@@ -667,7 +667,7 @@ function processAndRenderDynamicCharts(records) {
       const cardEl = document.createElement("div");
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
 
-      // Extração de dados robusta
+      // Extração de dados robusta e limpeza de parênteses/múltipla escolha
       const dataMap = {};
       records.forEach(row => {
         let rawVal = row[questionText];
@@ -675,14 +675,22 @@ function processAndRenderDynamicCharts(records) {
           rawVal = getField(row, [questionText]);
         }
         if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
-          const strVal = String(rawVal).trim();
-          if (strVal.includes(",") && !/^(R$|d+,d+)/.test(strVal)) {
+          let strVal = String(rawVal).trim();
+          // Remove parênteses e seus conteúdos se solicitados ou parênteses isolados
+          // Tratamento especial para valores com parênteses: ex: "Instagram (Notícias SJC, etc.)" -> "Instagram" ou desmembra mantendo sem parenteses
+          if (strVal.includes("(") || strVal.includes(")")) {
+            // Remove parênteses externos/internos mas preserva os textos de forma limpa
+            strVal = strVal.replace(/\(([^)]*)\)/g, "$1").replace(/[()]/g, "").trim();
+          }
+
+          if (strVal.includes(",") && !/^(R\$|\d+,\d+)/.test(strVal)) {
             strVal.split(",").forEach(part => {
-              const p = part.trim();
+              let p = part.trim().replace(/[()]/g, "").trim();
               if (p) dataMap[p] = (dataMap[p] || 0) + 1;
             });
           } else {
-            dataMap[strVal] = (dataMap[strVal] || 0) + 1;
+            strVal = strVal.replace(/[()]/g, "").trim();
+            if (strVal) dataMap[strVal] = (dataMap[strVal] || 0) + 1;
           }
         }
       });
@@ -2488,8 +2496,17 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const ctx = canvas.getContext("2d");
   if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
 
-  let labels = Object.keys(dataMap);
-  let values = Object.values(dataMap);
+  // Remove parênteses das legendas / labels de qualquer pergunta
+  let rawLabels = Object.keys(dataMap);
+  let cleanedDataMap = {};
+  rawLabels.forEach(k => {
+    let cleanKey = String(k).replace(/\(([^)]*)\)/g, "$1").replace(/[()]/g, "").trim();
+    if (!cleanKey) cleanKey = String(k).trim();
+    cleanedDataMap[cleanKey] = (cleanedDataMap[cleanKey] || 0) + dataMap[k];
+  });
+
+  let labels = Object.keys(cleanedDataMap);
+  let values = Object.values(cleanedDataMap);
 
   if (labels.length > 8 && options.horizontal && !options.isAge) {
     const combined = labels.map((l, i) => ({ label: l, val: values[i] }));
@@ -2606,7 +2623,17 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           grid: { color: "#F1F5F9" },
           ticks: {
             precision: 0,
-            font: { size: 10 }
+            font: { size: 10 },
+            callback: function(value, index) {
+              if (isHorizontal) {
+                const label = this.getLabelForValue(value);
+                if (typeof label === "string" && label.length > 25) {
+                  return label.slice(0, 24) + "…";
+                }
+                return label;
+              }
+              return value;
+            }
           }
         },
         x: {
