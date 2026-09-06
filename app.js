@@ -721,11 +721,12 @@ function processAndRenderDynamicCharts(records) {
 
       // 4. SITUAÇÃO DE TRABALHO: Ícones representativos com números absolutos e porcentagens
       if (qLower.includes("trabalho") && (qLower.includes("hoje") || qLower.includes("modelo") || qLower.includes("situação"))) {
-        cardEl.innerHTML = '<div>' +
+        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Distribuição com ícones representativos e percentuais</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Total: ' + total.toLocaleString("pt-BR") + ' respondentes • Situação Ocupacional</p>' +
         '</div>' +
-        '<div class="p-2">' + renderWorkIconsGrid(dataMap, total) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center">' + renderWorkIconsGrid(dataMap, total) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -988,39 +989,129 @@ function renderIncomeGreenChart(canvasId, dataMap) {
 
 // 4. Widget com Ícones Representativos para Situação de Trabalho
 function renderWorkIconsGrid(dataMap, total) {
-  const iconDefs = [
-    { label: "Presencial", icon: "fa-solid fa-briefcase", color: "text-blue-600 bg-blue-50 border-blue-200" },
-    { label: "Híbrido", icon: "fa-solid fa-laptop-house", color: "text-cyan-600 bg-cyan-50 border-cyan-200" },
-    { label: "Home Office", icon: "fa-solid fa-house-laptop", color: "text-indigo-600 bg-indigo-50 border-indigo-200" },
-    { label: "Conta Própria / PJ", icon: "fa-solid fa-user-tie", color: "text-emerald-600 bg-emerald-50 border-emerald-200" },
-    { label: "Estudante", icon: "fa-solid fa-graduation-cap", color: "text-amber-600 bg-amber-50 border-amber-200" },
-    { label: "Outros / Não informado", icon: "fa-solid fa-id-card-clip", color: "text-slate-600 bg-slate-50 border-slate-200" }
-  ];
+  // Mapeamento específico de ícones elegantes e paleta harmoniosa
+  function getWorkIconConfig(key) {
+    const k = key.toLowerCase();
+    if (k.includes("carteira") || k.includes("clt") || k.includes("registrado")) {
+      return {
+        icon: "fa-solid fa-id-card",
+        iconColor: "text-blue-600",
+        iconBg: "bg-blue-100/80",
+        border: "border-blue-100",
+        badgeBg: "bg-blue-50 text-blue-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("conta própria") || k.includes("autônomo") || k.includes("autonomo") || k.includes("pj") || k.includes("freelance")) {
+      return {
+        icon: "fa-solid fa-briefcase",
+        iconColor: "text-emerald-600",
+        iconBg: "bg-emerald-100/80",
+        border: "border-emerald-100",
+        badgeBg: "bg-emerald-50 text-emerald-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("funcionário") || k.includes("funcionario") || k.includes("concursado") || k.includes("público") || k.includes("publico")) {
+      return {
+        icon: "fa-solid fa-building-columns",
+        iconColor: "text-indigo-600",
+        iconBg: "bg-indigo-100/80",
+        border: "border-indigo-100",
+        badgeBg: "bg-indigo-50 text-indigo-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("estudante") || k.includes("estágio") || k.includes("estagio") || k.includes("bolsista")) {
+      return {
+        icon: "fa-solid fa-graduation-cap",
+        iconColor: "text-amber-600",
+        iconBg: "bg-amber-100/80",
+        border: "border-amber-100",
+        badgeBg: "bg-amber-50 text-amber-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("dono") || k.includes("empresa") || k.includes("sócio") || k.includes("empresário") || k.includes("comércio")) {
+      return {
+        icon: "fa-solid fa-store",
+        iconColor: "text-cyan-600",
+        iconBg: "bg-cyan-100/80",
+        border: "border-cyan-100",
+        badgeBg: "bg-cyan-50 text-cyan-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("desempregado") || k.includes("procura") || k.includes("buscando")) {
+      return {
+        icon: "fa-solid fa-user-clock",
+        iconColor: "text-rose-600",
+        iconBg: "bg-rose-100/80",
+        border: "border-rose-100",
+        badgeBg: "bg-rose-50 text-rose-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("aposentado") || k.includes("pensionista")) {
+      return {
+        icon: "fa-solid fa-person-walking-luggage",
+        iconColor: "text-violet-600",
+        iconBg: "bg-violet-100/80",
+        border: "border-violet-100",
+        badgeBg: "bg-violet-50 text-violet-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("home") || k.includes("remoto") || k.includes("teletrabalho")) {
+      return {
+        icon: "fa-solid fa-house-laptop",
+        iconColor: "text-teal-600",
+        iconBg: "bg-teal-100/80",
+        border: "border-teal-100",
+        badgeBg: "bg-teal-50 text-teal-700",
+        fullTitle: key
+      };
+    }
+    if (k.includes("híbrido") || k.includes("hibrido")) {
+      return {
+        icon: "fa-solid fa-laptop-file",
+        iconColor: "text-sky-600",
+        iconBg: "bg-sky-100/80",
+        border: "border-sky-100",
+        badgeBg: "bg-sky-50 text-sky-700",
+        fullTitle: key
+      };
+    }
+    return {
+      icon: "fa-solid fa-user-tie",
+      iconColor: "text-slate-600",
+      iconBg: "bg-slate-100",
+      border: "border-slate-200",
+      badgeBg: "bg-slate-100 text-slate-700",
+      fullTitle: key
+    };
+  }
 
-  let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
-  Object.entries(dataMap).forEach(([k, count]) => {
+  // Ordenar por maior número de respostas
+  const sortedEntries = Object.entries(dataMap).sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">';
+  sortedEntries.forEach(([k, count]) => {
     const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
-    
-    // Identificar ícone correspondente
-    let matchedIcon = iconDefs[5];
-    if (/presencial|carteira/i.test(k)) matchedIcon = iconDefs[0];
-    else if (/híbrido|hibrido/i.test(k)) matchedIcon = iconDefs[1];
-    else if (/home|remoto/i.test(k)) matchedIcon = iconDefs[2];
-    else if (/própria|autônomo|pj|empresário/i.test(k)) matchedIcon = iconDefs[3];
-    else if (/estudante|estágio/i.test(k)) matchedIcon = iconDefs[4];
+    const cfg = getWorkIconConfig(k);
 
-    html += '<div class="p-3.5 rounded-2xl border flex items-center justify-between ' + matchedIcon.color + '">' +
-      '<div class="flex items-center gap-3">' +
-        '<div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-lg">' +
-          '<i class="' + matchedIcon.icon + '"></i>' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-sm flex items-center justify-between gap-3 transition-all hover:shadow">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-base shadow-xs">' +
+          '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
-        '<div>' +
-          '<h4 class="text-xs font-bold text-slate-800 line-clamp-1">' + k + '</h4>' +
-          '<span class="text-[11px] font-semibold text-slate-500">' + count + ' respondentes</span>' +
+        '<div class="min-w-0 flex-1">' +
+          '<h4 class="text-xs font-bold text-slate-800 truncate" title="' + k + '">' + k + '</h4>' +
+          '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + count.toLocaleString("pt-BR") + ' respondentes</p>' +
         '</div>' +
       '</div>' +
-      '<div class="text-right">' +
-        '<span class="text-sm font-black text-slate-800">' + pct + '%</span>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-2.5 py-1 rounded-xl ' + cfg.badgeBg + ' text-xs font-black">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
@@ -1077,30 +1168,62 @@ function renderQualityScaleWidget(avgScore, dataMap, total) {
 
 // 7. Cards com Ícones Visuais para Evasão (Passear em Outras Cidades)
 function renderOtherCitiesIcons(dataMap, total) {
-  const categories = [
-    { key: "Sim", label: "Costuma ir a SP / Litoral", icon: "fa-solid fa-car-side", color: "text-indigo-600 bg-indigo-50 border-indigo-200" },
-    { key: "Às vezes", label: "Ocasionalmente / Finais de Semana", icon: "fa-solid fa-compass", color: "text-cyan-600 bg-cyan-50 border-cyan-200" },
-    { key: "Raramente", label: "Raramente sai de SJC", icon: "fa-solid fa-tree-city", color: "text-emerald-600 bg-emerald-50 border-emerald-200" },
-    { key: "Não", label: "Fica 100% em São José", icon: "fa-solid fa-house", color: "text-brand-800 bg-brand-50 border-brand-200" }
-  ];
+  function getCityIconConfig(key) {
+    const k = key.toLowerCase();
+    if (k.includes("sim") || k.includes("frequente") || k.includes("sempre")) {
+      return {
+        icon: "fa-solid fa-car-side",
+        iconColor: "text-indigo-600",
+        iconBg: "bg-indigo-100/80",
+        border: "border-indigo-100",
+        badgeBg: "bg-indigo-50 text-indigo-700"
+      };
+    }
+    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("ocasional")) {
+      return {
+        icon: "fa-solid fa-compass",
+        iconColor: "text-cyan-600",
+        iconBg: "bg-cyan-100/80",
+        border: "border-cyan-100",
+        badgeBg: "bg-cyan-50 text-cyan-700"
+      };
+    }
+    if (k.includes("raramente") || k.includes("pouco")) {
+      return {
+        icon: "fa-solid fa-tree-city",
+        iconColor: "text-emerald-600",
+        iconBg: "bg-emerald-100/80",
+        border: "border-emerald-100",
+        badgeBg: "bg-emerald-50 text-emerald-700"
+      };
+    }
+    return {
+      icon: "fa-solid fa-house-user",
+      iconColor: "text-slate-600",
+      iconBg: "bg-slate-100",
+      border: "border-slate-200",
+      badgeBg: "bg-slate-100 text-slate-700"
+    };
+  }
 
-  let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
-  Object.entries(dataMap).forEach(([k, count]) => {
+  const sorted = Object.entries(dataMap).sort((a, b) => b[1] - a[1]);
+  let html = '<div class="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">';
+  sorted.forEach(([k, count]) => {
     const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
-    let matched = categories.find(c => k.toLowerCase().includes(c.key.toLowerCase())) || categories[1];
+    const cfg = getCityIconConfig(k);
 
-    html += '<div class="p-3.5 rounded-2xl border flex items-center justify-between ' + matched.color + '">' +
-      '<div class="flex items-center gap-3">' +
-        '<div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-lg">' +
-          '<i class="' + matched.icon + '"></i>' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-sm flex items-center justify-between gap-3 transition-all hover:shadow">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-base shadow-xs">' +
+          '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
-        '<div>' +
-          '<h4 class="text-xs font-bold text-slate-800">' + k + '</h4>' +
-          '<span class="text-[10px] font-semibold text-slate-500">' + count + ' pessoas</span>' +
+        '<div class="min-w-0 flex-1">' +
+          '<h4 class="text-xs font-bold text-slate-800 truncate" title="' + k + '">' + k + '</h4>' +
+          '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + count.toLocaleString("pt-BR") + ' respondentes</p>' +
         '</div>' +
       '</div>' +
-      '<div class="text-right">' +
-        '<span class="text-sm font-black text-slate-800">' + pct + '%</span>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-2.5 py-1 rounded-xl ' + cfg.badgeBg + ' text-xs font-black">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
