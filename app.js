@@ -775,24 +775,24 @@ function processAndRenderDynamicCharts(records) {
 
       // 5. SITUAÇÃO DE TRABALHO: Ícones representativos com porcentagens
       if (qLower.includes("trabalho") && (qLower.includes("hoje") || qLower.includes("modelo") || qLower.includes("situação"))) {
-        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
-        cardEl.innerHTML = '<div class="mb-3">' +
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-start";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Situação Ocupacional</p>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-center">' + renderWorkIconsGrid(dataMap, total) + '</div>';
+        '<div class="w-full">' + renderWorkIconsGrid(dataMap, total) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
 
       // 6. ESTADO CIVIL: Mapa de Árvore (Treemap)
       if (qLower.includes("estado civil") || qLower.includes("estado_civil") || (qLower.includes("civil") && qLower.includes("estado"))) {
-        cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
-        cardEl.innerHTML = '<div class="mb-3">' +
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-start";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-medium text-slate-400">Mapa de Árvore (Treemap) • Distribuição Percentual</p>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-center">' + renderTreemapWidget(dataMap, total) + '</div>';
+        '<div class="w-full">' + renderTreemapWidget(dataMap, total) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -1511,22 +1511,22 @@ function renderWorkIconsGrid(dataMap, total) {
   // Ordenar por maior número de respostas
   const sortedEntries = Object.entries(dataMap).sort((a, b) => b[1] - a[1]);
 
-  let html = '<div class="flex flex-col gap-2 max-h-[300px] overflow-y-auto pr-1.5 py-0.5 custom-card-scroll">';
+  let html = '<div class="flex flex-col gap-2.5 max-h-[380px] overflow-y-auto pr-1 py-1 custom-card-scroll">';
   sortedEntries.forEach(([k, count]) => {
     const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
     const cfg = getWorkIconConfig(k);
 
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-xl p-2.5 sm:p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-2.5 transition-all">' +
-      '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
-        '<div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-xs sm:text-sm shadow-2xs">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-sm sm:text-base shadow-2xs">' +
           '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
           '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words" title="' + k + '">' + k + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex-shrink-0 text-right pl-1.5">' +
-        '<span class="inline-block px-2.5 py-1 rounded-lg ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
@@ -1973,56 +1973,56 @@ function renderTreemapWidget(dataMap, total) {
     }
 
     if (isHero) {
-      return '<div class="' + gradientClass + ' rounded-xl p-3 sm:p-3.5 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex items-center justify-between gap-2.5 transition-all duration-300">' +
-        '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
-          '<div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-xs sm:text-sm text-white flex-shrink-0 shadow-2xs">' +
+      return '<div class="' + gradientClass + ' rounded-2xl p-4 sm:p-4.5 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[78px]">' +
+        '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+          '<div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm sm:text-base text-white flex-shrink-0 shadow-2xs">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
-          '<h4 class="text-xs sm:text-sm font-bold text-white leading-tight break-words" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-white leading-snug break-words" title="' + label + '">' + label + '</h4>' +
         '</div>' +
-        '<span class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-2xs flex-shrink-0">' + pct + '%</span>' +
+        '<span class="px-3 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-sm sm:text-base text-white border border-white/30 shadow-2xs flex-shrink-0">' + pct + '%</span>' +
       '</div>';
     }
 
-    return '<div class="' + gradientClass + ' rounded-xl p-2.5 sm:p-3 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[68px] sm:min-h-[72px]">' +
-      '<div class="flex items-start gap-2 mb-1.5">' +
-        '<div class="w-5 h-5 rounded-md bg-white/20 backdrop-blur-xs flex items-center justify-center text-[10px] text-white flex-shrink-0 mt-0.5">' +
+    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 sm:p-4 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[100px] sm:min-h-[110px]">' +
+      '<div class="flex items-start gap-2.5 mb-2">' +
+        '<div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-xs sm:text-sm text-white flex-shrink-0 mt-0.5 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-[11px] sm:text-xs font-bold leading-snug break-words text-white" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-words text-white" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-1 border-t border-white/15">' +
-        '<span class="px-2 py-0.5 rounded-md bg-white/25 backdrop-blur-md font-black text-[11px] sm:text-xs text-white border border-white/30 shadow-2xs">' + pct + '%</span>' +
+      '<div class="flex items-center justify-end pt-2 border-t border-white/15">' +
+        '<span class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-2xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   }
 
-  let html = '<div class="w-full flex flex-col gap-2 py-0.5">';
+  let html = '<div class="w-full flex flex-col gap-2.5 py-1">';
 
   if (entries.length === 1) {
     html += getTreemapTile(entries[0], 0, totalSum, true);
   } else if (entries.length === 2) {
     const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 35);
     const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 35);
-    html += '<div class="flex flex-col sm:flex-row gap-2">' +
+    html += '<div class="flex flex-col sm:flex-row gap-2.5">' +
       '<div style="flex: ' + f1 + ';">' + getTreemapTile(entries[0], 0, totalSum) + '</div>' +
       '<div style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
     '</div>';
   } else if (entries.length === 3) {
-    html += '<div class="flex flex-col gap-2">' +
+    html += '<div class="flex flex-col gap-2.5">' +
       getTreemapTile(entries[0], 0, totalSum, true) +
-      '<div class="grid grid-cols-2 gap-2">' +
+      '<div class="grid grid-cols-2 gap-2.5">' +
         getTreemapTile(entries[1], 1, totalSum) +
         getTreemapTile(entries[2], 2, totalSum) +
       '</div>' +
     '</div>';
   } else {
     // 4 ou mais itens: Destaque ao maior item no topo + grid 2x2 organizado abaixo
-    html += '<div class="flex flex-col gap-2">' +
+    html += '<div class="flex flex-col gap-2.5">' +
       getTreemapTile(entries[0], 0, totalSum, true) +
-      '<div class="grid grid-cols-2 gap-2">';
+      '<div class="grid grid-cols-2 gap-2.5">';
     entries.slice(1).forEach((item, idx) => {
       html += '<div>' + getTreemapTile(item, idx + 1, totalSum) + '</div>';
     });
