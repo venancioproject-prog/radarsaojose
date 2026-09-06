@@ -2486,6 +2486,11 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     values = top.map(t => t.val);
   }
 
+  const isBar = type === "bar";
+  const isLine = type === "line";
+  const isHorizontal = options.horizontal === true;
+  const totalSum = values.reduce((a, b) => a + b, 0);
+
   function wrapTextLines(text, maxChars = 26) {
     if (typeof text !== "string" || text.length <= maxChars) return text;
     const words = text.split(" ");
@@ -2521,11 +2526,6 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
 
   Chart.defaults.font.family = "'Montserrat', sans-serif";
   Chart.defaults.color = "#64748B";
-
-  const isBar = type === "bar";
-  const isLine = type === "line";
-  const isHorizontal = options.horizontal === true;
-  const totalSum = values.reduce((a, b) => a + b, 0);
 
   // Mapeamento inteligente de cores por item (ex: Melhorando = Verde, Piorando = Vermelho, Do mesmo jeito = Cinza)
   const itemColors = labels.map((lbl, idx) => {
