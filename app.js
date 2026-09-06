@@ -624,7 +624,7 @@ function processAndRenderDynamicCharts(records) {
   const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
   if (remainingQuestions.length > 0) {
     categories.push({
-      title: "6. Demais Indicadores & Perguntas da Pesquisa",
+      title: "7. Demais Indicadores & Perguntas da Pesquisa",
       subtitle: "Outras perguntas presentes na base de dados",
       questions: remainingQuestions
     });
