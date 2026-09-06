@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Radar São José | Inteligência & Pesquisa de Opinião</title>
+  <title>Radar São José | Painel Analítico & Pesquisa Municipal</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="fotos radar/logo.png" />
@@ -38,7 +38,7 @@
               600: '#2070aa',
               700: '#1a598a',
               800: '#184c73',
-              900: '#0B2545',   /* Azul Petróleo / Navy Institucional */
+              900: '#0B2545',   /* Azul Petróleo Institucional */
               950: '#06162a',
             },
             accent: {
@@ -68,8 +68,9 @@
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Chart.js CDN -->
+  <!-- Chart.js CDN + Datalabels Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
   <style>
     body {
@@ -77,11 +78,9 @@
       background-color: #F8FAFC;
       color: #1E293B;
     }
-    
     .view-transition {
       transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -96,14 +95,12 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94A3B8;
     }
-
     .chart-container {
       position: relative;
       width: 100%;
-      height: 280px;
+      height: 290px;
     }
-
-    /* Style for dark capsule select dropdown options */
+    /* Estilo para opções dos menus selects Looker */
     select option {
       background-color: #FFFFFF !important;
       color: #0F172A !important;
@@ -127,7 +124,7 @@
             src="fotos radar/logo.png" 
             alt="Radar São José" 
             class="h-16 max-w-[240px] object-contain"
-            onerror="this.src='fotos radar/radar_sjc_white_rounded.png'"
+            onerror="this.src='fotos radar/logobranco.png'"
           />
         </div>
         <h1 class="text-2xl font-black tracking-tight text-brand-900">Painel Analítico</h1>
@@ -191,7 +188,7 @@
 
         <div class="relative flex py-1 items-center">
           <div class="flex-grow border-t border-slate-200"></div>
-          <span class="flex-shrink mx-3 text-[11px] text-slate-400 uppercase font-bold tracking-wider">Acesso Rápido</span>
+          <span class="flex-shrink mx-3 text-[11px] text-slate-400 uppercase font-bold tracking-wider">Acesso Direto</span>
           <div class="flex-grow border-t border-slate-200"></div>
         </div>
 
@@ -211,15 +208,14 @@
     </div>
   </main>
 
-
   <!-- 2. TELA PRINCIPAL (DASHBOARD) -->
   <div id="dashboard-screen" class="view-transition hidden min-h-screen flex flex-col">
     
-    <!-- Top Header em Fundo Branco Limpo & Minimalista -->
+    <!-- Top Header em Fundo Branco Limpo com Logo Oficial -->
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        <!-- Left: logo.png Oficial em Fundo Branco -->
+        <!-- Left: Logo Oficial em Fundo Branco -->
         <div class="flex items-center gap-4">
           <img 
             src="fotos radar/logo.png" 
@@ -233,7 +229,7 @@
           </div>
         </div>
 
-        <!-- Right: Profile & Actions -->
+        <!-- Right: Status e Ações -->
         <div class="flex items-center gap-3">
           <button 
             id="btn-refresh" 
@@ -259,15 +255,14 @@
       </div>
     </header>
 
-    <!-- Looker-Style Pill Filters Bar -->
+    <!-- Looker-Style Pill Filters Bar (10 Filtros em Cápsula Azul Navy) -->
     <section class="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border py-4 px-4 sm:px-6 lg:px-8 shadow-sm">
       <div class="max-w-7xl mx-auto space-y-3">
         
-        <!-- Header Info & Clean Button -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-brand-600 animate-pulse"></span>
-            <span class="text-xs font-bold uppercase tracking-wider text-brand-900">Filtros Ativos</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-900">Filtros Dinâmicos</span>
             <span class="text-xs text-slate-400 font-medium">|</span>
             <p class="text-xs font-semibold text-slate-500">
               Exibindo <span id="filtered-records-count" class="text-brand-600 font-bold">0</span> de <span id="total-base-count" class="font-bold text-slate-800">0</span> respondentes
@@ -284,7 +279,7 @@
           </button>
         </div>
 
-        <!-- 10 Capsule Pills Grid (Exact Looker Layout) -->
+        <!-- 10 Capsule Pills Grid -->
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
           
           <!-- Pill 1: Gênero -->
@@ -350,7 +345,7 @@
             <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
           </div>
 
-          <!-- Pill 8: Moradia (Casa Própria) -->
+          <!-- Pill 8: Moradia -->
           <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
             <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Moradia</span>
             <select id="filter-house" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
@@ -359,7 +354,7 @@
             <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
           </div>
 
-          <!-- Pill 9: Avaliação (Qualidade de Vida) -->
+          <!-- Pill 9: Avaliação -->
           <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
             <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Avaliação</span>
             <select id="filter-quality" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
@@ -386,7 +381,7 @@
       
       <!-- Hero Banner -->
       <section class="relative rounded-3xl overflow-hidden bg-brand-950 text-white shadow-xl">
-        <div class="absolute inset-0 z-0 opacity-30 mix-blend-overlay bg-cover bg-center" style="background-image: url('fotos radar/photo_1.jpg');"></div>
+        <div class="absolute inset-0 z-0 opacity-25 mix-blend-overlay bg-cover bg-center" style="background-image: url('fotos radar/foto_cidade.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-r from-brand-950 via-brand-900/90 to-transparent"></div>
         
         <div class="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
@@ -399,20 +394,20 @@
               O Futuro do Consumo & Comportamento em São José dos Campos
             </h1>
             <p class="text-sm font-medium text-slate-300">
-              Painel interativo consolidando as respostas de munícipes sobre qualidade de vida, cultura, lazer, renda, mobilidade e tendências de mercado.
+              Painel analítico consolidando 100% das 30 perguntas da pesquisa municipal sobre qualidade de vida, cultura, lazer, streaming, influenciadores, pets e economia local.
             </p>
           </div>
 
           <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex flex-col gap-3 min-w-[220px]">
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Status da Base</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Status da Conexão</p>
               <div class="flex items-center gap-2 mt-1">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span id="supabase-table-status" class="text-sm font-bold text-white">Conectando...</span>
               </div>
             </div>
             <div class="pt-2 border-t border-white/10">
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Última Sincronização</p>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Última Atualização</p>
               <p id="last-sync-time" class="text-xs font-bold text-accent-cyan mt-0.5">--:--:--</p>
             </div>
           </div>
@@ -422,7 +417,7 @@
       <!-- Error Notification -->
       <div id="data-fetch-error" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold"></div>
 
-      <!-- SECTION 1: KPIS / RESUMO GERAL -->
+      <!-- KPIS / RESUMO GERAL -->
       <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
           <div>
@@ -472,34 +467,34 @@
         </div>
       </section>
 
-      <!-- GALERIA VISUAL SÃO JOSÉ (FOTOS EM DESTAQUE) -->
+      <!-- GALERIA VISUAL DAS FOTOS OFICIAIS -->
       <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
-          <img src="fotos radar/foto_gastronomia.jpg" alt="Gastronomia em SJC" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <img src="fotos radar/foto_gastronomia.jpg" alt="Gastronomia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
             <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Gastronomia & Lazer</span>
-            <h4 class="text-base font-bold text-white">Hábitos de Consumo</h4>
+            <h4 class="text-base font-bold text-white">Hábitos & Decisão de Consumo</h4>
           </div>
         </div>
 
         <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
-          <img src="fotos radar/foto_cultura.jpg" alt="Cultura e Eventos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <img src="fotos radar/foto_cultura.jpg" alt="Cultura" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
             <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Cultura & Festas</span>
-            <h4 class="text-base font-bold text-white">Eventos da Cidade</h4>
+            <h4 class="text-base font-bold text-white">Eventos & Identidade Regional</h4>
           </div>
         </div>
 
         <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
           <img src="fotos radar/foto_noite.jpg" alt="Vida Noturna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Vida Noturna</span>
-            <h4 class="text-base font-bold text-white">Opções & Dificuldades</h4>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Vida Noturna & Desafios</span>
+            <h4 class="text-base font-bold text-white">Potencial de Gasto & Atração</h4>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 2: PERFIL DEMOGRÁFICO & SOCIAL -->
+      <!-- SECTION 1: PERFIL DEMOGRÁFICO, SOCIAL & RENDA (6 Perguntas) -->
       <div class="space-y-4">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
           <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">1</div>
@@ -507,183 +502,311 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 1. Qual a sua idade? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Qual a sua idade?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Distribuição por faixas etárias</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Distribuição etária dos participantes</p>
             <div class="chart-container"><canvas id="chart-age"></canvas></div>
           </div>
 
+          <!-- 2. Como você se identifica? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Como você se identifica?</h3>
             <p class="text-xs font-medium text-slate-400 mb-4">Gênero dos respondentes</p>
             <div class="chart-container"><canvas id="chart-gender"></canvas></div>
           </div>
 
+          <!-- 3. Qual a renda total da sua casa por mês? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Renda Total Familiar</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Faixa salarial mensal</p>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Renda Total Familiar Mensal</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Faixas de renda por domicílio</p>
             <div class="chart-container"><canvas id="chart-income"></canvas></div>
           </div>
 
+          <!-- 4. O seu trabalho hoje é: -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">O seu trabalho hoje é:</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Presencial, Híbrido, Home Office</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Presencial, Híbrido ou Home Office</p>
             <div class="chart-container"><canvas id="chart-work-mode"></canvas></div>
           </div>
 
+          <!-- 5. Qual o seu estado civil? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Qual o seu estado civil?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Situação conjugal</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Situação conjugal da população</p>
             <div class="chart-container"><canvas id="chart-marital"></canvas></div>
           </div>
 
+          <!-- 6. Você Já tem casa própria? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Você já tem casa própria?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Posse de imóvel residencial</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Posse imobiliária residencial</p>
             <div class="chart-container"><canvas id="chart-house"></canvas></div>
           </div>
         </div>
       </div>
 
-      <!-- SECTION 3: CIDADE, QUALIDADE DE VIDA & MOBILIDADE -->
+      <!-- SECTION 2: QUALIDADE DE VIDA, CONCEITO & MOBILIDADE (6 Perguntas) -->
       <div class="space-y-4">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
           <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">2</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Percepção da Cidade, Mobilidade & Pets</h2>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Qualidade de Vida, Mobilidade & Percepção da Cidade</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 7. De 1 a 5, que nota você dá para a qualidade de vida? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Nota de Qualidade de Vida</h3>
             <p class="text-xs font-medium text-slate-400 mb-4">Escala de 1 a 5 para São José</p>
             <div class="chart-container"><canvas id="chart-quality-scale"></canvas></div>
           </div>
 
+          <!-- 8. Quais meios de transporte você usa? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Meios de Transporte</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Veículos e modais mais usados</p>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Meios de Transporte Utilizados</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Modais de deslocamento diário</p>
             <div class="chart-container"><canvas id="chart-transport"></canvas></div>
           </div>
 
+          <!-- 9. Para você, São José é: -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Para você, São José é:</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Conceito e imagem da cidade</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Imagem e percepção do município</p>
             <div class="chart-container"><canvas id="chart-city-concept"></canvas></div>
           </div>
 
+          <!-- 10. Para você, a cidade de São José está: -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">A cidade de São José está:</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Crescendo, Parada ou Regredindo</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Crescendo, Estável ou Regredindo</p>
             <div class="chart-container"><canvas id="chart-growth"></canvas></div>
           </div>
 
+          <!-- 11. Você tem orgulho de morar em São José dos Campos? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Pets & Espaço Pet Friendly</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Posse de animais e estrutura da cidade</p>
-            <div class="chart-container"><canvas id="chart-pets"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Orgulho de Morar em SJC</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Sentimento de pertencimento municipal</p>
+            <div class="chart-container"><canvas id="chart-pride-chart"></canvas></div>
           </div>
 
+          <!-- 12. Em poucas palavras, como você definiria São José hoje? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Região Mais Frequentada</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Centro, Sul, Oeste, Leste, Norte</p>
-            <div class="chart-container"><canvas id="chart-regions-frequented"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Definição de São José Hoje</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Principais adjetivos e conceitos expressos</p>
+            <div class="chart-container"><canvas id="chart-define-city"></canvas></div>
           </div>
         </div>
       </div>
 
-      <!-- SECTION 4: LAZER, GASTRONOMIA & NOITE -->
+      <!-- SECTION 3: CULTURA, LAZER, EVENTOS & CONSUMO (6 Perguntas) -->
       <div class="space-y-4">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
           <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">3</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Lazer, Noite, Gastronomia & Cultura</h2>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Cultura, Eventos, Gastronomia & Vida Noturna</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 13. Você acha que a cidade tem boas opções de cultura e eventos? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">O que mais falta em São José?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Demandas de lazer e entretenimento</p>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Opções de Cultura e Eventos</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Avaliação da oferta cultural da cidade</p>
+            <div class="chart-container"><canvas id="chart-culture-options"></canvas></div>
+          </div>
+
+          <!-- 14. Você sente que as festas e eventos combinam com seu jeito? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Festas & Eventos Combinam com Você?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Afinidade do público com as atrações</p>
+            <div class="chart-container"><canvas id="chart-events-fit"></canvas></div>
+          </div>
+
+          <!-- 15. Comparando com as cidades vizinhas, o que acha das opções de lazer daqui? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Comparação com Cidades Vizinhas</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Competitividade do lazer regional</p>
+            <div class="chart-container"><canvas id="chart-compare-neighbors"></canvas></div>
+          </div>
+
+          <!-- 16. O que você acha que mais falta em São José? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">O Que Mais Falta em São José?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Demandas prioritárias não atendidas</p>
             <div class="chart-container"><canvas id="chart-missing"></canvas></div>
           </div>
 
+          <!-- 17. Com que frequência você sai para passear ou se divertir? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Frequência de Saída / Passeio</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Quantas vezes sai na semana</p>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Frequência de Saída / Lazer</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Hábito de passear ou se divertir na cidade</p>
             <div class="chart-container"><canvas id="chart-frequency"></canvas></div>
           </div>
 
+          <!-- 18. Você costuma ir para outras cidades para passear ou comer fora? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Passeia em outras cidades?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Evasão de consumo para SP/Vizinhos</p>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Evasão para Outras Cidades</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Frequência de deslocamento para SP/Litoral</p>
             <div class="chart-container"><canvas id="chart-other-cities"></canvas></div>
           </div>
+        </div>
+      </div>
 
+      <!-- SECTION 4: HÁBITOS DE BARES, NOITE & MÚSICA (6 Perguntas) -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">4</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Comportamento Noturno, Gastronomia & Músicas Favoritas</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 19. Qual região da cidade você mais frequenta quando sai de casa? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Escolha de Bar / Restaurante</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Fatores determinantes de decisão</p>
-            <div class="chart-container"><canvas id="chart-bar-choice"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Região Mais Frequentada</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Polos de maior concentração de pessoas</p>
+            <div class="chart-container"><canvas id="chart-regions-frequented"></canvas></div>
           </div>
 
+          <!-- 20. Qual a maior dificuldade para sair à noite em São José? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Maior Dificuldade Noturna</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Gargalos da vida noturna em SJC</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Gargalos da vida noturna e saídas</p>
             <div class="chart-container"><canvas id="chart-nightlife-issues"></canvas></div>
           </div>
 
+          <!-- 21. O que faz você escolher um restaurante ou bar? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Escolha de Restaurante / Bar</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Critérios decisivos de seleção</p>
+            <div class="chart-container"><canvas id="chart-bar-choice"></canvas></div>
+          </div>
+
+          <!-- 22. Você escolhe um lugar só porque ele é bonito para tirar fotos e postar? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Espaços Instagramáveis</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Influência visual/estética no consumo</p>
+            <div class="chart-container"><canvas id="chart-instagrammable"></canvas></div>
+          </div>
+
+          <!-- 23. Quais tipos de música você mais gosta de ouvir? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Gêneros Musicais Favoritos</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Estilos de maior apelo na cidade</p>
+            <div class="chart-container"><canvas id="chart-music-types"></canvas></div>
+          </div>
+
+          <!-- 24. Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Potencial de Consumo Adicional</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Gastaria mais com lazer qualificado?</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Disposição para gastar mais com lazer</p>
             <div class="chart-container"><canvas id="chart-spend-more"></canvas></div>
           </div>
         </div>
       </div>
 
-      <!-- SECTION 5: MÍDIA, INFLUENCIADORES & POLÍTICA -->
+      <!-- SECTION 5: MÍDIA, STREAMING, INFLUENCIADORES & COMPORTAMENTO SOCIAL (6 Perguntas) -->
       <div class="space-y-4">
         <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">4</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Mídias, Canais de Notícias & Política</h2>
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">5</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Mídias, Streaming, Influenciadores & Relacionamentos</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 25. Quais desses serviços de filmes ou música você usa? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Por onde sabe das notícias?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Portais, Instagram, WhatsApp, TV</p>
-            <div class="chart-container"><canvas id="chart-news-sources"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Streaming de Filmes & Música</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Penetração de plataformas digitais</p>
+            <div class="chart-container"><canvas id="chart-streamings"></canvas></div>
           </div>
 
+          <!-- 26. Qual rede social você mais usa pra encontrar lugares e referências na cidade -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
             <h3 class="text-sm font-bold text-brand-900 mb-1">Redes Sociais de Descoberta</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Instagram, TikTok, Google Maps</p>
+            <p class="text-xs font-medium text-slate-400 mb-4">Canais de busca de referências locais</p>
             <div class="chart-container"><canvas id="chart-social-discovery"></canvas></div>
           </div>
 
+          <!-- 27. Você já foi em algum lugar só porque viu um influenciador da cidade indicando? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Foi por indicação de Influencer?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Impacto do marketing de influência</p>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Conversão por Influenciadores</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Eficácia das indicações de criadores</p>
             <div class="chart-container"><canvas id="chart-influencers"></canvas></div>
           </div>
 
+          <!-- 28. Por onde você fica sabendo das notícias de São José? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Interesse na Política Local</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Nota de 1 a 5 de acompanhamento</p>
-            <div class="chart-container"><canvas id="chart-politics-follow"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Fontes de Notícias da Cidade</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Portais, Redes, WhatsApp e TV</p>
+            <div class="chart-container"><canvas id="chart-news-sources"></canvas></div>
           </div>
 
+          <!-- 29. Você acha que precisa estar bem financeiramente antes de começar um relacionamento? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Posicionamento Político</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Direita, Centro, Esquerda, Nenhum</p>
-            <div class="chart-container"><canvas id="chart-politics-side"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Finanças vs Relacionamento</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Condição financeira prévia para namoro sério</p>
+            <div class="chart-container"><canvas id="chart-finance-relationship"></canvas></div>
           </div>
 
+          <!-- 30. As redes sociais ou aplicativos de namoro mexem com a sua vida social? -->
           <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Quem mais ajuda a cidade?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Empresas, Prefeitura, Munícipes</p>
-            <div class="chart-container"><canvas id="chart-growth-agents"></canvas></div>
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Apps de Namoro & Vida Social</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Impacto das redes na dinâmica social</p>
+            <div class="chart-container"><canvas id="chart-dating-apps"></canvas></div>
           </div>
         </div>
       </div>
 
-      <!-- SECTION 6: TABELA DE REGISTROS RECENTES -->
+      <!-- SECTION 6: ECONOMIA LOCAL, PETS, POLÍTICA & QUEM AJUDA A CIDADE (6 Perguntas) -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">6</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Economia Local, Pets, Política & Desenvolvimento</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- 31. Produtores locais & feiras de artesanato -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Consumo de Produtores Locais</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Compras em feiras e artesãos de SJC</p>
+            <div class="chart-container"><canvas id="chart-local-producers"></canvas></div>
+          </div>
+
+          <!-- 32. Pets & Cidade Pet Friendly -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Posse de Pets & Estrutura Pet Friendly</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Avaliação de tutores e animais na cidade</p>
+            <div class="chart-container"><canvas id="chart-pets"></canvas></div>
+          </div>
+
+          <!-- 33. Acompanhamento da Política Local -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Interesse na Política Municipal</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Nível de 1 a 5 de acompanhamento</p>
+            <div class="chart-container"><canvas id="chart-politics-follow"></canvas></div>
+          </div>
+
+          <!-- 34. Posicionamento Político -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Posicionamento Político</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Distribuição do espectro de afinidade</p>
+            <div class="chart-container"><canvas id="chart-politics-side"></canvas></div>
+          </div>
+
+          <!-- 35. Quem mais ajuda a cidade a crescer? -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Quem Mais Ajuda a Cidade a Crescer?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Agentes e motores de transformação</p>
+            <div class="chart-container"><canvas id="chart-growth-agents"></canvas></div>
+          </div>
+
+          <!-- 36. Top Bairros com Mais Respondentes -->
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Concentração por Bairro</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Principais bairros de residência</p>
+            <div class="chart-container"><canvas id="chart-top-neighborhoods"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 7: TABELA DE REGISTROS RECENTES -->
       <section class="bg-surface-card rounded-3xl shadow-card border border-surface-border overflow-hidden">
         <div class="p-6 sm:p-8 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
@@ -721,12 +844,12 @@
 
     </main>
 
-    <!-- Footer -->
+    <!-- Footer Institucional com Logo Oficial Branco -->
     <footer class="bg-brand-950 text-white border-t border-brand-900 py-6 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
         <div class="flex items-center gap-3">
-          <img src="fotos radar/logobranco.png" alt="Logo" class="h-6 object-contain" onerror="this.src='fotos radar/logo.png'" />
-          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Análise de Mercado</span>
+          <img src="fotos radar/logobranco.png" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos radar/logo.png'" />
+          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência de Mercado & Pesquisa Municipal</span>
         </div>
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
       </div>
