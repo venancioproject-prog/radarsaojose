@@ -594,14 +594,14 @@ function processAndRenderDynamicCharts(records) {
       questions: questionList.filter(q => !/qualidade/i.test(q) && (/(^|\s|\b)idade(\b|\s|$)|faixa|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q)))
     },
     {
-      title: "2. Qualidade de Vida, Percepção & Mobilidade",
-      subtitle: "Velocímetro de satisfação (1 a 5), meios de transporte, imagem e crescimento da cidade",
-      questions: questionList.filter(q => !/animal|pet/i.test(q) && (/qualidade|transporte|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)))
+      title: "2. Qualidade de Vida, Percepção & Necessidades",
+      subtitle: "Velocímetro de satisfação (1 a 5), o que mais falta, percepção e crescimento da cidade",
+      questions: questionList.filter(q => !/transporte/i.test(q) && !/animal|pet/i.test(q) && (/qualidade|mais falta|o que falta|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)))
     },
     {
-      title: "3. Cultura, Eventos, Lazer & Vida Noturna",
-      subtitle: "Mapa de árvore (treemap), evasão com ícones e mapa de calor por região",
-      questions: questionList.filter(q => /cultura|festas|vizinhas|mais falta|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|instagram/i.test(q))
+      title: "3. Cultura, Eventos, Lazer, Mobilidade & Vida Noturna",
+      subtitle: "Meios de transporte, mapa de árvore (treemap), evasão com ícones e mapa de calor por região",
+      questions: questionList.filter(q => !/mais falta|o que falta/i.test(q) && (/transporte|cultura|festas|vizinhas|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|instagram|bonito para tirar fotos/i.test(q)))
     },
     {
       title: "4. Mídia, Músicas, Streamings & Comportamento",
@@ -667,10 +667,13 @@ function processAndRenderDynamicCharts(records) {
       const cardEl = document.createElement("div");
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
 
-      // Extração bruta de dados
+      // Extração de dados robusta
       const dataMap = {};
       records.forEach(row => {
-        const rawVal = row[questionText];
+        let rawVal = row[questionText];
+        if (rawVal === undefined || rawVal === null || String(rawVal).trim() === "") {
+          rawVal = getField(row, [questionText]);
+        }
         if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
           const strVal = String(rawVal).trim();
           if (strVal.includes(",") && !/^(R$|d+,d+)/.test(strVal)) {
