@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Radar São José | Painel Analítico</title>
+  <title>Radar São José | Inteligência & Pesquisa de Opinião</title>
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="fotos radar/logo.png" onerror="this.href='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'" />
+  <link rel="icon" type="image/png" href="fotos radar/logo.png" />
 
   <!-- Google Fonts: Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -29,17 +29,17 @@
           },
           colors: {
             brand: {
-              50: '#edf7fc',
-              100: '#d7eff9',
-              200: '#b4e0f3',
-              300: '#7ec9ea',
-              400: '#41acdc',
-              500: '#1b90c7',
-              600: '#0e73a7',
-              700: '#0c5c87',
-              800: '#0f4e70',
-              900: '#0B2545',   /* Azul Petróleo Profundo */
-              950: '#06162a',   /* Dark Navy */
+              50: '#f0f7fc',
+              100: '#dceef8',
+              200: '#bddff2',
+              300: '#8ec7e8',
+              400: '#57a9db',
+              500: '#308ccb',
+              600: '#2070aa',
+              700: '#1a598a',
+              800: '#184c73',
+              900: '#0B2545',   /* Azul Petróleo / Navy Institucional */
+              950: '#06162a',
             },
             accent: {
               cyan: '#00B4D8',
@@ -47,17 +47,18 @@
               emerald: '#10B981',
               amber: '#F59E0B',
               rose: '#F43F5E',
+              violet: '#6366F1',
             },
             surface: {
-              bg: '#F8FAFC',     /* Off-White suave */
-              card: '#FFFFFF',   /* Branco Puro */
-              border: '#E2E8F0', /* Cinza neutro suave */
+              bg: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
             }
           },
           boxShadow: {
             'card': '0 4px 20px -2px rgba(11, 37, 69, 0.05), 0 2px 6px -1px rgba(11, 37, 69, 0.02)',
-            'card-hover': '0 12px 30px -4px rgba(11, 37, 69, 0.09), 0 4px 10px -2px rgba(11, 37, 69, 0.04)',
-            'brand-glow': '0 0 20px rgba(0, 180, 216, 0.25)',
+            'card-hover': '0 12px 30px -4px rgba(11, 37, 69, 0.10), 0 4px 10px -2px rgba(11, 37, 69, 0.04)',
+            'brand-glow': '0 0 25px rgba(0, 180, 216, 0.3)',
           }
         }
       }
@@ -77,12 +78,10 @@
       color: #1E293B;
     }
     
-    /* Smooth Transitions */
     .view-transition {
       transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -97,41 +96,40 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94A3B8;
     }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
 
-  <!-- ========================================== -->
-  <!-- 1. TELA DE LOGIN / AUTENTICAÇÃO            -->
-  <!-- ========================================== -->
-  <main id="login-screen" class="view-transition min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden">
-    <!-- Decorative background elements -->
-    <div class="absolute -top-32 -left-32 w-96 h-96 bg-brand-200/50 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-accent-cyan/15 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- 1. TELA DE LOGIN -->
+  <main id="login-screen" class="view-transition min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden bg-slate-900">
+    <div class="absolute inset-0 z-0 opacity-20 mix-blend-luminosity bg-cover bg-center" style="background-image: url('fotos radar/hero_bg.jpg');"></div>
+    <div class="absolute inset-0 z-0 bg-gradient-to-tr from-brand-950/95 via-brand-900/90 to-brand-800/80"></div>
 
-    <div class="w-full max-w-md bg-surface-card rounded-2xl shadow-card border border-surface-border p-8 sm:p-10 relative z-10">
-      
-      <!-- Brand Logo & Header -->
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100/20 p-8 sm:p-10 relative z-10 backdrop-blur-lg">
       <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center mb-3">
+        <div class="inline-flex items-center justify-center mb-4 p-2 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
           <img 
             src="fotos radar/logo.png" 
             alt="Radar São José" 
-            class="h-16 max-w-[220px] object-contain drop-shadow-sm" 
-            onerror="this.onerror=null; this.src='fotos radar/logo.jpg'; this.onerror=function(){ this.parentElement.innerHTML='<div class=\'w-16 h-16 rounded-2xl bg-brand-900 flex items-center justify-center text-white text-2xl font-bold tracking-wider shadow-lg shadow-brand-900/20\'><i class=\'fa-solid fa-chart-line\'></i></div>'; }"
+            class="h-16 max-w-[240px] object-contain"
+            onerror="this.src='fotos radar/radar_sjc_white_rounded.png'"
           />
         </div>
-        <h1 class="text-2xl font-bold tracking-tight text-brand-900 mt-2">Acesse o Dashboard</h1>
-        <p class="text-sm font-medium text-slate-500 mt-1">Radar São José — Inteligência & Pesquisa</p>
+        <h1 class="text-2xl font-black tracking-tight text-brand-900">Painel Analítico</h1>
+        <p class="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Inteligência & Pesquisa Municipal</p>
       </div>
 
-      <!-- Feedback Alert Box -->
-      <div id="login-error-alert" class="hidden mb-6 p-4 rounded-xl text-sm font-medium border transition-all"></div>
+      <div id="login-error-alert" class="hidden mb-6 p-4 rounded-xl text-xs font-semibold border transition-all"></div>
 
-      <!-- Login Form -->
-      <form id="login-form" class="space-y-5" onsubmit="event.preventDefault();">
+      <form id="login-form" class="space-y-4" onsubmit="event.preventDefault();">
         <div>
-          <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
+          <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
             E-mail Institucional
           </label>
           <div class="relative">
@@ -143,17 +141,15 @@
               id="email" 
               required 
               placeholder="seu.email@exemplo.com" 
-              class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+              class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
             />
           </div>
         </div>
 
         <div>
-          <div class="flex items-center justify-between mb-2">
-            <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-              Senha
-            </label>
-          </div>
+          <label for="password" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+            Senha
+          </label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <i class="fa-solid fa-lock"></i>
@@ -163,7 +159,7 @@
               id="password" 
               required 
               placeholder="••••••••" 
-              class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+              class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
             />
             <button 
               type="button" 
@@ -178,7 +174,7 @@
         <button 
           type="submit" 
           id="btn-login" 
-          class="w-full py-3.5 px-4 bg-brand-900 hover:bg-brand-800 active:scale-[0.99] text-white font-semibold rounded-xl text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mt-2"
+          class="w-full py-3.5 px-4 bg-brand-900 hover:bg-brand-800 active:scale-[0.99] text-white font-bold rounded-xl text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mt-4"
         >
           <span id="btn-login-text">Entrar no Painel</span>
           <i id="btn-login-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
@@ -186,72 +182,71 @@
 
         <div class="relative flex py-1 items-center">
           <div class="flex-grow border-t border-slate-200"></div>
-          <span class="flex-shrink mx-3 text-xs text-slate-400 uppercase font-medium">Ou</span>
+          <span class="flex-shrink mx-3 text-[11px] text-slate-400 uppercase font-bold tracking-wider">Acesso Rápido</span>
           <div class="flex-grow border-t border-slate-200"></div>
         </div>
 
         <button 
           type="button" 
           id="btn-demo-view" 
-          class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 active:scale-[0.99] text-slate-700 font-semibold rounded-xl text-xs border border-slate-200 transition-all duration-200 flex items-center justify-center gap-2"
+          class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs border border-slate-200 transition-all flex items-center justify-center gap-2"
         >
-          <i class="fa-solid fa-eye text-slate-500"></i>
-          <span>Visualizar Dashboard em Modo Demonstração</span>
+          <i class="fa-solid fa-eye text-brand-600"></i>
+          <span>Visualizar Dashboard</span>
         </button>
       </form>
 
-      <!-- Footer Info -->
-      <div class="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-400 font-medium">
+      <div class="mt-6 pt-5 border-t border-slate-100 text-center text-[11px] text-slate-400 font-medium">
         &copy; <span id="year-current"></span> Radar São José. Todos os direitos reservados.
       </div>
     </div>
   </main>
 
 
-  <!-- ========================================== -->
-  <!-- 2. TELA PRINCIPAL (DASHBOARD ANALÍTICO)   -->
-  <!-- ========================================== -->
+  <!-- 2. TELA PRINCIPAL (DASHBOARD) -->
   <div id="dashboard-screen" class="view-transition hidden min-h-screen flex flex-col">
     
-    <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-surface-border shadow-sm">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        <!-- Left: Brand Logo & Title -->
         <div class="flex items-center gap-4">
           <img 
             src="fotos radar/logo.png" 
             alt="Logo Radar São José" 
-            class="h-10 sm:h-12 max-w-[160px] object-contain"
-            onerror="this.onerror=null; this.src='fotos radar/logo.jpg'; this.onerror=function(){ this.parentElement.innerHTML='<div class=\'w-10 h-10 rounded-xl bg-brand-900 flex items-center justify-center text-white font-bold\'><i class=\'fa-solid fa-chart-line text-lg\'></i></div>'; }"
+            class="h-11 sm:h-12 max-w-[170px] object-contain"
+            onerror="this.src='fotos radar/radar_sjc_white_rounded.png'"
           />
           <div class="hidden sm:block border-l border-slate-200 pl-4">
-            <h2 class="text-base font-bold text-brand-900 leading-tight">Radar São José</h2>
-            <p class="text-xs font-medium text-slate-500">Resultados & Indicadores de Pesquisa</p>
+            <h2 class="text-sm font-black text-brand-900 leading-tight">RADAR SÃO JOSÉ</h2>
+            <p class="text-[11px] font-semibold text-slate-400 tracking-wide">Relatório Analítico & Pesquisa 2026</p>
           </div>
         </div>
 
-        <!-- Right: Actions & User Profile -->
         <div class="flex items-center gap-3">
-          <!-- Refresh Data Button -->
+          <div class="hidden md:flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+            <i class="fa-solid fa-filter text-xs text-brand-600"></i>
+            <span class="text-xs font-bold text-slate-600">Região:</span>
+            <select id="filter-region-select" class="bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
+              <option value="TODAS">Todas as Regiões</option>
+            </select>
+          </div>
+
           <button 
             id="btn-refresh" 
-            title="Atualizar Dados"
+            title="Atualizar Dados do Supabase"
             class="p-2.5 text-slate-500 hover:text-brand-900 hover:bg-slate-100 rounded-xl transition-colors"
           >
             <i class="fa-solid fa-arrow-rotate-right" id="refresh-icon"></i>
           </button>
 
-          <!-- User Info Pill -->
-          <div class="hidden md:flex items-center gap-2 bg-slate-100/80 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-semibold text-slate-700">
+          <div class="hidden lg:flex items-center gap-2 bg-brand-50 px-3 py-1.5 rounded-full border border-brand-100 text-xs font-bold text-brand-900">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="user-email-display" class="truncate max-w-[180px]">usuario@exemplo.com</span>
+            <span id="user-email-display" class="truncate max-w-[160px]">usuario@exemplo.com</span>
           </div>
 
-          <!-- Logout Button -->
           <button 
             id="btn-logout" 
-            class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-xs rounded-xl border border-red-200 transition-all duration-150"
+            class="inline-flex items-center gap-2 px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs rounded-xl border border-red-200 transition-all"
           >
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
             <span class="hidden sm:inline">Sair</span>
@@ -260,160 +255,310 @@
       </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       
-      <!-- Hero / Page Intro -->
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-brand-900">Visão Geral das Respostas</h1>
-          <p class="text-sm font-medium text-slate-500 mt-1">
-            Monitoramento em tempo real dos dados consolidados da tabela <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-700 font-mono text-xs">respostas_pesquisa</code>.
-          </p>
-        </div>
-        <div class="flex items-center gap-2 self-start md:self-auto">
-          <span class="text-xs font-semibold text-slate-500">Última sincronização:</span>
-          <span id="last-sync-time" class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-lg border border-brand-100">--:--:--</span>
-        </div>
-      </div>
-
-      <!-- Error Notification (if fetch fails) -->
-      <div id="data-fetch-error" class="hidden p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-sm font-medium"></div>
-
-      <!-- KPI / Summary Cards Grid -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Hero Banner -->
+      <section class="relative rounded-3xl overflow-hidden bg-brand-950 text-white shadow-xl">
+        <div class="absolute inset-0 z-0 opacity-30 mix-blend-overlay bg-cover bg-center" style="background-image: url('fotos radar/photo_1.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-r from-brand-950 via-brand-900/90 to-transparent"></div>
         
-        <!-- Card 1: Total de Respostas -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-300 flex items-center justify-between">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total de Respostas</p>
-            <h3 id="stat-total-responses" class="text-3xl font-extrabold text-brand-900 mt-2">0</h3>
-            <p class="text-xs font-medium text-emerald-600 flex items-center gap-1 mt-1">
-              <i class="fa-solid fa-arrow-trend-up"></i>
-              <span>Coleta Ativa</span>
+        <div class="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div class="max-w-2xl space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/30 text-accent-cyan text-xs font-bold uppercase tracking-wider">
+              <i class="fa-solid fa-satellite-dish"></i>
+              <span>Inteligência de Dados Municipal</span>
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">
+              O Futuro do Consumo & Comportamento em São José dos Campos
+            </h1>
+            <p class="text-sm font-medium text-slate-300">
+              Painel interativo consolidando as respostas de munícipes sobre qualidade de vida, cultura, lazer, renda, mobilidade e tendências de mercado.
             </p>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl">
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex flex-col gap-3 min-w-[220px]">
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Status da Base</p>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                <span id="supabase-table-status" class="text-sm font-bold text-white">Conectando...</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-white/10">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Última Sincronização</p>
+              <p id="last-sync-time" class="text-xs font-bold text-accent-cyan mt-0.5">--:--:--</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Error Notification -->
+      <div id="data-fetch-error" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold"></div>
+
+      <!-- SECTION 1: KPIS / RESUMO GERAL -->
+      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Total de Respondentes</p>
+            <h3 id="stat-total-responses" class="text-3xl font-black text-brand-900 mt-2">0</h3>
+            <p class="text-xs font-semibold text-emerald-600 flex items-center gap-1 mt-1">
+              <i class="fa-solid fa-check-double"></i>
+              <span>Amostragem Válida</span>
+            </p>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl">
             <i class="fa-solid fa-users"></i>
           </div>
         </div>
 
-        <!-- Card 2: Índice de Satisfação / Favorabilidade -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-300 flex items-center justify-between">
+        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Índice Positivo</p>
-            <h3 id="stat-satisfaction-rate" class="text-3xl font-extrabold text-brand-900 mt-2">--</h3>
-            <p class="text-xs font-medium text-slate-400 mt-1">Avaliação média</p>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Qualidade de Vida (1 a 5)</p>
+            <h3 id="stat-quality-life" class="text-3xl font-black text-brand-900 mt-2">0.0</h3>
+            <p class="text-xs font-semibold text-brand-600 mt-1">Nota Média Geral</p>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-accent-cyan text-xl">
-            <i class="fa-solid fa-thumbs-up"></i>
+          <div class="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-accent-cyan text-xl">
+            <i class="fa-solid fa-star"></i>
           </div>
         </div>
 
-        <!-- Card 3: Regiões / Bairros Cobertos -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-300 flex items-center justify-between">
+        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Regiões Mapeadas</p>
-            <h3 id="stat-regions-count" class="text-3xl font-extrabold text-brand-900 mt-2">0</h3>
-            <p class="text-xs font-medium text-slate-400 mt-1">Pontos de amostragem</p>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Orgulho da Cidade</p>
+            <h3 id="stat-pride-rate" class="text-3xl font-black text-brand-900 mt-2">0%</h3>
+            <p class="text-xs font-semibold text-slate-400 mt-1">Sentimento Positivo</p>
           </div>
-          <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-xl">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-xl">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+        </div>
+
+        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Bairros Representados</p>
+            <h3 id="stat-neighborhoods-count" class="text-3xl font-black text-brand-900 mt-2">0</h3>
+            <p class="text-xs font-semibold text-slate-400 mt-1">Cobertura Territorial</p>
+          </div>
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 text-xl">
             <i class="fa-solid fa-map-location-dot"></i>
           </div>
         </div>
-
-        <!-- Card 4: Respostas Hoje -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-300 flex items-center justify-between">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Registros Recentes</p>
-            <h3 id="stat-today-responses" class="text-3xl font-extrabold text-brand-900 mt-2">0</h3>
-            <p class="text-xs font-medium text-slate-400 mt-1">Últimas 24 horas</p>
-          </div>
-          <div class="w-12 h-12 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 text-xl">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-          </div>
-        </div>
       </section>
 
-      <!-- Charts Section (Grid) -->
-      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Chart 1: Evolução / Distribuição de Avaliações -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h3 class="text-base font-bold text-brand-900">Distribuição de Avaliações</h3>
-              <p class="text-xs font-medium text-slate-400">Classificação geral das respostas</p>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
-              <i class="fa-solid fa-chart-pie text-sm"></i>
-            </div>
-          </div>
-          <div class="relative h-64 sm:h-72 w-full flex items-center justify-center">
-            <canvas id="chartDistribution"></canvas>
-          </div>
+      <!-- SECTION 2: PERFIL DEMOGRÁFICO & SOCIAL -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">1</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Perfil Demográfico, Social & Renda</h2>
         </div>
 
-        <!-- Chart 2: Distribuição por Bairro / Região -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h3 class="text-base font-bold text-brand-900">Respostas por Região / Bairro</h3>
-              <p class="text-xs font-medium text-slate-400">Concentração geográfica das respostas</p>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
-              <i class="fa-solid fa-chart-bar text-sm"></i>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Qual a sua idade?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Distribuição por faixas etárias</p>
+            <div class="chart-container"><canvas id="chart-age"></canvas></div>
           </div>
-          <div class="relative h-64 sm:h-72 w-full flex items-center justify-center">
-            <canvas id="chartRegions"></canvas>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Como você se identifica?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Gênero dos respondentes</p>
+            <div class="chart-container"><canvas id="chart-gender"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Renda Total Familiar</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Faixa salarial mensal</p>
+            <div class="chart-container"><canvas id="chart-income"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">O seu trabalho hoje é:</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Presencial, Híbrido, Home Office</p>
+            <div class="chart-container"><canvas id="chart-work-mode"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Qual o seu estado civil?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Situação conjugal</p>
+            <div class="chart-container"><canvas id="chart-marital"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Você já tem casa própria?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Posse de imóvel residencial</p>
+            <div class="chart-container"><canvas id="chart-house"></canvas></div>
           </div>
         </div>
+      </div>
 
-        <!-- Chart 3: Linha do Tempo / Evolução Diária -->
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border lg:col-span-2 flex flex-col justify-between">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <h3 class="text-base font-bold text-brand-900">Evolução Temporal de Coletas</h3>
-              <p class="text-xs font-medium text-slate-400">Volume de respostas recebidas ao longo dos dias</p>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
-              <i class="fa-solid fa-chart-line text-sm"></i>
-            </div>
-          </div>
-          <div class="relative h-72 sm:h-80 w-full">
-            <canvas id="chartTimeline"></canvas>
-          </div>
+      <!-- SECTION 3: CIDADE, QUALIDADE DE VIDA & MOBILIDADE -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">2</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Percepção da Cidade, Mobilidade & Pets</h2>
         </div>
 
-      </section>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Nota de Qualidade de Vida</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Escala de 1 a 5 para São José</p>
+            <div class="chart-container"><canvas id="chart-quality-scale"></canvas></div>
+          </div>
 
-      <!-- Data Table Preview (Latest Records) -->
-      <section class="bg-surface-card rounded-2xl shadow-card border border-surface-border overflow-hidden">
-        <div class="p-6 border-b border-surface-border flex items-center justify-between">
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Meios de Transporte</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Veículos e modais mais usados</p>
+            <div class="chart-container"><canvas id="chart-transport"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Para você, São José é:</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Conceito e imagem da cidade</p>
+            <div class="chart-container"><canvas id="chart-city-concept"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">A cidade de São José está:</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Crescendo, Parada ou Regredindo</p>
+            <div class="chart-container"><canvas id="chart-growth"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Pets & Espaço Pet Friendly</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Posse de animais e estrutura da cidade</p>
+            <div class="chart-container"><canvas id="chart-pets"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Região Mais Frequentada</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Centro, Sul, Oeste, Leste, Norte</p>
+            <div class="chart-container"><canvas id="chart-regions-frequented"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: LAZER, GASTRONOMIA & NOITE -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">3</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Lazer, Noite, Gastronomia & Cultura</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">O que mais falta em São José?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Demandas de lazer e entretenimento</p>
+            <div class="chart-container"><canvas id="chart-missing"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Frequência de Saída / Passeio</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Quantas vezes sai na semana</p>
+            <div class="chart-container"><canvas id="chart-frequency"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Passeia em outras cidades?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Evasão de consumo para SP/Vizinhos</p>
+            <div class="chart-container"><canvas id="chart-other-cities"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Escolha de Bar / Restaurante</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Fatores determinantes de decisão</p>
+            <div class="chart-container"><canvas id="chart-bar-choice"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Maior Dificuldade Noturna</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Gargalos da vida noturna em SJC</p>
+            <div class="chart-container"><canvas id="chart-nightlife-issues"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Potencial de Consumo Adicional</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Gastaria mais com lazer qualificado?</p>
+            <div class="chart-container"><canvas id="chart-spend-more"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: MÍDIA, INFLUENCIADORES & POLÍTICA -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">4</div>
+          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Mídias, Canais de Notícias & Política</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Por onde sabe das notícias?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Portais, Instagram, WhatsApp, TV</p>
+            <div class="chart-container"><canvas id="chart-news-sources"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Redes Sociais de Descoberta</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Instagram, TikTok, Google Maps</p>
+            <div class="chart-container"><canvas id="chart-social-discovery"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Foi por indicação de Influencer?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Impacto do marketing de influência</p>
+            <div class="chart-container"><canvas id="chart-influencers"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Interesse na Política Local</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Nota de 1 a 5 de acompanhamento</p>
+            <div class="chart-container"><canvas id="chart-politics-follow"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Posicionamento Político</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Direita, Centro, Esquerda, Nenhum</p>
+            <div class="chart-container"><canvas id="chart-politics-side"></canvas></div>
+          </div>
+
+          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
+            <h3 class="text-sm font-bold text-brand-900 mb-1">Quem mais ajuda a cidade?</h3>
+            <p class="text-xs font-medium text-slate-400 mb-4">Empresas, Prefeitura, Munícipes</p>
+            <div class="chart-container"><canvas id="chart-growth-agents"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: TABELA DE REGISTROS RECENTES -->
+      <section class="bg-surface-card rounded-3xl shadow-card border border-surface-border overflow-hidden">
+        <div class="p-6 sm:p-8 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 class="text-base font-bold text-brand-900">Registros Recentes da Pesquisa</h3>
-            <p class="text-xs font-medium text-slate-400">Últimas 5 entradas gravadas no banco de dados</p>
+            <h3 class="text-lg font-black text-brand-900">Registros Brutos da Tabela (Supabase)</h3>
+            <p class="text-xs font-medium text-slate-400 mt-0.5">Últimas respostas registradas em tempo real na tabela <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-800 font-mono font-bold">respostas radar</code></p>
           </div>
-          <span class="px-3 py-1 bg-brand-50 text-brand-700 text-xs font-bold rounded-lg border border-brand-100">
-            Tempo Real
+          <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-xl border border-emerald-200 self-start sm:self-auto flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Base Integrada
           </span>
         </div>
 
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-sm text-slate-600">
-            <thead class="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500 border-b border-surface-border">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 font-bold uppercase tracking-wider text-slate-500 border-b border-surface-border">
               <tr>
-                <th class="py-3.5 px-6">ID / Data</th>
-                <th class="py-3.5 px-6">Bairro / Região</th>
-                <th class="py-3.5 px-6">Avaliação / Resposta</th>
-                <th class="py-3.5 px-6 text-right">Status</th>
+                <th class="py-4 px-6">Data / Hora</th>
+                <th class="py-4 px-6">Bairro / Região</th>
+                <th class="py-4 px-6">Idade / Perfil</th>
+                <th class="py-4 px-6">Nota Qualidade</th>
+                <th class="py-4 px-6">O que mais falta?</th>
+                <th class="py-4 px-6 text-right">Status</th>
               </tr>
             </thead>
             <tbody id="recent-records-table-body" class="divide-y divide-slate-100">
               <tr>
-                <td colspan="4" class="py-8 text-center text-slate-400 font-medium">
-                  <i class="fa-solid fa-spinner fa-spin mr-2"></i> Carregando registros...
+                <td colspan="6" class="py-10 text-center text-slate-400 font-semibold">
+                  <i class="fa-solid fa-spinner fa-spin mr-2 text-brand-600"></i> Carregando registros da pesquisa...
                 </td>
               </tr>
             </tbody>
@@ -423,10 +568,13 @@
 
     </main>
 
-    <!-- Dashboard Footer -->
-    <footer class="bg-white border-t border-surface-border py-4 mt-8">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400 font-medium">
-        <span>Radar São José &bull; Painel de Gestão e Monitoramento</span>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-surface-border py-6 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
+        <div class="flex items-center gap-3">
+          <img src="fotos radar/logo.png" alt="Logo" class="h-6 object-contain" />
+          <span>Radar São José &bull; Inteligência & Análise de Mercado</span>
+        </div>
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
       </div>
     </footer>

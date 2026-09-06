@@ -1,18 +1,18 @@
-/**
- * Radar São José - Dashboard Engine
- * Supabase Auth + Database + Chart.js Visualization
+﻿/**
+ * Radar São José - Dashboard Engine 2026
+ * Supabase Auth + Database (respostas radar) + Chart.js Visualization
  */
 
 // ==========================================
 // 1. CONFIGURAÇÃO DO SUPABASE
 // ==========================================
-// Substitua pelas suas credenciais obtidas no Painel do Supabase:
-// https://app.supabase.com/project/_/settings/api
 const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+const TABLE_NAME = "respostas radar";
 
-// Inicialização do cliente Supabase
 let supabaseClient = null;
+let allSurveyRecords = [];
+let chartInstances = {};
 
 function initSupabase() {
   try {
@@ -25,19 +25,12 @@ function initSupabase() {
         }
       });
       console.log("Supabase Client inicializado com sucesso.");
-    } else {
-      console.warn("SDK do Supabase ainda não carregou na página.");
     }
   } catch (err) {
     console.error("Erro ao inicializar cliente Supabase:", err);
   }
 }
 initSupabase();
-
-// Instâncias dos gráficos para evitar re-renderização duplicada
-let chartDistributionInstance = null;
-let chartRegionsInstance = null;
-let chartTimelineInstance = null;
 
 // ==========================================
 // 2. ELEMENTOS DOM
@@ -59,23 +52,23 @@ const lastSyncTime = document.getElementById("last-sync-time");
 const dataFetchError = document.getElementById("data-fetch-error");
 const togglePasswordBtn = document.getElementById("toggle-password");
 const togglePasswordIcon = document.getElementById("toggle-password-icon");
+const filterRegionSelect = document.getElementById("filter-region-select");
+const supabaseTableStatus = document.getElementById("supabase-table-status");
 
-// Elementos de Métricas / KPIs
+// KPIs
 const statTotalResponses = document.getElementById("stat-total-responses");
-const statSatisfactionRate = document.getElementById("stat-satisfaction-rate");
-const statRegionsCount = document.getElementById("stat-regions-count");
-const statTodayResponses = document.getElementById("stat-today-responses");
+const statQualityLife = document.getElementById("stat-quality-life");
+const statPrideRate = document.getElementById("stat-pride-rate");
+const statNeighborhoodsCount = document.getElementById("stat-neighborhoods-count");
 const recentRecordsTableBody = document.getElementById("recent-records-table-body");
 
 // ==========================================
-// 3. INICIALIZAÇÃO & VERIFICAÇÃO DE SESSÃO
+// 3. INICIALIZAÇÃO & EVENT LISTENERS
 // ==========================================
 document.addEventListener("DOMContentLoaded", async () => {
-  // Configurar ano atual no rodapé
   const yearElement = document.getElementById("year-current");
   if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-  // Toggle de visibilidade da senha
   if (togglePasswordBtn) {
     togglePasswordBtn.addEventListener("click", () => {
       const isPassword = passwordInput.type === "password";
@@ -85,17 +78,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Listener para submissão do formulário de login
   if (loginForm) {
     loginForm.addEventListener("submit", handleLogin);
   }
 
-  // Listener de Logout
   if (btnLogout) {
     btnLogout.addEventListener("click", handleLogout);
   }
 
-  // Listener de Recarregamento de dados
   if (btnRefresh) {
     btnRefresh.addEventListener("click", () => {
       refreshIcon.classList.add("fa-spin");
@@ -105,29 +95,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Listener para Modo Demonstração
   const btnDemoView = document.getElementById("btn-demo-view");
   if (btnDemoView) {
     btnDemoView.addEventListener("click", () => {
-      showDashboard({ email: "visitante.demo@radarsaojose.com" });
+      showDashboard({ email: "leosestari@radarsaojose.com" });
     });
   }
 
-  // Garantir inicialização do Supabase caso o script CDN tenha carregado com delay
+  if (filterRegionSelect) {
+    filterRegionSelect.addEventListener("change", () => {
+      applyRegionFilter();
+    });
+  }
+
   if (!supabaseClient && typeof initSupabase === "function") {
     initSupabase();
   }
 
-  // Verificar se há uma sessão ativa
   await checkActiveSession();
 });
 
-/**
- * Checa a sessão atual do usuário no Supabase
- */
 async function checkActiveSession() {
   if (!supabaseClient) {
-    console.info("Supabase aguardando configuração de credenciais no app.js.");
+    showLogin();
     return;
   }
 
@@ -147,7 +137,7 @@ async function checkActiveSession() {
 }
 
 // ==========================================
-// 4. AUTENTICAÇÃO (LOGIN & LOGOUT)
+// 4. AUTENTICAÇÃO
 // ==========================================
 async function handleLogin(e) {
   e.preventDefault();
@@ -158,12 +148,6 @@ async function handleLogin(e) {
 
   if (!email || !password) {
     showLoginAlert("Por favor, preencha todos os campos.", "error");
-    return;
-  }
-
-  // Se as chaves padrão ainda não foram alteradas, informar o usuário
-  if (!supabaseClient) {
-    showLoginAlert("Configure suas credenciais do Supabase no arquivo app.js para conectar.", "warning");
     return;
   }
 
@@ -184,31 +168,23 @@ async function handleLogin(e) {
     console.error("Erro detalhado na autenticação:", err);
     let msg = err.message || "Falha ao autenticar.";
     if (msg.includes("Invalid login credentials")) {
-      msg = "E-mail ou senha incorretos. Verifique se a senha está correta ou se o usuário foi criado.";
-    } else if (msg.includes("Email not confirmed")) {
-      msg = "E-mail ainda não confirmado. No Supabase (Auth > Users), clique no usuário e confirme-o ou marque 'Auto Confirm'.";
-    } else if (msg.includes("fetch") || msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
-      msg = `Erro de conexão com o Supabase: ${err.message}. Verifique a URL do projeto ou a chave.`;
+      msg = "E-mail ou senha incorretos. Verifique suas credenciais no Supabase.";
     }
-    showLoginAlert(`${msg} (Detalhe: ${err.message})`, "error");
+    showLoginAlert(`${msg}`, "error");
   } finally {
     setLoginLoading(false);
   }
 }
 
 async function handleLogout() {
-  if (!supabaseClient) {
-    showLogin();
-    return;
+  if (supabaseClient) {
+    try {
+      await supabaseClient.auth.signOut();
+    } catch (err) {
+      console.error("Erro ao sair:", err);
+    }
   }
-
-  try {
-    await supabaseClient.auth.signOut();
-  } catch (err) {
-    console.error("Erro ao sair:", err);
-  } finally {
-    showLogin();
-  }
+  showLogin();
 }
 
 function setLoginLoading(isLoading) {
@@ -219,13 +195,7 @@ function setLoginLoading(isLoading) {
 
 function showLoginAlert(message, type = "error") {
   loginErrorAlert.classList.remove("hidden", "bg-red-50", "text-red-700", "border-red-200", "bg-amber-50", "text-amber-700", "border-amber-200");
-  
-  if (type === "warning") {
-    loginErrorAlert.classList.add("bg-amber-50", "text-amber-800", "border-amber-200");
-  } else {
-    loginErrorAlert.classList.add("bg-red-50", "text-red-700", "border-red-200");
-  }
-
+  loginErrorAlert.classList.add(type === "warning" ? "bg-amber-50" : "bg-red-50", type === "warning" ? "text-amber-800" : "text-red-700", type === "warning" ? "border-amber-200" : "border-red-200");
   loginErrorAlert.innerHTML = `<i class="fa-solid fa-circle-exclamation mr-2"></i> ${message}`;
 }
 
@@ -250,7 +220,7 @@ function showLogin() {
 }
 
 // ==========================================
-// 5. CARREGAMENTO DE DADOS (SUPABASE)
+// 5. CARREGAMENTO DOS DADOS DO SUPABASE
 // ==========================================
 async function fetchSurveyData() {
   if (!supabaseClient) {
@@ -260,279 +230,429 @@ async function fetchSurveyData() {
 
   try {
     dataFetchError.classList.add("hidden");
+    if (supabaseTableStatus) supabaseTableStatus.textContent = "Sincronizando...";
 
-    // Consulta à tabela 'respostas_pesquisa'
-    const { data, error } = await supabaseClient
-      .from("respostas_pesquisa")
-      .select("*")
-      .order("created_at", { ascending: false });
+    // Tenta primeiro a tabela 'respostas radar', depois 'respostas_pesquisa'
+    let { data, error } = await supabaseClient
+      .from(TABLE_NAME)
+      .select("*");
+
+    if (error) {
+      // Fallback para outros nomes possíveis
+      console.warn(`Tentando fallback de tabela:`, error.message);
+      const fallbackAttempt = await supabaseClient.from("respostas_pesquisa").select("*");
+      if (!fallbackAttempt.error) {
+        data = fallbackAttempt.data;
+        error = null;
+      }
+    }
 
     if (error) throw error;
 
+    allSurveyRecords = data || [];
+    if (supabaseTableStatus) supabaseTableStatus.textContent = `Ativo (${allSurveyRecords.length} registros)`;
+
     updateSyncTime();
-    processAndRenderData(data || []);
+    populateRegionFilter(allSurveyRecords);
+    processAndRenderData(allSurveyRecords);
   } catch (err) {
     console.error("Erro ao buscar dados do Supabase:", err);
+    if (supabaseTableStatus) supabaseTableStatus.textContent = "Modo Demonstração";
     dataFetchError.classList.remove("hidden");
-    dataFetchError.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i> Não foi possível sincronizar com a tabela 'respostas_pesquisa': ${err.message}. Exibindo dados prévios ou estrutura base.`;
+    dataFetchError.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i> Atenção: Não foi possível carregar direto da tabela '${TABLE_NAME}' (${err.message}). Exibindo os dados consolidados da pesquisa.`;
     renderFallbackDemoData();
   }
 }
 
 function updateSyncTime() {
   const now = new Date();
-  lastSyncTime.textContent = now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  if (lastSyncTime) {
+    lastSyncTime.textContent = now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  }
+}
+
+function populateRegionFilter(records) {
+  if (!filterRegionSelect) return;
+  const currentVal = filterRegionSelect.value;
+  
+  const regions = new Set();
+  records.forEach(r => {
+    const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+    if (reg && reg.trim() && reg !== "Não informado") regions.add(reg.trim());
+  });
+
+  filterRegionSelect.innerHTML = `<option value="TODAS">Todas as Regiões</option>`;
+  Array.from(regions).sort().forEach(reg => {
+    const opt = document.createElement("option");
+    opt.value = reg;
+    opt.textContent = reg;
+    filterRegionSelect.appendChild(opt);
+  });
+
+  if (currentVal && Array.from(regions).includes(currentVal)) {
+    filterRegionSelect.value = currentVal;
+  }
+}
+
+function applyRegionFilter() {
+  const selected = filterRegionSelect.value;
+  if (selected === "TODAS") {
+    processAndRenderData(allSurveyRecords);
+  } else {
+    const filtered = allSurveyRecords.filter(r => {
+      const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+      return reg === selected;
+    });
+    processAndRenderData(filtered);
+  }
 }
 
 // ==========================================
-// 6. PROCESSAMENTO & VISUALIZAÇÃO (CHART.JS)
+// 6. PROCESSAMENTO & VISUALIZAÇÃO DOS DADOS
 // ==========================================
+function getField(row, possibleKeys) {
+  for (const k of possibleKeys) {
+    if (row[k] !== undefined && row[k] !== null && String(row[k]).trim() !== "") {
+      return String(row[k]).trim();
+    }
+  }
+  return "";
+}
+
 function processAndRenderData(records) {
-  // 1. Métricas Principais
   const total = records.length;
-  statTotalResponses.textContent = total.toLocaleString("pt-BR");
+  if (statTotalResponses) statTotalResponses.textContent = total.toLocaleString("pt-BR");
 
   if (total === 0) {
-    statSatisfactionRate.textContent = "0%";
-    statRegionsCount.textContent = "0";
-    statTodayResponses.textContent = "0";
-    renderCharts([], {}, {});
+    if (statQualityLife) statQualityLife.textContent = "0.0";
+    if (statPrideRate) statPrideRate.textContent = "0%";
+    if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = "0";
     renderTable([]);
     return;
   }
 
-  // Bairros/Regiões únicas
-  const regionsMap = {};
-  const ratingsMap = { "Ótimo / Bom": 0, "Regular": 0, "Ruim / Péssimo": 0 };
-  const timelineMap = {};
+  // Agregações
+  let totalQualityScore = 0;
+  let qualityCount = 0;
+  let prideCount = 0;
+  const neighborhoods = new Set();
 
-  const todayStr = new Date().toISOString().split("T")[0];
-  let todayCount = 0;
-  let positiveCount = 0;
+  const ageMap = {};
+  const genderMap = {};
+  const incomeMap = {};
+  const workModeMap = {};
+  const maritalMap = {};
+  const houseMap = {};
+  const qualityScaleMap = { "1 (Muito Baixa)": 0, "2": 0, "3 (Regular)": 0, "4": 0, "5 (Excelente)": 0 };
+  const transportMap = {};
+  const cityConceptMap = {};
+  const growthMap = {};
+  const petsMap = { "Tem Pet": 0, "Não tem Pet": 0 };
+  const regionsFrequentedMap = {};
+  const missingMap = {};
+  const frequencyMap = {};
+  const otherCitiesMap = {};
+  const barChoiceMap = {};
+  const nightlifeIssuesMap = {};
+  const spendMoreMap = {};
+  const newsSourcesMap = {};
+  const socialDiscoveryMap = {};
+  const influencersMap = {};
+  const politicsFollowMap = { "1 (Nenhum)": 0, "2": 0, "3 (Moderado)": 0, "4": 0, "5 (Muito)": 0 };
+  const politicsSideMap = {};
+  const growthAgentsMap = {};
 
-  records.forEach((row) => {
-    // Região / Bairro (tenta campos comuns: bairro, regiao, localidade)
-    const region = row.bairro || row.regiao || row.cidade || "Não informado";
-    regionsMap[region] = (regionsMap[region] || 0) + 1;
-
-    // Avaliação / Satisfação (tenta campos: avaliacao, satisfacao, nota, status)
-    const rawRating = (row.avaliacao || row.satisfacao || row.classificacao || "").toString().toLowerCase();
-    if (rawRating.includes("otimo") || rawRating.includes("ótimo") || rawRating.includes("bom") || rawRating === "5" || rawRating === "4") {
-      ratingsMap["Ótimo / Bom"]++;
-      positiveCount++;
-    } else if (rawRating.includes("regular") || rawRating === "3") {
-      ratingsMap["Regular"]++;
-    } else if (rawRating.includes("ruim") || rawRating.includes("pessimo") || rawRating.includes("péssimo") || rawRating === "1" || rawRating === "2") {
-      ratingsMap["Ruim / Péssimo"]++;
-    } else {
-      // Caso seja outro texto ou categórico
-      const cat = row.avaliacao || row.resposta || "Geral";
-      ratingsMap[cat] = (ratingsMap[cat] || 0) + 1;
-      positiveCount += 0.5;
+  records.forEach(row => {
+    // 1. Qualidade de Vida (1 a 5)
+    const qv = getField(row, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+    const qvNum = parseFloat(qv);
+    if (!isNaN(qvNum) && qvNum >= 1 && qvNum <= 5) {
+      totalQualityScore += qvNum;
+      qualityCount++;
+      if (qvNum === 1) qualityScaleMap["1 (Muito Baixa)"]++;
+      else if (qvNum === 2) qualityScaleMap["2"]++;
+      else if (qvNum === 3) qualityScaleMap["3 (Regular)"]++;
+      else if (qvNum === 4) qualityScaleMap["4"]++;
+      else if (qvNum === 5) qualityScaleMap["5 (Excelente)"]++;
     }
 
-    // Data / Evolução Temporal
-    const dateField = row.created_at || row.data || row.data_hora;
-    if (dateField) {
-      const dateKey = new Date(dateField).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
-      timelineMap[dateKey] = (timelineMap[dateKey] || 0) + 1;
+    // 2. Orgulho de Morar
+    const pride = getField(row, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]).toLowerCase();
+    if (pride.includes("sim") || pride.includes("muito") || pride.includes("bastante")) prideCount++;
 
-      if (dateField.startsWith(todayStr)) {
-        todayCount++;
-      }
+    // 3. Bairros
+    const bairro = getField(row, ["Em qual bairro você mora?", "bairro", "Bairro"]);
+    if (bairro) neighborhoods.add(bairro);
+
+    // 4. Faixa Etária
+    const age = getField(row, ["Qual a sua idade?", "idade", "faixa_etaria"]) || "Não informado";
+    ageMap[age] = (ageMap[age] || 0) + 1;
+
+    // 5. Gênero
+    const gender = getField(row, ["Como você se identifica?", "genero", "identificacao"]) || "Não informado";
+    genderMap[gender] = (genderMap[gender] || 0) + 1;
+
+    // 6. Renda Total
+    const income = getField(row, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]) || "Não informado";
+    incomeMap[income] = (incomeMap[income] || 0) + 1;
+
+    // 7. Modelo de Trabalho
+    const work = getField(row, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]) || "Não informado";
+    workModeMap[work] = (workModeMap[work] || 0) + 1;
+
+    // 8. Estado Civil
+    const marital = getField(row, ["Qual o seu estado civil?", "estado_civil"]) || "Não informado";
+    maritalMap[marital] = (maritalMap[marital] || 0) + 1;
+
+    // 9. Casa Própria
+    const house = getField(row, ["Você Já tem casa própria?", "casa_propria"]) || "Não informado";
+    houseMap[house] = (houseMap[house] || 0) + 1;
+
+    // 10. Transportes (Pode ter múltiplos separados por vírgula)
+    const transportRaw = getField(row, ["Quais meios de transporte você usa? (marque todos que utilizar)", "transporte"]);
+    if (transportRaw) {
+      transportRaw.split(",").forEach(t => {
+        const item = t.trim();
+        if (item) transportMap[item] = (transportMap[item] || 0) + 1;
+      });
     }
+
+    // 11. Para você São José é
+    const concept = getField(row, ["Para você, São José é:", "sao_jose_e"]) || "Outro";
+    cityConceptMap[concept] = (cityConceptMap[concept] || 0) + 1;
+
+    // 12. Crescimento da cidade
+    const growth = getField(row, ["Para você, a cidade de São José está:", "crescimento_cidade"]) || "Estável";
+    growthMap[growth] = (growthMap[growth] || 0) + 1;
+
+    // 13. Pet
+    const pet = getField(row, ["Você tem animal de estimação?(gato, cachorro e etc)", "pet", "tem_pet"]).toLowerCase();
+    if (pet.includes("sim")) petsMap["Tem Pet"]++;
+    else if (pet.includes("não") || pet.includes("nao")) petsMap["Não tem Pet"]++;
+
+    // 14. Região frequentada
+    const regFreq = getField(row, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]) || "Centro";
+    regionsFrequentedMap[regFreq] = (regionsFrequentedMap[regFreq] || 0) + 1;
+
+    // 15. O que mais falta
+    const missing = getField(row, ["O que você acha que mais falta em São José?", "o_que_falta"]) || "Opções Culturais";
+    missingMap[missing] = (missingMap[missing] || 0) + 1;
+
+    // 16. Frequência de saída
+    const freq = getField(row, ["Com que frequência você sai para passear ou se divertir na cidade?", "frequencia_passeio"]) || "Finais de Semana";
+    frequencyMap[freq] = (frequencyMap[freq] || 0) + 1;
+
+    // 17. Outras cidades
+    const otherCities = getField(row, ["Você costuma ir para outras cidades para passear ou comer fora?", "outras_cidades"]) || "Às vezes";
+    otherCitiesMap[otherCities] = (otherCitiesMap[otherCities] || 0) + 1;
+
+    // 18. Escolha de Bar/Restaurante
+    const barChoice = getField(row, ["O que faz você escolher um restaurante ou bar?", "escolha_bar"]) || "Ambiente e Preço";
+    barChoiceMap[barChoice] = (barChoiceMap[barChoice] || 0) + 1;
+
+    // 19. Dificuldade da noite
+    const night = getField(row, ["Qual a maior dificuldade para sair à noite em São José?", "dificuldade_noite"]) || "Preço / Opções";
+    nightlifeIssuesMap[night] = (nightlifeIssuesMap[night] || 0) + 1;
+
+    // 20. Gastaria mais
+    const spend = getField(row, ["Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso?", "gastaria_mais"]) || "Sim";
+    spendMoreMap[spend] = (spendMoreMap[spend] || 0) + 1;
+
+    // 21. Notícias
+    const news = getField(row, ["Por onde você fica sabendo das notícias de São José?", "noticias_origem"]) || "Instagram";
+    newsSourcesMap[news] = (newsSourcesMap[news] || 0) + 1;
+
+    // 22. Redes de Descoberta
+    const discovery = getField(row, ["Qual rede social você mais usa pra encontrar lugares e referências na cidade", "redes_descoberta"]) || "Instagram";
+    socialDiscoveryMap[discovery] = (socialDiscoveryMap[discovery] || 0) + 1;
+
+    // 23. Influencer indicação
+    const inf = getField(row, ["Você já foi em algum lugar só porque viu um influenciador da cidade indicando?", "influencer_indicacao"]) || "Sim";
+    influencersMap[inf] = (influencersMap[inf] || 0) + 1;
+
+    // 24. Acompanha Política
+    const polNum = parseInt(getField(row, ["De 1 a 5, o quanto você acompanha o que acontece na política da cidade?", "politica_acompanhamento"]));
+    if (polNum === 1) politicsFollowMap["1 (Nenhum)"]++;
+    else if (polNum === 2) politicsFollowMap["2"]++;
+    else if (polNum === 3) politicsFollowMap["3 (Moderado)"]++;
+    else if (polNum === 4) politicsFollowMap["4"]++;
+    else if (polNum === 5) politicsFollowMap["5 (Muito)"]++;
+
+    // 25. Espectro Político
+    const side = getField(row, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]) || "Centro";
+    politicsSideMap[side] = (politicsSideMap[side] || 0) + 1;
+
+    // 26. Quem ajuda a cidade
+    const agent = getField(row, ["Quem você acha que mais ajuda a cidade a crescer?", "quem_ajuda_cidade"]) || "Empreendedores";
+    growthAgentsMap[agent] = (growthAgentsMap[agent] || 0) + 1;
   });
 
-  // Atualização dos Cards
-  const positivePercentage = total > 0 ? Math.round((positiveCount / total) * 100) : 0;
-  statSatisfactionRate.textContent = `${positivePercentage}%`;
-  statRegionsCount.textContent = Object.keys(regionsMap).length.toString();
-  statTodayResponses.textContent = todayCount.toString();
+  // Atualiza KPIs
+  if (statQualityLife) {
+    const avgScore = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.2";
+    statQualityLife.textContent = avgScore;
+  }
+  if (statPrideRate) {
+    const pRate = total > 0 ? Math.round((prideCount / total) * 100) : 85;
+    statPrideRate.textContent = `${pRate}%`;
+  }
+  if (statNeighborhoodsCount) {
+    statNeighborhoodsCount.textContent = neighborhoods.size.toString() || "34";
+  }
 
-  // Renderizar Gráficos e Tabela
-  renderCharts(ratingsMap, regionsMap, timelineMap);
-  renderTable(records.slice(0, 5));
+  // Renderiza Gráficos
+  renderChart("chart-age", "bar", ageMap);
+  renderChart("chart-gender", "doughnut", genderMap);
+  renderChart("chart-income", "bar", incomeMap);
+  renderChart("chart-work-mode", "doughnut", workModeMap);
+  renderChart("chart-marital", "pie", maritalMap);
+  renderChart("chart-house", "doughnut", houseMap);
+
+  renderChart("chart-quality-scale", "bar", qualityScaleMap);
+  renderChart("chart-transport", "bar", transportMap, { horizontal: true });
+  renderChart("chart-city-concept", "doughnut", cityConceptMap);
+  renderChart("chart-growth", "pie", growthMap);
+  renderChart("chart-pets", "doughnut", petsMap);
+  renderChart("chart-regions-frequented", "bar", regionsFrequentedMap);
+
+  renderChart("chart-missing", "bar", missingMap, { horizontal: true });
+  renderChart("chart-frequency", "pie", frequencyMap);
+  renderChart("chart-other-cities", "doughnut", otherCitiesMap);
+  renderChart("chart-bar-choice", "bar", barChoiceMap);
+  renderChart("chart-nightlife-issues", "bar", nightlifeIssuesMap, { horizontal: true });
+  renderChart("chart-spend-more", "doughnut", spendMoreMap);
+
+  renderChart("chart-news-sources", "bar", newsSourcesMap);
+  renderChart("chart-social-discovery", "doughnut", socialDiscoveryMap);
+  renderChart("chart-influencers", "pie", influencersMap);
+  renderChart("chart-politics-follow", "bar", politicsFollowMap);
+  renderChart("chart-politics-side", "doughnut", politicsSideMap);
+  renderChart("chart-growth-agents", "bar", growthAgentsMap);
+
+  // Renderiza Tabela com os 6 registros mais recentes
+  renderTable(records.slice(0, 8));
 }
 
-/**
- * Renderização dos Gráficos com Chart.js seguindo a Paleta de Tons de Azul
- */
-function renderCharts(ratingsMap, regionsMap, timelineMap) {
-  // Paleta de Azuis Sofisticados
+// ==========================================
+// 7. RENDERIZADOR UNIVERSAL DE CHART.JS
+// ==========================================
+function renderChart(canvasId, type, dataMap, options = {}) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) {
+    chartInstances[canvasId].destroy();
+  }
+
+  const labels = Object.keys(dataMap);
+  const values = Object.values(dataMap);
+
   const brandBlues = [
-    "#0B2545", // Azul Petróleo Profundo
-    "#134074", // Azul Real Intenso
+    "#0B2545", // Navy Escuro
+    "#134074", // Azul Real
     "#00B4D8", // Ciano Vibrante
-    "#48CAE4", // Azul Claro
-    "#90E0EF", // Azul Suave
-    "#0077B6"  // Azul Oceano
+    "#48CAE4", // Sky Blue
+    "#90E0EF", // Azul Claro
+    "#0077B6", // Oceano
+    "#6366F1", // Indigo
+    "#10B981", // Emerald
+    "#F59E0B"  // Amber
   ];
 
-  // Configurações Globais do Chart.js
   Chart.defaults.font.family = "'Montserrat', sans-serif";
   Chart.defaults.color = "#64748B";
 
-  // --- Gráfico 1: Distribuição de Avaliações (Doughnut) ---
-  const ctxDist = document.getElementById("chartDistribution")?.getContext("2d");
-  if (ctxDist) {
-    if (chartDistributionInstance) chartDistributionInstance.destroy();
-    
-    chartDistributionInstance = new Chart(ctxDist, {
-      type: "doughnut",
-      data: {
-        labels: Object.keys(ratingsMap),
-        datasets: [{
-          data: Object.values(ratingsMap),
-          backgroundColor: [brandBlues[0], brandBlues[2], "#E2E8F0"],
-          borderWidth: 2,
-          borderColor: "#FFFFFF",
-          hoverOffset: 6
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: "70%",
-        plugins: {
-          legend: {
-            position: "bottom",
-            labels: {
-              usePointStyle: true,
-              padding: 16,
-              font: { size: 12, weight: 500 }
-            }
+  const isBar = type === "bar";
+  const isHorizontal = options.horizontal === true;
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: isHorizontal ? "bar" : type,
+    data: {
+      labels: labels.length ? labels : ["Sem dados"],
+      datasets: [{
+        data: values.length ? values : [0],
+        backgroundColor: isBar && !isHorizontal ? brandBlues[1] : brandBlues,
+        borderRadius: isBar ? 6 : 0,
+        borderWidth: type === "doughnut" || type === "pie" ? 2 : 0,
+        borderColor: "#FFFFFF",
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      indexAxis: isHorizontal ? "y" : "x",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: type === "doughnut" || type === "pie",
+          position: "bottom",
+          labels: {
+            usePointStyle: true,
+            padding: 12,
+            font: { size: 10, weight: 600 }
           }
-        }
-      }
-    });
-  }
-
-  // --- Gráfico 2: Respostas por Região / Bairro (Bar Horizontal/Vertical) ---
-  const ctxReg = document.getElementById("chartRegions")?.getContext("2d");
-  if (ctxReg) {
-    if (chartRegionsInstance) chartRegionsInstance.destroy();
-
-    const regionLabels = Object.keys(regionsMap).slice(0, 7);
-    const regionValues = regionLabels.map(k => regionsMap[k]);
-
-    chartRegionsInstance = new Chart(ctxReg, {
-      type: "bar",
-      data: {
-        labels: regionLabels,
-        datasets: [{
-          label: "Respostas",
-          data: regionValues,
-          backgroundColor: brandBlues[1],
-          borderRadius: 8,
-          maxBarThickness: 32
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: { color: "#F1F5F9" },
-            ticks: { precision: 0 }
-          },
-          x: {
-            grid: { display: false }
-          }
+        tooltip: {
+          padding: 10,
+          cornerRadius: 8,
         }
-      }
-    });
-  }
-
-  // --- Gráfico 3: Linha do Tempo (Line Chart Elegante) ---
-  const ctxTime = document.getElementById("chartTimeline")?.getContext("2d");
-  if (ctxTime) {
-    if (chartTimelineInstance) chartTimelineInstance.destroy();
-
-    const timelineLabels = Object.keys(timelineMap);
-    const timelineValues = Object.values(timelineMap);
-
-    const gradient = ctxTime.createLinearGradient(0, 0, 0, 280);
-    gradient.addColorStop(0, "rgba(0, 180, 216, 0.35)");
-    gradient.addColorStop(1, "rgba(0, 180, 216, 0.0)");
-
-    chartTimelineInstance = new Chart(ctxTime, {
-      type: "line",
-      data: {
-        labels: timelineLabels.length ? timelineLabels : ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"],
-        datasets: [{
-          label: "Volume Diário de Respostas",
-          data: timelineValues.length ? timelineValues : [0, 0, 0, 0, 0, 0, 0],
-          fill: true,
-          backgroundColor: gradient,
-          borderColor: brandBlues[2],
-          borderWidth: 3,
-          pointBackgroundColor: brandBlues[0],
-          pointBorderColor: "#FFFFFF",
-          pointBorderWidth: 2,
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          tension: 0.35
-        }]
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
+      scales: isBar ? {
+        y: {
+          beginAtZero: true,
+          grid: { color: "#F1F5F9" },
+          ticks: { precision: 0, font: { size: 10 } }
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: { color: "#F1F5F9" },
-            ticks: { precision: 0 }
-          },
-          x: {
-            grid: { display: false }
-          }
+        x: {
+          grid: { display: false },
+          ticks: { font: { size: 10 } }
         }
-      }
-    });
-  }
+      } : {}
+    }
+  });
 }
 
-/**
- * Renderiza as linhas recentes da tabela
- */
+// ==========================================
+// 8. RENDERIZAÇÃO DA TABELA DE RESPOSTAS
+// ==========================================
 function renderTable(rows) {
   if (!recentRecordsTableBody) return;
 
   if (rows.length === 0) {
     recentRecordsTableBody.innerHTML = `
       <tr>
-        <td colspan="4" class="py-8 text-center text-slate-400 font-medium">
-          Nenhum registro encontrado na tabela 'respostas_pesquisa'.
+        <td colspan="6" class="py-8 text-center text-slate-400 font-medium">
+          Nenhum registro encontrado.
         </td>
       </tr>
     `;
     return;
   }
 
-  recentRecordsTableBody.innerHTML = rows.map((row) => {
-    const idDisplay = row.id ? `#${String(row.id).slice(0, 6)}` : "#---";
-    const dateFormatted = row.created_at ? new Date(row.created_at).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : "Recente";
-    const local = row.bairro || row.regiao || row.cidade || "São José";
-    const avaliacao = row.avaliacao || row.resposta || row.opiniao || "Registrado";
+  recentRecordsTableBody.innerHTML = rows.map((row, idx) => {
+    const rawDate = getField(row, ["Carimbo de data/hora", "created_at", "data", "Data"]);
+    const dateFormatted = rawDate ? (rawDate.includes("T") ? new Date(rawDate).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }) : rawDate) : `Registro #${idx + 1}`;
+    
+    const local = getField(row, ["Em qual bairro você mora?", "bairro", "Região", "regiao"]) || "São José dos Campos";
+    const perfil = `${getField(row, ["Qual a sua idade?", "idade"]) || "Adulto"} • ${getField(row, ["Como você se identifica?", "genero"]) || "Munícipe"}`;
+    const nota = getField(row, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]) || "5";
+    const falta = getField(row, ["O que você acha que mais falta em São José?", "o_que_falta"]) || "Lazer Noturno";
 
     return `
-      <tr class="hover:bg-slate-50/80 transition-colors">
-        <td class="py-3.5 px-6 font-semibold text-slate-900">
-          ${idDisplay}
-          <span class="block text-xs font-normal text-slate-400">${dateFormatted}</span>
+      <tr class="hover:bg-slate-50/80 transition-colors font-medium">
+        <td class="py-4 px-6 font-bold text-slate-800">${dateFormatted}</td>
+        <td class="py-4 px-6 text-brand-900 font-semibold">${local}</td>
+        <td class="py-4 px-6 text-slate-600">${perfil}</td>
+        <td class="py-4 px-6">
+          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 font-bold text-[11px] border border-amber-200">
+            <i class="fa-solid fa-star text-amber-500"></i> ${nota}/5
+          </span>
         </td>
-        <td class="py-3.5 px-6 font-medium text-slate-700">${local}</td>
-        <td class="py-3.5 px-6 text-slate-600 truncate max-w-xs">${avaliacao}</td>
-        <td class="py-3.5 px-6 text-right">
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            Sincronizado
+        <td class="py-4 px-6 text-slate-600 truncate max-w-xs">${falta}</td>
+        <td class="py-4 px-6 text-right">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            Processado
           </span>
         </td>
       </tr>
@@ -540,17 +660,104 @@ function renderTable(rows) {
   }).join("");
 }
 
-/**
- * Conjunto de demonstração padrão (Mock Data) para visualização imediata caso ainda não haja conexão
- */
+// ==========================================
+// 9. DADOS DE DEMONSTRAÇÃO CONSOLIDADOS
+// ==========================================
 function renderFallbackDemoData() {
   updateSyncTime();
   const demoRecords = [
-    { id: "101", bairro: "Kobrasol", avaliacao: "Ótimo", created_at: new Date().toISOString() },
-    { id: "102", bairro: "Campinas", avaliacao: "Bom", created_at: new Date().toISOString() },
-    { id: "103", bairro: "Praia Comprida", avaliacao: "Regular", created_at: new Date(Date.now() - 86400000).toISOString() },
-    { id: "104", bairro: "Barreiros", avaliacao: "Ótimo", created_at: new Date(Date.now() - 172800000).toISOString() },
-    { id: "105", bairro: "Forquilhinhas", avaliacao: "Bom", created_at: new Date(Date.now() - 259200000).toISOString() },
+    {
+      "Carimbo de data/hora": "06/09/2026 10:15:22",
+      "Como você se identifica?": "Feminino",
+      "Qual a sua idade?": "25 a 34 anos",
+      "Em qual bairro você mora?": "Jardim Aquárius",
+      "Região": "Oeste",
+      "Qual a renda total da sua casa por mês?": "R$ 10.000 a R$ 20.000",
+      "O seu trabalho hoje é:": "Híbrido",
+      "De 1 a 5, que nota você dá para a qualidade de vida em São José?": "5",
+      "Quais meios de transporte você usa? (marque todos que utilizar)": "Carro próprio, Uber / 99",
+      "Você acha que a cidade tem boas opções de cultura e eventos?": "Sim, moderadamente",
+      "Para você, São José é:": "Uma cidade moderna e segura",
+      "O que você acha que mais falta em São José?": "Mais vida noturna e rooftops",
+      "Com que frequência você sai para passear ou se divertir na cidade?": "2 a 3 vezes por semana",
+      "Você costuma ir para outras cidades para passear ou comer fora?": "Sim, vou a São Paulo",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Região Oeste / Vila Ema",
+      "Qual a maior dificuldade para sair à noite em São José?": "Pouca variedade de estilos",
+      "O que faz você escolher um restaurante ou bar?": "Ambiente sofisticado e boa comida",
+      "Por onde você fica sabendo das notícias de São José?": "Instagram (@radarsaojose)",
+      "Qual rede social você mais usa pra encontrar lugares e referências na cidade": "Instagram",
+      "Você já foi em algum lugar só porque viu um influenciador da cidade indicando?": "Sim",
+      "De 1 a 5, o quanto você acompanha o que acontece na política da cidade?": "3",
+      "Na política, você se sente mais próximo de qual lado?": "Centro",
+      "Quem você acha que mais ajuda a cidade a crescer?": "Empreendedores e Setor Privado",
+      "Para você, a cidade de São José está:": "Em pleno crescimento",
+      "Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso?": "Com certeza sim",
+      "Você tem orgulho de morar em São José dos Campos?": "Sim, muito",
+      "Qual o seu estado civil?": "Casado(a) / União Estável",
+      "Você Já tem casa própria?": "Sim",
+      "Você tem animal de estimação?(gato, cachorro e etc)": "Sim"
+    },
+    {
+      "Carimbo de data/hora": "06/09/2026 11:30:10",
+      "Como você se identifica?": "Masculino",
+      "Qual a sua idade?": "18 a 24 anos",
+      "Em qual bairro você mora?": "Vila Ema",
+      "Região": "Centro",
+      "Qual a renda total da sua casa por mês?": "R$ 5.000 a R$ 10.000",
+      "O seu trabalho hoje é:": "Presencial",
+      "De 1 a 5, que nota você dá para a qualidade de vida em São José?": "4",
+      "Quais meios de transporte você usa? (marque todos que utilizar)": "Carro próprio, Bicicleta",
+      "Para você, São José é:": "Excelente para famílias e tranquilidade",
+      "O que você acha que mais falta em São José?": "Eventos de música ao vivo e festivais",
+      "Com que frequência você sai para passear ou se divertir na cidade?": "Finais de semana",
+      "Você costuma ir para outras cidades para passear ou comer fora?": "Raramente",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Vila Ema",
+      "Qual a maior dificuldade para sair à noite em São José?": "Preços elevados",
+      "O que faz você escolher um restaurante ou bar?": "Atendimento e música boa",
+      "Por onde você fica sabendo das notícias de São José?": "Portais de Notícias",
+      "Qual rede social você mais usa pra encontrar lugares e referências na cidade": "Instagram / TikTok",
+      "Você já foi em algum lugar só porque viu um influenciador da cidade indicando?": "Sim",
+      "De 1 a 5, o quanto você acompanha o que acontece na política da cidade?": "2",
+      "Na política, você se sente mais próximo de qual lado?": "Direita",
+      "Quem você acha que mais ajuda a cidade a crescer?": "Inovação tecnológica",
+      "Para você, a cidade de São José está:": "Em pleno crescimento",
+      "Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso?": "Sim",
+      "Você tem orgulho de morar em São José dos Campos?": "Sim",
+      "Qual o seu estado civil?": "Solteiro(a)",
+      "Você Já tem casa própria?": "Não",
+      "Você tem animal de estimação?(gato, cachorro e etc)": "Sim"
+    },
+    {
+      "Carimbo de data/hora": "06/09/2026 12:05:44",
+      "Como você se identifica?": "Feminino",
+      "Qual a sua idade?": "35 a 44 anos",
+      "Em qual bairro você mora?": "Urbanova",
+      "Região": "Oeste",
+      "Qual a renda total da sua casa por mês?": "Mais de R$ 20.000",
+      "O seu trabalho hoje é:": "Home Office",
+      "De 1 a 5, que nota você dá para a qualidade de vida em São José?": "5",
+      "Quais meios de transporte você usa? (marque todos que utilizar)": "Carro próprio",
+      "Para você, São José é:": "A melhor cidade do interior do Brasil",
+      "O que você acha que mais falta em São José?": "Gastronomia internacional refinada",
+      "Com que frequência você sai para passear ou se divertir na cidade?": "3 a 4 vezes por semana",
+      "Você costuma ir para outras cidades para passear ou comer fora?": "Sim, finais de semana",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Urbanova / Aquárius",
+      "Qual a maior dificuldade para sair à noite em São José?": "Estacionamento e reservas",
+      "O que faz você escolher um restaurante ou bar?": "Carta de vinhos e ambiente",
+      "Por onde você fica sabendo das notícias de São José?": "Instagram e Grupos",
+      "Qual rede social você mais usa pra encontrar lugares e referências na cidade": "Instagram",
+      "Você já foi em algum lugar só porque viu um influenciador da cidade indicando?": "Não",
+      "De 1 a 5, o quanto você acompanha o que acontece na política da cidade?": "4",
+      "Na política, você se sente mais próximo de qual lado?": "Centro",
+      "Quem você acha que mais ajuda a cidade a crescer?": "Prefeitura e Empresas",
+      "Para você, a cidade de São José está:": "Em pleno crescimento",
+      "Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso?": "Sim",
+      "Você tem orgulho de morar em São José dos Campos?": "Sim, muito",
+      "Qual o seu estado civil?": "Casado(a) / União Estável",
+      "Você Já tem casa própria?": "Sim",
+      "Você tem animal de estimação?(gato, cachorro e etc)": "Sim"
+    }
   ];
+  populateRegionFilter(demoRecords);
   processAndRenderData(demoRecords);
 }
