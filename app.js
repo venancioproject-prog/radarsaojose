@@ -2517,6 +2517,26 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     values = top.map(t => t.val);
   }
 
+  function wrapTextLines(text, maxChars = 26) {
+    if (typeof text !== "string" || text.length <= maxChars) return text;
+    const words = text.split(" ");
+    const lines = [];
+    let currentLine = "";
+    words.forEach(w => {
+      if ((currentLine + " " + w).trim().length <= maxChars) {
+        currentLine = (currentLine + " " + w).trim();
+      } else {
+        if (currentLine) lines.push(currentLine);
+        currentLine = w;
+      }
+    });
+    if (currentLine) lines.push(currentLine);
+    return lines.length > 1 ? lines : text;
+  }
+
+  // Prepara labels com quebra nativa de linha (array de strings) para barras horizontais
+  const chartLabels = isHorizontal ? labels.map(l => wrapTextLines(l, 25)) : (labels.length ? labels : ["Sem registros"]);
+
   const brandPalette = [
     "#0B2545", // Azul Petróleo Institucional
     "#0077B6", // Azul Real Oceano
@@ -2558,7 +2578,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   chartInstances[canvasId] = new Chart(ctx, {
     type: isHorizontal ? "bar" : (isLine ? "line" : type),
     data: {
-      labels: labels.length ? labels : ["Sem registros"],
+      labels: chartLabels,
       datasets: [{
         data: values.length ? values : [0],
         backgroundColor: chartBgColors,
@@ -2583,8 +2603,8 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         padding: {
           top: type === "doughnut" || type === "pie" ? 10 : 15,
           bottom: type === "doughnut" || type === "pie" ? 10 : 10,
-          left: type === "doughnut" || type === "pie" ? 10 : 10,
-          right: isHorizontal ? 35 : (type === "doughnut" || type === "pie" ? 10 : 10)
+          left: isHorizontal ? 20 : (type === "doughnut" || type === "pie" ? 10 : 10),
+          right: isHorizontal ? 40 : (type === "doughnut" || type === "pie" ? 10 : 10)
         }
       },
       plugins: {
@@ -2637,30 +2657,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
             font: { size: 10, weight: 600 },
             color: "#334155",
             autoSkip: false,
-            callback: function(value, index) {
-              if (isHorizontal) {
-                const label = this.getLabelForValue(value);
-                if (typeof label === "string") {
-                  // Quebra inteligente em múltiplas linhas (máximo 28 caracteres por linha) sem cortar palavras nem colocar reticências
-                  if (label.length <= 26) return label;
-                  const words = label.split(" ");
-                  const lines = [];
-                  let currentLine = "";
-                  words.forEach(w => {
-                    if ((currentLine + " " + w).trim().length <= 26) {
-                      currentLine = (currentLine + " " + w).trim();
-                    } else {
-                      if (currentLine) lines.push(currentLine);
-                      currentLine = w;
-                    }
-                  });
-                  if (currentLine) lines.push(currentLine);
-                  return lines;
-                }
-                return label;
-              }
-              return value;
-            }
+            padding: 8
           }
         },
         x: {
