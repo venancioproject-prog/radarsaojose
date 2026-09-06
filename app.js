@@ -934,6 +934,18 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 11.1. QUEM MAIS AJUDA A CIDADE A CRESCER: Cards Modernos com Emojis e Porcentagens
+      if (qLower.includes("ajuda a cidade a crescer") || qLower.includes("mais ajuda a cidade") || (qLower.includes("ajuda") && qLower.includes("crescer"))) {
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Percepção de Desenvolvimento</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderGrowthHelpsCardsWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
       // 12. ORGULHO DE MORAR EM SÃO JOSÉ (Sim ou Não com Imagem de Expressão e Cards):
       if (qLower.includes("orgulho") && (qLower.includes("morar") || qLower.includes("são josé") || qLower.includes("sao jose") || qLower.includes("cidade"))) {
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
@@ -1807,6 +1819,104 @@ function renderCityIdentityCardsWidget(dataMap, total) {
   entries.forEach(([key, count]) => {
     const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
     const cfg = getCityIdentityConfig(key);
+
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
+          cfg.emoji +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+        '</div>' +
+      '</div>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// 7.5.1. Cards com Emojis e Porcentagens para "Quem você acha que mais ajuda a cidade a crescer?"
+function renderGrowthHelpsCardsWidget(dataMap, total) {
+  function getGrowthConfig(key) {
+    const k = key.toLowerCase().trim();
+    if (k.includes("dois juntos") || k.includes("ambos") || k.includes("parceria")) {
+      return {
+        emoji: "🤝",
+        title: "Os dois juntos",
+        subtitle: "União do setor público e privado",
+        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+        border: "border-blue-200 hover:border-blue-300",
+        tag: "Parceria",
+        tagBg: "bg-blue-100 text-blue-800",
+        iconBg: "bg-blue-100/80"
+      };
+    }
+    if (k.includes("empresas") || k.includes("comércio") || k.includes("comercio") || k.includes("iniciativa privada")) {
+      return {
+        emoji: "🏢",
+        title: "As empresas e o comércio",
+        subtitle: "Iniciativa privada, empregos e economia",
+        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        border: "border-emerald-200 hover:border-emerald-300",
+        tag: "Setor Privado",
+        tagBg: "bg-emerald-100 text-emerald-800",
+        iconBg: "bg-emerald-100/80"
+      };
+    }
+    if (k.includes("prefeitura") || k.includes("governo") || k.includes("público") || k.includes("publico")) {
+      return {
+        emoji: "🏛️",
+        title: "A Prefeitura e o Governo",
+        subtitle: "Gestão pública, obras e infraestrutura",
+        badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+        border: "border-cyan-200 hover:border-cyan-300",
+        tag: "Poder Público",
+        tagBg: "bg-cyan-100 text-cyan-800",
+        iconBg: "bg-cyan-100/80"
+      };
+    }
+    if (k.includes("não sei") || k.includes("nao sei") || k.includes("neutro") || k.includes("indeciso")) {
+      return {
+        emoji: "🤷‍♂️",
+        title: "Não sei",
+        subtitle: "Sem opinião definida",
+        badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+        border: "border-slate-200 hover:border-slate-300",
+        tag: "Indeciso",
+        tagBg: "bg-slate-100 text-slate-800",
+        iconBg: "bg-slate-100"
+      };
+    }
+    return {
+      emoji: "🌟",
+      title: key,
+      subtitle: "Percepção de crescimento registrada",
+      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+      border: "border-slate-200 hover:border-slate-300",
+      tag: "Opinião",
+      tagBg: "bg-slate-100 text-slate-800",
+      iconBg: "bg-slate-100"
+    };
+  }
+
+  const entries = Object.entries(dataMap || {});
+  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  // Ordenar pelo maior número de respostas
+  entries.sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+
+  entries.forEach(([key, count]) => {
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const cfg = getGrowthConfig(key);
 
     html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
