@@ -929,6 +929,18 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 13. SERVIÇOS DE STREAMING & MÚSICA: Cards Visuais com Logotipos Oficiais e Porcentagens
+      if ((qLower.includes("serviços") || qLower.includes("servicos") || qLower.includes("streaming")) && (qLower.includes("filmes") || qLower.includes("música") || qLower.includes("musica") || qLower.includes("usa"))) {
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Plataformas de Vídeo & Áudio • Distribuição com Logos Oficiais</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderStreamingLogosWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
 
@@ -1918,6 +1930,146 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
     '</div>' +
   '</div>';
 
+  return html;
+}
+
+// 7.7. Cards Visuais de Serviços de Streaming & Música com Logos Oficiais (PNG)
+function renderStreamingLogosWidget(dataMap, total) {
+  function getStreamingConfig(key) {
+    const k = key.toLowerCase().trim();
+    if (k.includes("netflix")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Netflix.png",
+        title: "Netflix",
+        desc: "Séries, Filmes & Originais",
+        badgeBg: "bg-red-50 text-red-700 border-red-200",
+        barColor: "bg-red-600",
+        border: "border-red-100 hover:border-red-300",
+        logoBg: "bg-slate-950 p-1.5"
+      };
+    }
+    if (k.includes("spotify")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Spotify.png",
+        title: "Spotify",
+        desc: "Streaming de Áudio & Podcasts",
+        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        barColor: "bg-emerald-500",
+        border: "border-emerald-100 hover:border-emerald-300",
+        logoBg: "bg-white p-1"
+      };
+    }
+    if (k.includes("prime") || k.includes("amazon")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Amazon_Prime_Video.png",
+        title: "Amazon Prime Video",
+        desc: "Filmes, Séries & Frete Prime",
+        badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+        barColor: "bg-cyan-600",
+        border: "border-cyan-100 hover:border-cyan-300",
+        logoBg: "bg-slate-900 p-1.5"
+      };
+    }
+    if (k.includes("max") || k.includes("hbo")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Max.png",
+        title: "Max (HBO)",
+        desc: "HBO, Warner Bros & DC",
+        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+        barColor: "bg-blue-600",
+        border: "border-blue-100 hover:border-blue-300",
+        logoBg: "bg-slate-950 p-1.5"
+      };
+    }
+    if (k.includes("disney")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Disney_Plus.png",
+        title: "Disney+",
+        desc: "Disney, Marvel, Star Wars & Pixar",
+        badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+        barColor: "bg-indigo-600",
+        border: "border-indigo-100 hover:border-indigo-300",
+        logoBg: "bg-slate-900 p-1.5"
+      };
+    }
+    if (k.includes("globo") || k.includes("globoplay")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Globoplay.png",
+        title: "Globoplay",
+        desc: "Novelas, Ao Vivo & Séries",
+        badgeBg: "bg-orange-50 text-orange-700 border-orange-200",
+        barColor: "bg-orange-500",
+        border: "border-orange-100 hover:border-orange-300",
+        logoBg: "bg-white p-1"
+      };
+    }
+    if (k.includes("youtube") || k.includes("yt music")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/YouTube_Music.png",
+        title: "YouTube Music",
+        desc: "Músicas, Clipes & Shows",
+        badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+        barColor: "bg-amber-500",
+        border: "border-amber-100 hover:border-amber-300",
+        logoBg: "bg-slate-950 p-1.5"
+      };
+    }
+    if (k.includes("apple") || k.includes("tv+")) {
+      return {
+        logo: "fotos radar/logos_streaming_png/Apple_TV_Plus.png",
+        title: "Apple TV+",
+        desc: "Apple Originals Premiados",
+        badgeBg: "bg-purple-50 text-purple-700 border-purple-200",
+        barColor: "bg-purple-600",
+        border: "border-purple-100 hover:border-purple-300",
+        logoBg: "bg-slate-950 p-1.5"
+      };
+    }
+    return {
+      logo: "fotos radar/logos_streaming_png/Netflix.png",
+      title: key,
+      desc: "Serviço de Streaming",
+      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+      barColor: "bg-brand-900",
+      border: "border-slate-200 hover:border-slate-300",
+      logoBg: "bg-slate-900 p-1"
+    };
+  }
+
+  const entries = Object.entries(dataMap || {}).filter(([k, v]) => v > 0);
+  entries.sort((a, b) => b[1] - a[1]);
+
+  const totalRespondents = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll">';
+
+  entries.forEach(([key, count]) => {
+    const pct = totalRespondents > 0 ? ((count / totalRespondents) * 100).toFixed(1) : "0.0";
+    const cfg = getStreamingConfig(key);
+
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex flex-col gap-2 transition-all group">' +
+      '<div class="flex items-center justify-between gap-3">' +
+        '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+          '<div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden ' + cfg.logoBg + ' shadow-2xs flex-shrink-0 flex items-center justify-center border border-slate-200/60">' +
+            '<img src="' + cfg.logo + '" alt="' + cfg.title + '" class="w-full h-full object-contain drop-shadow-2xs transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/logo.png\';" />' +
+          '</div>' +
+          '<div class="min-w-0 flex-1">' +
+            '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight truncate" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+            '<p class="text-[11px] font-medium text-slate-400 truncate mt-0.5">' + count.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="flex-shrink-0 text-right">' +
+          '<span class="inline-block px-2.5 sm:px-3 py-1 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+        '</div>' +
+      '</div>' +
+      // Barra de progresso proporcional elegante
+      '<div class="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden shadow-inner">' +
+        '<div class="h-full rounded-full ' + cfg.barColor + ' transition-all duration-700" style="width: ' + pct + '%;"></div>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
   return html;
 }
 
