@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Radar São José - Dashboard Engine 2026
  * Supabase Auth + Database (respostas radar) + Chart.js Visualization
  */
@@ -52,7 +52,14 @@ const lastSyncTime = document.getElementById("last-sync-time");
 const dataFetchError = document.getElementById("data-fetch-error");
 const togglePasswordBtn = document.getElementById("toggle-password");
 const togglePasswordIcon = document.getElementById("toggle-password-icon");
-const filterRegionSelect = document.getElementById("filter-region-select");
+const filterRegionSelect = document.getElementById("filter-region");
+const filterGenderSelect = document.getElementById("filter-gender");
+const filterAgeSelect = document.getElementById("filter-age");
+const filterIncomeSelect = document.getElementById("filter-income");
+const filterWorkSelect = document.getElementById("filter-work");
+const btnResetFilters = document.getElementById("btn-reset-filters");
+const filteredRecordsCount = document.getElementById("filtered-records-count");
+const totalBaseCount = document.getElementById("total-base-count");
 const supabaseTableStatus = document.getElementById("supabase-table-status");
 
 // KPIs
@@ -102,10 +109,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  if (filterRegionSelect) {
-    filterRegionSelect.addEventListener("change", () => {
-      applyRegionFilter();
-    });
+  // Multi-filter change listeners
+  [filterRegionSelect, filterGenderSelect, filterAgeSelect, filterIncomeSelect, filterWorkSelect].forEach(select => {
+    if (select) {
+      select.addEventListener("change", applyCombinedFilters);
+    }
+  });
+
+  if (btnResetFilters) {
+    btnResetFilters.addEventListener("click", resetAllFilters);
   }
 
   if (!supabaseClient && typeof initSupabase === "function") {
@@ -253,8 +265,8 @@ async function fetchSurveyData() {
     if (supabaseTableStatus) supabaseTableStatus.textContent = `Ativo (${allSurveyRecords.length} registros)`;
 
     updateSyncTime();
-    populateRegionFilter(allSurveyRecords);
-    processAndRenderData(allSurveyRecords);
+    populateAllFilters(allSurveyRecords);
+    applyCombinedFilters();
   } catch (err) {
     console.error("Erro ao buscar dados do Supabase:", err);
     if (supabaseTableStatus) supabaseTableStatus.textContent = "Modo Demonstração";
@@ -271,40 +283,104 @@ function updateSyncTime() {
   }
 }
 
-function populateRegionFilter(records) {
-  if (!filterRegionSelect) return;
-  const currentVal = filterRegionSelect.value;
+function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
+  if (!selectEl) return;
+  const currentVal = selectEl.value;
+  selectEl.innerHTML = `<option value="TODOS">${defaultLabel}</option>`;
   
-  const regions = new Set();
-  records.forEach(r => {
-    const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
-    if (reg && reg.trim() && reg !== "Não informado") regions.add(reg.trim());
-  });
-
-  filterRegionSelect.innerHTML = `<option value="TODAS">Todas as Regiões</option>`;
-  Array.from(regions).sort().forEach(reg => {
+  Array.from(values).filter(v => v && v.trim() && v !== "Não informado").sort().forEach(val => {
     const opt = document.createElement("option");
-    opt.value = reg;
-    opt.textContent = reg;
-    filterRegionSelect.appendChild(opt);
+    opt.value = val;
+    opt.textContent = val;
+    selectEl.appendChild(opt);
   });
 
-  if (currentVal && Array.from(regions).includes(currentVal)) {
-    filterRegionSelect.value = currentVal;
+  if (currentVal && Array.from(values).includes(currentVal)) {
+    selectEl.value = currentVal;
   }
 }
 
-function applyRegionFilter() {
-  const selected = filterRegionSelect.value;
-  if (selected === "TODAS") {
-    processAndRenderData(allSurveyRecords);
-  } else {
-    const filtered = allSurveyRecords.filter(r => {
-      const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
-      return reg === selected;
-    });
-    processAndRenderData(filtered);
+function populateAllFilters(records) {
+  const regions = new Set();
+  const genders = new Set();
+  const ages = new Set();
+  const incomes = new Set();
+  const works = new Set();
+
+  records.forEach(r => {
+    const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+    if (reg) regions.add(reg);
+
+    const gen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
+    if (gen) genders.add(gen);
+
+    const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+    if (age) ages.add(age);
+
+    const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
+    if (inc) incomes.add(inc);
+
+    const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
+    if (wrk) works.add(wrk);
+  });
+
+  populateSelectOptions(filterRegionSelect, regions, "Todas as Regiões");
+  populateSelectOptions(filterGenderSelect, genders, "Todos os Gêneros");
+  populateSelectOptions(filterAgeSelect, ages, "Todas as Idades");
+  populateSelectOptions(filterIncomeSelect, incomes, "Todas as Rendas");
+  populateSelectOptions(filterWorkSelect, works, "Todos os Modelos");
+
+  if (totalBaseCount) {
+    totalBaseCount.textContent = records.length.toLocaleString("pt-BR");
   }
+}
+
+function applyCombinedFilters() {
+  const selectedRegion = filterRegionSelect ? filterRegionSelect.value : "TODOS";
+  const selectedGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
+  const selectedAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
+  const selectedIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
+  const selectedWork = filterWorkSelect ? filterWorkSelect.value : "TODOS";
+
+  const filtered = allSurveyRecords.filter(r => {
+    if (selectedRegion !== "TODOS") {
+      const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+      if (reg !== selectedRegion) return false;
+    }
+    if (selectedGender !== "TODOS") {
+      const gen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
+      if (gen !== selectedGender) return false;
+    }
+    if (selectedAge !== "TODOS") {
+      const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+      if (age !== selectedAge) return false;
+    }
+    if (selectedIncome !== "TODOS") {
+      const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
+      if (inc !== selectedIncome) return false;
+    }
+    if (selectedWork !== "TODOS") {
+      const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
+      if (wrk !== selectedWork) return false;
+    }
+    return true;
+  });
+
+  if (filteredRecordsCount) {
+    filteredRecordsCount.textContent = filtered.length.toLocaleString("pt-BR");
+  }
+  if (totalBaseCount) {
+    totalBaseCount.textContent = allSurveyRecords.length.toLocaleString("pt-BR");
+  }
+
+  processAndRenderData(filtered);
+}
+
+function resetAllFilters() {
+  [filterRegionSelect, filterGenderSelect, filterAgeSelect, filterIncomeSelect, filterWorkSelect].forEach(select => {
+    if (select) select.value = "TODOS";
+  });
+  applyCombinedFilters();
 }
 
 // ==========================================

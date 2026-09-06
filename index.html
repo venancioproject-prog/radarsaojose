@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -254,6 +254,81 @@
         </div>
       </div>
     </header>
+
+    <!-- Sticky Multi-Filter Control Bar -->
+    <section class="sticky top-20 z-40 bg-surface-card/95 backdrop-blur-md border-b border-surface-border py-4 px-4 sm:px-6 lg:px-8 shadow-sm">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- Title & Counter -->
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">
+            <i class="fa-solid fa-sliders"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-brand-900">Filtros Dinâmicos</h3>
+            <p class="text-[11px] font-semibold text-slate-400">
+              Exibindo <span id="filtered-records-count" class="text-brand-600 font-bold">0</span> de <span id="total-base-count" class="font-bold">0</span> respostas
+            </p>
+          </div>
+        </div>
+
+        <!-- Filter Selects Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 flex-1 max-w-4xl">
+          
+          <!-- Filtro 1: Região -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus-within:border-brand-500 transition-colors">
+            <label class="block text-[9px] font-bold uppercase tracking-wider text-slate-400">Região</label>
+            <select id="filter-region" class="w-full bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
+              <option value="TODOS">Todas</option>
+            </select>
+          </div>
+
+          <!-- Filtro 2: Sexo / Identificação -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus-within:border-brand-500 transition-colors">
+            <label class="block text-[9px] font-bold uppercase tracking-wider text-slate-400">Identificação</label>
+            <select id="filter-gender" class="w-full bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
+              <option value="TODOS">Todos</option>
+            </select>
+          </div>
+
+          <!-- Filtro 3: Faixa Etária -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus-within:border-brand-500 transition-colors">
+            <label class="block text-[9px] font-bold uppercase tracking-wider text-slate-400">Faixa Etária</label>
+            <select id="filter-age" class="w-full bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
+              <option value="TODOS">Todas</option>
+            </select>
+          </div>
+
+          <!-- Filtro 4: Renda Familiar -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus-within:border-brand-500 transition-colors">
+            <label class="block text-[9px] font-bold uppercase tracking-wider text-slate-400">Renda</label>
+            <select id="filter-income" class="w-full bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
+              <option value="TODOS">Todas</option>
+            </select>
+          </div>
+
+          <!-- Filtro 5: Modelo de Trabalho -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 focus-within:border-brand-500 transition-colors">
+            <label class="block text-[9px] font-bold uppercase tracking-wider text-slate-400">Trabalho</label>
+            <select id="filter-work" class="w-full bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
+              <option value="TODOS">Todos</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Reset Button -->
+        <button 
+          id="btn-reset-filters" 
+          title="Limpar todos os filtros"
+          class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-600 hover:text-brand-900 font-bold text-xs rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1.5 self-stretch md:self-auto"
+        >
+          <i class="fa-solid fa-rotate-left text-xs"></i>
+          <span>Limpar</span>
+        </button>
+
+      </div>
+    </section>
 
     <!-- Main Content -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
