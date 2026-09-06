@@ -395,9 +395,12 @@ function populateAllSidebarFilters(records) {
     const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
     if (pol) politics.add(pol);
 
-    const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]);
-    if (qua) qualities.add(qua);
-
+    const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+    if (qua) {
+      const m = String(qua).match(/([1-5])/);
+      if (m) qualities.add("Nota " + m[1]);
+      else qualities.add(qua);
+    }
     const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
     if (pri) prides.add(pri);
   });
@@ -474,8 +477,14 @@ function applyCombinedFilters() {
       if (pol !== selPolitics) return false;
     }
     if (selQuality !== "TODOS") {
-      const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]);
-      if (qua !== selQuality) return false;
+      const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+      const mRow = String(qua).match(/([1-5])/);
+      const mSel = String(selQuality).match(/([1-5])/);
+      if (mRow && mSel) {
+        if (mRow[1] !== mSel[1]) return false;
+      } else if (qua !== selQuality) {
+        return false;
+      }
     }
     if (selPride !== "TODOS") {
       const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
@@ -679,6 +688,9 @@ function processAndRenderDynamicCharts(records) {
       if (displayTitle.toLowerCase().includes("animal de estimação") || displayTitle.toLowerCase().includes("animal de estimacao")) {
         displayTitle = "Você tem animal de estimação? (gato, cachorro e etc.)";
       }
+      if (displayTitle.toLowerCase().includes("qualidade de vida") || (displayTitle.toLowerCase().includes("1 a 5") && displayTitle.toLowerCase().includes("são j"))) {
+        displayTitle = "De 1 a 5, que nota você dá para a qualidade de vida em São José?";
+      }
 
       // Card Container
       const cardEl = document.createElement("div");
@@ -788,7 +800,7 @@ function processAndRenderDynamicCharts(records) {
 
         cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-2">' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Média de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-center pt-2">' + renderQualityCleanScoreWidget(calculatedAvg, counts, scoreCount) + '</div>';
