@@ -952,13 +952,14 @@ function processAndRenderDynamicCharts(records) {
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
 
-      cardEl.innerHTML = '<div>' +
+      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+      cardEl.innerHTML = '<div class="mb-2">' +
         '<div class="flex items-start justify-between gap-2 mb-1">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words" title="' + displayTitle + '">' + displayTitle + '</h3>' +
         '</div>' +
-        '<p class="text-[11px] font-medium text-slate-400 mb-4">Total: ' + total + ' respondentes</p>' +
+        '<p class="text-[11px] font-medium text-slate-400 mb-2">Total: ' + total + ' respondentes</p>' +
       '</div>' +
-      '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+      '<div class="chart-container flex-1 flex items-center justify-center min-h-[260px] w-full my-auto"><canvas id="' + canvasId + '"></canvas></div>';
 
       cardsGrid.appendChild(cardEl);
 
@@ -2537,13 +2538,22 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const isHorizontal = options.horizontal === true;
   const totalSum = values.reduce((a, b) => a + b, 0);
 
-  let bgFillColor = brandPalette[2];
-  if (isLine && options.gradient) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
-    gradient.addColorStop(0, "rgba(0, 180, 216, 0.45)");
-    gradient.addColorStop(1, "rgba(11, 37, 69, 0.0)");
-    bgFillColor = gradient;
-  }
+  // Mapeamento inteligente de cores por item (ex: Melhorando = Verde, Piorando = Vermelho, Do mesmo jeito = Cinza)
+  const itemColors = labels.map((lbl, idx) => {
+    const l = String(lbl).toLowerCase().trim();
+    if (l.includes("melhorando") || l.includes("melhor") || l.includes("crescimento") || l.includes("ótimo") || l.includes("otimo")) {
+      return "#10B981"; // Verde Esmeralda
+    }
+    if (l.includes("piorando") || l.includes("pior") || l.includes("ruim") || l.includes("crise")) {
+      return "#EF4444"; // Vermelho
+    }
+    if (l.includes("mesmo jeito") || l.includes("estagnada") || l.includes("igual") || l.includes("regular") || l.includes("neutro")) {
+      return "#94A3B8"; // Cinza Neutro / Slate
+    }
+    return brandPalette[idx % brandPalette.length];
+  });
+
+  const chartBgColors = isLine ? bgFillColor : (isBar && !isHorizontal ? brandPalette[1] : itemColors);
 
   chartInstances[canvasId] = new Chart(ctx, {
     type: isHorizontal ? "bar" : (isLine ? "line" : type),
@@ -2551,9 +2561,9 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
       labels: labels.length ? labels : ["Sem registros"],
       datasets: [{
         data: values.length ? values : [0],
-        backgroundColor: isLine ? bgFillColor : (isBar && !isHorizontal ? brandPalette[1] : brandPalette),
+        backgroundColor: chartBgColors,
         borderColor: isLine ? "#00B4D8" : (type === "doughnut" || type === "pie" ? "#FFFFFF" : undefined),
-        borderWidth: isLine ? 3 : (type === "doughnut" || type === "pie" ? 2 : 0),
+        borderWidth: isLine ? 3 : (type === "doughnut" || type === "pie" ? 2.5 : 0),
         borderRadius: isBar ? 6 : 0,
         fill: isLine,
         tension: 0.38,
@@ -2561,19 +2571,20 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         pointBorderColor: "#00B4D8",
         pointBorderWidth: 2,
         pointRadius: isLine ? 4 : 0,
-        hoverOffset: 6
+        hoverOffset: type === "doughnut" || type === "pie" ? 8 : 6
       }]
     },
     options: {
+      cutout: type === "doughnut" ? "62%" : undefined,
       indexAxis: isHorizontal ? "y" : "x",
       responsive: true,
       maintainAspectRatio: false,
       layout: {
         padding: {
-          top: 15,
-          bottom: 10,
-          left: 10,
-          right: isHorizontal ? 35 : 10
+          top: type === "doughnut" || type === "pie" ? 10 : 15,
+          bottom: type === "doughnut" || type === "pie" ? 10 : 10,
+          left: type === "doughnut" || type === "pie" ? 10 : 10,
+          right: isHorizontal ? 35 : (type === "doughnut" || type === "pie" ? 10 : 10)
         }
       },
       plugins: {
