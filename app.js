@@ -797,6 +797,25 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 7. CASA PRÓPRIA: Gráfico de Pizza Centralizado com Alta Legibilidade
+      if (qLower.includes("casa própria") || qLower.includes("casa_propria") || qLower.includes("casa propria")) {
+        cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-2">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">Você tem Casa Própria?</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-2">Total: ' + total.toLocaleString("pt-BR") + ' respondentes • Situação Habitacional</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col items-center justify-center min-h-[250px] w-full">' +
+          '<div class="chart-container w-full h-[240px] flex items-center justify-center"><canvas id="' + canvasId + '"></canvas></div>' +
+        '</div>';
+
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          renderHouseOwnershipChart(canvasId, dataMap);
+        }, 0);
+        return;
+      }
+
       // 6. CULTURA E EVENTOS: Gráfico de Pizza (Sim = Verde, Não = Vermelho)
       if (qLower.includes("cultura") && (qLower.includes("opções") || qLower.includes("opcoes") || qLower.includes("eventos") || qLower.includes("cidade"))) {
         cardEl.innerHTML = '<div>' +
@@ -964,6 +983,109 @@ function renderYesNoPieChart(canvasId, dataMap) {
             pointStyle: "circle",
             font: { weight: 700, size: 11 },
             padding: 12,
+            generateLabels: (chart) => {
+              const data = chart.data;
+              return data.labels.map((label, i) => {
+                const val = data.datasets[0].data[i] || 0;
+                const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : "0.0";
+                return {
+                  text: label + ": " + val.toLocaleString("pt-BR") + " (" + pct + "%)",
+                  fillStyle: data.datasets[0].backgroundColor[i],
+                  strokeStyle: "#FFFFFF",
+                  lineWidth: 1,
+                  hidden: false,
+                  index: i
+                };
+              });
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: "#0B2545",
+          titleFont: { size: 12, weight: "bold" },
+          bodyFont: { size: 12 },
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: {
+            label: function(context) {
+              const val = context.raw || 0;
+              const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+              return " " + context.label + ": " + val.toLocaleString("pt-BR") + " respostas (" + pct + "%)";
+            }
+          }
+        },
+        datalabels: {
+          color: "#FFFFFF",
+          font: { weight: 800, size: 12 },
+          formatter: (val) => {
+            if (!val || val === 0) return "";
+            const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+            return parseFloat(pct) >= 4 ? pct + "%" : "";
+          }
+        }
+      }
+    }
+  });
+}
+
+// Gráfico Específico de Moradia / Casa Própria (Centralizado com Alta Legibilidade)
+function renderHouseOwnershipChart(canvasId, dataMap) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+  const rawLabels = Object.keys(dataMap);
+  const values = [];
+  const labels = [];
+  const colors = [];
+
+  const defaultPalette = ["#0B2545", "#0096C7", "#06D6A0", "#F59E0B", "#94A3B8"];
+
+  rawLabels.forEach((k, i) => {
+    labels.push(k);
+    values.push(dataMap[k] || 0);
+    const kl = k.toLowerCase();
+    if (kl.includes("tenho") || (kl.includes("sim") && !kl.includes("não") && !kl.includes("nao"))) {
+      colors.push("#0B2545"); // Azul Petróleo Institucional
+    } else if (kl.includes("quero") && !kl.includes("não quero") && !kl.includes("nao quero")) {
+      colors.push("#0096C7"); // Azul Oceano
+    } else if (kl.includes("não quero") || kl.includes("nao quero")) {
+      colors.push("#00B4D8"); // Ciano Vivo
+    } else {
+      colors.push(defaultPalette[i % defaultPalette.length]);
+    }
+  });
+
+  const totalSum = values.reduce((a, b) => a + b, 0);
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors,
+        borderColor: "#FFFFFF",
+        borderWidth: 2.5,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: { top: 6, bottom: 6, left: 6, right: 6 }
+      },
+      plugins: {
+        legend: {
+          position: "bottom",
+          align: "center",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+            font: { weight: 700, size: 11 },
+            padding: 14,
             generateLabels: (chart) => {
               const data = chart.data;
               return data.labels.map((label, i) => {
