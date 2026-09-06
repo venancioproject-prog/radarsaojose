@@ -2634,12 +2634,28 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           grid: { color: "#F1F5F9" },
           ticks: {
             precision: 0,
-            font: { size: 10 },
+            font: { size: 10, weight: 600 },
+            color: "#334155",
+            autoSkip: false,
             callback: function(value, index) {
               if (isHorizontal) {
                 const label = this.getLabelForValue(value);
-                if (typeof label === "string" && label.length > 25) {
-                  return label.slice(0, 24) + "…";
+                if (typeof label === "string") {
+                  // Quebra inteligente em múltiplas linhas (máximo 28 caracteres por linha) sem cortar palavras nem colocar reticências
+                  if (label.length <= 26) return label;
+                  const words = label.split(" ");
+                  const lines = [];
+                  let currentLine = "";
+                  words.forEach(w => {
+                    if ((currentLine + " " + w).trim().length <= 26) {
+                      currentLine = (currentLine + " " + w).trim();
+                    } else {
+                      if (currentLine) lines.push(currentLine);
+                      currentLine = w;
+                    }
+                  });
+                  if (currentLine) lines.push(currentLine);
+                  return lines;
                 }
                 return label;
               }
