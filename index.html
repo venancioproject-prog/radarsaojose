@@ -533,42 +533,6 @@
         <!-- CONTAINER DINÂMICO PARA TODOS OS GRÁFICOS GERADOS PELO APP.JS -->
         <div id="dynamic-charts-grid" class="space-y-10"></div>
 
-        <!-- TABELA DE REGISTROS RECENTES -->
-        <section class="bg-surface-card rounded-3xl shadow-card border border-surface-border overflow-hidden">
-          <div class="p-6 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h3 class="text-lg font-black text-brand-900">Registros Brutos da Tabela (Supabase)</h3>
-              <p class="text-xs font-medium text-slate-400 mt-0.5">Últimas respostas registradas em tempo real na tabela <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-800 font-mono font-bold">respostas_pesquisa</code> / <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-800 font-mono font-bold">respostas radar</code></p>
-            </div>
-            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-xl border border-emerald-200 self-start sm:self-auto flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Base Integrada
-            </span>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-600">
-              <thead class="bg-slate-50 font-bold uppercase tracking-wider text-slate-500 border-b border-surface-border">
-                <tr>
-                  <th class="py-4 px-6">Data / Hora</th>
-                  <th class="py-4 px-6">Bairro / Região</th>
-                  <th class="py-4 px-6">Idade / Perfil</th>
-                  <th class="py-4 px-6">Nota Qualidade</th>
-                  <th class="py-4 px-6">O que mais falta?</th>
-                  <th class="py-4 px-6 text-right">Status</th>
-                </tr>
-              </thead>
-              <tbody id="recent-records-table-body" class="divide-y divide-slate-100">
-                <tr>
-                  <td colspan="6" class="py-10 text-center text-slate-400 font-semibold">
-                    <i class="fa-solid fa-spinner fa-spin mr-2 text-brand-600"></i> Carregando registros da pesquisa...
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
       </main>
     </div>
 
@@ -585,6 +549,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=4.2"></script>
+  <script src="app.js?v=4.3"></script>
 </body>
 </html>
