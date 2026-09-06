@@ -1973,28 +1973,35 @@ function renderTreemapWidget(dataMap, total) {
     }
 
     if (isHero) {
-      return '<div class="' + gradientClass + ' rounded-2xl p-4 sm:p-5 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[85px] sm:min-h-[92px]">' +
-        '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-          '<div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-base sm:text-lg text-white flex-shrink-0 shadow-2xs">' +
+      return '<div class="' + gradientClass + ' rounded-2xl p-4 sm:p-5 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[88px]">' +
+        '<div class="flex items-center gap-3.5 min-w-0 flex-1">' +
+          '<div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-lg sm:text-xl text-white flex-shrink-0 shadow-xs">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
-          '<h4 class="text-sm sm:text-base font-bold text-white leading-snug break-words" title="' + label + '">' + label + '</h4>' +
+          '<div>' +
+            '<span class="text-[10px] font-bold text-white/70 uppercase tracking-widest block mb-0.5">Maioria Absoluta</span>' +
+            '<h4 class="text-sm sm:text-base font-extrabold text-white leading-tight break-words" title="' + label + '">' + label + '</h4>' +
+          '</div>' +
         '</div>' +
-        '<span class="px-3.5 py-2 rounded-xl bg-white/25 backdrop-blur-md font-black text-base sm:text-lg text-white border border-white/30 shadow-2xs flex-shrink-0">' + pct + '%</span>' +
+        '<div class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl bg-white/25 backdrop-blur-md font-black text-xl sm:text-2xl text-white border border-white/40 shadow-sm flex-shrink-0 tracking-tight">' +
+          pct + '%' +
+        '</div>' +
       '</div>';
     }
 
-    return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[118px] sm:min-h-[126px] h-full">' +
+    return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[125px] sm:min-h-[135px] h-full">' +
       '<div class="flex items-start gap-2.5 mb-2">' +
-        '<div class="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 mt-0.5 shadow-2xs">' +
+        '<div class="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 mt-0.5 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-words text-white" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-words text-white" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-2 border-t border-white/15">' +
-        '<span class="px-3 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-2xs">' + pct + '%</span>' +
+      '<div class="flex items-center justify-end pt-2 border-t border-white/20">' +
+        '<div class="px-3.5 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-base sm:text-lg text-white border border-white/40 shadow-2xs tracking-tight">' +
+          pct + '%' +
+        '</div>' +
       '</div>' +
     '</div>';
   }
