@@ -689,38 +689,47 @@ function processAndRenderDynamicCharts(records) {
         const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
         records.forEach(r => {
-          let raw = r[questionText];
-          if (raw === undefined || raw === null || String(raw).trim() === "") {
-            raw = getField(r, [
-              questionText,
-              "De 1 a 5, que nota você dá para a qualidade de vida em São José?",
-              "De 1 a 5, que nota você dá para a qualidade de vida em São José dos Campos?",
-              "nota_qualidade",
-              "qualidade_vida",
-              "qualidade"
-            ]);
+          let scoreVal = null;
+
+          // 1. Tenta acesso direto pelo nome da coluna atual
+          if (r[questionText] !== undefined && r[questionText] !== null && String(r[questionText]).trim() !== "") {
+            const m = String(r[questionText]).trim().match(/([1-5](?:[,\.]\d+)?)/);
+            if (m) scoreVal = parseFloat(m[1].replace(",", "."));
           }
-          if (raw !== undefined && raw !== null && String(raw).trim() !== "") {
-            const rawStr = String(raw).trim();
-            const match = rawStr.match(/([1-5](?:[,\.]\d+)?)/);
-            if (match) {
-              const numVal = parseFloat(match[1].replace(",", "."));
-              if (!isNaN(numVal) && numVal >= 1 && numVal <= 5) {
-                const rounded = Math.min(5, Math.max(1, Math.round(numVal)));
-                counts[rounded] = (counts[rounded] || 0) + 1;
-                totalScore += numVal;
-                scoreCount++;
+
+          // 2. Se não encontrou, vasculha as chaves do objeto da linha
+          if (scoreVal === null || isNaN(scoreVal)) {
+            for (const k of Object.keys(r)) {
+              const kl = k.toLowerCase();
+              if ((kl.includes("qualidade") && (kl.includes("vida") || kl.includes("nota") || kl.includes("1 a 5") || kl.includes("são") || kl.includes("sao"))) ||
+                  (kl.includes("1 a 5") && kl.includes("nota") && kl.includes("josé"))) {
+                const val = r[k];
+                if (val !== undefined && val !== null && String(val).trim() !== "") {
+                  const m = String(val).trim().match(/([1-5](?:[,\.]\d+)?)/);
+                  if (m) {
+                    scoreVal = parseFloat(m[1].replace(",", "."));
+                    break;
+                  }
+                }
               }
             }
           }
+
+          // 3. Contabiliza se for nota válida de 1 a 5
+          if (scoreVal !== null && !isNaN(scoreVal) && scoreVal >= 1 && scoreVal <= 5) {
+            const rounded = Math.min(5, Math.max(1, Math.round(scoreVal)));
+            counts[rounded] = (counts[rounded] || 0) + 1;
+            totalScore += scoreVal;
+            scoreCount++;
+          }
         });
 
-        // Fallback pelos valores mapeados em dataMap caso o record direto venha agrupado
+        // 4. Fallback pelo dataMap da coluna caso records individuais tenham vindo agregados
         if (scoreCount === 0 && Object.keys(dataMap).length > 0) {
           Object.keys(dataMap).forEach(k => {
-            const match = String(k).match(/([1-5](?:[,\.]\d+)?)/);
-            if (match) {
-              const numVal = parseFloat(match[1].replace(",", "."));
+            const m = String(k).match(/([1-5](?:[,\.]\d+)?)/);
+            if (m) {
+              const numVal = parseFloat(m[1].replace(",", "."));
               const c = dataMap[k] || 1;
               if (!isNaN(numVal) && numVal >= 1 && numVal <= 5) {
                 const rounded = Math.min(5, Math.max(1, Math.round(numVal)));
