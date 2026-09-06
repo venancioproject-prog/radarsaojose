@@ -1591,7 +1591,7 @@ function renderTreemapWidget(dataMap, total) {
 
   const totalSum = entries.reduce((acc, curr) => acc + curr[1], 0);
 
-  function getTreemapTile(item, index, totalSum) {
+  function getTreemapTile(item, index, totalSum, isHero = false) {
     const [label, count] = item;
     const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
     const l = label.toLowerCase();
@@ -1644,22 +1644,36 @@ function renderTreemapWidget(dataMap, total) {
       borderClass = p.border;
     }
 
-    return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-0.5 group min-h-[90px] relative overflow-hidden">' +
-      '<div class="flex items-start justify-between gap-2 relative z-10">' +
-        '<div class="flex items-center gap-2 min-w-0 flex-1">' +
-          '<div class="w-7 h-7 rounded-lg bg-white/15 backdrop-blur-xs flex items-center justify-center text-xs text-white/90 flex-shrink-0">' +
-            '<i class="' + iconClass + '"></i>' +
+    if (isHero) {
+      return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300">' +
+        '<div class="flex items-center justify-between gap-3 mb-2.5">' +
+          '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
+            '<div class="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 shadow-xs">' +
+              '<i class="' + iconClass + '"></i>' +
+            '</div>' +
+            '<h4 class="text-sm sm:text-base font-bold text-white leading-snug break-words" title="' + label + '">' + label + '</h4>' +
           '</div>' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-words text-white/95" title="' + label + '">' + label + '</h4>' +
+          '<span class="px-3 py-1 rounded-xl bg-white/25 backdrop-blur-md font-black text-sm sm:text-base text-white border border-white/30 shadow-xs flex-shrink-0">' + pct + '%</span>' +
         '</div>' +
-        '<span class="px-2 py-0.5 rounded-lg bg-white/20 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/20 whitespace-nowrap shadow-xs">' + pct + '%</span>' +
+        '<div class="flex items-center justify-between pt-2 border-t border-white/15 text-xs text-white/90 font-semibold">' +
+          '<span>' + count.toLocaleString("pt-BR") + ' respondentes</span>' +
+          '<span class="text-white/70 text-[11px] font-bold">Maioria dos Votos</span>' +
+        '</div>' +
+      '</div>';
+    }
+
+    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[96px]">' +
+      '<div class="flex items-start gap-2 mb-2">' +
+        '<div class="w-6 h-6 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-[11px] text-white flex-shrink-0 mt-0.5">' +
+          '<i class="' + iconClass + '"></i>' +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<h4 class="text-xs font-bold leading-snug break-words text-white line-clamp-2" title="' + label + '">' + label + '</h4>' +
+        '</div>' +
       '</div>' +
-      '<div class="flex items-end justify-between mt-3 pt-2 border-t border-white/10 relative z-10">' +
-        '<span class="text-[11px] font-semibold text-white/80">' + count.toLocaleString("pt-BR") + ' respondentes</span>' +
-        '<span class="text-[10px] uppercase tracking-wider font-bold text-white/60">Área Proporcional</span>' +
-      '</div>' +
-      '<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity text-5xl text-white pointer-events-none">' +
-        '<i class="' + iconClass + '"></i>' +
+      '<div class="flex items-center justify-between gap-2 pt-2 border-t border-white/15">' +
+        '<span class="px-2 py-0.5 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-xs">' + pct + '%</span>' +
+        '<span class="text-[11px] font-medium text-white/80 whitespace-nowrap">' + count.toLocaleString("pt-BR") + ' resp.</span>' +
       '</div>' +
     '</div>';
   }
@@ -1667,7 +1681,7 @@ function renderTreemapWidget(dataMap, total) {
   let html = '<div class="w-full space-y-2.5">';
 
   if (entries.length === 1) {
-    html += getTreemapTile(entries[0], 0, totalSum);
+    html += getTreemapTile(entries[0], 0, totalSum, true);
   } else if (entries.length === 2) {
     const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 35);
     const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 35);
@@ -1676,23 +1690,22 @@ function renderTreemapWidget(dataMap, total) {
       '<div style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
     '</div>';
   } else if (entries.length === 3) {
-    const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 45);
-    const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 25);
-    const f3 = Math.max(parseFloat(((entries[2][1] / totalSum) * 100).toFixed(1)), 25);
-    html += '<div class="flex flex-col sm:flex-row gap-2.5">' +
-      '<div style="flex: ' + f1 + ';" class="flex flex-col">' + getTreemapTile(entries[0], 0, totalSum) + '</div>' +
-      '<div style="flex: 55;" class="flex flex-col gap-2.5">' +
-        '<div style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
-        '<div style="flex: ' + f3 + ';">' + getTreemapTile(entries[2], 2, totalSum) + '</div>' +
+    html += '<div class="space-y-2.5">' +
+      getTreemapTile(entries[0], 0, totalSum, true) +
+      '<div class="grid grid-cols-2 gap-2.5">' +
+        getTreemapTile(entries[1], 1, totalSum) +
+        getTreemapTile(entries[2], 2, totalSum) +
       '</div>' +
     '</div>';
   } else {
-    html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">';
-    entries.forEach((item, idx) => {
-      const isTop = idx === 0 && entries.length % 2 !== 0;
-      html += '<div class="' + (isTop ? 'sm:col-span-2' : '') + '">' + getTreemapTile(item, idx, totalSum) + '</div>';
+    // 4 ou mais itens: Destaque ao maior item no topo + grid 2x2 organizado abaixo
+    html += '<div class="space-y-2.5">' +
+      getTreemapTile(entries[0], 0, totalSum, true) +
+      '<div class="grid grid-cols-2 gap-2.5">';
+    entries.slice(1).forEach((item, idx) => {
+      html += '<div>' + getTreemapTile(item, idx + 1, totalSum) + '</div>';
     });
-    html += '</div>';
+    html += '</div></div>';
   }
 
   html += '</div>';
