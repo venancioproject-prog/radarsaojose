@@ -503,11 +503,29 @@ function resetAllFilters() {
 }
 
 function getField(row, possibleKeys) {
+  if (!row) return "";
+  const rowKeys = Object.keys(row);
+  
+  // 1. Busca exata pelos possíveis nomes
   for (const k of possibleKeys) {
     if (row[k] !== undefined && row[k] !== null && String(row[k]).trim() !== "") {
       return String(row[k]).trim();
     }
   }
+
+  // 2. Busca case-insensitive e por substring nas chaves do objeto
+  for (const target of possibleKeys) {
+    const targetLower = target.toLowerCase();
+    for (const key of rowKeys) {
+      const keyLower = key.toLowerCase();
+      if (keyLower === targetLower || keyLower.includes(targetLower) || targetLower.includes(keyLower)) {
+        if (row[key] !== undefined && row[key] !== null && String(row[key]).trim() !== "") {
+          return String(row[key]).trim();
+        }
+      }
+    }
+  }
+
   return "";
 }
 
@@ -664,7 +682,7 @@ function processAndRenderDynamicCharts(records) {
       // AJUSTES ESPECÍFICOS POR PERGUNTA:
       // ==========================================
 
-      // 1. QUALIDADE DE VIDA / NOTA 1 A 5: VELOCÍMETRO (GAUGE)
+      // 1. QUALIDADE DE VIDA / NOTA 1 A 5: VELOCÍMETRO (GAUGE) COM ESTRELAS E PORCENTAGENS
       if (qLower.includes("qualidade") || (qLower.includes("1 a 5") && (qLower.includes("vida") || qLower.includes("nota") || qLower.includes("são j")))) {
         let totalScore = 0;
         let scoreCount = 0;
@@ -673,15 +691,23 @@ function processAndRenderDynamicCharts(records) {
         records.forEach(r => {
           let raw = r[questionText];
           if (raw === undefined || raw === null || String(raw).trim() === "") {
-            raw = getField(r, [questionText, "De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade", "qualidade"]);
+            raw = getField(r, [
+              questionText,
+              "De 1 a 5, que nota você dá para a qualidade de vida em São José?",
+              "De 1 a 5, que nota você dá para a qualidade de vida em São José dos Campos?",
+              "nota_qualidade",
+              "qualidade_vida",
+              "qualidade"
+            ]);
           }
           if (raw !== undefined && raw !== null && String(raw).trim() !== "") {
-            const match = String(raw).match(/([1-5](?:[,\.]\d+)?)/);
+            const rawStr = String(raw).trim();
+            const match = rawStr.match(/([1-5](?:[,\.]\d+)?)/);
             if (match) {
               const numVal = parseFloat(match[1].replace(",", "."));
               if (!isNaN(numVal) && numVal >= 1 && numVal <= 5) {
-                const rounded = Math.round(numVal);
-                if (counts[rounded] !== undefined) counts[rounded]++;
+                const rounded = Math.min(5, Math.max(1, Math.round(numVal)));
+                counts[rounded] = (counts[rounded] || 0) + 1;
                 totalScore += numVal;
                 scoreCount++;
               }
@@ -689,7 +715,7 @@ function processAndRenderDynamicCharts(records) {
           }
         });
 
-        // Fallback pelos valores mapeados em dataMap se records diretos vierem agrupados
+        // Fallback pelos valores mapeados em dataMap caso o record direto venha agrupado
         if (scoreCount === 0 && Object.keys(dataMap).length > 0) {
           Object.keys(dataMap).forEach(k => {
             const match = String(k).match(/([1-5](?:[,\.]\d+)?)/);
@@ -697,8 +723,8 @@ function processAndRenderDynamicCharts(records) {
               const numVal = parseFloat(match[1].replace(",", "."));
               const c = dataMap[k] || 1;
               if (!isNaN(numVal) && numVal >= 1 && numVal <= 5) {
-                const rounded = Math.round(numVal);
-                if (counts[rounded] !== undefined) counts[rounded] += c;
+                const rounded = Math.min(5, Math.max(1, Math.round(numVal)));
+                counts[rounded] = (counts[rounded] || 0) + c;
                 totalScore += numVal * c;
                 scoreCount += c;
               }
@@ -708,9 +734,10 @@ function processAndRenderDynamicCharts(records) {
 
         const calculatedAvg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : (avgQualityScore || "4.3");
 
+        cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-2">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400">Velocímetro de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Velocímetro de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-center pt-2">' + renderGaugeSpeedometerWidget(calculatedAvg, counts, scoreCount) + '</div>';
 
@@ -1572,23 +1599,26 @@ function renderGaugeSpeedometerWidget(avgScore, counts, totalCount) {
   // Rótulos de dados e distribuição das notas de 1 a 5
   const totalValids = totalCount > 0 ? totalCount : 1;
   const ratingDetails = [
-    { score: 5, label: "5 estrelas", color: "bg-emerald-500", textCol: "text-emerald-700" },
-    { score: 4, label: "4 estrelas", color: "bg-teal-500", textCol: "text-teal-700" },
-    { score: 3, label: "3 estrelas", color: "bg-amber-400", textCol: "text-amber-700" },
-    { score: 2, label: "2 estrelas", color: "bg-orange-400", textCol: "text-orange-700" },
-    { score: 1, label: "1 estrela", color: "bg-rose-500", textCol: "text-rose-700" }
+    { score: 5, label: "5 estrelas", color: "bg-emerald-500", badgeBg: "bg-emerald-50 text-emerald-700" },
+    { score: 4, label: "4 estrelas", color: "bg-teal-500", badgeBg: "bg-teal-50 text-teal-700" },
+    { score: 3, label: "3 estrelas", color: "bg-amber-400", badgeBg: "bg-amber-50 text-amber-700" },
+    { score: 2, label: "2 estrelas", color: "bg-orange-400", badgeBg: "bg-orange-50 text-orange-700" },
+    { score: 1, label: "1 estrela", color: "bg-rose-500", badgeBg: "bg-rose-50 text-rose-700" }
   ];
 
-  let distributionHtml = '<div class="space-y-1.5 mt-3 pt-3 border-t border-slate-100 w-full">';
+  let distributionHtml = '<div class="space-y-2 mt-3 pt-3 border-t border-slate-100 w-full">';
   ratingDetails.forEach(r => {
     const c = (counts && counts[r.score]) ? counts[r.score] : 0;
     const pct = totalCount > 0 ? ((c / totalValids) * 100).toFixed(1) : "0.0";
     distributionHtml += '<div class="flex items-center gap-2 text-xs font-semibold text-slate-600">' +
-      '<span class="w-14 text-slate-500 font-bold flex items-center gap-1 text-[11px]"><span>' + r.score + '</span><i class="fa-solid fa-star text-[10px] text-amber-400"></i></span>' +
-      '<div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden shadow-inner">' +
+      '<span class="w-11 text-slate-700 font-bold flex items-center gap-1 text-xs"><span>' + r.score + '</span><i class="fa-solid fa-star text-[11px] text-amber-400"></i></span>' +
+      '<div class="flex-1 h-2.5 rounded-full bg-slate-100 overflow-hidden shadow-inner">' +
         '<div class="h-full rounded-full ' + r.color + ' transition-all duration-700" style="width: ' + pct + '%;"></div>' +
       '</div>' +
-      '<span class="w-20 text-right font-bold text-slate-700 text-[11px]">' + c + ' <span class="text-slate-400 font-normal">(' + pct + '%)</span></span>' +
+      '<div class="w-24 text-right flex items-center justify-end gap-1.5">' +
+        '<span class="text-[11px] font-medium text-slate-400">' + c + '</span>' +
+        '<span class="inline-block px-1.5 py-0.5 rounded-md ' + r.badgeBg + ' font-black text-[11px]">' + pct + '%</span>' +
+      '</div>' +
     '</div>';
   });
   distributionHtml += '</div>';
