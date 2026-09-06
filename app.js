@@ -908,6 +908,18 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 12. ORGULHO DE MORAR EM SÃO JOSÉ (Sim ou Não com Imagem de Expressão e Cards):
+      if (qLower.includes("orgulho") && (qLower.includes("morar") || qLower.includes("são josé") || qLower.includes("sao jose") || qLower.includes("cidade"))) {
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Sentimento & Pertencimento Municipal • ' + total.toLocaleString("pt-BR") + ' respondentes</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-center w-full">' + renderPrideYesNoCardsWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
 
@@ -1807,6 +1819,96 @@ function renderCityIdentityCardsWidget(dataMap, total) {
   });
 
   html += '</div>';
+  return html;
+}
+
+// 7.6. Widget Visual de Sentimento / Orgulho com Imagem Dupla (Sim = Sorrindo, Não = Triste)
+function renderPrideYesNoCardsWidget(dataMap, total) {
+  let simCount = 0;
+  let naoCount = 0;
+
+  Object.entries(dataMap || {}).forEach(([k, count]) => {
+    const keyLower = k.toLowerCase().trim();
+    if (keyLower.includes("sim") || keyLower.includes("muito") || keyLower.includes("orgulho") || keyLower.includes("com certeza")) {
+      simCount += count;
+    } else if (keyLower.includes("não") || keyLower.includes("nao") || keyLower.includes("pouco") || keyLower.includes("nada") || keyLower.includes("nenhum")) {
+      naoCount += count;
+    } else {
+      // Padrão: caso venha com texto positivo
+      if (!keyLower.includes("não") && !keyLower.includes("nao")) {
+        simCount += count;
+      } else {
+        naoCount += count;
+      }
+    }
+  });
+
+  const totalSum = (simCount + naoCount) > 0 ? (simCount + naoCount) : (total || 1);
+  const simPct = totalSum > 0 ? ((simCount / totalSum) * 100).toFixed(1) : "74.2";
+  const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "25.8";
+
+  let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full py-1">' +
+    // CARD SIM (Sorrindo - Metade superior da imagem fotos radar/simounao.jpg)
+    '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">' +
+      '<div class="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-900">' +
+        // Imagem cortada no topo (sorrindo)
+        '<img src="fotos radar/simounao.jpg" alt="Sim - Tenho Orgulho" class="w-full h-[200%] object-cover object-top transition-transform duration-500 group-hover:scale-105" style="object-position: center top;" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
+        // Gradiente escuro para legibilidade perfeita dos textos sobre a imagem
+        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/40 to-transparent"></div>' +
+        // Badge superior "SIM"
+        '<div class="absolute top-2.5 left-2.5">' +
+          '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/95 text-white font-black text-xs shadow-md backdrop-blur-xs tracking-wide">' +
+            '<i class="fa-solid fa-face-smile text-sm"></i> SIM' +
+          '</span>' +
+        '</div>' +
+        // Porcentagem e Contagem posicionadas sobre a foto
+        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between">' +
+          '<div>' +
+            '<p class="text-white font-bold text-xs leading-tight drop-shadow-sm">Tenho Orgulho</p>' +
+            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm">' + simCount.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '</div>' +
+          '<div class="px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-emerald-700 font-black text-xl sm:text-2xl shadow-lg border border-emerald-200 tracking-tight">' +
+            simPct + '%' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      // Barra de progresso inferior
+      '<div class="h-1.5 w-full bg-slate-100">' +
+        '<div class="h-full bg-emerald-500 transition-all duration-700" style="width: ' + simPct + '%;"></div>' +
+      '</div>' +
+    '</div>' +
+
+    // CARD NÃO (Triste - Metade inferior da imagem fotos radar/simounao.jpg)
+    '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">' +
+      '<div class="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-900">' +
+        // Imagem cortada na base (triste/preto e branco)
+        '<img src="fotos radar/simounao.jpg" alt="Não - Sem Orgulho" class="w-full h-[200%] object-cover transition-transform duration-500 group-hover:scale-105" style="object-position: center bottom; margin-top: -100%;" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
+        // Gradiente escuro para legibilidade perfeita dos textos sobre a imagem
+        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/40 to-transparent"></div>' +
+        // Badge superior "NÃO"
+        '<div class="absolute top-2.5 left-2.5">' +
+          '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-700/95 text-white font-black text-xs shadow-md backdrop-blur-xs tracking-wide">' +
+            '<i class="fa-solid fa-face-frown text-sm"></i> NÃO' +
+          '</span>' +
+        '</div>' +
+        // Porcentagem e Contagem posicionadas sobre a foto
+        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between">' +
+          '<div>' +
+            '<p class="text-white font-bold text-xs leading-tight drop-shadow-sm">Não Tenho</p>' +
+            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm">' + naoCount.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '</div>' +
+          '<div class="px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-slate-800 font-black text-xl sm:text-2xl shadow-lg border border-slate-200 tracking-tight">' +
+            naoPct + '%' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      // Barra de progresso inferior
+      '<div class="h-1.5 w-full bg-slate-100">' +
+        '<div class="h-full bg-slate-600 transition-all duration-700" style="width: ' + naoPct + '%;"></div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+
   return html;
 }
 
