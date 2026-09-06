@@ -596,7 +596,7 @@ function processAndRenderDynamicCharts(records) {
     {
       title: "2. Qualidade de Vida, Percepção & Mobilidade",
       subtitle: "Velocímetro de satisfação (1 a 5), meios de transporte, imagem e crescimento da cidade",
-      questions: questionList.filter(q => /qualidade|transporte|são josé é|crescimento|orgulho|definiria/i.test(q))
+      questions: questionList.filter(q => !/animal|pet/i.test(q) && (/qualidade|transporte|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)))
     },
     {
       title: "3. Cultura, Eventos, Lazer & Vida Noturna",
@@ -656,6 +656,12 @@ function processAndRenderDynamicCharts(records) {
       globalQuestionIndex++;
       const canvasId = "chart-q-" + globalQuestionIndex;
       const qLower = questionText.toLowerCase();
+
+      // Formatação elegante do título da pergunta
+      let displayTitle = questionText.replace(/_\d+$/i, "").replace(/_\d+\b/i, "");
+      if (displayTitle.toLowerCase().startsWith("para você_1")) {
+        displayTitle = "Para você, a cidade de São José está:";
+      }
 
       // Card Container
       const cardEl = document.createElement("div");
@@ -925,7 +931,7 @@ function processAndRenderDynamicCharts(records) {
 
       cardEl.innerHTML = '<div>' +
         '<div class="flex items-start justify-between gap-2 mb-1">' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words" title="' + questionText + '">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words" title="' + displayTitle + '">' + displayTitle + '</h3>' +
         '</div>' +
         '<p class="text-[11px] font-medium text-slate-400 mb-4">Total: ' + total + ' respondentes</p>' +
       '</div>' +
