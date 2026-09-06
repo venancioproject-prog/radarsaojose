@@ -1511,22 +1511,22 @@ function renderWorkIconsGrid(dataMap, total) {
   // Ordenar por maior número de respostas
   const sortedEntries = Object.entries(dataMap).sort((a, b) => b[1] - a[1]);
 
-  let html = '<div class="flex flex-col justify-between gap-2.5 h-full min-h-[320px] max-h-[380px] overflow-y-auto pr-1 py-1 custom-card-scroll flex-1">';
+  let html = '<div class="flex flex-col justify-between gap-2 sm:gap-2.5 h-full flex-1 w-full">';
   sortedEntries.forEach(([k, count]) => {
     const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
     const cfg = getWorkIconConfig(k);
 
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1 min-h-[54px]">' +
-      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-sm sm:text-base shadow-2xs">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-2.5 sm:p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+      '<div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">' +
+        '<div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-xs sm:text-sm shadow-2xs">' +
           '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words" title="' + k + '">' + k + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + k + '">' + k + '</h4>' +
         '</div>' +
       '</div>' +
       '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+        '<span class="inline-block px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
