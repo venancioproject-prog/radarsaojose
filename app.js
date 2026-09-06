@@ -600,32 +600,32 @@ function processAndRenderDynamicCharts(records) {
     {
       title: "1. Perfil Demográfico, Social & Renda",
       subtitle: "Gênero consolidado, faixas etárias cronológicas, renda em degradê verde e trabalho por ícones",
-      questions: questionList.filter(q => !/qualidade/i.test(q) && (/(^|\s|\b)idade(\b|\s|$)|faixa|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q)))
+      questions: questionList.filter(q => !/qualidade/i.test(q) && !/animal|pet|bicho|anima/i.test(q) && (/(^|\s|\b)idade(\b|\s|$)|faixa|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q)))
     },
     {
       title: "2. Qualidade de Vida, Percepção & Necessidades",
       subtitle: "Velocímetro de satisfação (1 a 5), o que mais falta, percepção e crescimento da cidade",
-      questions: questionList.filter(q => !/transporte/i.test(q) && !/animal|pet/i.test(q) && (/qualidade|mais falta|o que falta|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)))
+      questions: questionList.filter(q => !/transporte/i.test(q) && !/animal|pet|bicho|anima/i.test(q) && (/qualidade|mais falta|o que falta|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)))
     },
     {
       title: "3. Cultura, Eventos, Lazer, Mobilidade & Vida Noturna",
       subtitle: "Meios de transporte, mapa de árvore (treemap), evasão com ícones e mapa de calor por região",
-      questions: questionList.filter(q => !/mais falta|o que falta/i.test(q) && !/animal|pet/i.test(q) && (/transporte|cultura|festas|vizinhas|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|bonito para tirar fotos/i.test(q)))
+      questions: questionList.filter(q => !/mais falta|o que falta/i.test(q) && !/animal|pet|bicho|anima/i.test(q) && (/transporte|cultura|festas|vizinhas|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|bonito para tirar fotos/i.test(q)))
     },
     {
       title: "4. Mídia, Músicas, Streamings & Comportamento",
       subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e comportamento",
-      questions: questionList.filter(q => !/animal|pet/i.test(q) && (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q)))
+      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q)))
     },
     {
       title: "5. Economia Local, Política & Bairros",
       subtitle: "Produtores locais, feiras de artesanato, posicionamento político e bairros",
-      questions: questionList.filter(q => !/animal|pet/i.test(q) && (/produtores|feiras|artesanato|política|ajuda a cidade|bairro/i.test(q)))
+      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && (/produtores|feiras|artesanato|política|ajuda a cidade|bairro/i.test(q)))
     },
     {
       title: "6. Mundo Pet & Animais de Estimação",
       subtitle: "Posse de pets, estrutura e avaliação de São José para animais de estimação",
-      questions: questionList.filter(q => /animal|pet/i.test(q))
+      questions: questionList.filter(q => /animal|pet|bicho|anima/i.test(q))
     }
   ];
 
