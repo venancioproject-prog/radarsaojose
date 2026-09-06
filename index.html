@@ -206,47 +206,42 @@
   <!-- 2. TELA PRINCIPAL (DASHBOARD) -->
   <div id="dashboard-screen" class="view-transition hidden min-h-screen flex flex-col">
     
-    <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border shadow-sm">
+    <!-- Top Header com logobranco em fundo Navy sofisticado -->
+    <header class="sticky top-0 z-50 bg-brand-950 text-white border-b border-brand-900 shadow-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Left: logobranco.png Oficial -->
         <div class="flex items-center gap-4">
           <img 
-            src="fotos radar/logo.png" 
+            src="fotos radar/logobranco.png" 
             alt="Logo Radar São José" 
-            class="h-11 sm:h-12 max-w-[170px] object-contain"
-            onerror="this.src='fotos radar/radar_sjc_white_rounded.png'"
+            class="h-11 sm:h-12 max-w-[190px] object-contain"
+            onerror="this.src='fotos radar/logo.png'"
           />
-          <div class="hidden sm:block border-l border-slate-200 pl-4">
-            <h2 class="text-sm font-black text-brand-900 leading-tight">RADAR SÃO JOSÉ</h2>
-            <p class="text-[11px] font-semibold text-slate-400 tracking-wide">Relatório Analítico & Pesquisa 2026</p>
+          <div class="hidden sm:block border-l border-brand-800 pl-4">
+            <h2 class="text-xs font-black tracking-widest text-accent-cyan uppercase">RADAR SÃO JOSÉ</h2>
+            <p class="text-[11px] font-semibold text-slate-300">Inteligência de Mercado & Pesquisa 2026</p>
           </div>
         </div>
 
+        <!-- Right: Profile & Actions -->
         <div class="flex items-center gap-3">
-          <div class="hidden md:flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-            <i class="fa-solid fa-filter text-xs text-brand-600"></i>
-            <span class="text-xs font-bold text-slate-600">Região:</span>
-            <select id="filter-region-select" class="bg-transparent text-xs font-bold text-brand-900 outline-none cursor-pointer">
-              <option value="TODAS">Todas as Regiões</option>
-            </select>
-          </div>
-
           <button 
             id="btn-refresh" 
             title="Atualizar Dados do Supabase"
-            class="p-2.5 text-slate-500 hover:text-brand-900 hover:bg-slate-100 rounded-xl transition-colors"
+            class="p-2.5 text-slate-300 hover:text-white hover:bg-brand-900 rounded-xl transition-colors"
           >
             <i class="fa-solid fa-arrow-rotate-right" id="refresh-icon"></i>
           </button>
 
-          <div class="hidden lg:flex items-center gap-2 bg-brand-50 px-3 py-1.5 rounded-full border border-brand-100 text-xs font-bold text-brand-900">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div class="hidden lg:flex items-center gap-2 bg-brand-900/80 px-3 py-1.5 rounded-full border border-brand-800 text-xs font-bold text-slate-200">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span id="user-email-display" class="truncate max-w-[160px]">usuario@exemplo.com</span>
           </div>
 
           <button 
             id="btn-logout" 
-            class="inline-flex items-center gap-2 px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs rounded-xl border border-red-200 transition-all"
+            class="inline-flex items-center gap-2 px-3.5 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 font-bold text-xs rounded-xl border border-red-500/30 transition-all"
           >
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
             <span class="hidden sm:inline">Sair</span>
@@ -417,6 +412,33 @@
           </div>
           <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 text-xl">
             <i class="fa-solid fa-map-location-dot"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALERIA VISUAL SÃO JOSÉ (FOTOS EM DESTAQUE) -->
+      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
+          <img src="fotos radar/foto_gastronomia.jpg" alt="Gastronomia em SJC" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Gastronomia & Lazer</span>
+            <h4 class="text-base font-bold text-white">Hábitos de Consumo</h4>
+          </div>
+        </div>
+
+        <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
+          <img src="fotos radar/foto_cultura.jpg" alt="Cultura e Eventos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Cultura & Festas</span>
+            <h4 class="text-base font-bold text-white">Eventos da Cidade</h4>
+          </div>
+        </div>
+
+        <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
+          <img src="fotos radar/foto_noite.jpg" alt="Vida Noturna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Vida Noturna</span>
+            <h4 class="text-base font-bold text-white">Opções & Dificuldades</h4>
           </div>
         </div>
       </section>
@@ -644,11 +666,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-surface-border py-6 mt-12">
+    <footer class="bg-brand-950 text-white border-t border-brand-900 py-6 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
         <div class="flex items-center gap-3">
-          <img src="fotos radar/logo.png" alt="Logo" class="h-6 object-contain" />
-          <span>Radar São José &bull; Inteligência & Análise de Mercado</span>
+          <img src="fotos radar/logobranco.png" alt="Logo" class="h-6 object-contain" onerror="this.src='fotos radar/logo.png'" />
+          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Análise de Mercado</span>
         </div>
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
       </div>
