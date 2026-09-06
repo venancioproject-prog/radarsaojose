@@ -839,6 +839,12 @@ function renderGenderChart(canvasId, dataMap) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 10,
+          bottom: 10
+        }
+      },
       plugins: {
         legend: {
           position: "bottom",
@@ -849,8 +855,8 @@ function renderGenderChart(canvasId, dataMap) {
           font: { weight: 800, size: 11 },
           formatter: (val) => {
             if (!val || val === 0) return "";
-            const pct = totalSum > 0 ? Math.round((val / totalSum) * 100) : 0;
-            return pct >= 5 ? pct + "%" : "";
+            const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+            return parseFloat(pct) >= 4 ? pct + "%" : "";
           }
         }
       }
@@ -956,6 +962,14 @@ function renderIncomeGreenChart(canvasId, dataMap) {
       indexAxis: "y",
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 10,
+          bottom: 10,
+          left: 10,
+          right: 35
+        }
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -974,8 +988,8 @@ function renderIncomeGreenChart(canvasId, dataMap) {
           font: { weight: 700, size: 10 },
           formatter: (val) => {
             if (!val) return "";
-            const pct = totalSum > 0 ? Math.round((val / totalSum) * 100) : 0;
-            return val + " (" + pct + "%)";
+            const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+            return pct + "%";
           }
         }
       },
@@ -1385,11 +1399,23 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
       indexAxis: isHorizontal ? "y" : "x",
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 15,
+          bottom: 10,
+          left: 10,
+          right: isHorizontal ? 35 : 10
+        }
+      },
       plugins: {
         legend: {
           display: type === "doughnut" || type === "pie",
           position: "bottom",
-          labels: { usePointStyle: true, padding: 10, font: { size: 10, weight: 600 } }
+          labels: {
+            usePointStyle: true,
+            padding: 12,
+            font: { size: 10, weight: 600 }
+          }
         },
         tooltip: {
           padding: 10,
@@ -1398,7 +1424,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
             label: function(context) {
               const val = context.raw || 0;
               const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
-              return " " + val + " respostas (" + pct + "%)";
+              return " " + val + " respondentes (" + pct + "%)";
             }
           }
         },
@@ -1413,11 +1439,12 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           font: { weight: 700, size: 10 },
           formatter: function(value) {
             if (!value || value === 0) return "";
+            const pct = totalSum > 0 ? ((value / totalSum) * 100).toFixed(1) : 0;
+            // Sempre exibir porcentagem (%)
             if (type === "doughnut" || type === "pie") {
-              const pct = totalSum > 0 ? Math.round((value / totalSum) * 100) : 0;
-              return pct >= 6 ? (pct + "%") : "";
+              return parseFloat(pct) >= 5 ? pct + "%" : "";
             }
-            return value;
+            return pct + "%";
           }
         }
       },
@@ -1425,11 +1452,16 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         y: {
           beginAtZero: true,
           grid: { color: "#F1F5F9" },
-          ticks: { precision: 0, font: { size: 10 } }
+          ticks: {
+            precision: 0,
+            font: { size: 10 }
+          }
         },
         x: {
           grid: { display: false },
-          ticks: { font: { size: 10 } }
+          ticks: {
+            font: { size: 10 }
+          }
         }
       } : {}
     }
