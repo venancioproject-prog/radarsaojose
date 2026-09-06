@@ -763,9 +763,9 @@ function processAndRenderDynamicCharts(records) {
         cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-2">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-semibold text-slate-400">Velocímetro de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Média de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-center pt-2">' + renderGaugeSpeedometerWidget(calculatedAvg, counts, scoreCount) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center pt-2">' + renderQualityCleanScoreWidget(calculatedAvg, counts, scoreCount) + '</div>';
 
         cardsGrid.appendChild(cardEl);
         return;
@@ -1624,116 +1624,81 @@ function renderWorkIconsGrid(dataMap, total) {
   return html;
 }
 
-// 5. Velocímetro / Gauge Interativo de Qualidade de Vida (Escala 1 a 5) com Rótulo de Dados
-function renderGaugeSpeedometerWidget(avgScore, counts, totalCount) {
+// 5. Card Limpo e Funcional de Média Simples de Qualidade de Vida (Escala 1 a 5)
+function renderQualityCleanScoreWidget(avgScore, counts, totalCount) {
   const scoreNum = Math.max(1, Math.min(5, parseFloat(avgScore) || 4.3));
-  // Mapeia 1.0 -> 5.0 para o ângulo de -90deg a +90deg (arco de 180 graus)
-  const normalized = (scoreNum - 1) / 4;
-  const angleDeg = -90 + (normalized * 180);
 
-  // Status e cores de destaque
+  // Classificação Textual Dinâmica
   let statusText = "Excelente";
   let statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
   let statusIcon = "fa-solid fa-circle-check text-emerald-500";
-  let needleColor = "#059669";
 
   if (scoreNum < 2.0) {
     statusText = "Ruim / Baixa";
     statusBadgeClass = "bg-rose-50 text-rose-700 border-rose-200";
     statusIcon = "fa-solid fa-triangle-exclamation text-rose-500";
-    needleColor = "#EF4444";
-  } else if (scoreNum < 2.8) {
+  } else if (scoreNum < 3.0) {
     statusText = "Regular";
     statusBadgeClass = "bg-orange-50 text-orange-700 border-orange-200";
     statusIcon = "fa-solid fa-circle-exclamation text-orange-500";
-    needleColor = "#F97316";
-  } else if (scoreNum < 3.8) {
+  } else if (scoreNum < 4.0) {
     statusText = "Boa";
     statusBadgeClass = "bg-amber-50 text-amber-700 border-amber-200";
     statusIcon = "fa-solid fa-thumbs-up text-amber-500";
-    needleColor = "#F59E0B";
-  } else if (scoreNum < 4.5) {
+  } else {
     statusText = "Muito Boa";
     statusBadgeClass = "bg-teal-50 text-teal-700 border-teal-200";
     statusIcon = "fa-solid fa-award text-teal-500";
-    needleColor = "#0D9488";
   }
 
-  // Rótulos de dados e distribuição das notas de 1 a 5
+  // Distribuição Real nas Barras (5 estrelas até 1 estrela)
   const totalValids = totalCount > 0 ? totalCount : 1;
   const ratingDetails = [
-    { score: 5, label: "5 estrelas", color: "bg-emerald-500", badgeBg: "bg-emerald-50 text-emerald-700" },
-    { score: 4, label: "4 estrelas", color: "bg-teal-500", badgeBg: "bg-teal-50 text-teal-700" },
-    { score: 3, label: "3 estrelas", color: "bg-amber-400", badgeBg: "bg-amber-50 text-amber-700" },
-    { score: 2, label: "2 estrelas", color: "bg-orange-400", badgeBg: "bg-orange-50 text-orange-700" },
-    { score: 1, label: "1 estrela", color: "bg-rose-500", badgeBg: "bg-rose-50 text-rose-700" }
+    { score: 5, color: "bg-emerald-500", badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+    { score: 4, color: "bg-teal-500", badgeBg: "bg-teal-50 text-teal-700 border-teal-200" },
+    { score: 3, color: "bg-amber-400", badgeBg: "bg-amber-50 text-amber-700 border-amber-200" },
+    { score: 2, color: "bg-orange-400", badgeBg: "bg-orange-50 text-orange-700 border-orange-200" },
+    { score: 1, color: "bg-rose-500", badgeBg: "bg-rose-50 text-rose-700 border-rose-200" }
   ];
 
-  let distributionHtml = '<div class="space-y-2 mt-3 pt-3 border-t border-slate-100 w-full">';
+  let distributionHtml = '<div class="space-y-3 w-full mt-4 pt-4 border-t border-slate-100">';
   ratingDetails.forEach(r => {
     const c = (counts && counts[r.score]) ? counts[r.score] : 0;
     const pct = totalCount > 0 ? ((c / totalValids) * 100).toFixed(1) : "0.0";
-    distributionHtml += '<div class="flex items-center gap-2 text-xs font-semibold text-slate-600">' +
-      '<span class="w-11 text-slate-700 font-bold flex items-center gap-1 text-xs"><span>' + r.score + '</span><i class="fa-solid fa-star text-[11px] text-amber-400"></i></span>' +
-      '<div class="flex-1 h-2.5 rounded-full bg-slate-100 overflow-hidden shadow-inner">' +
-        '<div class="h-full rounded-full ' + r.color + ' transition-all duration-700" style="width: ' + pct + '%;"></div>' +
+    distributionHtml += '<div class="flex items-center gap-3 text-xs font-semibold text-slate-700">' +
+      '<span class="w-9 font-bold flex items-center gap-1 text-xs text-slate-800">' +
+        '<span>' + r.score + '</span>' +
+        '<i class="fa-solid fa-star text-[11px] text-amber-400"></i>' +
+      '</span>' +
+      '<div class="flex-1 h-3 rounded-full bg-slate-100 overflow-hidden shadow-inner p-0.5">' +
+        '<div class="h-full rounded-full ' + r.color + ' transition-all duration-700 ease-out" style="width: ' + pct + '%;"></div>' +
       '</div>' +
-      '<div class="w-24 text-right flex items-center justify-end gap-1.5">' +
-        '<span class="text-[11px] font-medium text-slate-400">' + c + '</span>' +
-        '<span class="inline-block px-1.5 py-0.5 rounded-md ' + r.badgeBg + ' font-black text-[11px]">' + pct + '%</span>' +
+      '<div class="min-w-[75px] text-right flex items-center justify-end gap-1.5">' +
+        '<span class="text-[11px] font-bold text-slate-400">' + c + '</span>' +
+        '<span class="inline-block px-2 py-0.5 rounded-lg border font-black text-[11px] ' + r.badgeBg + '">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
   distributionHtml += '</div>';
 
-  let html = '<div class="flex flex-col items-center justify-between h-full w-full px-1">' +
-    // Velocímetro SVG
-    '<div class="relative w-full max-w-[260px] mx-auto pt-1 flex flex-col items-center">' +
-      '<svg viewBox="0 0 240 140" class="w-full h-auto overflow-visible select-none">' +
-        '<defs>' +
-          '<linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">' +
-            '<stop offset="0%" stop-color="#EF4444" />' +
-            '<stop offset="25%" stop-color="#F97316" />' +
-            '<stop offset="50%" stop-color="#FBBF24" />' +
-            '<stop offset="75%" stop-color="#34D399" />' +
-            '<stop offset="100%" stop-color="#10B981" />' +
-          '</linearGradient>' +
-          '<filter id="needleShadow" x="-20%" y="-20%" width="140%" height="140%">' +
-            '<feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0F172A" flood-opacity="0.3"/>' +
-          '</filter>' +
-        '</defs>' +
-        // Arco de trilho de fundo cinza suave
-        '<path d="M 35,115 A 85,85 0 0,1 205,115" fill="none" stroke="#F1F5F9" stroke-width="16" stroke-linecap="round" />' +
-        // Arco colorido gradiente do velocímetro
-        '<path d="M 35,115 A 85,85 0 0,1 205,115" fill="none" stroke="url(#gaugeGradient)" stroke-width="16" stroke-linecap="round" />' +
-        // Rótulos de dados e marcadores ao redor do velocímetro (1 a 5)
-        '<text x="22" y="125" font-size="11" font-weight="800" fill="#EF4444" text-anchor="middle">1</text>' +
-        '<text x="48" y="52" font-size="11" font-weight="800" fill="#F97316" text-anchor="middle">2</text>' +
-        '<text x="120" y="18" font-size="11" font-weight="800" fill="#D97706" text-anchor="middle">3</text>' +
-        '<text x="192" y="52" font-size="11" font-weight="800" fill="#059669" text-anchor="middle">4</text>' +
-        '<text x="218" y="125" font-size="11" font-weight="800" fill="#10B981" text-anchor="middle">5</text>' +
-        // Ponteiro do Velocímetro
-        '<g transform="rotate(' + angleDeg + ', 120, 115)" style="transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);">' +
-          '<polygon points="117,115 120,34 123,115" fill="#0F172A" filter="url(#needleShadow)" />' +
-          '<polygon points="119,34 120,28 121,34" fill="' + needleColor + '" />' +
-          '<circle cx="120" cy="115" r="9" fill="#0F172A" />' +
-          '<circle cx="120" cy="115" r="4" fill="#38BDF8" />' +
-        '</g>' +
-      '</svg>' +
-      // Rótulo de Dados Central com Nota Média e Classificação
-      '<div class="text-center -mt-1 mb-1">' +
-        '<div class="flex items-baseline justify-center gap-1">' +
-          '<span class="text-3xl sm:text-4xl font-black text-brand-900 tracking-tight">' + scoreNum.toFixed(1) + '</span>' +
-          '<span class="text-xs font-bold text-slate-400">/ 5.0</span>' +
-        '</div>' +
-        '<div class="mt-0.5">' +
-          '<span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold border ' + statusBadgeClass + ' shadow-xs">' +
-            '<i class="' + statusIcon + '"></i> ' + statusText +
-          '</span>' +
-        '</div>' +
+  let html = '<div class="flex flex-col items-center justify-between h-full w-full py-1">' +
+    // Bloco Superior: Média Simples em Destaque
+    '<div class="flex flex-col items-center justify-center text-center my-2">' +
+      '<div class="flex items-baseline justify-center gap-1.5 mb-1.5">' +
+        '<span class="text-5xl sm:text-6xl font-black text-brand-900 tracking-tight leading-none">' + scoreNum.toFixed(1) + '</span>' +
+        '<span class="text-base sm:text-lg font-bold text-slate-400">/ 5.0</span>' +
+      '</div>' +
+      '<div class="flex items-center justify-center gap-1 text-amber-400 text-sm mb-2.5">' +
+        '<i class="fa-solid fa-star"></i>'.repeat(Math.round(scoreNum)) +
+        '<i class="fa-regular fa-star text-slate-200"></i>'.repeat(5 - Math.round(scoreNum)) +
+      '</div>' +
+      '<div>' +
+        '<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold border ' + statusBadgeClass + ' shadow-2xs">' +
+          '<i class="' + statusIcon + '"></i> ' + statusText +
+        '</span>' +
       '</div>' +
     '</div>' +
-    // Distribuição de notas
+    // Bloco Inferior: Distribuição de 5 a 1 Estrela
     distributionHtml +
   '</div>';
 
@@ -1741,6 +1706,10 @@ function renderGaugeSpeedometerWidget(avgScore, counts, totalCount) {
 }
 
 // Alias para compatibilidade
+function renderGaugeSpeedometerWidget(avgScore, counts, totalCount) {
+  return renderQualityCleanScoreWidget(avgScore, counts, totalCount);
+}
+
 function renderQualityScaleWidget(avgScore, dataMap, total) {
   const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   if (dataMap) {
@@ -1751,7 +1720,7 @@ function renderQualityScaleWidget(avgScore, dataMap, total) {
       }
     });
   }
-  return renderGaugeSpeedometerWidget(avgScore, counts, total);
+  return renderQualityCleanScoreWidget(avgScore, counts, total);
 }
 
 // 7.5. Cards com Emojis e Porcentagens para Identidade da Cidade (Para você, São José é:)
