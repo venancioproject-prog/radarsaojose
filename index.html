@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -183,10 +183,25 @@
           <span id="btn-login-text">Entrar no Painel</span>
           <i id="btn-login-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
         </button>
+
+        <div class="relative flex py-1 items-center">
+          <div class="flex-grow border-t border-slate-200"></div>
+          <span class="flex-shrink mx-3 text-xs text-slate-400 uppercase font-medium">Ou</span>
+          <div class="flex-grow border-t border-slate-200"></div>
+        </div>
+
+        <button 
+          type="button" 
+          id="btn-demo-view" 
+          class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 active:scale-[0.99] text-slate-700 font-semibold rounded-xl text-xs border border-slate-200 transition-all duration-200 flex items-center justify-center gap-2"
+        >
+          <i class="fa-solid fa-eye text-slate-500"></i>
+          <span>Visualizar Dashboard em Modo Demonstração</span>
+        </button>
       </form>
 
       <!-- Footer Info -->
-      <div class="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-400 font-medium">
+      <div class="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-400 font-medium">
         &copy; <span id="year-current"></span> Radar São José. Todos os direitos reservados.
       </div>
     </div>

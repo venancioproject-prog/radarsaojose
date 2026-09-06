@@ -13,13 +13,26 @@ const SUPABASE_ANON_KEY = "sb_publishable_8nKUF28dbMM8EOSPrgJRlA_19taJqW9";
 
 // Inicialização do cliente Supabase
 let supabaseClient = null;
-try {
-  if (window.supabase) {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+function initSupabase() {
+  try {
+    if (window.supabase && typeof window.supabase.createClient === "function") {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      });
+      console.log("Supabase Client inicializado com sucesso.");
+    } else {
+      console.warn("SDK do Supabase ainda não carregou na página.");
+    }
+  } catch (err) {
+    console.error("Erro ao inicializar cliente Supabase:", err);
   }
-} catch (err) {
-  console.warn("Supabase não configurado ou credenciais pendentes:", err);
 }
+initSupabase();
 
 // Instâncias dos gráficos para evitar re-renderização duplicada
 let chartDistributionInstance = null;
@@ -92,6 +105,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Listener para Modo Demonstração
+  const btnDemoView = document.getElementById("btn-demo-view");
+  if (btnDemoView) {
+    btnDemoView.addEventListener("click", () => {
+      showDashboard({ email: "visitante.demo@radarsaojose.com" });
+    });
+  }
+
+  // Garantir inicialização do Supabase caso o script CDN tenha carregado com delay
+  if (!supabaseClient && typeof initSupabase === "function") {
+    initSupabase();
+  }
+
   // Verificar se há uma sessão ativa
   await checkActiveSession();
 });
@@ -155,14 +181,16 @@ async function handleLogin(e) {
       showDashboard(data.user);
     }
   } catch (err) {
-    console.error("Erro na autenticação:", err);
-    let msg = "Falha ao autenticar. Verifique suas credenciais.";
-    if (err.message.includes("Invalid login credentials")) {
-      msg = "E-mail ou senha incorretos.";
-    } else if (err.message.includes("Email not confirmed")) {
-      msg = "E-mail ainda não confirmado no Supabase.";
+    console.error("Erro detalhado na autenticação:", err);
+    let msg = err.message || "Falha ao autenticar.";
+    if (msg.includes("Invalid login credentials")) {
+      msg = "E-mail ou senha incorretos. Verifique se a senha está correta ou se o usuário foi criado.";
+    } else if (msg.includes("Email not confirmed")) {
+      msg = "E-mail ainda não confirmado. No Supabase (Auth > Users), clique no usuário e confirme-o ou marque 'Auto Confirm'.";
+    } else if (msg.includes("fetch") || msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
+      msg = `Erro de conexão com o Supabase: ${err.message}. Verifique a URL do projeto ou a chave.`;
     }
-    showLoginAlert(msg, "error");
+    showLoginAlert(`${msg} (Detalhe: ${err.message})`, "error");
   } finally {
     setLoginLoading(false);
   }
