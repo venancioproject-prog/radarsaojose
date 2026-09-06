@@ -2500,7 +2500,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const isHorizontal = options.horizontal === true;
   const totalSum = values.reduce((a, b) => a + b, 0);
 
-  function wrapTextLines(text, maxChars = 26) {
+  function wrapTextLines(text, maxChars = 20) {
     if (typeof text !== "string" || text.length <= maxChars) return text;
     const words = text.split(" ");
     const lines = [];
@@ -2514,11 +2514,11 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
       }
     });
     if (currentLine) lines.push(currentLine);
-    return lines.length > 1 ? lines : text;
+    return lines.length > 1 ? lines : [text];
   }
 
   // Prepara labels com quebra nativa de linha (array de strings) para barras horizontais
-  const chartLabels = isHorizontal ? labels.map(l => wrapTextLines(l, 25)) : (labels.length ? labels : ["Sem registros"]);
+  const chartLabels = isHorizontal ? labels.map(l => wrapTextLines(l, 18)) : (labels.length ? labels : ["Sem registros"]);
 
   const brandPalette = [
     "#0B2545", // Azul Petróleo Institucional
@@ -2592,8 +2592,8 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         padding: {
           top: type === "doughnut" || type === "pie" ? 10 : 15,
           bottom: type === "doughnut" || type === "pie" ? 10 : 10,
-          left: isHorizontal ? 20 : (type === "doughnut" || type === "pie" ? 10 : 10),
-          right: isHorizontal ? 40 : (type === "doughnut" || type === "pie" ? 10 : 10)
+          left: isHorizontal ? 10 : (type === "doughnut" || type === "pie" ? 10 : 10),
+          right: isHorizontal ? 45 : (type === "doughnut" || type === "pie" ? 10 : 10)
         }
       },
       plugins: {
@@ -2637,7 +2637,27 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           }
         }
       },
-      scales: isBar || isLine ? {
+      scales: isHorizontal ? {
+        y: {
+          beginAtZero: true,
+          grid: { display: false },
+          ticks: {
+            font: { size: 10, weight: 600 },
+            color: "#1E293B",
+            autoSkip: false,
+            padding: 12,
+            crossAlign: "far"
+          }
+        },
+        x: {
+          beginAtZero: true,
+          grid: { color: "#F1F5F9" },
+          ticks: {
+            font: { size: 10 },
+            precision: 0
+          }
+        }
+      } : (isBar || isLine ? {
         y: {
           beginAtZero: true,
           grid: { color: "#F1F5F9" },
@@ -2655,7 +2675,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
             font: { size: 10 }
           }
         }
-      } : {}
+      } : {})
     }
   });
 }
