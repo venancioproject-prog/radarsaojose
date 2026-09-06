@@ -773,12 +773,12 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 5. SITUAÇÃO DE TRABALHO: Ícones representativos com números absolutos e porcentagens
+      // 5. SITUAÇÃO DE TRABALHO: Ícones representativos com porcentagens
       if (qLower.includes("trabalho") && (qLower.includes("hoje") || qLower.includes("modelo") || qLower.includes("situação"))) {
         cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-semibold text-slate-400">Total: ' + total.toLocaleString("pt-BR") + ' respondentes • Situação Ocupacional</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Situação Ocupacional</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-center">' + renderWorkIconsGrid(dataMap, total) + '</div>';
         cardsGrid.appendChild(cardEl);
@@ -790,7 +790,7 @@ function processAndRenderDynamicCharts(records) {
         cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400">Mapa de Árvore (Treemap) • ' + total.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '<p class="text-[11px] font-medium text-slate-400">Mapa de Árvore (Treemap) • Distribuição Percentual</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-center">' + renderTreemapWidget(dataMap, total) + '</div>';
         cardsGrid.appendChild(cardEl);
@@ -1442,8 +1442,7 @@ function renderWorkIconsGrid(dataMap, total) {
           '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs font-bold text-slate-800 truncate" title="' + k + '">' + k + '</h4>' +
-          '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + count.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words" title="' + k + '">' + k + '</h4>' +
         '</div>' +
       '</div>' +
       '<div class="flex-shrink-0 text-right pl-2">' +
@@ -1767,35 +1766,28 @@ function renderTreemapWidget(dataMap, total) {
     }
 
     if (isHero) {
-      return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300">' +
-        '<div class="flex items-center justify-between gap-3 mb-2.5">' +
-          '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
-            '<div class="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 shadow-xs">' +
-              '<i class="' + iconClass + '"></i>' +
-            '</div>' +
-            '<h4 class="text-sm sm:text-base font-bold text-white leading-snug break-words" title="' + label + '">' + label + '</h4>' +
+      return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300">' +
+        '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
+          '<div class="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 shadow-xs">' +
+            '<i class="' + iconClass + '"></i>' +
           '</div>' +
-          '<span class="px-3 py-1 rounded-xl bg-white/25 backdrop-blur-md font-black text-sm sm:text-base text-white border border-white/30 shadow-xs flex-shrink-0">' + pct + '%</span>' +
+          '<h4 class="text-sm sm:text-base font-bold text-white leading-snug break-words" title="' + label + '">' + label + '</h4>' +
         '</div>' +
-        '<div class="flex items-center justify-between pt-2 border-t border-white/15 text-xs text-white/90 font-semibold">' +
-          '<span>' + count.toLocaleString("pt-BR") + ' respondentes</span>' +
-          '<span class="text-white/70 text-[11px] font-bold">Maioria dos Votos</span>' +
-        '</div>' +
+        '<span class="px-3 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-base sm:text-lg text-white border border-white/30 shadow-xs flex-shrink-0">' + pct + '%</span>' +
       '</div>';
     }
 
-    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[96px]">' +
+    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[90px]">' +
       '<div class="flex items-start gap-2 mb-2">' +
         '<div class="w-6 h-6 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-[11px] text-white flex-shrink-0 mt-0.5">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs font-bold leading-snug break-words text-white line-clamp-2" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-words text-white" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-between gap-2 pt-2 border-t border-white/15">' +
-        '<span class="px-2 py-0.5 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-xs">' + pct + '%</span>' +
-        '<span class="text-[11px] font-medium text-white/80 whitespace-nowrap">' + count.toLocaleString("pt-BR") + ' resp.</span>' +
+      '<div class="flex items-center justify-end pt-1.5 border-t border-white/15">' +
+        '<span class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   }
