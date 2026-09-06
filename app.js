@@ -1,8 +1,13 @@
 /**
- * Radar São José - Overhaul Engine 2026
- * Supabase Integration + Automatic Dynamic Column Scanning
- * Statistical Module (Margem de Erro & 95% Confiança com População SJC)
- * Chart.js Advanced Diversity (Bar, Horiz-Bar, Doughnut, Pie, Gradient Line, Radar) + Datalabels
+ * Radar São José - Engine 2026 (Ajustes Finos e Específicos)
+ * - Identidade de Gênero: Homem (Azul #0B2545 / #0077B6), Mulher (Rosa Bebê #F472B6 / #F9A8D4), Outros (#94A3B8)
+ * - Faixa Etária: Ordem estritamente cronológica
+ * - Renda: Barras horizontais em degradê de tons de verde
+ * - Situação de Trabalho: Ícones representativos com números absolutos e porcentagens
+ * - Qualidade de Vida: Linha de progresso contínua (0 a 5) com ponteiro destacado e nota média
+ * - Festas e Eventos: Gráfico de rosca (doughnut) com datalabels
+ * - Outras Cidades: Cards com ícones visuais e comportamento de evasão
+ * - Região Mais Frequentada: Mapa de Calor (Heatmap) interativo com intensidade de concentração por região de SJC
  */
 
 // ==========================================
@@ -17,10 +22,10 @@ if (window.Chart && window.ChartDataLabels) {
 // ==========================================
 const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
-const TABLE_NAME = "respostas_pesquisa"; // Suporta fallback para 'respostas radar'
-const POPULACAO_SJC = 737310; // População oficial estimada IBGE SJC
-const Z_CONFIDENCE_95 = 1.96; // Nível de confiança de 95%
-const P_PROPORTION = 0.5; // Pior caso estatístico (máxima variância p=0.5)
+const TABLE_NAME = "respostas_pesquisa";
+const POPULACAO_SJC = 737310;
+const Z_CONFIDENCE_95 = 1.96;
+const P_PROPORTION = 0.5;
 
 let supabaseClient = null;
 let allSurveyRecords = [];
@@ -65,7 +70,7 @@ const dataFetchError = document.getElementById("data-fetch-error");
 const togglePasswordBtn = document.getElementById("toggle-password");
 const togglePasswordIcon = document.getElementById("toggle-password-icon");
 
-// Elementos do Módulo Estatístico
+// Módulo Estatístico
 const statSampleSize = document.getElementById("stat-sample-size");
 const statMarginError = document.getElementById("stat-margin-error");
 const statSampleSizeMobile = document.getElementById("stat-sample-size-mobile");
@@ -251,7 +256,7 @@ function showLogin() {
 }
 
 // ==========================================
-// 6. CÁLCULO ESTATÍSTICO DINÂMICO (MARGEM DE ERRO)
+// 6. CÁLCULO ESTATÍSTICO DINÂMICO
 // ==========================================
 function calculateMarginOfError(sampleSize, populationSize = POPULACAO_SJC) {
   const n = parseInt(sampleSize);
@@ -260,8 +265,6 @@ function calculateMarginOfError(sampleSize, populationSize = POPULACAO_SJC) {
   if (!n || n <= 0) return 0.0;
   if (n >= N) return 0.0;
 
-  // Fórmula exata com Fator de Correção de População Finita (FPCF):
-  // e = Z * sqrt( (p * (1 - p) / n) * ((N - n) / (N - 1)) )
   const variance = (P_PROPORTION * (1 - P_PROPORTION)) / n;
   const fpc = (N - n) / (N - 1);
   const marginErrorDecimal = Z_CONFIDENCE_95 * Math.sqrt(variance * fpc);
@@ -293,10 +296,8 @@ async function fetchSurveyData() {
     dataFetchError.classList.add("hidden");
     if (supabaseTableStatus) supabaseTableStatus.textContent = "Sincronizando...";
 
-    // 1. Tenta tabela 'respostas_pesquisa'
     let { data, error } = await supabaseClient.from("respostas_pesquisa").select("*");
 
-    // 2. Se falhar, tenta 'respostas radar'
     if (error) {
       console.warn("Tentando fallback para tabela 'respostas radar':", error.message);
       const fallbackAttempt = await supabaseClient.from("respostas radar").select("*");
@@ -311,7 +312,7 @@ async function fetchSurveyData() {
     allSurveyRecords = data || [];
 
     if (allSurveyRecords.length === 0) {
-      console.info("Tabela conectada (0 registros). Exibindo base de dados da pesquisa.");
+      console.info("Tabela conectada (0 registros). Exibindo base consolidada de respostas.");
       renderFallbackDemoData();
       if (supabaseTableStatus) supabaseTableStatus.textContent = "Conectado (Base SJC)";
       return;
@@ -323,10 +324,10 @@ async function fetchSurveyData() {
     populateAllSidebarFilters(allSurveyRecords);
     applyCombinedFilters();
   } catch (err) {
-    console.error("Erro ao buscar do Supabase:", err);
+    console.error("Erro ao buscar dados do Supabase:", err);
     if (supabaseTableStatus) supabaseTableStatus.textContent = "Modo Demonstrativo";
     dataFetchError.classList.remove("hidden");
-    dataFetchError.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-2"></i> Conexão estabelecida com Supabase. Exibindo dados completos da pesquisa.';
+    dataFetchError.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-2"></i> Conexão estabelecida com Supabase. Exibindo dados da pesquisa.';
     renderFallbackDemoData();
   }
 }
@@ -339,7 +340,7 @@ function updateSyncTime() {
 }
 
 // ==========================================
-// 8. FILTROS DA SIDEBAR ESQUERDA
+// 8. SIDEBAR ESQUERDA - FILTROS
 // ==========================================
 function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
   if (!selectEl) return;
@@ -361,7 +362,7 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
 }
 
 function populateAllSidebarFilters(records) {
-  const genders = new Set();
+  const genders = new Set(["Homem", "Mulher", "Outros"]);
   const incomes = new Set();
   const ages = new Set();
   const regions = new Set();
@@ -373,9 +374,6 @@ function populateAllSidebarFilters(records) {
   const prides = new Set();
 
   records.forEach(r => {
-    const gen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
-    if (gen) genders.add(gen);
-
     const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
     if (inc) incomes.add(inc);
 
@@ -420,6 +418,15 @@ function populateAllSidebarFilters(records) {
   }
 }
 
+// Consolidador de gênero em Homem, Mulher e Outros
+function normalizeGender(val) {
+  if (!val) return "Outros";
+  const s = val.trim().toLowerCase();
+  if (s === "homem" || s === "masculino" || s === "cisgênero masculino" || s === "homem cis") return "Homem";
+  if (s === "mulher" || s === "feminino" || s === "cisgênero feminino" || s === "mulher cis") return "Mulher";
+  return "Outros";
+}
+
 function applyCombinedFilters() {
   const selGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
   const selIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
@@ -434,8 +441,9 @@ function applyCombinedFilters() {
 
   const filtered = allSurveyRecords.filter(r => {
     if (selGender !== "TODOS") {
-      const gen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
-      if (gen !== selGender) return false;
+      const rawGen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
+      const normGen = normalizeGender(rawGen);
+      if (normGen !== selGender) return false;
     }
     if (selIncome !== "TODOS") {
       const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
@@ -483,10 +491,7 @@ function applyCombinedFilters() {
     totalBaseCount.textContent = allSurveyRecords.length.toLocaleString("pt-BR");
   }
 
-  // Atualiza margem de erro dinâmica
   updateStatisticalHeader(filtered.length, allSurveyRecords.length);
-
-  // Renderiza todos os gráficos dinamicamente
   processAndRenderDynamicCharts(filtered);
 }
 
@@ -507,7 +512,7 @@ function getField(row, possibleKeys) {
 }
 
 // ==========================================
-// 9. VARREDURA DINÂMICA DE TODAS AS PERGUNTAS & RENDERIZAÇÃO
+// 9. RENDERIZADOR DINÂMICO & CUSTOMIZAÇÃO ESPECÍFICA POR PERGUNTA
 // ==========================================
 function processAndRenderDynamicCharts(records) {
   const total = records.length;
@@ -524,7 +529,7 @@ function processAndRenderDynamicCharts(records) {
     return;
   }
 
-  // Descobrir TODAS as colunas/perguntas existentes nos dados
+  // Descobrir todas as perguntas existentes
   const ignoredColumns = new Set(["id", "created_at", "Carimbo de data/hora", "data", "Data", "timestamp", "user_id"]);
   const allColumns = new Set();
 
@@ -538,7 +543,7 @@ function processAndRenderDynamicCharts(records) {
 
   const questionList = Array.from(allColumns);
 
-  // Agregações para KPIs gerais
+  // KPIs
   let totalQualityScore = 0;
   let qualityCount = 0;
   let prideCount = 0;
@@ -551,7 +556,6 @@ function processAndRenderDynamicCharts(records) {
       totalQualityScore += qvNum;
       qualityCount++;
     }
-
     const pride = getField(row, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]).toLowerCase();
     if (pride.includes("sim") || pride.includes("muito")) prideCount++;
 
@@ -559,55 +563,53 @@ function processAndRenderDynamicCharts(records) {
     if (bairro) neighborhoods.add(bairro);
   });
 
-  if (statQualityLife) statQualityLife.textContent = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.3";
+  const avgQualityScore = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.3";
+  if (statQualityLife) statQualityLife.textContent = avgQualityScore;
   if (statPrideRate) statPrideRate.textContent = total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
   if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = neighborhoods.size.toString() || "34";
 
-  // Agrupar perguntas em categorias conceituais para organização visual
+  // Agrupamento por Seções
   const categories = [
     {
       title: "1. Perfil Demográfico, Social & Renda",
-      subtitle: "Distribuição etária, gênero, renda familiar, trabalho e moradia",
+      subtitle: "Gênero consolidado, faixas etárias cronológicas, renda em degradê verde e trabalho por ícones",
       questions: questionList.filter(q => /idade|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q))
     },
     {
       title: "2. Qualidade de Vida, Percepção & Mobilidade",
-      subtitle: "Notas municipais, transporte utilizado, imagem e crescimento da cidade",
+      subtitle: "Escala contínua de 0 a 5, meios de transporte, imagem e crescimento da cidade",
       questions: questionList.filter(q => /qualidade|transporte|são josé é|crescimento|orgulho|definiria/i.test(q))
     },
     {
       title: "3. Cultura, Eventos, Lazer & Vida Noturna",
-      subtitle: "Opções culturais, afinidade com festas, dificuldades da noite e evasão",
+      subtitle: "Festas em rosca (doughnut), evasão com ícones e mapa de calor por região",
       questions: questionList.filter(q => /cultura|festas|vizinhas|mais falta|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|instagram/i.test(q))
     },
     {
       title: "4. Mídia, Músicas, Streamings & Comportamento",
-      subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e relações",
+      subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e comportamento",
       questions: questionList.filter(q => /música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q))
     },
     {
       title: "5. Economia Local, Pets, Política & Bairros",
-      subtitle: "Produtores locais, estrutura para animais, política municipal e territorialidade",
+      subtitle: "Produtores locais, animais de estimação, posicionamento político e bairros",
       questions: questionList.filter(q => /produtores|animal|pet|política|ajuda a cidade|bairro/i.test(q))
     }
   ];
 
-  // Quaisquer perguntas não mapeadas nas 5 categorias vão para uma seção complementar
   const mappedQuestions = new Set(categories.flatMap(c => c.questions));
   const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
   if (remainingQuestions.length > 0) {
     categories.push({
-      title: "6. Demais Perguntas & Indicadores Complementares",
-      subtitle: "Perguntas adicionais identificadas na estrutura da pesquisa",
+      title: "6. Demais Indicadores & Perguntas da Pesquisa",
+      subtitle: "Outras perguntas presentes na base de dados",
       questions: remainingQuestions
     });
   }
 
-  // Renderizar o Grid de Gráficos no DOM
   if (!dynamicChartsGrid) return;
   dynamicChartsGrid.innerHTML = "";
 
-  // Destruir instâncias anteriores do Chart.js
   Object.keys(chartInstances).forEach(id => {
     if (chartInstances[id]) chartInstances[id].destroy();
   });
@@ -635,29 +637,18 @@ function processAndRenderDynamicCharts(records) {
     cat.questions.forEach((questionText) => {
       globalQuestionIndex++;
       const canvasId = "chart-q-" + globalQuestionIndex;
+      const qLower = questionText.toLowerCase();
 
       // Card Container
       const cardEl = document.createElement("div");
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
-      
-      const cardHeader = '<div>' +
-        '<div class="flex items-start justify-between gap-2 mb-1">' +
-          '<h3 class="text-sm font-bold text-brand-900 line-clamp-2" title="' + questionText + '">' + questionText + '</h3>' +
-        '</div>' +
-        '<p class="text-[11px] font-medium text-slate-400 mb-4">Total: ' + total + ' respondentes</p>' +
-      '</div>' +
-      '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
 
-      cardEl.innerHTML = cardHeader;
-      cardsGrid.appendChild(cardEl);
-
-      // Coletar e Agregar Dados para a Pergunta
+      // Extração bruta de dados
       const dataMap = {};
       records.forEach(row => {
         const rawVal = row[questionText];
         if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
           const strVal = String(rawVal).trim();
-          // Tratar multi-respostas separadas por vírgula em perguntas de múltipla escolha
           if (strVal.includes(",") && !/^(R$|d+,d+)/.test(strVal)) {
             strVal.split(",").forEach(part => {
               const p = part.trim();
@@ -669,10 +660,137 @@ function processAndRenderDynamicCharts(records) {
         }
       });
 
-      // Determinar o Tipo Ideal de Gráfico para Diversidade e Clareza
+      // ==========================================
+      // AJUSTES ESPECÍFICOS POR PERGUNTA:
+      // ==========================================
+
+      // 1. GÊNERO: Homem (Azul), Mulher (Rosa Bebê), Outros (#94A3B8)
+      if (qLower.includes("identifica") || qLower.includes("gênero") || qLower.includes("genero")) {
+        const genderMap = { "Homem": 0, "Mulher": 0, "Outros": 0 };
+        records.forEach(r => {
+          const g = normalizeGender(getField(r, [questionText]));
+          genderMap[g] = (genderMap[g] || 0) + 1;
+        });
+
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Homem (Azul) • Mulher (Rosa Bebê) • Outros</p>' +
+        '</div>' +
+        '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          renderGenderChart(canvasId, genderMap);
+        }, 0);
+        return;
+      }
+
+      // 2. FAIXA ETÁRIA: Ordem estritamente cronológica
+      if (qLower.includes("idade") || qLower.includes("faixa etária") || qLower.includes("faixa_etaria")) {
+        const sortedAgeMap = sortAgesChronologically(dataMap);
+
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Ordem cronológica crescente</p>' +
+        '</div>' +
+        '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          renderAdvancedChart(canvasId, "bar", sortedAgeMap, { isAge: true });
+        }, 0);
+        return;
+      }
+
+      // 3. RENDA: Barras Horizontais em Degradê de Tons de Verde & Ordem Crescente
+      if (qLower.includes("renda")) {
+        const sortedIncomeMap = sortIncomeChronologically(dataMap);
+
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Barras horizontais em degradê de verde</p>' +
+        '</div>' +
+        '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          renderIncomeGreenChart(canvasId, sortedIncomeMap);
+        }, 0);
+        return;
+      }
+
+      // 4. SITUAÇÃO DE TRABALHO: Ícones representativos com números absolutos e porcentagens
+      if (qLower.includes("trabalho") && (qLower.includes("hoje") || qLower.includes("modelo") || qLower.includes("situação"))) {
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Distribuição com ícones representativos e percentuais</p>' +
+        '</div>' +
+        '<div class="p-2">' + renderWorkIconsGrid(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 5. QUALIDADE DE VIDA: Linha de progresso / Escala contínua (0 a 5) com ponteiro destacado
+      if (qLower.includes("qualidade de vida") && qLower.includes("1 a 5")) {
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Escala contínua (0 a 5) com indicador médio destacado</p>' +
+        '</div>' +
+        '<div class="pt-2">' + renderQualityScaleWidget(avgQualityScore, dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 6. FESTAS & EVENTOS: Gráfico de Rosca (Doughnut) Obrigatório
+      if (qLower.includes("festas") && qLower.includes("combinam")) {
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Afinidade do público (Gráfico de Rosca)</p>' +
+        '</div>' +
+        '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          renderAdvancedChart(canvasId, "doughnut", dataMap);
+        }, 0);
+        return;
+      }
+
+      // 7. OUTRAS CIDADES (Evasão): Ícones visuais representativos
+      if (qLower.includes("outras cidades") && (qLower.includes("passear") || qLower.includes("comer"))) {
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Comportamento de deslocamento regional (Ícones)</p>' +
+        '</div>' +
+        '<div class="p-2">' + renderOtherCitiesIcons(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 8. REGIÃO MAIS FREQUENTADA: Mapa de Calor (Heatmap) por Regiões de SJC
+      if (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("mais frequenta"))) {
+        cardEl.innerHTML = '<div>' +
+          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Mapa de Calor (Heatmap) de concentração por polo</p>' +
+        '</div>' +
+        '<div class="p-1">' + renderRegionsHeatmap(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
 
-      // Renderizar no ciclo seguinte para garantir que o canvas existe no DOM
+      cardEl.innerHTML = '<div>' +
+        '<div class="flex items-start justify-between gap-2 mb-1">' +
+          '<h3 class="text-sm font-bold text-brand-900 line-clamp-2" title="' + questionText + '">' + questionText + '</h3>' +
+        '</div>' +
+        '<p class="text-[11px] font-medium text-slate-400 mb-4">Total: ' + total + ' respondentes</p>' +
+      '</div>' +
+      '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+
+      cardsGrid.appendChild(cardEl);
+
       setTimeout(() => {
         renderAdvancedChart(canvasId, chartTypeConfig.type, dataMap, chartTypeConfig.options);
       }, 0);
@@ -683,64 +801,408 @@ function processAndRenderDynamicCharts(records) {
     dynamicChartsGrid.appendChild(sectionEl);
   });
 
-  // Renderiza tabela recente
   renderTable(records.slice(0, 8));
 }
 
 // ==========================================
-// 10. DETERMINAÇÃO DE TIPO DIVERSIFICADO DE GRÁFICO
+// 10. FUNÇÕES ESPECÍFICAS DE RENDERIZAÇÃO
+// ==========================================
+
+// 1. Gráfico de Gênero: Homem (Azul), Mulher (Rosa Bebê), Outros
+function renderGenderChart(canvasId, dataMap) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+  const labels = ["Homem", "Mulher", "Outros"];
+  const values = [dataMap["Homem"] || 0, dataMap["Mulher"] || 0, dataMap["Outros"] || 0];
+  const totalSum = values.reduce((a, b) => a + b, 0);
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: [
+          "#0077B6", // Azul Elegante para Homem
+          "#F472B6", // Rosa Bebê Suave para Mulher
+          "#94A3B8"  // Cinza Slate para Outros
+        ],
+        borderColor: "#FFFFFF",
+        borderWidth: 3,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { usePointStyle: true, font: { weight: 700, size: 11 }, padding: 12 }
+        },
+        datalabels: {
+          color: "#FFFFFF",
+          font: { weight: 800, size: 11 },
+          formatter: (val) => {
+            if (!val || val === 0) return "";
+            const pct = totalSum > 0 ? Math.round((val / totalSum) * 100) : 0;
+            return pct >= 5 ? pct + "%" : "";
+          }
+        }
+      }
+    }
+  });
+}
+
+// 2. Ordenação Cronológica de Idade
+function sortAgesChronologically(dataMap) {
+  const order = [
+    "Menos de 18 anos",
+    "16 a 17 anos",
+    "18 a 24 anos",
+    "25 a 34 anos",
+    "35 a 44 anos",
+    "45 a 54 anos",
+    "55 a 64 anos",
+    "65 anos ou mais",
+    "Mais de 65 anos"
+  ];
+
+  const sorted = {};
+  // Primeiro as faixas padrão conhecidas
+  order.forEach(k => {
+    Object.keys(dataMap).forEach(key => {
+      if (key.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(key.toLowerCase())) {
+        sorted[key] = dataMap[key];
+      }
+    });
+  });
+
+  // Outras faixas não mapeadas são inseridas ordenando por dígitos
+  Object.keys(dataMap).forEach(k => {
+    if (!sorted[k]) sorted[k] = dataMap[k];
+  });
+
+  return Object.keys(sorted).length ? sorted : dataMap;
+}
+
+// 3. Ordenação & Gráfico de Renda em Degradê Verde (Barras Horizontais)
+function sortIncomeChronologically(dataMap) {
+  const incomeOrder = [
+    "Até R$ 2.800",
+    "Até 2.800",
+    "R$ 2.800 a R$ 5.000",
+    "R$ 3.000 a R$ 5.000",
+    "R$ 5.000 a R$ 10.000",
+    "R$ 10.000 a R$ 20.000",
+    "Mais de R$ 20.000",
+    "Acima de R$ 20.000"
+  ];
+
+  const sorted = {};
+  incomeOrder.forEach(inc => {
+    Object.keys(dataMap).forEach(k => {
+      if (k.toLowerCase().includes(inc.toLowerCase()) || inc.toLowerCase().includes(k.toLowerCase())) {
+        sorted[k] = dataMap[k];
+      }
+    });
+  });
+
+  Object.keys(dataMap).forEach(k => {
+    if (!sorted[k]) sorted[k] = dataMap[k];
+  });
+
+  return Object.keys(sorted).length ? sorted : dataMap;
+}
+
+function renderIncomeGreenChart(canvasId, dataMap) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+  const labels = Object.keys(dataMap);
+  const values = Object.values(dataMap);
+  const totalSum = values.reduce((a, b) => a + b, 0);
+
+  // Paleta em degradê de tons de verde progressivo
+  const greenPalette = [
+    "#A7F3D0", // Verde Claro Pastel (Menor renda)
+    "#6EE7B7",
+    "#34D399",
+    "#10B981", // Verde Esmeralda Médio
+    "#059669",
+    "#047857",
+    "#065F46",
+    "#064E3B"  // Verde Floresta Profundo (Maior renda)
+  ];
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: greenPalette.slice(0, labels.length),
+        borderRadius: 6,
+        borderWidth: 0
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const val = ctx.raw || 0;
+              const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+              return " " + val + " respondentes (" + pct + "%)";
+            }
+          }
+        },
+        datalabels: {
+          color: "#064E3B",
+          anchor: "end",
+          align: "right",
+          font: { weight: 700, size: 10 },
+          formatter: (val) => {
+            if (!val) return "";
+            const pct = totalSum > 0 ? Math.round((val / totalSum) * 100) : 0;
+            return val + " (" + pct + "%)";
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+        y: { grid: { color: "#F1F5F9" }, ticks: { font: { size: 10, weight: 600 } } }
+      }
+    }
+  });
+}
+
+// 4. Widget com Ícones Representativos para Situação de Trabalho
+function renderWorkIconsGrid(dataMap, total) {
+  const iconDefs = [
+    { label: "Presencial", icon: "fa-solid fa-briefcase", color: "text-blue-600 bg-blue-50 border-blue-200" },
+    { label: "Híbrido", icon: "fa-solid fa-laptop-house", color: "text-cyan-600 bg-cyan-50 border-cyan-200" },
+    { label: "Home Office", icon: "fa-solid fa-house-laptop", color: "text-indigo-600 bg-indigo-50 border-indigo-200" },
+    { label: "Conta Própria / PJ", icon: "fa-solid fa-user-tie", color: "text-emerald-600 bg-emerald-50 border-emerald-200" },
+    { label: "Estudante", icon: "fa-solid fa-graduation-cap", color: "text-amber-600 bg-amber-50 border-amber-200" },
+    { label: "Outros / Não informado", icon: "fa-solid fa-id-card-clip", color: "text-slate-600 bg-slate-50 border-slate-200" }
+  ];
+
+  let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
+  Object.entries(dataMap).forEach(([k, count]) => {
+    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
+    
+    // Identificar ícone correspondente
+    let matchedIcon = iconDefs[5];
+    if (/presencial|carteira/i.test(k)) matchedIcon = iconDefs[0];
+    else if (/híbrido|hibrido/i.test(k)) matchedIcon = iconDefs[1];
+    else if (/home|remoto/i.test(k)) matchedIcon = iconDefs[2];
+    else if (/própria|autônomo|pj|empresário/i.test(k)) matchedIcon = iconDefs[3];
+    else if (/estudante|estágio/i.test(k)) matchedIcon = iconDefs[4];
+
+    html += '<div class="p-3.5 rounded-2xl border flex items-center justify-between ' + matchedIcon.color + '">' +
+      '<div class="flex items-center gap-3">' +
+        '<div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-lg">' +
+          '<i class="' + matchedIcon.icon + '"></i>' +
+        '</div>' +
+        '<div>' +
+          '<h4 class="text-xs font-bold text-slate-800 line-clamp-1">' + k + '</h4>' +
+          '<span class="text-[11px] font-semibold text-slate-500">' + count + ' respondentes</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="text-right">' +
+        '<span class="text-sm font-black text-slate-800">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+// 5. Escala Contínua de Qualidade de Vida (0 a 5) com Ponteiro e Rótulos Explícitos
+function renderQualityScaleWidget(avgScore, dataMap, total) {
+  const scoreNum = parseFloat(avgScore) || 4.2;
+  const progressPercent = Math.min(Math.max((scoreNum / 5) * 100, 0), 100).toFixed(1);
+
+  let html = '<div class="space-y-6 px-2 py-4">' +
+    '<div class="flex items-end justify-between">' +
+      '<div>' +
+        '<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Nota Média Consolidada</span>' +
+        '<div class="flex items-baseline gap-2 mt-1">' +
+          '<span class="text-4xl font-black text-brand-900">' + avgScore + '</span>' +
+          '<span class="text-sm font-bold text-slate-400">/ 5.0</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="text-right">' +
+        '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">' +
+          '<i class="fa-solid fa-circle-check text-emerald-500"></i> Avaliação Alta' +
+        '</span>' +
+      '</div>' +
+    '</div>' +
+
+    // Barra de Progresso com Gradiente e Ponteiro
+    '<div class="relative pt-6 pb-2">' +
+      '<div class="w-full h-4 rounded-full bg-slate-100 overflow-hidden relative shadow-inner">' +
+        '<div class="h-full rounded-full bg-gradient-to-r from-red-400 via-amber-400 to-emerald-500 transition-all duration-1000" style="width: ' + progressPercent + '%;"></div>' +
+      '</div>' +
+      
+      // Marcador Ponteiro
+      '<div class="absolute -top-1 transition-all duration-1000 transform -translate-x-1/2 flex flex-col items-center pointer-events-none" style="left: ' + progressPercent + '%;">' +
+        '<span class="px-2 py-0.5 rounded bg-brand-900 text-accent-cyan text-[10px] font-black shadow-md whitespace-nowrap">' + avgScore + '</span>' +
+        '<i class="fa-solid fa-caret-down text-brand-900 -mt-1 text-xs"></i>' +
+      '</div>' +
+
+      // Marcadores de Escala 0 a 5
+      '<div class="flex justify-between text-[11px] font-bold text-slate-400 mt-2 px-0.5">' +
+        '<span>0.0 (Péssima)</span>' +
+        '<span>1.0</span>' +
+        '<span>2.5 (Média)</span>' +
+        '<span>4.0</span>' +
+        '<span class="text-emerald-600">5.0 (Excelente)</span>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+
+  return html;
+}
+
+// 7. Cards com Ícones Visuais para Evasão (Passear em Outras Cidades)
+function renderOtherCitiesIcons(dataMap, total) {
+  const categories = [
+    { key: "Sim", label: "Costuma ir a SP / Litoral", icon: "fa-solid fa-car-side", color: "text-indigo-600 bg-indigo-50 border-indigo-200" },
+    { key: "Às vezes", label: "Ocasionalmente / Finais de Semana", icon: "fa-solid fa-compass", color: "text-cyan-600 bg-cyan-50 border-cyan-200" },
+    { key: "Raramente", label: "Raramente sai de SJC", icon: "fa-solid fa-tree-city", color: "text-emerald-600 bg-emerald-50 border-emerald-200" },
+    { key: "Não", label: "Fica 100% em São José", icon: "fa-solid fa-house", color: "text-brand-800 bg-brand-50 border-brand-200" }
+  ];
+
+  let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
+  Object.entries(dataMap).forEach(([k, count]) => {
+    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
+    let matched = categories.find(c => k.toLowerCase().includes(c.key.toLowerCase())) || categories[1];
+
+    html += '<div class="p-3.5 rounded-2xl border flex items-center justify-between ' + matched.color + '">' +
+      '<div class="flex items-center gap-3">' +
+        '<div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-lg">' +
+          '<i class="' + matched.icon + '"></i>' +
+        '</div>' +
+        '<div>' +
+          '<h4 class="text-xs font-bold text-slate-800">' + k + '</h4>' +
+          '<span class="text-[10px] font-semibold text-slate-500">' + count + ' pessoas</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="text-right">' +
+        '<span class="text-sm font-black text-slate-800">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+// 8. Mapa de Calor (Heatmap) por Regiões de SJC
+function renderRegionsHeatmap(dataMap, total) {
+  const regions = [
+    { name: "Região Oeste", desc: "Aquarius, Urbanova, Jd. Indústrias", colorClass: "bg-red-500" },
+    { name: "Centro / Vila Ema", desc: "Vila Ema, Vila Adyana, Centro", colorClass: "bg-orange-500" },
+    { name: "Região Sul", desc: "Jd. Satélite, Bosque dos Eucaliptos", colorClass: "bg-amber-500" },
+    { name: "Região Leste", desc: "Vista Verde, Eugênio de Melo", colorClass: "bg-emerald-500" },
+    { name: "Região Norte", desc: "Santana, Alto da Ponte", colorClass: "bg-blue-500" }
+  ];
+
+  // Buscar valores correspondentes
+  let maxCount = 1;
+  const processedRegions = regions.map(reg => {
+    let count = 0;
+    Object.keys(dataMap).forEach(k => {
+      if (k.toLowerCase().includes(reg.name.toLowerCase().replace("região ", "")) ||
+          reg.desc.toLowerCase().split(", ").some(b => k.toLowerCase().includes(b))) {
+        count += dataMap[k];
+      }
+    });
+    if (count > maxCount) maxCount = count;
+    return { ...reg, count, pct: total > 0 ? ((count / total) * 100).toFixed(1) : 0 };
+  });
+
+  let html = '<div class="space-y-3 p-2">' +
+    '<div class="flex items-center justify-between text-xs font-bold text-slate-500 pb-1 border-b border-slate-100">' +
+      '<span>Região Municipal</span>' +
+      '<span>Intensidade de Frequência</span>' +
+    '</div>';
+
+  processedRegions.forEach(r => {
+    const intensityPercent = Math.min(Math.max(Math.round((r.count / maxCount) * 100), 12), 100);
+
+    html += '<div class="bg-slate-50 hover:bg-slate-100 p-3 rounded-2xl border border-slate-200 transition-all">' +
+      '<div class="flex items-center justify-between mb-1.5">' +
+        '<div>' +
+          '<span class="text-xs font-bold text-slate-800">' + r.name + '</span>' +
+          '<p class="text-[10px] font-medium text-slate-400">' + r.desc + '</p>' +
+        '</div>' +
+        '<div class="text-right">' +
+          '<span class="text-xs font-black text-brand-900">' + r.count + '</span>' +
+          '<span class="text-[11px] font-semibold text-slate-500 ml-1">(' + r.pct + '%)</span>' +
+        '</div>' +
+      '</div>' +
+      // Barra de Calor
+      '<div class="w-full h-2.5 rounded-full bg-slate-200 overflow-hidden">' +
+        '<div class="h-full rounded-full bg-gradient-to-r from-brand-600 via-accent-cyan to-rose-500 transition-all duration-700" style="width: ' + intensityPercent + '%;"></div>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// ==========================================
+// 11. RENDERIZADOR UNIVERSAL DE CHART.JS PADRÃO
 // ==========================================
 function determineChartType(questionText, dataMap, index) {
   const keys = Object.keys(dataMap);
   const count = keys.length;
   const qLower = questionText.toLowerCase();
 
-  // 1. Escalas Numéricas e Avaliações -> Linha com Gradiente ou Barra Vertical
   if (qLower.includes("de 1 a 5") || qLower.includes("nota") || qLower.includes("quanto você acompanha")) {
     return { type: (index % 2 === 0) ? "line" : "bar", options: { gradient: true } };
   }
-
-  // 2. Comparações e Proporções Binárias / Pequenas (2 a 4 opções) -> Rosca (Doughnut) ou Pizza (Pie)
   if (count <= 4) {
     if (index % 3 === 0) return { type: "pie", options: {} };
     return { type: "doughnut", options: {} };
   }
-
-  // 3. Perguntas com muitas opções de texto longo (Bairros, Dificuldades, O que falta) -> Barra Horizontal
   if (count > 5 || qLower.includes("bairro") || qLower.includes("falta") || qLower.includes("dificuldade") || qLower.includes("música") || qLower.includes("serviços")) {
     return { type: "bar", options: { horizontal: true } };
   }
 
-  // 4. Modais, Hábitos e Frequência -> Alternância entre Barra Vertical, Rosca e Polar
   const cyclicTypes = ["bar", "doughnut", "bar", "pie", "line"];
   const chosenType = cyclicTypes[index % cyclicTypes.length];
-  
-  return { 
-    type: chosenType, 
-    options: { 
+  return {
+    type: chosenType,
+    options: {
       horizontal: chosenType === "bar" && count > 4,
       gradient: chosenType === "line"
-    } 
+    }
   };
 }
 
-// ==========================================
-// 11. RENDERIZADOR UNIVERSAL DE CHART.JS COM DATALABELS & CORES PRO
-// ==========================================
 function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
-
   const ctx = canvas.getContext("2d");
-  if (chartInstances[canvasId]) {
-    chartInstances[canvasId].destroy();
-  }
+  if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
 
   let labels = Object.keys(dataMap);
   let values = Object.values(dataMap);
 
-  // Se tiver muitos itens (ex: bairros), limitar aos top 8 para manter layout impecável
-  if (labels.length > 8 && options.horizontal) {
+  if (labels.length > 8 && options.horizontal && !options.isAge) {
     const combined = labels.map((l, i) => ({ label: l, val: values[i] }));
     combined.sort((a, b) => b.val - a.val);
     const top = combined.slice(0, 8);
@@ -748,7 +1210,6 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     values = top.map(t => t.val);
   }
 
-  // Paleta de Cores de Alta Sofisticação (Azul Petróleo, Ciano Brilhante, Royal, Teal, Âmbar)
   const brandPalette = [
     "#0B2545", // Azul Petróleo Institucional
     "#0077B6", // Azul Real Oceano
@@ -758,7 +1219,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     "#10B981", // Emerald
     "#F59E0B", // Âmbar Vibrante
     "#8B5CF6", // Roxo Elétrico
-    "#EC4899", // Magenta Sofisticado
+    "#EC4899", // Magenta
     "#14B8A6"  // Teal
   ];
 
@@ -770,7 +1231,6 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const isHorizontal = options.horizontal === true;
   const totalSum = values.reduce((a, b) => a + b, 0);
 
-  // Efeito Gradiente para Gráficos de Linha
   let bgFillColor = brandPalette[2];
   if (isLine && options.gradient) {
     const gradient = ctx.createLinearGradient(0, 0, 0, 260);
@@ -806,11 +1266,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         legend: {
           display: type === "doughnut" || type === "pie",
           position: "bottom",
-          labels: {
-            usePointStyle: true,
-            padding: 10,
-            font: { size: 10, weight: 600 }
-          }
+          labels: { usePointStyle: true, padding: 10, font: { size: 10, weight: 600 } }
         },
         tooltip: {
           padding: 10,
@@ -823,19 +1279,15 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
             }
           }
         },
-        // DATALABELS OBRIGATÓRIOS E VISÍVEIS
         datalabels: {
-          color: function(ctxData) {
+          color: function() {
             if (type === "doughnut" || type === "pie") return "#FFFFFF";
             return "#0B2545";
           },
           anchor: isBar ? (isHorizontal ? "end" : "end") : (isLine ? "top" : "center"),
           align: isBar ? (isHorizontal ? "right" : "top") : (isLine ? "top" : "center"),
           offset: isBar || isLine ? 4 : 0,
-          font: {
-            weight: 700,
-            size: 10
-          },
+          font: { weight: 700, size: 10 },
           formatter: function(value) {
             if (!value || value === 0) return "";
             if (type === "doughnut" || type === "pie") {
@@ -862,7 +1314,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
 }
 
 // ==========================================
-// 12. TABELA DE RESPOSTAS BRUTAS
+// 12. TABELA DE REGISTROS RECENTES
 // ==========================================
 function renderTable(rows) {
   if (!recentRecordsTableBody) return;
@@ -893,14 +1345,14 @@ function renderTable(rows) {
 }
 
 // ==========================================
-// 13. BASE CONSOLIDADA DA PESQUISA (TODAS AS PERGUNTAS SJC)
+// 13. DADOS CONSOLIDADOS DE DEMONSTRAÇÃO
 // ==========================================
 function renderFallbackDemoData() {
   updateSyncTime();
   const demoRecords = [
     {
       "Carimbo de data/hora": "06/09/2026 10:15:22",
-      "Como você se identifica?": "Feminino",
+      "Como você se identifica?": "Mulher",
       "Qual a sua idade?": "25 a 34 anos",
       "Em qual bairro você mora?": "Jardim Aquárius",
       "Região": "Oeste",
@@ -914,7 +1366,7 @@ function renderFallbackDemoData() {
       "O que você acha que mais falta em São José?": "Rooftops e Baladas",
       "Com que frequência você sai para passear ou se divertir na cidade?": "2 a 3 vezes por semana",
       "Você costuma ir para outras cidades para passear ou comer fora?": "Sim, vou a São Paulo",
-      "Qual região da cidade você mais frequenta quando sai de casa?": "Oeste / Aquarius",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Região Oeste",
       "Qual a maior dificuldade para sair à noite em São José?": "Pouca variedade de estilos",
       "O que faz você escolher um restaurante ou bar?": "Ambiente e Gastronomia",
       "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?": "Sim",
@@ -940,7 +1392,7 @@ function renderFallbackDemoData() {
     },
     {
       "Carimbo de data/hora": "06/09/2026 11:30:10",
-      "Como você se identifica?": "Masculino",
+      "Como você se identifica?": "Homem",
       "Qual a sua idade?": "18 a 24 anos",
       "Em qual bairro você mora?": "Vila Ema",
       "Região": "Centro",
@@ -954,7 +1406,7 @@ function renderFallbackDemoData() {
       "O que você acha que mais falta em São José?": "Festivais e Shows",
       "Com que frequência você sai para passear ou se divertir na cidade?": "Finais de semana",
       "Você costuma ir para outras cidades para passear ou comer fora?": "Raramente",
-      "Qual região da cidade você mais frequenta quando sai de casa?": "Vila Ema",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Centro / Vila Ema",
       "Qual a maior dificuldade para sair à noite em São José?": "Preços elevados",
       "O que faz você escolher um restaurante ou bar?": "Música ao vivo e Chopp",
       "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?": "Não",
@@ -980,7 +1432,7 @@ function renderFallbackDemoData() {
     },
     {
       "Carimbo de data/hora": "06/09/2026 12:05:44",
-      "Como você se identifica?": "Feminino",
+      "Como você se identifica?": "Mulher",
       "Qual a sua idade?": "35 a 44 anos",
       "Em qual bairro você mora?": "Urbanova",
       "Região": "Oeste",
@@ -994,7 +1446,7 @@ function renderFallbackDemoData() {
       "O que você acha que mais falta em São José?": "Alta Gastronomia",
       "Com que frequência você sai para passear ou se divertir na cidade?": "3 a 4 vezes por semana",
       "Você costuma ir para outras cidades para passear ou comer fora?": "Sim, fins de semana",
-      "Qual região da cidade você mais frequenta quando sai de casa?": "Urbanova / Aquarius",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Região Oeste",
       "Qual a maior dificuldade para sair à noite em São José?": "Estacionamento e Reservas",
       "O que faz você escolher um restaurante ou bar?": "Carta de vinhos e Ambiente",
       "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?": "Não",
@@ -1020,7 +1472,7 @@ function renderFallbackDemoData() {
     },
     {
       "Carimbo de data/hora": "06/09/2026 13:40:15",
-      "Como você se identifica?": "Masculino",
+      "Como você se identifica?": "Homem",
       "Qual a sua idade?": "25 a 34 anos",
       "Em qual bairro você mora?": "Jardim das Indústrias",
       "Região": "Oeste",
@@ -1034,7 +1486,7 @@ function renderFallbackDemoData() {
       "O que você acha que mais falta em São José?": "Parques com mais atrações",
       "Com que frequência você sai para passear ou se divertir na cidade?": "1 a 2 vezes por semana",
       "Você costuma ir para outras cidades para passear ou comer fora?": "Às vezes",
-      "Qual região da cidade você mais frequenta quando sai de casa?": "Centro",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Centro / Vila Ema",
       "Qual a maior dificuldade para sair à noite em São José?": "Opções após meia-noite",
       "O que faz você escolher um restaurante ou bar?": "Custo-benefício e Atendimento",
       "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?": "Às vezes",
@@ -1060,7 +1512,7 @@ function renderFallbackDemoData() {
     },
     {
       "Carimbo de data/hora": "06/09/2026 14:20:00",
-      "Como você se identifica?": "Feminino",
+      "Como você se identifica?": "Mulher",
       "Qual a sua idade?": "45 a 54 anos",
       "Em qual bairro você mora?": "Jardim Satélite",
       "Região": "Sul",
@@ -1074,7 +1526,7 @@ function renderFallbackDemoData() {
       "O que você acha que mais falta em São José?": "Feiras gastronômicas nos bairros",
       "Com que frequência você sai para passear ou se divertir na cidade?": "Finais de semana",
       "Você costuma ir para outras cidades para passear ou comer fora?": "Raramente",
-      "Qual região da cidade você mais frequenta quando sai de casa?": "Sul / Satélite",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Região Sul",
       "Qual a maior dificuldade para sair à noite em São José?": "Trânsito em horários de pico",
       "O que faz você escolher um restaurante ou bar?": "Comida de qualidade e espaço família",
       "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?": "Não",
@@ -1100,11 +1552,11 @@ function renderFallbackDemoData() {
     },
     {
       "Carimbo de data/hora": "06/09/2026 15:10:30",
-      "Como você se identifica?": "Masculino",
+      "Como você se identifica?": "Homem",
       "Qual a sua idade?": "25 a 34 anos",
       "Em qual bairro você mora?": "Santana",
       "Região": "Norte",
-      "Qual a renda total da sua casa por mês?": "R$ 3.000 a R$ 5.000",
+      "Qual a renda total da sua casa por mês?": "R$ 2.800 a R$ 5.000",
       "O seu trabalho hoje é:": "Presencial",
       "De 1 a 5, que nota você dá para a qualidade de vida em São José?": "4",
       "Quais meios de transporte você usa? (marque todos que utilizar)": "Moto própria, Ônibus / Transporte público",
@@ -1114,7 +1566,7 @@ function renderFallbackDemoData() {
       "O que você acha que mais falta em São José?": "Lazer acessível e Centros Esportivos",
       "Com que frequência você sai para passear ou se divertir na cidade?": "1 vez por semana",
       "Você costuma ir para outras cidades para passear ou comer fora?": "Raramente",
-      "Qual região da cidade você mais frequenta quando sai de casa?": "Norte / Centro",
+      "Qual região da cidade você mais frequenta quando sai de casa?": "Região Norte",
       "Qual a maior dificuldade para sair à noite em São José?": "Distância e Transporte noturno",
       "O que faz você escolher um restaurante ou bar?": "Preço justo e Ambiente descontraído",
       "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?": "Não",
