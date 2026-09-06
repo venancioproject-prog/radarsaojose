@@ -1857,26 +1857,26 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
   const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "25.8";
 
   let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full py-1">' +
-    // CARD SIM (Sorrindo - Metade superior da imagem fotos radar/simounao.jpg)
+    // CARD SIM (Sorrindo)
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">' +
-      '<div class="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-900">' +
-        // Imagem cortada no topo (sorrindo)
-        '<img src="fotos radar/simounao.jpg" alt="Sim - Tenho Orgulho" class="w-full h-[200%] object-cover object-top transition-transform duration-500 group-hover:scale-105" style="object-position: center top;" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
+      '<div class="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">' +
+        // Imagem dedicada Sim (sorrindo)
+        '<img src="fotos radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
         // Gradiente escuro para legibilidade perfeita dos textos sobre a imagem
-        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/40 to-transparent"></div>' +
+        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/35 to-transparent"></div>' +
         // Badge superior "SIM"
         '<div class="absolute top-2.5 left-2.5">' +
           '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/95 text-white font-black text-xs shadow-md backdrop-blur-xs tracking-wide">' +
             '<i class="fa-solid fa-face-smile text-sm"></i> SIM' +
           '</span>' +
         '</div>' +
-        // Porcentagem e Contagem posicionadas sobre a foto
-        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between">' +
-          '<div>' +
-            '<p class="text-white font-bold text-xs leading-tight drop-shadow-sm">Tenho Orgulho</p>' +
-            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm">' + simCount.toLocaleString("pt-BR") + ' respondentes</p>' +
+        // Porcentagem e Contagem posicionadas sobre a foto sem cortes
+        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between gap-2">' +
+          '<div class="min-w-0 flex-1">' +
+            '<p class="text-white font-bold text-xs sm:text-sm leading-tight drop-shadow-sm truncate">Tenho Orgulho</p>' +
+            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm mt-0.5">' + simCount.toLocaleString("pt-BR") + ' votos</p>' +
           '</div>' +
-          '<div class="px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-emerald-700 font-black text-xl sm:text-2xl shadow-lg border border-emerald-200 tracking-tight">' +
+          '<div class="px-2.5 sm:px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-emerald-700 font-black text-base sm:text-lg shadow-lg border border-emerald-200 tracking-tight flex-shrink-0">' +
             simPct + '%' +
           '</div>' +
         '</div>' +
@@ -1887,26 +1887,26 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
       '</div>' +
     '</div>' +
 
-    // CARD NÃO (Triste - Metade inferior da imagem fotos radar/simounao.jpg)
+    // CARD NÃO (Triste)
     '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">' +
-      '<div class="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-900">' +
-        // Imagem cortada na base (triste/preto e branco)
-        '<img src="fotos radar/simounao.jpg" alt="Não - Sem Orgulho" class="w-full h-[200%] object-cover transition-transform duration-500 group-hover:scale-105" style="object-position: center bottom; margin-top: -100%;" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
+      '<div class="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">' +
+        // Imagem dedicada Não (triste / P&B)
+        '<img src="fotos radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
         // Gradiente escuro para legibilidade perfeita dos textos sobre a imagem
-        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/40 to-transparent"></div>' +
+        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/35 to-transparent"></div>' +
         // Badge superior "NÃO"
         '<div class="absolute top-2.5 left-2.5">' +
           '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-700/95 text-white font-black text-xs shadow-md backdrop-blur-xs tracking-wide">' +
             '<i class="fa-solid fa-face-frown text-sm"></i> NÃO' +
           '</span>' +
         '</div>' +
-        // Porcentagem e Contagem posicionadas sobre a foto
-        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between">' +
-          '<div>' +
-            '<p class="text-white font-bold text-xs leading-tight drop-shadow-sm">Não Tenho</p>' +
-            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm">' + naoCount.toLocaleString("pt-BR") + ' respondentes</p>' +
+        // Porcentagem e Contagem posicionadas sobre a foto sem cortes
+        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between gap-2">' +
+          '<div class="min-w-0 flex-1">' +
+            '<p class="text-white font-bold text-xs sm:text-sm leading-tight drop-shadow-sm truncate">Não Tenho</p>' +
+            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm mt-0.5">' + naoCount.toLocaleString("pt-BR") + ' votos</p>' +
           '</div>' +
-          '<div class="px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-slate-800 font-black text-xl sm:text-2xl shadow-lg border border-slate-200 tracking-tight">' +
+          '<div class="px-2.5 sm:px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-slate-800 font-black text-base sm:text-lg shadow-lg border border-slate-200 tracking-tight flex-shrink-0">' +
             naoPct + '%' +
           '</div>' +
         '</div>' +
