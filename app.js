@@ -797,22 +797,16 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 7. CASA PRÓPRIA: Gráfico de Pizza Centralizado com Alta Legibilidade
+      // 7. CASA PRÓPRIA: Tabela Visual com Ilustrações Estilo Studio Ghibli e Porcentagens
       if (qLower.includes("casa própria") || qLower.includes("casa_propria") || qLower.includes("casa propria")) {
-        cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
-        cardEl.innerHTML = '<div class="mb-2">' +
+        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">Você tem Casa Própria?</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-2">Total: ' + total.toLocaleString("pt-BR") + ' respondentes • Situação Habitacional</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Situação Habitacional</p>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col items-center justify-center min-h-[250px] w-full">' +
-          '<div class="chart-container w-full h-[240px] flex items-center justify-center"><canvas id="' + canvasId + '"></canvas></div>' +
-        '</div>';
+        '<div class="flex-1 flex flex-col justify-center">' + renderHouseGhibliCardsWidget(dataMap, total) + '</div>';
 
         cardsGrid.appendChild(cardEl);
-
-        setTimeout(() => {
-          renderHouseOwnershipChart(canvasId, dataMap);
-        }, 0);
         return;
       }
 
@@ -1026,6 +1020,91 @@ function renderYesNoPieChart(canvasId, dataMap) {
       }
     }
   });
+}
+
+// Gráfico / Tabela Visual Específica de Moradia com Ilustrações Estilo Studio Ghibli
+function renderHouseGhibliCardsWidget(dataMap, total) {
+  function getGhibliHouseConfig(key) {
+    const k = key.toLowerCase();
+    if (k.includes("tenho") || (k.includes("casa própria") && !k.includes("aluguel"))) {
+      return {
+        title: "Tenho Casa Própria",
+        subtitle: "Imóvel próprio quitado ou financiado",
+        image: "fotos radar/ghibli_casa_propria.jpg",
+        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        border: "border-emerald-200 hover:border-emerald-300",
+        tag: "Proprietário",
+        tagBg: "bg-emerald-100 text-emerald-800"
+      };
+    }
+    if (k.includes("quero") && !k.includes("não quero") && !k.includes("nao quero")) {
+      return {
+        title: "Moro de aluguel mas quero uma casa própria",
+        subtitle: "Locatário com planos de aquisição",
+        image: "fotos radar/ghibli_aluguel_quer_casa.jpg",
+        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+        border: "border-blue-200 hover:border-blue-300",
+        tag: "Quer Comprar",
+        tagBg: "bg-blue-100 text-blue-800"
+      };
+    }
+    if (k.includes("não quero") || k.includes("nao quero") || k.includes("não pretendo") || k.includes("nao pretendo")) {
+      return {
+        title: "Moro de aluguel e não quero adquirir uma casa própria",
+        subtitle: "Prefere flexibilidade e locação contínua",
+        image: "fotos radar/ghibli_aluguel_livre.jpg",
+        badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+        border: "border-cyan-200 hover:border-cyan-300",
+        tag: "Opta por Aluguel",
+        tagBg: "bg-cyan-100 text-cyan-800"
+      };
+    }
+    return {
+      title: key,
+      subtitle: "Opção registrada na pesquisa",
+      image: "fotos radar/ghibli_casa_propria.jpg",
+      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+      border: "border-slate-200 hover:border-slate-300",
+      tag: "Outros",
+      tagBg: "bg-slate-100 text-slate-800"
+    };
+  }
+
+  const entries = Object.entries(dataMap);
+  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  // Ordenar para destaque dos maiores percentuais
+  entries.sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="w-full flex flex-col gap-3 py-1">';
+
+  entries.forEach(([key, count]) => {
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const cfg = getGhibliHouseConfig(key);
+
+    html += '<div class="group relative bg-white rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between gap-3 sm:gap-4">' +
+      '<div class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">' +
+        '<div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-xs border border-slate-100">' +
+          '<img src="' + cfg.image + '" alt="' + cfg.title + '" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />' +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+          '<p class="text-[11px] font-medium text-slate-400 mt-0.5 leading-tight hidden sm:block">' + cfg.subtitle + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<div class="inline-flex items-center justify-center px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-sm sm:text-base shadow-2xs">' +
+          pct + '%' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
+  return html;
 }
 
 // Gráfico Específico de Moradia / Casa Própria (Centralizado com Alta Legibilidade)
