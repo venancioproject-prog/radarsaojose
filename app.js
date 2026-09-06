@@ -52,15 +52,34 @@ const lastSyncTime = document.getElementById("last-sync-time");
 const dataFetchError = document.getElementById("data-fetch-error");
 const togglePasswordBtn = document.getElementById("toggle-password");
 const togglePasswordIcon = document.getElementById("toggle-password-icon");
-const filterRegionSelect = document.getElementById("filter-region");
 const filterGenderSelect = document.getElementById("filter-gender");
-const filterAgeSelect = document.getElementById("filter-age");
 const filterIncomeSelect = document.getElementById("filter-income");
+const filterMaritalSelect = document.getElementById("filter-marital");
+const filterPoliticsSelect = document.getElementById("filter-politics");
+const filterRegionSelect = document.getElementById("filter-region");
+const filterAgeSelect = document.getElementById("filter-age");
 const filterWorkSelect = document.getElementById("filter-work");
+const filterHouseSelect = document.getElementById("filter-house");
+const filterQualitySelect = document.getElementById("filter-quality");
+const filterPrideSelect = document.getElementById("filter-pride");
+
 const btnResetFilters = document.getElementById("btn-reset-filters");
 const filteredRecordsCount = document.getElementById("filtered-records-count");
 const totalBaseCount = document.getElementById("total-base-count");
 const supabaseTableStatus = document.getElementById("supabase-table-status");
+
+const ALL_FILTER_ELEMENTS = [
+  filterGenderSelect,
+  filterIncomeSelect,
+  filterMaritalSelect,
+  filterPoliticsSelect,
+  filterRegionSelect,
+  filterAgeSelect,
+  filterWorkSelect,
+  filterHouseSelect,
+  filterQualitySelect,
+  filterPrideSelect
+];
 
 // KPIs
 const statTotalResponses = document.getElementById("stat-total-responses");
@@ -109,8 +128,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Multi-filter change listeners
-  [filterRegionSelect, filterGenderSelect, filterAgeSelect, filterIncomeSelect, filterWorkSelect].forEach(select => {
+  // Multi-filter change listeners para todos os 10 filtros do Looker
+  ALL_FILTER_ELEMENTS.forEach(select => {
     if (select) {
       select.addEventListener("change", applyCombinedFilters);
     }
@@ -301,34 +320,59 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
 }
 
 function populateAllFilters(records) {
-  const regions = new Set();
   const genders = new Set();
-  const ages = new Set();
   const incomes = new Set();
+  const maritals = new Set();
+  const politics = new Set();
+  const regions = new Set();
+  const ages = new Set();
   const works = new Set();
+  const houses = new Set();
+  const qualities = new Set();
+  const prides = new Set();
 
   records.forEach(r => {
-    const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
-    if (reg) regions.add(reg);
-
     const gen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
     if (gen) genders.add(gen);
-
-    const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
-    if (age) ages.add(age);
 
     const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
     if (inc) incomes.add(inc);
 
+    const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
+    if (mar) maritals.add(mar);
+
+    const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
+    if (pol) politics.add(pol);
+
+    const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+    if (reg) regions.add(reg);
+
+    const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+    if (age) ages.add(age);
+
     const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
     if (wrk) works.add(wrk);
+
+    const hou = getField(r, ["Você Já tem casa própria?", "casa_propria"]);
+    if (hou) houses.add(hou);
+
+    const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]);
+    if (qua) qualities.add(qua);
+
+    const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
+    if (pri) prides.add(pri);
   });
 
-  populateSelectOptions(filterRegionSelect, regions, "Todas as Regiões");
-  populateSelectOptions(filterGenderSelect, genders, "Todos os Gêneros");
-  populateSelectOptions(filterAgeSelect, ages, "Todas as Idades");
-  populateSelectOptions(filterIncomeSelect, incomes, "Todas as Rendas");
-  populateSelectOptions(filterWorkSelect, works, "Todos os Modelos");
+  populateSelectOptions(filterGenderSelect, genders, "Todos");
+  populateSelectOptions(filterIncomeSelect, incomes, "Todas");
+  populateSelectOptions(filterMaritalSelect, maritals, "Todos");
+  populateSelectOptions(filterPoliticsSelect, politics, "Todos");
+  populateSelectOptions(filterRegionSelect, regions, "Todas");
+  populateSelectOptions(filterAgeSelect, ages, "Todas");
+  populateSelectOptions(filterWorkSelect, works, "Todos");
+  populateSelectOptions(filterHouseSelect, houses, "Todas");
+  populateSelectOptions(filterQualitySelect, qualities, "Todas");
+  populateSelectOptions(filterPrideSelect, prides, "Todos");
 
   if (totalBaseCount) {
     totalBaseCount.textContent = records.length.toLocaleString("pt-BR");
@@ -336,32 +380,57 @@ function populateAllFilters(records) {
 }
 
 function applyCombinedFilters() {
-  const selectedRegion = filterRegionSelect ? filterRegionSelect.value : "TODOS";
-  const selectedGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
-  const selectedAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
-  const selectedIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
-  const selectedWork = filterWorkSelect ? filterWorkSelect.value : "TODOS";
+  const selGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
+  const selIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
+  const selMarital = filterMaritalSelect ? filterMaritalSelect.value : "TODOS";
+  const selPolitics = filterPoliticsSelect ? filterPoliticsSelect.value : "TODOS";
+  const selRegion = filterRegionSelect ? filterRegionSelect.value : "TODOS";
+  const selAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
+  const selWork = filterWorkSelect ? filterWorkSelect.value : "TODOS";
+  const selHouse = filterHouseSelect ? filterHouseSelect.value : "TODOS";
+  const selQuality = filterQualitySelect ? filterQualitySelect.value : "TODOS";
+  const selPride = filterPrideSelect ? filterPrideSelect.value : "TODOS";
 
   const filtered = allSurveyRecords.filter(r => {
-    if (selectedRegion !== "TODOS") {
-      const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
-      if (reg !== selectedRegion) return false;
-    }
-    if (selectedGender !== "TODOS") {
+    if (selGender !== "TODOS") {
       const gen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
-      if (gen !== selectedGender) return false;
+      if (gen !== selGender) return false;
     }
-    if (selectedAge !== "TODOS") {
-      const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
-      if (age !== selectedAge) return false;
-    }
-    if (selectedIncome !== "TODOS") {
+    if (selIncome !== "TODOS") {
       const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
-      if (inc !== selectedIncome) return false;
+      if (inc !== selIncome) return false;
     }
-    if (selectedWork !== "TODOS") {
+    if (selMarital !== "TODOS") {
+      const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
+      if (mar !== selMarital) return false;
+    }
+    if (selPolitics !== "TODOS") {
+      const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
+      if (pol !== selPolitics) return false;
+    }
+    if (selRegion !== "TODOS") {
+      const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+      if (reg !== selRegion) return false;
+    }
+    if (selAge !== "TODOS") {
+      const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+      if (age !== selAge) return false;
+    }
+    if (selWork !== "TODOS") {
       const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
-      if (wrk !== selectedWork) return false;
+      if (wrk !== selWork) return false;
+    }
+    if (selHouse !== "TODOS") {
+      const hou = getField(r, ["Você Já tem casa própria?", "casa_propria"]);
+      if (hou !== selHouse) return false;
+    }
+    if (selQuality !== "TODOS") {
+      const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]);
+      if (qua !== selQuality) return false;
+    }
+    if (selPride !== "TODOS") {
+      const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
+      if (pri !== selPride) return false;
     }
     return true;
   });
@@ -377,7 +446,7 @@ function applyCombinedFilters() {
 }
 
 function resetAllFilters() {
-  [filterRegionSelect, filterGenderSelect, filterAgeSelect, filterIncomeSelect, filterWorkSelect].forEach(select => {
+  ALL_FILTER_ELEMENTS.forEach(select => {
     if (select) select.value = "TODOS";
   });
   applyCombinedFilters();
