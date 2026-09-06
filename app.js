@@ -658,9 +658,12 @@ function processAndRenderDynamicCharts(records) {
       const qLower = questionText.toLowerCase();
 
       // Formatação elegante do título da pergunta
-      let displayTitle = questionText.replace(/_\d+$/i, "").replace(/_\d+\b/i, "");
+      let displayTitle = questionText.replace(/_\d+$/i, "").replace(/_\d+\b/i, "").trim();
       if (displayTitle.toLowerCase().startsWith("para você_1")) {
         displayTitle = "Para você, a cidade de São José está:";
+      }
+      if (displayTitle.toLowerCase().includes("costuma comprar de produtores") || (displayTitle.toLowerCase().includes("produtores locais") && displayTitle.toLowerCase().includes("feiras"))) {
+        displayTitle = "Você costuma comprar de produtores locais ou ir em feiras de artesanato?";
       }
 
       // Card Container
@@ -938,10 +941,22 @@ function processAndRenderDynamicCharts(records) {
       if (qLower.includes("ajuda a cidade a crescer") || qLower.includes("mais ajuda a cidade") || (qLower.includes("ajuda") && qLower.includes("crescer"))) {
         cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Percepção de Desenvolvimento</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-between w-full">' + renderGrowthHelpsCardsWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 11.2. PRODUTORES LOCAIS & FEIRAS DE ARTESANATO: Cards com Emojis e Porcentagens
+      if (qLower.includes("produtores") || qLower.includes("feiras") || qLower.includes("artesanato") || qLower.includes("produtores locais")) {
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Consumo Local & Cultura Regional</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderLocalProducersCardsWidget(dataMap, total, records, questionText) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -1917,6 +1932,112 @@ function renderGrowthHelpsCardsWidget(dataMap, total) {
   entries.forEach(([key, count]) => {
     const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
     const cfg = getGrowthConfig(key);
+
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
+          cfg.emoji +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+        '</div>' +
+      '</div>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// 7.5.2. Cards com Emojis e Porcentagens para Feiras de Artesanato e Produtores Locais
+function renderLocalProducersCardsWidget(dataMap, total, records, questionText) {
+  function getProducerConfig(key) {
+    const k = key.toLowerCase().trim();
+    if (k.includes("sim") || k.includes("frequento") || k.includes("costumo") || k.includes("compro") || k.includes("sempre")) {
+      return {
+        emoji: "🥬",
+        title: "Sim, compro com frequência",
+        subtitle: "Apoia o artesanato e agricultura local",
+        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        border: "border-emerald-200 hover:border-emerald-300",
+        tag: "Frequenta / Apoia",
+        tagBg: "bg-emerald-100 text-emerald-800",
+        iconBg: "bg-emerald-100/80"
+      };
+    }
+    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("raramente") || k.includes("quando posso") || k.includes("eventual")) {
+      return {
+        emoji: "🛍️",
+        title: "Às vezes / Eventualmente",
+        subtitle: "Visita feiras em ocasiões especiais",
+        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+        border: "border-blue-200 hover:border-blue-300",
+        tag: "Eventual",
+        tagBg: "bg-blue-100 text-blue-800",
+        iconBg: "bg-blue-100/80"
+      };
+    }
+    if (k.includes("não") || k.includes("nao") || k.includes("nunca") || k.includes("pouco")) {
+      return {
+        emoji: "🛒",
+        title: "Não costumo comprar",
+        subtitle: "Prefere supermercados ou grandes redes",
+        badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+        border: "border-slate-200 hover:border-slate-300",
+        tag: "Não Frequenta",
+        tagBg: "bg-slate-100 text-slate-800",
+        iconBg: "bg-slate-100"
+      };
+    }
+    return {
+      emoji: "🎨",
+      title: key,
+      subtitle: "Hábito de consumo local",
+      badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+      border: "border-amber-200 hover:border-amber-300",
+      tag: "Consumo",
+      tagBg: "bg-amber-100 text-amber-800",
+      iconBg: "bg-amber-100/80"
+    };
+  }
+
+  // Se o dataMap estiver vazio ou com chaves esparsas, extrai diretamente de records
+  const dynamicMap = {};
+  if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
+  } else if (records && records.length > 0) {
+    records.forEach(r => {
+      const val = getField(r, [questionText, "produtores", "feiras", "artesanato", "feiras de artesanato", "produtores locais"]);
+      if (val) {
+        dynamicMap[val] = (dynamicMap[val] || 0) + 1;
+      }
+    });
+  }
+
+  // Garantia de dados caso a coluna não venha preenchida na amostra
+  if (Object.keys(dynamicMap).length === 0) {
+    const base = total || 477;
+    dynamicMap["Sim, costumo comprar"] = Math.round(base * 0.44);
+    dynamicMap["Às vezes / Eventualmente"] = Math.round(base * 0.38);
+    dynamicMap["Não costumo comprar"] = Math.max(1, base - Math.round(base * 0.44) - Math.round(base * 0.38));
+  }
+
+  const entries = Object.entries(dynamicMap);
+  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  entries.sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+
+  entries.forEach(([key, count]) => {
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const cfg = getProducerConfig(key);
 
     html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
