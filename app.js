@@ -1510,22 +1510,22 @@ function renderWorkIconsGrid(dataMap, total) {
   // Ordenar por maior número de respostas
   const sortedEntries = Object.entries(dataMap).sort((a, b) => b[1] - a[1]);
 
-  let html = '<div class="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">';
+  let html = '<div class="flex flex-col gap-2 max-h-[300px] overflow-y-auto pr-1.5 py-0.5 custom-card-scroll">';
   sortedEntries.forEach(([k, count]) => {
     const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
     const cfg = getWorkIconConfig(k);
 
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-sm flex items-center justify-between gap-3 transition-all hover:shadow">' +
-      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-base shadow-xs">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-xl p-2.5 sm:p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-2.5 transition-all">' +
+      '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
+        '<div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-xs sm:text-sm shadow-2xs">' +
           '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
           '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words" title="' + k + '">' + k + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-2.5 py-1 rounded-xl ' + cfg.badgeBg + ' text-xs font-black">' + pct + '%</span>' +
+      '<div class="flex-shrink-0 text-right pl-1.5">' +
+        '<span class="inline-block px-2.5 py-1 rounded-lg ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
@@ -1845,56 +1845,56 @@ function renderTreemapWidget(dataMap, total) {
     }
 
     if (isHero) {
-      return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300">' +
+      return '<div class="' + gradientClass + ' rounded-xl p-3 sm:p-3.5 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex items-center justify-between gap-2.5 transition-all duration-300">' +
         '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
-          '<div class="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 shadow-xs">' +
+          '<div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-xs sm:text-sm text-white flex-shrink-0 shadow-2xs">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
-          '<h4 class="text-sm sm:text-base font-bold text-white leading-snug break-words" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-white leading-tight break-words" title="' + label + '">' + label + '</h4>' +
         '</div>' +
-        '<span class="px-3 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-base sm:text-lg text-white border border-white/30 shadow-xs flex-shrink-0">' + pct + '%</span>' +
+        '<span class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-2xs flex-shrink-0">' + pct + '%</span>' +
       '</div>';
     }
 
-    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[90px]">' +
-      '<div class="flex items-start gap-2 mb-2">' +
-        '<div class="w-6 h-6 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-[11px] text-white flex-shrink-0 mt-0.5">' +
+    return '<div class="' + gradientClass + ' rounded-xl p-2.5 sm:p-3 text-white shadow-xs hover:shadow-sm border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[68px] sm:min-h-[72px]">' +
+      '<div class="flex items-start gap-2 mb-1.5">' +
+        '<div class="w-5 h-5 rounded-md bg-white/20 backdrop-blur-xs flex items-center justify-center text-[10px] text-white flex-shrink-0 mt-0.5">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-words text-white" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-[11px] sm:text-xs font-bold leading-snug break-words text-white" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-1.5 border-t border-white/15">' +
-        '<span class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/30 shadow-xs">' + pct + '%</span>' +
+      '<div class="flex items-center justify-end pt-1 border-t border-white/15">' +
+        '<span class="px-2 py-0.5 rounded-md bg-white/25 backdrop-blur-md font-black text-[11px] sm:text-xs text-white border border-white/30 shadow-2xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   }
 
-  let html = '<div class="w-full space-y-2.5">';
+  let html = '<div class="w-full flex flex-col gap-2 py-0.5">';
 
   if (entries.length === 1) {
     html += getTreemapTile(entries[0], 0, totalSum, true);
   } else if (entries.length === 2) {
     const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 35);
     const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 35);
-    html += '<div class="flex flex-col sm:flex-row gap-2.5">' +
+    html += '<div class="flex flex-col sm:flex-row gap-2">' +
       '<div style="flex: ' + f1 + ';">' + getTreemapTile(entries[0], 0, totalSum) + '</div>' +
       '<div style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
     '</div>';
   } else if (entries.length === 3) {
-    html += '<div class="space-y-2.5">' +
+    html += '<div class="flex flex-col gap-2">' +
       getTreemapTile(entries[0], 0, totalSum, true) +
-      '<div class="grid grid-cols-2 gap-2.5">' +
+      '<div class="grid grid-cols-2 gap-2">' +
         getTreemapTile(entries[1], 1, totalSum) +
         getTreemapTile(entries[2], 2, totalSum) +
       '</div>' +
     '</div>';
   } else {
     // 4 ou mais itens: Destaque ao maior item no topo + grid 2x2 organizado abaixo
-    html += '<div class="space-y-2.5">' +
+    html += '<div class="flex flex-col gap-2">' +
       getTreemapTile(entries[0], 0, totalSum, true) +
-      '<div class="grid grid-cols-2 gap-2.5">';
+      '<div class="grid grid-cols-2 gap-2">';
     entries.slice(1).forEach((item, idx) => {
       html += '<div>' + getTreemapTile(item, idx + 1, totalSum) + '</div>';
     });
