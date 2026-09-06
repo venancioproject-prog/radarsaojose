@@ -848,13 +848,14 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 9. REGIÃO MAIS FREQUENTADA: Mapa de Calor (Heatmap) por Regiões de SJC
-      if (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("mais frequenta"))) {
-        cardEl.innerHTML = '<div>' +
+      // 10. DEFINIÇÃO DE SÃO JOSÉ / PALAVRAS MAIS DITAS: Nuvem de Palavras Interativa (Word Cloud)
+      if (qLower.includes("definiria") || (qLower.includes("poucas palavras") && qLower.includes("josé")) || qLower.includes("como você definiria")) {
+        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Mapa de Calor (Heatmap) de concentração por polo</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Nuvem de Palavras • Termos e Expressões Mais Mencionadas</p>' +
         '</div>' +
-        '<div class="p-1">' + renderRegionsHeatmap(dataMap, total) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center">' + renderWordCloudWidget(dataMap, total, records, questionText) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -1774,6 +1775,133 @@ function renderRegionsHeatmap(dataMap, total) {
         '<div class="h-full rounded-full bg-gradient-to-r from-brand-600 via-accent-cyan to-rose-500 transition-all duration-700" style="width: ' + intensityPercent + '%;"></div>' +
       '</div>' +
     '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// 8.5. Nuvem de Palavras Dinâmica (Word Cloud) com Stopwords em Português
+function renderWordCloudWidget(dataMap, total, records, questionText) {
+  const stopwords = new Set([
+    "a", "o", "as", "os", "um", "uma", "uns", "umas", "de", "do", "da", "dos", "das",
+    "em", "no", "na", "nos", "nas", "por", "para", "com", "sem", "sob", "sobre",
+    "e", "ou", "mas", "que", "se", "como", "porque", "quando", "onde", "quem",
+    "é", "são", "foi", "era", "ser", "estar", "tem", "ter", "muito", "muita", "muitos", "muitas",
+    "mais", "menos", "já", "não", "nao", "sim", "eu", "ele", "ela", "eles", "elas", "meu", "minha",
+    "seu", "sua", "seus", "suas", "são", "josé", "sao", "jose", "sjc", "campos", "cidade", "hoje",
+    "em", "poucas", "palavras", "você", "voce", "pra", "pro", "pelo", "pela"
+  ]);
+
+  const wordFrequency = {};
+  const phraseFrequency = {};
+
+  // Extrair respostas brutas
+  const rawResponses = [];
+  if (records && records.length > 0 && questionText) {
+    records.forEach(r => {
+      const val = getField(r, [questionText]);
+      if (val) rawResponses.push(val);
+    });
+  } else if (dataMap) {
+    Object.keys(dataMap).forEach(phrase => {
+      const count = dataMap[phrase] || 1;
+      for (let i = 0; i < count; i++) {
+        rawResponses.push(phrase);
+      }
+    });
+  }
+
+  rawResponses.forEach(text => {
+    const cleanText = text.trim();
+    if (!cleanText) return;
+
+    // Frequência de frases curtas
+    const phraseKey = cleanText.charAt(0).toUpperCase() + cleanText.slice(1).toLowerCase();
+    phraseFrequency[phraseKey] = (phraseFrequency[phraseKey] || 0) + 1;
+
+    // Tokenização e frequência de palavras individuais significativas
+    const words = cleanText.toLowerCase()
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'“”’]/g, " ")
+      .split(/\s+/);
+
+    words.forEach(w => {
+      const cleanW = w.trim();
+      if (cleanW.length >= 3 && !stopwords.has(cleanW)) {
+        const capitalized = cleanW.charAt(0).toUpperCase() + cleanW.slice(1);
+        wordFrequency[capitalized] = (wordFrequency[capitalized] || 0) + 1;
+      }
+    });
+  });
+
+  // Combinar palavras e frases-chave mais fortes
+  const combinedMap = {};
+  Object.entries(wordFrequency).forEach(([w, count]) => {
+    combinedMap[w] = (combinedMap[w] || 0) + count;
+  });
+
+  // Adicionar expressões curtas marcantes
+  Object.entries(phraseFrequency).forEach(([p, count]) => {
+    if (count >= 2 && p.split(" ").length <= 3 && !combinedMap[p]) {
+      combinedMap[p] = count;
+    }
+  });
+
+  let sortedWords = Object.entries(combinedMap).sort((a, b) => b[1] - a[1]);
+
+  if (sortedWords.length === 0) {
+    return '<div class="h-48 flex items-center justify-center text-slate-400 text-xs font-semibold">Sem palavras suficientes para a nuvem.</div>';
+  }
+
+  // Pegar top palavras mais expressivas
+  sortedWords = sortedWords.slice(0, 24);
+
+  const maxFreq = sortedWords[0][1] || 1;
+  const minFreq = sortedWords[sortedWords.length - 1][1] || 1;
+
+  // Paleta moderna e harmoniosa para a nuvem
+  const tagStyles = [
+    { bg: "bg-brand-900 text-white shadow-xs hover:scale-105", border: "border-brand-950" },
+    { bg: "bg-blue-600 text-white shadow-xs hover:scale-105", border: "border-blue-700" },
+    { bg: "bg-emerald-600 text-white shadow-xs hover:scale-105", border: "border-emerald-700" },
+    { bg: "bg-cyan-600 text-white shadow-xs hover:scale-105", border: "border-cyan-700" },
+    { bg: "bg-indigo-600 text-white shadow-xs hover:scale-105", border: "border-indigo-700" },
+    { bg: "bg-purple-600 text-white shadow-xs hover:scale-105", border: "border-purple-700" },
+    { bg: "bg-amber-500 text-white shadow-xs hover:scale-105", border: "border-amber-600" },
+    { bg: "bg-teal-500 text-white shadow-xs hover:scale-105", border: "border-teal-600" },
+    { bg: "bg-slate-100 text-slate-800 hover:bg-slate-200", border: "border-slate-300" }
+  ];
+
+  // Randomizador consistente para ordenação estética na nuvem
+  const shuffled = [...sortedWords].sort((a, b) => {
+    return (a[0].charCodeAt(0) % 5) - (b[0].charCodeAt(0) % 5);
+  });
+
+  let html = '<div class="w-full flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 p-3 sm:p-4 bg-slate-50/70 rounded-2xl border border-slate-200/80 min-h-[260px]">';
+
+  shuffled.forEach(([word, count], i) => {
+    // Escala de tamanho tipográfico proporcional (11px a 20px)
+    const ratio = maxFreq > minFreq ? (count - minFreq) / (maxFreq - minFreq) : 0.6;
+    let sizeClass = "text-xs font-semibold py-1 px-2.5";
+    let styleIndex = 8; // neutro padrão
+
+    if (ratio > 0.75) {
+      sizeClass = "text-sm sm:text-base font-black py-2 px-4";
+      styleIndex = i % 4; // cores principais vibrantes
+    } else if (ratio > 0.45) {
+      sizeClass = "text-xs sm:text-sm font-extrabold py-1.5 px-3";
+      styleIndex = (i % 5) + 1;
+    } else if (ratio > 0.2) {
+      sizeClass = "text-[11px] sm:text-xs font-bold py-1 px-2.5";
+      styleIndex = (i % 6) + 2;
+    }
+
+    const st = tagStyles[styleIndex % tagStyles.length];
+
+    html += '<span class="inline-flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-default select-none ' + st.bg + ' ' + st.border + ' ' + sizeClass + '" title="' + count + ' menções">' +
+      '<span>' + word + '</span>' +
+      '<span class="opacity-75 text-[10px] font-bold">(' + count + ')</span>' +
+    '</span>';
   });
 
   html += '</div>';
