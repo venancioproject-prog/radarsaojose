@@ -8,7 +8,7 @@
 // ==========================================
 // Substitua pelas suas credenciais obtidas no Painel do Supabase:
 // https://app.supabase.com/project/_/settings/api
-const SUPABASE_URL = "https://toryvysucpslayzglixq.supabase.co";
+const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 
 // Inicialização do cliente Supabase
