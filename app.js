@@ -896,6 +896,18 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 11. IDENTIDADE DA CIDADE (Para você, São José é:): Cards Modernos com Emojis e Porcentagens
+      if (qLower.includes("para você, são josé é") || qLower.includes("para voce, sao jose e") || (qLower.includes("são josé é") && (qLower.includes("moderna") || qLower.includes("tranquila") || qLower.includes("duas coisas")))) {
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Percepção & Identidade Municipal</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderCityIdentityCardsWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
 
@@ -1698,6 +1710,104 @@ function renderQualityScaleWidget(avgScore, dataMap, total) {
     });
   }
   return renderGaugeSpeedometerWidget(avgScore, counts, total);
+}
+
+// 7.5. Cards com Emojis e Porcentagens para Identidade da Cidade (Para você, São José é:)
+function renderCityIdentityCardsWidget(dataMap, total) {
+  function getCityIdentityConfig(key) {
+    const k = key.toLowerCase();
+    if (k.includes("moderna") || k.includes("tecnologia") || k.includes("inovação")) {
+      return {
+        emoji: "🚀",
+        title: "Moderna e cheia de tecnologia",
+        subtitle: "Polo aeroespacial e inovador",
+        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+        border: "border-blue-200 hover:border-blue-300",
+        tag: "Inovação",
+        tagBg: "bg-blue-100 text-blue-800",
+        iconBg: "bg-blue-100/80"
+      };
+    }
+    if (k.includes("tranquila") || k.includes("interior") || k.includes("familiar") || k.includes("calma")) {
+      return {
+        emoji: "🌳",
+        title: "Tranquila com jeito de interior",
+        subtitle: "Clima acolhedor e familiar",
+        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        border: "border-emerald-200 hover:border-emerald-300",
+        tag: "Qualidade",
+        tagBg: "bg-emerald-100 text-emerald-800",
+        iconBg: "bg-emerald-100/80"
+      };
+    }
+    if (k.includes("duas coisas") || k.includes("ambas") || k.includes("pouco das duas")) {
+      return {
+        emoji: "🏙️",
+        title: "Um pouco das duas coisas",
+        subtitle: "O melhor da metrópole e do interior",
+        badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+        border: "border-indigo-200 hover:border-indigo-300",
+        tag: "Equilíbrio",
+        tagBg: "bg-indigo-100 text-indigo-800",
+        iconBg: "bg-indigo-100/80"
+      };
+    }
+    if (k.includes("nenhuma") || k.includes("outra") || k.includes("neutro")) {
+      return {
+        emoji: "🤔",
+        title: "Nenhuma delas",
+        subtitle: "Outra percepção sobre o município",
+        badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+        border: "border-cyan-200 hover:border-cyan-300",
+        tag: "Outra Opinião",
+        tagBg: "bg-cyan-100 text-cyan-800",
+        iconBg: "bg-cyan-100/80"
+      };
+    }
+    return {
+      emoji: "📍",
+      title: key,
+      subtitle: "Percepção registrada na pesquisa",
+      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+      border: "border-slate-200 hover:border-slate-300",
+      tag: "Opinião",
+      tagBg: "bg-slate-100 text-slate-800",
+      iconBg: "bg-slate-100"
+    };
+  }
+
+  const entries = Object.entries(dataMap || {});
+  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  // Ordenar para destaque dos maiores percentuais
+  entries.sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+
+  entries.forEach(([key, count]) => {
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const cfg = getCityIdentityConfig(key);
+
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
+          cfg.emoji +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+        '</div>' +
+      '</div>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
+  return html;
 }
 
 // 7. Cards com Ícones Visuais para Evasão (Passear em Outras Cidades)
