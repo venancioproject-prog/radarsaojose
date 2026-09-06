@@ -310,7 +310,10 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
   Array.from(values).filter(v => v && v.trim() && v !== "Não informado").sort().forEach(val => {
     const opt = document.createElement("option");
     opt.value = val;
-    opt.textContent = val;
+    // Encurta texto longo nas opções para ficar perfeito no layout
+    const displayVal = val.length > 35 ? val.substring(0, 32) + "..." : val;
+    opt.textContent = displayVal;
+    opt.title = val;
     selectEl.appendChild(opt);
   });
 
