@@ -2547,9 +2547,27 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     }
   }
 
-  // Mapeamento inteligente de cores por item (ex: Melhorando = Verde, Piorando = Vermelho, Do mesmo jeito = Cinza)
+  // Mapeamento inteligente de cores por item
+  // Política: Esquerda = Vermelho, Direita = Azul, Centro = Amarelo, Não respondeu = Cinza
+  // Sentimento: Melhorando = Verde, Piorando = Vermelho, Do mesmo jeito = Cinza
   const itemColors = labels.map((lbl, idx) => {
     const l = String(lbl).toLowerCase().trim();
+    
+    // Política
+    if (l === "esquerda" || l.startsWith("esquerda") || l.includes("centro-esquerda")) {
+      return "#EF4444"; // Vermelho
+    }
+    if (l === "direita" || l.startsWith("direita") || l.includes("centro-direita")) {
+      return "#0077B6"; // Azul
+    }
+    if (l === "centro" || l.startsWith("centro")) {
+      return "#F59E0B"; // Amarelo / Âmbar
+    }
+    if (l.includes("não responder") || l.includes("nao responder") || l.includes("prefiro não") || l.includes("prefiro nao") || l.includes("não informado") || l.includes("nao informado") || l.includes("nenhum")) {
+      return "#94A3B8"; // Cinza
+    }
+
+    // Percepção de Cidade / Sentimento
     if (l.includes("melhorando") || l.includes("melhor") || l.includes("crescimento") || l.includes("ótimo") || l.includes("otimo")) {
       return "#10B981"; // Verde Esmeralda
     }
