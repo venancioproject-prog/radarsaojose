@@ -785,6 +785,18 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 6. ESTADO CIVIL: Mapa de Árvore (Treemap)
+      if (qLower.includes("estado civil") || qLower.includes("estado_civil") || (qLower.includes("civil") && qLower.includes("estado"))) {
+        cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400">Mapa de Árvore (Treemap) • ' + total.toLocaleString("pt-BR") + ' respondentes</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-center">' + renderTreemapWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
       // 6. CULTURA E EVENTOS: Gráfico de Pizza (Sim = Verde, Não = Vermelho)
       if (qLower.includes("cultura") && (qLower.includes("opções") || qLower.includes("opcoes") || qLower.includes("eventos") || qLower.includes("cidade"))) {
         cardEl.innerHTML = '<div>' +
@@ -1588,7 +1600,27 @@ function renderTreemapWidget(dataMap, total) {
     let iconClass = "fa-solid fa-sparkles";
     let borderClass = "border-blue-400/30";
 
-    if (l.includes("sim") || l.includes("muito") || l.includes("sempre") || l.includes("total") || l.includes("combinam")) {
+    if (l.includes("casad") || l.includes("união") || l.includes("uniao") || l.includes("junto")) {
+      gradientClass = "bg-gradient-to-br from-emerald-600 via-teal-700 to-brand-900";
+      iconClass = "fa-solid fa-ring";
+      borderClass = "border-emerald-400/30";
+    } else if (l.includes("solteir")) {
+      gradientClass = "bg-gradient-to-br from-blue-600 via-cyan-600 to-indigo-800";
+      iconClass = "fa-solid fa-user";
+      borderClass = "border-cyan-400/30";
+    } else if (l.includes("namor")) {
+      gradientClass = "bg-gradient-to-br from-pink-600 via-rose-600 to-rose-800";
+      iconClass = "fa-solid fa-heart";
+      borderClass = "border-pink-400/30";
+    } else if (l.includes("divorc") || l.includes("separad")) {
+      gradientClass = "bg-gradient-to-br from-amber-600 via-orange-600 to-slate-800";
+      iconClass = "fa-solid fa-user-minus";
+      borderClass = "border-amber-400/30";
+    } else if (l.includes("viúv") || l.includes("viuv")) {
+      gradientClass = "bg-gradient-to-br from-purple-600 via-indigo-700 to-slate-900";
+      iconClass = "fa-solid fa-feather";
+      borderClass = "border-purple-400/30";
+    } else if (l.includes("sim") || l.includes("muito") || l.includes("sempre") || l.includes("total") || l.includes("combinam")) {
       gradientClass = "bg-gradient-to-br from-emerald-600 via-teal-700 to-brand-900";
       iconClass = "fa-solid fa-circle-check";
       borderClass = "border-emerald-400/30";
@@ -1618,7 +1650,7 @@ function renderTreemapWidget(dataMap, total) {
           '<div class="w-7 h-7 rounded-lg bg-white/15 backdrop-blur-xs flex items-center justify-center text-xs text-white/90 flex-shrink-0">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-tight line-clamp-2 text-white/95" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-words text-white/95" title="' + label + '">' + label + '</h4>' +
         '</div>' +
         '<span class="px-2 py-0.5 rounded-lg bg-white/20 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/20 whitespace-nowrap shadow-xs">' + pct + '%</span>' +
       '</div>' +
