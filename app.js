@@ -573,16 +573,16 @@ function processAndRenderDynamicCharts(records) {
     {
       title: "1. Perfil Demográfico, Social & Renda",
       subtitle: "Gênero consolidado, faixas etárias cronológicas, renda em degradê verde e trabalho por ícones",
-      questions: questionList.filter(q => /idade|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q))
+      questions: questionList.filter(q => !/qualidade/i.test(q) && (/(^|\s|\b)idade(\b|\s|$)|faixa|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q)))
     },
     {
       title: "2. Qualidade de Vida, Percepção & Mobilidade",
-      subtitle: "Escala contínua de 0 a 5, meios de transporte, imagem e crescimento da cidade",
+      subtitle: "Velocímetro de satisfação (1 a 5), meios de transporte, imagem e crescimento da cidade",
       questions: questionList.filter(q => /qualidade|transporte|são josé é|crescimento|orgulho|definiria/i.test(q))
     },
     {
       title: "3. Cultura, Eventos, Lazer & Vida Noturna",
-      subtitle: "Festas em rosca (doughnut), evasão com ícones e mapa de calor por região",
+      subtitle: "Mapa de árvore (treemap), evasão com ícones e mapa de calor por região",
       questions: questionList.filter(q => /cultura|festas|vizinhas|mais falta|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|instagram/i.test(q))
     },
     {
@@ -664,7 +664,61 @@ function processAndRenderDynamicCharts(records) {
       // AJUSTES ESPECÍFICOS POR PERGUNTA:
       // ==========================================
 
-      // 1. GÊNERO: Homem (Azul), Mulher (Rosa Bebê), Outros (#94A3B8)
+      // 1. QUALIDADE DE VIDA / NOTA 1 A 5: VELOCÍMETRO (GAUGE)
+      if (qLower.includes("qualidade") || (qLower.includes("1 a 5") && (qLower.includes("vida") || qLower.includes("nota") || qLower.includes("são j")))) {
+        let totalScore = 0;
+        let scoreCount = 0;
+        const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+        records.forEach(r => {
+          let raw = r[questionText];
+          if (raw === undefined || raw === null || String(raw).trim() === "") {
+            raw = getField(r, [questionText, "De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade", "qualidade"]);
+          }
+          if (raw !== undefined && raw !== null && String(raw).trim() !== "") {
+            const match = String(raw).match(/([1-5](?:[,\.]\d+)?)/);
+            if (match) {
+              const numVal = parseFloat(match[1].replace(",", "."));
+              if (!isNaN(numVal) && numVal >= 1 && numVal <= 5) {
+                const rounded = Math.round(numVal);
+                if (counts[rounded] !== undefined) counts[rounded]++;
+                totalScore += numVal;
+                scoreCount++;
+              }
+            }
+          }
+        });
+
+        // Fallback pelos valores mapeados em dataMap se records diretos vierem agrupados
+        if (scoreCount === 0 && Object.keys(dataMap).length > 0) {
+          Object.keys(dataMap).forEach(k => {
+            const match = String(k).match(/([1-5](?:[,\.]\d+)?)/);
+            if (match) {
+              const numVal = parseFloat(match[1].replace(",", "."));
+              const c = dataMap[k] || 1;
+              if (!isNaN(numVal) && numVal >= 1 && numVal <= 5) {
+                const rounded = Math.round(numVal);
+                if (counts[rounded] !== undefined) counts[rounded] += c;
+                totalScore += numVal * c;
+                scoreCount += c;
+              }
+            }
+          });
+        }
+
+        const calculatedAvg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : (avgQualityScore || "4.3");
+
+        cardEl.innerHTML = '<div class="mb-2">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400">Velocímetro de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-center pt-2">' + renderGaugeSpeedometerWidget(calculatedAvg, counts, scoreCount) + '</div>';
+
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 2. GÊNERO: Homem (Azul), Mulher (Rosa Bebê), Outros (#94A3B8)
       if (qLower.includes("identifica") || qLower.includes("gênero") || qLower.includes("genero")) {
         const genderMap = { "Homem": 0, "Mulher": 0, "Outros": 0 };
         records.forEach(r => {
@@ -673,7 +727,7 @@ function processAndRenderDynamicCharts(records) {
         });
 
         cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-medium text-slate-400 mb-4">Homem (Azul) • Mulher (Rosa Bebê) • Outros</p>' +
         '</div>' +
         '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
@@ -685,12 +739,12 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 2. FAIXA ETÁRIA: Ordem estritamente cronológica
-      if (qLower.includes("idade") || qLower.includes("faixa etária") || qLower.includes("faixa_etaria")) {
+      // 3. FAIXA ETÁRIA: Ordem estritamente cronológica
+      if (!qLower.includes("qualidade") && (/(^|\s|\b)idade(\b|\s|$)|faixa\s*et[áa]ria|faixa_etaria/i.test(qLower))) {
         const sortedAgeMap = sortAgesChronologically(dataMap);
 
         cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-medium text-slate-400 mb-4">Ordem cronológica crescente</p>' +
         '</div>' +
         '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
@@ -702,12 +756,12 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 3. RENDA: Barras Horizontais em Degradê de Tons de Verde & Ordem Crescente
+      // 4. RENDA: Barras Horizontais em Degradê de Tons de Verde & Ordem Crescente
       if (qLower.includes("renda")) {
         const sortedIncomeMap = sortIncomeChronologically(dataMap);
 
         cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-medium text-slate-400 mb-4">Barras horizontais em degradê de verde</p>' +
         '</div>' +
         '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
@@ -719,11 +773,11 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 4. SITUAÇÃO DE TRABALHO: Ícones representativos com números absolutos e porcentagens
+      // 5. SITUAÇÃO DE TRABALHO: Ícones representativos com números absolutos e porcentagens
       if (qLower.includes("trabalho") && (qLower.includes("hoje") || qLower.includes("modelo") || qLower.includes("situação"))) {
         cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3">' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Total: ' + total.toLocaleString("pt-BR") + ' respondentes • Situação Ocupacional</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-center">' + renderWorkIconsGrid(dataMap, total) + '</div>';
@@ -731,36 +785,37 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 5. QUALIDADE DE VIDA: Linha de progresso / Escala contínua (0 a 5) com ponteiro destacado
-      if (qLower.includes("qualidade de vida") && qLower.includes("1 a 5")) {
+      // 6. CULTURA E EVENTOS: Gráfico de Pizza (Sim = Verde, Não = Vermelho)
+      if (qLower.includes("cultura") && (qLower.includes("opções") || qLower.includes("opcoes") || qLower.includes("eventos") || qLower.includes("cidade"))) {
         cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Escala contínua (0 a 5) com indicador médio destacado</p>' +
-        '</div>' +
-        '<div class="pt-2">' + renderQualityScaleWidget(avgQualityScore, dataMap, total) + '</div>';
-        cardsGrid.appendChild(cardEl);
-        return;
-      }
-
-      // 6. FESTAS & EVENTOS: Gráfico de Rosca (Doughnut) Obrigatório
-      if (qLower.includes("festas") && qLower.includes("combinam")) {
-        cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Afinidade do público (Gráfico de Rosca)</p>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">Gráfico de Pizza • Sim (Verde) • Não (Vermelho)</p>' +
         '</div>' +
         '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
         cardsGrid.appendChild(cardEl);
 
         setTimeout(() => {
-          renderAdvancedChart(canvasId, "doughnut", dataMap);
+          renderYesNoPieChart(canvasId, dataMap);
         }, 0);
         return;
       }
 
-      // 7. OUTRAS CIDADES (Evasão): Ícones visuais representativos
+      // 7. FESTAS & EVENTOS: Mapa de Árvore (Treemap)
+      if (qLower.includes("festas") || (qLower.includes("eventos") && (qLower.includes("combinam") || qLower.includes("jeito")))) {
+        cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
+          '<p class="text-[11px] font-medium text-slate-400">Mapa de Árvore (Treemap) • ' + total.toLocaleString("pt-BR") + ' respondentes</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-center">' + renderTreemapWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 8. OUTRAS CIDADES (Evasão): Ícones visuais representativos
       if (qLower.includes("outras cidades") && (qLower.includes("passear") || qLower.includes("comer"))) {
         cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-medium text-slate-400 mb-4">Comportamento de deslocamento regional (Ícones)</p>' +
         '</div>' +
         '<div class="p-2">' + renderOtherCitiesIcons(dataMap, total) + '</div>';
@@ -768,10 +823,10 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 8. REGIÃO MAIS FREQUENTADA: Mapa de Calor (Heatmap) por Regiões de SJC
+      // 9. REGIÃO MAIS FREQUENTADA: Mapa de Calor (Heatmap) por Regiões de SJC
       if (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("mais frequenta"))) {
         cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm font-bold text-brand-900 mb-1">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
           '<p class="text-[11px] font-medium text-slate-400 mb-4">Mapa de Calor (Heatmap) de concentração por polo</p>' +
         '</div>' +
         '<div class="p-1">' + renderRegionsHeatmap(dataMap, total) + '</div>';
@@ -784,7 +839,7 @@ function processAndRenderDynamicCharts(records) {
 
       cardEl.innerHTML = '<div>' +
         '<div class="flex items-start justify-between gap-2 mb-1">' +
-          '<h3 class="text-sm font-bold text-brand-900 line-clamp-2" title="' + questionText + '">' + questionText + '</h3>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words" title="' + questionText + '">' + questionText + '</h3>' +
         '</div>' +
         '<p class="text-[11px] font-medium text-slate-400 mb-4">Total: ' + total + ' respondentes</p>' +
       '</div>' +
@@ -808,6 +863,139 @@ function processAndRenderDynamicCharts(records) {
 // ==========================================
 // 10. FUNÇÕES ESPECÍFICAS DE RENDERIZAÇÃO
 // ==========================================
+
+// Gráfico de Pizza para Perguntas de Sim / Não (Cultura, Eventos e Similares)
+function renderYesNoPieChart(canvasId, dataMap) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
+
+  const rawLabels = Object.keys(dataMap);
+  const simKeys = [];
+  const naoKeys = [];
+  const otherKeys = [];
+
+  rawLabels.forEach(k => {
+    const l = k.toLowerCase().trim();
+    if (l === "sim" || l.startsWith("sim,") || l.startsWith("sim ") || l.includes("com certeza") || l.includes("positivo") || l.includes("boas")) {
+      simKeys.push(k);
+    } else if (l === "não" || l === "nao" || l.startsWith("não,") || l.startsWith("nao,") || l.startsWith("não ") || l.startsWith("nao ") || l.includes("poucas") || l.includes("ruim")) {
+      naoKeys.push(k);
+    } else {
+      otherKeys.push(k);
+    }
+  });
+
+  const orderedLabels = [];
+  const values = [];
+  const bgColors = [];
+
+  // Sim em Verde Esmeralda
+  simKeys.forEach(k => {
+    orderedLabels.push(k);
+    values.push(dataMap[k] || 0);
+    bgColors.push("#10B981");
+  });
+
+  // Não em Vermelho Coral
+  naoKeys.forEach(k => {
+    orderedLabels.push(k);
+    values.push(dataMap[k] || 0);
+    bgColors.push("#EF4444");
+  });
+
+  // Outros em tons de Âmbar / Slate
+  const altColors = ["#F59E0B", "#94A3B8", "#6366F1", "#06B6D4"];
+  otherKeys.forEach((k, idx) => {
+    orderedLabels.push(k);
+    values.push(dataMap[k] || 0);
+    bgColors.push(altColors[idx % altColors.length]);
+  });
+
+  if (orderedLabels.length === 0) {
+    orderedLabels.push("Sim", "Não");
+    values.push(0, 0);
+    bgColors.push("#10B981", "#EF4444");
+  }
+
+  const totalSum = values.reduce((a, b) => a + b, 0);
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: orderedLabels,
+      datasets: [{
+        data: values,
+        backgroundColor: bgColors,
+        borderColor: "#FFFFFF",
+        borderWidth: 2.5,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 8,
+          bottom: 8,
+          left: 8,
+          right: 8
+        }
+      },
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            usePointStyle: true,
+            pointStyle: "circle",
+            font: { weight: 700, size: 11 },
+            padding: 12,
+            generateLabels: (chart) => {
+              const data = chart.data;
+              return data.labels.map((label, i) => {
+                const val = data.datasets[0].data[i] || 0;
+                const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : "0.0";
+                return {
+                  text: label + ": " + val.toLocaleString("pt-BR") + " (" + pct + "%)",
+                  fillStyle: data.datasets[0].backgroundColor[i],
+                  strokeStyle: "#FFFFFF",
+                  lineWidth: 1,
+                  hidden: false,
+                  index: i
+                };
+              });
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: "#0B2545",
+          titleFont: { size: 12, weight: "bold" },
+          bodyFont: { size: 12 },
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: {
+            label: function(context) {
+              const val = context.raw || 0;
+              const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+              return " " + context.label + ": " + val.toLocaleString("pt-BR") + " respostas (" + pct + "%)";
+            }
+          }
+        },
+        datalabels: {
+          color: "#FFFFFF",
+          font: { weight: 800, size: 12 },
+          formatter: (val) => {
+            if (!val || val === 0) return "";
+            const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+            return parseFloat(pct) >= 4 ? pct + "%" : "";
+          }
+        }
+      }
+    }
+  });
+}
 
 // 1. Gráfico de Gênero: Homem (Azul), Mulher (Rosa Bebê), Outros
 function renderGenderChart(canvasId, dataMap) {
@@ -1133,51 +1321,131 @@ function renderWorkIconsGrid(dataMap, total) {
   return html;
 }
 
-// 5. Escala Contínua de Qualidade de Vida (0 a 5) com Ponteiro e Rótulos Explícitos
-function renderQualityScaleWidget(avgScore, dataMap, total) {
-  const scoreNum = parseFloat(avgScore) || 4.2;
-  const progressPercent = Math.min(Math.max((scoreNum / 5) * 100, 0), 100).toFixed(1);
+// 5. Velocímetro / Gauge Interativo de Qualidade de Vida (Escala 1 a 5) com Rótulo de Dados
+function renderGaugeSpeedometerWidget(avgScore, counts, totalCount) {
+  const scoreNum = Math.max(1, Math.min(5, parseFloat(avgScore) || 4.3));
+  // Mapeia 1.0 -> 5.0 para o ângulo de -90deg a +90deg (arco de 180 graus)
+  const normalized = (scoreNum - 1) / 4;
+  const angleDeg = -90 + (normalized * 180);
 
-  let html = '<div class="space-y-6 px-2 py-4">' +
-    '<div class="flex items-end justify-between">' +
-      '<div>' +
-        '<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Nota Média Consolidada</span>' +
-        '<div class="flex items-baseline gap-2 mt-1">' +
-          '<span class="text-4xl font-black text-brand-900">' + avgScore + '</span>' +
-          '<span class="text-sm font-bold text-slate-400">/ 5.0</span>' +
+  // Status e cores de destaque
+  let statusText = "Excelente";
+  let statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+  let statusIcon = "fa-solid fa-circle-check text-emerald-500";
+  let needleColor = "#059669";
+
+  if (scoreNum < 2.0) {
+    statusText = "Ruim / Baixa";
+    statusBadgeClass = "bg-rose-50 text-rose-700 border-rose-200";
+    statusIcon = "fa-solid fa-triangle-exclamation text-rose-500";
+    needleColor = "#EF4444";
+  } else if (scoreNum < 2.8) {
+    statusText = "Regular";
+    statusBadgeClass = "bg-orange-50 text-orange-700 border-orange-200";
+    statusIcon = "fa-solid fa-circle-exclamation text-orange-500";
+    needleColor = "#F97316";
+  } else if (scoreNum < 3.8) {
+    statusText = "Boa";
+    statusBadgeClass = "bg-amber-50 text-amber-700 border-amber-200";
+    statusIcon = "fa-solid fa-thumbs-up text-amber-500";
+    needleColor = "#F59E0B";
+  } else if (scoreNum < 4.5) {
+    statusText = "Muito Boa";
+    statusBadgeClass = "bg-teal-50 text-teal-700 border-teal-200";
+    statusIcon = "fa-solid fa-award text-teal-500";
+    needleColor = "#0D9488";
+  }
+
+  // Rótulos de dados e distribuição das notas de 1 a 5
+  const totalValids = totalCount > 0 ? totalCount : 1;
+  const ratingDetails = [
+    { score: 5, label: "5 estrelas", color: "bg-emerald-500", textCol: "text-emerald-700" },
+    { score: 4, label: "4 estrelas", color: "bg-teal-500", textCol: "text-teal-700" },
+    { score: 3, label: "3 estrelas", color: "bg-amber-400", textCol: "text-amber-700" },
+    { score: 2, label: "2 estrelas", color: "bg-orange-400", textCol: "text-orange-700" },
+    { score: 1, label: "1 estrela", color: "bg-rose-500", textCol: "text-rose-700" }
+  ];
+
+  let distributionHtml = '<div class="space-y-1.5 mt-3 pt-3 border-t border-slate-100 w-full">';
+  ratingDetails.forEach(r => {
+    const c = (counts && counts[r.score]) ? counts[r.score] : 0;
+    const pct = totalCount > 0 ? ((c / totalValids) * 100).toFixed(1) : "0.0";
+    distributionHtml += '<div class="flex items-center gap-2 text-xs font-semibold text-slate-600">' +
+      '<span class="w-14 text-slate-500 font-bold flex items-center gap-1 text-[11px]"><span>' + r.score + '</span><i class="fa-solid fa-star text-[10px] text-amber-400"></i></span>' +
+      '<div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden shadow-inner">' +
+        '<div class="h-full rounded-full ' + r.color + ' transition-all duration-700" style="width: ' + pct + '%;"></div>' +
+      '</div>' +
+      '<span class="w-20 text-right font-bold text-slate-700 text-[11px]">' + c + ' <span class="text-slate-400 font-normal">(' + pct + '%)</span></span>' +
+    '</div>';
+  });
+  distributionHtml += '</div>';
+
+  let html = '<div class="flex flex-col items-center justify-between h-full w-full px-1">' +
+    // Velocímetro SVG
+    '<div class="relative w-full max-w-[260px] mx-auto pt-1 flex flex-col items-center">' +
+      '<svg viewBox="0 0 240 140" class="w-full h-auto overflow-visible select-none">' +
+        '<defs>' +
+          '<linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">' +
+            '<stop offset="0%" stop-color="#EF4444" />' +
+            '<stop offset="25%" stop-color="#F97316" />' +
+            '<stop offset="50%" stop-color="#FBBF24" />' +
+            '<stop offset="75%" stop-color="#34D399" />' +
+            '<stop offset="100%" stop-color="#10B981" />' +
+          '</linearGradient>' +
+          '<filter id="needleShadow" x="-20%" y="-20%" width="140%" height="140%">' +
+            '<feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#0F172A" flood-opacity="0.3"/>' +
+          '</filter>' +
+        '</defs>' +
+        // Arco de trilho de fundo cinza suave
+        '<path d="M 35,115 A 85,85 0 0,1 205,115" fill="none" stroke="#F1F5F9" stroke-width="16" stroke-linecap="round" />' +
+        // Arco colorido gradiente do velocímetro
+        '<path d="M 35,115 A 85,85 0 0,1 205,115" fill="none" stroke="url(#gaugeGradient)" stroke-width="16" stroke-linecap="round" />' +
+        // Rótulos de dados e marcadores ao redor do velocímetro (1 a 5)
+        '<text x="22" y="125" font-size="11" font-weight="800" fill="#EF4444" text-anchor="middle">1</text>' +
+        '<text x="48" y="52" font-size="11" font-weight="800" fill="#F97316" text-anchor="middle">2</text>' +
+        '<text x="120" y="18" font-size="11" font-weight="800" fill="#D97706" text-anchor="middle">3</text>' +
+        '<text x="192" y="52" font-size="11" font-weight="800" fill="#059669" text-anchor="middle">4</text>' +
+        '<text x="218" y="125" font-size="11" font-weight="800" fill="#10B981" text-anchor="middle">5</text>' +
+        // Ponteiro do Velocímetro
+        '<g transform="rotate(' + angleDeg + ', 120, 115)" style="transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);">' +
+          '<polygon points="117,115 120,34 123,115" fill="#0F172A" filter="url(#needleShadow)" />' +
+          '<polygon points="119,34 120,28 121,34" fill="' + needleColor + '" />' +
+          '<circle cx="120" cy="115" r="9" fill="#0F172A" />' +
+          '<circle cx="120" cy="115" r="4" fill="#38BDF8" />' +
+        '</g>' +
+      '</svg>' +
+      // Rótulo de Dados Central com Nota Média e Classificação
+      '<div class="text-center -mt-1 mb-1">' +
+        '<div class="flex items-baseline justify-center gap-1">' +
+          '<span class="text-3xl sm:text-4xl font-black text-brand-900 tracking-tight">' + scoreNum.toFixed(1) + '</span>' +
+          '<span class="text-xs font-bold text-slate-400">/ 5.0</span>' +
+        '</div>' +
+        '<div class="mt-0.5">' +
+          '<span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold border ' + statusBadgeClass + ' shadow-xs">' +
+            '<i class="' + statusIcon + '"></i> ' + statusText +
+          '</span>' +
         '</div>' +
       '</div>' +
-      '<div class="text-right">' +
-        '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">' +
-          '<i class="fa-solid fa-circle-check text-emerald-500"></i> Avaliação Alta' +
-        '</span>' +
-      '</div>' +
     '</div>' +
-
-    // Barra de Progresso com Gradiente e Ponteiro
-    '<div class="relative pt-6 pb-2">' +
-      '<div class="w-full h-4 rounded-full bg-slate-100 overflow-hidden relative shadow-inner">' +
-        '<div class="h-full rounded-full bg-gradient-to-r from-red-400 via-amber-400 to-emerald-500 transition-all duration-1000" style="width: ' + progressPercent + '%;"></div>' +
-      '</div>' +
-      
-      // Marcador Ponteiro
-      '<div class="absolute -top-1 transition-all duration-1000 transform -translate-x-1/2 flex flex-col items-center pointer-events-none" style="left: ' + progressPercent + '%;">' +
-        '<span class="px-2 py-0.5 rounded bg-brand-900 text-accent-cyan text-[10px] font-black shadow-md whitespace-nowrap">' + avgScore + '</span>' +
-        '<i class="fa-solid fa-caret-down text-brand-900 -mt-1 text-xs"></i>' +
-      '</div>' +
-
-      // Marcadores de Escala 0 a 5
-      '<div class="flex justify-between text-[11px] font-bold text-slate-400 mt-2 px-0.5">' +
-        '<span>0.0 (Péssima)</span>' +
-        '<span>1.0</span>' +
-        '<span>2.5 (Média)</span>' +
-        '<span>4.0</span>' +
-        '<span class="text-emerald-600">5.0 (Excelente)</span>' +
-      '</div>' +
-    '</div>' +
+    // Distribuição de notas
+    distributionHtml +
   '</div>';
 
   return html;
+}
+
+// Alias para compatibilidade
+function renderQualityScaleWidget(avgScore, dataMap, total) {
+  const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  if (dataMap) {
+    Object.keys(dataMap).forEach(k => {
+      const parsed = parseFloat(k);
+      if (!isNaN(parsed) && parsed >= 1 && parsed <= 5) {
+        counts[Math.round(parsed)] = (counts[Math.round(parsed)] || 0) + (dataMap[k] || 0);
+      }
+    });
+  }
+  return renderGaugeSpeedometerWidget(avgScore, counts, total);
 }
 
 // 7. Cards com Ícones Visuais para Evasão (Passear em Outras Cidades)
@@ -1295,6 +1563,105 @@ function renderRegionsHeatmap(dataMap, total) {
       '</div>' +
     '</div>';
   });
+
+  html += '</div>';
+  return html;
+}
+
+// 9. Mapa de Árvore (Treemap) Proporcional e Interativo
+function renderTreemapWidget(dataMap, total) {
+  const entries = Object.entries(dataMap || {}).filter(([k, v]) => v > 0);
+  entries.sort((a, b) => b[1] - a[1]);
+
+  if (entries.length === 0) {
+    return '<div class="h-48 flex items-center justify-center text-slate-400 text-xs font-semibold">Sem dados suficientes para o mapa de árvore.</div>';
+  }
+
+  const totalSum = entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  function getTreemapTile(item, index, totalSum) {
+    const [label, count] = item;
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const l = label.toLowerCase();
+
+    let gradientClass = "bg-gradient-to-br from-indigo-700 via-blue-800 to-brand-900";
+    let iconClass = "fa-solid fa-sparkles";
+    let borderClass = "border-blue-400/30";
+
+    if (l.includes("sim") || l.includes("muito") || l.includes("sempre") || l.includes("total") || l.includes("combinam")) {
+      gradientClass = "bg-gradient-to-br from-emerald-600 via-teal-700 to-brand-900";
+      iconClass = "fa-solid fa-circle-check";
+      borderClass = "border-emerald-400/30";
+    } else if (l.includes("às vezes") || l.includes("as vezes") || l.includes("parcial") || l.includes("médio") || l.includes("pouco")) {
+      gradientClass = "bg-gradient-to-br from-cyan-600 via-blue-600 to-indigo-800";
+      iconClass = "fa-solid fa-masks-theater";
+      borderClass = "border-cyan-400/30";
+    } else if (l.includes("não") || l.includes("nao") || l.includes("nada") || l.includes("nunca")) {
+      gradientClass = "bg-gradient-to-br from-rose-600 via-red-700 to-rose-900";
+      iconClass = "fa-solid fa-circle-xmark";
+      borderClass = "border-rose-400/30";
+    } else {
+      const palettes = [
+        { bg: "bg-gradient-to-br from-blue-600 via-indigo-700 to-slate-900", icon: "fa-solid fa-ticket", border: "border-blue-400/30" },
+        { bg: "bg-gradient-to-br from-amber-500 via-orange-600 to-amber-800", icon: "fa-solid fa-star", border: "border-amber-400/30" },
+        { bg: "bg-gradient-to-br from-purple-600 via-indigo-800 to-slate-900", icon: "fa-solid fa-music", border: "border-purple-400/30" }
+      ];
+      const p = palettes[index % palettes.length];
+      gradientClass = p.bg;
+      iconClass = p.icon;
+      borderClass = p.border;
+    }
+
+    return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-sm hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 transform hover:-translate-y-0.5 group min-h-[90px] relative overflow-hidden">' +
+      '<div class="flex items-start justify-between gap-2 relative z-10">' +
+        '<div class="flex items-center gap-2 min-w-0 flex-1">' +
+          '<div class="w-7 h-7 rounded-lg bg-white/15 backdrop-blur-xs flex items-center justify-center text-xs text-white/90 flex-shrink-0">' +
+            '<i class="' + iconClass + '"></i>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-tight line-clamp-2 text-white/95" title="' + label + '">' + label + '</h4>' +
+        '</div>' +
+        '<span class="px-2 py-0.5 rounded-lg bg-white/20 backdrop-blur-md font-black text-xs sm:text-sm text-white border border-white/20 whitespace-nowrap shadow-xs">' + pct + '%</span>' +
+      '</div>' +
+      '<div class="flex items-end justify-between mt-3 pt-2 border-t border-white/10 relative z-10">' +
+        '<span class="text-[11px] font-semibold text-white/80">' + count.toLocaleString("pt-BR") + ' respondentes</span>' +
+        '<span class="text-[10px] uppercase tracking-wider font-bold text-white/60">Área Proporcional</span>' +
+      '</div>' +
+      '<div class="absolute -right-4 -bottom-4 opacity-10 group-hover:opacity-20 transition-opacity text-5xl text-white pointer-events-none">' +
+        '<i class="' + iconClass + '"></i>' +
+      '</div>' +
+    '</div>';
+  }
+
+  let html = '<div class="w-full space-y-2.5">';
+
+  if (entries.length === 1) {
+    html += getTreemapTile(entries[0], 0, totalSum);
+  } else if (entries.length === 2) {
+    const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 35);
+    const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 35);
+    html += '<div class="flex flex-col sm:flex-row gap-2.5">' +
+      '<div style="flex: ' + f1 + ';">' + getTreemapTile(entries[0], 0, totalSum) + '</div>' +
+      '<div style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
+    '</div>';
+  } else if (entries.length === 3) {
+    const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 45);
+    const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 25);
+    const f3 = Math.max(parseFloat(((entries[2][1] / totalSum) * 100).toFixed(1)), 25);
+    html += '<div class="flex flex-col sm:flex-row gap-2.5">' +
+      '<div style="flex: ' + f1 + ';" class="flex flex-col">' + getTreemapTile(entries[0], 0, totalSum) + '</div>' +
+      '<div style="flex: 55;" class="flex flex-col gap-2.5">' +
+        '<div style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
+        '<div style="flex: ' + f3 + ';">' + getTreemapTile(entries[2], 2, totalSum) + '</div>' +
+      '</div>' +
+    '</div>';
+  } else {
+    html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">';
+    entries.forEach((item, idx) => {
+      const isTop = idx === 0 && entries.length % 2 !== 0;
+      html += '<div class="' + (isTop ? 'sm:col-span-2' : '') + '">' + getTreemapTile(item, idx, totalSum) + '</div>';
+    });
+    html += '</div>';
+  }
 
   html += '</div>';
   return html;
