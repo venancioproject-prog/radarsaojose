@@ -2534,7 +2534,18 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   ];
 
   Chart.defaults.font.family = "'Montserrat', sans-serif";
-  Chart.defaults.color = "#64748B";
+  // Gradiente suave para gráficos de linha
+  let bgFillColor = "rgba(0, 180, 216, 0.15)";
+  if (isLine && ctx) {
+    try {
+      const grad = ctx.createLinearGradient(0, 0, 0, 260);
+      grad.addColorStop(0, "rgba(0, 180, 216, 0.35)");
+      grad.addColorStop(1, "rgba(0, 180, 216, 0.0)");
+      bgFillColor = grad;
+    } catch (e) {
+      bgFillColor = "rgba(0, 180, 216, 0.15)";
+    }
+  }
 
   // Mapeamento inteligente de cores por item (ex: Melhorando = Verde, Piorando = Vermelho, Do mesmo jeito = Cinza)
   const itemColors = labels.map((lbl, idx) => {
