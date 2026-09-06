@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Radar São José | Painel Analítico & Pesquisa Municipal</title>
+  <title>Radar São José | Inteligência & Pesquisa Municipal</title>
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="fotos radar/logo.png" />
@@ -98,37 +98,30 @@
     .chart-container {
       position: relative;
       width: 100%;
-      height: 290px;
-    }
-    /* Estilo para opções dos menus selects Looker */
-    select option {
-      background-color: #FFFFFF !important;
-      color: #0F172A !important;
-      font-weight: 600 !important;
-      font-size: 12px !important;
-      padding: 8px 12px !important;
+      height: 280px;
     }
   </style>
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
 
-  <!-- 1. TELA DE LOGIN -->
+  <!-- 1. TELA DE LOGIN (FUNDO ESCURO COM LOGOBRANCO.PNG) -->
   <main id="login-screen" class="view-transition min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden bg-slate-900">
     <div class="absolute inset-0 z-0 opacity-20 mix-blend-luminosity bg-cover bg-center" style="background-image: url('fotos radar/hero_bg.jpg');"></div>
     <div class="absolute inset-0 z-0 bg-gradient-to-tr from-brand-950/95 via-brand-900/90 to-brand-800/80"></div>
 
     <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100/20 p-8 sm:p-10 relative z-10 backdrop-blur-lg">
       <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center mb-4 p-2 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
+        <div class="inline-flex items-center justify-center mb-4 p-3 rounded-2xl bg-brand-950 border border-brand-800 shadow-md">
+          <!-- Logo Branco para tela de login de alto contraste -->
           <img 
-            src="fotos radar/logo.png" 
+            src="fotos radar/logobranco.png" 
             alt="Radar São José" 
-            class="h-16 max-w-[240px] object-contain"
-            onerror="this.src='fotos radar/logobranco.png'"
+            class="h-14 max-w-[230px] object-contain"
+            onerror="this.src='fotos radar/logo.png'"
           />
         </div>
-        <h1 class="text-2xl font-black tracking-tight text-brand-900">Painel Analítico</h1>
-        <p class="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Inteligência & Pesquisa Municipal</p>
+        <h1 class="text-2xl font-black tracking-tight text-brand-900">Painel Analítico Executivo</h1>
+        <p class="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Inteligência & Pesquisa Municipal SJC</p>
       </div>
 
       <div id="login-error-alert" class="hidden mb-6 p-4 rounded-xl text-xs font-semibold border transition-all"></div>
@@ -154,7 +147,7 @@
 
         <div>
           <label for="password" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
-            Senha
+            Senha de Acesso
           </label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -197,8 +190,8 @@
           id="btn-demo-view" 
           class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs border border-slate-200 transition-all flex items-center justify-center gap-2"
         >
-          <i class="fa-solid fa-eye text-brand-600"></i>
-          <span>Visualizar Dashboard</span>
+          <i class="fa-solid fa-chart-line text-brand-600"></i>
+          <span>Acessar Painel Analítico</span>
         </button>
       </form>
 
@@ -208,40 +201,59 @@
     </div>
   </main>
 
-  <!-- 2. TELA PRINCIPAL (DASHBOARD) -->
-  <div id="dashboard-screen" class="view-transition hidden min-h-screen flex flex-col">
+
+  <!-- 2. TELA PRINCIPAL (DASHBOARD CORPORATIVO COM SIDEBAR ESQUERDA) -->
+  <div id="dashboard-screen" class="view-transition hidden min-h-screen flex flex-col bg-surface-bg">
     
-    <!-- Top Header em Fundo Branco Limpo com Logo Oficial -->
+    <!-- Top Header em Fundo Branco com Logo Oficial + Módulo Estatístico Dinâmico -->
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
         
-        <!-- Left: Logo Oficial em Fundo Branco -->
+        <!-- Left: Logo Oficial em Fundo Branco e Título -->
         <div class="flex items-center gap-4">
           <img 
             src="fotos radar/logo.png" 
-            alt="Logo Radar São José" 
+            alt="Radar São José" 
             class="h-11 sm:h-12 max-w-[190px] object-contain"
             onerror="this.src='fotos radar/logobranco.png'"
           />
           <div class="hidden sm:block border-l border-slate-200 pl-4">
             <h2 class="text-xs font-black tracking-widest text-brand-900 uppercase">RADAR SÃO JOSÉ</h2>
-            <p class="text-[11px] font-semibold text-slate-400">Inteligência de Mercado & Pesquisa 2026</p>
+            <p class="text-[11px] font-semibold text-slate-400">Inteligência de Mercado & Pesquisa Municipal SJC</p>
           </div>
         </div>
 
-        <!-- Right: Status e Ações -->
+        <!-- Center: MÓDULO ESTATÍSTICO DINÂMICO (População SJC, Amostra, Margem de Erro & Confiança) -->
+        <div class="hidden md:flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2 shadow-inner">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center text-xs">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Rigor Amostral (SJC)</p>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-black text-brand-900" id="stat-sample-size">Amostra: 0</span>
+                <span class="text-slate-300">|</span>
+                <span class="text-xs font-black text-brand-700" id="stat-margin-error">Margem de Erro: &plusmn;0.0%</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800" id="stat-confidence-level">IC: 95%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Status, Refresh & Logout -->
         <div class="flex items-center gap-3">
           <button 
             id="btn-refresh" 
-            title="Atualizar Dados do Supabase"
+            title="Sincronizar Dados do Supabase"
             class="p-2.5 text-slate-500 hover:text-brand-900 hover:bg-slate-100 rounded-xl transition-colors"
           >
             <i class="fa-solid fa-arrow-rotate-right" id="refresh-icon"></i>
           </button>
 
-          <div class="hidden lg:flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-700">
+          <div class="hidden xl:flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-700">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="user-email-display" class="truncate max-w-[160px]">usuario@exemplo.com</span>
+            <span id="user-email-display" class="truncate max-w-[150px]">usuario@exemplo.com</span>
           </div>
 
           <button 
@@ -253,603 +265,312 @@
           </button>
         </div>
       </div>
+
+      <!-- Mobile Statistical Sub-bar -->
+      <div class="md:hidden flex items-center justify-between px-4 py-1.5 bg-slate-100 border-t border-slate-200 text-[11px] font-bold text-slate-700">
+        <span id="stat-margin-error-mobile">Margem: &plusmn;0.0% (95% IC)</span>
+        <span id="stat-sample-size-mobile" class="text-brand-900">Amostra: 0</span>
+      </div>
     </header>
 
-    <!-- Looker-Style Pill Filters Bar (10 Filtros em Cápsula Azul Navy) -->
-    <section class="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b border-surface-border py-4 px-4 sm:px-6 lg:px-8 shadow-sm">
-      <div class="max-w-7xl mx-auto space-y-3">
-        
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-brand-600 animate-pulse"></span>
-            <span class="text-xs font-bold uppercase tracking-wider text-brand-900">Filtros Dinâmicos</span>
-            <span class="text-xs text-slate-400 font-medium">|</span>
-            <p class="text-xs font-semibold text-slate-500">
-              Exibindo <span id="filtered-records-count" class="text-brand-600 font-bold">0</span> de <span id="total-base-count" class="font-bold text-slate-800">0</span> respondentes
-            </p>
-          </div>
 
-          <button 
-            id="btn-reset-filters" 
-            title="Limpar todos os filtros"
-            class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-600 hover:text-brand-900 font-bold text-xs rounded-full border border-slate-200 transition-all flex items-center gap-1.5"
-          >
-            <i class="fa-solid fa-rotate-left text-[10px]"></i>
-            <span>Limpar Filtros</span>
-          </button>
-        </div>
-
-        <!-- 10 Capsule Pills Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-          
-          <!-- Pill 1: Gênero -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Gênero</span>
-            <select id="filter-gender" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todos</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 2: Renda -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Renda</span>
-            <select id="filter-income" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todas</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 3: E. Civil -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">E. Civil</span>
-            <select id="filter-marital" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todos</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 4: Política -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Política</span>
-            <select id="filter-politics" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todos</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 5: Região -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Região</span>
-            <select id="filter-region" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todas</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 6: Idade -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Idade</span>
-            <select id="filter-age" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todas</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 7: Trabalho -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Trabalho</span>
-            <select id="filter-work" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todos</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 8: Moradia -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Moradia</span>
-            <select id="filter-house" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todas</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 9: Avaliação -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Avaliação</span>
-            <select id="filter-quality" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todas</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-          <!-- Pill 10: Orgulho -->
-          <div class="relative flex items-center bg-brand-900 hover:bg-brand-800 rounded-full px-4 py-2 shadow-sm transition-all cursor-pointer">
-            <span class="text-xs font-bold text-white whitespace-nowrap mr-2 pointer-events-none">Orgulho</span>
-            <select id="filter-pride" class="w-full bg-transparent text-xs font-bold text-white outline-none cursor-pointer text-right appearance-none pr-3">
-              <option value="TODOS" class="text-slate-800">Todos</option>
-            </select>
-            <i class="fa-solid fa-chevron-down text-[9px] text-accent-cyan pointer-events-none absolute right-3.5"></i>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <!-- CORPO DO DASHBOARD: SIDEBAR ESQUERDA FIXA + ÁREA PRINCIPAL DE CONTEÚDO -->
+    <div class="flex-1 flex flex-col lg:flex-row w-full">
       
-      <!-- Hero Banner -->
-      <section class="relative rounded-3xl overflow-hidden bg-brand-950 text-white shadow-xl">
-        <div class="absolute inset-0 z-0 opacity-25 mix-blend-overlay bg-cover bg-center" style="background-image: url('fotos radar/foto_cidade.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-r from-brand-950 via-brand-900/90 to-transparent"></div>
-        
-        <div class="relative z-10 p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div class="max-w-2xl space-y-3">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/30 text-accent-cyan text-xs font-bold uppercase tracking-wider">
-              <i class="fa-solid fa-satellite-dish"></i>
-              <span>Inteligência de Dados Municipal</span>
+      <!-- ========================================== -->
+      <!-- 4. SIDEBAR ESQUERDA DE FILTROS CORPORATIVA -->
+      <!-- ========================================== -->
+      <aside class="w-full lg:w-72 xl:w-80 bg-white border-b lg:border-b-0 lg:border-r border-surface-border p-5 flex flex-col justify-between shrink-0 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] lg:overflow-y-auto">
+        <div class="space-y-5">
+          
+          <!-- Header da Sidebar -->
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-filter text-brand-600"></i>
+              <h3 class="text-xs font-black uppercase tracking-wider text-brand-900">Filtros & Recortes</h3>
             </div>
-            <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">
-              O Futuro do Consumo & Comportamento em São José dos Campos
-            </h1>
-            <p class="text-sm font-medium text-slate-300">
-              Painel analítico consolidando 100% das 30 perguntas da pesquisa municipal sobre qualidade de vida, cultura, lazer, streaming, influenciadores, pets e economia local.
-            </p>
+            <button 
+              id="btn-reset-filters" 
+              title="Limpar todos os filtros"
+              class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-600 hover:text-brand-900 font-bold text-[11px] rounded-lg border border-slate-200 transition-all flex items-center gap-1"
+            >
+              <i class="fa-solid fa-rotate-left text-[9px]"></i>
+              <span>Limpar</span>
+            </button>
           </div>
 
-          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex flex-col gap-3 min-w-[220px]">
+          <!-- Totalizador de Respondentes Filtrados -->
+          <div class="bg-brand-50/60 rounded-xl p-3 border border-brand-100">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-brand-800">População Filtrada</p>
+            <div class="flex items-baseline gap-1 mt-0.5">
+              <span id="filtered-records-count" class="text-xl font-black text-brand-900">0</span>
+              <span class="text-xs font-semibold text-slate-500">de <span id="total-base-count" class="font-bold text-slate-800">0</span> respondentes</span>
+            </div>
+          </div>
+
+          <!-- Lista Vertical de Filtros -->
+          <div class="space-y-3.5 text-xs">
+            
+            <!-- 1. Gênero -->
             <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Status da Conexão</p>
-              <div class="flex items-center gap-2 mt-1">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span id="supabase-table-status" class="text-sm font-bold text-white">Conectando...</span>
+              <label for="filter-gender" class="block font-bold text-slate-700 mb-1">Gênero</label>
+              <div class="relative">
+                <select id="filter-gender" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todos os Gêneros</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
               </div>
             </div>
-            <div class="pt-2 border-t border-white/10">
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-300">Última Atualização</p>
-              <p id="last-sync-time" class="text-xs font-bold text-accent-cyan mt-0.5">--:--:--</p>
+
+            <!-- 2. Renda Familiar -->
+            <div>
+              <label for="filter-income" class="block font-bold text-slate-700 mb-1">Faixa de Renda</label>
+              <div class="relative">
+                <select id="filter-income" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todas as Faixas</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 3. Idade / Faixa Etária -->
+            <div>
+              <label for="filter-age" class="block font-bold text-slate-700 mb-1">Faixa Etária</label>
+              <div class="relative">
+                <select id="filter-age" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todas as Idades</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 4. Região / Bairro -->
+            <div>
+              <label for="filter-region" class="block font-bold text-slate-700 mb-1">Região de SJC</label>
+              <div class="relative">
+                <select id="filter-region" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todas as Regiões</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 5. Estado Civil -->
+            <div>
+              <label for="filter-marital" class="block font-bold text-slate-700 mb-1">Estado Civil</label>
+              <div class="relative">
+                <select id="filter-marital" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todos os Estados Civis</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 6. Modelo de Trabalho -->
+            <div>
+              <label for="filter-work" class="block font-bold text-slate-700 mb-1">Modelo de Trabalho</label>
+              <div class="relative">
+                <select id="filter-work" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todos os Modelos</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 7. Casa Própria -->
+            <div>
+              <label for="filter-house" class="block font-bold text-slate-700 mb-1">Moradia (Casa Própria)</label>
+              <div class="relative">
+                <select id="filter-house" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todas as Opções</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 8. Espectro Político -->
+            <div>
+              <label for="filter-politics" class="block font-bold text-slate-700 mb-1">Posicionamento Político</label>
+              <div class="relative">
+                <select id="filter-politics" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todos os Posicionamentos</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 9. Avaliação da Qualidade de Vida -->
+            <div>
+              <label for="filter-quality" class="block font-bold text-slate-700 mb-1">Nota Qualidade de Vida</label>
+              <div class="relative">
+                <select id="filter-quality" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todas as Notas (1 a 5)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 10. Orgulho de Morar -->
+            <div>
+              <label for="filter-pride" class="block font-bold text-slate-700 mb-1">Orgulho da Cidade</label>
+              <div class="relative">
+                <select id="filter-pride" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="TODOS">Todas as Opções</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="pt-5 mt-5 border-t border-slate-100 text-[10px] text-slate-400 font-medium text-center">
+          Radar São José Analytics &bull; v3.0 Pro
+        </div>
+      </aside>
+
+
+      <!-- ========================================== -->
+      <!-- CONTEÚDO PRINCIPAL (DASHBOARD & GRÁFICOS) -->
+      <!-- ========================================== -->
+      <main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+        
+        <!-- Hero Banner com Foto da Cidade -->
+        <section class="relative rounded-3xl overflow-hidden bg-brand-950 text-white shadow-xl">
+          <div class="absolute inset-0 z-0 opacity-25 mix-blend-overlay bg-cover bg-center" style="background-image: url('fotos radar/foto_cidade.jpg');"></div>
+          <div class="absolute inset-0 z-0 bg-gradient-to-r from-brand-950 via-brand-900/90 to-transparent"></div>
+          
+          <div class="relative z-10 p-8 sm:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="max-w-2xl space-y-2.5">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/30 text-accent-cyan text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-satellite-dish"></i>
+                <span>Censo Analítico Municipal de São José dos Campos</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight">
+                Painel Completo de Opinião, Hábitos & Comportamento
+              </h1>
+              <p class="text-xs sm:text-sm font-medium text-slate-300">
+                Visualização 100% dinâmica com todas as perguntas da pesquisa municipal mapeadas para gráficos especializados com data labels.
+              </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 flex flex-col gap-2 min-w-[200px]">
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-300">Conexão Supabase</p>
+                <div class="flex items-center gap-2 mt-0.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span id="supabase-table-status" class="text-xs font-bold text-white">Conectando...</span>
+                </div>
+              </div>
+              <div class="pt-2 border-t border-white/10">
+                <p class="text-[10px] font-bold uppercase tracking-wider text-slate-300">Sincronização</p>
+                <p id="last-sync-time" class="text-xs font-bold text-accent-cyan mt-0.5">--:--:--</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Error Notification -->
-      <div id="data-fetch-error" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold"></div>
+        <!-- Error Notification -->
+        <div id="data-fetch-error" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold"></div>
 
-      <!-- KPIS / RESUMO GERAL -->
-      <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Total de Respondentes</p>
-            <h3 id="stat-total-responses" class="text-3xl font-black text-brand-900 mt-2">0</h3>
-            <p class="text-xs font-semibold text-emerald-600 flex items-center gap-1 mt-1">
-              <i class="fa-solid fa-check-double"></i>
-              <span>Amostragem Válida</span>
-            </p>
-          </div>
-          <div class="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-xl">
-            <i class="fa-solid fa-users"></i>
-          </div>
-        </div>
-
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Qualidade de Vida (1 a 5)</p>
-            <h3 id="stat-quality-life" class="text-3xl font-black text-brand-900 mt-2">0.0</h3>
-            <p class="text-xs font-semibold text-brand-600 mt-1">Nota Média Geral</p>
-          </div>
-          <div class="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-accent-cyan text-xl">
-            <i class="fa-solid fa-star"></i>
-          </div>
-        </div>
-
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Orgulho da Cidade</p>
-            <h3 id="stat-pride-rate" class="text-3xl font-black text-brand-900 mt-2">0%</h3>
-            <p class="text-xs font-semibold text-slate-400 mt-1">Sentimento Positivo</p>
-          </div>
-          <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-xl">
-            <i class="fa-solid fa-heart"></i>
-          </div>
-        </div>
-
-        <div class="bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Bairros Representados</p>
-            <h3 id="stat-neighborhoods-count" class="text-3xl font-black text-brand-900 mt-2">0</h3>
-            <p class="text-xs font-semibold text-slate-400 mt-1">Cobertura Territorial</p>
-          </div>
-          <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 text-xl">
-            <i class="fa-solid fa-map-location-dot"></i>
-          </div>
-        </div>
-      </section>
-
-      <!-- GALERIA VISUAL DAS FOTOS OFICIAIS -->
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
-          <img src="fotos radar/foto_gastronomia.jpg" alt="Gastronomia" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Gastronomia & Lazer</span>
-            <h4 class="text-base font-bold text-white">Hábitos & Decisão de Consumo</h4>
-          </div>
-        </div>
-
-        <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
-          <img src="fotos radar/foto_cultura.jpg" alt="Cultura" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Cultura & Festas</span>
-            <h4 class="text-base font-bold text-white">Eventos & Identidade Regional</h4>
-          </div>
-        </div>
-
-        <div class="relative h-48 rounded-3xl overflow-hidden shadow-card group">
-          <img src="fotos radar/foto_noite.jpg" alt="Vida Noturna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/30 to-transparent p-6 flex flex-col justify-end">
-            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-cyan">Vida Noturna & Desafios</span>
-            <h4 class="text-base font-bold text-white">Potencial de Gasto & Atração</h4>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 1: PERFIL DEMOGRÁFICO, SOCIAL & RENDA (6 Perguntas) -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">1</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Perfil Demográfico, Social & Renda</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- 1. Qual a sua idade? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Qual a sua idade?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Distribuição etária dos participantes</p>
-            <div class="chart-container"><canvas id="chart-age"></canvas></div>
+        <!-- KPIS / RESUMO GERAL -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Amostra Filtrada</p>
+              <h3 id="stat-total-responses" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0</h3>
+              <p class="text-[11px] font-semibold text-emerald-600 flex items-center gap-1 mt-1">
+                <i class="fa-solid fa-check-double"></i>
+                <span id="kpi-margin-sub">Margem &plusmn;0.0%</span>
+              </p>
+            </div>
+            <div class="w-11 h-11 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-lg">
+              <i class="fa-solid fa-users"></i>
+            </div>
           </div>
 
-          <!-- 2. Como você se identifica? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Como você se identifica?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Gênero dos respondentes</p>
-            <div class="chart-container"><canvas id="chart-gender"></canvas></div>
+          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Qualidade de Vida (1 a 5)</p>
+              <h3 id="stat-quality-life" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0.0</h3>
+              <p class="text-[11px] font-semibold text-brand-600 mt-1">Nota Média Geral</p>
+            </div>
+            <div class="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-accent-cyan text-lg">
+              <i class="fa-solid fa-star"></i>
+            </div>
           </div>
 
-          <!-- 3. Qual a renda total da sua casa por mês? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Renda Total Familiar Mensal</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Faixas de renda por domicílio</p>
-            <div class="chart-container"><canvas id="chart-income"></canvas></div>
+          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Orgulho de Morar</p>
+              <h3 id="stat-pride-rate" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0%</h3>
+              <p class="text-[11px] font-semibold text-slate-400 mt-1">Sentimento Positivo</p>
+            </div>
+            <div class="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg">
+              <i class="fa-solid fa-heart"></i>
+            </div>
           </div>
 
-          <!-- 4. O seu trabalho hoje é: -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">O seu trabalho hoje é:</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Presencial, Híbrido ou Home Office</p>
-            <div class="chart-container"><canvas id="chart-work-mode"></canvas></div>
+          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
+            <div>
+              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Bairros Presentes</p>
+              <h3 id="stat-neighborhoods-count" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0</h3>
+              <p class="text-[11px] font-semibold text-slate-400 mt-1">Cobertura Territorial</p>
+            </div>
+            <div class="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 text-lg">
+              <i class="fa-solid fa-map-location-dot"></i>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTAINER DINÂMICO PARA TODOS OS GRÁFICOS GERADOS PELO APP.JS -->
+        <div id="dynamic-charts-grid" class="space-y-10"></div>
+
+        <!-- TABELA DE REGISTROS RECENTES -->
+        <section class="bg-surface-card rounded-3xl shadow-card border border-surface-border overflow-hidden">
+          <div class="p-6 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="text-lg font-black text-brand-900">Registros Brutos da Tabela (Supabase)</h3>
+              <p class="text-xs font-medium text-slate-400 mt-0.5">Últimas respostas registradas em tempo real na tabela <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-800 font-mono font-bold">respostas_pesquisa</code> / <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-800 font-mono font-bold">respostas radar</code></p>
+            </div>
+            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-xl border border-emerald-200 self-start sm:self-auto flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Base Integrada
+            </span>
           </div>
 
-          <!-- 5. Qual o seu estado civil? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Qual o seu estado civil?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Situação conjugal da população</p>
-            <div class="chart-container"><canvas id="chart-marital"></canvas></div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 font-bold uppercase tracking-wider text-slate-500 border-b border-surface-border">
+                <tr>
+                  <th class="py-4 px-6">Data / Hora</th>
+                  <th class="py-4 px-6">Bairro / Região</th>
+                  <th class="py-4 px-6">Idade / Perfil</th>
+                  <th class="py-4 px-6">Nota Qualidade</th>
+                  <th class="py-4 px-6">O que mais falta?</th>
+                  <th class="py-4 px-6 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody id="recent-records-table-body" class="divide-y divide-slate-100">
+                <tr>
+                  <td colspan="6" class="py-10 text-center text-slate-400 font-semibold">
+                    <i class="fa-solid fa-spinner fa-spin mr-2 text-brand-600"></i> Carregando registros da pesquisa...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+        </section>
 
-          <!-- 6. Você Já tem casa própria? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Você já tem casa própria?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Posse imobiliária residencial</p>
-            <div class="chart-container"><canvas id="chart-house"></canvas></div>
-          </div>
-        </div>
-      </div>
+      </main>
+    </div>
 
-      <!-- SECTION 2: QUALIDADE DE VIDA, CONCEITO & MOBILIDADE (6 Perguntas) -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">2</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Qualidade de Vida, Mobilidade & Percepção da Cidade</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- 7. De 1 a 5, que nota você dá para a qualidade de vida? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Nota de Qualidade de Vida</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Escala de 1 a 5 para São José</p>
-            <div class="chart-container"><canvas id="chart-quality-scale"></canvas></div>
-          </div>
-
-          <!-- 8. Quais meios de transporte você usa? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Meios de Transporte Utilizados</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Modais de deslocamento diário</p>
-            <div class="chart-container"><canvas id="chart-transport"></canvas></div>
-          </div>
-
-          <!-- 9. Para você, São José é: -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Para você, São José é:</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Imagem e percepção do município</p>
-            <div class="chart-container"><canvas id="chart-city-concept"></canvas></div>
-          </div>
-
-          <!-- 10. Para você, a cidade de São José está: -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">A cidade de São José está:</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Crescendo, Estável ou Regredindo</p>
-            <div class="chart-container"><canvas id="chart-growth"></canvas></div>
-          </div>
-
-          <!-- 11. Você tem orgulho de morar em São José dos Campos? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Orgulho de Morar em SJC</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Sentimento de pertencimento municipal</p>
-            <div class="chart-container"><canvas id="chart-pride-chart"></canvas></div>
-          </div>
-
-          <!-- 12. Em poucas palavras, como você definiria São José hoje? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Definição de São José Hoje</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Principais adjetivos e conceitos expressos</p>
-            <div class="chart-container"><canvas id="chart-define-city"></canvas></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 3: CULTURA, LAZER, EVENTOS & CONSUMO (6 Perguntas) -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">3</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Cultura, Eventos, Gastronomia & Vida Noturna</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- 13. Você acha que a cidade tem boas opções de cultura e eventos? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Opções de Cultura e Eventos</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Avaliação da oferta cultural da cidade</p>
-            <div class="chart-container"><canvas id="chart-culture-options"></canvas></div>
-          </div>
-
-          <!-- 14. Você sente que as festas e eventos combinam com seu jeito? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Festas & Eventos Combinam com Você?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Afinidade do público com as atrações</p>
-            <div class="chart-container"><canvas id="chart-events-fit"></canvas></div>
-          </div>
-
-          <!-- 15. Comparando com as cidades vizinhas, o que acha das opções de lazer daqui? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Comparação com Cidades Vizinhas</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Competitividade do lazer regional</p>
-            <div class="chart-container"><canvas id="chart-compare-neighbors"></canvas></div>
-          </div>
-
-          <!-- 16. O que você acha que mais falta em São José? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">O Que Mais Falta em São José?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Demandas prioritárias não atendidas</p>
-            <div class="chart-container"><canvas id="chart-missing"></canvas></div>
-          </div>
-
-          <!-- 17. Com que frequência você sai para passear ou se divertir? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Frequência de Saída / Lazer</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Hábito de passear ou se divertir na cidade</p>
-            <div class="chart-container"><canvas id="chart-frequency"></canvas></div>
-          </div>
-
-          <!-- 18. Você costuma ir para outras cidades para passear ou comer fora? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Evasão para Outras Cidades</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Frequência de deslocamento para SP/Litoral</p>
-            <div class="chart-container"><canvas id="chart-other-cities"></canvas></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 4: HÁBITOS DE BARES, NOITE & MÚSICA (6 Perguntas) -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">4</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Comportamento Noturno, Gastronomia & Músicas Favoritas</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- 19. Qual região da cidade você mais frequenta quando sai de casa? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Região Mais Frequentada</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Polos de maior concentração de pessoas</p>
-            <div class="chart-container"><canvas id="chart-regions-frequented"></canvas></div>
-          </div>
-
-          <!-- 20. Qual a maior dificuldade para sair à noite em São José? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Maior Dificuldade Noturna</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Gargalos da vida noturna e saídas</p>
-            <div class="chart-container"><canvas id="chart-nightlife-issues"></canvas></div>
-          </div>
-
-          <!-- 21. O que faz você escolher um restaurante ou bar? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Escolha de Restaurante / Bar</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Critérios decisivos de seleção</p>
-            <div class="chart-container"><canvas id="chart-bar-choice"></canvas></div>
-          </div>
-
-          <!-- 22. Você escolhe um lugar só porque ele é bonito para tirar fotos e postar? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Espaços Instagramáveis</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Influência visual/estética no consumo</p>
-            <div class="chart-container"><canvas id="chart-instagrammable"></canvas></div>
-          </div>
-
-          <!-- 23. Quais tipos de música você mais gosta de ouvir? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Gêneros Musicais Favoritos</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Estilos de maior apelo na cidade</p>
-            <div class="chart-container"><canvas id="chart-music-types"></canvas></div>
-          </div>
-
-          <!-- 24. Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Potencial de Consumo Adicional</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Disposição para gastar mais com lazer</p>
-            <div class="chart-container"><canvas id="chart-spend-more"></canvas></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 5: MÍDIA, STREAMING, INFLUENCIADORES & COMPORTAMENTO SOCIAL (6 Perguntas) -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">5</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Mídias, Streaming, Influenciadores & Relacionamentos</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- 25. Quais desses serviços de filmes ou música você usa? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Streaming de Filmes & Música</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Penetração de plataformas digitais</p>
-            <div class="chart-container"><canvas id="chart-streamings"></canvas></div>
-          </div>
-
-          <!-- 26. Qual rede social você mais usa pra encontrar lugares e referências na cidade -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Redes Sociais de Descoberta</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Canais de busca de referências locais</p>
-            <div class="chart-container"><canvas id="chart-social-discovery"></canvas></div>
-          </div>
-
-          <!-- 27. Você já foi em algum lugar só porque viu um influenciador da cidade indicando? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Conversão por Influenciadores</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Eficácia das indicações de criadores</p>
-            <div class="chart-container"><canvas id="chart-influencers"></canvas></div>
-          </div>
-
-          <!-- 28. Por onde você fica sabendo das notícias de São José? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Fontes de Notícias da Cidade</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Portais, Redes, WhatsApp e TV</p>
-            <div class="chart-container"><canvas id="chart-news-sources"></canvas></div>
-          </div>
-
-          <!-- 29. Você acha que precisa estar bem financeiramente antes de começar um relacionamento? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Finanças vs Relacionamento</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Condição financeira prévia para namoro sério</p>
-            <div class="chart-container"><canvas id="chart-finance-relationship"></canvas></div>
-          </div>
-
-          <!-- 30. As redes sociais ou aplicativos de namoro mexem com a sua vida social? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Apps de Namoro & Vida Social</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Impacto das redes na dinâmica social</p>
-            <div class="chart-container"><canvas id="chart-dating-apps"></canvas></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 6: ECONOMIA LOCAL, PETS, POLÍTICA & QUEM AJUDA A CIDADE (6 Perguntas) -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
-          <div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">6</div>
-          <h2 class="text-lg sm:text-xl font-bold text-brand-900">Economia Local, Pets, Política & Desenvolvimento</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- 31. Produtores locais & feiras de artesanato -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Consumo de Produtores Locais</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Compras em feiras e artesãos de SJC</p>
-            <div class="chart-container"><canvas id="chart-local-producers"></canvas></div>
-          </div>
-
-          <!-- 32. Pets & Cidade Pet Friendly -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Posse de Pets & Estrutura Pet Friendly</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Avaliação de tutores e animais na cidade</p>
-            <div class="chart-container"><canvas id="chart-pets"></canvas></div>
-          </div>
-
-          <!-- 33. Acompanhamento da Política Local -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Interesse na Política Municipal</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Nível de 1 a 5 de acompanhamento</p>
-            <div class="chart-container"><canvas id="chart-politics-follow"></canvas></div>
-          </div>
-
-          <!-- 34. Posicionamento Político -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Posicionamento Político</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Distribuição do espectro de afinidade</p>
-            <div class="chart-container"><canvas id="chart-politics-side"></canvas></div>
-          </div>
-
-          <!-- 35. Quem mais ajuda a cidade a crescer? -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Quem Mais Ajuda a Cidade a Crescer?</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Agentes e motores de transformação</p>
-            <div class="chart-container"><canvas id="chart-growth-agents"></canvas></div>
-          </div>
-
-          <!-- 36. Top Bairros com Mais Respondentes -->
-          <div class="bg-surface-card rounded-2xl p-6 shadow-card border border-surface-border">
-            <h3 class="text-sm font-bold text-brand-900 mb-1">Concentração por Bairro</h3>
-            <p class="text-xs font-medium text-slate-400 mb-4">Principais bairros de residência</p>
-            <div class="chart-container"><canvas id="chart-top-neighborhoods"></canvas></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 7: TABELA DE REGISTROS RECENTES -->
-      <section class="bg-surface-card rounded-3xl shadow-card border border-surface-border overflow-hidden">
-        <div class="p-6 sm:p-8 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h3 class="text-lg font-black text-brand-900">Registros Brutos da Tabela (Supabase)</h3>
-            <p class="text-xs font-medium text-slate-400 mt-0.5">Últimas respostas registradas em tempo real na tabela <code class="px-2 py-0.5 bg-slate-100 rounded text-brand-800 font-mono font-bold">respostas radar</code></p>
-          </div>
-          <span class="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-xl border border-emerald-200 self-start sm:self-auto flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            Base Integrada
-          </span>
-        </div>
-
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs text-slate-600">
-            <thead class="bg-slate-50 font-bold uppercase tracking-wider text-slate-500 border-b border-surface-border">
-              <tr>
-                <th class="py-4 px-6">Data / Hora</th>
-                <th class="py-4 px-6">Bairro / Região</th>
-                <th class="py-4 px-6">Idade / Perfil</th>
-                <th class="py-4 px-6">Nota Qualidade</th>
-                <th class="py-4 px-6">O que mais falta?</th>
-                <th class="py-4 px-6 text-right">Status</th>
-              </tr>
-            </thead>
-            <tbody id="recent-records-table-body" class="divide-y divide-slate-100">
-              <tr>
-                <td colspan="6" class="py-10 text-center text-slate-400 font-semibold">
-                  <i class="fa-solid fa-spinner fa-spin mr-2 text-brand-600"></i> Carregando registros da pesquisa...
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- Footer Institucional com Logo Oficial Branco -->
+    <!-- Footer Institucional com Logo Branco -->
     <footer class="bg-brand-950 text-white border-t border-brand-900 py-6 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
         <div class="flex items-center gap-3">
           <img src="fotos radar/logobranco.png" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos radar/logo.png'" />
-          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência de Mercado & Pesquisa Municipal</span>
+          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Pesquisa Municipal SJC</span>
         </div>
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
       </div>

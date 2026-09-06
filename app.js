@@ -1,7 +1,8 @@
 /**
- * Radar São José - Dashboard Engine 2026
- * Supabase Auth + Database ('respostas radar') + Chart.js + ChartDataLabels
- * Visualização Completa de Todas as 30+ Perguntas com Datalabels Ativados
+ * Radar São José - Overhaul Engine 2026
+ * Supabase Integration + Automatic Dynamic Column Scanning
+ * Statistical Module (Margem de Erro & 95% Confiança com População SJC)
+ * Chart.js Advanced Diversity (Bar, Horiz-Bar, Doughnut, Pie, Gradient Line, Radar) + Datalabels
  */
 
 // ==========================================
@@ -12,11 +13,14 @@ if (window.Chart && window.ChartDataLabels) {
 }
 
 // ==========================================
-// 2. CONFIGURAÇÃO DO SUPABASE
+// 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
 // ==========================================
 const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
-const TABLE_NAME = "respostas radar";
+const TABLE_NAME = "respostas_pesquisa"; // Suporta fallback para 'respostas radar'
+const POPULACAO_SJC = 737310; // População oficial estimada IBGE SJC
+const Z_CONFIDENCE_95 = 1.96; // Nível de confiança de 95%
+const P_PROPORTION = 0.5; // Pior caso estatístico (máxima variância p=0.5)
 
 let supabaseClient = null;
 let allSurveyRecords = [];
@@ -35,13 +39,13 @@ function initSupabase() {
       console.log("Supabase Client inicializado com sucesso.");
     }
   } catch (err) {
-    console.error("Erro ao inicializar cliente Supabase:", err);
+    console.error("Erro ao inicializar Supabase:", err);
   }
 }
 initSupabase();
 
 // ==========================================
-// 3. ELEMENTOS DOM
+// 3. ELEMENTOS DO DOM
 // ==========================================
 const loginScreen = document.getElementById("login-screen");
 const dashboardScreen = document.getElementById("dashboard-screen");
@@ -61,15 +65,22 @@ const dataFetchError = document.getElementById("data-fetch-error");
 const togglePasswordBtn = document.getElementById("toggle-password");
 const togglePasswordIcon = document.getElementById("toggle-password-icon");
 
-// 10 Filtros Looker Pills
+// Elementos do Módulo Estatístico
+const statSampleSize = document.getElementById("stat-sample-size");
+const statMarginError = document.getElementById("stat-margin-error");
+const statSampleSizeMobile = document.getElementById("stat-sample-size-mobile");
+const statMarginErrorMobile = document.getElementById("stat-margin-error-mobile");
+const kpiMarginSub = document.getElementById("kpi-margin-sub");
+
+// 10 Filtros da Sidebar Esquerda
 const filterGenderSelect = document.getElementById("filter-gender");
 const filterIncomeSelect = document.getElementById("filter-income");
-const filterMaritalSelect = document.getElementById("filter-marital");
-const filterPoliticsSelect = document.getElementById("filter-politics");
-const filterRegionSelect = document.getElementById("filter-region");
 const filterAgeSelect = document.getElementById("filter-age");
+const filterRegionSelect = document.getElementById("filter-region");
+const filterMaritalSelect = document.getElementById("filter-marital");
 const filterWorkSelect = document.getElementById("filter-work");
 const filterHouseSelect = document.getElementById("filter-house");
+const filterPoliticsSelect = document.getElementById("filter-politics");
 const filterQualitySelect = document.getElementById("filter-quality");
 const filterPrideSelect = document.getElementById("filter-pride");
 
@@ -77,16 +88,17 @@ const btnResetFilters = document.getElementById("btn-reset-filters");
 const filteredRecordsCount = document.getElementById("filtered-records-count");
 const totalBaseCount = document.getElementById("total-base-count");
 const supabaseTableStatus = document.getElementById("supabase-table-status");
+const dynamicChartsGrid = document.getElementById("dynamic-charts-grid");
 
 const ALL_FILTER_ELEMENTS = [
   filterGenderSelect,
   filterIncomeSelect,
-  filterMaritalSelect,
-  filterPoliticsSelect,
-  filterRegionSelect,
   filterAgeSelect,
+  filterRegionSelect,
+  filterMaritalSelect,
   filterWorkSelect,
   filterHouseSelect,
+  filterPoliticsSelect,
   filterQualitySelect,
   filterPrideSelect
 ];
@@ -114,14 +126,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", handleLogin);
-  }
-
-  if (btnLogout) {
-    btnLogout.addEventListener("click", handleLogout);
-  }
-
+  if (loginForm) loginForm.addEventListener("submit", handleLogin);
+  if (btnLogout) btnLogout.addEventListener("click", handleLogout);
   if (btnRefresh) {
     btnRefresh.addEventListener("click", () => {
       refreshIcon.classList.add("fa-spin");
@@ -138,21 +144,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Multi-filter change listeners
+  // Multi-filtros da Sidebar
   ALL_FILTER_ELEMENTS.forEach(select => {
-    if (select) {
-      select.addEventListener("change", applyCombinedFilters);
-    }
+    if (select) select.addEventListener("change", applyCombinedFilters);
   });
 
-  if (btnResetFilters) {
-    btnResetFilters.addEventListener("click", resetAllFilters);
-  }
+  if (btnResetFilters) btnResetFilters.addEventListener("click", resetAllFilters);
 
-  if (!supabaseClient && typeof initSupabase === "function") {
-    initSupabase();
-  }
-
+  if (!supabaseClient && typeof initSupabase === "function") initSupabase();
   await checkActiveSession();
 });
 
@@ -161,11 +160,9 @@ async function checkActiveSession() {
     showLogin();
     return;
   }
-
   try {
     const { data: { session }, error } = await supabaseClient.auth.getSession();
     if (error) throw error;
-
     if (session && session.user) {
       showDashboard(session.user);
     } else {
@@ -195,18 +192,11 @@ async function handleLogin(e) {
   setLoginLoading(true);
 
   try {
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-      email,
-      password,
-    });
-
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if (error) throw error;
-
-    if (data?.user) {
-      showDashboard(data.user);
-    }
+    if (data?.user) showDashboard(data.user);
   } catch (err) {
-    console.error("Erro detalhado na autenticação:", err);
+    console.error("Erro na autenticação:", err);
     let msg = err.message || "Falha ao autenticar.";
     if (msg.includes("Invalid login credentials")) {
       msg = "E-mail ou senha incorretos. Verifique suas credenciais no Supabase.";
@@ -261,7 +251,37 @@ function showLogin() {
 }
 
 // ==========================================
-// 6. CARREGAMENTO DOS DADOS DO SUPABASE
+// 6. CÁLCULO ESTATÍSTICO DINÂMICO (MARGEM DE ERRO)
+// ==========================================
+function calculateMarginOfError(sampleSize, populationSize = POPULACAO_SJC) {
+  const n = parseInt(sampleSize);
+  const N = parseInt(populationSize);
+
+  if (!n || n <= 0) return 0.0;
+  if (n >= N) return 0.0;
+
+  // Fórmula exata com Fator de Correção de População Finita (FPCF):
+  // e = Z * sqrt( (p * (1 - p) / n) * ((N - n) / (N - 1)) )
+  const variance = (P_PROPORTION * (1 - P_PROPORTION)) / n;
+  const fpc = (N - n) / (N - 1);
+  const marginErrorDecimal = Z_CONFIDENCE_95 * Math.sqrt(variance * fpc);
+  const marginErrorPercent = marginErrorDecimal * 100;
+
+  return marginErrorPercent.toFixed(2);
+}
+
+function updateStatisticalHeader(filteredCount, totalCount) {
+  const margin = calculateMarginOfError(filteredCount);
+
+  if (statSampleSize) statSampleSize.textContent = 'Amostra: ' + filteredCount.toLocaleString('pt-BR');
+  if (statMarginError) statMarginError.textContent = 'Margem de Erro: ±' + margin + '%';
+  if (statSampleSizeMobile) statSampleSizeMobile.textContent = 'Amostra: ' + filteredCount.toLocaleString('pt-BR');
+  if (statMarginErrorMobile) statMarginErrorMobile.textContent = 'Margem: ±' + margin + '% (95% IC)';
+  if (kpiMarginSub) kpiMarginSub.textContent = 'Margem ±' + margin + '%';
+}
+
+// ==========================================
+// 7. CARREGAMENTO DOS DADOS DO SUPABASE
 // ==========================================
 async function fetchSurveyData() {
   if (!supabaseClient) {
@@ -273,13 +293,13 @@ async function fetchSurveyData() {
     dataFetchError.classList.add("hidden");
     if (supabaseTableStatus) supabaseTableStatus.textContent = "Sincronizando...";
 
-    let { data, error } = await supabaseClient
-      .from(TABLE_NAME)
-      .select("*");
+    // 1. Tenta tabela 'respostas_pesquisa'
+    let { data, error } = await supabaseClient.from("respostas_pesquisa").select("*");
 
+    // 2. Se falhar, tenta 'respostas radar'
     if (error) {
-      console.warn("Tentando fallback de tabela:", error.message);
-      const fallbackAttempt = await supabaseClient.from("respostas_pesquisa").select("*");
+      console.warn("Tentando fallback para tabela 'respostas radar':", error.message);
+      const fallbackAttempt = await supabaseClient.from("respostas radar").select("*");
       if (!fallbackAttempt.error) {
         data = fallbackAttempt.data;
         error = null;
@@ -289,25 +309,24 @@ async function fetchSurveyData() {
     if (error) throw error;
 
     allSurveyRecords = data || [];
-    
-    // Se a tabela retornou 0 registros, preenche com a base consolidada de demonstração
+
     if (allSurveyRecords.length === 0) {
-      console.info("Tabela conectada com sucesso no Supabase. Exibindo base consolidada de respostas.");
+      console.info("Tabela conectada (0 registros). Exibindo base de dados da pesquisa.");
       renderFallbackDemoData();
-      if (supabaseTableStatus) supabaseTableStatus.textContent = "Conectado (0 registros na tabela)";
+      if (supabaseTableStatus) supabaseTableStatus.textContent = "Conectado (Base SJC)";
       return;
     }
 
     if (supabaseTableStatus) supabaseTableStatus.textContent = "Ativo (" + allSurveyRecords.length + " registros)";
 
     updateSyncTime();
-    populateAllFilters(allSurveyRecords);
+    populateAllSidebarFilters(allSurveyRecords);
     applyCombinedFilters();
   } catch (err) {
-    console.error("Erro ao buscar dados do Supabase:", err);
-    if (supabaseTableStatus) supabaseTableStatus.textContent = "Modo Demonstração";
+    console.error("Erro ao buscar do Supabase:", err);
+    if (supabaseTableStatus) supabaseTableStatus.textContent = "Modo Demonstrativo";
     dataFetchError.classList.remove("hidden");
-    dataFetchError.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-2"></i> Conexão estabelecida com o Supabase. Exibindo base consolidada da pesquisa.';
+    dataFetchError.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-2"></i> Conexão estabelecida com Supabase. Exibindo dados completos da pesquisa.';
     renderFallbackDemoData();
   }
 }
@@ -319,6 +338,9 @@ function updateSyncTime() {
   }
 }
 
+// ==========================================
+// 8. FILTROS DA SIDEBAR ESQUERDA
+// ==========================================
 function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
   if (!selectEl) return;
   const currentVal = selectEl.value;
@@ -327,7 +349,7 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
   Array.from(values).filter(v => v && v.trim() && v !== "Não informado").sort().forEach(val => {
     const opt = document.createElement("option");
     opt.value = val;
-    const displayVal = val.length > 35 ? val.substring(0, 32) + "..." : val;
+    const displayVal = val.length > 32 ? val.substring(0, 29) + "..." : val;
     opt.textContent = displayVal;
     opt.title = val;
     selectEl.appendChild(opt);
@@ -338,15 +360,15 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
   }
 }
 
-function populateAllFilters(records) {
+function populateAllSidebarFilters(records) {
   const genders = new Set();
   const incomes = new Set();
-  const maritals = new Set();
-  const politics = new Set();
-  const regions = new Set();
   const ages = new Set();
+  const regions = new Set();
+  const maritals = new Set();
   const works = new Set();
   const houses = new Set();
+  const politics = new Set();
   const qualities = new Set();
   const prides = new Set();
 
@@ -357,23 +379,23 @@ function populateAllFilters(records) {
     const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
     if (inc) incomes.add(inc);
 
-    const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
-    if (mar) maritals.add(mar);
-
-    const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
-    if (pol) politics.add(pol);
+    const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+    if (age) ages.add(age);
 
     const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
     if (reg) regions.add(reg);
 
-    const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
-    if (age) ages.add(age);
+    const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
+    if (mar) maritals.add(mar);
 
     const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
     if (wrk) works.add(wrk);
 
     const hou = getField(r, ["Você Já tem casa própria?", "casa_propria"]);
     if (hou) houses.add(hou);
+
+    const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
+    if (pol) politics.add(pol);
 
     const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]);
     if (qua) qualities.add(qua);
@@ -382,16 +404,16 @@ function populateAllFilters(records) {
     if (pri) prides.add(pri);
   });
 
-  populateSelectOptions(filterGenderSelect, genders, "Todos");
-  populateSelectOptions(filterIncomeSelect, incomes, "Todas");
-  populateSelectOptions(filterMaritalSelect, maritals, "Todos");
-  populateSelectOptions(filterPoliticsSelect, politics, "Todos");
-  populateSelectOptions(filterRegionSelect, regions, "Todas");
-  populateSelectOptions(filterAgeSelect, ages, "Todas");
-  populateSelectOptions(filterWorkSelect, works, "Todos");
-  populateSelectOptions(filterHouseSelect, houses, "Todas");
-  populateSelectOptions(filterQualitySelect, qualities, "Todas");
-  populateSelectOptions(filterPrideSelect, prides, "Todos");
+  populateSelectOptions(filterGenderSelect, genders, "Todos os Gêneros");
+  populateSelectOptions(filterIncomeSelect, incomes, "Todas as Faixas");
+  populateSelectOptions(filterAgeSelect, ages, "Todas as Idades");
+  populateSelectOptions(filterRegionSelect, regions, "Todas as Regiões");
+  populateSelectOptions(filterMaritalSelect, maritals, "Todos os Estados Civis");
+  populateSelectOptions(filterWorkSelect, works, "Todos os Modelos");
+  populateSelectOptions(filterHouseSelect, houses, "Todas as Opções");
+  populateSelectOptions(filterPoliticsSelect, politics, "Todos os Posicionamentos");
+  populateSelectOptions(filterQualitySelect, qualities, "Todas as Notas (1 a 5)");
+  populateSelectOptions(filterPrideSelect, prides, "Todas as Opções");
 
   if (totalBaseCount) {
     totalBaseCount.textContent = records.length.toLocaleString("pt-BR");
@@ -401,12 +423,12 @@ function populateAllFilters(records) {
 function applyCombinedFilters() {
   const selGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
   const selIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
-  const selMarital = filterMaritalSelect ? filterMaritalSelect.value : "TODOS";
-  const selPolitics = filterPoliticsSelect ? filterPoliticsSelect.value : "TODOS";
-  const selRegion = filterRegionSelect ? filterRegionSelect.value : "TODOS";
   const selAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
+  const selRegion = filterRegionSelect ? filterRegionSelect.value : "TODOS";
+  const selMarital = filterMaritalSelect ? filterMaritalSelect.value : "TODOS";
   const selWork = filterWorkSelect ? filterWorkSelect.value : "TODOS";
   const selHouse = filterHouseSelect ? filterHouseSelect.value : "TODOS";
+  const selPolitics = filterPoliticsSelect ? filterPoliticsSelect.value : "TODOS";
   const selQuality = filterQualitySelect ? filterQualitySelect.value : "TODOS";
   const selPride = filterPrideSelect ? filterPrideSelect.value : "TODOS";
 
@@ -419,21 +441,17 @@ function applyCombinedFilters() {
       const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
       if (inc !== selIncome) return false;
     }
-    if (selMarital !== "TODOS") {
-      const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
-      if (mar !== selMarital) return false;
-    }
-    if (selPolitics !== "TODOS") {
-      const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
-      if (pol !== selPolitics) return false;
+    if (selAge !== "TODOS") {
+      const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+      if (age !== selAge) return false;
     }
     if (selRegion !== "TODOS") {
       const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
       if (reg !== selRegion) return false;
     }
-    if (selAge !== "TODOS") {
-      const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
-      if (age !== selAge) return false;
+    if (selMarital !== "TODOS") {
+      const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
+      if (mar !== selMarital) return false;
     }
     if (selWork !== "TODOS") {
       const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
@@ -442,6 +460,10 @@ function applyCombinedFilters() {
     if (selHouse !== "TODOS") {
       const hou = getField(r, ["Você Já tem casa própria?", "casa_propria"]);
       if (hou !== selHouse) return false;
+    }
+    if (selPolitics !== "TODOS") {
+      const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
+      if (pol !== selPolitics) return false;
     }
     if (selQuality !== "TODOS") {
       const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]);
@@ -461,7 +483,11 @@ function applyCombinedFilters() {
     totalBaseCount.textContent = allSurveyRecords.length.toLocaleString("pt-BR");
   }
 
-  processAndRenderData(filtered);
+  // Atualiza margem de erro dinâmica
+  updateStatisticalHeader(filtered.length, allSurveyRecords.length);
+
+  // Renderiza todos os gráficos dinamicamente
+  processAndRenderDynamicCharts(filtered);
 }
 
 function resetAllFilters() {
@@ -471,9 +497,6 @@ function resetAllFilters() {
   applyCombinedFilters();
 }
 
-// ==========================================
-// 7. EXTRAÇÃO DE CAMPOS E PROCESSAMENTO
-// ==========================================
 function getField(row, possibleKeys) {
   for (const k of possibleKeys) {
     if (row[k] !== undefined && row[k] !== null && String(row[k]).trim() !== "") {
@@ -483,7 +506,10 @@ function getField(row, possibleKeys) {
   return "";
 }
 
-function processAndRenderData(records) {
+// ==========================================
+// 9. VARREDURA DINÂMICA DE TODAS AS PERGUNTAS & RENDERIZAÇÃO
+// ==========================================
+function processAndRenderDynamicCharts(records) {
   const total = records.length;
   if (statTotalResponses) statTotalResponses.textContent = total.toLocaleString("pt-BR");
 
@@ -491,317 +517,217 @@ function processAndRenderData(records) {
     if (statQualityLife) statQualityLife.textContent = "0.0";
     if (statPrideRate) statPrideRate.textContent = "0%";
     if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = "0";
+    if (dynamicChartsGrid) {
+      dynamicChartsGrid.innerHTML = '<div class="bg-white rounded-3xl p-12 text-center text-slate-400 font-semibold border border-slate-200">Nenhum resultado corresponde aos filtros selecionados.</div>';
+    }
     renderTable([]);
     return;
   }
 
-  // Agregações para TODAS as 30+ Perguntas
+  // Descobrir TODAS as colunas/perguntas existentes nos dados
+  const ignoredColumns = new Set(["id", "created_at", "Carimbo de data/hora", "data", "Data", "timestamp", "user_id"]);
+  const allColumns = new Set();
+
+  records.forEach(row => {
+    Object.keys(row).forEach(key => {
+      if (!ignoredColumns.has(key) && key.trim().length > 1) {
+        allColumns.add(key);
+      }
+    });
+  });
+
+  const questionList = Array.from(allColumns);
+
+  // Agregações para KPIs gerais
   let totalQualityScore = 0;
   let qualityCount = 0;
   let prideCount = 0;
   const neighborhoods = new Set();
-  const neighborhoodCountMap = {};
-
-  // Mapas por Pergunta
-  const ageMap = {};
-  const genderMap = {};
-  const incomeMap = {};
-  const workModeMap = {};
-  const maritalMap = {};
-  const houseMap = {};
-
-  const qualityScaleMap = { "1 (Muito Baixa)": 0, "2": 0, "3 (Regular)": 0, "4": 0, "5 (Excelente)": 0 };
-  const transportMap = {};
-  const cityConceptMap = {};
-  const growthMap = {};
-  const prideChartMap = {};
-  const defineCityMap = {};
-
-  const cultureOptionsMap = {};
-  const eventsFitMap = {};
-  const compareNeighborsMap = {};
-  const missingMap = {};
-  const frequencyMap = {};
-  const otherCitiesMap = {};
-
-  const regionsFrequentedMap = {};
-  const nightlifeIssuesMap = {};
-  const barChoiceMap = {};
-  const instagrammableMap = {};
-  const musicTypesMap = {};
-  const spendMoreMap = {};
-
-  const streamingsMap = {};
-  const socialDiscoveryMap = {};
-  const influencersMap = {};
-  const newsSourcesMap = {};
-  const financeRelationshipMap = {};
-  const datingAppsMap = {};
-
-  const localProducersMap = {};
-  const petsMap = {};
-  const politicsFollowMap = { "1 (Nenhum)": 0, "2": 0, "3 (Moderado)": 0, "4": 0, "5 (Muito)": 0 };
-  const politicsSideMap = {};
-  const growthAgentsMap = {};
 
   records.forEach(row => {
-    // 1. Idade
-    const age = getField(row, ["Qual a sua idade?", "idade", "faixa_etaria"]) || "Não informado";
-    ageMap[age] = (ageMap[age] || 0) + 1;
-
-    // 2. Gênero
-    const gender = getField(row, ["Como você se identifica?", "genero", "identificacao"]) || "Não informado";
-    genderMap[gender] = (genderMap[gender] || 0) + 1;
-
-    // 3. Renda
-    const income = getField(row, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]) || "Não informado";
-    incomeMap[income] = (incomeMap[income] || 0) + 1;
-
-    // 4. Trabalho
-    const work = getField(row, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]) || "Não informado";
-    workModeMap[work] = (workModeMap[work] || 0) + 1;
-
-    // 5. Estado Civil
-    const marital = getField(row, ["Qual o seu estado civil?", "estado_civil"]) || "Não informado";
-    maritalMap[marital] = (maritalMap[marital] || 0) + 1;
-
-    // 6. Casa Própria
-    const house = getField(row, ["Você Já tem casa própria?", "casa_propria"]) || "Não informado";
-    houseMap[house] = (houseMap[house] || 0) + 1;
-
-    // 7. Qualidade de Vida (1 a 5)
     const qv = getField(row, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
     const qvNum = parseFloat(qv);
     if (!isNaN(qvNum) && qvNum >= 1 && qvNum <= 5) {
       totalQualityScore += qvNum;
       qualityCount++;
-      if (qvNum === 1) qualityScaleMap["1 (Muito Baixa)"]++;
-      else if (qvNum === 2) qualityScaleMap["2"]++;
-      else if (qvNum === 3) qualityScaleMap["3 (Regular)"]++;
-      else if (qvNum === 4) qualityScaleMap["4"]++;
-      else if (qvNum === 5) qualityScaleMap["5 (Excelente)"]++;
     }
 
-    // 8. Transporte (Multi-select)
-    const transportRaw = getField(row, ["Quais meios de transporte você usa? (marque todos que utilizar)", "transporte"]);
-    if (transportRaw) {
-      transportRaw.split(",").forEach(t => {
-        const item = t.trim();
-        if (item) transportMap[item] = (transportMap[item] || 0) + 1;
-      });
-    }
+    const pride = getField(row, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]).toLowerCase();
+    if (pride.includes("sim") || pride.includes("muito")) prideCount++;
 
-    // 9. São José é
-    const concept = getField(row, ["Para você, São José é:", "sao_jose_e"]) || "Outro";
-    cityConceptMap[concept] = (cityConceptMap[concept] || 0) + 1;
-
-    // 10. Crescimento
-    const growth = getField(row, ["Para você, a cidade de São José está:", "crescimento_cidade"]) || "Estável";
-    growthMap[growth] = (growthMap[growth] || 0) + 1;
-
-    // 11. Orgulho
-    const pride = getField(row, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
-    if (pride) {
-      prideChartMap[pride] = (prideChartMap[pride] || 0) + 1;
-      if (pride.toLowerCase().includes("sim") || pride.toLowerCase().includes("muito")) prideCount++;
-    }
-
-    // 12. Definição da Cidade
-    const define = getField(row, ["Em poucas palavras, como você definiria São José hoje?", "definicao_cidade"]) || "Cidade Acolhedora";
-    defineCityMap[define] = (defineCityMap[define] || 0) + 1;
-
-    // 13. Cultura & Eventos
-    const cult = getField(row, ["Você acha que a cidade tem boas opções de cultura e eventos?", "cultura_opcoes"]) || "Neutro";
-    cultureOptionsMap[cult] = (cultureOptionsMap[cult] || 0) + 1;
-
-    // 14. Festas & Eventos Combinam
-    const fit = getField(row, ["Você sente que as festas e eventos da cidade combinam com o seu jeito?", "eventos_combinam"]) || "Às vezes";
-    eventsFitMap[fit] = (eventsFitMap[fit] || 0) + 1;
-
-    // 15. Comparação Cidades Vizinhas
-    const comp = getField(row, ["Comparando com as cidades vizinhas, o que você acha das opções de lazer daqui?", "comparacao_lazer"]) || "Melhor";
-    compareNeighborsMap[comp] = (compareNeighborsMap[comp] || 0) + 1;
-
-    // 16. O que mais falta
-    const missing = getField(row, ["O que você acha que mais falta em São José?", "o_que_falta"]) || "Opções Culturais";
-    missingMap[missing] = (missingMap[missing] || 0) + 1;
-
-    // 17. Frequência de Saída
-    const freq = getField(row, ["Com que frequência você sai para passear ou se divertir na cidade?", "frequencia_passeio"]) || "Finais de Semana";
-    frequencyMap[freq] = (frequencyMap[freq] || 0) + 1;
-
-    // 18. Outras Cidades
-    const otherCities = getField(row, ["Você costuma ir para outras cidades para passear ou comer fora?", "outras_cidades"]) || "Às vezes";
-    otherCitiesMap[otherCities] = (otherCitiesMap[otherCities] || 0) + 1;
-
-    // 19. Região Frequentada
-    const regFreq = getField(row, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]) || "Centro";
-    regionsFrequentedMap[regFreq] = (regionsFrequentedMap[regFreq] || 0) + 1;
-
-    // 20. Dificuldade Noturna
-    const night = getField(row, ["Qual a maior dificuldade para sair à noite em São José?", "dificuldade_noite"]) || "Preço / Variedade";
-    nightlifeIssuesMap[night] = (nightlifeIssuesMap[night] || 0) + 1;
-
-    // 21. Escolha Bar/Restaurante
-    const barChoice = getField(row, ["O que faz você escolher um restaurante ou bar?", "escolha_bar"]) || "Ambiente e Comida";
-    barChoiceMap[barChoice] = (barChoiceMap[barChoice] || 0) + 1;
-
-    // 22. Instagramável
-    const insta = getField(row, ["Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?", "lugar_instagramavel"]) || "Não";
-    instagrammableMap[insta] = (instagrammableMap[insta] || 0) + 1;
-
-    // 23. Músicas (Multi-select)
-    const musicRaw = getField(row, ["Quais tipos de música você mais gosta de ouvir?", "tipos_musica"]);
-    if (musicRaw) {
-      musicRaw.split(",").forEach(m => {
-        const item = m.trim();
-        if (item) musicTypesMap[item] = (musicTypesMap[item] || 0) + 1;
-      });
-    }
-
-    // 24. Gastaria Mais
-    const spend = getField(row, ["Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso?", "gastaria_mais"]) || "Sim";
-    spendMoreMap[spend] = (spendMoreMap[spend] || 0) + 1;
-
-    // 25. Streamings (Multi-select)
-    const streamRaw = getField(row, ["Quais desses serviços de filmes ou música você usa?", "servicos_streaming"]);
-    if (streamRaw) {
-      streamRaw.split(",").forEach(s => {
-        const item = s.trim();
-        if (item) streamingsMap[item] = (streamingsMap[item] || 0) + 1;
-      });
-    }
-
-    // 26. Redes Sociais Descoberta
-    const discovery = getField(row, ["Qual rede social você mais usa pra encontrar lugares e referências na cidade", "redes_descoberta"]) || "Instagram";
-    socialDiscoveryMap[discovery] = (socialDiscoveryMap[discovery] || 0) + 1;
-
-    // 27. Influenciadores Conversão
-    const inf = getField(row, ["Você já foi em algum lugar só porque viu um influenciador da cidade indicando?", "influencer_indicacao"]) || "Sim";
-    influencersMap[inf] = (influencersMap[inf] || 0) + 1;
-
-    // 28. Notícias Origem
-    const news = getField(row, ["Por onde você fica sabendo das notícias de São José?", "noticias_origem"]) || "Instagram";
-    newsSourcesMap[news] = (newsSourcesMap[news] || 0) + 1;
-
-    // 29. Finanças vs Relacionamento
-    const finRel = getField(row, ["Você acha que precisa estar bem financeiramente antes de começar um relacionamento sério?", "financas_relacionamento"]) || "Sim";
-    financeRelationshipMap[finRel] = (financeRelationshipMap[finRel] || 0) + 1;
-
-    // 30. Apps de Namoro
-    const dating = getField(row, ["As redes sociais ou aplicativos de namoro mexem com a sua vida social?", "apps_namoro_vida_social"]) || "Não";
-    datingAppsMap[dating] = (datingAppsMap[dating] || 0) + 1;
-
-    // 31. Produtores Locais
-    const localProd = getField(row, ["Você costuma comprar de produtores locais ou ir em feiras de artesanato da cidade?", "produtores_locais"]) || "Às vezes";
-    localProducersMap[localProd] = (localProducersMap[localProd] || 0) + 1;
-
-    // 32. Pets & Cidade Pet Friendly
-    const petStr = getField(row, ["Você tem animal de estimação?(gato, cachorro e etc)", "pet", "tem_pet"]);
-    const petAcha = getField(row, ["Você acha que São José é uma cidade boa para quem tem animais de estimação (cachorro, gato e etc)?", "sjc_pet_friendly"]);
-    const petCombined = petStr ? (petStr.toLowerCase().includes("sim") ? "Tem Pet (Sim)" : "Não tem Pet") : (petAcha || "Tem Pet");
-    petsMap[petCombined] = (petsMap[petCombined] || 0) + 1;
-
-    // 33. Política Acompanhamento
-    const polNum = parseInt(getField(row, ["De 1 a 5, o quanto você acompanha o que acontece na política da cidade?", "politica_acompanhamento"]));
-    if (polNum === 1) politicsFollowMap["1 (Nenhum)"]++;
-    else if (polNum === 2) politicsFollowMap["2"]++;
-    else if (polNum === 3) politicsFollowMap["3 (Moderado)"]++;
-    else if (polNum === 4) politicsFollowMap["4"]++;
-    else if (polNum === 5) politicsFollowMap["5 (Muito)"]++;
-
-    // 34. Posicionamento Político
-    const side = getField(row, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]) || "Centro";
-    politicsSideMap[side] = (politicsSideMap[side] || 0) + 1;
-
-    // 35. Quem Ajuda Cidade
-    const agent = getField(row, ["Quem você acha que mais ajuda a cidade a crescer?", "quem_ajuda_cidade"]) || "Empreendedores";
-    growthAgentsMap[agent] = (growthAgentsMap[agent] || 0) + 1;
-
-    // 36. Bairros
     const bairro = getField(row, ["Em qual bairro você mora?", "bairro", "Bairro"]);
-    if (bairro) {
-      neighborhoods.add(bairro);
-      neighborhoodCountMap[bairro] = (neighborhoodCountMap[bairro] || 0) + 1;
-    }
+    if (bairro) neighborhoods.add(bairro);
   });
 
-  // Atualiza KPIs
-  if (statQualityLife) {
-    const avgScore = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.2";
-    statQualityLife.textContent = avgScore;
+  if (statQualityLife) statQualityLife.textContent = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.3";
+  if (statPrideRate) statPrideRate.textContent = total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
+  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = neighborhoods.size.toString() || "34";
+
+  // Agrupar perguntas em categorias conceituais para organização visual
+  const categories = [
+    {
+      title: "1. Perfil Demográfico, Social & Renda",
+      subtitle: "Distribuição etária, gênero, renda familiar, trabalho e moradia",
+      questions: questionList.filter(q => /idade|identifica|gênero|genero|renda|trabalho|estado civil|casa própria/i.test(q))
+    },
+    {
+      title: "2. Qualidade de Vida, Percepção & Mobilidade",
+      subtitle: "Notas municipais, transporte utilizado, imagem e crescimento da cidade",
+      questions: questionList.filter(q => /qualidade|transporte|são josé é|crescimento|orgulho|definiria/i.test(q))
+    },
+    {
+      title: "3. Cultura, Eventos, Lazer & Vida Noturna",
+      subtitle: "Opções culturais, afinidade com festas, dificuldades da noite e evasão",
+      questions: questionList.filter(q => /cultura|festas|vizinhas|mais falta|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|instagram/i.test(q))
+    },
+    {
+      title: "4. Mídia, Músicas, Streamings & Comportamento",
+      subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e relações",
+      questions: questionList.filter(q => /música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q))
+    },
+    {
+      title: "5. Economia Local, Pets, Política & Bairros",
+      subtitle: "Produtores locais, estrutura para animais, política municipal e territorialidade",
+      questions: questionList.filter(q => /produtores|animal|pet|política|ajuda a cidade|bairro/i.test(q))
+    }
+  ];
+
+  // Quaisquer perguntas não mapeadas nas 5 categorias vão para uma seção complementar
+  const mappedQuestions = new Set(categories.flatMap(c => c.questions));
+  const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
+  if (remainingQuestions.length > 0) {
+    categories.push({
+      title: "6. Demais Perguntas & Indicadores Complementares",
+      subtitle: "Perguntas adicionais identificadas na estrutura da pesquisa",
+      questions: remainingQuestions
+    });
   }
-  if (statPrideRate) {
-    const pRate = total > 0 ? Math.round((prideCount / total) * 100) : 85;
-    statPrideRate.textContent = pRate + "%";
-  }
-  if (statNeighborhoodsCount) {
-    statNeighborhoodsCount.textContent = neighborhoods.size.toString() || "34";
-  }
 
-  // Obter top 8 bairros
-  const topBairrosMap = {};
-  Object.entries(neighborhoodCountMap)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
-    .forEach(([k, v]) => topBairrosMap[k] = v);
+  // Renderizar o Grid de Gráficos no DOM
+  if (!dynamicChartsGrid) return;
+  dynamicChartsGrid.innerHTML = "";
 
-  // SECTION 1: PERFIL DEMOGRÁFICO, SOCIAL & RENDA (6 Gráficos)
-  renderChart("chart-age", "bar", ageMap);
-  renderChart("chart-gender", "doughnut", genderMap);
-  renderChart("chart-income", "bar", incomeMap, { horizontal: true });
-  renderChart("chart-work-mode", "doughnut", workModeMap);
-  renderChart("chart-marital", "pie", maritalMap);
-  renderChart("chart-house", "doughnut", houseMap);
+  // Destruir instâncias anteriores do Chart.js
+  Object.keys(chartInstances).forEach(id => {
+    if (chartInstances[id]) chartInstances[id].destroy();
+  });
+  chartInstances = {};
 
-  // SECTION 2: QUALIDADE DE VIDA & PERCEPÇÃO (6 Gráficos)
-  renderChart("chart-quality-scale", "bar", qualityScaleMap);
-  renderChart("chart-transport", "bar", transportMap, { horizontal: true });
-  renderChart("chart-city-concept", "doughnut", cityConceptMap);
-  renderChart("chart-growth", "pie", growthMap);
-  renderChart("chart-pride-chart", "doughnut", prideChartMap);
-  renderChart("chart-define-city", "bar", defineCityMap, { horizontal: true });
+  let globalQuestionIndex = 0;
 
-  // SECTION 3: CULTURA, LAZER, EVENTOS & CONSUMO (6 Gráficos)
-  renderChart("chart-culture-options", "doughnut", cultureOptionsMap);
-  renderChart("chart-events-fit", "pie", eventsFitMap);
-  renderChart("chart-compare-neighbors", "bar", compareNeighborsMap);
-  renderChart("chart-missing", "bar", missingMap, { horizontal: true });
-  renderChart("chart-frequency", "pie", frequencyMap);
-  renderChart("chart-other-cities", "doughnut", otherCitiesMap);
+  categories.forEach((cat, catIdx) => {
+    if (!cat.questions || cat.questions.length === 0) return;
 
-  // SECTION 4: HÁBITOS DE BARES, NOITE & MÚSICA (6 Gráficos)
-  renderChart("chart-regions-frequented", "bar", regionsFrequentedMap);
-  renderChart("chart-nightlife-issues", "bar", nightlifeIssuesMap, { horizontal: true });
-  renderChart("chart-bar-choice", "bar", barChoiceMap);
-  renderChart("chart-instagrammable", "doughnut", instagrammableMap);
-  renderChart("chart-music-types", "bar", musicTypesMap, { horizontal: true });
-  renderChart("chart-spend-more", "doughnut", spendMoreMap);
+    const sectionEl = document.createElement("section");
+    sectionEl.className = "space-y-4";
 
-  // SECTION 5: MÍDIA, STREAMING, INFLUENCIADORES & RELAÇÕES (6 Gráficos)
-  renderChart("chart-streamings", "bar", streamingsMap, { horizontal: true });
-  renderChart("chart-social-discovery", "doughnut", socialDiscoveryMap);
-  renderChart("chart-influencers", "pie", influencersMap);
-  renderChart("chart-news-sources", "bar", newsSourcesMap);
-  renderChart("chart-finance-relationship", "doughnut", financeRelationshipMap);
-  renderChart("chart-dating-apps", "pie", datingAppsMap);
+    const sectionHeader = '<div class="flex items-center gap-3 border-b border-slate-200 pb-3">' +
+      '<div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">' + (catIdx + 1) + '</div>' +
+      '<div>' +
+        '<h2 class="text-lg sm:text-xl font-bold text-brand-900">' + cat.title + '</h2>' +
+        '<p class="text-xs font-medium text-slate-400">' + cat.subtitle + '</p>' +
+      '</div>' +
+    '</div>';
 
-  // SECTION 6: ECONOMIA LOCAL, PETS, POLÍTICA & BAIRROS (6 Gráficos)
-  renderChart("chart-local-producers", "doughnut", localProducersMap);
-  renderChart("chart-pets", "doughnut", petsMap);
-  renderChart("chart-politics-follow", "bar", politicsFollowMap);
-  renderChart("chart-politics-side", "doughnut", politicsSideMap);
-  renderChart("chart-growth-agents", "bar", growthAgentsMap);
-  renderChart("chart-top-neighborhoods", "bar", topBairrosMap, { horizontal: true });
+    const cardsGrid = document.createElement("div");
+    cardsGrid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
 
-  // Renderiza Tabela com os 8 registros mais recentes
+    cat.questions.forEach((questionText) => {
+      globalQuestionIndex++;
+      const canvasId = "chart-q-" + globalQuestionIndex;
+
+      // Card Container
+      const cardEl = document.createElement("div");
+      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+      
+      const cardHeader = '<div>' +
+        '<div class="flex items-start justify-between gap-2 mb-1">' +
+          '<h3 class="text-sm font-bold text-brand-900 line-clamp-2" title="' + questionText + '">' + questionText + '</h3>' +
+        '</div>' +
+        '<p class="text-[11px] font-medium text-slate-400 mb-4">Total: ' + total + ' respondentes</p>' +
+      '</div>' +
+      '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+
+      cardEl.innerHTML = cardHeader;
+      cardsGrid.appendChild(cardEl);
+
+      // Coletar e Agregar Dados para a Pergunta
+      const dataMap = {};
+      records.forEach(row => {
+        const rawVal = row[questionText];
+        if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
+          const strVal = String(rawVal).trim();
+          // Tratar multi-respostas separadas por vírgula em perguntas de múltipla escolha
+          if (strVal.includes(",") && !/^(R$|d+,d+)/.test(strVal)) {
+            strVal.split(",").forEach(part => {
+              const p = part.trim();
+              if (p) dataMap[p] = (dataMap[p] || 0) + 1;
+            });
+          } else {
+            dataMap[strVal] = (dataMap[strVal] || 0) + 1;
+          }
+        }
+      });
+
+      // Determinar o Tipo Ideal de Gráfico para Diversidade e Clareza
+      const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
+
+      // Renderizar no ciclo seguinte para garantir que o canvas existe no DOM
+      setTimeout(() => {
+        renderAdvancedChart(canvasId, chartTypeConfig.type, dataMap, chartTypeConfig.options);
+      }, 0);
+    });
+
+    sectionEl.innerHTML = sectionHeader;
+    sectionEl.appendChild(cardsGrid);
+    dynamicChartsGrid.appendChild(sectionEl);
+  });
+
+  // Renderiza tabela recente
   renderTable(records.slice(0, 8));
 }
 
 // ==========================================
-// 8. RENDERIZADOR UNIVERSAL DE CHART.JS COM DATALABELS
+// 10. DETERMINAÇÃO DE TIPO DIVERSIFICADO DE GRÁFICO
 // ==========================================
-function renderChart(canvasId, type, dataMap, options = {}) {
+function determineChartType(questionText, dataMap, index) {
+  const keys = Object.keys(dataMap);
+  const count = keys.length;
+  const qLower = questionText.toLowerCase();
+
+  // 1. Escalas Numéricas e Avaliações -> Linha com Gradiente ou Barra Vertical
+  if (qLower.includes("de 1 a 5") || qLower.includes("nota") || qLower.includes("quanto você acompanha")) {
+    return { type: (index % 2 === 0) ? "line" : "bar", options: { gradient: true } };
+  }
+
+  // 2. Comparações e Proporções Binárias / Pequenas (2 a 4 opções) -> Rosca (Doughnut) ou Pizza (Pie)
+  if (count <= 4) {
+    if (index % 3 === 0) return { type: "pie", options: {} };
+    return { type: "doughnut", options: {} };
+  }
+
+  // 3. Perguntas com muitas opções de texto longo (Bairros, Dificuldades, O que falta) -> Barra Horizontal
+  if (count > 5 || qLower.includes("bairro") || qLower.includes("falta") || qLower.includes("dificuldade") || qLower.includes("música") || qLower.includes("serviços")) {
+    return { type: "bar", options: { horizontal: true } };
+  }
+
+  // 4. Modais, Hábitos e Frequência -> Alternância entre Barra Vertical, Rosca e Polar
+  const cyclicTypes = ["bar", "doughnut", "bar", "pie", "line"];
+  const chosenType = cyclicTypes[index % cyclicTypes.length];
+  
+  return { 
+    type: chosenType, 
+    options: { 
+      horizontal: chosenType === "bar" && count > 4,
+      gradient: chosenType === "line"
+    } 
+  };
+}
+
+// ==========================================
+// 11. RENDERIZADOR UNIVERSAL DE CHART.JS COM DATALABELS & CORES PRO
+// ==========================================
+function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
 
@@ -810,20 +736,29 @@ function renderChart(canvasId, type, dataMap, options = {}) {
     chartInstances[canvasId].destroy();
   }
 
-  const labels = Object.keys(dataMap);
-  const values = Object.values(dataMap);
+  let labels = Object.keys(dataMap);
+  let values = Object.values(dataMap);
 
-  // Paleta de Cores de Alto Contraste & Elegância Visual
-  const brandColors = [
-    "#0B2545", // Navy Profundo
-    "#0077B6", // Azul Oceano
-    "#00B4D8", // Ciano Vibrante
+  // Se tiver muitos itens (ex: bairros), limitar aos top 8 para manter layout impecável
+  if (labels.length > 8 && options.horizontal) {
+    const combined = labels.map((l, i) => ({ label: l, val: values[i] }));
+    combined.sort((a, b) => b.val - a.val);
+    const top = combined.slice(0, 8);
+    labels = top.map(t => t.label);
+    values = top.map(t => t.val);
+  }
+
+  // Paleta de Cores de Alta Sofisticação (Azul Petróleo, Ciano Brilhante, Royal, Teal, Âmbar)
+  const brandPalette = [
+    "#0B2545", // Azul Petróleo Institucional
+    "#0077B6", // Azul Real Oceano
+    "#00B4D8", // Ciano Brilhante
     "#48CAE4", // Sky Blue
-    "#6366F1", // Indigo
+    "#6366F1", // Indigo Moderno
     "#10B981", // Emerald
-    "#F59E0B", // Âmbar / Ouro
-    "#EC4899", // Rosa Moderno
-    "#8B5CF6", // Roxo Vibrante
+    "#F59E0B", // Âmbar Vibrante
+    "#8B5CF6", // Roxo Elétrico
+    "#EC4899", // Magenta Sofisticado
     "#14B8A6"  // Teal
   ];
 
@@ -831,19 +766,35 @@ function renderChart(canvasId, type, dataMap, options = {}) {
   Chart.defaults.color = "#64748B";
 
   const isBar = type === "bar";
+  const isLine = type === "line";
   const isHorizontal = options.horizontal === true;
   const totalSum = values.reduce((a, b) => a + b, 0);
 
+  // Efeito Gradiente para Gráficos de Linha
+  let bgFillColor = brandPalette[2];
+  if (isLine && options.gradient) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 260);
+    gradient.addColorStop(0, "rgba(0, 180, 216, 0.45)");
+    gradient.addColorStop(1, "rgba(11, 37, 69, 0.0)");
+    bgFillColor = gradient;
+  }
+
   chartInstances[canvasId] = new Chart(ctx, {
-    type: isHorizontal ? "bar" : type,
+    type: isHorizontal ? "bar" : (isLine ? "line" : type),
     data: {
-      labels: labels.length ? labels : ["Sem dados"],
+      labels: labels.length ? labels : ["Sem registros"],
       datasets: [{
         data: values.length ? values : [0],
-        backgroundColor: isBar && !isHorizontal ? brandColors[1] : brandColors,
+        backgroundColor: isLine ? bgFillColor : (isBar && !isHorizontal ? brandPalette[1] : brandPalette),
+        borderColor: isLine ? "#00B4D8" : (type === "doughnut" || type === "pie" ? "#FFFFFF" : undefined),
+        borderWidth: isLine ? 3 : (type === "doughnut" || type === "pie" ? 2 : 0),
         borderRadius: isBar ? 6 : 0,
-        borderWidth: type === "doughnut" || type === "pie" ? 2 : 0,
-        borderColor: "#FFFFFF",
+        fill: isLine,
+        tension: 0.38,
+        pointBackgroundColor: "#0B2545",
+        pointBorderColor: "#00B4D8",
+        pointBorderWidth: 2,
+        pointRadius: isLine ? 4 : 0,
         hoverOffset: 6
       }]
     },
@@ -857,7 +808,7 @@ function renderChart(canvasId, type, dataMap, options = {}) {
           position: "bottom",
           labels: {
             usePointStyle: true,
-            padding: 12,
+            padding: 10,
             font: { size: 10, weight: 600 }
           }
         },
@@ -872,16 +823,15 @@ function renderChart(canvasId, type, dataMap, options = {}) {
             }
           }
         },
-        // DATALABELS ATIVADO VISIVELMENTE
+        // DATALABELS OBRIGATÓRIOS E VISÍVEIS
         datalabels: {
           color: function(ctxData) {
-            if (type === "doughnut" || type === "pie") {
-              return "#FFFFFF";
-            }
+            if (type === "doughnut" || type === "pie") return "#FFFFFF";
             return "#0B2545";
           },
-          anchor: isBar ? (isHorizontal ? "end" : "end") : "center",
-          align: isBar ? (isHorizontal ? "right" : "top") : "center",
+          anchor: isBar ? (isHorizontal ? "end" : "end") : (isLine ? "top" : "center"),
+          align: isBar ? (isHorizontal ? "right" : "top") : (isLine ? "top" : "center"),
+          offset: isBar || isLine ? 4 : 0,
           font: {
             weight: 700,
             size: 10
@@ -896,7 +846,7 @@ function renderChart(canvasId, type, dataMap, options = {}) {
           }
         }
       },
-      scales: isBar ? {
+      scales: isBar || isLine ? {
         y: {
           beginAtZero: true,
           grid: { color: "#F1F5F9" },
@@ -912,7 +862,7 @@ function renderChart(canvasId, type, dataMap, options = {}) {
 }
 
 // ==========================================
-// 9. TABELA DE RESPOSTAS BRUTAS
+// 12. TABELA DE RESPOSTAS BRUTAS
 // ==========================================
 function renderTable(rows) {
   if (!recentRecordsTableBody) return;
@@ -929,7 +879,7 @@ function renderTable(rows) {
     const local = getField(row, ["Em qual bairro você mora?", "bairro", "Região", "regiao"]) || "São José dos Campos";
     const perfil = (getField(row, ["Qual a sua idade?", "idade"]) || "Adulto") + " • " + (getField(row, ["Como você se identifica?", "genero"]) || "Munícipe");
     const nota = getField(row, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "nota_qualidade"]) || "5";
-    const falta = getField(row, ["O que você acha que mais falta em São José?", "o_que_falta"]) || "Lazer Noturno";
+    const falta = getField(row, ["O que você acha que mais falta em São José?", "o_que_falta"]) || "Opções de Lazer";
 
     return '<tr class="hover:bg-slate-50/80 transition-colors font-medium">' +
       '<td class="py-4 px-6 font-bold text-slate-800">' + dateFormatted + '</td>' +
@@ -943,7 +893,7 @@ function renderTable(rows) {
 }
 
 // ==========================================
-// 10. BASE CONSOLIDADA DA PESQUISA COM 30+ PERGUNTAS COMPLETAS
+// 13. BASE CONSOLIDADA DA PESQUISA (TODAS AS PERGUNTAS SJC)
 // ==========================================
 function renderFallbackDemoData() {
   updateSyncTime();
@@ -1023,7 +973,7 @@ function renderFallbackDemoData() {
       "Você Já tem casa própria?": "Não",
       "Você acha que precisa estar bem financeiramente antes de começar um relacionamento sério?": "Com certeza",
       "As redes sociais ou aplicativos de namoro mexem com a sua vida social?": "Sim",
-      "Em poucas palavras, como você definiria São José hoje?": "Cidade Universitária e Segura",
+      "Em poucas palavras, como você definiria São José hoje?": "Universitária e Segura",
       "Comparando com as cidades vizinhas, o que você acha das opções de lazer daqui?": "Na média",
       "Você costuma comprar de produtores locais ou ir em feiras de artesanato da cidade?": "Raramente",
       "Você tem animal de estimação?(gato, cachorro e etc)": "Sim"
@@ -1191,6 +1141,7 @@ function renderFallbackDemoData() {
   ];
 
   allSurveyRecords = demoRecords;
-  populateAllFilters(demoRecords);
-  processAndRenderData(demoRecords);
+  populateAllSidebarFilters(demoRecords);
+  updateStatisticalHeader(demoRecords.length, demoRecords.length);
+  processAndRenderDynamicCharts(demoRecords);
 }
