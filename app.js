@@ -1037,12 +1037,20 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 10. DEFINIÇÃO DE SÃO JOSÉ / PALAVRAS MAIS DITAS: Nuvem de Palavras Interativa (Word Cloud)
-      if (qLower.includes("definiria") || (qLower.includes("poucas palavras") && qLower.includes("josé")) || qLower.includes("como você definiria")) {
+      // 10. DEFINIÇÃO DE SÃO JOSÉ & SUGESTÕES ABERTAS: Nuvem de Palavras Interativa (Word Cloud)
+      if (
+        qLower.includes("definiria") || 
+        (qLower.includes("poucas palavras") && qLower.includes("josé")) || 
+        qLower.includes("como você definiria") ||
+        qLower.includes("tem algo que queira falar") ||
+        qLower.includes("não abordamos na pesquisa") ||
+        qLower.includes("nao abordamos na pesquisa") ||
+        qLower.includes("algo que queira falar")
+      ) {
         cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3">' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-semibold text-slate-400">Nuvem de Palavras • Termos e Expressões Mais Mencionadas</p>' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Nuvem de Palavras • Termos e Expressões Mais Mencionadas (Respostas Abertas)</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-center">' + renderWordCloudWidget(dataMap, total, records, questionText) + '</div>';
         cardsGrid.appendChild(cardEl);
@@ -4133,50 +4141,69 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
     "é", "são", "foi", "era", "ser", "estar", "tem", "ter", "muito", "muita", "muitos", "muitas",
     "mais", "menos", "já", "não", "nao", "sim", "eu", "ele", "ela", "eles", "elas", "meu", "minha",
     "seu", "sua", "seus", "suas", "são", "josé", "sao", "jose", "sjc", "campos", "cidade", "hoje",
-    "em", "poucas", "palavras", "você", "voce", "pra", "pro", "pelo", "pela"
+    "em", "poucas", "palavras", "você", "voce", "pra", "pro", "pelo", "pela", "nada", "nenhum", "nenhuma",
+    "acho", "acha", "algo", "isso", "esse", "essa", "esses", "essas", "tudo", "qualquer", "coisa"
   ]);
 
   const wordFrequency = {};
   const phraseFrequency = {};
 
+  // Função para checar se a resposta inteira é apenas ruído negativo/vazio (ex: "Não", "Nao.", "Nada", "Não sei", "Nenhum", etc)
+  function isIgnorableResponse(str) {
+    if (!str) return true;
+    const clean = str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'“”’]/g, "").trim();
+    if (!clean || clean.length < 2) return true;
+    const ignorableExact = new Set(["não", "nao", "nada", "nao tenho", "não tenho", "nenhum", "nenhuma", "sem sugestão", "sem sugestao", "sem comentarios", "sem comentários", "não sei", "nao sei", "tudo certo", "ok", "não.", "nao.", "nada.", "n"]);
+    if (ignorableExact.has(clean)) return true;
+    if (/^(não|nao|nada|nenhum|nenhuma)(\s+(não|nao|nada|tenho|sei|mais|obrigado|obrigada))?$/.test(clean)) return true;
+    return false;
+  }
+
   // Extrair respostas brutas com dados complementares do respondente
   const quoteRecords = [];
   if (records && records.length > 0 && questionText) {
     records.forEach(r => {
-      const val = getField(r, [questionText, "Em poucas palavras, como você definiria São José hoje?"]);
-      if (val && val.trim()) {
-        const cleanVal = val.trim();
-        const bairro = getField(r, ["Em qual bairro você mora?", "bairro", "Bairro"]);
-        const idade = getField(r, ["Qual a sua idade?", "idade", "Idade"]);
-        const genero = getField(r, ["Como você se identifica?", "identifica", "gênero", "genero"]);
-        const trabalho = getField(r, ["O seu trabalho hoje é:", "trabalho", "Trabalho"]);
-        quoteRecords.push({
-          text: cleanVal,
-          bairro: bairro || "",
-          idade: idade || "",
-          genero: genero || "",
-          trabalho: trabalho || ""
-        });
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "Em poucas palavras, como você definiria São José hoje?", "Tem algo que queira falar e não abordamos na pesquisa?", "Tem algo que queira falar"]);
+      }
+      if (val && String(val).trim()) {
+        const cleanVal = String(val).trim();
+        if (!isIgnorableResponse(cleanVal)) {
+          const bairro = getField(r, ["Em qual bairro você mora?", "bairro", "Bairro"]);
+          const idade = getField(r, ["Qual a sua idade?", "idade", "Idade"]);
+          const genero = getField(r, ["Como você se identifica?", "identifica", "gênero", "genero"]);
+          const trabalho = getField(r, ["O seu trabalho hoje é:", "trabalho", "Trabalho"]);
+          quoteRecords.push({
+            text: cleanVal,
+            bairro: bairro || "",
+            idade: idade || "",
+            genero: genero || "",
+            trabalho: trabalho || ""
+          });
+        }
       }
     });
   } else if (dataMap) {
     Object.keys(dataMap).forEach(phrase => {
-      const count = dataMap[phrase] || 1;
-      for (let i = 0; i < count; i++) {
-        quoteRecords.push({
-          text: phrase,
-          bairro: "",
-          idade: "",
-          genero: "",
-          trabalho: ""
-        });
+      if (!isIgnorableResponse(phrase)) {
+        const count = dataMap[phrase] || 1;
+        for (let i = 0; i < count; i++) {
+          quoteRecords.push({
+            text: phrase,
+            bairro: "",
+            idade: "",
+            genero: "",
+            trabalho: ""
+          });
+        }
       }
     });
   }
 
   quoteRecords.forEach(rec => {
     const cleanText = rec.text.trim();
-    if (!cleanText) return;
+    if (!cleanText || isIgnorableResponse(cleanText)) return;
 
     // Frequência de frases curtas
     const phraseKey = cleanText.charAt(0).toUpperCase() + cleanText.slice(1).toLowerCase();
