@@ -11,11 +11,27 @@
  */
 
 // ==========================================
-// 1. REGISTRO DO PLUGIN DE DATALABELS
+// 1. REGISTRO DO PLUGIN DE DATALABELS & NAVEGAÇÃO
 // ==========================================
 if (window.Chart && window.ChartDataLabels) {
   Chart.register(ChartDataLabels);
 }
+
+// Navegação instantânea e suave para os blocos de pesquisa
+window.scrollToSection = function(sectionId) {
+  if (!sectionId) return;
+  const target = document.getElementById(sectionId);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Destaque visual temporário no cabeçalho da seção
+    target.classList.add('ring-2', 'ring-brand-500', 'ring-offset-4', 'rounded-2xl', 'transition-all', 'duration-300');
+    setTimeout(() => {
+      target.classList.remove('ring-2', 'ring-brand-500', 'ring-offset-4', 'rounded-2xl');
+    }, 1500);
+  } else {
+    console.warn("Seção não encontrada para navegação:", sectionId);
+  }
+};
 
 // ==========================================
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
