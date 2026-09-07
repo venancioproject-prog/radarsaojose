@@ -1511,13 +1511,31 @@
             </div>
           </div>
 
-          <!-- Gráfico Complementar de Destinos Mais Frequentados -->
+          <!-- Gráfico Complementar de Destinos Mais Frequentados com Imagem Urbana -->
           <div class="space-y-3 pt-2">
             <span class="text-xs font-black text-slate-500 uppercase tracking-wider">
               Ranking de Destinos Mais Frequentados (Qual região você mais frequenta?)
             </span>
-            <div class="h-64 sm:h-72 w-full relative">
-              <canvas id="repChartLazerRegiao"></canvas>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              <!-- Gráfico bem legível à esquerda -->
+              <div class="lg:col-span-7 bg-slate-50/70 p-5 sm:p-6 rounded-2xl border border-slate-200 flex flex-col justify-center min-h-[340px]">
+                <div class="h-72 sm:h-80 w-full relative">
+                  <canvas id="repChartLazerRegiao"></canvas>
+                </div>
+              </div>
+
+              <!-- Foto Urbana/Cidade à direita -->
+              <div class="lg:col-span-5 rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-slate-100 flex flex-col relative group">
+                <img 
+                  src="fotos radar/foto_cidade.jpg" 
+                  alt="Tráfego e Acesso entre Regiões em São José dos Campos" 
+                  class="w-full h-full object-cover min-h-[260px] max-h-[360px] group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 via-slate-900/40 to-transparent p-4 text-white">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-accent-cyan block">Mobilidade & Lazer</span>
+                  <p class="text-xs text-slate-200 font-medium leading-snug">Conexão entre as regiões Centro, Oeste e Sul de São José dos Campos</p>
+                </div>
+              </div>
             </div>
           </div>
 

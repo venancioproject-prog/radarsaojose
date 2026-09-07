@@ -6452,13 +6452,22 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
       indexAxis: "y",
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          right: 50,
+          left: 5,
+          top: 5,
+          bottom: 5
+        }
+      },
       plugins: {
         legend: { display: false },
         datalabels: {
           anchor: "end",
           align: "end",
-          color: "#1E293B",
-          font: { family: "Montserrat", weight: "bold", size: 10 },
+          offset: 6,
+          color: "#0F172A",
+          font: { family: "Montserrat", weight: "bold", size: 11 },
           formatter: (value) => {
             const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
             return value + " (" + pct + "%)";
@@ -6468,13 +6477,14 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
       scales: {
         x: {
           display: false,
-          grid: { display: false }
+          grid: { display: false },
+          suggestedMax: Math.max(...data) * 1.18
         },
         y: {
           grid: { display: false },
           ticks: {
-            font: { family: "Montserrat", size: 11, weight: "600" },
-            color: "#334155"
+            font: { family: "Montserrat", size: 12, weight: "700" },
+            color: "#1E293B"
           }
         }
       }
