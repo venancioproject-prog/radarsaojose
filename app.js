@@ -736,7 +736,10 @@ function processAndRenderDynamicCharts(records) {
             strVal = strVal.replace(/\(([^)]*)\)/g, "$1").replace(/[()]/g, "").trim();
           }
 
-          if (strVal.includes(",") && !/^(R\$|\d+,\d+)/.test(strVal)) {
+          // Não quebra por vírgula perguntas de escolha única como "outras cidades", "tirar fotos", "produtores/feiras", etc.
+          const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador/i.test(questionText);
+
+          if (isMultipleChoice && strVal.includes(",") && !/^(R\$|\d+,\d+)/.test(strVal)) {
             strVal.split(",").forEach(part => {
               let p = part.trim().replace(/[()]/g, "").trim();
               if (p) dataMap[p] = (dataMap[p] || 0) + 1;
