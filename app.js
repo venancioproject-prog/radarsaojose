@@ -2196,7 +2196,7 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
         iconBg: "bg-amber-100/80"
       };
     }
-    if (k.includes("interesse") || k.includes("não tenho") || k.includes("nao tenho") || k.includes("não costumo") || k.includes("nao costumo")) {
+    if (k.includes("interesse") || k.includes("não tenho") || k.includes("nao tenho") || k.includes("não costumo") || k.includes("nao costumo") || k.includes("raramente") || k.includes("nunca")) {
       return {
         emoji: "🛒",
         title: "Não tenho interesse",
@@ -2208,21 +2208,11 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
         iconBg: "bg-slate-100"
       };
     }
-    return {
-      emoji: "🎨",
-      title: key,
-      subtitle: "Hábito de consumo local",
-      badgeBg: "bg-purple-50 text-purple-700 border-purple-200",
-      border: "border-purple-200 hover:border-purple-300",
-      tag: "Consumo",
-      tagBg: "bg-purple-100 text-purple-800",
-      iconBg: "bg-purple-100/80"
-    };
+    return null;
   }
 
   // Extração inteligente de dados da pergunta
   const dynamicMap = {};
-  let totalResponses = 0;
 
   if (records && records.length > 0) {
     records.forEach(r => {
@@ -2233,25 +2223,33 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
       if (val !== undefined && val !== null && String(val).trim() !== "") {
         const raw = String(val).trim();
         dynamicMap[raw] = (dynamicMap[raw] || 0) + 1;
-        totalResponses++;
       }
     });
   } else if (dataMap && Object.keys(dataMap).length > 0) {
     Object.entries(dataMap).forEach(([k, v]) => {
       dynamicMap[k] = v;
-      totalResponses += v;
     });
   }
 
-  // Agrupamento padronizado pelas 4 categorias reais
-  const categorizedCounts = {};
+  // Agrupamento padronizado pelas 4 categorias reais (ignora ruídos e números de deslocamento)
+  const categorizedCounts = {
+    "Sim, sempre": 0,
+    "Às vezes": 0,
+    "Tenho vontade, mas não vou": 0,
+    "Não tenho interesse": 0
+  };
+
+  let validTotal = 0;
   Object.entries(dynamicMap).forEach(([rawKey, count]) => {
     const cfg = getProducerConfig(rawKey);
-    categorizedCounts[cfg.title] = (categorizedCounts[cfg.title] || 0) + count;
+    if (cfg && cfg.title) {
+      categorizedCounts[cfg.title] = (categorizedCounts[cfg.title] || 0) + count;
+      validTotal += count;
+    }
   });
 
-  const baseTotal = totalResponses > 0 ? totalResponses : (total || 1);
-  const entries = Object.entries(categorizedCounts);
+  const baseTotal = validTotal > 0 ? validTotal : (total || 1);
+  const entries = Object.entries(categorizedCounts).filter(([_, count]) => count > 0);
 
   entries.sort((a, b) => b[1] - a[1]);
 
@@ -3658,53 +3656,68 @@ function renderPetOwnershipCardsWidget(dataMap, total, records, questionText) {
 // 7.7.3. Cards com Emojis e Porcentagens para São José é uma Cidade Boa para Animais
 function renderPetFriendlyCityCardsWidget(dataMap, total, records, questionText) {
   function getCityPetConfig(key) {
-    const k = key.toLowerCase().trim();
-    if (k.includes("sim") || k.includes("boa") || k.includes("muito") || k.includes("ótima") || k.includes("otima")) {
+    const k = String(key).toLowerCase().trim();
+    if (k === "5" || k.includes("nota 5") || k.includes("excelente") || k.includes("ótima") || k.includes("otima")) {
       return {
-        emoji: "🌳",
-        title: "Sim, é uma cidade boa para pets",
-        subtitle: "Parques, clínicas, pet shops e praças",
-        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        emoji: "⭐",
+        title: "Excelente (Nota 5)",
+        subtitle: "Cidade muito acolhedora e com ótima infraestrutura pet",
+        badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
         border: "border-emerald-200 hover:border-emerald-300",
-        tag: "Positivo",
+        tag: "Excelente",
         tagBg: "bg-emerald-100 text-emerald-800",
         iconBg: "bg-emerald-100/80"
       };
     }
-    if (k.includes("médio") || k.includes("medio") || k.includes("regular") || k.includes("às vezes") || k.includes("parcial") || k.includes("pode melhorar")) {
+    if (k === "4" || k.includes("nota 4") || k.includes("boa") || k.includes("sim")) {
+      return {
+        emoji: "🌳",
+        title: "Boa (Nota 4)",
+        subtitle: "Boa quantidade de parques, clínicas e praças",
+        badgeBg: "bg-teal-50 text-teal-800 border-teal-200",
+        border: "border-teal-200 hover:border-teal-300",
+        tag: "Boa",
+        tagBg: "bg-teal-100 text-teal-800",
+        iconBg: "bg-teal-100/80"
+      };
+    }
+    if (k === "3" || k.includes("nota 3") || k.includes("regular") || k.includes("médio") || k.includes("medio")) {
       return {
         emoji: "🐕",
-        title: "Regular / Pode melhorar",
-        subtitle: "Faltam mais espaços públicos e veterinários públicos",
-        badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+        title: "Regular (Nota 3)",
+        subtitle: "Atende o básico, mas faltam mais espaços e serviços públicos",
+        badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
         border: "border-amber-200 hover:border-amber-300",
-        tag: "Neutro",
+        tag: "Regular",
         tagBg: "bg-amber-100 text-amber-800",
         iconBg: "bg-amber-100/80"
       };
     }
-    if (k.includes("não") || k.includes("nao") || k.includes("ruim") || k.includes("pouco")) {
+    if (k === "2" || k.includes("nota 2") || k.includes("pouco")) {
+      return {
+        emoji: "⚠️",
+        title: "Pouco Adequada (Nota 2)",
+        subtitle: "Poucos parques pet friendly e áreas de lazer dedicadas",
+        badgeBg: "bg-orange-50 text-orange-800 border-orange-200",
+        border: "border-orange-200 hover:border-orange-300",
+        tag: "Insuficiente",
+        tagBg: "bg-orange-100 text-orange-800",
+        iconBg: "bg-orange-100/80"
+      };
+    }
+    if (k === "1" || k.includes("nota 1") || k.includes("ruim") || k.includes("péssim") || k.includes("pessim") || k.includes("não") || k.includes("nao")) {
       return {
         emoji: "🚫",
-        title: "Não, faltam opções e estrutura",
-        subtitle: "Poucos parques pet friendly e atendimento público",
-        badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
+        title: "Ruim (Nota 1)",
+        subtitle: "Falta quase total de estrutura pública para animais",
+        badgeBg: "bg-rose-50 text-rose-800 border-rose-200",
         border: "border-rose-200 hover:border-rose-300",
-        tag: "Negativo",
+        tag: "Ruim",
         tagBg: "bg-rose-100 text-rose-800",
         iconBg: "bg-rose-100/80"
       };
     }
-    return {
-      emoji: "🐾",
-      title: key,
-      subtitle: "Avaliação da infraestrutura pet",
-      badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
-      border: "border-blue-200 hover:border-blue-300",
-      tag: "Opinião",
-      tagBg: "bg-blue-100 text-blue-800",
-      iconBg: "bg-blue-100/80"
-    };
+    return null;
   }
 
   const dynamicMap = {};
@@ -3712,33 +3725,46 @@ function renderPetFriendlyCityCardsWidget(dataMap, total, records, questionText)
     Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
   } else if (records && records.length > 0) {
     records.forEach(r => {
-      const val = getField(r, [questionText, "cidade boa para quem tem anima", "cidade boa para animais", "sao jose animais", "pet friendly"]);
-      if (val) {
-        const clean = val.trim().replace(/[()]/g, "").trim();
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "cidade boa para quem tem anima", "cidade boa para animais", "sao jose animais", "pet friendly"]);
+      }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        const clean = String(val).trim().replace(/[()]/g, "").trim();
         if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
       }
     });
   }
 
-  if (Object.keys(dynamicMap).length === 0) {
-    const base = total || 203;
-    dynamicMap["Sim, é uma cidade boa para pets"] = Math.round(base * 0.58);
-    dynamicMap["Regular / Pode melhorar"] = Math.round(base * 0.28);
-    dynamicMap["Não, faltam opções e estrutura"] = Math.max(1, base - Math.round(base * 0.58) - Math.round(base * 0.28));
-  }
+  const categorizedCounts = {
+    "Boa (Nota 4)": 0,
+    "Regular (Nota 3)": 0,
+    "Excelente (Nota 5)": 0,
+    "Pouco Adequada (Nota 2)": 0,
+    "Ruim (Nota 1)": 0
+  };
 
-  const entries = Object.entries(dynamicMap);
-  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+  let validTotal = 0;
+  Object.entries(dynamicMap).forEach(([rawKey, count]) => {
+    const cfg = getCityPetConfig(rawKey);
+    if (cfg && cfg.title) {
+      categorizedCounts[cfg.title] = (categorizedCounts[cfg.title] || 0) + count;
+      validTotal += count;
+    }
+  });
+
+  const entries = Object.entries(categorizedCounts).filter(([_, count]) => count > 0);
+  const totalSum = validTotal > 0 ? validTotal : (total || 1);
 
   entries.sort((a, b) => b[1] - a[1]);
 
-  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
 
   entries.forEach(([key, count]) => {
     const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
     const cfg = getCityPetConfig(key);
 
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
         '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
           cfg.emoji +
