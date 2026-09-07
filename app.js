@@ -463,12 +463,114 @@ function updateSyncTime() {
 // ==========================================
 // 8. SIDEBAR ESQUERDA - FILTROS
 // ==========================================
-function populateSelectOptions(selectEl, values, defaultLabel = "Todas") {
+// Helpers de ordenação lógica e cronológica crescente para os filtros da sidebar
+function sortFilterAges(values) {
+  const customOrder = [
+    "Menos de 18 anos",
+    "16 a 17 anos",
+    "16 a 17",
+    "18 a 24 anos",
+    "18 a 24",
+    "25 a 34 anos",
+    "25 a 34",
+    "35 a 44 anos",
+    "35 a 44",
+    "45 a 54 anos",
+    "45 a 54",
+    "55 a 64 anos",
+    "55 a 64",
+    "65 anos ou mais",
+    "65 ou mais",
+    "Mais de 65 anos"
+  ];
+
+  return Array.from(values).sort((a, b) => {
+    const normA = a.toLowerCase().trim();
+    const normB = b.toLowerCase().trim();
+
+    const idxA = customOrder.findIndex(o => normA === o.toLowerCase() || normA.includes(o.toLowerCase()) || o.toLowerCase().includes(normA));
+    const idxB = customOrder.findIndex(o => normB === o.toLowerCase() || normB.includes(o.toLowerCase()) || o.toLowerCase().includes(normB));
+
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+
+    // Fallback: extrai o primeiro número para ordenar numericamente
+    const numA = (a.match(/\d+/) || [])[0];
+    const numB = (b.match(/\d+/) || [])[0];
+    if (numA !== undefined && numB !== undefined) {
+      const diff = parseInt(numA, 10) - parseInt(numB, 10);
+      if (diff !== 0) return diff;
+    }
+
+    return a.localeCompare(b, "pt-BR", { numeric: true, sensitivity: "base" });
+  });
+}
+
+function sortFilterIncomes(values) {
+  const customOrder = [
+    "Até R$ 2.800",
+    "Até 2.800",
+    "Entre R$ 2.801 e R$ 5.600",
+    "R$ 2.800 a R$ 5.000",
+    "R$ 2.801 a R$ 5.600",
+    "R$ 3.000 a R$ 5.000",
+    "Entre R$ 5.601 e R$ 12.000",
+    "R$ 5.000 a R$ 10.000",
+    "R$ 5.601 a R$ 12.000",
+    "Entre R$ 12.001 e R$ 26.000",
+    "R$ 10.000 a R$ 20.000",
+    "R$ 12.001 a R$ 26.000",
+    "Mais de R$ 20.000",
+    "Mais de R$ 26.000",
+    "Acima de R$ 20.000",
+    "Acima de R$ 26.000"
+  ];
+
+  return Array.from(values).sort((a, b) => {
+    const normA = a.toLowerCase().trim();
+    const normB = b.toLowerCase().trim();
+
+    const idxA = customOrder.findIndex(o => normA === o.toLowerCase() || normA.includes(o.toLowerCase()) || o.toLowerCase().includes(normA));
+    const idxB = customOrder.findIndex(o => normB === o.toLowerCase() || normB.includes(o.toLowerCase()) || o.toLowerCase().includes(normB));
+
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+
+    const numA = (a.replace(/\./g, "").match(/\d+/) || [])[0];
+    const numB = (b.replace(/\./g, "").match(/\d+/) || [])[0];
+    if (numA !== undefined && numB !== undefined) {
+      const diff = parseInt(numA, 10) - parseInt(numB, 10);
+      if (diff !== 0) return diff;
+    }
+
+    return a.localeCompare(b, "pt-BR", { numeric: true, sensitivity: "base" });
+  });
+}
+
+function sortFilterQualities(values) {
+  return Array.from(values).sort((a, b) => {
+    const numA = (a.match(/\d+/) || [])[0];
+    const numB = (b.match(/\d+/) || [])[0];
+    if (numA !== undefined && numB !== undefined) {
+      return parseInt(numA, 10) - parseInt(numB, 10);
+    }
+    return a.localeCompare(b, "pt-BR", { numeric: true });
+  });
+}
+
+function populateSelectOptions(selectEl, values, defaultLabel = "Todas", customSorter = null) {
   if (!selectEl) return;
   const currentVal = selectEl.value;
   selectEl.innerHTML = '<option value="TODOS">' + defaultLabel + '</option>';
   
-  Array.from(values).filter(v => v && v.trim() && v !== "Não informado").sort().forEach(val => {
+  const validValues = Array.from(values).filter(v => v && v.trim() && v !== "Não informado");
+  const sortedValues = customSorter 
+    ? customSorter(validValues) 
+    : validValues.sort((a, b) => a.localeCompare(b, "pt-BR", { numeric: true, sensitivity: "base" }));
+
+  sortedValues.forEach(val => {
     const opt = document.createElement("option");
     opt.value = val;
     const displayVal = val.length > 32 ? val.substring(0, 29) + "..." : val;
@@ -527,14 +629,14 @@ function populateAllSidebarFilters(records) {
   });
 
   populateSelectOptions(filterGenderSelect, genders, "Todos os Gêneros");
-  populateSelectOptions(filterIncomeSelect, incomes, "Todas as Faixas");
-  populateSelectOptions(filterAgeSelect, ages, "Todas as Idades");
+  populateSelectOptions(filterIncomeSelect, incomes, "Todas as Faixas", sortFilterIncomes);
+  populateSelectOptions(filterAgeSelect, ages, "Todas as Idades", sortFilterAges);
   populateSelectOptions(filterRegionSelect, regions, "Todas as Regiões");
   populateSelectOptions(filterMaritalSelect, maritals, "Todos os Estados Civis");
   populateSelectOptions(filterWorkSelect, works, "Todos os Modelos");
   populateSelectOptions(filterHouseSelect, houses, "Todas as Opções");
   populateSelectOptions(filterPoliticsSelect, politics, "Todos os Posicionamentos");
-  populateSelectOptions(filterQualitySelect, qualities, "Todas as Notas (1 a 5)");
+  populateSelectOptions(filterQualitySelect, qualities, "Todas as Notas (1 a 5)", sortFilterQualities);
   populateSelectOptions(filterPrideSelect, prides, "Todas as Opções");
 
   if (totalBaseCount) {
@@ -2011,12 +2113,20 @@ function sortIncomeChronologically(dataMap) {
   const incomeOrder = [
     "Até R$ 2.800",
     "Até 2.800",
+    "Entre R$ 2.801 e R$ 5.600",
     "R$ 2.800 a R$ 5.000",
+    "R$ 2.801 a R$ 5.600",
     "R$ 3.000 a R$ 5.000",
+    "Entre R$ 5.601 e R$ 12.000",
     "R$ 5.000 a R$ 10.000",
+    "R$ 5.601 a R$ 12.000",
+    "Entre R$ 12.001 e R$ 26.000",
     "R$ 10.000 a R$ 20.000",
+    "R$ 12.001 a R$ 26.000",
     "Mais de R$ 20.000",
-    "Acima de R$ 20.000"
+    "Mais de R$ 26.000",
+    "Acima de R$ 20.000",
+    "Acima de R$ 26.000"
   ];
 
   const sorted = {};
