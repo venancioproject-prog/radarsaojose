@@ -619,14 +619,14 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "3. Mobilidade Urbana & Deslocamento",
-      subtitle: "Modais de transporte utilizados, frequência de saídas, polos mais frequentados e evasão intermunicipal",
+      subtitle: "Modais de transporte utilizados, frequência de saídas, evasão intermunicipal e polos mais frequentados",
       questions: (() => {
-        // Ordem coerente: Meios de Transporte -> Frequência de Saída -> Região mais frequentada -> Evasão para outras cidades
+        // Ordem: Meios de Transporte -> Frequência de Saída -> Evasão para outras cidades -> Região mais frequentada (Mapa full-width embaixo)
         const orderSelectors = [
           q => /transporte/i.test(q) && (/usa/i.test(q) || /meios/i.test(q)),
           q => /frequência/i.test(q) && (/sai/i.test(q) || /passear/i.test(q) || /divertir/i.test(q)),
-          q => /região/i.test(q) && (/frequenta/i.test(q) || /sai de casa/i.test(q)),
-          q => /outras cidades/i.test(q) && (/passear/i.test(q) || /comer/i.test(q))
+          q => /outras cidades/i.test(q) && (/passear/i.test(q) || /comer/i.test(q)),
+          q => /região/i.test(q) && (/frequenta/i.test(q) || /sai de casa/i.test(q))
         ];
         const res = [];
         orderSelectors.forEach(fn => {
@@ -1018,13 +1018,14 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 8. OUTRAS CIDADES (Evasão): Ícones visuais representativos
+      // 8. OUTRAS CIDADES (Evasão): Cards com Ícones Visuais e Porcentagens
       if (qLower.includes("outras cidades") && (qLower.includes("passear") || qLower.includes("comer"))) {
-        cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Comportamento de deslocamento regional (Ícones)</p>' +
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Comportamento de Deslocamento Regional</p>' +
         '</div>' +
-        '<div class="p-2">' + renderOtherCitiesIcons(dataMap, total) + '</div>';
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderOtherCitiesIcons(dataMap, total) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -1090,14 +1091,14 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR (LEAFLET)
+      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR (LEAFLET) - SPAN 2 / FULL WIDTH
       if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
         const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real Oficial de SJC • Concentração & Frequência Regional</p>' +
+            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real Oficial de SJC • Concentração, Polos & Frequência Regional</p>' +
           '</div>' +
           '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0">' +
             '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
@@ -2903,65 +2904,65 @@ function calculateSjcRegionStats(dataMap, total, records, questionText) {
 function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) {
   const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
 
-  let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
+  let html = '<div class="w-full flex flex-col justify-between h-full gap-4">';
   
-  // Container do Mapa Real Leaflet
-  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[310px] sm:min-h-[340px]">' +
-    '<div id="' + mapContainerId + '" class="w-full h-[310px] sm:h-[340px] z-0"></div>' +
+  // Container do Mapa Real Leaflet Expandido
+  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[420px]">' +
+    '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0"></div>' +
     // Badge flutuante de cobertura
-    '<div class="absolute top-2.5 right-2.5 z-10 pointer-events-none">' +
-      '<div class="bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200/80 shadow-md text-right">' +
-        '<p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">São José dos Campos</p>' +
-        '<p class="text-xs font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
+    '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
+      '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
+        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">São José dos Campos</p>' +
+        '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
       '</div>' +
     '</div>' +
   '</div>';
 
-  // Legenda Interativa e Ranking de Concentração
-  html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-full pt-1">' +
+  // Legenda Interativa e Ranking de Concentração Expandida
+  html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
     // 1. Centro / Oeste
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100/80 border border-amber-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-[10px] font-bold text-amber-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
-        '<span class="text-xs font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
+        '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[9px] font-medium text-amber-700/80 truncate">Aquarius, Vila Ema, Centro</p>' +
+      '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Vila Ema, Centro</p>' +
     '</button>' +
 
     // 2. Zona Sul
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2 rounded-xl bg-blue-50 hover:bg-blue-100/80 border border-blue-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-[10px] font-bold text-blue-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Zona Sul</span>' +
-        '<span class="text-xs font-black text-blue-800">' + stats.sul.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
+        '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[9px] font-medium text-blue-700/80 truncate">Satélite, Bosque, Pq. Ind.</p>' +
+      '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Ind.</p>' +
     '</button>' +
 
     // 3. Todas as Regiões
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2 rounded-xl bg-cyan-50 hover:bg-cyan-100/80 border border-cyan-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-[10px] font-bold text-cyan-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
-        '<span class="text-xs font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
+        '<span class="text-xs sm:text-sm font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[9px] font-medium text-cyan-700/80 truncate">Circulação Geral</p>' +
+      '<p class="text-[10px] font-medium text-cyan-700 truncate">Circulação Geral</p>' +
     '</button>' +
 
     // 4. Zona Leste
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2 rounded-xl bg-sky-50 hover:bg-sky-100/80 border border-sky-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-[10px] font-bold text-sky-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-500"></span> Zona Leste</span>' +
-        '<span class="text-xs font-black text-sky-800">' + stats.leste.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
+        '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[9px] font-medium text-sky-700/80 truncate">Vista Verde, Eugênio Melo</p>' +
+      '<p class="text-[10px] font-medium text-sky-700 truncate">Vista Verde, Eugênio Melo</p>' +
     '</button>' +
 
     // 5. Zona Norte
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 border border-indigo-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-[10px] font-bold text-indigo-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
-        '<span class="text-xs font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
+        '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[9px] font-medium text-indigo-700/80 truncate">Santana, Altos Santana</p>' +
+      '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Altos Santana</p>' +
     '</button>' +
   '</div>';
 
@@ -3789,61 +3790,85 @@ function renderPetFriendlyCityCardsWidget(dataMap, total, records, questionText)
 // 7. Cards com Ícones Visuais para Evasão (Passear em Outras Cidades)
 function renderOtherCitiesIcons(dataMap, total) {
   function getCityIconConfig(key) {
-    const k = key.toLowerCase();
-    if (k.includes("sim") || k.includes("frequente") || k.includes("sempre")) {
+    const k = key.toLowerCase().trim();
+    if (k.includes("sim") || k.includes("frequente") || k.includes("sempre") || k.includes("muito")) {
       return {
         icon: "fa-solid fa-car-side",
         iconColor: "text-indigo-600",
         iconBg: "bg-indigo-100/80",
-        border: "border-indigo-100",
-        badgeBg: "bg-indigo-50 text-indigo-700"
+        border: "border-indigo-200 hover:border-indigo-300",
+        badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+        tag: "Frequente",
+        tagBg: "bg-indigo-100 text-indigo-800"
       };
     }
-    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("ocasional")) {
+    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("ocasional") || k.includes("eventual")) {
       return {
         icon: "fa-solid fa-compass",
-        iconColor: "text-cyan-600",
-        iconBg: "bg-cyan-100/80",
-        border: "border-cyan-100",
-        badgeBg: "bg-cyan-50 text-cyan-700"
+        iconColor: "text-blue-600",
+        iconBg: "bg-blue-100/80",
+        border: "border-blue-200 hover:border-blue-300",
+        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+        tag: "Ocasional",
+        tagBg: "bg-blue-100 text-blue-800"
       };
     }
     if (k.includes("raramente") || k.includes("pouco")) {
       return {
         icon: "fa-solid fa-tree-city",
+        iconColor: "text-amber-600",
+        iconBg: "bg-amber-100/80",
+        border: "border-amber-200 hover:border-amber-300",
+        badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+        tag: "Raramente",
+        tagBg: "bg-amber-100 text-amber-800"
+      };
+    }
+    if (k.includes("não") || k.includes("nao") || k.includes("nunca")) {
+      return {
+        icon: "fa-solid fa-house-chimney",
         iconColor: "text-emerald-600",
         iconBg: "bg-emerald-100/80",
-        border: "border-emerald-100",
-        badgeBg: "bg-emerald-50 text-emerald-700"
+        border: "border-emerald-200 hover:border-emerald-300",
+        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        tag: "Fica em SJC",
+        tagBg: "bg-emerald-100 text-emerald-800"
       };
     }
     return {
-      icon: "fa-solid fa-house-user",
+      icon: "fa-solid fa-location-dot",
       iconColor: "text-slate-600",
       iconBg: "bg-slate-100",
-      border: "border-slate-200",
-      badgeBg: "bg-slate-100 text-slate-700"
+      border: "border-slate-200 hover:border-slate-300",
+      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+      tag: "Outro",
+      tagBg: "bg-slate-100 text-slate-800"
     };
   }
 
-  const sorted = Object.entries(dataMap).sort((a, b) => b[1] - a[1]);
-  let html = '<div class="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">';
+  const validEntries = Object.entries(dataMap || {}).filter(([k]) => !/^\d+$/.test(k.trim()));
+  const totalSum = validEntries.reduce((acc, curr) => acc + curr[1], 0) || total || 1;
+  const sorted = validEntries.sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
   sorted.forEach(([k, count]) => {
-    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : "0.0";
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
     const cfg = getCityIconConfig(k);
 
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-sm flex items-center justify-between gap-3 transition-all hover:shadow">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-base shadow-xs">' +
+        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center ' + cfg.iconColor + ' text-base shadow-2xs select-none">' +
           '<i class="' + cfg.icon + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs font-bold text-slate-800 truncate" title="' + k + '">' + k + '</h4>' +
-          '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + count.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + k + '">' + k + '</h4>' +
         '</div>' +
       '</div>' +
       '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-2.5 py-1 rounded-xl ' + cfg.badgeBg + ' text-xs font-black">' + pct + '%</span>' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
