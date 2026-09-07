@@ -715,6 +715,9 @@ function processAndRenderDynamicCharts(records) {
       if (displayTitle.toLowerCase().includes("bonito para tirar fotos") || displayTitle.toLowerCase().includes("tirar fotos e postar")) {
         displayTitle = "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?";
       }
+      if (displayTitle.toLowerCase().includes("cidades vizinhas") || displayTitle.toLowerCase().includes("opções de lazer daqui")) {
+        displayTitle = "Comparando com as cidades vizinhas, o que você acha das opções de lazer?";
+      }
 
       // Card Container
       const cardEl = document.createElement("div");
@@ -729,6 +732,11 @@ function processAndRenderDynamicCharts(records) {
         }
         if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
           let strVal = String(rawVal).trim();
+          
+          // Ignora números isolados que não pertençam a escalas de 1 a 5 ou renda/idade
+          if (/^\d+$/.test(strVal) && !/1 a 5|nota|idade|quanto você acompanha/i.test(questionText) && !/^\d{1,2}$/.test(strVal)) {
+            return;
+          }
           // Remove parênteses e seus conteúdos se solicitados ou parênteses isolados
           // Tratamento especial para valores com parênteses: ex: "Instagram (Notícias SJC, etc.)" -> "Instagram" ou desmembra mantendo sem parenteses
           if (strVal.includes("(") || strVal.includes(")")) {
@@ -3755,15 +3763,18 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
       return "#94A3B8"; // Cinza
     }
 
-    // Percepção de Cidade / Sentimento
-    if (l.includes("melhorando") || l.includes("melhor") || l.includes("crescimento") || l.includes("ótimo") || l.includes("otimo")) {
+    // Comparativo / Sentimento
+    if (l === "são melhores" || l === "sao melhores" || l.includes("melhorando") || l.includes("melhor") || l.includes("crescimento") || l.includes("ótimo") || l.includes("otimo")) {
       return "#10B981"; // Verde Esmeralda
     }
-    if (l.includes("piorando") || l.includes("pior") || l.includes("ruim") || l.includes("crise")) {
+    if (l === "são iguais" || l === "sao iguais" || l.includes("iguais") || l.includes("mesmo jeito") || l.includes("estagnada") || l.includes("igual") || l.includes("regular") || l.includes("neutro")) {
+      return "#F59E0B"; // Âmbar / Laranja Suave
+    }
+    if (l === "são piores" || l === "sao piores" || l.includes("piorando") || l.includes("pior") || l.includes("ruim") || l.includes("crise")) {
       return "#EF4444"; // Vermelho
     }
-    if (l.includes("mesmo jeito") || l.includes("estagnada") || l.includes("igual") || l.includes("regular") || l.includes("neutro")) {
-      return "#94A3B8"; // Cinza Neutro / Slate
+    if (l === "não sei dizer" || l === "nao sei dizer" || l.includes("não sei") || l.includes("nao sei")) {
+      return "#8B5CF6"; // Roxo / Violeta
     }
     return brandPalette[idx % brandPalette.length];
   });
