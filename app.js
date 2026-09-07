@@ -1312,6 +1312,29 @@ function processAndRenderDynamicCharts(records) {
       cardsGrid.appendChild(culturePhotoCard);
     }
 
+    // Card editorial fotográfico temático para preencher harmoniosamente o grid do Bloco 5 (Mídia, Músicas & Streamings)
+    if (catIdx === 4) {
+      const mediaPhotoCard = document.createElement("div");
+      mediaPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-2";
+      mediaPhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_pessoas.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-brand-950/20"></div>
+        
+        <div class="relative z-10 space-y-2 max-w-xl">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/20 backdrop-blur-md border border-cyan-400/40 text-accent-cyan text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-satellite-dish text-cyan-400"></i> Informação & Consumo Digital
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-white leading-snug">
+            Comunicação, Redes Sociais & Notícias em São José
+          </h3>
+          <p class="text-xs sm:text-sm font-medium text-slate-300 leading-relaxed">
+            O ecossistema de informação joseense é fortemente digital: as páginas de Instagram e portais locais lideram o consumo diário de notícias, enquanto serviços de streaming dominam as preferências de áudio e vídeo na cidade.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(mediaPhotoCard);
+    }
+
     sectionEl.innerHTML = sectionHeader;
     sectionEl.appendChild(cardsGrid);
     dynamicChartsGrid.appendChild(sectionEl);
