@@ -650,26 +650,32 @@ function processAndRenderDynamicCharts(records) {
       )
     },
     {
-      title: "5. Mídia, Músicas, Streamings & Comportamento",
-      subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e comportamento",
+      title: "5. Mídia, Músicas & Streamings",
+      subtitle: "Gêneros musicais, plataformas de streaming, redes sociais para descoberta e influencers",
       questions: questionList.filter(q => 
         !/animal|pet|bicho|anima/i.test(q) && 
         !/bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q) &&
-        (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente/i.test(q))
+        !/namoro|financeiramente/i.test(q) &&
+        (/música|serviços|filmes|rede social|influenciador|notícias/i.test(q))
       )
     },
     {
-      title: "6. Política & Posicionamento",
+      title: "6. Relacionamento & Vida Pessoal",
+      subtitle: "Impacto das redes sociais, aplicativos de namoro e estabilidade financeira em relacionamentos",
+      questions: questionList.filter(q => /namoro|financeiramente/i.test(q))
+    },
+    {
+      title: "7. Política & Posicionamento",
       subtitle: "Nível de acompanhamento político (termômetro 1 a 5) e espectro político municipal",
       questions: questionList.filter(q => /política|politica|lado/i.test(q) && !/ajuda a cidade/i.test(q))
     },
     {
-      title: "7. Economia Local, Desenvolvimento & Bairros",
+      title: "8. Economia Local, Desenvolvimento & Bairros",
       subtitle: "Produtores locais, feiras de artesanato, quem ajuda a cidade e bairros",
       questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && !/política|politica/i.test(q) && (/produtores|feiras|artesanato|ajuda a cidade|bairro/i.test(q)))
     },
     {
-      title: "8. Mundo Pet & Animais de Estimação",
+      title: "9. Mundo Pet & Animais de Estimação",
       subtitle: "Posse de pets, estrutura e avaliação de São José para animais de estimação",
       questions: questionList.filter(q => /animal|pet|bicho|anima/i.test(q))
     }
@@ -679,7 +685,7 @@ function processAndRenderDynamicCharts(records) {
   const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
   if (remainingQuestions.length > 0) {
     categories.push({
-      title: "9. Demais Indicadores & Perguntas da Pesquisa",
+      title: "10. Demais Indicadores & Perguntas da Pesquisa",
       subtitle: "Outras perguntas presentes na base de dados",
       questions: remainingQuestions
     });
@@ -762,8 +768,11 @@ function processAndRenderDynamicCharts(records) {
       if (displayTitle.toLowerCase().includes("bonito para tirar foto") || displayTitle.toLowerCase().includes("tirar fotos e postar") || displayTitle.toLowerCase().includes("tirar foto")) {
         displayTitle = "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?";
       }
-      if (displayTitle.toLowerCase().includes("mais opções de lazer que você gosta") || displayTitle.toLowerCase().includes("mais opcoes de lazer") || (displayTitle.toLowerCase().includes("opções de lazer") && displayTitle.toLowerCase().includes("gastar"))) {
-        displayTitle = "Se tivesse mais opções de lazer que você gosta, você gastaria mais dinheiro na cidade?";
+      if (displayTitle.toLowerCase().includes("precisa estar bem financeiramente") || (displayTitle.toLowerCase().includes("financeiramente") && displayTitle.toLowerCase().includes("come"))) {
+        displayTitle = "Você acha que precisa estar bem financeiramente antes de começar um relacionamento?";
+      }
+      if (displayTitle.toLowerCase().includes("aplicativos de namoro mexem") || (displayTitle.toLowerCase().includes("redes sociais") && displayTitle.toLowerCase().includes("namoro"))) {
+        displayTitle = "As redes sociais ou aplicativos de namoro mexem com a sua vida e autoestima?";
       }
       if (displayTitle.toLowerCase().includes("cidades vizinhas") || displayTitle.toLowerCase().includes("opções de lazer daqui")) {
         displayTitle = "Comparando com as cidades vizinhas, o que você acha das opções de lazer?";
@@ -1154,14 +1163,26 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 13.1. REDES SOCIAIS & REFERÊNCIAS: Cards Visuais com Logotipos Oficiais e Porcentagens
-      if (qLower.includes("rede social") || qLower.includes("redes sociais") || (qLower.includes("social") && (qLower.includes("lugares") || qLower.includes("referê") || qLower.includes("referencia")))) {
+      // 13.1. REDES SOCIAIS & REFERÊNCIAS (Para encontrar lugares): Cards Visuais com Logotipos Oficiais
+      if ((qLower.includes("rede social") || qLower.includes("redes sociais") || qLower.includes("social")) && (qLower.includes("lugares") || qLower.includes("referê") || qLower.includes("referencia") || qLower.includes("encontrar"))) {
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Descoberta Local & Redes Sociais • Logos Oficiais</p>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-between w-full">' + renderSocialMediaLogosWidget(dataMap, total, records, questionText) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 13.2. APLICATIVOS DE NAMORO / REDES SOCIAIS NA VIDA PESSOAL: Cards Visuais com Barras e Emojis
+      if (qLower.includes("namoro") || (qLower.includes("redes sociais") && qLower.includes("mexem")) || (qLower.includes("aplicativos") && qLower.includes("namoro"))) {
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Impacto Emocional & Relacionamentos • Distribuição Percentual</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderDatingAppsImpactWidget(dataMap, total, records, questionText) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -3794,6 +3815,121 @@ function renderPetFriendlyCityCardsWidget(dataMap, total, records, questionText)
       '</div>' +
       '<div class="flex-shrink-0 text-right pl-2">' +
         '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div>';
+  return html;
+}
+
+// 7.7.4. Cards Visuais com Emojis & Barras para "As redes sociais ou aplicativos de namoro mexem com a sua vida"
+function renderDatingAppsImpactWidget(dataMap, total, records, questionText) {
+  function getImpactConfig(key) {
+    const k = key.toLowerCase().trim();
+    if (k.includes("não") || k.includes("nao") || k.includes("nada") || k.includes("nenhum")) {
+      return {
+        icon: "fa-solid fa-shield-heart",
+        emoji: "🛡️",
+        title: "Não",
+        subtitle: "Não afeta a autoestima ou vida pessoal",
+        badgeBg: "bg-slate-100 text-slate-800 border-slate-200",
+        barColor: "bg-slate-800",
+        border: "border-slate-200 hover:border-slate-300",
+        tag: "Neutro",
+        tagBg: "bg-slate-100 text-slate-700",
+        iconBg: "bg-slate-100 text-slate-700"
+      };
+    }
+    if (k.includes("um pouco") || k.includes("pouco") || k.includes("às vezes") || k.includes("as vezes") || k.includes("moderado")) {
+      return {
+        icon: "fa-solid fa-heart-pulse",
+        emoji: "💭",
+        title: "Um pouco",
+        subtitle: "Impacto ocasional no bem-estar ou rotina",
+        badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
+        barColor: "bg-blue-600",
+        border: "border-blue-200 hover:border-blue-300",
+        tag: "Moderado",
+        tagBg: "bg-blue-100 text-blue-800",
+        iconBg: "bg-blue-100/80 text-blue-700"
+      };
+    }
+    if (k.includes("muito") || k.includes("bastante") || k.includes("sim") || k.includes("demais")) {
+      return {
+        icon: "fa-solid fa-fire-flame-curved",
+        emoji: "🔥",
+        title: "Muito",
+        subtitle: "Forte influência emocional e nas decisões",
+        badgeBg: "bg-rose-50 text-rose-800 border-rose-200",
+        barColor: "bg-rose-600",
+        border: "border-rose-200 hover:border-rose-300",
+        tag: "Alto Impacto",
+        tagBg: "bg-rose-100 text-rose-800",
+        iconBg: "bg-rose-100/80 text-rose-700"
+      };
+    }
+    return {
+      icon: "fa-solid fa-hashtag",
+      emoji: "#",
+      title: key,
+      subtitle: "Percepção pessoal",
+      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+      barColor: "bg-brand-900",
+      border: "border-slate-200 hover:border-slate-300",
+      tag: "Opinião",
+      tagBg: "bg-slate-100 text-slate-700",
+      iconBg: "bg-slate-100 text-slate-700"
+    };
+  }
+
+  const dynamicMap = {};
+  if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
+  } else if (records && records.length > 0) {
+    records.forEach(r => {
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "redes sociais ou aplicativos de namoro", "aplicativos de namoro", "namoro mexem"]);
+      }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        const clean = String(val).trim().replace(/[()]/g, "").trim();
+        if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
+      }
+    });
+  }
+
+  const entries = Object.entries(dynamicMap);
+  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+
+  entries.sort((a, b) => b[1] - a[1]);
+
+  let html = '<div class="space-y-3 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
+
+  entries.forEach(([key, count]) => {
+    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const cfg = getImpactConfig(key);
+
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3.5 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex flex-col gap-2 transition-all">' +
+      '<div class="flex items-center justify-between gap-3">' +
+        '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+          '<div class="w-10 h-10 rounded-xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-lg shadow-2xs select-none">' +
+            '<i class="' + cfg.icon + '"></i>' +
+          '</div>' +
+          '<div class="min-w-0 flex-1">' +
+            '<div class="flex items-center gap-2 mb-0.5">' +
+              '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+            '</div>' +
+            '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+            '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + count.toLocaleString("pt-BR") + ' respondentes</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="flex-shrink-0 text-right">' +
+          '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden shadow-inner">' +
+        '<div class="h-full rounded-full ' + cfg.barColor + ' transition-all duration-700" style="width: ' + pct + '%;"></div>' +
       '</div>' +
     '</div>';
   });
