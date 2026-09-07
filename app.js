@@ -4981,6 +4981,10 @@ function determineChartType(questionText, dataMap, index) {
   if (qLower.includes("de 1 a 5") || qLower.includes("nota") || qLower.includes("quanto você acompanha")) {
     return { type: (index % 2 === 0) ? "line" : "bar", options: { gradient: true } };
   }
+  // Força gráfico de barras horizontais para "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?"
+  if (qLower.includes("bonito para tirar foto") || qLower.includes("tirar foto") || qLower.includes("tirar fotos e postar")) {
+    return { type: "bar", options: { horizontal: true } };
+  }
   if (count <= 4) {
     if (index % 3 === 0) return { type: "pie", options: {} };
     return { type: "doughnut", options: {} };
@@ -5105,6 +5109,17 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     }
     if (l.includes("não responder") || l.includes("nao responder") || l.includes("prefiro não") || l.includes("prefiro nao") || l.includes("não informado") || l.includes("nao informado") || l.includes("nenhum")) {
       return "#94A3B8"; // Cinza
+    }
+
+    // Escolha por local instagramável / fotos
+    if (l.includes("não, não ligo") || l.includes("nao, nao ligo") || l.includes("não ligo") || l.includes("nao ligo")) {
+      return "#EF4444"; // Vermelho
+    }
+    if (l.includes("um pouco") || l.includes("pouco") || l.includes("às vezes") || l.includes("as vezes")) {
+      return "#0077B6"; // Azul Real
+    }
+    if (l.includes("sim, muito") || l.includes("sim muito") || l.includes("muito") || l.includes("bastante")) {
+      return "#10B981"; // Verde Esmeralda
     }
 
     // Respostas Sim / Não (Sim = Verde, Não = Vermelho)
