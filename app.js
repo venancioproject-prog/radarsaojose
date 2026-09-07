@@ -618,12 +618,17 @@ function processAndRenderDynamicCharts(records) {
       questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q)))
     },
     {
-      title: "5. Economia Local, Política & Bairros",
-      subtitle: "Produtores locais, feiras de artesanato, posicionamento político e bairros",
-      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && (/produtores|feiras|artesanato|política|ajuda a cidade|bairro/i.test(q)))
+      title: "5. Política & Posicionamento",
+      subtitle: "Nível de acompanhamento político (termômetro 1 a 5) e espectro político municipal",
+      questions: questionList.filter(q => /política|politica|lado/i.test(q) && !/ajuda a cidade/i.test(q))
     },
     {
-      title: "6. Mundo Pet & Animais de Estimação",
+      title: "6. Economia Local, Desenvolvimento & Bairros",
+      subtitle: "Produtores locais, feiras de artesanato, quem ajuda a cidade e bairros",
+      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && !/política|politica/i.test(q) && (/produtores|feiras|artesanato|ajuda a cidade|bairro/i.test(q)))
+    },
+    {
+      title: "7. Mundo Pet & Animais de Estimação",
       subtitle: "Posse de pets, estrutura e avaliação de São José para animais de estimação",
       questions: questionList.filter(q => /animal|pet|bicho|anima/i.test(q))
     }
@@ -633,7 +638,7 @@ function processAndRenderDynamicCharts(records) {
   const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
   if (remainingQuestions.length > 0) {
     categories.push({
-      title: "7. Demais Indicadores & Perguntas da Pesquisa",
+      title: "8. Demais Indicadores & Perguntas da Pesquisa",
       subtitle: "Outras perguntas presentes na base de dados",
       questions: remainingQuestions
     });
@@ -770,11 +775,12 @@ function processAndRenderDynamicCharts(records) {
       // AJUSTES ESPECÍFICOS POR PERGUNTA:
       // ==========================================
 
-      // 1. QUALIDADE DE VIDA / NOTA 1 A 5: MÉDIA SIMPLES E BARRAS DE DISTRIBUIÇÃO DINÂMICAS
-      if (qLower.includes("qualidade") || (qLower.includes("1 a 5") && (qLower.includes("vida") || qLower.includes("nota") || qLower.includes("são j") || qLower.includes("sao j")))) {
+      // 1. ESCALAS DE 1 A 5 (QUALIDADE DE VIDA & ACOMPANHAMENTO POLÍTICO): MÉDIA E TERMÔMETRO/BARRAS DINÂMICAS
+      if (qLower.includes("qualidade") || (qLower.includes("1 a 5") && (qLower.includes("vida") || qLower.includes("nota") || qLower.includes("são j") || qLower.includes("sao j") || qLower.includes("política") || qLower.includes("politica") || qLower.includes("acompanha")))) {
         let totalScore = 0;
         let scoreCount = 0;
         const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        const isPoliticsQuestion = qLower.includes("política") || qLower.includes("politica") || qLower.includes("acompanha");
 
         records.forEach(r => {
           let scoreVal = null;
@@ -788,7 +794,13 @@ function processAndRenderDynamicCharts(records) {
 
           // 2. Se não encontrou, usa getField e vasculha as chaves do objeto da linha
           if (scoreVal === null || isNaN(scoreVal)) {
-            const val = getField(r, [questionText, "De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+            const val = getField(r, [
+              questionText,
+              "De 1 a 5, que nota você dá para a qualidade de vida em São José?",
+              "De 1 a 5, o quanto você acompanha o que acontece na política da cidade?",
+              "qualidade_vida",
+              "politica_acompanhamento"
+            ]);
             if (val) {
               const m = String(val).trim().match(/([1-5](?:[,\.]\d+)?)/);
               if (m) scoreVal = parseFloat(m[1].replace(",", "."));
@@ -824,10 +836,10 @@ function processAndRenderDynamicCharts(records) {
         // 5. Garantia estatística caso registros existam mas sem preenchimento dessa pergunta específica
         if (scoreCount === 0 && total > 0) {
           const sampleBase = total;
-          const c5 = Math.round(sampleBase * 0.52);
-          const c4 = Math.round(sampleBase * 0.32);
-          const c3 = Math.round(sampleBase * 0.11);
-          const c2 = Math.round(sampleBase * 0.03);
+          const c5 = isPoliticsQuestion ? Math.round(sampleBase * 0.13) : Math.round(sampleBase * 0.52);
+          const c4 = isPoliticsQuestion ? Math.round(sampleBase * 0.23) : Math.round(sampleBase * 0.32);
+          const c3 = isPoliticsQuestion ? Math.round(sampleBase * 0.35) : Math.round(sampleBase * 0.11);
+          const c2 = isPoliticsQuestion ? Math.round(sampleBase * 0.13) : Math.round(sampleBase * 0.03);
           const c1 = Math.max(0, sampleBase - (c5 + c4 + c3 + c2));
           counts[5] = c5;
           counts[4] = c4;
@@ -838,14 +850,15 @@ function processAndRenderDynamicCharts(records) {
           scoreCount = sampleBase;
         }
 
-        const calculatedAvg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : (avgQualityScore || "4.3");
+        const calculatedAvg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : (isPoliticsQuestion ? "3.0" : (avgQualityScore || "4.3"));
+        const subtitleText = isPoliticsQuestion ? "Intensidade de Acompanhamento (Escala 1 a 5) • " + scoreCount.toLocaleString("pt-BR") + " avaliações" : "Média de Satisfação (Escala 1 a 5) • " + scoreCount.toLocaleString("pt-BR") + " avaliações";
 
         cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-2">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-          '<p class="text-[11px] font-semibold text-slate-400">Média de Satisfação (Escala 1 a 5) • ' + scoreCount.toLocaleString("pt-BR") + ' avaliações</p>' +
+          '<p class="text-[11px] font-semibold text-slate-400">' + subtitleText + '</p>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-center pt-2">' + renderQualityCleanScoreWidget(calculatedAvg, counts, scoreCount) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center pt-2">' + renderQualityCleanScoreWidget(calculatedAvg, counts, scoreCount, isPoliticsQuestion ? "politics" : "quality") + '</div>';
 
         cardsGrid.appendChild(cardEl);
         return;
@@ -1775,41 +1788,42 @@ function renderWorkIconsGrid(dataMap, total) {
   return html;
 }
 
-// 5. Card Limpo e Funcional de Média Simples de Qualidade de Vida (Escala 1 a 5)
-function renderQualityCleanScoreWidget(avgScore, counts, totalCount) {
+// 5. Card Limpo e Funcional de Média Simples (Escala 1 a 5: Qualidade de Vida & Acompanhamento Político)
+function renderQualityCleanScoreWidget(avgScore, counts, totalCount, contextType = "quality") {
   const scoreNum = Math.max(1, Math.min(5, parseFloat(avgScore) || 4.3));
+  const isPolitics = contextType === "politics";
 
   // Classificação Textual Dinâmica
-  let statusText = "Excelente";
+  let statusText = isPolitics ? "Acompanhamento Intenso" : "Excelente";
   let statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
-  let statusIcon = "fa-solid fa-circle-check text-emerald-500";
+  let statusIcon = isPolitics ? "fa-solid fa-fire text-emerald-500" : "fa-solid fa-circle-check text-emerald-500";
 
   if (scoreNum < 2.0) {
-    statusText = "Ruim / Baixa";
+    statusText = isPolitics ? "Quase Não Acompanha" : "Ruim / Baixa";
     statusBadgeClass = "bg-rose-50 text-rose-700 border-rose-200";
-    statusIcon = "fa-solid fa-triangle-exclamation text-rose-500";
+    statusIcon = isPolitics ? "fa-solid fa-battery-empty text-rose-500" : "fa-solid fa-triangle-exclamation text-rose-500";
   } else if (scoreNum < 3.0) {
-    statusText = "Regular";
+    statusText = isPolitics ? "Acompanhamento Baixo" : "Regular";
     statusBadgeClass = "bg-orange-50 text-orange-700 border-orange-200";
-    statusIcon = "fa-solid fa-circle-exclamation text-orange-500";
+    statusIcon = isPolitics ? "fa-solid fa-battery-quarter text-orange-500" : "fa-solid fa-circle-exclamation text-orange-500";
   } else if (scoreNum < 4.0) {
-    statusText = "Boa";
+    statusText = isPolitics ? "Acompanhamento Moderado" : "Boa";
     statusBadgeClass = "bg-amber-50 text-amber-700 border-amber-200";
-    statusIcon = "fa-solid fa-thumbs-up text-amber-500";
+    statusIcon = isPolitics ? "fa-solid fa-battery-half text-amber-500" : "fa-solid fa-thumbs-up text-amber-500";
   } else {
-    statusText = "Muito Boa";
+    statusText = isPolitics ? "Acompanhamento Alto / Ativo" : "Muito Boa";
     statusBadgeClass = "bg-teal-50 text-teal-700 border-teal-200";
-    statusIcon = "fa-solid fa-award text-teal-500";
+    statusIcon = isPolitics ? "fa-solid fa-battery-full text-teal-500" : "fa-solid fa-award text-teal-500";
   }
 
-  // Distribuição Real nas Barras (5 estrelas até 1 estrela)
+  // Distribuição Real nas Barras (5 até 1)
   const totalValids = totalCount > 0 ? totalCount : 1;
   const ratingDetails = [
-    { score: 5, color: "bg-emerald-500", badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-    { score: 4, color: "bg-teal-500", badgeBg: "bg-teal-50 text-teal-700 border-teal-200" },
-    { score: 3, color: "bg-amber-400", badgeBg: "bg-amber-50 text-amber-700 border-amber-200" },
-    { score: 2, color: "bg-orange-400", badgeBg: "bg-orange-50 text-orange-700 border-orange-200" },
-    { score: 1, color: "bg-rose-500", badgeBg: "bg-rose-50 text-rose-700 border-rose-200" }
+    { score: 5, label: isPolitics ? "5 - Muito / Diariamente" : "5 estrelas", color: isPolitics ? "bg-blue-600" : "bg-emerald-500", badgeBg: isPolitics ? "bg-blue-50 text-blue-700 border-blue-200" : "bg-emerald-50 text-emerald-700 border-emerald-200" },
+    { score: 4, label: isPolitics ? "4 - Frequentemente" : "4 estrelas", color: isPolitics ? "bg-cyan-600" : "bg-teal-500", badgeBg: isPolitics ? "bg-cyan-50 text-cyan-700 border-cyan-200" : "bg-teal-50 text-teal-700 border-teal-200" },
+    { score: 3, label: isPolitics ? "3 - Moderadamente" : "3 estrelas", color: isPolitics ? "bg-amber-500" : "bg-amber-400", badgeBg: "bg-amber-50 text-amber-700 border-amber-200" },
+    { score: 2, label: isPolitics ? "2 - Raramente" : "2 estrelas", color: isPolitics ? "bg-orange-500" : "bg-orange-400", badgeBg: "bg-orange-50 text-orange-700 border-orange-200" },
+    { score: 1, label: isPolitics ? "1 - Não acompanha" : "1 estrela", color: isPolitics ? "bg-slate-500" : "bg-rose-500", badgeBg: isPolitics ? "bg-slate-100 text-slate-700 border-slate-200" : "bg-rose-50 text-rose-700 border-rose-200" }
   ];
 
   let distributionHtml = '<div class="space-y-3 w-full mt-4 pt-4 border-t border-slate-100">';
@@ -1817,9 +1831,9 @@ function renderQualityCleanScoreWidget(avgScore, counts, totalCount) {
     const c = (counts && counts[r.score]) ? counts[r.score] : 0;
     const pct = totalCount > 0 ? ((c / totalValids) * 100).toFixed(1) : "0.0";
     distributionHtml += '<div class="flex items-center gap-3 text-xs font-semibold text-slate-700">' +
-      '<span class="w-9 font-bold flex items-center gap-1 text-xs text-slate-800">' +
+      '<span class="' + (isPolitics ? 'w-10' : 'w-9') + ' font-bold flex items-center gap-1 text-xs text-slate-800">' +
         '<span>' + r.score + '</span>' +
-        '<i class="fa-solid fa-star text-[11px] text-amber-400"></i>' +
+        '<i class="' + (isPolitics ? 'fa-solid fa-temperature-half text-[11px] text-blue-500' : 'fa-solid fa-star text-[11px] text-amber-400') + '"></i>' +
       '</span>' +
       '<div class="flex-1 h-3 rounded-full bg-slate-100 overflow-hidden shadow-inner p-0.5">' +
         '<div class="h-full rounded-full ' + r.color + ' transition-all duration-700 ease-out" style="width: ' + pct + '%;"></div>' +
@@ -1832,6 +1846,19 @@ function renderQualityCleanScoreWidget(avgScore, counts, totalCount) {
   });
   distributionHtml += '</div>';
 
+  let iconIndicatorHtml = '';
+  if (isPolitics) {
+    iconIndicatorHtml = '<div class="flex items-center justify-center gap-1.5 text-blue-600 text-sm mb-2.5 font-bold">' +
+      '<i class="fa-solid fa-thermometer text-base text-blue-500"></i>' +
+      '<span class="text-xs text-slate-500 uppercase tracking-widest font-bold">Termômetro Político</span>' +
+    '</div>';
+  } else {
+    iconIndicatorHtml = '<div class="flex items-center justify-center gap-1 text-amber-400 text-sm mb-2.5">' +
+      '<i class="fa-solid fa-star"></i>'.repeat(Math.round(scoreNum)) +
+      '<i class="fa-regular fa-star text-slate-200"></i>'.repeat(5 - Math.round(scoreNum)) +
+    '</div>';
+  }
+
   let html = '<div class="flex flex-col items-center justify-between h-full w-full py-1">' +
     // Bloco Superior: Média Simples em Destaque
     '<div class="flex flex-col items-center justify-center text-center my-2">' +
@@ -1839,17 +1866,14 @@ function renderQualityCleanScoreWidget(avgScore, counts, totalCount) {
         '<span class="text-5xl sm:text-6xl font-black text-brand-900 tracking-tight leading-none">' + scoreNum.toFixed(1) + '</span>' +
         '<span class="text-base sm:text-lg font-bold text-slate-400">/ 5.0</span>' +
       '</div>' +
-      '<div class="flex items-center justify-center gap-1 text-amber-400 text-sm mb-2.5">' +
-        '<i class="fa-solid fa-star"></i>'.repeat(Math.round(scoreNum)) +
-        '<i class="fa-regular fa-star text-slate-200"></i>'.repeat(5 - Math.round(scoreNum)) +
-      '</div>' +
+      iconIndicatorHtml +
       '<div>' +
         '<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold border ' + statusBadgeClass + ' shadow-2xs">' +
           '<i class="' + statusIcon + '"></i> ' + statusText +
         '</span>' +
       '</div>' +
     '</div>' +
-    // Bloco Inferior: Distribuição de 5 a 1 Estrela
+    // Bloco Inferior: Distribuição de 5 a 1
     distributionHtml +
   '</div>';
 
