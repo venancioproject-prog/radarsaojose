@@ -737,24 +737,28 @@ function processAndRenderDynamicCharts(records) {
           if (/^\d+$/.test(strVal) && !/1 a 5|nota|idade|quanto você acompanha/i.test(questionText) && !/^\d{1,2}$/.test(strVal)) {
             return;
           }
-          // Remove parênteses e seus conteúdos se solicitados ou parênteses isolados
-          // Tratamento especial para valores com parênteses: ex: "Instagram (Notícias SJC, etc.)" -> "Instagram" ou desmembra mantendo sem parenteses
-          if (strVal.includes("(") || strVal.includes(")")) {
-            // Remove parênteses externos/internos mas preserva os textos de forma limpa
-            strVal = strVal.replace(/\(([^)]*)\)/g, "$1").replace(/[()]/g, "").trim();
-          }
 
-          // Não quebra por vírgula perguntas de escolha única como "outras cidades", "tirar fotos", "produtores/feiras", etc.
-          const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador/i.test(questionText);
+          // Identifica perguntas de múltipla escolha
+          const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
 
-          if (isMultipleChoice && strVal.includes(",") && !/^(R\$|\d+,\d+)/.test(strVal)) {
-            strVal.split(",").forEach(part => {
-              let p = part.trim().replace(/[()]/g, "").trim();
-              if (p) dataMap[p] = (dataMap[p] || 0) + 1;
+          if (isMultipleChoice) {
+            // Remove o conteúdo entre parênteses e os próprios parênteses para manter apenas os títulos limpos
+            const cleanedWithoutParens = strVal.replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
+            const parts = cleanedWithoutParens.split(",");
+            const rowBuckets = new Set();
+            parts.forEach(part => {
+              let p = part.trim();
+              if (p && !/^(R\$|\d+,\d+)$/.test(p)) {
+                rowBuckets.add(p);
+              }
+            });
+            rowBuckets.forEach(b => {
+              dataMap[b] = (dataMap[b] || 0) + 1;
             });
           } else {
-            strVal = strVal.replace(/[()]/g, "").trim();
-            if (strVal) dataMap[strVal] = (dataMap[strVal] || 0) + 1;
+            // Pergunta de escolha única: remove parênteses e seus conteúdos se existirem
+            let cleanSingle = strVal.replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
+            if (cleanSingle) dataMap[cleanSingle] = (dataMap[cleanSingle] || 0) + 1;
           }
         }
       });
@@ -3752,11 +3756,11 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const ctx = canvas.getContext("2d");
   if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
 
-  // Remove parênteses das legendas / labels de qualquer pergunta
+  // Remove parênteses e seus conteúdos das legendas / labels de qualquer pergunta
   let rawLabels = Object.keys(dataMap);
   let cleanedDataMap = {};
   rawLabels.forEach(k => {
-    let cleanKey = String(k).replace(/\(([^)]*)\)/g, "$1").replace(/[()]/g, "").trim();
+    let cleanKey = String(k).replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
     if (!cleanKey) cleanKey = String(k).trim();
     cleanedDataMap[cleanKey] = (cleanedDataMap[cleanKey] || 0) + dataMap[k];
   });
@@ -3777,7 +3781,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const isHorizontal = options.horizontal === true;
   const totalSum = values.reduce((a, b) => a + b, 0);
 
-  function wrapTextLines(text, maxChars = 20) {
+  function wrapTextLines(text, maxChars = 22) {
     if (typeof text !== "string" || text.length <= maxChars) return text;
     const words = text.split(" ");
     const lines = [];
@@ -3795,7 +3799,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   }
 
   // Prepara labels com quebra nativa de linha (array de strings) para barras horizontais
-  const chartLabels = isHorizontal ? labels.map(l => wrapTextLines(l, 18)) : (labels.length ? labels : ["Sem registros"]);
+  const chartLabels = isHorizontal ? labels.map(l => wrapTextLines(l, 22)) : (labels.length ? labels : ["Sem registros"]);
 
   const brandPalette = [
     "#0B2545", // Azul Petróleo Institucional
