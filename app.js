@@ -658,7 +658,8 @@ function processAndRenderDynamicCharts(records) {
     if (!cat.questions || cat.questions.length === 0) return;
 
     const sectionEl = document.createElement("section");
-    sectionEl.className = "space-y-4";
+    sectionEl.id = "secao-bloco-" + (catIdx + 1);
+    sectionEl.className = "space-y-4 scroll-mt-24";
 
     const sectionHeader = '<div class="flex items-center gap-3 border-b border-slate-200 pb-3">' +
       '<div class="w-8 h-8 rounded-xl bg-brand-900 text-white flex items-center justify-center text-xs font-bold">' + (catIdx + 1) + '</div>' +
@@ -3490,7 +3491,193 @@ function renderRegionsHeatmap(dataMap, total) {
   return html;
 }
 
-// 8.5. Nuvem de Palavras Dinâmica (Word Cloud) com Stopwords em Português
+// 8.5. Nuvem de Palavras Dinâmica (Word Cloud) com Stopwords em Português & Balão/Modal Interativo de Respostas
+window.wordCloudQuotesStore = window.wordCloudQuotesStore || {};
+window._activeModalWord = "";
+window._activeModalQuotes = [];
+
+window.openWordQuotesModal = function(word) {
+  window._activeModalWord = word;
+  const quotes = window.wordCloudQuotesStore[word] || [];
+  window._activeModalQuotes = quotes;
+
+  let modalEl = document.getElementById("word-cloud-quotes-modal");
+  if (!modalEl) {
+    modalEl = document.createElement("div");
+    modalEl.id = "word-cloud-quotes-modal";
+    document.body.appendChild(modalEl);
+  }
+
+  // Renderizar o conteúdo do modal
+  modalEl.className = "fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 transition-all duration-300";
+  modalEl.innerHTML = `
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-100 flex flex-col max-h-[88vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
+      <!-- Header do Modal -->
+      <div class="px-5 sm:px-6 py-4 sm:py-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex items-start justify-between gap-4 shrink-0">
+        <div>
+          <div class="flex items-center gap-2 mb-1 flex-wrap">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-900 text-white text-xs font-bold shadow-xs">
+              <i class="fa-solid fa-quote-left text-[10px] text-cyan-300"></i>
+              <span>${word}</span>
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+              ${quotes.length} ${quotes.length === 1 ? 'menção' : 'menções'}
+            </span>
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-brand-900 leading-snug">
+            O que as pessoas falaram com essa palavra
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">
+            Depoimentos reais sobre como os moradores definem São José hoje.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeWordQuotesModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors flex items-center justify-center shrink-0 text-sm focus:outline-none" title="Fechar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Barra de Pesquisa Rápida no Modal -->
+      <div class="px-5 sm:px-6 py-3 bg-slate-50/80 border-b border-slate-100 flex items-center gap-2 shrink-0">
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-xs"></i>
+          <input 
+            type="text" 
+            id="word-modal-search-input" 
+            placeholder="Filtrar por texto, bairro ou perfil..." 
+            oninput="window.filterModalWordQuotes(this.value)" 
+            class="w-full pl-9 pr-4 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all font-medium text-slate-800 placeholder-slate-400 shadow-xs"
+          />
+        </div>
+      </div>
+
+      <!-- Lista de Respostas / Depoimentos -->
+      <div id="word-modal-quotes-list" class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3 custom-card-scroll bg-slate-50/40">
+        ${renderModalQuotesListHTML(quotes, word)}
+      </div>
+
+      <!-- Footer do Modal -->
+      <div class="px-5 sm:px-6 py-3.5 border-t border-slate-100 bg-white flex items-center justify-between gap-3 shrink-0">
+        <span id="word-modal-counter-label" class="text-xs font-semibold text-slate-500">
+          Exibindo ${quotes.length} de ${quotes.length} respostas
+        </span>
+        <button type="button" onclick="window.closeWordQuotesModal()" class="px-5 py-2 rounded-xl bg-brand-900 hover:bg-brand-950 text-white text-xs font-bold transition-all shadow-xs hover:shadow-md focus:outline-none active:scale-95">
+          Fechar
+        </button>
+      </div>
+    </div>
+  `;
+
+  // Fechar ao clicar no backdrop
+  modalEl.onclick = function(e) {
+    if (e.target === modalEl) {
+      window.closeWordQuotesModal();
+    }
+  };
+
+  document.body.classList.add("overflow-hidden");
+};
+
+window.closeWordQuotesModal = function() {
+  const modalEl = document.getElementById("word-cloud-quotes-modal");
+  if (modalEl) {
+    modalEl.remove();
+  }
+  document.body.classList.remove("overflow-hidden");
+};
+
+// Fechar com tecla ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    window.closeWordQuotesModal();
+  }
+});
+
+function highlightWordInText(text, word) {
+  if (!text || !word) return text;
+  try {
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+    return text.replace(regex, '<mark class="bg-amber-200 text-amber-950 font-bold px-1 py-0.5 rounded shadow-xs">$1</mark>');
+  } catch (err) {
+    return text;
+  }
+}
+
+function renderModalQuotesListHTML(quotes, highlightWord) {
+  if (!quotes || quotes.length === 0) {
+    return `
+      <div class="py-12 text-center flex flex-col items-center justify-center text-slate-400">
+        <i class="fa-regular fa-comment-dots text-4xl mb-3 text-slate-300"></i>
+        <p class="text-sm font-semibold text-slate-600">Nenhuma resposta encontrada.</p>
+        <p class="text-xs text-slate-400 mt-1">Tente ajustar o termo pesquisado.</p>
+      </div>
+    `;
+  }
+
+  return quotes.map((q, idx) => {
+    const highlightedText = highlightWordInText(q.text, highlightWord);
+    
+    // Tags de metadados
+    let metaBadges = [];
+    if (q.bairro) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-100"><i class="fa-solid fa-location-dot text-[9px]"></i> ${q.bairro}</span>`);
+    }
+    if (q.idade) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200"><i class="fa-solid fa-user text-[9px]"></i> ${q.idade}</span>`);
+    }
+    if (q.genero) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-semibold px-2.5 py-0.5 rounded-md bg-slate-50 text-slate-600 border border-slate-200">${q.genero}</span>`);
+    }
+    if (q.trabalho) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-medium px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100"><i class="fa-solid fa-briefcase text-[9px]"></i> ${q.trabalho}</span>`);
+    }
+
+    return `
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-card hover:border-brand-300 hover:shadow-md transition-all flex flex-col gap-2.5">
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5 border border-brand-100">
+            <i class="fa-solid fa-quote-left"></i>
+          </div>
+          <div class="flex-1">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed break-words">
+              "${highlightedText}"
+            </p>
+          </div>
+        </div>
+        ${metaBadges.length > 0 ? `<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 ml-10">${metaBadges.join('')}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+window.filterModalWordQuotes = function(query) {
+  const q = (query || "").trim().toLowerCase();
+  const allQuotes = window._activeModalQuotes || [];
+  const currentWord = window._activeModalWord || "";
+
+  let filtered = allQuotes;
+  if (q) {
+    filtered = allQuotes.filter(item => {
+      const matchText = (item.text || "").toLowerCase().includes(q);
+      const matchBairro = (item.bairro || "").toLowerCase().includes(q);
+      const matchIdade = (item.idade || "").toLowerCase().includes(q);
+      const matchTrabalho = (item.trabalho || "").toLowerCase().includes(q);
+      const matchGenero = (item.genero || "").toLowerCase().includes(q);
+      return matchText || matchBairro || matchIdade || matchTrabalho || matchGenero;
+    });
+  }
+
+  const listEl = document.getElementById("word-modal-quotes-list");
+  if (listEl) {
+    listEl.innerHTML = renderModalQuotesListHTML(filtered, currentWord);
+  }
+
+  const counterEl = document.getElementById("word-modal-counter-label");
+  if (counterEl) {
+    counterEl.textContent = `Exibindo ${filtered.length} de ${allQuotes.length} respostas`;
+  }
+};
+
 function renderWordCloudWidget(dataMap, total, records, questionText) {
   const stopwords = new Set([
     "a", "o", "as", "os", "um", "uma", "uns", "umas", "de", "do", "da", "dos", "das",
@@ -3505,24 +3692,43 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
   const wordFrequency = {};
   const phraseFrequency = {};
 
-  // Extrair respostas brutas
-  const rawResponses = [];
+  // Extrair respostas brutas com dados complementares do respondente
+  const quoteRecords = [];
   if (records && records.length > 0 && questionText) {
     records.forEach(r => {
-      const val = getField(r, [questionText]);
-      if (val) rawResponses.push(val);
+      const val = getField(r, [questionText, "Em poucas palavras, como você definiria São José hoje?"]);
+      if (val && val.trim()) {
+        const cleanVal = val.trim();
+        const bairro = getField(r, ["Em qual bairro você mora?", "bairro", "Bairro"]);
+        const idade = getField(r, ["Qual a sua idade?", "idade", "Idade"]);
+        const genero = getField(r, ["Como você se identifica?", "identifica", "gênero", "genero"]);
+        const trabalho = getField(r, ["O seu trabalho hoje é:", "trabalho", "Trabalho"]);
+        quoteRecords.push({
+          text: cleanVal,
+          bairro: bairro || "",
+          idade: idade || "",
+          genero: genero || "",
+          trabalho: trabalho || ""
+        });
+      }
     });
   } else if (dataMap) {
     Object.keys(dataMap).forEach(phrase => {
       const count = dataMap[phrase] || 1;
       for (let i = 0; i < count; i++) {
-        rawResponses.push(phrase);
+        quoteRecords.push({
+          text: phrase,
+          bairro: "",
+          idade: "",
+          genero: "",
+          trabalho: ""
+        });
       }
     });
   }
 
-  rawResponses.forEach(text => {
-    const cleanText = text.trim();
+  quoteRecords.forEach(rec => {
+    const cleanText = rec.text.trim();
     if (!cleanText) return;
 
     // Frequência de frases curtas
@@ -3565,19 +3771,37 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
   // Pegar top palavras mais expressivas
   sortedWords = sortedWords.slice(0, 24);
 
+  // Mapear cada palavra às respostas completas correspondentes
+  window.wordCloudQuotesStore = {};
+  sortedWords.forEach(([word]) => {
+    const wordLower = word.toLowerCase();
+    const matches = [];
+
+    quoteRecords.forEach(rec => {
+      const textLower = rec.text.toLowerCase();
+      // Match por palavra isolada ou contenção
+      const isWordMatch = new RegExp('(\\b|\\s|^)' + wordLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\b|\\s|$|[.,!?;:])', 'i').test(textLower);
+      if (isWordMatch || textLower.includes(wordLower)) {
+        matches.push(rec);
+      }
+    });
+
+    window.wordCloudQuotesStore[word] = matches.length > 0 ? matches : quoteRecords.filter(r => r.text.toLowerCase().includes(wordLower));
+  });
+
   const maxFreq = sortedWords[0][1] || 1;
   const minFreq = sortedWords[sortedWords.length - 1][1] || 1;
 
   // Paleta moderna e harmoniosa para a nuvem
   const tagStyles = [
-    { bg: "bg-brand-900 text-white shadow-xs hover:scale-105", border: "border-brand-950" },
-    { bg: "bg-blue-600 text-white shadow-xs hover:scale-105", border: "border-blue-700" },
-    { bg: "bg-emerald-600 text-white shadow-xs hover:scale-105", border: "border-emerald-700" },
-    { bg: "bg-cyan-600 text-white shadow-xs hover:scale-105", border: "border-cyan-700" },
-    { bg: "bg-indigo-600 text-white shadow-xs hover:scale-105", border: "border-indigo-700" },
-    { bg: "bg-purple-600 text-white shadow-xs hover:scale-105", border: "border-purple-700" },
-    { bg: "bg-amber-500 text-white shadow-xs hover:scale-105", border: "border-amber-600" },
-    { bg: "bg-teal-500 text-white shadow-xs hover:scale-105", border: "border-teal-600" },
+    { bg: "bg-emerald-600 text-white shadow-xs hover:bg-emerald-700", border: "border-emerald-700" },
+    { bg: "bg-brand-900 text-white shadow-xs hover:bg-brand-950", border: "border-brand-950" },
+    { bg: "bg-blue-600 text-white shadow-xs hover:bg-blue-700", border: "border-blue-700" },
+    { bg: "bg-cyan-600 text-white shadow-xs hover:bg-cyan-700", border: "border-cyan-700" },
+    { bg: "bg-indigo-600 text-white shadow-xs hover:bg-indigo-700", border: "border-indigo-700" },
+    { bg: "bg-purple-600 text-white shadow-xs hover:bg-purple-700", border: "border-purple-700" },
+    { bg: "bg-amber-500 text-white shadow-xs hover:bg-amber-600", border: "border-amber-600" },
+    { bg: "bg-teal-500 text-white shadow-xs hover:bg-teal-600", border: "border-teal-600" },
     { bg: "bg-slate-100 text-slate-800 hover:bg-slate-200", border: "border-slate-300" }
   ];
 
@@ -3586,32 +3810,49 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
     return (a[0].charCodeAt(0) % 5) - (b[0].charCodeAt(0) % 5);
   });
 
-  let html = '<div class="w-full flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 p-3 sm:p-4 bg-slate-50/70 rounded-2xl border border-slate-200/80 min-h-[260px]">';
+  let html = '<div class="w-full flex flex-col items-center justify-center p-3 sm:p-4 bg-slate-50/70 rounded-2xl border border-slate-200/80 min-h-[260px]">';
+  
+  html += '<div class="w-full flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 py-2">';
 
   shuffled.forEach(([word, count], i) => {
     // Escala de tamanho tipográfico proporcional (11px a 20px)
     const ratio = maxFreq > minFreq ? (count - minFreq) / (maxFreq - minFreq) : 0.6;
-    let sizeClass = "text-xs font-semibold py-1 px-2.5";
+    let sizeClass = "text-xs font-semibold py-1.5 px-3";
     let styleIndex = 8; // neutro padrão
 
     if (ratio > 0.75) {
-      sizeClass = "text-sm sm:text-base font-black py-2 px-4";
+      sizeClass = "text-sm sm:text-base font-black py-2.5 px-4";
       styleIndex = i % 4; // cores principais vibrantes
     } else if (ratio > 0.45) {
-      sizeClass = "text-xs sm:text-sm font-extrabold py-1.5 px-3";
+      sizeClass = "text-xs sm:text-sm font-extrabold py-2 px-3.5";
       styleIndex = (i % 5) + 1;
     } else if (ratio > 0.2) {
-      sizeClass = "text-[11px] sm:text-xs font-bold py-1 px-2.5";
+      sizeClass = "text-[11px] sm:text-xs font-bold py-1.5 px-3";
       styleIndex = (i % 6) + 2;
     }
 
     const st = tagStyles[styleIndex % tagStyles.length];
+    const safeWord = word.replace(/'/g, "\\'");
 
-    html += '<span class="inline-flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-default select-none ' + st.bg + ' ' + st.border + ' ' + sizeClass + '" title="' + count + ' menções">' +
+    html += '<button type="button" onclick="window.openWordQuotesModal(\'' + safeWord + '\')" class="inline-flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-pointer select-none ' + st.bg + ' ' + st.border + ' ' + sizeClass + ' hover:scale-105 hover:shadow-md active:scale-95 group focus:outline-none" title="Clique para ler o que as pessoas falaram com \'' + safeWord + '\'">' +
       '<span>' + word + '</span>' +
-      '<span class="opacity-75 text-[10px] font-bold">(' + count + ')</span>' +
-    '</span>';
+      '<span class="opacity-80 text-[10px] font-bold">(' + count + ')</span>' +
+      '<i class="fa-regular fa-comment-dots text-[10px] opacity-60 group-hover:opacity-100 transition-opacity ml-0.5"></i>' +
+    '</button>';
   });
+
+  html += '</div>';
+
+  // Barra de dica interativa inferior
+  html += '<div class="mt-3.5 pt-3 border-t border-slate-200/70 flex flex-wrap items-center justify-between gap-2 text-xs w-full">' +
+    '<div class="flex items-center gap-2 text-brand-800 font-semibold text-[11px] sm:text-xs">' +
+      '<span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand-100 text-brand-800 text-[10px] font-black"><i class="fa-solid fa-hand-pointer animate-pulse"></i></span>' +
+      '<span>Clique em qualquer palavra para abrir o balão e ler o que as pessoas falaram</span>' +
+    '</div>' +
+    '<span class="text-[10px] font-bold text-slate-500 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-xs">' +
+      '<i class="fa-regular fa-comments mr-1 text-brand-600"></i> ' + quoteRecords.length + ' respostas analisadas' +
+    '</span>' +
+  '</div>';
 
   html += '</div>';
   return html;

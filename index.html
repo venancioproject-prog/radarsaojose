@@ -481,53 +481,104 @@
         <!-- Error Notification -->
         <div id="data-fetch-error" class="hidden p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold"></div>
 
-        <!-- KPIS / RESUMO GERAL -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-            <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Amostra Filtrada</p>
-              <h3 id="stat-total-responses" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0</h3>
-              <p class="text-[11px] font-semibold text-emerald-600 flex items-center gap-1 mt-1">
-                <i class="fa-solid fa-check-double"></i>
-                <span id="kpi-margin-sub">Margem &plusmn;0.0%</span>
-              </p>
+        <!-- NAVEGAÇÃO RÁPIDA ENTRE OS BLOCOS / SEÇÕES DA PESQUISA -->
+        <section class="bg-surface-card rounded-2xl p-5 shadow-card border border-surface-border transition-all">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100 flex-wrap gap-2">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center text-xs shadow-sm">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <div>
+                <h3 class="text-xs sm:text-sm font-bold text-brand-900 uppercase tracking-wider">Acesso Rápido aos Blocos de Pesquisa</h3>
+                <p class="text-[11px] font-medium text-slate-400">Clique em qualquer bloco abaixo para navegar diretamente para a seção desejada</p>
+              </div>
             </div>
-            <div class="w-11 h-11 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 text-lg">
-              <i class="fa-solid fa-users"></i>
-            </div>
-          </div>
-
-          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-            <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Qualidade de Vida (1 a 5)</p>
-              <h3 id="stat-quality-life" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0.0</h3>
-              <p class="text-[11px] font-semibold text-brand-600 mt-1">Nota Média Geral</p>
-            </div>
-            <div class="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-accent-cyan text-lg">
-              <i class="fa-solid fa-star"></i>
+            <div class="hidden sm:flex items-center gap-1 text-[11px] font-semibold text-slate-400">
+              <i class="fa-solid fa-arrows-up-down text-brand-500"></i>
+              <span>Navegação instantânea</span>
             </div>
           </div>
 
-          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-            <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Orgulho de Morar</p>
-              <h3 id="stat-pride-rate" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0%</h3>
-              <p class="text-[11px] font-semibold text-slate-400 mt-1">Sentimento Positivo</p>
-            </div>
-            <div class="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg">
-              <i class="fa-solid fa-heart"></i>
-            </div>
-          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+            <button type="button" onclick="scrollToSection('secao-bloco-1')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-blue-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                1
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Perfil Demográfico</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Idade, Gênero, Renda & Trabalho</p>
+              </div>
+            </button>
 
-          <div class="bg-surface-card rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex items-center justify-between">
-            <div>
-              <p class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Bairros Presentes</p>
-              <h3 id="stat-neighborhoods-count" class="text-2xl sm:text-3xl font-black text-brand-900 mt-1">0</h3>
-              <p class="text-[11px] font-semibold text-slate-400 mt-1">Cobertura Territorial</p>
-            </div>
-            <div class="w-11 h-11 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-600 text-lg">
-              <i class="fa-solid fa-map-location-dot"></i>
-            </div>
+            <button type="button" onclick="scrollToSection('secao-bloco-2')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-sky-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                2
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Qualidade de Vida</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Satisfação, Percepção & Falta</p>
+              </div>
+            </button>
+
+            <button type="button" onclick="scrollToSection('secao-bloco-3')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-amber-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                3
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Cultura & Lazer</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Transporte, Noite & Regiões</p>
+              </div>
+            </button>
+
+            <button type="button" onclick="scrollToSection('secao-bloco-4')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-rose-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                4
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Mídia & Hábitos</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Streaming, Músicas & Notícias</p>
+              </div>
+            </button>
+
+            <button type="button" onclick="scrollToSection('secao-bloco-5')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-purple-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                5
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Política</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Termômetro & Espectro</p>
+              </div>
+            </button>
+
+            <button type="button" onclick="scrollToSection('secao-bloco-6')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-emerald-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                6
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Economia & Bairros</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Produtores & Feiras Locais</p>
+              </div>
+            </button>
+
+            <button type="button" onclick="scrollToSection('secao-bloco-7')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-teal-100 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                7
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Mundo Pet</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Posse & Estrutura Pet SJC</p>
+              </div>
+            </button>
+
+            <button type="button" onclick="scrollToSection('secao-bloco-8')" class="group p-3 rounded-xl bg-slate-50 hover:bg-brand-900 border border-slate-200 hover:border-brand-900 transition-all duration-200 text-left flex items-center gap-3 shadow-sm hover:shadow-md hover:scale-[1.02]">
+              <div class="w-8 h-8 rounded-lg bg-slate-200 group-hover:bg-brand-800 text-brand-900 group-hover:text-white flex items-center justify-center text-sm font-black shrink-0 transition-colors">
+                8
+              </div>
+              <div class="min-w-0">
+                <p class="text-xs font-bold text-slate-800 group-hover:text-white truncate transition-colors">Demais Indicadores</p>
+                <p class="text-[10px] text-slate-400 group-hover:text-slate-200 truncate transition-colors">Perguntas Complementares</p>
+              </div>
+            </button>
           </div>
         </section>
 
@@ -550,6 +601,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=7.0"></script>
+  <script src="app.js?v=7.1"></script>
 </body>
 </html>
