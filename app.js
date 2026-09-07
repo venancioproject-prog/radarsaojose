@@ -619,14 +619,15 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "3. Mobilidade Urbana & Deslocamento",
-      subtitle: "Modais de transporte utilizados, frequência de saídas, evasão intermunicipal e polos mais frequentados",
+      subtitle: "Modais de transporte, frequência de saídas, evasão intermunicipal, bairros dos respondentes e polos mais frequentados",
       questions: (() => {
-        // Ordem: Meios de Transporte -> Frequência de Saída -> Evasão para outras cidades -> Região mais frequentada (Mapa full-width embaixo)
+        // Ordem: Meios de Transporte -> Frequência de Saída -> Evasão para outras cidades -> Região mais frequentada (Mapa) e Em qual bairro você mora (lado a lado)
         const orderSelectors = [
           q => /transporte/i.test(q) && (/usa/i.test(q) || /meios/i.test(q)),
           q => /frequência/i.test(q) && (/sai/i.test(q) || /passear/i.test(q) || /divertir/i.test(q)),
           q => /outras cidades/i.test(q) && (/passear/i.test(q) || /comer/i.test(q)),
-          q => /região/i.test(q) && (/frequenta/i.test(q) || /sai de casa/i.test(q))
+          q => /região/i.test(q) && (/frequenta/i.test(q) || /sai de casa/i.test(q)),
+          q => /bairro/i.test(q) && /mora/i.test(q)
         ];
         const res = [];
         orderSelectors.forEach(fn => {
@@ -647,6 +648,7 @@ function processAndRenderDynamicCharts(records) {
           !/outras cidades/i.test(q) && 
           !(/frequência/i.test(q) && /sai/i.test(q)) && 
           !(/região/i.test(q) && /frequenta/i.test(q)) && 
+          !(/bairro/i.test(q) && /mora/i.test(q)) &&
           (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q))
         );
         const idxDificuldade = qList.findIndex(q => /maior dificuldade|sair à noite|sair a noite/i.test(q));
@@ -680,9 +682,9 @@ function processAndRenderDynamicCharts(records) {
       questions: questionList.filter(q => /política|politica|lado/i.test(q) && !/ajuda a cidade/i.test(q))
     },
     {
-      title: "8. Economia Local, Desenvolvimento & Bairros",
-      subtitle: "Produtores locais, feiras de artesanato, quem ajuda a cidade e bairros",
-      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && !/política|politica/i.test(q) && (/produtores|feiras|artesanato|ajuda a cidade|bairro/i.test(q)))
+      title: "8. Economia Local & Desenvolvimento",
+      subtitle: "Produtores locais, feiras de artesanato e percepção sobre quem ajuda a cidade a crescer",
+      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && !/política|politica/i.test(q) && !/bairro/i.test(q) && (/produtores|feiras|artesanato|ajuda a cidade/i.test(q)))
     },
     {
       title: "9. Mundo Pet & Animais de Estimação",
