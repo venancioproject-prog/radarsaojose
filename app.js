@@ -2768,72 +2768,74 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
   const simPct = totalSum > 0 ? ((simCount / totalSum) * 100).toFixed(1) : "74.2";
   const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "25.8";
 
-  let html = '<div class="flex-1 flex flex-col justify-between gap-3 sm:gap-4 w-full h-full min-h-[340px] sm:min-h-[380px] py-1">' +
+  let html = '<div class="flex-1 flex flex-col justify-between gap-3 sm:gap-3.5 w-full h-full min-h-[320px] sm:min-h-[350px] py-1">' +
     // CARD SIM (Sorrindo) - Em Cima
-    '<div class="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[160px]">' +
-      // Imagem Sim (sorrindo) na esquerda
-      '<div class="relative w-32 sm:w-44 md:w-48 overflow-hidden bg-slate-900 shrink-0">' +
+    '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[140px] sm:min-h-[150px]">' +
+      // Imagem Sim (sorrindo) na esquerda com largura calibrada
+      '<div class="relative w-28 sm:w-32 md:w-36 overflow-hidden bg-slate-900 shrink-0">' +
         '<img src="fotos radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
-        '<div class="absolute inset-0 bg-gradient-to-r from-transparent via-slate-950/20 to-slate-950/50"></div>' +
-        '<div class="absolute top-2.5 left-2.5">' +
-          '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500 text-white font-black text-xs shadow-md tracking-wide">' +
-            '<i class="fa-solid fa-face-smile text-xs"></i> SIM' +
+        '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
+        '<div class="absolute top-2 left-2">' +
+          '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[11px] shadow-sm tracking-wide">' +
+            '<i class="fa-solid fa-face-smile text-[10px]"></i> SIM' +
           '</span>' +
         '</div>' +
       '</div>' +
-      // Conteúdo e Estatísticas na direita
-      '<div class="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/30 via-white to-white min-w-0">' +
-        '<div class="flex items-start justify-between gap-3">' +
+      // Conteúdo e Estatísticas na direita com tipografia limpa
+      '<div class="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
+        '<div class="flex items-start justify-between gap-2">' +
           '<div class="min-w-0 flex-1">' +
-            '<h4 class="text-sm sm:text-base font-extrabold text-slate-800 leading-snug">Tenho Orgulho de Morar em São José</h4>' +
-            '<p class="text-xs font-semibold text-slate-500 mt-1">' + simCount.toLocaleString("pt-BR") + ' votos computados</p>' +
+            '<h4 class="text-sm sm:text-base font-extrabold text-slate-800 leading-tight">Tenho Orgulho</h4>' +
+            '<p class="text-[11px] font-medium text-slate-400 mt-0.5 truncate">de morar em São José</p>' +
+            '<p class="text-xs font-bold text-emerald-700 mt-1">' + simCount.toLocaleString("pt-BR") + ' votos</p>' +
           '</div>' +
-          '<div class="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-2xl bg-emerald-50 text-emerald-700 font-black text-xl sm:text-2xl border border-emerald-200 shadow-xs shrink-0 tracking-tight">' +
+          '<div class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 font-black text-lg sm:text-xl border border-emerald-200 shadow-2xs shrink-0">' +
             simPct + '%' +
           '</div>' +
         '</div>' +
-        '<div class="w-full mt-3">' +
-          '<div class="flex items-center justify-between text-[11px] font-semibold text-emerald-800 mb-1.5">' +
+        '<div class="w-full mt-2">' +
+          '<div class="flex items-center justify-between text-[11px] font-bold text-emerald-800 mb-1">' +
             '<span>Sentimento Positivo</span>' +
-            '<span>' + simPct + '%</span>' +
+            '<span class="text-xs">' + simPct + '%</span>' +
           '</div>' +
-          '<div class="h-2.5 sm:h-3 w-full bg-emerald-100 rounded-full overflow-hidden p-0.5">' +
-            '<div class="h-full bg-emerald-500 rounded-full transition-all duration-700 shadow-xs" style="width: ' + simPct + '%;"></div>' +
+          '<div class="h-2.5 w-full bg-emerald-100 rounded-full overflow-hidden">' +
+            '<div class="h-full bg-emerald-500 rounded-full transition-all duration-700" style="width: ' + simPct + '%;"></div>' +
           '</div>' +
         '</div>' +
       '</div>' +
     '</div>' +
 
     // CARD NÃO (Triste) - Embaixo
-    '<div class="group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[160px]">' +
-      // Imagem Não (triste) na esquerda
-      '<div class="relative w-32 sm:w-44 md:w-48 overflow-hidden bg-slate-900 shrink-0">' +
+    '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[140px] sm:min-h-[150px]">' +
+      // Imagem Não (triste) na esquerda com largura calibrada
+      '<div class="relative w-28 sm:w-32 md:w-36 overflow-hidden bg-slate-900 shrink-0">' +
         '<img src="fotos radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
-        '<div class="absolute inset-0 bg-gradient-to-r from-transparent via-slate-950/20 to-slate-950/50"></div>' +
-        '<div class="absolute top-2.5 left-2.5">' +
-          '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-700 text-white font-black text-xs shadow-md tracking-wide">' +
-            '<i class="fa-solid fa-face-frown text-xs"></i> NÃO' +
+        '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
+        '<div class="absolute top-2 left-2">' +
+          '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[11px] shadow-sm tracking-wide">' +
+            '<i class="fa-solid fa-face-frown text-[10px]"></i> NÃO' +
           '</span>' +
         '</div>' +
       '</div>' +
-      // Conteúdo e Estatísticas na direita
-      '<div class="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/50 via-white to-white min-w-0">' +
-        '<div class="flex items-start justify-between gap-3">' +
+      // Conteúdo e Estatísticas na direita com tipografia limpa
+      '<div class="p-3 sm:p-4 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/30 via-white to-white min-w-0">' +
+        '<div class="flex items-start justify-between gap-2">' +
           '<div class="min-w-0 flex-1">' +
-            '<h4 class="text-sm sm:text-base font-extrabold text-slate-800 leading-snug">Não Tenho Orgulho de Morar</h4>' +
-            '<p class="text-xs font-semibold text-slate-500 mt-1">' + naoCount.toLocaleString("pt-BR") + ' votos computados</p>' +
+            '<h4 class="text-sm sm:text-base font-extrabold text-slate-800 leading-tight">Não Tenho Orgulho</h4>' +
+            '<p class="text-[11px] font-medium text-slate-400 mt-0.5 truncate">de morar em São José</p>' +
+            '<p class="text-xs font-bold text-slate-600 mt-1">' + naoCount.toLocaleString("pt-BR") + ' votos</p>' +
           '</div>' +
-          '<div class="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-2xl bg-slate-100 text-slate-800 font-black text-xl sm:text-2xl border border-slate-200 shadow-xs shrink-0 tracking-tight">' +
+          '<div class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800 font-black text-lg sm:text-xl border border-slate-200 shadow-2xs shrink-0">' +
             naoPct + '%' +
           '</div>' +
         '</div>' +
-        '<div class="w-full mt-3">' +
-          '<div class="flex items-center justify-between text-[11px] font-semibold text-slate-600 mb-1.5">' +
+        '<div class="w-full mt-2">' +
+          '<div class="flex items-center justify-between text-[11px] font-bold text-slate-700 mb-1">' +
             '<span>Sentimento Crítico</span>' +
-            '<span>' + naoPct + '%</span>' +
+            '<span class="text-xs">' + naoPct + '%</span>' +
           '</div>' +
-          '<div class="h-2.5 sm:h-3 w-full bg-slate-200 rounded-full overflow-hidden p-0.5">' +
-            '<div class="h-full bg-slate-600 rounded-full transition-all duration-700 shadow-xs" style="width: ' + naoPct + '%;"></div>' +
+          '<div class="h-2.5 w-full bg-slate-200 rounded-full overflow-hidden">' +
+            '<div class="h-full bg-slate-600 rounded-full transition-all duration-700" style="width: ' + naoPct + '%;"></div>' +
           '</div>' +
         '</div>' +
       '</div>' +
