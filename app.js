@@ -556,13 +556,23 @@ function processAndRenderDynamicCharts(records) {
     return;
   }
 
-  // Descobrir todas as perguntas existentes
-  const ignoredColumns = new Set(["id", "created_at", "Carimbo de data/hora", "data", "Data", "timestamp", "user_id"]);
+  // Descobrir todas as perguntas existentes (ignora metadados e campos abertos como lista de influenciadores)
+  const ignoredColumns = new Set([
+    "id", 
+    "created_at", 
+    "Carimbo de data/hora", 
+    "data", 
+    "Data", 
+    "timestamp", 
+    "user_id",
+    "Escreva o nome de até 3 influenciadores de São José que você acompanha.",
+    "Escreva o nome de até 3 influenciadores de São José que você acompanha. "
+  ]);
   const allColumns = new Set();
 
   records.forEach(row => {
     Object.keys(row).forEach(key => {
-      if (!ignoredColumns.has(key) && key.trim().length > 1) {
+      if (!ignoredColumns.has(key) && !/até 3 influenciadores|ate 3 influenciadores/i.test(key) && key.trim().length > 1) {
         allColumns.add(key);
       }
     });
@@ -663,11 +673,12 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "5. Mídia, Músicas & Streamings",
-      subtitle: "Gêneros musicais, plataformas de streaming, redes sociais para descoberta e influencers",
+      subtitle: "Gêneros musicais, plataformas de streaming, redes sociais para descoberta e impacto de influenciadores",
       questions: questionList.filter(q => 
         !/animal|pet|bicho|anima/i.test(q) && 
         !/bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q) &&
         !/namoro|financeiramente/i.test(q) &&
+        !/até 3 influenciadores|ate 3 influenciadores/i.test(q) &&
         (/música|serviços|filmes|rede social|influenciador|notícias/i.test(q))
       )
     },
