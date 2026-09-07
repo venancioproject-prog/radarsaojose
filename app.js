@@ -1205,6 +1205,18 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 12.1. INFLUÊNCIA DIGITAL / INDICAÇÃO DE INFLUENCIADOR (Sim ou Não com Fotos e Cards Estilizados)
+      if (qLower.includes("influenciador") && (qLower.includes("lugar") || qLower.includes("indicando") || qLower.includes("viu"))) {
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Marketing de Influência Local • ' + total.toLocaleString("pt-BR") + ' respondentes</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full h-full">' + renderInfluencerYesNoCardsWidget(dataMap, total) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
       // 13. SERVIÇOS DE STREAMING & MÚSICA: Cards Visuais com Logotipos Oficiais e Porcentagens
       if ((qLower.includes("serviços") || qLower.includes("servicos") || qLower.includes("streaming")) && (qLower.includes("filmes") || qLower.includes("música") || qLower.includes("musica") || qLower.includes("usa"))) {
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
@@ -3105,6 +3117,107 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
         '<div class="w-full mt-1.5">' +
           '<div class="flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-slate-700 mb-1">' +
             '<span>Sentimento Crítico</span>' +
+            '<span class="text-xs font-black">' + naoPct + '%</span>' +
+          '</div>' +
+          '<div class="h-2 w-full bg-slate-200 rounded-full overflow-hidden">' +
+            '<div class="h-full bg-slate-600 rounded-full transition-all duration-700" style="width: ' + naoPct + '%;"></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+
+  return html;
+}
+
+// 7.6.0. Widget Visual de Indicação de Influenciadores com Fotos Duplas (Sim vs Não)
+function renderInfluencerYesNoCardsWidget(dataMap, total) {
+  let simCount = 0;
+  let naoCount = 0;
+
+  Object.entries(dataMap || {}).forEach(([k, count]) => {
+    const keyLower = k.toLowerCase().trim();
+    if (keyLower.includes("sim") || keyLower.includes("já") || keyLower.includes("ja") || keyLower.includes("com certeza") || keyLower.includes("sempre") || keyLower.includes("muito")) {
+      simCount += count;
+    } else if (keyLower.includes("não") || keyLower.includes("nao") || keyLower.includes("nunca") || keyLower.includes("nenhum")) {
+      naoCount += count;
+    } else {
+      if (!keyLower.includes("não") && !keyLower.includes("nao")) {
+        simCount += count;
+      } else {
+        naoCount += count;
+      }
+    }
+  });
+
+  const totalSum = (simCount + naoCount) > 0 ? (simCount + naoCount) : (total || 1);
+  const simPct = totalSum > 0 ? ((simCount / totalSum) * 100).toFixed(1) : "50.0";
+  const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "50.0";
+
+  let html = '<div class="flex-1 flex flex-col justify-between gap-3 sm:gap-3.5 w-full h-full min-h-[320px] sm:min-h-[350px] py-1">' +
+    // CARD SIM - Em Cima
+    '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
+      // Imagem Sim na esquerda
+      '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
+        '<img src="fotos radar/foto_gastronomia.jpg" alt="Sim - Já fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/sim_sorrindo.jpg\';" />' +
+        '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
+        '<div class="absolute top-2 left-2">' +
+          '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[10px] shadow-sm tracking-wide">' +
+            '<i class="fa-solid fa-circle-check text-[9px]"></i> SIM' +
+          '</span>' +
+        '</div>' +
+      '</div>' +
+      // Conteúdo e Estatísticas na direita
+      '<div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
+        '<div class="flex items-start justify-between gap-1.5">' +
+          '<div class="min-w-0 flex-1 pr-1">' +
+            '<h4 class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">Já Fui por Indicação</h4>' +
+            '<p class="text-[10px] sm:text-[11px] font-medium text-slate-400 mt-0.5">impactado por criadores locais</p>' +
+            '<p class="text-[11px] font-bold text-emerald-700 mt-0.5">' + simCount.toLocaleString("pt-BR") + ' votos</p>' +
+          '</div>' +
+          '<div class="px-2.5 py-1 rounded-xl bg-emerald-50 text-emerald-700 font-black text-sm sm:text-base border border-emerald-200 shadow-2xs shrink-0 self-start">' +
+            simPct + '%' +
+          '</div>' +
+        '</div>' +
+        '<div class="w-full mt-1.5">' +
+          '<div class="flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-emerald-800 mb-1">' +
+            '<span>Conversão / Influenciado</span>' +
+            '<span class="text-xs font-black">' + simPct + '%</span>' +
+          '</div>' +
+          '<div class="h-2 w-full bg-emerald-100 rounded-full overflow-hidden">' +
+            '<div class="h-full bg-emerald-500 rounded-full transition-all duration-700" style="width: ' + simPct + '%;"></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    // CARD NÃO - Embaixo
+    '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
+      // Imagem Não na esquerda
+      '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
+        '<img src="fotos radar/foto_noite.jpg" alt="Não - Nunca fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/nao_triste.jpg\';" />' +
+        '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
+        '<div class="absolute top-2 left-2">' +
+          '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[10px] shadow-sm tracking-wide">' +
+            '<i class="fa-solid fa-circle-xmark text-[9px]"></i> NÃO' +
+          '</span>' +
+        '</div>' +
+      '</div>' +
+      // Conteúdo e Estatísticas na direita
+      '<div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/30 via-white to-white min-w-0">' +
+        '<div class="flex items-start justify-between gap-1.5">' +
+          '<div class="min-w-0 flex-1 pr-1">' +
+            '<h4 class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">Nunca Fui por Indicação</h4>' +
+            '<p class="text-[10px] sm:text-[11px] font-medium text-slate-400 mt-0.5">escolhe de forma independente</p>' +
+            '<p class="text-[11px] font-bold text-slate-600 mt-0.5">' + naoCount.toLocaleString("pt-BR") + ' votos</p>' +
+          '</div>' +
+          '<div class="px-2.5 py-1 rounded-xl bg-slate-100 text-slate-800 font-black text-sm sm:text-base border border-slate-200 shadow-2xs shrink-0 self-start">' +
+            naoPct + '%' +
+          '</div>' +
+        '</div>' +
+        '<div class="w-full mt-1.5">' +
+          '<div class="flex items-center justify-between text-[10px] sm:text-[11px] font-bold text-slate-700 mb-1">' +
+            '<span>Não Influenciado</span>' +
             '<span class="text-xs font-black">' + naoPct + '%</span>' +
           '</div>' +
           '<div class="h-2 w-full bg-slate-200 rounded-full overflow-hidden">' +
