@@ -112,14 +112,40 @@
       min-height: 350px;
       height: 350px;
     }
+    /* Slideshow Elegante de Fotos da Cidade com Fade Lento (Ken Burns effect) */
+    .login-bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), transform 8s ease-out;
+      will-change: opacity, transform;
+    }
+    .login-bg-slide.active {
+      opacity: 0.82;
+      transform: scale(1);
+    }
   </style>
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
 
-  <!-- 1. TELA DE LOGIN (FUNDO COM FOTO VIBRANTE DE SÃO JOSÉ DOS CAMPOS) -->
+  <!-- 1. TELA DE LOGIN (SLIDESHOW ELEGANTE COM FOTOS DINÂMICAS DE SÃO JOSÉ DOS CAMPOS) -->
   <main id="login-screen" class="view-transition min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden bg-slate-950">
-    <div class="absolute inset-0 z-0 opacity-75 bg-cover bg-[center_35%] transition-all duration-700 scale-100" style="background-image: url('fotos radar/foto_onibus_viaduto.jpg');"></div>
-    <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-brand-950/75"></div>
+    
+    <!-- Slideshow Elegante de Fundo com Transição Suave -->
+    <div id="login-slideshow" class="absolute inset-0 z-0 pointer-events-none">
+      <div class="login-bg-slide active" style="background-image: url('fotos radar/foto_onibus_viaduto.jpg'); background-position: center 35%;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_cidade.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_cultura.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_gastronomia.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_noite.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_pessoas.jpg'); background-position: center center;"></div>
+    </div>
+
+    <!-- Overlay Gradiente Corporativo de Alto Contraste -->
+    <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-brand-950/75 pointer-events-none"></div>
 
     <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100/20 p-8 sm:p-10 relative z-10 backdrop-blur-lg">
       <div class="text-center mb-8">
@@ -633,6 +659,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=10.0"></script>
+  <script src="app.js?v=10.1"></script>
 </body>
 </html>
