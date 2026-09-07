@@ -1335,6 +1335,121 @@ function processAndRenderDynamicCharts(records) {
       cardsGrid.appendChild(mediaPhotoCard);
     }
 
+    // Card editorial fotográfico para Bloco 6 (Relacionamento & Vida Pessoal)
+    if (catIdx === 5) {
+      const relPhotoCard = document.createElement("div");
+      relPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
+      relPhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/photo_3.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/65 to-transparent"></div>
+        
+        <div class="relative z-10 space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 backdrop-blur-md border border-pink-400/40 text-pink-300 text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-heart-pulse text-pink-400"></i> Conexões Humanas & Vida Social
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            Relacionamentos, Redes & Bem-Estar em São José
+          </h3>
+          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+            A dinâmica afetiva contemporânea em SJC equilibra a busca por estabilidade financeira e o impacto direto do uso diário de redes sociais e plataformas de relacionamento na autoestima.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(relPhotoCard);
+    }
+
+    // Card editorial fotográfico para Bloco 7 (Política & Posicionamento)
+    if (catIdx === 6) {
+      const polPhotoCard = document.createElement("div");
+      polPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
+      polPhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_cidade.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
+        
+        <div class="relative z-10 space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/20 backdrop-blur-md border border-purple-400/40 text-purple-300 text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-landmark-dome text-purple-400"></i> Cidadania & Engajamento Cívico
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            Cenário Político & Participação Municipal
+          </h3>
+          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+            O eleitorado joseense demonstra atenção crítica às decisões públicas locais, refletindo visões plurais sobre o desenvolvimento sustentável e os rumos da administração de São José dos Campos.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(polPhotoCard);
+    }
+
+    // Card editorial fotográfico para Bloco 8 (Economia Local & Desenvolvimento)
+    if (catIdx === 7) {
+      const econPhotoCard = document.createElement("div");
+      econPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-1";
+      econPhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_gastronomia.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/65 to-transparent"></div>
+        
+        <div class="relative z-10 space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-basket-shopping text-emerald-400"></i> Economia & Feiras Locais
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            Empreendedorismo, Feiras & Produção Local
+          </h3>
+          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+            O comércio de bairro e as feiras de artesanato fortalecem a identidade comunitária de São José dos Campos, gerando renda e impulsionando produtores locais e a economia circular.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(econPhotoCard);
+    }
+
+    // Card editorial fotográfico para Bloco 9 (Mundo Pet & Animais de Estimação)
+    if (catIdx === 8) {
+      const petPhotoCard = document.createElement("div");
+      petPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
+      petPhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_noite.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
+        
+        <div class="relative z-10 space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/20 backdrop-blur-md border border-teal-400/40 text-teal-300 text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-shield-dog text-teal-400"></i> Bem-Estar Animal & Parques Pet
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            São José Pet-Friendly: Espaços & Convivência
+          </h3>
+          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+            Com grande número de tutores de cães e gatos, a cidade expande áreas verdes, parques e espaços públicos adequados para a convivência saudável e segura dos animais de estimação.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(petPhotoCard);
+    }
+
+    // Card editorial fotográfico para Bloco 10 (Demais Indicadores & Sugestões Abertas)
+    if (catIdx === 9) {
+      const openFeedbackPhotoCard = document.createElement("div");
+      openFeedbackPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-2";
+      openFeedbackPhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/photo_2.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-brand-950/20"></div>
+        
+        <div class="relative z-10 space-y-2 max-w-xl">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/40 text-blue-300 text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-comments text-blue-400"></i> Voz da População & Futuro
+          </div>
+          <h3 class="text-lg sm:text-xl font-black text-white leading-snug">
+            A Voz dos Moradores de São José dos Campos
+          </h3>
+          <p class="text-xs sm:text-sm font-medium text-slate-300 leading-relaxed">
+            As respostas abertas e percepções espontâneas refletem o carinho e o espírito propositivo do cidadão joseense, oferecendo sugestões diretas de melhorias urbanas, culturais e sociais para o município.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(openFeedbackPhotoCard);
+    }
+
     sectionEl.innerHTML = sectionHeader;
     sectionEl.appendChild(cardsGrid);
     dynamicChartsGrid.appendChild(sectionEl);
