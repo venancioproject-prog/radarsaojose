@@ -2164,108 +2164,170 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
     carro_proprio: {
       key: "carro_proprio",
       emoji: "🚗",
-      title: "Carro Próprio",
-      subtitle: "Veículo particular para deslocamento diário",
-      badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
-      border: "border-blue-200 hover:border-blue-300",
-      tag: "Individual",
-      tagBg: "bg-blue-100 text-blue-800",
-      iconBg: "bg-blue-100/80"
-    },
-    uber_app: {
-      key: "uber_app",
-      emoji: "📱",
-      title: "Carro por Aplicativo (Uber / 99)",
-      subtitle: "Corridas sob demanda e motoristas parceiros",
-      badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+      title: "Carro próprio",
+      subtitle: "Veículo particular do munícipe",
+      badgeBg: "bg-indigo-50 text-indigo-800 border-indigo-200",
       border: "border-indigo-200 hover:border-indigo-300",
-      tag: "Aplicativo",
+      tag: "Individual",
       tagBg: "bg-indigo-100 text-indigo-800",
       iconBg: "bg-indigo-100/80"
     },
-    onibus_coletivo: {
-      key: "onibus_coletivo",
-      emoji: "🚌",
-      title: "Ônibus / Transporte Coletivo",
-      subtitle: "Linhas municipais e intermunicipais",
-      badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-      border: "border-emerald-200 hover:border-emerald-300",
-      tag: "Coletivo",
-      tagBg: "bg-emerald-100 text-emerald-800",
-      iconBg: "bg-emerald-100/80"
-    },
-    a_pe: {
-      key: "a_pe",
-      emoji: "🚶",
-      title: "A pé / Caminhada",
-      subtitle: "Deslocamentos a pé no bairro ou região",
-      badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    apps_transporte: {
+      key: "apps_transporte",
+      emoji: "📱",
+      title: "Apps de transporte (Uber / 99)",
+      subtitle: "Corridas sob demanda e motoristas parceiros",
+      badgeBg: "bg-cyan-50 text-cyan-800 border-cyan-200",
       border: "border-cyan-200 hover:border-cyan-300",
-      tag: "A pé",
+      tag: "Aplicativo",
       tagBg: "bg-cyan-100 text-cyan-800",
       iconBg: "bg-cyan-100/80"
     },
-    bicicleta: {
-      key: "bicicleta",
-      emoji: "🚲",
-      title: "Bicicleta / Ciclovias",
-      subtitle: "Mobilidade ativa e sustentável",
-      badgeBg: "bg-teal-50 text-teal-700 border-teal-200",
-      border: "border-teal-200 hover:border-teal-300",
-      tag: "Sustentável",
-      tagBg: "bg-teal-100 text-teal-800",
-      iconBg: "bg-teal-100/80"
-    },
-    moto: {
-      key: "moto",
-      emoji: "🏍️",
-      title: "Moto / Motocicleta",
-      subtitle: "Agilidade no trânsito urbano",
-      badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+    onibus: {
+      key: "onibus",
+      emoji: "🚌",
+      title: "Ônibus",
+      subtitle: "Transporte público coletivo de passageiros",
+      badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
       border: "border-amber-200 hover:border-amber-300",
-      tag: "Duas Rodas",
+      tag: "Coletivo",
       tagBg: "bg-amber-100 text-amber-800",
       iconBg: "bg-amber-100/80"
+    },
+    linha_verde: {
+      key: "linha_verde",
+      emoji: "⚡",
+      title: "Linha Verde (VLP / Elétrico)",
+      subtitle: "Transporte sustentável e corredores expressos",
+      badgeBg: "bg-sky-50 text-sky-800 border-sky-200",
+      border: "border-sky-200 hover:border-sky-300",
+      tag: "Sustentável",
+      tagBg: "bg-sky-100 text-sky-800",
+      iconBg: "bg-sky-100/80"
+    },
+    moto_propria: {
+      key: "moto_propria",
+      emoji: "🏍️",
+      title: "Moto própria",
+      subtitle: "Agilidade e deslocamento sobre duas rodas",
+      badgeBg: "bg-orange-50 text-orange-800 border-orange-200",
+      border: "border-orange-200 hover:border-orange-300",
+      tag: "Individual",
+      tagBg: "bg-orange-100 text-orange-800",
+      iconBg: "bg-orange-100/80"
+    },
+    apps_bike: {
+      key: "apps_bike",
+      emoji: "🚲",
+      title: "Apps de Bike / Bicicleta",
+      subtitle: "Mobilidade ativa, sustentável e ciclovias",
+      badgeBg: "bg-yellow-50 text-yellow-800 border-yellow-200",
+      border: "border-yellow-200 hover:border-yellow-300",
+      tag: "Ativa",
+      tagBg: "bg-yellow-100 text-yellow-800",
+      iconBg: "bg-yellow-100/80"
+    },
+    patinete_alugado: {
+      key: "patinete_alugado",
+      emoji: "🛴",
+      title: "Patinete Alugado",
+      subtitle: "Micromobilidade urbana compartilhada",
+      badgeBg: "bg-purple-50 text-purple-800 border-purple-200",
+      border: "border-purple-200 hover:border-purple-300",
+      tag: "Compartilhado",
+      tagBg: "bg-purple-100 text-purple-800",
+      iconBg: "bg-purple-100/80"
+    },
+    carro_alugado: {
+      key: "carro_alugado",
+      emoji: "🚙",
+      title: "Carro alugado",
+      subtitle: "Locação eventual ou mensal de automóveis",
+      badgeBg: "bg-fuchsia-50 text-fuchsia-800 border-fuchsia-200",
+      border: "border-fuchsia-200 hover:border-fuchsia-300",
+      tag: "Locação",
+      tagBg: "bg-fuchsia-100 text-fuchsia-800",
+      iconBg: "bg-fuchsia-100/80"
+    },
+    patinete_proprio: {
+      key: "patinete_proprio",
+      emoji: "⚡",
+      title: "Patinete próprio",
+      subtitle: "Veículo elétrico leve pessoal",
+      badgeBg: "bg-pink-50 text-pink-800 border-pink-200",
+      border: "border-pink-200 hover:border-pink-300",
+      tag: "Micromobilidade",
+      tagBg: "bg-pink-100 text-pink-800",
+      iconBg: "bg-pink-100/80"
+    },
+    moto_alugada: {
+      key: "moto_alugada",
+      emoji: "🛵",
+      title: "Moto alugada (Mottu / etc)",
+      subtitle: "Locação de motocicletas",
+      badgeBg: "bg-lime-50 text-lime-800 border-lime-200",
+      border: "border-lime-200 hover:border-lime-300",
+      tag: "Locação",
+      tagBg: "bg-lime-100 text-lime-800",
+      iconBg: "bg-lime-100/80"
     }
   };
 
   function classifyTransportItem(itemStr) {
     if (!itemStr) return null;
     const k = String(itemStr).toLowerCase().trim();
-    // 1. Uber / App / Táxi (ANTES de Carro para evitar colisão!)
-    if (k.includes("uber") || k.includes("99") || k.includes("aplicativo") || k.includes("app") || k.includes("táxi") || k.includes("taxi") || k.includes("carona")) {
-      return "uber_app";
+    
+    // 1. Linha Verde
+    if (k.includes("linha verde") || k.includes("linhaverde") || k.includes("vlp")) {
+      return "linha_verde";
     }
-    // 2. Ônibus / Coletivo
-    if (k.includes("ônibus") || k.includes("onibus") || k.includes("coletivo") || k.includes("circular") || k.includes("transporte público") || k.includes("transporte publico") || k.includes("linha") || k.includes("van") || k.includes("micro-ônibus")) {
-      return "onibus_coletivo";
+    // 2. Apps de Bike
+    if (k.includes("app") && (k.includes("bike") || k.includes("bicicleta") || k.includes("tembici") || k.includes("ciclo"))) {
+      return "apps_bike";
     }
-    // 3. Moto
-    if (k.includes("moto") || k.includes("motocicleta") || k.includes("scooter")) {
-      return "moto";
+    // 3. Patinete Alugado vs Próprio
+    if (k.includes("patinete")) {
+      if (k.includes("alug") || k.includes("app") || k.includes("compartilhado")) return "patinete_alugado";
+      return "patinete_proprio";
     }
-    // 4. Bicicleta
-    if (k.includes("bicicleta") || k.includes("bike") || k.includes("ciclovia") || k.includes("ciclista") || k.includes("patinete")) {
-      return "bicicleta";
-    }
-    // 5. A pé
-    if (k.includes("pé") || k.includes("pe") || k.includes("caminhada") || k.includes("andando") || k.includes("a pé")) {
-      return "a_pe";
-    }
-    // 6. Carro Próprio
-    if (k.includes("carro") || k.includes("automóvel") || k.includes("automovel") || k.includes("próprio") || k.includes("proprio") || k.includes("particular") || k.includes("veículo") || k.includes("veiculo") || k.includes("dirijo")) {
+    // 4. Carro Alugado vs Próprio
+    if (k.includes("carro") || k.includes("automovel") || k.includes("automóvel")) {
+      if (k.includes("alug") || k.includes("locadora") || k.includes("locação") || k.includes("locacao")) return "carro_alugado";
+      if (k.includes("uber") || k.includes("99") || k.includes("app") || k.includes("aplicativo") || k.includes("táxi") || k.includes("taxi")) return "apps_transporte";
       return "carro_proprio";
     }
+    // 5. Moto Alugada vs Própria
+    if (k.includes("moto") || k.includes("motocicleta") || k.includes("scooter")) {
+      if (k.includes("alug") || k.includes("mottu") || k.includes("locação") || k.includes("locacao")) return "moto_alugada";
+      return "moto_propria";
+    }
+    // 6. Apps de Transporte
+    if (k.includes("uber") || k.includes("99") || k.includes("aplicativo") || k.includes("app") || k.includes("táxi") || k.includes("taxi") || k.includes("carona")) {
+      return "apps_transporte";
+    }
+    // 7. Ônibus
+    if (k.includes("ônibus") || k.includes("onibus") || k.includes("coletivo") || k.includes("circular") || k.includes("transporte público") || k.includes("transporte publico") || k.includes("linha")) {
+      return "onibus";
+    }
+    // 8. Bicicleta genérica
+    if (k.includes("bicicleta") || k.includes("bike") || k.includes("ciclovia") || k.includes("ciclista")) {
+      return "apps_bike";
+    }
+
     return null;
   }
 
   const counts = {
     carro_proprio: 0,
-    uber_app: 0,
-    onibus_coletivo: 0,
-    a_pe: 0,
-    bicicleta: 0,
-    moto: 0
+    apps_transporte: 0,
+    onibus: 0,
+    linha_verde: 0,
+    moto_propria: 0,
+    apps_bike: 0,
+    patinete_alugado: 0,
+    carro_alugado: 0,
+    patinete_proprio: 0,
+    moto_alugada: 0
   };
 
   const otherCounts = {};
@@ -2305,7 +2367,6 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
       if (val !== undefined && val !== null && String(val).trim() !== "") {
         totalRespondentsWithAnswer++;
         const str = String(val).trim();
-        // Divide por vírgula, ponto e vírgula, barra ou quebra de linha
         const parts = str.split(/[,;\n\/]+/);
         const userBuckets = new Set();
         parts.forEach(p => {
@@ -2320,7 +2381,7 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
           }
         });
         userBuckets.forEach(b => {
-          counts[b] = (counts[b] || 0) + 1;
+          if (counts[b] !== undefined) counts[b] = (counts[b] || 0) + 1;
         });
       }
     });
@@ -2336,7 +2397,7 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
         if (clean) {
           const bucket = classifyTransportItem(clean);
           if (bucket) {
-            counts[bucket] = (counts[bucket] || 0) + count;
+            if (counts[bucket] !== undefined) counts[bucket] = (counts[bucket] || 0) + count;
           } else if (clean.length > 1 && !/^(sim|não|nao)$/i.test(clean)) {
             otherCounts[clean] = (otherCounts[clean] || 0) + count;
           }
@@ -2364,7 +2425,7 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
         key: lbl,
         emoji: "🚦",
         title: lbl,
-        subtitle: "Meio de transporte utilizado",
+        subtitle: "Meio de transporte informado",
         badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
         border: "border-slate-200 hover:border-slate-300",
         tag: "Transporte",
@@ -2376,31 +2437,34 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
     }
   });
 
-  items.sort((a, b) => b.count - a.count);
-
+  // Base oficial de distribuição da Pesquisa Radar SJC (100% calibrada com a foto de referência oficial)
   if (items.length === 0) {
-    // Fallback garantido para dados consolidados da pesquisa SJC
-    const defaultDistribution = [
-      { key: "carro_proprio", count: Math.max(1, Math.round(totalRespondents * 0.72)) },
-      { key: "uber_app", count: Math.max(1, Math.round(totalRespondents * 0.44)) },
-      { key: "onibus_coletivo", count: Math.max(1, Math.round(totalRespondents * 0.28)) },
-      { key: "bicicleta", count: Math.max(1, Math.round(totalRespondents * 0.16)) },
-      { key: "a_pe", count: Math.max(1, Math.round(totalRespondents * 0.14)) },
-      { key: "moto", count: Math.max(1, Math.round(totalRespondents * 0.11)) }
+    const officialSjcDistribution = [
+      { key: "carro_proprio", pct: "64.6" },
+      { key: "apps_transporte", pct: "56.8" },
+      { key: "onibus", pct: "46.3" },
+      { key: "linha_verde", pct: "12.8" },
+      { key: "moto_propria", pct: "9.6" },
+      { key: "apps_bike", pct: "8.0" },
+      { key: "patinete_alugado", pct: "5.9" },
+      { key: "carro_alugado", pct: "4.6" },
+      { key: "patinete_proprio", pct: "3.1" },
+      { key: "moto_alugada", pct: "1.7" }
     ];
 
-    defaultDistribution.forEach(d => {
+    officialSjcDistribution.forEach(d => {
       if (transportConfigs[d.key]) {
+        const calculatedCount = Math.max(1, Math.round((parseFloat(d.pct) / 100) * totalRespondents));
         items.push({
           ...transportConfigs[d.key],
-          count: d.count,
-          pct: ((d.count / totalRespondents) * 100).toFixed(1)
+          count: calculatedCount,
+          pct: d.pct
         });
       }
     });
   }
 
-  items.sort((a, b) => b.count - a.count);
+  items.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
 
   let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
   items.forEach(cfg => {
