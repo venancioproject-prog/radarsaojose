@@ -2718,64 +2718,66 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
   const simPct = totalSum > 0 ? ((simCount / totalSum) * 100).toFixed(1) : "74.2";
   const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "25.8";
 
-  let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full py-1">' +
-    // CARD SIM (Sorrindo)
-    '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">' +
-      '<div class="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">' +
-        // Imagem dedicada Sim (sorrindo)
-        '<img src="fotos radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
-        // Gradiente escuro para legibilidade perfeita dos textos sobre a imagem
-        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/35 to-transparent"></div>' +
-        // Badge superior "SIM"
-        '<div class="absolute top-2.5 left-2.5">' +
-          '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/95 text-white font-black text-xs shadow-md backdrop-blur-xs tracking-wide">' +
-            '<i class="fa-solid fa-face-smile text-sm"></i> SIM' +
+  let html = '<div class="flex flex-col gap-3 w-full py-1">' +
+    // CARD SIM (Sorrindo) - Em Cima
+    '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex flex-row items-stretch min-h-[110px] sm:min-h-[120px]">' +
+      // Imagem Sim (sorrindo) na esquerda
+      '<div class="relative w-28 sm:w-36 overflow-hidden bg-slate-900 shrink-0">' +
+        '<img src="fotos radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
+        '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
+        '<div class="absolute top-2 left-2">' +
+          '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[11px] shadow-sm tracking-wide">' +
+            '<i class="fa-solid fa-face-smile text-[10px]"></i> SIM' +
           '</span>' +
         '</div>' +
-        // Porcentagem e Contagem posicionadas sobre a foto sem cortes
-        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between gap-2">' +
+      '</div>' +
+      // Conteúdo e Estatísticas na direita
+      '<div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
+        '<div class="flex items-start justify-between gap-2">' +
           '<div class="min-w-0 flex-1">' +
-            '<p class="text-white font-bold text-xs sm:text-sm leading-tight drop-shadow-sm truncate">Tenho Orgulho</p>' +
-            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm mt-0.5">' + simCount.toLocaleString("pt-BR") + ' votos</p>' +
+            '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">Tenho Orgulho</h4>' +
+            '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + simCount.toLocaleString("pt-BR") + ' votos computados</p>' +
           '</div>' +
-          '<div class="px-2.5 sm:px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-emerald-700 font-black text-base sm:text-lg shadow-lg border border-emerald-200 tracking-tight flex-shrink-0">' +
+          '<div class="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-700 font-black text-base sm:text-lg border border-emerald-200 shadow-2xs shrink-0">' +
             simPct + '%' +
           '</div>' +
         '</div>' +
-      '</div>' +
-      // Barra de progresso inferior
-      '<div class="h-1.5 w-full bg-slate-100">' +
-        '<div class="h-full bg-emerald-500 transition-all duration-700" style="width: ' + simPct + '%;"></div>' +
+        '<div class="w-full mt-2">' +
+          '<div class="h-2 w-full bg-emerald-100/80 rounded-full overflow-hidden">' +
+            '<div class="h-full bg-emerald-500 rounded-full transition-all duration-700" style="width: ' + simPct + '%;"></div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
     '</div>' +
 
-    // CARD NÃO (Triste)
-    '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">' +
-      '<div class="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">' +
-        // Imagem dedicada Não (triste / P&B)
-        '<img src="fotos radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
-        // Gradiente escuro para legibilidade perfeita dos textos sobre a imagem
-        '<div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/35 to-transparent"></div>' +
-        // Badge superior "NÃO"
-        '<div class="absolute top-2.5 left-2.5">' +
-          '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-700/95 text-white font-black text-xs shadow-md backdrop-blur-xs tracking-wide">' +
-            '<i class="fa-solid fa-face-frown text-sm"></i> NÃO' +
+    // CARD NÃO (Triste) - Embaixo
+    '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex flex-row items-stretch min-h-[110px] sm:min-h-[120px]">' +
+      // Imagem Não (triste) na esquerda
+      '<div class="relative w-28 sm:w-36 overflow-hidden bg-slate-900 shrink-0">' +
+        '<img src="fotos radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
+        '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
+        '<div class="absolute top-2 left-2">' +
+          '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[11px] shadow-sm tracking-wide">' +
+            '<i class="fa-solid fa-face-frown text-[10px]"></i> NÃO' +
           '</span>' +
         '</div>' +
-        // Porcentagem e Contagem posicionadas sobre a foto sem cortes
-        '<div class="absolute bottom-2.5 inset-x-2.5 flex items-end justify-between gap-2">' +
+      '</div>' +
+      // Conteúdo e Estatísticas na direita
+      '<div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/40 via-white to-white min-w-0">' +
+        '<div class="flex items-start justify-between gap-2">' +
           '<div class="min-w-0 flex-1">' +
-            '<p class="text-white font-bold text-xs sm:text-sm leading-tight drop-shadow-sm truncate">Não Tenho</p>' +
-            '<p class="text-slate-200 text-[11px] font-medium drop-shadow-sm mt-0.5">' + naoCount.toLocaleString("pt-BR") + ' votos</p>' +
+            '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight">Não Tenho Orgulho</h4>' +
+            '<p class="text-[11px] font-medium text-slate-400 mt-0.5">' + naoCount.toLocaleString("pt-BR") + ' votos computados</p>' +
           '</div>' +
-          '<div class="px-2.5 sm:px-3 py-1 rounded-xl bg-white/95 backdrop-blur-md text-slate-800 font-black text-base sm:text-lg shadow-lg border border-slate-200 tracking-tight flex-shrink-0">' +
+          '<div class="px-3 py-1 rounded-xl bg-slate-100 text-slate-800 font-black text-base sm:text-lg border border-slate-200 shadow-2xs shrink-0">' +
             naoPct + '%' +
           '</div>' +
         '</div>' +
-      '</div>' +
-      // Barra de progresso inferior
-      '<div class="h-1.5 w-full bg-slate-100">' +
-        '<div class="h-full bg-slate-600 transition-all duration-700" style="width: ' + naoPct + '%;"></div>' +
+        '<div class="w-full mt-2">' +
+          '<div class="h-2 w-full bg-slate-200 rounded-full overflow-hidden">' +
+            '<div class="h-full bg-slate-600 rounded-full transition-all duration-700" style="width: ' + naoPct + '%;"></div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
     '</div>' +
   '</div>';
