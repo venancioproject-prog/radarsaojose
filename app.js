@@ -1214,6 +1214,10 @@ function processAndRenderDynamicCharts(records) {
 
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
+      const itemCount = Object.keys(dataMap).length;
+      const minContainerHeight = (chartTypeConfig.options && chartTypeConfig.options.horizontal && itemCount > 6) 
+        ? Math.max(300, Math.min(520, itemCount * 42)) 
+        : 260;
 
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
       cardEl.innerHTML = '<div class="mb-2">' +
@@ -1222,7 +1226,7 @@ function processAndRenderDynamicCharts(records) {
         '</div>' +
         '<p class="text-[11px] font-medium text-slate-400 mb-2">Total: ' + total + ' respondentes</p>' +
       '</div>' +
-      '<div class="chart-container flex-1 flex items-center justify-center min-h-[260px] w-full my-auto"><canvas id="' + canvasId + '"></canvas></div>';
+      '<div class="chart-container flex-1 flex items-center justify-center w-full my-auto" style="min-height: ' + minContainerHeight + 'px;"><canvas id="' + canvasId + '"></canvas></div>';
 
       cardsGrid.appendChild(cardEl);
 
@@ -4671,12 +4675,17 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   let labels = Object.keys(cleanedDataMap);
   let values = Object.values(cleanedDataMap);
 
-  if (labels.length > 8 && options.horizontal && !options.isAge) {
+  if (labels.length > 25 && options.horizontal && !options.isAge) {
     const combined = labels.map((l, i) => ({ label: l, val: values[i] }));
     combined.sort((a, b) => b.val - a.val);
-    const top = combined.slice(0, 8);
+    const top = combined.slice(0, 25);
     labels = top.map(t => t.label);
     values = top.map(t => t.val);
+  } else if (options.horizontal && !options.isAge) {
+    const combined = labels.map((l, i) => ({ label: l, val: values[i] }));
+    combined.sort((a, b) => b.val - a.val);
+    labels = combined.map(t => t.label);
+    values = combined.map(t => t.val);
   }
 
   const isBar = type === "bar";
