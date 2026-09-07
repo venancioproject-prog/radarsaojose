@@ -618,27 +618,54 @@ function processAndRenderDynamicCharts(records) {
       })()
     },
     {
-      title: "3. Cultura, Eventos, Lazer, Mobilidade & Vida Noturna",
-      subtitle: "Meios de transporte, mapa de árvore (treemap), evasão com ícones e mapa de calor por região",
-      questions: questionList.filter(q => !/mais falta|o que falta/i.test(q) && !/animal|pet|bicho|anima/i.test(q) && (/transporte|cultura|festas|vizinhas|frequência|outras cidades|frequenta|dificuldade|restaurante|bar|bonito para tirar fotos/i.test(q)))
+      title: "3. Mobilidade Urbana & Deslocamento",
+      subtitle: "Modais de transporte utilizados, frequência de saídas, polos mais frequentados e evasão intermunicipal",
+      questions: (() => {
+        // Ordem coerente: Meios de Transporte -> Frequência de Saída -> Região mais frequentada -> Evasão para outras cidades
+        const orderSelectors = [
+          q => /transporte/i.test(q) && (/usa/i.test(q) || /meios/i.test(q)),
+          q => /frequência/i.test(q) && (/sai/i.test(q) || /passear/i.test(q) || /divertir/i.test(q)),
+          q => /região/i.test(q) && (/frequenta/i.test(q) || /sai de casa/i.test(q)),
+          q => /outras cidades/i.test(q) && (/passear/i.test(q) || /comer/i.test(q))
+        ];
+        const res = [];
+        orderSelectors.forEach(fn => {
+          const match = questionList.find(fn);
+          if (match && !res.includes(match)) res.push(match);
+        });
+        return res;
+      })()
     },
     {
-      title: "4. Mídia, Músicas, Streamings & Comportamento",
+      title: "4. Cultura, Lazer & Vida Noturna",
+      subtitle: "Oferta cultural, festas, comparativo regional, dificuldades noturnas e gastronomia",
+      questions: questionList.filter(q => 
+        !/mais falta|o que falta/i.test(q) && 
+        !/animal|pet|bicho|anima/i.test(q) && 
+        !/transporte/i.test(q) && 
+        !/outras cidades/i.test(q) && 
+        !(/frequência/i.test(q) && /sai/i.test(q)) && 
+        !(/região/i.test(q) && /frequenta/i.test(q)) && 
+        (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar fotos/i.test(q))
+      )
+    },
+    {
+      title: "5. Mídia, Músicas, Streamings & Comportamento",
       subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e comportamento",
       questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q)))
     },
     {
-      title: "5. Política & Posicionamento",
+      title: "6. Política & Posicionamento",
       subtitle: "Nível de acompanhamento político (termômetro 1 a 5) e espectro político municipal",
       questions: questionList.filter(q => /política|politica|lado/i.test(q) && !/ajuda a cidade/i.test(q))
     },
     {
-      title: "6. Economia Local, Desenvolvimento & Bairros",
+      title: "7. Economia Local, Desenvolvimento & Bairros",
       subtitle: "Produtores locais, feiras de artesanato, quem ajuda a cidade e bairros",
       questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && !/política|politica/i.test(q) && (/produtores|feiras|artesanato|ajuda a cidade|bairro/i.test(q)))
     },
     {
-      title: "7. Mundo Pet & Animais de Estimação",
+      title: "8. Mundo Pet & Animais de Estimação",
       subtitle: "Posse de pets, estrutura e avaliação de São José para animais de estimação",
       questions: questionList.filter(q => /animal|pet|bicho|anima/i.test(q))
     }
@@ -648,7 +675,7 @@ function processAndRenderDynamicCharts(records) {
   const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
   if (remainingQuestions.length > 0) {
     categories.push({
-      title: "8. Demais Indicadores & Perguntas da Pesquisa",
+      title: "9. Demais Indicadores & Perguntas da Pesquisa",
       subtitle: "Outras perguntas presentes na base de dados",
       questions: remainingQuestions
     });
