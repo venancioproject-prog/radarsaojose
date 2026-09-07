@@ -238,8 +238,19 @@
           </div>
         </div>
 
-        <!-- Right: Status, Refresh & Logout -->
-        <div class="flex items-center gap-3">
+        <!-- Right: Status, Refresh, Mobile Filter Toggle & Logout -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Botão Toggle de Filtros no Mobile -->
+          <button 
+            id="btn-toggle-filters-mobile" 
+            class="lg:hidden inline-flex items-center gap-2 px-3 py-2 bg-brand-50 hover:bg-brand-100 text-brand-900 font-bold text-xs rounded-xl border border-brand-200 shadow-2xs transition-all active:scale-95"
+            title="Abrir ou fechar painel de filtros"
+          >
+            <i class="fa-solid fa-filter text-brand-600"></i>
+            <span class="hidden xs:inline">Filtros</span>
+            <span id="active-filters-badge" class="hidden w-2 h-2 rounded-full bg-accent-cyan"></span>
+          </button>
+
           <button 
             id="btn-refresh" 
             title="Sincronizar Dados do Supabase"
@@ -272,12 +283,15 @@
 
 
     <!-- CORPO DO DASHBOARD: SIDEBAR ESQUERDA FIXA + ÁREA PRINCIPAL DE CONTEÚDO -->
-    <div class="flex-1 flex flex-col lg:flex-row w-full">
+    <div class="flex-1 flex flex-col lg:flex-row w-full relative">
       
       <!-- ========================================== -->
       <!-- 4. SIDEBAR ESQUERDA DE FILTROS CORPORATIVA -->
       <!-- ========================================== -->
-      <aside class="w-full lg:w-72 xl:w-80 bg-white border-b lg:border-b-0 lg:border-r border-surface-border p-5 flex flex-col justify-between shrink-0 lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] lg:overflow-y-auto">
+      <!-- Mobile Backdrop Overlay -->
+      <div id="filter-backdrop-mobile" class="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-xs hidden lg:hidden transition-opacity duration-300"></div>
+
+      <aside id="filter-sidebar" class="hidden lg:flex fixed inset-y-0 left-0 z-50 lg:static lg:z-auto w-80 max-w-[85vw] lg:w-72 xl:w-80 bg-white border-r border-surface-border p-5 flex-col justify-between shrink-0 shadow-2xl lg:shadow-none lg:sticky lg:top-20 lg:h-[calc(100vh-5rem)] overflow-y-auto transition-transform duration-300">
         <div class="space-y-5">
           
           <!-- Header da Sidebar -->
@@ -286,14 +300,23 @@
               <i class="fa-solid fa-filter text-brand-600"></i>
               <h3 class="text-xs font-black uppercase tracking-wider text-brand-900">Filtros & Recortes</h3>
             </div>
-            <button 
-              id="btn-reset-filters" 
-              title="Limpar todos os filtros"
-              class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-600 hover:text-brand-900 font-bold text-[11px] rounded-lg border border-slate-200 transition-all flex items-center gap-1"
-            >
-              <i class="fa-solid fa-rotate-left text-[9px]"></i>
-              <span>Limpar</span>
-            </button>
+            <div class="flex items-center gap-1.5">
+              <button 
+                id="btn-reset-filters" 
+                title="Limpar todos os filtros"
+                class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-600 hover:text-brand-900 font-bold text-[11px] rounded-lg border border-slate-200 transition-all flex items-center gap-1"
+              >
+                <i class="fa-solid fa-rotate-left text-[9px]"></i>
+                <span>Limpar</span>
+              </button>
+              <button 
+                id="btn-close-filters-mobile" 
+                class="lg:hidden p-1 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors ml-1"
+                title="Fechar filtros"
+              >
+                <i class="fa-solid fa-xmark text-sm"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Totalizador de Respondentes Filtrados -->
@@ -610,6 +633,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=9.9"></script>
+  <script src="app.js?v=10.0"></script>
 </body>
 </html>

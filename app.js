@@ -167,10 +167,96 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Multi-filtros da Sidebar
   ALL_FILTER_ELEMENTS.forEach(select => {
-    if (select) select.addEventListener("change", applyCombinedFilters);
+    if (select) select.addEventListener("change", () => {
+      applyCombinedFilters();
+      updateActiveFiltersBadge();
+    });
   });
 
-  if (btnResetFilters) btnResetFilters.addEventListener("click", resetAllFilters);
+  if (btnResetFilters) {
+    btnResetFilters.addEventListener("click", () => {
+      resetAllFilters();
+      updateActiveFiltersBadge();
+    });
+  }
+
+  // Toggle de Filtros Mobile
+  const btnToggleFiltersMobile = document.getElementById("btn-toggle-filters-mobile");
+  const btnCloseFiltersMobile = document.getElementById("btn-close-filters-mobile");
+  const filterSidebar = document.getElementById("filter-sidebar");
+  const filterBackdropMobile = document.getElementById("filter-backdrop-mobile");
+
+  function openMobileFilters() {
+    if (filterSidebar && filterBackdropMobile) {
+      filterSidebar.classList.remove("hidden");
+      filterSidebar.classList.add("flex");
+      filterBackdropMobile.classList.remove("hidden");
+      document.body.classList.add("overflow-hidden", "lg:overflow-auto");
+    }
+  }
+
+  function closeMobileFilters() {
+    if (filterSidebar && filterBackdropMobile) {
+      if (window.innerWidth < 1024) {
+        filterSidebar.classList.add("hidden");
+        filterSidebar.classList.remove("flex");
+      }
+      filterBackdropMobile.classList.add("hidden");
+      document.body.classList.remove("overflow-hidden", "lg:overflow-auto");
+    }
+  }
+
+  if (btnToggleFiltersMobile) {
+    btnToggleFiltersMobile.addEventListener("click", () => {
+      if (filterSidebar && filterSidebar.classList.contains("hidden")) {
+        openMobileFilters();
+      } else {
+        closeMobileFilters();
+      }
+    });
+  }
+
+  if (btnCloseFiltersMobile) {
+    btnCloseFiltersMobile.addEventListener("click", closeMobileFilters);
+  }
+
+  if (filterBackdropMobile) {
+    filterBackdropMobile.addEventListener("click", closeMobileFilters);
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 1024) {
+      if (filterSidebar) {
+        filterSidebar.classList.remove("hidden");
+        filterSidebar.classList.add("flex");
+      }
+      if (filterBackdropMobile) {
+        filterBackdropMobile.classList.add("hidden");
+      }
+      document.body.classList.remove("overflow-hidden", "lg:overflow-auto");
+    } else {
+      if (filterSidebar && !filterBackdropMobile.classList.contains("hidden")) {
+        // mantém aberto se o backdrop estiver ativo
+      } else if (filterSidebar) {
+        filterSidebar.classList.add("hidden");
+        filterSidebar.classList.remove("flex");
+      }
+    }
+  });
+
+  function updateActiveFiltersBadge() {
+    const badge = document.getElementById("active-filters-badge");
+    if (!badge) return;
+    let hasActive = false;
+    ALL_FILTER_ELEMENTS.forEach(el => {
+      if (el && el.value !== "TODOS") hasActive = true;
+    });
+    if (hasActive) {
+      badge.classList.remove("hidden");
+    } else {
+      badge.classList.add("hidden");
+    }
+  }
 
   if (!supabaseClient && typeof initSupabase === "function") initSupabase();
   await checkActiveSession();
