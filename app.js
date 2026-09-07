@@ -3657,14 +3657,73 @@ function renderStreamingLogosWidget(dataMap, total) {
 }
 
 // 7.7.1. Cards Visuais de Redes Sociais com Logotipos Oficiais e Porcentagens
+// 7.7.1. Cards Visuais de Redes Sociais com Agrupamento e Normalização Inteligente
 function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
+  // Classificador e normalizador de respostas abertas / livres
+  function normalizeSocialMediaAnswer(rawText) {
+    if (!rawText) return null;
+    const t = String(rawText).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+
+    // 1. Respostas negativas / sem uso
+    if (/^(nao uso|nao|nenhum|nenhuma|nao utilizo|nao uso muito|nao costumo|nao tenho|nao vejo|nunca|nada|nenhuma das|nao me interesso|nao acompanho|off|eu nao|nenhum vou|nao uso redes)$/i.test(t) || 
+        t.includes("nao uso") || t.includes("nao utilizo") || t.includes("nenhum") || t.includes("nenhuma") || t.includes("nao costumo")) {
+      return "Não utiliza redes para descoberta";
+    }
+
+    // 2. Indicação de amigos / Boca a boca / Pessoalmente
+    if (t.includes("amigo") || t.includes("familia") || t.includes("conhecid") || t.includes("boca a boca") || t.includes("pessoalmente") || t.includes("indicacao")) {
+      return "Indicação de Amigos / Família";
+    }
+
+    // 3. Google / Buscas / Maps / TripAdvisor
+    if (t.includes("google") || t.includes("maps") || t.includes("pesquisa") || t.includes("tripadvisor") || t.includes("busca") || t.includes("internet")) {
+      return "Google / Maps";
+    }
+
+    // 4. Instagram
+    if (t.includes("instagram") || t.includes("insta") || t.includes("ig") || t.includes("reels") || t.includes("stories") || t.includes("feeds") || t.includes("explore")) {
+      return "Instagram";
+    }
+
+    // 5. TikTok
+    if (t.includes("tiktok") || t.includes("tik tok") || t.includes("tk") || t.includes("tok")) {
+      return "TikTok";
+    }
+
+    // 6. YouTube
+    if (t.includes("youtube") || t.includes("yt") || t.includes("you tube")) {
+      return "YouTube";
+    }
+
+    // 7. WhatsApp / Telegram
+    if (t.includes("whatsapp") || t.includes("whats") || t.includes("zap") || t.includes("telegram")) {
+      return "WhatsApp / Grupos";
+    }
+
+    // 8. Facebook
+    if (t.includes("facebook") || t.includes("face") || t.includes("fb") || t.includes("meta")) {
+      return "Facebook";
+    }
+
+    // 9. Pinterest
+    if (t.includes("pinterest") || t.includes("pin")) {
+      return "Pinterest";
+    }
+
+    // 10. X / Twitter
+    if (t.includes("twitter") || t.includes(" x ") || t === "x" || t.includes("tweet")) {
+      return "X (Twitter)";
+    }
+
+    return "Outras Fontes";
+  }
+
   function getSocialMediaConfig(key) {
-    const k = key.toLowerCase().trim();
-    if (k.includes("instagram") || k.includes("insta")) {
+    if (key === "Instagram") {
       return {
         icon: "fa-brands fa-instagram",
         title: "Instagram",
-        desc: "Reels, Stories & Perfis Locais",
+        desc: "Reels, Stories, Páginas & Perfis Locais",
         badgeBg: "bg-pink-50 text-pink-700 border-pink-200",
         barColor: "bg-gradient-to-r from-purple-500 to-pink-500",
         border: "border-pink-100 hover:border-pink-300",
@@ -3672,11 +3731,11 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
         iconBg: "bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 text-white"
       };
     }
-    if (k.includes("tiktok") || k.includes("tik tok")) {
+    if (key === "TikTok") {
       return {
         icon: "fa-brands fa-tiktok",
         title: "TikTok",
-        desc: "Vídeos Curtos & Tendências",
+        desc: "Vídeos Curtos, Dicas & Tendências Gastronômicas",
         badgeBg: "bg-slate-900 text-cyan-300 border-slate-700",
         barColor: "bg-cyan-500",
         border: "border-slate-300 hover:border-slate-500",
@@ -3684,23 +3743,11 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
         iconBg: "bg-slate-950 text-cyan-400"
       };
     }
-    if (k.includes("youtube") || k.includes("yt")) {
-      return {
-        icon: "fa-brands fa-youtube",
-        title: "YouTube",
-        desc: "Vídeos Longos, Reviews & Vlogs",
-        badgeBg: "bg-red-50 text-red-700 border-red-200",
-        barColor: "bg-red-600",
-        border: "border-red-100 hover:border-red-300",
-        iconColor: "text-red-600",
-        iconBg: "bg-red-50 text-red-600 border border-red-100"
-      };
-    }
-    if (k.includes("google") || k.includes("maps") || k.includes("pesquisa")) {
+    if (key === "Google / Maps") {
       return {
         icon: "fa-brands fa-google",
         title: "Google / Maps",
-        desc: "Buscas Locais & Avaliações",
+        desc: "Buscas Locais, Rotas & Avaliações de Lugares",
         badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
         barColor: "bg-blue-500",
         border: "border-blue-100 hover:border-blue-300",
@@ -3708,11 +3755,23 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
         iconBg: "bg-blue-50 text-blue-600 border border-blue-100"
       };
     }
-    if (k.includes("facebook") || k.includes("face") || k.includes("meta")) {
+    if (key === "YouTube") {
+      return {
+        icon: "fa-brands fa-youtube",
+        title: "YouTube",
+        desc: "Vídeos Longos, Reviews, Canais & Vlogs",
+        badgeBg: "bg-red-50 text-red-700 border-red-200",
+        barColor: "bg-red-600",
+        border: "border-red-100 hover:border-red-300",
+        iconColor: "text-red-600",
+        iconBg: "bg-red-50 text-red-600 border border-red-100"
+      };
+    }
+    if (key === "Facebook") {
       return {
         icon: "fa-brands fa-facebook",
         title: "Facebook",
-        desc: "Grupos de Bairros & Comunidades",
+        desc: "Grupos de Bairros, Eventos & Comunidades",
         badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
         barColor: "bg-blue-700",
         border: "border-blue-200 hover:border-blue-400",
@@ -3720,11 +3779,11 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
         iconBg: "bg-blue-600 text-white"
       };
     }
-    if (k.includes("whatsapp") || k.includes("zap")) {
+    if (key === "WhatsApp / Grupos") {
       return {
         icon: "fa-brands fa-whatsapp",
-        title: "WhatsApp",
-        desc: "Grupos de Amigos & Família",
+        title: "WhatsApp / Grupos",
+        desc: "Compartilhamento Direto com Amigos e Família",
         badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
         barColor: "bg-emerald-500",
         border: "border-emerald-100 hover:border-emerald-300",
@@ -3732,23 +3791,11 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
         iconBg: "bg-emerald-500 text-white"
       };
     }
-    if (k.includes("twitter") || k.includes(" x") || k === "x") {
-      return {
-        icon: "fa-brands fa-x-twitter",
-        title: "X (Twitter)",
-        desc: "Notícias & Opiniões em Tempo Real",
-        badgeBg: "bg-slate-50 text-slate-800 border-slate-200",
-        barColor: "bg-slate-800",
-        border: "border-slate-200 hover:border-slate-400",
-        iconColor: "text-slate-900",
-        iconBg: "bg-slate-900 text-white"
-      };
-    }
-    if (k.includes("pinterest")) {
+    if (key === "Pinterest") {
       return {
         icon: "fa-brands fa-pinterest",
         title: "Pinterest",
-        desc: "Ideias Visuais & Inspirações",
+        desc: "Ideias Visuais, Fotos & Inspirações",
         badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
         barColor: "bg-rose-600",
         border: "border-rose-100 hover:border-rose-300",
@@ -3756,10 +3803,46 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
         iconBg: "bg-rose-600 text-white"
       };
     }
+    if (key === "X (Twitter)") {
+      return {
+        icon: "fa-brands fa-x-twitter",
+        title: "X (Twitter)",
+        desc: "Notícias & Comentários Rápidos",
+        badgeBg: "bg-slate-50 text-slate-800 border-slate-200",
+        barColor: "bg-slate-800",
+        border: "border-slate-200 hover:border-slate-400",
+        iconColor: "text-slate-900",
+        iconBg: "bg-slate-900 text-white"
+      };
+    }
+    if (key === "Indicação de Amigos / Família") {
+      return {
+        icon: "fa-solid fa-users",
+        title: "Indicação Direta",
+        desc: "Boca a Boca & Amigos",
+        badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
+        barColor: "bg-amber-500",
+        border: "border-amber-200 hover:border-amber-400",
+        iconColor: "text-amber-600",
+        iconBg: "bg-amber-100 text-amber-700"
+      };
+    }
+    if (key === "Não utiliza redes para descoberta") {
+      return {
+        icon: "fa-solid fa-circle-xmark",
+        title: "Não Utiliza / Sem Hábito",
+        desc: "Não busca referências por redes sociais",
+        badgeBg: "bg-slate-100 text-slate-700 border-slate-200",
+        barColor: "bg-slate-400",
+        border: "border-slate-200 hover:border-slate-300",
+        iconColor: "text-slate-500",
+        iconBg: "bg-slate-100 text-slate-600"
+      };
+    }
     return {
-      icon: "fa-solid fa-hashtag",
+      icon: "fa-solid fa-compass",
       title: key,
-      desc: "Rede Social",
+      desc: "Outras Referências",
       badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
       barColor: "bg-brand-900",
       border: "border-slate-200 hover:border-slate-300",
@@ -3768,41 +3851,58 @@ function renderSocialMediaLogosWidget(dataMap, total, records, questionText) {
     };
   }
 
-  // Extração inteligente de dados da pergunta
-  const dynamicMap = {};
-  if (dataMap && Object.keys(dataMap).length > 0) {
-    Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
-  } else if (records && records.length > 0) {
+  // Extração inteligente de dados da pergunta com agrupamento
+  const aggregatedCounts = {};
+  let totalRespondentsCount = 0;
+
+  if (records && records.length > 0) {
     records.forEach(r => {
-      const val = getField(r, [questionText, "rede social", "redes sociais", "redes", "lugares e referências", "referencias"]);
-      if (val) {
-        if (val.includes(",")) {
-          val.split(",").forEach(item => {
-            const clean = item.trim().replace(/[()]/g, "").trim();
-            if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
-          });
-        } else {
-          const clean = val.trim().replace(/[()]/g, "").trim();
-          if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
-        }
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "qual rede social você mais usa", "rede social", "redes sociais", "lugares e referências", "referencias"]);
       }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        totalRespondentsCount++;
+        const str = String(val).trim();
+        // Pode conter múltiplas redes separadas por vírgula, barra ou 'e'
+        const parts = str.split(/[,;\/]+/);
+        const userSet = new Set();
+        parts.forEach(p => {
+          const norm = normalizeSocialMediaAnswer(p);
+          if (norm) userSet.add(norm);
+        });
+        if (userSet.size === 0) {
+          const normWhole = normalizeSocialMediaAnswer(str);
+          if (normWhole) userSet.add(normWhole);
+        }
+        userSet.forEach(channel => {
+          aggregatedCounts[channel] = (aggregatedCounts[channel] || 0) + 1;
+        });
+      }
+    });
+  } else if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, cnt]) => {
+      totalRespondentsCount += cnt;
+      const parts = String(k).split(/[,;\/]+/);
+      const userSet = new Set();
+      parts.forEach(p => {
+        const norm = normalizeSocialMediaAnswer(p);
+        if (norm) userSet.add(norm);
+      });
+      if (userSet.size === 0) {
+        const normWhole = normalizeSocialMediaAnswer(k);
+        if (normWhole) userSet.add(normWhole);
+      }
+      userSet.forEach(channel => {
+        aggregatedCounts[channel] = (aggregatedCounts[channel] || 0) + cnt;
+      });
     });
   }
 
-  // Fallback estatístico se necessário
-  if (Object.keys(dynamicMap).length === 0) {
-    const base = total || 477;
-    dynamicMap["Instagram"] = Math.round(base * 0.76);
-    dynamicMap["TikTok"] = Math.round(base * 0.38);
-    dynamicMap["Google / Maps"] = Math.round(base * 0.32);
-    dynamicMap["YouTube"] = Math.round(base * 0.24);
-    dynamicMap["WhatsApp"] = Math.round(base * 0.18);
-  }
-
-  const entries = Object.entries(dynamicMap).filter(([k, v]) => v > 0);
+  const entries = Object.entries(aggregatedCounts).filter(([_, count]) => count > 0);
   entries.sort((a, b) => b[1] - a[1]);
 
-  const totalRespondents = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+  const totalRespondents = totalRespondentsCount > 0 ? totalRespondentsCount : (total || 1);
 
   let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll">';
 
