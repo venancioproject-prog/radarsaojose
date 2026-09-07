@@ -1234,7 +1234,7 @@ function renderYesNoPieChart(canvasId, dataMap) {
         },
         datalabels: {
           color: "#FFFFFF",
-          font: { weight: 800, size: 12 },
+          font: { weight: 800, size: 14 },
           formatter: (val) => {
             if (!val || val === 0) return "";
             const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
@@ -1422,7 +1422,7 @@ function renderHouseOwnershipChart(canvasId, dataMap) {
         },
         datalabels: {
           color: "#FFFFFF",
-          font: { weight: 800, size: 12 },
+          font: { weight: 800, size: 14 },
           formatter: (val) => {
             if (!val || val === 0) return "";
             const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
@@ -1473,11 +1473,11 @@ function renderGenderChart(canvasId, dataMap) {
       plugins: {
         legend: {
           position: "bottom",
-          labels: { usePointStyle: true, font: { weight: 700, size: 11 }, padding: 12 }
+          labels: { usePointStyle: true, font: { weight: 700, size: 12 }, padding: 14 }
         },
         datalabels: {
           color: "#FFFFFF",
-          font: { weight: 800, size: 11 },
+          font: { weight: 800, size: 14 },
           formatter: (val) => {
             if (!val || val === 0) return "";
             const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
@@ -1610,7 +1610,7 @@ function renderIncomeGreenChart(canvasId, dataMap) {
           color: "#064E3B",
           anchor: "end",
           align: "right",
-          font: { weight: 700, size: 10 },
+          font: { weight: 800, size: 12 },
           formatter: (val) => {
             if (!val) return "";
             const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
@@ -3789,8 +3789,8 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           position: "bottom",
           labels: {
             usePointStyle: true,
-            padding: 12,
-            font: { size: 10, weight: 600 }
+            padding: 14,
+            font: { size: 12, weight: 700 }
           }
         },
         tooltip: {
@@ -3812,7 +3812,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           anchor: isBar ? (isHorizontal ? "end" : "end") : (isLine ? "top" : "center"),
           align: isBar ? (isHorizontal ? "right" : "top") : (isLine ? "top" : "center"),
           offset: isBar || isLine ? 4 : 0,
-          font: { weight: 700, size: 10 },
+          font: { weight: 800, size: type === "doughnut" || type === "pie" ? 14 : 12 },
           formatter: function(value) {
             if (!value || value === 0) return "";
             const pct = totalSum > 0 ? ((value / totalSum) * 100).toFixed(1) : 0;
