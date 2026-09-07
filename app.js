@@ -733,9 +733,12 @@ function processAndRenderDynamicCharts(records) {
         if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
           let strVal = String(rawVal).trim();
           
-          // Ignora números isolados que não pertençam a escalas de 1 a 5 ou renda/idade
-          if (/^\d+$/.test(strVal) && !/1 a 5|nota|idade|quanto você acompanha/i.test(questionText) && !/^\d{1,2}$/.test(strVal)) {
-            return;
+          // Ignora números isolados que não pertençam a escalas de 1 a 5 ou renda/idade (remove ruídos como 73, 302, 418, 445)
+          if (/^\d+$/.test(strVal)) {
+            const isScaleOrDemographic = /1 a 5|nota|idade|quanto você acompanha/i.test(questionText);
+            if (!isScaleOrDemographic) {
+              return;
+            }
           }
 
           // Identifica perguntas de múltipla escolha
@@ -3783,6 +3786,10 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   rawLabels.forEach(k => {
     let cleanKey = String(k).replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
     if (!cleanKey) cleanKey = String(k).trim();
+    // Filtra ruído de números soltos como IDs (73, 302, 418, 445) em perguntas qualitativas
+    if (/^\d+$/.test(cleanKey) && !options.isAge && !options.isScale && cleanKey.length > 1 && parseInt(cleanKey, 10) > 5) {
+      return;
+    }
     cleanedDataMap[cleanKey] = (cleanedDataMap[cleanKey] || 0) + dataMap[k];
   });
 
