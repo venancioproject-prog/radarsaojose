@@ -1595,7 +1595,7 @@ function renderYesNoPieChart(canvasId, dataMap) {
   });
 }
 
-// Gráfico / Tabela Visual Específica de Moradia com Ilustrações Estilo Studio Ghibli
+// Gráfico / Tabela Visual Específica de Moradia com Bolinhas Proporcionais
 function renderHouseGhibliCardsWidget(dataMap, total) {
   function getGhibliHouseConfig(key) {
     const k = key.toLowerCase();
@@ -1603,7 +1603,10 @@ function renderHouseGhibliCardsWidget(dataMap, total) {
       return {
         title: "Tenho Casa Própria",
         subtitle: "Imóvel próprio quitado ou financiado",
-        image: "fotos radar/ghibli_casa_propria.jpg",
+        circleColor: "bg-emerald-500",
+        circleGlow: "shadow-emerald-500/30",
+        circleBorder: "border-emerald-200",
+        icon: "fa-solid fa-house-chimney",
         badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
         border: "border-emerald-200 hover:border-emerald-300",
         tag: "Proprietário",
@@ -1614,7 +1617,10 @@ function renderHouseGhibliCardsWidget(dataMap, total) {
       return {
         title: "Moro de aluguel mas quero uma casa própria",
         subtitle: "Locatário com planos de aquisição",
-        image: "fotos radar/ghibli_aluguel_quer_casa.jpg",
+        circleColor: "bg-blue-600",
+        circleGlow: "shadow-blue-500/30",
+        circleBorder: "border-blue-200",
+        icon: "fa-solid fa-key",
         badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
         border: "border-blue-200 hover:border-blue-300",
         tag: "Quer Comprar",
@@ -1625,7 +1631,10 @@ function renderHouseGhibliCardsWidget(dataMap, total) {
       return {
         title: "Moro de aluguel e não quero adquirir uma casa própria",
         subtitle: "Prefere flexibilidade e locação contínua",
-        image: "fotos radar/ghibli_aluguel_livre.jpg",
+        circleColor: "bg-cyan-500",
+        circleGlow: "shadow-cyan-500/30",
+        circleBorder: "border-cyan-200",
+        icon: "fa-solid fa-door-open",
         badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
         border: "border-cyan-200 hover:border-cyan-300",
         tag: "Opta por Aluguel",
@@ -1635,7 +1644,10 @@ function renderHouseGhibliCardsWidget(dataMap, total) {
     return {
       title: key,
       subtitle: "Opção registrada na pesquisa",
-      image: "fotos radar/ghibli_casa_propria.jpg",
+      circleColor: "bg-slate-600",
+      circleGlow: "shadow-slate-500/30",
+      circleBorder: "border-slate-200",
+      icon: "fa-solid fa-building",
       badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
       border: "border-slate-200 hover:border-slate-300",
       tag: "Outros",
@@ -1653,12 +1665,19 @@ function renderHouseGhibliCardsWidget(dataMap, total) {
 
   entries.forEach(([key, count]) => {
     const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const pctNum = parseFloat(pct) || 0;
     const cfg = getGhibliHouseConfig(key);
 
-    html += '<div class="group relative bg-white rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between gap-3 sm:gap-4">' +
-      '<div class="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">' +
-        '<div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden flex-shrink-0 shadow-xs border border-slate-100">' +
-          '<img src="' + cfg.image + '" alt="' + cfg.title + '" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />' +
+    // Diâmetro proporcional ao percentual: mínimo 24px (10%), máximo 54px (50%)
+    const circleSize = Math.round(22 + (pctNum / 50) * 32);
+
+    html += '<div class="group relative bg-white rounded-2xl p-3.5 sm:p-4 border ' + cfg.border + ' shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between gap-3 sm:gap-4">' +
+      '<div class="flex items-center gap-3.5 sm:gap-4 min-w-0 flex-1">' +
+        // Container fixo para centralizar a bolinha proporcional
+        '<div class="w-14 h-14 rounded-2xl bg-slate-50/80 border border-slate-100 flex items-center justify-center flex-shrink-0 shadow-inner">' +
+          '<div class="rounded-full ' + cfg.circleColor + ' shadow-md ' + cfg.circleGlow + ' text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110" style="width: ' + circleSize + 'px; height: ' + circleSize + 'px;">' +
+            (circleSize >= 34 ? '<i class="' + cfg.icon + ' text-xs"></i>' : '') +
+          '</div>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
           '<div class="flex items-center gap-2 mb-1 flex-wrap">' +
