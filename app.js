@@ -2493,9 +2493,9 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
 
   items.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
 
-  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
   items.forEach(cfg => {
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
         '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
           cfg.emoji +
