@@ -639,15 +639,25 @@ function processAndRenderDynamicCharts(records) {
     {
       title: "4. Cultura, Lazer & Vida Noturna",
       subtitle: "Oferta cultural, festas, comparativo regional, opções de lazer, dificuldades noturnas e gastronomia",
-      questions: questionList.filter(q => 
-        !/mais falta|o que falta/i.test(q) && 
-        !/animal|pet|bicho|anima/i.test(q) && 
-        !/transporte/i.test(q) && 
-        !/outras cidades/i.test(q) && 
-        !(/frequência/i.test(q) && /sai/i.test(q)) && 
-        !(/região/i.test(q) && /frequenta/i.test(q)) && 
-        (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q))
-      )
+      questions: (() => {
+        const qList = questionList.filter(q => 
+          !/mais falta|o que falta/i.test(q) && 
+          !/animal|pet|bicho|anima/i.test(q) && 
+          !/transporte/i.test(q) && 
+          !/outras cidades/i.test(q) && 
+          !(/frequência/i.test(q) && /sai/i.test(q)) && 
+          !(/região/i.test(q) && /frequenta/i.test(q)) && 
+          (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q))
+        );
+        const idxDificuldade = qList.findIndex(q => /maior dificuldade|sair à noite|sair a noite/i.test(q));
+        const idxGastaria = qList.findIndex(q => /mais opções de lazer que você gosta|mais opcoes de lazer|gastaria/i.test(q));
+        if (idxDificuldade !== -1 && idxGastaria !== -1) {
+          const temp = qList[idxDificuldade];
+          qList[idxDificuldade] = qList[idxGastaria];
+          qList[idxGastaria] = temp;
+        }
+        return qList;
+      })()
     },
     {
       title: "5. Mídia, Músicas & Streamings",
@@ -767,6 +777,9 @@ function processAndRenderDynamicCharts(records) {
       }
       if (displayTitle.toLowerCase().includes("bonito para tirar foto") || displayTitle.toLowerCase().includes("tirar fotos e postar") || displayTitle.toLowerCase().includes("tirar foto")) {
         displayTitle = "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?";
+      }
+      if (displayTitle.toLowerCase().includes("mais opções de lazer que você gosta") || displayTitle.toLowerCase().includes("mais opcoes de lazer") || (displayTitle.toLowerCase().includes("opções de lazer") && displayTitle.toLowerCase().includes("gastar")) || displayTitle.toLowerCase().includes("você gastar")) {
+        displayTitle = "Se tivesse mais opções de lazer que você gosta, você gastaria mais dinheiro na cidade?";
       }
       if (displayTitle.toLowerCase().includes("precisa estar bem financeiramente") || (displayTitle.toLowerCase().includes("financeiramente") && displayTitle.toLowerCase().includes("come"))) {
         displayTitle = "Você acha que precisa estar bem financeiramente antes de começar um relacionamento?";
@@ -4758,6 +4771,14 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     }
     if (l.includes("não responder") || l.includes("nao responder") || l.includes("prefiro não") || l.includes("prefiro nao") || l.includes("não informado") || l.includes("nao informado") || l.includes("nenhum")) {
       return "#94A3B8"; // Cinza
+    }
+
+    // Respostas Sim / Não (Sim = Verde, Não = Vermelho)
+    if (l === "sim" || l.startsWith("sim,") || l.startsWith("sim ") || l.includes("com certeza") || l.includes("concordo")) {
+      return "#10B981"; // Verde Esmeralda
+    }
+    if (l === "não" || l === "nao" || l.startsWith("não,") || l.startsWith("nao,") || l.startsWith("não ") || l.startsWith("nao ") || l.includes("discordo")) {
+      return "#EF4444"; // Vermelho
     }
 
     // Comparativo / Sentimento
