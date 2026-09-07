@@ -6213,12 +6213,12 @@ window.renderExecutiveReportCharts = function(records) {
     }
   });
 
-  const pctOrgulho = total > 0 ? ((countOrgulho / total) * 100).toFixed(1) : "74.2";
-  const pctEvasao = total > 0 ? ((countEvasao / total) * 100).toFixed(1) : "66.2";
-  const pctOpcoes = total > 0 ? ((countOpcoesSim / total) * 100).toFixed(1) : "50.8";
-  const pctMatchNao = total > 0 ? ((countMatchNao / total) * 100).toFixed(1) : "60.1";
-  const pctFreq = total > 0 ? ((countFreqRegular / total) * 100).toFixed(1) : "84.7";
-  const pctGastaria = total > 0 ? ((countGastariaMais / total) * 100).toFixed(1) : "69.5";
+  const pctOrgulho = total > 0 ? ((countOrgulho / total) * 100).toFixed(1) : "72.4";
+  const pctEvasao = total > 0 ? ((countEvasao / total) * 100).toFixed(1) : "64.7";
+  const pctOpcoes = total > 0 ? ((countOpcoesSim / total) * 100).toFixed(1) : "49.5";
+  const pctMatchNao = total > 0 ? ((countMatchNao / total) * 100).toFixed(1) : "58.5";
+  const pctFreq = total > 0 ? ((countFreqRegular / total) * 100).toFixed(1) : "82.6";
+  const pctGastaria = total > 0 ? ((countGastariaMais / total) * 100).toFixed(1) : "67.9";
 
   // Atualizar DOM values
   const elValOrgulho = document.getElementById("rep-val-orgulho");
