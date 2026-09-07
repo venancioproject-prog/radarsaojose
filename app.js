@@ -33,6 +33,46 @@ window.scrollToSection = function(sectionId) {
   }
 };
 
+// Alternância de Abas SPA (Painel de Gráficos vs Relatório Completo)
+window.currentMainTab = "dashboard";
+window.switchMainTab = function(tabName) {
+  window.currentMainTab = tabName;
+  const dashboardView = document.getElementById("dashboard-view");
+  const reportView = document.getElementById("executive-report-view");
+  const btnDashboard = document.getElementById("btn-nav-dashboard");
+  const btnReport = document.getElementById("btn-nav-report");
+
+  if (!dashboardView || !reportView) return;
+
+  if (tabName === "report") {
+    dashboardView.classList.add("hidden");
+    reportView.classList.remove("hidden");
+
+    if (btnDashboard) {
+      btnDashboard.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200";
+    }
+    if (btnReport) {
+      btnReport.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md";
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (typeof window.renderExecutiveReportCharts === "function") {
+      window.renderExecutiveReportCharts(window.currentFilteredRecords || allSurveyRecords);
+    }
+  } else {
+    reportView.classList.add("hidden");
+    dashboardView.classList.remove("hidden");
+
+    if (btnDashboard) {
+      btnDashboard.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md";
+    }
+    if (btnReport) {
+      btnReport.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200";
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
+
 // ==========================================
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
 // ==========================================
@@ -723,8 +763,12 @@ function applyCombinedFilters() {
     totalBaseCount.textContent = allSurveyRecords.length.toLocaleString("pt-BR");
   }
 
+  window.currentFilteredRecords = filtered;
   updateStatisticalHeader(filtered.length, allSurveyRecords.length);
   processAndRenderDynamicCharts(filtered);
+  if (typeof window.renderExecutiveReportCharts === "function") {
+    window.renderExecutiveReportCharts(filtered);
+  }
 }
 
 function resetAllFilters() {
@@ -5875,4 +5919,448 @@ function renderFallbackDemoData() {
   populateAllSidebarFilters(demoRecords);
   updateStatisticalHeader(demoRecords.length, demoRecords.length);
   processAndRenderDynamicCharts(demoRecords);
+  if (typeof window.renderExecutiveReportCharts === "function") {
+    window.renderExecutiveReportCharts(demoRecords);
+  }
 }
+
+// ==========================================
+// 10. MÓDULO DO RELATÓRIO EXECUTIVO COMPLETO
+// ==========================================
+const EXECUTIVE_REPORT_PERSONAS = [
+  {
+    nome: "Gabriela",
+    cargo: "Consultora de Negócios",
+    idade: "46 anos",
+    classe: "Classe A",
+    regiao: "Oeste",
+    foto: "fotos radar/photo_1.jpg",
+    cor: "border-sky-500",
+    badgeBg: "bg-sky-100 text-sky-800",
+    resumo: "Profissional consolidada que usa o tempo como moeda. Transita entre reuniões, fiel a marcas que entregam conveniência e sofisticação.",
+    quote: "Precisamos ter mais festivais legais aqui. O Mr. Moo é um exemplo, mas eu mesma tenho várias críticas: falta lugar pra sentar direito, falta banheiro limpo — e ainda é um evento caro do caramba. (...) O pessoal que pensa em evento aqui não se lembra das mães. Parece que tem mais cuidado pra pensar em espaço pet do que em espaço pra mãe.",
+    tags: ["Time is Money", "Consumo Premium", "Lifestyle Aquarius/Urbanova", "Alta Exigência"]
+  },
+  {
+    nome: "Emerson",
+    cargo: "Entregador de App",
+    idade: "21 anos",
+    classe: "Classe D",
+    regiao: "Sul",
+    foto: "fotos radar/foto_pessoas.jpg",
+    cor: "border-amber-500",
+    badgeBg: "bg-amber-100 text-amber-800",
+    resumo: "Vive na economia de plataforma. O celular é ferramenta de trabalho e lazer. Sonha com negócio próprio, mas o presente ainda pesa mais.",
+    quote: "Lá no centro até tem parque, tem lugar iluminado, gente correndo, criança brincando. Agora chega lá nas quebrada depois das seis da tarde? Escuro, mato alto, banco quebrado, nem calçada direito tem. A molecada fica solta na rua porque não tem onde ir. Parece que tem dois São José: um que eles cuidam e outro que eles esqueceram.",
+    tags: ["Gig Economy", "Mobilidade 2 Rodas", "Periferia Ativa", "SJC Invisível"]
+  },
+  {
+    nome: "Lucas",
+    cargo: "Motorista de App",
+    idade: "24 anos",
+    classe: "Classe C",
+    regiao: "Leste",
+    foto: "fotos radar/photo_2.jpg",
+    cor: "border-emerald-500",
+    badgeBg: "bg-emerald-100 text-emerald-800",
+    resumo: "Migrou para a autonomia por necessidade. Conhece a cidade e a mobilidade como ninguém. Sempre calculando se o mês vai fechar.",
+    quote: "Esse negócio de Arco da Inovação, pelo amor de Deus cara. Gastaram rios de dinheiro naquilo pra aliviar o trânsito? Não resolveu porra nenhuma. Continua engarrafado. Você fica parado quarenta minutos pra andar dois quilômetros. Arco da Inovação? Pra mim é Arco do Prejuízo.",
+    tags: ["Trânsito Real", "Uber/99", "Zona Leste", "Autônomo"]
+  },
+  {
+    nome: "Ricardo",
+    cargo: "Trabalhador da Indústria",
+    idade: "48 anos",
+    classe: "Classe B",
+    regiao: "Sudeste",
+    foto: "fotos radar/photo_3.jpg",
+    cor: "border-blue-600",
+    badgeBg: "bg-blue-100 text-blue-800",
+    resumo: "Chão de fábrica com orgulho. Estabilidade é o valor central. Consome com cautela e desconfia de modismos, priorizando o ritmo do trabalho.",
+    quote: "Você tá doido, é ruim demais e caro demais as coisas rapaz(...) esses dias saí com a mulher e foi quase 300 conto numa sentada lá na Vila Ema. (...) Para mim cultura sempre foi uma coisa meio de outro mundo, coisa de quem estuda, de quem tem tempo.",
+    tags: ["Metalúrgico", "Tradição", "Família", "Pé no Chão"]
+  },
+  {
+    nome: "Felipe",
+    cargo: "Cabeleireiro & Empreendedor",
+    idade: "33 anos",
+    classe: "Classe B",
+    regiao: "Oeste",
+    foto: "fotos radar/foto_cultura.jpg",
+    cor: "border-purple-500",
+    badgeBg: "bg-purple-100 text-purple-800",
+    resumo: "Empreendedor informal que usa redes sociais como vitrine. Conectado às tendências, mas com os pés firmes na realidade do seu bairro.",
+    quote: "Fui num lugar incrível em São Paulo: uma funilaria durante o dia que à noite virava balada. Tinha muita gente estilosa. Pra São José falta isso — coisas mais espontâneas. Um cara abrir uma portinha, boa música, cerveja gelada, preço justo.",
+    tags: ["Estilo Urbano", "Social Media", "Nightlife", "Criatividade"]
+  },
+  {
+    nome: "Rosângela",
+    cargo: "Garçonete Freelancer",
+    idade: "43 anos",
+    classe: "Classe D",
+    regiao: "Centro",
+    foto: "fotos radar/foto_gastronomia.jpg",
+    cor: "border-rose-500",
+    badgeBg: "bg-rose-100 text-rose-800",
+    resumo: "Trabalha por diária com vasta experiência. Circula pelo Centro com facilidade e conhece os ritmos invisíveis da cidade como ninguém.",
+    quote: "Eu trabalho em festa, evento, casamento, essas coisas tudo. Você passa a noite inteira servindo bebida pra gente rica se divertindo, enquanto eu tô de pé com dor no joelho. Quando o evento acaba vou pegar ônibus lá pras duas da manhã e voltar pro meu bairro que não tem coisa nenhuma.",
+    tags: ["Trabalho Noturno", "Diárias", "Voz da Realidade", "Centro Histórico"]
+  },
+  {
+    nome: "Roberto",
+    cargo: "Comerciante & Dono de Lanchonete",
+    idade: "52 anos",
+    classe: "Classe B",
+    regiao: "Centro",
+    foto: "fotos radar/foto_cidade.jpg",
+    cor: "border-amber-600",
+    badgeBg: "bg-amber-100 text-amber-800",
+    resumo: "Comerciante raiz, sobreviveu a crises e pandemias. Seu ponto no centro é sua identidade. Adapta-se por necessidade às mudanças do entorno.",
+    quote: "Eu fecho a lanchonete meia-noite, mas tem dias que fecho onze e quinze porque não compensa o risco. Tenho filha que trabalha à noite num hospital. Toda noite espero a mensagem 'cheguei'. Se demora cinco minutos, meu coração dispara. Insegurança não é só quando acontece com a gente, é quando você sabe que pode acontecer a qualquer momento.",
+    tags: ["Comércio de Rua", "Segurança Noturna", "Pai de Família", "Resiliência"]
+  },
+  {
+    nome: "Ísis",
+    cargo: "Estudante Universitária",
+    idade: "18 anos",
+    classe: "Classe C",
+    regiao: "Leste",
+    foto: "fotos radar/ghibli_aluguel_livre.jpg",
+    cor: "border-teal-500",
+    badgeBg: "bg-teal-100 text-teal-800",
+    resumo: "Primeira geração no ensino superior. Voz ativa no digital, representa a geração que moldará o consumo e a cultura de SJC nos próximos anos.",
+    quote: "A gente até tem restaurantes bons, mas o preço é um absurdo. Não faz sentido pagar o mesmo que em Pinheiros aqui em São José. Em São Paulo saio do restaurante e vou a uma peça de teatro. Aqui, depois do jantar, o que você faz? Dormir? A sensação é que querem que as pessoas fiquem reféns dentro de casa. Não perco uma Virada Cultural em SP.",
+    tags: ["Gen Z", "Universitária", "Evasão para SP", "Cultura Alternativa"]
+  },
+  {
+    nome: "Miriam",
+    cargo: "Diarista",
+    idade: "56 anos",
+    classe: "Classe D",
+    regiao: "Norte",
+    foto: "fotos radar/ghibli_casa_propria.jpg",
+    cor: "border-indigo-500",
+    badgeBg: "bg-indigo-100 text-indigo-800",
+    resumo: "Trabalha em casas de família e conhece a cidade pelos endereços. Prioriza filhos e saúde. Fiel ao dinheiro vivo e desconfiada de crédito.",
+    quote: "Eu trabalho limpando casa de rico a semana inteira, e lá eles vivem falando de show, de peça, de exposição. Eu fico calada, mas penso: onde é que eu vou arrumar dinheiro pra isso? Tudo é caro, ingresso, transporte, até um pastel lá na hora é caro. Aí a gente fica em casa, vê os outros se divertindo.",
+    tags: ["Trabalho Doméstico", "Zona Norte", "Economia Básica", "Mães e Avós"]
+  },
+  {
+    nome: "Carla",
+    cargo: "Professora da Rede Pública",
+    idade: "34 anos",
+    classe: "Classe C",
+    regiao: "Norte",
+    foto: "fotos radar/ghibli_aluguel_quer_casa.jpg",
+    cor: "border-red-500",
+    badgeBg: "bg-red-100 text-red-800",
+    resumo: "Concursada e estável, mas pressionada. Consumidora de cultura frustrada com a oferta local. Sente a tensão entre potencial e entrega da cidade.",
+    quote: "São José é um microcosmo do Brasil: setor de empresas ativo, uma classe com dinheiro que organiza a cidade e um governo que atua em benefício dessa classe. E à margem uma população periférica que vivencia a cidade através do trabalho. A classe trabalhadora é meio figurante da cidade, nada é pensado pra ela mas quem sustenta tudo é ela.",
+    tags: ["Educação Pública", "Consciência Social", "Servidora", "Cultura Crítica"]
+  }
+];
+
+let executiveChartInstances = {};
+
+function renderExecutivePersonasCards() {
+  const container = document.getElementById("executive-personas-grid");
+  if (!container) return;
+
+  container.innerHTML = EXECUTIVE_REPORT_PERSONAS.map(p => `
+    <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-card border-2 ${p.cor} flex flex-col justify-between space-y-4 hover:shadow-card-hover transition-all duration-300">
+      <div>
+        <div class="flex items-center gap-4">
+          <div class="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-slate-200 bg-slate-100">
+            <img 
+              src="${p.foto}" 
+              alt="${p.nome}" 
+              class="w-full h-full object-cover"
+              onerror="this.src='fotos radar/photo_1.jpg'"
+            />
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              <h3 class="text-lg font-black text-brand-900 leading-tight">${p.nome}</h3>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-black ${p.badgeBg}">${p.classe}</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">Zona ${p.regiao}</span>
+            </div>
+            <p class="text-xs font-bold text-brand-700 mt-0.5">${p.cargo} &bull; ${p.idade}</p>
+            <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 font-medium">${p.resumo}</p>
+          </div>
+        </div>
+
+        <!-- Citação Real / Quote Etnográfico -->
+        <blockquote class="mt-4 p-4 rounded-2xl bg-slate-50 border-l-4 ${p.cor} text-xs text-slate-700 italic font-normal leading-relaxed">
+          "${p.quote}"
+        </blockquote>
+      </div>
+
+      <!-- Tags de Comportamento -->
+      <div class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100">
+        ${p.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-semibold">#${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+window.renderExecutiveReportCharts = function(records) {
+  if (!records || records.length === 0) return;
+
+  renderExecutivePersonasCards();
+
+  const total = records.length;
+
+  // Atualizar contadores do Header do Relatório
+  const repStatSample = document.getElementById("rep-stat-sample");
+  const repStatMargin = document.getElementById("rep-stat-margin");
+  if (repStatSample) repStatSample.textContent = total.toLocaleString("pt-BR");
+  if (repStatMargin) repStatMargin.textContent = "±" + calculateMarginOfError(total) + "%";
+
+  // 1. Contagens de Orgulho e Evasão
+  let countOrgulho = 0;
+  let countEvasao = 0;
+  let countOpcoesSim = 0;
+  let countMatchNao = 0;
+  let countFreqRegular = 0;
+  let countGastariaMais = 0;
+
+  const regiaoLazerCounts = {};
+  const barreirasCounts = {};
+  const mobilidadeCounts = {};
+  const musicaCounts = {};
+
+  records.forEach(r => {
+    // Orgulho
+    const pride = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
+    if (pride && (pride.toLowerCase().includes("sim") || pride.toLowerCase().includes("muito"))) countOrgulho++;
+
+    // Evasão
+    const evasao = getField(r, ["Você costuma ir para outras cidades para passear ou comer fora?", "outras_cidades"]);
+    if (evasao && !evasao.toLowerCase().includes("não") && !evasao.toLowerCase().includes("raramente") && !evasao.toLowerCase().includes("nunca")) {
+      countEvasao++;
+    }
+
+    // Opções
+    const opcoes = getField(r, ["Você acha que a cidade tem boas opções de cultura e eventos?", "opcoes_cultura"]);
+    if (opcoes && opcoes.toLowerCase().startsWith("sim")) countOpcoesSim++;
+
+    // Match de Eventos
+    const match = getField(r, ["Você sente que as festas e eventos da cidade combinam com o seu jeito?", "festas_combinam"]);
+    if (match && match.toLowerCase().startsWith("não")) countMatchNao++;
+
+    // Frequência
+    const freq = getField(r, ["Com que frequência você sai para passear ou se divertir na cidade?", "frequencia_lazer"]);
+    if (freq && !freq.toLowerCase().includes("raramente") && !freq.toLowerCase().includes("não costumo") && !freq.toLowerCase().includes("nunca")) {
+      countFreqRegular++;
+    }
+
+    // Gastaria mais
+    const gastaria = getField(r, ["Se tivesse mais opções de lazer que você gosta, você gastaria mais com isso?", "gastaria_mais_lazer"]);
+    if (gastaria && gastaria.toLowerCase().startsWith("sim")) countGastariaMais++;
+
+    // Região de Lazer
+    const regLazer = getField(r, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]);
+    if (regLazer) {
+      let k = regLazer.replace("Região ", "").replace("Zona ", "").trim();
+      regiaoLazerCounts[k] = (regiaoLazerCounts[k] || 0) + 1;
+    }
+
+    // Barreiras Noite
+    const barreira = getField(r, ["Qual a maior dificuldade para sair à noite em São José?", "dificuldade_noite"]);
+    if (barreira) {
+      const parts = barreira.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
+      parts.forEach(p => {
+        let clean = p.length > 28 ? p.substring(0, 25) + "..." : p;
+        barreirasCounts[clean] = (barreirasCounts[clean] || 0) + 1;
+      });
+    }
+
+    // Mobilidade
+    const mob = getField(r, ["Quais meios de transporte você usa? (marque todos que utilizar)", "meios_transporte"]);
+    if (mob) {
+      const parts = mob.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
+      parts.forEach(p => {
+        let clean = p;
+        if (clean.includes("Carro")) clean = "Carro Próprio";
+        else if (clean.includes("Uber") || clean.includes("99") || clean.includes("aplicativo")) clean = "Apps (Uber/99)";
+        else if (clean.includes("Ônibus") || clean.includes("público")) clean = "Ônibus Coletivo";
+        else if (clean.includes("Linha Verde") || clean.includes("VLP")) clean = "Linha Verde";
+        else if (clean.includes("Bicicleta") || clean.includes("Bike")) clean = "Bicicleta / Patinete";
+        else if (clean.includes("Moto")) clean = "Moto Própria";
+        else if (clean.length > 20) clean = clean.substring(0, 18) + "...";
+        mobilidadeCounts[clean] = (mobilidadeCounts[clean] || 0) + 1;
+      });
+    }
+
+    // Música
+    const mus = getField(r, ["Quais tipos de música você mais gosta de ouvir?", "generos_musicais"]);
+    if (mus) {
+      const parts = mus.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
+      parts.forEach(p => {
+        let clean = p;
+        if (clean.toLowerCase().includes("rock")) clean = "Rock";
+        else if (clean.toLowerCase().includes("sertanejo")) clean = "Sertanejo";
+        else if (clean.toLowerCase().includes("pop")) clean = "Pop";
+        else if (clean.toLowerCase().includes("mpb")) clean = "MPB";
+        else if (clean.toLowerCase().includes("pagode") || clean.toLowerCase().includes("samba")) clean = "Samba/Pagode";
+        else if (clean.toLowerCase().includes("eletr")) clean = "Eletrônica";
+        else if (clean.toLowerCase().includes("funk")) clean = "Funk";
+        else if (clean.toLowerCase().includes("rap") || clean.toLowerCase().includes("hip")) clean = "Hip-Hop/Rap";
+        else if (clean.toLowerCase().includes("jazz") || clean.toLowerCase().includes("blues")) clean = "Jazz/Blues";
+        else if (clean.length > 16) clean = clean.substring(0, 14) + "...";
+        musicaCounts[clean] = (musicaCounts[clean] || 0) + 1;
+      });
+    }
+  });
+
+  const pctOrgulho = total > 0 ? ((countOrgulho / total) * 100).toFixed(1) : "74.2";
+  const pctEvasao = total > 0 ? ((countEvasao / total) * 100).toFixed(1) : "66.2";
+  const pctOpcoes = total > 0 ? ((countOpcoesSim / total) * 100).toFixed(1) : "50.8";
+  const pctMatchNao = total > 0 ? ((countMatchNao / total) * 100).toFixed(1) : "60.1";
+  const pctFreq = total > 0 ? ((countFreqRegular / total) * 100).toFixed(1) : "84.7";
+  const pctGastaria = total > 0 ? ((countGastariaMais / total) * 100).toFixed(1) : "69.5";
+
+  // Atualizar DOM values
+  const elValOrgulho = document.getElementById("rep-val-orgulho");
+  const elValEvasao = document.getElementById("rep-val-evasao");
+  const elBarOrgulho = document.getElementById("rep-bar-orgulho");
+  const elBarEvasao = document.getElementById("rep-bar-evasao");
+
+  if (elValOrgulho) elValOrgulho.textContent = pctOrgulho + "%";
+  if (elValEvasao) elValEvasao.textContent = pctEvasao + "%";
+  if (elBarOrgulho) elBarOrgulho.style.width = Math.min(100, Math.max(5, pctOrgulho)) + "%";
+  if (elBarEvasao) elBarEvasao.style.width = Math.min(100, Math.max(5, pctEvasao)) + "%";
+
+  const elPilarOpcoes = document.getElementById("rep-pilar-opcoes");
+  const elPilarMatch = document.getElementById("rep-pilar-match");
+  const elPilarFreq = document.getElementById("rep-pilar-freq");
+  const elPilarDisp = document.getElementById("rep-pilar-disp");
+
+  if (elPilarOpcoes) elPilarOpcoes.textContent = pctOpcoes + "% Sim";
+  if (elPilarMatch) elPilarMatch.textContent = pctMatchNao + "% Não";
+  if (elPilarFreq) elPilarFreq.textContent = pctFreq + "% Saem";
+  if (elPilarDisp) elPilarDisp.textContent = pctGastaria + "% Gastariam+";
+
+  // 1. Chart Orgulho vs Evasão (Doughnut)
+  renderReportChartDoughnut("repChartOrgulhoEvasao", [
+    { label: "Orgulho da Cidade", value: countOrgulho, color: "#0B2545" },
+    { label: "Evasão para Outras Cidades", value: countEvasao, color: "#F43F5E" },
+    { label: "Retenção / Outros", value: Math.max(0, total - countOrgulho), color: "#94A3B8" }
+  ]);
+
+  // 2. Chart Concentração Regional Lazer
+  const sortedRegiao = Object.entries(regiaoLazerCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  renderReportChartBar("repChartLazerRegiao", sortedRegiao.map(e => e[0]), sortedRegiao.map(e => e[1]), "#0284C7", total);
+
+  // 3. Chart Barreiras da Noite
+  const sortedBarreiras = Object.entries(barreirasCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  renderReportChartBar("repChartBarreirasNoite", sortedBarreiras.map(e => e[0]), sortedBarreiras.map(e => e[1]), "#E11D48", total);
+
+  // 4. Chart Mobilidade Urbana
+  const sortedMob = Object.entries(mobilidadeCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  renderReportChartBar("repChartMobilidade", sortedMob.map(e => e[0]), sortedMob.map(e => e[1]), "#059669", total);
+
+  // 5. Chart Música
+  const sortedMusica = Object.entries(musicaCounts).sort((a, b) => b[1] - a[1]).slice(0, 6);
+  renderReportChartBar("repChartMusica", sortedMusica.map(e => e[0]), sortedMusica.map(e => e[1]), "#7C3AED", total);
+};
+
+function renderReportChartDoughnut(canvasId, items) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  if (executiveChartInstances[canvasId]) {
+    executiveChartInstances[canvasId].destroy();
+  }
+
+  const ctx = canvas.getContext("2d");
+  executiveChartInstances[canvasId] = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: items.map(i => i.label),
+      datasets: [{
+        data: items.map(i => i.value),
+        backgroundColor: items.map(i => i.color),
+        borderWidth: 2,
+        borderColor: "#FFFFFF"
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: "65%",
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { boxWidth: 12, font: { family: "Montserrat", size: 10, weight: "600" } }
+        },
+        datalabels: {
+          display: true,
+          color: "#FFFFFF",
+          font: { family: "Montserrat", weight: "bold", size: 10 },
+          formatter: (value, ctx) => {
+            const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+            if (!sum || value === 0) return "";
+            const pct = ((value / sum) * 100).toFixed(0);
+            return pct > 8 ? pct + "%" : "";
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderReportChartBar(canvasId, labels, data, color, total) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  if (executiveChartInstances[canvasId]) {
+    executiveChartInstances[canvasId].destroy();
+  }
+
+  const ctx = canvas.getContext("2d");
+  executiveChartInstances[canvasId] = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: color,
+        borderRadius: 8,
+        barPercentage: 0.65
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: "end",
+          align: "end",
+          color: "#1E293B",
+          font: { family: "Montserrat", weight: "bold", size: 10 },
+          formatter: (value) => {
+            const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
+            return value + " (" + pct + "%)";
+          }
+        }
+      },
+      scales: {
+        x: {
+          display: false,
+          grid: { display: false }
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            font: { family: "Montserrat", size: 11, weight: "600" },
+            color: "#334155"
+          }
+        }
+      }
+    }
+  });
+}
+
