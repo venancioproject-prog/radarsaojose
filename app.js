@@ -258,18 +258,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Slideshow Elegante de Fundo na Tela de Login (Crossfade lento a cada 6 segundos)
+  // Slideshow Dinâmico de Fundo na Tela de Login (Início imediato + troca a cada 3s)
   let currentSlideIdx = 0;
   const slides = document.querySelectorAll(".login-bg-slide");
   if (slides && slides.length > 1) {
-    setInterval(() => {
+    function advanceSlide() {
       const loginScreen = document.getElementById("login-screen");
       if (loginScreen && !loginScreen.classList.contains("hidden")) {
         slides[currentSlideIdx].classList.remove("active");
         currentSlideIdx = (currentSlideIdx + 1) % slides.length;
         slides[currentSlideIdx].classList.add("active");
       }
-    }, 6000);
+    }
+    // Primeiro avanço rápido aos 1.5s e depois a cada 3.2s
+    setTimeout(() => {
+      advanceSlide();
+      setInterval(advanceSlide, 3200);
+    }, 1500);
   }
 
   if (!supabaseClient && typeof initSupabase === "function") initSupabase();

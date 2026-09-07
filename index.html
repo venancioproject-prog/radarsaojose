@@ -112,19 +112,19 @@
       min-height: 350px;
       height: 350px;
     }
-    /* Slideshow Elegante de Fotos da Cidade com Fade Lento (Ken Burns effect) */
+    /* Slideshow Dinâmico de Fotos da Cidade com Fade Ágil e Contínuo */
     .login-bg-slide {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transform: scale(1.04);
-      transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), transform 8s ease-out;
+      transform: scale(1.05);
+      transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1), transform 3.5s ease-out;
       will-change: opacity, transform;
     }
     .login-bg-slide.active {
-      opacity: 0.82;
+      opacity: 0.85;
       transform: scale(1);
     }
   </style>
@@ -659,6 +659,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=10.1"></script>
+  <script src="app.js?v=10.2"></script>
 </body>
 </html>
