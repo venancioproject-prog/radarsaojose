@@ -649,7 +649,7 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "4. Cultura, Lazer & Vida Noturna",
-      subtitle: "Oferta cultural, festas, comparativo regional, opções de lazer, dificuldades noturnas e gastronomia",
+      subtitle: "Oferta cultural, festas, comparativo regional, opções de lazer, dificuldades noturnas, gastronomia e influenciadores",
       questions: (() => {
         const qList = questionList.filter(q => 
           !/mais falta|o que falta/i.test(q) && 
@@ -659,7 +659,8 @@ function processAndRenderDynamicCharts(records) {
           !(/frequência/i.test(q) && /sai/i.test(q)) && 
           !(/região/i.test(q) && /frequenta/i.test(q)) && 
           !(/bairro/i.test(q) && /mora/i.test(q)) &&
-          (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q))
+          !/até 3 influenciadores|ate 3 influenciadores/i.test(q) &&
+          (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria|viu um influenciador|influenciador da cidade indicando/i.test(q))
         );
         const idxDificuldade = qList.findIndex(q => /maior dificuldade|sair à noite|sair a noite/i.test(q));
         const idxGastaria = qList.findIndex(q => /mais opções de lazer que você gosta|mais opcoes de lazer|gastaria/i.test(q));
@@ -673,13 +674,14 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "5. Mídia, Músicas & Streamings",
-      subtitle: "Gêneros musicais, plataformas de streaming, redes sociais para descoberta e impacto de influenciadores",
+      subtitle: "Gêneros musicais, plataformas de streaming, fontes de notícias e redes sociais para descoberta",
       questions: questionList.filter(q => 
         !/animal|pet|bicho|anima/i.test(q) && 
         !/bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q) &&
         !/namoro|financeiramente/i.test(q) &&
         !/até 3 influenciadores|ate 3 influenciadores/i.test(q) &&
-        (/música|serviços|filmes|rede social|influenciador|notícias/i.test(q))
+        !/viu um influenciador|influenciador da cidade indicando/i.test(q) &&
+        (/música|serviços|filmes|rede social|notícias/i.test(q))
       )
     },
     {
