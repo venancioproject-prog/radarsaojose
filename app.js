@@ -638,7 +638,7 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "4. Cultura, Lazer & Vida Noturna",
-      subtitle: "Oferta cultural, festas, comparativo regional, dificuldades noturnas e gastronomia",
+      subtitle: "Oferta cultural, festas, comparativo regional, opções de lazer, dificuldades noturnas e gastronomia",
       questions: questionList.filter(q => 
         !/mais falta|o que falta/i.test(q) && 
         !/animal|pet|bicho|anima/i.test(q) && 
@@ -646,13 +646,17 @@ function processAndRenderDynamicCharts(records) {
         !/outras cidades/i.test(q) && 
         !(/frequência/i.test(q) && /sai/i.test(q)) && 
         !(/região/i.test(q) && /frequenta/i.test(q)) && 
-        (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar fotos/i.test(q))
+        (/cultura|festas|vizinhas|dificuldade|restaurante|bar|bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q))
       )
     },
     {
       title: "5. Mídia, Músicas, Streamings & Comportamento",
       subtitle: "Gêneros musicais, canais de streaming, redes sociais, influencers e comportamento",
-      questions: questionList.filter(q => !/animal|pet|bicho|anima/i.test(q) && (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente|gastaria/i.test(q)))
+      questions: questionList.filter(q => 
+        !/animal|pet|bicho|anima/i.test(q) && 
+        !/bonito para tirar foto|tirar foto|tirar fotos|opções de lazer que você gosta|opcoes de lazer que voce gosta|gastaria/i.test(q) &&
+        (/música|serviços|filmes|rede social|influenciador|notícias|namoro|financeiramente/i.test(q))
+      )
     },
     {
       title: "6. Política & Posicionamento",
@@ -755,8 +759,11 @@ function processAndRenderDynamicCharts(records) {
       if (displayTitle.toLowerCase().includes("faz você escolher um restaurante") || displayTitle.toLowerCase().includes("escolher um restaurante ou bar")) {
         displayTitle = "O que faz você escolher um restaurante ou bar?";
       }
-      if (displayTitle.toLowerCase().includes("bonito para tirar fotos") || displayTitle.toLowerCase().includes("tirar fotos e postar")) {
+      if (displayTitle.toLowerCase().includes("bonito para tirar foto") || displayTitle.toLowerCase().includes("tirar fotos e postar") || displayTitle.toLowerCase().includes("tirar foto")) {
         displayTitle = "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?";
+      }
+      if (displayTitle.toLowerCase().includes("mais opções de lazer que você gosta") || displayTitle.toLowerCase().includes("mais opcoes de lazer") || (displayTitle.toLowerCase().includes("opções de lazer") && displayTitle.toLowerCase().includes("gastar"))) {
+        displayTitle = "Se tivesse mais opções de lazer que você gosta, você gastaria mais dinheiro na cidade?";
       }
       if (displayTitle.toLowerCase().includes("cidades vizinhas") || displayTitle.toLowerCase().includes("opções de lazer daqui")) {
         displayTitle = "Comparando com as cidades vizinhas, o que você acha das opções de lazer?";
