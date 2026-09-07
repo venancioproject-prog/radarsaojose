@@ -2727,6 +2727,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     if (k.includes("netflix")) {
       return {
         logo: "fotos radar/logos_streaming_png/Netflix.png",
+        icon: "fa-solid fa-play",
         title: "Netflix",
         desc: "Séries, Filmes & Originais",
         badgeBg: "bg-red-50 text-red-700 border-red-200",
@@ -2738,50 +2739,55 @@ function renderStreamingLogosWidget(dataMap, total) {
     if (k.includes("spotify")) {
       return {
         logo: "fotos radar/logos_streaming_png/Spotify.png",
+        icon: "fa-brands fa-spotify",
         title: "Spotify",
         desc: "Streaming de Áudio & Podcasts",
         badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
         barColor: "bg-emerald-500",
         border: "border-emerald-100 hover:border-emerald-300",
-        logoBg: "bg-white p-1"
+        logoBg: "bg-[#121212] p-1.5"
       };
     }
     if (k.includes("prime") || k.includes("amazon")) {
       return {
         logo: "fotos radar/logos_streaming_png/Amazon_Prime_Video.png",
+        icon: "fa-brands fa-amazon",
         title: "Amazon Prime Video",
         desc: "Filmes, Séries & Frete Prime",
         badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
         barColor: "bg-cyan-600",
         border: "border-cyan-100 hover:border-cyan-300",
-        logoBg: "bg-slate-900 p-1.5"
+        logoBg: "bg-[#00050D] p-1.5"
       };
     }
     if (k.includes("max") || k.includes("hbo")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Max.png",
+        // High-contrast official HBO Max SVG icon
+        customSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full"><rect width="100" height="100" rx="16" fill="#002BE7"/><text x="50" y="64" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="34" fill="#FFFFFF" text-anchor="middle" letter-spacing="-1">max</text></svg>',
         title: "Max (HBO)",
         desc: "HBO, Warner Bros & DC",
         badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
         barColor: "bg-blue-600",
         border: "border-blue-100 hover:border-blue-300",
-        logoBg: "bg-slate-950 p-1.5"
+        logoBg: "bg-[#002BE7]"
       };
     }
     if (k.includes("disney")) {
       return {
         logo: "fotos radar/logos_streaming_png/Disney_Plus.png",
+        icon: "fa-solid fa-wand-magic-sparkles",
         title: "Disney+",
         desc: "Disney, Marvel, Star Wars & Pixar",
         badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
         barColor: "bg-indigo-600",
         border: "border-indigo-100 hover:border-indigo-300",
-        logoBg: "bg-slate-900 p-1.5"
+        logoBg: "bg-[#040714] p-1.5"
       };
     }
     if (k.includes("globo") || k.includes("globoplay")) {
       return {
         logo: "fotos radar/logos_streaming_png/Globoplay.png",
+        icon: "fa-solid fa-play",
         title: "Globoplay",
         desc: "Novelas, Ao Vivo & Séries",
         badgeBg: "bg-orange-50 text-orange-700 border-orange-200",
@@ -2793,6 +2799,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     if (k.includes("youtube") || k.includes("yt music")) {
       return {
         logo: "fotos radar/logos_streaming_png/YouTube_Music.png",
+        icon: "fa-brands fa-youtube",
         title: "YouTube Music",
         desc: "Músicas, Clipes & Shows",
         badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
@@ -2804,6 +2811,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     if (k.includes("apple") || k.includes("tv+")) {
       return {
         logo: "fotos radar/logos_streaming_png/Apple_TV_Plus.png",
+        icon: "fa-brands fa-apple",
         title: "Apple TV+",
         desc: "Apple Originals Premiados",
         badgeBg: "bg-purple-50 text-purple-700 border-purple-200",
@@ -2812,14 +2820,80 @@ function renderStreamingLogosWidget(dataMap, total) {
         logoBg: "bg-slate-950 p-1.5"
       };
     }
+    if (k.includes("deezer")) {
+      return {
+        customSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full p-1.5"><rect width="100" height="100" rx="16" fill="#0F0D13"/><rect x="18" y="56" width="9" height="16" rx="2" fill="#FEAA2D"/><rect x="31" y="46" width="9" height="26" rx="2" fill="#A238FF"/><rect x="44" y="32" width="9" height="40" rx="2" fill="#FF0055"/><rect x="57" y="42" width="9" height="30" rx="2" fill="#00C7F2"/><rect x="70" y="52" width="9" height="20" rx="2" fill="#2BEB7B"/></svg>',
+        title: "Deezer",
+        desc: "Streaming de Áudio & Flow",
+        badgeBg: "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200",
+        barColor: "bg-fuchsia-600",
+        border: "border-fuchsia-100 hover:border-fuchsia-300",
+        logoBg: "bg-[#0F0D13]"
+      };
+    }
+    if (k.includes("paramount")) {
+      return {
+        customSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full p-1.5"><rect width="100" height="100" rx="16" fill="#0064FF"/><path d="M50 22L28 66h44L50 22zm0 18l12 24H38l12-24z" fill="#FFFFFF"/><text x="50" y="86" font-family="Arial, sans-serif" font-weight="900" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">PARAMOUNT+</text></svg>',
+        title: "Paramount+",
+        desc: "Filmes, Séries & CBS",
+        badgeBg: "bg-sky-50 text-sky-700 border-sky-200",
+        barColor: "bg-sky-600",
+        border: "border-sky-100 hover:border-sky-300",
+        logoBg: "bg-[#0064FF]"
+      };
+    }
+    if (k.includes("star+") || k.includes("star plus") || k.includes("star +")) {
+      return {
+        customSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full p-1"><rect width="100" height="100" rx="16" fill="#111116"/><text x="40" y="60" font-family="Arial, sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" text-anchor="middle">STAR</text><text x="74" y="58" font-family="Arial, sans-serif" font-weight="900" font-size="26" fill="#FE5000" text-anchor="middle">+</text><polygon points="40,24 43,33 52,33 45,38 48,47 40,42 32,47 35,38 28,33 37,33" fill="#FE5000"/></svg>',
+        title: "Star+",
+        desc: "ESPN, Séries & Esportes",
+        badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
+        barColor: "bg-[#FE5000]",
+        border: "border-amber-100 hover:border-amber-300",
+        logoBg: "bg-[#111116]"
+      };
+    }
+    if (k.includes("game pass") || k.includes("xbox")) {
+      return {
+        customSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full p-1.5"><rect width="100" height="100" rx="16" fill="#107C10"/><circle cx="50" cy="50" r="30" fill="none" stroke="#FFFFFF" stroke-width="4"/><path d="M34 38c5 5 11 11 16 22 5-11 11-17 16-22-4-5-9-8-16-8s-12 3-16 8z" fill="#FFFFFF"/><path d="M28 48c2 7 7 14 14 18-3-5-5-12-7-18h-7zm44 0c-2 6-4 13-7 18 7-4 12-11 14-18h-7z" fill="#FFFFFF"/></svg>',
+        title: "Xbox Game Pass",
+        desc: "Jogos para PC & Console",
+        badgeBg: "bg-green-50 text-green-700 border-green-200",
+        barColor: "bg-green-600",
+        border: "border-green-100 hover:border-green-300",
+        logoBg: "bg-[#107C10]"
+      };
+    }
+    if (k.includes("playstation") || k.includes("ps plus") || k.includes("psn")) {
+      return {
+        customSvg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-full h-full p-1.5"><rect width="100" height="100" rx="16" fill="#003791"/><path d="M50 24c4 0 7 2 7 5v38c-3 2-6 3-9 3-4 0-7-2-7-5V32c0-5 4-8 9-8zm14 26c5-2 10-1 13 2 3 3 2 7-2 9-5 2-10 1-13-2l2-9zm-28 6c-5-2-10-1-13 2-3 3-2 7 2 9 5 2 10 1 13-2l-2-9z" fill="#FFFFFF"/><text x="50" y="86" font-family="Arial, sans-serif" font-weight="900" font-size="12" fill="#FFCC00" text-anchor="middle" letter-spacing="1">PS PLUS</text></svg>',
+        title: "PlayStation Plus",
+        desc: "Jogos & Multiplayer PS5/PS4",
+        badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
+        barColor: "bg-[#003791]",
+        border: "border-blue-100 hover:border-blue-300",
+        logoBg: "bg-[#003791]"
+      };
+    }
+    if (k.includes("nenhum") || k.includes("não uso") || k.includes("nao uso")) {
+      return {
+        customSvg: '<div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-500"><i class="fa-solid fa-ban text-xl"></i></div>',
+        title: "Não usa nenhum",
+        desc: "Sem assinatura de streaming",
+        badgeBg: "bg-slate-100 text-slate-600 border-slate-200",
+        barColor: "bg-slate-400",
+        border: "border-slate-200 hover:border-slate-300",
+        logoBg: "bg-slate-100"
+      };
+    }
     return {
-      logo: "fotos radar/logos_streaming_png/Netflix.png",
+      customSvg: '<div class="w-full h-full flex items-center justify-center bg-brand-900 text-white"><i class="fa-solid fa-film text-lg"></i></div>',
       title: key,
       desc: "Serviço de Streaming",
       badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
       barColor: "bg-brand-900",
       border: "border-slate-200 hover:border-slate-300",
-      logoBg: "bg-slate-900 p-1"
+      logoBg: "bg-slate-900"
     };
   }
 
@@ -2834,11 +2908,18 @@ function renderStreamingLogosWidget(dataMap, total) {
     const pct = totalRespondents > 0 ? ((count / totalRespondents) * 100).toFixed(1) : "0.0";
     const cfg = getStreamingConfig(key);
 
+    let logoHtml = '';
+    if (cfg.customSvg) {
+      logoHtml = cfg.customSvg;
+    } else {
+      logoHtml = '<img src="' + cfg.logo + '" alt="' + cfg.title + '" class="w-full h-full object-contain drop-shadow-2xs transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/logo.png\';" />';
+    }
+
     html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex flex-col gap-2 transition-all group">' +
       '<div class="flex items-center justify-between gap-3">' +
         '<div class="flex items-center gap-3 min-w-0 flex-1">' +
           '<div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl overflow-hidden ' + cfg.logoBg + ' shadow-2xs flex-shrink-0 flex items-center justify-center border border-slate-200/60">' +
-            '<img src="' + cfg.logo + '" alt="' + cfg.title + '" class="w-full h-full object-contain drop-shadow-2xs transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/logo.png\';" />' +
+            logoHtml +
           '</div>' +
           '<div class="min-w-0 flex-1">' +
             '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight truncate" title="' + cfg.title + '">' + cfg.title + '</h4>' +
