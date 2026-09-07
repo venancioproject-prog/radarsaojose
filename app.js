@@ -1090,6 +1090,30 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
+      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR (LEAFLET)
+      if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
+        const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
+          '<div>' +
+            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real Oficial de SJC • Concentração & Frequência Regional</p>' +
+          '</div>' +
+          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0">' +
+            '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
+          '</span>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
+          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) +
+        '</div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText);
+        }, 120);
+        return;
+      }
+
       // 12. ORGULHO DE MORAR EM SÃO JOSÉ (Sim ou Não com Imagem de Expressão e Cards):
       if (qLower.includes("orgulho") && (qLower.includes("morar") || qLower.includes("são josé") || qLower.includes("sao jose") || qLower.includes("cidade"))) {
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
@@ -2817,6 +2841,323 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
   '</div>';
 
   return html;
+}
+
+// 7.6.1. MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR DAS REGIÕES (LEAFLET)
+window.sjcLeafletMaps = window.sjcLeafletMaps || {};
+
+function calculateSjcRegionStats(dataMap, total, records, questionText) {
+  let centroOeste = 0;
+  let sul = 0;
+  let leste = 0;
+  let norte = 0;
+  let todas = 0;
+  let countSum = 0;
+
+  if (records && records.length > 0) {
+    records.forEach(r => {
+      const val = (questionText ? getField(r, [questionText, "Qual região da cidade você mais frequenta quando sai de casa?", "região", "regiao_frequenta"]) : "").toLowerCase().trim();
+      if (val) {
+        countSum++;
+        if (val.includes("oeste") || val.includes("centro") || val.includes("vila ema") || val.includes("aquarius") || val.includes("esplanada")) {
+          centroOeste++;
+        } else if (val.includes("sul") || val.includes("satélite") || val.includes("bosque")) {
+          sul++;
+        } else if (val.includes("todas") || val.includes("qualquer") || val.includes("todas as regiões")) {
+          todas++;
+        } else if (val.includes("leste") || val.includes("vista verde") || val.includes("eugênio") || val.includes("novo horizonte")) {
+          leste++;
+        } else if (val.includes("norte") || val.includes("santana")) {
+          norte++;
+        } else {
+          centroOeste++;
+        }
+      }
+    });
+  }
+
+  if (countSum === 0 && dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, cnt]) => {
+      const kl = k.toLowerCase().trim();
+      countSum += cnt;
+      if (kl.includes("oeste") || kl.includes("centro")) centroOeste += cnt;
+      else if (kl.includes("sul")) sul += cnt;
+      else if (kl.includes("todas")) todas += cnt;
+      else if (kl.includes("leste")) leste += cnt;
+      else if (kl.includes("norte")) norte += cnt;
+      else centroOeste += cnt;
+    });
+  }
+
+  const base = countSum > 0 ? countSum : (total || 1);
+  return {
+    total: base,
+    centroOeste: { count: centroOeste, pct: ((centroOeste / base) * 100).toFixed(1) },
+    sul: { count: sul, pct: ((sul / base) * 100).toFixed(1) },
+    todas: { count: todas, pct: ((todas / base) * 100).toFixed(1) },
+    leste: { count: leste, pct: ((leste / base) * 100).toFixed(1) },
+    norte: { count: norte, pct: ((norte / base) * 100).toFixed(1) }
+  };
+}
+
+function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) {
+  const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
+
+  let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
+  
+  // Container do Mapa Real Leaflet
+  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[310px] sm:min-h-[340px]">' +
+    '<div id="' + mapContainerId + '" class="w-full h-[310px] sm:h-[340px] z-0"></div>' +
+    // Badge flutuante de cobertura
+    '<div class="absolute top-2.5 right-2.5 z-10 pointer-events-none">' +
+      '<div class="bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200/80 shadow-md text-right">' +
+        '<p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">São José dos Campos</p>' +
+        '<p class="text-xs font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+
+  // Legenda Interativa e Ranking de Concentração
+  html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-full pt-1">' +
+    // 1. Centro / Oeste
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100/80 border border-amber-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-[10px] font-bold text-amber-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
+        '<span class="text-xs font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[9px] font-medium text-amber-700/80 truncate">Aquarius, Vila Ema, Centro</p>' +
+    '</button>' +
+
+    // 2. Zona Sul
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2 rounded-xl bg-blue-50 hover:bg-blue-100/80 border border-blue-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-[10px] font-bold text-blue-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Zona Sul</span>' +
+        '<span class="text-xs font-black text-blue-800">' + stats.sul.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[9px] font-medium text-blue-700/80 truncate">Satélite, Bosque, Pq. Ind.</p>' +
+    '</button>' +
+
+    // 3. Todas as Regiões
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2 rounded-xl bg-cyan-50 hover:bg-cyan-100/80 border border-cyan-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-[10px] font-bold text-cyan-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
+        '<span class="text-xs font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[9px] font-medium text-cyan-700/80 truncate">Circulação Geral</p>' +
+    '</button>' +
+
+    // 4. Zona Leste
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2 rounded-xl bg-sky-50 hover:bg-sky-100/80 border border-sky-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-[10px] font-bold text-sky-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-500"></span> Zona Leste</span>' +
+        '<span class="text-xs font-black text-sky-800">' + stats.leste.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[9px] font-medium text-sky-700/80 truncate">Vista Verde, Eugênio Melo</p>' +
+    '</button>' +
+
+    // 5. Zona Norte
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100/80 border border-indigo-200/90 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-[10px] font-bold text-indigo-900 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
+        '<span class="text-xs font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[9px] font-medium text-indigo-700/80 truncate">Santana, Altos Santana</p>' +
+    '</button>' +
+  '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+window.focusSjcRegion = function(mapContainerId, coords, zoomLevel) {
+  const map = window.sjcLeafletMaps[mapContainerId];
+  if (map) {
+    map.flyTo(coords, zoomLevel || 13, { duration: 1.2 });
+  }
+};
+
+function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText) {
+  const container = document.getElementById(mapContainerId);
+  if (!container || typeof L === "undefined") return;
+
+  // Limpar mapa anterior se já inicializado no mesmo ID
+  if (window.sjcLeafletMaps[mapContainerId]) {
+    try {
+      window.sjcLeafletMaps[mapContainerId].remove();
+    } catch (e) {}
+    delete window.sjcLeafletMaps[mapContainerId];
+  }
+
+  const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
+
+  // Inicializar o Mapa Centralizado em São José dos Campos
+  const map = L.map(mapContainerId, {
+    center: [-23.208, -45.885],
+    zoom: 11.5,
+    minZoom: 10,
+    maxZoom: 16,
+    scrollWheelZoom: false,
+    zoomControl: true,
+    attributionControl: false
+  });
+
+  window.sjcLeafletMaps[mapContainerId] = map;
+
+  // Tile layer institucional ultra-limpo (CartoDB Voyager)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19,
+    subdomains: 'abcd'
+  }).addTo(map);
+
+  // 1. Região Centro / Oeste (Concentração Máxima: 41.7%)
+  const centroOesteHalo = L.circle([-23.198, -45.908], {
+    radius: 3400,
+    color: "#F59E0B",
+    fillColor: "#F59E0B",
+    fillOpacity: 0.18,
+    weight: 0
+  }).addTo(map);
+
+  const centroOesteCore = L.circle([-23.198, -45.908], {
+    radius: 2100,
+    color: "#D97706",
+    fillColor: "#F59E0B",
+    fillOpacity: 0.45,
+    weight: 2
+  }).addTo(map);
+
+  centroOesteCore.bindPopup(`
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Centro / Região Oeste</strong>
+      </div>
+      <p class="text-base font-black text-amber-700">${stats.centroOeste.pct}% de Concentração</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.centroOeste.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Jd. Aquarius, Vila Ema, Esplanada, Urbanova, Centro</p>
+    </div>
+  `);
+
+  // Marcador HTML com Badge
+  const centroIcon = L.divIcon({
+    className: 'custom-map-badge',
+    html: `<div style="background:#F59E0B; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">🔥 ${stats.centroOeste.pct}%</div>`,
+    iconSize: [0, 0]
+  });
+  L.marker([-23.198, -45.908], { icon: centroIcon }).addTo(map).bindPopup(centroOesteCore.getPopup());
+
+  // 2. Zona Sul (Alta Concentração: 28.3%)
+  const sulHalo = L.circle([-23.248, -45.892], {
+    radius: 3000,
+    color: "#0284C7",
+    fillColor: "#0284C7",
+    fillOpacity: 0.16,
+    weight: 0
+  }).addTo(map);
+
+  const sulCore = L.circle([-23.248, -45.892], {
+    radius: 1900,
+    color: "#0369A1",
+    fillColor: "#0284C7",
+    fillOpacity: 0.42,
+    weight: 2
+  }).addTo(map);
+
+  sulCore.bindPopup(`
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Zona Sul</strong>
+      </div>
+      <p class="text-base font-black text-blue-700">${stats.sul.pct}% de Concentração</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.sul.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Floradas</p>
+    </div>
+  `);
+
+  const sulIcon = L.divIcon({
+    className: 'custom-map-badge',
+    html: `<div style="background:#0284C7; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.sul.pct}%</div>`,
+    iconSize: [0, 0]
+  });
+  L.marker([-23.248, -45.892], { icon: sulIcon }).addTo(map).bindPopup(sulCore.getPopup());
+
+  // 3. Zona Leste (11.5%)
+  const lesteHalo = L.circle([-23.182, -45.815], {
+    radius: 2500,
+    color: "#06B6D4",
+    fillColor: "#06B6D4",
+    fillOpacity: 0.15,
+    weight: 0
+  }).addTo(map);
+
+  const lesteCore = L.circle([-23.182, -45.815], {
+    radius: 1500,
+    color: "#0891B2",
+    fillColor: "#06B6D4",
+    fillOpacity: 0.38,
+    weight: 2
+  }).addTo(map);
+
+  lesteCore.bindPopup(`
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Zona Leste</strong>
+      </div>
+      <p class="text-base font-black text-cyan-700">${stats.leste.pct}% de Concentração</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.leste.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Vista Verde, Eugênio de Melo, Novo Horizonte, Vila Industrial</p>
+    </div>
+  `);
+
+  const lesteIcon = L.divIcon({
+    className: 'custom-map-badge',
+    html: `<div style="background:#06B6D4; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.leste.pct}%</div>`,
+    iconSize: [0, 0]
+  });
+  L.marker([-23.182, -45.815], { icon: lesteIcon }).addTo(map).bindPopup(lesteCore.getPopup());
+
+  // 4. Zona Norte (6.5%)
+  const norteHalo = L.circle([-23.142, -45.905], {
+    radius: 2200,
+    color: "#6366F1",
+    fillColor: "#6366F1",
+    fillOpacity: 0.14,
+    weight: 0
+  }).addTo(map);
+
+  const norteCore = L.circle([-23.142, -45.905], {
+    radius: 1300,
+    color: "#4F46E5",
+    fillColor: "#6366F1",
+    fillOpacity: 0.35,
+    weight: 2
+  }).addTo(map);
+
+  norteCore.bindPopup(`
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Zona Norte</strong>
+      </div>
+      <p class="text-base font-black text-indigo-700">${stats.norte.pct}% de Concentração</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.norte.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Santana, Altos de Santana, Buquirinha, Vila Paiva</p>
+    </div>
+  `);
+
+  const norteIcon = L.divIcon({
+    className: 'custom-map-badge',
+    html: `<div style="background:#6366F1; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.norte.pct}%</div>`,
+    iconSize: [0, 0]
+  });
+  L.marker([-23.142, -45.905], { icon: norteIcon }).addTo(map).bindPopup(norteCore.getPopup());
+
+  // Forçar recálculo de tamanho do Leaflet após renderizar o DOM
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 250);
 }
 
 // 7.7. Cards Visuais de Serviços de Streaming & Música com Logos Oficiais (PNG)
