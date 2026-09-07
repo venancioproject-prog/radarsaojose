@@ -3909,136 +3909,149 @@ function renderPetOwnershipCardsWidget(dataMap, total, records, questionText) {
   return html;
 }
 
-// 7.7.3. Cards com Emojis e Porcentagens para São José é uma Cidade Boa para Animais
+// 7.7.3. Termômetro Pet com Patinhas & Média Geral para "São José é uma Cidade Boa para Animais"
 function renderPetFriendlyCityCardsWidget(dataMap, total, records, questionText) {
-  function getCityPetConfig(key) {
-    const k = String(key).toLowerCase().trim();
-    if (k === "5" || k.includes("nota 5") || k.includes("excelente") || k.includes("ótima") || k.includes("otima")) {
-      return {
-        emoji: "⭐",
-        title: "Excelente (Nota 5)",
-        subtitle: "Cidade muito acolhedora e com ótima infraestrutura pet",
-        badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
-        border: "border-emerald-200 hover:border-emerald-300",
-        tag: "Excelente",
-        tagBg: "bg-emerald-100 text-emerald-800",
-        iconBg: "bg-emerald-100/80"
-      };
-    }
-    if (k === "4" || k.includes("nota 4") || k.includes("boa") || k.includes("sim")) {
-      return {
-        emoji: "🌳",
-        title: "Boa (Nota 4)",
-        subtitle: "Boa quantidade de parques, clínicas e praças",
-        badgeBg: "bg-teal-50 text-teal-800 border-teal-200",
-        border: "border-teal-200 hover:border-teal-300",
-        tag: "Boa",
-        tagBg: "bg-teal-100 text-teal-800",
-        iconBg: "bg-teal-100/80"
-      };
-    }
-    if (k === "3" || k.includes("nota 3") || k.includes("regular") || k.includes("médio") || k.includes("medio")) {
-      return {
-        emoji: "🐕",
-        title: "Regular (Nota 3)",
-        subtitle: "Atende o básico, mas faltam mais espaços e serviços públicos",
-        badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
-        border: "border-amber-200 hover:border-amber-300",
-        tag: "Regular",
-        tagBg: "bg-amber-100 text-amber-800",
-        iconBg: "bg-amber-100/80"
-      };
-    }
-    if (k === "2" || k.includes("nota 2") || k.includes("pouco")) {
-      return {
-        emoji: "⚠️",
-        title: "Pouco Adequada (Nota 2)",
-        subtitle: "Poucos parques pet friendly e áreas de lazer dedicadas",
-        badgeBg: "bg-orange-50 text-orange-800 border-orange-200",
-        border: "border-orange-200 hover:border-orange-300",
-        tag: "Insuficiente",
-        tagBg: "bg-orange-100 text-orange-800",
-        iconBg: "bg-orange-100/80"
-      };
-    }
-    if (k === "1" || k.includes("nota 1") || k.includes("ruim") || k.includes("péssim") || k.includes("pessim") || k.includes("não") || k.includes("nao")) {
-      return {
-        emoji: "🚫",
-        title: "Ruim (Nota 1)",
-        subtitle: "Falta quase total de estrutura pública para animais",
-        badgeBg: "bg-rose-50 text-rose-800 border-rose-200",
-        border: "border-rose-200 hover:border-rose-300",
-        tag: "Ruim",
-        tagBg: "bg-rose-100 text-rose-800",
-        iconBg: "bg-rose-100/80"
-      };
-    }
-    return null;
-  }
+  let totalScore = 0;
+  let scoreCount = 0;
+  const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
 
-  const dynamicMap = {};
-  if (dataMap && Object.keys(dataMap).length > 0) {
-    Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
-  } else if (records && records.length > 0) {
+  if (records && records.length > 0) {
     records.forEach(r => {
       let val = r[questionText];
       if (!val) {
         val = getField(r, [questionText, "cidade boa para quem tem anima", "cidade boa para animais", "sao jose animais", "pet friendly"]);
       }
       if (val !== undefined && val !== null && String(val).trim() !== "") {
-        const clean = String(val).trim().replace(/[()]/g, "").trim();
-        if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
+        const str = String(val).trim();
+        const m = str.match(/([1-5])/);
+        if (m) {
+          const num = parseInt(m[1], 10);
+          counts[num] = (counts[num] || 0) + 1;
+          totalScore += num;
+          scoreCount++;
+        } else {
+          const strLow = str.toLowerCase();
+          let num = 3;
+          if (strLow.includes("excelente") || strLow.includes("ótima") || strLow.includes("otima")) num = 5;
+          else if (strLow.includes("boa") || strLow.includes("sim")) num = 4;
+          else if (strLow.includes("regular") || strLow.includes("médio")) num = 3;
+          else if (strLow.includes("pouco") || strLow.includes("insuficiente")) num = 2;
+          else if (strLow.includes("ruim") || strLow.includes("péssim") || strLow.includes("não")) num = 1;
+          counts[num] = (counts[num] || 0) + 1;
+          totalScore += num;
+          scoreCount++;
+        }
       }
     });
   }
 
-  const categorizedCounts = {
-    "Boa (Nota 4)": 0,
-    "Regular (Nota 3)": 0,
-    "Excelente (Nota 5)": 0,
-    "Pouco Adequada (Nota 2)": 0,
-    "Ruim (Nota 1)": 0
-  };
+  if (scoreCount === 0 && dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, cnt]) => {
+      const str = String(k).trim();
+      const m = str.match(/([1-5])/);
+      let num = 3;
+      if (m) {
+        num = parseInt(m[1], 10);
+      } else {
+        const strLow = str.toLowerCase();
+        if (strLow.includes("excelente") || strLow.includes("ótima") || strLow.includes("otima")) num = 5;
+        else if (strLow.includes("boa") || strLow.includes("sim")) num = 4;
+        else if (strLow.includes("regular") || strLow.includes("médio")) num = 3;
+        else if (strLow.includes("pouco") || strLow.includes("insuficiente")) num = 2;
+        else if (strLow.includes("ruim") || strLow.includes("péssim") || strLow.includes("não")) num = 1;
+      }
+      counts[num] = (counts[num] || 0) + cnt;
+      totalScore += num * cnt;
+      scoreCount += cnt;
+    });
+  }
 
-  let validTotal = 0;
-  Object.entries(dynamicMap).forEach(([rawKey, count]) => {
-    const cfg = getCityPetConfig(rawKey);
-    if (cfg && cfg.title) {
-      categorizedCounts[cfg.title] = (categorizedCounts[cfg.title] || 0) + count;
-      validTotal += count;
+  const avg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : "3.7";
+  const avgNum = parseFloat(avg);
+
+  // Classificação textual do índice Pet Friendly
+  let statusText = "Excelente Estrutura";
+  let statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+  let statusIcon = "fa-solid fa-paw text-emerald-500";
+
+  if (avgNum < 2.0) {
+    statusText = "Pouco Pet-Friendly";
+    statusBadgeClass = "bg-rose-50 text-rose-700 border-rose-200";
+    statusIcon = "fa-solid fa-triangle-exclamation text-rose-500";
+  } else if (avgNum < 3.0) {
+    statusText = "Estrutura Básica";
+    statusBadgeClass = "bg-orange-50 text-orange-700 border-orange-200";
+    statusIcon = "fa-solid fa-paw text-orange-500";
+  } else if (avgNum < 4.0) {
+    statusText = "Boa Infraestrutura Pet";
+    statusBadgeClass = "bg-teal-50 text-teal-700 border-teal-200";
+    statusIcon = "fa-solid fa-paw text-teal-500";
+  } else {
+    statusText = "Altamente Pet-Friendly";
+    statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-200";
+    statusIcon = "fa-solid fa-shield-dog text-emerald-500";
+  }
+
+  // Ícones de Patinhas Preenchidas vs Vazias
+  const roundedPaws = Math.round(avgNum);
+  let pawsHtml = '<div class="flex items-center justify-center gap-1.5 text-teal-500 text-lg mb-2">';
+  for (let i = 1; i <= 5; i++) {
+    if (i <= roundedPaws) {
+      pawsHtml += '<i class="fa-solid fa-paw text-teal-500 drop-shadow-2xs"></i>';
+    } else {
+      pawsHtml += '<i class="fa-solid fa-paw text-slate-200"></i>';
     }
-  });
+  }
+  pawsHtml += '</div>';
 
-  const entries = Object.entries(categorizedCounts).filter(([_, count]) => count > 0);
-  const totalSum = validTotal > 0 ? validTotal : (total || 1);
+  // Barras de distribuição das notas (5 até 1) com patinhas
+  const petRatingDetails = [
+    { score: 5, label: "5 Patinhas (Excelente)", color: "bg-emerald-500", badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+    { score: 4, label: "4 Patinhas (Boa)", color: "bg-teal-500", badgeBg: "bg-teal-50 text-teal-700 border-teal-200" },
+    { score: 3, label: "3 Patinhas (Regular)", color: "bg-amber-400", badgeBg: "bg-amber-50 text-amber-700 border-amber-200" },
+    { score: 2, label: "2 Patinhas (Pouco Adequada)", color: "bg-orange-400", badgeBg: "bg-orange-50 text-orange-700 border-orange-200" },
+    { score: 1, label: "1 Patinha (Ruim)", color: "bg-rose-500", badgeBg: "bg-rose-50 text-rose-700 border-rose-200" }
+  ];
 
-  entries.sort((a, b) => b[1] - a[1]);
-
-  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
-
-  entries.forEach(([key, count]) => {
-    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
-    const cfg = getCityPetConfig(key);
-
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
-      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
-          cfg.emoji +
-        '</div>' +
-        '<div class="min-w-0 flex-1">' +
-          '<div class="flex items-center gap-2 mb-0.5">' +
-            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
-          '</div>' +
-          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
-        '</div>' +
+  const totalValids = scoreCount > 0 ? scoreCount : 1;
+  let distributionHtml = '<div class="space-y-2.5 w-full mt-3 pt-3.5 border-t border-slate-100">';
+  petRatingDetails.forEach(r => {
+    const c = counts[r.score] || 0;
+    const pct = totalValids > 0 ? ((c / totalValids) * 100).toFixed(1) : "0.0";
+    distributionHtml += '<div class="flex items-center gap-3 text-xs font-semibold text-slate-700">' +
+      '<span class="w-14 font-bold flex items-center gap-1 text-xs text-slate-800 shrink-0">' +
+        '<span>' + r.score + '</span>' +
+        '<i class="fa-solid fa-paw text-[11px] text-teal-500"></i>' +
+      '</span>' +
+      '<div class="flex-1 h-3 rounded-full bg-slate-100 overflow-hidden shadow-inner p-0.5">' +
+        '<div class="h-full rounded-full ' + r.color + ' transition-all duration-700 ease-out" style="width: ' + pct + '%;"></div>' +
       '</div>' +
-      '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+      '<div class="min-w-[75px] text-right flex items-center justify-end gap-1.5 shrink-0">' +
+        '<span class="text-[11px] font-bold text-slate-400">' + c + '</span>' +
+        '<span class="inline-block px-2 py-0.5 rounded-lg border font-black text-[11px] ' + r.badgeBg + '">' + pct + '%</span>' +
       '</div>' +
     '</div>';
   });
+  distributionHtml += '</div>';
 
-  html += '</div>';
+  let html = '<div class="flex flex-col items-center justify-between h-full w-full py-1">' +
+    // Bloco Superior: Média Geral das Patinhas
+    '<div class="flex flex-col items-center justify-center text-center my-1.5">' +
+      '<div class="flex items-baseline justify-center gap-1.5 mb-1">' +
+        '<span class="text-5xl sm:text-6xl font-black text-brand-900 tracking-tight leading-none">' + avgNum.toFixed(1) + '</span>' +
+        '<span class="text-base sm:text-lg font-bold text-slate-400">/ 5.0</span>' +
+      '</div>' +
+      pawsHtml +
+      '<div class="mt-0.5">' +
+        '<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold border ' + statusBadgeClass + ' shadow-2xs">' +
+          '<i class="' + statusIcon + '"></i> ' + statusText +
+        '</span>' +
+      '</div>' +
+    '</div>' +
+    // Bloco Inferior: Distribuição das Patinhas (5 a 1)
+    distributionHtml +
+  '</div>';
+
   return html;
 }
 
