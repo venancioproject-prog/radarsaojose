@@ -2219,13 +2219,24 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
     apps_bike: {
       key: "apps_bike",
       emoji: "🚲",
-      title: "Apps de Bike / Bicicleta",
-      subtitle: "Mobilidade ativa, sustentável e ciclovias",
+      title: "Apps de Bike",
+      subtitle: "Bicicletas compartilhadas e alugadas por aplicativo",
       badgeBg: "bg-yellow-50 text-yellow-800 border-yellow-200",
       border: "border-yellow-200 hover:border-yellow-300",
-      tag: "Ativa",
+      tag: "Aplicativo",
       tagBg: "bg-yellow-100 text-yellow-800",
       iconBg: "bg-yellow-100/80"
+    },
+    bike_propria: {
+      key: "bike_propria",
+      emoji: "🚲",
+      title: "Bicicleta própria",
+      subtitle: "Mobilidade ativa pessoal e ciclovias",
+      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
+      border: "border-emerald-200 hover:border-emerald-300",
+      tag: "Ativa",
+      tagBg: "bg-emerald-100 text-emerald-800",
+      iconBg: "bg-emerald-100/80"
     },
     patinete_alugado: {
       key: "patinete_alugado",
@@ -2285,6 +2296,10 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
     if (k.includes("app") && (k.includes("bike") || k.includes("bicicleta") || k.includes("tembici") || k.includes("ciclo"))) {
       return "apps_bike";
     }
+    // 2.1 Bicicleta Própria
+    if (k.includes("bicicleta própria") || k.includes("bicicleta propria") || k.includes("bike própria") || k.includes("bike propria")) {
+      return "bike_propria";
+    }
     // 3. Patinete Alugado vs Próprio
     if (k.includes("patinete")) {
       if (k.includes("alug") || k.includes("app") || k.includes("compartilhado")) return "patinete_alugado";
@@ -2311,7 +2326,7 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
     }
     // 8. Bicicleta genérica
     if (k.includes("bicicleta") || k.includes("bike") || k.includes("ciclovia") || k.includes("ciclista")) {
-      return "apps_bike";
+      return "bike_propria";
     }
 
     return null;
@@ -2323,6 +2338,7 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
     onibus: 0,
     linha_verde: 0,
     moto_propria: 0,
+    bike_propria: 0,
     apps_bike: 0,
     patinete_alugado: 0,
     carro_alugado: 0,
