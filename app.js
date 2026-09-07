@@ -604,8 +604,18 @@ function processAndRenderDynamicCharts(records) {
     },
     {
       title: "2. Qualidade de Vida, Percepção & Necessidades",
-      subtitle: "Velocímetro de satisfação (1 a 5), o que mais falta, percepção e crescimento da cidade",
-      questions: questionList.filter(q => !/transporte/i.test(q) && !/animal|pet|bicho|anima/i.test(q) && (/qualidade|mais falta|o que falta|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)))
+      subtitle: "Velocímetro de satisfação (1 a 5), percepção e crescimento da cidade, o que mais falta",
+      questions: (() => {
+        const qList = questionList.filter(q => !/transporte/i.test(q) && !/animal|pet|bicho|anima/i.test(q) && (/qualidade|mais falta|o que falta|são josé é|sao jose e|cidade de são josé está|cidade de sao jose esta|crescimento|orgulho|definiria/i.test(q)));
+        const idxFalta = qList.findIndex(q => /mais falta|o que falta/i.test(q));
+        const idxCidadeEsta = qList.findIndex(q => /cidade de são josé está|cidade de sao jose esta|são josé está|sao jose esta/i.test(q));
+        if (idxFalta !== -1 && idxCidadeEsta !== -1) {
+          const temp = qList[idxFalta];
+          qList[idxFalta] = qList[idxCidadeEsta];
+          qList[idxCidadeEsta] = temp;
+        }
+        return qList;
+      })()
     },
     {
       title: "3. Cultura, Eventos, Lazer, Mobilidade & Vida Noturna",
