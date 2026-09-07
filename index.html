@@ -68,9 +68,10 @@
   <!-- Supabase JS Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Chart.js CDN + Datalabels Plugin -->
+  <!-- Chart.js CDN + Datalabels Plugin + Sankey Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.1/dist/chartjs-chart-sankey.min.js"></script>
 
   <!-- Leaflet Maps CSS & JS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -1492,9 +1493,28 @@
             </p>
           </div>
 
-          <!-- Canvas Gráfico de Barras Horizontais Região Lazer -->
-          <div class="h-64 sm:h-80 w-full relative">
-            <canvas id="repChartLazerRegiao"></canvas>
+          <!-- Diagrama de Fluxo Sankey (Origem de Moradia -> Destino de Lazer) -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black text-brand-900 uppercase tracking-wider">
+                <i class="fa-solid fa-route text-accent-cyan mr-1.5"></i>Diagrama de Fluxo Sankey (Bairro de Origem &rarr; Região de Lazer)
+              </span>
+              <span class="text-[11px] font-semibold text-slate-400">Origem (Esquerda) &bull; Destino (Direita)</span>
+            </div>
+            
+            <div class="h-80 sm:h-96 w-full relative bg-slate-50/60 p-4 rounded-2xl border border-slate-200">
+              <canvas id="repChartSankeyLazer"></canvas>
+            </div>
+          </div>
+
+          <!-- Gráfico Complementar de Destinos Mais Frequentados -->
+          <div class="space-y-3 pt-2">
+            <span class="text-xs font-black text-slate-500 uppercase tracking-wider">
+              Ranking de Destinos Mais Frequentados (Qual região você mais frequenta?)
+            </span>
+            <div class="h-64 sm:h-72 w-full relative">
+              <canvas id="repChartLazerRegiao"></canvas>
+            </div>
           </div>
 
           <!-- O IMPACTO DA EVASÃO DE CONSUMO EM SJC -->

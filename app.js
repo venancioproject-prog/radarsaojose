@@ -6248,7 +6248,51 @@ window.renderExecutiveReportCharts = function(records) {
     { label: "Retenção / Outros", value: Math.max(0, total - countOrgulho), color: "#94A3B8" }
   ]);
 
-  // 2. Chart Concentração Regional Lazer
+  const sankeyFlows = {};
+  records.forEach(r => {
+    // Origem de Moradia (Bairro -> Região)
+    const origemRaw = getField(r, ["Região", "Regiao", "região", "regiao", "Em qual bairro você mora?", "bairro"]);
+    let origem = origemRaw ? origemRaw.trim() : "Outra";
+    if (origem.toLowerCase().includes("oeste") || origem.toLowerCase().includes("aquarius") || origem.toLowerCase().includes("esplanada") || origem.toLowerCase().includes("urbanova")) origem = "Origem: Zona Oeste";
+    else if (origem.toLowerCase().includes("sul") || origem.toLowerCase().includes("bosque") || origem.toLowerCase().includes("oriente") || origem.toLowerCase().includes("satélite") || origem.toLowerCase().includes("satelite")) origem = "Origem: Zona Sul";
+    else if (origem.toLowerCase().includes("centro") || origem.toLowerCase().includes("vila adyana") || origem.toLowerCase().includes("são dimas") || origem.toLowerCase().includes("sao dimas")) origem = "Origem: Centro";
+    else if (origem.toLowerCase().includes("leste") || origem.toLowerCase().includes("eugênio") || origem.toLowerCase().includes("vista verde") || origem.toLowerCase().includes("industrial")) origem = "Origem: Zona Leste";
+    else if (origem.toLowerCase().includes("norte") || origem.toLowerCase().includes("santana") || origem.toLowerCase().includes("alto da ponte")) origem = "Origem: Zona Norte";
+    else if (origem.toLowerCase().includes("sudeste") || origem.toLowerCase().includes("putim") || origem.toLowerCase().includes("são leopoldo")) origem = "Origem: Zona Sudeste";
+    else origem = "Origem: " + (origem || "SJC");
+
+    // Destino de Lazer
+    const destinoRaw = getField(r, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]);
+    let destino = destinoRaw ? destinoRaw.trim() : "Destino: Outras Regiões";
+    if (destino.includes("Centro") || destino.includes("Oeste") || destino.includes("Aquarius") || destino.includes("Vila Adyana")) {
+      destino = "Destino: Centro / Oeste";
+    } else if (destino.includes("Sul")) {
+      destino = "Destino: Zona Sul";
+    } else if (destino.includes("Leste")) {
+      destino = "Destino: Zona Leste";
+    } else if (destino.includes("Norte")) {
+      destino = "Destino: Zona Norte";
+    } else if (destino.toLowerCase().includes("todas")) {
+      destino = "Destino: Todas as Regiões";
+    } else {
+      destino = "Destino: " + destino;
+    }
+
+    const flowKey = origem + "|||" + destino;
+    sankeyFlows[flowKey] = (sankeyFlows[flowKey] || 0) + 1;
+  });
+
+  const sankeyData = Object.entries(sankeyFlows)
+    .filter(([_, flow]) => flow > 0)
+    .map(([key, flow]) => {
+      const [from, to] = key.split("|||");
+      return { from, to, flow };
+    });
+
+  // Render Sankey Flow Chart
+  renderReportChartSankey("repChartSankeyLazer", sankeyData);
+
+  // 2. Chart Concentração Regional Lazer (Bar Chart)
   const sortedRegiao = Object.entries(regiaoLazerCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
   renderReportChartBar("repChartLazerRegiao", sortedRegiao.map(e => e[0]), sortedRegiao.map(e => e[1]), "#0284C7", total);
 
@@ -6308,6 +6352,80 @@ function renderReportChartDoughnut(canvasId, items) {
       }
     }
   });
+}
+
+function renderReportChartSankey(canvasId, sankeyData) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  if (executiveChartInstances[canvasId]) {
+    executiveChartInstances[canvasId].destroy();
+  }
+
+  const colorPalette = {
+    "Origem: Zona Oeste": "#0284C7",
+    "Origem: Zona Sul": "#0B2545",
+    "Origem: Centro": "#00B4D8",
+    "Origem: Zona Leste": "#6366F1",
+    "Origem: Zona Norte": "#10B981",
+    "Origem: Zona Sudeste": "#F59E0B",
+    "Destino: Centro / Oeste": "#0284C7",
+    "Destino: Zona Sul": "#0B2545",
+    "Destino: Zona Leste": "#6366F1",
+    "Destino: Zona Norte": "#10B981",
+    "Destino: Todas as Regiões": "#8B5CF6"
+  };
+
+  function getColor(key, alpha = 1) {
+    const base = colorPalette[key] || "#94A3B8";
+    if (alpha === 1) return base;
+    return base + Math.round(alpha * 255).toString(16).padStart(2, '0');
+  }
+
+  const ctx = canvas.getContext("2d");
+
+  // Se o plugin Sankey estiver carregado
+  if (typeof Chart.controllers.sankey !== "undefined") {
+    executiveChartInstances[canvasId] = new Chart(ctx, {
+      type: "sankey",
+      data: {
+        datasets: [{
+          data: sankeyData,
+          colorFrom: (c) => getColor(c.dataset.data[c.dataIndex].from, 0.5),
+          colorTo: (c) => getColor(c.dataset.data[c.dataIndex].to, 0.5),
+          colorMode: "gradient",
+          borderWidth: 0,
+          nodeWidth: 16,
+          nodePadding: 12,
+          labels: {
+            display: true,
+            font: {
+              family: "Montserrat",
+              size: 11,
+              weight: "bold"
+            },
+            color: "#1E293B"
+          }
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          datalabels: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const item = ctx.raw;
+                return `${item.from} -> ${item.to}: ${item.flow} pessoas`;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
 }
 
 function renderReportChartBar(canvasId, labels, data, color, total) {
