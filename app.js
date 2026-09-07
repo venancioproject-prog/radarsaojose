@@ -1289,6 +1289,29 @@ function processAndRenderDynamicCharts(records) {
       }, 0);
     });
 
+    // Card editorial fotográfico temático para preencher harmoniosamente o grid do Bloco 4 (Cultura, Lazer & Vida Noturna)
+    if (catIdx === 3) {
+      const culturePhotoCard = document.createElement("div");
+      culturePhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
+      culturePhotoCard.innerHTML = `
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_cultura.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/60 to-transparent"></div>
+        
+        <div class="relative z-10 space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-sparkles text-amber-400"></i> Vida Noturna & Cultura
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            Cultura, Gastronomia & Encontros em São José dos Campos
+          </h3>
+          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+            O cenário de lazer joseense reúne desde polos gastronômicos consolidados no Aquarius e Vila Ema até manifestações artísticas e eventos de rua em toda a cidade.
+          </p>
+        </div>
+      `;
+      cardsGrid.appendChild(culturePhotoCard);
+    }
+
     sectionEl.innerHTML = sectionHeader;
     sectionEl.appendChild(cardsGrid);
     dynamicChartsGrid.appendChild(sectionEl);
