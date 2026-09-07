@@ -2071,11 +2071,11 @@ function renderGrowthHelpsCardsWidget(dataMap, total) {
 function renderLocalProducersCardsWidget(dataMap, total, records, questionText) {
   function getProducerConfig(key) {
     const k = key.toLowerCase().trim();
-    if (k.includes("sim") || k.includes("frequento") || k.includes("costumo") || k.includes("compro") || k.includes("sempre")) {
+    if (k.includes("sim") || k.includes("sempre") || k.includes("com frequência") || k.includes("com frequencia") || k.includes("costumo")) {
       return {
         emoji: "🥬",
-        title: "Sim, compro com frequência",
-        subtitle: "Apoia o artesanato e agricultura local",
+        title: "Sim, sempre",
+        subtitle: "Apoia com frequência o artesanato e agricultura local",
         badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
         border: "border-emerald-200 hover:border-emerald-300",
         tag: "Frequenta / Apoia",
@@ -2083,10 +2083,10 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
         iconBg: "bg-emerald-100/80"
       };
     }
-    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("raramente") || k.includes("quando posso") || k.includes("eventual")) {
+    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("eventual")) {
       return {
         emoji: "🛍️",
-        title: "Às vezes / Eventualmente",
+        title: "Às vezes",
         subtitle: "Visita feiras em ocasiões especiais",
         badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
         border: "border-blue-200 hover:border-blue-300",
@@ -2095,14 +2095,26 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
         iconBg: "bg-blue-100/80"
       };
     }
-    if (k.includes("não") || k.includes("nao") || k.includes("nunca") || k.includes("pouco")) {
+    if (k.includes("vontade") || k.includes("tenho vontade")) {
+      return {
+        emoji: "💭",
+        title: "Tenho vontade, mas não vou",
+        subtitle: "Tem interesse, mas encontra barreiras para ir",
+        badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+        border: "border-amber-200 hover:border-amber-300",
+        tag: "Potencial",
+        tagBg: "bg-amber-100 text-amber-800",
+        iconBg: "bg-amber-100/80"
+      };
+    }
+    if (k.includes("interesse") || k.includes("não tenho") || k.includes("nao tenho") || k.includes("não costumo") || k.includes("nao costumo")) {
       return {
         emoji: "🛒",
-        title: "Não costumo comprar",
-        subtitle: "Prefere supermercados ou grandes redes",
+        title: "Não tenho interesse",
+        subtitle: "Prefere outros formatos de comércio e compras",
         badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
         border: "border-slate-200 hover:border-slate-300",
-        tag: "Não Frequenta",
+        tag: "Desinteresse",
         tagBg: "bg-slate-100 text-slate-800",
         iconBg: "bg-slate-100"
       };
@@ -2111,47 +2123,56 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
       emoji: "🎨",
       title: key,
       subtitle: "Hábito de consumo local",
-      badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
-      border: "border-amber-200 hover:border-amber-300",
+      badgeBg: "bg-purple-50 text-purple-700 border-purple-200",
+      border: "border-purple-200 hover:border-purple-300",
       tag: "Consumo",
-      tagBg: "bg-amber-100 text-amber-800",
-      iconBg: "bg-amber-100/80"
+      tagBg: "bg-purple-100 text-purple-800",
+      iconBg: "bg-purple-100/80"
     };
   }
 
-  // Se o dataMap estiver vazio ou com chaves esparsas, extrai diretamente de records
+  // Extração inteligente de dados da pergunta
   const dynamicMap = {};
-  if (dataMap && Object.keys(dataMap).length > 0) {
-    Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
-  } else if (records && records.length > 0) {
+  let totalResponses = 0;
+
+  if (records && records.length > 0) {
     records.forEach(r => {
-      const val = getField(r, [questionText, "produtores", "feiras", "artesanato", "feiras de artesanato", "produtores locais"]);
-      if (val) {
-        dynamicMap[val] = (dynamicMap[val] || 0) + 1;
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "Você costuma comprar de produtores locais ou ir em feiras de artesanato da cidade?", "produtores locais", "feiras de artesanato", "feiras", "artesanato"]);
       }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        const raw = String(val).trim();
+        dynamicMap[raw] = (dynamicMap[raw] || 0) + 1;
+        totalResponses++;
+      }
+    });
+  } else if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, v]) => {
+      dynamicMap[k] = v;
+      totalResponses += v;
     });
   }
 
-  // Garantia de dados caso a coluna não venha preenchida na amostra
-  if (Object.keys(dynamicMap).length === 0) {
-    const base = total || 477;
-    dynamicMap["Sim, costumo comprar"] = Math.round(base * 0.44);
-    dynamicMap["Às vezes / Eventualmente"] = Math.round(base * 0.38);
-    dynamicMap["Não costumo comprar"] = Math.max(1, base - Math.round(base * 0.44) - Math.round(base * 0.38));
-  }
+  // Agrupamento padronizado pelas 4 categorias reais
+  const categorizedCounts = {};
+  Object.entries(dynamicMap).forEach(([rawKey, count]) => {
+    const cfg = getProducerConfig(rawKey);
+    categorizedCounts[cfg.title] = (categorizedCounts[cfg.title] || 0) + count;
+  });
 
-  const entries = Object.entries(dynamicMap);
-  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+  const baseTotal = totalResponses > 0 ? totalResponses : (total || 1);
+  const entries = Object.entries(categorizedCounts);
 
   entries.sort((a, b) => b[1] - a[1]);
 
-  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
 
   entries.forEach(([key, count]) => {
-    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
+    const pct = baseTotal > 0 ? ((count / baseTotal) * 100).toFixed(1) : "0.0";
     const cfg = getProducerConfig(key);
 
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
         '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
           cfg.emoji +
