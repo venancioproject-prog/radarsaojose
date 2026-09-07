@@ -572,7 +572,7 @@ function processAndRenderDynamicCharts(records) {
     return;
   }
 
-  // Descobrir todas as perguntas existentes (ignora metadados e campos abertos como lista de influenciadores)
+  // Descobrir todas as perguntas existentes (ignora metadados, campos abertos e coluna utilitária Região)
   const ignoredColumns = new Set([
     "id", 
     "created_at", 
@@ -581,6 +581,10 @@ function processAndRenderDynamicCharts(records) {
     "Data", 
     "timestamp", 
     "user_id",
+    "Região",
+    "Regiao",
+    "região",
+    "regiao",
     "Escreva o nome de até 3 influenciadores de São José que você acompanha.",
     "Escreva o nome de até 3 influenciadores de São José que você acompanha. "
   ]);
@@ -588,7 +592,13 @@ function processAndRenderDynamicCharts(records) {
 
   records.forEach(row => {
     Object.keys(row).forEach(key => {
-      if (!ignoredColumns.has(key) && !/até 3 influenciadores|ate 3 influenciadores/i.test(key) && key.trim().length > 1) {
+      const kTrim = key.trim();
+      const isIgnored = ignoredColumns.has(key) || 
+        ignoredColumns.has(kTrim) || 
+        /^regi[aã]o$/i.test(kTrim) || 
+        /até 3 influenciadores|ate 3 influenciadores/i.test(key);
+        
+      if (!isIgnored && kTrim.length > 1) {
         allColumns.add(key);
       }
     });
