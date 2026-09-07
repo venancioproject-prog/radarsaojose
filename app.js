@@ -673,7 +673,7 @@ function processAndRenderDynamicCharts(records) {
 
       // Formatação elegante do título da pergunta
       let displayTitle = questionText.replace(/_\d+$/i, "").replace(/_\d+\b/i, "").trim();
-      if (displayTitle.toLowerCase().startsWith("para você_1")) {
+      if (displayTitle.toLowerCase().startsWith("para você_1") || displayTitle.toLowerCase().includes("são josé está") || displayTitle.toLowerCase().includes("sao jose esta")) {
         displayTitle = "Para você, a cidade de São José está:";
       }
       if (displayTitle.toLowerCase().includes("costuma comprar de produtores") || (displayTitle.toLowerCase().includes("produtores locais") && displayTitle.toLowerCase().includes("feiras"))) {
@@ -693,6 +693,27 @@ function processAndRenderDynamicCharts(records) {
       }
       if (displayTitle.toLowerCase().includes("festas e eventos") || (displayTitle.toLowerCase().includes("festas") && displayTitle.toLowerCase().includes("combinam"))) {
         displayTitle = "Você sente que as festas e eventos da cidade combinam com o seu jeito?";
+      }
+      if (displayTitle.toLowerCase().includes("meios de transporte") || (displayTitle.toLowerCase().includes("transporte") && displayTitle.toLowerCase().includes("usa"))) {
+        displayTitle = "Quais meios de transporte você usa? (marque todos que utilizar)";
+      }
+      if (displayTitle.toLowerCase().includes("boas opções de cultura") || (displayTitle.toLowerCase().includes("cultura") && displayTitle.toLowerCase().includes("eventos") && (displayTitle.toLowerCase().includes("opções") || displayTitle.toLowerCase().includes("opcoes")))) {
+        displayTitle = "Você acha que a cidade tem boas opções de cultura e eventos?";
+      }
+      if (displayTitle.toLowerCase().includes("outras cidades") && (displayTitle.toLowerCase().includes("passear") || displayTitle.toLowerCase().includes("comer"))) {
+        displayTitle = "Você costuma ir para outras cidades para passear ou comer fora?";
+      }
+      if (displayTitle.toLowerCase().includes("região da cidade") || (displayTitle.toLowerCase().includes("mais frequenta") && displayTitle.toLowerCase().includes("sai de casa"))) {
+        displayTitle = "Qual região da cidade você mais frequenta quando sai de casa?";
+      }
+      if (displayTitle.toLowerCase().includes("maior dificuldade") && displayTitle.toLowerCase().includes("sair à noite")) {
+        displayTitle = "Qual a maior dificuldade para sair à noite em São José?";
+      }
+      if (displayTitle.toLowerCase().includes("faz você escolher um restaurante") || displayTitle.toLowerCase().includes("escolher um restaurante ou bar")) {
+        displayTitle = "O que faz você escolher um restaurante ou bar?";
+      }
+      if (displayTitle.toLowerCase().includes("bonito para tirar fotos") || displayTitle.toLowerCase().includes("tirar fotos e postar")) {
+        displayTitle = "Você escolhe um lugar só porque ele é bonito para tirar fotos e postar?";
       }
 
       // Card Container
@@ -904,18 +925,15 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 6. CULTURA E EVENTOS: Gráfico de Pizza (Sim = Verde, Não = Vermelho)
+      // 6. CULTURA E EVENTOS: Cards com Emojis e Porcentagens
       if (qLower.includes("cultura") && (qLower.includes("opções") || qLower.includes("opcoes") || qLower.includes("eventos") || qLower.includes("cidade"))) {
-        cardEl.innerHTML = '<div>' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Gráfico de Pizza • Sim (Verde) • Não (Vermelho)</p>' +
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Oferta Cultural & Opções de Lazer</p>' +
         '</div>' +
-        '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderCultureEventsCardsWidget(dataMap, total, records, questionText) + '</div>';
         cardsGrid.appendChild(cardEl);
-
-        setTimeout(() => {
-          renderYesNoPieChart(canvasId, dataMap);
-        }, 0);
         return;
       }
 
@@ -2142,135 +2160,193 @@ function renderLocalProducersCardsWidget(dataMap, total, records, questionText) 
 
 // 7.5.3. Cards com Emojis e Porcentagens para Meios de Transporte
 function renderTransportCardsWidget(dataMap, total, records, questionText) {
-  function getTransportConfig(key) {
-    const k = key.toLowerCase().trim();
-    if (k.includes("carro") || k.includes("automóvel") || k.includes("automovel") || k.includes("próprio") || k.includes("proprio")) {
-      return {
-        emoji: "🚗",
-        title: "Carro Próprio",
-        subtitle: "Veículo particular para deslocamento diário",
-        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
-        border: "border-blue-200 hover:border-blue-300",
-        tag: "Individual",
-        tagBg: "bg-blue-100 text-blue-800",
-        iconBg: "bg-blue-100/80"
-      };
+  const transportConfigs = {
+    carro_proprio: {
+      key: "carro_proprio",
+      emoji: "🚗",
+      title: "Carro Próprio",
+      subtitle: "Veículo particular para deslocamento diário",
+      badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
+      border: "border-blue-200 hover:border-blue-300",
+      tag: "Individual",
+      tagBg: "bg-blue-100 text-blue-800",
+      iconBg: "bg-blue-100/80"
+    },
+    uber_app: {
+      key: "uber_app",
+      emoji: "📱",
+      title: "Carro por Aplicativo (Uber / 99)",
+      subtitle: "Corridas sob demanda e motoristas parceiros",
+      badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+      border: "border-indigo-200 hover:border-indigo-300",
+      tag: "Aplicativo",
+      tagBg: "bg-indigo-100 text-indigo-800",
+      iconBg: "bg-indigo-100/80"
+    },
+    onibus_coletivo: {
+      key: "onibus_coletivo",
+      emoji: "🚌",
+      title: "Ônibus / Transporte Coletivo",
+      subtitle: "Linhas municipais e intermunicipais",
+      badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      border: "border-emerald-200 hover:border-emerald-300",
+      tag: "Coletivo",
+      tagBg: "bg-emerald-100 text-emerald-800",
+      iconBg: "bg-emerald-100/80"
+    },
+    a_pe: {
+      key: "a_pe",
+      emoji: "🚶",
+      title: "A pé / Caminhada",
+      subtitle: "Deslocamentos a pé no bairro ou região",
+      badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+      border: "border-cyan-200 hover:border-cyan-300",
+      tag: "A pé",
+      tagBg: "bg-cyan-100 text-cyan-800",
+      iconBg: "bg-cyan-100/80"
+    },
+    bicicleta: {
+      key: "bicicleta",
+      emoji: "🚲",
+      title: "Bicicleta / Ciclovias",
+      subtitle: "Mobilidade ativa e sustentável",
+      badgeBg: "bg-teal-50 text-teal-700 border-teal-200",
+      border: "border-teal-200 hover:border-teal-300",
+      tag: "Sustentável",
+      tagBg: "bg-teal-100 text-teal-800",
+      iconBg: "bg-teal-100/80"
+    },
+    moto: {
+      key: "moto",
+      emoji: "🏍️",
+      title: "Moto / Motocicleta",
+      subtitle: "Agilidade no trânsito urbano",
+      badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+      border: "border-amber-200 hover:border-amber-300",
+      tag: "Duas Rodas",
+      tagBg: "bg-amber-100 text-amber-800",
+      iconBg: "bg-amber-100/80"
     }
-    if (k.includes("ônibus") || k.includes("onibus") || k.includes("coletivo") || k.includes("circular") || k.includes("transporte público") || k.includes("transporte publico")) {
-      return {
-        emoji: "🚌",
-        title: "Ônibus / Transporte Coletivo",
-        subtitle: "Linhas municipais e intermunicipais",
-        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-        border: "border-emerald-200 hover:border-emerald-300",
-        tag: "Coletivo",
-        tagBg: "bg-emerald-100 text-emerald-800",
-        iconBg: "bg-emerald-100/80"
-      };
-    }
+  };
+
+  function classifyTransportItem(itemStr) {
+    const k = itemStr.toLowerCase().trim();
+    // 1. Uber / App / Táxi (ANTES de Carro para evitar colisão!)
     if (k.includes("uber") || k.includes("99") || k.includes("aplicativo") || k.includes("app") || k.includes("táxi") || k.includes("taxi") || k.includes("carona")) {
-      return {
-        emoji: "📱",
-        title: "Carro por Aplicativo (Uber / 99)",
-        subtitle: "Corridas sob demanda e motoristas parceiros",
-        badgeBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
-        border: "border-indigo-200 hover:border-indigo-300",
-        tag: "Aplicativo",
-        tagBg: "bg-indigo-100 text-indigo-800",
-        iconBg: "bg-indigo-100/80"
-      };
+      return "uber_app";
     }
+    // 2. Ônibus / Coletivo
+    if (k.includes("ônibus") || k.includes("onibus") || k.includes("coletivo") || k.includes("circular") || k.includes("transporte público") || k.includes("transporte publico") || k.includes("linha")) {
+      return "onibus_coletivo";
+    }
+    // 3. Moto
     if (k.includes("moto") || k.includes("motocicleta") || k.includes("scooter")) {
-      return {
-        emoji: "🏍️",
-        title: "Moto / Motocicleta",
-        subtitle: "Agilidade no trânsito urbano",
-        badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
-        border: "border-amber-200 hover:border-amber-300",
-        tag: "Duas Rodas",
-        tagBg: "bg-amber-100 text-amber-800",
-        iconBg: "bg-amber-100/80"
-      };
+      return "moto";
     }
+    // 4. Bicicleta
     if (k.includes("bicicleta") || k.includes("bike") || k.includes("ciclovia") || k.includes("patinete")) {
-      return {
-        emoji: "🚲",
-        title: "Bicicleta / Ciclovias",
-        subtitle: "Mobilidade ativa e sustentável",
-        badgeBg: "bg-teal-50 text-teal-700 border-teal-200",
-        border: "border-teal-200 hover:border-teal-300",
-        tag: "Sustentável",
-        tagBg: "bg-teal-100 text-teal-800",
-        iconBg: "bg-teal-100/80"
-      };
+      return "bicicleta";
     }
+    // 5. A pé
     if (k.includes("pé") || k.includes("pe") || k.includes("caminhada") || k.includes("andando")) {
-      return {
-        emoji: "🚶",
-        title: "A pé / Caminhada",
-        subtitle: "Deslocamentos a pé no bairro ou região",
-        badgeBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
-        border: "border-cyan-200 hover:border-cyan-300",
-        tag: "A pé",
-        tagBg: "bg-cyan-100 text-cyan-800",
-        iconBg: "bg-cyan-100/80"
-      };
+      return "a_pe";
     }
-    return {
-      emoji: "🚦",
-      title: key,
-      subtitle: "Meio de transporte utilizado",
-      badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
-      border: "border-slate-200 hover:border-slate-300",
-      tag: "Transporte",
-      tagBg: "bg-slate-100 text-slate-800",
-      iconBg: "bg-slate-100"
-    };
+    // 6. Carro Próprio
+    if (k.includes("carro") || k.includes("automóvel") || k.includes("automovel") || k.includes("próprio") || k.includes("proprio") || k.includes("particular") || k.includes("veículo") || k.includes("veiculo")) {
+      return "carro_proprio";
+    }
+    return null;
   }
 
-  // Extração robusta para múltipla escolha e registros individuais
-  const dynamicMap = {};
-  if (dataMap && Object.keys(dataMap).length > 0) {
-    Object.entries(dataMap).forEach(([k, v]) => { dynamicMap[k] = v; });
-  } else if (records && records.length > 0) {
+  const counts = {
+    carro_proprio: 0,
+    uber_app: 0,
+    onibus_coletivo: 0,
+    a_pe: 0,
+    bicicleta: 0,
+    moto: 0
+  };
+
+  const otherCounts = {};
+  let totalRespondentsWithAnswer = 0;
+
+  if (records && records.length > 0) {
     records.forEach(r => {
-      const val = getField(r, [questionText, "transporte", "meios de transporte", "transporte_utilizado", "veiculo"]);
-      if (val) {
-        if (val.includes(",")) {
-          val.split(",").forEach(item => {
-            const clean = item.trim().replace(/[()]/g, "").trim();
-            if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
-          });
-        } else {
-          const clean = val.trim().replace(/[()]/g, "").trim();
-          if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
-        }
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "Quais meios de transporte você usa? (marque todos que utilizar)", "Quais meios de transporte você usa?", "transporte", "meios de transporte", "transporte_utilizado"]);
+      }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        totalRespondentsWithAnswer++;
+        const str = String(val).trim();
+        const parts = str.split(",");
+        const userBuckets = new Set();
+        parts.forEach(p => {
+          const clean = p.trim().replace(/[()]/g, "").trim();
+          if (clean) {
+            const bucket = classifyTransportItem(clean);
+            if (bucket) {
+              userBuckets.add(bucket);
+            } else {
+              otherCounts[clean] = (otherCounts[clean] || 0) + 1;
+            }
+          }
+        });
+        userBuckets.forEach(b => {
+          counts[b] = (counts[b] || 0) + 1;
+        });
+      }
+    });
+  } else if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, count]) => {
+      const bucket = classifyTransportItem(k);
+      if (bucket) {
+        counts[bucket] = (counts[bucket] || 0) + count;
+      } else {
+        otherCounts[k] = (otherCounts[k] || 0) + count;
       }
     });
   }
 
-  // Fallback estatístico caso a coluna não venha preenchida na amostra
-  if (Object.keys(dynamicMap).length === 0) {
-    const base = total || 477;
-    dynamicMap["Carro Próprio"] = Math.round(base * 0.68);
-    dynamicMap["Carro por Aplicativo (Uber / 99)"] = Math.round(base * 0.46);
-    dynamicMap["Ônibus / Transporte Coletivo"] = Math.round(base * 0.35);
-    dynamicMap["A pé / Caminhada"] = Math.round(base * 0.22);
-    dynamicMap["Bicicleta / Ciclovias"] = Math.round(base * 0.14);
-    dynamicMap["Moto / Motocicleta"] = Math.round(base * 0.11);
+  const totalRespondents = (records && records.length > 0) ? records.length : (total || totalRespondentsWithAnswer || 1);
+
+  const items = [];
+  Object.keys(counts).forEach(bKey => {
+    if (counts[bKey] > 0) {
+      items.push({
+        ...transportConfigs[bKey],
+        count: counts[bKey],
+        pct: ((counts[bKey] / totalRespondents) * 100).toFixed(1)
+      });
+    }
+  });
+
+  Object.entries(otherCounts).forEach(([lbl, cnt]) => {
+    if (cnt > 0) {
+      items.push({
+        key: lbl,
+        emoji: "🚦",
+        title: lbl,
+        subtitle: "Meio de transporte utilizado",
+        badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
+        border: "border-slate-200 hover:border-slate-300",
+        tag: "Transporte",
+        tagBg: "bg-slate-100 text-slate-800",
+        iconBg: "bg-slate-100",
+        count: cnt,
+        pct: ((cnt / totalRespondents) * 100).toFixed(1)
+      });
+    }
+  });
+
+  items.sort((a, b) => b.count - a.count);
+
+  if (items.length === 0) {
+    return '<div class="h-32 flex items-center justify-center text-slate-400 text-xs font-semibold">Nenhum meio de transporte informado nos filtros selecionados.</div>';
   }
 
-  const entries = Object.entries(dynamicMap);
-  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
-
-  entries.sort((a, b) => b[1] - a[1]);
-
   let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
-
-  entries.forEach(([key, count]) => {
-    const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
-    const cfg = getTransportConfig(key);
-
+  items.forEach(cfg => {
     html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
         '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
@@ -2284,11 +2360,124 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
         '</div>' +
       '</div>' +
       '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + cfg.pct + '%</span>' +
       '</div>' +
     '</div>';
   });
+  html += '</div>';
+  return html;
+}
 
+// 7.5.4. Cards com Emojis e Porcentagens para Cultura e Eventos
+function renderCultureEventsCardsWidget(dataMap, total, records, questionText) {
+  const configs = {
+    sim: {
+      emoji: "🎭",
+      title: "Sim, tem boas opções",
+      subtitle: "Avaliação positiva da oferta cultural e de eventos",
+      badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      border: "border-emerald-200 hover:border-emerald-300",
+      tag: "Satisfeito",
+      tagBg: "bg-emerald-100 text-emerald-800",
+      iconBg: "bg-emerald-100/80"
+    },
+    razoavel: {
+      emoji: "🎟️",
+      title: "Poucas opções / Razoável",
+      subtitle: "Avaliação intermediária ou oferta concentrada",
+      badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
+      border: "border-amber-200 hover:border-amber-300",
+      tag: "Moderado",
+      tagBg: "bg-amber-100 text-amber-800",
+      iconBg: "bg-amber-100/80"
+    },
+    nao: {
+      emoji: "🎪",
+      title: "Não / Poucas opções",
+      subtitle: "Avaliação crítica sobre opções de cultura e eventos",
+      badgeBg: "bg-rose-50 text-rose-700 border-rose-200",
+      border: "border-rose-200 hover:border-rose-300",
+      tag: "Insatisfeito",
+      tagBg: "bg-rose-100 text-rose-800",
+      iconBg: "bg-rose-100/80"
+    }
+  };
+
+  const dynamicCounts = {};
+  let totalResponses = 0;
+
+  if (records && records.length > 0) {
+    records.forEach(r => {
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "Você acha que a cidade tem boas opções de cultura e eventos?", "cultura e eventos", "cultura", "opções de cultura"]);
+      }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        totalResponses++;
+        const raw = String(val).trim().replace(/[()]/g, "").trim();
+        dynamicCounts[raw] = (dynamicCounts[raw] || 0) + 1;
+      }
+    });
+  } else if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, v]) => {
+      dynamicCounts[k] = v;
+      totalResponses += v;
+    });
+  }
+
+  const baseTotal = (records && records.length > 0) ? records.length : (total || totalResponses || 1);
+
+  const items = Object.entries(dynamicCounts).map(([label, count]) => {
+    const l = label.toLowerCase();
+    let cfg = null;
+    if (l === "sim" || l.startsWith("sim,") || l.startsWith("sim ") || l.includes("excelente") || l.includes("boas opções") || l.includes("com certeza")) {
+      cfg = configs.sim;
+    } else if (l.includes("poucas") || l.includes("razoável") || l.includes("razoavel") || l.includes("médio") || l.includes("medio") || l.includes("às vezes") || l.includes("as vezes")) {
+      cfg = configs.razoavel;
+    } else {
+      cfg = configs.nao;
+    }
+
+    return {
+      label: label,
+      displayTitle: label,
+      emoji: cfg.emoji,
+      subtitle: cfg.subtitle,
+      badgeBg: cfg.badgeBg,
+      border: cfg.border,
+      tag: cfg.tag,
+      tagBg: cfg.tagBg,
+      iconBg: cfg.iconBg,
+      count: count,
+      pct: baseTotal > 0 ? ((count / baseTotal) * 100).toFixed(1) : "0.0"
+    };
+  });
+
+  items.sort((a, b) => b.count - a.count);
+
+  if (items.length === 0) {
+    return '<div class="h-32 flex items-center justify-center text-slate-400 text-xs font-semibold">Sem dados suficientes para opções de cultura nos filtros selecionados.</div>';
+  }
+
+  let html = '<div class="flex flex-col justify-between gap-2.5 h-full flex-1 w-full py-1">';
+  items.forEach(cfg => {
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all flex-1">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
+          cfg.emoji +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.displayTitle + '">' + cfg.displayTitle + '</h4>' +
+        '</div>' +
+      '</div>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + cfg.pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
   html += '</div>';
   return html;
 }
@@ -3150,47 +3339,32 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
 // 9. Mapa de Árvore (Treemap) Proporcional e Interativo
 function renderTreemapWidget(dataMap, total, records, questionText) {
   const dynamicMap = {};
-  if (dataMap && Object.keys(dataMap).length > 0) {
-    Object.entries(dataMap).forEach(([k, v]) => {
-      if (v > 0) dynamicMap[k] = v;
-    });
-  } else if (records && records.length > 0 && questionText) {
+
+  if (records && records.length > 0) {
     records.forEach(r => {
-      const val = getField(r, [questionText, "festas e eventos", "festas", "eventos", "combinam com o seu jeito"]);
-      if (val) {
-        const clean = val.trim().replace(/[()]/g, "").trim();
+      let val = r[questionText];
+      if (!val) {
+        val = getField(r, [questionText, "Você sente que as festas e eventos da cidade combinam com o seu jeito?", "festas e eventos", "festas", "eventos", "combinam com o seu jeito", "estado civil", "civil"]);
+      }
+      if (val !== undefined && val !== null && String(val).trim() !== "") {
+        const clean = String(val).trim().replace(/[()]/g, "").trim();
         if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
       }
     });
-  }
-
-  // Fallback estatístico caso a coluna não exista ou venha vazia
-  if (Object.keys(dynamicMap).length === 0) {
-    const base = total || 477;
-    const qL = (questionText || "").toLowerCase();
-    if (qL.includes("festas") || qL.includes("eventos")) {
-      dynamicMap["Sim, combinam com meu jeito"] = Math.round(base * 0.44);
-      dynamicMap["Às vezes / Parcialmente"] = Math.round(base * 0.38);
-      dynamicMap["Não combinam muito"] = Math.max(1, base - Math.round(base * 0.44) - Math.round(base * 0.38));
-    } else if (qL.includes("civil") || qL.includes("estado")) {
-      dynamicMap["Solteiro(a)"] = Math.round(base * 0.48);
-      dynamicMap["Casado(a) / União Estável"] = Math.round(base * 0.40);
-      dynamicMap["Divorciado(a) / Separado(a)"] = Math.round(base * 0.08);
-      dynamicMap["Viúvo(a)"] = Math.max(1, base - Math.round(base * 0.48) - Math.round(base * 0.40) - Math.round(base * 0.08));
-    } else {
-      dynamicMap["Opção Principal"] = Math.round(base * 0.55);
-      dynamicMap["Opção Secundária"] = Math.max(1, base - Math.round(base * 0.55));
-    }
+  } else if (dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, v]) => {
+      if (v > 0) dynamicMap[k] = v;
+    });
   }
 
   const entries = Object.entries(dynamicMap).filter(([k, v]) => v > 0);
   entries.sort((a, b) => b[1] - a[1]);
 
   if (entries.length === 0) {
-    return '<div class="h-48 flex items-center justify-center text-slate-400 text-xs font-semibold">Sem dados suficientes para o mapa de árvore.</div>';
+    return '<div class="h-48 flex items-center justify-center text-slate-400 text-xs font-semibold">Sem dados suficientes para o mapa de árvore nos filtros selecionados.</div>';
   }
 
-  const totalSum = total || entries.reduce((acc, curr) => acc + curr[1], 0);
+  const totalSum = (records && records.length > 0) ? records.length : (total || entries.reduce((acc, curr) => acc + curr[1], 0));
 
   function getTreemapTile(item, index, totalSum, isHero = false) {
     const [label, count] = item;
@@ -3246,63 +3420,63 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
     }
 
     if (isHero) {
-      return '<div class="' + gradientClass + ' rounded-2xl p-4 sm:p-5 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[88px]">' +
-        '<div class="flex items-center gap-3.5 min-w-0 flex-1">' +
-          '<div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-lg sm:text-xl text-white flex-shrink-0 shadow-xs">' +
+      return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[76px]">' +
+        '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+          '<div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-lg text-white flex-shrink-0 shadow-xs">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
-          '<div>' +
-            '<span class="text-[10px] font-bold text-white/70 uppercase tracking-widest block mb-0.5">Maioria Absoluta</span>' +
-            '<h4 class="text-sm sm:text-base font-extrabold text-white leading-tight break-words" title="' + label + '">' + label + '</h4>' +
+          '<div class="min-w-0 flex-1">' +
+            '<span class="text-[10px] font-bold text-white/70 uppercase tracking-widest block mb-0.5">Mais Citado</span>' +
+            '<h4 class="text-xs sm:text-sm font-extrabold text-white leading-tight break-words" title="' + label + '">' + label + '</h4>' +
           '</div>' +
         '</div>' +
-        '<div class="px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl bg-white/25 backdrop-blur-md font-black text-xl sm:text-2xl text-white border border-white/40 shadow-sm flex-shrink-0 tracking-tight">' +
+        '<div class="px-3.5 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-lg sm:text-xl text-white border border-white/40 shadow-sm flex-shrink-0 tracking-tight">' +
           pct + '%' +
         '</div>' +
       '</div>';
     }
 
-    return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[125px] sm:min-h-[135px] h-full">' +
-      '<div class="flex items-start gap-2.5 mb-2">' +
-        '<div class="w-8 h-8 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-sm text-white flex-shrink-0 mt-0.5 shadow-2xs">' +
+    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[90px] h-full">' +
+      '<div class="flex items-start gap-2.5 mb-1.5">' +
+        '<div class="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-xs text-white flex-shrink-0 mt-0.5 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-words text-white" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs font-bold leading-tight break-words text-white" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-2 border-t border-white/20">' +
-        '<div class="px-3.5 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-base sm:text-lg text-white border border-white/40 shadow-2xs tracking-tight">' +
+      '<div class="flex items-center justify-end pt-1.5 border-t border-white/20">' +
+        '<div class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-sm text-white border border-white/40 shadow-2xs tracking-tight">' +
           pct + '%' +
         '</div>' +
       '</div>' +
     '</div>';
   }
 
-  let html = '<div class="w-full flex flex-col justify-between gap-3 py-1 flex-1 h-full min-h-[320px]">';
+  let html = '<div class="w-full flex flex-col justify-between gap-2.5 py-1 flex-1 h-full min-h-[220px]">';
 
   if (entries.length === 1) {
     html += getTreemapTile(entries[0], 0, totalSum, true);
   } else if (entries.length === 2) {
     const f1 = Math.max(parseFloat(((entries[0][1] / totalSum) * 100).toFixed(1)), 35);
     const f2 = Math.max(parseFloat(((entries[1][1] / totalSum) * 100).toFixed(1)), 35);
-    html += '<div class="flex flex-col sm:flex-row gap-3 flex-1">' +
+    html += '<div class="flex flex-col sm:flex-row gap-2.5 flex-1">' +
       '<div class="flex-1" style="flex: ' + f1 + ';">' + getTreemapTile(entries[0], 0, totalSum) + '</div>' +
       '<div class="flex-1" style="flex: ' + f2 + ';">' + getTreemapTile(entries[1], 1, totalSum) + '</div>' +
     '</div>';
   } else if (entries.length === 3) {
-    html += '<div class="flex flex-col gap-3 flex-1">' +
+    html += '<div class="flex flex-col gap-2.5 flex-1">' +
       getTreemapTile(entries[0], 0, totalSum, true) +
-      '<div class="grid grid-cols-2 gap-3 flex-1">' +
+      '<div class="grid grid-cols-2 gap-2.5 flex-1">' +
         getTreemapTile(entries[1], 1, totalSum) +
         getTreemapTile(entries[2], 2, totalSum) +
       '</div>' +
     '</div>';
   } else {
     // 4 ou mais itens: Destaque ao maior item no topo + grid 2x2 organizado abaixo
-    html += '<div class="flex flex-col gap-3 flex-1 justify-between">' +
+    html += '<div class="flex flex-col gap-2.5 flex-1 justify-between">' +
       getTreemapTile(entries[0], 0, totalSum, true) +
-      '<div class="grid grid-cols-2 gap-3 flex-1">';
+      '<div class="grid grid-cols-2 gap-2.5 flex-1">';
     entries.slice(1).forEach((item, idx) => {
       html += '<div class="h-full">' + getTreemapTile(item, idx + 1, totalSum) + '</div>';
     });
