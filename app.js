@@ -6870,15 +6870,26 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)
     .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag);
 
-  // Helper para limpar markdown básico
+  // Helper para limpar markdown básico e remover ruídos de asteriscos/hifens soltos
   const formatMarkdown = (txt) => {
     if (!txt) return "";
-    return txt
+    let clean = txt
+      // Limpar asteriscos órfãos e traços soltos no início ou meio
+      .replace(/^\s*[\*\-•]\s*$/gm, "")
+      .replace(/^\s*\*\*\s*$/gm, "")
+      .replace(/\*\*\s*\*\*/g, "")
+      // Formatar negrito
       .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
-      .replace(/^[\*\-]\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
-      .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+      // Formatar listas
+      .replace(/^[\*\-•]\s+(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+      .replace(/^\d+\.\s+(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
       .replace(/\n\n/g, "<div class='my-2.5'></div>")
       .replace(/\n/g, "<br/>");
+    
+    // Limpar resíduos finais
+    return clean
+      .replace(/<br\/>\s*<br\/>/g, "<div class='my-2.5'></div>")
+      .replace(/<strong class='text-slate-900 font-bold'><\/strong>/g, "");
   };
 
   // Helper para extrair blocos de texto por títulos/marcadores com regex super flexível
@@ -6923,7 +6934,6 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
     // 1. VISÃO ESTRATÉGICA E VEREDICTO
     if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
-      // Remover sub-tópicos de raciocínio em inglês caso existam dentro do bloco de texto
       let sanitizedVision = content
         .replace(/\d+\.\s*(Deconstruct Requirements|Map Business Idea|Draft)[\s\S]*?(?=\n\n|###|$)/gi, '')
         .replace(/I need to generate the report[\s\S]*?(?=\n\n|$)/gi, '')
@@ -6939,6 +6949,47 @@ window.renderExecutiveReport = function(topic, text, customDate) {
           </div>
           <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
             ${formatMarkdown(sanitizedVision || content)}
+          </div>
+        </div>
+      `;
+    }
+    // 1.1 TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO & TAGS / NUVEM DE PALAVRAS)
+    else if (upperTitle.includes("BAIRROS") || upperTitle.includes("GEO-LOCALIZAÇÃO") || upperTitle.includes("GEO")) {
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
+              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                TOP 5 BAIRROS RECOMENDADOS (GEO-FIT SJC)
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+              ALTO POTENCIAL
+            </span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-3">
+            <div class="flex flex-wrap gap-2 pb-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-900 text-white text-xs font-bold shadow-xs">
+                <i class="fa-solid fa-map-pin text-accent-cyan text-[10px]"></i> Jardim Aquarius (Centro/Oeste)
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-900 text-white text-xs font-bold shadow-xs">
+                <i class="fa-solid fa-map-pin text-accent-cyan text-[10px]"></i> Vila Adyana & Vila Ema (Centro/Oeste)
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 text-white text-xs font-bold shadow-xs">
+                <i class="fa-solid fa-map-pin text-sky-400 text-[10px]"></i> Jardim Satélite (Zona Sul)
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 text-white text-xs font-bold shadow-xs">
+                <i class="fa-solid fa-map-pin text-sky-400 text-[10px]"></i> Urbanova (Oeste)
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-700 text-white text-xs font-bold shadow-xs">
+                <i class="fa-solid fa-map-pin text-amber-400 text-[10px]"></i> Vila Industrial (Zona Leste)
+              </span>
+            </div>
+            <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-2 pt-1 border-t border-slate-200/60">
+              ${formatMarkdown(content)}
+            </div>
           </div>
         </div>
       `;

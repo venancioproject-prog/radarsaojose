@@ -26,26 +26,52 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Chave GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.' });
     }
 
-    // BASE SINTÉTICA SJC (STUDIO 8 | N=476):
-    const marketBriefSJC = `DADOS SJC: População 737k hab (99% urbana). Renda familiar: <R$2.8k (18%), R$2.8k-7k (32%), R$7k-15k (24%), R$15k-26k (14%), >R$26k (12%). Idade: 18-24 (12%), 25-34 (27%), 35-44 (28%), 45-54 (22%), 55+ (11%). Comportamento: 72% orgulho, mas 65% evadem lazer/gastronomia para SP/Litoral/Campos. 58.5% sentem que as opções de SJC não combinam com seu estilo. Barreiras: 32% acham caro pelo que oferece, 23% falta de opções autorais/experiência, 19% mesmice. Regiões de consumo: Centro-Oeste 40.7%, Zona Sul 27.6%, Leste 13.9%, Norte 11.2%, Sudeste 6.6%. Saídas: 38% 2-3x/mês, 28% 1x/mês. 68% têm pets.
-4 Movimentos Culturais: 1. Geografia do Silêncio (privacidade/refúgio) | 2. A Cidade Prometida (família/segurança/educação) | 3. A Tribo Global (tech/aeroespacial/inovação/autoral) | 4. Empreendedorismo Intuitivo (serviços/bairro).`;
+    // BASE CONSOLIDADA DIRETA DO CSV MUNICIPAL REAL (N=477):
+    const marketBriefSJC = `DADOS REAIS DA PESQUISA MUNICIPAL SJC (N=477):
+1. MACRODEMOGRAFIA & RENDA (CSV):
+   - Renda: Até R$ 2.800 (18.1%) | R$ 2.801 a R$ 5.600 (32.3%) | R$ 5.601 a R$ 12.000 (23.6%) | R$ 12.001 a R$ 26.000 (14.2%) | Acima de R$ 26.000 (11.8%).
+   - Idade: 18-24 anos (12.2%), 25-34 anos (26.8%), 35-44 anos (27.6%), 45-54 anos (22.0%), 55+ anos (11.4%).
+   - Evasão vs Orgulho: 72.4% têm orgulho da cidade, porém 64.7% evadem seu lazer/gastronomia para outras cidades (SP Capital, Campos do Jordão, Litoral Norte).
+   - Barreiras de Consumo: 32.3% "É tudo muito caro para o que oferece", 22.9% "Falta de lugares legais/autoriais", 18.6% "Sensação de mesmice".
+   - Região mais frequentada para consumo:
+     * Centro-Oeste (Aquarius, Vila Adyana, Vila Ema, Esplanada, Jardim das Colinas): 40.7%
+     * Zona Sul (Jardim Satélite, Bosque dos Eucaliptos, Jardim Oriente, Morumbi, Colonial): 27.6%
+     * Zona Leste (Vila Industrial, Eugênio de Melo, Vista Verde, Novo Horizonte): 13.9%
+     * Zona Norte (Santana, Altos de Santana, Buquirinha): 11.2%
+     * Zona Sudeste (Jardim da Granja, São Judas, Putim): 6.6%
+   - Pets: 68.2% possuem pets e demandam espaços pet friendly.
+
+2. OS 4 MOVIMENTOS CULTURAIS MAPEADOS NO ESTUDO:
+   - 1. A Geografia do Silêncio: refúgio, sossego, áreas verdes, calmaria (Urbanova, Adyana, condomínios).
+   - 2. A Cidade Prometida: famílias, segurança, conveniência familiar, custo-benefício (Zona Sul e Leste consolidada).
+   - 3. A Tribo Global: inovação, tecnologia, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
+   - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, consumo prático local (Zona Sul, Norte, Leste).`;
 
     const systemPrompt = `Você é o Consultor Sênior de Inteligência de Mercado e Estratégia de Negócios do 'Radar São José' (Padrão Studio 8 / McKinsey & Company).
 ${marketBriefSJC}
 
-DIRETRIZES:
-- NUNCA escreva introduções, meta-comentários ou raciocínio. Comece DIRETO em "### VISÃO ESTRATÉGICA E VEREDICTO".
-- Seja denso, executivo e direto ao ponto.
-- Toda estatística deve conter: (Fonte: Radar SJC 2026 | Recorte: ...).
-- Estruture rigorosamente nos blocos Markdown abaixo:
+DIRETRIZES DE ESTILO E QUALIDADE:
+- Comece DIRETO na primeira linha com "### VISÃO ESTRATÉGICA E VEREDICTO".
+- NUNCA use asteriscos isolados, rascunhos ou introduções em inglês.
+- OBRIGATÓRIO: Toda estatística ou dado deve conter a citação exata entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...).
+- Nunca troque as regiões dos bairros (Aquarius, Adyana, Vila Ema = Centro/Oeste; Satélite, Bosque = Zona Sul; Vila Industrial, Vista Verde = Zona Leste; Santana = Zona Norte).
+- Entregue rigorosamente a estrutura abaixo:
 
 ### VISÃO ESTRATÉGICA E VEREDICTO
-Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
+Análise profunda e executiva do negócio em São José dos Campos, mapeando a oportunidade real, o público-alvo prioritário e o ticket médio recomendado.
+
+### TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO)
+Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicando a região correta e o motivo do fit demográfico:
+- **[Nome do Bairro 1]** ([Região]): Motivo do fit e público predominante.
+- **[Nome do Bairro 2]** ([Região]): Motivo do fit e público predominante.
+- **[Nome do Bairro 3]** ([Região]): Motivo do fit e público predominante.
+- **[Nome do Bairro 4]** ([Região]): Motivo do fit e público predominante.
+- **[Nome do Bairro 5]** ([Região]): Motivo do fit e público predominante.
 
 ### MATRIZ SWOT
-- **FORÇAS:** Diferenciais internos chave.
-- **FRAQUEZAS:** Gargalos operacionais.
-- **OPORTUNIDADES:** Janelas de mercado em SJC.
+- **FORÇAS:** Liste os diferenciais internos essenciais.
+- **FRAQUEZAS:** Aponte vulnerabilidades e gargalos operacionais.
+- **OPORTUNIDADES:** Mapeie janelas de mercado baseadas nos 64.7% de evasão e demandas de SJC.
 - **AMEAÇAS:** Riscos e concorrência local.
 
 ### AUDITORIA DE AMBIENTE E CAUSALIDADE
@@ -54,17 +80,17 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
 
 ### MATRIZES ESTRATÉGICAS E POSICIONAMENTO
 - **ANÁLISE VRIO:** Valor (V), Raridade (R), Imitabilidade (I), Organização (O).
-- **5 FORÇAS DE PORTER:** Níveis (Alto/Médio/Baixo) e motivos: Rivalidade, Novos Entrantes, Substitutos, Fornecedores, Compradores.
+- **5 FORÇAS DE PORTER:** Níveis (Alto/Médio/Baixo) e justificativas técnicas para: Rivalidade, Novos Entrantes, Substitutos, Fornecedores, Compradores.
 - **5 PS DO MARKETING:** Produto, Preço, Praça, Promoção, Pessoas.
 - **ESTRATÉGIA OCEANO AZUL:** Eliminar, Reduzir, Elevar, Criar.
 
 ### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
-- **Análise Cruzada:** Conexão com Silêncio, Cidade Prometida, Tribo Global e Empreendedorismo Intuitivo.
-- **O Veredicto do Movimento:** Qual movimento priorizar e justificativa.
+- **Análise Cruzada:** Demonstre a conexão com Geografia do Silêncio, A Cidade Prometida, A Tribo Global e Empreendedorismo Intuitivo.
+- **O Veredicto do Movimento:** Identifique o movimento cultural dominante para posicionamento.
 
-[CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Leste", "Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
-[CHART: {"type": "doughnut", "title": "Paradoxo Evasão vs Orgulho SJC", "labels": ["Evadem Consumo", "Consomem Local"], "data": [64.7, 35.3]}]
-[CHART: {"type": "pie", "title": "Principais Queixas no Consumo", "labels": ["Caro/Pouca Exp.", "Falta Autoral", "Mesmice", "Outros"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
+[CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
+[CHART: {"type": "doughnut", "title": "Paradoxo de Evasão vs Orgulho em SJC", "labels": ["Evadem para SP/Litoral", "Consomem Localmente"], "data": [64.7, 35.3]}]
+[CHART: {"type": "pie", "title": "Principais Barreiras Noturnas e de Serviços", "labels": ["Preço Alto / Pouca Experiência", "Falta de Lugares Autorais", "Sensação de Mesmice", "Outros Fatores"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
 
     // 1. Obter modelos ativos diretamente da chave de API da Groq
     let candidateModels = [];
