@@ -246,42 +246,63 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
   ]
 }`;
 
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + apiKey,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: "gpt-oss-120b",
-        response_format: { type: "json_object" },
-        max_tokens: 2800,
-        temperature: 0.2,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: String(inputContent) }
-        ]
-      })
-    });
+    const candidateModels = [
+      'openai/gpt-oss-120b',
+      'gpt-oss-120b',
+      'qwen/qwen-3.6-27b',
+      'qwen-3.6-27b',
+      'openai/gpt-oss-20b',
+      'gpt-oss-20b'
+    ];
 
-    if (!response.ok) {
-      const errText = await response.text();
-      return res.status(response.status).json({
-        error: 'Erro na API da Groq (gpt-oss-120b): ' + errText,
-        details: errText
-      });
+    let replyContent = null;
+    let modelUsed = null;
+    let lastError = null;
+
+    for (const model of candidateModels) {
+      try {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + apiKey,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: model,
+            response_format: { type: "json_object" },
+            max_tokens: 2800,
+            temperature: 0.2,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: String(inputContent) }
+            ]
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+            replyContent = data.choices[0].message.content;
+            modelUsed = model;
+            break;
+          }
+        } else {
+          const errText = await response.text();
+          lastError = 'Groq Status ' + response.status + ' (' + model + '): ' + errText;
+          console.warn('[Consultor IA] Falha no modelo ' + model + ':', lastError);
+        }
+      } catch (err) {
+        lastError = err.message;
+        console.warn('[Consultor IA] Excecao no modelo ' + model + ':', lastError);
+      }
     }
 
-    const data = await response.json();
-    if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
+    if (!replyContent) {
       return res.status(500).json({
-        error: 'Resposta vazia ou invalida da Groq.',
-        details: data
+        error: 'Erro na API da Groq: ' + (lastError || 'Nenhum modelo respondeu com sucesso.'),
+        details: lastError
       });
     }
-
-    const replyContent = data.choices[0].message.content;
-    const modelUsed = "gpt-oss-120b";
 
     // Extracao segura de JSON
     let jsonResult = null;
