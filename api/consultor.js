@@ -90,7 +90,7 @@ TRAVAS DRACONIANAS E PADRAO MCKINSEY DEFINITIVO (REGRAS DE OURO):
 1. REGRA DE SANIDADE LOGICA & FIT REALISTA: Adeque a estrategia a REALIDADE da ideia e do local. Negocios populares em bairros populares focam em giro rapido, custo-beneficio, delivery e Empreendedorismo Intuitivo.
 2. TRAVA DE NARRATIVA (PROIBIDO DATA-DUMP): E terminantemente proibido listar porcentagens como lista de compras. Foco na psicologia do consumidor e cultura local.
 3. TESE DE VIABILIDADE EM NEGRITO OBRIGATORIA: No meio do paragrafo de 'visao_estrategica_texto', escreva OBRIGATORIAMENTE uma tese central em formato Markdown Negrito (**frase de impacto definitiva**).
-4. REGRA DE TITANIO (3 VERBALIZACOES REAIS COM DEMOGRAFIA DO CSV): Na chave 'verbalizacoes_reais', extraia 3 objetos com citacoes reais e metadados demograficos (idade, regiao, renda).
+4. REGRA DE TITANIO (3 VERBALIZACOES REAIS COM DEMOGRAFIA DO CSV): Na chave 'verbalizacoes_reais', extraia 3 objetos com citacoes reais e metadados demograficos (genero, idade, regiao, renda). REGRA ESTRITA DE GENERO: A chave 'genero' deve conter estritamente 'Homem' ou 'Mulher'. E terminantemente proibido utilizar termos como 'Cis' ou outros qualificadores.
 5. TRAVA GEOGRAFICA (ZONA DE EXCLUSAO OBRIGATORIA E DENSA): A chave 'zona_exclusao' deve conter a regiao seguida de um paragrafo explicativo duro (40-60 palavras).
 6. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas.
 7. REGRA DESTRUIDORA DE VIES & BIBLIA DOS 4 MOVIMENTOS CULTURAIS: Julgue o negocio conforme as definicoes oficiais dos 4 Movimentos. Na chave 'analise_cards', cruze a ideia com cada uma das 4 definicoes.
@@ -109,18 +109,21 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
   "verbalizacoes_reais": [
     {
       "citacao": "Texto exato da citacao real extraida da pesquisa...",
+      "genero": "Mulher",
       "idade": "25-34 anos",
       "regiao": "Zona Sul",
       "renda": "R$ 5.6k - 12k"
     },
     {
       "citacao": "Texto exato da citacao real extraida da pesquisa...",
+      "genero": "Homem",
       "idade": "35-44 anos",
       "regiao": "Centro-Oeste",
       "renda": "R$ 12k - 25k"
     },
     {
       "citacao": "Texto exato da citacao real extraida da pesquisa...",
+      "genero": "Mulher",
       "idade": "18-24 anos",
       "regiao": "Zona Leste",
       "renda": "R$ 2.8k - 5.6k"

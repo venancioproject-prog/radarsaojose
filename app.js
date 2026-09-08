@@ -7267,19 +7267,28 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   let verbalizacoesList = [];
   const rawVerbalizacoes = data.verbalizacoes_reais || data.tres_verbalizacoes_reais || data.citacoes_reais;
 
+  function sanitizeGenero(gen) {
+    if (!gen) return "MULHER";
+    const str = String(gen).toUpperCase().trim();
+    if (str.includes("HOMEM") || str.includes("MASCULINO") || str === "H") return "HOMEM";
+    return "MULHER";
+  }
+
   if (Array.isArray(rawVerbalizacoes) && rawVerbalizacoes.length > 0) {
     verbalizacoesList = rawVerbalizacoes.map(item => {
       if (typeof item === 'object' && item !== null) {
         return {
           citacao: String(item.citacao || item.texto || item.frase || "").replace(/^["']|["']$/g, '').trim(),
+          genero: sanitizeGenero(item.genero || item.sexo),
           idade: String(item.idade || "25-34 ANOS").toUpperCase().trim(),
           regiao: String(item.regiao || "ZONA SUL").toUpperCase().trim(),
-          renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().trim()
+          renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().replace(/^RENDA:\s*/i, '').trim()
         };
       }
       // Se for string antiga, tenta extrair ou normalizar
       return {
         citacao: String(item || "").replace(/^["']|["']$/g, '').trim(),
+        genero: "MULHER",
         idade: "25-34 ANOS",
         regiao: "ZONA SUL",
         renda: "R$ 5.6K - 12K"
@@ -7293,13 +7302,15 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           if (typeof item === 'object' && item !== null) {
             return {
               citacao: String(item.citacao || item.texto || item.frase || "").replace(/^["']|["']$/g, '').trim(),
+              genero: sanitizeGenero(item.genero || item.sexo),
               idade: String(item.idade || "25-34 ANOS").toUpperCase().trim(),
               regiao: String(item.regiao || "ZONA SUL").toUpperCase().trim(),
-              renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().trim()
+              renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().replace(/^RENDA:\s*/i, '').trim()
             };
           }
           return {
             citacao: String(item || "").replace(/^["']|["']$/g, '').trim(),
+            genero: "MULHER",
             idade: "25-34 ANOS",
             regiao: "ZONA SUL",
             renda: "R$ 5.6K - 12K"
@@ -7309,6 +7320,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     } catch (e) {
       verbalizacoesList = [{
         citacao: rawVerbalizacoes.replace(/^["']|["']$/g, '').trim(),
+        genero: "MULHER",
         idade: "25-34 ANOS",
         regiao: "ZONA SUL",
         renda: "R$ 5.6K - 12K"
@@ -7322,18 +7334,21 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       verbalizacoesList = [
         {
           citacao: String(data.verbalizacao_pesquisa).replace(/^["']|["']$/g, '').trim(),
+          genero: "HOMEM",
           idade: "25-34 ANOS",
           regiao: "CENTRO-OESTE",
           renda: "R$ 12K - 25K"
         },
         {
           citacao: "Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José.",
+          genero: "MULHER",
           idade: "65+ ANOS",
           regiao: "ZONA OESTE",
           renda: "R$ 5.6K - 12K"
         },
         {
           citacao: "Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade.",
+          genero: "MULHER",
           idade: "25-34 ANOS",
           regiao: "ZONA SUL",
           renda: "R$ 5.6K - 12K"
@@ -7343,21 +7358,24 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       verbalizacoesList = [
         {
           citacao: "Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade.",
+          genero: "MULHER",
           idade: "25-34 ANOS",
           regiao: "ZONA SUL",
           renda: "R$ 5.6K - 12K"
         },
         {
           citacao: "Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José.",
+          genero: "MULHER",
           idade: "65+ ANOS",
           regiao: "ZONA OESTE",
           renda: "R$ 5.6K - 12K"
         },
         {
-          citacao: "Sinto falta de uma vida cultural mais pulsante fora do eixo comercial. Mais eventos de rua e ocupação dos espaços públicos.",
-          idade: "25-34 ANOS",
+          citacao: "Para lazer e cultura prefiro ir a São Paulo pois as opções aqui são limitadas e muitas vezes os eventos não são bem divulgados.",
+          genero: "HOMEM",
+          idade: "35-44 ANOS",
           regiao: "CENTRO",
-          renda: "R$ 2.8K - 5.6K"
+          renda: "R$ 12K - 25K"
         }
       ];
     }
@@ -8174,7 +8192,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </div>
             <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between">
               <span class="text-[10px] sm:text-xs text-slate-500 font-semibold tracking-wider uppercase font-mono">
-                ${verb.idade || "25-34 ANOS"} • ${verb.regiao || "ZONA SUL"} • RENDA: ${verb.renda || "R$ 5.6K-12K"}
+                ${verb.genero || "MULHER"} • ${verb.idade || "25-34 ANOS"} • ${verb.regiao || "ZONA SUL"} • RENDA: ${verb.renda || "R$ 5.6K - 12K"}
               </span>
               <span class="text-[10px] font-mono font-bold text-brand-900 shrink-0 ml-2">RADAR SJC</span>
             </div>
