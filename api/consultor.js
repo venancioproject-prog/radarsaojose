@@ -20,7 +20,12 @@ export default async function handler(req, res) {
   try {
     const { user_input, question, messages, context } = req.body || {};
     const inputContent = user_input || question || (Array.isArray(messages) && messages.length > 0 ? messages[messages.length - 1].content : 'Apresente um plano de negócios para São José dos Campos.');
-    
+    const apiKey = (process.env.GROQ_API_KEY || '').trim();
+
+    if (!apiKey) {
+      return res.status(500).json({ error: 'Chave GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.' });
+    }
+
     // BASE REAL CONSOLIDADA DO RADAR SÃO JOSÉ (DADOS DO CSV & APRESENTAÇÃO EXECUTIVA TXT)
     const realMarketDataSJC = `
 DADOS REAIS CONSOLIDADOS DO MERCADO DE SÃO JOSÉ DOS CAMPOS (RADAR SJC 2026 - STUDIO 8 | N=476, IC=95%, Erro ±4.5%):
@@ -88,15 +93,48 @@ Gere o relatório completo formatado em Markdown, seguindo RIGOROSAMENTE a estru
 **DIRETRIZ OBRIGATÓRIA DE VISUALIZAÇÃO DE DADOS (GRÁFICOS):**
 Para garantir o dinamismo do painel executivo, você DEVE inserir obrigatoriamente **2 tags de gráficos** em locais estratégicos do texto (como na Visão Geral ou na SWOT). Utilize rigorosamente o formato de tag limpo: [GRAFICO: NOME_DO_DADO]. Escolha apenas entre as opções suportadas pelo sistema: [GRAFICO: IDADE], [GRAFICO: RENDA] ou [GRAFICO: REGIAO]. Não invente outros nomes de tags.`;
 
+    // 1. AUTO-DESCOBERTA DINÂMICA DA SUA CONTA GROQ
+    let selectedModel = 'qwen/qwen3.8-27b';
+    try {
+      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+      if (modelsResp.ok) {
+        const modelsData = await modelsResp.json();
+        const available = (modelsData.data || [])
+          .map(m => m.id)
+          .filter(id => !id.includes('guard') && !id.includes('whisper') && !id.includes('embed'));
+        
+        console.log('[Consultor IA] Modelos ativos liberados na Groq:', available);
+
+        // Escolhe o melhor modelo de chat disponível na sua chave
+        const best = [
+          available.find(id => id.includes('qwen')),
+          available.find(id => id.includes('llama') && id.includes('70b')),
+          available.find(id => id.includes('llama') && id.includes('8b')),
+          available.find(id => id.includes('llama')),
+          available[0]
+        ].filter(Boolean);
+
+        if (best.length > 0) {
+          selectedModel = best[0];
+          console.log('[Consultor IA] Modelo eleito:', selectedModel);
+        }
+      }
+    } catch (eList) {
+      console.warn('[Consultor IA] Falha ao consultar /models:', eList.message);
+    }
+
+    // 2. CHAMADA COM O MODELO QUE SUA CHAVE REALMENTE TEM ACESSO (max_tokens: 800 para respeitar rate limit)
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        max_tokens: 3500, 
+        model: selectedModel,
+        max_tokens: 800, 
         temperature: 0.5,
         messages: [
           {
@@ -115,14 +153,19 @@ Para garantir o dinamismo do painel executivo, você DEVE inserir obrigatoriamen
 
     if (!response.ok) {
       console.error("Erro retornado pela Groq:", data);
-      return res.status(response.status).json({ error: data.error?.message || 'Erro de comunicação com a Groq' });
+      return res.status(response.status).json({ 
+        error: data.error?.message || 'Erro de comunicação com a Groq',
+        modelUsed: selectedModel,
+        details: JSON.stringify(data)
+      });
     }
 
     const replyContent = data.choices?.[0]?.message?.content || 'Não foi possível obter resposta no momento.';
 
     res.status(200).json({ 
       result: replyContent,
-      reply: replyContent
+      reply: replyContent,
+      modelUsed: selectedModel
     });
 
   } catch (error) {
