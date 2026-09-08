@@ -217,24 +217,37 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
       });
     }
 
-    // Validação ou Extração de JSON Seguro
+    // Sanitização e Extração Segura de JSON
     let jsonResult = null;
+    let cleanReply = replyContent.trim();
+
+    // Remover blocos ```json ... ``` ou ``` ... ``` se existirem
+    cleanReply = cleanReply.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+
+    // Extrair estritamente entre a primeira { e a última }
+    const firstBrace = cleanReply.indexOf('{');
+    const lastBrace = cleanReply.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      cleanReply = cleanReply.substring(firstBrace, lastBrace + 1).trim();
+    }
+
     try {
-      jsonResult = JSON.parse(replyContent);
+      jsonResult = JSON.parse(cleanReply);
     } catch (eJson) {
+      console.warn("[Consultor IA] Falha no primeiro JSON.parse, tentando regex:", eJson.message);
       const matchJson = replyContent.match(/\{[\s\S]*\}/);
       if (matchJson) {
         try {
           jsonResult = JSON.parse(matchJson[0]);
         } catch (eSub) {
-          console.warn("Falha no segundo parse JSON:", eSub);
+          console.warn("[Consultor IA] Falha no regex parse:", eSub.message);
         }
       }
     }
 
     res.status(200).json({ 
       result: jsonResult || replyContent,
-      reply: replyContent,
+      reply: cleanReply,
       modelUsed: modelUsed
     });
 

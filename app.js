@@ -6877,14 +6877,27 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     `).join('');
   };
 
-  // 1. Tentar fazer o parse do JSON
+  // 1. Sanitização robusta e Parse do JSON
   let data = null;
   if (typeof rawData === 'object' && rawData !== null) {
     data = rawData;
   } else if (typeof rawData === 'string') {
+    let cleanStr = rawData.trim();
+    
+    // Remover wrappers de blocos markdown tipo ```json ... ``` ou ``` ... ```
+    cleanStr = cleanStr.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+
+    // Extrair estritamente entre a primeira { e a última }
+    const firstBrace = cleanStr.indexOf('{');
+    const lastBrace = cleanStr.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      cleanStr = cleanStr.substring(firstBrace, lastBrace + 1).trim();
+    }
+
     try {
-      data = JSON.parse(rawData);
+      data = JSON.parse(cleanStr);
     } catch (e) {
+      console.warn("Falha no JSON.parse direto:", e);
       const matchJson = rawData.match(/\{[\s\S]*\}/);
       if (matchJson) {
         try { data = JSON.parse(matchJson[0]); } catch (e2) {}
@@ -6892,11 +6905,17 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     }
   }
 
-  // Se não foi possível obter objeto estruturado, monta objeto compatível a partir do texto
+  // Se mesmo com a sanitização não for um objeto JSON válido, evitar vazamento de JSON cru
   if (!data || typeof data !== 'object') {
-    const rawTxt = String(rawData || '');
+    let fallbackText = String(rawData || '');
+    // Se por acaso vazou JSON em formato string, extrair a visão ou limpar as chaves
+    fallbackText = fallbackText
+      .replace(/^\{[\s\S]*"visao_estrategica"\s*:\s*"([^"]+)"[\s\S]*\}$/i, '$1')
+      .replace(/["{}\[\]]/g, ' ')
+      .trim();
+
     data = {
-      visao_estrategica: rawTxt,
+      visao_estrategica: fallbackText || "Diagnóstico analítico e auditoria de viabilidade para São José dos Campos.",
       bairros: [],
       zona_exclusao: "",
       swot: { forcas: [], fraquezas: [], oportunidades: [], ameacas: [] },
@@ -6907,6 +6926,13 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       graficos_analiticos: []
     };
   }
+
+  // Garantir que nenhum campo de texto contenha JSON bruto serializado
+  if (typeof data.visao_estrategica === 'object') data.visao_estrategica = JSON.stringify(data.visao_estrategica);
+  if (typeof data.pestel_ishikawa === 'object') data.pestel_ishikawa = JSON.stringify(data.pestel_ishikawa);
+  if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
+  if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
+  if (typeof data.zona_exclusao === 'object') data.zona_exclusao = JSON.stringify(data.zona_exclusao);
 
   const dynamicChartsToRender = [];
 
@@ -7080,19 +7106,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 </p>
               </div>
             `).join('') : `
-              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
-                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed font-normal">Alta densidade de renda corporativa e tolerância a novos conceitos autorais.</p>
-              </div>
-              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                <div class="flex items-center justify-between">
-                  <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Satélite</span>
-                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Sul</span>
-                </div>
-                <p class="text-xs text-slate-600 leading-relaxed font-normal">Maior densidade populacional e volume de consumo contínuo da Zona Sul.</p>
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 text-slate-500 text-xs italic">
+                Nenhum bairro específico mapeado para os critérios selecionados.
               </div>
             `}
 
