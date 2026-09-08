@@ -7169,7 +7169,224 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
     </div>
 
-    <!-- SEÇÃO 2: MATRIZ SWOT -->
+  // Processamento e Normalização das 3 Verbalizações Reais (A Voz do Consumidor)
+  let verbalizacoesList = [];
+  const rawVerbalizacoes = data.tres_verbalizacoes_reais || data.verbalizacoes_reais || data.citacoes_reais;
+
+  if (Array.isArray(rawVerbalizacoes) && rawVerbalizacoes.length > 0) {
+    verbalizacoesList = rawVerbalizacoes;
+  } else if (typeof rawVerbalizacoes === 'string' && rawVerbalizacoes.trim()) {
+    try {
+      const parsedVerb = JSON.parse(rawVerbalizacoes);
+      if (Array.isArray(parsedVerb)) verbalizacoesList = parsedVerb;
+    } catch (e) {
+      verbalizacoesList = [rawVerbalizacoes];
+    }
+  }
+
+  // Fallback seguro caso não venha no array
+  if (verbalizacoesList.length === 0) {
+    if (data.verbalizacao_pesquisa) {
+      verbalizacoesList = [
+        data.verbalizacao_pesquisa,
+        "\"Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José.\"",
+        "\"Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade.\""
+      ];
+    } else {
+      verbalizacoesList = [
+        "\"Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade. - Mulher Cis, 25-34 anos, Parque Industrial\"",
+        "\"Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José. - Mulher Cis, 65+ anos, Oeste\"",
+        "\"Sinto falta de uma vida cultural mais pulsante fora do eixo comercial. Mais eventos de rua e ocupação dos espaços públicos. - Homem Cis, 25-34 anos, Centro\""
+      ];
+    }
+  }
+
+  // Montagem dos 3 Gráficos Analíticos
+  let graficosList = [];
+  if (Array.isArray(data.graficos_analiticos) && data.graficos_analiticos.length > 0) {
+    graficosList = data.graficos_analiticos;
+  } else {
+    graficosList = [
+      {
+        chart_data: {
+          type: "doughnut",
+          title: "Frequência de Consumo por Região de SJC",
+          labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
+          data: [40.7, 27.6, 13.9, 11.2, 6.6]
+        },
+        analise_texto: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
+      },
+      {
+        chart_data: {
+          type: "doughnut",
+          title: "Paradoxo de Evasão vs Orgulho em SJC",
+          labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
+          data: [64.7, 35.3]
+        },
+        analise_texto: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
+      },
+      {
+        chart_data: {
+          type: "bar",
+          title: "Distribuição de Renda Familiar em SJC",
+          labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
+          data: [18.1, 32.3, 23.6, 14.2, 11.8]
+        },
+        analise_texto: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da população economicamente ativa, sendo o motor de volume para a cidade."
+      }
+    ];
+  }
+
+  const chartCardsHtml = graficosList.map((item, gIdx) => {
+    const chartId = "dynamic-report-chart-" + gIdx + "-" + Math.random().toString(36).substr(2, 7);
+    const cfg = item.chart_data || {};
+
+    dynamicChartsToRender.push({
+      id: chartId,
+      config: cfg
+    });
+
+    return `
+      <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+              <i class="fa-solid fa-chart-column text-accent-cyan"></i>
+              ${cfg.title || "Indicador Analítico SJC"}
+            </span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+          </div>
+          <div class="relative w-full h-60 sm:h-64">
+            <canvas id="${chartId}"></canvas>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
+          <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
+            <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
+          </span>
+          <p class="text-xs text-slate-700 leading-relaxed font-normal">
+            ${formatMarkdown(item.analise_texto || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.")}
+          </p>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // INÍCIO DA MONTAGEM DO HTML NA SEQUÊNCIA EXATA SOLICITADA (1 A 9)
+  let htmlOutput = `
+    <!-- 1 & 2: VISÃO ESTRATÉGICA & TOP 5 BAIRROS -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <!-- BLOCO 1: VISÃO ESTRATÉGICA E VEREDICTO -->
+      <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                VISÃO ESTRATÉGICA E VEREDICTO
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+              DIAGNÓSTICO SJC
+            </span>
+          </div>
+          
+          <!-- ÚNICO BLOCO DE TEXTO DENSO, LIMPO E EXECUTIVO -->
+          <div class="p-4 sm:p-5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs">
+            <p id="visao-estrategica-texto-corrido" class="text-[13px] sm:text-[14px] text-slate-700 font-normal leading-relaxed text-justify">
+              ${formatMarkdown(visaoTextoCorrido)}
+            </p>
+          </div>
+
+          <!-- GRÁFICO DINÂMICO DE VALIDAÇÃO CONECTADO À ANÁLISE -->
+          <div class="mt-4 p-4 sm:p-5 bg-gradient-to-b from-slate-50/90 via-slate-50 to-slate-100/70 rounded-2xl border border-slate-200/90 shadow-2xs space-y-3 flex-1 flex flex-col justify-between min-h-[280px]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-slate-200/80">
+              <div class="flex items-start gap-2 flex-1">
+                <i class="fa-solid fa-chart-column text-accent-cyan text-sm mt-0.5 shrink-0"></i>
+                <span class="text-xs font-black uppercase tracking-wide text-brand-950 leading-snug">
+                  ${primaryChartConfig.title}
+                </span>
+              </div>
+              <span class="text-[9px] font-mono font-black px-2 py-0.5 rounded-md bg-brand-900 text-accent-cyan border border-brand-800 shadow-2xs shrink-0 self-start sm:self-center">
+                AMOSTRA N=477
+              </span>
+            </div>
+            <div class="relative w-full flex-1 min-h-[230px] sm:min-h-[260px]">
+              <canvas id="${primaryChartCanvasId}"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+          <span>PADRÃO MCKINSEY / STUDIO 8</span>
+          <span class="text-brand-900">RADAR SJC 2026</span>
+        </div>
+      </div>
+
+      <!-- BLOCO 2: TOP 5 BAIRROS & FIT GEOGRÁFICO -->
+      <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
+              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                TOP 5 BAIRROS & FIT GEOGRÁFICO
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+              GEO-FIT SJC
+            </span>
+          </div>
+
+          <div class="space-y-2.5 pt-1">
+            ${bairrosList.length > 0 ? bairrosList.map((b, idx) => `
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
+                    ${b.nome || `Microterritório 0${idx + 1}`}
+                  </span>
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">
+                    ${b.regiao || "SJC"}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                  ${formatMarkdown(b.justificativa || "")}
+                </p>
+              </div>
+            `).join('') : `
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 text-slate-500 text-xs italic">
+                Nenhum bairro específico mapeado para os critérios selecionados.
+              </div>
+            `}
+
+            <!-- ZONA DE EXCLUSÃO (ONDE NÃO ABRIR) -->
+            ${data.zona_exclusao ? `
+              <div class="p-3 bg-rose-50/90 rounded-2xl border border-rose-200 shadow-2xs space-y-1 hover:border-rose-300 transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-rose-800 text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-600 text-[11px]"></i> 
+                    ONDE NÃO ABRIR (ZONA DE EXCLUSÃO / ALTO RISCO)
+                  </span>
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-rose-200 text-rose-900 font-bold border border-rose-300">
+                    ALTO RISCO
+                  </span>
+                </div>
+                <p class="text-xs text-rose-900/90 leading-relaxed font-normal">
+                  ${formatMarkdown(data.zona_exclusao)}
+                </p>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+          <span>RECORTE GEOGRÁFICO</span>
+          <span class="text-emerald-700 font-bold">N=477 RESPONDENTES</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCO 3: MATRIZ SWOT -->
     <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
@@ -7230,7 +7447,26 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
     </div>
 
-    <!-- SEÇÃO 3: AUDITORIA PESTEL & ISHIKAWA -->
+    <!-- BLOCO 4: 3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS (IMEDIATAMENTE ABAIXO DA SWOT) -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS
+          </h3>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+          PESQUISA RADAR SJC (N=477)
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        ${chartCardsHtml}
+      </div>
+    </div>
+
+    <!-- BLOCO 5: AUDITORIA DE AMBIENTE (PESTEL & ISHIKAWA) -->
     <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2">
@@ -7249,45 +7485,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
     </div>
 
-    <!-- SEÇÃO 4: MATRIZES ESTRATÉGICAS (VRIO, PORTER, 5 PS & OCEANO AZUL) -->
-    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-        <div class="flex items-center gap-2.5">
-          <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
-          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-            MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER)
-          </h3>
-        </div>
-        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
-          COMPETITIVIDADE SJC
-        </span>
-      </div>
-
-      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
-        ${formatMarkdown(data.matrizes_vrio_porter || "Avaliação dos diferenciais internos sustentáveis (VRIO) e intensidade competitiva (Porter) no mercado joseense.")}
-      </div>
-    </div>
-
-    <!-- SEÇÃO 5: MIX DE MARKETING & OCEANO AZUL -->
-    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-        <div class="flex items-center gap-2.5">
-          <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
-          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-            MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL)
-          </h3>
-        </div>
-        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
-          5 PS & OCEANO AZUL
-        </span>
-      </div>
-
-      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
-        ${formatMarkdown(data.mix_marketing_oceano_azul || "Diretrizes para precificação, canais, comunicação e curva de valor eliminando fatores de atrito do setor.")}
-      </div>
-    </div>
-
-    <!-- SEÇÃO 6: FIT COM OS 4 MOVIMENTOS CULTURAIS -->
+    <!-- BLOCO 6: FIT COM OS 4 MOVIMENTOS CULTURAIS DE SJC (ABAIXO DO PESTEL) -->
     <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
@@ -7391,7 +7589,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </div>
       </div>
 
-      <!-- CARD DE DESTAQUE: MOVIMENTO VENCEDOR (ALTO CONTRASTE TEXT-WHITE / TEXT-AMBER-300) -->
+      <!-- CARD DE DESTAQUE: MOVIMENTO VENCEDOR -->
       <div class="p-5 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-2xl border border-brand-800 shadow-md flex flex-col md:flex-row items-center gap-4">
         <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-xl text-purple-300">
           👑
@@ -7411,96 +7609,79 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </div>
       </div>
     </div>
-  `;
 
-  // SEÇÃO 7: 3 GRÁFICOS ANALÍTICOS DE VALIDAÇÃO
-  let graficosList = [];
-  if (Array.isArray(data.graficos_analiticos) && data.graficos_analiticos.length > 0) {
-    graficosList = data.graficos_analiticos;
-  } else {
-    graficosList = [
-      {
-        chart_data: {
-          type: "doughnut",
-          title: "Frequência de Consumo por Região de SJC",
-          labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
-          data: [40.7, 27.6, 13.9, 11.2, 6.6]
-        },
-        analise_texto: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
-      },
-      {
-        chart_data: {
-          type: "doughnut",
-          title: "Paradoxo de Evasão vs Orgulho em SJC",
-          labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
-          data: [64.7, 35.3]
-        },
-        analise_texto: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
-      },
-      {
-        chart_data: {
-          type: "bar",
-          title: "Distribuição de Renda Familiar em SJC",
-          labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
-          data: [18.1, 32.3, 23.6, 14.2, 11.8]
-        },
-        analise_texto: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da população economicamente ativa, sendo o motor de volume para a cidade."
-      }
-    ];
-  }
-
-  const chartCardsHtml = graficosList.map((item, gIdx) => {
-    const chartId = "dynamic-report-chart-" + gIdx + "-" + Math.random().toString(36).substr(2, 7);
-    const cfg = item.chart_data || {};
-
-    dynamicChartsToRender.push({
-      id: chartId,
-      config: cfg
-    });
-
-    return `
-      <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
-        <div class="space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-              <i class="fa-solid fa-chart-column text-accent-cyan"></i>
-              ${cfg.title || "Indicador Analítico SJC"}
-            </span>
-            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
-          </div>
-          <div class="relative w-full h-60 sm:h-64">
-            <canvas id="${chartId}"></canvas>
-          </div>
-        </div>
-        <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
-          <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
-            <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
-          </span>
-          <p class="text-xs text-slate-700 leading-relaxed font-normal">
-            ${formatMarkdown(item.analise_texto || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.")}
-          </p>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  htmlOutput += `
-    <!-- SEÇÃO 7: 3 GRÁFICOS DE VALIDAÇÃO -->
-    <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
+    <!-- BLOCO 7: MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER) -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
-          <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
+          <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
           <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-            3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS
+            MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER)
           </h3>
         </div>
         <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
-          PESQUISA RADAR SJC (N=477)
+          COMPETITIVIDADE SJC
         </span>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        ${chartCardsHtml}
+      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
+        ${formatMarkdown(data.matrizes_vrio_porter || "Avaliação dos diferenciais internos sustentáveis (VRIO) e intensidade competitiva (Porter) no mercado joseense.")}
+      </div>
+    </div>
+
+    <!-- BLOCO 8: [NOVO] A VOZ DO CONSUMIDOR (VERBALIZAÇÕES REAIS DA PESQUISA) -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-comments text-amber-500 text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            A VOZ DO CONSUMIDOR (VERBALIZAÇÕES REAIS DA PESQUISA)
+          </h3>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+          QUALITATIVA RADAR SJC
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+        ${verbalizacoesList.slice(0, 3).map((verb, vIdx) => `
+          <div class="p-5 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between space-y-3.5 hover:border-slate-300 transition-all">
+            <div class="space-y-3 flex-1">
+              <div class="flex items-center justify-between">
+                <i class="fa-solid fa-quote-left text-amber-500 text-base"></i>
+                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-200/60">
+                  CITAÇÃO REAL 0${vIdx + 1}
+                </span>
+              </div>
+              <p class="text-xs sm:text-[13px] text-slate-700 italic leading-relaxed font-medium">
+                ${formatMarkdown(String(verb).replace(/^["']|["']$/g, '').trim())}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+              <span>VOZ DO MORADOR</span>
+              <span class="text-brand-900">RADAR SJC</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- BLOCO 9: MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL) -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL)
+          </h3>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
+          5 PS & OCEANO AZUL
+        </span>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
+        ${formatMarkdown(data.mix_marketing_oceano_azul || "Diretrizes para precificação, canais, comunicação e curva de valor eliminando fatores de atrito do setor.")}
       </div>
     </div>
   `;

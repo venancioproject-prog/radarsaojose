@@ -77,7 +77,7 @@ ${marketBriefSJC}
 TRAVAS DRACONIANAS E PADRÃO MCKINSEY DEFINITIVO (REGRAS DE OURO):
 1. TRAVA DE NARRATIVA (PROIBIDO DATA-DUMP): É TERMINANTEMENTE PROIBIDO listar porcentagens como uma lista de compras (ex: "tem 40%, além de 20%, somando 15%"). O foco central do texto deve ser a PSICOLOGIA DO CONSUMIDOR, AS DORES OCULTAS, O COMPORTAMENTO E A CULTURA LOCAL. Os números do Radar SJC devem aparecer de forma elegante e comedida, servindo unicamente para PROVAR a tese analítica.
 2. TESE DE VIABILIDADE EM NEGRITO OBRIGATÓRIA: No meio do parágrafo de 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE escrever uma frase de impacto definitiva em formato Markdown Negrito (**frase**). Exemplo de padrão: "**O sucesso deste negócio em SJC não depende de preço, mas da capacidade de quebrar a barreira da mesmice e reter o consumidor que hoje foge para São Paulo.**"
-3. TRAVA DE COERÊNCIA (VERBALIZAÇÃO COM FIT ABSOLUTO): Na chave 'verbalizacao_pesquisa', extraia uma citação qualitativa real do banco fornecido que tenha FIT ABSOLUTO com o nicho da ideia proposta. Se a ideia for gastronomia, wine bar ou café, é PROIBIDO puxar aspas de eventos/shows; puxe queixas sobre custo alto sem qualidade, falta de lugares legais, mesmice noturna ou falta de vida nas ruas.
+3. REGRA DE TITÂNIO (3 VERBALIZAÇÕES REAIS DO CSV): Na chave 'tres_verbalizacoes_reais', você é ESTONTEANTEMENTE PROIBIDO de inventar, criar ou simular frases falsas. Você DEVE ler o contexto da pesquisa/CSV e EXTRAIR EXATAMENTE 3 citações reais (verbatims) do banco que tenham o MAIOR FIT com o nicho de mercado da ideia sugerida.
 4. TRAVA GEOGRÁFICA (ZONA DE EXCLUSÃO OBRIGATÓRIA E DENSA): A chave 'zona_exclusao' NÃO PODE ser apenas o nome de um bairro. Ela DEVE conter o nome da região seguido de um PARÁGRAFO EXPLICATIVO E DURO (40-60 palavras) detalhando por que a ideia fracassaria e queimaria caixa naquele local (choque com a cultura tradicional familiar da Cidade Prometida, falta de lastro de renda, dispersão de fluxo, etc.).
 5. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas e contextualizadas cruzando renda, idade e o movimento cultural correspondente.
 6. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (\`\`\`json).
@@ -92,6 +92,11 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     "data": [45, 30, 25]
   },
   "verbalizacao_pesquisa": "\"Citação autêntica da pesquisa que seja PERFEITAMENTE alinhada ao nicho da ideia proposta.\"",
+  "tres_verbalizacoes_reais": [
+    "Citação real 1 extraída do CSV/pesquisa com fit no nicho",
+    "Citação real 2 extraída do CSV/pesquisa com fit no nicho",
+    "Citação real 3 extraída do CSV/pesquisa com fit no nicho"
+  ],
   "bairros": [
     { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Análise fluida e executiva conectando o perfil de renda, comportamento do CSV e o movimento cultural ao negócio." },
     { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Análise fluida conectando os dados demográficos e fluxo de consumo..." },
