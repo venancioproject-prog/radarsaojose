@@ -132,9 +132,17 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   },
   "matrizes_vrio_porter": "Avaliação competitiva real (VRIO) e nível de rivalidade contra concorrentes locais, poder do cliente joseense e barreiras (Porter).",
   "mix_marketing_oceano_azul": "Estratégia de precificação (Preço), canais (Praça), atração (Promoção) e curva de valor (Eliminar, Reduzir, Elevar, Criar diferenciais).",
-  "movimento_cultural": {
-    "vencedor": "Nome do Movimento (A Geografia do Silêncio | A Cidade Prometida | A Tribo Global | O Empreendedorismo Intuitivo)",
-    "analise": "Justificativa de ancoragem estratégica neste movimento e alerta de risco moral se chocar com a moral familiar da Cidade Prometida."
+  "movimentos_culturais": {
+    "analise_cards": {
+      "geografia_silencio": "Escreva 2 linhas analisando como o público que busca sossego, refúgio e áreas verdes em SJC recebe esta ideia com base no CSV.",
+      "cidade_prometida": "Escreva 2 linhas analisando como o público familiar conservador da Zona Sul/Colinas recebe a ideia, apontando fit ou riscos morais.",
+      "tribo_global": "Escreva 2 linhas analisando a recepção pelo público cosmopolita, engenheiros, tech e que busca estética diferenciada em SJC.",
+      "empreendedorismo_intuitivo": "Escreva 2 linhas analisando o fit com a economia real dos bairros, conveniência rápida e consumo prático local."
+    },
+    "veredicto_final": {
+      "nome_movimento": "A Tribo Global",
+      "justificativa_densa": "Um parágrafo forte explicando por que este movimento é o porto seguro do negócio e como capturar esse público específico com base no CSV de SJC."
+    }
   },
   "graficos_analiticos": [
     {

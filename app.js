@@ -7023,6 +7023,45 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     if (Array.isArray(data.ishikawa.causas)) ishikawaObj.causas = data.ishikawa.causas;
   }
 
+  // Processamento e Normalização dos 4 Movimentos Culturais (360º & Veredicto)
+  let movimentosObj = {
+    analise_cards: {
+      geografia_silencio: "Refúgio, sossego, áreas verdes e calmaria do estresse corporativo (Urbanova/Adyana).",
+      cidade_prometida: "Famílias que priorizam estabilidade, conveniência familiar e moral tradicional (Zona Sul/Leste).",
+      tribo_global: "Engenheiros, tech, criativos e público cosmopolita ávido por design autoral e inovação (Aquarius/Vila Ema).",
+      empreendedorismo_intuitivo: "A economia real dos bairros, prestadores de serviço e consumo prático local."
+    },
+    veredicto_final: {
+      nome_movimento: "A Tribo Global",
+      justificativa_densa: "Posicionamento prioritário para captura de margem e minimização do atrito moral em São José dos Campos."
+    }
+  };
+
+  const rawMov = data.movimentos_culturais || data.movimento_cultural;
+  if (rawMov && typeof rawMov === 'object') {
+    if (rawMov.analise_cards && typeof rawMov.analise_cards === 'object') {
+      movimentosObj.analise_cards = { ...movimentosObj.analise_cards, ...rawMov.analise_cards };
+    }
+    if (rawMov.veredicto_final && typeof rawMov.veredicto_final === 'object') {
+      if (rawMov.veredicto_final.nome_movimento) movimentosObj.veredicto_final.nome_movimento = rawMov.veredicto_final.nome_movimento;
+      if (rawMov.veredicto_final.justificativa_densa) movimentosObj.veredicto_final.justificativa_densa = rawMov.veredicto_final.justificativa_densa;
+    } else if (rawMov.vencedor || rawMov.analise) {
+      if (rawMov.vencedor) movimentosObj.veredicto_final.nome_movimento = rawMov.vencedor;
+      if (rawMov.analise) movimentosObj.veredicto_final.justificativa_densa = rawMov.analise;
+    }
+  } else if (typeof rawMov === 'string' && rawMov.trim()) {
+    try {
+      const parsedMov = JSON.parse(rawMov);
+      if (parsedMov.analise_cards) movimentosObj.analise_cards = { ...movimentosObj.analise_cards, ...parsedMov.analise_cards };
+      if (parsedMov.veredicto_final) {
+        if (parsedMov.veredicto_final.nome_movimento) movimentosObj.veredicto_final.nome_movimento = parsedMov.veredicto_final.nome_movimento;
+        if (parsedMov.veredicto_final.justificativa_densa) movimentosObj.veredicto_final.justificativa_densa = parsedMov.veredicto_final.justificativa_densa;
+      }
+    } catch (eMov) {
+      movimentosObj.veredicto_final.justificativa_densa = rawMov;
+    }
+  }
+
   // Garantir que nenhum outro campo de texto contenha JSON bruto serializado
   if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
   if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
@@ -7732,7 +7771,9 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </div>
             <div class="p-3.5 space-y-1.5">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DO SILÊNCIO</h5>
-              <p class="text-[11px] text-slate-600 leading-relaxed">Refúgio, sossego, áreas verdes e calmaria do estresse corporativo.</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                ${formatMarkdown(movimentosObj.analise_cards?.geografia_silencio || "Refúgio, sossego, áreas verdes e calmaria do estresse corporativo.")}
+              </p>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7754,7 +7795,9 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </div>
             <div class="p-3.5 space-y-1.5">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A CIDADE PROMETIDA</h5>
-              <p class="text-[11px] text-slate-600 leading-relaxed">Famílias que buscam segurança, estabilidade e moral tradicional.</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                ${formatMarkdown(movimentosObj.analise_cards?.cidade_prometida || "Famílias que buscam segurança, estabilidade e moral tradicional.")}
+              </p>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7776,7 +7819,9 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </div>
             <div class="p-3.5 space-y-1.5">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A TRIBO GLOBAL</h5>
-              <p class="text-[11px] text-slate-600 leading-relaxed">Engenheiros, tech, criativos e público cosmopolita.</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                ${formatMarkdown(movimentosObj.analise_cards?.tribo_global || "Engenheiros, tech, criativos e público cosmopolita.")}
+              </p>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7798,7 +7843,9 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </div>
             <div class="p-3.5 space-y-1.5">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">EMPREENDEDORISMO INTUITIVO</h5>
-              <p class="text-[11px] text-slate-600 leading-relaxed">A economia real dos bairros, prestadores de serviço e consumo prático.</p>
+              <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                ${formatMarkdown(movimentosObj.analise_cards?.empreendedorismo_intuitivo || "A economia real dos bairros, prestadores de serviço e consumo prático.")}
+              </p>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7807,22 +7854,22 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </div>
       </div>
 
-      <!-- CARD DE DESTAQUE: MOVIMENTO VENCEDOR -->
-      <div class="p-5 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-2xl border border-brand-800 shadow-md flex flex-col md:flex-row items-center gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-xl text-purple-300">
+      <!-- CARD DE DESTAQUE: MOVIMENTO VENCEDOR (BANNER EXECUTIVO) -->
+      <div class="p-6 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-3xl border border-brand-800/80 shadow-card flex flex-col md:flex-row items-start md:items-center gap-5">
+        <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-2xl text-purple-300 shadow-inner">
           👑
         </div>
-        <div class="space-y-1.5 flex-1 text-center md:text-left">
-          <div class="flex items-center gap-2 justify-center md:justify-start">
+        <div class="space-y-2 flex-1">
+          <div class="flex flex-wrap items-center gap-2">
             <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-300">
               MOVIMENTO VENCEDOR:
             </span>
-            <span class="text-xs font-black uppercase text-amber-300 font-mono bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
-              ${data.movimento_cultural?.vencedor || "A Tribo Global"}
+            <span class="text-xs sm:text-sm font-black uppercase text-amber-300 font-mono bg-amber-400/10 px-2.5 py-0.5 rounded-md border border-amber-400/30">
+              ${movimentosObj.veredicto_final?.nome_movimento || "A Tribo Global"}
             </span>
           </div>
-          <div class="text-xs sm:text-sm text-white font-medium leading-relaxed">
-            ${formatMarkdown(data.movimento_cultural?.analise || "Posicionamento prioritário para captura de margem e minimização do atrito moral em São José dos Campos.", 'text-amber-300 font-black')}
+          <div class="text-xs sm:text-[13px] text-slate-100 font-normal leading-relaxed text-justify">
+            ${formatMarkdown(movimentosObj.veredicto_final?.justificativa_densa || "Posicionamento prioritário para captura de margem e minimização do atrito moral em São José dos Campos.")}
           </div>
         </div>
       </div>
