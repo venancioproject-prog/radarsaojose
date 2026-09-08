@@ -6952,20 +6952,20 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     if (!fullText) return '';
     try {
       const endGroup = endPatterns.join('|');
-      // Procura por qualquer variação de título no início de linha ou após pontuação
-      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
+      // Procura por qualquer variação de título no início de linha ou após quebra/pontuação
+      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
       let match = fullText.match(regex);
       
-      // Fallback se não casou com início de linha
+      // Fallback se não casou
       if (!match) {
-        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
+        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
         match = fullText.match(fallbackRegex);
       }
 
       if (match && match[1]) {
         let res = match[1].trim();
-        // Remove títulos subsequentes que vazaram
-        res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5\s*FORÇAS|PORTER|VRIO|5\s*PS|MARKETING|OCEANO\s*AZUL|MATRIZ|AUDITORIA|SWOT)[\s\S]*$/gi, '').trim();
+        // Remove títulos de seções subsequentes se vazaram
+        res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5\s*FORÇAS|PORTER|VRIO|5\s*PS|MARKETING|OCEANO\s*AZUL|MATRIZ|AUDITORIA|SWOT|TOP\s*BAIRROS)[\s\S]*$/gi, '').trim();
         // Remove prefixos repetitivos como (V): (R): (I): (O): **
         res = res.replace(/^\s*\([VRIO]\)\s*:?\s*/gi, '');
         // Remove asteriscos órfãos e pontuações soltas no início ou final
@@ -6987,11 +6987,11 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
     // Lista ordenada de chaves para quebrar o texto sequencialmente
     const keys = [
-      { id: 'oport', name: 'Oportunidade Latente & Dor do Mercado', icon: 'fa-bullseye', color: 'rose', titleClass: 'text-rose-600', pattern: 'OPORTUNIDADE|DOR DO MERCADO|Oportunidade latente|A dor' },
-      { id: 'valid', name: 'Validação da Demanda & Comportamento', icon: 'fa-chart-line', color: 'sky', titleClass: 'text-sky-600', pattern: 'VALIDAÇÃO DA DEMANDA|VALIDACAO DA DEMANDA|Validação da demanda|Validacao da demanda|Validação|Validacao' },
-      { id: 'ticket', name: 'Ticket Médio Estimado & Posicionamento', icon: 'fa-tag', color: 'emerald', titleClass: 'text-emerald-600', pattern: 'TICKET MÉDIO|TICKET MEDIO|Ticket médio|Ticket medio|TICKET|PREÇO' },
-      { id: 'publico', name: 'Público Prioritário & Segmentos', icon: 'fa-users', color: 'purple', titleClass: 'text-purple-600', pattern: 'PÚBLICO PRIORITÁRIO|PUBLICO PRIORITARIO|Público prioritário|Publico prioritario|PÚBLICO|PUBLICO' },
-      { id: 'diretrizes', name: 'Diretrizes Executivas & Ações Práticas', icon: 'fa-lightbulb', color: 'amber', titleClass: 'text-brand-900', pattern: 'DIRETRIZES EXECUTIVAS|Diretrizes executivas|DIRETRIZES|EXPANSÃO|Posicionamento' }
+      { id: 'oport', name: 'Oportunidade Latente & Dor do Mercado', icon: 'fa-bullseye', color: 'rose', titleClass: 'text-rose-600', pattern: 'OPORTUNIDADE\\s*LATENTE|OPORTUNIDADE|DOR\\s*DO\\s*MERCADO|A\\s*dor' },
+      { id: 'valid', name: 'Validação da Demanda & Comportamento', icon: 'fa-chart-line', color: 'sky', titleClass: 'text-sky-600', pattern: 'VALIDAÇÃO\\s*DA\\s*DEMANDA|VALIDACAO\\s*DA\\s*DEMANDA|VALIDAÇÃO|VALIDACAO' },
+      { id: 'ticket', name: 'Ticket Médio Estimado & Posicionamento', icon: 'fa-tag', color: 'emerald', titleClass: 'text-emerald-600', pattern: 'TICKET\\s*MÉDIO|TICKET\\s*MEDIO|TICKET|PREÇO|PRECO' },
+      { id: 'publico', name: 'Público Prioritário & Segmentos', icon: 'fa-users', color: 'purple', titleClass: 'text-purple-600', pattern: 'PÚBLICO\\s*PRIORITÁRIO|PUBLICO\\s*PRIORITARIO|PÚBLICO|PUBLICO|PERFIL\\s*DE\\s*CLIENTES' },
+      { id: 'diretrizes', name: 'Diretrizes Executivas & Ações Práticas', icon: 'fa-lightbulb', color: 'amber', titleClass: 'text-brand-900', pattern: 'DIRETRIZES\\s*EXECUTIVAS|DIRETRIZES|EXPANSÃO|EXPANSAO|RECOMENDAÇÕES|RECOMENDACOES|AÇÕES|ACOES' }
     ];
 
     const allPatterns = keys.map(k => k.pattern);
@@ -7001,10 +7001,10 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       const remainingPatterns = allPatterns.filter((_, i) => i !== idx);
       const content = extractBlock(visionText, k.pattern, remainingPatterns);
       if (content && content.length > 5) {
-        // Limpar qualquer vazamento de título repetido no início do conteúdo (ex: "& COMPORTAMENTO", "ESTIMADO & POSICIONAMENTO")
+        // Limpar qualquer vazamento de título repetido no início do conteúdo
         let cleanContent = content
-          .replace(/^(&\s*COMPORTAMENTO|&\s*POSICIONAMENTO|&\s*EXPANSÃO|&\s*AÇÕES)[\s\:\-]*/i, '')
-          .replace(/^(?:OPORTUNIDADE|VALIDAÇÃO|TICKET|PÚBLICO|DIRETRIZES)[^:\n]*:?\s*/i, '')
+          .replace(/^(&\s*COMPORTAMENTO|&\s*POSICIONAMENTO|&\s*EXPANSÃO|&\s*EXPANSAO|&\s*AÇÕES|&\s*ACOES|&\s*DOR\s*DO\s*MERCADO)[\s\:\-]*/i, '')
+          .replace(/^(?:OPORTUNIDADE\s*LATENTE|OPORTUNIDADE|VALIDAÇÃO\s*DA\s*DEMANDA|VALIDACAO\s*DA\s*DEMANDA|VALIDAÇÃO|VALIDACAO|TICKET\s*MÉDIO|TICKET\s*MEDIO|TICKET|PÚBLICO\s*PRIORITÁRIO|PUBLICO\s*PRIORITARIO|PÚBLICO|PUBLICO|DIRETRIZES\s*EXECUTIVAS|DIRETRIZES)[^:\n]*:?\s*/i, '')
           .trim();
 
         extractedCards.push({
@@ -7016,7 +7016,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       }
     });
 
-    if (extractedCards.length > 0) {
+    if (extractedCards.length >= 2) {
       return `
         <div class="space-y-3.5">
           ${extractedCards.map(c => `
@@ -7034,9 +7034,40 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       `;
     }
 
-    // Fallback: Se não encontrou as chaves, formata parágrafos limpos com bullets destacados
+    // Se a IA gerou parágrafos contínuos ou outro padrão de bullets, quebra por tópicos ou parágrafos
+    const rawParagraphs = visionText.split(/\n\n+/).map(p => p.trim()).filter(p => p.length > 10);
+    if (rawParagraphs.length >= 2) {
+      const palette = [
+        { icon: 'fa-bullseye', color: 'text-rose-600', label: 'OPORTUNIDADE & DEMANDA' },
+        { icon: 'fa-chart-line', color: 'text-sky-600', label: 'VALIDAÇÃO & CONSUMO' },
+        { icon: 'fa-tag', color: 'text-emerald-600', label: 'TICKET MÉDIO & POSICIONAMENTO' },
+        { icon: 'fa-users', color: 'text-purple-600', label: 'PÚBLICO PRIORITÁRIO' },
+        { icon: 'fa-lightbulb', color: 'text-brand-900', label: 'DIRETRIZES ESTRATÉGICAS' }
+      ];
+
+      return `
+        <div class="space-y-3.5">
+          ${rawParagraphs.map((p, pIdx) => {
+            const pal = palette[pIdx % palette.length];
+            return `
+              <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 ${pal.color} font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <i class="fa-solid ${pal.icon} text-[11px]"></i>
+                  <span>${pal.label}</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${formatMarkdown(p)}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    // Fallback padrão se for texto único
     return `
-      <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-3">
+      <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs text-xs text-slate-700 font-normal leading-relaxed space-y-3">
         ${formatMarkdown(visionText)}
       </div>
     `;
@@ -7149,35 +7180,55 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
           <div class="space-y-2.5 pt-1">
             ${(() => {
-              const bText = bairrosContent || (processedText.match(/###\s*(?:TOP\s*BAIRROS|BAIRROS)[\s\S]*?(?=###|$)/i) || [])[0] || '';
-              const cleanBText = bText.replace(/^###[^\n]*\n/i, '').trim();
+              let bText = bairrosContent || '';
+              if (!bText) {
+                const bMatch = processedText.match(/###\s*(?:TOP\s*BAIRROS|BAIRROS|GEO)[\s\S]*?(?=###|$)/i);
+                if (bMatch) bText = bMatch[0];
+              }
+              const cleanBText = (bText || '').replace(/^###[^\n]*\n/i, '').trim();
 
-              if (!cleanBText) {
-                return `
-                  <div class="space-y-2">
-                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                      <div class="flex items-center justify-between">
-                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
-                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold">Centro-Oeste</span>
-                      </div>
-                      <p class="text-xs text-slate-600 leading-relaxed">Alta densidade de renda, público jovem/adulto corporativo e fluxo qualificado.</p>
+              const renderDefaultBairros = () => `
+                <div class="space-y-2.5">
+                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
+                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
                     </div>
-                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                      <div class="flex items-center justify-between">
-                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Vila Ema & Vila Adyana</span>
-                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold">Centro-Oeste</span>
-                      </div>
-                      <p class="text-xs text-slate-600 leading-relaxed">Polo gastronômico e de serviços premium consolidado, alta caminhabilidade.</p>
-                    </div>
-                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                      <div class="flex items-center justify-between">
-                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Satélite</span>
-                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold">Zona Sul</span>
-                      </div>
-                      <p class="text-xs text-slate-600 leading-relaxed">Maior densidade populacional e volume de consumo contínuo da Zona Sul.</p>
-                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Alta densidade de renda, público jovem/adulto corporativo e fluxo qualificado.</p>
                   </div>
-                `;
+                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Vila Ema & Vila Adyana</span>
+                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Polo gastronômico e de serviços premium consolidado, alta caminhabilidade.</p>
+                  </div>
+                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Satélite</span>
+                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Sul</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Maior densidade populacional e volume de consumo contínuo da Zona Sul.</p>
+                  </div>
+                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim das Colinas & Esplanada</span>
+                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Perfil de altíssimo poder aquisitivo e preferência por marcas consolidadas.</p>
+                  </div>
+                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Urbanova</span>
+                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Oeste</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Ambiente residencial de alto padrão com carência de serviços e conveniência local.</p>
+                  </div>
+                </div>
+              `;
+
+              if (!cleanBText || cleanBText.length < 15) {
+                return renderDefaultBairros();
               }
               
               // Limpar linhas vazias ou rascunhos de cabeçalhos de tabela
@@ -7207,7 +7258,10 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                       bDesc = cols[0];
                     }
                   } else {
-                    const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(]+)(?:\*\*)?\s*(?:\(([^)]+)\))?\s*:?\s*([\s\S]*)$/);
+                    // Trata variações como: - **Jardim Aquarius** (Centro-Oeste): Motivo
+                    // ou 1. **Jardim Aquarius** - Centro-Oeste: Motivo
+                    // ou - Jardim Aquarius: Motivo
+                    const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(\-]+)(?:\*\*)?\s*(?:[\(\-]\s*([^)\:]+)\s*[\)\-]?)?\s*:?\s*([\s\S]*)$/);
                     if (match) {
                       bName = (match[1] || "").trim();
                       bReg = (match[2] || "").trim();
@@ -7219,10 +7273,12 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
                   bName = bName.replace(/^\d+[\.\-\)]\s*/, '').replace(/[\*\:]+/g, '').trim();
                   bReg = bReg.replace(/[\*\(\)]+/g, '').trim();
-                  if (!bReg) {
-                    const lowName = (bName + " " + bDesc).toLowerCase();
+                  
+                  // Auto-detectar região se vier em branco
+                  if (!bReg || bReg.length > 25) {
+                    const lowName = (bName + " " + bReg + " " + bDesc).toLowerCase();
                     if (lowName.includes('aquarius') || lowName.includes('adyana') || lowName.includes('ema') || lowName.includes('esplanada') || lowName.includes('colinas')) bReg = 'Centro-Oeste';
-                    else if (lowName.includes('satélite') || lowName.includes('satelite') || lowName.includes('bosque') || lowName.includes('oriente') || lowName.includes('sul')) bReg = 'Zona Sul';
+                    else if (lowName.includes('satélite') || lowName.includes('satelite') || lowName.includes('bosque') || lowName.includes('oriente') || lowName.includes('sul') || lowName.includes('morumbi')) bReg = 'Zona Sul';
                     else if (lowName.includes('urbanova') || lowName.includes('oeste')) bReg = 'Zona Oeste';
                     else if (lowName.includes('industrial') || lowName.includes('leste') || lowName.includes('vista') || lowName.includes('melo')) bReg = 'Zona Leste';
                     else if (lowName.includes('santana') || lowName.includes('norte')) bReg = 'Zona Norte';
@@ -7248,7 +7304,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 }).join('');
               }
               
-              return `<div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 text-xs text-slate-700">${formatMarkdown(cleanBText)}</div>`;
+              return renderDefaultBairros();
             })()}
           </div>
         </div>
