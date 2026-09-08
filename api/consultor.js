@@ -59,7 +59,16 @@ export default async function handler(req, res) {
    - 1. A Geografia do Silêncio: refúgio, sossego, áreas verdes, calmaria do estresse corporativo (Urbanova, Adyana, condomínios fechados).
    - 2. A Cidade Prometida: famílias, segurança, estabilidade, conveniência familiar e custo-benefício (Zona Sul e Leste consolidada).
    - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
-   - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, conveniência e consumo prático local (Zona Sul, Norte, Leste).`;
+5. BANCO DE VERBATIMS E CITAÇÕES REAIS DE RESPONDENTES (PESQUISA QUALITATIVA RADAR SJC):
+   - "Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade." (Mulher Cis, 25-34 anos, Parque Industrial, PJ)
+   - "Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José." (Mulher Cis, 65+ anos, Oeste, Classe A/B)
+   - "Eu entendo que São José tem muitas opções pra quem pode pagar e poucas pra quem não pode pagar. Em vários aspectos com relação a cultura, ao transporte." (Mulher Cis, 25-34 anos, Norte, Classe C)
+   - "Cidade com direção política conservadora, falta arte, eventos públicos, os parques e feiras são bons. Mas poderíamos ter muito mais com o número de habitantes que temos." (Outros, 35-44 anos, Oeste, Classe C)
+   - "Para lazer e cultura prefiro ir a São Paulo pois as opções aqui são limitadas e muitas vezes os eventos não são bem divulgados ou organizados." (Mulher Cis, 35-44 anos, Oeste, Classe B)
+   - "Sinto falta de uma vida cultural mais pulsante fora do eixo comercial. Mais eventos de rua e ocupação dos espaços públicos." (Homem Cis, 25-34 anos, Centro, Classe B)
+   - "SJC tem potencial para ter eventos de grande porte, como festivais de música e gastronomia que atraiam pessoas de fora e segurem quem mora aqui." (Mulher Cis, 25-34 anos, Sul, Classe B)
+   - "Uma cidade com poucos recursos para jovens." (Mulher Cis, 35-44 anos, Jd. Colonial, PJ)
+   - "Lazer só pra quem tem dinheiro." (Mulher Cis, 35-44 anos, Jd. Santa Inês III, CLT)`;
 
     const systemPrompt = `Você é o Editor-Chefe de Estratégia e Lead Data Scientist (Padrão McKinsey / Bain & Company). O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica de ALTA ELEGÂNCIA NARRATIVA E RIGOR ANALÍTICO baseada no CSV municipal de São José dos Campos (N=477, IC=95%).
 
@@ -73,8 +82,9 @@ DIRETRIZES DE DATA STORYTELLING & REGRAS DE OURO (MCKINSEY STANDARD):
    * Exemplo: "Ao somarmos as classes com renda familiar acima de R$ 12.000 (14.2% e 11.8%), mapeamos que 26.0% da população joseense possui lastro financeiro robusto para sustentar a precificação premium..."
 3. FLUIDEZ EXECUTIVA & TESE EM NEGRITO: O parágrafo de 'visao_estrategica_texto' deve ser um texto corrido, denso, persuasivo e contínuo (aprox. 150 palavras), com conectivos elegantes. Inclua OBRIGATORIAMENTE a tese central de viabilidade em formato Markdown Negrito (**frase**). Ao final, faça uma transição natural para o gráfico demonstrado abaixo.
 4. FIM DO CLICHÊ DO PARADOXO: Proibido usar a muleta "tem orgulho mas foge para SP" se a ideia não for vida noturna/balada. Para serviços, varejo, academias, clínicas, alimentação diurna, pet e vestuário, explore as dores reais do CSV (falta de curadoria, demanda pet 68.2%, valorização de ambiente 38.9%, disposição a gastar mais 78.8%).
-5. JUSTIFICATIVAS NATURAIS DE BAIRROS: No array 'bairros', escreva análises naturais e contextualizadas para cada um dos 5 bairros, explicando como a renda média, faixa etária e o movimento cultural daquela região criam tração real para o negócio.
-6. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (\`\`\`json).
+5. REGRA DE OURO ANTI-ALUCINAÇÃO EM VERBALIZAÇÃO: Você é ESTONTEANTEMENTE PROIBIDO de inventar, simular ou criar frases falsas. Você DEVE varrer o texto da apresentação e do contexto (CSV) fornecido e EXTRAIR uma citação qualitativa REAL, uma reclamação ou uma constatação que já esteja escrita nos dados para justificar a necessidade do negócio. Traga a voz autêntica da pesquisa. Se for uma conclusão da pesquisa, escreva como um insight qualitativo real, sem inventar aspas de personagens fictícios.
+6. JUSTIFICATIVAS NATURAIS DE BAIRROS: No array 'bairros', escreva análises naturais e contextualizadas para cada um dos 5 bairros, explicando como a renda média, faixa etária e o movimento cultural daquela região criam tração real para o negócio.
+7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
@@ -85,7 +95,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     "labels": ["Indicador 1", "Indicador 2", "Indicador 3"],
     "data": [45, 30, 25]
   },
-  "verbalizacao_pesquisa": "\"Citação humana direta simulando a voz de um morador da pesquisa que justifique a demanda deste negócio em SJC.\"",
+  "verbalizacao_pesquisa": "Você é ESTONTEANTEMENTE PROIBIDO de inventar frases. Extraia uma citação qualitativa REAL ou insight literal do contexto fornecido (ex: 'Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade. - Mulher Cis, 25-34 anos, Parque Industrial').",
   "bairros": [
     { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Análise fluida e executiva conectando o perfil de renda, comportamento do CSV e o movimento cultural ao negócio." },
     { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Análise fluida conectando os dados demográficos e fluxo de consumo..." },
