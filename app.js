@@ -6969,8 +6969,61 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       .trim();
   }
 
+  // Processamento e Normalização da Auditoria de Ambiente (PESTEL & ISHIKAWA)
+  let pestelObj = {
+    P: "Políticas de incentivo à inovação e desburocratização no Parque Tecnológico e distritos municipais.",
+    E: "Renda média familiar consolidada de R$ 5.6k a 12k impulsionando o consumo de valor agregado.",
+    S: "Forte apego aos valores familiares com demanda crescente por autenticidade e estética cosmopolita.",
+    T: "Alta densidade de engenheiros, polos tech e adesão maciça a canais digitais (Instagram 79.4%).",
+    E_env: "Preservação de corredores verdes, áreas abertas e alta valorização da cultura pet-friendly.",
+    L: "Rigor no zoneamento urbano, conformidade de alvarás e leis de silêncio em bairros residenciais."
+  };
+
+  let ishikawaObj = {
+    problema_central: "Risco de Fracasso na Retenção do Consumidor Local em SJC",
+    causas: [
+      { categoria: "Pessoas & Atendimento", descricao: "Falta de atendimento qualificado e hospitalidade autêntica com padrão cosmopolita." },
+      { categoria: "Ambiente & Experiência", descricao: "Sensação de mesmice noturna e espaços sem aconchego ou apelo instagramável." },
+      { categoria: "Processos & Mobilidade", descricao: "Atritos de trânsito, estacionamento escasso e transporte público truncado." },
+      { categoria: "Produto & Percepção", descricao: "Preço elevado sem entrega de valor percebido ('coisas caras e sem qualidade')." }
+    ]
+  };
+
+  const rawAmbiente = data.auditoria_ambiente || data.pestel_ishikawa;
+  if (rawAmbiente && typeof rawAmbiente === 'object') {
+    if (rawAmbiente.pestel && typeof rawAmbiente.pestel === 'object') {
+      pestelObj = { ...pestelObj, ...rawAmbiente.pestel };
+    }
+    if (rawAmbiente.ishikawa && typeof rawAmbiente.ishikawa === 'object') {
+      if (rawAmbiente.ishikawa.problema_central) ishikawaObj.problema_central = rawAmbiente.ishikawa.problema_central;
+      if (Array.isArray(rawAmbiente.ishikawa.causas) && rawAmbiente.ishikawa.causas.length > 0) {
+        ishikawaObj.causas = rawAmbiente.ishikawa.causas;
+      }
+    }
+  } else if (typeof rawAmbiente === 'string' && rawAmbiente.trim()) {
+    try {
+      const parsedAmb = JSON.parse(rawAmbiente);
+      if (parsedAmb.pestel) pestelObj = { ...pestelObj, ...parsedAmb.pestel };
+      if (parsedAmb.ishikawa) {
+        if (parsedAmb.ishikawa.problema_central) ishikawaObj.problema_central = parsedAmb.ishikawa.problema_central;
+        if (Array.isArray(parsedAmb.ishikawa.causas)) ishikawaObj.causas = parsedAmb.ishikawa.causas;
+      }
+    } catch (eAmb) {
+      // Se for texto corrido legado, distribui nos campos
+      pestelObj.S = rawAmbiente;
+    }
+  }
+
+  // Se pestel veio diretamente na raiz
+  if (data.pestel && typeof data.pestel === 'object') {
+    pestelObj = { ...pestelObj, ...data.pestel };
+  }
+  if (data.ishikawa && typeof data.ishikawa === 'object') {
+    if (data.ishikawa.problema_central) ishikawaObj.problema_central = data.ishikawa.problema_central;
+    if (Array.isArray(data.ishikawa.causas)) ishikawaObj.causas = data.ishikawa.causas;
+  }
+
   // Garantir que nenhum outro campo de texto contenha JSON bruto serializado
-  if (typeof data.pestel_ishikawa === 'object') data.pestel_ishikawa = JSON.stringify(data.pestel_ishikawa);
   if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
   if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
   if (typeof data.zona_exclusao === 'object') data.zona_exclusao = JSON.stringify(data.zona_exclusao);
@@ -7354,8 +7407,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
     </div>
 
-    <!-- BLOCO 5: AUDITORIA DE AMBIENTE (PESTEL & ISHIKAWA) -->
-    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+    <!-- BLOCO 5: AUDITORIA DE AMBIENTE (PESTEL) & CAUSALIDADE (ISHIKAWA) -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-8">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-earth-americas text-brand-900 text-sm"></i>
@@ -7363,13 +7416,187 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             AUDITORIA DE AMBIENTE (PESTEL) & CAUSALIDADE (ISHIKAWA)
           </h4>
         </div>
-        <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
-          ANÁLISE DE RISCO
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+          ANÁLISE DE RISCO & CAUSALIDADE
         </span>
       </div>
 
-      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
-        ${formatMarkdown(data.pestel_ishikawa || "Análise dos fatores regulatórios, econômicos, culturais e operacionais de São José dos Campos.")}
+      <!-- SEÇÃO 1: PESTEL EM GRID MODERNO COM EMOJIS -->
+      <div class="space-y-3.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-layer-group text-brand-700"></i> MATRIZ DE FATORES MACROAMBIENTAIS (PESTEL)
+          </span>
+          <span class="text-[9px] font-mono font-semibold text-slate-400">6 DIMENSÕES DE IMPACTO</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- P - POLÍTICO -->
+          <div class="p-4 sm:p-4.5 rounded-2xl bg-blue-50/70 border border-blue-200/70 shadow-2xs space-y-2 hover:border-blue-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">🏛️</span>
+                  <span class="text-xs font-black uppercase tracking-wider text-blue-950 font-mono">POLÍTICO (P)</span>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-blue-200/80 text-blue-900">DIRETRIZES</span>
+              </div>
+              <p class="text-xs text-blue-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(pestelObj.P || "Políticas de incentivo e desregulamentação municipal.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- E - ECONÔMICO -->
+          <div class="p-4 sm:p-4.5 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 shadow-2xs space-y-2 hover:border-emerald-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">💰</span>
+                  <span class="text-xs font-black uppercase tracking-wider text-emerald-950 font-mono">ECONÔMICO (E)</span>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-200/80 text-emerald-900">RENDA & TICKET</span>
+              </div>
+              <p class="text-xs text-emerald-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(pestelObj.E || "Renda média consolidada e poder de consumo das famílias de SJC.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- S - SOCIAL -->
+          <div class="p-4 sm:p-4.5 rounded-2xl bg-amber-50/70 border border-amber-200/70 shadow-2xs space-y-2 hover:border-amber-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">👥</span>
+                  <span class="text-xs font-black uppercase tracking-wider text-amber-950 font-mono">SOCIAL & CULTURAL (S)</span>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-200/80 text-amber-900">COMPORTAMENTO</span>
+              </div>
+              <p class="text-xs text-amber-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(pestelObj.S || "Comportamento conservador e demanda latente por novas experiências.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- T - TECNOLÓGICO -->
+          <div class="p-4 sm:p-4.5 rounded-2xl bg-cyan-50/70 border border-cyan-200/70 shadow-2xs space-y-2 hover:border-cyan-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">💻</span>
+                  <span class="text-xs font-black uppercase tracking-wider text-cyan-950 font-mono">TECNOLÓGICO (T)</span>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-200/80 text-cyan-900">DIGITAL & TECH</span>
+              </div>
+              <p class="text-xs text-cyan-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(pestelObj.T || "Polos aeroespaciais, comunidade tech e consumo em canais digitais.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- E_ENV - AMBIENTAL -->
+          <div class="p-4 sm:p-4.5 rounded-2xl bg-teal-50/70 border border-teal-200/70 shadow-2xs space-y-2 hover:border-teal-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">🌿</span>
+                  <span class="text-xs font-black uppercase tracking-wider text-teal-950 font-mono">AMBIENTAL (E)</span>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-teal-200/80 text-teal-900">SUSTENTABILIDADE</span>
+              </div>
+              <p class="text-xs text-teal-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(pestelObj.E_env || pestelObj.A || "Áreas verdes, clima, sustentabilidade e cultura pet-friendly.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- L - LEGAL -->
+          <div class="p-4 sm:p-4.5 rounded-2xl bg-purple-50/70 border border-purple-200/70 shadow-2xs space-y-2 hover:border-purple-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">⚖️</span>
+                  <span class="text-xs font-black uppercase tracking-wider text-purple-950 font-mono">LEGAL & REGULATÓRIO (L)</span>
+                </div>
+                <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-200/80 text-purple-900">COMPLIANCE</span>
+              </div>
+              <p class="text-xs text-purple-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(pestelObj.L || "Regulação municipal, licenciamento, alvarás e leis de zoneamento urbano.")}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 2: DIAGRAMA DE ISHIKAWA (ESPINHA DE PEIXE EM CSS) -->
+      <div class="pt-5 border-t border-slate-200/80 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-diagram-project text-rose-600"></i> DIAGRAMA DE CAUSA E EFEITO (ISHIKAWA / ESPINHA DE PEIXE)
+          </span>
+          <span class="text-[9px] font-mono font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">ANÁLISE DE CAUSA-RAIZ</span>
+        </div>
+
+        <!-- DIAGRAMA VISUAL ESPINHA DE PEIXE -->
+        <div class="p-4 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-inner">
+          <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-6">
+            
+            <!-- ESPINHAS / CAUSAS (LADO ESQUERDO / CORPO DO PEIXE) -->
+            <div class="flex-1 space-y-4 relative">
+              <!-- LINHA CENTRAL DORSAL (DESENHADA COM CSS NO DESKTOP) -->
+              <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-slate-300 via-slate-400 to-rose-400 -translate-y-1/2 z-0 rounded-full"></div>
+
+              <!-- GRID DE CAUSAS 2X2 CONECTADAS À LINHA CENTRAL -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                ${(ishikawaObj.causas || []).slice(0, 4).map((causa, cIdx) => {
+                  const isTop = cIdx < 2;
+                  const borderSide = isTop ? "border-b-4 border-b-rose-400/80" : "border-t-4 border-t-rose-400/80";
+                  return `
+                    <div class="p-4 bg-white rounded-2xl border border-slate-200/90 ${borderSide} shadow-2xs space-y-1.5 hover:shadow-md transition-all">
+                      <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                          <i class="fa-solid fa-code-branch text-rose-500 text-[10px]"></i>
+                          ${causa.categoria || `Causa 0${cIdx + 1}`}
+                        </span>
+                        <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">ESPINHA 0${cIdx + 1}</span>
+                      </div>
+                      <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                        ${formatMarkdown(causa.descricao || "")}
+                      </p>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- SETA E CABEÇA DO PEIXE (PROBLEMA CENTRAL / EFEITO) -->
+            <div class="lg:w-72 shrink-0 flex flex-col justify-center items-center relative z-10">
+              <!-- SETA DE CONEXÃO -->
+              <div class="hidden lg:flex items-center justify-center -mr-3 z-20">
+                <i class="fa-solid fa-arrow-right text-rose-500 text-lg"></i>
+              </div>
+
+              <!-- CARD CABEÇA DO PEIXE (PROBLEMA CENTRAL) -->
+              <div class="w-full p-5 bg-gradient-to-br from-rose-900 via-rose-950 to-brand-950 text-white rounded-2xl border-2 border-rose-600 shadow-lg space-y-2 text-center relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 opacity-10 text-6xl text-white">
+                  <i class="fa-solid fa-skull-crossbones"></i>
+                </div>
+                <div class="flex items-center justify-center gap-1.5 text-rose-300 font-mono text-[10px] font-black uppercase tracking-widest">
+                  <i class="fa-solid fa-triangle-exclamation text-rose-400 text-xs"></i>
+                  <span>EFEITO / PROBLEMA CENTRAL</span>
+                </div>
+                <h5 class="text-xs sm:text-[13px] font-black uppercase leading-snug text-white font-mono">
+                  ${formatMarkdown(ishikawaObj.problema_central || "Inviabilidade de Retenção do Consumidor Local")}
+                </h5>
+                <span class="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-200 border border-rose-400/30">
+                  IMPACTO CRÍTICO EM SJC
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
 

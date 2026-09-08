@@ -111,7 +111,25 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     "oportunidades": ["Demanda reprimida comportamental em SJC 1", "Alavanca de mercado 2", "Oportunidade 3"],
     "ameacas": ["Risco competitivo local 1", "Atrito moral/cultural em SJC 2", "Ameaça 3"]
   },
-  "pestel_ishikawa": "Análise densa de fatores Políticos, Econômicos, Sociais (risco moral), Tecnológicos, Ambientais e Legais, mais causa-raiz de gargalos.",
+  "auditoria_ambiente": {
+    "pestel": {
+      "P": "Análise Política e Regulatória em SJC...",
+      "E": "Análise Econômica, Renda e Poder de Compra...",
+      "S": "Análise Social, Comportamento e Risco Moral Conservador...",
+      "T": "Análise Tecnológica, Aeroespacial e Canais Digitais...",
+      "E_env": "Análise Ambiental, Sustentabilidade e Espaços Urbanos...",
+      "L": "Análise Legal, Alvarás, Zoneamento e Compliance Local..."
+    },
+    "ishikawa": {
+      "problema_central": "Fracasso na Retenção de Consumo Local e Queima de Caixa",
+      "causas": [
+        { "categoria": "Pessoas & Atendimento", "descricao": "Falta de hospitalidade autêntica e mão de obra alinhada ao padrão cosmopolita" },
+        { "categoria": "Ambiente & Experiência", "descricao": "Sensação de mesmice noturna e espaços sem aconchego ou apelo instagramável" },
+        { "categoria": "Processos & Mobilidade", "descricao": "Atritos de trânsito, estacionamento escasso e transporte público desconectado" },
+        { "categoria": "Produto & Percepção", "descricao": "Preços altos sem entrega de valor percebido gerando sensação de 'caro e sem qualidade'" }
+      ]
+    }
+  },
   "matrizes_vrio_porter": "Avaliação competitiva real (VRIO) e nível de rivalidade contra concorrentes locais, poder do cliente joseense e barreiras (Porter).",
   "mix_marketing_oceano_azul": "Estratégia de precificação (Preço), canais (Praça), atração (Promoção) e curva de valor (Eliminar, Reduzir, Elevar, Criar diferenciais).",
   "movimento_cultural": {
