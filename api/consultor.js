@@ -142,7 +142,7 @@ Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicand
           },
           body: JSON.stringify({
             model: model,
-            max_tokens: 2000,
+            max_tokens: 3200,
             temperature: 0.3,
             messages: [
               { role: 'system', content: systemPrompt },

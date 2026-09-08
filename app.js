@@ -7511,7 +7511,14 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       const fitTribo = extractBlock(content, 'A Tribo Global|Tribo Global', ['Geografia do Silêncio', 'A Cidade Prometida', 'Empreendedorismo Intuitivo', 'Veredicto']);
       const fitEmpreendedorismo = extractBlock(content, 'Empreendedorismo Intuitivo|Empreendedorismo', ['Geografia do Silêncio', 'A Cidade Prometida', 'A Tribo Global', 'Veredicto']);
       
-      const veredictoMov = extractBlock(content, 'O Veredicto do Movimento|Veredicto do Movimento|Veredicto', ['Análise Cruzada', 'Geografia', 'Cidade Prometida', 'Tribo Global']);
+      let veredictoMov = extractBlock(content, 'O Veredicto do Movimento|Veredicto do Movimento|Veredicto', ['\\[CHART', '\\[GRAFICO']);
+      if (!veredictoMov || veredictoMov.trim().length < 10) {
+        // Fallback defensivo se o marcador final não capturou
+        const vMatch = content.match(/(?:###|####|\*\*|\*|-|•)?\s*(?:O Veredicto do Movimento|Veredicto do Movimento|Veredicto)\s*(?:\*\*)?:?\s*([\s\S]*?)(?=\[CHART|\[GRAFICO|$)/i);
+        if (vMatch && vMatch[1]) {
+          veredictoMov = vMatch[1].trim();
+        }
+      }
 
       htmlOutput += `
         <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
