@@ -6859,12 +6859,24 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     return "";
   };
 
-  // HIGIENIZAÇÃO DE LUXO: Cortar qualquer rascunho ou raciocínio preliminar
+  // HIGIENIZAÇÃO RIGOROSA DE LUXO: Cortar qualquer rascunho de pensamento em inglês (ex: 1. Deconstruct, 2. Map Data, Draft)
   let cleanText = (text || "").trim();
-  const firstSectionIdx = cleanText.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
-  if (firstSectionIdx !== -1) {
-    cleanText = cleanText.substring(firstSectionIdx).trim();
+  
+  // Encontrar o início oficial da primeira seção "### VISÃO ESTRATÉGICA"
+  const realStartIdx = cleanText.search(/###\s*VISÃO\s*ESTRATÉGICA\s*E\s*VEREDICTO/i);
+  if (realStartIdx !== -1) {
+    cleanText = cleanText.substring(realStartIdx).trim();
+  } else {
+    const firstSectionIdx = cleanText.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
+    if (firstSectionIdx !== -1) {
+      cleanText = cleanText.substring(firstSectionIdx).trim();
+    }
   }
+
+  // Descartar rascunhos numerados residuais
+  cleanText = cleanText
+    .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft|Section by Section)[\s\S]*?(?=###\s*VISÃO|###\s*TOP|$)/gi, '')
+    .trim();
 
   let processedText = cleanText
     .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)

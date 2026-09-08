@@ -173,11 +173,23 @@ Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicand
       });
     }
 
-    // HIGIENIZAÇÃO RIGOROSA: Cortar tudo que vier antes da primeira seção real
-    const firstH3 = replyContent.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
-    if (firstH3 !== -1) {
-      replyContent = replyContent.substring(firstH3).trim();
+    // HIGIENIZAÇÃO RIGOROSA: Cortar qualquer rascunho de pensamento em inglês ou preliminar
+    // Procura pela ocorrência real da primeira seção do relatório executivo
+    const realReportMatch = replyContent.match(/(###\s*VISÃO\s*ESTRATÉGICA\s*E\s*VEREDICTO[\s\S]*)/i);
+    if (realReportMatch) {
+      replyContent = realReportMatch[1].trim();
+    } else {
+      const firstH3 = replyContent.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
+      if (firstH3 !== -1) {
+        replyContent = replyContent.substring(firstH3).trim();
+      }
     }
+
+    // Remoção extra defensiva de rascunhos numerados caso tenham se infiltrado
+    replyContent = replyContent
+      .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft)[\s\S]*?(?=###\s*VISÃO|$)/gi, '')
+      .replace(/Start exactly with:[\s\S]*?(?=###\s*VISÃO|$)/gi, '')
+      .trim();
 
     res.status(200).json({ 
       result: replyContent,
