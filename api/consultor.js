@@ -127,7 +127,7 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
     res.status(200).json({ 
       result: replyContent,
       reply: replyContent,
-      modelUsed: selectedModel
+      modelUsed: modelUsed
     });
 
   } catch (error) {
