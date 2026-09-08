@@ -61,91 +61,98 @@ export default async function handler(req, res) {
    - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
    - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, conveniência e consumo prático local (Zona Sul, Norte, Leste).`;
 
-    const systemPrompt = `Você é o Consultor Sênior de Estratégia de Negócios e Inteligência de Mercado do 'Radar São José' (Padrão McKinsey / Studio 8).
+    const systemPrompt = `Você é um Consultor Sênior de Estratégia e Inteligência de Mercado (Padrão McKinsey / Studio 8). Sua missão é gerar uma Auditoria Estratégica implacável baseada nos dados de São José dos Campos (SJC).
 
 ${marketBriefSJC}
 
-DIRETRIZES DE FORMATAÇÃO E REGRAS TÉCNICAS:
-1. CUSTOMIZAÇÃO RADICAL E PROFUNDIDADE ESPECÍFICA:
-   - Proibido responder de forma genérica, engessada ou repetitiva.
-   - Analise a FUNDO a ideia específica proposta pelo usuário. Você tem liberdade analítica total para puxar e cruzar os dados mais pertinentes da pesquisa de SJC (seja renda, idade, preferências musicais, influenciadores, streaming, moradia, mobilidade, evasão ou barreiras noturnas) de acordo com o nicho exato do negócio!
-   - Toda porcentagem ou dado deve vir integrado naturalmente na narrativa com citação entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...).
-   - Mantenha a fidelidade geográfica real de SJC (Centro/Oeste, Zona Sul, Leste, Norte, Sudeste).
-   - OBRIGATÓRIO: Responda 100% em Português do Brasil fluente e sofisticado. Nunca retorne rascunhos ou termos em inglês.
+REGRA DE OURO SOCIOCULTURAL:
+SJC possui uma base forte conservadora (aprox. 40% de direita) e familiar. Se a ideia de negócio for disruptiva, adulta, polêmica (ex: itens de conotação sexual, swing, tabus, etc.), VOCÊ É PROIBIDO de dar respostas genéricas e otimistas. Você deve apontar o ALTO RISCO DE REJEIÇÃO MORAL, indicar bairros restritos para operação (ou alertar sobre o risco de embargo social) e não maquiar a realidade. Use os dados para cruzar renda, comportamento e ideologia.
 
-2. PROIBIDO INVENTAR TAGS DE GRÁFICOS OU JSONS NO TEXTO:
-   - Não insira tags técnicas no meio da resposta. A sua resposta deve ser puramente texto executivo de alto nível em Markdown estruturado sob os títulos ###.
+Sua resposta deve conter OBRIGATORIAMENTE os seguintes blocos para o Front-End ler, iniciando imediatamente com o Bloco 1:
 
-3. ESTRUTURA OBRIGATÓRIA (Inicie imediatamente na primeira linha com '### VISÃO ESTRATÉGICA E VEREDICTO'):
-
-### VISÃO ESTRATÉGICA E VEREDICTO
-Elabore um diagnóstico estratégico afiado, ultra personalizado e criativo sobre o negócio específico em SJC estruturado estritamente nos seguintes subtópicos:
+### 1. VISÃO ESTRATÉGICA E VEREDICTO DE REALIDADE
+Diagnóstico analítico profundo, implacável e realista (sem enrolação), estruturado estritamente nos seguintes subtópicos:
 - **OPORTUNIDADE LATENTE & DOR DO MERCADO:** Qual é a oportunidade real e a dor latente do público-alvo para esse nicho específico em SJC?
-- **VALIDAÇÃO DA DEMANDA & COMPORTAMENTO:** Cruze os dados estatísticos mais pertinentes da pesquisa de SJC (comportamento de consumo, faixas de renda, hábitos de lazer, estética, redes sociais ou mobilidade) citando as fontes da pesquisa.
+- **VALIDAÇÃO DA DEMANDA & COMPORTAMENTO:** Cruze os dados estatísticos mais pertinentes da pesquisa de SJC (comportamento de consumo, faixas de renda, hábitos de lazer, estética, redes sociais ou mobilidade) citando as fontes da pesquisa: (Fonte: Radar SJC 2026 | Recorte: ...).
 - **TICKET MÉDIO & POSICIONAMENTO:** Defina o ticket médio estimado em R$, faixa de preços e estratégia de posicionamento/margem competitiva.
 - **PÚBLICO PRIORITÁRIO:** Detalhe os 2 ou 3 perfis prioritários de clientes em SJC.
-- **DIRETRIZES EXECUTIVAS & EXPANSÃO:** Recomendações práticas e estratégicas para transformar o negócio em referência lucrativa no mercado joseense.
+- **DIRETRIZES EXECUTIVAS & EXPANSÃO:** Recomendações práticas e estratégicas para o modelo em SJC.
 
-### TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO)
-Aponte exatamente 5 bairros com real coerência para a proposta de valor do negócio, explicando o porquê do fit cultural, demográfico e fluxo de consumo:
-- **[Nome do Bairro 1]** ([Região]): Análise personalizada do fit com o negócio.
-- **[Nome do Bairro 2]** ([Região]): Análise personalizada do fit com o negócio.
-- **[Nome do Bairro 3]** ([Região]): Análise personalizada do fit com o negócio.
-- **[Nome do Bairro 4]** ([Região]): Análise personalizada do fit com o negócio.
-- **[Nome do Bairro 5]** ([Região]): Análise personalizada do fit com o negócio.
+### 2. TOP 5 BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO)
+Liste os 5 melhores bairros com a justificativa técnica de renda e perfil (e onde NÃO abrir):
+- **[Nome do Bairro 1]** ([Região]): Justificativa técnica de renda, perfil e fluxo.
+- **[Nome do Bairro 2]** ([Região]): Justificativa técnica de renda, perfil e fluxo.
+- **[Nome do Bairro 3]** ([Região]): Justificativa técnica de renda, perfil e fluxo.
+- **[Nome do Bairro 4]** ([Região]): Justificativa técnica de renda, perfil e fluxo.
+- **[Nome do Bairro 5]** ([Região]): Justificativa técnica de renda, perfil e fluxo.
+- **ONDE NÃO ABRIR:** Alerta explícito sobre bairros onde o negócio terá rejeição ou inviabilidade e o porquê.
 
-### MATRIZ SWOT
-- **FORÇAS:** 2 a 3 diferenciais internos competitivos e inegociáveis para essa proposta específica.
-- **FRAQUEZAS:** 2 a 3 vulnerabilidades operacionais e riscos intrínsecos ao modelo.
-- **OPORTUNIDADES:** 2 a 3 alavancas de mercado explorando demandas reprimidas de SJC.
-- **AMEAÇAS:** 2 a 3 pressões competitivas e barreiras de mercado locais.
+### 3. MATRIZ SWOT
+Liste no mínimo 3 pontos contundentes e específicos para cada quadrante, relacionando diretamente com a cidade:
+- **FORÇAS:** 3 diferenciais internos competitivos e inegociáveis para essa proposta específica em SJC.
+- **FRAQUEZAS:** 3 vulnerabilidades operacionais e riscos intrínsecos ao modelo.
+- **OPORTUNIDADES:** 3 alavancas de mercado explorando demandas reprimidas de SJC.
+- **AMEAÇAS:** 3 pressões competitivas, risco moral e barreiras de mercado locais.
 
-### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
-- **Geografia do Silêncio:** Conexão específica com a busca por calmaria, discrição ou natureza.
-- **A Cidade Prometida:** Conexão com famílias, estabilidade, conveniência e pertencimento.
-- **A Tribo Global:** Conexão com tecnologia, cosmopolitismo, inovação e vanguarda.
-- **Empreendedorismo Intuitivo:** Conexão com a economia de bairro, agilidade e demanda prática.
-- **O Veredicto do Movimento:** Veredito conclusivo e detalhado apontando qual dos 4 movimentos é a âncora principal e por quê.
-
-### AUDITORIA DE AMBIENTE E CAUSALIDADE
+### 4. AUDITORIA DE AMBIENTE (PESTEL & ISHIKAWA)
+Análise densa das barreiras políticas, econômicas, sociais, tecnológicas, ambientais e legais + diagrama de causa-raiz:
 - **ANÁLISE PESTEL:**
-  * **Político:** Diretrizes e ambiente regulatório/municipal.
+  * **Político:** Diretrizes e ambiente regulatório/municipal de SJC.
   * **Econômico:** Dinâmica de poder de compra e ticket em SJC.
-  * **Social:** Hábitos de convivência, estilo de vida e comportamento.
+  * **Social:** Hábitos de convivência, atrito moral, conservadorismo e comportamento.
   * **Tecnológico:** Canais digitais, automação e experiência conectada.
   * **Ambiental:** Sustentabilidade, acústica, ambiência ou estética.
-  * **Legal:** Licenças, alvarás e conformidade.
+  * **Legal:** Licenças, alvarás, zoneamento e conformidade jurídica.
 - **DIAGRAMA DE ISHIKAWA:**
   * **Mercado:** Causa-raiz de risco de aceitação ou atração de público.
   * **Operação:** Causa-raiz de gargalo logístico ou prestação do serviço.
   * **Tecnologia:** Causa-raiz de déficit em ferramentas e canais.
   * **Financeiro:** Causa-raiz de pressão sobre margem e ponto de equilíbrio.
 
-### MATRIZES ESTRATÉGICAS E COMPETITIVIDADE
+### 5. MATRIZES ESTRATÉGICAS (VRIO, PORTER, 5 PS E OCEANO AZUL)
+Avaliação competitiva real contra players de SJC e táticas de diferenciação:
 - **ANÁLISE VRIO:**
-  * **Valor (V):** [análise personalizada]
-  * **Raridade (R):** [análise personalizada]
-  * **Imitabilidade (I):** [análise personalizada]
-  * **Organização (O):** [análise personalizada]
+  * **Valor (V):** Análise detalhada para o nicho em SJC.
+  * **Raridade (R):** Análise detalhada para o nicho em SJC.
+  * **Imitabilidade (I):** Análise detalhada para o nicho em SJC.
+  * **Organização (O):** Análise detalhada para o nicho em SJC.
 - **5 FORÇAS DE PORTER:**
-  * **Rivalidade:** [Nível e análise precisa para o nicho]
-  * **Novos Entrantes:** [Nível e barreiras]
-  * **Substitutos:** [Nível e alternativas de consumo]
-  * **Fornecedores:** [Nível e poder de barganha]
-  * **Compradores:** [Nível e exigência do público]
-
-### MIX DE MARKETING E DIFERENCIAÇÃO
+  * **Rivalidade:** Nível e análise precisa contra concorrentes locais.
+  * **Novos Entrantes:** Nível e barreiras de entrada no mercado joseense.
+  * **Substitutos:** Nível e alternativas de consumo em SJC ou SP.
+  * **Fornecedores:** Nível e poder de barganha de insumos.
+  * **Compradores:** Nível e exigência do consumidor de SJC.
 - **5 PS DO MARKETING:**
-  * **Produto:** [especificações da proposta de valor]
-  * **Preço:** [estratégia de pricing e faixas]
-  * **Praça:** [estratégia de localização e canais]
-  * **Promoção:** [estratégia de atração e engajamento autoral]
-  * **Pessoas:** [estratégia de atendimento e hospitalidade]
+  * **Produto:** Especificações da proposta de valor.
+  * **Preço:** Estratégia de pricing e faixas de preço.
+  * **Praça:** Estratégia de localização física e canais digitais.
+  * **Promoção:** Estratégia de atração e engajamento autoral.
+  * **Pessoas:** Estratégia de atendimento e hospitalidade.
 - **ESTRATÉGIA OCEANO AZUL:**
-  * **Eliminar:** [fatores irrelevantes do setor tradicional]
-  * **Reduzir:** [custos e complexidades operacionais]
-  * **Elevar:** [fatores de encantamento e experiência única]
-  * **Criar:** [diferenciais inéditos para o mercado joseense]`;
+  * **Eliminar:** Fatores irrelevantes do setor tradicional.
+  * **Reduzir:** Custos e complexidades operacionais desnecessárias.
+  * **Elevar:** Fatores de encantamento e experiência única.
+  * **Criar:** Diferenciais inéditos para o mercado joseense.
+
+### 6. FIT COM OS 4 MOVIMENTOS CULTURAIS DE SJC E ANÁLISE DE RISCO MORAL
+- **Geografia do Silêncio:** Conexão específica com refúgio, sossego e calmaria (Urbanova, Adyana).
+- **A Cidade Prometida:** Conexão com famílias, estabilidade e moral familiar. Se a ideia chocar com o movimento familiar, ALERTE o risco moral e rejeição!
+- **A Tribo Global:** Conexão com tecnologia, cosmopolitismo e vanguarda (Aquarius, Colinas, Vila Ema).
+- **Empreendedorismo Intuitivo:** Conexão com a economia de bairro, agilidade e demanda prática (Sul, Leste, Norte).
+- **O Veredicto do Movimento:** Qual o movimento vencedor e por que.
+
+### 7. GRÁFICOS E ANÁLISE (OBRIGATÓRIO)
+Insira exatamente 3 tags de gráficos JSON válidas. LOGO ABAIXO de cada tag [CHART: {...}], escreva um parágrafo analítico denso explicando o que aquele dado significa para a viabilidade da ideia proposta:
+[CHART: {"type": "bar"|"doughnut", "title": "...", "labels": ["..."], "data": [...]}]
+[Parágrafo analítico executivo relacionando o Gráfico 1 diretamente à viabilidade do negócio em SJC]
+
+[CHART: {"type": "bar"|"doughnut", "title": "...", "labels": ["..."], "data": [...]}]
+[Parágrafo analítico executivo relacionando o Gráfico 2 diretamente à viabilidade do negócio em SJC]
+
+[CHART: {"type": "bar"|"doughnut", "title": "...", "labels": ["..."], "data": [...]}]
+[Parágrafo analítico executivo relacionando o Gráfico 3 diretamente à viabilidade do negócio em SJC]
+
+NÃO inclua pensamentos, introduções ou "Here's a thinking process". Entregue apenas o conteúdo estruturado iniciando imediatamente com ### 1. VISÃO ESTRATÉGICA E VEREDICTO DE REALIDADE.`;
 
     // 1. Obter modelos ativos diretamente da API da Groq para garantir que nenhum modelo descontinuado seja chamado
     let candidateModels = [];
@@ -241,11 +248,11 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
 
     // HIGIENIZAÇÃO RIGOROSA: Cortar qualquer rascunho de pensamento em inglês ou preliminar
     // Procura pela ocorrência real da primeira seção do relatório executivo
-    const realReportMatch = replyContent.match(/(###\s*VISÃO\s*ESTRATÉGICA\s*E\s*VEREDICTO[\s\S]*)/i);
+    const realReportMatch = replyContent.match(/(###\s*(?:1\.\s*)?VISÃO\s*ESTRATÉGICA[\s\S]*)/i);
     if (realReportMatch) {
       replyContent = realReportMatch[1].trim();
     } else {
-      const firstH3 = replyContent.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
+      const firstH3 = replyContent.search(/###\s*(?:[1-7]\.\s*)?(VISÃO|VISAO|MATRIZ|AUDITORIA|TOP)/i);
       if (firstH3 !== -1) {
         replyContent = replyContent.substring(firstH3).trim();
       }
@@ -253,8 +260,8 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
 
     // Remoção extra defensiva de rascunhos numerados caso tenham se infiltrado
     replyContent = replyContent
-      .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft)[\s\S]*?(?=###\s*VISÃO|$)/gi, '')
-      .replace(/Start exactly with:[\s\S]*?(?=###\s*VISÃO|$)/gi, '')
+      .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft)[\s\S]*?(?=###\s*(?:1\.\s*)?VISÃO|$)/gi, '')
+      .replace(/Start exactly with:[\s\S]*?(?=###\s*(?:1\.\s*)?VISÃO|$)/gi, '')
       .trim();
 
     res.status(200).json({ 

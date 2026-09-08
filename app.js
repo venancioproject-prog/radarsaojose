@@ -6922,7 +6922,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
   // Helper para renderizar bullet points delineados e elegantes na Matriz SWOT
   const renderSwotBullets = (txt, iconColor = "text-emerald-500", iconClass = "fa-circle-check") => {
-    if (!txt) return '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>';
+    if (!txt) return '<p class="text-slate-500 italic">Análise específica em processamento para São José dos Campos.</p>';
     
     // Divide por linhas ou quebras de marcadores
     let lines = txt.split(/\n+/).map(l => l.trim()).filter(l => l.length > 3 && !l.startsWith('###') && l !== '--');
@@ -6935,7 +6935,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       }
     }
 
-    if (lines.length === 0) return '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>';
+    if (lines.length === 0) return '<p class="text-slate-500 italic">Análise específica em processamento para São José dos Campos.</p>';
 
     return lines.map(line => `
       <div class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-white/80 transition-colors">
@@ -6953,12 +6953,12 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     try {
       const endGroup = endPatterns.join('|');
       // Procura por qualquer variação de título no início de linha ou após quebra/pontuação
-      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
+      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
       let match = fullText.match(regex);
       
       // Fallback se não casou
       if (!match) {
-        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
+        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
         match = fullText.match(fallbackRegex);
       }
 
@@ -7073,12 +7073,11 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     `;
   };
 
-  // Dividir por seções principais H3 de forma estrita
-  // Extrair explicitamente as seções conhecidas para evitar duplicação ou desencontro
+  // Dividir por seções principais H3 de forma estrita e flexível (com suporte a números)
   const extractMainSection = (txt, secName, nextSecNames) => {
     if (!txt) return '';
-    const nextGroup = nextSecNames.map(s => `###\\s*${s}`).join('|');
-    const regex = new RegExp(`###\\s*${secName}[\\s\\S]*?(?=${nextGroup}|$)`, 'i');
+    const nextGroup = nextSecNames.map(s => `(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:[1-9]\\.\\s*)?${s}`).join('|');
+    const regex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:[1-9]\\.\\s*)?${secName}[\\s\\S]*?(?=(?:\\n\\s*(?:${nextGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
     const m = txt.match(regex);
     return m ? m[0].trim() : '';
   };
@@ -7093,17 +7092,17 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     if (!secText) return '';
     const firstLineEnd = secText.indexOf("\n");
     const t = firstLineEnd !== -1 ? secText.substring(0, firstLineEnd) : secText;
-    return t.replace(/^###\s*/, '').trim();
+    return t.replace(/^###\s*(?:[1-9]\.\s*)?/, '').trim();
   };
 
-  // Seções estruturadas
-  const secVisionRaw = extractMainSection(processedText, 'VISÃO|VISAO|VEREDICTO', ['TOP\\s*BAIRROS', 'BAIRROS', 'MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'MATRIZES', 'MIX']);
-  const secBairrosRaw = extractMainSection(processedText, 'TOP\\s*BAIRROS|BAIRROS|GEO', ['MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'MATRIZES', 'MIX']);
-  const secSwotRaw = extractMainSection(processedText, 'MATRIZ\\s*SWOT|SWOT', ['FIT', 'MOVIMENTOS', 'CULTURAIS', 'AUDITORIA', 'MATRIZES', 'MIX']);
-  const secMovimentosRaw = extractMainSection(processedText, 'FIT|MOVIMENTOS|CULTURAIS', ['AUDITORIA', 'AMBIENTE', 'PESTEL', 'MATRIZES', 'MIX']);
-  const secAuditoriaRaw = extractMainSection(processedText, 'AUDITORIA|AMBIENTE|PESTEL|CAUSALIDADE', ['MATRIZES', 'COMPETITIVIDADE', 'VRIO', 'PORTER', 'MIX']);
-  const secCompetitividadeRaw = extractMainSection(processedText, 'MATRIZES|COMPETITIVIDADE|VRIO|PORTER', ['MIX', 'MARKETING', 'OCEANO', '5\\s*PS']);
-  const secMixRaw = extractMainSection(processedText, 'MIX|MARKETING|OCEANO|5\\s*PS|DIFERENCIAÇÃO|DIFERENCIACAO', ['INDICADORES', 'MACRODADOS', '$']);
+  // Seções estruturadas (suporte total com e sem numeração)
+  const secVisionRaw = extractMainSection(processedText, 'VISÃO|VISAO|VEREDICTO', ['TOP\\s*BAIRROS', 'BAIRROS', 'MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'PESTEL', 'MATRIZES', '5\\s*PS', 'GRÁFICOS', 'GRAFICOS']);
+  const secBairrosRaw = extractMainSection(processedText, 'TOP\\s*(?:5\\s*)?BAIRROS|BAIRROS|GEO', ['MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'PESTEL', 'MATRIZES', '5\\s*PS', 'GRÁFICOS', 'GRAFICOS']);
+  const secSwotRaw = extractMainSection(processedText, 'MATRIZ\\s*SWOT|SWOT', ['AUDITORIA', 'AMBIENTE', 'PESTEL', 'MATRIZES', '5\\s*PS', 'FIT', 'MOVIMENTOS', 'CULTURAIS', 'GRÁFICOS', 'GRAFICOS']);
+  const secAuditoriaRaw = extractMainSection(processedText, 'AUDITORIA|AMBIENTE|PESTEL|CAUSALIDADE', ['MATRIZES', 'COMPETITIVIDADE', 'VRIO', 'PORTER', '5\\s*PS', 'MIX', 'FIT', 'MOVIMENTOS', 'GRÁFICOS', 'GRAFICOS']);
+  const secCompetitividadeRaw = extractMainSection(processedText, 'MATRIZES|COMPETITIVIDADE|VRIO|PORTER|5\\s*PS|MIX', ['FIT', 'MOVIMENTOS', 'CULTURAIS', 'GRÁFICOS', 'GRAFICOS', 'INDICADORES']);
+  const secMovimentosRaw = extractMainSection(processedText, 'FIT|MOVIMENTOS|CULTURAIS|RISCO\\s*MORAL', ['GRÁFICOS', 'GRAFICOS', 'INDICADORES', 'MACRODADOS', '$']);
+  const secGraficosRaw = extractMainSection(processedText, 'GRÁFICOS|GRAFICOS|ANÁLISE\\s*DE\\s*DADOS|RECORTES', ['INDICADORES', 'MACRODADOS', '$']);
 
   const visionContent = getSectionContent(secVisionRaw);
   const bairrosContent = getSectionContent(secBairrosRaw);
@@ -7118,7 +7117,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
   // Se a IA não iniciou com ### e gerou o conteúdo de visão antes da primeira seção
   if (!sanitizedVision && !secVisionRaw) {
-    const rawMatch = processedText.match(/^([\s\S]*?)(?=###\s*TOP|###\s*MATRIZ|###\s*O\s*FIT|$)/i);
+    const rawMatch = processedText.match(/^([\s\S]*?)(?=###\s*(?:[1-9]\.\s*)?(?:TOP|MATRIZ|AUDITORIA|O\s*FIT)|$)/i);
     if (rawMatch && rawMatch[1]) sanitizedVision = rawMatch[1].trim();
   }
 
@@ -7135,19 +7134,19 @@ window.renderExecutiveReport = function(topic, text, customDate) {
               </h3>
             </div>
             <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-              DIAGNÓSTICO
+              DIAGNÓSTICO SJC
             </span>
           </div>
           
           <!-- RENDERIZAÇÃO ESTRUTURADA EM SUB-CARDS -->
-          ${renderVisionAndVerdict(sanitizedVision || 'Diagnóstico analítico de oportunidade, público e modelo de negócio em São José dos Campos.')}
+          ${renderVisionAndVerdict(sanitizedVision || 'Diagnóstico analítico e auditoria de viabilidade para São José dos Campos.')}
 
           <!-- MINI GRÁFICO DINÂMICO EMBUTIDO DO VEREDICTO -->
           <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
                 <i class="fa-solid fa-chart-pie text-accent-cyan text-xs"></i>
-                ADERÊNCIA AO VEREDICTO (DISTRIBUIÇÃO DE RENDA SJC)
+                DISTRIBUIÇÃO DE RENDA MUNICIPAL (BASE REAL)
               </span>
               <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-900 text-white">N=477</span>
             </div>
@@ -7170,7 +7169,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             <div class="flex items-center gap-2.5">
               <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
               <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                TOP 5 BAIRROS RECOMENDADOS
+                TOP 5 BAIRROS & FIT GEOGRÁFICO
               </h3>
             </div>
             <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -7182,7 +7181,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             ${(() => {
               let bText = bairrosContent || '';
               if (!bText) {
-                const bMatch = processedText.match(/###\s*(?:TOP\s*BAIRROS|BAIRROS|GEO)[\s\S]*?(?=###|$)/i);
+                const bMatch = processedText.match(/(?:###|####|\*\*|\*|-|•|–)?\s*(?:[1-9]\.\s*)?(?:TOP\s*(?:5\s*)?BAIRROS|BAIRROS|GEO)[\s\S]*?(?=(?:###|####|\*\*|\*|-|•|–)?\s*(?:[1-9]\.\s*)?(?:MATRIZ|AUDITORIA|FIT)|$)/i);
                 if (bMatch) bText = bMatch[0];
               }
               const cleanBText = (bText || '').replace(/^###[^\n]*\n/i, '').trim();
@@ -7194,7 +7193,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                       <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
                       <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
                     </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Alta densidade de renda, público jovem/adulto corporativo e fluxo qualificado.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Alta densidade de renda corporativa e tolerância a novos conceitos autorais.</p>
                   </div>
                   <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
                     <div class="flex items-center justify-between">
@@ -7212,17 +7211,17 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                   </div>
                   <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
                     <div class="flex items-center justify-between">
-                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim das Colinas & Esplanada</span>
+                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim das Colinas</span>
                       <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
                     </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Perfil de altíssimo poder aquisitivo e preferência por marcas consolidadas.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Perfil de altíssimo poder aquisitivo e preferência por privacidade.</p>
                   </div>
                   <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
                     <div class="flex items-center justify-between">
                       <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Urbanova</span>
                       <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Oeste</span>
                     </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Ambiente residencial de alto padrão com carência de serviços e conveniência local.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Ambiente residencial de alto padrão com carência de conveniência especializada.</p>
                   </div>
                 </div>
               `;
@@ -7241,6 +7240,8 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
               if (rawLines.length > 0) {
                 return rawLines.map((line, bIdx) => {
+                  const isNegativeWarning = line.toLowerCase().includes('onde não abrir') || line.toLowerCase().includes('onde nao abrir') || line.toLowerCase().includes('não abrir') || line.toLowerCase().includes('nao abrir') || line.toLowerCase().includes('rejeição') || line.toLowerCase().includes('embargo');
+                  
                   let bName = "";
                   let bReg = "";
                   let bDesc = "";
@@ -7258,9 +7259,6 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                       bDesc = cols[0];
                     }
                   } else {
-                    // Trata variações como: - **Jardim Aquarius** (Centro-Oeste): Motivo
-                    // ou 1. **Jardim Aquarius** - Centro-Oeste: Motivo
-                    // ou - Jardim Aquarius: Motivo
                     const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(\-]+)(?:\*\*)?\s*(?:[\(\-]\s*([^)\:]+)\s*[\)\-]?)?\s*:?\s*([\s\S]*)$/);
                     if (match) {
                       bName = (match[1] || "").trim();
@@ -7274,6 +7272,25 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                   bName = bName.replace(/^\d+[\.\-\)]\s*/, '').replace(/[\*\:]+/g, '').trim();
                   bReg = bReg.replace(/[\*\(\)]+/g, '').trim();
                   
+                  if (isNegativeWarning) {
+                    return `
+                      <div class="p-3 bg-rose-50/90 rounded-2xl border border-rose-200 shadow-2xs space-y-1 hover:border-rose-300 transition-all">
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-rose-800 text-xs flex items-center gap-1.5">
+                            <i class="fa-solid fa-triangle-exclamation text-rose-600 text-[11px]"></i> 
+                            ${bName || 'ONDE NÃO ABRIR (ALERTA DE RISCO)'}
+                          </span>
+                          <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-rose-200 text-rose-900 font-bold border border-rose-300">
+                            ALTO RISCO
+                          </span>
+                        </div>
+                        <p class="text-xs text-rose-900/90 leading-relaxed font-normal">
+                          ${formatMarkdown(bDesc || line)}
+                        </p>
+                      </div>
+                    `;
+                  }
+
                   // Auto-detectar região se vier em branco
                   if (!bReg || bReg.length > 25) {
                     const lowName = (bName + " " + bReg + " " + bDesc).toLowerCase();
@@ -7316,8 +7333,8 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     </div>
   `;
 
-  // Renderizar as demais seções restantes (SWOT, Movimentos, Auditoria, Competitividade, Mix)
-  const remainingSections = [secSwotRaw, secMovimentosRaw, secAuditoriaRaw, secCompetitividadeRaw, secMixRaw].filter(Boolean);
+  // Renderizar as demais seções restantes (SWOT, Auditoria, Competitividade, Movimentos)
+  const remainingSections = [secSwotRaw, secAuditoriaRaw, secCompetitividadeRaw, secMovimentosRaw].filter(Boolean);
 
   remainingSections.forEach((sec, idx) => {
     const title = getSectionTitle(sec);
@@ -7326,17 +7343,17 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     
     // 2. MATRIZ SWOT (4 QUADRANTES / 2 COLUNAS DE ALTA FIDELIDADE)
     if (upperTitle.includes("SWOT")) {
-      const forcas = extractBlock(content, 'FORÇAS', ['FRAQUEZAS', 'OPORTUNIDADES', 'AMEAÇAS']);
-      const fraquezas = extractBlock(content, 'FRAQUEZAS', ['FORÇAS', 'OPORTUNIDADES', 'AMEAÇAS']);
-      const oportunidades = extractBlock(content, 'OPORTUNIDADES', ['FORÇAS', 'FRAQUEZAS', 'AMEAÇAS']);
-      const ameacas = extractBlock(content, 'AMEAÇAS', ['FORÇAS', 'FRAQUEZAS', 'OPORTUNIDADES']);
+      const forcas = extractBlock(content, 'FORÇAS|FORCAS', ['FRAQUEZAS', 'OPORTUNIDADES', 'AMEAÇAS', 'AMEACAS']);
+      const fraquezas = extractBlock(content, 'FRAQUEZAS', ['FORÇAS', 'FORCAS', 'OPORTUNIDADES', 'AMEAÇAS', 'AMEACAS']);
+      const oportunidades = extractBlock(content, 'OPORTUNIDADES', ['FORÇAS', 'FORCAS', 'FRAQUEZAS', 'AMEAÇAS', 'AMEACAS']);
+      const ameacas = extractBlock(content, 'AMEAÇAS|AMEACAS', ['FORÇAS', 'FORCAS', 'FRAQUEZAS', 'OPORTUNIDADES']);
 
       htmlOutput += `
         <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
           <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
             <i class="fa-solid fa-chart-line text-rose-500 text-sm"></i>
             <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-              MATRIZ SWOT
+              MATRIZ SWOT (ANÁLISE DE MERCADO SJC)
             </h3>
           </div>
 
@@ -7378,7 +7395,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
               <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-rose-100">
                 <i class="fa-solid fa-circle-radiation text-rose-600 text-sm"></i>
-                <span>AMEAÇAS (RISCOS & PRESSÕES EXTERNAS)</span>
+                <span>AMEAÇAS (RISCOS, REJEIÇÃO MORAL & PRESSÕES)</span>
               </div>
               <div class="text-xs text-slate-700 space-y-2.5 flex-1">
                 ${renderSwotBullets(ameacas, "text-rose-500", "fa-shield-virus")}
@@ -7436,9 +7453,9 @@ window.renderExecutiveReport = function(topic, text, customDate) {
               <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
                 <div class="flex items-center gap-2 text-sky-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
                   <span class="text-base">👥</span>
-                  <span>SOCIAL</span>
+                  <span>SOCIAL & MORAL</span>
                 </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelSocial) || 'Comportamento de evasão e identidade comunitária.'}</div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelSocial) || 'Comportamento de consumo, perfil familiar conservador e atrito cultural.'}</div>
               </div>
               <!-- Tecnológico -->
               <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
@@ -7460,9 +7477,9 @@ window.renderExecutiveReport = function(topic, text, customDate) {
               <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
                 <div class="flex items-center gap-2 text-amber-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
                   <span class="text-base">⚖️</span>
-                  <span>LEGAL</span>
+                  <span>LEGAL & ZONEAMENTO</span>
                 </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelLegal) || 'Conformidade jurídica, alvarás e regras urbanas.'}</div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelLegal) || 'Conformidade jurídica, alvarás e zoneamento urbano em SJC.'}</div>
               </div>
             </div>
           </div>
@@ -7567,27 +7584,38 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         </div>
       `;
     }
-    // 4. MATRIZES ESTRATÉGICAS E COMPETITIVIDADE (VRIO & 5 FORÇAS DE PORTER)
-    else if (upperTitle.includes("COMPETITIVIDADE") || (upperTitle.includes("MATRIZES") && !upperTitle.includes("MARKETING")) || (upperTitle.includes("PORTER") && !upperTitle.includes("MARKETING"))) {
-      const vrioValor = extractBlock(content, 'VALOR|Valor', ['RARIDADE', 'Raridade', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS']);
-      const vrioRaridade = extractBlock(content, 'RARIDADE|Raridade', ['VALOR', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS']);
-      const vrioImitabilidade = extractBlock(content, 'IMITABILIDADE|Imitabilidade', ['VALOR', 'RARIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS']);
-      const vrioOrganizacao = extractBlock(content, 'ORGANIZAÇÃO|ORGANIZACAO|Organizacao', ['VALOR', 'RARIDADE', 'IMITABILIDADE', 'PORTER', '5 FORÇAS']);
+    // 4. MATRIZES ESTRATÉGICAS (VRIO, 5 FORÇAS DE PORTER, 5 PS & OCEANO AZUL)
+    else if (upperTitle.includes("COMPETITIVIDADE") || upperTitle.includes("MATRIZES") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO") || upperTitle.includes("5 PS") || upperTitle.includes("MIX")) {
+      const vrioValor = extractBlock(content, 'VALOR|Valor', ['RARIDADE', 'Raridade', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
+      const vrioRaridade = extractBlock(content, 'RARIDADE|Raridade', ['VALOR', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
+      const vrioImitabilidade = extractBlock(content, 'IMITABILIDADE|Imitabilidade', ['VALOR', 'RARIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
+      const vrioOrganizacao = extractBlock(content, 'ORGANIZAÇÃO|ORGANIZACAO|Organizacao', ['VALOR', 'RARIDADE', 'IMITABILIDADE', 'PORTER', '5 FORÇAS', '5 PS']);
 
-      const porterRiv = extractBlock(content, 'Rivalidade', ['Novos Entrantes', 'Substitutos', 'Fornecedores', 'Compradores']);
-      const porterNovos = extractBlock(content, 'Novos Entrantes', ['Rivalidade', 'Substitutos', 'Fornecedores', 'Compradores']);
-      const porterSub = extractBlock(content, 'Substitutos', ['Rivalidade', 'Novos Entrantes', 'Fornecedores', 'Compradores']);
-      const porterForn = extractBlock(content, 'Fornecedores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Compradores']);
-      const porterComp = extractBlock(content, 'Compradores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Fornecedores']);
+      const porterRiv = extractBlock(content, 'Rivalidade', ['Novos Entrantes', 'Substitutos', 'Fornecedores', 'Compradores', '5 PS']);
+      const porterNovos = extractBlock(content, 'Novos Entrantes', ['Rivalidade', 'Substitutos', 'Fornecedores', 'Compradores', '5 PS']);
+      const porterSub = extractBlock(content, 'Substitutos', ['Rivalidade', 'Novos Entrantes', 'Fornecedores', 'Compradores', '5 PS']);
+      const porterForn = extractBlock(content, 'Fornecedores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Compradores', '5 PS']);
+      const porterComp = extractBlock(content, 'Compradores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Fornecedores', '5 PS']);
+
+      const pProduto = extractBlock(content, 'PRODUTO|Produto', ['PREÇO', 'Preço', 'PRAÇA', 'Praça', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPreco = extractBlock(content, 'PREÇO|Preço|Preco', ['PRODUTO', 'PRAÇA', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPraca = extractBlock(content, 'PRAÇA|Praça|Praca', ['PRODUTO', 'PREÇO', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPromocao = extractBlock(content, 'PROMOÇÃO|Promoção|Promocao', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPessoas = extractBlock(content, 'PESSOAS|Pessoas', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PROMOÇÃO', 'OCEANO', 'ELIMINAR']);
+
+      const oaEliminar = extractBlock(content, 'ELIMINAR|Eliminar', ['REDUZIR', 'ELEVAR', 'CRIAR']);
+      const oaReduzir = extractBlock(content, 'REDUZIR|Reduzir', ['ELIMINAR', 'ELEVAR', 'CRIAR']);
+      const oaElevar = extractBlock(content, 'ELEVAR|Elevar', ['ELIMINAR', 'REDUZIR', 'CRIAR']);
+      const oaCriar = extractBlock(content, 'CRIAR|Criar', ['ELIMINAR', 'REDUZIR', 'ELEVAR']);
 
       htmlOutput += `
-        <!-- CARD: MATRIZES ESTRATÉGICAS E COMPETITIVIDADE (VRIO & 5 FORÇAS DE PORTER) -->
+        <!-- CARD: MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER) -->
         <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-2.5">
               <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
               <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                MATRIZES ESTRATÉGICAS E COMPETITIVIDADE
+                MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER)
               </h3>
             </div>
             <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
@@ -7608,7 +7636,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                   <span class="text-xl font-black font-mono text-emerald-600 shrink-0">V</span>
                   <div class="text-xs text-slate-700 leading-relaxed">
                     <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">VALOR:</strong>
-                    ${formatMarkdown(vrioValor) || 'Capacidade de explorar oportunidades e neutralizar ameaças no mercado.'}
+                    ${formatMarkdown(vrioValor) || 'Capacidade de explorar oportunidades e neutralizar ameaças no mercado de SJC.'}
                   </div>
                 </div>
 
@@ -7670,29 +7698,14 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             </div>
           </div>
         </div>
-      `;
-    }
-    // 5. MIX DE MARKETING E DIFERENCIAÇÃO (5 PS & OCEANO AZUL)
-    else if (upperTitle.includes("MIX") || upperTitle.includes("MARKETING") || upperTitle.includes("OCEANO") || upperTitle.includes("5 PS") || upperTitle.includes("DIFERENCIAÇÃO") || upperTitle.includes("DIFERENCIACAO")) {
-      const pProduto = extractBlock(content, 'PRODUTO|Produto', ['PREÇO', 'Preço', 'PRAÇA', 'Praça', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPreco = extractBlock(content, 'PREÇO|Preço|Preco', ['PRODUTO', 'PRAÇA', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPraca = extractBlock(content, 'PRAÇA|Praça|Praca', ['PRODUTO', 'PREÇO', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPromocao = extractBlock(content, 'PROMOÇÃO|Promoção|Promocao', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPessoas = extractBlock(content, 'PESSOAS|Pessoas', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PROMOÇÃO', 'OCEANO', 'ELIMINAR']);
 
-      const oaEliminar = extractBlock(content, 'ELIMINAR|Eliminar', ['REDUZIR', 'ELEVAR', 'CRIAR']);
-      const oaReduzir = extractBlock(content, 'REDUZIR|Reduzir', ['ELIMINAR', 'ELEVAR', 'CRIAR']);
-      const oaElevar = extractBlock(content, 'ELEVAR|Elevar', ['ELIMINAR', 'REDUZIR', 'CRIAR']);
-      const oaCriar = extractBlock(content, 'CRIAR|Criar', ['ELIMINAR', 'REDUZIR', 'ELEVAR']);
-
-      htmlOutput += `
         <!-- CARD: MIX DE MARKETING E DIFERENCIAÇÃO (5 PS & OCEANO AZUL) -->
         <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-2.5">
               <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
               <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                MIX DE MARKETING E DIFERENCIAÇÃO
+                MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL)
               </h3>
             </div>
             <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
@@ -7746,7 +7759,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                     ELIMINAR
                   </div>
                   <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaEliminar) || 'Fatores que o setor dá como certos e que devem ser eliminados.'}
+                    ${formatMarkdown(oaEliminar) || 'Fatores que o setor tradicional dá como certos e que devem ser eliminados.'}
                   </div>
                 </div>
 
@@ -7785,17 +7798,16 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         </div>
       `;
     }
-    // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS (4 CARDS VISUAIS COM FOTOS + VEREDICTO FINAL)
-    else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT") || upperTitle.includes("CULTURAIS")) {
+    // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS (4 CARDS VISUAIS COM FOTOS + VEREDICTO FINAL DE ALTO CONTRASTE)
+    else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT") || upperTitle.includes("CULTURAIS") || upperTitle.includes("RISCO MORAL")) {
       const fitSilencio = extractBlock(content, 'Geografia do Silêncio|Silêncio|Silencio', ['A Cidade Prometida', 'Cidade Prometida', 'A Tribo Global', 'Tribo Global', 'Empreendedorismo Intuitivo', 'Veredicto']);
       const fitPrometida = extractBlock(content, 'A Cidade Prometida|Cidade Prometida', ['Geografia do Silêncio', 'A Tribo Global', 'Tribo Global', 'Empreendedorismo Intuitivo', 'Veredicto']);
       const fitTribo = extractBlock(content, 'A Tribo Global|Tribo Global', ['Geografia do Silêncio', 'A Cidade Prometida', 'Empreendedorismo Intuitivo', 'Veredicto']);
       const fitEmpreendedorismo = extractBlock(content, 'Empreendedorismo Intuitivo|Empreendedorismo', ['Geografia do Silêncio', 'A Cidade Prometida', 'A Tribo Global', 'Veredicto']);
       
-      let veredictoMov = extractBlock(content, 'O Veredicto do Movimento|Veredicto do Movimento|Veredicto', ['\\[CHART', '\\[GRAFICO']);
+      let veredictoMov = extractBlock(content, 'O Veredicto do Movimento|Veredicto do Movimento|Veredicto', ['\\[CHART', '\\[GRAFICO', 'GRÁFICOS', 'GRAFICOS']);
       if (!veredictoMov || veredictoMov.trim().length < 10) {
-        // Fallback defensivo se o marcador final não capturou
-        const vMatch = content.match(/(?:###|####|\*\*|\*|-|•)?\s*(?:O Veredicto do Movimento|Veredicto do Movimento|Veredicto)\s*(?:\*\*)?:?\s*([\s\S]*?)(?=\[CHART|\[GRAFICO|$)/i);
+        const vMatch = content.match(/(?:###|####|\*\*|\*|-|•)?\s*(?:O Veredicto do Movimento|Veredicto do Movimento|Veredicto)\s*(?:\*\*)?:?\s*([\s\S]*?)(?=\[CHART|\[GRAFICO|###|$)/i);
         if (vMatch && vMatch[1]) {
           veredictoMov = vMatch[1].trim();
         }
@@ -7807,7 +7819,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             <div class="flex items-center gap-2.5">
               <i class="fa-solid fa-compass text-purple-600 text-sm"></i>
               <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
+                FIT COM OS 4 MOVIMENTOS CULTURAIS & ANÁLISE DE RISCO MORAL
               </h3>
             </div>
             <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
@@ -7854,7 +7866,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 </div>
                 <div class="p-3.5 space-y-1.5">
                   <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A CIDADE PROMETIDA</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitPrometida) || 'Famílias que buscam segurança, estabilidade e excelência educacional.'}</p>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitPrometida) || 'Famílias que buscam segurança, estabilidade e moral tradicional.'}</p>
                 </div>
               </div>
               <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7876,7 +7888,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 </div>
                 <div class="p-3.5 space-y-1.5">
                   <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A TRIBO GLOBAL</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitTribo) || 'Engenheiros, tech, criativos e jovens que exigem estética contemporânea e autoral.'}</p>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitTribo) || 'Engenheiros, tech, criativos e público cosmopolita.'}</p>
                 </div>
               </div>
               <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7898,7 +7910,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 </div>
                 <div class="p-3.5 space-y-1.5">
                   <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">EMPREENDEDORISMO INTUITIVO</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitEmpreendedorismo) || 'A economia real dos bairros, prestadores de serviço e consumo rápido.'}</p>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitEmpreendedorismo) || 'A economia real dos bairros, prestadores de serviço e consumo prático.'}</p>
                 </div>
               </div>
               <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -7908,17 +7920,17 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
           </div>
 
-          <!-- CARD DE DESTAQUE: O VEREDICTO DO MOVIMENTO -->
+          <!-- CARD DE DESTAQUE: O VEREDICTO DO MOVIMENTO (CORRIGIDO: ALTO CONTRASTE TEXT-WHITE) -->
           <div class="p-5 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-2xl border border-brand-800 shadow-md flex flex-col md:flex-row items-center gap-4">
             <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-xl text-purple-300">
               👑
             </div>
-            <div class="space-y-1 flex-1 text-center md:text-left">
-              <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-400">
+            <div class="space-y-1.5 flex-1 text-center md:text-left">
+              <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-300">
                 O VEREDICTO DO MOVIMENTO DOMINANTE
               </span>
-              <div class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">
-                ${formatMarkdown(veredictoMov || 'Identificação do movimento cultural prioritário para posicionamento competitivo e captura de margem em São José dos Campos.', 'text-white font-black underline decoration-purple-400 underline-offset-2')}
+              <div class="text-xs sm:text-sm text-white font-medium leading-relaxed">
+                ${formatMarkdown(veredictoMov || 'Identificação do movimento cultural prioritário para posicionamento competitivo e captura de margem em São José dos Campos.', 'text-amber-300 font-black')}
               </div>
             </div>
           </div>
@@ -7945,72 +7957,156 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     }
   });
 
-  // Renderizar os 3 Macrodados Municipais do Radar SJC no rodapé
-  const defaultMacroCharts = [
-    {
-      id: "macro-chart-regiao",
-      config: {
-        type: "doughnut",
-        title: "Frequência de Consumo por Região de SJC",
-        labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
-        data: [40.7, 27.6, 13.9, 11.2, 6.6]
-      }
-    },
-    {
-      id: "macro-chart-evasao",
-      config: {
-        type: "doughnut",
-        title: "Paradoxo de Evasão vs Orgulho em SJC",
-        labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
-        data: [64.7, 35.3]
-      }
-    },
-    {
-      id: "macro-chart-barreiras",
-      config: {
-        type: "bar",
-        title: "Principais Barreiras Noturnas e Gastronomia",
-        labels: ["Preço Alto / Pouca Experiência", "Falta Lugares Autorais", "Sensação de Mesmice", "Outros"],
-        data: [32.3, 22.9, 18.6, 26.2]
-      }
+  // PARSER DE GRÁFICOS DINÂMICOS & RECORTES DE DADOS (BLOCO 7)
+  const dynamicParsedCharts = [];
+  const chartTagRegex = /\[CHART:\s*(\{[\s\S]*?\})\s*\]([\s\S]*?)(?=(?:\[CHART:|$|###))/gi;
+  let chartMatch;
+  
+  while ((chartMatch = chartTagRegex.exec(cleanText)) !== null) {
+    try {
+      const jsonContent = chartMatch[1].trim();
+      const analysisText = (chartMatch[2] || "").trim();
+      const parsedConfig = JSON.parse(jsonContent);
+      const uniqueChartId = "chart-ai-" + Math.random().toString(36).substr(2, 9);
+      
+      dynamicParsedCharts.push({
+        id: uniqueChartId,
+        config: parsedConfig,
+        analysis: analysisText
+      });
+      dynamicChartsToRender.push({
+        id: uniqueChartId,
+        config: parsedConfig
+      });
+    } catch (eChart) {
+      console.warn("Erro ao fazer parse de tag [CHART]:", eChart);
     }
-  ];
+  }
 
-  // Adicionar aos charts para renderização no Chart.js
-  defaultMacroCharts.forEach(mc => dynamicChartsToRender.push(mc));
-
-  const chartsWrapper = `
-    <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-        <div class="flex items-center gap-2.5">
-          <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
-          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-            INDICADORES E MACRODADOS MUNICIPAIS (SJC)
-          </h3>
-        </div>
-        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
-          N=477 • IC=95%
-        </span>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        ${defaultMacroCharts.map(item => `
-          <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-              <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-                <i class="fa-solid fa-chart-column text-accent-cyan"></i>
-                ${item.config.title}
-              </span>
-              <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
-            </div>
-            <div class="relative w-full h-56">
-              <canvas id="${item.id}"></canvas>
-            </div>
+  // Se a IA gerou os gráficos dinâmicos da Seção 7, renderizá-los com o parágrafo analítico logo abaixo
+  if (dynamicParsedCharts.length > 0) {
+    htmlOutput += `
+      <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
+            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+              3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS
+            </h3>
           </div>
-        `).join('')}
+          <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+            PESQUISA RADAR SJC (N=477)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          ${dynamicParsedCharts.map(item => `
+            <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-column text-accent-cyan"></i>
+                    ${item.config.title || "Indicador Analítico SJC"}
+                  </span>
+                  <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+                </div>
+                <div class="relative w-full h-52">
+                  <canvas id="${item.id}"></canvas>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
+                <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
+                  <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
+                </span>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${formatMarkdown(item.analysis || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.")}
+                </p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
       </div>
-    </div>
-  `;
-  htmlOutput += chartsWrapper;
+    `;
+  } else {
+    // Se a IA não gerou tags [CHART], renderizar os 3 Macrodados Municipais do Radar SJC
+    const defaultMacroCharts = [
+      {
+        id: "macro-chart-regiao",
+        config: {
+          type: "doughnut",
+          title: "Frequência de Consumo por Região de SJC",
+          labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
+          data: [40.7, 27.6, 13.9, 11.2, 6.6]
+        },
+        analysis: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
+      },
+      {
+        id: "macro-chart-evasao",
+        config: {
+          type: "doughnut",
+          title: "Paradoxo de Evasão vs Orgulho em SJC",
+          labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
+          data: [64.7, 35.3]
+        },
+        analysis: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
+      },
+      {
+        id: "macro-chart-barreiras",
+        config: {
+          type: "bar",
+          title: "Principais Barreiras Noturnas e Gastronomia",
+          labels: ["Preço Alto / Pouca Experiência", "Falta Lugares Autorais", "Sensação de Mesmice", "Outros"],
+          data: [32.3, 22.9, 18.6, 26.2]
+        },
+        analysis: "A percepção de preço elevado sem proposta de valor correspondente (32.3%) e a mesmice estética (18.6%) demandam posicionamento autoral e excelente custo-benefício."
+      }
+    ];
+
+    defaultMacroCharts.forEach(mc => dynamicChartsToRender.push(mc));
+
+    const chartsWrapper = `
+      <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
+            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+              INDICADORES E MACRODADOS MUNICIPAIS (SJC)
+            </h3>
+          </div>
+          <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+            N=477 • IC=95%
+          </span>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          ${defaultMacroCharts.map(item => `
+            <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-column text-accent-cyan"></i>
+                    ${item.config.title}
+                  </span>
+                  <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+                </div>
+                <div class="relative w-full h-52">
+                  <canvas id="${item.id}"></canvas>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
+                <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
+                  <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
+                </span>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${item.analysis}
+                </p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    htmlOutput += chartsWrapper;
+  }
 
   if (!htmlOutput) {
     htmlOutput = `
