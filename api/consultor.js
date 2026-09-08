@@ -66,11 +66,41 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
 [CHART: {"type": "doughnut", "title": "Paradoxo Evasão vs Orgulho SJC", "labels": ["Evadem Consumo", "Consomem Local"], "data": [64.7, 35.3]}]
 [CHART: {"type": "pie", "title": "Principais Queixas no Consumo", "labels": ["Caro/Pouca Exp.", "Falta Autoral", "Mesmice", "Outros"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
 
-    // Modelos Groq com suporte a saída completa de relatório executivo
-    const candidateModels = [
-      'llama-3.3-70b-versatile',
-      'llama-3.1-8b-instant'
-    ];
+    // 1. Obter modelos ativos diretamente da chave de API da Groq
+    let candidateModels = [];
+    try {
+      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+      if (modelsResp.ok) {
+        const modelsData = await modelsResp.json();
+        const availableIds = (modelsData.data || []).map(m => m.id);
+        
+        // Priorizar modelos de texto completos e excluir modelos de áudio/whisper/guard
+        const chatModels = availableIds.filter(id => 
+          !id.includes('whisper') && 
+          !id.includes('guard') && 
+          !id.includes('distil') &&
+          !id.includes('vision')
+        );
+
+        // Ordenação inteligente: maiores/melhores primeiro
+        const preferred = ['llama-3.3-70b-versatile', 'llama3-70b-8192', 'llama3-8b-8192', 'qwen/qwen3.8-27b', 'mixtral-8x7b-32768'];
+        for (const p of preferred) {
+          if (chatModels.includes(p)) candidateModels.push(p);
+        }
+        // Incluir os demais modelos disponíveis
+        chatModels.forEach(m => {
+          if (!candidateModels.includes(m)) candidateModels.push(m);
+        });
+      }
+    } catch (eList) {
+      console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
+    }
+
+    if (candidateModels.length === 0) {
+      candidateModels = ['llama-3.3-70b-versatile', 'llama3-70b-8192', 'llama3-8b-8192'];
+    }
 
     let replyContent = null;
     let modelUsed = null;
@@ -86,7 +116,7 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
           },
           body: JSON.stringify({
             model: model,
-            max_tokens: 2500,
+            max_tokens: 2000,
             temperature: 0.3,
             messages: [
               { role: 'system', content: systemPrompt },
