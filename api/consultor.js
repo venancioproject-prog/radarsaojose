@@ -107,11 +107,7 @@ Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicand
   * **Eliminar:** [fatores a eliminar]
   * **Reduzir:** [fatores a reduzir]
   * **Elevar:** [fatores a elevar]
-  * **Criar:** [fatores a criar]
-
-[CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
-[CHART: {"type": "doughnut", "title": "Paradoxo de Evasão vs Orgulho em SJC", "labels": ["Evadem para SP/Litoral", "Consomem Localmente"], "data": [64.7, 35.3]}]
-[CHART: {"type": "pie", "title": "Principais Barreiras Noturnas e de Serviços", "labels": ["Preço Alto / Pouca Experiência", "Falta de Lugares Autorais", "Sensação de Mesmice", "Outros Fatores"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
+  * **Criar:** [fatores a criar]`;
 
     // 1. Obter modelos ativos diretamente da chave de API da Groq
     let candidateModels = [];
