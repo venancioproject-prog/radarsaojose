@@ -71,6 +71,7 @@ DIRETRIZES DE FORMATAÇÃO E REGRAS TÉCNICAS:
    - Analise a FUNDO a ideia específica proposta pelo usuário. Você tem liberdade analítica total para puxar e cruzar os dados mais pertinentes da pesquisa de SJC (seja renda, idade, preferências musicais, influenciadores, streaming, moradia, mobilidade, evasão ou barreiras noturnas) de acordo com o nicho exato do negócio!
    - Toda porcentagem ou dado deve vir integrado naturalmente na narrativa com citação entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...).
    - Mantenha a fidelidade geográfica real de SJC (Centro/Oeste, Zona Sul, Leste, Norte, Sudeste).
+   - OBRIGATÓRIO: Responda 100% em Português do Brasil fluente e sofisticado. Nunca retorne rascunhos ou termos em inglês.
 
 2. PROIBIDO INVENTAR TAGS DE GRÁFICOS OU JSONS NO TEXTO:
    - Não insira tags técnicas no meio da resposta. A sua resposta deve ser puramente texto executivo de alto nível em Markdown estruturado sob os títulos ###.

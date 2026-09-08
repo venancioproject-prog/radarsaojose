@@ -7042,193 +7042,234 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     `;
   };
 
-  // Dividir por seções principais H3
-  const sections = processedText.split(/^###\s+/m).filter(Boolean);
+  // Dividir por seções principais H3 de forma estrita
+  // Extrair explicitamente as seções conhecidas para evitar duplicação ou desencontro
+  const extractMainSection = (txt, secName, nextSecNames) => {
+    if (!txt) return '';
+    const nextGroup = nextSecNames.map(s => `###\\s*${s}`).join('|');
+    const regex = new RegExp(`###\\s*${secName}[\\s\\S]*?(?=${nextGroup}|$)`, 'i');
+    const m = txt.match(regex);
+    return m ? m[0].trim() : '';
+  };
+
+  const getSectionContent = (secText) => {
+    if (!secText) return '';
+    const firstLineEnd = secText.indexOf("\n");
+    return firstLineEnd !== -1 ? secText.substring(firstLineEnd).trim() : '';
+  };
+
+  const getSectionTitle = (secText) => {
+    if (!secText) return '';
+    const firstLineEnd = secText.indexOf("\n");
+    const t = firstLineEnd !== -1 ? secText.substring(0, firstLineEnd) : secText;
+    return t.replace(/^###\s*/, '').trim();
+  };
+
+  // Seções estruturadas
+  const secVisionRaw = extractMainSection(processedText, 'VISÃO|VISAO|VEREDICTO', ['TOP\\s*BAIRROS', 'BAIRROS', 'MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'MATRIZES', 'MIX']);
+  const secBairrosRaw = extractMainSection(processedText, 'TOP\\s*BAIRROS|BAIRROS|GEO', ['MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'MATRIZES', 'MIX']);
+  const secSwotRaw = extractMainSection(processedText, 'MATRIZ\\s*SWOT|SWOT', ['FIT', 'MOVIMENTOS', 'CULTURAIS', 'AUDITORIA', 'MATRIZES', 'MIX']);
+  const secMovimentosRaw = extractMainSection(processedText, 'FIT|MOVIMENTOS|CULTURAIS', ['AUDITORIA', 'AMBIENTE', 'PESTEL', 'MATRIZES', 'MIX']);
+  const secAuditoriaRaw = extractMainSection(processedText, 'AUDITORIA|AMBIENTE|PESTEL|CAUSALIDADE', ['MATRIZES', 'COMPETITIVIDADE', 'VRIO', 'PORTER', 'MIX']);
+  const secCompetitividadeRaw = extractMainSection(processedText, 'MATRIZES|COMPETITIVIDADE|VRIO|PORTER', ['MIX', 'MARKETING', 'OCEANO', '5\\s*PS']);
+  const secMixRaw = extractMainSection(processedText, 'MIX|MARKETING|OCEANO|5\\s*PS|DIFERENCIAÇÃO|DIFERENCIACAO', ['INDICADORES', 'MACRODADOS', '$']);
+
+  const visionContent = getSectionContent(secVisionRaw);
+  const bairrosContent = getSectionContent(secBairrosRaw);
+
   let htmlOutput = "";
 
-  sections.forEach((sec, idx) => {
-    const firstLineEnd = sec.indexOf("\n");
-    let title = "";
-    let content = "";
+  // 1. LINHA 1 DO RELATÓRIO: VISÃO ESTRATÉGICA & TOP 5 BAIRROS (LADO A LADO EM 2 COLUNAS)
+  let sanitizedVision = (visionContent || "")
+    .replace(/\d+\.\s*(Deconstruct Requirements|Map Business Idea|Draft)[\s\S]*?(?=\n\n|###|$)/gi, '')
+    .replace(/I need to generate the report[\s\S]*?(?=\n\n|$)/gi, '')
+    .trim();
 
-    if (firstLineEnd !== -1) {
-      title = sec.substring(0, firstLineEnd).trim();
-      content = sec.substring(firstLineEnd).trim();
-    } else {
-      title = sec.trim();
-      content = "";
-    }
+  // Se a IA não iniciou com ### e gerou o conteúdo de visão antes da primeira seção
+  if (!sanitizedVision && !secVisionRaw) {
+    const rawMatch = processedText.match(/^([\s\S]*?)(?=###\s*TOP|###\s*MATRIZ|###\s*O\s*FIT|$)/i);
+    if (rawMatch && rawMatch[1]) sanitizedVision = rawMatch[1].trim();
+  }
 
-    const upperTitle = title ? title.toUpperCase() : "";
-
-    // 1. VISÃO ESTRATÉGICA E VEREDICTO
-    if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
-      let sanitizedVision = content
-        .replace(/\d+\.\s*(Deconstruct Requirements|Map Business Idea|Draft)[\s\S]*?(?=\n\n|###|$)/gi, '')
-        .replace(/I need to generate the report[\s\S]*?(?=\n\n|$)/gi, '')
-        .trim();
-
-      // Encontrar se existe a seção de Bairros para renderizar lado a lado em 2 colunas
-      const bairrosSec = sections.find(s => {
-        const t = s.substring(0, s.indexOf("\n")).toUpperCase();
-        return t.includes("BAIRROS") || t.includes("GEO-LOCALIZAÇÃO") || t.includes("GEO");
-      });
-
-      let bairrosContent = "";
-      if (bairrosSec) {
-        bairrosContent = bairrosSec.substring(bairrosSec.indexOf("\n")).trim();
-      }
-
-      htmlOutput += `
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO + MINI GRÁFICO DE FIT DO VEREDICTO -->
-          <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                <div class="flex items-center gap-2.5">
-                  <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
-                  <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                    VISÃO ESTRATÉGICA E VEREDICTO
-                  </h3>
-                </div>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-                  DIAGNÓSTICO
-                </span>
-              </div>
-              
-              <!-- RENDERIZAÇÃO ESTRUTURADA EM SUB-CARDS -->
-              ${renderVisionAndVerdict(sanitizedVision || content)}
-
-              <!-- MINI GRÁFICO DINÂMICO EMBUTIDO DO VEREDICTO -->
-              <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
-                    <i class="fa-solid fa-chart-pie text-accent-cyan text-xs"></i>
-                    ADERÊNCIA AO VEREDICTO (DISTRIBUIÇÃO DE RENDA SJC)
-                  </span>
-                  <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-900 text-white">N=477</span>
-                </div>
-                <div class="relative w-full h-36">
-                  <canvas id="veredicto-mini-chart"></canvas>
-                </div>
-              </div>
+  htmlOutput += `
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO + MINI GRÁFICO DE FIT DO VEREDICTO -->
+      <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                VISÃO ESTRATÉGICA E VEREDICTO
+              </h3>
             </div>
-
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
-              <span>PADRÃO MCKINSEY / STUDIO 8</span>
-              <span class="text-brand-900">RADAR SJC 2026</span>
-            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+              DIAGNÓSTICO
+            </span>
           </div>
+          
+          <!-- RENDERIZAÇÃO ESTRUTURADA EM SUB-CARDS -->
+          ${renderVisionAndVerdict(sanitizedVision || 'Diagnóstico analítico de oportunidade, público e modelo de negócio em São José dos Campos.')}
 
-          <!-- CARD 2: TOP 5 BAIRROS RECOMENDADOS (GEO-FIT SJC) -->
-          <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                <div class="flex items-center gap-2.5">
-                  <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
-                  <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                    TOP 5 BAIRROS RECOMENDADOS
-                  </h3>
-                </div>
-                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  GEO-FIT SJC
-                </span>
-              </div>
-
-              <div class="space-y-2.5 pt-1">
-                ${(() => {
-                  if (!bairrosContent) return '<p class="text-xs text-slate-500 italic">Análise de microterritórios prioritários com base em densidade de renda e fluxo de consumo em São José dos Campos.</p>';
-                  
-                  // Limpar linhas vazias ou rascunhos de cabeçalhos de tabela (| Bairro | Região | Motivo |)
-                  let rawLines = bairrosContent.split(/\n+/).map(l => l.trim()).filter(l => {
-                    if (!l || l.length < 4 || l.startsWith('###') || l === '--') return false;
-                    if (l.match(/^\|[-:\s|]+\|$/)) return false; // separador |---|---|
-                    if (l.match(/^\|\s*(bairro|regi[aã]o|motivo|fit|por que)/i)) return false; // cabeçalho da tabela
-                    return true;
-                  });
-
-                  if (rawLines.length > 0) {
-                    return rawLines.map((line, bIdx) => {
-                      let bName = "";
-                      let bReg = "";
-                      let bDesc = "";
-
-                      // Se veio em formato de linha de tabela markdown (| Bairro | Região | Motivo |)
-                      if (line.includes('|')) {
-                        const cols = line.split('|').map(c => c.trim()).filter(Boolean);
-                        if (cols.length >= 3) {
-                          bName = cols[0];
-                          bReg = cols[1];
-                          bDesc = cols.slice(2).join(' - ');
-                        } else if (cols.length === 2) {
-                          bName = cols[0];
-                          bDesc = cols[1];
-                        } else if (cols.length === 1) {
-                          bDesc = cols[0];
-                        }
-                      } 
-                      // Se veio em formato de lista: - **Nome** (Região): Motivo
-                      else {
-                        const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(]+)(?:\*\*)?\s*(?:\(([^)]+)\))?\s*:?\s*([\s\S]*)$/);
-                        if (match) {
-                          bName = (match[1] || "").trim();
-                          bReg = (match[2] || "").trim();
-                          bDesc = (match[3] || "").trim();
-                        } else {
-                          bDesc = line;
-                        }
-                      }
-
-                      // Limpezas adicionais
-                      bName = bName.replace(/^\d+[\.\-\)]\s*/, '').replace(/[\*\:]+/g, '').trim();
-                      bReg = bReg.replace(/[\*\(\)]+/g, '').trim();
-                      if (!bReg) {
-                        const lowName = bName.toLowerCase();
-                        if (lowName.includes('aquarius') || lowName.includes('adyana') || lowName.includes('ema') || lowName.includes('esplanada') || lowName.includes('colinas')) bReg = 'Centro-Oeste';
-                        else if (lowName.includes('satélite') || lowName.includes('satelite') || lowName.includes('bosque') || lowName.includes('oriente') || lowName.includes('sul')) bReg = 'Zona Sul';
-                        else if (lowName.includes('urbanova') || lowName.includes('oeste')) bReg = 'Zona Oeste';
-                        else if (lowName.includes('industrial') || lowName.includes('leste') || lowName.includes('vista') || lowName.includes('melo')) bReg = 'Zona Leste';
-                        else if (lowName.includes('santana') || lowName.includes('norte')) bReg = 'Zona Norte';
-                        else bReg = 'SJC';
-                      }
-
-                      return `
-                        <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
-                          <div class="flex items-center justify-between">
-                            <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
-                              <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
-                              ${bName || `Microterritório 0${bIdx + 1}`}
-                            </span>
-                            <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">
-                              ${bReg}
-                            </span>
-                          </div>
-                          <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                            ${formatMarkdown(bDesc || line)}
-                          </p>
-                        </div>
-                      `;
-                    }).join('');
-                  }
-                  
-                  return `<div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 text-xs text-slate-700">${formatMarkdown(bairrosContent)}</div>`;
-                })()}
-              </div>
+          <!-- MINI GRÁFICO DINÂMICO EMBUTIDO DO VEREDICTO -->
+          <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
+                <i class="fa-solid fa-chart-pie text-accent-cyan text-xs"></i>
+                ADERÊNCIA AO VEREDICTO (DISTRIBUIÇÃO DE RENDA SJC)
+              </span>
+              <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-900 text-white">N=477</span>
             </div>
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
-              <span>RECORTE GEOGRÁFICO</span>
-              <span class="text-emerald-700 font-bold">N=477 RESPONDENTES</span>
+            <div class="relative w-full h-36">
+              <canvas id="veredicto-mini-chart"></canvas>
             </div>
           </div>
         </div>
-      `;
-    }
-    // 1.1 TOP BAIRROS (Se já renderizado no grid lado a lado, pular)
-    else if (upperTitle.includes("BAIRROS") || upperTitle.includes("GEO-LOCALIZAÇÃO") || upperTitle.includes("GEO")) {
-      return; // Já renderizado no grid 2-colunas acima
-    }
+
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+          <span>PADRÃO MCKINSEY / STUDIO 8</span>
+          <span class="text-brand-900">RADAR SJC 2026</span>
+        </div>
+      </div>
+
+      <!-- CARD 2: TOP 5 BAIRROS RECOMENDADOS (GEO-FIT SJC) -->
+      <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
+              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                TOP 5 BAIRROS RECOMENDADOS
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+              GEO-FIT SJC
+            </span>
+          </div>
+
+          <div class="space-y-2.5 pt-1">
+            ${(() => {
+              const bText = bairrosContent || (processedText.match(/###\s*(?:TOP\s*BAIRROS|BAIRROS)[\s\S]*?(?=###|$)/i) || [])[0] || '';
+              const cleanBText = bText.replace(/^###[^\n]*\n/i, '').trim();
+
+              if (!cleanBText) {
+                return `
+                  <div class="space-y-2">
+                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
+                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold">Centro-Oeste</span>
+                      </div>
+                      <p class="text-xs text-slate-600 leading-relaxed">Alta densidade de renda, público jovem/adulto corporativo e fluxo qualificado.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Vila Ema & Vila Adyana</span>
+                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold">Centro-Oeste</span>
+                      </div>
+                      <p class="text-xs text-slate-600 leading-relaxed">Polo gastronômico e de serviços premium consolidado, alta caminhabilidade.</p>
+                    </div>
+                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Satélite</span>
+                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold">Zona Sul</span>
+                      </div>
+                      <p class="text-xs text-slate-600 leading-relaxed">Maior densidade populacional e volume de consumo contínuo da Zona Sul.</p>
+                    </div>
+                  </div>
+                `;
+              }
+              
+              // Limpar linhas vazias ou rascunhos de cabeçalhos de tabela
+              let rawLines = cleanBText.split(/\n+/).map(l => l.trim()).filter(l => {
+                if (!l || l.length < 4 || l.startsWith('###') || l === '--') return false;
+                if (l.match(/^\|[-:\s|]+\|$/)) return false;
+                if (l.match(/^\|\s*(bairro|regi[aã]o|motivo|fit|por que)/i)) return false;
+                return true;
+              });
+
+              if (rawLines.length > 0) {
+                return rawLines.map((line, bIdx) => {
+                  let bName = "";
+                  let bReg = "";
+                  let bDesc = "";
+
+                  if (line.includes('|')) {
+                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                    if (cols.length >= 3) {
+                      bName = cols[0];
+                      bReg = cols[1];
+                      bDesc = cols.slice(2).join(' - ');
+                    } else if (cols.length === 2) {
+                      bName = cols[0];
+                      bDesc = cols[1];
+                    } else if (cols.length === 1) {
+                      bDesc = cols[0];
+                    }
+                  } else {
+                    const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(]+)(?:\*\*)?\s*(?:\(([^)]+)\))?\s*:?\s*([\s\S]*)$/);
+                    if (match) {
+                      bName = (match[1] || "").trim();
+                      bReg = (match[2] || "").trim();
+                      bDesc = (match[3] || "").trim();
+                    } else {
+                      bDesc = line;
+                    }
+                  }
+
+                  bName = bName.replace(/^\d+[\.\-\)]\s*/, '').replace(/[\*\:]+/g, '').trim();
+                  bReg = bReg.replace(/[\*\(\)]+/g, '').trim();
+                  if (!bReg) {
+                    const lowName = (bName + " " + bDesc).toLowerCase();
+                    if (lowName.includes('aquarius') || lowName.includes('adyana') || lowName.includes('ema') || lowName.includes('esplanada') || lowName.includes('colinas')) bReg = 'Centro-Oeste';
+                    else if (lowName.includes('satélite') || lowName.includes('satelite') || lowName.includes('bosque') || lowName.includes('oriente') || lowName.includes('sul')) bReg = 'Zona Sul';
+                    else if (lowName.includes('urbanova') || lowName.includes('oeste')) bReg = 'Zona Oeste';
+                    else if (lowName.includes('industrial') || lowName.includes('leste') || lowName.includes('vista') || lowName.includes('melo')) bReg = 'Zona Leste';
+                    else if (lowName.includes('santana') || lowName.includes('norte')) bReg = 'Zona Norte';
+                    else bReg = 'SJC';
+                  }
+
+                  return `
+                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
+                          <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
+                          ${bName || `Microterritório 0${bIdx + 1}`}
+                        </span>
+                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">
+                          ${bReg}
+                        </span>
+                      </div>
+                      <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                        ${formatMarkdown(bDesc || line)}
+                      </p>
+                    </div>
+                  `;
+                }).join('');
+              }
+              
+              return `<div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 text-xs text-slate-700">${formatMarkdown(cleanBText)}</div>`;
+            })()}
+          </div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+          <span>RECORTE GEOGRÁFICO</span>
+          <span class="text-emerald-700 font-bold">N=477 RESPONDENTES</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Renderizar as demais seções restantes (SWOT, Movimentos, Auditoria, Competitividade, Mix)
+  const remainingSections = [secSwotRaw, secMovimentosRaw, secAuditoriaRaw, secCompetitividadeRaw, secMixRaw].filter(Boolean);
+
+  remainingSections.forEach((sec, idx) => {
+    const title = getSectionTitle(sec);
+    const content = getSectionContent(sec);
+    const upperTitle = title.toUpperCase();
+    
     // 2. MATRIZ SWOT (4 QUADRANTES / 2 COLUNAS DE ALTA FIDELIDADE)
-    else if (upperTitle.includes("SWOT")) {
+    if (upperTitle.includes("SWOT")) {
       const forcas = extractBlock(content, 'FORÇAS', ['FRAQUEZAS', 'OPORTUNIDADES', 'AMEAÇAS']);
       const fraquezas = extractBlock(content, 'FRAQUEZAS', ['FORÇAS', 'OPORTUNIDADES', 'AMEAÇAS']);
       const oportunidades = extractBlock(content, 'OPORTUNIDADES', ['FORÇAS', 'FRAQUEZAS', 'AMEAÇAS']);
