@@ -6908,6 +6908,33 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       .trim();
   };
 
+  // Helper para renderizar bullet points delineados e elegantes na Matriz SWOT
+  const renderSwotBullets = (txt, iconColor = "text-emerald-500", iconClass = "fa-circle-check") => {
+    if (!txt) return '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>';
+    
+    // Divide por linhas ou quebras de marcadores
+    let lines = txt.split(/\n+/).map(l => l.trim()).filter(l => l.length > 3 && !l.startsWith('###') && l !== '--');
+    
+    // Se veio tudo em uma única linha grande com pontos finais ou traços
+    if (lines.length === 1 && lines[0].includes('. ')) {
+      const sentences = lines[0].split(/(?<=\.)\s+(?=[A-Z0-9])/).filter(s => s.trim().length > 3);
+      if (sentences.length > 1) {
+        lines = sentences;
+      }
+    }
+
+    if (lines.length === 0) return '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>';
+
+    return lines.map(line => `
+      <div class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-white/80 transition-colors">
+        <i class="fa-solid ${iconClass} ${iconColor} text-xs mt-1 shrink-0"></i>
+        <div class="leading-relaxed text-slate-700">
+          ${formatMarkdown(line)}
+        </div>
+      </div>
+    `).join('');
+  };
+
   // Helper para extrair blocos de texto por títulos/marcadores com regex super flexível
   const extractBlock = (fullText, startPattern, endPatterns) => {
     if (!fullText) return '';
@@ -7094,48 +7121,48 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
             <!-- 1. FORÇAS -->
-            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
-              <div class="flex items-center gap-2 text-emerald-700 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+              <div class="flex items-center gap-2 text-emerald-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-emerald-100">
+                <i class="fa-solid fa-shield-halved text-emerald-600 text-sm"></i>
                 <span>FORÇAS (DIFERENCIAIS INTERNOS)</span>
               </div>
-              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
-                ${formatMarkdown(forcas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
+              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+                ${renderSwotBullets(forcas, "text-emerald-500", "fa-circle-check")}
               </div>
             </div>
 
             <!-- 2. FRAQUEZAS -->
-            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
-              <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+              <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-amber-100">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 text-sm"></i>
                 <span>FRAQUEZAS (GARGALOS & VULNERABILIDADES)</span>
               </div>
-              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
-                ${formatMarkdown(fraquezas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
+              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+                ${renderSwotBullets(fraquezas, "text-amber-500", "fa-triangle-exclamation")}
               </div>
             </div>
 
             <!-- 3. OPORTUNIDADES -->
-            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
-              <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                <i class="fa-solid fa-arrow-trend-up text-sky-600"></i>
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+              <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-sky-100">
+                <i class="fa-solid fa-arrow-trend-up text-sky-600 text-sm"></i>
                 <span>OPORTUNIDADES (MERCADO & ALAVANCAS)</span>
               </div>
-              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
-                ${formatMarkdown(oportunidades) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
+              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+                ${renderSwotBullets(oportunidades, "text-sky-500", "fa-arrow-trend-up")}
               </div>
             </div>
 
             <!-- 4. AMEAÇAS -->
-            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
-              <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                <i class="fa-solid fa-circle-radiation text-rose-600"></i>
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+              <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-rose-100">
+                <i class="fa-solid fa-circle-radiation text-rose-600 text-sm"></i>
                 <span>AMEAÇAS (RISCOS & PRESSÕES EXTERNAS)</span>
               </div>
-              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
-                ${formatMarkdown(ameacas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
+              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+                ${renderSwotBullets(ameacas, "text-rose-500", "fa-shield-virus")}
               </div>
             </div>
           </div>
