@@ -6859,7 +6859,18 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     return "";
   };
 
-  let processedText = text
+  // HIGIENIZAÇÃO DE LUXO: Remover qualquer vazamento de raciocínio da IA
+  let cleanText = (text || "")
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .replace(/Here's a thinking process[\s\S]*?(?=###\s*VISÃO|###\s*VISAO|$)/gi, '')
+    .trim();
+
+  const h3Pos = cleanText.search(/###\s*(VISÃO|VISAO)/i);
+  if (h3Pos > 0) {
+    cleanText = cleanText.substring(h3Pos).trim();
+  }
+
+  let processedText = cleanText
     .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)
     .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag);
 

@@ -65,7 +65,12 @@ DADOS COMPLETOS E REALISTAS DA PESQUISA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS (RADA
 ${context ? `
 Recorte em tempo real da sessão do usuário: ${JSON.stringify(context)}` : ''}`;
 
-    const systemPrompt = `Você é o Consultor Sênior de Inteligência de Mercado e Estratégia de Negócios do 'Radar São José' (Padrão Studio 8 / McKinsey & Company).
+    const systemPrompt = `DIRETIVA MÁXIMA E INEGOCIÁVEL DE FORMATAÇÃO:
+NUNCA, EM HIPÓTESE ALGUMA, EMITA CADEIAS DE PENSAMENTO, ANÁLISES PRELIMINARES, INTRODUÇÕES, METADADOS OU FRASES COMO "Here's a thinking process", "Analyze User Input", "Deconstruct Requirements", "Draft", etc.
+O SEU OUTPUT DEVE COMEÇAR IMEDIATAMENTE PELO CABEÇALHO DO PRIMEIRO BLOCO: "### VISÃO ESTRATÉGICA E VEREDICTO".
+QUALQUER TEXTO QUE NÃO SEJA O RELATÓRIO ESTRUTURADO FINAL EM MARKDOWN É ESTRITAMENTE PROIBIDO.
+
+Você é o Consultor Sênior de Inteligência de Mercado e Estratégia de Negócios do 'Radar São José' (Padrão Studio 8 / McKinsey & Company).
 
 O usuário fornecerá uma ideia de negócio, produto ou serviço (ex: loja de biquínis, cafeteria, wine bar, academia boutique, etc.).
 
@@ -194,7 +199,22 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
       });
     }
 
-    const replyContent = data.choices?.[0]?.message?.content || 'Não foi possível obter resposta no momento.';
+        let replyContent = data.choices?.[0]?.message?.content || 'Não foi possível obter resposta no momento.';
+
+    // HIGIENIZAÇÃO RIGOROSA: Remover tags <think>, cadeias de raciocínio e introduções em inglês/metadados
+    replyContent = replyContent
+      .replace(/<think>[\s\S]*?<\/think>/gi, '')
+      .replace(/Here's a thinking process[\s\S]*?(?=###\s*VISÃO|###\s*VISAO|$)/gi, '')
+      .replace(/^[\s\S]*?(?=###\s*VISÃO|###\s*VISAO)/i, '')
+      .trim();
+
+    if (!replyContent.startsWith("###")) {
+      // Se por algum motivo ainda restou ruído antes da primeira seção
+      const firstH3 = replyContent.indexOf("###");
+      if (firstH3 !== -1) {
+        replyContent = replyContent.substring(firstH3).trim();
+      }
+    }
 
     res.status(200).json({ 
       result: replyContent,
