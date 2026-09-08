@@ -2,19 +2,20 @@ export const config = {
   runtime: 'edge',
 };
 
-export default async function handler(req) {
-  const corsHeaders = {
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-    'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
-    'Content-Type': 'application/json'
-  };
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+  'Content-Type': 'application/json'
+};
 
+export default async function handler(req) {
+  // 1. Interceptação imediata do Preflight (OPTIONS)
   if (req.method === 'OPTIONS') {
     return new Response(null, { status: 200, headers: corsHeaders });
   }
 
+  // 2. Bloqueio de métodos não-POST
   if (req.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Metodo nao permitido. Use POST.' }), {
       status: 405,
