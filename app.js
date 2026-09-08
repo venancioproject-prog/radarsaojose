@@ -6506,8 +6506,12 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
 // MÓDULO DO CONSULTOR ESTRATÉGICO IA (VERCEL SERVERLESS + GROQ)
 // ==========================================
 
+// ==========================================
+// GERADOR DE AUDITORIA ESTRATÉGICA EM TELA CHEIA (PADRÃO STUDIO 8 / MCKINSEY)
+// ==========================================
 window.consultorChatHistory = [];
 window.isConsultorThinking = false;
+window.currentAuditedTopic = "";
 
 window.toggleConsultorModal = function(show) {
   const modal = document.getElementById("consultor-modal");
@@ -6516,11 +6520,28 @@ window.toggleConsultorModal = function(show) {
 
   if (show) {
     modal.classList.remove("hidden");
-    if (input) {
+    if (input && !document.getElementById("consultor-report-view").classList.contains("hidden")) {
+      // Já está no relatório, não foca input
+    } else if (input) {
       setTimeout(() => input.focus(), 150);
     }
   } else {
     modal.classList.add("hidden");
+  }
+};
+
+window.resetConsultorView = function() {
+  const inputView = document.getElementById("consultor-input-view");
+  const reportView = document.getElementById("consultor-report-view");
+  const btnNewReport = document.getElementById("btn-new-report");
+  const input = document.getElementById("consultor-input");
+
+  if (inputView) inputView.classList.remove("hidden");
+  if (reportView) reportView.classList.add("hidden");
+  if (btnNewReport) btnNewReport.classList.add("hidden");
+  if (input) {
+    input.value = "";
+    setTimeout(() => input.focus(), 150);
   }
 };
 
@@ -6539,27 +6560,23 @@ window.handleConsultorSubmit = async function(e) {
   const input = document.getElementById("consultor-input");
   const btnSend = document.getElementById("consultor-btn-send");
   const iconSend = document.getElementById("consultor-send-icon");
-  const messagesContainer = document.getElementById("consultor-chat-messages");
   const loadingOverlay = document.getElementById("ai-report-loading-overlay");
   const loadingStatusText = document.getElementById("ai-loading-status-text");
   const loadingProgressBar = document.getElementById("ai-loading-progress-bar");
 
-  if (!input || !messagesContainer) return;
+  if (!input) return;
 
   const userQuestion = input.value.trim();
   if (!userQuestion) return;
 
-  // 1. Limpar input e adicionar ao histórico do usuário
-  input.value = "";
-  window.appendChatMessage("user", userQuestion);
-  window.consultorChatHistory.push({ role: "user", content: userQuestion });
+  window.currentAuditedTopic = userQuestion;
+  window.consultorChatHistory = [{ role: "user", content: userQuestion }];
 
-  // 2. Iniciar Estado de Loading Cinematográfico de 6 Segundos
+  // 1. Iniciar Estado de Loading Cinematográfico de 6 Segundos
   window.isConsultorThinking = true;
   if (btnSend) btnSend.disabled = true;
-  if (iconSend) iconSend.className = "fa-solid fa-circle-notch fa-spin text-[11px]";
+  if (iconSend) iconSend.className = "fa-solid fa-circle-notch fa-spin text-xs";
 
-  // Ativar overlay cinematográfico em tela cheia / drawer
   if (loadingOverlay) {
     loadingOverlay.classList.remove("hidden");
     if (loadingProgressBar) loadingProgressBar.style.width = "5%";
@@ -6571,7 +6588,7 @@ window.handleConsultorSubmit = async function(e) {
     { time: 1000, progress: "25%", text: "Analisando demografia e zonas nobres (Aquarius, Adyana, Sul)..." },
     { time: 2500, progress: "50%", text: "Cruzando dados com a Matriz SWOT e 5 Forças de Porter..." },
     { time: 4000, progress: "75%", text: "Calculando fit estratégico com os 4 Movimentos Culturais de SJC..." },
-    { time: 5200, progress: "95%", text: "Modelando 3 indicadores analíticos no Chart.js..." }
+    { time: 5200, progress: "95%", text: "Modelando indicadores analíticos no Chart.js..." }
   ];
 
   const timeouts = [];
@@ -6583,10 +6600,10 @@ window.handleConsultorSubmit = async function(e) {
     timeouts.push(t);
   });
 
-  // Temporizador de no mínimo 6 segundos
+  // Temporizador mínimo de 6 segundos
   const timerPromise = new Promise(resolve => setTimeout(resolve, 6000));
 
-  // Preparar contexto simplificado
+  // Contexto simplificado
   let contextData = null;
   if (window.currentFilteredRecords && window.currentFilteredRecords.length > 0) {
     contextData = {
@@ -6596,7 +6613,7 @@ window.handleConsultorSubmit = async function(e) {
     };
   }
 
-  // Promise da requisição ao backend Groq
+  // Fetch para a rota backend /api/consultor
   const fetchPromise = fetch("/api/consultor", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -6612,40 +6629,48 @@ window.handleConsultorSubmit = async function(e) {
   });
 
   try {
-    // Aguardar tanto os 6 segundos quanto a resposta da API
     const [_, result] = await Promise.all([timerPromise, fetchPromise]);
 
     if (loadingProgressBar) loadingProgressBar.style.width = "100%";
 
     if (!result.ok) {
-      const errorMsg = result.data?.error || result.error?.message || `Erro HTTP ${result.status}: Falha de comunicação com o backend.`;
-      const detailsMsg = result.data?.details ? `\n\n**Detalhes técnicos:** \`${result.data.details}\`` : "";
-      window.appendChatMessage("assistant", `⚠️ **Aviso:** ${errorMsg}${detailsMsg}\n\n*Dica: Verifique se a variável de ambiente GROQ_API_KEY foi adicionada no painel da Vercel.*`);
+      const errorMsg = result.data?.error || result.error?.message || `Erro HTTP ${result.status}: Falha ao conectar ao backend.`;
+      alert("Erro ao gerar relatório: " + errorMsg);
       return;
     }
 
     const reply = result.data?.reply || result.data?.result || "Nenhuma resposta retornada pela IA.";
 
-    // Adicionar resposta ao histórico e renderizar no chat com os gráficos
-    window.consultorChatHistory.push({ role: "assistant", content: reply });
-    window.appendChatMessage("assistant", reply);
+    // Renderizar o Relatório em Tela Cheia no padrão Studio 8
+    window.renderExecutiveReport(userQuestion, reply);
 
   } catch (err) {
-    console.error("Erro no fluxo do Consultor IA:", err);
-    window.appendChatMessage("assistant", `❌ Ocorreu um erro ao processar o relatório: ${err.message}`);
+    console.error("Erro ao gerar auditoria estratégica:", err);
+    alert("Ocorreu um erro ao processar o relatório: " + err.message);
   } finally {
     timeouts.forEach(t => clearTimeout(t));
     if (loadingOverlay) loadingOverlay.classList.add("hidden");
     window.isConsultorThinking = false;
     if (btnSend) btnSend.disabled = false;
-    if (iconSend) iconSend.className = "fa-solid fa-paper-plane text-[11px]";
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    if (iconSend) iconSend.className = "fa-solid fa-wand-magic-sparkles text-xs";
   }
 };
 
-window.appendChatMessage = function(role, text) {
-  const container = document.getElementById("consultor-chat-messages");
-  if (!container) return;
+// Renderizador de Relatório Executivo em Tela Cheia (Cards Corporativos)
+window.renderExecutiveReport = function(topic, text) {
+  const inputView = document.getElementById("consultor-input-view");
+  const reportView = document.getElementById("consultor-report-view");
+  const reportContent = document.getElementById("consultor-report-content");
+  const reportTitle = document.getElementById("report-topic-title");
+  const btnNewReport = document.getElementById("btn-new-report");
+  const scrollContainer = document.getElementById("consultor-main-scroll");
+
+  if (!reportContent || !reportView) return;
+
+  if (reportTitle) reportTitle.innerText = topic;
+  if (inputView) inputView.classList.add("hidden");
+  if (reportView) reportView.classList.remove("hidden");
+  if (btnNewReport) btnNewReport.classList.remove("hidden");
 
   const dynamicChartsToRender = [];
 
@@ -6662,15 +6687,15 @@ window.appendChatMessage = function(role, text) {
       });
 
       return `
-        <div class="my-4 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-100">
-            <span class="text-xs font-black uppercase tracking-wider text-brand-900 flex items-center gap-2">
+        <div class="my-6 p-5 sm:p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+            <span class="text-xs sm:text-sm font-black uppercase tracking-wider text-accent-cyan flex items-center gap-2">
               <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
               ${chartConfig.title || "Indicador Analítico (SJC)"}
             </span>
-            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-brand-50 text-brand-700">Radar SJC</span>
+            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-brand-900/80 text-accent-cyan border border-accent-cyan/30">Radar São José</span>
           </div>
-          <div class="relative w-full h-56">
+          <div class="relative w-full h-64 sm:h-72">
             <canvas id="${chartId}"></canvas>
           </div>
         </div>
@@ -6681,7 +6706,7 @@ window.appendChatMessage = function(role, text) {
     }
   };
 
-  // Suporte legado para [GRAFICO: ...]
+  // Suporte legado
   const renderLegacyGraficoTag = (match, p1) => {
     const tag = p1.trim().toUpperCase();
     if (tag === "IDADE") {
@@ -6709,42 +6734,105 @@ window.appendChatMessage = function(role, text) {
     return "";
   };
 
-  // Formatação rica de markdown
-  let formattedText = text
+  // Processar texto em seções/cards estruturados
+  let processedText = text
     .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)
-    .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag)
-    .replace(/^### (.*$)/gim, "<h4 class='text-xs font-black uppercase text-brand-900 tracking-wider mt-3 mb-1.5 border-b border-slate-200 pb-1'>$1</h4>")
-    .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
-    .replace(/^-\s(.*)$/gim, "<li class='ml-3.5 list-disc text-slate-700 font-medium'>$1</li>")
-    .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-3.5 list-decimal text-slate-700 font-medium'>$1</li>")
-    .replace(/\n/g, "<br/>");
+    .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag);
 
-  let bubbleHtml = "";
-  if (role === "user") {
-    bubbleHtml = `
-      <div class="flex justify-end">
-        <div class="bg-brand-900 text-white rounded-2xl p-3.5 max-w-[85%] leading-relaxed shadow-sm">
-          <p class="font-medium">${formattedText}</p>
+  // Dividir por seções H3
+  const sections = processedText.split(/^###\s+/m).filter(Boolean);
+
+  let htmlOutput = "";
+
+  sections.forEach((sec, idx) => {
+    const firstLineEnd = sec.indexOf("\n");
+    let title = "";
+    let content = "";
+
+    if (firstLineEnd !== -1) {
+      title = sec.substring(0, firstLineEnd).trim();
+      content = sec.substring(firstLineEnd).trim();
+    } else {
+      title = sec.trim();
+      content = "";
+    }
+
+    // Formatadores internos de markdown
+    let formattedContent = content
+      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-white font-bold'>$1</strong>")
+      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-300 font-medium leading-relaxed my-1'>$1</li>")
+      .replace(/^\*\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-300 font-medium leading-relaxed my-1'>$1</li>")
+      .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-300 font-medium leading-relaxed my-1'>$1</li>")
+      .replace(/\n\n/g, "<div class='my-2'></div>")
+      .replace(/\n/g, "<br/>");
+
+    // Ícone e cores para cada seção no padrão Studio 8
+    let iconClass = "fa-chart-simple";
+    let accentColor = "text-accent-cyan";
+    let borderAccent = "border-l-4 border-l-accent-cyan";
+
+    const upperTitle = title.toUpperCase();
+    if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
+      iconClass = "fa-bolt";
+      accentColor = "text-amber-400";
+      borderAccent = "border-l-4 border-l-amber-400";
+    } else if (upperTitle.includes("SWOT")) {
+      iconClass = "fa-table-cells-large";
+      accentColor = "text-rose-400";
+      borderAccent = "border-l-4 border-l-rose-500";
+    } else if (upperTitle.includes("AMBIENTE") || upperTitle.includes("PESTEL") || upperTitle.includes("ISHIKAWA")) {
+      iconClass = "fa-globe";
+      accentColor = "text-emerald-400";
+      borderAccent = "border-l-4 border-l-emerald-500";
+    } else if (upperTitle.includes("MATRIZ") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO") || upperTitle.includes("OCEANO")) {
+      iconClass = "fa-chess";
+      accentColor = "text-sky-400";
+      borderAccent = "border-l-4 border-l-sky-500";
+    } else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT")) {
+      iconClass = "fa-compass";
+      accentColor = "text-purple-400";
+      borderAccent = "border-l-4 border-l-purple-500";
+    }
+
+    htmlOutput += `
+      <section class="p-6 sm:p-8 bg-slate-900/80 rounded-2xl border border-slate-800 shadow-lg ${borderAccent} space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <h3 class="text-sm sm:text-base font-black uppercase tracking-wider text-white flex items-center gap-2.5">
+            <i class="fa-solid ${iconClass} ${accentColor}"></i>
+            <span>${title}</span>
+          </h3>
+          <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">SEÇÃO 0${idx + 1}</span>
         </div>
-      </div>
+        <div class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed space-y-2">
+          ${formattedContent}
+        </div>
+      </section>
     `;
-  } else {
-    bubbleHtml = `
-      <div class="flex gap-3">
-        <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold shadow-inner">
-          <i class="fa-solid fa-brain"></i>
+  });
+
+  // Se não foi possível dividir em seções h3, renderizar bloco geral
+  if (!htmlOutput) {
+    let formattedFallback = processedText
+      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-white font-bold'>$1</strong>")
+      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-300 my-1'>$1</li>")
+      .replace(/\n/g, "<br/>");
+
+    htmlOutput = `
+      <section class="p-6 sm:p-8 bg-slate-900/80 rounded-2xl border border-slate-800 shadow-lg border-l-4 border-l-accent-cyan space-y-4">
+        <div class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+          ${formattedFallback}
         </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 space-y-2 max-w-[94%] leading-relaxed">
-          <div class="prose prose-xs text-slate-800 font-medium">${formattedText}</div>
-        </div>
-      </div>
+      </section>
     `;
   }
 
-  container.insertAdjacentHTML("beforeend", bubbleHtml);
-  container.scrollTop = container.scrollHeight;
+  reportContent.innerHTML = htmlOutput;
 
-  // Instanciar os gráficos Chart.js dinamicamente criados
+  if (scrollContainer) {
+    scrollContainer.scrollTop = 0;
+  }
+
+  // Instanciar Chart.js nos novos canvas
   setTimeout(() => {
     dynamicChartsToRender.forEach(item => {
       const canvas = document.getElementById(item.id);
@@ -6754,11 +6842,11 @@ window.appendChatMessage = function(role, text) {
       const chartType = cfg.type === "pie" || cfg.type === "doughnut" ? "doughnut" : (cfg.type === "line" ? "line" : "bar");
 
       const defaultColors = [
-        "#0B2545", "#00B4D8", "#10B981", "#F59E0B", "#F43F5E",
-        "#8B5CF6", "#06B6D4", "#3B82F6", "#64748B"
+        "#00B4D8", "#F43F5E", "#10B981", "#F59E0B", "#8B5CF6",
+        "#06B6D4", "#3B82F6", "#EC4899", "#64748B"
       ];
 
-      const bgColors = chartType === "doughnut" ? defaultColors : "#0B2545";
+      const bgColors = chartType === "doughnut" ? defaultColors : "#00B4D8";
 
       try {
         new Chart(canvas.getContext("2d"), {
@@ -6769,6 +6857,8 @@ window.appendChatMessage = function(role, text) {
               label: cfg.title || "Indicador",
               data: cfg.data || [],
               backgroundColor: bgColors,
+              borderColor: "#0f172a",
+              borderWidth: chartType === "doughnut" ? 2 : 0,
               borderRadius: chartType === "bar" ? 6 : 0
             }]
           },
@@ -6779,10 +6869,10 @@ window.appendChatMessage = function(role, text) {
               legend: {
                 display: chartType === "doughnut",
                 position: "bottom",
-                labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 10 }
+                labels: { color: "#cbd5e1", font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12 }
               },
               datalabels: {
-                color: chartType === "doughnut" ? "#FFFFFF" : "#0B2545",
+                color: "#FFFFFF",
                 font: { family: "Montserrat", size: 10, weight: "bold" },
                 anchor: chartType === "doughnut" ? "center" : "end",
                 align: chartType === "doughnut" ? "center" : "top",
@@ -6790,13 +6880,13 @@ window.appendChatMessage = function(role, text) {
               }
             },
             scales: chartType === "doughnut" ? {} : {
-              y: { beginAtZero: true, grid: { color: "#F1F5F9" }, ticks: { font: { family: "Montserrat", size: 10 } } },
-              x: { grid: { display: false }, ticks: { font: { family: "Montserrat", size: 10, weight: "bold" } } }
+              y: { beginAtZero: true, grid: { color: "#1e293b" }, ticks: { color: "#94a3b8", font: { family: "Montserrat", size: 10 } } },
+              x: { grid: { display: false }, ticks: { color: "#cbd5e1", font: { family: "Montserrat", size: 10, weight: "bold" } } }
             }
           }
         });
       } catch (errChart) {
-        console.error("Erro ao instanciar Chart.js dinâmico:", errChart);
+        console.error("Erro ao instanciar Chart.js dinâmico no relatório:", errChart);
       }
     });
   }, 100);
