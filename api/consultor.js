@@ -148,9 +148,9 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
           .filter(id => !id.includes('guard') && !id.includes('whisper') && !id.includes('embed'));
         
         const best = [
+          available.find(id => id.includes('llama-3.3-70b-versatile')),
+          available.find(id => id.includes('llama-3.1-8b-instant')),
           available.find(id => id.includes('qwen')),
-          available.find(id => id.includes('llama') && id.includes('70b')),
-          available.find(id => id.includes('llama') && id.includes('8b')),
           available.find(id => id.includes('llama')),
           available[0]
         ].filter(Boolean);
@@ -164,7 +164,7 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
       console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
     }
 
-    // 2. Chamada de Chat Completions com limite de 1000 tokens para segurança do free tier
+    // 2. Chamada de Chat Completions com limite de 900 tokens para segurança do Free Tier da Groq (OTPM limit)
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -173,7 +173,7 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
       },
       body: JSON.stringify({
         model: selectedModel,
-        max_tokens: 3000, 
+        max_tokens: 900, 
         temperature: 0.5,
         messages: [
           {
