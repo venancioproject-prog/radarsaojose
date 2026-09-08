@@ -215,33 +215,36 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
   "graficos_analiticos": [
     {
       "chart_data": {
-        "type": "bar",
-        "title": "Barreiras e Atritos de Consumo em SJC",
-        "labels": ["Preco s/ Valor", "Falta Autoral", "Mesmice", "Transporte", "Inseguranca"],
-        "data": [32.3, 22.9, 18.6, 14.1, 12.1]
+        "type": "horizontalBar",
+        "title": "Concentração e Frequência por Região (Geometria Urbana)",
+        "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Zona Sudeste"],
+        "data": [40.7, 27.6, 13.9, 11.2, 6.6],
+        "highlight_index": 0
       },
-      "pergunta_origem": "O que mais te desanima a sair de casa em Sao Jose dos Campos? (Atritos & Barreiras)",
-      "parecer_analitico": "Parecer analitico explicando como a proposta quebra as barreiras de mesmice."
+      "pergunta_origem": "Em qual região de São José dos Campos você mais costuma frequentar para consumo e lazer?",
+      "parecer_analitico": "Parecer analítico denso evidenciando o peso das regiões centrais vs periferias e onde o público-alvo da tese circula."
     },
     {
       "chart_data": {
         "type": "doughnut",
-        "title": "Paradoxo de Evasao vs Consumo em SJC",
+        "title": "O Paradoxo de Evasão (Oportunidade Latente)",
         "labels": ["Evadem para SP/Litoral", "Consomem em SJC"],
-        "data": [66.2, 33.8]
+        "data": [66.2, 33.8],
+        "highlight_color": "#D97706"
       },
-      "pergunta_origem": "Voce costuma consumir servicos gastronomicos e culturais fora de Sao Jose dos Campos? (Evasao)",
-      "parecer_analitico": "Parecer analitico relacionando a retencao de consumo (66.2% de evasao) com novidade."
+      "pergunta_origem": "Você costuma consumir serviços gastronômicos e culturais fora de São José dos Campos? (Evasão)",
+      "parecer_analitico": "Parecer analítico cirúrgico explicando por que o negócio proposto captura a evasão de 66.2% que busca novidade fora."
     },
     {
       "chart_data": {
         "type": "bar",
-        "title": "Frequencia de Consumo por Macro-Regiao",
-        "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
-        "data": [40.7, 27.6, 13.9, 11.2, 6.6]
+        "title": "Distribuição de Renda Familiar por Fit",
+        "labels": ["Até R$ 2.8k", "R$ 2.8k-5.6k", "R$ 5.6k-12k", "R$ 12k-26k", "Acima R$ 26k"],
+        "data": [18.1, 32.3, 23.6, 14.2, 11.8],
+        "highlight_label": "R$ 5.6k-12k"
       },
-      "pergunta_origem": "Em qual regiao de Sao Jose dos Campos voce mais costuma frequentar para consumo e lazer?",
-      "parecer_analitico": "Parecer analitico sobre a penetracao geografica."
+      "pergunta_origem": "Qual é a faixa de renda familiar total mensal da sua residência? (IBGE / Radar SJC)",
+      "parecer_analitico": "Parecer analítico profundo provando visualmente e com dados em qual faixa de renda está o poder de compra prioritário para esta tese."
     }
   ]
 }`;

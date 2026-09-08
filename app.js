@@ -7415,7 +7415,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     }
   }
 
-  // Montagem dos 3 Gráficos Analíticos
+  // Montagem dos 3 Gráficos Analíticos com Propósitos Visuais e Contextuais Distintos
   let graficosList = [];
   if (Array.isArray(data.graficos_analiticos) && data.graficos_analiticos.length > 0) {
     graficosList = data.graficos_analiticos;
@@ -7423,33 +7423,36 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     graficosList = [
       {
         chart_data: {
-          type: "doughnut",
-          title: "Frequência de Consumo por Região de SJC",
-          labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
-          data: [40.7, 27.6, 13.9, 11.2, 6.6]
+          type: "horizontalBar",
+          title: "Concentração e Frequência por Região (Geometria Urbana)",
+          labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Zona Sudeste"],
+          data: [40.7, 27.6, 13.9, 11.2, 6.6],
+          highlight_index: 0
         },
         pergunta_origem: "Em qual região de São José dos Campos você mais costuma frequentar para consumo e lazer?",
-        parecer_analitico: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
+        parecer_analitico: "Concentração maciça de consumo no eixo Centro-Oeste (40.7%) e Zona Sul (27.6%), somando 68.3% do fluxo urbano ativo e provando onde reside a maior densidade comercial."
       },
       {
         chart_data: {
           type: "doughnut",
-          title: "Paradoxo de Evasão vs Orgulho em SJC",
-          labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
-          data: [66.2, 33.8]
+          title: "O Paradoxo de Evasão (Oportunidade Latente)",
+          labels: ["Evadem para SP/Litoral", "Consomem em SJC"],
+          data: [66.2, 33.8],
+          highlight_color: "#D97706"
         },
         pergunta_origem: "Você costuma consumir serviços gastronômicos e culturais fora de São José dos Campos? (Evasão)",
-        parecer_analitico: "66.2% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
+        parecer_analitico: "66.2% dos joseenses evadem seu consumo para São Paulo Capital e Litoral Norte buscando novidade, status e autenticidade, gerando uma oportunidade latente de retenção local."
       },
       {
         chart_data: {
           type: "bar",
-          title: "Distribuição de Renda Familiar em SJC",
-          labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
-          data: [18.1, 32.3, 23.6, 14.2, 11.8]
+          title: "Distribuição de Renda Familiar por Fit",
+          labels: ["Até R$ 2.8k", "R$ 2.8k-5.6k", "R$ 5.6k-12k", "R$ 12k-26k", "Acima R$ 26k"],
+          data: [18.1, 32.3, 23.6, 14.2, 11.8],
+          highlight_label: "R$ 5.6k-12k"
         },
-        pergunta_origem: "Qual é a faixa de renda familiar total mensal da sua residência?",
-        parecer_analitico: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da população economicamente ativa, sendo o motor de volume para a cidade."
+        pergunta_origem: "Qual é a faixa de renda familiar total mensal da sua residência? (IBGE / Radar SJC)",
+        parecer_analitico: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da base municipal, oferecendo volume escalável enquanto as classes A/B (26.0%) sustentam o ticket médio elevado."
       }
     ];
   }
@@ -7462,32 +7465,47 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 
     dynamicChartsToRender.push({
       id: chartId,
-      config: cfg
+      config: cfg,
+      index: gIdx
     });
 
+    const cardIcons = [
+      "fa-arrows-left-right-to-line text-cyan-600",
+      "fa-chart-pie text-amber-500",
+      "fa-chart-column text-emerald-600"
+    ];
+    const cardBadges = [
+      { text: "GEOMETRIA URBANA", cls: "bg-cyan-50 text-cyan-800 border-cyan-200" },
+      { text: "OPORTUNIDADE DUAL", cls: "bg-amber-50 text-amber-800 border-amber-200" },
+      { text: "PODER DE COMPRA", cls: "bg-emerald-50 text-emerald-800 border-emerald-200" }
+    ];
+
+    const currentIcon = cardIcons[gIdx % cardIcons.length];
+    const currentBadge = cardBadges[gIdx % cardBadges.length];
+
     return `
-      <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
+      <div class="p-5 sm:p-6 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4 flex flex-col justify-between hover:shadow-card-hover transition-all">
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-              <i class="fa-solid fa-chart-column text-accent-cyan"></i>
+              <i class="fa-solid ${currentIcon}"></i>
               ${cfg.title || "Indicador Analítico SJC"}
             </span>
-            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border ${currentBadge.cls}">${currentBadge.text}</span>
           </div>
 
           ${perguntaOrigem ? `
             <div class="text-[11px] text-slate-500 italic leading-snug px-1 flex items-start gap-1.5">
               <i class="fa-solid fa-database text-[10px] text-slate-400 mt-0.5 shrink-0"></i>
-              <span><strong class="font-semibold text-slate-700 not-italic">Fonte:</strong> "${perguntaOrigem}"</span>
+              <span><strong class="font-semibold text-slate-700 not-italic">Fonte Radar SJC:</strong> "${perguntaOrigem}"</span>
             </div>
           ` : ''}
 
-          <div class="relative w-full h-60 sm:h-64">
+          <div class="relative w-full h-60 sm:h-64 pt-1">
             <canvas id="${chartId}"></canvas>
           </div>
         </div>
-        <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
+        <div class="pt-3 border-t border-slate-100 bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/50">
           <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
             <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
           </span>
@@ -8393,30 +8411,53 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       const canvas = document.getElementById(item.id);
       if (!canvas || !window.Chart) return;
 
-      const cfg = item.config;
-      const chartType = cfg.type === "pie" || cfg.type === "doughnut" ? "doughnut" : (cfg.type === "line" ? "line" : "bar");
+      const cfg = item.config || {};
+      const chartIndex = item.index !== undefined ? item.index : 0;
+      const rawLabels = cfg.labels || [];
+      const rawData = (cfg.data || []).map(v => Number(v) || 0);
+      const maxVal = Math.max(...rawData, 10);
 
-      // Paleta Executiva Sofisticada McKinsey / Studio 8
-      const executivePalette = [
-        "#00B4D8", // Vibrant Cyan
-        "#0B2545", // Deep Navy
-        "#10B981", // Emerald
-        "#F59E0B", // Amber
-        "#F43F5E", // Rose
-        "#8B5CF6", // Violet
-        "#06B6D4", // Sky Blue
-        "#3B82F6", // Royal Blue
-        "#EC4899", // Pink
-        "#64748B"  // Slate
-      ];
+      // Definição de Tipos e Layouts Específicos por Card
+      let chartType = "bar";
+      let indexAxis = "x";
+      let bgColors = [];
+      let isDualDonut = false;
 
-      const processedLabels = (cfg.labels || []).map(l => cleanAndWrapLabel(l));
-      const rawData = cfg.data || [];
-      const maxVal = Math.max(...rawData.map(v => Number(v) || 0), 10);
-      
-      const bgColors = chartType === "doughnut" 
-        ? executivePalette 
-        : rawData.map((_, i) => executivePalette[i % executivePalette.length]);
+      if (cfg.type === "horizontalBar" || chartIndex === 0) {
+        // CARD 1: Gráfico de Barras Horizontais Limpas (Geometria Urbana)
+        chartType = "bar";
+        indexAxis = "y";
+        const highlightIdx = cfg.highlight_index !== undefined ? cfg.highlight_index : 0;
+        bgColors = rawData.map((_, i) => {
+          if (i === highlightIdx) return "#00B4D8"; // Cyan de Destaque para Região Principal
+          if (i === 1) return "#0B2545"; // Deep Navy
+          return "#94A3B8"; // Slate neutro para as demais
+        });
+      } else if (cfg.type === "doughnut" || cfg.type === "pie" || chartIndex === 1) {
+        // CARD 2: Donut de Impacto (Destaque Dual - Paradoxo de Evasão)
+        chartType = "doughnut";
+        isDualDonut = true;
+        // Dourado / Âmbar vibrante para Evasão (66.2%) vs Deep Navy institucional para Consumo Local (33.8%)
+        const primaryEvadeColor = cfg.highlight_color || "#D97706"; // Amber 600
+        bgColors = [primaryEvadeColor, "#0B2545", "#00B4D8", "#10B981"];
+      } else {
+        // CARD 3: Colunas Verticais Dinâmicas com Destaque na Faixa de Renda Ideal (Poder de Compra)
+        chartType = "bar";
+        indexAxis = "x";
+        const highlightTarget = (cfg.highlight_label || "5.6k").toLowerCase();
+        bgColors = rawLabels.map((lbl, idx) => {
+          const lblStr = String(lbl).toLowerCase();
+          if (lblStr.includes("5.6k") || lblStr.includes("5.601") || lblStr.includes(highlightTarget) || idx === 2) {
+            return "#F59E0B"; // Dourado / Âmbar de Destaque da Tese
+          }
+          if (idx === 3 || idx === 4) {
+            return "#0B2545"; // Navy para Classes A/B
+          }
+          return "#CBD5E1"; // Slate claro neutro
+        });
+      }
+
+      const processedLabels = rawLabels.map(l => cleanAndWrapLabel(l));
 
       try {
         new Chart(canvas.getContext("2d"), {
@@ -8428,43 +8469,44 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
               data: rawData,
               backgroundColor: bgColors,
               borderColor: "#FFFFFF",
-              borderWidth: chartType === "doughnut" ? 2 : 0,
+              borderWidth: chartType === "doughnut" ? 3 : 0,
               borderRadius: chartType === "bar" ? 8 : 0,
               borderSkipped: false,
-              maxBarThickness: 54,
-              barPercentage: 0.65,
+              maxBarThickness: indexAxis === "y" ? 28 : 48,
+              barPercentage: 0.7,
               categoryPercentage: 0.85
             }]
           },
           options: {
+            indexAxis: indexAxis,
             responsive: true,
             maintainAspectRatio: false,
             layout: {
               padding: {
-                top: chartType === "doughnut" ? 5 : 20,
-                bottom: 5,
-                left: 5,
-                right: 5
+                top: isDualDonut ? 10 : 15,
+                bottom: 10,
+                left: indexAxis === "y" ? 10 : 5,
+                right: indexAxis === "y" ? 25 : 5
               }
             },
             plugins: {
               legend: {
-                display: chartType === "doughnut",
+                display: isDualDonut,
                 position: "bottom",
                 labels: { 
-                  color: "#1E293B", 
-                  font: { family: "Montserrat", size: 10, weight: "bold" }, 
-                  boxWidth: 12,
-                  padding: 12
+                  color: "#0F172A", 
+                  font: { family: "Montserrat", size: 10.5, weight: "bold" }, 
+                  boxWidth: 14,
+                  padding: 14
                 }
               },
               datalabels: {
                 display: true,
-                color: chartType === "doughnut" ? "#FFFFFF" : "#0F172A",
+                color: isDualDonut ? "#FFFFFF" : "#0F172A",
                 font: { family: "Montserrat", size: 11, weight: "bold" },
-                anchor: chartType === "doughnut" ? "center" : "end",
-                align: chartType === "doughnut" ? "center" : "top",
-                offset: chartType === "doughnut" ? 0 : 4,
+                anchor: isDualDonut ? "center" : (indexAxis === "y" ? "end" : "end"),
+                align: isDualDonut ? "center" : (indexAxis === "y" ? "right" : "top"),
+                offset: isDualDonut ? 0 : 4,
                 formatter: (val) => {
                   if (val === null || val === undefined) return '';
                   return typeof val === 'number' ? (val % 1 === 0 ? val + '%' : val.toFixed(1) + '%') : val + '%';
@@ -8479,36 +8521,60 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 cornerRadius: 8,
                 callbacks: {
                   label: function(ctx) {
-                    return ` ${ctx.dataset.label || 'Valor'}: ${ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed}%`;
+                    const parsedVal = indexAxis === "y" ? ctx.parsed.x : (ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed);
+                    return ` ${ctx.dataset.label || 'Valor'}: ${parsedVal}%`;
                   }
                 }
               }
             },
-            scales: chartType === "doughnut" ? {} : {
-              y: { 
-                beginAtZero: true, 
-                suggestedMax: Math.ceil(maxVal * 1.25),
-                grid: { 
-                  color: "rgba(226, 232, 240, 0.7)",
-                  borderDash: [4, 4]
-                }, 
-                ticks: { 
-                  color: "#64748B", 
-                  font: { family: "Montserrat", size: 9.5 },
-                  callback: (v) => v + "%"
-                } 
-              },
-              x: { 
-                grid: { display: false }, 
-                ticks: { 
-                  color: "#1E293B", 
-                  font: { family: "Montserrat", size: 9.5, weight: "bold" },
-                  maxRotation: 45,
-                  minRotation: 25,
-                  autoSkip: false
-                } 
+            scales: isDualDonut ? {} : (
+              indexAxis === "y" ? {
+                x: {
+                  beginAtZero: true,
+                  suggestedMax: Math.ceil(maxVal * 1.25),
+                  grid: { 
+                    color: "rgba(226, 232, 240, 0.7)",
+                    borderDash: [4, 4]
+                  },
+                  ticks: { 
+                    color: "#64748B", 
+                    font: { family: "Montserrat", size: 9 },
+                    callback: (v) => v + "%"
+                  }
+                },
+                y: {
+                  grid: { display: false },
+                  ticks: { 
+                    color: "#0F172A", 
+                    font: { family: "Montserrat", size: 10, weight: "bold" }
+                  }
+                }
+              } : {
+                y: { 
+                  beginAtZero: true, 
+                  suggestedMax: Math.ceil(maxVal * 1.25),
+                  grid: { 
+                    color: "rgba(226, 232, 240, 0.7)",
+                    borderDash: [4, 4]
+                  }, 
+                  ticks: { 
+                    color: "#64748B", 
+                    font: { family: "Montserrat", size: 9.5 },
+                    callback: (v) => v + "%"
+                  } 
+                },
+                x: { 
+                  grid: { display: false }, 
+                  ticks: { 
+                    color: "#1E293B", 
+                    font: { family: "Montserrat", size: 9.5, weight: "bold" },
+                    maxRotation: 30,
+                    minRotation: 15,
+                    autoSkip: false
+                  } 
+                }
               }
-            }
+            )
           }
         });
       } catch (errChart) {
