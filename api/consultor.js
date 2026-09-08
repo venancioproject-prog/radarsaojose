@@ -67,21 +67,16 @@ ${marketBriefSJC}
 
 REGRAS DE OURO:
 1. FIM DA PREGUIÇA GEOGRÁFICA: PROIBIDO listar automaticamente bairros de elite (Aquarius, Colinas) se a renda e o público da ideia não baterem. Se for popular, mande para Zona Sul, Leste ou Norte. Justifique com dados do CSV.
-2. VEREDICTO IMPLACÁVEL & DATA STORYTELLING:
-   - Para a seção 'Visão Estratégica', você DEVE buscar no CSV o dado que tem o MAIOR FIT com a ideia do usuário (ex: se for luxo, puxe dados de alta renda; se for bar, puxe evasão noturna de 64.7% ou barreiras noturnas; se for família, puxe Cidade Prometida e bairros da Zona Sul).
-   - Gere frases COMPLETAS, sem truncamento.
-   - No campo 'diretrizes_executivas', você DEVE fazer referência direta ao gráfico que será gerado, usando expressões como "Conforme demonstrado no gráfico analítico abaixo..." ou "Como provado pelo gráfico abaixo...".
+2. VEREDICTO IMPLACÁVEL & TEXTO EXECUTIVO CORRIDO (DATA STORYTELLING):
+   - Para o campo 'visao_estrategica_texto', escreva UM ÚNICO PARÁGRAFO longo, denso, fluido e executivo (aprox. 150 palavras), sem quebras ou subtítulos, unindo o diagnóstico de oportunidade, ticket médio estimado, público prioritário e as diretrizes práticas para São José dos Campos.
+   - No final do texto de 'visao_estrategica_texto', faça OBRIGATORIAMENTE uma referência direta e coesa aos dados numéricos do gráfico 'grafico_validacao' que será exibido logo abaixo (ex: "Conforme demonstrado no gráfico analítico de validação abaixo, X% do público joseense...").
 3. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
-  "visao_estrategica": {
-    "ticket_medio": "Texto completo e finalizado sobre estimativa de preço, ticket médio e posicionamento baseado na renda e poder de compra de SJC.",
-    "publico_prioritario": "Texto completo e finalizado definindo o segmento exato, dados demográficos e o comportamento de consumo esperado.",
-    "diretrizes_executivas": "Texto completo com as ações práticas e recomendações de expansão. OBRIGATÓRIO citar e conectar diretamente os dados numéricos do 'grafico_validacao_principal' abaixo neste parágrafo (ex: 'Conforme demonstrado no gráfico analítico abaixo, X% do público...')."
-  },
-  "grafico_validacao_principal": {
-    "titulo": "TÍTULO DO GRÁFICO DE FIT DIRETO (EX: DISTRIBUIÇÃO DE RENDA FAMILIAR SJC / PARADOXO DE EVASÃO)",
+  "visao_estrategica_texto": "Escreva UM ÚNICO PARÁGRAFO longo, denso e executivo (aprox. 150 palavras) unindo o diagnóstico da oportunidade, ticket médio, público e as diretrizes práticas. No final do texto, faça referência obrigatória aos números do gráfico de validação que será exibido logo abaixo.",
+  "grafico_validacao": {
+    "titulo": "TÍTULO DO GRÁFICO DE VALIDAÇÃO (EX: DISTRIBUIÇÃO DE RENDA FAMILIAR SJC / PARADOXO DE EVASÃO)",
     "type": "bar",
     "labels": ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"],
     "data": [18.1, 32.3, 23.6, 14.2, 11.8]

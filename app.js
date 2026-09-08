@@ -6927,7 +6927,28 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     };
   }
 
-  // Garantir que nenhum campo de texto contenha JSON bruto serializado
+  // Extrair o texto consolidado da Visão Estratégica
+  let visaoTextoCorrido = "";
+  if (data.visao_estrategica_texto && typeof data.visao_estrategica_texto === 'string') {
+    visaoTextoCorrido = data.visao_estrategica_texto;
+  } else if (data.visao_estrategica) {
+    if (typeof data.visao_estrategica === 'object' && data.visao_estrategica !== null) {
+      const parts = [
+        data.visao_estrategica.ticket_medio,
+        data.visao_estrategica.publico_prioritario,
+        data.visao_estrategica.diretrizes_executivas
+      ].filter(Boolean);
+      visaoTextoCorrido = parts.join(' ');
+    } else {
+      visaoTextoCorrido = String(data.visao_estrategica);
+    }
+  }
+
+  if (!visaoTextoCorrido || visaoTextoCorrido.trim().length === 0) {
+    visaoTextoCorrido = "Diagnóstico analítico estratégico e auditoria de viabilidade para São José dos Campos baseada nos microdados da pesquisa municipal.";
+  }
+
+  // Garantir que nenhum outro campo de texto contenha JSON bruto serializado
   if (typeof data.pestel_ishikawa === 'object') data.pestel_ishikawa = JSON.stringify(data.pestel_ishikawa);
   if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
   if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
@@ -6935,77 +6956,18 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 
   const dynamicChartsToRender = [];
 
-  // Helper para renderizar a Visão Estratégica em blocos elegantes sem truncamento de texto
-  const renderVisionBlocks = (visionObj) => {
-    if (!visionObj) return '<p class="text-slate-600 text-xs">Diagnóstico analítico em elaboração para São José dos Campos.</p>';
-    
-    // Se a IA retornou o objeto aninhado conforme novo padrão
-    if (typeof visionObj === 'object' && visionObj !== null) {
-      const ticketMedio = visionObj.ticket_medio || "";
-      const publico = visionObj.publico_prioritario || "";
-      const diretrizes = visionObj.diretrizes_executivas || "";
-
-      return `
-        <div class="space-y-3.5">
-          ${ticketMedio ? `
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-tag text-[11px]"></i>
-                <span>TICKET MÉDIO & POSICIONAMENTO</span>
-              </div>
-              <div id="ticket-medio-texto" class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(ticketMedio)}
-              </div>
-            </div>
-          ` : ''}
-
-          ${publico ? `
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-users text-[11px]"></i>
-                <span>PÚBLICO PRIORITÁRIO & DEMOGRAFIA</span>
-              </div>
-              <div id="publico-texto" class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(publico)}
-              </div>
-            </div>
-          ` : ''}
-
-          ${diretrizes ? `
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-brand-900 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-lightbulb text-[11px] text-amber-500"></i>
-                <span>DIRETRIZES EXECUTIVAS & PROVA ESTATÍSTICA</span>
-              </div>
-              <div id="diretrizes-texto" class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(diretrizes)}
-              </div>
-            </div>
-          ` : ''}
-        </div>
-      `;
-    }
-
-    // Se veio como string simples
-    const visionText = String(visionObj);
-    return `
-      <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs text-xs text-slate-700 font-normal leading-relaxed space-y-3">
-        ${formatMarkdown(visionText)}
-      </div>
-    `;
-  };
-
-  // Processamento do Gráfico de Validação Principal do Veredicto
+  // Processamento do Gráfico de Validação do Veredicto
+  const grafValidacao = data.grafico_validacao || data.grafico_validacao_principal;
   let primaryChartConfig = null;
-  if (data.grafico_validacao_principal && Array.isArray(data.grafico_validacao_principal.data) && data.grafico_validacao_principal.data.length > 0) {
+  if (grafValidacao && Array.isArray(grafValidacao.data) && grafValidacao.data.length > 0) {
     primaryChartConfig = {
-      type: data.grafico_validacao_principal.type || "bar",
-      title: data.grafico_validacao_principal.titulo || "INDICADOR DE FIT ESTATÍSTICO (SJC)",
-      labels: data.grafico_validacao_principal.labels || ["Dado 1", "Dado 2", "Dado 3"],
-      data: data.grafico_validacao_principal.data || [10, 20, 30]
+      type: grafValidacao.type || "bar",
+      title: grafValidacao.titulo || "INDICADOR DE FIT ESTATÍSTICO (SJC)",
+      labels: grafValidacao.labels || ["Dado 1", "Dado 2", "Dado 3"],
+      data: grafValidacao.data || [10, 20, 30]
     };
   } else {
-    // Fallback inteligente
+    // Fallback inteligente com base real do CSV
     primaryChartConfig = {
       type: "bar",
       title: "DISTRIBUIÇÃO DE RENDA FAMILIAR (BASE REAL SJC)",
@@ -7031,7 +6993,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   let htmlOutput = `
     <!-- LINHA 1: VISÃO ESTRATÉGICA & TOP 5 BAIRROS -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO -->
+      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO (TEXTO EXECUTIVO CORRIDO + GRÁFICO DE VALIDAÇÃO) -->
       <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
         <div class="space-y-4">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -7046,9 +7008,14 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </span>
           </div>
           
-          ${renderVisionBlocks(data.visao_estrategica)}
+          <!-- ÚNICO BLOCO DE TEXTO DENSO, LIMPO E EXECUTIVO -->
+          <div class="p-4 sm:p-5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs">
+            <p id="visao-estrategica-texto-corrido" class="text-[13px] sm:text-[14px] text-slate-700 font-normal leading-relaxed text-justify">
+              ${formatMarkdown(visaoTextoCorrido)}
+            </p>
+          </div>
 
-          <!-- MINI GRÁFICO DINÂMICO CONECTADO À ANÁLISE -->
+          <!-- GRÁFICO DINÂMICO DE VALIDAÇÃO CONECTADO À ANÁLISE -->
           <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
