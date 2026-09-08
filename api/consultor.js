@@ -61,74 +61,40 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       return res.status(400).json({ error: 'Parâmetro question ou messages é obrigatório no corpo da requisição.' });
     }
 
-    // Modelos solicitados para a conta Groq
-    const productionModels = [
-      'llama3-70b-8192',
-      'llama3-8b-8192'
-    ];
+    // Chamada oficial segura para a API da Groq
+    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: chatMessages,
+        temperature: 0.6,
+        max_tokens: 1500
+      })
+    });
 
-    let lastError = null;
-    let successfulData = null;
-    let chosenModel = null;
+    const respText = await groqResponse.text();
 
-    for (const model of productionModels) {
-      try {
-        console.log(`[Consultor IA] Chamando Groq com modelo: ${model}`);
-        
-        const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-          },
-          body: JSON.stringify({
-            model: model,
-            messages: chatMessages,
-            temperature: 0.6,
-            max_tokens: 1500
-          })
-        });
-
-        const respText = await resp.text();
-
-        if (resp.ok) {
-          successfulData = JSON.parse(respText);
-          chosenModel = model;
-          console.log(`[Consultor IA] Sucesso com o modelo: ${model}`);
-          break;
-        } else {
-          console.warn(`[Consultor IA] Modelo ${model} falhou (Status ${resp.status}):`, respText);
-          lastError = {
-            status: resp.status,
-            statusText: resp.statusText,
-            details: respText
-          };
-        }
-      } catch (errLoop) {
-        console.error(`[Consultor IA] Exceção ao chamar ${model}:`, errLoop);
-        lastError = {
-          status: 500,
-          statusText: 'FetchException',
-          details: errLoop.message
-        };
-      }
-    }
-
-    if (!successfulData) {
-      return res.status(lastError?.status || 500).json({
-        error: `Erro retornado pela API da Groq: ${lastError?.statusText || 'Falha'}`,
-        status: lastError?.status,
-        details: lastError?.details
+    if (!groqResponse.ok) {
+      console.error('[Consultor IA] Erro na API da Groq:', groqResponse.status, respText);
+      return res.status(groqResponse.status).json({
+        error: `Erro retornado pela API da Groq: ${groqResponse.statusText}`,
+        status: groqResponse.status,
+        details: respText
       });
     }
 
-    const replyText = successfulData.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
+    const data = JSON.parse(respText);
+    const replyText = data.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
 
     return res.status(200).json({
       success: true,
       reply: replyText,
-      model: chosenModel,
-      usage: successfulData.usage || null
+      model: 'llama-3.3-70b-versatile',
+      usage: data.usage || null
     });
 
   } catch (err) {
