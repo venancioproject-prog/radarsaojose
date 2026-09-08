@@ -6895,6 +6895,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     let accentColor = "text-brand-900";
     let borderAccent = "border-l-4 border-l-brand-900";
 
+    const upperTitle = title ? title.toUpperCase() : "";
 
     // Formatador especial de layout para Matriz SWOT em 2 colunas
     if (upperTitle.includes("SWOT")) {
@@ -6976,7 +6977,6 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       }
     }
 
-    const upperTitle = title.toUpperCase();
     if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
       iconClass = "fa-bolt";
       accentColor = "text-amber-500";
