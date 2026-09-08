@@ -133,15 +133,52 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
   * **Elevar:** [fatores de encantamento e experiência única]
   * **Criar:** [diferenciais inéditos para o mercado joseense]`;
 
-    // Lista estrita de modelos de alta performance (priorizando 70B e Llama 3.3)
-    const candidateModels = [
-      'llama-3.3-70b-versatile',
-      'llama-3.1-70b-versatile',
-      'llama3-70b-8192',
-      'llama-3.3-70b-specdec',
-      'llama-3.1-8b-instant',
-      'llama3-8b-8192'
-    ];
+    // 1. Obter modelos ativos diretamente da API da Groq para garantir que nenhum modelo descontinuado seja chamado
+    let candidateModels = [];
+    try {
+      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+      if (modelsResp.ok) {
+        const modelsData = await modelsResp.json();
+        const activeIds = (modelsData.data || []).map(m => m.id);
+        
+        // Modelos de texto recomendados da Groq em ordem de preferência
+        const topPriorities = [
+          'llama-3.3-70b-versatile',
+          'llama-3.1-70b-versatile',
+          'llama-3.3-70b-specdec',
+          'qwen-2.5-32b',
+          'llama-3.1-8b-instant'
+        ];
+
+        for (const p of topPriorities) {
+          if (activeIds.includes(p)) candidateModels.push(p);
+        }
+
+        // Adicionar outros modelos de chat disponíveis não descontinuados
+        activeIds.forEach(id => {
+          if (!candidateModels.includes(id) && 
+              !id.includes('whisper') && 
+              !id.includes('guard') && 
+              !id.includes('distil') && 
+              !id.includes('vision') &&
+              !id.includes('llama3-8b-8192') &&
+              !id.includes('llama3-70b-8192')) {
+            candidateModels.push(id);
+          }
+        });
+      }
+    } catch (eList) {
+      console.warn('[Consultor IA] Falha ao listar /models da Groq:', eList.message);
+    }
+
+    if (candidateModels.length === 0) {
+      candidateModels = [
+        'llama-3.3-70b-versatile',
+        'llama-3.1-8b-instant'
+      ];
+    }
 
     let replyContent = null;
     let modelUsed = null;
