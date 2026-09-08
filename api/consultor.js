@@ -59,6 +59,7 @@ DIRETRIZES DE ESTILO E QUALIDADE:
 
 ### VISÃO ESTRATÉGICA E VEREDICTO
 Análise profunda e executiva do negócio em São José dos Campos, mapeando a oportunidade real, o público-alvo prioritário e o ticket médio recomendado.
+IMPORTANTE: No corpo da análise, faça referência explícita ao gráfico de distribuição de renda apresentado logo abaixo (ex: "Conforme ilustrado no gráfico de distribuição de renda abaixo...", "Como o gráfico abaixo evidencia, a concentração de renda em SJC..."), conectando a renda da população ao ticket médio e potencial do negócio.
 
 ### TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO)
 Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicando a região correta e o motivo do fit demográfico:
