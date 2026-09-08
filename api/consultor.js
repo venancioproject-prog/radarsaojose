@@ -247,12 +247,12 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
 }`;
 
     const candidateModels = [
+      'openai/gpt-oss-20b',
+      'gpt-oss-20b',
       'openai/gpt-oss-120b',
       'gpt-oss-120b',
       'qwen/qwen-3.6-27b',
-      'qwen-3.6-27b',
-      'openai/gpt-oss-20b',
-      'gpt-oss-20b'
+      'qwen-3.6-27b'
     ];
 
     let replyContent = null;
