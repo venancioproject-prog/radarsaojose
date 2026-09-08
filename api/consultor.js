@@ -234,7 +234,6 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     const candidateModels = [
       'llama-3.3-70b-versatile',
       'llama-3.1-8b-instant',
-      'qwen-2.5-32b',
       'llama-3.1-70b-versatile'
     ];
 
@@ -245,7 +244,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     for (const model of candidateModels) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 18000);
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
 
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
@@ -256,11 +255,11 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
           body: JSON.stringify({
             model: model,
             response_format: { type: "json_object" },
-            max_tokens: 3500,
+            max_tokens: 3000,
             temperature: 0.3,
             messages: [
               { role: 'system', content: systemPrompt },
-              { role: 'user', content: inputContent }
+              { role: 'user', content: String(inputContent) }
             ]
           }),
           signal: controller.signal
@@ -274,11 +273,11 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
           modelUsed = model;
           break;
         } else {
-          lastError = data.error?.message || data.message || `HTTP ${response.status} (${model})`;
+          lastError = data.error?.message || data.message || `Erro HTTP ${response.status} na Groq (${model})`;
           console.warn(`[Consultor IA] Falha no modelo ${model}:`, lastError);
         }
       } catch (err) {
-        lastError = err.name === 'AbortError' ? `Timeout no modelo ${model}` : err.message;
+        lastError = err.name === 'AbortError' ? `Timeout de resposta na Groq (${model})` : err.message;
         console.warn(`[Consultor IA] Exceção no modelo ${model}:`, lastError);
       }
     }
