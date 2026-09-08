@@ -6958,19 +6958,40 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
       htmlOutput += `
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO -->
+          <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO + MINI GRÁFICO DE FIT DO VEREDICTO -->
           <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
             <div class="space-y-3">
-              <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
-                <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                  VISÃO ESTRATÉGICA E VEREDICTO
-                </h3>
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+                  <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                    VISÃO ESTRATÉGICA E VEREDICTO
+                  </h3>
+                </div>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                  DIAGNÓSTICO
+                </span>
               </div>
+              
               <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
                 ${formatMarkdown(sanitizedVision || content)}
               </div>
+
+              <!-- MINI GRÁFICO DINÂMICO EMBUTIDO DO VEREDICTO -->
+              <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
+                    <i class="fa-solid fa-chart-pie text-accent-cyan text-xs"></i>
+                    ADERÊNCIA AO VEREDICTO (DISTRIBUIÇÃO DE RENDA SJC)
+                  </span>
+                  <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+                </div>
+                <div class="relative w-full h-36">
+                  <canvas id="veredicto-mini-chart"></canvas>
+                </div>
+              </div>
             </div>
+
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
               <span>PADRÃO MCKINSEY / STUDIO 8</span>
               <span class="text-brand-900">RADAR SJC 2026</span>
@@ -7575,5 +7596,44 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         console.error("Erro ao instanciar Chart.js dinâmico no relatório:", errChart);
       }
     });
+
+    // Instanciar o Mini Gráfico de Aderência do Veredicto
+    const veredictoCanvas = document.getElementById("veredicto-mini-chart");
+    if (veredictoCanvas && window.Chart) {
+      try {
+        new Chart(veredictoCanvas.getContext("2d"), {
+          type: "bar",
+          data: {
+            labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
+            datasets: [{
+              label: "Distribuição em SJC (%)",
+              data: [18.1, 32.3, 23.6, 14.2, 11.8],
+              backgroundColor: ["#94A3B8", "#0B2545", "#00B4D8", "#10B981", "#F59E0B"],
+              borderRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              datalabels: {
+                color: "#0B2545",
+                font: { family: "Montserrat", size: 9, weight: "bold" },
+                anchor: "end",
+                align: "top",
+                formatter: (val) => val + "%"
+              }
+            },
+            scales: {
+              y: { beginAtZero: true, max: 40, grid: { color: "#F1F5F9" }, ticks: { display: false } },
+              x: { grid: { display: false }, ticks: { color: "#475569", font: { family: "Montserrat", size: 8, weight: "bold" } } }
+            }
+          }
+        });
+      } catch (eVer) {
+        console.warn("Falha ao renderizar veredicto-mini-chart:", eVer);
+      }
+    }
   }, 100);
 };
