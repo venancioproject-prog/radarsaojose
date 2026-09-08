@@ -6879,6 +6879,87 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     let accentColor = "text-brand-900";
     let borderAccent = "border-l-4 border-l-brand-900";
 
+
+    // Formatador especial de layout para Matriz SWOT em 2 colunas
+    if (upperTitle.includes("SWOT")) {
+      // Separar FORÇAS, FRAQUEZAS, OPORTUNIDADES e AMEAÇAS
+      const extractSwotItem = (text, headerName) => {
+        const regex = new RegExp(`(?:\\*\\*|\\*|-)?\\s*${headerName}:?\\s*(?:\\*\\*)?([\\s\\S]*?)(?=(?:\\*\\*|\\*|-)?\\s*(?:FORÇAS|FRAQUEZAS|OPORTUNIDADES|AMEAÇAS):|$)`, 'i');
+        const match = text.match(regex);
+        return match ? match[1].trim() : '';
+      };
+
+      const formatSubItems = (rawSub) => {
+        if (!rawSub) return '<p class="text-xs text-slate-400 italic">Nenhum ponto listado.</p>';
+        return rawSub
+          .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
+          .replace(/^[\*\-]\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+          .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+          .replace(/\n/g, "<br/>");
+      };
+
+      const forcasText = extractSwotItem(content, 'FORÇAS');
+      const fraquezasText = extractSwotItem(content, 'FRAQUEZAS');
+      const oportunidadesText = extractSwotItem(content, 'OPORTUNIDADES');
+      const ameacasText = extractSwotItem(content, 'AMEAÇAS');
+
+      if (forcasText || fraquezasText || oportunidadesText || ameacasText) {
+        formattedContent = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+            <!-- BLOCO ESQUERDO: FORÇAS & OPORTUNIDADES -->
+            <div class="space-y-4">
+              <!-- FORÇAS -->
+              <div class="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 shadow-2xs space-y-2">
+                <div class="flex items-center gap-2 text-emerald-800 font-black text-xs uppercase tracking-wider pb-1 border-b border-emerald-200/60">
+                  <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                  <span>FORÇAS (Diferenciais Internos)</span>
+                </div>
+                <div class="text-xs text-slate-700 space-y-1">
+                  ${formatSubItems(forcasText)}
+                </div>
+              </div>
+
+              <!-- OPORTUNIDADES -->
+              <div class="p-5 rounded-2xl bg-sky-50/60 border border-sky-200/80 shadow-2xs space-y-2">
+                <div class="flex items-center gap-2 text-sky-900 font-black text-xs uppercase tracking-wider pb-1 border-b border-sky-200/60">
+                  <i class="fa-solid fa-arrow-trend-up text-sky-600"></i>
+                  <span>OPORTUNIDADES (Mercado & Alavancas)</span>
+                </div>
+                <div class="text-xs text-slate-700 space-y-1">
+                  ${formatSubItems(oportunidadesText)}
+                </div>
+              </div>
+            </div>
+
+            <!-- BLOCO DIREITO: FRAQUEZAS & AMEAÇAS -->
+            <div class="space-y-4">
+              <!-- FRAQUEZAS -->
+              <div class="p-5 rounded-2xl bg-amber-50/60 border border-amber-200/80 shadow-2xs space-y-2">
+                <div class="flex items-center gap-2 text-amber-900 font-black text-xs uppercase tracking-wider pb-1 border-b border-amber-200/60">
+                  <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                  <span>FRAQUEZAS (Gargalos & Vulnerabilidades)</span>
+                </div>
+                <div class="text-xs text-slate-700 space-y-1">
+                  ${formatSubItems(fraquezasText)}
+                </div>
+              </div>
+
+              <!-- AMEAÇAS -->
+              <div class="p-5 rounded-2xl bg-rose-50/60 border border-rose-200/80 shadow-2xs space-y-2">
+                <div class="flex items-center gap-2 text-rose-900 font-black text-xs uppercase tracking-wider pb-1 border-b border-rose-200/60">
+                  <i class="fa-solid fa-circle-radiation text-rose-600"></i>
+                  <span>AMEAÇAS (Riscos & Pressões Externas)</span>
+                </div>
+                <div class="text-xs text-slate-700 space-y-1">
+                  ${formatSubItems(ameacasText)}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
     const upperTitle = title.toUpperCase();
     if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
       iconClass = "fa-bolt";
