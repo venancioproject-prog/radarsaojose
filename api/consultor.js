@@ -66,10 +66,9 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
 [CHART: {"type": "doughnut", "title": "Paradoxo Evasão vs Orgulho SJC", "labels": ["Evadem Consumo", "Consomem Local"], "data": [64.7, 35.3]}]
 [CHART: {"type": "pie", "title": "Principais Queixas no Consumo", "labels": ["Caro/Pouca Exp.", "Falta Autoral", "Mesmice", "Outros"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
 
-    // Lista de modelos suportados com max_tokens: 500 para nunca estourar teto da Groq
+    // Modelos Groq com suporte a saída completa de relatório executivo
     const candidateModels = [
       'llama-3.3-70b-versatile',
-      'qwen/qwen3.8-27b',
       'llama-3.1-8b-instant'
     ];
 
@@ -87,7 +86,7 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
           },
           body: JSON.stringify({
             model: model,
-            max_tokens: 500,
+            max_tokens: 2500,
             temperature: 0.3,
             messages: [
               { role: 'system', content: systemPrompt },
