@@ -1,35 +1,48 @@
-// Configuração de Execução na Vercel (Timeout de até 60 segundos)
-export const maxDuration = 60;
-export const dynamic = 'force-dynamic';
+// Execução no Edge Runtime da Vercel (Timeout de até 25-30 segundos no plano gratuito)
+export const config = {
+  runtime: 'edge',
+};
 
-export default async function handler(req, res) {
-  // Configuração de CORS
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+export default async function handler(req) {
+  // Configuração de CORS para Edge Runtime
+  const corsHeaders = {
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+    'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+    'Content-Type': 'application/json'
+  };
 
   if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+    return new Response(null, { status: 200, headers: corsHeaders });
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido. Use POST.' });
+    return new Response(JSON.stringify({ error: 'Método não permitido. Use POST.' }), {
+      status: 405,
+      headers: corsHeaders
+    });
   }
 
   try {
-    const { user_input, question, messages, context } = req.body || {};
+    let body = {};
+    try {
+      body = await req.json();
+    } catch (eBody) {
+      body = {};
+    }
+
+    const { user_input, question, messages, context } = body;
     const inputContent = user_input || question || (Array.isArray(messages) && messages.length > 0 ? messages[messages.length - 1].content : 'Apresente um plano de negócios para São José dos Campos.');
     const apiKey = (process.env.GROQ_API_KEY || '').trim();
 
     if (!apiKey) {
-      return res.status(500).json({ 
+      return new Response(JSON.stringify({ 
         error: 'Chave GROQ_API_KEY não configurada.',
         details: 'A variável de ambiente GROQ_API_KEY não foi encontrada nas configurações da Vercel.'
+      }), {
+        status: 500,
+        headers: corsHeaders
       });
     }
 
@@ -290,9 +303,12 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     }
 
     if (!replyContent) {
-      return res.status(500).json({
+      return new Response(JSON.stringify({
         error: lastError || 'Erro ao conectar à API da Groq com os modelos disponíveis.',
         details: lastError
+      }), {
+        status: 500,
+        headers: corsHeaders
       });
     }
 
@@ -324,14 +340,23 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
       }
     }
 
-    res.status(200).json({ 
+    return new Response(JSON.stringify({ 
       result: jsonResult || replyContent,
       reply: cleanReply,
       modelUsed: modelUsed
+    }), {
+      status: 200,
+      headers: corsHeaders
     });
 
   } catch (error) {
-    console.error("Erro interno no servidor:", error);
-    res.status(500).json({ error: 'Erro interno na Serverless Function: ' + error.message });
+    console.error("Erro interno no servidor Edge:", error);
+    return new Response(JSON.stringify({ 
+      error: 'Erro interno no Edge Runtime da Vercel: ' + error.message,
+      details: error.stack || error.message
+    }), {
+      status: 500,
+      headers: corsHeaders
+    });
   }
 }
