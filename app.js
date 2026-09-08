@@ -6918,8 +6918,8 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       const match = fullText.match(regex);
       if (match && match[1]) {
         let res = match[1].trim();
-        // Remove títulos subsequentes que vazaram (ex: **5 FORÇAS DE PORTER)
-        res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5 FORÇAS|PORTER|VRIO|MATRIZ|AUDITORIA|SWOT)[\s\S]*$/gi, '').trim();
+        // Remove títulos subsequentes que vazaram (ex: **5 FORÇAS DE PORTER, 5 PS DO MARKETING, ESTRATÉGIA OCEANO AZUL)
+        res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5\s*FORÇAS|PORTER|VRIO|5\s*PS|MARKETING|OCEANO\s*AZUL|MATRIZ|AUDITORIA|SWOT)[\s\S]*$/gi, '').trim();
         // Remove prefixos repetitivos como (V): (R): (I): (O): **
         res = res.replace(/^\s*\([VRIO]\)\s*:?\s*/gi, '');
         // Remove asteriscos órfãos e pontuações soltas no início ou final
@@ -7312,197 +7312,233 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         </div>
       `;
     }
-    // 4. MATRIZES ESTRATÉGICAS E POSICIONAMENTO (VRIO, PORTER, 5PS, OCEANO AZUL)
-    else if (upperTitle.includes("MATRIZES") || upperTitle.includes("POSICIONAMENTO") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO")) {
-      const vrioValor = extractBlock(content, 'VALOR|Valor', ['RARIDADE', 'Raridade', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER']);
-      const vrioRaridade = extractBlock(content, 'RARIDADE|Raridade', ['VALOR', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER']);
-      const vrioImitabilidade = extractBlock(content, 'IMITABILIDADE|Imitabilidade', ['VALOR', 'RARIDADE', 'ORGANIZAÇÃO', 'PORTER']);
-      const vrioOrganizacao = extractBlock(content, 'ORGANIZAÇÃO|ORGANIZACAO|Organizacao', ['VALOR', 'RARIDADE', 'IMITABILIDADE', 'PORTER']);
+    // 4. MATRIZES ESTRATÉGICAS E COMPETITIVIDADE / MIX DE MARKETING
+    else if (upperTitle.includes("MATRIZES") || upperTitle.includes("COMPETITIVIDADE") || upperTitle.includes("POSICIONAMENTO") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO") || upperTitle.includes("MARKETING") || upperTitle.includes("OCEANO")) {
+      
+      // Extração para Card 1: VRIO & 5 Forças de Porter
+      const vrioValor = extractBlock(content, 'VALOR|Valor', ['RARIDADE', 'Raridade', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
+      const vrioRaridade = extractBlock(content, 'RARIDADE|Raridade', ['VALOR', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
+      const vrioImitabilidade = extractBlock(content, 'IMITABILIDADE|Imitabilidade', ['VALOR', 'RARIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
+      const vrioOrganizacao = extractBlock(content, 'ORGANIZAÇÃO|ORGANIZACAO|Organizacao', ['VALOR', 'RARIDADE', 'IMITABILIDADE', 'PORTER', '5 FORÇAS', '5 PS']);
 
-      const porterRiv = extractBlock(content, 'Rivalidade', ['Novos Entrantes', 'Substitutos', 'Fornecedores', 'Compradores']);
-      const porterNovos = extractBlock(content, 'Novos Entrantes', ['Rivalidade', 'Substitutos', 'Fornecedores', 'Compradores']);
-      const porterSub = extractBlock(content, 'Substitutos', ['Rivalidade', 'Novos Entrantes', 'Fornecedores', 'Compradores']);
-      const porterForn = extractBlock(content, 'Fornecedores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Compradores']);
-      const porterComp = extractBlock(content, 'Compradores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Fornecedores']);
+      const porterRiv = extractBlock(content, 'Rivalidade', ['Novos Entrantes', 'Substitutos', 'Fornecedores', 'Compradores', '5 PS', 'PRODUTO', 'OCEANO']);
+      const porterNovos = extractBlock(content, 'Novos Entrantes', ['Rivalidade', 'Substitutos', 'Fornecedores', 'Compradores', '5 PS', 'PRODUTO', 'OCEANO']);
+      const porterSub = extractBlock(content, 'Substitutos', ['Rivalidade', 'Novos Entrantes', 'Fornecedores', 'Compradores', '5 PS', 'PRODUTO', 'OCEANO']);
+      const porterForn = extractBlock(content, 'Fornecedores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Compradores', '5 PS', 'PRODUTO', 'OCEANO']);
+      const porterComp = extractBlock(content, 'Compradores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Fornecedores', '5 PS', 'PRODUTO', 'OCEANO']);
 
-      const pProduto = extractBlock(content, 'PRODUTO|Produto', ['PREÇO', 'Preço', 'PRAÇA', 'Praça', 'PROMOÇÃO', 'PESSOAS']);
-      const pPreco = extractBlock(content, 'PREÇO|Preço|Preco', ['PRODUTO', 'PRAÇA', 'PROMOÇÃO', 'PESSOAS']);
-      const pPraca = extractBlock(content, 'PRAÇA|Praça|Praca', ['PRODUTO', 'PREÇO', 'PROMOÇÃO', 'PESSOAS']);
-      const pPromocao = extractBlock(content, 'PROMOÇÃO|Promoção|Promocao', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PESSOAS']);
-      const pPessoas = extractBlock(content, 'PESSOAS|Pessoas', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PROMOÇÃO', 'OCEANO']);
+      // Extração para Card 2: 5 Ps do Marketing & Oceano Azul
+      const pProduto = extractBlock(content, 'PRODUTO|Produto', ['PREÇO', 'Preço', 'PRAÇA', 'Praça', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPreco = extractBlock(content, 'PREÇO|Preço|Preco', ['PRODUTO', 'PRAÇA', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPraca = extractBlock(content, 'PRAÇA|Praça|Praca', ['PRODUTO', 'PREÇO', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPromocao = extractBlock(content, 'PROMOÇÃO|Promoção|Promocao', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
+      const pPessoas = extractBlock(content, 'PESSOAS|Pessoas', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PROMOÇÃO', 'OCEANO', 'ELIMINAR']);
 
       const oaEliminar = extractBlock(content, 'ELIMINAR|Eliminar', ['REDUZIR', 'ELEVAR', 'CRIAR']);
       const oaReduzir = extractBlock(content, 'REDUZIR|Reduzir', ['ELIMINAR', 'ELEVAR', 'CRIAR']);
       const oaElevar = extractBlock(content, 'ELEVAR|Elevar', ['ELIMINAR', 'REDUZIR', 'CRIAR']);
       const oaCriar = extractBlock(content, 'CRIAR|Criar', ['ELIMINAR', 'REDUZIR', 'ELEVAR']);
 
-      htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-          <div class="text-center pb-1">
-            <span class="text-[10px] font-mono font-black tracking-widest text-slate-400 uppercase">MATRIZES ESTRATÉGICAS E POSICIONAMENTO</span>
-          </div>
+      const hasCompetitividade = vrioValor || vrioRaridade || porterRiv || porterNovos || porterSub;
+      const hasMarketing = pProduto || pPreco || pPraca || oaEliminar || oaReduzir;
 
-          <!-- BLOCO SUPERIOR: VRIO + PORTER EM 2 COLUNAS -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-slate-100">
-            <!-- ANÁLISE VRIO COM LETRAS DESTAQUE -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-bolt text-amber-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ANÁLISE VRIO</h4>
+      // Se contém dados de VRIO ou Porter, renderiza o Card de Competitividade
+      if (hasCompetitividade || (!hasMarketing && !hasCompetitividade)) {
+        htmlOutput += `
+          <!-- CARD A: MATRIZES ESTRATÉGICAS E COMPETITIVIDADE (VRIO & 5 FORÇAS DE PORTER) -->
+          <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
+                <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                  MATRIZES ESTRATÉGICAS E COMPETITIVIDADE
+                </h3>
               </div>
-
-              <div class="space-y-3">
-                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
-                  <span class="text-xl font-black font-mono text-emerald-600 shrink-0">V</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold">VALOR:</strong>
-                    ${formatMarkdown(vrioValor)}
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
-                  <span class="text-xl font-black font-mono text-sky-600 shrink-0">R</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold">RARIDADE:</strong>
-                    ${formatMarkdown(vrioRaridade)}
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
-                  <span class="text-xl font-black font-mono text-rose-600 shrink-0">I</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold">IMITABILIDADE:</strong>
-                    ${formatMarkdown(vrioImitabilidade)}
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
-                  <span class="text-xl font-black font-mono text-brand-900 shrink-0">O</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold">ORGANIZAÇÃO:</strong>
-                    ${formatMarkdown(vrioOrganizacao)}
-                  </div>
-                </div>
-              </div>
+              <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+                VRIO & PORTER
+              </span>
             </div>
 
-            <!-- 5 FORÇAS DE PORTER -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-chart-line text-amber-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 FORÇAS DE PORTER</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- ANÁLISE VRIO -->
+              <div class="space-y-4">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                  <i class="fa-solid fa-bolt text-amber-500 text-xs"></i>
+                  <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ANÁLISE VRIO</h4>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
+                    <span class="text-xl font-black font-mono text-emerald-600 shrink-0">V</span>
+                    <div class="text-xs text-slate-700 leading-relaxed">
+                      <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">VALOR:</strong>
+                      ${formatMarkdown(vrioValor) || 'Capacidade de explorar oportunidades e neutralizar ameaças no mercado.'}
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
+                    <span class="text-xl font-black font-mono text-sky-600 shrink-0">R</span>
+                    <div class="text-xs text-slate-700 leading-relaxed">
+                      <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">RARIDADE:</strong>
+                      ${formatMarkdown(vrioRaridade) || 'Atributos e recursos exclusivos controlados por poucos concorrentes.'}
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
+                    <span class="text-xl font-black font-mono text-rose-600 shrink-0">I</span>
+                    <div class="text-xs text-slate-700 leading-relaxed">
+                      <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">IMITABILIDADE:</strong>
+                      ${formatMarkdown(vrioImitabilidade) || 'Barreiras para que outros concorrentes não consigam duplicar a proposta com facilidade.'}
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
+                    <span class="text-xl font-black font-mono text-brand-900 shrink-0">O</span>
+                    <div class="text-xs text-slate-700 leading-relaxed">
+                      <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">ORGANIZAÇÃO:</strong>
+                      ${formatMarkdown(vrioOrganizacao) || 'Processos internos e governança alinhados para explorar o potencial competitivo.'}
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="space-y-2.5 text-xs text-slate-700">
-                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
-                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">RIVALIDADE</span>
-                  <p class="leading-relaxed">${formatMarkdown(porterRiv)}</p>
-                </div>
-                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
-                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">NOVOS ENTRANTES</span>
-                  <p class="leading-relaxed">${formatMarkdown(porterNovos)}</p>
-                </div>
-                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
-                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">SUBSTITUTOS</span>
-                  <p class="leading-relaxed">${formatMarkdown(porterSub)}</p>
-                </div>
-                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
-                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">FORNECEDORES</span>
-                  <p class="leading-relaxed">${formatMarkdown(porterForn)}</p>
-                </div>
-                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
-                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">COMPRADORES</span>
-                  <p class="leading-relaxed">${formatMarkdown(porterComp)}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- BLOCO INFERIOR: 5 PS DO MARKETING + OCEANO AZUL -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- 5 PS DO MARKETING -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-chart-line text-amber-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 PS DO MARKETING</h4>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2.5 text-xs">
-                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
-                  <span class="text-[10px] font-black text-rose-600 uppercase block">PRODUTO</span>
-                  <p class="text-slate-700 leading-tight">${formatMarkdown(pProduto)}</p>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
-                  <span class="text-[10px] font-black text-rose-600 uppercase block">PREÇO</span>
-                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPreco)}</p>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
-                  <span class="text-[10px] font-black text-rose-600 uppercase block">PRAÇA</span>
-                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPraca)}</p>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
-                  <span class="text-[10px] font-black text-rose-600 uppercase block">PROMOÇÃO</span>
-                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPromocao)}</p>
-                </div>
-                <div class="col-span-2 p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
-                  <span class="text-[10px] font-black text-rose-600 uppercase block">PESSOAS</span>
-                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPessoas)}</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- ESTRATÉGIA OCEANO AZUL (MATRIZ 4 AÇÕES) -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-earth-americas text-amber-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ESTRATÉGIA OCEANO AZUL</h4>
-              </div>
-
-              <div class="grid grid-cols-2 gap-3 text-xs">
-                <!-- ELIMINAR -->
-                <div class="rounded-xl border border-rose-200 overflow-hidden shadow-2xs">
-                  <div class="bg-rose-50 px-3 py-1.5 font-mono font-black text-[10px] text-rose-600 uppercase border-b border-rose-200">
-                    ELIMINAR
-                  </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaEliminar)}
-                  </div>
+              <!-- 5 FORÇAS DE PORTER -->
+              <div class="space-y-4">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                  <i class="fa-solid fa-chart-line text-rose-500 text-xs"></i>
+                  <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 FORÇAS DE PORTER</h4>
                 </div>
 
-                <!-- REDUZIR -->
-                <div class="rounded-xl border border-amber-200 overflow-hidden shadow-2xs">
-                  <div class="bg-amber-50 px-3 py-1.5 font-mono font-black text-[10px] text-amber-600 uppercase border-b border-amber-200">
-                    REDUZIR
+                <div class="space-y-2.5 text-xs text-slate-700">
+                  <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-rose-600 uppercase tracking-wider block">RIVALIDADE ENTRE CONCORRENTES</span>
+                    <div class="leading-relaxed text-slate-700">${formatMarkdown(porterRiv) || 'Mapeamento da intensidade competitiva local.'}</div>
                   </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaReduzir)}
+                  <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-amber-600 uppercase tracking-wider block">AMEAÇA DE NOVOS ENTRANTES</span>
+                    <div class="leading-relaxed text-slate-700">${formatMarkdown(porterNovos) || 'Barreiras de entrada e investimento necessário.'}</div>
                   </div>
-                </div>
-
-                <!-- ELEVAR -->
-                <div class="rounded-xl border border-sky-200 overflow-hidden shadow-2xs">
-                  <div class="bg-sky-50 px-3 py-1.5 font-mono font-black text-[10px] text-sky-600 uppercase border-b border-sky-200">
-                    ELEVAR
+                  <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-sky-600 uppercase tracking-wider block">AMEAÇA DE PRODUTOS SUBSTITUTOS</span>
+                    <div class="leading-relaxed text-slate-700">${formatMarkdown(porterSub) || 'Alternativas de mercado e comércio eletrônico.'}</div>
                   </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaElevar)}
+                  <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-purple-600 uppercase tracking-wider block">PODER DE BARGANHA DOS FORNECEDORES</span>
+                    <div class="leading-relaxed text-slate-700">${formatMarkdown(porterForn) || 'Disponibilidade de insumos e parceiros estratégicos.'}</div>
                   </div>
-                </div>
-
-                <!-- CRIAR -->
-                <div class="rounded-xl border border-emerald-200 overflow-hidden shadow-2xs">
-                  <div class="bg-emerald-50 px-3 py-1.5 font-mono font-black text-[10px] text-emerald-600 uppercase border-b border-emerald-200">
-                    CRIAR
-                  </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaCriar)}
+                  <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-emerald-600 uppercase tracking-wider block">PODER DE BARGANHA DOS CLIENTES</span>
+                    <div class="leading-relaxed text-slate-700">${formatMarkdown(porterComp) || 'Sensibilidade a preço e exigência do consumidor de SJC.'}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      `;
+        `;
+      }
+
+      // Se contém dados de Marketing ou Oceano Azul, renderiza o Card de Mix de Marketing & Oceano Azul separado
+      if (hasMarketing) {
+        htmlOutput += `
+          <!-- CARD B: MIX DE MARKETING E DIFERENCIAÇÃO (5 PS & OCEANO AZUL) -->
+          <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
+                <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                  MIX DE MARKETING E DIFERENCIAÇÃO
+                </h3>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
+                5 PS & OCEANO AZUL
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- 5 PS DO MARKETING -->
+              <div class="space-y-4">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                  <i class="fa-solid fa-layer-group text-accent-cyan text-xs"></i>
+                  <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 PS DO MARKETING</h4>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5 text-xs">
+                  <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-rose-600 uppercase block">PRODUTO</span>
+                    <div class="text-slate-700 leading-tight">${formatMarkdown(pProduto) || 'Linhas de produtos e proposta de valor.'}</div>
+                  </div>
+                  <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-emerald-600 uppercase block">PREÇO</span>
+                    <div class="text-slate-700 leading-tight">${formatMarkdown(pPreco) || 'Posicionamento de precificação e ticket.'}</div>
+                  </div>
+                  <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-sky-600 uppercase block">PRAÇA</span>
+                    <div class="text-slate-700 leading-tight">${formatMarkdown(pPraca) || 'Canais físicos e digitais em SJC.'}</div>
+                  </div>
+                  <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-purple-600 uppercase block">PROMOÇÃO</span>
+                    <div class="text-slate-700 leading-tight">${formatMarkdown(pPromocao) || 'Estratégia de atração e engajamento.'}</div>
+                  </div>
+                  <div class="col-span-2 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
+                    <span class="text-[10px] font-mono font-black text-brand-900 uppercase block">PESSOAS</span>
+                    <div class="text-slate-700 leading-tight">${formatMarkdown(pPessoas) || 'Treinamento, cultura de atendimento e hospitalidade.'}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ESTRATÉGIA OCEANO AZUL (MATRIZ 4 AÇÕES) -->
+              <div class="space-y-4">
+                <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                  <i class="fa-solid fa-water text-sky-500 text-xs"></i>
+                  <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ESTRATÉGIA OCEANO AZUL</h4>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                  <!-- ELIMINAR -->
+                  <div class="rounded-2xl border border-rose-200 overflow-hidden shadow-2xs">
+                    <div class="bg-rose-50 px-3 py-1.5 font-mono font-black text-[10px] text-rose-600 uppercase border-b border-rose-200">
+                      ELIMINAR
+                    </div>
+                    <div class="p-3 bg-white text-slate-700 leading-tight">
+                      ${formatMarkdown(oaEliminar) || 'Fatores que o setor dá como certos e que devem ser eliminados.'}
+                    </div>
+                  </div>
+
+                  <!-- REDUZIR -->
+                  <div class="rounded-2xl border border-amber-200 overflow-hidden shadow-2xs">
+                    <div class="bg-amber-50 px-3 py-1.5 font-mono font-black text-[10px] text-amber-600 uppercase border-b border-amber-200">
+                      REDUZIR
+                    </div>
+                    <div class="p-3 bg-white text-slate-700 leading-tight">
+                      ${formatMarkdown(oaReduzir) || 'Fatores que devem ser reduzidos bem abaixo do padrão do setor.'}
+                    </div>
+                  </div>
+
+                  <!-- ELEVAR -->
+                  <div class="rounded-2xl border border-sky-200 overflow-hidden shadow-2xs">
+                    <div class="bg-sky-50 px-3 py-1.5 font-mono font-black text-[10px] text-sky-600 uppercase border-b border-sky-200">
+                      ELEVAR
+                    </div>
+                    <div class="p-3 bg-white text-slate-700 leading-tight">
+                      ${formatMarkdown(oaElevar) || 'Fatores que devem ser elevados bem acima do padrão do setor.'}
+                    </div>
+                  </div>
+
+                  <!-- CRIAR -->
+                  <div class="rounded-2xl border border-emerald-200 overflow-hidden shadow-2xs">
+                    <div class="bg-emerald-50 px-3 py-1.5 font-mono font-black text-[10px] text-emerald-600 uppercase border-b border-emerald-200">
+                      CRIAR
+                    </div>
+                    <div class="p-3 bg-white text-slate-700 leading-tight">
+                      ${formatMarkdown(oaCriar) || 'Fatores que nunca foram oferecidos e que devem ser criados.'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
     }
     // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS (4 CARDS VISUAIS COM FOTOS + VEREDICTO FINAL)
     else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT") || upperTitle.includes("CULTURAIS")) {

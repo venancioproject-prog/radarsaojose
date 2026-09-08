@@ -82,11 +82,31 @@ Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicand
 - **ANÁLISE PESTEL:** Impactos Político, Econômico, Social, Tecnológico, Ambiental e Legal em SJC.
 - **DIAGRAMA DE ISHIKAWA:** Causas-raiz por Mercado, Operação, Tecnologia e Financeiro.
 
-### MATRIZES ESTRATÉGICAS E POSICIONAMENTO
-- **ANÁLISE VRIO:** Valor (V), Raridade (R), Imitabilidade (I), Organização (O).
-- **5 FORÇAS DE PORTER:** Níveis (Alto/Médio/Baixo) e justificativas técnicas para: Rivalidade, Novos Entrantes, Substitutos, Fornecedores, Compradores.
-- **5 PS DO MARKETING:** Produto, Preço, Praça, Promoção, Pessoas.
-- **ESTRATÉGIA OCEANO AZUL:** Eliminar, Reduzir, Elevar, Criar.
+### MATRIZES ESTRATÉGICAS E COMPETITIVIDADE
+- **ANÁLISE VRIO:**
+  * **Valor (V):** [descrição]
+  * **Raridade (R):** [descrição]
+  * **Imitabilidade (I):** [descrição]
+  * **Organização (O):** [descrição]
+- **5 FORÇAS DE PORTER:**
+  * **Rivalidade:** [Nível e justificativa]
+  * **Novos Entrantes:** [Nível e justificativa]
+  * **Substitutos:** [Nível e justificativa]
+  * **Fornecedores:** [Nível e justificativa]
+  * **Compradores:** [Nível e justificativa]
+
+### MIX DE MARKETING E DIFERENCIAÇÃO
+- **5 PS DO MARKETING:**
+  * **Produto:** [estratégia]
+  * **Preço:** [estratégia]
+  * **Praça:** [estratégia]
+  * **Promoção:** [estratégia]
+  * **Pessoas:** [estratégia]
+- **ESTRATÉGIA OCEANO AZUL:**
+  * **Eliminar:** [fatores a eliminar]
+  * **Reduzir:** [fatores a reduzir]
+  * **Elevar:** [fatores a elevar]
+  * **Criar:** [fatores a criar]
 
 [CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
 [CHART: {"type": "doughnut", "title": "Paradoxo de Evasão vs Orgulho em SJC", "labels": ["Evadem para SP/Litoral", "Consomem Localmente"], "data": [64.7, 35.3]}]
