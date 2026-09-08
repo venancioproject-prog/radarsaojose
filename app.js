@@ -6603,7 +6603,8 @@ window.handleConsultorSubmit = async function(e) {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       const errorMsg = errorData.error || `Erro HTTP ${response.status}: Falha na comunicação com o backend.`;
-      window.appendChatMessage("assistant", `⚠️ **Aviso:** ${errorMsg}\n\n*Dica: Verifique se a variável de ambiente GROQ_API_KEY foi adicionada no painel de configurações da Vercel.*`);
+      const detailsMsg = errorData.details ? `\n\n**Detalhes técnicos:** \`${errorData.details}\`` : "";
+      window.appendChatMessage("assistant", `⚠️ **Aviso:** ${errorMsg}${detailsMsg}\n\n*Dica: Verifique se a variável de ambiente GROQ_API_KEY foi adicionada no painel de configurações da Vercel (Project Settings > Environment Variables).*`);
       return;
     }
 

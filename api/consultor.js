@@ -23,15 +23,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const apiKey = process.env.GROQ_API_KEY;
+    const rawApiKey = process.env.GROQ_API_KEY || '';
+    const apiKey = rawApiKey.trim();
+
     if (!apiKey) {
-      console.error('ERRO CRÍTICO: GROQ_API_KEY não configurada no ambiente da Vercel.');
+      console.error('[Consultor IA] ERRO CRÍTICO: GROQ_API_KEY não encontrada em process.env.');
       return res.status(500).json({ 
-        error: 'Chave de API da Groq (GROQ_API_KEY) não configurada nas variáveis de ambiente da Vercel.' 
+        error: 'Chave de API da Groq (GROQ_API_KEY) não está configurada ou está vazia nas variáveis de ambiente da Vercel. Adicione em Project Settings > Environment Variables e faça um Redeploy.' 
       });
     }
 
-    const { messages, question, context } = req.body || {};
+    const { messages, question, context, model: userModel } = req.body || {};
 
     let chatMessages = [];
 
@@ -45,14 +47,12 @@ Diretrizes:
 ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringify(context)}` : ''}`;
 
     if (Array.isArray(messages) && messages.length > 0) {
-      // Se o frontend enviou histórico completo de mensagens
       const hasSystem = messages.some(m => m.role === 'system');
       if (!hasSystem) {
         chatMessages.push({ role: 'system', content: systemPrompt });
       }
       chatMessages = chatMessages.concat(messages);
     } else if (question) {
-      // Se enviou apenas pergunta individual
       chatMessages = [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: question }
@@ -61,49 +61,70 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       return res.status(400).json({ error: 'Parâmetro question ou messages é obrigatório no corpo da requisição.' });
     }
 
-    // Endpoint oficial da Groq
-    const groqEndpoint = 'https://api.groq.com/openai/v1/chat/completions';
-    
-    // Modelo oficial Groq
-    const modelName = 'llama3-70b-8192';
+    // Lista de modelos suportados pela Groq em ordem de prioridade
+    const candidateModels = [
+      userModel,
+      'llama-3.3-70b-versatile',
+      'llama-3.1-8b-instant',
+      'llama3-70b-8192',
+      'llama3-8b-8192',
+      'mixtral-8x7b-32768'
+    ].filter(Boolean);
 
-    console.log(`[Consultor IA] Enviando requisição para ${groqEndpoint} com modelo ${modelName}...`);
+    let groqResponse = null;
+    let lastErrorDetails = '';
+    let lastStatus = 500;
+    let successfulModel = null;
 
-    // Chamada oficial segura para a API da Groq
-    const groqResponse = await fetch(groqEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
-      body: JSON.stringify({
-        model: modelName,
-        messages: chatMessages,
-        temperature: 0.6,
-        max_tokens: 1500
-      })
-    });
+    for (const model of candidateModels) {
+      try {
+        console.log(`[Consultor IA] Tentando chamada Groq com modelo: ${model}`);
+        
+        const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: chatMessages,
+            temperature: 0.6,
+            max_tokens: 1500
+          })
+        });
 
-    if (!groqResponse.ok) {
-      const errorText = await groqResponse.text();
-      console.error(`[Consultor IA] Erro retornado pela API da Groq (Status ${groqResponse.status} ${groqResponse.statusText}):`, errorText);
-      return res.status(groqResponse.status).json({ 
-        error: `Erro na API da Groq: ${groqResponse.statusText}`, 
-        status: groqResponse.status,
-        details: errorText 
+        if (resp.ok) {
+          groqResponse = await resp.json();
+          successfulModel = model;
+          console.log(`[Consultor IA] Sucesso com o modelo: ${model}`);
+          break;
+        } else {
+          lastStatus = resp.status;
+          lastErrorDetails = await resp.text();
+          console.warn(`[Consultor IA] Falha no modelo ${model} (Status ${resp.status}): ${lastErrorDetails}`);
+        }
+      } catch (errLoop) {
+        console.warn(`[Consultor IA] Erro ao tentar modelo ${model}:`, errLoop.message);
+        lastErrorDetails = errLoop.message;
+      }
+    }
+
+    if (!groqResponse) {
+      console.error('[Consultor IA] Todos os modelos candidatos falharam na Groq.');
+      return res.status(lastStatus).json({ 
+        error: `Erro na API da Groq (Status ${lastStatus})`, 
+        details: lastErrorDetails 
       });
     }
 
-    const data = await groqResponse.json();
-    console.log('[Consultor IA] Resposta recebida com sucesso da Groq.');
-    
-    const replyText = data.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
+    const replyText = groqResponse.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
 
     return res.status(200).json({
       success: true,
       reply: replyText,
-      model: data.model || modelName,
-      usage: data.usage || null
+      model: successfulModel,
+      usage: groqResponse.usage || null
     });
 
   } catch (err) {
