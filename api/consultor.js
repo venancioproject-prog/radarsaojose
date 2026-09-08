@@ -250,8 +250,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
       'openai/gpt-oss-120b',
       'gpt-oss-120b',
       'qwen/qwen-3.6-27b',
-      'qwen-3.6-27b',
-      'llama-3.3-70b-versatile'
+      'qwen-3.6-27b'
     ];
 
     let replyContent = null;
