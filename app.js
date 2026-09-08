@@ -7376,10 +7376,10 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           type: "doughnut",
           title: "Paradoxo de Evasão vs Orgulho em SJC",
           labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
-          data: [64.7, 35.3]
+          data: [66.2, 33.8]
         },
         pergunta_origem: "Você costuma consumir serviços gastronômicos e culturais fora de São José dos Campos? (Evasão)",
-        parecer_analitico: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
+        parecer_analitico: "66.2% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
       },
       {
         chart_data: {

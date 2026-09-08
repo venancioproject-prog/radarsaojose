@@ -26,23 +26,23 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Chave GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.' });
     }
 
-    // BASE CONSOLIDADA DIRETA DO CSV MUNICIPAL REAL (N=477) COM RECORTES PSICOGRÁFICOS E COMPORTAMENTAIS:
+    // BASE CONSOLIDADA DIRETA DO RELATÓRIO OFICIAL RADAR SÃO JOSÉ (N=477, IC=95%):
     const marketBriefSJC = `BASE COMPLETA DE DADOS DA PESQUISA MUNICIPAL RADAR SÃO JOSÉ (N=477, IC=95%):
-1. MACRODEMOGRAFIA & PERFIL SOCIOECONÔMICO:
+1. MACRODEMOGRAFIA & PERFIL SOCIOECONÔMICO OFICIAL:
    - Renda Total Familiar: Até R$ 2.800 (18.1%) | R$ 2.801 a R$ 5.600 (32.3%) | R$ 5.601 a R$ 12.000 (23.6%) | R$ 12.001 a R$ 26.000 (14.2%) | Acima de R$ 26.000 (11.8%).
    - Faixa Etária: 16-17 anos (1.9%), 18-24 anos (12.2%), 25-34 anos (26.8%), 35-44 anos (27.6%), 45-54 anos (22.0%), 55-64 anos (7.4%), 65+ anos (4.0%).
    - Gênero / Identidade: Mulheres Cis (58.4%), Homens Cis (37.9%), Outros/Trans/Não-binários (3.7%).
    - Ocupação / Trabalho: CLT (53.2%), PJ / Autônomo / Bico (22.8%), Funcionário Público (11.4%), Estudante / Estágio (6.3%), Aposentado (4.2%), Empresário (2.1%).
    - Habitação & Relacionamento: Casa própria (51.2%), Aluguel querendo casa própria (39.5%), Aluguel sem intenção (9.3%). Casados/Morando junto (48.6%), Solteiros (33.5%), Namorando (11.2%), Divorciados/Viúvos (6.7%).
 
-2. PSICOGRAFIA, DORES REAIS & PSICOLOGIA DO CONSUMIDOR JOSEENSE:
-   - Paradoxo de Evasão vs Orgulho: 72.4% têm orgulho de morar em SJC. Contudo, 64.7% EVADEM seu lazer/gastronomia para fora (SP Capital, Campos do Jordão, Litoral Norte, Santo Antônio do Pinhal). Motivo: busca por autenticidade e status cosmopolita que a cidade não entrega.
+2. PSICOGRAFIA, DORES REAIS & PSICOLOGIA DO CONSUMIDOR JOSEENSE (MÉTRICAS OFICIAIS):
+   - Paradoxo de Evasão vs Orgulho: 72.4% têm orgulho de morar em SJC. Contudo, 66.2% EVADEM seu consumo de lazer/gastronomia para fora (SP Capital, Campos do Jordão, Litoral Norte, Santo Antônio do Pinhal). Motivo: busca por autenticidade, novidade e status que a cidade não entrega.
+   - Frequência de Saída: 84.7% dos moradores saem regularmente para lazer e consumo gastronômico.
+   - Demanda Reprimida & Disposição a Gastar: 75.8% dos joseenses afirmam categoricamente que gastariam MAIS dinheiro na cidade se houvesse opções inovadoras, autênticas e alinhadas ao seu estilo de vida.
    - Barreiras Noturnas & Atritos Invisíveis: 32.3% "É tudo muito caro para o que oferece (falta de valor percebido)", 22.9% "Falta de lugares legais e autorais (mesmice)", 18.6% "Sensação de mesmice e repetição de formato", 14.1% "Ônibus e mobilidade truncada", 12.1% "Insegurança percebida".
-   - Demanda Reprimida & Disposição a Gastar: 78.8% dos joseenses afirmam enfaticamente que gastariam MAIS dinheiro na cidade se houvesse opções inovadoras, autênticas e que combinassem com o seu estilo de vida.
    - Critérios Reais de Escolha: Ambiente agradável, acolhedor e bonito (38.9%), Preço/Custo-benefício (27.1%), Indicação orgânica de amigos/família (21.4%), Proximidade geográfica de casa (12.6%).
    - Estética Instagramável & Validação Social: 46.8% valorizam ou escolhem ativamente estabelecimentos por serem bonitos para fotos/redes sociais.
    - Cultura Pet-Friendly: 68.2% possuem animais de estimação e demandam estabelecimentos e praças abertas que acolham pets.
-   - Aversão a Risco & Conservadorismo Social: Forte apego a valores familiares tradicionais e cautela com conceitos excessivamente disruptivos ou eróticos na Zona Sul e Leste, com maior abertura cosmopolita concentrada no eixo Aquarius/Vila Ema/Adyana.
    - Distribuição de Frequência de Consumo Regional:
      * Centro-Oeste (Aquarius, Vila Adyana, Vila Ema, Esplanada, Colinas): 40.7%
      * Zona Sul (Jardim Satélite, Bosque, Jardim Oriente, Morumbi, Colonial): 27.6%
@@ -53,12 +53,13 @@ export default async function handler(req, res) {
 3. HÁBITOS CULTURAIS, MÍDIA & INFLUENCIADORES:
    - Redes Sociais Mais Usadas para Busca de Locais: Instagram (79.4%), TikTok (14.2%), Google/Maps (6.4%). 54.1% já frequentaram estabelecimentos por recomendação de influenciadores locais.
    - Gêneros Musicais Favoritos: MPB/Pop Rock (38.2%), Sertanejo (31.4%), Pagode/Samba (28.7%), Rock Internacional/Indie (24.1%), Funk/Trap (19.8%), Eletrônica (14.2%), Gospel (11.5%).
-   - Streaming: Netflix (78.2%), Spotify (64.3%), Prime Video (46.8%), YouTube Music (38.6%), Disney+ (34.1%).
 
-4. OS 4 GRANDES MOVIMENTOS CULTURAIS DE SJC:
-   - 1. A Geografia do Silêncio: refúgio, sossego, áreas verdes, calmaria do estresse corporativo (Urbanova, Adyana, condomínios fechados).
-   - 2. A Cidade Prometida: famílias, segurança, estabilidade, conveniência familiar e custo-benefício (Zona Sul e Leste consolidada).
-   - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
+4. A BÍBLIA DOS 4 MOVIMENTOS CULTURAIS DE SJC (DEFINIÇÕES OFICIAIS OBRIGATÓRIAS):
+   - 01. Geografia do Silêncio: Cultura da harmonia, estabilidade e conformismo ('tá tudo bem'). Público conservador, avesso a debates críticos. Focam em família, tranquilidade, segurança, shoppings e franquias seguras. Fogem de agito.
+   - 02. Cidade Prometida: Nostálgicos do potencial tecnológico (ITA, Embraer). Querem que SJC volte a ser protagonista e inovadora globalmente. Cobram excelência e performance (estética Apple, ROI), mas mantêm matrizes conservadoras.
+   - 03. Tribo Global: A elite técnica e cosmopolita. Early adopters super exigentes que demandam padrão internacional de gastronomia, design e ética. Trabalham e moram no eixo Aquarius/Vila Ema, mas gastam dinheiro em São Paulo porque acham a oferta de SJC básica e sem vibração.
+   - 04. Empreendedorismo Intuitivo: A economia real, de bairro e pragmática. Foco no sustento, na velocidade e na resolução imediata (WhatsApp, conveniência, delivery ágil). Pessoas da classe trabalhadora que valorizam o custo-benefício e o relacionamento humano direto (sem frescuras).
+
 5. BANCO DE VERBATIMS E CITAÇÕES REAIS DE RESPONDENTES (PESQUISA QUALITATIVA RADAR SJC):
    - "Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade." (Mulher Cis, 25-34 anos, Parque Industrial, PJ)
    - "Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José." (Mulher Cis, 65+ anos, Oeste, Classe A/B)
@@ -70,24 +71,25 @@ export default async function handler(req, res) {
    - "Uma cidade com poucos recursos para jovens." (Mulher Cis, 35-44 anos, Jd. Colonial, PJ)
    - "Lazer só pra quem tem dinheiro." (Mulher Cis, 35-44 anos, Jd. Santa Inês III, CLT)`;
 
-    const systemPrompt = `Você é o Sócio-Diretor de Estratégia da McKinsey & Company. O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica IMPLACÁVEL, DE ELEVADA DENSIDADE CONCEITUAL E RIGOR ANALÍTICO baseada nos microdados do CSV municipal de São José dos Campos (N=477, IC=95%).
+    const systemPrompt = `Você é o Sócio-Diretor de Estratégia da McKinsey & Company. O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica IMPLACÁVEL, DE ELEVADA DENSIDADE CONCEITUAL E RIGOR ANALÍTICO baseada estritamente nos dados oficiais e microdados do estudo municipal de São José dos Campos (N=477, IC=95%).
 
 ${marketBriefSJC}
 
 TRAVAS DRACONIANAS E PADRÃO MCKINSEY DEFINITIVO (REGRAS DE OURO):
-0. REGRA DE SANIDADE LÓGICA & FIT REALISTA: Adeque o seu tom e estratégia à REALIDADE da ideia e do local. Se o usuário sugerir um negócio popular (ex: Loja de Salgados, Marmitex, Barbearia de bairro, Oficina) em uma área popular (ex: Zona Norte, Zona Leste, bairros periféricos da Zona Sul), PARE de forçar narrativas de 'estética instagramável premium' ou focar na 'Tribo Global'. Use a estratégia correta: foco em giro rápido, custo-benefício, delivery, movimento 'Cidade Prometida' ou 'Empreendedorismo Intuitivo'. Respeite a classe social e a geografia real da ideia proposta.
-1. TRAVA DE NARRATIVA (PROIBIDO DATA-DUMP): É TERMINANTEMENTE PROIBIDO listar porcentagens como uma lista de compras (ex: "tem 40%, além de 20%, somando 15%"). O foco central do texto deve ser a PSICOLOGIA DO CONSUMIDOR, AS DORES OCULTAS, O COMPORTAMENTO E A CULTURA LOCAL. Os números do Radar SJC devem aparecer de forma elegante e comedida, servindo unicamente para PROVAR a tese analítica.
-2. TESE DE VIABILIDADE EM NEGRITO OBRIGATÓRIA: No meio do parágrafo de 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE escrever uma frase de impacto definitiva em formato Markdown Negrito (**frase**). Exemplo de padrão: "**O sucesso deste negócio em SJC não depende de preço, mas da capacidade de quebrar a barreira da mesmice e reter o consumidor que hoje foge para São Paulo.**"
-3. REGRA DE TITÂNIO (3 VERBALIZAÇÕES REAIS COM DEMOGRAFIA DO CSV): Na chave 'verbalizacoes_reais', você é ESTONTEANTEMENTE PROIBIDO de inventar, criar ou simular frases falsas. Você DEVE ler o contexto da pesquisa/CSV e EXTRAIR EXATAMENTE 3 objetos com citações reais (verbatims) do banco que tenham o MAIOR FIT com o nicho de mercado da ideia sugerida, atrelando a faixa etária, região e renda de cada respondente extraídos estritamente do perfil do CSV.
-4. TRAVA GEOGRÁFICA (ZONA DE EXCLUSÃO OBRIGATÓRIA E DENSA): A chave 'zona_exclusao' NÃO PODE ser apenas o nome de um bairro. Ela DEVE conter o nome da região seguido de um PARÁGRAFO EXPLICATIVO E DURO (40-60 palavras) detalhando por que a ideia fracassaria e queimaria caixa naquele local (choque com a cultura tradicional familiar da Cidade Prometida, falta de lastro de renda, dispersão de fluxo, etc.).
-5. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas e contextualizadas cruzando renda, idade e o movimento cultural correspondente.
-6. REGRA DESTRUIDORA DE VIÉS (4 MOVIMENTOS CULTURAIS): Você está PROIBIDO de escolher 'A Tribo Global' como vencedor por padrão. Você DEVE avaliar a essência do negócio:
-   - Se for um negócio de paz, retiro, saúde mental, natureza, desaceleração ou cafés pacatos, o vencedor É OBRIGATORIAMENTE 'A Geografia do Silêncio'.
-   - Se for popular, de bairro, rápido, alimentação básica ou custo-benefício, o vencedor É 'Empreendedorismo Intuitivo'.
-   - Se for tradicional, conservador, voltado para famílias ou bairros nobres consolidados, É 'A Cidade Prometida'.
-   - Se for voltado para inovação tecnológica, design vanguardista, público tech/engenharia e cultura cosmopolita, É 'A Tribo Global'.
-   Para cada um dos 4 movimentos na chave 'analise_cards', escreva EXATAMENTE como aquele público específico reagiria à ideia (se rejeitaria ou amaria) com base nos dados do CSV.
-7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (```json).
+0. REGRA DE INTEGRIDADE QUANTITATIVA (ANTI-ALUCINAÇÃO ESTATÍSTICA): Você é EXPRESSAMENTE PROIBIDO de inventar porcentagens ou tentar calcular estatísticas do zero lendo as linhas do CSV. Para embasar suas análises e preencher os dados dos gráficos, você DEVE buscar e utilizar ESTRITAMENTE as métricas oficiais já calculadas no relatório (Ex: 66,2% de Evasão de Consumo; 75,8% gastariam mais se houvesse oferta; 84,7% saem regularmente; 32,3% barreira de preço/valor; 79,4% busca no Instagram; etc.). Copie o dado exato do documento e cite a fonte real.
+1. REGRA DE SANIDADE LÓGICA & FIT REALISTA: Adeque o seu tom e estratégia à REALIDADE da ideia e do local. Se o usuário sugerir um negócio popular (ex: Loja de Salgados, Marmitex, Barbearia de bairro, Oficina) em uma área popular (ex: Zona Norte, Zona Leste, bairros periféricos da Zona Sul), PARE de forçar narrativas de 'estética instagramável premium' ou focar na 'Tribo Global'. Use a estratégia correta: foco em giro rápido, custo-benefício, delivery, movimento 'Cidade Prometida' ou 'Empreendedorismo Intuitivo'. Respeite a classe social e a geografia real da ideia proposta.
+2. TRAVA DE NARRATIVA (PROIBIDO DATA-DUMP): É TERMINANTEMENTE PROIBIDO listar porcentagens como uma lista de compras (ex: "tem 40%, além de 20%, somando 15%"). O foco central do texto deve ser a PSICOLOGIA DO CONSUMIDOR, AS DORES OCULTAS, O COMPORTAMENTO E A CULTURA LOCAL. Os números do Radar SJC devem aparecer de forma elegante e comedida, servindo unicamente para PROVAR a tese analítica.
+3. TESE DE VIABILIDADE EM NEGRITO OBRIGATÓRIA: No meio do parágrafo de 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE escrever uma frase de impacto definitiva em formato Markdown Negrito (**frase**). Exemplo de padrão: "**O sucesso deste negócio em SJC não depende de preço, mas da capacidade de quebrar a barreira da mesmice e reter o consumidor que hoje foge para São Paulo.**"
+4. REGRA DE TITÂNIO (3 VERBALIZAÇÕES REAIS COM DEMOGRAFIA DO CSV): Na chave 'verbalizacoes_reais', você é ESTONTEANTEMENTE PROIBIDO de inventar, criar ou simular frases falsas. Você DEVE ler o contexto da pesquisa/CSV e EXTRAIR EXATAMENTE 3 objetos com citações reais (verbatims) do banco que tenham o MAIOR FIT com o nicho de mercado da ideia sugerida, atrelando a faixa etária, região e renda de cada respondente extraídos estritamente do perfil do CSV.
+5. TRAVA GEOGRÁFICA (ZONA DE EXCLUSÃO OBRIGATÓRIA E DENSA): A chave 'zona_exclusao' NÃO PODE ser apenas o nome de um bairro. Ela DEVE conter o nome da região seguido de um PARÁGRAFO EXPLICATIVO E DURO (40-60 palavras) detalhando por que a ideia fracassaria e queimaria caixa naquele local (choque com a cultura tradicional familiar da Cidade Prometida, falta de lastro de renda, dispersão de fluxo, etc.).
+6. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas e contextualizadas cruzando renda, idade e o movimento cultural correspondente.
+7. REGRA DESTRUIDORA DE VIÉS & BÍBLIA DOS 4 MOVIMENTOS CULTURAIS: Você está PROIBIDO de escolher 'A Tribo Global' como vencedor por padrão. Você DEVE julgar o negócio à luz das definições oficiais dos 4 Movimentos Culturais:
+   - **A Geografia do Silêncio**: Escolha se o negócio for de paz, tranquilidade, harmonia, família tradicional, conformismo, desaceleração, cafés sossegados ou refúgio.
+   - **A Cidade Prometida**: Escolha se o negócio for inovador com apelo de alta performance tecnológica, engenharia, legado industrial/aeroespacial ou exigência de padrão sem abrir mão de bases familiares consolidadas.
+   - **A Tribo Global**: Escolha se for alta gastronomia, estética cosmopolita internacional, vanguarda de design, público tech/early-adopter que hoje evade para SP.
+   - **Empreendedorismo Intuitivo**: Escolha se for a economia real de bairro, pragmatismo, comida popular, resolução rápida por WhatsApp, delivery ágil e foco em custo-benefício.
+   Na chave 'analise_cards', cruze a ideia com CADA UMA das 4 definições oficiais (explicando reação de amor ou rejeição de cada público).
+8. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (```json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
@@ -184,14 +186,14 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   },
   "movimentos_culturais": {
     "analise_cards": {
-      "geografia_silencio": "Escreva 2 linhas analisando como o público que busca sossego, refúgio e áreas verdes em SJC recebe esta ideia com base no CSV.",
-      "cidade_prometida": "Escreva 2 linhas analisando como o público familiar conservador da Zona Sul/Colinas recebe a ideia, apontando fit ou riscos morais.",
-      "tribo_global": "Escreva 2 linhas analisando a recepção pelo público cosmopolita, engenheiros, tech e que busca estética diferenciada em SJC.",
-      "empreendedorismo_intuitivo": "Escreva 2 linhas analisando o fit com a economia real dos bairros, conveniência rápida e consumo prático local."
+      "geografia_silencio": "Escreva 2 linhas analisando a reação da persona de harmonia, conformismo, segurança e família tradicional ('A Geografia do Silêncio') perante a ideia com base no estudo.",
+      "cidade_prometida": "Escreva 2 linhas analisando a reação dos entusiastas de tecnologia, alta performance e legado joseense ('A Cidade Prometida') perante a proposta.",
+      "tribo_global": "Escreva 2 linhas analisando a reação da elite cosmopolita e tech que hoje evade para São Paulo ('A Tribo Global').",
+      "empreendedorismo_intuitivo": "Escreva 2 linhas analisando o fit com a economia real de bairro, pragmatismo, rapidez e custo-benefício ('Empreendedorismo Intuitivo')."
     },
     "veredicto_final": {
-      "nome_movimento": "A Tribo Global",
-      "justificativa_densa": "Um parágrafo forte explicando por que este movimento é o porto seguro do negócio e como capturar esse público específico com base no CSV de SJC."
+      "nome_movimento": "Nome Exato do Movimento Vencedor (Ex: Empreendedorismo Intuitivo)",
+      "justificativa_densa": "Um parágrafo forte e denso cruzando a essência do negócio com a definição oficial do movimento vencedor e as métricas do estudo municipal."
     }
   },
   "graficos_analiticos": [
@@ -210,10 +212,10 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
         "type": "doughnut",
         "title": "Paradoxo de Evasão vs Consumo em SJC",
         "labels": ["Evadem para SP/Litoral", "Consomem em SJC"],
-        "data": [64.7, 35.3]
+        "data": [66.2, 33.8]
       },
       "pergunta_origem": "Você costuma consumir serviços gastronômicos e culturais fora de São José dos Campos? (Evasão)",
-      "parecer_analitico": "Parecer analítico relacionando a retenção de consumo com o apelo de novidade e sofisticação."
+      "parecer_analitico": "Parecer analítico relacionando a retenção de consumo (66.2% de evasão) com o apelo de novidade e sofisticação."
     },
     {
       "chart_data": {
