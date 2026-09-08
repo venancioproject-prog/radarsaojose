@@ -6887,20 +6887,31 @@ window.renderExecutiveReport = function(topic, text, customDate) {
   const formatMarkdown = (txt, strongClass = "text-slate-900 font-bold") => {
     if (!txt) return "";
     let clean = txt
-      // Remover tags e prefixos residuais de asteriscos no início das linhas ou frases
-      .replace(/^\s*(\*\*|\*|-|•)\s*/gm, "")
+      // 1. Descartar linhas de tabela markdown cruas (ex: |---|---| ou | Bairro | Região |) se vazaram
+      .replace(/^\s*\|[-:\s|]+\|\s*$/gm, "")
+      .replace(/^\s*\|\s*(bairro|regi[aã]o|motivo|fit|por que)[\s\S]*?\|\s*$/gim, "")
+      // 2. Remover pipes residuais soltos de início/fim de linha
+      .replace(/^\s*\|\s*/gm, "")
+      .replace(/\s*\|\s*$/gm, "")
+      .replace(/\|/g, " • ")
+      // 3. Limpar asteriscos e marcadores órfãos no início e fim de linhas
+      .replace(/^\s*(\*\*|\*|-|•|–)\s*/gm, "")
       .replace(/(\*\*|\*)\s*$/gm, "")
       .replace(/\*\*:\s*/g, ": ")
       .replace(/\*\*\s*\*\*/g, "")
-      // Formatar negrito real (texto entre asteriscos duplos)
-      .replace(/\*\*(.*?)\*\*/g, `<strong class='${strongClass}'>$1</strong>`)
-      // Formatar listas
-      .replace(/^[\*\-•]\s+(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+      // 4. Formatar negrito real com tratamento defensivo para asteriscos não pareados
+      .replace(/\*\*([^*]+)\*\*/g, `<strong class='${strongClass}'>$1</strong>`)
+      .replace(/\*([^*]+)\*/g, `<em class='text-slate-800 font-medium'>$1</em>`)
+      // 5. Remover quaisquer asteriscos órfãos remanescentes
+      .replace(/\*\*/g, "")
+      .replace(/(?<!\w)\*(?!\w)/g, "")
+      // 6. Formatar listas com marcadores
+      .replace(/^[\-•]\s+(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
       .replace(/^\d+\.\s+(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
       .replace(/\n\n/g, "<div class='my-2.5'></div>")
       .replace(/\n/g, "<br/>");
     
-    // Limpar resíduos finais de pontuação
+    // Limpar resíduos finais de pontuação e tags vazias
     return clean
       .replace(/<br\/>\s*<br\/>/g, "<div class='my-2.5'></div>")
       .replace(/^\s*<br\/>/g, "")
@@ -7057,40 +7068,83 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 </span>
               </div>
 
-              <div class="flex flex-wrap gap-1.5 pb-1">
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-900 text-white text-[11px] font-bold shadow-2xs">
-                  <i class="fa-solid fa-map-pin text-accent-cyan text-[9px]"></i> Jd. Aquarius (Centro/Oeste)
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-900 text-white text-[11px] font-bold shadow-2xs">
-                  <i class="fa-solid fa-map-pin text-accent-cyan text-[9px]"></i> Vila Adyana & Ema (Centro/Oeste)
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 text-white text-[11px] font-bold shadow-2xs">
-                  <i class="fa-solid fa-map-pin text-sky-400 text-[9px]"></i> Jd. Satélite (Zona Sul)
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 text-white text-[11px] font-bold shadow-2xs">
-                  <i class="fa-solid fa-map-pin text-sky-400 text-[9px]"></i> Urbanova (Oeste)
-                </span>
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-700 text-white text-[11px] font-bold shadow-2xs">
-                  <i class="fa-solid fa-map-pin text-amber-400 text-[9px]"></i> Vila Industrial (Leste)
-                </span>
-              </div>
-
-              <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-3 pt-1">
+              <div class="space-y-2.5 pt-1">
                 ${(() => {
-                  if (!bairrosContent) return 'Análise de microterritórios prioritários com base em densidade de renda e fluxo de consumo em São José dos Campos.';
+                  if (!bairrosContent) return '<p class="text-xs text-slate-500 italic">Análise de microterritórios prioritários com base em densidade de renda e fluxo de consumo em São José dos Campos.</p>';
                   
-                  // Se os itens de bairros estão em lista com traço ou quebra de linha simples, separar em blocos individuais
-                  let items = bairrosContent.split(/\n+/).map(l => l.trim()).filter(l => l.length > 5 && !l.startsWith('###') && l !== '--');
-                  
-                  if (items.length > 0) {
-                    return items.map(item => `
-                      <div class="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 shadow-2xs leading-relaxed">
-                        ${formatMarkdown(item)}
-                      </div>
-                    `).join('');
+                  // Limpar linhas vazias ou rascunhos de cabeçalhos de tabela (| Bairro | Região | Motivo |)
+                  let rawLines = bairrosContent.split(/\n+/).map(l => l.trim()).filter(l => {
+                    if (!l || l.length < 4 || l.startsWith('###') || l === '--') return false;
+                    if (l.match(/^\|[-:\s|]+\|$/)) return false; // separador |---|---|
+                    if (l.match(/^\|\s*(bairro|regi[aã]o|motivo|fit|por que)/i)) return false; // cabeçalho da tabela
+                    return true;
+                  });
+
+                  if (rawLines.length > 0) {
+                    return rawLines.map((line, bIdx) => {
+                      let bName = "";
+                      let bReg = "";
+                      let bDesc = "";
+
+                      // Se veio em formato de linha de tabela markdown (| Bairro | Região | Motivo |)
+                      if (line.includes('|')) {
+                        const cols = line.split('|').map(c => c.trim()).filter(Boolean);
+                        if (cols.length >= 3) {
+                          bName = cols[0];
+                          bReg = cols[1];
+                          bDesc = cols.slice(2).join(' - ');
+                        } else if (cols.length === 2) {
+                          bName = cols[0];
+                          bDesc = cols[1];
+                        } else if (cols.length === 1) {
+                          bDesc = cols[0];
+                        }
+                      } 
+                      // Se veio em formato de lista: - **Nome** (Região): Motivo
+                      else {
+                        const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(]+)(?:\*\*)?\s*(?:\(([^)]+)\))?\s*:?\s*([\s\S]*)$/);
+                        if (match) {
+                          bName = (match[1] || "").trim();
+                          bReg = (match[2] || "").trim();
+                          bDesc = (match[3] || "").trim();
+                        } else {
+                          bDesc = line;
+                        }
+                      }
+
+                      // Limpezas adicionais
+                      bName = bName.replace(/^\d+[\.\-\)]\s*/, '').replace(/[\*\:]+/g, '').trim();
+                      bReg = bReg.replace(/[\*\(\)]+/g, '').trim();
+                      if (!bReg) {
+                        const lowName = bName.toLowerCase();
+                        if (lowName.includes('aquarius') || lowName.includes('adyana') || lowName.includes('ema') || lowName.includes('esplanada') || lowName.includes('colinas')) bReg = 'Centro-Oeste';
+                        else if (lowName.includes('satélite') || lowName.includes('satelite') || lowName.includes('bosque') || lowName.includes('oriente') || lowName.includes('sul')) bReg = 'Zona Sul';
+                        else if (lowName.includes('urbanova') || lowName.includes('oeste')) bReg = 'Zona Oeste';
+                        else if (lowName.includes('industrial') || lowName.includes('leste') || lowName.includes('vista') || lowName.includes('melo')) bReg = 'Zona Leste';
+                        else if (lowName.includes('santana') || lowName.includes('norte')) bReg = 'Zona Norte';
+                        else bReg = 'SJC';
+                      }
+
+                      return `
+                        <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
+                          <div class="flex items-center justify-between">
+                            <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
+                              <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
+                              ${bName || `Microterritório 0${bIdx + 1}`}
+                            </span>
+                            <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">
+                              ${bReg}
+                            </span>
+                          </div>
+                          <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                            ${formatMarkdown(bDesc || line)}
+                          </p>
+                        </div>
+                      `;
+                    }).join('');
                   }
                   
-                  return formatMarkdown(bairrosContent);
+                  return `<div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 text-xs text-slate-700">${formatMarkdown(bairrosContent)}</div>`;
                 })()}
               </div>
             </div>
