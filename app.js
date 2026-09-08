@@ -6738,8 +6738,15 @@ window.handleConsultorSubmit = async function(e) {
       context: contextData
     })
   }).then(async res => {
-    const data = await res.json().catch(() => ({}));
-    return { ok: res.ok, status: res.status, data };
+    let data = {};
+    let rawText = "";
+    try {
+      rawText = await res.text();
+      data = JSON.parse(rawText);
+    } catch (eParse) {
+      data = { rawText: rawText };
+    }
+    return { ok: res.ok, status: res.status, data, rawText };
   }).catch(err => {
     return { ok: false, status: 500, error: err };
   });
@@ -6750,7 +6757,8 @@ window.handleConsultorSubmit = async function(e) {
     if (loadingProgressBar) loadingProgressBar.style.width = "100%";
 
     if (!result.ok) {
-      const errorMsg = result.data?.error || result.data?.details || result.error?.message || `Erro HTTP ${result.status} ao conectar ao backend (/api/consultor).`;
+      console.error("[Consultor Backend Error]", result);
+      const errorMsg = result.data?.error || result.data?.details || result.data?.rawText || result.error?.message || `Erro HTTP ${result.status} na rota /api/consultor`;
       alert("Erro ao gerar relatório:\n" + errorMsg);
       return;
     }
