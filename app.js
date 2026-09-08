@@ -6874,11 +6874,12 @@ window.renderExecutiveReport = function(topic, text, customDate) {
   const formatMarkdown = (txt) => {
     if (!txt) return "";
     let clean = txt
-      // Limpar asteriscos órfãos e traços soltos no início ou meio
-      .replace(/^\s*[\*\-•]\s*$/gm, "")
-      .replace(/^\s*\*\*\s*$/gm, "")
+      // Remover tags e prefixos residuais de asteriscos no início das linhas ou frases
+      .replace(/^\s*(\*\*|\*|-|•)\s*/gm, "")
+      .replace(/(\*\*|\*)\s*$/gm, "")
+      .replace(/\*\*:\s*/g, ": ")
       .replace(/\*\*\s*\*\*/g, "")
-      // Formatar negrito
+      // Formatar negrito real (texto entre asteriscos duplos)
       .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
       // Formatar listas
       .replace(/^[\*\-•]\s+(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
@@ -6886,10 +6887,13 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       .replace(/\n\n/g, "<div class='my-2.5'></div>")
       .replace(/\n/g, "<br/>");
     
-    // Limpar resíduos finais
+    // Limpar resíduos finais de pontuação
     return clean
       .replace(/<br\/>\s*<br\/>/g, "<div class='my-2.5'></div>")
-      .replace(/<strong class='text-slate-900 font-bold'><\/strong>/g, "");
+      .replace(/^\s*<br\/>/g, "")
+      .replace(/<strong class='text-slate-900 font-bold'><\/strong>/g, "")
+      .replace(/:\s*<br\/>/g, ": ")
+      .trim();
   };
 
   // Helper para extrair blocos de texto por títulos/marcadores com regex super flexível
@@ -6902,8 +6906,10 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       const match = fullText.match(regex);
       if (match && match[1]) {
         let res = match[1].trim();
-        // Remove pontuações soltas no final
-        res = res.replace(/^[:\-\s]+/, '').trim();
+        // Remove asteriscos órfãos e pontuações soltas no início
+        res = res.replace(/^(\*\*|\*|:|\-|\s)+/, '').trim();
+        // Remove asteriscos residuais sozinhos
+        res = res.replace(/^\*\*\s*/gm, '').trim();
         if (res.length > 0) return res;
       }
       return '';
@@ -7119,34 +7125,52 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <!-- Político -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
-                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">POLÍTICO</span>
-                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelPolitico) || 'Análise regulatória em SJC.'}</p>
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <span class="text-base">🏛️</span>
+                  <span>POLÍTICO</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelPolitico) || 'Análise regulatória e diretrizes municipais de SJC.'}</div>
               </div>
               <!-- Econômico -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
-                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">ECONÔMICO</span>
-                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelEconomico) || 'Impacto de renda e inflação.'}</p>
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 text-emerald-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <span class="text-base">📈</span>
+                  <span>ECONÔMICO</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelEconomico) || 'Renda média e poder aquisitivo familiar local.'}</div>
               </div>
               <!-- Social -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
-                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">SOCIAL</span>
-                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelSocial) || 'Comportamento e demografia.'}</p>
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 text-sky-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <span class="text-base">👥</span>
+                  <span>SOCIAL</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelSocial) || 'Comportamento de evasão e identidade comunitária.'}</div>
               </div>
               <!-- Tecnológico -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
-                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">TECNOLÓGICO</span>
-                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelTecnologico) || 'Digitalização e canais.'}</p>
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 text-purple-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <span class="text-base">⚡</span>
+                  <span>TECNOLÓGICO</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelTecnologico) || 'Adoção digital, conectividade e canais online.'}</div>
               </div>
               <!-- Ambiental -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
-                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">AMBIENTAL</span>
-                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelAmbiental) || 'Sustentabilidade e insumos.'}</p>
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 text-teal-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <span class="text-base">🌿</span>
+                  <span>AMBIENTAL</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelAmbiental) || 'Sustentabilidade, calmaria e integração verde.'}</div>
               </div>
               <!-- Legal -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
-                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">LEGAL</span>
-                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelLegal) || 'Conformidade e licenças.'}</p>
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
+                <div class="flex items-center gap-2 text-amber-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                  <span class="text-base">⚖️</span>
+                  <span>LEGAL</span>
+                </div>
+                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelLegal) || 'Conformidade jurídica, alvarás e regras urbanas.'}</div>
               </div>
             </div>
           </div>
