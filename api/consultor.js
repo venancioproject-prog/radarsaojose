@@ -61,32 +61,35 @@ export default async function handler(req, res) {
    - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
    - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, conveniência e consumo prático local (Zona Sul, Norte, Leste).`;
 
-    const systemPrompt = `Você é o Head de Estratégia e Comportamento do Consumidor (Padrão Bain & Company / McKinsey). O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica focada em PSICOLOGIA DO CONSUMIDOR, DORES DE MERCADO, BARREIRAS INVISÍVEIS E CULTURA LOCAL de São José dos Campos (N=477, IC=95%).
+    const systemPrompt = `Você é o Lead Data Scientist e Consultor Sênior de Estratégia de Mercado (Padrão Bain & Company / McKinsey). O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica de ALTO RIGOR ANALÍTICO baseada no CSV municipal de São José dos Campos (N=477, IC=95%).
 
 ${marketBriefSJC}
 
-REGRAS DE OURO (ANTI-CENSO / ANTI-IBGE):
-1. FIM DO RELATÓRIO MERAMENTE DEMOGRÁFICO: Você DEVE analisar o cruzamento de dados psicográficos, dores de mercado, barreiras de consumo e cultura local presentes no CSV. É PROIBIDO basear o veredicto apenas em faixas de renda ou idade.
-2. TESE DE VIABILIDADE EM NEGRITO (**frase**): No campo 'visao_estrategica_texto', você DEVE incluir uma frase principal, impactante e definitiva em formato Markdown Negrito (**frase**) no meio do texto, resumindo a tese executiva de viabilidade.
-3. PROIBIDO GRÁFICOS GENÉRICOS DE RENDA/IDADE NO VEREDICTO: No campo 'grafico_validacao', é TERMINANTEMENTE PROIBIDO gerar gráficos de "Distribuição de Renda", "Gênero" ou "Faixa Etária". Você DEVE gerar um gráfico sobre dados de comportamento, motivos de evasão (64.7%), barreiras de consumo (mesmice 18.6%, caro p/ o que oferece 32.3%, falta de autorais 22.9%), critérios de escolha de ambiente (38.9%), estética instagramável (46.8%) ou disposição a gastar mais (78.8%).
-4. NO FINAL DO PARÁGRAFO: Faça referência obrigatória e fluida aos números do 'grafico_validacao' gerado abaixo.
-5. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
+REGRAS DE OURO E TRAVAS ANALÍTICAS OBRIGATÓRIAS (FOCO NOS BLOCOS 1 E 2):
+1. FIM DA MULETA DO PARADOXO: É TERMINANTEMENTE PROIBIDO usar o argumento clichê de "tem orgulho, mas foge para a capital", a menos que a ideia seja EXCLUSIVAMENTE de lazer/vida noturna. Para qualquer outro negócio (lojas, clínicas, alimentação rápida, serviços, academia, moda, etc.), você DEVE garimpar o CSV em busca de ângulos inovadores, dores reais e carências não óbvias (ex: falta de locais pet-friendly 68.2%, valorização de estética 46.8%, demanda por ambiente acolhedor 38.9%, disposição a gastar mais 78.8%, canais de influência, mobilidade, etc.).
+2. RASTREABILIDADE TOTAL DE DADOS: Toda vez que você citar qualquer porcentagem no texto da 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE citar a pergunta de origem no formato exato: (Pergunta: "Texto da pergunta no CSV" - Radar SJC).
+3. TESE DE VIABILIDADE EM NEGRITO (**frase**): No campo 'visao_estrategica_texto', você DEVE incluir uma frase principal, impactante e definitiva em formato Markdown Negrito (**frase**) no meio do texto, resumindo a tese executiva.
+4. VERBALIZAÇÃO QUALITATIVA (VERBATIM): No campo 'verbalizacao_pesquisa', formule ou cite uma frase entre aspas simulando a voz real de um respondente da pesquisa que expresse a dor ou a demanda que este negócio vem suprir em SJC.
+5. FIT GEOGRÁFICO SEM ACHISMOS: No campo 'bairros', a justificativa de cada bairro DEVE ser estritamente baseada nos dados de renda, faixa etária, fluxo de consumo e fit com os Movimentos Culturais do CSV. Zero inferências genéricas.
+6. TÍTULO DO GRÁFICO DE VALIDAÇÃO: O título de 'grafico_validacao' DEVE conter a pergunta exata da pesquisa que valida a tese.
+7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
-  "visao_estrategica_texto": "Escreva um parágrafo denso e analítico (aprox. 150 palavras) focado em psicologia do consumidor, barreiras invisíveis (ex: sensação de mesmice, evasão para outras cidades) e aderência ao mercado local. **OBRIGATÓRIO: Você DEVE incluir uma frase principal, impactante e definitiva em formato Markdown Negrito (**frase**) no meio do texto, resumindo a tese de viabilidade.** Esqueça a demografia básica; traga insights de comportamento. Termine fazendo referência ao gráfico comportamental gerado abaixo.",
+  "visao_estrategica_texto": "Um parágrafo longo, INÉDITO, denso e profundo (aprox. 150 palavras) explorando o CSV. Proibido clichês de evasão caso o negócio não seja vida noturna. Toda porcentagem DEVE citar a pergunta no formato: (Pergunta: \"Texto da pergunta no CSV\" - Radar SJC). Deve conter uma frase principal em **negrito**. No final, faça referência aos dados do gráfico abaixo.",
   "grafico_validacao": {
-    "titulo": "TÍTULO DO GRÁFICO (Foco Comportamental, Dores, Barreiras ou Evasão)",
+    "titulo": "TÍTULO DO GRÁFICO (Obrigatório: Incluir a Pergunta Exata da Pesquisa)",
     "type": "bar",
-    "labels": ["Barreira A", "Comportamento B", "Motivação C"],
-    "data": [45, 30, 25]
+    "labels": ["Dado 1", "Dado 2", "Dado 3"],
+    "data": [10, 20, 30]
   },
+  "verbalizacao_pesquisa": "\"Citação direta entre aspas simulando a resposta aberta de um respondente que justifique a necessidade deste negócio em SJC.\"",
   "bairros": [
-    { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Motivo comportamental e técnico baseado no perfil de consumo do CSV..." },
-    { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Motivo comportamental técnico baseado no CSV..." },
-    { "nome": "Nome do Bairro 3", "regiao": "Região", "justificativa": "Motivo comportamental..." },
-    { "nome": "Nome do Bairro 4", "regiao": "Região", "justificativa": "Motivo comportamental..." },
-    { "nome": "Nome do Bairro 5", "regiao": "Região", "justificativa": "Motivo comportamental..." }
+    { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Análise estritamente focada em dados geográficos, demográficos (renda/idade) do CSV e o fit com os Movimentos Culturais. Zero inferências sem base." },
+    { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Análise focada em dados do CSV..." },
+    { "nome": "Nome do Bairro 3", "regiao": "Região", "justificativa": "Análise focada em dados do CSV..." },
+    { "nome": "Nome do Bairro 4", "regiao": "Região", "justificativa": "Análise focada em dados do CSV..." },
+    { "nome": "Nome do Bairro 5", "regiao": "Região", "justificativa": "Análise focada em dados do CSV..." }
   ],
   "zona_exclusao": "Bairro/Região onde NUNCA abrir este negócio em SJC e o porquê detalhado com base no atrito cultural.",
   "swot": {

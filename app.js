@@ -6953,6 +6953,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
   if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
   if (typeof data.zona_exclusao === 'object') data.zona_exclusao = JSON.stringify(data.zona_exclusao);
+  if (typeof data.verbalizacao_pesquisa === 'object') data.verbalizacao_pesquisa = JSON.stringify(data.verbalizacao_pesquisa);
 
   const dynamicChartsToRender = [];
 
@@ -6993,7 +6994,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   let htmlOutput = `
     <!-- LINHA 1: VISÃO ESTRATÉGICA & TOP 5 BAIRROS -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO (TEXTO EXECUTIVO CORRIDO + GRÁFICO DE VALIDAÇÃO) -->
+      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO (TEXTO EXECUTIVO CORRIDO + GRÁFICO DE VALIDAÇÃO + VERBATIM) -->
       <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
         <div class="space-y-4">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -7017,12 +7018,14 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 
           <!-- GRÁFICO DINÂMICO DE VALIDAÇÃO CONECTADO À ANÁLISE -->
           <div class="mt-4 p-4 sm:p-5 bg-gradient-to-b from-slate-50/90 via-slate-50 to-slate-100/70 rounded-2xl border border-slate-200/90 shadow-2xs space-y-3 flex-1 flex flex-col justify-between min-h-[280px]">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-200/80">
-              <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2 font-mono">
-                <i class="fa-solid fa-chart-column text-accent-cyan text-sm"></i>
-                ${primaryChartConfig.title}
-              </span>
-              <span class="text-[9px] font-mono font-black px-2 py-0.5 rounded-md bg-brand-900 text-accent-cyan border border-brand-800 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-slate-200/80">
+              <div class="flex items-start gap-2 flex-1">
+                <i class="fa-solid fa-chart-column text-accent-cyan text-sm mt-0.5 shrink-0"></i>
+                <span class="text-xs font-black uppercase tracking-wide text-brand-950 leading-snug">
+                  ${primaryChartConfig.title}
+                </span>
+              </div>
+              <span class="text-[9px] font-mono font-black px-2 py-0.5 rounded-md bg-brand-900 text-accent-cyan border border-brand-800 shadow-2xs shrink-0 self-start sm:self-center">
                 AMOSTRA N=477
               </span>
             </div>
@@ -7030,6 +7033,19 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
               <canvas id="${primaryChartCanvasId}"></canvas>
             </div>
           </div>
+
+          <!-- VERBALIZAÇÃO QUALITATIVA (VOZ DO RESPONDENTE / PESQUISA) -->
+          ${data.verbalizacao_pesquisa ? `
+            <div class="p-3.5 sm:p-4 bg-gradient-to-r from-amber-50/90 via-amber-50/60 to-orange-50/40 rounded-2xl border border-amber-200/90 shadow-2xs space-y-1.5">
+              <div class="flex items-center gap-2 text-amber-900 font-mono font-bold text-[10px] uppercase tracking-wider">
+                <i class="fa-solid fa-quote-left text-amber-600 text-xs"></i>
+                <span>VERBATIM / VOZ DO RESPONDENTE (RADAR SJC)</span>
+              </div>
+              <p class="text-xs text-slate-800 italic leading-relaxed font-medium">
+                ${formatMarkdown(data.verbalizacao_pesquisa)}
+              </p>
+            </div>
+          ` : ''}
         </div>
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
