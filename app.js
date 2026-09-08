@@ -7138,7 +7138,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     movimentosObj.analise_cards.empreendedorismo_intuitivo = "Economia real dos bairros, prestadores de serviço e demanda por conveniência rápida (Zona Sul/Leste/Norte).";
   }
   if (!movimentosObj.veredicto_final.justificativa_densa) {
-    movimentosObj.veredicto_final.justificativa_densa = "Posicionamento estratégico prioritário com base nas dinâmicas de evasão (66,2%) e demanda reprimida levantadas no estudo municipal Radar São José.";
+    const topic = (window.currentAuditedTopic || "A proposta de negócio analisada").trim();
+    movimentosObj.veredicto_final.justificativa_densa = `${topic} encontra seu ponto de ancoragem prioritário no movimento ${movimentosObj.veredicto_final.nome_movimento}, alinhando sua curva de valor à demanda reprimida e às características demográficas e de consumo de São José dos Campos.`;
   }
 
   // Processamento e Normalização das Matrizes Estratégicas (VRIO & 5 Forças de Porter)

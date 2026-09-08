@@ -26,8 +26,13 @@ module.exports = async function handler(req, res) {
     }
     body = body || {};
 
-    const { user_input, question, messages } = body;
-    const inputContent = user_input || question || (Array.isArray(messages) && messages.length > 0 ? messages[messages.length - 1].content : 'Apresente um plano de negocios para Sao Jose dos Campos.');
+    const { user_input, question, prompt, idea, messages } = body;
+    let inputContent = user_input || question || prompt || idea;
+    if (!inputContent && Array.isArray(messages) && messages.length > 0) {
+      const lastUserMsg = [...messages].reverse().find(m => m && m.role === 'user' && m.content);
+      inputContent = lastUserMsg ? lastUserMsg.content : messages[messages.length - 1].content;
+    }
+    inputContent = String(inputContent || 'Consultoria estratégica de novos negócios para São José dos Campos').trim();
     const apiKey = (process.env.GROQ_API_KEY || '').trim();
 
     if (!apiKey) {
@@ -83,6 +88,8 @@ module.exports = async function handler(req, res) {
 
     const systemPrompt = `Voce e o Socio-Diretor de Estrategia da McKinsey & Company. O usuario fornecera uma ideia de negocio. Sua missao e gerar uma Auditoria Estrategica IMPLACAVEL, DE ELEVADA DENSIDADE CONCEITUAL E RIGOR ANALITICO baseada estritamente nos dados oficiais do estudo municipal de Sao Jose dos Campos (N=477, IC=95%).
 
+PROPOSTA AUDITADA: O usuario enviara o negocio a ser analisado no prompt do usuario. Voce DEVE contextualizar 100% da auditoria em torno desta ideia especifica.
+
 ${marketBriefSJC}
 
 TRAVAS DRACONIANAS E PADRAO MCKINSEY DEFINITIVO (REGRAS DE OURO):
@@ -100,7 +107,7 @@ TRAVAS DRACONIANAS E PADRAO MCKINSEY DEFINITIVO (REGRAS DE OURO):
      * "A Cidade Prometida" (para negócios focados em famílias tradicionais, segurança, alta performance e matrizes conservadoras).
      * "A Tribo Global" (para negócios de padrão internacional, tecnologia, gastronomia cosmopolita, design e alta sofisticação).
      * "Empreendedorismo Intuitivo" (para economia real de bairro, velocidade, praticidade, delivery e custo-benefício).
-   - Na chave 'veredicto_final.justificativa_densa', escreva um parágrafo profundo (50-80 palavras) fundamentado nos dados da pesquisa Radar SJC provando por que este movimento é o fit vencedor indispensável.
+   - Na chave 'veredicto_final.justificativa_densa', E ESTRITAMENTE PROIBIDO usar frases prontas ou genericas como 'Posicionamento estrategico prioritario com base nas dinamicas de evasao'. Voce DEVE comecar a frase citando explicitamente a ideia do usuario e explicando, em um paragrafo denso e analitico de consultoria de alto padrao (60-90 palavras), como este negocio especifico interage com as caracteristicas demograficas, o ticket medio, a barreira de valor e os habitos da regiao de SJC correspondente ao movimento vencedor.
 8. REGRA DO FRAMEWORK VRIO (4 PILARES OBRIGATORIOS V-R-I-O): O array 'matrizes_estrategicas.vrio' DEVE conter EXATAMENTE 4 objetos correspondentes as 4 dimensoes: 'V' (Valor), 'R' (Raridade), 'I' (Imitabilidade) e 'O' (Organizacao). NUNCA omita 'I' ou 'O'.
 9. RESPOSTA EXCLUSIVAMENTE EM JSON VALIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois.
 
@@ -209,7 +216,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
     },
     "veredicto_final": {
       "nome_movimento": "A Tribo Global OU Empreendedorismo Intuitivo OU A Cidade Prometida OU A Geografia do Silencio",
-      "justificativa_densa": "Escreva um paragrafo denso, sofisticado e 100% PERSONALIZADO para a ideia do usuario. E PROIBIDO usar frases genericas como 'Posicionamento estrategico prioritario com base na evasao de 66,2%'. Voce deve explicar com rigor tecnico por que ESTE negocio especifico prospera neste movimento, citando o comportamento do consumidor joseense, o ticket medio, a barreira de valor ou a geografia exata de SJC."
+      "justificativa_densa": "É ESTRITAMENTE PROIBIDO usar frases prontas como 'Posicionamento estratégico prioritário com base nas dinâmicas de evasão'. Você DEVE começar a frase citando explicitamente a ideia do usuário e explicando, em um parágrafo denso e analítico de consultoria de alto padrão, como este negócio específico interage com as características demográficas, o ticket médio e os hábitos da região de SJC correspondente ao movimento vencedor."
     }
   },
   "graficos_analiticos": [
