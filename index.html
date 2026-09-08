@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -78,6 +78,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #F8FAFC;
@@ -380,7 +383,8 @@
             </div>
           </div>
 
-          <!-- Totalizador de Respondentes Filtrados -->
+          <div id="sidebar-filters-container" class="space-y-5">
+<!-- Totalizador de Respondentes Filtrados -->
           <div class="bg-brand-50/60 rounded-xl p-3 border border-brand-100">
             <p class="text-[10px] font-bold uppercase tracking-wider text-brand-800">População Filtrada</p>
             <div class="flex items-baseline gap-1 mt-0.5">
@@ -503,6 +507,125 @@
             </div>
 
           </div>
+          </div>
+
+          <!-- ========================================== -->
+          <!-- ÍNDICE DINÂMICO DO RELATÓRIO COMPLETO (TOC) -->
+          <!-- ========================================== -->
+          <nav id="sidebar-report-index" class="hidden space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <span class="text-[10px] font-black uppercase tracking-wider text-brand-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-list-ol text-accent-cyan"></i>
+                Índice Executivo
+              </span>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-brand-50 text-brand-700">183 Slides</span>
+            </div>
+
+            <div class="space-y-1 text-xs font-semibold max-h-[calc(100vh-16rem)] overflow-y-auto pr-1">
+              <a href="#rep-capa" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-flag text-[11px] text-slate-400"></i>
+                <span class="truncate">Capa & Identificação</span>
+              </a>
+
+              <a href="#rep-contexto" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-city text-[11px] text-slate-400"></i>
+                <span class="truncate">Contexto SJC & Desafio</span>
+              </a>
+
+              <div class="pt-2 pb-1 text-[10px] font-black uppercase tracking-wider text-slate-400 px-3">Capítulo 01 • Quantitativo</div>
+
+              <a href="#rep-capitulo-1" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-chart-simple text-[11px] text-brand-600"></i>
+                <span class="truncate">Mapa do Consumo</span>
+              </a>
+
+              <a href="#rep-paradoxo" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-scale-unbalanced text-[11px] text-rose-500"></i>
+                <span class="truncate">Paradoxo: Orgulho vs Evasão</span>
+              </a>
+
+              <a href="#rep-fluxo-lazer" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-diagram-project text-[11px] text-cyan-600"></i>
+                <span class="truncate">Fluxo do Lazer (Sankey)</span>
+              </a>
+
+              <a href="#rep-radiografia-regional" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-map-location-dot text-[11px] text-amber-600"></i>
+                <span class="truncate">Radiografia das Regiões</span>
+              </a>
+
+              <a href="#rep-genero-geracoes" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-users text-[11px] text-purple-600"></i>
+                <span class="truncate">Gênero & Gerações</span>
+              </a>
+
+              <div class="pt-2 pb-1 text-[10px] font-black uppercase tracking-wider text-slate-400 px-3">Capítulo 02 • Qualitativo</div>
+
+              <a href="#rep-capitulo-2" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-brain text-[11px] text-brand-600"></i>
+                <span class="truncate">Mapa do Comportamento</span>
+              </a>
+
+              <a href="#rep-personagens" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-id-card-clip text-[11px] text-teal-600"></i>
+                <span class="truncate">10 Personagens de SJC</span>
+              </a>
+
+              <a href="#rep-insights-qualitativos" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-lightbulb text-[11px] text-amber-500"></i>
+                <span class="truncate">08 Insights Qualitativos</span>
+              </a>
+
+              <div class="pt-2 pb-1 text-[10px] font-black uppercase tracking-wider text-slate-400 px-3">Capítulo 04 • Movimentos</div>
+
+              <a href="#rep-capitulo-4" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-compass-drafting text-[11px] text-brand-600"></i>
+                <span class="truncate">Os 4 Movimentos Culturais</span>
+              </a>
+
+              <a href="#rep-mov-silencio" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all pl-5">
+                <i class="fa-solid fa-mountain-sun text-[10px] text-slate-500"></i>
+                <span class="truncate">1. Geografia do Silêncio</span>
+              </a>
+
+              <a href="#rep-mov-cidade-prometida" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all pl-5">
+                <i class="fa-solid fa-building-user text-[10px] text-blue-500"></i>
+                <span class="truncate">2. A Cidade Prometida</span>
+              </a>
+
+              <a href="#rep-mov-tribo-global" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all pl-5">
+                <i class="fa-solid fa-globe text-[10px] text-violet-500"></i>
+                <span class="truncate">3. A Tribo Global</span>
+              </a>
+
+              <a href="#rep-mov-emp-intuitivo" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all pl-5">
+                <i class="fa-solid fa-lightbulb text-[10px] text-emerald-500"></i>
+                <span class="truncate">4. Empreendedorismo Intuitivo</span>
+              </a>
+
+              <div class="pt-2 pb-1 text-[10px] font-black uppercase tracking-wider text-slate-400 px-3">Estratégia & Futuro</div>
+
+              <a href="#rep-insights-futuro" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-binoculars text-[11px] text-cyan-600"></i>
+                <span class="truncate">7 Insights para 2026/2027</span>
+              </a>
+
+              <a href="#rep-semaforo-playbook" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-traffic-light text-[11px] text-emerald-600"></i>
+                <span class="truncate">Semáforo & Playbook</span>
+              </a>
+
+              <a href="#rep-veredito-mapa-mina" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-gavel text-[11px] text-brand-900"></i>
+                <span class="truncate">O Veredito de São José</span>
+              </a>
+
+              <a href="#rep-50-ideias" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-slate-700 hover:text-brand-900 hover:bg-slate-100 transition-all">
+                <i class="fa-solid fa-gem text-[11px] text-amber-500"></i>
+                <span class="truncate">Mapa da Mina: 50 Ideias</span>
+              </a>
+            </div>
+          </nav>
         </div>
 
         <div class="pt-5 mt-5 border-t border-slate-100 text-[10px] text-slate-400 font-medium text-center">
@@ -701,7 +824,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 1 & 2: CAPA E IDENTIFICAÇÃO DO ESTUDO -->
         <!-- ========================================== -->
-        <header class="relative rounded-3xl overflow-hidden bg-brand-950 text-white shadow-2xl border border-brand-800/40 p-8 sm:p-14">
+        <header id="rep-capa" class="relative rounded-3xl overflow-hidden bg-brand-950 text-white shadow-2xl border border-brand-800/40 p-8 sm:p-14">
           <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" style="background-image: url('fotos radar/hero_bg.jpg');"></div>
           <div class="absolute inset-0 z-0 bg-gradient-to-r from-brand-950 via-brand-950/95 to-brand-900/85"></div>
 
@@ -728,7 +851,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 16: CONTEXTO SJC | SÃO JOSÉ: UMA POTÊNCIA EM TRANSIÇÃO -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-contexto" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDE 16</span>
@@ -1240,7 +1363,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 26: CAPÍTULO 01 - MAPA DO CONSUMO -->
         <!-- ========================================== -->
-        <article class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-6 text-center">
+        <article id="rep-capitulo-1" class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-6 text-center">
           <div class="flex items-center justify-center gap-3 pb-2">
             <span class="px-3 py-1 bg-accent-cyan text-brand-950 font-mono text-xs font-black rounded-lg">SLIDE 26</span>
             <span class="text-xs font-black uppercase tracking-widest text-slate-400">MOVIMENTOS | 2026</span>
@@ -1319,7 +1442,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 28 & 29: ORGULHO VS. EVASÃO - O PARADOXO DO CONSUMIDOR JOSEENSE -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-paradoxo" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 28-29</span>
@@ -1480,7 +1603,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 32: FLUXO DO LAZER EM SÃO JOSÉ & O IMPACTO DA EVASÃO -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-fluxo-lazer" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDE 32</span>
@@ -2516,7 +2639,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 56, 57 & 58: ANÁLISE URBANA & RADIOGRAFIA REGIONAL -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-radiografia-regional" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 56-58</span>
@@ -2681,7 +2804,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 59, 60 & 61: GÊNERO, AUTONOMIA E CRITÉRIOS DE ESCOLHA -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-genero-geracoes" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 59-61</span>
@@ -3175,7 +3298,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 72: CAPÍTULO 02 - MAPA DO COMPORTAMENTO -->
         <!-- ========================================== -->
-        <article class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-6 text-center">
+        <article id="rep-capitulo-2" class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-6 text-center">
           <div class="flex items-center justify-center gap-3 pb-2">
             <span class="px-3 py-1 bg-accent-cyan text-brand-950 font-mono text-xs font-black rounded-lg">SLIDE 72</span>
             <span class="text-xs font-black uppercase tracking-widest text-slate-400">MOVIMENTOS | 2026</span>
@@ -3191,7 +3314,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 73 & 74: ECOSSISTEMA DE PERSONAGENS (10 PERSPECTIVAS) -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-personagens" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 73-74</span>
@@ -3431,7 +3554,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 75: ABERTURA DOS 08 INSIGHTS QUALITATIVOS -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-6">
+        <article id="rep-insights-qualitativos" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-6">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDE 75</span>
@@ -4747,7 +4870,7 @@
 <!-- ========================================== -->
         <!-- SLIDE 114: CAPÍTULO 04 - OS QUATRO MOVIMENTOS CULTURAIS DE SÃO JOSÉ -->
         <!-- ========================================== -->
-        <article class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-6 text-center">
+        <article id="rep-capitulo-4" class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-6 text-center">
           <div class="flex items-center justify-center gap-3 pb-2">
             <span class="px-3 py-1 bg-accent-cyan text-brand-950 font-mono text-xs font-black rounded-lg">SLIDE 114</span>
             <span class="text-xs font-black uppercase tracking-widest text-slate-400">MOVIMENTOS | 2026</span>
@@ -4999,7 +5122,7 @@
         <!-- ========================================== -->
         <!-- SLIDES 121-130: MOVIMENTO 1 - A GEOGRAFIA DO SILÊNCIO -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-mov-silencio" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 121-130</span>
@@ -5160,7 +5283,7 @@
         <!-- ========================================== -->
         <!-- SLIDES 131-139: MOVIMENTO 2 - A CIDADE PROMETIDA -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-mov-cidade-prometida" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 131-139</span>
@@ -5299,7 +5422,7 @@
         <!-- ========================================== -->
         <!-- SLIDES 140-149: MOVIMENTO 3 - A TRIBO GLOBAL -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-mov-tribo-global" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 140-149</span>
@@ -5441,7 +5564,7 @@
         <!-- ========================================== -->
         <!-- SLIDES 150-159: MOVIMENTO 4 - O EMPREENDEDORISMO INTUITIVO -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-mov-emp-intuitivo" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 150-159</span>
@@ -5581,7 +5704,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 160, 161 & 162: INTEGRAÇÃO ESTRATÉGICA & 7 INSIGHTS PARA 2026/2027 -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-insights-futuro" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 160-162</span>
@@ -5672,7 +5795,7 @@
         <!-- ========================================== -->
         <!-- SLIDE 170 & 171: SEMÁFORO DE INVESTIMENTOS & PLAYBOOK GEOGRÁFICO -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-semaforo-playbook" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 170-171</span>
@@ -5796,7 +5919,7 @@
         <!-- ========================================== -->
         <!-- SLIDES 172-180: O VEREDITO DA CIDADE & O FUTURO DE SJC É AGORA -->
         <!-- ========================================== -->
-        <article class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-8">
+        <article id="rep-veredito-mapa-mina" class="bg-brand-950 text-white rounded-3xl p-8 sm:p-14 shadow-2xl border border-brand-800 space-y-8">
           <div class="flex items-center justify-between border-b border-brand-800 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-accent-cyan text-brand-950 font-mono text-xs font-black rounded-lg">SLIDES 172-180</span>
@@ -5876,7 +5999,7 @@
         <!-- ========================================== -->
         <!-- SLIDES 181 & 182: O MAPA DA MINA - 50 IDEIAS DE NEGÓCIOS DEMANDADAS -->
         <!-- ========================================== -->
-        <article class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
+        <article id="rep-50-ideias" class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-surface-border space-y-8">
           <div class="flex items-center justify-between border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
               <span class="px-3 py-1 bg-brand-900 text-accent-cyan font-mono text-xs font-black rounded-lg">SLIDES 181-182</span>

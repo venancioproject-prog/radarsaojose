@@ -41,12 +41,17 @@ window.switchMainTab = function(tabName) {
   const reportView = document.getElementById("executive-report-view");
   const btnDashboard = document.getElementById("btn-nav-dashboard");
   const btnReport = document.getElementById("btn-nav-report");
+  const filtersContainer = document.getElementById("sidebar-filters-container");
+  const reportIndex = document.getElementById("sidebar-report-index");
 
   if (!dashboardView || !reportView) return;
 
   if (tabName === "report") {
     dashboardView.classList.add("hidden");
     reportView.classList.remove("hidden");
+
+    if (filtersContainer) filtersContainer.classList.add("hidden");
+    if (reportIndex) reportIndex.classList.remove("hidden");
 
     if (btnDashboard) {
       btnDashboard.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200";
@@ -62,6 +67,9 @@ window.switchMainTab = function(tabName) {
   } else {
     reportView.classList.add("hidden");
     dashboardView.classList.remove("hidden");
+
+    if (reportIndex) reportIndex.classList.add("hidden");
+    if (filtersContainer) filtersContainer.classList.remove("hidden");
 
     if (btnDashboard) {
       btnDashboard.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md";
