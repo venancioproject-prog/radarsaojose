@@ -127,7 +127,11 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
   * **Eliminar:** [fatores irrelevantes do setor tradicional]
   * **Reduzir:** [custos e complexidades operacionais]
   * **Elevar:** [fatores de encantamento e experiência única]
-  * **Criar:** [diferenciais inéditos para o mercado joseense]`;
+  * **Criar:** [diferenciais inéditos para o mercado joseense]
+
+[CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
+[CHART: {"type": "doughnut", "title": "Paradoxo de Evasão vs Orgulho em SJC", "labels": ["Evadem para SP/Litoral", "Consomem Localmente"], "data": [64.7, 35.3]}]
+[CHART: {"type": "pie", "title": "Principais Barreiras Noturnas e de Serviços", "labels": ["Preço Alto / Pouca Experiência", "Falta de Lugares Autorais", "Sensação de Mesmice", "Outros Fatores"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
 
     // 1. Obter modelos ativos diretamente da chave de API da Groq
     let candidateModels = [];
