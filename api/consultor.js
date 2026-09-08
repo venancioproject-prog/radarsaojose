@@ -1,47 +1,39 @@
-export const config = {
-  runtime: 'edge',
-};
+module.exports = async function handler(req, res) {
+  // 1. Configuração de Cabeçalhos CORS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
-  'Content-Type': 'application/json'
-};
-
-export default async function handler(req) {
-  // 1. Interceptação imediata do Preflight (OPTIONS)
+  // 2. Interceptação do Preflight (OPTIONS)
   if (req.method === 'OPTIONS') {
-    return new Response(null, { status: 200, headers: corsHeaders });
+    return res.status(200).end();
   }
 
-  // 2. Bloqueio de métodos não-POST
+  // 3. Bloqueio de métodos não-POST
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'Metodo nao permitido. Use POST.' }), {
-      status: 405,
-      headers: corsHeaders
-    });
+    return res.status(405).json({ error: 'Metodo nao permitido. Use POST.' });
   }
 
   try {
-    let body = {};
-    try {
-      body = await req.json();
-    } catch (eBody) {
-      body = {};
+    let body = req.body;
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        body = {};
+      }
     }
+    body = body || {};
 
     const { user_input, question, messages } = body;
     const inputContent = user_input || question || (Array.isArray(messages) && messages.length > 0 ? messages[messages.length - 1].content : 'Apresente um plano de negocios para Sao Jose dos Campos.');
     const apiKey = (process.env.GROQ_API_KEY || '').trim();
 
     if (!apiKey) {
-      return new Response(JSON.stringify({ 
+      return res.status(500).json({ 
         error: 'Chave GROQ_API_KEY nao configurada nas variaveis de ambiente da Vercel.',
         details: 'Adicione GROQ_API_KEY no painel da Vercel (Settings -> Environment Variables).'
-      }), {
-        status: 500,
-        headers: corsHeaders
       });
     }
 
@@ -292,12 +284,9 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
     }
 
     if (!replyContent) {
-      return new Response(JSON.stringify({
+      return res.status(500).json({
         error: 'Erro na API da Groq: ' + (lastError || 'Nenhum modelo respondeu com sucesso.'),
         details: lastError
-      }), {
-        status: 500,
-        headers: corsHeaders
       });
     }
 
@@ -319,22 +308,16 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
       }
     }
 
-    return new Response(JSON.stringify({ 
+    return res.status(200).json({ 
       result: jsonResult || replyContent,
       reply: cleanReply,
       modelUsed: modelUsed
-    }), {
-      status: 200,
-      headers: corsHeaders
     });
 
   } catch (error) {
-    return new Response(JSON.stringify({ 
-      error: 'Erro interno no Edge Runtime: ' + error.message,
+    return res.status(500).json({ 
+      error: 'Erro interno no Servidor: ' + error.message,
       details: error.stack || error.message
-    }), {
-      status: 500,
-      headers: corsHeaders
     });
   }
-}
+};

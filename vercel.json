@@ -1,7 +1,7 @@
-﻿{
+{
   "functions": {
     "api/consultor.js": {
-      "runtime": "edge"
+      "maxDuration": 60
     }
   }
 }
