@@ -282,6 +282,16 @@
           </button>
 
           <button 
+            id="btn-open-consultor" 
+            onclick="window.toggleConsultorModal(true)"
+            title="Abrir Consultor Estratégico IA"
+            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-accent-cyan/15 to-brand-500/15 hover:from-accent-cyan/25 hover:to-brand-500/25 text-brand-900 font-bold text-xs rounded-xl border border-accent-cyan/30 shadow-2xs transition-all active:scale-95 cursor-pointer"
+          >
+            <i class="fa-solid fa-wand-magic-sparkles text-accent-cyan"></i>
+            <span class="hidden sm:inline">Consultor IA</span>
+          </button>
+
+          <button 
             id="btn-refresh" 
             title="Sincronizar Dados do Supabase"
             class="p-2.5 text-slate-500 hover:text-brand-900 hover:bg-slate-100 rounded-xl transition-colors"
@@ -365,6 +375,23 @@
                   <p class="text-[10px] text-slate-300 font-normal">Dashboard Dinâmico</p>
                 </div>
                 <i class="fa-solid fa-chevron-right text-[10px] opacity-70"></i>
+              </button>
+
+              <button 
+                type="button" 
+                id="btn-nav-consultor" 
+                onclick="window.toggleConsultorModal(true)"
+                class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-brand-900 via-brand-800 to-brand-900 text-white shadow-sm hover:shadow-md border border-brand-700/50 cursor-pointer"
+              >
+                <i class="fa-solid fa-brain text-accent-cyan text-sm"></i>
+                <div class="text-left flex-1">
+                  <p class="leading-tight flex items-center gap-1.5">
+                    <span>Consultor IA</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-accent-cyan/20 text-accent-cyan font-extrabold">GROQ</span>
+                  </p>
+                  <p class="text-[10px] text-slate-300 font-normal">Inteligência Estratégica</p>
+                </div>
+                <i class="fa-solid fa-sparkles text-[10px] text-amber-400"></i>
               </button>
 
               <button 
@@ -6157,6 +6184,104 @@
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
       </div>
     </footer>
+  </div>
+
+  
+  <!-- ========================================== -->
+  <!-- MODAL / DRAWER DO CONSULTOR ESTRATÉGICO IA (GROQ) -->
+  <!-- ========================================== -->
+  <div id="consultor-modal" class="fixed inset-0 z-50 hidden transition-opacity duration-300">
+    <!-- Backdrop com blur -->
+    <div id="consultor-backdrop" onclick="window.toggleConsultorModal(false)" class="absolute inset-0 bg-slate-950/70 backdrop-blur-xs"></div>
+
+    <!-- Container Drawer / Modal -->
+    <div class="relative z-10 w-full h-full flex justify-end">
+      <div class="w-full max-w-xl h-full bg-white shadow-2xl flex flex-col border-l border-surface-border">
+        
+        <!-- Header do Consultor -->
+        <div class="p-4 sm:p-5 bg-brand-950 text-white flex items-center justify-between border-b border-brand-800">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-brand-900 border border-brand-700 flex items-center justify-center text-accent-cyan shadow-inner">
+              <i class="fa-solid fa-robot text-lg"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="font-black text-sm text-white tracking-tight">Consultor Estratégico IA</h3>
+                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-accent-cyan/20 text-accent-cyan uppercase">Llama 3.3 • Groq</span>
+              </div>
+              <p class="text-[11px] text-slate-300">Inteligência de Mercado • Radar São José 2026</p>
+            </div>
+          </div>
+          <button 
+            type="button" 
+            onclick="window.toggleConsultorModal(false)"
+            class="p-2 text-slate-400 hover:text-white hover:bg-brand-900 rounded-xl transition-all cursor-pointer"
+            title="Fechar consultor"
+          >
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+
+        <!-- Sugestões Rápidas de Perguntas -->
+        <div class="p-3 bg-slate-50 border-b border-slate-200 overflow-x-auto">
+          <div class="flex items-center gap-1.5 whitespace-nowrap text-[11px]">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider pl-1">Perguntas Rápidas:</span>
+            <button onclick="window.sendQuickPrompt('Quais os principais dados sobre a evasão de lazer de SJC?')" class="px-2.5 py-1 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-semibold rounded-lg border border-slate-200 transition-all cursor-pointer">
+              🚨 Evasão de Lazer
+            </button>
+            <button onclick="window.sendQuickPrompt('Resuma os 4 Movimentos Culturais identificados no estudo.')" class="px-2.5 py-1 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-semibold rounded-lg border border-slate-200 transition-all cursor-pointer">
+              🧭 4 Movimentos
+            </button>
+            <button onclick="window.sendQuickPrompt('Quais oportunidades de negócios mais quentes para investir na Zona Sul e Oeste?')" class="px-2.5 py-1 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-semibold rounded-lg border border-slate-200 transition-all cursor-pointer">
+              💡 Oportunidades
+            </button>
+          </div>
+        </div>
+
+        <!-- Histórico de Mensagens do Chat -->
+        <div id="consultor-chat-messages" class="flex-1 p-4 sm:p-5 overflow-y-auto space-y-4 text-xs">
+          <!-- Mensagem Inicial de Boas-vindas -->
+          <div class="flex gap-3">
+            <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="bg-slate-100 rounded-2xl p-3.5 text-slate-800 space-y-1.5 max-w-[88%] leading-relaxed">
+              <p class="font-bold text-brand-950">Olá! Sou o Consultor de Inteligência do Radar São José 2026.</p>
+              <p>Tenho acesso integral a todas as respostas da pesquisa municipal, aos 183 slides do relatório, às 10 personas e aos 4 movimentos culturais de SJC.</p>
+              <p class="text-[11px] text-slate-500 font-medium pt-1">Como posso te ajudar a tomar decisões estratégicas para o seu negócio ou investimento?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input e Envio de Pergunta -->
+        <div class="p-4 bg-white border-t border-slate-200">
+          <form id="consultor-form" onsubmit="window.handleConsultorSubmit(event)" class="flex gap-2">
+            <input 
+              type="text" 
+              id="consultor-input" 
+              placeholder="Pergunte sobre dados, personas, bairros, oportunidades..." 
+              autocomplete="off"
+              class="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+            />
+            <button 
+              type="submit" 
+              id="consultor-btn-send"
+              class="px-4 py-3 bg-brand-900 hover:bg-brand-800 active:scale-95 text-white font-bold text-xs rounded-xl shadow-sm transition-all flex items-center gap-1.5 shrink-0 cursor-pointer"
+            >
+              <span>Enviar</span>
+              <i class="fa-solid fa-paper-plane text-[11px]" id="consultor-send-icon"></i>
+            </button>
+          </form>
+          <div class="flex items-center justify-between text-[10px] text-slate-400 mt-2 px-1">
+            <span>Desenvolvido com Vercel Serverless & Groq Cloud</span>
+            <span class="font-mono text-emerald-600 font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Conexão Segura
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- Custom Script -->

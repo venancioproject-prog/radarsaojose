@@ -6500,3 +6500,166 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
   });
 }
 
+
+
+// ==========================================
+// MÓDULO DO CONSULTOR ESTRATÉGICO IA (VERCEL SERVERLESS + GROQ)
+// ==========================================
+
+window.consultorChatHistory = [];
+window.isConsultorThinking = false;
+
+window.toggleConsultorModal = function(show) {
+  const modal = document.getElementById("consultor-modal");
+  const input = document.getElementById("consultor-input");
+  if (!modal) return;
+
+  if (show) {
+    modal.classList.remove("hidden");
+    if (input) {
+      setTimeout(() => input.focus(), 150);
+    }
+  } else {
+    modal.classList.add("hidden");
+  }
+};
+
+window.sendQuickPrompt = function(text) {
+  const input = document.getElementById("consultor-input");
+  if (input) {
+    input.value = text;
+    window.handleConsultorSubmit(new Event("submit"));
+  }
+};
+
+window.handleConsultorSubmit = async function(e) {
+  if (e && e.preventDefault) e.preventDefault();
+  if (window.isConsultorThinking) return;
+
+  const input = document.getElementById("consultor-input");
+  const btnSend = document.getElementById("consultor-btn-send");
+  const iconSend = document.getElementById("consultor-send-icon");
+  const messagesContainer = document.getElementById("consultor-chat-messages");
+
+  if (!input || !messagesContainer) return;
+
+  const userQuestion = input.value.trim();
+  if (!userQuestion) return;
+
+  // 1. Renderizar mensagem do usuário no chat
+  input.value = "";
+  window.appendChatMessage("user", userQuestion);
+
+  // Adicionar ao histórico local
+  window.consultorChatHistory.push({ role: "user", content: userQuestion });
+
+  // 2. Estado de Carregamento (Loading)
+  window.isConsultorThinking = true;
+  if (btnSend) btnSend.disabled = true;
+  if (iconSend) iconSend.className = "fa-solid fa-circle-notch fa-spin text-[11px]";
+
+  const loadingBubbleId = "consultor-loading-" + Date.now();
+  const loadingHtml = `
+    <div id="${loadingBubbleId}" class="flex gap-3 animate-pulse">
+      <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold">
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <div class="bg-slate-100 rounded-2xl p-3.5 text-slate-600 space-y-1 max-w-[88%] leading-relaxed flex items-center gap-2">
+        <i class="fa-solid fa-circle-notch fa-spin text-accent-cyan"></i>
+        <span>Consultando inteligência do Radar SJC na Groq...</span>
+      </div>
+    </div>
+  `;
+  messagesContainer.insertAdjacentHTML("beforeend", loadingHtml);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+  try {
+    // 3. Montar contexto simplificado da base filtrada atual
+    let contextData = null;
+    if (window.currentFilteredRecords && window.currentFilteredRecords.length > 0) {
+      contextData = {
+        totalFiltered: window.currentFilteredRecords.length,
+        totalBase: (window.allSurveyRecords || []).length,
+        currentView: window.currentMainTab || "dashboard"
+      };
+    }
+
+    // 4. Chamada segura para a rota Serverless da Vercel (/api/consultor)
+    const response = await fetch("/api/consultor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messages: window.consultorChatHistory,
+        context: contextData
+      })
+    });
+
+    // Remover balão de loading
+    const loadingElem = document.getElementById(loadingBubbleId);
+    if (loadingElem) loadingElem.remove();
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorMsg = errorData.error || `Erro HTTP ${response.status}: Falha na comunicação com o backend.`;
+      window.appendChatMessage("assistant", `⚠️ **Aviso:** ${errorMsg}\n\n*Dica: Verifique se a variável de ambiente GROQ_API_KEY foi adicionada no painel de configurações da Vercel.*`);
+      return;
+    }
+
+    const data = await response.json();
+    const reply = data.reply || "Nenhuma resposta retornada pela IA.";
+
+    // Salvar histórico e renderizar
+    window.consultorChatHistory.push({ role: "assistant", content: reply });
+    window.appendChatMessage("assistant", reply);
+
+  } catch (err) {
+    console.error("Erro ao consultar backend /api/consultor:", err);
+    const loadingElem = document.getElementById(loadingBubbleId);
+    if (loadingElem) loadingElem.remove();
+    window.appendChatMessage("assistant", `❌ Ocorreu um erro ao conectar com o serviço: ${err.message}`);
+  } finally {
+    window.isConsultorThinking = false;
+    if (btnSend) btnSend.disabled = false;
+    if (iconSend) iconSend.className = "fa-solid fa-paper-plane text-[11px]";
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+};
+
+window.appendChatMessage = function(role, text) {
+  const container = document.getElementById("consultor-chat-messages");
+  if (!container) return;
+
+  // Formatação simples de markdown (negrito, quebras de linha e tópicos)
+  const formattedText = text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc'>$1</li>")
+    .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal'>$1</li>")
+    .replace(/\n/g, "<br/>");
+
+  let bubbleHtml = "";
+  if (role === "user") {
+    bubbleHtml = `
+      <div class="flex justify-end">
+        <div class="bg-brand-900 text-white rounded-2xl p-3.5 max-w-[85%] leading-relaxed shadow-sm">
+          <p class="font-medium">${formattedText}</p>
+        </div>
+      </div>
+    `;
+  } else {
+    bubbleHtml = `
+      <div class="flex gap-3">
+        <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-slate-800 space-y-1.5 max-w-[88%] leading-relaxed">
+          <div class="prose prose-xs text-slate-800 font-medium">${formattedText}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  container.insertAdjacentHTML("beforeend", bubbleHtml);
+  container.scrollTop = container.scrollHeight;
+};
