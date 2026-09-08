@@ -235,43 +235,54 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
   ]
 }`;
 
-    const targetModel = 'llama-3.3-70b-versatile';
+    const candidateModels = [
+      'openai/gpt-oss-120b',
+      'gpt-oss-120b',
+      'qwen/qwen-3.6-27b',
+      'qwen-3.6-27b',
+      'llama-3.3-70b-versatile'
+    ];
+
     let replyContent = null;
-    let modelUsed = targetModel;
+    let modelUsed = null;
     let lastError = null;
 
-    try {
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + apiKey,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model: targetModel,
-          response_format: { type: "json_object" },
-          max_tokens: 2800,
-          temperature: 0.2,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: String(inputContent) }
-          ]
-        })
-      });
+    for (const model of candidateModels) {
+      try {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + apiKey,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: model,
+            response_format: { type: "json_object" },
+            max_tokens: 2800,
+            temperature: 0.2,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: String(inputContent) }
+            ]
+          })
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-          replyContent = data.choices[0].message.content;
+        if (response.ok) {
+          const data = await response.json();
+          if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+            replyContent = data.choices[0].message.content;
+            modelUsed = model;
+            break;
+          }
+        } else {
+          const errText = await response.text();
+          lastError = 'Groq Status ' + response.status + ' (' + model + '): ' + errText;
+          console.warn('[Consultor IA] Falha no modelo ' + model + ':', lastError);
         }
-      } else {
-        const errText = await response.text();
-        lastError = 'Groq Status ' + response.status + ': ' + errText;
-        console.warn('[Consultor IA] Falha no modelo ' + targetModel + ':', lastError);
+      } catch (err) {
+        lastError = err.message;
+        console.warn('[Consultor IA] Excecao no modelo ' + model + ':', lastError);
       }
-    } catch (err) {
-      lastError = err.message;
-      console.warn('[Consultor IA] Excecao no modelo ' + targetModel + ':', lastError);
     }
 
     if (!replyContent) {
