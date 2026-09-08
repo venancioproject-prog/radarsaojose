@@ -6873,14 +6873,15 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     }
   }
 
-  // Descartar rascunhos numerados residuais
+  // Descartar rascunhos numerados residuais e tags de gráficos cruas que vazaram no texto
   cleanText = cleanText
     .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft|Section by Section)[\s\S]*?(?=###\s*VISÃO|###\s*TOP|$)/gi, '')
+    .replace(/!\[\s*\[CHART:[\s\S]*?\]\]?/gi, '')
+    .replace(/\[CHART:[\s\S]*?\]/gi, '')
+    .replace(/\[GRAFICO:[\s\S]*?\]/gi, '')
     .trim();
 
-  let processedText = cleanText
-    .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)
-    .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag);
+  let processedText = cleanText;
 
   // Helper para limpar markdown básico e remover ruídos de asteriscos/hifens soltos
   const formatMarkdown = (txt, strongClass = "text-slate-900 font-bold") => {
@@ -7726,38 +7727,72 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     }
   });
 
-  // Renderizar gráficos dinâmicos encontrados no corpo ou rodapé
-  const standaloneChartsHtml = cleanText.match(/\[CHART:\s*(\{.*?\})\]/gis);
-  if (standaloneChartsHtml && dynamicChartsToRender.length > 0) {
-    // Se há gráficos dinâmicos capturados que não foram embutidos diretamente nos blocos
-    const chartsWrapper = `
-      <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
-        <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+  // Renderizar os 3 Macrodados Municipais do Radar SJC no rodapé
+  const defaultMacroCharts = [
+    {
+      id: "macro-chart-regiao",
+      config: {
+        type: "doughnut",
+        title: "Frequência de Consumo por Região de SJC",
+        labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
+        data: [40.7, 27.6, 13.9, 11.2, 6.6]
+      }
+    },
+    {
+      id: "macro-chart-evasao",
+      config: {
+        type: "doughnut",
+        title: "Paradoxo de Evasão vs Orgulho em SJC",
+        labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
+        data: [64.7, 35.3]
+      }
+    },
+    {
+      id: "macro-chart-barreiras",
+      config: {
+        type: "bar",
+        title: "Principais Barreiras Noturnas e Gastronomia",
+        labels: ["Preço Alto / Pouca Experiência", "Falta Lugares Autorais", "Sensação de Mesmice", "Outros"],
+        data: [32.3, 22.9, 18.6, 26.2]
+      }
+    }
+  ];
+
+  // Adicionar aos charts para renderização no Chart.js
+  defaultMacroCharts.forEach(mc => dynamicChartsToRender.push(mc));
+
+  const chartsWrapper = `
+    <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
           <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
           <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
             INDICADORES E MACRODADOS MUNICIPAIS (SJC)
           </h3>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          ${dynamicChartsToRender.map(item => `
-            <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-                  <i class="fa-solid fa-chart-column text-accent-cyan"></i>
-                  ${item.config.title || "Indicador Analítico"}
-                </span>
-                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
-              </div>
-              <div class="relative w-full h-56">
-                <canvas id="${item.id}"></canvas>
-              </div>
-            </div>
-          `).join('')}
-        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+          N=477 • IC=95%
+        </span>
       </div>
-    `;
-    htmlOutput += chartsWrapper;
-  }
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        ${defaultMacroCharts.map(item => `
+          <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+                <i class="fa-solid fa-chart-column text-accent-cyan"></i>
+                ${item.config.title}
+              </span>
+              <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+            </div>
+            <div class="relative w-full h-56">
+              <canvas id="${item.id}"></canvas>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  htmlOutput += chartsWrapper;
 
   if (!htmlOutput) {
     htmlOutput = `

@@ -51,20 +51,24 @@ export default async function handler(req, res) {
 
 ${marketBriefSJC}
 
-DIRETRIZES DE ALTA PERFORMANCE ANALÍTICA:
-1. CUSTOMIZAÇÃO RADICAL E PROFUNDIDADE:
+DIRETRIZES DE FORMATAÇÃO E REGRAS TÉCNICAS:
+1. PROIBIDO INVENTAR TAGS DE GRÁFICOS OU JSONS:
+   - Nunca gere tags do tipo [CHART: ...] ou [GRAFICO: ...] criadas por conta própria.
+   - NUNCA crie tags JSON malformadas. Toda a sua resposta deve ser puramente texto e markdown organizado sob os títulos com ###.
+
+2. CUSTOMIZAÇÃO RADICAL E PROFUNDIDADE:
    - Proibido responder de forma genérica, engessada ou repetitiva.
    - Analise a FUNDO a ideia específica que o usuário propôs, cruzando com a psicologia de consumo, dores reais e oportunidades não exploradas de São José dos Campos.
-   - NUNCA repita frases de placeholder como "Análise profunda e executiva do negócio...". Escreva diretamente como um consultor sênior apresentando um diagnóstico afiado e provocativo.
+   - NUNCA repita frases de placeholder. Escreva diretamente como um consultor sênior apresentando um diagnóstico afiado e provocativo.
    - Toda porcentagem ou dado deve vir integrado na narrativa e conter citação exata entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...).
    - Mantenha a fidelidade geográfica real de SJC (Centro/Oeste, Zona Sul, Leste, Norte).
 
-2. ESTRUTURA OBRIGATÓRIA:
+3. ESTRUTURA OBRIGATÓRIA (Inicie imediatamente na primeira linha com '### VISÃO ESTRATÉGICA E VEREDICTO'):
 
 ### VISÃO ESTRATÉGICA E VEREDICTO
 Elabore um diagnóstico estratégico afiado, personalizado e criativo sobre o negócio específico em SJC:
 - Qual é a oportunidade real e a dor latente que o público-alvo tem em SJC?
-- Conecte o modelo de negócio à distribuição de renda real e faça uma referência direta ao gráfico de renda posicionado abaixo (ex: analisando como as faixas de R$ 2.800 a R$ 12.000 ou classes superiores sustentam a proposta).
+- Conecte o modelo de negócio à distribuição de renda real da cidade (ex: analisando como as faixas de R$ 2.800 a R$ 12.000 ou classes superiores sustentam a proposta).
 - Defina o ticket médio estimado e a estratégia de rentabilidade/margem.
 - O que fará esse negócio reter os 64.7% de consumidores que evadem para São Paulo/Litoral?
 
@@ -127,47 +131,17 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
   * **Eliminar:** [fatores irrelevantes do setor tradicional]
   * **Reduzir:** [custos e complexidades operacionais]
   * **Elevar:** [fatores de encantamento e experiência única]
-  * **Criar:** [diferenciais inéditos para o mercado joseense]
+  * **Criar:** [diferenciais inéditos para o mercado joseense]`;
 
-[CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
-[CHART: {"type": "doughnut", "title": "Paradoxo de Evasão vs Orgulho em SJC", "labels": ["Evadem para SP/Litoral", "Consomem Localmente"], "data": [64.7, 35.3]}]
-[CHART: {"type": "pie", "title": "Principais Barreiras Noturnas e de Serviços", "labels": ["Preço Alto / Pouca Experiência", "Falta de Lugares Autorais", "Sensação de Mesmice", "Outros Fatores"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
-
-    // 1. Obter modelos ativos diretamente da chave de API da Groq
-    let candidateModels = [];
-    try {
-      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
-        headers: { 'Authorization': `Bearer ${apiKey}` }
-      });
-      if (modelsResp.ok) {
-        const modelsData = await modelsResp.json();
-        const availableIds = (modelsData.data || []).map(m => m.id);
-        
-        // Priorizar modelos de texto completos e excluir modelos de áudio/whisper/guard
-        const chatModels = availableIds.filter(id => 
-          !id.includes('whisper') && 
-          !id.includes('guard') && 
-          !id.includes('distil') &&
-          !id.includes('vision')
-        );
-
-        // Ordenação inteligente: maiores/melhores primeiro
-        const preferred = ['llama-3.3-70b-versatile', 'llama3-70b-8192', 'llama3-8b-8192', 'qwen/qwen3.8-27b', 'mixtral-8x7b-32768'];
-        for (const p of preferred) {
-          if (chatModels.includes(p)) candidateModels.push(p);
-        }
-        // Incluir os demais modelos disponíveis
-        chatModels.forEach(m => {
-          if (!candidateModels.includes(m)) candidateModels.push(m);
-        });
-      }
-    } catch (eList) {
-      console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
-    }
-
-    if (candidateModels.length === 0) {
-      candidateModels = ['llama-3.3-70b-versatile', 'llama3-70b-8192', 'llama3-8b-8192'];
-    }
+    // Lista estrita de modelos de alta performance (priorizando 70B e Llama 3.3)
+    const candidateModels = [
+      'llama-3.3-70b-versatile',
+      'llama-3.1-70b-versatile',
+      'llama3-70b-8192',
+      'llama-3.3-70b-specdec',
+      'llama-3.1-8b-instant',
+      'llama3-8b-8192'
+    ];
 
     let replyContent = null;
     let modelUsed = null;
