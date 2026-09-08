@@ -282,6 +282,9 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 
     for (const model of candidateModels) {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 20000);
+
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
           headers: {
@@ -292,33 +295,36 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
             model: model,
             response_format: { type: "json_object" },
             max_tokens: 3500,
-            temperature: 0.5,
+            temperature: 0.4,
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: inputContent }
             ]
-          })
+          }),
+          signal: controller.signal
         });
 
-        const data = await response.json();
+        clearTimeout(timeoutId);
+
+        const data = await response.json().catch(() => ({}));
         if (response.ok && data.choices?.[0]?.message?.content) {
           replyContent = data.choices[0].message.content;
           modelUsed = model;
           break;
         } else {
-          lastError = data.error?.message || JSON.stringify(data);
+          lastError = data.error?.message || data.message || `Status HTTP ${response.status} no modelo ${model}`;
           console.warn(`[Consultor IA] Falha no modelo ${model}:`, lastError);
         }
       } catch (err) {
-        lastError = err.message;
-        console.warn(`[Consultor IA] Exceção no modelo ${model}:`, err.message);
+        lastError = err.name === 'AbortError' ? `Timeout de 20s no modelo ${model}` : err.message;
+        console.warn(`[Consultor IA] Exceção no modelo ${model}:`, lastError);
       }
     }
 
     if (!replyContent) {
       return res.status(500).json({
-        error: lastError || 'Não foi possível gerar a resposta com os modelos disponíveis.',
-        modelUsed: candidateModels
+        error: lastError || 'Não foi possível gerar a resposta com os modelos disponíveis na Groq.',
+        candidateModels: candidateModels
       });
     }
 
