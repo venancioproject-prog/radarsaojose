@@ -6191,47 +6191,62 @@
   <!-- ========================================== -->
   <!-- MODAL EXECUTIVO EM TELA CHEIA - RELATÓRIO DE IA (STUDIO 8 / MCKINSEY) -->
   <!-- ========================================== -->
-  <div id="consultor-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 md:p-8 transition-all duration-300">
-    <!-- Backdrop com blur escuro corporativo -->
-    <div id="consultor-backdrop" onclick="window.toggleConsultorModal(false)" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md"></div>
+  <div id="consultor-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-5 md:p-6 transition-all duration-300">
+    <!-- Backdrop com blur corporativo -->
+    <div id="consultor-backdrop" onclick="window.toggleConsultorModal(false)" class="absolute inset-0 bg-slate-900/60 backdrop-blur-md"></div>
 
-    <!-- Container Modal em Tela Cheia (Escuro Executivo Studio 8) -->
-    <div class="relative z-10 w-full max-w-6xl h-[92vh] bg-slate-950 text-slate-100 rounded-3xl shadow-2xl border border-slate-800 flex flex-col overflow-hidden">
+    <!-- Container Modal em Tela Cheia (Fundo Limpo Off-White & Superfície Branca) -->
+    <div class="relative z-10 w-full max-w-7xl h-[94vh] bg-surface-bg text-slate-800 rounded-3xl shadow-2xl border border-slate-200/80 flex flex-col overflow-hidden">
       
-      <!-- Top Header Executivo Fixo com Botão de Fechar e Novo Relatório -->
-      <div class="px-6 py-4 bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 flex items-center justify-between shrink-0">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-brand-900 border border-brand-700/60 flex items-center justify-center text-accent-cyan shadow-inner">
+      <!-- Top Header Executivo em Branco com Branding Studio 8 & Botões de Controle -->
+      <div class="px-6 py-4 bg-white border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-2xs">
+        <div class="flex items-center gap-3.5">
+          <div class="w-10 h-10 rounded-2xl bg-brand-900 flex items-center justify-center text-accent-cyan shadow-sm">
             <i class="fa-solid fa-brain text-lg"></i>
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-[10px] font-black tracking-widest text-accent-cyan uppercase">STUDIO 8 AI LABS</span>
-              <span class="text-slate-600">•</span>
-              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 uppercase">AUDITORIA ESTRATÉGICA</span>
+              <span class="text-[10px] font-black tracking-widest text-brand-900 uppercase">STUDIO 8 AI LABS</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 uppercase">AUDITORIA ESTRATÉGICA</span>
             </div>
-            <h3 class="text-base sm:text-lg font-black text-white tracking-tight" id="consultor-modal-title">
+            <h3 class="text-base sm:text-lg font-black text-brand-950 tracking-tight" id="consultor-modal-title">
               Gerador de Auditoria Estratégica & Inteligência de Mercado
             </h3>
           </div>
         </div>
 
         <div class="flex items-center gap-2">
+          <!-- Botão Toggle de Histórico -->
+          <button 
+            type="button" 
+            onclick="window.toggleAuditHistoryDrawer()"
+            id="btn-toggle-history"
+            class="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 hover:bg-slate-100 active:scale-95 text-slate-700 hover:text-brand-900 text-xs font-bold rounded-xl border border-slate-200 transition-all cursor-pointer"
+            title="Ver Histórico de Auditorias Salvas"
+          >
+            <i class="fa-solid fa-clock-rotate-left text-brand-600 text-xs"></i>
+            <span class="hidden sm:inline">Histórico Salvo</span>
+            <span id="audit-history-count-badge" class="px-1.5 py-0.2 bg-brand-900 text-white rounded-full text-[10px] font-extrabold">0</span>
+          </button>
+
+          <!-- Botão Nova Auditoria -->
           <button 
             type="button" 
             onclick="window.resetConsultorView()"
             id="btn-new-report"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 text-xs font-bold rounded-xl border border-slate-700 transition-all cursor-pointer"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-900 hover:bg-brand-800 active:scale-95 text-white text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
             title="Iniciar Nova Auditoria"
           >
             <i class="fa-solid fa-plus text-[10px] text-accent-cyan"></i>
             <span>Nova Auditoria</span>
           </button>
           
+          <!-- Botão Fechar Modal -->
           <button 
             type="button" 
             onclick="window.toggleConsultorModal(false)"
-            class="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all cursor-pointer"
+            class="p-2.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all cursor-pointer ml-1"
             title="Fechar Relatório"
           >
             <i class="fa-solid fa-xmark text-lg"></i>
@@ -6239,107 +6254,139 @@
         </div>
       </div>
 
-      <!-- Área Central de Conteúdo com Scroll Próprio -->
-      <div id="consultor-main-scroll" class="flex-1 overflow-y-auto custom-card-scroll p-4 sm:p-8 space-y-6">
+      <!-- Layout Interno: Painel Lateral de Histórico (Drawer retrátil) + Área Principal de Conteúdo -->
+      <div class="flex-1 flex overflow-hidden relative">
         
-        <!-- Estado 1: Tela de Entrada / Input Inicial -->
-        <div id="consultor-input-view" class="max-w-3xl mx-auto py-6 sm:py-12 space-y-8">
-          <div class="text-center space-y-3">
-            <span class="px-3 py-1 bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan text-xs font-mono font-black rounded-full uppercase tracking-wider">
-              PADRÃO MCKINSEY & STUDIO 8
-            </span>
-            <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              Qual ideia ou nicho vamos auditar hoje?
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-400 font-medium max-w-xl mx-auto leading-relaxed">
-              Digite uma ideia de negócio, produto ou serviço. Nossa IA cruzará os microdados da pesquisa de São José dos Campos e gerará um relatório completo em tela cheia com SWOT, PESTEL, Porter, Ishikawa e Gráficos Analíticos.
-            </p>
-          </div>
-
-          <!-- Form de Envio da Ideia -->
-          <form id="consultor-form" onsubmit="window.handleConsultorSubmit(event)" class="space-y-4">
-            <div class="relative">
-              <input 
-                type="text" 
-                id="consultor-input" 
-                placeholder="Ex: Loja de biquínis no Aquarius, Wine Bar autoral, Coworking na Zona Sul..." 
-                autocomplete="off"
-                class="w-full pl-5 pr-32 py-4 bg-slate-900 border border-slate-700/80 rounded-2xl text-sm font-semibold text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-accent-cyan/40 focus:border-accent-cyan transition-all shadow-xl"
-              />
-              <button 
-                type="submit" 
-                id="consultor-btn-send"
-                class="absolute right-2 top-2 bottom-2 px-5 bg-gradient-to-r from-accent-cyan to-brand-500 hover:from-accent-cyan/90 hover:to-brand-500/90 active:scale-95 text-brand-950 font-black text-xs rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer"
-              >
-                <span>Gerar Relatório</span>
-                <i class="fa-solid fa-wand-magic-sparkles text-xs" id="consultor-send-icon"></i>
-              </button>
+        <!-- Drawer de Histórico de Auditorias Salvas (Local Storage) -->
+        <aside id="audit-history-drawer" class="hidden absolute inset-y-0 left-0 z-20 w-80 sm:w-96 h-full bg-white border-r border-slate-200 shadow-2xl flex-col justify-between transition-all duration-300">
+          <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-folder-open text-brand-600 text-xs"></i>
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-950">Histórico de Auditorias</h4>
             </div>
-          </form>
-
-          <!-- Sugestões Rápidas de Ideias -->
-          <div class="pt-2 space-y-2.5">
-            <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Ideias Rápidas para Testar:</span>
-            <div class="flex flex-wrap gap-2">
-              <button onclick="window.sendQuickPrompt('Loja de Biquínis e Moda Praia no Jardim Aquarius')" class="px-3 py-2 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-accent-cyan font-semibold text-xs rounded-xl border border-slate-800 transition-all cursor-pointer">
-                👙 Moda Praia no Aquarius
+            <div class="flex items-center gap-1">
+              <button onclick="window.clearAuditHistory()" title="Limpar histórico" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-white transition-colors text-xs cursor-pointer">
+                <i class="fa-solid fa-trash-can"></i>
               </button>
-              <button onclick="window.sendQuickPrompt('Wine Bar autoral e gastronomia intimista no Jardim Aquarius / Adyana')" class="px-3 py-2 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-accent-cyan font-semibold text-xs rounded-xl border border-slate-800 transition-all cursor-pointer">
-                🍷 Wine Bar Autoral
-              </button>
-              <button onclick="window.sendQuickPrompt('Academia Boutique e Centro Integrado de Saúde na Zona Sul')" class="px-3 py-2 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-accent-cyan font-semibold text-xs rounded-xl border border-slate-800 transition-all cursor-pointer">
-                🏋️ Academia Boutique Zona Sul
-              </button>
-              <button onclick="window.sendQuickPrompt('Cafeteria Especial com Espaço Coworking e Pet Friendly')" class="px-3 py-2 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-accent-cyan font-semibold text-xs rounded-xl border border-slate-800 transition-all cursor-pointer">
-                ☕ Café Coworking & Pet Friendly
+              <button onclick="window.toggleAuditHistoryDrawer(false)" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-white transition-colors text-xs cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
           </div>
-        </div>
 
-        <!-- Estado 2: Relatório Gerado em Tela Cheia (Layout de Cards Executivos) -->
-        <div id="consultor-report-view" class="hidden space-y-8 max-w-5xl mx-auto pb-12">
-          <!-- Banner de Identificação do Relatório -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-brand-950 border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div class="space-y-1.5">
-              <div class="flex items-center gap-2">
-                <span class="text-xs font-black px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-400 uppercase tracking-widest font-mono">RELATÓRIO DE AUDITORIA ESTRATÉGICA</span>
-                <span class="text-slate-600">•</span>
-                <span class="text-xs font-bold text-slate-400">STUDIO 8 AI LABS</span>
+          <div id="audit-history-list" class="flex-1 overflow-y-auto p-4 space-y-2.5 text-xs custom-card-scroll">
+            <!-- Itens do histórico injetados dinamicamente -->
+          </div>
+
+          <div class="p-3 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-400 text-center font-medium">
+            Salvo localmente no seu navegador
+          </div>
+        </aside>
+
+        <!-- Área Central de Conteúdo com Scroll Próprio e Fundo Limpo -->
+        <div id="consultor-main-scroll" class="flex-1 overflow-y-auto custom-card-scroll p-4 sm:p-8 space-y-8 bg-surface-bg">
+          
+          <!-- Estado 1: Tela de Entrada / Input Inicial -->
+          <div id="consultor-input-view" class="max-w-3xl mx-auto py-8 sm:py-16 space-y-8">
+            <div class="text-center space-y-3">
+              <span class="px-3.5 py-1 bg-brand-50 border border-brand-200 text-brand-900 text-xs font-mono font-black rounded-full uppercase tracking-wider">
+                PADRÃO MCKINSEY & STUDIO 8
+              </span>
+              <h2 class="text-2xl sm:text-4xl font-black text-brand-950 tracking-tight">
+                Qual ideia ou nicho vamos auditar hoje?
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto leading-relaxed">
+                Digite uma ideia de negócio, produto ou serviço. Nossa IA cruzará os microdados quantitativos da pesquisa municipal de São José dos Campos e gerará um relatório executivo em tela cheia com <strong>SWOT, PESTEL, Porter, Ishikawa, 4 Movimentos e 3 Gráficos Analíticos</strong>.
+              </p>
+            </div>
+
+            <!-- Form de Envio da Ideia -->
+            <form id="consultor-form" onsubmit="window.handleConsultorSubmit(event)" class="space-y-4">
+              <div class="relative bg-white p-2 rounded-2xl border border-slate-200 shadow-card">
+                <input 
+                  type="text" 
+                  id="consultor-input" 
+                  placeholder="Ex: Loja de biquínis no Aquarius, Wine Bar autoral, Coworking na Zona Sul..." 
+                  autocomplete="off"
+                  class="w-full pl-4 pr-36 py-3.5 bg-transparent border-0 text-sm font-bold text-slate-900 placeholder-slate-400 focus:outline-none"
+                />
+                <button 
+                  type="submit" 
+                  id="consultor-btn-send"
+                  class="absolute right-3 top-3 bottom-3 px-5 bg-brand-900 hover:bg-brand-800 active:scale-95 text-white font-black text-xs rounded-xl shadow-sm transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <span>Gerar Relatório</span>
+                  <i class="fa-solid fa-wand-magic-sparkles text-xs text-accent-cyan" id="consultor-send-icon"></i>
+                </button>
               </div>
-              <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight uppercase" id="report-topic-title">
-                AUDITORIA DE NEGÓCIO
-              </h1>
-              <p class="text-xs text-slate-400 font-medium">Base de Dados: Pesquisa Municipal Radar SJC (N=476, IC=95%, Erro ±4.5%)</p>
-            </div>
+            </form>
 
-            <button 
-              onclick="window.resetConsultorView()" 
-              class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 active:scale-95 text-accent-cyan font-bold text-xs rounded-xl border border-slate-700 transition-all flex items-center gap-2 self-start md:self-center cursor-pointer"
-            >
-              <i class="fa-solid fa-arrows-rotate text-xs"></i>
-              <span>Auditar Outro Negócio</span>
-            </button>
+            <!-- Sugestões Rápidas de Ideias -->
+            <div class="pt-2 space-y-2.5">
+              <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block text-center">Ideias Rápidas para Testar:</span>
+              <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="window.sendQuickPrompt('Loja de Biquínis e Moda Praia no Jardim Aquarius')" class="px-3.5 py-2 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-bold text-xs rounded-xl border border-slate-200 shadow-2xs transition-all cursor-pointer">
+                  👙 Moda Praia no Aquarius
+                </button>
+                <button onclick="window.sendQuickPrompt('Wine Bar autoral e gastronomia intimista no Jardim Aquarius / Adyana')" class="px-3.5 py-2 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-bold text-xs rounded-xl border border-slate-200 shadow-2xs transition-all cursor-pointer">
+                  🍷 Wine Bar Autoral
+                </button>
+                <button onclick="window.sendQuickPrompt('Academia Boutique e Centro Integrado de Saúde na Zona Sul')" class="px-3.5 py-2 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-bold text-xs rounded-xl border border-slate-200 shadow-2xs transition-all cursor-pointer">
+                  🏋️ Academia Boutique Zona Sul
+                </button>
+                <button onclick="window.sendQuickPrompt('Cafeteria Especial com Espaço Coworking e Pet Friendly')" class="px-3.5 py-2 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-900 font-bold text-xs rounded-xl border border-slate-200 shadow-2xs transition-all cursor-pointer">
+                  ☕ Café Coworking & Pet Friendly
+                </button>
+              </div>
+            </div>
           </div>
 
-          <!-- Container onde os Blocos Formatados e Cards de Auditoria serão Injetados -->
-          <div id="consultor-report-content" class="space-y-6"></div>
-        </div>
+          <!-- Estado 2: Relatório Gerado em Tela Cheia (Layout de Cards Modulares Brancos) -->
+          <div id="consultor-report-view" class="hidden space-y-6 max-w-5xl mx-auto pb-12">
+            <!-- Banner Executivo de Identificação do Relatório -->
+            <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-black px-2.5 py-1 rounded-lg bg-brand-50 text-brand-900 uppercase tracking-widest font-mono">RELATÓRIO DE AUDITORIA ESTRATÉGICA</span>
+                  <span class="text-slate-300">•</span>
+                  <span class="text-xs font-bold text-slate-500">STUDIO 8 AI LABS</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight uppercase" id="report-topic-title">
+                  AUDITORIA DE NEGÓCIO
+                </h1>
+                <p class="text-xs text-slate-500 font-semibold" id="report-date-badge">Base de Dados: Pesquisa Municipal Radar SJC (N=476, IC=95%, Erro ±4.5%)</p>
+              </div>
 
+              <button 
+                onclick="window.resetConsultorView()" 
+                class="px-4 py-2.5 bg-slate-50 hover:bg-slate-100 active:scale-95 text-brand-900 font-bold text-xs rounded-xl border border-slate-200 transition-all flex items-center gap-2 self-start md:self-center cursor-pointer shadow-2xs"
+              >
+                <i class="fa-solid fa-arrows-rotate text-xs text-brand-600"></i>
+                <span>Auditar Outro Negócio</span>
+              </button>
+            </div>
+
+            <!-- Container onde os Cards Modulares Brancos e Gráficos serão Renderizados -->
+            <div id="consultor-report-content" class="space-y-6"></div>
+          </div>
+
+        </div>
       </div>
 
       <!-- Footer do Modal -->
-      <div class="px-6 py-3 bg-slate-900/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
-        <span class="flex items-center gap-1.5">
+      <div class="px-6 py-3 bg-white border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500 shrink-0">
+        <span class="flex items-center gap-1.5 font-semibold">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
           Inteligência Artificial Ativa &bull; Vercel Serverless & Groq
         </span>
-        <span>Radar São José &copy; 2026</span>
+        <span class="font-medium">Radar São José &copy; 2026 &bull; Studio 8 Analytics</span>
       </div>
 
     </div>
   </div>
-<!-- OVERLAY CINEMATOGRÁFICO DE LOADING (6 SEGUNDOS) -->
+
+  <!-- ========================================== -->
+  <!-- OVERLAY CINEMATOGRÁFICO DE LOADING (6 SEGUNDOS) -->
   <!-- ========================================== -->
   <div id="ai-report-loading-overlay" class="fixed inset-0 z-[60] hidden flex flex-col items-center justify-center bg-brand-950/95 backdrop-blur-md text-white px-6">
     <div class="relative flex items-center justify-center mb-8">

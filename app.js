@@ -6509,9 +6509,107 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
 // ==========================================
 // GERADOR DE AUDITORIA ESTRATÉGICA EM TELA CHEIA (PADRÃO STUDIO 8 / MCKINSEY)
 // ==========================================
+// ==========================================
+// GERADOR DE AUDITORIA ESTRATÉGICA EM TELA CHEIA (PADRÃO STUDIO 8 / MCKINSEY)
+// COM CARDS MODULARES BRANCOS, 3 GRÁFICOS DINÂMICOS & HISTÓRICO LOCAL STORAGE
+// ==========================================
 window.consultorChatHistory = [];
 window.isConsultorThinking = false;
 window.currentAuditedTopic = "";
+const AUDIT_HISTORY_STORAGE_KEY = "radar_sjc_audit_history_v1";
+
+// Carregar e sincronizar histórico local
+window.getSavedAuditHistory = function() {
+  try {
+    const raw = localStorage.getItem(AUDIT_HISTORY_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.warn("Falha ao carregar histórico local:", e);
+    return [];
+  }
+};
+
+window.saveAuditToHistory = function(topic, markdownResult) {
+  try {
+    const history = window.getSavedAuditHistory();
+    const newEntry = {
+      id: "audit_" + Date.now(),
+      topic: topic,
+      content: markdownResult,
+      date: new Date().toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }),
+      timestamp: Date.now()
+    };
+    // Inserir no topo e limitar a 20 registros
+    const updated = [newEntry, ...history.filter(h => h.topic.toLowerCase() !== topic.toLowerCase())].slice(0, 20);
+    localStorage.setItem(AUDIT_HISTORY_STORAGE_KEY, JSON.stringify(updated));
+    window.renderAuditHistoryList();
+  } catch (e) {
+    console.warn("Falha ao salvar auditoria no histórico:", e);
+  }
+};
+
+window.renderAuditHistoryList = function() {
+  const container = document.getElementById("audit-history-list");
+  const badge = document.getElementById("audit-history-count-badge");
+  const history = window.getSavedAuditHistory();
+
+  if (badge) badge.innerText = history.length;
+  if (!container) return;
+
+  if (history.length === 0) {
+    container.innerHTML = `
+      <div class="py-8 text-center text-slate-400 space-y-2">
+        <i class="fa-solid fa-clock-rotate-left text-2xl text-slate-300"></i>
+        <p class="font-medium text-xs">Nenhuma auditoria salva ainda.</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = history.map(item => `
+    <div onclick="window.loadAuditFromHistory('${item.id}')" class="p-3.5 bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-300 rounded-2xl transition-all cursor-pointer group shadow-2xs">
+      <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+        <span class="font-bold text-brand-900 group-hover:text-brand-700 uppercase tracking-wider flex items-center gap-1">
+          <i class="fa-solid fa-file-contract text-accent-cyan"></i> Auditoria
+        </span>
+        <span>${item.date}</span>
+      </div>
+      <p class="font-bold text-xs text-slate-800 group-hover:text-brand-950 truncate">${item.topic}</p>
+    </div>
+  `).join("");
+};
+
+window.loadAuditFromHistory = function(id) {
+  const history = window.getSavedAuditHistory();
+  const found = history.find(h => h.id === id);
+  if (!found) return;
+
+  window.toggleAuditHistoryDrawer(false);
+  window.renderExecutiveReport(found.topic, found.content, found.date);
+};
+
+window.clearAuditHistory = function() {
+  if (confirm("Deseja realmente limpar todo o histórico de auditorias salvas?")) {
+    localStorage.removeItem(AUDIT_HISTORY_STORAGE_KEY);
+    window.renderAuditHistoryList();
+  }
+};
+
+window.toggleAuditHistoryDrawer = function(force) {
+  const drawer = document.getElementById("audit-history-drawer");
+  if (!drawer) return;
+
+  if (typeof force === "boolean") {
+    if (force) drawer.classList.remove("hidden");
+    else drawer.classList.add("hidden");
+  } else {
+    drawer.classList.toggle("hidden");
+  }
+
+  if (!drawer.classList.contains("hidden")) {
+    window.renderAuditHistoryList();
+  }
+};
 
 window.toggleConsultorModal = function(show) {
   const modal = document.getElementById("consultor-modal");
@@ -6520,13 +6618,15 @@ window.toggleConsultorModal = function(show) {
 
   if (show) {
     modal.classList.remove("hidden");
+    window.renderAuditHistoryList();
     if (input && !document.getElementById("consultor-report-view").classList.contains("hidden")) {
-      // Já está no relatório, não foca input
+      // Já está no relatório
     } else if (input) {
       setTimeout(() => input.focus(), 150);
     }
   } else {
     modal.classList.add("hidden");
+    window.toggleAuditHistoryDrawer(false);
   }
 };
 
@@ -6580,15 +6680,15 @@ window.handleConsultorSubmit = async function(e) {
   if (loadingOverlay) {
     loadingOverlay.classList.remove("hidden");
     if (loadingProgressBar) loadingProgressBar.style.width = "5%";
-    if (loadingStatusText) loadingStatusText.innerText = "Iniciando varredura demográfica de São José dos Campos...";
+    if (loadingStatusText) loadingStatusText.innerText = "Iniciando varredura quantitativa de São José dos Campos...";
   }
 
   // Ticker de frases a cada 1.5s
   const statusPhrases = [
-    { time: 1000, progress: "25%", text: "Analisando demografia e zonas nobres (Aquarius, Adyana, Sul)..." },
-    { time: 2500, progress: "50%", text: "Cruzando dados com a Matriz SWOT e 5 Forças de Porter..." },
+    { time: 1000, progress: "25%", text: "Cruzando microdados de renda e zonas (Aquarius, Adyana, Sul)..." },
+    { time: 2500, progress: "50%", text: "Processando Matriz SWOT, PESTEL e 5 Forças de Porter..." },
     { time: 4000, progress: "75%", text: "Calculando fit estratégico com os 4 Movimentos Culturais de SJC..." },
-    { time: 5200, progress: "95%", text: "Modelando indicadores analíticos no Chart.js..." }
+    { time: 5200, progress: "95%", text: "Gerando 3 gráficos dinâmicos de validação no Chart.js..." }
   ];
 
   const timeouts = [];
@@ -6641,7 +6741,10 @@ window.handleConsultorSubmit = async function(e) {
 
     const reply = result.data?.reply || result.data?.result || "Nenhuma resposta retornada pela IA.";
 
-    // Renderizar o Relatório em Tela Cheia no padrão Studio 8
+    // Salvar no histórico persistente do LocalStorage
+    window.saveAuditToHistory(userQuestion, reply);
+
+    // Renderizar o Relatório em Tela Cheia no padrão Cards Modulares Brancos
     window.renderExecutiveReport(userQuestion, reply);
 
   } catch (err) {
@@ -6656,18 +6759,23 @@ window.handleConsultorSubmit = async function(e) {
   }
 };
 
-// Renderizador de Relatório Executivo em Tela Cheia (Cards Corporativos)
-window.renderExecutiveReport = function(topic, text) {
+// Renderizador de Relatório Executivo em Tela Cheia (Cards Modulares Brancos)
+window.renderExecutiveReport = function(topic, text, customDate) {
   const inputView = document.getElementById("consultor-input-view");
   const reportView = document.getElementById("consultor-report-view");
   const reportContent = document.getElementById("consultor-report-content");
   const reportTitle = document.getElementById("report-topic-title");
+  const reportDateBadge = document.getElementById("report-date-badge");
   const btnNewReport = document.getElementById("btn-new-report");
   const scrollContainer = document.getElementById("consultor-main-scroll");
 
   if (!reportContent || !reportView) return;
 
   if (reportTitle) reportTitle.innerText = topic;
+  if (reportDateBadge) {
+    reportDateBadge.innerText = customDate ? `Auditoria Gerada em ${customDate} • Base: Pesquisa SJC (N=476, IC=95%)` : "Base de Dados: Pesquisa Municipal Radar SJC (N=476, IC=95%, Erro ±4.5%)";
+  }
+
   if (inputView) inputView.classList.add("hidden");
   if (reportView) reportView.classList.remove("hidden");
   if (btnNewReport) btnNewReport.classList.remove("hidden");
@@ -6687,13 +6795,13 @@ window.renderExecutiveReport = function(topic, text) {
       });
 
       return `
-        <div class="my-6 p-5 sm:p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-xl">
-          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
-            <span class="text-xs sm:text-sm font-black uppercase tracking-wider text-accent-cyan flex items-center gap-2">
-              <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
+        <div class="my-5 p-5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+            <span class="text-xs font-black uppercase tracking-wider text-brand-900 flex items-center gap-2">
+              <i class="fa-solid fa-chart-pie text-brand-600"></i>
               ${chartConfig.title || "Indicador Analítico (SJC)"}
             </span>
-            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-brand-900/80 text-accent-cyan border border-accent-cyan/30">Radar São José</span>
+            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-brand-900 text-white shadow-2xs">Radar SJC 2026</span>
           </div>
           <div class="relative w-full h-64 sm:h-72">
             <canvas id="${chartId}"></canvas>
@@ -6759,67 +6867,67 @@ window.renderExecutiveReport = function(topic, text) {
 
     // Formatadores internos de markdown
     let formattedContent = content
-      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-white font-bold'>$1</strong>")
-      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-300 font-medium leading-relaxed my-1'>$1</li>")
-      .replace(/^\*\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-300 font-medium leading-relaxed my-1'>$1</li>")
-      .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-300 font-medium leading-relaxed my-1'>$1</li>")
-      .replace(/\n\n/g, "<div class='my-2'></div>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
+      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1.5'>$1</li>")
+      .replace(/^\*\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1.5'>$1</li>")
+      .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1.5'>$1</li>")
+      .replace(/\n\n/g, "<div class='my-3'></div>")
       .replace(/\n/g, "<br/>");
 
     // Ícone e cores para cada seção no padrão Studio 8
     let iconClass = "fa-chart-simple";
-    let accentColor = "text-accent-cyan";
-    let borderAccent = "border-l-4 border-l-accent-cyan";
+    let accentColor = "text-brand-900";
+    let borderAccent = "border-l-4 border-l-brand-900";
 
     const upperTitle = title.toUpperCase();
     if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
       iconClass = "fa-bolt";
-      accentColor = "text-amber-400";
-      borderAccent = "border-l-4 border-l-amber-400";
+      accentColor = "text-amber-500";
+      borderAccent = "border-l-4 border-l-amber-500";
     } else if (upperTitle.includes("SWOT")) {
       iconClass = "fa-table-cells-large";
-      accentColor = "text-rose-400";
+      accentColor = "text-rose-500";
       borderAccent = "border-l-4 border-l-rose-500";
     } else if (upperTitle.includes("AMBIENTE") || upperTitle.includes("PESTEL") || upperTitle.includes("ISHIKAWA")) {
-      iconClass = "fa-globe";
-      accentColor = "text-emerald-400";
-      borderAccent = "border-l-4 border-l-emerald-500";
+      iconClass = "fa-earth-americas";
+      accentColor = "text-emerald-600";
+      borderAccent = "border-l-4 border-l-emerald-600";
     } else if (upperTitle.includes("MATRIZ") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO") || upperTitle.includes("OCEANO")) {
       iconClass = "fa-chess";
-      accentColor = "text-sky-400";
-      borderAccent = "border-l-4 border-l-sky-500";
+      accentColor = "text-sky-600";
+      borderAccent = "border-l-4 border-l-sky-600";
     } else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT")) {
       iconClass = "fa-compass";
-      accentColor = "text-purple-400";
-      borderAccent = "border-l-4 border-l-purple-500";
+      accentColor = "text-purple-600";
+      borderAccent = "border-l-4 border-l-purple-600";
     }
 
     htmlOutput += `
-      <section class="p-6 sm:p-8 bg-slate-900/80 rounded-2xl border border-slate-800 shadow-lg ${borderAccent} space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
-          <h3 class="text-sm sm:text-base font-black uppercase tracking-wider text-white flex items-center gap-2.5">
+      <section class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200 shadow-card ${borderAccent} space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="text-sm sm:text-base font-black uppercase tracking-wider text-brand-950 flex items-center gap-2.5">
             <i class="fa-solid ${iconClass} ${accentColor}"></i>
             <span>${title}</span>
           </h3>
-          <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-bold">SEÇÃO 0${idx + 1}</span>
+          <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-bold">SEÇÃO 0${idx + 1}</span>
         </div>
-        <div class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed space-y-2">
+        <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-2">
           ${formattedContent}
         </div>
       </section>
     `;
   });
 
-  // Se não foi possível dividir em seções h3, renderizar bloco geral
+  // Se não foi possível dividir em seções h3, renderizar fallback limpo
   if (!htmlOutput) {
     let formattedFallback = processedText
-      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-white font-bold'>$1</strong>")
-      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-300 my-1'>$1</li>")
+      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
+      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 my-1'>$1</li>")
       .replace(/\n/g, "<br/>");
 
     htmlOutput = `
-      <section class="p-6 sm:p-8 bg-slate-900/80 rounded-2xl border border-slate-800 shadow-lg border-l-4 border-l-accent-cyan space-y-4">
-        <div class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+      <section class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200 shadow-card border-l-4 border-l-brand-900 space-y-4">
+        <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed">
           ${formattedFallback}
         </div>
       </section>
@@ -6842,11 +6950,11 @@ window.renderExecutiveReport = function(topic, text) {
       const chartType = cfg.type === "pie" || cfg.type === "doughnut" ? "doughnut" : (cfg.type === "line" ? "line" : "bar");
 
       const defaultColors = [
-        "#00B4D8", "#F43F5E", "#10B981", "#F59E0B", "#8B5CF6",
-        "#06B6D4", "#3B82F6", "#EC4899", "#64748B"
+        "#0B2545", "#00B4D8", "#10B981", "#F59E0B", "#F43F5E",
+        "#8B5CF6", "#06B6D4", "#3B82F6", "#EC4899", "#64748B"
       ];
 
-      const bgColors = chartType === "doughnut" ? defaultColors : "#00B4D8";
+      const bgColors = chartType === "doughnut" ? defaultColors : "#0B2545";
 
       try {
         new Chart(canvas.getContext("2d"), {
@@ -6857,7 +6965,7 @@ window.renderExecutiveReport = function(topic, text) {
               label: cfg.title || "Indicador",
               data: cfg.data || [],
               backgroundColor: bgColors,
-              borderColor: "#0f172a",
+              borderColor: "#FFFFFF",
               borderWidth: chartType === "doughnut" ? 2 : 0,
               borderRadius: chartType === "bar" ? 6 : 0
             }]
@@ -6869,10 +6977,10 @@ window.renderExecutiveReport = function(topic, text) {
               legend: {
                 display: chartType === "doughnut",
                 position: "bottom",
-                labels: { color: "#cbd5e1", font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12 }
+                labels: { color: "#1E293B", font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12 }
               },
               datalabels: {
-                color: "#FFFFFF",
+                color: chartType === "doughnut" ? "#FFFFFF" : "#0B2545",
                 font: { family: "Montserrat", size: 10, weight: "bold" },
                 anchor: chartType === "doughnut" ? "center" : "end",
                 align: chartType === "doughnut" ? "center" : "top",
@@ -6880,8 +6988,8 @@ window.renderExecutiveReport = function(topic, text) {
               }
             },
             scales: chartType === "doughnut" ? {} : {
-              y: { beginAtZero: true, grid: { color: "#1e293b" }, ticks: { color: "#94a3b8", font: { family: "Montserrat", size: 10 } } },
-              x: { grid: { display: false }, ticks: { color: "#cbd5e1", font: { family: "Montserrat", size: 10, weight: "bold" } } }
+              y: { beginAtZero: true, grid: { color: "#F1F5F9" }, ticks: { color: "#64748B", font: { family: "Montserrat", size: 10 } } },
+              x: { grid: { display: false }, ticks: { color: "#1E293B", font: { family: "Montserrat", size: 10, weight: "bold" } } }
             }
           }
         });

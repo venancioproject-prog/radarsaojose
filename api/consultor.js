@@ -26,29 +26,44 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Chave GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.' });
     }
 
-    // BASE REAL CONSOLIDADA DO RADAR SÃO JOSÉ (DADOS DO CSV & APRESENTAÇÃO EXECUTIVA TXT)
+    // BASE REAL CONSOLIDADA COMPLETA (CSV MUNICIPAL + ESTUDO STUDIO 8 SJC 2026):
     const realMarketDataSJC = `
-DADOS REAIS CONSOLIDADOS DO MERCADO DE SÃO JOSÉ DOS CAMPOS (RADAR SJC 2026 - STUDIO 8 | N=476, IC=95%, Erro ±4.5%):
-- População SJC: 737.310 habitantes, 99% taxa de urbanização, 2,8 moradores por domicílio, idade mediana 36 anos.
-- Paradoxo Central: 72.4% têm ORGULHO de morar em SJC, mas 64.7% EVADEM consumo de lazer/gastronomia para outras cidades (São Paulo, Campos do Jordão, Litoral).
-- Identidade e Conexão: 58.5% NÃO sentem que os eventos/lugares combinam com seu estilo.
-- Barreira Financeira vs Experiência: 32.3% apontam "Preço alto para pouca entrega/experiência" como maior gargalo. 23.4% reclamam de falta de opções e mesmice.
-- Concentração Geográfica de Consumo:
-  * Centro-Oeste (Aquarius, Vila Adyana, Jd. Colinas): 40.7% da frequência de consumo.
-  * Zona Sul (Satélite, Bosque, Oriente): 27.6% (Polo autossuficiente e vibrante, mas carente de sofisticação).
-  * Zona Leste: 13.9% | Zona Norte: 11.2% | Sudeste: 6.6%.
-- Demografia & Renda:
-  * Idade: 35 a 44 anos (27.6%), 25 a 34 anos (26.8%), 45 a 54 anos (22.0%), 18 a 24 anos (12.2%), 55+ anos (11.4%).
-  * Renda Familiar: Até R$ 2.800 (18.1%), R$ 2.800 a R$ 7.000 (32.3%), R$ 7.000 a R$ 15.000 (23.6%), R$ 15.000 a R$ 26.000 (14.2%), Acima de R$ 26.000 (11.8%).
-  * Moradia: 58.7% possuem casa própria; 33.2% aluguel querendo casa própria.
-- Mobilidade: 56.4% usam Carro Próprio, 22.8% Apps de Transporte (Uber/99), 16.5% Ônibus.
-- Mercado Pet: 68.2% possuem pets e demandam espaços pet-friendly reais (não apenas tolerância).
-- OS 4 MOVIMENTOS CULTURAIS MAPEADOS EM SJC:
-  1. A GEOGRAFIA DO SILÊNCIO: Moradores que buscam refúgio, calmaria, privacidade, contato com a natureza e desaceleração do ritmo industrial.
-  2. A CIDADE PROMETIDA: Famílias consolidadas e migrantes que vieram pela promessa de segurança, infraestrutura de ponta e qualidade de vida familiar.
-  3. A TRIBO GLOBAL: Jovens, profissionais de tech, engenheiros e criativos hiperconectados com tendências globais, que exigem gastronomia autoral, design e vida noturna contemporânea.
-  4. O EMPREENDEDORISMO INTUITIVO: A força autônoma local, prestadores de serviço e pequenos negócios que movimentam os bairros fora do eixo tradicional.
-${context ? `\nRecorte Adicional da Sessão: ${JSON.stringify(context)}` : ''}`;
+DADOS COMPLETOS E REALISTAS DA PESQUISA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS (RADAR SJC - STUDIO 8 | N=476, IC=95%, Margem de Erro ±4.5%):
+1. MACRODEMOGRAFIA & URBANISMO (IBGE & PESQUISA SJC):
+   - População: 737.310 hab | 99% Urbanizada | Domicílios: 2,8 moradores/casa | Idade mediana: 36 anos.
+   - Distribuição de Renda Familiar SJC:
+     * Até R$ 2.800 (18.1%)
+     * R$ 2.801 a R$ 7.000 (32.3%) -> Maior classe média produtiva
+     * R$ 7.001 a R$ 15.000 (23.6%) -> Classe B em ascensão tecnológica
+     * R$ 15.001 a R$ 26.000 (14.2%) -> Alta renda consolidada (Aquarius, Urbanova, Colinas)
+     * Acima de R$ 26.000 (11.8%) -> Elite corporativa / aeroespacial
+   - Distribuição Etária SJC:
+     * 18 a 24 anos: 12.2%
+     * 25 a 34 anos: 26.8% (Pilar de inovação, bares e consumo rápido)
+     * 35 a 44 anos: 27.6% (Maior volume de decisão e gasto familiar)
+     * 45 a 54 anos: 22.0% (Poder aquisitivo alto e estabilidade)
+     * 55+ anos: 11.4% (Consumo de saúde, bem-estar e calmaria)
+
+2. COMPORTAMENTO, FLUXOS E PARADOXOS LOCAIS:
+   - Paradoxo do Orgulho vs Evasão: 72.4% têm ORGULHO de morar em SJC, mas 64.7% EVADEM seu consumo de lazer, gastronomia e cultura para outras cidades (SP, Campos do Jordão, Litoral).
+   - O "Match" de Eventos e Identidade: 58.5% afirmam categoricamente que os lugares e opções da cidade NÃO combinam com seu estilo de vida.
+   - As Barreiras da Noite e Serviços: 32.3% "É tudo muito caro para o que oferece (pouca experiência)" | 22.9% "Falta de lugares legais/autoriais" | 18.6% "Sensação de mesmice".
+   - Região mais frequentada para consumo:
+     * Centro-Oeste (Aquarius, Vila Adyana, Jardim das Colinas): 40.7%
+     * Zona Sul (Jardim Satélite, Bosque dos Eucaliptos, Oriente): 27.6% (Polo autossuficiente)
+     * Zona Leste: 13.9% | Zona Norte: 11.2% | Sudeste: 6.6%.
+   - Frequência de Saída: 37.6% saem 2 a 3 vezes/mês (conservador e seletivo) | 28.4% 1 vez/mês | 19.5% toda semana.
+   - Influenciadores e Redes: 61.2% usam Instagram para descobrir novidades, mas exigem curadoria estética real.
+   - Mercado Pet: 68.2% possuem pets (alta demanda por pets bem-vindos em locais gastronômicos).
+   - Moradia: 58.7% casa própria | 33.2% aluguel buscando comprar.
+
+3. OS 4 MOVIMENTOS CULTURAIS MAPEADOS NO ESTUDO:
+   1. A GEOGRAFIA DO SILÊNCIO: Busca por privacidade, sossego, refúgio verde, ar puro e desaceleração do estresse da indústria.
+   2. A CIDADE PROMETIDA: Famílias que migraram ou vivem pela promessa de segurança, estabilidade, boa educação e infraestrutura de ponta.
+   3. A TRIBO GLOBAL: Engenheiros, profissionais de tech (Embraer, INPE, startups), criativos e jovens cosmopolitas que exigem gastronomia autoral, tendências e estética contemporânea.
+   4. O EMPREENDEDORISMO INTUITIVO: A pujança dos prestadores de serviço, microempresários e negócios de bairro que sustentam a economia real da Zona Sul, Leste e Norte.
+${context ? `
+Recorte em tempo real da sessão do usuário: ${JSON.stringify(context)}` : ''}`;
 
     const systemPrompt = `Você é o Consultor Sênior de Inteligência de Mercado e Estratégia de Negócios do 'Radar São José' (Padrão Studio 8 / McKinsey & Company).
 
@@ -96,15 +111,14 @@ Gere o relatório completo seguindo RIGOROSAMENTE a estrutura abaixo:
 - **O Veredicto do Movimento:** Identifique e justifique categoricamente qual é **o melhor movimento cultural** para o empresário surfar prioritariamente, detalhando o fit de público e a alavanca de receita esperada.
 
 ---
-**AUTONOMIA DINÂMICA DE GRÁFICOS (CRÍTICO):**
-Você tem autonomia total para decidir quais são os **3 MELHORES gráficos e recortes analíticos** para embasar esta auditoria específica.
-Distribua exatamente 3 tags de gráficos dinâmicos ao longo do relatório (ex: na Visão Estratégica, SWOT ou Mercado).
-Gere cada tag no formato JSON exato em uma única linha:
+**OS 3 GRÁFICOS DINÂMICOS DE VALIDAÇÃO (OBRIGATÓRIO):**
+Você DEVE analisar a ideia de negócio e selecionar **EXATAMENTE 3 recortes de dados quantitativos estratégicos e distintos** para validar a tese do empreendimento em SJC (ex: Distribuição de Renda, Faixa Etária, Regiões de Consumo, Evasão vs Orgulho, Barreiras Noturnas ou Mobilidade).
+Distribua exatamente 3 tags de gráficos dinâmicos no formato JSON em uma única linha ao longo do relatório:
 [CHART: {"type": "bar|doughnut|pie|line", "title": "Título do Indicador Analítico", "labels": ["Label1", "Label2", "Label3"], "data": [40.7, 27.6, 31.7]}]
-Use apenas dados e porcentagens reais baseadas no contexto de SJC (ex: faixas de renda, regiões, faixas etárias, hábitos de evasão, mobilidade, etc).
+Use apenas porcentagens reais extraídas do contexto de SJC.
 
 **DIRETRIZ DE FORMATOS:**
-Escreva em tom executivo de alto nível, limpo e direto (Padrão Studio 8 / McKinsey), sem introduções robóticas. O texto deve sair pronto para ser renderizado como um relatório de auditoria corporativa.`;
+Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Studio 8 / McKinsey), sem introduções robóticas.`;
 
     // 1. Auto-descoberta dinâmica de modelo ativo na conta Groq
     let selectedModel = 'qwen/qwen3.8-27b';
