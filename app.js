@@ -6928,7 +6928,6 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   }
 
   // Garantir que nenhum campo de texto contenha JSON bruto serializado
-  if (typeof data.visao_estrategica === 'object') data.visao_estrategica = JSON.stringify(data.visao_estrategica);
   if (typeof data.pestel_ishikawa === 'object') data.pestel_ishikawa = JSON.stringify(data.pestel_ishikawa);
   if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
   if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
@@ -6936,95 +6935,91 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 
   const dynamicChartsToRender = [];
 
-  // Helper para renderizar a Visão Estratégica em blocos elegantes
-  const renderVisionBlocks = (visionText) => {
-    if (!visionText) return '<p class="text-slate-600 text-xs">Diagnóstico analítico em elaboração para São José dos Campos.</p>';
+  // Helper para renderizar a Visão Estratégica em blocos elegantes sem truncamento de texto
+  const renderVisionBlocks = (visionObj) => {
+    if (!visionObj) return '<p class="text-slate-600 text-xs">Diagnóstico analítico em elaboração para São José dos Campos.</p>';
     
-    // Lista de chaves temáticas caso o texto contenha subtópicos
-    const keys = [
-      { id: 'oport', name: 'Oportunidade Latente & Dor do Mercado', icon: 'fa-bullseye', color: 'rose', titleClass: 'text-rose-600', pattern: 'OPORTUNIDADE\\s*LATENTE|OPORTUNIDADE|DOR\\s*DO\\s*MERCADO|A\\s*dor' },
-      { id: 'valid', name: 'Validação da Demanda & Comportamento', icon: 'fa-chart-line', color: 'sky', titleClass: 'text-sky-600', pattern: 'VALIDAÇÃO\\s*DA\\s*DEMANDA|VALIDACAO\\s*DA\\s*DEMANDA|VALIDAÇÃO|VALIDACAO' },
-      { id: 'ticket', name: 'Ticket Médio Estimado & Posicionamento', icon: 'fa-tag', color: 'emerald', titleClass: 'text-emerald-600', pattern: 'TICKET\\s*MÉDIO|TICKET\\s*MEDIO|TICKET|PREÇO|PRECO' },
-      { id: 'publico', name: 'Público Prioritário & Segmentos', icon: 'fa-users', color: 'purple', titleClass: 'text-purple-600', pattern: 'PÚBLICO\\s*PRIORITÁRIO|PUBLICO\\s*PRIORITARIO|PÚBLICO|PUBLICO|PERFIL\\s*DE\\s*CLIENTES' },
-      { id: 'diretrizes', name: 'Diretrizes Executivas & Ações Práticas', icon: 'fa-lightbulb', color: 'amber', titleClass: 'text-brand-900', pattern: 'DIRETRIZES\\s*EXECUTIVAS|DIRETRIZES|EXPANSÃO|EXPANSAO|RECOMENDAÇÕES|RECOMENDACOES|AÇÕES|ACOES' }
-    ];
+    // Se a IA retornou o objeto aninhado conforme novo padrão
+    if (typeof visionObj === 'object' && visionObj !== null) {
+      const ticketMedio = visionObj.ticket_medio || "";
+      const publico = visionObj.publico_prioritario || "";
+      const diretrizes = visionObj.diretrizes_executivas || "";
 
-    const allPatterns = keys.map(k => k.pattern);
-    const extractedCards = [];
-
-    keys.forEach((k, idx) => {
-      const remainingPatterns = allPatterns.filter((_, i) => i !== idx);
-      const content = extractBlock(visionText, k.pattern, remainingPatterns);
-      if (content && content.length > 5) {
-        let cleanContent = content
-          .replace(/^(&\s*COMPORTAMENTO|&\s*POSICIONAMENTO|&\s*EXPANSÃO|&\s*EXPANSAO|&\s*AÇÕES|&\s*ACOES|&\s*DOR\s*DO\s*MERCADO)[\s\:\-]*/i, '')
-          .replace(/^(?:OPORTUNIDADE\s*LATENTE|OPORTUNIDADE|VALIDAÇÃO\s*DA\s*DEMANDA|VALIDACAO\s*DA\s*DEMANDA|VALIDAÇÃO|VALIDACAO|TICKET\s*MÉDIO|TICKET\s*MEDIO|TICKET|PÚBLICO\s*PRIORITÁRIO|PUBLICO\s*PRIORITARIO|PÚBLICO|PUBLICO|DIRETRIZES\s*EXECUTIVAS|DIRETRIZES)[^:\n]*:?\s*/i, '')
-          .trim();
-
-        extractedCards.push({
-          name: k.name,
-          icon: k.icon,
-          titleClass: k.titleClass,
-          content: cleanContent
-        });
-      }
-    });
-
-    if (extractedCards.length >= 2) {
       return `
         <div class="space-y-3.5">
-          ${extractedCards.map(c => `
+          ${ticketMedio ? `
             <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 ${c.titleClass} font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid ${c.icon} text-[11px]"></i>
-                <span>${c.name}</span>
+              <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-tag text-[11px]"></i>
+                <span>TICKET MÉDIO & POSICIONAMENTO</span>
               </div>
-              <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(c.content)}
+              <div id="ticket-medio-texto" class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(ticketMedio)}
               </div>
             </div>
-          `).join('')}
-        </div>
-      `;
-    }
+          ` : ''}
 
-    // Se veio parágrafos contínuos
-    const rawParagraphs = String(visionText).split(/\n\n+/).map(p => p.trim()).filter(p => p.length > 10);
-    if (rawParagraphs.length >= 2) {
-      const palette = [
-        { icon: 'fa-bullseye', color: 'text-rose-600', label: 'OPORTUNIDADE & DEMANDA' },
-        { icon: 'fa-chart-line', color: 'text-sky-600', label: 'VALIDAÇÃO & CONSUMO' },
-        { icon: 'fa-tag', color: 'text-emerald-600', label: 'TICKET MÉDIO & POSICIONAMENTO' },
-        { icon: 'fa-users', color: 'text-purple-600', label: 'PÚBLICO PRIORITÁRIO' },
-        { icon: 'fa-lightbulb', color: 'text-brand-900', label: 'DIRETRIZES ESTRATÉGICAS' }
-      ];
-
-      return `
-        <div class="space-y-3.5">
-          ${rawParagraphs.map((p, pIdx) => {
-            const pal = palette[pIdx % palette.length];
-            return `
-              <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 ${pal.color} font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <i class="fa-solid ${pal.icon} text-[11px]"></i>
-                  <span>${pal.label}</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                  ${formatMarkdown(p)}
-                </div>
+          ${publico ? `
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-users text-[11px]"></i>
+                <span>PÚBLICO PRIORITÁRIO & DEMOGRAFIA</span>
               </div>
-            `;
-          }).join('')}
+              <div id="publico-texto" class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(publico)}
+              </div>
+            </div>
+          ` : ''}
+
+          ${diretrizes ? `
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-brand-900 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-lightbulb text-[11px] text-amber-500"></i>
+                <span>DIRETRIZES EXECUTIVAS & PROVA ESTATÍSTICA</span>
+              </div>
+              <div id="diretrizes-texto" class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(diretrizes)}
+              </div>
+            </div>
+          ` : ''}
         </div>
       `;
     }
 
+    // Se veio como string simples
+    const visionText = String(visionObj);
     return `
       <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs text-xs text-slate-700 font-normal leading-relaxed space-y-3">
         ${formatMarkdown(visionText)}
       </div>
     `;
   };
+
+  // Processamento do Gráfico de Validação Principal do Veredicto
+  let primaryChartConfig = null;
+  if (data.grafico_validacao_principal && Array.isArray(data.grafico_validacao_principal.data) && data.grafico_validacao_principal.data.length > 0) {
+    primaryChartConfig = {
+      type: data.grafico_validacao_principal.type || "bar",
+      title: data.grafico_validacao_principal.titulo || "INDICADOR DE FIT ESTATÍSTICO (SJC)",
+      labels: data.grafico_validacao_principal.labels || ["Dado 1", "Dado 2", "Dado 3"],
+      data: data.grafico_validacao_principal.data || [10, 20, 30]
+    };
+  } else {
+    // Fallback inteligente
+    primaryChartConfig = {
+      type: "bar",
+      title: "DISTRIBUIÇÃO DE RENDA FAMILIAR (BASE REAL SJC)",
+      labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
+      data: [18.1, 32.3, 23.6, 14.2, 11.8]
+    };
+  }
+
+  // Registrar gráfico principal para renderização via Chart.js
+  const primaryChartCanvasId = "veredicto-mini-chart";
+  dynamicChartsToRender.push({
+    id: primaryChartCanvasId,
+    config: primaryChartConfig
+  });
 
   // Processamento dos Bairros
   let bairrosList = [];
@@ -7053,17 +7048,17 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           
           ${renderVisionBlocks(data.visao_estrategica)}
 
-          <!-- MINI GRÁFICO DINÂMICO DO VEREDICTO -->
+          <!-- MINI GRÁFICO DINÂMICO CONECTADO À ANÁLISE -->
           <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
                 <i class="fa-solid fa-chart-pie text-accent-cyan text-xs"></i>
-                DISTRIBUIÇÃO DE RENDA MUNICIPAL (BASE REAL)
+                ${primaryChartConfig.title}
               </span>
               <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-900 text-white">N=477</span>
             </div>
-            <div class="relative w-full h-36">
-              <canvas id="veredicto-mini-chart"></canvas>
+            <div class="relative w-full h-40">
+              <canvas id="${primaryChartCanvasId}"></canvas>
             </div>
           </div>
         </div>
@@ -7536,44 +7531,5 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         console.error("Erro ao instanciar Chart.js dinâmico no relatório:", errChart);
       }
     });
-
-    // Instanciar o Mini Gráfico do Veredicto
-    const veredictoCanvas = document.getElementById("veredicto-mini-chart");
-    if (veredictoCanvas && window.Chart) {
-      try {
-        new Chart(veredictoCanvas.getContext("2d"), {
-          type: "bar",
-          data: {
-            labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
-            datasets: [{
-              label: "Distribuição em SJC (%)",
-              data: [18.1, 32.3, 23.6, 14.2, 11.8],
-              backgroundColor: ["#94A3B8", "#0B2545", "#00B4D8", "#10B981", "#F59E0B"],
-              borderRadius: 4
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { display: false },
-              datalabels: {
-                color: "#0B2545",
-                font: { family: "Montserrat", size: 9, weight: "bold" },
-                anchor: "end",
-                align: "top",
-                formatter: (val) => val + "%"
-              }
-            },
-            scales: {
-              y: { beginAtZero: true, max: 40, grid: { color: "#F1F5F9" }, ticks: { display: false } },
-              x: { grid: { display: false }, ticks: { color: "#475569", font: { family: "Montserrat", size: 8, weight: "bold" } } }
-            }
-          }
-        });
-      } catch (eVer) {
-        console.warn("Falha ao renderizar veredicto-mini-chart:", eVer);
-      }
-    }
   }, 100);
 };

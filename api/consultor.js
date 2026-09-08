@@ -67,12 +67,25 @@ ${marketBriefSJC}
 
 REGRAS DE OURO:
 1. FIM DA PREGUIÇA GEOGRÁFICA: PROIBIDO listar automaticamente bairros de elite (Aquarius, Colinas) se a renda e o público da ideia não baterem. Se for popular, mande para Zona Sul, Leste ou Norte. Justifique com dados do CSV.
-2. VEREDICTO IMPLACÁVEL: Diagnóstico denso, citando métricas reais de SJC (evasão de 64.7%, orgulho 72.4%, barreiras noturnas 32.3%, faixas de renda e perfil conservador de aprox. 40% de direita para negócios adultos/polêmicos).
+2. VEREDICTO IMPLACÁVEL & DATA STORYTELLING:
+   - Para a seção 'Visão Estratégica', você DEVE buscar no CSV o dado que tem o MAIOR FIT com a ideia do usuário (ex: se for luxo, puxe dados de alta renda; se for bar, puxe evasão noturna de 64.7% ou barreiras noturnas; se for família, puxe Cidade Prometida e bairros da Zona Sul).
+   - Gere frases COMPLETAS, sem truncamento.
+   - No campo 'diretrizes_executivas', você DEVE fazer referência direta ao gráfico que será gerado, usando expressões como "Conforme demonstrado no gráfico analítico abaixo..." ou "Como provado pelo gráfico abaixo...".
 3. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
-  "visao_estrategica": "Seu diagnóstico analítico profundo cruzando a ideia com os microdados de SJC, ticket médio, oportunidade latente e público...",
+  "visao_estrategica": {
+    "ticket_medio": "Texto completo e finalizado sobre estimativa de preço, ticket médio e posicionamento baseado na renda e poder de compra de SJC.",
+    "publico_prioritario": "Texto completo e finalizado definindo o segmento exato, dados demográficos e o comportamento de consumo esperado.",
+    "diretrizes_executivas": "Texto completo com as ações práticas e recomendações de expansão. OBRIGATÓRIO citar e conectar diretamente os dados numéricos do 'grafico_validacao_principal' abaixo neste parágrafo (ex: 'Conforme demonstrado no gráfico analítico abaixo, X% do público...')."
+  },
+  "grafico_validacao_principal": {
+    "titulo": "TÍTULO DO GRÁFICO DE FIT DIRETO (EX: DISTRIBUIÇÃO DE RENDA FAMILIAR SJC / PARADOXO DE EVASÃO)",
+    "type": "bar",
+    "labels": ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"],
+    "data": [18.1, 32.3, 23.6, 14.2, 11.8]
+  },
   "bairros": [
     { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Motivo técnico baseado no perfil de renda e fluxo do CSV..." },
     { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Motivo técnico baseado no CSV..." },
