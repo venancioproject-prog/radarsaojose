@@ -6778,7 +6778,7 @@ window.handleConsultorSubmit = async function(e) {
 // ==========================================
 // RENDERIZADOR EXECUTIVO DE ALTA FIDELIDADE (STUDIO 8 / MCKINSEY)
 // ==========================================
-window.renderExecutiveReport = function(topic, text, customDate) {
+window.renderExecutiveReport = function(topic, rawData, customDate) {
   const inputView = document.getElementById("consultor-input-view");
   const reportView = document.getElementById("consultor-report-view");
   const reportContent = document.getElementById("consultor-report-content");
@@ -6791,129 +6791,34 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
   if (reportTitle) reportTitle.innerText = (topic || "AUDITORIA DE NEGÓCIO").toUpperCase();
   if (reportDateBadge) {
-    reportDateBadge.innerText = customDate ? `Auditoria Gerada em ${customDate} • Base: Pesquisa SJC (N=476, IC=95%)` : "Base de Dados: Pesquisa Municipal Radar SJC (N=476, IC=95%, Erro ±4.5%)";
+    reportDateBadge.innerText = customDate ? `Auditoria Gerada em ${customDate} • Base: Pesquisa SJC (N=477, IC=95%)` : "Base de Dados: Pesquisa Municipal Radar SJC (N=477, IC=95%, Erro ±4.5%)";
   }
 
   if (inputView) inputView.classList.add("hidden");
   if (reportView) reportView.classList.remove("hidden");
   if (btnNewReport) btnNewReport.classList.remove("hidden");
 
-  const dynamicChartsToRender = [];
-
-  // Parser Dinâmico de Tags de Gráficos [CHART: {...}]
-  const renderDynamicChartTag = (match, jsonStr) => {
-    try {
-      const cleanJson = jsonStr.trim();
-      const chartConfig = JSON.parse(cleanJson);
-      const chartId = "dynamic-chart-" + Math.random().toString(36).substr(2, 9);
-
-      dynamicChartsToRender.push({
-        id: chartId,
-        config: chartConfig
-      });
-
-      return `
-        <div class="my-6 p-5 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs">
-          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
-            <span class="text-xs font-black uppercase tracking-wider text-brand-900 flex items-center gap-2">
-              <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
-              ${chartConfig.title || "Indicador Analítico (SJC)"}
-            </span>
-            <span class="text-[10px] font-mono font-extrabold px-2.5 py-1 rounded-full bg-brand-900 text-white">RADAR SJC 2026</span>
-          </div>
-          <div class="relative w-full h-64 sm:h-72">
-            <canvas id="${chartId}"></canvas>
-          </div>
-        </div>
-      `;
-    } catch (e) {
-      console.warn("Falha ao analisar JSON da tag [CHART]:", jsonStr, e);
-      return "";
-    }
-  };
-
-  const renderLegacyGraficoTag = (match, p1) => {
-    const tag = p1.trim().toUpperCase();
-    if (tag === "IDADE") {
-      return renderDynamicChartTag("", JSON.stringify({
-        type: "bar",
-        title: "Radiografia Etária de São José dos Campos",
-        labels: ["18-24 anos", "25-34 anos", "35-44 anos", "45-54 anos", "55+ anos"],
-        data: [12.2, 26.8, 27.6, 22.0, 11.4]
-      }));
-    } else if (tag === "RENDA") {
-      return renderDynamicChartTag("", JSON.stringify({
-        type: "bar",
-        title: "Distribuição de Renda Familiar em SJC",
-        labels: ["Até R$ 2.8k", "R$ 2.8k-7k", "R$ 7k-15k", "R$ 15k-26k", "Mais de R$ 26k"],
-        data: [18.1, 32.3, 23.6, 14.2, 11.8]
-      }));
-    } else if (tag === "REGIAO") {
-      return renderDynamicChartTag("", JSON.stringify({
-        type: "doughnut",
-        title: "Frequência de Consumo por Região de SJC",
-        labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
-        data: [40.7, 27.6, 13.9, 11.2, 6.6]
-      }));
-    }
-    return "";
-  };
-
-  // HIGIENIZAÇÃO RIGOROSA DE LUXO: Cortar qualquer rascunho de pensamento em inglês (ex: 1. Deconstruct, 2. Map Data, Draft)
-  let rawAiText = (text || "").trim();
-  
-  // Encontrar o início oficial da primeira seção "### VISÃO ESTRATÉGICA"
-  const realStartIdx = rawAiText.search(/###\s*(?:[1-9]\.\s*)?VISÃO\s*ESTRATÉGICA/i);
-  if (realStartIdx !== -1) {
-    rawAiText = rawAiText.substring(realStartIdx).trim();
-  } else {
-    const firstSectionIdx = rawAiText.search(/###\s*(?:[1-9]\.\s*)?(VISÃO|VISAO|MATRIZ|AUDITORIA|TOP)/i);
-    if (firstSectionIdx !== -1) {
-      rawAiText = rawAiText.substring(firstSectionIdx).trim();
-    }
-  }
-
-  // Descartar rascunhos numerados residuais
-  rawAiText = rawAiText
-    .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft|Section by Section)[\s\S]*?(?=###\s*(?:[1-9]\.\s*)?VISÃO|###\s*(?:[1-9]\.\s*)?TOP|$)/gi, '')
-    .trim();
-
-  // processedText para renderização de cards de texto (sem poluição de tags de gráfico)
-  let processedText = rawAiText
-    .replace(/!\[\s*\[CHART:[\s\S]*?\]\]?/gi, '')
-    .replace(/\[CHART:[\s\S]*?\]/gi, '')
-    .replace(/\[GRAFICO:[\s\S]*?\]/gi, '')
-    .trim();
-
-  // Helper para limpar markdown básico e remover ruídos de asteriscos/hifens soltos
+  // Helper para formatar negritos e quebras de linha com segurança
   const formatMarkdown = (txt, strongClass = "text-slate-900 font-bold") => {
     if (!txt) return "";
-    let clean = txt
-      // 1. Descartar linhas de tabela markdown cruas (ex: |---|---| ou | Bairro | Região |) se vazaram
+    let clean = String(txt)
       .replace(/^\s*\|[-:\s|]+\|\s*$/gm, "")
-      .replace(/^\s*\|\s*(bairro|regi[aã]o|motivo|fit|por que)[\s\S]*?\|\s*$/gim, "")
-      // 2. Remover pipes residuais soltos de início/fim de linha
       .replace(/^\s*\|\s*/gm, "")
       .replace(/\s*\|\s*$/gm, "")
       .replace(/\|/g, " • ")
-      // 3. Limpar asteriscos e marcadores órfãos no início e fim de linhas
       .replace(/^\s*(\*\*|\*|-|•|–)\s*/gm, "")
       .replace(/(\*\*|\*)\s*$/gm, "")
       .replace(/\*\*:\s*/g, ": ")
       .replace(/\*\*\s*\*\*/g, "")
-      // 4. Formatar negrito real com tratamento defensivo para asteriscos não pareados
       .replace(/\*\*([^*]+)\*\*/g, `<strong class='${strongClass}'>$1</strong>`)
       .replace(/\*([^*]+)\*/g, `<em class='text-slate-800 font-medium'>$1</em>`)
-      // 5. Remover quaisquer asteriscos órfãos remanescentes
       .replace(/\*\*/g, "")
       .replace(/(?<!\w)\*(?!\w)/g, "")
-      // 6. Formatar listas com marcadores
       .replace(/^[\-•]\s+(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
       .replace(/^\d+\.\s+(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
       .replace(/\n\n/g, "<div class='my-2.5'></div>")
       .replace(/\n/g, "<br/>");
     
-    // Limpar resíduos finais de pontuação e tags vazias
     return clean
       .replace(/<br\/>\s*<br\/>/g, "<div class='my-2.5'></div>")
       .replace(/^\s*<br\/>/g, "")
@@ -6922,72 +6827,94 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       .trim();
   };
 
-  // Helper para renderizar bullet points delineados e elegantes na Matriz SWOT
-  const renderSwotBullets = (txt, iconColor = "text-emerald-500", iconClass = "fa-circle-check") => {
-    if (!txt) return '<p class="text-slate-500 italic">Análise específica em processamento para São José dos Campos.</p>';
-    
-    // Divide por linhas ou quebras de marcadores
-    let lines = txt.split(/\n+/).map(l => l.trim()).filter(l => l.length > 3 && !l.startsWith('###') && l !== '--');
-    
-    // Se veio tudo em uma única linha grande com pontos finais ou traços
-    if (lines.length === 1 && lines[0].includes('. ')) {
-      const sentences = lines[0].split(/(?<=\.)\s+(?=[A-Z0-9])/).filter(s => s.trim().length > 3);
-      if (sentences.length > 1) {
-        lines = sentences;
+  // Helper para extrair bloco de texto com fallback
+  const extractBlock = (fullText, startPattern, endPatterns) => {
+    if (!fullText) return '';
+    try {
+      const endGroup = endPatterns.join('|');
+      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
+      let match = fullText.match(regex);
+      if (!match) {
+        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
+        match = fullText.match(fallbackRegex);
+      }
+      if (match && match[1]) {
+        return match[1].trim()
+          .replace(/^(?:\*\*|\*|:|\-|\s)+/, '')
+          .replace(/(?:\*\*|\*|\-|\s)+$/, '')
+          .trim();
+      }
+      return '';
+    } catch (e) {
+      return '';
+    }
+  };
+
+  // Helper para renderizar bullet points da Matriz SWOT
+  const renderSwotBullets = (items, iconColor = "text-emerald-500", iconClass = "fa-circle-check") => {
+    let lines = [];
+    if (Array.isArray(items)) {
+      lines = items.map(i => String(i).trim()).filter(i => i.length > 2);
+    } else if (typeof items === 'string' && items.trim()) {
+      lines = items.split(/\n+/).map(l => l.trim()).filter(l => l.length > 2 && !l.startsWith('###') && l !== '--');
+      if (lines.length === 1 && lines[0].includes('. ')) {
+        const sentences = lines[0].split(/(?<=\.)\s+(?=[A-Z0-9])/).filter(s => s.trim().length > 3);
+        if (sentences.length > 1) lines = sentences;
       }
     }
 
-    if (lines.length === 0) return '<p class="text-slate-500 italic">Análise específica em processamento para São José dos Campos.</p>';
+    if (lines.length === 0) {
+      return '<p class="text-slate-500 italic text-xs">Análise específica em processamento para São José dos Campos.</p>';
+    }
 
     return lines.map(line => `
       <div class="flex items-start gap-2.5 p-2 rounded-xl hover:bg-white/80 transition-colors">
         <i class="fa-solid ${iconClass} ${iconColor} text-xs mt-1 shrink-0"></i>
-        <div class="leading-relaxed text-slate-700">
+        <div class="leading-relaxed text-slate-700 text-xs">
           ${formatMarkdown(line)}
         </div>
       </div>
     `).join('');
   };
 
-  // Helper para extrair blocos de texto por títulos/marcadores com regex super flexível
-  const extractBlock = (fullText, startPattern, endPatterns) => {
-    if (!fullText) return '';
+  // 1. Tentar fazer o parse do JSON
+  let data = null;
+  if (typeof rawData === 'object' && rawData !== null) {
+    data = rawData;
+  } else if (typeof rawData === 'string') {
     try {
-      const endGroup = endPatterns.join('|');
-      // Procura por qualquer variação de título no início de linha ou após quebra/pontuação
-      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
-      let match = fullText.match(regex);
-      
-      // Fallback se não casou
-      if (!match) {
-        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•|–|\\d+\\.)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
-        match = fullText.match(fallbackRegex);
-      }
-
-      if (match && match[1]) {
-        let res = match[1].trim();
-        // Remove títulos de seções subsequentes se vazaram
-        res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5\s*FORÇAS|PORTER|VRIO|5\s*PS|MARKETING|OCEANO\s*AZUL|MATRIZ|AUDITORIA|SWOT|TOP\s*BAIRROS)[\s\S]*$/gi, '').trim();
-        // Remove prefixos repetitivos como (V): (R): (I): (O): **
-        res = res.replace(/^\s*\([VRIO]\)\s*:?\s*/gi, '');
-        // Remove asteriscos órfãos e pontuações soltas no início ou final
-        res = res.replace(/^(\*\*|\*|:|\-|\s)+/, '').trim();
-        res = res.replace(/(\*\*|\*|\-|\s)+$/, '').trim();
-        res = res.replace(/^\*\*\s*/gm, '').trim();
-        if (res.length > 0) return res;
-      }
-      return '';
+      data = JSON.parse(rawData);
     } catch (e) {
-      console.warn("Erro no regex extractBlock:", e);
-      return '';
+      const matchJson = rawData.match(/\{[\s\S]*\}/);
+      if (matchJson) {
+        try { data = JSON.parse(matchJson[0]); } catch (e2) {}
+      }
     }
-  };
+  }
 
-  // Helper para renderizar a Visão Estratégica e Veredicto em blocos temáticos de alta fidelidade
-  const renderVisionAndVerdict = (visionText) => {
-    if (!visionText) return '';
+  // Se não foi possível obter objeto estruturado, monta objeto compatível a partir do texto
+  if (!data || typeof data !== 'object') {
+    const rawTxt = String(rawData || '');
+    data = {
+      visao_estrategica: rawTxt,
+      bairros: [],
+      zona_exclusao: "",
+      swot: { forcas: [], fraquezas: [], oportunidades: [], ameacas: [] },
+      pestel_ishikawa: "",
+      matrizes_vrio_porter: "",
+      mix_marketing_oceano_azul: "",
+      movimento_cultural: { vencedor: "A Tribo Global", analise: "" },
+      graficos_analiticos: []
+    };
+  }
 
-    // Lista ordenada de chaves para quebrar o texto sequencialmente
+  const dynamicChartsToRender = [];
+
+  // Helper para renderizar a Visão Estratégica em blocos elegantes
+  const renderVisionBlocks = (visionText) => {
+    if (!visionText) return '<p class="text-slate-600 text-xs">Diagnóstico analítico em elaboração para São José dos Campos.</p>';
+    
+    // Lista de chaves temáticas caso o texto contenha subtópicos
     const keys = [
       { id: 'oport', name: 'Oportunidade Latente & Dor do Mercado', icon: 'fa-bullseye', color: 'rose', titleClass: 'text-rose-600', pattern: 'OPORTUNIDADE\\s*LATENTE|OPORTUNIDADE|DOR\\s*DO\\s*MERCADO|A\\s*dor' },
       { id: 'valid', name: 'Validação da Demanda & Comportamento', icon: 'fa-chart-line', color: 'sky', titleClass: 'text-sky-600', pattern: 'VALIDAÇÃO\\s*DA\\s*DEMANDA|VALIDACAO\\s*DA\\s*DEMANDA|VALIDAÇÃO|VALIDACAO' },
@@ -7003,7 +6930,6 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       const remainingPatterns = allPatterns.filter((_, i) => i !== idx);
       const content = extractBlock(visionText, k.pattern, remainingPatterns);
       if (content && content.length > 5) {
-        // Limpar qualquer vazamento de título repetido no início do conteúdo
         let cleanContent = content
           .replace(/^(&\s*COMPORTAMENTO|&\s*POSICIONAMENTO|&\s*EXPANSÃO|&\s*EXPANSAO|&\s*AÇÕES|&\s*ACOES|&\s*DOR\s*DO\s*MERCADO)[\s\:\-]*/i, '')
           .replace(/^(?:OPORTUNIDADE\s*LATENTE|OPORTUNIDADE|VALIDAÇÃO\s*DA\s*DEMANDA|VALIDACAO\s*DA\s*DEMANDA|VALIDAÇÃO|VALIDACAO|TICKET\s*MÉDIO|TICKET\s*MEDIO|TICKET|PÚBLICO\s*PRIORITÁRIO|PUBLICO\s*PRIORITARIO|PÚBLICO|PUBLICO|DIRETRIZES\s*EXECUTIVAS|DIRETRIZES)[^:\n]*:?\s*/i, '')
@@ -7036,8 +6962,8 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       `;
     }
 
-    // Se a IA gerou parágrafos contínuos ou outro padrão de bullets, quebra por tópicos ou parágrafos
-    const rawParagraphs = visionText.split(/\n\n+/).map(p => p.trim()).filter(p => p.length > 10);
+    // Se veio parágrafos contínuos
+    const rawParagraphs = String(visionText).split(/\n\n+/).map(p => p.trim()).filter(p => p.length > 10);
     if (rawParagraphs.length >= 2) {
       const palette = [
         { icon: 'fa-bullseye', color: 'text-rose-600', label: 'OPORTUNIDADE & DEMANDA' },
@@ -7067,7 +6993,6 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       `;
     }
 
-    // Fallback padrão se for texto único
     return `
       <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs text-xs text-slate-700 font-normal leading-relaxed space-y-3">
         ${formatMarkdown(visionText)}
@@ -7075,57 +7000,17 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     `;
   };
 
-  // Dividir por seções principais H3 de forma estrita e flexível (com suporte a números)
-  const extractMainSection = (txt, secName, nextSecNames) => {
-    if (!txt) return '';
-    const nextGroup = nextSecNames.map(s => `(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:[1-9]\\.\\s*)?${s}`).join('|');
-    const regex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•|–)?\\s*(?:[1-9]\\.\\s*)?${secName}[\\s\\S]*?(?=(?:\\n\\s*(?:${nextGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
-    const m = txt.match(regex);
-    return m ? m[0].trim() : '';
-  };
-
-  const getSectionContent = (secText) => {
-    if (!secText) return '';
-    const firstLineEnd = secText.indexOf("\n");
-    return firstLineEnd !== -1 ? secText.substring(firstLineEnd).trim() : '';
-  };
-
-  const getSectionTitle = (secText) => {
-    if (!secText) return '';
-    const firstLineEnd = secText.indexOf("\n");
-    const t = firstLineEnd !== -1 ? secText.substring(0, firstLineEnd) : secText;
-    return t.replace(/^###\s*(?:[1-9]\.\s*)?/, '').trim();
-  };
-
-  // Seções estruturadas (suporte total com e sem numeração)
-  const secVisionRaw = extractMainSection(processedText, 'VISÃO|VISAO|VEREDICTO', ['TOP\\s*BAIRROS', 'BAIRROS', 'MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'PESTEL', 'MATRIZES', '5\\s*PS', 'GRÁFICOS', 'GRAFICOS']);
-  const secBairrosRaw = extractMainSection(processedText, 'TOP\\s*(?:5\\s*)?BAIRROS|BAIRROS|GEO', ['MATRIZ\\s*SWOT', 'SWOT', 'FIT', 'MOVIMENTOS', 'AUDITORIA', 'PESTEL', 'MATRIZES', '5\\s*PS', 'GRÁFICOS', 'GRAFICOS']);
-  const secSwotRaw = extractMainSection(processedText, 'MATRIZ\\s*SWOT|SWOT', ['AUDITORIA', 'AMBIENTE', 'PESTEL', 'MATRIZES', '5\\s*PS', 'FIT', 'MOVIMENTOS', 'CULTURAIS', 'GRÁFICOS', 'GRAFICOS']);
-  const secAuditoriaRaw = extractMainSection(processedText, 'AUDITORIA|AMBIENTE|PESTEL|CAUSALIDADE', ['MATRIZES', 'COMPETITIVIDADE', 'VRIO', 'PORTER', '5\\s*PS', 'MIX', 'FIT', 'MOVIMENTOS', 'GRÁFICOS', 'GRAFICOS']);
-  const secCompetitividadeRaw = extractMainSection(processedText, 'MATRIZES|COMPETITIVIDADE|VRIO|PORTER|5\\s*PS|MIX', ['FIT', 'MOVIMENTOS', 'CULTURAIS', 'GRÁFICOS', 'GRAFICOS', 'INDICADORES']);
-  const secMovimentosRaw = extractMainSection(processedText, 'FIT|MOVIMENTOS|CULTURAIS|RISCO\\s*MORAL', ['GRÁFICOS', 'GRAFICOS', 'INDICADORES', 'MACRODADOS', '$']);
-  const secGraficosRaw = extractMainSection(processedText, 'GRÁFICOS|GRAFICOS|ANÁLISE\\s*DE\\s*DADOS|RECORTES', ['INDICADORES', 'MACRODADOS', '$']);
-
-  const visionContent = getSectionContent(secVisionRaw);
-  const bairrosContent = getSectionContent(secBairrosRaw);
-
-  let htmlOutput = "";
-
-  // 1. LINHA 1 DO RELATÓRIO: VISÃO ESTRATÉGICA & TOP 5 BAIRROS (LADO A LADO EM 2 COLUNAS)
-  let sanitizedVision = (visionContent || "")
-    .replace(/\d+\.\s*(Deconstruct Requirements|Map Business Idea|Draft)[\s\S]*?(?=\n\n|###|$)/gi, '')
-    .replace(/I need to generate the report[\s\S]*?(?=\n\n|$)/gi, '')
-    .trim();
-
-  // Se a IA não iniciou com ### e gerou o conteúdo de visão antes da primeira seção
-  if (!sanitizedVision && !secVisionRaw) {
-    const rawMatch = processedText.match(/^([\s\S]*?)(?=###\s*(?:[1-9]\.\s*)?(?:TOP|MATRIZ|AUDITORIA|O\s*FIT)|$)/i);
-    if (rawMatch && rawMatch[1]) sanitizedVision = rawMatch[1].trim();
+  // Processamento dos Bairros
+  let bairrosList = [];
+  if (Array.isArray(data.bairros) && data.bairros.length > 0) {
+    bairrosList = data.bairros;
   }
 
-  htmlOutput += `
+  // Início da montagem do HTML
+  let htmlOutput = `
+    <!-- LINHA 1: VISÃO ESTRATÉGICA & TOP 5 BAIRROS -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO + MINI GRÁFICO DE FIT DO VEREDICTO -->
+      <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO -->
       <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
         <div class="space-y-4">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -7140,10 +7025,9 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             </span>
           </div>
           
-          <!-- RENDERIZAÇÃO ESTRUTURADA EM SUB-CARDS -->
-          ${renderVisionAndVerdict(sanitizedVision || 'Diagnóstico analítico e auditoria de viabilidade para São José dos Campos.')}
+          ${renderVisionBlocks(data.visao_estrategica)}
 
-          <!-- MINI GRÁFICO DINÂMICO EMBUTIDO DO VEREDICTO -->
+          <!-- MINI GRÁFICO DINÂMICO DO VEREDICTO -->
           <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
@@ -7164,7 +7048,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         </div>
       </div>
 
-      <!-- CARD 2: TOP 5 BAIRROS RECOMENDADOS (GEO-FIT SJC) -->
+      <!-- CARD 2: TOP 5 BAIRROS & FIT GEOGRÁFICO -->
       <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
@@ -7180,151 +7064,55 @@ window.renderExecutiveReport = function(topic, text, customDate) {
           </div>
 
           <div class="space-y-2.5 pt-1">
-            ${(() => {
-              let bText = bairrosContent || '';
-              if (!bText) {
-                const bMatch = processedText.match(/(?:###|####|\*\*|\*|-|•|–)?\s*(?:[1-9]\.\s*)?(?:TOP\s*(?:5\s*)?BAIRROS|BAIRROS|GEO)[\s\S]*?(?=(?:###|####|\*\*|\*|-|•|–)?\s*(?:[1-9]\.\s*)?(?:MATRIZ|AUDITORIA|FIT)|$)/i);
-                if (bMatch) bText = bMatch[0];
-              }
-              const cleanBText = (bText || '').replace(/^###[^\n]*\n/i, '').trim();
-
-              const renderDefaultBairros = () => `
-                <div class="space-y-2.5">
-                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                    <div class="flex items-center justify-between">
-                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
-                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
-                    </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Alta densidade de renda corporativa e tolerância a novos conceitos autorais.</p>
-                  </div>
-                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                    <div class="flex items-center justify-between">
-                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Vila Ema & Vila Adyana</span>
-                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
-                    </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Polo gastronômico e de serviços premium consolidado, alta caminhabilidade.</p>
-                  </div>
-                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                    <div class="flex items-center justify-between">
-                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Satélite</span>
-                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Sul</span>
-                    </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Maior densidade populacional e volume de consumo contínuo da Zona Sul.</p>
-                  </div>
-                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                    <div class="flex items-center justify-between">
-                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim das Colinas</span>
-                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
-                    </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Perfil de altíssimo poder aquisitivo e preferência por privacidade.</p>
-                  </div>
-                  <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
-                    <div class="flex items-center justify-between">
-                      <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Urbanova</span>
-                      <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Oeste</span>
-                    </div>
-                    <p class="text-xs text-slate-600 leading-relaxed font-normal">Ambiente residencial de alto padrão com carência de conveniência especializada.</p>
-                  </div>
+            ${bairrosList.length > 0 ? bairrosList.map((b, idx) => `
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
+                    ${b.nome || `Microterritório 0${idx + 1}`}
+                  </span>
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">
+                    ${b.regiao || "SJC"}
+                  </span>
                 </div>
-              `;
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                  ${formatMarkdown(b.justificativa || "")}
+                </p>
+              </div>
+            `).join('') : `
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Aquarius</span>
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Centro-Oeste</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">Alta densidade de renda corporativa e tolerância a novos conceitos autorais.</p>
+              </div>
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> Jardim Satélite</span>
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">Zona Sul</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">Maior densidade populacional e volume de consumo contínuo da Zona Sul.</p>
+              </div>
+            `}
 
-              if (!cleanBText || cleanBText.length < 15) {
-                return renderDefaultBairros();
-              }
-              
-              // Limpar linhas vazias ou rascunhos de cabeçalhos de tabela
-              let rawLines = cleanBText.split(/\n+/).map(l => l.trim()).filter(l => {
-                if (!l || l.length < 4 || l.startsWith('###') || l === '--') return false;
-                if (l.match(/^\|[-:\s|]+\|$/)) return false;
-                if (l.match(/^\|\s*(bairro|regi[aã]o|motivo|fit|por que)/i)) return false;
-                return true;
-              });
-
-              if (rawLines.length > 0) {
-                return rawLines.map((line, bIdx) => {
-                  const isNegativeWarning = line.toLowerCase().includes('onde não abrir') || line.toLowerCase().includes('onde nao abrir') || line.toLowerCase().includes('não abrir') || line.toLowerCase().includes('nao abrir') || line.toLowerCase().includes('rejeição') || line.toLowerCase().includes('embargo');
-                  
-                  let bName = "";
-                  let bReg = "";
-                  let bDesc = "";
-
-                  if (line.includes('|')) {
-                    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
-                    if (cols.length >= 3) {
-                      bName = cols[0];
-                      bReg = cols[1];
-                      bDesc = cols.slice(2).join(' - ');
-                    } else if (cols.length === 2) {
-                      bName = cols[0];
-                      bDesc = cols[1];
-                    } else if (cols.length === 1) {
-                      bDesc = cols[0];
-                    }
-                  } else {
-                    const match = line.match(/^(?:[\-\*\d\.]+\s*)?(?:\*\*)?([^*:\(\-]+)(?:\*\*)?\s*(?:[\(\-]\s*([^)\:]+)\s*[\)\-]?)?\s*:?\s*([\s\S]*)$/);
-                    if (match) {
-                      bName = (match[1] || "").trim();
-                      bReg = (match[2] || "").trim();
-                      bDesc = (match[3] || "").trim();
-                    } else {
-                      bDesc = line;
-                    }
-                  }
-
-                  bName = bName.replace(/^\d+[\.\-\)]\s*/, '').replace(/[\*\:]+/g, '').trim();
-                  bReg = bReg.replace(/[\*\(\)]+/g, '').trim();
-                  
-                  if (isNegativeWarning) {
-                    return `
-                      <div class="p-3 bg-rose-50/90 rounded-2xl border border-rose-200 shadow-2xs space-y-1 hover:border-rose-300 transition-all">
-                        <div class="flex items-center justify-between">
-                          <span class="font-bold text-rose-800 text-xs flex items-center gap-1.5">
-                            <i class="fa-solid fa-triangle-exclamation text-rose-600 text-[11px]"></i> 
-                            ${bName || 'ONDE NÃO ABRIR (ALERTA DE RISCO)'}
-                          </span>
-                          <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-rose-200 text-rose-900 font-bold border border-rose-300">
-                            ALTO RISCO
-                          </span>
-                        </div>
-                        <p class="text-xs text-rose-900/90 leading-relaxed font-normal">
-                          ${formatMarkdown(bDesc || line)}
-                        </p>
-                      </div>
-                    `;
-                  }
-
-                  // Auto-detectar região se vier em branco
-                  if (!bReg || bReg.length > 25) {
-                    const lowName = (bName + " " + bReg + " " + bDesc).toLowerCase();
-                    if (lowName.includes('aquarius') || lowName.includes('adyana') || lowName.includes('ema') || lowName.includes('esplanada') || lowName.includes('colinas')) bReg = 'Centro-Oeste';
-                    else if (lowName.includes('satélite') || lowName.includes('satelite') || lowName.includes('bosque') || lowName.includes('oriente') || lowName.includes('sul') || lowName.includes('morumbi')) bReg = 'Zona Sul';
-                    else if (lowName.includes('urbanova') || lowName.includes('oeste')) bReg = 'Zona Oeste';
-                    else if (lowName.includes('industrial') || lowName.includes('leste') || lowName.includes('vista') || lowName.includes('melo')) bReg = 'Zona Leste';
-                    else if (lowName.includes('santana') || lowName.includes('norte')) bReg = 'Zona Norte';
-                    else bReg = 'SJC';
-                  }
-
-                  return `
-                    <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
-                      <div class="flex items-center justify-between">
-                        <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
-                          <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
-                          ${bName || `Microterritório 0${bIdx + 1}`}
-                        </span>
-                        <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-brand-100/90 text-brand-900 font-bold border border-brand-200/60">
-                          ${bReg}
-                        </span>
-                      </div>
-                      <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                        ${formatMarkdown(bDesc || line)}
-                      </p>
-                    </div>
-                  `;
-                }).join('');
-              }
-              
-              return renderDefaultBairros();
-            })()}
+            <!-- ZONA DE EXCLUSÃO (ONDE NÃO ABRIR) -->
+            ${data.zona_exclusao ? `
+              <div class="p-3 bg-rose-50/90 rounded-2xl border border-rose-200 shadow-2xs space-y-1 hover:border-rose-300 transition-all">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-rose-800 text-xs flex items-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-600 text-[11px]"></i> 
+                    ONDE NÃO ABRIR (ZONA DE EXCLUSÃO / ALTO RISCO)
+                  </span>
+                  <span class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-rose-200 text-rose-900 font-bold border border-rose-300">
+                    ALTO RISCO
+                  </span>
+                </div>
+                <p class="text-xs text-rose-900/90 leading-relaxed font-normal">
+                  ${formatMarkdown(data.zona_exclusao)}
+                </p>
+              </div>
+            ` : ''}
           </div>
         </div>
         <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
@@ -7333,792 +7121,342 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         </div>
       </div>
     </div>
-  `;
 
-  // Renderizar as demais seções restantes (SWOT, Auditoria, Competitividade, Movimentos)
-  const remainingSections = [secSwotRaw, secAuditoriaRaw, secCompetitividadeRaw, secMovimentosRaw].filter(Boolean);
-
-  remainingSections.forEach((sec, idx) => {
-    const title = getSectionTitle(sec);
-    const content = getSectionContent(sec);
-    const upperTitle = title.toUpperCase();
-    
-    // 2. MATRIZ SWOT (4 QUADRANTES / 2 COLUNAS DE ALTA FIDELIDADE)
-    if (upperTitle.includes("SWOT")) {
-      const forcas = extractBlock(content, 'FORÇAS|FORCAS', ['FRAQUEZAS', 'OPORTUNIDADES', 'AMEAÇAS', 'AMEACAS']);
-      const fraquezas = extractBlock(content, 'FRAQUEZAS', ['FORÇAS', 'FORCAS', 'OPORTUNIDADES', 'AMEAÇAS', 'AMEACAS']);
-      const oportunidades = extractBlock(content, 'OPORTUNIDADES', ['FORÇAS', 'FORCAS', 'FRAQUEZAS', 'AMEAÇAS', 'AMEACAS']);
-      const ameacas = extractBlock(content, 'AMEAÇAS|AMEACAS', ['FORÇAS', 'FORCAS', 'FRAQUEZAS', 'OPORTUNIDADES']);
-
-      htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
-          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
-            <i class="fa-solid fa-chart-line text-rose-500 text-sm"></i>
-            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-              MATRIZ SWOT (ANÁLISE DE MERCADO SJC)
-            </h3>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
-            <!-- 1. FORÇAS -->
-            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
-              <div class="flex items-center gap-2 text-emerald-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-emerald-100">
-                <i class="fa-solid fa-shield-halved text-emerald-600 text-sm"></i>
-                <span>FORÇAS (DIFERENCIAIS INTERNOS)</span>
-              </div>
-              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
-                ${renderSwotBullets(forcas, "text-emerald-500", "fa-circle-check")}
-              </div>
-            </div>
-
-            <!-- 2. FRAQUEZAS -->
-            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
-              <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-amber-100">
-                <i class="fa-solid fa-triangle-exclamation text-amber-600 text-sm"></i>
-                <span>FRAQUEZAS (GARGALOS & VULNERABILIDADES)</span>
-              </div>
-              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
-                ${renderSwotBullets(fraquezas, "text-amber-500", "fa-triangle-exclamation")}
-              </div>
-            </div>
-
-            <!-- 3. OPORTUNIDADES -->
-            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
-              <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-sky-100">
-                <i class="fa-solid fa-arrow-trend-up text-sky-600 text-sm"></i>
-                <span>OPORTUNIDADES (MERCADO & ALAVANCAS)</span>
-              </div>
-              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
-                ${renderSwotBullets(oportunidades, "text-sky-500", "fa-arrow-trend-up")}
-              </div>
-            </div>
-
-            <!-- 4. AMEAÇAS -->
-            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
-              <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-rose-100">
-                <i class="fa-solid fa-circle-radiation text-rose-600 text-sm"></i>
-                <span>AMEAÇAS (RISCOS, REJEIÇÃO MORAL & PRESSÕES)</span>
-              </div>
-              <div class="text-xs text-slate-700 space-y-2.5 flex-1">
-                ${renderSwotBullets(ameacas, "text-rose-500", "fa-shield-virus")}
-              </div>
-            </div>
-          </div>
+    <!-- SEÇÃO 2: MATRIZ SWOT -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-chart-line text-rose-500 text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            MATRIZ SWOT (ANÁLISE DE MERCADO SJC)
+          </h3>
         </div>
-      `;
-    }
-    // 3. AUDITORIA DE AMBIENTE E CAUSALIDADE (PESTEL 6 CARDS + ISHIKAWA FLUXO)
-    else if (upperTitle.includes("AMBIENTE") || upperTitle.includes("CAUSALIDADE") || upperTitle.includes("PESTEL")) {
-      const pestelPolitico = extractBlock(content, 'POLÍTICO|POLITICO', ['ECONÔMICO', 'ECONOMICO', 'SOCIAL', 'TECNOLÓGICO', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
-      const pestelEconomico = extractBlock(content, 'ECONÔMICO|ECONOMICO', ['POLÍTICO', 'POLITICO', 'SOCIAL', 'TECNOLÓGICO', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
-      const pestelSocial = extractBlock(content, 'SOCIAL', ['POLÍTICO', 'ECONÔMICO', 'TECNOLÓGICO', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
-      const pestelTecnologico = extractBlock(content, 'TECNOLÓGICO|TECNOLOGICO', ['POLÍTICO', 'ECONÔMICO', 'SOCIAL', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
-      const pestelAmbiental = extractBlock(content, 'AMBIENTAL', ['POLÍTICO', 'ECONÔMICO', 'SOCIAL', 'TECNOLÓGICO', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
-      const pestelLegal = extractBlock(content, 'LEGAL', ['POLÍTICO', 'ECONÔMICO', 'SOCIAL', 'TECNOLÓGICO', 'AMBIENTAL', 'DIAGRAMA', 'ISHIKAWA']);
+        <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+          DIAGNÓSTICO COMPETITIVO
+        </span>
+      </div>
 
-      const ishikawaMercado = extractBlock(content, 'Mercado', ['Operação', 'Operacao', 'Tecnologia', 'Financeiro']);
-      const ishikawaOperacao = extractBlock(content, 'Operação|Operacao', ['Mercado', 'Tecnologia', 'Financeiro']);
-      const ishikawaTecnologia = extractBlock(content, 'Tecnologia', ['Mercado', 'Operação', 'Financeiro']);
-      const ishikawaFinanceiro = extractBlock(content, 'Financeiro', ['Mercado', 'Operação', 'Tecnologia']);
-
-      htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-          <div class="text-center pb-1">
-            <span class="text-[10px] font-mono font-black tracking-widest text-slate-400 uppercase">AUDITORIA DE AMBIENTE E CAUSALIDADE</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
+        <!-- 1. FORÇAS -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+          <div class="flex items-center gap-2 text-emerald-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-emerald-100">
+            <i class="fa-solid fa-shield-halved text-emerald-600 text-sm"></i>
+            <span>FORÇAS (DIFERENCIAIS INTERNOS)</span>
           </div>
-
-          <!-- BLOCO 1: ANÁLISE PESTEL (GRID 3X2 DE CARDS) -->
-          <div class="space-y-4">
-            <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-              <i class="fa-solid fa-earth-americas text-brand-900 text-xs"></i>
-              <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ANÁLISE PESTEL</h4>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <!-- Político -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <span class="text-base">🏛️</span>
-                  <span>POLÍTICO</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelPolitico) || 'Análise regulatória e diretrizes municipais de SJC.'}</div>
-              </div>
-              <!-- Econômico -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 text-emerald-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <span class="text-base">📈</span>
-                  <span>ECONÔMICO</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelEconomico) || 'Renda média e poder aquisitivo familiar local.'}</div>
-              </div>
-              <!-- Social -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 text-sky-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <span class="text-base">👥</span>
-                  <span>SOCIAL & MORAL</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelSocial) || 'Comportamento de consumo, perfil familiar conservador e atrito cultural.'}</div>
-              </div>
-              <!-- Tecnológico -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 text-purple-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <span class="text-base">⚡</span>
-                  <span>TECNOLÓGICO</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelTecnologico) || 'Adoção digital, conectividade e canais online.'}</div>
-              </div>
-              <!-- Ambiental -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 text-teal-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <span class="text-base">🌿</span>
-                  <span>AMBIENTAL</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelAmbiental) || 'Sustentabilidade, calmaria e integração verde.'}</div>
-              </div>
-              <!-- Legal -->
-              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-2 hover:border-slate-300 transition-all">
-                <div class="flex items-center gap-2 text-amber-600 font-black text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                  <span class="text-base">⚖️</span>
-                  <span>LEGAL & ZONEAMENTO</span>
-                </div>
-                <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelLegal) || 'Conformidade jurídica, alvarás e zoneamento urbano em SJC.'}</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- BLOCO 2: DIAGRAMA DE ISHIKAWA (AUTÊNTICA ESPINHA DE PEIXE) -->
-          <div class="space-y-4 pt-4 border-t border-slate-100">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-fish-fins text-rose-500 text-sm"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">DIAGRAMA DE ISHIKAWA (ESPINHA DE PEIXE)</h4>
-              </div>
-              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
-                ANÁLISE DE CAUSA-RAIZ
-              </span>
-            </div>
-
-            <!-- ESTRUTURA VISUAL FISHBONE -->
-            <div class="relative w-full p-4 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs overflow-x-auto">
-              <div class="min-w-[700px] flex items-center justify-between gap-4">
-                
-                <!-- ESPINHAS / COSTELAS (4 CATEGORIAS) -->
-                <div class="flex-1 grid grid-cols-2 gap-y-10 gap-x-8 relative py-2">
-                  
-                  <!-- LINHA DA ESPINHA CENTRAL (COLUNA VERTEBRAL) -->
-                  <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-brand-900 rounded-full z-0">
-                    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-rose-600 rounded-full shadow-sm"></div>
-                  </div>
-
-                  <!-- COSTELA SUPERIOR ESQUERDA: MERCADO -->
-                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-rose-500 border border-slate-200 shadow-sm space-y-1 transform -translate-y-2">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 flex items-center gap-1.5">
-                        <span>🎯</span> MERCADO
-                      </span>
-                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 01</span>
-                    </div>
-                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaMercado) || 'Evasão de consumo e adequação de oferta.'}</div>
-                    <!-- Linha Conectora Diagonal até a Espinha -->
-                    <div class="absolute -bottom-6 left-1/2 w-0.5 h-6 bg-rose-400/80 -rotate-12"></div>
-                  </div>
-
-                  <!-- COSTELA SUPERIOR DIREITA: OPERAÇÃO -->
-                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-rose-500 border border-slate-200 shadow-sm space-y-1 transform -translate-y-2">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 flex items-center gap-1.5">
-                        <span>⚙️</span> OPERAÇÃO
-                      </span>
-                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 02</span>
-                    </div>
-                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaOperacao) || 'Cadeia de suprimentos, treinamento e atendimento.'}</div>
-                    <!-- Linha Conectora Diagonal até a Espinha -->
-                    <div class="absolute -bottom-6 left-1/2 w-0.5 h-6 bg-rose-400/80 -rotate-12"></div>
-                  </div>
-
-                  <!-- COSTELA INFERIOR ESQUERDA: TECNOLOGIA -->
-                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-purple-500 border border-slate-200 shadow-sm space-y-1 transform translate-y-2">
-                    <!-- Linha Conectora Diagonal até a Espinha -->
-                    <div class="absolute -top-6 left-1/2 w-0.5 h-6 bg-purple-400/80 rotate-12"></div>
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11px] font-black uppercase tracking-wider text-purple-600 flex items-center gap-1.5">
-                        <span>💻</span> TECNOLOGIA
-                      </span>
-                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 03</span>
-                    </div>
-                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaTecnologia) || 'Digitalização, automação e CRM de fidelidade.'}</div>
-                  </div>
-
-                  <!-- COSTELA INFERIOR DIREITA: FINANCEIRO -->
-                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-emerald-500 border border-slate-200 shadow-sm space-y-1 transform translate-y-2">
-                    <!-- Linha Conectora Diagonal até a Espinha -->
-                    <div class="absolute -top-6 left-1/2 w-0.5 h-6 bg-emerald-400/80 rotate-12"></div>
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11px] font-black uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
-                        <span>💰</span> FINANCEIRO
-                      </span>
-                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 04</span>
-                    </div>
-                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaFinanceiro) || 'Investimento inicial, margem e ponto de equilíbrio.'}</div>
-                  </div>
-
-                </div>
-
-                <!-- CABEÇA DO PEIXE (O EFEITO / PROBLEMA PRINCIPAL) -->
-                <div class="w-64 shrink-0 relative z-20">
-                  <div class="p-4 bg-brand-900 text-white rounded-2xl shadow-md border border-brand-700 text-center space-y-2 relative overflow-hidden">
-                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-rose-500/20 rounded-full blur-lg"></div>
-                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-500 text-white text-[9px] font-black tracking-wider uppercase">
-                      <span>⚠️ EFEITO CENTRAL</span>
-                    </div>
-                    <h5 class="text-xs font-black font-mono leading-tight tracking-wider uppercase text-rose-300">
-                      GARGALO CRÍTICO DE VALOR & SUSTENTABILIDADE
-                    </h5>
-                    <p class="text-[10px] text-slate-300 leading-snug">
-                      Síntese das barreiras operacionais cruzadas com a psicologia de consumo em SJC.
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-    // 4. MATRIZES ESTRATÉGICAS (VRIO, 5 FORÇAS DE PORTER, 5 PS & OCEANO AZUL)
-    else if (upperTitle.includes("COMPETITIVIDADE") || upperTitle.includes("MATRIZES") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO") || upperTitle.includes("5 PS") || upperTitle.includes("MIX")) {
-      const vrioValor = extractBlock(content, 'VALOR|Valor', ['RARIDADE', 'Raridade', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
-      const vrioRaridade = extractBlock(content, 'RARIDADE|Raridade', ['VALOR', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
-      const vrioImitabilidade = extractBlock(content, 'IMITABILIDADE|Imitabilidade', ['VALOR', 'RARIDADE', 'ORGANIZAÇÃO', 'PORTER', '5 FORÇAS', '5 PS']);
-      const vrioOrganizacao = extractBlock(content, 'ORGANIZAÇÃO|ORGANIZACAO|Organizacao', ['VALOR', 'RARIDADE', 'IMITABILIDADE', 'PORTER', '5 FORÇAS', '5 PS']);
-
-      const porterRiv = extractBlock(content, 'Rivalidade', ['Novos Entrantes', 'Substitutos', 'Fornecedores', 'Compradores', '5 PS']);
-      const porterNovos = extractBlock(content, 'Novos Entrantes', ['Rivalidade', 'Substitutos', 'Fornecedores', 'Compradores', '5 PS']);
-      const porterSub = extractBlock(content, 'Substitutos', ['Rivalidade', 'Novos Entrantes', 'Fornecedores', 'Compradores', '5 PS']);
-      const porterForn = extractBlock(content, 'Fornecedores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Compradores', '5 PS']);
-      const porterComp = extractBlock(content, 'Compradores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Fornecedores', '5 PS']);
-
-      const pProduto = extractBlock(content, 'PRODUTO|Produto', ['PREÇO', 'Preço', 'PRAÇA', 'Praça', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPreco = extractBlock(content, 'PREÇO|Preço|Preco', ['PRODUTO', 'PRAÇA', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPraca = extractBlock(content, 'PRAÇA|Praça|Praca', ['PRODUTO', 'PREÇO', 'PROMOÇÃO', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPromocao = extractBlock(content, 'PROMOÇÃO|Promoção|Promocao', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PESSOAS', 'OCEANO', 'ELIMINAR']);
-      const pPessoas = extractBlock(content, 'PESSOAS|Pessoas', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PROMOÇÃO', 'OCEANO', 'ELIMINAR']);
-
-      const oaEliminar = extractBlock(content, 'ELIMINAR|Eliminar', ['REDUZIR', 'ELEVAR', 'CRIAR']);
-      const oaReduzir = extractBlock(content, 'REDUZIR|Reduzir', ['ELIMINAR', 'ELEVAR', 'CRIAR']);
-      const oaElevar = extractBlock(content, 'ELEVAR|Elevar', ['ELIMINAR', 'REDUZIR', 'CRIAR']);
-      const oaCriar = extractBlock(content, 'CRIAR|Criar', ['ELIMINAR', 'REDUZIR', 'ELEVAR']);
-
-      htmlOutput += `
-        <!-- CARD: MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER) -->
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-              <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
-              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER)
-              </h3>
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
-              VRIO & PORTER
-            </span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- ANÁLISE VRIO -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-bolt text-amber-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ANÁLISE VRIO</h4>
-              </div>
-
-              <div class="space-y-3">
-                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
-                  <span class="text-xl font-black font-mono text-emerald-600 shrink-0">V</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">VALOR:</strong>
-                    ${formatMarkdown(vrioValor) || 'Capacidade de explorar oportunidades e neutralizar ameaças no mercado de SJC.'}
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
-                  <span class="text-xl font-black font-mono text-sky-600 shrink-0">R</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">RARIDADE:</strong>
-                    ${formatMarkdown(vrioRaridade) || 'Atributos e recursos exclusivos controlados por poucos concorrentes.'}
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
-                  <span class="text-xl font-black font-mono text-rose-600 shrink-0">I</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">IMITABILIDADE:</strong>
-                    ${formatMarkdown(vrioImitabilidade) || 'Barreiras para que outros concorrentes não consigam duplicar a proposta com facilidade.'}
-                  </div>
-                </div>
-
-                <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs">
-                  <span class="text-xl font-black font-mono text-brand-900 shrink-0">O</span>
-                  <div class="text-xs text-slate-700 leading-relaxed">
-                    <strong class="text-slate-900 block font-bold uppercase text-[11px] mb-0.5">ORGANIZAÇÃO:</strong>
-                    ${formatMarkdown(vrioOrganizacao) || 'Processos internos e governança alinhados para explorar o potencial competitivo.'}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 5 FORÇAS DE PORTER -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-chart-line text-rose-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 FORÇAS DE PORTER</h4>
-              </div>
-
-              <div class="space-y-2.5 text-xs text-slate-700">
-                <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-rose-600 uppercase tracking-wider block">RIVALIDADE ENTRE CONCORRENTES</span>
-                  <div class="leading-relaxed text-slate-700">${formatMarkdown(porterRiv) || 'Mapeamento da intensidade competitiva local.'}</div>
-                </div>
-                <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-amber-600 uppercase tracking-wider block">AMEAÇA DE NOVOS ENTRANTES</span>
-                  <div class="leading-relaxed text-slate-700">${formatMarkdown(porterNovos) || 'Barreiras de entrada e investimento necessário.'}</div>
-                </div>
-                <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-sky-600 uppercase tracking-wider block">AMEAÇA DE PRODUTOS SUBSTITUTOS</span>
-                  <div class="leading-relaxed text-slate-700">${formatMarkdown(porterSub) || 'Alternativas de mercado e comércio eletrônico.'}</div>
-                </div>
-                <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-purple-600 uppercase tracking-wider block">PODER DE BARGANHA DOS FORNECEDORES</span>
-                  <div class="leading-relaxed text-slate-700">${formatMarkdown(porterForn) || 'Disponibilidade de insumos e parceiros estratégicos.'}</div>
-                </div>
-                <div class="p-3 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-emerald-600 uppercase tracking-wider block">PODER DE BARGANHA DOS CLIENTES</span>
-                  <div class="leading-relaxed text-slate-700">${formatMarkdown(porterComp) || 'Sensibilidade a preço e exigência do consumidor de SJC.'}</div>
-                </div>
-              </div>
-            </div>
+          <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+            ${renderSwotBullets(data.swot?.forcas, "text-emerald-500", "fa-circle-check")}
           </div>
         </div>
 
-        <!-- CARD: MIX DE MARKETING E DIFERENCIAÇÃO (5 PS & OCEANO AZUL) -->
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-              <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
-              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL)
-              </h3>
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
-              5 PS & OCEANO AZUL
-            </span>
+        <!-- 2. FRAQUEZAS -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+          <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-amber-100">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-sm"></i>
+            <span>FRAQUEZAS (GARGALOS & VULNERABILIDADES)</span>
           </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- 5 PS DO MARKETING -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-layer-group text-accent-cyan text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 PS DO MARKETING</h4>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2.5 text-xs">
-                <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-rose-600 uppercase block">PRODUTO</span>
-                  <div class="text-slate-700 leading-tight">${formatMarkdown(pProduto) || 'Linhas de produtos e proposta de valor.'}</div>
-                </div>
-                <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-emerald-600 uppercase block">PREÇO</span>
-                  <div class="text-slate-700 leading-tight">${formatMarkdown(pPreco) || 'Posicionamento de precificação e ticket.'}</div>
-                </div>
-                <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-sky-600 uppercase block">PRAÇA</span>
-                  <div class="text-slate-700 leading-tight">${formatMarkdown(pPraca) || 'Canais físicos e digitais em SJC.'}</div>
-                </div>
-                <div class="p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-purple-600 uppercase block">PROMOÇÃO</span>
-                  <div class="text-slate-700 leading-tight">${formatMarkdown(pPromocao) || 'Estratégia de atração e engajamento.'}</div>
-                </div>
-                <div class="col-span-2 p-3.5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[10px] font-mono font-black text-brand-900 uppercase block">PESSOAS</span>
-                  <div class="text-slate-700 leading-tight">${formatMarkdown(pPessoas) || 'Treinamento, cultura de atendimento e hospitalidade.'}</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- ESTRATÉGIA OCEANO AZUL (MATRIZ 4 AÇÕES) -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-water text-sky-500 text-xs"></i>
-                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ESTRATÉGIA OCEANO AZUL</h4>
-              </div>
-
-              <div class="grid grid-cols-2 gap-3 text-xs">
-                <!-- ELIMINAR -->
-                <div class="rounded-2xl border border-rose-200 overflow-hidden shadow-2xs">
-                  <div class="bg-rose-50 px-3 py-1.5 font-mono font-black text-[10px] text-rose-600 uppercase border-b border-rose-200">
-                    ELIMINAR
-                  </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaEliminar) || 'Fatores que o setor tradicional dá como certos e que devem ser eliminados.'}
-                  </div>
-                </div>
-
-                <!-- REDUZIR -->
-                <div class="rounded-2xl border border-amber-200 overflow-hidden shadow-2xs">
-                  <div class="bg-amber-50 px-3 py-1.5 font-mono font-black text-[10px] text-amber-600 uppercase border-b border-amber-200">
-                    REDUZIR
-                  </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaReduzir) || 'Fatores que devem ser reduzidos bem abaixo do padrão do setor.'}
-                  </div>
-                </div>
-
-                <!-- ELEVAR -->
-                <div class="rounded-2xl border border-sky-200 overflow-hidden shadow-2xs">
-                  <div class="bg-sky-50 px-3 py-1.5 font-mono font-black text-[10px] text-sky-600 uppercase border-b border-sky-200">
-                    ELEVAR
-                  </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaElevar) || 'Fatores que devem ser elevados bem acima do padrão do setor.'}
-                  </div>
-                </div>
-
-                <!-- CRIAR -->
-                <div class="rounded-2xl border border-emerald-200 overflow-hidden shadow-2xs">
-                  <div class="bg-emerald-50 px-3 py-1.5 font-mono font-black text-[10px] text-emerald-600 uppercase border-b border-emerald-200">
-                    CRIAR
-                  </div>
-                  <div class="p-3 bg-white text-slate-700 leading-tight">
-                    ${formatMarkdown(oaCriar) || 'Fatores que nunca foram oferecidos e que devem ser criados.'}
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+            ${renderSwotBullets(data.swot?.fraquezas, "text-amber-500", "fa-triangle-exclamation")}
           </div>
         </div>
-      `;
-    }
-    // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS (4 CARDS VISUAIS COM FOTOS + VEREDICTO FINAL DE ALTO CONTRASTE)
-    else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT") || upperTitle.includes("CULTURAIS") || upperTitle.includes("RISCO MORAL")) {
-      const fitSilencio = extractBlock(content, 'Geografia do Silêncio|Silêncio|Silencio', ['A Cidade Prometida', 'Cidade Prometida', 'A Tribo Global', 'Tribo Global', 'Empreendedorismo Intuitivo', 'Veredicto']);
-      const fitPrometida = extractBlock(content, 'A Cidade Prometida|Cidade Prometida', ['Geografia do Silêncio', 'A Tribo Global', 'Tribo Global', 'Empreendedorismo Intuitivo', 'Veredicto']);
-      const fitTribo = extractBlock(content, 'A Tribo Global|Tribo Global', ['Geografia do Silêncio', 'A Cidade Prometida', 'Empreendedorismo Intuitivo', 'Veredicto']);
-      const fitEmpreendedorismo = extractBlock(content, 'Empreendedorismo Intuitivo|Empreendedorismo', ['Geografia do Silêncio', 'A Cidade Prometida', 'A Tribo Global', 'Veredicto']);
-      
-      let veredictoMov = extractBlock(content, 'O Veredicto do Movimento|Veredicto do Movimento|Veredicto', ['\\[CHART', '\\[GRAFICO', 'GRÁFICOS', 'GRAFICOS']);
-      if (!veredictoMov || veredictoMov.trim().length < 10) {
-        const vMatch = content.match(/(?:###|####|\*\*|\*|-|•)?\s*(?:O Veredicto do Movimento|Veredicto do Movimento|Veredicto)\s*(?:\*\*)?:?\s*([\s\S]*?)(?=\[CHART|\[GRAFICO|###|$)/i);
-        if (vMatch && vMatch[1]) {
-          veredictoMov = vMatch[1].trim();
-        }
-      }
 
-      htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-              <i class="fa-solid fa-compass text-purple-600 text-sm"></i>
-              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                FIT COM OS 4 MOVIMENTOS CULTURAIS & ANÁLISE DE RISCO MORAL
-              </h3>
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
-              ESTUDO STUDIO 8 SJC
-            </span>
+        <!-- 3. OPORTUNIDADES -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+          <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-sky-100">
+            <i class="fa-solid fa-arrow-trend-up text-sky-600 text-sm"></i>
+            <span>OPORTUNIDADES (MERCADO & ALAVANCAS)</span>
           </div>
-
-          <!-- GRID DE 4 CARDS COM FOTOS TEMÁTICAS CORTADAS -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <!-- 1. GEOGRAFIA DO SILÊNCIO -->
-            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
-              <div>
-                <div class="relative h-32 w-full overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80" 
-                       alt="Geografia do Silêncio" 
-                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-emerald-950/80 backdrop-blur-xs text-emerald-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-emerald-500/30">
-                    🌿 MOVIMENTO 01
-                  </span>
-                </div>
-                <div class="p-3.5 space-y-1.5">
-                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DO SILÊNCIO</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitSilencio) || 'Busca por refúgio, sossego, áreas verdes e calmaria do estresse corporativo.'}</p>
-                </div>
-              </div>
-              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
-                <span>Foco: Urbanova / Adyana</span>
-              </div>
-            </div>
-
-            <!-- 2. A CIDADE PROMETIDA -->
-            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
-              <div>
-                <div class="relative h-32 w-full overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80" 
-                       alt="A Cidade Prometida" 
-                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-sky-950/80 backdrop-blur-xs text-sky-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-sky-500/30">
-                    👨‍👩‍👧‍👦 MOVIMENTO 02
-                  </span>
-                </div>
-                <div class="p-3.5 space-y-1.5">
-                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A CIDADE PROMETIDA</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitPrometida) || 'Famílias que buscam segurança, estabilidade e moral tradicional.'}</p>
-                </div>
-              </div>
-              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
-                <span>Foco: Zona Sul & Colinas</span>
-              </div>
-            </div>
-
-            <!-- 3. A TRIBO GLOBAL -->
-            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
-              <div>
-                <div class="relative h-32 w-full overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" 
-                       alt="A Tribo Global" 
-                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-purple-950/80 backdrop-blur-xs text-purple-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-purple-500/30">
-                    🚀 MOVIMENTO 03
-                  </span>
-                </div>
-                <div class="p-3.5 space-y-1.5">
-                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A TRIBO GLOBAL</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitTribo) || 'Engenheiros, tech, criativos e público cosmopolita.'}</p>
-                </div>
-              </div>
-              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
-                <span>Foco: Aquarius & Vila Ema</span>
-              </div>
-            </div>
-
-            <!-- 4. EMPREENDEDORISMO INTUITIVO -->
-            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
-              <div>
-                <div class="relative h-32 w-full overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=600&q=80" 
-                       alt="Empreendedorismo Intuitivo" 
-                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-amber-950/80 backdrop-blur-xs text-amber-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-amber-500/30">
-                    💡 MOVIMENTO 04
-                  </span>
-                </div>
-                <div class="p-3.5 space-y-1.5">
-                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">EMPREENDEDORISMO INTUITIVO</h5>
-                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitEmpreendedorismo) || 'A economia real dos bairros, prestadores de serviço e consumo prático.'}</p>
-                </div>
-              </div>
-              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
-                <span>Foco: Sul, Leste & Norte</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- CARD DE DESTAQUE: O VEREDICTO DO MOVIMENTO (CORRIGIDO: ALTO CONTRASTE TEXT-WHITE) -->
-          <div class="p-5 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-2xl border border-brand-800 shadow-md flex flex-col md:flex-row items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-xl text-purple-300">
-              👑
-            </div>
-            <div class="space-y-1.5 flex-1 text-center md:text-left">
-              <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-300">
-                O VEREDICTO DO MOVIMENTO DOMINANTE
-              </span>
-              <div class="text-xs sm:text-sm text-white font-medium leading-relaxed">
-                ${formatMarkdown(veredictoMov || 'Identificação do movimento cultural prioritário para posicionamento competitivo e captura de margem em São José dos Campos.', 'text-amber-300 font-black')}
-              </div>
-            </div>
-          </div>
-
-        </div>
-      `;
-    }
-    // FALLBACK GENÉRICO
-    else {
-      htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono flex items-center gap-2">
-              <i class="fa-solid fa-chart-simple text-brand-900"></i>
-              <span>${title}</span>
-            </h3>
-            <span class="text-[10px] font-mono text-slate-400 uppercase font-bold">SEÇÃO 0${idx + 1}</span>
-          </div>
-          <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-2">
-            ${formatMarkdown(content)}
+          <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+            ${renderSwotBullets(data.swot?.oportunidades, "text-sky-500", "fa-arrow-trend-up")}
           </div>
         </div>
-      `;
-    }
-  });
 
-  // PARSER DE GRÁFICOS DINÂMICOS & RECORTES DE DADOS (BLOCO 7)
-  const dynamicParsedCharts = [];
-  const chartTagRegex = /\[CHART:\s*(\{[\s\S]*?\})\s*\]([\s\S]*?)(?=(?:\[CHART:|$|###))/gi;
-  let chartMatch;
-  
-  while ((chartMatch = chartTagRegex.exec(rawAiText)) !== null) {
-    try {
-      const jsonContent = chartMatch[1].trim();
-      const analysisText = (chartMatch[2] || "").trim();
-      const parsedConfig = JSON.parse(jsonContent);
-      const uniqueChartId = "chart-ai-" + Math.random().toString(36).substr(2, 9);
-      
-      dynamicParsedCharts.push({
-        id: uniqueChartId,
-        config: parsedConfig,
-        analysis: analysisText
-      });
-      dynamicChartsToRender.push({
-        id: uniqueChartId,
-        config: parsedConfig
-      });
-    } catch (eChart) {
-      console.warn("Erro ao fazer parse de tag [CHART]:", eChart);
-    }
-  }
-
-  // Se a IA gerou os gráficos dinâmicos da Seção 7, renderizá-los com o parágrafo analítico logo abaixo
-  if (dynamicParsedCharts.length > 0) {
-    htmlOutput += `
-      <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-          <div class="flex items-center gap-2.5">
-            <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
-            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-              3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS
-            </h3>
+        <!-- 4. AMEAÇAS -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/90 shadow-2xs flex flex-col justify-start space-y-3.5">
+          <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-2 border-b border-rose-100">
+            <i class="fa-solid fa-circle-radiation text-rose-600 text-sm"></i>
+            <span>AMEAÇAS (RISCOS, REJEIÇÃO MORAL & PRESSÕES)</span>
           </div>
-          <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
-            PESQUISA RADAR SJC (N=477)
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          ${dynamicParsedCharts.map(item => `
-            <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
-              <div class="space-y-3">
-                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                  <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-column text-accent-cyan"></i>
-                    ${item.config.title || "Indicador Analítico SJC"}
-                  </span>
-                  <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
-                </div>
-                <div class="relative w-full h-52">
-                  <canvas id="${item.id}"></canvas>
-                </div>
-              </div>
-              <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
-                <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
-                  <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
-                </span>
-                <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                  ${formatMarkdown(item.analysis || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.")}
-                </p>
-              </div>
-            </div>
-          `).join('')}
+          <div class="text-xs text-slate-700 space-y-2.5 flex-1">
+            ${renderSwotBullets(data.swot?.ameacas, "text-rose-500", "fa-shield-virus")}
+          </div>
         </div>
       </div>
-    `;
+    </div>
+
+    <!-- SEÇÃO 3: AUDITORIA PESTEL & ISHIKAWA -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-earth-americas text-brand-900 text-sm"></i>
+          <h4 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            AUDITORIA DE AMBIENTE (PESTEL) & CAUSALIDADE (ISHIKAWA)
+          </h4>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+          ANÁLISE DE RISCO
+        </span>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
+        ${formatMarkdown(data.pestel_ishikawa || "Análise dos fatores regulatórios, econômicos, culturais e operacionais de São José dos Campos.")}
+      </div>
+    </div>
+
+    <!-- SEÇÃO 4: MATRIZES ESTRATÉGICAS (VRIO, PORTER, 5 PS & OCEANO AZUL) -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER)
+          </h3>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+          COMPETITIVIDADE SJC
+        </span>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
+        ${formatMarkdown(data.matrizes_vrio_porter || "Avaliação dos diferenciais internos sustentáveis (VRIO) e intensidade competitiva (Porter) no mercado joseense.")}
+      </div>
+    </div>
+
+    <!-- SEÇÃO 5: MIX DE MARKETING & OCEANO AZUL -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL)
+          </h3>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200">
+          5 PS & OCEANO AZUL
+        </span>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
+        ${formatMarkdown(data.mix_marketing_oceano_azul || "Diretrizes para precificação, canais, comunicação e curva de valor eliminando fatores de atrito do setor.")}
+      </div>
+    </div>
+
+    <!-- SEÇÃO 6: FIT COM OS 4 MOVIMENTOS CULTURAIS -->
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-compass text-purple-600 text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            FIT COM OS 4 MOVIMENTOS CULTURAIS DE SJC
+          </h3>
+        </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+          ESTUDO STUDIO 8 SJC
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 1. GEOGRAFIA DO SILÊNCIO -->
+        <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative h-32 w-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80" 
+                   alt="Geografia do Silêncio" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-emerald-950/80 backdrop-blur-xs text-emerald-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-emerald-500/30">
+                🌿 MOVIMENTO 01
+              </span>
+            </div>
+            <div class="p-3.5 space-y-1.5">
+              <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DO SILÊNCIO</h5>
+              <p class="text-[11px] text-slate-600 leading-relaxed">Refúgio, sossego, áreas verdes e calmaria do estresse corporativo.</p>
+            </div>
+          </div>
+          <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+            <span>Foco: Urbanova / Adyana</span>
+          </div>
+        </div>
+
+        <!-- 2. A CIDADE PROMETIDA -->
+        <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative h-32 w-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80" 
+                   alt="A Cidade Prometida" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-sky-950/80 backdrop-blur-xs text-sky-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-sky-500/30">
+                👨‍👩‍👧‍👦 MOVIMENTO 02
+              </span>
+            </div>
+            <div class="p-3.5 space-y-1.5">
+              <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A CIDADE PROMETIDA</h5>
+              <p class="text-[11px] text-slate-600 leading-relaxed">Famílias que buscam segurança, estabilidade e moral tradicional.</p>
+            </div>
+          </div>
+          <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+            <span>Foco: Zona Sul & Colinas</span>
+          </div>
+        </div>
+
+        <!-- 3. A TRIBO GLOBAL -->
+        <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative h-32 w-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" 
+                   alt="A Tribo Global" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-purple-950/80 backdrop-blur-xs text-purple-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-purple-500/30">
+                🚀 MOVIMENTO 03
+              </span>
+            </div>
+            <div class="p-3.5 space-y-1.5">
+              <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A TRIBO GLOBAL</h5>
+              <p class="text-[11px] text-slate-600 leading-relaxed">Engenheiros, tech, criativos e público cosmopolita.</p>
+            </div>
+          </div>
+          <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+            <span>Foco: Aquarius & Vila Ema</span>
+          </div>
+        </div>
+
+        <!-- 4. EMPREENDEDORISMO INTUITIVO -->
+        <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative h-32 w-full overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=600&q=80" 
+                   alt="Empreendedorismo Intuitivo" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+              <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-amber-950/80 backdrop-blur-xs text-amber-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-amber-500/30">
+                💡 MOVIMENTO 04
+              </span>
+            </div>
+            <div class="p-3.5 space-y-1.5">
+              <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">EMPREENDEDORISMO INTUITIVO</h5>
+              <p class="text-[11px] text-slate-600 leading-relaxed">A economia real dos bairros, prestadores de serviço e consumo prático.</p>
+            </div>
+          </div>
+          <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+            <span>Foco: Sul, Leste & Norte</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD DE DESTAQUE: MOVIMENTO VENCEDOR (ALTO CONTRASTE TEXT-WHITE / TEXT-AMBER-300) -->
+      <div class="p-5 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-2xl border border-brand-800 shadow-md flex flex-col md:flex-row items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-xl text-purple-300">
+          👑
+        </div>
+        <div class="space-y-1.5 flex-1 text-center md:text-left">
+          <div class="flex items-center gap-2 justify-center md:justify-start">
+            <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-300">
+              MOVIMENTO VENCEDOR:
+            </span>
+            <span class="text-xs font-black uppercase text-amber-300 font-mono bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/30">
+              ${data.movimento_cultural?.vencedor || "A Tribo Global"}
+            </span>
+          </div>
+          <div class="text-xs sm:text-sm text-white font-medium leading-relaxed">
+            ${formatMarkdown(data.movimento_cultural?.analise || "Posicionamento prioritário para captura de margem e minimização do atrito moral em São José dos Campos.", 'text-amber-300 font-black')}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // SEÇÃO 7: 3 GRÁFICOS ANALÍTICOS DE VALIDAÇÃO
+  let graficosList = [];
+  if (Array.isArray(data.graficos_analiticos) && data.graficos_analiticos.length > 0) {
+    graficosList = data.graficos_analiticos;
   } else {
-    // Se a IA não gerou tags [CHART], renderizar os 3 Macrodados Municipais do Radar SJC
-    const defaultMacroCharts = [
+    graficosList = [
       {
-        id: "macro-chart-regiao",
-        config: {
+        chart_data: {
           type: "doughnut",
           title: "Frequência de Consumo por Região de SJC",
           labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
           data: [40.7, 27.6, 13.9, 11.2, 6.6]
         },
-        analysis: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
+        analise_texto: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
       },
       {
-        id: "macro-chart-evasao",
-        config: {
+        chart_data: {
           type: "doughnut",
           title: "Paradoxo de Evasão vs Orgulho em SJC",
           labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
           data: [64.7, 35.3]
         },
-        analysis: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
+        analise_texto: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
       },
       {
-        id: "macro-chart-barreiras",
-        config: {
+        chart_data: {
           type: "bar",
-          title: "Principais Barreiras Noturnas e Gastronomia",
-          labels: ["Preço Alto / Pouca Experiência", "Falta Lugares Autorais", "Sensação de Mesmice", "Outros"],
-          data: [32.3, 22.9, 18.6, 26.2]
+          title: "Distribuição de Renda Familiar em SJC",
+          labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
+          data: [18.1, 32.3, 23.6, 14.2, 11.8]
         },
-        analysis: "A percepção de preço elevado sem proposta de valor correspondente (32.3%) e a mesmice estética (18.6%) demandam posicionamento autoral e excelente custo-benefício."
+        analise_texto: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da população economicamente ativa, sendo o motor de volume para a cidade."
       }
     ];
+  }
 
-    defaultMacroCharts.forEach(mc => dynamicChartsToRender.push(mc));
+  const chartCardsHtml = graficosList.map((item, gIdx) => {
+    const chartId = "dynamic-report-chart-" + gIdx + "-" + Math.random().toString(36).substr(2, 7);
+    const cfg = item.chart_data || {};
 
-    const chartsWrapper = `
-      <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
-        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-          <div class="flex items-center gap-2.5">
-            <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
-            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-              INDICADORES E MACRODADOS MUNICIPAIS (SJC)
-            </h3>
+    dynamicChartsToRender.push({
+      id: chartId,
+      config: cfg
+    });
+
+    return `
+      <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+              <i class="fa-solid fa-chart-column text-accent-cyan"></i>
+              ${cfg.title || "Indicador Analítico SJC"}
+            </span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
           </div>
-          <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
-            N=477 • IC=95%
+          <div class="relative w-full h-52">
+            <canvas id="${chartId}"></canvas>
+          </div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
+          <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
+            <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
           </span>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-          ${defaultMacroCharts.map(item => `
-            <div class="p-5 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-3 flex flex-col justify-between">
-              <div class="space-y-3">
-                <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-                  <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-column text-accent-cyan"></i>
-                    ${item.config.title}
-                  </span>
-                  <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
-                </div>
-                <div class="relative w-full h-52">
-                  <canvas id="${item.id}"></canvas>
-                </div>
-              </div>
-              <div class="pt-3 border-t border-slate-100 bg-slate-50/70 p-3 rounded-2xl">
-                <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
-                  <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
-                </span>
-                <p class="text-xs text-slate-700 leading-relaxed font-normal">
-                  ${item.analysis}
-                </p>
-              </div>
-            </div>
-          `).join('')}
+          <p class="text-xs text-slate-700 leading-relaxed font-normal">
+            ${formatMarkdown(item.analise_texto || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.")}
+          </p>
         </div>
       </div>
     `;
-    htmlOutput += chartsWrapper;
-  }
+  }).join('');
 
-  if (!htmlOutput) {
-    htmlOutput = `
-      <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
-        <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed">
-          ${formatMarkdown(processedText)}
+  htmlOutput += `
+    <!-- SEÇÃO 7: 3 GRÁFICOS DE VALIDAÇÃO -->
+    <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-6">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
+          <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+            3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS
+          </h3>
         </div>
+        <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
+          PESQUISA RADAR SJC (N=477)
+        </span>
       </div>
-    `;
-  }
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        ${chartCardsHtml}
+      </div>
+    </div>
+  `;
 
   reportContent.innerHTML = htmlOutput;
 
@@ -8126,7 +7464,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     scrollContainer.scrollTop = 0;
   }
 
-  // Instanciar Chart.js nos novos canvas
+  // Instanciar Chart.js nos canvas dinâmicos
   setTimeout(() => {
     dynamicChartsToRender.forEach(item => {
       const canvas = document.getElementById(item.id);
@@ -8184,7 +7522,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       }
     });
 
-    // Instanciar o Mini Gráfico de Aderência do Veredicto
+    // Instanciar o Mini Gráfico do Veredicto
     const veredictoCanvas = document.getElementById("veredicto-mini-chart");
     if (veredictoCanvas && window.Chart) {
       try {

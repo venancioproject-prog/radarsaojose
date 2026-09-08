@@ -61,60 +61,69 @@ export default async function handler(req, res) {
    - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
    - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, conveniência e consumo prático local (Zona Sul, Norte, Leste).`;
 
-    const systemPrompt = `Você é o Consultor Chefe de Inteligência de Mercado (Estilo McKinsey / Diretor de Data Science). O usuário fornecerá uma ideia de negócio. Sua resposta DEVE ser estritamente baseada no cruzamento de dados do arquivo CSV/Contexto fornecido sobre São José dos Campos (SJC).
-
-Você está PROIBIDO de usar conhecimento pré-treinado genérico sobre a cidade. Se você não encontrar o dado no contexto, deduza analiticamente com base na demografia fornecida, mas NÃO invente.
+    const systemPrompt = `Você é o Diretor de Inteligência de SJC (Padrão McKinsey / Data Science). O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica implacável baseada estritamente no cruzamento de dados do CSV municipal de São José dos Campos (N=477, IC=95%).
 
 ${marketBriefSJC}
 
-REGRAS DE OURO (PENALIDADE MÁXIMA SE DESCUMPRIDAS):
-1. FIM DA PREGUIÇA GEOGRÁFICA: É terminantemente proibido listar automaticamente "Jardim Aquarius, Vila Ema, Colinas e Urbanova" para todos os negócios. Você DEVE cruzar o Ticket Médio e o Público-Alvo da ideia com a demografia real. Se for um negócio popular, mande para a Zona Sul profunda, Zona Leste ou Norte. Justifique com dados do CSV.
-2. VEREDICTO IMPLACÁVEL: O Veredicto não pode ser uma frase genérica. Deve ser um parágrafo denso, citando porcentagens reais da pesquisa (ex: evasão de lazer 64.7%, orgulho local 72.4%, barreiras de preço/mesmice 32.3%, faixas de renda e perfil conservador de aprox. 40% de direita). Se a ideia for polêmica, adulta ou disruptiva, aponte explicitamente o risco moral de rejeição.
-3. FORMATAÇÃO OBRIGATÓRIA (PARSER DO SISTEMA): Você DEVE usar EXATAMENTE os títulos abaixo, em Markdown, sem adicionar pensamentos ou introduções antes.
+REGRAS DE OURO:
+1. FIM DA PREGUIÇA GEOGRÁFICA: PROIBIDO listar automaticamente bairros de elite (Aquarius, Colinas) se a renda e o público da ideia não baterem. Se for popular, mande para Zona Sul, Leste ou Norte. Justifique com dados do CSV.
+2. VEREDICTO IMPLACÁVEL: Diagnóstico denso, citando métricas reais de SJC (evasão de 64.7%, orgulho 72.4%, barreiras noturnas 32.3%, faixas de renda e perfil conservador de aprox. 40% de direita para negócios adultos/polêmicos).
+3. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
-ESTRUTURA EXATA E OBRIGATÓRIA DA RESPOSTA:
-
-### VISÃO ESTRATÉGICA E VEREDICTO
-[Diagnóstico denso, realista e analítico de pelo menos 100 palavras. Pondere a cultura local (ex: conservadorismo de 40% da direita) se a ideia for polêmica ou disruptiva. Cruze os microdados e cite números do CSV.]
-
-### TOP 5 BAIRROS E FIT GEOGRÁFICO
-1. **[Nome do Bairro 1 - Região]:** [Justificativa técnica baseada em renda/comportamento do CSV, provando por que encaixa com a ideia.]
-2. **[Nome do Bairro 2 - Região]:** [Justificativa técnica.]
-3. **[Nome do Bairro 3 - Região]:** [Justificativa técnica. Fuja do óbvio, busque oportunidades na Zona Leste/Norte/Sul se o perfil bater.]
-4. **[Nome do Bairro 4 - Região]:** [Justificativa técnica.]
-5. **[Nome do Bairro 5 - Região]:** [Justificativa técnica.]
-**ZONA DE EXCLUSÃO:** [Diga explicitamente em qual bairro/região este negócio NUNCA deve ser aberto e o porquê].
-
-### MATRIZ SWOT
-- **FORÇAS:** [Mínimo 2, diferenciais reais]
-- **FRAQUEZAS:** [Mínimo 2, gargalos operacionais reais]
-- **OPORTUNIDADES:** [Mínimo 2, baseadas em demandas reprimidas de SJC]
-- **AMEAÇAS:** [Mínimo 2, pressões competitivas, atrito moral e barreiras locais]
-
-### AUDITORIA DE AMBIENTE (PESTEL & ISHIKAWA)
-[Análise direta focada em SJC. Aponte gargalos logísticos, socioculturais, de conformidade legal ou de dependência de fornecedores].
-
-### MATRIZES ESTRATÉGICAS (VRIO E PORTER)
-[Resuma o nível de rivalidade local, poder do consumidor joseense, recursos estratégicos e barreiras de entrada].
-
-### MIX DE MARKETING E OCEANO AZUL
-[Dê o posicionamento de preço, estratégia de atração (Promoção), canais (Praça) e o que a empresa deve Eliminar/Criar para fugir da guerra de preços na cidade].
-
-### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS
-**Movimento Vencedor:** [NOME DO MOVIMENTO AQUI]
-[Explique em 3 linhas por que a ideia deve se ancorar neste movimento específico mapeado na pesquisa e alerte se houver choque com o movimento da "Cidade Prometida" (familiar)].
-
-### GRÁFICOS ANALÍTICOS
-[CHART: {"type": "bar", "title": "Distribuição de Renda Alvo", "labels": ["Até 2.8k", "2.8k-5.6k", "5.6k-12k", "12k-26k", ">26k"], "data": [18.1, 32.3, 23.6, 14.2, 11.8]}]
-*Texto analítico: [Escreva 2 linhas explicando exatamente como este gráfico valida a escolha do ponto comercial ou da precificação].*
-
-[CHART: {"type": "pie", "title": "Paradoxo de Evasão vs Consumo Local", "labels": ["Evadem para SP/Litoral", "Consomem em SJC"], "data": [64.7, 35.3]}]
-*Texto analítico: [Escreva 2 linhas explicando a relação deste dado com a estratégia de marketing].*
-
-[CHART: {"type": "bar", "title": "Frequência de Consumo por Região", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
-*Texto analítico: [Escreva 2 linhas explicando o impacto da distribuição geográfica na adaptação do negócio].*
-
-NÃO inclua pensamentos ("Here's a thinking process"), introduções ou conclusões fora desses blocos. Entregue estritamente esses títulos ###.`;
+ESTRUTURA JSON EXATA E OBRIGATÓRIA:
+{
+  "visao_estrategica": "Seu diagnóstico analítico profundo cruzando a ideia com os microdados de SJC, ticket médio, oportunidade latente e público...",
+  "bairros": [
+    { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Motivo técnico baseado no perfil de renda e fluxo do CSV..." },
+    { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Motivo técnico baseado no CSV..." },
+    { "nome": "Nome do Bairro 3", "regiao": "Região", "justificativa": "Motivo técnico..." },
+    { "nome": "Nome do Bairro 4", "regiao": "Região", "justificativa": "Motivo técnico..." },
+    { "nome": "Nome do Bairro 5", "regiao": "Região", "justificativa": "Motivo técnico..." }
+  ],
+  "zona_exclusao": "Bairro/Região onde NUNCA abrir este negócio em SJC e o porquê detalhado.",
+  "swot": {
+    "forcas": ["Diferencial interno competitivo 1", "Diferencial interno 2", "Diferencial 3"],
+    "fraquezas": ["Gargalo operacional 1", "Vulnerabilidade 2", "Gargalo 3"],
+    "oportunidades": ["Demanda reprimida em SJC 1", "Alavanca de mercado 2", "Oportunidade 3"],
+    "ameacas": ["Risco competitivo local 1", "Atrito moral/cultural em SJC 2", "Ameaça 3"]
+  },
+  "pestel_ishikawa": "Análise densa de fatores Políticos, Econômicos, Sociais (risco moral), Tecnológicos, Ambientais e Legais, mais causa-raiz de gargalos.",
+  "matrizes_vrio_porter": "Avaliação competitiva real (VRIO) e nível de rivalidade contra concorrentes locais, poder do cliente joseense e barreiras (Porter).",
+  "mix_marketing_oceano_azul": "Estratégia de precificação (Preço), canais (Praça), atração (Promoção) e curva de valor (Eliminar, Reduzir, Elevar, Criar diferenciais).",
+  "movimento_cultural": {
+    "vencedor": "Nome do Movimento (A Geografia do Silêncio | A Cidade Prometida | A Tribo Global | O Empreendedorismo Intuitivo)",
+    "analise": "Justificativa de ancoragem estratégica neste movimento e alerta de risco moral se chocar com a moral familiar da Cidade Prometida."
+  },
+  "graficos_analiticos": [
+    {
+      "chart_data": {
+        "type": "bar",
+        "title": "Distribuição de Renda Alvo em SJC",
+        "labels": ["Até 2.8k", "2.8k-5.6k", "5.6k-12k", "12k-26k", ">26k"],
+        "data": [18.1, 32.3, 23.6, 14.2, 11.8]
+      },
+      "analise_texto": "Parecer analítico explicando como este dado estatístico valida a precificação e a escolha do ponto comercial."
+    },
+    {
+      "chart_data": {
+        "type": "doughnut",
+        "title": "Paradoxo de Evasão vs Consumo em SJC",
+        "labels": ["Evadem para SP/Litoral", "Consomem em SJC"],
+        "data": [64.7, 35.3]
+      },
+      "analise_texto": "Parecer analítico relacionando a retenção de consumo com o apelo da proposta de valor."
+    },
+    {
+      "chart_data": {
+        "type": "bar",
+        "title": "Frequência de Consumo por Macro-Região",
+        "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
+        "data": [40.7, 27.6, 13.9, 11.2, 6.6]
+      },
+      "analise_texto": "Parecer analítico sobre a penetração geográfica e adaptação ao comportamento de fluxo local."
+    }
+  ]
+}`;
 
     // 1. Obter modelos ativos diretamente da API da Groq para garantir que nenhum modelo descontinuado seja chamado
     let candidateModels = [];
@@ -139,7 +148,6 @@ NÃO inclua pensamentos ("Here's a thinking process"), introduções ou conclus�
           if (activeIds.includes(p)) candidateModels.push(p);
         }
 
-        // Adicionar outros modelos de chat disponíveis não descontinuados
         activeIds.forEach(id => {
           if (!candidateModels.includes(id) && 
               !id.includes('whisper') && 
@@ -177,8 +185,9 @@ NÃO inclua pensamentos ("Here's a thinking process"), introduções ou conclus�
           },
           body: JSON.stringify({
             model: model,
-            max_tokens: 3200,
-            temperature: 0.6,
+            response_format: { type: "json_object" },
+            max_tokens: 3500,
+            temperature: 0.5,
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: inputContent }
@@ -208,26 +217,23 @@ NÃO inclua pensamentos ("Here's a thinking process"), introduções ou conclus�
       });
     }
 
-    // HIGIENIZAÇÃO RIGOROSA: Cortar qualquer rascunho de pensamento em inglês ou preliminar
-    // Procura pela ocorrência real da primeira seção do relatório executivo
-    const realReportMatch = replyContent.match(/(###\s*(?:1\.\s*)?VISÃO\s*ESTRATÉGICA[\s\S]*)/i);
-    if (realReportMatch) {
-      replyContent = realReportMatch[1].trim();
-    } else {
-      const firstH3 = replyContent.search(/###\s*(?:[1-7]\.\s*)?(VISÃO|VISAO|MATRIZ|AUDITORIA|TOP)/i);
-      if (firstH3 !== -1) {
-        replyContent = replyContent.substring(firstH3).trim();
+    // Validação ou Extração de JSON Seguro
+    let jsonResult = null;
+    try {
+      jsonResult = JSON.parse(replyContent);
+    } catch (eJson) {
+      const matchJson = replyContent.match(/\{[\s\S]*\}/);
+      if (matchJson) {
+        try {
+          jsonResult = JSON.parse(matchJson[0]);
+        } catch (eSub) {
+          console.warn("Falha no segundo parse JSON:", eSub);
+        }
       }
     }
 
-    // Remoção extra defensiva de rascunhos numerados caso tenham se infiltrado
-    replyContent = replyContent
-      .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft)[\s\S]*?(?=###\s*(?:1\.\s*)?VISÃO|$)/gi, '')
-      .replace(/Start exactly with:[\s\S]*?(?=###\s*(?:1\.\s*)?VISÃO|$)/gi, '')
-      .trim();
-
     res.status(200).json({ 
-      result: replyContent,
+      result: jsonResult || replyContent,
       reply: replyContent,
       modelUsed: modelUsed
     });
