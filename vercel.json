@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/consultor.js": {
-      "maxDuration": 60
+      "maxDuration": 15
     }
   }
 }
