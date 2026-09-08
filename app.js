@@ -7062,9 +7062,71 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     }
   }
 
+  // Processamento e Normalização das Matrizes Estratégicas (VRIO & 5 Forças de Porter)
+  let matrizesObj = {
+    vrio: [
+      { letra: "V", nome: "Valor", analise: "Gera valor perceptível resolvendo dores de conveniência ou diferenciação local em SJC." },
+      { letra: "R", nome: "Raridade", analise: "Proposta diferenciada ou escassa na micro-região frente aos concorrentes tradicionais." },
+      { letra: "I", nome: "Imitabilidade", analise: "Barreira de entrada sustentada por relacionamento, ponto ou eficiência de custos." },
+      { letra: "O", nome: "Organização", analise: "Capacidade operacional interna de entregar o padrão prometido sem queimar margem." }
+    ],
+    porter: [
+      { forca: "Rivalidade entre Concorrentes", analise: "Intensidade competitiva moderada a alta dependendo do microterritório escolhido." },
+      { forca: "Ameaça de Novos Entrantes", analise: "Barreiras de entrada baseadas em capital de giro, ponto comercial e fidelidade local." },
+      { forca: "Produtos Substitutos", analise: "Alternativas de consumo ou evasão do público para capitais e centros maiores." },
+      { forca: "Barganha dos Fornecedores", analise: "Pressão de insumos e logística de distribuição no polo do Vale do Paraíba." },
+      { forca: "Barganha dos Clientes", analise: "Público joseense exigente em qualidade com alta sensibilidade ao valor entregue." }
+    ]
+  };
+
+  const rawMatrizes = data.matrizes_estrategicas || data.matrizes_vrio_porter;
+  if (rawMatrizes && typeof rawMatrizes === 'object') {
+    if (Array.isArray(rawMatrizes.vrio) && rawMatrizes.vrio.length > 0) matrizesObj.vrio = rawMatrizes.vrio;
+    if (Array.isArray(rawMatrizes.porter) && rawMatrizes.porter.length > 0) matrizesObj.porter = rawMatrizes.porter;
+  } else if (typeof rawMatrizes === 'string' && rawMatrizes.trim()) {
+    try {
+      const parsedMat = JSON.parse(rawMatrizes);
+      if (Array.isArray(parsedMat.vrio)) matrizesObj.vrio = parsedMat.vrio;
+      if (Array.isArray(parsedMat.porter)) matrizesObj.porter = parsedMat.porter;
+    } catch (eMat) {
+      matrizesObj.vrio[0].analise = rawMatrizes;
+    }
+  }
+
+  // Processamento e Normalização do Mix de Marketing (5 Ps & Oceano Azul)
+  let mixMarketingObj = {
+    cinco_ps: [
+      { p: "Produto", analise: "Portfólio focado na demanda real e perfil do público-alvo de São José dos Campos." },
+      { p: "Preço", analise: "Precificação compatível com a faixa de renda familiar predominante na região." },
+      { p: "Praça", analise: "Localização estratégica no bairro com maior fluxo e capilaridade de atendimento." },
+      { p: "Promoção", analise: "Estratégia de comunicação local, canais digitais e boca a boca orgânico." },
+      { p: "Pessoas", analise: "Equipe treinada para hospitalidade, agilidade e atendimento resolutivo." }
+    ],
+    oceano_azul: {
+      eliminar: "Atritos de atendimento, processos burocráticos e custos supérfluos na operação.",
+      reduzir: "Desperdícios operacionais e dependência de modelos genéricos não adaptados à cidade.",
+      elevar: "Velocidade de entrega, padrão de qualidade e consistência da experiência do cliente.",
+      criar: "Diferenciais exclusivos e conexões autênticas com a cultura local de SJC."
+    }
+  };
+
+  const rawMix = data.mix_marketing || data.mix_marketing_oceano_azul;
+  if (rawMix && typeof rawMix === 'object') {
+    if (Array.isArray(rawMix.cinco_ps) && rawMix.cinco_ps.length > 0) mixMarketingObj.cinco_ps = rawMix.cinco_ps;
+    if (rawMix.oceano_azul && typeof rawMix.oceano_azul === 'object') {
+      mixMarketingObj.oceano_azul = { ...mixMarketingObj.oceano_azul, ...rawMix.oceano_azul };
+    }
+  } else if (typeof rawMix === 'string' && rawMix.trim()) {
+    try {
+      const parsedMix = JSON.parse(rawMix);
+      if (Array.isArray(parsedMix.cinco_ps)) mixMarketingObj.cinco_ps = parsedMix.cinco_ps;
+      if (parsedMix.oceano_azul) mixMarketingObj.oceano_azul = { ...mixMarketingObj.oceano_azul, ...parsedMix.oceano_azul };
+    } catch (eMix) {
+      mixMarketingObj.oceano_azul.criar = rawMix;
+    }
+  }
+
   // Garantir que nenhum outro campo de texto contenha JSON bruto serializado
-  if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
-  if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
   if (typeof data.zona_exclusao === 'object') data.zona_exclusao = JSON.stringify(data.zona_exclusao);
 
   const dynamicChartsToRender = [];
@@ -7876,7 +7938,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     </div>
 
     <!-- BLOCO 7: MATRIZES ESTRATÉGICAS (VRIO & 5 FORÇAS DE PORTER) -->
-    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-8">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
           <i class="fa-solid fa-chess-knight text-brand-900 text-sm"></i>
@@ -7889,8 +7951,63 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </span>
       </div>
 
-      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
-        ${formatMarkdown(data.matrizes_vrio_porter || "Avaliação dos diferenciais internos sustentáveis (VRIO) e intensidade competitiva (Porter) no mercado joseense.")}
+      <!-- SEÇÃO 1: FRAMEWORK VRIO (4 DIMENSÕES) -->
+      <div class="space-y-3.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-shield text-brand-700"></i> FRAMEWORK VRIO (RECURSOS INTERNOS SUSTENTÁVEIS)
+          </span>
+          <span class="text-[9px] font-mono font-semibold text-slate-400">V • R • I • O</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          ${(matrizesObj.vrio || []).slice(0, 4).map((vItem) => `
+            <div class="p-4 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-2 hover:border-brand-300 transition-all flex flex-col justify-between">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="w-7 h-7 rounded-xl bg-brand-900 text-white font-black font-mono text-xs flex items-center justify-center shadow-xs">
+                    ${vItem.letra || "V"}
+                  </span>
+                  <span class="text-[10px] font-mono font-bold uppercase text-brand-900 px-2 py-0.5 rounded bg-brand-50 border border-brand-200/60">
+                    ${vItem.nome || "Dimensão"}
+                  </span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal pt-1">
+                  ${formatMarkdown(vItem.analise || "")}
+                </p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- SEÇÃO 2: 5 FORÇAS DE PORTER (COMPETIÇÃO SETORIAL EM SJC) -->
+      <div class="pt-6 border-t border-slate-200/80 space-y-3.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-arrows-to-circle text-accent-cyan"></i> AS 5 FORÇAS COMPETITIVAS DE PORTER
+          </span>
+          <span class="text-[9px] font-mono font-semibold text-accent-cyan bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">RIVALIDADE & PODER</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          ${(matrizesObj.porter || []).slice(0, 5).map((pItem, pIdx) => `
+            <div class="p-4 bg-white rounded-2xl border border-slate-200/90 shadow-2xs space-y-2 hover:border-slate-300 transition-all flex flex-col justify-between ${pIdx === 4 ? 'md:col-span-2 lg:col-span-1' : ''}">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-dot text-accent-cyan text-[10px]"></i>
+                    ${pItem.forca || `Força 0${pIdx + 1}`}
+                  </span>
+                  <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">FORÇA 0${pIdx + 1}</span>
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                  ${formatMarkdown(pItem.analise || "")}
+                </p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
       </div>
     </div>
 
@@ -7932,7 +8049,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     </div>
 
     <!-- BLOCO 9: MIX DE MARKETING & DIFERENCIAÇÃO (5 PS & OCEANO AZUL) -->
-    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+    <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-8">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
           <i class="fa-solid fa-bullseye text-accent-cyan text-sm"></i>
@@ -7945,8 +8062,109 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </span>
       </div>
 
-      <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs text-xs text-slate-700 leading-relaxed font-normal">
-        ${formatMarkdown(data.mix_marketing_oceano_azul || "Diretrizes para precificação, canais, comunicação e curva de valor eliminando fatores de atrito do setor.")}
+      <!-- SEÇÃO 1: OS 5 PS DO MARKETING -->
+      <div class="space-y-3.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-cubes-stacked text-brand-700"></i> OS 5 PS ESTRATÉGICOS DE IMPLEMENTAÇÃO
+          </span>
+          <span class="text-[9px] font-mono font-semibold text-slate-400">P1 • P2 • P3 • P4 • P5</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          ${(mixMarketingObj.cinco_ps || []).slice(0, 5).map((pItem, pIdx) => {
+            const pIcons = ["fa-box-open", "fa-tag", "fa-map-pin", "fa-bullhorn", "fa-user-group"];
+            const pColors = ["bg-sky-50 text-sky-800 border-sky-200", "bg-emerald-50 text-emerald-800 border-emerald-200", "bg-amber-50 text-amber-800 border-amber-200", "bg-purple-50 text-purple-800 border-purple-200", "bg-rose-50 text-rose-800 border-rose-200"];
+            return `
+              <div class="p-4 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-2 hover:border-slate-300 transition-all flex flex-col justify-between">
+                <div class="space-y-1.5">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                      <i class="fa-solid ${pIcons[pIdx % pIcons.length]} text-accent-cyan text-xs"></i>
+                      ${pItem.p || `P${pIdx + 1}`}
+                    </span>
+                    <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded border ${pColors[pIdx % pColors.length]}">P0${pIdx + 1}</span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed font-normal">
+                    ${formatMarkdown(pItem.analise || "")}
+                  </p>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- SEÇÃO 2: MATRIZ OCEANO AZUL (ELIMINAR, REDUZIR, ELEVAR, CRIAR) -->
+      <div class="pt-6 border-t border-slate-200/80 space-y-3.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-water text-sky-600"></i> MATRIZ DE AVALIAÇÃO DE VALOR (ESTRATÉGIA DO OCEANO AZUL)
+          </span>
+          <span class="text-[9px] font-mono font-semibold text-sky-700 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">CURVA DE VALOR</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- ELIMINAR -->
+          <div class="p-4.5 rounded-2xl bg-rose-50/70 border border-rose-200/70 shadow-2xs space-y-2 hover:border-rose-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black uppercase text-rose-900 font-mono flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-xmark text-rose-600"></i> ELIMINAR
+                </span>
+                <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-200/80 text-rose-900">CUSTO & ATRITO</span>
+              </div>
+              <p class="text-xs text-rose-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(mixMarketingObj.oceano_azul?.eliminar || "Fatores de atrito e custos desnecessários a eliminar.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- REDUZIR -->
+          <div class="p-4.5 rounded-2xl bg-amber-50/70 border border-amber-200/70 shadow-2xs space-y-2 hover:border-amber-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black uppercase text-amber-900 font-mono flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-arrow-down text-amber-600"></i> REDUZIR
+                </span>
+                <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-200/80 text-amber-900">SIMPLIFICAÇÃO</span>
+              </div>
+              <p class="text-xs text-amber-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(mixMarketingObj.oceano_azul?.reduzir || "Desperdícios e complexidades desnecessárias no setor.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- ELEVAR -->
+          <div class="p-4.5 rounded-2xl bg-sky-50/70 border border-sky-200/70 shadow-2xs space-y-2 hover:border-sky-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black uppercase text-sky-900 font-mono flex items-center gap-1.5">
+                  <i class="fa-solid fa-circle-arrow-up text-sky-600"></i> ELEVAR
+                </span>
+                <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-200/80 text-sky-900">PADRÃO SUPERIOR</span>
+              </div>
+              <p class="text-xs text-sky-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(mixMarketingObj.oceano_azul?.elevar || "Velocidade, consistência e padrão de atendimento acima da média.")}
+              </p>
+            </div>
+          </div>
+
+          <!-- CRIAR -->
+          <div class="p-4.5 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 shadow-2xs space-y-2 hover:border-emerald-300 transition-all flex flex-col justify-between">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black uppercase text-emerald-900 font-mono flex items-center gap-1.5">
+                  <i class="fa-solid fa-sparkles text-emerald-600"></i> CRIAR
+                </span>
+                <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-200/80 text-emerald-900">NOVA DEMANDA</span>
+              </div>
+              <p class="text-xs text-emerald-950/90 leading-relaxed font-normal">
+                ${formatMarkdown(mixMarketingObj.oceano_azul?.criar || "Diferenciais e formatos inéditos para a praça joseense.")}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `;

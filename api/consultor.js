@@ -75,6 +75,7 @@ export default async function handler(req, res) {
 ${marketBriefSJC}
 
 TRAVAS DRACONIANAS E PADRÃO MCKINSEY DEFINITIVO (REGRAS DE OURO):
+0. REGRA DE SANIDADE LÓGICA & FIT REALISTA: Adeque o seu tom e estratégia à REALIDADE da ideia e do local. Se o usuário sugerir um negócio popular (ex: Loja de Salgados, Marmitex, Barbearia de bairro, Oficina) em uma área popular (ex: Zona Norte, Zona Leste, bairros periféricos da Zona Sul), PARE de forçar narrativas de 'estética instagramável premium' ou focar na 'Tribo Global'. Use a estratégia correta: foco em giro rápido, custo-benefício, delivery, movimento 'Cidade Prometida' ou 'Empreendedorismo Intuitivo'. Respeite a classe social e a geografia real da ideia proposta.
 1. TRAVA DE NARRATIVA (PROIBIDO DATA-DUMP): É TERMINANTEMENTE PROIBIDO listar porcentagens como uma lista de compras (ex: "tem 40%, além de 20%, somando 15%"). O foco central do texto deve ser a PSICOLOGIA DO CONSUMIDOR, AS DORES OCULTAS, O COMPORTAMENTO E A CULTURA LOCAL. Os números do Radar SJC devem aparecer de forma elegante e comedida, servindo unicamente para PROVAR a tese analítica.
 2. TESE DE VIABILIDADE EM NEGRITO OBRIGATÓRIA: No meio do parágrafo de 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE escrever uma frase de impacto definitiva em formato Markdown Negrito (**frase**). Exemplo de padrão: "**O sucesso deste negócio em SJC não depende de preço, mas da capacidade de quebrar a barreira da mesmice e reter o consumidor que hoje foge para São Paulo.**"
 3. REGRA DE TITÂNIO (3 VERBALIZAÇÕES REAIS DO CSV): Na chave 'tres_verbalizacoes_reais', você é ESTONTEANTEMENTE PROIBIDO de inventar, criar ou simular frases falsas. Você DEVE ler o contexto da pesquisa/CSV e EXTRAIR EXATAMENTE 3 citações reais (verbatims) do banco que tenham o MAIOR FIT com o nicho de mercado da ideia sugerida.
@@ -130,8 +131,36 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
       ]
     }
   },
-  "matrizes_vrio_porter": "Avaliação competitiva real (VRIO) e nível de rivalidade contra concorrentes locais, poder do cliente joseense e barreiras (Porter).",
-  "mix_marketing_oceano_azul": "Estratégia de precificação (Preço), canais (Praça), atração (Promoção) e curva de valor (Eliminar, Reduzir, Elevar, Criar diferenciais).",
+  "matrizes_estrategicas": {
+    "vrio": [
+      { "letra": "V", "nome": "Valor", "analise": "Avaliação se os recursos geram valor percebido real para o cliente joseense." },
+      { "letra": "R", "nome": "Raridade", "analise": "Avaliação se a solução é rara e escassa na micro-região de SJC." },
+      { "letra": "I", "nome": "Imitabilidade", "analise": "Dificuldade ou facilidade de competidores copiarem a operação local." },
+      { "letra": "O", "nome": "Organização", "analise": "Capacidade da estrutura interna e processos capturarem esse potencial." }
+    ],
+    "porter": [
+      { "forca": "Rivalidade entre Concorrentes", "analise": "Intensidade competitiva direta nos bairros selecionados de SJC." },
+      { "forca": "Ameaça de Novos Entrantes", "analise": "Barreiras de entrada de capital, ponto comercial e fidelidade local." },
+      { "forca": "Produtos Substitutos", "analise": "Alternativas de consumo ou evasão para outras praças." },
+      { "forca": "Barganha dos Fornecedores", "analise": "Poder de negociação de insumos e logística no Vale do Paraíba." },
+      { "forca": "Barganha dos Clientes", "analise": "Sensibilidade a preço e exigência de padrão de qualidade do público joseense." }
+    ]
+  },
+  "mix_marketing": {
+    "cinco_ps": [
+      { "p": "Produto", "analise": "Portfólio, curva de qualidade e diferenciação tangível." },
+      { "p": "Preço", "analise": "Estratégia de precificação (penetração, margem ou custo-benefício) compatível com a renda do local." },
+      { "p": "Praça", "analise": "Canais físicos, microterritório de ponto, delivery e capilaridade." },
+      { "p": "Promoção", "analise": "Comunicação, tráfego local, boca a boca orgânico e ativações." },
+      { "p": "Pessoas", "analise": "Padrão de atendimento, treinamento de equipe e hospitalidade." }
+    ],
+    "oceano_azul": {
+      "eliminar": "Fatores de atrito e custos desnecessários a eliminar na operação...",
+      "reduzir": "Fatores tradicionais que encarecem a operação e devem ser reduzidos...",
+      "elevar": "Padrões de entrega e agilidade que devem ficar muito acima do mercado de SJC...",
+      "criar": "Diferenciais autênticos nunca antes ofertados no microterritório..."
+    }
+  },
   "movimentos_culturais": {
     "analise_cards": {
       "geografia_silencio": "Escreva 2 linhas analisando como o público que busca sossego, refúgio e áreas verdes em SJC recebe esta ideia com base no CSV.",
