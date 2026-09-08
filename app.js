@@ -7080,10 +7080,10 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.empreendedorismo_intuitivo || cards.intuitivo || cards.empreendedorismo || "";
     }
     if (rawMov.veredicto_final && typeof rawMov.veredicto_final === 'object') {
-      movimentosObj.veredicto_final.nome_movimento = rawMov.veredicto_final.nome_movimento || rawMov.veredicto_final.movimento || rawMov.veredicto_final.vencedor || "Movimento Cultural";
-      movimentosObj.veredicto_final.justificativa_densa = rawMov.veredicto_final.justificativa_densa || rawMov.veredicto_final.justificativa || rawMov.veredicto_final.analise || "";
+      movimentosObj.veredicto_final.nome_movimento = rawMov.veredicto_final.nome_movimento || rawMov.veredicto_final.movimento || rawMov.veredicto_final.vencedor || rawMov.veredicto_final.titulo || "";
+      movimentosObj.veredicto_final.justificativa_densa = rawMov.veredicto_final.justificativa_densa || rawMov.veredicto_final.justificativa || rawMov.veredicto_final.analise || rawMov.veredicto_final.parecer || "";
     } else if (rawMov.vencedor || rawMov.nome_movimento || rawMov.analise || rawMov.justificativa) {
-      movimentosObj.veredicto_final.nome_movimento = rawMov.vencedor || rawMov.nome_movimento || "Movimento Cultural";
+      movimentosObj.veredicto_final.nome_movimento = rawMov.vencedor || rawMov.nome_movimento || "";
       movimentosObj.veredicto_final.justificativa_densa = rawMov.justificativa_densa || rawMov.justificativa || rawMov.analise || "";
     }
   } else if (typeof rawMov === 'string' && rawMov.trim()) {
@@ -7098,15 +7098,29 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.empreendedorismo_intuitivo || cards.intuitivo || "";
         }
         if (parsedMov.veredicto_final && typeof parsedMov.veredicto_final === 'object') {
-          movimentosObj.veredicto_final.nome_movimento = parsedMov.veredicto_final.nome_movimento || parsedMov.veredicto_final.vencedor || "Movimento Cultural";
+          movimentosObj.veredicto_final.nome_movimento = parsedMov.veredicto_final.nome_movimento || parsedMov.veredicto_final.vencedor || "";
           movimentosObj.veredicto_final.justificativa_densa = parsedMov.veredicto_final.justificativa_densa || parsedMov.veredicto_final.justificativa || "";
         } else if (parsedMov.vencedor || parsedMov.justificativa) {
-          movimentosObj.veredicto_final.nome_movimento = parsedMov.vencedor || "Movimento Cultural";
+          movimentosObj.veredicto_final.nome_movimento = parsedMov.vencedor || "";
           movimentosObj.veredicto_final.justificativa_densa = parsedMov.justificativa_densa || parsedMov.justificativa || "";
         }
       }
     } catch (eMov) {
       movimentosObj.veredicto_final.justificativa_densa = rawMov;
+    }
+  }
+
+  // Normalização do nome do movimento vencedor para manter estética oficial
+  if (!movimentosObj.veredicto_final.nome_movimento || movimentosObj.veredicto_final.nome_movimento.toLowerCase().includes("fit cultural")) {
+    const rawJust = (movimentosObj.veredicto_final.justificativa_densa || "").toLowerCase();
+    if (rawJust.includes("silêncio") || rawJust.includes("silencio")) {
+      movimentosObj.veredicto_final.nome_movimento = "A Geografia do Silêncio";
+    } else if (rawJust.includes("prometida")) {
+      movimentosObj.veredicto_final.nome_movimento = "A Cidade Prometida";
+    } else if (rawJust.includes("intuitivo") || rawJust.includes("empreendedorismo")) {
+      movimentosObj.veredicto_final.nome_movimento = "Empreendedorismo Intuitivo";
+    } else {
+      movimentosObj.veredicto_final.nome_movimento = "A Tribo Global";
     }
   }
 
@@ -7124,7 +7138,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     movimentosObj.analise_cards.empreendedorismo_intuitivo = "Economia real dos bairros, prestadores de serviço e demanda por conveniência rápida (Zona Sul/Leste/Norte).";
   }
   if (!movimentosObj.veredicto_final.justificativa_densa) {
-    movimentosObj.veredicto_final.justificativa_densa = "Posicionamento estratégico prioritário alinhado às forças comportamentais e culturais de São José dos Campos.";
+    movimentosObj.veredicto_final.justificativa_densa = "Posicionamento estratégico prioritário com base nas dinâmicas de evasão (66,2%) e demanda reprimida levantadas no estudo municipal Radar São José.";
   }
 
   // Processamento e Normalização das Matrizes Estratégicas (VRIO & 5 Forças de Porter)

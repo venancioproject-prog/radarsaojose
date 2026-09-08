@@ -93,7 +93,14 @@ TRAVAS DRACONIANAS E PADRAO MCKINSEY DEFINITIVO (REGRAS DE OURO):
 4. REGRA DE TITANIO (3 VERBALIZACOES REAIS COM DEMOGRAFIA DO CSV): Na chave 'verbalizacoes_reais', extraia 3 objetos com citacoes reais e metadados demograficos (genero, idade, regiao, renda). REGRA ESTRITA DE GENERO: A chave 'genero' deve conter estritamente 'Homem' ou 'Mulher'. E terminantemente proibido utilizar termos como 'Cis' ou outros qualificadores.
 5. TRAVA GEOGRAFICA (ZONA DE EXCLUSAO OBRIGATORIA E DENSA): A chave 'zona_exclusao' deve conter a regiao seguida de um paragrafo explicativo duro (40-60 palavras).
 6. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas.
-7. REGRA DESTRUIDORA DE VIES & BIBLIA DOS 4 MOVIMENTOS CULTURAIS: Julgue o negocio conforme as definicoes oficiais dos 4 Movimentos. Na chave 'analise_cards', cruze a ideia com cada uma das 4 definicoes.
+7. REGRA DESTRUIDORA DE VIES & BIBLIA DOS 4 MOVIMENTOS CULTURAIS (ANALISE PROFUNDA & VEREDICTO EXATO):
+   - Você DEVE cruzar o negócio proposto com CADA um dos 4 movimentos de São José dos Campos nas chaves de 'analise_cards' (geografia_silencio, cidade_prometida, tribo_global, empreendedorismo_intuitivo), explicando a adesão ou atrito de consumo de cada público.
+   - Na chave 'veredicto_final.nome_movimento', você É ESTRITAMENTE PROIBIDO de retornar termos genéricos como 'Fit Cultural' ou 'Vencedor'. Você DEVE cravar EXATAMENTE um dos 4 nomes oficiais:
+     * "A Geografia do Silêncio" (para negócios de refúgio, sossego, calmaria, família e baixa fricção).
+     * "A Cidade Prometida" (para negócios focados em famílias tradicionais, segurança, alta performance e matrizes conservadoras).
+     * "A Tribo Global" (para negócios de padrão internacional, tecnologia, gastronomia cosmopolita, design e alta sofisticação).
+     * "Empreendedorismo Intuitivo" (para economia real de bairro, velocidade, praticidade, delivery e custo-benefício).
+   - Na chave 'veredicto_final.justificativa_densa', escreva um parágrafo profundo (50-80 palavras) fundamentado nos dados da pesquisa Radar SJC provando por que este movimento é o fit vencedor indispensável.
 8. REGRA DO FRAMEWORK VRIO (4 PILARES OBRIGATORIOS V-R-I-O): O array 'matrizes_estrategicas.vrio' DEVE conter EXATAMENTE 4 objetos correspondentes as 4 dimensoes: 'V' (Valor), 'R' (Raridade), 'I' (Imitabilidade) e 'O' (Organizacao). NUNCA omita 'I' ou 'O'.
 9. RESPOSTA EXCLUSIVAMENTE EM JSON VALIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois.
 
