@@ -6939,60 +6939,86 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         .replace(/I need to generate the report[\s\S]*?(?=\n\n|$)/gi, '')
         .trim();
 
+      // Encontrar se existe a seção de Bairros para renderizar lado a lado em 2 colunas
+      const bairrosSec = sections.find(s => {
+        const t = s.substring(0, s.indexOf("\n")).toUpperCase();
+        return t.includes("BAIRROS") || t.includes("GEO-LOCALIZAÇÃO") || t.includes("GEO");
+      });
+
+      let bairrosContent = "";
+      if (bairrosSec) {
+        bairrosContent = bairrosSec.substring(bairrosSec.indexOf("\n")).trim();
+      }
+
       htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
-          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
-            <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
-            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-              VISÃO ESTRATÉGICA E VEREDICTO
-            </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO -->
+          <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+                <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+                <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                  VISÃO ESTRATÉGICA E VEREDICTO
+                </h3>
+              </div>
+              <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
+                ${formatMarkdown(sanitizedVision || content)}
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+              <span>PADRÃO MCKINSEY / STUDIO 8</span>
+              <span class="text-brand-900">RADAR SJC 2026</span>
+            </div>
           </div>
-          <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
-            ${formatMarkdown(sanitizedVision || content)}
+
+          <!-- CARD 2: TOP 5 BAIRROS RECOMENDADOS (GEO-FIT SJC) -->
+          <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <div class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
+                  <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                    TOP 5 BAIRROS RECOMENDADOS
+                  </h3>
+                </div>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  GEO-FIT SJC
+                </span>
+              </div>
+
+              <div class="flex flex-wrap gap-1.5 pb-1">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-900 text-white text-[11px] font-bold shadow-2xs">
+                  <i class="fa-solid fa-map-pin text-accent-cyan text-[9px]"></i> Jd. Aquarius (Centro/Oeste)
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-900 text-white text-[11px] font-bold shadow-2xs">
+                  <i class="fa-solid fa-map-pin text-accent-cyan text-[9px]"></i> Vila Adyana & Ema (Centro/Oeste)
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 text-white text-[11px] font-bold shadow-2xs">
+                  <i class="fa-solid fa-map-pin text-sky-400 text-[9px]"></i> Jd. Satélite (Zona Sul)
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 text-white text-[11px] font-bold shadow-2xs">
+                  <i class="fa-solid fa-map-pin text-sky-400 text-[9px]"></i> Urbanova (Oeste)
+                </span>
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-700 text-white text-[11px] font-bold shadow-2xs">
+                  <i class="fa-solid fa-map-pin text-amber-400 text-[9px]"></i> Vila Industrial (Leste)
+                </span>
+              </div>
+
+              <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-1.5">
+                ${formatMarkdown(bairrosContent || 'Análise de microterritórios prioritários com base em densidade de renda e fluxo de consumo em São José dos Campos.')}
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
+              <span>RECORTE GEOGRÁFICO</span>
+              <span class="text-emerald-700 font-bold">N=477 RESPONDENTES</span>
+            </div>
           </div>
         </div>
       `;
     }
-    // 1.1 TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO & TAGS / NUVEM DE PALAVRAS)
+    // 1.1 TOP BAIRROS (Se já renderizado no grid lado a lado, pular)
     else if (upperTitle.includes("BAIRROS") || upperTitle.includes("GEO-LOCALIZAÇÃO") || upperTitle.includes("GEO")) {
-      htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <div class="flex items-center gap-2.5">
-              <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
-              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                TOP 5 BAIRROS RECOMENDADOS (GEO-FIT SJC)
-              </h3>
-            </div>
-            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-              ALTO POTENCIAL
-            </span>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-3">
-            <div class="flex flex-wrap gap-2 pb-2">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-900 text-white text-xs font-bold shadow-xs">
-                <i class="fa-solid fa-map-pin text-accent-cyan text-[10px]"></i> Jardim Aquarius (Centro/Oeste)
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-900 text-white text-xs font-bold shadow-xs">
-                <i class="fa-solid fa-map-pin text-accent-cyan text-[10px]"></i> Vila Adyana & Vila Ema (Centro/Oeste)
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 text-white text-xs font-bold shadow-xs">
-                <i class="fa-solid fa-map-pin text-sky-400 text-[10px]"></i> Jardim Satélite (Zona Sul)
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 text-white text-xs font-bold shadow-xs">
-                <i class="fa-solid fa-map-pin text-sky-400 text-[10px]"></i> Urbanova (Oeste)
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-700 text-white text-xs font-bold shadow-xs">
-                <i class="fa-solid fa-map-pin text-amber-400 text-[10px]"></i> Vila Industrial (Zona Leste)
-              </span>
-            </div>
-            <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-2 pt-1 border-t border-slate-200/60">
-              ${formatMarkdown(content)}
-            </div>
-          </div>
-        </div>
-      `;
+      return; // Já renderizado no grid 2-colunas acima
     }
     // 2. MATRIZ SWOT (4 QUADRANTES / 2 COLUNAS DE ALTA FIDELIDADE)
     else if (upperTitle.includes("SWOT")) {
