@@ -158,7 +158,7 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
       },
       body: JSON.stringify({
         model: selectedModel,
-        max_tokens: 1000, 
+        max_tokens: 3000, 
         temperature: 0.5,
         messages: [
           {
