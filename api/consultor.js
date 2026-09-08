@@ -1,3 +1,7 @@
+// Configuração de Execução na Vercel (Timeout de até 60 segundos)
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
+
 export default async function handler(req, res) {
   // Configuração de CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -23,7 +27,10 @@ export default async function handler(req, res) {
     const apiKey = (process.env.GROQ_API_KEY || '').trim();
 
     if (!apiKey) {
-      return res.status(500).json({ error: 'Chave GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.' });
+      return res.status(500).json({ 
+        error: 'Chave GROQ_API_KEY não configurada.',
+        details: 'A variável de ambiente GROQ_API_KEY não foi encontrada nas configurações da Vercel.'
+      });
     }
 
     // BASE CONSOLIDADA DIRETA DO RELATÓRIO OFICIAL RADAR SÃO JOSÉ (N=477, IC=95%):

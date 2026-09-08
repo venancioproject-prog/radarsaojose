@@ -1,0 +1,7 @@
+﻿{
+  "functions": {
+    "api/consultor.js": {
+      "maxDuration": 60
+    }
+  }
+}
