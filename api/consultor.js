@@ -333,7 +333,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
       details: error.stack || error.message
     }), {
       status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      headers: corsHeaders
     });
   }
 }
