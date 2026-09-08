@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     const apiKey = rawApiKey.trim();
 
     if (!apiKey) {
-      console.error('[Consultor IA] ERRO CRÍTICO: GROQ_API_KEY não encontrada em process.env.');
+      console.error('[Consultor IA] ERRO CRÍTICO: GROQ_API_KEY não configurada em process.env.');
       return res.status(500).json({ 
         error: 'Chave de API da Groq (GROQ_API_KEY) não está configurada nas variáveis de ambiente da Vercel. Adicione em Project Settings > Environment Variables e faça um Redeploy.' 
       });
@@ -61,10 +61,10 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       return res.status(400).json({ error: 'Parâmetro question ou messages é obrigatório no corpo da requisição.' });
     }
 
-    // Modelos oficiais ATIVOS na Groq (Llama 3.3 e 3.1)
+    // Modelos solicitados para a conta Groq
     const productionModels = [
-      'llama-3.3-70b-versatile',
-      'llama-3.1-8b-instant'
+      'llama3-70b-8192',
+      'llama3-8b-8192'
     ];
 
     let lastError = null;
@@ -73,7 +73,7 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
 
     for (const model of productionModels) {
       try {
-        console.log(`[Consultor IA] Tentando Groq com modelo ativo: ${model}`);
+        console.log(`[Consultor IA] Chamando Groq com modelo: ${model}`);
         
         const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
@@ -94,10 +94,10 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
         if (resp.ok) {
           successfulData = JSON.parse(respText);
           chosenModel = model;
-          console.log(`[Consultor IA] Sucesso absoluto com o modelo ${model}`);
+          console.log(`[Consultor IA] Sucesso com o modelo: ${model}`);
           break;
         } else {
-          console.warn(`[Consultor IA] Modelo ${model} retornou status ${resp.status}:`, respText);
+          console.warn(`[Consultor IA] Modelo ${model} falhou (Status ${resp.status}):`, respText);
           lastError = {
             status: resp.status,
             statusText: resp.statusText,
@@ -105,7 +105,7 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
           };
         }
       } catch (errLoop) {
-        console.error(`[Consultor IA] Exceção na chamada do modelo ${model}:`, errLoop);
+        console.error(`[Consultor IA] Exceção ao chamar ${model}:`, errLoop);
         lastError = {
           status: 500,
           statusText: 'FetchException',
