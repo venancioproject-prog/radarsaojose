@@ -7048,43 +7048,75 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     if (Array.isArray(data.ishikawa.causas)) ishikawaObj.causas = data.ishikawa.causas;
   }
 
-  // Processamento e Normalização dos 4 Movimentos Culturais (360º & Veredicto)
+  // Processamento e Normalização dos 4 Movimentos Culturais (360º & Veredicto Dinâmico)
   let movimentosObj = {
     analise_cards: {
-      geografia_silencio: "Refúgio, sossego, áreas verdes e calmaria do estresse corporativo (Urbanova/Adyana).",
-      cidade_prometida: "Famílias que priorizam estabilidade, conveniência familiar e moral tradicional (Zona Sul/Leste).",
-      tribo_global: "Engenheiros, tech, criativos e público cosmopolita ávido por design autoral e inovação (Aquarius/Vila Ema).",
-      empreendedorismo_intuitivo: "A economia real dos bairros, prestadores de serviço e consumo prático local."
+      geografia_silencio: "",
+      cidade_prometida: "",
+      tribo_global: "",
+      empreendedorismo_intuitivo: ""
     },
     veredicto_final: {
-      nome_movimento: "A Tribo Global",
-      justificativa_densa: "Posicionamento prioritário para captura de margem e minimização do atrito moral em São José dos Campos."
+      nome_movimento: "Fit Cultural",
+      justificativa_densa: ""
     }
   };
 
-  const rawMov = data.movimentos_culturais || data.movimento_cultural;
+  const rawMov = data.movimentos_culturais || data.movimento_cultural || data.fit_movimentos_culturais;
   if (rawMov && typeof rawMov === 'object') {
-    if (rawMov.analise_cards && typeof rawMov.analise_cards === 'object') {
-      movimentosObj.analise_cards = { ...movimentosObj.analise_cards, ...rawMov.analise_cards };
+    const cards = rawMov.analise_cards || rawMov.cards || rawMov.analise || rawMov;
+    if (cards && typeof cards === 'object') {
+      movimentosObj.analise_cards.geografia_silencio = cards.geografia_silencio || cards.geografia_do_silencio || cards.silencio || "";
+      movimentosObj.analise_cards.cidade_prometida = cards.cidade_prometida || cards.a_cidade_prometida || cards.prometida || "";
+      movimentosObj.analise_cards.tribo_global = cards.tribo_global || cards.a_tribo_global || cards.global || "";
+      movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.empreendedorismo_intuitivo || cards.intuitivo || cards.empreendedorismo || "";
     }
     if (rawMov.veredicto_final && typeof rawMov.veredicto_final === 'object') {
-      if (rawMov.veredicto_final.nome_movimento) movimentosObj.veredicto_final.nome_movimento = rawMov.veredicto_final.nome_movimento;
-      if (rawMov.veredicto_final.justificativa_densa) movimentosObj.veredicto_final.justificativa_densa = rawMov.veredicto_final.justificativa_densa;
-    } else if (rawMov.vencedor || rawMov.analise) {
-      if (rawMov.vencedor) movimentosObj.veredicto_final.nome_movimento = rawMov.vencedor;
-      if (rawMov.analise) movimentosObj.veredicto_final.justificativa_densa = rawMov.analise;
+      movimentosObj.veredicto_final.nome_movimento = rawMov.veredicto_final.nome_movimento || rawMov.veredicto_final.movimento || rawMov.veredicto_final.vencedor || "Movimento Cultural";
+      movimentosObj.veredicto_final.justificativa_densa = rawMov.veredicto_final.justificativa_densa || rawMov.veredicto_final.justificativa || rawMov.veredicto_final.analise || "";
+    } else if (rawMov.vencedor || rawMov.nome_movimento || rawMov.analise || rawMov.justificativa) {
+      movimentosObj.veredicto_final.nome_movimento = rawMov.vencedor || rawMov.nome_movimento || "Movimento Cultural";
+      movimentosObj.veredicto_final.justificativa_densa = rawMov.justificativa_densa || rawMov.justificativa || rawMov.analise || "";
     }
   } else if (typeof rawMov === 'string' && rawMov.trim()) {
     try {
       const parsedMov = JSON.parse(rawMov);
-      if (parsedMov.analise_cards) movimentosObj.analise_cards = { ...movimentosObj.analise_cards, ...parsedMov.analise_cards };
-      if (parsedMov.veredicto_final) {
-        if (parsedMov.veredicto_final.nome_movimento) movimentosObj.veredicto_final.nome_movimento = parsedMov.veredicto_final.nome_movimento;
-        if (parsedMov.veredicto_final.justificativa_densa) movimentosObj.veredicto_final.justificativa_densa = parsedMov.veredicto_final.justificativa_densa;
+      if (parsedMov && typeof parsedMov === 'object') {
+        const cards = parsedMov.analise_cards || parsedMov.cards || parsedMov;
+        if (cards && typeof cards === 'object') {
+          movimentosObj.analise_cards.geografia_silencio = cards.geografia_silencio || cards.geografia_do_silencio || "";
+          movimentosObj.analise_cards.cidade_prometida = cards.cidade_prometida || cards.a_cidade_prometida || "";
+          movimentosObj.analise_cards.tribo_global = cards.tribo_global || cards.a_tribo_global || "";
+          movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.empreendedorismo_intuitivo || cards.intuitivo || "";
+        }
+        if (parsedMov.veredicto_final && typeof parsedMov.veredicto_final === 'object') {
+          movimentosObj.veredicto_final.nome_movimento = parsedMov.veredicto_final.nome_movimento || parsedMov.veredicto_final.vencedor || "Movimento Cultural";
+          movimentosObj.veredicto_final.justificativa_densa = parsedMov.veredicto_final.justificativa_densa || parsedMov.veredicto_final.justificativa || "";
+        } else if (parsedMov.vencedor || parsedMov.justificativa) {
+          movimentosObj.veredicto_final.nome_movimento = parsedMov.vencedor || "Movimento Cultural";
+          movimentosObj.veredicto_final.justificativa_densa = parsedMov.justificativa_densa || parsedMov.justificativa || "";
+        }
       }
     } catch (eMov) {
       movimentosObj.veredicto_final.justificativa_densa = rawMov;
     }
+  }
+
+  // Fallbacks inteligentes apenas caso algum card venha estritamente vazio
+  if (!movimentosObj.analise_cards.geografia_silencio) {
+    movimentosObj.analise_cards.geografia_silencio = "Público em busca de refúgio, sossego e desconexão do estresse corporativo (Urbanova/Adyana).";
+  }
+  if (!movimentosObj.analise_cards.cidade_prometida) {
+    movimentosObj.analise_cards.cidade_prometida = "Famílias que priorizam estabilidade, consumo tradicional e preservação de valores (Zona Sul/Colinas).";
+  }
+  if (!movimentosObj.analise_cards.tribo_global) {
+    movimentosObj.analise_cards.tribo_global = "Público tech, engenheiros e criativos ávidos por inovação e referências cosmopolitas (Aquarius/Vila Ema).";
+  }
+  if (!movimentosObj.analise_cards.empreendedorismo_intuitivo) {
+    movimentosObj.analise_cards.empreendedorismo_intuitivo = "Economia real dos bairros, prestadores de serviço e demanda por conveniência rápida (Zona Sul/Leste/Norte).";
+  }
+  if (!movimentosObj.veredicto_final.justificativa_densa) {
+    movimentosObj.veredicto_final.justificativa_densa = "Posicionamento estratégico prioritário alinhado às forças comportamentais e culturais de São José dos Campos.";
   }
 
   // Processamento e Normalização das Matrizes Estratégicas (VRIO & 5 Forças de Porter)

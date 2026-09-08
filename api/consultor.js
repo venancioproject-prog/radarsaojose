@@ -81,7 +81,13 @@ TRAVAS DRACONIANAS E PADRÃO MCKINSEY DEFINITIVO (REGRAS DE OURO):
 3. REGRA DE TITÂNIO (3 VERBALIZAÇÕES REAIS COM DEMOGRAFIA DO CSV): Na chave 'verbalizacoes_reais', você é ESTONTEANTEMENTE PROIBIDO de inventar, criar ou simular frases falsas. Você DEVE ler o contexto da pesquisa/CSV e EXTRAIR EXATAMENTE 3 objetos com citações reais (verbatims) do banco que tenham o MAIOR FIT com o nicho de mercado da ideia sugerida, atrelando a faixa etária, região e renda de cada respondente extraídos estritamente do perfil do CSV.
 4. TRAVA GEOGRÁFICA (ZONA DE EXCLUSÃO OBRIGATÓRIA E DENSA): A chave 'zona_exclusao' NÃO PODE ser apenas o nome de um bairro. Ela DEVE conter o nome da região seguido de um PARÁGRAFO EXPLICATIVO E DURO (40-60 palavras) detalhando por que a ideia fracassaria e queimaria caixa naquele local (choque com a cultura tradicional familiar da Cidade Prometida, falta de lastro de renda, dispersão de fluxo, etc.).
 5. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas e contextualizadas cruzando renda, idade e o movimento cultural correspondente.
-6. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (```json).
+6. REGRA DESTRUIDORA DE VIÉS (4 MOVIMENTOS CULTURAIS): Você está PROIBIDO de escolher 'A Tribo Global' como vencedor por padrão. Você DEVE avaliar a essência do negócio:
+   - Se for um negócio de paz, retiro, saúde mental, natureza, desaceleração ou cafés pacatos, o vencedor É OBRIGATORIAMENTE 'A Geografia do Silêncio'.
+   - Se for popular, de bairro, rápido, alimentação básica ou custo-benefício, o vencedor É 'Empreendedorismo Intuitivo'.
+   - Se for tradicional, conservador, voltado para famílias ou bairros nobres consolidados, É 'A Cidade Prometida'.
+   - Se for voltado para inovação tecnológica, design vanguardista, público tech/engenharia e cultura cosmopolita, É 'A Tribo Global'.
+   Para cada um dos 4 movimentos na chave 'analise_cards', escreva EXATAMENTE como aquele público específico reagiria à ideia (se rejeitaria ou amaria) com base nos dados do CSV.
+7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (```json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
