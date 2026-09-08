@@ -66,41 +66,12 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
 [CHART: {"type": "doughnut", "title": "Paradoxo Evasão vs Orgulho SJC", "labels": ["Evadem Consumo", "Consomem Local"], "data": [64.7, 35.3]}]
 [CHART: {"type": "pie", "title": "Principais Queixas no Consumo", "labels": ["Caro/Pouca Exp.", "Falta Autoral", "Mesmice", "Outros"], "data": [32.3, 22.9, 18.6, 26.2]}]`;
 
-    // Obter lista dinâmica de modelos ativos na conta Groq
-    let activeModels = [];
-    try {
-      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
-        headers: { 'Authorization': `Bearer ${apiKey}` }
-      });
-      if (modelsResp.ok) {
-        const modelsData = await modelsResp.json();
-        activeModels = (modelsData.data || []).map(m => m.id);
-      }
-    } catch (eList) {
-      console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
-    }
-
-    // Lista de modelos preferenciais na Groq (atuais e suportados)
-    const preferredOrder = [
+    // Lista de modelos suportados com max_tokens: 500 para nunca estourar teto da Groq
+    const candidateModels = [
       'llama-3.3-70b-versatile',
-      'llama-3.1-8b-instant',
-      'llama3-70b-8192',
-      'llama3-8b-8192'
+      'qwen/qwen3.8-27b',
+      'llama-3.1-8b-instant'
     ];
-
-    // Montar a lista de candidatos filtrando apenas o que existe na conta (ou fallback seguro)
-    let candidateModels = [];
-    if (activeModels.length > 0) {
-      for (const pref of preferredOrder) {
-        if (activeModels.includes(pref)) candidateModels.push(pref);
-      }
-      // Adicionar outros modelos llama disponíveis que não estejam na lista
-      activeModels.filter(m => m.includes('llama') && !candidateModels.includes(m)).forEach(m => candidateModels.push(m));
-    }
-
-    if (candidateModels.length === 0) {
-      candidateModels = ['llama-3.3-70b-versatile', 'llama-3.1-8b-instant'];
-    }
 
     let replyContent = null;
     let modelUsed = null;
@@ -116,7 +87,7 @@ Análise executiva concisa do nicho, barreiras e oportunidade em SJC.
           },
           body: JSON.stringify({
             model: model,
-            max_tokens: 1000,
+            max_tokens: 500,
             temperature: 0.3,
             messages: [
               { role: 'system', content: systemPrompt },
