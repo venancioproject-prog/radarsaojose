@@ -6284,6 +6284,40 @@
     </div>
   </div>
 
+
+  <!-- ========================================== -->
+  <!-- OVERLAY CINEMATOGRÁFICO DE LOADING (6 SEGUNDOS) -->
+  <!-- ========================================== -->
+  <div id="ai-report-loading-overlay" class="fixed inset-0 z-[60] hidden flex flex-col items-center justify-center bg-brand-950/95 backdrop-blur-md text-white px-6">
+    <div class="relative flex items-center justify-center mb-8">
+      <!-- Radar Pulsing Waves -->
+      <div class="absolute w-36 h-36 rounded-full border-2 border-accent-cyan/20 animate-ping"></div>
+      <div class="absolute w-28 h-28 rounded-full border-2 border-accent-cyan/40 animate-pulse"></div>
+      <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-brand-900 via-brand-800 to-accent-cyan/30 border border-accent-cyan/50 flex items-center justify-center text-accent-cyan shadow-2xl relative z-10">
+        <i class="fa-solid fa-brain text-3xl animate-bounce"></i>
+      </div>
+    </div>
+
+    <!-- Título e Subtítulo -->
+    <h3 class="text-xl sm:text-2xl font-black tracking-tight text-white text-center mb-2">
+      Gerando Relatório de Inteligência Estratégica
+    </h3>
+    <p class="text-xs sm:text-sm text-slate-300 font-medium text-center max-w-md mb-6">
+      Cruzando dados de mercado do Radar São José com modelagem executiva McKinsey.
+    </p>
+
+    <!-- Barra de Progresso com Transição Suave -->
+    <div class="w-full max-w-md bg-brand-900 rounded-full h-2.5 overflow-hidden border border-brand-700/50 p-0.5 mb-5 shadow-inner">
+      <div id="ai-loading-progress-bar" class="h-full bg-gradient-to-r from-accent-cyan to-brand-400 rounded-full transition-all duration-300 ease-out" style="width: 5%;"></div>
+    </div>
+
+    <!-- Status Ticker Dinâmico -->
+    <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-accent-cyan bg-brand-900/80 px-4 py-2 rounded-xl border border-accent-cyan/30 shadow-lg">
+      <i class="fa-solid fa-circle-notch fa-spin text-accent-cyan"></i>
+      <span id="ai-loading-status-text">Iniciando varredura analítica de São José dos Campos...</span>
+    </div>
+  </div>
+
   <!-- Custom Script -->
   <script src="app.js?v=13.0"></script>
 </body>

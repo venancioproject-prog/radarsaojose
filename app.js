@@ -6540,87 +6540,102 @@ window.handleConsultorSubmit = async function(e) {
   const btnSend = document.getElementById("consultor-btn-send");
   const iconSend = document.getElementById("consultor-send-icon");
   const messagesContainer = document.getElementById("consultor-chat-messages");
+  const loadingOverlay = document.getElementById("ai-report-loading-overlay");
+  const loadingStatusText = document.getElementById("ai-loading-status-text");
+  const loadingProgressBar = document.getElementById("ai-loading-progress-bar");
 
   if (!input || !messagesContainer) return;
 
   const userQuestion = input.value.trim();
   if (!userQuestion) return;
 
-  // 1. Renderizar mensagem do usuário no chat
+  // 1. Limpar input e adicionar ao histórico do usuário
   input.value = "";
   window.appendChatMessage("user", userQuestion);
-
-  // Adicionar ao histórico local
   window.consultorChatHistory.push({ role: "user", content: userQuestion });
 
-  // 2. Estado de Carregamento (Loading)
+  // 2. Iniciar Estado de Loading Cinematográfico de 6 Segundos
   window.isConsultorThinking = true;
   if (btnSend) btnSend.disabled = true;
   if (iconSend) iconSend.className = "fa-solid fa-circle-notch fa-spin text-[11px]";
 
-  const loadingBubbleId = "consultor-loading-" + Date.now();
-  const loadingHtml = `
-    <div id="${loadingBubbleId}" class="flex gap-3 animate-pulse">
-      <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold">
-        <i class="fa-solid fa-brain"></i>
-      </div>
-      <div class="bg-slate-100 rounded-2xl p-3.5 text-slate-600 space-y-1 max-w-[88%] leading-relaxed flex items-center gap-2">
-        <i class="fa-solid fa-circle-notch fa-spin text-accent-cyan"></i>
-        <span>Consultando inteligência do Radar SJC na Groq...</span>
-      </div>
-    </div>
-  `;
-  messagesContainer.insertAdjacentHTML("beforeend", loadingHtml);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  // Ativar overlay cinematográfico em tela cheia / drawer
+  if (loadingOverlay) {
+    loadingOverlay.classList.remove("hidden");
+    if (loadingProgressBar) loadingProgressBar.style.width = "5%";
+    if (loadingStatusText) loadingStatusText.innerText = "Iniciando varredura demográfica de São José dos Campos...";
+  }
+
+  // Ticker de frases a cada 1.5s
+  const statusPhrases = [
+    { time: 1000, progress: "25%", text: "Analisando demografia e zonas nobres (Aquarius, Adyana, Sul)..." },
+    { time: 2500, progress: "50%", text: "Cruzando dados com a Matriz SWOT e 5 Forças de Porter..." },
+    { time: 4000, progress: "75%", text: "Calculando fit estratégico com os 4 Movimentos Culturais de SJC..." },
+    { time: 5200, progress: "95%", text: "Modelando 3 indicadores analíticos no Chart.js..." }
+  ];
+
+  const timeouts = [];
+  statusPhrases.forEach(item => {
+    const t = setTimeout(() => {
+      if (loadingProgressBar) loadingProgressBar.style.width = item.progress;
+      if (loadingStatusText) loadingStatusText.innerText = item.text;
+    }, item.time);
+    timeouts.push(t);
+  });
+
+  // Temporizador de no mínimo 6 segundos
+  const timerPromise = new Promise(resolve => setTimeout(resolve, 6000));
+
+  // Preparar contexto simplificado
+  let contextData = null;
+  if (window.currentFilteredRecords && window.currentFilteredRecords.length > 0) {
+    contextData = {
+      totalFiltered: window.currentFilteredRecords.length,
+      totalBase: (window.allSurveyRecords || []).length,
+      currentView: window.currentMainTab || "dashboard"
+    };
+  }
+
+  // Promise da requisição ao backend Groq
+  const fetchPromise = fetch("/api/consultor", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      messages: window.consultorChatHistory,
+      context: contextData
+    })
+  }).then(async res => {
+    const data = await res.json().catch(() => ({}));
+    return { ok: res.ok, status: res.status, data };
+  }).catch(err => {
+    return { ok: false, status: 500, error: err };
+  });
 
   try {
-    // 3. Montar contexto simplificado da base filtrada atual
-    let contextData = null;
-    if (window.currentFilteredRecords && window.currentFilteredRecords.length > 0) {
-      contextData = {
-        totalFiltered: window.currentFilteredRecords.length,
-        totalBase: (window.allSurveyRecords || []).length,
-        currentView: window.currentMainTab || "dashboard"
-      };
-    }
+    // Aguardar tanto os 6 segundos quanto a resposta da API
+    const [_, result] = await Promise.all([timerPromise, fetchPromise]);
 
-    // 4. Chamada segura para a rota Serverless da Vercel (/api/consultor)
-    const response = await fetch("/api/consultor", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        messages: window.consultorChatHistory,
-        context: contextData
-      })
-    });
+    if (loadingProgressBar) loadingProgressBar.style.width = "100%";
 
-    // Remover balão de loading
-    const loadingElem = document.getElementById(loadingBubbleId);
-    if (loadingElem) loadingElem.remove();
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      const errorMsg = errorData.error || `Erro HTTP ${response.status}: Falha na comunicação com o backend.`;
-      const detailsMsg = errorData.details ? `\n\n**Detalhes técnicos:** \`${errorData.details}\`` : "";
-      window.appendChatMessage("assistant", `⚠️ **Aviso:** ${errorMsg}${detailsMsg}\n\n*Dica: Verifique se a variável de ambiente GROQ_API_KEY foi adicionada no painel de configurações da Vercel (Project Settings > Environment Variables).*`);
+    if (!result.ok) {
+      const errorMsg = result.data?.error || result.error?.message || `Erro HTTP ${result.status}: Falha de comunicação com o backend.`;
+      const detailsMsg = result.data?.details ? `\n\n**Detalhes técnicos:** \`${result.data.details}\`` : "";
+      window.appendChatMessage("assistant", `⚠️ **Aviso:** ${errorMsg}${detailsMsg}\n\n*Dica: Verifique se a variável de ambiente GROQ_API_KEY foi adicionada no painel da Vercel.*`);
       return;
     }
 
-    const data = await response.json();
-    const reply = data.reply || "Nenhuma resposta retornada pela IA.";
+    const reply = result.data?.reply || result.data?.result || "Nenhuma resposta retornada pela IA.";
 
-    // Salvar histórico e renderizar
+    // Adicionar resposta ao histórico e renderizar no chat com os gráficos
     window.consultorChatHistory.push({ role: "assistant", content: reply });
     window.appendChatMessage("assistant", reply);
 
   } catch (err) {
-    console.error("Erro ao consultar backend /api/consultor:", err);
-    const loadingElem = document.getElementById(loadingBubbleId);
-    if (loadingElem) loadingElem.remove();
-    window.appendChatMessage("assistant", `❌ Ocorreu um erro ao conectar com o serviço: ${err.message}`);
+    console.error("Erro no fluxo do Consultor IA:", err);
+    window.appendChatMessage("assistant", `❌ Ocorreu um erro ao processar o relatório: ${err.message}`);
   } finally {
+    timeouts.forEach(t => clearTimeout(t));
+    if (loadingOverlay) loadingOverlay.classList.add("hidden");
     window.isConsultorThinking = false;
     if (btnSend) btnSend.disabled = false;
     if (iconSend) iconSend.className = "fa-solid fa-paper-plane text-[11px]";
