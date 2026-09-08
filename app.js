@@ -6632,11 +6632,77 @@ window.appendChatMessage = function(role, text) {
   const container = document.getElementById("consultor-chat-messages");
   if (!container) return;
 
-  // Formatação simples de markdown (negrito, quebras de linha e tópicos)
+  // Renderizador de Gráficos Visuais Embutidos
+  const renderGraficoTag = (match, p1) => {
+    const tag = p1.trim().toUpperCase();
+    if (tag === "IDADE") {
+      return `
+        <div class="my-3 p-3.5 bg-white rounded-xl border border-brand-200 shadow-2xs">
+          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+            <span class="text-[10px] font-black uppercase text-brand-900 flex items-center gap-1.5">
+              <i class="fa-solid fa-chart-simple text-accent-cyan"></i> Radiografia Etária (SJC)
+            </span>
+            <span class="text-[9px] font-bold text-slate-400">Março 2026</span>
+          </div>
+          <div class="space-y-1.5 text-[11px] font-semibold text-slate-700">
+            <div class="flex justify-between items-center"><span>35 a 44 anos (Maturidade)</span><span class="font-bold text-brand-900">27.6%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-brand-600 h-full rounded-full" style="width: 27.6%"></div></div>
+            <div class="flex justify-between items-center"><span>25 a 34 anos (Jovens Profissionais)</span><span class="font-bold text-brand-900">26.8%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-accent-cyan h-full rounded-full" style="width: 26.8%"></div></div>
+            <div class="flex justify-between items-center"><span>45 a 54 anos (Consolidados)</span><span class="font-bold text-brand-900">22.0%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-brand-900 h-full rounded-full" style="width: 22.0%"></div></div>
+          </div>
+        </div>
+      `;
+    } else if (tag === "RENDA") {
+      return `
+        <div class="my-3 p-3.5 bg-white rounded-xl border border-emerald-200 shadow-2xs">
+          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+            <span class="text-[10px] font-black uppercase text-emerald-900 flex items-center gap-1.5">
+              <i class="fa-solid fa-money-bill-trend-up text-emerald-600"></i> Distribuição de Renda Familiar
+            </span>
+            <span class="text-[9px] font-bold text-slate-400">Poder de Compra</span>
+          </div>
+          <div class="space-y-1.5 text-[11px] font-semibold text-slate-700">
+            <div class="flex justify-between items-center"><span>R$ 2.800 a R$ 7.000 (Classe Média)</span><span class="font-bold text-emerald-800">32.3%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-emerald-500 h-full rounded-full" style="width: 32.3%"></div></div>
+            <div class="flex justify-between items-center"><span>R$ 7.000 a R$ 15.000 (Classe Média Alta)</span><span class="font-bold text-emerald-800">23.6%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-emerald-600 h-full rounded-full" style="width: 23.6%"></div></div>
+            <div class="flex justify-between items-center"><span>Mais de R$ 15.000 (Alta Renda)</span><span class="font-bold text-emerald-800">18.1%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-emerald-800 h-full rounded-full" style="width: 18.1%"></div></div>
+          </div>
+        </div>
+      `;
+    } else if (tag === "REGIAO") {
+      return `
+        <div class="my-3 p-3.5 bg-white rounded-xl border border-amber-200 shadow-2xs">
+          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
+            <span class="text-[10px] font-black uppercase text-amber-900 flex items-center gap-1.5">
+              <i class="fa-solid fa-map-location-dot text-amber-600"></i> Frequência de Consumo por Região
+            </span>
+            <span class="text-[9px] font-bold text-slate-400">Concentração Urbana</span>
+          </div>
+          <div class="space-y-1.5 text-[11px] font-semibold text-slate-700">
+            <div class="flex justify-between items-center"><span>Centro-Oeste (Aquarius/Adyana)</span><span class="font-bold text-amber-900">40.7%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-amber-500 h-full rounded-full" style="width: 40.7%"></div></div>
+            <div class="flex justify-between items-center"><span>Zona Sul (Polo Autossuficiente)</span><span class="font-bold text-amber-900">27.6%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-amber-600 h-full rounded-full" style="width: 27.6%"></div></div>
+            <div class="flex justify-between items-center"><span>Zona Leste & Outras</span><span class="font-bold text-amber-900">31.7%</span></div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-slate-400 h-full rounded-full" style="width: 31.7%"></div></div>
+          </div>
+        </div>
+      `;
+    }
+    return "";
+  };
+
+  // Formatação rica de markdown (títulos, negrito, listas e tags de gráficos)
   const formattedText = text
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc'>$1</li>")
-    .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal'>$1</li>")
+    .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderGraficoTag)
+    .replace(/^### (.*$)/gim, "<h4 class='text-xs font-black uppercase text-brand-900 tracking-wider mt-3 mb-1 border-b border-slate-200 pb-1'>$1</h4>")
+    .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
+    .replace(/^-\s(.*)$/gim, "<li class='ml-3.5 list-disc text-slate-700'>$1</li>")
+    .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-3.5 list-decimal text-slate-700'>$1</li>")
     .replace(/\n/g, "<br/>");
 
   let bubbleHtml = "";
@@ -6651,10 +6717,10 @@ window.appendChatMessage = function(role, text) {
   } else {
     bubbleHtml = `
       <div class="flex gap-3">
-        <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold">
+        <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold shadow-inner">
           <i class="fa-solid fa-brain"></i>
         </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-slate-800 space-y-1.5 max-w-[88%] leading-relaxed">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 space-y-2 max-w-[92%] leading-relaxed">
           <div class="prose prose-xs text-slate-800 font-medium">${formattedText}</div>
         </div>
       </div>
