@@ -284,11 +284,11 @@
           <button 
             id="btn-open-consultor" 
             onclick="window.toggleConsultorModal(true)"
-            title="Abrir Consultor Estratégico IA"
-            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-accent-cyan/15 to-brand-500/15 hover:from-accent-cyan/25 hover:to-brand-500/25 text-brand-900 font-bold text-xs rounded-xl border border-accent-cyan/30 shadow-2xs transition-all active:scale-95 cursor-pointer"
+            title="Gerar Relatório Estratégico com IA"
+            class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-accent-cyan/20 to-brand-500/20 hover:from-accent-cyan/30 hover:to-brand-500/30 text-brand-900 font-bold text-xs rounded-xl border border-accent-cyan/40 shadow-sm transition-all active:scale-95 cursor-pointer"
           >
-            <i class="fa-solid fa-wand-magic-sparkles text-accent-cyan"></i>
-            <span class="hidden sm:inline">Consultor IA</span>
+            <i class="fa-solid fa-wand-magic-sparkles text-accent-cyan animate-pulse"></i>
+            <span class="hidden sm:inline font-black">Relatório de IA</span>
           </button>
 
           <button 
@@ -383,13 +383,13 @@
                 onclick="window.toggleConsultorModal(true)"
                 class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-brand-900 via-brand-800 to-brand-900 text-white shadow-sm hover:shadow-md border border-brand-700/50 cursor-pointer"
               >
-                <i class="fa-solid fa-brain text-accent-cyan text-sm"></i>
+                <i class="fa-solid fa-file-invoice text-accent-cyan text-sm"></i>
                 <div class="text-left flex-1">
                   <p class="leading-tight flex items-center gap-1.5">
-                    <span>Consultor IA</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-accent-cyan/20 text-accent-cyan font-extrabold">GROQ</span>
+                    <span class="font-black">Relatório de IA</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-accent-cyan/20 text-accent-cyan font-extrabold">GERADOR</span>
                   </p>
-                  <p class="text-[10px] text-slate-300 font-normal">Inteligência Estratégica</p>
+                  <p class="text-[10px] text-slate-300 font-normal">Auditoria Estratégica</p>
                 </div>
                 <i class="fa-solid fa-sparkles text-[10px] text-amber-400"></i>
               </button>
@@ -6206,10 +6206,10 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h3 class="font-black text-sm text-white tracking-tight">Consultor Estratégico IA</h3>
-                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-accent-cyan/20 text-accent-cyan uppercase">Llama 3.3 • Groq</span>
+                <h3 class="font-black text-sm text-white tracking-tight">Gerador de Relatório de IA</h3>
+                <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-accent-cyan/20 text-accent-cyan uppercase">Auditoria McKinsey • Groq</span>
               </div>
-              <p class="text-[11px] text-slate-300">Inteligência de Mercado • Radar São José 2026</p>
+              <p class="text-[11px] text-slate-300">Auditoria Estratégica, SWOT, PESTEL, Porter & Movimentos SJC</p>
             </div>
           </div>
           <button 
@@ -6246,9 +6246,9 @@
               <i class="fa-solid fa-brain"></i>
             </div>
             <div class="bg-slate-100 rounded-2xl p-3.5 text-slate-800 space-y-1.5 max-w-[88%] leading-relaxed">
-              <p class="font-bold text-brand-950">Olá! Sou o Consultor de Inteligência do Radar São José 2026.</p>
-              <p>Tenho acesso integral a todas as respostas da pesquisa municipal, aos 183 slides do relatório, às 10 personas e aos 4 movimentos culturais de SJC.</p>
-              <p class="text-[11px] text-slate-500 font-medium pt-1">Como posso te ajudar a tomar decisões estratégicas para o seu negócio ou investimento?</p>
+              <p class="font-bold text-brand-950">🎯 Gerador de Relatório Estratégico e Auditoria de Negócios SJC</p>
+              <p>Digite a sua <strong>ideia de negócio, produto ou nicho</strong> (ex: <em>Loja de biquínis e moda praia no Aquarius</em>, <em>Wine Bar autoral</em>, <em>Academia boutique na Zona Sul</em>).</p>
+              <p class="text-[11px] text-slate-600 font-medium pt-1">Gerarei uma auditoria completa com: <strong>Visão Estratégica, SWOT, PESTEL, 5 Forças de Porter, Análise dos 4 Movimentos Culturais de SJC, 5 Ps do Marketing, VRIO, Oceano Azul e Gráficos Mapeados</strong>.</p>
             </div>
           </div>
         </div>
@@ -6259,7 +6259,7 @@
             <input 
               type="text" 
               id="consultor-input" 
-              placeholder="Pergunte sobre dados, personas, bairros, oportunidades..." 
+              placeholder="Digite sua ideia de negócio (ex: Loja de Biquínis no Aquarius, Wine Bar, Coworking)..." 
               autocomplete="off"
               class="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
             />
@@ -6285,6 +6285,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=11.0"></script>
+  <script src="app.js?v=12.0"></script>
 </body>
 </html>
