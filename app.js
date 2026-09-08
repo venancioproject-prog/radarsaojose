@@ -6967,12 +6967,12 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       data: grafValidacao.data || [10, 20, 30]
     };
   } else {
-    // Fallback inteligente com base real do CSV
+    // Fallback inteligente focado em comportamento e barreiras reais do CSV
     primaryChartConfig = {
       type: "bar",
-      title: "DISTRIBUIÇÃO DE RENDA FAMILIAR (BASE REAL SJC)",
-      labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
-      data: [18.1, 32.3, 23.6, 14.2, 11.8]
+      title: "BARREIRAS DE CONSUMO E ATRITOS LOCAIS (SJC)",
+      labels: ["Preço s/ Valor", "Falta Autoral", "Sensação Mesmice", "Transporte", "Insegurança"],
+      data: [32.3, 22.9, 18.6, 14.1, 12.1]
     };
   }
 
