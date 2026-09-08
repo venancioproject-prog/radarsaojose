@@ -74,6 +74,10 @@ Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicand
 - **OPORTUNIDADES:** Mapeie janelas de mercado baseadas nos 64.7% de evasão e demandas de SJC.
 - **AMEAÇAS:** Riscos e concorrência local.
 
+### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
+- **Análise Cruzada:** Demonstre a conexão com Geografia do Silêncio, A Cidade Prometida, A Tribo Global e Empreendedorismo Intuitivo.
+- **O Veredicto do Movimento:** Identifique o movimento cultural dominante para posicionamento.
+
 ### AUDITORIA DE AMBIENTE E CAUSALIDADE
 - **ANÁLISE PESTEL:** Impactos Político, Econômico, Social, Tecnológico, Ambiental e Legal em SJC.
 - **DIAGRAMA DE ISHIKAWA:** Causas-raiz por Mercado, Operação, Tecnologia e Financeiro.
@@ -83,10 +87,6 @@ Aponte exatamente 5 bairros com o maior alinhamento para este negócio, indicand
 - **5 FORÇAS DE PORTER:** Níveis (Alto/Médio/Baixo) e justificativas técnicas para: Rivalidade, Novos Entrantes, Substitutos, Fornecedores, Compradores.
 - **5 PS DO MARKETING:** Produto, Preço, Praça, Promoção, Pessoas.
 - **ESTRATÉGIA OCEANO AZUL:** Eliminar, Reduzir, Elevar, Criar.
-
-### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
-- **Análise Cruzada:** Demonstre a conexão com Geografia do Silêncio, A Cidade Prometida, A Tribo Global e Empreendedorismo Intuitivo.
-- **O Veredicto do Movimento:** Identifique o movimento cultural dominante para posicionamento.
 
 [CHART: {"type": "bar", "title": "Distribuição de Consumo por Região SJC", "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"], "data": [40.7, 27.6, 13.9, 11.2, 6.6]}]
 [CHART: {"type": "doughnut", "title": "Paradoxo de Evasão vs Orgulho em SJC", "labels": ["Evadem para SP/Litoral", "Consomem Localmente"], "data": [64.7, 35.3]}]
