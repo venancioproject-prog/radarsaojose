@@ -65,22 +65,15 @@ DADOS COMPLETOS E REALISTAS DA PESQUISA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS (RADA
 ${context ? `
 Recorte em tempo real da sessão do usuário: ${JSON.stringify(context)}` : ''}`;
 
-    const systemPrompt = `DIRETIVA MÁXIMA E INEGOCIÁVEL DE FORMATAÇÃO:
-NUNCA, EM HIPÓTESE ALGUMA, EMITA CADEIAS DE PENSAMENTO, ANÁLISES PRELIMINARES, INTRODUÇÕES, METADADOS OU FRASES COMO "Here's a thinking process", "Analyze User Input", "Deconstruct Requirements", "Draft", etc.
-O SEU OUTPUT DEVE COMEÇAR IMEDIATAMENTE PELO CABEÇALHO DO PRIMEIRO BLOCO: "### VISÃO ESTRATÉGICA E VEREDICTO".
-QUALQUER TEXTO QUE NÃO SEJA O RELATÓRIO ESTRUTURADO FINAL EM MARKDOWN É ESTRITAMENTE PROIBIDO.
+    const systemPrompt = `Você é o Consultor Sênior de Inteligência de Mercado e Estratégia de Negócios do 'Radar São José' (Padrão Studio 8 / McKinsey & Company).
 
-Você é o Consultor Sênior de Inteligência de Mercado e Estratégia de Negócios do 'Radar São José' (Padrão Studio 8 / McKinsey & Company).
-
-O usuário fornecerá uma ideia de negócio, produto ou serviço (ex: loja de biquínis, cafeteria, wine bar, academia boutique, etc.).
-
-Sua missão é gerar um **Relatório de Auditoria Estratégica Completo e Executivo**, estruturado rigorosamente em blocos analíticos em Markdown, utilizando ESTRITAMENTE os dados quantitativos e qualitativos da pesquisa municipal de São José dos Campos (SJC) fornecidos no contexto:
-${realMarketDataSJC}
-
-Gere o relatório completo seguindo RIGOROSAMENTE a estrutura abaixo:
+DIRETRIZES DE FORMATAÇÃO E ESTRUTURA:
+- NUNCA escreva textos de planejamento, raciocínio em inglês, análise prévia ou "Here's a thinking process".
+- COMECE DIRETAMENTE na primeira linha com "### VISÃO ESTRATÉGICA E VEREDICTO".
+- Siga rigorosamente os blocos analíticos abaixo em Markdown:
 
 ### VISÃO ESTRATÉGICA E VEREDICTO
-- Elabore um parágrafo executivo profundo analisando o nicho, o potencial real de crescimento na cidade, as barreiras invisíveis de entrada e a psicologia do consumo local em São José dos Campos.
+Elabore um parágrafo executivo profundo analisando o nicho, o potencial real de crescimento na cidade, as barreiras invisíveis de entrada e a psicologia do consumo local em São José dos Campos.
 
 ### MATRIZ SWOT
 - **FORÇAS:** Destaque os diferenciais competitivos internos essenciais do negócio.
@@ -108,63 +101,44 @@ Gere o relatório completo seguindo RIGOROSAMENTE a estrutura abaixo:
   * **Criar:** O que deve ser criado como diferencial inédito em SJC.
 
 ### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
-- **Análise Cruzada:** Demonstre de forma prática como o negócio interage com cada um dos 4 movimentos culturais mapeados no ecossistema de São José dos Campos:
+- **Análise Cruzada:** Demonstre de forma prática como o negócio interage com cada um dos 4 movimentos:
   1. **Geografia do Silêncio:** Conexão e abordagem.
   2. **A Cidade Prometida:** Conexão e abordagem.
   3. **A Tribo Global:** Conexão e abordagem.
   4. **Empreendedorismo Intuitivo:** Conexão e abordagem.
-- **O Veredicto do Movimento:** Identifique e justifique categoricamente qual é **o melhor movimento cultural** para o empresário surfar prioritariamente, detalhando o fit de público e a alavanca de receita esperada.
+- **O Veredicto do Movimento:** Identifique e justifique categoricamente qual é **o melhor movimento cultural** para o empresário surfar prioritariamente.
 
 ---
 **OS 3 GRÁFICOS DINÂMICOS DE VALIDAÇÃO (OBRIGATÓRIO):**
-Você DEVE analisar a ideia de negócio e selecionar **EXATAMENTE 3 recortes de dados quantitativos estratégicos e distintos** para validar a tese do empreendimento em SJC (ex: Distribuição de Renda, Faixa Etária, Regiões de Consumo, Evasão vs Orgulho, Barreiras Noturnas ou Mobilidade).
-Distribua exatamente 3 tags de gráficos dinâmicos no formato JSON em uma única linha ao longo do relatório:
-[CHART: {"type": "bar|doughnut|pie|line", "title": "Título do Indicador Analítico", "labels": ["Label1", "Label2", "Label3"], "data": [40.7, 27.6, 31.7]}]
-Use apenas porcentagens reais extraídas do contexto de SJC.
+Insira exatamente 3 tags no formato JSON ao longo do texto:
+[CHART: {"type": "bar|doughnut|pie", "title": "Título do Indicador", "labels": ["A", "B", "C"], "data": [40.7, 27.6, 31.7]}]
 
-**DIRETRIZ DE CITAÇÃO DE DADOS (CRÍTICO & OBRIGATÓRIO):**
-Toda vez que você citar qualquer número, porcentagem, estatística ou constatação de mercado, você DEVE OBRIGATORIAMENTE colocar entre parênteses a fonte exata e o recorte demográfico/geográfico correspondente.
-Exemplos obrigatórios de formatação:
-- (Fonte: Radar SJC 2026 | Recorte: População Geral, N=476, IC=95%)
-- (Fonte: Radar SJC 2026 | Recorte: Faixa Etária 35-54 anos, 49.6% da base)
-- (Fonte: Radar SJC 2026 | Recorte: Região Centro-Oeste / Aquarius / Adyana)
-- (Fonte: Radar SJC 2026 | Recorte: Evasão de Lazer para SP/Litoral)
-- (Fonte: IBGE Censo 2022 / Radar SJC | Recorte: Idade Mediana 36 anos, 2.8 hab/domicílio)
-- (Fonte: Radar SJC 2026 | Recorte: Renda Familiar Classe A/B > R$ 7k)
+**DIRETRIZ DE CITAÇÃO DE DADOS:**
+Toda estatística deve conter entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...)`;
 
-**DIRETRIZ DE FORMATOS:**
-Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Studio 8 / McKinsey), sem introduções robóticas.`;
-
-    // 1. Auto-descoberta dinâmica de modelo ativo na conta Groq
-    let selectedModel = 'qwen/qwen3.8-27b';
+    // 1. Priorização de modelos Llama estáveis da Groq (não geram rascunho de pensamento)
+    let selectedModel = 'llama-3.3-70b-versatile';
     try {
       const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
         headers: { 'Authorization': `Bearer ${apiKey}` }
       });
       if (modelsResp.ok) {
         const modelsData = await modelsResp.json();
-        const available = (modelsData.data || [])
-          .map(m => m.id)
-          .filter(id => !id.includes('guard') && !id.includes('whisper') && !id.includes('embed'));
+        const available = (modelsData.data || []).map(m => m.id);
         
-        const best = [
-          available.find(id => id.includes('llama-3.3-70b-versatile')),
-          available.find(id => id.includes('llama-3.1-8b-instant')),
-          available.find(id => id.includes('qwen')),
-          available.find(id => id.includes('llama')),
-          available[0]
-        ].filter(Boolean);
-
-        if (best.length > 0) {
-          selectedModel = best[0];
-          console.log('[Consultor IA] Modelo selecionado:', selectedModel);
+        if (available.includes('llama-3.3-70b-versatile')) {
+          selectedModel = 'llama-3.3-70b-versatile';
+        } else if (available.includes('llama-3.1-8b-instant')) {
+          selectedModel = 'llama-3.1-8b-instant';
+        } else if (available.find(id => id.includes('llama'))) {
+          selectedModel = available.find(id => id.includes('llama'));
         }
       }
     } catch (eList) {
       console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
     }
 
-    // 2. Chamada de Chat Completions com limite de 900 tokens para segurança do Free Tier da Groq (OTPM limit)
+    // 2. Chamada de Chat Completions com limite de 900 tokens (OTPM seguro)
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -174,7 +148,7 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
       body: JSON.stringify({
         model: selectedModel,
         max_tokens: 900, 
-        temperature: 0.5,
+        temperature: 0.4,
         messages: [
           {
             role: 'system',
@@ -199,21 +173,12 @@ Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Stu
       });
     }
 
-        let replyContent = data.choices?.[0]?.message?.content || 'Não foi possível obter resposta no momento.';
+    let replyContent = data.choices?.[0]?.message?.content || 'Não foi possível obter resposta no momento.';
 
-    // HIGIENIZAÇÃO RIGOROSA: Remover tags <think>, cadeias de raciocínio e introduções em inglês/metadados
-    replyContent = replyContent
-      .replace(/<think>[\s\S]*?<\/think>/gi, '')
-      .replace(/Here's a thinking process[\s\S]*?(?=###\s*VISÃO|###\s*VISAO|$)/gi, '')
-      .replace(/^[\s\S]*?(?=###\s*VISÃO|###\s*VISAO)/i, '')
-      .trim();
-
-    if (!replyContent.startsWith("###")) {
-      // Se por algum motivo ainda restou ruído antes da primeira seção
-      const firstH3 = replyContent.indexOf("###");
-      if (firstH3 !== -1) {
-        replyContent = replyContent.substring(firstH3).trim();
-      }
+    // HIGIENIZAÇÃO RIGOROSA: Cortar tudo que vier antes da primeira seção real
+    const firstH3 = replyContent.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
+    if (firstH3 !== -1) {
+      replyContent = replyContent.substring(firstH3).trim();
     }
 
     res.status(200).json({ 

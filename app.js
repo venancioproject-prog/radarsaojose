@@ -6859,15 +6859,11 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     return "";
   };
 
-  // HIGIENIZAÇÃO DE LUXO: Remover qualquer vazamento de raciocínio da IA
-  let cleanText = (text || "")
-    .replace(/<think>[\s\S]*?<\/think>/gi, '')
-    .replace(/Here's a thinking process[\s\S]*?(?=###\s*VISÃO|###\s*VISAO|$)/gi, '')
-    .trim();
-
-  const h3Pos = cleanText.search(/###\s*(VISÃO|VISAO)/i);
-  if (h3Pos > 0) {
-    cleanText = cleanText.substring(h3Pos).trim();
+  // HIGIENIZAÇÃO DE LUXO: Cortar qualquer rascunho ou raciocínio preliminar
+  let cleanText = (text || "").trim();
+  const firstSectionIdx = cleanText.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
+  if (firstSectionIdx !== -1) {
+    cleanText = cleanText.substring(firstSectionIdx).trim();
   }
 
   let processedText = cleanText
@@ -6914,6 +6910,12 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
     // 1. VISÃO ESTRATÉGICA E VEREDICTO
     if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
+      // Remover sub-tópicos de raciocínio em inglês caso existam dentro do bloco de texto
+      let sanitizedVision = content
+        .replace(/\d+\.\s*(Deconstruct Requirements|Map Business Idea|Draft)[\s\S]*?(?=\n\n|###|$)/gi, '')
+        .replace(/I need to generate the report[\s\S]*?(?=\n\n|$)/gi, '')
+        .trim();
+
       htmlOutput += `
         <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
           <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
@@ -6923,7 +6925,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             </h3>
           </div>
           <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
-            ${formatMarkdown(content)}
+            ${formatMarkdown(sanitizedVision || content)}
           </div>
         </div>
       `;
