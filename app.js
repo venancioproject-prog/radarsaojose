@@ -7492,19 +7492,137 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         </div>
       `;
     }
-    // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS
+    // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS (4 CARDS VISUAIS COM FOTOS + VEREDICTO FINAL)
     else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT") || upperTitle.includes("CULTURAIS")) {
+      const fitSilencio = extractBlock(content, 'Geografia do Silêncio|Silêncio|Silencio', ['A Cidade Prometida', 'Cidade Prometida', 'A Tribo Global', 'Tribo Global', 'Empreendedorismo Intuitivo', 'Veredicto']);
+      const fitPrometida = extractBlock(content, 'A Cidade Prometida|Cidade Prometida', ['Geografia do Silêncio', 'A Tribo Global', 'Tribo Global', 'Empreendedorismo Intuitivo', 'Veredicto']);
+      const fitTribo = extractBlock(content, 'A Tribo Global|Tribo Global', ['Geografia do Silêncio', 'A Cidade Prometida', 'Empreendedorismo Intuitivo', 'Veredicto']);
+      const fitEmpreendedorismo = extractBlock(content, 'Empreendedorismo Intuitivo|Empreendedorismo', ['Geografia do Silêncio', 'A Cidade Prometida', 'A Tribo Global', 'Veredicto']);
+      
+      const veredictoMov = extractBlock(content, 'O Veredicto do Movimento|Veredicto do Movimento|Veredicto', ['Análise Cruzada', 'Geografia', 'Cidade Prometida', 'Tribo Global']);
+
       htmlOutput += `
-        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
-          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
-            <i class="fa-solid fa-compass text-purple-600 text-sm"></i>
-            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-              O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
-            </h3>
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-compass text-purple-600 text-sm"></i>
+              <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+                O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
+              </h3>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+              ESTUDO STUDIO 8 SJC
+            </span>
           </div>
-          <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-3">
-            ${formatMarkdown(content)}
+
+          <!-- GRID DE 4 CARDS COM FOTOS TEMÁTICAS CORTADAS -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- 1. GEOGRAFIA DO SILÊNCIO -->
+            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="relative h-32 w-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80" 
+                       alt="Geografia do Silêncio" 
+                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-emerald-950/80 backdrop-blur-xs text-emerald-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-emerald-500/30">
+                    🌿 MOVIMENTO 01
+                  </span>
+                </div>
+                <div class="p-3.5 space-y-1.5">
+                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DO SILÊNCIO</h5>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitSilencio) || 'Busca por refúgio, sossego, áreas verdes e calmaria do estresse corporativo.'}</p>
+                </div>
+              </div>
+              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+                <span>Foco: Urbanova / Adyana</span>
+              </div>
+            </div>
+
+            <!-- 2. A CIDADE PROMETIDA -->
+            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="relative h-32 w-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80" 
+                       alt="A Cidade Prometida" 
+                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-sky-950/80 backdrop-blur-xs text-sky-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-sky-500/30">
+                    👨‍👩‍👧‍👦 MOVIMENTO 02
+                  </span>
+                </div>
+                <div class="p-3.5 space-y-1.5">
+                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A CIDADE PROMETIDA</h5>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitPrometida) || 'Famílias que buscam segurança, estabilidade e excelência educacional.'}</p>
+                </div>
+              </div>
+              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+                <span>Foco: Zona Sul & Colinas</span>
+              </div>
+            </div>
+
+            <!-- 3. A TRIBO GLOBAL -->
+            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="relative h-32 w-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" 
+                       alt="A Tribo Global" 
+                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-purple-950/80 backdrop-blur-xs text-purple-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-purple-500/30">
+                    🚀 MOVIMENTO 03
+                  </span>
+                </div>
+                <div class="p-3.5 space-y-1.5">
+                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A TRIBO GLOBAL</h5>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitTribo) || 'Engenheiros, tech, criativos e jovens que exigem estética contemporânea e autoral.'}</p>
+                </div>
+              </div>
+              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+                <span>Foco: Aquarius & Vila Ema</span>
+              </div>
+            </div>
+
+            <!-- 4. EMPREENDEDORISMO INTUITIVO -->
+            <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div class="relative h-32 w-full overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=600&q=80" 
+                       alt="Empreendedorismo Intuitivo" 
+                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-amber-950/80 backdrop-blur-xs text-amber-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-amber-500/30">
+                    💡 MOVIMENTO 04
+                  </span>
+                </div>
+                <div class="p-3.5 space-y-1.5">
+                  <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">EMPREENDEDORISMO INTUITIVO</h5>
+                  <p class="text-[11px] text-slate-600 leading-relaxed">${formatMarkdown(fitEmpreendedorismo) || 'A economia real dos bairros, prestadores de serviço e consumo rápido.'}</p>
+                </div>
+              </div>
+              <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
+                <span>Foco: Sul, Leste & Norte</span>
+              </div>
+            </div>
+
           </div>
+
+          <!-- CARD DE DESTAQUE: O VEREDICTO DO MOVIMENTO -->
+          <div class="p-5 bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-2xl border border-brand-800 shadow-md flex flex-col md:flex-row items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center shrink-0 text-xl text-purple-300">
+              👑
+            </div>
+            <div class="space-y-1 flex-1 text-center md:text-left">
+              <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-400">
+                O VEREDICTO DO MOVIMENTO DOMINANTE
+              </span>
+              <div class="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                ${formatMarkdown(veredictoMov || 'Identificação do movimento cultural prioritário para posicionamento competitivo e captura de margem em São José dos Campos.')}
+              </div>
+            </div>
+          </div>
+
         </div>
       `;
     }
