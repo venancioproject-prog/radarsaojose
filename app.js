@@ -7016,15 +7016,17 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           </div>
 
           <!-- GRÁFICO DINÂMICO DE VALIDAÇÃO CONECTADO À ANÁLISE -->
-          <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-black uppercase tracking-wider text-brand-950 flex items-center gap-1.5">
-                <i class="fa-solid fa-chart-pie text-accent-cyan text-xs"></i>
+          <div class="mt-4 p-4 sm:p-5 bg-gradient-to-b from-slate-50/90 via-slate-50 to-slate-100/70 rounded-2xl border border-slate-200/90 shadow-2xs space-y-3 flex-1 flex flex-col justify-between min-h-[280px]">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-200/80">
+              <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2 font-mono">
+                <i class="fa-solid fa-chart-column text-accent-cyan text-sm"></i>
                 ${primaryChartConfig.title}
               </span>
-              <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-brand-900 text-white">N=477</span>
+              <span class="text-[9px] font-mono font-black px-2 py-0.5 rounded-md bg-brand-900 text-accent-cyan border border-brand-800 shadow-2xs">
+                AMOSTRA N=477
+              </span>
             </div>
-            <div class="relative w-full h-40">
+            <div class="relative w-full flex-1 min-h-[230px] sm:min-h-[260px]">
               <canvas id="${primaryChartCanvasId}"></canvas>
             </div>
           </div>
@@ -7398,7 +7400,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </span>
             <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
           </div>
-          <div class="relative w-full h-52">
+          <div class="relative w-full h-60 sm:h-64">
             <canvas id="${chartId}"></canvas>
           </div>
         </div>
@@ -7441,7 +7443,32 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     scrollContainer.scrollTop = 0;
   }
 
-  // Instanciar Chart.js nos canvas dinâmicos
+  // Helper para quebrar labels longos em múltiplas linhas e remover porcentagens repetidas
+  const cleanAndWrapLabel = (labelStr) => {
+    if (!labelStr) return '';
+    let clean = String(labelStr).replace(/\s*\(\s*\d+(\.\d+)?%\s*\)/g, '').trim();
+    if (clean.length <= 15) return clean;
+    
+    const words = clean.split(' ');
+    if (words.length <= 1) return clean;
+    
+    const lines = [];
+    let currentLine = '';
+    words.forEach(w => {
+      if (!currentLine) {
+        currentLine = w;
+      } else if ((currentLine + ' ' + w).length <= 14) {
+        currentLine += ' ' + w;
+      } else {
+        lines.push(currentLine);
+        currentLine = w;
+      }
+    });
+    if (currentLine) lines.push(currentLine);
+    return lines;
+  };
+
+  // Instanciar Chart.js nos canvas dinâmicos com design executivo de alto padrão
   setTimeout(() => {
     dynamicChartsToRender.forEach(item => {
       const canvas = document.getElementById(item.id);
@@ -7450,47 +7477,118 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       const cfg = item.config;
       const chartType = cfg.type === "pie" || cfg.type === "doughnut" ? "doughnut" : (cfg.type === "line" ? "line" : "bar");
 
-      const defaultColors = [
-        "#0B2545", "#00B4D8", "#10B981", "#F59E0B", "#F43F5E",
-        "#8B5CF6", "#06B6D4", "#3B82F6", "#EC4899", "#64748B"
+      // Paleta Executiva Sofisticada McKinsey / Studio 8
+      const executivePalette = [
+        "#00B4D8", // Vibrant Cyan
+        "#0B2545", // Deep Navy
+        "#10B981", // Emerald
+        "#F59E0B", // Amber
+        "#F43F5E", // Rose
+        "#8B5CF6", // Violet
+        "#06B6D4", // Sky Blue
+        "#3B82F6", // Royal Blue
+        "#EC4899", // Pink
+        "#64748B"  // Slate
       ];
 
-      const bgColors = chartType === "doughnut" ? defaultColors : "#0B2545";
+      const processedLabels = (cfg.labels || []).map(l => cleanAndWrapLabel(l));
+      const rawData = cfg.data || [];
+      const maxVal = Math.max(...rawData.map(v => Number(v) || 0), 10);
+      
+      const bgColors = chartType === "doughnut" 
+        ? executivePalette 
+        : rawData.map((_, i) => executivePalette[i % executivePalette.length]);
 
       try {
         new Chart(canvas.getContext("2d"), {
           type: chartType,
           data: {
-            labels: cfg.labels || [],
+            labels: processedLabels,
             datasets: [{
               label: cfg.title || "Indicador",
-              data: cfg.data || [],
+              data: rawData,
               backgroundColor: bgColors,
               borderColor: "#FFFFFF",
               borderWidth: chartType === "doughnut" ? 2 : 0,
-              borderRadius: chartType === "bar" ? 6 : 0
+              borderRadius: chartType === "bar" ? 8 : 0,
+              borderSkipped: false,
+              maxBarThickness: 54,
+              barPercentage: 0.65,
+              categoryPercentage: 0.85
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+              padding: {
+                top: chartType === "doughnut" ? 5 : 20,
+                bottom: 5,
+                left: 5,
+                right: 5
+              }
+            },
             plugins: {
               legend: {
                 display: chartType === "doughnut",
                 position: "bottom",
-                labels: { color: "#1E293B", font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12 }
+                labels: { 
+                  color: "#1E293B", 
+                  font: { family: "Montserrat", size: 10, weight: "bold" }, 
+                  boxWidth: 12,
+                  padding: 12
+                }
               },
               datalabels: {
-                color: chartType === "doughnut" ? "#FFFFFF" : "#0B2545",
-                font: { family: "Montserrat", size: 10, weight: "bold" },
+                display: true,
+                color: chartType === "doughnut" ? "#FFFFFF" : "#0F172A",
+                font: { family: "Montserrat", size: 11, weight: "bold" },
                 anchor: chartType === "doughnut" ? "center" : "end",
                 align: chartType === "doughnut" ? "center" : "top",
-                formatter: (val) => val + "%"
+                offset: chartType === "doughnut" ? 0 : 4,
+                formatter: (val) => {
+                  if (val === null || val === undefined) return '';
+                  return typeof val === 'number' ? (val % 1 === 0 ? val + '%' : val.toFixed(1) + '%') : val + '%';
+                }
+              },
+              tooltip: {
+                enabled: true,
+                backgroundColor: "#0B2545",
+                titleFont: { family: "Montserrat", size: 11, weight: "bold" },
+                bodyFont: { family: "Montserrat", size: 11 },
+                padding: 10,
+                cornerRadius: 8,
+                callbacks: {
+                  label: function(ctx) {
+                    return ` ${ctx.dataset.label || 'Valor'}: ${ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed}%`;
+                  }
+                }
               }
             },
             scales: chartType === "doughnut" ? {} : {
-              y: { beginAtZero: true, grid: { color: "#F1F5F9" }, ticks: { color: "#64748B", font: { family: "Montserrat", size: 10 } } },
-              x: { grid: { display: false }, ticks: { color: "#1E293B", font: { family: "Montserrat", size: 10, weight: "bold" } } }
+              y: { 
+                beginAtZero: true, 
+                suggestedMax: Math.ceil(maxVal * 1.25),
+                grid: { 
+                  color: "rgba(226, 232, 240, 0.7)",
+                  borderDash: [4, 4]
+                }, 
+                ticks: { 
+                  color: "#64748B", 
+                  font: { family: "Montserrat", size: 10 },
+                  callback: (v) => v + "%"
+                } 
+              },
+              x: { 
+                grid: { display: false }, 
+                ticks: { 
+                  color: "#1E293B", 
+                  font: { family: "Montserrat", size: 10.5, weight: "bold" },
+                  maxRotation: 0,
+                  minRotation: 0,
+                  autoSkip: false
+                } 
+              }
             }
           }
         });
