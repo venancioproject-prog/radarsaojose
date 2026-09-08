@@ -1,4 +1,4 @@
-﻿export const config = {
+export const config = {
   runtime: 'edge',
 };
 
@@ -44,7 +44,7 @@ export default async function handler(req) {
       });
     }
 
-    const marketBriefSJC = BASE COMPLETA DE DADOS DA PESQUISA MUNICIPAL RADAR SAO JOSE (N=477, IC=95%):
+    const marketBriefSJC = `BASE COMPLETA DE DADOS DA PESQUISA MUNICIPAL RADAR SAO JOSE (N=477, IC=95%):
 1. MACRODEMOGRAFIA & PERFIL SOCIOECONOMICO OFICIAL:
    - Renda Total Familiar: Ate R$ 2.800 (18.1%) | R$ 2.801 a R$ 5.600 (32.3%) | R$ 5.601 a R$ 12.000 (23.6%) | R$ 12.001 a R$ 26.000 (14.2%) | Acima de R$ 26.000 (11.8%).
    - Faixa Etaria: 16-17 anos (1.9%), 18-24 anos (12.2%), 25-34 anos (26.8%), 35-44 anos (27.6%), 45-54 anos (22.0%), 55-64 anos (7.4%), 65+ anos (4.0%).
@@ -86,11 +86,11 @@ export default async function handler(req) {
    - "Sinto falta de uma vida cultural mais pulsante fora do eixo comercial. Mais eventos de rua e ocupacao dos espacos publicos." (Homem Cis, 25-34 anos, Centro, Classe B)
    - "SJC tem potencial para ter eventos de grande porte, como festivais de musica e gastronomia que atraiam pessoas de fora e segurem quem mora aqui." (Mulher Cis, 25-34 anos, Sul, Classe B)
    - "Uma cidade com poucos recursos para jovens." (Mulher Cis, 35-44 anos, Jd. Colonial, PJ)
-   - "Lazer so pra quem tem dinheiro." (Mulher Cis, 35-44 anos, Jd. Santa Ines III, CLT);
+   - "Lazer so pra quem tem dinheiro." (Mulher Cis, 35-44 anos, Jd. Santa Ines III, CLT)`;
 
-    const systemPrompt = Voce e o Socio-Diretor de Estrategia da McKinsey & Company. O usuario fornecera uma ideia de negocio. Sua missao e gerar uma Auditoria Estrategica IMPLACAVEL, DE ELEVADA DENSIDADE CONCEITUAL E RIGOR ANALITICO baseada estritamente nos dados oficiais do estudo municipal de Sao Jose dos Campos (N=477, IC=95%).
+    const systemPrompt = `Voce e o Socio-Diretor de Estrategia da McKinsey & Company. O usuario fornecera uma ideia de negocio. Sua missao e gerar uma Auditoria Estrategica IMPLACAVEL, DE ELEVADA DENSIDADE CONCEITUAL E RIGOR ANALITICO baseada estritamente nos dados oficiais do estudo municipal de Sao Jose dos Campos (N=477, IC=95%).
 
- + marketBriefSJC + 
+${marketBriefSJC}
 
 TRAVAS DRACONIANAS E PADRAO MCKINSEY DEFINITIVO (REGRAS DE OURO):
 0. REGRA DE INTEGRIDADE QUANTITATIVA (ANTI-ALUCINACAO ESTATISTICA): Voce e EXPRESSAMENTE PROIBIDO de inventar porcentagens ou calcular estatisticas do zero. Use ESTRITAMENTE as metricas oficiais ja calculadas no relatorio (66.2% de Evasao; 75.8% gastariam mais; 84.7% saem regularmente; 32.3% barreira de preco/valor; 79.4% busca no Instagram).
@@ -240,7 +240,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
       "parecer_analitico": "Parecer analitico sobre a penetracao geografica."
     }
   ]
-};
+}`;
 
     const candidateModels = [
       'llama-3.3-70b-versatile',
