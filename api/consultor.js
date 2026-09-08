@@ -94,7 +94,8 @@ TRAVAS DRACONIANAS E PADRAO MCKINSEY DEFINITIVO (REGRAS DE OURO):
 5. TRAVA GEOGRAFICA (ZONA DE EXCLUSAO OBRIGATORIA E DENSA): A chave 'zona_exclusao' deve conter a regiao seguida de um paragrafo explicativo duro (40-60 palavras).
 6. BAIRROS ESTRUTURADOS: O array 'bairros' deve conter exatamente 5 bairros com justificativas fluidas.
 7. REGRA DESTRUIDORA DE VIES & BIBLIA DOS 4 MOVIMENTOS CULTURAIS: Julgue o negocio conforme as definicoes oficiais dos 4 Movimentos. Na chave 'analise_cards', cruze a ideia com cada uma das 4 definicoes.
-8. RESPOSTA EXCLUSIVAMENTE EM JSON VALIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois.
+8. REGRA DO FRAMEWORK VRIO (4 PILARES OBRIGATORIOS V-R-I-O): O array 'matrizes_estrategicas.vrio' DEVE conter EXATAMENTE 4 objetos correspondentes as 4 dimensoes: 'V' (Valor), 'R' (Raridade), 'I' (Imitabilidade) e 'O' (Organizacao). NUNCA omita 'I' ou 'O'.
+9. RESPOSTA EXCLUSIVAMENTE EM JSON VALIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois.
 
 ESTRUTURA JSON EXATA E OBRIGATORIA:
 {

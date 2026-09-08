@@ -7128,13 +7128,15 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   }
 
   // Processamento e Normalização das Matrizes Estratégicas (VRIO & 5 Forças de Porter)
+  const defaultVrio = [
+    { letra: "V", nome: "Valor", analise: "Gera valor perceptível resolvendo dores de conveniência ou diferenciação local em SJC." },
+    { letra: "R", nome: "Raridade", analise: "Proposta diferenciada ou escassa na micro-região frente aos concorrentes tradicionais." },
+    { letra: "I", nome: "Imitabilidade", analise: "Barreira de entrada sustentada por relacionamento, ponto ou eficiência de custos." },
+    { letra: "O", nome: "Organização", analise: "Capacidade operacional interna de entregar o padrão prometido sem queimar margem." }
+  ];
+
   let matrizesObj = {
-    vrio: [
-      { letra: "V", nome: "Valor", analise: "Gera valor perceptível resolvendo dores de conveniência ou diferenciação local em SJC." },
-      { letra: "R", nome: "Raridade", analise: "Proposta diferenciada ou escassa na micro-região frente aos concorrentes tradicionais." },
-      { letra: "I", nome: "Imitabilidade", analise: "Barreira de entrada sustentada por relacionamento, ponto ou eficiência de custos." },
-      { letra: "O", nome: "Organização", analise: "Capacidade operacional interna de entregar o padrão prometido sem queimar margem." }
-    ],
+    vrio: [...defaultVrio],
     porter: [
       { forca: "Rivalidade entre Concorrentes", analise: "Intensidade competitiva moderada a alta dependendo do microterritório escolhido." },
       { forca: "Ameaça de Novos Entrantes", analise: "Barreiras de entrada baseadas em capital de giro, ponto comercial e fidelidade local." },
@@ -7146,12 +7148,30 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 
   const rawMatrizes = data.matrizes_estrategicas || data.matrizes_vrio_porter;
   if (rawMatrizes && typeof rawMatrizes === 'object') {
-    if (Array.isArray(rawMatrizes.vrio) && rawMatrizes.vrio.length > 0) matrizesObj.vrio = rawMatrizes.vrio;
+    if (Array.isArray(rawMatrizes.vrio) && rawMatrizes.vrio.length > 0) {
+      matrizesObj.vrio = defaultVrio.map((defItem, idx) => {
+        const found = rawMatrizes.vrio.find(v => (v.letra || '').toUpperCase() === defItem.letra) || rawMatrizes.vrio[idx];
+        return {
+          letra: defItem.letra,
+          nome: defItem.nome,
+          analise: String(found && found.analise ? found.analise : defItem.analise).replace(/\\/g, '').trim()
+        };
+      });
+    }
     if (Array.isArray(rawMatrizes.porter) && rawMatrizes.porter.length > 0) matrizesObj.porter = rawMatrizes.porter;
   } else if (typeof rawMatrizes === 'string' && rawMatrizes.trim()) {
     try {
       const parsedMat = JSON.parse(rawMatrizes);
-      if (Array.isArray(parsedMat.vrio)) matrizesObj.vrio = parsedMat.vrio;
+      if (Array.isArray(parsedMat.vrio) && parsedMat.vrio.length > 0) {
+        matrizesObj.vrio = defaultVrio.map((defItem, idx) => {
+          const found = parsedMat.vrio.find(v => (v.letra || '').toUpperCase() === defItem.letra) || parsedMat.vrio[idx];
+          return {
+            letra: defItem.letra,
+            nome: defItem.nome,
+            analise: String(found && found.analise ? found.analise : defItem.analise).replace(/\\/g, '').trim()
+          };
+        });
+      }
       if (Array.isArray(parsedMat.porter)) matrizesObj.porter = parsedMat.porter;
     } catch (eMat) {
       matrizesObj.vrio[0].analise = rawMatrizes;
