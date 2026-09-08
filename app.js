@@ -6906,9 +6906,13 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       const match = fullText.match(regex);
       if (match && match[1]) {
         let res = match[1].trim();
-        // Remove asteriscos órfãos e pontuações soltas no início
+        // Remove títulos subsequentes que vazaram (ex: **5 FORÇAS DE PORTER)
+        res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5 FORÇAS|PORTER|VRIO|MATRIZ|AUDITORIA|SWOT)[\s\S]*$/gi, '').trim();
+        // Remove prefixos repetitivos como (V): (R): (I): (O): **
+        res = res.replace(/^\s*\([VRIO]\)\s*:?\s*/gi, '');
+        // Remove asteriscos órfãos e pontuações soltas no início ou final
         res = res.replace(/^(\*\*|\*|:|\-|\s)+/, '').trim();
-        // Remove asteriscos residuais sozinhos
+        res = res.replace(/(\*\*|\*|\-|\s)+$/, '').trim();
         res = res.replace(/^\*\*\s*/gm, '').trim();
         if (res.length > 0) return res;
       }
