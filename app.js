@@ -39,44 +39,60 @@ window.switchMainTab = function(tabName) {
   window.currentMainTab = tabName;
   const dashboardView = document.getElementById("dashboard-view");
   const reportView = document.getElementById("executive-report-view");
+  const aiReportView = document.getElementById("ai-report-view");
+
   const btnDashboard = document.getElementById("btn-nav-dashboard");
   const btnReport = document.getElementById("btn-nav-report");
+  const btnAiReport = document.getElementById("btn-nav-consultor");
+
   const filtersContainer = document.getElementById("sidebar-filters-container");
   const reportIndex = document.getElementById("sidebar-report-index");
 
   if (!dashboardView || !reportView) return;
 
-  if (tabName === "report") {
-    dashboardView.classList.add("hidden");
-    reportView.classList.remove("hidden");
+  const inactiveBtnClass = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200";
+  const activeBtnClass = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md";
 
+  // Esconder todas as abas
+  dashboardView.classList.add("hidden");
+  reportView.classList.add("hidden");
+  if (aiReportView) aiReportView.classList.add("hidden");
+
+  // Resetar botões
+  if (btnDashboard) btnDashboard.className = inactiveBtnClass;
+  if (btnReport) btnReport.className = inactiveBtnClass;
+  if (btnAiReport) btnAiReport.className = inactiveBtnClass;
+
+  if (tabName === "report") {
+    reportView.classList.remove("hidden");
     if (filtersContainer) filtersContainer.classList.add("hidden");
     if (reportIndex) reportIndex.classList.remove("hidden");
-
-    if (btnDashboard) {
-      btnDashboard.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200";
-    }
-    if (btnReport) {
-      btnReport.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md";
-    }
+    if (btnReport) btnReport.className = activeBtnClass;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
     if (typeof window.renderExecutiveReportCharts === "function") {
       window.renderExecutiveReportCharts(window.currentFilteredRecords || allSurveyRecords);
     }
-  } else {
-    reportView.classList.add("hidden");
-    dashboardView.classList.remove("hidden");
-
-    if (reportIndex) reportIndex.classList.add("hidden");
+  } else if (tabName === "ai-report") {
+    if (aiReportView) aiReportView.classList.remove("hidden");
     if (filtersContainer) filtersContainer.classList.remove("hidden");
+    if (reportIndex) reportIndex.classList.add("hidden");
+    if (btnAiReport) btnAiReport.className = activeBtnClass;
 
-    if (btnDashboard) {
-      btnDashboard.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md";
+    window.renderAuditHistoryList();
+    const input = document.getElementById("consultor-input");
+    if (input && !document.getElementById("consultor-report-view")?.classList.contains("hidden")) {
+      // Já está no relatório
+    } else if (input) {
+      setTimeout(() => input.focus(), 150);
     }
-    if (btnReport) {
-      btnReport.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200";
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    dashboardView.classList.remove("hidden");
+    if (filtersContainer) filtersContainer.classList.remove("hidden");
+    if (reportIndex) reportIndex.classList.add("hidden");
+    if (btnDashboard) btnDashboard.className = activeBtnClass;
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };

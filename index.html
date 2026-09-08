@@ -283,7 +283,7 @@
 
           <button 
             id="btn-open-consultor" 
-            onclick="window.toggleConsultorModal(true)"
+            onclick="window.switchMainTab('ai-report')"
             title="Gerar Relatório Estratégico com IA"
             class="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-accent-cyan/20 to-brand-500/20 hover:from-accent-cyan/30 hover:to-brand-500/30 text-brand-900 font-bold text-xs rounded-xl border border-accent-cyan/40 shadow-sm transition-all active:scale-95 cursor-pointer"
           >
@@ -380,7 +380,7 @@
               <button 
                 type="button" 
                 id="btn-nav-consultor" 
-                onclick="window.toggleConsultorModal(true)"
+                onclick="window.switchMainTab('ai-report')"
                 class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-brand-900 via-brand-800 to-brand-900 text-white shadow-sm hover:shadow-md border border-brand-700/50 cursor-pointer"
               >
                 <i class="fa-solid fa-file-invoice text-accent-cyan text-sm"></i>
@@ -6172,122 +6172,89 @@
       </section>
 
       </section>
-    </div>
 
-    <!-- Footer Institucional com Logo Branco -->
-    <footer class="bg-brand-950 text-white border-t border-brand-900 py-6 mt-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
-        <div class="flex items-center gap-3">
-          <img src="fotos radar/logobranco.png" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos radar/logo.png'" />
-          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Pesquisa Municipal SJC</span>
-        </div>
-        <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
-      </div>
-    </footer>
-  </div>
-
-  
-  <!-- ========================================== -->
-  <!-- ========================================== -->
-  <!-- MODAL EXECUTIVO EM TELA CHEIA - RELATÓRIO DE IA (STUDIO 8 / MCKINSEY) -->
-  <!-- ========================================== -->
-  <div id="consultor-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-2 sm:p-5 md:p-6 transition-all duration-300">
-    <!-- Backdrop com blur corporativo -->
-    <div id="consultor-backdrop" onclick="window.toggleConsultorModal(false)" class="absolute inset-0 bg-slate-900/60 backdrop-blur-md"></div>
-
-    <!-- Container Modal em Tela Cheia (Fundo Limpo Off-White & Superfície Branca) -->
-    <div class="relative z-10 w-full max-w-7xl h-[94vh] bg-surface-bg text-slate-800 rounded-3xl shadow-2xl border border-slate-200/80 flex flex-col overflow-hidden">
-      
-      <!-- Top Header Executivo em Branco com Branding Studio 8 & Botões de Controle -->
-      <div class="px-6 py-4 bg-white border-b border-slate-200/80 flex items-center justify-between shrink-0 shadow-2xs">
-        <div class="flex items-center gap-3.5">
-          <div class="w-10 h-10 rounded-2xl bg-brand-900 flex items-center justify-center text-accent-cyan shadow-sm">
-            <i class="fa-solid fa-brain text-lg"></i>
-          </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="text-[10px] font-black tracking-widest text-brand-900 uppercase">STUDIO 8 AI LABS</span>
-              <span class="text-slate-300">•</span>
-              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 uppercase">AUDITORIA ESTRATÉGICA</span>
-            </div>
-            <h3 class="text-base sm:text-lg font-black text-brand-950 tracking-tight" id="consultor-modal-title">
-              Gerador de Auditoria Estratégica & Inteligência de Mercado
-            </h3>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <!-- Botão Toggle de Histórico -->
-          <button 
-            type="button" 
-            onclick="window.toggleAuditHistoryDrawer()"
-            id="btn-toggle-history"
-            class="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 hover:bg-slate-100 active:scale-95 text-slate-700 hover:text-brand-900 text-xs font-bold rounded-xl border border-slate-200 transition-all cursor-pointer"
-            title="Ver Histórico de Auditorias Salvas"
-          >
-            <i class="fa-solid fa-clock-rotate-left text-brand-600 text-xs"></i>
-            <span class="hidden sm:inline">Histórico Salvo</span>
-            <span id="audit-history-count-badge" class="px-1.5 py-0.2 bg-brand-900 text-white rounded-full text-[10px] font-extrabold">0</span>
-          </button>
-
-          <!-- Botão Nova Auditoria -->
-          <button 
-            type="button" 
-            onclick="window.resetConsultorView()"
-            id="btn-new-report"
-            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-900 hover:bg-brand-800 active:scale-95 text-white text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
-            title="Iniciar Nova Auditoria"
-          >
-            <i class="fa-solid fa-plus text-[10px] text-accent-cyan"></i>
-            <span>Nova Auditoria</span>
-          </button>
-          
-          <!-- Botão Fechar Modal -->
-          <button 
-            type="button" 
-            onclick="window.toggleConsultorModal(false)"
-            class="p-2.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all cursor-pointer ml-1"
-            title="Fechar Relatório"
-          >
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Layout Interno: Painel Lateral de Histórico (Drawer retrátil) + Área Principal de Conteúdo -->
-      <div class="flex-1 flex overflow-hidden relative">
+      <!-- ========================================== -->
+      <!-- 6. RELATÓRIO DE IA - AUDITORIA ESTRATÉGICA (STUDIO 8 / MCKINSEY) -->
+      <!-- ========================================== -->
+      <section id="ai-report-view" class="hidden flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
-        <!-- Drawer de Histórico de Auditorias Salvas (Local Storage) -->
-        <aside id="audit-history-drawer" class="hidden absolute inset-y-0 left-0 z-20 w-80 sm:w-96 h-full bg-white border-r border-slate-200 shadow-2xl flex-col justify-between transition-all duration-300">
-          <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-folder-open text-brand-600 text-xs"></i>
-              <h4 class="text-xs font-black uppercase tracking-wider text-brand-950">Histórico de Auditorias</h4>
+        <!-- Top Header da Aba de IA -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-brand-900 flex items-center justify-center text-accent-cyan shadow-sm shrink-0">
+              <i class="fa-solid fa-brain text-xl"></i>
             </div>
-            <div class="flex items-center gap-1">
-              <button onclick="window.clearAuditHistory()" title="Limpar histórico" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-white transition-colors text-xs cursor-pointer">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-              <button onclick="window.toggleAuditHistoryDrawer(false)" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-white transition-colors text-xs cursor-pointer">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-black tracking-widest text-brand-900 uppercase font-mono">STUDIO 8 AI LABS</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 uppercase">AUDITORIA ESTRATÉGICA MCKINSEY</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-brand-950 tracking-tight mt-0.5">
+                Gerador de Relatório Estratégico com Inteligência Artificial
+              </h2>
             </div>
           </div>
 
-          <div id="audit-history-list" class="flex-1 overflow-y-auto p-4 space-y-2.5 text-xs custom-card-scroll">
-            <!-- Itens do histórico injetados dinamicamente -->
-          </div>
+          <div class="flex items-center gap-2">
+            <!-- Botão Toggle de Histórico -->
+            <button 
+              type="button" 
+              onclick="window.toggleAuditHistoryDrawer()"
+              id="btn-toggle-history"
+              class="inline-flex items-center gap-2 px-3.5 py-2.5 bg-slate-50 hover:bg-slate-100 active:scale-95 text-slate-700 hover:text-brand-900 text-xs font-bold rounded-xl border border-slate-200 transition-all cursor-pointer shadow-2xs"
+              title="Ver Histórico de Auditorias Salvas"
+            >
+              <i class="fa-solid fa-clock-rotate-left text-brand-600 text-xs"></i>
+              <span class="hidden sm:inline">Histórico Salvo</span>
+              <span id="audit-history-count-badge" class="px-1.5 py-0.2 bg-brand-900 text-white rounded-full text-[10px] font-extrabold">0</span>
+            </button>
 
-          <div class="p-3 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-400 text-center font-medium">
-            Salvo localmente no seu navegador
+            <!-- Botão Nova Auditoria -->
+            <button 
+              type="button" 
+              onclick="window.resetConsultorView()"
+              id="btn-new-report"
+              class="hidden inline-flex items-center gap-1.5 px-4 py-2.5 bg-brand-900 hover:bg-brand-800 active:scale-95 text-white text-xs font-bold rounded-xl shadow-sm transition-all cursor-pointer"
+              title="Iniciar Nova Auditoria"
+            >
+              <i class="fa-solid fa-plus text-[10px] text-accent-cyan"></i>
+              <span>Nova Auditoria</span>
+            </button>
           </div>
-        </aside>
+        </div>
 
-        <!-- Área Central de Conteúdo com Scroll Próprio e Fundo Limpo -->
-        <div id="consultor-main-scroll" class="flex-1 overflow-y-auto custom-card-scroll p-4 sm:p-8 space-y-8 bg-surface-bg">
+        <!-- Área Principal de Conteúdo da IA -->
+        <div class="relative">
           
+          <!-- Drawer Retrátil de Histórico Local -->
+          <aside id="audit-history-drawer" class="hidden absolute inset-y-0 left-0 z-30 w-80 sm:w-96 bg-white border border-slate-200 shadow-2xl rounded-2xl flex flex-col justify-between transition-all duration-300">
+            <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50 rounded-t-2xl">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-folder-open text-brand-600 text-xs"></i>
+                <h4 class="text-xs font-black uppercase tracking-wider text-brand-950">Histórico de Auditorias</h4>
+              </div>
+              <div class="flex items-center gap-1">
+                <button onclick="window.clearAuditHistory()" title="Limpar histórico" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-white transition-colors text-xs cursor-pointer">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+                <button onclick="window.toggleAuditHistoryDrawer(false)" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-white transition-colors text-xs cursor-pointer">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+
+            <div id="audit-history-list" class="flex-1 overflow-y-auto p-4 space-y-2.5 text-xs custom-card-scroll max-h-[500px]">
+              <!-- Itens do histórico injetados dinamicamente -->
+            </div>
+
+            <div class="p-3 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-400 text-center font-medium rounded-b-2xl">
+              Salvo localmente no seu navegador
+            </div>
+          </aside>
+
           <!-- Estado 1: Tela de Entrada / Input Inicial -->
-          <div id="consultor-input-view" class="max-w-3xl mx-auto py-8 sm:py-16 space-y-8">
+          <div id="consultor-input-view" class="max-w-3xl mx-auto py-8 sm:py-14 space-y-8">
             <div class="text-center space-y-3">
               <span class="px-3.5 py-1 bg-brand-50 border border-brand-200 text-brand-900 text-xs font-mono font-black rounded-full uppercase tracking-wider">
                 PADRÃO MCKINSEY & STUDIO 8
@@ -6296,7 +6263,7 @@
                 Qual ideia ou nicho vamos auditar hoje?
               </h2>
               <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto leading-relaxed">
-                Digite uma ideia de negócio, produto ou serviço. Nossa IA cruzará os microdados quantitativos da pesquisa municipal de São José dos Campos e gerará um relatório executivo em tela cheia com <strong>SWOT, PESTEL, Porter, Ishikawa, 4 Movimentos e 3 Gráficos Analíticos</strong>.
+                Digite uma ideia de negócio, produto ou serviço. Nossa IA cruzará os microdados quantitativos da pesquisa municipal de São José dos Campos e gerará um relatório executivo estruturado com <strong>SWOT, PESTEL, Porter, Ishikawa, 4 Movimentos e 3 Gráficos Analíticos</strong>.
               </p>
             </div>
 
@@ -6371,20 +6338,27 @@
           </div>
 
         </div>
-      </div>
-
-      <!-- Footer do Modal -->
-      <div class="px-6 py-3 bg-white border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500 shrink-0">
-        <span class="flex items-center gap-1.5 font-semibold">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          Inteligência Artificial Ativa &bull; Vercel Serverless & Groq
-        </span>
-        <span class="font-medium">Radar São José &copy; 2026 &bull; Studio 8 Analytics</span>
-      </div>
+      </section>
 
     </div>
+
+    <!-- Footer Institucional com Logo Branco -->
+    <footer class="bg-brand-950 text-white border-t border-brand-900 py-6 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
+        <div class="flex items-center gap-3">
+          <img src="fotos radar/logobranco.png" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos radar/logo.png'" />
+          <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Pesquisa Municipal SJC</span>
+        </div>
+        <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
+      </div>
+    </footer>
   </div>
 
+  
+  <!-- ========================================== -->
+  <!-- ========================================== -->
+  <!-- MODAL EXECUTIVO EM TELA CHEIA - RELATÓRIO DE IA (STUDIO 8 / MCKINSEY) -->
+  <!-- ========================================== -->
   <!-- ========================================== -->
   <!-- OVERLAY CINEMATOGRÁFICO DE LOADING (6 SEGUNDOS) -->
   <!-- ========================================== -->
