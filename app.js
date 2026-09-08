@@ -7175,42 +7175,100 @@ window.renderExecutiveReport = function(topic, text, customDate) {
             </div>
           </div>
 
-          <!-- BLOCO 2: DIAGRAMA DE ISHIKAWA COM BANNER CENTRAL -->
+          <!-- BLOCO 2: DIAGRAMA DE ISHIKAWA (AUTÊNTICA ESPINHA DE PEIXE) -->
           <div class="space-y-4 pt-4 border-t border-slate-100">
-            <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-              <i class="fa-solid fa-code-branch text-rose-500 text-xs"></i>
-              <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">DIAGRAMA DE ISHIKAWA</h4>
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-fish-fins text-rose-500 text-sm"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">DIAGRAMA DE ISHIKAWA (ESPINHA DE PEIXE)</h4>
+              </div>
+              <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+                ANÁLISE DE CAUSA-RAIZ
+              </span>
             </div>
 
-            <div class="space-y-3">
-              <!-- Linha Superior: Mercado & Operação -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Mercado</span>
-                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaMercado) || 'Demanda e adequação de oferta.'}</p>
-                </div>
-                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Operação</span>
-                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaOperacao) || 'Gargalos de entrega e processo.'}</p>
-                </div>
-              </div>
+            <!-- ESTRUTURA VISUAL FISHBONE -->
+            <div class="relative w-full p-4 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs overflow-x-auto">
+              <div class="min-w-[700px] flex items-center justify-between gap-4">
+                
+                <!-- ESPINHAS / COSTELAS (4 CATEGORIAS) -->
+                <div class="flex-1 grid grid-cols-2 gap-y-10 gap-x-8 relative py-2">
+                  
+                  <!-- LINHA DA ESPINHA CENTRAL (COLUNA VERTEBRAL) -->
+                  <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-brand-900 rounded-full z-0">
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-rose-600 rounded-full shadow-sm"></div>
+                  </div>
 
-              <!-- Faixa Central Vermelha: PROBLEMA RAIZ -->
-              <div class="p-3.5 rounded-xl bg-brand-900 text-white text-center font-mono font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-2">
-                <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
-                <span>GARGALO CRÍTICO: SUSTENTABILIDADE OPERACIONAL E PERCEPÇÃO DE VALOR</span>
-              </div>
+                  <!-- COSTELA SUPERIOR ESQUERDA: MERCADO -->
+                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-rose-500 border border-slate-200 shadow-sm space-y-1 transform -translate-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 flex items-center gap-1.5">
+                        <span>🎯</span> MERCADO
+                      </span>
+                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 01</span>
+                    </div>
+                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaMercado) || 'Evasão de consumo e adequação de oferta.'}</div>
+                    <!-- Linha Conectora Diagonal até a Espinha -->
+                    <div class="absolute -bottom-6 left-1/2 w-0.5 h-6 bg-rose-400/80 -rotate-12"></div>
+                  </div>
 
-              <!-- Linha Inferior: Tecnologia & Financeiro -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Tecnologia</span>
-                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaTecnologia) || 'Sistemas e automação de controle.'}</p>
+                  <!-- COSTELA SUPERIOR DIREITA: OPERAÇÃO -->
+                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-rose-500 border border-slate-200 shadow-sm space-y-1 transform -translate-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 flex items-center gap-1.5">
+                        <span>⚙️</span> OPERAÇÃO
+                      </span>
+                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 02</span>
+                    </div>
+                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaOperacao) || 'Cadeia de suprimentos, treinamento e atendimento.'}</div>
+                    <!-- Linha Conectora Diagonal até a Espinha -->
+                    <div class="absolute -bottom-6 left-1/2 w-0.5 h-6 bg-rose-400/80 -rotate-12"></div>
+                  </div>
+
+                  <!-- COSTELA INFERIOR ESQUERDA: TECNOLOGIA -->
+                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-purple-500 border border-slate-200 shadow-sm space-y-1 transform translate-y-2">
+                    <!-- Linha Conectora Diagonal até a Espinha -->
+                    <div class="absolute -top-6 left-1/2 w-0.5 h-6 bg-purple-400/80 rotate-12"></div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-[11px] font-black uppercase tracking-wider text-purple-600 flex items-center gap-1.5">
+                        <span>💻</span> TECNOLOGIA
+                      </span>
+                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 03</span>
+                    </div>
+                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaTecnologia) || 'Digitalização, automação e CRM de fidelidade.'}</div>
+                  </div>
+
+                  <!-- COSTELA INFERIOR DIREITA: FINANCEIRO -->
+                  <div class="relative z-10 bg-white p-3.5 rounded-xl border-l-4 border-l-emerald-500 border border-slate-200 shadow-sm space-y-1 transform translate-y-2">
+                    <!-- Linha Conectora Diagonal até a Espinha -->
+                    <div class="absolute -top-6 left-1/2 w-0.5 h-6 bg-emerald-400/80 rotate-12"></div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-[11px] font-black uppercase tracking-wider text-emerald-600 flex items-center gap-1.5">
+                        <span>💰</span> FINANCEIRO
+                      </span>
+                      <span class="text-[9px] font-mono text-slate-400 font-bold">CAUSA 04</span>
+                    </div>
+                    <div class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaFinanceiro) || 'Investimento inicial, margem e ponto de equilíbrio.'}</div>
+                  </div>
+
                 </div>
-                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
-                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Financeiro</span>
-                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaFinanceiro) || 'Custo de aquisição e margens.'}</p>
+
+                <!-- CABEÇA DO PEIXE (O EFEITO / PROBLEMA PRINCIPAL) -->
+                <div class="w-64 shrink-0 relative z-20">
+                  <div class="p-4 bg-brand-900 text-white rounded-2xl shadow-md border border-brand-700 text-center space-y-2 relative overflow-hidden">
+                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-rose-500/20 rounded-full blur-lg"></div>
+                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-500 text-white text-[9px] font-black tracking-wider uppercase">
+                      <span>⚠️ EFEITO CENTRAL</span>
+                    </div>
+                    <h5 class="text-xs font-black font-mono leading-tight tracking-wider uppercase text-rose-300">
+                      GARGALO CRÍTICO DE VALOR & SUSTENTABILIDADE
+                    </h5>
+                    <p class="text-[10px] text-slate-300 leading-snug">
+                      Síntese das barreiras operacionais cruzadas com a psicologia de consumo em SJC.
+                    </p>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
