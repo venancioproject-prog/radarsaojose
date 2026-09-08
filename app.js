@@ -6880,7 +6880,20 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   // 1. Sanitização robusta e Parse do JSON
   let data = null;
   if (typeof rawData === 'object' && rawData !== null) {
-    data = rawData;
+    // Se o backend retornou { result: {...} } ou { reply: "..." }
+    if (rawData.result && typeof rawData.result === 'object') {
+      data = rawData.result;
+    } else if (rawData.result && typeof rawData.result === 'string') {
+      try { data = JSON.parse(rawData.result); } catch (e) {}
+    }
+    if (!data && rawData.reply && typeof rawData.reply === 'object') {
+      data = rawData.reply;
+    } else if (!data && rawData.reply && typeof rawData.reply === 'string') {
+      try { data = JSON.parse(rawData.reply); } catch (e) {}
+    }
+    if (!data) {
+      data = rawData;
+    }
   } else if (typeof rawData === 'string') {
     let cleanStr = rawData.trim();
     
@@ -6905,17 +6918,25 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     }
   }
 
+  // Se o objeto estiver aninhado dentro de data.result ou data.reply
+  if (data && typeof data === 'object') {
+    if (data.result && typeof data.result === 'object') data = data.result;
+    if (data.reply && typeof data.reply === 'object') data = data.reply;
+  }
+
   // Se mesmo com a sanitização não for um objeto JSON válido, evitar vazamento de JSON cru
   if (!data || typeof data !== 'object') {
     let fallbackText = String(rawData || '');
     // Se por acaso vazou JSON em formato string, extrair a visão ou limpar as chaves
-    fallbackText = fallbackText
-      .replace(/^\{[\s\S]*"visao_estrategica"\s*:\s*"([^"]+)"[\s\S]*\}$/i, '$1')
-      .replace(/["{}\[\]]/g, ' ')
-      .trim();
+    const matchVisao = fallbackText.match(/"visao_estrategica(?:_texto)?"\s*:\s*"([^"]+)"/i);
+    if (matchVisao && matchVisao[1]) {
+      fallbackText = matchVisao[1];
+    } else {
+      fallbackText = fallbackText.replace(/\{[\s\S]*\}/g, '').trim();
+    }
 
     data = {
-      visao_estrategica: fallbackText || "Diagnóstico analítico e auditoria de viabilidade para São José dos Campos.",
+      visao_estrategica_texto: fallbackText || "Diagnóstico analítico e auditoria de viabilidade para São José dos Campos.",
       bairros: [],
       zona_exclusao: "",
       swot: { forcas: [], fraquezas: [], oportunidades: [], ameacas: [] },
@@ -6927,7 +6948,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     };
   }
 
-  // Extrair e sanitizar o texto consolidado da Visão Estratégica
+  // Extrair e sanitizar estritamente o texto consolidado da Visão Estratégica (SEM VAZAMENTO DE OBJETO)
   let visaoTextoCorrido = "";
   if (data.visao_estrategica_texto && typeof data.visao_estrategica_texto === 'string') {
     visaoTextoCorrido = data.visao_estrategica_texto;
@@ -6937,18 +6958,22 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         data.visao_estrategica.ticket_medio,
         data.visao_estrategica.publico_prioritario,
         data.visao_estrategica.diretrizes_executivas
-      ].filter(Boolean);
+      ].filter(p => typeof p === 'string' && p.trim());
       visaoTextoCorrido = parts.join(' ');
-    } else {
-      visaoTextoCorrido = String(data.visao_estrategica);
+    } else if (typeof data.visao_estrategica === 'string') {
+      visaoTextoCorrido = data.visao_estrategica;
     }
   }
 
-  // Limpeza de segurança contra vazamento de chaves JSON ou escapes de barra invertida
+  // Limpeza profunda de segurança contra vazamento de chaves JSON subsequentes na mesma string
   if (visaoTextoCorrido) {
     visaoTextoCorrido = String(visaoTextoCorrido)
       .replace(/^(?:["']?\s*visao_estrategica_texto\s*["']?\s*[:=]\s*)/i, '')
       .replace(/^(?:["']?\s*visao_estrategica\s*["']?\s*[:=]\s*)/i, '')
+      // Se a string contiver vazamento de outras chaves como "grafico_validacao", cortar antes delas
+      .replace(/["']?\s*grafico_validacao\s*["']?\s*[:=][\s\S]*$/i, '')
+      .replace(/["']?\s*verbalizacao_pesquisa\s*["']?\s*[:=][\s\S]*$/i, '')
+      .replace(/["']?\s*bairros\s*["']?\s*[:=][\s\S]*$/i, '')
       .replace(/\\"/g, '"')
       .replace(/\\'/g, "'")
       .replace(/\\/g, '')
