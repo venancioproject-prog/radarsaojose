@@ -7089,7 +7089,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
           data: [40.7, 27.6, 13.9, 11.2, 6.6]
         },
-        analise_texto: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
+        pergunta_origem: "Em qual região de São José dos Campos você mais costuma frequentar para consumo e lazer?",
+        parecer_analitico: "Concentração maciça de consumo nas regiões Centro-Oeste e Zona Sul (68.3% do volume total), onde o poder aquisitivo e a densidade comercial convergem."
       },
       {
         chart_data: {
@@ -7098,7 +7099,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           labels: ["Evadem para SP/Litoral", "Consomem Localmente"],
           data: [64.7, 35.3]
         },
-        analise_texto: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
+        pergunta_origem: "Você costuma consumir serviços gastronômicos e culturais fora de São José dos Campos? (Evasão)",
+        parecer_analitico: "64.7% dos joseenses evadem seu consumo para São Paulo Capital e Litoral por falta de opções inovadoras, gerando uma oportunidade latente de captura de receita."
       },
       {
         chart_data: {
@@ -7107,7 +7109,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           labels: ["Até R$2.8k", "R$2.8k-5.6k", "R$5.6k-12k", "R$12k-26k", ">R$26k"],
           data: [18.1, 32.3, 23.6, 14.2, 11.8]
         },
-        analise_texto: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da população economicamente ativa, sendo o motor de volume para a cidade."
+        pergunta_origem: "Qual é a faixa de renda familiar total mensal da sua residência?",
+        parecer_analitico: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da população economicamente ativa, sendo o motor de volume para a cidade."
       }
     ];
   }
@@ -7115,6 +7118,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   const chartCardsHtml = graficosList.map((item, gIdx) => {
     const chartId = "dynamic-report-chart-" + gIdx + "-" + Math.random().toString(36).substr(2, 7);
     const cfg = item.chart_data || {};
+    const perguntaOrigem = item.pergunta_origem || item.pergunta || item.origem || item.fonte || "";
+    const parecerTexto = item.parecer_analitico || item.analise_texto || item.analise || item.justificativa || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.";
 
     dynamicChartsToRender.push({
       id: chartId,
@@ -7131,6 +7136,14 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </span>
             <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-brand-900 text-white">N=477</span>
           </div>
+
+          ${perguntaOrigem ? `
+            <div class="text-[11px] text-slate-500 italic leading-snug px-1 flex items-start gap-1.5">
+              <i class="fa-solid fa-database text-[10px] text-slate-400 mt-0.5 shrink-0"></i>
+              <span><strong class="font-semibold text-slate-700 not-italic">Fonte:</strong> "${perguntaOrigem}"</span>
+            </div>
+          ` : ''}
+
           <div class="relative w-full h-60 sm:h-64">
             <canvas id="${chartId}"></canvas>
           </div>
@@ -7140,7 +7153,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
           </span>
           <p class="text-xs text-slate-700 leading-relaxed font-normal">
-            ${formatMarkdown(item.analise_texto || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.")}
+            ${formatMarkdown(parecerTexto)}
           </p>
         </div>
       </div>
@@ -7322,13 +7335,13 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
     </div>
 
-    <!-- BLOCO 4: 3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS (IMEDIATAMENTE ABAIXO DA SWOT) -->
+    <!-- BLOCO 4: EVIDÊNCIAS QUANTITATIVAS & DATA ANALYTICS (IMEDIATAMENTE ABAIXO DA SWOT) -->
     <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
       <div class="flex items-center justify-between pb-2 border-b border-slate-100">
         <div class="flex items-center gap-2.5">
           <i class="fa-solid fa-chart-pie text-accent-cyan text-sm"></i>
           <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-            3 GRÁFICOS DE VALIDAÇÃO E RECORTES DE DADOS
+            EVIDÊNCIAS QUANTITATIVAS & DATA ANALYTICS
           </h3>
         </div>
         <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-brand-50 text-brand-900 border border-brand-200">
@@ -7699,7 +7712,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 }, 
                 ticks: { 
                   color: "#64748B", 
-                  font: { family: "Montserrat", size: 10 },
+                  font: { family: "Montserrat", size: 9.5 },
                   callback: (v) => v + "%"
                 } 
               },
@@ -7707,9 +7720,9 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 grid: { display: false }, 
                 ticks: { 
                   color: "#1E293B", 
-                  font: { family: "Montserrat", size: 10.5, weight: "bold" },
-                  maxRotation: 0,
-                  minRotation: 0,
+                  font: { family: "Montserrat", size: 9.5, weight: "bold" },
+                  maxRotation: 45,
+                  minRotation: 25,
                   autoSkip: false
                 } 
               }

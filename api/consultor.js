@@ -126,7 +126,8 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
         "labels": ["Preço s/ Valor", "Falta Autoral", "Mesmice", "Transporte", "Insegurança"],
         "data": [32.3, 22.9, 18.6, 14.1, 12.1]
       },
-      "analise_texto": "Parecer analítico explicando como a proposta quebra as barreiras de mesmice e entrega percepção real de valor."
+      "pergunta_origem": "O que mais te desanima a sair de casa em São José dos Campos? (Atritos & Barreiras)",
+      "parecer_analitico": "Parecer analítico explicando como a proposta quebra as barreiras de mesmice e entrega percepção real de valor."
     },
     {
       "chart_data": {
@@ -135,7 +136,8 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
         "labels": ["Evadem para SP/Litoral", "Consomem em SJC"],
         "data": [64.7, 35.3]
       },
-      "analise_texto": "Parecer analítico relacionando a retenção de consumo com o apelo de novidade e sofisticação."
+      "pergunta_origem": "Você costuma consumir serviços gastronômicos e culturais fora de São José dos Campos? (Evasão)",
+      "parecer_analitico": "Parecer analítico relacionando a retenção de consumo com o apelo de novidade e sofisticação."
     },
     {
       "chart_data": {
@@ -144,7 +146,8 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
         "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
         "data": [40.7, 27.6, 13.9, 11.2, 6.6]
       },
-      "analise_texto": "Parecer analítico sobre a penetração geográfica e adaptação ao comportamento de fluxo local."
+      "pergunta_origem": "Em qual região de São José dos Campos você mais costuma frequentar para consumo e lazer?",
+      "parecer_analitico": "Parecer analítico sobre a penetração geográfica e adaptação ao comportamento de fluxo local."
     }
   ]
 }`;
