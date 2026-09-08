@@ -7529,73 +7529,176 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </div>
       </div>
 
-      <!-- SEÇÃO 2: DIAGRAMA DE ISHIKAWA (ESPINHA DE PEIXE EM CSS) -->
-      <div class="pt-5 border-t border-slate-200/80 space-y-4">
+      <!-- SEÇÃO 2: DIAGRAMA DE ISHIKAWA (ESPINHA DE PEIXE EM SVG & CSS) -->
+      <div class="pt-6 border-t border-slate-200/80 space-y-4">
         <div class="flex items-center justify-between">
           <span class="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
             <i class="fa-solid fa-diagram-project text-rose-600"></i> DIAGRAMA DE CAUSA E EFEITO (ISHIKAWA / ESPINHA DE PEIXE)
           </span>
-          <span class="text-[9px] font-mono font-semibold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">ANÁLISE DE CAUSA-RAIZ</span>
+          <span class="text-[9px] font-mono font-semibold text-rose-700 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">ANÁLISE DE CAUSA-RAIZ SJC</span>
         </div>
 
-        <!-- DIAGRAMA VISUAL ESPINHA DE PEIXE -->
-        <div class="p-4 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-inner">
-          <div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-6">
+        <!-- DIAGRAMA VISUAL ESPINHA DE PEIXE (ISHIKAWA AUTHENTIC DESIGN) -->
+        <div class="p-5 sm:p-7 bg-gradient-to-br from-slate-50 via-slate-50/80 to-rose-50/20 rounded-3xl border border-slate-200/90 shadow-inner overflow-hidden">
+          
+          <!-- DESKTOP / TABLET: DIAGRAMA COM GEOMETRIA REAL DE ESPINHA DE PEIXE (SVG CONNECTORS) -->
+          <div class="hidden md:flex items-center gap-6 relative min-h-[380px]">
             
-            <!-- ESPINHAS / CAUSAS (LADO ESQUERDO / CORPO DO PEIXE) -->
-            <div class="flex-1 space-y-4 relative">
-              <!-- LINHA CENTRAL DORSAL (DESENHADA COM CSS NO DESKTOP) -->
-              <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-slate-300 via-slate-400 to-rose-400 -translate-y-1/2 z-0 rounded-full"></div>
+            <!-- CORPO DO PEIXE: ESPINHAS SUPERIORES, LINHA CENTRAL E ESPINHAS INFERIORES -->
+            <div class="flex-1 relative flex flex-col justify-between h-[360px] py-2">
+              
+              <!-- LINHAS DIAGONAIS E DORSAL EM SVG ABSOLUTO -->
+              <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <defs>
+                  <!-- Marcador de Seta Central para o Problema -->
+                  <marker id="fish-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#E11D48" />
+                  </marker>
+                  <!-- Marcadores de Conexão das Espinhas Secundárias -->
+                  <marker id="bone-dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+                    <circle cx="5" cy="5" r="4" fill="#E11D48" stroke="#FFFFFF" stroke-width="1.5" />
+                  </marker>
+                </defs>
 
-              <!-- GRID DE CAUSAS 2X2 CONECTADAS À LINHA CENTRAL -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-                ${(ishikawaObj.causas || []).slice(0, 4).map((causa, cIdx) => {
-                  const isTop = cIdx < 2;
-                  const borderSide = isTop ? "border-b-4 border-b-rose-400/80" : "border-t-4 border-t-rose-400/80";
-                  return `
-                    <div class="p-4 bg-white rounded-2xl border border-slate-200/90 ${borderSide} shadow-2xs space-y-1.5 hover:shadow-md transition-all">
-                      <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
-                          <i class="fa-solid fa-code-branch text-rose-500 text-[10px]"></i>
-                          ${causa.categoria || `Causa 0${cIdx + 1}`}
-                        </span>
-                        <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">ESPINHA 0${cIdx + 1}</span>
-                      </div>
-                      <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                        ${formatMarkdown(causa.descricao || "")}
-                      </p>
-                    </div>
-                  `;
-                }).join('')}
+                <!-- ESPINHA DORSAL PRINCIPAL (LINHA HORIZONTAL CENTRAL) -->
+                <line x1="2%" y1="50%" x2="96%" y2="50%" stroke="#0F172A" stroke-width="4" stroke-linecap="round" marker-end="url(#fish-arrow)" />
+
+                <!-- ESPINHA 01 (SUPERIOR ESQUERDA -> CENTRO) -->
+                <line x1="22%" y1="28%" x2="35%" y2="50%" stroke="#E11D48" stroke-width="2.5" stroke-dasharray="4 2" marker-start="url(#bone-dot)" marker-end="url(#bone-dot)" />
+
+                <!-- ESPINHA 02 (SUPERIOR DIREITA -> CENTRO) -->
+                <line x1="72%" y1="28%" x2="82%" y2="50%" stroke="#E11D48" stroke-width="2.5" stroke-dasharray="4 2" marker-start="url(#bone-dot)" marker-end="url(#bone-dot)" />
+
+                <!-- ESPINHA 03 (INFERIOR ESQUERDA -> CENTRO) -->
+                <line x1="22%" y1="72%" x2="35%" y2="50%" stroke="#E11D48" stroke-width="2.5" stroke-dasharray="4 2" marker-start="url(#bone-dot)" marker-end="url(#bone-dot)" />
+
+                <!-- ESPINHA 04 (INFERIOR DIREITA -> CENTRO) -->
+                <line x1="72%" y1="72%" x2="82%" y2="50%" stroke="#E11D48" stroke-width="2.5" stroke-dasharray="4 2" marker-start="url(#bone-dot)" marker-end="url(#bone-dot)" />
+              </svg>
+
+              <!-- CAMADA SUPERIOR: 2 CARDS DE CAUSAS (TOPO) -->
+              <div class="grid grid-cols-2 gap-8 relative z-10">
+                <!-- CAUSA 01: SUPERIOR ESQUERDA -->
+                <div class="p-3.5 bg-white/95 backdrop-blur-xs rounded-2xl border border-slate-200/90 shadow-card hover:shadow-md transition-all hover:border-rose-300 space-y-1 max-w-[92%]">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                      <i class="fa-solid fa-users text-rose-500 text-[10px]"></i>
+                      ${ishikawaObj.causas?.[0]?.categoria || "Pessoas & Atendimento"}
+                    </span>
+                    <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200/60">CAUSA 01</span>
+                  </div>
+                  <p class="text-[11.5px] text-slate-600 leading-snug font-normal">
+                    ${formatMarkdown(ishikawaObj.causas?.[0]?.descricao || "Falta de atendimento qualificado e hospitalidade cosmopolita.")}
+                  </p>
+                </div>
+
+                <!-- CAUSA 02: SUPERIOR DIREITA -->
+                <div class="p-3.5 bg-white/95 backdrop-blur-xs rounded-2xl border border-slate-200/90 shadow-card hover:shadow-md transition-all hover:border-rose-300 space-y-1 max-w-[92%] ml-auto">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                      <i class="fa-solid fa-store text-rose-500 text-[10px]"></i>
+                      ${ishikawaObj.causas?.[1]?.categoria || "Ambiente & Experiência"}
+                    </span>
+                    <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200/60">CAUSA 02</span>
+                  </div>
+                  <p class="text-[11.5px] text-slate-600 leading-snug font-normal">
+                    ${formatMarkdown(ishikawaObj.causas?.[1]?.descricao || "Sensação de mesmice noturna e espaços sem apelo autoral.")}
+                  </p>
+                </div>
               </div>
+
+              <!-- ESPAÇO CENTRAL DE RESPIRO PARA A ESPINHA DORSAL -->
+              <div class="h-6"></div>
+
+              <!-- CAMADA INFERIOR: 2 CARDS DE CAUSAS (BASE) -->
+              <div class="grid grid-cols-2 gap-8 relative z-10">
+                <!-- CAUSA 03: INFERIOR ESQUERDA -->
+                <div class="p-3.5 bg-white/95 backdrop-blur-xs rounded-2xl border border-slate-200/90 shadow-card hover:shadow-md transition-all hover:border-rose-300 space-y-1 max-w-[92%]">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                      <i class="fa-solid fa-route text-rose-500 text-[10px]"></i>
+                      ${ishikawaObj.causas?.[2]?.categoria || "Processos & Mobilidade"}
+                    </span>
+                    <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200/60">CAUSA 03</span>
+                  </div>
+                  <p class="text-[11.5px] text-slate-600 leading-snug font-normal">
+                    ${formatMarkdown(ishikawaObj.causas?.[2]?.descricao || "Atritos de trânsito, estacionamento escasso e mobilidade truncada.")}
+                  </p>
+                </div>
+
+                <!-- CAUSA 04: INFERIOR DIREITA -->
+                <div class="p-3.5 bg-white/95 backdrop-blur-xs rounded-2xl border border-slate-200/90 shadow-card hover:shadow-md transition-all hover:border-rose-300 space-y-1 max-w-[92%] ml-auto">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-black uppercase text-brand-950 font-mono flex items-center gap-1.5">
+                      <i class="fa-solid fa-tag text-rose-500 text-[10px]"></i>
+                      ${ishikawaObj.causas?.[3]?.categoria || "Produto & Percepção"}
+                    </span>
+                    <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200/60">CAUSA 04</span>
+                  </div>
+                  <p class="text-[11.5px] text-slate-600 leading-snug font-normal">
+                    ${formatMarkdown(ishikawaObj.causas?.[3]?.descricao || "Preço alto sem valor percebido ('coisas caras e sem qualidade').")}
+                  </p>
+                </div>
+              </div>
+
             </div>
 
-            <!-- SETA E CABEÇA DO PEIXE (PROBLEMA CENTRAL / EFEITO) -->
-            <div class="lg:w-72 shrink-0 flex flex-col justify-center items-center relative z-10">
-              <!-- SETA DE CONEXÃO -->
-              <div class="hidden lg:flex items-center justify-center -mr-3 z-20">
-                <i class="fa-solid fa-arrow-right text-rose-500 text-lg"></i>
-              </div>
-
-              <!-- CARD CABEÇA DO PEIXE (PROBLEMA CENTRAL) -->
-              <div class="w-full p-5 bg-gradient-to-br from-rose-900 via-rose-950 to-brand-950 text-white rounded-2xl border-2 border-rose-600 shadow-lg space-y-2 text-center relative overflow-hidden">
-                <div class="absolute -right-4 -bottom-4 opacity-10 text-6xl text-white">
+            <!-- CABEÇA DO PEIXE (EFEITO / PROBLEMA CENTRAL NA EXTREMA DIREITA) -->
+            <div class="w-64 lg:w-72 shrink-0 relative z-10">
+              <div class="p-5 bg-gradient-to-br from-rose-900 via-slate-950 to-brand-950 text-white rounded-3xl border-2 border-rose-500/80 shadow-xl space-y-2.5 text-center relative overflow-hidden group hover:border-rose-400 transition-all">
+                <div class="absolute -right-3 -bottom-3 opacity-10 text-6xl text-white">
                   <i class="fa-solid fa-skull-crossbones"></i>
                 </div>
-                <div class="flex items-center justify-center gap-1.5 text-rose-300 font-mono text-[10px] font-black uppercase tracking-widest">
+                
+                <div class="flex items-center justify-center gap-1.5 text-rose-300 font-mono text-[10px] font-black uppercase tracking-widest pb-1 border-b border-rose-500/30">
                   <i class="fa-solid fa-triangle-exclamation text-rose-400 text-xs"></i>
-                  <span>EFEITO / PROBLEMA CENTRAL</span>
+                  <span>PROBLEMA CENTRAL (EFEITO)</span>
                 </div>
+
                 <h5 class="text-xs sm:text-[13px] font-black uppercase leading-snug text-white font-mono">
                   ${formatMarkdown(ishikawaObj.problema_central || "Inviabilidade de Retenção do Consumidor Local")}
                 </h5>
-                <span class="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-200 border border-rose-400/30">
-                  IMPACTO CRÍTICO EM SJC
-                </span>
+
+                <div class="pt-1">
+                  <span class="inline-block text-[9px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-200 border border-rose-400/40">
+                    DIAGNÓSTICO CAUSA-RAIZ
+                  </span>
+                </div>
               </div>
             </div>
 
           </div>
+
+          <!-- MOBILE: LAYOUT CONECTADO VERTICAL COM TRILHA VISUAL -->
+          <div class="md:hidden space-y-3.5">
+            <div class="space-y-3 pl-4 border-l-4 border-rose-500 relative">
+              ${(ishikawaObj.causas || []).slice(0, 4).map((causa, cIdx) => `
+                <div class="p-3.5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 relative">
+                  <span class="absolute -left-[23px] top-3.5 w-3 h-3 rounded-full bg-rose-600 border-2 border-white"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-black uppercase text-brand-950 font-mono">
+                      ${causa.categoria || `Causa 0${cIdx + 1}`}
+                    </span>
+                    <span class="text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200">ESPINHA 0${cIdx + 1}</span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-snug">
+                    ${formatMarkdown(causa.descricao || "")}
+                  </p>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- CARD PROBLEMA CENTRAL NO MOBILE -->
+            <div class="p-4 bg-gradient-to-br from-rose-900 to-brand-950 text-white rounded-2xl border-2 border-rose-600 shadow-md space-y-2 text-center mt-3">
+              <span class="text-[10px] font-mono font-black uppercase text-rose-300 tracking-wider block">
+                <i class="fa-solid fa-triangle-exclamation text-rose-400 mr-1"></i> PROBLEMA CENTRAL (EFEITO)
+              </span>
+              <h5 class="text-xs font-black uppercase leading-snug text-white font-mono">
+                ${formatMarkdown(ishikawaObj.problema_central || "Inviabilidade de Retenção do Consumidor Local")}
+              </h5>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
