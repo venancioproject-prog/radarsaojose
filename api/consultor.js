@@ -253,7 +253,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "llama3-70b-8192",
+        model: "gpt-oss-120b",
         response_format: { type: "json_object" },
         max_tokens: 2800,
         temperature: 0.2,
@@ -267,7 +267,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
     if (!response.ok) {
       const errText = await response.text();
       return res.status(response.status).json({
-        error: 'Erro na API da Groq (llama3-70b-8192): ' + errText,
+        error: 'Erro na API da Groq (gpt-oss-120b): ' + errText,
         details: errText
       });
     }
@@ -281,7 +281,7 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
     }
 
     const replyContent = data.choices[0].message.content;
-    const modelUsed = "llama3-70b-8192";
+    const modelUsed = "gpt-oss-120b";
 
     // Extracao segura de JSON
     let jsonResult = null;
