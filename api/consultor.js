@@ -1,7 +1,6 @@
 /**
  * Serverless Function - Consultor Estratégico IA Radar São José
  * Backend seguro na infraestrutura Vercel que protege a GROQ_API_KEY.
- * Auto-descoberta dinâmica de modelos para garantir zero erros de depreciação/404.
  */
 
 export default async function handler(req, res) {
@@ -62,40 +61,7 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       return res.status(400).json({ error: 'Parâmetro question ou messages é obrigatório no corpo da requisição.' });
     }
 
-    // 1. AUTO-DESCOBERTA DINÂMICA: Consulta a lista oficial de modelos ativos na conta Groq
-    let selectedModel = 'llama-3.3-70b-versatile';
-    try {
-      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
-        headers: { 'Authorization': `Bearer ${apiKey}` }
-      });
-      if (modelsResp.ok) {
-        const modelsData = await modelsResp.json();
-        const availableIds = (modelsData.data || []).map(m => m.id);
-        console.log('[Consultor IA] Modelos ativos na Groq:', availableIds);
-
-        // Prioridade de seleção automática
-        const preferred = [
-          availableIds.find(id => id.includes('llama-3.3-70b')),
-          availableIds.find(id => id.includes('llama-3.1-70b')),
-          availableIds.find(id => id.includes('llama-3.1-8b')),
-          availableIds.find(id => id.includes('llama3-70b')),
-          availableIds.find(id => id.includes('llama3-8b')),
-          availableIds.find(id => id.includes('llama')),
-          availableIds[0]
-        ].filter(Boolean);
-
-        if (preferred.length > 0) {
-          selectedModel = preferred[0];
-          console.log('[Consultor IA] Modelo auto-selecionado:', selectedModel);
-        }
-      } else {
-        console.warn('[Consultor IA] Não foi possível listar modelos:', modelsResp.status);
-      }
-    } catch (eList) {
-      console.warn('[Consultor IA] Exceção ao listar modelos:', eList.message);
-    }
-
-    // 2. Chamada de Chat Completions com o modelo validado
+    // Chamada oficial para a API da Groq com llama-3.3-70b-versatile e 4096 tokens
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -103,10 +69,10 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: selectedModel,
+        model: 'llama-3.3-70b-versatile',
         messages: chatMessages,
         temperature: 0.6,
-        max_tokens: 1500
+        max_tokens: 4096
       })
     });
 
@@ -116,7 +82,7 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       console.error('[Consultor IA] Erro na API da Groq:', groqResponse.status, respText);
       return res.status(groqResponse.status).json({
         error: `Erro retornado pela API da Groq (${groqResponse.status})`,
-        modelUsed: selectedModel,
+        modelUsed: 'llama-3.3-70b-versatile',
         details: respText
       });
     }
@@ -127,7 +93,7 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
     return res.status(200).json({
       success: true,
       reply: replyText,
-      model: selectedModel,
+      model: 'llama-3.3-70b-versatile',
       usage: data.usage || null
     });
 
