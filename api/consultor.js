@@ -78,11 +78,12 @@ DIRETRIZES DE FORMATAÇÃO E REGRAS TÉCNICAS:
 3. ESTRUTURA OBRIGATÓRIA (Inicie imediatamente na primeira linha com '### VISÃO ESTRATÉGICA E VEREDICTO'):
 
 ### VISÃO ESTRATÉGICA E VEREDICTO
-Elabore um diagnóstico estratégico afiado, ultra personalizado e criativo sobre o negócio específico em SJC:
-- Qual é a oportunidade real e a dor latente do público-alvo para esse nicho específico em SJC?
-- Cruze os dados mais pertinentes da pesquisa para validar a demanda (ex: comportamento de consumo, faixas de renda, hábitos de lazer, estética ou mobilidade).
-- Defina o ticket médio estimado, público prioritário e estratégia de posicionamento/margem.
-- Diretrizes executivas para transformar o negócio em referência no mercado joseense.
+Elabore um diagnóstico estratégico afiado, ultra personalizado e criativo sobre o negócio específico em SJC estruturado estritamente nos seguintes subtópicos:
+- **OPORTUNIDADE LATENTE & DOR DO MERCADO:** Qual é a oportunidade real e a dor latente do público-alvo para esse nicho específico em SJC?
+- **VALIDAÇÃO DA DEMANDA & COMPORTAMENTO:** Cruze os dados estatísticos mais pertinentes da pesquisa de SJC (comportamento de consumo, faixas de renda, hábitos de lazer, estética, redes sociais ou mobilidade) citando as fontes da pesquisa.
+- **TICKET MÉDIO & POSICIONAMENTO:** Defina o ticket médio estimado em R$, faixa de preços e estratégia de posicionamento/margem competitiva.
+- **PÚBLICO PRIORITÁRIO:** Detalhe os 2 ou 3 perfis prioritários de clientes em SJC.
+- **DIRETRIZES EXECUTIVAS & EXPANSÃO:** Recomendações práticas e estratégicas para transformar o negócio em referência lucrativa no mercado joseense.
 
 ### TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO)
 Aponte exatamente 5 bairros com real coerência para a proposta de valor do negócio, explicando o porquê do fit cultural, demográfico e fluxo de consumo:

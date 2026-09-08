@@ -6974,6 +6974,97 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     }
   };
 
+  // Helper para renderizar a Visão Estratégica e Veredicto em blocos temáticos de alta fidelidade
+  const renderVisionAndVerdict = (visionText) => {
+    if (!visionText) return '';
+
+    // Extrair cada um dos tópicos principais com regex resiliente
+    const oport = extractBlock(visionText, 'OPORTUNIDADE|DOR DO MERCADO|Oportunidade latente|A dor', ['VALIDAÇÃO', 'VALIDACAO', 'DEMANDA', 'TICKET', 'PÚBLICO', 'PUBLICO', 'DIRETRIZES', 'POSICIONAMENTO']);
+    const valid = extractBlock(visionText, 'VALIDAÇÃO DA DEMANDA|VALIDACAO DA DEMANDA|Validação da demanda|Validacao da demanda|Validação|Validacao', ['OPORTUNIDADE', 'TICKET', 'PÚBLICO', 'PUBLICO', 'DIRETRIZES', 'POSICIONAMENTO']);
+    const ticket = extractBlock(visionText, 'TICKET MÉDIO|TICKET MEDIO|Ticket médio|Ticket medio|TICKET|PREÇO', ['OPORTUNIDADE', 'VALIDAÇÃO', 'VALIDACAO', 'PÚBLICO', 'PUBLICO', 'DIRETRIZES', 'POSICIONAMENTO']);
+    const publico = extractBlock(visionText, 'PÚBLICO PRIORITÁRIO|PUBLICO PRIORITARIO|Público prioritário|Publico prioritario|PÚBLICO|PUBLICO', ['OPORTUNIDADE', 'VALIDAÇÃO', 'VALIDACAO', 'TICKET', 'DIRETRIZES', 'POSICIONAMENTO']);
+    const diretrizes = extractBlock(visionText, 'DIRETRIZES EXECUTIVAS|Diretrizes executivas|DIRETRIZES|EXPANSÃO|Posicionamento', ['OPORTUNIDADE', 'VALIDAÇÃO', 'VALIDACAO', 'TICKET', 'PÚBLICO', 'PUBLICO']);
+
+    // Se conseguiu segmentar por subtópicos, renderiza em módulos elegantes
+    if (oport || valid || ticket || publico || diretrizes) {
+      return `
+        <div class="space-y-4">
+          ${oport ? `
+            <!-- 1. OPORTUNIDADE & DOR -->
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-bullseye text-[11px]"></i>
+                <span>Oportunidade Latente & Dor do Mercado</span>
+              </div>
+              <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(oport)}
+              </div>
+            </div>
+          ` : ''}
+
+          ${valid ? `
+            <!-- 2. VALIDAÇÃO DA DEMANDA -->
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-sky-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-chart-line text-[11px]"></i>
+                <span>Validação da Demanda & Comportamento</span>
+              </div>
+              <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(valid)}
+              </div>
+            </div>
+          ` : ''}
+
+          ${ticket ? `
+            <!-- 3. TICKET MÉDIO & POSICIONAMENTO -->
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-tag text-[11px]"></i>
+                <span>Ticket Médio Estimado & Posicionamento</span>
+              </div>
+              <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(ticket)}
+              </div>
+            </div>
+          ` : ''}
+
+          ${publico ? `
+            <!-- 4. PÚBLICO PRIORITÁRIO -->
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-users text-[11px]"></i>
+                <span>Público Prioritário & Segmentos</span>
+              </div>
+              <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(publico)}
+              </div>
+            </div>
+          ` : ''}
+
+          ${diretrizes ? `
+            <!-- 5. DIRETRIZES EXECUTIVAS -->
+            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
+              <div class="flex items-center gap-2 text-brand-900 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid fa-lightbulb text-amber-500 text-[11px]"></i>
+                <span>Diretrizes Executivas & Ações Práticas</span>
+              </div>
+              <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                ${formatMarkdown(diretrizes)}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    // Fallback: Se não encontrou as chaves, formata parágrafos limpos com bullets destacados
+    return `
+      <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-3">
+        ${formatMarkdown(visionText)}
+      </div>
+    `;
+  };
+
   // Dividir por seções principais H3
   const sections = processedText.split(/^###\s+/m).filter(Boolean);
   let htmlOutput = "";
@@ -7015,7 +7106,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <!-- CARD 1: VISÃO ESTRATÉGICA E VEREDICTO + MINI GRÁFICO DE FIT DO VEREDICTO -->
           <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
-            <div class="space-y-3">
+            <div class="space-y-4">
               <div class="flex items-center justify-between pb-2 border-b border-slate-100">
                 <div class="flex items-center gap-2.5">
                   <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
@@ -7028,9 +7119,8 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 </span>
               </div>
               
-              <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
-                ${formatMarkdown(sanitizedVision || content)}
-              </div>
+              <!-- RENDERIZAÇÃO ESTRUTURADA EM SUB-CARDS -->
+              ${renderVisionAndVerdict(sanitizedVision || content)}
 
               <!-- MINI GRÁFICO DINÂMICO EMBUTIDO DO VEREDICTO -->
               <div class="mt-4 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
