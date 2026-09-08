@@ -6775,7 +6775,9 @@ window.handleConsultorSubmit = async function(e) {
   }
 };
 
-// Renderizador de Relatório Executivo em Tela Cheia (Cards Modulares Brancos)
+// ==========================================
+// RENDERIZADOR EXECUTIVO DE ALTA FIDELIDADE (STUDIO 8 / MCKINSEY)
+// ==========================================
 window.renderExecutiveReport = function(topic, text, customDate) {
   const inputView = document.getElementById("consultor-input-view");
   const reportView = document.getElementById("consultor-report-view");
@@ -6787,7 +6789,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
 
   if (!reportContent || !reportView) return;
 
-  if (reportTitle) reportTitle.innerText = topic;
+  if (reportTitle) reportTitle.innerText = (topic || "AUDITORIA DE NEGÓCIO").toUpperCase();
   if (reportDateBadge) {
     reportDateBadge.innerText = customDate ? `Auditoria Gerada em ${customDate} • Base: Pesquisa SJC (N=476, IC=95%)` : "Base de Dados: Pesquisa Municipal Radar SJC (N=476, IC=95%, Erro ±4.5%)";
   }
@@ -6811,13 +6813,13 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       });
 
       return `
-        <div class="my-5 p-5 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-sm">
+        <div class="my-6 p-5 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200 shadow-2xs">
           <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
             <span class="text-xs font-black uppercase tracking-wider text-brand-900 flex items-center gap-2">
-              <i class="fa-solid fa-chart-pie text-brand-600"></i>
+              <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
               ${chartConfig.title || "Indicador Analítico (SJC)"}
             </span>
-            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-brand-900 text-white shadow-2xs">Radar SJC 2026</span>
+            <span class="text-[10px] font-mono font-extrabold px-2.5 py-1 rounded-full bg-brand-900 text-white">RADAR SJC 2026</span>
           </div>
           <div class="relative w-full h-64 sm:h-72">
             <canvas id="${chartId}"></canvas>
@@ -6830,7 +6832,6 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     }
   };
 
-  // Suporte legado
   const renderLegacyGraficoTag = (match, p1) => {
     const tag = p1.trim().toUpperCase();
     if (tag === "IDADE") {
@@ -6858,14 +6859,31 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     return "";
   };
 
-  // Processar texto em seções/cards estruturados
   let processedText = text
     .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)
     .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag);
 
-  // Dividir por seções H3
-  const sections = processedText.split(/^###\s+/m).filter(Boolean);
+  // Helper para limpar markdown básico
+  const formatMarkdown = (txt) => {
+    if (!txt) return "";
+    return txt
+      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
+      .replace(/^[\*\-]\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+      .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
+      .replace(/\n\n/g, "<div class='my-2.5'></div>")
+      .replace(/\n/g, "<br/>");
+  };
 
+  // Helper para extrair blocos de texto por títulos/marcadores
+  const extractBlock = (fullText, startPattern, endPatterns) => {
+    const endGroup = endPatterns.join('|');
+    const regex = new RegExp(`(?:###|####|\*\*|\*|-)?\s*${startPattern}:?\s*(?:\*\*)?([\s\S]*?)(?=(?:###|####|\*\*|\*|-)?\s*(?:${endGroup})|$)`, 'i');
+    const match = fullText.match(regex);
+    return match ? match[1].trim() : '';
+  };
+
+  // Dividir por seções principais H3
+  const sections = processedText.split(/^###\s+/m).filter(Boolean);
   let htmlOutput = "";
 
   sections.forEach((sec, idx) => {
@@ -6881,153 +6899,431 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       content = "";
     }
 
-    // Formatadores internos de markdown
-    let formattedContent = content
-      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
-      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1.5'>$1</li>")
-      .replace(/^\*\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1.5'>$1</li>")
-      .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1.5'>$1</li>")
-      .replace(/\n\n/g, "<div class='my-3'></div>")
-      .replace(/\n/g, "<br/>");
-
-    // Ícone e cores para cada seção no padrão Studio 8
-    let iconClass = "fa-chart-simple";
-    let accentColor = "text-brand-900";
-    let borderAccent = "border-l-4 border-l-brand-900";
-
     const upperTitle = title ? title.toUpperCase() : "";
 
-    // Formatador especial de layout para Matriz SWOT em 2 colunas
-    if (upperTitle.includes("SWOT")) {
-      // Separar FORÇAS, FRAQUEZAS, OPORTUNIDADES e AMEAÇAS
-      const extractSwotItem = (text, headerName) => {
-        const regex = new RegExp(`(?:\\*\\*|\\*|-)?\\s*${headerName}:?\\s*(?:\\*\\*)?([\\s\\S]*?)(?=(?:\\*\\*|\\*|-)?\\s*(?:FORÇAS|FRAQUEZAS|OPORTUNIDADES|AMEAÇAS):|$)`, 'i');
-        const match = text.match(regex);
-        return match ? match[1].trim() : '';
-      };
+    // 1. VISÃO ESTRATÉGICA E VEREDICTO
+    if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
+          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+            <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+              VISÃO ESTRATÉGICA E VEREDICTO
+            </h3>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed text-justify space-y-3">
+            ${formatMarkdown(content)}
+          </div>
+        </div>
+      `;
+    }
+    // 2. MATRIZ SWOT (4 QUADRANTES / 2 COLUNAS DE ALTA FIDELIDADE)
+    else if (upperTitle.includes("SWOT")) {
+      const forcas = extractBlock(content, 'FORÇAS', ['FRAQUEZAS', 'OPORTUNIDADES', 'AMEAÇAS']);
+      const fraquezas = extractBlock(content, 'FRAQUEZAS', ['FORÇAS', 'OPORTUNIDADES', 'AMEAÇAS']);
+      const oportunidades = extractBlock(content, 'OPORTUNIDADES', ['FORÇAS', 'FRAQUEZAS', 'AMEAÇAS']);
+      const ameacas = extractBlock(content, 'AMEAÇAS', ['FORÇAS', 'FRAQUEZAS', 'OPORTUNIDADES']);
 
-      const formatSubItems = (rawSub) => {
-        if (!rawSub) return '<p class="text-xs text-slate-400 italic">Nenhum ponto listado.</p>';
-        return rawSub
-          .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
-          .replace(/^[\*\-]\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
-          .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
-          .replace(/\n/g, "<br/>");
-      };
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-5">
+          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+            <i class="fa-solid fa-chart-line text-rose-500 text-sm"></i>
+            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+              MATRIZ SWOT
+            </h3>
+          </div>
 
-      const forcasText = extractSwotItem(content, 'FORÇAS');
-      const fraquezasText = extractSwotItem(content, 'FRAQUEZAS');
-      const oportunidadesText = extractSwotItem(content, 'OPORTUNIDADES');
-      const ameacasText = extractSwotItem(content, 'AMEAÇAS');
-
-      if (forcasText || fraquezasText || oportunidadesText || ameacasText) {
-        formattedContent = `
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
-            <!-- BLOCO ESQUERDO: FORÇAS & OPORTUNIDADES -->
-            <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- BLOCO ESQUERDO: FORÇAS E OPORTUNIDADES -->
+            <div class="space-y-5">
               <!-- FORÇAS -->
-              <div class="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 shadow-2xs space-y-2">
-                <div class="flex items-center gap-2 text-emerald-800 font-black text-xs uppercase tracking-wider pb-1 border-b border-emerald-200/60">
+              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
+                <div class="flex items-center gap-2 text-emerald-700 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
                   <i class="fa-solid fa-shield-halved text-emerald-600"></i>
                   <span>FORÇAS (Diferenciais Internos)</span>
                 </div>
                 <div class="text-xs text-slate-700 space-y-1">
-                  ${formatSubItems(forcasText)}
+                  ${formatMarkdown(forcas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
                 </div>
               </div>
 
               <!-- OPORTUNIDADES -->
-              <div class="p-5 rounded-2xl bg-sky-50/60 border border-sky-200/80 shadow-2xs space-y-2">
-                <div class="flex items-center gap-2 text-sky-900 font-black text-xs uppercase tracking-wider pb-1 border-b border-sky-200/60">
+              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
+                <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
                   <i class="fa-solid fa-arrow-trend-up text-sky-600"></i>
                   <span>OPORTUNIDADES (Mercado & Alavancas)</span>
                 </div>
                 <div class="text-xs text-slate-700 space-y-1">
-                  ${formatSubItems(oportunidadesText)}
+                  ${formatMarkdown(oportunidades) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
                 </div>
               </div>
             </div>
 
-            <!-- BLOCO DIREITO: FRAQUEZAS & AMEAÇAS -->
-            <div class="space-y-4">
+            <!-- BLOCO DIREITO: FRAQUEZAS E AMEAÇAS -->
+            <div class="space-y-5">
               <!-- FRAQUEZAS -->
-              <div class="p-5 rounded-2xl bg-amber-50/60 border border-amber-200/80 shadow-2xs space-y-2">
-                <div class="flex items-center gap-2 text-amber-900 font-black text-xs uppercase tracking-wider pb-1 border-b border-amber-200/60">
+              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
+                <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
                   <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
                   <span>FRAQUEZAS (Gargalos & Vulnerabilidades)</span>
                 </div>
                 <div class="text-xs text-slate-700 space-y-1">
-                  ${formatSubItems(fraquezasText)}
+                  ${formatMarkdown(fraquezas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
                 </div>
               </div>
 
               <!-- AMEAÇAS -->
-              <div class="p-5 rounded-2xl bg-rose-50/60 border border-rose-200/80 shadow-2xs space-y-2">
-                <div class="flex items-center gap-2 text-rose-900 font-black text-xs uppercase tracking-wider pb-1 border-b border-rose-200/60">
+              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
+                <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
                   <i class="fa-solid fa-circle-radiation text-rose-600"></i>
                   <span>AMEAÇAS (Riscos & Pressões Externas)</span>
                 </div>
                 <div class="text-xs text-slate-700 space-y-1">
-                  ${formatSubItems(ameacasText)}
+                  ${formatMarkdown(ameacas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
                 </div>
               </div>
             </div>
           </div>
-        `;
-      }
-    }
-
-    if (upperTitle.includes("VISÃO") || upperTitle.includes("VEREDICTO")) {
-      iconClass = "fa-bolt";
-      accentColor = "text-amber-500";
-      borderAccent = "border-l-4 border-l-amber-500";
-    } else if (upperTitle.includes("SWOT")) {
-      iconClass = "fa-table-cells-large";
-      accentColor = "text-rose-500";
-      borderAccent = "border-l-4 border-l-rose-500";
-    } else if (upperTitle.includes("AMBIENTE") || upperTitle.includes("PESTEL") || upperTitle.includes("ISHIKAWA")) {
-      iconClass = "fa-earth-americas";
-      accentColor = "text-emerald-600";
-      borderAccent = "border-l-4 border-l-emerald-600";
-    } else if (upperTitle.includes("MATRIZ") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO") || upperTitle.includes("OCEANO")) {
-      iconClass = "fa-chess";
-      accentColor = "text-sky-600";
-      borderAccent = "border-l-4 border-l-sky-600";
-    } else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT")) {
-      iconClass = "fa-compass";
-      accentColor = "text-purple-600";
-      borderAccent = "border-l-4 border-l-purple-600";
-    }
-
-    htmlOutput += `
-      <section class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200 shadow-card ${borderAccent} space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <h3 class="text-sm sm:text-base font-black uppercase tracking-wider text-brand-950 flex items-center gap-2.5">
-            <i class="fa-solid ${iconClass} ${accentColor}"></i>
-            <span>${title}</span>
-          </h3>
-          <span class="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-bold">SEÇÃO 0${idx + 1}</span>
         </div>
-        <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-2">
-          ${formattedContent}
+      `;
+    }
+    // 3. AUDITORIA DE AMBIENTE E CAUSALIDADE (PESTEL 6 CARDS + ISHIKAWA FLUXO)
+    else if (upperTitle.includes("AMBIENTE") || upperTitle.includes("CAUSALIDADE") || upperTitle.includes("PESTEL")) {
+      const pestelPolitico = extractBlock(content, 'POLÍTICO|POLITICO', ['ECONÔMICO', 'ECONOMICO', 'SOCIAL', 'TECNOLÓGICO', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
+      const pestelEconomico = extractBlock(content, 'ECONÔMICO|ECONOMICO', ['POLÍTICO', 'POLITICO', 'SOCIAL', 'TECNOLÓGICO', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
+      const pestelSocial = extractBlock(content, 'SOCIAL', ['POLÍTICO', 'ECONÔMICO', 'TECNOLÓGICO', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
+      const pestelTecnologico = extractBlock(content, 'TECNOLÓGICO|TECNOLOGICO', ['POLÍTICO', 'ECONÔMICO', 'SOCIAL', 'AMBIENTAL', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
+      const pestelAmbiental = extractBlock(content, 'AMBIENTAL', ['POLÍTICO', 'ECONÔMICO', 'SOCIAL', 'TECNOLÓGICO', 'LEGAL', 'DIAGRAMA', 'ISHIKAWA']);
+      const pestelLegal = extractBlock(content, 'LEGAL', ['POLÍTICO', 'ECONÔMICO', 'SOCIAL', 'TECNOLÓGICO', 'AMBIENTAL', 'DIAGRAMA', 'ISHIKAWA']);
+
+      const ishikawaMercado = extractBlock(content, 'Mercado', ['Operação', 'Operacao', 'Tecnologia', 'Financeiro']);
+      const ishikawaOperacao = extractBlock(content, 'Operação|Operacao', ['Mercado', 'Tecnologia', 'Financeiro']);
+      const ishikawaTecnologia = extractBlock(content, 'Tecnologia', ['Mercado', 'Operação', 'Financeiro']);
+      const ishikawaFinanceiro = extractBlock(content, 'Financeiro', ['Mercado', 'Operação', 'Tecnologia']);
+
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+          <div class="text-center pb-1">
+            <span class="text-[10px] font-mono font-black tracking-widest text-slate-400 uppercase">AUDITORIA DE AMBIENTE E CAUSALIDADE</span>
+          </div>
+
+          <!-- BLOCO 1: ANÁLISE PESTEL (GRID 3X2 DE CARDS) -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+              <i class="fa-solid fa-earth-americas text-brand-900 text-xs"></i>
+              <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ANÁLISE PESTEL</h4>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Político -->
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
+                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">POLÍTICO</span>
+                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelPolitico) || 'Análise regulatória em SJC.'}</p>
+              </div>
+              <!-- Econômico -->
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
+                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">ECONÔMICO</span>
+                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelEconomico) || 'Impacto de renda e inflação.'}</p>
+              </div>
+              <!-- Social -->
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
+                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">SOCIAL</span>
+                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelSocial) || 'Comportamento e demografia.'}</p>
+              </div>
+              <!-- Tecnológico -->
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
+                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">TECNOLÓGICO</span>
+                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelTecnologico) || 'Digitalização e canais.'}</p>
+              </div>
+              <!-- Ambiental -->
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
+                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">AMBIENTAL</span>
+                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelAmbiental) || 'Sustentabilidade e insumos.'}</p>
+              </div>
+              <!-- Legal -->
+              <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200 shadow-2xs space-y-1.5">
+                <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">LEGAL</span>
+                <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(pestelLegal) || 'Conformidade e licenças.'}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCO 2: DIAGRAMA DE ISHIKAWA COM BANNER CENTRAL -->
+          <div class="space-y-4 pt-4 border-t border-slate-100">
+            <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+              <i class="fa-solid fa-code-branch text-rose-500 text-xs"></i>
+              <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">DIAGRAMA DE ISHIKAWA</h4>
+            </div>
+
+            <div class="space-y-3">
+              <!-- Linha Superior: Mercado & Operação -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Mercado</span>
+                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaMercado) || 'Demanda e adequação de oferta.'}</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Operação</span>
+                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaOperacao) || 'Gargalos de entrega e processo.'}</p>
+                </div>
+              </div>
+
+              <!-- Faixa Central Vermelha: PROBLEMA RAIZ -->
+              <div class="p-3.5 rounded-xl bg-brand-900 text-white text-center font-mono font-bold text-xs uppercase tracking-wider shadow-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
+                <span>GARGALO CRÍTICO: SUSTENTABILIDADE OPERACIONAL E PERCEPÇÃO DE VALOR</span>
+              </div>
+
+              <!-- Linha Inferior: Tecnologia & Financeiro -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Tecnologia</span>
+                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaTecnologia) || 'Sistemas e automação de controle.'}</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50/90 border-t-2 border-t-rose-500 border-x border-b border-slate-200 shadow-2xs space-y-1">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-rose-600 block">Financeiro</span>
+                  <p class="text-xs text-slate-700 leading-relaxed">${formatMarkdown(ishikawaFinanceiro) || 'Custo de aquisição e margens.'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
-    `;
+      `;
+    }
+    // 4. MATRIZES ESTRATÉGICAS E POSICIONAMENTO (VRIO, PORTER, 5PS, OCEANO AZUL)
+    else if (upperTitle.includes("MATRIZES") || upperTitle.includes("POSICIONAMENTO") || upperTitle.includes("PORTER") || upperTitle.includes("VRIO")) {
+      const vrioValor = extractBlock(content, 'VALOR|Valor', ['RARIDADE', 'Raridade', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER']);
+      const vrioRaridade = extractBlock(content, 'RARIDADE|Raridade', ['VALOR', 'IMITABILIDADE', 'ORGANIZAÇÃO', 'PORTER']);
+      const vrioImitabilidade = extractBlock(content, 'IMITABILIDADE|Imitabilidade', ['VALOR', 'RARIDADE', 'ORGANIZAÇÃO', 'PORTER']);
+      const vrioOrganizacao = extractBlock(content, 'ORGANIZAÇÃO|ORGANIZACAO|Organizacao', ['VALOR', 'RARIDADE', 'IMITABILIDADE', 'PORTER']);
+
+      const porterRiv = extractBlock(content, 'Rivalidade', ['Novos Entrantes', 'Substitutos', 'Fornecedores', 'Compradores']);
+      const porterNovos = extractBlock(content, 'Novos Entrantes', ['Rivalidade', 'Substitutos', 'Fornecedores', 'Compradores']);
+      const porterSub = extractBlock(content, 'Substitutos', ['Rivalidade', 'Novos Entrantes', 'Fornecedores', 'Compradores']);
+      const porterForn = extractBlock(content, 'Fornecedores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Compradores']);
+      const porterComp = extractBlock(content, 'Compradores', ['Rivalidade', 'Novos Entrantes', 'Substitutos', 'Fornecedores']);
+
+      const pProduto = extractBlock(content, 'PRODUTO|Produto', ['PREÇO', 'Preço', 'PRAÇA', 'Praça', 'PROMOÇÃO', 'PESSOAS']);
+      const pPreco = extractBlock(content, 'PREÇO|Preço|Preco', ['PRODUTO', 'PRAÇA', 'PROMOÇÃO', 'PESSOAS']);
+      const pPraca = extractBlock(content, 'PRAÇA|Praça|Praca', ['PRODUTO', 'PREÇO', 'PROMOÇÃO', 'PESSOAS']);
+      const pPromocao = extractBlock(content, 'PROMOÇÃO|Promoção|Promocao', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PESSOAS']);
+      const pPessoas = extractBlock(content, 'PESSOAS|Pessoas', ['PRODUTO', 'PREÇO', 'PRAÇA', 'PROMOÇÃO', 'OCEANO']);
+
+      const oaEliminar = extractBlock(content, 'ELIMINAR|Eliminar', ['REDUZIR', 'ELEVAR', 'CRIAR']);
+      const oaReduzir = extractBlock(content, 'REDUZIR|Reduzir', ['ELIMINAR', 'ELEVAR', 'CRIAR']);
+      const oaElevar = extractBlock(content, 'ELEVAR|Elevar', ['ELIMINAR', 'REDUZIR', 'CRIAR']);
+      const oaCriar = extractBlock(content, 'CRIAR|Criar', ['ELIMINAR', 'REDUZIR', 'ELEVAR']);
+
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-6">
+          <div class="text-center pb-1">
+            <span class="text-[10px] font-mono font-black tracking-widest text-slate-400 uppercase">MATRIZES ESTRATÉGICAS E POSICIONAMENTO</span>
+          </div>
+
+          <!-- BLOCO SUPERIOR: VRIO + PORTER EM 2 COLUNAS -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-slate-100">
+            <!-- ANÁLISE VRIO COM LETRAS DESTAQUE -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <i class="fa-solid fa-bolt text-amber-500 text-xs"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ANÁLISE VRIO</h4>
+              </div>
+
+              <div class="space-y-3">
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
+                  <span class="text-xl font-black font-mono text-emerald-600 shrink-0">V</span>
+                  <div class="text-xs text-slate-700 leading-relaxed">
+                    <strong class="text-slate-900 block font-bold">VALOR:</strong>
+                    ${formatMarkdown(vrioValor)}
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
+                  <span class="text-xl font-black font-mono text-sky-600 shrink-0">R</span>
+                  <div class="text-xs text-slate-700 leading-relaxed">
+                    <strong class="text-slate-900 block font-bold">RARIDADE:</strong>
+                    ${formatMarkdown(vrioRaridade)}
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
+                  <span class="text-xl font-black font-mono text-rose-600 shrink-0">I</span>
+                  <div class="text-xs text-slate-700 leading-relaxed">
+                    <strong class="text-slate-900 block font-bold">IMITABILIDADE:</strong>
+                    ${formatMarkdown(vrioImitabilidade)}
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50/90 border border-slate-200">
+                  <span class="text-xl font-black font-mono text-brand-900 shrink-0">O</span>
+                  <div class="text-xs text-slate-700 leading-relaxed">
+                    <strong class="text-slate-900 block font-bold">ORGANIZAÇÃO:</strong>
+                    ${formatMarkdown(vrioOrganizacao)}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 FORÇAS DE PORTER -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <i class="fa-solid fa-chart-line text-amber-500 text-xs"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 FORÇAS DE PORTER</h4>
+              </div>
+
+              <div class="space-y-2.5 text-xs text-slate-700">
+                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
+                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">RIVALIDADE</span>
+                  <p class="leading-relaxed">${formatMarkdown(porterRiv)}</p>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
+                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">NOVOS ENTRANTES</span>
+                  <p class="leading-relaxed">${formatMarkdown(porterNovos)}</p>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
+                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">SUBSTITUTOS</span>
+                  <p class="leading-relaxed">${formatMarkdown(porterSub)}</p>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
+                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">FORNECEDORES</span>
+                  <p class="leading-relaxed">${formatMarkdown(porterForn)}</p>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-50/90 border-b border-slate-200">
+                  <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block">COMPRADORES</span>
+                  <p class="leading-relaxed">${formatMarkdown(porterComp)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BLOCO INFERIOR: 5 PS DO MARKETING + OCEANO AZUL -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 5 PS DO MARKETING -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <i class="fa-solid fa-chart-line text-amber-500 text-xs"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">5 PS DO MARKETING</h4>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2.5 text-xs">
+                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
+                  <span class="text-[10px] font-black text-rose-600 uppercase block">PRODUTO</span>
+                  <p class="text-slate-700 leading-tight">${formatMarkdown(pProduto)}</p>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
+                  <span class="text-[10px] font-black text-rose-600 uppercase block">PREÇO</span>
+                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPreco)}</p>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
+                  <span class="text-[10px] font-black text-rose-600 uppercase block">PRAÇA</span>
+                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPraca)}</p>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
+                  <span class="text-[10px] font-black text-rose-600 uppercase block">PROMOÇÃO</span>
+                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPromocao)}</p>
+                </div>
+                <div class="col-span-2 p-3 rounded-xl bg-slate-50/90 border border-slate-200 space-y-1">
+                  <span class="text-[10px] font-black text-rose-600 uppercase block">PESSOAS</span>
+                  <p class="text-slate-700 leading-tight">${formatMarkdown(pPessoas)}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ESTRATÉGIA OCEANO AZUL (MATRIZ 4 AÇÕES) -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <i class="fa-solid fa-earth-americas text-amber-500 text-xs"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest text-brand-950 font-mono">ESTRATÉGIA OCEANO AZUL</h4>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 text-xs">
+                <!-- ELIMINAR -->
+                <div class="rounded-xl border border-rose-200 overflow-hidden shadow-2xs">
+                  <div class="bg-rose-50 px-3 py-1.5 font-mono font-black text-[10px] text-rose-600 uppercase border-b border-rose-200">
+                    ELIMINAR
+                  </div>
+                  <div class="p-3 bg-white text-slate-700 leading-tight">
+                    ${formatMarkdown(oaEliminar)}
+                  </div>
+                </div>
+
+                <!-- REDUZIR -->
+                <div class="rounded-xl border border-amber-200 overflow-hidden shadow-2xs">
+                  <div class="bg-amber-50 px-3 py-1.5 font-mono font-black text-[10px] text-amber-600 uppercase border-b border-amber-200">
+                    REDUZIR
+                  </div>
+                  <div class="p-3 bg-white text-slate-700 leading-tight">
+                    ${formatMarkdown(oaReduzir)}
+                  </div>
+                </div>
+
+                <!-- ELEVAR -->
+                <div class="rounded-xl border border-sky-200 overflow-hidden shadow-2xs">
+                  <div class="bg-sky-50 px-3 py-1.5 font-mono font-black text-[10px] text-sky-600 uppercase border-b border-sky-200">
+                    ELEVAR
+                  </div>
+                  <div class="p-3 bg-white text-slate-700 leading-tight">
+                    ${formatMarkdown(oaElevar)}
+                  </div>
+                </div>
+
+                <!-- CRIAR -->
+                <div class="rounded-xl border border-emerald-200 overflow-hidden shadow-2xs">
+                  <div class="bg-emerald-50 px-3 py-1.5 font-mono font-black text-[10px] text-emerald-600 uppercase border-b border-emerald-200">
+                    CRIAR
+                  </div>
+                  <div class="p-3 bg-white text-slate-700 leading-tight">
+                    ${formatMarkdown(oaCriar)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    // 5. FIT COM OS 4 MOVIMENTOS CULTURAIS
+    else if (upperTitle.includes("MOVIMENTOS") || upperTitle.includes("FIT") || upperTitle.includes("CULTURAIS")) {
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
+          <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+            <i class="fa-solid fa-compass text-purple-600 text-sm"></i>
+            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
+              O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
+            </h3>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-3">
+            ${formatMarkdown(content)}
+          </div>
+        </div>
+      `;
+    }
+    // FALLBACK GENÉRICO
+    else {
+      htmlOutput += `
+        <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono flex items-center gap-2">
+              <i class="fa-solid fa-chart-simple text-brand-900"></i>
+              <span>${title}</span>
+            </h3>
+            <span class="text-[10px] font-mono text-slate-400 uppercase font-bold">SEÇÃO 0${idx + 1}</span>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-2">
+            ${formatMarkdown(content)}
+          </div>
+        </div>
+      `;
+    }
   });
 
-  // Se não foi possível dividir em seções h3, renderizar fallback limpo
   if (!htmlOutput) {
-    let formattedFallback = processedText
-      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
-      .replace(/^-\s(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 my-1'>$1</li>")
-      .replace(/\n/g, "<br/>");
-
     htmlOutput = `
-      <section class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200 shadow-card border-l-4 border-l-brand-900 space-y-4">
+      <div class="p-6 sm:p-8 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4">
         <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed">
-          ${formattedFallback}
+          ${formatMarkdown(processedText)}
         </div>
-      </section>
+      </div>
     `;
   }
 
