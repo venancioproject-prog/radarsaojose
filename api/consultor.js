@@ -202,14 +202,14 @@ ESTRUTURA JSON EXATA E OBRIGATORIA:
   },
   "movimentos_culturais": {
     "analise_cards": {
-      "geografia_silencio": "Analise de 2 linhas sobre a recepcao por A Geografia do Silencio.",
-      "cidade_prometida": "Analise de 2 linhas sobre a recepcao por A Cidade Prometida.",
-      "tribo_global": "Analise de 2 linhas sobre a recepcao por A Tribo Global.",
-      "empreendedorismo_intuitivo": "Analise de 2 linhas sobre o fit com Empreendedorismo Intuitivo."
+      "geografia_silencio": "Escreva exatamente 2 frases curtas e diretas sobre como este publico especifico recebe a ideia do usuario, citando zonas como Urbanova ou Vila Adyana se houver fit.",
+      "cidade_prometida": "Escreva exatamente 2 frases curtas e diretas avaliando o fit com as familias da Zona Sul ou Colinas, apontando se ha barreiras morais ou de preco.",
+      "tribo_global": "Escreva exatamente 2 frases curtas e diretas avaliando o comportamento do publico do Aquarius/Vila Ema frente a proposta.",
+      "empreendedorismo_intuitivo": "Escreva exatamente 2 frases curtas e diretas avaliando a recepcao na economia real de bairro e zonas perifericas ou satelites."
     },
     "veredicto_final": {
-      "nome_movimento": "Nome do Movimento Vencedor",
-      "justificativa_densa": "Paragrafo denso justificando o movimento vencedor com base no estudo municipal."
+      "nome_movimento": "A Tribo Global OU Empreendedorismo Intuitivo OU A Cidade Prometida OU A Geografia do Silencio",
+      "justificativa_densa": "Escreva um paragrafo denso, sofisticado e 100% PERSONALIZADO para a ideia do usuario. E PROIBIDO usar frases genericas como 'Posicionamento estrategico prioritario com base na evasao de 66,2%'. Voce deve explicar com rigor tecnico por que ESTE negocio especifico prospera neste movimento, citando o comportamento do consumidor joseense, o ticket medio, a barreira de valor ou a geografia exata de SJC."
     }
   },
   "graficos_analiticos": [
