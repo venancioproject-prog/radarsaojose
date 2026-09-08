@@ -6952,12 +6952,19 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     if (!fullText) return '';
     try {
       const endGroup = endPatterns.join('|');
-      // Procura por qualquer variação de título (com asterisco, traço, dois pontos, maiúsculo/minúsculo)
-      const regex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
-      const match = fullText.match(regex);
+      // Procura por qualquer variação de título no início de linha ou após pontuação
+      const regex = new RegExp(`(?:^|\\n)\\s*(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:\\n\\s*(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?)|$)`, 'i');
+      let match = fullText.match(regex);
+      
+      // Fallback se não casou com início de linha
+      if (!match) {
+        const fallbackRegex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
+        match = fullText.match(fallbackRegex);
+      }
+
       if (match && match[1]) {
         let res = match[1].trim();
-        // Remove títulos subsequentes que vazaram (ex: **5 FORÇAS DE PORTER, 5 PS DO MARKETING, ESTRATÉGIA OCEANO AZUL)
+        // Remove títulos subsequentes que vazaram
         res = res.replace(/(?:###|####|\*\*|\*|-|•)?\s*(?:5\s*FORÇAS|PORTER|VRIO|5\s*PS|MARKETING|OCEANO\s*AZUL|MATRIZ|AUDITORIA|SWOT)[\s\S]*$/gi, '').trim();
         // Remove prefixos repetitivos como (V): (R): (I): (O): **
         res = res.replace(/^\s*\([VRIO]\)\s*:?\s*/gi, '');
@@ -6978,81 +6985,51 @@ window.renderExecutiveReport = function(topic, text, customDate) {
   const renderVisionAndVerdict = (visionText) => {
     if (!visionText) return '';
 
-    // Extrair cada um dos tópicos principais com regex resiliente
-    const oport = extractBlock(visionText, 'OPORTUNIDADE|DOR DO MERCADO|Oportunidade latente|A dor', ['VALIDAÇÃO', 'VALIDACAO', 'DEMANDA', 'TICKET', 'PÚBLICO', 'PUBLICO', 'DIRETRIZES', 'POSICIONAMENTO']);
-    const valid = extractBlock(visionText, 'VALIDAÇÃO DA DEMANDA|VALIDACAO DA DEMANDA|Validação da demanda|Validacao da demanda|Validação|Validacao', ['OPORTUNIDADE', 'TICKET', 'PÚBLICO', 'PUBLICO', 'DIRETRIZES', 'POSICIONAMENTO']);
-    const ticket = extractBlock(visionText, 'TICKET MÉDIO|TICKET MEDIO|Ticket médio|Ticket medio|TICKET|PREÇO', ['OPORTUNIDADE', 'VALIDAÇÃO', 'VALIDACAO', 'PÚBLICO', 'PUBLICO', 'DIRETRIZES', 'POSICIONAMENTO']);
-    const publico = extractBlock(visionText, 'PÚBLICO PRIORITÁRIO|PUBLICO PRIORITARIO|Público prioritário|Publico prioritario|PÚBLICO|PUBLICO', ['OPORTUNIDADE', 'VALIDAÇÃO', 'VALIDACAO', 'TICKET', 'DIRETRIZES', 'POSICIONAMENTO']);
-    const diretrizes = extractBlock(visionText, 'DIRETRIZES EXECUTIVAS|Diretrizes executivas|DIRETRIZES|EXPANSÃO|Posicionamento', ['OPORTUNIDADE', 'VALIDAÇÃO', 'VALIDACAO', 'TICKET', 'PÚBLICO', 'PUBLICO']);
+    // Lista ordenada de chaves para quebrar o texto sequencialmente
+    const keys = [
+      { id: 'oport', name: 'Oportunidade Latente & Dor do Mercado', icon: 'fa-bullseye', color: 'rose', titleClass: 'text-rose-600', pattern: 'OPORTUNIDADE|DOR DO MERCADO|Oportunidade latente|A dor' },
+      { id: 'valid', name: 'Validação da Demanda & Comportamento', icon: 'fa-chart-line', color: 'sky', titleClass: 'text-sky-600', pattern: 'VALIDAÇÃO DA DEMANDA|VALIDACAO DA DEMANDA|Validação da demanda|Validacao da demanda|Validação|Validacao' },
+      { id: 'ticket', name: 'Ticket Médio Estimado & Posicionamento', icon: 'fa-tag', color: 'emerald', titleClass: 'text-emerald-600', pattern: 'TICKET MÉDIO|TICKET MEDIO|Ticket médio|Ticket medio|TICKET|PREÇO' },
+      { id: 'publico', name: 'Público Prioritário & Segmentos', icon: 'fa-users', color: 'purple', titleClass: 'text-purple-600', pattern: 'PÚBLICO PRIORITÁRIO|PUBLICO PRIORITARIO|Público prioritário|Publico prioritario|PÚBLICO|PUBLICO' },
+      { id: 'diretrizes', name: 'Diretrizes Executivas & Ações Práticas', icon: 'fa-lightbulb', color: 'amber', titleClass: 'text-brand-900', pattern: 'DIRETRIZES EXECUTIVAS|Diretrizes executivas|DIRETRIZES|EXPANSÃO|Posicionamento' }
+    ];
 
-    // Se conseguiu segmentar por subtópicos, renderiza em módulos elegantes
-    if (oport || valid || ticket || publico || diretrizes) {
+    const allPatterns = keys.map(k => k.pattern);
+    const extractedCards = [];
+
+    keys.forEach((k, idx) => {
+      const remainingPatterns = allPatterns.filter((_, i) => i !== idx);
+      const content = extractBlock(visionText, k.pattern, remainingPatterns);
+      if (content && content.length > 5) {
+        // Limpar qualquer vazamento de título repetido no início do conteúdo (ex: "& COMPORTAMENTO", "ESTIMADO & POSICIONAMENTO")
+        let cleanContent = content
+          .replace(/^(&\s*COMPORTAMENTO|&\s*POSICIONAMENTO|&\s*EXPANSÃO|&\s*AÇÕES)[\s\:\-]*/i, '')
+          .replace(/^(?:OPORTUNIDADE|VALIDAÇÃO|TICKET|PÚBLICO|DIRETRIZES)[^:\n]*:?\s*/i, '')
+          .trim();
+
+        extractedCards.push({
+          name: k.name,
+          icon: k.icon,
+          titleClass: k.titleClass,
+          content: cleanContent
+        });
+      }
+    });
+
+    if (extractedCards.length > 0) {
       return `
-        <div class="space-y-4">
-          ${oport ? `
-            <!-- 1. OPORTUNIDADE & DOR -->
+        <div class="space-y-3.5">
+          ${extractedCards.map(c => `
             <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-rose-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-bullseye text-[11px]"></i>
-                <span>Oportunidade Latente & Dor do Mercado</span>
+              <div class="flex items-center gap-2 ${c.titleClass} font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
+                <i class="fa-solid ${c.icon} text-[11px]"></i>
+                <span>${c.name}</span>
               </div>
               <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(oport)}
+                ${formatMarkdown(c.content)}
               </div>
             </div>
-          ` : ''}
-
-          ${valid ? `
-            <!-- 2. VALIDAÇÃO DA DEMANDA -->
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-sky-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-chart-line text-[11px]"></i>
-                <span>Validação da Demanda & Comportamento</span>
-              </div>
-              <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(valid)}
-              </div>
-            </div>
-          ` : ''}
-
-          ${ticket ? `
-            <!-- 3. TICKET MÉDIO & POSICIONAMENTO -->
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-tag text-[11px]"></i>
-                <span>Ticket Médio Estimado & Posicionamento</span>
-              </div>
-              <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(ticket)}
-              </div>
-            </div>
-          ` : ''}
-
-          ${publico ? `
-            <!-- 4. PÚBLICO PRIORITÁRIO -->
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-users text-[11px]"></i>
-                <span>Público Prioritário & Segmentos</span>
-              </div>
-              <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(publico)}
-              </div>
-            </div>
-          ` : ''}
-
-          ${diretrizes ? `
-            <!-- 5. DIRETRIZES EXECUTIVAS -->
-            <div class="p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
-              <div class="flex items-center gap-2 text-brand-900 font-bold text-xs uppercase tracking-wider pb-1 border-b border-slate-200/60">
-                <i class="fa-solid fa-lightbulb text-amber-500 text-[11px]"></i>
-                <span>Diretrizes Executivas & Ações Práticas</span>
-              </div>
-              <div class="text-xs text-slate-700 leading-relaxed font-normal">
-                ${formatMarkdown(diretrizes)}
-              </div>
-            </div>
-          ` : ''}
+          `).join('')}
         </div>
       `;
     }
