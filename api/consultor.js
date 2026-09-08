@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   try {
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      console.error('ERRO: GROQ_API_KEY não configurada no ambiente da Vercel.');
+      console.error('ERRO CRÍTICO: GROQ_API_KEY não configurada no ambiente da Vercel.');
       return res.status(500).json({ 
         error: 'Chave de API da Groq (GROQ_API_KEY) não configurada nas variáveis de ambiente da Vercel.' 
       });
@@ -61,15 +61,23 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       return res.status(400).json({ error: 'Parâmetro question ou messages é obrigatório no corpo da requisição.' });
     }
 
+    // Endpoint oficial da Groq
+    const groqEndpoint = 'https://api.groq.com/openai/v1/chat/completions';
+    
+    // Modelo oficial Groq
+    const modelName = 'llama3-70b-8192';
+
+    console.log(`[Consultor IA] Enviando requisição para ${groqEndpoint} com modelo ${modelName}...`);
+
     // Chamada oficial segura para a API da Groq
-    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const groqResponse = await fetch(groqEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: modelName,
         messages: chatMessages,
         temperature: 0.6,
         max_tokens: 1500
@@ -78,25 +86,28 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
 
     if (!groqResponse.ok) {
       const errorText = await groqResponse.text();
-      console.error('Erro retornado pela API da Groq:', groqResponse.status, errorText);
+      console.error(`[Consultor IA] Erro retornado pela API da Groq (Status ${groqResponse.status} ${groqResponse.statusText}):`, errorText);
       return res.status(groqResponse.status).json({ 
         error: `Erro na API da Groq: ${groqResponse.statusText}`, 
+        status: groqResponse.status,
         details: errorText 
       });
     }
 
     const data = await groqResponse.json();
+    console.log('[Consultor IA] Resposta recebida com sucesso da Groq.');
+    
     const replyText = data.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
 
     return res.status(200).json({
       success: true,
       reply: replyText,
-      model: data.model || 'llama-3.3-70b-versatile',
+      model: data.model || modelName,
       usage: data.usage || null
     });
 
   } catch (err) {
-    console.error('Erro interno na Serverless Function /api/consultor:', err);
+    console.error('[Consultor IA] Erro interno na Serverless Function /api/consultor:', err);
     return res.status(500).json({ 
       error: 'Erro interno no servidor ao processar requisição do Consultor IA.',
       message: err.message 
