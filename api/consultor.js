@@ -230,51 +230,13 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   ]
 }`;
 
-    // 1. Obter modelos ativos diretamente da API da Groq para garantir que nenhum modelo descontinuado seja chamado
-    let candidateModels = [];
-    try {
-      const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
-        headers: { 'Authorization': `Bearer ${apiKey}` }
-      });
-      if (modelsResp.ok) {
-        const modelsData = await modelsResp.json();
-        const activeIds = (modelsData.data || []).map(m => m.id);
-        
-        // Modelos de texto recomendados da Groq em ordem de preferência
-        const topPriorities = [
-          'llama-3.3-70b-versatile',
-          'llama-3.1-70b-versatile',
-          'llama-3.3-70b-specdec',
-          'qwen-2.5-32b',
-          'llama-3.1-8b-instant'
-        ];
-
-        for (const p of topPriorities) {
-          if (activeIds.includes(p)) candidateModels.push(p);
-        }
-
-        activeIds.forEach(id => {
-          if (!candidateModels.includes(id) && 
-              !id.includes('whisper') && 
-              !id.includes('guard') && 
-              !id.includes('distil') && 
-              !id.includes('vision') &&
-              !id.includes('llama3-8b-8192') &&
-              !id.includes('llama3-70b-8192')) {
-            candidateModels.push(id);
-          }
-        });
-      }
-    } catch (eList) {
-      console.warn('[Consultor IA] Falha ao listar /models da Groq:', eList.message);
-    }
-
-    if (candidateModels.length === 0) {
-      candidateModels = [
-        'llama-3.3-70b-versatile',
-        'llama-3.1-8b-instant'
-      ];
-    }
+    // Modelos de texto rápidos e estáveis da Groq
+    const candidateModels = [
+      'llama-3.3-70b-versatile',
+      'llama-3.1-8b-instant',
+      'qwen-2.5-32b',
+      'llama-3.1-70b-versatile'
+    ];
 
     let replyContent = null;
     let modelUsed = null;
@@ -283,7 +245,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     for (const model of candidateModels) {
       try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 20000);
+        const timeoutId = setTimeout(() => controller.abort(), 18000);
 
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
@@ -295,7 +257,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
             model: model,
             response_format: { type: "json_object" },
             max_tokens: 3500,
-            temperature: 0.4,
+            temperature: 0.3,
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: inputContent }
@@ -312,19 +274,19 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
           modelUsed = model;
           break;
         } else {
-          lastError = data.error?.message || data.message || `Status HTTP ${response.status} no modelo ${model}`;
+          lastError = data.error?.message || data.message || `HTTP ${response.status} (${model})`;
           console.warn(`[Consultor IA] Falha no modelo ${model}:`, lastError);
         }
       } catch (err) {
-        lastError = err.name === 'AbortError' ? `Timeout de 20s no modelo ${model}` : err.message;
+        lastError = err.name === 'AbortError' ? `Timeout no modelo ${model}` : err.message;
         console.warn(`[Consultor IA] Exceção no modelo ${model}:`, lastError);
       }
     }
 
     if (!replyContent) {
       return res.status(500).json({
-        error: lastError || 'Não foi possível gerar a resposta com os modelos disponíveis na Groq.',
-        candidateModels: candidateModels
+        error: lastError || 'Erro ao conectar à API da Groq com os modelos disponíveis.',
+        details: lastError
       });
     }
 

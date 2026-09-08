@@ -6750,8 +6750,8 @@ window.handleConsultorSubmit = async function(e) {
     if (loadingProgressBar) loadingProgressBar.style.width = "100%";
 
     if (!result.ok) {
-      const errorMsg = result.data?.error || result.error?.message || `Erro HTTP ${result.status}: Falha ao conectar ao backend.`;
-      alert("Erro ao gerar relatório: " + errorMsg);
+      const errorMsg = result.data?.error || result.data?.details || result.error?.message || `Erro HTTP ${result.status} ao conectar ao backend (/api/consultor).`;
+      alert("Erro ao gerar relatório:\n" + errorMsg);
       return;
     }
 
