@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'qwen/qwen3.8-27b',
-        max_tokens: 4096, 
+        max_tokens: 800, 
         messages: [
           {
             role: 'system',
