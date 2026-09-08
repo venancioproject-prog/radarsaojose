@@ -6860,28 +6860,30 @@ window.renderExecutiveReport = function(topic, text, customDate) {
   };
 
   // HIGIENIZAÇÃO RIGOROSA DE LUXO: Cortar qualquer rascunho de pensamento em inglês (ex: 1. Deconstruct, 2. Map Data, Draft)
-  let cleanText = (text || "").trim();
+  let rawAiText = (text || "").trim();
   
   // Encontrar o início oficial da primeira seção "### VISÃO ESTRATÉGICA"
-  const realStartIdx = cleanText.search(/###\s*VISÃO\s*ESTRATÉGICA\s*E\s*VEREDICTO/i);
+  const realStartIdx = rawAiText.search(/###\s*(?:[1-9]\.\s*)?VISÃO\s*ESTRATÉGICA/i);
   if (realStartIdx !== -1) {
-    cleanText = cleanText.substring(realStartIdx).trim();
+    rawAiText = rawAiText.substring(realStartIdx).trim();
   } else {
-    const firstSectionIdx = cleanText.search(/###\s*(VISÃO|VISAO|MATRIZ|AUDITORIA)/i);
+    const firstSectionIdx = rawAiText.search(/###\s*(?:[1-9]\.\s*)?(VISÃO|VISAO|MATRIZ|AUDITORIA|TOP)/i);
     if (firstSectionIdx !== -1) {
-      cleanText = cleanText.substring(firstSectionIdx).trim();
+      rawAiText = rawAiText.substring(firstSectionIdx).trim();
     }
   }
 
-  // Descartar rascunhos numerados residuais e tags de gráficos cruas que vazaram no texto
-  cleanText = cleanText
-    .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft|Section by Section)[\s\S]*?(?=###\s*VISÃO|###\s*TOP|$)/gi, '')
+  // Descartar rascunhos numerados residuais
+  rawAiText = rawAiText
+    .replace(/\d+\.\s*\*\*(Deconstruct Requirements|Map Data|Draft|Section by Section)[\s\S]*?(?=###\s*(?:[1-9]\.\s*)?VISÃO|###\s*(?:[1-9]\.\s*)?TOP|$)/gi, '')
+    .trim();
+
+  // processedText para renderização de cards de texto (sem poluição de tags de gráfico)
+  let processedText = rawAiText
     .replace(/!\[\s*\[CHART:[\s\S]*?\]\]?/gi, '')
     .replace(/\[CHART:[\s\S]*?\]/gi, '')
     .replace(/\[GRAFICO:[\s\S]*?\]/gi, '')
     .trim();
-
-  let processedText = cleanText;
 
   // Helper para limpar markdown básico e remover ruídos de asteriscos/hifens soltos
   const formatMarkdown = (txt, strongClass = "text-slate-900 font-bold") => {
@@ -7962,7 +7964,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
   const chartTagRegex = /\[CHART:\s*(\{[\s\S]*?\})\s*\]([\s\S]*?)(?=(?:\[CHART:|$|###))/gi;
   let chartMatch;
   
-  while ((chartMatch = chartTagRegex.exec(cleanText)) !== null) {
+  while ((chartMatch = chartTagRegex.exec(rawAiText)) !== null) {
     try {
       const jsonContent = chartMatch[1].trim();
       const analysisText = (chartMatch[2] || "").trim();
