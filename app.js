@@ -6881,14 +6881,21 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       .replace(/\n/g, "<br/>");
   };
 
-  // Helper para extrair blocos de texto por títulos/marcadores com regex segura
+  // Helper para extrair blocos de texto por títulos/marcadores com regex super flexível
   const extractBlock = (fullText, startPattern, endPatterns) => {
     if (!fullText) return '';
     try {
       const endGroup = endPatterns.join('|');
-      const regex = new RegExp(`(?:###|####|\\*\\*|\\*|-)?\\s*(?:${startPattern}):?\\s*(?:\\*\\*)?([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-)?\\s*(?:${endGroup})|$)`, 'i');
+      // Procura por qualquer variação de título (com asterisco, traço, dois pontos, maiúsculo/minúsculo)
+      const regex = new RegExp(`(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${startPattern})\\s*(?:\\*\\*)?:?\\s*([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-|•)?\\s*(?:${endGroup})\\s*(?:\\*\\*)?:?|$)`, 'i');
       const match = fullText.match(regex);
-      return match ? match[1].trim() : '';
+      if (match && match[1]) {
+        let res = match[1].trim();
+        // Remove pontuações soltas no final
+        res = res.replace(/^[:\-\s]+/, '').trim();
+        if (res.length > 0) return res;
+      }
+      return '';
     } catch (e) {
       console.warn("Erro no regex extractBlock:", e);
       return '';
