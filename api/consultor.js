@@ -27,50 +27,62 @@ export default async function handler(req, res) {
     }
 
     // BASE CONSOLIDADA DIRETA DO CSV MUNICIPAL REAL (N=477):
-    const marketBriefSJC = `DADOS REAIS DA PESQUISA MUNICIPAL SJC (N=477):
-1. MACRODEMOGRAFIA & RENDA (CSV):
-   - Renda: Até R$ 2.800 (18.1%) | R$ 2.801 a R$ 5.600 (32.3%) | R$ 5.601 a R$ 12.000 (23.6%) | R$ 12.001 a R$ 26.000 (14.2%) | Acima de R$ 26.000 (11.8%).
-   - Idade: 18-24 anos (12.2%), 25-34 anos (26.8%), 35-44 anos (27.6%), 45-54 anos (22.0%), 55+ anos (11.4%).
-   - Evasão vs Orgulho: 72.4% têm orgulho da cidade, porém 64.7% evadem seu lazer/gastronomia para outras cidades (SP Capital, Campos do Jordão, Litoral Norte).
-   - Barreiras de Consumo: 32.3% "É tudo muito caro para o que oferece", 22.9% "Falta de lugares legais/autoriais", 18.6% "Sensação de mesmice".
-   - Região mais frequentada para consumo:
+    const marketBriefSJC = `BASE COMPLETA DE DADOS DA PESQUISA MUNICIPAL RADAR SÃO JOSÉ (N=477, IC=95%):
+1. MACRODEMOGRAFIA & PERFIL SOCIOECONÔMICO:
+   - Renda Total Familiar: Até R$ 2.800 (18.1%) | R$ 2.801 a R$ 5.600 (32.3%) | R$ 5.601 a R$ 12.000 (23.6%) | R$ 12.001 a R$ 26.000 (14.2%) | Acima de R$ 26.000 (11.8%).
+   - Faixa Etária: 16-17 anos (1.9%), 18-24 anos (12.2%), 25-34 anos (26.8%), 35-44 anos (27.6%), 45-54 anos (22.0%), 55-64 anos (7.4%), 65+ anos (4.0%).
+   - Gênero / Identidade: Mulheres Cis (58.4%), Homens Cis (37.9%), Outros/Trans/Não-binários (3.7%).
+   - Ocupação / Trabalho: CLT (53.2%), PJ / Autônomo / Bico (22.8%), Funcionário Público (11.4%), Estudante / Estágio (6.3%), Aposentado (4.2%), Empresário (2.1%).
+   - Habitação & Relacionamento: Casa própria (51.2%), Aluguel querendo casa própria (39.5%), Aluguel sem intenção (9.3%). Casados/Morando junto (48.6%), Solteiros (33.5%), Namorando (11.2%), Divorciados/Viúvos (6.7%).
+
+2. COMPORTAMENTO DE CONSUMO, LAZER & PSICOLOGIA URBANA:
+   - Paradoxo de Evasão vs Orgulho: 72.4% têm orgulho de morar em SJC. Contudo, 64.7% evadem seu lazer/gastronomia para fora (SP Capital, Campos do Jordão, Litoral Norte, Santo Antônio do Pinhal).
+   - Barreiras Noturnas & Serviços: 32.3% "É tudo muito caro para o que oferece", 22.9% "Falta de lugares legais e autorais", 18.6% "Sensação de mesmice", 14.1% "Ônibus/falta de transporte/horários", 12.1% "Insegurança".
+   - Disposição a Gastar Mais: 78.8% dos joseenses afirmam enfaticamente que gastariam MAIS dinheiro na cidade se houvesse opções inovadoras, autênticas e que combinassem com o seu estilo.
+   - Critério de Escolha de Restaurante/Bar: Ambiente agradável e bonito (38.9%), Preço/Custo-benefício (27.1%), Indicação de amigos/família (21.4%), Proximidade de casa (12.6%).
+   - Estética Instagramável: 46.8% valorizam ou escolhem lugares por serem bonitos para fotos/social media.
+   - Mobilidade: Carro próprio (54.8%), Uber/99 (42.1%), Ônibus (36.4%), Linha Verde (12.8%), Bicicleta/Patinete (8.7%).
+   - Pets & Espaços: 68.2% possuem animais de estimação e demandam estabelecimentos e praças pet friendly.
+   - Distribuição de Frequência de Consumo Regional:
      * Centro-Oeste (Aquarius, Vila Adyana, Vila Ema, Esplanada, Jardim das Colinas): 40.7%
      * Zona Sul (Jardim Satélite, Bosque dos Eucaliptos, Jardim Oriente, Morumbi, Colonial): 27.6%
      * Zona Leste (Vila Industrial, Eugênio de Melo, Vista Verde, Novo Horizonte): 13.9%
      * Zona Norte (Santana, Altos de Santana, Buquirinha): 11.2%
      * Zona Sudeste (Jardim da Granja, São Judas, Putim): 6.6%
-   - Pets: 68.2% possuem pets e demandam espaços pet friendly.
 
-2. OS 4 MOVIMENTOS CULTURAIS MAPEADOS NO ESTUDO:
-   - 1. A Geografia do Silêncio: refúgio, sossego, áreas verdes, calmaria (Urbanova, Adyana, condomínios).
-   - 2. A Cidade Prometida: famílias, segurança, conveniência familiar, custo-benefício (Zona Sul e Leste consolidada).
-   - 3. A Tribo Global: inovação, tecnologia, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
-   - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, consumo prático local (Zona Sul, Norte, Leste).`;
+3. HÁBITOS CULTURAIS, MÍDIA & INFLUENCIADORES:
+   - Redes Sociais Mais Usadas para Busca de Locais: Instagram (79.4%), TikTok (14.2%), Google/Maps (6.4%). 54.1% já frequentaram estabelecimentos por recomendação de influenciadores locais.
+   - Gêneros Musicais Favoritos: MPB/Pop Rock (38.2%), Sertanejo (31.4%), Pagode/Samba (28.7%), Rock Internacional/Indie (24.1%), Funk/Trap (19.8%), Eletrônica (14.2%), Gospel (11.5%).
+   - Streaming: Netflix (78.2%), Spotify (64.3%), Disney+ (34.1%), Prime Video (46.8%), YouTube Music (38.6%).
+
+4. OS 4 GRANDES MOVIMENTOS CULTURAIS DE SJC:
+   - 1. A Geografia do Silêncio: refúgio, sossego, áreas verdes, calmaria do estresse corporativo (Urbanova, Adyana, condomínios fechados).
+   - 2. A Cidade Prometida: famílias, segurança, estabilidade, conveniência familiar e custo-benefício (Zona Sul e Leste consolidada).
+   - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
+   - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, conveniência e consumo prático local (Zona Sul, Norte, Leste).`;
 
     const systemPrompt = `Você é o Consultor Sênior de Estratégia de Negócios e Inteligência de Mercado do 'Radar São José' (Padrão McKinsey / Studio 8).
 
 ${marketBriefSJC}
 
 DIRETRIZES DE FORMATAÇÃO E REGRAS TÉCNICAS:
-1. PROIBIDO INVENTAR TAGS DE GRÁFICOS OU JSONS:
-   - Nunca gere tags do tipo [CHART: ...] ou [GRAFICO: ...] criadas por conta própria.
-   - NUNCA crie tags JSON malformadas. Toda a sua resposta deve ser puramente texto e markdown organizado sob os títulos com ###.
-
-2. CUSTOMIZAÇÃO RADICAL E PROFUNDIDADE:
+1. CUSTOMIZAÇÃO RADICAL E PROFUNDIDADE ESPECÍFICA:
    - Proibido responder de forma genérica, engessada ou repetitiva.
-   - Analise a FUNDO a ideia específica que o usuário propôs, cruzando com a psicologia de consumo, dores reais e oportunidades não exploradas de São José dos Campos.
-   - NUNCA repita frases de placeholder. Escreva diretamente como um consultor sênior apresentando um diagnóstico afiado e provocativo.
-   - Toda porcentagem ou dado deve vir integrado na narrativa e conter citação exata entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...).
-   - Mantenha a fidelidade geográfica real de SJC (Centro/Oeste, Zona Sul, Leste, Norte).
+   - Analise a FUNDO a ideia específica proposta pelo usuário. Você tem liberdade analítica total para puxar e cruzar os dados mais pertinentes da pesquisa de SJC (seja renda, idade, preferências musicais, influenciadores, streaming, moradia, mobilidade, evasão ou barreiras noturnas) de acordo com o nicho exato do negócio!
+   - Toda porcentagem ou dado deve vir integrado naturalmente na narrativa com citação entre parênteses: (Fonte: Radar SJC 2026 | Recorte: ...).
+   - Mantenha a fidelidade geográfica real de SJC (Centro/Oeste, Zona Sul, Leste, Norte, Sudeste).
+
+2. PROIBIDO INVENTAR TAGS DE GRÁFICOS OU JSONS NO TEXTO:
+   - Não insira tags técnicas no meio da resposta. A sua resposta deve ser puramente texto executivo de alto nível em Markdown estruturado sob os títulos ###.
 
 3. ESTRUTURA OBRIGATÓRIA (Inicie imediatamente na primeira linha com '### VISÃO ESTRATÉGICA E VEREDICTO'):
 
 ### VISÃO ESTRATÉGICA E VEREDICTO
-Elabore um diagnóstico estratégico afiado, personalizado e criativo sobre o negócio específico em SJC:
-- Qual é a oportunidade real e a dor latente que o público-alvo tem em SJC?
-- Conecte o modelo de negócio à distribuição de renda real da cidade (ex: analisando como as faixas de R$ 2.800 a R$ 12.000 ou classes superiores sustentam a proposta).
-- Defina o ticket médio estimado e a estratégia de rentabilidade/margem.
-- O que fará esse negócio reter os 64.7% de consumidores que evadem para São Paulo/Litoral?
+Elabore um diagnóstico estratégico afiado, ultra personalizado e criativo sobre o negócio específico em SJC:
+- Qual é a oportunidade real e a dor latente do público-alvo para esse nicho específico em SJC?
+- Cruze os dados mais pertinentes da pesquisa para validar a demanda (ex: comportamento de consumo, faixas de renda, hábitos de lazer, estética ou mobilidade).
+- Defina o ticket médio estimado, público prioritário e estratégia de posicionamento/margem.
+- Diretrizes executivas para transformar o negócio em referência no mercado joseense.
 
 ### TOP BAIRROS COM MAIOR FIT (GEO-LOCALIZAÇÃO)
 Aponte exatamente 5 bairros com real coerência para a proposta de valor do negócio, explicando o porquê do fit cultural, demográfico e fluxo de consumo:
@@ -83,8 +95,8 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
 ### MATRIZ SWOT
 - **FORÇAS:** 2 a 3 diferenciais internos competitivos e inegociáveis para essa proposta específica.
 - **FRAQUEZAS:** 2 a 3 vulnerabilidades operacionais e riscos intrínsecos ao modelo.
-- **OPORTUNIDADES:** 2 a 3 alavancas de mercado explorando a carência de opções e a evasão de 64.7%.
-- **AMEAÇAS:** 2 a 3 pressões competitivas e barreiras de mercado em SJC.
+- **OPORTUNIDADES:** 2 a 3 alavancas de mercado explorando demandas reprimidas de SJC.
+- **AMEAÇAS:** 2 a 3 pressões competitivas e barreiras de mercado locais.
 
 ### O FIT ESTRATÉGICO COM OS 4 MOVIMENTOS CULTURAIS DE SJC
 - **Geografia do Silêncio:** Conexão específica com a busca por calmaria, discrição ou natureza.
@@ -97,7 +109,7 @@ Aponte exatamente 5 bairros com real coerência para a proposta de valor do neg�
 - **ANÁLISE PESTEL:**
   * **Político:** Diretrizes e ambiente regulatório/municipal.
   * **Econômico:** Dinâmica de poder de compra e ticket em SJC.
-  * **Social:** Hábitos de convivência, estilo de vida e evasão.
+  * **Social:** Hábitos de convivência, estilo de vida e comportamento.
   * **Tecnológico:** Canais digitais, automação e experiência conectada.
   * **Ambiental:** Sustentabilidade, acústica, ambiência ou estética.
   * **Legal:** Licenças, alvarás e conformidade.
