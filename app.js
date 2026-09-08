@@ -6927,7 +6927,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     };
   }
 
-  // Extrair o texto consolidado da Visão Estratégica
+  // Extrair e sanitizar o texto consolidado da Visão Estratégica
   let visaoTextoCorrido = "";
   if (data.visao_estrategica_texto && typeof data.visao_estrategica_texto === 'string') {
     visaoTextoCorrido = data.visao_estrategica_texto;
@@ -6944,8 +6944,29 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     }
   }
 
+  // Limpeza de segurança contra vazamento de chaves JSON ou escapes de barra invertida
+  if (visaoTextoCorrido) {
+    visaoTextoCorrido = String(visaoTextoCorrido)
+      .replace(/^(?:["']?\s*visao_estrategica_texto\s*["']?\s*[:=]\s*)/i, '')
+      .replace(/^(?:["']?\s*visao_estrategica\s*["']?\s*[:=]\s*)/i, '')
+      .replace(/\\"/g, '"')
+      .replace(/\\'/g, "'")
+      .replace(/\\/g, '')
+      .trim();
+  }
+
   if (!visaoTextoCorrido || visaoTextoCorrido.trim().length === 0) {
     visaoTextoCorrido = "Diagnóstico analítico estratégico e auditoria de viabilidade para São José dos Campos baseada nos microdados da pesquisa municipal.";
+  }
+
+  // Limpar verbalizacao_pesquisa também de chaves residuais e barras invertidas
+  if (data.verbalizacao_pesquisa) {
+    data.verbalizacao_pesquisa = String(data.verbalizacao_pesquisa)
+      .replace(/^(?:["']?\s*verbalizacao_pesquisa\s*["']?\s*[:=]\s*)/i, '')
+      .replace(/\\"/g, '"')
+      .replace(/\\'/g, "'")
+      .replace(/\\/g, '')
+      .trim();
   }
 
   // Garantir que nenhum outro campo de texto contenha JSON bruto serializado
@@ -6953,7 +6974,6 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   if (typeof data.matrizes_vrio_porter === 'object') data.matrizes_vrio_porter = JSON.stringify(data.matrizes_vrio_porter);
   if (typeof data.mix_marketing_oceano_azul === 'object') data.mix_marketing_oceano_azul = JSON.stringify(data.mix_marketing_oceano_azul);
   if (typeof data.zona_exclusao === 'object') data.zona_exclusao = JSON.stringify(data.zona_exclusao);
-  if (typeof data.verbalizacao_pesquisa === 'object') data.verbalizacao_pesquisa = JSON.stringify(data.verbalizacao_pesquisa);
 
   const dynamicChartsToRender = [];
 
@@ -6984,11 +7004,43 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     config: primaryChartConfig
   });
 
-  // Processamento dos Bairros
+  // Processamento e Normalização Robusta dos Bairros
+  console.log("Bairros recebidos:", data.bairros);
   let bairrosList = [];
-  if (Array.isArray(data.bairros) && data.bairros.length > 0) {
-    bairrosList = data.bairros;
+  const rawBairros = data.bairros || data.top_bairros || data.bairros_recomendados || data.microterritorios;
+
+  if (Array.isArray(rawBairros)) {
+    bairrosList = rawBairros;
+  } else if (typeof rawBairros === 'string' && rawBairros.trim()) {
+    try {
+      const parsed = JSON.parse(rawBairros);
+      if (Array.isArray(parsed)) bairrosList = parsed;
+    } catch (e) {
+      const lines = rawBairros.split(/\n+/).filter(l => l.trim().length > 3);
+      bairrosList = lines.map((l, i) => ({
+        nome: `Microterritório 0${i + 1}`,
+        regiao: "SJC",
+        justificativa: l
+      }));
+    }
+  } else if (rawBairros && typeof rawBairros === 'object') {
+    bairrosList = Object.values(rawBairros);
   }
+
+  bairrosList = bairrosList.filter(b => b && (typeof b === 'object' || typeof b === 'string')).map((b, idx) => {
+    if (typeof b === 'string') {
+      return {
+        nome: `Microterritório 0${idx + 1}`,
+        regiao: "SJC",
+        justificativa: String(b).replace(/\\/g, '').trim()
+      };
+    }
+    return {
+      nome: String(b.nome || b.bairro || b.bairro_nome || b.titulo || `Microterritório 0${idx + 1}`).replace(/\\/g, '').trim(),
+      regiao: String(b.regiao || b.macro_regiao || b.zona || "SJC").replace(/\\/g, '').trim(),
+      justificativa: String(b.justificativa || b.motivo || b.analise || b.fit || "").replace(/\\/g, '').trim()
+    };
+  });
 
   // Início da montagem do HTML
   let htmlOutput = `

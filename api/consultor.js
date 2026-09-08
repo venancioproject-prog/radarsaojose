@@ -66,17 +66,17 @@ export default async function handler(req, res) {
 ${marketBriefSJC}
 
 REGRAS DE OURO E TRAVAS ANALÍTICAS OBRIGATÓRIAS (FOCO NOS BLOCOS 1 E 2):
-1. FIM DA MULETA DO PARADOXO: É TERMINANTEMENTE PROIBIDO usar o argumento clichê de "tem orgulho, mas foge para a capital", a menos que a ideia seja EXCLUSIVAMENTE de lazer/vida noturna. Para qualquer outro negócio (lojas, clínicas, alimentação rápida, serviços, academia, moda, etc.), você DEVE garimpar o CSV em busca de ângulos inovadores, dores reais e carências não óbvias (ex: falta de locais pet-friendly 68.2%, valorização de estética 46.8%, demanda por ambiente acolhedor 38.9%, disposição a gastar mais 78.8%, canais de influência, mobilidade, etc.).
-2. RASTREABILIDADE TOTAL DE DADOS: Toda vez que você citar qualquer porcentagem no texto da 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE citar a pergunta de origem no formato exato: (Pergunta: "Texto da pergunta no CSV" - Radar SJC).
-3. TESE DE VIABILIDADE EM NEGRITO (**frase**): No campo 'visao_estrategica_texto', você DEVE incluir uma frase principal, impactante e definitiva em formato Markdown Negrito (**frase**) no meio do texto, resumindo a tese executiva.
-4. VERBALIZAÇÃO QUALITATIVA (VERBATIM): No campo 'verbalizacao_pesquisa', formule ou cite uma frase entre aspas simulando a voz real de um respondente da pesquisa que expresse a dor ou a demanda que este negócio vem suprir em SJC.
-5. FIT GEOGRÁFICO SEM ACHISMOS: No campo 'bairros', a justificativa de cada bairro DEVE ser estritamente baseada nos dados de renda, faixa etária, fluxo de consumo e fit com os Movimentos Culturais do CSV. Zero inferências genéricas.
+1. FIM DA MULETA DO PARADOXO: É TERMINANTEMENTE PROIBIDO usar o argumento clichê de 'tem orgulho, mas foge para a capital', a menos que a ideia seja EXCLUSIVAMENTE de lazer/vida noturna. Para qualquer outro negócio (lojas, clínicas, alimentação rápida, serviços, academia, moda, pet, etc.), você DEVE garimpar o CSV em busca de ângulos inovadores, dores reais e carências não óbvias (ex: falta de locais pet-friendly 68.2%, valorização de estética 46.8%, demanda por ambiente acolhedor 38.9%, disposição a gastar mais 78.8%, canais de influência, mobilidade, etc.).
+2. RASTREABILIDADE TOTAL DE DADOS: Toda vez que você citar qualquer porcentagem no texto da 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE citar a pergunta de origem usando ASPAS SIMPLES no formato exato: (Pergunta: 'Texto da pergunta no CSV' - Radar SJC). NUNCA use barras invertidas ou aspas duplas aninhadas.
+3. FORMATAÇÃO DA VISÃO ESTRATÉGICA: Na chave 'visao_estrategica_texto', envie APENAS o texto corrido. É PROIBIDO escrever o nome da chave ('visao_estrategica_texto :') dentro do valor. Inclua uma frase principal em formato Markdown Negrito (**frase**) no meio do texto, resumindo a tese executiva.
+4. VERBALIZAÇÃO QUALITATIVA (VERBATIM): No campo 'verbalizacao_pesquisa', envie uma citação direta entre aspas simulando a voz real de um respondente da pesquisa que expresse a dor ou a demanda que este negócio vem suprir em SJC.
+5. FIT GEOGRÁFICO E ARRAY DE BAIRROS: No campo 'bairros', retorne OBRIGATORIAMENTE um ARRAY DE OBJETOS com 5 bairros no formato: [{"nome": "Nome do Bairro", "regiao": "Zona X", "justificativa": "Análise técnica baseada no CSV..."}]. Zero inferências sem base.
 6. TÍTULO DO GRÁFICO DE VALIDAÇÃO: O título de 'grafico_validacao' DEVE conter a pergunta exata da pesquisa que valida a tese.
 7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
-  "visao_estrategica_texto": "Um parágrafo longo, INÉDITO, denso e profundo (aprox. 150 palavras) explorando o CSV. Proibido clichês de evasão caso o negócio não seja vida noturna. Toda porcentagem DEVE citar a pergunta no formato: (Pergunta: \"Texto da pergunta no CSV\" - Radar SJC). Deve conter uma frase principal em **negrito**. No final, faça referência aos dados do gráfico abaixo.",
+  "visao_estrategica_texto": "Texto corrido analítico profundo (aprox. 150 palavras) explorando o CSV. Proibido escrever o nome da chave aqui dentro. Toda porcentagem DEVE citar a pergunta com aspas simples: (Pergunta: 'Texto da pergunta' - Radar SJC). Deve conter uma frase principal em **negrito**. No final, faça referência aos dados do gráfico abaixo.",
   "grafico_validacao": {
     "titulo": "TÍTULO DO GRÁFICO (Obrigatório: Incluir a Pergunta Exata da Pesquisa)",
     "type": "bar",
