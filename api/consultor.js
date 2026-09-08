@@ -138,7 +138,7 @@ Toda estatística deve conter entre parênteses: (Fonte: Radar SJC 2026 | Recort
       console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
     }
 
-    // 2. Chamada de Chat Completions com limite de 900 tokens (OTPM seguro)
+    // 2. Chamada de Chat Completions com limite seguro de 500 tokens
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -147,7 +147,7 @@ Toda estatística deve conter entre parênteses: (Fonte: Radar SJC 2026 | Recort
       },
       body: JSON.stringify({
         model: selectedModel,
-        max_tokens: 900, 
+        max_tokens: 500, 
         temperature: 0.4,
         messages: [
           {
