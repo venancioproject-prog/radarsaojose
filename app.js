@@ -7095,53 +7095,47 @@ window.renderExecutiveReport = function(topic, text, customDate) {
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <!-- BLOCO ESQUERDO: FORÇAS E OPORTUNIDADES -->
-            <div class="space-y-5">
-              <!-- FORÇAS -->
-              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
-                <div class="flex items-center gap-2 text-emerald-700 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                  <i class="fa-solid fa-shield-halved text-emerald-600"></i>
-                  <span>FORÇAS (Diferenciais Internos)</span>
-                </div>
-                <div class="text-xs text-slate-700 space-y-1">
-                  ${formatMarkdown(forcas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
-                </div>
+            <!-- 1. FORÇAS -->
+            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
+              <div class="flex items-center gap-2 text-emerald-700 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
+                <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                <span>FORÇAS (DIFERENCIAIS INTERNOS)</span>
               </div>
-
-              <!-- OPORTUNIDADES -->
-              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
-                <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                  <i class="fa-solid fa-arrow-trend-up text-sky-600"></i>
-                  <span>OPORTUNIDADES (Mercado & Alavancas)</span>
-                </div>
-                <div class="text-xs text-slate-700 space-y-1">
-                  ${formatMarkdown(oportunidades) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
-                </div>
+              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
+                ${formatMarkdown(forcas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
               </div>
             </div>
 
-            <!-- BLOCO DIREITO: FRAQUEZAS E AMEAÇAS -->
-            <div class="space-y-5">
-              <!-- FRAQUEZAS -->
-              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
-                <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                  <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
-                  <span>FRAQUEZAS (Gargalos & Vulnerabilidades)</span>
-                </div>
-                <div class="text-xs text-slate-700 space-y-1">
-                  ${formatMarkdown(fraquezas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
-                </div>
+            <!-- 2. FRAQUEZAS -->
+            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
+              <div class="flex items-center gap-2 text-amber-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                <span>FRAQUEZAS (GARGALOS & VULNERABILIDADES)</span>
               </div>
+              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
+                ${formatMarkdown(fraquezas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
+              </div>
+            </div>
 
-              <!-- AMEAÇAS -->
-              <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5">
-                <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
-                  <i class="fa-solid fa-circle-radiation text-rose-600"></i>
-                  <span>AMEAÇAS (Riscos & Pressões Externas)</span>
-                </div>
-                <div class="text-xs text-slate-700 space-y-1">
-                  ${formatMarkdown(ameacas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
-                </div>
+            <!-- 3. OPORTUNIDADES -->
+            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
+              <div class="flex items-center gap-2 text-sky-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
+                <i class="fa-solid fa-arrow-trend-up text-sky-600"></i>
+                <span>OPORTUNIDADES (MERCADO & ALAVANCAS)</span>
+              </div>
+              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
+                ${formatMarkdown(oportunidades) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
+              </div>
+            </div>
+
+            <!-- 4. AMEAÇAS -->
+            <div class="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-start">
+              <div class="flex items-center gap-2 text-rose-800 font-black text-xs uppercase tracking-wider pb-1.5 border-b border-slate-200/70">
+                <i class="fa-solid fa-circle-radiation text-rose-600"></i>
+                <span>AMEAÇAS (RISCOS & PRESSÕES EXTERNAS)</span>
+              </div>
+              <div class="text-xs text-slate-700 space-y-1.5 flex-1">
+                ${formatMarkdown(ameacas) || '<p class="text-slate-400 italic">Nenhum ponto registrado.</p>'}
               </div>
             </div>
           </div>
