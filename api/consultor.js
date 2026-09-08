@@ -117,6 +117,16 @@ Distribua exatamente 3 tags de gráficos dinâmicos no formato JSON em uma únic
 [CHART: {"type": "bar|doughnut|pie|line", "title": "Título do Indicador Analítico", "labels": ["Label1", "Label2", "Label3"], "data": [40.7, 27.6, 31.7]}]
 Use apenas porcentagens reais extraídas do contexto de SJC.
 
+**DIRETRIZ DE CITAÇÃO DE DADOS (CRÍTICO & OBRIGATÓRIO):**
+Toda vez que você citar qualquer número, porcentagem, estatística ou constatação de mercado, você DEVE OBRIGATORIAMENTE colocar entre parênteses a fonte exata e o recorte demográfico/geográfico correspondente.
+Exemplos obrigatórios de formatação:
+- (Fonte: Radar SJC 2026 | Recorte: População Geral, N=476, IC=95%)
+- (Fonte: Radar SJC 2026 | Recorte: Faixa Etária 35-54 anos, 49.6% da base)
+- (Fonte: Radar SJC 2026 | Recorte: Região Centro-Oeste / Aquarius / Adyana)
+- (Fonte: Radar SJC 2026 | Recorte: Evasão de Lazer para SP/Litoral)
+- (Fonte: IBGE Censo 2022 / Radar SJC | Recorte: Idade Mediana 36 anos, 2.8 hab/domicílio)
+- (Fonte: Radar SJC 2026 | Recorte: Renda Familiar Classe A/B > R$ 7k)
+
 **DIRETRIZ DE FORMATOS:**
 Escreva em tom executivo de alto nível, limpo, analítico e direto (Padrão Studio 8 / McKinsey), sem introduções robóticas.`;
 
