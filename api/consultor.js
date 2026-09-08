@@ -90,10 +90,14 @@ Gere o relatório completo formatado em Markdown, seguindo RIGOROSAMENTE a estru
 - **Estratégia Oceano Azul:** O que a empresa deve **Eliminar, Elevar, Reduzir e Criar** para se distanciar da concorrência tradicional.
 
 ---
-**DIRETRIZ OBRIGATÓRIA DE VISUALIZAÇÃO DE DADOS (GRÁFICOS):**
-Para garantir o dinamismo do painel executivo, você DEVE inserir obrigatoriamente **2 tags de gráficos** em locais estratégicos do texto (como na Visão Geral ou na SWOT). Utilize rigorosamente o formato de tag limpo: [GRAFICO: NOME_DO_DADO]. Escolha apenas entre as opções suportadas pelo sistema: [GRAFICO: IDADE], [GRAFICO: RENDA] ou [GRAFICO: REGIAO]. Não invente outros nomes de tags.`;
+**AUTONOMIA DINÂMICA DE GRÁFICOS (CRÍTICO):**
+Você tem autonomia total para decidir quais são os **3 MELHORES gráficos e recortes analíticos** para embasar esta auditoria específica.
+Distribua exatamente 3 tags de gráficos dinâmicos ao longo do relatório (ex: na Visão Estratégica, SWOT ou Mercado).
+Gere cada tag no formato JSON exato em uma única linha:
+[CHART: {"type": "bar|doughnut|pie|line", "title": "Título do Indicador Analítico", "labels": ["Label1", "Label2", "Label3"], "data": [40.7, 27.6, 31.7]}]
+Use apenas dados e porcentagens reais baseadas no contexto de SJC (ex: faixas de renda, regiões, faixas etárias, hábitos de evasão, mobilidade, etc).`;
 
-    // 1. AUTO-DESCOBERTA DINÂMICA DA SUA CONTA GROQ
+    // 1. Auto-descoberta dinâmica de modelo ativo na conta Groq
     let selectedModel = 'qwen/qwen3.8-27b';
     try {
       const modelsResp = await fetch('https://api.groq.com/openai/v1/models', {
@@ -105,9 +109,6 @@ Para garantir o dinamismo do painel executivo, você DEVE inserir obrigatoriamen
           .map(m => m.id)
           .filter(id => !id.includes('guard') && !id.includes('whisper') && !id.includes('embed'));
         
-        console.log('[Consultor IA] Modelos ativos liberados na Groq:', available);
-
-        // Escolhe o melhor modelo de chat disponível na sua chave
         const best = [
           available.find(id => id.includes('qwen')),
           available.find(id => id.includes('llama') && id.includes('70b')),
@@ -118,14 +119,14 @@ Para garantir o dinamismo do painel executivo, você DEVE inserir obrigatoriamen
 
         if (best.length > 0) {
           selectedModel = best[0];
-          console.log('[Consultor IA] Modelo eleito:', selectedModel);
+          console.log('[Consultor IA] Modelo selecionado:', selectedModel);
         }
       }
     } catch (eList) {
-      console.warn('[Consultor IA] Falha ao consultar /models:', eList.message);
+      console.warn('[Consultor IA] Falha ao listar /models:', eList.message);
     }
 
-    // 2. CHAMADA COM O MODELO QUE SUA CHAVE REALMENTE TEM ACESSO (max_tokens: 800 para respeitar rate limit)
+    // 2. Chamada de Chat Completions com limite de 1000 tokens para segurança do free tier
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -134,7 +135,7 @@ Para garantir o dinamismo do painel executivo, você DEVE inserir obrigatoriamen
       },
       body: JSON.stringify({
         model: selectedModel,
-        max_tokens: 800, 
+        max_tokens: 1000, 
         temperature: 0.5,
         messages: [
           {

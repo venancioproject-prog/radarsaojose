@@ -6632,77 +6632,76 @@ window.appendChatMessage = function(role, text) {
   const container = document.getElementById("consultor-chat-messages");
   if (!container) return;
 
-  // Renderizador de Gráficos Visuais Embutidos
-  const renderGraficoTag = (match, p1) => {
+  const dynamicChartsToRender = [];
+
+  // Parser Dinâmico de Tags de Gráficos [CHART: {...}]
+  const renderDynamicChartTag = (match, jsonStr) => {
+    try {
+      const cleanJson = jsonStr.trim();
+      const chartConfig = JSON.parse(cleanJson);
+      const chartId = "dynamic-chart-" + Math.random().toString(36).substr(2, 9);
+
+      dynamicChartsToRender.push({
+        id: chartId,
+        config: chartConfig
+      });
+
+      return `
+        <div class="my-4 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-100">
+            <span class="text-xs font-black uppercase tracking-wider text-brand-900 flex items-center gap-2">
+              <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
+              ${chartConfig.title || "Indicador Analítico (SJC)"}
+            </span>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-brand-50 text-brand-700">Radar SJC</span>
+          </div>
+          <div class="relative w-full h-56">
+            <canvas id="${chartId}"></canvas>
+          </div>
+        </div>
+      `;
+    } catch (e) {
+      console.warn("Falha ao analisar JSON da tag [CHART]:", jsonStr, e);
+      return "";
+    }
+  };
+
+  // Suporte legado para [GRAFICO: ...]
+  const renderLegacyGraficoTag = (match, p1) => {
     const tag = p1.trim().toUpperCase();
     if (tag === "IDADE") {
-      return `
-        <div class="my-3 p-3.5 bg-white rounded-xl border border-brand-200 shadow-2xs">
-          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
-            <span class="text-[10px] font-black uppercase text-brand-900 flex items-center gap-1.5">
-              <i class="fa-solid fa-chart-simple text-accent-cyan"></i> Radiografia Etária (SJC)
-            </span>
-            <span class="text-[9px] font-bold text-slate-400">Março 2026</span>
-          </div>
-          <div class="space-y-1.5 text-[11px] font-semibold text-slate-700">
-            <div class="flex justify-between items-center"><span>35 a 44 anos (Maturidade)</span><span class="font-bold text-brand-900">27.6%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-brand-600 h-full rounded-full" style="width: 27.6%"></div></div>
-            <div class="flex justify-between items-center"><span>25 a 34 anos (Jovens Profissionais)</span><span class="font-bold text-brand-900">26.8%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-accent-cyan h-full rounded-full" style="width: 26.8%"></div></div>
-            <div class="flex justify-between items-center"><span>45 a 54 anos (Consolidados)</span><span class="font-bold text-brand-900">22.0%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-brand-900 h-full rounded-full" style="width: 22.0%"></div></div>
-          </div>
-        </div>
-      `;
+      return renderDynamicChartTag("", JSON.stringify({
+        type: "bar",
+        title: "Radiografia Etária de São José dos Campos",
+        labels: ["18-24 anos", "25-34 anos", "35-44 anos", "45-54 anos", "55+ anos"],
+        data: [12.2, 26.8, 27.6, 22.0, 11.4]
+      }));
     } else if (tag === "RENDA") {
-      return `
-        <div class="my-3 p-3.5 bg-white rounded-xl border border-emerald-200 shadow-2xs">
-          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
-            <span class="text-[10px] font-black uppercase text-emerald-900 flex items-center gap-1.5">
-              <i class="fa-solid fa-money-bill-trend-up text-emerald-600"></i> Distribuição de Renda Familiar
-            </span>
-            <span class="text-[9px] font-bold text-slate-400">Poder de Compra</span>
-          </div>
-          <div class="space-y-1.5 text-[11px] font-semibold text-slate-700">
-            <div class="flex justify-between items-center"><span>R$ 2.800 a R$ 7.000 (Classe Média)</span><span class="font-bold text-emerald-800">32.3%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-emerald-500 h-full rounded-full" style="width: 32.3%"></div></div>
-            <div class="flex justify-between items-center"><span>R$ 7.000 a R$ 15.000 (Classe Média Alta)</span><span class="font-bold text-emerald-800">23.6%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-emerald-600 h-full rounded-full" style="width: 23.6%"></div></div>
-            <div class="flex justify-between items-center"><span>Mais de R$ 15.000 (Alta Renda)</span><span class="font-bold text-emerald-800">18.1%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-emerald-800 h-full rounded-full" style="width: 18.1%"></div></div>
-          </div>
-        </div>
-      `;
+      return renderDynamicChartTag("", JSON.stringify({
+        type: "bar",
+        title: "Distribuição de Renda Familiar em SJC",
+        labels: ["Até R$ 2.8k", "R$ 2.8k-7k", "R$ 7k-15k", "R$ 15k-26k", "Mais de R$ 26k"],
+        data: [18.1, 32.3, 23.6, 14.2, 11.8]
+      }));
     } else if (tag === "REGIAO") {
-      return `
-        <div class="my-3 p-3.5 bg-white rounded-xl border border-amber-200 shadow-2xs">
-          <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-100">
-            <span class="text-[10px] font-black uppercase text-amber-900 flex items-center gap-1.5">
-              <i class="fa-solid fa-map-location-dot text-amber-600"></i> Frequência de Consumo por Região
-            </span>
-            <span class="text-[9px] font-bold text-slate-400">Concentração Urbana</span>
-          </div>
-          <div class="space-y-1.5 text-[11px] font-semibold text-slate-700">
-            <div class="flex justify-between items-center"><span>Centro-Oeste (Aquarius/Adyana)</span><span class="font-bold text-amber-900">40.7%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-amber-500 h-full rounded-full" style="width: 40.7%"></div></div>
-            <div class="flex justify-between items-center"><span>Zona Sul (Polo Autossuficiente)</span><span class="font-bold text-amber-900">27.6%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-amber-600 h-full rounded-full" style="width: 27.6%"></div></div>
-            <div class="flex justify-between items-center"><span>Zona Leste & Outras</span><span class="font-bold text-amber-900">31.7%</span></div>
-            <div class="w-full bg-slate-100 h-1.5 rounded-full"><div class="bg-slate-400 h-full rounded-full" style="width: 31.7%"></div></div>
-          </div>
-        </div>
-      `;
+      return renderDynamicChartTag("", JSON.stringify({
+        type: "doughnut",
+        title: "Frequência de Consumo por Região de SJC",
+        labels: ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Sudeste"],
+        data: [40.7, 27.6, 13.9, 11.2, 6.6]
+      }));
     }
     return "";
   };
 
-  // Formatação rica de markdown (títulos, negrito, listas e tags de gráficos)
-  const formattedText = text
-    .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderGraficoTag)
-    .replace(/^### (.*$)/gim, "<h4 class='text-xs font-black uppercase text-brand-900 tracking-wider mt-3 mb-1 border-b border-slate-200 pb-1'>$1</h4>")
+  // Formatação rica de markdown
+  let formattedText = text
+    .replace(/\[CHART:\s*(\{.*?\})\]/gis, renderDynamicChartTag)
+    .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag)
+    .replace(/^### (.*$)/gim, "<h4 class='text-xs font-black uppercase text-brand-900 tracking-wider mt-3 mb-1.5 border-b border-slate-200 pb-1'>$1</h4>")
     .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
-    .replace(/^-\s(.*)$/gim, "<li class='ml-3.5 list-disc text-slate-700'>$1</li>")
-    .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-3.5 list-decimal text-slate-700'>$1</li>")
+    .replace(/^-\s(.*)$/gim, "<li class='ml-3.5 list-disc text-slate-700 font-medium'>$1</li>")
+    .replace(/^\d+\.\s(.*)$/gim, "<li class='ml-3.5 list-decimal text-slate-700 font-medium'>$1</li>")
     .replace(/\n/g, "<br/>");
 
   let bubbleHtml = "";
@@ -6720,7 +6719,7 @@ window.appendChatMessage = function(role, text) {
         <div class="w-7 h-7 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center shrink-0 text-xs font-bold shadow-inner">
           <i class="fa-solid fa-brain"></i>
         </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 space-y-2 max-w-[92%] leading-relaxed">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-slate-800 space-y-2 max-w-[94%] leading-relaxed">
           <div class="prose prose-xs text-slate-800 font-medium">${formattedText}</div>
         </div>
       </div>
@@ -6729,4 +6728,61 @@ window.appendChatMessage = function(role, text) {
 
   container.insertAdjacentHTML("beforeend", bubbleHtml);
   container.scrollTop = container.scrollHeight;
+
+  // Instanciar os gráficos Chart.js dinamicamente criados
+  setTimeout(() => {
+    dynamicChartsToRender.forEach(item => {
+      const canvas = document.getElementById(item.id);
+      if (!canvas || !window.Chart) return;
+
+      const cfg = item.config;
+      const chartType = cfg.type === "pie" || cfg.type === "doughnut" ? "doughnut" : (cfg.type === "line" ? "line" : "bar");
+
+      const defaultColors = [
+        "#0B2545", "#00B4D8", "#10B981", "#F59E0B", "#F43F5E",
+        "#8B5CF6", "#06B6D4", "#3B82F6", "#64748B"
+      ];
+
+      const bgColors = chartType === "doughnut" ? defaultColors : "#0B2545";
+
+      try {
+        new Chart(canvas.getContext("2d"), {
+          type: chartType,
+          data: {
+            labels: cfg.labels || [],
+            datasets: [{
+              label: cfg.title || "Indicador",
+              data: cfg.data || [],
+              backgroundColor: bgColors,
+              borderRadius: chartType === "bar" ? 6 : 0
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: chartType === "doughnut",
+                position: "bottom",
+                labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 10 }
+              },
+              datalabels: {
+                color: chartType === "doughnut" ? "#FFFFFF" : "#0B2545",
+                font: { family: "Montserrat", size: 10, weight: "bold" },
+                anchor: chartType === "doughnut" ? "center" : "end",
+                align: chartType === "doughnut" ? "center" : "top",
+                formatter: (val) => val + "%"
+              }
+            },
+            scales: chartType === "doughnut" ? {} : {
+              y: { beginAtZero: true, grid: { color: "#F1F5F9" }, ticks: { font: { family: "Montserrat", size: 10 } } },
+              x: { grid: { display: false }, ticks: { font: { family: "Montserrat", size: 10, weight: "bold" } } }
+            }
+          }
+        });
+      } catch (errChart) {
+        console.error("Erro ao instanciar Chart.js dinâmico:", errChart);
+      }
+    });
+  }, 100);
 };
