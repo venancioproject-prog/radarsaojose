@@ -7047,8 +7047,23 @@ window.renderExecutiveReport = function(topic, text, customDate) {
                 </span>
               </div>
 
-              <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-1.5">
-                ${formatMarkdown(bairrosContent || 'Análise de microterritórios prioritários com base em densidade de renda e fluxo de consumo em São José dos Campos.')}
+              <div class="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed space-y-3 pt-1">
+                ${(() => {
+                  if (!bairrosContent) return 'Análise de microterritórios prioritários com base em densidade de renda e fluxo de consumo em São José dos Campos.';
+                  
+                  // Se os itens de bairros estão em lista com traço ou quebra de linha simples, separar em blocos individuais
+                  let items = bairrosContent.split(/\n+/).map(l => l.trim()).filter(l => l.length > 5 && !l.startsWith('###') && l !== '--');
+                  
+                  if (items.length > 0) {
+                    return items.map(item => `
+                      <div class="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 shadow-2xs leading-relaxed">
+                        ${formatMarkdown(item)}
+                      </div>
+                    `).join('');
+                  }
+                  
+                  return formatMarkdown(bairrosContent);
+                })()}
               </div>
             </div>
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
