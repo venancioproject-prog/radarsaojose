@@ -6883,7 +6883,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     .replace(/\[GRAFICO:\s*([A-Z_]+)\]/gi, renderLegacyGraficoTag);
 
   // Helper para limpar markdown básico e remover ruídos de asteriscos/hifens soltos
-  const formatMarkdown = (txt) => {
+  const formatMarkdown = (txt, strongClass = "text-slate-900 font-bold") => {
     if (!txt) return "";
     let clean = txt
       // Remover tags e prefixos residuais de asteriscos no início das linhas ou frases
@@ -6892,7 +6892,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       .replace(/\*\*:\s*/g, ": ")
       .replace(/\*\*\s*\*\*/g, "")
       // Formatar negrito real (texto entre asteriscos duplos)
-      .replace(/\*\*(.*?)\*\*/g, "<strong class='text-slate-900 font-bold'>$1</strong>")
+      .replace(/\*\*(.*?)\*\*/g, `<strong class='${strongClass}'>$1</strong>`)
       // Formatar listas
       .replace(/^[\*\-•]\s+(.*)$/gim, "<li class='ml-4 list-disc text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
       .replace(/^\d+\.\s+(.*)$/gim, "<li class='ml-4 list-decimal text-slate-700 font-medium leading-relaxed my-1'>$1</li>")
@@ -6903,7 +6903,7 @@ window.renderExecutiveReport = function(topic, text, customDate) {
     return clean
       .replace(/<br\/>\s*<br\/>/g, "<div class='my-2.5'></div>")
       .replace(/^\s*<br\/>/g, "")
-      .replace(/<strong class='text-slate-900 font-bold'><\/strong>/g, "")
+      .replace(/<strong class='[^']*'><\/strong>/g, "")
       .replace(/:\s*<br\/>/g, ": ")
       .trim();
   };
@@ -7681,8 +7681,8 @@ window.renderExecutiveReport = function(topic, text, customDate) {
               <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-400">
                 O VEREDICTO DO MOVIMENTO DOMINANTE
               </span>
-              <div class="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
-                ${formatMarkdown(veredictoMov || 'Identificação do movimento cultural prioritário para posicionamento competitivo e captura de margem em São José dos Campos.')}
+              <div class="text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">
+                ${formatMarkdown(veredictoMov || 'Identificação do movimento cultural prioritário para posicionamento competitivo e captura de margem em São José dos Campos.', 'text-white font-black underline decoration-purple-400 underline-offset-2')}
               </div>
             </div>
           </div>
