@@ -6881,12 +6881,18 @@ window.renderExecutiveReport = function(topic, text, customDate) {
       .replace(/\n/g, "<br/>");
   };
 
-  // Helper para extrair blocos de texto por títulos/marcadores
+  // Helper para extrair blocos de texto por títulos/marcadores com regex segura
   const extractBlock = (fullText, startPattern, endPatterns) => {
-    const endGroup = endPatterns.join('|');
-    const regex = new RegExp(`(?:###|####|\*\*|\*|-)?\s*${startPattern}:?\s*(?:\*\*)?([\s\S]*?)(?=(?:###|####|\*\*|\*|-)?\s*(?:${endGroup})|$)`, 'i');
-    const match = fullText.match(regex);
-    return match ? match[1].trim() : '';
+    if (!fullText) return '';
+    try {
+      const endGroup = endPatterns.join('|');
+      const regex = new RegExp(`(?:###|####|\\*\\*|\\*|-)?\\s*(?:${startPattern}):?\\s*(?:\\*\\*)?([\\s\\S]*?)(?=(?:###|####|\\*\\*|\\*|-)?\\s*(?:${endGroup})|$)`, 'i');
+      const match = fullText.match(regex);
+      return match ? match[1].trim() : '';
+    } catch (e) {
+      console.warn("Erro no regex extractBlock:", e);
+      return '';
+    }
   };
 
   // Dividir por seções principais H3
