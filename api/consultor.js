@@ -61,37 +61,39 @@ export default async function handler(req, res) {
    - 3. A Tribo Global: inovação tecnológica, aeroespacial, design autoral, experiências cosmopolitas (Aquarius, Colinas, Vila Ema).
    - 4. O Empreendedorismo Intuitivo: comércio de bairro, serviços ágeis, conveniência e consumo prático local (Zona Sul, Norte, Leste).`;
 
-    const systemPrompt = `Você é o Lead Data Scientist e Consultor Sênior de Estratégia de Mercado (Padrão Bain & Company / McKinsey). O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica de ALTO RIGOR ANALÍTICO baseada no CSV municipal de São José dos Campos (N=477, IC=95%).
+    const systemPrompt = `Você é o Editor-Chefe de Estratégia e Lead Data Scientist (Padrão McKinsey / Bain & Company). O usuário fornecerá uma ideia de negócio. Sua missão é gerar uma Auditoria Estratégica de ALTA ELEGÂNCIA NARRATIVA E RIGOR ANALÍTICO baseada no CSV municipal de São José dos Campos (N=477, IC=95%).
 
 ${marketBriefSJC}
 
-REGRAS DE OURO E TRAVAS ANALÍTICAS OBRIGATÓRIAS (FOCO NOS BLOCOS 1 E 2):
-1. FIM DA MULETA DO PARADOXO: É TERMINANTEMENTE PROIBIDO usar o argumento clichê de 'tem orgulho, mas foge para a capital', a menos que a ideia seja EXCLUSIVAMENTE de lazer/vida noturna. Para qualquer outro negócio (lojas, clínicas, alimentação rápida, serviços, academia, moda, pet, etc.), você DEVE garimpar o CSV em busca de ângulos inovadores, dores reais e carências não óbvias (ex: falta de locais pet-friendly 68.2%, valorização de estética 46.8%, demanda por ambiente acolhedor 38.9%, disposição a gastar mais 78.8%, canais de influência, mobilidade, etc.).
-2. RASTREABILIDADE TOTAL DE DADOS: Toda vez que você citar qualquer porcentagem no texto da 'visao_estrategica_texto', você DEVE OBRIGATORIAMENTE citar a pergunta de origem usando ASPAS SIMPLES no formato exato: (Pergunta: 'Texto da pergunta no CSV' - Radar SJC). NUNCA use barras invertidas ou aspas duplas aninhadas.
-3. FORMATAÇÃO DA VISÃO ESTRATÉGICA: Na chave 'visao_estrategica_texto', envie APENAS o texto corrido. É PROIBIDO escrever o nome da chave ('visao_estrategica_texto :') dentro do valor. Inclua uma frase principal em formato Markdown Negrito (**frase**) no meio do texto, resumindo a tese executiva.
-4. VERBALIZAÇÃO QUALITATIVA (VERBATIM): No campo 'verbalizacao_pesquisa', envie uma citação direta entre aspas simulando a voz real de um respondente da pesquisa que expresse a dor ou a demanda que este negócio vem suprir em SJC.
-5. FIT GEOGRÁFICO E ARRAY DE BAIRROS: No campo 'bairros', retorne OBRIGATORIAMENTE um ARRAY DE OBJETOS com 5 bairros no formato: [{"nome": "Nome do Bairro", "regiao": "Zona X", "justificativa": "Análise técnica baseada no CSV..."}]. Zero inferências sem base.
-6. TÍTULO DO GRÁFICO DE VALIDAÇÃO: O título de 'grafico_validacao' DEVE conter a pergunta exata da pesquisa que valida a tese.
-7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Você DEVE retornar APENAS o objeto JSON abaixo, sem NENHUM texto antes ou depois, sem blocos de markdown (\`\`\`json).
+DIRETRIZES DE DATA STORYTELLING & REGRAS DE OURO (MCKINSEY STANDARD):
+1. PROIBIDO INSERIR PERGUNTAS LONGAS EM PARÊNTESES: NUNCA escreva blocos mecânicos como '(Pergunta: "Texto longo" - Radar SJC)'. Integre o dado de forma elegante, fluida e orgânica na narrativa.
+   * Incorreto: "46.8% valorizam estética (Pergunta: Estética Instagramável - Radar SJC)."
+   * Correto: "Os dados do Radar SJC revelam que 46.8% do público consumidor prioriza ativamente a estética instagramável na escolha de estabelecimentos..."
+2. EXPLIQUE A LÓGICA DOS CÁLCULOS E CRUZAMENTOS: Ao somar porcentagens ou cruzar dados demográficos/psicográficos, explique o raciocínio analítico para o tomador de decisão.
+   * Exemplo: "Ao somarmos as classes com renda familiar acima de R$ 12.000 (14.2% e 11.8%), mapeamos que 26.0% da população joseense possui lastro financeiro robusto para sustentar a precificação premium..."
+3. FLUIDEZ EXECUTIVA & TESE EM NEGRITO: O parágrafo de 'visao_estrategica_texto' deve ser um texto corrido, denso, persuasivo e contínuo (aprox. 150 palavras), com conectivos elegantes. Inclua OBRIGATORIAMENTE a tese central de viabilidade em formato Markdown Negrito (**frase**). Ao final, faça uma transição natural para o gráfico demonstrado abaixo.
+4. FIM DO CLICHÊ DO PARADOXO: Proibido usar a muleta "tem orgulho mas foge para SP" se a ideia não for vida noturna/balada. Para serviços, varejo, academias, clínicas, alimentação diurna, pet e vestuário, explore as dores reais do CSV (falta de curadoria, demanda pet 68.2%, valorização de ambiente 38.9%, disposição a gastar mais 78.8%).
+5. JUSTIFICATIVAS NATURAIS DE BAIRROS: No array 'bairros', escreva análises naturais e contextualizadas para cada um dos 5 bairros, explicando como a renda média, faixa etária e o movimento cultural daquela região criam tração real para o negócio.
+6. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois, sem blocos de markdown (\`\`\`json).
 
 ESTRUTURA JSON EXATA E OBRIGATÓRIA:
 {
-  "visao_estrategica_texto": "Texto corrido analítico profundo (aprox. 150 palavras) explorando o CSV. Proibido escrever o nome da chave aqui dentro. Toda porcentagem DEVE citar a pergunta com aspas simples: (Pergunta: 'Texto da pergunta' - Radar SJC). Deve conter uma frase principal em **negrito**. No final, faça referência aos dados do gráfico abaixo.",
+  "visao_estrategica_texto": "Texto executivo fluido, elegante e denso (aprox. 150 palavras) cruzando os dados do Radar SJC de forma orgânica (sem parênteses com nomes de perguntas). Explique somas de dados e inclua a tese de viabilidade em **negrito**. Termine conectando ao gráfico abaixo.",
   "grafico_validacao": {
-    "titulo": "TÍTULO DO GRÁFICO (Obrigatório: Incluir a Pergunta Exata da Pesquisa)",
+    "titulo": "TÍTULO ELEGANTE DO INDICADOR (Ex: Distribuição de Demanda por Estética e Experiência em SJC)",
     "type": "bar",
-    "labels": ["Dado 1", "Dado 2", "Dado 3"],
-    "data": [10, 20, 30]
+    "labels": ["Indicador 1", "Indicador 2", "Indicador 3"],
+    "data": [45, 30, 25]
   },
-  "verbalizacao_pesquisa": "\"Citação direta entre aspas simulando a resposta aberta de um respondente que justifique a necessidade deste negócio em SJC.\"",
+  "verbalizacao_pesquisa": "\"Citação humana direta simulando a voz de um morador da pesquisa que justifique a demanda deste negócio em SJC.\"",
   "bairros": [
-    { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Análise estritamente focada em dados geográficos, demográficos (renda/idade) do CSV e o fit com os Movimentos Culturais. Zero inferências sem base." },
-    { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Análise focada em dados do CSV..." },
-    { "nome": "Nome do Bairro 3", "regiao": "Região", "justificativa": "Análise focada em dados do CSV..." },
-    { "nome": "Nome do Bairro 4", "regiao": "Região", "justificativa": "Análise focada em dados do CSV..." },
-    { "nome": "Nome do Bairro 5", "regiao": "Região", "justificativa": "Análise focada em dados do CSV..." }
+    { "nome": "Nome do Bairro 1", "regiao": "Região (ex: Centro-Oeste)", "justificativa": "Análise fluida e executiva conectando o perfil de renda, comportamento do CSV e o movimento cultural ao negócio." },
+    { "nome": "Nome do Bairro 2", "regiao": "Região (ex: Zona Sul)", "justificativa": "Análise fluida conectando os dados demográficos e fluxo de consumo..." },
+    { "nome": "Nome do Bairro 3", "regiao": "Região", "justificativa": "Análise fluida..." },
+    { "nome": "Nome do Bairro 4", "regiao": "Região", "justificativa": "Análise fluida..." },
+    { "nome": "Nome do Bairro 5", "regiao": "Região", "justificativa": "Análise fluida..." }
   ],
-  "zona_exclusao": "Bairro/Região onde NUNCA abrir este negócio em SJC e o porquê detalhado com base no atrito cultural.",
+  "zona_exclusao": "Bairro/Região onde NUNCA abrir este negócio em SJC e a justificativa técnica com base no atrito cultural.",
   "swot": {
     "forcas": ["Diferencial psicográfico interno 1", "Diferencial 2", "Diferencial 3"],
     "fraquezas": ["Gargalo de percepção/operação 1", "Vulnerabilidade 2", "Gargalo 3"],
