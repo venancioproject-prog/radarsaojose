@@ -29,11 +29,11 @@ export default async function handler(req, res) {
     if (!apiKey) {
       console.error('[Consultor IA] ERRO CRÍTICO: GROQ_API_KEY não encontrada em process.env.');
       return res.status(500).json({ 
-        error: 'Chave de API da Groq (GROQ_API_KEY) não está configurada ou está vazia nas variáveis de ambiente da Vercel. Adicione em Project Settings > Environment Variables e faça um Redeploy.' 
+        error: 'Chave de API da Groq (GROQ_API_KEY) não está configurada nas variáveis de ambiente da Vercel. Adicione em Project Settings > Environment Variables e faça um Redeploy.' 
       });
     }
 
-    const { messages, question, context, model: userModel } = req.body || {};
+    const { messages, question, context } = req.body || {};
 
     let chatMessages = [];
 
@@ -61,24 +61,19 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
       return res.status(400).json({ error: 'Parâmetro question ou messages é obrigatório no corpo da requisição.' });
     }
 
-    // Lista de modelos suportados pela Groq em ordem de prioridade
-    const candidateModels = [
-      userModel,
+    // Modelos oficiais ATIVOS na Groq (Llama 3.3 e 3.1)
+    const productionModels = [
       'llama-3.3-70b-versatile',
-      'llama-3.1-8b-instant',
-      'llama3-70b-8192',
-      'llama3-8b-8192',
-      'mixtral-8x7b-32768'
-    ].filter(Boolean);
+      'llama-3.1-8b-instant'
+    ];
 
-    let groqResponse = null;
-    let lastErrorDetails = '';
-    let lastStatus = 500;
-    let successfulModel = null;
+    let lastError = null;
+    let successfulData = null;
+    let chosenModel = null;
 
-    for (const model of candidateModels) {
+    for (const model of productionModels) {
       try {
-        console.log(`[Consultor IA] Tentando chamada Groq com modelo: ${model}`);
+        console.log(`[Consultor IA] Tentando Groq com modelo ativo: ${model}`);
         
         const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
           method: 'POST',
@@ -94,41 +89,50 @@ ${context ? `\nContexto específico de dados do usuário/filtro:\n${JSON.stringi
           })
         });
 
+        const respText = await resp.text();
+
         if (resp.ok) {
-          groqResponse = await resp.json();
-          successfulModel = model;
-          console.log(`[Consultor IA] Sucesso com o modelo: ${model}`);
+          successfulData = JSON.parse(respText);
+          chosenModel = model;
+          console.log(`[Consultor IA] Sucesso absoluto com o modelo ${model}`);
           break;
         } else {
-          lastStatus = resp.status;
-          lastErrorDetails = await resp.text();
-          console.warn(`[Consultor IA] Falha no modelo ${model} (Status ${resp.status}): ${lastErrorDetails}`);
+          console.warn(`[Consultor IA] Modelo ${model} retornou status ${resp.status}:`, respText);
+          lastError = {
+            status: resp.status,
+            statusText: resp.statusText,
+            details: respText
+          };
         }
       } catch (errLoop) {
-        console.warn(`[Consultor IA] Erro ao tentar modelo ${model}:`, errLoop.message);
-        lastErrorDetails = errLoop.message;
+        console.error(`[Consultor IA] Exceção na chamada do modelo ${model}:`, errLoop);
+        lastError = {
+          status: 500,
+          statusText: 'FetchException',
+          details: errLoop.message
+        };
       }
     }
 
-    if (!groqResponse) {
-      console.error('[Consultor IA] Todos os modelos candidatos falharam na Groq.');
-      return res.status(lastStatus).json({ 
-        error: `Erro na API da Groq (Status ${lastStatus})`, 
-        details: lastErrorDetails 
+    if (!successfulData) {
+      return res.status(lastError?.status || 500).json({
+        error: `Erro retornado pela API da Groq: ${lastError?.statusText || 'Falha'}`,
+        status: lastError?.status,
+        details: lastError?.details
       });
     }
 
-    const replyText = groqResponse.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
+    const replyText = successfulData.choices?.[0]?.message?.content || 'Não foi possível gerar uma resposta no momento.';
 
     return res.status(200).json({
       success: true,
       reply: replyText,
-      model: successfulModel,
-      usage: groqResponse.usage || null
+      model: chosenModel,
+      usage: successfulData.usage || null
     });
 
   } catch (err) {
-    console.error('[Consultor IA] Erro interno na Serverless Function /api/consultor:', err);
+    console.error('[Consultor IA] Erro interno no servidor:', err);
     return res.status(500).json({ 
       error: 'Erro interno no servidor ao processar requisição do Consultor IA.',
       message: err.message 
