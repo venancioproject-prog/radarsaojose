@@ -3749,65 +3749,17 @@ function calculateSjcRegionStats(dataMap, total, records, questionText) {
 function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) {
   const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
 
-  let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
-  
-  // Seletores Superiores: Abas Horizontais Modernas, Minimalistas e Perfeitamente Alinhadas
-  html += '<div class="flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 shadow-2xs overflow-x-auto scrollbar-none">' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-amber-50 border border-slate-200/70 hover:border-amber-300 text-slate-700 hover:text-amber-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-amber-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Centro-Oeste</span>' +
-      '<span class="text-[11px] font-black text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded-md border border-amber-200/60">' + stats.centroOeste.pct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200/70 hover:border-blue-300 text-slate-700 hover:text-blue-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-blue-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Zona Sul</span>' +
-      '<span class="text-[11px] font-black text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded-md border border-blue-200/60">' + stats.sul.pct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-cyan-50 border border-slate-200/70 hover:border-cyan-300 text-slate-700 hover:text-cyan-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-cyan-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Zona Leste</span>' +
-      '<span class="text-[11px] font-black text-cyan-700 bg-cyan-50 px-1.5 py-0.5 rounded-md border border-cyan-200/60">' + stats.leste.pct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200/70 hover:border-indigo-300 text-slate-700 hover:text-indigo-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-indigo-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Zona Norte</span>' +
-      '<span class="text-[11px] font-black text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded-md border border-indigo-200/60">' + stats.norte.pct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 hover:border-slate-300 text-slate-700 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-slate-500 shrink-0 group-hover:scale-125 transition-transform"></span>Todos</span>' +
-      '<span class="text-[11px] font-black text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded-md border border-slate-200/60">' + stats.todas.pct + '%</span>' +
-    '</button>' +
-  '</div>';
-
-  // Container do Mapa Leaflet com Filtro Preto & Branco
-  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-950 min-h-[380px] sm:min-h-[420px]">' +
+  // Container limpo do Mapa Leaflet com Filtro Preto & Branco
+  return '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-900 min-h-[380px] sm:min-h-[420px]">' +
     '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0 sjc-bw-map"></div>' +
     // Badge flutuante Superior Direito
     '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
-      '<div class="bg-slate-900/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 shadow-xl text-right text-white">' +
-        '<p class="text-[10px] font-extrabold text-slate-300 uppercase tracking-wider">Polos Mais Frequentados</p>' +
-        '<p class="text-xs sm:text-sm font-black text-amber-400">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
-      '</div>' +
-    '</div>' +
-    // Legenda Integrada Flutuante Inferior Esquerdo (HUD executivo)
-    '<div class="absolute bottom-3 left-3 z-10 pointer-events-none hidden sm:block">' +
-      '<div class="bg-slate-950/85 backdrop-blur-md px-3 py-2.5 rounded-xl border border-white/15 shadow-2xl text-white">' +
-        '<p class="text-[9px] font-black tracking-widest text-slate-400 uppercase mb-1.5 flex items-center gap-1.5">' +
-          '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> RADAR REGIONAL SJC' +
-        '</p>' +
-        '<div class="grid grid-cols-2 gap-x-3 gap-y-1 text-[10px] font-bold">' +
-          '<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Centro-Oeste: <span class="font-extrabold text-amber-400">' + stats.centroOeste.pct + '%</span></div>' +
-          '<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-500"></span> Zona Sul: <span class="font-extrabold text-sky-400">' + stats.sul.pct + '%</span></div>' +
-          '<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Zona Leste: <span class="font-extrabold text-cyan-300">' + stats.leste.pct + '%</span></div>' +
-          '<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-400"></span> Zona Norte: <span class="font-extrabold text-indigo-300">' + stats.norte.pct + '%</span></div>' +
-        '</div>' +
+      '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
+        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Polos Mais Frequentados</p>' +
+        '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
       '</div>' +
     '</div>' +
   '</div>';
-
-  html += '</div>';
-  return html;
 }
 
 window.focusSjcRegion = function(mapContainerId, coords, zoomLevel) {
@@ -3851,21 +3803,20 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     className: 'sjc-bw-tiles'
   }).addTo(map);
 
-  // 1. Região Centro / Oeste
+  // 1. Região Centro / Oeste (Círculos estáticos e limpos)
   L.circle([-23.198, -45.908], {
     radius: 3400,
     color: "#F59E0B",
     fillColor: "#F59E0B",
-    fillOpacity: 0.20,
-    weight: 2,
-    className: 'sjc-radar-halo sjc-halo-centro'
+    fillOpacity: 0.18,
+    weight: 1.5
   }).addTo(map);
 
   const centroOesteCore = L.circle([-23.198, -45.908], {
     radius: 2100,
     color: "#D97706",
     fillColor: "#F59E0B",
-    fillOpacity: 0.50,
+    fillOpacity: 0.45,
     weight: 2
   }).addTo(map);
 
@@ -3884,13 +3835,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
 
   const centroIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div class="sjc-radar-beacon" style="transform:translate(-50%, -50%);">
-      <div class="sjc-radar-beacon-ring" style="background:rgba(245, 158, 11, 0.35);"></div>
-      <div style="background:rgba(15, 23, 42, 0.94); color:#F59E0B; font-weight:900; font-size:11px; padding:4px 9px; border-radius:12px; border:1.5px solid #F59E0B; box-shadow:0 4px 14px rgba(0,0,0,0.5); white-space:nowrap; display:flex; align-items:center; gap:5px; backdrop-filter:blur(6px);">
-        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#F59E0B;"></span>
-        <span>Centro-Oeste <strong style="color:#FFF; font-weight:900;">${stats.centroOeste.pct}%</strong></span>
-      </div>
-    </div>`,
+    html: `<div style="background:#F59E0B; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); white-space:nowrap; transform:translate(-50%, -50%);">🔥 ${stats.centroOeste.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.198, -45.908], { icon: centroIcon }).addTo(map).bindPopup(centroOestePopup);
@@ -3900,16 +3845,15 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     radius: 3000,
     color: "#0284C7",
     fillColor: "#0284C7",
-    fillOpacity: 0.18,
-    weight: 2,
-    className: 'sjc-radar-halo sjc-halo-sul'
+    fillOpacity: 0.16,
+    weight: 1.5
   }).addTo(map);
 
   const sulCore = L.circle([-23.248, -45.892], {
     radius: 1900,
     color: "#0369A1",
     fillColor: "#0284C7",
-    fillOpacity: 0.48,
+    fillOpacity: 0.45,
     weight: 2
   }).addTo(map);
 
@@ -3928,13 +3872,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
 
   const sulIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div class="sjc-radar-beacon" style="transform:translate(-50%, -50%);">
-      <div class="sjc-radar-beacon-ring" style="background:rgba(2, 132, 199, 0.35);"></div>
-      <div style="background:rgba(15, 23, 42, 0.94); color:#38BDF8; font-weight:900; font-size:11px; padding:4px 9px; border-radius:12px; border:1.5px solid #0284C7; box-shadow:0 4px 14px rgba(0,0,0,0.5); white-space:nowrap; display:flex; align-items:center; gap:5px; backdrop-filter:blur(6px);">
-        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#38BDF8;"></span>
-        <span>Zona Sul <strong style="color:#FFF; font-weight:900;">${stats.sul.pct}%</strong></span>
-      </div>
-    </div>`,
+    html: `<div style="background:#0284C7; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.sul.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.248, -45.892], { icon: sulIcon }).addTo(map).bindPopup(sulPopup);
@@ -3944,16 +3882,15 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     radius: 2500,
     color: "#06B6D4",
     fillColor: "#06B6D4",
-    fillOpacity: 0.18,
-    weight: 2,
-    className: 'sjc-radar-halo sjc-halo-leste'
+    fillOpacity: 0.16,
+    weight: 1.5
   }).addTo(map);
 
   const lesteCore = L.circle([-23.182, -45.815], {
     radius: 1500,
     color: "#0891B2",
     fillColor: "#06B6D4",
-    fillOpacity: 0.45,
+    fillOpacity: 0.42,
     weight: 2
   }).addTo(map);
 
@@ -3972,13 +3909,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
 
   const lesteIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div class="sjc-radar-beacon" style="transform:translate(-50%, -50%);">
-      <div class="sjc-radar-beacon-ring" style="background:rgba(6, 182, 212, 0.35);"></div>
-      <div style="background:rgba(15, 23, 42, 0.94); color:#22D3EE; font-weight:900; font-size:11px; padding:4px 9px; border-radius:12px; border:1.5px solid #06B6D4; box-shadow:0 4px 14px rgba(0,0,0,0.5); white-space:nowrap; display:flex; align-items:center; gap:5px; backdrop-filter:blur(6px);">
-        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#22D3EE;"></span>
-        <span>Zona Leste <strong style="color:#FFF; font-weight:900;">${stats.leste.pct}%</strong></span>
-      </div>
-    </div>`,
+    html: `<div style="background:#06B6D4; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.leste.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.182, -45.815], { icon: lesteIcon }).addTo(map).bindPopup(lestePopup);
@@ -3988,16 +3919,15 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     radius: 2200,
     color: "#6366F1",
     fillColor: "#6366F1",
-    fillOpacity: 0.16,
-    weight: 2,
-    className: 'sjc-radar-halo sjc-halo-norte'
+    fillOpacity: 0.14,
+    weight: 1.5
   }).addTo(map);
 
   const norteCore = L.circle([-23.142, -45.905], {
     radius: 1300,
     color: "#4F46E5",
     fillColor: "#6366F1",
-    fillOpacity: 0.42,
+    fillOpacity: 0.40,
     weight: 2
   }).addTo(map);
 
@@ -4016,13 +3946,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
 
   const norteIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div class="sjc-radar-beacon" style="transform:translate(-50%, -50%);">
-      <div class="sjc-radar-beacon-ring" style="background:rgba(99, 102, 241, 0.35);"></div>
-      <div style="background:rgba(15, 23, 42, 0.94); color:#818CF8; font-weight:900; font-size:11px; padding:4px 9px; border-radius:12px; border:1.5px solid #6366F1; box-shadow:0 4px 14px rgba(0,0,0,0.5); white-space:nowrap; display:flex; align-items:center; gap:5px; backdrop-filter:blur(6px);">
-        <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#818CF8;"></span>
-        <span>Zona Norte <strong style="color:#FFF; font-weight:900;">${stats.norte.pct}%</strong></span>
-      </div>
-    </div>`,
+    html: `<div style="background:#6366F1; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.norte.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.142, -45.905], { icon: norteIcon }).addTo(map).bindPopup(nortePopup);
@@ -4349,39 +4273,8 @@ window.sjcBairroMarkers = window.sjcBairroMarkers || {};
 function renderSjcBairrosMapWidget(mapContainerId, dataMap, total, records, questionText) {
   const stats = calculateSjcBairrosStats(dataMap, total, records, questionText);
 
-  let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
-  
-  // Seletores Superiores: Abas Horizontais Modernas, Minimalistas e Perfeitamente Alinhadas
-  html += '<div class="flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 shadow-2xs overflow-x-auto scrollbar-none">' +
-    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Centro / Oeste\', [-23.210, -45.912], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-amber-50 border border-slate-200/70 hover:border-amber-300 text-slate-700 hover:text-amber-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-amber-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Centro-Oeste</span>' +
-      '<span class="text-[11px] font-black text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded-md border border-amber-200/60">' + stats.centroOestePct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Sul\', [-23.250, -45.885], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-blue-50 border border-slate-200/70 hover:border-blue-300 text-slate-700 hover:text-blue-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-blue-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Zona Sul</span>' +
-      '<span class="text-[11px] font-black text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded-md border border-blue-200/60">' + stats.sulPct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Leste\', [-23.185, -45.815], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-cyan-50 border border-slate-200/70 hover:border-cyan-300 text-slate-700 hover:text-cyan-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-cyan-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Zona Leste</span>' +
-      '<span class="text-[11px] font-black text-cyan-700 bg-cyan-50 px-1.5 py-0.5 rounded-md border border-cyan-200/60">' + stats.lestePct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Norte\', [-23.145, -45.900], 13)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200/70 hover:border-indigo-300 text-slate-700 hover:text-indigo-950 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-indigo-500 shrink-0 group-hover:scale-125 transition-transform animate-pulse"></span>Zona Norte</span>' +
-      '<span class="text-[11px] font-black text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded-md border border-indigo-200/60">' + stats.nortePct + '%</span>' +
-    '</button>' +
-    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'all\', [-23.208, -45.885], 11.5)" ' +
-      'class="flex-1 min-w-[105px] sm:min-w-0 flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-200/70 hover:border-slate-300 text-slate-700 font-bold text-xs whitespace-nowrap transition-all shadow-2xs group">' +
-      '<span class="flex items-center gap-1.5 min-w-0 truncate"><span class="w-2 h-2 rounded-full bg-slate-500 shrink-0 group-hover:scale-125 transition-transform"></span>Todos</span>' +
-      '<span class="text-[11px] font-black text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded-md border border-slate-200/60">100%</span>' +
-    '</button>' +
-  '</div>';
-
-  // Container do Mapa Real Leaflet com Bolinhas de Cada Bairro
-  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[420px]">' +
+  // Container limpo do Mapa Real Leaflet com Bolinhas de Cada Bairro
+  return '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[420px]">' +
     '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0"></div>' +
     // Badge flutuante Superior Direito
     '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
@@ -4391,9 +4284,6 @@ function renderSjcBairrosMapWidget(mapContainerId, dataMap, total, records, ques
       '</div>' +
     '</div>' +
   '</div>';
-
-  html += '</div>';
-  return html;
 }
 
 window.focusSjcBairro = function(mapContainerId, bairroName, coords, zoomLevel) {
@@ -4472,7 +4362,7 @@ function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, quest
   };
   window.sjcBairrosLayerGroups[mapContainerId] = groups;
 
-  // Plotagem limpa e despoluída de bolinhas proporcionais por bairro (L.circleMarker)
+  // Plotagem limpa e estática de bolinhas proporcionais por bairro (L.circleMarker)
   stats.bairros.forEach(b => {
     const targetGroup = groups[b.regiao] || groups["Centro / Oeste"];
     
@@ -4496,14 +4386,13 @@ function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, quest
       </div>
     `;
 
-    // Bolinha estilizada e leve
+    // Bolinha estilizada, estática e leve
     const circleMarker = L.circleMarker([b.lat, b.lng], {
       radius: radiusPx,
       color: "#FFFFFF",
       weight: 1.5,
       fillColor: b.color,
-      fillOpacity: 0.75,
-      className: 'sjc-bairro-bubble'
+      fillOpacity: 0.75
     }).addTo(targetGroup);
 
     circleMarker.bindPopup(popupHtml);
