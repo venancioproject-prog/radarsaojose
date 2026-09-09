@@ -4310,215 +4310,99 @@ function calculateSjcBairrosStats(dataMap, total, records, questionText) {
   };
 }
 
+window.sjcBairroMarkers = window.sjcBairroMarkers || {};
+
 function renderSjcBairrosMapWidget(mapContainerId, dataMap, total, records, questionText) {
   const stats = calculateSjcBairrosStats(dataMap, total, records, questionText);
-  const maxCount = stats.bairros.length > 0 ? stats.bairros[0].count : 1;
 
-  let html = '<div class="w-full flex flex-col justify-between h-full gap-3.5">';
+  let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
   
-  // Header com Tabs de Alternância (Ranking / Mapa) e Contadores
-  html += '<div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-100">' +
-    '<div class="flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-xl border border-slate-200/80 shadow-2xs">' +
-      '<button type="button" id="tab-btn-ranking-' + mapContainerId + '" onclick="window.toggleBairroView(\'' + mapContainerId + '\', \'ranking\')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-brand-900 shadow-xs flex items-center gap-1.5">' +
-        '<i class="fa-solid fa-chart-simple text-amber-500"></i>' +
-        '<span>Ranking dos Bairros</span>' +
-      '</button>' +
-      '<button type="button" id="tab-btn-map-' + mapContainerId + '" onclick="window.toggleBairroView(\'' + mapContainerId + '\', \'map\')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-brand-900 flex items-center gap-1.5">' +
-        '<i class="fa-solid fa-map-location-dot text-emerald-500"></i>' +
-        '<span>Mapa Interativo</span>' +
-      '</button>' +
-    '</div>' +
-
-    '<div class="flex items-center gap-2">' +
-      '<span class="px-3 py-1 rounded-xl bg-brand-50 text-brand-900 text-xs font-black border border-brand-200/60 shadow-2xs">' +
-        stats.total.toLocaleString("pt-BR") + ' Moradores' +
-      '</span>' +
-      '<span class="px-3 py-1 rounded-xl bg-amber-50 text-amber-900 text-xs font-black border border-amber-200/60 shadow-2xs">' +
-        stats.distinctCount + ' Bairros Mapeados' +
-      '</span>' +
+  // Container do Mapa Real Leaflet com Bolinhas de Cada Bairro
+  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[420px]">' +
+    '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0"></div>' +
+    // Badge flutuante
+    '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
+      '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
+        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Origem dos Entrevistados</p>' +
+        '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes • ' + stats.distinctCount + ' Bairros</p>' +
+      '</div>' +
     '</div>' +
   '</div>';
 
-  // 1. CONTAINER DA VISUALIZAÇÃO: RANKING DE BAIRROS (BARRAS + BUSCA + FILTROS POR ZONA)
-  html += '<div id="view-ranking-' + mapContainerId + '" class="flex flex-col gap-3 w-full">' +
-    // Barra de Busca e Filtros Rápidos de Zona
-    '<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">' +
-      '<div class="relative flex-1">' +
-        '<i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>' +
-        '<input type="text" oninput="window.filterBairroSearch(\'' + mapContainerId + '\', this.value)" placeholder="Buscar bairro (ex: Indústrias, Satélite, Aquarius)..." class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all" />' +
+  // Botões de Filtro e Foco por Zona Residencial
+  html += '<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full pt-0.5">' +
+    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Centro / Oeste\', [-23.210, -45.912], 13)" class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.01] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro/Oeste</span>' +
+        '<span class="text-xs font-black text-amber-800">' + stats.centroOestePct + '%</span>' +
       '</div>' +
-      '<div class="flex flex-wrap items-center gap-1.5 shrink-0">' +
-        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'TODOS\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-brand-900 text-white shadow-2xs" data-zone="TODOS">Todos (' + stats.distinctCount + ')</button>' +
-        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Centro / Oeste\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100" data-zone="Centro / Oeste">Centro/Oeste (' + stats.centroOestePct + '%)</button>' +
-        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Zona Sul\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-blue-50 text-blue-900 border border-blue-200 hover:bg-blue-100" data-zone="Zona Sul">Sul (' + stats.sulPct + '%)</button>' +
-        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Zona Leste\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-cyan-50 text-cyan-900 border border-cyan-200 hover:bg-cyan-100" data-zone="Zona Leste">Leste (' + stats.lestePct + '%)</button>' +
-        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Zona Norte\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-indigo-50 text-indigo-900 border border-indigo-200 hover:bg-indigo-100" data-zone="Zona Norte">Norte (' + stats.nortePct + '%)</button>' +
+      '<p class="text-[10px] font-medium text-amber-700 truncate">Indústrias, Aquarius, Urbanova</p>' +
+    '</button>' +
+
+    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Sul\', [-23.250, -45.885], 13)" class="p-2 rounded-xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.01] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
+        '<span class="text-xs font-black text-blue-800">' + stats.sulPct + '%</span>' +
       '</div>' +
-    '</div>' +
+      '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Colonial</p>' +
+    '</button>' +
 
-    // Lista com Scroll dos Bairros com Barras de Frequência e Percentuais
-    '<div id="bairros-list-' + mapContainerId + '" class="max-h-[380px] overflow-y-auto space-y-2 pr-1.5 custom-card-scroll">';
-
-  stats.bairros.forEach((b, idx) => {
-    const widthPct = Math.max(8, (b.count / maxCount) * 100);
-    const badgeColor = b.regiao === "Centro / Oeste" 
-      ? "bg-amber-50 text-amber-800 border-amber-200"
-      : b.regiao === "Zona Sul"
-      ? "bg-blue-50 text-blue-800 border-blue-200"
-      : b.regiao === "Zona Leste"
-      ? "bg-cyan-50 text-cyan-800 border-cyan-200"
-      : "bg-indigo-50 text-indigo-800 border-indigo-200";
-
-    const barGradient = b.regiao === "Centro / Oeste"
-      ? "from-amber-400 to-amber-500"
-      : b.regiao === "Zona Sul"
-      ? "from-blue-400 to-blue-600"
-      : b.regiao === "Zona Leste"
-      ? "from-cyan-400 to-cyan-600"
-      : "from-indigo-400 to-indigo-600";
-
-    const medalClass = idx === 0 
-      ? "bg-amber-400 text-amber-950 font-black shadow-xs ring-2 ring-amber-300"
-      : idx === 1
-      ? "bg-slate-300 text-slate-800 font-bold shadow-xs"
-      : idx === 2
-      ? "bg-amber-700 text-white font-bold shadow-xs"
-      : "bg-slate-100 text-slate-600 font-semibold";
-
-    html += '<div class="bairro-item p-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-card hover:border-brand-300 transition-all flex flex-col gap-2 group" data-bairro="' + b.bairro.toLowerCase() + '" data-regiao="' + b.regiao + '">' +
-      '<div class="flex items-center justify-between gap-2">' +
-        '<div class="flex items-center gap-2 min-w-0 flex-1">' +
-          '<span class="w-6 h-6 rounded-lg ' + medalClass + ' text-[10px] flex items-center justify-center shrink-0">' + (idx + 1) + 'º</span>' +
-          '<span class="text-base shrink-0">' + (b.icon || '🏠') + '</span>' +
-          '<strong class="text-xs sm:text-sm font-bold text-slate-900 truncate group-hover:text-brand-900 transition-colors">' + b.bairro + '</strong>' +
-          '<span class="hidden sm:inline-block px-2 py-0.5 rounded-md text-[10px] font-bold border ' + badgeColor + ' shrink-0">' + b.regiao + '</span>' +
-        '</div>' +
-        '<div class="flex items-center gap-2 shrink-0">' +
-          '<span class="text-xs font-medium text-slate-500">' + b.count + ' moradores</span>' +
-          '<span class="text-xs sm:text-sm font-black text-brand-900 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-200">' + b.pct + '%</span>' +
-        '</div>' +
+    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Leste\', [-23.185, -45.815], 13)" class="p-2 rounded-xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.01] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Zona Leste</span>' +
+        '<span class="text-xs font-black text-cyan-800">' + stats.lestePct + '%</span>' +
       '</div>' +
-      // Barra de Progresso
-      '<div class="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60">' +
-        '<div class="h-full bg-gradient-to-r ' + barGradient + ' rounded-full transition-all duration-700" style="width: ' + widthPct + '%;"></div>' +
+      '<p class="text-[10px] font-medium text-cyan-700 truncate">Vista Verde, Vila Ind., Campos SJC</p>' +
+    '</button>' +
+
+    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Norte\', [-23.145, -45.900], 13)" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.01] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
+        '<span class="text-xs font-black text-indigo-800">' + stats.nortePct + '%</span>' +
       '</div>' +
-    '</div>';
-  });
+      '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Minas Gerais, Buquirinha</p>' +
+    '</button>' +
 
-  html += '</div></div>';
-
-  // 2. CONTAINER DA VISUALIZAÇÃO: MAPA REAL LEAFLET DE BAIRROS (HIDDEN INICIALMENTE OU ALTERNÁVEL)
-  html += '<div id="view-map-' + mapContainerId + '" class="hidden flex-col gap-3 w-full">' +
-    '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[400px]">' +
-      '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[400px] z-0"></div>' +
-      '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
-        '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
-          '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Geolocalização</p>' +
-          '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.distinctCount + ' Bairros no Mapa</p>' +
-        '</div>' +
+    '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'all\', [-23.208, -45.885], 11.5)" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200/90 border border-slate-300 text-left transition-all hover:scale-[1.01] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
+        '<span class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Todos Bairros</span>' +
+        '<span class="text-xs font-black text-slate-700">100%</span>' +
       '</div>' +
-    '</div>' +
-
-    // Botões de Foco do Mapa por Zona
-    '<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full pt-1">' +
-      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Centro / Oeste\', [-23.210, -45.912], 13)" class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-left transition-all text-xs font-bold text-amber-900 flex items-center justify-between">' +
-        '<span>Centro/Oeste</span><span class="font-black">' + stats.centroOestePct + '%</span>' +
-      '</button>' +
-      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Sul\', [-23.250, -45.885], 13)" class="p-2 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-left transition-all text-xs font-bold text-blue-900 flex items-center justify-between">' +
-        '<span>Zona Sul</span><span class="font-black">' + stats.sulPct + '%</span>' +
-      '</button>' +
-      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Leste\', [-23.185, -45.815], 13)" class="p-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 text-left transition-all text-xs font-bold text-cyan-900 flex items-center justify-between">' +
-        '<span>Zona Leste</span><span class="font-black">' + stats.lestePct + '%</span>' +
-      '</button>' +
-      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Norte\', [-23.145, -45.900], 13)" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-left transition-all text-xs font-bold text-indigo-900 flex items-center justify-between">' +
-        '<span>Zona Norte</span><span class="font-black">' + stats.nortePct + '%</span>' +
-      '</button>' +
-      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'all\', [-23.208, -45.885], 11.5)" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-left transition-all text-xs font-bold text-slate-800 flex items-center justify-between">' +
-        '<span>Todos Bairros</span><span class="font-black">100%</span>' +
-      '</button>' +
-    '</div>' +
+      '<p class="text-[10px] font-medium text-slate-500 truncate">' + stats.distinctCount + ' Bairros Mapeados</p>' +
+    '</button>' +
   '</div>';
+
+  // Chips Rápidos dos Top Bairros para voar direto para a bolinha
+  if (stats.bairros && stats.bairros.length > 0) {
+    const topBairros = stats.bairros.slice(0, 8);
+    html += '<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100">' +
+      '<span class="text-[10px] font-black text-slate-400 uppercase tracking-wider shrink-0 mr-1"><i class="fa-solid fa-location-dot text-amber-500"></i> Principais Bairros:</span>';
+    topBairros.forEach((b, idx) => {
+      const sanitizedName = b.bairro.replace(/'/g, "\\'");
+      html += '<button type="button" onclick="window.focusSjcBairro(\'' + mapContainerId + '\', \'' + sanitizedName + '\', [' + b.lat + ', ' + b.lng + '], 14.5)" class="px-2.5 py-1 rounded-xl bg-slate-50 hover:bg-brand-50 hover:text-brand-900 border border-slate-200 text-[11px] font-bold text-slate-700 flex items-center gap-1.5 transition-all shadow-2xs hover:scale-[1.02]">' +
+        '<span class="w-4 h-4 rounded-full bg-brand-900 text-white text-[9px] flex items-center justify-center font-black">' + (idx + 1) + '</span>' +
+        '<span>' + b.bairro + '</span>' +
+        '<span class="font-black text-brand-900">(' + b.count + ')</span>' +
+      '</button>';
+    });
+    html += '</div>';
+  }
 
   html += '</div>';
   return html;
 }
 
-window.toggleBairroView = function(mapContainerId, viewMode) {
-  const rankingEl = document.getElementById("view-ranking-" + mapContainerId);
-  const mapEl = document.getElementById("view-map-" + mapContainerId);
-  const tabRanking = document.getElementById("tab-btn-ranking-" + mapContainerId);
-  const tabMap = document.getElementById("tab-btn-map-" + mapContainerId);
+window.focusSjcBairro = function(mapContainerId, bairroName, coords, zoomLevel) {
+  const map = window.sjcLeafletMaps[mapContainerId];
+  if (!map) return;
 
-  if (viewMode === 'map') {
-    if (rankingEl) rankingEl.classList.add("hidden");
-    if (mapEl) mapEl.classList.remove("hidden");
-    if (tabRanking) {
-      tabRanking.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-brand-900 flex items-center gap-1.5";
-    }
-    if (tabMap) {
-      tabMap.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-brand-900 shadow-xs flex items-center gap-1.5";
-    }
+  map.flyTo(coords, zoomLevel || 14.5, { duration: 1.2 });
 
-    const map = window.sjcLeafletMaps[mapContainerId];
-    if (map) {
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 100);
-    }
-  } else {
-    if (mapEl) mapEl.classList.add("hidden");
-    if (rankingEl) rankingEl.classList.remove("hidden");
-    if (tabMap) {
-      tabMap.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-brand-900 flex items-center gap-1.5";
-    }
-    if (tabRanking) {
-      tabRanking.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-brand-900 shadow-xs flex items-center gap-1.5";
-    }
+  if (window.sjcBairroMarkers[mapContainerId] && window.sjcBairroMarkers[mapContainerId][bairroName]) {
+    setTimeout(() => {
+      window.sjcBairroMarkers[mapContainerId][bairroName].openPopup();
+    }, 1250);
   }
-};
-
-window.filterBairroSearch = function(mapContainerId, query) {
-  const list = document.getElementById("bairros-list-" + mapContainerId);
-  if (!list) return;
-  const q = (query || "").toLowerCase().trim();
-  const items = list.querySelectorAll(".bairro-item");
-  items.forEach(el => {
-    const name = el.getAttribute("data-bairro") || "";
-    const reg = el.getAttribute("data-regiao") || "";
-    if (!q || name.includes(q) || reg.toLowerCase().includes(q)) {
-      el.style.display = "flex";
-    } else {
-      el.style.display = "none";
-    }
-  });
-};
-
-window.filterBairroZone = function(mapContainerId, zone) {
-  const container = document.getElementById("view-ranking-" + mapContainerId);
-  if (!container) return;
-  
-  // Atualiza botões
-  const btns = container.querySelectorAll(".bairro-zone-btn");
-  btns.forEach(btn => {
-    const btnZone = btn.getAttribute("data-zone");
-    if (btnZone === zone) {
-      btn.className = "bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-brand-900 text-white shadow-2xs";
-    } else {
-      btn.className = "bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100";
-    }
-  });
-
-  const list = document.getElementById("bairros-list-" + mapContainerId);
-  if (!list) return;
-  const items = list.querySelectorAll(".bairro-item");
-  items.forEach(el => {
-    const reg = el.getAttribute("data-regiao") || "";
-    if (zone === "TODOS" || reg === zone) {
-      el.style.display = "flex";
-    } else {
-      el.style.display = "none";
-    }
-  });
 };
 
 window.filterSjcBairrosMap = function(mapContainerId, regionKey, coords, zoomLevel) {
@@ -4567,6 +4451,7 @@ function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, quest
   });
 
   window.sjcLeafletMaps[mapContainerId] = map;
+  window.sjcBairroMarkers[mapContainerId] = {};
 
   // Tile layer OpenStreetMap standard sem chave de API
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -4583,44 +4468,49 @@ function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, quest
   };
   window.sjcBairrosLayerGroups[mapContainerId] = groups;
 
-  // Plotagem de cada Bairro Real do Banco de Dados
+  // Plotagem de cada Bairro Real como Bolinha no Mapa de SJC
   stats.bairros.forEach(b => {
     const targetGroup = groups[b.regiao] || groups["Zona Sul"];
-    const radiusSize = Math.max(350, Math.min(1800, b.count * 80 + 300));
+    
+    // Raio proporcional em metros para a bolinha de calor
+    const radiusMeters = Math.max(300, Math.min(1800, Math.sqrt(b.count) * 180 + 200));
 
-    // Círculo de calor residencial
+    // 1. Bolinha de Calor / Circulo de Concentração do Bairro
     const circle = L.circle([b.lat, b.lng], {
-      radius: radiusSize,
+      radius: radiusMeters,
       color: b.color,
       fillColor: b.color,
-      fillOpacity: 0.30,
-      weight: 1.5
+      fillOpacity: 0.35,
+      weight: 2
     }).addTo(targetGroup);
 
     const popupHtml = `
-      <div class="p-1.5 text-slate-800 min-w-[190px]">
+      <div class="p-2 text-slate-800 min-w-[200px]">
         <div class="flex items-center gap-1.5 mb-1">
           <span class="text-base">${b.icon || '🏠'}</span>
           <strong class="text-sm font-bold text-slate-900">${b.bairro}</strong>
         </div>
-        <div class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold mb-1.5" style="background:${b.color}20; color:${b.color}; border:1px solid ${b.color}40;">
+        <div class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold mb-2" style="background:${b.color}20; color:${b.color}; border:1px solid ${b.color}50;">
           ${b.regiao}
         </div>
-        <p class="text-sm font-black text-brand-900">${b.count} Moradores (${b.pct}%)</p>
-        <p class="text-[11px] text-slate-500 mt-0.5">Base direta de respostas da pesquisa</p>
+        <div class="p-2 rounded-xl bg-slate-50 border border-slate-200/80 mb-1">
+          <p class="text-sm font-black text-brand-900">${b.count} Entrevistados</p>
+          <p class="text-xs font-bold text-slate-600">${b.pct}% da pesquisa</p>
+        </div>
+        <p class="text-[10px] text-slate-400">Origem residencial capturada na pesquisa</p>
       </div>
     `;
 
     circle.bindPopup(popupHtml);
-    circle.bindTooltip(`<b>${b.bairro}</b>: ${b.count} moradores (${b.pct}%)`, {
+    circle.bindTooltip(`<b>${b.bairro}</b>: ${b.count} entrevistados (${b.pct}%)`, {
       direction: 'top',
       offset: [0, -5],
       className: 'sjc-map-tooltip'
     });
 
-    // Badge com contagem no ponto exato
+    // 2. Bolinha Central (Badge / Pin com contador de entrevistados)
     const markerHtml = `
-      <div style="background:${b.color}; color:white; font-weight:900; font-size:10px; padding:2px 6px; border-radius:10px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); white-space:nowrap; transform:translate(-50%, -50%); display:flex; items-center; gap:3px;">
+      <div style="background:${b.color}; color:white; font-weight:900; font-size:10px; padding:2px 6px; border-radius:10px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.35); white-space:nowrap; transform:translate(-50%, -50%); display:flex; align-items:center; gap:3px; cursor:pointer;">
         <span>${b.icon || '🏠'}</span>
         <span>${b.count}</span>
       </div>
@@ -4634,6 +4524,8 @@ function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, quest
 
     const marker = L.marker([b.lat, b.lng], { icon: customIcon }).addTo(targetGroup);
     marker.bindPopup(popupHtml);
+
+    window.sjcBairroMarkers[mapContainerId][b.bairro] = marker;
   });
 
   setTimeout(() => {
