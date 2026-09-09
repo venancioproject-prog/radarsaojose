@@ -100,20 +100,15 @@ HIERARQUIA DE CONFIANÇA & CONTROLE DE QUALIDADE:
 - Hipótese a validar: Suposição que exige teste de baixo custo antes de investimento irreversível.
 - Informação ausente: Dado não fornecido pelo usuário ou não coberto pela pesquisa.
 
-PRINCÍPIO DE CAUSALIDADE & REGRAS DE OURO:
-1. NÃO CONFUNDA CORRELAÇÃO COM CAUSALIDADE: O fato de 75.8% dos joseenses afirmarem que gastariam mais se houvesse opções inovadoras de lazer/gastronomia indica demanda reprimida geral por experiências melhores, mas NÃO comprova demanda automática pela categoria específica do negócio. Explique a oportunidade como retenção de consumo e proponha validação direta.
-2. REGRA DO N AMOSTRAL: A base oficial possui rigorosamente N=477 respondentes.
-3. BAIRROS SÃO SHORTLIST A VALIDAR: Ao indicar bairros, apresente-os como shortlist analítica a ser validada em campo com fluxo, concorrência, aluguel e perfil real de compra, e não como ranking absoluto comprovado pelo Radar.
-4. ZONA DE EXCLUSÃO FUNDAMENTADA: Não rotule regiões automaticamente como inviáveis sem analisar o modelo de operação (loja física x delivery x operação de bairro x ticket). Aponte os atritos estruturais reais para o modelo analisado.
-5. REGRA DE TITÂNIO DAS VERBALIZAÇÕES: Na chave 'verbalizacoes_reais', extraia 3 objetos com citações autênticas do banco fornecido. REGRA ESTRITA DE GÊNERO: A chave 'genero' deve conter ESTRITAMENTE 'Homem' ou 'Mulher'.
-6. FRAMEWORKS COMPLETOS COM CONEXÃO REAL:
-   - SWOT: Ações e diagnósticos específicos para a operação, precificação e retenção local.
-   - PESTEL: Conectar cada uma das 6 dimensões (P, E, S, T, E_env, L) a decisões estratégicas reais.
-   - ISHIKAWA: Problema central observável e 4 causas estruturadas (Pessoas, Ambiente, Processos, Produto).
-   - VRIO: 4 dimensões (V, R, I, O) avaliando recursos reais do negócio.
-   - 5 FORÇAS DE PORTER: Avaliar rivalidade, entrantes, substitutos (incluindo SP e online), fornecedores e poder dos clientes.
-   - 5 PS & OCEANO AZUL: 5 Ps com lógica de valor e matriz Eliminar, Reduzir, Elevar, Criar.
-   - MOVIMENTOS CULTURAIS: Analisar a aderência com os 4 movimentos e cravar exatamente um dos 4 no veredicto ("A Geografia do Silêncio", "A Cidade Prometida", "A Tribo Global", "Empreendedorismo Intuitivo") com parágrafo denso (60-90 palavras).
+PRINCÍPIO DE CAUSALIDADE & REGRAS METODOLÓGICAS OBRIGATÓRIAS:
+1. NÃO CONFUNDA CORRELAÇÃO COM CAUSALIDADE: O fato de 75.8% dos joseenses afirmarem que gastariam mais com lazer/gastronomia indica demanda reprimida geral por experiências melhores, mas NÃO comprova demanda automática pela categoria de negócio específica. Apresente como sinal de oportunidade urbana de retenção e explicite a necessidade de validar a categoria e a disposição a pagar.
+2. FONTE OFICIAL ESTATÍSTICA: Toda métrica quantitativa deriva estritamente da base oficial Supabase N=477 (IC=95%, Erro ±4.5%). A apresentação serve como contexto qualitativo e hipóteses.
+3. BAIRROS SÃO SHORTLIST A INVESTIGAR: Apresente bairros como "Shortlist de áreas candidatas para validação de campo" (avaliando fluxo, aluguel, concorrência e público real), nunca como ranking comprovado.
+4. ZONA DE EXCLUSÃO COM RIGOR: Não rotule regiões automaticamente como inviáveis e NUNCA invente "risco de inadimplência" sem dados. Aponte apenas atritos operacionais de ticket/formato e recomende teste antes de ponto fixo.
+5. RIGOR NOS MOVIMENTOS CULTURAIS: Trate os 4 movimentos como lentes comportamentais, não como categorias demográficas censitárias ou garantias de compra. Aderência é uma hipótese que exige teste de oferta, preço e conversão.
+6. ISHIKAWA COM EFEITO OBSERVÁVEL: O problema central deve ser um efeito observável mensurável (ex: "Risco de baixa conversão da intenção de consumo em compra recorrente com margem suficiente").
+7. SEM JARGÃO DE VENDA: É proibido usar "mercado bilionário", "demanda comprovada", "garante viabilidade" ou "rejeição moral" sem dados específicos.
+8. REGRA DE TITÂNIO DAS VERBALIZAÇÕES: Na chave 'verbalizacoes_reais', extraia 3 objetos com citações autênticas do banco fornecido. A chave 'genero' deve conter ESTRITAMENTE 'Homem' ou 'Mulher'.
 
 7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois.
 
