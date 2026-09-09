@@ -1078,6 +1078,9 @@ function processAndRenderDynamicCharts(records) {
       if (displayTitle.toLowerCase().includes("meios de transporte") || (displayTitle.toLowerCase().includes("transporte") && displayTitle.toLowerCase().includes("usa"))) {
         displayTitle = "Quais meios de transporte você usa? (marque todos que utilizar)";
       }
+      if (displayTitle.toLowerCase().includes("frequência") && (displayTitle.toLowerCase().includes("sai") || displayTitle.toLowerCase().includes("passear") || displayTitle.toLowerCase().includes("divertir") || displayTitle.toLowerCase().includes("cidade"))) {
+        displayTitle = "Com que frequência você sai para passear ou se divertir na cidade?";
+      }
       if (displayTitle.toLowerCase().includes("boas opções de cultura") || (displayTitle.toLowerCase().includes("cultura") && displayTitle.toLowerCase().includes("eventos") && (displayTitle.toLowerCase().includes("opções") || displayTitle.toLowerCase().includes("opcoes")))) {
         displayTitle = "Você acha que a cidade tem boas opções de cultura e eventos?";
       }
@@ -3360,42 +3363,32 @@ function calculateFrequencyOutingStats(dataMap, total, records, questionText) {
 function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, questionText) {
   const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
 
-  let html = '<div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center w-full h-full py-1">';
+  let html = '<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center w-full h-full py-2">';
   
-  // Coluna 1: Gráfico Donut com Centro Informativo
-  html += '<div class="sm:col-span-5 flex flex-col items-center justify-center relative min-h-[220px] sm:min-h-[240px]">' +
-    '<div class="relative w-full max-w-[220px] aspect-square flex items-center justify-center">' +
+  // Coluna 1: Gráfico Donut com Centro Minimalista de Destaque
+  html += '<div class="md:col-span-5 flex flex-col items-center justify-center relative min-h-[200px] sm:min-h-[220px]">' +
+    '<div class="relative w-[190px] h-[190px] sm:w-[210px] sm:h-[210px] flex items-center justify-center">' +
       '<canvas id="' + canvasId + '" class="w-full h-full"></canvas>' +
-      // Centro informativo da Rosca
+      // Centro informativo da Rosca (limpo, sem selos espremidos)
       '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">' +
-        '<span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Maioria</span>' +
-        '<span class="text-xl sm:text-2xl font-black text-brand-900 leading-tight my-0.5">' + stats.dominant.pct + '%</span>' +
-        '<span class="text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200/60 shadow-2xs">' + stats.dominant.shortTitle + '</span>' +
+        '<span class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-none">' + stats.dominant.pct + '%</span>' +
+        '<span class="text-xs font-semibold text-slate-500 mt-1">' + stats.dominant.shortTitle + '</span>' +
       '</div>' +
     '</div>' +
   '</div>';
 
-  // Coluna 2: Legenda Executiva com Emojis, Barras de Progresso e Percentuais
-  html += '<div class="sm:col-span-7 flex flex-col justify-center gap-2.5 w-full">';
+  // Coluna 2: Lista Limpa e Executiva de Categorias
+  html += '<div class="md:col-span-7 flex flex-col justify-center gap-2.5 w-full">';
   stats.items.forEach(item => {
-    html += '<div class="bg-white hover:bg-slate-50/90 p-3 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-3 group">' +
+    html += '<div class="bg-white hover:bg-slate-50/80 p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-3">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 shadow-2xs" style="background:' + item.color + '15; border:1px solid ' + item.color + '30;">' +
-          item.emoji +
-        '</div>' +
-        '<div class="min-w-0 flex-1">' +
-          '<div class="flex items-center gap-1.5 mb-1">' +
-            '<span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:' + item.color + ';"></span>' +
-            '<span class="text-xs sm:text-sm font-bold text-slate-800 truncate leading-none">' + item.title + '</span>' +
-          '</div>' +
-          // Barra de progresso delicada
-          '<div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200/50">' +
-            '<div class="h-full rounded-full transition-all duration-700" style="width:' + item.pct + '%; background:' + item.color + ';"></div>' +
-          '</div>' +
-        '</div>' +
+        '<span class="w-3.5 h-3.5 rounded-full flex-shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
+        '<span class="text-xs sm:text-sm font-semibold text-slate-700 truncate leading-snug">' + item.title + '</span>' +
       '</div>' +
-      '<div class="text-right flex-shrink-0 pl-1">' +
-        '<span class="inline-block px-3 py-1 rounded-xl text-xs sm:text-sm font-black shadow-2xs" style="background:' + item.color + '12; color:' + item.color + '; border:1px solid ' + item.color + '30;">' + item.pct + '%</span>' +
+      '<div class="flex-shrink-0 pl-2">' +
+        '<span class="inline-flex items-center justify-center min-w-[58px] px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
+          item.pct + '%' +
+        '</span>' +
       '</div>' +
     '</div>';
   });
@@ -3428,18 +3421,18 @@ function initFrequencyOutingDonutChart(canvasId, dataMap, total, records, questi
         data: values,
         backgroundColor: bgColors,
         borderColor: "#FFFFFF",
-        borderWidth: 3,
-        borderRadius: 6,
-        spacing: 3,
-        hoverOffset: 8
+        borderWidth: 2.5,
+        borderRadius: 4,
+        spacing: 2,
+        hoverOffset: 6
       }]
     },
     options: {
-      cutout: "68%",
+      cutout: "70%",
       responsive: true,
       maintainAspectRatio: false,
       layout: {
-        padding: 6
+        padding: 4
       },
       plugins: {
         legend: {
@@ -3447,23 +3440,17 @@ function initFrequencyOutingDonutChart(canvasId, dataMap, total, records, questi
         },
         tooltip: {
           padding: 10,
-          cornerRadius: 10,
+          cornerRadius: 8,
           callbacks: {
             label: function(context) {
               const val = context.raw || 0;
               const pct = stats.total > 0 ? ((val / stats.total) * 100).toFixed(1) : 0;
-              return " " + context.label + ": " + val + " respondentes (" + pct + "%)";
+              return " " + context.label + ": " + val + " (" + pct + "%)";
             }
           }
         },
         datalabels: {
-          color: "#FFFFFF",
-          font: { weight: 900, size: 11, family: "Montserrat, sans-serif" },
-          formatter: function(value) {
-            if (!value || value === 0) return "";
-            const pct = stats.total > 0 ? ((value / stats.total) * 100).toFixed(1) : 0;
-            return parseFloat(pct) >= 16 ? pct + "%" : "";
-          }
+          display: false
         }
       }
     }
