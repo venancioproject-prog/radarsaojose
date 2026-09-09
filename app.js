@@ -1455,9 +1455,9 @@ function processAndRenderDynamicCharts(records) {
       // 11.3.1. FREQUÊNCIA DE SAÍDAS PARA PASSEAR/DIVERTIR: Gráfico Donut com Centro Informativo e Legenda Executiva
       if (qLower.includes("frequência") && (qLower.includes("sai") || qLower.includes("passear") || qLower.includes("divertir"))) {
         const donutCanvasId = "chart-frequency-donut-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-2 lg:col-span-2" : " col-span-1 md:col-span-2 lg:col-span-2");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
-          '<div>' +
+          '<div class="min-w-0 flex-1">' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
             '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Rotina de Lazer & Vida Urbana</p>' +
           '</div>' +
@@ -3363,13 +3363,13 @@ function calculateFrequencyOutingStats(dataMap, total, records, questionText) {
 function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, questionText) {
   const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
 
-  let html = '<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center w-full h-full py-2">';
+  let html = '<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center w-full h-full py-2">';
   
   // Coluna 1: Gráfico Donut com Centro Minimalista de Destaque
-  html += '<div class="md:col-span-5 flex flex-col items-center justify-center relative min-h-[200px] sm:min-h-[220px]">' +
-    '<div class="relative w-[190px] h-[190px] sm:w-[210px] sm:h-[210px] flex items-center justify-center">' +
+  html += '<div class="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[190px] sm:min-h-[210px]">' +
+    '<div class="relative w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] flex items-center justify-center">' +
       '<canvas id="' + canvasId + '" class="w-full h-full"></canvas>' +
-      // Centro informativo da Rosca (limpo, sem selos espremidos)
+      // Centro informativo da Rosca
       '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">' +
         '<span class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-none">' + stats.dominant.pct + '%</span>' +
         '<span class="text-xs font-semibold text-slate-500 mt-1">' + stats.dominant.shortTitle + '</span>' +
@@ -3377,16 +3377,16 @@ function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, que
     '</div>' +
   '</div>';
 
-  // Coluna 2: Lista Limpa e Executiva de Categorias
-  html += '<div class="md:col-span-7 flex flex-col justify-center gap-2.5 w-full">';
+  // Coluna 2: Lista Limpa e Executiva de Categorias (Texto 100% visível, sem cortes)
+  html += '<div class="lg:col-span-8 flex flex-col justify-center gap-2.5 w-full">';
   stats.items.forEach(item => {
-    html += '<div class="bg-white hover:bg-slate-50/80 p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-3">' +
+    html += '<div class="bg-white hover:bg-slate-50/90 p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-3 min-w-0 w-full">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
         '<span class="w-3.5 h-3.5 rounded-full flex-shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
-        '<span class="text-xs sm:text-sm font-semibold text-slate-700 truncate leading-snug">' + item.title + '</span>' +
+        '<span class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words">' + item.title + '</span>' +
       '</div>' +
       '<div class="flex-shrink-0 pl-2">' +
-        '<span class="inline-flex items-center justify-center min-w-[58px] px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
+        '<span class="inline-flex items-center justify-center min-w-[62px] px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
           item.pct + '%' +
         '</span>' +
       '</div>' +
