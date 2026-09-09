@@ -262,22 +262,20 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   ]
 }`;
 
-    // Lista de modelos Groq com fallbacks seguros e de alta performance
+    // Lista de modelos oficiais ativos da Groq (ordem de prioridade e fallback)
     const candidateModels = [
       'llama-3.3-70b-versatile',
-      'llama-3.1-70b-versatile',
       'llama-3.1-8b-instant',
       'mixtral-8x7b-32768',
       'gemma2-9b-it',
-      'qwen-2.5-32b',
       'deepseek-r1-distill-llama-70b',
-      'openai/gpt-oss-120b',
-      'gpt-oss-20b'
+      'llama-3.2-3b-preview',
+      'llama-3.2-1b-preview'
     ];
 
     let replyContent = null;
     let modelUsed = null;
-    let lastError = null;
+    const errorsList = [];
 
     for (const model of candidateModels) {
       try {
@@ -290,7 +288,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
           body: JSON.stringify({
             model: model,
             response_format: { type: "json_object" },
-            max_tokens: 3800,
+            max_tokens: 2200,
             temperature: 0.2,
             messages: [
               { role: 'system', content: systemPrompt },
@@ -308,18 +306,21 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
           }
         } else {
           const errText = await response.text();
-          lastError = 'Groq Status ' + response.status + ' (' + model + '): ' + errText;
-          console.warn('[Consultor IA] Falha no modelo ' + model + ':', lastError);
+          const errorMsg = 'Groq Status ' + response.status + ' (' + model + '): ' + errText;
+          errorsList.push(errorMsg);
+          console.warn('[Consultor IA] Falha no modelo ' + model + ':', errorMsg);
         }
       } catch (err) {
-        lastError = err.message;
-        console.warn('[Consultor IA] Exceção no modelo ' + model + ':', lastError);
+        const errorMsg = 'Exceção (' + model + '): ' + err.message;
+        errorsList.push(errorMsg);
+        console.warn('[Consultor IA] Exceção no modelo ' + model + ':', errorMsg);
       }
     }
 
     if (!replyContent) {
       return res.status(500).json({
-        error: 'Erro na API da Groq: ' + (lastError || 'Nenhum modelo respondeu com sucesso.'),
+        error: 'Erro na API da Groq: ' + (errorsList[0] || 'Nenhum modelo respondeu com sucesso.'),
+        details: errorsList.join(' | ')
       });
     }
 
