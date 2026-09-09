@@ -481,11 +481,11 @@ async function fetchSurveyData() {
     dataFetchError.classList.add("hidden");
     if (supabaseTableStatus) supabaseTableStatus.textContent = "Sincronizando...";
 
-    let { data, error } = await supabaseClient.from("respostas_pesquisa").select("*");
+    let { data, error } = await supabaseClient.from("respostas_pesquisa").select("*").range(0, 5000);
 
     if (error) {
       console.warn("Tentando fallback para tabela 'respostas radar':", error.message);
-      const fallbackAttempt = await supabaseClient.from("respostas radar").select("*");
+      const fallbackAttempt = await supabaseClient.from("respostas radar").select("*").range(0, 5000);
       if (!fallbackAttempt.error) {
         data = fallbackAttempt.data;
         error = null;
@@ -4114,7 +4114,10 @@ const SJC_BAIRROS_GEO = {
   "Vila Cândida": { lat: -23.158, lng: -45.905, regiao: "Zona Norte", color: "#6366F1", icon: "🏡" },
   "Jardim Guimarães": { lat: -23.150, lng: -45.895, regiao: "Zona Norte", color: "#6366F1", icon: "⛰️" },
   "Jardim Aparecida": { lat: -23.155, lng: -45.890, regiao: "Zona Norte", color: "#6366F1", icon: "⛪" },
-  "Bairrinho": { lat: -23.165, lng: -45.895, regiao: "Zona Norte", color: "#6366F1", icon: "🏘️" }
+  "Bairrinho": { lat: -23.165, lng: -45.895, regiao: "Zona Norte", color: "#6366F1", icon: "🏘️" },
+
+  // Agrupamento de registros sem bairro especificado (Garante 100% de integridade volumétrica N=477)
+  "Outros / Não informado": { lat: -23.208, lng: -45.885, regiao: "Centro / Oeste", color: "#64748B", icon: "📍" }
 };
 
 function normalizeBairroName(raw) {
@@ -4260,30 +4263,30 @@ function calculateSjcBairrosStats(dataMap, total, records, questionText) {
   if (records && records.length > 0) {
     records.forEach(r => {
       const raw = getField(r, [questionText, "Em qual bairro você mora?", "bairro", "Bairro", "bairro_mora"]);
-      if (raw) {
-        const normalized = normalizeBairroName(String(raw));
-        if (normalized && SJC_BAIRROS_GEO[normalized]) {
-          bairroCounts[normalized] = (bairroCounts[normalized] || 0) + 1;
-          totalResidentCount++;
-          const reg = SJC_BAIRROS_GEO[normalized].regiao;
-          if (regionCounts[reg] !== undefined) {
-            regionCounts[reg]++;
-          }
-        }
+      let normalized = raw ? normalizeBairroName(String(raw)) : null;
+      if (!normalized || !SJC_BAIRROS_GEO[normalized]) {
+        normalized = "Outros / Não informado";
+      }
+      bairroCounts[normalized] = (bairroCounts[normalized] || 0) + 1;
+      totalResidentCount++;
+      const reg = SJC_BAIRROS_GEO[normalized] ? SJC_BAIRROS_GEO[normalized].regiao : "Centro / Oeste";
+      if (regionCounts[reg] !== undefined) {
+        regionCounts[reg]++;
       }
     });
   }
 
   if (totalResidentCount === 0 && dataMap && Object.keys(dataMap).length > 0) {
     Object.entries(dataMap).forEach(([raw, cnt]) => {
-      const normalized = normalizeBairroName(raw);
-      if (normalized && SJC_BAIRROS_GEO[normalized]) {
-        bairroCounts[normalized] = (bairroCounts[normalized] || 0) + cnt;
-        totalResidentCount += cnt;
-        const reg = SJC_BAIRROS_GEO[normalized].regiao;
-        if (regionCounts[reg] !== undefined) {
-          regionCounts[reg] += cnt;
-        }
+      let normalized = normalizeBairroName(raw);
+      if (!normalized || !SJC_BAIRROS_GEO[normalized]) {
+        normalized = "Outros / Não informado";
+      }
+      bairroCounts[normalized] = (bairroCounts[normalized] || 0) + cnt;
+      totalResidentCount += cnt;
+      const reg = SJC_BAIRROS_GEO[normalized] ? SJC_BAIRROS_GEO[normalized].regiao : "Centro / Oeste";
+      if (regionCounts[reg] !== undefined) {
+        regionCounts[reg] += cnt;
       }
     });
   }
@@ -4294,7 +4297,7 @@ function calculateSjcBairrosStats(dataMap, total, records, questionText) {
       bairro,
       count,
       pct: ((count / base) * 100).toFixed(1),
-      ...SJC_BAIRROS_GEO[bairro]
+      ...(SJC_BAIRROS_GEO[bairro] || { lat: -23.208, lng: -45.885, regiao: "Centro / Oeste", color: "#64748B", icon: "📍" })
     }))
     .sort((a, b) => b.count - a.count);
 
@@ -4468,64 +4471,48 @@ function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, quest
   };
   window.sjcBairrosLayerGroups[mapContainerId] = groups;
 
-  // Plotagem de cada Bairro Real como Bolinha no Mapa de SJC
+  // Plotagem limpa e despoluída de bolinhas proporcionais por bairro (L.circleMarker)
   stats.bairros.forEach(b => {
-    const targetGroup = groups[b.regiao] || groups["Zona Sul"];
+    const targetGroup = groups[b.regiao] || groups["Centro / Oeste"];
     
-    // Raio proporcional em metros para a bolinha de calor
-    const radiusMeters = Math.max(300, Math.min(1800, Math.sqrt(b.count) * 180 + 200));
-
-    // 1. Bolinha de Calor / Circulo de Concentração do Bairro
-    const circle = L.circle([b.lat, b.lng], {
-      radius: radiusMeters,
-      color: b.color,
-      fillColor: b.color,
-      fillOpacity: 0.35,
-      weight: 2
-    }).addTo(targetGroup);
+    // Raio proporcional em pixels na tela (elegante e sem sobreposições opacas)
+    const radiusPx = Math.max(5, Math.min(22, Math.sqrt(b.count) * 3.2 + 3.5));
 
     const popupHtml = `
-      <div class="p-2 text-slate-800 min-w-[200px]">
-        <div class="flex items-center gap-1.5 mb-1">
-          <span class="text-base">${b.icon || '🏠'}</span>
-          <strong class="text-sm font-bold text-slate-900">${b.bairro}</strong>
+      <div class="p-2.5 text-slate-800 min-w-[210px] font-sans">
+        <div class="flex items-center gap-1.5 mb-1.5">
+          <span class="text-lg">${b.icon || '🏠'}</span>
+          <strong class="text-sm font-black text-slate-900 leading-tight">${b.bairro}</strong>
         </div>
-        <div class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold mb-2" style="background:${b.color}20; color:${b.color}; border:1px solid ${b.color}50;">
+        <div class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold mb-2.5" style="background:${b.color}20; color:${b.color}; border:1px solid ${b.color}50;">
           ${b.regiao}
         </div>
-        <div class="p-2 rounded-xl bg-slate-50 border border-slate-200/80 mb-1">
-          <p class="text-sm font-black text-brand-900">${b.count} Entrevistados</p>
-          <p class="text-xs font-bold text-slate-600">${b.pct}% da pesquisa</p>
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-1.5 shadow-2xs">
+          <p class="text-sm font-black text-brand-900">${b.count.toLocaleString('pt-BR')} Entrevistados</p>
+          <p class="text-xs font-bold text-slate-600">${b.pct}% da amostra total</p>
         </div>
-        <p class="text-[10px] text-slate-400">Origem residencial capturada na pesquisa</p>
+        <p class="text-[10px] text-slate-400 font-medium">Bairro de residência declarado na pesquisa</p>
       </div>
     `;
 
-    circle.bindPopup(popupHtml);
-    circle.bindTooltip(`<b>${b.bairro}</b>: ${b.count} entrevistados (${b.pct}%)`, {
+    // Bolinha estilizada e leve
+    const circleMarker = L.circleMarker([b.lat, b.lng], {
+      radius: radiusPx,
+      color: "#FFFFFF",
+      weight: 1.5,
+      fillColor: b.color,
+      fillOpacity: 0.75,
+      className: 'sjc-bairro-bubble'
+    }).addTo(targetGroup);
+
+    circleMarker.bindPopup(popupHtml);
+    circleMarker.bindTooltip(`<b>${b.bairro}</b>: ${b.count} entrevistados (${b.pct}%)`, {
       direction: 'top',
-      offset: [0, -5],
+      offset: [0, -radiusPx],
       className: 'sjc-map-tooltip'
     });
 
-    // 2. Bolinha Central (Badge / Pin com contador de entrevistados)
-    const markerHtml = `
-      <div style="background:${b.color}; color:white; font-weight:900; font-size:10px; padding:2px 6px; border-radius:10px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.35); white-space:nowrap; transform:translate(-50%, -50%); display:flex; align-items:center; gap:3px; cursor:pointer;">
-        <span>${b.icon || '🏠'}</span>
-        <span>${b.count}</span>
-      </div>
-    `;
-
-    const customIcon = L.divIcon({
-      className: 'custom-bairro-pin',
-      html: markerHtml,
-      iconSize: [0, 0]
-    });
-
-    const marker = L.marker([b.lat, b.lng], { icon: customIcon }).addTo(targetGroup);
-    marker.bindPopup(popupHtml);
-
-    window.sjcBairroMarkers[mapContainerId][b.bairro] = marker;
+    window.sjcBairroMarkers[mapContainerId][b.bairro] = circleMarker;
   });
 
   setTimeout(() => {
