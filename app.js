@@ -7626,7 +7626,6 @@ window.handleConsultorSubmit = async function(e) {
   window.currentAuditedTopic = userQuestion;
   window.consultorChatHistory = [{ role: "user", content: userQuestion }];
 
-  // 1. Iniciar Estado de Loading Cinematográfico de 6 Segundos
   window.isConsultorThinking = true;
   if (btnSend) btnSend.disabled = true;
   if (iconSend) iconSend.className = "fa-solid fa-circle-notch fa-spin text-xs";
@@ -7634,30 +7633,9 @@ window.handleConsultorSubmit = async function(e) {
   if (loadingOverlay) {
     loadingOverlay.classList.remove("hidden");
     if (loadingProgressBar) loadingProgressBar.style.width = "5%";
-    if (loadingStatusText) loadingStatusText.innerText = "Iniciando varredura quantitativa de São José dos Campos...";
+    if (loadingStatusText) loadingStatusText.innerText = "Iniciando processamento analítico de São José dos Campos...";
   }
 
-  // Ticker de frases a cada 1.5s
-  const statusPhrases = [
-    { time: 1000, progress: "25%", text: "Cruzando microdados de renda e zonas (Aquarius, Adyana, Sul)..." },
-    { time: 2500, progress: "50%", text: "Processando Matriz SWOT, PESTEL e 5 Forças de Porter..." },
-    { time: 4000, progress: "75%", text: "Calculando fit estratégico com os 4 Movimentos Culturais de SJC..." },
-    { time: 5200, progress: "95%", text: "Gerando 3 gráficos dinâmicos de validação no Chart.js..." }
-  ];
-
-  const timeouts = [];
-  statusPhrases.forEach(item => {
-    const t = setTimeout(() => {
-      if (loadingProgressBar) loadingProgressBar.style.width = item.progress;
-      if (loadingStatusText) loadingStatusText.innerText = item.text;
-    }, item.time);
-    timeouts.push(t);
-  });
-
-  // Temporizador mínimo de 6 segundos
-  const timerPromise = new Promise(resolve => setTimeout(resolve, 6000));
-
-  // Contexto simplificado
   let contextData = null;
   if (window.currentFilteredRecords && window.currentFilteredRecords.length > 0) {
     contextData = {
@@ -7667,53 +7645,91 @@ window.handleConsultorSubmit = async function(e) {
     };
   }
 
-  // Fetch para a rota backend /api/consultor
-  const fetchPromise = fetch("/api/consultor", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      messages: window.consultorChatHistory,
-      context: contextData
-    })
-  }).then(async res => {
-    let data = {};
-    let rawText = "";
-    try {
-      rawText = await res.text();
-      data = JSON.parse(rawText);
-    } catch (eParse) {
-      data = { rawText: rawText };
-    }
-    return { ok: res.ok, status: res.status, data, rawText };
-  }).catch(err => {
-    return { ok: false, status: 500, error: err };
-  });
-
   try {
-    const [_, result] = await Promise.all([timerPromise, fetchPromise]);
+    // 1. Iniciar Job Assíncrono no Backend
+    const startRes = await fetch("/api/consultor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "start",
+        idea: userQuestion,
+        messages: window.consultorChatHistory,
+        context: contextData
+      })
+    });
 
-    if (loadingProgressBar) loadingProgressBar.style.width = "100%";
-
-    if (!result.ok) {
-      console.error("[Consultor Backend Error]", result);
-      const errorMsg = result.data?.error || result.data?.details || result.data?.rawText || result.error?.message || `Erro HTTP ${result.status} na rota /api/consultor`;
-      alert("Erro ao gerar relatório:\n" + errorMsg);
-      return;
+    const startData = await startRes.json();
+    if (!startRes.ok || !startData.job_id) {
+      throw new Error(startData.error || startData.details || `Falha ao iniciar processamento (HTTP ${startRes.status})`);
     }
 
-    const reply = result.data?.reply || result.data?.result || "Nenhuma resposta retornada pela IA.";
+    const jobId = startData.job_id;
+    sessionStorage.setItem("radarsjc_active_job_id", jobId);
+    sessionStorage.setItem("radarsjc_active_job_topic", userQuestion);
 
-    // Salvar no histórico persistente do LocalStorage
-    window.saveAuditToHistory(userQuestion, reply);
+    // 2. Loop de Polling Periódico com Respeito a Rate Limits
+    const pollIntervalMs = 3500;
+    let isCompleted = false;
 
-    // Renderizar o Relatório em Tela Cheia no padrão Cards Modulares Brancos
-    window.renderExecutiveReport(userQuestion, reply);
+    while (!isCompleted && window.isConsultorThinking) {
+      await new Promise(resolve => setTimeout(resolve, pollIntervalMs));
+
+      try {
+        const statusRes = await fetch(`/api/consultor?action=status&job_id=${encodeURIComponent(jobId)}`);
+        const statusData = await statusRes.json();
+
+        if (!statusRes.ok) {
+          throw new Error(statusData.error || "Erro ao consultar status do job.");
+        }
+
+        if (statusData.status === "running" || statusData.status === "queued" || statusData.status === "waiting_rate_limit") {
+          const progress = Math.min(95, Math.max(8, statusData.progress_percent || 10));
+          if (loadingProgressBar) loadingProgressBar.style.width = progress + "%";
+          
+          let estText = "";
+          if (statusData.estimated_remaining_seconds > 0) {
+            const mins = Math.ceil(statusData.estimated_remaining_seconds / 60);
+            estText = mins > 1 ? ` (~${mins} min restantes)` : " (~1 min restante)";
+          }
+
+          if (loadingStatusText) {
+            loadingStatusText.innerText = (statusData.message || statusData.current_module_label || "Processando cruzamento de microdados...") + estText;
+          }
+        } else if (statusData.status === "completed") {
+          isCompleted = true;
+          if (loadingProgressBar) loadingProgressBar.style.width = "100%";
+          if (loadingStatusText) loadingStatusText.innerText = "Relatório concluído! Renderizando painel executivo...";
+
+          // 3. Buscar Resultado Final Consolidado
+          const resultRes = await fetch(`/api/consultor?action=result&job_id=${encodeURIComponent(jobId)}`);
+          const resultData = await resultRes.json();
+
+          if (!resultRes.ok || !resultData.result) {
+            throw new Error(resultData.error || "Erro ao resgatar o relatório consolidado.");
+          }
+
+          sessionStorage.removeItem("radarsjc_active_job_id");
+          sessionStorage.removeItem("radarsjc_active_job_topic");
+
+          const reply = resultData.result || resultData.reply;
+          window.saveAuditToHistory(userQuestion, reply);
+          window.renderExecutiveReport(userQuestion, reply);
+          break;
+        } else if (statusData.status === "failed" || statusData.status === "cancelled") {
+          throw new Error(statusData.message || statusData.error || "Ocorreu uma falha no processamento do relatório.");
+        }
+      } catch (pollErr) {
+        console.warn("[Polling Status Warn]", pollErr);
+        if (pollErr.message && pollErr.message.includes("GROQ_QUOTA_EXHAUSTED")) {
+          throw pollErr;
+        }
+      }
+    }
 
   } catch (err) {
-    console.error("Erro ao gerar auditoria estratégica:", err);
-    alert("Ocorreu um erro ao processar o relatório: " + err.message);
+    console.error("Erro no processamento assíncrono do consultor:", err);
+    alert("Erro na auditoria estratégica:\n" + (err.message || err));
   } finally {
-    timeouts.forEach(t => clearTimeout(t));
     if (loadingOverlay) loadingOverlay.classList.add("hidden");
     window.isConsultorThinking = false;
     if (btnSend) btnSend.disabled = false;
@@ -7724,6 +7740,7 @@ window.handleConsultorSubmit = async function(e) {
 // ==========================================
 // RENDERIZADOR EXECUTIVO DE ALTA FIDELIDADE (STUDIO 8 / MCKINSEY)
 // ==========================================
+
 window.renderExecutiveReport = function(topic, rawData, customDate) {
   const inputView = document.getElementById("consultor-input-view");
   const reportView = document.getElementById("consultor-report-view");
