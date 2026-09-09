@@ -1449,7 +1449,19 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR (LEAFLET) - LADO A LADO COM O MAPA DE BAIRROS
+      // 11.3.1. FREQUÊNCIA DE SAÍDAS PARA PASSEAR/DIVERTIR: Cards com Emojis e Porcentagens
+      if (qLower.includes("frequência") && (qLower.includes("sai") || qLower.includes("passear") || qLower.includes("divertir"))) {
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
+          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Rotina de Lazer & Vida Urbana</p>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full">' + renderFrequencyOutingCardsWidget(dataMap, total, records, questionText) + '</div>';
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
+
+      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM POLOS & CONCENTRAÇÃO (LEAFLET)
       if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
         const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
@@ -1463,36 +1475,36 @@ function processAndRenderDynamicCharts(records) {
           '</span>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
-          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText, false) +
+          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) +
         '</div>';
         cardsGrid.appendChild(cardEl);
 
         setTimeout(() => {
-          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText, false);
+          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText);
         }, 120);
         return;
       }
 
-      // 11.4.1. EM QUAL BAIRRO VOCÊ MORA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR RESIDENCIAL (LEAFLET) - LADO A LADO COM O MAPA DE REGIÕES
+      // 11.4.1. EM QUAL BAIRRO VOCÊ MORA: MAPA REAL DE BAIRROS DE SÃO JOSÉ DOS CAMPOS LINKADO AO BANCO DE DADOS (LEAFLET)
       if (qLower.includes("bairro") && (qLower.includes("mora") || qLower.includes("você mora") || qLower.includes("voce mora"))) {
         const mapContainerId = "map-sjc-bairros-" + globalQuestionIndex;
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real Oficial de SJC • Concentração & Distribuição Territorial dos Respondentes</p>' +
+            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real de Bairros de SJC • Geolocalização Direta da Base de Moradores</p>' +
           '</div>' +
           '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0">' +
-            '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
+            '<i class="fa-solid fa-map-pin text-emerald-600"></i> Geolocalizado' +
           '</span>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
-          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText, true) +
+          renderSjcBairrosMapWidget(mapContainerId, dataMap, total, records, questionText) +
         '</div>';
         cardsGrid.appendChild(cardEl);
 
         setTimeout(() => {
-          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText, true);
+          initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, questionText);
         }, 120);
         return;
       }
@@ -3227,6 +3239,129 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
   return html;
 }
 
+// 7.5.3.1. Cards com Emojis e Porcentagens para Frequência de Passeios e Lazer na Cidade
+function renderFrequencyOutingCardsWidget(dataMap, total, records, questionText) {
+  const freqConfigs = {
+    semanal: {
+      key: "semanal",
+      emoji: "✨",
+      title: "Toda semana",
+      subtitle: "Lazer frequente e passeios contínuos na cidade",
+      badgeBg: "bg-indigo-50 text-indigo-800 border-indigo-200",
+      border: "border-indigo-200 hover:border-indigo-300",
+      tag: "Alta Frequência",
+      tagBg: "bg-indigo-100 text-indigo-800",
+      iconBg: "bg-indigo-100/80"
+    },
+    recorrente: {
+      key: "recorrente",
+      emoji: "🍕",
+      title: "2 ou 3 vezes por mês",
+      subtitle: "Frequência quinzenal ou quase semanal",
+      badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
+      border: "border-blue-200 hover:border-blue-300",
+      tag: "Recorrente",
+      tagBg: "bg-blue-100 text-blue-800",
+      iconBg: "bg-blue-100/80"
+    },
+    mensal: {
+      key: "mensal",
+      emoji: "☕",
+      title: "1 vez por mês",
+      subtitle: "Passeios e saídas pontuais mensais",
+      badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
+      border: "border-amber-200 hover:border-amber-300",
+      tag: "Mensal",
+      tagBg: "bg-amber-100 text-amber-800",
+      iconBg: "bg-amber-100/80"
+    },
+    quase_nunca: {
+      key: "quase_nunca",
+      emoji: "🛋️",
+      title: "Quase nunca",
+      subtitle: "Preferência por ficar em casa e baixa circulação",
+      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
+      border: "border-emerald-200 hover:border-emerald-300",
+      tag: "Caseiro",
+      tagBg: "bg-emerald-100 text-emerald-800",
+      iconBg: "bg-emerald-100/80"
+    }
+  };
+
+  const counts = { semanal: 0, recorrente: 0, mensal: 0, quase_nunca: 0 };
+  let countTotal = 0;
+
+  if (records && records.length > 0) {
+    records.forEach(r => {
+      const v = (getField(r, [
+        questionText,
+        "Com que frequência você sai para passear ou se divertir na cidade?",
+        "frequencia_lazer",
+        "frequencia_passeio"
+      ]) || "").toLowerCase().trim();
+
+      if (v) {
+        countTotal++;
+        if (v.includes("toda semana") || v.includes("semana") || v.includes("frequente")) {
+          counts.semanal++;
+        } else if (v.includes("2 ou 3") || v.includes("2 a 3") || v.includes("vezes por mês") || v.includes("vezes por mes")) {
+          counts.recorrente++;
+        } else if (v.includes("1 vez") || v.includes("uma vez")) {
+          counts.mensal++;
+        } else if (v.includes("nunca") || v.includes("quase nunca") || v.includes("raramente")) {
+          counts.quase_nunca++;
+        } else {
+          counts.recorrente++;
+        }
+      }
+    });
+  }
+
+  if (countTotal === 0 && dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, cnt]) => {
+      const kl = k.toLowerCase().trim();
+      countTotal += cnt;
+      if (kl.includes("toda semana") || kl.includes("semana")) counts.semanal += cnt;
+      else if (kl.includes("2 ou 3") || kl.includes("2 a 3")) counts.recorrente += cnt;
+      else if (kl.includes("1 vez") || kl.includes("uma vez")) counts.mensal += cnt;
+      else counts.quase_nunca += cnt;
+    });
+  }
+
+  const base = countTotal > 0 ? countTotal : (total || 1);
+  const items = [
+    { ...freqConfigs.recorrente, count: counts.recorrente, pct: ((counts.recorrente / base) * 100).toFixed(1) },
+    { ...freqConfigs.semanal, count: counts.semanal, pct: ((counts.semanal / base) * 100).toFixed(1) },
+    { ...freqConfigs.mensal, count: counts.mensal, pct: ((counts.mensal / base) * 100).toFixed(1) },
+    { ...freqConfigs.quase_nunca, count: counts.quase_nunca, pct: ((counts.quase_nunca / base) * 100).toFixed(1) }
+  ];
+
+  items.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
+
+  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
+  items.forEach(cfg => {
+    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
+      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
+          cfg.emoji +
+        '</div>' +
+        '<div class="min-w-0 flex-1">' +
+          '<div class="flex items-center gap-2 mb-0.5">' +
+            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '</div>' +
+          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
+          '<p class="text-[11px] text-slate-400 truncate mt-0.5">' + cfg.subtitle + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="flex-shrink-0 text-right pl-2">' +
+        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + cfg.pct + '%</span>' +
+      '</div>' +
+    '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
 // 7.5.4. Cards com Emojis e Porcentagens para Cultura e Eventos
 function renderCultureEventsCardsWidget(dataMap, total, records, questionText) {
   const configs = {
@@ -3543,10 +3678,14 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
   return html;
 }
 
-/// 7.6.1. MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR DAS REGIÕES & BAIRROS (LEAFLET)
+/// 7.6.1. MAPAS REAIS OFICIAIS DE SÃO JOSÉ DOS CAMPOS (LEAFLET)
 window.sjcLeafletMaps = window.sjcLeafletMaps || {};
+window.sjcBairrosLayerGroups = window.sjcBairrosLayerGroups || {};
 
-function calculateSjcRegionStats(dataMap, total, records, questionText, isResidence = false) {
+// =========================================================================
+// MAPA 1: REGIÃO MAIS FREQUENTADA (QUAL REGIÃO VOCÊ MAIS FREQUENTA)
+// =========================================================================
+function calculateSjcRegionStats(dataMap, total, records, questionText) {
   let centroOeste = 0;
   let sul = 0;
   let leste = 0;
@@ -3554,83 +3693,23 @@ function calculateSjcRegionStats(dataMap, total, records, questionText, isReside
   let todas = 0;
   let countSum = 0;
 
-  const topBairros = {
-    centroOeste: {},
-    sul: {},
-    leste: {},
-    norte: {}
-  };
-
-  const isBairroMode = isResidence || (questionText && /bairro/i.test(questionText) && /mora/i.test(questionText));
-
   if (records && records.length > 0) {
     records.forEach(r => {
-      if (isBairroMode) {
-        const bairroVal = (getField(r, [questionText, "Em qual bairro você mora?", "bairro", "bairro_mora"]) || "").toLowerCase().trim();
-        const regiaoVal = (getField(r, ["Região", "regiao", "região"]) || "").toLowerCase().trim();
-        
-        if (bairroVal || regiaoVal) {
-          countSum++;
-          if (
-            regiaoVal.includes("oeste") || regiaoVal.includes("centro") ||
-            bairroVal.includes("aquarius") || bairroVal.includes("urbanova") || bairroVal.includes("das indústrias") || bairroVal.includes("das industrias") ||
-            bairroVal.includes("esplanada") || bairroVal.includes("vila ema") || bairroVal.includes("adyana") || bairroVal.includes("centro") ||
-            bairroVal.includes("betânia") || bairroVal.includes("betania") || bairroVal.includes("são dimas") || bairroVal.includes("sao dimas") ||
-            bairroVal.includes("américa") || bairroVal.includes("america") || bairroVal.includes("apollo") || bairroVal.includes("colinas") ||
-            bairroVal.includes("maringá") || bairroVal.includes("maringa")
-          ) {
-            centroOeste++;
-            if (bairroVal) topBairros.centroOeste[bairroVal] = (topBairros.centroOeste[bairroVal] || 0) + 1;
-          } else if (
-            regiaoVal.includes("sul") ||
-            bairroVal.includes("satélite") || bairroVal.includes("satelite") || bairroVal.includes("bosque") ||
-            bairroVal.includes("parque industrial") || bairroVal.includes("pq. industrial") || bairroVal.includes("pq industrial") ||
-            bairroVal.includes("morumbi") || bairroVal.includes("ypê") || bairroVal.includes("ype") || bairroVal.includes("jardim sul") ||
-            bairroVal.includes("portugal") || bairroVal.includes("oriente") || bairroVal.includes("terras do sul") || bairroVal.includes("interlagos") ||
-            bairroVal.includes("colonial") || bairroVal.includes("imperial") || bairroVal.includes("floradas") || bairroVal.includes("alemães") ||
-            bairroVal.includes("dom pedro")
-          ) {
-            sul++;
-            if (bairroVal) topBairros.sul[bairroVal] = (topBairros.sul[bairroVal] || 0) + 1;
-          } else if (
-            regiaoVal.includes("leste") ||
-            bairroVal.includes("vila industrial") || bairroVal.includes("vista verde") || bairroVal.includes("monte castelo") ||
-            bairroVal.includes("tesouro") || bairroVal.includes("campos de são josé") || bairroVal.includes("campos de sao jose") ||
-            bairroVal.includes("eugênio") || bairroVal.includes("eugenio") || bairroVal.includes("novo horizonte") || bairroVal.includes("galo branco") ||
-            bairroVal.includes("santa inês") || bairroVal.includes("santa ines") || bairroVal.includes("tatetuba")
-          ) {
-            leste++;
-            if (bairroVal) topBairros.leste[bairroVal] = (topBairros.leste[bairroVal] || 0) + 1;
-          } else if (
-            regiaoVal.includes("norte") ||
-            bairroVal.includes("santana") || bairroVal.includes("paiva") || bairroVal.includes("altos") ||
-            bairroVal.includes("buquirinha") || bairroVal.includes("cristina") || bairroVal.includes("telespark") ||
-            bairroVal.includes("minas gerais") || bairroVal.includes("alto da ponte")
-          ) {
-            norte++;
-            if (bairroVal) topBairros.norte[bairroVal] = (topBairros.norte[bairroVal] || 0) + 1;
-          } else {
-            sul++;
-            if (bairroVal) topBairros.sul[bairroVal] = (topBairros.sul[bairroVal] || 0) + 1;
-          }
-        }
-      } else {
-        const val = (questionText ? getField(r, [questionText, "Qual região da cidade você mais frequenta quando sai de casa?", "região", "regiao_frequenta"]) : "").toLowerCase().trim();
-        if (val) {
-          countSum++;
-          if (val.includes("oeste") || val.includes("centro") || val.includes("vila ema") || val.includes("aquarius") || val.includes("esplanada")) {
-            centroOeste++;
-          } else if (val.includes("sul") || val.includes("satélite") || val.includes("bosque")) {
-            sul++;
-          } else if (val.includes("todas") || val.includes("qualquer") || val.includes("todas as regiões")) {
-            todas++;
-          } else if (val.includes("leste") || val.includes("vista verde") || val.includes("eugênio") || val.includes("novo horizonte")) {
-            leste++;
-          } else if (val.includes("norte") || val.includes("santana")) {
-            norte++;
-          } else {
-            centroOeste++;
-          }
+      const val = (questionText ? getField(r, [questionText, "Qual região da cidade você mais frequenta quando sai de casa?", "região", "regiao_frequenta"]) : "").toLowerCase().trim();
+      if (val) {
+        countSum++;
+        if (val.includes("oeste") || val.includes("centro") || val.includes("vila ema") || val.includes("aquarius") || val.includes("esplanada")) {
+          centroOeste++;
+        } else if (val.includes("sul") || val.includes("satélite") || val.includes("bosque")) {
+          sul++;
+        } else if (val.includes("todas") || val.includes("qualquer") || val.includes("todas as regiões")) {
+          todas++;
+        } else if (val.includes("leste") || val.includes("vista verde") || val.includes("eugênio") || val.includes("novo horizonte")) {
+          leste++;
+        } else if (val.includes("norte") || val.includes("santana")) {
+          norte++;
+        } else {
+          centroOeste++;
         }
       }
     });
@@ -3640,36 +3719,18 @@ function calculateSjcRegionStats(dataMap, total, records, questionText, isReside
     Object.entries(dataMap).forEach(([k, cnt]) => {
       const kl = k.toLowerCase().trim();
       countSum += cnt;
-      if (
-        kl.includes("oeste") || kl.includes("centro") || kl.includes("aquarius") || kl.includes("urbanova") ||
-        kl.includes("das indústrias") || kl.includes("das industrias") || kl.includes("esplanada") || kl.includes("vila ema") ||
-        kl.includes("adyana") || kl.includes("são dimas") || kl.includes("sao dimas") || kl.includes("américa") || kl.includes("america")
-      ) {
+      if (kl.includes("oeste") || kl.includes("centro") || kl.includes("aquarius") || kl.includes("urbanova") || kl.includes("vila ema")) {
         centroOeste += cnt;
-        topBairros.centroOeste[k] = (topBairros.centroOeste[k] || 0) + cnt;
-      } else if (
-        kl.includes("sul") || kl.includes("satélite") || kl.includes("satelite") || kl.includes("bosque") ||
-        kl.includes("parque industrial") || kl.includes("morumbi") || kl.includes("ypê") || kl.includes("ype") ||
-        kl.includes("jardim sul") || kl.includes("portugal") || kl.includes("oriente")
-      ) {
+      } else if (kl.includes("sul") || kl.includes("satélite") || kl.includes("bosque")) {
         sul += cnt;
-        topBairros.sul[k] = (topBairros.sul[k] || 0) + cnt;
       } else if (kl.includes("todas") || kl.includes("todas regiões") || kl.includes("geral")) {
         todas += cnt;
-      } else if (
-        kl.includes("leste") || kl.includes("vila industrial") || kl.includes("vista verde") || kl.includes("monte castelo") ||
-        kl.includes("tesouro") || kl.includes("campos de são josé") || kl.includes("campos de sao jose") || kl.includes("eugênio") || kl.includes("eugenio")
-      ) {
+      } else if (kl.includes("leste") || kl.includes("vista verde") || kl.includes("eugênio")) {
         leste += cnt;
-        topBairros.leste[k] = (topBairros.leste[k] || 0) + cnt;
-      } else if (
-        kl.includes("norte") || kl.includes("santana") || kl.includes("paiva") || kl.includes("altos") || kl.includes("buquirinha")
-      ) {
+      } else if (kl.includes("norte") || kl.includes("santana")) {
         norte += cnt;
-        topBairros.norte[k] = (topBairros.norte[k] || 0) + cnt;
       } else {
-        if (isBairroMode) sul += cnt;
-        else centroOeste += cnt;
+        centroOeste += cnt;
       }
     });
   }
@@ -3677,129 +3738,73 @@ function calculateSjcRegionStats(dataMap, total, records, questionText, isReside
   const base = countSum > 0 ? countSum : (total || 1);
   return {
     total: base,
-    isBairroMode,
     centroOeste: { count: centroOeste, pct: ((centroOeste / base) * 100).toFixed(1) },
     sul: { count: sul, pct: ((sul / base) * 100).toFixed(1) },
     todas: { count: todas, pct: ((todas / base) * 100).toFixed(1) },
     leste: { count: leste, pct: ((leste / base) * 100).toFixed(1) },
-    norte: { count: norte, pct: ((norte / base) * 100).toFixed(1) },
-    topBairros
+    norte: { count: norte, pct: ((norte / base) * 100).toFixed(1) }
   };
 }
 
-function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText, isResidence = false) {
-  const stats = calculateSjcRegionStats(dataMap, total, records, questionText, isResidence);
+function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) {
+  const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
 
   let html = '<div class="w-full flex flex-col justify-between h-full gap-4">';
   
-  // Container do Mapa Real Leaflet Expandido
+  // Container do Mapa Leaflet
   html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[420px]">' +
     '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0"></div>' +
-    // Badge flutuante de cobertura
+    // Badge flutuante
     '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
       '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
-        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">' + (stats.isBairroMode ? 'Moradia dos Cidadãos' : 'São José dos Campos') + '</p>' +
+        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Polos Mais Frequentados</p>' +
         '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
       '</div>' +
     '</div>' +
   '</div>';
 
-  // Legenda Interativa e Ranking de Concentração Expandida
-  if (stats.isBairroMode) {
-    html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
-      // 1. Centro / Oeste
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
-          '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Jd. Indústrias, Urbanova</p>' +
-      '</button>' +
+  // Botões de Foco Regional
+  html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
+        '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Vila Ema, Centro</p>' +
+    '</button>' +
 
-      // 2. Zona Sul
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
-          '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Industrial</p>' +
-      '</button>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
+        '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Ind.</p>' +
+    '</button>' +
 
-      // 3. Zona Leste
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
-          '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-sky-700 truncate">Vila Ind., Vista Verde, M. Castelo</p>' +
-      '</button>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
+        '<span class="text-xs sm:text-sm font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[10px] font-medium text-cyan-700 truncate">Circulação Geral</p>' +
+    '</button>' +
 
-      // 4. Zona Norte
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
-          '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Vila Paiva, Altos</p>' +
-      '</button>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
+        '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[10px] font-medium text-sky-700 truncate">Vista Verde, Eugênio Melo</p>' +
+    '</button>' +
 
-      // 5. Visão Geral SJC
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/90 border border-slate-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Visão Geral</span>' +
-          '<span class="text-xs sm:text-sm font-black text-slate-700">100%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-slate-500 truncate">Todos os Bairros</p>' +
-      '</button>' +
-    '</div>';
-  } else {
-    html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
-      // 1. Centro / Oeste
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
-          '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Vila Ema, Centro</p>' +
-      '</button>' +
-
-      // 2. Zona Sul
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
-          '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Ind.</p>' +
-      '</button>' +
-
-      // 3. Todas as Regiões
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
-          '<span class="text-xs sm:text-sm font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-cyan-700 truncate">Circulação Geral</p>' +
-      '</button>' +
-
-      // 4. Zona Leste
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
-          '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-sky-700 truncate">Vista Verde, Eugênio Melo</p>' +
-      '</button>' +
-
-      // 5. Zona Norte
-      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-        '<div class="flex items-center justify-between gap-1 mb-1">' +
-          '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
-          '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
-        '</div>' +
-        '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Altos Santana</p>' +
-      '</button>' +
-    '</div>';
-  }
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+      '<div class="flex items-center justify-between gap-1 mb-1">' +
+        '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
+        '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
+      '</div>' +
+      '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Altos Santana</p>' +
+    '</button>' +
+  '</div>';
 
   html += '</div>';
   return html;
@@ -3812,11 +3817,10 @@ window.focusSjcRegion = function(mapContainerId, coords, zoomLevel) {
   }
 };
 
-function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText, isResidence = false) {
+function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText) {
   const container = document.getElementById(mapContainerId);
   if (!container || typeof L === "undefined") return;
 
-  // Limpar mapa anterior se já inicializado no mesmo ID
   if (window.sjcLeafletMaps[mapContainerId]) {
     try {
       window.sjcLeafletMaps[mapContainerId].remove();
@@ -3824,9 +3828,8 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     delete window.sjcLeafletMaps[mapContainerId];
   }
 
-  const stats = calculateSjcRegionStats(dataMap, total, records, questionText, isResidence);
+  const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
 
-  // Inicializar o Mapa Centralizado em São José dos Campos
   const map = L.map(mapContainerId, {
     center: [-23.208, -45.885],
     zoom: 11.5,
@@ -3839,16 +3842,14 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
 
   window.sjcLeafletMaps[mapContainerId] = map;
 
-  // Tile layer institucional ultra-limpo (CartoDB Voyager)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  // Tile layer OpenStreetMap standard ultra-rápido e sem exigência de chave de API
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    subdomains: 'abcd'
+    attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  const isBairro = stats.isBairroMode;
-
   // 1. Região Centro / Oeste
-  const centroOesteHalo = L.circle([-23.198, -45.908], {
+  L.circle([-23.198, -45.908], {
     radius: 3400,
     color: "#F59E0B",
     fillColor: "#F59E0B",
@@ -3864,17 +3865,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     weight: 2
   }).addTo(map);
 
-  const centroOestePopupContent = isBairro ? `
-    <div class="p-1 text-slate-800">
-      <div class="flex items-center gap-1.5 mb-1">
-        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-        <strong class="text-sm font-bold text-slate-900">Moradores Centro / Oeste</strong>
-      </div>
-      <p class="text-base font-black text-amber-700">${stats.centroOeste.pct}% dos Moradores</p>
-      <p class="text-xs text-slate-500 font-medium">${stats.centroOeste.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Jd. Aquarius, Jd. das Indústrias, Urbanova, Vila Ema, Esplanada, Centro</p>
-    </div>
-  ` : `
+  const centroOestePopup = `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
@@ -3882,21 +3873,20 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       </div>
       <p class="text-base font-black text-amber-700">${stats.centroOeste.pct}% de Concentração</p>
       <p class="text-xs text-slate-500 font-medium">${stats.centroOeste.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Jd. Aquarius, Vila Ema, Esplanada, Urbanova, Centro</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Polos: Jd. Aquarius, Vila Ema, Esplanada, Urbanova, Centro</p>
     </div>
   `;
-
-  centroOesteCore.bindPopup(centroOestePopupContent);
+  centroOesteCore.bindPopup(centroOestePopup);
 
   const centroIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#F59E0B; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '🔥'} ${stats.centroOeste.pct}%</div>`,
+    html: `<div style="background:#F59E0B; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">🔥 ${stats.centroOeste.pct}%</div>`,
     iconSize: [0, 0]
   });
-  L.marker([-23.198, -45.908], { icon: centroIcon }).addTo(map).bindPopup(centroOesteCore.getPopup());
+  L.marker([-23.198, -45.908], { icon: centroIcon }).addTo(map).bindPopup(centroOestePopup);
 
   // 2. Zona Sul
-  const sulHalo = L.circle([-23.248, -45.892], {
+  L.circle([-23.248, -45.892], {
     radius: 3000,
     color: "#0284C7",
     fillColor: "#0284C7",
@@ -3908,21 +3898,11 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     radius: 1900,
     color: "#0369A1",
     fillColor: "#0284C7",
-    fillOpacity: 42,
+    fillOpacity: 0.42,
     weight: 2
   }).addTo(map);
 
-  const sulPopupContent = isBairro ? `
-    <div class="p-1 text-slate-800">
-      <div class="flex items-center gap-1.5 mb-1">
-        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-        <strong class="text-sm font-bold text-slate-900">Moradores Zona Sul</strong>
-      </div>
-      <p class="text-base font-black text-blue-700">${stats.sul.pct}% dos Moradores</p>
-      <p class="text-xs text-slate-500 font-medium">${stats.sul.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Morumbi, Jd. América</p>
-    </div>
-  ` : `
+  const sulPopup = `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
@@ -3930,21 +3910,20 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       </div>
       <p class="text-base font-black text-blue-700">${stats.sul.pct}% de Concentração</p>
       <p class="text-xs text-slate-500 font-medium">${stats.sul.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Floradas</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Polos: Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Floradas</p>
     </div>
   `;
-
-  sulCore.bindPopup(sulPopupContent);
+  sulCore.bindPopup(sulPopup);
 
   const sulIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#0284C7; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '📍'} ${stats.sul.pct}%</div>`,
+    html: `<div style="background:#0284C7; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.sul.pct}%</div>`,
     iconSize: [0, 0]
   });
-  L.marker([-23.248, -45.892], { icon: sulIcon }).addTo(map).bindPopup(sulCore.getPopup());
+  L.marker([-23.248, -45.892], { icon: sulIcon }).addTo(map).bindPopup(sulPopup);
 
   // 3. Zona Leste
-  const lesteHalo = L.circle([-23.182, -45.815], {
+  L.circle([-23.182, -45.815], {
     radius: 2500,
     color: "#06B6D4",
     fillColor: "#06B6D4",
@@ -3960,17 +3939,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     weight: 2
   }).addTo(map);
 
-  const lestePopupContent = isBairro ? `
-    <div class="p-1 text-slate-800">
-      <div class="flex items-center gap-1.5 mb-1">
-        <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
-        <strong class="text-sm font-bold text-slate-900">Moradores Zona Leste</strong>
-      </div>
-      <p class="text-base font-black text-cyan-700">${stats.leste.pct}% dos Moradores</p>
-      <p class="text-xs text-slate-500 font-medium">${stats.leste.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Vila Industrial, Vista Verde, Monte Castelo, Vila Tesouro, Campos de SJC</p>
-    </div>
-  ` : `
+  const lestePopup = `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
@@ -3978,21 +3947,20 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       </div>
       <p class="text-base font-black text-cyan-700">${stats.leste.pct}% de Concentração</p>
       <p class="text-xs text-slate-500 font-medium">${stats.leste.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Vista Verde, Eugênio de Melo, Novo Horizonte, Vila Industrial</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Polos: Vista Verde, Eugênio de Melo, Novo Horizonte, Vila Industrial</p>
     </div>
   `;
-
-  lesteCore.bindPopup(lestePopupContent);
+  lesteCore.bindPopup(lestePopup);
 
   const lesteIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#06B6D4; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '📍'} ${stats.leste.pct}%</div>`,
+    html: `<div style="background:#06B6D4; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.leste.pct}%</div>`,
     iconSize: [0, 0]
   });
-  L.marker([-23.182, -45.815], { icon: lesteIcon }).addTo(map).bindPopup(lesteCore.getPopup());
+  L.marker([-23.182, -45.815], { icon: lesteIcon }).addTo(map).bindPopup(lestePopup);
 
   // 4. Zona Norte
-  const norteHalo = L.circle([-23.142, -45.905], {
+  L.circle([-23.142, -45.905], {
     radius: 2200,
     color: "#6366F1",
     fillColor: "#6366F1",
@@ -4008,17 +3976,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     weight: 2
   }).addTo(map);
 
-  const nortePopupContent = isBairro ? `
-    <div class="p-1 text-slate-800">
-      <div class="flex items-center gap-1.5 mb-1">
-        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-        <strong class="text-sm font-bold text-slate-900">Moradores Zona Norte</strong>
-      </div>
-      <p class="text-base font-black text-indigo-700">${stats.norte.pct}% dos Moradores</p>
-      <p class="text-xs text-slate-500 font-medium">${stats.norte.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Santana, Vila Paiva, Altos de Santana, Buquirinha, Minas Gerais</p>
-    </div>
-  ` : `
+  const nortePopup = `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
@@ -4026,20 +3984,658 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       </div>
       <p class="text-base font-black text-indigo-700">${stats.norte.pct}% de Concentração</p>
       <p class="text-xs text-slate-500 font-medium">${stats.norte.count} respondentes</p>
-      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Santana, Altos de Santana, Buquirinha, Vila Paiva</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Polos: Santana, Altos de Santana, Buquirinha, Vila Paiva</p>
     </div>
   `;
-
-  norteCore.bindPopup(nortePopupContent);
+  norteCore.bindPopup(nortePopup);
 
   const norteIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#6366F1; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '📍'} ${stats.norte.pct}%</div>`,
+    html: `<div style="background:#6366F1; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.norte.pct}%</div>`,
     iconSize: [0, 0]
   });
-  L.marker([-23.142, -45.905], { icon: norteIcon }).addTo(map).bindPopup(norteCore.getPopup());
+  L.marker([-23.142, -45.905], { icon: norteIcon }).addTo(map).bindPopup(nortePopup);
 
-  // Forçar recálculo de tamanho do Leaflet após renderizar o DOM
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 250);
+}
+
+// =========================================================================
+// MAPA 2: BAIRROS DE RESIDÊNCIA (EM QUAL BAIRRO VOCÊ MORA) - GEOLOCALIZADO & RANKING
+// =========================================================================
+const SJC_BAIRROS_GEO = {
+  // Centro / Oeste
+  "Jardim das Indústrias": { lat: -23.227, lng: -45.918, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏭" },
+  "Jardim Aquarius": { lat: -23.216, lng: -45.908, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏙️" },
+  "Centro": { lat: -23.186, lng: -45.884, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏛️" },
+  "Urbanova": { lat: -23.203, lng: -45.945, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏞️" },
+  "Jardim São Dimas": { lat: -23.199, lng: -45.888, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🎓" },
+  "Vila Adyana": { lat: -23.197, lng: -45.892, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🌳" },
+  "Jardim Esplanada": { lat: -23.204, lng: -45.903, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🛍️" },
+  "Vila Ema": { lat: -23.201, lng: -45.898, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🍷" },
+  "Vila Betânia": { lat: -23.194, lng: -45.881, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏥" },
+  "Jardim das Colinas": { lat: -23.210, lng: -45.915, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏡" },
+  "Jardim Alvorada": { lat: -23.220, lng: -45.913, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏡" },
+  "Jardim Maringá": { lat: -23.191, lng: -45.889, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏢" },
+  "Jardim Augusta": { lat: -23.195, lng: -45.875, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏢" },
+  "Jardim Oswaldo Cruz": { lat: -23.194, lng: -45.879, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏢" },
+  "Jardim Apolo": { lat: -23.205, lng: -45.895, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏛️" },
+  "Jardim Jussara": { lat: -23.198, lng: -45.885, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🌸" },
+  "Santa Helena": { lat: -23.205, lng: -45.890, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🏡" },
+  "Vale dos Pinheiros": { lat: -23.220, lng: -45.895, regiao: "Centro / Oeste", color: "#F59E0B", icon: "🌲" },
+
+  // Sul
+  "Jardim Satélite": { lat: -23.235, lng: -45.891, regiao: "Zona Sul", color: "#0284C7", icon: "🛍️" },
+  "Bosque dos Eucaliptos": { lat: -23.257, lng: -45.887, regiao: "Zona Sul", color: "#0284C7", icon: "🌲" },
+  "Jardim Colonial": { lat: -23.268, lng: -45.874, regiao: "Zona Sul", color: "#0284C7", icon: "🏡" },
+  "Jardim América": { lat: -23.241, lng: -45.894, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Jardim Portugal": { lat: -23.250, lng: -45.880, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Jardim Imperial": { lat: -23.275, lng: -45.867, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Jardim Morumbi": { lat: -23.262, lng: -45.878, regiao: "Zona Sul", color: "#0284C7", icon: "🏡" },
+  "Parque Industrial": { lat: -23.242, lng: -45.903, regiao: "Zona Sul", color: "#0284C7", icon: "🏥" },
+  "Jardim Oriente": { lat: -23.246, lng: -45.883, regiao: "Zona Sul", color: "#0284C7", icon: "🏬" },
+  "Jardim Interlagos": { lat: -23.265, lng: -45.862, regiao: "Zona Sul", color: "#0284C7", icon: "🏡" },
+  "Dom Pedro II": { lat: -23.252, lng: -45.867, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Floradas de São José": { lat: -23.239, lng: -45.889, regiao: "Zona Sul", color: "#0284C7", icon: "🌸" },
+  "Chácaras Reunidas": { lat: -23.249, lng: -45.918, regiao: "Zona Sul", color: "#0284C7", icon: "🏭" },
+  "Palmeiras de São José": { lat: -23.245, lng: -45.912, regiao: "Zona Sul", color: "#0284C7", icon: "🌴" },
+  "Jardim Sul": { lat: -23.258, lng: -45.894, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Vale do Sol": { lat: -23.269, lng: -45.885, regiao: "Zona Sul", color: "#0284C7", icon: "☀️" },
+  "Campo dos Alemães": { lat: -23.278, lng: -45.881, regiao: "Zona Sul", color: "#0284C7", icon: "⚽" },
+  "Putim": { lat: -23.260, lng: -45.830, regiao: "Zona Sul", color: "#0284C7", icon: "🏡" },
+  "Jardim Santa Júlia": { lat: -23.268, lng: -45.820, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Jardim São Judas Tadeu": { lat: -23.264, lng: -45.825, regiao: "Zona Sul", color: "#0284C7", icon: "⛪" },
+  "Jd Veneza": { lat: -23.272, lng: -45.865, regiao: "Zona Sul", color: "#0284C7", icon: "🏠" },
+  "Residencial São Francisco": { lat: -23.270, lng: -45.860, regiao: "Zona Sul", color: "#0284C7", icon: "🏡" },
+  "Jardim Paraíso": { lat: -23.245, lng: -45.890, regiao: "Zona Sul", color: "#0284C7", icon: "🌴" },
+  "Jardim Souto": { lat: -23.225, lng: -45.860, regiao: "Zona Sul", color: "#0284C7", icon: "✈️" },
+  "Jardim Esmeralda": { lat: -23.250, lng: -45.875, regiao: "Zona Sul", color: "#0284C7", icon: "💎" },
+  "Residencial União": { lat: -23.265, lng: -45.880, regiao: "Zona Sul", color: "#0284C7", icon: "🤝" },
+  "Vila Nair": { lat: -23.215, lng: -45.875, regiao: "Zona Sul", color: "#0284C7", icon: "🏡" },
+  "Jardim Cruzeiro do Sul": { lat: -23.270, lng: -45.875, regiao: "Zona Sul", color: "#0284C7", icon: "✨" },
+  "Jardim del Rey": { lat: -23.275, lng: -45.870, regiao: "Zona Sul", color: "#0284C7", icon: "👑" },
+  "Residencial Dom Bosco": { lat: -23.260, lng: -45.865, regiao: "Zona Sul", color: "#0284C7", icon: "⛪" },
+  "Taquari": { lat: -23.250, lng: -45.920, regiao: "Zona Sul", color: "#0284C7", icon: "🌳" },
+  "Jardim Aeroporto": { lat: -23.220, lng: -45.865, regiao: "Zona Sul", color: "#0284C7", icon: "✈️" },
+  "Águas da Prata": { lat: -23.275, lng: -45.885, regiao: "Zona Sul", color: "#0284C7", icon: "💧" },
+
+  // Leste
+  "Vista Verde": { lat: -23.181, lng: -45.828, regiao: "Zona Leste", color: "#06B6D4", icon: "🌳" },
+  "Jardim Santa Inês": { lat: -23.182, lng: -45.789, regiao: "Zona Leste", color: "#06B6D4", icon: "⛪" },
+  "Campos de São José": { lat: -23.208, lng: -45.774, regiao: "Zona Leste", color: "#06B6D4", icon: "🌾" },
+  "Monte Castelo": { lat: -23.188, lng: -45.871, regiao: "Zona Leste", color: "#06B6D4", icon: "🏰" },
+  "Jardim Tesouro": { lat: -23.193, lng: -45.845, regiao: "Zona Leste", color: "#06B6D4", icon: "💰" },
+  "Vila Industrial": { lat: -23.182, lng: -45.862, regiao: "Zona Leste", color: "#06B6D4", icon: "🏭" },
+  "Jardim das Cerejeiras": { lat: -23.189, lng: -45.795, regiao: "Zona Leste", color: "#06B6D4", icon: "🌸" },
+  "Novo Horizonte": { lat: -23.184, lng: -45.768, regiao: "Zona Leste", color: "#06B6D4", icon: "🌅" },
+  "Jardim Diamante": { lat: -23.184, lng: -45.808, regiao: "Zona Leste", color: "#06B6D4", icon: "💎" },
+  "Eugênio de Melo": { lat: -23.155, lng: -45.772, regiao: "Zona Leste", color: "#06B6D4", icon: "🚉" },
+  "Jardim Paulista": { lat: -23.191, lng: -45.875, regiao: "Zona Leste", color: "#06B6D4", icon: "🏙️" },
+  "Vila Tatetuba": { lat: -23.180, lng: -45.850, regiao: "Zona Leste", color: "#06B6D4", icon: "🏡" },
+  "Jardim Motorama": { lat: -23.177, lng: -45.820, regiao: "Zona Leste", color: "#06B6D4", icon: "🚗" },
+  "Jardim Ismênia": { lat: -23.179, lng: -45.842, regiao: "Zona Leste", color: "#06B6D4", icon: "🌺" },
+  "Santa Hermínia": { lat: -23.190, lng: -45.755, regiao: "Zona Leste", color: "#06B6D4", icon: "🏡" },
+  "Jardim da Granja": { lat: -23.209, lng: -45.850, regiao: "Zona Leste", color: "#06B6D4", icon: "✈️" },
+  "CTA": { lat: -23.210, lng: -45.865, regiao: "Zona Leste", color: "#06B6D4", icon: "🚀" },
+  "Jardim Mariana 2": { lat: -23.189, lng: -45.772, regiao: "Zona Leste", color: "#06B6D4", icon: "🏠" },
+  "Jardim Nova Michigan II": { lat: -23.205, lng: -45.765, regiao: "Zona Leste", color: "#06B6D4", icon: "🏡" },
+  "Majestic": { lat: -23.160, lng: -45.760, regiao: "Zona Leste", color: "#06B6D4", icon: "🏠" },
+  "Jardim do Céu": { lat: -23.212, lng: -45.770, regiao: "Zona Leste", color: "#06B6D4", icon: "🏠" },
+  "Jardim Coqueiro": { lat: -23.185, lng: -45.760, regiao: "Zona Leste", color: "#06B6D4", icon: "🏠" },
+  "Galo Branco": { lat: -23.168, lng: -45.789, regiao: "Zona Leste", color: "#06B6D4", icon: "🐓" },
+  "Jardim Santa Maria": { lat: -23.220, lng: -45.850, regiao: "Zona Leste", color: "#06B6D4", icon: "🏠" },
+  "Chácaras São José": { lat: -23.210, lng: -45.790, regiao: "Zona Leste", color: "#06B6D4", icon: "🌾" },
+  "Jardim Castanheira": { lat: -23.175, lng: -45.805, regiao: "Zona Leste", color: "#06B6D4", icon: "🌰" },
+  "Jardim Nova Detroit": { lat: -23.185, lng: -45.815, regiao: "Zona Leste", color: "#06B6D4", icon: "🚗" },
+  "Jardim São Vicente": { lat: -23.190, lng: -45.810, regiao: "Zona Leste", color: "#06B6D4", icon: "⛪" },
+  "Jardim Valparaíba": { lat: -23.170, lng: -45.810, regiao: "Zona Leste", color: "#06B6D4", icon: "🌳" },
+  "Jardim Ouro Preto": { lat: -23.185, lng: -45.800, regiao: "Zona Leste", color: "#06B6D4", icon: "🏡" },
+  "Chácara Araújo": { lat: -23.195, lng: -45.805, regiao: "Zona Leste", color: "#06B6D4", icon: "🌾" },
+  "Vila Monterrey": { lat: -23.140, lng: -45.790, regiao: "Zona Leste", color: "#06B6D4", icon: "🏡" },
+  "Residencial Cambuí": { lat: -23.210, lng: -45.840, regiao: "Zona Leste", color: "#06B6D4", icon: "🏢" },
+  "Santa Lúcia": { lat: -23.170, lng: -45.795, regiao: "Zona Leste", color: "#06B6D4", icon: "🏡" },
+  "Floresta": { lat: -23.180, lng: -45.800, regiao: "Zona Leste", color: "#06B6D4", icon: "🌲" },
+
+  // Norte
+  "Santana": { lat: -23.155, lng: -45.902, regiao: "Zona Norte", color: "#6366F1", icon: "⛪" },
+  "Jardim Minas Gerais": { lat: -23.145, lng: -45.885, regiao: "Zona Norte", color: "#6366F1", icon: "⛰️" },
+  "Buquirinha": { lat: -23.125, lng: -45.915, regiao: "Zona Norte", color: "#6366F1", icon: "🌳" },
+  "Altos de Santana": { lat: -23.148, lng: -45.908, regiao: "Zona Norte", color: "#6366F1", icon: "⛰️" },
+  "Vila Paiva": { lat: -23.162, lng: -45.908, regiao: "Zona Norte", color: "#6366F1", icon: "🏡" },
+  "Alto da Ponte": { lat: -23.159, lng: -45.895, regiao: "Zona Norte", color: "#6366F1", icon: "🌉" },
+  "Vila Cristina": { lat: -23.142, lng: -45.903, regiao: "Zona Norte", color: "#6366F1", icon: "🏠" },
+  "Jardim Telespark": { lat: -23.152, lng: -45.890, regiao: "Zona Norte", color: "#6366F1", icon: "📻" },
+  "São Francisco Xavier": { lat: -22.905, lng: -45.955, regiao: "Zona Norte", color: "#6366F1", icon: "🌲" },
+  "Vila Terezinha": { lat: -23.175, lng: -45.890, regiao: "Zona Norte", color: "#6366F1", icon: "🏡" },
+  "Altos do Caetê": { lat: -23.135, lng: -45.910, regiao: "Zona Norte", color: "#6366F1", icon: "⛰️" },
+  "Vila São Geraldo": { lat: -23.161, lng: -45.892, regiao: "Zona Norte", color: "#6366F1", icon: "🏘️" },
+  "Vila Sinhá": { lat: -23.155, lng: -45.898, regiao: "Zona Norte", color: "#6366F1", icon: "🏡" },
+  "Vila Cândida": { lat: -23.158, lng: -45.905, regiao: "Zona Norte", color: "#6366F1", icon: "🏡" },
+  "Jardim Guimarães": { lat: -23.150, lng: -45.895, regiao: "Zona Norte", color: "#6366F1", icon: "⛰️" },
+  "Jardim Aparecida": { lat: -23.155, lng: -45.890, regiao: "Zona Norte", color: "#6366F1", icon: "⛪" },
+  "Bairrinho": { lat: -23.165, lng: -45.895, regiao: "Zona Norte", color: "#6366F1", icon: "🏘️" }
+};
+
+function normalizeBairroName(raw) {
+  if (!raw) return null;
+  const s = raw.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  
+  if (!s || s === 'sao jose dos campos' || s === 'sjc') return null;
+
+  // Centro / Oeste
+  if (s.includes('aquarius')) return "Jardim Aquarius";
+  if (s.includes('urbanova')) return "Urbanova";
+  if (s.includes('industria') || s.includes('industrias')) return "Jardim das Indústrias";
+  if (s.includes('vila ema')) return "Vila Ema";
+  if (s.includes('adyana') || s.includes('adyanna') || s.includes('adriana') || s.includes('adiana')) return "Vila Adyana";
+  if (s === 'centro' || s.includes('vila maria') || s.includes('vila rossi') || s.includes('vila zizinha') || s.includes('vila machado')) return "Centro";
+  if (s.includes('esplanada')) return "Jardim Esplanada";
+  if (s.includes('dimas')) return "Jardim São Dimas";
+  if (s.includes('betania') || s.includes('bethania')) return "Vila Betânia";
+  if (s.includes('colinas')) return "Jardim das Colinas";
+  if (s.includes('alvorada')) return "Jardim Alvorada";
+  if (s.includes('maringa')) return "Jardim Maringá";
+  if (s.includes('augusta')) return "Jardim Augusta";
+  if (s.includes('oswaldo cruz')) return "Jardim Oswaldo Cruz";
+  if (s.includes('apolo') || s.includes('apollo')) return "Jardim Apolo";
+  if (s.includes('jussara')) return "Jardim Jussara";
+  if (s.includes('helena')) return "Santa Helena";
+  if (s.includes('pinheiros')) return "Vale dos Pinheiros";
+
+  // Sul
+  if (s.includes('satelite') || s === 'j satelite') return "Jardim Satélite";
+  if (s.includes('bosque') || s.includes('bq eucaliptos') || s.includes('ipes') || s.includes('ypes') || s.includes('recanto dos eucaliptos')) return "Bosque dos Eucaliptos";
+  if (s.includes('parque industrial') || s.includes('pq industrial') || s.includes('porque industrial') || s.includes('pque martim')) return "Parque Industrial";
+  if (s.includes('oriente')) return "Jardim Oriente";
+  if (s.includes('america')) return "Jardim América";
+  if (s.includes('morumbi')) return "Jardim Morumbi";
+  if (s.includes('portugal')) return "Jardim Portugal";
+  if (s.includes('colonial')) return "Jardim Colonial";
+  if (s.includes('imperial')) return "Jardim Imperial";
+  if (s.includes('interlagos')) return "Jardim Interlagos";
+  if (s.includes('floradas')) return "Floradas de São José";
+  if (s.includes('dom pedro')) return "Dom Pedro II";
+  if (s.includes('reunidas')) return "Chácaras Reunidas";
+  if (s.includes('palmeiras')) return "Palmeiras de São José";
+  if (s.includes('jd sul') || s.includes('jardim sul') || s.includes('terras do sul')) return "Jardim Sul";
+  if (s.includes('vale do sol')) return "Vale do Sol";
+  if (s.includes('alemao') || s.includes('alemaes')) return "Campo dos Alemães";
+  if (s.includes('putim') || s.includes('santa fe putim')) return "Putim";
+  if (s.includes('julia')) return "Jardim Santa Júlia";
+  if (s.includes('judas')) return "Jardim São Judas Tadeu";
+  if (s.includes('veneza')) return "Jd Veneza";
+  if (s.includes('sao francisco') && !s.includes('xavier')) return "Residencial São Francisco";
+  if (s.includes('paraiso') || s.includes('paraisso')) return "Jardim Paraíso";
+  if (s.includes('souto')) return "Jardim Souto";
+  if (s.includes('esmeralda')) return "Jardim Esmeralda";
+  if (s.includes('uniao') || s.includes('residencial uniao')) return "Residencial União";
+  if (s.includes('nair')) return "Vila Nair";
+  if (s.includes('cruzeiro do sul')) return "Jardim Cruzeiro do Sul";
+  if (s.includes('del rey') || s.includes('delrey')) return "Jardim del Rey";
+  if (s.includes('dom bosco')) return "Residencial Dom Bosco";
+  if (s.includes('taquari')) return "Taquari";
+  if (s.includes('aeroporto')) return "Jardim Aeroporto";
+  if (s.includes('aguas da prata') || s.includes('prata')) return "Águas da Prata";
+  if (s.includes('31 de marco')) return "Jardim Satélite";
+  if (s.includes('chacaras oliveira') || s.includes('chacaras oliveiras')) return "Jardim Satélite";
+  if (s.includes('estoril') || s.includes('anhembi')) return "Jardim América";
+  if (s.includes('rio comprido') || s.includes('limoeiro')) return "Jardim das Indústrias";
+  if (s.includes('primavera') || s.includes('nova republica') || s.includes('bela vista') || s.includes('paineiras') || s.includes('torrao de ouro')) return "Jardim Colonial";
+
+  // Leste
+  if (s.includes('vista verde') || s.includes('uira') || s.includes('pararangaba') || s.includes('canindu') || s.includes('ana maria') || s.includes('bom retiro')) return "Vista Verde";
+  if (s.includes('vila industrial')) return "Vila Industrial";
+  if (s.includes('monte castelo')) return "Monte Castelo";
+  if (s.includes('paulista')) return "Jardim Paulista";
+  if (s.includes('motorama')) return "Jardim Motorama";
+  if (s.includes('eugenio')) return "Eugênio de Melo";
+  if (s.includes('novo horizonte')) return "Novo Horizonte";
+  if (s.includes('campos de sao jose') || s.includes('sao jose 2') || s.includes('sao jose ii') || s.includes('chacaras sao jose')) return "Campos de São José";
+  if (s.includes('santa ines') || s.includes('santa inez')) return "Jardim Santa Inês";
+  if (s.includes('cerejeiras')) return "Jardim das Cerejeiras";
+  if (s.includes('diamante')) return "Jardim Diamante";
+  if (s.includes('tatetuba')) return "Vila Tatetuba";
+  if (s.includes('ismenia')) return "Jardim Ismênia";
+  if (s.includes('tesouro')) return "Jardim Tesouro";
+  if (s.includes('herminia')) return "Santa Hermínia";
+  if (s.includes('granja') || s.includes('flamboyant')) return "Jardim da Granja";
+  if (s.includes('cta')) return "CTA";
+  if (s.includes('mariana')) return "Jardim Mariana 2";
+  if (s.includes('michigan')) return "Jardim Nova Michigan II";
+  if (s.includes('majestic')) return "Majestic";
+  if (s.includes('ceu')) return "Jardim do Céu";
+  if (s.includes('coqueiro')) return "Jardim Coqueiro";
+  if (s.includes('galo branco')) return "Galo Branco";
+  if (s.includes('santa maria')) return "Jardim Santa Maria";
+  if (s.includes('castanheira')) return "Jardim Castanheira";
+  if (s.includes('nova detroit') || s.includes('detroit')) return "Jardim Nova Detroit";
+  if (s.includes('sao vicente')) return "Jardim São Vicente";
+  if (s.includes('valparaiba')) return "Jardim Valparaíba";
+  if (s.includes('ouro preto')) return "Jardim Ouro Preto";
+  if (s.includes('araujo') || s.includes('chacara araujo')) return "Chácara Araújo";
+  if (s.includes('monterrey')) return "Vila Monterrey";
+  if (s.includes('cambui')) return "Residencial Cambuí";
+  if (s.includes('santa lucia')) return "Santa Lúcia";
+  if (s.includes('floresta')) return "Floresta";
+
+  // Norte
+  if (s.includes('altos') && s.includes('santana')) return "Altos de Santana";
+  if (s.includes('santana') || s.includes('samtana')) return "Santana";
+  if (s.includes('paiva')) return "Vila Paiva";
+  if (s.includes('alto da ponte')) return "Alto da Ponte";
+  if (s.includes('cristina')) return "Vila Cristina";
+  if (s.includes('buquirinha') || s.includes('freitas') || s.includes('costinha')) return "Buquirinha";
+  if (s.includes('telespark')) return "Jardim Telespark";
+  if (s.includes('minas gerais')) return "Jardim Minas Gerais";
+  if (s.includes('francisco xavier')) return "São Francisco Xavier";
+  if (s.includes('terezinha')) return "Vila Terezinha";
+  if (s.includes('caete')) return "Altos do Caetê";
+  if (s.includes('sao geraldo')) return "Vila São Geraldo";
+  if (s.includes('sinha')) return "Vila Sinhá";
+  if (s.includes('candida')) return "Vila Cândida";
+  if (s.includes('guimaraes')) return "Jardim Guimarães";
+  if (s.includes('aparecida')) return "Jardim Aparecida";
+  if (s.includes('bairrinho')) return "Bairrinho";
+  if (s.includes('vila das flores') || s.includes('vila cardoso') || s.includes('sao pedro')) return "Santana";
+
+  return null;
+}
+
+function calculateSjcBairrosStats(dataMap, total, records, questionText) {
+  const bairroCounts = {};
+  let totalResidentCount = 0;
+
+  const regionCounts = {
+    "Centro / Oeste": 0,
+    "Zona Sul": 0,
+    "Zona Leste": 0,
+    "Zona Norte": 0
+  };
+
+  if (records && records.length > 0) {
+    records.forEach(r => {
+      const raw = getField(r, [questionText, "Em qual bairro você mora?", "bairro", "Bairro", "bairro_mora"]);
+      if (raw) {
+        const normalized = normalizeBairroName(String(raw));
+        if (normalized && SJC_BAIRROS_GEO[normalized]) {
+          bairroCounts[normalized] = (bairroCounts[normalized] || 0) + 1;
+          totalResidentCount++;
+          const reg = SJC_BAIRROS_GEO[normalized].regiao;
+          if (regionCounts[reg] !== undefined) {
+            regionCounts[reg]++;
+          }
+        }
+      }
+    });
+  }
+
+  if (totalResidentCount === 0 && dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([raw, cnt]) => {
+      const normalized = normalizeBairroName(raw);
+      if (normalized && SJC_BAIRROS_GEO[normalized]) {
+        bairroCounts[normalized] = (bairroCounts[normalized] || 0) + cnt;
+        totalResidentCount += cnt;
+        const reg = SJC_BAIRROS_GEO[normalized].regiao;
+        if (regionCounts[reg] !== undefined) {
+          regionCounts[reg] += cnt;
+        }
+      }
+    });
+  }
+
+  const base = totalResidentCount > 0 ? totalResidentCount : (total || 1);
+  const sortedBairros = Object.entries(bairroCounts)
+    .map(([bairro, count]) => ({
+      bairro,
+      count,
+      pct: ((count / base) * 100).toFixed(1),
+      ...SJC_BAIRROS_GEO[bairro]
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  return {
+    total: base,
+    bairros: sortedBairros,
+    distinctCount: sortedBairros.length,
+    regionCounts,
+    centroOestePct: ((regionCounts["Centro / Oeste"] / base) * 100).toFixed(1),
+    sulPct: ((regionCounts["Zona Sul"] / base) * 100).toFixed(1),
+    lestePct: ((regionCounts["Zona Leste"] / base) * 100).toFixed(1),
+    nortePct: ((regionCounts["Zona Norte"] / base) * 100).toFixed(1)
+  };
+}
+
+function renderSjcBairrosMapWidget(mapContainerId, dataMap, total, records, questionText) {
+  const stats = calculateSjcBairrosStats(dataMap, total, records, questionText);
+  const maxCount = stats.bairros.length > 0 ? stats.bairros[0].count : 1;
+
+  let html = '<div class="w-full flex flex-col justify-between h-full gap-3.5">';
+  
+  // Header com Tabs de Alternância (Ranking / Mapa) e Contadores
+  html += '<div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-100">' +
+    '<div class="flex items-center gap-1.5 p-1 bg-slate-100/90 rounded-xl border border-slate-200/80 shadow-2xs">' +
+      '<button type="button" id="tab-btn-ranking-' + mapContainerId + '" onclick="window.toggleBairroView(\'' + mapContainerId + '\', \'ranking\')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-brand-900 shadow-xs flex items-center gap-1.5">' +
+        '<i class="fa-solid fa-chart-simple text-amber-500"></i>' +
+        '<span>Ranking dos Bairros</span>' +
+      '</button>' +
+      '<button type="button" id="tab-btn-map-' + mapContainerId + '" onclick="window.toggleBairroView(\'' + mapContainerId + '\', \'map\')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-brand-900 flex items-center gap-1.5">' +
+        '<i class="fa-solid fa-map-location-dot text-emerald-500"></i>' +
+        '<span>Mapa Interativo</span>' +
+      '</button>' +
+    '</div>' +
+
+    '<div class="flex items-center gap-2">' +
+      '<span class="px-3 py-1 rounded-xl bg-brand-50 text-brand-900 text-xs font-black border border-brand-200/60 shadow-2xs">' +
+        stats.total.toLocaleString("pt-BR") + ' Moradores' +
+      '</span>' +
+      '<span class="px-3 py-1 rounded-xl bg-amber-50 text-amber-900 text-xs font-black border border-amber-200/60 shadow-2xs">' +
+        stats.distinctCount + ' Bairros Mapeados' +
+      '</span>' +
+    '</div>' +
+  '</div>';
+
+  // 1. CONTAINER DA VISUALIZAÇÃO: RANKING DE BAIRROS (BARRAS + BUSCA + FILTROS POR ZONA)
+  html += '<div id="view-ranking-' + mapContainerId + '" class="flex flex-col gap-3 w-full">' +
+    // Barra de Busca e Filtros Rápidos de Zona
+    '<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">' +
+      '<div class="relative flex-1">' +
+        '<i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>' +
+        '<input type="text" oninput="window.filterBairroSearch(\'' + mapContainerId + '\', this.value)" placeholder="Buscar bairro (ex: Indústrias, Satélite, Aquarius)..." class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all" />' +
+      '</div>' +
+      '<div class="flex flex-wrap items-center gap-1.5 shrink-0">' +
+        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'TODOS\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-brand-900 text-white shadow-2xs" data-zone="TODOS">Todos (' + stats.distinctCount + ')</button>' +
+        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Centro / Oeste\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100" data-zone="Centro / Oeste">Centro/Oeste (' + stats.centroOestePct + '%)</button>' +
+        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Zona Sul\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-blue-50 text-blue-900 border border-blue-200 hover:bg-blue-100" data-zone="Zona Sul">Sul (' + stats.sulPct + '%)</button>' +
+        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Zona Leste\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-cyan-50 text-cyan-900 border border-cyan-200 hover:bg-cyan-100" data-zone="Zona Leste">Leste (' + stats.lestePct + '%)</button>' +
+        '<button type="button" onclick="window.filterBairroZone(\'' + mapContainerId + '\', \'Zona Norte\')" class="bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-indigo-50 text-indigo-900 border border-indigo-200 hover:bg-indigo-100" data-zone="Zona Norte">Norte (' + stats.nortePct + '%)</button>' +
+      '</div>' +
+    '</div>' +
+
+    // Lista com Scroll dos Bairros com Barras de Frequência e Percentuais
+    '<div id="bairros-list-' + mapContainerId + '" class="max-h-[380px] overflow-y-auto space-y-2 pr-1.5 custom-card-scroll">';
+
+  stats.bairros.forEach((b, idx) => {
+    const widthPct = Math.max(8, (b.count / maxCount) * 100);
+    const badgeColor = b.regiao === "Centro / Oeste" 
+      ? "bg-amber-50 text-amber-800 border-amber-200"
+      : b.regiao === "Zona Sul"
+      ? "bg-blue-50 text-blue-800 border-blue-200"
+      : b.regiao === "Zona Leste"
+      ? "bg-cyan-50 text-cyan-800 border-cyan-200"
+      : "bg-indigo-50 text-indigo-800 border-indigo-200";
+
+    const barGradient = b.regiao === "Centro / Oeste"
+      ? "from-amber-400 to-amber-500"
+      : b.regiao === "Zona Sul"
+      ? "from-blue-400 to-blue-600"
+      : b.regiao === "Zona Leste"
+      ? "from-cyan-400 to-cyan-600"
+      : "from-indigo-400 to-indigo-600";
+
+    const medalClass = idx === 0 
+      ? "bg-amber-400 text-amber-950 font-black shadow-xs ring-2 ring-amber-300"
+      : idx === 1
+      ? "bg-slate-300 text-slate-800 font-bold shadow-xs"
+      : idx === 2
+      ? "bg-amber-700 text-white font-bold shadow-xs"
+      : "bg-slate-100 text-slate-600 font-semibold";
+
+    html += '<div class="bairro-item p-3 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-card hover:border-brand-300 transition-all flex flex-col gap-2 group" data-bairro="' + b.bairro.toLowerCase() + '" data-regiao="' + b.regiao + '">' +
+      '<div class="flex items-center justify-between gap-2">' +
+        '<div class="flex items-center gap-2 min-w-0 flex-1">' +
+          '<span class="w-6 h-6 rounded-lg ' + medalClass + ' text-[10px] flex items-center justify-center shrink-0">' + (idx + 1) + 'º</span>' +
+          '<span class="text-base shrink-0">' + (b.icon || '🏠') + '</span>' +
+          '<strong class="text-xs sm:text-sm font-bold text-slate-900 truncate group-hover:text-brand-900 transition-colors">' + b.bairro + '</strong>' +
+          '<span class="hidden sm:inline-block px-2 py-0.5 rounded-md text-[10px] font-bold border ' + badgeColor + ' shrink-0">' + b.regiao + '</span>' +
+        '</div>' +
+        '<div class="flex items-center gap-2 shrink-0">' +
+          '<span class="text-xs font-medium text-slate-500">' + b.count + ' moradores</span>' +
+          '<span class="text-xs sm:text-sm font-black text-brand-900 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-200">' + b.pct + '%</span>' +
+        '</div>' +
+      '</div>' +
+      // Barra de Progresso
+      '<div class="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60">' +
+        '<div class="h-full bg-gradient-to-r ' + barGradient + ' rounded-full transition-all duration-700" style="width: ' + widthPct + '%;"></div>' +
+      '</div>' +
+    '</div>';
+  });
+
+  html += '</div></div>';
+
+  // 2. CONTAINER DA VISUALIZAÇÃO: MAPA REAL LEAFLET DE BAIRROS (HIDDEN INICIALMENTE OU ALTERNÁVEL)
+  html += '<div id="view-map-' + mapContainerId + '" class="hidden flex-col gap-3 w-full">' +
+    '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-100 min-h-[380px] sm:min-h-[400px]">' +
+      '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[400px] z-0"></div>' +
+      '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
+        '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
+          '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Geolocalização</p>' +
+          '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.distinctCount + ' Bairros no Mapa</p>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    // Botões de Foco do Mapa por Zona
+    '<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full pt-1">' +
+      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Centro / Oeste\', [-23.210, -45.912], 13)" class="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-left transition-all text-xs font-bold text-amber-900 flex items-center justify-between">' +
+        '<span>Centro/Oeste</span><span class="font-black">' + stats.centroOestePct + '%</span>' +
+      '</button>' +
+      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Sul\', [-23.250, -45.885], 13)" class="p-2 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-200 text-left transition-all text-xs font-bold text-blue-900 flex items-center justify-between">' +
+        '<span>Zona Sul</span><span class="font-black">' + stats.sulPct + '%</span>' +
+      '</button>' +
+      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Leste\', [-23.185, -45.815], 13)" class="p-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 border border-cyan-200 text-left transition-all text-xs font-bold text-cyan-900 flex items-center justify-between">' +
+        '<span>Zona Leste</span><span class="font-black">' + stats.lestePct + '%</span>' +
+      '</button>' +
+      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'Zona Norte\', [-23.145, -45.900], 13)" class="p-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-left transition-all text-xs font-bold text-indigo-900 flex items-center justify-between">' +
+        '<span>Zona Norte</span><span class="font-black">' + stats.nortePct + '%</span>' +
+      '</button>' +
+      '<button type="button" onclick="window.filterSjcBairrosMap(\'' + mapContainerId + '\', \'all\', [-23.208, -45.885], 11.5)" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-left transition-all text-xs font-bold text-slate-800 flex items-center justify-between">' +
+        '<span>Todos Bairros</span><span class="font-black">100%</span>' +
+      '</button>' +
+    '</div>' +
+  '</div>';
+
+  html += '</div>';
+  return html;
+}
+
+window.toggleBairroView = function(mapContainerId, viewMode) {
+  const rankingEl = document.getElementById("view-ranking-" + mapContainerId);
+  const mapEl = document.getElementById("view-map-" + mapContainerId);
+  const tabRanking = document.getElementById("tab-btn-ranking-" + mapContainerId);
+  const tabMap = document.getElementById("tab-btn-map-" + mapContainerId);
+
+  if (viewMode === 'map') {
+    if (rankingEl) rankingEl.classList.add("hidden");
+    if (mapEl) mapEl.classList.remove("hidden");
+    if (tabRanking) {
+      tabRanking.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-brand-900 flex items-center gap-1.5";
+    }
+    if (tabMap) {
+      tabMap.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-brand-900 shadow-xs flex items-center gap-1.5";
+    }
+
+    const map = window.sjcLeafletMaps[mapContainerId];
+    if (map) {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 100);
+    }
+  } else {
+    if (mapEl) mapEl.classList.add("hidden");
+    if (rankingEl) rankingEl.classList.remove("hidden");
+    if (tabMap) {
+      tabMap.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-brand-900 flex items-center gap-1.5";
+    }
+    if (tabRanking) {
+      tabRanking.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all bg-white text-brand-900 shadow-xs flex items-center gap-1.5";
+    }
+  }
+};
+
+window.filterBairroSearch = function(mapContainerId, query) {
+  const list = document.getElementById("bairros-list-" + mapContainerId);
+  if (!list) return;
+  const q = (query || "").toLowerCase().trim();
+  const items = list.querySelectorAll(".bairro-item");
+  items.forEach(el => {
+    const name = el.getAttribute("data-bairro") || "";
+    const reg = el.getAttribute("data-regiao") || "";
+    if (!q || name.includes(q) || reg.toLowerCase().includes(q)) {
+      el.style.display = "flex";
+    } else {
+      el.style.display = "none";
+    }
+  });
+};
+
+window.filterBairroZone = function(mapContainerId, zone) {
+  const container = document.getElementById("view-ranking-" + mapContainerId);
+  if (!container) return;
+  
+  // Atualiza botões
+  const btns = container.querySelectorAll(".bairro-zone-btn");
+  btns.forEach(btn => {
+    const btnZone = btn.getAttribute("data-zone");
+    if (btnZone === zone) {
+      btn.className = "bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-brand-900 text-white shadow-2xs";
+    } else {
+      btn.className = "bairro-zone-btn px-2.5 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100";
+    }
+  });
+
+  const list = document.getElementById("bairros-list-" + mapContainerId);
+  if (!list) return;
+  const items = list.querySelectorAll(".bairro-item");
+  items.forEach(el => {
+    const reg = el.getAttribute("data-regiao") || "";
+    if (zone === "TODOS" || reg === zone) {
+      el.style.display = "flex";
+    } else {
+      el.style.display = "none";
+    }
+  });
+};
+
+window.filterSjcBairrosMap = function(mapContainerId, regionKey, coords, zoomLevel) {
+  const map = window.sjcLeafletMaps[mapContainerId];
+  const groups = window.sjcBairrosLayerGroups[mapContainerId];
+  if (!map || !groups) return;
+
+  if (regionKey === 'all') {
+    Object.values(groups).forEach(grp => map.addLayer(grp));
+  } else {
+    Object.keys(groups).forEach(reg => {
+      if (reg === regionKey) {
+        map.addLayer(groups[reg]);
+      } else {
+        map.removeLayer(groups[reg]);
+      }
+    });
+  }
+
+  if (coords) {
+    map.flyTo(coords, zoomLevel || 13, { duration: 1.2 });
+  }
+};
+
+function initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, questionText) {
+  const container = document.getElementById(mapContainerId);
+  if (!container || typeof L === "undefined") return;
+
+  if (window.sjcLeafletMaps[mapContainerId]) {
+    try {
+      window.sjcLeafletMaps[mapContainerId].remove();
+    } catch (e) {}
+    delete window.sjcLeafletMaps[mapContainerId];
+  }
+
+  const stats = calculateSjcBairrosStats(dataMap, total, records, questionText);
+
+  const map = L.map(mapContainerId, {
+    center: [-23.208, -45.885],
+    zoom: 11.5,
+    minZoom: 10,
+    maxZoom: 16,
+    scrollWheelZoom: false,
+    zoomControl: true,
+    attributionControl: false
+  });
+
+  window.sjcLeafletMaps[mapContainerId] = map;
+
+  // Tile layer OpenStreetMap standard sem chave de API
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Grupos por Zona para Filtragem Dinâmica
+  const groups = {
+    "Centro / Oeste": L.layerGroup().addTo(map),
+    "Zona Sul": L.layerGroup().addTo(map),
+    "Zona Leste": L.layerGroup().addTo(map),
+    "Zona Norte": L.layerGroup().addTo(map)
+  };
+  window.sjcBairrosLayerGroups[mapContainerId] = groups;
+
+  // Plotagem de cada Bairro Real do Banco de Dados
+  stats.bairros.forEach(b => {
+    const targetGroup = groups[b.regiao] || groups["Zona Sul"];
+    const radiusSize = Math.max(350, Math.min(1800, b.count * 80 + 300));
+
+    // Círculo de calor residencial
+    const circle = L.circle([b.lat, b.lng], {
+      radius: radiusSize,
+      color: b.color,
+      fillColor: b.color,
+      fillOpacity: 0.30,
+      weight: 1.5
+    }).addTo(targetGroup);
+
+    const popupHtml = `
+      <div class="p-1.5 text-slate-800 min-w-[190px]">
+        <div class="flex items-center gap-1.5 mb-1">
+          <span class="text-base">${b.icon || '🏠'}</span>
+          <strong class="text-sm font-bold text-slate-900">${b.bairro}</strong>
+        </div>
+        <div class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold mb-1.5" style="background:${b.color}20; color:${b.color}; border:1px solid ${b.color}40;">
+          ${b.regiao}
+        </div>
+        <p class="text-sm font-black text-brand-900">${b.count} Moradores (${b.pct}%)</p>
+        <p class="text-[11px] text-slate-500 mt-0.5">Base direta de respostas da pesquisa</p>
+      </div>
+    `;
+
+    circle.bindPopup(popupHtml);
+    circle.bindTooltip(`<b>${b.bairro}</b>: ${b.count} moradores (${b.pct}%)`, {
+      direction: 'top',
+      offset: [0, -5],
+      className: 'sjc-map-tooltip'
+    });
+
+    // Badge com contagem no ponto exato
+    const markerHtml = `
+      <div style="background:${b.color}; color:white; font-weight:900; font-size:10px; padding:2px 6px; border-radius:10px; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.3); white-space:nowrap; transform:translate(-50%, -50%); display:flex; items-center; gap:3px;">
+        <span>${b.icon || '🏠'}</span>
+        <span>${b.count}</span>
+      </div>
+    `;
+
+    const customIcon = L.divIcon({
+      className: 'custom-bairro-pin',
+      html: markerHtml,
+      iconSize: [0, 0]
+    });
+
+    const marker = L.marker([b.lat, b.lng], { icon: customIcon }).addTo(targetGroup);
+    marker.bindPopup(popupHtml);
+  });
+
   setTimeout(() => {
     map.invalidateSize();
   }, 250);
