@@ -1645,7 +1645,7 @@ function processAndRenderDynamicCharts(records) {
       culturePhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       culturePhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_cultura.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/60 to-transparent"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-300 text-[11px] font-bold uppercase tracking-wider">
@@ -1654,7 +1654,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-base sm:text-lg font-black text-white leading-snug">
             Cultura, Gastronomia & Encontros em São José dos Campos
           </h3>
-          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             O cenário de lazer joseense reúne desde polos gastronômicos consolidados no Aquarius e Vila Ema até manifestações artísticas e eventos de rua em toda a cidade.
           </p>
         </div>
@@ -1677,7 +1677,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-lg sm:text-xl font-black text-white leading-snug">
             Comunicação, Redes Sociais & Notícias em São José
           </h3>
-          <p class="text-xs sm:text-sm font-medium text-slate-300 leading-relaxed">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             O ecossistema de informação joseense é fortemente digital: as páginas de Instagram e portais locais lideram o consumo diário de notícias, enquanto serviços de streaming dominam as preferências de áudio e vídeo na cidade.
           </p>
         </div>
@@ -1691,7 +1691,7 @@ function processAndRenderDynamicCharts(records) {
       relPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       relPhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/photo_3.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/65 to-transparent"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/20 backdrop-blur-md border border-pink-400/40 text-pink-300 text-[11px] font-bold uppercase tracking-wider">
@@ -1700,7 +1700,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-base sm:text-lg font-black text-white leading-snug">
             Relacionamentos, Redes & Bem-Estar em São José
           </h3>
-          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             A dinâmica afetiva contemporânea em SJC equilibra a busca por estabilidade financeira e o impacto direto do uso diário de redes sociais e plataformas de relacionamento na autoestima.
           </p>
         </div>
@@ -1714,7 +1714,7 @@ function processAndRenderDynamicCharts(records) {
       polPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       polPhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_cidade.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/20 backdrop-blur-md border border-purple-400/40 text-purple-300 text-[11px] font-bold uppercase tracking-wider">
@@ -1723,7 +1723,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-base sm:text-lg font-black text-white leading-snug">
             Cenário Político & Participação Municipal
           </h3>
-          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             O eleitorado joseense demonstra atenção crítica às decisões públicas locais, refletindo visões plurais sobre o desenvolvimento sustentável e os rumos da administração de São José dos Campos.
           </p>
         </div>
@@ -1737,7 +1737,7 @@ function processAndRenderDynamicCharts(records) {
       econPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-1";
       econPhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_gastronomia.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/65 to-transparent"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-[11px] font-bold uppercase tracking-wider">
@@ -1746,7 +1746,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-base sm:text-lg font-black text-white leading-snug">
             Empreendedorismo, Feiras & Produção Local
           </h3>
-          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             O comércio de bairro e as feiras de artesanato fortalecem a identidade comunitária de São José dos Campos, gerando renda e impulsionando produtores locais e a economia circular.
           </p>
         </div>
@@ -1760,7 +1760,7 @@ function processAndRenderDynamicCharts(records) {
       petPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       petPhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_noite.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/20 backdrop-blur-md border border-teal-400/40 text-teal-300 text-[11px] font-bold uppercase tracking-wider">
@@ -1769,7 +1769,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-base sm:text-lg font-black text-white leading-snug">
             São José Pet-Friendly: Espaços & Convivência
           </h3>
-          <p class="text-xs font-medium text-slate-300 line-clamp-3">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             Com grande número de tutores de cães e gatos, a cidade expande áreas verdes, parques e espaços públicos adequados para a convivência saudável e segura dos animais de estimação.
           </p>
         </div>
@@ -1792,7 +1792,7 @@ function processAndRenderDynamicCharts(records) {
           <h3 class="text-lg sm:text-xl font-black text-white leading-snug">
             A Voz dos Moradores de São José dos Campos
           </h3>
-          <p class="text-xs sm:text-sm font-medium text-slate-300 leading-relaxed">
+          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
             As respostas abertas e percepções espontâneas refletem o carinho e o espírito propositivo do cidadão joseense, oferecendo sugestões diretas de melhorias urbanas, culturais e sociais para o município.
           </p>
         </div>
