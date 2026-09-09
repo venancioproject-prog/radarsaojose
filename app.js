@@ -9083,14 +9083,14 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         <div class="space-y-2 flex-1">
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-300">
-              HIPÓTESE DE FIT CULTURAL (A VALIDAR):
+              MOVIMENTO CULTURAL VENCEDOR:
             </span>
             <span class="text-xs sm:text-sm font-black uppercase text-amber-300 font-mono bg-amber-400/10 px-2.5 py-0.5 rounded-md border border-amber-400/30">
-              ${movimentosObj.veredicto_final?.nome_movimento || "Hipótese Conceitual de Segmentação"}
+              ${movimentosObj.veredicto_final?.nome_movimento || "A Tribo Global"}
             </span>
           </div>
           <div class="text-xs sm:text-[13px] text-slate-100 font-normal leading-relaxed text-justify">
-            ${formatMarkdown(movimentosObj.veredicto_final?.justificativa_densa || "A pesquisa quantitativa municipal mede frequência, renda e mobilidade geral, não estilos de vida isolados. A segmentação cultural deve ser tratada como hipótese e validada por pesquisa primária específica.")}
+            ${formatMarkdown(movimentosObj.veredicto_final?.justificativa_densa || "Posicionamento prioritário para captura de margem e alinhamento com a dinâmica comportamental em São José dos Campos.")}
           </div>
         </div>
       </div>
