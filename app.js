@@ -6024,82 +6024,128 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
     const pct = totalSum > 0 ? ((count / totalSum) * 100).toFixed(1) : "0.0";
     const l = label.toLowerCase();
 
-    let gradientClass = "bg-gradient-to-br from-indigo-700 via-blue-800 to-brand-900";
+    // Paleta em Tons Pastel Sofisticados (Menta/Sage suave, Azul Pastel, Rosa/Coral suave, Âmbar suave, Lavanda/Lilás suave)
+    let cardBg = "bg-slate-100/90 hover:bg-slate-200/80";
+    let iconBg = "bg-slate-200/90 text-slate-700";
+    let textColor = "text-slate-800";
+    let subTextColor = "text-slate-500";
+    let badgeBg = "bg-white text-slate-900 border-slate-300/80";
+    let borderClass = "border-slate-200/90";
     let iconClass = "fa-solid fa-sparkles";
-    let borderClass = "border-blue-400/30";
 
     if (l.includes("casad") || l.includes("união") || l.includes("uniao") || l.includes("junto")) {
-      gradientClass = "bg-gradient-to-br from-emerald-600 via-teal-700 to-brand-900";
+      // Verde Sage / Menta Suave Pastel
+      cardBg = "bg-emerald-50 hover:bg-emerald-100/80";
+      iconBg = "bg-emerald-100 text-emerald-800";
+      textColor = "text-emerald-950";
+      subTextColor = "text-emerald-700";
+      badgeBg = "bg-white text-emerald-900 border-emerald-200 shadow-sm";
+      borderClass = "border-emerald-200/90";
       iconClass = "fa-solid fa-ring";
-      borderClass = "border-emerald-400/30";
     } else if (l.includes("solteir")) {
-      gradientClass = "bg-gradient-to-br from-blue-600 via-cyan-600 to-indigo-800";
+      // Azul Celeste Suave Pastel
+      cardBg = "bg-sky-50 hover:bg-sky-100/80";
+      iconBg = "bg-sky-100 text-sky-800";
+      textColor = "text-sky-950";
+      subTextColor = "text-sky-700";
+      badgeBg = "bg-white text-sky-900 border-sky-200 shadow-sm";
+      borderClass = "border-sky-200/90";
       iconClass = "fa-solid fa-user";
-      borderClass = "border-cyan-400/30";
     } else if (l.includes("namor")) {
-      gradientClass = "bg-gradient-to-br from-pink-600 via-rose-600 to-rose-800";
+      // Rosa / Coral Suave Pastel
+      cardBg = "bg-rose-50 hover:bg-rose-100/80";
+      iconBg = "bg-rose-100 text-rose-800";
+      textColor = "text-rose-950";
+      subTextColor = "text-rose-700";
+      badgeBg = "bg-white text-rose-900 border-rose-200 shadow-sm";
+      borderClass = "border-rose-200/90";
       iconClass = "fa-solid fa-heart";
-      borderClass = "border-pink-400/30";
     } else if (l.includes("divorc") || l.includes("separad")) {
-      gradientClass = "bg-gradient-to-br from-amber-600 via-orange-600 to-slate-800";
+      // Âmbar / Damasco Suave Pastel
+      cardBg = "bg-amber-50 hover:bg-amber-100/80";
+      iconBg = "bg-amber-100 text-amber-800";
+      textColor = "text-amber-950";
+      subTextColor = "text-amber-700";
+      badgeBg = "bg-white text-amber-900 border-amber-200 shadow-sm";
+      borderClass = "border-amber-200/90";
       iconClass = "fa-solid fa-user-minus";
-      borderClass = "border-amber-400/30";
     } else if (l.includes("viúv") || l.includes("viuv")) {
-      gradientClass = "bg-gradient-to-br from-purple-600 via-indigo-700 to-slate-900";
+      // Lavanda / Lilás Suave Pastel
+      cardBg = "bg-indigo-50 hover:bg-indigo-100/80";
+      iconBg = "bg-indigo-100 text-indigo-800";
+      textColor = "text-indigo-950";
+      subTextColor = "text-indigo-700";
+      badgeBg = "bg-white text-indigo-900 border-indigo-200 shadow-sm";
+      borderClass = "border-indigo-200/90";
       iconClass = "fa-solid fa-feather";
-      borderClass = "border-purple-400/30";
     } else if (l.includes("sim") || l.includes("muito") || l.includes("sempre") || l.includes("total") || l.includes("combinam")) {
-      gradientClass = "bg-gradient-to-br from-emerald-600 via-teal-700 to-brand-900";
+      cardBg = "bg-emerald-50 hover:bg-emerald-100/80";
+      iconBg = "bg-emerald-100 text-emerald-800";
+      textColor = "text-emerald-950";
+      subTextColor = "text-emerald-700";
+      badgeBg = "bg-white text-emerald-900 border-emerald-200 shadow-sm";
+      borderClass = "border-emerald-200/90";
       iconClass = "fa-solid fa-circle-check";
-      borderClass = "border-emerald-400/30";
     } else if (l.includes("às vezes") || l.includes("as vezes") || l.includes("parcial") || l.includes("médio") || l.includes("pouco")) {
-      gradientClass = "bg-gradient-to-br from-cyan-600 via-blue-600 to-indigo-800";
+      cardBg = "bg-cyan-50 hover:bg-cyan-100/80";
+      iconBg = "bg-cyan-100 text-cyan-800";
+      textColor = "text-cyan-950";
+      subTextColor = "text-cyan-700";
+      badgeBg = "bg-white text-cyan-900 border-cyan-200 shadow-sm";
+      borderClass = "border-cyan-200/90";
       iconClass = "fa-solid fa-masks-theater";
-      borderClass = "border-cyan-400/30";
     } else if (l.includes("não") || l.includes("nao") || l.includes("nada") || l.includes("nunca")) {
-      gradientClass = "bg-gradient-to-br from-rose-600 via-red-700 to-rose-900";
+      cardBg = "bg-rose-50 hover:bg-rose-100/80";
+      iconBg = "bg-rose-100 text-rose-800";
+      textColor = "text-rose-950";
+      subTextColor = "text-rose-700";
+      badgeBg = "bg-white text-rose-900 border-rose-200 shadow-sm";
+      borderClass = "border-rose-200/90";
       iconClass = "fa-solid fa-circle-xmark";
-      borderClass = "border-rose-400/30";
     } else {
-      const palettes = [
-        { bg: "bg-gradient-to-br from-blue-600 via-indigo-700 to-slate-900", icon: "fa-solid fa-ticket", border: "border-blue-400/30" },
-        { bg: "bg-gradient-to-br from-amber-500 via-orange-600 to-amber-800", icon: "fa-solid fa-star", border: "border-amber-400/30" },
-        { bg: "bg-gradient-to-br from-purple-600 via-indigo-800 to-slate-900", icon: "fa-solid fa-music", border: "border-purple-400/30" }
+      const pastelFallback = [
+        { bg: "bg-sky-50 hover:bg-sky-100/80", iconBg: "bg-sky-100 text-sky-800", text: "text-sky-950", sub: "text-sky-700", border: "border-sky-200/90", icon: "fa-solid fa-ticket" },
+        { bg: "bg-amber-50 hover:bg-amber-100/80", iconBg: "bg-amber-100 text-amber-800", text: "text-amber-950", sub: "text-amber-700", border: "border-amber-200/90", icon: "fa-solid fa-star" },
+        { bg: "bg-purple-50 hover:bg-purple-100/80", iconBg: "bg-purple-100 text-purple-800", text: "text-purple-950", sub: "text-purple-700", border: "border-purple-200/90", icon: "fa-solid fa-music" }
       ];
-      const p = palettes[index % palettes.length];
-      gradientClass = p.bg;
-      iconClass = p.icon;
+      const p = pastelFallback[index % pastelFallback.length];
+      cardBg = p.bg;
+      iconBg = p.iconBg;
+      textColor = p.text;
+      subTextColor = p.sub;
       borderClass = p.border;
+      badgeBg = "bg-white " + p.text + " border-slate-200 shadow-sm";
+      iconClass = p.icon;
     }
 
     if (isHero) {
-      return '<div class="' + gradientClass + ' rounded-2xl p-4 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[76px]">' +
+      return '<div class="' + cardBg + ' rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[82px]">' +
         '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-          '<div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-lg text-white flex-shrink-0 shadow-xs">' +
+          '<div class="w-11 h-11 rounded-2xl ' + iconBg + ' flex items-center justify-center text-lg flex-shrink-0 shadow-2xs">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
           '<div class="min-w-0 flex-1">' +
-            '<span class="text-[10px] font-bold text-white/70 uppercase tracking-widest block mb-0.5">Mais Citado</span>' +
-            '<h4 class="text-xs sm:text-sm font-extrabold text-white leading-tight break-words" title="' + label + '">' + label + '</h4>' +
+            '<span class="text-[10px] font-extrabold ' + subTextColor + ' uppercase tracking-wider block mb-0.5">Mais Citado</span>' +
+            '<h4 class="text-sm sm:text-base font-black ' + textColor + ' leading-tight break-words" title="' + label + '">' + label + '</h4>' +
           '</div>' +
         '</div>' +
-        '<div class="px-3.5 py-1.5 rounded-xl bg-white/25 backdrop-blur-md font-black text-lg sm:text-xl text-white border border-white/40 shadow-sm flex-shrink-0 tracking-tight">' +
+        '<div class="px-3.5 py-1.5 rounded-2xl ' + badgeBg + ' font-black text-2xl sm:text-3xl border shadow-xs flex-shrink-0 tracking-tight leading-none">' +
           pct + '%' +
         '</div>' +
       '</div>';
     }
 
-    return '<div class="' + gradientClass + ' rounded-2xl p-3.5 text-white shadow-md hover:shadow-lg border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[90px] h-full">' +
-      '<div class="flex items-start gap-2.5 mb-1.5">' +
-        '<div class="w-7 h-7 rounded-lg bg-white/20 backdrop-blur-xs flex items-center justify-center text-xs text-white flex-shrink-0 mt-0.5 shadow-2xs">' +
+    return '<div class="' + cardBg + ' rounded-2xl p-3.5 sm:p-4 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[96px] h-full">' +
+      '<div class="flex items-start gap-2.5 mb-2">' +
+        '<div class="w-8 h-8 rounded-xl ' + iconBg + ' flex items-center justify-center text-xs flex-shrink-0 mt-0.5 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs font-bold leading-tight break-words text-white" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-words ' + textColor + '" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-1.5 border-t border-white/20">' +
-        '<div class="px-2.5 py-1 rounded-lg bg-white/25 backdrop-blur-md font-black text-sm text-white border border-white/40 shadow-2xs tracking-tight">' +
+      '<div class="flex items-center justify-end pt-2 border-t border-black/5">' +
+        '<div class="px-3 py-1 rounded-xl ' + badgeBg + ' font-black text-lg sm:text-xl border shadow-2xs tracking-tight leading-none">' +
           pct + '%' +
         '</div>' +
       '</div>' +
