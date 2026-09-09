@@ -3363,11 +3363,11 @@ function calculateFrequencyOutingStats(dataMap, total, records, questionText) {
 function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, questionText) {
   const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
 
-  let html = '<div class="flex flex-col items-center justify-between gap-3.5 w-full h-full py-1">';
+  let html = '<div class="flex flex-col items-center justify-between gap-3 w-full h-full py-1">';
   
   // Topo: Gráfico Donut com Centro Minimalista de Destaque
   html += '<div class="w-full flex items-center justify-center relative my-1">' +
-    '<div class="relative w-[160px] h-[160px] sm:w-[175px] sm:h-[175px] flex items-center justify-center mx-auto">' +
+    '<div class="relative w-[150px] h-[150px] sm:w-[165px] sm:h-[165px] flex items-center justify-center mx-auto">' +
       '<canvas id="' + canvasId + '" class="w-full h-full block"></canvas>' +
       // Centro informativo da Rosca perfeitamente centralizado
       '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center select-none">' +
@@ -3377,16 +3377,16 @@ function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, que
     '</div>' +
   '</div>';
 
-  // Embaixo: Lista de Cards de Legenda em 2 Colunas Limpas (ou 1 coluna compacta)
-  html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full mt-1">';
+  // Embaixo: Lista de Cards de Legenda em 1 Coluna com Largura Total (Sem cortes de texto!)
+  html += '<div class="flex flex-col gap-2 w-full mt-1">';
   stats.items.forEach(item => {
-    html += '<div class="bg-white hover:bg-slate-50/90 px-3 py-2 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-2 min-w-0 w-full">' +
-      '<div class="flex items-center gap-2 min-w-0 flex-1">' +
-        '<span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
-        '<span class="text-[11px] sm:text-xs font-bold text-slate-800 leading-tight truncate" title="' + item.title + '">' + item.title + '</span>' +
+    html += '<div class="bg-white hover:bg-slate-50/90 px-3.5 py-2 sm:py-2.5 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-2.5 min-w-0 w-full">' +
+      '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
+        '<span class="w-3 h-3 rounded-full shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
+        '<span class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words">' + item.title + '</span>' +
       '</div>' +
       '<div class="shrink-0 pl-1">' +
-        '<span class="inline-flex items-center justify-center min-w-[50px] px-1.5 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
+        '<span class="inline-flex items-center justify-center min-w-[54px] px-2 py-0.5 rounded-xl text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
           item.pct + '%' +
         '</span>' +
       '</div>' +
