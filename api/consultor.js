@@ -257,19 +257,16 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   ]
 }`;
 
-    // Lista de modelos oficiais e estáveis com migração para a linha Qwen
+    // Lista de modelos oficiais e estáveis com fallbacks automáticos
     const configuredModel = (process.env.GROQ_MODEL || '').trim();
     const defaultModels = [
-      'qwen/qwen3.6-27b',
-      'qwen/qwen3.8-27b',
-      'qwen-3.6-27b',
-      'qwen/qwen-3.6-27b',
-      'qwen-2.5-32b',
-      'qwen/qwen-2.5-32b',
+      'llama-3.3-70b-versatile',
+      'llama-3.1-8b-instant',
       'mixtral-8x7b-32768',
       'gemma2-9b-it',
+      'qwen/qwen3.6-27b',
       'llama3-70b-8192',
-      'llama-3.1-8b-instant'
+      'llama3-8b-8192'
     ];
     const candidateModels = configuredModel 
       ? [configuredModel, ...defaultModels.filter(m => m !== configuredModel)]
@@ -279,44 +276,64 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     let modelUsed = null;
     const errorsList = [];
 
+    const userPromptText = String(inputContent) + '\n\nIMPORTANTE: Responda ESTRITAMENTE com o objeto JSON válido começando imediatamente com `{` e terminando com `}`. Não inclua texto antes ou depois.';
+
     for (const model of candidateModels) {
-      try {
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': 'Bearer ' + apiKey,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
+      // Tentativa 1: Com json_object
+      // Tentativa 2: Sem json_object (caso o modelo gere erro de validação)
+      const attempts = [
+        { response_format: { type: "json_object" } },
+        { response_format: undefined }
+      ];
+
+      let modelSuccess = false;
+
+      for (const formatOpt of attempts) {
+        try {
+          const payload = {
             model: model,
-            response_format: { type: "json_object" },
-            max_tokens: 3500,
+            max_tokens: 3000,
             temperature: 0.2,
             messages: [
               { role: 'system', content: systemPrompt },
-              { role: 'user', content: String(inputContent) }
+              { role: 'user', content: userPromptText }
             ]
-          })
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
-            replyContent = data.choices[0].message.content;
-            modelUsed = model;
-            break;
+          };
+          if (formatOpt.response_format) {
+            payload.response_format = formatOpt.response_format;
           }
-        } else {
-          const errText = await response.text();
-          const errorMsg = 'Groq Status ' + response.status + ' (' + model + '): ' + errText;
+
+          const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + apiKey,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+              replyContent = data.choices[0].message.content;
+              modelUsed = model;
+              modelSuccess = true;
+              break;
+            }
+          } else {
+            const errText = await response.text();
+            const errorMsg = 'Groq Status ' + response.status + ' (' + model + '): ' + errText;
+            errorsList.push(errorMsg);
+            console.warn('[Consultor IA] Tentativa falhou:', errorMsg);
+          }
+        } catch (err) {
+          const errorMsg = 'Exceção (' + model + '): ' + err.message;
           errorsList.push(errorMsg);
-          console.warn('[Consultor IA] Falha no modelo ' + model + ':', errorMsg);
+          console.warn('[Consultor IA] Exceção:', errorMsg);
         }
-      } catch (err) {
-        const errorMsg = 'Exceção (' + model + '): ' + err.message;
-        errorsList.push(errorMsg);
-        console.warn('[Consultor IA] Exceção no modelo ' + model + ':', errorMsg);
       }
+
+      if (modelSuccess) break;
     }
 
     if (!replyContent) {
