@@ -1044,7 +1044,7 @@ function processAndRenderDynamicCharts(records) {
 
     const cardsGrid = document.createElement("div");
     cardsGrid.className = catIdx === 2
-      ? "grid grid-cols-1 lg:grid-cols-2 gap-6"
+      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6"
       : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
 
     cat.questions.forEach((questionText) => {
@@ -1373,7 +1373,7 @@ function processAndRenderDynamicCharts(records) {
 
       // 8. OUTRAS CIDADES (Evasão): Cards com Ícones Visuais e Porcentagens
       if (qLower.includes("outras cidades") && (qLower.includes("passear") || qLower.includes("comer"))) {
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Comportamento de Deslocamento Regional</p>' +
@@ -1442,7 +1442,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.3. MEIOS DE TRANSPORTE: Cards com Emojis e Porcentagens
       if (qLower.includes("transporte") || qLower.includes("meios de transporte") || (qLower.includes("transporte") && qLower.includes("usa"))) {
         const cleanTransportTitle = displayTitle.replace(/\([^)]*\)/g, "").trim();
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + cleanTransportTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Múltipla Escolha • Distribuição Percentual de Mobilidade Urbana</p>' +
@@ -1455,7 +1455,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.3.1. FREQUÊNCIA DE SAÍDAS PARA PASSEAR/DIVERTIR: Gráfico Donut com Centro Informativo e Legenda Executiva
       if (qLower.includes("frequência") && (qLower.includes("sai") || qLower.includes("passear") || qLower.includes("divertir"))) {
         const donutCanvasId = "chart-frequency-donut-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div class="min-w-0 flex-1">' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -1479,7 +1479,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM POLOS & CONCENTRAÇÃO (LEAFLET)
       if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
         const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -1503,7 +1503,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.4.1. EM QUAL BAIRRO VOCÊ MORA: MAPA REAL DE BAIRROS DE SÃO JOSÉ DOS CAMPOS LINKADO AO BANCO DE DADOS (LEAFLET)
       if (qLower.includes("bairro") && (qLower.includes("mora") || qLower.includes("você mora") || qLower.includes("voce mora"))) {
         const mapContainerId = "map-sjc-bairros-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -3363,30 +3363,30 @@ function calculateFrequencyOutingStats(dataMap, total, records, questionText) {
 function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, questionText) {
   const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
 
-  let html = '<div class="flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 w-full h-full py-1">';
+  let html = '<div class="flex flex-col items-center justify-between gap-3.5 w-full h-full py-1">';
   
-  // Coluna da Esquerda: Gráfico Donut com Centro Minimalista de Destaque
-  html += '<div class="w-full md:w-[45%] flex flex-col items-center justify-center relative shrink-0">' +
-    '<div class="relative w-[190px] h-[190px] sm:w-[210px] sm:h-[210px] flex items-center justify-center mx-auto">' +
+  // Topo: Gráfico Donut com Centro Minimalista de Destaque
+  html += '<div class="w-full flex items-center justify-center relative my-1">' +
+    '<div class="relative w-[160px] h-[160px] sm:w-[175px] sm:h-[175px] flex items-center justify-center mx-auto">' +
       '<canvas id="' + canvasId + '" class="w-full h-full block"></canvas>' +
       // Centro informativo da Rosca perfeitamente centralizado
       '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center select-none">' +
         '<span class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-none">' + stats.dominant.pct + '%</span>' +
-        '<span class="text-[11px] sm:text-xs font-bold text-slate-500 mt-1 max-w-[100px] leading-tight">' + stats.dominant.shortTitle + '</span>' +
+        '<span class="text-[10px] sm:text-[11px] font-bold text-slate-500 mt-1 max-w-[90px] leading-tight">' + stats.dominant.shortTitle + '</span>' +
       '</div>' +
     '</div>' +
   '</div>';
 
-  // Coluna da Direita: Lista Vertical Organizada de Cards de Legenda
-  html += '<div class="w-full md:w-[55%] flex flex-col justify-center gap-2.5 min-w-0">';
+  // Embaixo: Lista de Cards de Legenda em 2 Colunas Limpas (ou 1 coluna compacta)
+  html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full mt-1">';
   stats.items.forEach(item => {
-    html += '<div class="bg-white hover:bg-slate-50/90 px-3.5 py-2.5 sm:py-3 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-2.5 min-w-0 w-full">' +
-      '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
-        '<span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
-        '<span class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words">' + item.title + '</span>' +
+    html += '<div class="bg-white hover:bg-slate-50/90 px-3 py-2 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-2 min-w-0 w-full">' +
+      '<div class="flex items-center gap-2 min-w-0 flex-1">' +
+        '<span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
+        '<span class="text-[11px] sm:text-xs font-bold text-slate-800 leading-tight truncate" title="' + item.title + '">' + item.title + '</span>' +
       '</div>' +
       '<div class="shrink-0 pl-1">' +
-        '<span class="inline-flex items-center justify-center min-w-[58px] px-2 py-1 rounded-xl text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
+        '<span class="inline-flex items-center justify-center min-w-[50px] px-1.5 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
           item.pct + '%' +
         '</span>' +
       '</div>' +
@@ -3421,18 +3421,18 @@ function initFrequencyOutingDonutChart(canvasId, dataMap, total, records, questi
         data: values,
         backgroundColor: bgColors,
         borderColor: "#FFFFFF",
-        borderWidth: 3,
-        borderRadius: 5,
+        borderWidth: 2.5,
+        borderRadius: 4,
         spacing: 2,
-        hoverOffset: 6
+        hoverOffset: 5
       }]
     },
     options: {
-      cutout: "72%",
+      cutout: "70%",
       responsive: true,
       maintainAspectRatio: true,
       layout: {
-        padding: 4
+        padding: 2
       },
       plugins: {
         legend: {
