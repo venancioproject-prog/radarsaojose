@@ -7729,13 +7729,12 @@ window.handleConsultorSubmit = async function(e) {
           window.renderExecutiveReport(userQuestion, reply);
           break;
         } else if (statusData.status === "failed" || statusData.status === "cancelled") {
-          throw new Error(statusData.message || statusData.error || "Ocorreu uma falha no processamento do relatório.");
+          const errText = statusData.message || statusData.last_error || statusData.error || "Ocorreu uma falha no processamento do relatório.";
+          throw new Error(errText);
         }
       } catch (pollErr) {
-        console.warn("[Polling Status Warn]", pollErr);
-        if (pollErr.message && (pollErr.message.includes("GROQ_QUOTA_EXHAUSTED") || pollErr.message.includes("STEP_EXECUTION_FAILED"))) {
-          throw pollErr;
-        }
+        console.error("[Consultor Polling Error]", pollErr);
+        throw pollErr; // Nunca engolir erro nem manter o modal em looping infinito
       }
     }
 

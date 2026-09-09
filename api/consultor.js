@@ -1,19 +1,17 @@
 // API Consultor Estratégico - Arquitetura de Alta Disponibilidade Serverless
-// Persistência Atômica no Supabase (consultor_jobs), Lock Anti-Colisão e Timeouts Estritos
+// Persistência Centralizada no Supabase, Lock Atômico Rigoroso, Diagnóstico Completo
 
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-// Exportação explícita de configuração para runtime Vercel Serverless
+// Configuração de Runtime Serverless Vercel
 exports.config = {
   maxDuration: 60
 };
 
-// Configuração e Flag de Rigor
+// Flags e Configurações
 const REQUIRE_PRESENTATION = String(process.env.REQUIRE_PRESENTATION || "true").toLowerCase() !== "false";
-
-// Credenciais e Endpoints Oficiais
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 const TABLE_NAME = "respostas_pesquisa";
@@ -413,11 +411,11 @@ async function loadCulturalMovements() {
   };
 }
 
-// 4. PERSISTÊNCIA REAL NO SUPABASE (consultor_jobs) COM FALLBACK SEGURO
+// 4. PERSISTÊNCIA REAL NO SUPABASE (consultor_jobs) COM SUPORTE ATÔMICO
 const MEMORY_JOBS = new Map();
 const JOBS_FILE_PATH = path.join(os.tmpdir(), "radarsjc_consultor_jobs_v2.json");
 
-// Helper para ler job no Supabase ou local
+// Helper para obter Job
 async function getJob(jobId) {
   if (!jobId) return null;
 
@@ -436,7 +434,7 @@ async function getJob(jobId) {
         if (Array.isArray(rows) && rows.length > 0) {
           const job = rows[0];
           MEMORY_JOBS.set(job.job_id, job);
-          return job;
+          return { job, source: "supabase" };
         }
       }
     } catch (err) {
@@ -445,7 +443,7 @@ async function getJob(jobId) {
   }
 
   if (MEMORY_JOBS.has(jobId)) {
-    return MEMORY_JOBS.get(jobId);
+    return { job: MEMORY_JOBS.get(jobId), source: "memory" };
   }
 
   try {
@@ -454,21 +452,21 @@ async function getJob(jobId) {
       const jobsObj = JSON.parse(fileData || "{}");
       if (jobsObj[jobId]) {
         MEMORY_JOBS.set(jobId, jobsObj[jobId]);
-        return jobsObj[jobId];
+        return { job: jobsObj[jobId], source: "file_tmp" };
       }
     }
   } catch (err) {}
 
-  return null;
+  return { job: null, source: "none" };
 }
 
-// Helper para salvar / atualizar job no Supabase e localmente
+// Helper para Salvar Job
 async function saveJob(job) {
   if (!job || !job.job_id) return;
   job.updated_at = new Date().toISOString();
   MEMORY_JOBS.set(job.job_id, job);
 
-  // Backup em arquivo local para robustez extrema
+  // Backup em arquivo local
   try {
     let jobsObj = {};
     if (fs.existsSync(JOBS_FILE_PATH)) {
@@ -486,7 +484,7 @@ async function saveJob(job) {
     fs.writeFileSync(JOBS_FILE_PATH, JSON.stringify(jobsObj, null, 2), "utf8");
   } catch (err) {}
 
-  // Persistência Principal no Supabase
+  // Persistência no Supabase
   if (SUPABASE_URL && SUPABASE_ANON_KEY) {
     try {
       const endpoint = `${SUPABASE_URL}/rest/v1/${JOBS_TABLE_NAME}`;
@@ -506,15 +504,13 @@ async function saveJob(job) {
   }
 }
 
-// Aquisição atômica de Lock no Supabase
+// Aquisição Atômica de Lock
 async function acquireJobLock(jobId) {
   const nowIso = new Date().toISOString();
   const sixtySecondsAgoIso = new Date(Date.now() - 60000).toISOString();
 
   if (SUPABASE_URL && SUPABASE_ANON_KEY) {
     try {
-      // Tentar adquirir lock condicionalmente no Supabase
-      // WHERE job_id = $1 AND (is_processing = false OR lock_timestamp IS NULL OR lock_timestamp < 60s)
       const lockEndpoint = `${SUPABASE_URL}/rest/v1/${JOBS_TABLE_NAME}?job_id=eq.${encodeURIComponent(jobId)}&or=(is_processing.eq.false,lock_timestamp.is.null,lock_timestamp.lt.${encodeURIComponent(sixtySecondsAgoIso)})`;
       
       const res = await fetchWithTimeout(lockEndpoint, {
@@ -541,12 +537,13 @@ async function acquireJobLock(jobId) {
         }
       }
     } catch (err) {
-      console.warn("[LOCK SUPABASE WARN] Falha no lock Supabase, usando lock local:", err.message);
+      console.warn("[LOCK SUPABASE WARN] Falha no lock Supabase:", err.message);
     }
   }
 
-  // Fallback de Lock Local Atômico
-  const localJob = await getJob(jobId);
+  // Fallback de Lock Local
+  const getRes = await getJob(jobId);
+  const localJob = getRes.job;
   if (!localJob) return { acquired: false, job: null };
 
   const nowMs = Date.now();
@@ -1131,6 +1128,8 @@ module.exports = async function handler(req, res) {
     if (action === "diag") {
       const loc = locatePresentation();
       return res.status(200).json({
+        server_time: new Date().toISOString(),
+        node_env: process.env.NODE_ENV || "development",
         cwd: process.cwd(),
         dirname: __dirname,
         presentation: loc,
@@ -1140,7 +1139,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // ROTA POST: Criar e Iniciar Novo Job (PERSISTIDO NO SUPABASE)
+    // ROTA POST: Criar e Iniciar Novo Job
     if (req.method === "POST" && (action === "start" || !action)) {
       const ideaInput = String(body.idea || body.user_input || body.question || body.prompt || "").trim();
       const reportToAudit = String(body.report_to_audit || body.presentation || "").trim();
@@ -1209,7 +1208,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // ROTA GET/POST: Status do Job (STEP-DRIVEN EXECUTION COM LOCK ATÔMICO)
+    // ROTA GET/POST: Status do Job (STEP-DRIVEN EXECUTION ENGINE)
     if (action === "status") {
       if (!jobId) {
         return res.status(400).json({ 
@@ -1218,7 +1217,10 @@ module.exports = async function handler(req, res) {
         });
       }
 
-      const job = await getJob(jobId);
+      const getRes = await getJob(jobId);
+      const job = getRes.job;
+      const storageSource = getRes.source;
+
       if (!job) {
         return res.status(404).json({ 
           error_code: "JOB_NOT_FOUND",
@@ -1229,46 +1231,52 @@ module.exports = async function handler(req, res) {
       }
 
       const now = Date.now();
+      const currentStepDef = MODULE_DEFINITIONS[job.current_step] || {};
+      const currentAttempt = (job.attempts_by_step && job.attempts_by_step[currentStepDef.id]) || 0;
+
+      // Resposta padronizada de status
+      function formatStatusResponse(jobData, overrides = {}) {
+        const stepDef = MODULE_DEFINITIONS[jobData.current_step] || {};
+        const stepAttempt = (jobData.attempts_by_step && jobData.attempts_by_step[stepDef.id]) || 0;
+        const lockMs = jobData.lock_timestamp ? new Date(jobData.lock_timestamp).getTime() : now;
+        const stepElapsed = jobData.is_processing ? (now - lockMs) : 0;
+
+        return {
+          job_id: jobData.job_id,
+          status: jobData.status,
+          current_step: jobData.current_step,
+          current_module_label: stepDef.label || "Conclusão",
+          attempt: stepAttempt,
+          max_attempts: 3,
+          is_processing: Boolean(jobData.is_processing),
+          lock_timestamp: jobData.lock_timestamp || null,
+          updated_at: jobData.updated_at,
+          last_error: jobData.last_error || null,
+          error_code: jobData.error_code || null,
+          retry_after_at: jobData.retry_after_at || null,
+          step_started_at: jobData.step_metrics?.[stepDef.id]?.started_at || jobData.lock_timestamp || null,
+          step_elapsed_ms: stepElapsed,
+          completed_steps: jobData.completed_steps || [],
+          total_steps: MODULE_DEFINITIONS.length,
+          progress_percent: Math.round(((jobData.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
+          estimated_remaining_seconds: jobData.status === "completed" ? 0 : Math.max(3, (MODULE_DEFINITIONS.length - (jobData.completed_steps || []).length) * 5),
+          message: jobData.message,
+          storage_source: storageSource,
+          server_timestamp: new Date().toISOString(),
+          ...overrides
+        };
+      }
 
       if (job.status === "completed") {
-        return res.status(200).json({
-          success: true,
-          job_id: job.job_id,
-          status: "completed",
-          current_step: job.total_steps,
-          total_steps: job.total_steps,
-          completed_steps: job.completed_steps || [],
-          progress_percent: 100,
-          estimated_remaining_seconds: 0,
-          elapsed_step_ms: 0,
-          last_updated: job.updated_at,
-          message: "Relatório estratégico concluído com sucesso!"
-        });
+        return res.status(200).json(formatStatusResponse(job, { success: true }));
       }
 
       if (job.status === "failed") {
-        return res.status(200).json({
-          success: false,
-          job_id: job.job_id,
-          status: "failed",
-          error_code: job.error_code || "EXECUTION_FAILED",
-          message: job.message || "Ocorreu uma falha no processamento.",
-          retryable: job.retryable || false,
-          current_step: job.current_step,
-          completed_steps: job.completed_steps || [],
-          last_error: job.last_error,
-          last_updated: job.updated_at
-        });
+        return res.status(200).json(formatStatusResponse(job, { success: false }));
       }
 
       if (job.status === "cancelled") {
-        return res.status(200).json({
-          success: false,
-          job_id: job.job_id,
-          status: "cancelled",
-          error_code: "JOB_CANCELLED",
-          message: "Job cancelado pelo usuário."
-        });
+        return res.status(200).json(formatStatusResponse(job, { success: false }));
       }
 
       // Checagem de Rate Limit Ativo (retry_after_at)
@@ -1276,45 +1284,20 @@ module.exports = async function handler(req, res) {
         const retryTime = new Date(job.retry_after_at).getTime();
         if (now < retryTime) {
           const waitSec = Math.ceil((retryTime - now) / 1000);
-          return res.status(200).json({
+          return res.status(200).json(formatStatusResponse(job, {
             success: true,
-            job_id: job.job_id,
             status: "waiting_rate_limit",
-            current_step: job.current_step,
-            current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Aguardando janela de API",
-            total_steps: job.total_steps,
-            progress_percent: Math.round(((job.completed_steps || []).length / job.total_steps) * 100),
             estimated_remaining_seconds: waitSec + 5,
-            elapsed_step_ms: now - (job.lock_timestamp ? new Date(job.lock_timestamp).getTime() : now),
-            last_updated: job.updated_at,
             message: `Limite de taxa da Groq ativo. Aguardando liberação (${waitSec}s restantes)...`
-          });
+          }));
         }
       }
 
-      // Tentativa de Aquisição de Lock Atômico para Executar a Etapa
+      // Tentativa de Aquisição de Lock Atômico
       const lockResult = await acquireJobLock(jobId);
       if (!lockResult.acquired) {
-        // Outra requisição está processando a etapa no momento
         const currentLockJob = lockResult.job || job;
-        const stepDef = MODULE_DEFINITIONS[currentLockJob.current_step] || {};
-        const lockMs = currentLockJob.lock_timestamp ? new Date(currentLockJob.lock_timestamp).getTime() : now;
-        const stepElapsed = now - lockMs;
-
-        return res.status(200).json({
-          success: true,
-          job_id: currentLockJob.job_id,
-          status: "running",
-          current_step: currentLockJob.current_step,
-          current_module_label: stepDef.label || "Processando análise",
-          total_steps: currentLockJob.total_steps,
-          progress_percent: Math.round(((currentLockJob.completed_steps || []).length / currentLockJob.total_steps) * 100),
-          estimated_remaining_seconds: Math.max(3, (currentLockJob.total_steps - (currentLockJob.completed_steps || []).length) * 5),
-          elapsed_step_ms: stepElapsed,
-          attempt: (currentLockJob.attempts_by_step && currentLockJob.attempts_by_step[stepDef.id]) || 1,
-          last_updated: currentLockJob.updated_at,
-          message: `Executando ${stepDef.label} (${Math.round(stepElapsed / 1000)}s decorridos)...`
-        });
+        return res.status(200).json(formatStatusResponse(currentLockJob, { success: true }));
       }
 
       // Lock Adquirido com Sucesso: Executar EXATAMENTE UMA etapa
@@ -1326,6 +1309,7 @@ module.exports = async function handler(req, res) {
         activeJob.status = "running";
         activeJob.attempts_by_step = activeJob.attempts_by_step || {};
         activeJob.attempts_by_step[stepDef.id] = (activeJob.attempts_by_step[stepDef.id] || 0) + 1;
+        const currentAttemptNumber = activeJob.attempts_by_step[stepDef.id];
         await saveJob(activeJob);
 
         // ETAPA 0: SOURCE PREPARATION (CARREGAMENTO DAS FONTES OFICIAIS)
@@ -1373,27 +1357,14 @@ module.exports = async function handler(req, res) {
               activeJob.completed_steps.push(stepDef.id);
             }
             activeJob.current_step = 1;
+            activeJob.last_error = null;
+            activeJob.error_code = null;
             activeJob.message = "Fontes oficiais carregadas com sucesso. Avançando para a Tese Estratégica...";
 
             await releaseJobLock(activeJob);
 
             console.log(`[STEP 0 COMPLETED] Job ${activeJob.job_id} avançou para Step 1 em ${Date.now() - stepStartTime}ms.`);
-
-            return res.status(200).json({
-              success: true,
-              job_id: activeJob.job_id,
-              status: "running",
-              current_step: 1,
-              current_module_label: (MODULE_DEFINITIONS[1] || {}).label,
-              completed_steps: activeJob.completed_steps,
-              total_steps: MODULE_DEFINITIONS.length,
-              progress_percent: Math.round((activeJob.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
-              estimated_remaining_seconds: 20,
-              elapsed_step_ms: Date.now() - stepStartTime,
-              attempt: 1,
-              last_updated: activeJob.updated_at,
-              message: activeJob.message
-            });
+            return res.status(200).json(formatStatusResponse(activeJob, { success: true, step_elapsed_ms: Date.now() - stepStartTime }));
 
           } catch (prepErr) {
             console.error(`[STEP 0 ERROR] Job ${activeJob.job_id}:`, prepErr);
@@ -1404,15 +1375,7 @@ module.exports = async function handler(req, res) {
             activeJob.retryable = false;
             await releaseJobLock(activeJob);
 
-            return res.status(200).json({
-              success: false,
-              job_id: activeJob.job_id,
-              status: "failed",
-              error_code: activeJob.error_code,
-              message: activeJob.message,
-              last_error: activeJob.last_error,
-              last_updated: activeJob.updated_at
-            });
+            return res.status(200).json(formatStatusResponse(activeJob, { success: false, step_elapsed_ms: Date.now() - stepStartTime }));
           }
         }
 
@@ -1464,11 +1427,12 @@ module.exports = async function handler(req, res) {
             duration_ms: groqResult.durationMs,
             input_chars: groqResult.inputChars,
             output_chars: groqResult.outputChars,
-            attempts: activeJob.attempts_by_step[stepDef.id] || 1
+            attempts: currentAttemptNumber
           };
 
           activeJob.current_step += 1;
           activeJob.last_error = null;
+          activeJob.error_code = null;
           activeJob.retry_after_at = null;
 
           // Se completou todas as etapas, montar relatório final
@@ -1484,27 +1448,10 @@ module.exports = async function handler(req, res) {
           }
 
           await releaseJobLock(activeJob);
-
-          return res.status(200).json({
-            success: true,
-            job_id: activeJob.job_id,
-            status: activeJob.status,
-            current_step: activeJob.current_step,
-            current_module_label: (MODULE_DEFINITIONS[activeJob.current_step] || {}).label || "Conclusão",
-            completed_steps: activeJob.completed_steps,
-            total_steps: MODULE_DEFINITIONS.length,
-            progress_percent: Math.round((activeJob.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
-            estimated_remaining_seconds: Math.max(0, (MODULE_DEFINITIONS.length - activeJob.completed_steps.length) * 5),
-            elapsed_step_ms: groqResult.durationMs,
-            attempt: activeJob.attempts_by_step[stepDef.id] || 1,
-            last_updated: activeJob.updated_at,
-            message: activeJob.message
-          });
+          return res.status(200).json(formatStatusResponse(activeJob, { success: true, step_elapsed_ms: groqResult.durationMs }));
 
         } catch (err) {
           console.error(`[STEP ERROR] Job ${activeJob.job_id} na etapa ${stepDef.id}:`, err);
-
-          const attemptCount = activeJob.attempts_by_step[stepDef.id] || 1;
 
           if (err.isQuotaExhausted) {
             activeJob.status = "failed";
@@ -1521,7 +1468,7 @@ module.exports = async function handler(req, res) {
             activeJob.retryable = true;
           } else {
             activeJob.last_error = err.message;
-            if (attemptCount >= 3) {
+            if (currentAttemptNumber >= 3) {
               activeJob.status = "failed";
               activeJob.error_code = err.message.includes("INDICATOR_NOT_FOUND") ? "INDICATOR_NOT_FOUND" :
                                  err.message.includes("INVALID_GRAPH_SELECTION") ? "INVALID_GRAPH_SELECTION" :
@@ -1532,40 +1479,17 @@ module.exports = async function handler(req, res) {
               activeJob.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
               activeJob.retryable = true;
             } else {
-              activeJob.message = `Tentativa ${attemptCount}/3: Reexecutando ${stepDef.label}...`;
+              activeJob.status = "running";
+              activeJob.message = `Tentativa ${currentAttemptNumber}/3: Reexecutando ${stepDef.label}...`;
             }
           }
 
           await releaseJobLock(activeJob);
-
-          return res.status(200).json({
-            success: activeJob.status !== "failed",
-            job_id: activeJob.job_id,
-            status: activeJob.status,
-            error_code: activeJob.error_code,
-            current_step: activeJob.current_step,
-            current_module_label: stepDef.label,
-            completed_steps: activeJob.completed_steps || [],
-            total_steps: MODULE_DEFINITIONS.length,
-            progress_percent: Math.round(((activeJob.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
-            estimated_remaining_seconds: 20,
-            elapsed_step_ms: Date.now() - stepStartTime,
-            attempt: attemptCount,
-            last_error: activeJob.last_error,
-            last_updated: activeJob.updated_at,
-            message: activeJob.message
-          });
+          return res.status(200).json(formatStatusResponse(activeJob, { success: activeJob.status !== "failed", step_elapsed_ms: Date.now() - stepStartTime }));
         }
       }
 
-      return res.status(200).json({
-        success: true,
-        job_id: activeJob.job_id,
-        status: activeJob.status,
-        current_step: activeJob.current_step,
-        total_steps: MODULE_DEFINITIONS.length,
-        message: activeJob.message
-      });
+      return res.status(200).json(formatStatusResponse(activeJob, { success: true }));
     }
 
     // ROTA GET: Resultado do Job
@@ -1576,7 +1500,8 @@ module.exports = async function handler(req, res) {
           error: "Parâmetro job_id obrigatório." 
         });
       }
-      const job = await getJob(jobId);
+      const getRes = await getJob(jobId);
+      const job = getRes.job;
       if (!job) {
         return res.status(404).json({ 
           error_code: "JOB_NOT_FOUND",
@@ -1587,6 +1512,7 @@ module.exports = async function handler(req, res) {
       }
       if (job.status !== "completed") {
         return res.status(400).json({ 
+          error_code: "JOB_NOT_COMPLETED",
           error: "O job ainda não foi concluído.", 
           status: job.status, 
           progress_percent: Math.round(((job.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100)
@@ -1610,7 +1536,8 @@ module.exports = async function handler(req, res) {
           error: "Parâmetro job_id obrigatório." 
         });
       }
-      const job = await getJob(jobId);
+      const getRes = await getJob(jobId);
+      const job = getRes.job;
       if (job) {
         job.status = "cancelled";
         job.error_code = "JOB_CANCELLED";
