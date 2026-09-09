@@ -7667,12 +7667,13 @@ window.handleConsultorSubmit = async function(e) {
     sessionStorage.setItem("radarsjc_active_job_id", jobId);
     sessionStorage.setItem("radarsjc_active_job_topic", userQuestion);
 
-    // 2. Loop de Polling Periódico com Respeito a Rate Limits
-    const pollIntervalMs = 3500;
+    // 2. Loop de Polling Otimizado (2 a 3 segundos com respeito a rate limit)
     let isCompleted = false;
+    let pollIntervalMs = 800; // Início imediato
 
     while (!isCompleted && window.isConsultorThinking) {
       await new Promise(resolve => setTimeout(resolve, pollIntervalMs));
+      pollIntervalMs = 2200; // Próximos polls a cada 2.2 segundos
 
       try {
         const statusRes = await fetch(`/api/consultor?action=status&job_id=${encodeURIComponent(jobId)}`);
@@ -7682,14 +7683,23 @@ window.handleConsultorSubmit = async function(e) {
           throw new Error(statusData.error || "Erro ao consultar status do job.");
         }
 
-        if (statusData.status === "running" || statusData.status === "queued" || statusData.status === "waiting_rate_limit") {
+        if (statusData.status === "waiting_rate_limit") {
+          const waitSec = statusData.estimated_remaining_seconds || 8;
+          pollIntervalMs = Math.max(3000, waitSec * 1000);
+          if (loadingStatusText) {
+            loadingStatusText.innerText = statusData.message || `Aguardando liberação de taxa (${waitSec}s)...`;
+          }
+          continue;
+        }
+
+        if (statusData.status === "running" || statusData.status === "queued") {
           const progress = Math.min(95, Math.max(8, statusData.progress_percent || 10));
           if (loadingProgressBar) loadingProgressBar.style.width = progress + "%";
           
           let estText = "";
           if (statusData.estimated_remaining_seconds > 0) {
-            const mins = Math.ceil(statusData.estimated_remaining_seconds / 60);
-            estText = mins > 1 ? ` (~${mins} min restantes)` : " (~1 min restante)";
+            const secs = statusData.estimated_remaining_seconds;
+            estText = secs > 60 ? ` (~${Math.ceil(secs / 60)} min)` : ` (~${secs}s)`;
           }
 
           if (loadingStatusText) {
@@ -7720,7 +7730,7 @@ window.handleConsultorSubmit = async function(e) {
         }
       } catch (pollErr) {
         console.warn("[Polling Status Warn]", pollErr);
-        if (pollErr.message && pollErr.message.includes("GROQ_QUOTA_EXHAUSTED")) {
+        if (pollErr.message && (pollErr.message.includes("GROQ_QUOTA_EXHAUSTED") || pollErr.message.includes("STEP_EXECUTION_FAILED"))) {
           throw pollErr;
         }
       }
