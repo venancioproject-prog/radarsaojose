@@ -257,20 +257,17 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   ]
 }`;
 
-    // Lista de modelos oficiais e estáveis com fallbacks automáticos
-    const configuredModel = (process.env.GROQ_MODEL || '').trim();
-    const defaultModels = [
-      'llama-3.3-70b-versatile',
-      'llama-3.1-8b-instant',
+    // Modelos estritamente validados - Bypass total de process.env.GROQ_MODEL e sem Llama 3.3
+    const candidateModels = [
+      'qwen/qwen3.6-27b',
+      'qwen/qwen3.8-27b',
+      'qwen-2.5-32b',
       'mixtral-8x7b-32768',
       'gemma2-9b-it',
-      'qwen/qwen3.6-27b',
+      'llama-3.1-8b-instant',
       'llama3-70b-8192',
       'llama3-8b-8192'
     ];
-    const candidateModels = configuredModel 
-      ? [configuredModel, ...defaultModels.filter(m => m !== configuredModel)]
-      : defaultModels;
 
     let replyContent = null;
     let modelUsed = null;
