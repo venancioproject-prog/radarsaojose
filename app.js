@@ -1449,15 +1449,27 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 11.3.1. FREQUÊNCIA DE SAÍDAS PARA PASSEAR/DIVERTIR: Cards com Emojis e Porcentagens
+      // 11.3.1. FREQUÊNCIA DE SAÍDAS PARA PASSEAR/DIVERTIR: Gráfico Donut com Centro Informativo e Legenda Executiva
       if (qLower.includes("frequência") && (qLower.includes("sai") || qLower.includes("passear") || qLower.includes("divertir"))) {
-        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
-        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Rotina de Lazer & Vida Urbana</p>' +
+        const donutCanvasId = "chart-frequency-donut-" + globalQuestionIndex;
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
+          '<div>' +
+            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+            '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Rotina de Lazer & Vida Urbana</p>' +
+          '</div>' +
+          '<span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 text-[10px] font-bold border border-blue-200 flex items-center gap-1 shrink-0">' +
+            '<i class="fa-solid fa-chart-pie text-blue-600"></i> Donut' +
+          '</span>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-between w-full">' + renderFrequencyOutingCardsWidget(dataMap, total, records, questionText) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center w-full h-full">' +
+          renderFrequencyOutingDonutWidget(donutCanvasId, dataMap, total, records, questionText) +
+        '</div>';
         cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          initFrequencyOutingDonutChart(donutCanvasId, dataMap, total, records, questionText);
+        }, 100);
         return;
       }
 
@@ -3239,52 +3251,52 @@ function renderTransportCardsWidget(dataMap, total, records, questionText) {
   return html;
 }
 
-// 7.5.3.1. Cards com Emojis e Porcentagens para Frequência de Passeios e Lazer na Cidade
-function renderFrequencyOutingCardsWidget(dataMap, total, records, questionText) {
+// 7.5.3.1. Gráfico Donut Lindinho com Centro Informativo e Legenda Executiva para Lazer
+function calculateFrequencyOutingStats(dataMap, total, records, questionText) {
   const freqConfigs = {
-    semanal: {
-      key: "semanal",
-      emoji: "✨",
-      title: "Toda semana",
-      subtitle: "Lazer frequente e passeios contínuos na cidade",
-      badgeBg: "bg-indigo-50 text-indigo-800 border-indigo-200",
-      border: "border-indigo-200 hover:border-indigo-300",
-      tag: "Alta Frequência",
-      tagBg: "bg-indigo-100 text-indigo-800",
-      iconBg: "bg-indigo-100/80"
-    },
     recorrente: {
       key: "recorrente",
       emoji: "🍕",
       title: "2 ou 3 vezes por mês",
+      shortTitle: "2 a 3x/mês",
       subtitle: "Frequência quinzenal ou quase semanal",
-      badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
-      border: "border-blue-200 hover:border-blue-300",
+      color: "#3B82F6",
       tag: "Recorrente",
       tagBg: "bg-blue-100 text-blue-800",
-      iconBg: "bg-blue-100/80"
+      badgeBg: "bg-blue-50 text-blue-800 border-blue-200"
     },
     mensal: {
       key: "mensal",
       emoji: "☕",
       title: "1 vez por mês",
+      shortTitle: "1x/mês",
       subtitle: "Passeios e saídas pontuais mensais",
-      badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
-      border: "border-amber-200 hover:border-amber-300",
+      color: "#F59E0B",
       tag: "Mensal",
       tagBg: "bg-amber-100 text-amber-800",
-      iconBg: "bg-amber-100/80"
+      badgeBg: "bg-amber-50 text-amber-800 border-amber-200"
+    },
+    semanal: {
+      key: "semanal",
+      emoji: "✨",
+      title: "Toda semana",
+      shortTitle: "Toda semana",
+      subtitle: "Lazer frequente e passeios contínuos",
+      color: "#8B5CF6",
+      tag: "Alta Freq.",
+      tagBg: "bg-purple-100 text-purple-800",
+      badgeBg: "bg-purple-50 text-purple-800 border-purple-200"
     },
     quase_nunca: {
       key: "quase_nunca",
       emoji: "🛋️",
       title: "Quase nunca",
-      subtitle: "Preferência por ficar em casa e baixa circulação",
-      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
-      border: "border-emerald-200 hover:border-emerald-300",
+      shortTitle: "Quase nunca",
+      subtitle: "Preferência por ficar em casa",
+      color: "#10B981",
       tag: "Caseiro",
       tagBg: "bg-emerald-100 text-emerald-800",
-      iconBg: "bg-emerald-100/80"
+      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200"
     }
   };
 
@@ -3331,35 +3343,131 @@ function renderFrequencyOutingCardsWidget(dataMap, total, records, questionText)
   const base = countTotal > 0 ? countTotal : (total || 1);
   const items = [
     { ...freqConfigs.recorrente, count: counts.recorrente, pct: ((counts.recorrente / base) * 100).toFixed(1) },
-    { ...freqConfigs.semanal, count: counts.semanal, pct: ((counts.semanal / base) * 100).toFixed(1) },
     { ...freqConfigs.mensal, count: counts.mensal, pct: ((counts.mensal / base) * 100).toFixed(1) },
+    { ...freqConfigs.semanal, count: counts.semanal, pct: ((counts.semanal / base) * 100).toFixed(1) },
     { ...freqConfigs.quase_nunca, count: counts.quase_nunca, pct: ((counts.quase_nunca / base) * 100).toFixed(1) }
   ];
 
-  items.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
+  const sorted = items.slice().sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
 
-  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
-  items.forEach(cfg => {
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
+  return {
+    total: base,
+    items: sorted,
+    dominant: sorted[0]
+  };
+}
+
+function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, questionText) {
+  const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
+
+  let html = '<div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center w-full h-full py-1">';
+  
+  // Coluna 1: Gráfico Donut com Centro Informativo
+  html += '<div class="sm:col-span-5 flex flex-col items-center justify-center relative min-h-[220px] sm:min-h-[240px]">' +
+    '<div class="relative w-full max-w-[220px] aspect-square flex items-center justify-center">' +
+      '<canvas id="' + canvasId + '" class="w-full h-full"></canvas>' +
+      // Centro informativo da Rosca
+      '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">' +
+        '<span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Maioria</span>' +
+        '<span class="text-xl sm:text-2xl font-black text-brand-900 leading-tight my-0.5">' + stats.dominant.pct + '%</span>' +
+        '<span class="text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200/60 shadow-2xs">' + stats.dominant.shortTitle + '</span>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+
+  // Coluna 2: Legenda Executiva com Emojis, Barras de Progresso e Percentuais
+  html += '<div class="sm:col-span-7 flex flex-col justify-center gap-2.5 w-full">';
+  stats.items.forEach(item => {
+    html += '<div class="bg-white hover:bg-slate-50/90 p-3 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-3 group">' +
       '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
-          cfg.emoji +
+        '<div class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0 shadow-2xs" style="background:' + item.color + '15; border:1px solid ' + item.color + '30;">' +
+          item.emoji +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<div class="flex items-center gap-2 mb-0.5">' +
-            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
+          '<div class="flex items-center gap-1.5 mb-1">' +
+            '<span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:' + item.color + ';"></span>' +
+            '<span class="text-xs sm:text-sm font-bold text-slate-800 truncate leading-none">' + item.title + '</span>' +
           '</div>' +
-          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
-          '<p class="text-[11px] text-slate-400 truncate mt-0.5">' + cfg.subtitle + '</p>' +
+          // Barra de progresso delicada
+          '<div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200/50">' +
+            '<div class="h-full rounded-full transition-all duration-700" style="width:' + item.pct + '%; background:' + item.color + ';"></div>' +
+          '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + cfg.pct + '%</span>' +
+      '<div class="text-right flex-shrink-0 pl-1">' +
+        '<span class="inline-block px-3 py-1 rounded-xl text-xs sm:text-sm font-black shadow-2xs" style="background:' + item.color + '12; color:' + item.color + '; border:1px solid ' + item.color + '30;">' + item.pct + '%</span>' +
       '</div>' +
     '</div>';
   });
   html += '</div>';
+
+  html += '</div>';
   return html;
+}
+
+function initFrequencyOutingDonutChart(canvasId, dataMap, total, records, questionText) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || typeof Chart === "undefined") return;
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) {
+    try {
+      chartInstances[canvasId].destroy();
+    } catch (e) {}
+  }
+
+  const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
+  const labels = stats.items.map(i => i.title);
+  const values = stats.items.map(i => i.count);
+  const bgColors = stats.items.map(i => i.color);
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: bgColors,
+        borderColor: "#FFFFFF",
+        borderWidth: 3,
+        borderRadius: 6,
+        spacing: 3,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      cutout: "68%",
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: {
+        padding: 6
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          padding: 10,
+          cornerRadius: 10,
+          callbacks: {
+            label: function(context) {
+              const val = context.raw || 0;
+              const pct = stats.total > 0 ? ((val / stats.total) * 100).toFixed(1) : 0;
+              return " " + context.label + ": " + val + " respondentes (" + pct + "%)";
+            }
+          }
+        },
+        datalabels: {
+          color: "#FFFFFF",
+          font: { weight: 900, size: 11, family: "Montserrat, sans-serif" },
+          formatter: function(value) {
+            if (!value || value === 0) return "";
+            const pct = stats.total > 0 ? ((value / stats.total) * 100).toFixed(1) : 0;
+            return parseFloat(pct) >= 16 ? pct + "%" : "";
+          }
+        }
+      }
+    }
+  });
 }
 
 // 7.5.4. Cards com Emojis e Porcentagens para Cultura e Eventos
