@@ -607,11 +607,28 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
   if (!response.ok) {
     const errText = await response.text();
     const retryAfter = response.headers.get("retry-after");
+    
+    // Diagnóstico detalhado de erro de validação JSON da Groq
+    if (errText.includes("json_validate_failed") || errText.includes("Failed to validate JSON")) {
+      console.error(`[GROQ JSON VALIDATE FAILED] Etapa: ${stepLabel}`);
+      console.error(`[GROQ JSON VALIDATE FAILED] Modelo: ${GROQ_MODEL}`);
+      console.error(`[GROQ JSON VALIDATE FAILED] Tamanho System Prompt: ${systemPrompt.length} chars`);
+      console.error(`[GROQ JSON VALIDATE FAILED] Tamanho User Payload: ${userPayloadStr.length} chars`);
+      console.error(`[GROQ JSON VALIDATE FAILED] Max Tokens: ${maxTokens}`);
+      console.error(`[GROQ JSON VALIDATE FAILED] Erro retornado pela Groq: ${errText}`);
+    }
+
     const errorObj = new Error(`GROQ_API_ERROR: Falha na chamada da Groq (${response.status}): ${errText}`);
     errorObj.status = response.status;
     errorObj.retryAfterSeconds = retryAfter ? parseInt(retryAfter, 10) : 8;
     errorObj.durationMs = durationMs;
+    errorObj.rawErrorBody = errText;
     
+    if (errText.includes("json_validate_failed") || errText.includes("Failed to validate JSON")) {
+      errorObj.isJsonValidateFailed = true;
+      errorObj.error_code = "GROQ_JSON_VALIDATE_FAILED";
+    }
+
     // Detecção imediata de modelo inválido/descontinuado (400 ou 404)
     if (response.status === 404 || (response.status === 400 && (errText.includes("model") || errText.includes("decommissioned") || errText.includes("not found")))) {
       errorObj.isModelInvalid = true;
@@ -626,17 +643,27 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
   }
 
   const data = await response.json();
-  const rawContent = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "{}";
+  const rawContent = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
   
+  if (!rawContent || rawContent.trim().length === 0) {
+    const emptyErr = new Error("GROQ_EMPTY_GENERATION: A Groq retornou geração vazia.");
+    emptyErr.error_code = "GROQ_EMPTY_GENERATION";
+    throw emptyErr;
+  }
+
   let parsed;
   try {
     parsed = JSON.parse(rawContent);
   } catch (e) {
     const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
-      parsed = JSON.parse(jsonMatch[0]);
+      try {
+        parsed = JSON.parse(jsonMatch[0]);
+      } catch (innerErr) {
+        throw new Error(`GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido. Resposta: ${rawContent.slice(0, 100)}`);
+      }
     } else {
-      throw new Error("GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido.");
+      throw new Error(`GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido. Resposta: ${rawContent.slice(0, 100)}`);
     }
   }
 
@@ -741,29 +768,35 @@ const MODULE_DEFINITIONS = [
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
     message: "Formulando tese estratégica, veredito humano e vocação territorial...",
-    maxTokens: 850,
+    maxTokens: 1400,
     systemPrompt: `Voce e o Consultor Estrategico Senior do Radar SJC.
 Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e criativo.
 
 DIRETRIZES:
 1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados e numeros fornecidos no analysisContext. Nao invente percentuais.
-2. LIBERDADE ANALITICA: Formule uma tese autoral e conecte o comportamento do joseense com o modelo de negocio.
-3. BAIRROS E REGIOES: Avalie bairros e polos comerciais de SJC com base na vocacao real do territorio e do publico-alvo. Nao invente pontuacoes numericas sem formula; use prioridade estrategica qualitativa ("Alta", "Media", "Exploratoria") com defesa consistente.
-4. ZONA DE EXCLUSAO: Aponte com franqueza onde e em quais condicoes o negocio NAO deve operar.
+2. CONCISAO E PROFUNDIDADE: O campo visao_estrategica_texto deve conter no maximo 2 paragrafos objetivos e densos.
+3. BAIRROS E POLOS: Retorne no maximo 5 bairros ou polos prioritarios de SJC no array bairros. Em nivel_de_confianca use estritamente "alta", "media" ou "baixa".
+4. FORMATACAO ESTRITA: Retorne EXCLUSIVAMENTE um objeto JSON valido.
+- Nao inclua markdown (sem marcadores de bloco json).
+- Nao escreva texto antes ou depois do JSON.
+- Use aspas duplas em todas as chaves e valores.
+- Nao use virgula antes de fechar chaves ou colchetes.
 
-RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
+ESTRUTURA JSON EXATA:
 {
-  "visao_estrategica_texto": "Tese executiva contendo: (1) O que a proposta realmente e e sua premissa central; (2) Leitura do comportamento e barreiras em SJC; (3) Veredito consultivo maduro e humano com diretrizes praticas de diferenciacao.",
+  "visao_estrategica_texto": "Texto da analise estrategica em ate 2 paragrafos densos.",
+  "veredito_postura": "avancar",
+  "veredito_justificativa": "Justificativa clara do veredito para o empreendedor.",
   "bairros": [
     {
-      "nome": "Nome do Bairro ou Regiao em SJC",
-      "regiao": "Centro-Oeste | Sul | Leste | Norte | Centro | Oeste",
-      "prioridade_estrategica": "Alta | Media | Exploratoria",
-      "formato_recomendado": "Loja de Rua | Showroom Agendado | Hub Digital | Quiosque | Atelier",
-      "justificativa_vocacional": "Defesa estrategica conectando renda, fluxo e vocacao do territorio."
+      "nome": "Jardim Aquarius",
+      "regiao": "Centro-Oeste",
+      "formato_recomendado": "Loja de Rua",
+      "justificativa": "Justificativa estrategica ancorada no contexto socioeconomico do bairro.",
+      "nivel_de_confianca": "alta"
     }
   ],
-  "zona_exclusao": "ZONA DE EXCLUSAO DETALHADA - Alerta sobre locais ou modelos com risco de friccao ou baixo retorno."
+  "zona_exclusao": "Local ou formato que deve ser evitado e por qual motivo."
 }`
   },
   {
@@ -927,18 +960,26 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 ];
 
 // 8. VALIDAÇÃO ESTRITA DE CADA MÓDULO
+function validateStep1Result(result) {
+  if (!result || typeof result !== 'object') {
+    throw new Error("INVALID_STEP1_RESULT: O Step 1 retornou uma resposta nula ou inválida.");
+  }
+  if (!result.visao_estrategica_texto || typeof result.visao_estrategica_texto !== 'string' || result.visao_estrategica_texto.length < 50) {
+    throw new Error("INVALID_STRATEGIC_VISION: O texto da visão estratégica está incompleto.");
+  }
+  if (!Array.isArray(result.bairros) || result.bairros.length === 0) {
+    throw new Error("INVALID_NEIGHBORHOOD_ANALYSIS: Nenhum bairro ou polo territorial foi avaliado.");
+  }
+  return true;
+}
+
 function validateModuleResult(stepId, result, snapshot) {
   if (!result || typeof result !== 'object' || Object.keys(result).length === 0) {
     throw new Error(`MODULE_EMPTY_RESULT: O módulo ${stepId} retornou um objeto vazio.`);
   }
 
   if (stepId === "visao_veredito_territorio") {
-    if (!result.visao_estrategica_texto || result.visao_estrategica_texto.length < 50) {
-      throw new Error("INVALID_STRATEGIC_VISION: O texto da visão estratégica está incompleto.");
-    }
-    if (!Array.isArray(result.bairros) || result.bairros.length === 0) {
-      throw new Error("INVALID_NEIGHBORHOOD_ANALYSIS: Nenhum bairro ou polo territorial foi avaliado.");
-    }
+    return validateStep1Result(result);
   }
 
   if (stepId === "swot_causalidade_ambiente") {
@@ -1413,16 +1454,34 @@ module.exports = async function handler(req, res) {
             analysisContext: stepContext
           });
 
-          const groqResult = await callGroqStep(
-            apiKey,
-            stepDef.systemPrompt,
-            stepPayloadStr,
-            stepDef.maxTokens || 750,
-            25000,
-            stepDef.label
-          );
-
-          validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
+          let groqResult;
+          try {
+            groqResult = await callGroqStep(
+              apiKey,
+              stepDef.systemPrompt,
+              stepPayloadStr,
+              stepDef.maxTokens || 750,
+              25000,
+              stepDef.label
+            );
+            validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
+          } catch (firstAttemptErr) {
+            if (firstAttemptErr.isJsonValidateFailed || firstAttemptErr.error_code === "GROQ_EMPTY_GENERATION" || firstAttemptErr.message.includes("GROQ_INVALID_JSON")) {
+              console.warn(`[RECOVERY RETRY] Reexecutando ${stepDef.id} com prompt restrito após erro JSON:`, firstAttemptErr.message);
+              const recoverySystemPrompt = `${stepDef.systemPrompt}\n\nATENCAO: Sua resposta anterior nao pode ser validada. Retorne SOMENTE um objeto JSON valido, curto e completo, seguindo exatamente as chaves indicadas. Nao inclua markdown, explicacoes externas ou campos extras.`;
+              groqResult = await callGroqStep(
+                apiKey,
+                recoverySystemPrompt,
+                stepPayloadStr,
+                stepDef.maxTokens || 750,
+                25000,
+                `${stepDef.label} (Recovery Retry)`
+              );
+              validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
+            } else {
+              throw firstAttemptErr;
+            }
+          }
 
           activeJob.partial_results = activeJob.partial_results || {};
           activeJob.partial_results[stepDef.id] = groqResult.result;
