@@ -6171,13 +6171,13 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
       '</div>';
     }
 
-    return '<div class="' + cardBg + ' rounded-2xl p-3 sm:p-3.5 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[92px] h-full overflow-hidden">' +
-      '<div class="flex items-center gap-2.5 min-w-0 mb-1.5">' +
-        '<div class="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg ' + iconBg + ' flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">' +
+    return '<div class="' + cardBg + ' rounded-2xl p-2.5 sm:p-3 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[88px] h-full overflow-hidden">' +
+      '<div class="flex items-center gap-2 min-w-0 mb-1.5">' +
+        '<div class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg ' + iconBg + ' flex items-center justify-center text-[10px] sm:text-xs flex-shrink-0 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
-        '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-words ' + textColor + '" title="' + label + '">' + label + '</h4>' +
+        '<div class="min-w-0 flex-1 overflow-hidden">' +
+          '<h4 class="text-[11px] sm:text-xs font-bold leading-snug whitespace-nowrap overflow-hidden text-ellipsis ' + textColor + '" style="word-break: normal; overflow-wrap: normal;" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
       '<div class="flex items-center justify-end pt-1.5 border-t border-black/5">' +
