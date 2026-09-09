@@ -1427,15 +1427,27 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 11.2. PRODUTORES LOCAIS & FEIRAS DE ARTESANATO: Cards com Emojis e Porcentagens
+      // 11.2. PRODUTORES LOCAIS & FEIRAS DE ARTESANATO: Gráfico Donut com Centro Informativo e Legenda Executiva
       if (qLower.includes("produtores") || qLower.includes("feiras") || qLower.includes("artesanato") || qLower.includes("produtores locais")) {
-        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
-        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
-          '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-          '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Consumo Local & Cultura Regional</p>' +
+        const donutCanvasId = "chart-producers-donut-" + globalQuestionIndex;
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
+          '<div class="min-w-0 flex-1">' +
+            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+            '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Consumo Local & Cultura Regional</p>' +
+          '</div>' +
+          '<span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 text-[10px] font-bold border border-blue-200 flex items-center gap-1 shrink-0">' +
+            '<i class="fa-solid fa-chart-pie text-blue-600"></i> Donut' +
+          '</span>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-between w-full">' + renderLocalProducersCardsWidget(dataMap, total, records, questionText) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center w-full h-full">' +
+          renderLocalProducersDonutWidget(donutCanvasId, dataMap, total, records, questionText) +
+        '</div>';
         cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          initLocalProducersDonutChart(donutCanvasId, dataMap, total, records, questionText);
+        }, 100);
         return;
       }
 
@@ -2789,129 +2801,212 @@ function renderGrowthHelpsCardsWidget(dataMap, total) {
   return html;
 }
 
-// 7.5.2. Cards com Emojis e Porcentagens para Feiras de Artesanato e Produtores Locais
-function renderLocalProducersCardsWidget(dataMap, total, records, questionText) {
-  function getProducerConfig(key) {
-    const k = key.toLowerCase().trim();
-    if (k.includes("sim") || k.includes("sempre") || k.includes("com frequência") || k.includes("com frequencia") || k.includes("costumo")) {
-      return {
-        emoji: "🥬",
-        title: "Sim, sempre",
-        subtitle: "Apoia com frequência o artesanato e agricultura local",
-        badgeBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-        border: "border-emerald-200 hover:border-emerald-300",
-        tag: "Frequenta / Apoia",
-        tagBg: "bg-emerald-100 text-emerald-800",
-        iconBg: "bg-emerald-100/80"
-      };
+// 7.5.2. Gráfico Donut para Feiras de Artesanato e Produtores Locais (Estrutura idêntica à de Frequência de Lazer)
+function calculateLocalProducersStats(dataMap, total, records, questionText) {
+  const producerConfigs = {
+    sim_sempre: {
+      key: "sim_sempre",
+      emoji: "🥬",
+      title: "Sim, sempre",
+      shortTitle: "Sim, sempre",
+      subtitle: "Apoia com frequência o artesanato e agricultura local",
+      color: "#10B981", // Verde Esmeralda
+      tag: "Frequenta",
+      tagBg: "bg-emerald-100 text-emerald-800",
+      badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200"
+    },
+    as_vezes: {
+      key: "as_vezes",
+      emoji: "🛍️",
+      title: "Às vezes",
+      shortTitle: "Às vezes",
+      subtitle: "Visita feiras em ocasiões especiais",
+      color: "#0077B6", // Azul Oceano
+      tag: "Eventual",
+      tagBg: "bg-blue-100 text-blue-800",
+      badgeBg: "bg-blue-50 text-blue-800 border-blue-200"
+    },
+    tenho_vontade: {
+      key: "tenho_vontade",
+      emoji: "💭",
+      title: "Tenho vontade, mas não vou",
+      shortTitle: "Tenho vontade",
+      subtitle: "Tem interesse, mas encontra barreiras para ir",
+      color: "#F59E0B", // Âmbar / Laranja
+      tag: "Potencial",
+      tagBg: "bg-amber-100 text-amber-800",
+      badgeBg: "bg-amber-50 text-amber-800 border-amber-200"
+    },
+    desinteresse: {
+      key: "desinteresse",
+      emoji: "🛒",
+      title: "Não tenho interesse",
+      shortTitle: "Sem interesse",
+      subtitle: "Prefere outros formatos de comércio e compras",
+      color: "#94A3B8", // Cinza Ardósia
+      tag: "Desinteresse",
+      tagBg: "bg-slate-100 text-slate-800",
+      badgeBg: "bg-slate-50 text-slate-800 border-slate-200"
     }
-    if (k.includes("às vezes") || k.includes("as vezes") || k.includes("eventual")) {
-      return {
-        emoji: "🛍️",
-        title: "Às vezes",
-        subtitle: "Visita feiras em ocasiões especiais",
-        badgeBg: "bg-blue-50 text-blue-700 border-blue-200",
-        border: "border-blue-200 hover:border-blue-300",
-        tag: "Eventual",
-        tagBg: "bg-blue-100 text-blue-800",
-        iconBg: "bg-blue-100/80"
-      };
-    }
-    if (k.includes("vontade") || k.includes("tenho vontade")) {
-      return {
-        emoji: "💭",
-        title: "Tenho vontade, mas não vou",
-        subtitle: "Tem interesse, mas encontra barreiras para ir",
-        badgeBg: "bg-amber-50 text-amber-700 border-amber-200",
-        border: "border-amber-200 hover:border-amber-300",
-        tag: "Potencial",
-        tagBg: "bg-amber-100 text-amber-800",
-        iconBg: "bg-amber-100/80"
-      };
-    }
-    if (k.includes("interesse") || k.includes("não tenho") || k.includes("nao tenho") || k.includes("não costumo") || k.includes("nao costumo") || k.includes("raramente") || k.includes("nunca")) {
-      return {
-        emoji: "🛒",
-        title: "Não tenho interesse",
-        subtitle: "Prefere outros formatos de comércio e compras",
-        badgeBg: "bg-slate-50 text-slate-700 border-slate-200",
-        border: "border-slate-200 hover:border-slate-300",
-        tag: "Desinteresse",
-        tagBg: "bg-slate-100 text-slate-800",
-        iconBg: "bg-slate-100"
-      };
-    }
-    return null;
-  }
+  };
 
-  // Extração inteligente de dados da pergunta
-  const dynamicMap = {};
+  const counts = { sim_sempre: 0, as_vezes: 0, tenho_vontade: 0, desinteresse: 0 };
+  let countTotal = 0;
 
   if (records && records.length > 0) {
     records.forEach(r => {
-      let val = r[questionText];
-      if (!val) {
-        val = getField(r, [questionText, "Você costuma comprar de produtores locais ou ir em feiras de artesanato da cidade?", "produtores locais", "feiras de artesanato", "feiras", "artesanato"]);
+      const v = (getField(r, [
+        questionText,
+        "Você costuma comprar de produtores locais ou ir em feiras de artesanato da cidade?",
+        "produtores locais",
+        "feiras de artesanato",
+        "feiras",
+        "artesanato"
+      ]) || "").toLowerCase().trim();
+
+      if (v) {
+        countTotal++;
+        if (v.includes("sim") || v.includes("sempre") || v.includes("com frequência") || v.includes("com frequencia") || v.includes("costumo")) {
+          counts.sim_sempre++;
+        } else if (v.includes("às vezes") || v.includes("as vezes") || v.includes("eventual")) {
+          counts.as_vezes++;
+        } else if (v.includes("vontade") || v.includes("tenho vontade")) {
+          counts.tenho_vontade++;
+        } else {
+          counts.desinteresse++;
+        }
       }
-      if (val !== undefined && val !== null && String(val).trim() !== "") {
-        const raw = String(val).trim();
-        dynamicMap[raw] = (dynamicMap[raw] || 0) + 1;
-      }
-    });
-  } else if (dataMap && Object.keys(dataMap).length > 0) {
-    Object.entries(dataMap).forEach(([k, v]) => {
-      dynamicMap[k] = v;
     });
   }
 
-  // Agrupamento padronizado pelas 4 categorias reais (ignora ruídos e números de deslocamento)
-  const categorizedCounts = {
-    "Sim, sempre": 0,
-    "Às vezes": 0,
-    "Tenho vontade, mas não vou": 0,
-    "Não tenho interesse": 0
+  if (countTotal === 0 && dataMap && Object.keys(dataMap).length > 0) {
+    Object.entries(dataMap).forEach(([k, cnt]) => {
+      const kl = k.toLowerCase().trim();
+      countTotal += cnt;
+      if (kl.includes("sim") || kl.includes("sempre") || kl.includes("com frequência") || kl.includes("com frequencia") || kl.includes("costumo")) {
+        counts.sim_sempre += cnt;
+      } else if (kl.includes("às vezes") || kl.includes("as vezes") || kl.includes("eventual")) {
+        counts.as_vezes += cnt;
+      } else if (kl.includes("vontade") || kl.includes("tenho vontade")) {
+        counts.tenho_vontade += cnt;
+      } else {
+        counts.desinteresse += cnt;
+      }
+    });
+  }
+
+  const base = countTotal > 0 ? countTotal : (total || 1);
+  const items = [
+    { ...producerConfigs.sim_sempre, count: counts.sim_sempre, pct: ((counts.sim_sempre / base) * 100).toFixed(1) },
+    { ...producerConfigs.as_vezes, count: counts.as_vezes, pct: ((counts.as_vezes / base) * 100).toFixed(1) },
+    { ...producerConfigs.tenho_vontade, count: counts.tenho_vontade, pct: ((counts.tenho_vontade / base) * 100).toFixed(1) },
+    { ...producerConfigs.desinteresse, count: counts.desinteresse, pct: ((counts.desinteresse / base) * 100).toFixed(1) }
+  ];
+
+  const sorted = items.slice().sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
+
+  return {
+    total: base,
+    items: sorted,
+    dominant: sorted[0]
   };
+}
 
-  let validTotal = 0;
-  Object.entries(dynamicMap).forEach(([rawKey, count]) => {
-    const cfg = getProducerConfig(rawKey);
-    if (cfg && cfg.title) {
-      categorizedCounts[cfg.title] = (categorizedCounts[cfg.title] || 0) + count;
-      validTotal += count;
-    }
-  });
+function renderLocalProducersDonutWidget(canvasId, dataMap, total, records, questionText) {
+  const stats = calculateLocalProducersStats(dataMap, total, records, questionText);
 
-  const baseTotal = validTotal > 0 ? validTotal : (total || 1);
-  const entries = Object.entries(categorizedCounts).filter(([_, count]) => count > 0);
-
-  entries.sort((a, b) => b[1] - a[1]);
-
-  let html = '<div class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1 py-1 custom-card-scroll w-full">';
-
-  entries.forEach(([key, count]) => {
-    const pct = baseTotal > 0 ? ((count / baseTotal) * 100).toFixed(1) : "0.0";
-    const cfg = getProducerConfig(key);
-
-    html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex items-center justify-between gap-3 transition-all">' +
-      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<div class="w-10 h-10 rounded-2xl ' + cfg.iconBg + ' flex-shrink-0 flex items-center justify-center text-xl shadow-2xs select-none">' +
-          cfg.emoji +
-        '</div>' +
-        '<div class="min-w-0 flex-1">' +
-          '<div class="flex items-center gap-2 mb-0.5">' +
-            '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold ' + cfg.tagBg + ' tracking-tight">' + cfg.tag + '</span>' +
-          '</div>' +
-          '<h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-tight break-words" title="' + cfg.title + '">' + cfg.title + '</h4>' +
-        '</div>' +
+  let html = '<div class="flex flex-col items-center justify-between gap-3 w-full h-full py-1">';
+  
+  // Topo: Gráfico Donut com Centro Minimalista de Destaque
+  html += '<div class="w-full flex items-center justify-center relative my-1">' +
+    '<div class="relative w-[150px] h-[150px] sm:w-[165px] sm:h-[165px] flex items-center justify-center mx-auto">' +
+      '<canvas id="' + canvasId + '" class="w-full h-full block"></canvas>' +
+      // Centro informativo da Rosca perfeitamente centralizado
+      '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center select-none">' +
+        '<span class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-none">' + stats.dominant.pct + '%</span>' +
+        '<span class="text-[10px] sm:text-[11px] font-bold text-slate-500 mt-1 max-w-[90px] leading-tight">' + stats.dominant.shortTitle + '</span>' +
       '</div>' +
-      '<div class="flex-shrink-0 text-right pl-2">' +
-        '<span class="inline-block px-3 py-1.5 rounded-xl ' + cfg.badgeBg + ' border font-black text-xs sm:text-sm shadow-2xs">' + pct + '%</span>' +
+    '</div>' +
+  '</div>';
+
+  // Embaixo: Lista de Cards de Legenda em 1 Coluna com Largura Total (Sem cortes de texto!)
+  html += '<div class="flex flex-col gap-2 w-full mt-1">';
+  stats.items.forEach(item => {
+    html += '<div class="bg-white hover:bg-slate-50/90 px-3.5 py-2 sm:py-2.5 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-2.5 min-w-0 w-full">' +
+      '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
+        '<span class="w-3 h-3 rounded-full shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
+        '<span class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words">' + item.title + '</span>' +
+      '</div>' +
+      '<div class="shrink-0 pl-1">' +
+        '<span class="inline-flex items-center justify-center min-w-[54px] px-2 py-0.5 rounded-xl text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
+          item.pct + '%' +
+        '</span>' +
       '</div>' +
     '</div>';
   });
+  html += '</div>';
 
   html += '</div>';
   return html;
+}
+
+function initLocalProducersDonutChart(canvasId, dataMap, total, records, questionText) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || typeof Chart === "undefined") return;
+  const ctx = canvas.getContext("2d");
+  if (chartInstances[canvasId]) {
+    try {
+      chartInstances[canvasId].destroy();
+    } catch (e) {}
+  }
+
+  const stats = calculateLocalProducersStats(dataMap, total, records, questionText);
+  const labels = stats.items.map(i => i.title);
+  const values = stats.items.map(i => i.count);
+  const bgColors = stats.items.map(i => i.color);
+
+  chartInstances[canvasId] = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        backgroundColor: bgColors,
+        borderColor: "#FFFFFF",
+        borderWidth: 2.5,
+        borderRadius: 4,
+        spacing: 2,
+        hoverOffset: 5
+      }]
+    },
+    options: {
+      cutout: "70%",
+      responsive: true,
+      maintainAspectRatio: true,
+      layout: {
+        padding: 2
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: {
+            label: function(context) {
+              const val = context.raw || 0;
+              const pct = stats.total > 0 ? ((val / stats.total) * 100).toFixed(1) : 0;
+              return " " + context.label + ": " + val + " (" + pct + "%)";
+            }
+          }
+        },
+        datalabels: {
+          display: false
+        }
+      }
+    }
+  });
 }
 
 // 7.5.3. Cards com Emojis e Porcentagens para Meios de Transporte
