@@ -6000,6 +6000,32 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
 function renderTreemapWidget(dataMap, total, records, questionText) {
   const dynamicMap = {};
 
+  function normalizeTreemapLabel(raw) {
+    if (raw === undefined || raw === null) return "";
+    let str = String(raw).trim();
+    const l = str.toLowerCase();
+
+    // Normalização específica e gramaticalmente perfeita para Estado Civil
+    if (l.includes("casad") || l.includes("união") || l.includes("uniao") || l.includes("junto")) {
+      return "Casado(a) ou morando junto";
+    }
+    if (l.includes("solteir")) {
+      return "Solteiro(a)";
+    }
+    if (l.includes("namor")) {
+      return "Namorando";
+    }
+    if (l.includes("divorc") || l.includes("separad")) {
+      return "Divorciado(a)";
+    }
+    if (l.includes("viúv") || l.includes("viuv")) {
+      return "Viúvo(a)";
+    }
+
+    // Limpeza padrão segura sem concatenar letras
+    return str.replace(/\s*\([^)]*\)/g, "").trim() || str;
+  }
+
   if (records && records.length > 0) {
     records.forEach(r => {
       let val = r[questionText];
@@ -6007,13 +6033,16 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
         val = getField(r, [questionText, "Você sente que as festas e eventos da cidade combinam com o seu jeito?", "festas e eventos", "festas", "eventos", "combinam com o seu jeito", "estado civil", "civil"]);
       }
       if (val !== undefined && val !== null && String(val).trim() !== "") {
-        const clean = String(val).trim().replace(/[()]/g, "").trim();
+        const clean = normalizeTreemapLabel(val);
         if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + 1;
       }
     });
   } else if (dataMap && Object.keys(dataMap).length > 0) {
     Object.entries(dataMap).forEach(([k, v]) => {
-      if (v > 0) dynamicMap[k] = v;
+      if (v > 0) {
+        const clean = normalizeTreemapLabel(k);
+        if (clean) dynamicMap[clean] = (dynamicMap[clean] || 0) + v;
+      }
     });
   }
 
@@ -6128,12 +6157,12 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
     if (isHero) {
       return '<div class="' + cardBg + ' rounded-2xl p-4 sm:p-5 shadow-xs hover:shadow-md border ' + borderClass + ' flex items-center justify-between gap-3 transition-all duration-300 min-h-[82px]">' +
         '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-          '<div class="w-11 h-11 rounded-2xl ' + iconBg + ' flex items-center justify-center text-lg flex-shrink-0 shadow-2xs">' +
+          '<div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl ' + iconBg + ' flex items-center justify-center text-base sm:text-lg flex-shrink-0 shadow-2xs">' +
             '<i class="' + iconClass + '"></i>' +
           '</div>' +
           '<div class="min-w-0 flex-1">' +
             '<span class="text-[10px] font-extrabold ' + subTextColor + ' uppercase tracking-wider block mb-0.5">Mais Citado</span>' +
-            '<h4 class="text-sm sm:text-base font-black ' + textColor + ' leading-tight break-words" title="' + label + '">' + label + '</h4>' +
+            '<h4 class="text-sm sm:text-base font-black ' + textColor + ' leading-snug break-normal" title="' + label + '">' + label + '</h4>' +
           '</div>' +
         '</div>' +
         '<div class="px-3.5 py-1.5 rounded-2xl ' + badgeBg + ' font-black text-2xl sm:text-3xl border shadow-xs flex-shrink-0 tracking-tight leading-none">' +
@@ -6142,17 +6171,17 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
       '</div>';
     }
 
-    return '<div class="' + cardBg + ' rounded-2xl p-3.5 sm:p-4 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[96px] h-full">' +
-      '<div class="flex items-start gap-2.5 mb-2">' +
-        '<div class="w-8 h-8 rounded-xl ' + iconBg + ' flex items-center justify-center text-xs flex-shrink-0 mt-0.5 shadow-2xs">' +
+    return '<div class="' + cardBg + ' rounded-2xl p-3 sm:p-3.5 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[92px] h-full">' +
+      '<div class="flex items-center gap-2 min-w-0 mb-1.5">' +
+        '<div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl ' + iconBg + ' flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-words ' + textColor + '" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-normal whitespace-normal ' + textColor + '" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-2 border-t border-black/5">' +
-        '<div class="px-3 py-1 rounded-xl ' + badgeBg + ' font-black text-lg sm:text-xl border shadow-2xs tracking-tight leading-none">' +
+      '<div class="flex items-center justify-end pt-1.5 border-t border-black/5">' +
+        '<div class="px-2.5 py-1 rounded-xl ' + badgeBg + ' font-black text-base sm:text-lg border shadow-2xs tracking-tight leading-none">' +
           pct + '%' +
         '</div>' +
       '</div>' +
