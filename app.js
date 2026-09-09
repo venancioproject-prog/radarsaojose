@@ -1393,7 +1393,7 @@ function processAndRenderDynamicCharts(records) {
         qLower.includes("nao abordamos na pesquisa") ||
         qLower.includes("algo que queira falar")
       ) {
-        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2";
+        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
         cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Nuvem de Palavras • Termos e Expressões Mais Mencionadas (Respostas Abertas)</p>' +
