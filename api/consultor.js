@@ -1208,6 +1208,10 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({
         server_time: new Date().toISOString(),
         node_env: process.env.NODE_ENV || "development",
+        build_commit: process.env.VERCEL_GIT_COMMIT_SHA || "local_development",
+        model: GROQ_MODEL,
+        step: "visao_veredito_territorio",
+        response_format_used: false,
         cwd: process.cwd(),
         dirname: __dirname,
         presentation: loc,
