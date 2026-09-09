@@ -131,6 +131,25 @@
       opacity: 0.85;
       transform: scale(1);
     }
+    /* Estilo Preto & Branco Executivo para o Mapa de Regiões Frequentadas */
+    .sjc-bw-map .leaflet-tile-pane,
+    .sjc-bw-tiles {
+      filter: grayscale(100%) contrast(1.15) brightness(0.92) !important;
+      -webkit-filter: grayscale(100%) contrast(1.15) brightness(0.92) !important;
+    }
+    .sjc-map-tooltip {
+      background-color: rgba(15, 23, 42, 0.92) !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 8px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 11px !important;
+      padding: 4px 8px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    }
+    .sjc-map-tooltip::before {
+      border-top-color: rgba(15, 23, 42, 0.92) !important;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
