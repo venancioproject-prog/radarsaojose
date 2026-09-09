@@ -1043,7 +1043,9 @@ function processAndRenderDynamicCharts(records) {
     '</div>';
 
     const cardsGrid = document.createElement("div");
-    cardsGrid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+    cardsGrid.className = catIdx === 2
+      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6"
+      : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
 
     cat.questions.forEach((questionText) => {
       globalQuestionIndex++;
@@ -1085,6 +1087,9 @@ function processAndRenderDynamicCharts(records) {
       if (displayTitle.toLowerCase().includes("região da cidade") || (displayTitle.toLowerCase().includes("mais frequenta") && displayTitle.toLowerCase().includes("sai de casa"))) {
         displayTitle = "Qual região da cidade você mais frequenta quando sai de casa?";
       }
+      if (displayTitle.toLowerCase().includes("em qual bairro você mora") || displayTitle.toLowerCase().includes("bairro você mora") || (displayTitle.toLowerCase().includes("bairro") && displayTitle.toLowerCase().includes("mora"))) {
+        displayTitle = "Em qual bairro você mora?";
+      }
       if (displayTitle.toLowerCase().includes("maior dificuldade") && displayTitle.toLowerCase().includes("sair à noite")) {
         displayTitle = "Qual a maior dificuldade para sair à noite em São José?";
       }
@@ -1109,7 +1114,7 @@ function processAndRenderDynamicCharts(records) {
 
       // Card Container
       const cardEl = document.createElement("div");
-      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
 
       // Extração de dados robusta e limpeza de parênteses/múltipla escolha
       const dataMap = {};
@@ -1365,7 +1370,7 @@ function processAndRenderDynamicCharts(records) {
 
       // 8. OUTRAS CIDADES (Evasão): Cards com Ícones Visuais e Porcentagens
       if (qLower.includes("outras cidades") && (qLower.includes("passear") || qLower.includes("comer"))) {
-        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Comportamento de Deslocamento Regional</p>' +
@@ -1434,7 +1439,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.3. MEIOS DE TRANSPORTE: Cards com Emojis e Porcentagens
       if (qLower.includes("transporte") || qLower.includes("meios de transporte") || (qLower.includes("transporte") && qLower.includes("usa"))) {
         const cleanTransportTitle = displayTitle.replace(/\([^)]*\)/g, "").trim();
-        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + cleanTransportTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Múltipla Escolha • Distribuição Percentual de Mobilidade Urbana</p>' +
@@ -1444,10 +1449,10 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR (LEAFLET) - SPAN 2 / FULL WIDTH
+      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR (LEAFLET) - LADO A LADO COM O MAPA DE BAIRROS
       if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
         const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -1458,12 +1463,36 @@ function processAndRenderDynamicCharts(records) {
           '</span>' +
         '</div>' +
         '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
-          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) +
+          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText, false) +
         '</div>';
         cardsGrid.appendChild(cardEl);
 
         setTimeout(() => {
-          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText);
+          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText, false);
+        }, 120);
+        return;
+      }
+
+      // 11.4.1. EM QUAL BAIRRO VOCÊ MORA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR RESIDENCIAL (LEAFLET) - LADO A LADO COM O MAPA DE REGIÕES
+      if (qLower.includes("bairro") && (qLower.includes("mora") || qLower.includes("você mora") || qLower.includes("voce mora"))) {
+        const mapContainerId = "map-sjc-bairros-" + globalQuestionIndex;
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
+          '<div>' +
+            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real Oficial de SJC • Concentração & Distribuição Territorial dos Respondentes</p>' +
+          '</div>' +
+          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0">' +
+            '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
+          '</span>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
+          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText, true) +
+        '</div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText, true);
         }, 120);
         return;
       }
@@ -3514,10 +3543,10 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
   return html;
 }
 
-// 7.6.1. MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR DAS REGIÕES (LEAFLET)
+/// 7.6.1. MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM MAPA DE CALOR DAS REGIÕES & BAIRROS (LEAFLET)
 window.sjcLeafletMaps = window.sjcLeafletMaps || {};
 
-function calculateSjcRegionStats(dataMap, total, records, questionText) {
+function calculateSjcRegionStats(dataMap, total, records, questionText, isResidence = false) {
   let centroOeste = 0;
   let sul = 0;
   let leste = 0;
@@ -3525,23 +3554,83 @@ function calculateSjcRegionStats(dataMap, total, records, questionText) {
   let todas = 0;
   let countSum = 0;
 
+  const topBairros = {
+    centroOeste: {},
+    sul: {},
+    leste: {},
+    norte: {}
+  };
+
+  const isBairroMode = isResidence || (questionText && /bairro/i.test(questionText) && /mora/i.test(questionText));
+
   if (records && records.length > 0) {
     records.forEach(r => {
-      const val = (questionText ? getField(r, [questionText, "Qual região da cidade você mais frequenta quando sai de casa?", "região", "regiao_frequenta"]) : "").toLowerCase().trim();
-      if (val) {
-        countSum++;
-        if (val.includes("oeste") || val.includes("centro") || val.includes("vila ema") || val.includes("aquarius") || val.includes("esplanada")) {
-          centroOeste++;
-        } else if (val.includes("sul") || val.includes("satélite") || val.includes("bosque")) {
-          sul++;
-        } else if (val.includes("todas") || val.includes("qualquer") || val.includes("todas as regiões")) {
-          todas++;
-        } else if (val.includes("leste") || val.includes("vista verde") || val.includes("eugênio") || val.includes("novo horizonte")) {
-          leste++;
-        } else if (val.includes("norte") || val.includes("santana")) {
-          norte++;
-        } else {
-          centroOeste++;
+      if (isBairroMode) {
+        const bairroVal = (getField(r, [questionText, "Em qual bairro você mora?", "bairro", "bairro_mora"]) || "").toLowerCase().trim();
+        const regiaoVal = (getField(r, ["Região", "regiao", "região"]) || "").toLowerCase().trim();
+        
+        if (bairroVal || regiaoVal) {
+          countSum++;
+          if (
+            regiaoVal.includes("oeste") || regiaoVal.includes("centro") ||
+            bairroVal.includes("aquarius") || bairroVal.includes("urbanova") || bairroVal.includes("das indústrias") || bairroVal.includes("das industrias") ||
+            bairroVal.includes("esplanada") || bairroVal.includes("vila ema") || bairroVal.includes("adyana") || bairroVal.includes("centro") ||
+            bairroVal.includes("betânia") || bairroVal.includes("betania") || bairroVal.includes("são dimas") || bairroVal.includes("sao dimas") ||
+            bairroVal.includes("américa") || bairroVal.includes("america") || bairroVal.includes("apollo") || bairroVal.includes("colinas") ||
+            bairroVal.includes("maringá") || bairroVal.includes("maringa")
+          ) {
+            centroOeste++;
+            if (bairroVal) topBairros.centroOeste[bairroVal] = (topBairros.centroOeste[bairroVal] || 0) + 1;
+          } else if (
+            regiaoVal.includes("sul") ||
+            bairroVal.includes("satélite") || bairroVal.includes("satelite") || bairroVal.includes("bosque") ||
+            bairroVal.includes("parque industrial") || bairroVal.includes("pq. industrial") || bairroVal.includes("pq industrial") ||
+            bairroVal.includes("morumbi") || bairroVal.includes("ypê") || bairroVal.includes("ype") || bairroVal.includes("jardim sul") ||
+            bairroVal.includes("portugal") || bairroVal.includes("oriente") || bairroVal.includes("terras do sul") || bairroVal.includes("interlagos") ||
+            bairroVal.includes("colonial") || bairroVal.includes("imperial") || bairroVal.includes("floradas") || bairroVal.includes("alemães") ||
+            bairroVal.includes("dom pedro")
+          ) {
+            sul++;
+            if (bairroVal) topBairros.sul[bairroVal] = (topBairros.sul[bairroVal] || 0) + 1;
+          } else if (
+            regiaoVal.includes("leste") ||
+            bairroVal.includes("vila industrial") || bairroVal.includes("vista verde") || bairroVal.includes("monte castelo") ||
+            bairroVal.includes("tesouro") || bairroVal.includes("campos de são josé") || bairroVal.includes("campos de sao jose") ||
+            bairroVal.includes("eugênio") || bairroVal.includes("eugenio") || bairroVal.includes("novo horizonte") || bairroVal.includes("galo branco") ||
+            bairroVal.includes("santa inês") || bairroVal.includes("santa ines") || bairroVal.includes("tatetuba")
+          ) {
+            leste++;
+            if (bairroVal) topBairros.leste[bairroVal] = (topBairros.leste[bairroVal] || 0) + 1;
+          } else if (
+            regiaoVal.includes("norte") ||
+            bairroVal.includes("santana") || bairroVal.includes("paiva") || bairroVal.includes("altos") ||
+            bairroVal.includes("buquirinha") || bairroVal.includes("cristina") || bairroVal.includes("telespark") ||
+            bairroVal.includes("minas gerais") || bairroVal.includes("alto da ponte")
+          ) {
+            norte++;
+            if (bairroVal) topBairros.norte[bairroVal] = (topBairros.norte[bairroVal] || 0) + 1;
+          } else {
+            sul++;
+            if (bairroVal) topBairros.sul[bairroVal] = (topBairros.sul[bairroVal] || 0) + 1;
+          }
+        }
+      } else {
+        const val = (questionText ? getField(r, [questionText, "Qual região da cidade você mais frequenta quando sai de casa?", "região", "regiao_frequenta"]) : "").toLowerCase().trim();
+        if (val) {
+          countSum++;
+          if (val.includes("oeste") || val.includes("centro") || val.includes("vila ema") || val.includes("aquarius") || val.includes("esplanada")) {
+            centroOeste++;
+          } else if (val.includes("sul") || val.includes("satélite") || val.includes("bosque")) {
+            sul++;
+          } else if (val.includes("todas") || val.includes("qualquer") || val.includes("todas as regiões")) {
+            todas++;
+          } else if (val.includes("leste") || val.includes("vista verde") || val.includes("eugênio") || val.includes("novo horizonte")) {
+            leste++;
+          } else if (val.includes("norte") || val.includes("santana")) {
+            norte++;
+          } else {
+            centroOeste++;
+          }
         }
       }
     });
@@ -3551,28 +3640,55 @@ function calculateSjcRegionStats(dataMap, total, records, questionText) {
     Object.entries(dataMap).forEach(([k, cnt]) => {
       const kl = k.toLowerCase().trim();
       countSum += cnt;
-      if (kl.includes("oeste") || kl.includes("centro")) centroOeste += cnt;
-      else if (kl.includes("sul")) sul += cnt;
-      else if (kl.includes("todas")) todas += cnt;
-      else if (kl.includes("leste")) leste += cnt;
-      else if (kl.includes("norte")) norte += cnt;
-      else centroOeste += cnt;
+      if (
+        kl.includes("oeste") || kl.includes("centro") || kl.includes("aquarius") || kl.includes("urbanova") ||
+        kl.includes("das indústrias") || kl.includes("das industrias") || kl.includes("esplanada") || kl.includes("vila ema") ||
+        kl.includes("adyana") || kl.includes("são dimas") || kl.includes("sao dimas") || kl.includes("américa") || kl.includes("america")
+      ) {
+        centroOeste += cnt;
+        topBairros.centroOeste[k] = (topBairros.centroOeste[k] || 0) + cnt;
+      } else if (
+        kl.includes("sul") || kl.includes("satélite") || kl.includes("satelite") || kl.includes("bosque") ||
+        kl.includes("parque industrial") || kl.includes("morumbi") || kl.includes("ypê") || kl.includes("ype") ||
+        kl.includes("jardim sul") || kl.includes("portugal") || kl.includes("oriente")
+      ) {
+        sul += cnt;
+        topBairros.sul[k] = (topBairros.sul[k] || 0) + cnt;
+      } else if (kl.includes("todas") || kl.includes("todas regiões") || kl.includes("geral")) {
+        todas += cnt;
+      } else if (
+        kl.includes("leste") || kl.includes("vila industrial") || kl.includes("vista verde") || kl.includes("monte castelo") ||
+        kl.includes("tesouro") || kl.includes("campos de são josé") || kl.includes("campos de sao jose") || kl.includes("eugênio") || kl.includes("eugenio")
+      ) {
+        leste += cnt;
+        topBairros.leste[k] = (topBairros.leste[k] || 0) + cnt;
+      } else if (
+        kl.includes("norte") || kl.includes("santana") || kl.includes("paiva") || kl.includes("altos") || kl.includes("buquirinha")
+      ) {
+        norte += cnt;
+        topBairros.norte[k] = (topBairros.norte[k] || 0) + cnt;
+      } else {
+        if (isBairroMode) sul += cnt;
+        else centroOeste += cnt;
+      }
     });
   }
 
   const base = countSum > 0 ? countSum : (total || 1);
   return {
     total: base,
+    isBairroMode,
     centroOeste: { count: centroOeste, pct: ((centroOeste / base) * 100).toFixed(1) },
     sul: { count: sul, pct: ((sul / base) * 100).toFixed(1) },
     todas: { count: todas, pct: ((todas / base) * 100).toFixed(1) },
     leste: { count: leste, pct: ((leste / base) * 100).toFixed(1) },
-    norte: { count: norte, pct: ((norte / base) * 100).toFixed(1) }
+    norte: { count: norte, pct: ((norte / base) * 100).toFixed(1) },
+    topBairros
   };
 }
 
-function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) {
-  const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
+function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText, isResidence = false) {
+  const stats = calculateSjcRegionStats(dataMap, total, records, questionText, isResidence);
 
   let html = '<div class="w-full flex flex-col justify-between h-full gap-4">';
   
@@ -3582,59 +3698,108 @@ function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, ques
     // Badge flutuante de cobertura
     '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
       '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
-        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">São José dos Campos</p>' +
+        '<p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">' + (stats.isBairroMode ? 'Moradia dos Cidadãos' : 'São José dos Campos') + '</p>' +
         '<p class="text-xs sm:text-sm font-black text-brand-900">' + stats.total.toLocaleString("pt-BR") + ' Respondentes</p>' +
       '</div>' +
     '</div>' +
   '</div>';
 
   // Legenda Interativa e Ranking de Concentração Expandida
-  html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
-    // 1. Centro / Oeste
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-1">' +
-        '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
-        '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Vila Ema, Centro</p>' +
-    '</button>' +
+  if (stats.isBairroMode) {
+    html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
+      // 1. Centro / Oeste
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
+          '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Jd. Indústrias, Urbanova</p>' +
+      '</button>' +
 
-    // 2. Zona Sul
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-1">' +
-        '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
-        '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Ind.</p>' +
-    '</button>' +
+      // 2. Zona Sul
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
+          '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Industrial</p>' +
+      '</button>' +
 
-    // 3. Todas as Regiões
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-1">' +
-        '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
-        '<span class="text-xs sm:text-sm font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-cyan-700 truncate">Circulação Geral</p>' +
-    '</button>' +
+      // 3. Zona Leste
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
+          '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-sky-700 truncate">Vila Ind., Vista Verde, M. Castelo</p>' +
+      '</button>' +
 
-    // 4. Zona Leste
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-1">' +
-        '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
-        '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-sky-700 truncate">Vista Verde, Eugênio Melo</p>' +
-    '</button>' +
+      // 4. Zona Norte
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
+          '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Vila Paiva, Altos</p>' +
+      '</button>' +
 
-    // 5. Zona Norte
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
-      '<div class="flex items-center justify-between gap-1 mb-1">' +
-        '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
-        '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Altos Santana</p>' +
-    '</button>' +
-  '</div>';
+      // 5. Visão Geral SJC
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-slate-50 hover:bg-slate-100/90 border border-slate-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Visão Geral</span>' +
+          '<span class="text-xs sm:text-sm font-black text-slate-700">100%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-slate-500 truncate">Todos os Bairros</p>' +
+      '</button>' +
+    '</div>';
+  } else {
+    html += '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 w-full pt-1">' +
+      // 1. Centro / Oeste
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Centro / Oeste</span>' +
+          '<span class="text-xs sm:text-sm font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Vila Ema, Centro</p>' +
+      '</button>' +
+
+      // 2. Zona Sul
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
+          '<span class="text-xs sm:text-sm font-black text-blue-800">' + stats.sul.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Ind.</p>' +
+      '</button>' +
+
+      // 3. Todas as Regiões
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 sm:p-3 rounded-2xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Todas Regiões</span>' +
+          '<span class="text-xs sm:text-sm font-black text-cyan-800">' + stats.todas.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-cyan-700 truncate">Circulação Geral</p>' +
+      '</button>' +
+
+      // 4. Zona Leste
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-sky-50 hover:bg-sky-100/90 border border-sky-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-sky-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Zona Leste</span>' +
+          '<span class="text-xs sm:text-sm font-black text-sky-800">' + stats.leste.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-sky-700 truncate">Vista Verde, Eugênio Melo</p>' +
+      '</button>' +
+
+      // 5. Zona Norte
+      '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 sm:p-3 rounded-2xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.02] shadow-2xs group">' +
+        '<div class="flex items-center justify-between gap-1 mb-1">' +
+          '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
+          '<span class="text-xs sm:text-sm font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
+        '</div>' +
+        '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Altos Santana</p>' +
+      '</button>' +
+    '</div>';
+  }
 
   html += '</div>';
   return html;
@@ -3647,7 +3812,7 @@ window.focusSjcRegion = function(mapContainerId, coords, zoomLevel) {
   }
 };
 
-function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText) {
+function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText, isResidence = false) {
   const container = document.getElementById(mapContainerId);
   if (!container || typeof L === "undefined") return;
 
@@ -3659,7 +3824,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     delete window.sjcLeafletMaps[mapContainerId];
   }
 
-  const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
+  const stats = calculateSjcRegionStats(dataMap, total, records, questionText, isResidence);
 
   // Inicializar o Mapa Centralizado em São José dos Campos
   const map = L.map(mapContainerId, {
@@ -3680,7 +3845,9 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     subdomains: 'abcd'
   }).addTo(map);
 
-  // 1. Região Centro / Oeste (Concentração Máxima: 41.7%)
+  const isBairro = stats.isBairroMode;
+
+  // 1. Região Centro / Oeste
   const centroOesteHalo = L.circle([-23.198, -45.908], {
     radius: 3400,
     color: "#F59E0B",
@@ -3697,7 +3864,17 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     weight: 2
   }).addTo(map);
 
-  centroOesteCore.bindPopup(`
+  const centroOestePopupContent = isBairro ? `
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Moradores Centro / Oeste</strong>
+      </div>
+      <p class="text-base font-black text-amber-700">${stats.centroOeste.pct}% dos Moradores</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.centroOeste.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Jd. Aquarius, Jd. das Indústrias, Urbanova, Vila Ema, Esplanada, Centro</p>
+    </div>
+  ` : `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
@@ -3707,17 +3884,18 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       <p class="text-xs text-slate-500 font-medium">${stats.centroOeste.count} respondentes</p>
       <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Jd. Aquarius, Vila Ema, Esplanada, Urbanova, Centro</p>
     </div>
-  `);
+  `;
 
-  // Marcador HTML com Badge
+  centroOesteCore.bindPopup(centroOestePopupContent);
+
   const centroIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#F59E0B; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">🔥 ${stats.centroOeste.pct}%</div>`,
+    html: `<div style="background:#F59E0B; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '🔥'} ${stats.centroOeste.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.198, -45.908], { icon: centroIcon }).addTo(map).bindPopup(centroOesteCore.getPopup());
 
-  // 2. Zona Sul (Alta Concentração: 28.3%)
+  // 2. Zona Sul
   const sulHalo = L.circle([-23.248, -45.892], {
     radius: 3000,
     color: "#0284C7",
@@ -3730,11 +3908,21 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     radius: 1900,
     color: "#0369A1",
     fillColor: "#0284C7",
-    fillOpacity: 0.42,
+    fillOpacity: 42,
     weight: 2
   }).addTo(map);
 
-  sulCore.bindPopup(`
+  const sulPopupContent = isBairro ? `
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Moradores Zona Sul</strong>
+      </div>
+      <p class="text-base font-black text-blue-700">${stats.sul.pct}% dos Moradores</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.sul.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Morumbi, Jd. América</p>
+    </div>
+  ` : `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
@@ -3744,16 +3932,18 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       <p class="text-xs text-slate-500 font-medium">${stats.sul.count} respondentes</p>
       <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Floradas</p>
     </div>
-  `);
+  `;
+
+  sulCore.bindPopup(sulPopupContent);
 
   const sulIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#0284C7; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.sul.pct}%</div>`,
+    html: `<div style="background:#0284C7; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '📍'} ${stats.sul.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.248, -45.892], { icon: sulIcon }).addTo(map).bindPopup(sulCore.getPopup());
 
-  // 3. Zona Leste (11.5%)
+  // 3. Zona Leste
   const lesteHalo = L.circle([-23.182, -45.815], {
     radius: 2500,
     color: "#06B6D4",
@@ -3770,7 +3960,17 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     weight: 2
   }).addTo(map);
 
-  lesteCore.bindPopup(`
+  const lestePopupContent = isBairro ? `
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Moradores Zona Leste</strong>
+      </div>
+      <p class="text-base font-black text-cyan-700">${stats.leste.pct}% dos Moradores</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.leste.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Vila Industrial, Vista Verde, Monte Castelo, Vila Tesouro, Campos de SJC</p>
+    </div>
+  ` : `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span>
@@ -3780,16 +3980,18 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       <p class="text-xs text-slate-500 font-medium">${stats.leste.count} respondentes</p>
       <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Vista Verde, Eugênio de Melo, Novo Horizonte, Vila Industrial</p>
     </div>
-  `);
+  `;
+
+  lesteCore.bindPopup(lestePopupContent);
 
   const lesteIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#06B6D4; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.leste.pct}%</div>`,
+    html: `<div style="background:#06B6D4; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '📍'} ${stats.leste.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.182, -45.815], { icon: lesteIcon }).addTo(map).bindPopup(lesteCore.getPopup());
 
-  // 4. Zona Norte (6.5%)
+  // 4. Zona Norte
   const norteHalo = L.circle([-23.142, -45.905], {
     radius: 2200,
     color: "#6366F1",
@@ -3806,7 +4008,17 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     weight: 2
   }).addTo(map);
 
-  norteCore.bindPopup(`
+  const nortePopupContent = isBairro ? `
+    <div class="p-1 text-slate-800">
+      <div class="flex items-center gap-1.5 mb-1">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+        <strong class="text-sm font-bold text-slate-900">Moradores Zona Norte</strong>
+      </div>
+      <p class="text-base font-black text-indigo-700">${stats.norte.pct}% dos Moradores</p>
+      <p class="text-xs text-slate-500 font-medium">${stats.norte.count} respondentes</p>
+      <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Top Bairros: Santana, Vila Paiva, Altos de Santana, Buquirinha, Minas Gerais</p>
+    </div>
+  ` : `
     <div class="p-1 text-slate-800">
       <div class="flex items-center gap-1.5 mb-1">
         <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
@@ -3816,11 +4028,13 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
       <p class="text-xs text-slate-500 font-medium">${stats.norte.count} respondentes</p>
       <p class="text-[11px] text-slate-400 mt-1 border-t border-slate-100 pt-1">📍 Santana, Altos de Santana, Buquirinha, Vila Paiva</p>
     </div>
-  `);
+  `;
+
+  norteCore.bindPopup(nortePopupContent);
 
   const norteIcon = L.divIcon({
     className: 'custom-map-badge',
-    html: `<div style="background:#6366F1; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">📍 ${stats.norte.pct}%</div>`,
+    html: `<div style="background:#6366F1; color:white; font-weight:900; font-size:11px; padding:3px 8px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.25); white-space:nowrap; transform:translate(-50%, -50%);">${isBairro ? '🏠' : '📍'} ${stats.norte.pct}%</div>`,
     iconSize: [0, 0]
   });
   L.marker([-23.142, -45.905], { icon: norteIcon }).addTo(map).bindPopup(norteCore.getPopup());
@@ -4831,13 +5045,101 @@ function renderRegionsHeatmap(dataMap, total) {
 
 // 8.5. Nuvem de Palavras Dinâmica (Word Cloud) com Stopwords em Português & Balão/Modal Interativo de Respostas
 window.wordCloudQuotesStore = window.wordCloudQuotesStore || {};
+window.wordCloudStoresByCloud = window.wordCloudStoresByCloud || {};
 window._activeModalWord = "";
 window._activeModalQuotes = [];
 
-window.openWordQuotesModal = function(word) {
+function normalizeSearchWord(str) {
+  if (!str) return "";
+  return String(str).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function isIgnorableResponse(str) {
+  if (!str) return true;
+  const clean = String(str).toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'“”’]/g, "").trim();
+  if (!clean || clean.length < 2) return true;
+  const ignorableExact = new Set([
+    "não", "nao", "nada", "nao tenho", "não tenho", "nenhum", "nenhuma", 
+    "sem sugestão", "sem sugestao", "sem comentarios", "sem comentários", 
+    "não sei", "nao sei", "tudo certo", "ok", "não.", "nao.", "nada.", "n"
+  ]);
+  if (ignorableExact.has(clean)) return true;
+  if (/^(não|nao|nada|nenhum|nenhuma)(\s+(não|nao|nada|tenho|sei|mais|obrigado|obrigada))?$/.test(clean)) return true;
+  return false;
+}
+
+window.openWordQuotesModal = function(word, cloudKey) {
   window._activeModalWord = word;
-  const quotes = window.wordCloudQuotesStore[word] || [];
-  window._activeModalQuotes = quotes;
+  const normWord = normalizeSearchWord(word);
+  
+  let quotes = [];
+  
+  // 1. Tentar buscar no store da nuvem específica (evita colisão entre múltiplas nuvens)
+  if (cloudKey && window.wordCloudStoresByCloud && window.wordCloudStoresByCloud[cloudKey]) {
+    quotes = window.wordCloudStoresByCloud[cloudKey][word] || 
+             window.wordCloudStoresByCloud[cloudKey][normWord] || 
+             window.wordCloudStoresByCloud[cloudKey][word.toLowerCase()] || [];
+  }
+  
+  // 2. Tentar buscar no store global com prefixo de nuvem ou chave direta
+  if ((!quotes || quotes.length === 0) && window.wordCloudQuotesStore) {
+    if (cloudKey && window.wordCloudQuotesStore[cloudKey + ":::" + word]) {
+      quotes = window.wordCloudQuotesStore[cloudKey + ":::" + word];
+    } else if (cloudKey && window.wordCloudQuotesStore[cloudKey + ":::" + normWord]) {
+      quotes = window.wordCloudQuotesStore[cloudKey + ":::" + normWord];
+    } else {
+      quotes = window.wordCloudQuotesStore[word] || 
+               window.wordCloudQuotesStore[normWord] || 
+               window.wordCloudQuotesStore[word.toLowerCase()] || [];
+    }
+  }
+
+  // 3. Fallback Dinâmico Infalível: Buscar em tempo real na base de dados (seja filtrada ou total)
+  if (!quotes || quotes.length === 0) {
+    const dataset = (window.currentFilteredRecords && window.currentFilteredRecords.length > 0) 
+      ? window.currentFilteredRecords 
+      : (window.allSurveyRecords || []);
+    
+    const collected = [];
+    dataset.forEach(r => {
+      const possibleTexts = [
+        getField(r, ["Em poucas palavras, como você definiria São José hoje?", "definiria"]),
+        getField(r, ["Tem algo que queira falar e não abordamos na pesquisa?", "Tem algo que queira falar", "sugestoes"]),
+        r["Em poucas palavras, como você definiria São José hoje?"],
+        r["Tem algo que queira falar e não abordamos na pesquisa?"]
+      ].filter(Boolean);
+
+      possibleTexts.forEach(txt => {
+        const str = String(txt).trim();
+        if (str && !isIgnorableResponse(str)) {
+          const normStr = normalizeSearchWord(str);
+          const regex = new RegExp('(^|[^a-z0-9])' + normWord + '([^a-z0-9]|$)', 'i');
+          if (regex.test(normStr) || normStr.includes(normWord)) {
+            collected.push({
+              text: str,
+              bairro: getField(r, ["Em qual bairro você mora?", "bairro", "Bairro"]) || "",
+              idade: getField(r, ["Qual a sua idade?", "idade", "Idade"]) || "",
+              genero: getField(r, ["Como você se identifica?", "identifica", "gênero", "genero"]) || "",
+              trabalho: getField(r, ["O seu trabalho hoje é:", "trabalho", "Trabalho"]) || ""
+            });
+          }
+        }
+      });
+    });
+    quotes = collected;
+  }
+
+  // Deduplicar respostas por texto
+  const uniqueQuotes = [];
+  const seenTexts = new Set();
+  (quotes || []).forEach(q => {
+    if (q && q.text && !seenTexts.has(q.text.toLowerCase().trim())) {
+      seenTexts.add(q.text.toLowerCase().trim());
+      uniqueQuotes.push(q);
+    }
+  });
+
+  window._activeModalQuotes = uniqueQuotes;
 
   let modalEl = document.getElementById("word-cloud-quotes-modal");
   if (!modalEl) {
@@ -4859,14 +5161,14 @@ window.openWordQuotesModal = function(word) {
               <span>${word}</span>
             </span>
             <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
-              ${quotes.length} ${quotes.length === 1 ? 'menção' : 'menções'}
+              ${uniqueQuotes.length} ${uniqueQuotes.length === 1 ? 'menção' : 'menções'}
             </span>
           </div>
           <h3 class="text-base sm:text-lg font-black text-brand-900 leading-snug">
             O que as pessoas falaram com essa palavra
           </h3>
           <p class="text-xs text-slate-500 font-medium">
-            Depoimentos reais sobre como os moradores definem São José hoje.
+            Depoimentos reais dos moradores de São José dos Campos.
           </p>
         </div>
         <button type="button" onclick="window.closeWordQuotesModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors flex items-center justify-center shrink-0 text-sm focus:outline-none" title="Fechar">
@@ -4890,13 +5192,13 @@ window.openWordQuotesModal = function(word) {
 
       <!-- Lista de Respostas / Depoimentos -->
       <div id="word-modal-quotes-list" class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3 custom-card-scroll bg-slate-50/40">
-        ${renderModalQuotesListHTML(quotes, word)}
+        ${renderModalQuotesListHTML(uniqueQuotes, word)}
       </div>
 
       <!-- Footer do Modal -->
       <div class="px-5 sm:px-6 py-3.5 border-t border-slate-100 bg-white flex items-center justify-between gap-3 shrink-0">
         <span id="word-modal-counter-label" class="text-xs font-semibold text-slate-500">
-          Exibindo ${quotes.length} de ${quotes.length} respostas
+          Exibindo ${uniqueQuotes.length} de ${uniqueQuotes.length} respostas
         </span>
         <button type="button" onclick="window.closeWordQuotesModal()" class="px-5 py-2 rounded-xl bg-brand-900 hover:bg-brand-950 text-white text-xs font-bold transition-all shadow-xs hover:shadow-md focus:outline-none active:scale-95">
           Fechar
@@ -4931,10 +5233,20 @@ document.addEventListener("keydown", (e) => {
 });
 
 function highlightWordInText(text, word) {
-  if (!text || !word) return text;
+  if (!text || !word) return text || "";
   try {
-    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escaped})`, 'gi');
+    const pattern = word.split('').map(ch => {
+      const lower = ch.toLowerCase();
+      if (lower === 'a' || lower === 'á' || lower === 'à' || lower === 'â' || lower === 'ã') return '[aáàâãAÁÀÂÃ]';
+      if (lower === 'e' || lower === 'é' || lower === 'è' || lower === 'ê') return '[eéèêEÉÈÊ]';
+      if (lower === 'i' || lower === 'í' || lower === 'ì' || lower === 'î') return '[iíìîIÍÌÎ]';
+      if (lower === 'o' || lower === 'ó' || lower === 'ò' || lower === 'ô' || lower === 'õ') return '[oóòôõOÓÒÔÕ]';
+      if (lower === 'u' || lower === 'ú' || lower === 'ù' || lower === 'û') return '[uúùûUÚÙÛ]';
+      if (lower === 'c' || lower === 'ç') return '[cçCÇ]';
+      return ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join('');
+    
+    const regex = new RegExp(`(${pattern})`, 'gi');
     return text.replace(regex, '<mark class="bg-amber-200 text-amber-950 font-bold px-1 py-0.5 rounded shadow-xs">$1</mark>');
   } catch (err) {
     return text;
@@ -5031,24 +5343,13 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
   const wordFrequency = {};
   const phraseFrequency = {};
 
-  // Função para checar se a resposta inteira é apenas ruído negativo/vazio (ex: "Não", "Nao.", "Nada", "Não sei", "Nenhum", etc)
-  function isIgnorableResponse(str) {
-    if (!str) return true;
-    const clean = str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'“”’]/g, "").trim();
-    if (!clean || clean.length < 2) return true;
-    const ignorableExact = new Set(["não", "nao", "nada", "nao tenho", "não tenho", "nenhum", "nenhuma", "sem sugestão", "sem sugestao", "sem comentarios", "sem comentários", "não sei", "nao sei", "tudo certo", "ok", "não.", "nao.", "nada.", "n"]);
-    if (ignorableExact.has(clean)) return true;
-    if (/^(não|nao|nada|nenhum|nenhuma)(\s+(não|nao|nada|tenho|sei|mais|obrigado|obrigada))?$/.test(clean)) return true;
-    return false;
-  }
-
   // Extrair respostas brutas com dados complementares do respondente
   const quoteRecords = [];
   if (records && records.length > 0 && questionText) {
     records.forEach(r => {
       let val = r[questionText];
-      if (!val) {
-        val = getField(r, [questionText, "Em poucas palavras, como você definiria São José hoje?", "Tem algo que queira falar e não abordamos na pesquisa?", "Tem algo que queira falar"]);
+      if (val === undefined || val === null || String(val).trim() === "") {
+        val = getField(r, [questionText]);
       }
       if (val && String(val).trim()) {
         const cleanVal = String(val).trim();
@@ -5128,22 +5429,32 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
   // Pegar top palavras mais expressivas
   sortedWords = sortedWords.slice(0, 24);
 
-  // Mapear cada palavra às respostas completas correspondentes
-  window.wordCloudQuotesStore = {};
+  // Mapear cada palavra às respostas completas correspondentes preservando o ID desta nuvem
+  const cloudKey = "cloud_" + (questionText ? questionText.replace(/[^a-zA-Z0-9]/g, "_") : "default");
+  window.wordCloudQuotesStore = window.wordCloudQuotesStore || {};
+  window.wordCloudStoresByCloud = window.wordCloudStoresByCloud || {};
+  window.wordCloudStoresByCloud[cloudKey] = {};
+
   sortedWords.forEach(([word]) => {
-    const wordLower = word.toLowerCase();
+    const normTarget = normalizeSearchWord(word);
     const matches = [];
 
     quoteRecords.forEach(rec => {
-      const textLower = rec.text.toLowerCase();
-      // Match por palavra isolada ou contenção
-      const isWordMatch = new RegExp('(\\b|\\s|^)' + wordLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\b|\\s|$|[.,!?;:])', 'i').test(textLower);
-      if (isWordMatch || textLower.includes(wordLower)) {
+      const normText = normalizeSearchWord(rec.text);
+      const regex = new RegExp('(^|[^a-z0-9])' + normTarget + '([^a-z0-9]|$)', 'i');
+      if (regex.test(normText) || normText.includes(normTarget)) {
         matches.push(rec);
       }
     });
 
-    window.wordCloudQuotesStore[word] = matches.length > 0 ? matches : quoteRecords.filter(r => r.text.toLowerCase().includes(wordLower));
+    const finalMatches = matches.length > 0 ? matches : quoteRecords.filter(r => normalizeSearchWord(r.text).includes(normTarget));
+    
+    window.wordCloudStoresByCloud[cloudKey][word] = finalMatches;
+    window.wordCloudStoresByCloud[cloudKey][normTarget] = finalMatches;
+    window.wordCloudQuotesStore[cloudKey + ":::" + word] = finalMatches;
+    window.wordCloudQuotesStore[cloudKey + ":::" + normTarget] = finalMatches;
+    window.wordCloudQuotesStore[word] = finalMatches;
+    window.wordCloudQuotesStore[normTarget] = finalMatches;
   });
 
   const maxFreq = sortedWords[0][1] || 1;
@@ -5191,7 +5502,7 @@ function renderWordCloudWidget(dataMap, total, records, questionText) {
     const st = tagStyles[styleIndex % tagStyles.length];
     const safeWord = word.replace(/'/g, "\\'");
 
-    html += '<button type="button" onclick="window.openWordQuotesModal(\'' + safeWord + '\')" class="inline-flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-pointer select-none ' + st.bg + ' ' + st.border + ' ' + sizeClass + ' hover:scale-105 hover:shadow-md active:scale-95 group focus:outline-none" title="Clique para ler o que as pessoas falaram com \'' + safeWord + '\'">' +
+    html += '<button type="button" onclick="window.openWordQuotesModal(\'' + safeWord + '\', \'' + cloudKey + '\')" class="inline-flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-pointer select-none ' + st.bg + ' ' + st.border + ' ' + sizeClass + ' hover:scale-105 hover:shadow-md active:scale-95 group focus:outline-none" title="Clique para ler o que as pessoas falaram com \'' + safeWord + '\'">' +
       '<span>' + word + '</span>' +
       '<span class="opacity-80 text-[10px] font-bold">(' + count + ')</span>' +
       '<i class="fa-regular fa-comment-dots text-[10px] opacity-60 group-hover:opacity-100 transition-opacity ml-0.5"></i>' +
