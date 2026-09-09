@@ -1044,7 +1044,7 @@ function processAndRenderDynamicCharts(records) {
 
     const cardsGrid = document.createElement("div");
     cardsGrid.className = catIdx === 2
-      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6"
+      ? "grid grid-cols-1 lg:grid-cols-2 gap-6"
       : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
 
     cat.questions.forEach((questionText) => {
@@ -1117,7 +1117,7 @@ function processAndRenderDynamicCharts(records) {
 
       // Card Container
       const cardEl = document.createElement("div");
-      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
+      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
 
       // Extração de dados robusta e limpeza de parênteses/múltipla escolha
       const dataMap = {};
@@ -1373,7 +1373,7 @@ function processAndRenderDynamicCharts(records) {
 
       // 8. OUTRAS CIDADES (Evasão): Cards com Ícones Visuais e Porcentagens
       if (qLower.includes("outras cidades") && (qLower.includes("passear") || qLower.includes("comer"))) {
-        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Distribuição Percentual • Comportamento de Deslocamento Regional</p>' +
@@ -1442,7 +1442,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.3. MEIOS DE TRANSPORTE: Cards com Emojis e Porcentagens
       if (qLower.includes("transporte") || qLower.includes("meios de transporte") || (qLower.includes("transporte") && qLower.includes("usa"))) {
         const cleanTransportTitle = displayTitle.replace(/\([^)]*\)/g, "").trim();
-        cardEl.className = "bg-surface-card rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-2" : "");
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + cleanTransportTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Múltipla Escolha • Distribuição Percentual de Mobilidade Urbana</p>' +
@@ -1455,7 +1455,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.3.1. FREQUÊNCIA DE SAÍDAS PARA PASSEAR/DIVERTIR: Gráfico Donut com Centro Informativo e Legenda Executiva
       if (qLower.includes("frequência") && (qLower.includes("sai") || qLower.includes("passear") || qLower.includes("divertir"))) {
         const donutCanvasId = "chart-frequency-donut-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-2 lg:col-span-2" : " col-span-1 md:col-span-2 lg:col-span-2");
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div class="min-w-0 flex-1">' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -1479,7 +1479,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM POLOS & CONCENTRAÇÃO (LEAFLET)
       if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
         const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -1503,7 +1503,7 @@ function processAndRenderDynamicCharts(records) {
       // 11.4.1. EM QUAL BAIRRO VOCÊ MORA: MAPA REAL DE BAIRROS DE SÃO JOSÉ DOS CAMPOS LINKADO AO BANCO DE DADOS (LEAFLET)
       if (qLower.includes("bairro") && (qLower.includes("mora") || qLower.includes("você mora") || qLower.includes("voce mora"))) {
         const mapContainerId = "map-sjc-bairros-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-3";
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
           '<div>' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
@@ -3847,51 +3847,51 @@ function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, ques
   let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
   
   // Abas de Foco Regional no Topo do Mapa
-  html += '<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full pb-1">' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2.5 rounded-xl bg-amber-50 hover:bg-amber-100/90 border border-amber-200 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-xs font-bold text-amber-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Centro / Oeste</span>' +
-        '<span class="text-xs font-black text-amber-800">' + stats.centroOeste.pct + '%</span>' +
+  html += '<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full">' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2 sm:p-2.5 rounded-xl bg-amber-50/90 hover:bg-amber-100 border border-amber-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
+      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
+        '<span class="text-[11px] sm:text-xs font-bold text-amber-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-500 shrink-0"></span> Centro / Oeste</span>' +
+        '<span class="text-[11px] sm:text-xs font-black text-amber-800 shrink-0">' + stats.centroOeste.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[10px] font-medium text-amber-700 truncate">Aquarius, Vila Ema, Centro</p>' +
+      '<p class="text-[10px] font-medium text-amber-700/90 truncate">Aquarius, Vila Ema, Centro</p>' +
     '</button>' +
 
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2.5 rounded-xl bg-blue-50 hover:bg-blue-100/90 border border-blue-200 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-xs font-bold text-blue-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul</span>' +
-        '<span class="text-xs font-black text-blue-800">' + stats.sul.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2 sm:p-2.5 rounded-xl bg-blue-50/90 hover:bg-blue-100 border border-blue-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
+      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
+        '<span class="text-[11px] sm:text-xs font-bold text-blue-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-blue-500 shrink-0"></span> Zona Sul</span>' +
+        '<span class="text-[11px] sm:text-xs font-black text-blue-800 shrink-0">' + stats.sul.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[10px] font-medium text-blue-700 truncate">Satélite, Bosque, Pq. Ind.</p>' +
+      '<p class="text-[10px] font-medium text-blue-700/90 truncate">Satélite, Bosque, Pq. Ind.</p>' +
     '</button>' +
 
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2.5 rounded-xl bg-cyan-50 hover:bg-cyan-100/90 border border-cyan-200 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> Zona Leste</span>' +
-        '<span class="text-xs font-black text-cyan-800">' + stats.leste.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2 sm:p-2.5 rounded-xl bg-cyan-50/90 hover:bg-cyan-100 border border-cyan-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
+      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
+        '<span class="text-[11px] sm:text-xs font-bold text-cyan-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-cyan-500 shrink-0"></span> Zona Leste</span>' +
+        '<span class="text-[11px] sm:text-xs font-black text-cyan-800 shrink-0">' + stats.leste.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[10px] font-medium text-cyan-700 truncate">Vista Verde, Eugênio Melo</p>' +
+      '<p class="text-[10px] font-medium text-cyan-700/90 truncate">Vista Verde, Eugênio Melo</p>' +
     '</button>' +
 
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> Zona Norte</span>' +
-        '<span class="text-xs font-black text-indigo-800">' + stats.norte.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2 sm:p-2.5 rounded-xl bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
+      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
+        '<span class="text-[11px] sm:text-xs font-bold text-indigo-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-indigo-500 shrink-0"></span> Zona Norte</span>' +
+        '<span class="text-[11px] sm:text-xs font-black text-indigo-800 shrink-0">' + stats.norte.pct + '%</span>' +
       '</div>' +
-      '<p class="text-[10px] font-medium text-indigo-700 truncate">Santana, Altos Santana</p>' +
+      '<p class="text-[10px] font-medium text-indigo-700/90 truncate">Santana, Altos Santana</p>' +
     '</button>' +
 
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 border border-slate-300 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer">' +
-      '<div class="flex items-center justify-between gap-1 mb-0.5">' +
-        '<span class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Todas</span>' +
-        '<span class="text-xs font-black text-slate-700">' + stats.todas.pct + '%</span>' +
+    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2 sm:p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 border border-slate-300 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0 col-span-2 sm:col-span-1">' +
+      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
+        '<span class="text-[11px] sm:text-xs font-bold text-slate-800 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-slate-500 shrink-0"></span> Todas</span>' +
+        '<span class="text-[11px] sm:text-xs font-black text-slate-700 shrink-0">' + stats.todas.pct + '%</span>' +
       '</div>' +
       '<p class="text-[10px] font-medium text-slate-500 truncate">Circulação Geral</p>' +
     '</button>' +
   '</div>';
 
   // Container do Mapa Leaflet com Filtro Preto & Branco
-  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-900 min-h-[390px] sm:min-h-[430px]">' +
-    '<div id="' + mapContainerId + '" class="w-full h-[390px] sm:h-[430px] z-0 sjc-bw-map"></div>' +
+  html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-900 min-h-[380px] sm:min-h-[420px]">' +
+    '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0 sjc-bw-map"></div>' +
     // Badge flutuante executiva
     '<div class="absolute top-3 right-3 z-10 pointer-events-none">' +
       '<div class="bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/80 shadow-md text-right">' +
