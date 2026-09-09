@@ -58,23 +58,12 @@ async function loadSupabaseResearchData() {
   const selectQuery = encodeURIComponent(RELEVANT_COLUMNS.map(c => `"${c}"`).join(','));
   const endpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=${selectQuery}&limit=1000`;
 
-  let response;
-  try {
-    response = await fetch(endpoint, {
-      headers: {
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    });
-  } catch (netErr) {
-    const fallbackEndpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=*&limit=1000`;
-    response = await fetch(fallbackEndpoint, {
-      headers: {
-        "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    });
-  }
+  const response = await fetch(endpoint, {
+    headers: {
+      "apikey": SUPABASE_ANON_KEY,
+      "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+    }
+  });
 
   if (!response.ok) {
     const errText = await response.text();
