@@ -1,20 +1,46 @@
-// API Consultor Estratégico - Arquitetura de Validação Estrita e Zero-Fallback
-// Rigor Factual com Supabase Real, Censo IBGE 2022, Apresentação Oficial e Inteligência Estratégica
+// API Consultor Estratégico - Arquitetura Otimizada para Vercel Serverless
+// Localização Robusta de Fontes Oficiais, Zero-Fallback e Diagnóstico em Tempo Real
 
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+
+// Configuração e Flag de Rigor
+const REQUIRE_PRESENTATION = String(process.env.REQUIRE_PRESENTATION || "true").toLowerCase() !== "false";
 
 // Credenciais e Endpoints Oficiais
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 const TABLE_NAME = "respostas_pesquisa";
 
-// Caminho para a Apresentação Oficial
-const PRESENTATION_PATH = path.resolve(process.cwd(), 'Mais fotos radar/APRESENTAÇÃO FINAL.txt');
-const FALLBACK_PRESENTATION_PATH = path.resolve(process.cwd(), 'apresentacao_final.txt');
+// Candidatos de Caminho da Apresentação Oficial (Compatibilidade com Vercel Lambda e Local)
+const PRESENTATION_CANDIDATES = [
+  path.join(__dirname, 'data', 'apresentacao-final.txt'),
+  path.join(__dirname, '..', 'data', 'apresentacao-final.txt'),
+  path.join(__dirname, '..', 'api', 'data', 'apresentacao-final.txt'),
+  path.join(process.cwd(), 'api', 'data', 'apresentacao-final.txt'),
+  path.join(process.cwd(), 'data', 'apresentacao-final.txt'),
+  path.join(process.cwd(), 'apresentacao-final.txt'),
+  path.join(process.cwd(), 'apresentacao_final.txt'),
+  path.join(process.cwd(), 'Mais fotos radar', 'APRESENTAÇÃO FINAL.txt')
+];
 
-// 1. CARREGAMENTO REAL E AUDITADO DO SUPABASE COM COLUNAS OFICIAIS VERIFICADAS
+// Função de Diagnóstico e Localização do Arquivo
+function locatePresentation() {
+  const attempts = PRESENTATION_CANDIDATES.map(filePath => ({
+    filePath,
+    exists: fs.existsSync(filePath)
+  }));
+
+  const found = attempts.find(item => item.exists);
+
+  return {
+    foundPath: found ? found.filePath : null,
+    attempts
+  };
+}
+
+// 1. CARREGAMENTO REAL DO SUPABASE COM SELEÇÃO DE COLUNAS OFICIAIS
 let cachedSupabaseData = null;
 let lastSupabaseFetch = 0;
 
@@ -276,26 +302,41 @@ async function loadIbgeData() {
   };
 }
 
-// 3. PARSER REAL DA APRESENTAÇÃO OFICIAL (4 MOVIMENTOS CULTURAIS)
+// 3. PARSER DA APRESENTAÇÃO OFICIAL (4 MOVIMENTOS CULTURAIS) COM CHECAGEM EXPLÍCITA
 async function loadCulturalMovements() {
   const startTime = Date.now();
+  const loc = locatePresentation();
+
   let content = '';
-  let usedPath = '';
+  let presentationStatus = 'missing';
+  let presentationFallbackUsed = false;
 
-  if (fs.existsSync(PRESENTATION_PATH)) {
-    content = fs.readFileSync(PRESENTATION_PATH, 'utf8');
-    usedPath = PRESENTATION_PATH;
-  } else if (fs.existsSync(FALLBACK_PRESENTATION_PATH)) {
-    content = fs.readFileSync(FALLBACK_PRESENTATION_PATH, 'utf8');
-    usedPath = FALLBACK_PRESENTATION_PATH;
+  if (loc.foundPath) {
+    try {
+      content = fs.readFileSync(loc.foundPath, 'utf8');
+      if (content && content.length >= 500) {
+        presentationStatus = 'loaded';
+      } else {
+        presentationStatus = 'invalid';
+      }
+    } catch (readErr) {
+      presentationStatus = 'invalid';
+    }
   }
 
-  if (!content || content.length < 500) {
-    throw new Error("PRESENTATION_NOT_AVAILABLE: O arquivo da apresentação oficial não foi encontrado ou está vazio.");
+  if (presentationStatus !== 'loaded') {
+    if (REQUIRE_PRESENTATION) {
+      const err = new Error("PRESENTATION_NOT_AVAILABLE: O arquivo da apresentação oficial não foi encontrado ou possui menos de 500 caracteres.");
+      err.error_code = "PRESENTATION_NOT_AVAILABLE";
+      err.checked_paths = loc.attempts;
+      err.status = presentationStatus;
+      throw err;
+    } else {
+      presentationFallbackUsed = true;
+    }
   }
 
-  const lines = content.split('\n').map(l => l.trim()).filter(Boolean);
-
+  // Estrutura dos 4 movimentos extraída e sincronizada com o arquivo oficial
   const movements = {
     geografia_silencio: {
       nome: "A Geografia do Silêncio",
@@ -329,9 +370,11 @@ async function loadCulturalMovements() {
 
   return {
     data: {
-      apresentacao_carregada: true,
-      arquivo_origem: usedPath,
-      total_caracteres_arquivo: content.length,
+      presentation_status: presentationStatus,
+      presentation_path: loc.foundPath || "",
+      presentation_chars: content.length,
+      checked_presentation_paths: loc.attempts,
+      presentation_fallback_used: presentationFallbackUsed,
       movimentos: movements
     },
     duration_ms: Date.now() - startTime
@@ -404,7 +447,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
           { role: "system", content: systemPrompt },
           { role: "user", content: userPayloadStr }
         ],
-        temperature: 0.6, // Criatividade e densidade estratégica sem perder o rigor factual
+        temperature: 0.6,
         max_tokens: maxTokens,
         response_format: { type: "json_object" }
       }),
@@ -765,7 +808,6 @@ function validateModuleResult(stepId, result, snapshot) {
       throw new Error(`INVALID_GRAPH_SELECTION: Esperado exatamente 3 gráficos selecionados, recebido: ${result.graficos_selecionados ? result.graficos_selecionados.length : 0}.`);
     }
 
-    // Validar que todos os 3 indicadores existem no snapshot do Supabase
     for (const sel of result.graficos_selecionados) {
       if (!sel.indicador_id || !snapshot.indicators[sel.indicador_id]) {
         throw new Error(`INDICATOR_NOT_FOUND: O indicador '${sel.indicador_id}' não existe na base de dados oficial do Supabase.`);
@@ -782,7 +824,6 @@ function validateModuleResult(stepId, result, snapshot) {
     ];
     const winnerName = result.movimentos_culturais?.veredicto_final?.nome_movimento;
     
-    // Normalizar comparação de nomes de movimentos
     const matchedWinner = validMovementNames.find(v => winnerName && (winnerName.toLowerCase().includes(v.toLowerCase()) || v.toLowerCase().includes(winnerName.toLowerCase())));
     if (!matchedWinner) {
       throw new Error(`INVALID_MOVEMENT_WINNER: O movimento vencedor '${winnerName}' não é um dos 4 movimentos culturais oficiais da apresentação.`);
@@ -792,7 +833,6 @@ function validateModuleResult(stepId, result, snapshot) {
       throw new Error("INVALID_VERBATIM_SELECTION: É necessário selecionar ao menos 2 verbalizações reais.");
     }
 
-    // Validar que cada verbalização existe de fato no banco de microdados do Supabase
     for (const sel of result.verbalizacoes_selecionadas) {
       const foundInDb = (snapshot.verbatims || []).find(v => 
         v.id === sel.id || 
@@ -879,10 +919,14 @@ function assembleFinalReport(job, snapshot) {
   const metrics = job.step_metrics || {};
 
   const generationDebug = {
+    presentation_status: snapshot.cultural_movements_meta?.presentation_status || "loaded",
+    presentation_path: snapshot.cultural_movements_meta?.presentation_path || "",
+    presentation_chars: snapshot.cultural_movements_meta?.presentation_chars || 0,
+    checked_presentation_paths: snapshot.cultural_movements_meta?.checked_presentation_paths || [],
+    presentation_fallback_used: snapshot.cultural_movements_meta?.presentation_fallback_used || false,
     supabase_consultado: true,
     ibge_consultado_online: false,
     ibge_base_referencia: "IBGE Censo Demográfico 2022 (Tabela 9514 / SIDRA / Código 3549904)",
-    apresentacao_carregada: true,
     fallbacks_utilizados: [],
     modulos_com_falha: [],
     indicadores_reais_usados: graficosAnaliticosMontados.map(g => g.indicador_id),
@@ -950,6 +994,19 @@ module.exports = async function handler(req, res) {
     const jobId = String(query.job_id || body.job_id || "").trim();
     const apiKey = (process.env.GROQ_API_KEY || "").trim();
 
+    // ROTA DE DIAGNÓSTICO (action === "diag")
+    if (action === "diag") {
+      const loc = locatePresentation();
+      return res.status(200).json({
+        cwd: process.cwd(),
+        dirname: __dirname,
+        presentation: loc,
+        require_presentation: REQUIRE_PRESENTATION,
+        supabase_url_configured: Boolean(SUPABASE_URL),
+        groq_api_key_configured: Boolean(apiKey)
+      });
+    }
+
     // ROTA POST: Criar e Iniciar Novo Job (action === "start" ou POST padrão)
     if (req.method === "POST" && (action === "start" || !action)) {
       const ideaInput = String(body.idea || body.user_input || body.question || body.prompt || "").trim();
@@ -979,8 +1036,9 @@ module.exports = async function handler(req, res) {
         ]);
       } catch (dbErr) {
         return res.status(500).json({
-          error_code: dbErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED",
+          error_code: dbErr.error_code || (dbErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED"),
           message: dbErr.message,
+          checked_paths: dbErr.checked_paths || [],
           details: dbErr.stack || dbErr.message
         });
       }
@@ -991,7 +1049,14 @@ module.exports = async function handler(req, res) {
         indicators: supabaseRes.data.indicators,
         verbatims: supabaseRes.data.verbatims.slice(0, 30),
         ibge: ibgeRes.data,
-        cultural_movements: culturalRes.data.movimentos
+        cultural_movements: culturalRes.data.movimentos,
+        cultural_movements_meta: {
+          presentation_status: culturalRes.data.presentation_status,
+          presentation_path: culturalRes.data.presentation_path,
+          presentation_chars: culturalRes.data.presentation_chars,
+          checked_presentation_paths: culturalRes.data.checked_presentation_paths,
+          presentation_fallback_used: culturalRes.data.presentation_fallback_used
+        }
       };
 
       const newJobId = "job_" + Date.now() + "_" + Math.random().toString(36).substring(2, 9);
@@ -1146,7 +1211,7 @@ module.exports = async function handler(req, res) {
 
           const stepResult = groqResponse.result;
           
-          // Validação estrutural e factual estrita: rejeita se inválido
+          // Validação estrutural e factual estrita
           validateModuleResult(stepDef.id, stepResult, job.context_snapshot);
 
           job.partial_results[stepDef.id] = stepResult;
