@@ -133,7 +133,7 @@
     }
 
     /* ================================================================
-       MAPAS DE GEOLOCALIZAÇÃO — ESTILOS EXECUTIVOS LIMPOS E ESTÁTICOS
+       MAPAS DE GEOLOCALIZAÇÃO — ESTILOS EXECUTIVOS & EFEITO DE ONDAS
     ================================================================ */
 
     /* Filtro profissional de escala de cinza de alta definição no fundo do mapa */
@@ -160,6 +160,49 @@
     }
     .sjc-map-tooltip::before {
       border-top-color: rgba(15, 23, 42, 0.94) !important;
+    }
+
+    /* Animação Suave e Sofisticada de Ondas Concêntricas (Pedrinha na Água / Radar) */
+    .sjc-ripple-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .sjc-ripple-wave {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      box-sizing: border-box;
+      animation: sjcRippleEffect 3.2s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+    }
+
+    .sjc-ripple-wave-2 {
+      animation-delay: 1.05s;
+    }
+
+    .sjc-ripple-wave-3 {
+      animation-delay: 2.1s;
+    }
+
+    @keyframes sjcRippleEffect {
+      0% {
+        width: 10px;
+        height: 10px;
+        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(0.6);
+      }
+      50% {
+        opacity: 0.45;
+      }
+      100% {
+        width: 130px;
+        height: 130px;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.6);
+      }
     }
   </style>
 </head>
