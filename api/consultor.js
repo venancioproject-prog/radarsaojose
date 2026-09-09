@@ -578,10 +578,20 @@ async function releaseJobLock(job, updates = {}) {
 }
 
 // 5. CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 25S) E DIAGNÓSTICO
-async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 25000, stepLabel = "Etapa") {
+async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 25000, stepLabel = "Etapa", temperature = 0.2) {
   const startTime = Date.now();
   console.log("[Groq] Modelo utilizado:", GROQ_MODEL);
-  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Timeout: ${timeoutMs / 1000}s)...`);
+  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Timeout: ${timeoutMs / 1000}s, Temp: ${temperature})...`);
+
+  const requestBody = {
+    model: GROQ_MODEL,
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPayloadStr }
+    ],
+    temperature: temperature,
+    max_tokens: maxTokens
+  };
 
   const response = await fetchWithTimeout("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -589,16 +599,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
       "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      model: GROQ_MODEL,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPayloadStr }
-      ],
-      temperature: 0.2,
-      max_tokens: maxTokens,
-      response_format: { type: "json_object" }
-    })
+    body: JSON.stringify(requestBody)
   }, timeoutMs, `Groq (${stepLabel})`);
 
   const durationMs = Date.now() - startTime;
@@ -607,16 +608,8 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
   if (!response.ok) {
     const errText = await response.text();
     const retryAfter = response.headers.get("retry-after");
-    
-    // Diagnóstico detalhado de erro de validação JSON da Groq
-    if (errText.includes("json_validate_failed") || errText.includes("Failed to validate JSON")) {
-      console.error(`[GROQ JSON VALIDATE FAILED] Etapa: ${stepLabel}`);
-      console.error(`[GROQ JSON VALIDATE FAILED] Modelo: ${GROQ_MODEL}`);
-      console.error(`[GROQ JSON VALIDATE FAILED] Tamanho System Prompt: ${systemPrompt.length} chars`);
-      console.error(`[GROQ JSON VALIDATE FAILED] Tamanho User Payload: ${userPayloadStr.length} chars`);
-      console.error(`[GROQ JSON VALIDATE FAILED] Max Tokens: ${maxTokens}`);
-      console.error(`[GROQ JSON VALIDATE FAILED] Erro retornado pela Groq: ${errText}`);
-    }
+
+    console.error(`[GROQ HTTP ERROR] ${stepLabel} - Status ${response.status}: ${errText.slice(0, 300)}`);
 
     const errorObj = new Error(`GROQ_API_ERROR: Falha na chamada da Groq (${response.status}): ${errText}`);
     errorObj.status = response.status;
@@ -624,11 +617,6 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
     errorObj.durationMs = durationMs;
     errorObj.rawErrorBody = errText;
     
-    if (errText.includes("json_validate_failed") || errText.includes("Failed to validate JSON")) {
-      errorObj.isJsonValidateFailed = true;
-      errorObj.error_code = "GROQ_JSON_VALIDATE_FAILED";
-    }
-
     // Detecção imediata de modelo inválido/descontinuado (400 ou 404)
     if (response.status === 404 || (response.status === 400 && (errText.includes("model") || errText.includes("decommissioned") || errText.includes("not found")))) {
       errorObj.isModelInvalid = true;
@@ -638,34 +626,59 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
 
     if (response.status === 429 && (errText.includes("TPD") || errText.includes("Day") || errText.includes("quota"))) {
       errorObj.isQuotaExhausted = true;
+      errorObj.error_code = "GROQ_QUOTA_EXHAUSTED";
     }
     throw errorObj;
   }
 
   const data = await response.json();
-  const rawContent = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "";
+  let rawContent = String(data.choices?.[0]?.message?.content || "").trim();
   
-  if (!rawContent || rawContent.trim().length === 0) {
+  if (!rawContent || rawContent.length === 0) {
     const emptyErr = new Error("GROQ_EMPTY_GENERATION: A Groq retornou geração vazia.");
     emptyErr.error_code = "GROQ_EMPTY_GENERATION";
     throw emptyErr;
   }
 
+  // Limpeza de blocos de código Markdown
+  rawContent = rawContent
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/\s*```$/i, "")
+    .trim();
+
+  const firstBrace = rawContent.indexOf("{");
+  const lastBrace = rawContent.lastIndexOf("}");
+
+  if (firstBrace === -1 || lastBrace <= firstBrace) {
+    console.error(`[GROQ PARSE FAILED] Resposta sem objeto JSON: ${rawContent.slice(0, 200)}...`);
+    const noJsonErr = new Error("GROQ_INVALID_JSON: A resposta não contém um objeto JSON.");
+    noJsonErr.error_code = "GROQ_INVALID_JSON";
+    throw noJsonErr;
+  }
+
+  const jsonText = rawContent.slice(firstBrace, lastBrace + 1);
   let parsed;
   try {
-    parsed = JSON.parse(rawContent);
-  } catch (e) {
-    const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      try {
-        parsed = JSON.parse(jsonMatch[0]);
-      } catch (innerErr) {
-        throw new Error(`GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido. Resposta: ${rawContent.slice(0, 100)}`);
-      }
-    } else {
-      throw new Error(`GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido. Resposta: ${rawContent.slice(0, 100)}`);
-    }
+    parsed = JSON.parse(jsonText);
+  } catch (parseErr) {
+    console.error(`[GROQ JSON.PARSE ERROR] ${parseErr.message}. Trecho: ${jsonText.slice(0, 200)}...`);
+    const invJsonErr = new Error(`GROQ_INVALID_JSON: Falha ao interpretar o JSON retornado: ${parseErr.message}`);
+    invJsonErr.error_code = "GROQ_INVALID_JSON";
+    throw invJsonErr;
   }
+
+  // Telemetria mascarada segura sem vazamento de dados pessoais
+  console.log("[GROQ TELEMETRY]", JSON.stringify({
+    model: GROQ_MODEL,
+    step: stepLabel,
+    status: response.status,
+    input_chars: userPayloadStr.length + systemPrompt.length,
+    output_chars: rawContent.length,
+    duration_ms: durationMs,
+    response_format_used: "none",
+    parse_status: "success"
+  }));
 
   return {
     result: parsed,
@@ -772,15 +785,13 @@ const MODULE_DEFINITIONS = [
     systemPrompt: `Voce e o Consultor Estrategico Senior do Radar SJC.
 Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e criativo.
 
+Responda exclusivamente com um único objeto JSON válido. Não use markdown, não use \`\`\`json, não escreva texto antes ou depois do objeto.
+
 DIRETRIZES:
 1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados e numeros fornecidos no analysisContext. Nao invente percentuais.
 2. CONCISAO E PROFUNDIDADE: O campo visao_estrategica_texto deve conter no maximo 2 paragrafos objetivos e densos.
 3. BAIRROS E POLOS: Retorne no maximo 5 bairros ou polos prioritarios de SJC no array bairros. Em nivel_de_confianca use estritamente "alta", "media" ou "baixa".
-4. FORMATACAO ESTRITA: Retorne EXCLUSIVAMENTE um objeto JSON valido.
-- Nao inclua markdown (sem marcadores de bloco json).
-- Nao escreva texto antes ou depois do JSON.
-- Use aspas duplas em todas as chaves e valores.
-- Nao use virgula antes de fechar chaves ou colchetes.
+4. FORMATACAO ESTRITA: Retorne EXCLUSIVAMENTE um objeto JSON valido com aspas duplas, sem comentarios, sem virgula antes de fechar chaves ou colchetes, e sem campos extras.
 
 ESTRUTURA JSON EXATA:
 {
@@ -960,16 +971,27 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 ];
 
 // 8. VALIDAÇÃO ESTRITA DE CADA MÓDULO
-function validateStep1Result(result) {
-  if (!result || typeof result !== 'object') {
-    throw new Error("INVALID_STEP1_RESULT: O Step 1 retornou uma resposta nula ou inválida.");
+function validateStep1Result(parsed) {
+  if (!parsed || typeof parsed !== "object") {
+    throw new Error("GROQ_INVALID_JSON_OBJECT");
   }
-  if (!result.visao_estrategica_texto || typeof result.visao_estrategica_texto !== 'string' || result.visao_estrategica_texto.length < 50) {
-    throw new Error("INVALID_STRATEGIC_VISION: O texto da visão estratégica está incompleto.");
+
+  if (typeof parsed.visao_estrategica_texto !== "string" || parsed.visao_estrategica_texto.trim().length === 0) {
+    throw new Error("INVALID_STEP1_FIELD: visao_estrategica_texto");
   }
-  if (!Array.isArray(result.bairros) || result.bairros.length === 0) {
-    throw new Error("INVALID_NEIGHBORHOOD_ANALYSIS: Nenhum bairro ou polo territorial foi avaliado.");
+
+  if (typeof parsed.veredito_postura !== "string" || parsed.veredito_postura.trim().length === 0) {
+    throw new Error("INVALID_STEP1_FIELD: veredito_postura");
   }
+
+  if (!Array.isArray(parsed.bairros)) {
+    throw new Error("INVALID_STEP1_FIELD: bairros");
+  }
+
+  if (parsed.bairros.length > 5) {
+    parsed.bairros = parsed.bairros.slice(0, 5);
+  }
+
   return true;
 }
 
@@ -1455,6 +1477,7 @@ module.exports = async function handler(req, res) {
           });
 
           let groqResult;
+          const stepTemperature = stepDef.id === "visao_veredito_territorio" ? 0.55 : 0.2;
           try {
             groqResult = await callGroqStep(
               apiKey,
@@ -1462,11 +1485,12 @@ module.exports = async function handler(req, res) {
               stepPayloadStr,
               stepDef.maxTokens || 750,
               25000,
-              stepDef.label
+              stepDef.label,
+              stepTemperature
             );
             validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
           } catch (firstAttemptErr) {
-            if (firstAttemptErr.isJsonValidateFailed || firstAttemptErr.error_code === "GROQ_EMPTY_GENERATION" || firstAttemptErr.message.includes("GROQ_INVALID_JSON")) {
+            if (firstAttemptErr.error_code === "GROQ_EMPTY_GENERATION" || firstAttemptErr.message.includes("GROQ_INVALID_JSON")) {
               console.warn(`[RECOVERY RETRY] Reexecutando ${stepDef.id} com prompt restrito após erro JSON:`, firstAttemptErr.message);
               const recoverySystemPrompt = `${stepDef.systemPrompt}\n\nATENCAO: Sua resposta anterior nao pode ser validada. Retorne SOMENTE um objeto JSON valido, curto e completo, seguindo exatamente as chaves indicadas. Nao inclua markdown, explicacoes externas ou campos extras.`;
               groqResult = await callGroqStep(
@@ -1475,7 +1499,8 @@ module.exports = async function handler(req, res) {
                 stepPayloadStr,
                 stepDef.maxTokens || 750,
                 25000,
-                `${stepDef.label} (Recovery Retry)`
+                `${stepDef.label} (Recovery Retry)`,
+                stepTemperature
               );
               validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
             } else {
