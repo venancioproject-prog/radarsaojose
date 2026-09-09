@@ -185,40 +185,40 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   },
   "matrizes_estrategicas": {
     "vrio": [
-      { "letra": "V", "nome": "Valor", "analise": "Gera valor perceptível resolvendo dores reais de consumo e retenção em SJC." },
-      { "letra": "R", "nome": "Raridade", "analise": "Oferta escassa ou diferenciada na micro-região frente à concorrência genérica." },
-      { "letra": "I", "nome": "Imitabilidade", "analise": "Barreira de entrada sustentada por relacionamento local, curadoria e experiência." },
-      { "letra": "O", "nome": "Organização", "analise": "Capacidade operacional interna de sustentar o padrão com margem saudável." }
+      { "letra": "V", "nome": "Valor", "analise": "Análise aprofundada específica de como este negócio cria valor real e reduz dores de consumo em SJC..." },
+      { "letra": "R", "nome": "Raridade", "analise": "Análise aprofundada de diferenciação e raridade da oferta frente à concorrência no território..." },
+      { "letra": "I", "nome": "Imitabilidade", "analise": "Análise das barreiras contra cópia (marca, curadoria, rede, ponto, know-how)..." },
+      { "letra": "O", "nome": "Organização", "analise": "Análise da capacidade operacional e financeira interna para sustentar a entrega com margem..." }
     ],
     "porter": [
-      { "forca": "Rivalidade entre Concorrentes", "analise": "Intensidade competitiva local e disputa pela mesma parcela de renda familiar." },
-      { "forca": "Ameaça de Novos Entrantes", "analise": "Barreiras de entrada de capital, ponto comercial e fidelidade de clientes." },
-      { "forca": "Produtos Substitutos", "analise": "Evasão de 66.2% para São Paulo/Litoral e concorrência com marketplaces online." },
-      { "forca": "Barganha dos Fornecedores", "analise": "Pressão de custos de insumos, pedido mínimo e prazos no polo regional." },
-      { "forca": "Barganha dos Clientes", "analise": "Sensibilidade a preço (32.3% barreira de valor) e facilidade de comparação digital." }
+      { "forca": "Rivalidade entre Concorrentes", "analise": "Análise detalhada dos concorrentes diretos e indiretos no território escolhido em SJC..." },
+      { "forca": "Ameaça de Novos Entrantes", "analise": "Análise das barreiras de capital, ponto comercial e fidelidade para novos concorrentes..." },
+      { "forca": "Produtos Substitutos", "analise": "Análise do impacto da evasão para SP/Litoral (66.2%) e marketplaces digitais..." },
+      { "forca": "Barganha dos Fornecedores", "analise": "Análise de dependência de fornecedores, prazos, exclusividade e custos de reposição..." },
+      { "forca": "Barganha dos Clientes", "analise": "Análise da sensibilidade a preço e expectativa de custo-benefício do consumidor joseense..." }
     ]
   },
   "mix_marketing": {
     "cinco_ps": [
-      { "p": "Produto", "analise": "Portfólio focado na dor real do consumidor e itens de maior margem." },
-      { "p": "Preço", "analise": "Precificação estratégica compatível com a faixa de renda predominante (R$ 2.8k a 12k)." },
-      { "p": "Praça", "analise": "Localização com alto fluxo ou destino no território com melhor fit geográfico." },
-      { "p": "Promoção", "analise": "Comunicação visual forte no Instagram (79.4%), microinfluenciadores e boca a boca." },
-      { "p": "Pessoas", "analise": "Atendimento hospitaleiro, veloz e focado em retenção e pós-venda." }
+      { "p": "Produto", "analise": "Diretriz detalhada de mix de produtos, curva de qualidade, itens de entrada vs âncora para esta proposta..." },
+      { "p": "Preço", "analise": "Estratégia precisa de precificação, posicionamento de valor e compatibilidade com a renda familiar alvo..." },
+      { "p": "Praça", "analise": "Estratégia de canais físicos e digitais, ponto de venda e capilaridade no território..." },
+      { "p": "Promoção", "analise": "Plano tático de comunicação local, Instagram (79.4%), criadores locais e ativação de comunidade..." },
+      { "p": "Pessoas", "analise": "Padrão de treinamento, consultoria técnica, hospitalidade autêntica e retenção pós-venda..." }
     ],
     "oceano_azul": {
-      "eliminar": "Atritos de atendimento, processos burocráticos e custos que não geram valor real.",
-      "reduzir": "Complexidade desnecessária e custos fixos desproporcionais à fase inicial.",
-      "elevar": "Padrão de experiência, velocidade de entrega e consistência de qualidade.",
-      "criar": "Diferenciais autorais exclusivos que conectem com a identidade e demanda local."
+      "eliminar": "Fatores tradicionais que encarecem a operação ou geram atrito sem agregar valor ao cliente local...",
+      "reduzir": "Elementos superdimensionados ou custos fixos que devem ser enxugados na operação...",
+      "elevar": "Atributos de experiência, velocidade, atendimento e curadoria que devem superar a média da cidade...",
+      "criar": "Diferenciais exclusivos inéditos que resolvam tensões culturais e capturem a demanda reprimida em SJC..."
     }
   },
   "movimentos_culturais": {
     "analise_cards": {
-      "geografia_silencio": "Avaliação de 2 frases sobre como o público focado em tranquilidade e família recebe a proposta.",
-      "cidade_prometida": "Avaliação de 2 frases sobre o fit com famílias tradicionais e possíveis barreiras de conformidade moral ou preço.",
-      "tribo_global": "Avaliação de 2 frases sobre o público cosmopolita, tech e early adopters do Aquarius/Vila Ema frente à proposta.",
-      "empreendedorismo_intuitivo": "Avaliação de 2 frases sobre a recepção na economia real de bairro, velocidade e custo-benefício."
+      "geografia_silencio": "Análise aprofundada de 2 frases avaliando como o público de refúgio, sossego e família (Urbanova/Adyana) reage especificamente a esta proposta.",
+      "cidade_prometida": "Análise aprofundada de 2 frases avaliando o fit com famílias tradicionais e conservadoras (Zona Sul/Colinas) e possíveis barreiras morais ou de preço.",
+      "tribo_global": "Análise aprofundada de 2 frases avaliando a receptividade do público cosmopolita, tech e early adopters (Aquarius/Vila Ema) frente ao negócio.",
+      "empreendedorismo_intuitivo": "Análise aprofundada de 2 frases avaliando a aderência na economia real de bairro, velocidade e foco em custo-benefício."
     },
     "veredicto_final": {
       "nome_movimento": "A Tribo Global OU Empreendedorismo Intuitivo OU A Cidade Prometida OU A Geografia do Silêncio",
@@ -295,7 +295,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
           body: JSON.stringify({
             model: model,
             response_format: { type: "json_object" },
-            max_tokens: 2200,
+            max_tokens: 3500,
             temperature: 0.2,
             messages: [
               { role: 'system', content: systemPrompt },
