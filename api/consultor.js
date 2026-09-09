@@ -255,7 +255,9 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
       "parecer_analitico": "Parecer analítico profundo comprovando a distribuição do poder de compra e a aderência do ticket médio do negócio."
     }
   ]
-}`;
+}
+
+Você deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não inclua nenhum texto adicional.`;
 
     // Modelos estritamente validados - Bypass total de process.env.GROQ_MODEL e sem Llama 3.3
     const candidateModels = [
@@ -273,7 +275,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     let modelUsed = null;
     const errorsList = [];
 
-    const userPromptText = String(inputContent) + '\n\nIMPORTANTE: Responda ESTRITAMENTE com o objeto JSON válido começando imediatamente com `{` e terminando com `}`. Não inclua texto antes ou depois.';
+    const userPromptText = String(inputContent) + '\n\nVocê deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não inclua nenhum texto adicional.';
 
     for (const model of candidateModels) {
       // Tentativa 1: Com json_object
@@ -340,9 +342,13 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
       });
     }
 
-    // Extracao segura de JSON
+    // Extração segura de JSON
     let jsonResult = null;
-    let cleanReply = replyContent.trim().replace(/^`(?:json)?\s*/i, '').replace(/\s*`$/i, '').trim();
+    let cleanReply = String(replyContent || '').trim()
+      .replace(/^```(?:json)?\s*/i, '')
+      .replace(/\s*```$/i, '')
+      .trim();
+
     const firstBrace = cleanReply.indexOf('{');
     const lastBrace = cleanReply.lastIndexOf('}');
     if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
@@ -352,7 +358,7 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
     try {
       jsonResult = JSON.parse(cleanReply);
     } catch (eJson) {
-      const matchJson = replyContent.match(/\{[\s\S]*\}/);
+      const matchJson = String(replyContent).match(/\{[\s\S]*\}/);
       if (matchJson) {
         try { jsonResult = JSON.parse(matchJson[0]); } catch (eSub) {}
       }
