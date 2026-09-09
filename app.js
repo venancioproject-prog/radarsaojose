@@ -1798,18 +1798,18 @@ function processAndRenderDynamicCharts(records) {
       const openFeedbackPhotoCard = document.createElement("div");
       openFeedbackPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-1 lg:col-span-1";
       openFeedbackPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/photo_2.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/sjc_ponte_estaiada.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-brand-950/30"></div>
         
         <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/40 text-blue-300 text-[11px] font-bold uppercase tracking-wider">
-            <i class="fa-solid fa-comments text-blue-400"></i> Voz da População
+            <i class="fa-solid fa-bullhorn text-blue-400"></i> Voz da População & Cidade
           </div>
           <h3 class="text-base sm:text-lg font-black text-white leading-snug">
-            A Voz dos Moradores de São José
+            A Visão de Quem Vive em São José
           </h3>
           <p class="text-xs font-medium text-slate-200 leading-relaxed">
-            As percepções espontâneas refletem o carinho e o espírito propositivo do cidadão, trazendo ideias para a cidade.
+            As respostas abertas e palavras espontâneas traduzem o sentimento, os anseios e o orgulho dos moradores com a cidade em constante transformação.
           </p>
         </div>
       `;
