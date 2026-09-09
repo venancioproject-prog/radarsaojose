@@ -1480,12 +1480,12 @@ function processAndRenderDynamicCharts(records) {
       if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
         const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
-        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
-          '<div>' +
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-3 min-h-[60px] sm:min-h-[68px]">' +
+          '<div class="min-w-0 flex-1">' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real Oficial de SJC • Concentração, Polos & Frequência Regional</p>' +
+            '<p class="text-[11px] font-semibold text-slate-400 truncate">Mapa Real Oficial de SJC • Concentração, Polos & Frequência Regional</p>' +
           '</div>' +
-          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0">' +
+          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0 self-start mt-0.5">' +
             '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
           '</span>' +
         '</div>' +
@@ -1504,12 +1504,12 @@ function processAndRenderDynamicCharts(records) {
       if (qLower.includes("bairro") && (qLower.includes("mora") || qLower.includes("você mora") || qLower.includes("voce mora"))) {
         const mapContainerId = "map-sjc-bairros-" + globalQuestionIndex;
         cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
-        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-2">' +
-          '<div>' +
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-3 min-h-[60px] sm:min-h-[68px]">' +
+          '<div class="min-w-0 flex-1">' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-            '<p class="text-[11px] font-semibold text-slate-400">Mapa Real de Bairros de SJC • Geolocalização Direta da Base de Moradores</p>' +
+            '<p class="text-[11px] font-semibold text-slate-400 truncate">Mapa Real de Bairros de SJC • Geolocalização Direta da Base de Moradores</p>' +
           '</div>' +
-          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0">' +
+          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0 self-start mt-0.5">' +
             '<i class="fa-solid fa-map-pin text-emerald-600"></i> Geolocalizado' +
           '</span>' +
         '</div>' +
