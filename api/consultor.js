@@ -1,5 +1,5 @@
-// API Consultor Estratégico - Arquitetura Otimizada para Vercel Serverless
-// Localização Robusta de Fontes Oficiais, Zero-Fallback e Diagnóstico em Tempo Real
+// API Consultor Estratégico - Arquitetura Instant-Start e Step-Driven Completa
+// POST Imediato (< 50ms) + Step 0: Source Preparation + Timeouts Estritos com AbortController
 
 const fs = require('fs');
 const path = require('path');
@@ -13,6 +13,29 @@ const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.s
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 const TABLE_NAME = "respostas_pesquisa";
 
+// Helper de Fetch Seguro com AbortController e Timeout
+async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      const timeoutErr = new Error(`NETWORK_TIMEOUT: A requisição para ${url.slice(0, 40)}... excedeu o limite de ${timeoutMs / 1000}s.`);
+      timeoutErr.isTimeout = true;
+      timeoutErr.timeoutMs = timeoutMs;
+      throw timeoutErr;
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 // Candidatos de Caminho da Apresentação Oficial (Compatibilidade com Vercel Lambda e Local)
 const PRESENTATION_CANDIDATES = [
   path.join(__dirname, 'data', 'apresentacao-final.txt'),
@@ -25,7 +48,6 @@ const PRESENTATION_CANDIDATES = [
   path.join(process.cwd(), 'Mais fotos radar', 'APRESENTAÇÃO FINAL.txt')
 ];
 
-// Função de Diagnóstico e Localização do Arquivo
 function locatePresentation() {
   const attempts = PRESENTATION_CANDIDATES.map(filePath => ({
     filePath,
@@ -40,7 +62,7 @@ function locatePresentation() {
   };
 }
 
-// 1. CARREGAMENTO REAL DO SUPABASE COM SELEÇÃO DE COLUNAS OFICIAIS
+// 1. CARREGAMENTO REAL DO SUPABASE COM TIMEOUT DE 15S E SELEÇÃO DE COLUNAS OFICIAIS
 let cachedSupabaseData = null;
 let lastSupabaseFetch = 0;
 
@@ -84,12 +106,12 @@ async function loadSupabaseResearchData() {
   const selectQuery = encodeURIComponent(RELEVANT_COLUMNS.map(c => `"${c}"`).join(','));
   const endpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=${selectQuery}&limit=1000`;
 
-  const response = await fetch(endpoint, {
+  const response = await fetchWithTimeout(endpoint, {
     headers: {
       "apikey": SUPABASE_ANON_KEY,
       "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
     }
-  });
+  }, 15000);
 
   if (!response.ok) {
     const errText = await response.text();
@@ -302,7 +324,7 @@ async function loadIbgeData() {
   };
 }
 
-// 3. PARSER DA APRESENTAÇÃO OFICIAL (4 MOVIMENTOS CULTURAIS) COM CHECAGEM EXPLÍCITA
+// 3. PARSER DA APRESENTAÇÃO OFICIAL (4 MOVIMENTOS CULTURAIS)
 async function loadCulturalMovements() {
   const startTime = Date.now();
   const loc = locatePresentation();
@@ -336,7 +358,6 @@ async function loadCulturalMovements() {
     }
   }
 
-  // Estrutura dos 4 movimentos extraída e sincronizada com o arquivo oficial
   const movements = {
     geografia_silencio: {
       nome: "A Geografia do Silêncio",
@@ -429,85 +450,68 @@ function saveJob(job) {
 
 // 5. CHAMADA À GROQ COM ABORTCONTROLLER (45S), TEMPERATURA 0.6 E TRATAMENTO DE ERROS
 async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 45000) {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-
   const startTime = Date.now();
 
-  try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        model: "qwen/qwen3.6-27b",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPayloadStr }
-        ],
-        temperature: 0.6,
-        max_tokens: maxTokens,
-        response_format: { type: "json_object" }
-      }),
-      signal: controller.signal
-    });
+  const response = await fetchWithTimeout("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "qwen/qwen3.6-27b",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPayloadStr }
+      ],
+      temperature: 0.6,
+      max_tokens: maxTokens,
+      response_format: { type: "json_object" }
+    })
+  }, timeoutMs);
 
-    clearTimeout(timeoutId);
-    const durationMs = Date.now() - startTime;
+  const durationMs = Date.now() - startTime;
 
-    if (!response.ok) {
-      const errText = await response.text();
-      let retryAfter = 0;
-      const retryHeader = response.headers.get("retry-after");
-      if (retryHeader) {
-        retryAfter = parseInt(retryHeader, 10) || 8;
-      }
-      
-      const errorObj = new Error(`Groq API Error (${response.status}): ${errText}`);
-      errorObj.status = response.status;
-      errorObj.retryAfterSeconds = retryAfter;
-      errorObj.durationMs = durationMs;
-      
-      if (response.status === 429 && (errText.includes("TPD") || errText.includes("Day") || errText.includes("quota"))) {
-        errorObj.isQuotaExhausted = true;
-      }
-      throw errorObj;
+  if (!response.ok) {
+    const errText = await response.text();
+    let retryAfter = 0;
+    const retryHeader = response.headers.get("retry-after");
+    if (retryHeader) {
+      retryAfter = parseInt(retryHeader, 10) || 8;
     }
-
-    const data = await response.json();
-    const rawContent = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "{}";
     
-    let parsed;
-    try {
-      parsed = JSON.parse(rawContent);
-    } catch (e) {
-      const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        parsed = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error("GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido.");
-      }
+    const errorObj = new Error(`Groq API Error (${response.status}): ${errText}`);
+    errorObj.status = response.status;
+    errorObj.retryAfterSeconds = retryAfter;
+    errorObj.durationMs = durationMs;
+    
+    if (response.status === 429 && (errText.includes("TPD") || errText.includes("Day") || errText.includes("quota"))) {
+      errorObj.isQuotaExhausted = true;
     }
-
-    return {
-      result: parsed,
-      durationMs,
-      outputChars: rawContent.length,
-      inputChars: userPayloadStr.length + systemPrompt.length
-    };
-
-  } catch (err) {
-    clearTimeout(timeoutId);
-    if (err.name === 'AbortError') {
-      const timeoutErr = new Error(`GROQ_TIMEOUT: A chamada excedeu o limite de ${timeoutMs / 1000}s.`);
-      timeoutErr.isTimeout = true;
-      timeoutErr.durationMs = Date.now() - startTime;
-      throw timeoutErr;
-    }
-    throw err;
+    throw errorObj;
   }
+
+  const data = await response.json();
+  const rawContent = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "{}";
+  
+  let parsed;
+  try {
+    parsed = JSON.parse(rawContent);
+  } catch (e) {
+    const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      parsed = JSON.parse(jsonMatch[0]);
+    } else {
+      throw new Error("GROQ_INVALID_JSON: A IA não retornou um objeto JSON válido.");
+    }
+  }
+
+  return {
+    result: parsed,
+    durationMs,
+    outputChars: rawContent.length,
+    inputChars: userPayloadStr.length + systemPrompt.length
+  };
 }
 
 // 6. BUILDER DE CONTEXTO POR ETAPA
@@ -589,10 +593,17 @@ function buildStepContext(stepId, snapshot, job) {
   }
 }
 
-// 7. DEFINIÇÕES DOS 4 MÓDULOS E PROMPTS DE SISTEMA
+// 7. DEFINIÇÕES DOS 5 MÓDULOS STEP-DRIVEN (INCLUINDO STEP 0: SOURCE PREPARATION)
 const MODULE_DEFINITIONS = [
   {
     stepIndex: 0,
+    id: "source_preparation",
+    label: "Preparação e Carregamento de Fontes Oficiais",
+    message: "Consultando Supabase (N=477), Censo IBGE 2022 e Apresentação Oficial...",
+    isPreparationStep: true
+  },
+  {
+    stepIndex: 1,
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
     message: "Formulando tese estratégica, veredito humano e vocação territorial...",
@@ -622,7 +633,7 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 }`
   },
   {
-    stepIndex: 1,
+    stepIndex: 2,
     id: "swot_causalidade_ambiente",
     label: "Matriz SWOT, PESTEL e Diagrama de Ishikawa",
     message: "Auditando ambiente competitivo, causalidade Ishikawa e matriz SWOT...",
@@ -674,7 +685,7 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 }`
   },
   {
-    stepIndex: 2,
+    stepIndex: 3,
     id: "selecao_graficos_matrizes",
     label: "Seleção Dinâmica de 3 Gráficos, Matriz VRIO e 5 Forças de Porter",
     message: "Cruzando indicadores da pesquisa oficial, VRIO e 5 Forças de Porter...",
@@ -729,7 +740,7 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 }`
   },
   {
-    stepIndex: 3,
+    stepIndex: 4,
     id: "movimentos_vencedor_testes",
     label: "Comparação dos 4 Movimentos Culturais, Eleição do Vencedor e Validação",
     message: "Comparando os 4 movimentos culturais, elegendo o vencedor e estruturando validação de campo...",
@@ -919,6 +930,7 @@ function assembleFinalReport(job, snapshot) {
   const metrics = job.step_metrics || {};
 
   const generationDebug = {
+    post_response_ms: perf.post_response_ms || 0,
     presentation_status: snapshot.cultural_movements_meta?.presentation_status || "loaded",
     presentation_path: snapshot.cultural_movements_meta?.presentation_path || "",
     presentation_chars: snapshot.cultural_movements_meta?.presentation_chars || 0,
@@ -974,6 +986,7 @@ function assembleFinalReport(job, snapshot) {
 
 // 10. HANDLER PRINCIPAL (SERVERLESS HANDLER)
 module.exports = async function handler(req, res) {
+  const handlerStartTime = Date.now();
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -1007,7 +1020,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // ROTA POST: Criar e Iniciar Novo Job (action === "start" ou POST padrão)
+    // ROTA POST: Criar e Iniciar Novo Job (RESPOSTA INSTANTÂNEA < 50MS)
     if (req.method === "POST" && (action === "start" || !action)) {
       const ideaInput = String(body.idea || body.user_input || body.question || body.prompt || "").trim();
       const reportToAudit = String(body.report_to_audit || body.presentation || "").trim();
@@ -1026,45 +1039,15 @@ module.exports = async function handler(req, res) {
         });
       }
 
-      // 2. Pré-carregamento das fontes oficiais UMA ÚNICA VEZ por job
-      let supabaseRes, ibgeRes, culturalRes;
-      try {
-        [supabaseRes, ibgeRes, culturalRes] = await Promise.all([
-          loadSupabaseResearchData(),
-          loadIbgeData(),
-          loadCulturalMovements()
-        ]);
-      } catch (dbErr) {
-        return res.status(500).json({
-          error_code: dbErr.error_code || (dbErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED"),
-          message: dbErr.message,
-          checked_paths: dbErr.checked_paths || [],
-          details: dbErr.stack || dbErr.message
-        });
-      }
-
-      // Compact Snapshot salvo no Job
-      const contextSnapshot = {
-        totalN: supabaseRes.data.totalN,
-        indicators: supabaseRes.data.indicators,
-        verbatims: supabaseRes.data.verbatims.slice(0, 30),
-        ibge: ibgeRes.data,
-        cultural_movements: culturalRes.data.movimentos,
-        cultural_movements_meta: {
-          presentation_status: culturalRes.data.presentation_status,
-          presentation_path: culturalRes.data.presentation_path,
-          presentation_chars: culturalRes.data.presentation_chars,
-          checked_presentation_paths: culturalRes.data.checked_presentation_paths,
-          presentation_fallback_used: culturalRes.data.presentation_fallback_used
-        }
-      };
-
+      // Criar o Job Imediatamente sem Bloquear por Rede/Disco
       const newJobId = "job_" + Date.now() + "_" + Math.random().toString(36).substring(2, 9);
+      const postDurationMs = Date.now() - handlerStartTime;
+
       const newJob = {
         job_id: newJobId,
         idea: combinedInput,
         report_to_audit: reportToAudit,
-        context_snapshot: contextSnapshot,
+        context_snapshot: null, // Será preenchido no Step 0 pelo polling
         status: "queued",
         current_step: 0,
         total_steps: MODULE_DEFINITIONS.length,
@@ -1075,9 +1058,10 @@ module.exports = async function handler(req, res) {
         timeouts: [],
         erros_429: [],
         performance: {
-          supabase_ms: supabaseRes.duration_ms,
-          ibge_ms: ibgeRes.duration_ms,
-          presentation_ms: culturalRes.duration_ms,
+          post_response_ms: postDurationMs,
+          supabase_ms: 0,
+          ibge_ms: 0,
+          presentation_ms: 0,
           groq_ms_por_etapa: {},
           total_ms: 0
         },
@@ -1098,12 +1082,12 @@ module.exports = async function handler(req, res) {
         status: "queued",
         current_step: 0,
         total_steps: MODULE_DEFINITIONS.length,
-        estimated_seconds: 25,
-        message: "Job criado com sucesso com pré-carregamento concluído."
+        estimated_seconds: 30,
+        message: "Job criado com sucesso. Polling iniciado para preparação de fontes oficiais."
       });
     }
 
-    // ROTA GET/POST: Status do Job (STEP-DRIVEN EXECUTION ENGINE OTIMIZADO)
+    // ROTA GET/POST: Status do Job (STEP-DRIVEN EXECUTION ENGINE)
     if (action === "status") {
       if (!jobId) {
         return res.status(400).json({ error: "Parâmetro job_id obrigatório." });
@@ -1191,9 +1175,92 @@ module.exports = async function handler(req, res) {
         job.attempts_by_step[stepDef.id] = (job.attempts_by_step[stepDef.id] || 0) + 1;
         saveJob(job);
 
+        // ETAPA 0: SOURCE PREPARATION (CARREGAMENTO DAS FONTES OFICIAIS)
+        if (stepDef.id === "source_preparation" || stepDef.isPreparationStep) {
+          try {
+            const [supabaseRes, ibgeRes, culturalRes] = await Promise.all([
+              loadSupabaseResearchData(),
+              loadIbgeData(),
+              loadCulturalMovements()
+            ]);
+
+            job.context_snapshot = {
+              totalN: supabaseRes.data.totalN,
+              indicators: supabaseRes.data.indicators,
+              verbatims: supabaseRes.data.verbatims.slice(0, 30),
+              ibge: ibgeRes.data,
+              cultural_movements: culturalRes.data.movimentos,
+              cultural_movements_meta: {
+                presentation_status: culturalRes.data.presentation_status,
+                presentation_path: culturalRes.data.presentation_path,
+                presentation_chars: culturalRes.data.presentation_chars,
+                checked_presentation_paths: culturalRes.data.checked_presentation_paths,
+                presentation_fallback_used: culturalRes.data.presentation_fallback_used
+              }
+            };
+
+            job.performance.supabase_ms = supabaseRes.duration_ms;
+            job.performance.ibge_ms = ibgeRes.duration_ms;
+            job.performance.presentation_ms = culturalRes.duration_ms;
+
+            job.step_metrics[stepDef.id] = {
+              started_at: new Date(stepStartTime).toISOString(),
+              finished_at: new Date().toISOString(),
+              duration_ms: Date.now() - stepStartTime,
+              input_chars: 0,
+              output_chars: JSON.stringify(job.context_snapshot).length,
+              attempts: 1
+            };
+
+            if (!job.completed_steps.includes(stepDef.id)) {
+              job.completed_steps.push(stepDef.id);
+            }
+            job.current_step++;
+            job.retry_count = 0;
+            job.is_processing = false;
+            job.message = "Fontes oficiais carregadas com sucesso. Avançando para a Tese Estratégica...";
+            saveJob(job);
+
+            return res.status(200).json({
+              success: true,
+              job_id: job.job_id,
+              status: "running",
+              current_step: job.current_step,
+              current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Tese Estratégica",
+              completed_steps: job.completed_steps,
+              total_steps: MODULE_DEFINITIONS.length,
+              progress_percent: Math.round((job.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
+              estimated_remaining_seconds: 24,
+              message: job.message
+            });
+
+          } catch (prepErr) {
+            job.is_processing = false;
+            job.status = "failed";
+            job.error_code = prepErr.error_code || (prepErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED");
+            job.message = `Falha ao preparar fontes oficiais: ${prepErr.message}`;
+            job.retryable = false;
+            saveJob(job);
+
+            return res.status(200).json({
+              success: false,
+              job_id: job.job_id,
+              status: "failed",
+              error_code: job.error_code,
+              message: job.message,
+              checked_paths: prepErr.checked_paths || []
+            });
+          }
+        }
+
+        // ETAPAS 1 A 4: EXECUÇÃO DOS MÓDULOS COM GROQ
         try {
           if (!apiKey) {
             throw new Error("GROQ_API_KEY não configurada nas variáveis de ambiente.");
+          }
+
+          if (!job.context_snapshot) {
+            throw new Error("SNAPSHOT_MISSING: O snapshot de fontes oficiais não foi inicializado.");
           }
 
           // Build Context específico e compacto para a etapa
@@ -1246,7 +1313,7 @@ module.exports = async function handler(req, res) {
           } else {
             job.status = "running";
             job.progress_percent = Math.round((job.completed_steps.length / MODULE_DEFINITIONS.length) * 100);
-            job.estimated_remaining_seconds = Math.max(6, (MODULE_DEFINITIONS.length - job.completed_steps.length) * 6);
+            job.estimated_remaining_seconds = Math.max(5, (MODULE_DEFINITIONS.length - job.completed_steps.length) * 6);
             const nextStepDef = MODULE_DEFINITIONS[job.current_step] || {};
             job.message = nextStepDef.message || "Avançando para a próxima etapa...";
           }
@@ -1261,7 +1328,7 @@ module.exports = async function handler(req, res) {
             job.timeouts.push({
               step: stepDef.id,
               timestamp: new Date().toISOString(),
-              duration_ms: err.durationMs
+              duration_ms: err.durationMs || 45000
             });
           }
 
@@ -1311,7 +1378,7 @@ module.exports = async function handler(req, res) {
         completed_steps: job.completed_steps || [],
         total_steps: MODULE_DEFINITIONS.length,
         progress_percent: Math.round(((job.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
-        estimated_remaining_seconds: job.status === "completed" ? 0 : Math.max(5, (MODULE_DEFINITIONS.length - (job.completed_steps || []).length) * 6),
+        estimated_remaining_seconds: job.status === "completed" ? 0 : Math.max(4, (MODULE_DEFINITIONS.length - (job.completed_steps || []).length) * 6),
         message: job.message || "Etapa processada com sucesso."
       });
     }
