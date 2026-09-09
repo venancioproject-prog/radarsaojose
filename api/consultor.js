@@ -1,6 +1,331 @@
+// API Consultor Estratégico - Radar São José dos Campos
+// Base Oficial de Microdados (N=477, IC=95%, Erro Amostral ±4.49%)
+
+// 1. DATASET SNAPSHOT OFICIAL E AUDITADO (CALCULADO DIRETAMENTE DA BASE N=477)
+const DATASET_SNAPSHOT = {
+  source: "Pesquisa Municipal Radar SJC (Microdados Oficiais)",
+  n: 477,
+  valid_rows: 477,
+  confidence_interval: "95%",
+  margin_of_error: "±4.49%",
+  metrics: {
+    renda_familiar: {
+      question: "Qual a renda total da sua casa por mês?",
+      denominator: 477,
+      categories: [
+        { label: "Até R$ 2.800", count: 73, percentage: 15.3, formula: "73 / 477 * 100" },
+        { label: "R$ 2.801 a R$ 5.600", count: 161, percentage: 33.8, formula: "161 / 477 * 100" },
+        { label: "R$ 5.601 a R$ 12.000", count: 155, percentage: 32.5, formula: "155 / 477 * 100" },
+        { label: "R$ 12.001 a R$ 26.000", count: 67, percentage: 14.0, formula: "67 / 477 * 100" },
+        { label: "Mais de R$ 26.000", count: 21, percentage: 4.4, formula: "21 / 477 * 100" }
+      ],
+      alta_renda_acima_12k: { count: 88, percentage: 18.4, formula: "88 / 477 * 100" }
+    },
+    evasao_consumo: {
+      question: "Você costuma ir para outras cidades para passear ou comer fora?",
+      denominator: 477,
+      categories: [
+        { label: "Às vezes", count: 238, percentage: 49.9, formula: "238 / 477 * 100" },
+        { label: "Quase nunca", count: 129, percentage: 27.0, formula: "129 / 477 * 100" },
+        { label: "Sim, sempre", count: 78, percentage: 16.4, formula: "78 / 477 * 100" },
+        { label: "Nunca", count: 32, percentage: 6.7, formula: "32 / 477 * 100" }
+      ],
+      total_evadem: { count: 316, percentage: 66.2, formula: "(238 + 78) / 477 * 100" }
+    },
+    demanda_reprimida_lazer: {
+      question: "Você gastaria mais dinheiro se a cidade tivesse melhores opções de lazer ou lugares para frequentar?",
+      denominator: 477,
+      categories: [
+        { label: "Sim", count: 332, percentage: 69.6, formula: "332 / 477 * 100" },
+        { label: "Não", count: 145, percentage: 30.4, formula: "145 / 477 * 100" }
+      ]
+    },
+    regiao_frequentada: {
+      question: "Qual região da cidade você mais frequenta quando sai de casa?",
+      denominator: 477,
+      categories: [
+        { label: "Centro / Oeste (ex: Aquarius, Vila Adyana)", count: 199, percentage: 41.7, formula: "199 / 477 * 100" },
+        { label: "Zona Sul", count: 135, percentage: 28.3, formula: "135 / 477 * 100" },
+        { label: "Vou em todas as regiões", count: 57, percentage: 11.9, formula: "57 / 477 * 100" },
+        { label: "Zona Leste", count: 55, percentage: 11.5, formula: "55 / 477 * 100" },
+        { label: "Zona Norte", count: 31, percentage: 6.5, formula: "31 / 477 * 100" }
+      ]
+    },
+    dificuldade_noite_barreiras: {
+      question: "Qual a sua maior dificuldade quando decide sair à noite em São José dos Campos?",
+      denominator: 477,
+      categories: [
+        { label: "É tudo muito caro", count: 158, percentage: 33.1, formula: "158 / 477 * 100" },
+        { label: "Não tem lugar legal para ir", count: 112, percentage: 23.5, formula: "112 / 477 * 100" },
+        { label: "Falta de segurança", count: 98, percentage: 20.5, formula: "98 / 477 * 100" },
+        { label: "Não vejo dificuldade", count: 65, percentage: 13.6, formula: "65 / 477 * 100" },
+        { label: "Ônibus ou falta de transporte", count: 34, percentage: 7.1, formula: "34 / 477 * 100" },
+        { label: "O trânsito", count: 10, percentage: 2.1, formula: "10 / 477 * 100" }
+      ]
+    },
+    criterio_escolha_restaurante: {
+      question: "O que você mais leva em conta para escolher um restaurante ou bar?",
+      denominator: 477,
+      categories: [
+        { label: "O preço", count: 133, percentage: 27.9, formula: "133 / 477 * 100" },
+        { label: "Se o lugar é bonito e agradável", count: 131, percentage: 27.5, formula: "131 / 477 * 100" },
+        { label: "Indicação de amigos ou família", count: 98, percentage: 20.5, formula: "98 / 477 * 100" },
+        { label: "As notas no Google", count: 45, percentage: 9.4, formula: "45 / 477 * 100" },
+        { label: "O que vejo no Instagram ou TikTok", count: 42, percentage: 8.8, formula: "42 / 477 * 100" },
+        { label: "Se é perto de casa", count: 28, percentage: 5.9, formula: "28 / 477 * 100" }
+      ]
+    },
+    estetica_instagramavel: {
+      question: "Você já escolheu um lugar só porque ele é bonito para tirar fotos e postar?",
+      denominator: 477,
+      categories: [
+        { label: "Não, não ligo para isso", count: 308, percentage: 64.6, formula: "308 / 477 * 100" },
+        { label: "Um pouco", count: 131, percentage: 27.5, formula: "131 / 477 * 100" },
+        { label: "Sim, muito", count: 38, percentage: 8.0, formula: "38 / 477 * 100" }
+      ],
+      alguma_influencia: { count: 169, percentage: 35.4, formula: "(131 + 38) / 477 * 100" }
+    },
+    redes_sociais_busca: {
+      question: "Qual rede social você mais usa pra encontrar lugares e referências na cidade",
+      denominator: 477,
+      categories: [
+        { label: "Instagram", count: 295, percentage: 61.8, formula: "295 / 477 * 100" },
+        { label: "TikTok", count: 78, percentage: 16.4, formula: "78 / 477 * 100" },
+        { label: "YouTube", count: 66, percentage: 13.8, formula: "66 / 477 * 100" },
+        { label: "Google", count: 10, percentage: 2.1, formula: "10 / 477 * 100" },
+        { label: "Facebook", count: 10, percentage: 2.1, formula: "10 / 477 * 100" }
+      ]
+    },
+    influenciadores_visita: {
+      question: "Você já foi a algum lugar na cidade por recomendação de um influenciador local?",
+      denominator: 477,
+      categories: [
+        { label: "Não", count: 332, percentage: 69.6, formula: "332 / 477 * 100" },
+        { label: "Sim", count: 145, percentage: 30.4, formula: "145 / 477 * 100" }
+      ]
+    },
+    pet_friendly: {
+      question: "Você tem animais de estimação em casa?",
+      denominator: 475,
+      categories: [
+        { label: "Sim", count: 251, percentage: 52.8, formula: "251 / 475 * 100" },
+        { label: "Não", count: 224, percentage: 47.2, formula: "224 / 475 * 100" }
+      ]
+    },
+    orgulho_morar: {
+      question: "Você sente orgulho de morar em São José dos Campos?",
+      denominator: 477,
+      categories: [
+        { label: "Sim", count: 354, percentage: 74.2, formula: "354 / 477 * 100" },
+        { label: "Não", count: 123, percentage: 25.8, formula: "123 / 477 * 100" }
+      ]
+    },
+    boas_opcoes_cultura_lazer: {
+      question: "Você acha que São José dos Campos tem boas opções de lazer, cultura e vida noturna?",
+      denominator: 477,
+      categories: [
+        { label: "Sim", count: 242, percentage: 50.7, formula: "242 / 477 * 100" },
+        { label: "Não", count: 235, percentage: 49.3, formula: "235 / 477 * 100" }
+      ]
+    },
+    frequencia_saida_lazer: {
+      question: "Com que frequência você costuma sair para comer fora ou lazer?",
+      denominator: 477,
+      categories: [
+        { label: "Toda semana", count: 239, percentage: 50.1, formula: "239 / 477 * 100" },
+        { label: "1 vez ao mês", count: 115, percentage: 24.1, formula: "115 / 477 * 100" },
+        { label: "Quase nunca", count: 68, percentage: 14.3, formula: "68 / 477 * 100" },
+        { label: "2 ou 3 vezes por mês", count: 50, percentage: 10.5, formula: "50 / 477 * 100" },
+        { label: "Nunca", count: 5, percentage: 1.0, formula: "5 / 477 * 100" }
+      ],
+      saem_regularmente: {
+        descricao: "Definição estrita: Toda semana (50.1%) + 2-3 vezes por mês (10.5%)",
+        count: 289,
+        percentage: 60.6,
+        formula: "(239 + 50) / 477 * 100"
+      },
+      saem_ao_menos_mensalmente: {
+        descricao: "Definição ampla: Incluindo 1 vez ao mês (24.1%)",
+        count: 404,
+        percentage: 84.7,
+        formula: "(239 + 50 + 115) / 477 * 100"
+      }
+    }
+  },
+  verbatims: [
+    {
+      citacao: "Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade.",
+      genero: "Mulher",
+      idade: "25-34 anos",
+      regiao: "Zona Sul",
+      renda: "R$ 5.6k - 12k"
+    },
+    {
+      citacao: "Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José.",
+      genero: "Mulher",
+      idade: "65+ anos",
+      regiao: "Centro-Oeste",
+      renda: "R$ 5.6k - 12k"
+    },
+    {
+      citacao: "Eu entendo que São José tem muitas opções pra quem pode pagar e poucas pra quem não pode pagar. Em vários aspectos com relação a cultura, ao transporte.",
+      genero: "Mulher",
+      idade: "25-34 anos",
+      regiao: "Zona Norte",
+      renda: "R$ 2.8k - 5.6k"
+    },
+    {
+      citacao: "Cidade com direção política conservadora, falta arte, eventos públicos, os parques e feiras são bons. Mas poderíamos ter muito mais com o número de habitantes que temos.",
+      genero: "Homem",
+      idade: "35-44 anos",
+      regiao: "Centro-Oeste",
+      renda: "R$ 2.8k - 5.6k"
+    },
+    {
+      citacao: "Para lazer e cultura prefiro ir a São Paulo pois as opções aqui são limitadas e muitas vezes os eventos não são bem divulgados ou organizados.",
+      genero: "Mulher",
+      idade: "35-44 anos",
+      regiao: "Centro-Oeste",
+      renda: "R$ 12k - 26k"
+    },
+    {
+      citacao: "Sinto falta de uma vida cultural mais pulsante fora do eixo comercial. Mais eventos de rua e ocupação dos espaços públicos.",
+      genero: "Homem",
+      idade: "25-34 anos",
+      regiao: "Centro-Oeste",
+      renda: "R$ 5.6k - 12k"
+    },
+    {
+      citacao: "SJC tem potencial para ter eventos de grande porte, como festivais de música e gastronomia que atraiam pessoas de fora e segurem quem mora aqui.",
+      genero: "Mulher",
+      idade: "25-34 anos",
+      regiao: "Zona Sul",
+      renda: "R$ 5.6k - 12k"
+    },
+    {
+      citacao: "Uma cidade com poucos recursos para jovens.",
+      genero: "Mulher",
+      idade: "35-44 anos",
+      regiao: "Zona Sul",
+      renda: "R$ 2.8k - 5.6k"
+    },
+    {
+      citacao: "Lazer só pra quem tem dinheiro.",
+      genero: "Mulher",
+      idade: "35-44 anos",
+      regiao: "Zona Leste",
+      renda: "R$ 2.8k - 5.6k"
+    }
+  ]
+};
+
+// 2. FUNÇÕES DE VALIDAÇÃO PROGRAMÁTICA NO BACKEND
+function validateAndEnforceOfficialCharts(result) {
+  if (!result || typeof result !== 'object') return result;
+
+  // 1. Gráfico de Validação Principal (Barreiras Noturnas Oficiais)
+  const snapBarreiras = DATASET_SNAPSHOT.metrics.dificuldade_noite_barreiras.categories;
+  result.grafico_validacao = {
+    titulo: "BARREIRAS DE CONSUMO E ATRITOS LOCAIS (SJC N=477)",
+    type: "bar",
+    labels: ["Preço Alto", "Falta Lugar Legal", "Insegurança", "Sem Dificuldade", "Transporte"],
+    data: [
+      snapBarreiras[0].percentage,
+      snapBarreiras[1].percentage,
+      snapBarreiras[2].percentage,
+      snapBarreiras[3].percentage,
+      snapBarreiras[4].percentage
+    ]
+  };
+
+  // 2. Gráficos Analíticos Auditados (Garantia Matemática Absoluta)
+  const snapRegiao = DATASET_SNAPSHOT.metrics.regiao_frequentada.categories;
+  const snapRenda = DATASET_SNAPSHOT.metrics.renda_familiar.categories;
+  const snapEvasao = DATASET_SNAPSHOT.metrics.evasao_consumo;
+
+  result.graficos_analiticos = [
+    {
+      chart_data: {
+        type: "horizontalBar",
+        title: "Concentração e Frequência por Região (Geometria Urbana)",
+        labels: ["Centro-Oeste", "Zona Sul", "Todas as Regiões", "Zona Leste", "Zona Norte"],
+        data: [
+          snapRegiao[0].percentage,
+          snapRegiao[1].percentage,
+          snapRegiao[2].percentage,
+          snapRegiao[3].percentage,
+          snapRegiao[4].percentage
+        ],
+        highlight_index: 0
+      },
+      pergunta_origem: "Qual região da cidade você mais frequenta quando sai de casa? (N=477)",
+      parecer_analitico: "Concentração consolidada no eixo Centro-Oeste (41.7%) e Zona Sul (28.3%), polarizando mais de 70% da dinâmica de consumo da cidade."
+    },
+    {
+      chart_data: {
+        type: "doughnut",
+        title: "O Paradoxo de Evasão (Oportunidade Latente)",
+        labels: ["Evadem para SP/Litoral", "Consomem em SJC"],
+        data: [
+          snapEvasao.total_evadem.percentage,
+          Number((100 - snapEvasao.total_evadem.percentage).toFixed(1))
+        ],
+        highlight_color: "#D97706"
+      },
+      pergunta_origem: "Você costuma ir para outras cidades para passear ou comer fora? (N=477)",
+      parecer_analitico: "Evasão de 66.2% que sai frequentemente ou ocasionalmente para lazer fora da cidade, sinalizando oportunidade de retenção local."
+    },
+    {
+      chart_data: {
+        type: "bar",
+        title: "Distribuição de Renda Familiar por Faixa",
+        labels: ["Até R$ 2.8k", "R$ 2.8k-5.6k", "R$ 5.6k-12k", "R$ 12k-26k", "Acima R$ 26k"],
+        data: [
+          snapRenda[0].percentage,
+          snapRenda[1].percentage,
+          snapRenda[2].percentage,
+          snapRenda[3].percentage,
+          snapRenda[4].percentage
+        ],
+        highlight_label: "R$ 5.6k-12k"
+      },
+      pergunta_origem: "Qual a renda total da sua casa por mês? (N=477)",
+      parecer_analitico: "Predomínio das classes médias consolidadas (66.3% entre R$ 2.8k e R$ 12k) e 18.4% de alta renda (> R$ 12k)."
+    }
+  ];
+
+  // 3. Garantir 3 Verbalizações Reais Autênticas do Banco Oficial
+  if (!Array.isArray(result.verbalizacoes_reais) || result.verbalizacoes_reais.length < 3) {
+    result.verbalizacoes_reais = DATASET_SNAPSHOT.verbatims.slice(0, 3);
+  } else {
+    result.verbalizacoes_reais = result.verbalizacoes_reais.slice(0, 3).map((v, i) => {
+      const matchOfficial = DATASET_SNAPSHOT.verbatims.find(off => 
+        off.citacao.toLowerCase().includes((v.citacao || '').substring(0, 15).toLowerCase())
+      ) || DATASET_SNAPSHOT.verbatims[i % DATASET_SNAPSHOT.verbatims.length];
+
+      return {
+        citacao: matchOfficial.citacao,
+        genero: matchOfficial.genero,
+        idade: matchOfficial.idade,
+        regiao: matchOfficial.regiao,
+        renda: matchOfficial.renda
+      };
+    });
+  }
+
+  // 4. Garantir que o movimento cultural seja rotulado como hipótese
+  if (result.movimentos_culturais && result.movimentos_culturais.veredicto_final) {
+    let just = result.movimentos_culturais.veredicto_final.justificativa_densa || '';
+    if (!just.toLowerCase().includes("hipótese") && !just.toLowerCase().includes("hipotese")) {
+      result.movimentos_culturais.veredicto_final.justificativa_densa = "[HIPÓTESE ESTRATÉGICA A VALIDAR] " + just;
+    }
+  }
+
+  return result;
+}
+
 module.exports = async function handler(req, res) {
-  // 1. Configuração de Cabeçalhos CORS
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // 1. Configuração de Cabeçalhos CORS (Sem credentials quando origin for *)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
@@ -26,15 +351,18 @@ module.exports = async function handler(req, res) {
     }
     body = body || {};
 
-    const { user_input, question, prompt, idea, messages } = body;
-    let inputContent = user_input || question || prompt || idea;
-    if (!inputContent && Array.isArray(messages) && messages.length > 0) {
-      const lastUserMsg = [...messages].reverse().find(m => m && m.role === 'user' && m.content);
-      inputContent = lastUserMsg ? lastUserMsg.content : messages[messages.length - 1].content;
+    // 4. Extração e Separação Estrita de Entradas
+    const ideaInput = String(body.idea || body.user_input || body.question || body.prompt || '').trim();
+    const reportToAudit = String(body.report_to_audit || body.presentation || '').trim();
+    
+    let combinedInput = ideaInput;
+    if (!combinedInput && Array.isArray(body.messages) && body.messages.length > 0) {
+      const lastUserMsg = [...body.messages].reverse().find(m => m && m.role === 'user' && m.content);
+      combinedInput = lastUserMsg ? lastUserMsg.content : body.messages[body.messages.length - 1].content;
     }
-    inputContent = String(inputContent || 'Consultoria estratégica de novos negócios para São José dos Campos').trim();
-    const apiKey = (process.env.GROQ_API_KEY || '').trim();
+    combinedInput = String(combinedInput || 'Consultoria estratégica de novos negócios para São José dos Campos').trim();
 
+    const apiKey = (process.env.GROQ_API_KEY || '').trim();
     if (!apiKey) {
       return res.status(500).json({ 
         error: 'Chave GROQ_API_KEY nao configurada nas variaveis de ambiente da Vercel.',
@@ -42,224 +370,121 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // BASE OFICIAL DE MICRODADOS DA PESQUISA MUNICIPAL RADAR SÃO JOSÉ (SUPABASE N=477, IC=95%, MARGEM DE ERRO ±4.5%)
-    const marketBriefSJC = `BASE OFICIAL DE MICRODADOS DA PESQUISA MUNICIPAL RADAR SÃO JOSÉ (SUPABASE N=477, IC=95%, MARGEM DE ERRO ±4.5%):
-1. MACRODEMOGRAFIA & PERFIL SOCIOECONÔMICO OFICIAL (FONTE: SUPABASE N=477):
-   - Renda Total Familiar Mensal: Até R$ 2.800 (18.1%) | R$ 2.801 a R$ 5.600 (32.3%) | R$ 5.601 a R$ 12.000 (23.6%) | R$ 12.001 a R$ 26.000 (14.2%) | Acima de R$ 26.000 (11.8%).
-   - Faixa Etária: 16-17 anos (1.9%), 18-24 anos (12.2%), 25-34 anos (26.8%), 35-44 anos (27.6%), 45-54 anos (22.0%), 55-64 anos (7.4%), 65+ anos (4.0%).
-   - Identidade de Gênero: Mulheres (58.4%), Homens (37.9%), Outros (3.7%).
-   - Ocupação / Trabalho: Carteira assinada / CLT (53.2%), PJ / Autônomo / Bico (22.8%), Funcionário Público (11.4%), Estudante / Estágio (6.3%), Aposentado (4.2%), Empresário (2.1%).
-   - Habitação & Relacionamento: Casa própria (51.2%), Aluguel querendo casa própria (39.5%), Aluguel sem intenção (9.3%). Casados/Morando junto (48.6%), Solteiros (33.5%), Namorando (11.2%), Divorciados/Viúvos (6.7%).
+    // 5. System Prompt Rigoroso e Científico
+    const systemPrompt = `Você é um analista sênior de mercado e estrategista de negócios. Sua função é auditar uma ideia de negócio e/ou relatório fornecido pelo usuário usando exclusivamente o SNAPSHOT OFICIAL DE MICRODADOS DE SÃO JOSÉ DOS CAMPOS (N=477, IC=95%, Erro ±4.49%).
 
-2. PSICOGRAFIA, COMPORTAMENTO, DORES REAIS & PSICOLOGIA DO CONSUMIDOR JOSEENSE:
-   - Paradoxo de Evasão vs Orgulho: 72.4% têm orgulho de morar em SJC. Contudo, 66.2% EVADEM seu consumo de lazer/gastronomia para fora (São Paulo Capital, Litoral Norte, Campos do Jordão, Santo Antônio do Pinhal). Motivo: busca por autenticidade, novidade e status que a cidade não entrega.
-   - Frequência de Saída: 84.7% dos moradores saem regularmente para lazer e consumo gastronômico.
-   - Demanda Reprimida & Disposição a Gastar: 75.8% dos joseenses afirmam categoricamente que gastariam MAIS dinheiro na cidade se houvesse opções inovadoras, autênticas e alinhadas ao seu estilo de vida (Nota de Auditoria: sinaliza demanda reprimida geral por experiências e lazer; a aderência à categoria específica do negócio deve ser validada por testes).
-   - Barreiras Noturnas & Atritos de Consumo: 32.3% "É tudo muito caro para o que oferece (falta de valor percebido)", 22.9% "Falta de lugares legais e autorais (mesmice)", 18.6% "Sensação de mesmice e repetição de formato", 14.1% "Ônibus e mobilidade truncada", 12.1% "Insegurança percebida".
-   - Critérios Reais de Escolha: Ambiente agradável, acolhedor e bonito (38.9%), Preço/Custo-benefício (27.1%), Indicação de amigos/família (21.4%), Proximidade geográfica (12.6%).
-   - Estética Instagramável: 46.8% valorizam ou escolhem estabelecimentos por serem atraentes para fotos e redes sociais.
-   - Cultura Pet-Friendly: 68.2% possuem animais de estimação e demandam estabelecimentos e praças que acolham pets.
-   - Distribuição de Frequência de Consumo Regional:
-     * Centro-Oeste (Aquarius, Vila Adyana, Vila Ema, Esplanada, Colinas): 40.7%
-     * Zona Sul (Jardim Satélite, Bosque, Jardim Oriente, Morumbi, Colonial): 27.6%
-     * Zona Leste (Vila Industrial, Eugênio de Melo, Vista Verde, Novo Horizonte): 13.9%
-     * Zona Norte (Santana, Altos de Santana, Buquirinha): 11.2%
-     * Zona Sudeste (Jardim da Granja, São Judas, Putim): 6.6%
+ESCOPO TÉCNICO:
+Trabalhe somente na lógica de análise, validação de dados e conteúdo textual retornado. Não altere front-end, layout ou gráficos.
 
-3. HÁBITOS DIGITAIS, MÍDIA & INFLUENCIADORES:
-   - Redes Sociais Mais Usadas para Busca de Locais e Referências: Instagram (79.4%), TikTok (14.2%), Google/Maps (6.4%). 54.1% já frequentaram estabelecimentos por recomendação de influenciadores locais.
-   - Gêneros Musicais Favoritos: MPB/Pop Rock (38.2%), Sertanejo (31.4%), Pagode/Samba (28.7%), Rock Internacional/Indie (24.1%), Funk/Trap (19.8%), Eletrônica (14.2%), Gospel (11.5%).
+SNAPSHOT OFICIAL DE DADOS (ÚNICA FONTE DE VERDADE PARA NÚMEROS):
+${JSON.stringify(DATASET_SNAPSHOT, null, 2)}
 
-4. A BÍBLIA DOS 4 MOVIMENTOS CULTURAIS DE SJC (LENTES COMPORTAMENTAIS OFICIAIS):
-   - 01. A Geografia do Silêncio: Cultura da harmonia, sossego, refúgio e conformismo. Público focado em família, calmaria, segurança, shoppings e marcas consolidadas. Foge de atrito e agito excessivo (Foco: Urbanova, Vila Adyana).
-   - 02. A Cidade Prometida: Matrizes conservadoras com alta expectativa de tecnologia, segurança e performance (estética Apple, ROI). Famílias tradicionais que valorizam estabilidade e conformidade moral (Foco: Zona Sul, Colinas).
-   - 03. A Tribo Global: Elite técnica, engenheiros aeroespaciais e criativos cosmopolitas. Early adopters super exigentes que demandam padrão internacional de design, atendimento e gastronomia. Moram no eixo Aquarius/Vila Ema e evadem para SP por carência de oferta autoral em SJC (Foco: Aquarius, Vila Ema).
-   - 04. Empreendedorismo Intuitivo: A economia real, de bairro e pragmática. Foco no sustento, velocidade, conveniência, WhatsApp, delivery ágil e custo-benefício (Foco: Zona Sul, Leste, Norte).
+PRINCÍPIOS METODOLÓGICOS E REGRAS QUANTITATIVAS:
+1. O dataset_snapshot é a ÚNICA fonte de verdade para qualquer porcentagem, N ou contagem.
+2. O texto a ser auditado (report_to_audit) é objeto de auditoria e NUNCA fonte estatística.
+3. Não invente números, faturamentos, percentuais ou correlações sem suporte no snapshot.
+4. Renda familiar oficial: Até R$ 2.8k (15.3%) | R$ 2.8k-5.6k (33.8%) | R$ 5.6k-12k (32.5%) | R$ 12k-26k (14.0%) | Acima R$ 26k (4.4%).
+5. Evasão: 66.2% evadem para lazer/gastronomia (49.9% às vezes, 16.4% sempre).
+6. Demanda reprimida geral: 69.6% gastariam mais na cidade se houvesse opções qualificadas.
+7. Influenciadores: apenas 30.4% já foram a locais por recomendação (69.6% disseram não).
+8. Estética "Instagramável": 64.6% NÃO ligam para apelo de fotos; apenas 8.0% acham decisivo.
+9. Regiões mais frequentadas: Centro-Oeste (41.7%), Zona Sul (28.3%), Leste (11.5%), Norte (6.5%).
+10. Dores noturnas: 33.1% "É tudo muito caro", 23.5% "Não tem lugar legal", 20.5% "Insegurança".
+11. Bairros e Regiões são "shortlist de áreas a validar", nunca ranking comprovado.
+12. Os 4 Movimentos Culturais (A Tribo Global, A Cidade Prometida, A Geografia do Silêncio, Empreendedorismo Intuitivo) são HIPÓTESES ESTRATÉGICAS e lentes analíticas, JAMAIS fatos demográficos ou dados censitários do CSV.
 
-5. BANCO OFICIAL DE VERBATIMS E CITAÇÕES REAIS DE RESPONDENTES (PESQUISA QUALITATIVA RADAR SJC):
-   - "Custo de vida de capital, com opções, salário e oportunidades de um interior... Coisas caras e sem qualidade." (Mulher, 25-34 anos, Zona Sul, R$ 5.6k - 12k)
-   - "Falta aconchego humano, vida nas ruas. Fora centro comercial, shopping, supermercados e corredores, não há vida nas ruas de São José." (Mulher, 65+ anos, Centro-Oeste, R$ 5.6k - 12k)
-   - "Eu entendo que São José tem muitas opções pra quem pode pagar e poucas pra quem não pode pagar. Em vários aspectos com relação a cultura, ao transporte." (Mulher, 25-34 anos, Zona Norte, R$ 2.8k - 5.6k)
-   - "Cidade com direção política conservadora, falta arte, eventos públicos, os parques e feiras são bons. Mas poderíamos ter muito mais com o número de habitantes que temos." (Homem, 35-44 anos, Centro-Oeste, R$ 2.8k - 5.6k)
-   - "Para lazer e cultura prefiro ir a São Paulo pois as opções aqui são limitadas e muitas vezes os eventos não são bem divulgados ou organizados." (Mulher, 35-44 anos, Centro-Oeste, R$ 12k - 25k)
-   - "Sinto falta de uma vida cultural mais pulsante fora do eixo comercial. Mais eventos de rua e ocupação dos espaços públicos." (Homem, 25-34 anos, Centro-Oeste, R$ 5.6k - 12k)
-   - "SJC tem potencial para ter eventos de grande porte, como festivais de música e gastronomia que atraiam pessoas de fora e segurem quem mora aqui." (Mulher, 25-34 anos, Zona Sul, R$ 5.6k - 12k)
-   - "Uma cidade com poucos recursos para jovens." (Mulher, 35-44 anos, Zona Sul, R$ 2.8k - 5.6k)
-   - "Lazer só pra quem tem dinheiro." (Mulher, 35-44 anos, Zona Leste, R$ 2.8k - 5.6k)`;
-
-    const systemPrompt = `Você é um estrategista sênior de mercado, comportamento do consumidor e posicionamento territorial, especializado em São José dos Campos. Sua tarefa é auditar o negócio descrito pelo usuário usando exclusivamente a base oficial do Radar SJC e do Supabase (N=477, IC=95%, Erro ±4.5%) e produzir uma auditoria de elevada densidade analítica, rastreável, profunda e honesta sobre suas limitações e condições de validação.
-
-PROPOSTA AUDITADA: O usuário fornecerá a ideia de negócio. Você DEVE contextualizar 100% da auditoria em torno desta ideia específica.
-
-${marketBriefSJC}
-
-HIERARQUIA DE CONFIANÇA & CONTROLE DE QUALIDADE:
-- Evidência quantitativa: Dado oficial do Supabase N=477.
-- Evidência qualitativa: Verbatim real com metadados demográficos.
-- Inferência estratégica: Leitura lógica conectada ao negócio (deve ser nomeada como inferência / hipótese a validar).
-- Hipótese a validar: Suposição que exige teste de baixo custo antes de investimento irreversível.
-- Informação ausente: Dado não fornecido pelo usuário ou não coberto pela pesquisa.
-
-PRINCÍPIO DE CAUSALIDADE & REGRAS METODOLÓGICAS OBRIGATÓRIAS:
-1. NÃO CONFUNDA CORRELAÇÃO COM CAUSALIDADE: O fato de 75.8% dos joseenses afirmarem que gastariam mais com lazer/gastronomia indica demanda reprimida geral por experiências melhores, mas NÃO comprova demanda automática pela categoria de negócio específica. Apresente como sinal de oportunidade urbana de retenção e explicite a necessidade de validar a categoria e a disposição a pagar.
-2. FONTE OFICIAL ESTATÍSTICA: Toda métrica quantitativa deriva estritamente da base oficial Supabase N=477 (IC=95%, Erro ±4.5%). A apresentação serve como contexto qualitativo e hipóteses.
-3. BAIRROS SÃO SHORTLIST A INVESTIGAR: Apresente bairros como "Shortlist de áreas candidatas para validação de campo" (avaliando fluxo, aluguel, concorrência e público real), nunca como ranking comprovado.
-4. ZONA DE EXCLUSÃO COM RIGOR: Não rotule regiões automaticamente como inviáveis e NUNCA invente "risco de inadimplência" sem dados. Aponte apenas atritos operacionais de ticket/formato e recomende teste antes de ponto fixo.
-5. RIGOR NOS MOVIMENTOS CULTURAIS: Trate os 4 movimentos como lentes comportamentais, não como categorias demográficas censitárias ou garantias de compra. Aderência é uma hipótese que exige teste de oferta, preço e conversão.
-6. ISHIKAWA COM EFEITO OBSERVÁVEL: O problema central deve ser um efeito observável mensurável (ex: "Risco de baixa conversão da intenção de consumo em compra recorrente com margem suficiente").
-7. SEM JARGÃO DE VENDA: É proibido usar "mercado bilionário", "demanda comprovada", "garante viabilidade" ou "rejeição moral" sem dados específicos.
-8. REGRA DE TITÂNIO DAS VERBALIZAÇÕES: Na chave 'verbalizacoes_reais', extraia 3 objetos com citações autênticas do banco fornecido. A chave 'genero' deve conter ESTRITAMENTE 'Homem' ou 'Mulher'.
-
-7. RESPOSTA EXCLUSIVAMENTE EM JSON VÁLIDO: Retorne APENAS o objeto JSON abaixo, sem texto antes ou depois.
-
-ESTRUTURA JSON EXATA E OBRIGATÓRIA:
+ESTRUTURA JSON EXATA E OBRIGATÓRIA A RETORNAR:
 {
-  "visao_estrategica_texto": "Texto fluido e denso, focado em dor e comportamento do consumidor em SJC. Contém OBRIGATORIAMENTE uma tese central em **negrito**. Termina conectando a oportunidade à necessidade de validação prática e fazendo menção ao gráfico abaixo.",
-  "grafico_validacao": {
-    "titulo": "TÍTULO DO INDICADOR (EX: BARREIRAS DE CONSUMO E ATRITOS LOCAIS)",
-    "type": "bar",
-    "labels": ["Preço s/ Valor", "Falta Autoral", "Sensação Mesmice", "Transporte", "Insegurança"],
-    "data": [32.3, 22.9, 18.6, 14.1, 12.1]
-  },
-  "verbalizacao_pesquisa": "\"Citação autêntica da pesquisa com fit na proposta.\"",
-  "verbalizacoes_reais": [
-    {
-      "citacao": "Texto exato da citação real extraída do banco oficial...",
-      "genero": "Mulher",
-      "idade": "25-34 anos",
-      "regiao": "Zona Sul",
-      "renda": "R$ 5.6k - 12k"
-    },
-    {
-      "citacao": "Texto exato da citação real extraída do banco oficial...",
-      "genero": "Homem",
-      "idade": "35-44 anos",
-      "regiao": "Centro-Oeste",
-      "renda": "R$ 12k - 25k"
-    },
-    {
-      "citacao": "Texto exato da citação real extraída do banco oficial...",
-      "genero": "Mulher",
-      "idade": "25-34 anos",
-      "regiao": "Zona Norte",
-      "renda": "R$ 2.8k - 5.6k"
-    }
-  ],
+  "visao_estrategica_texto": "Texto fluido e denso contextualizado na ideia do usuário. Contém OBRIGATORIAMENTE a tese central em **negrito**, identifica as dores locais reais do snapshot e conclui recomendando teste de validação prático.",
   "bairros": [
-    { "nome": "Nome do Bairro 1", "regiao": "Centro-Oeste", "justificativa": "Análise analítica de fit de público, ticket e validação de campo recomendada..." },
-    { "nome": "Nome do Bairro 2", "regiao": "Zona Sul", "justificativa": "Análise analítica..." },
-    { "nome": "Nome do Bairro 3", "regiao": "Região", "justificativa": "Análise analítica..." },
-    { "nome": "Nome do Bairro 4", "regiao": "Região", "justificativa": "Análise analítica..." },
-    { "nome": "Nome do Bairro 5", "regiao": "Região", "justificativa": "Análise analítica..." }
+    { "nome": "Jardim Aquarius", "regiao": "Centro-Oeste", "justificativa": "Análise analítica de fit com a região Centro-Oeste (41.7%) e alta renda (18.4%), destacando a necessidade de validação de campo..." },
+    { "nome": "Vila Ema", "regiao": "Centro-Oeste", "justificativa": "Análise analítica de fluxo gastronômico e perfil..." },
+    { "nome": "Jardim Satélite", "regiao": "Zona Sul", "justificativa": "Análise analítica para a Zona Sul (28.3% de frequência)..." },
+    { "nome": "Vila Adyana", "regiao": "Centro-Oeste", "justificativa": "Análise analítica..." },
+    { "nome": "Urbanova", "regiao": "Centro-Oeste", "justificativa": "Análise analítica..." }
   ],
-  "zona_exclusao": "NOME DA REGIÃO - Explicação densa e fundamentada (40-60 palavras) dos atritos estruturais, perfil de público, ticket ou formato que geram alto risco neste local.",
+  "zona_exclusao": "NOME DA REGIÃO - Explicação fundamentada dos atritos estruturais, ticket ou formato que geram alto risco sem validação prévia.",
   "swot": {
-    "forcas": ["Diferencial psicográfico 1", "Diferencial 2", "Diferencial 3"],
-    "fraquezas": ["Gargalo operacional 1", "Vulnerabilidade de canal 2", "Gargalo 3"],
-    "oportunidades": ["Demanda reprimida de retenção 1", "Alavanca de mercado 2", "Oportunidade 3"],
-    "ameacas": ["Risco competitivo e substitutos 1", "Sensibilidade a preço 2", "Ameaça 3"]
+    "forcas": ["Força 1 baseada no snapshot", "Força 2", "Força 3"],
+    "fraquezas": ["Gargalo operacional 1", "Gargalo 2", "Gargalo 3"],
+    "oportunidades": ["Demanda reprimida (69.6%) 1", "Alavanca de mercado 2", "Oportunidade 3"],
+    "ameacas": ["Evasão (66.2%) 1", "Sensibilidade a preço (33.1%) 2", "Ameaça 3"]
   },
   "auditoria_ambiente": {
     "pestel": {
-      "P": "Análise Política conectada à regulação, incentivos e diretrizes municipais em SJC...",
-      "E": "Análise Econômica conectada à renda, inflação, custo de aluguel e poder de compra...",
-      "S": "Análise Social & Cultural conectada ao comportamento, família, diversidade e adesão local...",
-      "T": "Análise Tecnológica conectada à descoberta por Instagram (79.4%), WhatsApp e canais digitais...",
-      "E_env": "Análise Ambiental conectada ao clima, sazonalidade, cultura pet-friendly (68.2%) e espaço urbano...",
-      "L": "Análise Legal & Regulatória conectada a zoneamento, alvarás, proteção ao consumidor e compliance..."
+      "P": "Análise Política...",
+      "E": "Análise Econômica conectada às rendas de R$ 2.8k-12k (66.3%) e alta renda de 18.4%...",
+      "S": "Análise Social conectada ao comportamento, evasão de 66.2% e busca por qualidade...",
+      "T": "Análise Tecnológica (Instagram 61.8%, WhatsApp, canais digitais)...",
+      "E_env": "Análise Ambiental (sazonalidade, cultura pet-friendly 52.8%)...",
+      "L": "Análise Legal e Regulatória (alvarás, zoneamento)..."
     },
     "ishikawa": {
-      "problema_central": "Inviabilidade de Retenção do Consumidor Local em SJC",
+      "problema_central": "Risco de Baixa Conversão e Evasão do Consumidor Local em SJC",
       "causas": [
-        { "categoria": "Pessoas & Atendimento", "descricao": "Falta de treinamento, hospitalidade autêntica e agilidade resolutiva." },
-        { "categoria": "Ambiente & Experiência", "descricao": "Sensação de mesmice, falta de aconchego autoral e apelo instagramável (46.8%)." },
-        { "categoria": "Processos & Mobilidade", "descricao": "Atritos de trânsito, estacionamento escasso e logística de atendimento truncada." },
-        { "categoria": "Produto & Percepção", "descricao": "Preço elevado sem entrega de valor percebido compatível ('coisas caras e sem qualidade')." }
+        { "categoria": "Pessoas & Atendimento", "descricao": "Falta de treinamento qualificado e hospitalidade." },
+        { "categoria": "Ambiente & Experiência", "descricao": "Sensação de mesmice noturna e espaços sem aconchego." },
+        { "categoria": "Processos & Mobilidade", "descricao": "Atritos de trânsito e estacionamento escasso." },
+        { "categoria": "Produto & Percepção", "descricao": "Preço elevado sem entrega de valor percebido ('coisas caras e sem qualidade')." }
       ]
     }
   },
   "matrizes_estrategicas": {
     "vrio": [
-      { "letra": "V", "nome": "Valor", "analise": "Análise aprofundada específica de como este negócio cria valor real e reduz dores de consumo em SJC..." },
-      { "letra": "R", "nome": "Raridade", "analise": "Análise aprofundada de diferenciação e raridade da oferta frente à concorrência no território..." },
-      { "letra": "I", "nome": "Imitabilidade", "analise": "Análise das barreiras contra cópia (marca, curadoria, rede, ponto, know-how)..." },
-      { "letra": "O", "nome": "Organização", "analise": "Análise da capacidade operacional e financeira interna para sustentar a entrega com margem..." }
+      { "letra": "V", "nome": "Valor", "analise": "Como este negócio cria valor real e reduz dores de consumo em SJC..." },
+      { "letra": "R", "nome": "Raridade", "analise": "Diferenciação e raridade da oferta frente à concorrência..." },
+      { "letra": "I", "nome": "Imitabilidade", "analise": "Barreiras contra cópia (marca, curadoria, rede, know-how)..." },
+      { "letra": "O", "nome": "Organização", "analise": "Capacidade operacional interna para sustentar entrega..." }
     ],
     "porter": [
-      { "forca": "Rivalidade entre Concorrentes", "analise": "Análise detalhada dos concorrentes diretos e indiretos no território escolhido em SJC..." },
-      { "forca": "Ameaça de Novos Entrantes", "analise": "Análise das barreiras de capital, ponto comercial e fidelidade para novos concorrentes..." },
-      { "forca": "Produtos Substitutos", "analise": "Análise do impacto da evasão para SP/Litoral (66.2%) e marketplaces digitais..." },
-      { "forca": "Barganha dos Fornecedores", "analise": "Análise de dependência de fornecedores, prazos, exclusividade e custos de reposição..." },
-      { "forca": "Barganha dos Clientes", "analise": "Análise da sensibilidade a preço e expectativa de custo-benefício do consumidor joseense..." }
+      { "forca": "Rivalidade entre Concorrentes", "analise": "Intensidade competitiva no território..." },
+      { "forca": "Ameaça de Novos Entrantes", "analise": "Barreiras de entrada e capital de giro..." },
+      { "forca": "Produtos Substitutos", "analise": "Impacto da evasão para SP/Litoral (66.2%) e e-commerce..." },
+      { "forca": "Barganha dos Fornecedores", "analise": "Dependência de fornecedores e prazos..." },
+      { "forca": "Barganha dos Clientes", "analise": "Sensibilidade a preço (33.1% reclamam de custo excessivo)..." }
     ]
   },
   "mix_marketing": {
     "cinco_ps": [
-      { "p": "Produto", "analise": "Diretriz detalhada de mix de produtos, curva de qualidade, itens de entrada vs âncora para esta proposta..." },
-      { "p": "Preço", "analise": "Estratégia precisa de precificação, posicionamento de valor e compatibilidade com a renda familiar alvo..." },
-      { "p": "Praça", "analise": "Estratégia de canais físicos e digitais, ponto de venda e capilaridade no território..." },
-      { "p": "Promoção", "analise": "Plano tático de comunicação local, Instagram (79.4%), criadores locais e ativação de comunidade..." },
-      { "p": "Pessoas", "analise": "Padrão de treinamento, consultoria técnica, hospitalidade autêntica e retenção pós-venda..." }
+      { "p": "Produto", "analise": "Mix de produtos, qualidade e itens de entrada..." },
+      { "p": "Preço", "analise": "Estratégia de precificação alinhada à renda familiar..." },
+      { "p": "Praça", "analise": "Canais físicos e digitais no território..." },
+      { "p": "Promoção", "analise": "Instagram (61.8%) e ativação comunitária..." },
+      { "p": "Pessoas", "analise": "Treinamento de atendimento e hospitalidade..." }
     ],
     "oceano_azul": {
-      "eliminar": "Fatores tradicionais que encarecem a operação ou geram atrito sem agregar valor ao cliente local...",
-      "reduzir": "Elementos superdimensionados ou custos fixos que devem ser enxugados na operação...",
-      "elevar": "Atributos de experiência, velocidade, atendimento e curadoria que devem superar a média da cidade...",
-      "criar": "Diferenciais exclusivos inéditos que resolvam tensões culturais e capturem a demanda reprimida em SJC..."
+      "eliminar": "Custos supérfluos e atritos operacionais sem valor...",
+      "reduzir": "Desperdícios e dependência de modelos genéricos...",
+      "elevar": "Padrão de atendimento, consistência e curadoria...",
+      "criar": "Diferenciais exclusivos conectados à cultura local de SJC..."
     }
   },
   "movimentos_culturais": {
     "analise_cards": {
-      "geografia_silencio": "Análise aprofundada de 2 frases avaliando como o público de refúgio, sossego e família (Urbanova/Adyana) reage especificamente a esta proposta.",
-      "cidade_prometida": "Análise aprofundada de 2 frases avaliando o fit com famílias tradicionais e conservadoras (Zona Sul/Colinas) e possíveis barreiras morais ou de preço.",
-      "tribo_global": "Análise aprofundada de 2 frases avaliando a receptividade do público cosmopolita, tech e early adopters (Aquarius/Vila Ema) frente ao negócio.",
-      "empreendedorismo_intuitivo": "Análise aprofundada de 2 frases avaliando a aderência na economia real de bairro, velocidade e foco em custo-benefício."
+      "geografia_silencio": "Hipótese de fit com o público de refúgio e sossego (Urbanova/Adyana).",
+      "cidade_prometida": "Hipótese de fit com famílias tradicionais (Zona Sul/Colinas).",
+      "tribo_global": "Hipótese de fit com o público tech e cosmopolita (Aquarius/Vila Ema).",
+      "empreendedorismo_intuitivo": "Hipótese de fit com a economia real de bairro e conveniência (Zona Sul/Leste/Norte)."
     },
     "veredicto_final": {
       "nome_movimento": "A Tribo Global OU Empreendedorismo Intuitivo OU A Cidade Prometida OU A Geografia do Silêncio",
-      "justificativa_densa": "Comece citando explicitamente a proposta do usuário e explicando, em um parágrafo denso e analítico (60-90 palavras), como este negócio específico interage com as características demográficas, o ticket médio e os hábitos da região de SJC correspondente ao movimento vencedor."
+      "justificativa_densa": "Contextualize a proposta explicitamente em um parágrafo denso (60-90 palavras), rotulando a análise como [HIPÓTESE ESTRATÉGICA A VALIDAR]."
     }
-  },
-  "graficos_analiticos": [
-    {
-      "chart_data": {
-        "type": "horizontalBar",
-        "title": "Concentração e Frequência por Região (Geometria Urbana)",
-        "labels": ["Centro-Oeste", "Zona Sul", "Zona Leste", "Zona Norte", "Zona Sudeste"],
-        "data": [40.7, 27.6, 13.9, 11.2, 6.6],
-        "highlight_index": 0
-      },
-      "pergunta_origem": "Qual região da cidade você mais frequenta quando sai de casa? (Supabase N=477)",
-      "parecer_analitico": "Parecer analítico denso evidenciando a concentração no eixo Centro-Oeste (40.7%) e Zona Sul (27.6%) e a aderência territorial para o negócio."
-    },
-    {
-      "chart_data": {
-        "type": "doughnut",
-        "title": "O Paradoxo de Evasão (Oportunidade Latente)",
-        "labels": ["Evadem para SP/Litoral", "Consomem em SJC"],
-        "data": [66.2, 33.8],
-        "highlight_color": "#D97706"
-      },
-      "pergunta_origem": "Você costuma ir para outras cidades para passear ou comer fora? (Supabase N=477)",
-      "parecer_analitico": "Parecer analítico cirúrgico explicando por que o negócio proposto atua na retenção do consumo de 66.2% que busca inovação fora de SJC."
-    },
-    {
-      "chart_data": {
-        "type": "bar",
-        "title": "Distribuição de Renda Familiar por Fit",
-        "labels": ["Até R$ 2.8k", "R$ 2.8k-5.6k", "R$ 5.6k-12k", "R$ 12k-26k", "Acima R$ 26k"],
-        "data": [18.1, 32.3, 23.6, 14.2, 11.8],
-        "highlight_label": "R$ 5.6k-12k"
-      },
-      "pergunta_origem": "Qual a renda total da sua casa por mês? (Supabase N=477)",
-      "parecer_analitico": "Parecer analítico profundo comprovando a distribuição do poder de compra e a aderência do ticket médio do negócio."
-    }
-  ]
+  }
 }
 
 Você deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não inclua nenhum texto adicional.`;
 
-    // Modelos estritamente validados - Bypass total de process.env.GROQ_MODEL e sem Llama 3.3
+    // 6. Montagem do Payload do Usuário com Separação Estruturada
+    const userPayload = {
+      idea: combinedInput,
+      report_to_audit: reportToAudit || "Nenhum relatório externo fornecido. Audite a ideia diretamente com o dataset_snapshot.",
+      instruction: "Audite a proposta usando exclusivamente o dataset_snapshot oficial. Retorne EXCLUSIVAMENTE o JSON estruturado."
+    };
+
+    const userPromptText = JSON.stringify(userPayload) + '\n\nVocê deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não inclua nenhum texto adicional.';
+
+    // 7. Cascata de Modelos Suportados na Groq
     const candidateModels = [
       'qwen/qwen3.6-27b',
       'qwen/qwen3.8-27b',
@@ -275,11 +500,7 @@ Você deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não 
     let modelUsed = null;
     const errorsList = [];
 
-    const userPromptText = String(inputContent) + '\n\nVocê deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não inclua nenhum texto adicional.';
-
     for (const model of candidateModels) {
-      // Tentativa 1: Com json_object
-      // Tentativa 2: Sem json_object (caso o modelo gere erro de validação)
       const attempts = [
         { response_format: { type: "json_object" } },
         { response_format: undefined }
@@ -291,7 +512,7 @@ Você deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não 
         try {
           const payload = {
             model: model,
-            max_tokens: 3000,
+            max_tokens: 4000,
             temperature: 0.2,
             messages: [
               { role: 'system', content: systemPrompt },
@@ -342,11 +563,11 @@ Você deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não 
       });
     }
 
-    // Extração segura de JSON
+    // 8. Extração e Parse Seguro de JSON
     let jsonResult = null;
     let cleanReply = String(replyContent || '').trim()
-      .replace(/^```(?:json)?\s*/i, '')
-      .replace(/\s*```$/i, '')
+      .replace(/^\`\`\`(?:json)?\s*/i, '')
+      .replace(/\s*\`\`\`$/i, '')
       .trim();
 
     const firstBrace = cleanReply.indexOf('{');
@@ -364,10 +585,16 @@ Você deve retornar a sua resposta EXCLUSIVAMENTE em formato JSON válido. Não 
       }
     }
 
+    // 9. Validação Programática e Injeção de Dados Garantidos no Backend
+    if (jsonResult && typeof jsonResult === 'object') {
+      jsonResult = validateAndEnforceOfficialCharts(jsonResult);
+    }
+
     return res.status(200).json({ 
       result: jsonResult || replyContent,
-      reply: cleanReply,
-      modelUsed: modelUsed
+      reply: jsonResult ? JSON.stringify(jsonResult) : cleanReply,
+      modelUsed: modelUsed,
+      datasetN: DATASET_SNAPSHOT.n
     });
 
   } catch (error) {
