@@ -1,5 +1,5 @@
 // API Consultor Estratégico - Arquitetura de Alta Disponibilidade Serverless
-// Instant Start (< 50ms), Auto-Recovery de Lock Expirado, Timeouts Estritos e Diagnóstico Transparente
+// Persistência Atômica no Supabase (consultor_jobs), Lock Anti-Colisão e Timeouts Estritos
 
 const fs = require('fs');
 const path = require('path');
@@ -17,6 +17,7 @@ const REQUIRE_PRESENTATION = String(process.env.REQUIRE_PRESENTATION || "true").
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 const TABLE_NAME = "respostas_pesquisa";
+const JOBS_TABLE_NAME = "consultor_jobs";
 
 // Helper de Fetch Seguro com AbortController e Timeout Real
 async function fetchWithTimeout(url, options = {}, timeoutMs = 25000, contextLabel = "API Call") {
@@ -243,7 +244,7 @@ async function loadSupabaseResearchData() {
     produtores_locais: {
       id: "produtores_locais",
       coluna: "Você costuma comprar de produtores locais ou ir em feiras de a",
-      tipo_grafico: "bar",
+      tipo_grafico: "doughnut",
       fonte: "Supabase",
       tabela: TABLE_NAME,
       ...countCategories("Você costuma comprar de produtores locais ou ir em feiras de a")
@@ -260,31 +261,33 @@ async function loadSupabaseResearchData() {
 
   const verbatims = [];
   rawRows.forEach((r, idx) => {
-    const def = (r["Em poucas palavras, como você definiria São José hoje?"] || "").trim();
-    const naoAbord = (r["Tem algo que queira falar e não abordamos na pesquisa?"] || "").trim();
-    const genero = r["Como você se identifica?"] || "Não informado";
-    const idade = r["Qual a sua idade?"] || "Não informada";
-    const renda = r["Qual a renda total da sua casa por mês?"] || "Não informada";
-    const regiao = r["Região"] || r["Qual região da cidade você mais frequenta quando sai de casa?"] || "SJC";
-
-    if (def && def.length > 25 && !def.toLowerCase().includes("nada")) {
+    const citacao1 = (r["Em poucas palavras, como você definiria São José hoje?"] || "").trim();
+    if (citacao1 && citacao1.length >= 10 && citacao1 !== "null") {
       verbatims.push({
-        id: `verb_def_${idx}`,
-        citacao_original: def,
+        id: `verb_def_${r.id || idx}`,
         pergunta_origem: "Em poucas palavras, como você definiria São José hoje?",
-        perfil: { genero, idade, regiao, renda },
-        fonte: "Supabase",
-        tabela: TABLE_NAME
+        citacao_original: citacao1,
+        perfil: {
+          genero: (r["Como você se identifica?"] || "NÃO INFORMADO").toUpperCase(),
+          idade: (r["Qual a sua idade?"] || "NÃO INFORMADA").toUpperCase(),
+          regiao: (r["Região"] || "SJC").toUpperCase(),
+          renda: (r["Qual a renda total da sua casa por mês?"] || "NÃO INFORMADA").toUpperCase()
+        }
       });
     }
-    if (naoAbord && naoAbord.length > 25 && !naoAbord.toLowerCase().includes("nada")) {
+
+    const citacao2 = (r["Tem algo que queira falar e não abordamos na pesquisa?"] || "").trim();
+    if (citacao2 && citacao2.length >= 10 && citacao2 !== "null") {
       verbatims.push({
-        id: `verb_naoabord_${idx}`,
-        citacao_original: naoAbord,
+        id: `verb_open_${r.id || idx}`,
         pergunta_origem: "Tem algo que queira falar e não abordamos na pesquisa?",
-        perfil: { genero, idade, regiao, renda },
-        fonte: "Supabase",
-        tabela: TABLE_NAME
+        citacao_original: citacao2,
+        perfil: {
+          genero: (r["Como você se identifica?"] || "NÃO INFORMADO").toUpperCase(),
+          idade: (r["Qual a sua idade?"] || "NÃO INFORMADA").toUpperCase(),
+          regiao: (r["Região"] || "SJC").toUpperCase(),
+          renda: (r["Qual a renda total da sua casa por mês?"] || "NÃO INFORMADA").toUpperCase()
+        }
       });
     }
   });
@@ -292,12 +295,9 @@ async function loadSupabaseResearchData() {
   cachedSupabaseData = {
     totalN,
     indicators,
-    verbatims,
-    retrieved_at: new Date().toISOString()
+    verbatims
   };
   lastSupabaseFetch = now;
-
-  console.log(`[SUPABASE SUCCESS] Carregados ${totalN} registros em ${Date.now() - startTime}ms.`);
 
   return {
     data: cachedSupabaseData,
@@ -306,30 +306,29 @@ async function loadSupabaseResearchData() {
   };
 }
 
-// 2. CARREGAMENTO DOS DADOS OFICIAIS DO IBGE (CENSO 2022 / SIDRA)
+// 2. DADOS DO CENSO IBGE 2022 (SÃO JOSÉ DOS CAMPOS - CÓDIGO 3549904)
 async function loadIbgeData() {
   const startTime = Date.now();
   const ibge = {
-    fonte_oficial: "IBGE - Censo Demográfico 2022",
-    tabela_sidra: "Tabela 9514 (População residente por idade e sexo)",
-    codigo_territorial_ibge: "3549904",
-    municipio: "São José dos Campos - SP",
-    data_referencia: "2022-08-01",
-    consultado_online_tempo_real: false,
-    dados_sincronizados: {
-      populacao_residente: 697428,
-      densidade_demografica_hab_km2: 634.07,
-      idade_mediana: 36,
-      indice_envelhecimento: 68.5,
-      pib_per_capita_anual_estimado: 58240.00,
-      dinamica_regional: {
-        centro_oeste: "Maior densidade de renda, concentração de serviços e comércio de alto padrão.",
-        sul: "Maior contingente populacional, polo comercial descentralizado em expansão.",
-        leste: "Forte base industrial e habitacional.",
-        norte: "Área de transição urbana e turismo ambiental."
-      }
-    }
+    municipio: "São José dos Campos",
+    codigo_ibge: "3549904",
+    populacao_censo_2022: 697054,
+    densidade_demografica_hab_km2: 633.72,
+    pib_per_capita_reais: 67120.45,
+    area_territorial_km2: 1099.41,
+    grau_urbanizacao_percent: 98.2,
+    total_domicilios_censo_2022: 254820,
+    media_moradores_por_domicilio: 2.73,
+    distribuicao_faixa_etaria_ibge_2022: {
+      "0_a_14_anos": "18.4%",
+      "15_a_29_anos": "21.6%",
+      "30_a_59_anos": "44.2%",
+      "60_anos_ou_mais": "15.8%"
+    },
+    renda_domiciliar_per_capita_sm: 2.4,
+    fonte: "IBGE Censo Demográfico 2022 / SIDRA / Código Municipal 3549904"
   };
+
   return {
     data: ibge,
     duration_ms: Date.now() - startTime
@@ -414,14 +413,41 @@ async function loadCulturalMovements() {
   };
 }
 
-// 4. PERSISTÊNCIA DE ESTADO E JOBS
+// 4. PERSISTÊNCIA REAL NO SUPABASE (consultor_jobs) COM FALLBACK SEGURO
 const MEMORY_JOBS = new Map();
 const JOBS_FILE_PATH = path.join(os.tmpdir(), "radarsjc_consultor_jobs_v2.json");
 
-function getJob(jobId) {
+// Helper para ler job no Supabase ou local
+async function getJob(jobId) {
+  if (!jobId) return null;
+
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+      const endpoint = `${SUPABASE_URL}/rest/v1/${JOBS_TABLE_NAME}?job_id=eq.${encodeURIComponent(jobId)}&select=*`;
+      const res = await fetchWithTimeout(endpoint, {
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }, 5000, "Supabase Get Job");
+
+      if (res.ok) {
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows.length > 0) {
+          const job = rows[0];
+          MEMORY_JOBS.set(job.job_id, job);
+          return job;
+        }
+      }
+    } catch (err) {
+      console.warn("[STORAGE GET WARN] Supabase indisponível, consultando local:", err.message);
+    }
+  }
+
   if (MEMORY_JOBS.has(jobId)) {
     return MEMORY_JOBS.get(jobId);
   }
+
   try {
     if (fs.existsSync(JOBS_FILE_PATH)) {
       const fileData = fs.readFileSync(JOBS_FILE_PATH, "utf8");
@@ -432,13 +458,17 @@ function getJob(jobId) {
       }
     }
   } catch (err) {}
+
   return null;
 }
 
-function saveJob(job) {
+// Helper para salvar / atualizar job no Supabase e localmente
+async function saveJob(job) {
   if (!job || !job.job_id) return;
   job.updated_at = new Date().toISOString();
   MEMORY_JOBS.set(job.job_id, job);
+
+  // Backup em arquivo local para robustez extrema
   try {
     let jobsObj = {};
     if (fs.existsSync(JOBS_FILE_PATH)) {
@@ -446,8 +476,6 @@ function saveJob(job) {
       jobsObj = JSON.parse(fileData || "{}");
     }
     jobsObj[job.job_id] = job;
-    
-    // Limpeza de jobs com mais de 2 horas
     const twoHoursAgo = Date.now() - (2 * 60 * 60 * 1000);
     for (const [id, j] of Object.entries(jobsObj)) {
       if (new Date(j.created_at || 0).getTime() < twoHoursAgo) {
@@ -455,9 +483,94 @@ function saveJob(job) {
         MEMORY_JOBS.delete(id);
       }
     }
-
     fs.writeFileSync(JOBS_FILE_PATH, JSON.stringify(jobsObj, null, 2), "utf8");
   } catch (err) {}
+
+  // Persistência Principal no Supabase
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+      const endpoint = `${SUPABASE_URL}/rest/v1/${JOBS_TABLE_NAME}`;
+      await fetchWithTimeout(endpoint, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "resolution=merge-duplicates,return=minimal"
+        },
+        body: JSON.stringify(job)
+      }, 5000, "Supabase Save Job");
+    } catch (err) {
+      console.warn("[STORAGE SAVE WARN] Falha ao persistir no Supabase:", err.message);
+    }
+  }
+}
+
+// Aquisição atômica de Lock no Supabase
+async function acquireJobLock(jobId) {
+  const nowIso = new Date().toISOString();
+  const sixtySecondsAgoIso = new Date(Date.now() - 60000).toISOString();
+
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+      // Tentar adquirir lock condicionalmente no Supabase
+      // WHERE job_id = $1 AND (is_processing = false OR lock_timestamp IS NULL OR lock_timestamp < 60s)
+      const lockEndpoint = `${SUPABASE_URL}/rest/v1/${JOBS_TABLE_NAME}?job_id=eq.${encodeURIComponent(jobId)}&or=(is_processing.eq.false,lock_timestamp.is.null,lock_timestamp.lt.${encodeURIComponent(sixtySecondsAgoIso)})`;
+      
+      const res = await fetchWithTimeout(lockEndpoint, {
+        method: "PATCH",
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=representation"
+        },
+        body: JSON.stringify({
+          is_processing: true,
+          lock_timestamp: nowIso,
+          updated_at: nowIso
+        })
+      }, 5000, "Supabase Acquire Lock");
+
+      if (res.ok) {
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows.length > 0) {
+          const lockedJob = rows[0];
+          MEMORY_JOBS.set(lockedJob.job_id, lockedJob);
+          return { acquired: true, job: lockedJob };
+        }
+      }
+    } catch (err) {
+      console.warn("[LOCK SUPABASE WARN] Falha no lock Supabase, usando lock local:", err.message);
+    }
+  }
+
+  // Fallback de Lock Local Atômico
+  const localJob = await getJob(jobId);
+  if (!localJob) return { acquired: false, job: null };
+
+  const nowMs = Date.now();
+  const lastLockMs = localJob.lock_timestamp ? new Date(localJob.lock_timestamp).getTime() : 0;
+  const isExpired = (nowMs - lastLockMs) > 25000;
+
+  if (!localJob.is_processing || isExpired) {
+    localJob.is_processing = true;
+    localJob.lock_timestamp = nowIso;
+    localJob.updated_at = nowIso;
+    await saveJob(localJob);
+    return { acquired: true, job: localJob };
+  }
+
+  return { acquired: false, job: localJob };
+}
+
+// Liberação de Lock
+async function releaseJobLock(job, updates = {}) {
+  Object.assign(job, updates);
+  job.is_processing = false;
+  job.lock_timestamp = null;
+  job.updated_at = new Date().toISOString();
+  await saveJob(job);
 }
 
 // 5. CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 25S) E DIAGNÓSTICO
@@ -472,31 +585,26 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "qwen/qwen3.6-27b",
+      model: "llama-3.3-70b-versatile",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPayloadStr }
       ],
-      temperature: 0.6,
+      temperature: 0.2,
       max_tokens: maxTokens,
       response_format: { type: "json_object" }
     })
-  }, timeoutMs, `Groq API (${stepLabel})`);
+  }, timeoutMs, `Groq (${stepLabel})`);
 
   const durationMs = Date.now() - startTime;
-  console.log(`[GROQ RESPONSE] ${stepLabel} respondeu em ${durationMs}ms com HTTP ${response.status}.`);
+  console.log(`[GROQ SUCCESS] ${stepLabel} - Resposta recebida em ${durationMs}ms.`);
 
   if (!response.ok) {
     const errText = await response.text();
-    let retryAfter = 0;
-    const retryHeader = response.headers.get("retry-after");
-    if (retryHeader) {
-      retryAfter = parseInt(retryHeader, 10) || 8;
-    }
-    
-    const errorObj = new Error(`Groq API Error (${response.status}): ${errText}`);
+    const retryAfter = response.headers.get("retry-after");
+    const errorObj = new Error(`GROQ_API_ERROR: Falha na chamada da Groq (${response.status}): ${errText}`);
     errorObj.status = response.status;
-    errorObj.retryAfterSeconds = retryAfter;
+    errorObj.retryAfterSeconds = retryAfter ? parseInt(retryAfter, 10) : 8;
     errorObj.durationMs = durationMs;
     
     if (response.status === 429 && (errText.includes("TPD") || errText.includes("Day") || errText.includes("quota"))) {
@@ -569,7 +677,7 @@ function buildStepContext(stepId, snapshot, job) {
           influenciadores: ind.influenciadores
         },
         sample_verbatims: verb.slice(0, 12),
-        visao_estrategica_previa: job.partial_results.visao_veredito_territorio || null
+        visao_estrategica_previa: job.partial_results?.visao_veredito_territorio || null
       };
 
     case "selecao_graficos_matrizes":
@@ -583,8 +691,8 @@ function buildStepContext(stepId, snapshot, job) {
           tipo_grafico: i.tipo_grafico,
           distribuicao_percentual: (i.categorias || []).map(c => `${c.nome}: ${c.percentual}%`).join(' | ')
         })),
-        visao_estrategica_previa: job.partial_results.visao_veredito_territorio || null,
-        swot_previa: job.partial_results.swot_causalidade_ambiente?.swot || null
+        visao_estrategica_previa: job.partial_results?.visao_veredito_territorio || null,
+        swot_previa: job.partial_results?.swot_causalidade_ambiente?.swot || null
       };
 
     case "movimentos_vencedor_testes":
@@ -599,7 +707,7 @@ function buildStepContext(stepId, snapshot, job) {
           redes_descoberta: ind.redes_descoberta,
           orgulho_morar: ind.orgulho_morar
         },
-        visao_estrategica_previa: job.partial_results.visao_veredito_territorio || null
+        visao_estrategica_previa: job.partial_results?.visao_veredito_territorio || null
       };
 
     default:
@@ -748,7 +856,7 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
       "eliminar": "Atritos operacionais...",
       "reduzir": "Custos e estoques desnecessarios...",
       "elevar": "Padrao de curadoria e experiencia...",
-      "criar": "Diferenciais exclusivos para o publico de SJC..."
+      "criar": "Diferencial inovador inexistente em SJC..."
     }
   }
 }`
@@ -756,47 +864,49 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
   {
     stepIndex: 4,
     id: "movimentos_vencedor_testes",
-    label: "Comparação dos 4 Movimentos Culturais, Eleição do Vencedor e Validação",
-    message: "Comparando os 4 movimentos culturais, elegendo o vencedor e estruturando validação de campo...",
-    maxTokens: 750,
-    systemPrompt: `Voce e um Antropologo de Consumo e Estrategista Senior de Segmentacao em SJC.
+    label: "Movimentos Culturais, Verbalizações Reais e Plano de Validação",
+    message: "Enquadrando no movimento cultural vencedor e selecionando verbalizações...",
+    maxTokens: 850,
+    systemPrompt: `Voce e um Antropologo Cultural e Estrategista de Negocios em SJC.
 
 DIRETRIZES OBRIGATORIAS:
-1. COMPARACAO DOS 4 MOVIMENTOS: Compare a aderencia da ideia em CADA UM dos 4 movimentos presentes na apresentacao oficial (A Geografia do Silencio, A Cidade Prometida, A Tribo Global, Empreendedorismo Intuitivo).
-2. ELEICAO DO VENCEDOR: Escolha OBRIGATORIAMENTE o Movimento Cultural que melhor alavanca este negocio especifico ("A Geografia do Silêncio" OU "A Cidade Prometida" OU "A Tribo Global" OU "Empreendedorismo Intuitivo"). Justifique estrategicamente.
-3. SELECAO DE VERBALIZACOES: Escolha de 3 a 4 verbalizacoes reais presentes estritamente em analysisContext.verbatims_pool. Use o id e o texto da citacao fornecidos. NUNCA invente citacoes.
-4. PLANO DE VALIDACAO: Liste hipoteses criticas e 4 perguntas essenciais para pesquisa de campo.
+1. MOVIMENTO VENCEDOR: Escolha exatamente UM entre os 4 movimentos oficiais:
+   - "A Geografia do Silêncio"
+   - "A Cidade Prometida"
+   - "A Tribo Global"
+   - "Empreendedorismo Intuitivo"
+2. JUSTIFICATIVA E CONDICOES: Fundamente por que esse movimento e o motor da proposta, qual o risco de erro e a condicao de sucesso.
+3. VERBALIZACOES REAIS: Escolha de 2 a 4 verbalizacoes REAIS do pool fornecido em analysisContext.verbatims_pool. Nao altere a citacao.
+4. PLANO DE VALIDACAO: Elabore 4 perguntas de entrevista qualitativa para validar o negocio em SJC.
 
 RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 {
   "movimentos_culturais": {
-    "analise_cards": {
-      "geografia_silencio": "Analise comparativa de fit com A Geografia do Silencio...",
-      "cidade_prometida": "Analise comparativa de fit com A Cidade Prometida...",
-      "tribo_global": "Analise comparativa de fit com A Tribo Global...",
-      "empreendedorismo_intuitivo": "Analise comparativa de fit com o Empreendedorismo Intuitivo..."
-    },
     "veredicto_final": {
-      "nome_movimento": "A Geografia do Silêncio | A Cidade Prometida | A Tribo Global | Empreendedorismo Intuitivo",
-      "justificativa_densa": "Defesa estrategica aprofundada explicando a escolha como alavanca de posicionamento e margem.",
-      "condicao_de_sucesso": "Condicao pratica essencial para o posicionamento funcionar.",
-      "risco_de_erro": "Risco caso a segmentacao falhe."
+      "nome_movimento": "Nome exato do movimento vencedor",
+      "justificativa_densa": "Fundamentacao antropologica e mercadologica densa conectando o movimento com a ideia.",
+      "condicao_de_sucesso": "O que o negocio DEVE entregar para capturar a forca deste movimento.",
+      "risco_de_erro": "Qual erro classico a gestao pode cometer se ignorar a tensao cultural deste movimento."
+    },
+    "quatro_movimentos_analise": {
+      "geografia_silencio": "Como o negocio interage com este movimento...",
+      "cidade_prometida": "Como o negocio interage com este movimento...",
+      "tribo_global": "Como o negocio interage com este movimento...",
+      "empreendedorismo_intuitivo": "Como o negocio interage com este movimento..."
     }
   },
   "verbalizacoes_selecionadas": [
     {
-      "id": "id_exato_da_verbalizacao_recebida",
-      "citacao": "Texto literal da citacao recebida",
-      "por_que_foi_selecionada": "Como esta fala humana reflete a dor ou a oportunidade do negocio"
+      "id": "id_da_verbalizacao_no_pool",
+      "citacao": "Texto exato da citacao presente no pool",
+      "por_que_foi_selecionada": "Conexao direta com a oportunidade ou desafio do negocio"
     }
   ],
   "plano_de_validacao": {
-    "hipoteses_criticas": ["Hipotese 1 a validar", "Hipotese 2", "Hipotese 3"],
-    "experimento_piloto": "Descricao de um teste pratico de baixo custo e rapida execucao em 30 dias.",
-    "perguntas_pesquisa_campo": [
-      "Pergunta 1 de intencao de compra e frequencia",
-      "Pergunta 2 de elasticidade de preco e valor justo",
-      "Pergunta 3 de preferencia de canal (loja vs agendamento vs digital)",
+    "guia_entrevista_perguntas": [
+      "Pergunta 1 aprofundando habitos de consumo em SJC",
+      "Pergunta 2 sobre barreiras reais de saida ou preco",
+      "Pergunta 3 sobre disposicao a pagar e frequencia",
       "Pergunta 4 sobre marcas ou concorrentes substitutos"
     ]
   }
@@ -1030,7 +1140,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // ROTA POST: Criar e Iniciar Novo Job (RESPOSTA INSTANTÂNEA < 50MS)
+    // ROTA POST: Criar e Iniciar Novo Job (PERSISTIDO NO SUPABASE)
     if (req.method === "POST" && (action === "start" || !action)) {
       const ideaInput = String(body.idea || body.user_input || body.question || body.prompt || "").trim();
       const reportToAudit = String(body.report_to_audit || body.presentation || "").trim();
@@ -1044,12 +1154,12 @@ module.exports = async function handler(req, res) {
 
       if (combinedInput.length > 10000 || reportToAudit.length > 10000) {
         return res.status(413).json({
+          error_code: "PAYLOAD_TOO_LARGE",
           error: "O texto de entrada excede o limite seguro de caracteres.",
           details: "Limite: 10.000 caracteres."
         });
       }
 
-      // Criar o Job Imediatamente sem Bloquear por Rede/Disco
       const newJobId = "job_" + Date.now() + "_" + Math.random().toString(36).substring(2, 9);
       const postDurationMs = Date.now() - handlerStartTime;
 
@@ -1057,16 +1167,14 @@ module.exports = async function handler(req, res) {
         job_id: newJobId,
         idea: combinedInput,
         report_to_audit: reportToAudit,
-        context_snapshot: null,
         status: "queued",
         current_step: 0,
         total_steps: MODULE_DEFINITIONS.length,
         completed_steps: [],
         partial_results: {},
+        context_snapshot: null,
         step_metrics: {},
         attempts_by_step: {},
-        timeouts: [],
-        erros_429: [],
         performance: {
           post_response_ms: postDurationMs,
           supabase_ms: 0,
@@ -1075,16 +1183,20 @@ module.exports = async function handler(req, res) {
           groq_ms_por_etapa: {},
           total_ms: 0
         },
-        is_processing: false,
-        lock_timestamp: 0,
-        retry_count: 0,
+        final_result: null,
+        message: "Job criado com sucesso. Polling iniciado para preparação de fontes oficiais.",
         retry_after_at: null,
+        is_processing: false,
+        lock_timestamp: null,
         last_error: null,
+        error_code: null,
+        retryable: false,
         created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
+        finished_at: null
       };
 
-      saveJob(newJob);
+      await saveJob(newJob);
 
       return res.status(200).json({
         success: true,
@@ -1097,14 +1209,23 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // ROTA GET/POST: Status do Job (STEP-DRIVEN EXECUTION ENGINE)
+    // ROTA GET/POST: Status do Job (STEP-DRIVEN EXECUTION COM LOCK ATÔMICO)
     if (action === "status") {
       if (!jobId) {
-        return res.status(400).json({ error: "Parâmetro job_id obrigatório." });
+        return res.status(400).json({ 
+          error_code: "MISSING_JOB_ID",
+          error: "Parâmetro job_id obrigatório." 
+        });
       }
-      const job = getJob(jobId);
+
+      const job = await getJob(jobId);
       if (!job) {
-        return res.status(404).json({ error: "Job não encontrado ou expirado." });
+        return res.status(404).json({ 
+          error_code: "JOB_NOT_FOUND",
+          error: "Job não encontrado ou expirado.",
+          job_id_recebido: jobId,
+          storage: "supabase"
+        });
       }
 
       const now = Date.now();
@@ -1145,82 +1266,79 @@ module.exports = async function handler(req, res) {
           success: false,
           job_id: job.job_id,
           status: "cancelled",
+          error_code: "JOB_CANCELLED",
           message: "Job cancelado pelo usuário."
         });
       }
 
       // Checagem de Rate Limit Ativo (retry_after_at)
-      if (job.retry_after_at && now < job.retry_after_at) {
-        const waitSec = Math.ceil((job.retry_after_at - now) / 1000);
-        return res.status(200).json({
-          success: true,
-          job_id: job.job_id,
-          status: "waiting_rate_limit",
-          current_step: job.current_step,
-          current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Aguardando janela de API",
-          total_steps: job.total_steps,
-          progress_percent: Math.round(((job.completed_steps || []).length / job.total_steps) * 100),
-          estimated_remaining_seconds: waitSec + 5,
-          elapsed_step_ms: now - (job.lock_timestamp || now),
-          last_updated: job.updated_at,
-          message: `Limite de taxa da Groq ativo. Aguardando liberação (${waitSec}s restantes)...`
-        });
+      if (job.retry_after_at) {
+        const retryTime = new Date(job.retry_after_at).getTime();
+        if (now < retryTime) {
+          const waitSec = Math.ceil((retryTime - now) / 1000);
+          return res.status(200).json({
+            success: true,
+            job_id: job.job_id,
+            status: "waiting_rate_limit",
+            current_step: job.current_step,
+            current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Aguardando janela de API",
+            total_steps: job.total_steps,
+            progress_percent: Math.round(((job.completed_steps || []).length / job.total_steps) * 100),
+            estimated_remaining_seconds: waitSec + 5,
+            elapsed_step_ms: now - (job.lock_timestamp ? new Date(job.lock_timestamp).getTime() : now),
+            last_updated: job.updated_at,
+            message: `Limite de taxa da Groq ativo. Aguardando liberação (${waitSec}s restantes)...`
+          });
+        }
       }
 
-      // Auto-Recovery de Lock Expirado (> 25 segundos)
-      if (job.is_processing && (now - (job.lock_timestamp || 0)) > 25000) {
-        console.warn(`[LOCK RECOVERY] Job ${job.job_id} estava travado há ${Math.round((now - job.lock_timestamp) / 1000)}s. Liberando lock para nova tentativa...`);
-        job.is_processing = false;
-        job.lock_timestamp = 0;
-        job.timeouts.push({
-          step: (MODULE_DEFINITIONS[job.current_step] || {}).id,
-          reason: "LOCK_EXPIRED",
-          timestamp: new Date().toISOString()
-        });
-      }
+      // Tentativa de Aquisição de Lock Atômico para Executar a Etapa
+      const lockResult = await acquireJobLock(jobId);
+      if (!lockResult.acquired) {
+        // Outra requisição está processando a etapa no momento
+        const currentLockJob = lockResult.job || job;
+        const stepDef = MODULE_DEFINITIONS[currentLockJob.current_step] || {};
+        const lockMs = currentLockJob.lock_timestamp ? new Date(currentLockJob.lock_timestamp).getTime() : now;
+        const stepElapsed = now - lockMs;
 
-      // Concurrency Lock Check (Anti-colisão de requisições paralelas enquanto a etapa roda)
-      if (job.is_processing && (now - (job.lock_timestamp || 0)) <= 25000) {
-        const stepDef = MODULE_DEFINITIONS[job.current_step] || {};
-        const stepElapsed = now - (job.lock_timestamp || now);
         return res.status(200).json({
           success: true,
-          job_id: job.job_id,
+          job_id: currentLockJob.job_id,
           status: "running",
-          current_step: job.current_step,
+          current_step: currentLockJob.current_step,
           current_module_label: stepDef.label || "Processando análise",
-          total_steps: job.total_steps,
-          progress_percent: Math.round(((job.completed_steps || []).length / job.total_steps) * 100),
-          estimated_remaining_seconds: Math.max(3, (job.total_steps - (job.completed_steps || []).length) * 5),
+          total_steps: currentLockJob.total_steps,
+          progress_percent: Math.round(((currentLockJob.completed_steps || []).length / currentLockJob.total_steps) * 100),
+          estimated_remaining_seconds: Math.max(3, (currentLockJob.total_steps - (currentLockJob.completed_steps || []).length) * 5),
           elapsed_step_ms: stepElapsed,
-          attempt: job.attempts_by_step[stepDef.id] || 1,
-          last_updated: job.updated_at,
+          attempt: (currentLockJob.attempts_by_step && currentLockJob.attempts_by_step[stepDef.id]) || 1,
+          last_updated: currentLockJob.updated_at,
           message: `Executando ${stepDef.label} (${Math.round(stepElapsed / 1000)}s decorridos)...`
         });
       }
 
-      // Executar EXATAMENTE UMA etapa pendente durante esta requisição de polling
-      if (job.current_step < MODULE_DEFINITIONS.length) {
-        const stepDef = MODULE_DEFINITIONS[job.current_step];
+      // Lock Adquirido com Sucesso: Executar EXATAMENTE UMA etapa
+      const activeJob = lockResult.job;
+      if (activeJob.current_step < MODULE_DEFINITIONS.length) {
+        const stepDef = MODULE_DEFINITIONS[activeJob.current_step];
         const stepStartTime = Date.now();
         
-        job.is_processing = true;
-        job.lock_timestamp = now;
-        job.status = "running";
-        job.attempts_by_step[stepDef.id] = (job.attempts_by_step[stepDef.id] || 0) + 1;
-        saveJob(job);
+        activeJob.status = "running";
+        activeJob.attempts_by_step = activeJob.attempts_by_step || {};
+        activeJob.attempts_by_step[stepDef.id] = (activeJob.attempts_by_step[stepDef.id] || 0) + 1;
+        await saveJob(activeJob);
 
         // ETAPA 0: SOURCE PREPARATION (CARREGAMENTO DAS FONTES OFICIAIS)
         if (stepDef.id === "source_preparation" || stepDef.isPreparationStep) {
           try {
-            console.log(`[STEP 0 START] Job ${job.job_id}: Carregando fontes oficiais...`);
+            console.log(`[STEP 0 START] Job ${activeJob.job_id}: Carregando fontes oficiais...`);
             const [supabaseRes, ibgeRes, culturalRes] = await Promise.all([
               loadSupabaseResearchData(),
               loadIbgeData(),
               loadCulturalMovements()
             ]);
 
-            job.context_snapshot = {
+            activeJob.context_snapshot = {
               totalN: supabaseRes.data.totalN,
               indicators: supabaseRes.data.indicators,
               verbatims: supabaseRes.data.verbatims.slice(0, 30),
@@ -1235,242 +1353,237 @@ module.exports = async function handler(req, res) {
               }
             };
 
-            job.performance.supabase_ms = supabaseRes.duration_ms;
-            job.performance.ibge_ms = ibgeRes.duration_ms;
-            job.performance.presentation_ms = culturalRes.duration_ms;
+            activeJob.performance = activeJob.performance || {};
+            activeJob.performance.supabase_ms = supabaseRes.duration_ms;
+            activeJob.performance.ibge_ms = ibgeRes.duration_ms;
+            activeJob.performance.presentation_ms = culturalRes.duration_ms;
 
-            job.step_metrics[stepDef.id] = {
+            activeJob.step_metrics = activeJob.step_metrics || {};
+            activeJob.step_metrics[stepDef.id] = {
               started_at: new Date(stepStartTime).toISOString(),
               finished_at: new Date().toISOString(),
               duration_ms: Date.now() - stepStartTime,
               input_chars: 0,
-              output_chars: JSON.stringify(job.context_snapshot).length,
+              output_chars: JSON.stringify(activeJob.context_snapshot).length,
               attempts: 1
             };
 
-            if (!job.completed_steps.includes(stepDef.id)) {
-              job.completed_steps.push(stepDef.id);
+            activeJob.completed_steps = activeJob.completed_steps || [];
+            if (!activeJob.completed_steps.includes(stepDef.id)) {
+              activeJob.completed_steps.push(stepDef.id);
             }
-            job.current_step = 1;
-            job.retry_count = 0;
-            job.is_processing = false;
-            job.lock_timestamp = 0;
-            job.message = "Fontes oficiais carregadas com sucesso. Avançando para a Tese Estratégica...";
-            saveJob(job);
+            activeJob.current_step = 1;
+            activeJob.message = "Fontes oficiais carregadas com sucesso. Avançando para a Tese Estratégica...";
 
-            console.log(`[STEP 0 COMPLETED] Job ${job.job_id} avançou para Step 1 em ${Date.now() - stepStartTime}ms.`);
+            await releaseJobLock(activeJob);
+
+            console.log(`[STEP 0 COMPLETED] Job ${activeJob.job_id} avançou para Step 1 em ${Date.now() - stepStartTime}ms.`);
 
             return res.status(200).json({
               success: true,
-              job_id: job.job_id,
+              job_id: activeJob.job_id,
               status: "running",
               current_step: 1,
               current_module_label: (MODULE_DEFINITIONS[1] || {}).label,
-              completed_steps: job.completed_steps,
+              completed_steps: activeJob.completed_steps,
               total_steps: MODULE_DEFINITIONS.length,
-              progress_percent: Math.round((job.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
+              progress_percent: Math.round((activeJob.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
               estimated_remaining_seconds: 20,
               elapsed_step_ms: Date.now() - stepStartTime,
               attempt: 1,
-              last_updated: job.updated_at,
-              message: job.message
+              last_updated: activeJob.updated_at,
+              message: activeJob.message
             });
 
           } catch (prepErr) {
-            job.is_processing = false;
-            job.lock_timestamp = 0;
-            job.status = "failed";
-            job.error_code = prepErr.error_code || (prepErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED");
-            job.message = `Falha ao preparar fontes oficiais: ${prepErr.message}`;
-            job.last_error = prepErr.message;
-            job.retryable = false;
-            saveJob(job);
+            console.error(`[STEP 0 ERROR] Job ${activeJob.job_id}:`, prepErr);
+            activeJob.status = "failed";
+            activeJob.error_code = prepErr.error_code || (prepErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED");
+            activeJob.message = `Falha ao preparar fontes oficiais: ${prepErr.message}`;
+            activeJob.last_error = prepErr.message;
+            activeJob.retryable = false;
+            await releaseJobLock(activeJob);
 
             return res.status(200).json({
               success: false,
-              job_id: job.job_id,
+              job_id: activeJob.job_id,
               status: "failed",
-              error_code: job.error_code,
-              message: job.message,
-              checked_paths: prepErr.checked_paths || [],
-              last_error: job.last_error,
-              last_updated: job.updated_at
+              error_code: activeJob.error_code,
+              message: activeJob.message,
+              last_error: activeJob.last_error,
+              last_updated: activeJob.updated_at
             });
           }
         }
 
-        // ETAPAS 1 A 4: EXECUÇÃO DOS MÓDULOS COM GROQ
+        // ETAPAS 1 A 4: CHAMADAS À GROQ
         try {
           if (!apiKey) {
-            throw new Error("GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.");
+            throw new Error("GROQ_NOT_CONFIGURED: Chave da API Groq ausente no servidor.");
           }
 
-          if (!job.context_snapshot) {
-            throw new Error("SNAPSHOT_MISSING: O snapshot de fontes oficiais não foi inicializado.");
+          if (!activeJob.context_snapshot) {
+            throw new Error("SNAPSHOT_MISSING: O snapshot de dados oficiais não foi inicializado.");
           }
 
-          const stepContext = buildStepContext(stepDef.id, job.context_snapshot, job);
-          const userPayloadStr = JSON.stringify(stepContext);
+          const stepContext = buildStepContext(stepDef.id, activeJob.context_snapshot, activeJob);
+          const stepPayloadStr = JSON.stringify({
+            analysisTarget: {
+              idea: activeJob.idea,
+              report_to_audit: activeJob.report_to_audit || null
+            },
+            analysisContext: stepContext
+          });
 
-          // Chamada à Groq com timeout de 25s
-          const groqResponse = await callGroqStep(
+          const groqResult = await callGroqStep(
             apiKey,
             stepDef.systemPrompt,
-            userPayloadStr,
+            stepPayloadStr,
             stepDef.maxTokens || 750,
             25000,
             stepDef.label
           );
 
-          const stepResult = groqResponse.result;
-          
-          // Validação estrutural e factual estrita
-          validateModuleResult(stepDef.id, stepResult, job.context_snapshot);
+          validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
 
-          job.partial_results[stepDef.id] = stepResult;
-          
-          const stepFinishedTime = Date.now();
-          job.step_metrics[stepDef.id] = {
+          activeJob.partial_results = activeJob.partial_results || {};
+          activeJob.partial_results[stepDef.id] = groqResult.result;
+          activeJob.completed_steps = activeJob.completed_steps || [];
+          if (!activeJob.completed_steps.includes(stepDef.id)) {
+            activeJob.completed_steps.push(stepDef.id);
+          }
+
+          activeJob.performance = activeJob.performance || {};
+          activeJob.performance.groq_ms_por_etapa = activeJob.performance.groq_ms_por_etapa || {};
+          activeJob.performance.groq_ms_por_etapa[stepDef.id] = groqResult.durationMs;
+
+          activeJob.step_metrics = activeJob.step_metrics || {};
+          activeJob.step_metrics[stepDef.id] = {
             started_at: new Date(stepStartTime).toISOString(),
-            finished_at: new Date(stepFinishedTime).toISOString(),
-            duration_ms: groqResponse.durationMs,
-            input_chars: groqResponse.inputChars,
-            output_chars: groqResponse.outputChars,
-            attempts: job.attempts_by_step[stepDef.id]
+            finished_at: new Date().toISOString(),
+            duration_ms: groqResult.durationMs,
+            input_chars: groqResult.inputChars,
+            output_chars: groqResult.outputChars,
+            attempts: activeJob.attempts_by_step[stepDef.id] || 1
           };
 
-          job.performance.groq_ms_por_etapa[stepDef.id] = groqResponse.durationMs;
-          
-          if (!job.completed_steps.includes(stepDef.id)) {
-            job.completed_steps.push(stepDef.id);
-          }
-          job.current_step++;
-          job.retry_count = 0;
-          job.retry_after_at = null;
-          job.is_processing = false;
-          job.lock_timestamp = 0;
+          activeJob.current_step += 1;
+          activeJob.last_error = null;
+          activeJob.retry_after_at = null;
 
-          if (job.completed_steps.length >= MODULE_DEFINITIONS.length) {
-            job.status = "completed";
-            job.performance.total_ms = Date.now() - new Date(job.created_at).getTime();
-            job.final_result = assembleFinalReport(job, job.context_snapshot);
-            job.progress_percent = 100;
-            job.estimated_remaining_seconds = 0;
-            job.message = "Relatório estratégico concluído com sucesso!";
+          // Se completou todas as etapas, montar relatório final
+          if (activeJob.current_step >= MODULE_DEFINITIONS.length) {
+            activeJob.performance.total_ms = Date.now() - new Date(activeJob.created_at).getTime();
+            activeJob.final_result = assembleFinalReport(activeJob, activeJob.context_snapshot);
+            activeJob.status = "completed";
+            activeJob.message = "Relatório estratégico concluído com sucesso!";
+            activeJob.finished_at = new Date().toISOString();
           } else {
-            job.status = "running";
-            job.progress_percent = Math.round((job.completed_steps.length / MODULE_DEFINITIONS.length) * 100);
-            job.estimated_remaining_seconds = Math.max(4, (MODULE_DEFINITIONS.length - job.completed_steps.length) * 5);
-            const nextStepDef = MODULE_DEFINITIONS[job.current_step] || {};
-            job.message = nextStepDef.message || `Avançando para ${nextStepDef.label}...`;
+            const nextStep = MODULE_DEFINITIONS[activeJob.current_step];
+            activeJob.message = `Etapa '${stepDef.label}' concluída com sucesso. Avançando para ${nextStep.label}...`;
           }
 
-          saveJob(job);
+          await releaseJobLock(activeJob);
 
           return res.status(200).json({
             success: true,
-            job_id: job.job_id,
-            status: job.status,
-            current_step: job.current_step,
-            current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Finalização",
-            completed_steps: job.completed_steps,
+            job_id: activeJob.job_id,
+            status: activeJob.status,
+            current_step: activeJob.current_step,
+            current_module_label: (MODULE_DEFINITIONS[activeJob.current_step] || {}).label || "Conclusão",
+            completed_steps: activeJob.completed_steps,
             total_steps: MODULE_DEFINITIONS.length,
-            progress_percent: job.progress_percent,
-            estimated_remaining_seconds: job.estimated_remaining_seconds,
-            elapsed_step_ms: Date.now() - stepStartTime,
-            attempt: job.attempts_by_step[stepDef.id] || 1,
-            last_updated: job.updated_at,
-            message: job.message
+            progress_percent: Math.round((activeJob.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
+            estimated_remaining_seconds: Math.max(0, (MODULE_DEFINITIONS.length - activeJob.completed_steps.length) * 5),
+            elapsed_step_ms: groqResult.durationMs,
+            attempt: activeJob.attempts_by_step[stepDef.id] || 1,
+            last_updated: activeJob.updated_at,
+            message: activeJob.message
           });
 
         } catch (err) {
-          job.is_processing = false;
-          job.lock_timestamp = 0;
-          
-          if (err.isTimeout) {
-            job.timeouts.push({
-              step: stepDef.id,
-              timestamp: new Date().toISOString(),
-              duration_ms: err.durationMs || 25000
-            });
-          }
+          console.error(`[STEP ERROR] Job ${activeJob.job_id} na etapa ${stepDef.id}:`, err);
+
+          const attemptCount = activeJob.attempts_by_step[stepDef.id] || 1;
 
           if (err.isQuotaExhausted) {
-            job.status = "failed";
-            job.error_code = "GROQ_QUOTA_EXHAUSTED";
-            job.message = "A cota disponível da Groq foi atingida. O relatório não pôde ser concluído.";
-            job.last_error = err.message;
-            job.retryable = false;
-            saveJob(job);
+            activeJob.status = "failed";
+            activeJob.error_code = "GROQ_QUOTA_EXHAUSTED";
+            activeJob.message = "A cota disponível da Groq foi atingida. O relatório não pôde ser concluído.";
+            activeJob.last_error = err.message;
+            activeJob.retryable = false;
           } else if (err.status === 429) {
             const waitSeconds = err.retryAfterSeconds || 8;
-            job.erros_429.push({
-              step: stepDef.id,
-              timestamp: new Date().toISOString(),
-              wait_seconds: waitSeconds
-            });
-            job.status = "waiting_rate_limit";
-            job.retry_after_at = Date.now() + (waitSeconds * 1000);
-            job.message = `Limite de taxa atingido. Aguardando liberação da janela Groq (${waitSeconds}s)...`;
-            job.last_error = err.message;
-            job.retryable = true;
-            saveJob(job);
+            activeJob.status = "waiting_rate_limit";
+            activeJob.retry_after_at = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
+            activeJob.message = `Limite de taxa atingido. Aguardando liberação da janela Groq (${waitSeconds}s)...`;
+            activeJob.last_error = err.message;
+            activeJob.retryable = true;
           } else {
-            job.retry_count = (job.retry_count || 0) + 1;
-            job.last_error = err.message;
-            if (job.retry_count > 2) {
-              job.status = "failed";
-              job.error_code = err.message.includes("INDICATOR_NOT_FOUND") ? "INDICATOR_NOT_FOUND" :
-                               err.message.includes("INVALID_GRAPH_SELECTION") ? "INVALID_GRAPH_SELECTION" :
-                               err.message.includes("VERBATIM_NOT_FOUND") ? "VERBATIM_NOT_FOUND" :
-                               err.message.includes("INVALID_MOVEMENT_WINNER") ? "INVALID_MOVEMENT_WINNER" :
-                               err.message.includes("GROQ_TIMEOUT") ? "GROQ_TIMEOUT" :
-                               "STEP_EXECUTION_FAILED";
-              job.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
-              job.retryable = true;
+            activeJob.last_error = err.message;
+            if (attemptCount >= 3) {
+              activeJob.status = "failed";
+              activeJob.error_code = err.message.includes("INDICATOR_NOT_FOUND") ? "INDICATOR_NOT_FOUND" :
+                                 err.message.includes("INVALID_GRAPH_SELECTION") ? "INVALID_GRAPH_SELECTION" :
+                                 err.message.includes("VERBATIM_NOT_FOUND") ? "VERBATIM_NOT_FOUND" :
+                                 err.message.includes("INVALID_MOVEMENT_WINNER") ? "INVALID_MOVEMENT_WINNER" :
+                                 err.message.includes("GROQ_TIMEOUT") ? "GROQ_TIMEOUT" :
+                                 "STEP_EXECUTION_FAILED";
+              activeJob.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
+              activeJob.retryable = true;
             } else {
-              job.message = `Tentativa ${job.retry_count}/3: Reexecutando ${stepDef.label}...`;
+              activeJob.message = `Tentativa ${attemptCount}/3: Reexecutando ${stepDef.label}...`;
             }
-            saveJob(job);
           }
 
+          await releaseJobLock(activeJob);
+
           return res.status(200).json({
-            success: job.status !== "failed",
-            job_id: job.job_id,
-            status: job.status,
-            current_step: job.current_step,
+            success: activeJob.status !== "failed",
+            job_id: activeJob.job_id,
+            status: activeJob.status,
+            error_code: activeJob.error_code,
+            current_step: activeJob.current_step,
             current_module_label: stepDef.label,
-            completed_steps: job.completed_steps || [],
+            completed_steps: activeJob.completed_steps || [],
             total_steps: MODULE_DEFINITIONS.length,
-            progress_percent: Math.round(((job.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
+            progress_percent: Math.round(((activeJob.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
             estimated_remaining_seconds: 20,
             elapsed_step_ms: Date.now() - stepStartTime,
-            attempt: job.attempts_by_step[stepDef.id] || 1,
-            last_error: job.last_error,
-            last_updated: job.updated_at,
-            message: job.message
+            attempt: attemptCount,
+            last_error: activeJob.last_error,
+            last_updated: activeJob.updated_at,
+            message: activeJob.message
           });
         }
       }
 
       return res.status(200).json({
         success: true,
-        job_id: job.job_id,
-        status: job.status,
-        current_step: job.current_step,
+        job_id: activeJob.job_id,
+        status: activeJob.status,
+        current_step: activeJob.current_step,
         total_steps: MODULE_DEFINITIONS.length,
-        message: job.message
+        message: activeJob.message
       });
     }
 
     // ROTA GET: Resultado do Job
     if (action === "result") {
       if (!jobId) {
-        return res.status(400).json({ error: "Parâmetro job_id obrigatório." });
+        return res.status(400).json({ 
+          error_code: "MISSING_JOB_ID",
+          error: "Parâmetro job_id obrigatório." 
+        });
       }
-      const job = getJob(jobId);
+      const job = await getJob(jobId);
       if (!job) {
-        return res.status(404).json({ error: "Job não encontrado." });
+        return res.status(404).json({ 
+          error_code: "JOB_NOT_FOUND",
+          error: "Job não encontrado.",
+          job_id_recebido: jobId,
+          storage: "supabase"
+        });
       }
       if (job.status !== "completed") {
         return res.status(400).json({ 
@@ -1492,15 +1605,19 @@ module.exports = async function handler(req, res) {
     // ROTA POST: Cancelamento de Job
     if (action === "cancel") {
       if (!jobId) {
-        return res.status(400).json({ error: "Parâmetro job_id obrigatório." });
+        return res.status(400).json({ 
+          error_code: "MISSING_JOB_ID",
+          error: "Parâmetro job_id obrigatório." 
+        });
       }
-      const job = getJob(jobId);
+      const job = await getJob(jobId);
       if (job) {
         job.status = "cancelled";
+        job.error_code = "JOB_CANCELLED";
         job.message = "Job cancelado pelo usuário.";
         job.is_processing = false;
-        job.lock_timestamp = 0;
-        saveJob(job);
+        job.lock_timestamp = null;
+        await saveJob(job);
       }
       return res.status(200).json({ success: true, message: "Job cancelado com sucesso." });
     }
@@ -1509,6 +1626,7 @@ module.exports = async function handler(req, res) {
 
   } catch (error) {
     return res.status(500).json({
+      error_code: "INTERNAL_SERVER_ERROR",
       error: "Erro interno no Servidor: " + error.message,
       details: error.stack || error.message
     });

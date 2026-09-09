@@ -7680,6 +7680,9 @@ window.handleConsultorSubmit = async function(e) {
         const statusData = await statusRes.json();
 
         if (!statusRes.ok) {
+          if (statusData.error_code === "JOB_NOT_FOUND" || statusRes.status === 404) {
+            throw new Error("A execução foi perdida no servidor. Inicie uma nova análise.");
+          }
           throw new Error(statusData.error || "Erro ao consultar status do job.");
         }
 
