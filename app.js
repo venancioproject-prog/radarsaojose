@@ -3844,51 +3844,8 @@ function calculateSjcRegionStats(dataMap, total, records, questionText) {
 function renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) {
   const stats = calculateSjcRegionStats(dataMap, total, records, questionText);
 
-  let html = '<div class="w-full flex flex-col justify-between h-full gap-3">';
+  let html = '<div class="w-full flex flex-col justify-between h-full">';
   
-  // Abas de Foco Regional no Topo do Mapa
-  html += '<div class="grid grid-cols-2 sm:grid-cols-5 gap-2 w-full">' +
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.198, -45.908], 13)" class="p-2 sm:p-2.5 rounded-xl bg-amber-50/90 hover:bg-amber-100 border border-amber-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
-      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
-        '<span class="text-[11px] sm:text-xs font-bold text-amber-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-amber-500 shrink-0"></span> Centro / Oeste</span>' +
-        '<span class="text-[11px] sm:text-xs font-black text-amber-800 shrink-0">' + stats.centroOeste.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-amber-700/90 truncate">Aquarius, Vila Ema, Centro</p>' +
-    '</button>' +
-
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.248, -45.892], 13)" class="p-2 sm:p-2.5 rounded-xl bg-blue-50/90 hover:bg-blue-100 border border-blue-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
-      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
-        '<span class="text-[11px] sm:text-xs font-bold text-blue-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-blue-500 shrink-0"></span> Zona Sul</span>' +
-        '<span class="text-[11px] sm:text-xs font-black text-blue-800 shrink-0">' + stats.sul.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-blue-700/90 truncate">Satélite, Bosque, Pq. Ind.</p>' +
-    '</button>' +
-
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.182, -45.815], 13)" class="p-2 sm:p-2.5 rounded-xl bg-cyan-50/90 hover:bg-cyan-100 border border-cyan-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
-      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
-        '<span class="text-[11px] sm:text-xs font-bold text-cyan-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-cyan-500 shrink-0"></span> Zona Leste</span>' +
-        '<span class="text-[11px] sm:text-xs font-black text-cyan-800 shrink-0">' + stats.leste.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-cyan-700/90 truncate">Vista Verde, Eugênio Melo</p>' +
-    '</button>' +
-
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.142, -45.905], 13)" class="p-2 sm:p-2.5 rounded-xl bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200/90 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0">' +
-      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
-        '<span class="text-[11px] sm:text-xs font-bold text-indigo-950 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-indigo-500 shrink-0"></span> Zona Norte</span>' +
-        '<span class="text-[11px] sm:text-xs font-black text-indigo-800 shrink-0">' + stats.norte.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-indigo-700/90 truncate">Santana, Altos Santana</p>' +
-    '</button>' +
-
-    '<button type="button" onclick="window.focusSjcRegion(\'' + mapContainerId + '\', [-23.208, -45.885], 11.5)" class="p-2 sm:p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 border border-slate-300 text-left transition-all hover:scale-[1.01] shadow-2xs group cursor-pointer flex flex-col justify-between min-w-0 col-span-2 sm:col-span-1">' +
-      '<div class="flex items-center justify-between gap-1 w-full mb-0.5">' +
-        '<span class="text-[11px] sm:text-xs font-bold text-slate-800 flex items-center gap-1.5 truncate"><span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-slate-500 shrink-0"></span> Todas</span>' +
-        '<span class="text-[11px] sm:text-xs font-black text-slate-700 shrink-0">' + stats.todas.pct + '%</span>' +
-      '</div>' +
-      '<p class="text-[10px] font-medium text-slate-500 truncate">Circulação Geral</p>' +
-    '</button>' +
-  '</div>';
-
   // Container do Mapa Leaflet com Filtro Preto & Branco
   html += '<div class="relative w-full rounded-2xl overflow-hidden border border-slate-200/90 shadow-inner bg-slate-900 min-h-[380px] sm:min-h-[420px]">' +
     '<div id="' + mapContainerId + '" class="w-full h-[380px] sm:h-[420px] z-0 sjc-bw-map"></div>' +
@@ -3946,19 +3903,21 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     className: 'sjc-bw-tiles'
   }).addTo(map);
 
-  // Helper para criar Marcadores com Efeito de Ondas Concêntricas (Pedrinha na Água / Radar)
-  function createWaveIcon(color, pct, emoji) {
+  // Helper para criar Marcadores com Nome da Região, Porcentagem e Efeito de Ondas Concêntricas (Radar)
+  function createWaveIcon(color, regionName, pct, emoji) {
     return L.divIcon({
       className: 'sjc-ripple-marker',
       html: `
         <div class="sjc-ripple-container" style="width:0; height:0;">
-          <!-- Ondas Concêntricas em Expansão -->
+          <!-- Ondas Concêntricas em Expansão Suave -->
           <div class="sjc-ripple-wave" style="border: 2px solid ${color}; background: ${color}20;"></div>
           <div class="sjc-ripple-wave sjc-ripple-wave-2" style="border: 2px solid ${color}; background: ${color}15;"></div>
           <div class="sjc-ripple-wave sjc-ripple-wave-3" style="border: 1.5px solid ${color}; background: ${color}10;"></div>
-          <!-- Badge Central com Rótulo e Porcentagem -->
-          <div style="position:relative; z-index:10; background:${color}; color:white; font-weight:900; font-size:11px; padding:3.5px 9px; border-radius:12px; border:2px solid white; box-shadow:0 3px 10px rgba(0,0,0,0.35); white-space:nowrap; transform:translate(-50%, -50%); display:flex; items-center; gap:3px;">
-            <span>${emoji}</span> <span>${pct}%</span>
+          <!-- Badge Central com Nome da Região e Porcentagem -->
+          <div style="position:relative; z-index:10; background:${color}; color:white; font-weight:800; font-size:11px; padding:4px 10px; border-radius:14px; border:2px solid white; box-shadow:0 4px 12px rgba(0,0,0,0.4); white-space:nowrap; transform:translate(-50%, -50%); display:flex; align-items:center; gap:5px; pointer-events:auto; cursor:pointer;">
+            <span>${emoji}</span>
+            <span style="font-weight:700; letter-spacing:-0.2px;">${regionName}</span>
+            <span style="font-weight:900; background:rgba(255,255,255,0.25); padding:1px 6px; border-radius:8px; margin-left:2px;">${pct}%</span>
           </div>
         </div>
       `,
@@ -3995,7 +3954,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     </div>
   `;
   centroOesteCore.bindPopup(centroOestePopup);
-  L.marker([-23.198, -45.908], { icon: createWaveIcon("#F59E0B", stats.centroOeste.pct, "🔥") }).addTo(map).bindPopup(centroOestePopup);
+  L.marker([-23.198, -45.908], { icon: createWaveIcon("#F59E0B", "Centro / Oeste", stats.centroOeste.pct, "🔥") }).addTo(map).bindPopup(centroOestePopup);
 
   // 2. Zona Sul
   L.circle([-23.248, -45.892], {
@@ -4026,7 +3985,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     </div>
   `;
   sulCore.bindPopup(sulPopup);
-  L.marker([-23.248, -45.892], { icon: createWaveIcon("#0284C7", stats.sul.pct, "📍") }).addTo(map).bindPopup(sulPopup);
+  L.marker([-23.248, -45.892], { icon: createWaveIcon("#0284C7", "Zona Sul", stats.sul.pct, "📍") }).addTo(map).bindPopup(sulPopup);
 
   // 3. Zona Leste
   L.circle([-23.182, -45.815], {
@@ -4057,7 +4016,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     </div>
   `;
   lesteCore.bindPopup(lestePopup);
-  L.marker([-23.182, -45.815], { icon: createWaveIcon("#06B6D4", stats.leste.pct, "📍") }).addTo(map).bindPopup(lestePopup);
+  L.marker([-23.182, -45.815], { icon: createWaveIcon("#06B6D4", "Zona Leste", stats.leste.pct, "📍") }).addTo(map).bindPopup(lestePopup);
 
   // 4. Zona Norte
   L.circle([-23.142, -45.905], {
@@ -4088,7 +4047,7 @@ function initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText
     </div>
   `;
   norteCore.bindPopup(nortePopup);
-  L.marker([-23.142, -45.905], { icon: createWaveIcon("#6366F1", stats.norte.pct, "📍") }).addTo(map).bindPopup(nortePopup);
+  L.marker([-23.142, -45.905], { icon: createWaveIcon("#6366F1", "Zona Norte", stats.norte.pct, "📍") }).addTo(map).bindPopup(nortePopup);
 
   setTimeout(() => {
     map.invalidateSize();
