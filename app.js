@@ -1011,8 +1011,8 @@ function processAndRenderDynamicCharts(records) {
   const remainingQuestions = questionList.filter(q => !mappedQuestions.has(q));
   if (remainingQuestions.length > 0) {
     categories.push({
-      title: "10. Demais Indicadores & Perguntas da Pesquisa",
-      subtitle: "Outras perguntas presentes na base de dados",
+      title: "10. Voz da População",
+      subtitle: "Sugestões abertas, aspirações e percepções espontâneas dos cidadãos joseenses",
       questions: remainingQuestions
     });
   }
@@ -1393,7 +1393,7 @@ function processAndRenderDynamicCharts(records) {
         qLower.includes("nao abordamos na pesquisa") ||
         qLower.includes("algo que queira falar")
       ) {
-        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+        cardEl.className = "bg-surface-card rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between col-span-1 md:col-span-2 lg:col-span-2";
         cardEl.innerHTML = '<div class="mb-3">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Nuvem de Palavras • Termos e Expressões Mais Mencionadas (Respostas Abertas)</p>' +
@@ -1629,7 +1629,11 @@ function processAndRenderDynamicCharts(records) {
         ? Math.max(300, Math.min(520, itemCount * 42)) 
         : 260;
 
-      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
+      // Perguntas de destaque que devem ocupar 2/3 da linha (ex: Notícias / Informação)
+      const isDominantWidthQuestion = /sabendo das|notícias|noticias|mais falta|o que falta/i.test(questionText);
+      const colSpanClass = isDominantWidthQuestion ? " col-span-1 md:col-span-2 lg:col-span-2" : "";
+
+      cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + colSpanClass;
       cardEl.innerHTML = '<div class="mb-2">' +
         '<div class="flex items-start justify-between gap-2 mb-1">' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words" title="' + displayTitle + '">' + displayTitle + '</h3>' +
@@ -1677,20 +1681,20 @@ function processAndRenderDynamicCharts(records) {
     // Card editorial fotográfico temático para preencher harmoniosamente o grid do Bloco 5 (Mídia, Músicas & Streamings)
     if (catIdx === 4) {
       const mediaPhotoCard = document.createElement("div");
-      mediaPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-2";
+      mediaPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-1 lg:col-span-1";
       mediaPhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_pessoas.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-brand-950/20"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-brand-950/30"></div>
         
-        <div class="relative z-10 space-y-2 max-w-xl">
+        <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/20 backdrop-blur-md border border-cyan-400/40 text-accent-cyan text-[11px] font-bold uppercase tracking-wider">
-            <i class="fa-solid fa-satellite-dish text-cyan-400"></i> Informação & Consumo Digital
+            <i class="fa-solid fa-satellite-dish text-cyan-400"></i> Informação & Digital
           </div>
-          <h3 class="text-lg sm:text-xl font-black text-white leading-snug">
-            Comunicação, Redes Sociais & Notícias em São José
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            Comunicação & Redes em SJC
           </h3>
-          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
-            O ecossistema de informação joseense é fortemente digital: as páginas de Instagram e portais locais lideram o consumo diário de notícias, enquanto serviços de streaming dominam as preferências de áudio e vídeo na cidade.
+          <p class="text-xs font-medium text-slate-200 leading-relaxed">
+            O consumo de notícias é fortemente digital: Instagram e portais lideram a informação local, enquanto streaming domina áudio e vídeo.
           </p>
         </div>
       `;
@@ -1789,23 +1793,23 @@ function processAndRenderDynamicCharts(records) {
       cardsGrid.appendChild(petPhotoCard);
     }
 
-    // Card editorial fotográfico para Bloco 10 (Demais Indicadores & Sugestões Abertas)
+    // Card editorial fotográfico para Bloco 10 (Voz da População)
     if (catIdx === 9) {
       const openFeedbackPhotoCard = document.createElement("div");
-      openFeedbackPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-2";
+      openFeedbackPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-1 lg:col-span-1";
       openFeedbackPhotoCard.innerHTML = `
         <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/photo_2.jpg');"></div>
-        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-brand-950/20"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-brand-950/30"></div>
         
-        <div class="relative z-10 space-y-2 max-w-xl">
+        <div class="relative z-10 space-y-2">
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/40 text-blue-300 text-[11px] font-bold uppercase tracking-wider">
-            <i class="fa-solid fa-comments text-blue-400"></i> Voz da População & Futuro
+            <i class="fa-solid fa-comments text-blue-400"></i> Voz da População
           </div>
-          <h3 class="text-lg sm:text-xl font-black text-white leading-snug">
-            A Voz dos Moradores de São José dos Campos
+          <h3 class="text-base sm:text-lg font-black text-white leading-snug">
+            A Voz dos Moradores de São José
           </h3>
-          <p class="text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
-            As respostas abertas e percepções espontâneas refletem o carinho e o espírito propositivo do cidadão joseense, oferecendo sugestões diretas de melhorias urbanas, culturais e sociais para o município.
+          <p class="text-xs font-medium text-slate-200 leading-relaxed">
+            As percepções espontâneas refletem o carinho e o espírito propositivo do cidadão, trazendo ideias para a cidade.
           </p>
         </div>
       `;
