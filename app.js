@@ -1610,6 +1610,7 @@ function processAndRenderDynamicCharts(records) {
       }
 
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
+      const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
       const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
       const itemCount = Object.keys(dataMap).length;
       const minContainerHeight = (chartTypeConfig.options && chartTypeConfig.options.horizontal && itemCount > 6) 
@@ -1627,8 +1628,14 @@ function processAndRenderDynamicCharts(records) {
 
       cardsGrid.appendChild(cardEl);
 
+      const chartOptions = {
+        ...(chartTypeConfig.options || {}),
+        totalBase: total,
+        isMultipleChoice: isMultipleChoice
+      };
+
       setTimeout(() => {
-        renderAdvancedChart(canvasId, chartTypeConfig.type, dataMap, chartTypeConfig.options);
+        renderAdvancedChart(canvasId, chartTypeConfig.type, dataMap, chartOptions);
       }, 0);
     });
 
@@ -6259,6 +6266,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
   const isLine = type === "line";
   const isHorizontal = options.horizontal === true;
   const totalSum = values.reduce((a, b) => a + b, 0);
+  const totalBase = (options.totalBase && options.totalBase > 0) ? options.totalBase : (options.isMultipleChoice ? (options.totalBase || totalSum) : totalSum);
 
   function wrapTextLines(text, maxChars = 22) {
     if (typeof text !== "string" || text.length <= maxChars) return text;
@@ -6291,6 +6299,20 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     "#8B5CF6", // Roxo Elétrico
     "#EC4899", // Magenta
     "#14B8A6"  // Teal
+  ];
+
+  // Paleta pastel elegante para barras horizontais (ex: carências / rankings de múltipla escolha)
+  const pastelBarPalette = [
+    "#6EE7B7", // Menta suave pastel
+    "#93C5FD", // Azul bebê pastel
+    "#A5B4FC", // Lavanda suave pastel
+    "#67E8F9", // Ciano pastel
+    "#FDE68A", // Âmbar / Amarelo pastel
+    "#FCA5A5", // Coral / Rosa pastel
+    "#C4B5FD", // Lilás pastel
+    "#FBCFE8", // Rosa blush pastel
+    "#A7F3D0", // Verde água pastel
+    "#BAE6FD"  // Sky pastel
   ];
 
   Chart.defaults.font.family = "'Montserrat', sans-serif";
@@ -6359,6 +6381,9 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     if (l === "não sei dizer" || l === "nao sei dizer" || l.includes("não sei") || l.includes("nao sei")) {
       return "#8B5CF6"; // Roxo / Violeta
     }
+    if (isHorizontal) {
+      return pastelBarPalette[idx % pastelBarPalette.length];
+    }
     return brandPalette[idx % brandPalette.length];
   });
 
@@ -6412,7 +6437,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           callbacks: {
             label: function(context) {
               const val = context.raw || 0;
-              const pct = totalSum > 0 ? ((val / totalSum) * 100).toFixed(1) : 0;
+              const pct = totalBase > 0 ? ((val / totalBase) * 100).toFixed(1) : 0;
               return " " + val + " respondentes (" + pct + "%)";
             }
           }
@@ -6428,7 +6453,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           font: { weight: 800, size: type === "doughnut" || type === "pie" ? 14 : 12 },
           formatter: function(value) {
             if (!value || value === 0) return "";
-            const pct = totalSum > 0 ? ((value / totalSum) * 100).toFixed(1) : 0;
+            const pct = totalBase > 0 ? ((value / totalBase) * 100).toFixed(1) : 0;
             // Sempre exibir porcentagem (%)
             if (type === "doughnut" || type === "pie") {
               return parseFloat(pct) >= 5 ? pct + "%" : "";
