@@ -3363,30 +3363,30 @@ function calculateFrequencyOutingStats(dataMap, total, records, questionText) {
 function renderFrequencyOutingDonutWidget(canvasId, dataMap, total, records, questionText) {
   const stats = calculateFrequencyOutingStats(dataMap, total, records, questionText);
 
-  let html = '<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center w-full h-full py-2">';
+  let html = '<div class="flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 w-full h-full py-1">';
   
-  // Coluna 1: Gráfico Donut com Centro Minimalista de Destaque
-  html += '<div class="lg:col-span-4 flex flex-col items-center justify-center relative min-h-[190px] sm:min-h-[210px]">' +
-    '<div class="relative w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] flex items-center justify-center">' +
-      '<canvas id="' + canvasId + '" class="w-full h-full"></canvas>' +
-      // Centro informativo da Rosca
-      '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">' +
+  // Coluna da Esquerda: Gráfico Donut com Centro Minimalista de Destaque
+  html += '<div class="w-full md:w-[45%] flex flex-col items-center justify-center relative shrink-0">' +
+    '<div class="relative w-[190px] h-[190px] sm:w-[210px] sm:h-[210px] flex items-center justify-center mx-auto">' +
+      '<canvas id="' + canvasId + '" class="w-full h-full block"></canvas>' +
+      // Centro informativo da Rosca perfeitamente centralizado
+      '<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center select-none">' +
         '<span class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-none">' + stats.dominant.pct + '%</span>' +
-        '<span class="text-xs font-semibold text-slate-500 mt-1">' + stats.dominant.shortTitle + '</span>' +
+        '<span class="text-[11px] sm:text-xs font-bold text-slate-500 mt-1 max-w-[100px] leading-tight">' + stats.dominant.shortTitle + '</span>' +
       '</div>' +
     '</div>' +
   '</div>';
 
-  // Coluna 2: Lista Limpa e Executiva de Categorias (Texto 100% visível, sem cortes)
-  html += '<div class="lg:col-span-8 flex flex-col justify-center gap-2.5 w-full">';
+  // Coluna da Direita: Lista Vertical Organizada de Cards de Legenda
+  html += '<div class="w-full md:w-[55%] flex flex-col justify-center gap-2.5 min-w-0">';
   stats.items.forEach(item => {
-    html += '<div class="bg-white hover:bg-slate-50/90 p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-3 min-w-0 w-full">' +
-      '<div class="flex items-center gap-3 min-w-0 flex-1">' +
-        '<span class="w-3.5 h-3.5 rounded-full flex-shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
+    html += '<div class="bg-white hover:bg-slate-50/90 px-3.5 py-2.5 sm:py-3 rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center justify-between gap-2.5 min-w-0 w-full">' +
+      '<div class="flex items-center gap-2.5 min-w-0 flex-1">' +
+        '<span class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full shrink-0 shadow-2xs" style="background:' + item.color + ';"></span>' +
         '<span class="text-xs sm:text-sm font-bold text-slate-800 leading-snug break-words">' + item.title + '</span>' +
       '</div>' +
-      '<div class="flex-shrink-0 pl-2">' +
-        '<span class="inline-flex items-center justify-center min-w-[62px] px-2.5 py-1 rounded-lg text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
+      '<div class="shrink-0 pl-1">' +
+        '<span class="inline-flex items-center justify-center min-w-[58px] px-2 py-1 rounded-xl text-xs sm:text-sm font-black tracking-tight" style="background:' + item.color + '15; color:' + item.color + '; border:1px solid ' + item.color + '35;">' +
           item.pct + '%' +
         '</span>' +
       '</div>' +
@@ -3421,16 +3421,16 @@ function initFrequencyOutingDonutChart(canvasId, dataMap, total, records, questi
         data: values,
         backgroundColor: bgColors,
         borderColor: "#FFFFFF",
-        borderWidth: 2.5,
-        borderRadius: 4,
+        borderWidth: 3,
+        borderRadius: 5,
         spacing: 2,
         hoverOffset: 6
       }]
     },
     options: {
-      cutout: "70%",
+      cutout: "72%",
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       layout: {
         padding: 4
       },
