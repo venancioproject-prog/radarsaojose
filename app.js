@@ -8065,17 +8065,17 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     }
   }
 
-  // Normalização do nome do movimento vencedor para manter estética oficial
+  // Normalização do nome do movimento conceitual (apresentado como hipótese estratégica a validar)
   if (!movimentosObj.veredicto_final.nome_movimento || movimentosObj.veredicto_final.nome_movimento.toLowerCase().includes("fit cultural")) {
     const rawJust = (movimentosObj.veredicto_final.justificativa_densa || "").toLowerCase();
     if (rawJust.includes("silêncio") || rawJust.includes("silencio")) {
-      movimentosObj.veredicto_final.nome_movimento = "A Geografia do Silêncio";
+      movimentosObj.veredicto_final.nome_movimento = "A Geografia do Silêncio (Hipótese)";
     } else if (rawJust.includes("prometida")) {
-      movimentosObj.veredicto_final.nome_movimento = "A Cidade Prometida";
+      movimentosObj.veredicto_final.nome_movimento = "A Cidade Prometida (Hipótese)";
     } else if (rawJust.includes("intuitivo") || rawJust.includes("empreendedorismo")) {
-      movimentosObj.veredicto_final.nome_movimento = "Empreendedorismo Intuitivo";
+      movimentosObj.veredicto_final.nome_movimento = "Empreendedorismo Intuitivo (Hipótese)";
     } else {
-      movimentosObj.veredicto_final.nome_movimento = "A Tribo Global";
+      movimentosObj.veredicto_final.nome_movimento = "Hipótese Conceitual de Segmentação (Exige Validação)";
     }
   }
 
@@ -9083,14 +9083,14 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         <div class="space-y-2 flex-1">
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-[10px] font-mono font-black uppercase tracking-widest text-purple-300">
-              MOVIMENTO VENCEDOR:
+              HIPÓTESE DE FIT CULTURAL (A VALIDAR):
             </span>
             <span class="text-xs sm:text-sm font-black uppercase text-amber-300 font-mono bg-amber-400/10 px-2.5 py-0.5 rounded-md border border-amber-400/30">
-              ${movimentosObj.veredicto_final?.nome_movimento || "A Tribo Global"}
+              ${movimentosObj.veredicto_final?.nome_movimento || "Hipótese Conceitual de Segmentação"}
             </span>
           </div>
           <div class="text-xs sm:text-[13px] text-slate-100 font-normal leading-relaxed text-justify">
-            ${formatMarkdown(movimentosObj.veredicto_final?.justificativa_densa || "Posicionamento prioritário para captura de margem e minimização do atrito moral em São José dos Campos.")}
+            ${formatMarkdown(movimentosObj.veredicto_final?.justificativa_densa || "A pesquisa quantitativa municipal mede frequência, renda e mobilidade geral, não estilos de vida isolados. A segmentação cultural deve ser tratada como hipótese e validada por pesquisa primária específica.")}
           </div>
         </div>
       </div>
