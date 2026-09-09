@@ -131,24 +131,113 @@
       opacity: 0.85;
       transform: scale(1);
     }
-    /* Estilo Preto & Branco Executivo para o Mapa de Regiões Frequentadas */
+
+    /* ================================================================
+       MAPAS DE GEOLOCALIZAÇÃO — ESTILOS EXECUTIVOS DE ALTO PADRÃO (UI/UX RADAR)
+    ================================================================ */
+
+    /* Filtro profissional de escala de cinza de alta definição no fundo do mapa */
     .sjc-bw-map .leaflet-tile-pane,
+    .sjc-bw-map .leaflet-tile,
+    .sjc-bw-map img.leaflet-tile,
     .sjc-bw-tiles {
-      filter: grayscale(100%) contrast(1.15) brightness(0.92) !important;
-      -webkit-filter: grayscale(100%) contrast(1.15) brightness(0.92) !important;
+      filter: grayscale(100%) contrast(1.15) brightness(0.95) !important;
+      -webkit-filter: grayscale(100%) contrast(1.15) brightness(0.95) !important;
     }
+
+    /* Tooltip dark elegante (ambos os mapas) */
     .sjc-map-tooltip {
-      background-color: rgba(15, 23, 42, 0.92) !important;
+      background-color: rgba(15, 23, 42, 0.94) !important;
       color: #FFFFFF !important;
       border: 1px solid rgba(255, 255, 255, 0.2) !important;
-      border-radius: 8px !important;
+      border-radius: 10px !important;
       font-family: 'Montserrat', sans-serif !important;
       font-size: 11px !important;
-      padding: 4px 8px !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+      font-weight: 700 !important;
+      padding: 6px 10px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.40) !important;
+      white-space: nowrap !important;
+      backdrop-filter: blur(8px) !important;
     }
     .sjc-map-tooltip::before {
-      border-top-color: rgba(15, 23, 42, 0.92) !important;
+      border-top-color: rgba(15, 23, 42, 0.94) !important;
+    }
+
+    /* ================================================================
+       ANIMAÇÃO DE RADAR / PULSO — Efeito dinâmico em tempo real
+    ================================================================ */
+    @keyframes sjcRadarPulse {
+      0% {
+        stroke-opacity: 0.85;
+        fill-opacity: 0.28;
+        stroke-width: 2px;
+      }
+      50% {
+        stroke-opacity: 0.20;
+        fill-opacity: 0.06;
+        stroke-width: 5px;
+      }
+      100% {
+        stroke-opacity: 0.85;
+        fill-opacity: 0.28;
+        stroke-width: 2px;
+      }
+    }
+
+    @keyframes sjcRadarExpand {
+      0% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.25;
+        transform: scale(1.16);
+      }
+      100% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes sjcBeaconRipple {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+
+    /* Aplica ao anel de halo (círculo externo) de regiões */
+    .sjc-radar-halo path {
+      animation: sjcRadarPulse 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    /* Aplica ao anel de halo de bairros (circleMarker) */
+    .sjc-bairro-bubble {
+      animation: sjcRadarExpand 3s ease-in-out infinite;
+    }
+
+    /* Estaggering de delay por zona para efeito de "ondas" assíncronas */
+    .sjc-halo-centro  path { animation-delay: 0.0s; }
+    .sjc-halo-sul     path { animation-delay: 0.7s; }
+    .sjc-halo-leste   path { animation-delay: 1.4s; }
+    .sjc-halo-norte   path { animation-delay: 2.1s; }
+
+    /* Marcador Radar com Pulso Vivo */
+    .sjc-radar-beacon {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sjc-radar-beacon-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      pointer-events: none;
+      animation: sjcBeaconRipple 2.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
     }
   </style>
 </head>
