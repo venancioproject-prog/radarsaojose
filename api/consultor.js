@@ -10,6 +10,13 @@ exports.config = {
   maxDuration: 60
 };
 
+// Modelo Oficial Homologado na Groq
+const GROQ_MODEL = "qwen/qwen3.6-27b";
+const configuredModel = process.env.GROQ_MODEL || "qwen/qwen3.6-27b";
+if (configuredModel !== "qwen/qwen3.6-27b") {
+  throw new Error("INVALID_GROQ_MODEL: A aplicação deve usar qwen/qwen3.6-27b.");
+}
+
 // Flags e Configurações
 const REQUIRE_PRESENTATION = String(process.env.REQUIRE_PRESENTATION || "true").toLowerCase() !== "false";
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
@@ -573,6 +580,7 @@ async function releaseJobLock(job, updates = {}) {
 // 5. CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 25S) E DIAGNÓSTICO
 async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 25000, stepLabel = "Etapa") {
   const startTime = Date.now();
+  console.log("[Groq] Modelo utilizado:", GROQ_MODEL);
   console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Timeout: ${timeoutMs / 1000}s)...`);
 
   const response = await fetchWithTimeout("https://api.groq.com/openai/v1/chat/completions", {
@@ -582,7 +590,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
+      model: GROQ_MODEL,
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPayloadStr }
@@ -604,6 +612,13 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
     errorObj.retryAfterSeconds = retryAfter ? parseInt(retryAfter, 10) : 8;
     errorObj.durationMs = durationMs;
     
+    // Detecção imediata de modelo inválido/descontinuado (400 ou 404)
+    if (response.status === 404 || (response.status === 400 && (errText.includes("model") || errText.includes("decommissioned") || errText.includes("not found")))) {
+      errorObj.isModelInvalid = true;
+      errorObj.error_code = "GROQ_MODEL_INVALID";
+      errorObj.model_used = GROQ_MODEL;
+    }
+
     if (response.status === 429 && (errText.includes("TPD") || errText.includes("Day") || errText.includes("quota"))) {
       errorObj.isQuotaExhausted = true;
     }
@@ -1453,7 +1468,13 @@ module.exports = async function handler(req, res) {
         } catch (err) {
           console.error(`[STEP ERROR] Job ${activeJob.job_id} na etapa ${stepDef.id}:`, err);
 
-          if (err.isQuotaExhausted) {
+          if (err.isModelInvalid) {
+            activeJob.status = "failed";
+            activeJob.error_code = "GROQ_MODEL_INVALID";
+            activeJob.message = `O modelo Groq configurado (${err.model_used}) é inválido ou foi descontinuado: ${err.message}`;
+            activeJob.last_error = err.message;
+            activeJob.retryable = false;
+          } else if (err.isQuotaExhausted) {
             activeJob.status = "failed";
             activeJob.error_code = "GROQ_QUOTA_EXHAUSTED";
             activeJob.message = "A cota disponível da Groq foi atingida. O relatório não pôde ser concluído.";
