@@ -1,5 +1,5 @@
 // API Consultor Estratégico - Radar SJC (Modelo: Qwen 3.6 27B)
-// Dados estritamente agregados (N=477) - Payload ultra-enxuto (< 2.000 tokens)
+// Configurado com max_tokens: 800 para conformidade estrita com limites OTPM da Groq
 
 const DATA_SUMMARY = {
   n: 477,
@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
       const lastUserMsg = [...body.messages].reverse().find(m => m && m.role === 'user' && m.content);
       inputContent = lastUserMsg ? lastUserMsg.content : body.messages[body.messages.length - 1].content;
     }
-    inputContent = String(inputContent || 'Consultoria de novos negócios em SJC').trim().slice(0, 4000);
+    inputContent = String(inputContent || 'Consultoria de novos negócios em SJC').trim().slice(0, 3000);
 
     const apiKey = (process.env.GROQ_API_KEY || '').trim();
     if (!apiKey) {
@@ -55,23 +55,23 @@ module.exports = async function handler(req, res) {
 Analise a ideia do usuário usando estritamente o resumo estatístico oficial (N=477):
 ${JSON.stringify(DATA_SUMMARY)}
 
-REGRAS CRÍTICAS:
+REGRAS:
 1. Fonte única de dados é o DATA_SUMMARY acima.
-2. Trate os movimentos culturais (Tribo Global, Cidade Prometida, Geografia do Silêncio, Empreendedorismo Intuitivo) e personas estritamente como HIPÓTESES ESTRATÉGICAS.
-3. Não altere front-end, layout ou elementos visuais.
+2. Trate movimentos culturais (Tribo Global, Cidade Prometida, Geografia do Silêncio, Empreendedorismo Intuitivo) e personas estritamente como HIPÓTESES ESTRATÉGICAS.
+3. Seja extremamente conciso na geração do JSON. Retorne apenas os dados essenciais e frases curtas e diretas, sem enrolação, para evitar estourar o limite de tokens de saída.
 4. Retorne a resposta estritamente em formato JSON válido. Não inclua nenhum texto adicional fora do JSON.
 
-JSON ESPERADO:
+JSON ESPERADO (CONCISO):
 {
-  "visao_estrategica_texto": "Texto denso e fluido com a tese central em **negrito**, abordando a dor real do consumidor de SJC.",
+  "visao_estrategica_texto": "Texto direto (40-60 palavras) com a tese central em **negrito** sobre a dor do consumidor em SJC.",
   "bairros": [
-    { "nome": "Jardim Aquarius", "regiao": "Centro-Oeste", "justificativa": "Fit com Centro-Oeste (41.7%) e alta renda (18.4%)..." },
-    { "nome": "Vila Ema", "regiao": "Centro-Oeste", "justificativa": "Fit com polo gastronômico e cultural..." },
-    { "nome": "Jardim Satélite", "regiao": "Zona Sul", "justificativa": "Fit com Zona Sul (28.3%)..." },
-    { "nome": "Vila Adyana", "regiao": "Centro-Oeste", "justificativa": "Fit com público maduro e serviços..." },
-    { "nome": "Urbanova", "regiao": "Centro-Oeste", "justificativa": "Fit com público familiar de alta renda..." }
+    { "nome": "Jardim Aquarius", "regiao": "Centro-Oeste", "justificativa": "Fit com Centro-Oeste (41.7%) e alta renda (18.4%)." },
+    { "nome": "Vila Ema", "regiao": "Centro-Oeste", "justificativa": "Polo gastronômico e cultural." },
+    { "nome": "Jardim Satélite", "regiao": "Zona Sul", "justificativa": "Fit com densidade da Zona Sul (28.3%)." },
+    { "nome": "Vila Adyana", "regiao": "Centro-Oeste", "justificativa": "Público maduro e serviços." },
+    { "nome": "Urbanova", "regiao": "Centro-Oeste", "justificativa": "Público familiar de alto poder aquisitivo." }
   ],
-  "zona_exclusao": "REGIÃO - Análise dos riscos de ticket ou formato sem validação prévia.",
+  "zona_exclusao": "REGIÃO - Análise concisa dos riscos de ticket ou formato.",
   "swot": {
     "forcas": ["Força 1", "Força 2", "Força 3"],
     "fraquezas": ["Gargalo 1", "Gargalo 2", "Gargalo 3"],
@@ -85,10 +85,10 @@ JSON ESPERADO:
     "ishikawa": {
       "problema_central": "Risco de Baixa Retenção do Consumidor Local em SJC",
       "causas": [
-        { "categoria": "Pessoas", "descricao": "Falta de hospitalidade e treinamento." },
-        { "categoria": "Ambiente", "descricao": "Sensação de mesmice noturna." },
-        { "categoria": "Processos", "descricao": "Atritos de conveniência e mobilidade." },
-        { "categoria": "Produto", "descricao": "Preço alto sem valor percebido correspondente." }
+        { "categoria": "Pessoas", "descricao": "Falta de hospitalidade." },
+        { "categoria": "Ambiente", "descricao": "Sensação de mesmice." },
+        { "categoria": "Processos", "descricao": "Atritos de conveniência." },
+        { "categoria": "Produto", "descricao": "Preço sem valor percebido." }
       ]
     }
   },
@@ -121,24 +121,24 @@ JSON ESPERADO:
   },
   "movimentos_culturais": {
     "analise_cards": {
-      "geografia_silencio": "Hipótese sobre o público de refúgio (Urbanova/Adyana).",
+      "geografia_silencio": "Hipótese sobre público de refúgio (Urbanova/Adyana).",
       "cidade_prometida": "Hipótese sobre famílias tradicionais (Zona Sul/Colinas).",
       "tribo_global": "Hipótese sobre público cosmopolita (Aquarius/Vila Ema).",
       "empreendedorismo_intuitivo": "Hipótese sobre economia real de bairro."
     },
     "veredicto_final": {
       "nome_movimento": "A Tribo Global",
-      "justificativa_densa": "[HIPÓTESE ESTRATÉGICA A VALIDAR] Explicação analítica do fit da proposta com o público de SJC."
+      "justificativa_densa": "[HIPÓTESE ESTRATÉGICA A VALIDAR] Explicação concisa do fit da proposta com SJC."
     }
   }
 }`;
 
     const userPromptText = JSON.stringify({
       ideia_negocio: inputContent,
-      instrucao: "Retorne a resposta estritamente em formato JSON válido."
+      instrucao: "Retorne a resposta estritamente em formato JSON válido com respostas concisas."
     });
 
-    // TRAVADO EXCLUSIVAMENTE NA LINHA QWEN (SEM LLAMA LEGADO)
+    // Modelo Qwen configurado com max_tokens: 800 para evitar erro 429
     const qwenModels = [
       'qwen/qwen3.6-27b',
       'qwen/qwen3.8-27b'
@@ -152,7 +152,7 @@ JSON ESPERADO:
       try {
         const payload = {
           model: model,
-          max_tokens: 3000,
+          max_tokens: 800,
           temperature: 0.2,
           response_format: { type: "json_object" },
           messages: [
