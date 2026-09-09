@@ -684,9 +684,11 @@ function populateAllSidebarFilters(records) {
 
     const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
     if (qua) {
-      const m = String(qua).match(/([1-5])/);
-      if (m) qualities.add("Nota " + m[1]);
-      else qualities.add(qua);
+      const trimmed = String(qua).trim();
+      const m = trimmed.match(/^([1-5])$/) || trimmed.match(/nota\s*([1-5])/i) || trimmed.match(/\b([1-5])\b/);
+      if (m && parseInt(m[1], 10) >= 1 && parseInt(m[1], 10) <= 5) {
+        qualities.add("Nota " + m[1]);
+      }
     }
     const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
     if (pri) prides.add(pri);
