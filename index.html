@@ -78,19 +78,17 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <style>
-    *, *::before, *::after, html, body, input, button, select, textarea, p, h1, h2, h3, h4, h5, h6, span:not(.fa):not(.fas):not(.far):not(.fal):not(.fad):not(.fab):not([class*="fa-"]), a, label, table, th, td, div {
-      font-family: 'Montserrat', sans-serif !important;
-    }
-    .fa, .fas, .far, .fal, .fad, .fab, [class*="fa-"], [class^="fa-"] {
-      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
+    html, body {
       font-family: 'Montserrat', sans-serif !important;
       background-color: #F8FAFC;
       color: #1E293B;
+      scroll-behavior: smooth;
+    }
+    input, button, select, textarea, p, h1, h2, h3, h4, h5, h6, label, table, th, td {
+      font-family: 'Montserrat', sans-serif !important;
+    }
+    i.fa, i.fas, i.far, i.fal, i.fad, i.fab, i[class*="fa-"], [class*="fa-"] {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
     }
     .view-transition {
       transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
