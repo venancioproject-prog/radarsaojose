@@ -5745,20 +5745,6 @@ window.openWordQuotesModal = function(word, cloudKey) {
         </button>
       </div>
 
-      <!-- Barra de Pesquisa Rápida no Modal -->
-      <div class="px-5 sm:px-6 py-3 bg-slate-50/80 border-b border-slate-100 flex items-center gap-2 shrink-0">
-        <div class="relative flex-1">
-          <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 text-xs"></i>
-          <input 
-            type="text" 
-            id="word-modal-search-input" 
-            placeholder="Filtrar por texto, bairro ou perfil..." 
-            oninput="window.filterModalWordQuotes(this.value)" 
-            class="w-full pl-9 pr-4 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all font-medium text-slate-800 placeholder-slate-400 shadow-xs"
-          />
-        </div>
-      </div>
-
       <!-- Lista de Respostas / Depoimentos -->
       <div id="word-modal-quotes-list" class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3 custom-card-scroll bg-slate-50/40">
         ${renderModalQuotesListHTML(uniqueQuotes, word)}
