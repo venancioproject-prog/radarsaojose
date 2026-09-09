@@ -6171,17 +6171,17 @@ function renderTreemapWidget(dataMap, total, records, questionText) {
       '</div>';
     }
 
-    return '<div class="' + cardBg + ' rounded-2xl p-4 sm:p-4.5 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[96px] h-full">' +
-      '<div class="flex items-center gap-3 min-w-0 mb-2 pl-1">' +
-        '<div class="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl ' + iconBg + ' flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">' +
+    return '<div class="' + cardBg + ' rounded-2xl p-3 sm:p-3.5 shadow-xs hover:shadow-md border ' + borderClass + ' flex flex-col justify-between transition-all duration-300 min-h-[92px] h-full overflow-hidden">' +
+      '<div class="flex items-center gap-2.5 min-w-0 mb-1.5">' +
+        '<div class="w-7 h-7 sm:w-7.5 sm:h-7.5 rounded-lg ' + iconBg + ' flex items-center justify-center text-xs flex-shrink-0 shadow-2xs">' +
           '<i class="' + iconClass + '"></i>' +
         '</div>' +
         '<div class="min-w-0 flex-1">' +
-          '<h4 class="text-xs sm:text-sm font-bold leading-snug break-normal whitespace-normal ' + textColor + '" title="' + label + '">' + label + '</h4>' +
+          '<h4 class="text-xs sm:text-sm font-bold leading-tight break-words ' + textColor + '" title="' + label + '">' + label + '</h4>' +
         '</div>' +
       '</div>' +
-      '<div class="flex items-center justify-end pt-2 border-t border-black/5">' +
-        '<div class="px-3 py-1 rounded-xl ' + badgeBg + ' font-black text-base sm:text-lg border shadow-2xs tracking-tight leading-none">' +
+      '<div class="flex items-center justify-end pt-1.5 border-t border-black/5">' +
+        '<div class="px-2.5 py-1 rounded-xl ' + badgeBg + ' font-black text-sm sm:text-base border shadow-2xs tracking-tight leading-none">' +
           pct + '%' +
         '</div>' +
       '</div>' +

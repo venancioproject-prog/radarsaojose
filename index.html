@@ -78,8 +78,11 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <style>
-    *, *::before, *::after, html, body, input, button, select, textarea, p, h1, h2, h3, h4, h5, h6, span, a, label, table, th, td, div {
+    *, *::before, *::after, html, body, input, button, select, textarea, p, h1, h2, h3, h4, h5, h6, span:not(.fa):not(.fas):not(.far):not(.fal):not(.fad):not(.fab):not([class*="fa-"]), a, label, table, th, td, div {
       font-family: 'Montserrat', sans-serif !important;
+    }
+    .fa, .fas, .far, .fal, .fad, .fab, [class*="fa-"], [class^="fa-"] {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands", "FontAwesome" !important;
     }
     html {
       scroll-behavior: smooth;
