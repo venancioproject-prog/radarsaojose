@@ -1550,12 +1550,17 @@ module.exports = async function handler(req, res) {
             activeJob.last_error = err.message;
             if (currentAttemptNumber >= 3) {
               activeJob.status = "failed";
-              activeJob.error_code = err.message.includes("INDICATOR_NOT_FOUND") ? "INDICATOR_NOT_FOUND" :
+              activeJob.error_code = err.error_code || (
+                                 err.message.includes("INDICATOR_NOT_FOUND") ? "INDICATOR_NOT_FOUND" :
                                  err.message.includes("INVALID_GRAPH_SELECTION") ? "INVALID_GRAPH_SELECTION" :
                                  err.message.includes("VERBATIM_NOT_FOUND") ? "VERBATIM_NOT_FOUND" :
                                  err.message.includes("INVALID_MOVEMENT_WINNER") ? "INVALID_MOVEMENT_WINNER" :
                                  err.message.includes("GROQ_TIMEOUT") ? "GROQ_TIMEOUT" :
-                                 "STEP_EXECUTION_FAILED";
+                                 err.message.includes("json_validate_failed") ? "GROQ_JSON_VALIDATE_FAILED" :
+                                 err.message.includes("GROQ_INVALID_JSON") ? "GROQ_INVALID_JSON" :
+                                 err.message.includes("GROQ_EMPTY_GENERATION") ? "GROQ_EMPTY_GENERATION" :
+                                 "STEP_EXECUTION_FAILED"
+                              );
               activeJob.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
               activeJob.retryable = true;
             } else {
