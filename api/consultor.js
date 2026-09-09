@@ -1,9 +1,14 @@
-// API Consultor Estratégico - Arquitetura Instant-Start e Step-Driven Completa
-// POST Imediato (< 50ms) + Step 0: Source Preparation + Timeouts Estritos com AbortController
+// API Consultor Estratégico - Arquitetura de Alta Disponibilidade Serverless
+// Instant Start (< 50ms), Auto-Recovery de Lock Expirado, Timeouts Estritos e Diagnóstico Transparente
 
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+
+// Exportação explícita de configuração para runtime Vercel Serverless
+exports.config = {
+  maxDuration: 60
+};
 
 // Configuração e Flag de Rigor
 const REQUIRE_PRESENTATION = String(process.env.REQUIRE_PRESENTATION || "true").toLowerCase() !== "false";
@@ -13,19 +18,23 @@ const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.s
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 const TABLE_NAME = "respostas_pesquisa";
 
-// Helper de Fetch Seguro com AbortController e Timeout
-async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
+// Helper de Fetch Seguro com AbortController e Timeout Real
+async function fetchWithTimeout(url, options = {}, timeoutMs = 25000, contextLabel = "API Call") {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  const timer = setTimeout(() => {
+    console.warn(`[TIMEOUT TRIGGERED] ${contextLabel} excedeu ${timeoutMs / 1000}s. Abortando...`);
+    controller.abort();
+  }, timeoutMs);
 
   try {
-    return await fetch(url, {
+    const res = await fetch(url, {
       ...options,
       signal: controller.signal
     });
+    return res;
   } catch (err) {
-    if (err.name === 'AbortError') {
-      const timeoutErr = new Error(`NETWORK_TIMEOUT: A requisição para ${url.slice(0, 40)}... excedeu o limite de ${timeoutMs / 1000}s.`);
+    if (err.name === 'AbortError' || err.message?.includes('aborted')) {
+      const timeoutErr = new Error(`GROQ_TIMEOUT: A chamada para ${contextLabel} excedeu o limite de ${timeoutMs / 1000}s.`);
       timeoutErr.isTimeout = true;
       timeoutErr.timeoutMs = timeoutMs;
       throw timeoutErr;
@@ -36,7 +45,7 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
   }
 }
 
-// Candidatos de Caminho da Apresentação Oficial (Compatibilidade com Vercel Lambda e Local)
+// Candidatos de Caminho da Apresentação Oficial
 const PRESENTATION_CANDIDATES = [
   path.join(__dirname, 'data', 'apresentacao-final.txt'),
   path.join(__dirname, '..', 'data', 'apresentacao-final.txt'),
@@ -106,12 +115,13 @@ async function loadSupabaseResearchData() {
   const selectQuery = encodeURIComponent(RELEVANT_COLUMNS.map(c => `"${c}"`).join(','));
   const endpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=${selectQuery}&limit=1000`;
 
+  console.log('[SUPABASE FETCH] Iniciando consulta Supabase com timeout de 15s...');
   const response = await fetchWithTimeout(endpoint, {
     headers: {
       "apikey": SUPABASE_ANON_KEY,
       "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
     }
-  }, 15000);
+  }, 15000, "Supabase REST");
 
   if (!response.ok) {
     const errText = await response.text();
@@ -287,6 +297,8 @@ async function loadSupabaseResearchData() {
   };
   lastSupabaseFetch = now;
 
+  console.log(`[SUPABASE SUCCESS] Carregados ${totalN} registros em ${Date.now() - startTime}ms.`);
+
   return {
     data: cachedSupabaseData,
     duration_ms: Date.now() - startTime,
@@ -448,9 +460,10 @@ function saveJob(job) {
   } catch (err) {}
 }
 
-// 5. CHAMADA À GROQ COM ABORTCONTROLLER (45S), TEMPERATURA 0.6 E TRATAMENTO DE ERROS
-async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 45000) {
+// 5. CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 25S) E DIAGNÓSTICO
+async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 25000, stepLabel = "Etapa") {
   const startTime = Date.now();
+  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Timeout: ${timeoutMs / 1000}s)...`);
 
   const response = await fetchWithTimeout("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -468,9 +481,10 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
       max_tokens: maxTokens,
       response_format: { type: "json_object" }
     })
-  }, timeoutMs);
+  }, timeoutMs, `Groq API (${stepLabel})`);
 
   const durationMs = Date.now() - startTime;
+  console.log(`[GROQ RESPONSE] ${stepLabel} respondeu em ${durationMs}ms com HTTP ${response.status}.`);
 
   if (!response.ok) {
     const errText = await response.text();
@@ -593,7 +607,7 @@ function buildStepContext(stepId, snapshot, job) {
   }
 }
 
-// 7. DEFINIÇÕES DOS 5 MÓDULOS STEP-DRIVEN (INCLUINDO STEP 0: SOURCE PREPARATION)
+// 7. DEFINIÇÕES DOS 5 MÓDULOS STEP-DRIVEN
 const MODULE_DEFINITIONS = [
   {
     stepIndex: 0,
@@ -790,7 +804,7 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
   }
 ];
 
-// 8. VALIDAÇÃO ESTRITA DE CADA MÓDULO (REJEITA DADOS INVÁLIDOS SEM FALLBACK SILENCIOSO)
+// 8. VALIDAÇÃO ESTRITA DE CADA MÓDULO
 function validateModuleResult(stepId, result, snapshot) {
   if (!result || typeof result !== 'object' || Object.keys(result).length === 0) {
     throw new Error(`MODULE_EMPTY_RESULT: O módulo ${stepId} retornou um objeto vazio.`);
@@ -870,7 +884,6 @@ function assembleFinalReport(job, snapshot) {
 
   const ideaText = job.idea || "Negócio em São José dos Campos";
 
-  // Montagem Dinâmica e Estrita dos 3 Gráficos Selecionados do Supabase
   const graficosAnaliticosMontados = (mod3.graficos_selecionados || []).map(sel => {
     const ind = snapshot.indicators[sel.indicador_id];
     return {
@@ -888,7 +901,6 @@ function assembleFinalReport(job, snapshot) {
     };
   });
 
-  // Montagem Dinâmica e Estrita das Verbalizações Reais do Supabase
   const verbalizacoesList = (mod4.verbalizacoes_selecionadas || []).map(sel => {
     const foundInDb = snapshot.verbatims.find(v => 
       v.id === sel.id || 
@@ -908,7 +920,6 @@ function assembleFinalReport(job, snapshot) {
     };
   });
 
-  // Normalização de SWOT
   const swotClean = {
     forcas: (mod2.swot?.forcas || []).map(f => typeof f === 'object' ? (f.texto || f.item) : f),
     fraquezas: (mod2.swot?.fraquezas || []).map(f => typeof f === 'object' ? (f.texto || f.item) : f),
@@ -916,7 +927,6 @@ function assembleFinalReport(job, snapshot) {
     ameacas: (mod2.swot?.ameacas || []).map(f => typeof f === 'object' ? (f.texto || f.item) : f)
   };
 
-  // Normalização de PESTEL
   const pestelClean = {
     P: typeof mod2.pestel?.P === 'object' ? `${mod2.pestel.P.fator} - ${mod2.pestel.P.decisao_recomendada}` : (mod2.pestel?.P || "Diretrizes e conformidade municipal."),
     E: typeof mod2.pestel?.E === 'object' ? `${mod2.pestel.E.fator} - ${mod2.pestel.E.decisao_recomendada}` : (mod2.pestel?.E || "Poder de compra e renda familiar de SJC."),
@@ -1047,7 +1057,7 @@ module.exports = async function handler(req, res) {
         job_id: newJobId,
         idea: combinedInput,
         report_to_audit: reportToAudit,
-        context_snapshot: null, // Será preenchido no Step 0 pelo polling
+        context_snapshot: null,
         status: "queued",
         current_step: 0,
         total_steps: MODULE_DEFINITIONS.length,
@@ -1097,6 +1107,8 @@ module.exports = async function handler(req, res) {
         return res.status(404).json({ error: "Job não encontrado ou expirado." });
       }
 
+      const now = Date.now();
+
       if (job.status === "completed") {
         return res.status(200).json({
           success: true,
@@ -1107,6 +1119,8 @@ module.exports = async function handler(req, res) {
           completed_steps: job.completed_steps || [],
           progress_percent: 100,
           estimated_remaining_seconds: 0,
+          elapsed_step_ms: 0,
+          last_updated: job.updated_at,
           message: "Relatório estratégico concluído com sucesso!"
         });
       }
@@ -1119,7 +1133,10 @@ module.exports = async function handler(req, res) {
           error_code: job.error_code || "EXECUTION_FAILED",
           message: job.message || "Ocorreu uma falha no processamento.",
           retryable: job.retryable || false,
-          completed_steps: job.completed_steps || []
+          current_step: job.current_step,
+          completed_steps: job.completed_steps || [],
+          last_error: job.last_error,
+          last_updated: job.updated_at
         });
       }
 
@@ -1133,7 +1150,6 @@ module.exports = async function handler(req, res) {
       }
 
       // Checagem de Rate Limit Ativo (retry_after_at)
-      const now = Date.now();
       if (job.retry_after_at && now < job.retry_after_at) {
         const waitSec = Math.ceil((job.retry_after_at - now) / 1000);
         return res.status(200).json({
@@ -1144,14 +1160,29 @@ module.exports = async function handler(req, res) {
           current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Aguardando janela de API",
           total_steps: job.total_steps,
           progress_percent: Math.round(((job.completed_steps || []).length / job.total_steps) * 100),
-          estimated_remaining_seconds: waitSec + 8,
+          estimated_remaining_seconds: waitSec + 5,
+          elapsed_step_ms: now - (job.lock_timestamp || now),
+          last_updated: job.updated_at,
           message: `Limite de taxa da Groq ativo. Aguardando liberação (${waitSec}s restantes)...`
         });
       }
 
-      // Concurrency Lock Check (Anti-colisão)
-      if (job.is_processing && (now - (job.lock_timestamp || 0)) < 30000) {
+      // Auto-Recovery de Lock Expirado (> 25 segundos)
+      if (job.is_processing && (now - (job.lock_timestamp || 0)) > 25000) {
+        console.warn(`[LOCK RECOVERY] Job ${job.job_id} estava travado há ${Math.round((now - job.lock_timestamp) / 1000)}s. Liberando lock para nova tentativa...`);
+        job.is_processing = false;
+        job.lock_timestamp = 0;
+        job.timeouts.push({
+          step: (MODULE_DEFINITIONS[job.current_step] || {}).id,
+          reason: "LOCK_EXPIRED",
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      // Concurrency Lock Check (Anti-colisão de requisições paralelas enquanto a etapa roda)
+      if (job.is_processing && (now - (job.lock_timestamp || 0)) <= 25000) {
         const stepDef = MODULE_DEFINITIONS[job.current_step] || {};
+        const stepElapsed = now - (job.lock_timestamp || now);
         return res.status(200).json({
           success: true,
           job_id: job.job_id,
@@ -1160,7 +1191,11 @@ module.exports = async function handler(req, res) {
           current_module_label: stepDef.label || "Processando análise",
           total_steps: job.total_steps,
           progress_percent: Math.round(((job.completed_steps || []).length / job.total_steps) * 100),
-          message: "Executando " + (stepDef.label || "etapa") + "..."
+          estimated_remaining_seconds: Math.max(3, (job.total_steps - (job.completed_steps || []).length) * 5),
+          elapsed_step_ms: stepElapsed,
+          attempt: job.attempts_by_step[stepDef.id] || 1,
+          last_updated: job.updated_at,
+          message: `Executando ${stepDef.label} (${Math.round(stepElapsed / 1000)}s decorridos)...`
         });
       }
 
@@ -1178,6 +1213,7 @@ module.exports = async function handler(req, res) {
         // ETAPA 0: SOURCE PREPARATION (CARREGAMENTO DAS FONTES OFICIAIS)
         if (stepDef.id === "source_preparation" || stepDef.isPreparationStep) {
           try {
+            console.log(`[STEP 0 START] Job ${job.job_id}: Carregando fontes oficiais...`);
             const [supabaseRes, ibgeRes, culturalRes] = await Promise.all([
               loadSupabaseResearchData(),
               loadIbgeData(),
@@ -1215,30 +1251,38 @@ module.exports = async function handler(req, res) {
             if (!job.completed_steps.includes(stepDef.id)) {
               job.completed_steps.push(stepDef.id);
             }
-            job.current_step++;
+            job.current_step = 1;
             job.retry_count = 0;
             job.is_processing = false;
+            job.lock_timestamp = 0;
             job.message = "Fontes oficiais carregadas com sucesso. Avançando para a Tese Estratégica...";
             saveJob(job);
+
+            console.log(`[STEP 0 COMPLETED] Job ${job.job_id} avançou para Step 1 em ${Date.now() - stepStartTime}ms.`);
 
             return res.status(200).json({
               success: true,
               job_id: job.job_id,
               status: "running",
-              current_step: job.current_step,
-              current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Tese Estratégica",
+              current_step: 1,
+              current_module_label: (MODULE_DEFINITIONS[1] || {}).label,
               completed_steps: job.completed_steps,
               total_steps: MODULE_DEFINITIONS.length,
               progress_percent: Math.round((job.completed_steps.length / MODULE_DEFINITIONS.length) * 100),
-              estimated_remaining_seconds: 24,
+              estimated_remaining_seconds: 20,
+              elapsed_step_ms: Date.now() - stepStartTime,
+              attempt: 1,
+              last_updated: job.updated_at,
               message: job.message
             });
 
           } catch (prepErr) {
             job.is_processing = false;
+            job.lock_timestamp = 0;
             job.status = "failed";
             job.error_code = prepErr.error_code || (prepErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED");
             job.message = `Falha ao preparar fontes oficiais: ${prepErr.message}`;
+            job.last_error = prepErr.message;
             job.retryable = false;
             saveJob(job);
 
@@ -1248,7 +1292,9 @@ module.exports = async function handler(req, res) {
               status: "failed",
               error_code: job.error_code,
               message: job.message,
-              checked_paths: prepErr.checked_paths || []
+              checked_paths: prepErr.checked_paths || [],
+              last_error: job.last_error,
+              last_updated: job.updated_at
             });
           }
         }
@@ -1256,24 +1302,24 @@ module.exports = async function handler(req, res) {
         // ETAPAS 1 A 4: EXECUÇÃO DOS MÓDULOS COM GROQ
         try {
           if (!apiKey) {
-            throw new Error("GROQ_API_KEY não configurada nas variáveis de ambiente.");
+            throw new Error("GROQ_API_KEY não configurada nas variáveis de ambiente da Vercel.");
           }
 
           if (!job.context_snapshot) {
             throw new Error("SNAPSHOT_MISSING: O snapshot de fontes oficiais não foi inicializado.");
           }
 
-          // Build Context específico e compacto para a etapa
           const stepContext = buildStepContext(stepDef.id, job.context_snapshot, job);
           const userPayloadStr = JSON.stringify(stepContext);
 
-          // Chamada única à Groq com AbortController e cap ajustado
+          // Chamada à Groq com timeout de 25s
           const groqResponse = await callGroqStep(
             apiKey,
             stepDef.systemPrompt,
             userPayloadStr,
             stepDef.maxTokens || 750,
-            45000
+            25000,
+            stepDef.label
           );
 
           const stepResult = groqResponse.result;
@@ -1283,7 +1329,6 @@ module.exports = async function handler(req, res) {
 
           job.partial_results[stepDef.id] = stepResult;
           
-          // Registro de métricas da etapa
           const stepFinishedTime = Date.now();
           job.step_metrics[stepDef.id] = {
             started_at: new Date(stepStartTime).toISOString(),
@@ -1302,6 +1347,8 @@ module.exports = async function handler(req, res) {
           job.current_step++;
           job.retry_count = 0;
           job.retry_after_at = null;
+          job.is_processing = false;
+          job.lock_timestamp = 0;
 
           if (job.completed_steps.length >= MODULE_DEFINITIONS.length) {
             job.status = "completed";
@@ -1313,22 +1360,38 @@ module.exports = async function handler(req, res) {
           } else {
             job.status = "running";
             job.progress_percent = Math.round((job.completed_steps.length / MODULE_DEFINITIONS.length) * 100);
-            job.estimated_remaining_seconds = Math.max(5, (MODULE_DEFINITIONS.length - job.completed_steps.length) * 6);
+            job.estimated_remaining_seconds = Math.max(4, (MODULE_DEFINITIONS.length - job.completed_steps.length) * 5);
             const nextStepDef = MODULE_DEFINITIONS[job.current_step] || {};
-            job.message = nextStepDef.message || "Avançando para a próxima etapa...";
+            job.message = nextStepDef.message || `Avançando para ${nextStepDef.label}...`;
           }
 
-          job.is_processing = false;
           saveJob(job);
+
+          return res.status(200).json({
+            success: true,
+            job_id: job.job_id,
+            status: job.status,
+            current_step: job.current_step,
+            current_module_label: (MODULE_DEFINITIONS[job.current_step] || {}).label || "Finalização",
+            completed_steps: job.completed_steps,
+            total_steps: MODULE_DEFINITIONS.length,
+            progress_percent: job.progress_percent,
+            estimated_remaining_seconds: job.estimated_remaining_seconds,
+            elapsed_step_ms: Date.now() - stepStartTime,
+            attempt: job.attempts_by_step[stepDef.id] || 1,
+            last_updated: job.updated_at,
+            message: job.message
+          });
 
         } catch (err) {
           job.is_processing = false;
+          job.lock_timestamp = 0;
           
           if (err.isTimeout) {
             job.timeouts.push({
               step: stepDef.id,
               timestamp: new Date().toISOString(),
-              duration_ms: err.durationMs || 45000
+              duration_ms: err.durationMs || 25000
             });
           }
 
@@ -1336,6 +1399,7 @@ module.exports = async function handler(req, res) {
             job.status = "failed";
             job.error_code = "GROQ_QUOTA_EXHAUSTED";
             job.message = "A cota disponível da Groq foi atingida. O relatório não pôde ser concluído.";
+            job.last_error = err.message;
             job.retryable = false;
             saveJob(job);
           } else if (err.status === 429) {
@@ -1348,6 +1412,7 @@ module.exports = async function handler(req, res) {
             job.status = "waiting_rate_limit";
             job.retry_after_at = Date.now() + (waitSeconds * 1000);
             job.message = `Limite de taxa atingido. Aguardando liberação da janela Groq (${waitSeconds}s)...`;
+            job.last_error = err.message;
             job.retryable = true;
             saveJob(job);
           } else {
@@ -1359,27 +1424,42 @@ module.exports = async function handler(req, res) {
                                err.message.includes("INVALID_GRAPH_SELECTION") ? "INVALID_GRAPH_SELECTION" :
                                err.message.includes("VERBATIM_NOT_FOUND") ? "VERBATIM_NOT_FOUND" :
                                err.message.includes("INVALID_MOVEMENT_WINNER") ? "INVALID_MOVEMENT_WINNER" :
+                               err.message.includes("GROQ_TIMEOUT") ? "GROQ_TIMEOUT" :
                                "STEP_EXECUTION_FAILED";
               job.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
               job.retryable = true;
+            } else {
+              job.message = `Tentativa ${job.retry_count}/3: Reexecutando ${stepDef.label}...`;
             }
             saveJob(job);
           }
+
+          return res.status(200).json({
+            success: job.status !== "failed",
+            job_id: job.job_id,
+            status: job.status,
+            current_step: job.current_step,
+            current_module_label: stepDef.label,
+            completed_steps: job.completed_steps || [],
+            total_steps: MODULE_DEFINITIONS.length,
+            progress_percent: Math.round(((job.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
+            estimated_remaining_seconds: 20,
+            elapsed_step_ms: Date.now() - stepStartTime,
+            attempt: job.attempts_by_step[stepDef.id] || 1,
+            last_error: job.last_error,
+            last_updated: job.updated_at,
+            message: job.message
+          });
         }
       }
 
-      const nextLabel = (MODULE_DEFINITIONS[job.current_step] || {}).label || "Finalização";
       return res.status(200).json({
-        success: job.status !== "failed",
+        success: true,
         job_id: job.job_id,
         status: job.status,
         current_step: job.current_step,
-        current_module_label: nextLabel,
-        completed_steps: job.completed_steps || [],
         total_steps: MODULE_DEFINITIONS.length,
-        progress_percent: Math.round(((job.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
-        estimated_remaining_seconds: job.status === "completed" ? 0 : Math.max(4, (MODULE_DEFINITIONS.length - (job.completed_steps || []).length) * 6),
-        message: job.message || "Etapa processada com sucesso."
+        message: job.message
       });
     }
 
@@ -1419,6 +1499,7 @@ module.exports = async function handler(req, res) {
         job.status = "cancelled";
         job.message = "Job cancelado pelo usuário.";
         job.is_processing = false;
+        job.lock_timestamp = 0;
         saveJob(job);
       }
       return res.status(200).json({ success: true, message: "Job cancelado com sucesso." });
