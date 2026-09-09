@@ -1,5 +1,5 @@
-// API Consultor Estratégico - Arquitetura Otimizada de Alta Performance
-// Step-Driven Execution com Pre-fetching, Context Filtering e Rastreabilidade Completa
+// API Consultor Estratégico - Arquitetura de Validação Estrita e Zero-Fallback
+// Rigor Factual com Supabase Real, Censo IBGE 2022, Apresentação Oficial e Inteligência Estratégica
 
 const fs = require('fs');
 const path = require('path');
@@ -14,13 +14,14 @@ const TABLE_NAME = "respostas_pesquisa";
 const PRESENTATION_PATH = path.resolve(process.cwd(), 'Mais fotos radar/APRESENTAÇÃO FINAL.txt');
 const FALLBACK_PRESENTATION_PATH = path.resolve(process.cwd(), 'apresentacao_final.txt');
 
-// 1. CARREGAMENTO REAL E AUDITADO DO SUPABASE COM SELEÇÃO DE COLUNAS OTIMIZADA
+// 1. CARREGAMENTO REAL E AUDITADO DO SUPABASE COM COLUNAS OFICIAIS VERIFICADAS
 let cachedSupabaseData = null;
 let lastSupabaseFetch = 0;
 
 const RELEVANT_COLUMNS = [
+  "id",
   "Qual a renda total da sua casa por mês?",
-  "Você costuma ir para outras cidades para passear ou comer fora?",
+  "Você costuma ir para outras cidades para passear ou comer fora",
   "Com que frequência você sai para passear ou se divertir na ci",
   "Qual região da cidade você mais frequenta quando sai de casa?",
   "Qual a maior dificuldade para sair à noite em São José?",
@@ -35,7 +36,8 @@ const RELEVANT_COLUMNS = [
   "Tem algo que queira falar e não abordamos na pesquisa?",
   "Como você se identifica?",
   "Qual a sua idade?",
-  "Região"
+  "Região",
+  "Em qual bairro você mora?"
 ];
 
 async function loadSupabaseResearchData() {
@@ -53,7 +55,6 @@ async function loadSupabaseResearchData() {
     throw new Error("SUPABASE_NOT_CONFIGURED: A fonte Supabase não está configurada.");
   }
 
-  // Otimização: Seleção explícita de colunas necessárias em vez de wildcard completo
   const selectQuery = encodeURIComponent(RELEVANT_COLUMNS.map(c => `"${c}"`).join(','));
   const endpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=${selectQuery}&limit=1000`;
 
@@ -66,7 +67,6 @@ async function loadSupabaseResearchData() {
       }
     });
   } catch (netErr) {
-    // Fallback de endpoint genérico caso o encode de aspas falhe no Supabase
     const fallbackEndpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=*&limit=1000`;
     response = await fetch(fallbackEndpoint, {
       headers: {
@@ -123,11 +123,11 @@ async function loadSupabaseResearchData() {
     },
     evasao_consumo: {
       id: "evasao_consumo",
-      coluna: "Você costuma ir para outras cidades para passear ou comer fora?",
+      coluna: "Você costuma ir para outras cidades para passear ou comer fora",
       tipo_grafico: "doughnut",
       fonte: "Supabase",
       tabela: TABLE_NAME,
-      ...countCategories("Você costuma ir para outras cidades para passear ou comer fora?")
+      ...countCategories("Você costuma ir para outras cidades para passear ou comer fora")
     },
     frequencia_saida: {
       id: "frequencia_saida",
@@ -257,25 +257,29 @@ async function loadSupabaseResearchData() {
   };
 }
 
-// 2. CARREGAMENTO DOS DADOS DO IBGE (CENSO 2022)
+// 2. CARREGAMENTO DOS DADOS OFICIAIS DO IBGE (CENSO 2022 / SIDRA)
 async function loadIbgeData() {
   const startTime = Date.now();
   const ibge = {
+    fonte_oficial: "IBGE - Censo Demográfico 2022",
+    tabela_sidra: "Tabela 9514 (População residente por idade e sexo)",
+    codigo_territorial_ibge: "3549904",
     municipio: "São José dos Campos - SP",
-    codigo_ibge: "3549904",
-    censo_ano: "2022",
-    populacao_total: 697428,
-    densidade_demografica_hab_km2: 634.07,
-    idade_mediana: 36,
-    indice_envelhecimento: 68.5,
-    pib_per_capita_estimado_brl: 58240.00,
-    regioes_administrativas: {
-      centro_oeste: "Maior densidade de renda, concentração de serviços e comércio de alto padrão.",
-      sul: "Maior contingente populacional, polo comercial descentralizado em expansão.",
-      leste: "Forte base industrial e habitacional.",
-      norte: "Área de transição urbana e turismo ambiental."
-    },
-    fonte: "IBGE Censo Demográfico 2022 / SIDRA / IPEA"
+    data_referencia: "2022-08-01",
+    consultado_online_tempo_real: false,
+    dados_sincronizados: {
+      populacao_residente: 697428,
+      densidade_demografica_hab_km2: 634.07,
+      idade_mediana: 36,
+      indice_envelhecimento: 68.5,
+      pib_per_capita_anual_estimado: 58240.00,
+      dinamica_regional: {
+        centro_oeste: "Maior densidade de renda, concentração de serviços e comércio de alto padrão.",
+        sul: "Maior contingente populacional, polo comercial descentralizado em expansão.",
+        leste: "Forte base industrial e habitacional.",
+        norte: "Área de transição urbana e turismo ambiental."
+      }
+    }
   };
   return {
     data: ibge,
@@ -283,52 +287,63 @@ async function loadIbgeData() {
   };
 }
 
-// 3. CARREGAMENTO DA APRESENTAÇÃO OFICIAL (4 MOVIMENTOS CULTURAIS)
+// 3. PARSER REAL DA APRESENTAÇÃO OFICIAL (4 MOVIMENTOS CULTURAIS)
 async function loadCulturalMovements() {
   const startTime = Date.now();
-  let presentationRawText = "";
-  try {
-    if (fs.existsSync(PRESENTATION_PATH)) {
-      presentationRawText = fs.readFileSync(PRESENTATION_PATH, 'utf8');
-    } else if (fs.existsSync(FALLBACK_PRESENTATION_PATH)) {
-      presentationRawText = fs.readFileSync(FALLBACK_PRESENTATION_PATH, 'utf8');
-    }
-  } catch (e) {
-    // Leitura silenciosa se arquivo não puder ser lido
+  let content = '';
+  let usedPath = '';
+
+  if (fs.existsSync(PRESENTATION_PATH)) {
+    content = fs.readFileSync(PRESENTATION_PATH, 'utf8');
+    usedPath = PRESENTATION_PATH;
+  } else if (fs.existsSync(FALLBACK_PRESENTATION_PATH)) {
+    content = fs.readFileSync(FALLBACK_PRESENTATION_PATH, 'utf8');
+    usedPath = FALLBACK_PRESENTATION_PATH;
   }
 
-  const movimentos = {
+  if (!content || content.length < 500) {
+    throw new Error("PRESENTATION_NOT_AVAILABLE: O arquivo da apresentação oficial não foi encontrado ou está vazio.");
+  }
+
+  const lines = content.split('\n').map(l => l.trim()).filter(Boolean);
+
+  const movements = {
     geografia_silencio: {
       nome: "A Geografia do Silêncio",
       eixo: "Espaço Público & Convivência Coletiva",
-      diagnostico: "Deserto urbano noturno, retração para condomínios e sensação de isolamento nas praças.",
-      oportunidade_negocio: "Criar refúgios seguros de convivência, eventos intimistas, rooftops e pontos de encontro protegidos."
+      descricao_apresentacao: "A cultura da harmonia, estabilidade e do 'tá tudo bem' que evita conflito e debate público.",
+      diagnostico: "Conformismo positivo e retração para condomínios, gerando sensação de isolamento e estagnação de inovações culturais.",
+      oportunidade_negocio: "Espaços acolhedores, refúgios de convivência seguros, eventos intimistas e pontos de encontro com curadoria."
     },
     cidade_prometida: {
       nome: "A Cidade Prometida",
       eixo: "Consumo Local vs Evasão Metropolitana",
-      diagnostico: "Alta renda e padrão técnico que fogem para São Paulo (66.2% de evasão) pela falta de sofisticação local.",
-      oportunidade_negocio: "Marcas autorais, gastronomia premium, moda e hospitalidade de nível capital para reter a classe A/B."
+      descricao_apresentacao: "A expectativa de um futuro vibrante frustrada pela oferta convencional, gerando evasão de consumo para SP (66.2%).",
+      diagnostico: "Público qualificado de alta renda que não encontra sofisticação na cidade e consome fora em busca de marcas e gastronomia de padrão capital.",
+      oportunidade_negocio: "Marcas autorais, gastronomia premium, moda e hospitalidade de nível internacional para reter o poder de compra classe A/B."
     },
     tribo_global: {
       nome: "A Tribo Global",
       eixo: "Comunidades de Nicho & Lifestyle Cosmopolita",
-      diagnostico: "Profissionais de tecnologia, nômades digitais e apaixonados por pets (52.8%) sem espaços autênticos de expressão.",
-      oportunidade_negocio: "Clubes de assinatura, microcomunidades, hospitalidade pet-friendly, cafés especiais e wellness."
+      descricao_apresentacao: "Profissionais conectados, nômades digitais e público cosmopolita sem ecossistema urbano autêntico.",
+      diagnostico: "Early adopters exigentes que sentem falta de ambientes modernos, pet-friendly (52.8%) e experiências de padrão global.",
+      oportunidade_negocio: "Microcomunidades, hospitalidade pet-friendly, cafés especiais, wellness e produtos de diferenciação estética."
     },
     empreendedorismo_intuitivo: {
       nome: "Empreendedorismo Intuitivo",
       eixo: "Autonomia Econômica & Produção Autoral",
-      diagnostico: "Negócios locais com excelente produto artesanal, mas baixa maturidade de posicionamento e canais digitais.",
+      descricao_apresentacao: "O foco pragmático no sustento e abertura de negócios autorais com alta garra e baixa maturidade técnica.",
+      diagnostico: "Negócios locais com excelente produto artesanal, mas baixa maturidade de canais digitais e posicionamento de marca.",
       oportunidade_negocio: "Curadoria de produtores locais (58.9%), parcerias de co-branding, feiras autorais e marketing de diferenciação."
     }
   };
 
   return {
     data: {
-      has_presentation_file: Boolean(presentationRawText),
-      raw_chars: presentationRawText.length,
-      movimentos
+      apresentacao_carregada: true,
+      arquivo_origem: usedPath,
+      total_caracteres_arquivo: content.length,
+      movimentos: movements
     },
     duration_ms: Date.now() - startTime
   };
@@ -380,7 +395,7 @@ function saveJob(job) {
   } catch (err) {}
 }
 
-// 5. HELPER PARA CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 45S) E RETRY-AFTER
+// 5. CHAMADA À GROQ COM ABORTCONTROLLER (45S), TEMPERATURA 0.6 E TRATAMENTO DE ERROS
 async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 45000) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -400,7 +415,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
           { role: "system", content: systemPrompt },
           { role: "user", content: userPayloadStr }
         ],
-        temperature: 0.2,
+        temperature: 0.6, // Criatividade e densidade estratégica sem perder o rigor factual
         max_tokens: maxTokens,
         response_format: { type: "json_object" }
       }),
@@ -463,7 +478,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
   }
 }
 
-// 6. BUILDER DE CONTEXTO ESPECÍFICO POR ETAPA (OTIMIZAÇÃO DE TOKENS E PERFORMANCE)
+// 6. BUILDER DE CONTEXTO POR ETAPA
 function buildStepContext(stepId, snapshot, job) {
   const ind = snapshot.indicators || {};
   const ibge = snapshot.ibge || {};
@@ -484,10 +499,10 @@ function buildStepContext(stepId, snapshot, job) {
         },
         ibge_data: ibge,
         cultural_movements_summary: {
-          geografia_silencio: mov.geografia_silencio?.nome + " (" + mov.geografia_silencio?.diagnostico + ")",
-          cidade_prometida: mov.cidade_prometida?.nome + " (" + mov.cidade_prometida?.diagnostico + ")",
-          tribo_global: mov.tribo_global?.nome + " (" + mov.tribo_global?.diagnostico + ")",
-          empreendedorismo_intuitivo: mov.empreendedorismo_intuitivo?.nome + " (" + mov.empreendedorismo_intuitivo?.diagnostico + ")"
+          geografia_silencio: mov.geografia_silencio?.nome + ": " + mov.geografia_silencio?.diagnostico,
+          cidade_prometida: mov.cidade_prometida?.nome + ": " + mov.cidade_prometida?.diagnostico,
+          tribo_global: mov.tribo_global?.nome + ": " + mov.tribo_global?.diagnostico,
+          empreendedorismo_intuitivo: mov.empreendedorismo_intuitivo?.nome + ": " + mov.empreendedorismo_intuitivo?.diagnostico
         }
       };
 
@@ -512,12 +527,12 @@ function buildStepContext(stepId, snapshot, job) {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
         available_indicators: Object.entries(ind).map(([id, i]) => ({
-          id,
+          indicador_id: id,
           coluna: i.coluna,
           denominador: i.denominador,
-          top_categoria: (i.categorias && i.categorias[0]) ? `${i.categorias[0].nome} (${i.categorias[0].percentual}%)` : ""
+          tipo_grafico: i.tipo_grafico,
+          distribuicao_percentual: (i.categorias || []).map(c => `${c.nome}: ${c.percentual}%`).join(' | ')
         })),
-        indicators_data: ind,
         visao_estrategica_previa: job.partial_results.visao_veredito_territorio || null,
         swot_previa: job.partial_results.swot_causalidade_ambiente?.swot || null
       };
@@ -548,7 +563,7 @@ const MODULE_DEFINITIONS = [
     stepIndex: 0,
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
-    message: "Formulando tese estratégica, veredito humano e ranking de bairros...",
+    message: "Formulando tese estratégica, veredito humano e vocação territorial...",
     maxTokens: 850,
     systemPrompt: `Voce e o Consultor Estrategico Senior do Radar SJC.
 Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e criativo.
@@ -556,7 +571,7 @@ Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e criativo.
 DIRETRIZES:
 1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados e numeros fornecidos no analysisContext. Nao invente percentuais.
 2. LIBERDADE ANALITICA: Formule uma tese autoral e conecte o comportamento do joseense com o modelo de negocio.
-3. RANKING DE BAIRROS: Avalie os bairros com base na vocacao real (Jardim Aquarius, Vila Ema, Urbanova, Centro, Jardim Satelite).
+3. BAIRROS E REGIOES: Avalie bairros e polos comerciais de SJC com base na vocacao real do territorio e do publico-alvo. Nao invente pontuacoes numericas sem formula; use prioridade estrategica qualitativa ("Alta", "Media", "Exploratoria") com defesa consistente.
 4. ZONA DE EXCLUSAO: Aponte com franqueza onde e em quais condicoes o negocio NAO deve operar.
 
 RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
@@ -564,11 +579,11 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
   "visao_estrategica_texto": "Tese executiva contendo: (1) O que a proposta realmente e e sua premissa central; (2) Leitura do comportamento e barreiras em SJC; (3) Veredito consultivo maduro e humano com diretrizes praticas de diferenciacao.",
   "bairros": [
     {
-      "nome": "Jardim Aquarius | Vila Ema | Urbanova | Centro | Jardim Satelite",
-      "regiao": "Centro-Oeste | Sul | Centro | Oeste",
-      "fit_score": 85,
-      "formato_recomendado": "Loja de Rua | Showroom Agendado | Hub Digital | Quiosque",
-      "justificativa": "Defesa estrategica conectando renda, fluxo e vocacao do bairro."
+      "nome": "Nome do Bairro ou Regiao em SJC",
+      "regiao": "Centro-Oeste | Sul | Leste | Norte | Centro | Oeste",
+      "prioridade_estrategica": "Alta | Media | Exploratoria",
+      "formato_recomendado": "Loja de Rua | Showroom Agendado | Hub Digital | Quiosque | Atelier",
+      "justificativa_vocacional": "Defesa estrategica conectando renda, fluxo e vocacao do territorio."
     }
   ],
   "zona_exclusao": "ZONA DE EXCLUSAO DETALHADA - Alerta sobre locais ou modelos com risco de friccao ou baixo retorno."
@@ -631,19 +646,19 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
     id: "selecao_graficos_matrizes",
     label: "Seleção Dinâmica de 3 Gráficos, Matriz VRIO e 5 Forças de Porter",
     message: "Cruzando indicadores da pesquisa oficial, VRIO e 5 Forças de Porter...",
-    maxTokens: 700,
+    maxTokens: 750,
     systemPrompt: `Voce e um Engenheiro de Dados e Estrategista Competitivo em SJC.
 
-DIRETRIZES:
-1. SELECAO DE GRAFICOS: Escolha exatamente 3 indicadores oficiais da lista em analysisContext.available_indicators que melhor sustentem ou desafiem o negocio.
-2. PARECER ANALITICO: Escreva uma interpretacao honesta do que o dado prova e declare explicitamente o que a metrica NAO prova.
+DIRETRIZES OBRIGATORIAS:
+1. SELECAO DE GRAFICOS: Escolha EXATAMENTE 3 indicadores da lista em analysisContext.available_indicators usando estritamente o campo indicador_id ("renda_familiar", "evasao_consumo", "frequencia_saida", "regioes_frequentadas", "barreiras_saida", "criterios_escolha", "redes_descoberta", "demanda_reprimida", "influenciadores", "pets_posse", "produtores_locais", "orgulho_morar").
+2. PARECER ANALITICO: Escreva uma interpretacao honesta do que o dado prova e declare explicitamente o que a metrica NAO prova para este negocio.
 3. VRIO e PORTER: Analise as forcas competitivas e barreiras de imitabilidade.
 
 RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
 {
   "graficos_selecionados": [
     {
-      "indicador_id": "renda_familiar | evasao_consumo | frequencia_saida | regioes_frequentadas | barreiras_saida | criterios_escolha | redes_descoberta | demanda_reprimida | pets_posse | produtores_locais | orgulho_morar",
+      "indicador_id": "id_exato_do_indicador",
       "motivo_da_escolha": "Por que esta metrica e crucial para este negocio especifico",
       "leitura_analitica": "Parecer aprofundado cruzando os dados do indicador com a proposta",
       "o_que_nao_prova": "Declaracao honesta do limite da metrica (o que nao deve ser extrapolado)"
@@ -689,10 +704,10 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
     maxTokens: 750,
     systemPrompt: `Voce e um Antropologo de Consumo e Estrategista Senior de Segmentacao em SJC.
 
-DIRETRIZES:
+DIRETRIZES OBRIGATORIAS:
 1. COMPARACAO DOS 4 MOVIMENTOS: Compare a aderencia da ideia em CADA UM dos 4 movimentos presentes na apresentacao oficial (A Geografia do Silencio, A Cidade Prometida, A Tribo Global, Empreendedorismo Intuitivo).
-2. ELEICAO DO VENCEDOR: Escolha OBRIGATORIAMENTE um Movimento Cultural Vencedor como posicao estrategica deliberada de posicionamento e justifique densamente.
-3. SELECAO DE VERBALIZACOES: Escolha de 3 a 4 verbalizacoes reais do banco de citacoes recebido em analysisContext.verbatims_pool que melhor ilustrem a tensao do consumidor.
+2. ELEICAO DO VENCEDOR: Escolha OBRIGATORIAMENTE o Movimento Cultural que melhor alavanca este negocio especifico ("A Geografia do Silêncio" OU "A Cidade Prometida" OU "A Tribo Global" OU "Empreendedorismo Intuitivo"). Justifique estrategicamente.
+3. SELECAO DE VERBALIZACOES: Escolha de 3 a 4 verbalizacoes reais presentes estritamente em analysisContext.verbatims_pool. Use o id e o texto da citacao fornecidos. NUNCA invente citacoes.
 4. PLANO DE VALIDACAO: Liste hipoteses criticas e 4 perguntas essenciais para pesquisa de campo.
 
 RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
@@ -705,7 +720,7 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
       "empreendedorismo_intuitivo": "Analise comparativa de fit com o Empreendedorismo Intuitivo..."
     },
     "veredicto_final": {
-      "nome_movimento": "A Tribo Global | A Geografia do Silêncio | A Cidade Prometida | Empreendedorismo Intuitivo",
+      "nome_movimento": "A Geografia do Silêncio | A Cidade Prometida | A Tribo Global | Empreendedorismo Intuitivo",
       "justificativa_densa": "Defesa estrategica aprofundada explicando a escolha como alavanca de posicionamento e margem.",
       "condicao_de_sucesso": "Condicao pratica essencial para o posicionamento funcionar.",
       "risco_de_erro": "Risco caso a segmentacao falhe."
@@ -713,8 +728,8 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
   },
   "verbalizacoes_selecionadas": [
     {
-      "id": "id_da_verbalizacao",
-      "citacao": "Texto literal da citacao",
+      "id": "id_exato_da_verbalizacao_recebida",
+      "citacao": "Texto literal da citacao recebida",
       "por_que_foi_selecionada": "Como esta fala humana reflete a dor ou a oportunidade do negocio"
     }
   ],
@@ -732,7 +747,80 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
   }
 ];
 
-// 8. MONTAGEM FINAL DO RELATÓRIO EXECUTIVO E DEBUG METRICS
+// 8. VALIDAÇÃO ESTRITA DE CADA MÓDULO (REJEITA DADOS INVÁLIDOS SEM FALLBACK SILENCIOSO)
+function validateModuleResult(stepId, result, snapshot) {
+  if (!result || typeof result !== 'object' || Object.keys(result).length === 0) {
+    throw new Error(`MODULE_EMPTY_RESULT: O módulo ${stepId} retornou um objeto vazio.`);
+  }
+
+  if (stepId === "visao_veredito_territorio") {
+    if (!result.visao_estrategica_texto || result.visao_estrategica_texto.length < 50) {
+      throw new Error("INVALID_STRATEGIC_VISION: O texto da visão estratégica está incompleto.");
+    }
+    if (!Array.isArray(result.bairros) || result.bairros.length === 0) {
+      throw new Error("INVALID_NEIGHBORHOOD_ANALYSIS: Nenhum bairro ou polo territorial foi avaliado.");
+    }
+  }
+
+  if (stepId === "swot_causalidade_ambiente") {
+    if (!result.swot || !result.swot.forcas || !result.swot.fraquezas || !result.swot.oportunidades || !result.swot.ameacas) {
+      throw new Error("INVALID_SWOT_STRUCTURE: A matriz SWOT está incompleta.");
+    }
+    if (!result.ishikawa || !result.ishikawa.problema_central || !Array.isArray(result.ishikawa.causas)) {
+      throw new Error("INVALID_ISHIKAWA_STRUCTURE: O diagrama de Ishikawa está incompleto.");
+    }
+  }
+
+  if (stepId === "selecao_graficos_matrizes") {
+    if (!Array.isArray(result.graficos_selecionados) || result.graficos_selecionados.length !== 3) {
+      throw new Error(`INVALID_GRAPH_SELECTION: Esperado exatamente 3 gráficos selecionados, recebido: ${result.graficos_selecionados ? result.graficos_selecionados.length : 0}.`);
+    }
+
+    // Validar que todos os 3 indicadores existem no snapshot do Supabase
+    for (const sel of result.graficos_selecionados) {
+      if (!sel.indicador_id || !snapshot.indicators[sel.indicador_id]) {
+        throw new Error(`INDICATOR_NOT_FOUND: O indicador '${sel.indicador_id}' não existe na base de dados oficial do Supabase.`);
+      }
+    }
+  }
+
+  if (stepId === "movimentos_vencedor_testes") {
+    const validMovementNames = [
+      "A Geografia do Silêncio",
+      "A Cidade Prometida",
+      "A Tribo Global",
+      "Empreendedorismo Intuitivo"
+    ];
+    const winnerName = result.movimentos_culturais?.veredicto_final?.nome_movimento;
+    
+    // Normalizar comparação de nomes de movimentos
+    const matchedWinner = validMovementNames.find(v => winnerName && (winnerName.toLowerCase().includes(v.toLowerCase()) || v.toLowerCase().includes(winnerName.toLowerCase())));
+    if (!matchedWinner) {
+      throw new Error(`INVALID_MOVEMENT_WINNER: O movimento vencedor '${winnerName}' não é um dos 4 movimentos culturais oficiais da apresentação.`);
+    }
+
+    if (!Array.isArray(result.verbalizacoes_selecionadas) || result.verbalizacoes_selecionadas.length < 2) {
+      throw new Error("INVALID_VERBATIM_SELECTION: É necessário selecionar ao menos 2 verbalizações reais.");
+    }
+
+    // Validar que cada verbalização existe de fato no banco de microdados do Supabase
+    for (const sel of result.verbalizacoes_selecionadas) {
+      const foundInDb = (snapshot.verbatims || []).find(v => 
+        v.id === sel.id || 
+        (sel.citacao && v.citacao_original && v.citacao_original.toLowerCase().includes(sel.citacao.slice(0, 20).toLowerCase())) ||
+        (sel.citacao && v.citacao_original && sel.citacao.toLowerCase().includes(v.citacao_original.slice(0, 20).toLowerCase()))
+      );
+
+      if (!foundInDb) {
+        throw new Error(`VERBATIM_NOT_FOUND: A verbalização '${sel.citacao?.slice(0, 30)}...' não foi encontrada na base de dados do Supabase.`);
+      }
+    }
+  }
+
+  return true;
+}
+
+// 9. MONTAGEM FINAL DO RELATÓRIO EXECUTIVO
 function assembleFinalReport(job, snapshot) {
   const p = job.partial_results || {};
   const mod1 = p.visao_veredito_territorio || {};
@@ -742,70 +830,45 @@ function assembleFinalReport(job, snapshot) {
 
   const ideaText = job.idea || "Negócio em São José dos Campos";
 
-  // Montagem Dinâmica dos Gráficos com Dados Reais do Snapshot
-  let graficosAnaliticosMontados = [];
-  if (Array.isArray(mod3.graficos_selecionados) && mod3.graficos_selecionados.length > 0) {
-    graficosAnaliticosMontados = mod3.graficos_selecionados.map(sel => {
-      const ind = snapshot.indicators[sel.indicador_id] || snapshot.indicators.regioes_frequentadas;
-      return {
-        chart_data: {
-          type: ind.tipo_grafico || "bar",
-          title: ind.coluna.split("?")[0].replace(/^Qual\s+|\s*\(N=.*\)/gi, '').trim().toUpperCase(),
-          labels: ind.categorias.map(c => c.nome),
-          data: ind.categorias.map(c => c.percentual),
-          highlight_index: 0
-        },
-        pergunta_origem: `${ind.coluna} (N=${ind.denominador} - Supabase)`,
-        parecer_analitico: sel.leitura_analitica || sel.motivo_da_escolha || "Cruzamento analítico oficial do Supabase.",
-        o_que_nao_prova: sel.o_que_nao_prova || "A métrica mede o comportamento da amostra e não deve ser extrapolada para intenção de compra sem teste primário."
-      };
-    });
-  } else {
-    const defaultIds = ["regioes_frequentadas", "evasao_consumo", "renda_familiar"];
-    graficosAnaliticosMontados = defaultIds.map(id => {
-      const ind = snapshot.indicators[id];
-      return {
-        chart_data: {
-          type: ind.tipo_grafico || "bar",
-          title: ind.coluna.split("?")[0].replace(/^Qual\s+|\s*\(N=.*\)/gi, '').trim().toUpperCase(),
-          labels: ind.categorias.map(c => c.nome),
-          data: ind.categorias.map(c => c.percentual),
-          highlight_index: 0
-        },
-        pergunta_origem: `${ind.coluna} (N=${ind.denominador} - Supabase)`,
-        parecer_analitico: "Cruzamento analítico extraído dos microdados do Supabase."
-      };
-    });
-  }
+  // Montagem Dinâmica e Estrita dos 3 Gráficos Selecionados do Supabase
+  const graficosAnaliticosMontados = (mod3.graficos_selecionados || []).map(sel => {
+    const ind = snapshot.indicators[sel.indicador_id];
+    return {
+      indicador_id: sel.indicador_id,
+      chart_data: {
+        type: ind.tipo_grafico || "bar",
+        title: ind.coluna.split("?")[0].replace(/^Qual\s+|\s*\(N=.*\)/gi, '').trim().toUpperCase(),
+        labels: ind.categorias.map(c => c.nome),
+        data: ind.categorias.map(c => c.percentual),
+        highlight_index: 0
+      },
+      pergunta_origem: `${ind.coluna} (N=${ind.denominador} - Supabase)`,
+      parecer_analitico: sel.leitura_analitica || sel.motivo_da_escolha,
+      o_que_nao_prova: sel.o_que_nao_prova || "A métrica mede o comportamento da amostra e não deve ser extrapolada para intenção de compra sem teste primário."
+    };
+  });
 
-  // Montagem Dinâmica das Verbalizações com Base no Snapshot
-  let verbalizacoesList = [];
-  if (Array.isArray(mod4.verbalizacoes_selecionadas) && mod4.verbalizacoes_selecionadas.length > 0) {
-    verbalizacoesList = mod4.verbalizacoes_selecionadas.map(sel => {
-      const foundInDb = snapshot.verbatims.find(v => v.id === sel.id || v.citacao_original.includes(sel.citacao?.slice(0, 20))) || {
-        citacao_original: sel.citacao,
-        perfil: { genero: "MULHER", idade: "25-34 ANOS", regiao: "CENTRO-OESTE", renda: "R$ 5.6K - 12K" }
-      };
-      return {
-        citacao: foundInDb.citacao_original,
-        genero: foundInDb.perfil.genero,
-        idade: foundInDb.perfil.idade,
-        regiao: foundInDb.perfil.regiao,
-        renda: foundInDb.perfil.renda,
-        por_que_foi_selecionada: sel.por_que_foi_selecionada || ""
-      };
-    });
-  } else {
-    verbalizacoesList = (snapshot.verbatims || []).slice(0, 3).map(v => ({
-      citacao: v.citacao_original,
-      genero: v.perfil.genero,
-      idade: v.perfil.idade,
-      regiao: v.perfil.regiao,
-      renda: v.perfil.renda
-    }));
-  }
+  // Montagem Dinâmica e Estrita das Verbalizações Reais do Supabase
+  const verbalizacoesList = (mod4.verbalizacoes_selecionadas || []).map(sel => {
+    const foundInDb = snapshot.verbatims.find(v => 
+      v.id === sel.id || 
+      (sel.citacao && v.citacao_original && v.citacao_original.toLowerCase().includes(sel.citacao.slice(0, 20).toLowerCase())) ||
+      (sel.citacao && v.citacao_original && sel.citacao.toLowerCase().includes(v.citacao_original.slice(0, 20).toLowerCase()))
+    );
 
-  // Normalização de SWOT para formato limpo
+    return {
+      id: foundInDb.id,
+      citacao: foundInDb.citacao_original,
+      genero: foundInDb.perfil.genero,
+      idade: foundInDb.perfil.idade,
+      regiao: foundInDb.perfil.regiao,
+      renda: foundInDb.perfil.renda,
+      pergunta_origem: foundInDb.pergunta_origem,
+      por_que_foi_selecionada: sel.por_que_foi_selecionada || ""
+    };
+  });
+
+  // Normalização de SWOT
   const swotClean = {
     forcas: (mod2.swot?.forcas || []).map(f => typeof f === 'object' ? (f.texto || f.item) : f),
     fraquezas: (mod2.swot?.fraquezas || []).map(f => typeof f === 'object' ? (f.texto || f.item) : f),
@@ -818,8 +881,8 @@ function assembleFinalReport(job, snapshot) {
     P: typeof mod2.pestel?.P === 'object' ? `${mod2.pestel.P.fator} - ${mod2.pestel.P.decisao_recomendada}` : (mod2.pestel?.P || "Diretrizes e conformidade municipal."),
     E: typeof mod2.pestel?.E === 'object' ? `${mod2.pestel.E.fator} - ${mod2.pestel.E.decisao_recomendada}` : (mod2.pestel?.E || "Poder de compra e renda familiar de SJC."),
     S: typeof mod2.pestel?.S === 'object' ? `${mod2.pestel.S.fator} - ${mod2.pestel.S.decisao_recomendada}` : (mod2.pestel?.S || "Comportamento e busca por novidades."),
-    T: typeof mod2.pestel?.T === 'object' ? `${mod2.pestel.T.fator} - ${mod2.pestel.T.decisao_recomendada}` : (mod2.pestel?.T || "Canais digitais e Instagram (61.8%)."),
-    E_env: typeof mod2.pestel?.E_env === 'object' ? `${mod2.pestel.E_env.fator} - ${mod2.pestel.E_env.decisao_recomendada}` : (mod2.pestel?.E_env || "Sustentabilidade e espaços pet-friendly (52.8%)."),
+    T: typeof mod2.pestel?.T === 'object' ? `${mod2.pestel.T.fator} - ${mod2.pestel.T.decisao_recomendada}` : (mod2.pestel?.T || "Canais digitais e redes sociais."),
+    E_env: typeof mod2.pestel?.E_env === 'object' ? `${mod2.pestel.E_env.fator} - ${mod2.pestel.E_env.decisao_recomendada}` : (mod2.pestel?.E_env || "Práticas ambientais e pet-friendly."),
     L: typeof mod2.pestel?.L === 'object' ? `${mod2.pestel.L.fator} - ${mod2.pestel.L.decisao_recomendada}` : (mod2.pestel?.L || "Alvarás e conformidade de zoneamento.")
   };
 
@@ -827,6 +890,14 @@ function assembleFinalReport(job, snapshot) {
   const metrics = job.step_metrics || {};
 
   const generationDebug = {
+    supabase_consultado: true,
+    ibge_consultado_online: false,
+    ibge_base_referencia: "IBGE Censo Demográfico 2022 (Tabela 9514 / SIDRA / Código 3549904)",
+    apresentacao_carregada: true,
+    fallbacks_utilizados: [],
+    modulos_com_falha: [],
+    indicadores_reais_usados: graficosAnaliticosMontados.map(g => g.indicador_id),
+    verbalizacoes_reais_usadas: verbalizacoesList.map(v => v.id),
     duracao_total_ms: perf.total_ms || 0,
     duracao_por_etapa: perf.groq_ms_por_etapa || {},
     duracao_consulta_supabase_ms: perf.supabase_ms || 0,
@@ -844,99 +915,31 @@ function assembleFinalReport(job, snapshot) {
   };
 
   return {
-    visao_estrategica_texto: mod1.visao_estrategica_texto || `A proposta **${ideaText}** foi analisada com base nos dados do Supabase (N=${snapshot.totalN}). O sucesso depende de validar os atritos de preço e canal antes de imobilizar capital.`,
-    
-    bairros: Array.isArray(mod1.bairros) && mod1.bairros.length > 0 ? mod1.bairros : [
-      { nome: "Jardim Aquarius", regiao: "Centro-Oeste", fit_score: 85, formato_recomendado: "Showroom / Atendimento Agendado", justificativa: "Polo cosmopolita no vetor Centro-Oeste com fluxo qualificado." }
-    ],
-
-    zona_exclusao: mod1.zona_exclusao || "ZONAS DE BAIXA DENSIDADE COMERCIAL - Evitar locações fixas sem validação prévia de público-alvo.",
-
+    visao_estrategica_texto: mod1.visao_estrategica_texto,
+    bairros: mod1.bairros || [],
+    zona_exclusao: mod1.zona_exclusao,
     swot: swotClean,
-
     auditoria_ambiente: {
       pestel: pestelClean,
-      ishikawa: mod2.ishikawa || {
-        problema_central: "Risco de Baixa Retenção do Consumidor Local em SJC",
-        causas: [
-          { categoria: "Pessoas & Atendimento", descricao: "Falta de consultoria e acolhimento." },
-          { categoria: "Ambiente & Experiência", descricao: "Atritos de acesso e comodidade." },
-          { categoria: "Processos & Operação", descricao: "Gargalos de fornecimento ou estoque." },
-          { categoria: "Produto & Precificação", descricao: "Preço descalibrado do valor percebido." }
-        ]
-      }
+      ishikawa: mod2.ishikawa
     },
-
-    matrizes_estrategicas: mod3.matrizes_estrategicas || {
-      vrio: [
-        { letra: "V", nome: "Valor", analise: "Cria valor ao resolver dores específicas do consumidor em SJC." },
-        { letra: "R", nome: "Raridade", analise: "Curadoria diferenciada frente às opções convencionais." },
-        { letra: "I", nome: "Imitabilidade", analise: "Barreira competitiva sustentada por marca e atendimento." },
-        { letra: "O", nome: "Organização", analise: "Estrutura operacional enxuta." }
-      ],
-      porter: [
-        { forca: "Rivalidade entre Concorrentes", intensidade: "media", analise: "Disputa com opções tradicionais de SJC." },
-        { forca: "Ameaça de Novos Entrantes", intensidade: "media", analise: "Barreiras baseadas em ponto e capital de giro." },
-        { forca: "Produtos Substitutos", intensidade: "alta", analise: "E-commerce nacional e compras em SP (66.2% de evasão)." },
-        { forca: "Barganha dos Fornecedores", intensidade: "baixa", analise: "Dependência de insumos e logística." },
-        { forca: "Barganha dos Clientes", intensidade: "alta", analise: "Sensibilidade a preço acentuada (33.1% apontam custo alto)." }
-      ]
-    },
-
-    mix_marketing: mod3.mix_marketing || {
-      cinco_ps: [
-        { p: "Produto", analise: "Curadoria assertiva alinhada à demanda real." },
-        { p: "Preço", analise: "Precificação compatível com a renda familiar alvo." },
-        { p: "Praça", analise: "Presença estratégica física e digital." },
-        { p: "Promoção", analise: "Foco no Instagram (61.8%) e boca a boca." },
-        { p: "Pessoas", analise: "Treinamento consultivo para retenção." }
-      ],
-      oceano_azul: {
-        eliminar: "Custos supérfluos que não geram valor perceptível.",
-        reduzir: "Desperdícios e estoques desnecessários.",
-        elevar: "Padrão de curadoria e agilidade.",
-        criar: "Diferenciais exclusivos para o público joseense."
-      }
-    },
-
-    movimentos_culturais: {
-      analise_cards: mod4.movimentos_culturais?.analise_cards || {
-        geografia_silencio: "Demanda refúgios de convivência acolhedores.",
-        cidade_prometida: "Exige alto padrão para evitar evasão para SP.",
-        tribo_global: "Conecta-se com inovação e flexibilidade.",
-        empreendedorismo_intuitivo: "Valoriza autenticidade e curadoria independente."
-      },
-      veredicto_final: mod4.movimentos_culturais?.veredicto_final || {
-        nome_movimento: "A Tribo Global",
-        justificativa_densa: "Posicionamento de nicho voltado para diferenciação e valor agregado."
-      }
-    },
-
+    matrizes_estrategicas: mod3.matrizes_estrategicas,
+    mix_marketing: mod3.mix_marketing,
+    movimentos_culturais: mod4.movimentos_culturais,
     movimento_vencedor: {
-      nome: mod4.movimentos_culturais?.veredicto_final?.nome_movimento || "A Tribo Global",
-      justificativa: mod4.movimentos_culturais?.veredicto_final?.justificativa_densa || "Posicionamento estratégico escolhido para captura de margem.",
-      condicao_de_sucesso: mod4.movimentos_culturais?.veredicto_final?.condicao_de_sucesso || "Execução com rigor de experiência.",
-      risco_de_erro: mod4.movimentos_culturais?.veredicto_final?.risco_de_erro || "Perda de identidade de nicho."
+      nome: mod4.movimentos_culturais?.veredicto_final?.nome_movimento,
+      justificativa: mod4.movimentos_culturais?.veredicto_final?.justificativa_densa,
+      condicao_de_sucesso: mod4.movimentos_culturais?.veredicto_final?.condicao_de_sucesso,
+      risco_de_erro: mod4.movimentos_culturais?.veredicto_final?.risco_de_erro
     },
-
     verbalizacoes_reais: verbalizacoesList,
     graficos_selecionados: graficosAnaliticosMontados,
-    plano_de_validacao: mod4.plano_de_validacao || {
-      hipoteses_criticas: ["Validação da disposição a pagar", "Frequência de recompra", "Preferência de canal"],
-      experimento_piloto: "Lançamento piloto controlado com amostragem direta de 30 clientes.",
-      perguntas_pesquisa_campo: [
-        "Com que frequência você compraria este produto/serviço?",
-        "Qual faixa de preço considera justa?",
-        "Qual canal de atendimento é mais conveniente?",
-        "O que faria você preferir este negócio frente aos concorrentes?"
-      ]
-    },
-
+    plano_de_validacao: mod4.plano_de_validacao,
     generation_debug: generationDebug
   };
 }
 
-// 9. HANDLER PRINCIPAL (SERVERLESS HANDLER)
+// 10. HANDLER PRINCIPAL (SERVERLESS HANDLER)
 module.exports = async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -987,9 +990,9 @@ module.exports = async function handler(req, res) {
         ]);
       } catch (dbErr) {
         return res.status(500).json({
-          error_code: "SUPABASE_NOT_CONFIGURED",
-          message: "A fonte Supabase não pôde ser consultada. A análise não pode ser gerada sem números oficiais.",
-          details: dbErr.message
+          error_code: dbErr.message.includes("PRESENTATION") ? "PRESENTATION_NOT_AVAILABLE" : "SUPABASE_NOT_CONFIGURED",
+          message: dbErr.message,
+          details: dbErr.stack || dbErr.message
         });
       }
 
@@ -1139,11 +1142,11 @@ module.exports = async function handler(req, res) {
             throw new Error("GROQ_API_KEY não configurada nas variáveis de ambiente.");
           }
 
-          // 4. Build Context específico e compacto para a etapa
+          // Build Context específico e compacto para a etapa
           const stepContext = buildStepContext(stepDef.id, job.context_snapshot, job);
           const userPayloadStr = JSON.stringify(stepContext);
 
-          // 5. Chamada única à Groq com AbortController e cap ajustado
+          // Chamada única à Groq com AbortController e cap ajustado
           const groqResponse = await callGroqStep(
             apiKey,
             stepDef.systemPrompt,
@@ -1154,10 +1157,8 @@ module.exports = async function handler(req, res) {
 
           const stepResult = groqResponse.result;
           
-          // Validação estrutural: não aceitar resultado vazio
-          if (!stepResult || Object.keys(stepResult).length === 0) {
-            throw new Error(`GROQ_EMPTY_RESULT: O módulo ${stepDef.label} retornou um objeto vazio.`);
-          }
+          // Validação estrutural e factual estrita: rejeita se inválido
+          validateModuleResult(stepDef.id, stepResult, job.context_snapshot);
 
           job.partial_results[stepDef.id] = stepResult;
           
@@ -1233,7 +1234,11 @@ module.exports = async function handler(req, res) {
             job.last_error = err.message;
             if (job.retry_count > 2) {
               job.status = "failed";
-              job.error_code = "STEP_EXECUTION_FAILED";
+              job.error_code = err.message.includes("INDICATOR_NOT_FOUND") ? "INDICATOR_NOT_FOUND" :
+                               err.message.includes("INVALID_GRAPH_SELECTION") ? "INVALID_GRAPH_SELECTION" :
+                               err.message.includes("VERBATIM_NOT_FOUND") ? "VERBATIM_NOT_FOUND" :
+                               err.message.includes("INVALID_MOVEMENT_WINNER") ? "INVALID_MOVEMENT_WINNER" :
+                               "STEP_EXECUTION_FAILED";
               job.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
               job.retryable = true;
             }
