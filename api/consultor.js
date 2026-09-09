@@ -262,14 +262,19 @@ ESTRUTURA JSON EXATA E OBRIGATÓRIA:
   ]
 }`;
 
-    // Lista de modelos oficiais e estáveis da Groq com fallbacks garantidos
+    // Lista de modelos oficiais e estáveis com migração para a linha Qwen
     const configuredModel = (process.env.GROQ_MODEL || '').trim();
     const defaultModels = [
-      'llama3-70b-8192',
+      'qwen/qwen3.6-27b',
+      'qwen/qwen3.8-27b',
+      'qwen-3.6-27b',
+      'qwen/qwen-3.6-27b',
+      'qwen-2.5-32b',
+      'qwen/qwen-2.5-32b',
       'mixtral-8x7b-32768',
-      'llama-3.1-8b-instant',
-      'llama3-8b-8192',
-      'gemma2-9b-it'
+      'gemma2-9b-it',
+      'llama3-70b-8192',
+      'llama-3.1-8b-instant'
     ];
     const candidateModels = configuredModel 
       ? [configuredModel, ...defaultModels.filter(m => m !== configuredModel)]
