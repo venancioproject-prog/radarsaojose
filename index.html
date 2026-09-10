@@ -7242,7 +7242,7 @@
         <!-- RAIO-X ESTRATÉGICO: ECONOMIA, TERRITÓRIO, RENDA & DINÂMICA URBANA -->
         <!-- ====================================================================== -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6">
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div class="flex items-center gap-3">
               <div class="w-11 h-11 rounded-2xl bg-brand-900 text-accent-cyan flex items-center justify-center text-xl shadow-sm shrink-0">
                 <i class="fa-solid fa-compass-drafting"></i>
@@ -7257,18 +7257,9 @@
               </div>
             </div>
 
-            <!-- FILTRO CONTEXTUAL DO BLOCO ECONOMIA -->
-            <div class="flex flex-wrap items-center gap-2.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/80">
-              <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                <i class="fa-solid fa-industry text-emerald-600 text-xs"></i>
-                <select id="ibge-filter-sector" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
-                  <option value="todos">Todos os Segmentos Econômicos</option>
-                  <option value="servicos">Serviços & Tecnologia (52,8%)</option>
-                  <option value="industria">Indústria Aeroespacial & Auto (24,5%)</option>
-                  <option value="comercio">Comércio & Varejo (16,1%)</option>
-                  <option value="construcao">Construção Civil & Imobiliário (5,9%)</option>
-                </select>
-              </div>
+            <div class="flex items-center gap-2 text-xs font-bold text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
+              <i class="fa-solid fa-chart-pie text-emerald-600"></i>
+              <span>Panorama Multissetorial Consolidado</span>
             </div>
           </div>
 
@@ -7915,6 +7906,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=98.0"></script>
+  <script src="app.js?v=99.0"></script>
 </body>
 </html>
