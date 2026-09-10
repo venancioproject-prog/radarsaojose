@@ -7341,44 +7341,86 @@
             <div class="flex flex-wrap items-center gap-2.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/80">
               <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
                 <i class="fa-solid fa-scale-balanced text-amber-600 text-xs"></i>
-                <select id="ibge-filter-benchmark" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
-                  <option value="sjc_vs_estado">SJC vs. Estado de São Paulo</option>
-                  <option value="sjc_vs_brasil">SJC vs. Média do Brasil</option>
-                  <option value="sjc_vs_rmvale">SJC vs. RMVale (Vale do Paraíba)</option>
-                  <option value="sjc_vs_campinas">SJC vs. Campinas (Polo Tech SP)</option>
-                  <option value="sjc_vs_taubate">SJC vs. Taubaté (Vizinho Industrial)</option>
-                  <option value="sjc_vs_curitiba">SJC vs. Curitiba (Referência Nacional)</option>
+                <select id="ibge-filter-benchmark" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer max-w-[280px] sm:max-w-none">
+                  <optgroup label="📍 Referências Macrorregionais">
+                    <option value="sjc_vs_estado">SJC vs. Estado de São Paulo</option>
+                    <option value="sjc_vs_brasil">SJC vs. Média do Brasil</option>
+                    <option value="sjc_vs_rmvale">SJC vs. RMVale (Vale do Paraíba)</option>
+                  </optgroup>
+                  <optgroup label="🏘️ Vale do Paraíba & Litoral Norte">
+                    <option value="sjc_vs_taubate">SJC vs. Taubaté (Hub Industrial & Universitário)</option>
+                    <option value="sjc_vs_jacarei">SJC vs. Jacareí (Conurbação Oeste)</option>
+                    <option value="sjc_vs_pinda">SJC vs. Pindamonhangaba (Metalmecânico)</option>
+                    <option value="sjc_vs_guara">SJC vs. Guaratinguetá (Hub Químico)</option>
+                    <option value="sjc_vs_cacapava">SJC vs. Caçapava (Corredor Dutra)</option>
+                    <option value="sjc_vs_campos_jordao">SJC vs. Campos do Jordão (Serra da Mantiqueira)</option>
+                    <option value="sjc_vs_caragua">SJC vs. Caraguatatuba (Litoral Norte)</option>
+                    <option value="sjc_vs_sao_sebastiao">SJC vs. São Sebastião (Porto & Pré-Sal)</option>
+                    <option value="sjc_vs_ubatuba">SJC vs. Ubatuba (Turismo & Serviços)</option>
+                  </optgroup>
+                  <optgroup label="🚀 Grandes Polos Tecnológicos & Industriais de SP">
+                    <option value="sjc_vs_campinas">SJC vs. Campinas (Polo Tech & Unicamp)</option>
+                    <option value="sjc_vs_sao_carlos">SJC vs. São Carlos (Capital da Tecnologia)</option>
+                    <option value="sjc_vs_ribeirao_preto">SJC vs. Ribeirão Preto (Agronegócio & Saúde)</option>
+                    <option value="sjc_vs_sorocaba">SJC vs. Sorocaba (Polo Industrial)</option>
+                    <option value="sjc_vs_jundiai">SJC vs. Jundiaí (Logística & Renda Alta)</option>
+                    <option value="sjc_vs_piracicaba">SJC vs. Piracicaba (AgroTech & Biocombustíveis)</option>
+                    <option value="sjc_vs_sao_jose_rio_preto">SJC vs. São José do Rio Preto (Saúde & Comércio)</option>
+                    <option value="sjc_vs_araraquara">SJC vs. Araraquara (Alimentos & Educação)</option>
+                    <option value="sjc_vs_bauru">SJC vs. Bauru (Centro SP & Ensino)</option>
+                    <option value="sjc_vs_indaiatuba">SJC vs. Indaiatuba (Alta Qualidade de Vida)</option>
+                    <option value="sjc_vs_americana">SJC vs. Americana (Têxtil & Indústria)</option>
+                    <option value="sjc_vs_limeira">SJC vs. Limeira (Jóias & Agronegócio)</option>
+                    <option value="sjc_vs_itu">SJC vs. Itu (Indústria & Condomínios)</option>
+                    <option value="sjc_vs_braganca">SJC vs. Bragança Paulista (Região Bragantina)</option>
+                    <option value="sjc_vs_santos">SJC vs. Santos (Maior Porto da AL)</option>
+                    <option value="sjc_vs_sao_caetano">SJC vs. São Caetano do Sul (Maior IDHM do Brasil)</option>
+                    <option value="sjc_vs_barueri">SJC vs. Barueri / Alphaville (Tech & Finanças)</option>
+                    <option value="sjc_vs_sao_paulo_capital">SJC vs. São Paulo Capital (Metrópole)</option>
+                  </optgroup>
+                  <optgroup label="🇧🇷 Capitais & Cidades Referência Nacional">
+                    <option value="sjc_vs_curitiba">SJC vs. Curitiba - PR (Referência em Inovação)</option>
+                    <option value="sjc_vs_florianopolis">SJC vs. Florianópolis - SC (Capital Tech & IDHM)</option>
+                    <option value="sjc_vs_joinville">SJC vs. Joinville - SC (Polo Fabril do Sul)</option>
+                    <option value="sjc_vs_blumenau">SJC vs. Blumenau - SC (TI & Economia Europeia)</option>
+                    <option value="sjc_vs_maringa">SJC vs. Maringá - PR (Alta Qualidade Urbana)</option>
+                    <option value="sjc_vs_londrina">SJC vs. Londrina - PR (Universitário & Serviços)</option>
+                    <option value="sjc_vs_caxias_sul">SJC vs. Caxias do Sul - RS (Serra Gaúcha & Metal)</option>
+                    <option value="sjc_vs_belo_horizonte">SJC vs. Belo Horizonte - MG (San Pedro Valley)</option>
+                    <option value="sjc_vs_uberlandia">SJC vs. Uberlândia - MG (Triângulo Mineiro)</option>
+                    <option value="sjc_vs_juiz_de_fora">SJC vs. Juiz de Fora - MG (Ensino & Saúde)</option>
+                  </optgroup>
                 </select>
               </div>
             </div>
           </div>
 
-          <!-- Cards Comparativos Resumidos (Badges de Performance) -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <!-- Cards Comparativos Resumidos (Badges de Performance Dinâmicos) -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3" id="ibge-benchmark-badges-container">
             <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
-              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs SP</span>
-              <p class="text-xs font-bold text-slate-700">Salário: <strong class="text-purple-700">+9,7%</strong></p>
-              <p class="text-[10px] text-slate-500">IDHM: 0,807 vs 0,783</p>
+              <span class="text-[10px] font-black uppercase text-brand-900 block">PIB per Capita</span>
+              <p class="text-xs font-bold text-slate-700">Dif: <strong class="text-rose-600">-5.8%</strong></p>
+              <p class="text-[10px] text-slate-500">R$ 54.9k vs R$ 58.3k</p>
             </div>
             <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
-              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs Brasil</span>
-              <p class="text-xs font-bold text-slate-700">PIB/capita: <strong class="text-emerald-700">+29,9%</strong></p>
-              <p class="text-[10px] text-slate-500">Salário: 3,4 vs 2,5 SM</p>
+              <span class="text-[10px] font-black uppercase text-brand-900 block">Salário Médio</span>
+              <p class="text-xs font-bold text-slate-700">Dif: <strong class="text-emerald-700">+9.7%</strong></p>
+              <p class="text-[10px] text-slate-500">3.4 SM vs 3.1 SM</p>
             </div>
             <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
-              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs RMVale</span>
-              <p class="text-xs font-bold text-slate-700">Líder Regional: <strong class="text-cyan-700">#1 PIB</strong></p>
-              <p class="text-[10px] text-slate-500">38% de toda a RMVale</p>
+              <span class="text-[10px] font-black uppercase text-brand-900 block">IDHM Municipal</span>
+              <p class="text-xs font-bold text-slate-700">Dif: <strong class="text-emerald-700">+24 pts</strong></p>
+              <p class="text-[10px] text-slate-500">0,807 vs 0,783</p>
             </div>
             <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
-              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs Campinas</span>
-              <p class="text-xs font-bold text-slate-700">IDHM: <strong class="text-amber-700">0,807 vs 0,805</strong></p>
-              <p class="text-[10px] text-slate-500">Polo Aeroespacial vs Tech</p>
+              <span class="text-[10px] font-black uppercase text-brand-900 block">Escolarização</span>
+              <p class="text-xs font-bold text-slate-700">Dif: <strong class="text-emerald-700">+0.3 p.p.</strong></p>
+              <p class="text-[10px] text-slate-500">97.8% vs 97.5%</p>
             </div>
             <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1 col-span-2 sm:col-span-1">
-              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs Taubaté</span>
-              <p class="text-xs font-bold text-slate-700">PIB/capita: <strong class="text-emerald-700">+17,3%</strong></p>
-              <p class="text-[10px] text-slate-500">Frota: 70,6 vs 62,4/100hab</p>
+              <span class="text-[10px] font-black uppercase text-brand-900 block">Motorização / 100 hab</span>
+              <p class="text-xs font-bold text-slate-700">Dif: <strong class="text-emerald-700">+11.4 veíc.</strong></p>
+              <p class="text-[10px] text-slate-500">70.6 vs 59.2</p>
             </div>
           </div>
 
@@ -7830,6 +7872,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=88.0"></script>
+  <script src="app.js?v=89.0"></script>
 </body>
 </html>
