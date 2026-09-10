@@ -24,6 +24,74 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf
 const TABLE_NAME = "respostas_pesquisa";
 const JOBS_TABLE_NAME = "consultor_jobs";
 
+// Rastreador Global de Rate Limit da Groq (em memória por instância e sincronizado nos jobs)
+const GROQ_RATE_LIMIT_TRACKER = {
+  remainingTokens: null,
+  limitTokens: null,
+  resetTokensSeconds: null,
+  remainingRequests: null,
+  limitRequests: null,
+  resetRequestsSeconds: null,
+  retryAfterSeconds: null,
+  lastCapturedAt: null,
+  lastHeaders: {}
+};
+
+// Helper para converter strings de tempo como '2s', '2.5s', '1m20s', '1m20.5s', '1h30m' ou inteiros em segundos
+function parseResetSeconds(str) {
+  if (!str) return null;
+  str = String(str).trim().toLowerCase();
+  if (!isNaN(str)) return Math.ceil(parseFloat(str));
+  
+  let totalSec = 0;
+  const hMatch = str.match(/(\d+(?:\.\d+)?)\s*h/);
+  const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m(?!s)/);
+  const sMatch = str.match(/(\d+(?:\.\d+)?)\s*s/);
+  if (hMatch) totalSec += parseFloat(hMatch[1]) * 3600;
+  if (mMatch) totalSec += parseFloat(mMatch[1]) * 60;
+  if (sMatch) totalSec += parseFloat(sMatch[1]);
+  return totalSec > 0 ? Math.ceil(totalSec) : null;
+}
+
+// Extração padronizada de headers de rate limit da Groq
+function extractGroqRateLimitHeaders(headers) {
+  if (!headers) return {};
+  const getH = (k) => typeof headers.get === "function" ? headers.get(k) : headers[k] || headers[k.toLowerCase()] || null;
+  return {
+    "retry-after": getH("retry-after"),
+    "x-ratelimit-limit-requests": getH("x-ratelimit-limit-requests"),
+    "x-ratelimit-remaining-requests": getH("x-ratelimit-remaining-requests"),
+    "x-ratelimit-reset-requests": getH("x-ratelimit-reset-requests"),
+    "x-ratelimit-limit-tokens": getH("x-ratelimit-limit-tokens"),
+    "x-ratelimit-remaining-tokens": getH("x-ratelimit-remaining-tokens"),
+    "x-ratelimit-reset-tokens": getH("x-ratelimit-reset-tokens")
+  };
+}
+
+// Atualização do rastreador global com base nos headers capturados
+function updateGroqRateLimitTracker(headers) {
+  const h = extractGroqRateLimitHeaders(headers);
+  const remTok = h["x-ratelimit-remaining-tokens"] !== null ? parseInt(h["x-ratelimit-remaining-tokens"], 10) : null;
+  const limTok = h["x-ratelimit-limit-tokens"] !== null ? parseInt(h["x-ratelimit-limit-tokens"], 10) : null;
+  const resetTokSec = parseResetSeconds(h["x-ratelimit-reset-tokens"]);
+  const remReq = h["x-ratelimit-remaining-requests"] !== null ? parseInt(h["x-ratelimit-remaining-requests"], 10) : null;
+  const limReq = h["x-ratelimit-limit-requests"] !== null ? parseInt(h["x-ratelimit-limit-requests"], 10) : null;
+  const resetReqSec = parseResetSeconds(h["x-ratelimit-reset-requests"]);
+  const retryAfterSec = parseResetSeconds(h["retry-after"]);
+
+  if (remTok !== null && !isNaN(remTok)) GROQ_RATE_LIMIT_TRACKER.remainingTokens = remTok;
+  if (limTok !== null && !isNaN(limTok)) GROQ_RATE_LIMIT_TRACKER.limitTokens = limTok;
+  if (resetTokSec !== null) GROQ_RATE_LIMIT_TRACKER.resetTokensSeconds = resetTokSec;
+  if (remReq !== null && !isNaN(remReq)) GROQ_RATE_LIMIT_TRACKER.remainingRequests = remReq;
+  if (limReq !== null && !isNaN(limReq)) GROQ_RATE_LIMIT_TRACKER.limitRequests = limReq;
+  if (resetReqSec !== null) GROQ_RATE_LIMIT_TRACKER.resetRequestsSeconds = resetReqSec;
+  if (retryAfterSec !== null) GROQ_RATE_LIMIT_TRACKER.retryAfterSeconds = retryAfterSec;
+  GROQ_RATE_LIMIT_TRACKER.lastCapturedAt = new Date().toISOString();
+  GROQ_RATE_LIMIT_TRACKER.lastHeaders = h;
+
+  return GROQ_RATE_LIMIT_TRACKER;
+}
+
 // Helper de Fetch Seguro com AbortController e Timeout Real
 async function fetchWithTimeout(url, options = {}, timeoutMs = 25000, contextLabel = "API Call") {
   const controller = new AbortController();
@@ -583,12 +651,16 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
   const estimatedInputTokens = Math.ceil(((systemPrompt?.length || 0) + (userPayloadStr?.length || 0)) / 3.8);
   const totalEstimatedTokens = estimatedInputTokens + maxTokens;
 
+  // Obter saldo em tempo real antes da requisição
+  const remainingBefore = GROQ_RATE_LIMIT_TRACKER.remainingTokens;
+
   console.log("[GROQ PRE-CHECK]", JSON.stringify({
     step: stepLabel,
     model: GROQ_MODEL,
     input_tokens_estimados: estimatedInputTokens,
     max_tokens: maxTokens,
-    total_estimado: totalEstimatedTokens
+    total_estimado: totalEstimatedTokens,
+    remaining_tokens_before: remainingBefore
   }));
 
   // Proteção preventiva contra estouro de TPM (limite seguro de 1200 tokens por chamada em qualquer etapa)
@@ -597,7 +669,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
   }
 
   console.log("[Groq] Modelo utilizado:", GROQ_MODEL);
-  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Tokens Est: ${estimatedInputTokens}, Max: ${maxTokens}, Total: ${totalEstimatedTokens}, Timeout: ${timeoutMs / 1000}s, Temp: ${temperature})...`);
+  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Tokens Est: ${estimatedInputTokens}, Max: ${maxTokens}, Total: ${totalEstimatedTokens}, Saldo Conhecido: ${remainingBefore !== null ? remainingBefore : "N/D"}, Timeout: ${timeoutMs / 1000}s, Temp: ${temperature})...`);
 
   const requestBody = {
     model: GROQ_MODEL,
@@ -621,31 +693,19 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
   const durationMs = Date.now() - startTime;
   console.log(`[GROQ SUCCESS] ${stepLabel} - Resposta recebida em ${durationMs}ms.`);
 
+  // Atualizar rastreador global com os headers retornados pela Groq (em 200 ou erro)
+  const capturedHeaders = updateGroqRateLimitTracker(response.headers);
+  const rawHeadersObj = extractGroqRateLimitHeaders(response.headers);
+
   if (!response.ok) {
     const errText = await response.text();
-    const retryAfter = response.headers.get("retry-after");
-    const limitReq = response.headers.get("x-ratelimit-limit-requests");
-    const remReq = response.headers.get("x-ratelimit-remaining-requests");
-    const resetReq = response.headers.get("x-ratelimit-reset-requests");
-    const limitTok = response.headers.get("x-ratelimit-limit-tokens");
-    const remTok = response.headers.get("x-ratelimit-remaining-tokens");
-    const resetTok = response.headers.get("x-ratelimit-reset-tokens");
-
-    // Helper para converter strings de tempo como '2s', '2.5s', '1m20s', '1m20.5s', '1h30m' ou inteiros em segundos
-    function parseResetSeconds(str) {
-      if (!str) return null;
-      str = String(str).trim().toLowerCase();
-      if (!isNaN(str)) return Math.ceil(parseFloat(str));
-      
-      let totalSec = 0;
-      const hMatch = str.match(/(\d+(?:\.\d+)?)\s*h/);
-      const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m(?!s)/);
-      const sMatch = str.match(/(\d+(?:\.\d+)?)\s*s/);
-      if (hMatch) totalSec += parseFloat(hMatch[1]) * 3600;
-      if (mMatch) totalSec += parseFloat(mMatch[1]) * 60;
-      if (sMatch) totalSec += parseFloat(sMatch[1]);
-      return totalSec > 0 ? Math.ceil(totalSec) : null;
-    }
+    const retryAfter = rawHeadersObj["retry-after"];
+    const limitReq = rawHeadersObj["x-ratelimit-limit-requests"];
+    const remReq = rawHeadersObj["x-ratelimit-remaining-requests"];
+    const resetReq = rawHeadersObj["x-ratelimit-reset-requests"];
+    const limitTok = rawHeadersObj["x-ratelimit-limit-tokens"];
+    const remTok = rawHeadersObj["x-ratelimit-remaining-tokens"];
+    const resetTok = rawHeadersObj["x-ratelimit-reset-tokens"];
 
     const retryAfterSec = parseResetSeconds(retryAfter);
     const resetReqSec = parseResetSeconds(resetReq);
@@ -658,15 +718,10 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
     errorObj.resetTokensSeconds = resetTokSec;
     errorObj.durationMs = durationMs;
     errorObj.rawErrorBody = errText;
-    errorObj.rateLimitHeaders = {
-      "retry-after": retryAfter || null,
-      "x-ratelimit-limit-requests": limitReq || null,
-      "x-ratelimit-remaining-requests": remReq || null,
-      "x-ratelimit-reset-requests": resetReq || null,
-      "x-ratelimit-limit-tokens": limitTok || null,
-      "x-ratelimit-remaining-tokens": remTok || null,
-      "x-ratelimit-reset-tokens": resetTok || null
-    };
+    errorObj.rateLimitHeaders = rawHeadersObj;
+    errorObj.remainingTokensBefore = remainingBefore;
+    errorObj.estimatedRequestTokens = totalEstimatedTokens;
+    errorObj.maxTokens = maxTokens;
     
     // Detecção imediata de modelo inválido/descontinuado (400 ou 404)
     if (response.status === 404 || (response.status === 400 && (errText.includes("model") || errText.includes("decommissioned") || errText.includes("not found")))) {
@@ -746,7 +801,10 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
     inputChars: userPayloadStr.length + systemPrompt.length,
     promptTokens: usage.prompt_tokens || estimatedInputTokens,
     completionTokens: usage.completion_tokens || Math.ceil(rawContent.length / 3.8),
-    totalTokens: usage.total_tokens || (estimatedInputTokens + Math.ceil(rawContent.length / 3.8))
+    totalTokens: usage.total_tokens || (estimatedInputTokens + Math.ceil(rawContent.length / 3.8)),
+    remainingTokensBefore: remainingBefore,
+    remainingTokensAfter: capturedHeaders.remainingTokens,
+    rateLimitHeaders: rawHeadersObj
   };
 }
 
@@ -773,32 +831,30 @@ function buildStepContext(stepId, snapshot, job) {
       };
 
     case "swot_causalidade_ambiente":
+      // Resumo do Step 1 com no máximo 500 caracteres
+      const s1Res = job.partial_results?.visao_veredito_territorio || {};
+      const s1Text = `Postura: ${s1Res.veredito_postura || "avancar"}. Justificativa: ${s1Res.veredito_justificativa || ""}. Bairros: ${(s1Res.bairros || []).map(b => b.nome).join(", ")}. Zona Exclusao: ${s1Res.zona_exclusao || ""}`.slice(0, 500);
+
       return {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
-        comportamento_e_barreiras: {
-          barreiras_saida: (ind.barreiras_saida?.categorias || []).slice(0, 4).map(c => `${c.nome}: ${c.percentual}%`),
-          criterios_escolha: (ind.criterios_escolha?.categorias || []).slice(0, 4).map(c => `${c.nome}: ${c.percentual}%`),
-          demanda_reprimida: (ind.demanda_reprimida?.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`),
-          pets_posse: (ind.pets_posse?.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`),
-          produtores_locais: (ind.produtores_locais?.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`)
+        indicadores_barreiras_preco: {
+          barreiras_saida: (ind.barreiras_saida?.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`),
+          criterios_escolha: (ind.criterios_escolha?.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`),
+          demanda_reprimida: (ind.demanda_reprimida?.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`)
         },
-        verbalizacoes_amostra: verb.slice(0, 5).map(v => ({ id: v.id, citacao: v.citacao_original })),
-        resumo_step1: {
-          veredito: job.partial_results?.visao_veredito_territorio?.veredito_postura,
-          justificativa: job.partial_results?.visao_veredito_territorio?.veredito_justificativa,
-          bairros: (job.partial_results?.visao_veredito_territorio?.bairros || []).map(b => b.nome)
-        }
+        verbalizacoes_curtas: verb.slice(0, 2).map(v => ({ id: v.id, citacao: (v.citacao_original || "").slice(0, 100) })),
+        resumo_step1: s1Text
       };
 
     case "selecao_graficos_matrizes":
       return {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
-        indicadores_disponiveis: Object.entries(ind).map(([id, i]) => ({
+        indicadores_disponiveis: Object.entries(ind).slice(0, 6).map(([id, i]) => ({
           indicador_id: id,
           coluna: i.coluna ? i.coluna.split("?")[0].trim() : id,
-          top_dados: (i.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`).join(', ')
+          top_dados: (i.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`).join(', ')
         })),
         resumo_step1: {
           bairros: (job.partial_results?.visao_veredito_territorio?.bairros || []).map(b => b.nome),
@@ -816,16 +872,16 @@ function buildStepContext(stepId, snapshot, job) {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
         quatro_movimentos: {
-          geografia_silencio: "Refúgio, acolhimento e desaceleração na cidade",
-          cidade_prometida: "Cosmopolitismo, padrão metropolitano e retenção de consumo",
-          tribo_global: "Conexão digital, marcas globais e tendências",
-          empreendedorismo_intuitivo: "Autoralidade, feiras locais e economia criativa"
+          geografia_silencio: "Refúgio e desaceleração",
+          cidade_prometida: "Cosmopolitismo e consumo",
+          tribo_global: "Conexão digital e tendências",
+          empreendedorismo_intuitivo: "Autoralidade e economia criativa"
         },
-        verbatims_pool: verb.slice(0, 6).map(v => ({ id: v.id, citacao: v.citacao_original })),
+        verbatims_pool: verb.slice(0, 6).map(v => ({ id: v.id, citacao: (v.citacao_original || "").slice(0, 120) })),
         indicadores_relevantes: {
-          evasao_sp: "42.1% viajam a SP por falta de opcoes equivalentes",
-          redes: "Instagram e WhatsApp predominantes para descoberta",
-          orgulho: "84.5% declaram orgulho de morar em SJC"
+          evasao_sp: "42.1% viajam a SP",
+          redes: "Instagram e WhatsApp",
+          orgulho: "84.5% orgulho de morar"
         }
       };
 
@@ -884,38 +940,33 @@ ESTRUTURA JSON EXATA:
     id: "swot_causalidade_ambiente",
     label: "Matriz SWOT, PESTEL e Diagrama de Ishikawa",
     message: "Auditando ambiente competitivo, causalidade Ishikawa e matriz SWOT...",
-    maxTokens: 700,
-    systemPrompt: `Voce e um Especialista em Diagnostico Organizacional e Estrategia Competitiva em SJC.
-Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
+    maxTokens: 500,
+    systemPrompt: `Consultor Radar SJC. Responda SOMENTE objeto JSON sem markdown ou texto extra.
+LIMITES: SWOT (2 forcas, 2 fraquezas, 2 oportunidades, 2 ameacas em ate 80c), PESTEL (P, E, S, T, E_env, L com fator e decisao_recomendada em ate 80c), ISHIKAWA (problema_central em ate 100c e 4 causas: Pessoas & Atendimento, Ambiente & Experiencia, Processos & Operacao, Produto & Precificacao em ate 80c).
 
-DIRETRIZES E LIMITES:
-1. SWOT: 2 forcas, 2 fraquezas, 2 oportunidades, 2 ameacas (texto de ate 120 caracteres cada).
-2. PESTEL: 1 decisao recomendada por letra (P, E, S, T, E_env, L) em ate 120 caracteres.
-3. ISHIKAWA: problema_central em ate 140 caracteres e 4 categorias de causas (Pessoas & Atendimento, Ambiente & Experiencia, Processos & Operacao, Produto & Precificacao) com descricao em ate 120 caracteres.
-
-ESTRUTURA JSON EXATA:
+JSON:
 {
   "swot": {
-    "forcas": [{ "item": "Forca 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Forca 2", "texto": "Texto em ate 120 caracteres" }],
-    "fraquezas": [{ "item": "Fraqueza 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Fraqueza 2", "texto": "Texto em ate 120 caracteres" }],
-    "oportunidades": [{ "item": "Oportunidade 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Oportunidade 2", "texto": "Texto em ate 120 caracteres" }],
-    "ameacas": [{ "item": "Ameaca 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Ameaca 2", "texto": "Texto em ate 120 caracteres" }]
+    "forcas": [{ "item": "F1", "texto": "Texto ate 80c" }, { "item": "F2", "texto": "Texto ate 80c" }],
+    "fraquezas": [{ "item": "W1", "texto": "Texto ate 80c" }, { "item": "W2", "texto": "Texto ate 80c" }],
+    "oportunidades": [{ "item": "O1", "texto": "Texto ate 80c" }, { "item": "O2", "texto": "Texto ate 80c" }],
+    "ameacas": [{ "item": "T1", "texto": "Texto ate 80c" }, { "item": "T2", "texto": "Texto ate 80c" }]
   },
   "pestel": {
-    "P": { "fator": "Politico", "decisao_recomendada": "Decisao em ate 120 caracteres" },
-    "E": { "fator": "Economico", "decisao_recomendada": "Decisao em ate 120 caracteres" },
-    "S": { "fator": "Social", "decisao_recomendada": "Decisao em ate 120 caracteres" },
-    "T": { "fator": "Tecnologico", "decisao_recomendada": "Decisao em ate 120 caracteres" },
-    "E_env": { "fator": "Ambiental", "decisao_recomendada": "Decisao em ate 120 caracteres" },
-    "L": { "fator": "Legal", "decisao_recomendada": "Decisao em ate 120 caracteres" }
+    "P": { "fator": "Politico", "decisao_recomendada": "Decisao ate 80c" },
+    "E": { "fator": "Economico", "decisao_recomendada": "Decisao ate 80c" },
+    "S": { "fator": "Social", "decisao_recomendada": "Decisao ate 80c" },
+    "T": { "fator": "Tecnologico", "decisao_recomendada": "Decisao ate 80c" },
+    "E_env": { "fator": "Ambiental", "decisao_recomendada": "Decisao ate 80c" },
+    "L": { "fator": "Legal", "decisao_recomendada": "Decisao ate 80c" }
   },
   "ishikawa": {
-    "problema_central": "Principal risco ou atrito do negocio em ate 140 caracteres",
+    "problema_central": "Problema central ate 100c",
     "causas": [
-      { "categoria": "Pessoas & Atendimento", "descricao": "Causa raiz em ate 120 caracteres" },
-      { "categoria": "Ambiente & Experiencia", "descricao": "Causa raiz em ate 120 caracteres" },
-      { "categoria": "Processos & Operacao", "descricao": "Causa raiz em ate 120 caracteres" },
-      { "categoria": "Produto & Precificacao", "descricao": "Causa raiz em ate 120 caracteres" }
+      { "categoria": "Pessoas & Atendimento", "descricao": "Causa ate 80c" },
+      { "categoria": "Ambiente & Experiencia", "descricao": "Causa ate 80c" },
+      { "categoria": "Processos & Operacao", "descricao": "Causa ate 80c" },
+      { "categoria": "Produto & Precificacao", "descricao": "Causa ate 80c" }
     ]
   }
 }`
@@ -1206,42 +1257,58 @@ function assembleFinalReport(job, snapshot) {
       visao_veredito_territorio: {
         max_tokens: metrics.visao_veredito_territorio?.max_tokens || 650,
         estimated_input_tokens: metrics.visao_veredito_territorio?.estimated_input_tokens || 0,
+        prompt_tokens: metrics.visao_veredito_territorio?.prompt_tokens_usados || 0,
+        completion_tokens: metrics.visao_veredito_territorio?.completion_tokens_usados || 0,
+        total_tokens: metrics.visao_veredito_territorio?.total_tokens_usados || 0,
         prompt_tokens_usados: metrics.visao_veredito_territorio?.prompt_tokens_usados || 0,
         completion_tokens_usados: metrics.visao_veredito_territorio?.completion_tokens_usados || 0,
         total_tokens_usados: metrics.visao_veredito_territorio?.total_tokens_usados || 0,
         duracao_ms: metrics.visao_veredito_territorio?.duration_ms || 0,
         tentativas: metrics.visao_veredito_territorio?.attempts || 1,
-        rate_limits: metrics.visao_veredito_territorio?.rate_limit_retries || 0
+        rate_limits: metrics.visao_veredito_territorio?.rate_limit_retries || 0,
+        status_http: 200
       },
       swot_causalidade_ambiente: {
-        max_tokens: metrics.swot_causalidade_ambiente?.max_tokens || 700,
+        max_tokens: metrics.swot_causalidade_ambiente?.max_tokens || 500,
         estimated_input_tokens: metrics.swot_causalidade_ambiente?.estimated_input_tokens || 0,
+        prompt_tokens: metrics.swot_causalidade_ambiente?.prompt_tokens_usados || 0,
+        completion_tokens: metrics.swot_causalidade_ambiente?.completion_tokens_usados || 0,
+        total_tokens: metrics.swot_causalidade_ambiente?.total_tokens_usados || 0,
         prompt_tokens_usados: metrics.swot_causalidade_ambiente?.prompt_tokens_usados || 0,
         completion_tokens_usados: metrics.swot_causalidade_ambiente?.completion_tokens_usados || 0,
         total_tokens_usados: metrics.swot_causalidade_ambiente?.total_tokens_usados || 0,
         duracao_ms: metrics.swot_causalidade_ambiente?.duration_ms || 0,
         tentativas: metrics.swot_causalidade_ambiente?.attempts || 1,
-        rate_limits: metrics.swot_causalidade_ambiente?.rate_limit_retries || 0
+        rate_limits: metrics.swot_causalidade_ambiente?.rate_limit_retries || 0,
+        status_http: 200
       },
       selecao_graficos_matrizes: {
         max_tokens: metrics.selecao_graficos_matrizes?.max_tokens || 700,
         estimated_input_tokens: metrics.selecao_graficos_matrizes?.estimated_input_tokens || 0,
+        prompt_tokens: metrics.selecao_graficos_matrizes?.prompt_tokens_usados || 0,
+        completion_tokens: metrics.selecao_graficos_matrizes?.completion_tokens_usados || 0,
+        total_tokens: metrics.selecao_graficos_matrizes?.total_tokens_usados || 0,
         prompt_tokens_usados: metrics.selecao_graficos_matrizes?.prompt_tokens_usados || 0,
         completion_tokens_usados: metrics.selecao_graficos_matrizes?.completion_tokens_usados || 0,
         total_tokens_usados: metrics.selecao_graficos_matrizes?.total_tokens_usados || 0,
         duracao_ms: metrics.selecao_graficos_matrizes?.duration_ms || 0,
         tentativas: metrics.selecao_graficos_matrizes?.attempts || 1,
-        rate_limits: metrics.selecao_graficos_matrizes?.rate_limit_retries || 0
+        rate_limits: metrics.selecao_graficos_matrizes?.rate_limit_retries || 0,
+        status_http: 200
       },
       movimentos_vencedor_testes: {
         max_tokens: metrics.movimentos_vencedor_testes?.max_tokens || 700,
         estimated_input_tokens: metrics.movimentos_vencedor_testes?.estimated_input_tokens || 0,
+        prompt_tokens: metrics.movimentos_vencedor_testes?.prompt_tokens_usados || 0,
+        completion_tokens: metrics.movimentos_vencedor_testes?.completion_tokens_usados || 0,
+        total_tokens: metrics.movimentos_vencedor_testes?.total_tokens_usados || 0,
         prompt_tokens_usados: metrics.movimentos_vencedor_testes?.prompt_tokens_usados || 0,
         completion_tokens_usados: metrics.movimentos_vencedor_testes?.completion_tokens_usados || 0,
         total_tokens_usados: metrics.movimentos_vencedor_testes?.total_tokens_usados || 0,
         duracao_ms: metrics.movimentos_vencedor_testes?.duration_ms || 0,
         tentativas: metrics.movimentos_vencedor_testes?.attempts || 1,
-        rate_limits: metrics.movimentos_vencedor_testes?.rate_limit_retries || 0
+        rate_limits: metrics.movimentos_vencedor_testes?.rate_limit_retries || 0,
+        status_http: 200
       }
     },
     tamanho_contexto_por_etapa: {
@@ -1605,6 +1672,43 @@ module.exports = async function handler(req, res) {
             analysisContext: stepContext
           });
 
+          // Pré-checagem de Saldo Conhecido de Tokens da Groq
+          const estimatedTokensForThisCall = Math.ceil(((stepDef.systemPrompt?.length || 0) + (stepPayloadStr?.length || 0)) / 3.8) + (stepDef.maxTokens || 700);
+          if (GROQ_RATE_LIMIT_TRACKER.remainingTokens !== null && GROQ_RATE_LIMIT_TRACKER.remainingTokens <= 0) {
+            const resetWaitSec = GROQ_RATE_LIMIT_TRACKER.resetTokensSeconds || GROQ_RATE_LIMIT_TRACKER.retryAfterSeconds || 60;
+            const nextAllowedDate = new Date(Date.now() + (resetWaitSec * 1000));
+            const nextAllowedIso = nextAllowedDate.toISOString();
+            const hhMm = nextAllowedDate.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+
+            console.warn(`[GROQ PREVENTIVE RATE LIMIT] Saldo de tokens conhecido (${GROQ_RATE_LIMIT_TRACKER.remainingTokens}) insuficiente para ${stepDef.label} (estimado: ${estimatedTokensForThisCall}). Aguardando janela de ${resetWaitSec}s...`);
+
+            // Reverter contagem de tentativa
+            activeJob.attempts_by_step[stepDef.id] = Math.max(0, (activeJob.attempts_by_step[stepDef.id] || 0) - 1);
+            activeJob.status = "waiting_rate_limit";
+            activeJob.retry_after_at = nextAllowedIso;
+            activeJob.next_allowed_request_at = nextAllowedIso;
+            activeJob.rate_limit_diagnostic = {
+              limit_type: "tokens",
+              headers: GROQ_RATE_LIMIT_TRACKER.lastHeaders || {},
+              wait_seconds: resetWaitSec,
+              rate_limit_attempts: (activeJob.rate_limit_attempts_by_step && activeJob.rate_limit_attempts_by_step[stepDef.id]) || 0,
+              next_allowed_request_at: nextAllowedIso,
+              hh_mm: hhMm,
+              remaining_tokens: GROQ_RATE_LIMIT_TRACKER.remainingTokens,
+              estimated_request_tokens: estimatedTokensForThisCall
+            };
+            activeJob.message = `Limite de tokens da Groq. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${resetWaitSec}s restantes)...`;
+            await releaseJobLock(activeJob);
+
+            return res.status(200).json(formatStatusResponse(activeJob, {
+              success: true,
+              status: "waiting_rate_limit",
+              wait_seconds: resetWaitSec,
+              estimated_remaining_seconds: resetWaitSec + 5,
+              message: activeJob.message
+            }));
+          }
+
           let groqResult;
           const stepTemperature = stepDef.id === "visao_veredito_territorio" ? 0.55 : 0.2;
           try {
@@ -1612,7 +1716,7 @@ module.exports = async function handler(req, res) {
               apiKey,
               stepDef.systemPrompt,
               stepPayloadStr,
-              stepDef.maxTokens || 750,
+              stepDef.maxTokens || 700,
               25000,
               stepDef.label,
               stepTemperature
@@ -1765,14 +1869,27 @@ module.exports = async function handler(req, res) {
               activeJob.last_rate_limit_headers = err.rateLimitHeaders || {};
               activeJob.rate_limit_diagnostic = {
                 limit_type: limitType,
+                step: activeJob.current_step,
+                step_id: stepDef.id,
+                step_label: stepDef.label,
                 headers: err.rateLimitHeaders || {},
                 wait_seconds: waitSeconds,
                 rate_limit_attempts: rateLimitCount,
                 next_allowed_request_at: nextAllowedAt,
-                hh_mm: hhMm
+                hh_mm: hhMm,
+                prompt_tokens: err.estimatedRequestTokens ? (err.estimatedRequestTokens - (err.maxTokens || 0)) : null,
+                completion_tokens: null,
+                max_tokens: err.maxTokens || stepDef.maxTokens || null,
+                total_estimado: err.estimatedRequestTokens || null,
+                total_real: null,
+                remaining_tokens_before: err.remainingTokensBefore !== undefined ? err.remainingTokensBefore : GROQ_RATE_LIMIT_TRACKER.remainingTokens
               };
 
-              activeJob.message = `Limite temporário de ${limitType}. Retentar após ${hhMm} (${waitSeconds}s restantes)...`;
+              if (limitType === "tokens") {
+                activeJob.message = `Limite de tokens da Groq. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${waitSeconds}s restantes)...`;
+              } else {
+                activeJob.message = `Limite temporário de requisições. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${waitSeconds}s restantes)...`;
+              }
               activeJob.last_error = err.message;
               activeJob.retryable = true;
             }
