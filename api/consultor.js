@@ -1663,12 +1663,34 @@ module.exports = async function handler(req, res) {
               // Respeitar o tempo real informado pela Groq com teto de segurança de até 300s
               waitSeconds = Math.min(300, Math.max(3, waitSeconds));
 
-              const nextAllowedAt = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
+              const nextAllowedDate = new Date(Date.now() + (waitSeconds * 1000));
+              const nextAllowedAt = nextAllowedDate.toISOString();
+              
+              // Formatar horário HH:MM para exibição amigável
+              const hhMm = nextAllowedDate.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+
+              // Identificar se o gargalo principal foi por Tokens ou por Requisições
+              let limitType = "requisições";
+              if (err.resetTokensSeconds && (!err.resetRequestsSeconds || err.resetTokensSeconds >= err.resetRequestsSeconds)) {
+                limitType = "tokens";
+              } else if (err.rawErrorBody?.includes("TPM") || err.rawErrorBody?.includes("tokens")) {
+                limitType = "tokens";
+              }
+
               activeJob.status = "waiting_rate_limit";
               activeJob.retry_after_at = nextAllowedAt;
               activeJob.next_allowed_request_at = nextAllowedAt;
               activeJob.last_rate_limit_error = (err.rawErrorBody || err.message || "").slice(0, 300);
-              activeJob.message = `Limite de taxa atingido na etapa ${stepDef.label} (${rateLimitCount}/3). Aguardando liberação da janela Groq (${waitSeconds}s)...`;
+              activeJob.rate_limit_diagnostic = {
+                limit_type: limitType,
+                headers: err.rateLimitHeaders || {},
+                wait_seconds: waitSeconds,
+                rate_limit_attempts: rateLimitCount,
+                next_allowed_request_at: nextAllowedAt,
+                hh_mm: hhMm
+              };
+
+              activeJob.message = `Limite temporário de ${limitType}. Retentar após ${hhMm} (${waitSeconds}s restantes)...`;
               activeJob.last_error = err.message;
               activeJob.retryable = true;
             }
