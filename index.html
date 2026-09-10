@@ -484,6 +484,20 @@
                 </div>
                 <span class="text-[9px] px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 font-bold">PRO</span>
               </button>
+
+              <button 
+                type="button" 
+                id="btn-nav-image-bank" 
+                onclick="window.switchMainTab('image-bank')"
+                class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200"
+              >
+                <i class="fa-solid fa-images text-emerald-600 text-sm"></i>
+                <div class="text-left flex-1">
+                  <p class="leading-tight">Banco de imagens gratuitos</p>
+                  <p class="text-[10px] text-slate-400 font-normal">Acervo local de SJC</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+              </button>
             </div>
           </div>
 
@@ -1784,6 +1798,23 @@
               </div>
             </div>
           </div>
+
+          <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-md">
+            <div class="h-56 sm:h-72 w-full overflow-hidden">
+              <img
+                src="Mais fotos radar/André Paixão - Studio 8.jpeg"
+                alt="Ônibus e carros circulando em uma via arborizada de São José dos Campos"
+                class="w-full h-full object-cover object-center"
+                loading="lazy"
+                width="1600"
+                height="1067"
+              />
+            </div>
+            <figcaption class="px-5 py-4 bg-brand-950 text-sm text-slate-200 leading-relaxed">
+              <span class="block text-[11px] font-black uppercase tracking-wider text-accent-cyan mb-1">Mobilidade como acesso</span>
+              O deslocamento entre bairros não é apenas um fluxo no gráfico: ele define quem consegue alcançar as experiências de lazer da cidade.
+            </figcaption>
+          </figure>
 
           <!-- O IMPACTO DA EVASÃO DE CONSUMO EM SJC -->
           <div class="space-y-6 pt-6 border-t border-slate-100">
@@ -3700,6 +3731,42 @@
             <p class="text-xs sm:text-sm text-slate-500 italic">
               A pesquisa quantitativa foi a base da sondagem que inspirou as perguntas que deram origem a estes insights.
             </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-md">
+              <div class="h-64 sm:h-72 w-full overflow-hidden">
+                <img
+                  src="fotos radar/photo_3.jpg"
+                  alt="Espaço verde de convivência urbana usado como contexto para consumo e valor percebido"
+                  class="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  width="1600"
+                  height="1067"
+                />
+              </div>
+              <figcaption class="px-4 py-3 bg-white text-xs text-slate-600 leading-relaxed">
+                <span class="block text-[11px] font-black uppercase tracking-wider text-brand-900 mb-1">Experiência e valor</span>
+                Gastronomia aparece como uma dimensão concreta da busca por variedade, estética e pertencimento.
+              </figcaption>
+            </figure>
+
+            <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-slate-900 shadow-md">
+              <div class="h-64 sm:h-72 w-full overflow-hidden">
+                <img
+                  src="fotos radar/photo_3.jpg"
+                  alt="Espaço verde de convivência urbana em São José dos Campos"
+                  class="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  width="1600"
+                  height="1067"
+                />
+              </div>
+              <figcaption class="px-4 py-3 bg-white text-xs text-slate-600 leading-relaxed">
+                <span class="block text-[11px] font-black uppercase tracking-wider text-brand-900 mb-1">Cidade vivida</span>
+                Parques e espaços públicos ajudam a visualizar a dimensão cotidiana da qualidade de vida joseense.
+              </figcaption>
+            </figure>
           </div>
         </article>
 
@@ -6358,8 +6425,275 @@
           </div>
         </article>
 
+        <style id="report-insight-image-curation">
+          #executive-report-view .report-insight-pillar {
+            padding: 0 0 1.5rem;
+            overflow: hidden;
+          }
+
+          #executive-report-view .report-insight-pillar > .report-insight-media {
+            height: 9rem;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+            position: relative;
+            background: #0b2545;
+          }
+
+          #executive-report-view .report-insight-pillar > .report-insight-media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(6, 22, 42, 0.02), rgba(6, 22, 42, 0.3));
+            pointer-events: none;
+          }
+
+          #executive-report-view .report-insight-pillar > .report-insight-media img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 500ms ease, filter 500ms ease;
+          }
+
+          #executive-report-view .report-insight-pillar:hover > .report-insight-media img {
+            transform: scale(1.05);
+            filter: saturate(1.08) contrast(1.03);
+          }
+
+          #executive-report-view .report-insight-pillar > :not(.report-insight-media) {
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+          }
+
+          #executive-report-view .report-quant-image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+          }
+
+          #executive-report-view .report-quant-image-card {
+            position: relative;
+            min-height: 12rem;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 1rem;
+            background: #0b2545;
+            box-shadow: 0 8px 20px rgba(11, 37, 69, 0.1);
+          }
+
+          #executive-report-view .report-quant-image-card img {
+            width: 100%;
+            height: 100%;
+            min-height: 12rem;
+            display: block;
+            object-fit: cover;
+            transition: transform 500ms ease, filter 500ms ease;
+          }
+
+          #executive-report-view .report-quant-image-card:hover img {
+            transform: scale(1.04);
+            filter: saturate(1.06) contrast(1.03);
+          }
+
+          #executive-report-view .report-quant-image-card figcaption {
+            position: absolute;
+            inset: auto 0 0;
+            padding: 2.5rem 0.9rem 0.8rem;
+            color: white;
+            font-size: 0.7rem;
+            line-height: 1.35;
+            background: linear-gradient(transparent, rgba(6, 22, 42, 0.9));
+          }
+
+          #executive-report-view .report-quant-image-card figcaption strong {
+            display: block;
+            margin-bottom: 0.15rem;
+            color: #48cae4;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+          }
+
+          @media (max-width: 640px) {
+            #executive-report-view .report-insight-pillar > .report-insight-media {
+              height: 8.5rem;
+            }
+
+            #executive-report-view .report-quant-image-grid {
+              grid-template-columns: 1fr;
+            }
+
+            #executive-report-view .report-quant-image-card,
+            #executive-report-view .report-quant-image-card img {
+              min-height: 11rem;
+            }
+          }
+        </style>
+        <script>
+          (() => {
+            const insightImageSets = [
+              {
+                match: "#01 IDENTIDADE JOSEENSE",
+                images: [
+                  ["Mais fotos radar/pexels-thisisengineering-3861976.jpg", "Imagem conceitual de engenharia e tecnologia", "Tecnologia no DNA"],
+                  ["Mais fotos radar/pexels-artempodrez-7773980.jpg", "Imagem conceitual de trabalho técnico e concentração", "Cidade técnica"],
+                  ["Mais fotos radar/pexels-arth-443963208-31996252.jpg", "Imagem conceitual de arquitetura e futuro urbano", "Futuro possível"]
+                ]
+              },
+              {
+                match: "#02 COMER E SAIR",
+                images: [
+                  ["Mais fotos radar/pexels-cup-of-couple-6632857.jpg", "Experiência gastronômica conceitual", "Valor percebido"],
+                  ["Mais fotos radar/pexels-cup-of-couple-8015667.jpg", "Encontro e consumo compartilhado em ambiente gastronômico", "Sair junto"],
+                  ["Mais fotos radar/pexels-jonathanborba-3563173.jpg", "Prato e apresentação como parte da experiência", "Variedade"]
+                ]
+              },
+              {
+                match: "#03 SEGURANÇA",
+                images: [
+                  ["Mais fotos radar/pexels-cottonbro-7181694.jpg", "Pessoa em deslocamento urbano ao anoitecer", "Medo noturno"],
+                  ["Mais fotos radar/pexels-tima-miroshnichenko-8764619.jpg", "Pessoa aguardando transporte em contexto urbano", "Vulnerabilidade"],
+                  ["Mais fotos radar/pexels-shvetsa-5029919.jpg", "Interação humana em situação de cuidado e proteção", "Confiança"]
+                ]
+              },
+              {
+                match: "#04 LAZER GEOGRÁFICO",
+                images: [
+                  ["Mais fotos radar/pexels-life-of-pix-2391.jpg", "Espaço aberto de convivência e lazer", "Lazer concentrado"],
+                  ["Mais fotos radar/pexels-jibarofoto-14001854.jpg", "Paisagem urbana vista como território de circulação", "Geografia do acesso"],
+                  ["Mais fotos radar/pexels-lilartsy-6228234.jpg", "Área pública e possibilidade de permanência", "Ocupação desigual"]
+                ]
+              },
+              {
+                match: "#05 CULTURA: PARA QUEM",
+                images: [
+                  ["Mais fotos radar/pexels-tomfisk-1081912.jpg", "Cena cultural e encontro coletivo em imagem conceitual", "Cultura fora do eixo"],
+                  ["Mais fotos radar/pexels-ron-lach-9783835.jpg", "Expressão artística como participação urbana", "Participação e acesso"],
+                  ["Mais fotos radar/pexels-yuncaba-11650874.jpg", "Cultura ocupando um espaço compartilhado", "Cultura no território"]
+                ]
+              },
+              {
+                match: "#05 O PREÇO DE VIVER",
+                images: [
+                  ["Mais fotos radar/pexels-karola-g-8005029.jpg", "Pessoa trabalhando em ambiente urbano contemporâneo", "Custo da cidade"],
+                  ["Mais fotos radar/pexels-mati-5952645.jpg", "Rotina profissional e pressão sobre o tempo", "Tempo e deslocamento"],
+                  ["Mais fotos radar/pexels-max-fischer-5212675.jpg", "Imagem conceitual de moradia e acesso a serviços", "Acesso à moradia"]
+                ]
+              },
+              {
+                match: "#06 MOBILIDADE",
+                images: [
+                  ["Mais fotos radar/pexels-kindelmedia-7298856.jpg", "Pessoa se deslocando em contexto urbano", "Transporte coletivo"],
+                  ["Mais fotos radar/pexels-james-l-349383308-15068453.jpg", "Mobilidade individual e conexão entre trajetos", "Dependência diária"],
+                  ["Mais fotos radar/pexels-ivo-brasil-335441-6310123.jpg", "Infraestrutura viária e deslocamento cotidiano", "Malha urbana"]
+                ]
+              },
+              {
+                match: "#07 VIDA PET",
+                images: [
+                  ["Mais fotos radar/pexels-eye4dtail-792032.jpg", "Animal e tutor em contexto de convivência", "Espaços de convivência"],
+                  ["Mais fotos radar/pexels-rethaferguson-3810792.jpg", "Cuidado cotidiano entre pessoa e animal", "Infraestrutura pública"],
+                  ["Mais fotos radar/pexels-cottonbro-5473950.jpg", "Relação de cuidado pet em imagem conceitual", "Acesso territorial"]
+                ]
+              },
+              {
+                match: "#08 SAÚDE",
+                images: [
+                  ["Mais fotos radar/pexels-cottonbro-6153354.jpg", "Atendimento de saúde em imagem conceitual", "A espera por atendimento"],
+                  ["Mais fotos radar/pexels-cottonbro-3951628.jpg", "Cuidado e escuta em contexto de saúde", "Relação humana"],
+                  ["Mais fotos radar/pexels-cottonbro-3825295.jpg", "Ambiente clínico em imagem conceitual", "Infraestrutura e acesso"]
+                ]
+              }
+            ];
+
+            const quantitativeImageSets = [
+              { match: "QUEM É O CONSUMIDOR JOSEENSE", images: [["Mais fotos radar/IMG_2838.jpg", "Comércio local e circulação de consumidores", "Perfil em movimento"], ["Mais fotos radar/IMG_2822.jpg", "Galeria comercial e hábitos de compra", "Consumo híbrido"], ["Mais fotos radar/IMG_2777.jpg", "Comércio de rua joseense", "Vida cotidiana"]] },
+              { match: "ORGULHO VS. EVASÃO", images: [["Mais fotos radar/IMG_2899.jpg", "Infraestrutura urbana reconhecível de São José dos Campos", "Orgulho local"], ["Mais fotos radar/IMG_2857.jpg", "Paisagem urbana e memória da cidade", "Pertencimento"], ["Mais fotos radar/IMG_2883.jpg", "Conexão viária e saída para outras experiências", "Evasão"]] },
+              { match: "DESCONEXÃO ENTRE OFERTA LOCAL", images: [["Mais fotos radar/IMG_2839.jpg", "Oferta comercial no centro urbano", "Oferta local"], ["Mais fotos radar/IMG_2840.jpg", "Circulação em área comercial joseense", "Identificação"], ["Mais fotos radar/IMG_2841.jpg", "Fachadas e serviços no tecido urbano", "Variedade"]] },
+              { match: "DIAGNÓSTICO DO LAZER E CONSUMO", images: [["Mais fotos radar/IMG_2905.jpg", "Espaço público de lazer em São José dos Campos", "Lazer local"], ["Mais fotos radar/IMG_2906.jpg", "Paisagem e conexão entre áreas da cidade", "Concentração"], ["Mais fotos radar/IMG_2911.jpg", "Área de permanência e convivência", "Experiência"]] },
+              { match: "FLUXO DO LAZER EM SÃO JOSÉ", images: [["Mais fotos radar/IMG_2792.jpg", "Ônibus municipal em deslocamento", "Origem e acesso"], ["Mais fotos radar/IMG_2809.jpg", "Embarque e conexão entre bairros", "Fluxo"], ["Mais fotos radar/IMG_2815.jpg", "Malha viária da circulação joseense", "Destino"]] },
+              { match: "O DNA ECONÔMICO DAS REGIÕES", images: [["Mais fotos radar/IMG_2874.jpg", "Paisagem construída e valor urbano", "Centro-Oeste"], ["Mais fotos radar/IMG_2868.jpg", "Conexão viária entre regiões", "Eixo de circulação"], ["Mais fotos radar/IMG_2875.jpg", "Tecido urbano e moradia", "Microecossistemas"]] },
+              { match: "O PODER DE DECISÃO É FEMININO", images: [["Mais fotos radar/IMG_2890.jpg", "Circulação de pessoas no centro urbano", "Decisão e consumo"], ["Mais fotos radar/IMG_2893.jpg", "Uso cotidiano do espaço público", "Autonomia"], ["Mais fotos radar/IMG_2896.jpg", "Memória e identidade urbana", "Gerações"]] },
+              { match: "MAPA DO CONSUMO", images: [["Mais fotos radar/IMG_2858.jpg", "Infraestrutura urbana de São José dos Campos", "Cidade observada"], ["Mais fotos radar/IMG_2863.jpg", "Paisagem e deslocamento local", "Território"], ["Mais fotos radar/IMG_2865.jpg", "Espaço construído e circulação", "Dados no território"]] },
+              { match: "SÃO JOSÉ: UMA POTÊNCIA EM TRANSIÇÃO", images: [["Mais fotos radar/IMG_2898.jpg", "Infraestrutura e modernização urbana", "Potência local"], ["Mais fotos radar/IMG_2904.jpg", "Cidade e capital humano em circulação", "Transição"], ["Mais fotos radar/IMG_2919.jpg", "Equipamento e serviço urbano", "Realidade concreta"]] }
+            ];
+
+            const normalize = (value) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+
+            const addInsightImages = ({ match, images }) => {
+              const article = [...document.querySelectorAll("#executive-report-view article")].find((candidate) => {
+                const heading = candidate.querySelector("h3");
+                return heading && normalize(heading.textContent).includes(normalize(match));
+              });
+
+              const pillarGrid = article?.querySelector(".grid.grid-cols-1.md\\:grid-cols-3");
+              if (!pillarGrid) return;
+
+              [...pillarGrid.children].slice(0, 3).forEach((pillar, index) => {
+                const [src, alt, label] = images[index];
+                const media = document.createElement("div");
+                media.className = "report-insight-media";
+                media.innerHTML = `<img src="${src}" alt="${alt}" loading="lazy" width="1600" height="900"><span class="absolute bottom-2 left-3 z-10 rounded bg-brand-950/80 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-accent-cyan">${label}</span>`;
+                pillar.classList.add("report-insight-pillar");
+                pillar.prepend(media);
+              });
+            };
+
+            const addQuantitativeImages = ({ match, images }) => {
+              const article = [...document.querySelectorAll("#executive-report-view article")].find((candidate) => {
+                return [...candidate.querySelectorAll("h2, h3, h4")].some((heading) => normalize(heading.textContent).includes(normalize(match)));
+              });
+              if (!article || article.querySelector(".report-quant-image-grid")) return;
+
+              const heading = [...article.querySelectorAll("h2, h3, h4")].find((candidate) => normalize(candidate.textContent).includes(normalize(match)));
+              const grid = document.createElement("div");
+              grid.className = "report-quant-image-grid";
+              grid.innerHTML = images.map(([src, alt, label]) => `<figure class="report-quant-image-card"><img src="${src}" alt="${alt}" loading="lazy" width="1600" height="1067"><figcaption><strong>${label}</strong>Registro visual local que ancora a leitura quantitativa no território.</figcaption></figure>`).join("");
+              heading?.parentElement?.after(grid);
+            };
+
+            insightImageSets.forEach(addInsightImages);
+            quantitativeImageSets.forEach(addQuantitativeImages);
+          })();
+        </script>
+
       </section>
 
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 5. BANCO DE IMAGENS GRATUITOS -->
+      <!-- ========================================== -->
+      <section id="image-bank-view" class="hidden flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        <div class="relative overflow-hidden rounded-3xl bg-brand-950 p-8 sm:p-12 text-white shadow-2xl">
+          <div class="absolute inset-0 bg-[url('Mais%20fotos%20radar/IMG_2899.jpg')] bg-cover bg-center opacity-20"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/90 to-brand-900/60"></div>
+          <div class="relative z-10 max-w-3xl space-y-4">
+            <span class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-accent-cyan">
+              <i class="fa-solid fa-camera-retro"></i> Acervo visual aberto
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight">Banco de imagens gratuitos</h2>
+            <p class="max-w-2xl text-sm sm:text-base leading-relaxed text-slate-300">
+              Fotografias autorais e registros urbanos de São José dos Campos, organizados para apresentações, pesquisas e projetos que valorizam a cidade.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p class="text-xs font-black uppercase tracking-widest text-slate-400">Acervo Radar São José</p>
+            <p id="image-bank-count" class="mt-1 text-sm font-semibold text-slate-600">Carregando imagens...</p>
+          </div>
+          <div class="relative w-full sm:w-80">
+            <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3 top-3 text-slate-400"></i>
+            <input id="image-bank-search" type="search" placeholder="Buscar por tema ou arquivo" class="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm font-semibold text-slate-800 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20" />
+          </div>
+        </div>
+
+        <div id="image-bank-filters" class="flex flex-wrap gap-2"></div>
+        <div id="image-bank-grid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
 
       <!-- ========================================== -->
@@ -6582,6 +6916,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=82.0"></script>
+  <script src="app.js?v=83.0"></script>
 </body>
 </html>

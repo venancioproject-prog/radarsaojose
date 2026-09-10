@@ -40,10 +40,12 @@ window.switchMainTab = function(tabName) {
   const dashboardView = document.getElementById("dashboard-view");
   const reportView = document.getElementById("executive-report-view");
   const aiReportView = document.getElementById("ai-report-view");
+  const imageBankView = document.getElementById("image-bank-view");
 
   const btnDashboard = document.getElementById("btn-nav-dashboard");
   const btnReport = document.getElementById("btn-nav-report");
   const btnAiReport = document.getElementById("btn-nav-consultor");
+  const btnImageBank = document.getElementById("btn-nav-image-bank");
 
   const filtersContainer = document.getElementById("sidebar-filters-container");
   const reportIndex = document.getElementById("sidebar-report-index");
@@ -57,11 +59,13 @@ window.switchMainTab = function(tabName) {
   dashboardView.classList.add("hidden");
   reportView.classList.add("hidden");
   if (aiReportView) aiReportView.classList.add("hidden");
+  if (imageBankView) imageBankView.classList.add("hidden");
 
   // Resetar botões
   if (btnDashboard) btnDashboard.className = inactiveBtnClass;
   if (btnReport) btnReport.className = inactiveBtnClass;
   if (btnAiReport) btnAiReport.className = inactiveBtnClass;
+  if (btnImageBank) btnImageBank.className = inactiveBtnClass;
 
   if (tabName === "report") {
     reportView.classList.remove("hidden");
@@ -87,6 +91,13 @@ window.switchMainTab = function(tabName) {
       setTimeout(() => input.focus(), 150);
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
+  } else if (tabName === "image-bank") {
+    if (imageBankView) imageBankView.classList.remove("hidden");
+    if (filtersContainer) filtersContainer.classList.add("hidden");
+    if (reportIndex) reportIndex.classList.add("hidden");
+    if (btnImageBank) btnImageBank.className = activeBtnClass;
+    if (typeof window.renderImageBank === "function") window.renderImageBank();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
     dashboardView.classList.remove("hidden");
     if (filtersContainer) filtersContainer.classList.remove("hidden");
@@ -96,6 +107,107 @@ window.switchMainTab = function(tabName) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
+
+const IMAGE_BANK_ITEMS = [
+  ["Mais fotos radar/IMG_2777.jpg", "Comércio de rua", "Comércio"],
+  ["Mais fotos radar/IMG_2780.jpg", "Vida urbana", "Cidade"],
+  ["Mais fotos radar/IMG_2792.jpg", "Ônibus municipal", "Mobilidade"],
+  ["Mais fotos radar/IMG_2808.jpg", "Transporte coletivo", "Mobilidade"],
+  ["Mais fotos radar/IMG_2809.jpg", "Embarque e circulação", "Mobilidade"],
+  ["Mais fotos radar/IMG_2810.jpg", "Circulação urbana", "Mobilidade"],
+  ["Mais fotos radar/IMG_2813.jpg", "Via e iluminação", "Infraestrutura"],
+  ["Mais fotos radar/IMG_2815.jpg", "Malha viária", "Mobilidade"],
+  ["Mais fotos radar/IMG_2822.jpg", "Galeria comercial", "Comércio"],
+  ["Mais fotos radar/IMG_2838.jpg", "Comércio e consumo", "Comércio"],
+  ["Mais fotos radar/IMG_2839.jpg", "Centro comercial", "Comércio"],
+  ["Mais fotos radar/IMG_2840.jpg", "Circulação no centro", "Cidade"],
+  ["Mais fotos radar/IMG_2841.jpg", "Serviços urbanos", "Cidade"],
+  ["Mais fotos radar/IMG_2857.jpg", "Memória urbana", "Patrimônio"],
+  ["Mais fotos radar/IMG_2858.jpg", "Infraestrutura urbana", "Infraestrutura"],
+  ["Mais fotos radar/IMG_2863.jpg", "Paisagem e deslocamento", "Cidade"],
+  ["Mais fotos radar/IMG_2865.jpg", "Espaço construído", "Infraestrutura"],
+  ["Mais fotos radar/IMG_2868.jpg", "Conexão entre regiões", "Mobilidade"],
+  ["Mais fotos radar/IMG_2874.jpg", "Paisagem construída", "Cidade"],
+  ["Mais fotos radar/IMG_2875.jpg", "Tecido urbano", "Cidade"],
+  ["Mais fotos radar/IMG_2883.jpg", "Ponte e conexão", "Infraestrutura"],
+  ["Mais fotos radar/IMG_2890.jpg", "Centro e cultura", "Cultura"],
+  ["Mais fotos radar/IMG_2893.jpg", "Espaço público", "Cultura"],
+  ["Mais fotos radar/IMG_2896.jpg", "Memória e arquitetura", "Patrimônio"],
+  ["Mais fotos radar/IMG_2898.jpg", "Modernização urbana", "Infraestrutura"],
+  ["Mais fotos radar/IMG_2899.jpg", "Cidade em transformação", "Cidade"],
+  ["Mais fotos radar/IMG_2902.jpg", "Área verde", "Lazer"],
+  ["Mais fotos radar/IMG_2904.jpg", "Capital humano e cidade", "Cidade"],
+  ["Mais fotos radar/IMG_2905.jpg", "Espaço de lazer", "Lazer"],
+  ["Mais fotos radar/IMG_2906.jpg", "Paisagem e convivência", "Lazer"],
+  ["Mais fotos radar/IMG_2911.jpg", "Área de permanência", "Lazer"],
+  ["Mais fotos radar/IMG_2912.jpg", "Parque e infraestrutura", "Lazer"],
+  ["Mais fotos radar/IMG_2914.jpg", "Áreas abertas", "Lazer"],
+  ["Mais fotos radar/IMG_2915.jpg", "Serviço público", "Serviços"],
+  ["Mais fotos radar/IMG_2916.jpg", "Circulação e cuidado", "Serviços"],
+  ["Mais fotos radar/IMG_2919.jpg", "Equipamento urbano", "Serviços"],
+  ["fotos radar/capa_sjc_skyline.jpg", "Panorama de São José dos Campos", "Cidade"],
+  ["fotos radar/foto_cultura.jpg", "Cultura e cidade", "Cultura"],
+  ["fotos radar/foto_noite.jpg", "Cidade à noite", "Cidade"],
+  ["fotos radar/foto_onibus_viaduto.jpg", "Ônibus sob viaduto", "Mobilidade"],
+  ["fotos radar/sjc_ponte_estaiada.jpg", "Arco da Inovação", "Infraestrutura"]
+];
+
+let imageBankInitialized = false;
+let imageBankCategory = "Todos";
+
+function renderImageBank() {
+  const grid = document.getElementById("image-bank-grid");
+  const filters = document.getElementById("image-bank-filters");
+  const search = document.getElementById("image-bank-search");
+  const count = document.getElementById("image-bank-count");
+  if (!grid || !filters || !search || !count) return;
+
+  if (!imageBankInitialized) {
+    const categories = ["Todos", ...new Set(IMAGE_BANK_ITEMS.map(([, , category]) => category))];
+    filters.innerHTML = categories.map(category => `
+      <button type="button" data-image-category="${category}" class="rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${category === "Todos" ? "border-brand-900 bg-brand-900 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:text-brand-900"}">${category}</button>
+    `).join("");
+    filters.addEventListener("click", event => {
+      const button = event.target.closest("[data-image-category]");
+      if (!button) return;
+      imageBankCategory = button.dataset.imageCategory;
+      filters.querySelectorAll("[data-image-category]").forEach(item => {
+        const active = item === button;
+        item.className = `rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${active ? "border-brand-900 bg-brand-900 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:text-brand-900"}`;
+      });
+      renderImageBank();
+    });
+    search.addEventListener("input", renderImageBank);
+    imageBankInitialized = true;
+  }
+
+  const query = search.value.trim().toLocaleLowerCase("pt-BR");
+  const filtered = IMAGE_BANK_ITEMS.filter(([, title, category]) => {
+    const matchesCategory = imageBankCategory === "Todos" || category === imageBankCategory;
+    return matchesCategory && (!query || `${title} ${category}`.toLocaleLowerCase("pt-BR").includes(query));
+  });
+
+  count.textContent = `${filtered.length} ${filtered.length === 1 ? "imagem disponível" : "imagens disponíveis"} para uso gratuito no projeto`;
+  grid.innerHTML = filtered.map(([src, title, category]) => `
+    <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
+      <div class="relative aspect-[4/3] overflow-hidden bg-slate-100">
+        <img src="${src}" alt="${title} em São José dos Campos" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <span class="absolute left-3 top-3 rounded-full bg-brand-950/85 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-accent-cyan">${category}</span>
+      </div>
+      <div class="flex items-center justify-between gap-3 p-4">
+        <div class="min-w-0">
+          <h3 class="truncate text-sm font-black text-brand-950">${title}</h3>
+          <p class="mt-1 truncate text-[11px] font-medium text-slate-400">Acervo Radar SJC</p>
+        </div>
+        <a href="${src}" download title="Baixar imagem" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-900 transition hover:bg-brand-900 hover:text-white">
+          <i class="fa-solid fa-download"></i>
+        </a>
+      </div>
+    </article>
+  `).join("");
+}
+
+window.renderImageBank = renderImageBank;
 
 // ==========================================
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS

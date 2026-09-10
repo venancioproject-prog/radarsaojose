@@ -1,0 +1,106 @@
+{
+  "escopo": "Relatório Completo (#executive-report-view)",
+  "ultima_revisao": "2026-09-09",
+  "acervo": {
+    "fotos radar": { "arquivos_de_imagem": 74, "uso": "base local e personagens já integrados ao relatório" },
+    "Mais fotos radar": { "arquivos_de_imagem": 292, "jpg_jpeg": 250, "png": 33, "webp": 5, "avif": 2 }
+  },
+  "aprovadas": [
+    {
+      "arquivo": "Mais fotos radar/André Paixão - Studio 8.jpeg",
+      "dimensao": "1600x1067 (estimada pelo arquivo)",
+      "orientacao": "horizontal",
+      "temas": ["mobilidade", "transporte público", "circulação urbana"],
+      "localidade": "São José dos Campos, provável; linha Rodoviária visível",
+      "funcao": ["evidência local", "contextualização"],
+      "destino": "rep-fluxo-lazer",
+      "recorte": "object-fit: cover; object-position: center center",
+      "prioridade": "alta",
+      "confianca": "alta",
+      "nota": 5,
+      "observacoes": "Mostra ônibus, automóveis, árvores e escala viária; sustenta a leitura de mobilidade como determinante do acesso ao lazer."
+    },
+    {
+      "arquivo": "Mais fotos radar/pexels-cup-of-couple-6632857.jpg",
+      "dimensao": "4480x6720",
+      "orientacao": "vertical",
+      "temas": ["gastronomia", "experiência", "consumo"],
+      "localidade": "não local; referência conceitual",
+      "funcao": ["contextualização", "aspiração"],
+      "destino": "rep-insights-qualitativos",
+      "recorte": "object-fit: cover; object-position: center center",
+      "prioridade": "alta",
+      "confianca": "baixa",
+      "nota": 4,
+      "observacoes": "Usada apenas como apoio conceitual para experiência e valor percebido; não sustenta afirmação factual sobre São José."
+    },
+    {
+      "arquivo": "fotos radar/photo_3.jpg",
+      "dimensao": "não extraída nesta revisão",
+      "orientacao": "horizontal",
+      "temas": ["parque", "espaço público", "qualidade de vida"],
+      "localidade": "São José dos Campos, provável pelo acervo local",
+      "funcao": ["evidência local", "humanização"],
+      "destino": "rep-insights-qualitativos",
+      "recorte": "object-fit: cover; object-position: center center",
+      "prioridade": "média",
+      "confianca": "média",
+      "nota": 4,
+      "observacoes": "Contraponto verde e cotidiano aos blocos de consumo; apoia a leitura de lazer, cultura e ocupação urbana."
+    },
+    {
+      "arquivo": "fotos radar/capa_sjc_skyline.jpg",
+      "dimensao": "3456x2304",
+      "orientacao": "horizontal",
+      "temas": ["skyline", "cidade", "mobilidade"],
+      "localidade": "São José dos Campos, provável",
+      "funcao": ["identidade", "evidência local"],
+      "destino": "rep-capa",
+      "recorte": "background-size: cover; background-position: center center",
+      "prioridade": "alta",
+      "confianca": "alta",
+      "nota": 5,
+      "observacoes": "Imagem oficial de abertura já existente; não duplicar em outras seções."
+    }
+  ],
+  "quantitativo_autoral": {
+    "quantidade_cartoes": 27,
+    "tratamento": "Três fotos autorais por bloco quantitativo, em grade estável, com legenda territorial e zoom discreto. As fotos ancoram percentuais, regiões e fluxos no território real de SJC.",
+    "blocos": [
+      { "bloco": "Quem é o consumidor joseense", "imagens": ["IMG_2838.jpg", "IMG_2822.jpg", "IMG_2777.jpg"], "sentido": "Comércio e circulação tornam visível o perfil produtivo e o consumo cotidiano." },
+      { "bloco": "Orgulho versus evasão", "imagens": ["IMG_2899.jpg", "IMG_2857.jpg", "IMG_2883.jpg"], "sentido": "Infraestrutura, memória e conexão viária materializam pertencimento e deslocamento." },
+      { "bloco": "Desconexão entre oferta local e identidade", "imagens": ["IMG_2839.jpg", "IMG_2840.jpg", "IMG_2841.jpg"], "sentido": "Fachadas e comércio local ajudam a discutir variedade e identificação sem inventar um dado." },
+      { "bloco": "Diagnóstico do lazer e consumo", "imagens": ["IMG_2905.jpg", "IMG_2906.jpg", "IMG_2911.jpg"], "sentido": "Espaços públicos mostram a experiência urbana por trás da concentração percentual." },
+      { "bloco": "Fluxo do lazer em São José", "imagens": ["IMG_2792.jpg", "IMG_2809.jpg", "IMG_2815.jpg"], "sentido": "Ônibus, embarque e vias funcionam como evidência visual dos fluxos do Sankey." },
+      { "bloco": "DNA econômico das regiões", "imagens": ["IMG_2874.jpg", "IMG_2868.jpg", "IMG_2875.jpg"], "sentido": "Paisagem construída, conexão e moradia dão escala aos microecossistemas regionais." },
+      { "bloco": "Poder de decisão é feminino", "imagens": ["IMG_2890.jpg", "IMG_2893.jpg", "IMG_2896.jpg"], "sentido": "Circulação, uso do espaço e memória urbana contextualizam decisão e gerações." },
+      { "bloco": "Mapa do consumo", "imagens": ["IMG_2858.jpg", "IMG_2863.jpg", "IMG_2865.jpg"], "sentido": "Infraestrutura, deslocamento e espaço construído tornam a leitura quantitativa observável." },
+      { "bloco": "São José: uma potência em transição", "imagens": ["IMG_2898.jpg", "IMG_2904.jpg", "IMG_2919.jpg"], "sentido": "Modernização, capital humano e serviços mostram a tensão entre potência e realidade." }
+    ]
+  },
+  "insights_pexels_conceituais": {
+    "quantidade_cartoes": 27,
+    "tratamento": "Três imagens conceituais Pexels por bloco qualitativo, aplicadas acima dos pilares; não são apresentadas como evidência local nem como retratos dos entrevistados.",
+    "blocos": [
+      { "insight": "01 Identidade joseense", "imagens": ["pexels-thisisengineering-3861976.jpg", "pexels-artempodrez-7773980.jpg", "pexels-arth-443963208-31996252.jpg"], "sentido": "Engenharia, trabalho técnico e arquitetura traduzem inovação versus conservadorismo." },
+      { "insight": "02 Comer e sair", "imagens": ["pexels-cup-of-couple-6632857.jpg", "pexels-cup-of-couple-8015667.jpg", "pexels-jonathanborba-3563173.jpg"], "sentido": "Mesa, encontro e apresentação tornam visíveis variedade, preço e valor percebido." },
+      { "insight": "03 Segurança", "imagens": ["pexels-cottonbro-7181694.jpg", "pexels-tima-miroshnichenko-8764619.jpg", "pexels-shvetsa-5029919.jpg"], "sentido": "Noite, espera e cuidado representam a percepção subjetiva de risco sem dramatização factual." },
+      { "insight": "04 Lazer geográfico", "imagens": ["pexels-life-of-pix-2391.jpg", "pexels-jibarofoto-14001854.jpg", "pexels-lilartsy-6228234.jpg"], "sentido": "Espaço aberto, território e permanência ilustram acesso desigual ao lazer." },
+      { "insight": "05 Cultura", "imagens": ["pexels-tomfisk-1081912.jpg", "pexels-ron-lach-9783835.jpg", "pexels-yuncaba-11650874.jpg"], "sentido": "Expressão artística, participação e ocupação coletiva dão forma à demanda cultural." },
+      { "insight": "05 Preço de viver no Vale", "imagens": ["pexels-karola-g-8005029.jpg", "pexels-mati-5952645.jpg", "pexels-max-fischer-5212675.jpg"], "sentido": "Trabalho, tempo e moradia representam o custo humano da cidade cara." },
+      { "insight": "06 Mobilidade", "imagens": ["pexels-kindelmedia-7298856.jpg", "pexels-james-l-349383308-15068453.jpg", "pexels-ivo-brasil-335441-6310123.jpg"], "sentido": "Deslocamento, mobilidade individual e infraestrutura explicam o last mile." },
+      { "insight": "07 Vida pet", "imagens": ["pexels-eye4dtail-792032.jpg", "pexels-rethaferguson-3810792.jpg", "pexels-cottonbro-5473950.jpg"], "sentido": "Tutor, vínculo e cuidado traduzem a demanda por infraestrutura pet com humanidade." },
+      { "insight": "08 Saúde", "imagens": ["pexels-cottonbro-6153354.jpg", "pexels-cottonbro-3951628.jpg", "pexels-cottonbro-3825295.jpg"], "sentido": "Atendimento, escuta e ambiente clínico apoiam a leitura de espera e saturação." }
+    ]
+  },
+  "nao_utilizadas": {
+    "motivos": [
+      "logos e marcas: não sustentam uma tese do relatório",
+      "imagens genéricas ou sem localidade verificável: não usadas como evidência factual",
+      "retratos não comprovados: mantidos apenas nas personas ilustrativas já existentes",
+      "imagens de notícias importadas: excluídas por contexto editorial e direitos incertos",
+      "demais arquivos: aguardam associação com nota mínima 4 e não foram forçados em gráficos ou tabelas"
+    ]
+  },
+  "regra_de_escopo": "Nenhuma imagem foi inserida no dashboard ou no Consultor IA; a implementação foi limitada ao markup dentro de #executive-report-view."
+}
