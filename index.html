@@ -6858,11 +6858,11 @@
               <h3 class="text-lg sm:text-xl font-black text-brand-950 tracking-tight">Indicadores Chave do Território Selecionado</h3>
             </div>
 
-            <!-- FILTROS PRINCIPAIS CONECTADOS -->
-            <div class="flex flex-wrap items-center gap-2.5">
+            <!-- FILTROS PRINCIPAIS CONECTADOS (LADO A LADO) -->
+            <div class="flex flex-nowrap items-center gap-2.5 shrink-0 overflow-x-auto">
               <!-- Filtro Região -->
-              <div class="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
-                <i class="fa-solid fa-location-dot text-cyan-600 text-xs"></i>
+              <div class="flex items-center gap-2 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
+                <i class="fa-solid fa-location-dot text-cyan-600 text-xs shrink-0"></i>
                 <select id="ibge-filter-region" onchange="window.handleIbgeRegionChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
                   <option value="todos">Todas as 7 Regiões de SJC</option>
                   <option value="oeste">Região Oeste (Aquarius, Urbanova, Colinas)</option>
@@ -6875,11 +6875,9 @@
                 </select>
               </div>
 
-
-
               <!-- Filtro Renda -->
-              <div class="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
-                <i class="fa-solid fa-wallet text-emerald-600 text-xs"></i>
+              <div class="flex items-center gap-2 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
+                <i class="fa-solid fa-wallet text-emerald-600 text-xs shrink-0"></i>
                 <select id="ibge-filter-income" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
                   <option value="todos">Todas as Classes de Renda</option>
                   <option value="alta">Classe Alta (&gt;5 SM / R$ 7.000+)</option>
@@ -6892,7 +6890,7 @@
               <button 
                 type="button" 
                 onclick="window.resetIbgeFilters()" 
-                class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition-all cursor-pointer"
+                class="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition-all cursor-pointer shrink-0 border border-slate-200/80 shadow-2xs"
                 title="Resetar filtros para o padrão"
               >
                 <i class="fa-solid fa-arrow-rotate-left"></i>
@@ -7906,6 +7904,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=99.0"></script>
+  <script src="app.js?v=100.0"></script>
 </body>
 </html>
