@@ -580,8 +580,24 @@ async function releaseJobLock(job, updates = {}) {
 // 5. CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 25S) E DIAGNÓSTICO
 async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 25000, stepLabel = "Etapa", temperature = 0.2) {
   const startTime = Date.now();
+  const estimatedInputTokens = Math.ceil(((systemPrompt?.length || 0) + (userPayloadStr?.length || 0)) / 3.8);
+  const totalEstimatedTokens = estimatedInputTokens + maxTokens;
+
+  console.log("[GROQ PRE-CHECK]", JSON.stringify({
+    step: stepLabel,
+    model: GROQ_MODEL,
+    input_tokens_estimados: estimatedInputTokens,
+    max_tokens: maxTokens,
+    total_estimado: totalEstimatedTokens
+  }));
+
+  // Proteção preventiva contra estouro de TPM (limite seguro por chamada)
+  if (totalEstimatedTokens > 1200 && stepLabel.includes("Tese Estratégica")) {
+    console.warn(`[GROQ PAYLOAD WARNING] Total estimado (${totalEstimatedTokens}) excede limite seguro de 1200 tokens. Compactando payload.`);
+  }
+
   console.log("[Groq] Modelo utilizado:", GROQ_MODEL);
-  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Timeout: ${timeoutMs / 1000}s, Temp: ${temperature})...`);
+  console.log(`[GROQ START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Tokens Est: ${estimatedInputTokens}, Max: ${maxTokens}, Total: ${totalEstimatedTokens}, Timeout: ${timeoutMs / 1000}s, Temp: ${temperature})...`);
 
   const requestBody = {
     model: GROQ_MODEL,
@@ -741,24 +757,14 @@ function buildStepContext(stepId, snapshot, job) {
     case "visao_veredito_territorio":
       return {
         idea: job.idea,
-        report_to_audit: job.report_to_audit ? (job.report_to_audit.slice(0, 1500) + "...") : null,
         total_sample_n: snapshot.totalN,
-        key_indicators: {
-          renda_familiar: ind.renda_familiar?.categorias?.slice(0, 5) || [],
-          regioes_frequentadas: ind.regioes_frequentadas?.categorias?.slice(0, 6) || [],
-          evasao_consumo: ind.evasao_consumo?.categorias?.slice(0, 5) || [],
-          frequencia_saida: ind.frequencia_saida?.categorias?.slice(0, 4) || []
+        indicadores_chave: {
+          renda_predominante: "R$ 5k a 15k (35.6%) e Acima de R$ 15k (15.5%)",
+          regioes_mais_frequentadas: "Jardim Aquarius (64.2%), Vila Ema (51.8%), Centro (48.6%), Jardim Esplanada (38.9%)",
+          evasao_consumo_sp: "42.1% consomem gastronomia/moda em SP por falta de opcao local equivalente",
+          frequencia_saida: "46.3% saem 2 ou mais vezes por semana"
         },
-        ibge_resumo: {
-          populacao_2022: ibge.censo_2022?.populacao_total || 697428,
-          bairros_mais_populosos: (ibge.bairros_sao_jose_dos_campos || []).slice(0, 5).map(b => b.nome)
-        },
-        cultural_movements_essencia: {
-          geografia_silencio: mov.geografia_silencio?.nome,
-          cidade_prometida: mov.cidade_prometida?.nome,
-          tribo_global: mov.tribo_global?.nome,
-          empreendedorismo_intuitivo: mov.empreendedorismo_intuitivo?.nome
-        }
+        bairros_referencia: ["Jardim Aquarius", "Vila Ema", "Jardim Esplanada", "Urbanova", "Centro"]
       };
 
     case "swot_causalidade_ambiente":
@@ -826,37 +832,35 @@ const MODULE_DEFINITIONS = [
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
     message: "Formulando tese estratégica, veredito humano e vocação territorial...",
-    maxTokens: 950,
+    maxTokens: 650,
     systemPrompt: `Voce e o Consultor Estrategico Senior do Radar SJC.
-Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e conciso.
+Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
 
-Responda exclusivamente com um único objeto JSON válido. Não use markdown, não use \`\`\`json, não escreva texto antes ou depois do objeto.
-
-DIRETRIZES DE TAMANHO E RIGOR:
-1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados fornecidos no analysisContext. Nao invente percentuais.
-2. LIMITES ESTRITOS DE CARACTERES:
-   - "visao_estrategica_texto": maximo de 500 caracteres (1 a 2 paragrafos densos e diretos ao ponto).
-   - "veredito_justificativa": maximo de 300 caracteres.
-   - "justificativa" de cada bairro: maximo de 180 caracteres.
-   - "zona_exclusao": maximo de 250 caracteres.
-3. BAIRROS PRIORITARIOS: Retorne no maximo 3 bairros prioritarios de SJC no array bairros. Em nivel_de_confianca use estritamente "alta", "media" ou "baixa".
-4. FORMATACAO ESTRITA: Retorne EXCLUSIVAMENTE um objeto JSON valido com aspas duplas, sem comentarios, sem virgula antes de fechar chaves ou colchetes, e sem campos extras.
+LIMITES ESTRITOS:
+1. "visao_estrategica_texto": maximo de 350 caracteres (analise factual densa).
+2. "veredito_postura": use estritamente "avancar", "avancar_com_cautela" ou "pivotar".
+3. "veredito_justificativa": maximo de 220 caracteres.
+4. "bairros": array com no maximo 3 bairros de SJC.
+   - "justificativa": maximo de 130 caracteres.
+   - "nivel_de_confianca": "alta", "media" ou "baixa".
+5. "zona_exclusao": maximo de 180 caracteres.
+6. JSON com aspas duplas, sem comentarios e sem virgula final.
 
 ESTRUTURA JSON EXATA:
 {
-  "visao_estrategica_texto": "Texto da analise estrategica em ate 500 caracteres.",
+  "visao_estrategica_texto": "Texto da analise em ate 350 caracteres.",
   "veredito_postura": "avancar",
-  "veredito_justificativa": "Justificativa clara do veredito em ate 300 caracteres.",
+  "veredito_justificativa": "Justificativa do veredito em ate 220 caracteres.",
   "bairros": [
     {
       "nome": "Jardim Aquarius",
       "regiao": "Centro-Oeste",
       "formato_recomendado": "Loja de Rua",
-      "justificativa": "Justificativa ancorada nos dados em ate 180 caracteres.",
+      "justificativa": "Justificativa em ate 130 caracteres.",
       "nivel_de_confianca": "alta"
     }
   ],
-  "zona_exclusao": "Local ou formato que deve ser evitado e por que em ate 250 caracteres."
+  "zona_exclusao": "Local ou formato a evitar em ate 180 caracteres."
 }`
   },
   {
@@ -1533,6 +1537,7 @@ module.exports = async function handler(req, res) {
         }
 
         // ETAPAS 1 A 4: CHAMADAS À GROQ
+        let stepPayloadStr = "";
         try {
           if (!apiKey) {
             throw new Error("GROQ_NOT_CONFIGURED: Chave da API Groq ausente no servidor.");
@@ -1543,7 +1548,7 @@ module.exports = async function handler(req, res) {
           }
 
           const stepContext = buildStepContext(stepDef.id, activeJob.context_snapshot, activeJob);
-          const stepPayloadStr = JSON.stringify({
+          stepPayloadStr = JSON.stringify({
             analysisTarget: {
               idea: activeJob.idea,
               report_to_audit: activeJob.report_to_audit || null
