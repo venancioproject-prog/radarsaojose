@@ -10601,14 +10601,23 @@ function renderIbgeHistoricoPopChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 24,
+          left: 10,
+          right: 18,
+          bottom: 4
+        }
+      },
       plugins: {
         legend: { display: false },
         datalabels: {
           align: "top",
           anchor: "end",
-          offset: 4,
+          offset: 6,
+          clip: false,
           color: "#0B2545",
-          font: { family: "Montserrat", size: 10, weight: "bold" },
+          font: { family: "Montserrat", size: 10.5, weight: "bold" },
           formatter: (val) => val >= 1000 ? (val / 1000).toFixed(1) + "k" : val
         },
         tooltip: {
@@ -10620,6 +10629,7 @@ function renderIbgeHistoricoPopChart() {
       scales: {
         y: {
           beginAtZero: false,
+          grace: "15%",
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
           ticks: {
             font: { family: "Montserrat", size: 9 },
@@ -10681,11 +10691,21 @@ function renderIbgeFaixasEtariasChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 24,
+          left: 4,
+          right: 8,
+          bottom: 4
+        }
+      },
       plugins: {
         legend: { display: false },
         datalabels: {
           anchor: "end",
           align: "top",
+          offset: 4,
+          clip: false,
           color: "#0F172A",
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
@@ -10699,6 +10719,7 @@ function renderIbgeFaixasEtariasChart() {
       scales: {
         y: {
           beginAtZero: true,
+          grace: "18%",
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
           ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + "k" : v }
         },
@@ -11040,11 +11061,21 @@ function renderIbgeBairrosRendaChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          top: 24,
+          left: 4,
+          right: 8,
+          bottom: 4
+        }
+      },
       plugins: {
         legend: { display: false },
         datalabels: {
           anchor: "end",
           align: "top",
+          offset: 4,
+          clip: false,
           color: "#0F172A",
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v.toFixed(1) + " SM"
@@ -11058,6 +11089,7 @@ function renderIbgeBairrosRendaChart() {
       scales: {
         y: {
           beginAtZero: true,
+          grace: "18%",
           suggestedMax: 12,
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
           ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v + " SM" }
