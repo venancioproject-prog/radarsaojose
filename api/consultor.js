@@ -904,35 +904,25 @@ const MODULE_DEFINITIONS = [
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
     message: "Formulando tese estratégica, veredito humano e vocação territorial...",
-    maxTokens: 650,
-    systemPrompt: `Voce e o Consultor Estrategico Senior do Radar SJC.
-Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
+    maxTokens: 500,
+    systemPrompt: `Consultor Radar SJC. Responda SOMENTE objeto JSON sem markdown.
+LIMITES: visao_estrategica_texto (ate 280c), veredito_postura ("avancar", "avancar_com_cautela" ou "pivotar"), veredito_justificativa (ate 160c), bairros (max 3 com nome, regiao, formato_recomendado, justificativa ate 100c, nivel_de_confianca "alta", "media" ou "baixa"), zona_exclusao (ate 140c).
 
-LIMITES ESTRITOS:
-1. "visao_estrategica_texto": maximo de 350 caracteres (analise factual densa).
-2. "veredito_postura": use estritamente "avancar", "avancar_com_cautela" ou "pivotar".
-3. "veredito_justificativa": maximo de 220 caracteres.
-4. "bairros": array com no maximo 3 bairros de SJC.
-   - "justificativa": maximo de 130 caracteres.
-   - "nivel_de_confianca": "alta", "media" ou "baixa".
-5. "zona_exclusao": maximo de 180 caracteres.
-6. JSON com aspas duplas, sem comentarios e sem virgula final.
-
-ESTRUTURA JSON EXATA:
+JSON:
 {
-  "visao_estrategica_texto": "Texto da analise em ate 350 caracteres.",
+  "visao_estrategica_texto": "Analise factual densa ate 280c.",
   "veredito_postura": "avancar",
-  "veredito_justificativa": "Justificativa do veredito em ate 220 caracteres.",
+  "veredito_justificativa": "Justificativa do veredito ate 160c.",
   "bairros": [
     {
       "nome": "Jardim Aquarius",
       "regiao": "Centro-Oeste",
       "formato_recomendado": "Loja de Rua",
-      "justificativa": "Justificativa em ate 130 caracteres.",
+      "justificativa": "Justificativa ate 100c.",
       "nivel_de_confianca": "alta"
     }
   ],
-  "zona_exclusao": "Local ou formato a evitar em ate 180 caracteres."
+  "zona_exclusao": "Zona ou formato a evitar ate 140c."
 }`
   },
   {
@@ -1255,7 +1245,7 @@ function assembleFinalReport(job, snapshot) {
     duracao_apresentacao_ms: perf.presentation_ms || 0,
     tokens_por_etapa: {
       visao_veredito_territorio: {
-        max_tokens: metrics.visao_veredito_territorio?.max_tokens || 650,
+        max_tokens: metrics.visao_veredito_territorio?.max_tokens || 500,
         estimated_input_tokens: metrics.visao_veredito_territorio?.estimated_input_tokens || 0,
         prompt_tokens: metrics.visao_veredito_territorio?.prompt_tokens_usados || 0,
         completion_tokens: metrics.visao_veredito_territorio?.completion_tokens_usados || 0,
@@ -1513,7 +1503,7 @@ module.exports = async function handler(req, res) {
           attempt: stepAttempt,
           max_attempts: 3,
           rate_limit_attempts: rateLimitAttempts,
-          max_rate_limit_attempts: limitType === "tokens" ? 1 : 3,
+          max_rate_limit_attempts: 3,
           is_processing: Boolean(jobData.is_processing),
           lock_timestamp: jobData.lock_timestamp || null,
           updated_at: jobData.updated_at,
@@ -1829,17 +1819,17 @@ module.exports = async function handler(req, res) {
               limitType = "tokens";
             }
 
-            // Para limite de tokens: permitir no máximo 1 retentativa após a janela real indicada pela Groq
-            const maxAllowedRateAttempts = limitType === "tokens" ? 1 : 3;
+            // Para limite de taxa (tokens ou requisições): permitir até 3 tentativas com respeito estrito às janelas de reset
+            const maxAllowedRateAttempts = 3;
 
             if (rateLimitCount > maxAllowedRateAttempts) {
               activeJob.status = "failed";
               activeJob.error_code = limitType === "tokens" ? "GROQ_TOKEN_LIMIT_EXHAUSTED" : "GROQ_RATE_LIMIT_EXHAUSTED";
-              activeJob.message = `Limite de ${limitType} da Groq excedeu o máximo permitido na etapa ${stepDef.label}.`;
+              activeJob.message = `Limite de ${limitType} da Groq excedeu o máximo de 3 tentativas na etapa ${stepDef.label}.`;
               activeJob.last_error = err.message;
               activeJob.retryable = true;
             } else {
-              const exponentialSec = 8 * Math.pow(2, rateLimitCount - 1);
+              const exponentialSec = 10 * Math.pow(2, rateLimitCount - 1);
               const headerCandidates = [
                 err.retryAfterSeconds,
                 err.resetTokensSeconds,
