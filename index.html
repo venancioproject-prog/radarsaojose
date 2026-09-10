@@ -6844,10 +6844,72 @@
           </div>
         </div>
 
-        <!-- CARDS DE KPIS DEMOGRÁFICOS & ECONÔMICOS OFICIAIS (RESUMO GERAL) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
-          <!-- Card 1: População -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+        <!-- ====================================================================== -->
+        <!-- PAINEL DE CONTROLE & FILTROS CONTEXTUAIS DOS KPIS OFICIAIS -->
+        <!-- ====================================================================== -->
+        <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 shadow-card space-y-4">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-cyan-100 text-cyan-900">FILTROS EM TEMPO REAL</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs font-bold text-slate-500">Recorte Censitário & Territorial</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-black text-brand-950 tracking-tight">Indicadores Chave do Território Selecionado</h3>
+            </div>
+
+            <!-- FILTROS PRINCIPAIS CONECTADOS -->
+            <div class="flex flex-wrap items-center gap-2.5">
+              <!-- Filtro Região -->
+              <div class="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
+                <i class="fa-solid fa-location-dot text-cyan-600 text-xs"></i>
+                <select id="ibge-filter-region" onchange="window.handleIbgeRegionChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
+                  <option value="todos">Todas as 7 Regiões de SJC</option>
+                  <option value="oeste">Região Oeste (Aquarius, Urbanova, Colinas)</option>
+                  <option value="centro">Região Central (Centro, Vila Adyana, Ema)</option>
+                  <option value="sul">Região Sul (Satélite, Bosque, Morumbi)</option>
+                  <option value="leste">Região Leste (Vista Verde, Eugênio de Melo)</option>
+                  <option value="norte">Região Norte (Santana, Alto da Ponte)</option>
+                  <option value="sudeste">Região Sudeste (São Judas, Putim)</option>
+                  <option value="sao_francisco">Distrito São Francisco Xavier</option>
+                </select>
+              </div>
+
+              <!-- Filtro Bairro -->
+              <div class="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
+                <i class="fa-solid fa-house-chimney text-brand-600 text-xs"></i>
+                <select id="ibge-filter-bairro" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer max-w-[200px]">
+                  <option value="todos">Todos os Bairros da Região</option>
+                </select>
+              </div>
+
+              <!-- Filtro Renda -->
+              <div class="flex items-center gap-1.5 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-cyan-400 transition-all">
+                <i class="fa-solid fa-wallet text-emerald-600 text-xs"></i>
+                <select id="ibge-filter-income" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
+                  <option value="todos">Todas as Classes de Renda</option>
+                  <option value="alta">Classe Alta (&gt;5 SM / R$ 7.000+)</option>
+                  <option value="media">Classe Média (2 a 5 SM / R$ 2.800 a 7.000)</option>
+                  <option value="base">Base da Pirâmide (Até 2 SM)</option>
+                </select>
+              </div>
+
+              <!-- Botão Reset -->
+              <button 
+                type="button" 
+                onclick="window.resetIbgeFilters()" 
+                class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition-all cursor-pointer"
+                title="Resetar filtros para o padrão"
+              >
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- CARDS DE KPIS DEMOGRÁFICOS & ECONÔMICOS OFICIAIS (RESUMO GERAL) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 pt-2">
+            <!-- Card 1: População -->
+            <div class="bg-slate-50/70 rounded-2xl p-5 border border-slate-200/80 shadow-2xs hover:shadow-card hover:bg-white transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">População Recenseada</span>
               <div class="w-8 h-8 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center text-xs font-bold">
@@ -6965,8 +7027,8 @@
         <!-- EIXO 1: TERRITÓRIO, BAIRROS & RENDA (COM FILTROS NO CABEÇALHO DO BLOCO) -->
         <!-- ====================================================================== -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6" id="ibge-bairros-container">
-          <!-- Cabeçalho do Bloco com Título + Barra de Filtros Integrados -->
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <!-- Cabeçalho do Bloco com Título e Status Territorial -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div class="flex items-center gap-3">
               <div class="w-11 h-11 rounded-2xl bg-brand-900 text-accent-cyan flex items-center justify-center text-xl shadow-sm shrink-0">
                 <i class="fa-solid fa-map-location-dot"></i>
@@ -6981,41 +7043,9 @@
               </div>
             </div>
 
-            <!-- FILTROS CONTEXTUAIS DO BLOCO TERRITORIAL -->
-            <div class="flex flex-wrap items-center gap-2.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/80">
-              <!-- Filtro Região -->
-              <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                <i class="fa-solid fa-location-dot text-cyan-600 text-xs"></i>
-                <select id="ibge-filter-region" onchange="window.handleIbgeRegionChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
-                  <option value="todos">Todas as 7 Regiões</option>
-                  <option value="oeste">Região Oeste (Aquarius, Urbanova, Colinas)</option>
-                  <option value="centro">Região Central (Centro, Vila Adyana, Ema)</option>
-                  <option value="sul">Região Sul (Satélite, Bosque, Morumbi)</option>
-                  <option value="leste">Região Leste (Vista Verde, Eugênio de Melo)</option>
-                  <option value="norte">Região Norte (Santana, Alto da Ponte)</option>
-                  <option value="sudeste">Região Sudeste (São Judas, Putim)</option>
-                  <option value="sao_francisco">Distrito São Francisco Xavier</option>
-                </select>
-              </div>
-
-              <!-- Filtro Bairro -->
-              <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                <i class="fa-solid fa-house-chimney text-brand-600 text-xs"></i>
-                <select id="ibge-filter-bairro" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer max-w-[200px]">
-                  <option value="todos">Todos os Bairros da Região</option>
-                </select>
-              </div>
-
-              <!-- Filtro Renda do Bloco -->
-              <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                <i class="fa-solid fa-wallet text-emerald-600 text-xs"></i>
-                <select id="ibge-filter-income" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
-                  <option value="todos">Todas as Classes de Renda</option>
-                  <option value="alta">Classe Alta (&gt;5 SM / R$ 7.000+)</option>
-                  <option value="media">Classe Média (2 a 5 SM / R$ 2.800 a 7.000)</option>
-                  <option value="base">Base da Pirâmide (Até 2 SM)</option>
-                </select>
-              </div>
+            <div class="flex items-center gap-2 text-xs font-bold text-slate-500 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
+              <i class="fa-solid fa-layer-group text-cyan-600"></i>
+              <span>Distribuição Georreferenciada de São José dos Campos</span>
             </div>
           </div>
 
@@ -7877,6 +7907,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=90.0"></script>
+  <script src="app.js?v=91.0"></script>
 </body>
 </html>
