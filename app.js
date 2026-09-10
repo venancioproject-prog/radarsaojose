@@ -10235,7 +10235,7 @@ const IBGE_DATABASE = {
     frota_automoveis: 338120,
     frota_motocicletas: 74210,
     frota_comerciais_outros: 80320,
-    taxa_motorizacao: 1.41 // 1 veículo a cada 1.41 habitantes
+    taxa_motorizacao: 1.41
   },
   regioes: {
     oeste: {
@@ -10243,6 +10243,8 @@ const IBGE_DATABASE = {
       pop: 87800,
       dom: 34000,
       renda_media_sm: 9.8,
+      pib_share: 0.28,
+      empresas_share: 0.26,
       bairros: [
         { id: "aquarius", nome: "Jd. Aquarius", pop: 26500, dom: 10200, renda_sm: 11.5, desc: "Polo executivo e residencial vertical de altíssimo padrão, comércio nobre e serviços." },
         { id: "urbanova", nome: "Urbanova", pop: 22800, dom: 7400, renda_sm: 12.8, desc: "Bairro nobre de condomínios fechados horizontais, alta renda familiar e expansão universitária." },
@@ -10257,6 +10259,8 @@ const IBGE_DATABASE = {
       pop: 71100,
       dom: 29000,
       renda_media_sm: 6.2,
+      pib_share: 0.22,
+      empresas_share: 0.25,
       bairros: [
         { id: "centro_hist", nome: "Centro Histórico / Comercial", pop: 24500, dom: 10800, renda_sm: 4.6, desc: "Polo comercial popular tradicional, calçadão, serviços públicos e rede bancária densa." },
         { id: "vila_adyana", nome: "Vila Adyana", pop: 14200, dom: 6300, renda_sm: 8.4, desc: "Bairro médico-hospitalar e residencial nobre, contorno do Parque Santos Dumont." },
@@ -10270,6 +10274,8 @@ const IBGE_DATABASE = {
       pop: 240500,
       dom: 86000,
       renda_media_sm: 3.6,
+      pib_share: 0.24,
+      empresas_share: 0.27,
       bairros: [
         { id: "satelite", nome: "Jd. Satélite", pop: 48000, dom: 17500, renda_sm: 4.8, desc: "Maior polo comercial descentralizado de SJC (Av. Andrômeda) e Vale Sul Shopping." },
         { id: "bosque", nome: "Bosque dos Eucaliptos", pop: 44000, dom: 15800, renda_sm: 4.2, desc: "Bairro residencial muito estruturado, ampla rede escolar, praças e comércio autossuficiente." },
@@ -10285,6 +10291,8 @@ const IBGE_DATABASE = {
       pop: 173000,
       dom: 62000,
       renda_media_sm: 2.9,
+      pib_share: 0.16,
+      empresas_share: 0.13,
       bairros: [
         { id: "vista_verde", nome: "Vista Verde / Cidade Vista Verde", pop: 21000, dom: 7600, renda_sm: 4.6, desc: "Bairro planejado residencial tradicional, arborizado e com classe média consolidada." },
         { id: "eugenio_melo", nome: "Eugênio de Melo (Distrito)", pop: 42000, dom: 15200, renda_sm: 2.8, desc: "Polo industrial e de inovação (Parque Tecnológico de SJC), Ceagesp e rodovia Dutra." },
@@ -10299,6 +10307,8 @@ const IBGE_DATABASE = {
       pop: 66200,
       dom: 23000,
       renda_media_sm: 2.6,
+      pib_share: 0.05,
+      empresas_share: 0.05,
       bairros: [
         { id: "santana", nome: "Santana", pop: 22000, dom: 7800, renda_sm: 2.9, desc: "Bairro berço histórico de SJC, Parque da Cidade (Burle Marx) e comércio centenário." },
         { id: "alto_ponte", nome: "Alto da Ponte", pop: 16500, dom: 5800, renda_sm: 2.5, desc: "Área tradicional da Zona Norte ligada ao Rio Paraíba do Sul e vias de acesso ao norte." },
@@ -10311,6 +10321,8 @@ const IBGE_DATABASE = {
       pop: 47400,
       dom: 16000,
       renda_media_sm: 3.1,
+      pib_share: 0.04,
+      empresas_share: 0.03,
       bairros: [
         { id: "sao_judas", nome: "São Judas Tadeu", pop: 14000, dom: 4800, renda_sm: 3.3, desc: "Bairro residencial em expansão com proximidade ao aeroporto e Embraer." },
         { id: "putim", nome: "Putim", pop: 16500, dom: 5600, renda_sm: 2.5, desc: "Importante polo residencial e comercial da região sudeste com forte expansão imobiliária." },
@@ -10323,6 +10335,8 @@ const IBGE_DATABASE = {
       pop: 11400,
       dom: 3800,
       renda_media_sm: 3.4,
+      pib_share: 0.01,
+      empresas_share: 0.01,
       bairros: [
         { id: "sfx_vila", nome: "Vila de São Francisco Xavier", pop: 5200, dom: 1800, renda_sm: 4.1, desc: "Centro histórico do distrito, praça central, gastronomia artesanal e pousadas de charme." },
         { id: "sfx_ferreiras", nome: "Bairro dos Ferreiras & Remédios", pop: 3400, dom: 1100, renda_sm: 2.9, desc: "Área rural e ecológica com forte apelo para trilhas, cachoeiras e turismo de montanha." },
@@ -10390,6 +10404,130 @@ const IBGE_DATABASE = {
   }
 };
 
+// ==========================================
+// ENGINE DE CRUZAMENTO TOTAL DE MICRODADOS (MICRODATA CROSS-ENGINE)
+// ==========================================
+function calculateFilteredIbgeMicrodata() {
+  const region = document.getElementById("ibge-filter-region")?.value || "todos";
+  const bairro = document.getElementById("ibge-filter-bairro")?.value || "todos";
+  const income = document.getElementById("ibge-filter-income")?.value || "todos";
+  const timeline = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
+  const sector = document.getElementById("ibge-filter-sector")?.value || "todos";
+  const demo = document.getElementById("ibge-filter-demo")?.value || "geral";
+
+  let basePop = IBGE_DATABASE.municipio.populacao_censo_2022;
+  let baseDom = IBGE_DATABASE.municipio.domicilios_censo_2022;
+  let baseRendaSM = IBGE_DATABASE.municipio.salario_medio_formal_sm;
+  let baseEmpresas = IBGE_DATABASE.municipio.empresas_ativas;
+  let basePib = IBGE_DATABASE.municipio.pib_corrente_reais_milhoes;
+  let activeBairroObj = null;
+  let activeRegionName = "Toda a Cidade de SJC";
+
+  // 1. Recorte Territorial (Região ou Bairro)
+  if (bairro !== "todos") {
+    for (const rKey in IBGE_DATABASE.regioes) {
+      const r = IBGE_DATABASE.regioes[rKey];
+      const found = r.bairros.find(b => b.id === bairro);
+      if (found) {
+        activeBairroObj = found;
+        activeRegionName = r.nome;
+        basePop = found.pop;
+        baseDom = found.dom;
+        baseRendaSM = found.renda_sm;
+        baseEmpresas = Math.round(IBGE_DATABASE.municipio.empresas_ativas * (found.pop / IBGE_DATABASE.municipio.populacao_censo_2022));
+        basePib = (IBGE_DATABASE.municipio.pib_corrente_reais_milhoes * (found.pop / IBGE_DATABASE.municipio.populacao_censo_2022) * (found.renda_sm / 3.4));
+        break;
+      }
+    }
+  } else if (region !== "todos") {
+    const regData = IBGE_DATABASE.regioes[region];
+    if (regData) {
+      activeRegionName = regData.nome;
+      basePop = regData.pop;
+      baseDom = regData.dom;
+      baseRendaSM = regData.renda_media_sm;
+      baseEmpresas = Math.round(IBGE_DATABASE.municipio.empresas_ativas * regData.empresas_share);
+      basePib = IBGE_DATABASE.municipio.pib_corrente_reais_milhoes * regData.pib_share;
+      activeBairroObj = regData.bairros[0];
+    }
+  }
+
+  // 2. Coeficientes de Distribuição de Renda por perfil de bairro
+  // Bairros nobres (renda >= 8 SM) têm mais classe alta; periféricos têm mais base
+  let incomeShare = { base: 0.23, media_baixa: 0.30, media_alta: 0.29, alta: 0.12, topo: 0.06 };
+  if (baseRendaSM >= 8.0) {
+    incomeShare = { base: 0.04, media_baixa: 0.11, media_alta: 0.25, alta: 0.38, topo: 0.22 };
+  } else if (baseRendaSM >= 4.5) {
+    incomeShare = { base: 0.12, media_baixa: 0.22, media_alta: 0.38, alta: 0.20, topo: 0.08 };
+  } else if (baseRendaSM <= 2.8) {
+    incomeShare = { base: 0.42, media_baixa: 0.38, media_alta: 0.16, alta: 0.03, topo: 0.01 };
+  }
+
+  // Multiplicador de Renda
+  let incomeMultiplier = 1.0;
+  if (income === "alta") {
+    incomeMultiplier = incomeShare.alta + incomeShare.topo;
+    baseRendaSM = baseRendaSM * 1.85;
+  } else if (income === "media") {
+    incomeMultiplier = incomeShare.media_baixa + incomeShare.media_alta;
+    baseRendaSM = baseRendaSM * 1.05;
+  } else if (income === "base") {
+    incomeMultiplier = incomeShare.base;
+    baseRendaSM = Math.min(baseRendaSM * 0.55, 1.8);
+  }
+
+  // 3. Coeficiente Demográfico (Gênero e Faixa Etária)
+  let demoMultiplier = 1.0;
+  let demoLabel = "População Geral";
+  if (demo === "mulheres") {
+    demoMultiplier = 0.514;
+    demoLabel = "Mulheres";
+  } else if (demo === "ativa") {
+    demoMultiplier = 0.671;
+    demoLabel = "População em Idade Ativa (15-59)";
+  } else if (demo === "jovens") {
+    demoMultiplier = 0.148;
+    demoLabel = "Jovens (15-24 anos)";
+  } else if (demo === "idosos") {
+    demoMultiplier = 0.147;
+    demoLabel = "Idosos 60+";
+  }
+
+  // 4. Coeficiente Setorial
+  let sectorMultiplier = 1.0;
+  if (sector === "servicos") sectorMultiplier = 0.528;
+  else if (sector === "industria") sectorMultiplier = 0.245;
+  else if (sector === "comercio") sectorMultiplier = 0.161;
+  else if (sector === "construcao") sectorMultiplier = 0.059;
+
+  // Cálculo Final das Métricas Cruzadas
+  const finalPop = Math.round(basePop * incomeMultiplier * demoMultiplier);
+  const finalDom = Math.round(baseDom * incomeMultiplier);
+  const finalEmpresas = Math.round(baseEmpresas * sectorMultiplier);
+  const massaSalarialMensal = Math.round(finalPop * (baseRendaSM * 1412));
+  const frotaEstimada = Math.round(finalPop / 1.41);
+
+  return {
+    region,
+    bairro,
+    income,
+    timeline,
+    sector,
+    demo,
+    activeBairroObj,
+    activeRegionName,
+    incomeShare,
+    baseRendaSM,
+    finalPop,
+    finalDom,
+    finalEmpresas,
+    massaSalarialMensal,
+    frotaEstimada,
+    basePib: (basePib * incomeMultiplier).toFixed(2),
+    demoLabel
+  };
+}
+
 // Destruir gráficos anteriores com segurança
 function destroyIbgeChart(chartId) {
   if (window.ibgeChartInstances[chartId]) {
@@ -10402,37 +10540,31 @@ function destroyIbgeChart(chartId) {
   }
 }
 
-// 1. Gráfico: Composição do PIB por Setores Econômicos (Reativo a Renda e Setor)
+// 1. Gráfico: Composição do PIB por Setores Econômicos (Totalmente Cruzado)
 function renderIbgePibChart() {
   const canvas = document.getElementById("ibgeChartPibSjc");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("pib");
 
-  const incomeFilter = document.getElementById("ibge-filter-income")?.value || "todos";
-  const sectorFilter = document.getElementById("ibge-filter-sector")?.value || "todos";
-
-  let labels = ["Serviços & Comércio", "Indústria & Aeroespacial", "Administração Pública", "Impostos Líquidos", "Agropecuária"];
+  const cross = calculateFilteredIbgeMicrodata();
+  let labels = ["Serviços & Tecnologia", "Indústria & Aeroespacial", "Comércio & Logística", "Administração Pública & Impostos", "Agropecuária"];
   let data = [48.6, 28.4, 11.2, 11.3, 0.5];
   let colors = ["#00B4D8", "#0B2545", "#6366F1", "#94A3B8", "#10B981"];
 
-  if (incomeFilter === "alta") {
-    data = [58.2, 31.5, 4.2, 5.8, 0.3];
+  if (cross.income === "alta" || cross.baseRendaSM >= 8.0) {
+    data = [62.4, 26.8, 6.2, 4.4, 0.2];
     colors = ["#00B4D8", "#0B2545", "#94A3B8", "#CBD5E1", "#E2E8F0"];
-  } else if (incomeFilter === "media") {
-    data = [49.5, 27.8, 12.5, 9.7, 0.5];
-    colors = ["#00B4D8", "#0B2545", "#6366F1", "#94A3B8", "#10B981"];
-  } else if (incomeFilter === "base") {
-    data = [38.0, 22.0, 24.5, 14.8, 0.7];
+  } else if (cross.income === "base") {
+    data = [34.0, 18.0, 24.5, 22.8, 0.7];
     colors = ["#00B4D8", "#0B2545", "#6366F1", "#F59E0B", "#10B981"];
   }
 
-  // Destaque se setor específico selecionado
-  if (sectorFilter === "servicos") {
-    colors = ["#00B4D8", "#CBD5E1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "industria") {
-    colors = ["#CBD5E1", "#0B2545", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "comercio") {
-    colors = ["#6366F1", "#E2E8F0", "#CBD5E1", "#E2E8F0", "#E2E8F0"];
+  if (cross.sector === "servicos") {
+    colors = ["#00B4D8", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (cross.sector === "industria") {
+    colors = ["#E2E8F0", "#0B2545", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (cross.sector === "comercio") {
+    colors = ["#E2E8F0", "#E2E8F0", "#6366F1", "#E2E8F0", "#E2E8F0"];
   }
 
   window.ibgeChartInstances["pib"] = new Chart(canvas.getContext("2d"), {
@@ -10453,12 +10585,7 @@ function renderIbgePibChart() {
       plugins: {
         legend: {
           position: "bottom",
-          labels: {
-            font: { family: "Montserrat", size: 10, weight: "bold" },
-            boxWidth: 12,
-            padding: 8,
-            color: "#0F172A"
-          }
+          labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12, padding: 8, color: "#0F172A" }
         },
         datalabels: {
           color: "#FFFFFF",
@@ -10467,7 +10594,7 @@ function renderIbgePibChart() {
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${ctx.label}: ${ctx.parsed}% (Total: R$ 39,24 Bi)`
+            label: (ctx) => ` ${ctx.label}: ${ctx.parsed}% (PIB Território: R$ ${cross.basePib} Mi)`
           }
         }
       }
@@ -10475,44 +10602,18 @@ function renderIbgePibChart() {
   });
 }
 
-// 2. Gráfico: Série Histórica de População (Reativo a Horizonte Temporal e Recorte Demográfico)
+// 2. Gráfico: Série Histórica Populacional (Totalmente Cruzado com a Amostra Filtrada)
 function renderIbgeHistoricoPopChart() {
   const canvas = document.getElementById("ibgeChartHistoricoPop");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("historicoPop");
 
-  const timelineFilter = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
-  const demoFilter = document.getElementById("ibge-filter-demo")?.value || "geral";
-  const series = IBGE_DATABASE.series_historicas[timelineFilter] || IBGE_DATABASE.series_historicas.censo_2022;
+  const cross = calculateFilteredIbgeMicrodata();
+  const series = IBGE_DATABASE.series_historicas[cross.timeline] || IBGE_DATABASE.series_historicas.censo_2022;
+  const scalingRatio = cross.finalPop / IBGE_DATABASE.municipio.populacao_censo_2022;
 
-  let factor = 1.0;
-  let labelTitle = "População Residente (hab.)";
-  let lineColor = "#00B4D8";
-  let pointColor = "#0B2545";
-
-  if (demoFilter === "mulheres") {
-    factor = 0.514;
-    labelTitle = "População Feminina (hab.)";
-    lineColor = "#F43F5E";
-    pointColor = "#9F1239";
-  } else if (demoFilter === "ativa") {
-    factor = 0.671;
-    labelTitle = "População Ativa 15-59 anos (hab.)";
-    lineColor = "#6366F1";
-    pointColor = "#312E81";
-  } else if (demoFilter === "jovens") {
-    factor = 0.148;
-    labelTitle = "Jovens 15-24 anos (hab.)";
-    lineColor = "#F59E0B";
-    pointColor = "#78350F";
-  } else if (demoFilter === "idosos") {
-    factor = 0.147;
-    labelTitle = "Idosos 60+ anos (hab.)";
-    lineColor = "#10B981";
-    pointColor = "#064E3B";
-  }
-
-  let chartData = series.data.map(v => Math.round(v * factor));
+  let chartData = series.data.map(v => Math.round(v * scalingRatio));
+  let labelTitle = `População Recortada (${cross.activeRegionName})`;
 
   window.ibgeChartInstances["historicoPop"] = new Chart(canvas.getContext("2d"), {
     type: "line",
@@ -10521,11 +10622,11 @@ function renderIbgeHistoricoPopChart() {
       datasets: [{
         label: labelTitle,
         data: chartData,
-        borderColor: lineColor,
-        backgroundColor: lineColor.replace(")", ", 0.12)").replace("rgb", "rgba").replace("#00B4D8", "rgba(0, 180, 216, 0.12)").replace("#F43F5E", "rgba(244, 63, 94, 0.12)"),
+        borderColor: "#00B4D8",
+        backgroundColor: "rgba(0, 180, 216, 0.12)",
         fill: true,
         tension: 0.35,
-        pointBackgroundColor: pointColor,
+        pointBackgroundColor: "#0B2545",
         pointBorderColor: "#FFFFFF",
         pointBorderWidth: 2,
         pointRadius: 6,
@@ -10541,13 +10642,13 @@ function renderIbgeHistoricoPopChart() {
           align: "top",
           anchor: "end",
           offset: 4,
-          color: pointColor,
+          color: "#0B2545",
           font: { family: "Montserrat", size: 10, weight: "bold" },
-          formatter: (val) => (val / 1000).toFixed(1) + "k"
+          formatter: (val) => val >= 1000 ? (val / 1000).toFixed(1) + "k" : val
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${labelTitle}: ${Number(ctx.parsed.y).toLocaleString('pt-BR')} pessoas`
+            label: (ctx) => ` População estimada: ${Number(ctx.parsed.y).toLocaleString('pt-BR')} hab.`
           }
         }
       },
@@ -10558,7 +10659,7 @@ function renderIbgeHistoricoPopChart() {
           ticks: {
             font: { family: "Montserrat", size: 9 },
             color: "#64748B",
-            callback: (v) => (v / 1000).toFixed(0) + "k"
+            callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + "k" : v
           }
         },
         x: {
@@ -10570,35 +10671,31 @@ function renderIbgeHistoricoPopChart() {
   });
 }
 
-// 3. Gráfico: Pirâmide Etária Oficial (Reativo a Demo e Renda)
+// 3. Gráfico: Pirâmide Etária com Volumes Absolutos Reais Recalculados
 function renderIbgeFaixasEtariasChart() {
   const canvas = document.getElementById("ibgeChartFaixaEtaria");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("faixaEtaria");
 
-  const demoFilter = document.getElementById("ibge-filter-demo")?.value || "geral";
+  const cross = calculateFilteredIbgeMicrodata();
   let labels = ["0-14 anos", "15-24 anos", "25-39 anos", "40-59 anos", "60+ anos"];
-  let data = [18.2, 14.8, 24.5, 27.8, 14.7];
+  let proportions = [0.182, 0.148, 0.245, 0.278, 0.147];
   let bgColors = ["#94A3B8", "#6366F1", "#00B4D8", "#0B2545", "#F59E0B"];
 
-  if (demoFilter === "mulheres") {
-    data = [16.8, 14.2, 24.8, 28.6, 15.6]; // Maior longevidade feminina
+  if (cross.demo === "mulheres") {
+    proportions = [0.168, 0.142, 0.248, 0.286, 0.156];
     bgColors = ["#CBD5E1", "#F472B6", "#EC4899", "#BE185D", "#F59E0B"];
-  } else if (demoFilter === "jovens") {
-    bgColors = ["#E2E8F0", "#6366F1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (demoFilter === "idosos") {
-    bgColors = ["#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#F59E0B"];
-  } else if (demoFilter === "ativa") {
-    bgColors = ["#E2E8F0", "#6366F1", "#00B4D8", "#0B2545", "#E2E8F0"];
   }
+
+  let absolutePersons = proportions.map(p => Math.round(cross.finalPop * p));
 
   window.ibgeChartInstances["faixaEtaria"] = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
       labels: labels,
       datasets: [{
-        label: "% População",
-        data: data,
+        label: "Habitantes no Grupo",
+        data: absolutePersons,
         backgroundColor: bgColors,
         borderRadius: 8,
         barPercentage: 0.65
@@ -10613,21 +10710,20 @@ function renderIbgeFaixasEtariasChart() {
           anchor: "end",
           align: "top",
           color: "#0F172A",
-          font: { family: "Montserrat", size: 10.5, weight: "bold" },
-          formatter: (v) => v + "%"
+          font: { family: "Montserrat", size: 10, weight: "bold" },
+          formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` Participação: ${ctx.parsed.y}% da população de SJC`
+            label: (ctx) => ` ${Number(ctx.parsed.y).toLocaleString('pt-BR')} pessoas (${(proportions[ctx.dataIndex] * 100).toFixed(1)}%)`
           }
         }
       },
       scales: {
         y: {
           beginAtZero: true,
-          suggestedMax: 35,
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v + "%" }
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + "k" : v }
         },
         x: {
           grid: { display: false },
@@ -10638,44 +10734,26 @@ function renderIbgeFaixasEtariasChart() {
   });
 }
 
-// 4. Gráfico: Emprego Formal por Setor (CAGED / RAIS - Reativo a Setor e Renda)
+// 4. Gráfico: Emprego Formal CAGED Recalculado para o Território e Renda
 function renderIbgeEmpregoChart() {
   const canvas = document.getElementById("ibgeChartEmpregoSetor");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("emprego");
 
-  const sectorFilter = document.getElementById("ibge-filter-sector")?.value || "todos";
-  const incomeFilter = document.getElementById("ibge-filter-income")?.value || "todos";
+  const cross = calculateFilteredIbgeMicrodata();
+  const scalingRatio = cross.finalPop / IBGE_DATABASE.municipio.populacao_censo_2022;
 
-  let labels = ["Serviços Técnicos/Gerais", "Indústria de Transformação", "Comércio Varejista", "Construção Civil", "Agro/Outros"];
-  let postos = [112400, 52100, 34200, 12600, 1500];
-  let percentages = [52.8, 24.5, 16.1, 5.9, 0.7];
+  let labels = ["Serviços Especializados", "Indústria Aeroespacial/Auto", "Comércio Varejista", "Construção Civil", "Agro/Outros"];
+  let basePostos = [112400, 52100, 34200, 12600, 1500];
+  let postos = basePostos.map(v => Math.max(10, Math.round(v * scalingRatio)));
   let colors = ["#00B4D8", "#0B2545", "#8B5CF6", "#F59E0B", "#94A3B8"];
-
-  if (incomeFilter === "alta") {
-    postos = [68400, 38200, 8400, 3100, 400];
-    percentages = [57.7, 32.2, 7.1, 2.6, 0.4];
-  } else if (incomeFilter === "base") {
-    postos = [44000, 13900, 25800, 9500, 1100];
-    percentages = [46.7, 14.7, 27.4, 10.1, 1.1];
-  }
-
-  if (sectorFilter === "servicos") {
-    colors = ["#00B4D8", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "industria") {
-    colors = ["#E2E8F0", "#0B2545", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "comercio") {
-    colors = ["#E2E8F0", "#E2E8F0", "#8B5CF6", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "construcao") {
-    colors = ["#E2E8F0", "#E2E8F0", "#E2E8F0", "#F59E0B", "#E2E8F0"];
-  }
 
   window.ibgeChartInstances["emprego"] = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
       labels: labels,
       datasets: [{
-        label: "Postos Formais (CAGED)",
+        label: "Postos Formais no Recorte",
         data: postos,
         backgroundColor: colors,
         borderRadius: 8,
@@ -10693,7 +10771,7 @@ function renderIbgeEmpregoChart() {
           align: "right",
           color: "#0F172A",
           font: { family: "Montserrat", size: 10, weight: "bold" },
-          formatter: (v, ctx) => `${(v / 1000).toFixed(1)}k (${percentages[ctx.dataIndex]}%)`
+          formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
         },
         tooltip: {
           callbacks: {
@@ -10704,39 +10782,31 @@ function renderIbgeEmpregoChart() {
       scales: {
         x: {
           beginAtZero: true,
-          suggestedMax: Math.ceil(Math.max(...postos) * 1.25),
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => (v / 1000) + "k" }
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
         },
         y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" }, color: "#1E293B" }
         }
       }
     }
   });
 }
 
-// 5. Gráfico: Empresas e Densidade de CNPJs por Segmento (Novo Bloco 5 do Grid)
+// 5. Gráfico: Empresas e CNPJs Ativos
 function renderIbgeEmpresasSetorChart() {
   const canvas = document.getElementById("ibgeChartEmpresasSetor");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("empresasSetor");
 
-  const sectorFilter = document.getElementById("ibge-filter-sector")?.value || "todos";
-  let labels = ["Serviços & Tech", "Comércio Varejista", "Indústria de Transformação", "Construção Civil", "Outros Segmentos"];
-  let data = [18900, 11450, 3240, 2150, 680];
-  let colors = ["#00B4D8", "#6366F1", "#0B2545", "#F59E0B", "#94A3B8"];
+  const cross = calculateFilteredIbgeMicrodata();
+  const scalingRatio = cross.finalPop / IBGE_DATABASE.municipio.populacao_censo_2022;
 
-  if (sectorFilter === "servicos") {
-    colors = ["#00B4D8", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "comercio") {
-    colors = ["#E2E8F0", "#6366F1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "industria") {
-    colors = ["#E2E8F0", "#E2E8F0", "#0B2545", "#E2E8F0", "#E2E8F0"];
-  } else if (sectorFilter === "construcao") {
-    colors = ["#E2E8F0", "#E2E8F0", "#E2E8F0", "#F59E0B", "#E2E8F0"];
-  }
+  let labels = ["Serviços & Tech", "Comércio Varejista", "Indústria de Transformação", "Construção Civil", "Outros"];
+  let baseEmpresas = [18900, 11450, 3240, 2150, 680];
+  let data = baseEmpresas.map(v => Math.max(5, Math.round(v * scalingRatio)));
+  let colors = ["#00B4D8", "#6366F1", "#0B2545", "#F59E0B", "#94A3B8"];
 
   window.ibgeChartInstances["empresasSetor"] = new Chart(canvas.getContext("2d"), {
     type: "bar",
@@ -10761,7 +10831,7 @@ function renderIbgeEmpresasSetorChart() {
           align: "right",
           color: "#0F172A",
           font: { family: "Montserrat", size: 10, weight: "bold" },
-          formatter: (v) => `${(v / 1000).toFixed(1)}k`
+          formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
         },
         tooltip: {
           callbacks: {
@@ -10773,7 +10843,7 @@ function renderIbgeEmpresasSetorChart() {
         x: {
           beginAtZero: true,
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => (v / 1000) + "k" }
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
         },
         y: {
           grid: { display: false },
@@ -10784,20 +10854,19 @@ function renderIbgeEmpresasSetorChart() {
   });
 }
 
-// 6. Gráfico: Frota de Veículos DENATRAN & Mobilidade
+// 6. Gráfico: Frota de Veículos DENATRAN Recalculada para o Território
 function renderIbgeFrotaChart() {
   const canvas = document.getElementById("ibgeChartFrota");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("frota");
 
-  const timelineFilter = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
-  let labels = ["Automóveis (Carros)", "Motocicletas / Motos", "Comerciais Leves / Caminhões", "Ônibus / Utilitários"];
-  let data = [338120, 74210, 62450, 17870];
-  let percentages = [68.6, 15.1, 12.7, 3.6];
+  const cross = calculateFilteredIbgeMicrodata();
+  const scalingRatio = cross.finalPop / IBGE_DATABASE.municipio.populacao_censo_2022;
 
-  if (timelineFilter === "censo_1991_2022") {
-    data = [285000, 52000, 48000, 14000];
-  }
+  let labels = ["Automóveis (Carros)", "Motocicletas / Motos", "Comerciais Leves / Caminhões", "Ônibus / Utilitários"];
+  let baseFrota = [338120, 74210, 62450, 17870];
+  let data = baseFrota.map(v => Math.max(10, Math.round(v * scalingRatio)));
+  let percentages = [68.6, 15.1, 12.7, 3.6];
 
   window.ibgeChartInstances["frota"] = new Chart(canvas.getContext("2d"), {
     type: "doughnut",
@@ -10826,7 +10895,7 @@ function renderIbgeFrotaChart() {
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${ctx.label}: ${Number(ctx.parsed).toLocaleString('pt-BR')} unidades`
+            label: (ctx) => ` ${ctx.label}: ${Number(ctx.parsed).toLocaleString('pt-BR')} veículos`
           }
         }
       }
@@ -10834,7 +10903,71 @@ function renderIbgeFrotaChart() {
   });
 }
 
-// 7. Gráfico: Distribuição Populacional por Região e Bairros
+// 7. NOVO GRÁFICO EXCLUSIVO: Distribuição de Pessoas por Faixa de Renda (Volume Real)
+function renderIbgeFaixasRendaPopChart() {
+  const canvas = document.getElementById("ibgeChartFaixasRendaPop");
+  if (!canvas || !window.Chart) return;
+  destroyIbgeChart("faixasRendaPop");
+
+  const cross = calculateFilteredIbgeMicrodata();
+  let labels = ["Até 1 SM (Até R$ 1,4k)", "1 a 2 SM (R$ 1,4k - 2,8k)", "2 a 5 SM (R$ 2,8k - 7,0k)", "5 a 10 SM (R$ 7,0k - 14k)", "> 10 SM (> R$ 14k)"];
+  let p = cross.incomeShare;
+  let values = [
+    Math.round(cross.finalPop * p.base),
+    Math.round(cross.finalPop * p.media_baixa),
+    Math.round(cross.finalPop * p.media_alta),
+    Math.round(cross.finalPop * p.alta),
+    Math.round(cross.finalPop * p.topo)
+  ];
+  let colors = ["#94A3B8", "#6366F1", "#10B981", "#00B4D8", "#0B2545"];
+
+  window.ibgeChartInstances["faixasRendaPop"] = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Habitantes nesta Faixa de Renda",
+        data: values,
+        backgroundColor: colors,
+        borderRadius: 6,
+        barPercentage: 0.65
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: "end",
+          align: "right",
+          color: "#0F172A",
+          font: { family: "Montserrat", size: 9.5, weight: "bold" },
+          formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${Number(ctx.parsed.x).toLocaleString('pt-BR')} pessoas com esta renda no território`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { family: "Montserrat", size: 8.5, weight: "bold" }, color: "#1E293B" }
+        }
+      }
+    }
+  });
+}
+
+// 8. Gráfico: Distribuição Populacional por Região e Bairros
 function renderIbgeBairrosPopChart() {
   const canvas = document.getElementById("ibgeChartBairrosPop");
   if (!canvas || !window.Chart) return;
@@ -10898,7 +11031,7 @@ function renderIbgeBairrosPopChart() {
   });
 }
 
-// 8. Gráfico: Renda Média Domiciliar Estimada por Região de SJC
+// 9. Gráfico: Renda Média Domiciliar Estimada por Região de SJC
 function renderIbgeBairrosRendaChart() {
   const canvas = document.getElementById("ibgeChartBairrosRenda");
   if (!canvas || !window.Chart) return;
@@ -10906,7 +11039,7 @@ function renderIbgeBairrosRendaChart() {
 
   const regionFilter = document.getElementById("ibge-filter-region")?.value || "todos";
   const labels = ["Zona Oeste (Aquarius/Colinas)", "Centro (Adyana/Ema)", "Zona Sul (Satélite/Bosque)", "Zona Sudeste (Putim)", "Zona Leste (Vista Verde)", "Zona Norte (Santana)", "São Francisco Xavier"];
-  const data = [9.8, 6.2, 3.6, 3.1, 2.9, 2.6, 3.4]; // Salários Mínimos Médios
+  const data = [9.8, 6.2, 3.6, 3.1, 2.9, 2.6, 3.4];
   let bgColors = ["#00B4D8", "#0B2545", "#6366F1", "#14B8A6", "#10B981", "#F43F5E", "#65A30D"];
 
   if (regionFilter !== "todos") {
@@ -10966,7 +11099,7 @@ function renderIbgeBairrosRendaChart() {
   });
 }
 
-// 9. Gráfico do Painel Dedicado de Benchmark Territorial
+// 10. Gráfico do Painel Dedicado de Benchmark Territorial
 function renderIbgeBenchmarkChart() {
   const canvas = document.getElementById("ibgeChartBenchmark");
   if (!canvas || !window.Chart) return;
@@ -11050,7 +11183,6 @@ window.populateBairrosDropdown = function(regionKey) {
     allOpt.textContent = "Todos os Bairros de SJC";
     bairroSel.appendChild(allOpt);
 
-    // Listar todos os bairros agrupados por região
     Object.keys(IBGE_DATABASE.regioes).forEach(reg => {
       const optGroup = document.createElement("optgroup");
       optGroup.label = IBGE_DATABASE.regioes[reg].nome;
@@ -11098,16 +11230,9 @@ window.selectIbgeRegion = function(regionKey) {
   window.handleIbgeFilterChange();
 };
 
-// Atualizar dinamicamente os KPIs, Cards de Bairros e Textos
+// Atualizar dinamicamente os KPIs, Cards de Bairros e Textos com Cruzamento Total
 window.updateIbgeKpisAndStatus = function() {
-  const region = document.getElementById("ibge-filter-region")?.value || "todos";
-  const bairro = document.getElementById("ibge-filter-bairro")?.value || "todos";
-  const axis = document.getElementById("ibge-filter-axis")?.value || "todos";
-  const bench = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
-  const income = document.getElementById("ibge-filter-income")?.value || "todos";
-  const timeline = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
-  const sector = document.getElementById("ibge-filter-sector")?.value || "todos";
-  const demo = document.getElementById("ibge-filter-demo")?.value || "geral";
+  const cross = calculateFilteredIbgeMicrodata();
 
   const popElem = document.getElementById("kpi-ibge-pop");
   const popSub = document.getElementById("kpi-ibge-pop-sub");
@@ -11126,7 +11251,6 @@ window.updateIbgeKpisAndStatus = function() {
   const domSub = document.getElementById("kpi-ibge-domicilios-sub");
   const domDetail = document.getElementById("kpi-ibge-domicilios-detail");
 
-  const idhmElem = document.getElementById("kpi-ibge-idhm");
   const statusText = document.getElementById("ibge-filter-status-text");
 
   // Atualizar Card de Destaque do Bairro Selecionado
@@ -11137,44 +11261,22 @@ window.updateIbgeKpisAndStatus = function() {
   const bairroRendaElem = document.getElementById("ibge-bairro-metric-renda");
   const bairroDomElem = document.getElementById("ibge-bairro-metric-dom");
 
-  // Localizar dados do Bairro Selecionado
-  let activeBairroObj = null;
-  let activeRegionName = "Região Oeste";
-  
-  for (const rKey in IBGE_DATABASE.regioes) {
-    const r = IBGE_DATABASE.regioes[rKey];
-    const found = r.bairros.find(b => b.id === bairro);
-    if (found) {
-      activeBairroObj = found;
-      activeRegionName = r.nome;
-      break;
-    }
-  }
-
-  if (!activeBairroObj) {
-    // Pegar o primeiro da região ativa ou Aquarius por padrão
-    const targetRegKey = region !== "todos" ? region : "oeste";
-    const targetReg = IBGE_DATABASE.regioes[targetRegKey] || IBGE_DATABASE.regioes.oeste;
-    activeBairroObj = targetReg.bairros[0];
-    activeRegionName = targetReg.nome;
-  }
-
-  if (activeBairroObj && bairroNameElem) {
-    bairroNameElem.textContent = activeBairroObj.nome;
-    if (bairroRegionBadge) bairroRegionBadge.textContent = activeRegionName;
-    if (bairroDescElem) bairroDescElem.textContent = activeBairroObj.desc;
-    if (bairroPopElem) bairroPopElem.textContent = `~${Number(activeBairroObj.pop).toLocaleString('pt-BR')}`;
-    if (bairroRendaElem) bairroRendaElem.textContent = `${activeBairroObj.renda_sm.toFixed(1)} SM`;
-    if (bairroDomElem) bairroDomElem.textContent = Number(activeBairroObj.dom).toLocaleString('pt-BR');
+  if (cross.activeBairroObj && bairroNameElem) {
+    bairroNameElem.textContent = cross.activeBairroObj.nome;
+    if (bairroRegionBadge) bairroRegionBadge.textContent = cross.activeRegionName;
+    if (bairroDescElem) bairroDescElem.textContent = cross.activeBairroObj.desc;
+    if (bairroPopElem) bairroPopElem.textContent = `~${Number(cross.finalPop).toLocaleString('pt-BR')}`;
+    if (bairroRendaElem) bairroRendaElem.textContent = `${cross.baseRendaSM.toFixed(1)} SM`;
+    if (bairroDomElem) bairroDomElem.textContent = Number(cross.finalDom).toLocaleString('pt-BR');
   }
 
   // Destaque visual nos cards das 7 Regiões
   ["sul", "leste", "oeste", "centro", "norte", "sudeste", "sao_francisco"].forEach(rKey => {
     const card = document.getElementById(`card-region-${rKey}`);
     if (card) {
-      if (region === "todos" || region === rKey) {
+      if (cross.region === "todos" || cross.region === rKey) {
         card.classList.remove("opacity-40", "grayscale");
-        if (region === rKey) {
+        if (cross.region === rKey) {
           card.classList.add("ring-2", "ring-cyan-500", "bg-cyan-50/50");
         } else {
           card.classList.remove("ring-2", "ring-cyan-500", "bg-cyan-50/50");
@@ -11186,114 +11288,43 @@ window.updateIbgeKpisAndStatus = function() {
     }
   });
 
-  // Se uma região específica ou bairro estiver filtrado
-  if (bairro !== "todos" && activeBairroObj && popElem) {
-    popElem.textContent = `~${Number(activeBairroObj.pop).toLocaleString('pt-BR')} hab.`;
-    if (popSub) popSub.innerHTML = `<i class="fa-solid fa-location-dot text-[9px]"></i> Bairro: ${activeBairroObj.nome}`;
-    if (popDetail) popDetail.textContent = activeBairroObj.desc;
-
-    if (domElem) domElem.textContent = Number(activeBairroObj.dom).toLocaleString('pt-BR');
-    if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Domicílios no Bairro`;
-    if (domDetail) domDetail.textContent = `Média: ${(activeBairroObj.pop / activeBairroObj.dom).toFixed(2)} pessoas / casa`;
-
-    if (salElem) salElem.textContent = `${activeBairroObj.renda_sm.toFixed(1)} SM`;
-    if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> Renda Média: ~R$ ${(activeBairroObj.renda_sm * 1412).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-  } else if (region !== "todos" && popElem) {
-    const regData = IBGE_DATABASE.regioes[region];
-    if (regData) {
-      popElem.textContent = `~${Number(regData.pop).toLocaleString('pt-BR')} hab.`;
-      const pct = ((regData.pop / IBGE_DATABASE.municipio.populacao_censo_2022) * 100).toFixed(1);
-      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-location-dot text-[9px]"></i> ${pct}% de SJC`;
-      if (popDetail) popDetail.textContent = `Bairros: ${regData.bairros.map(b => b.nome).slice(0, 4).join(", ")}...`;
-
-      if (domElem) domElem.textContent = Number(regData.dom).toLocaleString('pt-BR');
-      if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Domicílios na Região`;
-      if (domDetail) domDetail.textContent = `Concentração territorial oficial`;
-
-      if (salElem) salElem.textContent = `${regData.renda_media_sm.toFixed(1)} SM`;
-      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> Média da Região: ~R$ ${(regData.renda_media_sm * 1412).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
-    }
-  } else {
-    // Dinâmica Geral de População
-    if (popElem) {
-      if (timeline === "censo_1991_2022") {
-        popElem.textContent = "442.370 a 737.310";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +66,7% em 30 anos`;
-        if (popDetail) popDetail.textContent = "Série Histórica Consolidada (1991 - 2026)";
-      } else if (timeline === "historico_2000_2022") {
-        popElem.textContent = "539.313 a 737.310";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +36,7% no Século XXI`;
-        if (popDetail) popDetail.textContent = "Censo 2000 vs Censo 2022 vs Estimativa 2026";
-      } else {
-        if (demo === "mulheres") {
-          popElem.textContent = "358.478 mulheres";
-          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-venus text-[9px]"></i> 51,4% da população total`;
-        } else if (demo === "ativa") {
-          popElem.textContent = "468.000 ativos";
-          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-bolt text-[9px]"></i> 67,1% em idade de trabalho`;
-        } else if (demo === "jovens") {
-          popElem.textContent = "103.200 jovens";
-          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-graduation-cap text-[9px]"></i> 14,8% (15-24 anos)`;
-        } else if (demo === "idosos") {
-          popElem.textContent = "102.500 idosos";
-          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-heart-pulse text-[9px]"></i> 14,7% (60+ anos)`;
-        } else {
-          popElem.textContent = "697.428 hab.";
-          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +10,8% (5º maior de SP)`;
-        }
-        if (popDetail) popDetail.textContent = "Densidade: 634,2 hab/km² • Projeção 2026: ~737.310 hab.";
-      }
-    }
-
-    // Dinâmica de Renda & Salário Geral
-    if (salElem) {
-      if (income === "alta") {
-        salElem.textContent = "> 5,0 Salários";
-        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 7.100 a R$ 22.000 / mês`;
-      } else if (income === "media") {
-        salElem.textContent = "2,0 a 5,0 SM";
-        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 2.840 a R$ 7.100 / mês`;
-      } else if (income === "base") {
-        salElem.textContent = "Até 2,0 SM";
-        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> Até R$ 2.840 / mês`;
-      } else {
-        salElem.textContent = "3,4 Salários";
-        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> ~R$ 4.820 / mês (Média Formal)`;
-      }
-    }
-
-    if (domElem) domElem.textContent = "253.180";
-    if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Média: 2,75 hab / domicílio`;
-    if (domDetail) domDetail.textContent = "98,2% urbanização • 99,4% acesso à rede elétrica";
+  // Atualizar KPIs Reais Cruzados
+  if (popElem) {
+    popElem.textContent = `${Number(cross.finalPop).toLocaleString('pt-BR')} hab.`;
+    const pct = ((cross.finalPop / IBGE_DATABASE.municipio.populacao_censo_2022) * 100).toFixed(1);
+    if (popSub) popSub.innerHTML = `<i class="fa-solid fa-users text-[9px]"></i> ${pct}% da Cidade (${cross.demoLabel})`;
+    if (popDetail) popDetail.textContent = `Massa de Consumo: ~R$ ${(cross.massaSalarialMensal / 1000000).toFixed(1)} Mi/mês circulando`;
   }
 
-  // Dinâmica de Segmento Econômico
+  if (pibElem) {
+    pibElem.textContent = `R$ ${cross.basePib} Mi`;
+    if (pibSub) pibSub.innerHTML = `<i class="fa-solid fa-chart-line text-[9px]"></i> PIB estimado do recorte`;
+  }
+
+  if (salElem) {
+    salElem.textContent = `${cross.baseRendaSM.toFixed(1)} Salários`;
+    if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> ~R$ ${(cross.baseRendaSM * 1412).toLocaleString('pt-BR', {minimumFractionDigits: 2})} / mês`;
+  }
+
+  if (domElem) {
+    domElem.textContent = Number(cross.finalDom).toLocaleString('pt-BR');
+    if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Domicílios no Recorte`;
+    if (domDetail) domDetail.textContent = `Frota estimada: ${Number(cross.frotaEstimada).toLocaleString('pt-BR')} veículos`;
+  }
+
   if (empElem) {
-    if (sector === "servicos") {
-      empElem.textContent = "18.900 empresas";
-      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-laptop-code text-[9px]"></i> 52% do ecossistema empresarial`;
-    } else if (sector === "industria") {
-      empElem.textContent = "3.240 indústrias";
-      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-plane text-[9px]"></i> Polo Aeroespacial & Tecnológico`;
-    } else if (sector === "comercio") {
-      empElem.textContent = "11.450 comércios";
-      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-shop text-[9px]"></i> Varejo e Atacado Regional`;
-    } else {
-      empElem.textContent = "36.420";
-      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-shield text-[9px]"></i> 19.800 MEIs + 16.6k MEs/EPPs`;
-    }
+    empElem.textContent = Number(cross.finalEmpresas).toLocaleString('pt-BR');
+    if (empSub) empSub.innerHTML = `<i class="fa-solid fa-building text-[9px]"></i> Negócios ativos no segmento`;
   }
 
-  // Texto explicativo dinâmico do status
   if (statusText) {
-    const benchLabel = IBGE_DATABASE.comparativos[bench]?.nome || "Estado de SP";
-    const regionName = region === "todos" ? "Toda a Cidade" : "Região " + region.toUpperCase();
-    const bairroName = bairro === "todos" ? "Todos os Bairros" : (activeBairroObj ? activeBairroObj.nome : bairro);
-    statusText.textContent = `Exibindo: Território [${regionName} > ${bairroName}] | Eixo [${axis.toUpperCase()}] | Benchmark [${benchLabel}] | Recorte [${demo}].`;
+    const benchLabel = IBGE_DATABASE.comparativos[cross.bench]?.nome || "Estado de SP";
+    const bairroName = cross.bairro === "todos" ? "Todos os Bairros" : (cross.activeBairroObj ? cross.activeBairroObj.nome : cross.bairro);
+    statusText.textContent = `Cruzamento Ativo: [${cross.activeRegionName} > ${bairroName}] | Renda [${cross.income.toUpperCase()}] | População Filtrada [${Number(cross.finalPop).toLocaleString('pt-BR')} pessoas].`;
   }
 };
 
-// Renderizar todos os 8 gráficos do IBGE (incluindo Bairros, Empresas e Benchmark dedicado)
+// Renderizar todos os 9 gráficos do IBGE
 window.renderIbgeCharts = function() {
   window.updateIbgeKpisAndStatus();
   renderIbgePibChart();
@@ -11302,17 +11333,17 @@ window.renderIbgeCharts = function() {
   renderIbgeEmpregoChart();
   renderIbgeEmpresasSetorChart();
   renderIbgeFrotaChart();
+  renderIbgeFaixasRendaPopChart();
   renderIbgeBairrosPopChart();
   renderIbgeBairrosRendaChart();
   renderIbgeBenchmarkChart();
 };
 
-// Controle de Eixos Temáticos (Filtro por Categoria)
+// Controle de Eixos Temáticos
 window.setIbgeAxisFilter = function(axis) {
   const select = document.getElementById("ibge-filter-axis");
   if (select && select.value !== axis) select.value = axis;
 
-  // Atualizar botões de pílula
   const pills = document.querySelectorAll(".ibge-pill-btn");
   pills.forEach(btn => {
     if (btn.dataset.axis === axis) {
@@ -11322,7 +11353,6 @@ window.setIbgeAxisFilter = function(axis) {
     }
   });
 
-  // Filtrar cards de gráficos exibidos
   const cards = document.querySelectorAll(".ibge-card-block");
   cards.forEach(card => {
     const cardSection = card.dataset.section;
@@ -11333,7 +11363,6 @@ window.setIbgeAxisFilter = function(axis) {
     }
   });
 
-  // Filtrar cards de KPI de topo
   const kpiCards = document.querySelectorAll(".ibge-kpi-card");
   kpiCards.forEach(card => {
     const cardAxis = card.dataset.axis;

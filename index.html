@@ -7408,16 +7408,25 @@
             </div>
           </div>
 
-          <!-- Gráfico de Comparação Territorial por Região e Renda -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
+          <!-- Gráficos de Microdados Territoriais e Distribuição por Faixas de Renda -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
             <div>
-              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-2">Distribuição Populacional por Região (%)</h4>
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-1">População por Faixa de Renda (hab.)</h4>
+              <p class="text-[10px] text-slate-400 font-medium mb-2">Volume absoluto de pessoas no território filtrado</p>
+              <div class="h-60 relative">
+                <canvas id="ibgeChartFaixasRendaPop"></canvas>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-1">Distribuição Populacional por Região (%)</h4>
+              <p class="text-[10px] text-slate-400 font-medium mb-2">Fatia demográfica das macrozonas</p>
               <div class="h-60 relative">
                 <canvas id="ibgeChartBairrosPop"></canvas>
               </div>
             </div>
             <div>
-              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-2">Renda Média Domiciliar Estimada por Região (Salários Mínimos)</h4>
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-1">Renda Média Domiciliar (Salários Mínimos)</h4>
+              <p class="text-[10px] text-slate-400 font-medium mb-2">Poder aquisitivo médio por macrorregião</p>
               <div class="h-60 relative">
                 <canvas id="ibgeChartBairrosRenda"></canvas>
               </div>
@@ -7874,6 +7883,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=86.0"></script>
+  <script src="app.js?v=87.0"></script>
 </body>
 </html>
