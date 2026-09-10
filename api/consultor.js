@@ -1628,9 +1628,11 @@ module.exports = async function handler(req, res) {
           console.error(`[STEP ERROR] Job ${activeJob.job_id} na etapa ${stepDef.id}:`, {
             status: err.status || null,
             error_code: err.error_code || null,
-            retry_after_header: err.headers?.["retry-after"] || null,
-            retry_after_seconds: err.retryAfterSeconds || null,
-            error_body: (err.rawErrorBody || err.message || "").slice(0, 300),
+            model: GROQ_MODEL,
+            max_tokens: stepDef.maxTokens || null,
+            estimated_prompt_tokens: Math.ceil(((stepPayloadStr?.length || 0) + (stepDef.systemPrompt?.length || 0)) / 4),
+            headers: err.rateLimitHeaders || {},
+            error_body: (err.rawErrorBody || err.message || "").slice(0, 500),
             step: stepDef.id,
             attempt: currentAttemptNumber,
             timestamp: new Date().toISOString()
