@@ -10745,8 +10745,150 @@ function renderIbgeFrotaChart() {
   });
 }
 
+// 7. Gráfico: Distribuição Populacional por Região e Bairros
+function renderIbgeBairrosPopChart() {
+  const canvas = document.getElementById("ibgeChartBairrosPop");
+  if (!canvas || !window.Chart) return;
+  destroyIbgeChart("bairrosPop");
+
+  const regionFilter = document.getElementById("ibge-filter-region")?.value || "todos";
+  const labels = ["Zona Sul", "Zona Leste", "Zona Oeste", "Centro", "Zona Norte", "Zona Sudeste", "São Francisco Xavier"];
+  const data = [34.5, 24.8, 12.6, 10.2, 9.5, 6.8, 1.6];
+  let bgColors = ["#3B82F6", "#10B981", "#F59E0B", "#8B5CF6", "#F43F5E", "#14B8A6", "#65A30D"];
+
+  if (regionFilter !== "todos") {
+    const regionMap = { sul: 0, leste: 1, oeste: 2, centro: 3, norte: 4, sudeste: 5, sao_francisco: 6 };
+    const targetIdx = regionMap[regionFilter];
+    bgColors = bgColors.map((c, i) => i === targetIdx ? c : "#E2E8F0");
+  }
+
+  window.ibgeChartInstances["bairrosPop"] = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "% População Total",
+        data: data,
+        backgroundColor: bgColors,
+        borderRadius: 8,
+        barPercentage: 0.65
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: "end",
+          align: "right",
+          color: "#0F172A",
+          font: { family: "Montserrat", size: 10, weight: "bold" },
+          formatter: (v) => v + "%"
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` População: ${ctx.parsed.x}% de São José dos Campos`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          suggestedMax: 40,
+          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v + "%" }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: "#1E293B" }
+        }
+      }
+    }
+  });
+}
+
+// 8. Gráfico: Renda Média Domiciliar Estimada por Região de SJC
+function renderIbgeBairrosRendaChart() {
+  const canvas = document.getElementById("ibgeChartBairrosRenda");
+  if (!canvas || !window.Chart) return;
+  destroyIbgeChart("bairrosRenda");
+
+  const regionFilter = document.getElementById("ibge-filter-region")?.value || "todos";
+  const labels = ["Zona Oeste (Aquarius/Colinas)", "Centro (Adyana/Ema)", "Zona Sul (Satélite/Bosque)", "Zona Sudeste (Putim)", "Zona Leste (Vista Verde)", "Zona Norte (Santana)", "São Francisco Xavier"];
+  const data = [9.8, 6.2, 3.6, 3.1, 2.9, 2.6, 3.4]; // Salários Mínimos Médios
+  let bgColors = ["#00B4D8", "#0B2545", "#6366F1", "#14B8A6", "#10B981", "#F43F5E", "#65A30D"];
+
+  if (regionFilter !== "todos") {
+    const regionMap = { oeste: 0, centro: 1, sul: 2, sudeste: 3, leste: 4, norte: 5, sao_francisco: 6 };
+    const targetIdx = regionMap[regionFilter];
+    bgColors = bgColors.map((c, i) => i === targetIdx ? c : "#CBD5E1");
+  }
+
+  window.ibgeChartInstances["bairrosRenda"] = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Renda Média (Salários Mínimos)",
+        data: data,
+        backgroundColor: bgColors,
+        borderRadius: 8,
+        barPercentage: 0.65
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: "end",
+          align: "top",
+          color: "#0F172A",
+          font: { family: "Montserrat", size: 10, weight: "bold" },
+          formatter: (v) => v.toFixed(1) + " SM"
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` Renda Média Domiciliar: ${ctx.parsed.y} SM (~R$ ${(ctx.parsed.y * 1412).toLocaleString('pt-BR', {minimumFractionDigits: 2})})`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          suggestedMax: 12,
+          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v + " SM" }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { 
+            font: { family: "Montserrat", size: 8.5, weight: "bold" }, 
+            color: "#1E293B",
+            maxRotation: 25,
+            minRotation: 15
+          }
+        }
+      }
+    }
+  });
+}
+
+// Interação ao clicar em um Card de Região no Mapa do IBGE
+window.selectIbgeRegion = function(regionKey) {
+  const regSel = document.getElementById("ibge-filter-region");
+  if (regSel) {
+    regSel.value = regionKey;
+  }
+  window.handleIbgeFilterChange();
+};
+
 // Atualizar dinamicamente os KPIs e Textos Baseados nos Filtros Ativos
 window.updateIbgeKpisAndStatus = function() {
+  const region = document.getElementById("ibge-filter-region")?.value || "todos";
   const axis = document.getElementById("ibge-filter-axis")?.value || "todos";
   const bench = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
   const income = document.getElementById("ibge-filter-income")?.value || "todos";
@@ -10768,55 +10910,89 @@ window.updateIbgeKpisAndStatus = function() {
   const empSub = document.getElementById("kpi-ibge-empresas-sub");
 
   const domElem = document.getElementById("kpi-ibge-domicilios");
+  const domSub = document.getElementById("kpi-ibge-domicilios-sub");
+  const domDetail = document.getElementById("kpi-ibge-domicilios-detail");
+
   const idhmElem = document.getElementById("kpi-ibge-idhm");
   const statusText = document.getElementById("ibge-filter-status-text");
 
-  // Dinâmica de População
-  if (popElem) {
-    if (timeline === "censo_1991_2022") {
-      popElem.textContent = "442.370 a 737.310";
-      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +66,7% em 30 anos`;
-      if (popDetail) popDetail.textContent = "Série Histórica Consolidada (1991 - 2026)";
-    } else if (timeline === "historico_2000_2022") {
-      popElem.textContent = "539.313 a 737.310";
-      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +36,7% no Século XXI`;
-      if (popDetail) popDetail.textContent = "Censo 2000 vs Censo 2022 vs Estimativa 2026";
-    } else {
-      if (demo === "mulheres") {
-        popElem.textContent = "358.478 mulheres";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-venus text-[9px]"></i> 51,4% da população total`;
-      } else if (demo === "ativa") {
-        popElem.textContent = "468.000 ativos";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-bolt text-[9px]"></i> 67,1% em idade de trabalho`;
-      } else if (demo === "jovens") {
-        popElem.textContent = "103.200 jovens";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-graduation-cap text-[9px]"></i> 14,8% (15-24 anos)`;
-      } else if (demo === "idosos") {
-        popElem.textContent = "102.500 idosos";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-heart-pulse text-[9px]"></i> 14,7% (60+ anos)`;
-      } else {
-        popElem.textContent = "697.428 hab.";
-        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +10,8% (5º maior de SP)`;
-      }
-      if (popDetail) popDetail.textContent = "Densidade: 634,2 hab/km² • Projeção 2026: ~737.310 hab.";
-    }
-  }
+  // Se uma região específica estiver filtrada
+  if (region !== "todos" && popElem) {
+    const regionDataMap = {
+      sul: { pop: "240.500 hab.", pct: "34,5% de SJC", dom: "86.000", sal: "3,6 SM (~R$ 5.080)", desc: "Satélite, Bosque, Morumbi, D. Pedro, Oriente" },
+      leste: { pop: "173.000 hab.", pct: "24,8% de SJC", dom: "62.000", sal: "2,9 SM (~R$ 4.090)", desc: "Vista Verde, Eugênio de Melo, Sta Inês, Galo Branco" },
+      oeste: { pop: "87.800 hab.", pct: "12,6% de SJC", dom: "34.000", sal: "9,8 SM (~R$ 13.800)", desc: "Aquarius, Urbanova, Colinas, Esplanada, Alvorada" },
+      centro: { pop: "71.100 hab.", pct: "10,2% de SJC", dom: "29.000", sal: "6,2 SM (~R$ 8.750)", desc: "Centro, Vila Adyana, Vila Ema, São Dimas" },
+      norte: { pop: "66.200 hab.", pct: "9,5% de SJC", dom: "23.000", sal: "2,6 SM (~R$ 3.670)", desc: "Santana, Alto da Ponte, Vila Paiva, Buquirinha" },
+      sudeste: { pop: "47.400 hab.", pct: "6,8% de SJC", dom: "16.000", sal: "3,1 SM (~R$ 4.370)", desc: "São Judas, Putim, Sta Júlia, Chácaras Reunidas" },
+      sao_francisco: { pop: "11.400 hab.", pct: "1,6% de SJC", dom: "3.800", sal: "3,4 SM (~R$ 4.800)", desc: "Distrito de SFX, Ferreiras, Santa Bárbara" }
+    };
 
-  // Dinâmica de Renda & Salário
-  if (salElem) {
-    if (income === "alta") {
-      salElem.textContent = "> 5,0 Salários";
-      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 7.100 a R$ 22.000 / mês`;
-    } else if (income === "media") {
-      salElem.textContent = "2,0 a 5,0 SM";
-      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 2.840 a R$ 7.100 / mês`;
-    } else if (income === "base") {
-      salElem.textContent = "Até 2,0 SM";
-      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> Até R$ 2.840 / mês`;
-    } else {
-      salElem.textContent = "3,4 Salários";
-      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> ~R$ 4.820 / mês (Média Formal)`;
+    const rd = regionDataMap[region];
+    if (rd) {
+      popElem.textContent = rd.pop;
+      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-location-dot text-[9px]"></i> ${rd.pct}`;
+      if (popDetail) popDetail.textContent = `Bairros: ${rd.desc}`;
+
+      if (domElem) domElem.textContent = rd.dom;
+      if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Domicílios na Região`;
+      if (domDetail) domDetail.textContent = `Concentração territorial oficial`;
+
+      if (salElem) salElem.textContent = rd.sal.split(" ")[0] + " SM";
+      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> Média da Região: ${rd.sal}`;
     }
+  } else {
+    // Dinâmica Geral de População
+    if (popElem) {
+      if (timeline === "censo_1991_2022") {
+        popElem.textContent = "442.370 a 737.310";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +66,7% em 30 anos`;
+        if (popDetail) popDetail.textContent = "Série Histórica Consolidada (1991 - 2026)";
+      } else if (timeline === "historico_2000_2022") {
+        popElem.textContent = "539.313 a 737.310";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +36,7% no Século XXI`;
+        if (popDetail) popDetail.textContent = "Censo 2000 vs Censo 2022 vs Estimativa 2026";
+      } else {
+        if (demo === "mulheres") {
+          popElem.textContent = "358.478 mulheres";
+          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-venus text-[9px]"></i> 51,4% da população total`;
+        } else if (demo === "ativa") {
+          popElem.textContent = "468.000 ativos";
+          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-bolt text-[9px]"></i> 67,1% em idade de trabalho`;
+        } else if (demo === "jovens") {
+          popElem.textContent = "103.200 jovens";
+          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-graduation-cap text-[9px]"></i> 14,8% (15-24 anos)`;
+        } else if (demo === "idosos") {
+          popElem.textContent = "102.500 idosos";
+          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-heart-pulse text-[9px]"></i> 14,7% (60+ anos)`;
+        } else {
+          popElem.textContent = "697.428 hab.";
+          if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +10,8% (5º maior de SP)`;
+        }
+        if (popDetail) popDetail.textContent = "Densidade: 634,2 hab/km² • Projeção 2026: ~737.310 hab.";
+      }
+    }
+
+    // Dinâmica de Renda & Salário Geral
+    if (salElem) {
+      if (income === "alta") {
+        salElem.textContent = "> 5,0 Salários";
+        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 7.100 a R$ 22.000 / mês`;
+      } else if (income === "media") {
+        salElem.textContent = "2,0 a 5,0 SM";
+        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 2.840 a R$ 7.100 / mês`;
+      } else if (income === "base") {
+        salElem.textContent = "Até 2,0 SM";
+        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> Até R$ 2.840 / mês`;
+      } else {
+        salElem.textContent = "3,4 Salários";
+        if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> ~R$ 4.820 / mês (Média Formal)`;
+      }
+    }
+
+    if (domElem) domElem.textContent = "253.180";
+    if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Média: 2,75 hab / domicílio`;
+    if (domDetail) domDetail.textContent = "98,2% urbanização • 99,4% acesso à rede elétrica";
   }
 
   // Dinâmica de Segmento Econômico
@@ -10839,11 +11015,12 @@ window.updateIbgeKpisAndStatus = function() {
   // Texto explicativo dinâmico do status
   if (statusText) {
     const benchLabel = IBGE_DATABASE.comparativos[bench]?.nome || "Estado de SP";
-    statusText.textContent = `Exibindo: Eixo ${axis.toUpperCase()} | Benchmark: ${benchLabel} | Período: ${timeline.replace(/_/g, ' ')} | Recorte: ${demo}.`;
+    const regionName = region === "todos" ? "Toda a Cidade" : "Região " + region.toUpperCase();
+    statusText.textContent = `Exibindo: Território [${regionName}] | Eixo [${axis.toUpperCase()}] | Benchmark [${benchLabel}] | Recorte [${demo}].`;
   }
 };
 
-// Renderizar todos os 6 gráficos do IBGE
+// Renderizar todos os 8 gráficos do IBGE (incluindo Bairros)
 window.renderIbgeCharts = function() {
   window.updateIbgeKpisAndStatus();
   renderIbgePibChart();
@@ -10852,6 +11029,8 @@ window.renderIbgeCharts = function() {
   renderIbgeEmpregoChart();
   renderIbgeBenchmarkChart();
   renderIbgeFrotaChart();
+  renderIbgeBairrosPopChart();
+  renderIbgeBairrosRendaChart();
 };
 
 // Controle de Eixos Temáticos (Filtro por Categoria)
@@ -10902,6 +11081,7 @@ window.handleIbgeFilterChange = function() {
 
 // Resetar todos os filtros do IBGE para o padrão
 window.resetIbgeFilters = function() {
+  const regSel = document.getElementById("ibge-filter-region");
   const axisSel = document.getElementById("ibge-filter-axis");
   const benchSel = document.getElementById("ibge-filter-benchmark");
   const incomeSel = document.getElementById("ibge-filter-income");
@@ -10909,6 +11089,7 @@ window.resetIbgeFilters = function() {
   const sectorSel = document.getElementById("ibge-filter-sector");
   const demoSel = document.getElementById("ibge-filter-demo");
 
+  if (regSel) regSel.value = "todos";
   if (axisSel) axisSel.value = "todos";
   if (benchSel) benchSel.value = "sjc_vs_estado";
   if (incomeSel) incomeSel.value = "todos";
@@ -10963,5 +11144,6 @@ window.refreshIbgeData = async function() {
 
   window.renderIbgeCharts();
 };
+
 
 

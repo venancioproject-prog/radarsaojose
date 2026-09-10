@@ -532,6 +532,24 @@
               <button type="button" onclick="window.resetIbgeFilters()" class="text-[10px] font-bold text-slate-400 hover:text-brand-900 transition-colors cursor-pointer">Resetar</button>
             </div>
 
+            <!-- 0. Filtro por Região / Bairro de SJC -->
+            <div>
+              <label for="ibge-filter-region" class="block font-bold text-slate-700 text-xs mb-1">📍 Região & Território de SJC</label>
+              <div class="relative">
+                <select id="ibge-filter-region" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="todos">Todas as Regiões (Município Todo)</option>
+                  <option value="centro">Região Central (Centro, Vila Adyana, Vila Ema)</option>
+                  <option value="oeste">Região Oeste (Aquarius, Urbanova, Esplanada, Alvorada)</option>
+                  <option value="sul">Região Sul (Satélite, Bosque, Morumbi, Oriente, Dom Pedro)</option>
+                  <option value="leste">Região Leste (Vista Verde, Eugênio de Melo, Sta Inês)</option>
+                  <option value="norte">Região Norte (Santana, Alto da Ponte, Buquirinha)</option>
+                  <option value="sudeste">Região Sudeste (São Judas, Putim, Santa Júlia)</option>
+                  <option value="sao_francisco">Distrito de São Francisco Xavier</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
             <!-- 1. Categoria / Eixo Temático -->
             <div>
               <label for="ibge-filter-axis" class="block font-bold text-slate-700 text-xs mb-1">1. Eixo Temático</label>
@@ -7214,6 +7232,156 @@
 
         </div>
 
+        <!-- NOVO BLOCO EXCLUSIVO: CENSO & DEMOGRAFIA POR REGIÕES E BAIRROS DE SJC -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6" id="ibge-bairros-container">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-brand-900 text-accent-cyan flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-black text-brand-950">Demografia, População & Renda por Bairros e Regiões</h3>
+                <p class="text-xs text-slate-500 font-medium">Divisão territorial oficial de São José dos Campos (Censo Demográfico & Planejamento Urbano)</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200 text-xs font-black">
+                <i class="fa-solid fa-layer-group text-cyan-600"></i> 7 Regiões &bull; 150+ Bairros
+              </span>
+            </div>
+          </div>
+
+          <!-- Cards das 7 Regiões de SJC com População e Bairros Destaque -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="ibge-regions-grid">
+            <!-- Região Sul -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('sul')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul (Mais Populosa)
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-800">34,5%</span>
+              </div>
+              <p class="text-xl font-black text-brand-900">~240.500 hab.</p>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Jd. Satélite, Bosque dos Eucaliptos, Pq. Industrial, Jd. Morumbi, D. Pedro I, Jd. Oriente, Campo dos Alemães.</p>
+              <div class="text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-200/60 flex justify-between">
+                <span>Renda Média: 2,8 a 4,5 SM</span>
+                <span class="text-cyan-600">86k Domicílios</span>
+              </div>
+            </div>
+
+            <!-- Região Leste -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('leste')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Zona Leste (Hub Industrial)
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">24,8%</span>
+              </div>
+              <p class="text-xl font-black text-brand-900">~173.000 hab.</p>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Vista Verde, Eugênio de Melo, Galo Branco, Novo Horizonte, Santa Inês, Jd. Ismênia, Vila Tesouro.</p>
+              <div class="text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-200/60 flex justify-between">
+                <span>Renda Média: 2,2 a 3,8 SM</span>
+                <span class="text-cyan-600">62k Domicílios</span>
+              </div>
+            </div>
+
+            <!-- Região Oeste -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('oeste')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Zona Oeste (Alto Padrão)
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">12,6%</span>
+              </div>
+              <p class="text-xl font-black text-brand-900">~87.800 hab.</p>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Jd. Aquarius, Urbanova, Jd. das Colinas, Vila Ema/Esplanada, Jd. Alvorada, Pq. Residencial Aquarius.</p>
+              <div class="text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-200/60 flex justify-between">
+                <span>Renda Média: 6,5 a 14+ SM</span>
+                <span class="text-cyan-600">34k Domicílios</span>
+              </div>
+            </div>
+
+            <!-- Região Central -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('centro')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Centro & Adjacências
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-800">10,2%</span>
+              </div>
+              <p class="text-xl font-black text-brand-900">~71.100 hab.</p>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Centro Histórico, Vila Adyana, Vila Nova São José, Jd. São Dimas, Vila Bethânia, Vila Maria.</p>
+              <div class="text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-200/60 flex justify-between">
+                <span>Renda Média: 4,8 a 8,5 SM</span>
+                <span class="text-cyan-600">29k Domicílios</span>
+              </div>
+            </div>
+
+            <!-- Região Norte -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('norte')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Zona Norte (Histórica)
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-800">9,5%</span>
+              </div>
+              <p class="text-xl font-black text-brand-900">~66.200 hab.</p>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Santana, Alto da Ponte, Vila Paiva, Telespark, Vila Cândida, Jd. Guimarães, Buquirinha.</p>
+              <div class="text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-200/60 flex justify-between">
+                <span>Renda Média: 2,1 a 3,4 SM</span>
+                <span class="text-cyan-600">23k Domicílios</span>
+              </div>
+            </div>
+
+            <!-- Região Sudeste -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('sudeste')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span> Zona Sudeste (Expansão)
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal-100 text-teal-800">6,8%</span>
+              </div>
+              <p class="text-xl font-black text-brand-900">~47.400 hab.</p>
+              <p class="text-[11px] text-slate-500 line-clamp-2">São Judas Tadeu, Putim, Jd. Santa Júlia, Chácaras Reunidas, Jd. Souto, Vila Tatetuba.</p>
+              <div class="text-[10px] font-bold text-slate-400 pt-1 border-t border-slate-200/60 flex justify-between">
+                <span>Renda Média: 2,4 a 4,0 SM</span>
+                <span class="text-cyan-600">16k Domicílios</span>
+              </div>
+            </div>
+
+            <!-- São Francisco Xavier -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer col-span-1 md:col-span-2 lg:col-span-2" onclick="window.selectIbgeRegion('sao_francisco')">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-lime-600"></span> Distrito de São Francisco Xavier (Serra da Mantiqueira)
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-lime-100 text-lime-800">1,6% (APA & Turismo)</span>
+              </div>
+              <div class="flex items-baseline justify-between">
+                <p class="text-xl font-black text-brand-900">~11.400 hab.</p>
+                <span class="text-[11px] text-slate-500 font-semibold">3.800 domicílios rurais/urbanos</span>
+              </div>
+              <p class="text-[11px] text-slate-500">Vila de SFX, Bairro dos Ferreiras, Santa Bárbara, Remédios, Lavras. Foco em ecoturismo, gastronomia artesanal e pousadas.</p>
+            </div>
+          </div>
+
+          <!-- Gráfico de Comparação Territorial por Região e Renda -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-4 border-t border-slate-100">
+            <div>
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-2">Distribuição Populacional por Região (%)</h4>
+              <div class="h-60 relative">
+                <canvas id="ibgeChartBairrosPop"></canvas>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-2">Renda Média Domiciliar Estimada por Região (Salários Mínimos)</h4>
+              <div class="h-60 relative">
+                <canvas id="ibgeChartBairrosRenda"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- TABELA DETALHADA DE INDICADORES OFICIAIS (IBGE CIDADES) -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
@@ -7599,6 +7767,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=84.0"></script>
+  <script src="app.js?v=85.0"></script>
 </body>
 </html>
