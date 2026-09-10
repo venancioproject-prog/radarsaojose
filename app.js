@@ -609,29 +609,32 @@ function renderIbgeFaixasChart() {
 }
 
 function handleIbgeFilterChange() {
-  const axis = document.getElementById("ibge-filter-axis")?.value || "todos";
-  const benchmark = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
-  
-  // Reatividade visual nos gráficos
-  if (benchmark === "sjc_vs_brasil") {
-    IBGE_DATA_STORE.pib.values = [52.1, 31.2, 9.5, 6.8, 0.4];
-  } else if (benchmark === "sjc_vs_rmvale") {
-    IBGE_DATA_STORE.pib.values = [46.8, 38.5, 7.5, 6.9, 0.3];
-  } else {
-    IBGE_DATA_STORE.pib.values = [48.6, 36.4, 7.8, 6.9, 0.3];
+  if (typeof window.renderIbgeCharts === "function") {
+    window.renderIbgeCharts();
   }
-
-  renderIbgeCharts();
 }
 
 function resetIbgeFilters() {
-  const selAxis = document.getElementById("ibge-filter-axis");
-  const selBench = document.getElementById("ibge-filter-benchmark");
-  const selTime = document.getElementById("ibge-filter-timeline");
-  if (selAxis) selAxis.value = "todos";
-  if (selBench) selBench.value = "sjc_vs_estado";
-  if (selTime) selTime.value = "censo_2022";
-  handleIbgeFilterChange();
+  const regSel = document.getElementById("ibge-filter-region");
+  const bairroSel = document.getElementById("ibge-filter-bairro");
+  const benchSel = document.getElementById("ibge-filter-benchmark");
+  const incomeSel = document.getElementById("ibge-filter-income");
+  const timeSel = document.getElementById("ibge-filter-timeline");
+  const sectorSel = document.getElementById("ibge-filter-sector");
+  const demoSel = document.getElementById("ibge-filter-demo");
+
+  if (regSel) regSel.value = "todos";
+  if (typeof window.populateBairrosDropdown === "function") window.populateBairrosDropdown("todos");
+  if (bairroSel) bairroSel.value = "todos";
+  if (benchSel) benchSel.value = "sjc_vs_estado";
+  if (incomeSel) incomeSel.value = "todos";
+  if (timeSel) timeSel.value = "censo_2022";
+  if (sectorSel) sectorSel.value = "todos";
+  if (demoSel) demoSel.value = "geral";
+
+  if (typeof window.renderIbgeCharts === "function") {
+    window.renderIbgeCharts();
+  }
 }
 
 async function refreshIbgeData() {
