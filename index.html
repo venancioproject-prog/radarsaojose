@@ -19,6 +19,10 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- JSZip & FileSaver for bulk zip downloads -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
   <!-- Tailwind Custom Config -->
   <script>
     tailwind.config = {
@@ -6678,22 +6682,104 @@
             <p class="max-w-2xl text-sm sm:text-base leading-relaxed text-slate-300">
               Fotografias autorais e registros urbanos de São José dos Campos, organizados para apresentações, pesquisas e projetos que valorizam a cidade.
             </p>
+            <div class="inline-flex flex-wrap items-center gap-3 pt-2">
+              <div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs text-slate-200">
+                <i class="fa-solid fa-copyright text-accent-cyan"></i>
+                <span>Atribuição: <strong class="text-white">André Paixão Studio 8</strong></span>
+              </div>
+              <button 
+                type="button" 
+                onclick="window.copyGlobalAttribution()" 
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent-cyan/20 hover:bg-accent-cyan/30 text-accent-cyan text-xs font-bold transition-all cursor-pointer border border-accent-cyan/30 active:scale-95"
+                title="Copiar texto de crédito para colar nas redes sociais ou projetos"
+              >
+                <i class="fa-solid fa-clone text-[11px]"></i>
+                <span id="btn-copy-attribution-text">Copiar Crédito</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p class="text-xs font-black uppercase tracking-widest text-slate-400">Acervo Radar São José</p>
             <p id="image-bank-count" class="mt-1 text-sm font-semibold text-slate-600">Carregando imagens...</p>
           </div>
-          <div class="relative w-full sm:w-80">
-            <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3 top-3 text-slate-400"></i>
-            <input id="image-bank-search" type="search" placeholder="Buscar por tema ou arquivo" class="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm font-semibold text-slate-800 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20" />
+          
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button
+              type="button"
+              id="btn-download-all-zip"
+              onclick="window.downloadImageBankZip()"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-900 hover:bg-brand-800 text-white text-xs font-bold shadow-sm transition-all cursor-pointer active:scale-95"
+              title="Baixar todas as imagens visíveis compactadas em um único arquivo .ZIP"
+            >
+              <i class="fa-solid fa-file-zipper text-accent-cyan"></i>
+              <span id="btn-zip-text">Baixar Seleção (.ZIP)</span>
+            </button>
+
+            <div class="relative w-full sm:w-72">
+              <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-3 top-3 text-slate-400"></i>
+              <input id="image-bank-search" type="search" placeholder="Buscar por tema ou arquivo" class="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-sm font-semibold text-slate-800 shadow-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20" />
+            </div>
           </div>
         </div>
 
         <div id="image-bank-filters" class="flex flex-wrap gap-2"></div>
         <div id="image-bank-grid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+        <!-- MODAL LIGHTBOX COM ZOOM E DETALHES -->
+        <div id="image-lightbox-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-950/90 backdrop-blur-md p-4 sm:p-6 transition-all">
+          <div class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+            <!-- Header do Modal -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+              <div class="flex items-center gap-3">
+                <span id="modal-image-category" class="px-3 py-1 rounded-full bg-brand-900 text-accent-cyan text-[10px] font-black uppercase tracking-wider"></span>
+                <h3 id="modal-image-title" class="text-base sm:text-lg font-black text-brand-950 truncate"></h3>
+              </div>
+              <button onclick="window.closeImageLightbox()" class="p-2 text-slate-400 hover:text-slate-800 rounded-full hover:bg-slate-200 transition-colors text-base cursor-pointer" title="Fechar">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <!-- Imagem em Destaque -->
+            <div class="relative flex-1 bg-slate-900 flex items-center justify-center overflow-hidden min-h-[300px] max-h-[60vh] p-2">
+              <img id="modal-image-src" src="" alt="Foto" class="max-h-full max-w-full object-contain rounded-lg shadow-lg" />
+            </div>
+
+            <!-- Rodapé e Ações do Modal -->
+            <div class="p-5 sm:p-6 bg-white border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="space-y-1 text-center sm:text-left">
+                <div class="flex items-center justify-center sm:justify-start gap-2 text-xs font-semibold text-slate-700">
+                  <i class="fa-solid fa-camera text-brand-600"></i>
+                  <span>Foto por: <strong class="text-brand-950">André Paixão Studio 8</strong></span>
+                </div>
+                <p class="text-[11px] text-slate-400">Livre para uso editorial, comercial e em apresentações do projeto.</p>
+              </div>
+
+              <div class="flex items-center gap-2.5 w-full sm:w-auto">
+                <button 
+                  type="button" 
+                  onclick="window.copyModalAttribution()"
+                  id="modal-copy-btn"
+                  class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 active:scale-95 text-xs font-bold text-slate-700 transition cursor-pointer"
+                >
+                  <i class="fa-solid fa-copy text-brand-600"></i>
+                  <span>Copiar Atribuição</span>
+                </button>
+                <a 
+                  id="modal-download-link"
+                  href="" 
+                  download 
+                  class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-brand-900 hover:bg-brand-800 active:scale-95 text-xs font-bold text-white shadow-sm transition cursor-pointer"
+                >
+                  <i class="fa-solid fa-download text-accent-cyan"></i>
+                  <span>Baixar Original</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ========================================== -->

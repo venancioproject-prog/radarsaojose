@@ -154,6 +154,7 @@ const IMAGE_BANK_ITEMS = [
 
 let imageBankInitialized = false;
 let imageBankCategory = "Todos";
+let currentLightboxImage = null;
 
 function renderImageBank() {
   const grid = document.getElementById("image-bank-grid");
@@ -178,6 +179,12 @@ function renderImageBank() {
       renderImageBank();
     });
     search.addEventListener("input", renderImageBank);
+
+    // Fechar lightbox ao pressionar ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeImageLightbox();
+    });
+
     imageBankInitialized = true;
   }
 
@@ -187,31 +194,215 @@ function renderImageBank() {
     return matchesCategory && (!query || `${title} ${category}`.toLocaleLowerCase("pt-BR").includes(query));
   });
 
+  window.currentFilteredImageBank = filtered;
+
   count.textContent = `${filtered.length} ${filtered.length === 1 ? "imagem disponível" : "imagens disponíveis"} para uso gratuito no projeto`;
-  grid.innerHTML = filtered.map(([src, title, category]) => {
+  
+  grid.innerHTML = filtered.map(([src, title, category], index) => {
     const filename = src.split("/").pop().replace(/\.[^/.]+$/, "");
     const thumbSrc = `thumbnails/${filename}_thumb.webp`;
     return `
-    <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
-      <div class="relative aspect-[4/3] overflow-hidden bg-slate-100">
+    <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between">
+      <div 
+        class="relative aspect-[4/3] overflow-hidden bg-slate-100 cursor-zoom-in"
+        onclick="window.openImageLightbox(${index})"
+        title="Clique para ampliar a foto"
+      >
         <img src="${thumbSrc}" onerror="this.onerror=null;this.src='${src}'" alt="${title} em São José dos Campos" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <span class="absolute left-3 top-3 rounded-full bg-brand-950/85 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-accent-cyan">${category}</span>
-      </div>
-      <div class="flex items-center justify-between gap-3 p-4">
-        <div class="min-w-0">
-          <h3 class="truncate text-sm font-black text-brand-950">${title}</h3>
-          <p class="mt-1 truncate text-[11px] font-medium text-slate-400">Acervo Radar SJC</p>
+        <div class="absolute inset-0 bg-brand-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="px-3 py-1.5 rounded-full bg-white/90 text-brand-950 text-xs font-bold shadow-md flex items-center gap-1.5">
+            <i class="fa-solid fa-magnifying-glass-plus text-accent-cyan"></i> Ampliar
+          </span>
         </div>
-        <a href="${src}" download title="Baixar imagem original em alta resolução" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-900 transition hover:bg-brand-900 hover:text-white">
-          <i class="fa-solid fa-download"></i>
-        </a>
+      </div>
+      <div class="p-4">
+        <div class="flex items-start justify-between gap-3">
+          <div class="min-w-0 flex-1">
+            <h3 class="truncate text-sm font-black text-brand-950">${title}</h3>
+            <p class="mt-0.5 truncate text-[11px] font-medium text-slate-500">
+              <i class="fa-solid fa-camera text-[10px] text-brand-500 mr-1"></i>Foto: André Paixão Studio 8
+            </p>
+          </div>
+          <a href="${src}" download title="Baixar foto original em alta resolução" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-900 transition hover:bg-brand-900 hover:text-white active:scale-95 shadow-2xs">
+            <i class="fa-solid fa-download"></i>
+          </a>
+        </div>
+        <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+          <button 
+            type="button" 
+            onclick="window.copyImageAttribution(this, '${title}')"
+            class="text-[11px] font-bold text-slate-500 hover:text-brand-900 flex items-center gap-1.5 transition-colors cursor-pointer py-1"
+            title="Copiar créditos da imagem"
+          >
+            <i class="fa-solid fa-copy text-[10px]"></i>
+            <span>Copiar Crédito</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="window.openImageLightbox(${index})"
+            class="text-[11px] font-bold text-accent-cyan hover:text-brand-700 flex items-center gap-1 transition-colors cursor-pointer py-1"
+          >
+            <span>Ver Detalhes</span>
+            <i class="fa-solid fa-arrow-right text-[9px]"></i>
+          </button>
+        </div>
       </div>
     </article>
   `;
   }).join("");
 }
 
+function openImageLightbox(index) {
+  const images = window.currentFilteredImageBank || IMAGE_BANK_ITEMS;
+  const item = images[index];
+  if (!item) return;
+
+  const [src, title, category] = item;
+  currentLightboxImage = { src, title, category };
+
+  const modal = document.getElementById("image-lightbox-modal");
+  const modalImg = document.getElementById("modal-image-src");
+  const modalTitle = document.getElementById("modal-image-title");
+  const modalCategory = document.getElementById("modal-image-category");
+  const modalDownload = document.getElementById("modal-download-link");
+
+  if (!modal || !modalImg || !modalTitle || !modalCategory || !modalDownload) return;
+
+  modalImg.src = src;
+  modalTitle.textContent = title;
+  modalCategory.textContent = category;
+  modalDownload.href = src;
+  modalDownload.setAttribute("download", src.split("/").pop());
+
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeImageLightbox() {
+  const modal = document.getElementById("image-lightbox-modal");
+  if (modal) modal.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function copyGlobalAttribution() {
+  const text = "Foto: André Paixão Studio 8 / Radar São José";
+  navigator.clipboard.writeText(text).then(() => {
+    const btnText = document.getElementById("btn-copy-attribution-text");
+    if (btnText) {
+      const original = btnText.textContent;
+      btnText.textContent = "Crédito Copiado!";
+      setTimeout(() => { btnText.textContent = original; }, 2000);
+    }
+  }).catch(() => {
+    prompt("Copie a atribuição abaixo:", text);
+  });
+}
+
+function copyModalAttribution() {
+  const text = currentLightboxImage 
+    ? `Foto: André Paixão Studio 8 (${currentLightboxImage.title} - Radar São José)` 
+    : "Foto: André Paixão Studio 8 / Radar São José";
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("modal-copy-btn");
+    if (btn) {
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = `<i class="fa-solid fa-check text-emerald-600"></i> <span class="text-emerald-700">Copiado!</span>`;
+      setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
+    }
+  }).catch(() => {
+    prompt("Copie a atribuição abaixo:", text);
+  });
+}
+
+function copyImageAttribution(buttonEl, title) {
+  const text = `Foto: André Paixão Studio 8 (${title} - Radar São José)`;
+  navigator.clipboard.writeText(text).then(() => {
+    if (buttonEl) {
+      const originalHtml = buttonEl.innerHTML;
+      buttonEl.innerHTML = `<i class="fa-solid fa-check text-emerald-600 text-[10px]"></i> <span class="text-emerald-700">Copiado!</span>`;
+      setTimeout(() => { buttonEl.innerHTML = originalHtml; }, 2000);
+    }
+  }).catch(() => {
+    prompt("Copie a atribuição abaixo:", text);
+  });
+}
+
+async function downloadImageBankZip() {
+  const images = window.currentFilteredImageBank || IMAGE_BANK_ITEMS;
+  if (!images || !images.length) {
+    alert("Nenhuma imagem selecionada para download.");
+    return;
+  }
+
+  if (typeof JSZip === "undefined" || typeof saveAs === "undefined") {
+    alert("Biblioteca de compactação ZIP indisponível no momento.");
+    return;
+  }
+
+  const btnZipText = document.getElementById("btn-zip-text");
+  const originalText = btnZipText ? btnZipText.textContent : "Baixar Seleção (.ZIP)";
+  
+  try {
+    if (btnZipText) btnZipText.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Compactando 0/${images.length}...`;
+    
+    const zip = new JSZip();
+    const folder = zip.folder("Radar_Sao_Jose_Acervo_Visual");
+    
+    // Adicionar arquivo de licença / atribuição no ZIP
+    folder.file("LEIAME_ATRIBUICAO.txt", 
+      "ACERVO VISUAL - RADAR SÃO JOSÉ DOS CAMPOS\n" +
+      "=========================================\n\n" +
+      "Créditos e Atribuição Obrigatória:\n" +
+      "Fotografias por: André Paixão Studio 8\n" +
+      "Projeto: Radar São José\n\n" +
+      "Uso autorizado para projetos, apresentações, redes sociais e mídias com a devida citação do autor.\n"
+    );
+
+    let completed = 0;
+    const fetchPromises = images.map(async ([src, title]) => {
+      try {
+        const response = await fetch(src);
+        if (!response.ok) throw new Error(`Falha ao carregar ${src}`);
+        const blob = await response.blob();
+        const filename = src.split("/").pop();
+        folder.file(filename, blob);
+        completed++;
+        if (btnZipText) {
+          btnZipText.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Compactando ${completed}/${images.length}...`;
+        }
+      } catch (err) {
+        console.warn("Erro ao incluir imagem no ZIP:", src, err);
+      }
+    });
+
+    await Promise.all(fetchPromises);
+
+    if (btnZipText) btnZipText.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Gerando arquivo ZIP...`;
+
+    const content = await zip.generateAsync({ type: "blob" });
+    const categoryName = imageBankCategory === "Todos" ? "Completo" : imageBankCategory;
+    saveAs(content, `Radar_SJC_Fotos_${categoryName}.zip`);
+
+    if (btnZipText) {
+      btnZipText.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i> Download Pronto!`;
+      setTimeout(() => { btnZipText.textContent = originalText; }, 3000);
+    }
+  } catch (error) {
+    console.error("Erro ao gerar ZIP:", error);
+    alert("Ocorreu um erro ao gerar o arquivo ZIP. Tente baixar individualmente.");
+    if (btnZipText) btnZipText.textContent = originalText;
+  }
+}
+
 window.renderImageBank = renderImageBank;
+window.openImageLightbox = openImageLightbox;
+window.closeImageLightbox = closeImageLightbox;
+window.copyGlobalAttribution = copyGlobalAttribution;
+window.copyModalAttribution = copyModalAttribution;
+window.copyImageAttribution = copyImageAttribution;
+window.downloadImageBankZip = downloadImageBankZip;
 
 // ==========================================
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
