@@ -1604,10 +1604,8 @@ module.exports = async function handler(req, res) {
             activeJob.last_error = err.message;
             activeJob.retryable = false;
           } else if (err.status === 429) {
-            // Reverter a contagem de tentativa normal pois foi apenas limitação de taxa
-            if (activeJob.attempts_by_step[stepDef.id] > 0) {
-              activeJob.attempts_by_step[stepDef.id] -= 1;
-            }
+            // Reverter a contagem de tentativa normal com proteção contra valores negativos
+            activeJob.attempts_by_step[stepDef.id] = Math.max(0, (activeJob.attempts_by_step[stepDef.id] || 0) - 1);
 
             activeJob.rate_limit_attempts_by_step[stepDef.id] = (activeJob.rate_limit_attempts_by_step[stepDef.id] || 0) + 1;
             const rateLimitCount = activeJob.rate_limit_attempts_by_step[stepDef.id];

@@ -7687,7 +7687,13 @@ window.handleConsultorSubmit = async function(e) {
         }
 
         if (statusData.status === "waiting_rate_limit") {
-          const waitSec = Number(statusData.wait_seconds || statusData.estimated_remaining_seconds || 8);
+          let waitSec = 8;
+          if (statusData.retry_after_at) {
+            const retryTimeMs = new Date(statusData.retry_after_at).getTime();
+            waitSec = Math.max(1, Math.ceil((retryTimeMs - Date.now()) / 1000));
+          } else if (statusData.wait_seconds) {
+            waitSec = Number(statusData.wait_seconds);
+          }
           pollIntervalMs = Math.max(2000, waitSec * 1000);
           if (loadingStatusText) {
             loadingStatusText.innerText = statusData.message || `Aguardando liberação de taxa da janela Groq (${waitSec}s restantes)...`;
