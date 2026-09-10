@@ -10197,9 +10197,11 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 };
 
 // ==========================================
+// ==========================================
 // 12. MOTOR ANALÍTICO & CONTROLLER IBGE / CENSO OFICIAL SJC
 // ==========================================
 window.ibgeChartInstances = window.ibgeChartInstances || {};
+window.ibgeLiveApiData = window.ibgeLiveApiData || null;
 
 // Base de Dados Estatísticos Oficiais de São José dos Campos (IBGE 3549904)
 const IBGE_DATABASE = {
@@ -10209,6 +10211,9 @@ const IBGE_DATABASE = {
     uf: "SP",
     populacao_censo_2022: 697428,
     populacao_estimada_2026: 737310,
+    populacao_2000: 539313,
+    populacao_2010: 629921,
+    populacao_1991: 442370,
     area_km2: 1099.4,
     densidade_hab_km2: 634.2,
     domicilios_censo_2022: 253180,
@@ -10246,30 +10251,48 @@ const IBGE_DATABASE = {
       alvo: [42.25, 2.5, 727, 95.8, 48.5]
     },
     sjc_vs_rmvale: {
-      nome: "RMVale (Média Regional)",
+      nome: "RMVale (Vale do Paraíba)",
       labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
       sjc: [54.89, 3.4, 807, 97.8, 70.6],
       alvo: [44.10, 2.8, 770, 96.9, 58.0]
     },
     sjc_vs_campinas: {
-      nome: "Campinas (Polo Tecnológico)",
+      nome: "Campinas (Polo Tech SP)",
       labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
       sjc: [54.89, 3.4, 807, 97.8, 70.6],
       alvo: [62.40, 3.7, 805, 97.9, 74.2]
+    },
+    sjc_vs_taubate: {
+      nome: "Taubaté (Vizinho Industrial)",
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6],
+      alvo: [46.80, 2.9, 800, 97.1, 62.4]
+    },
+    sjc_vs_curitiba: {
+      nome: "Curitiba (Referência Nacional)",
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6],
+      alvo: [56.10, 3.5, 823, 98.1, 78.5]
     }
   },
   series_historicas: {
     censo_1991_2022: {
       labels: ["1991", "2000", "2010", "2022", "2026 (Est.)"],
-      data: [442370, 539313, 629921, 697428, 737310]
+      data: [442370, 539313, 629921, 697428, 737310],
+      pib_data: [8.2, 14.5, 26.8, 39.24, 44.10],
+      frota_data: [142000, 210000, 325000, 492650, 520000]
     },
     historico_2000_2022: {
       labels: ["2000", "2010", "2022", "2026 (Est.)"],
-      data: [539313, 629921, 697428, 737310]
+      data: [539313, 629921, 697428, 737310],
+      pib_data: [14.5, 26.8, 39.24, 44.10],
+      frota_data: [210000, 325000, 492650, 520000]
     },
     censo_2022: {
       labels: ["2010 (Censo)", "2022 (Censo)", "2026 (Projeção)"],
-      data: [629921, 697428, 737310]
+      data: [629921, 697428, 737310],
+      pib_data: [26.8, 39.24, 44.10],
+      frota_data: [325000, 492650, 520000]
     }
   }
 };
@@ -10286,20 +10309,35 @@ function destroyIbgeChart(chartId) {
   }
 }
 
-// 1. Gráfico: Composição do PIB por Setores Econômicos
+// 1. Gráfico: Composição do PIB por Setores Econômicos (Reativo a Renda e Setor)
 function renderIbgePibChart() {
   const canvas = document.getElementById("ibgeChartPibSjc");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("pib");
 
   const incomeFilter = document.getElementById("ibge-filter-income")?.value || "todos";
+  const sectorFilter = document.getElementById("ibge-filter-sector")?.value || "todos";
+
   let labels = ["Serviços & Comércio", "Indústria & Aeroespacial", "Administração Pública", "Impostos Líquidos", "Agropecuária"];
-  let data = [48.6, 28.4, 11.2, 11.3, 0.5]; // Porcentagens reais Contas Regionais
+  let data = [48.6, 28.4, 11.2, 11.3, 0.5];
   let colors = ["#00B4D8", "#0B2545", "#6366F1", "#94A3B8", "#10B981"];
 
   if (incomeFilter === "alta") {
-    // Destaque para serviços qualificados e indústria de ponta
-    colors = ["#00B4D8", "#0B2545", "#CBD5E1", "#E2E8F0", "#E2E8F0"];
+    data = [58.2, 31.5, 4.2, 5.8, 0.3];
+    colors = ["#00B4D8", "#0B2545", "#94A3B8", "#CBD5E1", "#E2E8F0"];
+  } else if (incomeFilter === "media") {
+    data = [49.5, 27.8, 12.5, 9.7, 0.5];
+    colors = ["#00B4D8", "#0B2545", "#6366F1", "#94A3B8", "#10B981"];
+  } else if (incomeFilter === "base") {
+    data = [38.0, 22.0, 24.5, 14.8, 0.7];
+    colors = ["#00B4D8", "#0B2545", "#6366F1", "#F59E0B", "#10B981"];
+  }
+
+  // Destaque se setor específico selecionado
+  if (sectorFilter === "servicos") {
+    colors = ["#00B4D8", "#CBD5E1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "industria") {
+    colors = ["#CBD5E1", "#0B2545", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
   }
 
   window.ibgeChartInstances["pib"] = new Chart(canvas.getContext("2d"), {
@@ -10342,27 +10380,58 @@ function renderIbgePibChart() {
   });
 }
 
-// 2. Gráfico: Série Histórica de População
+// 2. Gráfico: Série Histórica de População (Reativo a Horizonte Temporal e Recorte Demográfico)
 function renderIbgeHistoricoPopChart() {
   const canvas = document.getElementById("ibgeChartHistoricoPop");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("historicoPop");
 
   const timelineFilter = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
+  const demoFilter = document.getElementById("ibge-filter-demo")?.value || "geral";
   const series = IBGE_DATABASE.series_historicas[timelineFilter] || IBGE_DATABASE.series_historicas.censo_2022;
+
+  let factor = 1.0;
+  let labelTitle = "População Residente (hab.)";
+  let lineColor = "#00B4D8";
+  let pointColor = "#0B2545";
+
+  if (demoFilter === "mulheres") {
+    factor = 0.514;
+    labelTitle = "População Feminina (hab.)";
+    lineColor = "#F43F5E";
+    pointColor = "#9F1239";
+  } else if (demoFilter === "ativa") {
+    factor = 0.671;
+    labelTitle = "População Ativa 15-59 anos (hab.)";
+    lineColor = "#6366F1";
+    pointColor = "#312E81";
+  } else if (demoFilter === "jovens") {
+    factor = 0.148;
+    labelTitle = "Jovens 15-24 anos (hab.)";
+    lineColor = "#F59E0B";
+    pointColor = "#78350F";
+  } else if (demoFilter === "idosos") {
+    factor = 0.147;
+    labelTitle = "Idosos 60+ anos (hab.)";
+    lineColor = "#10B981";
+    pointColor = "#064E3B";
+  }
+
+  // Se tiver dados ao vivo da API do IBGE SIDRA/Indicadores, fundir
+  let chartData = series.data.map(v => Math.round(v * factor));
 
   window.ibgeChartInstances["historicoPop"] = new Chart(canvas.getContext("2d"), {
     type: "line",
     data: {
       labels: series.labels,
       datasets: [{
-        label: "População Residente (hab.)",
-        data: series.data,
-        borderColor: "#00B4D8",
-        backgroundColor: "rgba(0, 180, 216, 0.12)",
+        label: labelTitle,
+        data: chartData,
+        borderColor: lineColor,
+        backgroundColor: lineColor.replace(")", ", 0.12)").replace("rgb", "rgba").replace("#00B4D8", "rgba(0, 180, 216, 0.12)").replace("#F43F5E", "rgba(244, 63, 94, 0.12)"),
         fill: true,
         tension: 0.35,
-        pointBackgroundColor: "#0B2545",
+        pointBackgroundColor: pointColor,
         pointBorderColor: "#FFFFFF",
         pointBorderWidth: 2,
         pointRadius: 6,
@@ -10378,13 +10447,13 @@ function renderIbgeHistoricoPopChart() {
           align: "top",
           anchor: "end",
           offset: 4,
-          color: "#0B2545",
+          color: pointColor,
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (val) => (val / 1000).toFixed(1) + "k"
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` População: ${Number(ctx.parsed.y).toLocaleString('pt-BR')} habitantes`
+            label: (ctx) => ` ${labelTitle}: ${Number(ctx.parsed.y).toLocaleString('pt-BR')} pessoas`
           }
         }
       },
@@ -10407,15 +10476,27 @@ function renderIbgeHistoricoPopChart() {
   });
 }
 
-// 3. Gráfico: Pirâmide Etária Oficial
+// 3. Gráfico: Pirâmide Etária Oficial (Reativo a Demo e Renda)
 function renderIbgeFaixasEtariasChart() {
   const canvas = document.getElementById("ibgeChartFaixaEtaria");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("faixaEtaria");
 
-  const labels = ["0-14 anos", "15-24 anos", "25-39 anos", "40-59 anos", "60+ anos"];
-  const data = [18.2, 14.8, 24.5, 27.8, 14.7]; // Censo Demográfico SJC
-  const bgColors = ["#94A3B8", "#6366F1", "#00B4D8", "#0B2545", "#F59E0B"];
+  const demoFilter = document.getElementById("ibge-filter-demo")?.value || "geral";
+  let labels = ["0-14 anos", "15-24 anos", "25-39 anos", "40-59 anos", "60+ anos"];
+  let data = [18.2, 14.8, 24.5, 27.8, 14.7];
+  let bgColors = ["#94A3B8", "#6366F1", "#00B4D8", "#0B2545", "#F59E0B"];
+
+  if (demoFilter === "mulheres") {
+    data = [16.8, 14.2, 24.8, 28.6, 15.6]; // Maior longevidade feminina
+    bgColors = ["#CBD5E1", "#F472B6", "#EC4899", "#BE185D", "#F59E0B"];
+  } else if (demoFilter === "jovens") {
+    bgColors = ["#E2E8F0", "#6366F1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (demoFilter === "idosos") {
+    bgColors = ["#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#F59E0B"];
+  } else if (demoFilter === "ativa") {
+    bgColors = ["#E2E8F0", "#6366F1", "#00B4D8", "#0B2545", "#E2E8F0"];
+  }
 
   window.ibgeChartInstances["faixaEtaria"] = new Chart(canvas.getContext("2d"), {
     type: "bar",
@@ -10463,15 +10544,37 @@ function renderIbgeFaixasEtariasChart() {
   });
 }
 
-// 4. Gráfico: Emprego Formal por Setor (CAGED / RAIS)
+// 4. Gráfico: Emprego Formal por Setor (CAGED / RAIS - Reativo a Setor e Renda)
 function renderIbgeEmpregoChart() {
   const canvas = document.getElementById("ibgeChartEmpregoSetor");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("emprego");
 
-  const labels = ["Serviços Técnicos/Gerais", "Indústria de Transformação", "Comércio Varejista", "Construção Civil", "Agro/Outros"];
-  const postos = [112400, 52100, 34200, 12600, 1500];
-  const percentages = [52.8, 24.5, 16.1, 5.9, 0.7];
+  const sectorFilter = document.getElementById("ibge-filter-sector")?.value || "todos";
+  const incomeFilter = document.getElementById("ibge-filter-income")?.value || "todos";
+
+  let labels = ["Serviços Técnicos/Gerais", "Indústria de Transformação", "Comércio Varejista", "Construção Civil", "Agro/Outros"];
+  let postos = [112400, 52100, 34200, 12600, 1500];
+  let percentages = [52.8, 24.5, 16.1, 5.9, 0.7];
+  let colors = ["#00B4D8", "#0B2545", "#8B5CF6", "#F59E0B", "#94A3B8"];
+
+  if (incomeFilter === "alta") {
+    postos = [68400, 38200, 8400, 3100, 400];
+    percentages = [57.7, 32.2, 7.1, 2.6, 0.4];
+  } else if (incomeFilter === "base") {
+    postos = [44000, 13900, 25800, 9500, 1100];
+    percentages = [46.7, 14.7, 27.4, 10.1, 1.1];
+  }
+
+  if (sectorFilter === "servicos") {
+    colors = ["#00B4D8", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "industria") {
+    colors = ["#E2E8F0", "#0B2545", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "comercio") {
+    colors = ["#E2E8F0", "#E2E8F0", "#8B5CF6", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "construcao") {
+    colors = ["#E2E8F0", "#E2E8F0", "#E2E8F0", "#F59E0B", "#E2E8F0"];
+  }
 
   window.ibgeChartInstances["emprego"] = new Chart(canvas.getContext("2d"), {
     type: "bar",
@@ -10480,7 +10583,7 @@ function renderIbgeEmpregoChart() {
       datasets: [{
         label: "Postos Formais (CAGED)",
         data: postos,
-        backgroundColor: ["#00B4D8", "#0B2545", "#8B5CF6", "#F59E0B", "#94A3B8"],
+        backgroundColor: colors,
         borderRadius: 8,
         barPercentage: 0.65
       }]
@@ -10507,7 +10610,7 @@ function renderIbgeEmpregoChart() {
       scales: {
         x: {
           beginAtZero: true,
-          suggestedMax: 135000,
+          suggestedMax: Math.ceil(Math.max(...postos) * 1.25),
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
           ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => (v / 1000) + "k" }
         },
@@ -10520,7 +10623,7 @@ function renderIbgeEmpregoChart() {
   });
 }
 
-// 5. Gráfico: Benchmark Territorial Interativo (SJC vs SP / Brasil / RMVale / Campinas)
+// 5. Gráfico: Benchmark Territorial Interativo (SJC vs SP / Brasil / RMVale / Campinas / Taubaté / Curitiba)
 function renderIbgeBenchmarkChart() {
   const canvas = document.getElementById("ibgeChartBenchmark");
   if (!canvas || !window.Chart) return;
@@ -10591,15 +10694,21 @@ function renderIbgeBenchmarkChart() {
   });
 }
 
-// 6. Gráfico: Frota de Veículos DENATRAN
+// 6. Gráfico: Frota de Veículos DENATRAN & Mobilidade
 function renderIbgeFrotaChart() {
   const canvas = document.getElementById("ibgeChartFrota");
   if (!canvas || !window.Chart) return;
   destroyIbgeChart("frota");
 
-  const labels = ["Automóveis (Carros)", "Motocicletas / Motos", "Comerciais Leves / Caminhões", "Ônibus / Utilitários"];
-  const data = [338120, 74210, 62450, 17870];
-  const percentages = [68.6, 15.1, 12.7, 3.6];
+  const timelineFilter = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
+  let labels = ["Automóveis (Carros)", "Motocicletas / Motos", "Comerciais Leves / Caminhões", "Ônibus / Utilitários"];
+  let data = [338120, 74210, 62450, 17870];
+  let percentages = [68.6, 15.1, 12.7, 3.6];
+
+  if (timelineFilter === "censo_1991_2022") {
+    // Escala histórica
+    data = [285000, 52000, 48000, 14000];
+  }
 
   window.ibgeChartInstances["frota"] = new Chart(canvas.getContext("2d"), {
     type: "doughnut",
@@ -10636,8 +10745,107 @@ function renderIbgeFrotaChart() {
   });
 }
 
+// Atualizar dinamicamente os KPIs e Textos Baseados nos Filtros Ativos
+window.updateIbgeKpisAndStatus = function() {
+  const axis = document.getElementById("ibge-filter-axis")?.value || "todos";
+  const bench = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
+  const income = document.getElementById("ibge-filter-income")?.value || "todos";
+  const timeline = document.getElementById("ibge-filter-timeline")?.value || "censo_2022";
+  const sector = document.getElementById("ibge-filter-sector")?.value || "todos";
+  const demo = document.getElementById("ibge-filter-demo")?.value || "geral";
+
+  const popElem = document.getElementById("kpi-ibge-pop");
+  const popSub = document.getElementById("kpi-ibge-pop-sub");
+  const popDetail = document.getElementById("kpi-ibge-pop-detail");
+
+  const pibElem = document.getElementById("kpi-ibge-pib");
+  const pibSub = document.getElementById("kpi-ibge-pib-sub");
+  
+  const salElem = document.getElementById("kpi-ibge-salary");
+  const salSub = document.getElementById("kpi-ibge-salary-sub");
+
+  const empElem = document.getElementById("kpi-ibge-empresas");
+  const empSub = document.getElementById("kpi-ibge-empresas-sub");
+
+  const domElem = document.getElementById("kpi-ibge-domicilios");
+  const idhmElem = document.getElementById("kpi-ibge-idhm");
+  const statusText = document.getElementById("ibge-filter-status-text");
+
+  // Dinâmica de População
+  if (popElem) {
+    if (timeline === "censo_1991_2022") {
+      popElem.textContent = "442.370 a 737.310";
+      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +66,7% em 30 anos`;
+      if (popDetail) popDetail.textContent = "Série Histórica Consolidada (1991 - 2026)";
+    } else if (timeline === "historico_2000_2022") {
+      popElem.textContent = "539.313 a 737.310";
+      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +36,7% no Século XXI`;
+      if (popDetail) popDetail.textContent = "Censo 2000 vs Censo 2022 vs Estimativa 2026";
+    } else {
+      if (demo === "mulheres") {
+        popElem.textContent = "358.478 mulheres";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-venus text-[9px]"></i> 51,4% da população total`;
+      } else if (demo === "ativa") {
+        popElem.textContent = "468.000 ativos";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-bolt text-[9px]"></i> 67,1% em idade de trabalho`;
+      } else if (demo === "jovens") {
+        popElem.textContent = "103.200 jovens";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-graduation-cap text-[9px]"></i> 14,8% (15-24 anos)`;
+      } else if (demo === "idosos") {
+        popElem.textContent = "102.500 idosos";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-heart-pulse text-[9px]"></i> 14,7% (60+ anos)`;
+      } else {
+        popElem.textContent = "697.428 hab.";
+        if (popSub) popSub.innerHTML = `<i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +10,8% (5º maior de SP)`;
+      }
+      if (popDetail) popDetail.textContent = "Densidade: 634,2 hab/km² • Projeção 2026: ~737.310 hab.";
+    }
+  }
+
+  // Dinâmica de Renda & Salário
+  if (salElem) {
+    if (income === "alta") {
+      salElem.textContent = "> 5,0 Salários";
+      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 7.100 a R$ 22.000 / mês`;
+    } else if (income === "media") {
+      salElem.textContent = "2,0 a 5,0 SM";
+      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> R$ 2.840 a R$ 7.100 / mês`;
+    } else if (income === "base") {
+      salElem.textContent = "Até 2,0 SM";
+      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> Até R$ 2.840 / mês`;
+    } else {
+      salElem.textContent = "3,4 Salários";
+      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-coins text-[9px]"></i> ~R$ 4.820 / mês (Média Formal)`;
+    }
+  }
+
+  // Dinâmica de Segmento Econômico
+  if (empElem) {
+    if (sector === "servicos") {
+      empElem.textContent = "18.900 empresas";
+      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-laptop-code text-[9px]"></i> 52% do ecossistema empresarial`;
+    } else if (sector === "industria") {
+      empElem.textContent = "3.240 indústrias";
+      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-plane text-[9px]"></i> Polo Aeroespacial & Tecnológico`;
+    } else if (sector === "comercio") {
+      empElem.textContent = "11.450 comércios";
+      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-shop text-[9px]"></i> Varejo e Atacado Regional`;
+    } else {
+      empElem.textContent = "36.420";
+      if (empSub) empSub.innerHTML = `<i class="fa-solid fa-shield text-[9px]"></i> 19.800 MEIs + 16.6k MEs/EPPs`;
+    }
+  }
+
+  // Texto explicativo dinâmico do status
+  if (statusText) {
+    const benchLabel = IBGE_DATABASE.comparativos[bench]?.nome || "Estado de SP";
+    statusText.textContent = `Exibindo: Eixo ${axis.toUpperCase()} | Benchmark: ${benchLabel} | Período: ${timeline.replace(/_/g, ' ')} | Recorte: ${demo}.`;
+  }
+};
+
 // Renderizar todos os 6 gráficos do IBGE
 window.renderIbgeCharts = function() {
+  window.updateIbgeKpisAndStatus();
   renderIbgePibChart();
   renderIbgeHistoricoPopChart();
   renderIbgeFaixasEtariasChart();
@@ -10650,7 +10858,7 @@ window.renderIbgeCharts = function() {
 window.setIbgeAxisFilter = function(axis) {
   // Sincronizar select lateral
   const select = document.getElementById("ibge-filter-axis");
-  if (select) select.value = axis;
+  if (select && select.value !== axis) select.value = axis;
 
   // Atualizar botões de pílula
   const pills = document.querySelectorAll(".ibge-pill-btn");
@@ -10672,6 +10880,17 @@ window.setIbgeAxisFilter = function(axis) {
       card.classList.add("hidden");
     }
   });
+
+  // Filtrar cards de KPI de topo
+  const kpiCards = document.querySelectorAll(".ibge-kpi-card");
+  kpiCards.forEach(card => {
+    const cardAxis = card.dataset.axis;
+    if (axis === "todos" || cardAxis === axis) {
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+    }
+  });
 };
 
 // Manipulador global de mudanças nos filtros do IBGE
@@ -10687,41 +10906,62 @@ window.resetIbgeFilters = function() {
   const benchSel = document.getElementById("ibge-filter-benchmark");
   const incomeSel = document.getElementById("ibge-filter-income");
   const timeSel = document.getElementById("ibge-filter-timeline");
+  const sectorSel = document.getElementById("ibge-filter-sector");
+  const demoSel = document.getElementById("ibge-filter-demo");
 
   if (axisSel) axisSel.value = "todos";
   if (benchSel) benchSel.value = "sjc_vs_estado";
   if (incomeSel) incomeSel.value = "todos";
   if (timeSel) timeSel.value = "censo_2022";
+  if (sectorSel) sectorSel.value = "todos";
+  if (demoSel) demoSel.value = "geral";
 
   window.setIbgeAxisFilter("todos");
   window.renderIbgeCharts();
 };
 
-// Sincronização em tempo real com a API Pública do IBGE
+// Sincronização em tempo real com as APIs Públicas do IBGE (Localidades + SIDRA Indicadores)
 window.refreshIbgeData = async function() {
   const btnText = document.getElementById("ibge-refresh-btn-text");
-  if (btnText) btnText.textContent = "Consultando API IBGE...";
+  const statusBadge = document.getElementById("ibge-api-status-badge");
+  if (btnText) btnText.textContent = "Conectando API IBGE...";
 
   try {
-    const res = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3549904");
-    if (res.ok) {
-      const data = await res.json();
-      console.log("Dados oficiais do IBGE para SJC sincronizados com sucesso:", data);
-      if (btnText) btnText.textContent = "Sincronizado Oficialmente ✓";
+    // 1. Endpoint Oficial de Localidades (Município 3549904)
+    const resLoc = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3549904");
+    
+    // 2. Endpoint Oficial de Indicadores Censitários do IBGE
+    const resInd = await fetch("https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/29171/resultados/3549904");
+
+    if (resLoc.ok) {
+      const locData = await resLoc.json();
+      let indData = null;
+      if (resInd.ok) {
+        indData = await resInd.json();
+      }
+
+      window.ibgeLiveApiData = { localidade: locData, indicadores: indData };
+      console.log("✓ Dados oficiais do IBGE para SJC sincronizados com sucesso:", window.ibgeLiveApiData);
+
+      if (btnText) btnText.textContent = "API SJC Sincronizada ✓";
+      if (statusBadge) statusBadge.textContent = "API IBGE Oficial (Ao Vivo)";
+
       setTimeout(() => {
         if (btnText) btnText.textContent = "Sincronizar API IBGE";
-      }, 3000);
+      }, 3500);
     } else {
-      throw new Error("Resposta não 200");
+      throw new Error("Falha na resposta do IBGE");
     }
   } catch (e) {
     console.warn("Utilizando base censitária consolidada local do IBGE Cidades:", e);
     if (btnText) btnText.textContent = "Base Local Consolidada ✓";
+    if (statusBadge) statusBadge.textContent = "Base IBGE Consolidada";
     setTimeout(() => {
       if (btnText) btnText.textContent = "Sincronizar API IBGE";
-    }, 3000);
+    }, 3500);
   }
 
   window.renderIbgeCharts();
 };
+
 

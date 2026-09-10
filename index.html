@@ -527,22 +527,22 @@
             <div class="flex items-center justify-between pb-2 border-b border-slate-100">
               <span class="text-[10px] font-black uppercase tracking-wider text-brand-900 flex items-center gap-1.5">
                 <i class="fa-solid fa-sliders text-cyan-600"></i>
-                Filtros Temáticos IBGE
+                Filtros Analíticos IBGE
               </span>
-              <button onclick="window.resetIbgeFilters()" class="text-[10px] font-bold text-slate-400 hover:text-brand-900 transition-colors cursor-pointer">Resetar</button>
+              <button type="button" onclick="window.resetIbgeFilters()" class="text-[10px] font-bold text-slate-400 hover:text-brand-900 transition-colors cursor-pointer">Resetar</button>
             </div>
 
             <!-- 1. Categoria / Eixo Temático -->
             <div>
-              <label for="ibge-filter-axis" class="block font-bold text-slate-700 text-xs mb-1">Eixo Temático</label>
+              <label for="ibge-filter-axis" class="block font-bold text-slate-700 text-xs mb-1">1. Eixo Temático</label>
               <div class="relative">
                 <select id="ibge-filter-axis" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="todos">Todos os Eixos (Visão Geral)</option>
-                  <option value="demografia">1. Demografia & População</option>
-                  <option value="economia">2. Economia, Renda & PIB</option>
-                  <option value="trabalho">3. Trabalho, Emprego & Negócios</option>
-                  <option value="educacao">4. Educação & IDEB</option>
-                  <option value="habitacao">5. Domicílios, Frota & Território</option>
+                  <option value="demografia">👥 Demografia & População</option>
+                  <option value="economia">📊 Economia, Renda & PIB</option>
+                  <option value="trabalho">💼 Trabalho, Emprego & CAGED</option>
+                  <option value="educacao">🎓 Educação & IDHM</option>
+                  <option value="habitacao">🚗 Domicílios, Frota & Território</option>
                 </select>
                 <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
               </div>
@@ -550,55 +550,87 @@
 
             <!-- 2. Comparativo Geográfico / Benchmark -->
             <div>
-              <label for="ibge-filter-benchmark" class="block font-bold text-slate-700 text-xs mb-1">Comparativo Territorial</label>
+              <label for="ibge-filter-benchmark" class="block font-bold text-slate-700 text-xs mb-1">2. Benchmark Territorial</label>
               <div class="relative">
                 <select id="ibge-filter-benchmark" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="sjc_vs_estado">SJC vs. Estado de São Paulo</option>
                   <option value="sjc_vs_brasil">SJC vs. Média do Brasil</option>
                   <option value="sjc_vs_rmvale">SJC vs. RMVale (Vale do Paraíba)</option>
-                  <option value="sjc_vs_campinas">SJC vs. Campinas (Polo Tech)</option>
+                  <option value="sjc_vs_campinas">SJC vs. Campinas (Polo Tech SP)</option>
+                  <option value="sjc_vs_taubate">SJC vs. Taubaté (Vizinho Industrial)</option>
+                  <option value="sjc_vs_curitiba">SJC vs. Curitiba (Referência Nacional)</option>
                 </select>
                 <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
               </div>
             </div>
 
-            <!-- 3. Métrica de Renda e Poder de Compra -->
+            <!-- 3. Horizonte Temporal / Período -->
             <div>
-              <label for="ibge-filter-income" class="block font-bold text-slate-700 text-xs mb-1">Recorte de Renda & Salário</label>
-              <div class="relative">
-                <select id="ibge-filter-income" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
-                  <option value="todos">Todas as Faixas Salariais</option>
-                  <option value="alta">Acima de 5 Salários Mínimos</option>
-                  <option value="media">De 2 a 5 Salários Mínimos</option>
-                  <option value="base">Até 2 Salários Mínimos</option>
-                </select>
-                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
-              </div>
-            </div>
-
-            <!-- 4. Recorte Censitário Temporal -->
-            <div>
-              <label for="ibge-filter-timeline" class="block font-bold text-slate-700 text-xs mb-1">Horizonte Temporal</label>
+              <label for="ibge-filter-timeline" class="block font-bold text-slate-700 text-xs mb-1">3. Horizonte Censitário</label>
               <div class="relative">
                 <select id="ibge-filter-timeline" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
-                  <option value="censo_2022">Censo 2022 + Projeções 2026</option>
-                  <option value="historico_2000_2022">Série Histórica (2000 - 2022)</option>
-                  <option value="censo_1991_2022">Série Completa (1991 - 2022)</option>
+                  <option value="censo_2022">Censo 2022 + Projeção 2026</option>
+                  <option value="historico_2000_2022">Série 2000 a 2026 (Crescimento)</option>
+                  <option value="censo_1991_2022">Série Histórica Completa (1991 - 2026)</option>
                 </select>
                 <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
               </div>
             </div>
 
-            <!-- Indicadores Rápidos Ativos -->
+            <!-- 4. Recorte de Renda & Salário -->
+            <div>
+              <label for="ibge-filter-income" class="block font-bold text-slate-700 text-xs mb-1">4. Recorte de Renda & Poder de Compra</label>
+              <div class="relative">
+                <select id="ibge-filter-income" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="todos">Todas as Classes Econômicas</option>
+                  <option value="alta">Classe Alta (Acima de 5 SM / R$ 7.000+)</option>
+                  <option value="media">Classe Média (2 a 5 SM / R$ 2.800 a R$ 7.000)</option>
+                  <option value="base">Base da Pirâmide (Até 2 Salários Mínimos)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 5. Segmento Econômico de Foco -->
+            <div>
+              <label for="ibge-filter-sector" class="block font-bold text-slate-700 text-xs mb-1">5. Segmento Econômico de Foco</label>
+              <div class="relative">
+                <select id="ibge-filter-sector" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="todos">Todos os Segmentos (Geral)</option>
+                  <option value="servicos">Serviços & Tecnologia (52,8%)</option>
+                  <option value="industria">Indústria Aeroespacial & Auto (24,5%)</option>
+                  <option value="comercio">Comércio & Varejo (16,1%)</option>
+                  <option value="construcao">Construção Civil & Imobiliário (5,9%)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 6. Recorte Demográfico / Gênero & Faixa Etária -->
+            <div>
+              <label for="ibge-filter-demo" class="block font-bold text-slate-700 text-xs mb-1">6. Recorte Demográfico</label>
+              <div class="relative">
+                <select id="ibge-filter-demo" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="geral">População Total (697k Censo / 737k Est.)</option>
+                  <option value="ativa">População em Idade Ativa (15 a 59 anos)</option>
+                  <option value="jovens">Jovens & Universitários (15 a 24 anos)</option>
+                  <option value="idosos">População 60+ (Envelhecimento Ativo)</option>
+                  <option value="mulheres">Recorte Feminino (51,4% da Cidade)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- Card de Status do Filtro com Dados Vivos da API -->
             <div id="ibge-filter-summary-card" class="p-3.5 bg-gradient-to-br from-cyan-50 to-brand-50/50 rounded-2xl border border-cyan-200/80 text-[11px] text-cyan-950 space-y-1.5">
               <div class="flex items-center justify-between font-black text-cyan-900">
                 <span class="flex items-center gap-1.5">
                   <i class="fa-solid fa-circle-check text-cyan-600"></i>
-                  <span>IBGE Cidades 3549904</span>
+                  <span id="ibge-api-status-badge">API IBGE Conectada</span>
                 </span>
-                <span class="px-1.5 py-0.5 rounded bg-cyan-200/60 text-[9px]">SJC-SP</span>
+                <span class="px-1.5 py-0.5 rounded bg-cyan-200/60 text-[9px] font-mono">SJC 3549904</span>
               </div>
-              <p id="ibge-filter-status-text" class="text-slate-600 leading-snug">
+              <p id="ibge-filter-status-text" class="text-slate-600 leading-snug font-medium">
                 Exibindo visão abrangente com dados consolidados de demografia, renda, mercado formal e infraestrutura.
               </p>
             </div>
@@ -6949,7 +6981,7 @@
         <!-- CARDS DE KPIS DEMOGRÁFICOS & ECONÔMICOS OFICIAIS (6 CARDS RICOS) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
           <!-- Card 1: População -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2 ibge-kpi-card" data-axis="demografia">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">População Recenseada</span>
               <div class="w-8 h-8 rounded-xl bg-cyan-50 text-cyan-700 flex items-center justify-center text-xs font-bold">
@@ -6958,17 +6990,17 @@
             </div>
             <div>
               <h3 id="kpi-ibge-pop" class="text-2xl font-black text-brand-950 tracking-tight">697.428 hab.</h3>
-              <p class="text-[11px] font-bold text-emerald-600 flex items-center gap-1 mt-0.5">
+              <p id="kpi-ibge-pop-sub" class="text-[11px] font-bold text-emerald-600 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +10,8% (5º maior de SP)
               </p>
             </div>
-            <p class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+            <p id="kpi-ibge-pop-detail" class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
               Densidade: 634,2 hab/km² • Projeção 2026: ~737.310 hab.
             </p>
           </div>
 
           <!-- Card 2: PIB Total & per Capita -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2 ibge-kpi-card" data-axis="economia">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">PIB Municipal</span>
               <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs font-bold">
@@ -6977,17 +7009,17 @@
             </div>
             <div>
               <h3 id="kpi-ibge-pib" class="text-2xl font-black text-brand-950 tracking-tight">R$ 39,24 Bilhões</h3>
-              <p class="text-[11px] font-bold text-emerald-600 flex items-center gap-1 mt-0.5">
+              <p id="kpi-ibge-pib-sub" class="text-[11px] font-bold text-emerald-600 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-chart-line text-[9px]"></i> PIB per capita: R$ 54.890
               </p>
             </div>
-            <p class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+            <p id="kpi-ibge-pib-detail" class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
               Maior economia do Vale do Paraíba • Top 20 PIB do Brasil
             </p>
           </div>
 
           <!-- Card 3: Salário Médio -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2 ibge-kpi-card" data-axis="trabalho">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Salário Médio Formal</span>
               <div class="w-8 h-8 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-xs font-bold">
@@ -6996,17 +7028,17 @@
             </div>
             <div>
               <h3 id="kpi-ibge-salary" class="text-2xl font-black text-brand-950 tracking-tight">3,4 Salários</h3>
-              <p class="text-[11px] font-bold text-purple-700 flex items-center gap-1 mt-0.5">
+              <p id="kpi-ibge-salary-sub" class="text-[11px] font-bold text-purple-700 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-coins text-[9px]"></i> ~R$ 4.820 / mês
               </p>
             </div>
-            <p class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+            <p id="kpi-ibge-salary-detail" class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
               212.800 postos de trabalho formais ativos
             </p>
           </div>
 
           <!-- Card 4: Empresas e CNPJs Ativos -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2 ibge-kpi-card" data-axis="trabalho">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Empresas & Negócios</span>
               <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xs font-bold">
@@ -7014,18 +7046,18 @@
               </div>
             </div>
             <div>
-              <h3 class="text-2xl font-black text-brand-950 tracking-tight">36.420</h3>
-              <p class="text-[11px] font-bold text-blue-700 flex items-center gap-1 mt-0.5">
+              <h3 id="kpi-ibge-empresas" class="text-2xl font-black text-brand-950 tracking-tight">36.420</h3>
+              <p id="kpi-ibge-empresas-sub" class="text-[11px] font-bold text-blue-700 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-shield text-[9px]"></i> 19.800 MEIs + 16.6k MEs/EPPs
               </p>
             </div>
-            <p class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+            <p id="kpi-ibge-empresas-detail" class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
               Hub aeroespacial, farmacêutico, telecom e automotivo
             </p>
           </div>
 
           <!-- Card 5: Domicílios e Famílias -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2 ibge-kpi-card" data-axis="habitacao">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Domicílios Ocupados</span>
               <div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center text-xs font-bold">
@@ -7033,18 +7065,18 @@
               </div>
             </div>
             <div>
-              <h3 class="text-2xl font-black text-brand-950 tracking-tight">253.180</h3>
-              <p class="text-[11px] font-bold text-rose-700 flex items-center gap-1 mt-0.5">
+              <h3 id="kpi-ibge-domicilios" class="text-2xl font-black text-brand-950 tracking-tight">253.180</h3>
+              <p id="kpi-ibge-domicilios-sub" class="text-[11px] font-bold text-rose-700 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-people-roof text-[9px]"></i> Média: 2,75 hab / domicílio
               </p>
             </div>
-            <p class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+            <p id="kpi-ibge-domicilios-detail" class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
               98,2% urbanização • 99,4% acesso à rede elétrica
             </p>
           </div>
 
           <!-- Card 6: IDHM & Educação -->
-          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2">
+          <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-2 col-span-1 sm:col-span-1 lg:col-span-2 ibge-kpi-card" data-axis="educacao">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">IDHM (Muito Alto)</span>
               <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xs font-bold">
@@ -7052,12 +7084,12 @@
               </div>
             </div>
             <div>
-              <h3 class="text-2xl font-black text-brand-950 tracking-tight">0,807</h3>
-              <p class="text-[11px] font-bold text-amber-700 flex items-center gap-1 mt-0.5">
+              <h3 id="kpi-ibge-idhm" class="text-2xl font-black text-brand-950 tracking-tight">0,807</h3>
+              <p id="kpi-ibge-idhm-sub" class="text-[11px] font-bold text-amber-700 flex items-center gap-1 mt-0.5">
                 <i class="fa-solid fa-star text-[9px]"></i> 12º melhor de SP
               </p>
             </div>
-            <p class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
+            <p id="kpi-ibge-idhm-detail" class="text-[10px] text-slate-500 border-t border-slate-100 pt-2">
               Escolarização: 97,8% • Longevidade: 76,8 anos
             </p>
           </div>
@@ -7567,6 +7599,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=83.0"></script>
+  <script src="app.js?v=84.0"></script>
 </body>
 </html>
