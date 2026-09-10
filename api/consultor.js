@@ -578,7 +578,7 @@ async function releaseJobLock(job, updates = {}) {
 }
 
 // 5. CHAMADA À GROQ COM ABORTCONTROLLER (TIMEOUT 25S) E DIAGNÓSTICO
-async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 750, timeoutMs = 25000, stepLabel = "Etapa", temperature = 0.2) {
+async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 700, timeoutMs = 25000, stepLabel = "Etapa", temperature = 0.2) {
   const startTime = Date.now();
   const estimatedInputTokens = Math.ceil(((systemPrompt?.length || 0) + (userPayloadStr?.length || 0)) / 3.8);
   const totalEstimatedTokens = estimatedInputTokens + maxTokens;
@@ -591,9 +591,9 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
     total_estimado: totalEstimatedTokens
   }));
 
-  // Proteção preventiva contra estouro de TPM (limite seguro por chamada)
-  if (totalEstimatedTokens > 1200 && stepLabel.includes("Tese Estratégica")) {
-    console.warn(`[GROQ PAYLOAD WARNING] Total estimado (${totalEstimatedTokens}) excede limite seguro de 1200 tokens. Compactando payload.`);
+  // Proteção preventiva contra estouro de TPM (limite seguro de 1200 tokens por chamada em qualquer etapa)
+  if (totalEstimatedTokens > 1200) {
+    console.warn(`[GROQ PAYLOAD WARNING] Total estimado (${totalEstimatedTokens}) excede limite de 1200 tokens na etapa '${stepLabel}'.`);
   }
 
   console.log("[Groq] Modelo utilizado:", GROQ_MODEL);
@@ -738,14 +738,19 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
     parse_status: "success"
   }));
 
+  const usage = data.usage || {};
   return {
     result: parsed,
     durationMs,
     outputChars: rawContent.length,
-    inputChars: userPayloadStr.length + systemPrompt.length
+    inputChars: userPayloadStr.length + systemPrompt.length,
+    promptTokens: usage.prompt_tokens || estimatedInputTokens,
+    completionTokens: usage.completion_tokens || Math.ceil(rawContent.length / 3.8),
+    totalTokens: usage.total_tokens || (estimatedInputTokens + Math.ceil(rawContent.length / 3.8))
   };
 }
 
+// 6. BUILDER DE CONTEXTO POR ETAPA
 // 6. BUILDER DE CONTEXTO POR ETAPA
 function buildStepContext(stepId, snapshot, job) {
   const ind = snapshot.indicators || {};
@@ -771,46 +776,57 @@ function buildStepContext(stepId, snapshot, job) {
       return {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
-        behavior_and_barrier_indicators: {
-          barreiras_saida: ind.barreiras_saida,
-          criterios_escolha: ind.criterios_escolha,
-          demanda_reprimida: ind.demanda_reprimida,
-          pets_posse: ind.pets_posse,
-          produtores_locais: ind.produtores_locais,
-          influenciadores: ind.influenciadores
+        comportamento_e_barreiras: {
+          barreiras_saida: (ind.barreiras_saida?.categorias || []).slice(0, 4).map(c => `${c.nome}: ${c.percentual}%`),
+          criterios_escolha: (ind.criterios_escolha?.categorias || []).slice(0, 4).map(c => `${c.nome}: ${c.percentual}%`),
+          demanda_reprimida: (ind.demanda_reprimida?.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`),
+          pets_posse: (ind.pets_posse?.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`),
+          produtores_locais: (ind.produtores_locais?.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`)
         },
-        sample_verbatims: verb.slice(0, 12),
-        visao_estrategica_previa: job.partial_results?.visao_veredito_territorio || null
+        verbalizacoes_amostra: verb.slice(0, 5).map(v => ({ id: v.id, citacao: v.citacao_original })),
+        resumo_step1: {
+          veredito: job.partial_results?.visao_veredito_territorio?.veredito_postura,
+          justificativa: job.partial_results?.visao_veredito_territorio?.veredito_justificativa,
+          bairros: (job.partial_results?.visao_veredito_territorio?.bairros || []).map(b => b.nome)
+        }
       };
 
     case "selecao_graficos_matrizes":
       return {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
-        available_indicators: Object.entries(ind).map(([id, i]) => ({
+        indicadores_disponiveis: Object.entries(ind).map(([id, i]) => ({
           indicador_id: id,
-          coluna: i.coluna,
-          denominador: i.denominador,
-          tipo_grafico: i.tipo_grafico,
-          distribuicao_percentual: (i.categorias || []).map(c => `${c.nome}: ${c.percentual}%`).join(' | ')
+          coluna: i.coluna ? i.coluna.split("?")[0].trim() : id,
+          top_dados: (i.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`).join(', ')
         })),
-        visao_estrategica_previa: job.partial_results?.visao_veredito_territorio || null,
-        swot_previa: job.partial_results?.swot_causalidade_ambiente?.swot || null
+        resumo_step1: {
+          bairros: (job.partial_results?.visao_veredito_territorio?.bairros || []).map(b => b.nome),
+          zona_exclusao: job.partial_results?.visao_veredito_territorio?.zona_exclusao
+        },
+        resumo_step2: {
+          forca_chave: job.partial_results?.swot_causalidade_ambiente?.swot?.forcas?.[0]?.item,
+          fraqueza_chave: job.partial_results?.swot_causalidade_ambiente?.swot?.fraquezas?.[0]?.item,
+          problema_central: job.partial_results?.swot_causalidade_ambiente?.ishikawa?.problema_central
+        }
       };
 
     case "movimentos_vencedor_testes":
       return {
         idea: job.idea,
         total_sample_n: snapshot.totalN,
-        cultural_movements: mov,
-        verbatims_pool: verb.slice(0, 20),
-        key_indicators: {
-          evasao_consumo: ind.evasao_consumo,
-          frequencia_saida: ind.frequencia_saida,
-          redes_descoberta: ind.redes_descoberta,
-          orgulho_morar: ind.orgulho_morar
+        quatro_movimentos: {
+          geografia_silencio: "Refúgio, acolhimento e desaceleração na cidade",
+          cidade_prometida: "Cosmopolitismo, padrão metropolitano e retenção de consumo",
+          tribo_global: "Conexão digital, marcas globais e tendências",
+          empreendedorismo_intuitivo: "Autoralidade, feiras locais e economia criativa"
         },
-        visao_estrategica_previa: job.partial_results?.visao_veredito_territorio || null
+        verbatims_pool: verb.slice(0, 6).map(v => ({ id: v.id, citacao: v.citacao_original })),
+        indicadores_relevantes: {
+          evasao_sp: "42.1% viajam a SP por falta de opcoes equivalentes",
+          redes: "Instagram e WhatsApp predominantes para descoberta",
+          orgulho: "84.5% declaram orgulho de morar em SJC"
+        }
       };
 
     default:
@@ -870,47 +886,36 @@ ESTRUTURA JSON EXATA:
     message: "Auditando ambiente competitivo, causalidade Ishikawa e matriz SWOT...",
     maxTokens: 700,
     systemPrompt: `Voce e um Especialista em Diagnostico Organizacional e Estrategia Competitiva em SJC.
+Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
 
-DIRETRIZES:
-1. Analise as condicoes especificas da cidade para esta ideia de negocio com base no analysisContext recebido.
-2. No Diagrama de Ishikawa, identifique causas reais de possivel fracasso ou baixa retencao.
-3. No PESTEL, traduza fatores macroeconomicos e culturais de SJC em decisoes recomendadas.
+DIRETRIZES E LIMITES:
+1. SWOT: 2 forcas, 2 fraquezas, 2 oportunidades, 2 ameacas (texto de ate 120 caracteres cada).
+2. PESTEL: 1 decisao recomendada por letra (P, E, S, T, E_env, L) em ate 120 caracteres.
+3. ISHIKAWA: problema_central em ate 140 caracteres e 4 categorias de causas (Pessoas & Atendimento, Ambiente & Experiencia, Processos & Operacao, Produto & Precificacao) com descricao em ate 120 caracteres.
 
-RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
+ESTRUTURA JSON EXATA:
 {
   "swot": {
-    "forcas": [
-      { "item": "Forca 1", "texto": "Descricao da forca interna do negocio..." },
-      { "item": "Forca 2", "texto": "Descricao da forca 2..." }
-    ],
-    "fraquezas": [
-      { "item": "Fraqueza 1", "texto": "Ponto de vulnerabilidade interna..." },
-      { "item": "Fraqueza 2", "texto": "Descricao da fraqueza 2..." }
-    ],
-    "oportunidades": [
-      { "item": "Oportunidade 1", "texto": "Brecha de mercado em SJC..." },
-      { "item": "Oportunidade 2", "texto": "Descricao da oportunidade 2..." }
-    ],
-    "ameacas": [
-      { "item": "Ameaca 1", "texto": "Risco de concorrencia ou evasao..." },
-      { "item": "Ameaca 2", "texto": "Descricao da ameaca 2..." }
-    ]
+    "forcas": [{ "item": "Forca 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Forca 2", "texto": "Texto em ate 120 caracteres" }],
+    "fraquezas": [{ "item": "Fraqueza 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Fraqueza 2", "texto": "Texto em ate 120 caracteres" }],
+    "oportunidades": [{ "item": "Oportunidade 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Oportunidade 2", "texto": "Texto em ate 120 caracteres" }],
+    "ameacas": [{ "item": "Ameaca 1", "texto": "Texto em ate 120 caracteres" }, { "item": "Ameaca 2", "texto": "Texto em ate 120 caracteres" }]
   },
   "pestel": {
-    "P": { "fator": "Politico / Regulatorio", "decisao_recomendada": "Decisao recomendada para adequacao..." },
-    "E": { "fator": "Economico / Renda", "decisao_recomendada": "Estrategia de precificacao frente ao poder de compra..." },
-    "S": { "fator": "Social / Habitos", "decisao_recomendada": "Alinhamento com estilo de vida joseense..." },
-    "T": { "fator": "Tecnologico / Digital", "decisao_recomendada": "Canais e presenca digital recomendada..." },
-    "E_env": { "fator": "Ambiental / Sustentabilidade", "decisao_recomendada": "Pratica ambiental ou pet-friendly..." },
-    "L": { "fator": "Legal / Zoneamento", "decisao_recomendada": "Conformidade municipal..." }
+    "P": { "fator": "Politico", "decisao_recomendada": "Decisao em ate 120 caracteres" },
+    "E": { "fator": "Economico", "decisao_recomendada": "Decisao em ate 120 caracteres" },
+    "S": { "fator": "Social", "decisao_recomendada": "Decisao em ate 120 caracteres" },
+    "T": { "fator": "Tecnologico", "decisao_recomendada": "Decisao em ate 120 caracteres" },
+    "E_env": { "fator": "Ambiental", "decisao_recomendada": "Decisao em ate 120 caracteres" },
+    "L": { "fator": "Legal", "decisao_recomendada": "Decisao em ate 120 caracteres" }
   },
   "ishikawa": {
-    "problema_central": "Principal risco de fracasso ou perda de margem do negocio em SJC",
+    "problema_central": "Principal risco ou atrito do negocio em ate 140 caracteres",
     "causas": [
-      { "categoria": "Pessoas & Atendimento", "descricao": "Causa raiz ligada a servico e equipe..." },
-      { "categoria": "Ambiente & Experiencia", "descricao": "Causa raiz ligada ao espaco fisico ou atrito de acesso..." },
-      { "categoria": "Processos & Operacao", "descricao": "Causa raiz de eficiencia ou estoque..." },
-      { "categoria": "Produto & Precificacao", "descricao": "Causa raiz de desajuste entre preco e valor..." }
+      { "categoria": "Pessoas & Atendimento", "descricao": "Causa raiz em ate 120 caracteres" },
+      { "categoria": "Ambiente & Experiencia", "descricao": "Causa raiz em ate 120 caracteres" },
+      { "categoria": "Processos & Operacao", "descricao": "Causa raiz em ate 120 caracteres" },
+      { "categoria": "Produto & Precificacao", "descricao": "Causa raiz em ate 120 caracteres" }
     ]
   }
 }`
@@ -920,52 +925,55 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
     id: "selecao_graficos_matrizes",
     label: "Seleção Dinâmica de 3 Gráficos, Matriz VRIO e 5 Forças de Porter",
     message: "Cruzando indicadores da pesquisa oficial, VRIO e 5 Forças de Porter...",
-    maxTokens: 750,
+    maxTokens: 700,
     systemPrompt: `Voce e um Engenheiro de Dados e Estrategista Competitivo em SJC.
+Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
 
-DIRETRIZES OBRIGATORIAS:
-1. SELECAO DE GRAFICOS: Escolha EXATAMENTE 3 indicadores da lista em analysisContext.available_indicators usando estritamente o campo indicador_id ("renda_familiar", "evasao_consumo", "frequencia_saida", "regioes_frequentadas", "barreiras_saida", "criterios_escolha", "redes_descoberta", "demanda_reprimida", "influenciadores", "pets_posse", "produtores_locais", "orgulho_morar").
-2. PARECER ANALITICO: Escreva uma interpretacao honesta do que o dado prova e declare explicitamente o que a metrica NAO prova para este negocio.
-3. VRIO e PORTER: Analise as forcas competitivas e barreiras de imitabilidade.
+DIRETRIZES E LIMITES:
+1. SELECAO: Escolha EXATAMENTE 3 indicadores validos presentes na lista (use o indicador_id exato).
+2. GRAFICOS: motivo_da_escolha (ate 130c), leitura_analitica (ate 150c), o_que_nao_prova (ate 140c).
+3. VRIO: 4 itens (V, R, I, O) com analise em ate 110 caracteres cada.
+4. PORTER: 5 forcas com intensidade ("baixa", "media", "alta") e analise em ate 110 caracteres.
+5. MIX MARKETING: cinco_ps (Produto, Preco, Praca, Promocao, Pessoas em ate 90c) e oceano_azul (eliminar, reduzir, elevar, criar em ate 100c).
 
-RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
+ESTRUTURA JSON EXATA:
 {
   "graficos_selecionados": [
     {
-      "indicador_id": "id_exato_do_indicador",
-      "motivo_da_escolha": "Por que esta metrica e crucial para este negocio especifico",
-      "leitura_analitica": "Parecer aprofundado cruzando os dados do indicador com a proposta",
-      "o_que_nao_prova": "Declaracao honesta do limite da metrica (o que nao deve ser extrapolado)"
+      "indicador_id": "renda_familiar",
+      "motivo_da_escolha": "Motivo em ate 130 caracteres",
+      "leitura_analitica": "Leitura em ate 150 caracteres",
+      "o_que_nao_prova": "Limite do dado em ate 140 caracteres"
     }
   ],
   "matrizes_estrategicas": {
     "vrio": [
-      { "letra": "V", "nome": "Valor", "analise": "Como o negocio cria valor concreto..." },
-      { "letra": "R", "nome": "Raridade", "analise": "O que e incomum na oferta frente aos concorrentes..." },
-      { "letra": "I", "nome": "Imitabilidade", "analise": "Barreiras que impedem copias faceis..." },
-      { "letra": "O", "nome": "Organizacao", "analise": "Processos de entrega e controle..." }
+      { "letra": "V", "nome": "Valor", "analise": "Analise em ate 110 caracteres" },
+      { "letra": "R", "nome": "Raridade", "analise": "Analise em ate 110 caracteres" },
+      { "letra": "I", "nome": "Imitabilidade", "analise": "Analise em ate 110 caracteres" },
+      { "letra": "O", "nome": "Organizacao", "analise": "Analise em ate 110 caracteres" }
     ],
     "porter": [
-      { "forca": "Rivalidade entre Concorrentes", "intensidade": "baixa | media | alta", "analise": "Disputa com players locais e regionais..." },
-      { "forca": "Ameaca de Novos Entrantes", "intensidade": "baixa | media | alta", "analise": "Barreiras de entrada de capital e ponto..." },
-      { "forca": "Produtos Substitutos", "intensidade": "baixa | media | alta", "analise": "Substitutos diretos, e-commerce e viagens a SP..." },
-      { "forca": "Barganha dos Fornecedores", "intensidade": "baixa | media | alta", "analise": "Dependencia e custos logísticos..." },
-      { "forca": "Barganha dos Clientes", "intensidade": "baixa | media | alta", "analise": "Sensibilidade a preco e poder de escolha..." }
+      { "forca": "Rivalidade entre Concorrentes", "intensidade": "media", "analise": "Analise em ate 110 caracteres" },
+      { "forca": "Ameaca de Novos Entrantes", "intensidade": "media", "analise": "Analise em ate 110 caracteres" },
+      { "forca": "Produtos Substitutos", "intensidade": "alta", "analise": "Analise em ate 110 caracteres" },
+      { "forca": "Barganha dos Fornecedores", "intensidade": "baixa", "analise": "Analise em ate 110 caracteres" },
+      { "forca": "Barganha dos Clientes", "intensidade": "alta", "analise": "Analise em ate 110 caracteres" }
     ]
   },
   "mix_marketing": {
     "cinco_ps": [
-      { "p": "Produto", "analise": "Mix e proposta tangivel..." },
-      { "p": "Preco", "analise": "Precificacao equilibrada com valor perceptivel..." },
-      { "p": "Praca", "analise": "Canais fisicos e presenca digital..." },
-      { "p": "Promocao", "analise": "Divulgacao focada em redes e indicacao..." },
-      { "p": "Pessoas", "analise": "Treinamento consultivo..." }
+      { "p": "Produto", "analise": "Analise em ate 90 caracteres" },
+      { "p": "Preco", "analise": "Analise em ate 90 caracteres" },
+      { "p": "Praca", "analise": "Analise em ate 90 caracteres" },
+      { "p": "Promocao", "analise": "Analise em ate 90 caracteres" },
+      { "p": "Pessoas", "analise": "Analise em ate 90 caracteres" }
     ],
     "oceano_azul": {
-      "eliminar": "Atritos operacionais...",
-      "reduzir": "Custos e estoques desnecessarios...",
-      "elevar": "Padrao de curadoria e experiencia...",
-      "criar": "Diferencial inovador inexistente em SJC..."
+      "eliminar": "Em ate 100 caracteres",
+      "reduzir": "Em ate 100 caracteres",
+      "elevar": "Em ate 100 caracteres",
+      "criar": "Em ate 100 caracteres"
     }
   }
 }`
@@ -975,48 +983,46 @@ RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
     id: "movimentos_vencedor_testes",
     label: "Movimentos Culturais, Verbalizações Reais e Plano de Validação",
     message: "Enquadrando no movimento cultural vencedor e selecionando verbalizações...",
-    maxTokens: 850,
+    maxTokens: 700,
     systemPrompt: `Voce e um Antropologo Cultural e Estrategista de Negocios em SJC.
+Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
 
-DIRETRIZES OBRIGATORIAS:
-1. MOVIMENTO VENCEDOR: Escolha exatamente UM entre os 4 movimentos oficiais:
-   - "A Geografia do Silêncio"
-   - "A Cidade Prometida"
-   - "A Tribo Global"
-   - "Empreendedorismo Intuitivo"
-2. JUSTIFICATIVA E CONDICOES: Fundamente por que esse movimento e o motor da proposta, qual o risco de erro e a condicao de sucesso.
-3. VERBALIZACOES REAIS: Escolha de 2 a 4 verbalizacoes REAIS do pool fornecido em analysisContext.verbatims_pool. Nao altere a citacao.
-4. PLANO DE VALIDACAO: Elabore 4 perguntas de entrevista qualitativa para validar o negocio em SJC.
+DIRETRIZES E LIMITES:
+1. MOVIMENTO VENCEDOR: Escolha exatamente UM entre os 4 nomes oficiais: "A Geografia do Silêncio", "A Cidade Prometida", "A Tribo Global" ou "Empreendedorismo Intuitivo".
+2. JUSTIFICATIVA: justificativa_densa (ate 250c), condicao_de_sucesso (ate 160c), risco_de_erro (ate 160c).
+3. 4 MOVIMENTOS: analise de cada um em ate 120 caracteres.
+4. VERBALIZACOES: Escolha de 2 a 4 verbalizacoes presentes no verbatims_pool mantendo id e citacao identicos.
+5. PLANO: 4 perguntas de entrevista de validacao em ate 130 caracteres cada.
 
-RETORNE EXCLUSIVAMENTE UM JSON com esta estrutura:
+ESTRUTURA JSON EXATA:
 {
   "movimentos_culturais": {
     "veredicto_final": {
-      "nome_movimento": "Nome exato do movimento vencedor",
-      "justificativa_densa": "Fundamentacao antropologica e mercadologica densa conectando o movimento com a ideia.",
-      "condicao_de_sucesso": "O que o negocio DEVE entregar para capturar a forca deste movimento.",
-      "risco_de_erro": "Qual erro classico a gestao pode cometer se ignorar a tensao cultural deste movimento."
+      "nome_movimento": "A Cidade Prometida",
+      "justificativa_densa": "Justificativa em ate 250 caracteres",
+      "condicao_de_sucesso": "Condicao em ate 160 caracteres",
+      "risco_de_erro": "Risco em ate 160 caracteres"
     },
     "quatro_movimentos_analise": {
-      "geografia_silencio": "Como o negocio interage com este movimento...",
-      "cidade_prometida": "Como o negocio interage com este movimento...",
-      "tribo_global": "Como o negocio interage com este movimento...",
-      "empreendedorismo_intuitivo": "Como o negocio interage com este movimento..."
+      "geografia_silencio": "Analise em ate 120 caracteres",
+      "cidade_prometida": "Analise em ate 120 caracteres",
+      "tribo_global": "Analise em ate 120 caracteres",
+      "empreendedorismo_intuitivo": "Analise em ate 120 caracteres"
     }
   },
   "verbalizacoes_selecionadas": [
     {
-      "id": "id_da_verbalizacao_no_pool",
-      "citacao": "Texto exato da citacao presente no pool",
-      "por_que_foi_selecionada": "Conexao direta com a oportunidade ou desafio do negocio"
+      "id": "id_exato",
+      "citacao": "Citacao exata",
+      "por_que_foi_selecionada": "Motivo em ate 120 caracteres"
     }
   ],
   "plano_de_validacao": {
     "guia_entrevista_perguntas": [
-      "Pergunta 1 aprofundando habitos de consumo em SJC",
-      "Pergunta 2 sobre barreiras reais de saida ou preco",
-      "Pergunta 3 sobre disposicao a pagar e frequencia",
-      "Pergunta 4 sobre marcas ou concorrentes substitutos"
+      "Pergunta 1 em ate 130 caracteres",
+      "Pergunta 2 em ate 130 caracteres",
+      "Pergunta 3 em ate 130 caracteres",
+      "Pergunta 4 em ate 130 caracteres"
     ]
   }
 }`
@@ -1196,6 +1202,48 @@ function assembleFinalReport(job, snapshot) {
     duracao_consulta_supabase_ms: perf.supabase_ms || 0,
     duracao_ibge_ms: perf.ibge_ms || 0,
     duracao_apresentacao_ms: perf.presentation_ms || 0,
+    tokens_por_etapa: {
+      visao_veredito_territorio: {
+        max_tokens: metrics.visao_veredito_territorio?.max_tokens || 650,
+        estimated_input_tokens: metrics.visao_veredito_territorio?.estimated_input_tokens || 0,
+        prompt_tokens_usados: metrics.visao_veredito_territorio?.prompt_tokens_usados || 0,
+        completion_tokens_usados: metrics.visao_veredito_territorio?.completion_tokens_usados || 0,
+        total_tokens_usados: metrics.visao_veredito_territorio?.total_tokens_usados || 0,
+        duracao_ms: metrics.visao_veredito_territorio?.duration_ms || 0,
+        tentativas: metrics.visao_veredito_territorio?.attempts || 1,
+        rate_limits: metrics.visao_veredito_territorio?.rate_limit_retries || 0
+      },
+      swot_causalidade_ambiente: {
+        max_tokens: metrics.swot_causalidade_ambiente?.max_tokens || 700,
+        estimated_input_tokens: metrics.swot_causalidade_ambiente?.estimated_input_tokens || 0,
+        prompt_tokens_usados: metrics.swot_causalidade_ambiente?.prompt_tokens_usados || 0,
+        completion_tokens_usados: metrics.swot_causalidade_ambiente?.completion_tokens_usados || 0,
+        total_tokens_usados: metrics.swot_causalidade_ambiente?.total_tokens_usados || 0,
+        duracao_ms: metrics.swot_causalidade_ambiente?.duration_ms || 0,
+        tentativas: metrics.swot_causalidade_ambiente?.attempts || 1,
+        rate_limits: metrics.swot_causalidade_ambiente?.rate_limit_retries || 0
+      },
+      selecao_graficos_matrizes: {
+        max_tokens: metrics.selecao_graficos_matrizes?.max_tokens || 700,
+        estimated_input_tokens: metrics.selecao_graficos_matrizes?.estimated_input_tokens || 0,
+        prompt_tokens_usados: metrics.selecao_graficos_matrizes?.prompt_tokens_usados || 0,
+        completion_tokens_usados: metrics.selecao_graficos_matrizes?.completion_tokens_usados || 0,
+        total_tokens_usados: metrics.selecao_graficos_matrizes?.total_tokens_usados || 0,
+        duracao_ms: metrics.selecao_graficos_matrizes?.duration_ms || 0,
+        tentativas: metrics.selecao_graficos_matrizes?.attempts || 1,
+        rate_limits: metrics.selecao_graficos_matrizes?.rate_limit_retries || 0
+      },
+      movimentos_vencedor_testes: {
+        max_tokens: metrics.movimentos_vencedor_testes?.max_tokens || 700,
+        estimated_input_tokens: metrics.movimentos_vencedor_testes?.estimated_input_tokens || 0,
+        prompt_tokens_usados: metrics.movimentos_vencedor_testes?.prompt_tokens_usados || 0,
+        completion_tokens_usados: metrics.movimentos_vencedor_testes?.completion_tokens_usados || 0,
+        total_tokens_usados: metrics.movimentos_vencedor_testes?.total_tokens_usados || 0,
+        duracao_ms: metrics.movimentos_vencedor_testes?.duration_ms || 0,
+        tentativas: metrics.movimentos_vencedor_testes?.attempts || 1,
+        rate_limits: metrics.movimentos_vencedor_testes?.rate_limit_retries || 0
+      }
+    },
     tamanho_contexto_por_etapa: {
       visao_veredito_territorio: metrics.visao_veredito_territorio?.input_chars || 0,
       swot_causalidade_ambiente: metrics.swot_causalidade_ambiente?.input_chars || 0,
@@ -1203,6 +1251,7 @@ function assembleFinalReport(job, snapshot) {
       movimentos_vencedor_testes: metrics.movimentos_vencedor_testes?.input_chars || 0
     },
     tentativas_por_etapa: job.attempts_by_step || {},
+    rate_limit_attempts_por_etapa: job.rate_limit_attempts_by_step || {},
     timeouts: job.timeouts || [],
     erros_429: job.erros_429 || []
   };
@@ -1606,7 +1655,13 @@ module.exports = async function handler(req, res) {
             duration_ms: groqResult.durationMs,
             input_chars: groqResult.inputChars,
             output_chars: groqResult.outputChars,
-            attempts: currentAttemptNumber
+            max_tokens: stepDef.maxTokens,
+            estimated_input_tokens: Math.ceil((stepPayloadStr.length + stepDef.systemPrompt.length) / 3.8),
+            prompt_tokens_usados: groqResult.promptTokens,
+            completion_tokens_usados: groqResult.completionTokens,
+            total_tokens_usados: groqResult.totalTokens,
+            attempts: currentAttemptNumber,
+            rate_limit_retries: (activeJob.rate_limit_attempts_by_step && activeJob.rate_limit_attempts_by_step[stepDef.id]) || 0
           };
 
           activeJob.current_step += 1;
