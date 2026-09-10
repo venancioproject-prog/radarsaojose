@@ -1,0 +1,11 @@
+﻿# Excluir arquivos pesados do deploy da Vercel
+*.pdf
+*.txt
+*.csv
+import_supabase.sql
+
+# Excluir pastas brutas/locais de midia que nao sao usadas no index.html
+fotos radar/
+Mais fotos radar/
+Landing page_files/
+Landing page.html
