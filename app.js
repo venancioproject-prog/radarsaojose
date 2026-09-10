@@ -188,10 +188,13 @@ function renderImageBank() {
   });
 
   count.textContent = `${filtered.length} ${filtered.length === 1 ? "imagem disponível" : "imagens disponíveis"} para uso gratuito no projeto`;
-  grid.innerHTML = filtered.map(([src, title, category]) => `
+  grid.innerHTML = filtered.map(([src, title, category]) => {
+    const filename = src.split("/").pop().replace(/\.[^/.]+$/, "");
+    const thumbSrc = `thumbnails/${filename}_thumb.webp`;
+    return `
     <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
       <div class="relative aspect-[4/3] overflow-hidden bg-slate-100">
-        <img src="${src}" alt="${title} em São José dos Campos" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <img src="${thumbSrc}" onerror="this.onerror=null;this.src='${src}'" alt="${title} em São José dos Campos" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <span class="absolute left-3 top-3 rounded-full bg-brand-950/85 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-accent-cyan">${category}</span>
       </div>
       <div class="flex items-center justify-between gap-3 p-4">
@@ -199,12 +202,13 @@ function renderImageBank() {
           <h3 class="truncate text-sm font-black text-brand-950">${title}</h3>
           <p class="mt-1 truncate text-[11px] font-medium text-slate-400">Acervo Radar SJC</p>
         </div>
-        <a href="${src}" download title="Baixar imagem" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-900 transition hover:bg-brand-900 hover:text-white">
+        <a href="${src}" download title="Baixar imagem original em alta resolução" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-900 transition hover:bg-brand-900 hover:text-white">
           <i class="fa-solid fa-download"></i>
         </a>
       </div>
     </article>
-  `).join("");
+  `;
+  }).join("");
 }
 
 window.renderImageBank = renderImageBank;
