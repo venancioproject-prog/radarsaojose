@@ -615,15 +615,17 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
     const remTok = response.headers.get("x-ratelimit-remaining-tokens");
     const resetTok = response.headers.get("x-ratelimit-reset-tokens");
 
-    // Helper para converter strings de tempo como '2s', '2.5s', '1m20s' ou inteiros em segundos
+    // Helper para converter strings de tempo como '2s', '2.5s', '1m20s', '1m20.5s', '1h30m' ou inteiros em segundos
     function parseResetSeconds(str) {
       if (!str) return null;
       str = String(str).trim().toLowerCase();
       if (!isNaN(str)) return Math.ceil(parseFloat(str));
       
       let totalSec = 0;
-      const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m/);
+      const hMatch = str.match(/(\d+(?:\.\d+)?)\s*h/);
+      const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m(?!s)/);
       const sMatch = str.match(/(\d+(?:\.\d+)?)\s*s/);
+      if (hMatch) totalSec += parseFloat(hMatch[1]) * 3600;
       if (mMatch) totalSec += parseFloat(mMatch[1]) * 60;
       if (sMatch) totalSec += parseFloat(sMatch[1]);
       return totalSec > 0 ? Math.ceil(totalSec) : null;
@@ -739,20 +741,23 @@ function buildStepContext(stepId, snapshot, job) {
     case "visao_veredito_territorio":
       return {
         idea: job.idea,
-        report_to_audit: job.report_to_audit || null,
+        report_to_audit: job.report_to_audit ? (job.report_to_audit.slice(0, 1500) + "...") : null,
         total_sample_n: snapshot.totalN,
-        territorial_and_economic_indicators: {
-          renda_familiar: ind.renda_familiar,
-          regioes_frequentadas: ind.regioes_frequentadas,
-          evasao_consumo: ind.evasao_consumo,
-          frequencia_saida: ind.frequencia_saida
+        key_indicators: {
+          renda_familiar: ind.renda_familiar?.categorias?.slice(0, 5) || [],
+          regioes_frequentadas: ind.regioes_frequentadas?.categorias?.slice(0, 6) || [],
+          evasao_consumo: ind.evasao_consumo?.categorias?.slice(0, 5) || [],
+          frequencia_saida: ind.frequencia_saida?.categorias?.slice(0, 4) || []
         },
-        ibge_data: ibge,
-        cultural_movements_summary: {
-          geografia_silencio: mov.geografia_silencio?.nome + ": " + mov.geografia_silencio?.diagnostico,
-          cidade_prometida: mov.cidade_prometida?.nome + ": " + mov.cidade_prometida?.diagnostico,
-          tribo_global: mov.tribo_global?.nome + ": " + mov.tribo_global?.diagnostico,
-          empreendedorismo_intuitivo: mov.empreendedorismo_intuitivo?.nome + ": " + mov.empreendedorismo_intuitivo?.diagnostico
+        ibge_resumo: {
+          populacao_2022: ibge.censo_2022?.populacao_total || 697428,
+          bairros_mais_populosos: (ibge.bairros_sao_jose_dos_campos || []).slice(0, 5).map(b => b.nome)
+        },
+        cultural_movements_essencia: {
+          geografia_silencio: mov.geografia_silencio?.nome,
+          cidade_prometida: mov.cidade_prometida?.nome,
+          tribo_global: mov.tribo_global?.nome,
+          empreendedorismo_intuitivo: mov.empreendedorismo_intuitivo?.nome
         }
       };
 
@@ -821,21 +826,21 @@ const MODULE_DEFINITIONS = [
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
     message: "Formulando tese estratégica, veredito humano e vocação territorial...",
-    maxTokens: 1400,
+    maxTokens: 950,
     systemPrompt: `Voce e o Consultor Estrategico Senior do Radar SJC.
-Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e criativo.
+Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e conciso.
 
 Responda exclusivamente com um único objeto JSON válido. Não use markdown, não use \`\`\`json, não escreva texto antes ou depois do objeto.
 
 DIRETRIZES:
-1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados e numeros fornecidos no analysisContext. Nao invente percentuais.
-2. CONCISAO E PROFUNDIDADE: O campo visao_estrategica_texto deve conter no maximo 2 paragrafos objetivos e densos.
-3. BAIRROS E POLOS: Retorne no maximo 5 bairros ou polos prioritarios de SJC no array bairros. Em nivel_de_confianca use estritamente "alta", "media" ou "baixa".
+1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados fornecidos no analysisContext. Nao invente percentuais.
+2. CONCISAO E PROFUNDIDADE: O campo visao_estrategica_texto deve conter no maximo 2 paragrafos curtos e objetivos.
+3. BAIRROS PRIORITARIOS: Retorne no maximo 3 bairros prioritarios de SJC no array bairros. Em nivel_de_confianca use estritamente "alta", "media" ou "baixa".
 4. FORMATACAO ESTRITA: Retorne EXCLUSIVAMENTE um objeto JSON valido com aspas duplas, sem comentarios, sem virgula antes de fechar chaves ou colchetes, e sem campos extras.
 
 ESTRUTURA JSON EXATA:
 {
-  "visao_estrategica_texto": "Texto da analise estrategica em ate 2 paragrafos densos.",
+  "visao_estrategica_texto": "Texto da analise estrategica em ate 2 paragrafos curtos e densos.",
   "veredito_postura": "avancar",
   "veredito_justificativa": "Justificativa clara do veredito para o empreendedor.",
   "bairros": [
@@ -1372,6 +1377,9 @@ module.exports = async function handler(req, res) {
           }
         }
 
+        const diag = jobData.rate_limit_diagnostic || {};
+        const limitType = diag.limit_type || (jobData.status === "waiting_rate_limit" ? "tokens" : null);
+
         return {
           job_id: jobData.job_id,
           status: jobData.status,
@@ -1381,16 +1389,19 @@ module.exports = async function handler(req, res) {
           attempt: stepAttempt,
           max_attempts: 3,
           rate_limit_attempts: rateLimitAttempts,
-          max_rate_limit_attempts: 3,
+          max_rate_limit_attempts: limitType === "tokens" ? 1 : 3,
           is_processing: Boolean(jobData.is_processing),
           lock_timestamp: jobData.lock_timestamp || null,
           updated_at: jobData.updated_at,
           last_error: jobData.last_error || null,
           error_code: jobData.error_code || null,
+          limit_type: limitType,
           retry_after_at: jobData.retry_after_at || null,
-          wait_seconds: waitSeconds,
           next_allowed_request_at: jobData.next_allowed_request_at || jobData.retry_after_at || null,
+          wait_seconds: waitSeconds,
+          last_rate_limit_headers: diag.headers || jobData.last_rate_limit_headers || {},
           last_rate_limit_error: jobData.last_rate_limit_error || null,
+          rate_limit_diagnostic: diag,
           step_started_at: jobData.step_metrics?.[stepDef.id]?.started_at || jobData.lock_timestamp || null,
           step_elapsed_ms: stepElapsed,
           completed_steps: jobData.completed_steps || [],
@@ -1640,28 +1651,40 @@ module.exports = async function handler(req, res) {
             activeJob.rate_limit_attempts_by_step[stepDef.id] = (activeJob.rate_limit_attempts_by_step[stepDef.id] || 0) + 1;
             const rateLimitCount = activeJob.rate_limit_attempts_by_step[stepDef.id];
 
-            if (rateLimitCount > 3) {
+            // Identificar se o gargalo principal foi por Tokens ou por Requisições
+            let limitType = "requisições";
+            if (err.resetTokensSeconds && (!err.resetRequestsSeconds || err.resetTokensSeconds >= err.resetRequestsSeconds)) {
+              limitType = "tokens";
+            } else if (err.rawErrorBody?.includes("TPM") || err.rawErrorBody?.includes("tokens") || err.rawErrorBody?.includes("token rate")) {
+              limitType = "tokens";
+            }
+
+            // Para limite de tokens: permitir no máximo 1 retentativa após a janela real indicada pela Groq
+            const maxAllowedRateAttempts = limitType === "tokens" ? 1 : 3;
+
+            if (rateLimitCount > maxAllowedRateAttempts) {
               activeJob.status = "failed";
-              activeJob.error_code = "GROQ_RATE_LIMIT_EXHAUSTED";
-              activeJob.message = `Limite de taxa da Groq excedeu o máximo de 3 tentativas na etapa ${stepDef.label}.`;
+              activeJob.error_code = limitType === "tokens" ? "GROQ_TOKEN_LIMIT_EXHAUSTED" : "GROQ_RATE_LIMIT_EXHAUSTED";
+              activeJob.message = `Limite de ${limitType} da Groq excedeu o máximo permitido na etapa ${stepDef.label}.`;
               activeJob.last_error = err.message;
               activeJob.retryable = true;
             } else {
               const exponentialSec = 8 * Math.pow(2, rateLimitCount - 1);
               const headerCandidates = [
                 err.retryAfterSeconds,
-                err.resetRequestsSeconds,
-                err.resetTokensSeconds
+                err.resetTokensSeconds,
+                err.resetRequestsSeconds
               ].filter(v => typeof v === 'number' && v > 0);
 
               let waitSeconds;
               if (headerCandidates.length > 0) {
-                waitSeconds = Math.max(...headerCandidates, exponentialSec);
+                // Respeitar integralmente o reset da Groq sem limitar artificialmente a 300s
+                waitSeconds = Math.max(...headerCandidates);
               } else {
                 waitSeconds = exponentialSec;
               }
-              // Respeitar o tempo real informado pela Groq com teto de segurança de até 300s
-              waitSeconds = Math.min(300, Math.max(3, waitSeconds));
+              // Garantir no mínimo 3 segundos
+              waitSeconds = Math.max(3, waitSeconds);
 
               const nextAllowedDate = new Date(Date.now() + (waitSeconds * 1000));
               const nextAllowedAt = nextAllowedDate.toISOString();
@@ -1669,18 +1692,11 @@ module.exports = async function handler(req, res) {
               // Formatar horário HH:MM para exibição amigável
               const hhMm = nextAllowedDate.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
 
-              // Identificar se o gargalo principal foi por Tokens ou por Requisições
-              let limitType = "requisições";
-              if (err.resetTokensSeconds && (!err.resetRequestsSeconds || err.resetTokensSeconds >= err.resetRequestsSeconds)) {
-                limitType = "tokens";
-              } else if (err.rawErrorBody?.includes("TPM") || err.rawErrorBody?.includes("tokens")) {
-                limitType = "tokens";
-              }
-
               activeJob.status = "waiting_rate_limit";
               activeJob.retry_after_at = nextAllowedAt;
               activeJob.next_allowed_request_at = nextAllowedAt;
               activeJob.last_rate_limit_error = (err.rawErrorBody || err.message || "").slice(0, 300);
+              activeJob.last_rate_limit_headers = err.rateLimitHeaders || {};
               activeJob.rate_limit_diagnostic = {
                 limit_type: limitType,
                 headers: err.rateLimitHeaders || {},
