@@ -608,18 +608,46 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
   if (!response.ok) {
     const errText = await response.text();
     const retryAfter = response.headers.get("retry-after");
+    const limitReq = response.headers.get("x-ratelimit-limit-requests");
+    const remReq = response.headers.get("x-ratelimit-remaining-requests");
+    const resetReq = response.headers.get("x-ratelimit-reset-requests");
+    const limitTok = response.headers.get("x-ratelimit-limit-tokens");
+    const remTok = response.headers.get("x-ratelimit-remaining-tokens");
+    const resetTok = response.headers.get("x-ratelimit-reset-tokens");
 
-    console.error(`[GROQ HTTP ERROR] ${stepLabel} - Status ${response.status}: ${errText.slice(0, 300)}`);
+    // Helper para converter strings de tempo como '2s', '2.5s', '1m20s' ou inteiros em segundos
+    function parseResetSeconds(str) {
+      if (!str) return null;
+      str = String(str).trim().toLowerCase();
+      if (!isNaN(str)) return Math.ceil(parseFloat(str));
+      
+      let totalSec = 0;
+      const mMatch = str.match(/(\d+(?:\.\d+)?)\s*m/);
+      const sMatch = str.match(/(\d+(?:\.\d+)?)\s*s/);
+      if (mMatch) totalSec += parseFloat(mMatch[1]) * 60;
+      if (sMatch) totalSec += parseFloat(sMatch[1]);
+      return totalSec > 0 ? Math.ceil(totalSec) : null;
+    }
+
+    const retryAfterSec = parseResetSeconds(retryAfter);
+    const resetReqSec = parseResetSeconds(resetReq);
+    const resetTokSec = parseResetSeconds(resetTok);
 
     const errorObj = new Error(`GROQ_API_ERROR: Falha na chamada da Groq (${response.status}): ${errText}`);
     errorObj.status = response.status;
-    errorObj.retryAfterSeconds = retryAfter ? parseInt(retryAfter, 10) : null;
+    errorObj.retryAfterSeconds = retryAfterSec;
+    errorObj.resetRequestsSeconds = resetReqSec;
+    errorObj.resetTokensSeconds = resetTokSec;
     errorObj.durationMs = durationMs;
     errorObj.rawErrorBody = errText;
-    errorObj.headers = {
+    errorObj.rateLimitHeaders = {
       "retry-after": retryAfter || null,
-      "x-ratelimit-reset-requests": response.headers.get("x-ratelimit-reset-requests") || null,
-      "x-ratelimit-reset-tokens": response.headers.get("x-ratelimit-reset-tokens") || null
+      "x-ratelimit-limit-requests": limitReq || null,
+      "x-ratelimit-remaining-requests": remReq || null,
+      "x-ratelimit-reset-requests": resetReq || null,
+      "x-ratelimit-limit-tokens": limitTok || null,
+      "x-ratelimit-remaining-tokens": remTok || null,
+      "x-ratelimit-reset-tokens": resetTok || null
     };
     
     // Detecção imediata de modelo inválido/descontinuado (400 ou 404)
@@ -631,7 +659,7 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
 
     // Diferenciação estrita entre cota diária/esgotada e rate limit temporário
     if (response.status === 429) {
-      const isDailyLimit = errText.includes("TPD") || errText.includes("Day") || errText.includes("daily") || errText.includes("quota") || errText.includes("insufficient_quota");
+      const isDailyLimit = errText.includes("TPD") || errText.includes("Day") || errText.includes("daily") || errText.includes("quota") || errText.includes("insufficient_quota") || errText.includes("tokens exhausted");
       if (isDailyLimit) {
         errorObj.isQuotaExhausted = true;
         errorObj.error_code = "GROQ_QUOTA_EXHAUSTED";
@@ -1361,6 +1389,8 @@ module.exports = async function handler(req, res) {
           error_code: jobData.error_code || null,
           retry_after_at: jobData.retry_after_at || null,
           wait_seconds: waitSeconds,
+          next_allowed_request_at: jobData.next_allowed_request_at || jobData.retry_after_at || null,
+          last_rate_limit_error: jobData.last_rate_limit_error || null,
           step_started_at: jobData.step_metrics?.[stepDef.id]?.started_at || jobData.lock_timestamp || null,
           step_elapsed_ms: stepElapsed,
           completed_steps: jobData.completed_steps || [],
@@ -1617,9 +1647,27 @@ module.exports = async function handler(req, res) {
               activeJob.last_error = err.message;
               activeJob.retryable = true;
             } else {
-              const waitSeconds = err.retryAfterSeconds || Math.min(60, 8 * Math.pow(2, rateLimitCount - 1));
+              const exponentialSec = 8 * Math.pow(2, rateLimitCount - 1);
+              const headerCandidates = [
+                err.retryAfterSeconds,
+                err.resetRequestsSeconds,
+                err.resetTokensSeconds
+              ].filter(v => typeof v === 'number' && v > 0);
+
+              let waitSeconds;
+              if (headerCandidates.length > 0) {
+                waitSeconds = Math.max(...headerCandidates, exponentialSec);
+              } else {
+                waitSeconds = exponentialSec;
+              }
+              // Limite de segurança razoável (máximo 120s)
+              waitSeconds = Math.min(120, Math.max(3, waitSeconds));
+
+              const nextAllowedAt = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
               activeJob.status = "waiting_rate_limit";
-              activeJob.retry_after_at = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
+              activeJob.retry_after_at = nextAllowedAt;
+              activeJob.next_allowed_request_at = nextAllowedAt;
+              activeJob.last_rate_limit_error = (err.rawErrorBody || err.message || "").slice(0, 300);
               activeJob.message = `Limite de taxa atingido na etapa ${stepDef.label} (${rateLimitCount}/3). Aguardando liberação da janela Groq (${waitSeconds}s)...`;
               activeJob.last_error = err.message;
               activeJob.retryable = true;
