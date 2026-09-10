@@ -10720,6 +10720,7 @@ function calculateFilteredIbgeMicrodata() {
   const finalEmpresas = Math.round(baseEmpresas * sectorMultiplier);
   const massaSalarialMensal = Math.round(finalPop * (baseRendaSM * 1412));
   const frotaEstimada = Math.round(finalPop / 1.41);
+  const finalPibVal = basePib * incomeMultiplier;
 
   return {
     region,
@@ -10737,7 +10738,8 @@ function calculateFilteredIbgeMicrodata() {
     finalEmpresas,
     massaSalarialMensal,
     frotaEstimada,
-    basePib: (basePib * incomeMultiplier).toFixed(2),
+    finalPibVal,
+    basePib: (finalPibVal >= 1000) ? `${(finalPibVal / 1000).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Bilhões` : `${finalPibVal.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} Mi`,
     demoLabel
   };
 }
@@ -10808,7 +10810,7 @@ function renderIbgePibChart() {
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${ctx.label}: ${ctx.parsed}% (PIB Território: R$ ${cross.basePib} Mi)`
+            label: (ctx) => ` ${ctx.label}: ${ctx.parsed}% (PIB Território: R$ ${cross.basePib})`
           }
         }
       }
@@ -11622,7 +11624,7 @@ window.updateIbgeKpisAndStatus = function() {
   }
 
   if (pibElem) {
-    pibElem.textContent = `R$ ${cross.basePib} Mi`;
+    pibElem.textContent = `R$ ${cross.basePib}`;
     if (pibSub) pibSub.innerHTML = `<i class="fa-solid fa-chart-line text-[9px]"></i> PIB estimado do recorte`;
   }
 
