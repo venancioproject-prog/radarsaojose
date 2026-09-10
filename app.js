@@ -10237,6 +10237,99 @@ const IBGE_DATABASE = {
     frota_comerciais_outros: 80320,
     taxa_motorizacao: 1.41 // 1 veículo a cada 1.41 habitantes
   },
+  regioes: {
+    oeste: {
+      nome: "Região Oeste (Alto Padrão)",
+      pop: 87800,
+      dom: 34000,
+      renda_media_sm: 9.8,
+      bairros: [
+        { id: "aquarius", nome: "Jd. Aquarius", pop: 26500, dom: 10200, renda_sm: 11.5, desc: "Polo executivo e residencial vertical de altíssimo padrão, comércio nobre e serviços." },
+        { id: "urbanova", nome: "Urbanova", pop: 22800, dom: 7400, renda_sm: 12.8, desc: "Bairro nobre de condomínios fechados horizontais, alta renda familiar e expansão universitária." },
+        { id: "colinas", nome: "Jd. das Colinas", pop: 11200, dom: 3900, renda_sm: 13.5, desc: "Região nobre tradicional vizinha ao Colinas Shopping e eixo comercial da Av. São João." },
+        { id: "esplanada", nome: "Jd. Esplanada", pop: 9800, dom: 3800, renda_sm: 10.2, desc: "Área nobre consolidada, alto padrão arquitetônico e proximidade ao Parque Vicentina Aranha." },
+        { id: "vila_ema", nome: "Vila Ema", pop: 10500, dom: 5100, renda_sm: 8.9, desc: "Polo gastronômico e boêmio sofisticado de SJC, comércio charmoso e vida noturna nobre." },
+        { id: "alvorada", nome: "Jd. Alvorada", pop: 7000, dom: 3600, renda_sm: 7.2, desc: "Bairro residencial bem localizado entre a Linha Verde e vias arteriais da Zona Oeste." }
+      ]
+    },
+    centro: {
+      nome: "Região Central",
+      pop: 71100,
+      dom: 29000,
+      renda_media_sm: 6.2,
+      bairros: [
+        { id: "centro_hist", nome: "Centro Histórico / Comercial", pop: 24500, dom: 10800, renda_sm: 4.6, desc: "Polo comercial popular tradicional, calçadão, serviços públicos e rede bancária densa." },
+        { id: "vila_adyana", nome: "Vila Adyana", pop: 14200, dom: 6300, renda_sm: 8.4, desc: "Bairro médico-hospitalar e residencial nobre, contorno do Parque Santos Dumont." },
+        { id: "sao_dimas", nome: "Jd. São Dimas", pop: 13800, dom: 5600, renda_sm: 6.8, desc: "Polo universitário (UNESP), gastronômico e residencial tradicional com perfil jovem/médico." },
+        { id: "vila_nova_sjc", nome: "Vila Nova São José", pop: 10200, dom: 3800, renda_sm: 5.1, desc: "Bairro tradicional com perfil residencial familiar e comércio de vizinhança ativo." },
+        { id: "vila_bethania", nome: "Vila Bethânia", pop: 8400, dom: 2500, renda_sm: 5.5, desc: "Região de transição para o polo médico e clínicas da Zona Central." }
+      ]
+    },
+    sul: {
+      nome: "Região Sul (Mais Populosa)",
+      pop: 240500,
+      dom: 86000,
+      renda_media_sm: 3.6,
+      bairros: [
+        { id: "satelite", nome: "Jd. Satélite", pop: 48000, dom: 17500, renda_sm: 4.8, desc: "Maior polo comercial descentralizado de SJC (Av. Andrômeda) e Vale Sul Shopping." },
+        { id: "bosque", nome: "Bosque dos Eucaliptos", pop: 44000, dom: 15800, renda_sm: 4.2, desc: "Bairro residencial muito estruturado, ampla rede escolar, praças e comércio autossuficiente." },
+        { id: "parque_industrial", nome: "Parque Industrial", pop: 31000, dom: 11200, renda_sm: 4.0, desc: "Próximo à Johnson & Johnson e Hospital Regional, forte malha de serviços e moradia." },
+        { id: "morumbi", nome: "Jd. Morumbi", pop: 28000, dom: 9800, renda_sm: 3.5, desc: "Bairro residencial dinâmico com grande oferta de comércio local e condomínios recentes." },
+        { id: "dom_pedro", nome: "D. Pedro I e II", pop: 26000, dom: 8900, renda_sm: 2.9, desc: "Bairros familiares consolidados com forte vida comunitária e comércio popular." },
+        { id: "oriente", nome: "Jd. Oriente / Shibata", pop: 22000, dom: 7800, renda_sm: 3.8, desc: "Região em valorização impulsionada pelo Shopping Jardim Oriente e Linha Verde." },
+        { id: "campo_dos_alemaes", nome: "Campo dos Alemães", pop: 41500, dom: 15000, renda_sm: 2.3, desc: "Grande polo populacional da Zona Sul, alta demanda de consumo popular e serviços básicos." }
+      ]
+    },
+    leste: {
+      nome: "Região Leste (Hub Industrial)",
+      pop: 173000,
+      dom: 62000,
+      renda_media_sm: 2.9,
+      bairros: [
+        { id: "vista_verde", nome: "Vista Verde / Cidade Vista Verde", pop: 21000, dom: 7600, renda_sm: 4.6, desc: "Bairro planejado residencial tradicional, arborizado e com classe média consolidada." },
+        { id: "eugenio_melo", nome: "Eugênio de Melo (Distrito)", pop: 42000, dom: 15200, renda_sm: 2.8, desc: "Polo industrial e de inovação (Parque Tecnológico de SJC), Ceagesp e rodovia Dutra." },
+        { id: "galo_branco", nome: "Galo Branco", pop: 18500, dom: 6600, renda_sm: 2.7, desc: "Bairro residencial em expansão com novas vias de conexão à Dutra e Zona Leste." },
+        { id: "novo_horizonte", nome: "Parque Novo Horizonte", pop: 33000, dom: 11800, renda_sm: 2.1, desc: "Grande concentração populacional trabalhadora com comércio local vibrante e popular." },
+        { id: "santa_ines", nome: "Santa Inês I, II e III", pop: 29000, dom: 10400, renda_sm: 2.2, desc: "Núcleo residencial populoso com intensa atividade comercial de proximidade." },
+        { id: "ismenia", nome: "Jd. Ismênia / Vila Tesouro", pop: 29500, dom: 10400, renda_sm: 3.2, desc: "Bairro tradicional da Zona Leste com feira livre, escolas e comércio diversificado." }
+      ]
+    },
+    norte: {
+      nome: "Região Norte (Histórica)",
+      pop: 66200,
+      dom: 23000,
+      renda_media_sm: 2.6,
+      bairros: [
+        { id: "santana", nome: "Santana", pop: 22000, dom: 7800, renda_sm: 2.9, desc: "Bairro berço histórico de SJC, Parque da Cidade (Burle Marx) e comércio centenário." },
+        { id: "alto_ponte", nome: "Alto da Ponte", pop: 16500, dom: 5800, renda_sm: 2.5, desc: "Área tradicional da Zona Norte ligada ao Rio Paraíba do Sul e vias de acesso ao norte." },
+        { id: "vila_paiva", nome: "Vila Paiva / Telespark", pop: 14200, dom: 4900, renda_sm: 2.4, desc: "Bairro residencial aconchegante com praças e vista panorâmica da serra." },
+        { id: "buquirinha", nome: "Buquirinha / Jd. Guimarães", pop: 13500, dom: 4500, renda_sm: 2.2, desc: "Eixo de ligação norte para Monteiro Lobato e Serra da Mantiqueira." }
+      ]
+    },
+    sudeste: {
+      nome: "Região Sudeste (Expansão)",
+      pop: 47400,
+      dom: 16000,
+      renda_media_sm: 3.1,
+      bairros: [
+        { id: "sao_judas", nome: "São Judas Tadeu", pop: 14000, dom: 4800, renda_sm: 3.3, desc: "Bairro residencial em expansão com proximidade ao aeroporto e Embraer." },
+        { id: "putim", nome: "Putim", pop: 16500, dom: 5600, renda_sm: 2.5, desc: "Importante polo residencial e comercial da região sudeste com forte expansão imobiliária." },
+        { id: "santa_julia", nome: "Jd. Santa Júlia", pop: 9800, dom: 3300, renda_sm: 2.6, desc: "Bairro novo planejado com loteamentos e comércio de vizinhança ativo." },
+        { id: "chacaras_reunidas", nome: "Chácaras Reunidas / Jd. Souto", pop: 7100, dom: 2300, renda_sm: 4.2, desc: "Polo de pequenas e médias indústrias, metalurgia, logística e serviços técnicos." }
+      ]
+    },
+    sao_francisco: {
+      nome: "Distrito de São Francisco Xavier",
+      pop: 11400,
+      dom: 3800,
+      renda_media_sm: 3.4,
+      bairros: [
+        { id: "sfx_vila", nome: "Vila de São Francisco Xavier", pop: 5200, dom: 1800, renda_sm: 4.1, desc: "Centro histórico do distrito, praça central, gastronomia artesanal e pousadas de charme." },
+        { id: "sfx_ferreiras", nome: "Bairro dos Ferreiras & Remédios", pop: 3400, dom: 1100, renda_sm: 2.9, desc: "Área rural e ecológica com forte apelo para trilhas, cachoeiras e turismo de montanha." },
+        { id: "sfx_sta_barbara", nome: "Santa Bárbara & Lavras", pop: 2800, dom: 900, renda_sm: 3.1, desc: "Comunidades rurais tradicionais, agricultura familiar e APA da Mantiqueira." }
+      ]
+    }
+  },
   comparativos: {
     sjc_vs_estado: {
       nome: "Estado de São Paulo",
@@ -10338,6 +10431,8 @@ function renderIbgePibChart() {
     colors = ["#00B4D8", "#CBD5E1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
   } else if (sectorFilter === "industria") {
     colors = ["#CBD5E1", "#0B2545", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "comercio") {
+    colors = ["#6366F1", "#E2E8F0", "#CBD5E1", "#E2E8F0", "#E2E8F0"];
   }
 
   window.ibgeChartInstances["pib"] = new Chart(canvas.getContext("2d"), {
@@ -10417,7 +10512,6 @@ function renderIbgeHistoricoPopChart() {
     pointColor = "#064E3B";
   }
 
-  // Se tiver dados ao vivo da API do IBGE SIDRA/Indicadores, fundir
   let chartData = series.data.map(v => Math.round(v * factor));
 
   window.ibgeChartInstances["historicoPop"] = new Chart(canvas.getContext("2d"), {
@@ -10623,71 +10717,67 @@ function renderIbgeEmpregoChart() {
   });
 }
 
-// 5. Gráfico: Benchmark Territorial Interativo (SJC vs SP / Brasil / RMVale / Campinas / Taubaté / Curitiba)
-function renderIbgeBenchmarkChart() {
-  const canvas = document.getElementById("ibgeChartBenchmark");
+// 5. Gráfico: Empresas e Densidade de CNPJs por Segmento (Novo Bloco 5 do Grid)
+function renderIbgeEmpresasSetorChart() {
+  const canvas = document.getElementById("ibgeChartEmpresasSetor");
   if (!canvas || !window.Chart) return;
-  destroyIbgeChart("benchmark");
+  destroyIbgeChart("empresasSetor");
 
-  const benchKey = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
-  const benchData = IBGE_DATABASE.comparativos[benchKey] || IBGE_DATABASE.comparativos.sjc_vs_estado;
+  const sectorFilter = document.getElementById("ibge-filter-sector")?.value || "todos";
+  let labels = ["Serviços & Tech", "Comércio Varejista", "Indústria de Transformação", "Construção Civil", "Outros Segmentos"];
+  let data = [18900, 11450, 3240, 2150, 680];
+  let colors = ["#00B4D8", "#6366F1", "#0B2545", "#F59E0B", "#94A3B8"];
 
-  const benchTitleElem = document.getElementById("ibge-bench-title");
-  if (benchTitleElem) {
-    benchTitleElem.textContent = `São José dos Campos vs. ${benchData.nome}`;
+  if (sectorFilter === "servicos") {
+    colors = ["#00B4D8", "#E2E8F0", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "comercio") {
+    colors = ["#E2E8F0", "#6366F1", "#E2E8F0", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "industria") {
+    colors = ["#E2E8F0", "#E2E8F0", "#0B2545", "#E2E8F0", "#E2E8F0"];
+  } else if (sectorFilter === "construcao") {
+    colors = ["#E2E8F0", "#E2E8F0", "#E2E8F0", "#F59E0B", "#E2E8F0"];
   }
 
-  window.ibgeChartInstances["benchmark"] = new Chart(canvas.getContext("2d"), {
+  window.ibgeChartInstances["empresasSetor"] = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
-      labels: benchData.labels,
-      datasets: [
-        {
-          label: "São José dos Campos",
-          data: benchData.sjc,
-          backgroundColor: "#00B4D8",
-          borderRadius: 6,
-          barPercentage: 0.7
-        },
-        {
-          label: benchData.nome,
-          data: benchData.alvo,
-          backgroundColor: "#0B2545",
-          borderRadius: 6,
-          barPercentage: 0.7
-        }
-      ]
+      labels: labels,
+      datasets: [{
+        label: "Empresas Ativas",
+        data: data,
+        backgroundColor: colors,
+        borderRadius: 6,
+        barPercentage: 0.65
+      }]
     },
     options: {
+      indexAxis: "y",
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          position: "bottom",
-          labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#0F172A", boxWidth: 12, padding: 8 }
-        },
+        legend: { display: false },
         datalabels: {
           anchor: "end",
-          align: "top",
+          align: "right",
           color: "#0F172A",
-          font: { family: "Montserrat", size: 9, weight: "bold" },
-          formatter: (v) => v >= 100 ? Math.round(v) : v.toFixed(1)
+          font: { family: "Montserrat", size: 10, weight: "bold" },
+          formatter: (v) => `${(v / 1000).toFixed(1)}k`
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}`
+            label: (ctx) => ` ${Number(ctx.parsed.x).toLocaleString('pt-BR')} empresas registradas`
           }
         }
       },
       scales: {
-        y: {
+        x: {
           beginAtZero: true,
           grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B" }
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => (v / 1000) + "k" }
         },
-        x: {
+        y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 8.5, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" }, color: "#1E293B" }
         }
       }
     }
@@ -10706,7 +10796,6 @@ function renderIbgeFrotaChart() {
   let percentages = [68.6, 15.1, 12.7, 3.6];
 
   if (timelineFilter === "censo_1991_2022") {
-    // Escala histórica
     data = [285000, 52000, 48000, 14000];
   }
 
@@ -10877,18 +10966,142 @@ function renderIbgeBairrosRendaChart() {
   });
 }
 
+// 9. Gráfico do Painel Dedicado de Benchmark Territorial
+function renderIbgeBenchmarkChart() {
+  const canvas = document.getElementById("ibgeChartBenchmark");
+  if (!canvas || !window.Chart) return;
+  destroyIbgeChart("benchmark");
+
+  const benchKey = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
+  const benchData = IBGE_DATABASE.comparativos[benchKey] || IBGE_DATABASE.comparativos.sjc_vs_estado;
+
+  const benchTitleElem = document.getElementById("ibge-bench-title");
+  if (benchTitleElem) {
+    benchTitleElem.textContent = `São José dos Campos vs. ${benchData.nome}`;
+  }
+
+  window.ibgeChartInstances["benchmark"] = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: benchData.labels,
+      datasets: [
+        {
+          label: "São José dos Campos",
+          data: benchData.sjc,
+          backgroundColor: "#00B4D8",
+          borderRadius: 6,
+          barPercentage: 0.7
+        },
+        {
+          label: benchData.nome,
+          data: benchData.alvo,
+          backgroundColor: "#0B2545",
+          borderRadius: 6,
+          barPercentage: 0.7
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#0F172A", boxWidth: 12, padding: 8 }
+        },
+        datalabels: {
+          anchor: "end",
+          align: "top",
+          color: "#0F172A",
+          font: { family: "Montserrat", size: 9, weight: "bold" },
+          formatter: (v) => v >= 100 ? Math.round(v) : v.toFixed(1)
+        },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B" }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: "Montserrat", size: 8.5, weight: "bold" }, color: "#1E293B" }
+        }
+      }
+    }
+  });
+}
+
+// Popula o select de bairros dinamicamente de acordo com a região selecionada
+window.populateBairrosDropdown = function(regionKey) {
+  const bairroSel = document.getElementById("ibge-filter-bairro");
+  if (!bairroSel) return;
+
+  bairroSel.innerHTML = "";
+  
+  if (!regionKey || regionKey === "todos") {
+    const allOpt = document.createElement("option");
+    allOpt.value = "todos";
+    allOpt.textContent = "Todos os Bairros de SJC";
+    bairroSel.appendChild(allOpt);
+
+    // Listar todos os bairros agrupados por região
+    Object.keys(IBGE_DATABASE.regioes).forEach(reg => {
+      const optGroup = document.createElement("optgroup");
+      optGroup.label = IBGE_DATABASE.regioes[reg].nome;
+      IBGE_DATABASE.regioes[reg].bairros.forEach(b => {
+        const opt = document.createElement("option");
+        opt.value = b.id;
+        opt.textContent = `${b.nome} (${(b.pop/1000).toFixed(1)}k hab.)`;
+        optGroup.appendChild(opt);
+      });
+      bairroSel.appendChild(optGroup);
+    });
+  } else {
+    const regObj = IBGE_DATABASE.regioes[regionKey];
+    if (regObj) {
+      const allRegOpt = document.createElement("option");
+      allRegOpt.value = "todos";
+      allRegOpt.textContent = `Todos da ${regObj.nome}`;
+      bairroSel.appendChild(allRegOpt);
+
+      regObj.bairros.forEach(b => {
+        const opt = document.createElement("option");
+        opt.value = b.id;
+        opt.textContent = `${b.nome} (${(b.pop/1000).toFixed(1)}k hab.)`;
+        bairroSel.appendChild(opt);
+      });
+    }
+  }
+};
+
+// Manipulador de mudança de região
+window.handleIbgeRegionChange = function() {
+  const regSel = document.getElementById("ibge-filter-region");
+  const selectedRegion = regSel?.value || "todos";
+  window.populateBairrosDropdown(selectedRegion);
+  window.handleIbgeFilterChange();
+};
+
 // Interação ao clicar em um Card de Região no Mapa do IBGE
 window.selectIbgeRegion = function(regionKey) {
   const regSel = document.getElementById("ibge-filter-region");
   if (regSel) {
     regSel.value = regionKey;
+    window.populateBairrosDropdown(regionKey);
   }
   window.handleIbgeFilterChange();
 };
 
-// Atualizar dinamicamente os KPIs e Textos Baseados nos Filtros Ativos
+// Atualizar dinamicamente os KPIs, Cards de Bairros e Textos
 window.updateIbgeKpisAndStatus = function() {
   const region = document.getElementById("ibge-filter-region")?.value || "todos";
+  const bairro = document.getElementById("ibge-filter-bairro")?.value || "todos";
   const axis = document.getElementById("ibge-filter-axis")?.value || "todos";
   const bench = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
   const income = document.getElementById("ibge-filter-income")?.value || "todos";
@@ -10916,30 +11129,89 @@ window.updateIbgeKpisAndStatus = function() {
   const idhmElem = document.getElementById("kpi-ibge-idhm");
   const statusText = document.getElementById("ibge-filter-status-text");
 
-  // Se uma região específica estiver filtrada
-  if (region !== "todos" && popElem) {
-    const regionDataMap = {
-      sul: { pop: "240.500 hab.", pct: "34,5% de SJC", dom: "86.000", sal: "3,6 SM (~R$ 5.080)", desc: "Satélite, Bosque, Morumbi, D. Pedro, Oriente" },
-      leste: { pop: "173.000 hab.", pct: "24,8% de SJC", dom: "62.000", sal: "2,9 SM (~R$ 4.090)", desc: "Vista Verde, Eugênio de Melo, Sta Inês, Galo Branco" },
-      oeste: { pop: "87.800 hab.", pct: "12,6% de SJC", dom: "34.000", sal: "9,8 SM (~R$ 13.800)", desc: "Aquarius, Urbanova, Colinas, Esplanada, Alvorada" },
-      centro: { pop: "71.100 hab.", pct: "10,2% de SJC", dom: "29.000", sal: "6,2 SM (~R$ 8.750)", desc: "Centro, Vila Adyana, Vila Ema, São Dimas" },
-      norte: { pop: "66.200 hab.", pct: "9,5% de SJC", dom: "23.000", sal: "2,6 SM (~R$ 3.670)", desc: "Santana, Alto da Ponte, Vila Paiva, Buquirinha" },
-      sudeste: { pop: "47.400 hab.", pct: "6,8% de SJC", dom: "16.000", sal: "3,1 SM (~R$ 4.370)", desc: "São Judas, Putim, Sta Júlia, Chácaras Reunidas" },
-      sao_francisco: { pop: "11.400 hab.", pct: "1,6% de SJC", dom: "3.800", sal: "3,4 SM (~R$ 4.800)", desc: "Distrito de SFX, Ferreiras, Santa Bárbara" }
-    };
+  // Atualizar Card de Destaque do Bairro Selecionado
+  const bairroNameElem = document.getElementById("ibge-bairro-detail-name");
+  const bairroRegionBadge = document.getElementById("ibge-bairro-badge-region");
+  const bairroDescElem = document.getElementById("ibge-bairro-detail-desc");
+  const bairroPopElem = document.getElementById("ibge-bairro-metric-pop");
+  const bairroRendaElem = document.getElementById("ibge-bairro-metric-renda");
+  const bairroDomElem = document.getElementById("ibge-bairro-metric-dom");
 
-    const rd = regionDataMap[region];
-    if (rd) {
-      popElem.textContent = rd.pop;
-      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-location-dot text-[9px]"></i> ${rd.pct}`;
-      if (popDetail) popDetail.textContent = `Bairros: ${rd.desc}`;
+  // Localizar dados do Bairro Selecionado
+  let activeBairroObj = null;
+  let activeRegionName = "Região Oeste";
+  
+  for (const rKey in IBGE_DATABASE.regioes) {
+    const r = IBGE_DATABASE.regioes[rKey];
+    const found = r.bairros.find(b => b.id === bairro);
+    if (found) {
+      activeBairroObj = found;
+      activeRegionName = r.nome;
+      break;
+    }
+  }
 
-      if (domElem) domElem.textContent = rd.dom;
+  if (!activeBairroObj) {
+    // Pegar o primeiro da região ativa ou Aquarius por padrão
+    const targetRegKey = region !== "todos" ? region : "oeste";
+    const targetReg = IBGE_DATABASE.regioes[targetRegKey] || IBGE_DATABASE.regioes.oeste;
+    activeBairroObj = targetReg.bairros[0];
+    activeRegionName = targetReg.nome;
+  }
+
+  if (activeBairroObj && bairroNameElem) {
+    bairroNameElem.textContent = activeBairroObj.nome;
+    if (bairroRegionBadge) bairroRegionBadge.textContent = activeRegionName;
+    if (bairroDescElem) bairroDescElem.textContent = activeBairroObj.desc;
+    if (bairroPopElem) bairroPopElem.textContent = `~${Number(activeBairroObj.pop).toLocaleString('pt-BR')}`;
+    if (bairroRendaElem) bairroRendaElem.textContent = `${activeBairroObj.renda_sm.toFixed(1)} SM`;
+    if (bairroDomElem) bairroDomElem.textContent = Number(activeBairroObj.dom).toLocaleString('pt-BR');
+  }
+
+  // Destaque visual nos cards das 7 Regiões
+  ["sul", "leste", "oeste", "centro", "norte", "sudeste", "sao_francisco"].forEach(rKey => {
+    const card = document.getElementById(`card-region-${rKey}`);
+    if (card) {
+      if (region === "todos" || region === rKey) {
+        card.classList.remove("opacity-40", "grayscale");
+        if (region === rKey) {
+          card.classList.add("ring-2", "ring-cyan-500", "bg-cyan-50/50");
+        } else {
+          card.classList.remove("ring-2", "ring-cyan-500", "bg-cyan-50/50");
+        }
+      } else {
+        card.classList.add("opacity-40", "grayscale");
+        card.classList.remove("ring-2", "ring-cyan-500", "bg-cyan-50/50");
+      }
+    }
+  });
+
+  // Se uma região específica ou bairro estiver filtrado
+  if (bairro !== "todos" && activeBairroObj && popElem) {
+    popElem.textContent = `~${Number(activeBairroObj.pop).toLocaleString('pt-BR')} hab.`;
+    if (popSub) popSub.innerHTML = `<i class="fa-solid fa-location-dot text-[9px]"></i> Bairro: ${activeBairroObj.nome}`;
+    if (popDetail) popDetail.textContent = activeBairroObj.desc;
+
+    if (domElem) domElem.textContent = Number(activeBairroObj.dom).toLocaleString('pt-BR');
+    if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Domicílios no Bairro`;
+    if (domDetail) domDetail.textContent = `Média: ${(activeBairroObj.pop / activeBairroObj.dom).toFixed(2)} pessoas / casa`;
+
+    if (salElem) salElem.textContent = `${activeBairroObj.renda_sm.toFixed(1)} SM`;
+    if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> Renda Média: ~R$ ${(activeBairroObj.renda_sm * 1412).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+  } else if (region !== "todos" && popElem) {
+    const regData = IBGE_DATABASE.regioes[region];
+    if (regData) {
+      popElem.textContent = `~${Number(regData.pop).toLocaleString('pt-BR')} hab.`;
+      const pct = ((regData.pop / IBGE_DATABASE.municipio.populacao_censo_2022) * 100).toFixed(1);
+      if (popSub) popSub.innerHTML = `<i class="fa-solid fa-location-dot text-[9px]"></i> ${pct}% de SJC`;
+      if (popDetail) popDetail.textContent = `Bairros: ${regData.bairros.map(b => b.nome).slice(0, 4).join(", ")}...`;
+
+      if (domElem) domElem.textContent = Number(regData.dom).toLocaleString('pt-BR');
       if (domSub) domSub.innerHTML = `<i class="fa-solid fa-people-roof text-[9px]"></i> Domicílios na Região`;
       if (domDetail) domDetail.textContent = `Concentração territorial oficial`;
 
-      if (salElem) salElem.textContent = rd.sal.split(" ")[0] + " SM";
-      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> Média da Região: ${rd.sal}`;
+      if (salElem) salElem.textContent = `${regData.renda_media_sm.toFixed(1)} SM`;
+      if (salSub) salSub.innerHTML = `<i class="fa-solid fa-wallet text-[9px]"></i> Média da Região: ~R$ ${(regData.renda_media_sm * 1412).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
     }
   } else {
     // Dinâmica Geral de População
@@ -11016,26 +11288,27 @@ window.updateIbgeKpisAndStatus = function() {
   if (statusText) {
     const benchLabel = IBGE_DATABASE.comparativos[bench]?.nome || "Estado de SP";
     const regionName = region === "todos" ? "Toda a Cidade" : "Região " + region.toUpperCase();
-    statusText.textContent = `Exibindo: Território [${regionName}] | Eixo [${axis.toUpperCase()}] | Benchmark [${benchLabel}] | Recorte [${demo}].`;
+    const bairroName = bairro === "todos" ? "Todos os Bairros" : (activeBairroObj ? activeBairroObj.nome : bairro);
+    statusText.textContent = `Exibindo: Território [${regionName} > ${bairroName}] | Eixo [${axis.toUpperCase()}] | Benchmark [${benchLabel}] | Recorte [${demo}].`;
   }
 };
 
-// Renderizar todos os 8 gráficos do IBGE (incluindo Bairros)
+// Renderizar todos os 8 gráficos do IBGE (incluindo Bairros, Empresas e Benchmark dedicado)
 window.renderIbgeCharts = function() {
   window.updateIbgeKpisAndStatus();
   renderIbgePibChart();
   renderIbgeHistoricoPopChart();
   renderIbgeFaixasEtariasChart();
   renderIbgeEmpregoChart();
-  renderIbgeBenchmarkChart();
+  renderIbgeEmpresasSetorChart();
   renderIbgeFrotaChart();
   renderIbgeBairrosPopChart();
   renderIbgeBairrosRendaChart();
+  renderIbgeBenchmarkChart();
 };
 
 // Controle de Eixos Temáticos (Filtro por Categoria)
 window.setIbgeAxisFilter = function(axis) {
-  // Sincronizar select lateral
   const select = document.getElementById("ibge-filter-axis");
   if (select && select.value !== axis) select.value = axis;
 
@@ -11082,6 +11355,7 @@ window.handleIbgeFilterChange = function() {
 // Resetar todos os filtros do IBGE para o padrão
 window.resetIbgeFilters = function() {
   const regSel = document.getElementById("ibge-filter-region");
+  const bairroSel = document.getElementById("ibge-filter-bairro");
   const axisSel = document.getElementById("ibge-filter-axis");
   const benchSel = document.getElementById("ibge-filter-benchmark");
   const incomeSel = document.getElementById("ibge-filter-income");
@@ -11090,6 +11364,8 @@ window.resetIbgeFilters = function() {
   const demoSel = document.getElementById("ibge-filter-demo");
 
   if (regSel) regSel.value = "todos";
+  window.populateBairrosDropdown("todos");
+  if (bairroSel) bairroSel.value = "todos";
   if (axisSel) axisSel.value = "todos";
   if (benchSel) benchSel.value = "sjc_vs_estado";
   if (incomeSel) incomeSel.value = "todos";
@@ -11101,17 +11377,14 @@ window.resetIbgeFilters = function() {
   window.renderIbgeCharts();
 };
 
-// Sincronização em tempo real com as APIs Públicas do IBGE (Localidades + SIDRA Indicadores)
+// Sincronização em tempo real com as APIs Públicas do IBGE
 window.refreshIbgeData = async function() {
   const btnText = document.getElementById("ibge-refresh-btn-text");
   const statusBadge = document.getElementById("ibge-api-status-badge");
   if (btnText) btnText.textContent = "Conectando API IBGE...";
 
   try {
-    // 1. Endpoint Oficial de Localidades (Município 3549904)
     const resLoc = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3549904");
-    
-    // 2. Endpoint Oficial de Indicadores Censitários do IBGE
     const resInd = await fetch("https://servicodados.ibge.gov.br/api/v1/pesquisas/indicadores/29171/resultados/3549904");
 
     if (resLoc.ok) {
@@ -11144,6 +11417,16 @@ window.refreshIbgeData = async function() {
 
   window.renderIbgeCharts();
 };
+
+// Inicialização automática dos dropdowns de bairros ao carregar o script
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof window.populateBairrosDropdown === "function") {
+    window.populateBairrosDropdown("todos");
+  }
+});
+if (typeof window.populateBairrosDropdown === "function") {
+  window.populateBairrosDropdown("todos");
+}
 
 
 

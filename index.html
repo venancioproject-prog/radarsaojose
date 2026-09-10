@@ -532,19 +532,31 @@
               <button type="button" onclick="window.resetIbgeFilters()" class="text-[10px] font-bold text-slate-400 hover:text-brand-900 transition-colors cursor-pointer">Resetar</button>
             </div>
 
-            <!-- 0. Filtro por Região / Bairro de SJC -->
+            <!-- 0. Filtro por Região de SJC -->
             <div>
-              <label for="ibge-filter-region" class="block font-bold text-slate-700 text-xs mb-1">📍 Região & Território de SJC</label>
+              <label for="ibge-filter-region" class="block font-bold text-slate-700 text-xs mb-1">📍 1. Região de SJC</label>
               <div class="relative">
-                <select id="ibge-filter-region" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
-                  <option value="todos">Todas as Regiões (Município Todo)</option>
-                  <option value="centro">Região Central (Centro, Vila Adyana, Vila Ema)</option>
-                  <option value="oeste">Região Oeste (Aquarius, Urbanova, Esplanada, Alvorada)</option>
-                  <option value="sul">Região Sul (Satélite, Bosque, Morumbi, Oriente, Dom Pedro)</option>
-                  <option value="leste">Região Leste (Vista Verde, Eugênio de Melo, Sta Inês)</option>
-                  <option value="norte">Região Norte (Santana, Alto da Ponte, Buquirinha)</option>
-                  <option value="sudeste">Região Sudeste (São Judas, Putim, Santa Júlia)</option>
-                  <option value="sao_francisco">Distrito de São Francisco Xavier</option>
+                <select id="ibge-filter-region" onchange="window.handleIbgeRegionChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="todos">Todas as 7 Regiões de SJC</option>
+                  <option value="oeste">Região Oeste (Aquarius, Urbanova, Colinas, Esplanada)</option>
+                  <option value="centro">Região Central (Centro Histórico, Vila Adyana, Vila Ema)</option>
+                  <option value="sul">Região Sul (Satélite, Bosque, Morumbi, D. Pedro, Oriente)</option>
+                  <option value="leste">Região Leste (Vista Verde, Eugênio de Melo, Galo Branco)</option>
+                  <option value="norte">Região Norte (Santana, Alto da Ponte, Vila Paiva)</option>
+                  <option value="sudeste">Região Sudeste (São Judas, Putim, Sta Júlia, Chácaras)</option>
+                  <option value="sao_francisco">Distrito de São Francisco Xavier (Mantiqueira)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- 0.1 Filtro por Bairro Específico (Microterritório) -->
+            <div>
+              <label for="ibge-filter-bairro" class="block font-bold text-slate-700 text-xs mb-1">🏘️ 2. Bairro Específico</label>
+              <div class="relative">
+                <select id="ibge-filter-bairro" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="todos">Todos os Bairros da Região</option>
+                  <!-- Opções inseridas dinamicamente ou listadas -->
                 </select>
                 <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
               </div>
@@ -552,7 +564,7 @@
 
             <!-- 1. Categoria / Eixo Temático -->
             <div>
-              <label for="ibge-filter-axis" class="block font-bold text-slate-700 text-xs mb-1">1. Eixo Temático</label>
+              <label for="ibge-filter-axis" class="block font-bold text-slate-700 text-xs mb-1">🎯 3. Eixo Temático</label>
               <div class="relative">
                 <select id="ibge-filter-axis" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="todos">Todos os Eixos (Visão Geral)</option>
@@ -568,7 +580,7 @@
 
             <!-- 2. Comparativo Geográfico / Benchmark -->
             <div>
-              <label for="ibge-filter-benchmark" class="block font-bold text-slate-700 text-xs mb-1">2. Benchmark Territorial</label>
+              <label for="ibge-filter-benchmark" class="block font-bold text-slate-700 text-xs mb-1">⚖️ 4. Benchmark Territorial</label>
               <div class="relative">
                 <select id="ibge-filter-benchmark" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="sjc_vs_estado">SJC vs. Estado de São Paulo</option>
@@ -584,7 +596,7 @@
 
             <!-- 3. Horizonte Temporal / Período -->
             <div>
-              <label for="ibge-filter-timeline" class="block font-bold text-slate-700 text-xs mb-1">3. Horizonte Censitário</label>
+              <label for="ibge-filter-timeline" class="block font-bold text-slate-700 text-xs mb-1">⏳ 5. Horizonte Censitário</label>
               <div class="relative">
                 <select id="ibge-filter-timeline" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="censo_2022">Censo 2022 + Projeção 2026</option>
@@ -597,7 +609,7 @@
 
             <!-- 4. Recorte de Renda & Salário -->
             <div>
-              <label for="ibge-filter-income" class="block font-bold text-slate-700 text-xs mb-1">4. Recorte de Renda & Poder de Compra</label>
+              <label for="ibge-filter-income" class="block font-bold text-slate-700 text-xs mb-1">💰 6. Recorte de Renda & Poder de Compra</label>
               <div class="relative">
                 <select id="ibge-filter-income" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="todos">Todas as Classes Econômicas</option>
@@ -611,7 +623,7 @@
 
             <!-- 5. Segmento Econômico de Foco -->
             <div>
-              <label for="ibge-filter-sector" class="block font-bold text-slate-700 text-xs mb-1">5. Segmento Econômico de Foco</label>
+              <label for="ibge-filter-sector" class="block font-bold text-slate-700 text-xs mb-1">🏢 7. Segmento Econômico de Foco</label>
               <div class="relative">
                 <select id="ibge-filter-sector" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="todos">Todos os Segmentos (Geral)</option>
@@ -626,7 +638,7 @@
 
             <!-- 6. Recorte Demográfico / Gênero & Faixa Etária -->
             <div>
-              <label for="ibge-filter-demo" class="block font-bold text-slate-700 text-xs mb-1">6. Recorte Demográfico</label>
+              <label for="ibge-filter-demo" class="block font-bold text-slate-700 text-xs mb-1">👥 8. Recorte Demográfico</label>
               <div class="relative">
                 <select id="ibge-filter-demo" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                   <option value="geral">População Total (697k Censo / 737k Est.)</option>
@@ -7192,22 +7204,22 @@
             </div>
           </div>
 
-          <!-- Bloco 5: Comparativo de Indicadores vs SP e Brasil -->
-          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4 ibge-card-block" data-section="economia">
+          <!-- Bloco 5: Empresas & Densidade Empresarial por Setor -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4 ibge-card-block" data-section="trabalho">
             <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
               <div>
-                <h3 class="text-base font-black text-brand-950">Comparativo: SJC vs Benchmark</h3>
-                <p class="text-xs text-slate-400 font-medium" id="ibge-bench-title">SJC vs. Estado de SP e Brasil</p>
+                <h3 class="text-base font-black text-brand-950">Ecossistema de Empresas</h3>
+                <p class="text-xs text-slate-400 font-medium">36.420 CNPJs Ativos em SJC</p>
               </div>
-              <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 text-[10px] font-bold border border-amber-200">
-                Benchmark
+              <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 text-[10px] font-bold border border-blue-200">
+                Empresas & Negócios
               </span>
             </div>
             <div class="h-64 relative">
-              <canvas id="ibgeChartBenchmark"></canvas>
+              <canvas id="ibgeChartEmpresasSetor"></canvas>
             </div>
             <div class="text-[11px] text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-100">
-              <strong class="text-brand-950 font-bold">Competitividade:</strong> SJC supera a média estadual em PIB per capita, salário médio e IDHM.
+              <strong class="text-brand-950 font-bold">Ecossistema Forte:</strong> 54% MEIs (19.8k) e 46% Micro/Médias e Grandes Empresas consolidadas.
             </div>
           </div>
 
@@ -7232,7 +7244,7 @@
 
         </div>
 
-        <!-- NOVO BLOCO EXCLUSIVO: CENSO & DEMOGRAFIA POR REGIÕES E BAIRROS DE SJC -->
+        <!-- NOVO BLOCO EXCLUSIVO 1: CENSO & DEMOGRAFIA POR BAIRROS E REGIÕES DE SJC -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6" id="ibge-bairros-container">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
             <div class="flex items-center gap-3">
@@ -7240,8 +7252,8 @@
                 <i class="fa-solid fa-map-location-dot"></i>
               </div>
               <div>
-                <h3 class="text-lg font-black text-brand-950">Demografia, População & Renda por Bairros e Regiões</h3>
-                <p class="text-xs text-slate-500 font-medium">Divisão territorial oficial de São José dos Campos (Censo Demográfico & Planejamento Urbano)</p>
+                <h3 class="text-lg font-black text-brand-950">Demografia, População & Renda Bairro a Bairro</h3>
+                <p class="text-xs text-slate-500 font-medium">Microdados censitários e socioeconômicos dos 150+ bairros agrupados nas 7 macrozonas de SJC</p>
               </div>
             </div>
             <div class="flex items-center gap-2">
@@ -7251,10 +7263,41 @@
             </div>
           </div>
 
+          <!-- Seletor Rápido de Bairro e Card Detalhado do Bairro Selecionado -->
+          <div class="p-5 rounded-2xl bg-gradient-to-r from-brand-900 via-brand-950 to-brand-900 text-white shadow-lg border border-brand-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="space-y-1.5 flex-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-accent-cyan/20 text-accent-cyan">EXPLORADOR DE MICROTERRITÓRIOS</span>
+                <span class="text-slate-400 text-xs">•</span>
+                <span id="ibge-bairro-badge-region" class="text-xs font-bold text-slate-300">Região Oeste</span>
+              </div>
+              <h4 id="ibge-bairro-detail-name" class="text-2xl font-black text-white tracking-tight">Jardim Aquarius</h4>
+              <p id="ibge-bairro-detail-desc" class="text-xs text-slate-300 font-medium max-w-xl">
+                Principal polo comercial e residencial vertical de alto padrão de SJC, com grande concentração de serviços, gastronomia e classe A/B.
+              </p>
+            </div>
+
+            <!-- Métricas do Bairro Selecionado -->
+            <div class="grid grid-cols-3 gap-3 shrink-0 bg-white/10 p-3 rounded-2xl border border-white/10 text-center">
+              <div class="px-2">
+                <span class="text-[10px] font-bold text-slate-300 uppercase block">População Est.</span>
+                <span id="ibge-bairro-metric-pop" class="text-lg font-black text-accent-cyan">~26.500</span>
+              </div>
+              <div class="px-2 border-x border-white/10">
+                <span class="text-[10px] font-bold text-slate-300 uppercase block">Renda Média</span>
+                <span id="ibge-bairro-metric-renda" class="text-lg font-black text-emerald-400">11,5 SM</span>
+              </div>
+              <div class="px-2">
+                <span class="text-[10px] font-bold text-slate-300 uppercase block">Domicílios</span>
+                <span id="ibge-bairro-metric-dom" class="text-lg font-black text-amber-300">10.200</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Cards das 7 Regiões de SJC com População e Bairros Destaque -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="ibge-regions-grid">
             <!-- Região Sul -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('sul')">
+            <div id="card-region-sul" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('sul')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Zona Sul (Mais Populosa)
@@ -7270,7 +7313,7 @@
             </div>
 
             <!-- Região Leste -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('leste')">
+            <div id="card-region-leste" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('leste')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Zona Leste (Hub Industrial)
@@ -7286,7 +7329,7 @@
             </div>
 
             <!-- Região Oeste -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('oeste')">
+            <div id="card-region-oeste" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('oeste')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Zona Oeste (Alto Padrão)
@@ -7302,7 +7345,7 @@
             </div>
 
             <!-- Região Central -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('centro')">
+            <div id="card-region-centro" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('centro')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> Centro & Adjacências
@@ -7318,7 +7361,7 @@
             </div>
 
             <!-- Região Norte -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('norte')">
+            <div id="card-region-norte" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('norte')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Zona Norte (Histórica)
@@ -7334,7 +7377,7 @@
             </div>
 
             <!-- Região Sudeste -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('sudeste')">
+            <div id="card-region-sudeste" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer" onclick="window.selectIbgeRegion('sudeste')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span> Zona Sudeste (Expansão)
@@ -7350,7 +7393,7 @@
             </div>
 
             <!-- São Francisco Xavier -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer col-span-1 md:col-span-2 lg:col-span-2" onclick="window.selectIbgeRegion('sao_francisco')">
+            <div id="card-region-sao_francisco" class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-cyan-400 transition-all cursor-pointer col-span-1 md:col-span-2 lg:col-span-2" onclick="window.selectIbgeRegion('sao_francisco')">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-black text-brand-950 flex items-center gap-1.5">
                   <span class="w-2.5 h-2.5 rounded-full bg-lime-600"></span> Distrito de São Francisco Xavier (Serra da Mantiqueira)
@@ -7378,6 +7421,70 @@
               <div class="h-60 relative">
                 <canvas id="ibgeChartBairrosRenda"></canvas>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOVO BLOCO EXCLUSIVO 2: BENCHMARK TERRITORIAL MULTICIDADES DEDICADO -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6" id="ibge-benchmark-dedicated-container">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-brand-900 text-accent-cyan flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-earth-americas"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-black text-brand-950">Painel Comparativo de Benchmark Territorial</h3>
+                <p class="text-xs text-slate-500 font-medium">Comparativo simultâneo de São José dos Campos contra Estado de SP, Brasil, RMVale, Campinas e Taubaté</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-black">
+                <i class="fa-solid fa-chart-column text-amber-600"></i> Competitividade Municipal
+              </span>
+            </div>
+          </div>
+
+          <!-- Cards Comparativos Resumidos (Badges de Performance) -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
+              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs SP</span>
+              <p class="text-xs font-bold text-slate-700">Salário: <strong class="text-purple-700">+9,7%</strong></p>
+              <p class="text-[10px] text-slate-500">IDHM: 0,807 vs 0,783</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
+              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs Brasil</span>
+              <p class="text-xs font-bold text-slate-700">PIB/capita: <strong class="text-emerald-700">+29,9%</strong></p>
+              <p class="text-[10px] text-slate-500">Salário: 3,4 vs 2,5 SM</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
+              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs RMVale</span>
+              <p class="text-xs font-bold text-slate-700">Líder Regional: <strong class="text-cyan-700">#1 PIB</strong></p>
+              <p class="text-[10px] text-slate-500">38% de toda a RMVale</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
+              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs Campinas</span>
+              <p class="text-xs font-bold text-slate-700">IDHM: <strong class="text-amber-700">0,807 vs 0,805</strong></p>
+              <p class="text-[10px] text-slate-500">Polo Aeroespacial vs Tech</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1 col-span-2 sm:col-span-1">
+              <span class="text-[10px] font-black uppercase text-brand-900 block">SJC vs Taubaté</span>
+              <p class="text-xs font-bold text-slate-700">PIB/capita: <strong class="text-emerald-700">+17,3%</strong></p>
+              <p class="text-[10px] text-slate-500">Frota: 70,6 vs 62,4/100hab</p>
+            </div>
+          </div>
+
+          <!-- Gráfico de Barras Comparativo do Benchmark com Seletor Integrado -->
+          <div class="pt-2 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900" id="ibge-bench-title">
+                São José dos Campos vs. Território Selecionado
+              </h4>
+              <div class="text-[11px] text-slate-500 font-semibold">
+                Indicadores normalizados para análise direta de competitividade
+              </div>
+            </div>
+            <div class="h-72 relative">
+              <canvas id="ibgeChartBenchmark"></canvas>
             </div>
           </div>
         </div>
@@ -7767,6 +7874,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=85.0"></script>
+  <script src="app.js?v=86.0"></script>
 </body>
 </html>
