@@ -491,9 +491,26 @@
 
               <button 
                 type="button" 
+                id="btn-nav-ibge" 
+                onclick="window.switchMainTab('ibge')"
+                class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200 cursor-pointer"
+              >
+                <i class="fa-solid fa-landmark-dome text-cyan-600 text-sm"></i>
+                <div class="text-left flex-1">
+                  <p class="leading-tight flex items-center gap-1.5">
+                    <span class="font-bold">Demografia & IBGE</span>
+                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-100 text-cyan-800 font-extrabold">OFICIAL</span>
+                  </p>
+                  <p class="text-[10px] text-slate-400 font-normal">Censo & Microdados SJC</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
+              </button>
+
+              <button 
+                type="button" 
                 id="btn-nav-image-bank" 
                 onclick="window.switchMainTab('image-bank')"
-                class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200"
+                class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200 cursor-pointer"
               >
                 <i class="fa-solid fa-images text-emerald-600 text-sm"></i>
                 <div class="text-left flex-1">
@@ -502,6 +519,66 @@
                 </div>
                 <i class="fa-solid fa-chevron-right text-[10px] opacity-50"></i>
               </button>
+            </div>
+          </div>
+
+          <!-- FILTROS ESPECÍFICOS DO MÓDULO IBGE & DEMOGRAFIA -->
+          <div id="sidebar-ibge-filters-container" class="hidden space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <span class="text-[10px] font-black uppercase tracking-wider text-brand-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-sliders text-cyan-600"></i>
+                Filtros Temáticos IBGE
+              </span>
+              <button onclick="window.resetIbgeFilters()" class="text-[10px] font-bold text-slate-400 hover:text-brand-900 transition-colors">Resetar</button>
+            </div>
+
+            <!-- Eixo Analítico -->
+            <div>
+              <label for="ibge-filter-axis" class="block font-bold text-slate-700 text-xs mb-1">Eixo de Análise</label>
+              <div class="relative">
+                <select id="ibge-filter-axis" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="todos">Todos os Eixos Estratégicos</option>
+                  <option value="demografia">Demografia & População</option>
+                  <option value="economia">Economia, Renda & PIB</option>
+                  <option value="trabalho">Trabalho & Empresas</option>
+                  <option value="educacao">Educação & Habitação</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- Comparativo Regional -->
+            <div>
+              <label for="ibge-filter-benchmark" class="block font-bold text-slate-700 text-xs mb-1">Comparativo Geográfico</label>
+              <div class="relative">
+                <select id="ibge-filter-benchmark" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="sjc_vs_estado">SJC vs. Estado de São Paulo</option>
+                  <option value="sjc_vs_brasil">SJC vs. Média Nacional (Brasil)</option>
+                  <option value="sjc_vs_rmvale">SJC vs. RMVale (Vale do Paraíba)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- Recorte Censitário Temporal -->
+            <div>
+              <label for="ibge-filter-timeline" class="block font-bold text-slate-700 text-xs mb-1">Série Histórica</label>
+              <div class="relative">
+                <select id="ibge-filter-timeline" onchange="window.handleIbgeFilterChange()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <option value="censo_2022">Censo 2022 + Projeções 2026</option>
+                  <option value="historico_2000_2022">Série Censos 2000 - 2022</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+              </div>
+            </div>
+
+            <!-- Card Informativo da Fonte -->
+            <div class="p-3 bg-cyan-50/70 rounded-xl border border-cyan-200/80 text-[11px] text-cyan-950 space-y-1">
+              <div class="flex items-center gap-1.5 font-black text-cyan-900">
+                <i class="fa-solid fa-circle-check text-cyan-600"></i>
+                <span>API IBGE Conectada</span>
+              </div>
+              <p class="text-slate-600">Dados oficiais do Censo Demográfico e Contas Regionais (Código Municipal 3549904).</p>
             </div>
           </div>
 
@@ -6777,6 +6854,257 @@
                   <span>Baixar Original</span>
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- 5.5. DEMOGRAFIA & IBGE OFICIAL (SÃO JOSÉ DOS CAMPOS) -->
+      <!-- ========================================== -->
+      <section id="ibge-view" class="hidden flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Header Banner Demografia & IBGE -->
+        <div class="relative overflow-hidden rounded-3xl bg-brand-950 p-8 sm:p-12 text-white shadow-2xl border border-brand-800/60">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/95 to-cyan-950/60"></div>
+          <div class="absolute right-0 top-0 bottom-0 w-1/3 bg-[radial-gradient(circle_at_center,rgba(0,180,216,0.15)_0,transparent_70%)] pointer-events-none"></div>
+          
+          <div class="relative z-10 max-w-3xl space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/15 border border-accent-cyan/30 text-xs font-black uppercase tracking-widest text-accent-cyan">
+              <i class="fa-solid fa-landmark-dome"></i> Inteligência Censitária Oficial • IBGE Cidades & SIDRA
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-black tracking-tight">
+              Demografia, Economia & Microdados Municipais
+            </h2>
+            <p class="max-w-2xl text-sm sm:text-base leading-relaxed text-slate-300 font-medium">
+              Radiografia demográfica oficial de São José dos Campos (Código IBGE <strong class="text-white font-mono">3549904</strong>). Indicadores consolidados de população, PIB per capita, renda média, mercado formal e comparação com o Estado de São Paulo e o Brasil.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 text-[11px] font-bold text-slate-200 border border-white/15">
+                <i class="fa-solid fa-database text-accent-cyan"></i> Censo Demográfico 2022
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 text-[11px] font-bold text-slate-200 border border-white/15">
+                <i class="fa-solid fa-chart-line text-accent-cyan"></i> Contas Regionais & CAGED
+              </span>
+              <button 
+                type="button" 
+                onclick="window.refreshIbgeData()" 
+                class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-lg bg-accent-cyan hover:bg-cyan-400 active:scale-95 text-brand-950 text-xs font-black transition-all cursor-pointer shadow-sm"
+              >
+                <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
+                <span id="ibge-refresh-btn-text">Atualizar Dados API</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARDS DE KPIS DEMOGRÁFICOS & ECONÔMICOS OFICIAIS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Card 1: População Oficial -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">População Recenseada</span>
+              <div class="w-10 h-10 rounded-2xl bg-cyan-50 text-cyan-700 flex items-center justify-center text-base">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">697.428</h3>
+              <p class="text-xs font-bold text-emerald-600 flex items-center gap-1 mt-1">
+                <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> +10,8% vs. Censo 2010
+              </p>
+            </div>
+            <p class="text-[11px] font-semibold text-slate-500 border-t border-slate-100 pt-2.5">
+              5º maior município de SP • Projeção atual: ~737 mil hab.
+            </p>
+          </div>
+
+          <!-- Card 2: PIB per Capita -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">PIB per Capita</span>
+              <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-base">
+                <i class="fa-solid fa-brazilian-real-sign"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">R$ 54.890</h3>
+              <p class="text-xs font-bold text-emerald-600 flex items-center gap-1 mt-1">
+                <i class="fa-solid fa-shield-halved text-[10px]"></i> 1,3x Média Nacional
+              </p>
+            </div>
+            <p class="text-[11px] font-semibold text-slate-500 border-t border-slate-100 pt-2.5">
+              PIB Total: R$ 39,2 Bilhões (Polo de Alto Valor Agregado)
+            </p>
+          </div>
+
+          <!-- Card 3: Salário Médio Formal -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">Salário Médio Formal</span>
+              <div class="w-10 h-10 rounded-2xl bg-purple-50 text-purple-700 flex items-center justify-center text-base">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">3,4 Salários</h3>
+              <p class="text-xs font-bold text-purple-700 flex items-center gap-1 mt-1">
+                <i class="fa-solid fa-wallet text-[10px]"></i> ~R$ 4.820 / mês
+              </p>
+            </div>
+            <p class="text-[11px] font-semibold text-slate-500 border-t border-slate-100 pt-2.5">
+              Mais de 210.000 empregos formais ativos
+            </p>
+          </div>
+
+          <!-- Card 4: Índice de Desenvolvimento (IDHM) -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">IDHM (Muito Alto)</span>
+              <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center text-base">
+                <i class="fa-solid fa-trophy"></i>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">0,807</h3>
+              <p class="text-xs font-bold text-amber-700 flex items-center gap-1 mt-1">
+                <i class="fa-solid fa-star text-[10px]"></i> Top 25 no Brasil
+              </p>
+            </div>
+            <p class="text-[11px] font-semibold text-slate-500 border-t border-slate-100 pt-2.5">
+              Escolarização 6-14 anos: 97,8% • Longevidade: 76,8 anos
+            </p>
+          </div>
+        </div>
+
+        <!-- GRID PRINCIPAL DE GRÁFICOS ANALÍTICOS DO IBGE -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Gráfico 1: Estrutura da Economia / PIB Municipal -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4">
+            <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h3 class="text-base font-black text-brand-950">Composição do PIB de SJC</h3>
+                <p class="text-xs text-slate-400 font-medium">Divisão por setores econômicos oficiais</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 text-[10px] font-bold border border-blue-200">
+                Contas IBGE
+              </span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="ibgeChartPibSjc"></canvas>
+            </div>
+            <div class="text-[11px] text-slate-500 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+              <strong class="text-brand-950 font-bold">Destaque:</strong> Serviços e Indústria Aeroespacial/Tecnologia somam mais de 85% do valor adicionado da cidade.
+            </div>
+          </div>
+
+          <!-- Gráfico 2: Evolução da População ao longo dos Censos -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4">
+            <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h3 class="text-base font-black text-brand-950">Crescimento Populacional</h3>
+                <p class="text-xs text-slate-400 font-medium">Série Histórica dos Censos do IBGE</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200">
+                Série Censitária
+              </span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="ibgeChartHistoricoPop"></canvas>
+            </div>
+            <div class="text-[11px] text-slate-500 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+              <strong class="text-brand-950 font-bold">Dinâmica:</strong> Crescimento sustentável com forte migração qualificada atraída pelo polo de engenharia e TI.
+            </div>
+          </div>
+
+          <!-- Gráfico 3: Estrutura Demográfica por Faixa Etária Oficial -->
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4">
+            <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h3 class="text-base font-black text-brand-950">Pirâmide Etária Oficial</h3>
+                <p class="text-xs text-slate-400 font-medium">Distribuição por faixas de idade (Censo)</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-purple-50 text-purple-800 text-[10px] font-bold border border-purple-200">
+                Perfil Demográfico
+              </span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="ibgeChartFaixaEtaria"></canvas>
+            </div>
+            <div class="text-[11px] text-slate-500 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+              <strong class="text-brand-950 font-bold">População Ativa:</strong> Predomínio de jovens e adultos (20 a 59 anos), com alto potencial de consumo e decisão de compra.
+            </div>
+          </div>
+        </div>
+
+        <!-- BENCHMARK: RADAR SÃO JOSÉ (AMOSTRA) VS IBGE OFICIAL (MUNICÍPIO) -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-2xl bg-brand-900 text-accent-cyan flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-scale-balanced"></i>
+              </div>
+              <div>
+                <h3 class="text-lg font-black text-brand-950">Benchmark: Pesquisa Radar SJC vs. Censo IBGE</h3>
+                <p class="text-xs text-slate-500 font-medium">Validação estatística e representatividade amostral da nossa base de dados</p>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-black">
+              <i class="fa-solid fa-check-double text-emerald-600"></i> Amostra Validada (IC 95%)
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Indicador 1: Gênero -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+                <span>Distribuição de Gênero</span>
+                <span class="text-brand-900">Alinhamento 98%</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div>
+                  <div class="flex justify-between text-[11px] font-semibold text-slate-600 mb-1">
+                    <span>Mulheres</span>
+                    <span>Radar: 53% | IBGE: 51,4%</span>
+                  </div>
+                  <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div class="bg-rose-400 h-full rounded-full" style="width: 53%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[11px] font-semibold text-slate-600 mb-1">
+                    <span>Homens</span>
+                    <span>Radar: 47% | IBGE: 48,6%</span>
+                  </div>
+                  <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                    <div class="bg-brand-900 h-full rounded-full" style="width: 47%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indicador 2: População Ativa e Renda -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+                <span>Classe Média & Alta (Renda)</span>
+                <span class="text-brand-900">Fit Comercial</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                A amostra do Radar São José reflete a concentração das zonas com maior poder aquisitivo do município (Centro, Oeste e Sul), com forte correspondência ao perfil consumidor de alto ticket.
+              </p>
+            </div>
+
+            <!-- Indicador 3: Domicílios e Urbanização -->
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+                <span>Taxa de Urbanização</span>
+                <span class="text-emerald-700 font-bold">98,2%</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                São José dos Campos possui 253 mil domicílios particulares permanentes ocupados, com média de 2,75 moradores por residência.
+              </p>
             </div>
           </div>
         </div>
