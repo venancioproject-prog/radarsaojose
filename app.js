@@ -11313,34 +11313,35 @@ function renderIbgeBairrosRendaChart() {
   });
 }
 
-// 10. Gráfico do Painel Dedicado de Benchmark Territorial
+// 10. Renderizador do Painel Dedicado de Benchmark Territorial (Cards Executivos Ricos com Barras de Progresso)
 function renderIbgeBenchmarkChart() {
-  const canvas = document.getElementById("ibgeChartBenchmark");
-  if (!canvas || !window.Chart) return;
-  destroyIbgeChart("benchmark");
-
   const benchKey = document.getElementById("ibge-filter-benchmark")?.value || "sjc_vs_estado";
   const benchData = IBGE_DATABASE.comparativos[benchKey] || IBGE_DATABASE.comparativos.sjc_vs_estado;
 
-  // Atualizar os Badges Dinâmicos de Desempenho Relativo
+  const benchTitleElem = document.getElementById("ibge-bench-title");
+  if (benchTitleElem) {
+    benchTitleElem.textContent = `São José dos Campos vs. ${benchData.nome}`;
+  }
+
+  const sjcVals = benchData.sjc;
+  const alvoVals = benchData.alvo;
+
+  const diffPib = (((sjcVals[0] - alvoVals[0]) / alvoVals[0]) * 100).toFixed(1);
+  const diffSal = (((sjcVals[1] - alvoVals[1]) / alvoVals[1]) * 100).toFixed(1);
+  const diffIdhm = (sjcVals[2] - alvoVals[2]);
+  const diffEscola = (sjcVals[3] - alvoVals[3]).toFixed(1);
+  const diffFrota = (sjcVals[4] - alvoVals[4]).toFixed(1);
+
+  const fmtDiff = (v, suffix = "%") => {
+    const num = Number(v);
+    if (num > 0) return `<strong class="text-emerald-700">+${num}${suffix}</strong>`;
+    if (num < 0) return `<strong class="text-rose-600">${num}${suffix}</strong>`;
+    return `<strong class="text-slate-600">0.0${suffix}</strong>`;
+  };
+
+  // 1. Atualizar Badges de Topo
   const badgesContainer = document.getElementById("ibge-benchmark-badges-container");
   if (badgesContainer) {
-    const sjcVals = benchData.sjc;
-    const alvoVals = benchData.alvo;
-
-    const diffPib = (((sjcVals[0] - alvoVals[0]) / alvoVals[0]) * 100).toFixed(1);
-    const diffSal = (((sjcVals[1] - alvoVals[1]) / alvoVals[1]) * 100).toFixed(1);
-    const diffIdhm = (sjcVals[2] - alvoVals[2]);
-    const diffEscola = (sjcVals[3] - alvoVals[3]).toFixed(1);
-    const diffFrota = (sjcVals[4] - alvoVals[4]).toFixed(1);
-
-    const fmtDiff = (v, suffix = "%") => {
-      const num = Number(v);
-      if (num > 0) return `<strong class="text-emerald-700">+${num}${suffix}</strong>`;
-      if (num < 0) return `<strong class="text-rose-600">${num}${suffix}</strong>`;
-      return `<strong class="text-slate-600">0.0${suffix}</strong>`;
-    };
-
     badgesContainer.innerHTML = `
       <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
         <span class="text-[10px] font-black uppercase text-brand-900 block">PIB per Capita</span>
@@ -11370,61 +11371,128 @@ function renderIbgeBenchmarkChart() {
     `;
   }
 
-  window.ibgeChartInstances["benchmark"] = new Chart(canvas.getContext("2d"), {
-    type: "bar",
-    data: {
-      labels: benchData.labels,
-      datasets: [
-        {
-          label: "São José dos Campos",
-          data: benchData.sjc,
-          backgroundColor: "#00B4D8",
-          borderRadius: 6,
-          barPercentage: 0.7
-        },
-        {
-          label: benchData.nome,
-          data: benchData.alvo,
-          backgroundColor: "#0B2545",
-          borderRadius: 6,
-          barPercentage: 0.7
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#0F172A", boxWidth: 12, padding: 8 }
-        },
-        datalabels: {
-          anchor: "end",
-          align: "top",
-          color: "#0F172A",
-          font: { family: "Montserrat", size: 9, weight: "bold" },
-          formatter: (v) => v >= 100 ? Math.round(v) : v.toFixed(1)
-        },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ` ${ctx.dataset.label}: ${ctx.parsed.y}`
-          }
-        }
+  // 2. Renderizar os 5 Cards Comparativos Visuais Ricos
+  const cardsGrid = document.getElementById("ibge-benchmark-cards-grid");
+  if (cardsGrid) {
+    const cardData = [
+      {
+        icon: "fa-brazilian-real-sign",
+        iconColor: "text-emerald-600 bg-emerald-50",
+        title: "PIB per Capita Anual",
+        unit: "R$",
+        sjcFormatted: `R$ ${Number(sjcVals[0] * 1000).toLocaleString('pt-BR')}`,
+        alvoFormatted: `R$ ${Number(alvoVals[0] * 1000).toLocaleString('pt-BR')}`,
+        sjcVal: sjcVals[0],
+        alvoVal: alvoVals[0],
+        maxVal: Math.max(sjcVals[0], alvoVals[0], 100) * 1.05,
+        diffText: Number(diffPib) > 0 ? `SJC é +${diffPib}% mais produtivo por habitante` : `Praça comparada é +${Math.abs(diffPib)}% maior`,
+        statusBadge: Number(diffPib) >= 0 ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Vantagem SJC</span>' : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold">Benchmark Alto</span>'
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B" }
-        },
-        x: {
-          grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 8.5, weight: "bold" }, color: "#1E293B" }
-        }
+      {
+        icon: "fa-wallet",
+        iconColor: "text-purple-600 bg-purple-50",
+        title: "Salário Médio Formal",
+        unit: "SM",
+        sjcFormatted: `${sjcVals[1]} Salários Mínimos (~R$ ${(sjcVals[1]*1412).toFixed(0)})`,
+        alvoFormatted: `${alvoVals[1]} Salários Mínimos (~R$ ${(alvoVals[1]*1412).toFixed(0)})`,
+        sjcVal: sjcVals[1],
+        alvoVal: alvoVals[1],
+        maxVal: Math.max(sjcVals[1], alvoVals[1], 5) * 1.1,
+        diffText: Number(diffSal) > 0 ? `Remuneração média de SJC é +${diffSal}% superior` : `Média salarial de SJC é ${diffSal}% da praça`,
+        statusBadge: Number(diffSal) >= 0 ? '<span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-bold">Renda Alta SJC</span>' : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold">Padrão Salarial</span>'
+      },
+      {
+        icon: "fa-trophy",
+        iconColor: "text-amber-600 bg-amber-50",
+        title: "Índice de Desenv. Humano (IDHM)",
+        unit: "pts",
+        sjcFormatted: `0,${sjcVals[2]} (Muito Alto)`,
+        alvoFormatted: `0,${alvoVals[2]} (${alvoVals[2] >= 800 ? 'Muito Alto' : 'Alto'})`,
+        sjcVal: sjcVals[2],
+        alvoVal: alvoVals[2],
+        maxVal: 900,
+        diffText: diffIdhm > 0 ? `SJC supera em +${diffIdhm} pontos no ranking de bem-estar` : diffIdhm < 0 ? `Diferença de ${Math.abs(diffIdhm)} pontos entre os polos` : `Empate técnico em qualidade de vida`,
+        statusBadge: diffIdhm >= 0 ? '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Top IDHM SP</span>' : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold">IDHM Elevado</span>'
+      },
+      {
+        icon: "fa-graduation-cap",
+        iconColor: "text-blue-600 bg-blue-50",
+        title: "Taxa de Escolarização (6-14 anos)",
+        unit: "%",
+        sjcFormatted: `${sjcVals[3]}% das crianças`,
+        alvoFormatted: `${alvoVals[3]}% das crianças`,
+        sjcVal: sjcVals[3],
+        alvoVal: alvoVals[3],
+        maxVal: 100,
+        diffText: Number(diffEscola) >= 0 ? `Cobertura educacional básica universalizada em SJC` : `Taxa de frequência em linha com referências`,
+        statusBadge: '<span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold">Educação Básica</span>'
+      },
+      {
+        icon: "fa-car",
+        iconColor: "text-rose-600 bg-rose-50",
+        title: "Motorização (Veículos / 100 hab)",
+        unit: "veíc.",
+        sjcFormatted: `${sjcVals[4]} veículos p/ 100 hab.`,
+        alvoFormatted: `${alvoVals[4]} veículos p/ 100 hab.`,
+        sjcVal: sjcVals[4],
+        alvoVal: alvoVals[4],
+        maxVal: Math.max(sjcVals[4], alvoVals[4], 85) * 1.05,
+        diffText: Number(diffFrota) > 0 ? `Densidade de veículos em SJC é +${diffFrota} veíc./100 hab.` : `Taxa de mobilidade da praça comparada`,
+        statusBadge: '<span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold">Poder de Compra</span>'
       }
-    }
-  });
+    ];
+
+    cardsGrid.innerHTML = cardData.map(c => {
+      const sjcPercent = Math.min(Math.round((c.sjcVal / c.maxVal) * 100), 100);
+      const alvoPercent = Math.min(Math.round((c.alvoVal / c.maxVal) * 100), 100);
+
+      return `
+        <div class="p-5 rounded-2xl bg-slate-50/90 border border-slate-200/80 hover:border-cyan-400/80 transition-all hover:shadow-card space-y-4 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl ${c.iconColor} flex items-center justify-center text-xs font-bold shadow-2xs">
+                  <i class="fa-solid ${c.icon}"></i>
+                </div>
+                <span class="text-xs font-black text-brand-950">${c.title}</span>
+              </div>
+              ${c.statusBadge}
+            </div>
+
+            <!-- Barras Comparativas Visuais -->
+            <div class="space-y-2.5 pt-2">
+              <!-- São José dos Campos -->
+              <div>
+                <div class="flex justify-between text-[11px] font-bold text-brand-950 mb-1">
+                  <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-500"></span> São José dos Campos</span>
+                  <span class="text-cyan-700">${c.sjcFormatted}</span>
+                </div>
+                <div class="w-full bg-slate-200/80 h-2.5 rounded-full overflow-hidden p-0.5">
+                  <div class="bg-gradient-to-r from-cyan-500 to-accent-cyan h-full rounded-full transition-all duration-700" style="width: ${sjcPercent}%;"></div>
+                </div>
+              </div>
+
+              <!-- Território Comparado -->
+              <div>
+                <div class="flex justify-between text-[11px] font-bold text-slate-600 mb-1">
+                  <span class="flex items-center gap-1.5 truncate max-w-[180px]"><span class="w-2.5 h-2.5 rounded-full bg-brand-950"></span> ${benchData.nome}</span>
+                  <span class="text-slate-700">${c.alvoFormatted}</span>
+                </div>
+                <div class="w-full bg-slate-200/80 h-2.5 rounded-full overflow-hidden p-0.5">
+                  <div class="bg-brand-950 h-full rounded-full transition-all duration-700" style="width: ${alvoPercent}%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-200/60 flex items-center gap-1.5 text-[10px] font-semibold text-slate-500">
+            <i class="fa-solid fa-chart-line text-cyan-600"></i>
+            <span>${c.diffText}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
 }
 
 // Popula o select de bairros dinamicamente de acordo com a região selecionada
