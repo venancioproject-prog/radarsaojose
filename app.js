@@ -417,259 +417,8 @@ window.copyImageAttribution = copyImageAttribution;
 window.downloadImageBankZip = downloadImageBankZip;
 
 // ==========================================
-// 1.5. MOTOR ANALÍTICO DO IBGE (SÃO JOSÉ DOS CAMPOS)
-// ==========================================
-const IBGE_SJC_CODE = "3549904";
-let ibgeChartInstances = {};
-
-const IBGE_DATA_STORE = {
-  pib: {
-    labels: ["Serviços & Comércio", "Indústria & Aeroespacial", "Administração Pública", "Impostos Líquidos", "Agropecuária"],
-    values: [48.6, 36.4, 7.8, 6.9, 0.3],
-    colors: ["#0284C7", "#0B2545", "#6366F1", "#10B981", "#F59E0B"]
-  },
-  historicoPop: {
-    labels: ["Censo 1991", "Censo 2000", "Censo 2010", "Censo 2022", "Estimativa 2026"],
-    values: [442370, 539313, 629921, 697428, 737310],
-    colors: ["#94A3B8", "#64748B", "#38BDF8", "#0284C7", "#0B2545"]
-  },
-  faixasEtarias: {
-    labels: ["0 a 14 anos", "15 a 29 anos", "30 a 44 anos", "45 a 59 anos", "60+ anos (Idosos)"],
-    values: [17.8, 22.4, 25.6, 19.3, 14.9],
-    colors: ["#38BDF8", "#0284C7", "#0B2545", "#7C3AED", "#EC4899"]
-  }
-};
-
-function renderIbgeCharts() {
-  renderIbgePibChart();
-  renderIbgeHistoricoChart();
-  renderIbgeFaixasChart();
-}
-
-function renderIbgePibChart() {
-  const canvas = document.getElementById("ibgeChartPibSjc");
-  if (!canvas) return;
-
-  if (ibgeChartInstances["pib"]) {
-    ibgeChartInstances["pib"].destroy();
-  }
-
-  const ctx = canvas.getContext("2d");
-  const data = IBGE_DATA_STORE.pib;
-
-  ibgeChartInstances["pib"] = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: data.labels,
-      datasets: [{
-        data: data.values,
-        backgroundColor: data.colors,
-        borderWidth: 2,
-        borderColor: "#FFFFFF"
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: "62%",
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: { boxWidth: 10, font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#334155" }
-        },
-        datalabels: {
-          color: "#FFFFFF",
-          font: { family: "Montserrat", weight: "black", size: 10 },
-          formatter: (value) => value > 5 ? value + "%" : ""
-        },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ` ${ctx.label}: ${ctx.raw}% do PIB Total`
-          }
-        }
-      }
-    }
-  });
-}
-
-function renderIbgeHistoricoChart() {
-  const canvas = document.getElementById("ibgeChartHistoricoPop");
-  if (!canvas) return;
-
-  if (ibgeChartInstances["historico"]) {
-    ibgeChartInstances["historico"].destroy();
-  }
-
-  const ctx = canvas.getContext("2d");
-  const data = IBGE_DATA_STORE.historicoPop;
-
-  ibgeChartInstances["historico"] = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: data.labels,
-      datasets: [{
-        label: "População Oficial (Habitantes)",
-        data: data.values,
-        backgroundColor: data.colors,
-        borderRadius: 8,
-        borderSkipped: false
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        datalabels: {
-          anchor: "end",
-          align: "top",
-          color: "#0B2545",
-          font: { family: "Montserrat", weight: "bold", size: 9 },
-          formatter: (val) => (val / 1000).toFixed(0) + "k"
-        },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ` População: ${ctx.raw.toLocaleString("pt-BR")} habitantes`
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: false,
-          min: 350000,
-          grid: { color: "#F1F5F9" },
-          ticks: {
-            font: { family: "Montserrat", size: 9 },
-            callback: (v) => (v / 1000) + "k"
-          }
-        },
-        x: {
-          grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" } }
-        }
-      }
-    }
-  });
-}
-
-function renderIbgeFaixasChart() {
-  const canvas = document.getElementById("ibgeChartFaixaEtaria");
-  if (!canvas) return;
-
-  if (ibgeChartInstances["faixas"]) {
-    ibgeChartInstances["faixas"].destroy();
-  }
-
-  const ctx = canvas.getContext("2d");
-  const data = IBGE_DATA_STORE.faixasEtarias;
-
-  ibgeChartInstances["faixas"] = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: data.labels,
-      datasets: [{
-        label: "% População",
-        data: data.values,
-        backgroundColor: data.colors,
-        borderRadius: 6
-      }]
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        datalabels: {
-          anchor: "end",
-          align: "right",
-          color: "#0B2545",
-          font: { family: "Montserrat", weight: "bold", size: 10 },
-          formatter: (val) => val + "%"
-        },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => ` Proporção: ${ctx.raw}% da população`
-          }
-        }
-      },
-      scales: {
-        x: {
-          max: 32,
-          grid: { color: "#F1F5F9" },
-          ticks: { callback: (v) => v + "%" }
-        },
-        y: {
-          grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 10, weight: "bold" } }
-        }
-      }
-    }
-  });
-}
-
-function handleIbgeFilterChange() {
-  if (typeof window.renderIbgeCharts === "function") {
-    window.renderIbgeCharts();
-  }
-}
-
-function resetIbgeFilters() {
-  const regSel = document.getElementById("ibge-filter-region");
-  const bairroSel = document.getElementById("ibge-filter-bairro");
-  const benchSel = document.getElementById("ibge-filter-benchmark");
-  const incomeSel = document.getElementById("ibge-filter-income");
-  const timeSel = document.getElementById("ibge-filter-timeline");
-  const sectorSel = document.getElementById("ibge-filter-sector");
-  const demoSel = document.getElementById("ibge-filter-demo");
-
-  if (regSel) regSel.value = "todos";
-  if (typeof window.populateBairrosDropdown === "function") window.populateBairrosDropdown("todos");
-  if (bairroSel) bairroSel.value = "todos";
-  if (benchSel) benchSel.value = "sjc_vs_estado";
-  if (incomeSel) incomeSel.value = "todos";
-  if (timeSel) timeSel.value = "censo_2022";
-  if (sectorSel) sectorSel.value = "todos";
-  if (demoSel) demoSel.value = "geral";
-
-  if (typeof window.renderIbgeCharts === "function") {
-    window.renderIbgeCharts();
-  }
-}
-
-async function refreshIbgeData() {
-  const btn = document.getElementById("ibge-refresh-btn-text");
-  if (btn) btn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Conectando IBGE...`;
-  
-  try {
-    // Consulta real à API de agregados/cidades do IBGE para o município 3549904 (São José dos Campos)
-    const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3549904");
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Dados do município carregados da API IBGE:", data);
-    }
-    renderIbgeCharts();
-    if (btn) {
-      btn.innerHTML = `<i class="fa-solid fa-check text-emerald-950"></i> Sincronizado com IBGE!`;
-      setTimeout(() => { btn.textContent = "Atualizar Dados API"; }, 2500);
-    }
-  } catch (err) {
-    console.warn("Consulta API IBGE em fallback local:", err);
-    renderIbgeCharts();
-    if (btn) {
-      btn.innerHTML = `<i class="fa-solid fa-check text-emerald-950"></i> Dados Oficiais Ativos`;
-      setTimeout(() => { btn.textContent = "Atualizar Dados API"; }, 2000);
-    }
-  }
-}
-
-window.renderIbgeCharts = renderIbgeCharts;
-window.handleIbgeFilterChange = handleIbgeFilterChange;
-window.resetIbgeFilters = resetIbgeFilters;
-window.refreshIbgeData = refreshIbgeData;
-
-// ==========================================
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
+// ==========================================
 // ==========================================
 const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
@@ -10885,6 +10634,18 @@ function renderIbgeHistoricoPopChart() {
       }
     }
   });
+
+  // Atualizar dinamicamente o texto de análise contextual da série histórica
+  const summaryBox = document.getElementById("ibge-historico-pop-summary");
+  if (summaryBox && chartData.length > 0) {
+    const firstVal = chartData[0];
+    const lastVal = chartData[chartData.length - 1];
+    const firstLabel = series.labels[0];
+    const lastLabel = series.labels[series.labels.length - 1];
+    const growthPercent = firstVal > 0 ? (((lastVal - firstVal) / firstVal) * 100).toFixed(1) : "0";
+    
+    summaryBox.innerHTML = `<strong class="text-brand-950 font-bold">Dinâmica (${cross.activeRegionName}):</strong> Evolução de ${firstVal >= 1000 ? (firstVal/1000).toFixed(1) + 'k' : firstVal} (${firstLabel}) para ${lastVal >= 1000 ? (lastVal/1000).toFixed(1) + 'k' : lastVal} (${lastLabel}) &bull; <span class="text-emerald-700 font-bold">+${growthPercent}%</span> no período selecionado.`;
+  }
 }
 
 // 3. Gráfico: Pirâmide Etária com Volumes Absolutos Reais Recalculados
