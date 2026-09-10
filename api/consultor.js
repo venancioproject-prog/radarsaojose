@@ -1660,8 +1660,8 @@ module.exports = async function handler(req, res) {
               } else {
                 waitSeconds = exponentialSec;
               }
-              // Limite de segurança razoável (máximo 120s)
-              waitSeconds = Math.min(120, Math.max(3, waitSeconds));
+              // Respeitar o tempo real informado pela Groq com teto de segurança de até 300s
+              waitSeconds = Math.min(300, Math.max(3, waitSeconds));
 
               const nextAllowedAt = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
               activeJob.status = "waiting_rate_limit";
