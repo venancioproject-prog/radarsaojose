@@ -1241,7 +1241,7 @@ function processAndRenderDynamicCharts(records) {
       title: "3. Mobilidade Urbana & Deslocamento",
       subtitle: "Modais de transporte, frequência de saídas, evasão intermunicipal, bairros dos respondentes e polos mais frequentados",
       questions: (() => {
-        // Ordem: Meios de Transporte -> Frequência de Saída -> Evasão para outras cidades -> Em qual bairro você mora (Mapa de Bairros) -> Região mais frequentada (Mapa de Polos)
+        // Ordem: Meios de Transporte -> Frequência de Saída -> Evasão para outras cidades -> Em qual bairro você mora? -> Qual região da cidade você mais frequenta quando sai de casa?
         const orderSelectors = [
           q => /transporte/i.test(q) && (/usa/i.test(q) || /meios/i.test(q)),
           q => /frequência/i.test(q) && (/sai/i.test(q) || /passear/i.test(q) || /divertir/i.test(q)),
@@ -1797,30 +1797,6 @@ function processAndRenderDynamicCharts(records) {
         return;
       }
 
-      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM POLOS & CONCENTRAÇÃO (LEAFLET)
-      if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
-        const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
-        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
-        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-3 min-h-[60px] sm:min-h-[68px]">' +
-          '<div class="min-w-0 flex-1">' +
-            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
-            '<p class="text-[11px] font-semibold text-slate-400 truncate">Mapa Real Oficial de SJC • Concentração, Polos & Frequência Regional</p>' +
-          '</div>' +
-          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0 self-start mt-0.5">' +
-            '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
-          '</span>' +
-        '</div>' +
-        '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
-          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) +
-        '</div>';
-        cardsGrid.appendChild(cardEl);
-
-        setTimeout(() => {
-          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText);
-        }, 120);
-        return;
-      }
-
       // 11.4.1. EM QUAL BAIRRO VOCÊ MORA: MAPA REAL DE BAIRROS DE SÃO JOSÉ DOS CAMPOS LINKADO AO BANCO DE DADOS (LEAFLET)
       if (qLower.includes("bairro") && (qLower.includes("mora") || qLower.includes("você mora") || qLower.includes("voce mora"))) {
         const mapContainerId = "map-sjc-bairros-" + globalQuestionIndex;
@@ -1842,11 +1818,35 @@ function processAndRenderDynamicCharts(records) {
         setTimeout(() => {
           initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, questionText);
         }, 120);
+        return;
+      }
 
-        // 11.4.2. DIAGRAMA DE FLUXO SANKEY (ORIGEM DE MORADIA -> DESTINO DE LAZER)
+      // 11.4. REGIÃO MAIS FREQUENTADA: MAPA REAL OFICIAL DE SÃO JOSÉ DOS CAMPOS COM POLOS & CONCENTRAÇÃO (LEAFLET)
+      if (qLower.includes("região da cidade") || (qLower.includes("região") && (qLower.includes("frequenta") || qLower.includes("sai de casa")))) {
+        const mapContainerId = "map-sjc-regions-" + globalQuestionIndex;
+        cardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
+        cardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-3 min-h-[60px] sm:min-h-[68px]">' +
+          '<div class="min-w-0 flex-1">' +
+            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
+            '<p class="text-[11px] font-semibold text-slate-400 truncate">Mapa Real Oficial de SJC • Concentração, Polos & Frequência Regional</p>' +
+          '</div>' +
+          '<span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 text-[10px] font-bold border border-emerald-200 flex items-center gap-1 shrink-0 self-start mt-0.5">' +
+            '<i class="fa-solid fa-map-location-dot text-emerald-600"></i> Mapa Interativo' +
+          '</span>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
+          renderSjcRegionsMapWidget(mapContainerId, dataMap, total, records, questionText) +
+        '</div>';
+        cardsGrid.appendChild(cardEl);
+
+        setTimeout(() => {
+          initSjcLeafletMap(mapContainerId, dataMap, total, records, questionText);
+        }, 120);
+
+        // 11.4.2. DIAGRAMA DE FLUXO SANKEY (ORIGEM DE MORADIA -> DESTINO DE LAZER) - LOGO ABAIXO DOS DOIS MAPAS
         const sankeyCardEl = document.createElement("div");
         const sankeyCanvasId = "dashChartSankeyLazer-" + globalQuestionIndex;
-        sankeyCardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
+        sankeyCardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-2 lg:col-span-6" : "");
         sankeyCardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-3 min-h-[60px] sm:min-h-[68px]">' +
           '<div class="min-w-0 flex-1">' +
             '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' +
