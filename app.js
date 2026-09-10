@@ -1842,6 +1842,76 @@ function processAndRenderDynamicCharts(records) {
         setTimeout(() => {
           initSjcBairrosLeafletMap(mapContainerId, dataMap, total, records, questionText);
         }, 120);
+
+        // 11.4.2. DIAGRAMA DE FLUXO SANKEY (ORIGEM DE MORADIA -> DESTINO DE LAZER)
+        const sankeyCardEl = document.createElement("div");
+        const sankeyCanvasId = "dashChartSankeyLazer-" + globalQuestionIndex;
+        sankeyCardEl.className = "bg-surface-card rounded-3xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between" + (catIdx === 2 ? " col-span-1 md:col-span-1 lg:col-span-3" : "");
+        sankeyCardEl.innerHTML = '<div class="mb-3.5 pb-2 border-b border-slate-100/80 flex items-start justify-between gap-3 min-h-[60px] sm:min-h-[68px]">' +
+          '<div class="min-w-0 flex-1">' +
+            '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' +
+              '<i class="fa-solid fa-route text-accent-cyan mr-1.5"></i>Diagrama de Fluxo Sankey (Bairro de Origem &rarr; Região de Lazer)' +
+            '</h3>' +
+            '<p class="text-[11px] font-semibold text-slate-400 truncate">Movimentação Urbana & Concentração Regional • Cruzamento de Bairro de Residência com Região Frequentada</p>' +
+          '</div>' +
+          '<span class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-800 text-[10px] font-bold border border-cyan-200 flex items-center gap-1 shrink-0 self-start mt-0.5">' +
+            '<i class="fa-solid fa-diagram-project text-cyan-600"></i> Fluxo Dinâmico' +
+          '</span>' +
+        '</div>' +
+        '<div class="flex-1 flex flex-col justify-between w-full h-full">' +
+          '<div class="flex items-center justify-between text-[11px] font-semibold text-slate-400 mb-2 px-1">' +
+            '<span><i class="fa-solid fa-house-user text-brand-600 mr-1"></i> Origem de Moradia (Esquerda)</span>' +
+            '<span>Destino de Lazer (Direita) <i class="fa-solid fa-champagne-glasses text-accent-cyan ml-1"></i></span>' +
+          '</div>' +
+          '<div class="h-80 sm:h-96 w-full relative bg-slate-50/60 p-4 rounded-2xl border border-slate-200/80">' +
+            '<canvas id="' + sankeyCanvasId + '"></canvas>' +
+          '</div>' +
+        '</div>';
+        cardsGrid.appendChild(sankeyCardEl);
+
+        setTimeout(() => {
+          const sankeyFlows = {};
+          records.forEach(r => {
+            const origemRaw = getField(r, ["Região", "Regiao", "região", "regiao", "Em qual bairro você mora?", "bairro"]);
+            let origem = origemRaw ? origemRaw.trim() : "Outra";
+            if (origem.toLowerCase().includes("oeste") || origem.toLowerCase().includes("aquarius") || origem.toLowerCase().includes("esplanada") || origem.toLowerCase().includes("urbanova")) origem = "Origem: Zona Oeste";
+            else if (origem.toLowerCase().includes("sul") || origem.toLowerCase().includes("bosque") || origem.toLowerCase().includes("oriente") || origem.toLowerCase().includes("satélite") || origem.toLowerCase().includes("satelite")) origem = "Origem: Zona Sul";
+            else if (origem.toLowerCase().includes("centro") || origem.toLowerCase().includes("vila adyana") || origem.toLowerCase().includes("são dimas") || origem.toLowerCase().includes("sao dimas")) origem = "Origem: Centro";
+            else if (origem.toLowerCase().includes("leste") || origem.toLowerCase().includes("eugênio") || origem.toLowerCase().includes("vista verde") || origem.toLowerCase().includes("industrial")) origem = "Origem: Zona Leste";
+            else if (origem.toLowerCase().includes("norte") || origem.toLowerCase().includes("santana") || origem.toLowerCase().includes("alto da ponte")) origem = "Origem: Zona Norte";
+            else if (origem.toLowerCase().includes("sudeste") || origem.toLowerCase().includes("putim") || origem.toLowerCase().includes("são leopoldo")) origem = "Origem: Zona Sudeste";
+            else origem = "Origem: " + (origem || "SJC");
+
+            const destinoRaw = getField(r, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]);
+            let destino = destinoRaw ? destinoRaw.trim() : "Destino: Outras Regiões";
+            if (destino.includes("Centro") || destino.includes("Oeste") || destino.includes("Aquarius") || destino.includes("Vila Adyana")) {
+              destino = "Destino: Centro / Oeste";
+            } else if (destino.includes("Sul")) {
+              destino = "Destino: Zona Sul";
+            } else if (destino.includes("Leste")) {
+              destino = "Destino: Zona Leste";
+            } else if (destino.includes("Norte")) {
+              destino = "Destino: Zona Norte";
+            } else if (destino.toLowerCase().includes("todas")) {
+              destino = "Destino: Todas as Regiões";
+            } else {
+              destino = "Destino: " + destino;
+            }
+
+            const flowKey = origem + "|||" + destino;
+            sankeyFlows[flowKey] = (sankeyFlows[flowKey] || 0) + 1;
+          });
+
+          const sankeyData = Object.entries(sankeyFlows)
+            .filter(([_, flow]) => flow > 0)
+            .map(([key, flow]) => {
+              const [from, to] = key.split("|||");
+              return { from, to, flow };
+            });
+
+          renderReportChartSankey(sankeyCanvasId, sankeyData);
+        }, 150);
+
         return;
       }
 
