@@ -7173,11 +7173,11 @@
               </div>
             </div>
 
-            <!-- FILTROS CONTEXTUAIS DO BLOCO DEMOGRAFIA -->
-            <div class="flex flex-wrap items-center gap-2.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-200/80">
+            <!-- FILTROS CONTEXTUAIS DO BLOCO DEMOGRAFIA (LADO A LADO) -->
+            <div class="flex flex-nowrap items-center gap-2.5 bg-slate-50 p-2 rounded-2xl border border-slate-200/80 shrink-0 overflow-x-auto">
               <!-- Filtro Período Censitário -->
-              <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                <i class="fa-solid fa-timeline text-purple-600 text-xs"></i>
+              <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-purple-400 transition-all">
+                <i class="fa-solid fa-timeline text-purple-600 text-xs shrink-0"></i>
                 <select id="ibge-filter-timeline" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
                   <option value="censo_2022">Censo 2022 + Projeção 2026</option>
                   <option value="historico_2000_2022">Série 2000 a 2026 (Crescimento)</option>
@@ -7186,8 +7186,8 @@
               </div>
 
               <!-- Filtro Recorte Demográfico / Gênero -->
-              <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs">
-                <i class="fa-solid fa-user-group text-blue-600 text-xs"></i>
+              <div class="flex items-center gap-2 bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-2xs hover:border-blue-400 transition-all">
+                <i class="fa-solid fa-user-group text-blue-600 text-xs shrink-0"></i>
                 <select id="ibge-filter-demo" onchange="window.handleIbgeFilterChange()" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
                   <option value="geral">População Total (Geral)</option>
                   <option value="ativa">População em Idade Ativa (15 a 59 anos)</option>
@@ -7904,6 +7904,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=100.0"></script>
+  <script src="app.js?v=101.0"></script>
 </body>
 </html>
