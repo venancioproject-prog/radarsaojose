@@ -7131,27 +7131,18 @@
             </div>
           </div>
 
-          <!-- Gráficos de Microdados Territoriais e Distribuição por Faixas de Renda -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
-            <div>
-              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-1">População por Faixa de Renda (hab.)</h4>
-              <p class="text-[10px] text-slate-400 font-medium mb-2">Volume absoluto no território filtrado</p>
+          <!-- Gráfico de Microdados de Renda no Território -->
+          <div class="pt-4 border-t border-slate-100">
+            <div class="p-5 rounded-2xl bg-slate-50/70 border border-slate-100 max-w-2xl mx-auto">
+              <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+                <div>
+                  <h4 class="text-xs font-black uppercase tracking-wider text-brand-900">População por Faixa de Renda (hab.)</h4>
+                  <p class="text-[10px] text-slate-400 font-medium">Volume absoluto de contingente no território filtrado</p>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-black">Poder Aquisitivo</span>
+              </div>
               <div class="h-60 relative">
                 <canvas id="ibgeChartFaixasRendaPop"></canvas>
-              </div>
-            </div>
-            <div>
-              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-1">Distribuição Populacional por Região (%)</h4>
-              <p class="text-[10px] text-slate-400 font-medium mb-2">Fatia demográfica das macrozonas</p>
-              <div class="h-60 relative">
-                <canvas id="ibgeChartBairrosPop"></canvas>
-              </div>
-            </div>
-            <div>
-              <h4 class="text-xs font-black uppercase tracking-wider text-brand-900 mb-1">Renda Média Domiciliar (Salários Mínimos)</h4>
-              <p class="text-[10px] text-slate-400 font-medium mb-2">Poder aquisitivo médio por macrorregião</p>
-              <div class="h-60 relative">
-                <canvas id="ibgeChartBairrosRenda"></canvas>
               </div>
             </div>
           </div>
@@ -7240,21 +7231,21 @@
         </div>
 
         <!-- ====================================================================== -->
-        <!-- EIXO 3: ECONOMIA, MERCADO DE TRABALHO & EMPRESAS (COM FILTROS NO CABEÇALHO) -->
+        <!-- RAIO-X ESTRATÉGICO: ECONOMIA, TERRITÓRIO, RENDA & DINÂMICA URBANA -->
         <!-- ====================================================================== -->
         <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-6">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div class="flex items-center gap-3">
               <div class="w-11 h-11 rounded-2xl bg-brand-900 text-accent-cyan flex items-center justify-center text-xl shadow-sm shrink-0">
-                <i class="fa-solid fa-briefcase"></i>
+                <i class="fa-solid fa-compass-drafting"></i>
               </div>
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-900">EIXO ECONÔMICO & CORPORATIVO</span>
+                  <span class="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-900">RAIO-X ESTRATÉGICO MUNICIPAL</span>
                   <span class="text-slate-300">•</span>
-                  <span class="text-xs font-bold text-slate-500">PIB &bull; RAIS &bull; CAGED</span>
+                  <span class="text-xs font-bold text-slate-500">Macroindicadores &bull; Território &bull; Renda &bull; Negócios</span>
                 </div>
-                <h3 class="text-xl font-black text-brand-950 tracking-tight">Composição do PIB, Emprego Formal & Empresas Ativas</h3>
+                <h3 class="text-xl font-black text-brand-950 tracking-tight">Raio-X Municipal: Território, Renda, PIB & Dinâmica Corporativa</h3>
               </div>
             </div>
 
@@ -7273,8 +7264,70 @@
             </div>
           </div>
 
+          <!-- LINHA 1: 1. Infraestrutura & Domicílios | 2. Distribuição Populacional por Região (%) | 3. Renda Média Domiciliar -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Gráfico PIB -->
+            <!-- 1. Infraestrutura & Domicílios -->
+            <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-100 flex flex-col justify-between space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                <div>
+                  <h4 class="text-xs font-black uppercase text-brand-950">Infraestrutura & Domicílios</h4>
+                  <p class="text-[10px] text-slate-400 font-medium">Dados de moradia Censo 2022</p>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-black">Habitação</span>
+              </div>
+              <div class="space-y-2 text-xs py-1">
+                <div class="p-2.5 bg-white rounded-xl border border-slate-200/70 flex items-center justify-between">
+                  <span class="text-[10px] uppercase font-bold text-slate-500">Domicílios Ocupados</span>
+                  <span class="text-sm font-black text-brand-950">253.180 residências</span>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-200/70 flex items-center justify-between">
+                  <span class="text-[10px] uppercase font-bold text-slate-500">Média Moradores/Dom.</span>
+                  <span class="text-sm font-black text-brand-950">2,75 hab / dom.</span>
+                </div>
+                <div class="p-2.5 bg-white rounded-xl border border-slate-200/70 flex items-center justify-between">
+                  <span class="text-[10px] uppercase font-bold text-slate-500">Taxa de Urbanização</span>
+                  <span class="text-sm font-black text-emerald-600">98,2% urbana</span>
+                </div>
+              </div>
+              <p class="text-[10px] text-slate-500 bg-emerald-50/80 p-2 rounded-xl border border-emerald-100">
+                99,4% de rede de energia e alta cobertura de saneamento básico.
+              </p>
+            </div>
+
+            <!-- 2. Distribuição Populacional por Região (%) -->
+            <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                <div>
+                  <h4 class="text-xs font-black uppercase text-brand-950">Distribuição Populacional por Região (%)</h4>
+                  <p class="text-[10px] text-slate-400 font-medium">Fatia demográfica das macrozonas</p>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 text-[10px] font-black">Macrozonas</span>
+              </div>
+              <div class="h-56 relative">
+                <canvas id="ibgeChartBairrosPop"></canvas>
+              </div>
+              <p class="text-[11px] text-slate-500">Zona Sul e Leste concentram quase 60% de todo o contingente urbano.</p>
+            </div>
+
+            <!-- 3. Renda Média Domiciliar (Salários Mínimos) -->
+            <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-3">
+              <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                <div>
+                  <h4 class="text-xs font-black uppercase text-brand-950">Renda Média Domiciliar (Salários Mínimos)</h4>
+                  <p class="text-[10px] text-slate-400 font-medium">Poder aquisitivo médio por macrorregião</p>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-black">Renda SM</span>
+              </div>
+              <div class="h-56 relative">
+                <canvas id="ibgeChartBairrosRenda"></canvas>
+              </div>
+              <p class="text-[11px] text-slate-500">Zona Oeste lidera com 8.4 SM médios, seguida pela Região Central (5.6 SM).</p>
+            </div>
+          </div>
+
+          <!-- LINHA 2: 4. Composição do PIB | 5. Emprego Formal CAGED | 6. Empresas & CNPJs Ativos -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+            <!-- 4. Gráfico PIB -->
             <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
                 <h4 class="text-xs font-black uppercase text-brand-950">Composição do PIB</h4>
@@ -7286,7 +7339,7 @@
               <p class="text-[11px] text-slate-500">Serviços e Indústria de Alta Tecnologia representam 85% do valor adicionado de SJC.</p>
             </div>
 
-            <!-- Gráfico Emprego Formal -->
+            <!-- 5. Gráfico Emprego Formal -->
             <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
                 <h4 class="text-xs font-black uppercase text-brand-950">Emprego Formal CAGED</h4>
@@ -7298,7 +7351,7 @@
               <p class="text-[11px] text-slate-500">212.800 postos formais, com destaque para engenharia, tecnologia e serviços qualificados.</p>
             </div>
 
-            <!-- Gráfico Empresas -->
+            <!-- 6. Gráfico Empresas -->
             <div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-3">
               <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
                 <h4 class="text-xs font-black uppercase text-brand-950">Empresas & CNPJs Ativos</h4>
@@ -7445,49 +7498,27 @@
         </div>
 
         <!-- ====================================================================== -->
-        <!-- EIXO 5: MOBILIDADE URBANA, FROTA & DOMICÍLIOS -->
+        <!-- EIXO 5: MOBILIDADE URBANA & FROTA DE VEÍCULOS -->
         <!-- ====================================================================== -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4 lg:col-span-2">
-            <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
-              <div>
-                <h3 class="text-base font-black text-brand-950">Frota de Veículos Registrada</h3>
-                <p class="text-xs text-slate-400 font-medium">492.650 veículos (DENATRAN / IBGE)</p>
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-card space-y-4">
+          <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded bg-rose-100 text-rose-900">MOBILIDADE URBANA & TRANSPORTE</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs font-bold text-slate-500">DENATRAN / IBGE</span>
               </div>
-              <span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-800 text-[10px] font-bold border border-rose-200">
-                Mobilidade Urbana
-              </span>
+              <h3 class="text-xl font-black text-brand-950 tracking-tight">Frota de Veículos Registrada em São José dos Campos</h3>
             </div>
-            <div class="h-64 relative">
-              <canvas id="ibgeChartFrota"></canvas>
-            </div>
-            <div class="text-[11px] text-slate-600 bg-slate-50 p-3 rounded-2xl border border-slate-100">
-              <strong class="text-brand-950 font-bold">Alta Motorização:</strong> 1 veículo para cada 1,41 habitantes (taxa de país desenvolvido).
-            </div>
+            <span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-800 text-xs font-bold border border-rose-200">
+              492.650 Veículos
+            </span>
           </div>
-
-          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card flex flex-col justify-between space-y-4">
-            <div class="border-b border-slate-100 pb-3">
-              <h3 class="text-base font-black text-brand-950">Infraestrutura & Domicílios</h3>
-              <p class="text-xs text-slate-400 font-medium">Dados de moradia Censo 2022</p>
-            </div>
-            <div class="space-y-3.5 text-xs">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <span class="text-[10px] uppercase font-bold text-slate-400 block">Total Domicílios Ocupados</span>
-                <span class="text-lg font-black text-brand-950">253.180 residências</span>
-              </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <span class="text-[10px] uppercase font-bold text-slate-400 block">Média Moradores / Domicílio</span>
-                <span class="text-lg font-black text-brand-950">2,75 hab / domicílio</span>
-              </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <span class="text-[10px] uppercase font-bold text-slate-400 block">Taxa de Urbanização</span>
-                <span class="text-lg font-black text-emerald-600">98,2% urbana</span>
-              </div>
-            </div>
-            <div class="text-[11px] text-slate-500 bg-emerald-50/60 p-3 rounded-xl border border-emerald-100">
-              99,4% de cobertura de energia e alta densidade de saneamento básico.
-            </div>
+          <div class="h-72 relative">
+            <canvas id="ibgeChartFrota"></canvas>
+          </div>
+          <div class="text-[11px] text-slate-600 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+            <strong class="text-brand-950 font-bold">Alta Densidade Automotiva:</strong> SJC possui 1 veículo registrado para cada 1,41 habitantes (taxa compatível com cidades desenvolvidas da Europa/EUA), com expressiva prevalência de automóveis particulares e motocicletas.
           </div>
         </div>
 
@@ -7876,6 +7907,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=96.0"></script>
+  <script src="app.js?v=97.0"></script>
 </body>
 </html>
