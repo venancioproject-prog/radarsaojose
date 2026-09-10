@@ -10351,249 +10351,249 @@ const IBGE_DATABASE = {
     // Macro Visões
     sjc_vs_estado: {
       nome: "Estado de São Paulo",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [58.30, 3.1, 783, 97.5, 59.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [58.30, 3.1, 783, 97.5, 59.2, 1950000]
     },
     sjc_vs_brasil: {
       nome: "Média do Brasil",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [42.25, 2.5, 727, 95.8, 48.5]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [42.25, 2.5, 727, 95.8, 48.5, 8900000]
     },
     sjc_vs_rmvale: {
       nome: "RMVale (Média Vale do Paraíba)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [44.10, 2.8, 770, 96.9, 58.0]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [44.10, 2.8, 770, 96.9, 58.0, 118500]
     },
 
     // 1. Vizinhos & RMVale (Vale do Paraíba & Litoral Norte)
     sjc_vs_taubate: {
       nome: "Taubaté (Hub Industrial & Universitário)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [46.80, 2.9, 800, 97.1, 62.4]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [46.80, 2.9, 800, 97.1, 62.4, 18200]
     },
     sjc_vs_jacarei: {
       nome: "Jacareí (Conurbação Oeste SJC)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [41.20, 2.7, 777, 96.4, 54.8]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [41.20, 2.7, 777, 96.4, 54.8, 12600]
     },
     sjc_vs_pinda: {
       nome: "Pindamonhangaba (Metalmecânico & Alumínio)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [58.70, 3.2, 773, 96.8, 55.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [58.70, 3.2, 773, 96.8, 55.2, 7850]
     },
     sjc_vs_guara: {
       nome: "Guaratinguetá (Hub Químico & Aeronáutica)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [38.50, 2.6, 798, 97.3, 61.0]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [38.50, 2.6, 798, 97.3, 61.0, 7120]
     },
     sjc_vs_cacapava: {
       nome: "Caçapava (Corredor Dutra & Bebidas)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [43.90, 2.8, 788, 96.9, 58.4]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [43.90, 2.8, 788, 96.9, 58.4, 4980]
     },
     sjc_vs_campos_jordao: {
       nome: "Campos do Jordão (Turismo de Alta Renda)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [31.20, 2.1, 749, 96.2, 49.5]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [31.20, 2.1, 749, 96.2, 49.5, 3450]
     },
     sjc_vs_caragua: {
       nome: "Caraguatatuba (Pólo Litoral Norte & Gás)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [36.40, 2.3, 759, 96.7, 51.3]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [36.40, 2.3, 759, 96.7, 51.3, 8920]
     },
     sjc_vs_sao_sebastiao: {
       nome: "São Sebastião (Porto & Royalties Pré-Sal)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [78.20, 2.8, 772, 96.5, 48.9]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [78.20, 2.8, 772, 96.5, 48.9, 6140]
     },
     sjc_vs_ubatuba: {
       nome: "Ubatuba (Turismo Ecológico & Serviços)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [28.90, 2.1, 751, 96.1, 46.8]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [28.90, 2.1, 751, 96.1, 46.8, 5980]
     },
 
     // 2. Grandes Polos Tecnológicos & Industriais do Interior de SP
     sjc_vs_campinas: {
       nome: "Campinas (Polo Tech & Unicamp)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [62.40, 3.7, 805, 97.9, 74.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [62.40, 3.7, 805, 97.9, 74.2, 78500]
     },
     sjc_vs_sao_carlos: {
       nome: "São Carlos (Capital da Tecnologia & USP/UFSCar)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [48.10, 3.3, 805, 98.2, 73.5]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [48.10, 3.3, 805, 98.2, 73.5, 16900]
     },
     sjc_vs_ribeirao_preto: {
       nome: "Ribeirão Preto (Capital do Agronegócio & Saúde)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [51.30, 3.2, 800, 97.4, 76.1]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [51.30, 3.2, 800, 97.4, 76.1, 48200]
     },
     sjc_vs_sorocaba: {
       nome: "Sorocaba (Polo Metalmecânico & Logística)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [47.50, 3.0, 798, 97.2, 69.8]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [47.50, 3.0, 798, 97.2, 69.8, 38100]
     },
     sjc_vs_jundiai: {
       nome: "Jundiaí (Hub Logístico & Alta Renda)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [108.20, 3.6, 822, 98.4, 78.9]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [108.20, 3.6, 822, 98.4, 78.9, 29400]
     },
     sjc_vs_piracicaba: {
       nome: "Piracicaba (AgroTech & Biocombustíveis)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [68.90, 3.3, 785, 97.6, 72.4]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [68.90, 3.3, 785, 97.6, 72.4, 24800]
     },
     sjc_vs_sao_jose_rio_preto: {
       nome: "São José do Rio Preto (Polo Médico & Comércio)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [41.80, 2.9, 797, 97.7, 82.1]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [41.80, 2.9, 797, 97.7, 82.1, 33200]
     },
     sjc_vs_araraquara: {
       nome: "Araraquara (Educação, Bebidas & Alimentos)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [46.30, 3.0, 815, 98.1, 74.8]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [46.30, 3.0, 815, 98.1, 74.8, 14700]
     },
     sjc_vs_bauru: {
       nome: "Bauru (Centro Geográfico & Ensino)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [38.20, 2.8, 801, 97.5, 71.3]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [38.20, 2.8, 801, 97.5, 71.3, 23500]
     },
     sjc_vs_indaiatuba: {
       nome: "Indaiatuba (Indústria & Qualidade de Vida)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [72.50, 3.5, 788, 98.0, 77.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [72.50, 3.5, 788, 98.0, 77.2, 17800]
     },
     sjc_vs_americana: {
       nome: "Americana (Polo Têxtil & Metalmecânico)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [49.70, 3.1, 811, 97.9, 75.4]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [49.70, 3.1, 811, 97.9, 75.4, 18400]
     },
     sjc_vs_limeira: {
       nome: "Limeira (Jóias Folheadas & Citricultura)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [45.10, 2.9, 775, 97.2, 70.1]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [45.10, 2.9, 775, 97.2, 70.1, 19200]
     },
     sjc_vs_itu: {
       nome: "Itu (Indústria & Condomínios Fechados)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [58.40, 3.2, 773, 97.3, 68.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [58.40, 3.2, 773, 97.3, 68.2, 11500]
     },
     sjc_vs_braganca: {
       nome: "Bragança Paulista (Região Bragantina & Turismo)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [36.70, 2.6, 776, 96.8, 67.5]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [36.70, 2.6, 776, 96.8, 67.5, 11900]
     },
     sjc_vs_santos: {
       nome: "Santos (Maior Porto da AL & Petróleo)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [57.60, 3.8, 840, 98.3, 69.4]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [57.60, 3.8, 840, 98.3, 69.4, 31800]
     },
     sjc_vs_sao_caetano: {
       nome: "São Caetano do Sul (Maior IDHM do Brasil)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [89.30, 4.4, 862, 98.8, 84.5]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [89.30, 4.4, 862, 98.8, 84.5, 18900]
     },
     sjc_vs_barueri: {
       nome: "Barueri / Alphaville (Hub Financeiro & Tech)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [178.40, 4.6, 786, 97.8, 81.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [178.40, 4.6, 786, 97.8, 81.2, 42600]
     },
     sjc_vs_sao_paulo_capital: {
       nome: "São Paulo Capital (Centro Financeiro da AL)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [65.20, 4.1, 805, 97.6, 68.3]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [65.20, 4.1, 805, 97.6, 68.3, 890000]
     },
 
     // 3. Capitais e Cidades Referência Nacional (Brasil)
     sjc_vs_curitiba: {
       nome: "Curitiba - PR (Referência em Planejamento & Inovação)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [56.10, 3.5, 823, 98.1, 78.5]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [56.10, 3.5, 823, 98.1, 78.5, 154000]
     },
     sjc_vs_florianopolis: {
       nome: "Florianópolis - SC (Capital Tech & Qualidade de Vida)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [48.90, 3.8, 847, 98.4, 76.8]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [48.90, 3.8, 847, 98.4, 76.8, 52000]
     },
     sjc_vs_joinville: {
       nome: "Joinville - SC (Polo Industrial do Sul)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [61.20, 3.3, 809, 98.2, 74.6]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [61.20, 3.3, 809, 98.2, 74.6, 43200]
     },
     sjc_vs_blumenau: {
       nome: "Blumenau - SC (TI, Cerveja & Têxtil)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [52.80, 3.1, 806, 98.0, 77.3]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [52.80, 3.1, 806, 98.0, 77.3, 27600]
     },
     sjc_vs_maringa: {
       nome: "Maringá - PR (Agronegócio & Alto IDHM)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [47.30, 2.9, 808, 98.3, 79.1]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [47.30, 2.9, 808, 98.3, 79.1, 39500]
     },
     sjc_vs_londrina: {
       nome: "Londrina - PR (Polo Universitário & Serviços)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [41.60, 2.8, 778, 97.7, 72.8]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [41.60, 2.8, 778, 97.7, 72.8, 38900]
     },
     sjc_vs_caxias_sul: {
       nome: "Caxias do Sul - RS (Polo Metalmecânico & Vinícola)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [58.90, 3.2, 782, 97.8, 73.1]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [58.90, 3.2, 782, 97.8, 73.1, 36200]
     },
     sjc_vs_belo_horizonte: {
       nome: "Belo Horizonte - MG (Capital Mineira & San Pedro Valley)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [43.70, 3.5, 810, 97.5, 68.9]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [43.70, 3.5, 810, 97.5, 68.9, 198000]
     },
     sjc_vs_uberlandia: {
       nome: "Uberlândia - MG (Polo Logístico & Atacadista)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [53.40, 2.9, 789, 97.3, 75.2]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [53.40, 2.9, 789, 97.3, 75.2, 45800]
     },
     sjc_vs_juiz_de_fora: {
       nome: "Juiz de Fora - MG (Ensino, Saúde & Indústria)",
-      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab"],
-      sjc: [54.89, 3.4, 807, 97.8, 70.6],
-      alvo: [35.20, 2.7, 778, 97.1, 56.4]
+      labels: ["PIB per Capita (R$ mil)", "Salário Médio (SM)", "IDHM (x1000)", "Escolarização (%)", "Veículos / 100 hab", "Empresas Ativas"],
+      sjc: [54.89, 3.4, 807, 97.8, 70.6, 36420],
+      alvo: [35.20, 2.7, 778, 97.1, 56.4, 31200]
     }
   },
   series_historicas: {
@@ -11333,6 +11333,7 @@ function renderIbgeBenchmarkChart() {
   const diffIdhm = (sjcVals[2] - alvoVals[2]);
   const diffEscola = (sjcVals[3] - alvoVals[3]).toFixed(1);
   const diffFrota = (sjcVals[4] - alvoVals[4]).toFixed(1);
+  const diffEmpresas = sjcVals[5] && alvoVals[5] ? (((sjcVals[5] - alvoVals[5]) / alvoVals[5]) * 100).toFixed(1) : "0.0";
 
   const fmtDiff = (v, suffix = "%") => {
     const num = Number(v);
@@ -11341,7 +11342,7 @@ function renderIbgeBenchmarkChart() {
     return `<strong class="text-slate-600">0.0${suffix}</strong>`;
   };
 
-  // 1. Atualizar Badges de Topo
+  // 1. Atualizar Badges de Topo (6 Badges)
   const badgesContainer = document.getElementById("ibge-benchmark-badges-container");
   if (badgesContainer) {
     badgesContainer.innerHTML = `
@@ -11365,15 +11366,20 @@ function renderIbgeBenchmarkChart() {
         <p class="text-xs font-bold text-slate-700">Dif: ${fmtDiff(diffEscola, " p.p.")}</p>
         <p class="text-[10px] text-slate-500">${sjcVals[3]}% vs ${alvoVals[3]}%</p>
       </div>
-      <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1 col-span-2 sm:col-span-1">
+      <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
         <span class="text-[10px] font-black uppercase text-brand-900 block">Motorização / 100 hab</span>
         <p class="text-xs font-bold text-slate-700">Dif: ${fmtDiff(diffFrota, " veíc.")}</p>
         <p class="text-[10px] text-slate-500">${sjcVals[4]} vs ${alvoVals[4]}</p>
       </div>
+      <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
+        <span class="text-[10px] font-black uppercase text-brand-900 block">Empresas & Negócios</span>
+        <p class="text-xs font-bold text-slate-700">Dif: ${fmtDiff(diffEmpresas)}</p>
+        <p class="text-[10px] text-slate-500">${Number(sjcVals[5]||36420).toLocaleString('pt-BR')} vs ${Number(alvoVals[5]||0).toLocaleString('pt-BR')}</p>
+      </div>
     `;
   }
 
-  // 2. Renderizar os 5 Cards Comparativos Visuais Ricos
+  // 2. Renderizar os 6 Cards Comparativos Visuais Ricos
   const cardsGrid = document.getElementById("ibge-benchmark-cards-grid");
   if (cardsGrid) {
     const cardData = [
@@ -11441,6 +11447,19 @@ function renderIbgeBenchmarkChart() {
         maxVal: Math.max(sjcVals[4], alvoVals[4], 85) * 1.05,
         diffText: Number(diffFrota) > 0 ? `Densidade de veículos em SJC é +${diffFrota} veíc./100 hab.` : `Taxa de mobilidade da praça comparada`,
         statusBadge: '<span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[10px] font-bold">Poder de Compra</span>'
+      },
+      {
+        icon: "fa-building",
+        iconColor: "text-indigo-600 bg-indigo-50",
+        title: "Empresas & Negócios Ativos",
+        unit: "unid.",
+        sjcFormatted: `${Number(sjcVals[5] || 36420).toLocaleString('pt-BR')} empresas registradas`,
+        alvoFormatted: `${Number(alvoVals[5] || 0).toLocaleString('pt-BR')} empresas registradas`,
+        sjcVal: sjcVals[5] || 36420,
+        alvoVal: alvoVals[5] || 1,
+        maxVal: Math.max(sjcVals[5] || 36420, alvoVals[5] || 1) * 1.05,
+        diffText: Number(diffEmpresas) > 0 ? `SJC possui +${diffEmpresas}% de densidade de CNPJs ativos` : `Densidade empresarial: ${diffEmpresas}% em relação ao polo`,
+        statusBadge: Number(diffEmpresas) >= 0 ? '<span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-[10px] font-bold">Dinamismo SJC</span>' : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-bold">Polo Macrorregional</span>'
       }
     ];
 
