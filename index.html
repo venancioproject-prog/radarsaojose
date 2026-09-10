@@ -7131,18 +7131,26 @@
             </div>
           </div>
 
-          <!-- Gráfico de Microdados de Renda no Território -->
+          <!-- Gráfico de Microdados de Renda no Território (Full Width) -->
           <div class="pt-4 border-t border-slate-100">
-            <div class="p-5 rounded-2xl bg-slate-50/70 border border-slate-100 max-w-2xl mx-auto">
-              <div class="flex items-center justify-between border-b border-slate-200/60 pb-2 mb-3">
+            <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/70 border border-slate-100 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/60 pb-3">
                 <div>
-                  <h4 class="text-xs font-black uppercase tracking-wider text-brand-900">População por Faixa de Renda (hab.)</h4>
-                  <p class="text-[10px] text-slate-400 font-medium">Volume absoluto de contingente no território filtrado</p>
+                  <h4 class="text-sm sm:text-base font-black uppercase tracking-tight text-brand-950">Distribuição Populacional por Faixa de Renda Domiciliar (hab.)</h4>
+                  <p class="text-xs text-slate-500 font-medium">Contingente demográfico absoluto no território filtrado (Classes A, B, C, D e E)</p>
                 </div>
-                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-black">Poder Aquisitivo</span>
+                <div class="flex items-center gap-2">
+                  <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-black">
+                    <i class="fa-solid fa-wallet text-emerald-600 mr-1"></i> Poder Aquisitivo
+                  </span>
+                </div>
               </div>
-              <div class="h-60 relative">
+              <div class="h-72 sm:h-80 relative w-full">
                 <canvas id="ibgeChartFaixasRendaPop"></canvas>
+              </div>
+              <div class="text-[11px] text-slate-600 bg-white p-3.5 rounded-xl border border-slate-200 flex items-center gap-2 shadow-2xs">
+                <i class="fa-solid fa-circle-info text-cyan-600 text-sm shrink-0"></i>
+                <span><strong class="text-brand-950 font-bold">Perfil Salarial & Consumo:</strong> Cruzamento territorial oficial baseado nos microdados censitários e RAIS municipal. Mostra a capacidade real de consumo e distribuição socioeconômica da região selecionada.</span>
               </div>
             </div>
           </div>
@@ -7907,6 +7915,6 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="app.js?v=97.0"></script>
+  <script src="app.js?v=98.0"></script>
 </body>
 </html>

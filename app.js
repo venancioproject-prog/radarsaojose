@@ -10906,8 +10906,8 @@ function renderIbgeFaixasRendaPopChart() {
         label: "Habitantes nesta Faixa de Renda",
         data: values,
         backgroundColor: colors,
-        borderRadius: 6,
-        barPercentage: 0.65
+        borderRadius: 8,
+        barPercentage: 0.60
       }]
     },
     options: {
@@ -10920,24 +10920,24 @@ function renderIbgeFaixasRendaPopChart() {
           anchor: "end",
           align: "right",
           color: "#0F172A",
-          font: { family: "Montserrat", size: 9.5, weight: "bold" },
-          formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
+          font: { family: "Montserrat", size: 11, weight: "bold" },
+          formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k hab." : v + " hab."
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => ` ${Number(ctx.parsed.x).toLocaleString('pt-BR')} pessoas com esta renda no território`
+            label: (ctx) => ` População estimada: ${Number(ctx.parsed.x).toLocaleString('pt-BR')} habitantes (${((ctx.parsed.x / cross.finalPop) * 100).toFixed(1)}%)`
           }
         }
       },
       scales: {
         x: {
           beginAtZero: true,
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
+          grid: { color: "rgba(226, 232, 240, 0.7)", borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
         },
         y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 8.5, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 11, weight: "bold" }, color: "#0B2545" }
         }
       }
     }
