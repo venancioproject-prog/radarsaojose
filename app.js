@@ -7687,10 +7687,10 @@ window.handleConsultorSubmit = async function(e) {
         }
 
         if (statusData.status === "waiting_rate_limit") {
-          const waitSec = statusData.estimated_remaining_seconds || 8;
-          pollIntervalMs = Math.max(3000, waitSec * 1000);
+          const waitSec = Number(statusData.wait_seconds || statusData.estimated_remaining_seconds || 8);
+          pollIntervalMs = Math.max(2000, waitSec * 1000);
           if (loadingStatusText) {
-            loadingStatusText.innerText = statusData.message || `Aguardando liberação de taxa (${waitSec}s)...`;
+            loadingStatusText.innerText = statusData.message || `Aguardando liberação de taxa da janela Groq (${waitSec}s restantes)...`;
           }
           continue;
         }

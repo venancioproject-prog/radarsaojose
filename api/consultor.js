@@ -613,9 +613,14 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
 
     const errorObj = new Error(`GROQ_API_ERROR: Falha na chamada da Groq (${response.status}): ${errText}`);
     errorObj.status = response.status;
-    errorObj.retryAfterSeconds = retryAfter ? parseInt(retryAfter, 10) : 8;
+    errorObj.retryAfterSeconds = retryAfter ? parseInt(retryAfter, 10) : null;
     errorObj.durationMs = durationMs;
     errorObj.rawErrorBody = errText;
+    errorObj.headers = {
+      "retry-after": retryAfter || null,
+      "x-ratelimit-reset-requests": response.headers.get("x-ratelimit-reset-requests") || null,
+      "x-ratelimit-reset-tokens": response.headers.get("x-ratelimit-reset-tokens") || null
+    };
     
     // Detecção imediata de modelo inválido/descontinuado (400 ou 404)
     if (response.status === 404 || (response.status === 400 && (errText.includes("model") || errText.includes("decommissioned") || errText.includes("not found")))) {
@@ -624,9 +629,16 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 75
       errorObj.model_used = GROQ_MODEL;
     }
 
-    if (response.status === 429 && (errText.includes("TPD") || errText.includes("Day") || errText.includes("quota"))) {
-      errorObj.isQuotaExhausted = true;
-      errorObj.error_code = "GROQ_QUOTA_EXHAUSTED";
+    // Diferenciação estrita entre cota diária/esgotada e rate limit temporário
+    if (response.status === 429) {
+      const isDailyLimit = errText.includes("TPD") || errText.includes("Day") || errText.includes("daily") || errText.includes("quota") || errText.includes("insufficient_quota");
+      if (isDailyLimit) {
+        errorObj.isQuotaExhausted = true;
+        errorObj.error_code = "GROQ_QUOTA_EXHAUSTED";
+      } else {
+        errorObj.isRateLimit = true;
+        errorObj.error_code = "GROQ_RATE_LIMIT";
+      }
     }
     throw errorObj;
   }
@@ -1320,22 +1332,35 @@ module.exports = async function handler(req, res) {
       function formatStatusResponse(jobData, overrides = {}) {
         const stepDef = MODULE_DEFINITIONS[jobData.current_step] || {};
         const stepAttempt = (jobData.attempts_by_step && jobData.attempts_by_step[stepDef.id]) || 0;
+        const rateLimitAttempts = (jobData.rate_limit_attempts_by_step && jobData.rate_limit_attempts_by_step[stepDef.id]) || 0;
         const lockMs = jobData.lock_timestamp ? new Date(jobData.lock_timestamp).getTime() : now;
         const stepElapsed = jobData.is_processing ? (now - lockMs) : 0;
+        
+        let waitSeconds = 0;
+        if (jobData.retry_after_at) {
+          const rTime = new Date(jobData.retry_after_at).getTime();
+          if (rTime > now) {
+            waitSeconds = Math.ceil((rTime - now) / 1000);
+          }
+        }
 
         return {
           job_id: jobData.job_id,
           status: jobData.status,
           current_step: jobData.current_step,
           current_module_label: stepDef.label || "Conclusão",
+          step: stepDef.id || "conclusao",
           attempt: stepAttempt,
           max_attempts: 3,
+          rate_limit_attempts: rateLimitAttempts,
+          max_rate_limit_attempts: 3,
           is_processing: Boolean(jobData.is_processing),
           lock_timestamp: jobData.lock_timestamp || null,
           updated_at: jobData.updated_at,
           last_error: jobData.last_error || null,
           error_code: jobData.error_code || null,
           retry_after_at: jobData.retry_after_at || null,
+          wait_seconds: waitSeconds,
           step_started_at: jobData.step_metrics?.[stepDef.id]?.started_at || jobData.lock_timestamp || null,
           step_elapsed_ms: stepElapsed,
           completed_steps: jobData.completed_steps || [],
@@ -1390,6 +1415,7 @@ module.exports = async function handler(req, res) {
         
         activeJob.status = "running";
         activeJob.attempts_by_step = activeJob.attempts_by_step || {};
+        activeJob.rate_limit_attempts_by_step = activeJob.rate_limit_attempts_by_step || {};
         activeJob.attempts_by_step[stepDef.id] = (activeJob.attempts_by_step[stepDef.id] || 0) + 1;
         const currentAttemptNumber = activeJob.attempts_by_step[stepDef.id];
         await saveJob(activeJob);
@@ -1554,7 +1580,16 @@ module.exports = async function handler(req, res) {
           return res.status(200).json(formatStatusResponse(activeJob, { success: true, step_elapsed_ms: groqResult.durationMs }));
 
         } catch (err) {
-          console.error(`[STEP ERROR] Job ${activeJob.job_id} na etapa ${stepDef.id}:`, err);
+          console.error(`[STEP ERROR] Job ${activeJob.job_id} na etapa ${stepDef.id}:`, {
+            status: err.status || null,
+            error_code: err.error_code || null,
+            retry_after_header: err.headers?.["retry-after"] || null,
+            retry_after_seconds: err.retryAfterSeconds || null,
+            error_body: (err.rawErrorBody || err.message || "").slice(0, 300),
+            step: stepDef.id,
+            attempt: currentAttemptNumber,
+            timestamp: new Date().toISOString()
+          });
 
           if (err.isModelInvalid) {
             activeJob.status = "failed";
@@ -1562,19 +1597,35 @@ module.exports = async function handler(req, res) {
             activeJob.message = `O modelo Groq configurado (${err.model_used}) é inválido ou foi descontinuado: ${err.message}`;
             activeJob.last_error = err.message;
             activeJob.retryable = false;
-          } else if (err.isQuotaExhausted) {
+          } else if (err.isQuotaExhausted || err.error_code === "GROQ_QUOTA_EXHAUSTED") {
             activeJob.status = "failed";
             activeJob.error_code = "GROQ_QUOTA_EXHAUSTED";
-            activeJob.message = "A cota disponível da Groq foi atingida. O relatório não pôde ser concluído.";
+            activeJob.message = "A cota diária ou limite de tokens da Groq foi atingida. O processamento foi interrompido sem retentativas.";
             activeJob.last_error = err.message;
             activeJob.retryable = false;
           } else if (err.status === 429) {
-            const waitSeconds = err.retryAfterSeconds || 8;
-            activeJob.status = "waiting_rate_limit";
-            activeJob.retry_after_at = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
-            activeJob.message = `Limite de taxa atingido. Aguardando liberação da janela Groq (${waitSeconds}s)...`;
-            activeJob.last_error = err.message;
-            activeJob.retryable = true;
+            // Reverter a contagem de tentativa normal pois foi apenas limitação de taxa
+            if (activeJob.attempts_by_step[stepDef.id] > 0) {
+              activeJob.attempts_by_step[stepDef.id] -= 1;
+            }
+
+            activeJob.rate_limit_attempts_by_step[stepDef.id] = (activeJob.rate_limit_attempts_by_step[stepDef.id] || 0) + 1;
+            const rateLimitCount = activeJob.rate_limit_attempts_by_step[stepDef.id];
+
+            if (rateLimitCount > 3) {
+              activeJob.status = "failed";
+              activeJob.error_code = "GROQ_RATE_LIMIT_EXHAUSTED";
+              activeJob.message = `Limite de taxa da Groq excedeu o máximo de 3 tentativas na etapa ${stepDef.label}.`;
+              activeJob.last_error = err.message;
+              activeJob.retryable = true;
+            } else {
+              const waitSeconds = err.retryAfterSeconds || Math.min(60, 8 * Math.pow(2, rateLimitCount - 1));
+              activeJob.status = "waiting_rate_limit";
+              activeJob.retry_after_at = new Date(Date.now() + (waitSeconds * 1000)).toISOString();
+              activeJob.message = `Limite de taxa atingido na etapa ${stepDef.label} (${rateLimitCount}/3). Aguardando liberação da janela Groq (${waitSeconds}s)...`;
+              activeJob.last_error = err.message;
+              activeJob.retryable = true;
+            }
           } else {
             activeJob.last_error = err.message;
             if (currentAttemptNumber >= 3) {
