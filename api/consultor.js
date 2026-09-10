@@ -832,27 +832,31 @@ Sua funcao e emitir um parecer consultivo maduro, humano, decisivo e conciso.
 
 Responda exclusivamente com um único objeto JSON válido. Não use markdown, não use \`\`\`json, não escreva texto antes ou depois do objeto.
 
-DIRETRIZES:
+DIRETRIZES DE TAMANHO E RIGOR:
 1. RIGOR FACTUAL: Use EXCLUSIVAMENTE os dados fornecidos no analysisContext. Nao invente percentuais.
-2. CONCISAO E PROFUNDIDADE: O campo visao_estrategica_texto deve conter no maximo 2 paragrafos curtos e objetivos.
+2. LIMITES ESTRITOS DE CARACTERES:
+   - "visao_estrategica_texto": maximo de 500 caracteres (1 a 2 paragrafos densos e diretos ao ponto).
+   - "veredito_justificativa": maximo de 300 caracteres.
+   - "justificativa" de cada bairro: maximo de 180 caracteres.
+   - "zona_exclusao": maximo de 250 caracteres.
 3. BAIRROS PRIORITARIOS: Retorne no maximo 3 bairros prioritarios de SJC no array bairros. Em nivel_de_confianca use estritamente "alta", "media" ou "baixa".
 4. FORMATACAO ESTRITA: Retorne EXCLUSIVAMENTE um objeto JSON valido com aspas duplas, sem comentarios, sem virgula antes de fechar chaves ou colchetes, e sem campos extras.
 
 ESTRUTURA JSON EXATA:
 {
-  "visao_estrategica_texto": "Texto da analise estrategica em ate 2 paragrafos curtos e densos.",
+  "visao_estrategica_texto": "Texto da analise estrategica em ate 500 caracteres.",
   "veredito_postura": "avancar",
-  "veredito_justificativa": "Justificativa clara do veredito para o empreendedor.",
+  "veredito_justificativa": "Justificativa clara do veredito em ate 300 caracteres.",
   "bairros": [
     {
       "nome": "Jardim Aquarius",
       "regiao": "Centro-Oeste",
       "formato_recomendado": "Loja de Rua",
-      "justificativa": "Justificativa estrategica ancorada no contexto socioeconomico do bairro.",
+      "justificativa": "Justificativa ancorada nos dados em ate 180 caracteres.",
       "nivel_de_confianca": "alta"
     }
   ],
-  "zona_exclusao": "Local ou formato que deve ser evitado e por qual motivo."
+  "zona_exclusao": "Local ou formato que deve ser evitado e por que em ate 250 caracteres."
 }`
   },
   {
