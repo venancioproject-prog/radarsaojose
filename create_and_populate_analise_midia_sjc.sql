@@ -14612,7 +14612,7 @@ Serviço
 📍 Local: Rancho Eldorado – São José dos Campos
 🎟️ Ingressos: ingressos10.com.br
 Foto: Divulgação'),
-(3978932201312263870, 'noticias.sjcampos', '2026-09-04 15:15:02', NULL, 61, 0, 61, 'Cotidiano & Cidade', 'Sem conteúdo', 'Informativo', 'Neutro', 'Outros', '', 'https://www.instagram.com/p/Dc4AcF8lJ6-/', ''),
+(3978932201312263870, 'noticias.sjcampos', '2026-09-04 15:15:02', NULL, 61, 0, 61, 'Cotidiano & Cidade', 'Sem conteúdo', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', '', 'https://www.instagram.com/p/Dc4AcF8lJ6-/', ''),
 (3978803969039697204, 'noticias.sjcampos', '2026-09-04 11:00:06', NULL, 436, 9, 445, 'Cultura & Entretenimento', 'Festival de Flores e Morangos', 'Informativo', 'Negativo', 'Indignação & Reclamação', 'Parque Roberto Burle Marx, Pavilhão das Gaivotas', 'https://www.instagram.com/p/Dc3jSEVhoU0/', 'São José dos Campos será palco de mais uma edição do Festival de Flores e Morangos, que chega à sua terceira edição em 2026. O evento será realizado em dois finais de semana, de 4 a 7 e de 11 a 13 de setembro, no Parque da Cidade – Roberto Burle Marx, com entrada gratuita.
 
 Depois de conquistar o público nas edições anteriores, o festival retorna reunindo atrações para toda a família. Entre os destaques estão as delícias preparadas com morango, exposição e venda de flores e plantas, praça gastronômica, artesanato e diversos expositores.
@@ -43285,7 +43285,7 @@ A informação consta de mensagens encontradas pela Polícia Federal no celular 
 O material integra um relatório sigiloso enviado pela PF ao ministro André Mendonça, relator no STF das investigações sobre o Banco Master. O documento foi tornado público nesta terça (1º) por decisão de Mendonça.
 
 📲 Leia mais em spriomais.com.br (link na bio)'),
-(3977326731203511953, 'spriomais', '2026-09-02 10:15:20', NULL, 42, 5, 47, 'Trânsito & Mobilidade', 'Municipalização de trecho da Rodovia SP-62', 'Informativo', 'Crítico', 'Indignação & Reclamação', 'Prefeitura de São José dos Campos, Rodovia Estadual SP-62, Jardim Ipê, Itapoã, Galo Branco, Residencial Righi', 'https://www.instagram.com/p/DcyTZbZDQaR/', '🛣️ A Prefeitura de São José dos Campos foi autorizada a realizar a municipalização de um trecho da Rodovia Estadual SP-62, conhecida como Estrada Velha Rio–São Paulo, na região de Eugênio de Melo.
+(3977326731203511953, 'spriomais', '2026-09-02 10:15:20', NULL, 42, 5, 47, 'Trânsito & Mobilidade', 'Municipalização de trecho da Rodovia SP-62', 'Informativo', 'Negativo', 'Indignação & Reclamação', 'Prefeitura de São José dos Campos, Rodovia Estadual SP-62, Jardim Ipê, Itapoã, Galo Branco, Residencial Righi', 'https://www.instagram.com/p/DcyTZbZDQaR/', '🛣️ A Prefeitura de São José dos Campos foi autorizada a realizar a municipalização de um trecho da Rodovia Estadual SP-62, conhecida como Estrada Velha Rio–São Paulo, na região de Eugênio de Melo.
 
 O segmento, que fica entre os km 101 e 103+800, tem 2,8 quilômetros de extensão e liga os bairros Jardim Ipê, Itapoã, Galo Branco e o acesso ao Residencial Righi.
 
@@ -47872,7 +47872,7 @@ O movimento na Rodovia Presidente Dutra deve ser intenso durante o feriado. Os h
 📲 Quer ficar atualizado sobre as notícias da região? Entre no Grupo do WhatsApp pelo link na bio e receba nossos conteúdos!
 
 #feriadoprolongado #revolucaoconstitucionalista #estadosp #viagem #rodovias #valedoparaiba #serradamantiqueira #litoralnorte'),
-(3935355100093386881, 'spriomais', '2026-07-06 13:00:21', NULL, 3, 0, 3, 'Candidato & Cidadania', 'Atendimento móvel de documentos (Poupatempo)', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Poupatempo, Detran, Fundo Social de Solidariedade, spriomais', 'https://www.instagram.com/p/DadMJz2FpCB/', '🗃️ POUPATEMPO MÓVEL
+(3935355100093386881, 'spriomais', '2026-07-06 13:00:21', NULL, 3, 0, 3, 'Política & Gestão Pública', 'Atendimento móvel de documentos (Poupatempo)', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Poupatempo, Detran, Fundo Social de Solidariedade, spriomais', 'https://www.instagram.com/p/DadMJz2FpCB/', '🗃️ POUPATEMPO MÓVEL
 
 Os moradores de Santa Branca contam, nesta semana, com os serviços da carreta móvel do Poupatempo. A unidade está instalada na Rua Brigadeiro Aguiar, nº 110, no Centro, e atende a população de forma presencial.
 
@@ -53416,7 +53416,7 @@ O Café @3coracoes está aquecendo a Praça do Capivari com uma ativação espec
 Se você está por aqui, passe para tomar uma bebida, aproveitar o clima da serra e viver essa experiência com a gente.
 
 Esperamos você na Praça do Capivari! ❤️☕'),
-(3941106842444709232, 'bandvaletv', '2026-07-14 10:42:51', NULL, -1, 1, 0, 'Segurança Pública', 'Combate a jogos de azar e caça-níqueis', 'Informativo', 'Crítico', 'Indignação & Reclamação', 'Polícia Civil, DEIC, Portal Band Vale', 'https://www.instagram.com/p/Daxn8rVxz1w/', 'A Polícia Civil realizou, nesta segunda-feira (13), a quarta fase da Operação Game Over, que tem como objetivo combater a exploração de jogos de azar em Taubaté.
+(3941106842444709232, 'bandvaletv', '2026-07-14 10:42:51', NULL, -1, 1, 0, 'Segurança Pública', 'Combate a jogos de azar e caça-níqueis', 'Informativo', 'Negativo', 'Indignação & Reclamação', 'Polícia Civil, DEIC, Portal Band Vale', 'https://www.instagram.com/p/Daxn8rVxz1w/', 'A Polícia Civil realizou, nesta segunda-feira (13), a quarta fase da Operação Game Over, que tem como objetivo combater a exploração de jogos de azar em Taubaté.
 
 Segundo a polícia, equipes localizaram uma adega no bairro Parque Três Marias onde funcionava um vídeo bingo, além de duas máquinas caça-níqueis em operação.
 
@@ -53430,7 +53430,7 @@ Os policiais apreenderam uma máquina digital de registro de apostas, um televis
 O novo recorde ocorre durante a atuação de uma intensa massa de ar frio que derrubou as temperaturas em diversas regiões do estado de São Paulo. Na Serra da Mantiqueira, o frio mais intenso também aumenta as condições favoráveis para a formação de geada, principalmente durante as madrugadas e nas primeiras horas da manhã.
 
 📷 Marcelo Bueno'),
-(3941034691505118910, 'bandvaletv', '2026-07-14 08:21:57', NULL, -1, 1, 0, 'Economia & Negócios', 'Crescimento de exportações no setor aeroespacial', 'Informativo', 'Crítico', 'Debate Político & Opinião', 'Portal Band Vale', 'https://www.instagram.com/p/DaxXivip16-/', 'Setor aeroespacial de São José dos Campos impulsiona vendas para o exterior.
+(3941034691505118910, 'bandvaletv', '2026-07-14 08:21:57', NULL, -1, 1, 0, 'Economia & Negócios', 'Crescimento de exportações no setor aeroespacial', 'Informativo', 'Negativo', 'Debate Político & Opinião', 'Portal Band Vale', 'https://www.instagram.com/p/DaxXivip16-/', 'Setor aeroespacial de São José dos Campos impulsiona vendas para o exterior.
 
 📲 Leia mais no portal Band Vale.'),
 (3941053963621093731, 'bandvaletv', '2026-07-14 08:57:46', NULL, -1, 3, 2, 'Defesa Civil & Clima', 'Onda de frio intenso na Serra da Mantiqueira', 'Alerta', 'Neutro', 'Utilidade Pública & Oportunidade', 'Instituto Nacional de Meteorologia, Inmet, Centro Integrado de Informações Agrometeorológicas, Ciiagro, Band Vale', 'https://www.instagram.com/p/Daxb7MGR9Fj/', '🥶 Campos do Jordão amanheceu com frio intenso nesta terça-feira (14). De acordo com o Instituto Nacional de Meteorologia (Inmet), a cidade registrou temperatura mínima de 2,1°C, igualando o recorde de frio registrado em maio deste ano. A marca foi a menor registrada no estado de São Paulo nesta manhã.
@@ -53462,7 +53462,7 @@ Em fevereiro, a sala de espera da internação e visitas também recebeu 40 polt
 (3942731921448397613, 'bandvaletv', '2026-07-16 16:33:06', NULL, 55, 5, 60, 'Esporte', 'Espaço interativo para envio de fotos e vídeos de esportes', 'Descontraído', 'Positivo', 'Orgulho & Celebração', '', 'https://www.instagram.com/p/Da3ZcsGhmst/', 'O “O MEU ESPORTE” É O SEU ESPAÇO! 🏃‍♀️⚽🏀
 
 MANDE UMA FOTO OU UM VÍDEO DE 10 A 20 SEGUNDOS MOSTRANDO O ESPORTE QUE VOCÊ AMA PELO WHATSAPP (12) 99716-8014. SUA HISTÓRIA PODE APARECER NO PROGRAMA!'),
-(3941803528426252056, 'bandvaletv', '2026-07-15 09:47:41', NULL, -1, 4, 3, 'Trânsito & Mobilidade', 'Engavetamento múltiplo na rodovia', 'Alerta', 'Crítico', 'Indignação & Reclamação', 'Via Dutra, Centro de Controle Operacional, CCO, RioSP, Band Vale, GM', 'https://www.instagram.com/p/Da0GWyuOmcY/', 'Um engavetamento envolvendo seis veículos foi registrado na manhã desta quarta-feira (15) na Via Dutra, em São José dos Campos. O acidente aconteceu no km 140,5 da rodovia, no sentido Rio de Janeiro.
+(3941803528426252056, 'bandvaletv', '2026-07-15 09:47:41', NULL, -1, 4, 3, 'Trânsito & Mobilidade', 'Engavetamento múltiplo na rodovia', 'Alerta', 'Negativo', 'Indignação & Reclamação', 'Via Dutra, Centro de Controle Operacional, CCO, RioSP, Band Vale, GM', 'https://www.instagram.com/p/Da0GWyuOmcY/', 'Um engavetamento envolvendo seis veículos foi registrado na manhã desta quarta-feira (15) na Via Dutra, em São José dos Campos. O acidente aconteceu no km 140,5 da rodovia, no sentido Rio de Janeiro.
 
 Segundo o Centro de Controle Operacional (CCO) da concessionária RioSP, a colisão envolveu um caminhão, uma van e quatro veículos de passeio.
 
@@ -53484,7 +53484,7 @@ Além da droga, os policiais apreenderam o veículo utilizado no transporte e um
 📲 Leia mais no Portal Band Vale
 
 📷 TOR'),
-(3941282184618269038, 'bandvaletv', '2026-07-14 16:31:13', NULL, -1, 46, 45, 'Segurança Pública', 'Furto continuado em estabelecimento comercial', 'Informativo', 'Crítico', 'Indignação & Reclamação', 'Polícia Civil, Portal Band Vale, Shibata', 'https://www.instagram.com/p/DayP0Pdv1lu/', 'Uma operadora de caixa de 46 anos foi presa em flagrante pela Polícia Civil na noite desta segunda-feira (13), suspeita de furtar cerca de R$ 140 mil de um mercado onde trabalhava no bairro Campo dos Alemães, em São José dos Campos. A detenção ocorreu após investigações para confirmar as denúncias de subtrações recorrentes que vinham ocorrendo no estabelecimento comercial.
+(3941282184618269038, 'bandvaletv', '2026-07-14 16:31:13', NULL, -1, 46, 45, 'Segurança Pública', 'Furto continuado em estabelecimento comercial', 'Informativo', 'Negativo', 'Indignação & Reclamação', 'Polícia Civil, Portal Band Vale, Shibata', 'https://www.instagram.com/p/DayP0Pdv1lu/', 'Uma operadora de caixa de 46 anos foi presa em flagrante pela Polícia Civil na noite desta segunda-feira (13), suspeita de furtar cerca de R$ 140 mil de um mercado onde trabalhava no bairro Campo dos Alemães, em São José dos Campos. A detenção ocorreu após investigações para confirmar as denúncias de subtrações recorrentes que vinham ocorrendo no estabelecimento comercial.
 
 Ao ser abordada enquanto se dirigia ao seu veículo, a mulher inicialmente negou o crime. No entanto, durante busca pessoal, foram encontrados R$ 500,00 escondidos sob a manga de sua blusa. Após a localização das notas, a funcionária confessou ter retirado o dinheiro do caixa.
 
@@ -53548,7 +53548,7 @@ Após o controle das chamas, o local foi deixado em segurança e ficou sob respo
 📲 Leia mais no Portal Band Vale
 
 📷 Pronto Falei Litoral'),
-(3940554119780809779, 'bandvaletv', '2026-07-13 16:25:48', NULL, 34, 1, 35, 'Cultura & Entretenimento', 'Evento musical e recreativo em bairro', 'Comemorativo', 'Crítico', 'Indignação & Reclamação', 'Stereo Vale, Portal Band Vale', 'https://www.instagram.com/p/DavqRgPvLwz/', 'STEREO VALE LEVA MÚSICA E DIVERSÃO PARA MORADORES DO BAIRRO CIDADE MORUMBI!
+(3940554119780809779, 'bandvaletv', '2026-07-13 16:25:48', NULL, 34, 1, 35, 'Cultura & Entretenimento', 'Evento musical e recreativo em bairro', 'Comemorativo', 'Negativo', 'Indignação & Reclamação', 'Stereo Vale, Portal Band Vale', 'https://www.instagram.com/p/DavqRgPvLwz/', 'STEREO VALE LEVA MÚSICA E DIVERSÃO PARA MORADORES DO BAIRRO CIDADE MORUMBI!
 
 📲Leia mais no Portal Band Vale.'),
 (3940309596316408192, 'bandvaletv', '2026-07-13 08:19:58', NULL, -1, 33, 32, 'Segurança Pública', 'Apreensão de medicamentos proibidos e contrabando', 'Informativo', 'Dividido/Polarizado', 'Indignação & Reclamação', 'Polícia Rodoviária Federal, PRF, Portal Band Vale, Anvisa', 'https://www.instagram.com/p/DauyrOBgJmA/', 'Uma mulher de 32 anos foi presa pela Polícia Rodoviária Federal (PRF) na tarde deste domingo (12) transportando quase 1.500 ampolas de medicamentos de comercialização proibida no Brasil. A abordagem aconteceu no km 126 da Rodovia Presidente Dutra, em Caçapava.
@@ -53901,7 +53901,7 @@ Semana que vem tem mais ao vivo direto de  Campos do Jordão, direto da praça d
 Te esperamos a partir das 12h30, na tela da TV Band Vale. Não perca! 📺
 
 #BandVale #BandCidade #Cruzeiro'),
-(3933378621608248136, 'bandvaletv', '2026-07-03 19:30:44', NULL, 6, 0, 6, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Nenhum', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaWKwQ0E0NI/', 'Grupo Bandeirantes: Somos de Verdade.'),
+(3933378621608248136, 'bandvaletv', '2026-07-03 19:30:44', NULL, 6, 0, 6, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaWKwQ0E0NI/', 'Grupo Bandeirantes: Somos de Verdade.'),
 (3933329806044689213, 'bandvaletv', '2026-07-03 17:13:49', NULL, 138, 2, 140, 'Trânsito & Mobilidade', 'Acidente de trânsito na Via Dutra', 'Informativo', 'Neutro', 'Medo & Alerta de Segurança', 'RioSP, Band Vale', 'https://www.instagram.com/p/DaV_p5xv_M9/', 'Um carro capotou na tarde desta sexta-feira (3) na altura do km 143 da Via Dutra, sentido norte (RJ), em São José dos Campos. 
 
 O Centro de Controle Operacional da RioSP foi acionado às 15h24 para atender a ocorrência.
@@ -53949,7 +53949,7 @@ Durante as buscas na casa do homem preso, os policiais apreenderam a máscara do
 Segundo a Polícia Civil, o acessório era usado pelo comparsa para tentar esconder a identidade durante os roubos. Apesar da estratégia, ele foi identificado, teve a prisão temporária decretada e segue foragido da Justiça.
 
 📷 Polícia Civil'),
-(3932653812716228311, 'bandvaletv', '2026-07-02 19:30:42', NULL, 4, 0, 4, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Nenhum', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaTl857iU7X/', 'Grupo Bandeirantes: Somos de Verdade.'),
+(3932653812716228311, 'bandvaletv', '2026-07-02 19:30:42', NULL, 4, 0, 4, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaTl857iU7X/', 'Grupo Bandeirantes: Somos de Verdade.'),
 (3933183181930868337, 'bandvaletv', '2026-07-03 12:19:57', NULL, -1, 3, 2, 'Cultura & Entretenimento', 'Festival de Inverno de Campos do Jordão', 'Informativo', 'Positivo', 'Utilidade Pública & Oportunidade', 'Osesp, Band Vale, Via Cultural', 'https://www.instagram.com/p/DaVeUPbh65x/', 'O Festival de Inverno de Campos do Jordão chega à sua 56ª edição em 2026 com uma programação que reúne mais de 80 concertos gratuitos entre os dias 4 de julho e 2 de agosto. Sob a direção artística de Roberto Minczuk, o evento ocupará seis palcos em Campos do Jordão e três espaços na capital paulista, consolidando-se como o mais tradicional e importante festival de música clássica da América Latina.
 
 A abertura oficial acontece no sábado (4), às 13h, no Parque Capivari, com concerto ao ar livre da Orquestra Sinfônica do Estado de São Paulo (Osesp), sob regência de seu diretor musical e regente titular, Thierry Fischer.
@@ -53967,14 +53967,14 @@ Segundo a Polícia Civil, o suspeito foi localizado escondido na região do anti
 Levado ao 3º Distrito Policial, o suspeito foi interrogado e confessou a participação nos roubos investigados.
 
 📷 Polícia Civil'),
-(3933061072095225670, 'bandvaletv', '2026-07-03 08:21:25', NULL, -1, 3, 2, 'Cotidiano & Cidade', 'Proibição de pesca magnética', 'Informativo', 'Neutro', 'Nenhum', 'Band Vale', 'https://www.instagram.com/p/DaVCjTyJydG/', 'Pesca magnética pode ser proibida em ponte do Urbanova em São José dos Campos.
+(3933061072095225670, 'bandvaletv', '2026-07-03 08:21:25', NULL, -1, 3, 2, 'Cotidiano & Cidade', 'Proibição de pesca magnética', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Band Vale', 'https://www.instagram.com/p/DaVCjTyJydG/', 'Pesca magnética pode ser proibida em ponte do Urbanova em São José dos Campos.
 
 📲 Leia mais no portal Band Vale'),
-(3932337503662150707, 'bandvaletv', '2026-07-02 08:22:37', NULL, -1, 0, -1, 'Defesa Civil & Clima', 'Captação de água do Rio Paraíba', 'Informativo', 'Neutro', 'Nenhum', 'Sabesp, Band Vale', 'https://www.instagram.com/p/DaSeCAKupQz/', 'Para o sistema Cantareira | Sabesp faz captação de água do Rio Paraíba.
+(3932337503662150707, 'bandvaletv', '2026-07-02 08:22:37', NULL, -1, 0, -1, 'Defesa Civil & Clima', 'Captação de água do Rio Paraíba', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Sabesp, Band Vale', 'https://www.instagram.com/p/DaSeCAKupQz/', 'Para o sistema Cantareira | Sabesp faz captação de água do Rio Paraíba.
 
 📲 Leia mais no portal Band Vale'),
-(3931928954500548772, 'bandvaletv', '2026-07-01 19:30:41', NULL, 5, 1, 6, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Nenhum', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaRBI1HFAik/', 'Grupo Bandeirantes: Somos de Verdade.'),
-(3932356632322296285, 'bandvaletv', '2026-07-02 09:00:10', NULL, -1, 0, -1, 'Trânsito & Mobilidade', 'Acidente na Via Dutra', 'Informativo', 'Neutro', 'Nenhum', 'PRF, Band Vale', 'https://www.instagram.com/p/DaSiYXHuMnd/', 'PRF localiza caminhão que arrastou carro na Dutra em São José dos Campos.
+(3931928954500548772, 'bandvaletv', '2026-07-01 19:30:41', NULL, 5, 1, 6, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaRBI1HFAik/', 'Grupo Bandeirantes: Somos de Verdade.'),
+(3932356632322296285, 'bandvaletv', '2026-07-02 09:00:10', NULL, -1, 0, -1, 'Trânsito & Mobilidade', 'Acidente na Via Dutra', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'PRF, Band Vale', 'https://www.instagram.com/p/DaSiYXHuMnd/', 'PRF localiza caminhão que arrastou carro na Dutra em São José dos Campos.
 
 📲 Leia mais no portal Band Vale'),
 (3931802895585044989, 'bandvaletv', '2026-07-01 14:40:43', NULL, 183, 10, 193, 'Saúde Pública', 'Recuperação de ciclista atropelada', 'Informativo', 'Positivo', 'Orgulho & Celebração', 'Hospital Regional, Band Vale', 'https://www.instagram.com/p/DaQkebmMun9/', 'CICLISTA ATROPELADA POR CARRO NA CONTRAMÃO RECEBE ALTA DO HOSPITAL EM TAUBATÉ. 
@@ -54012,7 +54012,7 @@ O Grupo Chavantes confirmou o recebimento da comunicação para o encerramento d
 (3932312252916728110, 'bandvaletv', '2026-07-02 07:38:22', NULL, -1, 12, 11, 'Trânsito & Mobilidade', 'Acidente na Via Dutra', 'Crítico', 'Negativo', 'Indignação & Reclamação', 'Band Vale', 'https://www.instagram.com/p/DaSYSjlBIEu/', 'Carreta arrasta carro na Via Dutra em São José dos Campos.
 
 📲 Leia mais no portal Band Vale'),
-(3933120650642102113, 'bandvaletv', '2026-07-03 10:20:44', NULL, -1, 0, -1, 'Segurança Pública', 'Prisão de assaltante', 'Informativo', 'Neutro', 'Nenhum', 'Band Vale', 'https://www.instagram.com/p/DaVQGSoRpdh/', 'Polícia prende suspeito de roubar lojas usando máscara do Homem-Aranha em São José dos Campos.
+(3933120650642102113, 'bandvaletv', '2026-07-03 10:20:44', NULL, -1, 0, -1, 'Segurança Pública', 'Prisão de assaltante', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Band Vale', 'https://www.instagram.com/p/DaVQGSoRpdh/', 'Polícia prende suspeito de roubar lojas usando máscara do Homem-Aranha em São José dos Campos.
 
 📲 Leia mais no portal Band Vale.'),
 (3932391606891699646, 'bandvaletv', '2026-07-02 10:07:14', NULL, -1, 1, 0, 'Trânsito & Mobilidade', 'Acidente com caminhão na Rodovia dos Tamoios', 'Crítico', 'Negativo', 'Indignação & Reclamação', 'Artesp, Polícia Militar Rodoviária, Band Vale', 'https://www.instagram.com/p/DaSqVTugd2-/', 'Um caminhão tombou na manhã desta quinta-feira (2) na Rodovia dos Tamoios, na altura do km 80, no trecho da Serra Antiga, sentido litoral. Apesar do acidente, ninguém ficou ferido. O acidente aconteceu em Paraibuna.
@@ -54043,7 +54043,7 @@ A orientação é manter distância e acionar imediatamente a equipe especializa
 
 📷 Fotos: Instituto Argonauta
 📲 Leia mais no Portal Band Vale.'),
-(3931204247286813030, 'bandvaletv', '2026-06-30 19:30:41', NULL, 5, 0, 5, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Nenhum', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaOcW87CZFm/', 'Grupo Bandeirantes: Somos de Verdade.'),
+(3931204247286813030, 'bandvaletv', '2026-06-30 19:30:41', NULL, 5, 0, 5, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaOcW87CZFm/', 'Grupo Bandeirantes: Somos de Verdade.'),
 (3931070737650459654, 'bandvaletv', '2026-06-30 14:22:51', NULL, -1, 1, 0, 'Cotidiano & Cidade', 'Sustentabilidade e inovação urbana', 'Comemorativo', 'Positivo', 'Orgulho & Celebração', '', 'https://www.instagram.com/p/DaN-AIYlqQG/', 'Inovação que gera economia e cuida das pessoas. 🌿
 
 São José dos Campos é referência em sustentabilidade, mostrando que tecnologia e preservação ambiental podem caminhar lado a lado.
@@ -54090,7 +54090,7 @@ O veículo será encaminhado à Polícia Civil de Taubaté, onde passará por pe
 📲 Leia mais no Portal Band Vale
 
 📷 PRF'),
-(3931682648824211350, 'bandvaletv', '2026-07-01 10:57:47', NULL, -1, 0, -1, 'Economia & Negócios', 'Impacto do preço do diesel', 'Informativo', 'Neutro', 'Nenhum', '', 'https://www.instagram.com/p/DaQJInEu-eW/', 'Nas estradas | Preço do diesel impacta vida de caminhoneiros e economia.
+(3931682648824211350, 'bandvaletv', '2026-07-01 10:57:47', NULL, -1, 0, -1, 'Economia & Negócios', 'Impacto do preço do diesel', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', '', 'https://www.instagram.com/p/DaQJInEu-eW/', 'Nas estradas | Preço do diesel impacta vida de caminhoneiros e economia.
 
 📲 Leia mais no portal Band Vale'),
 (3931628321254363918, 'bandvaletv', '2026-07-01 08:54:03', NULL, 1255, 115, 1370, 'Educação & Tecnologia', 'Violência escolar e segurança', 'Crítico', 'Negativo', 'Indignação & Reclamação', 'TV Globo', 'https://www.instagram.com/p/DaP8yClO1MO/', 'Professora encontra vidro em água | Alunos são suspensos em escola de São José dos Campos.
@@ -54133,7 +54133,7 @@ Até o momento, a causa do acidente não foi divulgada. A Polícia Militar isolo
 (3931772163852963618, 'bandvaletv', '2026-07-01 13:39:02', NULL, -1, 3, 2, 'Defesa Civil & Clima', 'Resgate de pinguins', 'Informativo', 'Positivo', 'Orgulho & Celebração', 'Instituto Argonauta', 'https://www.instagram.com/p/DaQdfOcOY8i/', 'Eles vem para o litoral no inverno | Instituto Argonauta em Ubatuba resgate pinguins de Magalhães 🐧
 
 📲 Leia mais no Portal Band Vale'),
-(3931219296793774429, 'bandvaletv', '2026-06-30 20:00:43', NULL, 17, 1, 18, 'Cultura & Entretenimento', 'Programação MasterChef', 'Descontraído', 'Neutro', 'Nenhum', 'Band Vale', 'https://www.instagram.com/p/DaOfx83jcld/', 'Toda terça-feira, às 22h30, você tem um encontro marcado com o MasterChef Brasil! 👩🍳🔥
+(3931219296793774429, 'bandvaletv', '2026-06-30 20:00:43', NULL, 17, 1, 18, 'Cultura & Entretenimento', 'Programação MasterChef', 'Descontraído', 'Neutro', 'Utilidade Pública & Oportunidade', 'Band Vale', 'https://www.instagram.com/p/DaOfx83jcld/', 'Toda terça-feira, às 22h30, você tem um encontro marcado com o MasterChef Brasil! 👩🍳🔥
 
 Novas provas, novos participantes e desafios de tirar o fôlego na tela da TV Band Vale.
 
@@ -54156,7 +54156,7 @@ A Rodoviário Oceano manifesta seus mais sinceros sentimentos aos familiares e a
 📲 Leia mais no Portal Band Vale 
 
 📷 Jornal de olho em Guará'),
-(3932612433660222947, 'bandvaletv', '2026-07-02 17:25:56', NULL, 53, 4, 57, 'Defesa Civil & Clima', 'Estudo de emissões de metano', 'Informativo', 'Neutro', 'Nenhum', 'Band Vale', 'https://www.instagram.com/p/DaTciwrmh3jkPtbFNu64PX_EcM7ktQNCo_Q9o80/', 'Um gás invisível pode mudar a forma como as cidades enfrentam a crise climática.
+(3932612433660222947, 'bandvaletv', '2026-07-02 17:25:56', NULL, 53, 4, 57, 'Defesa Civil & Clima', 'Estudo de emissões de metano', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Band Vale', 'https://www.instagram.com/p/DaTciwrmh3jkPtbFNu64PX_EcM7ktQNCo_Q9o80/', 'Um gás invisível pode mudar a forma como as cidades enfrentam a crise climática.
 
 Na coluna desta semana para a @bandvaletv , falo sobre como medir emissões reais pode transformar a gestão climática das cidades.
 
@@ -54166,13 +54166,13 @@ Arraste para o lado e leia alguns trechos.
 
 Coluna completa na BandVale:
 www.band.com.br/band-vale/colunistas'),
-(3932491450906140017, 'bandvaletv', '2026-07-02 13:29:18', NULL, -1, 0, -1, 'Saúde Pública', 'Gestão hospitalar em Taubaté', 'Informativo', 'Neutro', 'Nenhum', 'Hospital Municipal Universitário de Taubaté, Chavantes', 'https://www.instagram.com/p/DaTBCOthV1x/', 'Hospital Municipal Universitário de Taubaté | Prefeitura não vai renovar contrato com a Chavantes.
+(3932491450906140017, 'bandvaletv', '2026-07-02 13:29:18', NULL, -1, 0, -1, 'Saúde Pública', 'Gestão hospitalar em Taubaté', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Hospital Municipal Universitário de Taubaté, Chavantes', 'https://www.instagram.com/p/DaTBCOthV1x/', 'Hospital Municipal Universitário de Taubaté | Prefeitura não vai renovar contrato com a Chavantes.
 
 📲 Leia mais no portal Band Vale'),
 (3930904969178938573, 'bandvaletv', '2026-06-30 08:55:01', NULL, -1, 15, 14, 'Saúde Pública', 'Hospital veterinário 24h', 'Informativo', 'Negativo', 'Indignação & Reclamação', 'Prefeitura de São José dos Campos', 'https://www.instagram.com/p/DaNYT4dunzN/', 'Serviço gratuito | São José dos Campos terá hospital veterinário 24 horas.
 
 📲 Leia mais no portal Band Vale'),
-(3930479390438135262, 'bandvaletv', '2026-06-29 19:30:41', NULL, 10, 0, 10, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Nenhum', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaL3i5YDxXe/', 'Grupo Bandeirantes: Somos de Verdade'),
+(3930479390438135262, 'bandvaletv', '2026-06-29 19:30:41', NULL, 10, 0, 10, 'Cotidiano & Cidade', 'Institucional do Grupo Bandeirantes', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Grupo Bandeirantes', 'https://www.instagram.com/p/DaL3i5YDxXe/', 'Grupo Bandeirantes: Somos de Verdade'),
 (3930940893078891577, 'bandvaletv', '2026-06-30 10:04:56', NULL, -1, 2, 1, 'Segurança Pública', 'Prisão por tráfico de drogas', 'Informativo', 'Positivo', 'Orgulho & Celebração', 'BAEP, Polícia Militar', 'https://www.instagram.com/p/DaNgepNBiw5/', 'Um homem foi preso por tráfico de drogas na noite desta segunda-feira (29), no bairro São Judas Tadeu, em São José dos Campos.
 
 Segundo o 3º Batalhão de Ações Especiais de Polícia (BAEP), a prisão aconteceu por volta das 18h55 durante uma ação realizada na região. De acordo com a corporação, o suspeito foi flagrado realizando a venda e o armazenamento de entorpecentes.
@@ -54186,8 +54186,8 @@ O homem foi encaminhado à Central de Flagrantes de São José dos Campos, onde 
 📲 Leia mais no Portal Band Vale
 
 📷 Polícia Militar'),
-(3930196731554859785, 'bandvaletv', '2026-06-29 09:31:00', NULL, -1, 0, -1, 'Cultura & Entretenimento', 'Festa de São Pedro', 'Informativo', 'Neutro', 'Nenhum', '', 'https://www.instagram.com/p/DaK3RqxuosJ/', 'Fé e tradição no mar | Em Ubatuba, devotos celebram São Pedro, padroeiro dos pescadores'),
-(3930967407941720653, 'bandvaletv', '2026-06-30 10:57:36', NULL, -1, 0, -1, 'Política & Gestão Pública', 'Eleição da Mesa Diretora da Câmara', 'Informativo', 'Neutro', 'Nenhum', 'Câmara Municipal de São José dos Campos, Tribunal de Justiça de São Paulo, STF', 'https://www.instagram.com/p/DaNmgfGARpN/', 'A Câmara Municipal de São José dos Campos apresentou um recurso ao Tribunal de Justiça de São Paulo para tentar derrubar a liminar que suspendeu a eleição da Mesa Diretora para o biênio 2027-2028, marcada para esta quarta-feira (1º).
+(3930196731554859785, 'bandvaletv', '2026-06-29 09:31:00', NULL, -1, 0, -1, 'Cultura & Entretenimento', 'Festa de São Pedro', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', '', 'https://www.instagram.com/p/DaK3RqxuosJ/', 'Fé e tradição no mar | Em Ubatuba, devotos celebram São Pedro, padroeiro dos pescadores'),
+(3930967407941720653, 'bandvaletv', '2026-06-30 10:57:36', NULL, -1, 0, -1, 'Política & Gestão Pública', 'Eleição da Mesa Diretora da Câmara', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Câmara Municipal de São José dos Campos, Tribunal de Justiça de São Paulo, STF', 'https://www.instagram.com/p/DaNmgfGARpN/', 'A Câmara Municipal de São José dos Campos apresentou um recurso ao Tribunal de Justiça de São Paulo para tentar derrubar a liminar que suspendeu a eleição da Mesa Diretora para o biênio 2027-2028, marcada para esta quarta-feira (1º).
 
 O agravo de instrumento foi protocolado na segunda-feira (29), após a Justiça atender ao pedido de quatro vereadores e determinar a suspensão da sessão extraordinária destinada à escolha da nova Mesa Diretora.
 
@@ -54207,7 +54207,7 @@ A celebração também foi marcada por momentos simbólicos, como a oração jun
 📲 Leia mais no Portal Band Vale
 
 📷 Vatican News'),
-(3930471828454962537, 'bandvaletv', '2026-06-29 18:32:58', NULL, 129, 2, 131, 'Defesa Civil & Clima', 'Fenômeno astronômico Lua de Morango', 'Informativo', 'Positivo', 'Nenhum', 'Univap, Inmet', 'https://www.instagram.com/p/DaL102uvPVp/', '🌕A lua cheia desta segunda-feira (29), a primeira do inverno, é popularmente chamada de Lua de Morango no Hemisfério Norte. 
+(3930471828454962537, 'bandvaletv', '2026-06-29 18:32:58', NULL, 129, 2, 131, 'Defesa Civil & Clima', 'Fenômeno astronômico Lua de Morango', 'Informativo', 'Positivo', 'Utilidade Pública & Oportunidade', 'Univap, Inmet', 'https://www.instagram.com/p/DaL102uvPVp/', '🌕A lua cheia desta segunda-feira (29), a primeira do inverno, é popularmente chamada de Lua de Morango no Hemisfério Norte. 
 
 🍓Mas o motivo, como se pode imaginar, não é por apresentar uma coloração rosada ou avermelhada, e sim porque marca o início da colheita de frutas silvestres no norte do planeta.
 
@@ -54220,7 +54220,7 @@ O Prof. de Física e Astronomia da Univap, Dr. Alexandre Soares, explica que tra
 Será possível ver a lua cheia a olho nu desde que o céu não esteja nublado. No Hemisfério Sul, devido ao inverno, a lua estará em sue ponto mais distante da Terra, e ligeiramente menor que as outras luas cheias, apesar de a diferença não poder ser notada a olho nu.
 
 📲Leia mais no Portal Band Vale.'),
-(3930209932766027689, 'bandvaletv', '2026-06-29 09:55:56', NULL, -1, 0, -1, 'Cultura & Entretenimento', 'História do rádio local', 'Informativo', 'Neutro', 'Nenhum', '', 'https://www.instagram.com/p/DaK6RxXOx-p/', 'A primeira voz da cidade | Livro conta a história da rádio pioneira de São José dos Campos.'),
+(3930209932766027689, 'bandvaletv', '2026-06-29 09:55:56', NULL, -1, 0, -1, 'Cultura & Entretenimento', 'História do rádio local', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', '', 'https://www.instagram.com/p/DaK6RxXOx-p/', 'A primeira voz da cidade | Livro conta a história da rádio pioneira de São José dos Campos.'),
 (3930269581863796701, 'bandvaletv', '2026-06-29 11:53:07', NULL, -1, 19, 18, 'Segurança Pública', 'Ataque de cão em praça pública', 'Informativo', 'Negativo', 'Indignação & Reclamação', 'Corpo de Bombeiros, Guarda Civil Municipal, Prefeitura de São José dos Campos', 'https://www.instagram.com/p/DaLH1x6g7_d/', 'Um cão de grande porte matou outro animal e mobilizou equipes do Corpo de Bombeiros e da Guarda Civil Municipal (GCM) na noite deste sábado (27), na Praça Francisco Escobar, no bairro Monte Castelo, em São José dos Campos.
 
 Segundo o Corpo de Bombeiros, a corporação foi acionada após a informação de que um cão agressivo estava solto em via pública. No local, os bombeiros constataram que o animal havia atacado e matado outro cão, gerando risco às pessoas que circulavam pela praça.
@@ -61964,7 +61964,7 @@ As opiniões desta coluna não necessariamente representam as posições do Aqui
 O Aqui Vale explica como o consumo de morango pode estar relacionado à redução de picos de açúcar no sangue, à pressão arterial e à proteção das células contra os danos dos radicais livres. A fruta também é uma importante fonte de vitamina C e pode fazer parte de uma alimentação equilibrada. Confira!
 
 📹 Aqui Vale'),
-(3960710361913605401, 'aquivaleoficial', '2026-08-10 11:52:44', NULL, 6120, 526, 6646, 'Trânsito & Mobilidade', 'Acidente fatal na Rodovia Dutra', 'Alerta', 'Negativo', 'Medio & Alerta de Segurança', 'Igreja Evangélica Pentecostal Voz da Profecia, Cemitério Gethsemani', 'https://www.instagram.com/p/Db3RRbkEb0Z/', 'Momentos antes do grave acidente que vitimou José Ricardo Kern, 60 anos, e sua filha Amanda da Silva Kern, de 32 anos ,na Via Dutra no domingo (9), eles gravaram um vídeo nas redes sociais de Amanda sobre o Dia dos Pais. 
+(3960710361913605401, 'aquivaleoficial', '2026-08-10 11:52:44', NULL, 6120, 526, 6646, 'Trânsito & Mobilidade', 'Acidente fatal na Rodovia Dutra', 'Alerta', 'Negativo', 'Medo & Alerta de Segurança', 'Igreja Evangélica Pentecostal Voz da Profecia, Cemitério Gethsemani', 'https://www.instagram.com/p/Db3RRbkEb0Z/', 'Momentos antes do grave acidente que vitimou José Ricardo Kern, 60 anos, e sua filha Amanda da Silva Kern, de 32 anos ,na Via Dutra no domingo (9), eles gravaram um vídeo nas redes sociais de Amanda sobre o Dia dos Pais. 
 
 A publicação mostra a filha fazendo perguntas para o pai, que era pastor da Igreja Evangélica Pentecostal Voz da Profecia, em São José dos Campos. 
 
@@ -61997,7 +61997,7 @@ A Zona Leste é a segunda região mais populosa da cidade, atrás apenas da Zona
 Leia a matéria completa no site.
 
 📷 Reprodução'),
-(3960791515480117340, 'aquivaleoficial', '2026-08-10 15:00:23', NULL, 87, 0, 87, 'Defesa Civil & Clima', 'Interdição de rodovia após queda de postes e barranco', 'Alerta', 'Neutro', 'Medio & Alerta de Segurança', 'DER', 'https://www.instagram.com/p/Db3juXtktBc/', 'Na madrugada desta segunda-feira (10), a Rodovia Rio-Santos precisou ser interditada após a queda de quatro postes e uma árvore no trecho de São Sebastião, no Litoral Norte, após um barranco ceder devido às chuvas e atingir a pista no km 156.
+(3960791515480117340, 'aquivaleoficial', '2026-08-10 15:00:23', NULL, 87, 0, 87, 'Defesa Civil & Clima', 'Interdição de rodovia após queda de postes e barranco', 'Alerta', 'Neutro', 'Medo & Alerta de Segurança', 'DER', 'https://www.instagram.com/p/Db3juXtktBc/', 'Na madrugada desta segunda-feira (10), a Rodovia Rio-Santos precisou ser interditada após a queda de quatro postes e uma árvore no trecho de São Sebastião, no Litoral Norte, após um barranco ceder devido às chuvas e atingir a pista no km 156.
 
 O DER informou que houve interdição total da rodovia, com isolamento e sinalização do local. Na manhã desta segunda, a interdição era parcial, com tráfego fluindo em sistema ''pare e siga''.
 
@@ -62037,7 +62037,7 @@ Ele explica que está simulando um pedido na mesma loja dentro do app e que os v
 Leia a matéria completa no site. Link na bio. 
 
 Vídeo: @brunodiniiz_'),
-(3960692076191144664, 'aquivaleoficial', '2026-08-10 12:00:23', NULL, 160, 4, 164, 'Trânsito & Mobilidade', 'Acidente fatal entre motocicletas', 'Alerta', 'Negativo', 'Medio & Alerta de Segurança', 'Polícia Militar, Santa Casa de Jacareí', 'https://www.instagram.com/p/Db3NHVqE9rY/', 'Uma mulher de 38 anos morreu e um motociclista de 29 anos ficou gravemente ferido após um acidente envolvendo duas motocicletas na noite deste domingo (9), em Jacareí. A ocorrência foi registrada por volta das 22h, na avenida Professora Olinda de Almeida Mercadante, no Jardim Maria Amélia.
+(3960692076191144664, 'aquivaleoficial', '2026-08-10 12:00:23', NULL, 160, 4, 164, 'Trânsito & Mobilidade', 'Acidente fatal entre motocicletas', 'Alerta', 'Negativo', 'Medo & Alerta de Segurança', 'Polícia Militar, Santa Casa de Jacareí', 'https://www.instagram.com/p/Db3NHVqE9rY/', 'Uma mulher de 38 anos morreu e um motociclista de 29 anos ficou gravemente ferido após um acidente envolvendo duas motocicletas na noite deste domingo (9), em Jacareí. A ocorrência foi registrada por volta das 22h, na avenida Professora Olinda de Almeida Mercadante, no Jardim Maria Amélia.
 
 Segundo o boletim de ocorrência, as duas motos colidiram frontalmente. Quando a Polícia Militar chegou ao endereço, equipes de emergência já prestavam atendimento às vítimas. Sanara Fernanda de Oliveira Rosa Xavier recebeu manobras de reanimação, mas não resistiu aos ferimentos e morreu ainda no local.
 
@@ -76409,7 +76409,7 @@ Antes de viajar, revise o veículo, confira pneus, freios, combustível e evite 
 📲 Leia a matéria completa no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #carvalhopinto #ayrtonsenna #saojosedoscampos #cacapava #taubate #litoralnorte #valedoparaiba #transito #feriado'),
-(3935534290833603498, 'vale360news', '2026-07-06 18:11:08', NULL, 73, 1, 74, 'Seguridad Pública', 'Recuperação de caminhões furtados', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', '5º Distrito Policial de São José dos Campos, PRF, CSI, Polícia Militar Rodoviária, Polícia Civil', 'https://www.instagram.com/p/Dad05YOgXuq/', 'Os dois caminhões furtados no bairro Boa Vista, na Zona Norte de São José dos Campos, foram recuperados intactos.
+(3935534290833603498, 'vale360news', '2026-07-06 18:11:08', NULL, 73, 1, 74, 'Segurança Pública', 'Recuperação de caminhões furtados', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', '5º Distrito Policial de São José dos Campos, PRF, CSI, Polícia Militar Rodoviária, Polícia Civil', 'https://www.instagram.com/p/Dad05YOgXuq/', 'Os dois caminhões furtados no bairro Boa Vista, na Zona Norte de São José dos Campos, foram recuperados intactos.
 
 Segundo a atualização da investigação, um veículo foi encontrado em Lorena, no Vale do Paraíba, e o outro em Arco Verde, em Minas Gerais.
 
@@ -76440,7 +76440,7 @@ Motoristas devem ter atenção nas primeiras horas da manhã, principalmente em 
 📲 Veja a previsão completa no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #previsaodotempo #valedoparaiba #sjc #saojosedoscampos #litoralnorte #camposdojordao #caraguatatuba #clima #inpe'),
-(3935222842732697154, 'vale360news', '2026-07-06 07:52:21', NULL, 48, 0, 48, 'Seguridad Pública', 'Homicídio de adolescente', 'Alerta', 'Neutro', 'Medo & Alerta de Segurança', 'Polícia Militar, Polícia Civil', 'https://www.instagram.com/p/DacuFNlFdZC/', 'Um adolescente de 17 anos foi encontrado morto a tiros na noite de domingo (05/07), em Aparecida.
+(3935222842732697154, 'vale360news', '2026-07-06 07:52:21', NULL, 48, 0, 48, 'Segurança Pública', 'Homicídio de adolescente', 'Alerta', 'Neutro', 'Medo & Alerta de Segurança', 'Polícia Militar, Polícia Civil', 'https://www.instagram.com/p/DacuFNlFdZC/', 'Um adolescente de 17 anos foi encontrado morto a tiros na noite de domingo (05/07), em Aparecida.
 
 O caso ocorreu perto da linha férrea na Avenida Padroeira do Brasil, na região central da cidade.
 
@@ -76473,7 +76473,7 @@ A prova objetiva está marcada para 26 de julho. Para agente comunitário de sa�
 📲 Veja os detalhes no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #camposdojordao #serradamantiqueira #empregos #processoseletivo #saude #agentecomunitariodesaude #agentedeendemias #vagas'),
-(3935201288330267302, 'vale360news', '2026-07-06 07:09:31', NULL, 196, 5, 201, 'Seguridad Pública', 'Homicídio decorrente de discussão de trânsito', 'Alerta', 'Negativo', 'Indignação & Reclamação', 'Polícia Civil, Polícia Militar', 'https://www.instagram.com/p/DacpLjelcqm/', 'Uma discussão no trânsito terminou em morte na noite de domingo (05/07), em Jacareí.
+(3935201288330267302, 'vale360news', '2026-07-06 07:09:31', NULL, 196, 5, 201, 'Segurança Pública', 'Homicídio decorrente de discussão de trânsito', 'Alerta', 'Negativo', 'Indignação & Reclamação', 'Polícia Civil, Polícia Militar', 'https://www.instagram.com/p/DacpLjelcqm/', 'Uma discussão no trânsito terminou em morte na noite de domingo (05/07), em Jacareí.
 
 A vítima foi identificada como Weverton Innocente, de 45 anos. Ele estava em uma motocicleta e morreu após ser atingido por uma VW Amarok prata na Rua Anésia Ruston, no Jardim das Indústrias.
 
@@ -76486,7 +76486,7 @@ O investigado negou ter cometido homicídio. A versão dele será confrontada co
 📲 Leia os detalhes no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #jacarei #jardimdasindustrias #transito #policiacivil #policiamilitar #homicidio #valedoparaiba'),
-(3935211700287242724, 'vale360news', '2026-07-06 07:30:12', NULL, 88, 1, 89, 'Seguridad Pública', 'Homicídio consumado', 'Alerta', 'Neutro', 'Medo & Alerta de Segurança', 'Samu, DIG de Jacareí, Polícia Civil', 'https://www.instagram.com/p/DacrjEXlQHk/', 'Um homem foi encontrado morto dentro de casa em Jacareí, na manhã de domingo (05/07), no Parque dos Príncipes.
+(3935211700287242724, 'vale360news', '2026-07-06 07:30:12', NULL, 88, 1, 89, 'Segurança Pública', 'Homicídio consumado', 'Alerta', 'Neutro', 'Medo & Alerta de Segurança', 'Samu, DIG de Jacareí, Polícia Civil', 'https://www.instagram.com/p/DacrjEXlQHk/', 'Um homem foi encontrado morto dentro de casa em Jacareí, na manhã de domingo (05/07), no Parque dos Príncipes.
 
 A vítima foi identificada como Gilberto Messias de Souza, de 54 anos.
 
@@ -76503,7 +76503,7 @@ O caso foi registrado como homicídio consumado de autoria desconhecida e será 
 📲 Leia os detalhes no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #jacarei #parquedosprincipes #policiacivil #dig #homicidio #valedoparaiba'),
-(3933042526827952862, 'vale360news', '2026-07-03 07:40:27', NULL, 21, 0, 21, 'Seguridad Pública', 'Apreensão de arma de fogo', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Polícia Militar, Polícia Civil, Justiça', 'https://www.instagram.com/p/DaU-VcKFbre/', 'A Polícia Militar prendeu um homem com uma pistola .22 em Jacareí, no bairro Veraneio Ijal.
+(3933042526827952862, 'vale360news', '2026-07-03 07:40:27', NULL, 21, 0, 21, 'Segurança Pública', 'Apreensão de arma de fogo', 'Informativo', 'Neutro', 'Utilidade Pública & Oportunidade', 'Polícia Militar, Polícia Civil, Justiça', 'https://www.instagram.com/p/DaU-VcKFbre/', 'A Polícia Militar prendeu um homem com uma pistola .22 em Jacareí, no bairro Veraneio Ijal.
 
 Segundo o boletim de ocorrência, os policiais receberam informações de que uma arma estaria sendo anunciada para venda em grupos de WhatsApp.
 
@@ -76583,7 +76583,7 @@ Importante: a mudança não elimina os dias letivos nem a carga horária mínima
 📲 Entenda os impactos no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #educacao #calendarioescolar #copafeminina2027 #valedoparaiba #saojosedoscampos #taubate #jacarei #litoralnorte #serradamantiqueira'),
-(3933034394869425718, 'vale360news', '2026-07-03 07:24:17', NULL, 350, 6, 356, 'Seguridad Pública', 'Encontro de cadáver', 'Alerta', 'Negativo', 'Medo & Alerta de Segurança', 'Polícia Militar, Polícia Científica, IML, Polícia Civil', 'https://www.instagram.com/p/DaU8fGrleY2/', 'Um corpo em decomposição foi encontrado às margens da Via Dutra, em Lorena, na noite de quinta-feira (02/07).
+(3933034394869425718, 'vale360news', '2026-07-03 07:24:17', NULL, 350, 6, 356, 'Segurança Pública', 'Encontro de cadáver', 'Alerta', 'Negativo', 'Medo & Alerta de Segurança', 'Polícia Militar, Polícia Científica, IML, Polícia Civil', 'https://www.instagram.com/p/DaU8fGrleY2/', 'Um corpo em decomposição foi encontrado às margens da Via Dutra, em Lorena, na noite de quinta-feira (02/07).
 
 Segundo o boletim de ocorrência, a Polícia Militar recebeu informações sobre mau cheiro perto da rodovia e foi até o trecho indicado.
 
@@ -76596,7 +76596,7 @@ O caso foi registrado pela Polícia Civil como morte suspeita e encontro de cad�
 📲 Acompanhe as atualizações no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #lorena #dutra #viadutra #policiacivil #policiamilitar #valedoparaiba'),
-(3934122229570620900, 'vale360news', '2026-07-04 19:26:47', NULL, 1544, 46, 1590, 'Seguridad Pública', 'Furto de caminhões', 'Alerta', 'Negativo', 'Indignação & Reclamação', 'Vale 360 News, Polícia Civil, Polícia Militar', 'https://www.instagram.com/p/DaYz1Lshk3k/', 'Dois caminhões foram furtados no bairro Boa Vista, na Zona Norte de São José dos Campos, na madrugada deste sábado (04/07).
+(3934122229570620900, 'vale360news', '2026-07-04 19:26:47', NULL, 1544, 46, 1590, 'Segurança Pública', 'Furto de caminhões', 'Alerta', 'Negativo', 'Indignação & Reclamação', 'Vale 360 News, Polícia Civil, Polícia Militar', 'https://www.instagram.com/p/DaYz1Lshk3k/', 'Dois caminhões foram furtados no bairro Boa Vista, na Zona Norte de São José dos Campos, na madrugada deste sábado (04/07).
 
 Câmeras de segurança registraram a ação por volta de 0h30.
 
@@ -76672,7 +76672,7 @@ A mudança ainda exige comunicação clara sobre prazo, transição e orientaç�
 
 #vale360news #vale360 #360 #360news #taubate #hospitalregional #sus #iamspe #saudepublica #felicioramuth #sergiovictor #valedoparaiba'),
 (3933117132623160380, 'vale360news', '2026-07-03 10:09:06', NULL, 47, 4, 51, 'Política & Gestão Pública', 'Anúncio de investimentos em infraestrutura e saúde', 'Informativo', 'Dividido/Polarizado', 'Debate Político & Opinião', 'Governo de SP', 'https://www.instagram.com/p/DaVPTGOAaQ8/', 'Governo de SP faz anúncio de investimentos para as áreas de infraestrutura e saúde em Taubaté.  O prefeito Sérgio Victor recebeu o vice-governador Felício Ramuth. Investimentos são de 11,5 milhões.'),
-(3934580882694117983, 'vale360news', '2026-07-05 10:37:25', NULL, 783, 31, 814, 'Seguridad Pública', 'Duplo homicídio em adega', 'Alerta', 'Negativo', 'Medo & Alerta de Segurança', 'Polícia Científica, Polícia Civil', 'https://www.instagram.com/p/DaacHdtBppf/', 'Dois homens foram mortos a tiros em uma adega de Ubatuba, na Rodovia Oswaldo Cruz, no bairro Ipiranguinha, na noite de sábado (04/07).
+(3934580882694117983, 'vale360news', '2026-07-05 10:37:25', NULL, 783, 31, 814, 'Segurança Pública', 'Duplo homicídio em adega', 'Alerta', 'Negativo', 'Medo & Alerta de Segurança', 'Polícia Científica, Polícia Civil', 'https://www.instagram.com/p/DaacHdtBppf/', 'Dois homens foram mortos a tiros em uma adega de Ubatuba, na Rodovia Oswaldo Cruz, no bairro Ipiranguinha, na noite de sábado (04/07).
 
 As vítimas foram identificadas no boletim como Leonardo da Silva Rodrigues, de 24 anos, e Carlos Eduardo Praxedes, de 19 anos.
 
@@ -76708,7 +76708,7 @@ Agora, os pontos a acompanhar são projeto executivo, licenciamento, contrato co
 📲 Leia a análise no Vale 360 News.
 
 #vale360news #vale360 #360 #360news #carvalhopinto #taubate #aparecida #pindamonhangaba #valedoparaiba #riosantos #tremintercidades #mobilidade #infraestrutura'),
-(3933966779060422490, 'vale360news', '2026-07-04 14:16:46', NULL, 61, 0, 61, 'Seguridad Pública', 'Furto de sino em igreja', 'Alerta', 'Neutro', 'Indignação & Reclamação', 'Comunidade Nossa Senhora das Graças, Polícia Civil', 'https://www.instagram.com/p/DaYQfFIFYda/', 'A Polícia Civil investiga o furto do sino principal da Comunidade Nossa Senhora das Graças, em Tremembé.
+(3933966779060422490, 'vale360news', '2026-07-04 14:16:46', NULL, 61, 0, 61, 'Segurança Pública', 'Furto de sino em igreja', 'Alerta', 'Neutro', 'Indignação & Reclamação', 'Comunidade Nossa Senhora das Graças, Polícia Civil', 'https://www.instagram.com/p/DaYQfFIFYda/', 'A Polícia Civil investiga o furto do sino principal da Comunidade Nossa Senhora das Graças, em Tremembé.
 
 O crime ocorreu na noite de quinta-feira (02/07), no Parque Residencial Flor do Vale.
 
@@ -80205,7 +80205,7 @@ O cantor e compositor, que há décadas carrega a coroa de “Rei”, confirmou 
 Foto: Divulgação 
 
 Leia mais em www.ovale.com.br ou clique no link da bio. Link também nos stories'),
-(3977978096448318976, 'jornalovale', '2026-09-03 07:39:24', NULL, 1213, 16, 1229, 'SaÃºde PÃºblica', 'Estrutura Hospitalar & VacinaÃ§Ã£o', 'Informativo', 'Positivo', 'PrestaÃ§Ã£o de Contas & Cidadania', 'Hospital Municipal', 'https://www.instagram.com/p/Dc0ngCjFi4A/', 'Cerca de 65 polvos de crochê foram doados à UTI neonatal do Hospital Municipal de São José dos Campos pelo Projeto Octo São Paulo. As peças foram entregues na segunda-feira (31) e serão utilizadas por recém-nascidos durante o período de internação.
+(3977978096448318976, 'jornalovale', '2026-09-03 07:39:24', NULL, 1213, 16, 1229, 'Saúde Pública', 'Estrutura Hospitalar & VacinaÃ§Ã£o', 'Informativo', 'Positivo', 'Debate Político & Opinião', 'Hospital Municipal', 'https://www.instagram.com/p/Dc0ngCjFi4A/', 'Cerca de 65 polvos de crochê foram doados à UTI neonatal do Hospital Municipal de São José dos Campos pelo Projeto Octo São Paulo. As peças foram entregues na segunda-feira (31) e serão utilizadas por recém-nascidos durante o período de internação.
 
 A proposta é oferecer algo para que os recém-nascidos possam segurar, reduzindo a possibilidade de que puxem fios, sondas e cateteres durante o tratamento. Os tentáculos são desenvolvidos para proporcionar aos bebês uma sensação de aconchego semelhante à vivenciada no útero.
 
@@ -83078,7 +83078,7 @@ O vigilante reagiu e entrou em luta corporal com um dos assaltantes, que estava 
 Imagens: Rafael Rodrigues
 
 Leia mais em www.ovale.com.br ou clique no link da bio. Link também nos stories'),
-(3966735576978551425, 'jornalovale', '2026-08-18 19:22:35', NULL, 15, 0, 15, 'TrÃ¢nsito & Mobilidade', 'TrÃ¢nsito e OcorrÃªncias em Rodovias', 'Informativo', 'Neutro', 'PrestaÃ§Ã£o de Contas & Cidadania', 'Geral SJC', 'https://www.instagram.com/p/DcMrP2XtfKB/', '#conteúdodemarca
+(3966735576978551425, 'jornalovale', '2026-08-18 19:22:35', NULL, 15, 0, 15, 'Trânsito & Mobilidade', 'TrÃ¢nsito e OcorrÃªncias em Rodovias', 'Informativo', 'Neutro', 'Debate Político & Opinião', 'Geral SJC', 'https://www.instagram.com/p/DcMrP2XtfKB/', '#conteúdodemarca
 
 Em progresso! A Prefeitura de Jacareí avança em ritmo acelerado com a obra de duplicação da Avenida Malek Assad. Os trabalhos da primeira fase compreendem o trecho entre a rotatória da Avenida Roberto Lopes Leal até a rotatória da Avenida Mário Covas, com o objetivo de gerar melhorias na segurança e na qualidade viária.
 
@@ -85224,7 +85224,7 @@ A previsão aponta que o período mais crítico será registrado ao longo da sex
 Foto: Pixabay
 
 Leia mais em www.ovale.com.br ou clique no link da bio. Link também nos stories'),
-(3958045391591866590, 'jornalovale', '2026-08-07 05:00:03', NULL, 64, 2, 66, 'Eduração & Tecnologia', 'Escolas da RMVale entre as melhores do país no Ideb', 'Informativo', 'Positivo', 'Orgulho & Celebração', 'INPE, INEP, Cotel', 'https://www.instagram.com/p/DbtzVAitIDe/', 'A RMVale (Região Metropolitana do Vale do Paraíba e Litoral Norte) tem 13 escolas entre as 500 mais bem avaliadas do país no ensino médio, segundo dados do Ideb (Índice de Desenvolvimento da Educação Básica) 2025, divulgado na quarta-feira (5) pelo Inep (Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira).
+(3958045391591866590, 'jornalovale', '2026-08-07 05:00:03', NULL, 64, 2, 66, 'Educação & Tecnologia', 'Escolas da RMVale entre as melhores do país no Ideb', 'Informativo', 'Positivo', 'Orgulho & Celebração', 'INPE, INEP, Cotel', 'https://www.instagram.com/p/DbtzVAitIDe/', 'A RMVale (Região Metropolitana do Vale do Paraíba e Litoral Norte) tem 13 escolas entre as 500 mais bem avaliadas do país no ensino médio, segundo dados do Ideb (Índice de Desenvolvimento da Educação Básica) 2025, divulgado na quarta-feira (5) pelo Inep (Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira).
 
 O maior destaque regional ficou com Lorena, que abriga a Cotel (Colégio Técnico de Lorena) Professor Nelson Pesciotta, classificada como a 5ª melhor escola de ensino médio do Brasil, com nota 7,6.
 
@@ -85238,7 +85238,7 @@ Segundo relatos e fotos enviadas a OVALE, o Terminal Rodoviário Central ficou l
 Foto: Reprodução
 
 Leia mais em www.ovale.com.br ou clique no link da bio. Link também nos stories'),
-(3957854485739741830, 'jornalovale', '2026-08-06 13:17:32', NULL, 10, 0, 10, 'Eduração & Tecnologia', 'Formatura do curso Tecnologia 60+ em São José dos Campos', 'Comemorativo', 'Positivo', 'Orgulho & Celebração', 'Cedemp, Prefeitura de São José dos Campos', 'https://www.instagram.com/p/DbtH69nNCKG/', '#conteúdodemarca
+(3957854485739741830, 'jornalovale', '2026-08-06 13:17:32', NULL, 10, 0, 10, 'Educação & Tecnologia', 'Formatura do curso Tecnologia 60+ em São José dos Campos', 'Comemorativo', 'Positivo', 'Orgulho & Celebração', 'Cedemp, Prefeitura de São José dos Campos', 'https://www.instagram.com/p/DbtH69nNCKG/', '#conteúdodemarca
 
 A emoção tomou conta do Centro de Educação Empreendedora (Cedemp) durante a formatura de mais uma turma do curso Tecnologia 60+, promovido pela Prefeitura. A cerimônia reuniu formandos e convidados para celebrar uma conquista que vai muito além do domínio das ferramentas digitais: representa autonomia, confiança e novas possibilidades de conexão com o mundo.
 

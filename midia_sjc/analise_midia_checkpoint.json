@@ -35088,7 +35088,7 @@
     "subtema": "Sem conteúdo",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Outros",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [],
     "pessoas_citadas": [],
     "cidades_citadas": [],
@@ -70128,7 +70128,7 @@
     "tema_central": "Trânsito & Mobilidade",
     "subtema": "Municipalização de trecho da Rodovia SP-62",
     "tom_noticia": "Informativo",
-    "sentimento_comentarios": "Crítico",
+    "sentimento_comentarios": "Negativo",
     "gatilho_engajamento": "Indignação & Reclamação",
     "entidades_citadas": [
       "Prefeitura de São José dos Campos",
@@ -76285,7 +76285,7 @@
   },
   "3935355100093386881": {
     "id": "3935355100093386881",
-    "tema_central": "Candidato & Cidadania",
+    "tema_central": "Política & Gestão Pública",
     "subtema": "Atendimento móvel de documentos (Poupatempo)",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
@@ -86237,7 +86237,7 @@
     "tema_central": "Segurança Pública",
     "subtema": "Combate a jogos de azar e caça-níqueis",
     "tom_noticia": "Informativo",
-    "sentimento_comentarios": "Crítico",
+    "sentimento_comentarios": "Negativo",
     "gatilho_engajamento": "Indignação & Reclamação",
     "entidades_citadas": [
       "Polícia Civil",
@@ -86277,7 +86277,7 @@
     "tema_central": "Economia & Negócios",
     "subtema": "Crescimento de exportações no setor aeroespacial",
     "tom_noticia": "Informativo",
-    "sentimento_comentarios": "Crítico",
+    "sentimento_comentarios": "Negativo",
     "gatilho_engajamento": "Debate Político & Opinião",
     "entidades_citadas": [
       "Portal Band Vale"
@@ -86380,7 +86380,7 @@
     "tema_central": "Trânsito & Mobilidade",
     "subtema": "Engavetamento múltiplo na rodovia",
     "tom_noticia": "Alerta",
-    "sentimento_comentarios": "Crítico",
+    "sentimento_comentarios": "Negativo",
     "gatilho_engajamento": "Indignação & Reclamação",
     "entidades_citadas": [
       "Via Dutra",
@@ -86429,7 +86429,7 @@
     "tema_central": "Segurança Pública",
     "subtema": "Furto continuado em estabelecimento comercial",
     "tom_noticia": "Informativo",
-    "sentimento_comentarios": "Crítico",
+    "sentimento_comentarios": "Negativo",
     "gatilho_engajamento": "Indignação & Reclamação",
     "entidades_citadas": [
       "Polícia Civil",
@@ -86567,7 +86567,7 @@
     "tema_central": "Cultura & Entretenimento",
     "subtema": "Evento musical e recreativo em bairro",
     "tom_noticia": "Comemorativo",
-    "sentimento_comentarios": "Crítico",
+    "sentimento_comentarios": "Negativo",
     "gatilho_engajamento": "Indignação & Reclamação",
     "entidades_citadas": [
       "Stereo Vale",
@@ -87481,7 +87481,7 @@
     "subtema": "Institucional do Grupo Bandeirantes",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Grupo Bandeirantes"
     ],
@@ -87602,7 +87602,7 @@
     "subtema": "Institucional do Grupo Bandeirantes",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Grupo Bandeirantes"
     ],
@@ -87680,7 +87680,7 @@
     "subtema": "Proibição de pesca magnética",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Band Vale"
     ],
@@ -87696,7 +87696,7 @@
     "subtema": "Captação de água do Rio Paraíba",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Sabesp",
       "Band Vale"
@@ -87711,7 +87711,7 @@
     "subtema": "Institucional do Grupo Bandeirantes",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Grupo Bandeirantes"
     ],
@@ -87725,7 +87725,7 @@
     "subtema": "Acidente na Via Dutra",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "PRF",
       "Band Vale"
@@ -87827,7 +87827,7 @@
     "subtema": "Prisão de assaltante",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Band Vale"
     ],
@@ -87893,7 +87893,7 @@
     "subtema": "Institucional do Grupo Bandeirantes",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Grupo Bandeirantes"
     ],
@@ -87983,7 +87983,7 @@
     "subtema": "Impacto do preço do diesel",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [],
     "pessoas_citadas": [],
     "cidades_citadas": [],
@@ -88082,7 +88082,7 @@
     "subtema": "Programação MasterChef",
     "tom_noticia": "Descontraído",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Band Vale"
     ],
@@ -88127,7 +88127,7 @@
     "subtema": "Estudo de emissões de metano",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Band Vale"
     ],
@@ -88143,7 +88143,7 @@
     "subtema": "Gestão hospitalar em Taubaté",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Hospital Municipal Universitário de Taubaté",
       "Chavantes"
@@ -88176,7 +88176,7 @@
     "subtema": "Institucional do Grupo Bandeirantes",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Grupo Bandeirantes"
     ],
@@ -88207,7 +88207,7 @@
     "subtema": "Festa de São Pedro",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [],
     "pessoas_citadas": [],
     "cidades_citadas": [
@@ -88221,7 +88221,7 @@
     "subtema": "Eleição da Mesa Diretora da Câmara",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Câmara Municipal de São José dos Campos",
       "Tribunal de Justiça de São Paulo",
@@ -88258,7 +88258,7 @@
     "subtema": "Fenômeno astronômico Lua de Morango",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Positivo",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [
       "Univap",
       "Inmet"
@@ -88275,7 +88275,7 @@
     "subtema": "História do rádio local",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Nenhum",
+    "gatilho_engajamento": "Utilidade Pública & Oportunidade",
     "entidades_citadas": [],
     "pessoas_citadas": [],
     "cidades_citadas": [
@@ -99969,7 +99969,7 @@
     "subtema": "Acidente fatal na Rodovia Dutra",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Negativo",
-    "gatilho_engajamento": "Medio & Alerta de Segurança",
+    "gatilho_engajamento": "Medo & Alerta de Segurança",
     "entidades_citadas": [
       "Igreja Evangélica Pentecostal Voz da Profecia",
       "Cemitério Gethsemani"
@@ -100025,7 +100025,7 @@
     "subtema": "Interdição de rodovia após queda de postes e barranco",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Neutro",
-    "gatilho_engajamento": "Medio & Alerta de Segurança",
+    "gatilho_engajamento": "Medo & Alerta de Segurança",
     "entidades_citadas": [
       "DER"
     ],
@@ -100093,7 +100093,7 @@
     "subtema": "Acidente fatal entre motocicletas",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Negativo",
-    "gatilho_engajamento": "Medio & Alerta de Segurança",
+    "gatilho_engajamento": "Medo & Alerta de Segurança",
     "entidades_citadas": [
       "Polícia Militar",
       "Santa Casa de Jacareí"
@@ -119381,7 +119381,7 @@
   },
   "3935534290833603498": {
     "id": "3935534290833603498",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Recuperação de caminhões furtados",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
@@ -119425,7 +119425,7 @@
   },
   "3935222842732697154": {
     "id": "3935222842732697154",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Homicídio de adolescente",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Neutro",
@@ -119458,7 +119458,7 @@
   },
   "3935201288330267302": {
     "id": "3935201288330267302",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Homicídio decorrente de discussão de trânsito",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Negativo",
@@ -119477,7 +119477,7 @@
   },
   "3935211700287242724": {
     "id": "3935211700287242724",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Homicídio consumado",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Neutro",
@@ -119497,7 +119497,7 @@
   },
   "3933042526827952862": {
     "id": "3933042526827952862",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Apreensão de arma de fogo",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Neutro",
@@ -119596,7 +119596,7 @@
   },
   "3933034394869425718": {
     "id": "3933034394869425718",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Encontro de cadáver",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Negativo",
@@ -119615,7 +119615,7 @@
   },
   "3934122229570620900": {
     "id": "3934122229570620900",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Furto de caminhões",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Negativo",
@@ -119737,7 +119737,7 @@
   },
   "3934580882694117983": {
     "id": "3934580882694117983",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Duplo homicídio em adega",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Negativo",
@@ -119786,7 +119786,7 @@
   },
   "3933966779060422490": {
     "id": "3933966779060422490",
-    "tema_central": "Seguridad Pública",
+    "tema_central": "Segurança Pública",
     "subtema": "Furto de sino em igreja",
     "tom_noticia": "Alerta",
     "sentimento_comentarios": "Neutro",
@@ -135289,7 +135289,7 @@
   },
   "3958045391591866590": {
     "id": "3958045391591866590",
-    "tema_central": "Eduração & Tecnologia",
+    "tema_central": "Educação & Tecnologia",
     "subtema": "Escolas da RMVale entre as melhores do país no Ideb",
     "tom_noticia": "Informativo",
     "sentimento_comentarios": "Positivo",
@@ -135326,7 +135326,7 @@
   },
   "3957854485739741830": {
     "id": "3957854485739741830",
-    "tema_central": "Eduração & Tecnologia",
+    "tema_central": "Educação & Tecnologia",
     "subtema": "Formatura do curso Tecnologia 60+ em São José dos Campos",
     "tom_noticia": "Comemorativo",
     "sentimento_comentarios": "Positivo",

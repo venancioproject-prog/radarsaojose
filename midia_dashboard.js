@@ -153,6 +153,10 @@
       'Medo, Luto & comoÃ§Ã£o': 'Medo, Luto & Comoção',
       'IndignaÃ§Ã£o & CobranÃ§a': 'Indignação & Cobrança',
       'Curiosidade & ViralizaÃ§Ã£o': 'Curiosidade & Viralização',
+      'Candidato & Cidadania': 'Política & Gestão Pública',
+      'Seguridad Pública': 'Segurança Pública',
+      'Eduração & Tecnologia': 'Educação & Tecnologia',
+      'Medio & Alerta de Segurança': 'Medo & Alerta de Segurança',
       'TarcÃ­sio de Freitas': 'Tarcísio de Freitas',
       'CSI SÃ£o JosÃ©': 'CSI São José',
       'PolÃ­cia Militar / BAEP': 'Polícia Militar / BAEP'
