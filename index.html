@@ -919,14 +919,59 @@
     /* ── HAMBURGUER MOBILE ── */
     .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.4rem; cursor: pointer; }
 
-    /* ── RESPONSIVO ── */
+    /* ── RESPONSIVO MOBILE & TABLET ── */
     @media (max-width: 1024px) {
       .navbar { padding: 16px 24px; }
+      .navbar-logo img { height: 38px; }
       .navbar-nav { display: none; }
       .nav-toggle { display: block; }
-      .hero { padding: 100px 24px 60px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+
+      /* Hero Mobile: Foto de SJC mais vibrante no fundo & alinhamento perfeito no eixo vertical do R da logo (24px) */
+      .hero {
+        padding: 110px 24px 70px;
+        min-height: 100vh;
+        background:
+          linear-gradient(180deg, rgba(11,37,69,0.72) 0%, rgba(11,37,69,0.40) 35%, rgba(11,37,69,0.85) 100%),
+          url('fotos_radar/capa_sjc_skyline.jpg') center 25% / cover no-repeat !important;
+        align-items: flex-start;
+      }
+      .hero-inner {
+        margin-left: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .hero-label {
+        margin-bottom: 14px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      }
+      .hero-title {
+        font-size: clamp(2rem, 6.5vw, 2.8rem);
+        line-height: 1.15;
+        margin-bottom: 18px;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+      }
+      .hero-desc {
+        font-size: 0.98rem;
+        line-height: 1.65;
+        margin-bottom: 32px;
+        color: rgba(255, 255, 255, 0.92);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      }
+      .hero-btns {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .hero-btns .btn-primary,
+      .hero-btns .btn-outline {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 15px 24px;
+        font-size: 0.82rem;
+      }
       .hero-visual { display: none; }
+
       .stats-bar { padding: 32px 24px; }
       .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(3) { border-left: none; }
@@ -950,7 +995,9 @@
     }
 
     @media (max-width: 640px) {
-      .hero-title { font-size: 2rem; }
+      .navbar { padding: 14px 20px; }
+      .hero { padding: 105px 20px 60px; }
+      .hero-title { font-size: 2.1rem; }
       .navbar-cta .btn-nav-outline { display: none; }
       .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
       .insight-cards { grid-template-columns: repeat(2, 1fr); }
