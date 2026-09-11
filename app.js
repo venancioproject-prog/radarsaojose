@@ -430,47 +430,47 @@ window.switchHistoriaSubTab = function(subTabName) {
 };
 
 const IMAGE_BANK_ITEMS = [
-  ["Mais fotos radar/IMG_2777.jpg", "Comércio de rua", "Comércio"],
-  ["Mais fotos radar/IMG_2780.jpg", "Vida urbana", "Cidade"],
-  ["Mais fotos radar/IMG_2792.jpg", "Ônibus municipal", "Mobilidade"],
-  ["Mais fotos radar/IMG_2808.jpg", "Transporte coletivo", "Mobilidade"],
-  ["Mais fotos radar/IMG_2809.jpg", "Embarque e circulação", "Mobilidade"],
-  ["Mais fotos radar/IMG_2810.jpg", "Circulação urbana", "Mobilidade"],
-  ["Mais fotos radar/IMG_2813.jpg", "Via e iluminação", "Infraestrutura"],
-  ["Mais fotos radar/IMG_2815.jpg", "Malha viária", "Mobilidade"],
-  ["Mais fotos radar/IMG_2822.jpg", "Galeria comercial", "Comércio"],
-  ["Mais fotos radar/IMG_2838.jpg", "Comércio e consumo", "Comércio"],
-  ["Mais fotos radar/IMG_2839.jpg", "Centro comercial", "Comércio"],
-  ["Mais fotos radar/IMG_2840.jpg", "Circulação no centro", "Cidade"],
-  ["Mais fotos radar/IMG_2841.jpg", "Serviços urbanos", "Cidade"],
-  ["Mais fotos radar/IMG_2857.jpg", "Memória urbana", "Patrimônio"],
-  ["Mais fotos radar/IMG_2858.jpg", "Infraestrutura urbana", "Infraestrutura"],
-  ["Mais fotos radar/IMG_2863.jpg", "Paisagem e deslocamento", "Cidade"],
-  ["Mais fotos radar/IMG_2865.jpg", "Espaço construído", "Infraestrutura"],
-  ["Mais fotos radar/IMG_2868.jpg", "Conexão entre regiões", "Mobilidade"],
-  ["Mais fotos radar/IMG_2874.jpg", "Paisagem construída", "Cidade"],
-  ["Mais fotos radar/IMG_2875.jpg", "Tecido urbano", "Cidade"],
-  ["Mais fotos radar/IMG_2883.jpg", "Ponte e conexão", "Infraestrutura"],
-  ["Mais fotos radar/IMG_2890.jpg", "Centro e cultura", "Cultura"],
-  ["Mais fotos radar/IMG_2893.jpg", "Espaço público", "Cultura"],
-  ["Mais fotos radar/IMG_2896.jpg", "Memória e arquitetura", "Patrimônio"],
-  ["Mais fotos radar/IMG_2898.jpg", "Modernização urbana", "Infraestrutura"],
-  ["Mais fotos radar/IMG_2899.jpg", "Cidade em transformação", "Cidade"],
-  ["Mais fotos radar/IMG_2902.jpg", "Área verde", "Lazer"],
-  ["Mais fotos radar/IMG_2904.jpg", "Capital humano e cidade", "Cidade"],
-  ["Mais fotos radar/IMG_2905.jpg", "Espaço de lazer", "Lazer"],
-  ["Mais fotos radar/IMG_2906.jpg", "Paisagem e convivência", "Lazer"],
-  ["Mais fotos radar/IMG_2911.jpg", "Área de permanência", "Lazer"],
-  ["Mais fotos radar/IMG_2912.jpg", "Parque e infraestrutura", "Lazer"],
-  ["Mais fotos radar/IMG_2914.jpg", "Áreas abertas", "Lazer"],
-  ["Mais fotos radar/IMG_2915.jpg", "Serviço público", "Serviços"],
-  ["Mais fotos radar/IMG_2916.jpg", "Circulação e cuidado", "Serviços"],
-  ["Mais fotos radar/IMG_2919.jpg", "Equipamento urbano", "Serviços"],
-  ["fotos radar/capa_sjc_skyline.jpg", "Panorama de São José dos Campos", "Cidade"],
-  ["fotos radar/foto_cultura.jpg", "Cultura e cidade", "Cultura"],
-  ["fotos radar/foto_noite.jpg", "Cidade à noite", "Cidade"],
-  ["fotos radar/foto_onibus_viaduto.jpg", "Ônibus sob viaduto", "Mobilidade"],
-  ["fotos radar/sjc_ponte_estaiada.jpg", "Arco da Inovação", "Infraestrutura"]
+  ["Mais fotos_radar/IMG_2777.jpg", "Comércio de rua", "Comércio"],
+  ["Mais fotos_radar/IMG_2780.jpg", "Vida urbana", "Cidade"],
+  ["Mais fotos_radar/IMG_2792.jpg", "Ônibus municipal", "Mobilidade"],
+  ["Mais fotos_radar/IMG_2808.jpg", "Transporte coletivo", "Mobilidade"],
+  ["Mais fotos_radar/IMG_2809.jpg", "Embarque e circulação", "Mobilidade"],
+  ["Mais fotos_radar/IMG_2810.jpg", "Circulação urbana", "Mobilidade"],
+  ["Mais fotos_radar/IMG_2813.jpg", "Via e iluminação", "Infraestrutura"],
+  ["Mais fotos_radar/IMG_2815.jpg", "Malha viária", "Mobilidade"],
+  ["Mais fotos_radar/IMG_2822.jpg", "Galeria comercial", "Comércio"],
+  ["Mais fotos_radar/IMG_2838.jpg", "Comércio e consumo", "Comércio"],
+  ["Mais fotos_radar/IMG_2839.jpg", "Centro comercial", "Comércio"],
+  ["Mais fotos_radar/IMG_2840.jpg", "Circulação no centro", "Cidade"],
+  ["Mais fotos_radar/IMG_2841.jpg", "Serviços urbanos", "Cidade"],
+  ["Mais fotos_radar/IMG_2857.jpg", "Memória urbana", "Patrimônio"],
+  ["Mais fotos_radar/IMG_2858.jpg", "Infraestrutura urbana", "Infraestrutura"],
+  ["Mais fotos_radar/IMG_2863.jpg", "Paisagem e deslocamento", "Cidade"],
+  ["Mais fotos_radar/IMG_2865.jpg", "Espaço construído", "Infraestrutura"],
+  ["Mais fotos_radar/IMG_2868.jpg", "Conexão entre regiões", "Mobilidade"],
+  ["Mais fotos_radar/IMG_2874.jpg", "Paisagem construída", "Cidade"],
+  ["Mais fotos_radar/IMG_2875.jpg", "Tecido urbano", "Cidade"],
+  ["Mais fotos_radar/IMG_2883.jpg", "Ponte e conexão", "Infraestrutura"],
+  ["Mais fotos_radar/IMG_2890.jpg", "Centro e cultura", "Cultura"],
+  ["Mais fotos_radar/IMG_2893.jpg", "Espaço público", "Cultura"],
+  ["Mais fotos_radar/IMG_2896.jpg", "Memória e arquitetura", "Patrimônio"],
+  ["Mais fotos_radar/IMG_2898.jpg", "Modernização urbana", "Infraestrutura"],
+  ["Mais fotos_radar/IMG_2899.jpg", "Cidade em transformação", "Cidade"],
+  ["Mais fotos_radar/IMG_2902.jpg", "Área verde", "Lazer"],
+  ["Mais fotos_radar/IMG_2904.jpg", "Capital humano e cidade", "Cidade"],
+  ["Mais fotos_radar/IMG_2905.jpg", "Espaço de lazer", "Lazer"],
+  ["Mais fotos_radar/IMG_2906.jpg", "Paisagem e convivência", "Lazer"],
+  ["Mais fotos_radar/IMG_2911.jpg", "Área de permanência", "Lazer"],
+  ["Mais fotos_radar/IMG_2912.jpg", "Parque e infraestrutura", "Lazer"],
+  ["Mais fotos_radar/IMG_2914.jpg", "Áreas abertas", "Lazer"],
+  ["Mais fotos_radar/IMG_2915.jpg", "Serviço público", "Serviços"],
+  ["Mais fotos_radar/IMG_2916.jpg", "Circulação e cuidado", "Serviços"],
+  ["Mais fotos_radar/IMG_2919.jpg", "Equipamento urbano", "Serviços"],
+  ["fotos_radar/capa_sjc_skyline.jpg", "Panorama de São José dos Campos", "Cidade"],
+  ["fotos_radar/foto_cultura.jpg", "Cultura e cidade", "Cultura"],
+  ["fotos_radar/foto_noite.jpg", "Cidade à noite", "Cidade"],
+  ["fotos_radar/foto_onibus_viaduto.jpg", "Ônibus sob viaduto", "Mobilidade"],
+  ["fotos_radar/sjc_ponte_estaiada.jpg", "Arco da Inovação", "Infraestrutura"]
 ];
 
 let imageBankInitialized = false;
@@ -2361,7 +2361,7 @@ function processAndRenderDynamicCharts(records) {
       const culturePhotoCard = document.createElement("div");
       culturePhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       culturePhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_cultura.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_cultura.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2384,7 +2384,7 @@ function processAndRenderDynamicCharts(records) {
       const mediaPhotoCard = document.createElement("div");
       mediaPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-1 lg:col-span-1";
       mediaPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_pessoas.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_pessoas.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/80 to-brand-950/30"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2407,7 +2407,7 @@ function processAndRenderDynamicCharts(records) {
       const relPhotoCard = document.createElement("div");
       relPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       relPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/photo_3.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/photo_3.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2430,7 +2430,7 @@ function processAndRenderDynamicCharts(records) {
       const polPhotoCard = document.createElement("div");
       polPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       polPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_cidade.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_cidade.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2453,7 +2453,7 @@ function processAndRenderDynamicCharts(records) {
       const econPhotoCard = document.createElement("div");
       econPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-1";
       econPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_gastronomia.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_gastronomia.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2476,7 +2476,7 @@ function processAndRenderDynamicCharts(records) {
       const petPhotoCard = document.createElement("div");
       petPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       petPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos radar/foto_noite.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_noite.jpg');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -4384,7 +4384,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Sim (sorrindo) na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_1.jpg\';" />' +
+        '<img src="fotos_radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/photo_1.jpg\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -4420,7 +4420,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Não (triste) na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/photo_2.jpg\';" />' +
+        '<img src="fotos_radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/photo_2.jpg\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -4485,7 +4485,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Sim na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos radar/foto_gastronomia.jpg" alt="Sim - Já fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/sim_sorrindo.jpg\';" />' +
+        '<img src="fotos_radar/foto_gastronomia.jpg" alt="Sim - Já fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/sim_sorrindo.jpg\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -4521,7 +4521,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Não na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos radar/foto_noite.jpg" alt="Não - Nunca fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/nao_triste.jpg\';" />' +
+        '<img src="fotos_radar/foto_noite.jpg" alt="Não - Nunca fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/nao_triste.jpg\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -5298,7 +5298,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     const k = key.toLowerCase().trim();
     if (k.includes("netflix")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Netflix.png",
+        logo: "fotos_radar/logos_streaming_png/Netflix.png",
         icon: "fa-solid fa-play",
         title: "Netflix",
         desc: "Séries, Filmes & Originais",
@@ -5310,7 +5310,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     }
     if (k.includes("spotify")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Spotify.png",
+        logo: "fotos_radar/logos_streaming_png/Spotify.png",
         icon: "fa-brands fa-spotify",
         title: "Spotify",
         desc: "Streaming de Áudio & Podcasts",
@@ -5322,7 +5322,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     }
     if (k.includes("prime") || k.includes("amazon")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Amazon_Prime_Video.png",
+        logo: "fotos_radar/logos_streaming_png/Amazon_Prime_Video.png",
         icon: "fa-brands fa-amazon",
         title: "Amazon Prime Video",
         desc: "Filmes, Séries & Frete Prime",
@@ -5346,7 +5346,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     }
     if (k.includes("disney")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Disney_Plus.png",
+        logo: "fotos_radar/logos_streaming_png/Disney_Plus.png",
         icon: "fa-solid fa-wand-magic-sparkles",
         title: "Disney+",
         desc: "Disney, Marvel, Star Wars & Pixar",
@@ -5358,7 +5358,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     }
     if (k.includes("globo") || k.includes("globoplay")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Globoplay.png",
+        logo: "fotos_radar/logos_streaming_png/Globoplay.png",
         icon: "fa-solid fa-play",
         title: "Globoplay",
         desc: "Novelas, Ao Vivo & Séries",
@@ -5370,7 +5370,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     }
     if (k.includes("youtube") || k.includes("yt music")) {
       return {
-        logo: "fotos radar/logos_streaming_png/YouTube_Music.png",
+        logo: "fotos_radar/logos_streaming_png/YouTube_Music.png",
         icon: "fa-brands fa-youtube",
         title: "YouTube Music",
         desc: "Músicas, Clipes & Shows",
@@ -5382,7 +5382,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     }
     if (k.includes("apple") || k.includes("tv+")) {
       return {
-        logo: "fotos radar/logos_streaming_png/Apple_TV_Plus.png",
+        logo: "fotos_radar/logos_streaming_png/Apple_TV_Plus.png",
         icon: "fa-brands fa-apple",
         title: "Apple TV+",
         desc: "Apple Originals Premiados",
@@ -5484,7 +5484,7 @@ function renderStreamingLogosWidget(dataMap, total) {
     if (cfg.customSvg) {
       logoHtml = cfg.customSvg;
     } else {
-      logoHtml = '<img src="' + cfg.logo + '" alt="' + cfg.title + '" class="w-full h-full object-contain drop-shadow-2xs transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos radar/logo.png\';" />';
+      logoHtml = '<img src="' + cfg.logo + '" alt="' + cfg.title + '" class="w-full h-full object-contain drop-shadow-2xs transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/logo.png\';" />';
     }
 
     html += '<div class="bg-white hover:bg-slate-50/90 rounded-2xl p-3 sm:p-3.5 border ' + cfg.border + ' shadow-2xs hover:shadow-xs flex flex-col gap-2 transition-all group">' +
@@ -7595,7 +7595,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "46 anos",
     classe: "Classe A",
     regiao: "Oeste",
-    foto: "fotos radar/photo_1.jpg",
+    foto: "fotos_radar/photo_1.jpg",
     cor: "border-sky-500",
     badgeBg: "bg-sky-100 text-sky-800",
     resumo: "Profissional consolidada que usa o tempo como moeda. Transita entre reuniões, fiel a marcas que entregam conveniência e sofisticação.",
@@ -7608,7 +7608,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "21 anos",
     classe: "Classe D",
     regiao: "Sul",
-    foto: "fotos radar/foto_pessoas.jpg",
+    foto: "fotos_radar/foto_pessoas.jpg",
     cor: "border-amber-500",
     badgeBg: "bg-amber-100 text-amber-800",
     resumo: "Vive na economia de plataforma. O celular é ferramenta de trabalho e lazer. Sonha com negócio próprio, mas o presente ainda pesa mais.",
@@ -7621,7 +7621,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "24 anos",
     classe: "Classe C",
     regiao: "Leste",
-    foto: "fotos radar/photo_2.jpg",
+    foto: "fotos_radar/photo_2.jpg",
     cor: "border-emerald-500",
     badgeBg: "bg-emerald-100 text-emerald-800",
     resumo: "Migrou para a autonomia por necessidade. Conhece a cidade e a mobilidade como ninguém. Sempre calculando se o mês vai fechar.",
@@ -7634,7 +7634,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "48 anos",
     classe: "Classe B",
     regiao: "Sudeste",
-    foto: "fotos radar/photo_3.jpg",
+    foto: "fotos_radar/photo_3.jpg",
     cor: "border-blue-600",
     badgeBg: "bg-blue-100 text-blue-800",
     resumo: "Chão de fábrica com orgulho. Estabilidade é o valor central. Consome com cautela e desconfia de modismos, priorizando o ritmo do trabalho.",
@@ -7647,7 +7647,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "33 anos",
     classe: "Classe B",
     regiao: "Oeste",
-    foto: "fotos radar/foto_cultura.jpg",
+    foto: "fotos_radar/foto_cultura.jpg",
     cor: "border-purple-500",
     badgeBg: "bg-purple-100 text-purple-800",
     resumo: "Empreendedor informal que usa redes sociais como vitrine. Conectado às tendências, mas com os pés firmes na realidade do seu bairro.",
@@ -7660,7 +7660,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "43 anos",
     classe: "Classe D",
     regiao: "Centro",
-    foto: "fotos radar/foto_gastronomia.jpg",
+    foto: "fotos_radar/foto_gastronomia.jpg",
     cor: "border-rose-500",
     badgeBg: "bg-rose-100 text-rose-800",
     resumo: "Trabalha por diária com vasta experiência. Circula pelo Centro com facilidade e conhece os ritmos invisíveis da cidade como ninguém.",
@@ -7673,7 +7673,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "52 anos",
     classe: "Classe B",
     regiao: "Centro",
-    foto: "fotos radar/foto_cidade.jpg",
+    foto: "fotos_radar/foto_cidade.jpg",
     cor: "border-amber-600",
     badgeBg: "bg-amber-100 text-amber-800",
     resumo: "Comerciante raiz, sobreviveu a crises e pandemias. Seu ponto no centro é sua identidade. Adapta-se por necessidade às mudanças do entorno.",
@@ -7686,7 +7686,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "18 anos",
     classe: "Classe C",
     regiao: "Leste",
-    foto: "fotos radar/ghibli_aluguel_livre.jpg",
+    foto: "fotos_radar/ghibli_aluguel_livre.jpg",
     cor: "border-teal-500",
     badgeBg: "bg-teal-100 text-teal-800",
     resumo: "Primeira geração no ensino superior. Voz ativa no digital, representa a geração que moldará o consumo e a cultura de SJC nos próximos anos.",
@@ -7699,7 +7699,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "56 anos",
     classe: "Classe D",
     regiao: "Norte",
-    foto: "fotos radar/ghibli_casa_propria.jpg",
+    foto: "fotos_radar/ghibli_casa_propria.jpg",
     cor: "border-indigo-500",
     badgeBg: "bg-indigo-100 text-indigo-800",
     resumo: "Trabalha em casas de família e conhece a cidade pelos endereços. Prioriza filhos e saúde. Fiel ao dinheiro vivo e desconfiada de crédito.",
@@ -7712,7 +7712,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     idade: "34 anos",
     classe: "Classe C",
     regiao: "Norte",
-    foto: "fotos radar/ghibli_aluguel_quer_casa.jpg",
+    foto: "fotos_radar/ghibli_aluguel_quer_casa.jpg",
     cor: "border-red-500",
     badgeBg: "bg-red-100 text-red-800",
     resumo: "Concursada e estável, mas pressionada. Consumidora de cultura frustrada com a oferta local. Sente a tensão entre potencial e entrega da cidade.",
@@ -7736,7 +7736,7 @@ function renderExecutivePersonasCards() {
               src="${p.foto}" 
               alt="${p.nome}" 
               class="w-full h-full object-cover"
-              onerror="this.src='fotos radar/photo_1.jpg'"
+              onerror="this.src='fotos_radar/photo_1.jpg'"
             />
           </div>
           <div class="min-w-0 flex-1">
