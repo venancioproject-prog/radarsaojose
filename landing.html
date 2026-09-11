@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radar São José | Plataforma de Inteligência de Mercado Local</title>
+  <meta name="description" content="A plataforma de inteligência de mercado local sobre São José dos Campos. Banco de imagens gratuito, dados IBGE e dashboard analítico com 477 respondentes." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="fotos radar/logo.png" />
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --azul: #0B2545;
+      --azul-medio: #0b315c;
+      --azul-claro: #19afea;
+      --azul-suave: #e6eff1;
+      --vermelho: #ff2e2e;
+      --branco: #ffffff;
+      --cinza-claro: #f0f1f0;
+      --cinza-texto: #3a3a3a;
+      --preto: #0a0a0a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--branco);
+      color: var(--cinza-texto);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(11,37,69,0.97);
+      backdrop-filter: blur(10px);
+    }
+    .navbar-logo img {
+      height: 45px;
+      width: auto;
+      display: block;
+    }
+    .navbar-nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .navbar-nav a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .navbar-nav a:hover { color: var(--azul-claro); }
+    .navbar-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-nav-outline {
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.85);
+      background: transparent;
+      padding: 9px 22px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-nav-outline:hover { border-color: var(--azul-claro); color: var(--azul-claro); }
+    .btn-nav-primary {
+      background: var(--azul-claro);
+      color: var(--branco);
+      border: none;
+      padding: 10px 24px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-nav-primary:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(to right, rgba(11,37,69,0.97) 45%, rgba(11,37,69,0.3) 100%),
+        url('fotos radar/capa_sjc_skyline.jpg') center 50% / cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      max-width: 560px;
+      margin-left: 110px;
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 800;
+      color: var(--branco);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+    .hero-title span { color: var(--azul-claro); }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+    }
+    .btn-primary {
+      background: var(--azul-claro);
+      color: var(--branco);
+      border: none;
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-family: 'Montserrat', sans-serif;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.85);
+      background: transparent;
+      padding: 14px 32px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      font-family: 'Montserrat', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-outline:hover { border-color: var(--azul-claro); color: var(--azul-claro); }
+    .hero-visual {
+      position: relative;
+    }
+    .hero-visual img {
+      width: 100%;
+      border-radius: 0;
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--vermelho);
+      color: var(--branco);
+      padding: 10px 16px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--azul-medio);
+      padding: 40px 48px;
+    }
+    .stats-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 20px 16px;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:first-child { border-left: none; }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--branco);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stat-suffix { color: var(--azul-claro); }
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section {
+      padding: 96px 48px;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      margin-bottom: 16px;
+    }
+    .section-label.dark { color: #0d6890; }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .section-title.light { color: var(--branco); }
+    .section-desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #434343;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+    .section-desc.light { color: rgba(255,255,255,0.7); }
+
+    /* ── PLATAFORMA — O QUE OFERECEMOS ── */
+    .platform-section { background: var(--cinza-claro); }
+    .platform-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 24px;
+      margin-top: 60px;
+      overflow-x: auto;
+      padding-bottom: 24px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE e Edge */
+    }
+    .platform-grid::-webkit-scrollbar {
+      display: none; /* Chrome, Safari e Opera */
+    }
+    .carousel-wrapper {
+      position: relative;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      z-index: 10;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--azul);
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+    .carousel-btn:hover {
+      background: var(--azul-claro);
+      color: white;
+      border-color: var(--azul-claro);
+    }
+    .prev-btn { left: -24px; }
+    .next-btn { right: -24px; }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+    .platform-card {
+      width: 360px;
+      min-width: 360px;
+      flex: 0 0 360px;
+      scroll-snap-align: start;
+      background: var(--branco);
+      border-radius: 8px;
+      padding: 32px;
+      border: 1px solid rgba(22,22,22,0.06);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .platform-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+      border-radius: 2px;
+    }
+    .badge-free { background: #10b981; color: white; }
+    .badge-premium { background: var(--vermelho); color: white; }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-title i {
+      color: var(--azul-claro);
+      font-size: 1.4rem;
+    }
+    .card-desc {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .card-items {
+      list-style: none;
+      margin-top: 20px;
+    }
+    .card-items li {
+      font-size: 0.82rem;
+      color: #444;
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .card-items li i { color: var(--azul-claro); margin-top: 2px; flex-shrink: 0; }
+
+    /* ── PLANOS ── */
+    .plans-section { background: var(--preto); }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+      background: rgba(255,255,255,0.08);
+    }
+    .plan-card {
+      background: #111;
+      padding: 44px 36px;
+    }
+    .plan-card.destaque {
+      background: var(--azul);
+      position: relative;
+    }
+    .plan-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--azul-claro);
+      color: white;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+    }
+    .plan-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+    .plan-price {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--branco);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .plan-price span { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,0.4); }
+    .plan-tagline {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    .plan-features {
+      list-style: none;
+      margin-bottom: 36px;
+    }
+    .plan-features li {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.75);
+      padding: 8px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .plan-features li:last-child { border-bottom: none; }
+    .plan-features li i { color: var(--azul-claro); flex-shrink: 0; margin-top: 2px; }
+    .btn-plan {
+      display: block;
+      text-align: center;
+      padding: 13px 24px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-plan:hover { opacity: 0.85; }
+    .btn-plan-outline {
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+    }
+    .btn-plan-solid {
+      background: var(--azul-claro);
+      color: var(--branco);
+    }
+    .btn-plan-red {
+      background: var(--vermelho);
+      color: var(--branco);
+    }
+
+    /* ── COMO FUNCIONA ── */
+    .how-section { background: var(--branco); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+      background: rgba(11,49,92,0.12);
+    }
+    .step-card {
+      background: var(--branco);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .step-num {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      margin-bottom: 20px;
+    }
+    .step-icon {
+      font-size: 1.8rem;
+      color: var(--azul);
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 0.84rem;
+      color: #666;
+      line-height: 1.65;
+    }
+
+    /* ── INSIGHTS — DADOS QUE A PLATAFORMA OFERECE ── */
+    .insights-section { background: var(--azul); }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 120px;
+      align-items: center;
+      margin-top: 60px;
+    }
+    .insights-left { }
+    .insight-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255,255,255,0.1);
+      margin-top: 40px;
+    }
+    .insight-card {
+      background: rgba(255,255,255,0.05);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .insight-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--branco);
+    }
+    .insight-num .accent { color: var(--azul-claro); }
+    .insight-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .insights-note {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+    .insights-right img {
+      width: 100%;
+      border-radius: 2px;
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { background: var(--cinza-claro); }
+    .video-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .video-wrap {
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    }
+    .video-wrap video {
+      width: 100%;
+      display: block;
+    }
+    .video-text { }
+    .checklist {
+      list-style: none;
+      margin-top: 28px;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      font-size: 0.88rem;
+      color: #444;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li i { color: var(--azul-claro); margin-top: 2px; flex-shrink: 0; }
+
+    /* ── METODOLOGIA ── */
+    .metodo-section { background: var(--branco); }
+    .metodo-desc {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.7;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+    .metodo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+      background: rgba(11,49,92,0.12);
+    }
+    .metodo-card {
+      padding: 36px 28px;
+      background: var(--azul-suave);
+    }
+    .metodo-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 8px;
+    }
+    .metodo-card-sub {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--azul-claro);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .metodo-card-desc {
+      font-size: 0.84rem;
+      color: #555;
+      line-height: 1.65;
+    }
+    .metodo-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 2px;
+      background: rgba(11,49,92,0.12);
+    }
+    .metodo-card-2 {
+      padding: 28px;
+      background: var(--branco);
+    }
+
+    /* ── FOTOS GRID ── */
+    .fotos-section { background: var(--preto); }
+    .fotos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-top: 48px;
+    }
+    .foto-item {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+    .foto-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    .foto-item.tall {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+    .foto-item.tall img { height: 100%; }
+
+    /* ── TERRITÓRIO / REGIÕES ── */
+    .regioes-section { background: var(--azul-medio); }
+    .regioes-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .regioes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(255,255,255,0.1);
+      margin-top: 40px;
+    }
+    .regiao-card {
+      background: rgba(255,255,255,0.06);
+      padding: 24px 20px;
+    }
+    .regiao-nome {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      margin-bottom: 8px;
+    }
+    .regiao-titulo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--branco);
+      margin-bottom: 8px;
+    }
+    .regiao-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+    }
+    .regioes-visual img {
+      width: 100%;
+      border-radius: 2px;
+      opacity: 0.9;
+    }
+
+    /* ── CTA MEIO ── */
+    .cta-mid {
+      background: #06162a; /* Azul bem escuro */
+      padding: 60px 48px;
+    }
+    .cta-mid-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+    .cta-tag {
+      display: inline-block;
+      background: rgba(0,0,0,0.2);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 16px;
+    }
+    .cta-title {
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 800;
+      color: var(--branco);
+      line-height: 1.2;
+    }
+    .cta-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { background: var(--branco); }
+    .faq-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 60px;
+      border-top: 1px solid rgba(22,22,22,0.15);
+    }
+    details {
+      border-bottom: 1px solid rgba(22,22,22,0.15);
+    }
+    summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      list-style: none;
+      gap: 16px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary .faq-icon { color: var(--azul-claro); flex-shrink: 0; font-size: 0.8rem; }
+    details[open] summary .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.2s; }
+    .faq-answer {
+      padding: 0 0 22px;
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    /* ── FORM / CONTATO ── */
+    .contact-section { background: var(--preto); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .contact-logo img { height: 60px; margin-bottom: 28px; }
+    .contact-eyebrow {
+      display: inline-block;
+      background: var(--vermelho);
+      color: white;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 20px;
+    }
+    .contact-red-line {
+      border-left: 3px solid var(--vermelho);
+      padding-left: 20px;
+      margin-top: 32px;
+    }
+    .contact-red-line p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--branco);
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      font-family: 'Montserrat', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder { color: rgba(255,255,255,0.35); }
+    .form-group input:focus { border-color: var(--azul-claro); }
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      font-family: 'Montserrat', sans-serif;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .form-group select:focus { border-color: var(--azul-claro); }
+    .form-note {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      padding: 40px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-brand {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-brand strong { color: rgba(255,255,255,0.6); }
+    .footer-email {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-email a {
+      color: var(--azul-claro);
+      text-decoration: none;
+    }
+
+    /* ── HAMBURGUER MOBILE ── */
+    .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.4rem; cursor: pointer; }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 1024px) {
+      .navbar { padding: 16px 24px; }
+      .navbar-nav { display: none; }
+      .nav-toggle { display: block; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+      .stats-bar { padding: 32px 24px; }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(3) { border-left: none; }
+      .section { padding: 64px 24px; }
+      .carousel-btn { display: none; }
+      .platform-grid { grid-template-columns: 1fr; margin-top: 40px; }
+      .platform-card { width: 300px; min-width: 300px; flex: 0 0 300px; }
+      .plans-grid { grid-template-columns: 1fr; }
+      .how-section .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .insights-grid { grid-template-columns: 1fr; }
+      .video-inner { grid-template-columns: 1fr; }
+      .metodo-grid { grid-template-columns: 1fr; }
+      .metodo-grid-2 { grid-template-columns: 1fr; }
+      .fotos-grid { grid-template-columns: repeat(2, 1fr); }
+      .foto-item.tall { grid-row: auto; }
+      .regioes-inner { grid-template-columns: 1fr; }
+      .cta-mid-inner { grid-template-columns: 1fr; }
+      .faq-list { grid-template-columns: 1fr; gap: 0; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title { font-size: 2rem; }
+      .navbar-cta .btn-nav-outline { display: none; }
+      .stats-bar-inner { grid-template-columns: repeat(2, 1fr); }
+      .insight-cards { grid-template-columns: repeat(2, 1fr); }
+      .regioes-grid { grid-template-columns: 1fr; }
+      .manifesto-authors { grid-template-columns: 1fr; }
+      .manifesto-text { column-count: 1; }
+    }
+
+    /* ── MANIFESTO ── */
+    .manifesto-section {
+      background: #091321;
+      color: white;
+      padding: 100px 48px;
+      position: relative;
+    }
+    .manifesto-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .manifesto-label {
+      color: var(--azul-claro);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+      display: block;
+      text-align: center;
+    }
+    .manifesto-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+      column-count: 2;
+      column-gap: 40px;
+    }
+    .manifesto-text p {
+      margin-bottom: 24px;
+    }
+    .manifesto-text strong {
+      color: white;
+      font-weight: 700;
+    }
+    .manifesto-highlight {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 40px !important;
+      text-align: center;
+      column-span: all;
+    }
+    .author-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 24px;
+      border: 3px solid var(--azul-claro);
+      filter: grayscale(100%);
+    }
+    .manifesto-authors {
+      margin-top: 60px;
+      padding-top: 60px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .author-card h4 {
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+    .author-card .author-role {
+      color: var(--azul-claro);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .author-card .author-bio {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">
+      <img src="fotos radar/logobranco.png" alt="Radar São José" />
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="#solucoes">Soluções</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#metodologia">Metodologia</a></li>
+      <li><a href="#manifesto">Manifesto</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="navbar-cta">
+      <a href="#contato" class="btn-nav-outline">Falar com especialista</a>
+      <a href="index.html" class="btn-nav-primary">Acessar soluções</a>
+    </div>
+    <button class="nav-toggle" onclick="this.closest('nav').querySelector('.navbar-nav').style.display = this.closest('nav').querySelector('.navbar-nav').style.display === 'flex' ? 'none' : 'flex'">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-label">Soluções de inteligência de mercado local</p>
+        <h1 class="hero-title">
+          Entenda São José<br>
+          <span>antes</span> de decidir<br>
+          onde investir.
+        </h1>
+        <p class="hero-desc">
+          O <strong>Radar São José</strong> é um conjunto de soluções com dados comportamentais, demográficos e culturais profundos sobre São José dos Campos — organizadas para que empresas tomem decisões mais precisas sobre expansão, posicionamento e oferta.
+        </p>
+        <div class="hero-btns">
+          <a href="index.html" class="btn-primary">Criar conta grátis</a>
+          <a href="#planos" class="btn-outline">
+            <i class="fas fa-layer-group"></i>
+            Ver planos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ O QUE AS SOLUÇÕES OFERECEM ══ -->
+  <section class="section platform-section" id="solucoes">
+    <div class="section-inner">
+      <p class="section-label dark">As soluções</p>
+      <h2 class="section-title">Não é um relatório. É uma lente<br>para o mercado local.</h2>
+      <p class="section-desc">
+        Acesse dados, imagens e análises sobre São José dos Campos — organizados em módulos para cada momento da sua decisão.
+      </p>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev-btn" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn next-btn" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+        <div class="platform-grid">
+        <!-- 1: Dashboard Radar -->
+        <div class="platform-card premium">
+          <img src="Mais fotos radar/pexels-thisisengineering-3861976.jpg" class="card-img" alt="Dashboard Radar" loading="lazy" />
+          <span class="card-badge badge-premium">Dashboard Dinâmico</span>
+          <h3 class="card-title"><i class="fas fa-chart-pie"></i>Dashboard Radar</h3>
+          <p class="card-desc">Filtros interativos sobre comportamento, consumo e mobilidade em SJC. Cruze variáveis e identifique oportunidades em tempo real.</p>
+          <ul class="card-items">
+            <li><i class="fas fa-check"></i>Filtros por renda, bairro, idade e perfil</li>
+            <li><i class="fas fa-check"></i>Mapa de calor de consumo por região</li>
+          </ul>
+        </div>
+
+        <!-- 2: Radar News -->
+        <div class="platform-card premium">
+          <img src="Mais fotos radar/pexels-pavel-danilyuk-7937360.jpg" class="card-img" alt="Radar News" loading="lazy" />
+          <span class="card-badge badge-premium" style="background: #e11d48;">Big Data</span>
+          <h3 class="card-title"><i class="fas fa-satellite-dish"></i>Radar News</h3>
+          <p class="card-desc">Monitoramento de mídia, notícias e opinião pública em SJC. Entenda como a cidade repercute marcas, eventos e tendências.</p>
+          <ul class="card-items">
+            <li><i class="fas fa-check"></i>Clipping e análise de notícias locais</li>
+            <li><i class="fas fa-check"></i>Termômetro de sentimento e tendências</li>
+          </ul>
+        </div>
+
+        <!-- 3: Relatório de IA -->
+        <div class="platform-card premium">
+          <img src="Mais fotos radar/pexels-tima-miroshnichenko-8764619.jpg" class="card-img" alt="Relatório de IA" loading="lazy" />
+          <span class="card-badge badge-premium" style="background: var(--azul-claro);">Gerador</span>
+          <h3 class="card-title"><i class="fas fa-robot"></i>Relatório de IA</h3>
+          <p class="card-desc">Auditoria estratégica automatizada. Nossa inteligência artificial cruza os dados da plataforma para gerar insights imediatos.</p>
+          <ul class="card-items">
+            <li><i class="fas fa-check"></i>Geração instantânea de análises</li>
+            <li><i class="fas fa-check"></i>Foco direto no seu segmento</li>
+          </ul>
+        </div>
+
+        <!-- 4: Radar São José 2026 Pesquisa Completa -->
+        <div class="platform-card premium">
+          <img src="Mais fotos radar/pexels-rdne-5778714.jpg" class="card-img" alt="Radar São José 2026 Pesquisa Completa" loading="lazy" />
+          <span class="card-badge badge-premium" style="background: #f59e0b; color: #fff;">Pro</span>
+          <h3 class="card-title"><i class="fas fa-file-alt"></i>Radar São José 2026<br>Pesquisa Completa</h3>
+          <p class="card-desc">Apresentação executiva profunda com 3 camadas metodológicas: quantitativa, qualitativa e invasão de cenários (etnografia).</p>
+          <ul class="card-items">
+            <li><i class="fas fa-check"></i>Pesquisa quantitativa (477 respondentes)</li>
+            <li><i class="fas fa-check"></i>Observação etnográfica real de SJC</li>
+          </ul>
+        </div>
+
+        <!-- 5: Demografia & IBGE -->
+        <div class="platform-card">
+          <img src="Mais fotos radar/pexels-tomfisk-1081912.jpg" class="card-img" alt="Demografia IBGE" loading="lazy" />
+          <span class="card-badge badge-free" style="background: #0ea5e9;">Oficial</span>
+          <h3 class="card-title"><i class="fas fa-landmark"></i>Demografia & IBGE</h3>
+          <p class="card-desc">Censo e microdados sobre SJC organizados. Renda, faixa etária, perfil familiar e distribuição geográfica — prontos para usar.</p>
+          <ul class="card-items">
+            <li><i class="fas fa-check"></i>Dados populacionais por bairro e zona</li>
+            <li><i class="fas fa-check"></i>Visualizações e recortes já preparados</li>
+          </ul>
+        </div>
+
+        <!-- 6: Banco de Imagens -->
+        <div class="platform-card">
+          <img src="Mais fotos radar/pexels-leandro-street-fotografia-96279287-9260388.jpg" class="card-img" alt="Banco de imagens gratuito" loading="lazy" />
+          <span class="card-badge badge-free">Gratuito</span>
+          <h3 class="card-title"><i class="fas fa-images"></i>Banco de Imagens</h3>
+          <p class="card-desc">Acervo fotográfico de São José dos Campos — ruas, bairros, cultura e vida urbana. Disponível para download gratuito.</p>
+          <ul class="card-items">
+            <li><i class="fas fa-check"></i>Alta resolução para apresentações</li>
+            <li><i class="fas fa-check"></i>Atualizado continuamente pela Studio 8</li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PLANOS ══ -->
+  <section class="section plans-section" id="planos">
+    <div class="section-inner">
+      <p class="section-label" style="color: rgba(255,255,255,0.45)">Acesso</p>
+      <h2 class="section-title light">Escolha seu plano.</h2>
+      <p class="section-desc" style="color: rgba(255,255,255,0.55)">
+        Do básico ao estratégico — comece gratuitamente e expanda conforme sua necessidade.
+      </p>
+
+      <div class="plans-grid">
+        <!-- GRATUITO -->
+        <div class="plan-card">
+          <p class="plan-name">Gratuito</p>
+          <div class="plan-price">R$ 0 <span>/ sempre</span></div>
+          <p class="plan-tagline">Crie sua conta e acesse imediatamente o banco de imagens e os dados do IBGE.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i>Banco de imagens profissionais de SJC</li>
+            <li><i class="fas fa-check"></i>Dados IBGE Censo 2022 organizados</li>
+            <li><i class="fas fa-check"></i>Prévia dos insights da plataforma</li>
+            <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Dashboard analítico completo</li>
+            <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Relatório comportamental</li>
+          </ul>
+          <a href="index.html" class="btn-plan btn-plan-outline">Criar conta grátis</a>
+        </div>
+
+        <!-- PRO -->
+        <div class="plan-card destaque">
+          <div class="plan-badge">Mais popular</div>
+          <p class="plan-name">Pro</p>
+          <div class="plan-price">Sob <span style="font-size:1.8rem; color: white;">consulta</span></div>
+          <p class="plan-tagline">Dashboard completo + relatório comportamental + acesso guiado com especialista.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i>Tudo do plano Gratuito</li>
+            <li><i class="fas fa-check"></i>Dashboard analítico interativo completo</li>
+            <li><i class="fas fa-check"></i>Relatório comportamental (3 camadas)</li>
+            <li><i class="fas fa-check"></i>Curadoria de Mídia — clipping SJC</li>
+            <li><i class="fas fa-check"></i>1 sessão de leitura aplicada</li>
+          </ul>
+          <a href="#contato" class="btn-plan btn-plan-solid">Falar com especialista</a>
+        </div>
+
+        <!-- EMPRESARIAL -->
+        <div class="plan-card">
+          <p class="plan-name">Empresarial</p>
+          <div class="plan-price">Sob <span style="font-size:1.8rem; color: white;">consulta</span></div>
+          <p class="plan-tagline">Para empresas com expansão, decisão estratégica ou múltiplos usuários.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i>Tudo do plano Pro</li>
+            <li><i class="fas fa-check"></i>Múltiplos acessos simultâneos</li>
+            <li><i class="fas fa-check"></i>Sessões de leitura aplicada recorrentes</li>
+            <li><i class="fas fa-check"></i>Recortes personalizados por segmento</li>
+            <li><i class="fas fa-check"></i>Suporte dedicado Studio 8</li>
+          </ul>
+          <a href="#contato" class="btn-plan btn-plan-red">Solicitar proposta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COMO FUNCIONA ══ -->
+  <section class="section how-section">
+    <div class="section-inner">
+      <p class="section-label dark">Como funciona</p>
+      <h2 class="section-title">Uma pergunta concreta muda<br>a qualidade da decisão.</h2>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <p class="step-num">01</p>
+          <div class="step-icon"><i class="fas fa-user-plus"></i></div>
+          <h3 class="step-title">Crie sua conta</h3>
+          <p class="step-desc">Cadastro gratuito em menos de 2 minutos. Acesso imediato ao banco de imagens e dados IBGE.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-num">02</p>
+          <div class="step-icon"><i class="fas fa-search"></i></div>
+          <h3 class="step-title">Explore os dados</h3>
+          <p class="step-desc">Filtre por região, renda, perfil e comportamento. Veja a cidade como ela realmente é — não como você imagina.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-num">03</p>
+          <div class="step-icon"><i class="fas fa-glasses"></i></div>
+          <h3 class="step-title">Leitura aplicada</h3>
+          <p class="step-desc">Conecte os dados ao movimento concreto da sua empresa: expansão, posicionamento, comunicação ou oferta.</p>
+        </div>
+        <div class="step-card">
+          <p class="step-num">04</p>
+          <div class="step-icon"><i class="fas fa-location-arrow"></i></div>
+          <h3 class="step-title">Próximo passo</h3>
+          <p class="step-desc">Você leva uma leitura mais clara para decidir o que investigar, priorizar ou colocar em ação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══ INSIGHTS — DADOS DA PLATAFORMA ══ -->
+  <section class="section insights-section">
+    <div class="section-inner">
+      <div class="insights-grid">
+        <div class="insights-left">
+          <p class="section-label" style="color: rgba(123,217,240,0.9)">Existe demanda. A pergunta é onde ela escapa.</p>
+          <h2 class="section-title light">A cidade combina orgulho, poder de consumo e uma busca constante por experiências.</h2>
+          <p class="section-desc light">
+            O Radar ajuda a identificar o espaço entre intenção e escolha — e a transformar esse espaço em vantagem competitiva.
+          </p>
+          <div class="insight-cards">
+            <div class="insight-card">
+              <div class="insight-num">74<span class="accent">%</span></div>
+              <div class="insight-label">têm orgulho de viver em São José</div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-num">66<span class="accent">%</span></div>
+              <div class="insight-label">consomem lazer fora da cidade</div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-num">69<span class="accent">%</span></div>
+              <div class="insight-label">gastariam mais com opções locais melhores</div>
+            </div>
+          </div>
+          <p class="insights-note">Resultados da pesquisa quantitativa do Radar São José. Os dados orientam hipóteses de mercado e não representam promessa de resultado financeiro.</p>
+        </div>
+        <div class="insights-right" style="margin-left: 50px;">
+          <img src="fotos radar/mapa_origem_entrevistados.png" alt="Origem dos Entrevistados - 477 Respondentes em 100 Bairros" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);" />
+          <p style="margin-top: 16px; font-size: 0.75rem; color: rgba(255,255,255,0.45); text-align: right; font-style: italic; line-height: 1.5;">
+            Ilustração amostral da distribuição dos respondentes pelos<br>bairros de São José dos Campos (Pesquisa Radar 2026).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS BAR ══ -->
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div class="stat-item">
+        <div class="stat-num">477</div>
+        <div class="stat-label">Respondentes válidos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">95<span class="stat-suffix">%</span></div>
+        <div class="stat-label">Nível de confiança</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">±4,5<span class="stat-suffix">%</span></div>
+        <div class="stat-label">Margem de erro</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Camadas metodológicas</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══ VIDEO — DASHBOARD EM AÇÃO ══ -->
+  <section class="section video-section">
+    <div class="section-inner">
+      <div class="video-inner">
+        <div class="video-wrap">
+          <video
+            src="https://studio8.com.br/wp-content/uploads/2026/08/Design-sem-nome-2-1.mp4"
+            controls
+            preload="metadata"
+            controlslist="nodownload">
+          </video>
+        </div>
+        <div class="video-text">
+          <p class="section-label dark">O dashboard · inteligência em uso</p>
+          <h2 class="section-title">Veja o Radar entrar na decisão.</h2>
+          <p class="section-desc">
+            Neste vídeo, você acompanha a central de inteligência do Radar em ação. A leitura cruza perfil, renda, idade e regiões da cidade para revelar onde o joseense consome, o que procura e quais oportunidades ficam fora dos relatórios padrão.
+          </p>
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i>Mais de 470 respostas válidas organizadas por perfil e território</li>
+            <li><i class="fas fa-check"></i>Sinais de consumo, lacunas locais e motivações de escolha</li>
+            <li><i class="fas fa-check"></i>Uma leitura preparada para discussões estratégicas de diretoria</li>
+          </ul>
+          <div style="margin-top: 32px;">
+            <a href="#contato" class="btn-primary">Acessar o dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOTOS DA CIDADE ══ -->
+  <section class="fotos-section" id="banco-imagens">
+    <div class="section-inner section" style="padding-bottom: 0;">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+        <div style="flex: 1 1 500px; max-width: 580px;">
+          <p class="section-label" style="color: rgba(255,255,255,0.45)">Banco de imagens · gratuito</p>
+          <h2 class="section-title light" style="margin-bottom: 20px;">São José dos Campos,<br>em alta resolução.</h2>
+          <p class="section-desc" style="color: rgba(255,255,255,0.7); margin-bottom: 0;">
+            Sempre foi muito difícil encontrar fotografias de qualidade e em alta resolução da nossa cidade para usar em apresentações, campanhas e materiais de marketing. Criamos este acervo para suprir essa demanda do mercado local.
+          </p>
+        </div>
+        
+        <div style="flex: 1 1 400px; max-width: 500px; background: rgba(25, 175, 234, 0.08); border-left: 3px solid var(--azul-claro); padding: 24px; border-radius: 0 8px 8px 0;">
+          <p style="color: var(--branco); font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;">Projeto Colaborativo 🤝</p>
+          <p style="color: rgba(255,255,255,0.75); font-size: 0.85rem; line-height: 1.6; margin-bottom: 0;">
+            Queremos registrar e movimentar a cidade juntos! Se você é fotógrafo ou tem fotos incríveis de SJC e quer ajudar a construir esse banco de imagens, envie seu material para <br><a href="mailto:contato@studio8.com.br" style="color: var(--azul-claro); text-decoration: none; font-weight: 600;">contato@studio8.com.br</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 48px 96px; position: relative;">
+      <!-- Menos imagens, com pointer-events: none (via CSS) para não baixar/arrastar -->
+      <div class="fotos-grid" style="margin-top: 40px; opacity: 0.4; filter: blur(2px) grayscale(50%);">
+        <div class="foto-item tall">
+          <img src="fotos radar/capa_sjc_skyline.jpg" alt="São José dos Campos - Skyline" loading="lazy" />
+        </div>
+        <div class="foto-item">
+          <img src="fotos radar/foto_cidade.jpg" alt="São José dos Campos" loading="lazy" />
+        </div>
+        <div class="foto-item">
+          <img src="fotos radar/sjc_ponte_estaiada.jpg" alt="Ponte estaiada SJC" loading="lazy" />
+        </div>
+        <div class="foto-item">
+          <img src="fotos radar/foto_pessoas.jpg" alt="Pessoas de São José" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Overlay bloqueando a galeria com call to action -->
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10;">
+        <div style="background: rgba(11,37,69,0.9); backdrop-filter: blur(8px); padding: 40px 48px; border-radius: 12px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); max-width: 420px; width: 90%;">
+          <i class="fas fa-lock" style="font-size: 2.2rem; color: var(--azul-claro); margin-bottom: 20px;"></i>
+          <h3 style="color: white; font-family: 'Montserrat'; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">Acervo Fechado</h3>
+          <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin: 0 auto 28px;">
+            Crie sua conta gratuitamente para visualizar e fazer download das fotografias em alta resolução.
+          </p>
+          <a href="index.html" class="btn-primary" style="display: block; width: 100%;">Criar Conta Grátis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ METODOLOGIA ══ -->
+  <section class="section metodo-section" id="metodologia">
+    <div class="section-inner">
+      <p class="section-label dark">Metodologia / 03 camadas</p>
+      <h2 class="section-title">Uma decisão importante merece<br>uma pergunta melhor.</h2>
+      <p class="metodo-desc">
+        Cada método responde a uma pergunta diferente. Juntos, eles mostram o que o consumidor diz, o que sente e o que realmente faz nos espaços de convivência da cidade.
+      </p>
+
+      <div class="metodo-grid">
+        <div class="metodo-card">
+          <p class="metodo-card-sub">Quantitativa</p>
+          <h3 class="metodo-card-title">O que a cidade pensa em números.</h3>
+          <p class="metodo-card-desc">477 respondentes válidos, com recortes por renda, bairro, idade e perfil. Margem de erro ±4,5% com 95% de confiança.</p>
+        </div>
+        <div class="metodo-card">
+          <p class="metodo-card-sub">Qualitativa</p>
+          <h3 class="metodo-card-title">O que a cidade sente em palavras.</h3>
+          <p class="metodo-card-desc">Perfis em profundidade para identificar desejos, tensões, motivações e contradições — a alma por trás dos dados estatísticos.</p>
+        </div>
+        <div class="metodo-card">
+          <p class="metodo-card-sub">Invasão de Cenários</p>
+          <h3 class="metodo-card-title">O que a cidade faz na vida real.</h3>
+          <p class="metodo-card-desc">Observação etnográfica em pontos estratégicos: bares, feiras, shoppings e espaços públicos. Comportamento real quando ninguém está perguntando.</p>
+        </div>
+      </div>
+
+      <div class="metodo-grid-2">
+        <div class="metodo-card-2">
+          <p style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#0d6890; margin-bottom:8px;">Dados Secundários</p>
+          <p style="font-size:0.84rem; font-weight:600; color:#222; margin-bottom:6px;">Qual o contexto oficial?</p>
+          <p style="font-size:0.8rem; color:#666; line-height:1.6;">Dados do IBGE e revisões de estudos demográficos sobre SJC.</p>
+        </div>
+        <div class="metodo-card-2">
+          <p style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#0d6890; margin-bottom:8px;">Fonte Documental</p>
+          <p style="font-size:0.84rem; font-weight:600; color:#222; margin-bottom:6px;">O que as pesquisas dizem?</p>
+          <p style="font-size:0.8rem; color:#666; line-height:1.6;">Artigos acadêmicos, teses e relatórios de mercado.</p>
+        </div>
+        <div class="metodo-card-2">
+          <p style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#0d6890; margin-bottom:8px;">Curadoria de Mídia</p>
+          <p style="font-size:0.84rem; font-weight:600; color:#222; margin-bottom:6px;">Como a cidade repercute?</p>
+          <p style="font-size:0.8rem; color:#666; line-height:1.6;">Análise de jornal e clipping de notícias locais de SJC.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TERRITÓRIO / REGIÕES ══ -->
+  <section class="section regioes-section">
+    <div class="section-inner">
+      <div class="regioes-inner">
+        <div>
+          <p class="section-label" style="color: rgba(123,217,240,0.9)">Leitura territorial</p>
+          <h2 class="section-title light">A cidade não se comporta como um único mercado.</h2>
+          <p class="section-desc light">
+            Regiões, perfis, deslocamentos e expectativas diferentes formam mercados dentro do mesmo CEP. O Radar organiza essas diferenças para que sua empresa pare de falar com uma cidade abstrata.
+          </p>
+
+          <div class="regioes-grid">
+            <div class="regiao-card">
+              <p class="regiao-nome">Zona Oeste</p>
+              <h4 class="regiao-titulo">Elite e Qualidade</h4>
+              <p class="regiao-desc">Renda R$ 12k–26k. Lazer 73% local. Maior qualidade de vida da cidade.</p>
+            </div>
+            <div class="regiao-card">
+              <p class="regiao-nome">Zona Sul</p>
+              <h4 class="regiao-titulo">Polo Autossuficiente</h4>
+              <p class="regiao-desc">Renda R$ 5,6k–12k. Bairros 25–34 anos. Não apenas dormitório.</p>
+            </div>
+            <div class="regiao-card">
+              <p class="regiao-nome">Zona Norte</p>
+              <h4 class="regiao-titulo">Demanda Reprimida</h4>
+              <p class="regiao-desc">Alta dependência de transporte. Maior potencial de conversão de consumo local.</p>
+            </div>
+            <div class="regiao-card">
+              <p class="regiao-nome">Centro</p>
+              <h4 class="regiao-titulo">Hiperconcentração</h4>
+              <p class="regiao-desc">41,8% do lazer acontece no eixo Centro-Oeste. Aquarius e Vila Adyana em destaque.</p>
+            </div>
+          </div>
+        </div>
+        <div class="regioes-visual" style="position: relative; border-radius: 8px; overflow: hidden; height: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+          <!-- Foto de fundo (substituindo a imagem tipografada estática) -->
+          <img src="fotos radar/sjc_cassiano_ricardo.jpg" alt="Comércio de rua em SJC" style="width: 100%; height: 100%; object-fit: cover;" />
+          
+          <!-- Overlay com texto HTML editável -->
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(11,37,69,0.9) 0%, rgba(11,37,69,0.2) 70%, rgba(11,37,69,0.5) 100%); padding: 48px 40px; display: flex; flex-direction: column;">
+            <p style="color: white; font-size: 1.75rem; font-weight: 700; font-family: 'Montserrat', sans-serif; line-height: 1.35; text-shadow: 0 2px 10px rgba(0,0,0,0.6); margin: 0;">
+              Comportamento real não acontece <span style="color: var(--azul-claro);">atrás de telas.</span><br><br>
+              <span style="font-size: 1.4rem; font-weight: 500; opacity: 0.95;">Acontece na rua, no trajeto e na escolha que vem antes da compra.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA MEIO ══ -->
+  <div class="cta-mid">
+    <div class="cta-mid-inner">
+      <div>
+        <span class="cta-tag">O que você pode investigar</span>
+        <h2 class="cta-title">Quais regiões concentram o público que você quer alcançar?</h2>
+        <p class="cta-sub">O que impede uma intenção de consumo de virar escolha local? Quais experiências ainda estão subatendidas? Como diferentes perfis percebem sua categoria?</p>
+      </div>
+      <div>
+        <a href="index.html" class="btn-primary" style="white-space: nowrap;">Acessar as soluções</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NOSSO MANIFESTO ══ -->
+  <section class="section manifesto-section" id="manifesto">
+    <div class="manifesto-inner">
+      <span class="manifesto-label">Nosso Manifesto</span>
+      
+      <div class="manifesto-text">
+        <p class="manifesto-highlight">
+          São José dos Campos. A potência do Vale do Paraíba que constrói máquinas voadoras, que cortam os céus mundo afora. O maior polo aeronáutico da América Latina, cidade tecnológica, à frente do seu tempo. Mão de obra qualificada, renda alta. Gente boa trabalha aqui.
+        </p>
+        
+        <p>Mas tem uma coisa que é pouco debatida: o dinheiro que entra some, vai pras cidades vizinhas que oferecem o que São José ainda não possui. <br>
+        Não porque não tenha comércio e oferta. Tem. <br>
+        Não porque não tenha gente com grana. Tem, e muita.<br>
+        Consumidor não falta! Então o que realmente falta?</p>
+        
+        <p>São José ainda tem fama de distrito industrial que "dorme cedo". E essa fama é igual a boato de botequim: começa pequeno, ninguém sabe quem inventou, mas todo mundo repete e acabou que virou verdade…</p>
+        
+        <p>Enquanto a fama cresce, bons negócios vão para outras cidades e quem vem pra cá espanta a concorrência local, muitas vezes de forma selvagem e rápida. E você, empreendedor, executivo, comerciante, dono de loja, dono de restaurante, fica aí coçando a cabeça, sem entender por que a venda não engrena. Porque o ticket médio não sobe. Porque o lead do tráfego está desqualificado e suas campanhas estão cada vez mais caras? Porque os talentos da sua empresa saem e você não consegue contratar mais gente? Porque vários empresários estão indo a bancarrota e como o seu negócio não vai ser o próximo?</p>
+        
+        <p>Sabe por quê? <strong>Você não conhece São José vivendo nas ruas</strong>, no cotidiano, nos detalhes da cidade que fazem o Joseense comprar, voltar, ou nunca nem passar por você, ainda.</p>
+        
+        <p>A cidade tem uma cultura de contratar institutos de pesquisa de fora do estado. E apesar de reconhecermos a importância deles, também sabemos que esses caras nunca sentaram para comer um bolinho caipira na praça do São Dimas em pleno frio de junho. Nunca desceram o famoso morro do Habib's e sentiram aquele frio que embrulha a barriga e faz as nossas crianças levantarem os braços todas as vezes fingindo que estão numa montanha russa. <strong>Eles chegam com uma planilha. A gente entrega vida, São José de verdade.</strong></p>
+        
+        <p>Não é falta de demanda. Não é falta de poder de compra. É falta de informação real sobre onde, quando e como o dinheiro do Joseense se move!</p>
+        
+        <p>É por isso que o Radar São José existe. Porque ninguém antes mergulhou nos movimentos que de fato norteiam esta cidade. No rigor técnico e multidisciplinar que usamos para mapear o que ninguém quis ver: a Capital do Vale não precisa de mais achismos. Precisa de dados reais. E nós temos!</p>
+      </div>
+
+      <div class="manifesto-authors">
+        <div class="author-card">
+          <img src="Landing page_files/LEONARDO.jpeg" alt="Leonardo Venâncio" class="author-photo" loading="lazy" />
+          <h4>Leonardo Venâncio</h4>
+          <div class="author-role">Consultor de Pesquisa - Studio 8</div>
+          <p class="author-bio">Pesquisador e consultor com mais de uma década de experiência em inteligência de mercado para marcas como Ambev, Pernod Ricard, Sadia e CNN Brasil. Nasceu em São José dos Campos, construiu carreira em São Paulo e nunca parou de olhar para o Vale com os dois olhos: o de quem foi criado aqui e o de quem aprendeu a ler mercado lá fora.</p>
+        </div>
+        <div class="author-card">
+          <img src="Landing page_files/mayumi.jpg" alt="Mayumi Nagano" class="author-photo" loading="lazy" />
+          <h4>Mayumi Nagano</h4>
+          <div class="author-role">Estrategista de Tráfego e Cultura - Studio 8</div>
+          <p class="author-bio">Empreendedora desde 2016 e especialista em automação, tráfego pago e growth para escala em performance digital. Ajuda a transformar a inteligência de dados em ação e crescimento real para negócios em São José dos Campos e região.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FAQ ══ -->
+  <section class="section faq-section" id="faq">
+    <div class="section-inner">
+      <div class="faq-inner">
+        <div>
+          <p class="section-label dark">Base de decisão / FAQ</p>
+          <h2 class="section-title">Clareza antes da conversa.</h2>
+        </div>
+        <div>
+          <div class="faq-list">
+
+            <details open>
+              <summary>
+                O Radar é uma pesquisa ou uma plataforma?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">É uma plataforma de inteligência de mercado local. A pesquisa, as análises e o dashboard trabalham juntos para transformar comportamento em decisões mais específicas sobre São José dos Campos.</p>
+            </details>
+
+            <details>
+              <summary>
+                O que está disponível gratuitamente?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Com cadastro gratuito você acessa o banco de imagens profissionais de SJC e os dados do IBGE organizados. O dashboard analítico completo e o relatório comportamental são módulos premium — fale conosco para saber mais.</p>
+            </details>
+
+            <details>
+              <summary>
+                Como faço para criar minha conta?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Acesse a plataforma pelo botão "Criar conta grátis". O cadastro é rápido — nome, e-mail e senha. Você já fica com acesso imediato ao banco de imagens e aos dados IBGE.</p>
+            </details>
+
+            <details>
+              <summary>
+                Por onde começamos uma conversa sobre o Radar?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Começamos por uma decisão concreta: expansão, posicionamento, comunicação, oferta, território ou outra escolha que dependa de entender melhor o mercado local. Você não precisa de um briefing pronto.</p>
+            </details>
+
+            <details>
+              <summary>
+                O Radar garante aumento de vendas?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Não. O Radar não promete resultado financeiro específico. Ele reduz incertezas, mostra comportamentos reais e ajuda sua equipe a tomar decisões mais bem informadas sobre o mercado de SJC.</p>
+            </details>
+
+            <details>
+              <summary>
+                Para qual tipo de empresa o Radar é mais indicado?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Empresas de varejo, serviços, gastronomia, saúde, educação e incorporadoras que estão em fase de expansão, buscando reposicionamento ou querendo aprofundar seu entendimento sobre o consumidor joseense.</p>
+            </details>
+
+            <details>
+              <summary>
+                Como os dados do dashboard são atualizados?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Os dados demográficos seguem as divulgações oficiais do IBGE, enquanto os módulos comportamentais e o painel de Social Intelligence recebem atualizações contínuas pela equipe de dados do Studio 8.</p>
+            </details>
+
+            <details>
+              <summary>
+                Posso baixar os gráficos do painel para usar na minha apresentação?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Sim, assinantes dos planos Premium e Empresarial podem exportar recortes, relatórios em PDF e gráficos em alta resolução diretamente do dashboard para embasar apresentações executivas e comitês.</p>
+            </details>
+
+            <details>
+              <summary>
+                O banco de imagens gratuitas tem alguma restrição de direitos autorais?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">As imagens do acervo colaborativo são livres para uso em campanhas, mídias sociais e apresentações da sua empresa, desde que mantenham o contexto original e não sejam comercializadas ou revendidas isoladamente.</p>
+            </details>
+
+            <details>
+              <summary>
+                O Relatório de IA pode ser focado apenas no meu segmento?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Sim! A plataforma cruza a base qualitativa e quantitativa geral da cidade e permite que a Inteligência Artificial extraia análises e cenários focados exatamente no seu nicho de atuação e desafio de negócios.</p>
+            </details>
+
+            <details>
+              <summary>
+                Como funciona a 'Invasão de Cenários'?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">É nossa metodologia etnográfica. A equipe vai a campo (shoppings, parques, ruas comerciais) para observar o comportamento real do consumidor de SJC em seu habitat, sem interferências de questionários, captando como ele age de verdade.</p>
+            </details>
+
+            <details>
+              <summary>
+                Qual a fonte primária dos dados demográficos da plataforma?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Utilizamos os microdados mais recentes do IBGE (Censo 2022), mas eles são tratados, refinados e cruzados especificamente para a realidade dos bairros e zonas de São José dos Campos, facilitando a leitura estratégica e local.</p>
+            </details>
+
+            <details>
+              <summary>
+                É possível contratar uma pesquisa exclusiva além da plataforma?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Com certeza. Além da assinatura da plataforma, o Studio 8 realiza projetos de inteligência, branding e pesquisas ad-hoc sob medida para desafios muito específicos que a sua marca precisa desvendar.</p>
+            </details>
+
+            <details>
+              <summary>
+                O Social Intelligence monitora quais redes?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Monitoramos grandes portais de notícias locais, menções públicas em redes e o termômetro de opinião geral sobre eventos, problemas urbanos e tendências que moldam o humor da cidade.</p>
+            </details>
+
+            <details>
+              <summary>
+                Consigo acessar o Radar pelo celular?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Sim, a plataforma web é responsiva. Porém, devido à alta densidade de informações e cruzamento de gráficos no dashboard analítico, recomendamos o uso via desktop ou tablet para uma experiência de análise mais confortável.</p>
+            </details>
+
+            <details>
+              <summary>
+                Vocês têm dados de outras cidades do Vale do Paraíba?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Neste primeiro momento, o projeto Radar é verticalizado, sendo 100% focado e aprofundado exclusivamente na dinâmica cultural, demográfica e comportamental de São José dos Campos.</p>
+            </details>
+
+            <details>
+              <summary>
+                O que significa a margem de erro de ±4,5%?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Significa que, com um nível de confiança de 95%, os resultados da nossa pesquisa quantitativa (477 respostas locais válidas) refletem com precisão a realidade da população de SJC, podendo variar no máximo 4,5 pontos para cima ou para baixo.</p>
+            </details>
+
+            <details>
+              <summary>
+                Posso dividir meu acesso premium com minha equipe?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Depende do plano. As assinaturas Pro e Empresarial contam com permissões e acessos dedicados para que múltiplos líderes e gestores da sua empresa consultem a base simultaneamente.</p>
+            </details>
+
+            <details>
+              <summary>
+                A inteligência artificial lê dados confidenciais da minha empresa?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">Não. A IA do Radar atua apenas consultando a nossa própria base de dados (pesquisas, IBGE e cenários de SJC). Nenhum dado proprietário do seu negócio é exposto, ingerido ou armazenado pelo nosso gerador de análises.</p>
+            </details>
+
+            <details>
+              <summary>
+                O que muda entre o plano Pro e o plano Empresarial?
+                <i class="fas fa-plus faq-icon"></i>
+              </summary>
+              <p class="faq-answer">O plano Empresarial oferece, além da plataforma completa, workshops de imersão presenciais, acompanhamento contínuo e apresentações executivas guiadas pela nossa equipe de estrategistas para o board da sua empresa.</p>
+            </details>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTATO / FORMULÁRIO ══ -->
+  <section class="section contact-section" id="contato">
+    <div class="section-inner">
+      <div class="contact-inner">
+        <div>
+          <div class="contact-logo">
+            <img src="fotos radar/logobranco.png" alt="Radar São José" />
+          </div>
+          <span class="contact-eyebrow">Primeiro movimento</span>
+          <h2 class="section-title light">Qual movimento da sua empresa precisa de mais clareza?</h2>
+          <p class="section-desc" style="color: rgba(255,255,255,0.55); margin-top: 16px;">
+            Conte qual decisão você está avaliando. A equipe do Studio 8 entra em contato para entender o contexto e definir o próximo passo mais útil para a sua decisão.
+          </p>
+          <div class="contact-red-line">
+            <p>Quando a leitura aponta uma questão que pede mais evidência, definimos juntos o próximo nível de investigação e acompanhamento.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="form-group">
+            <input type="text" placeholder="Nome completo" />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="E-mail corporativo" required />
+          </div>
+          <div class="form-group">
+            <input type="tel" placeholder="WhatsApp" />
+          </div>
+          <div class="form-group">
+            <select>
+              <option value="" disabled selected>Qual é o seu objetivo principal?</option>
+              <option>Expansão / nova unidade em SJC</option>
+              <option>Posicionamento de marca local</option>
+              <option>Comunicação e campanhas territoriais</option>
+              <option>Estratégia de oferta e produto</option>
+              <option>Inteligência de mercado / pesquisa</option>
+              <option>Outro</option>
+            </select>
+          </div>
+          <div style="margin-top: 8px;">
+            <a href="mailto:radarsaojose@studio8.com.br" class="btn-primary" style="display: block; text-align: center; width: 100%; background: var(--azul-claro);">Enviar mensagem</a>
+          </div>
+          <p class="form-note">Ou fale direto pelo WhatsApp: <a href="https://wa.me/5512991661925" style="color: var(--azul-claro); text-decoration: none;">+55 12 99166-1925</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-brand">
+        <strong>Radar São José</strong> · Studio 8 · 2026
+      </p>
+      <p class="footer-email">
+        <a href="mailto:radarsaojose@studio8.com.br">radarsaojose@studio8.com.br</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ── JS: FAQ + navbar mobile ── -->
+  <script>
+    // Fecha outros details quando um abre
+    document.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (d.open) {
+          document.querySelectorAll('details').forEach(other => {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+
+    // Contador animado nos stats
+    function animateCounter(el, target, suffix) {
+      let start = 0;
+      const duration = 1800;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const val = progress * target;
+        el.textContent = Number.isInteger(target) ? Math.floor(val) : val.toFixed(1);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nums = entry.target.querySelectorAll('.stat-num');
+          nums.forEach(el => {
+            const raw = el.textContent.replace(/[^0-9.]/g, '');
+            const target = parseFloat(raw);
+            if (!isNaN(target)) animateCounter(el, target);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsBar = document.querySelector('.stats-bar');
+    if (statsBar) observer.observe(statsBar);
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.querySelector('.platform-grid');
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      
+      if (grid && prevBtn && nextBtn) {
+        const scrollAmount = 384; // largura do card (360) + gap (24)
+        
+        prevBtn.addEventListener('click', () => {
+          grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

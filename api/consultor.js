@@ -444,7 +444,7 @@ async function loadCulturalMovements() {
 
   const movements = {
     geografia_silencio: {
-      nome: "A Geografia do Silêncio",
+      nome: "A Geografia da Inércia",
       eixo: "Espaço Público & Convivência Coletiva",
       descricao_apresentacao: "A cultura da harmonia, estabilidade e do 'tá tudo bem' que evita conflito e debate público.",
       diagnostico: "Conformismo positivo e retração para condomínios, gerando sensação de isolamento e estagnação de inovações culturais.",
@@ -1029,7 +1029,7 @@ ESTRUTURA JSON EXATA:
 Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
 
 DIRETRIZES E LIMITES:
-1. MOVIMENTO VENCEDOR: Escolha exatamente UM entre os 4 nomes oficiais: "A Geografia do Silêncio", "A Cidade Prometida", "A Tribo Global" ou "Empreendedorismo Intuitivo".
+1. MOVIMENTO VENCEDOR: Escolha exatamente UM entre os 4 nomes oficiais: "A Geografia da Inércia", "A Cidade Prometida", "A Tribo Global" ou "Empreendedorismo Intuitivo".
 2. JUSTIFICATIVA: justificativa_densa (ate 250c), condicao_de_sucesso (ate 160c), risco_de_erro (ate 160c).
 3. 4 MOVIMENTOS: analise de cada um em ate 120 caracteres.
 4. VERBALIZACOES: Escolha de 2 a 4 verbalizacoes presentes no verbatims_pool mantendo id e citacao identicos.
@@ -1127,7 +1127,7 @@ function validateModuleResult(stepId, result, snapshot) {
 
   if (stepId === "movimentos_vencedor_testes") {
     const validMovementNames = [
-      "A Geografia do Silêncio",
+      "A Geografia da Inércia",
       "A Cidade Prometida",
       "A Tribo Global",
       "Empreendedorismo Intuitivo"

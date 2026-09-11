@@ -33,24 +33,37 @@ window.scrollToSection = function(sectionId) {
   }
 };
 
-// Alternância de Abas SPA (Painel de Gráficos vs Relatório Completo vs IBGE vs Banco de Imagens)
+// Alternância de Abas SPA com Preservação de Posição de Rolagem (Scroll State)
 window.currentMainTab = "dashboard";
+window.tabScrollPositions = {};
+
 window.switchMainTab = function(tabName) {
+  // 1. Salvar a posição de rolagem atual da aba de onde o usuário está saindo
+  if (window.currentMainTab) {
+    window.tabScrollPositions[window.currentMainTab] = window.scrollY || window.pageYOffset || 0;
+  }
+
   window.currentMainTab = tabName;
   const dashboardView = document.getElementById("dashboard-view");
   const reportView = document.getElementById("executive-report-view");
   const aiReportView = document.getElementById("ai-report-view");
   const ibgeView = document.getElementById("ibge-view");
   const imageBankView = document.getElementById("image-bank-view");
+  const midiaView = document.getElementById("midia-dashboard-view");
+  const historiaView = document.getElementById("historia-view");
 
   const btnDashboard = document.getElementById("btn-nav-dashboard");
   const btnReport = document.getElementById("btn-nav-report");
   const btnAiReport = document.getElementById("btn-nav-consultor");
   const btnIbge = document.getElementById("btn-nav-ibge");
   const btnImageBank = document.getElementById("btn-nav-image-bank");
+  const btnMidia = document.getElementById("btn-nav-midia");
+  const btnHistoria = document.getElementById("btn-nav-historia");
 
   const filtersContainer = document.getElementById("sidebar-filters-container");
   const ibgeFiltersContainer = document.getElementById("sidebar-ibge-filters-container");
+  const midiaFiltersContainer = document.getElementById("sidebar-midia-filters-container");
+  const historiaFiltersContainer = document.getElementById("sidebar-historia-filters-container");
   const reportIndex = document.getElementById("sidebar-report-index");
 
   if (!dashboardView || !reportView) return;
@@ -64,10 +77,14 @@ window.switchMainTab = function(tabName) {
   if (aiReportView) aiReportView.classList.add("hidden");
   if (ibgeView) ibgeView.classList.add("hidden");
   if (imageBankView) imageBankView.classList.add("hidden");
+  if (midiaView) midiaView.classList.add("hidden");
+  if (historiaView) historiaView.classList.add("hidden");
 
   // Esconder containers de filtros laterais por padrão
   if (filtersContainer) filtersContainer.classList.add("hidden");
   if (ibgeFiltersContainer) ibgeFiltersContainer.classList.add("hidden");
+  if (midiaFiltersContainer) midiaFiltersContainer.classList.add("hidden");
+  if (historiaFiltersContainer) historiaFiltersContainer.classList.add("hidden");
   if (reportIndex) reportIndex.classList.add("hidden");
 
   // Resetar botões
@@ -76,15 +93,43 @@ window.switchMainTab = function(tabName) {
   if (btnAiReport) btnAiReport.className = inactiveBtnClass;
   if (btnIbge) btnIbge.className = inactiveBtnClass;
   if (btnImageBank) btnImageBank.className = inactiveBtnClass;
+  if (btnMidia) btnMidia.className = inactiveBtnClass;
+  if (btnHistoria) btnHistoria.className = inactiveBtnClass;
 
-  if (tabName === "report") {
+  if (tabName === "midia") {
+    if (midiaView) midiaView.classList.remove("hidden");
+    if (midiaFiltersContainer) midiaFiltersContainer.classList.remove("hidden");
+    if (btnMidia) btnMidia.className = activeBtnClass;
+    
+    if (typeof window.onSwitchToMidiaTab === "function") {
+      window.onSwitchToMidiaTab();
+    } else {
+      const loadingState = document.getElementById("midia-loading-state");
+      const dashboardContent = document.getElementById("midia-dashboard-content");
+      if (loadingState) loadingState.classList.add("hidden");
+      if (dashboardContent) dashboardContent.classList.remove("hidden");
+      if (typeof window.renderMidiaDashboard === "function") {
+        window.renderMidiaDashboard();
+      }
+    }
+  } else if (tabName === "historia") {
+    if (historiaView) historiaView.classList.remove("hidden");
+    if (historiaFiltersContainer) historiaFiltersContainer.classList.remove("hidden");
+    if (btnHistoria) btnHistoria.className = activeBtnClass;
+
+    if (typeof window.renderHistoriaDashboard === "function") {
+      window.renderHistoriaDashboard();
+    }
+  } else if (tabName === "report") {
     reportView.classList.remove("hidden");
     if (reportIndex) reportIndex.classList.remove("hidden");
     if (btnReport) btnReport.className = activeBtnClass;
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
     if (typeof window.renderExecutiveReportCharts === "function") {
       window.renderExecutiveReportCharts(window.currentFilteredRecords || allSurveyRecords);
+    }
+    if (typeof window.renderInfluenciadoresModule === "function") {
+      window.renderInfluenciadoresModule();
     }
   } else if (tabName === "ai-report") {
     if (aiReportView) aiReportView.classList.remove("hidden");
@@ -98,26 +143,290 @@ window.switchMainTab = function(tabName) {
     } else if (input) {
       setTimeout(() => input.focus(), 150);
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   } else if (tabName === "ibge") {
     if (ibgeView) ibgeView.classList.remove("hidden");
     if (ibgeFiltersContainer) ibgeFiltersContainer.classList.remove("hidden");
     if (btnIbge) btnIbge.className = activeBtnClass;
 
     if (typeof window.renderIbgeCharts === "function") window.renderIbgeCharts();
-    window.scrollTo({ top: 0, behavior: "smooth" });
   } else if (tabName === "image-bank") {
     if (imageBankView) imageBankView.classList.remove("hidden");
     if (btnImageBank) btnImageBank.className = activeBtnClass;
     if (typeof window.renderImageBank === "function") window.renderImageBank();
-    window.scrollTo({ top: 0, behavior: "smooth" });
   } else {
     dashboardView.classList.remove("hidden");
     if (filtersContainer) filtersContainer.classList.remove("hidden");
     if (btnDashboard) btnDashboard.className = activeBtnClass;
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  // 2. Restaurar a posição de rolagem salva da aba de destino (ou 0 se for a primeira visita)
+  const targetScrollY = window.tabScrollPositions[tabName] !== undefined ? window.tabScrollPositions[tabName] : 0;
+  setTimeout(() => {
+    window.scrollTo({ top: targetScrollY, behavior: "instant" });
+  }, 10);
+};
+
+// =========================================================================
+// MÓDULO INTERATIVO: TÚNEL DO TEMPO & HISTÓRIA DE SÃO JOSÉ DOS CAMPOS
+// =========================================================================
+
+window.historiaState = {
+  currentSubTab: 'timeline',
+  selectedYear: null
+};
+
+window.renderHistoriaDashboard = function() {
+  const data = window.HISTORIA_SJC_DATA;
+  if (!data) return;
+
+  // Atualizar contadores do sidebar
+  const totalCountEl = document.getElementById("historia-total-base-count");
+  if (totalCountEl) totalCountEl.textContent = data.eventos.length;
+
+  // Renderizar régua de anos
+  window.renderHistoriaYearsBar();
+
+  // Renderizar conteúdo inicial
+  window.filterHistoriaEvents();
+  window.renderHistoriaPersonalidades();
+  window.renderHistoriaPrefeitos();
+};
+
+window.renderHistoriaYearsBar = function() {
+  const container = document.getElementById("historia-years-bar");
+  if (!container || !window.HISTORIA_SJC_DATA) return;
+
+  const marcos = window.HISTORIA_SJC_DATA.marcosAnosDestaque;
+  let html = `<button type="button" onclick="window.selectHistoriaYear(null)" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${window.historiaState.selectedYear === null ? 'bg-purple-900 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'} cursor-pointer whitespace-nowrap">
+    Todos os Anos
+  </button>`;
+
+  marcos.forEach(ano => {
+    const active = window.historiaState.selectedYear === ano;
+    html += `<button type="button" onclick="window.selectHistoriaYear(${ano})" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${active ? 'bg-purple-900 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'} cursor-pointer whitespace-nowrap">
+      ${ano}
+    </button>`;
+  });
+
+  container.innerHTML = html;
+};
+
+window.selectHistoriaYear = function(ano) {
+  window.historiaState.selectedYear = ano;
+  window.renderHistoriaYearsBar();
+  window.filterHistoriaEvents();
+};
+
+window.filterHistoriaEvents = function() {
+  const data = window.HISTORIA_SJC_DATA;
+  if (!data) return;
+
+  const filterEpoca = document.getElementById("filter-historia-epoca")?.value || "all";
+  const filterEixo = document.getElementById("filter-historia-eixo")?.value || "all";
+  const filterConfianca = document.getElementById("filter-historia-confianca")?.value || "all";
+  const filterSearch = (document.getElementById("filter-historia-search")?.value || "").toLowerCase().trim();
+
+  let filtered = data.eventos.filter(ev => {
+    // Ano selecionado na barra
+    if (window.historiaState.selectedYear && ev.ano !== window.historiaState.selectedYear) {
+      return false;
+    }
+
+    // Época
+    if (filterEpoca !== "all") {
+      const epocaObj = data.epocas.find(e => e.id === filterEpoca);
+      if (epocaObj && (ev.ano < epocaObj.minAno || ev.ano > epocaObj.maxAno)) {
+        return false;
+      }
+    }
+
+    // Eixo
+    if (filterEixo !== "all" && ev.eixo !== filterEixo) {
+      return false;
+    }
+
+    // Confiança
+    if (filterConfianca !== "all" && !ev.situacao.includes(filterConfianca)) {
+      return false;
+    }
+
+    // Busca textual
+    if (filterSearch) {
+      const searchBlob = `${ev.ano} ${ev.titulo} ${ev.resumo} ${ev.detalhes} ${ev.fontes}`.toLowerCase();
+      if (!searchBlob.includes(filterSearch)) return false;
+    }
+
+    return true;
+  });
+
+  // Atualizar contador de filtrados
+  const countEl = document.getElementById("historia-filtered-records-count");
+  if (countEl) countEl.textContent = filtered.length;
+
+  window.renderHistoriaTimeline(filtered);
+};
+
+window.renderHistoriaTimeline = function(eventosList) {
+  const container = document.getElementById("historia-timeline-container");
+  if (!container) return;
+
+  if (eventosList.length === 0) {
+    container.innerHTML = `
+      <div class="p-8 text-center bg-white rounded-2xl border border-slate-200 space-y-2">
+        <i class="fa-solid fa-hourglass-empty text-3xl text-slate-300"></i>
+        <p class="text-sm font-bold text-slate-700">Nenhum marco histórico encontrado para este filtro.</p>
+        <p class="text-xs text-slate-400">Tente ajustar a busca ou clicar em "Limpar Filtros de História".</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Mapear ícones por eixo
+  const eixoIconMap = {
+    fundacao: "fa-landmark text-amber-500",
+    saude: "fa-notes-medical text-rose-500",
+    ciencia: "fa-plane-departure text-cyan-600",
+    cultura: "fa-masks-theater text-purple-600",
+    ambiente: "fa-leaf text-emerald-600",
+    trabalho: "fa-industry text-indigo-600"
+  };
+
+  container.innerHTML = eventosList.map(ev => {
+    const iconClass = eixoIconMap[ev.eixo] || "fa-clock text-purple-600";
+    
+    let confiancaBadgeClass = "bg-emerald-50 text-emerald-800 border-emerald-200";
+    if (ev.situacao.includes("HIPÓTESE")) confiancaBadgeClass = "bg-amber-50 text-amber-800 border-amber-200";
+    if (ev.situacao.includes("CONFLITO")) confiancaBadgeClass = "bg-rose-50 text-rose-800 border-rose-200";
+    if (ev.situacao.includes("LACUNA")) confiancaBadgeClass = "bg-slate-100 text-slate-700 border-slate-300";
+
+    return `
+      <div class="relative group">
+        <!-- Marcador luminoso no trilho da timeline -->
+        <div class="absolute -left-[27px] sm:-left-[41px] top-1.5 w-6 h-6 rounded-full bg-white border-4 border-purple-600 shadow-sm group-hover:scale-125 transition-all flex items-center justify-center"></div>
+
+        <!-- Card do Evento Histórico -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-lg font-black text-brand-950 font-mono bg-purple-50 border border-purple-100 px-3 py-1 rounded-xl">
+                ${ev.ano}
+              </span>
+              <span class="text-xs font-semibold text-slate-500">${ev.periodo}</span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full border ${confiancaBadgeClass}">
+                ${ev.situacao}
+              </span>
+              <span class="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-xs">
+                <i class="fa-solid ${iconClass}"></i>
+              </span>
+            </div>
+          </div>
+
+          <h3 class="text-base sm:text-lg font-black text-brand-950 leading-snug">
+            ${ev.titulo}
+          </h3>
+
+          <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+            ${ev.resumo}
+          </p>
+
+          ${ev.detalhes ? `
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-600 leading-relaxed font-normal">
+              <strong class="text-brand-900 font-bold">Nota do Dossiê:</strong> ${ev.detalhes}
+            </div>
+          ` : ''}
+
+          <div class="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100">
+            <span class="flex items-center gap-1.5 font-medium">
+              <i class="fa-solid fa-book-open text-purple-600"></i>
+              Fonte: <strong class="text-slate-600 font-semibold">${ev.fontes}</strong>
+            </span>
+            <span class="text-[10px] font-mono text-slate-400">ID: ${ev.id}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+};
+
+window.renderHistoriaPersonalidades = function() {
+  const container = document.getElementById("historia-personalidades-grid");
+  if (!container || !window.HISTORIA_SJC_DATA) return;
+
+  container.innerHTML = window.HISTORIA_SJC_DATA.personalidades.map(p => `
+    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 hover:border-purple-300 transition-all flex flex-col justify-between space-y-3">
+      <div class="space-y-2">
+        <div class="w-10 h-10 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center text-lg font-black shadow-xs">
+          ${p.nome.charAt(0)}
+        </div>
+        <div>
+          <h4 class="text-sm font-black text-brand-950">${p.nome}</h4>
+          <p class="text-[11px] font-bold text-purple-700">${p.cargo}</p>
+        </div>
+        <p class="text-xs text-slate-600 font-medium leading-relaxed">${p.descricao}</p>
+      </div>
+      <div>
+        <span class="inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">
+          ${p.tag}
+        </span>
+      </div>
+    </div>
+  `).join('');
+};
+
+window.renderHistoriaPrefeitos = function() {
+  const tbody = document.getElementById("historia-prefeitos-table-body");
+  if (!tbody || !window.HISTORIA_SJC_DATA) return;
+
+  tbody.innerHTML = window.HISTORIA_SJC_DATA.prefeitos.map(pref => `
+    <tr class="hover:bg-slate-50 transition-colors">
+      <td class="px-4 py-3 font-bold text-brand-900 whitespace-nowrap">${pref.periodo}</td>
+      <td class="px-4 py-3 font-black text-slate-900">${pref.nome}</td>
+      <td class="px-4 py-3 font-medium text-slate-600">${pref.cargo}</td>
+      <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">${pref.acesso}</span></td>
+      <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold ${pref.situacao.includes('LACUNA') ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">${pref.situacao}</span></td>
+    </tr>
+  `).join('');
+};
+
+window.resetHistoriaFilters = function() {
+  const elEpoca = document.getElementById("filter-historia-epoca");
+  const elEixo = document.getElementById("filter-historia-eixo");
+  const elConfianca = document.getElementById("filter-historia-confianca");
+  const elSearch = document.getElementById("filter-historia-search");
+
+  if (elEpoca) elEpoca.value = "all";
+  if (elEixo) elEixo.value = "all";
+  if (elConfianca) elConfianca.value = "all";
+  if (elSearch) elSearch.value = "";
+
+  window.historiaState.selectedYear = null;
+  window.renderHistoriaYearsBar();
+  window.filterHistoriaEvents();
+};
+
+window.switchHistoriaSubTab = function(subTabName) {
+  const tabs = ['timeline', 'personalidades', 'prefeitos', 'fontes'];
+  tabs.forEach(t => {
+    const el = document.getElementById(`historia-sub-${t}`);
+    const btn = document.getElementById(`btn-hist-sub-${t}`);
+    if (el) {
+      if (t === subTabName) {
+        el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
+    if (btn) {
+      if (t === subTabName) {
+        btn.className = "px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-900 text-white shadow-xs cursor-pointer";
+      } else {
+        btn.className = "px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer";
+      }
+    }
+  });
 };
 
 const IMAGE_BANK_ITEMS = [
@@ -8477,7 +8786,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   if (!movimentosObj.veredicto_final.nome_movimento || movimentosObj.veredicto_final.nome_movimento.toLowerCase().includes("fit cultural")) {
     const rawJust = (movimentosObj.veredicto_final.justificativa_densa || "").toLowerCase();
     if (rawJust.includes("silêncio") || rawJust.includes("silencio")) {
-      movimentosObj.veredicto_final.nome_movimento = "A Geografia do Silêncio (Hipótese)";
+      movimentosObj.veredicto_final.nome_movimento = "A Geografia da Inércia (Hipótese)";
     } else if (rawJust.includes("prometida")) {
       movimentosObj.veredicto_final.nome_movimento = "A Cidade Prometida (Hipótese)";
     } else if (rawJust.includes("intuitivo") || rawJust.includes("empreendedorismo")) {
@@ -9386,12 +9695,12 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <!-- 1. GEOGRAFIA DO SILÊNCIO -->
+        <!-- 1. GEOGRAFIA DA INÉRCIA -->
         <div class="group bg-slate-50/90 rounded-2xl border border-slate-200 overflow-hidden shadow-2xs hover:shadow-md transition-all flex flex-col justify-between">
           <div>
             <div class="relative h-32 w-full overflow-hidden">
               <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80" 
-                   alt="Geografia do Silêncio" 
+                   alt="Geografia da Inércia" 
                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
               <span class="absolute bottom-2 left-2.5 px-2 py-0.5 rounded-md bg-emerald-950/80 backdrop-blur-xs text-emerald-300 font-mono font-bold text-[9px] uppercase tracking-wider border border-emerald-500/30">
@@ -9399,7 +9708,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
               </span>
             </div>
             <div class="p-3.5 space-y-1.5">
-              <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DO SILÊNCIO</h5>
+              <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DA INÉRCIA</h5>
               <p class="text-xs text-slate-600 leading-relaxed font-normal">
                 ${formatMarkdown(movimentosObj.analise_cards?.geografia_silencio || "Refúgio, sossego, áreas verdes e calmaria do estresse corporativo.")}
               </p>
