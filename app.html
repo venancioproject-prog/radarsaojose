@@ -674,57 +674,84 @@
             <!-- Lista Vertical de Filtros de Mídia -->
             <div class="space-y-3.5 text-xs">
               
-              <!-- 1. Perfil Instagram -->
+              <!-- 1. Período de Datas (Início & Fim) -->
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label for="filter-midia-date-start" class="block font-bold text-slate-700 mb-1 flex items-center gap-1 text-[11px]">
+                    <i class="fa-regular fa-calendar-minus text-rose-500"></i> Data Inicial
+                  </label>
+                  <input 
+                    type="date" 
+                    id="filter-midia-date-start" 
+                    onchange="window.applyMidiaFilters()"
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 text-xs cursor-pointer"
+                  />
+                </div>
+                <div>
+                  <label for="filter-midia-date-end" class="block font-bold text-slate-700 mb-1 flex items-center gap-1 text-[11px]">
+                    <i class="fa-regular fa-calendar-plus text-rose-500"></i> Data Final
+                  </label>
+                  <input 
+                    type="date" 
+                    id="filter-midia-date-end" 
+                    onchange="window.applyMidiaFilters()"
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 text-xs cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <!-- 2. Perfil Instagram -->
               <div>
                 <label for="filter-midia-perfil" class="block font-bold text-slate-700 mb-1">Perfil Instagram</label>
                 <div class="relative">
-                  <select id="filter-midia-perfil" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <select id="filter-midia-perfil" onchange="window.applyMidiaFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                     <option value="">Todos os Perfis (10 canais)</option>
                   </select>
                   <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
                 </div>
               </div>
 
-              <!-- 2. Tema Central -->
+              <!-- 3. Tema Central -->
               <div>
                 <label for="filter-midia-tema" class="block font-bold text-slate-700 mb-1">Tema Central</label>
                 <div class="relative">
-                  <select id="filter-midia-tema" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <select id="filter-midia-tema" onchange="window.applyMidiaFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                     <option value="">Todos os Temas</option>
                   </select>
                   <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
                 </div>
               </div>
 
-              <!-- 3. Sentimento do Público -->
+              <!-- 4. Sentimento do Público -->
               <div>
                 <label for="filter-midia-sentimento" class="block font-bold text-slate-700 mb-1">Sentimento do Público</label>
                 <div class="relative">
-                  <select id="filter-midia-sentimento" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <select id="filter-midia-sentimento" onchange="window.applyMidiaFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                     <option value="">Todos os Sentimentos</option>
                   </select>
                   <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
                 </div>
               </div>
 
-              <!-- 4. Tom da Notícia -->
+              <!-- 5. Tom da Notícia -->
               <div>
                 <label for="filter-midia-tom" class="block font-bold text-slate-700 mb-1">Tom da Notícia</label>
                 <div class="relative">
-                  <select id="filter-midia-tom" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
+                  <select id="filter-midia-tom" onchange="window.applyMidiaFilters()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 cursor-pointer appearance-none">
                     <option value="">Todos os Tons</option>
                   </select>
                   <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
                 </div>
               </div>
 
-              <!-- 5. Busca Textual por Termo ou Entidade -->
+              <!-- 6. Busca Textual por Termo na Legenda -->
               <div>
-                <label for="filter-midia-search" class="block font-bold text-slate-700 mb-1">Buscar Palavra ou Entidade</label>
+                <label for="filter-midia-search" class="block font-bold text-slate-700 mb-1">Buscar na Legenda</label>
                 <div class="relative">
                   <input 
                     type="text" 
                     id="filter-midia-search" 
+                    oninput="window.applyMidiaFilters()"
                     placeholder="Ex: Tarcísio, Acidente, Embraer..." 
                     class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 text-xs"
                   />
@@ -8495,7 +8522,7 @@
 
         <!-- Conteúdo Principal do Dashboard de Mídia -->
         <div id="midia-dashboard-content" class="space-y-8 hidden">
-          
+
           <!-- CARDS DE RESUMO (KPIS DE TOPO: 6 CARDS OTIMIZADOS) -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
             
@@ -8508,9 +8535,8 @@
                     <i class="fa-brands fa-instagram"></i>
                   </span>
                 </div>
-                <div class="mt-2 flex items-baseline gap-1.5 flex-wrap">
+                <div class="mt-2">
                   <span id="midia-kpi-total-posts" class="text-xl font-black text-brand-950">7.543</span>
-                  <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 shrink-0">100% Amostra</span>
                 </div>
               </div>
               <p class="text-[11px] text-slate-500 font-medium mt-2 leading-tight">10 canais de notícias</p>
@@ -8654,10 +8680,10 @@
               <!-- Barra Visual Proporcional de Sentimento -->
               <div class="space-y-4 my-auto">
                 <div class="w-full h-5 rounded-full overflow-hidden flex bg-slate-100 border border-slate-200 shadow-inner">
-                  <div id="sent-bar-positivo" class="bg-emerald-500 h-full transition-all duration-500" style="width: 39%;"></div>
-                  <div id="sent-bar-neutro" class="bg-slate-500 h-full transition-all duration-500" style="width: 33%;"></div>
-                  <div id="sent-bar-negativo" class="bg-rose-500 h-full transition-all duration-500" style="width: 22%;"></div>
-                  <div id="sent-bar-polarizado" class="bg-purple-600 h-full transition-all duration-500" style="width: 5%;"></div>
+                  <div id="sent-bar-positivo" class="bg-emerald-500 h-full transition-all duration-500" style="width: 25%;"></div>
+                  <div id="sent-bar-neutro" class="bg-slate-500 h-full transition-all duration-500" style="width: 35%;"></div>
+                  <div id="sent-bar-negativo" class="bg-rose-500 h-full transition-all duration-500" style="width: 26%;"></div>
+                  <div id="sent-bar-polarizado" class="bg-purple-600 h-full transition-all duration-500" style="width: 14%;"></div>
                 </div>
 
                 <!-- Legenda com contadores numéricos -->
@@ -8685,7 +8711,7 @@
 
                   <div class="p-3 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-between">
                     <span class="font-bold text-purple-800 flex items-center gap-1.5">
-                      <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> Polarizado
+                      <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> Dividido/Polarizado
                     </span>
                     <span id="sent-txt-polarizado" class="font-black text-purple-950">0 (0%)</span>
                   </div>
@@ -8693,20 +8719,55 @@
               </div>
             </div>
 
+            <!-- Gráfico Full-Width: Positividade e Negatividade por Veículo -->
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col justify-between">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 mb-4 gap-2">
+                <div>
+                  <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-chart-column text-brand-600"></i>
+                    Análise de Sentimento dos Comentários por Veículo
+                  </h3>
+                  <p class="text-xs text-slate-400 font-medium mt-0.5">Comparativo de recepção e tom do público nos 10 canais de mídia de SJC</p>
+                </div>
+                <div class="flex items-center gap-3 text-xs font-bold shrink-0 flex-wrap">
+                  <span class="flex items-center gap-1.5 text-emerald-700"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Positivo</span>
+                  <span class="flex items-center gap-1.5 text-slate-600"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Neutro</span>
+                  <span class="flex items-center gap-1.5 text-rose-700"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Negativo</span>
+                  <span class="flex items-center gap-1.5 text-purple-700"><span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> Polarizado</span>
+                </div>
+              </div>
+
+              <!-- Bloco Mini-Cards: Logos dos Veículos e Número de Seguidores no Instagram -->
+              <div class="mb-5">
+                <div class="flex items-center justify-between mb-2.5">
+                  <span class="text-[11px] font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                    <i class="fa-brands fa-instagram text-rose-500"></i> Canais Oficiais de Mídia &bull; Seguidores & Publicações
+                  </span>
+                </div>
+                <div id="midia-sentiment-profiles-header-cards" class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2">
+                  <!-- Povoado dinamicamente via JS com logo, handle e seguidores -->
+                </div>
+              </div>
+
+              <div class="relative w-full h-[360px] sm:h-[400px]">
+                <canvas id="chart-midia-sentimento-veiculos"></canvas>
+              </div>
+            </div>
+
           </div>
 
-          <!-- GRID DE GRÁFICOS ANALÍTICOS (LINHA 3: TEMA CENTRAL & GATILHOS DE ENGAJAMENTO) -->
+          <!-- GRID DE GRÁFICOS ANALÍTICOS (LINHA 3: DISTRIBUIÇÃO POR TEMA CENTRAL: POSTS VS ENGAJAMENTO) -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            <!-- Gráfico 2: Distribuição do Tema Central (Donut) -->
+            <!-- Gráfico 2A: Distribuição por Tema Central (Número de Postagens) -->
             <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col justify-between">
               <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
                 <div>
                   <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
                     <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
-                    Distribuição por Tema Central
+                    Distribuição por Tema Central (Número de Postagens)
                   </h3>
-                  <p class="text-xs text-slate-400 font-medium mt-0.5">Participação relativa das categorias dinâmicas</p>
+                  <p class="text-xs text-slate-400 font-medium mt-0.5">Participação relativa por volume de publicações</p>
                 </div>
               </div>
               <div class="h-72 w-full relative">
@@ -8714,9 +8775,29 @@
               </div>
             </div>
 
-            <!-- Gráfico 3: Top Gatilhos de Engajamento (Barras Horizontais) -->
+            <!-- Gráfico 2B: Distribuição por Tema Central (Engajamento por Tema) -->
             <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col justify-between">
               <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+                <div>
+                  <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-heart-pulse text-rose-500"></i>
+                    Distribuição por Tema Central (Engajamento por Tema)
+                  </h3>
+                  <p class="text-xs text-slate-400 font-medium mt-0.5">Volume total de interações (likes + comentários) por tema</p>
+                </div>
+              </div>
+              <div class="h-72 w-full relative">
+                <canvas id="chart-midia-theme-engagement"></canvas>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- GRID LINHA: TOP GATILHOS DE ENGAJAMENTO & MAPA DE ÁRVORE DO TOM DA NOTÍCIA -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Coluna 1: Top Gatilhos de Engajamento (Barras Horizontais) -->
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
                 <div>
                   <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
                     <i class="fa-solid fa-bolt text-amber-500"></i>
@@ -8725,32 +8806,47 @@
                   <p class="text-xs text-slate-400 font-medium mt-0.5">Volume total de interações (likes + comentários) por gatilho psicológico</p>
                 </div>
               </div>
-              <div class="h-72 w-full relative">
+              <div class="w-full relative flex-1 min-h-[360px]">
                 <canvas id="chart-midia-triggers"></canvas>
               </div>
             </div>
 
+            <!-- Coluna 2: Mapa de Árvore do Tom da Notícia -->
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+                <div>
+                  <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-square-poll-vertical text-brand-600"></i>
+                    Mapa de Árvore • Distribuição por Tom da Notícia
+                  </h3>
+                  <p class="text-xs text-slate-400 font-medium mt-0.5">Mapeamento proporcional em blocos por volume de matérias e engajamento</p>
+                </div>
+              </div>
+              <div id="chart-midia-tone-container" class="w-full relative min-h-[380px] flex-1">
+                <canvas id="chart-midia-tone"></canvas>
+              </div>
+            </div>
           </div>
 
-          <!-- GRID LINHA 3: DIAGRAMA DE FLUXO SANKEY - TEMA CENTRAL VS TOM EDITORIAL -->
+          <!-- GRID LINHA 3: DIAGRAMA DE FLUXO SANKEY - TEMA CENTRAL VS GATILHO DE ENGAJAMENTO -->
           <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4 flex-wrap gap-2">
               <div>
                 <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
                   <i class="fa-solid fa-diagram-project text-brand-600"></i>
-                  Fluxo Editorial: Tema Central &rarr; Tom da Notícia (Sankey)
+                  Fluxo Editorial: Tema Central &rarr; Gatilho de Engajamento (Sankey)
                 </h3>
-                <p class="text-xs text-slate-400 font-medium mt-0.5">Mapeamento visual da conexão entre as temáticas abordadas e o tom editorial (Informativo, Alerta, Comemorativo, Crítico, Descontraído, etc.)</p>
+                <p class="text-xs text-slate-400 font-medium mt-0.5">Mapeamento visual da conexão entre as temáticas abordadas e os gatilhos psicológicos de engajamento do público</p>
               </div>
               <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-50 rounded-xl border border-brand-100 text-[11px] text-brand-800 font-bold">
-                  <i class="fa-solid fa-arrows-split-up-and-left text-brand-600"></i> Fluxo de Publicações &bull; 7 Tons Editoriais
+                  <i class="fa-solid fa-arrows-split-up-and-left text-brand-600"></i> Fluxo de Publicações &bull; Gatilhos de Engajamento
                 </span>
               </div>
             </div>
             
             <!-- Container do Sankey Responsivo com Altura Adequada -->
-            <div class="w-full h-[520px] relative rounded-2xl bg-white p-2">
+            <div id="chart-midia-sankey-container" class="w-full min-h-[480px] relative rounded-2xl bg-white p-2">
               <canvas id="chart-midia-sankey"></canvas>
             </div>
           </div>
@@ -8759,8 +8855,8 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
             <!-- Gráfico: Figuras Públicas & Pessoas Mais Citadas -->
-            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col justify-between">
-              <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
                 <div>
                   <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
                     <i class="fa-solid fa-users text-brand-600"></i>
@@ -8769,24 +8865,27 @@
                   <p class="text-xs text-slate-400 font-medium mt-0.5">Lideranças, gestores e personalidades com maior volume de menções nas legendas</p>
                 </div>
               </div>
-              <div class="h-80 w-full relative">
+              <div class="w-full relative flex-1 min-h-[360px]">
                 <canvas id="chart-midia-people"></canvas>
               </div>
             </div>
 
-            <!-- Gráfico: Cidades Mais Citadas na Cobertura -->
-            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col justify-between">
-              <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+            <!-- Gráfico/Mapa: Cidades Mais Citadas na Cobertura (Mapa de Calor Real Leaflet) -->
+            <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-card flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3 flex-wrap gap-2">
                 <div>
                   <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
-                    <i class="fa-solid fa-city text-accent-cyan"></i>
-                    Cidades & Municípios Mais Citados
+                    <i class="fa-solid fa-map-location-dot text-accent-cyan"></i>
+                    Mapa de Calor Geográfico • Cidades & Municípios
                   </h3>
-                  <p class="text-xs text-slate-400 font-medium mt-0.5">Distribuição geográfica das notícias entre São José dos Campos e região</p>
+                  <p class="text-xs text-slate-400 font-medium mt-0.5">Distribuição geográfica interativa com rótulos de dados e porcentagens da cobertura de mídia</p>
                 </div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-cyan-50 text-cyan-800 border border-cyan-200/80">
+                  <i class="fa-solid fa-fire text-rose-500 animate-pulse"></i> Mapa de Calor Real
+                </span>
               </div>
-              <div class="h-80 w-full relative">
-                <canvas id="chart-midia-cities"></canvas>
+              <div class="w-full relative rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-900 flex-1 min-h-[360px]">
+                <div id="midia-cities-map-container" class="h-full w-full min-h-[360px] relative z-0"></div>
               </div>
             </div>
 
@@ -8816,7 +8915,7 @@
           </div>
 
           <!-- TABELA INTERATIVA DE PUBLICAÇÕES -->
-          <div class="rounded-3xl bg-white border border-slate-200 shadow-card overflow-hidden">
+          <div id="midia-table-container" class="rounded-3xl bg-white border border-slate-200 shadow-card overflow-hidden">
             <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <h3 class="text-sm font-black text-brand-950 uppercase tracking-tight flex items-center gap-2">
@@ -8832,16 +8931,56 @@
             <div class="overflow-x-auto w-full">
               <table class="w-full text-left border-collapse table-auto">
                 <thead>
-                  <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-wider text-slate-500 whitespace-nowrap">
+                  <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-wider text-slate-500 whitespace-nowrap select-none">
                     <th class="px-3 py-2.5 text-center w-12">Foto</th>
-                    <th class="px-3 py-2.5">Perfil</th>
-                    <th class="px-3 py-2.5">Data / Hora</th>
-                    <th class="px-3 py-2.5 text-right">Engajamento</th>
-                    <th class="px-3 py-2.5">Tema & Subtema</th>
-                    <th class="px-3 py-2.5 max-w-[200px]">Legenda</th>
-                    <th class="px-3 py-2.5 text-center">Tom</th>
-                    <th class="px-3 py-2.5 text-center">Sentimento</th>
-                    <th class="px-3 py-2.5">Entidades</th>
+                    <th onclick="window.setMidiaSortColumn('perfil')" class="px-3 py-2.5 cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Perfil">
+                      <div class="flex items-center gap-1">
+                        <span>Perfil</span>
+                        <i id="sort-icon-perfil" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('timestamp_brasilia')" class="px-3 py-2.5 cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Data/Hora">
+                      <div class="flex items-center gap-1">
+                        <span>Data / Hora</span>
+                        <i id="sort-icon-timestamp_brasilia" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('engajamento_total')" class="px-3 py-2.5 text-right cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Engajamento">
+                      <div class="flex items-center justify-end gap-1">
+                        <span>Engajamento</span>
+                        <i id="sort-icon-engajamento_total" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('tema_central')" class="px-3 py-2.5 cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Tema">
+                      <div class="flex items-center gap-1">
+                        <span>Tema & Subtema</span>
+                        <i id="sort-icon-tema_central" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('legenda')" class="px-3 py-2.5 max-w-[200px] cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Legenda">
+                      <div class="flex items-center gap-1">
+                        <span>Legenda</span>
+                        <i id="sort-icon-legenda" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('tom_noticia')" class="px-3 py-2.5 text-center cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Tom">
+                      <div class="flex items-center justify-center gap-1">
+                        <span>Tom</span>
+                        <i id="sort-icon-tom_noticia" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('sentimento_comentarios')" class="px-3 py-2.5 text-center cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Sentimento">
+                      <div class="flex items-center justify-center gap-1">
+                        <span>Sentimento</span>
+                        <i id="sort-icon-sentimento_comentarios" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
+                    <th onclick="window.setMidiaSortColumn('entidades_citadas')" class="px-3 py-2.5 cursor-pointer hover:bg-slate-100 transition-colors group/th" title="Clique para ordenar por Entidades">
+                      <div class="flex items-center gap-1">
+                        <span>Entidades</span>
+                        <i id="sort-icon-entidades_citadas" class="fa-solid fa-sort text-slate-300 group-hover/th:text-slate-500 transition-colors text-[10px]"></i>
+                      </div>
+                    </th>
                   </tr>
                 </thead>
                 <tbody id="midia-table-body" class="divide-y divide-slate-100">
@@ -9013,7 +9152,7 @@
   <script src="midia_sjc/analise_midia_data.js?v=1789087000"></script>
   <script src="midia_sjc/comunidade_data.js?v=1789087000"></script>
   <script src="app.js?v=1789087000"></script>
-  <script src="midia_dashboard.js?v=1789087000"></script>
+  <script src="midia_dashboard.js?v=1789215000"></script>
   <script src="vetores_sinergia.js"></script>
   <script src="scroll_reveal.js"></script>
   <script src="semaforo_module.js"></script>
