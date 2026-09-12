@@ -1354,11 +1354,10 @@
             }
           },
           datalabels: {
-            color: '#FFFFFF',
-            textStrokeColor: 'rgba(11, 37, 69, 0.85)',
-            textStrokeWidth: 2.5,
+            color: '#000000',
             align: 'right',
             anchor: 'center',
+            offset: 20,
             font: { family: 'Montserrat', weight: '900', size: 10 },
             formatter: (val, ctx) => {
               const pName = sortedProfiles[ctx.dataIndex];

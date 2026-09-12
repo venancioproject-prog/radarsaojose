@@ -20,3 +20,23 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Relatórios brutos, PDFs e apresentações confidenciais
+*.pdf
+apresentacao*.txt
+apresentacao-final.txt
+apresentacao_final.txt
+data/apresentacao-final.txt
+api/data/apresentacao-final.txt
+"Mais fotos radar/APRESENTAÇÃO FINAL.txt"
+
+# Planilhas brutas de dados e respostas de pesquisa
+*.csv
+respostas.csv.csv
+dados_pesquisa_*.csv
+INFLUENCIADORES_RADAR_SJC.csv
+midia_sjc/*.csv
+
+# Dumps e scripts SQL com dados brutos
+*.sql
+
