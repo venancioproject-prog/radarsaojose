@@ -3834,7 +3834,7 @@
 
           <!-- Seletor de Modo -->
           <div class="flex items-center gap-2 bg-white/10 p-1.5 rounded-2xl border border-white/15 backdrop-blur-md self-start lg:self-center shrink-0">
-            <button 
+            <button type="button" 
               id="tab-btn-oracle" 
               onclick="window.switchRadarDnaTab('oracle')"
               class="px-5 py-2.5 rounded-xl font-black text-xs transition-all flex items-center gap-2 cursor-pointer bg-white text-pink-950 shadow-md transform scale-[1.02]"
@@ -3842,7 +3842,7 @@
               <i class="fa-solid fa-wand-magic-sparkles text-pink-600"></i>
               <span>Oráculo & Leitura</span>
             </button>
-            <button 
+            <button type="button" 
               id="tab-btn-dossier" 
               onclick="window.switchRadarDnaTab('dossier')"
               class="px-5 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center gap-2 cursor-pointer text-white/80 hover:text-white hover:bg-white/10"
@@ -4127,10 +4127,10 @@
 
           <!-- Rodapé de Controle do Palco -->
           <div class="w-full pt-3 mt-1 border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500 font-bold z-10">
-            <button onclick="window.returnToOracleWelcome()" class="text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer text-[11px] transition-colors">
+            <button type="button" onclick="window.returnToOracleWelcome()" class="text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer text-[11px] transition-colors">
               <i class="fa-solid fa-arrow-left"></i> Voltar à Metodologia
             </button>
-            <button onclick="window.triggerCapivaraInteraction()" class="text-pink-700 hover:text-pink-900 flex items-center gap-1 cursor-pointer text-[11px] transition-colors">
+            <button type="button" onclick="window.triggerCapivaraInteraction()" class="text-pink-700 hover:text-pink-900 flex items-center gap-1 cursor-pointer text-[11px] transition-colors">
               <i class="fa-solid fa-lightbulb"></i> Dica da Kapy
             </button>
           </div>
@@ -4416,23 +4416,23 @@
 
             <div class="flex flex-wrap items-center gap-2">
               <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Sugestões Rápidas:</span>
-              <button onclick="window.setOracleQuickPrompt('Como posicionar um serviço de alto padrão e ganhar a confiança do público mais exigente de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-pink-100 text-slate-700 hover:text-pink-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Como posicionar um serviço de alto padrão e ganhar a confiança do público mais exigente de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-pink-100 text-slate-700 hover:text-pink-800 transition-colors cursor-pointer border border-slate-200">
                 ⭐ Alto Padrão & Confiança
               </button>
-              <button onclick="window.setOracleQuickPrompt('Qual a melhor abordagem comercial no WhatsApp para converter rápido nos bairros de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Qual a melhor abordagem comercial no WhatsApp para converter rápido nos bairros de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 transition-colors cursor-pointer border border-slate-200">
                 💬 Vendas no WhatsApp & Bairros
               </button>
-              <button onclick="window.setOracleQuickPrompt('Como expandir um negócio local pelas redes sociais com apoio de influenciadores da cidade?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Como expandir um negócio local pelas redes sociais com apoio de influenciadores da cidade?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-800 transition-colors cursor-pointer border border-slate-200">
                 📱 Redes Sociais & Influenciadores
               </button>
             </div>
           </div>
 
           <div class="flex items-center justify-between pt-2">
-            <button onclick="window.setOracleStep(4)" class="px-5 py-3 rounded-xl font-bold text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all cursor-pointer">
+            <button type="button" onclick="window.setOracleStep(4)" class="px-5 py-3 rounded-xl font-bold text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all cursor-pointer">
               ← Voltar
             </button>
-            <button onclick="window.startAuthenticTarotReadingSequence()" class="px-8 py-3.5 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-500/25 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer">
+            <button type="button" onclick="window.startAuthenticTarotReadingSequence()" class="px-8 py-3.5 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-500/25 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer">
               <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
               <span>CONSULTAR O ORÁCULO DE SJC</span>
             </button>
@@ -4714,11 +4714,11 @@
             </div>
 
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0 w-full md:w-auto">
-              <button onclick="window.resetOracleReading()" class="px-5 py-3 bg-slate-900 hover:bg-pink-900 text-white font-black text-xs rounded-2xl shadow-sm transition-all transform hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2">
+              <button type="button" onclick="window.resetOracleReading()" class="px-5 py-3 bg-slate-900 hover:bg-pink-900 text-white font-black text-xs rounded-2xl shadow-sm transition-all transform hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2">
                 <i class="fa-solid fa-rotate-left"></i>
                 <span>Nova Consulta</span>
               </button>
-              <button onclick="window.switchRadarDnaTab('dossier')" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-2xl border border-slate-200 transition-all cursor-pointer flex items-center justify-center gap-2">
+              <button type="button" onclick="window.switchRadarDnaTab('dossier')" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-2xl border border-slate-200 transition-all cursor-pointer flex items-center justify-center gap-2">
                 <i class="fa-solid fa-address-book"></i>
                 <span>Ver 60 Personas</span>
               </button>
@@ -5038,11 +5038,11 @@
               <span>Diagnóstico validado pelo cruzamento da pesquisa N=477 e as 60 Personas de SJC.</span>
             </div>
             <div class="flex items-center gap-3 w-full sm:w-auto">
-              <button onclick="window.resetOracleReading()" class="flex-1 sm:flex-none px-5 py-3 bg-pink-600 hover:bg-pink-700 active:scale-95 text-white font-black text-xs rounded-2xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
+              <button type="button" onclick="window.resetOracleReading()" class="flex-1 sm:flex-none px-5 py-3 bg-pink-600 hover:bg-pink-700 active:scale-95 text-white font-black text-xs rounded-2xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
                 <i class="fa-solid fa-rotate-left"></i>
                 <span>Executar Nova Consulta</span>
               </button>
-              <button onclick="window.switchRadarDnaTab('dossier')" class="flex-1 sm:flex-none px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-2xl border border-slate-200 transition-all cursor-pointer flex items-center justify-center gap-2">
+              <button type="button" onclick="window.switchRadarDnaTab('dossier')" class="flex-1 sm:flex-none px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-2xl border border-slate-200 transition-all cursor-pointer flex items-center justify-center gap-2">
                 <i class="fa-solid fa-address-book text-slate-600"></i>
                 <span>Ver Dossiê das 60 Personas</span>
               </button>
@@ -5177,7 +5177,7 @@
                 </div>
               </div>
 
-              <button 
+              <button type="button" 
                 onclick="event.stopPropagation(); window.openPersonaModal(${p.id})" 
                 class="w-full py-2.5 rounded-xl font-bold text-xs bg-slate-900 hover:bg-pink-900 text-white transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2"
               >
@@ -5251,7 +5251,7 @@
               <option value="Sudeste">Região Sudeste</option>
             </select>
 
-            <button onclick="window.resetDossierFilters()" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5">
+            <button type="button" onclick="window.resetDossierFilters()" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5">
               <i class="fa-solid fa-rotate-left text-[11px]"></i> Limpar
             </button>
           </div>

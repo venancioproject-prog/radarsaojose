@@ -44,6 +44,11 @@ window.switchMainTab = function(tabName) {
   }
 
   window.currentMainTab = tabName;
+  try {
+    if (window.location.hash !== "#" + tabName) {
+      history.replaceState(null, "", "#" + tabName);
+    }
+  } catch (e) {}
   const dashboardView = document.getElementById("dashboard-view");
   const reportView = document.getElementById("executive-report-view");
   const aiReportView = document.getElementById("ai-report-view");
@@ -51,6 +56,7 @@ window.switchMainTab = function(tabName) {
   const imageBankView = document.getElementById("image-bank-view");
   const midiaView = document.getElementById("midia-dashboard-view");
   const historiaView = document.getElementById("historia-view");
+  const personasView = document.getElementById("personas-view");
 
   const btnDashboard = document.getElementById("btn-nav-dashboard");
   const btnReport = document.getElementById("btn-nav-report");
@@ -59,17 +65,20 @@ window.switchMainTab = function(tabName) {
   const btnImageBank = document.getElementById("btn-nav-image-bank");
   const btnMidia = document.getElementById("btn-nav-midia");
   const btnHistoria = document.getElementById("btn-nav-historia");
+  const btnPersonas = document.getElementById("btn-nav-personas");
 
   const filtersContainer = document.getElementById("sidebar-filters-container");
   const ibgeFiltersContainer = document.getElementById("sidebar-ibge-filters-container");
   const midiaFiltersContainer = document.getElementById("sidebar-midia-filters-container");
   const historiaFiltersContainer = document.getElementById("sidebar-historia-filters-container");
+  const imageBankFiltersContainer = document.getElementById("sidebar-image-bank-filters-container");
+  const personasFiltersContainer = document.getElementById("sidebar-personas-filters-container");
   const reportIndex = document.getElementById("sidebar-report-index");
 
   if (!dashboardView || !reportView) return;
 
-  const inactiveBtnClass = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-brand-900 border border-slate-200 cursor-pointer";
-  const activeBtnClass = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-sm hover:shadow-md cursor-pointer";
+  const inactiveBtnClass = "nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 shadow-2xs cursor-pointer text-center leading-tight whitespace-nowrap";
+  const activeBtnClass = "nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-slate-600 text-white border-slate-500 shadow-md cursor-pointer text-center leading-tight whitespace-nowrap";
 
   // Esconder todas as abas
   dashboardView.classList.add("hidden");
@@ -79,12 +88,15 @@ window.switchMainTab = function(tabName) {
   if (imageBankView) imageBankView.classList.add("hidden");
   if (midiaView) midiaView.classList.add("hidden");
   if (historiaView) historiaView.classList.add("hidden");
+  if (personasView) personasView.classList.add("hidden");
 
   // Esconder containers de filtros laterais por padrão
   if (filtersContainer) filtersContainer.classList.add("hidden");
   if (ibgeFiltersContainer) ibgeFiltersContainer.classList.add("hidden");
   if (midiaFiltersContainer) midiaFiltersContainer.classList.add("hidden");
   if (historiaFiltersContainer) historiaFiltersContainer.classList.add("hidden");
+  if (imageBankFiltersContainer) imageBankFiltersContainer.classList.add("hidden");
+  if (personasFiltersContainer) personasFiltersContainer.classList.add("hidden");
   if (reportIndex) reportIndex.classList.add("hidden");
 
   // Resetar botões
@@ -95,9 +107,12 @@ window.switchMainTab = function(tabName) {
   if (btnImageBank) btnImageBank.className = inactiveBtnClass;
   if (btnMidia) btnMidia.className = inactiveBtnClass;
   if (btnHistoria) btnHistoria.className = inactiveBtnClass;
+  if (btnPersonas) btnPersonas.className = inactiveBtnClass;
+
+  let activeView = null;
 
   if (tabName === "midia") {
-    if (midiaView) midiaView.classList.remove("hidden");
+    if (midiaView) { midiaView.classList.remove("hidden"); activeView = midiaView; }
     if (midiaFiltersContainer) midiaFiltersContainer.classList.remove("hidden");
     if (btnMidia) btnMidia.className = activeBtnClass;
     
@@ -113,15 +128,24 @@ window.switchMainTab = function(tabName) {
       }
     }
   } else if (tabName === "historia") {
-    if (historiaView) historiaView.classList.remove("hidden");
+    if (historiaView) { historiaView.classList.remove("hidden"); activeView = historiaView; }
     if (historiaFiltersContainer) historiaFiltersContainer.classList.remove("hidden");
     if (btnHistoria) btnHistoria.className = activeBtnClass;
 
     if (typeof window.renderHistoriaDashboard === "function") {
       window.renderHistoriaDashboard();
     }
+  } else if (tabName === "personas") {
+    if (personasView) { personasView.classList.remove("hidden"); activeView = personasView; }
+    if (personasFiltersContainer) personasFiltersContainer.classList.remove("hidden");
+    if (btnPersonas) btnPersonas.className = activeBtnClass;
+
+    if (typeof window.renderPersonasModule === "function") {
+      window.renderPersonasModule();
+    }
   } else if (tabName === "report") {
     reportView.classList.remove("hidden");
+    activeView = reportView;
     if (reportIndex) reportIndex.classList.remove("hidden");
     if (btnReport) btnReport.className = activeBtnClass;
 
@@ -132,11 +156,10 @@ window.switchMainTab = function(tabName) {
       window.renderInfluenciadoresModule();
     }
   } else if (tabName === "ai-report") {
-    if (aiReportView) aiReportView.classList.remove("hidden");
-    if (filtersContainer) filtersContainer.classList.remove("hidden");
+    if (aiReportView) { aiReportView.classList.remove("hidden"); activeView = aiReportView; }
     if (btnAiReport) btnAiReport.className = activeBtnClass;
 
-    window.renderAuditHistoryList();
+    if (typeof window.renderAuditHistoryList === "function") window.renderAuditHistoryList();
     const input = document.getElementById("consultor-input");
     if (input && !document.getElementById("consultor-report-view")?.classList.contains("hidden")) {
       // Já está no relatório
@@ -144,19 +167,28 @@ window.switchMainTab = function(tabName) {
       setTimeout(() => input.focus(), 150);
     }
   } else if (tabName === "ibge") {
-    if (ibgeView) ibgeView.classList.remove("hidden");
+    if (ibgeView) { ibgeView.classList.remove("hidden"); activeView = ibgeView; }
     if (ibgeFiltersContainer) ibgeFiltersContainer.classList.remove("hidden");
     if (btnIbge) btnIbge.className = activeBtnClass;
 
     if (typeof window.renderIbgeCharts === "function") window.renderIbgeCharts();
   } else if (tabName === "image-bank") {
-    if (imageBankView) imageBankView.classList.remove("hidden");
+    if (imageBankView) { imageBankView.classList.remove("hidden"); activeView = imageBankView; }
+    if (imageBankFiltersContainer) imageBankFiltersContainer.classList.remove("hidden");
     if (btnImageBank) btnImageBank.className = activeBtnClass;
     if (typeof window.renderImageBank === "function") window.renderImageBank();
   } else {
     dashboardView.classList.remove("hidden");
+    activeView = dashboardView;
     if (filtersContainer) filtersContainer.classList.remove("hidden");
     if (btnDashboard) btnDashboard.className = activeBtnClass;
+  }
+
+  // Efeito suave de transição (fade-in)
+  if (activeView) {
+    activeView.classList.remove("animate-in", "fade-in");
+    void activeView.offsetWidth; // trigger reflow
+    activeView.classList.add("animate-in", "fade-in");
   }
 
   // 2. Restaurar a posição de rolagem salva da aba de destino (ou 0 se for a primeira visita)
@@ -1061,7 +1093,23 @@ function showDashboard(user) {
     userEmailDisplay.textContent = user.email;
   }
   fetchSurveyData();
+
+  const hash = (window.location.hash || "").replace("#", "").trim();
+  const validTabs = ["dashboard", "report", "ai-report", "ibge", "image-bank", "midia", "historia", "personas"];
+  if (validTabs.includes(hash) && hash !== "dashboard") {
+    setTimeout(() => {
+      window.switchMainTab(hash);
+    }, 50);
+  }
 }
+
+window.addEventListener("hashchange", () => {
+  const hash = (window.location.hash || "").replace("#", "").trim();
+  const validTabs = ["dashboard", "report", "ai-report", "ibge", "image-bank", "midia", "historia", "personas"];
+  if (validTabs.includes(hash) && window.currentMainTab !== hash) {
+    window.switchMainTab(hash);
+  }
+});
 
 function showLogin() {
   dashboardScreen.classList.add("hidden");
