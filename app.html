@@ -89,6 +89,9 @@
       scroll-behavior: smooth;
       overflow-x: clip;
     }
+    .hidden {
+      display: none !important;
+    }
     input, button, select, textarea, p, h1, h2, h3, h4, h5, h6, label, table, th, td {
       font-family: 'Montserrat', sans-serif !important;
     }
@@ -7467,7 +7470,7 @@
         <div id="image-bank-grid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
 
         <!-- MODAL LIGHTBOX COM ZOOM E DETALHES -->
-        <div id="image-lightbox-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-950/90 backdrop-blur-md p-4 sm:p-6 transition-all">
+        <div id="image-lightbox-modal" style="display: none;" class="fixed inset-0 z-50 hidden items-center justify-center bg-brand-950/90 backdrop-blur-md p-4 sm:p-6 transition-all">
           <div class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
             <!-- Header do Modal -->
             <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
@@ -9182,7 +9185,7 @@
       </section>
 
       <!-- MODAL DE COMUNIDADE & TOP COMENTARISTAS -->
-      <div id="midia-community-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div id="midia-community-modal" style="display: none;" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
           
           <!-- Modal Header -->
@@ -9272,7 +9275,7 @@
       </section>
 
       <!-- MODAL BALÃO POPUP DE DETALHES DA PERSONA -->
-      <div id="persona-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs hidden flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div id="persona-modal" style="display: none;" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs hidden items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh] relative">
           
           <!-- Modal Header -->
@@ -9393,7 +9396,7 @@
   <!-- ========================================== -->
   <!-- OVERLAY CINEMATOGRÁFICO DE LOADING (6 SEGUNDOS) -->
   <!-- ========================================== -->
-  <div id="ai-report-loading-overlay" class="fixed inset-0 z-[60] hidden flex flex-col items-center justify-center bg-brand-950/95 backdrop-blur-md text-white px-6">
+  <div id="ai-report-loading-overlay" style="display: none;" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-brand-950/95 backdrop-blur-md text-white px-6">
     <div class="relative flex items-center justify-center mb-8">
       <!-- Radar Pulsing Waves -->
       <div class="absolute w-36 h-36 rounded-full border-2 border-accent-cyan/20 animate-ping"></div>

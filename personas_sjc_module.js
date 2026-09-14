@@ -3997,10 +3997,10 @@
                   <img 
                     src="data_personas/capivara/kapy_avatar_smile.png" 
                     alt="Rostinho da Kapy Sorrindo" 
-                    class="w-16 h-16 sm:w-20 sm:h-20 object-contain relative z-10 drop-shadow-md cursor-pointer transition-transform hover:scale-110"
-                    style="animation: kapyHeadFloat 3.2s ease-in-out infinite;"
+                    class="w-16 h-16 sm:w-20 sm:h-20 object-contain relative z-20 drop-shadow-md cursor-pointer transition-transform hover:scale-110 pointer-events-auto"
+                    style="animation: kapyHeadFloat 3.2s ease-in-out infinite; pointer-events: auto;"
                     title="Olá! Sou a Kapy, assessora de inteligência!"
-                    onclick="window.startOracleGame()"
+                    onclick="window.startOracleGame(event)"
                   />
                 </div>
               </div>
@@ -4038,10 +4038,13 @@
             </div>
 
             <!-- Botões de Ação no Rodapé -->
-            <div class="pt-6 space-y-3">
+            <div class="pt-6 space-y-3 relative z-20 pointer-events-auto">
               <button 
-                onclick="window.startOracleGame()" 
-                class="w-full py-4 px-6 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-xl shadow-pink-500/25 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer"
+                type="button"
+                id="btn-start-oracle-reading"
+                onclick="window.startOracleGame(event)" 
+                style="position: relative; z-index: 20; pointer-events: auto;"
+                class="w-full py-4 px-6 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-xl shadow-pink-500/25 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer select-none"
               >
                 <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
                 <span>DEIXAR A KAPY LER MINHA IDEIA</span>
@@ -4057,7 +4060,9 @@
               </div>
 
               <button 
-                onclick="window.switchToDossierTab()" 
+                type="button"
+                onclick="window.switchToDossierTab(event)" 
+                style="position: relative; z-index: 20; pointer-events: auto;"
                 class="w-full py-2.5 px-4 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
               >
                 <i class="fa-solid fa-cards-blank text-slate-500"></i>
@@ -5450,12 +5455,16 @@
     }
 
     modal.classList.remove('hidden');
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
 
   function closePersonaModal() {
     const modal = document.getElementById('persona-modal');
-    if (modal) modal.classList.add('hidden');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+    }
     document.body.style.overflow = '';
   }
 
@@ -5632,16 +5641,20 @@
   }
 
   // Exportações Globais
-  window.startOracleGame = function() {
+  window.startOracleGame = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
     oracleScreenState = 'game';
     currentOracleStep = 1;
     setMascotState('welcome');
     readingPhase = 'idle';
     renderOracleView();
-    window.scrollTo({ top: 250, behavior: 'smooth' });
+    window.scrollTo({ top: 200, behavior: 'smooth' });
   };
 
-  window.returnToOracleWelcome = function() {
+  window.returnToOracleWelcome = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
     oracleScreenState = 'welcome';
     readingPhase = 'idle';
     setMascotState('welcome');
@@ -5649,7 +5662,9 @@
     window.scrollTo({ top: 150, behavior: 'smooth' });
   };
 
-  window.switchToDossierTab = function() {
+  window.switchToDossierTab = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
     switchRadarDnaTab('dossier');
   };
 
