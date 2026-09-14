@@ -1,0 +1,2942 @@
+[
+  {
+    "id": 1,
+    "nome_completo": "Maria do Carmo Paes",
+    "idade": 54,
+    "genero_etnia": "Mulher Negra",
+    "profissao": "Escrevente Judiciária do Fórum Central",
+    "bairro": "Vila Ema",
+    "localizacao": "Vila Ema, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro próprio",
+    "historia_resumida": "Trabalha há mais de vinte anos no fórum central e construiu sua vida em torno da rotina estável de São José. Gosta de caminhar pelas ruas arborizadas da Vila Ema e valoriza atendimentos que prezam pelo olho no olho e pela palavra dada.",
+    "dor_principal": "Mudanças bruscas no trânsito do centro e obras viárias que alteram suas rotas históricas de deslocamento diário.",
+    "habitos": {
+      "alimentacao": "Padarias tradicionais, almoço em restaurantes por quilo consolidados e feira livre de domingo.",
+      "consumo": "Comércio de rua tradicional, lojas físicas onde conhece o dono há anos e compras estritamente planejadas.",
+      "vestuario": "Alfaiataria clássica, tons neutros sóbrios e sapatos confortáveis para o expediente no tribunal.",
+      "aversoes": "Atendimento automatizado por robôs de IA e estabelecimentos comerciais barulhentos.",
+      "paixoes": "Caminhadas matinais no Parque Vicentina Aranha, jardinagem no quintal e café coado com as amigas de infância."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Padaria Nove de Julho",
+      "Mercado Municipal de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Rede Vanguarda (Globo)",
+        "handle": "redevanguarda"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      },
+      {
+        "nome": "Parque Vicentina Aranha",
+        "handle": "parquevicentina"
+      }
+    ],
+    "estilo_consumo_tag": "Tradicional & Fidelidade",
+    "foto": "data_personas/imagens_personagens/personagem_1_maria_do_carmo_paes.jpg"
+  },
+  {
+    "id": 2,
+    "nome_completo": "Roberto Alvarenga",
+    "idade": 46,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Diretor de Operações de Multinacional Tecnológica",
+    "bairro": "Vila Adyana",
+    "localizacao": "Vila Adyana, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Híbrido",
+    "historia_resumida": "Paulistano radicado em SJC há doze anos em busca de segurança e blindagem para os filhos. Pratica ciclismo de estrada na Via Norte/Urbanova nas manhãs de sábado e comanda operações globais a partir do seu home office inteligente.",
+    "dor_principal": "Gargalos severos no acesso à Ponte Estaiada nos horários de pico e falta de voos executivos diretos no aeroporto regional.",
+    "habitos": {
+      "alimentacao": "Empórios gourmets, carnes nobres de cortes especiais para churrasco e cartas de vinhos importados.",
+      "consumo": "Assinaturas premium internacionais, tecnologia de automação residencial e serviços de concierge.",
+      "vestuario": "Techwear executivo de marcas internacionais, camisas de linho italiano e relógio esportivo de alta precisão.",
+      "aversoes": "Sensação de insegurança pública, prestadores de serviços amadores e filas de espera em restaurantes.",
+      "paixoes": "Ciclismo de alta performance na estrada, enologia internacional e viagens de esqui com a família."
+    },
+    "lugares_frequenta_sjc": [
+      "Colinas Shopping",
+      "Empório da Vila Ema",
+      "Thermas do Vale / Alphaville Club"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Valor Econômico",
+        "handle": "valoreconomico"
+      },
+      {
+        "nome": "Life Informa Aquarius",
+        "handle": "lifeinforma"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Lucas Sanseverino (Imóveis)",
+        "handle": "lucassanseverino"
+      },
+      {
+        "nome": "Pellegrini Wine",
+        "handle": "pellegriniwine"
+      }
+    ],
+    "estilo_consumo_tag": "Premium & Exclusividade",
+    "foto": "data_personas/imagens_personagens/personagem_2_gilberto_alcantara_santos.jpg"
+  },
+  {
+    "id": 3,
+    "nome_completo": "Larissa Aparecida Souza",
+    "idade": 24,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Trancista & Especialista em Alongamento de Unhas",
+    "bairro": "Centro Histórico",
+    "localizacao": "Centro Histórico, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Ônibus e Moto própria",
+    "historia_resumida": "Começou atendendo a domicílio na zona sul e hoje possui seu próprio espaço montado na garagem de casa. Usa o Instagram e o WhatsApp com maestria para preencher a agenda semanal e reinveste todo lucro em cursos de aperfeiçoamento.",
+    "dor_principal": "Oscilação brusca no faturamento na segunda quinzena do mês e a demora nas linhas alimentadoras de ônibus da zona sul.",
+    "habitos": {
+      "alimentacao": "Lanches rápidos prensados, delivery pelo iFood aos fins de semana e copos generosos de açaí com as clientes.",
+      "consumo": "Insumos de beleza no atacado no centro da cidade e compras frequentes de roupas na Shein e Shopee.",
+      "vestuario": "Moda jovem urbana, conjuntinhos streetwear confortáveis e unhas de gel impecavelmente decoradas.",
+      "aversoes": "Clientes que desmarcam em cima da hora sem aviso e desvalorização do trabalho manual de estética.",
+      "paixoes": "Gravar reels de transformação no TikTok, ouvir pagode no Spotify e passear no Shopping Jardim Oriente."
+    },
+    "lugares_frequenta_sjc": [
+      "Shopping Jardim Oriente",
+      "Feira da Av. Andrômeda",
+      "Praça do Campo dos Alemães"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Notícias SJC no Insta",
+        "handle": "noticias_sjc"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Juliana Nails SJC",
+        "handle": "juliananails_sjc"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Ágil & Digital Popular",
+    "foto": "data_personas/imagens_personagens/personagem_3_kenji_takahashi.jpg"
+  },
+  {
+    "id": 4,
+    "nome_completo": "Dr. Gustavo Meirelles",
+    "idade": 51,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Cirurgião Ortopedista & Sócio de Clínica Médica",
+    "bairro": "Jardim São Dimas",
+    "localizacao": "Jardim São Dimas, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Sedan Executivo Alemão",
+    "historia_resumida": "Formado em medicina de excelência, atende nos principais hospitais privados da cidade e mantém consultório conceituado na Vila Adyana. Vive no Esplanada pela proximidade com os colégios dos filhos e pela vizinhança tranquila.",
+    "dor_principal": "Falta crônica de vagas de estacionamento rotativo para pacientes nas imediações do polo médico da Vila Adyana.",
+    "habitos": {
+      "alimentacao": "Culinária mediterrânea equilibrada, jantares em bistrôs autorais na Vila Ema e café espresso de grãos arábica.",
+      "consumo": "Equipamentos cirúrgicos importados de última geração e investimentos estruturados em fundos imobiliários.",
+      "vestuario": "Costume sob medida para congressos médicos e jaleco de alta alfaiataria hospitalar.",
+      "aversoes": "Atrasos em reuniões de junta médica e fornecedores que não cumprem rigorosamente prazos contratuais.",
+      "paixoes": "Partidas de tênis no Clube de Campo Santa Rita, corridas no Vicentina Aranha e leitura de biografias históricas."
+    },
+    "lugares_frequenta_sjc": [
+      "Hospital Vivalle",
+      "Parque Vicentina Aranha",
+      "Clube de Campo Santa Rita"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Saúde Vale",
+        "handle": "saudevalerevista"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Dr. Barakat",
+        "handle": "doutorbarakat"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Prestígio & Tradição Médica",
+    "foto": "data_personas/imagens_personagens/personagem_4_helena_ribeiro_de_camargo.jpg"
+  },
+  {
+    "id": 5,
+    "nome_completo": "Tiago Ramos",
+    "idade": 29,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Engenheiro de Inteligência Artificial & Tech Lead",
+    "bairro": "Jardim Apolo",
+    "localizacao": "Jardim Apolo, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Carro elétrico e patinete elétrico",
+    "historia_resumida": "Trabalha remotamente para uma startup do Vale do Silício a partir do seu apartamento no Aquarius. É cliente assíduo de cafeterias de cafés especiais e valoriza a mobilidade urbana sustentável.",
+    "dor_principal": "Carência de espaços de coworking com infraestrutura de alta velocidade 24h e pouca vida noturna cosmopolita na cidade.",
+    "habitos": {
+      "alimentacao": "Cafés especiais extraídos em V60, bowls funcionais nutritivos e culinária asiática artesanal.",
+      "consumo": "Hardware de ponta importado, periféricos ergonômicos e compras automatizadas na Amazon Prime.",
+      "vestuario": "Camisetas básicas pretas de algodão pima peruano, calças chino e tênis minimalistas ecológicos.",
+      "aversoes": "Processos burocráticos analógicos em papel e lojas que ainda não aceitam pagamentos por aproximação/NFC.",
+      "paixoes": "Desenvolvimento de projetos open-source, trilhas de mountain bike na serra e degustação de cafés premiados."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça Ulisses Guimarães",
+      "Cafeteria Torra Fresca Aquarius",
+      "Parque Ribeirão Vermelho"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "TechCrunch",
+        "handle": "techcrunch"
+      },
+      {
+        "nome": "Podcast Startups SJC",
+        "handle": "startups_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Filipe Deschamps",
+        "handle": "filipedeschamps"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "estilo_consumo_tag": "Tech Global & Conectado",
+    "foto": "data_personas/imagens_personagens/personagem_5_osvaldo_martins_ferraz.jpg"
+  },
+  {
+    "id": 6,
+    "nome_completo": "Dona Maria do Carmo Prado",
+    "idade": 68,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Feirante & Doceira Tradicional Aposentada",
+    "bairro": "Jardim Maringá",
+    "localizacao": "Jardim Maringá, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Caminhada e Ônibus municipal",
+    "historia_resumida": "Nasceu e cresceu em Santana, filha de tecelões da antiga Tecelagem Parahyba. Conhece cada família do bairro e ainda produz doces caseiros de abóbora e figo por encomenda para clientes fiéis.",
+    "dor_principal": "Sensação de esquecimento da memória histórica e cultural da zona norte em contraste com as áreas nobres da cidade.",
+    "habitos": {
+      "alimentacao": "Comida caipira no fogão de ferro, verduras fresquinhas da feira de Santana e bolo de fubá cremoso à tarde.",
+      "consumo": "Mercadinho de secos e molhados da esquina, quitanda local e farmácia onde mantém conta anotada no caderno.",
+      "vestuario": "Vestidos florais rodados confortáveis, cardigãs de tricô feitos à mão e sapatos ortopédicos acolchoados.",
+      "aversoes": "Totens eletrônicos impessoais em agências bancárias e atendentes jovens sem paciência com idosos.",
+      "paixoes": "Participação no coral da Paróquia de Santana, cultivar orquídeas no alpendre e narrar causos antigos para os netos."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque da Cidade (Burle Marx)",
+      "Igreja Matriz de Santana",
+      "Feira Livre de Santana"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Rede Vanguarda (Jornal Regional)",
+        "handle": "redevanguarda"
+      },
+      {
+        "nome": "Rádio Nativa FM",
+        "handle": "nativafmsjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Memória Joseense",
+        "handle": "memoria_joseense"
+      },
+      {
+        "nome": "Padre da Paróquia Santana",
+        "handle": "paroquiasantanasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Memória Afetiva & Raízes",
+    "foto": "data_personas/imagens_personagens/personagem_6_claudete_aparecida_da_silva.jpg"
+  },
+  {
+    "id": 7,
+    "nome_completo": "Benedito 'Seu Dito' Alvarenga",
+    "idade": 62,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Produtor de Queijo Artesanal da Mantiqueira",
+    "bairro": "Vila Betânia",
+    "localizacao": "Vila Betânia, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Picape antiga 4x4",
+    "historia_resumida": "Guardião das tradições do distrito de SFX, produz queijo curado premiado em sua propriedade familiar. Recebe turistas e chefs renomados de SJC e SP que sobem a serra em busca de ingredientes autênticos.",
+    "dor_principal": "Superlotação desordenada do vilarejo nos feriados de inverno e a instabilidade da rede elétrica rural que afeta as ordenhas.",
+    "habitos": {
+      "alimentacao": "Queijo curado na tábua, café passado no coador de pano com água de mina e galinha caipira com quiabo.",
+      "consumo": "Arame farpado, ferramentas e ração em cooperativas agropecuárias e compras mensais de atacado na cidade.",
+      "vestuario": "Botina campeira de couro legítimo, calça jeans grossa de lida e chapéu de palha de aba larga.",
+      "aversoes": "Turistas barulhentos que jogam lixo nas trilhas ecológicas e desrespeitam o silêncio sagrado da serra.",
+      "paixoes": "Tocar moda de viola caipira no entardecer, cavalgar pelas cristas da serra e contemplar a Pedra de São Francisco."
+    },
+    "lugares_frequenta_sjc": [
+      "Vila de São Francisco Xavier",
+      "Mirante da Pedra de São Francisco",
+      "Mercado da Cidade de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Jornal de SFX",
+        "handle": "sfx_noticias"
+      },
+      {
+        "nome": "Globo Rural / Vanguarda",
+        "handle": "redevanguarda"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Rota Gastronômica da Mantiqueira",
+        "handle": "rotamantiqueira"
+      },
+      {
+        "nome": "Explore SFX",
+        "handle": "exploresfx"
+      }
+    ],
+    "estilo_consumo_tag": "Sustentabilidade & Raiz Serrana",
+    "foto": "data_personas/imagens_personagens/personagem_7_reinaldo_mendes_trindade.jpg"
+  },
+  {
+    "id": 8,
+    "nome_completo": "Dra. Camila Rocha Meireles",
+    "idade": 38,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Dermatologista & Gestora de Clínica Estética",
+    "bairro": "Jardim Paulista",
+    "localizacao": "Jardim Paulista, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Compacto Blindado",
+    "historia_resumida": "Manteve sua clínica na Vila Adyana pela elegância histórica do bairro. Conecta tratamentos de alta tecnologia a um atendimento acolhedor e humanizado para famílias tradicionais e executivas da região.",
+    "dor_principal": "Dificuldade em recrutar e reter profissionais de enfermagem estética altamente capacitados na região do Vale.",
+    "habitos": {
+      "alimentacao": "Menu funcional e orgânico, sucos verdes detox prensados e saladas gourmet com azeites trufados.",
+      "consumo": "Aparelhos de ultrassom microfocado importados, cosméticos dermatológicos de alta performance e viagens a congressos.",
+      "vestuario": "Blazers de corte impecável em alfaiataria off-white e sapatilhas de couro nobre.",
+      "aversoes": "Procedimentos estéticos padronizados sem respaldo científico e falta de ética profissional de concorrentes.",
+      "paixoes": "Sessões matinais de pilates, finais de semana ensolarados em Ilhabela e colecionismo de arte contemporânea brasileira."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Santos Dumont",
+      "Restaurantes da Av. Adhemar de Barros",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Vogue Brasil",
+        "handle": "voguebrasil"
+      },
+      {
+        "nome": "Revista Metrópole SJC",
+        "handle": "revistametropolesjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Dermatologia & Estética Brasil",
+        "handle": "sbd_dermato"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Sofisticação & Autocuidado",
+    "foto": "data_personas/imagens_personagens/personagem_8_geraldo_magela_de_souza.jpg"
+  },
+  {
+    "id": 9,
+    "nome_completo": "Wagner Santos",
+    "idade": 41,
+    "genero_etnia": "Homem Negro",
+    "profissao": "Técnico Mecatrônico Sênior de Linha Automotiva",
+    "bairro": "Jardim Augusta",
+    "localizacao": "Jardim Augusta, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Fretado da montadora e carro próprio nos fins de semana",
+    "historia_resumida": "Formado pelo SENAI, atua na indústria há quase duas décadas. Mora perto da Dutra pelo acesso rápido e valoriza a solidez das conquistas da sua família: casa própria quitada e filhos estudando em boas escolas.",
+    "dor_principal": "Oscilações imprevisíveis no mercado fabril automotivo e os aumentos abusivos nas mensalidades de convênio médico.",
+    "habitos": {
+      "alimentacao": "Churrasco de contrafilé no quintal de casa com os colegas de turno, pastel de feira e cerveja pilsen gelada.",
+      "consumo": "Materiais de construção para ampliações na residência e compras em grandes atacarejos às margens da Dutra.",
+      "vestuario": "Macacão técnico antichamas nos dias úteis e bermuda jeans com camisa polo esportiva nos fins de semana.",
+      "aversoes": "Cursos rápidos de internet que prometem enriquecimento fácil e eletrodomésticos com obsolescência programada.",
+      "paixoes": "Peladas de futebol society nas quadras da zona sul, mexer no motor do seu carro antigo e pescaria no Rio Paraíba."
+    },
+    "lugares_frequenta_sjc": [
+      "Vale Sul Shopping",
+      "Feira da Praça do Pq. Industrial",
+      "Assaí Atacadista da Dutra"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Band Vale Notícias",
+        "handle": "bandvaletv"
+      },
+      {
+        "nome": "Rádio Stereo Vale",
+        "handle": "stereovale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Mecânica Descomplicada",
+        "handle": "mecanicadescomplicada"
+      },
+      {
+        "nome": "São José Esporte Clube",
+        "handle": "saojoseec_oficial"
+      }
+    ],
+    "estilo_consumo_tag": "Pragmático & Familiar",
+    "foto": "data_personas/imagens_personagens/personagem_9_beatriz_prado_antunes.jpg"
+  },
+  {
+    "id": 10,
+    "nome_completo": "Gabriel Marcondes de Oliveira",
+    "idade": 23,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Desenvolvedor Full Stack Júnior no Parque Tecnológico",
+    "bairro": "Jardim Jussara",
+    "localizacao": "Jardim Jussara, São José dos Campos",
+    "regiao": "Centro",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Moto 160cc e Transporte por aplicativo",
+    "historia_resumida": "Estudou na FATEC e conseguiu seu primeiro contrato tech no Parque Tecnológico de SJC. É a ponte entre a tradição operária de Eugênio de Melo e a nova economia digital que transforma a zona leste.",
+    "dor_principal": "Falta crônica de ciclovias seguras conectando o distrito de Eugênio de Melo aos polos tecnológicos da cidade.",
+    "habitos": {
+      "alimentacao": "Marmitas congeladas fitness durante a semana, rodízio de pizza aos sábados e energéticos nas madrugadas de código.",
+      "consumo": "Teclados mecânicos RGB, cursos avançados de backend em plataformas online e calçados casuais esportivos.",
+      "vestuario": "Moletons com capuz estampados com referências geeks, calças cargo pretas e tênis skate.",
+      "aversoes": "Chefias autoritárias que exigem presença física desnecessária e empresas que não incentivam inovação.",
+      "paixoes": "Participação em maratonas de programação (hackathons), jogos online cooperativos e manobras na pista de skate do Parque da Cidade."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Tecnológico de SJC (PqTec)",
+      "CenterVale Shopping",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Manual do Dev",
+        "handle": "manualdodev"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Rocketseat",
+        "handle": "rocketseat_oficial"
+      },
+      {
+        "nome": "Alura Online",
+        "handle": "aluraonline"
+      }
+    ],
+    "estilo_consumo_tag": "Aspiracional Tech",
+    "foto": "data_personas/imagens_personagens/personagem_10_rodolfo_guimaraes_villela.jpg"
+  },
+  {
+    "id": 11,
+    "nome_completo": "Valéria Fontes",
+    "idade": 42,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Arquiteta de Interiores & Cenógrafa Comercial",
+    "bairro": "Jardim Aquarius",
+    "localizacao": "Jardim Aquarius, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Carro elétrico compacto",
+    "historia_resumida": "Especialista em projetos comerciais biofílicos e residenciais de alto padrão no Colinas e Aquarius. Busca constantemente inspirações nas feiras de design de Milão e São Paulo para aplicar em imóveis da região.",
+    "dor_principal": "Falta de lojas locais com mobiliário assinado e demora no fornecimento de mármores e pedras nobres.",
+    "habitos": {
+      "alimentacao": "Pratos à base de peixes frescos, risotos artesanais e degustação de espumantes nacionais premiados.",
+      "consumo": "Peças de design autoral, luminárias de artistas brasileiros e softwares 3D de renderização imersiva.",
+      "vestuario": "Roupas assimétricas de linho cru, óculos de armação geométrica marcante e sapatos de design exclusivo.",
+      "aversoes": "Ambientes saturados de plástico sem personalidade e empreiteiros descompromissados com o acabamento fino.",
+      "paixoes": "Visitar bienais de arquitetura, restaurar móveis modernistas garimpados e cuidar de sua coleção de samambaias raras."
+    },
+    "lugares_frequenta_sjc": [
+      "Colinas Shopping",
+      "Showrooms de Design na Av. São João",
+      "Parque Vicentina Aranha"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Casa Vogue",
+        "handle": "casavoguebrasil"
+      },
+      {
+        "nome": "Revista Visual Vale",
+        "handle": "visualvalerevista"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Mauricio Arruda",
+        "handle": "mauricioarruda"
+      },
+      {
+        "nome": "Arquitetura SJC",
+        "handle": "arquiteturasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Design & Estética Autoral",
+    "foto": "data_personas/imagens_personagens/personagem_11_valdir_de_oliveira_santos.jpg"
+  },
+  {
+    "id": 12,
+    "nome_completo": "Kenji Takahashi",
+    "idade": 36,
+    "genero_etnia": "Homem Asiático",
+    "profissao": "Pesquisador Sênior em Satélites do INPE",
+    "bairro": "Urbanova",
+    "localizacao": "Urbanova, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Bicicleta elétrica e Carro sedan",
+    "historia_resumida": "Doutor em engenharia aeroespacial, trabalha no desenvolvimento de cargas úteis para satélites de monitoramento ambiental no INPE. Mora no Jardim das Indústrias pela tranquilidade e rápido acesso à rodovia.",
+    "dor_principal": "Burocracia excessiva na importação de componentes ópticos e sensores de alta precisão para pesquisa científica.",
+    "habitos": {
+      "alimentacao": "Autêntica culinária japonesa tradicional (ramen e izakaya), chás verdes matcha e frutas da estação.",
+      "consumo": "Livros acadêmicos importados, ferramentas de telescópio amador e instrumentos musicais acústicos.",
+      "vestuario": "Camisas xadrez discretas, calças jeans escuras duráveis e tênis de caminhada impermeáveis.",
+      "aversoes": "Desinformação científica nas redes sociais e reuniões longas sem pauta prévia definida.",
+      "paixoes": "Astrofotografia noturna nas montanhas de SFX, tocar violão clássico e marcenaria de precisão nos dias livres."
+    },
+    "lugares_frequenta_sjc": [
+      "Campus do INPE",
+      "Praça das Indústrias",
+      "Restaurante Japonês Tradicional no Centro"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Nature Scientific",
+        "handle": "nature"
+      },
+      {
+        "nome": "Jornal do INPE",
+        "handle": "inpe_oficial"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Sérgio Sacani (Space Today)",
+        "handle": "spacetoday1"
+      },
+      {
+        "nome": "Ciência Todo Dia",
+        "handle": "pedroloos"
+      }
+    ],
+    "estilo_consumo_tag": "Científico & Racional",
+    "foto": "data_personas/imagens_personagens/personagem_12_keiko_yamashita_sato.jpg"
+  },
+  {
+    "id": 13,
+    "nome_completo": "Claudete Aparecida da Silva",
+    "idade": 59,
+    "genero_etnia": "Mulher Negra",
+    "profissao": "Costureira Especialista em Reformas & Alta Costura",
+    "bairro": "Jardim das Colinas",
+    "localizacao": "Jardim das Colinas, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Ônibus e Caminhada",
+    "historia_resumida": "Costura desde os quinze anos e construiu uma reputação impecável na zona norte pelo capricho nos ajustes de vestidos de noiva e ternos. Atende clientes de toda a cidade que sobem a ponte buscando seu corte cirúrgico.",
+    "dor_principal": "Dores crônicas na coluna pelas longas jornadas na máquina de costura e o aumento contínuo no preço dos tecidos e zíperes.",
+    "habitos": {
+      "alimentacao": "Arroz, feijão fresquinho, couve refogada na hora e suco natural de maracujá para relaxar à noite.",
+      "consumo": "Armarinhos e retrosarias tradicionais no centro de SJC e manutenção preventiva em suas máquinas industriais.",
+      "vestuario": "Roupas confortáveis confeccionadas por ela mesma com tecidos florais e aventais com bolsos utilitários.",
+      "aversoes": "Roupas descartáveis de fast-fashion com costuras frágeis e clientes que pedem fiado sem intimidade.",
+      "paixoes": "Participar das novenas da comunidade do Alto da Ponte, ensinar corte e costura para meninas do bairro e ouvir rádio AM."
+    },
+    "lugares_frequenta_sjc": [
+      "Centro Comunitário do Alto da Ponte",
+      "Armarinhos da Rua 15 no Centro",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Rádio Aparecida",
+        "handle": "radioaparecida"
+      },
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Dicas de Costura Brasil",
+        "handle": "costuracriativa"
+      },
+      {
+        "nome": "Vozes da Zona Norte SJC",
+        "handle": "zn_sjc"
+      }
+    ],
+    "estilo_consumo_tag": "Artesanal & Essencial",
+    "foto": "data_personas/imagens_personagens/personagem_13_rosana_aparecida_de_lima.jpg"
+  },
+  {
+    "id": 14,
+    "nome_completo": "Heloísa Castilho",
+    "idade": 33,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Gestora de Tráfego Pago & Marketing Digital",
+    "bairro": "Jardim Esplanada",
+    "localizacao": "Jardim Esplanada, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro hatch automático",
+    "historia_resumida": "Gerencia campanhas de performance para lançamentos imobiliários e franquias da região do Vale do Paraíba. Divide sua rotina entre cafés com clientes e a gestão de equipes remotas de copywriters e designers.",
+    "dor_principal": "Mudanças constantes nos algoritmos de anúncios da Meta/Google que desestabilizam o custo por lead dos clientes.",
+    "habitos": {
+      "alimentacao": "Smoothies energéticos com whey protein, pães de fermentação natural e almoços em bistrôs charmosos.",
+      "consumo": "Softwares de automação de marketing em dólar, cursos de mentoria executiva e acessórios de ergonomia.",
+      "vestuario": "Estilo smart casual elegante, blazers coloridos estruturados e bolsas de couro legítimo de marcas locais.",
+      "aversoes": "Clientes retrógrados que não compreendem a importância do funil de vendas digital e relatórios vagos.",
+      "paixoes": "Prática de beach tennis nas quadras do Urbanova, viagens de praia nos feriados e podcasts de negócios."
+    },
+    "lugares_frequenta_sjc": [
+      "Colinas Shopping",
+      "Arena de Beach Tennis Urbanova",
+      "Cafeteria da Av. Anchieta"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Meio & Mensagem",
+        "handle": "meioemensagem"
+      },
+      {
+        "nome": "StartSe Negócios",
+        "handle": "startse"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Pedro Sobral",
+        "handle": "pedrosobral"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "estilo_consumo_tag": "Performance & Inovação",
+    "foto": "data_personas/imagens_personagens/personagem_14_eduardo_henrique_de_barros.jpg"
+  },
+  {
+    "id": 15,
+    "nome_completo": "Lucas Henrique Silva",
+    "idade": 27,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Chef & Proprietário de Hamburgueria Artesanal",
+    "bairro": "Jardim Alvorada",
+    "localizacao": "Jardim Alvorada, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Carro utilitário e moto",
+    "historia_resumida": "Transformou sua paixão por carnes em uma hamburgueria que é referência de delivery na zona sul. Valoriza o blend artesanal moído diariamente e a agilidade nas entregas pelo WhatsApp e iFood.",
+    "dor_principal": "As altas taxas cobradas pelos aplicativos de entrega e os custos crescentes do queijo cheddar e do carvão especial.",
+    "habitos": {
+      "alimentacao": "Degustação contínua de hambúrgueres autorais, porções de batata rústica com páprica e refrigerantes artesanais.",
+      "consumo": "Insumos gastronômicos em distribuidoras especializadas e embalagens térmicas sustentáveis de papel kraft.",
+      "vestuario": "Camisetas pretas estampadas com sua marca, dólmã de sarja moderna e bonés aba reta.",
+      "aversoes": "Entregadores terceirizados que derrubam os pedidos no transporte e avaliações injustas em plataformas online.",
+      "paixoes": "Estudar técnicas de defumação texana no pit smoker, assistir a reality shows de gastronomia e jogar futebol com amigos."
+    },
+    "lugares_frequenta_sjc": [
+      "Avenida Bacabal",
+      "Atacadão da Zona Sul",
+      "Shopping Jardim Oriente"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "FoodBiz Brasil",
+        "handle": "foodbizbrasil"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Netão Bom Beef",
+        "handle": "netaobombeef"
+      },
+      {
+        "nome": "Guia de Bares SJC",
+        "handle": "guiadebaressjc"
+      }
+    ],
+    "estilo_consumo_tag": "Gastronomia & Corre Comercial",
+    "foto": "data_personas/imagens_personagens/personagem_15_vanessa_cristina_moreira.jpg"
+  },
+  {
+    "id": 16,
+    "nome_completo": "Osvaldo Martins Ferraz",
+    "idade": 64,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Mestre de Obras da Construção Civil",
+    "bairro": "Jardim das Indústrias",
+    "localizacao": "Jardim das Indústrias, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Picape utilitária média",
+    "historia_resumida": "Construiu dezenas de casas e edifícios em SJC ao longo de quarenta anos de canteiro de obras. Conhece os tipos de solo e as particularidades estruturais de cada morro e vale da cidade.",
+    "dor_principal": "Escassez de jovens interessados em aprender a profissão de pedreiro e carpinteiro com rigor técnico.",
+    "habitos": {
+      "alimentacao": "Marmita reforçada com feijão tropeiro e bife na chapa, café forte com açúcar e paçoca na sobremesa.",
+      "consumo": "Ferramentas profissionais de alta durabilidade em lojas tradicionais de ferragens e peças automotivas originais.",
+      "vestuario": "Camisas de manga longa de algodão grosso para proteção solar, calça jeans pesada e botas de segurança com bico de aço.",
+      "aversoes": "Projetos de engenharia desenhados no computador que não consideram as dificuldades práticas da obra real.",
+      "paixoes": "Pescar no Rio Paraíba do Sul nas tardes de domingo, ouvir modas de viola e cuidar dos seus pássaros no quintal."
+    },
+    "lugares_frequenta_sjc": [
+      "Lojas de Ferragens do Centro",
+      "Parque da Cidade",
+      "Feira da Vila Nova São José"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Jornal O Vale",
+        "handle": "jornalovale"
+      },
+      {
+        "nome": "Rádio Nativa FM",
+        "handle": "nativafmsjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Dicas de Obra do Mestre",
+        "handle": "obramestre"
+      },
+      {
+        "nome": "Memória de SJC",
+        "handle": "memoriasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Experiência Prática & Raiz",
+    "foto": "data_personas/imagens_personagens/personagem_16_danielle_ramos_ferreira.jpg"
+  },
+  {
+    "id": 17,
+    "nome_completo": "Larissa 'Lari' Santos Neves",
+    "idade": 26,
+    "genero_etnia": "Mulher Negra",
+    "profissao": "Barista & Consultora de Cafés Especiais",
+    "bairro": "Vale dos Pinheiros",
+    "localizacao": "Vale dos Pinheiros, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Bicicleta urbana e Metrô/Ônibus",
+    "historia_resumida": "Formada em gastronomia e certificada pela SCA, atua no treinamento de equipes de cafeterias premiadas em SJC. Tem paixão por desmistificar as notas sensoriais de microlotes do interior paulista e mineiro.",
+    "dor_principal": "A persistência da cultura do café extra-forte carbonizado que impede muitas pessoas de valorizarem grãos especiais.",
+    "habitos": {
+      "alimentacao": "Torradas artesanais de sourdough com avocado, ovos pochê e infusões botânicas com especiarias.",
+      "consumo": "Métodos manuais de extração (Aeropress, Chemex), filtros japoneses e livros técnicos de microbiologia do café.",
+      "vestuario": "Aventais de sarja com tiras de couro marrom, calças de veludo cotelê e meias estampadas divertidas.",
+      "aversoes": "Cafés comerciais servidos em copos plásticos finos e açúcar adicionado sem consentimento na xícara.",
+      "paixoes": "Visitar fazendas produtoras no Sul de Minas e na Serra da Mantiqueira, garimpar xícaras de cerâmica e fotografia analógica."
+    },
+    "lugares_frequenta_sjc": [
+      "Cafeterias da Vila Ema e Betânia",
+      "Parque Vicentina Aranha",
+      "Sesc São José dos Campos"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Espresso",
+        "handle": "revistaespresso"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Boram Um (World Barista Champion)",
+        "handle": "boramum"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Sensorial & Artesanal Nobre",
+    "foto": "data_personas/imagens_personagens/personagem_17_thiago_alcantara_bispo.jpg"
+  },
+  {
+    "id": 18,
+    "nome_completo": "Carlos Eduardo 'Cadu' Peixoto",
+    "idade": 35,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Engenheiro de Estruturas Aeronáuticas da Embraer",
+    "bairro": "Jardim Aquarius II",
+    "localizacao": "Jardim Aquarius, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Sedan Híbrido",
+    "historia_resumida": "Formado pelo ITA, trabalha no cálculo estrutural de compósitos de fuselagem para a nova geração de jatos comerciais. Vive dentro do complexo aeronáutico pela segurança e pela sinergia com a comunidade de engenharia.",
+    "dor_principal": "Restrições orçamentárias em projetos estratégicos de inovação e a alta competitividade de headhunters internacionais.",
+    "habitos": {
+      "alimentacao": "Pratos ricos em proteínas magras, gastronomia contemporânea nos finais de semana e vinhos chilenos da uva Carménère.",
+      "consumo": "Drones com câmera 4K, relógios analógicos com cronógrafo de aviação e assinaturas de periódicos científicos aeroespaciais.",
+      "vestuario": "Camisas polo azul-marinho de algodão mercerizado, calças chino cáqui e jaquetas corta-vento de aviação.",
+      "aversoes": "Cortes de investimentos na educação científica de base e falta de visão de longo prazo em políticas industriais.",
+      "paixoes": "Pilotar aeromodelos com os colegas no DCTA, velejar na Represa de Igaratá e leitura de ficção científica clássica."
+    },
+    "lugares_frequenta_sjc": [
+      "Clube dos Oficiais do DCTA",
+      "Memorial Aeroespacial Brasileiro (MAB)",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Aviation Week",
+        "handle": "aviationweek"
+      },
+      {
+        "nome": "Revista Asas",
+        "handle": "revistaasas"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Lito Sousa (Aviões e Músicas)",
+        "handle": "avioesemusicas"
+      },
+      {
+        "nome": "ITA Oficial",
+        "handle": "ita_oficial"
+      }
+    ],
+    "estilo_consumo_tag": "Tecnológico & Aeroespacial",
+    "foto": "data_personas/imagens_personagens/personagem_18_renata_sayuri_matsuda.jpg"
+  },
+  {
+    "id": 19,
+    "nome_completo": "Aline Moreira Siqueira",
+    "idade": 31,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Personal Trainer & Coach de Treinamento Funcional",
+    "bairro": "Urbanova (Reserva do Paratehy)",
+    "localizacao": "Urbanova, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro hatch esportivo",
+    "historia_resumida": "Atende executivos e mulheres na zona sul com foco em emagrecimento saudável e reabilitação postural. Montou seu estúdio funcional privativo próximo à Av. Andrômeda e tem lista de espera para horários nobres.",
+    "dor_principal": "Alunos que desistem nos primeiros meses por buscarem resultados imediatos milagrosos sem disciplina.",
+    "habitos": {
+      "alimentacao": "Refeições equilibradas pesadas na balança, suplementação vitamínica personalizada e água de coco fresca.",
+      "consumo": "Equipamentos de treinamento funcional de borracha vulcanizada, smartbands e calçados específicos de Cross Training.",
+      "vestuario": "Conjuntos fitness de alta compressão sem costura, jaquetas corta-vento leves e viseiras de corrida.",
+      "aversoes": "Fórmulas mágicas de emagrecimento sem base científica e academias desorganizadas com aparelhos quebrados.",
+      "paixoes": "Participar de meias maratonas de rua em SJC, treinar nas escadarias do Parque da Cidade e cozinhar receitas fit."
+    },
+    "lugares_frequenta_sjc": [
+      "Avenida Andrômeda",
+      "Vale Sul Shopping",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Runner's Brasil",
+        "handle": "runnersbrasil"
+      },
+      {
+        "nome": "Explore SJC Esportes",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Coach Carol Borba",
+        "handle": "carolborba1"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Fitness & Saúde Ativa",
+    "foto": "data_personas/imagens_personagens/personagem_19_roberto_junqueira_siqueira.jpg"
+  },
+  {
+    "id": 20,
+    "nome_completo": "Renato Guimarães Prado",
+    "idade": 48,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Gerente Geral de Concessionária de Veículos Premium",
+    "bairro": "Jardim Golfe",
+    "localizacao": "Jardim Golfe, São José dos Campos",
+    "regiao": "Oeste",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Sedan Alemão da Concessionária",
+    "historia_resumida": "Comanda uma das concessionárias mais rentáveis do eixo da Dutra, negociando veículos importados para empresários e pecuaristas do Vale. Vive no Floradas de São José pela segurança e sofisticação das praças.",
+    "dor_principal": "Atrasos na entrega de veículos zero km devido à crise global na cadeia de semicondutores e fretes marítimos.",
+    "habitos": {
+      "alimentacao": "Almoços de negócios em churrascarias de alto padrão, grelhados nobres e cervejas artesanais do estilo IPA.",
+      "consumo": "Acessórios automotivos homologados de fábrica, relógios de marcas suíças e investimentos em imóveis comerciais.",
+      "vestuario": "Ternos italianos sem gravata, camisas sociais sob medida e sapatos de couro legítimo com solado duplo.",
+      "aversoes": "Vendedores despreparados que não conhecem a ficha técnica do produto e promessas comerciais não honradas.",
+      "paixoes": "Participar de track days em autódromos aos sábados, churrasco gourmet para amigos e assistir à Fórmula 1 aos domingos."
+    },
+    "lugares_frequenta_sjc": [
+      "Vale Sul Shopping",
+      "Praça das Floradas de São José",
+      "Restaurantes Nobres da Dutra"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Quatro Rodas",
+        "handle": "quatrorodas"
+      },
+      {
+        "nome": "AutoEsporte Globo",
+        "handle": "autoesporte"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Acelerados (Rubens Barrichello)",
+        "handle": "acelerados"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Automotivo & Alto Padrão",
+    "foto": "data_personas/imagens_personagens/personagem_20_camila_albuquerque_de_moura.jpg"
+  },
+  {
+    "id": 21,
+    "nome_completo": "Beatriz 'Bia' Mendonça",
+    "idade": 22,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Estudante de Odontologia na UNESP & Criadora Digital",
+    "bairro": "Jardim Satélite",
+    "localizacao": "Jardim Satélite, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Caminhada e Ônibus universitário",
+    "historia_resumida": "Veio do interior de Minas para estudar na prestigiada Faculdade de Odontologia da UNESP em São José. Compartilha sua rotina de estudos clínicos no TikTok e Instagram, acumulando milhares de seguidores.",
+    "dor_principal": "O custo altíssimo dos kits de instrumentos odontológicos exigidos pela faculdade a cada novo semestre letivo.",
+    "habitos": {
+      "alimentacao": "Marmitas congeladas da mãe, café gelado em copos térmicos entre as aulas e açaí com granola na Praça São Dimas.",
+      "consumo": "Materiais odontológicos profissionais em dentais do centro, maquiagem cruelty-free e livros técnicos de anatomia.",
+      "vestuario": "Scrubs cirúrgicos coloridos estilizados na faculdade e roupas casuais jovens confortáveis nos finais de semana.",
+      "aversoes": "Professores autoritários sem empatia pedagógica e clínicas que utilizam materiais de baixa qualidade.",
+      "paixoes": "Criar vídeos educativos de saúde bucal para jovens, passear pelas feirinhas de artesanato e piqueniques no Vicentina."
+    },
+    "lugares_frequenta_sjc": [
+      "Campus da UNESP São Dimas",
+      "Praça Monsenhor Ascânio Brandão",
+      "Parque Vicentina Aranha"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista CROSP Notícias",
+        "handle": "crosp_oficial"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Dra. Dentista no Insta",
+        "handle": "dentistando"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Universitária & Criativa",
+    "foto": "data_personas/imagens_personagens/personagem_21_tatiane_souza_ribeiro.jpg"
+  },
+  {
+    "id": 22,
+    "nome_completo": "Sebastião 'Tião' Ribeiro",
+    "idade": 66,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Operador de Caminhão Pipa & Manutenção de Estradas Rurais",
+    "bairro": "Floradas de São José",
+    "localizacao": "Floradas de São José, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Caminhão de trabalho e moto antiga",
+    "historia_resumida": "Conhece cada curva, ponte de madeira e mata-burro da zona norte rural de SJC. Presta serviços de abastecimento de água potável em chácaras e patrolamento de estradas vicinais há quase quatro décadas.",
+    "dor_principal": "A precariedade da iluminação pública nas estradas rurais e o descaso de motoristas da cidade que andam em alta velocidade nas vias de terra.",
+    "habitos": {
+      "alimentacao": "Arroz com feijão gordo, torresmo crocante, farinha de milho caipira e café bem doce passado na hora.",
+      "consumo": "Peças de reposição para motores diesel em oficinas locais e calçados resistentes para trabalho pesado.",
+      "vestuario": "Camisa xadrez de flanela, calça jeans surrada pelo trabalho e chapéu de feltro tradicional.",
+      "aversoes": "Gente arrogante da cidade grande que desdenha do modo de vida e da sabedoria simples do homem do campo.",
+      "paixoes": "Participar de cavalgadas tropeiras no Bairro dos Freitas, cuidar da sua horta de couve e ouvir modão sertanejo no rádio de pilha."
+    },
+    "lugares_frequenta_sjc": [
+      "Igreja de Santo Expedito no Bairro dos Freitas",
+      "Mercado da Zona Norte",
+      "Posto de Combustíveis SP-50"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Rádio Piratininga",
+        "handle": "radiopiratiningasjc"
+      },
+      {
+        "nome": "TV Canção Nova",
+        "handle": "cancaonova"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Cultura Caipira Raiz",
+        "handle": "culturacaipira"
+      },
+      {
+        "nome": "Voz do Campo SJC",
+        "handle": "vozesdocampo"
+      }
+    ],
+    "estilo_consumo_tag": "Trabalho Pesado & Tradição Rural",
+    "foto": "data_personas/imagens_personagens/personagem_22_gustavo_henrique_assis.jpg"
+  },
+  {
+    "id": 23,
+    "nome_completo": "Priscila Alencar",
+    "idade": 39,
+    "genero_etnia": "Mulher Negra",
+    "profissao": "Proprietária de Esmalteria & Spa dos Pés",
+    "bairro": "Bosque dos Eucaliptos",
+    "localizacao": "Bosque dos Eucaliptos, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro próprio popular",
+    "historia_resumida": "Construiu um dos salões de beleza mais movimentados da região do Colonial. Emprega quatro profissionais do próprio bairro e é conhecida pela inovação nos tratamentos de podologia e unhas decoradas.",
+    "dor_principal": "Dificuldade de obter linhas de microcrédito bancário acessíveis para modernizar as poltronas e autoclaves do salão.",
+    "habitos": {
+      "alimentacao": "Marmita caseira caprichada levada para o salão, lanches rápidos entre atendimentos e refrigerante diet.",
+      "consumo": "Esmaltes hipoalergênicos profissionais no atacado, cosméticos para os pés e compras na feira dominical do Colonial.",
+      "vestuario": "Macacões pretos elegantes com detalhes dourados e calçados ortopédicos estilosos para aguentar o dia em pé.",
+      "aversoes": "Fornecedores que atrasam a entrega de insumos essenciais e fofocas no ambiente de trabalho.",
+      "paixoes": "Participar da feira de domingo do Colonial com a família, assistir séries de suspense e cantar no coral da igreja."
+    },
+    "lugares_frequenta_sjc": [
+      "Galeria Imperial do Colonial",
+      "Supermercado Nagumo Colonial",
+      "Shopping Jardim Oriente"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Portal Meon Vale",
+        "handle": "meonjornal"
+      },
+      {
+        "nome": "Notícias SJC",
+        "handle": "noticias_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Mulheres Empreendedoras do Vale",
+        "handle": "mulheresdovale"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Beleza & Liderança Local",
+    "foto": "data_personas/imagens_personagens/personagem_23_nayara_cristina_dos_santos.jpg"
+  },
+  {
+    "id": 24,
+    "nome_completo": "Felipe 'Lipe' Nogueira",
+    "idade": 25,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Instalador Técnico de Energia Solar Fotovoltaica",
+    "bairro": "Parque Industrial",
+    "localizacao": "Parque Industrial, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Furgão utilitário com escada no teto",
+    "historia_resumida": "Aproveitou o crescimento dos condomínios em SJC para se especializar na instalação de painéis solares em telhados residenciais e comerciais. Trabalha duro nos telhados debaixo de sol para expandir sua microempresa.",
+    "dor_principal": "A demora das concessionárias de energia elétrica para homologar e ativar os inversores solares dos clientes.",
+    "habitos": {
+      "alimentacao": "Almoço comercial de farto buffet livre, isotônicos durante as instalações e pizza com a namorada no domingo.",
+      "consumo": "Cabos solares de alta condutividade, ferramentas elétricas profissionais de impacto e equipamentos de proteção em altura (EPI).",
+      "vestuario": "Camisas térmicas com proteção UV de manga longa, calças reforçadas de ripstop e botas com sola antiderrapante.",
+      "aversoes": "Instaladores amadores que fazem ligações elétricas perigosas sem seguir as normas da ABNT.",
+      "paixoes": "Aprender sobre novas tecnologias de baterias de lítio, andar de kart aos sábados e churrasco com os amigos de infância."
+    },
+    "lugares_frequenta_sjc": [
+      "Lojas de Elétrica e Construção da Zona Leste",
+      "Parque Santos Dumont",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Canal Solar Brasil",
+        "handle": "canalsolar"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Engenharia na Prática",
+        "handle": "engenhariaprática"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Técnico Solar & Autonomia",
+    "foto": "data_personas/imagens_personagens/personagem_24_alexandre_de_siqueira_prado.jpg"
+  },
+  {
+    "id": 25,
+    "nome_completo": "Juliana 'Ju' Vasconcellos",
+    "idade": 44,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Corretora de Imóveis Especialista em Condomínios Fechados",
+    "bairro": "Jardim Oriente",
+    "localizacao": "Jardim Oriente, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Sedan Híbrido de Luxo",
+    "historia_resumida": "Uma das corretoras mais requisitadas para negociações de mansões e terrenos no Urbanova e Jardim do Golfe. Tem uma rede de relacionamentos sólida entre empresários e médicos do Vale do Paraíba.",
+    "dor_principal": "A lentidão nos cartórios de registro de imóveis e clientes indecisos que desistem na assinatura final da escritura.",
+    "habitos": {
+      "alimentacao": "Café espresso com grãos gourmet, carpaccios finos em restaurantes italianos e almoços de networking na Vila Ema.",
+      "consumo": "Produções fotográficas profissionais com drone para seus imóveis, marketing imobiliário digital e roupas de grife.",
+      "vestuario": "Tailleurs sob medida em tons neutros, joias discretas de ouro e saltos altos clássicos.",
+      "aversoes": "Corretores que não têm postura ética no mercado e imóveis com documentação fundiária irregular.",
+      "paixoes": "Viajar para praias paradisíacas no Nordeste, ioga ao ar livre nas manhãs de sábado e arquitetura de luxo."
+    },
+    "lugares_frequenta_sjc": [
+      "Restaurantes da Vila Ema",
+      "Colinas Shopping",
+      "Praça Ulisses Guimarães no Aquarius"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Imobiliária do Vale",
+        "handle": "imoveisvale"
+      },
+      {
+        "nome": "Valor Econômico",
+        "handle": "valoreconomico"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Lucas Sanseverino",
+        "handle": "lucassanseverino"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Alto Padrão & Network",
+    "foto": "data_personas/imagens_personagens/personagem_25_beatriz_helena_fontes.jpg"
+  },
+  {
+    "id": 26,
+    "nome_completo": "Marcio Souza e Silva",
+    "idade": 50,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Operador de Torno CNC & Usinagem Mecânica de Precisão",
+    "bairro": "Jardim América",
+    "localizacao": "Jardim América, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Carro próprio e ônibus",
+    "historia_resumida": "Mora e trabalha no polo industrial das Chácaras Reunidas, programando tornos e centros de usinagem que fornecem peças sob medida para os setores aeroespacial e petroquímico.",
+    "dor_principal": "A falta de renovação de maquinário nas pequenas oficinas locais em virtude das altas taxas de juros para financiamento industrial.",
+    "habitos": {
+      "alimentacao": "Comida de restaurante caseiro no polo industrial, marmita reforçada e café preto com bolacha no intervalo da fábrica.",
+      "consumo": "Ferramentas de medição micrométrica (paquímetros digitais, micrômetros) e melhorias na oficina.",
+      "vestuario": "Camisa polo industrial com o bolso frontal para caneta e óculos de proteção graduados.",
+      "aversoes": "Engenheiros recém-formados que ignoram a experiência prática dos torneiros mecânicos veteranos.",
+      "paixoes": "Restaurar motores de motocicletas clássicas nos finais de semana e passar tardes de domingo em família."
+    },
+    "lugares_frequenta_sjc": [
+      "Polo Industrial das Chácaras Reunidas",
+      "Vale Sul Shopping",
+      "Mercado Municipal de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Usinagem Brasil",
+        "handle": "usinagembrasil"
+      },
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Torneiros do Brasil",
+        "handle": "torneiromecanico"
+      },
+      {
+        "nome": "Mecânica Descomplicada",
+        "handle": "mecanicadescomplicada"
+      }
+    ],
+    "estilo_consumo_tag": "Industrial & Precisão",
+    "foto": "data_personas/imagens_personagens/personagem_26_luciana_barbosa_coimbra.jpg"
+  },
+  {
+    "id": 27,
+    "nome_completo": "Tatiane 'Tati' Camargo",
+    "idade": 34,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Nutricionista Clínica Funcional & Esportiva",
+    "bairro": "Jardim Portugal",
+    "localizacao": "Jardim Portugal, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro hatch moderno",
+    "historia_resumida": "Mantém consultório na Vila Ema atendendo atletas amadores e pessoas que buscam longevidade através de dietas limpas e individualizadas. Tem forte presença digital produzindo conteúdos de receitas funcionais.",
+    "dor_principal": "O bombardeio de dietas da moda perigosas promovidas por influenciadores leigos nas redes sociais.",
+    "habitos": {
+      "alimentacao": "Superalimentos, sementes de chia e linhaça dourada, kombuchas artesanais e vegetais orgânicos da feira de SJC.",
+      "consumo": "Artigos de bioimpedância de precisão, suplementos importados com laudo de pureza e cursos de nutrigenômica.",
+      "vestuario": "Roupas casuais refinadas em tecidos sustentáveis e jaleco estilizado em linho verde-oliva.",
+      "aversoes": "Alimentos ultraprocessados com excesso de corantes artificiais e clientes que não seguem o plano alimentar proposto.",
+      "paixoes": "Corridas no Parque Vicentina Aranha aos domingos pela manhã, cozinhar pratos funcionais e yoga ao ar livre."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Empórios Naturais da Vila Ema",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Nutrição Brasil",
+        "handle": "nutricaobrasil"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Luciano Bruno",
+        "handle": "lucianobrunocs"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Saúde Integrativa & Equilíbrio",
+    "foto": "data_personas/imagens_personagens/personagem_27_hiroshi_nakamura_filho.jpg"
+  },
+  {
+    "id": 28,
+    "nome_completo": "Rodrigo 'Digão' Barbosa",
+    "idade": 30,
+    "genero_etnia": "Homem Negro",
+    "profissao": "Eletricista Predial & Residencial Certificado",
+    "bairro": "Campo dos Alemães",
+    "localizacao": "Campo dos Alemães, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Moto com baú de ferramentas",
+    "historia_resumida": "Atende chamados de emergência elétrica em residências e comércios de toda a zona sul. Conquistou sua clientela pela pontualidade, honestidade nos orçamentos e trabalho dentro das normas de segurança.",
+    "dor_principal": "Clientes que contratam curiosos desqualificados e depois o chamam para consertar instalações em curto-circuito perigosas.",
+    "habitos": {
+      "alimentacao": "Almoço comercial nos bairros onde está trabalhando, lanches de rua no fim de tarde e refrigerante bem gelado.",
+      "consumo": "Alicates amperímetros de marca renomada, disjuntores de qualidade e fios de cobre normatizados.",
+      "vestuario": "Camiseta pólo com logotipo da sua empresa, calça jeans reforçada e botinas com isolamento elétrico de 1000V.",
+      "aversoes": "Materiais elétricos falsificados vendidos em depósitos clandestinos e calotes de clientes desonestos.",
+      "paixoes": "Aprender sobre automação residencial inteligente (Alexa), jogar videogame nas horas vagas e churrasco em família."
+    },
+    "lugares_frequenta_sjc": [
+      "Lojas de Materiais Elétricos da Zona Sul",
+      "Shopping Jardim Oriente",
+      "Praça do Dom Pedro I"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Mundo da Elétrica",
+        "handle": "mundodaeletrica"
+      },
+      {
+        "nome": "Notícias SJC",
+        "handle": "noticias_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Engehall Elétrica",
+        "handle": "engehall_eletrica"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Técnico Prático & Confiança",
+    "foto": "data_personas/imagens_personagens/personagem_28_vinicius_gabriel_de_oliveira.jpg"
+  },
+  {
+    "id": 29,
+    "nome_completo": "Vera Lúcia Bittencourt",
+    "idade": 61,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Professora de Língua Portuguesa Aposentada",
+    "bairro": "Conjunto Dom Pedro I & II",
+    "localizacao": "Conjunto Habitacional Dom Pedro, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Caminhada e Carro próprio",
+    "historia_resumida": "Lecionou durante mais de três décadas em colégios estaduais tradicionais de SJC. Conhecida por sua erudição e carinho com gerações de alunos, hoje dedica seu tempo a clubes de leitura e eventos culturais.",
+    "dor_principal": "A perda progressiva do hábito da leitura profunda entre os jovens e a decadência de livrarias físicas na cidade.",
+    "habitos": {
+      "alimentacao": "Café com leite e torradas pela manhã, sopas caseiras leves à noite e frutas frescas da quitanda do Monte Castelo.",
+      "consumo": "Livros clássicos e contemporâneos em sebos e livrarias, peças de teatro e assinaturas de jornais impressos.",
+      "vestuario": "Cardigãs elegantes de lã, echarpes coloridas de seda e sapatos clássicos de bico arredondado.",
+      "aversoes": "Erros grosseiros de concordância em comunicações oficiais e poluição sonora perto de sua casa.",
+      "paixoes": "Participar de saraus literários no Parque Vicentina Aranha, escrever crônicas sobre a história de SJC e cuidar de suas violetas."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Teatro Municipal de SJC",
+      "Livrarias do CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Jornal O Vale",
+        "handle": "jornalovale"
+      },
+      {
+        "nome": "TV Cultura",
+        "handle": "tvcultura"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Clube de Leitura Vale",
+        "handle": "clubedeleituravale"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Cultural & Intelectual Clássica",
+    "foto": "data_personas/imagens_personagens/personagem_29_patricia_monte_negro_da_silva.jpg"
+  },
+  {
+    "id": 30,
+    "nome_completo": "André Luiz Fonseca",
+    "idade": 45,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Consultor Financeiro & Gestor de Patrimônio Familiar",
+    "bairro": "Parque Interlagos",
+    "localizacao": "Parque Interlagos, São José dos Campos",
+    "regiao": "Sul",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Premium Importado",
+    "historia_resumida": "Atende famílias de alta renda e herdeiros de empresas tradicionais do Vale, auxiliando na alocação global de ativos e planejamento sucessório. Vive no Colinas pela proximidade aos clubes e centros empresariais.",
+    "dor_principal": "A instabilidade fiscal e tributária do país que dificulta o planejamento financeiro de longo prazo para as empresas.",
+    "habitos": {
+      "alimentacao": "Cortes nobres de carne angus, queijos finos europeus e vinhos estruturados da região de Bordeaux.",
+      "consumo": "Terminais Bloomberg de dados financeiros, viagens de férias ao exterior e itens de alta relojoaria.",
+      "vestuario": "Costumes de alfaiataria fina sem gravata, camisas de algodão egípcio e sapatos Oxford artesanais.",
+      "aversoes": "Especulações financeiras irresponsáveis e promessas de retornos exorbitantes sem fundamentos sólidos.",
+      "paixoes": "Jogar golfe nos fins de semana, leitura sobre geopolítica internacional e colecionismo de moedas históricas."
+    },
+    "lugares_frequenta_sjc": [
+      "Clube de Campo Santa Rita",
+      "Colinas Shopping",
+      "Restaurantes da Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Bloomberg Línea Brasil",
+        "handle": "bloomberglinea"
+      },
+      {
+        "nome": "InfoMoney",
+        "handle": "infomoney"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Tiago Reis (Suno)",
+        "handle": "tiagoreis"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Mercado Financeiro & Patrimônio",
+    "foto": "data_personas/imagens_personagens/personagem_30_fernando_de_almeida_prado.jpg"
+  },
+  {
+    "id": 31,
+    "nome_completo": "Natália 'Nati' Dornelles",
+    "idade": 28,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Designer de UX/UI para Startups Globais",
+    "bairro": "Cidade Vista Verde",
+    "localizacao": "Cidade Vista Verde, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Patinete elétrico e Carro por aplicativo",
+    "historia_resumida": "Trabalha para uma empresa de tecnologia da Europa remotamente de seu estúdio no Aquarius. É apaixonada por tipografia, acessibilidade digital e interfaces centradas nas reais necessidades dos usuários.",
+    "dor_principal": "A escassez de eventos presenciais de design de produto e tecnologia fora da capital paulista.",
+    "habitos": {
+      "alimentacao": "Matcha lattes cremosos, toasts com cogumelos salteados e refeições vegetarianas leves.",
+      "consumo": "Monitores 4K calibrados para design, cadernos Moleskine e assinaturas de plataformas de tipografia.",
+      "vestuario": "Camisetas de algodão orgânico oversized, calças retas de sarja bege e tênis sustentáveis brancos.",
+      "aversoes": "Aplicativos com interfaces confusas cheias de propagandas invasivas e reuniões sem objetivo claro.",
+      "paixoes": "Ilustração vetorial autoral, passeios com seu cão na Praça Ulisses Guimarães e cerâmica manual."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça Ulisses Guimarães",
+      "Cafeterias do Aquarius",
+      "Parque Ribeirão Vermelho"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Design Brasil",
+        "handle": "designbrasil"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Ux Collective Brasil",
+        "handle": "uxdesign"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Design & Criatividade Digital",
+    "foto": "data_personas/imagens_personagens/personagem_31_yala_tamires_da_silva.jpg"
+  },
+  {
+    "id": 32,
+    "nome_completo": "Cláudio Roberto Toledo",
+    "idade": 53,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Líder Comunitário & Motorista de Transporte Coletivo",
+    "bairro": "Eugênio de Melo (Distrito)",
+    "localizacao": "Eugênio de Melo, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Ônibus e Bicicleta",
+    "historia_resumida": "Dirige ônibus nas linhas da zona leste há mais de vinte anos e atua como voz ativa da associação de moradores do Novo Horizonte, lutando por melhorias nas praças esportivas e postos de saúde.",
+    "dor_principal": "Superlotação nos horários de pico e a falta de segurança em pontos de ônibus mal iluminados da periferia leste.",
+    "habitos": {
+      "alimentacao": "Prato feito caprichado com bife acebolado, café forte no ponto final da linha e feijão com farinha no almoço.",
+      "consumo": "Compras no comércio popular do bairro, farmácia comunitária e materiais para reformas no centro comunitário.",
+      "vestuario": "Uniforme de motorista sempre bem passado e bermuda com camiseta de time de futebol nos fins de semana.",
+      "aversoes": "Políticos que só aparecem na zona leste em época de eleição e motoristas imprudentes no trânsito.",
+      "paixoes": "Organizar campeonatos de futebol de várzea no bairro, churrasco com a vizinhança e ouvir samba de raiz."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça de Esportes do Novo Horizonte",
+      "Mercado da Zona Leste",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Jornal da Zona Leste SJC",
+        "handle": "zl_noticias"
+      },
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Voz Comunitária SJC",
+        "handle": "comunidade_sjc"
+      },
+      {
+        "nome": "São José EC",
+        "handle": "saojoseec_oficial"
+      }
+    ],
+    "estilo_consumo_tag": "Comunitário & Voz do Povo",
+    "foto": "data_personas/imagens_personagens/personagem_32_caio_felipe_dos_santos_neves.jpg"
+  },
+  {
+    "id": 33,
+    "nome_completo": "Fernanda 'Fê' Albuquerque",
+    "idade": 37,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Bióloga & Coordenadora de Licenciamento Ambiental",
+    "bairro": "Galo Branco",
+    "localizacao": "Galo Branco, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Compacto Híbrido",
+    "historia_resumida": "Coordena estudos de impacto ambiental e reflorestamento para grandes empreendimentos imobiliários e industriais no Vale do Paraíba. Defende o crescimento urbano sustentável e a preservação dos mananciais.",
+    "dor_principal": "A pressão política para flexibilização de áreas de preservação permanente (APP) e o desmatamento ilegal nas bordas da cidade.",
+    "habitos": {
+      "alimentacao": "Alimentos orgânicos certificados, queijos artesanais da serra e jantares intimistas em bistrôs da Vila Ema.",
+      "consumo": "Equipamentos de GPS georreferenciado de alta precisão, cosméticos veganos e livros de ecologia florestal.",
+      "vestuario": "Roupas em tecidos naturais de algodão cru e linho, botas confortáveis para campo e acessórios sustentáveis.",
+      "aversoes": "Descarte inadequado de entulhos em áreas verdes urbanas e empresas que praticam greenwashing.",
+      "paixoes": "Trilhas de observação de aves (birdwatching) na Serra da Mantiqueira, fotografar a flora nativa e jardinagem ecológica."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Áreas de Preservação do Banhado",
+      "Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista O Eco",
+        "handle": "oeco_oficial"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "SOS Mata Atlântica",
+        "handle": "sosmataatlantica"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Sustentabilidade & Meio Ambiente",
+    "foto": "data_personas/imagens_personagens/personagem_33_karen_naomi_fujimoto.jpg"
+  },
+  {
+    "id": 34,
+    "nome_completo": "Lucas 'LK' Kuntz",
+    "idade": 24,
+    "genero_etnia": "Homem Asiático",
+    "profissao": "Analista de Segurança da Informação & Hacker Ético",
+    "bairro": "Parque Novo Horizonte",
+    "localizacao": "Parque Novo Horizonte, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Moto esportiva e Carro",
+    "historia_resumida": "Atua na defesa cibernética e testes de intrusão para instituições financeiras e indústrias aeroespaciais do Vale. É focado em criptografia, privacidade de dados e segurança de redes.",
+    "dor_principal": "A vulnerabilidade generalizada de pequenas e médias empresas locais a ataques de ransomware.",
+    "habitos": {
+      "alimentacao": "Lanches práticos, delivery asiático noturno e café expresso duplo sem açúcar durante os plantões.",
+      "consumo": "Hardware de segurança física (YubiKeys), servidores domésticos e periféricos de computador de alta fidelidade.",
+      "vestuario": "Camisetas pretas básicas de algodão, calças jeans escuras e tênis skate duráveis.",
+      "aversoes": "Sistemas corporativos com senhas fracas e falta de investimento em cultura de privacidade de dados.",
+      "paixoes": "Competições globais de Capture The Flag (CTF), pilotar sua moto nas curvas da SP-50 e tecnologia cripto."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça das Indústrias",
+      "Parque Tecnológico de SJC",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "The Hacker News",
+        "handle": "thehackernews"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Gabriel Pato",
+        "handle": "gabrielpato"
+      },
+      {
+        "nome": "Filipe Deschamps",
+        "handle": "filipedeschamps"
+      }
+    ],
+    "estilo_consumo_tag": "Cibersegurança & Tech",
+    "foto": "data_personas/imagens_personagens/personagem_34_rodrigo_paiva_kuhlmann.jpg"
+  },
+  {
+    "id": 35,
+    "nome_completo": "Rosana Maria de Jesus",
+    "idade": 57,
+    "genero_etnia": "Mulher Negra",
+    "profissao": "Cozinheira Chefe de Restaurante Tradicional por Quilo",
+    "bairro": "Jardim Santa Inês I & II",
+    "localizacao": "Jardim Santa Inês, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Caminhada e Ônibus",
+    "historia_resumida": "Comanda a cozinha de um dos restaurantes executivos mais antigos do centro de SJC, alimentando centenas de bancários e comerciantes todos os dias com seu tempero caipira inconfundível.",
+    "dor_principal": "O encarecimento excessivo do óleo vegetal, do gás de cozinha e das carnes de primeira no comércio atacadista.",
+    "habitos": {
+      "alimentacao": "Comida de panela caseira bem temperada com alho e cebola fresca, feijão carioquinha e doce de abóbora caseiro.",
+      "consumo": "Panelas industriais de ferro e alumínio grosso, temperos a granel no Mercado Municipal e compras de mês.",
+      "vestuario": "Turbantes coloridos de algodão, jaleco branco higiênico e sapatos de segurança emborrachados fechados.",
+      "aversoes": "Desperdício de alimentos em buffets e restaurantes que utilizam temperos químicos industrializados artificiais.",
+      "paixoes": "Reunir filhos e netos em volta da mesa farta no domingo, cuidar das suas plantas de quintal e ouvir samba antigo."
+    },
+    "lugares_frequenta_sjc": [
+      "Mercado Municipal de SJC",
+      "Igreja Matriz de São José",
+      "Praça Afonso Pena"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      },
+      {
+        "nome": "Rádio Nativa FM",
+        "handle": "nativafmsjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Receitas de Vó Caipira",
+        "handle": "receitasdevo"
+      },
+      {
+        "nome": "Memória Joseense",
+        "handle": "memoria_joseense"
+      }
+    ],
+    "estilo_consumo_tag": "Gastronomia Tradicional & Afeto",
+    "foto": "data_personas/imagens_personagens/personagem_35_sylvia_regina_castilho.jpg"
+  },
+  {
+    "id": 36,
+    "nome_completo": "Vinícius 'Vini' Castanho",
+    "idade": 32,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Especialista em Detalhamento Automotivo e Vitrificação",
+    "bairro": "Jardim Mariana I & II",
+    "localizacao": "Jardim Mariana, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro esportivo rebaixado legalizado",
+    "historia_resumida": "Montou uma estética automotiva de alto padrão próxima ao Shopping Oriente, atendendo donos de carros de luxo e entusiastas de veículos esportivos que exigem polimento técnico espelhado.",
+    "dor_principal": "A poeira excessiva de obras vizinhas que prejudica os processos de cura de vitrificadores cerâmicos na oficina.",
+    "habitos": {
+      "alimentacao": "Hambúrguer artesanal aos fins de semana, almoço em restaurantes self-service rápidos e energéticos gelados.",
+      "consumo": "Compostos polidores alemães, boinas de lã e microfibras especiais de alta densidade para acabamento.",
+      "vestuario": "Camisetas pretas de marcas de car care, bermudas cargo pretas e tênis esportivos confortáveis.",
+      "aversoes": "Lava-rápidos automáticos de rolo que riscam a pintura dos veículos e clientes que usam produtos abrasivos caseiros.",
+      "paixoes": "Encontros de carros antigos e modificados no estacionamento de shoppings, cuidar do brilho do próprio carro e automobilismo."
+    },
+    "lugares_frequenta_sjc": [
+      "Shopping Jardim Oriente",
+      "Av. Andrômeda",
+      "Vale Sul Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Car Care Brasil",
+        "handle": "carcarebrasil"
+      },
+      {
+        "nome": "Notícias SJC",
+        "handle": "noticias_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Polimento Técnico Brasil",
+        "handle": "detailerbrasil"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Automotivo Estético & Empreendedor",
+    "foto": "data_personas/imagens_personagens/personagem_36_danilo_viana_de_alencar.jpg"
+  },
+  {
+    "id": 37,
+    "nome_completo": "Mariana 'Mari' Godoy",
+    "idade": 29,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Fotógrafa Especialista em Ensaios de Família e Gastronomia",
+    "bairro": "Vila Tatetuba",
+    "localizacao": "Vila Tatetuba, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro compacto e caminhada",
+    "historia_resumida": "Fotografa ensaios de gestantes e crianças no Parque Vicentina Aranha e produz o catálogo visual dos principais restaurantes gourmets da cidade com luz natural e sensibilidade estética.",
+    "dor_principal": "A desvalorização do trabalho autoral fotográfico por clientes que acham que câmeras de celular substituem um olhar profissional.",
+    "habitos": {
+      "alimentacao": "Pães de queijo artesanais, cafés filtrados em cafeterias da Adyana e tortas de frutas vermelhas.",
+      "consumo": "Lentes prime de alta abertura (f/1.4), cartões de memória de alta velocidade e álbuns encadernados artesanais.",
+      "vestuario": "Vestidos fluidos em tons terrosos, chapéus de feltro discretos e botas de camurça macias.",
+      "aversoes": "Ensaios fotográficos engessados e clientes que exigem edições artificiais exageradas em Photoshop.",
+      "paixoes": "Passeios matinais fotografando a arquitetura histórica do Vicentina Aranha, viajar para a serra e cinema de arte."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Parque Santos Dumont",
+      "Bistrôs da Vila Adyana"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Fotografe Melhor",
+        "handle": "fotografemelhor"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Fotografia Autoral Brasil",
+        "handle": "fotografiaautoral"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Visual & Fotografia Sensível",
+    "foto": "data_personas/imagens_personagens/personagem_37_larissa_meireles_prado.jpg"
+  },
+  {
+    "id": 38,
+    "nome_completo": "Edson 'Edinho' Ferreira",
+    "idade": 47,
+    "genero_etnia": "Homem Negro",
+    "profissao": "Soldador Industrial Especialista TIG e Caldeiraria",
+    "bairro": "Jardim Motorama",
+    "localizacao": "Jardim Motorama, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Moto e Fretado da fábrica",
+    "historia_resumida": "Metalúrgico altamente qualificado em solda TIG para tubulações de alta pressão e estruturas aeroespaciais. Reside no Galo Branco há mais de vinte anos e tem orgulho da tradição trabalhadora da sua família.",
+    "dor_principal": "Falta de investimentos em cursos de requalificação tecnológica gratuita para veteranos da indústria local.",
+    "habitos": {
+      "alimentacao": "Comida farta de refeitório fabril, churrasco com linguiça artesanal aos sábados e cerveja bem gelada.",
+      "consumo": "Máscaras de solda com escurecimento automático de última geração e ferramentas manuais resistentes.",
+      "vestuario": "Jaquetas de couro de soldador na fábrica e camisa polo com bermuda jeans nos dias de descanso.",
+      "aversoes": "Falta de rigor nas normas de segurança do trabalho e atrasos de pagamento de fornecedores terceirizados.",
+      "paixoes": "Tocar pandeiro em rodas de samba no Galo Branco, consertar coisas em casa e torcer pelo São José EC."
+    },
+    "lugares_frequenta_sjc": [
+      "Comércio do Galo Branco",
+      "Estádio Martins Pereira",
+      "Parque Novo Horizonte"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Jornal dos Metalúrgicos SJC",
+        "handle": "sindicatometalurgicossjc"
+      },
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Soldagem & Indústria",
+        "handle": "soldagembrasil"
+      },
+      {
+        "nome": "São José Esporte Clube",
+        "handle": "saojoseec_oficial"
+      }
+    ],
+    "estilo_consumo_tag": "Técnico Metalúrgico & Raiz",
+    "foto": "data_personas/imagens_personagens/personagem_38_jamila_nogueira_santos.jpg"
+  },
+  {
+    "id": 39,
+    "nome_completo": "Carla Cristina Zanin",
+    "idade": 43,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Cirurgiã Dentista Especialista em Implantodontia",
+    "bairro": "Vila Tesouro",
+    "localizacao": "Vila Tesouro, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Premium",
+    "historia_resumida": "Referência em cirurgia guiada por computador e implantes dentários com consultório na Vila Adyana. Mora no Esplanada e preza pela discrição, elegância e rigor cirúrgico.",
+    "dor_principal": "A proliferação de franquias odontológicas populares de baixo custo que desvalorizam a complexidade cirúrgica.",
+    "habitos": {
+      "alimentacao": "Gastronomia contemporânea, vinhos brancos da uva Sauvignon Blanc e cafés espressos de torra média.",
+      "consumo": "Scanners intraorais 3D, congressos internacionais de implantodontia e artigos de decoração refinados.",
+      "vestuario": "Alfaiataria impecável de cortes retos em cores neutras e joias clássicas de pérolas.",
+      "aversoes": "Profissionais da saúde que priorizam o lucro em detrimento da saúde e segurança do paciente.",
+      "paixoes": "Natação matinal no clube, viagens culturais pela Europa e colecionismo de cerâmica fina."
+    },
+    "lugares_frequenta_sjc": [
+      "Clube de Campo Santa Rita",
+      "Colinas Shopping",
+      "Restaurantes da Av. São João"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Odonto Magazine",
+        "handle": "odontomagazine"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Implantodontia Avançada Brasil",
+        "handle": "implantodontiabrasil"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Excelência Cirúrgica & Tradição",
+    "foto": "data_personas/imagens_personagens/personagem_39_thais_regina_cavalcante.jpg"
+  },
+  {
+    "id": 40,
+    "nome_completo": "Matheus 'Math' Lourenço",
+    "idade": 21,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Barbeiro Especialista em Cortes Freestyle & Navalha",
+    "bairro": "Vila Industrial",
+    "localizacao": "Vila Industrial, São José dos Campos",
+    "regiao": "Leste",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Moto 160cc",
+    "historia_resumida": "Começou cortando cabelo dos amigos na calçada e hoje é dono de uma barbearia concorrida no Dom Pedro II. Cria desenhos freestyle na navalha e atrai jovens de toda a zona sul para mudar o visual.",
+    "dor_principal": "O aumento no preço das lâminas descartáveis e máquinas de corte sem fio importadas.",
+    "habitos": {
+      "alimentacao": "Açaí turbinado com leite condensado, lanches de rua com batata frita e refrigerante gelado.",
+      "consumo": "Máquinas de corte profissionais de precisão (Wahl/Babyliss), pomadas modeladoras e tênis de marca.",
+      "vestuario": "Camisetas de time de basquete americano (NBA), bermudas jeans e correntes de prata.",
+      "aversoes": "Clientes que chegam atrasados sem avisar e pessoas que desvalorizam a arte da barbearia de periferia.",
+      "paixoes": "Batalhas de rima e hip-hop na zona sul, gravar vídeos de transformação de cortes e andar de moto."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça do Dom Pedro II",
+      "Shopping Jardim Oriente",
+      "Pista de Skate do Satélite"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Barber Shop Brasil",
+        "handle": "barbershopbrasil"
+      },
+      {
+        "nome": "Notícias SJC",
+        "handle": "noticias_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Willy Morales",
+        "handle": "willymorales"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Estilo Urbano & Freestyle",
+    "foto": "data_personas/imagens_personagens/personagem_40_osvaldo_henrique_castelo.jpg"
+  },
+  {
+    "id": 41,
+    "nome_completo": "Elza Aparecida Bueno",
+    "idade": 65,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Feirante Produtora de Hortaliças Orgânicas",
+    "bairro": "Santana",
+    "localizacao": "Santana, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Kombi utilitária e Caminhada",
+    "historia_resumida": "Acorda às quatro da manhã para colher alfaces, couves e cheiro-verde sem agrotóxicos em sua horta familiar na Costinha para vender nas feiras da zona norte e centro de SJC.",
+    "dor_principal": "Perdas na lavoura causadas por geadas repentinas no inverno ou tempestades de granizo na serra.",
+    "habitos": {
+      "alimentacao": "Verduras fresquinhas refogadas na banha de porco, angu de milho verde e café com leite da roça.",
+      "consumo": "Sementes orgânicas certificadas, adubo natural e lonas para estufas agrícolas.",
+      "vestuario": "Camisas de manga comprida para o sol, chapéu de palha com lenço e botas de borracha de cano alto.",
+      "aversoes": "Agrotóxicos pesados que contaminam a terra e atravessadores que querem pagar pouco na produção rural.",
+      "paixoes": "Cuidar de suas mudas na estufa, ir à missa de domingo no Bairro dos Freitas e reunir a família para o almoço caipira."
+    },
+    "lugares_frequenta_sjc": [
+      "Feira Livre de Santana",
+      "Igreja da Costinha",
+      "Mercado Municipal de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Globo Rural Vanguarda",
+        "handle": "redevanguarda"
+      },
+      {
+        "nome": "Rádio Piratininga",
+        "handle": "radiopiratiningasjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Agricultura Orgânica Brasil",
+        "handle": "organicosbrasil"
+      },
+      {
+        "nome": "Voz do Campo SJC",
+        "handle": "vozesdocampo"
+      }
+    ],
+    "estilo_consumo_tag": "Orgânico & Agricultura Familiar",
+    "foto": "data_personas/imagens_personagens/personagem_41_mayara_silva_de_oliveira.jpg"
+  },
+  {
+    "id": 42,
+    "nome_completo": "Rafael 'Rafa' Brandão",
+    "idade": 38,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Gerente de Supply Chain & Logística da Dutra",
+    "bairro": "Altos de Santana",
+    "localizacao": "Altos de Santana, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Carro sedan executivo",
+    "historia_resumida": "Coordena a frota e a distribuição de um dos maiores centros de logística instalados ao longo da Rodovia Presidente Dutra. Vive no Vista Verde pela arborização exuberante e fácil acesso às vias rápidas.",
+    "dor_principal": "Interrupções no fluxo logístico causadas por acidentes na Dutra nos horários de entrega de carga expressa.",
+    "habitos": {
+      "alimentacao": "Grelhados com legumes no almoço, massas artesanais com molhos encorpados e cervejas artesanais locais.",
+      "consumo": "Softwares de rastreamento e telemetria logística, equipamentos eletrônicos para home office e livros de gestão.",
+      "vestuario": "Camisas sociais sem gravata em tecidos tecnológicos antimanchas e calças chino elegantes.",
+      "aversoes": "Atrasos em relatórios operacionais e transportadoras que não cumprem os padrões de segurança de carga.",
+      "paixoes": "Correr pelas alamedas arborizadas do Vista Verde, andar de caiaque na represa e churrasco de fim de semana."
+    },
+    "lugares_frequenta_sjc": [
+      "Praças da Cidade Vista Verde",
+      "CenterVale Shopping",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Mundo Logística",
+        "handle": "mundologistica"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Logística na Prática",
+        "handle": "logisticabr"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Logística & Gestão Estratégica",
+    "foto": "data_personas/imagens_personagens/personagem_42_lucas_kaua_dos_santos.jpg"
+  },
+  {
+    "id": 43,
+    "nome_completo": "Sabrina Satoe Mori",
+    "idade": 30,
+    "genero_etnia": "Mulher Asiática",
+    "profissao": "Desenvolvedora Mobile iOS/Swift",
+    "bairro": "Alto da Ponte",
+    "localizacao": "Alto da Ponte, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Bicicleta e Transporte por aplicativo",
+    "historia_resumida": "Cria aplicativos para o ecossistema Apple em uma empresa de tecnologia financeira. Escolheu morar na Vila Maria pela atmosfera charmosa e proximidade das padarias clássicas e do centro histórico.",
+    "dor_principal": "A instabilidade nas diretrizes de aprovação de aplicativos na App Store que atrasa lançamentos comerciais.",
+    "habitos": {
+      "alimentacao": "Culinária fusion asiática, chás de jasmim orgânicos e pães de fermentação lenta com queijo branco.",
+      "consumo": "Dispositivos Apple de última geração para testes, cadeiras ergonômicas certificadas e fones com cancelamento de ruído.",
+      "vestuario": "Cardigãs minimalistas em tons pastéis, calças de alfaiataria confortáveis e tênis slip-on.",
+      "aversoes": "Sistemas corporativos legados lentos e falta de acessibilidade para usuários com deficiência visual em apps.",
+      "paixoes": "Desenhar ilustrações no iPad, fotografar detalhes arquitetônicos da Vila Maria e passeios de bicicleta no Vicentina."
+    },
+    "lugares_frequenta_sjc": [
+      "Padarias tradicionais da Vila Maria",
+      "Parque Vicentina Aranha",
+      "Sesc São José dos Campos"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "MacMagazine Brasil",
+        "handle": "macmagazine"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Filipe Deschamps",
+        "handle": "filipedeschamps"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Mobile Tech & Estilo Minimalista",
+    "foto": "data_personas/imagens_personagens/personagem_43_kenji_takahashi.jpg"
+  },
+  {
+    "id": 44,
+    "nome_completo": "Geraldo 'Seu Geraldo' Dias",
+    "idade": 69,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Mecânico Especialista em Motores Diesel & Bombas Injetoras",
+    "bairro": "Buquirinha I & II",
+    "localizacao": "Buquirinha, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Picape antiga e Caminhada",
+    "historia_resumida": "Mantém sua oficina de beira de estrada no Buquirinha há quarenta e cinco anos, socorrendo caminhoneiros, produtores rurais e ônibus que sobem para a serra de Monteiro Lobato e Campos do Jordão.",
+    "dor_principal": "A complexidade da eletrônica embarcada nos motores modernos que exige scanners caros com assinaturas anuais abusivas.",
+    "habitos": {
+      "alimentacao": "Marmita de ferro com arroz, feijão e carne de panela, café coado na hora e paçoca caipira.",
+      "consumo": "Chaves mecânicas forjadas em cromo-vanádio, peças de reposição diesel originais e óleos lubrificantes de qualidade.",
+      "vestuario": "Macacão azul escuro de mecânico com manchas de graxa e boné de marca de caminhão.",
+      "aversoes": "Mecânicos desonestos que cobram por peças que não trocaram e ferramentas de baixa qualidade que quebram no torque.",
+      "paixoes": "Restaurar tratores agrícolas antigos no galpão, conversar com os viajantes da SP-50 e ouvir modão no rádio."
+    },
+    "lugares_frequenta_sjc": [
+      "Comércio do Buquirinha",
+      "Posto da SP-50",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista O Carreteiro",
+        "handle": "ocarreteiro"
+      },
+      {
+        "nome": "Rádio Nativa FM",
+        "handle": "nativafmsjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Mecânica Pesada Brasil",
+        "handle": "mecanicadiesel"
+      },
+      {
+        "nome": "Voz do Campo SJC",
+        "handle": "vozesdocampo"
+      }
+    ],
+    "estilo_consumo_tag": "Mecânica Pesada & Sabedoria de Estrada",
+    "foto": "data_personas/imagens_personagens/personagem_44_clara_meirelles_castroviejo.jpg"
+  },
+  {
+    "id": 45,
+    "nome_completo": "Patrícia 'Pati' Lemes",
+    "idade": 40,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Organizadora Profissional de Ambientes (Personal Organizer)",
+    "bairro": "Vila Paiva",
+    "localizacao": "Vila Paiva, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro próprio espaçoso",
+    "historia_resumida": "Transforma casas caóticas em lares harmoniosos e funcionais em condomínios da zona sul e oeste. Ensina técnicas de desapego e organização que economizam tempo e trazem paz mental para famílias ocupadas.",
+    "dor_principal": "Clientes que voltam a acumular objetos desnecessários semanas após a conclusão do projeto de organização.",
+    "habitos": {
+      "alimentacao": "Marmitas congeladas saudáveis e etiquetadas, saladas com sementes e sucos naturais prensados a frio.",
+      "consumo": "Caixas organizadoras de acrílico transparente, rotuladores eletrônicos térmicos e cabides padronizados de veludo.",
+      "vestuario": "Camisas polo brancas com seu logotipo bordado, calças confortáveis com elastano e tênis slip-on acolchoados.",
+      "aversoes": "Acumulação compulsiva de caixas vazias e pessoas que não valorizam a metodologia profissional de organização.",
+      "paixoes": "Passeios na Av. Ouro Fino no Bosque dos Eucaliptos, ler livros sobre minimalismo e reformas criativas de móveis."
+    },
+    "lugares_frequenta_sjc": [
+      "Avenida Ouro Fino no Bosque",
+      "Vale Sul Shopping",
+      "Leroy Merlin do Satélite"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Casa & Organização",
+        "handle": "casaeorganizacao"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Micaela Góes (Santa Ajuda)",
+        "handle": "micaelagoes"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "estilo_consumo_tag": "Organização & Harmonia Prática",
+    "foto": "data_personas/imagens_personagens/personagem_45_leonardo_vianna_martins.jpg"
+  },
+  {
+    "id": 46,
+    "nome_completo": "Henrique 'Rique' Faria",
+    "idade": 26,
+    "genero_etnia": "Homem Negro",
+    "profissao": "Técnico de Instalação e Fusão de Fibra Óptica",
+    "bairro": "Telespark",
+    "localizacao": "Telespark, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Carro utilitário com escada e moto",
+    "historia_resumida": "Trabalha subindo em postes e instalando internet de ultravelocidade em bairros da zona leste e áreas rurais de SJC. Tem agilidade cirúrgica na fusão de cabos ópticos e atendimento direto aos clientes.",
+    "dor_principal": "Fios cortados por caminhões com excesso de altura e roubo frequente de cabos de telecomunicações nas madrugadas.",
+    "habitos": {
+      "alimentacao": "Marmitex de frango com quiabo nos restaurantes da ZL, salgados assados nos postos e refrigerante no intervalo.",
+      "consumo": "Máquinas de fusão de fibra óptica portáteis, canetas laser de teste óptico e calçados com isolamento térmico.",
+      "vestuario": "Uniforme com faixas refletivas de alta visibilidade, capacete com jugular de segurança e óculos de proteção UV.",
+      "aversoes": "Clientes impacientes que culpam o instalador por instabilidades globais de servidores de internet.",
+      "paixoes": "Participar de torneios de videogame de futebol aos fins de semana, empinar pipa com o filho no campinho e churrasco."
+    },
+    "lugares_frequenta_sjc": [
+      "Comércio do Santa Inês e Hermínia",
+      "Shopping CenterVale",
+      "Parque Novo Horizonte"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Telecom Brasil Notícias",
+        "handle": "telecombrasil"
+      },
+      {
+        "nome": "Notícias SJC",
+        "handle": "noticias_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Mundo das Telecomunicações",
+        "handle": "telecom_pro"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Conectividade & Trabalho Técnico",
+    "foto": "data_personas/imagens_personagens/personagem_46_sergio_murilo_de_santana.jpg"
+  },
+  {
+    "id": 47,
+    "nome_completo": "Mônica D'Ávila",
+    "idade": 52,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Psicóloga Clínica Especialista em Terapia Cognitivo-Comportamental",
+    "bairro": "Bairro dos Freitas",
+    "localizacao": "Bairro dos Freitas, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Compacto",
+    "historia_resumida": "Atende executivos e jovens universitários com foco no manejo de ansiedade, estresse corporativo e desenvolvimento emocional. Mantém consultório com isolamento acústico refinado no Esplanada.",
+    "dor_principal": "O aumento expressivo de crises de burnout entre jovens profissionais do polo tecnológico de SJC.",
+    "habitos": {
+      "alimentacao": "Chás aromáticos calmantes de camomila e melissa, refeições mediterrâneas leves e pães de nozes artesanais.",
+      "consumo": "Livros de neurociência e psicologia comportamental, poltronas ergonômicas de veludo e viagens de retiro espiritual.",
+      "vestuario": "Camisas de seda pura em tons suaves de azul e lavanda, calças pantalona elegantes e sapatilhas confortáveis.",
+      "aversoes": "Psicólogos que quebram o sigilo profissional ou fazem diagnósticos superficiais sensacionalistas na internet.",
+      "paixoes": "Caminhadas reflexivas no Parque Vicentina Aranha, prática de meditação mindfulness e jardinagem aromática."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Colinas Shopping",
+      "Bistrôs da Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Mente & Cérebro",
+        "handle": "mentecerebro"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Rossandro Klinjey",
+        "handle": "rossandroklinjey"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Saúde Mental & Reflexão Nobre",
+    "foto": "data_personas/imagens_personagens/personagem_47_erika_sayuri_yamashita.jpg"
+  },
+  {
+    "id": 48,
+    "nome_completo": "Jair Messias da Silva",
+    "idade": 58,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Pedreiro Especialista em Acabamentos e Porcelanatos",
+    "bairro": "Bonsucesso",
+    "localizacao": "Bonsucesso, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Ônibus e Bicicleta",
+    "historia_resumida": "Assentador de pisos e porcelanatos de grande formato com mais de trinta anos de experiência em reformas na cidade. É meticuloso no nivelamento a laser e no corte fino de meia-esquadria.",
+    "dor_principal": "A distância e o tempo excessivo gasto no trajeto de ônibus do extremo sul até as obras nos condomínios da zona oeste.",
+    "habitos": {
+      "alimentacao": "Marmita reforçada com arroz, feijão, farofa e carne assada, café com biscoito na obra e suco de caju.",
+      "consumo": "Niveladores de piso de alta precisão, discos de corte diamantados para porcelanato e ferramentas elétricas.",
+      "vestuario": "Camisas polo de algodão resistentes, calças jeans grossas de trabalho e botas com solado de borracha.",
+      "aversoes": "Contratantes que atrasam o pagamento do serviço combinado na entrega da obra e pisos com defeito de fábrica empenados.",
+      "paixoes": "Cuidar dos seus netos no fim de semana, pescar na represa com os amigos do Pinheirinho e assistir jogos de futebol."
+    },
+    "lugares_frequenta_sjc": [
+      "Comércio do Pinheirinho dos Palmares",
+      "Mercado da Zona Sul",
+      "Shopping Jardim Oriente"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      },
+      {
+        "nome": "Rádio Nativa FM",
+        "handle": "nativafmsjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "O Pulo do Gato na Construção",
+        "handle": "opulodogatonaconstrucao"
+      },
+      {
+        "nome": "Voz do Povo SJC",
+        "handle": "vozesdopovo"
+      }
+    ],
+    "estilo_consumo_tag": "Construção Fina & Trabalho Honesto",
+    "foto": "data_personas/imagens_personagens/personagem_48_valeria_das_gracas_jesus.jpg"
+  },
+  {
+    "id": 49,
+    "nome_completo": "Camila 'Cami' Valente",
+    "idade": 33,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Farmacêutica Bioquímica & Gestora de Farmácia de Manipulação",
+    "bairro": "São Francisco Xavier (Centro)",
+    "localizacao": "São Francisco Xavier, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro próprio",
+    "historia_resumida": "Dirige o laboratório de manipulação magistral de fórmulas personalizadas para médicos endocrinologistas e dermatologistas da região central de SJC. Preza pela rastreabilidade e pureza das matérias-primas.",
+    "dor_principal": "A demora nos processos de liberação aduaneira de princípios ativos e fitoquímicos importados na Anvisa.",
+    "habitos": {
+      "alimentacao": "Shakes proteicos funcionais, saladas de grãos com azeite extravirgem e cafés espressos curtos.",
+      "consumo": "Balanças analíticas de alta precisão, softwares de controle magistral e cosméticos com fórmulas limpas.",
+      "vestuario": "Jalecos brancos estilizados com bordado impecável e calçados hospitalares anatômicos acolchoados.",
+      "aversoes": "Farmácias que adulteram fórmulas ou utilizam matérias-primas com laudos de pureza duvidosos.",
+      "paixoes": "Participar de congressos de farmacologia personalizada, aulas de dança de salão e piqueniques no Santos Dumont."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Santos Dumont",
+      "Polo Hospitalar da Vila Betânia",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Pharmacia Brasileira",
+        "handle": "cff_oficial"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Farmácia Magistral Brasil",
+        "handle": "farmaciamagistral"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Bioquímica & Fórmulas Personalizadas",
+    "foto": "data_personas/imagens_personagens/personagem_49_cristiano_ricardo_fonseca.jpg"
+  },
+  {
+    "id": 50,
+    "nome_completo": "Diego 'Dih' Santos",
+    "idade": 28,
+    "genero_etnia": "Homem Negro",
+    "profissao": "Entregador Autônomo Líder de Logística de Aplicativos",
+    "bairro": "São Francisco Xavier (Santa Bárbara)",
+    "localizacao": "São Francisco Xavier, São José dos Campos",
+    "regiao": "Norte",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Moto 160cc flex",
+    "historia_resumida": "Conhece cada viela, ladeira e condomínio de SJC na palma da mão. Atua como líder de equipe de entregadores expressos, organizando rotas otimizadas para restaurantes e e-commerce na cidade.",
+    "dor_principal": "O asfalto esburacado em vias secundárias que desgasta as suspensões da moto e os riscos de acidentes com motoristas distraídos no celular.",
+    "habitos": {
+      "alimentacao": "Marmita rápida nos pontos de apoio de entregadores, lanches no capricho e suco de laranja bem gelado.",
+      "consumo": "Pneus de moto de alta aderência, baús impermeáveis reforçados, jaquetas térmicas e suportes de celular antivibração.",
+      "vestuario": "Jaqueta de motoqueiro com proteções nos ombros e cotovelos, luvas reforçadas e capacete fechado com viseira espelhada.",
+      "aversoes": "Condomínios fechados que tratam entregadores com desrespeito ou exigem caminhadas longas a pé no sol.",
+      "paixoes": "Participar de passeios de motociclistas pelas curvas da serra no fim de semana, churrasco com a família e futebol society."
+    },
+    "lugares_frequenta_sjc": [
+      "Pontos de Encontro de Motociclistas na ZS",
+      "Shopping Jardim Oriente",
+      "Parque Interlagos"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Duas Rodas Notícias",
+        "handle": "duasrodas"
+      },
+      {
+        "nome": "Notícias SJC",
+        "handle": "noticias_sjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Motofilmador SJC",
+        "handle": "motoboy_sjc"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Agilidade em Duas Rodas & Corre",
+    "foto": "data_personas/imagens_personagens/personagem_50_marlene_aparecida_schmidt.jpg"
+  },
+  {
+    "id": 51,
+    "nome_completo": "Sílvia Helena de Castro",
+    "idade": 49,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Professora de Balé Clássico & Dança Infantil",
+    "bairro": "Região do Putim",
+    "localizacao": "Putim, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro próprio",
+    "historia_resumida": "Dirige uma tradicional escola de dança e balé clássico na Vila Ema, tendo formado centenas de bailarinas da cidade para exames internacionais da Royal Academy of Dance.",
+    "dor_principal": "A escassez de teatros municipais com infraestrutura adequada de coxias e piso flutuante para grandes espetáculos de dança na cidade.",
+    "habitos": {
+      "alimentacao": "Frutas frescas, iogurtes naturais com mel puro, chás calmantes e pratos leves de massa fresca italiana.",
+      "consumo": "Sapatilhas de ponta importadas, figurinos de tule nobre e sistemas de som acústico profissional para estúdio.",
+      "vestuario": "Collants de lycra elegantes com saias de chiffon, polainas de lã macias e sapatilhas de meia-ponta.",
+      "aversoes": "Falta de disciplina nos ensaios gerais e estabelecimentos que colocam música comercial excessivamente alta.",
+      "paixoes": "Assistir a transmissões de espetáculos do Bolshoi e do Royal Ballet, passear no Vicentina Aranha e cuidar de suas orquídeas."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Teatro Municipal de SJC",
+      "Cafeterias da Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Dança Brasil",
+        "handle": "dancabrasil"
+      },
+      {
+        "nome": "CBN Vale",
+        "handle": "cbnvale"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Royal Academy Brasil",
+        "handle": "royalacademy"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Arte Clássica & Disciplina",
+    "foto": "data_personas/imagens_personagens/personagem_51_claudinei_ribeiro_da_silva.jpg"
+  },
+  {
+    "id": 52,
+    "nome_completo": "Alexandre 'Xande' Pires",
+    "idade": 46,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Empresário do Setor de Blindagem e Acessórios Automotivos",
+    "bairro": "São Judas Tadeu",
+    "localizacao": "São Judas Tadeu, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Blindado Nível III-A",
+    "historia_resumida": "Proprietário de uma empresa especializada em blindagem automotiva e vidros balísticos que atende executivos e políticos do Vale e da capital. Vive no Urbanova e valoriza privacidade e proteção familiar.",
+    "dor_principal": "A complexidade da burocracia documental do Exército Brasileiro para homologação de novas tecnologias de blindagem balística leve.",
+    "habitos": {
+      "alimentacao": "Carnes nobres maturadas no dry aged, cervejas artesanais premium e almoços executivos no Colinas.",
+      "consumo": "Vidros balísticos curvos de alta transparência óptica, aramidas de proteção e tecnologia de monitoramento residencial.",
+      "vestuario": "Camisas polo de algodão egípcio preto, calças jeans confortáveis e relógio esportivo de titânio.",
+      "aversoes": "Prestadores de serviços que não respeitam normas rígidas de segurança e sigilo de clientes.",
+      "paixoes": "Praticar tiro esportivo em clube homologado, pilotar barcos na represa e passeios de quadriciclo na serra."
+    },
+    "lugares_frequenta_sjc": [
+      "Colinas Shopping",
+      "Clube de Tiro do Vale",
+      "Restaurantes da Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Segurança & Defesa",
+        "handle": "segurancabrasil"
+      },
+      {
+        "nome": "Valor Econômico",
+        "handle": "valoreconomico"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Blindagem Brasil",
+        "handle": "blindagem_pro"
+      },
+      {
+        "nome": "Lucas Sanseverino",
+        "handle": "lucassanseverino"
+      }
+    ],
+    "estilo_consumo_tag": "Segurança & Tecnologia Balística",
+    "foto": "data_personas/imagens_personagens/personagem_52_sheila_maria_de_santana.jpg"
+  },
+  {
+    "id": 53,
+    "nome_completo": "Débora 'Deby' Antunes",
+    "idade": 25,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Atendente de Clínica Veterinária & Tosadora Especialista",
+    "bairro": "Santa Júlia",
+    "localizacao": "Santa Júlia, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Moto própria e Ônibus",
+    "historia_resumida": "Apaixonada por animais, especializou-se em tosa higiênica e banhos relaxantes para cães e gatos em uma das clínicas mais movimentadas do Jardim Satélite. Tem um talento especial para acalmar pets estressados.",
+    "dor_principal": "Tutores irresponsáveis que abandonam animais idosos ou negligenciam os tratamentos veterinários prescritos.",
+    "habitos": {
+      "alimentacao": "Lanches vegetarianos práticos, sucos de frutas da estação e comida caseira no almoço com a equipe do pet shop.",
+      "consumo": "Tesouras japonesas de tosa de precisão, lâminas profissionais, xampus hipoalergênicos e acessórios pet fofos.",
+      "vestuario": "Camisetas pretas impermeáveis que não grudam pelos, calças legging confortáveis e tênis leves antiderrapantes.",
+      "aversoes": "Maus-tratos a animais e pessoas que compram bichos por modismo sem pensar no compromisso de longo prazo.",
+      "paixoes": "Trabalhar como voluntária em feirinhas de adoção de animais em SJC, passear com seus cães resgatados e gravar vídeos pet."
+    },
+    "lugares_frequenta_sjc": [
+      "Avenida Andrômeda",
+      "Vale Sul Shopping",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Pet Care Brasil",
+        "handle": "petcarebrasil"
+      },
+      {
+        "nome": "Explore SJC Pets",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Alexandre Rossi (Dr. Pet)",
+        "handle": "drpet"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Cuidado Animal & Afeto",
+    "foto": "data_personas/imagens_personagens/personagem_53_marcio_jose_da_rocha.jpg"
+  },
+  {
+    "id": 54,
+    "nome_completo": "Mauro 'Seu Mauro' Quintanilha",
+    "idade": 63,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Tapeceiro Artesanal de Veículos e Estofados Antigos",
+    "bairro": "Residencial Flamboyant",
+    "localizacao": "Residencial Flamboyant, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Carro antigo restaurado e Caminhada",
+    "historia_resumida": "Herdeiro da tradição de tapeçaria automotiva em Santana, restaura interiores de carros clássicos, bancos de couro e poltronas de época com costura dupla manual perfeita.",
+    "dor_principal": "A dificuldade em encontrar couros bovinos legítimos tingidos no padrão original dos anos 70 e espumas de alta densidade duráveis.",
+    "habitos": {
+      "alimentacao": "Comida de boteco tradicional, torresmo sequinho com limão, arroz com tutu de feijão e café fresco passado na hora.",
+      "consumo": "Couros legítimos de curtumes selecionados, linhas de náilon de alta tenacidade e ferramentas manuais de tapeceiro.",
+      "vestuario": "Aventais grossos de lona pesada sobre a roupa, camisas jeans duráveis e calçados confortáveis para trabalho em pé.",
+      "aversoes": "Materiais sintéticos plásticos que esfarelam com o calor do sol e clientes que exigem pressa em restaurações artísticas.",
+      "paixoes": "Participar de encontros de carros clássicos no Parque da Cidade, ouvir sambas antigos no rádio e contar histórias de Santana."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque da Cidade",
+      "Feira de Santana",
+      "Oficinas Tradicionais da Zona Norte"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Classic Motors",
+        "handle": "classicmotors"
+      },
+      {
+        "nome": "Rádio Nativa FM",
+        "handle": "nativafmsjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Restauração Brasil",
+        "handle": "restauracaoclassicos"
+      },
+      {
+        "nome": "Memória Joseense",
+        "handle": "memoria_joseense"
+      }
+    ],
+    "estilo_consumo_tag": "Restauração & Tradição Manual",
+    "foto": "data_personas/imagens_personagens/personagem_54_renata_silveira_camargo.jpg"
+  },
+  {
+    "id": 55,
+    "nome_completo": "Renata 'Re' Schimidt",
+    "idade": 36,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Engenheira de Telecomunicações & Redes de Alta Velocidade",
+    "bairro": "Vila Nova São José",
+    "localizacao": "Vila Nova São José, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "Carro SUV Híbrido",
+    "historia_resumida": "Planeja e executa a infraestrutura de antenas 5G e data centers de missão crítica para polos industriais e condomínios inteligentes do Vale. Vive no Aquarius pela conectividade e estilo de vida moderno.",
+    "dor_principal": "A demora nos processos de licenciamento municipal para instalação de novas antenas de telecomunicação urbana.",
+    "habitos": {
+      "alimentacao": "Pratos equilibrados da culinária mediterrânea, café expresso gourmet e smoothies funcionais com sementes.",
+      "consumo": "Equipamentos de análise de espectro de radiofrequência, gadgets tecnológicos inteligentes e viagens internacionais.",
+      "vestuario": "Tailleur executivo contemporâneo em cores sóbrias, camisas de seda e sapatos scarpin confortáveis.",
+      "aversoes": "Negacionismo tecnológico, teorias da conspiração sobre redes sem fio e fornecedores que não cumprem SLA.",
+      "paixoes": "Praticar corrida de rua na Praça Ulisses Guimarães, leitura sobre inteligência artificial e degustação de vinhos brancos."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça Ulisses Guimarães",
+      "Colinas Shopping",
+      "Restaurantes da Av. São João"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Tele.Síntese Notícias",
+        "handle": "telesintese"
+      },
+      {
+        "nome": "Valor Econômico",
+        "handle": "valoreconomico"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Telecom na Prática",
+        "handle": "telecompractice"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Telecomunicações & Modernidade",
+    "foto": "data_personas/imagens_personagens/personagem_55_walter_egidio_guimaraes.jpg"
+  },
+  {
+    "id": 56,
+    "nome_completo": "Bruno 'Brunão' Marins",
+    "idade": 34,
+    "genero_etnia": "Homem Negro",
+    "profissao": "Pitmaster & Proprietário de Defumados e Carnes Artesanais",
+    "bairro": "Jardim Santa Luzia",
+    "localizacao": "Jardim Santa Luzia, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "Empreendedorismo Intuitivo",
+    "faixa_renda": "Classe C1",
+    "meio_transporte_principal": "Picape utilitária",
+    "historia_resumida": "Especialista em churrasco americano e defumação lenta com lenhas frutíferas (macieira e laranjeira). Montou seu negócio de charcutaria e brisket artesanal no Bosque dos Ipês e faz eventos em toda a região.",
+    "dor_principal": "A alta oscilação nos preços dos cortes de carne bovina angus de primeira linha e o custo do frete de lenhas especiais.",
+    "habitos": {
+      "alimentacao": "Costelinha suína ao molho barbecue autoral, brisket defumado por doze horas, picles artesanais e cerveja gelada.",
+      "consumo": "Pit smokers industriais de fluxo reverso, termômetros sem fio de alta precisão e facas artesanais de aço damasco.",
+      "vestuario": "Aventais pesados de couro legítimo, camisetas pretas estampadas com sua marca e bonés de aba curva.",
+      "aversoes": "Carnes ressecadas mal preparadas e pessoas que colocam água no carvão do churrasco.",
+      "paixoes": "Participar de festivais de churrasco e barbecue pelo Brasil, criar novos molhos artesanais e ouvir rock clássico."
+    },
+    "lugares_frequenta_sjc": [
+      "Praças do Bosque dos Ipês",
+      "Shopping Jardim Oriente",
+      "Feiras Gastronômicas de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Barbecue Brasil",
+        "handle": "bbqbrasil"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Netão Bom Beef",
+        "handle": "netaobombeef"
+      },
+      {
+        "nome": "Guia Gastronômico Vale",
+        "handle": "gastronomiavale"
+      }
+    ],
+    "estilo_consumo_tag": "Barbecue Artesanal & Fumaça Nobre",
+    "foto": "data_personas/imagens_personagens/personagem_56_wanderson_clayton_de_souza.jpg"
+  },
+  {
+    "id": 57,
+    "nome_completo": "Lúcia Helena Guimarães",
+    "idade": 56,
+    "genero_etnia": "Mulher Branca",
+    "profissao": "Assistente Social de Centro de Referência Municipal",
+    "bairro": "Bairro dos Marmelos",
+    "localizacao": "Bairro dos Marmelos, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Caminhada e Ônibus",
+    "historia_resumida": "Dedica sua carreira ao atendimento de famílias em situação de vulnerabilidade e idosos nos programas sociais da prefeitura. Mora no calçadão do centro e conhece todas as nuances e contrastes da cidade.",
+    "dor_principal": "A burocracia excessiva nos encaminhamentos de saúde pública e a escassez de vagas em abrigos de acolhimento social.",
+    "habitos": {
+      "alimentacao": "Comida simples e saudável, café com pão na chapa nas padarias históricas do calçadão e sopas nutritivas à noite.",
+      "consumo": "Livros de ciências sociais e direitos humanos em sebos do centro, produtos de higiene para doação e calçados confortáveis.",
+      "vestuario": "Calças de tecido maleável confortáveis, blusas de algodão estampadas discretas e bolsas grandes utilitárias.",
+      "aversoes": "Aporofobia, preconceito contra populações periféricas e desperdício de verbas públicas destinadas à assistência social.",
+      "paixoes": "Participar de projetos voluntários de distribuição de alimentos, passear pelas praças do centro e ouvir música popular brasileira."
+    },
+    "lugares_frequenta_sjc": [
+      "Praça Afonso Pena",
+      "Calçadão da Rua 15 de Novembro",
+      "Mercado Municipal de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "TV Vanguarda",
+        "handle": "redevanguarda"
+      },
+      {
+        "nome": "Portal G1 Vale",
+        "handle": "g1valeparaiba"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Padre Júlio Lancellotti",
+        "handle": "padrejulio.lancellotti"
+      },
+      {
+        "nome": "Carlos Abranches",
+        "handle": "carlosabranchesoficial"
+      }
+    ],
+    "estilo_consumo_tag": "Humanitário & Assistência Social",
+    "foto": "data_personas/imagens_personagens/personagem_57_rosana_cassia_dos_santos.jpg"
+  },
+  {
+    "id": 58,
+    "nome_completo": "Guilherme 'Gui' Esteves",
+    "idade": 31,
+    "genero_etnia": "Homem Branco",
+    "profissao": "Executivo de Vendas de Software Corporativo (SaaS)",
+    "bairro": "Chácaras Reunidas",
+    "localizacao": "Chácaras Reunidas, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "A Cidade Prometida",
+    "faixa_renda": "Classe A",
+    "meio_transporte_principal": "SUV Premium Alemão",
+    "historia_resumida": "Negocia contratos milionários de softwares de gestão empresarial para indústrias e redes varejistas em todo o Brasil. Vive no Urbanova em busca de qualidade de vida, esportes e segurança.",
+    "dor_principal": "Ciclos longos e imprevisíveis de fechamento de contratos corporativos durante períodos de instabilidade econômica.",
+    "habitos": {
+      "alimentacao": "Pratos à base de salmão grelhado, jantares em restaurantes premiados da Vila Ema e cafés espressos de cápsula.",
+      "consumo": "Gadgets da Apple de última geração, trajes esportivos de marcas premium e assinaturas de plataformas de negócios.",
+      "vestuario": "Camisas polo de marcas renomadas, calças de corte slim e tênis esportivos casuais de couro legítimo.",
+      "aversoes": "Reuniões comerciais desestruturadas sem tomada de decisão e promessas de entrega não cumpridas.",
+      "paixoes": "Jogar futevôlei nas quadras do Urbanova, passear de lancha na represa nos fins de semana e viajar para o exterior."
+    },
+    "lugares_frequenta_sjc": [
+      "Colinas Shopping",
+      "Quadras de Areia do Urbanova",
+      "Restaurantes da Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Exame",
+        "handle": "exame"
+      },
+      {
+        "nome": "Valor Econômico",
+        "handle": "valoreconomico"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Thiago Nigro (Primo Rico)",
+        "handle": "thiago.nigro"
+      },
+      {
+        "nome": "Lucas Sanseverino",
+        "handle": "lucassanseverino"
+      }
+    ],
+    "estilo_consumo_tag": "Corporativo & Vendas de Alta Renda",
+    "foto": "data_personas/imagens_personagens/personagem_58_hideo_kazuo_matsui.jpg"
+  },
+  {
+    "id": 59,
+    "nome_completo": "Talita 'Tali' Rezende",
+    "idade": 27,
+    "genero_etnia": "Mulher Parda",
+    "profissao": "Produtora Cultural & Gestora de Festivais de Música e Arte",
+    "bairro": "Jardim Santo Onofre",
+    "localizacao": "Jardim Santo Onofre, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "A Tribo Global",
+    "faixa_renda": "Classe B",
+    "meio_transporte_principal": "Carro compacto e Bicicleta",
+    "historia_resumida": "Organiza feiras de arte independente, festivais de jazz e mostras de cinema ao ar livre no Parque Vicentina Aranha e espaços alternativos de SJC, conectando artistas locais ao público jovem.",
+    "dor_principal": "A escassez de editais municipais de fomento à cultura independente e o excesso de burocracia para uso de espaços públicos.",
+    "habitos": {
+      "alimentacao": "Petiscos vegetarianos criativos, chás naturais aromatizados com gengibre e cervejas artesanais de microcervejarias do Vale.",
+      "consumo": "Equipamentos de iluminação cênica portátil, cartazes em serigrafia autoral e livros de produção cultural.",
+      "vestuario": "Roupas vintage garimpadas em brechós conceituais, jaquetas jeans customizadas e botas de cano curto.",
+      "aversoes": "Censura artística, falta de pontualidade em montagens de palco e preconceito contra manifestações culturais populares.",
+      "paixoes": "Descobrir novos músicos e bandas autorais do Vale, frequentar mostras no Sesc e viajar para bienais de arte."
+    },
+    "lugares_frequenta_sjc": [
+      "Parque Vicentina Aranha",
+      "Sesc São José dos Campos",
+      "Bares Culturais da Vila Ema"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Bravo Cultural",
+        "handle": "bravocultura"
+      },
+      {
+        "nome": "Explore SJC",
+        "handle": "exploresjc"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Cultura em SP",
+        "handle": "culturasp"
+      },
+      {
+        "nome": "Fica a Dica SJC",
+        "handle": "ficaadicasjc"
+      }
+    ],
+    "estilo_consumo_tag": "Cultura Independente & Vanguarda",
+    "foto": "data_personas/imagens_personagens/personagem_59_vanessa_beatriz_rossi.jpg"
+  },
+  {
+    "id": 60,
+    "nome_completo": "Antônio Carlos 'Tonho' Viana",
+    "idade": 60,
+    "genero_etnia": "Homem Pardo",
+    "profissao": "Apicultor & Produtor de Mel Silvestre da Serra da Mantiqueira",
+    "bairro": "Recanto dos Eucaliptos",
+    "localizacao": "Putim / Recanto dos Eucaliptos, São José dos Campos",
+    "regiao": "Sudeste",
+    "movimento": "Geografia da Inércia",
+    "faixa_renda": "Classe C2",
+    "meio_transporte_principal": "Caminhonete 4x4 e Cavalo",
+    "historia_resumida": "Cuida de mais de duzentas colmeias de abelhas nativas sem ferrão (Jataí, Mandaçaia) e abelhas melíferas nas matas preservadas de São Francisco Xavier, produzindo um dos méis mais premiados do Vale.",
+    "dor_principal": "O uso clandestino de defensivos agrícolas em lavouras vizinhas que intoxica e dizima enxames de abelhas nativas.",
+    "habitos": {
+      "alimentacao": "Mel silvestre puro no café da manhã, queijo da serra com broa de fubá e comida caipira feita no fogão a lenha.",
+      "consumo": "Macacões de apicultor com tela especial, centrífugas extratoras de mel em aço inox e embalagens de vidro esterilizadas.",
+      "vestuario": "Camisas de algodão grosso de manga comprida, calças de lida reforçadas, botinas de couro e chapéu de palha.",
+      "aversoes": "Méis adulterados com xarope de açúcar vendidos em feiras clandestinas e desmatamento de florestas nativas.",
+      "paixoes": "Observar a dança das abelhas nas floradas da serra, tocar viola caipira no alpendre e prosear com os vizinhos de SFX."
+    },
+    "lugares_frequenta_sjc": [
+      "Vila de São Francisco Xavier",
+      "Trilhas das Lavras",
+      "Mercado da Cidade de SJC"
+    ],
+    "veiculos_midia": [
+      {
+        "nome": "Revista Apicultura Brasil",
+        "handle": "apiculturabrasil"
+      },
+      {
+        "nome": "Jornal de SFX",
+        "handle": "sfx_noticias"
+      }
+    ],
+    "influenciadores_seguidos": [
+      {
+        "nome": "Abelhas Nativas Brasil",
+        "handle": "abelhasnativas"
+      },
+      {
+        "nome": "Explore SFX",
+        "handle": "exploresfx"
+      }
+    ],
+    "estilo_consumo_tag": "Apicultura Sustentável & Serra",
+    "foto": "data_personas/imagens_personagens/personagem_60_agostinho_celso_pires.jpg"
+  }
+]

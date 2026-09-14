@@ -162,40 +162,43 @@
     let data = [];
     let source = "preloaded";
 
-    // 1. Prioridade 1: Dados embutidos instantaneamente na memória (7.543 posts)
-    if (typeof window.PRELOADED_MIDIA_DATA !== 'undefined' && Array.isArray(window.PRELOADED_MIDIA_DATA) && window.PRELOADED_MIDIA_DATA.length > 0) {
-      data = window.PRELOADED_MIDIA_DATA;
-      source = "preloaded_js";
-    }
-
-    // 2. Prioridade 2: Carregamento direto do JSON local consolidado caso não esteja embutido
-    if (!data || data.length === 0) {
-      try {
-        const response = await fetch('midia_sjc/analise_midia_sjc.json?v=' + Date.now());
-        if (response.ok) {
-          data = await response.json();
-          source = "local_json";
-        }
-      } catch (jsonErr) {
-        console.warn("[MIDIA] Falha ao carregar JSON local, tentando Supabase:", jsonErr);
-      }
-    }
-
-    // 3. Prioridade 3: Fallback para o Supabase caso o arquivo local não responda
-    if (!data || data.length === 0) {
-      try {
-        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+    // 1. Prioridade 1: Buscar do Supabase (Fonte Oficial Atualizada)
+    try {
+      if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+        let allSupabaseData = [];
+        let from = 0;
+        let limit = 1000;
+        let hasMore = true;
+        
+        while (hasMore) {
           const res = await supabaseClient
             .from('analise_midia_sjc')
             .select('*')
-            .range(0, 10000);
-          if (res && !res.error && res.data && res.data.length > 0) {
-            data = res.data;
-            source = "supabase";
+            .range(from, from + limit - 1);
+            
+          if (res && !res.error && res.data) {
+            allSupabaseData = allSupabaseData.concat(res.data);
+            if (res.data.length < limit) hasMore = false;
+            else from += limit;
+          } else {
+            hasMore = false;
           }
         }
-      } catch (err) {
-        console.error("[MIDIA] Erro ao buscar dados do Supabase:", err);
+        if (allSupabaseData.length > 0) {
+          data = allSupabaseData;
+          source = "supabase";
+        }
+      }
+    } catch (err) {
+      console.error("[MIDIA] Erro ao buscar dados do Supabase:", err);
+    }
+
+    // 2. Prioridade 2: Fallback para dados embutidos
+    if (!data || data.length === 0) {
+      if (typeof window.PRELOADED_MIDIA_DATA !== 'undefined' && Array.isArray(window.PRELOADED_MIDIA_DATA) && window.PRELOADED_MIDIA_DATA.length > 0) {
+        data = window.PRELOADED_MIDIA_DATA;
+        source = "preloaded_js";
+        console.warn("[MIDIA] Supabase falhou, usando dados locais.");
       }
     }
 
@@ -368,7 +371,12 @@
           return String(val).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         };
         const normSearch = norm(search);
-        const matchLegenda = norm(r.legenda || r.caption || '').includes(normSearch);
+        
+        // Escapa caracteres especiais de regex
+        const safeSearch = normSearch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Usa \b para garantir que a palavra comece com o termo buscado (evita falso positivo: 'lula' dentro de 'celular')
+        const regexPesquisa = new RegExp('\\b' + safeSearch, 'i');
+        const matchLegenda = regexPesquisa.test(norm(r.legenda || r.caption || ''));
 
         if (!matchLegenda) {
           return false;
@@ -432,6 +440,7 @@
     try { renderMidiaPeopleChart(); } catch (e) { console.error("[MIDIA] Erro em renderMidiaPeopleChart:", e); }
     try { renderMidiaCitiesChart(); } catch (e) { console.error("[MIDIA] Erro em renderMidiaCitiesChart:", e); }
     try { renderMidiaWordCloud(); } catch (e) { console.error("[MIDIA] Erro em renderMidiaWordCloud:", e); }
+    try { renderMidiaTimelineChart(); } catch (e) { console.error("[MIDIA] Erro em renderMidiaTimelineChart:", e); }
     try { renderMidiaTable(); } catch (e) { console.error("[MIDIA] Erro em renderMidiaTable:", e); }
     
     console.log("[MIDIA] Renderização de todos os gráficos e tabela concluída!");
@@ -1935,6 +1944,136 @@
   };
 
   // 13. NUVEM DE PALAVRAS E TERMOS MAIS CITADOS NAS LEGENDAS
+  
+  // GRAFICO DE EVOLUCAO TEMPORAL (POSTS E ENGAJAMENTO)
+  function renderMidiaTimelineChart() {
+    const canvas = document.getElementById('midiaTimelineChart');
+    if (!canvas) return;
+
+    if (midiaChartInstances['timelineChart']) {
+      midiaChartInstances['timelineChart'].destroy();
+    }
+
+    if (!filteredMidiaRecords || filteredMidiaRecords.length === 0) {
+      return;
+    }
+
+    // Group by Date (YYYY-MM-DD or YYYY-MM)
+    // Let's group by week (e.g. "YYYY-WW") or just Month "YYYY-MM" to make it look smooth.
+    // Given dates are from 2026-04 to 2026-09, we can group by Month or Week. Let's do Month for now, or maybe Week.
+    // To group by week, we can just use ISO week or simple 7-day blocks, or just Year-Month.
+    // Let's use Year-Month-Week or just simply Year-Month.
+    
+    // Better yet, just Year-Month-Day but resampled or just Year-Month to keep it simple and clean.
+    // Actually, "2026-04" -> "Abril", "2026-05" -> "Maio", etc.
+    const dateGroups = {};
+    
+    filteredMidiaRecords.forEach(post => {
+      const dtStr = post.timestamp_brasilia;
+      if (!dtStr) return;
+      const datePart = dtStr.substring(0, 7); // YYYY-MM
+      
+      if (!dateGroups[datePart]) {
+        dateGroups[datePart] = { posts: 0, engagement: 0 };
+      }
+      dateGroups[datePart].posts += 1;
+      dateGroups[datePart].engagement += (post.engajamento_total || 0);
+    });
+    
+    const sortedDates = Object.keys(dateGroups).sort();
+    
+    const labels = sortedDates.map(d => {
+        const parts = d.split('-');
+        if(parts.length !== 2) return d;
+        const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        return months[parseInt(parts[1], 10) - 1] + '/' + parts[0].substring(2);
+    });
+    const postsData = sortedDates.map(d => dateGroups[d].posts);
+    const engData = sortedDates.map(d => dateGroups[d].engagement);
+
+    const ctx = canvas.getContext('2d');
+    midiaChartInstances['timelineChart'] = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'N de Posts',
+            data: postsData,
+            borderColor: '#2563EB',
+            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+            borderWidth: 3,
+            tension: 0.3,
+            fill: true,
+            yAxisID: 'y'
+          },
+          {
+            label: 'Engajamento',
+            data: engData,
+            borderColor: '#F59E0B',
+            backgroundColor: 'transparent',
+            borderWidth: 3,
+            borderDash: [5, 5],
+            tension: 0.3,
+            fill: false,
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          datalabels: { display: false },
+          legend: { position: 'top', labels: { font: { family: 'Montserrat', size: 12 } } },
+          tooltip: {
+            backgroundColor: 'rgba(11, 37, 69, 0.95)',
+            padding: 12,
+            titleFont: { family: 'Montserrat', size: 13, weight: 'bold' },
+            bodyFont: { family: 'Montserrat', size: 12 },
+            callbacks: {
+              label: function(context) {
+                let label = context.dataset.label || '';
+                if (label) label += ': ';
+                label += context.raw.toLocaleString('pt-BR');
+                return label;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { font: { family: 'Montserrat', size: 11 }, color: '#64748B' }
+          },
+          y: {
+            type: 'linear',
+            display: true,
+            position: 'left',
+            title: { display: true, text: 'N de Posts', font: { family: 'Montserrat', size: 11, weight: 'bold' }, color: '#2563EB' },
+            grid: { color: '#F1F5F9' },
+            ticks: { font: { family: 'Montserrat', size: 10 }, color: '#64748B' }
+          },
+          y1: {
+            type: 'linear',
+            display: true,
+            position: 'right',
+            title: { display: true, text: 'Engajamento', font: { family: 'Montserrat', size: 11, weight: 'bold' }, color: '#F59E0B' },
+            grid: { drawOnChartArea: false },
+            ticks: { 
+                font: { family: 'Montserrat', size: 10 }, 
+                color: '#64748B',
+                callback: function(value) {
+                    return value >= 1000000 ? (value / 1000000).toFixed(1) + 'M' : value >= 1000 ? (value / 1000).toFixed(1) + 'k' : value;
+                }
+            }
+          }
+        }
+      }
+    });
+  }
+
   function renderMidiaWordCloud() {
     const container = document.getElementById('midia-wordcloud-container');
     if (!container) return;

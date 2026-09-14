@@ -1,0 +1,510 @@
+{
+  "bairros": [
+    {
+      "nome": "São Francisco Xavier",
+      "zona": "Distrito SFX",
+      "descricao": "Maior distrito em área, ecoturismo, artesanato, gastronomia de serra, divisa com Monteiro Lobato e Sul de Minas."
+    },
+    {
+      "nome": "Santa Bárbara (SFX)",
+      "zona": "Distrito SFX",
+      "descricao": "Área rural de SFX, pousadas, trilhas e agricultura agroecológica."
+    },
+    {
+      "nome": "Lavras (SFX)",
+      "zona": "Distrito SFX",
+      "descricao": "Tradição rural de montanha, cachoeiras e pequenos produtores de queijo artesanal."
+    },
+    {
+      "nome": "Remédios (SFX)",
+      "zona": "Distrito SFX",
+      "descricao": "Comunidade tradicional da serra, artesanato e vida comunitária tranquila."
+    },
+    {
+      "nome": "Buquirinha I",
+      "zona": "Norte",
+      "descricao": "Entrada na Rodovia SP-50, UBS, escola, comércio local e vida de bairro tradicional."
+    },
+    {
+      "nome": "Buquirinha II / Mirante",
+      "zona": "Norte",
+      "descricao": "Parte alta com vista panorâmica, chácaras e prestação de serviços."
+    },
+    {
+      "nome": "Bairro dos Freitas",
+      "zona": "Norte",
+      "descricao": "Tradição tropeira, culinária caipira, eventos rurais e agricultura familiar."
+    },
+    {
+      "nome": "Costinha",
+      "zona": "Norte",
+      "descricao": "Raízes tradicionais, olarias, marcenaria e pequenos sítios."
+    },
+    {
+      "nome": "Bonsucesso",
+      "zona": "Norte",
+      "descricao": "Zona rural norte, criação animal e transporte vicinal."
+    },
+    {
+      "nome": "Turvo",
+      "zona": "Norte",
+      "descricao": "Comunidade rural, pesqueiros e chácaras de lazer."
+    },
+    {
+      "nome": "Pouso Frio",
+      "zona": "Norte",
+      "descricao": "Área de produção de hortaliças e queijos artesanais."
+    },
+    {
+      "nome": "Águas do Canindu",
+      "zona": "Norte",
+      "descricao": "Comunidade ecológica próxima à serra."
+    },
+    {
+      "nome": "Alto da Ponte",
+      "zona": "Norte",
+      "descricao": "Um dos mais populosos da ZN, CRAS, CREAS, UBS, FUNDHAS e comércio vibrante."
+    },
+    {
+      "nome": "Altos de Santana",
+      "zona": "Norte",
+      "descricao": "Grande polo populacional da zona norte, comércio consolidado."
+    },
+    {
+      "nome": "Santana",
+      "zona": "Norte",
+      "descricao": "Berço histórico da cidade, Parque da Cidade (Burle Marx), SENAI Santos Dumont."
+    },
+    {
+      "nome": "Vila Paiva",
+      "zona": "Norte",
+      "descricao": "Bairro tradicional da fase sanatorial, calmo e residencial."
+    },
+    {
+      "nome": "Telespark",
+      "zona": "Norte",
+      "descricao": "Bairro residencial consolidado, proximidade com a zona norte fabril."
+    },
+    {
+      "nome": "Vila Nova São José",
+      "zona": "Norte",
+      "descricao": "Comunidade tradicional e residencial familiar."
+    },
+    {
+      "nome": "Vila Cristina",
+      "zona": "Norte",
+      "descricao": "Próximo à linha férrea e indústrias tradicionais."
+    },
+    {
+      "nome": "Vila Dirce",
+      "zona": "Norte",
+      "descricao": "Bairro histórico com forte identidade local."
+    },
+    {
+      "nome": "Jardim Guimarães",
+      "zona": "Norte",
+      "descricao": "Área residencial tranquila próxima ao Alto da Ponte."
+    },
+    {
+      "nome": "Jardim Satélite",
+      "zona": "Sul",
+      "descricao": "Maior centro comercial da ZS, Av. Andrômeda, Vale Sul Shopping, Leroy Merlin."
+    },
+    {
+      "nome": "Floradas de São José",
+      "zona": "Sul",
+      "descricao": "Bairro de alto padrão da zona sul, praças arborizadas e clínicas."
+    },
+    {
+      "nome": "Bosque dos Eucaliptos",
+      "zona": "Sul",
+      "descricao": "Grande bairro residencial de classe média, Av. Ouro Fino e comércio diversificado."
+    },
+    {
+      "nome": "Parque Industrial",
+      "zona": "Sul",
+      "descricao": "Bairro histórico, Hospital Regional, proximidade Dutra e grande rede de serviços."
+    },
+    {
+      "nome": "Jardim Oriente",
+      "zona": "Sul",
+      "descricao": "Polo comercial do Shopping Jardim Oriente, Shibata e expansão residencial."
+    },
+    {
+      "nome": "Jardim América",
+      "zona": "Sul",
+      "descricao": "Eixo de ligação entre Centro e Zona Sul, clínicas e residencial consolidado."
+    },
+    {
+      "nome": "Jardim Portugal",
+      "zona": "Sul",
+      "descricao": "Residencial tradicional da zona sul, escolas e comércios locais."
+    },
+    {
+      "nome": "Conjunto Residencial 31 de Março",
+      "zona": "Sul",
+      "descricao": "Bairro tradicional com forte vida comunitária."
+    },
+    {
+      "nome": "Jardim Cruzeiro do Sul",
+      "zona": "Sul",
+      "descricao": "Comércio popular e famílias trabalhadoras."
+    },
+    {
+      "nome": "Palmeiras de São José",
+      "zona": "Sul",
+      "descricao": "Bairro calmo próximo ao Parque Industrial."
+    },
+    {
+      "nome": "Jardim Estoril",
+      "zona": "Sul",
+      "descricao": "Residencial de classe média vizinho ao Bosque."
+    },
+    {
+      "nome": "Jardim Madureira",
+      "zona": "Sul",
+      "descricao": "Pequeno bairro tradicional e tranquilo."
+    },
+    {
+      "nome": "Campo dos Alemães",
+      "zona": "Sul",
+      "descricao": "Grande polo populacional jovem, comércio autônomo e centro comunitário ativo."
+    },
+    {
+      "nome": "Conjunto Habitacional Dom Pedro I",
+      "zona": "Sul",
+      "descricao": "Bairro trabalhador dinâmico com forte comércio de rua."
+    },
+    {
+      "nome": "Conjunto Habitacional Dom Pedro II",
+      "zona": "Sul",
+      "descricao": "Expansão residencial popular e microempreendedores."
+    },
+    {
+      "nome": "Parque Interlagos",
+      "zona": "Sul",
+      "descricao": "Próximo à represa, esportes ao ar livre, antigo Torrão de Ouro."
+    },
+    {
+      "nome": "Cidade Morumbi",
+      "zona": "Sul",
+      "descricao": "Um dos mais populosos da cidade, Estrada Velha SP-Rio e forte comércio de bairro."
+    },
+    {
+      "nome": "Jardim Colonial",
+      "zona": "Sul",
+      "descricao": "Famoso pela Feira do Colonial/Rolo de domingo, Supermercado Nagumo e comércio variado."
+    },
+    {
+      "nome": "Jardim Imperial",
+      "zona": "Sul",
+      "descricao": "Polo em forte expansão de moradia e pequenos negócios."
+    },
+    {
+      "nome": "Bosque dos Ipês",
+      "zona": "Sul",
+      "descricao": "Expansão recente da zona sul com jovens casais e condomínios de sobrados."
+    },
+    {
+      "nome": "Parque União",
+      "zona": "Sul",
+      "descricao": "Comunidade tradicional com laços de vizinhança sólidos."
+    },
+    {
+      "nome": "Pinheirinho dos Palmares",
+      "zona": "Sul",
+      "descricao": "Extremo sul, jovens trabalhadores, entregadores e setor de logística."
+    },
+    {
+      "nome": "Torrão de Ouro",
+      "zona": "Sul",
+      "descricao": "Comunidade em transição urbana e serviços práticos."
+    },
+    {
+      "nome": "Chácaras Reunidas",
+      "zona": "Sul",
+      "descricao": "Polo metalmecânico, usinagem, transportadoras e oficinas pesadas."
+    },
+    {
+      "nome": "Eugênio de Melo (Distrito)",
+      "zona": "Leste",
+      "descricao": "Maior distrito da cidade, patrimônio ferroviário, Parque Tecnológico e divisa Caçapava."
+    },
+    {
+      "nome": "Galo Branco",
+      "zona": "Leste",
+      "descricao": "Grande bairro com comércio forte, trabalhadores industriais e metalúrgicos."
+    },
+    {
+      "nome": "Cidade Vista Verde",
+      "zona": "Leste",
+      "descricao": "Bairro planejado arborizado, classe média, próximo à Dutra e Refinaria Revap."
+    },
+    {
+      "nome": "Parque Novo Horizonte",
+      "zona": "Leste",
+      "descricao": "Grande polo da ZL, praça de esportes, comércio popular e feiras livres."
+    },
+    {
+      "nome": "Santa Hermínia",
+      "zona": "Leste",
+      "descricao": "Bairro residencial popular com intensa atividade de microempreendedores."
+    },
+    {
+      "nome": "Jardim Mariana I & II",
+      "zona": "Leste",
+      "descricao": "Bairro familiar com trabalhadores de serviços e comércio central."
+    },
+    {
+      "nome": "São Judas Tadeu",
+      "zona": "Leste",
+      "descricao": "Conexão com a Via Cambuí e Av. Pedro Friggi."
+    },
+    {
+      "nome": "Jardim Cerejeiras",
+      "zona": "Leste",
+      "descricao": "Bairro tradicional com comércio local consolidado."
+    },
+    {
+      "nome": "Vila Tatetuba",
+      "zona": "Leste",
+      "descricao": "Trabalhadores de logística e serviços, vizinho à Vila Industrial."
+    },
+    {
+      "nome": "Vila Tesouro",
+      "zona": "Leste",
+      "descricao": "Grande eixo de ligação com vias rápidas para o centro e anel viário."
+    },
+    {
+      "nome": "Vila Industrial",
+      "zona": "Leste",
+      "descricao": "Hospital Municipal, Urbam, Tiro de Guerra, São José Esporte Clube e revendedoras."
+    },
+    {
+      "nome": "Jardim Santa Inês I & II",
+      "zona": "Leste",
+      "descricao": "Bairro de classe trabalhadora com comércio dinâmico."
+    },
+    {
+      "nome": "Jardim Coqueiro",
+      "zona": "Leste",
+      "descricao": "Pequenas oficinas e prestadores de serviços."
+    },
+    {
+      "nome": "Jardim Motorama",
+      "zona": "Leste",
+      "descricao": "Localizado entre a Dutra e a Pedro Friggi, praças e comércio tradicional."
+    },
+    {
+      "nome": "Jardim Diamante",
+      "zona": "Leste",
+      "descricao": "Residencial calmo e serviços de bairro."
+    },
+    {
+      "nome": "Jardim da Granja",
+      "zona": "Sudeste",
+      "descricao": "Mais antigo da região sudeste, comércio diversificado, praças e UBS."
+    },
+    {
+      "nome": "Jardim Uirá",
+      "zona": "Sudeste",
+      "descricao": "Bairro arborizado, Restaurante Trairão, comércio tradicional e tranquilidade."
+    },
+    {
+      "nome": "DCTA / Vila das Acácias",
+      "zona": "Sudeste",
+      "descricao": "Campus aeroespacial, militares, engenheiros do ITA e pesquisadores."
+    },
+    {
+      "nome": "Putim",
+      "zona": "Sudeste",
+      "descricao": "Ligação estratégica com a Rodovia dos Tamoios e polo em rápida urbanização."
+    },
+    {
+      "nome": "Residencial Flamboyant",
+      "zona": "Sudeste",
+      "descricao": "Verticalização recente, acesso pela Av. dos Astronautas."
+    },
+    {
+      "nome": "Jardim Santa Júlia",
+      "zona": "Sudeste",
+      "descricao": "Região em forte expansão residencial e novos condomínios."
+    },
+    {
+      "nome": "Jardim Aquarius",
+      "zona": "Oeste",
+      "descricao": "Polo empresarial moderno, Praça Ulisses Guimarães, startups, consultórios e alto padrão."
+    },
+    {
+      "nome": "Urbanova (Alphaville / Paratehy)",
+      "zona": "Oeste",
+      "descricao": "Condomínios de altíssimo padrão, Univap, esportes de aventura e natureza."
+    },
+    {
+      "nome": "Jardim Esplanada",
+      "zona": "Oeste",
+      "descricao": "Classe A tradicional, Colégio Poliedro, Anglo, clínicas e proximidade Vicentina."
+    },
+    {
+      "nome": "Jardim das Colinas",
+      "zona": "Oeste",
+      "descricao": "Colinas Shopping, condomínios fechados e alto poder aquisitivo."
+    },
+    {
+      "nome": "Jardim das Indústrias",
+      "zona": "Oeste",
+      "descricao": "Johnson & Johnson, fácil acesso à Dutra, classe média alta e inovação."
+    },
+    {
+      "nome": "Vila Ema",
+      "zona": "Centro",
+      "descricao": "Corredor gastronômico nobre de SJC, bistrôs, bares artesanais e alta renda."
+    },
+    {
+      "nome": "Vila Adyana",
+      "zona": "Centro",
+      "descricao": "Parque Vicentina Aranha, Parque Santos Dumont, polo médico e advocatício."
+    },
+    {
+      "nome": "Vila Betânia",
+      "zona": "Centro",
+      "descricao": "Complexo hospitalar (Santos Dumont, Policlin, AME), clínicas e estudantes."
+    },
+    {
+      "nome": "Centro Histórico (Rua 15 / Praça Afonso Pena)",
+      "zona": "Centro",
+      "descricao": "Coração do comércio tradicional de rua, calçadão, bancos e serviços."
+    },
+    {
+      "nome": "Jardim São Dimas",
+      "zona": "Centro",
+      "descricao": "Faculdade de Odontologia da UNESP, repúblicas, vida jovem e serviços."
+    },
+    {
+      "nome": "Monte Castelo",
+      "zona": "Centro",
+      "descricao": "Escola Técnica, proximidade com o CenterVale Shopping e famílias tradicionais."
+    },
+    {
+      "nome": "Vila Maria",
+      "zona": "Centro",
+      "descricao": "Região central baixa, padarias históricas, bares tradicionais e tipografia urbana."
+    },
+    {
+      "nome": "Jardim Paulista",
+      "zona": "Centro",
+      "descricao": "Corredor de comércio e conexão entre o Centro e a Zona Leste."
+    },
+    {
+      "nome": "Jardim Augusta",
+      "zona": "Centro",
+      "descricao": "CenterVale Shopping, sede da Rede Vanguarda e hotéis executivos."
+    }
+  ],
+  "clusters_vizinhanca": {
+    "Distrito SFX": [
+      "São Francisco Xavier",
+      "Santa Bárbara (SFX)",
+      "Lavras (SFX)",
+      "Remédios (SFX)",
+      "Buquirinha I",
+      "Bairro dos Freitas"
+    ],
+    "Norte": [
+      "Buquirinha I",
+      "Buquirinha II / Mirante",
+      "Bairro dos Freitas",
+      "Costinha",
+      "Bonsucesso",
+      "Turvo",
+      "Pouso Frio",
+      "Águas do Canindu",
+      "Alto da Ponte",
+      "Altos de Santana",
+      "Santana",
+      "Vila Paiva",
+      "Telespark",
+      "Vila Nova São José",
+      "Vila Cristina",
+      "Vila Dirce",
+      "Jardim Guimarães",
+      "Centro Histórico (Rua 15 / Praça Afonso Pena)"
+    ],
+    "Sul": [
+      "Jardim Satélite",
+      "Floradas de São José",
+      "Bosque dos Eucaliptos",
+      "Parque Industrial",
+      "Jardim Oriente",
+      "Jardim América",
+      "Jardim Portugal",
+      "Conjunto Residencial 31 de Março",
+      "Jardim Cruzeiro do Sul",
+      "Palmeiras de São José",
+      "Jardim Estoril",
+      "Jardim Madureira",
+      "Campo dos Alemães",
+      "Conjunto Habitacional Dom Pedro I",
+      "Conjunto Habitacional Dom Pedro II",
+      "Parque Interlagos",
+      "Cidade Morumbi",
+      "Jardim Colonial",
+      "Jardim Imperial",
+      "Bosque dos Ipês",
+      "Parque União",
+      "Pinheirinho dos Palmares",
+      "Torrão de Ouro",
+      "Chácaras Reunidas"
+    ],
+    "Leste": [
+      "Eugênio de Melo (Distrito)",
+      "Galo Branco",
+      "Cidade Vista Verde",
+      "Parque Novo Horizonte",
+      "Santa Hermínia",
+      "Jardim Mariana I & II",
+      "São Judas Tadeu",
+      "Jardim Cerejeiras",
+      "Vila Tatetuba",
+      "Vila Tesouro",
+      "Vila Industrial",
+      "Jardim Santa Inês I & II",
+      "Jardim Coqueiro",
+      "Jardim Motorama",
+      "Jardim Diamante"
+    ],
+    "Sudeste": [
+      "Jardim da Granja",
+      "Jardim Uirá",
+      "DCTA / Vila das Acácias",
+      "Putim",
+      "Residencial Flamboyant",
+      "Jardim Santa Júlia",
+      "Cidade Vista Verde",
+      "Chácaras Reunidas"
+    ],
+    "Oeste": [
+      "Jardim Aquarius",
+      "Urbanova (Alphaville / Paratehy)",
+      "Jardim Esplanada",
+      "Jardim das Colinas",
+      "Jardim das Indústrias",
+      "Vila Ema",
+      "Vila Adyana"
+    ],
+    "Centro": [
+      "Vila Ema",
+      "Vila Adyana",
+      "Vila Betânia",
+      "Centro Histórico (Rua 15 / Praça Afonso Pena)",
+      "Jardim São Dimas",
+      "Monte Castelo",
+      "Vila Maria",
+      "Jardim Paulista",
+      "Jardim Augusta",
+      "Santana",
+      "Jardim Satélite"
+    ]
+  },
+  "total_bairros_mapeados": 80
+}

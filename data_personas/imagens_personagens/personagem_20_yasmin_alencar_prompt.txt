@@ -1,0 +1,5 @@
+PERSONA: Yasmin Alencar
+IDADE: 22
+LOCAL: Vila Ema, São José dos Campos
+PROMPT:
+Cinematic 8k portrait of a 22yo female aerospace engineering student at ITA, focused and intelligent expression, laboratory background with scientific equipment, soft natural light, hyperrealistic.

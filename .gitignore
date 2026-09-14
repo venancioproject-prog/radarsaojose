@@ -1,4 +1,4 @@
-# Environment variables (GROQ_API_KEY, Supabase secrets, etc.)
+# Environment variables (chaves de API)
 .env
 .env.local
 .env.development.local
@@ -6,14 +6,16 @@
 .env.production.local
 *.env
 
-# Node modules & logs
+# Node modules, logs & builds
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Vercel build output
 .vercel
+
+# Python caches
+__pycache__/
+*.pyc
 
 # OS metadata & IDEs
 .DS_Store
@@ -21,22 +23,34 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Relatórios brutos, PDFs e apresentações confidenciais
+# Relatórios brutos pesados e arquivos confidenciais
 *.pdf
-apresentacao*.txt
-apresentacao-final.txt
-apresentacao_final.txt
-data/apresentacao-final.txt
-api/data/apresentacao-final.txt
-"Mais fotos radar/APRESENTAÇÃO FINAL.txt"
+Mais fotos radar/
+"Mais fotos radar/"
+"mais_fotos_radar/APRESENTAÇÃO FINAL.txt"
 
-# Planilhas brutas de dados e respostas de pesquisa
+# Planilhas e dados brutos temporários
 *.csv
 respostas.csv.csv
-dados_pesquisa_*.csv
 INFLUENCIADORES_RADAR_SJC.csv
-midia_sjc/*.csv
 
-# Dumps e scripts SQL com dados brutos
+# Scripts e arquivos temporários de migração/testes
+teste_*.jpg
+teste_*.png
+app_recovered.html
+diff_app.txt
+entrada_*.txt
+commands.json
 *.sql
-
+*.py
+build_clean_app.js
+gerar_csv.js
+inject_missing_filters.js
+move_filters.js
+recover.js
+safe_move_filters.js
+update_gray_and_popups.js
+wrap_switchMainTab.js
+apresentacao-final.txt
+apresentacao_final.txt
+tests/

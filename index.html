@@ -341,28 +341,55 @@
     }
     .prev-btn { left: -24px; }
     .next-btn { right: -24px; }
-    .card-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 24px;
-    }
     .platform-card {
       width: 360px;
       min-width: 360px;
       flex: 0 0 360px;
       scroll-snap-align: start;
       background: var(--branco);
-      border-radius: 8px;
+      border-radius: 16px;
       padding: 32px;
-      border: 1px solid rgba(22,22,22,0.06);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(11,37,69,0.05);
+      box-shadow: 0 8px 30px -10px rgba(11,37,69,0.08);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .platform-card::after {
+      content: 'Clique e veja em detalhes ➔';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      background: var(--azul-claro);
+      color: white;
+      text-align: center;
+      padding: 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: bottom 0.3s ease;
     }
     .platform-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(11,37,69,0.15);
+      border-color: rgba(11,37,69,0.1);
+    }
+    .platform-card:hover::after {
+      bottom: 0;
+    }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      transition: transform 0.5s ease;
+    }
+    .platform-card:hover .card-img {
+      transform: scale(1.04);
     }
     .card-badge {
       display: inline-block;
@@ -1094,7 +1121,7 @@
   <!-- ══ NAVBAR ══ -->
   <nav class="navbar">
     <a href="#" class="navbar-logo">
-      <img src="fotos_radar/logobranco.png" alt="Radar São José" />
+      <img src="fotos_radar/logobranco.png" alt="Radar São José"  loading="lazy" />
     </a>
     <ul class="navbar-nav">
       <li><a href="#solucoes">Soluções</a></li>
@@ -1151,10 +1178,10 @@
         <button class="carousel-btn next-btn" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
         <div class="platform-grid">
         <!-- 1: Dashboard Radar -->
-        <div class="platform-card premium">
+        <div class="platform-card premium" onclick="openSolutionModal('Dash Pesquisa 2026', 'O Dash Pesquisa 2026 oferece dados interativos inéditos sobre São José dos Campos. Cruzamos variáveis de renda, comportamento, hábitos de consumo e mobilidade urbana para gerar mapas de calor exclusivos. Ideal para validar expansões, encontrar novos públicos e tomar decisões de negócio com embasamento estatístico de 477 moradores.')">
           <img src="mais_fotos_radar/pexels-thisisengineering-3861976.jpg" class="card-img" alt="Dashboard Radar" loading="lazy" />
           <span class="card-badge badge-premium">Dashboard Dinâmico</span>
-          <h3 class="card-title"><i class="fas fa-chart-pie"></i>Dashboard Radar</h3>
+          <h3 class="card-title"><i class="fas fa-chart-pie"></i>Dash Pesquisa 2026</h3>
           <p class="card-desc">Filtros interativos sobre comportamento, consumo e mobilidade em SJC. Cruze variáveis e identifique oportunidades em tempo real.</p>
           <ul class="card-items">
             <li><i class="fas fa-check"></i>Filtros por renda, bairro, idade e perfil</li>
@@ -1163,10 +1190,10 @@
         </div>
 
         <!-- 2: Radar News -->
-        <div class="platform-card premium">
+        <div class="platform-card premium" onclick="openSolutionModal('Radar Clipping', 'Monitoramento completo da opinião pública e da mídia local. O Radar Clipping varre as principais fontes de notícias e redes da cidade para identificar menções, analisar sentimentos e mapear tendências. Descubra exatamente como os eventos e marcas estão repercutindo em tempo real.')">
           <img src="mais_fotos_radar/pexels-pavel-danilyuk-7937360.jpg" class="card-img" alt="Radar News" loading="lazy" />
           <span class="card-badge badge-premium" style="background: #e11d48;">Big Data</span>
-          <h3 class="card-title"><i class="fas fa-satellite-dish"></i>Radar News</h3>
+          <h3 class="card-title"><i class="fas fa-satellite-dish"></i>Radar Clipping</h3>
           <p class="card-desc">Monitoramento de mídia, notícias e opinião pública em SJC. Entenda como a cidade repercute marcas, eventos e tendências.</p>
           <ul class="card-items">
             <li><i class="fas fa-check"></i>Clipping e análise de notícias locais</li>
@@ -1175,10 +1202,10 @@
         </div>
 
         <!-- 3: Relatório de IA -->
-        <div class="platform-card premium">
+        <div class="platform-card premium" onclick="openSolutionModal('Consultor IA', 'O Consultor IA é o seu consultor estratégico automatizado. Utilizando inteligência artificial avançada, ele cruza instantaneamente todo o nosso banco de dados com o seu segmento de mercado, gerando relatórios precisos, análises SWOT e insights focados em conversão e oportunidade.')">
           <img src="mais_fotos_radar/pexels-tima-miroshnichenko-8764619.jpg" class="card-img" alt="Relatório de IA" loading="lazy" />
           <span class="card-badge badge-premium" style="background: var(--azul-claro);">Gerador</span>
-          <h3 class="card-title"><i class="fas fa-robot"></i>Relatório de IA</h3>
+          <h3 class="card-title"><i class="fas fa-robot"></i>Consultor IA</h3>
           <p class="card-desc">Auditoria estratégica automatizada. Nossa inteligência artificial cruza os dados da plataforma para gerar insights imediatos.</p>
           <ul class="card-items">
             <li><i class="fas fa-check"></i>Geração instantânea de análises</li>
@@ -1187,10 +1214,10 @@
         </div>
 
         <!-- 4: Radar São José 2026 Pesquisa Completa -->
-        <div class="platform-card premium">
+        <div class="platform-card premium" onclick="openSolutionModal('Report Pesquisa 2026', 'O material executivo definitivo sobre São José dos Campos. Uma apresentação densa baseada em 3 camadas metodológicas: dados quantitativos rigorosos, análise qualitativa de tendências e observação etnográfica. A visão mais completa para quem precisa dominar o mercado local.')">
           <img src="mais_fotos_radar/pexels-rdne-5778714.jpg" class="card-img" alt="Radar São José 2026 Pesquisa Completa" loading="lazy" />
           <span class="card-badge badge-premium" style="background: #f59e0b; color: #fff;">Pro</span>
-          <h3 class="card-title"><i class="fas fa-file-alt"></i>Radar São José 2026<br>Pesquisa Completa</h3>
+          <h3 class="card-title"><i class="fas fa-file-alt"></i>Report Pesquisa 2026</h3>
           <p class="card-desc">Apresentação executiva profunda com 3 camadas metodológicas: quantitativa, qualitativa e invasão de cenários (etnografia).</p>
           <ul class="card-items">
             <li><i class="fas fa-check"></i>Pesquisa quantitativa (477 respondentes)</li>
@@ -1199,10 +1226,10 @@
         </div>
 
         <!-- 5: Demografia & IBGE -->
-        <div class="platform-card">
+        <div class="platform-card" onclick="openSolutionModal('Radar Hub', 'Acesse a verdadeira fonte oficial dos dados de São José dos Campos. Reunimos informações vitais do IBGE, censo demográfico, distribuição de renda e faixas etárias, organizando tudo em painéis visuais fáceis de consultar e cruzar.')">
           <img src="mais_fotos_radar/pexels-tomfisk-1081912.jpg" class="card-img" alt="Demografia IBGE" loading="lazy" />
           <span class="card-badge badge-free" style="background: #0ea5e9;">Oficial</span>
-          <h3 class="card-title"><i class="fas fa-landmark"></i>Demografia & IBGE</h3>
+          <h3 class="card-title"><i class="fas fa-landmark"></i>Radar Hub</h3>
           <p class="card-desc">Censo e microdados sobre SJC organizados. Renda, faixa etária, perfil familiar e distribuição geográfica — prontos para usar.</p>
           <ul class="card-items">
             <li><i class="fas fa-check"></i>Dados populacionais por bairro e zona</li>
@@ -1211,10 +1238,10 @@
         </div>
 
         <!-- 6: Banco de Imagens -->
-        <div class="platform-card">
+        <div class="platform-card" onclick="openSolutionModal('Lentes SJC', 'Nosso acervo visual aberto. O Lentes SJC oferece dezenas de fotografias profissionais de altíssima qualidade de diversas regiões, avenidas e ícones culturais de São José dos Campos. Perfeito para enriquecer apresentações e materiais de marketing regional sem custos adicionais.')">
           <img src="mais_fotos_radar/pexels-leandro-street-fotografia-96279287-9260388.jpg" class="card-img" alt="Banco de imagens gratuito" loading="lazy" />
           <span class="card-badge badge-free">Gratuito</span>
-          <h3 class="card-title"><i class="fas fa-images"></i>Banco de Imagens</h3>
+          <h3 class="card-title"><i class="fas fa-images"></i>Lentes SJC</h3>
           <p class="card-desc">Acervo fotográfico de São José dos Campos — ruas, bairros, cultura e vida urbana. Disponível para download gratuito.</p>
           <ul class="card-items">
             <li><i class="fas fa-check"></i>Alta resolução para apresentações</li>
@@ -1348,7 +1375,7 @@
           <p class="insights-note">Resultados da pesquisa quantitativa do Radar São José. Os dados orientam hipóteses de mercado e não representam promessa de resultado financeiro.</p>
         </div>
         <div class="insights-right" style="margin-left: 50px;">
-          <img src="fotos_radar/mapa_origem_entrevistados.png" alt="Origem dos Entrevistados - 477 Respondentes em 100 Bairros" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);" />
+          <img src="fotos_radar/mapa_origem_entrevistados.png" alt="Origem dos Entrevistados - 477 Respondentes em 100 Bairros" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);"  loading="lazy" />
           <p style="margin-top: 16px; font-size: 0.75rem; color: rgba(255,255,255,0.45); text-align: right; font-style: italic; line-height: 1.5;">
             Ilustração amostral da distribuição dos respondentes pelos<br>bairros de São José dos Campos (Pesquisa Radar 2026).
           </p>
@@ -1546,7 +1573,7 @@
         </div>
         <div class="regioes-visual" style="position: relative; border-radius: 8px; overflow: hidden; height: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
           <!-- Foto de fundo (substituindo a imagem tipografada estática) -->
-          <img src="fotos_radar/sjc_cassiano_ricardo.jpg" alt="Comércio de rua em SJC" style="width: 100%; height: 100%; object-fit: cover;" />
+          <img src="fotos_radar/sjc_cassiano_ricardo.jpg" alt="Comércio de rua em SJC" style="width: 100%; height: 100%; object-fit: cover;"  loading="lazy" />
           
           <!-- Overlay com texto HTML editável -->
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(11,37,69,0.9) 0%, rgba(11,37,69,0.2) 70%, rgba(11,37,69,0.5) 100%); padding: 48px 40px; display: flex; flex-direction: column;">
@@ -1683,7 +1710,7 @@
                 Como os dados do dashboard são atualizados?
                 <i class="fas fa-plus faq-icon"></i>
               </summary>
-              <p class="faq-answer">Os dados demográficos seguem as divulgações oficiais do IBGE, enquanto os módulos comportamentais e o painel de Social Intelligence recebem atualizações contínuas pela equipe de dados do Studio 8.</p>
+              <p class="faq-answer">Os dados demográficos seguem as divulgações oficiais do IBGE, enquanto os módulos comportamentais e o painel de Radar Clipping recebem atualizações contínuas pela equipe de dados do Studio 8.</p>
             </details>
 
             <details>
@@ -1736,7 +1763,7 @@
 
             <details>
               <summary>
-                O Social Intelligence monitora quais redes?
+                O Radar Clipping monitora quais redes?
                 <i class="fas fa-plus faq-icon"></i>
               </summary>
               <p class="faq-answer">Monitoramos grandes portais de notícias locais, menções públicas em redes e o termômetro de opinião geral sobre eventos, problemas urbanos e tendências que moldam o humor da cidade.</p>
@@ -1802,7 +1829,7 @@
       <div class="contact-inner">
         <div>
           <div class="contact-logo">
-            <img src="fotos_radar/logobranco.png" alt="Radar São José" />
+            <img src="fotos_radar/logobranco.png" alt="Radar São José"  loading="lazy" />
           </div>
           <span class="contact-eyebrow">Primeiro movimento</span>
           <h2 class="section-title light">Qual movimento da sua empresa precisa de mais clareza?</h2>
@@ -1918,6 +1945,50 @@
         });
       }
     });
+  </script>
+  <!-- Modal de Detalhes da Solução -->
+  <div id="solutionModal" class="solution-modal">
+    <div class="solution-modal-content">
+      <span class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></span>
+      <h3 id="modalTitle" class="modal-title">Título</h3>
+      <p id="modalDesc" class="modal-desc">Descrição</p>
+    </div>
+  </div>
+  <style>
+    .solution-modal {
+      display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+      background-color: rgba(11,37,69,0.7); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .solution-modal.show { display: flex; opacity: 1; }
+    .solution-modal-content {
+      background: #fff; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%;
+      position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+    .solution-modal.show .solution-modal-content { transform: translateY(0); }
+    .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; color: #999; cursor: pointer; transition: color 0.2s; }
+    .close-modal:hover { color: var(--azul); }
+    .modal-title { font-size: 1.8rem; font-weight: 800; color: var(--azul); margin-bottom: 16px; }
+    .modal-desc { font-size: 1rem; line-height: 1.6; color: #555; }
+  </style>
+  <script>
+    function openSolutionModal(title, desc) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDesc').innerHTML = desc;
+      const modal = document.getElementById('solutionModal');
+      modal.style.display = 'flex';
+      setTimeout(() => modal.classList.add('show'), 10);
+    }
+    function closeModal() {
+      const modal = document.getElementById('solutionModal');
+      modal.classList.remove('show');
+      setTimeout(() => modal.style.display = 'none', 300);
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById('solutionModal');
+      if (event.target == modal) { closeModal(); }
+    }
   </script>
 </body>
 </html>
