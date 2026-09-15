@@ -12,6 +12,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vercel
+package-lock.json
 
 # Python caches
 __pycache__/
@@ -25,19 +26,38 @@ Thumbs.db
 
 # Relatórios brutos pesados e arquivos confidenciais
 *.pdf
-Mais fotos radar/
+*.zip
+*.tar.gz
+
+# Pastas de mídia duplicadas ou de arquivos brutos (fotos_radar é a pasta oficial do app)
 "Mais fotos radar/"
-"mais_fotos_radar/APRESENTAÇÃO FINAL.txt"
+Mais fotos radar/
+"fotos radar/"
+fotos radar/
+"mais_fotos_radar/"
+mais_fotos_radar/
+
+# Datasets gigantescos e brutos de scraping / processamento (dados já estão no Supabase)
+midia_sjc/*.json
+!midia_sjc/comunidade_comentarios_sjc.json
+midia_sjc/*.csv
+midia_sjc/*.js
+!midia_sjc/comunidade_data.js
+midia_sjc/*.zip
 
 # Planilhas e dados brutos temporários
 *.csv
 respostas.csv.csv
 INFLUENCIADORES_RADAR_SJC.csv
+all_cap1_ground_truth.json
+dados_pesquisa_477.json
 
 # Scripts e arquivos temporários de migração/testes
 teste_*.jpg
 teste_*.png
 app_recovered.html
+app_backup_*.html
+apresentacao_comparativo_*.md
 diff_app.txt
 entrada_*.txt
 commands.json

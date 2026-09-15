@@ -3896,113 +3896,49 @@
     }
   }
 
-      function renderOracleWelcomeScreen() {
+  function renderOracleWelcomeScreen() {
     return `
-      <div class="space-y-6 animate-in fade-in duration-400">
+      <div class="space-y-8 animate-in fade-in duration-400">
         
-        <!-- Grid Principal da Tela Inicial -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <!-- ========================================================================= -->
+        <!-- LINHA 1: KAPY BOAS-VINDAS FLUTUANDO (ESQUERDA) + AÇÃO / CARD KAPY (DIREITA) -->
+        <!-- ========================================================================= -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
           
-          <!-- LADO ESQUERDO: METODOLOGIA & PESQUISA RADAR 2026 (7 Colunas) -->
-          <div class="lg:col-span-7 bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm flex flex-col justify-between space-y-6">
+          <!-- LADO ESQUERDO: KAPY BOAS-VINDAS FLUTUANDO (5 Colunas) -->
+          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative py-4 sm:py-6">
+            <!-- Brilho / Aura suave ao fundo -->
+            <div class="absolute w-56 h-56 sm:w-72 sm:h-72 bg-gradient-to-tr from-pink-200/50 via-purple-200/30 to-pink-100/40 rounded-full blur-2xl pointer-events-none -z-0"></div>
             
-            <div class="space-y-4">
-              <!-- Selos de Inteligência -->
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-pink-100 text-pink-800 border border-pink-200">
-                  <i class="fa-solid fa-sparkles text-pink-600"></i> Metodologia Radar São José 2026
-                </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
-                  <i class="fa-solid fa-database text-slate-500"></i> Big Data + Pesquisa Primária
-                </span>
-              </div>
-
-              <!-- Título & Subtítulo -->
-              <div class="space-y-2">
-                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
-                  Como nascem as 60 Personas de São José dos Campos?
-                </h3>
-                <p class="text-sm text-slate-600 leading-relaxed font-medium">
-                  Não são arquétipos genéricos. As 60 personas representam uma síntese viva e fidedigna da população joseense, desenvolvida a partir de um cruzamento rigoroso de inteligência de mercado:
-                </p>
-              </div>
-
-              <!-- 3 Pilares Metodológicos -->
-              <div class="grid grid-cols-1 gap-3.5 pt-1">
-                
-                <!-- Pilar 1: Pesquisa Radar 2026 -->
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-pink-300 transition-all flex items-start gap-3.5">
-                  <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-clipboard-check"></i>
-                  </div>
-                  <div class="space-y-0.5">
-                    <h4 class="text-xs font-black text-slate-900">1. Pesquisa Radar São José 2026</h4>
-                    <p class="text-[12px] text-slate-600 leading-snug">
-                      Entrevistas e questionários de campo cobrindo todas as macro-regiões de SJC, mapeando dores reais de consumo, mobilidade, renda e prioridades familiares.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pilar 2: Big Data Municipal & Mídia Local -->
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 transition-all flex items-start gap-3.5">
-                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-chart-network"></i>
-                  </div>
-                  <div class="space-y-0.5">
-                    <h4 class="text-xs font-black text-slate-900">2. Big Data da Plataforma & Mídia Local</h4>
-                    <p class="text-[12px] text-slate-600 leading-snug">
-                      Dados demográficos do IBGE cruzados com mais de 7.500 postagens e reportagens monitoradas na imprensa regional (Rede Vanguarda, O Vale, CBN Vale e portais de bairro).
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pilar 3: 4 Movimentos Socioculturais -->
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-indigo-300 transition-all flex items-start gap-3.5">
-                  <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-compass-drafting"></i>
-                  </div>
-                  <div class="space-y-0.5">
-                    <h4 class="text-xs font-black text-slate-900">3. Quatro Movimentos Socioculturais</h4>
-                    <p class="text-[12px] text-slate-600 leading-snug">
-                      Classificação psicográfica dos estilos de vida da cidade: <em>A Tribo Global</em>, <em>A Cidade Prometida</em>, <em>Geografia da Inércia</em> e <em>Empreendedorismo Intuitivo</em>.
-                    </p>
-                  </div>
-                </div>
-
+            <div class="relative z-10 flex flex-col items-center">
+              <img 
+                src="data_personas/capivara/01_boas_vindas.png" 
+                alt="Kapy • Assessora do Oráculo SJC" 
+                class="w-56 sm:w-64 md:w-72 max-w-full h-auto object-contain cursor-pointer transition-transform hover:scale-105 select-none"
+                style="animation: capivaraFloat 3.2s ease-in-out infinite; filter: drop-shadow(0 18px 26px rgba(219, 39, 119, 0.25));"
+                onclick="window.startOracleGame(event)"
+                title="Clique para iniciar o Oráculo com a Kapy!"
+              />
+              <div class="mt-2 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-xs border border-pink-200 shadow-xs text-xs font-black text-pink-900">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Kapy • Assessora de Inteligência</span>
               </div>
             </div>
-
-            <!-- Rodapé Metodológico -->
-            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-              <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-check text-emerald-600"></i> 60 Personas com 20 Requisitos Auditados</span>
-              <span class="text-slate-400">Radar SJC Analytics</span>
-            </div>
-
           </div>
 
-          <!-- LADO DIREITO: CALL TO ACTION - JOGAR ORÁCULO (Card Branco com Rostinho Flutuante da Kapy) -->
-          <div class="lg:col-span-5 bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden">
+          <!-- LADO DIREITO: CALL TO ACTION - TODA IDEIA DEIXA PISTAS (7 Colunas) -->
+          <div class="lg:col-span-7 bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm flex flex-col justify-between space-y-6 relative overflow-hidden">
             
             <div class="space-y-5">
               
-              <!-- Topo: Selo + Rostinho da Kapy Flutuando Sorrindo -->
+              <!-- Topo: Selo -->
               <div class="flex items-center justify-between gap-4">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-100 border border-pink-200 text-xs font-black text-pink-700">
                   <i class="fa-solid fa-wand-magic-sparkles text-pink-500"></i> Experiência Interativa
                 </span>
-
-                <!-- Rostinho da Kapy Flutuando e Sorrindo -->
-                <div class="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center">
-                  <div class="absolute inset-0 bg-pink-100 rounded-full blur-xs opacity-60"></div>
-                  <img 
-                    src="data_personas/capivara/kapy_avatar_smile.png" 
-                    alt="Rostinho da Kapy Sorrindo" 
-                    class="w-16 h-16 sm:w-20 sm:h-20 object-contain relative z-20 drop-shadow-md cursor-pointer transition-transform hover:scale-110 pointer-events-auto"
-                    style="animation: kapyHeadFloat 3.2s ease-in-out infinite; pointer-events: auto;"
-                    title="Olá! Sou a Kapy, assessora de inteligência!"
-                    onclick="window.startOracleGame(event)"
-                  />
-                </div>
+                <span class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
+                  Radar SJC 2026
+                </span>
               </div>
 
               <!-- Chamada Principal -->
@@ -4038,19 +3974,19 @@
             </div>
 
             <!-- Botões de Ação no Rodapé -->
-            <div class="pt-6 space-y-3 relative z-20 pointer-events-auto">
+            <div class="pt-4 space-y-3 relative z-20 pointer-events-auto">
               <button 
-                type="button"
-                id="btn-start-oracle-reading"
+                type="button" 
+                id="btn-start-oracle-reading" 
                 onclick="window.startOracleGame(event)" 
-                style="position: relative; z-index: 20; pointer-events: auto;"
+                style="position: relative; z-index: 20; pointer-events: auto;" 
                 class="w-full py-4 px-6 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-xl shadow-pink-500/25 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer select-none"
               >
                 <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
                 <span>DEIXAR A KAPY LER MINHA IDEIA</span>
               </button>
 
-              <div class="text-center space-y-1 pt-1">
+              <div class="text-center space-y-0.5 pt-0.5">
                 <p class="text-[11px] text-slate-600 font-bold">
                   Uma leitura rápida, local e estratégica. Sem respostas genéricas.
                 </p>
@@ -4060,9 +3996,9 @@
               </div>
 
               <button 
-                type="button"
+                type="button" 
                 onclick="window.switchToDossierTab(event)" 
-                style="position: relative; z-index: 20; pointer-events: auto;"
+                style="position: relative; z-index: 20; pointer-events: auto;" 
                 class="w-full py-2.5 px-4 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
               >
                 <i class="fa-solid fa-cards-blank text-slate-500"></i>
@@ -4070,6 +4006,86 @@
               </button>
             </div>
 
+          </div>
+
+        </div>
+
+
+        <!-- ========================================================================= -->
+        <!-- LINHA 2: COMO NASCEM AS 60 PERSONAS DE SÃO JOSÉ DOS CAMPOS? (LARGURA TOTAL)-->
+        <!-- ========================================================================= -->
+        <div class="bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm space-y-6">
+          
+          <div class="space-y-4">
+            <!-- Selos de Inteligência -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-pink-100 text-pink-800 border border-pink-200">
+                <i class="fa-solid fa-sparkles text-pink-600"></i> Metodologia Radar São José 2026
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                <i class="fa-solid fa-database text-slate-500"></i> Big Data + Pesquisa Primária
+              </span>
+            </div>
+
+            <!-- Título & Subtítulo -->
+            <div class="space-y-2">
+              <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+                Como nascem as 60 Personas de São José dos Campos?
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                Não são arquétipos genéricos. As 60 personas representam uma síntese viva e fidedigna da população joseense, desenvolvida a partir de um cruzamento rigoroso de inteligência de mercado:
+              </p>
+            </div>
+
+            <!-- 3 Pilares Metodológicos (Disposição em 3 Colunas no Desktop) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              
+              <!-- Pilar 1: Pesquisa Radar 2026 -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-pink-300 transition-all flex flex-col justify-between gap-3">
+                <div class="space-y-2.5">
+                  <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-base">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                  </div>
+                  <h4 class="text-xs font-black text-slate-900 leading-snug">1. Pesquisa Radar São José 2026</h4>
+                  <p class="text-[12px] text-slate-600 leading-relaxed">
+                    Entrevistas e questionários de campo cobrindo todas as macro-regiões de SJC, mapeando dores reais de consumo, mobilidade, renda e prioridades familiares.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Pilar 2: Big Data Municipal & Mídia Local -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 transition-all flex flex-col justify-between gap-3">
+                <div class="space-y-2.5">
+                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-base">
+                    <i class="fa-solid fa-chart-network"></i>
+                  </div>
+                  <h4 class="text-xs font-black text-slate-900 leading-snug">2. Big Data da Plataforma & Mídia Local</h4>
+                  <p class="text-[12px] text-slate-600 leading-relaxed">
+                    Dados demográficos do IBGE cruzados com mais de 7.500 postagens e reportagens monitoradas na imprensa regional (Rede Vanguarda, O Vale, CBN Vale e portais de bairro).
+                  </p>
+                </div>
+              </div>
+
+              <!-- Pilar 3: 4 Movimentos Socioculturais -->
+              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-indigo-300 transition-all flex flex-col justify-between gap-3">
+                <div class="space-y-2.5">
+                  <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 text-base">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                  </div>
+                  <h4 class="text-xs font-black text-slate-900 leading-snug">3. Quatro Movimentos Socioculturais</h4>
+                  <p class="text-[12px] text-slate-600 leading-relaxed">
+                    Classificação psicográfica dos estilos de vida da cidade: <em>A Tribo Global</em>, <em>A Cidade Prometida</em>, <em>Geografia da Inércia</em> e <em>Empreendedorismo Intuitivo</em>.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Rodapé Metodológico -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-check text-emerald-600"></i> 60 Personas com 20 Requisitos Auditados</span>
+            <span class="text-slate-400 font-bold">Radar SJC Analytics</span>
           </div>
 
         </div>
@@ -4138,7 +4154,7 @@
         </div>
 
         <!-- PAINEL DE PERGUNTAS E MESA SAGRADA (Lado Direito - 8 Colunas) -->
-        <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md flex flex-col justify-between min-h-[480px]">
+        <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 md:p-9 border border-slate-200 shadow-md flex flex-col justify-start">
           ${readingPhase !== 'idle' ? renderTableAnimationPhase() : getOracleStepContent()}
         </div>
 
@@ -4163,7 +4179,7 @@
     }, speed);
   }
 
-    function triggerOracleTypewriterForCurrentStep() {
+  function triggerOracleTypewriterForCurrentStep() {
     const texts = {
       1: "Olá! Sou a Kapy, sua assessora de inteligência. Como sua ideia, negócio ou projeto se posiciona em São José dos Campos?",
       2: "Qual é o perfil do público que você quer atrair ou engajar?",
@@ -4183,8 +4199,8 @@
   function getOracleStepContent() {
     if (currentOracleStep === 1) {
       return `
-        <div class="space-y-4 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+        <div class="space-y-6 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4193,36 +4209,36 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'inovacao', 2)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'inovacao' ? 'bg-purple-50 border-purple-500 shadow-sm ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-globe"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Inovação, Cultura & Vanguarda</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Design, café especial, tecnologia e autenticidade.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'inovacao', 2)" class="oracle-option-card oracle-card-delay-1 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'inovacao' ? 'bg-purple-50 border-purple-500 shadow-md ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-globe"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Inovação, Cultura & Vanguarda</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Design, café especial, tecnologia e autenticidade.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'luxo', 2)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'luxo' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-crown"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Alto Padrão & Internacional</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Exclusividade, condomínios fechados e prestígio.</p>
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'luxo', 2)" class="oracle-option-card oracle-card-delay-2 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'luxo' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-crown"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Alto Padrão & Internacional</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Exclusividade, condomínios fechados e prestígio.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'tradicao', 2)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'tradicao' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-landmark"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Tradição & Confiança Familiar</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Raízes de bairro, fidelidade e palavra dada.</p>
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'tradicao', 2)" class="oracle-option-card oracle-card-delay-3 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'tradicao' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-landmark"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Tradição & Confiança Familiar</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Raízes de bairro, fidelidade e palavra dada.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'agilidade', 2)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'agilidade' ? 'bg-cyan-50 border-cyan-500 shadow-sm ring-2 ring-cyan-500/20' : 'bg-white border-slate-200 hover:border-cyan-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 border border-cyan-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-lightbulb"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Agilidade & Vida Real dos Bairros</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Resolução prática no WhatsApp e bom preço.</p>
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'agilidade', 2)" class="oracle-option-card oracle-card-delay-4 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'agilidade' ? 'bg-cyan-50 border-cyan-500 shadow-md ring-2 ring-cyan-500/20' : 'bg-white border-slate-200 hover:border-cyan-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 border border-cyan-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-lightbulb"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Agilidade & Vida Real dos Bairros</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Resolução prática no WhatsApp e bom preço.</p>
               </div>
             </div>
           </div>
@@ -4232,8 +4248,8 @@
 
     if (currentOracleStep === 2) {
       return `
-        <div class="space-y-4 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+        <div class="space-y-6 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4242,36 +4258,36 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'alto', 3)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'alto' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-gem"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Alto Padrão & Exclusividade</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Público de alta renda, sofisticado, exigente e seleto.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'alto', 3)" class="oracle-option-card oracle-card-delay-1 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'alto' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-gem"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Alto Padrão & Exclusividade</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Público de alta renda, sofisticado, exigente e seleto.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'experiencia', 3)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'experiencia' ? 'bg-purple-50 border-purple-500 shadow-sm ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-mug-hot"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Experiência, Cultura & Estilo</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Valoriza autenticidade, vivências, significado e comunidade.</p>
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'experiencia', 3)" class="oracle-option-card oracle-card-delay-2 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'experiencia' ? 'bg-purple-50 border-purple-500 shadow-md ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-mug-hot"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Experiência, Cultura & Estilo</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Valoriza autenticidade, vivências, significado e comunidade.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'custo_beneficio', 3)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'custo_beneficio' ? 'bg-blue-50 border-blue-500 shadow-sm ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-scale-balanced"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Pragmático & Custo-Benefício</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Busca solidez, confiança, utilidade e clareza de resultados.</p>
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'custo_beneficio', 3)" class="oracle-option-card oracle-card-delay-3 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'custo_beneficio' ? 'bg-blue-50 border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Pragmático & Custo-Benefício</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Busca solidez, confiança, utilidade e clareza de resultados.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'economico', 3)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'economico' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-tags"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Popular, Prático & Acessível</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Linguagem simples, agilidade no WhatsApp e fácil acesso.</p>
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'economico', 3)" class="oracle-option-card oracle-card-delay-4 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'economico' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-tags"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Popular, Prático & Acessível</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Linguagem simples, agilidade no WhatsApp e fácil acesso.</p>
               </div>
             </div>
           </div>
@@ -4281,8 +4297,8 @@
 
     if (currentOracleStep === 3) {
       return `
-        <div class="space-y-4 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+        <div class="space-y-6 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4291,52 +4307,52 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'centro', 4)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'centro' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-city"></i></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'centro', 4)" class="oracle-option-card oracle-card-delay-1 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'centro' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-city"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Região Centro</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Vila Ema, Vila Adyana, Centro Histórico, São Dimas e Apolo.</p>
+                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Centro</h4>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Vila Ema, Vila Adyana, Centro Histórico, São Dimas e Apolo.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sul', 4)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sul' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-shop"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sul', 4)" class="oracle-option-card oracle-card-delay-2 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sul' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-shop"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Região Sul</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Jardim Satélite, Floradas, Bosque dos Eucaliptos e Parque Industrial.</p>
+                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Sul</h4>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Jardim Satélite, Floradas, Bosque dos Eucaliptos e Parque Industrial.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'leste', 4)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'leste' ? 'bg-blue-50 border-blue-500 shadow-sm ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-industry"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'leste', 4)" class="oracle-option-card oracle-card-delay-3 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'leste' ? 'bg-blue-50 border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
+              <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-industry"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Região Leste</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Vista Verde, Eugênio de Melo, Galo Branco e Novo Horizonte.</p>
+                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Leste</h4>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Vista Verde, Eugênio de Melo, Galo Branco e Novo Horizonte.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'oeste', 4)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'oeste' ? 'bg-pink-50 border-pink-500 shadow-sm ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-tree-city"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'oeste', 4)" class="oracle-option-card oracle-card-delay-4 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'oeste' ? 'bg-pink-50 border-pink-500 shadow-md ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
+              <div class="w-11 h-11 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-tree-city"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Região Oeste</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Jardim Aquarius, Urbanova, Jardim das Colinas e Esplanada.</p>
+                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Oeste</h4>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Jardim Aquarius, Urbanova, Jardim das Colinas e Esplanada.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'norte', 4)" class="oracle-option-card oracle-card-delay-5 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'norte' ? 'bg-teal-50 border-teal-500 shadow-sm ring-2 ring-teal-500/20' : 'bg-white border-slate-200 hover:border-teal-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 border border-teal-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-mountain-sun"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'norte', 4)" class="oracle-option-card oracle-card-delay-5 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'norte' ? 'bg-teal-50 border-teal-500 shadow-md ring-2 ring-teal-500/20' : 'bg-white border-slate-200 hover:border-teal-300 shadow-2xs'}">
+              <div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-700 border border-teal-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-mountain-sun"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Região Norte</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Santana, Altos de Santana, Alto da Ponte e Buquirinha.</p>
+                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Norte</h4>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Santana, Altos de Santana, Alto da Ponte e Buquirinha.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sudeste', 4)" class="oracle-option-card oracle-card-delay-6 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sudeste' ? 'bg-violet-50 border-violet-500 shadow-sm ring-2 ring-violet-500/20' : 'bg-white border-slate-200 hover:border-violet-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 border border-violet-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-plane-departure"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sudeste', 4)" class="oracle-option-card oracle-card-delay-6 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sudeste' ? 'bg-violet-50 border-violet-500 shadow-md ring-2 ring-violet-500/20' : 'bg-white border-slate-200 hover:border-violet-300 shadow-2xs'}">
+              <div class="w-11 h-11 rounded-xl bg-violet-100 text-violet-700 border border-violet-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-plane-departure"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Região Sudeste</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Região do Putim, São Judas Tadeu, Flamboyant e Chácaras Reunidas.</p>
+                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Sudeste</h4>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Região do Putim, São Judas Tadeu, Flamboyant e Chácaras Reunidas.</p>
               </div>
             </div>
           </div>
@@ -4346,8 +4362,8 @@
 
     if (currentOracleStep === 4) {
       return `
-        <div class="space-y-4 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+        <div class="space-y-6 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4356,36 +4372,36 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'instagram', 5)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'instagram' ? 'bg-pink-50 border-pink-500 shadow-sm ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-brands fa-instagram"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Instagram & Reels Autoral</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Estética visual, bastidores e influenciadores de SJC.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'instagram', 5)" class="oracle-option-card oracle-card-delay-1 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'instagram' ? 'bg-pink-50 border-pink-500 shadow-md ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-brands fa-instagram"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Instagram & Reels Autoral</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Estética visual, bastidores e influenciadores de SJC.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'whatsapp', 5)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'whatsapp' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-brands fa-whatsapp"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">WhatsApp & Contato Direto</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Atendimento ágil, catálogo prático e tirar dúvidas na hora.</p>
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'whatsapp', 5)" class="oracle-option-card oracle-card-delay-2 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'whatsapp' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-brands fa-whatsapp"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">WhatsApp & Contato Direto</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Atendimento ágil, catálogo prático e tirar dúvidas na hora.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'google', 5)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'google' ? 'bg-blue-50 border-blue-500 shadow-sm ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-magnifying-glass"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Google, Tráfego Pago & SEO</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Busca no Google Maps, anúncios locais e avaliações.</p>
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'google', 5)" class="oracle-option-card oracle-card-delay-3 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'google' ? 'bg-blue-50 border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Google, Tráfego Pago & SEO</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Busca no Google Maps, anúncios locais e avaliações.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'eventos', 5)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'eventos' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-users"></i></div>
-              <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs font-black text-slate-900">Boca a Boca, Parcerias & Eventos</h4>
-                <p class="text-[11px] text-slate-600 leading-snug">Networking local, feiras, Vicentina Aranha e indicação.</p>
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'eventos', 5)" class="oracle-option-card oracle-card-delay-4 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'eventos' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-users"></i></div>
+              <div class="space-y-1 min-w-0">
+                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Boca a Boca, Parcerias & Eventos</h4>
+                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Networking local, feiras, Vicentina Aranha e indicação.</p>
               </div>
             </div>
           </div>
@@ -4395,8 +4411,8 @@
 
     if (currentOracleStep === 5) {
       return `
-        <div class="space-y-4 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
+        <div class="space-y-6 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4405,34 +4421,34 @@
             </h3>
           </div>
 
-          <div class="space-y-3">
+          <div class="space-y-3.5">
             <textarea
               id="oracle-open-textarea"
-              rows="3"
+              rows="4"
               placeholder="Ex: Quero abrir uma cafeteria autoral no Aquarius, lançar um aplicativo de saúde para famílias na Zona Sul, ou promover um projeto cultural em Santana..."
               oninput="window.updateOracleOpenText(this.value)"
-              class="w-full p-4 text-xs sm:text-sm bg-slate-50 border-2 border-slate-200 rounded-2xl font-medium text-slate-900 focus:outline-hidden focus:border-pink-500 focus:bg-white focus:ring-4 focus:ring-pink-500/10 transition-all resize-none shadow-inner"
+              class="w-full p-5 text-sm sm:text-base bg-slate-50 border-2 border-slate-200 rounded-2xl font-medium text-slate-900 focus:outline-hidden focus:border-pink-500 focus:bg-white focus:ring-4 focus:ring-pink-500/10 transition-all resize-none shadow-inner"
             >${oracleAnswers.q5_texto_livre || ''}</textarea>
 
             <div class="flex flex-wrap items-center gap-2">
               <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Sugestões Rápidas:</span>
-              <button type="button" onclick="window.setOracleQuickPrompt('Como posicionar um serviço de alto padrão e ganhar a confiança do público mais exigente de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-pink-100 text-slate-700 hover:text-pink-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Como posicionar um serviço de alto padrão e ganhar a confiança do público mais exigente de SJC?')" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-pink-100 text-slate-700 hover:text-pink-800 transition-colors cursor-pointer border border-slate-200">
                 ⭐ Alto Padrão & Confiança
               </button>
-              <button type="button" onclick="window.setOracleQuickPrompt('Qual a melhor abordagem comercial no WhatsApp para converter rápido nos bairros de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Qual a melhor abordagem comercial no WhatsApp para converter rápido nos bairros de SJC?')" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 transition-colors cursor-pointer border border-slate-200">
                 💬 Vendas no WhatsApp & Bairros
               </button>
-              <button type="button" onclick="window.setOracleQuickPrompt('Como expandir um negócio local pelas redes sociais com apoio de influenciadores da cidade?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Como expandir um negócio local pelas redes sociais com apoio de influenciadores da cidade?')" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-800 transition-colors cursor-pointer border border-slate-200">
                 📱 Redes Sociais & Influenciadores
               </button>
             </div>
           </div>
 
-          <div class="flex items-center justify-between pt-2">
+          <div class="flex items-center justify-between pt-3">
             <button type="button" onclick="window.setOracleStep(4)" class="px-5 py-3 rounded-xl font-bold text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all cursor-pointer">
               ← Voltar
             </button>
-            <button type="button" onclick="window.startAuthenticTarotReadingSequence()" class="px-8 py-3.5 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-500/25 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer">
+            <button type="button" onclick="window.startAuthenticTarotReadingSequence()" class="px-8 py-4 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-500/25 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer">
               <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
               <span>CONSULTAR O ORÁCULO DE SJC</span>
             </button>
@@ -4707,7 +4723,7 @@
                     Radar SJC 2026 • 477 Respondentes & 60 Personas
                   </span>
                 </div>
-                <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
+                <h2 class="text-lg sm:text-xl font-bold uppercase tracking-tight text-slate-900 leading-tight">
                   ${r.titulo_leitura || r.tituloLeitura || 'Diagnóstico Estratégico de São José dos Campos'}
                 </h2>
               </div>

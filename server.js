@@ -49,32 +49,59 @@ const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
-  if (pathname === '/api/oraculo') {
-    try {
-      const apiPath = path.resolve(__dirname, 'api', 'oraculo.js');
-      delete require.cache[require.resolve(apiPath)];
-      const handler = require(apiPath);
-      
-      if (req.method === 'POST') {
-        let body = '';
-        req.on('data', chunk => { body += chunk; });
-        req.on('end', async () => {
-          try {
-            req.body = body ? JSON.parse(body) : {};
-          } catch(e) {
-            req.body = {};
-          }
+  // Roteador de APIs Serverless (/api/consultor, /api/oraculo, etc.)
+  if (pathname.startsWith('/api/')) {
+    const routeName = pathname.replace('/api/', '').replace(/\.js$/, '');
+    const apiPath = path.resolve(__dirname, 'api', `${routeName}.js`);
+    
+    if (fs.existsSync(apiPath)) {
+      try {
+        delete require.cache[require.resolve(apiPath)];
+        const handler = require(apiPath);
+
+        // Helper de compatibilidade Serverless / Express (res.status().json())
+        res.status = function(statusCode) {
+          res.statusCode = statusCode;
+          return {
+            json: (data) => {
+              if (!res.headersSent) res.setHeader('Content-Type', 'application/json; charset=utf-8');
+              res.end(JSON.stringify(data));
+            },
+            send: (data) => {
+              res.end(data);
+            }
+          };
+        };
+        res.json = function(data) {
+          if (!res.headersSent) res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(JSON.stringify(data));
+        };
+        req.query = parsedUrl.query || {};
+
+        if (req.method === 'POST') {
+          let body = '';
+          req.on('data', chunk => { body += chunk; });
+          req.on('end', async () => {
+            try {
+              req.body = body ? JSON.parse(body) : {};
+            } catch(e) {
+              req.body = {};
+            }
+            await handler(req, res);
+          });
+        } else {
+          req.body = {};
           await handler(req, res);
-        });
-      } else {
-        await handler(req, res);
+        }
+        return;
+      } catch (err) {
+        console.error(`API ${routeName} Error:`, err);
+        if (!res.headersSent) {
+          res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ error: err.message }));
+        }
+        return;
       }
-      return;
-    } catch (err) {
-      console.error('API Error:', err);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: err.message }));
-      return;
     }
   }
 
