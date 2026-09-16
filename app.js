@@ -501,13 +501,17 @@ window.openHistoriaFonteModal = function(eventId) {
     </div>
   `;
 
+  modal.style.display = "flex";
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 };
 
 window.closeHistoriaFonteModal = function() {
   const modal = document.getElementById("historia-fonte-modal");
-  if (modal) modal.classList.add("hidden");
+  if (modal) {
+    modal.style.display = "none";
+    modal.classList.add("hidden");
+  }
   document.body.style.overflow = "";
 };
 
@@ -613,13 +617,19 @@ window.switchHistoriaSubTab = function(subTabName) {
 
 window.openPorQue1767Modal = function() {
   const modal = document.getElementById("modal-porque-1767");
-  if (modal) modal.classList.remove("hidden");
+  if (modal) {
+    modal.style.display = "flex";
+    modal.classList.remove("hidden");
+  }
   document.body.style.overflow = "hidden";
 };
 
 window.closePorQue1767Modal = function() {
   const modal = document.getElementById("modal-porque-1767");
-  if (modal) modal.classList.add("hidden");
+  if (modal) {
+    modal.style.display = "none";
+    modal.classList.add("hidden");
+  }
   document.body.style.overflow = "";
 };
 
@@ -29492,6 +29502,7 @@ window.handleConsultorSubmit = async function(e) {
   if (iconSend) iconSend.className = "fa-solid fa-circle-notch fa-spin text-xs";
 
   if (loadingOverlay) {
+    loadingOverlay.style.display = "flex";
     loadingOverlay.classList.remove("hidden");
     if (loadingProgressBar) loadingProgressBar.style.width = "5%";
     if (loadingStatusText) loadingStatusText.innerText = "Iniciando processamento analítico de São José dos Campos...";
@@ -29624,11 +29635,35 @@ window.handleConsultorSubmit = async function(e) {
     console.error("Erro no processamento assíncrono do consultor:", err);
     alert("Erro na auditoria estratégica:\n" + (err.message || err));
   } finally {
-    if (loadingOverlay) loadingOverlay.classList.add("hidden");
+    if (loadingOverlay) {
+      loadingOverlay.style.display = "none";
+      loadingOverlay.classList.add("hidden");
+    }
     window.isConsultorThinking = false;
     if (btnSend) btnSend.disabled = false;
     if (iconSend) iconSend.className = "fa-solid fa-wand-magic-sparkles text-xs";
   }
+};
+
+window.copyReportTextBlock = function(el) {
+  if (!el) return;
+  const p = el.querySelector("#visao-estrategica-texto-corrido");
+  const text = p ? p.innerText : el.innerText;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const badge = el.querySelector(".copy-feedback-badge");
+    if (badge) {
+      const originalHtml = badge.innerHTML;
+      badge.innerHTML = `<i class="fa-solid fa-check text-emerald-600"></i> Copiado!`;
+      badge.classList.add("bg-emerald-50", "text-emerald-800", "border-emerald-300");
+      setTimeout(() => {
+        badge.innerHTML = originalHtml;
+        badge.classList.remove("bg-emerald-50", "text-emerald-800", "border-emerald-300");
+      }, 2500);
+    }
+  }).catch(err => {
+    console.warn("Falha ao copiar para clipboard:", err);
+  });
 };
 
 // ==========================================
@@ -30388,9 +30423,17 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             </span>
           </div>
           
-          <!-- ÚNICO BLOCO DE TEXTO DENSO, LIMPO E EXECUTIVO -->
-          <div class="p-4 sm:p-5 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs">
-            <p id="visao-estrategica-texto-corrido" class="text-[13px] sm:text-[14px] text-slate-700 font-normal leading-relaxed text-justify">
+          <!-- ÚNICO BLOCO DE TEXTO DENSO, LIMPO E EXECUTIVO (CLICÁVEL PARA COPIAR) -->
+          <div onclick="window.copyReportTextBlock(this)" class="p-4 sm:p-5 bg-slate-50/90 hover:bg-slate-100/90 rounded-2xl border border-slate-200/90 shadow-2xs cursor-pointer group transition-all" title="Clique para copiar este diagnóstico para a área de transferência">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono mb-2">
+              <span class="font-bold flex items-center gap-1.5 text-slate-500 group-hover:text-emerald-800 transition-colors">
+                <i class="fa-solid fa-align-left text-emerald-600"></i> CORPO DO TEXTO ESTRATÉGICO
+              </span>
+              <span class="copy-feedback-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-500 group-hover:border-emerald-300 group-hover:text-emerald-800 transition-all shadow-2xs">
+                <i class="fa-regular fa-copy"></i> Clique para copiar
+              </span>
+            </div>
+            <p id="visao-estrategica-texto-corrido" class="text-[13px] sm:text-[14px] text-slate-700 font-normal leading-relaxed text-justify select-text">
               ${formatMarkdown(visaoTextoCorrido)}
             </p>
           </div>
