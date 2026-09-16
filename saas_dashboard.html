@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaaS Analytics Suite — CRM & Afiliados</title>
+  
+  <!-- Tipografia Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            },
+            teal: {
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+            },
+            cyan: {
+              500: '#06b6d4',
+              600: '#0891b2',
+            }
+          },
+          boxShadow: {
+            'card': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+            'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.05)',
+            'pill': '0 1px 2px rgba(0,0,0,0.06)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Scrollbar minimalista */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+
+<body class="h-full text-slate-800 bg-[#f8f9fa] flex flex-col antialiased selection:bg-teal-500 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- 1. HEADER SUPERIOR FIXO (Pill Navigation & User Menu) -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3 transition-all">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-3 shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-brand-900 text-white flex items-center justify-center shadow-md shadow-brand-900/20 font-black text-lg">
+          <i class="fa-solid fa-layer-group text-teal-400"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base tracking-tight text-brand-950">NEXUS<span class="text-teal-600">SaaS</span></span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-700 border border-teal-200">PRO v3.4</span>
+          </div>
+          <p class="text-[11px] font-medium text-slate-400 hidden sm:block">Enterprise Management Suite</p>
+        </div>
+      </div>
+
+      <!-- Navegação Central em Formato 'Pills' (Abas) -->
+      <nav class="flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl border border-slate-200/80 shadow-inner">
+        <button 
+          id="tab-btn-crm" 
+          onclick="switchTab('crm')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-pill bg-white text-brand-900 cursor-pointer"
+        >
+          <i class="fa-solid fa-users-gear text-teal-600"></i>
+          <span>CRM de Assinantes</span>
+          <span class="ml-1 px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-slate-100 text-slate-600">1.482</span>
+        </button>
+
+        <button 
+          id="tab-btn-afiliados" 
+          onclick="switchTab('afiliados')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-brand-900 hover:bg-white/60 cursor-pointer"
+        >
+          <i class="fa-solid fa-bullhorn text-slate-400 group-hover:text-teal-600"></i>
+          <span>Painel de Afiliados</span>
+          <span class="ml-1 px-1.5 py-0.5 rounded-md text-[10px] font-extrabold bg-amber-100 text-amber-800">Novo</span>
+        </button>
+      </nav>
+
+      <!-- Perfil do Usuário & Ações Rápidas -->
+      <div class="flex items-center gap-3 shrink-0">
+        <!-- Notificações -->
+        <button class="relative w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 flex items-center justify-center transition-colors cursor-pointer">
+          <i class="fa-regular fa-bell text-sm"></i>
+          <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-teal-500 ring-2 ring-white"></span>
+        </button>
+
+        <!-- Divider -->
+        <div class="h-6 w-[1px] bg-slate-200 hidden sm:block"></div>
+
+        <!-- Profile Card -->
+        <div class="flex items-center gap-3 pl-1 cursor-pointer group">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-9 h-9 rounded-xl object-cover ring-2 ring-slate-200 group-hover:ring-teal-500 transition-all" />
+          <div class="hidden md:block text-left">
+            <span class="block text-xs font-bold text-brand-950 leading-tight">Dra. Helena V.</span>
+            <span class="block text-[10px] font-medium text-slate-400">Head of Operations</span>
+          </div>
+          <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 group-hover:text-slate-600 transition-colors hidden sm:block"></i>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 2. LAYOUT PRINCIPAL (Sidebar Esquerda + Área de Conteúdo) -->
+  <!-- ========================================================================= -->
+  <div class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 flex flex-col lg:flex-row gap-8">
+
+    <!-- SIDEBAR ESQUERDA (Filtros & Métricas de Apoio) -->
+    <aside class="w-full lg:w-72 shrink-0 space-y-6">
+      
+      <!-- Card de Filtros e Busca -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <h3 class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-teal-600"></i>
+            Filtros & Recortes
+          </h3>
+          <button onclick="resetFilters()" class="text-[11px] font-bold text-slate-400 hover:text-teal-600 transition-colors cursor-pointer">
+            Limpar
+          </button>
+        </div>
+
+        <!-- Campo de Busca Universal -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-700">Buscar por Nome, E-mail ou ID</label>
+          <div class="relative">
+            <input 
+              type="text" 
+              id="search-input" 
+              oninput="handleSearch(this.value)" 
+              placeholder="Digite para filtrar..." 
+              class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 transition-all"
+            />
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+          </div>
+        </div>
+
+        <!-- Filtro por Plano / Categoria -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-700">Plano de Assinatura</label>
+          <div class="relative">
+            <select id="filter-plan" onchange="filterData()" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-600 appearance-none cursor-pointer">
+              <option value="all">Todos os Planos</option>
+              <option value="Enterprise">Enterprise Anual (R$ 599)</option>
+              <option value="Pro">Pro Mensal (R$ 119)</option>
+              <option value="Starter">Starter (R$ 49)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
+          </div>
+        </div>
+
+        <!-- Filtro por Ciclo de Faturamento -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-slate-700">Ciclo de Faturamento</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="setBillingCycle('all')" class="cycle-pill active px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all bg-brand-900 text-white border-brand-900 text-center">Todos</button>
+            <button type="button" onclick="setBillingCycle('anual')" class="cycle-pill px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200 text-center">Anual (-20%)</button>
+          </div>
+        </div>
+
+        <!-- Alerta / Destaque de Saúde de Faturamento -->
+        <div class="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 flex items-start gap-3">
+          <i class="fa-solid fa-triangle-exclamation text-amber-600 text-sm mt-0.5"></i>
+          <div class="space-y-1">
+            <h4 class="text-xs font-black text-amber-950">Atenção ao Churn</h4>
+            <p class="text-[11px] text-amber-900 leading-snug">
+              14 faturas expiram nas próximas 48h. A régua automática de recuperação está ativada.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card de Suporte & Atalho Rápido -->
+      <div class="bg-gradient-to-br from-slate-900 to-brand-950 rounded-2xl p-5 text-white shadow-card space-y-3 relative overflow-hidden">
+        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-teal-500/10 rounded-full blur-xl pointer-events-none"></div>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-white/10 text-teal-300 border border-white/10">
+          <i class="fa-solid fa-sparkles text-[9px]"></i> Exportação Automática
+        </span>
+        <h4 class="text-sm font-bold leading-snug">Relatórios de Conciliação em CSV / PDF</h4>
+        <p class="text-xs text-slate-400">Gere auditorias de MRR e comissões com 1 clique.</p>
+        <button onclick="showToast('Exportando relatório consolidado...')" class="w-full py-2 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+          <i class="fa-solid fa-file-arrow-down text-xs"></i>
+          <span>Exportar Dados</span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- ========================================================================= -->
+    <!-- 3. ÁREA CENTRAL DINÂMICA (PÁGINA 1: CRM & PÁGINA 2: AFILIADOS) -->
+    <!-- ========================================================================= -->
+    <main class="flex-1 space-y-8 min-w-0">
+
+      <!-- ======================================================================= -->
+      <!-- PÁGINA 1: CRM DE ASSINANTES (VISÃO ADMIN) -->
+      <!-- ======================================================================= -->
+      <div id="view-crm" class="space-y-8 animate-in fade-in duration-300">
+        
+        <!-- Header da Página -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">CRM de Assinantes</h1>
+            <p class="text-xs sm:text-sm text-slate-500 font-medium">Gestão de ciclo de vida, faturamento recorrente e retenção de clientes.</p>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <button onclick="showToast('Adicionar novo assinante...')" class="px-4 py-2.5 bg-brand-900 hover:bg-brand-800 text-white font-bold text-xs rounded-xl shadow-card transition-all flex items-center gap-2 cursor-pointer active:scale-95">
+              <i class="fa-solid fa-user-plus text-teal-400"></i>
+              <span>Novo Assinante</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 MÉTRICAS DO TOPO (High Contrast Metric Cards) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          
+          <!-- Card 1: Total Assinantes -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total de Assinantes</span>
+              <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center text-lg border border-teal-100">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+            <div class="space-y-1 mt-3">
+              <span class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">1.482</span>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                <i class="fa-solid fa-arrow-trend-up text-[10px]"></i>
+                <span>+12.4%</span>
+                <span class="text-slate-400 font-normal">vs. mês anterior</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Receita Mensal (MRR) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Receita Mensal (MRR)</span>
+              <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg border border-cyan-100">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+            </div>
+            <div class="space-y-1 mt-3">
+              <span class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">R$ 184.250</span>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                <i class="fa-solid fa-arrow-trend-up text-[10px]"></i>
+                <span>+8.2%</span>
+                <span class="text-slate-400 font-normal">crescimento orgânico</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Novos Assinantes (Mês) -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Novos Assinantes</span>
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg border border-indigo-100">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+            </div>
+            <div class="space-y-1 mt-3">
+              <span class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">+148</span>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                <i class="fa-solid fa-bolt text-[10px]"></i>
+                <span>4.8/dia</span>
+                <span class="text-slate-400 font-normal">taxa de ativação</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Cancelados / Churn -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cancelados / Churn</span>
+              <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg border border-rose-100">
+                <i class="fa-solid fa-user-xmark"></i>
+              </div>
+            </div>
+            <div class="space-y-1 mt-3">
+              <div class="flex items-baseline gap-2">
+                <span class="text-2xl sm:text-3xl font-black text-brand-950 tracking-tight">1.2%</span>
+                <span class="text-xs font-bold text-slate-400">(18 contas)</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                <i class="fa-solid fa-arrow-trend-down text-[10px]"></i>
+                <span>-0.4%</span>
+                <span class="text-slate-400 font-normal">abaixo da média de 2%</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ÁREA CENTRAL: LISTA DE CLIENTES EM ESTILO CARD TABLE -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-card space-y-5">
+          
+          <!-- Filtros de Status (Pill Filter Bar) -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2 overflow-x-auto pb-1">
+              <button onclick="setStatusFilter('all')" class="status-tab active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white cursor-pointer whitespace-nowrap">
+                Todos (<span id="count-all">6</span>)
+              </button>
+              <button onclick="setStatusFilter('Ativo')" class="status-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer whitespace-nowrap">
+                🟢 Ativos
+              </button>
+              <button onclick="setStatusFilter('Pendente')" class="status-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer whitespace-nowrap">
+                🟡 Pendentes
+              </button>
+              <button onclick="setStatusFilter('Cancelado')" class="status-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer whitespace-nowrap">
+                🔴 Cancelados
+              </button>
+            </div>
+
+            <div class="text-xs text-slate-500 font-medium shrink-0">
+              Ordenado por: <strong class="text-brand-950 font-bold">Mais Recentes</strong>
+            </div>
+          </div>
+
+          <!-- LISTA DE CARDS DE ASSINANTES -->
+          <div id="subscribers-list-container" class="space-y-3">
+            <!-- Renderizado dinamicamente via JS -->
+          </div>
+
+          <!-- Paginação Simplificada -->
+          <div class="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-500 border-t border-slate-100">
+            <span>Mostrando <strong class="text-brand-950">1-6</strong> de <strong>1.482</strong> registros</span>
+            <div class="flex items-center gap-1.5">
+              <button class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 font-bold disabled:opacity-50" disabled>Anterior</button>
+              <button class="px-3 py-1.5 rounded-lg bg-brand-900 text-white font-bold">1</button>
+              <button class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 font-bold">2</button>
+              <button class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 font-bold">3</button>
+              <button class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 font-bold">Próxima</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ======================================================================= -->
+      <!-- PÁGINA 2: PAINEL DO AFILIADO / VENDEDOR -->
+      <!-- ======================================================================= -->
+      <div id="view-afiliados" class="hidden space-y-8 animate-in fade-in duration-300">
+        
+        <!-- HERO SECTION INTERNA (Banner Navy com Link de Indicação) -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 text-white p-6 sm:p-8 shadow-xl border border-slate-800">
+          <div class="absolute -right-10 -top-10 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 max-w-3xl space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-500/20 text-teal-300 border border-teal-400/30">
+                <i class="fa-solid fa-crown text-[9px]"></i> Nível Diamond • 30% Recorrente
+              </span>
+              <span class="text-xs text-slate-400">ID de Parceiro: <strong class="text-white font-mono">#AF-8829</strong></span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+              Seu Link Exclusivo de Indicação
+            </h1>
+
+            <p class="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
+              Compartilhe seu link e receba 30% de comissão sobre todas as mensalidades e renovações anuais dos clientes que você trouxer.
+            </p>
+
+            <!-- Input do Link + Botão Copiar -->
+            <div class="pt-2 flex flex-col sm:flex-row items-stretch gap-2.5 max-w-2xl">
+              <div class="relative flex-1">
+                <input 
+                  type="text" 
+                  id="affiliate-link-input" 
+                  readonly 
+                  value="https://nexussaas.com/ref/helena-vip" 
+                  class="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-2xl text-xs sm:text-sm font-mono font-bold text-white focus:outline-none select-all"
+                />
+                <i class="fa-solid fa-link absolute left-3.5 top-3.5 text-teal-400 text-sm"></i>
+              </div>
+
+              <button 
+                onclick="copyAffiliateLink()" 
+                class="px-6 py-3 bg-teal-500 hover:bg-teal-400 active:scale-95 text-slate-950 font-black text-xs sm:text-sm rounded-2xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-teal-500/25 shrink-0"
+              >
+                <i class="fa-solid fa-copy"></i>
+                <span id="copy-btn-text">Copiar Link</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 MÉTRICAS DO VENDEDOR (Com destaque no Saldo Disponível) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          
+          <!-- Métrica 1: Cliques Totais -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cliques no Link</span>
+              <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg border border-cyan-100">
+                <i class="fa-solid fa-arrow-pointer"></i>
+              </div>
+            </div>
+            <div class="space-y-1 mt-4">
+              <span class="text-3xl font-black text-brand-950 tracking-tight">4.290</span>
+              <p class="text-xs text-slate-400 font-medium">Origem: 68% LinkedIn • 32% Direto</p>
+            </div>
+          </div>
+
+          <!-- Métrica 2: Conversões Pagas -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Conversões Pagas</span>
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg border border-indigo-100">
+                <i class="fa-solid fa-user-tag"></i>
+              </div>
+            </div>
+            <div class="space-y-1 mt-4">
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-black text-brand-950 tracking-tight">138</span>
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">3.2% Conv.</span>
+              </div>
+              <p class="text-xs text-slate-400 font-medium">92 planos Pro • 46 Enterprise</p>
+            </div>
+          </div>
+
+          <!-- Métrica 3: SALDO DISPONÍVEL (Destaque Visual com Gradiente) -->
+          <div class="bg-gradient-to-br from-teal-700 via-teal-800 to-brand-900 rounded-2xl p-6 text-white shadow-card hover:shadow-card-hover transition-all flex flex-col justify-between relative overflow-hidden">
+            <div class="flex items-center justify-between relative z-10">
+              <span class="text-xs font-bold text-teal-200 uppercase tracking-wider">Saldo Disponível</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-white/20 text-white border border-white/20">Pronto para Saque</span>
+            </div>
+            <div class="space-y-3 mt-4 relative z-10">
+              <span class="text-3xl sm:text-4xl font-black text-white tracking-tight">R$ 12.840,00</span>
+              <div class="flex items-center justify-between pt-1">
+                <span class="text-xs text-teal-200">PIX cadastrado: hel***@gmail.com</span>
+                <button onclick="showToast('Solicitação de saque enviada com sucesso!')" class="px-3.5 py-1.5 bg-white hover:bg-slate-100 text-teal-900 font-bold text-xs rounded-xl transition-all cursor-pointer shadow-sm active:scale-95">
+                  Solicitar Saque
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- HISTÓRICO DE COMISSÕES (Extrato Limpo com Nomes Ocultos) -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-card space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="text-base font-black text-brand-950">Histórico de Comissões Recorrentes</h3>
+              <p class="text-xs text-slate-500 font-medium">Extrato detalhado de indicações aprovadas e créditos em conta.</p>
+            </div>
+            <button onclick="showToast('Filtrando período...')" class="px-3 py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-2 cursor-pointer">
+              <i class="fa-regular fa-calendar text-slate-400"></i>
+              <span>Últimos 30 Dias</span>
+            </button>
+          </div>
+
+          <div id="commissions-list-container" class="space-y-2.5">
+            <!-- Renderizado via JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 4. GAVETA LATERAL / SLIDE-OVER (Detalhes do Assinante) -->
+  <!-- ========================================================================= -->
+  <div id="subscriber-drawer" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex justify-end hidden animate-in fade-in duration-200">
+    <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-slate-200 overflow-y-auto">
+      
+      <!-- Drawer Header -->
+      <div class="p-6 bg-slate-900 text-white flex items-center justify-between sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center font-bold text-lg border border-teal-400/30">
+            <i class="fa-solid fa-address-card"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-white">Ficha do Assinante</h3>
+            <span id="drawer-user-id" class="text-[11px] font-mono text-slate-400">#SUB-90214</span>
+          </div>
+        </div>
+        <button onclick="closeSubscriberDrawer()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center cursor-pointer transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Drawer Content -->
+      <div class="p-6 space-y-6 flex-1 text-xs text-slate-700">
+        
+        <!-- User Profile Card -->
+        <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+          <img id="drawer-avatar" src="" alt="Avatar" class="w-12 h-12 rounded-xl object-cover ring-2 ring-slate-200" />
+          <div>
+            <h4 id="drawer-name" class="text-sm font-black text-brand-950">Nome do Assinante</h4>
+            <p id="drawer-email" class="text-xs text-slate-500 font-medium">email@dominio.com</p>
+            <div id="drawer-status-badge" class="mt-1"></div>
+          </div>
+        </div>
+
+        <!-- Plan Info -->
+        <div class="space-y-2">
+          <h5 class="font-bold text-slate-900 uppercase tracking-wider text-[10px]">Detalhes do Plano & Faturamento</h5>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2.5">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500">Plano Atual:</span>
+              <strong id="drawer-plan" class="text-brand-950 font-black text-xs">Enterprise Anual</strong>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500">Mensalidade / Valor:</span>
+              <strong id="drawer-price" class="text-teal-700 font-black text-xs">R$ 599,00 / mês</strong>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500">Data de Entrada:</span>
+              <span id="drawer-date" class="font-medium text-slate-700">12/03/2024</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-500">Cartão Final:</span>
+              <span class="font-mono text-slate-700">Mastercard •••• 4892</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Histórico de Transações -->
+        <div class="space-y-2">
+          <h5 class="font-bold text-slate-900 uppercase tracking-wider text-[10px]">Últimas Faturas</h5>
+          <div class="space-y-2">
+            <div class="p-3 rounded-xl bg-white border border-slate-200 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-900 block">Fatura #INV-8492</span>
+                <span class="text-[10px] text-slate-400">Paga em 12/09/2026 via Cartão</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200">Aprovada</span>
+            </div>
+            <div class="p-3 rounded-xl bg-white border border-slate-200 flex justify-between items-center">
+              <div>
+                <span class="font-bold text-slate-900 block">Fatura #INV-7921</span>
+                <span class="text-[10px] text-slate-400">Paga em 12/08/2026 via Cartão</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200">Aprovada</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center gap-2">
+        <button onclick="showToast('E-mail de cobrança enviado!')" class="flex-1 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl transition-colors cursor-pointer">
+          Reenviar Acesso
+        </button>
+        <button onclick="closeSubscriberDrawer()" class="flex-1 py-2.5 bg-brand-900 hover:bg-brand-800 text-white font-bold rounded-xl transition-colors cursor-pointer">
+          Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. TOAST NOTIFICATION COMPONENT -->
+  <!-- ========================================================================= -->
+  <div id="toast-notification" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="w-7 h-7 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <span id="toast-message" class="text-xs font-semibold">Ação concluída com sucesso!</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 6. JAVASCRIPT & DATA CONTROLLER -->
+  <!-- ========================================================================= -->
+  <script>
+    // Base de Dados Mockada de Assinantes
+    const SUBSCRIBERS = [
+      {
+        id: "SUB-1082",
+        name: "Guilherme Siqueira",
+        email: "guilherme.siqueira@techflow.io",
+        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80",
+        plan: "Enterprise",
+        price: "R$ 599/mês",
+        cycle: "anual",
+        status: "Ativo",
+        date: "14/09/2026",
+        ltv: "R$ 7.188",
+        badge: "bg-emerald-50 text-emerald-700 border-emerald-200"
+      },
+      {
+        id: "SUB-1083",
+        name: "Beatriz Nogueira Santos",
+        email: "beatriz.nogueira@agenciacura.com",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80",
+        plan: "Pro",
+        price: "R$ 119/mês",
+        cycle: "mensal",
+        status: "Ativo",
+        date: "12/09/2026",
+        ltv: "R$ 1.428",
+        badge: "bg-emerald-50 text-emerald-700 border-emerald-200"
+      },
+      {
+        id: "SUB-1084",
+        name: "Marcos Vinícius Andrade",
+        email: "marcos.andrade@consulting.br",
+        avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&auto=format&fit=crop&q=80",
+        plan: "Pro",
+        price: "R$ 119/mês",
+        cycle: "mensal",
+        status: "Pendente",
+        date: "10/09/2026",
+        ltv: "R$ 357",
+        badge: "bg-amber-50 text-amber-700 border-amber-200"
+      },
+      {
+        id: "SUB-1085",
+        name: "Camila Fernandez Rios",
+        email: "camila.rios@designlab.co",
+        avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80",
+        plan: "Starter",
+        price: "R$ 49/mês",
+        cycle: "mensal",
+        status: "Ativo",
+        date: "08/09/2026",
+        ltv: "R$ 588",
+        badge: "bg-emerald-50 text-emerald-700 border-emerald-200"
+      },
+      {
+        id: "SUB-1086",
+        name: "Rodrigo Toledo Alencar",
+        email: "rodrigo.toledo@fintechx.com",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
+        plan: "Enterprise",
+        price: "R$ 599/mês",
+        cycle: "anual",
+        status: "Cancelado",
+        date: "01/09/2026",
+        ltv: "R$ 3.594",
+        badge: "bg-rose-50 text-rose-700 border-rose-200"
+      },
+      {
+        id: "SUB-1087",
+        name: "Larissa Dornelles",
+        email: "larissa@dornellesadv.com.br",
+        avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80",
+        plan: "Pro",
+        price: "R$ 119/mês",
+        cycle: "mensal",
+        status: "Ativo",
+        date: "28/08/2026",
+        ltv: "R$ 2.142",
+        badge: "bg-emerald-50 text-emerald-700 border-emerald-200"
+      }
+    ];
+
+    // Base de Comissões de Afiliados
+    const COMMISSIONS = [
+      { date: "Hoje, 14:32", maskedName: "Gui***** S.", plan: "Enterprise Anual", status: "Liberado", value: "R$ 179,70", badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+      { date: "Hoje, 09:15", maskedName: "Bea**** N.", plan: "Pro Mensal", status: "Liberado", value: "R$ 35,70", badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+      { date: "Ontem, 18:40", maskedName: "Mar*** V.", plan: "Pro Mensal", status: "Em Retenção (7d)", value: "R$ 35,70", badge: "bg-amber-50 text-amber-700 border-amber-200" },
+      { date: "14/09/2026", maskedName: "Cam*** F.", plan: "Starter Mensal", status: "Liberado", value: "R$ 14,70", badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+      { date: "13/09/2026", maskedName: "Fer*** M.", plan: "Enterprise Anual", status: "Liberado", value: "R$ 179,70", badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+      { date: "11/09/2026", maskedName: "Lar*** D.", plan: "Pro Mensal (Recorrente)", status: "Liberado", value: "R$ 35,70", badge: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+    ];
+
+    let currentStatusFilter = 'all';
+    let currentPlanFilter = 'all';
+    let currentCycleFilter = 'all';
+    let currentSearchTerm = '';
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSubscribers();
+      renderCommissions();
+    });
+
+    // Alternar Abas Principais
+    function switchTab(tabId) {
+      const crmView = document.getElementById('view-crm');
+      const afiliadosView = document.getElementById('view-afiliados');
+      const crmBtn = document.getElementById('tab-btn-crm');
+      const afiliadosBtn = document.getElementById('tab-btn-afiliados');
+
+      if (tabId === 'crm') {
+        crmView.classList.remove('hidden');
+        afiliadosView.classList.add('hidden');
+        crmBtn.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-pill bg-white text-brand-900 cursor-pointer";
+        afiliadosBtn.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-brand-900 hover:bg-white/60 cursor-pointer";
+      } else {
+        crmView.classList.add('hidden');
+        afiliadosView.classList.remove('hidden');
+        afiliadosBtn.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-pill bg-white text-brand-900 cursor-pointer";
+        crmBtn.className = "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:text-brand-900 hover:bg-white/60 cursor-pointer";
+      }
+    }
+
+    // Renderizar Linhas de Assinantes (Card Table Rows)
+    function renderSubscribers() {
+      const container = document.getElementById('subscribers-list-container');
+      if (!container) return;
+
+      const filtered = SUBSCRIBERS.filter(sub => {
+        if (currentStatusFilter !== 'all' && sub.status !== currentStatusFilter) return false;
+        if (currentPlanFilter !== 'all' && sub.plan !== currentPlanFilter) return false;
+        if (currentCycleFilter !== 'all' && sub.cycle !== currentCycleFilter) return false;
+        if (currentSearchTerm) {
+          const term = currentSearchTerm.toLowerCase();
+          const matchName = sub.name.toLowerCase().includes(term);
+          const matchEmail = sub.email.toLowerCase().includes(term);
+          const matchId = sub.id.toLowerCase().includes(term);
+          if (!matchName && !matchEmail && !matchId) return false;
+        }
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+            <i class="fa-solid fa-user-slash text-3xl text-slate-300 mb-2"></i>
+            <p class="text-xs font-bold text-slate-600">Nenhum assinante encontrado para os filtros selecionados.</p>
+            <button onclick="resetFilters()" class="mt-3 text-xs font-bold text-teal-600 hover:underline">Limpar filtros</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(sub => `
+        <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/80 hover:border-teal-500/50 hover:shadow-card-hover transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 group">
+          
+          <!-- Coluna 1: Avatar + Nome & Email -->
+          <div class="flex items-center gap-3.5 min-w-[240px]">
+            <div class="relative shrink-0">
+              <img src="${sub.avatar}" alt="${sub.name}" class="w-11 h-11 rounded-xl object-cover ring-2 ring-slate-100 group-hover:ring-teal-200 transition-all" />
+              <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-2 border-white ${sub.status === 'Ativo' ? 'bg-emerald-500' : (sub.status === 'Pendente' ? 'bg-amber-500' : 'bg-rose-500')}"></span>
+            </div>
+            <div class="truncate">
+              <h4 class="text-xs sm:text-sm font-black text-brand-950 truncate group-hover:text-teal-700 transition-colors">${sub.name}</h4>
+              <p class="text-[11px] text-slate-500 font-medium truncate">${sub.email}</p>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Plano & Ciclo -->
+          <div class="flex items-center gap-2 min-w-[150px]">
+            <div>
+              <span class="block text-xs font-bold text-brand-950">${sub.plan}</span>
+              <span class="text-[10px] font-semibold text-slate-400 font-mono">${sub.price} (${sub.cycle})</span>
+            </div>
+          </div>
+
+          <!-- Coluna 3: Status Badge -->
+          <div class="min-w-[100px]">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase border ${sub.badge}">
+              <span class="w-1.5 h-1.5 rounded-full ${sub.status === 'Ativo' ? 'bg-emerald-500' : (sub.status === 'Pendente' ? 'bg-amber-500' : 'bg-rose-500')}"></span>
+              <span>${sub.status}</span>
+            </span>
+          </div>
+
+          <!-- Coluna 4: Data & LTV -->
+          <div class="min-w-[110px] hidden sm:block">
+            <span class="block text-xs font-bold text-slate-700">${sub.date}</span>
+            <span class="text-[10px] font-medium text-slate-400">LTV: <strong class="text-slate-600">${sub.ltv}</strong></span>
+          </div>
+
+          <!-- Coluna 5: Botão Ghost de Ações -->
+          <div class="flex items-center justify-end">
+            <button 
+              onclick="openSubscriberDrawer('${sub.id}')" 
+              class="px-3 py-2 text-slate-500 hover:text-brand-900 hover:bg-slate-100 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>Detalhes</span>
+              <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+          </div>
+
+        </div>
+      `).join('');
+    }
+
+    // Renderizar Histórico de Comissões do Afiliado
+    function renderCommissions() {
+      const container = document.getElementById('commissions-list-container');
+      if (!container) return;
+
+      container.innerHTML = COMMISSIONS.map(comm => `
+        <div class="p-3.5 sm:p-4 rounded-xl bg-slate-50/70 hover:bg-slate-50 border border-slate-200/70 flex items-center justify-between gap-3 text-xs transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-teal-100/60 text-teal-800 flex items-center justify-center font-bold text-xs">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+            </div>
+            <div>
+              <span class="font-black text-brand-950 block">${comm.maskedName}</span>
+              <span class="text-[10px] text-slate-400 font-medium">${comm.plan} • ${comm.date}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${comm.badge}">
+              ${comm.status}
+            </span>
+            <span class="text-xs sm:text-sm font-black text-emerald-600 font-mono">
+              + ${comm.value}
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filtragem em Tempo Real
+    function handleSearch(val) {
+      currentSearchTerm = val.trim();
+      renderSubscribers();
+    }
+
+    function setStatusFilter(status) {
+      currentStatusFilter = status;
+      document.querySelectorAll('.status-tab').forEach(btn => {
+        if ((status === 'all' && btn.textContent.includes('Todos')) || btn.textContent.includes(status)) {
+          btn.className = "status-tab active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white cursor-pointer whitespace-nowrap";
+        } else {
+          btn.className = "status-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer whitespace-nowrap";
+        }
+      });
+      renderSubscribers();
+    }
+
+    function filterData() {
+      currentPlanFilter = document.getElementById('filter-plan').value;
+      renderSubscribers();
+    }
+
+    function setBillingCycle(cycle) {
+      currentCycleFilter = cycle;
+      document.querySelectorAll('.cycle-pill').forEach(btn => {
+        if ((cycle === 'all' && btn.textContent === 'Todos') || (cycle === 'anual' && btn.textContent.includes('Anual'))) {
+          btn.className = "cycle-pill active px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all bg-brand-900 text-white border-brand-900 text-center";
+        } else {
+          btn.className = "cycle-pill px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200 text-center";
+        }
+      });
+      renderSubscribers();
+    }
+
+    function resetFilters() {
+      currentStatusFilter = 'all';
+      currentPlanFilter = 'all';
+      currentCycleFilter = 'all';
+      currentSearchTerm = '';
+      
+      const sInput = document.getElementById('search-input');
+      const pFilter = document.getElementById('filter-plan');
+      if (sInput) sInput.value = '';
+      if (pFilter) pFilter.value = 'all';
+
+      setStatusFilter('all');
+      setBillingCycle('all');
+    }
+
+    // Drawer de Detalhes do Assinante
+    function openSubscriberDrawer(subId) {
+      const sub = SUBSCRIBERS.find(s => s.id === subId);
+      if (!sub) return;
+
+      document.getElementById('drawer-user-id').textContent = `#${sub.id}`;
+      document.getElementById('drawer-avatar').src = sub.avatar;
+      document.getElementById('drawer-name').textContent = sub.name;
+      document.getElementById('drawer-email').textContent = sub.email;
+      document.getElementById('drawer-plan').textContent = `${sub.plan} (${sub.cycle.toUpperCase()})`;
+      document.getElementById('drawer-price').textContent = sub.price;
+      document.getElementById('drawer-date').textContent = sub.date;
+      document.getElementById('drawer-status-badge').innerHTML = `
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase border ${sub.badge}">
+          ${sub.status}
+        </span>
+      `;
+
+      const drawer = document.getElementById('subscriber-drawer');
+      drawer.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSubscriberDrawer() {
+      const drawer = document.getElementById('subscriber-drawer');
+      drawer.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Copiar Link de Afiliado com Feedback Visual
+    function copyAffiliateLink() {
+      const input = document.getElementById('affiliate-link-input');
+      navigator.clipboard.writeText(input.value).then(() => {
+        const btnText = document.getElementById('copy-btn-text');
+        btnText.textContent = "Copiado!";
+        showToast("Link de indicação copiado para a área de transferência!");
+        setTimeout(() => {
+          btnText.textContent = "Copiar Link";
+        }, 3000);
+      });
+    }
+
+    // Toast Notifier
+    function showToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const msg = document.getElementById('toast-message');
+      msg.textContent = message;
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+  </script>
+
+</body>
+</html>

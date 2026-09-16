@@ -1,0 +1,1366 @@
+{
+  "package_version": "1.0",
+  "publisher": "Radar São José",
+  "editorial_note": "Pacote gerado em lotes; revisar verification_tasks antes de publicar.",
+  "articles": [
+    {
+      "id": "01",
+      "cluster": "população",
+      "title": "São José dos Campos está crescendo? O que os dados mostram sobre a população",
+      "primary_keyword": "população de São José dos Campos",
+      "search_intent": "informacional",
+      "audience": "moradores, pesquisadores, planejadores urbanos",
+      "seo_title": "População de São José dos Campos: o que os dados dizem",
+      "meta_description": "Análise dos dados oficiais sobre a população de São José dos Campos: Censo 2010 vs 2022, estimativas IBGE 2025/2026 e mudanças na composição etária.",
+      "slug": "populacao-sao-jose-dos-campos-crescimento",
+      "answer_first": "Resposta direta: Sim — os dados oficiais mostram crescimento entre 2010 e 2022, com aumento da população e mudanças na composição etária.",
+      "article_markdown": "Resposta direta: Sim — os dados oficiais mostram crescimento entre 2010 e 2022, com aumento da população e mudanças na composição etária.\n\nDados confirmados\n- Censo IBGE 2010: 629.921 habitantes; Censo 2022: 697.054 habitantes. Isso representa um crescimento de 10,66% no período.\n- A Prefeitura calcula taxa média anual de 1,65% entre 2010 e 2022.\n- Estimativas do IBGE apontavam 727.078 para 2025; a página atual apresenta 729.153 para 2026.\n- Distribuição por região (Censo 2022): Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; Zona rural 15.212; São Francisco Xavier 1.443. População urbana 681.842 e rural 15.212.\n- Mudança etária: pessoas com 65 anos ou mais passaram de 6% (2010) para 12% (2022); a faixa 0–14 anos caiu de 22% para 18%.\n\nO que esses números implicam (análise responsável)\nOs dados confirmam crescimento demográfico entre 2010 e 2022 e uma população que envelhece. Isso aponta para demandas crescentes por serviços de saúde voltados à população idosa, além de mudanças na demanda por educação infantil. O aumento estimado para 2025/2026 sugere continuidade do crescimento, mas estimativas não substituem confirmação censitária ou registros administrativos atualizados.\n\nHipóteses e perguntas de apuração\n- Se o crescimento recente se concentra em bairros específicos ou é difuso pela cidade.\n- Quanto desse aumento se deve a saldo migratório versus taxa de natalidade/ mortalidade.\n- Impactos em oferta habitacional, trânsito e serviços públicos.\nEssas são questões que exigem checagem em fontes adicionais (ver lista de verificação abaixo).\n\nO que verificar antes da publicação\n- Atualizar números no site do IBGE e da Prefeitura.\n- Dados sobre nascimento, óbitos e migração (IBGE, Registro Civil, DataSUS, CAGED).\n- Distribuição por sub-bairros ou setores censitários no Geoportal do IBGE.\n\nImplicações locais\nMoradores e gestores locais devem usar os dados confirmados para priorizar políticas de saúde, transporte e moradia, enquanto pesquisadores podem combinar Censo com registros administrativos para entender a dinâmica recente.",
+      "faq": [
+        {
+          "question": "A cidade cresceu entre 2010 e 2022?",
+          "answer": "Sim. O Censo 2010 registrou 629.921 habitantes e o Censo 2022 registrou 697.054, um crescimento de 10,66%."
+        },
+        {
+          "question": "A população de São José está envelhecendo?",
+          "answer": "Sim. A parcela de pessoas com 65 anos ou mais aumentou de 6% em 2010 para 12% em 2022, segundo o Censo."
+        },
+        {
+          "question": "As estimativas do IBGE para 2025 e 2026 confirmam o crescimento?",
+          "answer": "As estimativas indicam população maior (727.078 em 2025 estimado; 729.153 para 2026 na página atual do IBGE), mas são projeções. Devem ser usadas com cautela até checagem com registros administrativos."
+        }
+      ],
+      "geo_summary": "Município de São José dos Campos (SP): crescimento de 629.921 (2010) para 697.054 (2022); distribuição por regiões locais conforme Censo 2022.",
+      "internal_links": [
+        "/populacao-sao-jose-dos-campos-crescimento",
+        "/bairros-crescimento-sjc",
+        "/demografia-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html",
+        "https://www.sjc.sp.gov.br/servicos/governanca/populacao/",
+        "IBGE - estimativas e projeções (2025/2026)",
+        "Registro Civil, DataSUS, CAGED"
+      ],
+      "verification_tasks": [
+        "Confirmar números mais recentes no site do IBGE e na Prefeitura de São José dos Campos.",
+        "Obter dados de nascimentos, óbitos e migração para separar contribuição de saldo migratório.",
+        "Verificar se há revisões de estimativas recentes (IBGE 2026)."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "02",
+      "cluster": "território",
+      "title": "Quais bairros de São José dos Campos mais cresceram nos últimos anos?",
+      "primary_keyword": "bairros de São José dos Campos",
+      "search_intent": "informacional/local",
+      "audience": "moradores, pesquisadores urbanos, gestores municipais",
+      "seo_title": "Bairros que mais cresceram em São José dos Campos",
+      "meta_description": "Orientações sobre como identificar quais bairros de São José dos Campos cresceram mais, fontes oficiais e perguntas a confirmar antes da divulgação.",
+      "slug": "bairros-cresceram-sao-jose-dos-campos",
+      "answer_first": "Resposta direta: Os dados do Censo 2022 oferecem distribuição por grandes regiões, mas não indicam, nesta fonte, uma lista pública consolidada dos bairros que mais cresceram; é preciso cruzar fontes censitárias e administrativas.",
+      "article_markdown": "Resposta direta: Os dados do Censo 2022 oferecem distribuição por grandes regiões, mas não indicam, nesta fonte, uma lista pública consolidada dos bairros que mais cresceram; é preciso cruzar fontes censitárias e administrativas.\n\nO que os dados oficiais mostram (confirmado)\n- O Censo 2022 traz a população por regiões administrativas: Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; Rural 15.212; São Francisco Xavier 1.443.\n- Esses números confirmam onde a população está concentrada por macro-área, mas não apontam diretamente quais bairros tiveram as maiores taxas de crescimento ano a ano.\n\nComo identificar bairros com maior crescimento (procedimento)\n1) Consultar os setores censitários do IBGE para comparar população por setor entre 2010 e 2022. Setores podem ser agregados para obter números por bairro.\n2) Cruzar com registros municipais: emplacamentos de unidades habitacionais, alvarás de construção, cadastro do IPTU e atualizações do cadastro imobiliário.\n3) Verificar registros de transferência de domicílio e mudanças de endereço em bancos de dados administrativos (quando acessíveis).\n4) Usar dados do Geoportal municipal ou base cartográfica do IBGE para mapear expansão de áreas de uso residencial.\n\nLimitações e perguntas de apuração\n- Nem todos os bairros têm limites oficiais padronizados; a agregação de setores censitários pode criar variações.\n- Dados administrativos (alvarás, IPTU) podem refletir regularização tardia de ocupações já existentes.\n- É necessário confirmar se crescimento populacional veio de novos empreendimentos, verticalização ou mudança interna.\n\nO que verificar antes da publicação\n- Setores censitários e tabelas do IBGE para 2010 e 2022 por setor.\n- Bases municipais: alvarás, IPTU, cadastro habitacional, geoportal.\n- Dados do Registro de Imóveis e de empresas de construção sobre lançamentos.\n\nRelevância local\nPara moradores e gestores, saber quais bairros cresceram ajuda a priorizar transporte, escolas e saúde. Para pesquisadores, a combinação de Censo e registros administrativos é essencial para análises confiáveis.",
+      "faq": [
+        {
+          "question": "O Censo 2022 indica quais bairros mais cresceram?",
+          "answer": "O Censo fornece dados por setor censitário e por grandes regiões administrativas; é preciso agregar setores para identificar crescimento por bairro."
+        },
+        {
+          "question": "Quais fontes devo consultar para saber crescimento por bairro?",
+          "answer": "IBGE (setores censitários 2010 e 2022), cadastro municipal (IPTU, alvarás), Geoportal e registros de obras."
+        }
+      ],
+      "geo_summary": "Análise focada em setores censitários e bases municipais de São José dos Campos (SP) para identificar crescimento por bairros dentro das regiões Sul, Leste, Centro, Oeste, Sudeste e Norte.",
+      "internal_links": [
+        "/populacao-sao-jose-dos-campos-crescimento",
+        "/demografia-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE - setores censitários 2010 e 2022",
+        "Geoportal e cadastro imobiliário da Prefeitura de São José dos Campos",
+        "IPTU municipal, alvarás de construção, Registro de Imóveis",
+        "SEADE e bases estaduais de planejamento"
+      ],
+      "verification_tasks": [
+        "Obter setores censitários 2010 e 2022 do IBGE e mapear para os bairros locais.",
+        "Solicitar dados de alvarás e atualizações do cadastro imobiliário na Prefeitura.",
+        "Confirmar limites oficiais de bairros e pequenas áreas com a secretaria municipal competente."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "03",
+      "cluster": "demografia",
+      "title": "Quem mora em São José dos Campos: perfil da população por idade, renda e região",
+      "primary_keyword": "habitantes de São José dos Campos",
+      "search_intent": "informacional/analítico",
+      "audience": "pesquisadores, planejadores, moradores interessados em perfil demográfico",
+      "seo_title": "Perfil dos habitantes de São José dos Campos por idade e região",
+      "meta_description": "Resumo dos perfis demográficos confirmados por idade e região em São José dos Campos (Censo 2022) e orientações sobre onde obter dados de renda e educação.",
+      "slug": "perfil-habitantes-sao-jose-dos-campos",
+      "answer_first": "Resposta direta: O Censo 2022 confirma envelhecimento e distribuição por regiões; dados de renda e escolaridade exigem consulta a bases específicas (PNAD/RAIS/INEP) para detalhes.",
+      "article_markdown": "Resposta direta: O Censo 2022 confirma envelhecimento e distribuição por regiões; dados de renda e escolaridade exigem consulta a bases específicas (PNAD/RAIS/INEP) para detalhes.\n\nFatos confirmados (Censo 2022)\n- População total: 697.054 habitantes.\n- Distribuição por regiões: Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; Rural 15.212; São Francisco Xavier 1.443.\n- Urbanos: 681.842; rurais: 15.212.\n- Estrutura etária: redução da parcela 0–14 anos (de 22% para 18%) e aumento de 65+ (de 6% para 12%).\n\nO que falta e como conseguir (renda, educação, ocupação)\n- Renda média por domicílio e por pessoa não está explícita nos números que recebemos. Fontes para consulta: PNAD/IBGE, RAIS, Novo CAGED (emprego formal), e estudos do Seade.\n- Escolaridade e perfil ocupacional: INEP (para indicadores educacionais), RAIS e CAGED (para empregos formais), e o setor de Saúde (DataSUS/CNES) para profissionais da saúde.\n- Para estudos por região dentro do município, é preciso combinar setores censitários do IBGE com dados administrativos municipais (IPTU, Cadastro Social).\n\nInterpretação para políticas públicas\n- Envelhecimento exige revisão de planejamento de saúde, transporte acessível e habitação adaptada.\n- Menor participação relativa de crianças tende a impactar demanda por matrícula em creches e escolas primárias ao longo do tempo.\n- A distribuição por região ajuda a calibrar alocação de unidades de saúde e vagas escolares, desde que complementada por dados de renda e emprego.\n\nPerguntas abertas e apuração necessária\n- Qual é a distribuição de renda por regiões e faixa etária dentro do município?\n- Como se distribuem níveis de escolaridade por região e geração?\nEssas perguntas requerem cruzamento de Censo com PNAD/RAIS/CAGED e bases municipais.\n\nRecomendação para pesquisadores\nCombine Censo 2010/2022 por setor censitário com RAIS/CAGED e bases municipais para produzir perfis por bairro e elaborar indicadores de desigualdade e necessidades locais.",
+      "faq": [
+        {
+          "question": "Qual é a faixa etária predominante em São José dos Campos?",
+          "answer": "Houve redução da parcela de 0–14 anos (22% para 18%) e aumento da população com 65 anos ou mais (6% para 12%), segundo o Censo 2022."
+        },
+        {
+          "question": "Onde encontro dados sobre renda dos habitantes?",
+          "answer": "Dados de renda exigem consulta ao PNAD/IBGE, RAIS e bases municipais; o Censo traz informações úteis, mas o detalhamento por renda costuma vir de pesquisas complementares."
+        },
+        {
+          "question": "Os dados por região indicam desigualdade interna?",
+          "answer": "A distribuição por região mostra concentração maior no Sul e Leste, mas para medir desigualdade é necessário cruzar com renda, escolaridade e condições de moradia."
+        }
+      ],
+      "geo_summary": "Perfil demográfico por região do município de São José dos Campos (SP) com base no Censo 2022 e indicação das fontes necessárias para renda e escolaridade.",
+      "internal_links": [
+        "/populacao-sao-jose-dos-campos-crescimento",
+        "/bairros-cresceram-sjc",
+        "/expansao-urbana-sjc"
+      ],
+      "sources_to_consult": [
+        "IBGE - Censo 2010 e 2022 (setores censitários)",
+        "PNAD e bases do IBGE sobre rendimento",
+        "RAIS, Novo CAGED, Seade, INEP"
+      ],
+      "verification_tasks": [
+        "Acessar microdados do Censo por setor para cruzar com indicadores de rendimento.",
+        "Obter RAIS/CAGED para mapear empregos formais por setor e idade.",
+        "Confirmar dados educacionais com INEP e secretarias locais de educação."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "04",
+      "cluster": "migração",
+      "title": "São José dos Campos está atraindo moradores de outras cidades?",
+      "primary_keyword": "morar em São José dos Campos",
+      "search_intent": "informacional/analítico",
+      "audience": "pessoas considerando mudar, pesquisadores de mobilidade, gestores locais",
+      "seo_title": "São José dos Campos atrai moradores de outras cidades?",
+      "meta_description": "Análise do que os dados mostram sobre atração de moradores para São José dos Campos e quais fontes consultar para confirmar fluxos migratórios.",
+      "slug": "morar-sao-jose-dos-campos-migracao",
+      "answer_first": "Resposta direta: Os números mostram crescimento populacional, mas não há, nos dados citados, uma medida direta e publicada dos fluxos migratórios detalhados — essa informação exige cruzamento de fontes.",
+      "article_markdown": "Resposta direta: Os números mostram crescimento populacional, mas não há, nos dados citados, uma medida direta e publicada dos fluxos migratórios detalhados — essa informação exige cruzamento de fontes.\n\nFatos confirmados\n- Crescimento do total populacional entre 2010 e 2022 (629.921 para 697.054) e estimativas do IBGE para 2025/2026.\n- Mudança na estrutura etária (aumento de 65+; redução de 0–14).\n\nPor que ainda não se pode afirmar com certeza sobre atração migratória\nO crescimento populacional pode decorrer de saldo migratório positivo, diferença entre nascimentos e óbitos, ou ambos. Para saber se a cidade tem sido um polo de atração é preciso checar fluxos migratórios explícitos.\n\nFontes e método para apurar atração de moradores\n- Migrantes entre municípios: usar os indicadores de migração do IBGE (microdados do Censo), que registram município de residência anterior.\n- Movimentação por emprego: CAGED e RAIS mostram transferências de vínculos formais e contratações que podem indicar atração por trabalho.\n- Registro Civil e declarações de mudança de endereço em bases municipais, também úteis para medir transferências domiciliares.\n- Mercado imobiliário (lançamentos e vendas) pode indicar demanda de novos moradores.\n\nHipóteses plausíveis (requerem verificação)\n- A presença de polos industriais e tecnológicos poderia atrair trabalhadores; isso é hipótese que precisa de checagem com RAIS/CAGED e dados do Parque Tecnológico.\n- Oferta de serviços e infraestrutura urbana pode ser fator de atração, mas demanda pesquisa qualitativa e dados sobre motivos de mudança.\n\nO que verificar antes de publicar conclusões\n- Microdados de migração do Censo 2022 (município de residência 5 anos antes) e séries históricas.\n- RAIS/CAGED por município de contratação e origem dos trabalhadores.\n- Dados do mercado imobiliário local e cadastros municipais de mudança de endereço.\n\nOrientação prática\nQuem pensa em mudar para São José dos Campos deve consultar oferta de emprego, custo de moradia e serviços por região. Pesquisadores devem cruzar IBGE, RAIS, CAGED e bases municipais para medir efetivamente a atração migratória.",
+      "faq": [
+        {
+          "question": "Os dados do Censo mostram de onde vieram os novos moradores?",
+          "answer": "O Censo tem informação sobre local de residência anterior no microdados, mas é preciso consulta direta aos microdados do IBGE para quantificar fluxos entre municípios."
+        },
+        {
+          "question": "Posso usar CAGED e RAIS para inferir atração por empregos?",
+          "answer": "Sim, RAIS e CAGED ajudam a identificar vagas formais e transferências, mas devem ser combinados com dados do Censo para uma visão completa."
+        }
+      ],
+      "geo_summary": "Avaliação dos fluxos migratórios envolvendo São José dos Campos (SP): crescimento confirmado, mas fluxos entre municípios precisam ser verificados em microdados do IBGE e bases administrativas.",
+      "internal_links": [
+        "/populacao-sao-jose-dos-campos-crescimento",
+        "/bairros-cresceram-sjc",
+        "/demografia-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE - microdados do Censo (variáveis de migração)",
+        "RAIS, Novo CAGED",
+        "Prefeitura de São José dos Campos - cadastros de mudança e IPTU",
+        "Mercado imobiliário local e dados do Parque Tecnológico"
+      ],
+      "verification_tasks": [
+        "Extrair e analisar variável de local de residência anterior nos microdados do Censo 2022.",
+        "Solicitar RAIS/CAGED para identificar origem dos contratados e transferidos por empresas locais.",
+        "Checar registros municipais de mudança de endereço e lançamentos imobiliários."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "05",
+      "cluster": "urbanismo",
+      "title": "Como a expansão urbana está mudando a vida dos moradores",
+      "primary_keyword": "expansão urbana São José dos Campos",
+      "search_intent": "informacional/prático",
+      "audience": "residentes, urbanistas, gestores públicos",
+      "seo_title": "Expansão urbana em São José dos Campos: impactos para moradores",
+      "meta_description": "Análise dos impactos observados e as questões a investigar sobre a expansão urbana em São José dos Campos, com orientações para moradores e pesquisadores.",
+      "slug": "expansao-urbana-sao-jose-dos-campos-impactos",
+      "answer_first": "Resposta direta: A expansão urbana em São José dos Campos está associada a mudanças na distribuição populacional e demanda por serviços; efeitos específicos precisam ser confirmados com dados municipais e setoriais.",
+      "article_markdown": "Resposta direta: A expansão urbana em São José dos Campos está associada a mudanças na distribuição populacional e demanda por serviços; efeitos específicos precisam ser confirmados com dados municipais e setoriais.\n\nO que se sabe com base em dados oficiais\n- O Censo 2022 mostra concentração maior da população nas regiões Sul (237.572) e Leste (181.463), com 681.842 pessoas em áreas urbanas e 15.212 em áreas rurais.\n- Esses números confirmam uma cidade essencialmente urbana com diferentes densidades por região.\n\nPossíveis impactos observáveis (hipóteses a verificar)\n- Pressão sobre infraestrutura: expansão residencial costuma aumentar demanda por água, esgoto, transporte e escolas; isso é plausível, mas requer checagem com dados de consumo, investimentos e cobertura de serviços.\n- Mudanças no uso do solo: conversão de áreas rurais ao redor em loteamentos ou condomínios pode alterar cobertura vegetal e risco de enchentes; é preciso analisar imagens de uso do solo e registros de licenciamento.\n- Mobilidade: aumento de população em determinadas regiões pode alterar padrões de deslocamento e gerar maiores tempos de viagem; essa hipótese precisa de dados de tráfego (DER-SP, transporte municipal) e pesquisas domiciliares de deslocamento.\n\nO que checar para quantificar impactos\n- Alvarás e licenças de parcelamento do solo e construção (Prefeitura).\n- Dados de consumo de água e esgoto, e cobertura de redes (da autarquia local responsável).\n- Estatísticas de transporte público, frota de veículos e indicadores de tráfego (DER-SP e Prefeitura).\n- Imagens de uso do solo e séries temporais (INPE, QGIS/Geoportal municipal).\n\nRecomendações práticas para moradores\n- Ao considerar mudança ou investimento, verifique infraestrutura disponível (escolas, saúde, transporte) e planos de expansão locais.\n- Para comunidades, documentar mudanças registrando alvarás e impactos locais auxilia na negociação com a Prefeitura.\n\nPerguntas abertas\n- Quais bairros sofreram maior conversão de solo? Qual o ritmo de novas ligações de infraestrutura? Essas respostas exigem cruzamento de bases e análise cartográfica.",
+      "faq": [
+        {
+          "question": "A expansão urbana aumentou problemas de enchentes?",
+          "answer": "A conversão de uso do solo pode agravar riscos de enchentes, mas é necessário analisar registros de drenagem, imagens de uso do solo e relatórios técnicos municipais para confirmar qualquer relação."
+        },
+        {
+          "question": "Como saber se um bairro tem infraestrutura suficiente para novos moradores?",
+          "answer": "Consultar a Prefeitura sobre planos de expansão de água/esgoto, transporte e vagas escolares, além de verificar indicadores de cobertura desses serviços."
+        },
+        {
+          "question": "Que fontes consultar para estudar a expansão urbana?",
+          "answer": "INPE (imagens e uso do solo), Geoportal municipal, alvarás e cadastro da Prefeitura, DER-SP e dados ambientais municipais."
+        }
+      ],
+      "geo_summary": "Discussão sobre efeitos da expansão urbana em São José dos Campos (SP), com foco em distribuição regional (Sul, Leste, Centro etc.) e indicação de bases para mensurar impactos locais.",
+      "internal_links": [
+        "/bairros-cresceram-sjc",
+        "/populacao-sao-jose-dos-campos-crescimento",
+        "/demografia-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "Prefeitura de São José dos Campos - alvarás, cadastro e planos diretores",
+        "INPE - imagens de uso do solo",
+        "DER-SP, IBGE (setores censitários), DataSUS (infraestrutura de saúde)",
+        "Parque Tecnológico e demais órgãos setoriais"
+      ],
+      "verification_tasks": [
+        "Mapear alvarás e licenças de parcelamento dos últimos anos com a Prefeitura.",
+        "Analisar séries de imagens de satélite (INPE) para detectar conversão de uso do solo.",
+        "Recolher dados de consumo e cobertura de água/esgoto, transporte e escolas por região."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "06",
+      "cluster": "moradia",
+      "title": "Quanto custa morar em São José dos Campos? Uma análise do custo de vida",
+      "primary_keyword": "custo de vida São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Quanto custa morar em São José dos Campos — análise do custo de vida",
+      "meta_description": "Análise do custo de vida em São José dos Campos: componentes principais (moradia, transporte, saúde, alimentação), dados demográficos confirmados e fontes para consultar preços e rendas por bairro.",
+      "slug": "quanto-custa-morar-sao-jose-dos-campos",
+      "answer_first": "O custo de vida em São José dos Campos depende principalmente de moradia, transporte, alimentação e saúde; dados oficiais demográficos ajudam a contextualizar, mas preços específicos por bairro precisam ser verificados com fontes locais.",
+      "article_markdown": "Resumo direto\nO custo de vida em São José dos Campos é determinado por cinco componentes principais: habitação (aluguel/condomínio/preço de compra), transporte, alimentação, saúde e serviços públicos. Este texto separa fatos demográficos confirmados de hipóteses e indica quais bases consultar para preços e rendas.\nFatos confirmados\n- População do município (Censo 2022): 697.054 habitantes; em 2010 eram 629.921 (crescimento de 10,66%).\n- Estimativa IBGE: 2025 cerca de 727.078; página atual apresenta 729.153 para 2026.\n- Distribuição por regiões (Censo 2022): Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; Rural 15.212; São Francisco Xavier 1.443.\n- Envelhecimento: parcela de 65+ aumentou de 6% (2010) para 12% (2022); crianças 0–14 caiu de 22% para 18%.\nO que precisamos medir (preços reais)\nNão há números de preço por unidade neste texto; para estimar o custo de vida diário e mensal é preciso reunir:\n- Valores médios de aluguel e preço do m² por bairro (portais imobiliários, corretoras locais, Secovi).\n- Condomínio, IPTU e consumo médio de água, gás e energia (dados de concessionárias locais e Prefeitura).\n- Preços de cesta básica e alimentação em supermercados e feiras (IBGE POF ou levantamentos locais).\n- Tarifas de transporte público, custo médio de combustível e tempo de deslocamento (Prefeitura/DER‑SP).\n- Gastos com saúde: planos de saúde médios, consultas e internações; uso do SUS (DataSUS, CNES).\nAnálise responsável e hipóteses\nHipótese plausível: moradia é a maior parcela do custo para famílias urbanas, especialmente nas regiões Sul e Leste com maior população — mas isso precisa ser testado com dados de preços por bairro e renda média (RAIS/Novo Caged/PNAD).\nOutra hipótese: envelhecimento da população tende a aumentar despesas com saúde e assistência, afetando orçamento doméstico; confirmar com dados de utilização de serviços de saúde (DataSUS, CNES) e gasto por domicílio.\nO que verificar antes de publicar preços\n- Aluguéis médios e faixas por bairro.\n- Preço médio do m² para compra e variação anual.\n- Tarifas de transporte e estimativa de gasto mensal por trabalhador.\n- Índice de inflação local (IPCA municipal, se disponível) e variação recente dos itens de consumo.\nFontes e bases para consulta\nIBGE (Censo e POF), Prefeitura de São José dos Campos (dados abertos), Seade, Novo Caged, RAIS, DataSUS, CNES, Secovi Vale, portais imobiliários locais, concessionárias de energia e água, DER‑SP.\nFatos confirmados x perguntas em aberto\nFatos: população, distribuição regional e envelhecimento (citados acima). Questões em aberto: valores médios de moradia, composição detalhada do gasto familiar por região e impacto do envelhecimento nas despesas.\nFAQs\n1) Quanto pesa a moradia no orçamento? Resposta: costuma ser a maior parcela, mas é preciso verificar aluguéis e condomínios por bairro para quantificar. 2) Onde buscar dados de preços? Resposta: portais imobiliários, Secovi, Prefeitura (dados abertos), IBGE e pesquisa direta com corretores. 3) O envelhecimento já impacta serviços? Resposta: sim, há aumento de população 65+, mas é preciso checar uso de serviços de saúde e assistência. 4) Este texto traz valores? Resposta: não; indica fontes e verificação necessária.\nGEO e SEO\nCidade: São José dos Campos (SP). Palavra-chave: custo de vida São José dos Campos. Público: moradores e pesquisadores locais.\nLinks internos sugeridos\n/aluguel-sao-jose-dos-campos\n/bairros-servicos-sao-jose-dos-campos\nFontes a consultar\nIBGE, Prefeitura SJC, Seade, Novo Caged, RAIS, DataSUS, CNES, Secovi, portais imobiliários, dados abertos municipais.\nTarefas de verificação\n- Levantamento de aluguéis por região e m².\n- Pesquisa de tarifas e consumos médios domésticos.\n- Consulta sobre uso de serviços de saúde por faixa etária.\nPublication status: draft",
+      "faq": [
+        {
+          "question": "Quanto pesa a moradia no orçamento familiar em São José dos Campos?",
+          "answer": "Geralmente é a maior parcela do gasto doméstico, mas é preciso consultar aluguéis e custos de condomínio por bairro para quantificar com precisão."
+        },
+        {
+          "question": "Onde encontro preços médios de aluguel e compra?",
+          "answer": "Portais imobiliários locais, Secovi Vale, registros de transações da Prefeitura (dados abertos) e relatórios de mercado imobiliário."
+        },
+        {
+          "question": "O envelhecimento da população já altera o custo de vida?",
+          "answer": "Há confirmação de aumento da parcela de 65+, o impacto sobre despesas depende de dados de utilização de saúde e assistência que precisam ser levantados."
+        }
+      ],
+      "geo_summary": "São José dos Campos (SP): população Censo 2022 697.054; distribuição regional com maior população no Sul e Leste; urbanização predominante; envelhecimento da população.",
+      "internal_links": [
+        "/aluguel-sao-jose-dos-campos",
+        "/aluguel-sao-jose-dos-campos-regioes-caras",
+        "/bairros-servicos-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2022, POF e estimativas 2025/2026)",
+        "Prefeitura de São José dos Campos (dados abertos, guias fiscais)",
+        "Seade",
+        "Novo Caged",
+        "RAIS",
+        "DataSUS",
+        "CNES",
+        "Secovi Vale",
+        "portais imobiliários locais",
+        "concessionárias de água e energia",
+        "DER-SP"
+      ],
+      "verification_tasks": [
+        "Coletar valores médios de aluguel e preço do m² por bairro",
+        "Verificar média de condomínio e IPTU por tipologia",
+        "Levantamento de preços de cesta básica e alimentação locais",
+        "Obter tarifas de transporte público e custos médios de deslocamento"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "07",
+      "cluster": "moradia",
+      "title": "Aluguel em São José dos Campos: quais regiões ficaram mais caras?",
+      "primary_keyword": "aluguel São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Aluguel em São José dos Campos — regiões que subiram mais",
+      "meta_description": "Análise das tendências de aluguel em São José dos Campos: onde concentrar checagem de preços, como a distribuição populacional e renda influenciam o mercado e quais fontes consultar.",
+      "slug": "aluguel-sao-jose-dos-campos",
+      "answer_first": "Tendências apontam variação de preços entre regiões; é preciso cruzar dados de transações, oferta e renda por distrito para afirmar quais áreas encareceram mais.",
+      "article_markdown": "Resposta direta\nNão é possível afirmar neste texto quais regiões ficaram objetivamente mais caras sem dados de preços recentes por bairro; apresento os passos para checagem e os dados demográficos que contextualizam a demanda.\nContexto demográfico relevante\n- População total (Censo 2022): 697.054. Regiões com maiores contingentes: Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940.\n- Urbanização: 681.842 habitantes em área urbana e 15.212 em área rural.\nComo as características demográficas influenciam o aluguel\n- Regiões maiores em população (Sul, Leste) têm maior demanda por moradia, o que pode pressionar aluguéis dependendo da oferta.\n- Centro tende a concentrar empregos e serviços; isso costuma aumentar demanda por aluguel de curta e média duração, mas efeito real depende de estoque de imóveis.\n- Envelhecimento (65+ subiu de 6% para 12%) pode alterar demanda por tipologias menores ou adaptadas, influenciando preços de certos imóveis.\nQuais dados coletar para afirmar onde uparam os aluguéis\n- Valores médios de aluguel por bairro e variação anual (portais imobiliários, Secovi, cartórios de registro de imóveis).\n- Número de contratos de aluguel registrados e oferta de imóveis vagos (Prefeitura e dados de transações).\n- Renda média e empregos formais por região (RAIS, Novo Caged, IBGE) para avaliar capacidade de pagamento.\n- Novas autorizações de construção e lançamentos imobiliários (Prefeitura, dados de alvarás).\nMetodologia recomendada\n1) Mapear preços médios e mediana por bairro nos últimos 12–24 meses. 2) Calcular variação percentual por região. 3) Cruzar com oferta (estoque de imóveis à venda/aluguel) e indicadores de rendimento.\nFatos confirmados x hipóteses\nFatos: distribuição populacional por regiões e envelhecimento (dados do Censo 2022). Hipóteses: regiões com maior população e serviços (Sul, Leste, Centro) possivelmente apresentam maior pressão de preços — precisa ser testado com preços reais.\nFontes a consultar\nIBGE (Censo), Prefeitura de SJC (dados abertos, alvarás), Secovi Vale, portais imobiliários locais, cartórios de registro de imóveis, RAIS, Novo Caged, Seade.\nO que verificar antes de publicar rankings por região\n- Coletar conjunto de anúncios e contratos fechados para evitar viés de oferta.  - Checar liquidez do mercado (quantos imóveis foram alugados) para cada região. - Validar se aumentos se referem a aluguéis nominais ou já corrigidos pela inflação.\nFAQs\n1) Posso confiar em anúncios online para saber onde os aluguéis subiram? Resposta: anúncios mostram oferta e tendência, mas devem ser cruzados com contratos fechados e registros oficiais. 2) O Centro é sempre mais caro? Resposta: nem sempre; depende do estoque e do perfil da demanda. 3) Onde buscar dados sobre alvarás e lançamentos? Resposta: Prefeitura de São José dos Campos (dados abertos) e Secovi.\nGEO e SEO\nCidade: São José dos Campos (SP). Palavra-chave: aluguel São José dos Campos. Público: moradores procurando locação e pesquisadores do mercado imobiliário.\nLinks internos sugeridos\n/quanto-custa-morar-sao-jose-dos-campos\n/bairros-servicos-sao-jose-dos-campos\nSources to consult\nIBGE, Prefeitura SJC, Secovi Vale, RAIS, Novo Caged, cartórios de imóveis, portais imobiliários, Seade.\nTarefas de verificação\n- Levantar preços por bairro últimos 12–24 meses. - Confirmar número de contratos e vacância por região. - Ajustar variações pela inflação local. Publication status: draft",
+      "faq": [
+        {
+          "question": "Como saber se uma região ficou mais cara para alugar?",
+          "answer": "É preciso comparar preços médios e mediana de aluguéis por bairro em um período (ex.: 12–24 meses), cruzando com dados de contratos fechados e oferta disponível."
+        },
+        {
+          "question": "Portais de anúncio são suficientes para análise?",
+          "answer": "Não: anúncios indicam oferta, mas devem ser cruzados com registros de contratos e dados oficiais para evitar viés."
+        },
+        {
+          "question": "Quais fontes públicas checar para alvarás e lançamentos?",
+          "answer": "Prefeitura de São José dos Campos (dados abertos) e Secovi Vale para informações sobre lançamentos e permissões."
+        }
+      ],
+      "geo_summary": "Análise do aluguel em São José dos Campos com foco em variação por região; populações maiores no Sul e Leste podem pressionar demanda, mas é necessária checagem de preços.",
+      "internal_links": [
+        "/quanto-custa-morar-sao-jose-dos-campos",
+        "/regioes-diferencas-sjc"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2022)",
+        "Prefeitura de São José dos Campos (dados abertos)",
+        "Secovi Vale",
+        "portais imobiliários locais",
+        "cartórios de registro de imóveis",
+        "RAIS",
+        "Novo Caged",
+        "Seade"
+      ],
+      "verification_tasks": [
+        "Coletar dados de anúncios e contratos de aluguel por bairro",
+        "Calcular variação nominal e real dos aluguéis",
+        "Verificar estoque/lançamentos via alvarás municipais"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "08",
+      "cluster": "regiões",
+      "title": "A diferença entre morar nas regiões central, sul, norte, leste e oeste",
+      "primary_keyword": "regiões de São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Diferenças entre as regiões de São José dos Campos — centro, sul, norte, leste, oeste",
+      "meta_description": "Comparação das condições demográficas e de serviço entre as regiões de São José dos Campos usando dados do Censo 2022 e orientações sobre o que verificar para comparar custo, transporte e acesso a serviços.",
+      "slug": "diferenca-morar-regioes-sao-jose-dos-campos",
+      "answer_first": "As diferenças entre as regiões de São José dos Campos são visíveis em população, função urbana e demanda por serviços; dados do Censo 2022 ajudam a contextualizar, mas indicadores de renda, oferta imobiliária e serviços precisam ser levantados para comparação completa.",
+      "article_markdown": "Resposta direta\nAs regiões (Centro, Sul, Norte, Leste, Oeste, Sudeste) apresentam perfis e densidades diferentes; o Censo 2022 mostra onde estão as maiores populações, mas comparar qualidade de vida exige checar renda, oferta de serviços e infraestrutura.\nFatos demográficos confirmados (Censo 2022)\n- Sul: 237.572 habitantes.\n- Leste: 181.463 habitantes.\n- Centro: 72.401 habitantes.\n- Oeste: 64.482 habitantes.\n- Sudeste: 62.541 habitantes.\n- Norte: 61.940 habitantes.\n- Área rural: 15.212; São Francisco Xavier: 1.443.\nAspectos para comparar entre regiões\n- Acesso a serviços: presença de escolas, unidades de saúde, comércio e transporte público deve ser mapeada por região (CNES, DataSUS, INEP, Prefeitura).\n- Mercado de trabalho: concentração de empregos formais e setores predominantes (indústria, serviços, tecnologia) influenciam deslocamentos e renda (RAIS, Novo Caged).\n- Oferta habitacional: tipos de moradia (apartamento, casa), estoque novo e lançamentos variam entre Centro e periferia (dados de alvarás municipais e Secovi).\n- Infraestrutura e mobilidade: tempo médio de deslocamento, corredores de ônibus, rodovias próximas e acesso ao transporte intermunicipal (DER‑SP, ANTT, Prefeitura).\nHipóteses e perguntas de apuração\n- Hipótese: Sul e Leste, por terem maior população, podem concentrar mais comércio e serviços, mas é preciso confirmar com mapeamento de estabelecimentos e uso de serviços.\n- Pergunta: Qual região tem melhor relação custo/benefício entre preço de moradia e acesso a empregos? Exige cruzamento de preço do m², aluguéis e localização de vagas de trabalho.\nO que verificar antes de publicar comparativos de qualidade de vida\n- Renda média por região e participação de setores econômicos.\n- Tempo médio de deslocamento casa-trabalho por região.\n- Número de leitos, unidades de atenção básica e escolas por 10 mil habitantes.\nFontes recomendadas\nIBGE (Censo), Prefeitura SJC, DataSUS, CNES, INEP, RAIS, Novo Caged, DER‑SP, ANTT, Secovi Vale e dados abertos municipais.\nFAQs\n1) Qual região tem mais população? Resposta: Sul (237.572) e Leste (181.463) têm os maiores contingentes, segundo Censo 2022. 2) Centro é o melhor para trabalhar? Resposta: Centro concentra serviços, mas avaliação depende da oferta de empregos e tempo de deslocamento de cada pessoa. 3) Onde encontrar dados sobre serviços por região? Resposta: CNES para saúde, INEP para escolas, Prefeitura para infraestrutura.\nGEO e SEO\nCidade: São José dos Campos (SP). Palavra-chave: regiões de São José dos Campos. Público: moradores interessados em mudança e pesquisadores urbanísticos.\nLinks internos sugeridos\n/aluguel-sao-jose-dos-campos\n/bairros-servicos-sao-jose-dos-campos\nSources to consult\nIBGE, Prefeitura SJC, DataSUS, CNES, INEP, RAIS, Novo Caged, DER‑SP, ANTT, Seade, dados abertos municipais.\nVerification tasks\n- Mapear serviços e empregos por região com dados oficiais. - Levantar aluguéis e preços do m² por bairro. Publication status: draft",
+      "faq": [
+        {
+          "question": "Qual região tem maior população em São José dos Campos?",
+          "answer": "Segundo Censo 2022, a região Sul tem 237.572 habitantes, seguida pela Leste com 181.463."
+        },
+        {
+          "question": "Centro é melhor para morar se eu trabalho no centro?",
+          "answer": "Depende: o Centro concentra serviços e empregos, mas é preciso comparar tempo de deslocamento e custos de moradia para cada caso."
+        }
+      ],
+      "geo_summary": "Comparativo das regiões de São José dos Campos com dados do Censo 2022; Sul e Leste concentram maior população; recomenda-se levantamento de renda, serviços e mobilidade por região.",
+      "internal_links": [
+        "/quanto-custa-morar-sao-jose-dos-campos",
+        "/aluguel-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2022)",
+        "Prefeitura de São José dos Campos",
+        "DataSUS",
+        "CNES",
+        "INEP",
+        "RAIS",
+        "Novo Caged",
+        "DER-SP",
+        "ANTT",
+        "Seade",
+        "dados abertos municipais"
+      ],
+      "verification_tasks": [
+        "Mapear número de estabelecimentos de ensino e saúde por região",
+        "Levantamento de empregos formais e setores por região",
+        "Coletar preços médios de moradia por bairro"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "09",
+      "cluster": "serviços",
+      "title": "Quais bairros têm maior acesso a escolas, saúde, transporte e comércio?",
+      "primary_keyword": "bairros São José dos Campos serviços",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Bairros com melhor acesso a escolas, saúde, transporte e comércio em São José dos Campos",
+      "meta_description": "Mapa de verificação para identificar bairros com maior acesso a serviços em São José dos Campos: que dados usar (CNES, INEP, Prefeitura) e quais indicadores levantar antes de afirmar rankings por bairro.",
+      "slug": "bairros-sao-jose-dos-campos-servicos",
+      "answer_first": "Alguns bairros concentram mais serviços, mas é necessário cruzar bases oficiais (CNES, INEP, Prefeitura) para identificar claramente quais têm melhor acesso a escolas, saúde, transporte e comércio.",
+      "article_markdown": "Resposta direta\nNão é possível listar bairros com maior acesso a todos os serviços sem cruzar dados oficiais; abaixo descrevo os indicadores úteis e as fontes para compor um mapa confiável de acesso a educação, saúde, transporte e comércio.\nIndicadores a levantar por bairro\n- Educação: número de escolas públicas e privadas, matrículas, índice de atendimento (INEP, Prefeitura local).\n- Saúde: unidades básicas, postos, hospitais e leitos por 10 mil habitantes (CNES, DataSUS).\n- Transporte: linhas de ônibus, frequência, terminais e tempo médio de deslocamento para eixos de emprego (Prefeitura, DER‑SP).\n- Comércio e serviços: densidade de estabelecimentos comerciais e serviços essenciais (Prefeitura — alvarás e dados abertos; IBGE para atividade econômica).\nFatos demográficos a considerar\n- População por região (Censo 2022): Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; Rural 15.212.\nComo montar o mapa de acesso\n1) Reunir bases: CNES para saúde, INEP para educação, Prefeitura para alvarás e transporte, IBGE para população. 2) Calcular indicadores por 10 mil habitantes ou por distância média (por exemplo, tempo até a escola/UBS mais próxima). 3) Produzir um ranking por serviço e um índice composto de acesso.\nHipóteses e verificações necessárias\n- Hipótese: bairros no Centro e Sul têm maior oferta de comércio e serviços por km²; precisa ser confirmado medindo densidade de estabelecimentos e fluxo de clientes. - Pergunta: quais bairros têm melhor tempo de deslocamento até hospitais de maior complexidade? Requer dados de localização e tempos médios de trânsito.\nRiscos de interpretação\n- Usar apenas número absoluto de estabelecimentos pode favorecer bairros populosos; é preciso ajustar por população e por área. - Analisar apenas oferta sem considerar qualidade dos serviços leva a conclusões incompletas.\nFontes a consultar\nCNES, DataSUS, INEP (censo escolar), Prefeitura de São José dos Campos (dados abertos, transporte, alvarás), IBGE, Seade, DER‑SP.\nO que verificar antes de publicar listas de bairros\n- Atualizar localização e status de unidades de saúde e escolas (funcionamento e horários). - Checar linhas e horários de transporte público vigentes. - Verificar alvarás e atividades comerciais atualizadas.\nFAQs\n1) Onde encontro dados de unidades de saúde por bairro? Resposta: CNES e DataSUS, complementados pela Prefeitura. 2) Como medir acesso efetivo à educação? Resposta: combinar número de vagas/matrículas por escola com distância média e transporte escolar.\nGEO e SEO\nCidade: São José dos Campos (SP). Palavra-chave: bairros São José dos Campos serviços. Público: moradores que avaliam mudança e pesquisadores de planejamento.\nLinks internos sugeridos\n/regioes-diferencas-sjc\n/quanto-custa-morar-sao-jose-dos-campos\nSources to consult\nCNES, DataSUS, INEP, IBGE, Prefeitura SJC, Seade, DER-SP, dados abertos municipais.\nVerification tasks\n- Geocodificar unidades de saúde e escolas e calcular tempos médios de deslocamento por bairro. - Levantar densidade de comércio por área. Publication status: draft",
+      "faq": [
+        {
+          "question": "Como saber se um bairro tem boas escolas?",
+          "answer": "Verifique número de escolas, matrículas por vaga e indicadores de desempenho (INEP) e considere distância e transporte escolar."
+        },
+        {
+          "question": "Onde checar unidades de saúde ativas?",
+          "answer": "CNES e DataSUS fornecem lista de unidades e informações de capacidade; confirme funcionamento com a Prefeitura local."
+        }
+      ],
+      "geo_summary": "Guia para mapear acesso a serviços por bairro em São José dos Campos usando CNES (saúde), INEP (educação), Prefeitura (transporte e alvarás) e IBGE para população.",
+      "internal_links": [
+        "/regioes-diferencas-sjc",
+        "/aluguel-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "CNES",
+        "DataSUS",
+        "INEP",
+        "IBGE",
+        "Prefeitura de São José dos Campos",
+        "Seade",
+        "DER-SP",
+        "dados abertos municipais"
+      ],
+      "verification_tasks": [
+        "Geocodificar e confirmar status de escolas e unidades de saúde",
+        "Levantar linhas e frequências de transporte público por bairro",
+        "Calcular densidade de comércio por área"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "10",
+      "cluster": "desigualdade",
+      "title": "O crescimento imobiliário está aumentando ou reduzindo a desigualdade na cidade?",
+      "primary_keyword": "desigualdade urbana São José dos Campos",
+      "search_intent": "analytical",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Crescimento imobiliário e desigualdade em São José dos Campos — análise crítica",
+      "meta_description": "Avaliação preliminar sobre se o crescimento imobiliário em São José dos Campos amplia ou reduz desigualdades: separa dados do Censo 2022 de hipóteses e indica fontes e verificações necessárias.",
+      "slug": "crescimento-imobiliario-desigualdade-sjc",
+      "answer_first": "Não dá para afirmar categoricamente se o crescimento imobiliário aumentou ou reduziu a desigualdade sem cruzar dados de preços, renda, oferta habitacional e deslocamento; apresento indicativos e o que precisa ser verificado.",
+      "article_markdown": "Resposta direta\nO efeito do crescimento imobiliário sobre a desigualdade urbana em São José dos Campos não pode ser concluído apenas com dados demográficos; requer avaliação de preços, oferta de habitação, deslocamento, e mudanças na renda por região.\nFatos demográficos relevantes\n- População (Censo 2022): 697.054. Crescimento desde 2010: 10,66% (2010: 629.921). Prefeito informa taxa média anual de 1,65% entre 2010 e 2022. Estimativas IBGE: 727.078 (2025) e 729.153 (2026).\n- Distribuição regional: Sul (237.572) e Leste (181.463) concentram grande parte da população.\n- Estrutura etária mudou: 65+ passou de 6% para 12%; 0–14 de 22% para 18%.\nQuais evidências são necessárias para avaliar desigualdade\n- Preços de imóveis e aluguel por bairro ao longo do tempo para medir gentrificação ou expulsão de moradores.\n- Renda média e distribuição de renda por região (RAIS, PNAD, IBGE) para ver se ganhos econômicos são homogêneos.\n- Produção de moradia social e oferta de unidades populares (Prefeitura: alvarás, programa habitacional).\n- Acesso a serviços (saúde, educação, transporte) e tempo de deslocamento para empregos.\nHipóteses plausíveis\n- Hipótese A: Crescimento imobiliário recente pode concentrar oferta de imóveis de maior padrão em áreas centrais e Sul, elevando preços e reduzindo acessibilidade para famílias de menor renda. - Hipótese B: Expansão do mercado pode também aumentar oferta de imóveis e empregos, reduzindo desemprego e podendo melhorar renda média — efeito que depende de inclusão de políticas habitacionais.\nRiscos de interpretação\n- Correlacionar crescimento populacional com aumento da desigualdade exige cuidado: crescimento pode vir com ampliação de serviços ou com aumento de preços sem contrapartida social.\nO que verificar antes de publicar conclusões\n- Séries temporais de preços de venda e aluguel por bairro. - Variação da renda média e indicadores de pobreza por região. - Número de unidades habitacionais produzidas por faixa de renda e programas sociais executados.\nFontes a consultar\nIBGE (Censo e pesquisas), Prefeitura de SJC (programas habitacionais, alvarás), RAIS, Novo Caged, Seade, dados de transações imobiliárias, Secovi, INEP, DataSUS.\nFAQs\n1) Crescimento de prédios sempre aumenta desigualdade? Resposta: não necessariamente; depende do tipo de oferta e de políticas de habitação e emprego. 2) Como medir deslocamento forçado por gentrificação? Resposta: acompanhar mudanças no perfil de moradores, preços e número de contratos de locação encerrados por bairro.\nGEO e SEO\nCidade: São José dos Campos (SP). Palavra-chave: desigualdade urbana São José dos Campos. Público: pesquisadores urbanos e moradores interessados em política habitacional.\nLinks internos sugeridos\n/quanto-custa-morar-sao-jose-dos-campos\n/aluguel-sao-jose-dos-campos\nSources to consult\nIBGE, Prefeitura SJC, RAIS, Novo Caged, Seade, Secovi Vale, cartórios de imóveis, dados abertos municipais, DataSUS.\nVerification tasks\n- Colher séries de preços e aluguéis por bairro e por ano. - Mapear produção habitacional por faixa de renda e programas sociais executados. Publication status: draft",
+      "faq": [
+        {
+          "question": "O crescimento imobiliário necessariamente aumenta a desigualdade?",
+          "answer": "Não necessariamente; depende da natureza da oferta (luxo vs. social), políticas públicas e se há aumento de renda local compatível com os preços."
+        },
+        {
+          "question": "Quais indicadores mostram gentrificação?",
+          "answer": "Aumento rápido de preços de venda e aluguel, substituição de moradores de baixa renda, redução de contratos de longo prazo e mudanças no perfil de comércio e serviços; precisa ser medido com séries temporais e registros de contratos."
+        }
+      ],
+      "geo_summary": "Avaliação das possíveis relações entre crescimento imobiliário e desigualdade em São José dos Campos usando dados do Censo 2022 e indicando as verificações necessárias para conclusões.",
+      "internal_links": [
+        "/regioes-diferencas-sjc",
+        "/aluguel-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2022)",
+        "Prefeitura de São José dos Campos",
+        "RAIS",
+        "Novo Caged",
+        "Seade",
+        "Secovi Vale",
+        "cartórios de imóveis",
+        "DataSUS",
+        "dados abertos municipais"
+      ],
+      "verification_tasks": [
+        "Obter séries temporais de preços de venda e aluguel por bairro",
+        "Mapear produção habitacional por faixa de renda e programas sociais",
+        "Analisar renda média e indicadores de pobreza por região"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "11",
+      "cluster": "empregos",
+      "title": "Onde estão os empregos em São José dos Campos?",
+      "primary_keyword": "emprego São José dos Campos",
+      "search_intent": "informacional",
+      "audience": "moradores, buscadores de emprego, pesquisadores locais",
+      "seo_title": "Onde estão os empregos em São José dos Campos? | Radar São José",
+      "meta_description": "Mapa e análise dos locais onde se concentram vagas em São José dos Campos, com fontes a consultar e o que precisa ser verificado antes da publicação.",
+      "slug": "onde-estao-os-empregos-sao-jose-dos-campos",
+      "answer_first": "Empregos em São José dos Campos estão distribuídos entre áreas industriais, parques de tecnologia, polos de serviços e centros urbanos; a confirmação da concentração por bairro exige checagem de bases como RAIS, CAGED e registros municipais.",
+      "article_markdown": "Resposta direta:\nEmpregos em São José dos Campos se localizam em áreas industriais tradicionais, no Distrito do Parque Tecnológico e em polos de serviços na região central e nos bairros mais populosos; porém, a distribuição precisa por setor e endereço exige verificação em bases oficiais.\n\nOnde já há dados confirmados\n- População municipal (Censo IBGE 2022): 697.054 habitantes, com maior população nas regiões Sul (237.572) e Leste (181.463). Esses números ajudam a explicar demanda por serviços locais.\n- Urbano x rural: 681.842 urbanos e 15.212 rurais (Censo 2022).\n\nIndícios e hipóteses úteis para moradores\n- Áreas com maior população tendem a concentrar empregos em comércio e serviços de proximidade (hipótese a validar).\n- Presença de pólos tecnológicos e de grandes empresas (ex.: empresas aeronáuticas e de tecnologia) sugere oferta de vagas técnicas na região (hipótese; conferir RAIS/CAGED).\n\nO que precisa ser verificado antes de publicar como fato\n- Número e localização das vagas por bairro ou distrito (consultar RAIS, CAGED, dados abertos da Prefeitura).\n- Principais empregadores por número de vínculos formais (RAIS; registros das empresas).\n- Fluxos de deslocamento casa-trabalho (Censo - perguntas sobre deslocamento; pesquisa municipal de mobilidade).\n\nComo moradores podem usar essa informação agora\n- Procurar vagas próximas consultando o site de empregos da Prefeitura, SINE local e plataformas de busca, e conferindo ofertas nos polos industriais e no Parque Tecnológico.\n- Se deslocam de outras regiões, verificar linhas de ônibus e horários com a EMTU/Prefeitura/DER-SP.\n\nFontes e bases recomendadas\nIBGE (Censo 2022), Prefeitura de São José dos Campos (dados de população e serviços), RAIS, Novo CAGED, Seade, Parque Tecnológico de São José dos Campos, DER-SP.\n\nFatos confirmados vs. hipóteses\n- Fatos confirmados: população total e por região (IBGE Censo 2022); urbano vs rural.\n- Hipóteses/questões para apuração: onde exatamente as vagas formais estão concentradas por bairro; quantos empregos por setor; padrões de deslocamento para trabalho.\n\nO que checar em seguida\n- Levantar RAIS/CAGED por município e setor; obter mapas de empregadores do município; entrevistar Secretaria de Desenvolvimento Econômico para qualificar dados.\n",
+      "faq": [
+        {
+          "question": "Como posso ver vagas disponíveis por região da cidade?",
+          "answer": "Consultar o SINE municipal, portais de emprego que permitem filtragem por endereço e os painéis de emprego da Prefeitura; para dados formais, verificar os relatórios do Novo CAGED e RAIS."
+        },
+        {
+          "question": "Os dados do Censo 2022 mostram onde estão os empregos?",
+          "answer": "O Censo mostra população e características (incluindo deslocamento), mas não detalha todos os empregos por empresa. Para isso, use RAIS e CAGED."
+        },
+        {
+          "question": "O Parque Tecnológico concentra muitas vagas?",
+          "answer": "Há presença de empresas de tecnologia no Parque Tecnológico; o volume exato de vagas exige checagem em RAIS/CAGED e relatórios das empresas."
+        }
+      ],
+      "geo_summary": "São José dos Campos (SP): análise focada nas regiões Sul, Leste, Centro, Oeste, Sudeste, Norte e rural conforme Censo 2022.",
+      "internal_links": [
+        "onde-estao-os-empregos-sao-jose-dos-campos",
+        "quais-setores-mais-contratam-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2022)",
+        "Prefeitura de São José dos Campos - dados de população e governança",
+        "RAIS (Ministério do Trabalho)",
+        "Novo CAGED",
+        "Seade",
+        "Parque Tecnológico de São José dos Campos",
+        "DER-SP"
+      ],
+      "verification_tasks": [
+        "Obter RAIS/CAGED por submunicípio ou bairro para quantificar empregos formais por localidade",
+        "Solicitar mapa de empregadores à Secretaria de Desenvolvimento Econômico municipal",
+        "Checar pesquisa municipal de mobilidade e dados do Censo sobre deslocamento para trabalho"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "12",
+      "cluster": "trabalho",
+      "title": "Quais setores mais contratam na cidade?",
+      "primary_keyword": "vagas de emprego São José dos Campos",
+      "search_intent": "informacional",
+      "audience": "buscadores de emprego, pesquisadores de mercado de trabalho, políticas públicas",
+      "seo_title": "Quais setores mais contratam em São José dos Campos? | Radar São José",
+      "meta_description": "Análise dos setores que tendem a contratar em São José dos Campos, fontes para confirmar dados e recomendações para quem procura vaga.",
+      "slug": "quais-setores-mais-contratam-sao-jose-dos-campos",
+      "answer_first": "Setores que costumam contratar em São José dos Campos incluem indústria, serviços (comércio, saúde, educação) e tecnologia; a dimensão relativa de cada um precisa ser confirmada com RAIS, CAGED e dados oficiais municipais.",
+      "article_markdown": "Resposta direta:\nOs setores com maior demanda de mão de obra em São José dos Campos costumam ser indústria, serviços (comércio, saúde, educação) e tecnologia; contudo, a ordem e o peso de cada setor exigem verificação em bases oficiais.\n\nFatos e indicadores locais\n- Demografia: cresceu a população idosa (65+ passou de 6% em 2010 para 12% em 2022) e diminuiu a faixa 0–14 (22% para 18%). Isso sinaliza maior demanda por serviços de saúde e cuidados de longo prazo (hipótese plausível a confirmar com dados de emprego em saúde).\n\nSetores com indícios de contratação\n- Indústria: presença histórica de indústria aeronáutica e fornecedores; demanda por técnicos e operários é provável (verificar RAIS/CAGED).\n- Tecnologia e pesquisa: existe um Parque Tecnológico e instituições de P&D na cidade; isso aponta para vagas qualificadas em TI, engenharia e pesquisa (confirmar com dados do parque e RAIS).\n- Serviços: comércio, educação e saúde atendem a população urbana intensa e ao envelhecimento demográfico; hospitais e escolas são empregadores locais (validar com CNES, INEP e registros municipais).\n\nO que checar antes de afirmar\n- Número de contratações por setor (consultar RAIS e Novo CAGED por CNAE e município).\n- Variação temporal de contratações (anos recentes) para entender tendências (CAGED mensal/semanal, RAIS anual).\n- Perfil ocupacional e escolaridade dos contratados (RAIS/PNAD/Censo).\n\nComo isso interessa a quem procura emprego\n- Quem busca vaga deve olhar tanto a oferta formal (vagas em empresas listadas) quanto oportunidades em serviços e cuidado domiciliar, especialmente com envelhecimento da população.\n- Para vagas técnicas, verifique oportunidades no Parque Tecnológico e em institutos de pesquisa.\n\nFontes recomendadas para confirmação\nIBGE, RAIS, Novo CAGED, Seade, CNES, INEP, Prefeitura (Secretaria de Desenvolvimento Econômico), Parque Tecnológico de São José dos Campos.\n\nFatos confirmados vs. hipóteses\n- Confirmado: mudança demográfica (Censo 2010/2022). \n- Hipóteses: quais setores estão em maior expansão e sua participação no emprego formal; essas hipóteses exigem checagem em RAIS/CAGED.\n",
+      "faq": [
+        {
+          "question": "Onde encontro os dados oficiais de contratação por setor?",
+          "answer": "RAIS e Novo CAGED são as fontes principais para empregos formais por setor e município; complementam INEP (educação), CNES (saúde) e IBGE."
+        },
+        {
+          "question": "O envelhecimento da população já alterou as vagas na cidade?",
+          "answer": "O Censo mostra aumento da população 65+; é plausível que isso gere mais vagas em saúde e cuidados, mas é preciso consultar RAIS/CAGED e provedores de serviços para confirmar mudanças no emprego."
+        }
+      ],
+      "geo_summary": "Foco em São José dos Campos (regiões do município conforme Censo 2022), com atenção a setores industriais, tecnológicos e de serviços.",
+      "internal_links": [
+        "quais-setores-mais-contratam-sao-jose-dos-campos",
+        "embora-central-embraer-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "RAIS",
+        "Novo CAGED",
+        "IBGE (Censo e PNAD)",
+        "Seade",
+        "CNES",
+        "INEP",
+        "Prefeitura de São José dos Campos - Secretaria de Desenvolvimento Econômico",
+        "Parque Tecnológico de São José dos Campos"
+      ],
+      "verification_tasks": [
+        "Extrair RAIS/CAGED por CNAE para São José dos Campos nos últimos 5 anos",
+        "Mapear vagas formais em saúde via CNES e em educação via INEP",
+        "Comparar tendências demográficas do Censo com séries de emprego formal"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "13",
+      "cluster": "economia",
+      "title": "A Embraer ainda é central para a economia de São José dos Campos?",
+      "primary_keyword": "Embraer São José dos Campos",
+      "search_intent": "informacional/analítico",
+      "audience": "moradores, economistas locais, jornalistas",
+      "seo_title": "A Embraer ainda é central para São José dos Campos? | Radar São José",
+      "meta_description": "Análise sobre o papel atual da Embraer na economia de São José dos Campos, com fontes a consultar e pontos a verificar antes da publicação.",
+      "slug": "embraer-central-economia-sao-jose-dos-campos",
+      "answer_first": "A Embraer tem papel relevante na economia local, mas afirmar que continua sendo o centro exige dados recentes sobre empregos, cadeia de fornecedores e tributos; esses números devem ser obtidos em relatórios da empresa, RAIS e fontes municipais.",
+      "article_markdown": "Resposta direta:\nA Embraer é historicamente uma das maiores empresas com presença em São José dos Campos e influencia postos de trabalho e fornecedores; porém, para estabelecer sua centralidade atual é preciso checar dados recentes de empregos diretos, indiretos e contribuições fiscais.\n\nO que se sabe com base em fontes públicas gerais\n- Presença histórica: a indústria aeronáutica, incluindo a Embraer, é associada à cidade há décadas. Essa associação é um fato histórico constatado em literatura e relatórios setoriais.\n\nO que precisa ser verificado para afirmar centralidade hoje\n- Emprego direto e indireto: número de vínculos formais da Embraer no município e contratos com fornecedores locais (verificar RAIS, relatórios da própria Embraer e listas de fornecedores).\n- Participação no PIB municipal ou receitas fiscais: requer acesso a balanços fiscais da Prefeitura e dados de tributos recolhidos.\n- Evolução recente: mudanças em atividades, terceirização ou deslocamento de unidades que alterem a relevância local (informação a obter junto à Embraer, sindicatos e Prefeitura).\n\nPontos de análise para pesquisadores\n- Cadeia produtiva: mapear fornecedores locais e suas relações contratuais para medir efeitos multiplicadores.\n- Comparação com outros setores: verificar participação relativa de tecnologia, serviços e comércio no emprego e receita municipal.\n\nFontes recomendadas\nRelatórios corporativos da Embraer, RAIS, Novo CAGED, Prefeitura (dados fiscais e de emprego), estudos do Parque Tecnológico, Seade.\n\nFatos confirmados vs. hipóteses\n- Confirmado: presença histórica e papel na formação do setor aeroespacial local.\n- Hipóteses/questões: número atual de empregos diretos e indiretos, peso no PIB municipal e dinâmica de contratos locais — todas precisam de validação documental.\n\nVerificações prioritárias antes da publicação\n- Solicitar números de vínculos formais da Embraer por município (RAIS) e pedir relatórios públicos da Embraer sobre presença em São José dos Campos.\n- Consultar Secretaria de Fazenda e Desenvolvimento Econômico para dados fiscais e de compras públicas relacionados.\n",
+      "faq": [
+        {
+          "question": "Posso afirmar que a Embraer é o maior empregador da cidade?",
+          "answer": "Não sem checar números atualizados em RAIS e relatórios da empresa; a afirmação exige dados recentes sobre vínculos formais e comparação com outros empregadores."
+        },
+        {
+          "question": "Onde encontro dados oficiais sobre fornecedores locais da Embraer?",
+          "answer": "Pesquisas setoriais, relatórios do próprio Parque Tecnológico, RAIS (para vínculos formais) e estudos de cadeia produtiva publicados por universidades ou órgãos de desenvolvimento regional."
+        }
+      ],
+      "geo_summary": "Foco em São José dos Campos (SP); análise sobre impacto local da Embraer na economia municipal.",
+      "internal_links": [
+        "embraer-central-economia-sao-jose-dos-campos",
+        "sao-jose-depende-industria-tecnologia-servicos"
+      ],
+      "sources_to_consult": [
+        "Relatórios da Embraer",
+        "RAIS",
+        "Novo CAGED",
+        "Prefeitura de São José dos Campos (Fazenda/Desenvolvimento)",
+        "Parque Tecnológico de São José dos Campos",
+        "Seade"
+      ],
+      "verification_tasks": [
+        "Obter RAIS por empregador para quantificar vínculos da Embraer no município",
+        "Pedir ao setor fiscal da Prefeitura dados sobre tributos e compras relacionadas à Embraer",
+        "Mapear fornecedores locais e contratos públicos/privados"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "14",
+      "cluster": "economia",
+      "title": "São José dos Campos depende mais da indústria, da tecnologia ou dos serviços?",
+      "primary_keyword": "empresas São José dos Campos",
+      "search_intent": "analítico",
+      "audience": "pesquisadores, formuladores de políticas, empresários locais",
+      "seo_title": "Indústria, tecnologia ou serviços: de que depende São José dos Campos? | Radar São José",
+      "meta_description": "Análise sobre a estrutura econômica de São José dos Campos, com fontes a consultar para confirmar participação relativa de indústria, tecnologia e serviços.",
+      "slug": "sao-jose-depende-industria-tecnologia-servicos",
+      "answer_first": "São José dos Campos tem uma economia diversificada com legado industrial, presença de tecnologia e amplo setor de serviços; determinar qual domina exige consulta a RAIS, IBGE, Secretaria de Desenvolvimento e dados fiscais municipais.",
+      "article_markdown": "Resposta direta:\nA economia de São José dos Campos combina indústria tradicional, atividades tecnológicas e um setor de serviços substancial; identificar qual domina quantitativamente requer cruzamento de fontes oficiais.\n\nElementos factuais e contexto\n- A cidade tem histórico de indústria aeronáutica e fornecedores ligados ao setor, presença de centros de pesquisa e um Parque Tecnológico, além de uma base de serviços para a população urbana (fatos conhecidos em estudos locais).\n- Indicador demográfico que influencia a economia: o aumento da população idosa (65+ de 6% para 12% entre 2010 e 2022) tende a ampliar serviços de saúde e cuidados.\n\nComo medir dependência econômica\n- Emprego formal por setor (RAIS e CAGED) dará a distribuição ocupacional entre indústria, tecnologia e serviços.\n- Receita fiscal e participação no PIB municipal (dados da Prefeitura e de contabilidade municipal) mostram contribuição econômica.\n- Número de empresas registradas por CNAE (Junta Comercial/Prefeitura) ajuda a medir presença setorial.\n\nHipóteses a testar\n- Indústria pode ainda deter peso significativo em termos de valor agregado e exportações, mesmo que serviços empreguem mais pessoas.\n- Setor de tecnologia pode ter alto valor agregado por empregado, sem necessariamente empregar a maioria.\n- Serviços provavelmente lideram em número de empregos locais devido à população urbana e demanda por saúde, educação e comércio.\n\nFontes e passos para verificação\n- Extrair RAIS/CAGED para São José dos Campos por CNAE e anos recentes.\n- Consultar dados fiscais da Prefeitura e estudos do Seade sobre participação setorial regional.\n- Levantar número de empresas no Parque Tecnológico e faturamento setorial quando disponível.\n\nFatos confirmados vs. questões abertas\n- Confirmado: diversidade — indústria, tecnologia e serviços estão presentes.\n- Em aberto: participação relativa em emprego, PIB e receita; essas métricas exigem análise de RAIS, CAGED, dados fiscais e estudos setoriais.\n",
+      "faq": [
+        {
+          "question": "Qual fonte mostra o setor que mais emprega na cidade?",
+          "answer": "RAIS e Novo CAGED mostram empregos formais por setor; o Censo e PNAD complementam com informações sobre ocupação e deslocamento."
+        },
+        {
+          "question": "A tecnologia já superou a indústria na cidade?",
+          "answer": "Não é possível afirmar sem dados comparativos recentes. Verificar RAIS/CAGED e estudos do Parque Tecnológico e da Prefeitura é necessário para concluir."
+        }
+      ],
+      "geo_summary": "Análise setorial para São José dos Campos (SP), considerando indústria aeronáutica, parques de tecnologia e serviços municipais conforme contexto local.",
+      "internal_links": [
+        "sao-jose-depende-industria-tecnologia-servicos",
+        "embora-central-embraer-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "RAIS",
+        "Novo CAGED",
+        "IBGE (Censo, PNAD)",
+        "Prefeitura de São José dos Campos - dados fiscais e de empresas",
+        "Seade",
+        "Junta Comercial do Estado de São Paulo",
+        "Parque Tecnológico de São José dos Campos"
+      ],
+      "verification_tasks": [
+        "Gerar tabela RAIS/CAGED por CNAE para os últimos anos",
+        "Solicitar dados fiscais municipais por setor e consultar estudos do Seade",
+        "Mapear empresas do Parque Tecnológico e coletar faturamento agregado quando disponível"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "15",
+      "cluster": "trabalho",
+      "title": "Quem trabalha em São José dos Campos consegue morar perto do emprego?",
+      "primary_keyword": "trabalho e moradia São José dos Campos",
+      "search_intent": "prático/analítico",
+      "audience": "trabalhadores, planejadores urbanos, pesquisadores",
+      "seo_title": "Trabalho e moradia em São José dos Campos: morre perto do emprego? | Radar São José",
+      "meta_description": "Avaliação sobre proximidade entre trabalho e moradia em São José dos Campos, com fontes para confirmar padrões de deslocamento e recomendações práticas para moradores.",
+      "slug": "trabalho-moradia-sao-jose-dos-campos",
+      "answer_first": "Algumas pessoas que trabalham em São José dos Campos moram perto do emprego, mas a extensão dessa proximidade e os padrões de deslocamento exigem análise de dados de mobilidade do Censo e pesquisas locais para confirmação.",
+      "article_markdown": "Resposta direta:\nHá trabalhadores que moram próximos ao local de trabalho em São José dos Campos, mas não há dados públicos na descrição fornecida que permitam afirmar quão frequente isso é; é preciso consultar o Censo (itens sobre deslocamento), pesquisas municipais de mobilidade e RAIS para mapear fluxos.\n\nDados confirmados úteis\n- Distribuição populacional (Censo 2022): Sul e Leste concentram a maior população municipal, o que tende a gerar demanda por empregos locais nessas áreas.\n- Urbana vs rural: grande maioria vive em área urbana (681.842), o que implica fluxos urbanos intensos.\n\nDados que faltam e devem ser verificados\n- Tempo médio de deslocamento casa-trabalho e modal (ônibus, carro, a pé) — disponível em microdados do Censo e em pesquisas de mobilidade municipais.\n- Percentual de trabalhadores que trabalham no mesmo bairro ou região administrativa — requer cruzamento de RAIS/CAGED com dados de endereço e pesquisa OD (origem-destino).\n\nImplicações práticas para moradores\n- Moradores que priorizam morar perto do trabalho devem consultar ofertas de aluguel/compra próximas aos polos empregadores (centro, parques industriais, Parque Tecnológico) e checar linhas de transporte.\n- Para quem depende de transporte público, é recomendável verificar integração e horários da frota municipal, empresas concessionárias e DER-SP.\n\nFontes e passos para pesquisa\n- Consultar microdados do Censo 2022 sobre deslocamento e local de trabalho; acessar pesquisa de Origem-Destino municipal se existir; verificar RAIS para endereço dos empregadores.\n- Dados da Prefeitura, EMTU/operadora municipal e DER-SP servem para mapear oferta de transporte.\n\nFatos confirmados vs. hipóteses\n- Confirmado: distribuição populacional por região (IBGE Censo 2022).\n- Em aberto: proporção de trabalhadores que moram na mesma região de trabalho e padrões modais — essas são perguntas de apuração.\n\nO que fazer em seguida\n- Solicitar microdados do Censo e estudar padrões OD; pedir à Prefeitura e Secretaria de Mobilidade mapas de fluxo e cobertura de transporte para orientar políticas e escolhas individuais.\n",
+      "faq": [
+        {
+          "question": "O Censo 2022 traz informações sobre deslocamento para trabalho?",
+          "answer": "Sim, o Censo inclui perguntas sobre local de trabalho, tempo de deslocamento e meio de transporte; microdados ajudam a mapear padrões locais."
+        },
+        {
+          "question": "Como saber se vale a pena morar perto do trabalho em São José?",
+          "answer": "Depende do custo de moradia, qualidade do transporte e estabilidade do emprego. Consulte ofertas imobiliárias, rotas de transporte e dados de deslocamento do Censo para avaliar."
+        }
+      ],
+      "geo_summary": "Foco em padrões de moradia e deslocamento em São José dos Campos (regiões Sul, Leste, Centro, etc.), com base no Censo 2022 como ponto de partida.",
+      "internal_links": [
+        "trabalho-moradia-sao-jose-dos-campos",
+        "onde-estao-os-empregos-sao-jose-dos-campos"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2022 - microdados)",
+        "RAIS",
+        "Novo CAGED",
+        "Prefeitura de São José dos Campos - secretarias de mobilidade e desenvolvimento",
+        "DER-SP",
+        "EMTU",
+        "Seade"
+      ],
+      "verification_tasks": [
+        "Extrair microdados do Censo 2022 sobre deslocamento casa-trabalho para análise por região",
+        "Obter pesquisa de Origem-Destino municipal ou estudos de mobilidade locais",
+        "Cruzar endereços de empregadores (RAIS) com domicílios para medir proporção de trabalhadores que moram perto do trabalho"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "16",
+      "cluster": "ciência",
+      "title": "Por que São José dos Campos é considerada uma cidade de ciência e tecnologia?",
+      "primary_keyword": "pesquisa São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores, pesquisadores, gestores públicos",
+      "seo_title": "Por que São José é referência em ciência e tecnologia",
+      "meta_description": "Levantamento sobre os elementos que orientam a reputação de São José dos Campos como polo de ciência e tecnologia e o que falta checar.",
+      "slug": "por-que-sao-jose-ciencia-tecnologia",
+      "answer_first": "São José dos Campos é considerada um polo de ciência e tecnologia por concentrar instituições de pesquisa, ensino técnico e indústrias de alta tecnologia, mas é preciso checar dados sobre investimentos, empregos em P&D e patentes.",
+      "article_markdown": "Resposta direta\nSão José dos Campos é considerada um polo de ciência e tecnologia por concentrar instituições de pesquisa, ensino técnico e indústrias de alta tecnologia. Fatos sobre investimentos, empregos em pesquisa e desenvolvimento (P&D) e indicadores de inovação precisam ser confirmados antes de afirmações mais detalhadas.\n\nContexto institucional\nA cidade abriga instituições e empresas que atuam em setores aeroespacial, espacial e de defesa — contexto que sustenta a percepção local de ciência aplicada. Essa presença institucional gera redes de colaboração entre universidades, centros de pesquisa e empresas. Para avaliar a força desse ecossistema é necessário cruzar dados sobre empregos qualificados, receitas de inovação e número de startups.\n\nFatos confirmados\n- População total (Censo 2022): 697.054 habitantes (IBGE). Crescimento de 10,66% desde 2010. Estimativas IBGE para 2025/2026: 727.078 / 729.153.\n- Estrutura regional do município (Censo 2022): Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; rural 15.212; São Francisco Xavier 1.443.\n- Envelhecimento: pessoas com 65+ passaram de 6% (2010) para 12% (2022); 0–14 caiu de 22% para 18%.\nEsses dados mostram mudanças demográficas que influenciam oferta e demanda por formação técnica e pesquisa aplicada.\n\nQuestões em apuração (hipóteses e perguntas)\n- Quanto os investimentos públicos e privados em P&D representam do PIB municipal? (verificar em IBGE/Prefeitura/Estatísticas de Ciência e Tecnologia).\n- Quantos empregos diretos em P&D, engenharia e tecnologia existem na cidade? (checar RAIS/RAIS-empresas/Novo Caged).\n- Quantas patentes foram registradas por residentes/empresas locais e qual a tendência? (consultar INPI e dados do Parque Tecnológico).\n- Qual a intensidade de colaboração entre instituições (publicações, projetos conjuntos, contratos)? (verificar Scopus, Web of Science, bases institucionais).\n\nO que checar antes de publicar\n- Valores de investimento público/privado em P&D e anos correspondentes.\n- Número e perfil dos empregos em P&D/tecnologia.\n- Dados sobre incubadoras, startups e patentes.\n- Indicadores de educação superior e técnico (matrículas, cursos, diplomas).\n\nFontes recomendadas\nIBGE; Prefeitura de São José dos Campos; INPI; Ministério da Ciência e Tecnologia; Instituições locais (ITA, INPE, universidades); RAIS/CAGED; Parque Tecnológico.\n\nFAQ\n1) São José é a cidade com mais emprego em tecnologia no estado? R: Não há confirmação imediata; é preciso comparar RAIS/CAGED entre municípios.\n2) O envelhecimento impacta o setor de P&D? R: O envelhecimento altera demanda por serviços e força de trabalho; impactos específicos exigem análise de mercado e emprego.\n3) Onde buscar dados sobre patentes locais? R: INPI, bases do Parque Tecnológico e relatórios institucionais.\n4) Qual o papel das indústrias locais? R: Empresas de alta tecnologia criam demanda por mão de obra qualificada, mas o impacto econômico precisa ser quantificado.\n",
+      "faq": [
+        {
+          "question": "São José é realmente um polo de ciência e tecnologia?",
+          "answer": "A cidade reúne instituições e empresas que justificam a classificação, mas a dimensão do polo (investimento, empregos em P&D, patentes) precisa ser verificada com dados específicos."
+        },
+        {
+          "question": "Onde encontrar dados sobre empregos em tecnologia na cidade?",
+          "answer": "Fontes como RAIS, Novo Caged e estatísticas municipais (Prefeitura) devem ser consultadas para números atualizados."
+        },
+        {
+          "question": "Os indicadores demográficos influenciam o setor?",
+          "answer": "Sim. O aumento da população 65+ e a queda de 0–14 alteram oferta de trabalho e demanda por serviços, mas efeitos concretos dependem de análise setorial."
+        }
+      ],
+      "geo_summary": "São José dos Campos (pop. Censo 2022: 697.054) concentra instituições de ciência e tecnologia em um contexto urbano distribuído por regiões: Sul e Leste têm as maiores populações; rural e subprefeitura São Francisco Xavier são menores.",
+      "internal_links": [
+        "conexao-ita-inpe-embraer-parque",
+        "tecnologia-sao-jose-dos-campos",
+        "inovacao-empregos-empresas",
+        "cursos-de-tecnologia-sjc"
+      ],
+      "sources_to_consult": [
+        "IBGE",
+        "Prefeitura de São José dos Campos",
+        "INPI",
+        "Ministério da Ciência, Tecnologia e Inovações",
+        "ITA",
+        "INPE",
+        "Parque Tecnológico de São José dos Campos",
+        "RAIS",
+        "Novo CAGED",
+        "Scopus/Web of Science"
+      ],
+      "verification_tasks": [
+        "Obter dados sobre investimentos públicos e privados em P&D (últimos 5 anos)",
+        "Levantar número de empregos diretos em P&D, engenharia e tecnologia por setor (RAIS/CAGED)",
+        "Consultar registros de patentes atribuídas a residentes ou empresas locais (INPI)",
+        "Mapear incubadoras, aceleradoras e quantidade de startups ativas na cidade"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "17",
+      "cluster": "instituições",
+      "title": "ITA, INPE, Embraer e Parque Tecnológico: como essas instituições se conectam",
+      "primary_keyword": "ITA INPE São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores, pesquisadores, estudantes",
+      "seo_title": "Como ITA, INPE, Embraer e Parque se conectam",
+      "meta_description": "Visão sobre as trocas institucionais entre ITA, INPE, Embraer e o Parque Tecnológico em São José dos Campos e o que falta verificar.",
+      "slug": "conexao-ita-inpe-embraer-parque",
+      "answer_first": "ITA, INPE, Embraer e o Parque Tecnológico atuam em áreas complementares e frequentemente colaboram em pesquisa e formação, mas conexões formais, fluxos de recursos e efeitos sobre o emprego precisam ser comprovados com dados.",
+      "article_markdown": "Resposta direta\nITA, INPE, Embraer e o Parque Tecnológico atuam em áreas complementares — formação, pesquisa básica e aplicada, produção e incubação — e há relatos públicos de parcerias. Entretanto, é preciso confirmar contratos, projetos conjuntos e números de pessoal envolvidos.\n\nPapéis institucionais\n- ITA: formação de engenheiros, com foco em aeroespacial (papel educacional e de pesquisa aplicada).\n- INPE: pesquisa em sensoriamento remoto, meteorologia e engenharia espacial (pesquisa e infraestrutura científica).\n- Embraer: indústria aeronáutica com linhas de produção e P&D integrado.\n- Parque Tecnológico: ambiente para startups, empresas de base tecnológica e serviços de inovação.\nEsses papéis indicam complementaridade entre formação, pesquisa e indústria.\n\nFatos confirmados e limites\nConfirmado: a cidade tem essas instituições e um histórico público de atuação nos setores aeroespacial e espacial. Limite: não há nesta matéria números oficiais sobre contratos interinstitucionais, transferência tecnológica ou aporte financeiro entre elas que possam ser citados sem verificação.\n\nConexões possíveis (hipóteses a checar)\n- Fluxo de graduados do ITA para empresas locais (Embraer, startups) e para centros de pesquisa (INPE).\n- Projetos conjuntos de pesquisa entre INPE e universidades com participação do Parque Tecnológico.\n- Contratos de P&D e transferência de tecnologia entre empresas e instituições.\nCada hipótese exige consulta a dados institucionais, relatórios anuais e bancos de emprego (RAIS/CAGED).\n\nO que checar antes da publicação\n- Relatórios institucionais (ITA, INPE, Embraer, Parque Tecnológico) para identificar convênios e projetos comuns.\n- Dados sobre mobilidade de profissionais e egressos (RAIS, INEP e secretarias educacionais).\n- Estatísticas de patentes e contratos de transferência tecnológica (INPI, relatórios das instituições).\n\nFontes recomendadas\nRelatórios e páginas oficiais do ITA, INPE, Embraer e Parque Tecnológico; RAIS/CAGED; INPI; publicações científicas.\n\nFAQ\n1) Essas instituições têm convênios públicos? R: Há menções públicas a parcerias, mas números e termos exigem verificação nas fontes institucionais.\n2) O Parque Tecnológico só abriga empresas do setor aero? R: Não é possível afirmar sem levantamento; o Parque costuma abrigar diversas áreas de tecnologia.\"",
+      "faq": [
+        {
+          "question": "O ITA forma profissionais para Embraer?",
+          "answer": "Historicamente, há fluxo de profissionais entre instituições de ensino técnico e empresas locais; dados sobre contratações específicas precisam ser confirmados em RAIS ou relatórios institucionais."
+        },
+        {
+          "question": "O INPE realiza projetos com startups locais?",
+          "answer": "Pode haver projetos conjuntos, mas é necessário consultar editais e relatórios do INPE e do Parque Tecnológico para confirmar participação de startups."
+        }
+      ],
+      "geo_summary": "No território de São José dos Campos estão ITA, INPE, instalações industriais e o Parque Tecnológico; a interação entre essas instituições é relevante para a economia local, mas requer checagem de fluxos e contratos.",
+      "internal_links": [
+        "por-que-sao-jose-ciencia-tecnologia",
+        "tecnologia-sao-jose-dos-campos",
+        "inovacao-empregos-empresas",
+        "cursos-de-tecnologia-sjc"
+      ],
+      "sources_to_consult": [
+        "ITA",
+        "INPE",
+        "Embraer",
+        "Parque Tecnológico de São José dos Campos",
+        "RAIS",
+        "Novo CAGED",
+        "INPI",
+        "Relatórios Institucionais",
+        "Scopus/Web of Science"
+      ],
+      "verification_tasks": [
+        "Solicitar relatórios anuais e convênios do ITA, INPE, Embraer e Parque Tecnológico",
+        "Mapear egressos do ITA e trajetórias profissionais (INEP/RAIS)",
+        "Identificar projetos conjuntos via bases de projetos de pesquisa e publicações",
+        "Verificar contratos de transferência tecnológica e patentes (INPI)"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "18",
+      "cluster": "inovação",
+      "title": "Quanto a ciência e a inovação movimentam a economia local?",
+      "primary_keyword": "tecnologia São José dos Campos",
+      "search_intent": "informational",
+      "audience": "gestores, pesquisadores, empresários",
+      "seo_title": "Impacto econômico da ciência em São José dos Campos",
+      "meta_description": "Análise inicial sobre a contribuição da ciência e da inovação para a economia de São José dos Campos e os dados necessários para quantificar esse impacto.",
+      "slug": "tecnologia-sao-jose-dos-campos",
+      "answer_first": "Ciência e inovação têm papel relevante na economia de São José dos Campos, especialmente em setores aeroespacial e tecnológico; contudo, a parcela precisa do PIB, empregos e faturamento gerado por esses setores precisa ser quantificada com dados oficiais.",
+      "article_markdown": "Resposta direta\nCiência e inovação contribuem para a economia local, sobretudo via indústrias de alta tecnologia e serviços especializados. Para mensurar essa contribuição é necessário consolidar dados sobre faturamento setorial, empregos em P&D, startups, investimentos e exportações.\n\nIndicadores a considerar\n- Emprego em setores de tecnologia e engenharia (RAIS/CAGED).\n- Receita e valor agregado de setores aeroespacial, eletrônica e serviços tecnológicos (contas setoriais, FGV, IBGE).\n- Investimentos em P&D (órgãos públicos e relatórios empresariais).\n- Número de startups, empresas de base tecnológica e incubadoras (Parque Tecnológico, juntas comerciais).\nSem esses indicadores não é possível afirmar uma participação percentual confiável no PIB municipal.\n\nFatos confirmados que influenciam a economia\n- População (Censo 2022): 697.054; estimativas IBGE 2025/2026 ~727–729 mil.\n- Estrutura demográfica: aumento da população idosa (65+) e redução da parcela 0–14 entre 2010 e 2022. Essas mudanças podem afetar disponibilidade de mão de obra e demanda por produtos/serviços.\n\nPerguntas abertas e hipóteses\n- Qual a fatia do emprego local vinculada a empresas de alta tecnologia? (ver RAIS/CAGED)\n- Qual o impacto das exportações de bens aeronáuticos e serviços tecnológicos no faturamento do município? (consultar dados de comércio exterior por município)\n- Quanta renda é gerada por startups e empresas sediadas no Parque Tecnológico? (relatórios do Parque e Juntas Comerciais)\n\nO que verificar antes de publicar\n- Contas setoriais e fiscais municipais para calcular contribuição ao PIB.\n- RAIS/CAGED para emprego por CNAE e nível de qualificação.\n- Dados de exportações e balanços de empresas relevantes.\n- Relatórios de investimento em P&D e financiamento público/privado.\n\nFontes recomendadas\nIBGE (contas regionais), Prefeitura de São José dos Campos, RAIS/CAGED, FGV, INPI, Juntas Comerciais, Parque Tecnológico.\n\nFAQ\n1) A inovação paga mais que outros setores na cidade? R: Em geral, ocupações em P&D e TI apresentam salários médios mais altos; confirmar com RAIS por município.\n2) Startups geram muitos empregos locais? R: Startups podem ter impacto relevante, mas é preciso quantificar com dados do Parque Tecnológico e Juntas Comerciais.\n3) Onde encontrar dados sobre exportações locais? R: Bases de comércio exterior por município e relatórios empresariais.",
+      "faq": [
+        {
+          "question": "Como medir a contribuição da tecnologia ao PIB local?",
+          "answer": "É preciso cruzar contas setoriais municipais (IBGE), faturamento de empresas-chave, e dados de emprego qualificado (RAIS/CAGED)."
+        },
+        {
+          "question": "Existe fonte pública com dados sobre investimentos em P&D locais?",
+          "answer": "Algumas informações constam em relatórios institucionais e em bases federais; relatórios municipais e institucionais (Parque, empresas) também são essenciais."
+        }
+      ],
+      "geo_summary": "A economia de São José dos Campos é influenciada por setores de alta tecnologia concentrados na área urbana (pop. Censo 2022: 697.054), mas participação precisa no PIB e emprego ainda exige verificação de bases locais e federais.",
+      "internal_links": [
+        "por-que-sao-jose-ciencia-tecnologia",
+        "conexao-ita-inpe-embraer-parque",
+        "inovacao-empregos-empresas",
+        "cursos-de-tecnologia-sjc"
+      ],
+      "sources_to_consult": [
+        "IBGE (contas regionais)",
+        "Prefeitura de São José dos Campos",
+        "RAIS",
+        "Novo CAGED",
+        "Parque Tecnológico",
+        "Junta Comercial do Estado de SP",
+        "FGV",
+        "Balanços e relatórios de empresas locais",
+        "INPI"
+      ],
+      "verification_tasks": [
+        "Levantar faturamento e valor agregado dos setores aeroespacial e tecnológico (contas regionais)",
+        "Obter emprego por CNAE e remuneração média (RAIS/CAGED)",
+        "Mapear exportações por município e por empresa relevante",
+        "Reunir relatórios de investimento em P&D público e privado"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "19",
+      "cluster": "inovação",
+      "title": "São José dos Campos consegue transformar pesquisa em empregos e empresas?",
+      "primary_keyword": "inovação São José dos Campos",
+      "search_intent": "informational",
+      "audience": "empreendedores, pesquisadores, gestores",
+      "seo_title": "Pesquisa em empregos e empresas em São José",
+      "meta_description": "Análise sobre a conversão de pesquisa em empregos e empresas em São José dos Campos e as evidências que precisam ser checadas.",
+      "slug": "inovacao-empregos-empresas",
+      "answer_first": "Há sinais de conversão de pesquisa em empregos e empresas em São José dos Campos, mas a intensidade desse processo (número de startups geradas, empregos criados e transferência tecnológica) requer levantamentos em bases formais.",
+      "article_markdown": "Resposta direta\nHá transformação de pesquisa em empregos e empresas em São José dos Campos, especialmente ligada a setores aeroespacial e tecnológico. Porém, quantificar essa conversão exige dados sobre incubação, patentes, spin-offs e contratações de egressos.\n\nMecanismos de conversão\n- Incubadoras e aceleradoras no Parque Tecnológico podem dar suporte a startups que nascem de pesquisas.\n- Empresas locais (indústria) podem contratar equipes formadas em instituições técnicas e universitárias.\n- Programas de transferência tecnológica e contratos de P&D formalizam a passagem da pesquisa para o mercado.\nIdentificar quais mecanismos funcionam melhor na cidade pede análise de casos e estatísticas.\n\nFatos confirmados e limitações\nConfirmado: existência de instituições de ensino, pesquisa e um Parque Tecnológico que abriga empresas de base tecnológica. Limite: não há nesta matéria números oficiais sobre quantas startups surgiram de pesquisa local, taxa de sobrevivência de empresas ou vagas de emprego geradas diretamente por spin-offs.\n\nPerguntas em apuração\n- Quantas startups foram formalmente criadas a partir de projetos de pesquisa (últimos 5–10 anos)?\n- Qual a taxa de sobrevivência e emprego médio dessas empresas?\n- Quantos profissionais contratados em empresas de alta tecnologia são egressos de instituições locais?\n\nO que checar antes de publicar\n- Registros de empresas vinculadas a incubação ou ao Parque Tecnológico (Junta Comercial, relatórios do Parque).\n- Patentes e pedidos de patente envolvendo pesquisadores/instituições locais (INPI).\n- Dados de emprego por instituição de formação (RAIS, INEP, relatórios institucionais).\n\nFontes recomendadas\nParque Tecnológico de São José dos Campos; Junta Comercial; INPI; RAIS/CAGED; relatórios de programas de incubação/aceleração; publicações acadêmicas sobre spin-offs.\n\nFAQ\n1) Quantas startups nascem por ano na cidade? R: Não há número consolidado aqui; é preciso consultar o Parque Tecnológico e Junta Comercial.\n2) Spin-offs geram emprego local? R: Podem gerar, mas impacto depende do porte e tempo de atuação; ver RAIS/CAGED para medir emprego formal.",
+      "faq": [
+        {
+          "question": "Como identificar startups originadas em pesquisa?",
+          "answer": "Procurar registros de incubadoras, relatórios do Parque Tecnológico e contratos de transferência de tecnologia que indiquem origem acadêmica."
+        },
+        {
+          "question": "Existem programas municipais de fomento à inovação?",
+          "answer": "Informações sobre programas devem ser obtidas na Prefeitura e no Parque Tecnológico para confirmar edital e efeitos."
+        }
+      ],
+      "geo_summary": "Em São José dos Campos, a presença de instituições de pesquisa e de um Parque Tecnológico favorece a criação de empresas de base tecnológica, mas conversão efetiva em empregos depende de fatores mensuráveis e locais.",
+      "internal_links": [
+        "por-que-sao-jose-ciencia-tecnologia",
+        "conexao-ita-inpe-embraer-parque",
+        "tecnologia-sao-jose-dos-campos",
+        "cursos-de-tecnologia-sjc"
+      ],
+      "sources_to_consult": [
+        "Parque Tecnológico de São José dos Campos",
+        "Junta Comercial do Estado de SP",
+        "INPI",
+        "RAIS",
+        "Novo CAGED",
+        "Relatórios de incubadoras e aceleradoras",
+        "Prefeitura de São José dos Campos"
+      ],
+      "verification_tasks": [
+        "Listar startups ligadas ao Parque Tecnológico e origem (pesquisa/empresa)",
+        "Verificar solicitações e concessões de patentes por autores/empresas locais (INPI)",
+        "Medir emprego gerado por empresas nascidas de pesquisa (RAIS/CAGED)",
+        "Analisar relatórios de incubação e aceleração para taxas de sobrevivência"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "20",
+      "cluster": "educação",
+      "title": "Quem tem acesso às oportunidades de formação tecnológica na cidade?",
+      "primary_keyword": "cursos de tecnologia São José dos Campos",
+      "search_intent": "informational",
+      "audience": "estudantes, famílias, gestores educacionais",
+      "seo_title": "Acesso à formação tecnológica em São José dos Campos",
+      "meta_description": "Levantamento sobre acesso a cursos técnicos, superiores e de tecnologia em São José dos Campos e pontos que precisam ser checados.",
+      "slug": "cursos-de-tecnologia-sjc",
+      "answer_first": "Há oferta de formação tecnológica em diferentes níveis em São José dos Campos, mas o perfil de acesso por renda, região e faixa etária precisa ser verificado com dados do INEP, Prefeitura e instituições locais.",
+      "article_markdown": "Resposta direta\nSão oferecidos cursos técnicos, superiores e de pós-graduação em áreas tecnológicas em São José dos Campos. Para saber quem tem acesso a essas oportunidades é necessário cruzar dados por região, renda e nível de ensino.\n\nOferta educacional (níveis principais)\n- Ensino técnico e profissionalizante: cursos técnicos e programas de formação profissional podem ser oferecidos por escolas técnicas e instituições privadas.\n- Ensino superior e pós-graduação: universidades e faculdades técnicas oferecem engenharia, TI e cursos afins.\n- Cursos livres e de curta duração: oferecidos por incubadoras, empresas e organizações do Parque Tecnológico.\n\nFatos confirmados e dados demográficos relevantes\n- População (Censo 2022): 697.054 habitantes, com distribuição regional (Sul e Leste mais populosos).\n- Mudança etária: aumento da população com 65+ e redução da parcela 0–14 entre 2010 e 2022. Isso afeta a demanda por formação inicial e a disponibilidade de mão de obra jovem.\n\nQuestões em apuração\n- Qual a distribuição geográfica das vagas em cursos técnicos e superiores por região do município?\n- Quais faixas de renda acessam mais cursos tecnológicos? Há cotas ou programas de inclusão?\n- Como a oferta pública e privada se divide em número de vagas e qualidade de formação?\n\nO que checar antes de publicar\n- Dados de matrículas e oferta de cursos por instituição e por bairro/região (INEP, secretarias municipais e instituições).\n- Programas de bolsas, cotas e iniciativas de inclusão (Prefeitura, instituições de ensino).\n- Taxas de conclusão e empregabilidade por curso (INEP/Censos Escolares/Relatórios institucionais).\n\nFontes recomendadas\nINEP, secretarias de educação municipal e estadual, instituições de ensino (relatórios), Parque Tecnológico, SINE/SMTE para inserção no mercado.\n\nFAQ\n1) Existem cursos técnicos gratuitos na cidade? R: É preciso verificar oferta atual nas secretarias municipais e estaduais e em instituições técnicas públicas.\n2) Onde buscar bolsas para cursos de tecnologia? R: Procurar programas de universidades, FIES, PROUNI (se aplicável) e iniciativas municipais/privadas.",
+      "faq": [
+        {
+          "question": "Como saber se um curso é reconhecido?",
+          "answer": "Consultar o INEP e a página do MEC para verificar reconhecimento e avaliação do curso/instituição."
+        },
+        {
+          "question": "Há vagas suficientes para jovens da cidade em cursos tecnológicos?",
+          "answer": "Apenas análise de matrículas e oferta por região (INEP/secretarias) permite responder com precisão."
+        }
+      ],
+      "geo_summary": "Em São José dos Campos, com 697.054 habitantes (Censo 2022) e regiões com densidades diferentes, a oferta de formação tecnológica existe em vários níveis; acesso por região e renda exige checagem de matrículas e programas locais.",
+      "internal_links": [
+        "por-que-sao-jose-ciencia-tecnologia",
+        "conexao-ita-inpe-embraer-parque",
+        "tecnologia-sao-jose-dos-campos",
+        "inovacao-empregos-empresas"
+      ],
+      "sources_to_consult": [
+        "INEP",
+        "IBGE",
+        "Prefeitura de São José dos Campos (Secretaria de Educação)",
+        "Instituições locais de ensino",
+        "Parque Tecnológico",
+        "SINE/SMTE"
+      ],
+      "verification_tasks": [
+        "Levantar matrículas e vagas por curso e por região (INEP e secretarias)",
+        "Mapear programas de bolsas e inclusão (Prefeitura e instituições)",
+        "Obter taxas de conclusão e empregabilidade por curso (INEP/relatórios institucionais)"
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "21",
+      "cluster": "mobilidade",
+      "title": "Como os moradores se deslocam entre as regiões de São José dos Campos?",
+      "primary_keyword": "transporte público São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Como moradores se deslocam entre regiões de São José dos Campos | Radar SJC",
+      "meta_description": "Análise sobre deslocamentos entre regiões de São José dos Campos com dados do Censo 2022 e lista de fontes e verificações necessárias para completar o diagnóstico.",
+      "slug": "como-moradores-se-deslocam-sjc",
+      "answer_first": "Resposta direta: não há dados públicos completos sobre modal share por região em SJC no Censo 2022; o que existe são distribuições populacionais por região que apontam onde se concentram os deslocamentos, mas é preciso levantar origem-destino, frota e tempos de viagem para entender como as pessoas se deslocam efetivamente.",
+      "article_markdown": "Resposta direta: não há dados públicos completos sobre modal share por região em SJC no Censo 2022; o que existe são distribuições populacionais por região que apontam onde se concentram os deslocamentos, mas é preciso levantar origem-destino, frota e tempos de viagem para entender como as pessoas se deslocam efetivamente.\n\nDados confirmados\n- O Censo 2022 registra 697.054 habitantes em São José dos Campos. A população urbana é de 681.842 e a rural de 15.212. Por região: Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; rural 15.212; São Francisco Xavier 1.443. Esses números mostram onde se concentram potenciais origens e destinos de deslocamentos.\n\nPadrões plausíveis e limites dos dados\n- Áreas com maior população (Sul e Leste) tendem a gerar e atrair mais viagens, mas o Censo não informa modos de transporte ou fluxos entre regiões. O envelhecimento da população (pessoas 65+ passaram de 6% em 2010 para 12% em 2022) pode alterar demanda por serviços de transporte mais próximos e acessíveis. Esses são indícios, não provas.\n\nO que precisa ser verificado e pesquisado\n- Origem-destino por modo: levantamento atualizado (ônibus, carro, moto, bicicleta, a pé).  \n- Frota e oferta: número de ônibus, linhas, horários, frequências e cobertura geográfica.  \n- Tempo de viagem e congestionamentos por corredor.  \n- Taxa de motorização por região e posse de veículo por domicílio.  \n- Infraestrutura ativa (ciclovias, calçadas) e sua continuidade entre bairros.\n\nImpactos locais e perguntas de apuração\n- Como a distribuição etária (mais idosos) influencia demanda por viagens curtas e por transporte adaptado?  \n- Quais corredores concentram maiores fluxos pendulares entre residência e trabalho?  \n\nO que moradores podem fazer hoje\n- Exigir dados de origem-destino junto à Prefeitura e à empresa de transporte.  \n- Mapear pontos de embarque que enfrentam superlotação ou falta de acessibilidade.\n\nConclusão factual e transparência\n- Fato confirmado: o Censo 2022 fornece a distribuição populacional por região.  \n- Hipótese/questão: padrões de mobilidade dependem de dados que não constam no Censo; é necessário levantamento específico. Abaixo há lista de fontes e tarefas para verificação antes da publicação final.",
+      "faq": [
+        {
+          "question": "O Censo 2022 mostra como as pessoas vão ao trabalho?",
+          "answer": "Não; o Censo informa distribuição populacional e faixa etária, mas não detalha modal share por deslocamento entre regiões. Para isso são necessárias pesquisas de origem-destino ou dados operacionais das empresas de transporte."
+        },
+        {
+          "question": "Onde encontrar dados sobre linhas de ônibus?",
+          "answer": "Dados operacionais costumam estar com a Prefeitura (secretaria de mobilidade) e com as novas regras do sistema de transporte; é preciso solicitar planilhas de linhas, itinerários e frequência."
+        }
+      ],
+      "geo_summary": "Distribuição por região (Sul, Leste, Centro, Oeste, Sudeste, Norte, rural) e população urbana/rural em São José dos Campos—base: Censo 2022.",
+      "internal_links": [
+        "/demografia/sao-jose-campos-censo-2022",
+        "/mobilidade/licitacao-onibus-sjc",
+        "/infraestrutura/ciclovias-sjc"
+      ],
+      "sources_to_consult": [
+        "IBGE - página São José dos Campos (Censo 2022)",
+        "Prefeitura de São José dos Campos - Secretaria de Mobilidade/Transporte",
+        "Pesquisa Origem-Destino municipal (se houver)",
+        "DER-SP (corredores rodoviários)",
+        "Dados abertos municipais (linhas de ônibus, horários)"
+      ],
+      "verification_tasks": [
+        "Solicitar à Prefeitura a pesquisa Origem-Destino ou dados equivalentes",
+        "Obter tabela de linhas, horários e frota do operador de ônibus",
+        "Verificar taxa de motorização por região (registro de veículos)",
+        "Coletar tempos médios de viagem por corredor em horários de pico"
+      ],
+      "publication_status": "em revisão — verificar dados indicados"
+    },
+    {
+      "id": "22",
+      "cluster": "mobilidade",
+      "title": "A Via Dutra aproxima ou divide a cidade?",
+      "primary_keyword": "Via Dutra São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Via Dutra em São José dos Campos: aproxima ou divide? | Radar SJC",
+      "meta_description": "Análise sobre os efeitos da Via Dutra em São José dos Campos usando limites de dados disponíveis e lista de verificações necessárias para entender impactos urbanos e de mobilidade.",
+      "slug": "via-dutra-aproxima-ou-divide-sjc",
+      "answer_first": "Resposta direta: a Via Dutra é um elemento físico central na geografia de São José dos Campos, mas o Censo e as fontes oficiais citadas não permitem afirmar se ela aproxima ou divide a cidade sem estudos de acessibilidade, barulho, uso do solo e fluxos rodoviários específicos.",
+      "article_markdown": "Resposta direta: a Via Dutra é um elemento físico central na geografia de São José dos Campos, mas o Censo e as fontes oficiais citadas não permitem afirmar se ela aproxima ou divide a cidade sem estudos de acessibilidade, barulho, uso do solo e fluxos rodoviários específicos.\n\nFatos confirmados e alcance dos dados\n- O estoque demográfico do Censo 2022 e as estimativas do IBGE indicam onde as pessoas moram por região, mas não conectam diretamente esse mapa à influência física da rodovia. Não há, nas fontes fornecidas, dados públicos que quantifiquem barreiras urbanas criadas pela Via Dutra dentro de SJC.\n\nPossíveis efeitos urbanos (hipóteses a testar)\n- Rodovias de grande porte costumam atuar como barreiras físicas quando limitam travessias seguras entre bairros e quando alinham uso do solo a favor do tráfego de passagem.  \n- Também podem facilitar o acesso intermunicipal e o transporte de carga, influenciando localização de indústrias e serviços próximos. Essas são possibilidades plausíveis, não conclusões sobre SJC.\n\nO que precisa ser verificado\n- Número e localização de passarelas, viadutos e cruzamentos que permitem travessia local.  \n- Medições de ruído, qualidade do ar e impactos ambientais em áreas próximas.  \n- Uso do solo e ocupação (empresas, moradia, comércio) ao longo dos dois lados da rodovia.  \n- Dados de acidentes e segurança viária em trechos dentro do município.\n\nRelevância para moradores e pesquisadores\n- Entender se a Via Dutra “divide” bairros ou facilita integração depende de indicadores de acessibilidade a pé, por bicicleta e por transporte público, além de políticas de urbanismo.\n\nFontes e próximos passos\n- Consultar DER-SP, ANTT, Prefeitura (urbanismo e mobilidade), IBGE e dados abertos para mapas de infraestrutura e levantamentos ambientais.  \n- Propor pesquisa de campo ou pedido de informações públicas (LAI) sobre travessias e estudos ambientais.\n\nSeparação entre fato e hipótese\n- Fato confirmado: a rodovia atravessa a região metropolitana e é um eixo de tráfego intermunicipal.  \n- Hipótese: seus efeitos como barreira local em SJC exigem estudos específicos listados acima.",
+      "faq": [
+        {
+          "question": "A Via Dutra corta bairros de São José dos Campos?",
+          "answer": "A rodovia atravessa o território municipal e é eixo de tráfego intermunicipal, mas a configuração de cortes entre bairros só pode ser avaliada com mapas de uso do solo e pontos de travessia."
+        },
+        {
+          "question": "Quais órgãos têm dados sobre a Via Dutra?",
+          "answer": "DER-SP, ANTT e a Prefeitura (secretarias de urbanismo e mobilidade) costumam ter dados sobre trechos, obras, travessias e acidentes; solicitar informações é recomendável."
+        }
+      ],
+      "geo_summary": "Análise qualitativa sobre a presença da Rodovia Presidente Dutra no território de São José dos Campos; demanda verificação por órgãos como DER-SP e Prefeitura.",
+      "internal_links": [
+        "/infraestrutura/rodovias-sjc",
+        "/seguranca/acidentes-viarios-sjc"
+      ],
+      "sources_to_consult": [
+        "DER-SP",
+        "ANTT",
+        "Prefeitura de São José dos Campos - urbanismo e mobilidade",
+        "IBGE - mapas e uso do solo",
+        "Dados abertos municipais (mapas e licenciamento)"
+      ],
+      "verification_tasks": [
+        "Solicitar mapas de travessias e pontos de passagem sobre a Via Dutra",
+        "Obter dados de acidentes na rodovia dentro do município",
+        "Medir ruído e qualidade do ar em áreas adjacentes",
+        "Mapear uso do solo ao longo dos trechos municipais"
+      ],
+      "publication_status": "em revisão — verificar dados indicados"
+    },
+    {
+      "id": "23",
+      "cluster": "infraestrutura",
+      "title": "São José dos Campos está preparada para o crescimento da população?",
+      "primary_keyword": "crescimento São José dos Campos infraestrutura",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "SJC e infraestrutura: preparada para o crescimento populacional? | Radar SJC",
+      "meta_description": "Análise sobre a preparação de infraestrutura em São José dos Campos ao crescimento populacional com dados do Censo 2022 e lista de verificação de capacidades em serviços públicos e infraestrutura urbana.",
+      "slug": "sjc-preparada-crescimento-populacao",
+      "answer_first": "Resposta direta: o crescimento populacional registrado entre 2010 e 2022 (10,66%) indica aumento de demanda por infraestrutura, mas avaliar se a cidade está preparada exige checagem de capacidade em saúde, educação, saneamento, transporte e habitação — informações que não são totalmente cobertas pelo Censo.",
+      "article_markdown": "Resposta direta: o crescimento populacional registrado entre 2010 e 2022 (10,66%) indica aumento de demanda por infraestrutura, mas avaliar se a cidade está preparada exige checagem de capacidade em saúde, educação, saneamento, transporte e habitação — informações que não são totalmente cobertas pelo Censo.\n\nDados confirmados\n- Censo 2010: 629.921 habitantes; Censo 2022: 697.054 — crescimento de 10,66% no período. Prefeitura indica taxa média anual de 1,65% entre 2010 e 2022. IBGE estimativas: 727.078 (2025) e 729.153 (2026) em páginas oficiais.\n\nÁreas-chave para avaliação\n- Saneamento básico: cobertura de água tratada, esgotamento sanitário e drenagem pluvial.  \n- Saúde: número de leitos, unidades básicas, distribuição geográfica e capacidade para envelhecimento populacional (65+ passou de 6% para 12% entre 2010 e 2022).  \n- Educação: vagas em creche e ensino fundamental, distribuição por região.  \n- Transporte: oferta e qualidade do transporte público, capacidade rodoviária e mobilidade ativa.  \n- Habitação: oferta de moradias, regularização fundiária e custos de mercado.\n\nO que é hipótese e precisa ser comprovado\n- Hipótese: o envelhecimento mais rápido da população pressiona serviços de saúde e acessibilidade. É plausível, mas requer dados de utilização dos serviços e capacidade instalada.  \n- Hipótese: áreas com maior crescimento demandam expansão da rede de coleta de esgoto e abastecimento; essa ligação precisa ser verificada com dados do Saae/estado.\n\nTarefas de verificação antes da publicação\n- Levantar indicadores por área junto a DataSUS, INEP (educação), Prefeitura (saneamento e obras), CNES (saúde), e redes de dados abertos estaduais.  \n- Cruzar estimativas IBGE com projetos de investimento municipal e estadual planejados para os próximos anos.\n\nComo moradores podem acompanhar\n- Consultar planos diretores, relatórios de execução orçamentária e agendas de conselhos de saúde e educação; solicitar informações públicas quando necessário.\n\nSeparação clara entre fato e pergunta de apuração\n- Fato: crescimento populacional entre 2010 e 2022 e mudança na estrutura etária são dados do Censo.  \n- Perguntas de apuração: capacidade atual e projetos de expansão dos serviços apontados acima.",
+      "faq": [
+        {
+          "question": "O crescimento de 2010 a 2022 compromete serviços públicos?",
+          "answer": "O crescimento cria maior demanda, mas comprometer ou não os serviços depende da capacidade instalada e dos investimentos realizados; é preciso verificar indicadores específicos (leitos, vagas, cobertura de esgoto)."
+        },
+        {
+          "question": "Onde encontrar planos de expansão de infraestrutura?",
+          "answer": "Planos diretores, planos de saneamento, relatórios da Prefeitura e projetos publicados em portais de transparência são pontos iniciais para verificação."
+        }
+      ],
+      "geo_summary": "Crescimento populacional de São José dos Campos (2010→2022) e mudança etária; necessidade de cruzamento com dados setoriais (saúde, educação, saneamento) por região.",
+      "internal_links": [
+        "/planejamento/planodiretor-sjc",
+        "/transparencia/investimentos-obras-sjc"
+      ],
+      "sources_to_consult": [
+        "IBGE (Censo 2010 e 2022; estimativas 2025/2026)",
+        "Prefeitura de São José dos Campos - planos e projetos",
+        "DataSUS, CNES, INEP, Saae municipal",
+        "SEADE e dados estaduais"
+      ],
+      "verification_tasks": [
+        "Solicitar números atualizados de cobertura de água e esgoto ao Saae/Prefeitura",
+        "Obter capacidade instalada em saúde (leitos, UBS) via CNES/DataSUS",
+        "Checar vagas em creche e escolas via INEP/Prefeitura",
+        "Mapear investimentos públicos planejados para próximos anos"
+      ],
+      "publication_status": "em revisão — verificar dados indicados"
+    },
+    {
+      "id": "24",
+      "cluster": "transporte",
+      "title": "Quem depende de transporte público na cidade?",
+      "primary_keyword": "ônibus São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Quem depende do transporte público em São José dos Campos? | Radar SJC",
+      "meta_description": "Perfil dos dependentes do transporte público em São José dos Campos com base no Censo 2022 e orientações sobre dados a obter para mapear vulnerabilidades e demanda por ônibus.",
+      "slug": "quem-depende-transporte-publico-sjc",
+      "answer_first": "Resposta direta: o Censo 2022 não fornece número direto de usuários de ônibus; é possível identificar grupos prováveis de dependência (população de baixa renda, idosos, jovens sem veículo) a partir de indicadores demográficos, mas é necessário cruzar com dados de renda, posse de veículo e pesquisas de mobilidade para confirmar.",
+      "article_markdown": "Resposta direta: o Censo 2022 não fornece número direto de usuários de ônibus; é possível identificar grupos prováveis de dependência (população de baixa renda, idosos, jovens sem veículo) a partir de indicadores demográficos, mas é necessário cruzar com dados de renda, posse de veículo e pesquisas de mobilidade para confirmar.\n\nElementos confirmados\n- Censo 2022 registra população total e distribuição por regiões do município, e mostra envelhecimento demográfico (65+ de 6% para 12% entre 2010 e 2022). Esses dados ajudam a identificar áreas com maior potencial de demanda por transporte público, mas não quantificam usuários.\n\nGrupos mais suscetíveis à dependência (hipóteses fundamentadas)\n- Pessoas com menor renda e domicílios sem automóvel tendem a depender mais de transporte coletivo.  \n- Idosos e jovens que não têm carteira de motorista formalmente são outros grupos com maior propensão.  \n- Trabalhadores de turno e empregados em setores com horários fixos costumam depender de linhas regulares; essa hipótese precisa de dados laborais para confirmação.\n\nQue dados faltam e onde procurá-los\n- Modal split e pesquisa Origem-Destino para identificar quem usa ônibus e em que trajetos.  \n- Registro de domicílios com veículos (DETRAN/registro municipal) para estimar taxa de motorização.  \n- Dados socioeconômicos por bairro (renda, ocupação) disponíveis em bases do IBGE e da Prefeitura.  \n- Informações operacionais do operador de ônibus: número de linhas, itinerários, capacidade e ocupação média.\n\nComo usar essas informações localmente\n- Identificar áreas subatendidas para priorizar melhorias de frequência e acessibilidade.  \n- Direcionar políticas para atender grupos vulneráveis (idosos, pessoas com deficiência, trabalhadores de turno).\n\nPerguntas de apuração para completar a reportagem\n- Qual a participação modal do ônibus em trajetos casa-trabalho em SJC?  \n- Quais bairros registram maior uso do transporte público e quais sofrem com baixa oferta?\n\nConclusão e transparência\n- Fato confirmado: Censo indica estrutura demográfica e distribuição por região.  \n- Questão a apurar: número efetivo de dependentes de ônibus e distribuição espacial dessa dependência.",
+      "faq": [
+        {
+          "question": "O Censo mostra quantas pessoas usam ônibus diariamente?",
+          "answer": "Não. O Censo não traz modal split detalhado. Para isso é necessário pesquisa de origem-destino ou dados operacionais do sistema de transporte."
+        },
+        {
+          "question": "Como reclamar sobre falta de ônibus ou acessibilidade?",
+          "answer": "Registrar reclamação na Prefeitura (secretaria de mobilidade) e manter histórico de solicitações ajuda a pressionar por ajustes; coletar horários e números de linha auxilia em pedidos formais."
+        }
+      ],
+      "geo_summary": "Perfil demográfico e regional de SJC (Censo 2022) usado como base para identificar potencial dependência do transporte público; faltam dados operacionais para mapear usuários reais.",
+      "internal_links": [
+        "/mobilidade/linhas-onibus-sjc",
+        "/transparencia/reclamacoes-onibus"
+      ],
+      "sources_to_consult": [
+        "IBGE (dados demográficos)",
+        "Prefeitura - Secretaria de Mobilidade e empresa operadora de ônibus",
+        "DETRAN - registros de veículos",
+        "Pesquisa Origem-Destino (municipal)",
+        "Dados abertos municipais sobre transporte"
+      ],
+      "verification_tasks": [
+        "Solicitar pesquisa Origem-Destino ou dados de embarques por linha",
+        "Obter registros de propriedade de veículos por bairro",
+        "Mapear indicadores socioeconômicos por região (renda, ocupação)",
+        "Pedir dados de lotação média por linha ao operador de ônibus"
+      ],
+      "publication_status": "em revisão — verificar dados indicados"
+    },
+    {
+      "id": "25",
+      "cluster": "regional",
+      "title": "Como São José dos Campos se conecta a São Paulo, Taubaté, litoral e Serra da Mantiqueira?",
+      "primary_keyword": "distâncias São José dos Campos",
+      "search_intent": "informational",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Conexões e distâncias: São José dos Campos a SP, Taubaté, litoral e Serra | Radar SJC",
+      "meta_description": "Resumo sobre as conexões rodoviárias e sinais de acessibilidade entre São José dos Campos e principais regiões vizinhas; lista de dados a confirmar com órgãos rodoviários e serviços de transporte.",
+      "slug": "conexoes-distancias-sjc-regioes",
+      "answer_first": "Resposta direta: São José dos Campos está ligada por rodovias importantes à capital, cidades vizinhas e ao litoral; porém, para precisão de distâncias e tempos médios de viagem por modal, é necessário consultar DER-SP, ANTT, rotas oficiais e operadores de transporte intermunicipal.",
+      "article_markdown": "Resposta direta: São José dos Campos está ligada por rodovias importantes à capital, cidades vizinhas e ao litoral; porém, para precisão de distâncias e tempos médios de viagem por modal, é necessário consultar DER-SP, ANTT, rotas oficiais e operadores de transporte intermunicipal.\n\nFatos confirmados e limites\n- As fontes oficiais citadas (IBGE e Prefeitura) descrevem a posição de São José dos Campos no Vale do Paraíba e sua população, mas não substituem medições de distâncias e tempos de deslocamento. Informações detalhadas de estrada, horários e condições são trazidas por órgãos como DER-SP e operadores rodoviários.\n\nConexões típicas a verificar (itinerários e trechos)\n- São José dos Campos ↔ São Paulo (capital): ligação por rodovias federais e estaduais que costumam ser corredor de tráfego intenso; verificar itinerários oficiais e tempos médios.  \n- São José dos Campos ↔ Taubaté: deslocamento regional dentro do Vale do Paraíba, geralmente com fluxo diário de trabalhadores e serviços.  \n- São José dos Campos ↔ litoral (Litoral Norte/Sul): acesso por rodovias que conectam o Vale do Paraíba à costa; tempos variam conforme condições sazonais e obras.  \n- São José dos Campos ↔ Serra da Mantiqueira: acesso por estradas estaduais/municipais para áreas de serra e turismo de natureza; checar trechos e manutenção.\n\nDados a coletar para completar a análise\n- Distâncias oficiais por rota e tempos médios em diferentes horários e dias da semana.  \n- Frequência e horários de linhas intermunicipais e interestaduais (ônibus, transporte executivo).  \n- Condições de tráfego e pontos críticos (obras, acidentes, trechos com restrições).  \n- Alternativas de transporte (trens regionais, se aplicável, ou serviços de fretamento).\n\nComo moradores podem usar essa informação\n- Planejar viagens consultando horários e condições de tráfego em aplicativos e órgãos responsáveis; verificar projetos de melhoria em DER-SP e Prefeitura.\n\nSeparação entre fato e necessidade de verificação\n- Fato confirmado: SJC é pólo regional com ligações rodoviárias a outras áreas do estado e região.  \n- Pergunta de verificação: distâncias exatas e tempos médios por rota e por modal, que exigem consulta a DER-SP, ANTT e operadores de transporte.",
+      "faq": [
+        {
+          "question": "Existe trem de passageiros ligando SJC a São Paulo?",
+          "answer": "Atualmente, a principal ligação é rodoviária. Projetos de trens regionais podem existir em estudo, mas é preciso consultar DER-SP e concessionárias para confirmar situação atual."
+        },
+        {
+          "question": "Como verificar o tempo de viagem até o litoral?",
+          "answer": "Consultar operadores rodoviários, DER-SP e serviços de transporte por aplicativo; comparar horários em dias de alta temporada e verificar alertas de obras e tráfego."
+        }
+      ],
+      "geo_summary": "Posição de São José dos Campos no Vale do Paraíba e suas conexões rodoviárias com a capital, cidades vizinhas, litoral e Serra da Mantiqueira; exige checagem de rotas e tempos com DER-SP e ANTT.",
+      "internal_links": [
+        "/regional/estradas-e-corredores",
+        "/mobilidade/transportes-intermunicipais"
+      ],
+      "sources_to_consult": [
+        "DER-SP (mapas rodoviários e condições)",
+        "ANTT (informações sobre rodovias federais)",
+        "Operadores de transporte intermunicipal e empresas de ônibus",
+        "Prefeitura de São José dos Campos - projetos viários",
+        "IBGE - posicionamento geográfico e perfil municipal"
+      ],
+      "verification_tasks": [
+        "Obter distâncias oficiais e tempos médios por rota junto ao DER-SP",
+        "Solicitar horários e frequências das empresas intermunicipais",
+        "Verificar existência e status de projetos ferroviários regionais",
+        "Mapear trechos críticos e obras em andamento que afetam tempos de viagem"
+      ],
+      "publication_status": "em revisão — verificar dados indicados"
+    },
+    {
+      "id": "26",
+      "cluster": "saúde",
+      "title": "Onde estão os hospitais e unidades de saúde de São José dos Campos?",
+      "primary_keyword": "hospitais São José dos Campos",
+      "search_intent": "informacional",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Hospitais e unidades de saúde em São José dos Campos — onde ficam",
+      "meta_description": "Mapa e orientação sobre onde buscar hospitais, UBS e serviços de saúde em São José dos Campos. O que já sabemos e o que precisa ser verificado.",
+      "slug": "onde-estao-hospitais-unidades-sjc",
+      "answer_first": "Hospitais e unidades de saúde estão distribuídos por toda a cidade, com concentração esperada nas regiões mais populosas; lista completa e posições precisam ser conferidas em bases oficiais (CNES, Prefeitura, DataSUS).",
+      "article_markdown": "Resposta direta\nHospitais e unidades básicas de saúde (UBS) existem em todas as regiões de São José dos Campos, mas a localização exata, porte e serviços oferecidos devem ser consultados em registros oficiais (CNES/DataSUS) antes de qualquer uso informativo.\n\nO que já está confirmado\n- População e distribuição: o Censo 2022 do IBGE mostra 697.054 habitantes no município e detalha a população por região (por exemplo, Sul 237.572; Leste 181.463; Centro 72.401; Oeste 64.482; Sudeste 62.541; Norte 61.940; rural 15.212; São Francisco Xavier 1.443). Esses números ajudam a contextualizar onde a demanda por saúde tende a ser maior.\n- Rede mista: como em cidades de porte semelhante, a oferta inclui unidades públicas municipais, hospitais estaduais e privados. Para nomes, endereços e capacidade, não há lista oficial completa aqui; é preciso consultar as bases indicadas abaixo.\n\nO que falta confirmar (hipóteses e perguntas de apuração)\n- Quantos hospitais com atendimento de urgência e maternidade existem por região.\n- Distribuição de Unidades Básicas de Saúde (UBS/USF) por região e cobertura da Estratégia Saúde da Família.\n- Número de leitos por 1.000 habitantes, leitos de UTI e especialidades disponíveis localmente.\n- Tempos médios de espera para consultas e urgências em cada tipo de serviço.\n\nComo moradores podem usar essa informação\n- Antes de buscar atendimento, verifique no DataSUS/CNES ou na página da Prefeitura a unidade mais próxima e seus horários.\n- Em casos graves, informe-se também sobre portas de entrada (UPA, pronto-socorro, hospitais de referência) e transporte até elas.\n\nFontes e bases a consultar\nIBGE (Censo 2022), Prefeitura de São José dos Campos, CNES (Ministério da Saúde), DataSUS, Secretaria de Saúde do Estado de SP, Ouvidoria municipal.\n\nO que precisa ser verificado antes de publicar\n- Lista e localização (endereços e coordenadas) de hospitais e UBS/USF.\n- Classificação pública/privada, serviços (urgência, maternidade, UTI), número de leitos.\n- Horários de funcionamento, telefones e fluxo de referência entre unidades.\n\nFAQ\n1) Onde encontro a lista oficial de hospitais? — Consulte o CNES/DataSUS e a Secretaria Municipal de Saúde.\\n2) A Prefeitura tem mapa das unidades? — Normalmente sim; confirmar na página de serviços/saúde.\\n3) Como saber se uma UBS atende minha família? — Verificar cobertura da Estratégia Saúde da Família no site da Prefeitura ou contato da UBS.\\n4) Há hospitais 24h em todas as regiões? — Isso precisa ser verificado por unidade; não há informação única confirmada aqui.\n",
+      "faq": [
+        {
+          "question": "Onde encontro a lista oficial de hospitais em São José dos Campos?",
+          "answer": "A lista oficial está nas bases do CNES (Ministério da Saúde) e no DataSUS, além do site da Secretaria Municipal de Saúde."
+        },
+        {
+          "question": "A Prefeitura disponibiliza um mapa das unidades?",
+          "answer": "A Prefeitura costuma ter páginas e serviços com a localização das unidades; é preciso confirmar no portal municipal de serviços/saúde."
+        },
+        {
+          "question": "Como confirmar se uma UBS atende minha família?",
+          "answer": "Verifique a cobertura da Estratégia Saúde da Família no site da Prefeitura ou entre em contato direto com a UBS."
+        },
+        {
+          "question": "Existem hospitais 24 horas em todas as regiões?",
+          "answer": "Essa informação varia por unidade e deve ser consultada nas bases oficiais ou ligando diretamente às unidades."
+        }
+      ],
+      "geo_summary": "Dados do Censo 2022 mostram 697.054 habitantes distribuídos por Sul, Leste, Centro, Oeste, Sudeste, Norte, rural e São Francisco Xavier; localização exata das unidades de saúde deve ser consultada em CNES/DataSUS e Prefeitura.",
+      "internal_links": [
+        "/saude",
+        "/populacao",
+        "/servicos-publicos"
+      ],
+      "sources_to_consult": [
+        "https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html",
+        "https://www.sjc.sp.gov.br/servicos/governanca/populacao/",
+        "https://cnes.datasus.gov.br/",
+        "https://www.saude.gov.br/ (DataSUS)",
+        "Secretaria Municipal de Saúde de São José dos Campos (portal oficial)"
+      ],
+      "verification_tasks": [
+        "Obter lista atualizada de hospitais, UBS e USF com endereços e coordenadas (CNES/DataSUS/Prefeitura).",
+        "Confirmar classificação pública/privada e serviços oferecidos (urgência, maternidade, UTI).",
+        "Levantar número de leitos e especialidades por unidade.",
+        "Verificar horários de funcionamento, contatos e fluxos de referência entre unidades."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "27",
+      "cluster": "saúde",
+      "title": "O acesso à saúde é igual em todas as regiões da cidade?",
+      "primary_keyword": "saúde pública São José dos Campos",
+      "search_intent": "informacional",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Acesso à saúde por região em São José dos Campos — desigualdades e dados",
+      "meta_description": "Análise do acesso à saúde em São José dos Campos: o que os dados confirmam, o que falta verificar e onde buscar informações oficiais.",
+      "slug": "acesso-saude-regioes-sjc",
+      "answer_first": "Não há evidência única de que o acesso à saúde seja igual em todas as regiões; distribuição populacional e envelhecimento sugerem necessidades diferentes, e a situação real precisa ser checada em bases oficiais.",
+      "article_markdown": "Resposta direta\nNão é possível afirmar que o acesso à saúde seja igual em todas as regiões de São José dos Campos sem cruzar dados de oferta de serviços, cobertura da Atenção Primária e indicadores de uso; há elementos que indicam demandas distintas entre áreas.\n\nO que os dados confirmados mostram\n- População e distribuição: o Censo 2022 registra 697.054 habitantes, com concentração maior no Sul (237.572) e Leste (181.463). A população idosa (65+) dobrou de 6% em 2010 para 12% em 2022, ao passo que a faixa 0–14 caiu de 22% para 18%.\n- Implicação inicial: regiões mais populosas tendem a demandar mais serviços; o aumento relativo de idosos implica maior procura por atenção continuada e especializada.\n\nO que é hipótese e precisa ser verificado\n- Se a oferta de UBS, hospitais e UPA é proporcional à população por região.\n- Cobertura da Estratégia Saúde da Família (ESF) por bairro/região e densidade de médicos por 1.000 habitantes.\n- Tempo de deslocamento até unidades de referência e disponibilidade de transporte para pacientes.\n- Indicadores de uso que apontem desigualdade (internações por condições sensíveis à atenção primária, filas de atendimento, taxas de vacinação). Esses pontos exigem dados do CNES, DataSUS, Secretaria Municipal e indicadores administrativos.\n\nComo apurar e quais fontes consultar\nPara avaliar equidade é preciso cruzar: localização das unidades (CNES/DataSUS), mapas de cobertura da ESF (Prefeitura), tempos de deslocamento (análise GIS com malha viária do DER-SP), indicadores de saúde (DataSUS, SIM, SIH), e registros de ouvidoria municipal.\n\nO que moradores e pesquisadores podem fazer\n- Moradores: identifique a UBS mais próxima e confirme serviços; registre dificuldades em canais oficiais (ouvidoria) para que haja evidência pública.\n- Pesquisadores: solicite dados de atenção primária, estrutura hospitalar e fluxos de referência; produza mapas de oferta por 10 mil habitantes.\n\nFAQ\n1) Onde achar dados de cobertura da ESF? — Prefeitura e DataSUS/CNES.\\n2) Como saber se minha região tem tempo de espera maior? — Exija relatórios de tempo médio de espera na ouvidoria e compare com dados municipais.\\n3) Há estudo público sobre desigualdade intra-municipal? — Procurar publicações da Prefeitura, universidades locais e Seade.\n",
+      "faq": [
+        {
+          "question": "Onde encontro dados sobre a cobertura da Estratégia Saúde da Família?",
+          "answer": "Na base CNES/DataSUS e no portal da Secretaria Municipal de Saúde; algumas informações podem ser solicitadas via Lei de Acesso à Informação."
+        },
+        {
+          "question": "Como medir se uma região tem pior acesso?",
+          "answer": "Combine localização das unidades, número de profissionais, tempos de deslocamento e indicadores de uso (internações sensíveis à APS, filas)."
+        },
+        {
+          "question": "Posso reclamar em caso de falta de atendimento?",
+          "answer": "Sim; registre o ocorrido na Ouvidoria da Saúde municipal para que haja documentação e possibilidade de resposta."
+        }
+      ],
+      "geo_summary": "Usar distribuição populacional do Censo 2022 (Sul, Leste, Centro, Oeste, Sudeste, Norte, rural) e as mudanças etárias para avaliar demandas regionais; dados de oferta e desempenho devem vir de CNES/DataSUS e Prefeitura.",
+      "internal_links": [
+        "/saude/unidades",
+        "/ouvidoria",
+        "/populacao"
+      ],
+      "sources_to_consult": [
+        "https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html",
+        "https://cnes.datasus.gov.br/",
+        "https://www.sjc.sp.gov.br/servicos/governanca/populacao/",
+        "DataSUS (SIH, SIM, SIAB)",
+        "Secretaria Municipal de Saúde de São José dos Campos"
+      ],
+      "verification_tasks": [
+        "Mapear unidades de saúde (CNES) e relacionar por região com dados do Censo 2022.",
+        "Obter cobertura da ESF e número de profissionais por unidade.",
+        "Medir tempos médios de deslocamento e espera por serviço.",
+        "Recolher indicadores de uso: internações por condições sensíveis à APS, filas, vacinas, etc."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "28",
+      "cluster": "participação",
+      "title": "Quais são os principais problemas apontados pelos moradores?",
+      "primary_keyword": "problemas de São José dos Campos",
+      "search_intent": "informacional/participativo",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Problemas apontados pelos moradores de São José dos Campos — levantamento e próximos passos",
+      "meta_description": "Resumo de como levantar os problemas citados por moradores de São José dos Campos, o que já se sabe pelos dados oficiais e o que precisa ser apurado.",
+      "slug": "problemas-apontados-moradores-sjc",
+      "answer_first": "Não há uma lista oficial única aqui; problemas relatados por moradores variam por região e precisam ser levantados por fontes como Ouvidoria, pesquisas locais e associações comunitárias para confirmação.",
+      "article_markdown": "Resposta direta\nOs problemas que moradores apontam em qualquer cidade costumam incluir serviços públicos, mobilidade, segurança, saúde e meio ambiente, mas em São José dos Campos as questões concretas precisam ser comprovadas por registros oficiais e pesquisas locais.\n\nO que podemos afirmar com base em dados confirmados\n- População e tendências demográficas: o Censo 2022 mostra 697.054 habitantes, aumento de 10,66% desde 2010, e envelhecimento (65+ passou de 6% para 12%). Essas mudanças alteram demandas por serviços e infraestrutura.\n\nO que é hipótese e requer apuração\n- Prioridades locais: quais problemas aparecem com maior frequência nas reclamações (falta de transporte, atendimento de saúde, pavimentação, alagamentos, iluminação pública etc.).\n- Diferenças entre regiões: se Sul ou Leste, por exemplo, têm maior volume de queixas por conta da maior população.\n- Demanda por serviços para idosos: necessidade de mais atenção domiciliar, transporte adaptado e assistência especializada.\n\nComo levantar evidências\n- Consultar Ouvidoria municipal e relatórios de atendimento para identificar temas recorrentes.\n- Revisar resultados de audiências públicas, conselhos municipais e orçamentos participativos.\n- Fazer análise de redes sociais e grupos comunitários com cuidado metodológico e ética.\n- Buscar dados administrativos (manutenção urbana, reclamações de iluminação, pedidos de tapa-buraco) junto às secretarias responsáveis.\n\nRecomendações práticas para moradores\n- Registre reclamações na Ouvidoria e protocole pedidos para que haja rastreabilidade;\n- Participe de reuniões de bairro ou conselhos para levar problemas ao poder público;\n- Organize coleta de evidências locais (fotos datadas, listas de moradores afetados) para reforçar demandas.\n\nFAQ\n1) Existe pesquisa oficial sobre satisfação dos moradores? — Procurar por pesquisas realizadas pela Prefeitura, universidades locais e institutos independentes.\\n2) Como registrar uma reclamação formalmente? — Use a Ouvidoria municipal e protocole o pedido para obter resposta formal.\\n3) Onde vejo relatórios de audiências públicas? — Normalmente publicados no portal da Prefeitura ou nas secretarias responsáveis.\n",
+      "faq": [
+        {
+          "question": "Como registro uma reclamação que atinge minha rua?",
+          "answer": "Registre na Ouvidoria municipal e, se possível, anexe fotos e dados para facilitar o protocolo e acompanhamento."
+        },
+        {
+          "question": "Existem dados públicos sobre queixas por tema?",
+          "answer": "Sim, mas é preciso solicitar relatórios à Ouvidoria ou acessar publicações da Prefeitura e conselhos municipais."
+        },
+        {
+          "question": "Como participar de decisões locais?",
+          "answer": "Participe de conselhos, audiências públicas e reuniões de bairro; informe-se no portal da Prefeitura sobre agendas."
+        }
+      ],
+      "geo_summary": "Com base no Censo 2022 e na distribuição por região, é necessário cruzar registros da Ouvidoria e órgãos municipais para identificar padrões de reclamação por Sul, Leste, Centro, Oeste, Sudeste, Norte e áreas rurais.",
+      "internal_links": [
+        "/participacao/ouvidoria",
+        "/servicos-publicos/manutencao",
+        "/populacao"
+      ],
+      "sources_to_consult": [
+        "Portal da Ouvidoria de São José dos Campos",
+        "Relatórios de audiências públicas e conselhos municipais",
+        "IBGE Censo 2022",
+        "Prefeitura de São José dos Campos (secretarias por tema)"
+      ],
+      "verification_tasks": [
+        "Solicitar relatórios da Ouvidoria municipal por tema e região.",
+        "Checar atas e relatórios de audiências públicas e conselhos de bairro.",
+        "Mapear reclamações administrativas (manutenção urbana, iluminação, transporte).",
+        "Realizar entrevistas ou questionários com amostra representativa de moradores, se possível, ou usar dados já existentes."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "29",
+      "cluster": "ambiente",
+      "title": "Clima, enchentes e calor: quais riscos ambientais afetam São José dos Campos?",
+      "primary_keyword": "clima São José dos Campos",
+      "search_intent": "informacional/preventivo",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Riscos ambientais em São José dos Campos: clima, enchentes e calor",
+      "meta_description": "Análise dos riscos ambientais em São José dos Campos: o que sabemos e que dados consultar para mapear enchentes, calor e mudanças climáticas na cidade.",
+      "slug": "riscos-ambientais-sjc-clima-enchentes-calor",
+      "answer_first": "São José dos Campos enfrenta riscos ambientais relacionados ao clima, como enchentes e ondas de calor; a extensão e localização desses riscos precisam ser confirmadas com dados pluviométricos, mapas de risco (CEMADEN/Defesa Civil), e inventários locais.",
+      "article_markdown": "Resposta direta\nHá riscos ambientais associados a chuva intensa (enchentes) e a períodos de calor, mas a localização precisa de áreas vulneráveis em São José dos Campos depende de dados técnicos a serem consultados.\n\nO que precisa ser considerado e o que já é conhecido\n- Dados demográficos: com 697.054 habitantes (Censo 2022), a exposição humana a riscos naturais tem escala municipal. O aumento da população e a urbanização podem ampliar vulnerabilidades.\n- Enchentes e drenagem: áreas urbanas com ocupação em áreas baixas ou em margens de cursos d’água costumam ser mais vulneráveis. No entanto, não há aqui um mapa confirmado de áreas alagáveis; é preciso consultar CEMADEN, Defesa Civil municipal e mapas do DAEE/INPE.\n- Calor e ilhas de calor: aumento de temperatura em áreas urbanizadas é uma preocupação geral. A distribuição do verde urbano e a densidade construtiva influenciam, mas é necessário análise de sensoriamento remoto (INPE) e estudos locais para confirmar onde as ilhas de calor se formam na cidade.\n\nFontes e dados a consultar\n- CEMADEN e INMET para séries pluviométricas e alertas.\\n- Defesa Civil municipal para histórico de eventos e áreas mapeadas.\\n- INPE/IMPACTO e imagens de satélite para mapear cobertura vegetal e ilhas de calor.\\n- DAEE/DER-SP para informações sobre bacias, córregos e infraestrutura de drenagem.\n\nO que moradores podem verificar localmente\n- Identificar trechos que alagam com frequência e documentar data, hora e foto.\\n- Conferir se seu imóvel está em área de risco declarada pela Defesa Civil.\\n- Informar-se sobre planos de contingência e abrigos temporários em eventos extremos.\n\nO que precisa ser verificado antes da publicação\n- Mapas oficiais de risco por bairro e coordenadas de pontos críticos de enchente.\\n- Séries pluviométricas e registros históricos de eventos extremos.\\n- Estudos sobre temperatura urbana e cobertura vegetal na cidade.\n\nFAQ\n1) Onde vejo alertas de chuva e enchentes? — CEMADEN e Defesa Civil municipal.\\n2) Como saber se minha casa está em área de risco? — Conferir mapas da Defesa Civil e registros municipais; em dúvida, pedir vistoria técnica.",
+      "faq": [
+        {
+          "question": "Onde encontro mapas de risco de enchentes?",
+          "answer": "Em geral, CEMADEN e a Defesa Civil municipal publicam mapas e relatórios; também há dados hidrológicos no DAEE."
+        },
+        {
+          "question": "Como verificar se minha rua costuma alagar?",
+          "answer": "Documente ocorrências (fotos, datas) e compare com os mapas oficiais da Defesa Civil; registre reclamação para investigação técnica."
+        },
+        {
+          "question": "Há medidas preventivas que moradores podem tomar contra calor extremo?",
+          "answer": "Buscar espaços com sombra e ventilação, verificar planos municipais de redução de ilhas de calor e apoiar o aumento de áreas verdes locais; medidas técnicas dependem de políticas públicas."
+        }
+      ],
+      "geo_summary": "A exposição a enchentes e calor em São José dos Campos precisa ser avaliada com mapas e séries históricas (CEMADEN, Defesa Civil, INPE); o Censo 2022 fornece a base populacional para dimensionar a vulnerabilidade.",
+      "internal_links": [
+        "/meio-ambiente",
+        "/defesa-civil",
+        "/infraestrutura"
+      ],
+      "sources_to_consult": [
+        "CEMADEN (Centro Nacional de Monitoramento e Alertas de Desastres Naturais)",
+        "INMET (Instituto Nacional de Meteorologia) e INPE",
+        "Defesa Civil de São José dos Campos",
+        "DAEE e DER-SP",
+        "IBGE Censo 2022"
+      ],
+      "verification_tasks": [
+        "Pedir mapas oficiais de áreas alagáveis e históricos de eventos à Defesa Civil municipal e CEMADEN.",
+        "Obter séries pluviométricas e extremos climáticos de INMET/CEMADEN.",
+        "Solicitar estudos ou dados de sensoriamento remoto sobre cobertura vegetal e ilhas de calor (INPE).",
+        "Mapear bacias e infraestrutura de drenagem com DAEE/DER-SP."
+      ],
+      "publication_status": "draft"
+    },
+    {
+      "id": "30",
+      "cluster": "qualidade de vida",
+      "title": "O que os indicadores mostram sobre a qualidade de vida em São José dos Campos?",
+      "primary_keyword": "qualidade de vida São José dos Campos",
+      "search_intent": "informacional/analítico",
+      "audience": "moradores e pesquisadores",
+      "seo_title": "Indicadores de qualidade de vida em São José dos Campos — o que os dados dizem",
+      "meta_description": "Análise dos principais indicadores que ajudam a entender a qualidade de vida em São José dos Campos: demografia, saúde, e o que precisa ser verificado em fontes oficiais.",
+      "slug": "indicadores-qualidade-vida-sjc",
+      "answer_first": "Os indicadores demográficos do Censo 2022 mostram crescimento populacional e envelhecimento, que impactam qualidade de vida; avaliação completa exige cruzamento com dados de renda, educação, saúde e meio ambiente de fontes oficiais.",
+      "article_markdown": "Resposta direta\nCenso e estimativas mostram crescimento (de 629.921 em 2010 para 697.054 em 2022) e envelhecimento da população em São José dos Campos. Isso afeta demandas por serviços e é um dos elementos para avaliar qualidade de vida, mas uma avaliação abrangente requer indicadores socioeconômicos e ambientais complementares.\n\nO que os dados confirmados indicam\n- Crescimento populacional: aumento de 10,66% entre 2010 e 2022; Prefeitura informa taxa média anual de 1,65% no período.\n- Estimativas futuras: IBGE estimou 727.078 para 2025 e apresenta 729.153 para 2026 em sua página atual.\n- Estrutura etária: idosos (65+) passaram de 6% para 12% entre 2010 e 2022; crianças 0–14 reduziram de 22% para 18%.\n\nO que falta para medir qualidade de vida de forma abrangente\n- Indicadores econômicos: renda média, taxa de emprego formal/informal, desigualdade (Gini). Fontes: RAIS, Novo CAGED, Seade.\n- Educação: taxa de conclusão, IDEB, número de vagas por etapa; fontes: INEP e secretarias de educação.\n- Saúde e mortalidade: expectativa de vida, taxas de mortalidade, internações; fontes: DataSUS.\n- Segurança e mobilidade: taxas de crimes, tempo médio de deslocamento, acesso a transporte público; fontes: SSP, DER-SP e pesquisa local.\n- Meio ambiente e habitação: acesso a saneamento, qualidade do ar, áreas verdes por habitante; fontes: SNIS, INPE, secretarias municipais.\n\nComo proceder na apuração\nÉ necessário cruzar o Censo com bases administrativas (RAIS, INEP, DataSUS, SNIS, Seade) para produzir indicadores compostos (IDH municipal, taxa de emprego, cobertura de serviços básicos) que permitam comparações no tempo e com outras cidades.\n\nSugestões para moradores e pesquisadores\n- Moradores: consulte indicadores públicos no portal da Prefeitura e no IBGE para entender como sua região se posiciona.\\n- Pesquisadores: solicite microdados do Censo, bases administrativas e produza análises por região e faixa etária.\n\nFAQ\n1) Onde encontro o IDH municipal? — Atlas do Desenvolvimento Humano e IBGE podem trazer dados; confirmar com Seade para análises estaduais.\\n2) Como comparar qualidade de vida entre bairros? — Cruzar dados do Censo por setores censitários com indicadores municipais; exige trabalho de geoprocessamento.\n",
+      "faq": [
+        {
+          "question": "Onde consulto indicadores socioeconômicos de São José dos Campos?",
+          "answer": "IBGE (Censo e SIDRA), Seade, RAIS, Novo CAGED e portais municipais fornecem dados socioeconômicos."
+        },
+        {
+          "question": "O que significa o envelhecimento da população para a cidade?",
+          "answer": "Aumenta a demanda por saúde de longo prazo, acessibilidade, e serviços sociais; a magnitude precisa ser avaliada com dados de uso e oferta."
+        },
+        {
+          "question": "Como obter dados por bairro para pesquisas?",
+          "answer": "Solicite microdados do Censo, use o portal do IBGE e ferramentas GIS; dados administrativos podem ser obtidos por solicitação à Prefeitura."
+        }
+      ],
+      "geo_summary": "Use o Censo 2022 (697.054 habitantes, distribuição por região e mudança etária) como base; combinar com RAIS, INEP, DataSUS, SNIS e Seade permite avaliar qualidade de vida por região (Sul, Leste, Centro, Oeste, Sudeste, Norte, rural).",
+      "internal_links": [
+        "/qualidade-de-vida/indicadores",
+        "/populacao",
+        "/economia"
+      ],
+      "sources_to_consult": [
+        "https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html",
+        "Seade",
+        "RAIS e Novo CAGED (Ministério do Trabalho)",
+        "DataSUS (saúde)",
+        "INEP (educação)",
+        "SNIS (saneamento)"
+      ],
+      "verification_tasks": [
+        "Levantar dados econômicos (renda média, emprego formal) de RAIS/Novo CAGED.",
+        "Obter indicadores educacionais (IDEB, taxa de conclusão) do INEP e secretarias.",
+        "Recolher dados de saúde (expectativa de vida, mortalidade, cobertura) do DataSUS.",
+        "Cruzar dados por região/bairro usando microdados do Censo para análises locais."
+      ],
+      "publication_status": "draft"
+    }
+  ]
+}

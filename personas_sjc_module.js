@@ -1,7 +1,7 @@
 /**
- * Radar São José - Módulo Radar DNA & Mesa Autêntica de Tarô
- * 60 Cartas Reais e Fidedignas de Tarô com Movimento Físico na Mesa
- * Header Padronizado 100% Idêntico às Outras Abas do Sistema
+ * Radar São José - Módulo Integrado de Inteligência & Personas SJC
+ * 1. Oráculo RDR & Kapy (Mapeamento Interativo com IA & 3 Cartas Sagradas)
+ * 2. Dossiê Completo das 60 Personas de SJC (Tilt 3D, Flip 500ms, Multi-select Filters)
  */
 
 (function () {
@@ -10,16 +10,19 @@
     "id": 1,
     "nome_completo": "Maria do Carmo Paes",
     "idade": 54,
-    "genero_etnia": "Mulher Negra",
-    "profissao": "Escrevente Judiciária do Fórum Central",
+    "genero": "Mulher",
+    "raca_cor": "Negra",
+    "profissao": "Escrevente Judiciária do Fórum",
     "bairro": "Vila Ema",
-    "localizacao": "Vila Ema, São José dos Campos",
     "regiao": "Centro",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro próprio",
-    "historia_resumida": "Trabalha há mais de vinte anos no fórum central e construiu sua vida em torno da rotina estável de São José. Gosta de caminhar pelas ruas arborizadas da Vila Ema e valoriza atendimentos que prezam pelo olho no olho e pela palavra dada.",
-    "dor_principal": "Mudanças bruscas no trânsito do centro e obras viárias que alteram suas rotas históricas de deslocamento diário.",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Carro hatch próprio e caminhada diária",
+    "historia_resumida": "Trabalha há mais de vinte anos no fórum e construiu sua rotina em torno da estabilidade de São José. Caminha pelas alamedas arborizadas da Vila Ema e preza por relações de confiança e olho no olho.",
+    "dor_da_cidade": "Gargalos viários no horário de pico na Av. São João e obras no anel viário que alteram suas rotas rotineiras.",
+    "dor_pessoal": "Medo paralisante da aposentadoria iminente e do vazio existencial de perder a relevância no tribunal onde dedicou toda a vida adulta.",
+    "tensao_dramatica": "Tem pavor absoluto de parecer ultrapassada profissionalmente, mas esconde que não consegue operar os novos softwares jurídicos de IA sem pedir socorro aos estagiários.",
+    "bordao": "Papel assinado e olho no olho valem mais do que qualquer tecnologia.",
     "habitos": {
       "alimentacao": "Padarias tradicionais, almoço em restaurantes por quilo consolidados e feira livre de domingo.",
       "consumo": "Comércio de rua tradicional, lojas físicas onde conhece o dono há anos e compras estritamente planejadas.",
@@ -27,48 +30,68 @@
       "aversoes": "Atendimento automatizado por robôs de IA e estabelecimentos comerciais barulhentos.",
       "paixoes": "Caminhadas matinais no Parque Vicentina Aranha, jardinagem no quintal e café coado com as amigas de infância."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Parque Vicentina Aranha",
       "Padaria Nove de Julho",
       "Mercado Municipal de SJC"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Rede Vanguarda (Globo)",
-        "handle": "redevanguarda"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
+      "Rede Vanguarda (Globo) (@redevanguarda)",
+      "CBN Vale (@cbnvale)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      },
-      {
-        "nome": "Parque Vicentina Aranha",
-        "handle": "parquevicentina"
-      }
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "Parque Vicentina Aranha (@parquevicentina)"
     ],
     "estilo_consumo_tag": "Tradicional & Fidelidade",
-    "foto": "data_personas/imagens_personagens/personagem_1_maria_do_carmo_paes.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_1_maria_do_carmo_paes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 2,
-    "nome_completo": "Roberto Alvarenga",
+    "nome_completo": "Marcelo Albuquerque",
     "idade": 46,
-    "genero_etnia": "Homem Branco",
+    "genero": "Homem",
+    "raca_cor": "Branco",
     "profissao": "Diretor de Operações de Multinacional Tecnológica",
     "bairro": "Vila Adyana",
-    "localizacao": "Vila Adyana, São José dos Campos",
     "regiao": "Centro",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Híbrido",
-    "historia_resumida": "Paulistano radicado em SJC há doze anos em busca de segurança e blindagem para os filhos. Pratica ciclismo de estrada na Via Norte/Urbanova nas manhãs de sábado e comanda operações globais a partir do seu home office inteligente.",
-    "dor_principal": "Gargalos severos no acesso à Ponte Estaiada nos horários de pico e falta de voos executivos diretos no aeroporto regional.",
+    "movimento_cultural": "A Cidade Prometida",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "SUV Híbrido e Bicicleta de estrada",
+    "historia_resumida": "Paulistano radicado em SJC há doze anos em busca de segurança para a família. Pratica ciclismo na Via Norte e comanda operações corporativas globais a partir do seu escritório em casa.",
+    "dor_da_cidade": "Lentidão no acesso à Ponte Estaiada no rush e carência de voos executivos diretos no aeroporto regional.",
+    "dor_pessoal": "Sensação constante de impostor corporativo e burnout crônico por tentar sustentar um padrão de vida astronômico para a família.",
+    "tensao_dramatica": "Sustenta um padrão de vida que já não cabe no salário e não consegue dizer isso em voz alta — nem para a esposa, nem para si mesmo. Calcula mentalmente quanto tempo a família aguentaria se a diretoria fosse transferida.",
+    "bordao": "No fim do trimestre, planilha não aceita desculpa nem poesia.",
     "habitos": {
       "alimentacao": "Empórios gourmets, carnes nobres de cortes especiais para churrasco e cartas de vinhos importados.",
       "consumo": "Assinaturas premium internacionais, tecnologia de automação residencial e serviços de concierge.",
@@ -76,48 +99,70 @@
       "aversoes": "Sensação de insegurança pública, prestadores de serviços amadores e filas de espera em restaurantes.",
       "paixoes": "Ciclismo de alta performance na estrada, enologia internacional e viagens de esqui com a família."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Colinas Shopping",
       "Empório da Vila Ema",
       "Thermas do Vale / Alphaville Club"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Valor Econômico",
-        "handle": "valoreconomico"
-      },
-      {
-        "nome": "Life Informa Aquarius",
-        "handle": "lifeinforma"
-      }
+      "Valor Econômico (@valoreconomico)",
+      "Life Informa (@lifeinforma)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Lucas Sanseverino (Imóveis)",
-        "handle": "lucassanseverino"
-      },
-      {
-        "nome": "Pellegrini Wine",
-        "handle": "pellegriniwine"
-      }
+      "Lucas Sanseverino (@lucassanseverino)",
+      "Pellegrini Wine (@pellegriniwine)"
     ],
     "estilo_consumo_tag": "Premium & Exclusividade",
-    "foto": "data_personas/imagens_personagens/personagem_2_gilberto_alcantara_santos.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_2_marcelo_albuquerque.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 3,
     "nome_completo": "Larissa Aparecida Souza",
     "idade": 24,
-    "genero_etnia": "Mulher Parda",
+    "genero": "Mulher",
+    "raca_cor": "Parda",
     "profissao": "Trancista & Especialista em Alongamento de Unhas",
-    "bairro": "Centro Histórico",
-    "localizacao": "Centro Histórico, São José dos Campos",
-    "regiao": "Centro",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Ônibus e Moto própria",
-    "historia_resumida": "Começou atendendo a domicílio na zona sul e hoje possui seu próprio espaço montado na garagem de casa. Usa o Instagram e o WhatsApp com maestria para preencher a agenda semanal e reinveste todo lucro em cursos de aperfeiçoamento.",
-    "dor_principal": "Oscilação brusca no faturamento na segunda quinzena do mês e a demora nas linhas alimentadoras de ônibus da zona sul.",
+    "bairro": "Campo dos Alemães",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Ônibus municipal e Moto 160cc própria",
+    "historia_resumida": "Começou atendendo a domicílio na zona sul e estruturou seu próprio espaço na garagem de casa. Usa o Instagram com maestria para fechar a agenda semanal e reinveste o lucro em cursos.",
+    "dor_da_cidade": "Oscilação de clientes na segunda quinzena do mês e a demora das linhas de ônibus alimentadoras na zona sul.",
+    "dor_pessoal": "O desespero sufocante de carregar sozinha o sustento financeiro e os remédios da mãe doente, sentindo que aos 24 anos não teve juventude nem tempo para sonhar com a própria vida.",
+    "tensao_dramatica": "Ostenta roupas da moda e faturamento alto nos reels do Instagram, mas já estourou três cartões de crédito e deve juros no cheque especial.",
+    "bordao": "Quem tem medo do corre não conquista o brilho.",
     "habitos": {
       "alimentacao": "Lanches rápidos prensados, delivery pelo iFood aos fins de semana e copos generosos de açaí com as clientes.",
       "consumo": "Insumos de beleza no atacado no centro da cidade e compras frequentes de roupas na Shein e Shopee.",
@@ -125,48 +170,68 @@
       "aversoes": "Clientes que desmarcam em cima da hora sem aviso e desvalorização do trabalho manual de estética.",
       "paixoes": "Gravar reels de transformação no TikTok, ouvir pagode no Spotify e passear no Shopping Jardim Oriente."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Shopping Jardim Oriente",
       "Feira da Av. Andrômeda",
       "Praça do Campo dos Alemães"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Notícias SJC no Insta",
-        "handle": "noticias_sjc"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "Notícias SJC no Insta (@noticias_sjc)",
+      "Explore SJC (@exploresjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Juliana Nails SJC",
-        "handle": "juliananails_sjc"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Juliana Nails SJC (@juliananails_sjc)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Ágil & Digital Popular",
-    "foto": "data_personas/imagens_personagens/personagem_3_kenji_takahashi.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_3_larissa_aparecida_souza.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 4,
     "nome_completo": "Dr. Gustavo Meirelles",
     "idade": 51,
-    "genero_etnia": "Homem Branco",
+    "genero": "Homem",
+    "raca_cor": "Negro",
     "profissao": "Cirurgião Ortopedista & Sócio de Clínica Médica",
-    "bairro": "Jardim São Dimas",
-    "localizacao": "Jardim São Dimas, São José dos Campos",
-    "regiao": "Centro",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Sedan Executivo Alemão",
-    "historia_resumida": "Formado em medicina de excelência, atende nos principais hospitais privados da cidade e mantém consultório conceituado na Vila Adyana. Vive no Esplanada pela proximidade com os colégios dos filhos e pela vizinhança tranquila.",
-    "dor_principal": "Falta crônica de vagas de estacionamento rotativo para pacientes nas imediações do polo médico da Vila Adyana.",
+    "bairro": "Jardim Esplanada",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Cidade Prometida",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "Sedan Executivo Alemão e Caminhada matinal",
+    "historia_resumida": "Médico conceituado com consultório na Vila Adyana e atuação nos hospitais privados da cidade. Escolheu o Esplanada pela proximidade das escolas tradicionais e parques.",
+    "dor_da_cidade": "Falta crônica de vagas de estacionamento rotativo para pacientes nas imediações do polo médico da Vila Adyana.",
+    "dor_pessoal": "Distanciamento afetivo irreparável dos filhos adolescentes, que o enxergam apenas como um provedor ausente sempre no plantão.",
+    "tensao_dramatica": "Depois de cirurgias longas, passa mais tempo do que admitiria olhando as próprias mãos. Nunca falou disso com ninguém do hospital, porque não sabe se é cansaço ou se é o começo do fim da sua melhor fase.",
+    "bordao": "Com articulação e osso não se brinca: ou você acerta no milímetro ou o paciente não anda.",
     "habitos": {
       "alimentacao": "Culinária mediterrânea equilibrada, jantares em bistrôs autorais na Vila Ema e café espresso de grãos arábica.",
       "consumo": "Equipamentos cirúrgicos importados de última geração e investimentos estruturados em fundos imobiliários.",
@@ -174,48 +239,71 @@
       "aversoes": "Atrasos em reuniões de junta médica e fornecedores que não cumprem rigorosamente prazos contratuais.",
       "paixoes": "Partidas de tênis no Clube de Campo Santa Rita, corridas no Vicentina Aranha e leitura de biografias históricas."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Hospital Vivalle",
       "Parque Vicentina Aranha",
       "Clube de Campo Santa Rita"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Saúde Vale",
-        "handle": "saudevalerevista"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
+      "Revista Saúde Vale (@saudevalerevista)",
+      "CBN Vale (@cbnvale)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Dr. Barakat",
-        "handle": "doutorbarakat"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
+      "Dr. Barakat (@doutorbarakat)",
+      "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Prestígio & Tradição Médica",
-    "foto": "data_personas/imagens_personagens/personagem_4_helena_ribeiro_de_camargo.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_4_gustavo_meirelles.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 5,
     "nome_completo": "Tiago Ramos",
     "idade": 29,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Engenheiro de Inteligência Artificial & Tech Lead",
-    "bairro": "Jardim Apolo",
-    "localizacao": "Jardim Apolo, São José dos Campos",
-    "regiao": "Centro",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Carro elétrico e patinete elétrico",
-    "historia_resumida": "Trabalha remotamente para uma startup do Vale do Silício a partir do seu apartamento no Aquarius. É cliente assíduo de cafeterias de cafés especiais e valoriza a mobilidade urbana sustentável.",
-    "dor_principal": "Carência de espaços de coworking com infraestrutura de alta velocidade 24h e pouca vida noturna cosmopolita na cidade.",
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Tech Lead & Engenheiro de Inteligência Artificial",
+    "bairro": "Jardim Aquarius",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "Carro elétrico compacto e Patinete elétrico próprio",
+    "historia_resumida": "Atua remotamente para empresas internacionais a partir do seu apartamento no Aquarius. É apreciador de cafés especiais e adepto da micromobilidade elétrica pelas ciclovias do bairro.",
+    "dor_da_cidade": "Carência de cafés e espaços de coworking abertos até tarde e pouca vida noturna diversificada na cidade.",
+    "dor_pessoal": "Isolamento social agudo e sensação de que a vida real está passando rápido enquanto vive hiperconectado trabalhando para a gringa.",
+    "tensao_dramatica": "Lidera reuniões técnicas com dezenas de pessoas sem piscar, mas evita convites presenciais com desculpas de agenda. Já recusou três palestras que teriam mudado sua carreira.",
+    "bordao": "Se você passa mais de dez minutos clicando na mesma coisa todo dia, você tá perdendo a vida pro computador.",
     "habitos": {
       "alimentacao": "Cafés especiais extraídos em V60, bowls funcionais nutritivos e culinária asiática artesanal.",
       "consumo": "Hardware de ponta importado, periféricos ergonômicos e compras automatizadas na Amazon Prime.",
@@ -223,48 +311,70 @@
       "aversoes": "Processos burocráticos analógicos em papel e lojas que ainda não aceitam pagamentos por aproximação/NFC.",
       "paixoes": "Desenvolvimento de projetos open-source, trilhas de mountain bike na serra e degustação de cafés premiados."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Praça Ulisses Guimarães",
       "Cafeteria Torra Fresca Aquarius",
       "Parque Ribeirão Vermelho"
     ],
     "veiculos_midia": [
-      {
-        "nome": "TechCrunch",
-        "handle": "techcrunch"
-      },
-      {
-        "nome": "Podcast Startups SJC",
-        "handle": "startups_sjc"
-      }
+      "TechCrunch (@techcrunch)",
+      "Podcast Startups SJC (@startups_sjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Filipe Deschamps",
-        "handle": "filipedeschamps"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "Filipe Deschamps (@filipedeschamps)",
+      "Explore SJC (@exploresjc)"
     ],
     "estilo_consumo_tag": "Tech Global & Conectado",
-    "foto": "data_personas/imagens_personagens/personagem_5_osvaldo_martins_ferraz.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_5_tiago_ramos.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 6,
-    "nome_completo": "Dona Maria do Carmo Prado",
+    "nome_completo": "Dona Dirce de Lourdes Prado",
     "idade": 68,
-    "genero_etnia": "Mulher Branca",
+    "genero": "Mulher",
+    "raca_cor": "Branca",
     "profissao": "Feirante & Doceira Tradicional Aposentada",
-    "bairro": "Jardim Maringá",
-    "localizacao": "Jardim Maringá, São José dos Campos",
-    "regiao": "Centro",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Caminhada e Ônibus municipal",
-    "historia_resumida": "Nasceu e cresceu em Santana, filha de tecelões da antiga Tecelagem Parahyba. Conhece cada família do bairro e ainda produz doces caseiros de abóbora e figo por encomenda para clientes fiéis.",
-    "dor_principal": "Sensação de esquecimento da memória histórica e cultural da zona norte em contraste com as áreas nobres da cidade.",
+    "bairro": "Santana",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Caminhada diária e Ônibus municipal",
+    "historia_resumida": "Filha de tecelões da antiga Tecelagem Parahyba, mora em Santana desde a infância. Produz compotas caseiras de abóbora e figo por encomenda e conhece todas as famílias do bairro.",
+    "dor_da_cidade": "Sensação de esquecimento da memória histórica e cultural da zona norte em contraste com as áreas nobres da cidade.",
+    "dor_pessoal": "Solidão pungente de ver a casa vazia e o temor de perder a lucidez antes de ver os netos encaminhados na vida.",
+    "tensao_dramatica": "Guarda em uma lata de biscoito economias em dinheiro vivo por desconfiança cega do sistema bancário e digital.",
+    "bordao": "Quem não honra a raiz esquece o gosto da própria história.",
     "habitos": {
       "alimentacao": "Comida caipira no fogão de ferro, verduras fresquinhas da feira de Santana e bolo de fubá cremoso à tarde.",
       "consumo": "Mercadinho de secos e molhados da esquina, quitanda local e farmácia onde mantém conta anotada no caderno.",
@@ -272,48 +382,68 @@
       "aversoes": "Totens eletrônicos impessoais em agências bancárias e atendentes jovens sem paciência com idosos.",
       "paixoes": "Participação no coral da Paróquia de Santana, cultivar orquídeas no alpendre e narrar causos antigos para os netos."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Parque da Cidade (Burle Marx)",
       "Igreja Matriz de Santana",
       "Feira Livre de Santana"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Rede Vanguarda (Jornal Regional)",
-        "handle": "redevanguarda"
-      },
-      {
-        "nome": "Rádio Nativa FM",
-        "handle": "nativafmsjc"
-      }
+      "Rede Vanguarda (@redevanguarda)",
+      "Rádio Nativa FM (@nativafmsjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Memória Joseense",
-        "handle": "memoria_joseense"
-      },
-      {
-        "nome": "Padre da Paróquia Santana",
-        "handle": "paroquiasantanasjc"
-      }
+      "Memória Joseense (@memoria_joseense)",
+      "Padre da Paróquia Santana (@paroquiasantanasjc)"
     ],
     "estilo_consumo_tag": "Memória Afetiva & Raízes",
-    "foto": "data_personas/imagens_personagens/personagem_6_claudete_aparecida_da_silva.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_6_dirce_de_lourdes_prado.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 7,
     "nome_completo": "Benedito 'Seu Dito' Alvarenga",
     "idade": 62,
-    "genero_etnia": "Homem Pardo",
+    "genero": "Homem",
+    "raca_cor": "Pardo",
     "profissao": "Produtor de Queijo Artesanal da Mantiqueira",
-    "bairro": "Vila Betânia",
-    "localizacao": "Vila Betânia, São José dos Campos",
-    "regiao": "Centro",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Picape antiga 4x4",
-    "historia_resumida": "Guardião das tradições do distrito de SFX, produz queijo curado premiado em sua propriedade familiar. Recebe turistas e chefs renomados de SJC e SP que sobem a serra em busca de ingredientes autênticos.",
-    "dor_principal": "Superlotação desordenada do vilarejo nos feriados de inverno e a instabilidade da rede elétrica rural que afeta as ordenhas.",
+    "bairro": "São Francisco Xavier",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Picape antiga 4x4 a diesel",
+    "historia_resumida": "Produz queijo artesanal curado premiado em propriedade familiar em SFX. Recebe visitantes e chefs renomados que sobem a serra em busca de produtos genuínos da Mantiqueira.",
+    "dor_da_cidade": "Superlotação do vilarejo nos finais de semana de inverno e instabilidade na rede elétrica rural que compromete as ordenhas.",
+    "dor_pessoal": "A angústia de ver os filhos fascinados pela vida urbana de São Paulo e o peso de saber que a tradição centenária de queijo artesanal da sua família vai morrer com ele na serra.",
+    "tensao_dramatica": "Reclama publicamente dos turistas paulistanos que invadem a serra, mas depende financeiramente das compras extravagantes que eles fazem aos sábados.",
+    "bordao": "Tempo e paciência curam o queijo, a terra e o coração do homem.",
     "habitos": {
       "alimentacao": "Queijo curado na tábua, café passado no coador de pano com água de mina e galinha caipira com quiabo.",
       "consumo": "Arame farpado, ferramentas e ração em cooperativas agropecuárias e compras mensais de atacado na cidade.",
@@ -321,48 +451,68 @@
       "aversoes": "Turistas barulhentos que jogam lixo nas trilhas ecológicas e desrespeitam o silêncio sagrado da serra.",
       "paixoes": "Tocar moda de viola caipira no entardecer, cavalgar pelas cristas da serra e contemplar a Pedra de São Francisco."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Vila de São Francisco Xavier",
       "Mirante da Pedra de São Francisco",
       "Mercado da Cidade de SJC"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Jornal de SFX",
-        "handle": "sfx_noticias"
-      },
-      {
-        "nome": "Globo Rural / Vanguarda",
-        "handle": "redevanguarda"
-      }
+      "Jornal de SFX (@sfx_noticias)",
+      "Globo Rural / Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Rota Gastronômica da Mantiqueira",
-        "handle": "rotamantiqueira"
-      },
-      {
-        "nome": "Explore SFX",
-        "handle": "exploresfx"
-      }
+      "Rota Gastronômica da Mantiqueira (@rotamantiqueira)",
+      "Explore SFX (@exploresfx)"
     ],
     "estilo_consumo_tag": "Sustentabilidade & Raiz Serrana",
-    "foto": "data_personas/imagens_personagens/personagem_7_reinaldo_mendes_trindade.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_7_benedito_alvarenga.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 8,
-    "nome_completo": "Dra. Camila Rocha Meireles",
+    "nome_completo": "Dra. Letícia Rocha Figueiredo",
     "idade": 38,
-    "genero_etnia": "Mulher Branca",
+    "genero": "Mulher",
+    "raca_cor": "Negra",
     "profissao": "Dermatologista & Gestora de Clínica Estética",
-    "bairro": "Jardim Paulista",
-    "localizacao": "Jardim Paulista, São José dos Campos",
+    "bairro": "Vila Adyana",
     "regiao": "Centro",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Compacto Blindado",
-    "historia_resumida": "Manteve sua clínica na Vila Adyana pela elegância histórica do bairro. Conecta tratamentos de alta tecnologia a um atendimento acolhedor e humanizado para famílias tradicionais e executivas da região.",
-    "dor_principal": "Dificuldade em recrutar e reter profissionais de enfermagem estética altamente capacitados na região do Vale.",
+    "movimento_cultural": "A Cidade Prometida",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "SUV Compacto Blindado e Caminhada",
+    "historia_resumida": "Comanda clínica estética integrada na Vila Adyana pela elegância histórica do bairro. Conecta lasers de ponta a um acolhimento intimista para pacientes da região.",
+    "dor_da_cidade": "Dificuldade para atrair e reter técnicas de enfermagem estética com especialização avançada no Vale.",
+    "dor_pessoal": "Cobrança estética implacável sobre sua própria imagem e o pavor obsessivo do envelhecimento enquanto vende perfeição aos outros.",
+    "tensao_dramatica": "Submete-se a procedimentos estéticos invasivos periódicos em clínicas de São Paulo para que ninguém em São José saiba que ela fez intervenções.",
+    "bordao": "Elegância não grita; a excelência se reconhece nos mínimos detalhes.",
     "habitos": {
       "alimentacao": "Menu funcional e orgânico, sucos verdes detox prensados e saladas gourmet com azeites trufados.",
       "consumo": "Aparelhos de ultrassom microfocado importados, cosméticos dermatológicos de alta performance e viagens a congressos.",
@@ -370,48 +520,70 @@
       "aversoes": "Procedimentos estéticos padronizados sem respaldo científico e falta de ética profissional de concorrentes.",
       "paixoes": "Sessões matinais de pilates, finais de semana ensolarados em Ilhabela e colecionismo de arte contemporânea brasileira."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Parque Santos Dumont",
       "Restaurantes da Av. Adhemar de Barros",
       "CenterVale Shopping"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Vogue Brasil",
-        "handle": "voguebrasil"
-      },
-      {
-        "nome": "Revista Metrópole SJC",
-        "handle": "revistametropolesjc"
-      }
+      "Vogue Brasil (@voguebrasil)",
+      "Life Informa (@lifeinforma)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Dermatologia & Estética Brasil",
-        "handle": "sbd_dermato"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Dermatologia & Estética Brasil (@sbd_dermato)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Sofisticação & Autocuidado",
-    "foto": "data_personas/imagens_personagens/personagem_8_geraldo_magela_de_souza.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_8_leticia_rocha.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 9,
     "nome_completo": "Wagner Santos",
     "idade": 41,
-    "genero_etnia": "Homem Negro",
+    "genero": "Homem",
+    "raca_cor": "Negro",
     "profissao": "Técnico Mecatrônico Sênior de Linha Automotiva",
     "bairro": "Jardim Augusta",
-    "localizacao": "Jardim Augusta, São José dos Campos",
     "regiao": "Centro",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Fretado da montadora e carro próprio nos fins de semana",
-    "historia_resumida": "Formado pelo SENAI, atua na indústria há quase duas décadas. Mora perto da Dutra pelo acesso rápido e valoriza a solidez das conquistas da sua família: casa própria quitada e filhos estudando em boas escolas.",
-    "dor_principal": "Oscilações imprevisíveis no mercado fabril automotivo e os aumentos abusivos nas mensalidades de convênio médico.",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Fretado da montadora e Carro popular nos fins de semana",
+    "historia_resumida": "Técnico industrial formado pelo SENAI, atua na cadeia automotiva da Dutra há quase duas décadas. Valoriza a estabilidade da casa própria e os estudos dos filhos.",
+    "dor_da_cidade": "Oscilações nos turnos fabris com paradas de linha e reajustes pesados nas mensalidades do plano de saúde familiar.",
+    "dor_pessoal": "Ansiedade constante de que a automação robótica avançada da montadora torne sua especialidade técnica descartável antes de se aposentar.",
+    "tensao_dramatica": "Fica acordado fazendo contas de quanto faltaria para quitar a casa se conseguisse qualquer renda extra. Já começou e abandonou quatro planos diferentes, e não conta nenhum deles para a esposa.",
+    "bordao": "Chão de fábrica ensina o que nenhuma teoria de escritório consegue explicar.",
     "habitos": {
       "alimentacao": "Churrasco de contrafilé no quintal de casa com os colegas de turno, pastel de feira e cerveja pilsen gelada.",
       "consumo": "Materiais de construção para ampliações na residência e compras em grandes atacarejos às margens da Dutra.",
@@ -419,48 +591,70 @@
       "aversoes": "Cursos rápidos de internet que prometem enriquecimento fácil e eletrodomésticos com obsolescência programada.",
       "paixoes": "Peladas de futebol society nas quadras da zona sul, mexer no motor do seu carro antigo e pescaria no Rio Paraíba."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Vale Sul Shopping",
       "Feira da Praça do Pq. Industrial",
       "Assaí Atacadista da Dutra"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Band Vale Notícias",
-        "handle": "bandvaletv"
-      },
-      {
-        "nome": "Rádio Stereo Vale",
-        "handle": "stereovale"
-      }
+      "Band Vale Notícias (@bandvaletv)",
+      "Rádio Stereo Vale (@stereovale)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Mecânica Descomplicada",
-        "handle": "mecanicadescomplicada"
-      },
-      {
-        "nome": "São José Esporte Clube",
-        "handle": "saojoseec_oficial"
-      }
+      "Mecânica Descomplicada (@mecanicadescomplicada)",
+      "São José Esporte Clube (@saojoseec_oficial)"
     ],
     "estilo_consumo_tag": "Pragmático & Familiar",
-    "foto": "data_personas/imagens_personagens/personagem_9_beatriz_prado_antunes.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_9_wagner_santos.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 10,
     "nome_completo": "Gabriel Marcondes de Oliveira",
     "idade": 23,
-    "genero_etnia": "Homem Pardo",
+    "genero": "Homem",
+    "raca_cor": "Pardo",
     "profissao": "Desenvolvedor Full Stack Júnior no Parque Tecnológico",
-    "bairro": "Jardim Jussara",
-    "localizacao": "Jardim Jussara, São José dos Campos",
-    "regiao": "Centro",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Moto 160cc e Transporte por aplicativo",
-    "historia_resumida": "Estudou na FATEC e conseguiu seu primeiro contrato tech no Parque Tecnológico de SJC. É a ponte entre a tradição operária de Eugênio de Melo e a nova economia digital que transforma a zona leste.",
-    "dor_principal": "Falta crônica de ciclovias seguras conectando o distrito de Eugênio de Melo aos polos tecnológicos da cidade.",
+    "bairro": "Eugênio de Melo",
+    "regiao": "Leste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Moto 160cc e Ônibus com integração",
+    "historia_resumida": "Formado pela FATEC, atua em equipe ágil no Parque Tecnológico. Faz a ponte entre as origens fabris de Eugênio de Melo e o novo ecossistema digital da zona leste.",
+    "dor_da_cidade": "Falta de ciclovias seguras conectando Eugênio de Melo ao PqTec e intervalos longos nas linhas de ônibus.",
+    "dor_pessoal": "Culpa constante por ganhar mais que os pais juntos e a pressão esmagadora de ter que ser o 'salvador da família'.",
+    "tensao_dramatica": "Copia blocos inteiros de código gerados por inteligência artificial sem entender a lógica profunda e tem pavor de ser desmascarado em code review.",
+    "bordao": "Da periferia pro servidor: o código não mente.",
     "habitos": {
       "alimentacao": "Marmitas congeladas fitness durante a semana, rodízio de pizza aos sábados e energéticos nas madrugadas de código.",
       "consumo": "Teclados mecânicos RGB, cursos avançados de backend em plataformas online e calçados casuais esportivos.",
@@ -468,48 +662,68 @@
       "aversoes": "Chefias autoritárias que exigem presença física desnecessária e empresas que não incentivam inovação.",
       "paixoes": "Participação em maratonas de programação (hackathons), jogos online cooperativos e manobras na pista de skate do Parque da Cidade."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Parque Tecnológico de SJC (PqTec)",
       "CenterVale Shopping",
       "Parque da Cidade"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Manual do Dev",
-        "handle": "manualdodev"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "Manual do Dev (@manualdodev)",
+      "Explore SJC (@exploresjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Rocketseat",
-        "handle": "rocketseat_oficial"
-      },
-      {
-        "nome": "Alura Online",
-        "handle": "aluraonline"
-      }
+      "Rocketseat (@rocketseat_oficial)",
+      "Jonas Almeida (@jonas_almeida)"
     ],
     "estilo_consumo_tag": "Aspiracional Tech",
-    "foto": "data_personas/imagens_personagens/personagem_10_rodolfo_guimaraes_villela.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_10_gabriel_marcondes_de_oliveira.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 11,
     "nome_completo": "Valéria Fontes",
     "idade": 42,
-    "genero_etnia": "Mulher Branca",
+    "genero": "Mulher",
+    "raca_cor": "Parda",
     "profissao": "Arquiteta de Interiores & Cenógrafa Comercial",
     "bairro": "Jardim Aquarius",
-    "localizacao": "Jardim Aquarius, São José dos Campos",
     "regiao": "Oeste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Carro elétrico compacto",
-    "historia_resumida": "Especialista em projetos comerciais biofílicos e residenciais de alto padrão no Colinas e Aquarius. Busca constantemente inspirações nas feiras de design de Milão e São Paulo para aplicar em imóveis da região.",
-    "dor_principal": "Falta de lojas locais com mobiliário assinado e demora no fornecimento de mármores e pedras nobres.",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "Carro elétrico e Caminhada no bairro",
+    "historia_resumida": "Desenvolve projetos comerciais e residenciais biofílicos no Aquarius e Urbanova. Garimpa novidades em feiras de design para criar ambientes acolhedores.",
+    "dor_da_cidade": "Escassez de lojas de decoração autoral na cidade e prazos dilatados no fornecimento de mármores nobres.",
+    "dor_pessoal": "Sensação de superficialidade existencial em atender caprichos fúteis de novos-ricos enquanto seus projetos conceituais continuam na gaveta.",
+    "tensao_dramatica": "Tem fobia secreta de falência e compra roupas de marca de segunda mão em brechós escondidos fingindo tê-las adquirido em Milão.",
+    "bordao": "O luxo autêntico está no espaço bem respirado, não no excesso.",
     "habitos": {
       "alimentacao": "Pratos à base de peixes frescos, risotos artesanais e degustação de espumantes nacionais premiados.",
       "consumo": "Peças de design autoral, luminárias de artistas brasileiros e softwares 3D de renderização imersiva.",
@@ -517,48 +731,70 @@
       "aversoes": "Ambientes saturados de plástico sem personalidade e empreiteiros descompromissados com o acabamento fino.",
       "paixoes": "Visitar bienais de arquitetura, restaurar móveis modernistas garimpados e cuidar de sua coleção de samambaias raras."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Colinas Shopping",
-      "Showrooms de Design na Av. São João",
+      "Showrooms da Av. São João",
       "Parque Vicentina Aranha"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Casa Vogue",
-        "handle": "casavoguebrasil"
-      },
-      {
-        "nome": "Revista Visual Vale",
-        "handle": "visualvalerevista"
-      }
+      "Casa Vogue (@casavoguebrasil)",
+      "Life Informa (@lifeinforma)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Mauricio Arruda",
-        "handle": "mauricioarruda"
-      },
-      {
-        "nome": "Arquitetura SJC",
-        "handle": "arquiteturasjc"
-      }
+      "Mauricio Arruda (@mauricioarruda)",
+      "Sanja Dicas (@sanjadicas)"
     ],
     "estilo_consumo_tag": "Design & Estética Autoral",
-    "foto": "data_personas/imagens_personagens/personagem_11_valdir_de_oliveira_santos.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_11_valeria_fontes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 12,
     "nome_completo": "Kenji Takahashi",
     "idade": 36,
-    "genero_etnia": "Homem Asiático",
+    "genero": "Homem",
+    "raca_cor": "Asiático",
     "profissao": "Pesquisador Sênior em Satélites do INPE",
-    "bairro": "Urbanova",
-    "localizacao": "Urbanova, São José dos Campos",
+    "bairro": "Jardim das Indústrias",
     "regiao": "Oeste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Bicicleta elétrica e Carro sedan",
-    "historia_resumida": "Doutor em engenharia aeroespacial, trabalha no desenvolvimento de cargas úteis para satélites de monitoramento ambiental no INPE. Mora no Jardim das Indústrias pela tranquilidade e rápido acesso à rodovia.",
-    "dor_principal": "Burocracia excessiva na importação de componentes ópticos e sensores de alta precisão para pesquisa científica.",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "Bicicleta elétrica própria e Sedan japonês",
+    "historia_resumida": "Físico aeroespacial com doutorado, atua no desenvolvimento de sensores orbitais para monitoramento climático. Reside no Jardim das Indústrias pela calmaria e acesso à rodovia.",
+    "dor_da_cidade": "Demora alfandegária e burocracia na importação de componentes ópticos e sensores para pesquisas espaciais.",
+    "dor_pessoal": "Frustração profunda com os baixos salários da carreira acadêmica/pública no Brasil em comparação com seus ex-colegas que emigraram para a NASA ou Europa.",
+    "tensao_dramatica": "Coleciona secretamente mangás raros e passa noites jogando RPG online sob anonimato total para fugir da rigidez científica.",
+    "bordao": "A ciência exige método, não retórica populista.",
     "habitos": {
       "alimentacao": "Autêntica culinária japonesa tradicional (ramen e izakaya), chás verdes matcha e frutas da estação.",
       "consumo": "Livros acadêmicos importados, ferramentas de telescópio amador e instrumentos musicais acústicos.",
@@ -566,48 +802,68 @@
       "aversoes": "Desinformação científica nas redes sociais e reuniões longas sem pauta prévia definida.",
       "paixoes": "Astrofotografia noturna nas montanhas de SFX, tocar violão clássico e marcenaria de precisão nos dias livres."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Campus do INPE",
       "Praça das Indústrias",
-      "Restaurante Japonês Tradicional no Centro"
+      "Restaurante Tradicional no Centro"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Nature Scientific",
-        "handle": "nature"
-      },
-      {
-        "nome": "Jornal do INPE",
-        "handle": "inpe_oficial"
-      }
+      "Nature Scientific (@nature)",
+      "CBN Vale (@cbnvale)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Sérgio Sacani (Space Today)",
-        "handle": "spacetoday1"
-      },
-      {
-        "nome": "Ciência Todo Dia",
-        "handle": "pedroloos"
-      }
+      "Sérgio Sacani (@spacetoday1)",
+      "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Científico & Racional",
-    "foto": "data_personas/imagens_personagens/personagem_12_keiko_yamashita_sato.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_12_kenji_takahashi.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 13,
     "nome_completo": "Claudete Aparecida da Silva",
     "idade": 59,
-    "genero_etnia": "Mulher Negra",
+    "genero": "Mulher",
+    "raca_cor": "Negra",
     "profissao": "Costureira Especialista em Reformas & Alta Costura",
-    "bairro": "Jardim das Colinas",
-    "localizacao": "Jardim das Colinas, São José dos Campos",
-    "regiao": "Oeste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Ônibus e Caminhada",
-    "historia_resumida": "Costura desde os quinze anos e construiu uma reputação impecável na zona norte pelo capricho nos ajustes de vestidos de noiva e ternos. Atende clientes de toda a cidade que sobem a ponte buscando seu corte cirúrgico.",
-    "dor_principal": "Dores crônicas na coluna pelas longas jornadas na máquina de costura e o aumento contínuo no preço dos tecidos e zíperes.",
+    "bairro": "Alto da Ponte",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Ônibus municipal e Deslocamento a pé",
+    "historia_resumida": "Trabalha com costura há mais de quatro décadas, atendendo noivas e alfaiataria fina. Recebe clientes de várias regiões da cidade que sobem a ponte buscando seu ajuste perfeito.",
+    "dor_da_cidade": "Dores lombares causadas por longas horas diante da máquina de costura e a alta nos preços de tecidos e aviamentos.",
+    "dor_pessoal": "Tristeza silenciosa de ter dedicado a juventude a criar filhos que raramente atravessam a ponte para visitá-la.",
+    "tensao_dramatica": "Guarda em segredo um vestido de noiva suntuoso que costurou para si mesma há 30 anos e nunca teve a chance de usar.",
+    "bordao": "Ponto bem dado não desmancha nem com o peso dos anos.",
     "habitos": {
       "alimentacao": "Arroz, feijão fresquinho, couve refogada na hora e suco natural de maracujá para relaxar à noite.",
       "consumo": "Armarinhos e retrosarias tradicionais no centro de SJC e manutenção preventiva em suas máquinas industriais.",
@@ -615,48 +871,70 @@
       "aversoes": "Roupas descartáveis de fast-fashion com costuras frágeis e clientes que pedem fiado sem intimidade.",
       "paixoes": "Participar das novenas da comunidade do Alto da Ponte, ensinar corte e costura para meninas do bairro e ouvir rádio AM."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Centro Comunitário do Alto da Ponte",
       "Armarinhos da Rua 15 no Centro",
       "Parque da Cidade"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Rádio Aparecida",
-        "handle": "radioaparecida"
-      },
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      }
+      "Rádio Aparecida (@radioaparecida)",
+      "TV Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Dicas de Costura Brasil",
-        "handle": "costuracriativa"
-      },
-      {
-        "nome": "Vozes da Zona Norte SJC",
-        "handle": "zn_sjc"
-      }
+      "Dicas de Costura Brasil (@costuracriativa)",
+      "Explore SJC (@exploresjc)"
     ],
     "estilo_consumo_tag": "Artesanal & Essencial",
-    "foto": "data_personas/imagens_personagens/personagem_13_rosana_aparecida_de_lima.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_13_claudete_aparecida_da_silva.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "dor_pessoal_despatologizada"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 14,
     "nome_completo": "Heloísa Castilho",
     "idade": 33,
-    "genero_etnia": "Mulher Parda",
+    "genero": "Mulher",
+    "raca_cor": "Parda",
     "profissao": "Gestora de Tráfego Pago & Marketing Digital",
     "bairro": "Jardim Esplanada",
-    "localizacao": "Jardim Esplanada, São José dos Campos",
     "regiao": "Oeste",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro hatch automático",
-    "historia_resumida": "Gerencia campanhas de performance para lançamentos imobiliários e franquias da região do Vale do Paraíba. Divide sua rotina entre cafés com clientes e a gestão de equipes remotas de copywriters e designers.",
-    "dor_principal": "Mudanças constantes nos algoritmos de anúncios da Meta/Google que desestabilizam o custo por lead dos clientes.",
+    "movimento_cultural": "A Cidade Prometida",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Carro hatch turbo e Uber",
+    "historia_resumida": "Conduz campanhas de mídia de performance para redes de varejo e imobiliárias de médio e grande porte. Divide seu tempo entre visitas a clientes e gestão remota.",
+    "dor_da_cidade": "Variações bruscas no custo por aquisição (CPA) causadas por mudanças repentinas nas plataformas de anúncios.",
+    "dor_pessoal": "Incapacidade crônica de desconectar a mente do trabalho, arruinando qualquer possibilidade de relacionamento amoroso estável.",
+    "tensao_dramatica": "Finge para as clientes que tem uma equipe gigante de analistas, mas na verdade opera tudo sozinha na mesa da sala até às 3h da manhã.",
+    "bordao": "Não adianta botar mil reais de anúncio se o cliente clica, entra no WhatsApp e ninguém responde direito.",
     "habitos": {
       "alimentacao": "Smoothies energéticos com whey protein, pães de fermentação natural e almoços em bistrôs charmosos.",
       "consumo": "Softwares de automação de marketing em dólar, cursos de mentoria executiva e acessórios de ergonomia.",
@@ -664,48 +942,68 @@
       "aversoes": "Clientes retrógrados que não compreendem a importância do funil de vendas digital e relatórios vagos.",
       "paixoes": "Prática de beach tennis nas quadras do Urbanova, viagens de praia nos feriados e podcasts de negócios."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Colinas Shopping",
       "Arena de Beach Tennis Urbanova",
       "Cafeteria da Av. Anchieta"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Meio & Mensagem",
-        "handle": "meioemensagem"
-      },
-      {
-        "nome": "StartSe Negócios",
-        "handle": "startse"
-      }
+      "Meon Jornal (@meonjornal)",
+      "Life Informa (@lifeinforma)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Pedro Sobral",
-        "handle": "pedrosobral"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "Pedro Sobral (@pedrosobral)",
+      "Sanja Dicas (@sanjadicas)"
     ],
     "estilo_consumo_tag": "Performance & Inovação",
-    "foto": "data_personas/imagens_personagens/personagem_14_eduardo_henrique_de_barros.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_14_heloisa_castilho.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 15,
-    "nome_completo": "Lucas Henrique Silva",
+    "nome_completo": "Wellington 'Well' Prates",
     "idade": 27,
-    "genero_etnia": "Homem Pardo",
+    "genero": "Homem",
+    "raca_cor": "Pardo",
     "profissao": "Chef & Proprietário de Hamburgueria Artesanal",
-    "bairro": "Jardim Alvorada",
-    "localizacao": "Jardim Alvorada, São José dos Campos",
-    "regiao": "Oeste",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Carro utilitário e moto",
-    "historia_resumida": "Transformou sua paixão por carnes em uma hamburgueria que é referência de delivery na zona sul. Valoriza o blend artesanal moído diariamente e a agilidade nas entregas pelo WhatsApp e iFood.",
-    "dor_principal": "As altas taxas cobradas pelos aplicativos de entrega e os custos crescentes do queijo cheddar e do carvão especial.",
+    "bairro": "Parque Industrial",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Utilitário furgão e Moto própria",
+    "historia_resumida": "Criou uma hamburgueria de delivery forte na zona sul, focada em carnes defumadas e smash burgers. Cuida pessoalmente das compras e da logística de entrega rápida.",
+    "dor_da_cidade": "Comissões elevadas retidas pelas plataformas de delivery e a escalada de preços de queijos e insumos nobres.",
+    "dor_pessoal": "Medo asfixiante de falir o negócio próprio e a vergonha de ter que voltar a trabalhar como auxiliar de cozinha subordinado.",
+    "tensao_dramatica": "O 'molho secreto' premiado da sua hamburgueria tem como base uma maionese industrial comum comprada no atacado misturada com condimentos.",
+    "bordao": "Hambúrguer de verdade tem fumaça, crosta e respeito pelo cliente.",
     "habitos": {
       "alimentacao": "Degustação contínua de hambúrgueres autorais, porções de batata rústica com páprica e refrigerantes artesanais.",
       "consumo": "Insumos gastronômicos em distribuidoras especializadas e embalagens térmicas sustentáveis de papel kraft.",
@@ -713,48 +1011,70 @@
       "aversoes": "Entregadores terceirizados que derrubam os pedidos no transporte e avaliações injustas em plataformas online.",
       "paixoes": "Estudar técnicas de defumação texana no pit smoker, assistir a reality shows de gastronomia e jogar futebol com amigos."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Avenida Bacabal",
       "Atacadão da Zona Sul",
       "Shopping Jardim Oriente"
     ],
     "veiculos_midia": [
-      {
-        "nome": "FoodBiz Brasil",
-        "handle": "foodbizbrasil"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Diário de SJC (@diariodesjc)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Netão Bom Beef",
-        "handle": "netaobombeef"
-      },
-      {
-        "nome": "Guia de Bares SJC",
-        "handle": "guiadebaressjc"
-      }
+      "Netão Bom Beef (@netaobombeef)",
+      "Bora Comer SJC (@boracomersjc)"
     ],
     "estilo_consumo_tag": "Gastronomia & Corre Comercial",
-    "foto": "data_personas/imagens_personagens/personagem_15_vanessa_cristina_moreira.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_15_wellington_prates.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 16,
     "nome_completo": "Osvaldo Martins Ferraz",
     "idade": 64,
-    "genero_etnia": "Homem Branco",
+    "genero": "Homem",
+    "raca_cor": "Branco",
     "profissao": "Mestre de Obras da Construção Civil",
     "bairro": "Jardim das Indústrias",
-    "localizacao": "Jardim das Indústrias, São José dos Campos",
     "regiao": "Oeste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Picape utilitária média",
-    "historia_resumida": "Construiu dezenas de casas e edifícios em SJC ao longo de quarenta anos de canteiro de obras. Conhece os tipos de solo e as particularidades estruturais de cada morro e vale da cidade.",
-    "dor_principal": "Escassez de jovens interessados em aprender a profissão de pedreiro e carpinteiro com rigor técnico.",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Picape média a diesel",
+    "historia_resumida": "Comanda equipes em obras residenciais e comerciais em SJC há quarenta anos. Conhece a topografia de cada colina e loteamento da cidade.",
+    "dor_da_cidade": "Falta de jovens dedicados a aprender carpintaria e alvenaria estrutural com esmero técnico e responsabilidade.",
+    "dor_pessoal": "O medo de perder o respeito dos pedreiros mais jovens e a sensação de inutilidade ao ver mestres práticos sendo substituídos por softwares e engenheiros que nunca pegaram numa colher de alvenaria.",
+    "tensao_dramatica": "Pede para a filha ler e responder os orçamentos que chegam por mensagem. Disfarça dizendo que está com a vista ruim, mas o que o incomoda de verdade é depender de alguém para uma coisa que todo mundo mais novo faz sozinho.",
+    "bordao": "Na alvenaria não adianta enganar: se estiver fora de prumo, a parede cai.",
     "habitos": {
       "alimentacao": "Marmita reforçada com feijão tropeiro e bife na chapa, café forte com açúcar e paçoca na sobremesa.",
       "consumo": "Ferramentas profissionais de alta durabilidade em lojas tradicionais de ferragens e peças automotivas originais.",
@@ -762,48 +1082,70 @@
       "aversoes": "Projetos de engenharia desenhados no computador que não consideram as dificuldades práticas da obra real.",
       "paixoes": "Pescar no Rio Paraíba do Sul nas tardes de domingo, ouvir modas de viola e cuidar dos seus pássaros no quintal."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Lojas de Ferragens do Centro",
       "Parque da Cidade",
       "Feira da Vila Nova São José"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Jornal O Vale",
-        "handle": "jornalovale"
-      },
-      {
-        "nome": "Rádio Nativa FM",
-        "handle": "nativafmsjc"
-      }
+      "Jornal O Vale (@jornalovale)",
+      "Rádio Nativa FM (@nativafmsjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Dicas de Obra do Mestre",
-        "handle": "obramestre"
-      },
-      {
-        "nome": "Memória de SJC",
-        "handle": "memoriasjc"
-      }
+      "Dicas de Obra do Mestre (@obramestre)",
+      "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Experiência Prática & Raiz",
-    "foto": "data_personas/imagens_personagens/personagem_16_danielle_ramos_ferreira.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_16_osvaldo_martins_ferraz.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 17,
-    "nome_completo": "Larissa 'Lari' Santos Neves",
+    "nome_completo": "Nayara 'Nai' Santos Neves",
     "idade": 26,
-    "genero_etnia": "Mulher Negra",
+    "genero": "Mulher",
+    "raca_cor": "Negra",
     "profissao": "Barista & Consultora de Cafés Especiais",
-    "bairro": "Vale dos Pinheiros",
-    "localizacao": "Vale dos Pinheiros, São José dos Campos",
-    "regiao": "Oeste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Bicicleta urbana e Metrô/Ônibus",
-    "historia_resumida": "Formada em gastronomia e certificada pela SCA, atua no treinamento de equipes de cafeterias premiadas em SJC. Tem paixão por desmistificar as notas sensoriais de microlotes do interior paulista e mineiro.",
-    "dor_principal": "A persistência da cultura do café extra-forte carbonizado que impede muitas pessoas de valorizarem grãos especiais.",
+    "bairro": "Vila Ema",
+    "regiao": "Centro",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Bicicleta urbana vintage e Ônibus municipal",
+    "historia_resumida": "Formada em gastronomia e barista profissional, treina equipes de cafeterias em SJC e ensina a apreciar microlotes da Mantiqueira sem açúcar.",
+    "dor_da_cidade": "Prevalência da cultura do café torrado escuro carbonizado que bloqueia a valorização da produção regional.",
+    "dor_pessoal": "Sensação sufocante de não pertencer a nenhum lugar: considerada 'esnobe demais' na periferia onde nasceu e 'alternativa demais' na elite da Vila Ema.",
+    "tensao_dramatica": "Quando está exausta de madrugada em casa, toma café solúvel instantâneo com açúcar branco para desespero de seu purismo gastronômico.",
+    "bordao": "Café especial não precisa de açúcar; precisa de paladar desperto.",
     "habitos": {
       "alimentacao": "Torradas artesanais de sourdough com avocado, ovos pochê e infusões botânicas com especiarias.",
       "consumo": "Métodos manuais de extração (Aeropress, Chemex), filtros japoneses e livros técnicos de microbiologia do café.",
@@ -811,48 +1153,68 @@
       "aversoes": "Cafés comerciais servidos em copos plásticos finos e açúcar adicionado sem consentimento na xícara.",
       "paixoes": "Visitar fazendas produtoras no Sul de Minas e na Serra da Mantiqueira, garimpar xícaras de cerâmica e fotografia analógica."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Cafeterias da Vila Ema e Betânia",
       "Parque Vicentina Aranha",
       "Sesc São José dos Campos"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Espresso",
-        "handle": "revistaespresso"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "Revista Espresso (@revistaespresso)",
+      "Explore SJC (@exploresjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Boram Um (World Barista Champion)",
-        "handle": "boramum"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Boram Um (@boramum)",
+      "Sanja Dicas (@sanjadicas)"
     ],
     "estilo_consumo_tag": "Sensorial & Artesanal Nobre",
-    "foto": "data_personas/imagens_personagens/personagem_17_thiago_alcantara_bispo.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_17_nayara_santos_neves.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 18,
     "nome_completo": "Carlos Eduardo 'Cadu' Peixoto",
     "idade": 35,
-    "genero_etnia": "Homem Branco",
+    "genero": "Homem",
+    "raca_cor": "Branco",
     "profissao": "Engenheiro de Estruturas Aeronáuticas da Embraer",
-    "bairro": "Jardim Aquarius II",
-    "localizacao": "Jardim Aquarius, São José dos Campos",
-    "regiao": "Oeste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Sedan Híbrido",
-    "historia_resumida": "Formado pelo ITA, trabalha no cálculo estrutural de compósitos de fuselagem para a nova geração de jatos comerciais. Vive dentro do complexo aeronáutico pela segurança e pela sinergia com a comunidade de engenharia.",
-    "dor_principal": "Restrições orçamentárias em projetos estratégicos de inovação e a alta competitividade de headhunters internacionais.",
+    "bairro": "DCTA",
+    "regiao": "Sudeste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "Sedan Híbrido e Patinete elétrico no campus",
+    "historia_resumida": "Formado pelo ITA, trabalha em compósitos avançados para fuselagens de aviões comerciais. Mora no complexo aeroespacial e valoriza a convivência técnica e científica.",
+    "dor_da_cidade": "Incertezas no orçamento de projetos aeroespaciais de longo prazo e assédio de empresas do exterior.",
+    "dor_pessoal": "Obsessão maníaca por controle e perfeccionismo que o torna incapaz de tolerar erros mínimos em si mesmo e nos colegas.",
+    "tensao_dramatica": "Tem pavor de turbulência e não contou isso a nenhum colega em quinze anos projetando fuselagem. Escolhe voos mais longos só para evitar as rotas que sabe que balançam.",
+    "bordao": "Lá em cima, a dez mil metros de altura, nenhum parafuso pode ter dúvida se aguenta o tranco.",
     "habitos": {
       "alimentacao": "Pratos ricos em proteínas magras, gastronomia contemporânea nos finais de semana e vinhos chilenos da uva Carménère.",
       "consumo": "Drones com câmera 4K, relógios analógicos com cronógrafo de aviação e assinaturas de periódicos científicos aeroespaciais.",
@@ -860,48 +1222,70 @@
       "aversoes": "Cortes de investimentos na educação científica de base e falta de visão de longo prazo em políticas industriais.",
       "paixoes": "Pilotar aeromodelos com os colegas no DCTA, velejar na Represa de Igaratá e leitura de ficção científica clássica."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Clube dos Oficiais do DCTA",
-      "Memorial Aeroespacial Brasileiro (MAB)",
+      "MAB (Memorial Aeroespacial)",
       "CenterVale Shopping"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Aviation Week",
-        "handle": "aviationweek"
-      },
-      {
-        "nome": "Revista Asas",
-        "handle": "revistaasas"
-      }
+      "Aviation Week (@aviationweek)",
+      "TV Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Lito Sousa (Aviões e Músicas)",
-        "handle": "avioesemusicas"
-      },
-      {
-        "nome": "ITA Oficial",
-        "handle": "ita_oficial"
-      }
+      "Lito Sousa (@avioesemusicas)",
+      "ITA Oficial (@ita_oficial)"
     ],
     "estilo_consumo_tag": "Tecnológico & Aeroespacial",
-    "foto": "data_personas/imagens_personagens/personagem_18_renata_sayuri_matsuda.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_18_carlos_eduardo_peixoto.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 19,
     "nome_completo": "Aline Moreira Siqueira",
     "idade": 31,
-    "genero_etnia": "Mulher Parda",
+    "genero": "Mulher",
+    "raca_cor": "Parda",
     "profissao": "Personal Trainer & Coach de Treinamento Funcional",
-    "bairro": "Urbanova (Reserva do Paratehy)",
-    "localizacao": "Urbanova, São José dos Campos",
-    "regiao": "Oeste",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro hatch esportivo",
-    "historia_resumida": "Atende executivos e mulheres na zona sul com foco em emagrecimento saudável e reabilitação postural. Montou seu estúdio funcional privativo próximo à Av. Andrômeda e tem lista de espera para horários nobres.",
-    "dor_principal": "Alunos que desistem nos primeiros meses por buscarem resultados imediatos milagrosos sem disciplina.",
+    "bairro": "Jardim Satélite",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro hatch econômico e Moto scooter",
+    "historia_resumida": "Treinadora física com estúdio perto da Av. Andrômeda, focada em condicionamento funcional e saúde postural de mulheres da zona sul.",
+    "dor_da_cidade": "Desistência precoce de alunas que procuram emagrecimento rápido sem regularidade e disciplina aos treinos.",
+    "dor_pessoal": "Sustenta o próprio corpo como principal argumento de venda do negócio e não tem um só dia de folga dessa vitrine.",
+    "tensao_dramatica": "Vende disciplina o dia inteiro e chega em casa sem nenhuma sobrando para si mesma. Tem dias em que o próprio corpo, que é sua vitrine de trabalho, é a última coisa que ela quer olhar no espelho.",
+    "bordao": "A preguiça você deixa na porta; aqui dentro é consistência que paga o espelho.",
     "habitos": {
       "alimentacao": "Refeições equilibradas pesadas na balança, suplementação vitamínica personalizada e água de coco fresca.",
       "consumo": "Equipamentos de treinamento funcional de borracha vulcanizada, smartbands e calçados específicos de Cross Training.",
@@ -909,48 +1293,71 @@
       "aversoes": "Fórmulas mágicas de emagrecimento sem base científica e academias desorganizadas com aparelhos quebrados.",
       "paixoes": "Participar de meias maratonas de rua em SJC, treinar nas escadarias do Parque da Cidade e cozinhar receitas fit."
     },
-    "lugares_frequenta_sjc": [
-      "Avenida Andrômeda",
+    "lugares_frequenta": [
+      "Pista de Caminhada da Av. Andrômeda",
       "Vale Sul Shopping",
-      "Parque da Cidade"
+      "Praça do Centenário"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Runner's Brasil",
-        "handle": "runnersbrasil"
-      },
-      {
-        "nome": "Explore SJC Esportes",
-        "handle": "exploresjc"
-      }
+      "Notícias SJC (@noticias_sjc)",
+      "Explore SJC (@exploresjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Coach Carol Borba",
-        "handle": "carolborba1"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Carol Borba (@carolborba1)",
+      "Jonas Almeida (@jonas_almeida)"
     ],
     "estilo_consumo_tag": "Fitness & Saúde Ativa",
-    "foto": "data_personas/imagens_personagens/personagem_19_roberto_junqueira_siqueira.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_19_aline_moreira_siqueira.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica",
+        "dor_pessoal_despatologizada"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 20,
     "nome_completo": "Renato Guimarães Prado",
     "idade": 48,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Gerente Geral de Concessionária de Veículos Premium",
-    "bairro": "Jardim Golfe",
-    "localizacao": "Jardim Golfe, São José dos Campos",
-    "regiao": "Oeste",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Sedan Alemão da Concessionária",
-    "historia_resumida": "Comanda uma das concessionárias mais rentáveis do eixo da Dutra, negociando veículos importados para empresários e pecuaristas do Vale. Vive no Floradas de São José pela segurança e sofisticação das praças.",
-    "dor_principal": "Atrasos na entrega de veículos zero km devido à crise global na cadeia de semicondutores e fretes marítimos.",
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Gerente Geral de Concessionária de Veículos",
+    "bairro": "Floradas de São José",
+    "regiao": "Sul",
+    "movimento_cultural": "A Cidade Prometida",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Sedan executivo da concessionária",
+    "historia_resumida": "Gerencia vendas de veículos seminovos e novos no polo da Dutra, negociando com moradores e frotistas da região metropolitana do Vale.",
+    "dor_da_cidade": "Oscilações nas taxas de juros automotivas que travam o crédito bancário de potenciais compradores.",
+    "dor_pessoal": "Terror paralisante de perder o status social e o cargo executivo em um mercado que demite homens de meia-idade sem cerimônia.",
+    "tensao_dramatica": "Deve condomínio há meses no prédio de luxo onde mora para sustentar a aparência que o cargo exige. Sabe que o carro da empresa é a única coisa nova na vida dele.",
+    "bordao": "O cliente entra procurando motor, mas compra o brilho da pintura e o cheirinho de novo no painel.",
     "habitos": {
       "alimentacao": "Almoços de negócios em churrascarias de alto padrão, grelhados nobres e cervejas artesanais do estilo IPA.",
       "consumo": "Acessórios automotivos homologados de fábrica, relógios de marcas suíças e investimentos em imóveis comerciais.",
@@ -958,48 +1365,70 @@
       "aversoes": "Vendedores despreparados que não conhecem a ficha técnica do produto e promessas comerciais não honradas.",
       "paixoes": "Participar de track days em autódromos aos sábados, churrasco gourmet para amigos e assistir à Fórmula 1 aos domingos."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Vale Sul Shopping",
-      "Praça das Floradas de São José",
-      "Restaurantes Nobres da Dutra"
+      "Praça das Floradas",
+      "Restaurantes da Av. Cidade Jardim"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Quatro Rodas",
-        "handle": "quatrorodas"
-      },
-      {
-        "nome": "AutoEsporte Globo",
-        "handle": "autoesporte"
-      }
+      "AutoEsporte Globo (@autoesporte)",
+      "CBN Vale (@cbnvale)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Acelerados (Rubens Barrichello)",
-        "handle": "acelerados"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
+      "Acelerados (@acelerados)",
+      "Beto Oliver (@betooliver)"
     ],
-    "estilo_consumo_tag": "Automotivo & Alto Padrão",
-    "foto": "data_personas/imagens_personagens/personagem_20_camila_albuquerque_de_moura.jpg"
+    "estilo_consumo_tag": "Automotivo & Negócios",
+    "foto": "data_personas/imagens_personagens/personagem_20_renato_guimaraes_prado.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 21,
     "nome_completo": "Beatriz 'Bia' Mendonça",
     "idade": 22,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Estudante de Odontologia na UNESP & Criadora Digital",
-    "bairro": "Jardim Satélite",
-    "localizacao": "Jardim Satélite, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Caminhada e Ônibus universitário",
-    "historia_resumida": "Veio do interior de Minas para estudar na prestigiada Faculdade de Odontologia da UNESP em São José. Compartilha sua rotina de estudos clínicos no TikTok e Instagram, acumulando milhares de seguidores.",
-    "dor_principal": "O custo altíssimo dos kits de instrumentos odontológicos exigidos pela faculdade a cada novo semestre letivo.",
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Estudante de Odontologia na UNESP",
+    "bairro": "Jardim São Dimas",
+    "regiao": "Centro",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Caminhada a pé e Ônibus intermunicipal",
+    "historia_resumida": "Estudante de odontologia, divide apartamento no São Dimas pela facilidade de caminhar até a faculdade e compartilha rotinas de estudos nas redes.",
+    "dor_da_cidade": "Custo muito alto das listas de materiais e instrumentais odontológicos cobrados em cada semestre da graduação.",
+    "dor_pessoal": "Insegurança paralisante sobre sua vocação real e a vergonha de estar endividando os pais do interior para bancar os instrumentais da faculdade.",
+    "tensao_dramatica": "Tem fobia profunda de agulhas e sangue, passando mal em segredo no banheiro após os primeiros procedimentos práticos na clínica universitária.",
+    "bordao": "Um sorriso alinhado abre portas que nenhum diploma consegue abrir.",
     "habitos": {
       "alimentacao": "Marmitas congeladas da mãe, café gelado em copos térmicos entre as aulas e açaí com granola na Praça São Dimas.",
       "consumo": "Materiais odontológicos profissionais em dentais do centro, maquiagem cruelty-free e livros técnicos de anatomia.",
@@ -1007,48 +1436,68 @@
       "aversoes": "Professores autoritários sem empatia pedagógica e clínicas que utilizam materiais de baixa qualidade.",
       "paixoes": "Criar vídeos educativos de saúde bucal para jovens, passear pelas feirinhas de artesanato e piqueniques no Vicentina."
     },
-    "lugares_frequenta_sjc": [
-      "Campus da UNESP São Dimas",
+    "lugares_frequenta": [
+      "Campus da UNESP",
       "Praça Monsenhor Ascânio Brandão",
       "Parque Vicentina Aranha"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista CROSP Notícias",
-        "handle": "crosp_oficial"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "G1 Vale do Paraíba (@g1valeparaiba)",
+      "Explore SJC (@exploresjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Dra. Dentista no Insta",
-        "handle": "dentistando"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Universitária & Criativa",
-    "foto": "data_personas/imagens_personagens/personagem_21_tatiane_souza_ribeiro.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_21_beatriz_mendonca.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 22,
     "nome_completo": "Sebastião 'Tião' Ribeiro",
     "idade": 66,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Operador de Caminhão Pipa & Manutenção de Estradas Rurais",
-    "bairro": "Floradas de São José",
-    "localizacao": "Floradas de São José, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Caminhão de trabalho e moto antiga",
-    "historia_resumida": "Conhece cada curva, ponte de madeira e mata-burro da zona norte rural de SJC. Presta serviços de abastecimento de água potável em chácaras e patrolamento de estradas vicinais há quase quatro décadas.",
-    "dor_principal": "A precariedade da iluminação pública nas estradas rurais e o descaso de motoristas da cidade que andam em alta velocidade nas vias de terra.",
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Operador de Caminhão Pipa & Vias Rurais",
+    "bairro": "Bairro dos Freitas",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe D",
+    "meio_transporte_principal": "Caminhão pipa de serviço e Moto 125cc antiga",
+    "historia_resumida": "Realiza serviços de entrega de água potável em propriedades rurais e nivelamento de estradas de terra na zona norte há mais de 35 anos.",
+    "dor_da_cidade": "Poeira excessiva nos períodos de seca prolongada e falta de conservação das pontes de madeira vicinais.",
+    "dor_pessoal": "A solidão asfixiante da casa vazia após o falecimento da esposa e a sensação de ser um fantasma do passado numa zona norte que se urbaniza depressa demais.",
+    "tensao_dramatica": "Guarda um ressentimento silencioso dos novos sitiantes ricos que cercaram as nascentes antigas, mas finge subserviência para não perder os bicos de manutenção.",
+    "bordao": "Água e respeito não se nega a nenhuma alma viva.",
     "habitos": {
       "alimentacao": "Arroz com feijão gordo, torresmo crocante, farinha de milho caipira e café bem doce passado na hora.",
       "consumo": "Peças de reposição para motores diesel em oficinas locais e calçados resistentes para trabalho pesado.",
@@ -1056,48 +1505,70 @@
       "aversoes": "Gente arrogante da cidade grande que desdenha do modo de vida e da sabedoria simples do homem do campo.",
       "paixoes": "Participar de cavalgadas tropeiras no Bairro dos Freitas, cuidar da sua horta de couve e ouvir modão sertanejo no rádio de pilha."
     },
-    "lugares_frequenta_sjc": [
-      "Igreja de Santo Expedito no Bairro dos Freitas",
-      "Mercado da Zona Norte",
-      "Posto de Combustíveis SP-50"
+    "lugares_frequenta": [
+      "Santo Expedito no Bairro dos Freitas",
+      "Bar do Ponto na SP-50",
+      "Mercado Municipal"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Rádio Piratininga",
-        "handle": "radiopiratiningasjc"
-      },
-      {
-        "nome": "TV Canção Nova",
-        "handle": "cancaonova"
-      }
+      "Rádio Nativa FM (@nativafmsjc)",
+      "TV Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Cultura Caipira Raiz",
-        "handle": "culturacaipira"
-      },
-      {
-        "nome": "Voz do Campo SJC",
-        "handle": "vozesdocampo"
-      }
+      "Voz do Campo SJC (@vozesdocampo)",
+      "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Trabalho Pesado & Tradição Rural",
-    "foto": "data_personas/imagens_personagens/personagem_22_gustavo_henrique_assis.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_22_sebastiao_ribeiro.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 23,
     "nome_completo": "Priscila Alencar",
     "idade": 39,
-    "genero_etnia": "Mulher Negra",
-    "profissao": "Proprietária de Esmalteria & Spa dos Pés",
-    "bairro": "Bosque dos Eucaliptos",
-    "localizacao": "Bosque dos Eucaliptos, São José dos Campos",
+    "genero": "Mulher",
+    "raca_cor": "Negra",
+    "profissao": "Manicure & Proprietária de Esmalteria de Bairro",
+    "bairro": "Jardim Colonial",
     "regiao": "Sul",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro próprio popular",
-    "historia_resumida": "Construiu um dos salões de beleza mais movimentados da região do Colonial. Emprega quatro profissionais do próprio bairro e é conhecida pela inovação nos tratamentos de podologia e unhas decoradas.",
-    "dor_principal": "Dificuldade de obter linhas de microcrédito bancário acessíveis para modernizar as poltronas e autoclaves do salão.",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Ônibus municipal e Carro popular financiado",
+    "historia_resumida": "Montou salão de estética e unhas na avenida principal do Jardim Colonial, gerando emprego para duas vizinhas do próprio bairro.",
+    "dor_da_cidade": "Alta de aluguel comercial e atrasos na entrega de insumos cosméticos comprados em distribuidoras.",
+    "dor_pessoal": "Sobrecarga mental como mãe solo de dois pré-adolescentes e o medo de adoecer e não ter quem coloque comida na mesa.",
+    "tensao_dramatica": "Sabe todos os segredos comprometedores das famílias ricas da região sul através das conversas de salão, mas teme retaliação se falar demais.",
+    "bordao": "No meu salão a mulher entra cansada e sai pronta pra governar o mundo.",
     "habitos": {
       "alimentacao": "Marmita caseira caprichada levada para o salão, lanches rápidos entre atendimentos e refrigerante diet.",
       "consumo": "Esmaltes hipoalergênicos profissionais no atacado, cosméticos para os pés e compras na feira dominical do Colonial.",
@@ -1105,48 +1576,68 @@
       "aversoes": "Fornecedores que atrasam a entrega de insumos essenciais e fofocas no ambiente de trabalho.",
       "paixoes": "Participar da feira de domingo do Colonial com a família, assistir séries de suspense e cantar no coral da igreja."
     },
-    "lugares_frequenta_sjc": [
-      "Galeria Imperial do Colonial",
-      "Supermercado Nagumo Colonial",
+    "lugares_frequenta": [
+      "Comércio do Jardim Colonial",
+      "Supermercado Nagumo",
       "Shopping Jardim Oriente"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Portal Meon Vale",
-        "handle": "meonjornal"
-      },
-      {
-        "nome": "Notícias SJC",
-        "handle": "noticias_sjc"
-      }
+      "Notícias SJC (@noticias_sjc)",
+      "Portal Meon (@meonjornal)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Mulheres Empreendedoras do Vale",
-        "handle": "mulheresdovale"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Juliana Nails SJC (@juliananails_sjc)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Beleza & Liderança Local",
-    "foto": "data_personas/imagens_personagens/personagem_23_nayara_cristina_dos_santos.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_23_priscila_alencar.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 24,
-    "nome_completo": "Felipe 'Lipe' Nogueira",
+    "nome_completo": "Douglas 'Dodô' Nogueira",
     "idade": 25,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Instalador Técnico de Energia Solar Fotovoltaica",
-    "bairro": "Parque Industrial",
-    "localizacao": "Parque Industrial, São José dos Campos",
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Instalador de Painéis Solares & Eletricista",
+    "bairro": "Bosque dos Eucaliptos",
     "regiao": "Sul",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Furgão utilitário com escada no teto",
-    "historia_resumida": "Aproveitou o crescimento dos condomínios em SJC para se especializar na instalação de painéis solares em telhados residenciais e comerciais. Trabalha duro nos telhados debaixo de sol para expandir sua microempresa.",
-    "dor_principal": "A demora das concessionárias de energia elétrica para homologar e ativar os inversores solares dos clientes.",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Picape utilitária leve com bagageiro de escada",
+    "historia_resumida": "Executa montagem de sistemas fotovoltaicos em residências e pequenos galpões na região sul e leste da cidade.",
+    "dor_da_cidade": "Atrasos burocráticos na vistoria e liberação de medidores bidirecionais pela concessionária de energia.",
+    "dor_pessoal": "Pavor de altura e vertigem que precisa engolir todos os dias ao subir nos telhados sob pena de perder o sustento.",
+    "tensao_dramatica": "Levou um susto sério numa instalação e não contou para ninguém, com medo de perder contrato. Desde então sobe em todo telhado com um nó no estômago que aprendeu a esconder atrás de conversa fiada.",
+    "bordao": "Energia limpa no teto e dinheiro honesto no bolso.",
     "habitos": {
       "alimentacao": "Almoço comercial de farto buffet livre, isotônicos durante as instalações e pizza com a namorada no domingo.",
       "consumo": "Cabos solares de alta condutividade, ferramentas elétricas profissionais de impacto e equipamentos de proteção em altura (EPI).",
@@ -1154,1273 +1645,71 @@
       "aversoes": "Instaladores amadores que fazem ligações elétricas perigosas sem seguir as normas da ABNT.",
       "paixoes": "Aprender sobre novas tecnologias de baterias de lítio, andar de kart aos sábados e churrasco com os amigos de infância."
     },
-    "lugares_frequenta_sjc": [
-      "Lojas de Elétrica e Construção da Zona Leste",
-      "Parque Santos Dumont",
-      "CenterVale Shopping"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Canal Solar Brasil",
-        "handle": "canalsolar"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Engenharia na Prática",
-        "handle": "engenhariaprática"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Técnico Solar & Autonomia",
-    "foto": "data_personas/imagens_personagens/personagem_24_alexandre_de_siqueira_prado.jpg"
-  },
-  {
-    "id": 25,
-    "nome_completo": "Juliana 'Ju' Vasconcellos",
-    "idade": 44,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Corretora de Imóveis Especialista em Condomínios Fechados",
-    "bairro": "Jardim Oriente",
-    "localizacao": "Jardim Oriente, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Sedan Híbrido de Luxo",
-    "historia_resumida": "Uma das corretoras mais requisitadas para negociações de mansões e terrenos no Urbanova e Jardim do Golfe. Tem uma rede de relacionamentos sólida entre empresários e médicos do Vale do Paraíba.",
-    "dor_principal": "A lentidão nos cartórios de registro de imóveis e clientes indecisos que desistem na assinatura final da escritura.",
-    "habitos": {
-      "alimentacao": "Café espresso com grãos gourmet, carpaccios finos em restaurantes italianos e almoços de networking na Vila Ema.",
-      "consumo": "Produções fotográficas profissionais com drone para seus imóveis, marketing imobiliário digital e roupas de grife.",
-      "vestuario": "Tailleurs sob medida em tons neutros, joias discretas de ouro e saltos altos clássicos.",
-      "aversoes": "Corretores que não têm postura ética no mercado e imóveis com documentação fundiária irregular.",
-      "paixoes": "Viajar para praias paradisíacas no Nordeste, ioga ao ar livre nas manhãs de sábado e arquitetura de luxo."
-    },
-    "lugares_frequenta_sjc": [
-      "Restaurantes da Vila Ema",
-      "Colinas Shopping",
-      "Praça Ulisses Guimarães no Aquarius"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Imobiliária do Vale",
-        "handle": "imoveisvale"
-      },
-      {
-        "nome": "Valor Econômico",
-        "handle": "valoreconomico"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Lucas Sanseverino",
-        "handle": "lucassanseverino"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Alto Padrão & Network",
-    "foto": "data_personas/imagens_personagens/personagem_25_beatriz_helena_fontes.jpg"
-  },
-  {
-    "id": 26,
-    "nome_completo": "Marcio Souza e Silva",
-    "idade": 50,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Operador de Torno CNC & Usinagem Mecânica de Precisão",
-    "bairro": "Jardim América",
-    "localizacao": "Jardim América, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Carro próprio e ônibus",
-    "historia_resumida": "Mora e trabalha no polo industrial das Chácaras Reunidas, programando tornos e centros de usinagem que fornecem peças sob medida para os setores aeroespacial e petroquímico.",
-    "dor_principal": "A falta de renovação de maquinário nas pequenas oficinas locais em virtude das altas taxas de juros para financiamento industrial.",
-    "habitos": {
-      "alimentacao": "Comida de restaurante caseiro no polo industrial, marmita reforçada e café preto com bolacha no intervalo da fábrica.",
-      "consumo": "Ferramentas de medição micrométrica (paquímetros digitais, micrômetros) e melhorias na oficina.",
-      "vestuario": "Camisa polo industrial com o bolso frontal para caneta e óculos de proteção graduados.",
-      "aversoes": "Engenheiros recém-formados que ignoram a experiência prática dos torneiros mecânicos veteranos.",
-      "paixoes": "Restaurar motores de motocicletas clássicas nos finais de semana e passar tardes de domingo em família."
-    },
-    "lugares_frequenta_sjc": [
-      "Polo Industrial das Chácaras Reunidas",
-      "Vale Sul Shopping",
-      "Mercado Municipal de SJC"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Usinagem Brasil",
-        "handle": "usinagembrasil"
-      },
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Torneiros do Brasil",
-        "handle": "torneiromecanico"
-      },
-      {
-        "nome": "Mecânica Descomplicada",
-        "handle": "mecanicadescomplicada"
-      }
-    ],
-    "estilo_consumo_tag": "Industrial & Precisão",
-    "foto": "data_personas/imagens_personagens/personagem_26_luciana_barbosa_coimbra.jpg"
-  },
-  {
-    "id": 27,
-    "nome_completo": "Tatiane 'Tati' Camargo",
-    "idade": 34,
-    "genero_etnia": "Mulher Parda",
-    "profissao": "Nutricionista Clínica Funcional & Esportiva",
-    "bairro": "Jardim Portugal",
-    "localizacao": "Jardim Portugal, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro hatch moderno",
-    "historia_resumida": "Mantém consultório na Vila Ema atendendo atletas amadores e pessoas que buscam longevidade através de dietas limpas e individualizadas. Tem forte presença digital produzindo conteúdos de receitas funcionais.",
-    "dor_principal": "O bombardeio de dietas da moda perigosas promovidas por influenciadores leigos nas redes sociais.",
-    "habitos": {
-      "alimentacao": "Superalimentos, sementes de chia e linhaça dourada, kombuchas artesanais e vegetais orgânicos da feira de SJC.",
-      "consumo": "Artigos de bioimpedância de precisão, suplementos importados com laudo de pureza e cursos de nutrigenômica.",
-      "vestuario": "Roupas casuais refinadas em tecidos sustentáveis e jaleco estilizado em linho verde-oliva.",
-      "aversoes": "Alimentos ultraprocessados com excesso de corantes artificiais e clientes que não seguem o plano alimentar proposto.",
-      "paixoes": "Corridas no Parque Vicentina Aranha aos domingos pela manhã, cozinhar pratos funcionais e yoga ao ar livre."
-    },
-    "lugares_frequenta_sjc": [
-      "Parque Vicentina Aranha",
-      "Empórios Naturais da Vila Ema",
-      "CenterVale Shopping"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Nutrição Brasil",
-        "handle": "nutricaobrasil"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Luciano Bruno",
-        "handle": "lucianobrunocs"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Saúde Integrativa & Equilíbrio",
-    "foto": "data_personas/imagens_personagens/personagem_27_hiroshi_nakamura_filho.jpg"
-  },
-  {
-    "id": 28,
-    "nome_completo": "Rodrigo 'Digão' Barbosa",
-    "idade": 30,
-    "genero_etnia": "Homem Negro",
-    "profissao": "Eletricista Predial & Residencial Certificado",
-    "bairro": "Campo dos Alemães",
-    "localizacao": "Campo dos Alemães, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Moto com baú de ferramentas",
-    "historia_resumida": "Atende chamados de emergência elétrica em residências e comércios de toda a zona sul. Conquistou sua clientela pela pontualidade, honestidade nos orçamentos e trabalho dentro das normas de segurança.",
-    "dor_principal": "Clientes que contratam curiosos desqualificados e depois o chamam para consertar instalações em curto-circuito perigosas.",
-    "habitos": {
-      "alimentacao": "Almoço comercial nos bairros onde está trabalhando, lanches de rua no fim de tarde e refrigerante bem gelado.",
-      "consumo": "Alicates amperímetros de marca renomada, disjuntores de qualidade e fios de cobre normatizados.",
-      "vestuario": "Camiseta pólo com logotipo da sua empresa, calça jeans reforçada e botinas com isolamento elétrico de 1000V.",
-      "aversoes": "Materiais elétricos falsificados vendidos em depósitos clandestinos e calotes de clientes desonestos.",
-      "paixoes": "Aprender sobre automação residencial inteligente (Alexa), jogar videogame nas horas vagas e churrasco em família."
-    },
-    "lugares_frequenta_sjc": [
-      "Lojas de Materiais Elétricos da Zona Sul",
+    "lugares_frequenta": [
+      "Avenida Ouro Fino",
       "Shopping Jardim Oriente",
-      "Praça do Dom Pedro I"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Mundo da Elétrica",
-        "handle": "mundodaeletrica"
-      },
-      {
-        "nome": "Notícias SJC",
-        "handle": "noticias_sjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Engehall Elétrica",
-        "handle": "engehall_eletrica"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Técnico Prático & Confiança",
-    "foto": "data_personas/imagens_personagens/personagem_28_vinicius_gabriel_de_oliveira.jpg"
-  },
-  {
-    "id": 29,
-    "nome_completo": "Vera Lúcia Bittencourt",
-    "idade": 61,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Professora de Língua Portuguesa Aposentada",
-    "bairro": "Conjunto Dom Pedro I & II",
-    "localizacao": "Conjunto Habitacional Dom Pedro, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Caminhada e Carro próprio",
-    "historia_resumida": "Lecionou durante mais de três décadas em colégios estaduais tradicionais de SJC. Conhecida por sua erudição e carinho com gerações de alunos, hoje dedica seu tempo a clubes de leitura e eventos culturais.",
-    "dor_principal": "A perda progressiva do hábito da leitura profunda entre os jovens e a decadência de livrarias físicas na cidade.",
-    "habitos": {
-      "alimentacao": "Café com leite e torradas pela manhã, sopas caseiras leves à noite e frutas frescas da quitanda do Monte Castelo.",
-      "consumo": "Livros clássicos e contemporâneos em sebos e livrarias, peças de teatro e assinaturas de jornais impressos.",
-      "vestuario": "Cardigãs elegantes de lã, echarpes coloridas de seda e sapatos clássicos de bico arredondado.",
-      "aversoes": "Erros grosseiros de concordância em comunicações oficiais e poluição sonora perto de sua casa.",
-      "paixoes": "Participar de saraus literários no Parque Vicentina Aranha, escrever crônicas sobre a história de SJC e cuidar de suas violetas."
-    },
-    "lugares_frequenta_sjc": [
-      "Parque Vicentina Aranha",
-      "Teatro Municipal de SJC",
-      "Livrarias do CenterVale Shopping"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Jornal O Vale",
-        "handle": "jornalovale"
-      },
-      {
-        "nome": "TV Cultura",
-        "handle": "tvcultura"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Clube de Leitura Vale",
-        "handle": "clubedeleituravale"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Cultural & Intelectual Clássica",
-    "foto": "data_personas/imagens_personagens/personagem_29_patricia_monte_negro_da_silva.jpg"
-  },
-  {
-    "id": 30,
-    "nome_completo": "André Luiz Fonseca",
-    "idade": 45,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Consultor Financeiro & Gestor de Patrimônio Familiar",
-    "bairro": "Parque Interlagos",
-    "localizacao": "Parque Interlagos, São José dos Campos",
-    "regiao": "Sul",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Premium Importado",
-    "historia_resumida": "Atende famílias de alta renda e herdeiros de empresas tradicionais do Vale, auxiliando na alocação global de ativos e planejamento sucessório. Vive no Colinas pela proximidade aos clubes e centros empresariais.",
-    "dor_principal": "A instabilidade fiscal e tributária do país que dificulta o planejamento financeiro de longo prazo para as empresas.",
-    "habitos": {
-      "alimentacao": "Cortes nobres de carne angus, queijos finos europeus e vinhos estruturados da região de Bordeaux.",
-      "consumo": "Terminais Bloomberg de dados financeiros, viagens de férias ao exterior e itens de alta relojoaria.",
-      "vestuario": "Costumes de alfaiataria fina sem gravata, camisas de algodão egípcio e sapatos Oxford artesanais.",
-      "aversoes": "Especulações financeiras irresponsáveis e promessas de retornos exorbitantes sem fundamentos sólidos.",
-      "paixoes": "Jogar golfe nos fins de semana, leitura sobre geopolítica internacional e colecionismo de moedas históricas."
-    },
-    "lugares_frequenta_sjc": [
-      "Clube de Campo Santa Rita",
-      "Colinas Shopping",
-      "Restaurantes da Vila Ema"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Bloomberg Línea Brasil",
-        "handle": "bloomberglinea"
-      },
-      {
-        "nome": "InfoMoney",
-        "handle": "infomoney"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Tiago Reis (Suno)",
-        "handle": "tiagoreis"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Mercado Financeiro & Patrimônio",
-    "foto": "data_personas/imagens_personagens/personagem_30_fernando_de_almeida_prado.jpg"
-  },
-  {
-    "id": 31,
-    "nome_completo": "Natália 'Nati' Dornelles",
-    "idade": 28,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Designer de UX/UI para Startups Globais",
-    "bairro": "Cidade Vista Verde",
-    "localizacao": "Cidade Vista Verde, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Patinete elétrico e Carro por aplicativo",
-    "historia_resumida": "Trabalha para uma empresa de tecnologia da Europa remotamente de seu estúdio no Aquarius. É apaixonada por tipografia, acessibilidade digital e interfaces centradas nas reais necessidades dos usuários.",
-    "dor_principal": "A escassez de eventos presenciais de design de produto e tecnologia fora da capital paulista.",
-    "habitos": {
-      "alimentacao": "Matcha lattes cremosos, toasts com cogumelos salteados e refeições vegetarianas leves.",
-      "consumo": "Monitores 4K calibrados para design, cadernos Moleskine e assinaturas de plataformas de tipografia.",
-      "vestuario": "Camisetas de algodão orgânico oversized, calças retas de sarja bege e tênis sustentáveis brancos.",
-      "aversoes": "Aplicativos com interfaces confusas cheias de propagandas invasivas e reuniões sem objetivo claro.",
-      "paixoes": "Ilustração vetorial autoral, passeios com seu cão na Praça Ulisses Guimarães e cerâmica manual."
-    },
-    "lugares_frequenta_sjc": [
-      "Praça Ulisses Guimarães",
-      "Cafeterias do Aquarius",
-      "Parque Ribeirão Vermelho"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Design Brasil",
-        "handle": "designbrasil"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Ux Collective Brasil",
-        "handle": "uxdesign"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Design & Criatividade Digital",
-    "foto": "data_personas/imagens_personagens/personagem_31_yala_tamires_da_silva.jpg"
-  },
-  {
-    "id": 32,
-    "nome_completo": "Cláudio Roberto Toledo",
-    "idade": 53,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Líder Comunitário & Motorista de Transporte Coletivo",
-    "bairro": "Eugênio de Melo (Distrito)",
-    "localizacao": "Eugênio de Melo, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Ônibus e Bicicleta",
-    "historia_resumida": "Dirige ônibus nas linhas da zona leste há mais de vinte anos e atua como voz ativa da associação de moradores do Novo Horizonte, lutando por melhorias nas praças esportivas e postos de saúde.",
-    "dor_principal": "Superlotação nos horários de pico e a falta de segurança em pontos de ônibus mal iluminados da periferia leste.",
-    "habitos": {
-      "alimentacao": "Prato feito caprichado com bife acebolado, café forte no ponto final da linha e feijão com farinha no almoço.",
-      "consumo": "Compras no comércio popular do bairro, farmácia comunitária e materiais para reformas no centro comunitário.",
-      "vestuario": "Uniforme de motorista sempre bem passado e bermuda com camiseta de time de futebol nos fins de semana.",
-      "aversoes": "Políticos que só aparecem na zona leste em época de eleição e motoristas imprudentes no trânsito.",
-      "paixoes": "Organizar campeonatos de futebol de várzea no bairro, churrasco com a vizinhança e ouvir samba de raiz."
-    },
-    "lugares_frequenta_sjc": [
-      "Praça de Esportes do Novo Horizonte",
-      "Mercado da Zona Leste",
-      "Parque da Cidade"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Jornal da Zona Leste SJC",
-        "handle": "zl_noticias"
-      },
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Voz Comunitária SJC",
-        "handle": "comunidade_sjc"
-      },
-      {
-        "nome": "São José EC",
-        "handle": "saojoseec_oficial"
-      }
-    ],
-    "estilo_consumo_tag": "Comunitário & Voz do Povo",
-    "foto": "data_personas/imagens_personagens/personagem_32_caio_felipe_dos_santos_neves.jpg"
-  },
-  {
-    "id": 33,
-    "nome_completo": "Fernanda 'Fê' Albuquerque",
-    "idade": 37,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Bióloga & Coordenadora de Licenciamento Ambiental",
-    "bairro": "Galo Branco",
-    "localizacao": "Galo Branco, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Compacto Híbrido",
-    "historia_resumida": "Coordena estudos de impacto ambiental e reflorestamento para grandes empreendimentos imobiliários e industriais no Vale do Paraíba. Defende o crescimento urbano sustentável e a preservação dos mananciais.",
-    "dor_principal": "A pressão política para flexibilização de áreas de preservação permanente (APP) e o desmatamento ilegal nas bordas da cidade.",
-    "habitos": {
-      "alimentacao": "Alimentos orgânicos certificados, queijos artesanais da serra e jantares intimistas em bistrôs da Vila Ema.",
-      "consumo": "Equipamentos de GPS georreferenciado de alta precisão, cosméticos veganos e livros de ecologia florestal.",
-      "vestuario": "Roupas em tecidos naturais de algodão cru e linho, botas confortáveis para campo e acessórios sustentáveis.",
-      "aversoes": "Descarte inadequado de entulhos em áreas verdes urbanas e empresas que praticam greenwashing.",
-      "paixoes": "Trilhas de observação de aves (birdwatching) na Serra da Mantiqueira, fotografar a flora nativa e jardinagem ecológica."
-    },
-    "lugares_frequenta_sjc": [
-      "Parque Vicentina Aranha",
-      "Áreas de Preservação do Banhado",
-      "Vila Ema"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista O Eco",
-        "handle": "oeco_oficial"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "SOS Mata Atlântica",
-        "handle": "sosmataatlantica"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Sustentabilidade & Meio Ambiente",
-    "foto": "data_personas/imagens_personagens/personagem_33_karen_naomi_fujimoto.jpg"
-  },
-  {
-    "id": 34,
-    "nome_completo": "Lucas 'LK' Kuntz",
-    "idade": 24,
-    "genero_etnia": "Homem Asiático",
-    "profissao": "Analista de Segurança da Informação & Hacker Ético",
-    "bairro": "Parque Novo Horizonte",
-    "localizacao": "Parque Novo Horizonte, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Moto esportiva e Carro",
-    "historia_resumida": "Atua na defesa cibernética e testes de intrusão para instituições financeiras e indústrias aeroespaciais do Vale. É focado em criptografia, privacidade de dados e segurança de redes.",
-    "dor_principal": "A vulnerabilidade generalizada de pequenas e médias empresas locais a ataques de ransomware.",
-    "habitos": {
-      "alimentacao": "Lanches práticos, delivery asiático noturno e café expresso duplo sem açúcar durante os plantões.",
-      "consumo": "Hardware de segurança física (YubiKeys), servidores domésticos e periféricos de computador de alta fidelidade.",
-      "vestuario": "Camisetas pretas básicas de algodão, calças jeans escuras e tênis skate duráveis.",
-      "aversoes": "Sistemas corporativos com senhas fracas e falta de investimento em cultura de privacidade de dados.",
-      "paixoes": "Competições globais de Capture The Flag (CTF), pilotar sua moto nas curvas da SP-50 e tecnologia cripto."
-    },
-    "lugares_frequenta_sjc": [
-      "Praça das Indústrias",
-      "Parque Tecnológico de SJC",
-      "CenterVale Shopping"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "The Hacker News",
-        "handle": "thehackernews"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Gabriel Pato",
-        "handle": "gabrielpato"
-      },
-      {
-        "nome": "Filipe Deschamps",
-        "handle": "filipedeschamps"
-      }
-    ],
-    "estilo_consumo_tag": "Cibersegurança & Tech",
-    "foto": "data_personas/imagens_personagens/personagem_34_rodrigo_paiva_kuhlmann.jpg"
-  },
-  {
-    "id": 35,
-    "nome_completo": "Rosana Maria de Jesus",
-    "idade": 57,
-    "genero_etnia": "Mulher Negra",
-    "profissao": "Cozinheira Chefe de Restaurante Tradicional por Quilo",
-    "bairro": "Jardim Santa Inês I & II",
-    "localizacao": "Jardim Santa Inês, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Caminhada e Ônibus",
-    "historia_resumida": "Comanda a cozinha de um dos restaurantes executivos mais antigos do centro de SJC, alimentando centenas de bancários e comerciantes todos os dias com seu tempero caipira inconfundível.",
-    "dor_principal": "O encarecimento excessivo do óleo vegetal, do gás de cozinha e das carnes de primeira no comércio atacadista.",
-    "habitos": {
-      "alimentacao": "Comida de panela caseira bem temperada com alho e cebola fresca, feijão carioquinha e doce de abóbora caseiro.",
-      "consumo": "Panelas industriais de ferro e alumínio grosso, temperos a granel no Mercado Municipal e compras de mês.",
-      "vestuario": "Turbantes coloridos de algodão, jaleco branco higiênico e sapatos de segurança emborrachados fechados.",
-      "aversoes": "Desperdício de alimentos em buffets e restaurantes que utilizam temperos químicos industrializados artificiais.",
-      "paixoes": "Reunir filhos e netos em volta da mesa farta no domingo, cuidar das suas plantas de quintal e ouvir samba antigo."
-    },
-    "lugares_frequenta_sjc": [
-      "Mercado Municipal de SJC",
-      "Igreja Matriz de São José",
-      "Praça Afonso Pena"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      },
-      {
-        "nome": "Rádio Nativa FM",
-        "handle": "nativafmsjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Receitas de Vó Caipira",
-        "handle": "receitasdevo"
-      },
-      {
-        "nome": "Memória Joseense",
-        "handle": "memoria_joseense"
-      }
-    ],
-    "estilo_consumo_tag": "Gastronomia Tradicional & Afeto",
-    "foto": "data_personas/imagens_personagens/personagem_35_sylvia_regina_castilho.jpg"
-  },
-  {
-    "id": 36,
-    "nome_completo": "Vinícius 'Vini' Castanho",
-    "idade": 32,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Especialista em Detalhamento Automotivo e Vitrificação",
-    "bairro": "Jardim Mariana I & II",
-    "localizacao": "Jardim Mariana, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro esportivo rebaixado legalizado",
-    "historia_resumida": "Montou uma estética automotiva de alto padrão próxima ao Shopping Oriente, atendendo donos de carros de luxo e entusiastas de veículos esportivos que exigem polimento técnico espelhado.",
-    "dor_principal": "A poeira excessiva de obras vizinhas que prejudica os processos de cura de vitrificadores cerâmicos na oficina.",
-    "habitos": {
-      "alimentacao": "Hambúrguer artesanal aos fins de semana, almoço em restaurantes self-service rápidos e energéticos gelados.",
-      "consumo": "Compostos polidores alemães, boinas de lã e microfibras especiais de alta densidade para acabamento.",
-      "vestuario": "Camisetas pretas de marcas de car care, bermudas cargo pretas e tênis esportivos confortáveis.",
-      "aversoes": "Lava-rápidos automáticos de rolo que riscam a pintura dos veículos e clientes que usam produtos abrasivos caseiros.",
-      "paixoes": "Encontros de carros antigos e modificados no estacionamento de shoppings, cuidar do brilho do próprio carro e automobilismo."
-    },
-    "lugares_frequenta_sjc": [
-      "Shopping Jardim Oriente",
-      "Av. Andrômeda",
       "Vale Sul Shopping"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Car Care Brasil",
-        "handle": "carcarebrasil"
-      },
-      {
-        "nome": "Notícias SJC",
-        "handle": "noticias_sjc"
-      }
+      "Diário de SJC (@diariodesjc)",
+      "Explore SJC (@exploresjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Polimento Técnico Brasil",
-        "handle": "detailerbrasil"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Netão Bom Beef (@netaobombeef)",
+      "Bora Comer SJC (@boracomersjc)"
     ],
-    "estilo_consumo_tag": "Automotivo Estético & Empreendedor",
-    "foto": "data_personas/imagens_personagens/personagem_36_danilo_viana_de_alencar.jpg"
-  },
-  {
-    "id": 37,
-    "nome_completo": "Mariana 'Mari' Godoy",
-    "idade": 29,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Fotógrafa Especialista em Ensaios de Família e Gastronomia",
-    "bairro": "Vila Tatetuba",
-    "localizacao": "Vila Tatetuba, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro compacto e caminhada",
-    "historia_resumida": "Fotografa ensaios de gestantes e crianças no Parque Vicentina Aranha e produz o catálogo visual dos principais restaurantes gourmets da cidade com luz natural e sensibilidade estética.",
-    "dor_principal": "A desvalorização do trabalho autoral fotográfico por clientes que acham que câmeras de celular substituem um olhar profissional.",
-    "habitos": {
-      "alimentacao": "Pães de queijo artesanais, cafés filtrados em cafeterias da Adyana e tortas de frutas vermelhas.",
-      "consumo": "Lentes prime de alta abertura (f/1.4), cartões de memória de alta velocidade e álbuns encadernados artesanais.",
-      "vestuario": "Vestidos fluidos em tons terrosos, chapéus de feltro discretos e botas de camurça macias.",
-      "aversoes": "Ensaios fotográficos engessados e clientes que exigem edições artificiais exageradas em Photoshop.",
-      "paixoes": "Passeios matinais fotografando a arquitetura histórica do Vicentina Aranha, viajar para a serra e cinema de arte."
+    "estilo_consumo_tag": "Técnico Solar & Autonomia",
+    "foto": "data_personas/imagens_personagens/personagem_24_douglas_nogueira.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
     },
-    "lugares_frequenta_sjc": [
-      "Parque Vicentina Aranha",
-      "Parque Santos Dumont",
-      "Bistrôs da Vila Adyana"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Fotografe Melhor",
-        "handle": "fotografemelhor"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Fotografia Autoral Brasil",
-        "handle": "fotografiaautoral"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Visual & Fotografia Sensível",
-    "foto": "data_personas/imagens_personagens/personagem_37_larissa_meireles_prado.jpg"
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
-    "id": 38,
-    "nome_completo": "Edson 'Edinho' Ferreira",
-    "idade": 47,
-    "genero_etnia": "Homem Negro",
-    "profissao": "Soldador Industrial Especialista TIG e Caldeiraria",
-    "bairro": "Jardim Motorama",
-    "localizacao": "Jardim Motorama, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Moto e Fretado da fábrica",
-    "historia_resumida": "Metalúrgico altamente qualificado em solda TIG para tubulações de alta pressão e estruturas aeroespaciais. Reside no Galo Branco há mais de vinte anos e tem orgulho da tradição trabalhadora da sua família.",
-    "dor_principal": "Falta de investimentos em cursos de requalificação tecnológica gratuita para veteranos da indústria local.",
-    "habitos": {
-      "alimentacao": "Comida farta de refeitório fabril, churrasco com linguiça artesanal aos sábados e cerveja bem gelada.",
-      "consumo": "Máscaras de solda com escurecimento automático de última geração e ferramentas manuais resistentes.",
-      "vestuario": "Jaquetas de couro de soldador na fábrica e camisa polo com bermuda jeans nos dias de descanso.",
-      "aversoes": "Falta de rigor nas normas de segurança do trabalho e atrasos de pagamento de fornecedores terceirizados.",
-      "paixoes": "Tocar pandeiro em rodas de samba no Galo Branco, consertar coisas em casa e torcer pelo São José EC."
-    },
-    "lugares_frequenta_sjc": [
-      "Comércio do Galo Branco",
-      "Estádio Martins Pereira",
-      "Parque Novo Horizonte"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Jornal dos Metalúrgicos SJC",
-        "handle": "sindicatometalurgicossjc"
-      },
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Soldagem & Indústria",
-        "handle": "soldagembrasil"
-      },
-      {
-        "nome": "São José Esporte Clube",
-        "handle": "saojoseec_oficial"
-      }
-    ],
-    "estilo_consumo_tag": "Técnico Metalúrgico & Raiz",
-    "foto": "data_personas/imagens_personagens/personagem_38_jamila_nogueira_santos.jpg"
-  },
-  {
-    "id": 39,
-    "nome_completo": "Carla Cristina Zanin",
-    "idade": 43,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Cirurgiã Dentista Especialista em Implantodontia",
-    "bairro": "Vila Tesouro",
-    "localizacao": "Vila Tesouro, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Premium",
-    "historia_resumida": "Referência em cirurgia guiada por computador e implantes dentários com consultório na Vila Adyana. Mora no Esplanada e preza pela discrição, elegância e rigor cirúrgico.",
-    "dor_principal": "A proliferação de franquias odontológicas populares de baixo custo que desvalorizam a complexidade cirúrgica.",
-    "habitos": {
-      "alimentacao": "Gastronomia contemporânea, vinhos brancos da uva Sauvignon Blanc e cafés espressos de torra média.",
-      "consumo": "Scanners intraorais 3D, congressos internacionais de implantodontia e artigos de decoração refinados.",
-      "vestuario": "Alfaiataria impecável de cortes retos em cores neutras e joias clássicas de pérolas.",
-      "aversoes": "Profissionais da saúde que priorizam o lucro em detrimento da saúde e segurança do paciente.",
-      "paixoes": "Natação matinal no clube, viagens culturais pela Europa e colecionismo de cerâmica fina."
-    },
-    "lugares_frequenta_sjc": [
-      "Clube de Campo Santa Rita",
-      "Colinas Shopping",
-      "Restaurantes da Av. São João"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Odonto Magazine",
-        "handle": "odontomagazine"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Implantodontia Avançada Brasil",
-        "handle": "implantodontiabrasil"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Excelência Cirúrgica & Tradição",
-    "foto": "data_personas/imagens_personagens/personagem_39_thais_regina_cavalcante.jpg"
-  },
-  {
-    "id": 40,
-    "nome_completo": "Matheus 'Math' Lourenço",
+    "id": 25,
+    "nome_completo": "Wesley Nascimento",
     "idade": 21,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Barbeiro Especialista em Cortes Freestyle & Navalha",
-    "bairro": "Vila Industrial",
-    "localizacao": "Vila Industrial, São José dos Campos",
-    "regiao": "Leste",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Moto 160cc",
-    "historia_resumida": "Começou cortando cabelo dos amigos na calçada e hoje é dono de uma barbearia concorrida no Dom Pedro II. Cria desenhos freestyle na navalha e atrai jovens de toda a zona sul para mudar o visual.",
-    "dor_principal": "O aumento no preço das lâminas descartáveis e máquinas de corte sem fio importadas.",
-    "habitos": {
-      "alimentacao": "Açaí turbinado com leite condensado, lanches de rua com batata frita e refrigerante gelado.",
-      "consumo": "Máquinas de corte profissionais de precisão (Wahl/Babyliss), pomadas modeladoras e tênis de marca.",
-      "vestuario": "Camisetas de time de basquete americano (NBA), bermudas jeans e correntes de prata.",
-      "aversoes": "Clientes que chegam atrasados sem avisar e pessoas que desvalorizam a arte da barbearia de periferia.",
-      "paixoes": "Batalhas de rima e hip-hop na zona sul, gravar vídeos de transformação de cortes e andar de moto."
-    },
-    "lugares_frequenta_sjc": [
-      "Praça do Dom Pedro II",
-      "Shopping Jardim Oriente",
-      "Pista de Skate do Satélite"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Barber Shop Brasil",
-        "handle": "barbershopbrasil"
-      },
-      {
-        "nome": "Notícias SJC",
-        "handle": "noticias_sjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Willy Morales",
-        "handle": "willymorales"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Estilo Urbano & Freestyle",
-    "foto": "data_personas/imagens_personagens/personagem_40_osvaldo_henrique_castelo.jpg"
-  },
-  {
-    "id": 41,
-    "nome_completo": "Elza Aparecida Bueno",
-    "idade": 65,
-    "genero_etnia": "Mulher Parda",
-    "profissao": "Feirante Produtora de Hortaliças Orgânicas",
-    "bairro": "Santana",
-    "localizacao": "Santana, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Kombi utilitária e Caminhada",
-    "historia_resumida": "Acorda às quatro da manhã para colher alfaces, couves e cheiro-verde sem agrotóxicos em sua horta familiar na Costinha para vender nas feiras da zona norte e centro de SJC.",
-    "dor_principal": "Perdas na lavoura causadas por geadas repentinas no inverno ou tempestades de granizo na serra.",
-    "habitos": {
-      "alimentacao": "Verduras fresquinhas refogadas na banha de porco, angu de milho verde e café com leite da roça.",
-      "consumo": "Sementes orgânicas certificadas, adubo natural e lonas para estufas agrícolas.",
-      "vestuario": "Camisas de manga comprida para o sol, chapéu de palha com lenço e botas de borracha de cano alto.",
-      "aversoes": "Agrotóxicos pesados que contaminam a terra e atravessadores que querem pagar pouco na produção rural.",
-      "paixoes": "Cuidar de suas mudas na estufa, ir à missa de domingo no Bairro dos Freitas e reunir a família para o almoço caipira."
-    },
-    "lugares_frequenta_sjc": [
-      "Feira Livre de Santana",
-      "Igreja da Costinha",
-      "Mercado Municipal de SJC"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Globo Rural Vanguarda",
-        "handle": "redevanguarda"
-      },
-      {
-        "nome": "Rádio Piratininga",
-        "handle": "radiopiratiningasjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Agricultura Orgânica Brasil",
-        "handle": "organicosbrasil"
-      },
-      {
-        "nome": "Voz do Campo SJC",
-        "handle": "vozesdocampo"
-      }
-    ],
-    "estilo_consumo_tag": "Orgânico & Agricultura Familiar",
-    "foto": "data_personas/imagens_personagens/personagem_41_mayara_silva_de_oliveira.jpg"
-  },
-  {
-    "id": 42,
-    "nome_completo": "Rafael 'Rafa' Brandão",
-    "idade": 38,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Gerente de Supply Chain & Logística da Dutra",
-    "bairro": "Altos de Santana",
-    "localizacao": "Altos de Santana, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Carro sedan executivo",
-    "historia_resumida": "Coordena a frota e a distribuição de um dos maiores centros de logística instalados ao longo da Rodovia Presidente Dutra. Vive no Vista Verde pela arborização exuberante e fácil acesso às vias rápidas.",
-    "dor_principal": "Interrupções no fluxo logístico causadas por acidentes na Dutra nos horários de entrega de carga expressa.",
-    "habitos": {
-      "alimentacao": "Grelhados com legumes no almoço, massas artesanais com molhos encorpados e cervejas artesanais locais.",
-      "consumo": "Softwares de rastreamento e telemetria logística, equipamentos eletrônicos para home office e livros de gestão.",
-      "vestuario": "Camisas sociais sem gravata em tecidos tecnológicos antimanchas e calças chino elegantes.",
-      "aversoes": "Atrasos em relatórios operacionais e transportadoras que não cumprem os padrões de segurança de carga.",
-      "paixoes": "Correr pelas alamedas arborizadas do Vista Verde, andar de caiaque na represa e churrasco de fim de semana."
-    },
-    "lugares_frequenta_sjc": [
-      "Praças da Cidade Vista Verde",
-      "CenterVale Shopping",
-      "Parque da Cidade"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Mundo Logística",
-        "handle": "mundologistica"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Logística na Prática",
-        "handle": "logisticabr"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Logística & Gestão Estratégica",
-    "foto": "data_personas/imagens_personagens/personagem_42_lucas_kaua_dos_santos.jpg"
-  },
-  {
-    "id": 43,
-    "nome_completo": "Sabrina Satoe Mori",
-    "idade": 30,
-    "genero_etnia": "Mulher Asiática",
-    "profissao": "Desenvolvedora Mobile iOS/Swift",
-    "bairro": "Alto da Ponte",
-    "localizacao": "Alto da Ponte, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Bicicleta e Transporte por aplicativo",
-    "historia_resumida": "Cria aplicativos para o ecossistema Apple em uma empresa de tecnologia financeira. Escolheu morar na Vila Maria pela atmosfera charmosa e proximidade das padarias clássicas e do centro histórico.",
-    "dor_principal": "A instabilidade nas diretrizes de aprovação de aplicativos na App Store que atrasa lançamentos comerciais.",
-    "habitos": {
-      "alimentacao": "Culinária fusion asiática, chás de jasmim orgânicos e pães de fermentação lenta com queijo branco.",
-      "consumo": "Dispositivos Apple de última geração para testes, cadeiras ergonômicas certificadas e fones com cancelamento de ruído.",
-      "vestuario": "Cardigãs minimalistas em tons pastéis, calças de alfaiataria confortáveis e tênis slip-on.",
-      "aversoes": "Sistemas corporativos legados lentos e falta de acessibilidade para usuários com deficiência visual em apps.",
-      "paixoes": "Desenhar ilustrações no iPad, fotografar detalhes arquitetônicos da Vila Maria e passeios de bicicleta no Vicentina."
-    },
-    "lugares_frequenta_sjc": [
-      "Padarias tradicionais da Vila Maria",
-      "Parque Vicentina Aranha",
-      "Sesc São José dos Campos"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "MacMagazine Brasil",
-        "handle": "macmagazine"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Filipe Deschamps",
-        "handle": "filipedeschamps"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Mobile Tech & Estilo Minimalista",
-    "foto": "data_personas/imagens_personagens/personagem_43_kenji_takahashi.jpg"
-  },
-  {
-    "id": 44,
-    "nome_completo": "Geraldo 'Seu Geraldo' Dias",
-    "idade": 69,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Mecânico Especialista em Motores Diesel & Bombas Injetoras",
-    "bairro": "Buquirinha I & II",
-    "localizacao": "Buquirinha, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Picape antiga e Caminhada",
-    "historia_resumida": "Mantém sua oficina de beira de estrada no Buquirinha há quarenta e cinco anos, socorrendo caminhoneiros, produtores rurais e ônibus que sobem para a serra de Monteiro Lobato e Campos do Jordão.",
-    "dor_principal": "A complexidade da eletrônica embarcada nos motores modernos que exige scanners caros com assinaturas anuais abusivas.",
-    "habitos": {
-      "alimentacao": "Marmita de ferro com arroz, feijão e carne de panela, café coado na hora e paçoca caipira.",
-      "consumo": "Chaves mecânicas forjadas em cromo-vanádio, peças de reposição diesel originais e óleos lubrificantes de qualidade.",
-      "vestuario": "Macacão azul escuro de mecânico com manchas de graxa e boné de marca de caminhão.",
-      "aversoes": "Mecânicos desonestos que cobram por peças que não trocaram e ferramentas de baixa qualidade que quebram no torque.",
-      "paixoes": "Restaurar tratores agrícolas antigos no galpão, conversar com os viajantes da SP-50 e ouvir modão no rádio."
-    },
-    "lugares_frequenta_sjc": [
-      "Comércio do Buquirinha",
-      "Posto da SP-50",
-      "Parque da Cidade"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista O Carreteiro",
-        "handle": "ocarreteiro"
-      },
-      {
-        "nome": "Rádio Nativa FM",
-        "handle": "nativafmsjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Mecânica Pesada Brasil",
-        "handle": "mecanicadiesel"
-      },
-      {
-        "nome": "Voz do Campo SJC",
-        "handle": "vozesdocampo"
-      }
-    ],
-    "estilo_consumo_tag": "Mecânica Pesada & Sabedoria de Estrada",
-    "foto": "data_personas/imagens_personagens/personagem_44_clara_meirelles_castroviejo.jpg"
-  },
-  {
-    "id": 45,
-    "nome_completo": "Patrícia 'Pati' Lemes",
-    "idade": 40,
-    "genero_etnia": "Mulher Parda",
-    "profissao": "Organizadora Profissional de Ambientes (Personal Organizer)",
-    "bairro": "Vila Paiva",
-    "localizacao": "Vila Paiva, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro próprio espaçoso",
-    "historia_resumida": "Transforma casas caóticas em lares harmoniosos e funcionais em condomínios da zona sul e oeste. Ensina técnicas de desapego e organização que economizam tempo e trazem paz mental para famílias ocupadas.",
-    "dor_principal": "Clientes que voltam a acumular objetos desnecessários semanas após a conclusão do projeto de organização.",
-    "habitos": {
-      "alimentacao": "Marmitas congeladas saudáveis e etiquetadas, saladas com sementes e sucos naturais prensados a frio.",
-      "consumo": "Caixas organizadoras de acrílico transparente, rotuladores eletrônicos térmicos e cabides padronizados de veludo.",
-      "vestuario": "Camisas polo brancas com seu logotipo bordado, calças confortáveis com elastano e tênis slip-on acolchoados.",
-      "aversoes": "Acumulação compulsiva de caixas vazias e pessoas que não valorizam a metodologia profissional de organização.",
-      "paixoes": "Passeios na Av. Ouro Fino no Bosque dos Eucaliptos, ler livros sobre minimalismo e reformas criativas de móveis."
-    },
-    "lugares_frequenta_sjc": [
-      "Avenida Ouro Fino no Bosque",
-      "Vale Sul Shopping",
-      "Leroy Merlin do Satélite"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Casa & Organização",
-        "handle": "casaeorganizacao"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Micaela Góes (Santa Ajuda)",
-        "handle": "micaelagoes"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "estilo_consumo_tag": "Organização & Harmonia Prática",
-    "foto": "data_personas/imagens_personagens/personagem_45_leonardo_vianna_martins.jpg"
-  },
-  {
-    "id": 46,
-    "nome_completo": "Henrique 'Rique' Faria",
-    "idade": 26,
-    "genero_etnia": "Homem Negro",
-    "profissao": "Técnico de Instalação e Fusão de Fibra Óptica",
-    "bairro": "Telespark",
-    "localizacao": "Telespark, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Carro utilitário com escada e moto",
-    "historia_resumida": "Trabalha subindo em postes e instalando internet de ultravelocidade em bairros da zona leste e áreas rurais de SJC. Tem agilidade cirúrgica na fusão de cabos ópticos e atendimento direto aos clientes.",
-    "dor_principal": "Fios cortados por caminhões com excesso de altura e roubo frequente de cabos de telecomunicações nas madrugadas.",
-    "habitos": {
-      "alimentacao": "Marmitex de frango com quiabo nos restaurantes da ZL, salgados assados nos postos e refrigerante no intervalo.",
-      "consumo": "Máquinas de fusão de fibra óptica portáteis, canetas laser de teste óptico e calçados com isolamento térmico.",
-      "vestuario": "Uniforme com faixas refletivas de alta visibilidade, capacete com jugular de segurança e óculos de proteção UV.",
-      "aversoes": "Clientes impacientes que culpam o instalador por instabilidades globais de servidores de internet.",
-      "paixoes": "Participar de torneios de videogame de futebol aos fins de semana, empinar pipa com o filho no campinho e churrasco."
-    },
-    "lugares_frequenta_sjc": [
-      "Comércio do Santa Inês e Hermínia",
-      "Shopping CenterVale",
-      "Parque Novo Horizonte"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Telecom Brasil Notícias",
-        "handle": "telecombrasil"
-      },
-      {
-        "nome": "Notícias SJC",
-        "handle": "noticias_sjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Mundo das Telecomunicações",
-        "handle": "telecom_pro"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Conectividade & Trabalho Técnico",
-    "foto": "data_personas/imagens_personagens/personagem_46_sergio_murilo_de_santana.jpg"
-  },
-  {
-    "id": 47,
-    "nome_completo": "Mônica D'Ávila",
-    "idade": 52,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Psicóloga Clínica Especialista em Terapia Cognitivo-Comportamental",
-    "bairro": "Bairro dos Freitas",
-    "localizacao": "Bairro dos Freitas, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Compacto",
-    "historia_resumida": "Atende executivos e jovens universitários com foco no manejo de ansiedade, estresse corporativo e desenvolvimento emocional. Mantém consultório com isolamento acústico refinado no Esplanada.",
-    "dor_principal": "O aumento expressivo de crises de burnout entre jovens profissionais do polo tecnológico de SJC.",
-    "habitos": {
-      "alimentacao": "Chás aromáticos calmantes de camomila e melissa, refeições mediterrâneas leves e pães de nozes artesanais.",
-      "consumo": "Livros de neurociência e psicologia comportamental, poltronas ergonômicas de veludo e viagens de retiro espiritual.",
-      "vestuario": "Camisas de seda pura em tons suaves de azul e lavanda, calças pantalona elegantes e sapatilhas confortáveis.",
-      "aversoes": "Psicólogos que quebram o sigilo profissional ou fazem diagnósticos superficiais sensacionalistas na internet.",
-      "paixoes": "Caminhadas reflexivas no Parque Vicentina Aranha, prática de meditação mindfulness e jardinagem aromática."
-    },
-    "lugares_frequenta_sjc": [
-      "Parque Vicentina Aranha",
-      "Colinas Shopping",
-      "Bistrôs da Vila Ema"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Mente & Cérebro",
-        "handle": "mentecerebro"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Rossandro Klinjey",
-        "handle": "rossandroklinjey"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
-    ],
-    "estilo_consumo_tag": "Saúde Mental & Reflexão Nobre",
-    "foto": "data_personas/imagens_personagens/personagem_47_erika_sayuri_yamashita.jpg"
-  },
-  {
-    "id": 48,
-    "nome_completo": "Jair Messias da Silva",
-    "idade": 58,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Pedreiro Especialista em Acabamentos e Porcelanatos",
-    "bairro": "Bonsucesso",
-    "localizacao": "Bonsucesso, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Ônibus e Bicicleta",
-    "historia_resumida": "Assentador de pisos e porcelanatos de grande formato com mais de trinta anos de experiência em reformas na cidade. É meticuloso no nivelamento a laser e no corte fino de meia-esquadria.",
-    "dor_principal": "A distância e o tempo excessivo gasto no trajeto de ônibus do extremo sul até as obras nos condomínios da zona oeste.",
-    "habitos": {
-      "alimentacao": "Marmita reforçada com arroz, feijão, farofa e carne assada, café com biscoito na obra e suco de caju.",
-      "consumo": "Niveladores de piso de alta precisão, discos de corte diamantados para porcelanato e ferramentas elétricas.",
-      "vestuario": "Camisas polo de algodão resistentes, calças jeans grossas de trabalho e botas com solado de borracha.",
-      "aversoes": "Contratantes que atrasam o pagamento do serviço combinado na entrega da obra e pisos com defeito de fábrica empenados.",
-      "paixoes": "Cuidar dos seus netos no fim de semana, pescar na represa com os amigos do Pinheirinho e assistir jogos de futebol."
-    },
-    "lugares_frequenta_sjc": [
-      "Comércio do Pinheirinho dos Palmares",
-      "Mercado da Zona Sul",
-      "Shopping Jardim Oriente"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      },
-      {
-        "nome": "Rádio Nativa FM",
-        "handle": "nativafmsjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "O Pulo do Gato na Construção",
-        "handle": "opulodogatonaconstrucao"
-      },
-      {
-        "nome": "Voz do Povo SJC",
-        "handle": "vozesdopovo"
-      }
-    ],
-    "estilo_consumo_tag": "Construção Fina & Trabalho Honesto",
-    "foto": "data_personas/imagens_personagens/personagem_48_valeria_das_gracas_jesus.jpg"
-  },
-  {
-    "id": 49,
-    "nome_completo": "Camila 'Cami' Valente",
-    "idade": 33,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Farmacêutica Bioquímica & Gestora de Farmácia de Manipulação",
-    "bairro": "São Francisco Xavier (Centro)",
-    "localizacao": "São Francisco Xavier, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro próprio",
-    "historia_resumida": "Dirige o laboratório de manipulação magistral de fórmulas personalizadas para médicos endocrinologistas e dermatologistas da região central de SJC. Preza pela rastreabilidade e pureza das matérias-primas.",
-    "dor_principal": "A demora nos processos de liberação aduaneira de princípios ativos e fitoquímicos importados na Anvisa.",
-    "habitos": {
-      "alimentacao": "Shakes proteicos funcionais, saladas de grãos com azeite extravirgem e cafés espressos curtos.",
-      "consumo": "Balanças analíticas de alta precisão, softwares de controle magistral e cosméticos com fórmulas limpas.",
-      "vestuario": "Jalecos brancos estilizados com bordado impecável e calçados hospitalares anatômicos acolchoados.",
-      "aversoes": "Farmácias que adulteram fórmulas ou utilizam matérias-primas com laudos de pureza duvidosos.",
-      "paixoes": "Participar de congressos de farmacologia personalizada, aulas de dança de salão e piqueniques no Santos Dumont."
-    },
-    "lugares_frequenta_sjc": [
-      "Parque Santos Dumont",
-      "Polo Hospitalar da Vila Betânia",
-      "CenterVale Shopping"
-    ],
-    "veiculos_midia": [
-      {
-        "nome": "Revista Pharmacia Brasileira",
-        "handle": "cff_oficial"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
-    ],
-    "influenciadores_seguidos": [
-      {
-        "nome": "Farmácia Magistral Brasil",
-        "handle": "farmaciamagistral"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
-    ],
-    "estilo_consumo_tag": "Bioquímica & Fórmulas Personalizadas",
-    "foto": "data_personas/imagens_personagens/personagem_49_cristiano_ricardo_fonseca.jpg"
-  },
-  {
-    "id": 50,
-    "nome_completo": "Diego 'Dih' Santos",
-    "idade": 28,
-    "genero_etnia": "Homem Negro",
-    "profissao": "Entregador Autônomo Líder de Logística de Aplicativos",
-    "bairro": "São Francisco Xavier (Santa Bárbara)",
-    "localizacao": "São Francisco Xavier, São José dos Campos",
-    "regiao": "Norte",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Moto 160cc flex",
-    "historia_resumida": "Conhece cada viela, ladeira e condomínio de SJC na palma da mão. Atua como líder de equipe de entregadores expressos, organizando rotas otimizadas para restaurantes e e-commerce na cidade.",
-    "dor_principal": "O asfalto esburacado em vias secundárias que desgasta as suspensões da moto e os riscos de acidentes com motoristas distraídos no celular.",
+    "genero": "Homem",
+    "raca_cor": "Negro",
+    "profissao": "Entregador de Aplicativo em Duas Rodas",
+    "bairro": "Conjunto Dom Pedro I",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe D",
+    "meio_transporte_principal": "Moto 160cc financiada",
+    "historia_resumida": "Roda mais de 100 km por dia entregando refeições do almoço à madrugada em todas as regiões da cidade com seu baú térmico.",
+    "dor_da_cidade": "Motoristas imprudentes no trânsito, tarifa baixa paga pelos aplicativos e desvalorização da categoria.",
+    "dor_pessoal": "Terror de sofrer um acidente grave no trânsito e deixar a moto apreendida por parcelas atrasadas, ficando sem fonte de renda.",
+    "tensao_dramatica": "Sonha em ser produtor de funk e MC, gravando rimas escondido no banheiro dos postos de gasolina nos intervalos de entregas.",
+    "bordao": "O asfalto é duro, mas a minha fé é blindada.",
     "habitos": {
       "alimentacao": "Marmita rápida nos pontos de apoio de entregadores, lanches no capricho e suco de laranja bem gelado.",
       "consumo": "Pneus de moto de alta aderência, baús impermeáveis reforçados, jaquetas térmicas e suportes de celular antivibração.",
@@ -2428,146 +1717,1976 @@
       "aversoes": "Condomínios fechados que tratam entregadores com desrespeito ou exigem caminhadas longas a pé no sol.",
       "paixoes": "Participar de passeios de motociclistas pelas curvas da serra no fim de semana, churrasco com a família e futebol society."
     },
-    "lugares_frequenta_sjc": [
-      "Pontos de Encontro de Motociclistas na ZS",
+    "lugares_frequenta": [
+      "Postos da Av. Bacabal",
+      "Shopping Jardim Oriente",
+      "Praça do Dom Pedro I"
+    ],
+    "veiculos_midia": [
+      "Notícias SJC (@noticias_sjc)",
+      "012 News (@012news)"
+    ],
+    "influenciadores_seguidos": [
+      "MC Paiva (@mcpaiva)",
+      "Trolando SJC (@trollandosaojose)"
+    ],
+    "estilo_consumo_tag": "Corre Urbano & Juventude",
+    "foto": "data_personas/imagens_personagens/personagem_25_wesley_nascimento.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 26,
+    "nome_completo": "Marcio Souza e Silva",
+    "idade": 50,
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Operador de Torno Mecânico & Usinagem",
+    "bairro": "Chácaras Reunidas",
+    "regiao": "Sul",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Ônibus da linha industrial e Moto antiga",
+    "historia_resumida": "Atua na ferramentaria de peças técnicas para indústrias automotivas e aeroespaciais sediadas nas Chácaras Reunidas.",
+    "dor_da_cidade": "Falta de incentivo a cursos técnicos de torno convencional para a juventude que só busca o digital.",
+    "dor_pessoal": "O ressentimento silencioso de ver o saber artesanal de três décadas ser reduzido a um botão de torno CNC, sentindo que sua inteligência com o metal perdeu o valor para a nova indústria.",
+    "tensao_dramatica": "Ensinou a usar o torno metade dos engenheiros que hoje passam por ele sem cumprimentar. Guarda uma lista mental de erros de projeto que ele previu e ninguém quis ouvir — e a satisfação amarga de estar certo em todos.",
+    "bordao": "Um décimo de milímetro separa a perfeição do refugo total.",
+    "habitos": {
+      "alimentacao": "Comida de restaurante caseiro no polo industrial, marmita reforçada e café preto com bolacha no intervalo da fábrica.",
+      "consumo": "Ferramentas de medição micrométrica (paquímetros digitais, micrômetros) e melhorias na oficina.",
+      "vestuario": "Camisa polo industrial com o bolso frontal para caneta e óculos de proteção graduados.",
+      "aversoes": "Engenheiros recém-formados que ignoram a experiência prática dos torneiros mecânicos veteranos.",
+      "paixoes": "Restaurar motores de motocicletas clássicas nos finais de semana e passar tardes de domingo em família."
+    },
+    "lugares_frequenta": [
+      "Polo Industrial das Chácaras Reunidas",
+      "Vale Sul Shopping",
+      "Mercado Municipal de SJC"
+    ],
+    "veiculos_midia": [
+      "Rádio Band Vale (@bandvaletv)",
+      "Rádio Nativa FM (@nativafmsjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Mecânica Descomplicada (@mecanicadescomplicada)",
+      "São José EC (@saojoseec_oficial)"
+    ],
+    "estilo_consumo_tag": "Industrial & Precisão",
+    "foto": "data_personas/imagens_personagens/personagem_26_marcio_souza_e_silva.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 27,
+    "nome_completo": "Tatiane 'Tati' Camargo",
+    "idade": 34,
+    "genero": "Mulher",
+    "raca_cor": "Parda",
+    "profissao": "Nutricionista Clínica e Atendimento Domiciliar",
+    "bairro": "Jardim Satélite",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro hatch econômico e Deslocamento a pé",
+    "historia_resumida": "Atende famílias e idosos na zona sul orientando alimentação saudável para controle de glicemia e hipertensão.",
+    "dor_da_cidade": "Preços elevados de alimentos frescos e mitos alimentares sem embasamento propagados em redes sociais.",
+    "dor_pessoal": "Frustração de ter que vender 'emagrecimento milagroso' nas redes sociais para pagar as contas, traindo sua crença em nutrição comportamental.",
+    "tensao_dramatica": "Julga com profundo desprezo os hábitos alimentares de suas amigas em jantares sociais, fingindo naturalidade enquanto calcula mentalmente as calorias de cada prato na mesa.",
+    "bordao": "Comida de verdade nutre a célula e acalma a alma.",
+    "habitos": {
+      "alimentacao": "Superalimentos, sementes de chia e linhaça dourada, kombuchas artesanais e vegetais orgânicos da feira de SJC.",
+      "consumo": "Artigos de bioimpedância de precisão, suplementos importados com laudo de pureza e cursos de nutrigenômica.",
+      "vestuario": "Roupas casuais refinadas em tecidos sustentáveis e jaleco estilizado em linho verde-oliva.",
+      "aversoes": "Alimentos ultraprocessados com excesso de corantes artificiais e clientes que não seguem o plano alimentar proposto.",
+      "paixoes": "Corridas no Parque Vicentina Aranha aos domingos pela manhã, cozinhar pratos funcionais e yoga ao ar livre."
+    },
+    "lugares_frequenta": [
+      "Feira Livre do Jardim Satélite",
+      "Vale Sul Shopping",
+      "Parque Ribeirão Vermelho"
+    ],
+    "veiculos_midia": [
+      "Portal G1 Vale (@g1valeparaiba)",
+      "Explore SJC (@exploresjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
+    ],
+    "estilo_consumo_tag": "Saúde Integrativa & Equilíbrio",
+    "foto": "data_personas/imagens_personagens/personagem_27_tatiane_camargo.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 28,
+    "nome_completo": "Rodrigo 'Digão' Barbosa",
+    "idade": 30,
+    "genero": "Homem",
+    "raca_cor": "Negro",
+    "profissao": "Eletricista Instalador Predial e Residencial",
+    "bairro": "Campo dos Alemães",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Moto com caixa lateral de ferramentas",
+    "historia_resumida": "Faz manutenções elétricas residenciais na zona sul, atendendo chamados pelo WhatsApp com rapidez e preço justo.",
+    "dor_da_cidade": "Clientes que improvisam fiações clandestinas perigosas e tentam negociar valores abaixo do custo de segurança.",
+    "dor_pessoal": "Insegurança financeira crônica: semanas com muito dinheiro no bolso seguidas por semanas sem nenhum chamado de emergência.",
+    "tensao_dramatica": "Tem pavor de cobras e aranhas em forros de telhado, já tendo pulado de uma laje e quebrado ferramentas por causa de um rato.",
+    "bordao": "Com eletricidade você só erra uma vez; faça certo de primeira.",
+    "habitos": {
+      "alimentacao": "Almoço comercial nos bairros onde está trabalhando, lanches de rua no fim de tarde e refrigerante bem gelado.",
+      "consumo": "Alicates amperímetros de marca renomada, disjuntores de qualidade e fios de cobre normatizados.",
+      "vestuario": "Camiseta pólo com logotipo da sua empresa, calça jeans reforçada e botinas com isolamento elétrico de 1000V.",
+      "aversoes": "Materiais elétricos falsificados vendidos em depósitos clandestinos e calotes de clientes desonestos.",
+      "paixoes": "Aprender sobre automação residencial inteligente (Alexa), jogar videogame nas horas vagas e churrasco em família."
+    },
+    "lugares_frequenta": [
+      "Depósitos de construção da Zona Sul",
+      "Shopping Jardim Oriente",
+      "Praça do Campo dos Alemães"
+    ],
+    "veiculos_midia": [
+      "Notícias SJC (@noticias_sjc)",
+      "TV Thathi (@tvthathi)"
+    ],
+    "influenciadores_seguidos": [
+      "Trolando SJC (@trollandosaojose)",
+      "Fica a Dica SJC (@ficaadicasjc)"
+    ],
+    "estilo_consumo_tag": "Técnico Prático & Confiança",
+    "foto": "data_personas/imagens_personagens/personagem_28_rodrigo_barbosa.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 29,
+    "nome_completo": "Vera Lúcia Bittencourt",
+    "idade": 61,
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Professora de Educação Básica Aposentada",
+    "bairro": "Monte Castelo",
+    "regiao": "Centro",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Ônibus municipal e Caminhada",
+    "historia_resumida": "Dedicou 32 anos ao ensino fundamental na rede pública de São José. Hoje participa de grupos de leitura e caminhadas matinais.",
+    "dor_da_cidade": "Fechamento de livrarias físicas de rua e a proliferação de calçadas esburacadas que dificultam caminhar no centro.",
+    "dor_pessoal": "Sensação lancinante de irrelevância social após sair da sala de aula e o afastamento dos parentes jovens viciados em telas.",
+    "tensao_dramatica": "É viciada em compras por catálogos de TV e telemarketing, acumulando caixas lacradas de utensílios inúteis no quarto de hóspedes.",
+    "bordao": "A educação é a única revolução que não derrama sangue.",
+    "habitos": {
+      "alimentacao": "Café com leite e torradas pela manhã, sopas caseiras leves à noite e frutas frescas da quitanda do Monte Castelo.",
+      "consumo": "Livros clássicos e contemporâneos em sebos e livrarias, peças de teatro e assinaturas de jornais impressos.",
+      "vestuario": "Cardigãs elegantes de lã, echarpes coloridas de seda e sapatos clássicos de bico arredondado.",
+      "aversoes": "Erros grosseiros de concordância em comunicações oficiais e poluição sonora perto de sua casa.",
+      "paixoes": "Participar de saraus literários no Parque Vicentina Aranha, escrever crônicas sobre a história de SJC e cuidar de suas violetas."
+    },
+    "lugares_frequenta": [
+      "Parque Vicentina Aranha",
+      "Biblioteca Pública Cassiano Ricardo",
+      "Calçadão da Rua 15"
+    ],
+    "veiculos_midia": [
+      "Jornal O Vale (@jornalovale)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "Memória Joseense (@memoria_joseense)"
+    ],
+    "estilo_consumo_tag": "Cultural & Intelectual Clássica",
+    "foto": "data_personas/imagens_personagens/personagem_29_vera_lucia_bittencourt.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 30,
+    "nome_completo": "Neusa de Oliveira",
+    "idade": 56,
+    "genero": "Mulher",
+    "raca_cor": "Negra",
+    "profissao": "Diarista em Casas de Família",
+    "bairro": "Vila Tatetuba",
+    "regiao": "Leste",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe D",
+    "meio_transporte_principal": "Ônibus municipal com baldeação e Caminhada",
+    "historia_resumida": "Trabalha como diarista há quase trinta anos em condomínios da zona oeste. Conhece os endereços da cidade de ponta a ponta.",
+    "dor_da_cidade": "Medo da violência nos pontos de ônibus escuros na volta para casa e o cansaço das viagens longas de transporte público.",
+    "dor_pessoal": "Dores articulares severas nas mãos pela água sanitária e o medo de não conseguir se aposentar pelas regras do INSS.",
+    "tensao_dramatica": "Guarda fotos antigas de uma época em que sonhava em ser técnica de enfermagem e sente uma pontada de rancor toda vez que vê os filhos das patroas reclamando de barriga cheia da faculdade.",
+    "bordao": "Minha faxina é caprichada porque trabalho para Deus, não pros homens.",
+    "habitos": {
+      "alimentacao": "Arroz com feijão caseiro, café passado com açúcar refinado e pão francês com margarina.",
+      "consumo": "Produtos de limpeza no atacarejo, compras de supermercado para o mês e farmácia popular.",
+      "vestuario": "Roupas confortáveis de algodão, calça legging escura e tênis acolchoado para aguentar o expediente.",
+      "aversoes": "Patrões que atrasam o pagamento da diária e desrespeito nos coletivos lotados.",
+      "paixoes": "Reunir os netos no domingo para almoço, cuidar das samambaias no quintal e ouvir rádio evangélica à noite."
+    },
+    "lugares_frequenta": [
+      "Ponto Central da Av. São José",
+      "Feira do Tatetuba",
+      "Igreja de São Benedito"
+    ],
+    "veiculos_midia": [
+      "Rádio Aparecida (@radioaparecida)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Padre Júlio Lancellotti (@padrejulio.lancellotti)",
+      "Notícias SJC (@noticias_sjc)"
+    ],
+    "estilo_consumo_tag": "Batalhadora & Cuidado Familiar",
+    "foto": "data_personas/imagens_personagens/personagem_30_neusa_de_oliveira.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 31,
+    "nome_completo": "Natália 'Nati' Dornelles",
+    "idade": 28,
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Designer de UX/UI para Startups Globais",
+    "bairro": "Jardim Aquarius",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Patinete elétrico próprio e Carro hatch",
+    "historia_resumida": "Trabalha para empresas de tecnologia no exterior a partir do Aquarius. Valoriza cafés com internet rápida e eventos digitais.",
+    "dor_da_cidade": "Falta de eventos de design e inovação fora da capital paulista e pouca oferta de arte independente.",
+    "dor_pessoal": "Crise de identidade crônica por trabalhar criando designs persuasivos para prender a atenção de usuários em apps que considera nocivos.",
+    "tensao_dramatica": "Projeta telas desenhadas para prender atenção e não consegue passar vinte minutos longe das próprias métricas. Sabe exatamente qual gatilho está usando nela, e mesmo assim funciona.",
+    "bordao": "Se o design precisa de explicação, ele falhou.",
+    "habitos": {
+      "alimentacao": "Matcha lattes cremosos, toasts com cogumelos salteados e refeições vegetarianas leves.",
+      "consumo": "Monitores 4K calibrados para design, cadernos Moleskine e assinaturas de plataformas de tipografia.",
+      "vestuario": "Camisetas de algodão orgânico oversized, calças retas de sarja bege e tênis sustentáveis brancos.",
+      "aversoes": "Aplicativos com interfaces confusas cheias de propagandas invasivas e reuniões sem objetivo claro.",
+      "paixoes": "Ilustração vetorial autoral, passeios com seu cão na Praça Ulisses Guimarães e cerâmica manual."
+    },
+    "lugares_frequenta": [
+      "Praça Ulisses Guimarães",
+      "Cafeterias do Aquarius",
+      "Parque Ribeirão Vermelho"
+    ],
+    "veiculos_midia": [
+      "Life Informa (@lifeinforma)",
+      "Explore SJC (@exploresjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
+    ],
+    "estilo_consumo_tag": "Design & Criatividade Digital",
+    "foto": "data_personas/imagens_personagens/personagem_31_natalia_dornelles.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "estereotipo_residual_corrigido"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 32,
+    "nome_completo": "Cláudio Aparecido Toledo",
+    "idade": 53,
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Motorista de Linha Urbana & Líder Comunitário",
+    "bairro": "Parque Novo Horizonte",
+    "regiao": "Leste",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Ônibus municipal e Bicicleta própria",
+    "historia_resumida": "Dirige coletivos na zona leste há 22 anos e atua na associação de moradores do Novo Horizonte, cobrando asfalto e segurança nos pontos.",
+    "dor_da_cidade": "Intervalos demorados entre linhas alimentadoras nos fins de semana e pontos de ônibus escuros.",
+    "dor_pessoal": "A sensação sufocante de ser invisível para a cidade que transporta todo dia, engolindo desaforos no trânsito enquanto carrega a culpa de ser um pai ausente pelo cansaço extremo das escalas.",
+    "tensao_dramatica": "Já chegou ao ponto final pensando em não voltar mais. Fica sentado no ônibus vazio uns minutos antes de descer, todo dia, e ninguém nunca perguntou o motivo.",
+    "bordao": "Na catraca ou no bairro, ninguém passa por cima de quem trabalha.",
+    "habitos": {
+      "alimentacao": "Prato feito caprichado com bife acebolado, café forte no ponto final da linha e feijão com farinha no almoço.",
+      "consumo": "Compras no comércio popular do bairro, farmácia comunitária e materiais para reformas no centro comunitário.",
+      "vestuario": "Uniforme de motorista sempre bem passado e bermuda com camiseta de time de futebol nos fins de semana.",
+      "aversoes": "Políticos que só aparecem na zona leste em época de eleição e motoristas imprudentes no trânsito.",
+      "paixoes": "Organizar campeonatos de futebol de várzea no bairro, churrasco com a vizinhança e ouvir samba de raiz."
+    },
+    "lugares_frequenta": [
+      "Praça de Esportes do Novo Horizonte",
+      "Mercado da Zona Leste",
+      "Parque da Cidade"
+    ],
+    "veiculos_midia": [
+      "TV Vanguarda (@redevanguarda)",
+      "Rádio Nativa FM (@nativafmsjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "São José EC (@saojoseec_oficial)"
+    ],
+    "estilo_consumo_tag": "Comunitário & Voz do Povo",
+    "foto": "data_personas/imagens_personagens/personagem_32_claudio_aparecido_toledo.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 33,
+    "nome_completo": "Elaine Mendes",
+    "idade": 34,
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Professora Concursada do Ensino Fundamental",
+    "bairro": "Jardim Colonial",
+    "regiao": "Sul",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Ônibus municipal e Uber eventual",
+    "historia_resumida": "Professora da rede municipal, vive no Colonial e vivencia o contraste entre a propaganda tech da cidade e a realidade de infraestrutura dos bairros.",
+    "dor_da_cidade": "Custo de vida elevado em aluguel e alimentação na cidade sem reajuste salarial compatível.",
+    "dor_pessoal": "Desgaste de voz que não cede e a impotência diária de ver criança com fome na sala sem ter como resolver.",
+    "tensao_dramatica": "Cansaço de voz que já virou rotina e a certeza de que metade da turma vai embora com fome. Gasta do próprio bolso em lanche e não conta isso na escola para não virar assunto.",
+    "bordao": "Educação em São José não precisa de tablet; precisa de comida no prato e respeito ao professor.",
+    "habitos": {
+      "alimentacao": "Comida caseira simples e nutritiva, cafezinho coado na sala dos professores e marmita com arroz e feijão.",
+      "consumo": "Livros didáticos e literários em sebos, materiais escolares criativos e compras no comércio do bairro.",
+      "vestuario": "Roupas práticas e confortáveis em algodão, calça jeans e tênis macios para dar aula em pé.",
+      "aversoes": "Falta de estrutura nas escolas periféricas e retórica oficial que ignora as dificuldades da sala de aula.",
+      "paixoes": "Projetos de leitura com crianças, passeios em feiras livres e música popular brasileira."
+    },
+    "lugares_frequenta": [
+      "Supermercado Nagumo Colonial",
+      "Feira Livre do Jardim Colonial",
+      "Shopping Jardim Oriente"
+    ],
+    "veiculos_midia": [
+      "G1 Vale do Paraíba (@g1valeparaiba)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "Padre Júlio Lancellotti (@padrejulio.lancellotti)"
+    ],
+    "estilo_consumo_tag": "Educação Pública & Consciência",
+    "foto": "data_personas/imagens_personagens/personagem_33_elaine_mendes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica",
+        "dor_pessoal_despatologizada"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 34,
+    "nome_completo": "Danilo 'DK' Kuntz",
+    "idade": 24,
+    "genero": "Homem",
+    "raca_cor": "Asiático",
+    "profissao": "Analista de Suporte de TI no Parque Tecnológico",
+    "bairro": "Eugênio de Melo",
+    "regiao": "Leste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Moto 150cc e Carona compartilhada",
+    "historia_resumida": "Atua no suporte de infraestrutura e redes para empresas incubadas no Parque Tecnológico. Mora em Eugênio de Melo e estuda certificações à noite.",
+    "dor_da_cidade": "Trânsito pesado na Dutra no trevo de Eugênio de Melo no fim da tarde e falta de ciclovias seguras.",
+    "dor_pessoal": "Timidez patológica que impede qualquer aproximação afetiva e o medo de passar a juventude inteira confinado num quarto escuro.",
+    "tensao_dramatica": "Descobriu uma falha grave de segurança na firma anterior, reportou pelos canais certos e foi tratado como problema em vez de solução. Saiu de lá com a sensação de que fazer a coisa certa custa caro.",
+    "bordao": "Não existe sistema 100% seguro; o elo fraco é sempre o humano.",
+    "habitos": {
+      "alimentacao": "Lanches práticos, delivery asiático noturno e café expresso duplo sem açúcar durante os plantões.",
+      "consumo": "Hardware de segurança física (YubiKeys), servidores domésticos e periféricos de computador de alta fidelidade.",
+      "vestuario": "Camisetas pretas básicas de algodão, calças jeans escuras e tênis skate duráveis.",
+      "aversoes": "Sistemas corporativos com senhas fracas e falta de investimento em cultura de privacidade de dados.",
+      "paixoes": "Competições globais de Capture The Flag (CTF), pilotar sua moto nas curvas da SP-50 e tecnologia cripto."
+    },
+    "lugares_frequenta": [
+      "Parque Tecnológico de SJC (PqTec)",
+      "CenterVale Shopping",
+      "Lan house e jogos online"
+    ],
+    "veiculos_midia": [
+      "TechCrunch (@techcrunch)",
+      "Notícias SJC (@noticias_sjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Rocketseat (@rocketseat_oficial)",
+      "Explore SJC (@exploresjc)"
+    ],
+    "estilo_consumo_tag": "Cibersegurança & Tech",
+    "foto": "data_personas/imagens_personagens/personagem_34_danilo_kuntz.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 35,
+    "nome_completo": "Rosana Maria de Jesus",
+    "idade": 57,
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Cozinheira e Merendeira de Escola Pública",
+    "bairro": "Jardim Santa Inês I",
+    "regiao": "Leste",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe D",
+    "meio_transporte_principal": "Ônibus municipal e Caminhada",
+    "historia_resumida": "Cozinha para centenas de estudantes na escola do Santa Inês com carinho caipira há quase duas décadas. É muito querida pela comunidade escolar.",
+    "dor_da_cidade": "Preço alto dos alimentos básicos no mercado e a falta de medicamentos de uso contínuo nos postos de saúde.",
+    "dor_pessoal": "O desgaste emocional de ver diariamente a vulnerabilidade e o desamparo das crianças na fila da merenda, sentindo-se impotente diante da miséria que ultrapassa os muros da escola.",
+    "tensao_dramatica": "Emprestou o nome para um parente e passou meses recebendo cobrança que não era dela. Resolveu sozinha, sem contar para o marido, e até hoje não sabe se foi orgulho ou vergonha.",
+    "bordao": "Tempero de mãe e panela cheia confortam qualquer coração miúdo.",
+    "habitos": {
+      "alimentacao": "Comida de panela bem temperada, feijão fresquinho, couve refogada e café com biscoito de polvilho.",
+      "consumo": "Alimentos básicos em atacarejo, produtos de limpeza para casa e farmácia popular.",
+      "vestuario": "Vestidos de malha confortáveis, avental branco no trabalho e sapatos fechados acolchoados.",
+      "aversoes": "Desperdício de comida e descaso de atendentes públicos com pessoas simples.",
+      "paixoes": "Fazer almoço de domingo para os netos, cultivar hortelã no quintal e louvores na igreja."
+    },
+    "lugares_frequenta": [
+      "Comércio do Santa Inês",
+      "Mercado Municipal de SJC",
+      "Igreja Evangélica da ZL"
+    ],
+    "veiculos_midia": [
+      "Rádio Nativa FM (@nativafmsjc)",
+      "TV Thathi (@tvthathi)"
+    ],
+    "influenciadores_seguidos": [
+      "Notícias SJC (@noticias_sjc)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "estilo_consumo_tag": "Gastronomia Tradicional & Afeto",
+    "foto": "data_personas/imagens_personagens/personagem_35_rosana_maria_de_jesus.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 36,
+    "nome_completo": "Vinícius 'Vini' Castanho",
+    "idade": 32,
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Especialista em Estética Automotiva e Polimento",
+    "bairro": "Jardim Oriente",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro hatch esportivo e Moto 160cc",
+    "historia_resumida": "Montou espaço de lavagem técnica e polimento no Jardim Oriente, atendendo donos de carros e motos com zelo e dedicação artesanal.",
+    "dor_da_cidade": "Alta no custo de produtos químicos importados para vitrificação e oscilação nas semanas chuvosas.",
+    "dor_pessoal": "Inalação crônica de solventes e compostos químicos que causam enxaquecas constantes e a cobrança da esposa por mais tempo em casa.",
+    "tensao_dramatica": "Já riscou acidentalmente o capô de um carro importado de luxo de um cliente e passou a noite inteira polindo em desespero para disfarçar.",
+    "bordao": "Carro limpo é reflexo da alma do dono.",
+    "habitos": {
+      "alimentacao": "Hambúrguer artesanal aos fins de semana, almoço em restaurantes self-service rápidos e energéticos gelados.",
+      "consumo": "Compostos polidores alemães, boinas de lã e microfibras especiais de alta densidade para acabamento.",
+      "vestuario": "Camisetas pretas de marcas de car care, bermudas cargo pretas e tênis esportivos confortáveis.",
+      "aversoes": "Lava-rápidos automáticos de rolo que riscam a pintura dos veículos e clientes que usam produtos abrasivos caseiros.",
+      "paixoes": "Encontros de carros antigos e modificados no estacionamento de shoppings, cuidar do brilho do próprio carro e automobilismo."
+    },
+    "lugares_frequenta": [
+      "Shopping Jardim Oriente",
+      "Av. Bacabal",
+      "Vale Sul Shopping"
+    ],
+    "veiculos_midia": [
+      "Diário de SJC (@diariodesjc)",
+      "Notícias SJC (@noticias_sjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Netão Bom Beef (@netaobombeef)",
+      "Mecânica Descomplicada (@mecanicadescomplicada)"
+    ],
+    "estilo_consumo_tag": "Automotivo Estético & Corre",
+    "foto": "data_personas/imagens_personagens/personagem_36_vinicius_castanho.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 37,
+    "nome_completo": "Mariana 'Mari' Godoy",
+    "idade": 29,
+    "genero": "Mulher",
+    "raca_cor": "Negra",
+    "profissao": "Fotógrafa de Ensaios Familiares e Cafés",
+    "bairro": "Jardim das Indústrias",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Carro compacto e Caminhada",
+    "historia_resumida": "Fotografa ensaios externos de gestantes e crianças nos parques de SJC e produz fotos de pratos para bistrôs e confeitarias autorais.",
+    "dor_da_cidade": "Clientes que desvalorizam o trabalho fotográfico autoral e pedem descontos excessivos.",
+    "dor_pessoal": "Ansiedade profunda quanto à estabilidade financeira e a autocobrança implacável de que suas fotos nunca são artísticas o bastante.",
+    "tensao_dramatica": "Usa perfis fakes nas redes sociais para espionar os preços e estratégias das concorrentes de fotografia de São José.",
+    "bordao": "A beleza está no instante espontâneo que a pressa não vê.",
+    "habitos": {
+      "alimentacao": "Pães de queijo artesanais, cafés filtrados em cafeterias da Adyana e tortas de frutas vermelhas.",
+      "consumo": "Lentes prime de alta abertura (f/1.4), cartões de memória de alta velocidade e álbuns encadernados artesanais.",
+      "vestuario": "Vestidos fluidos em tons terrosos, chapéus de feltro discretos e botas de camurça macias.",
+      "aversoes": "Ensaios fotográficos engessados e clientes que exigem edições artificiais exageradas em Photoshop.",
+      "paixoes": "Passeios matinais fotografando a arquitetura histórica do Vicentina Aranha, viajar para a serra e cinema de arte."
+    },
+    "lugares_frequenta": [
+      "Parque Vicentina Aranha",
+      "Parque Santos Dumont",
+      "Cafeterias da Vila Adyana"
+    ],
+    "veiculos_midia": [
+      "Explore SJC (@exploresjc)",
+      "Meon Jornal (@meonjornal)"
+    ],
+    "influenciadores_seguidos": [
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
+    ],
+    "estilo_consumo_tag": "Visual & Fotografia Sensível",
+    "foto": "data_personas/imagens_personagens/personagem_37_mariana_godoy.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_37_mariana_godoy.jpg"
+  },
+  {
+    "id": 38,
+    "nome_completo": "Edson 'Edinho' Ferreira",
+    "idade": 47,
+    "genero": "Homem",
+    "raca_cor": "Negro",
+    "profissao": "Soldador Industrial TIG em Linha Pesada",
+    "bairro": "Conjunto Residencial Galo Branco",
+    "regiao": "Leste",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Fretado da fábrica e Moto 125cc aos fins de semana",
+    "historia_resumida": "Metalúrgico experiente em soldagem de tubulações e estruturas na zona leste. Trabalha há 22 anos na indústria e joga futebol aos domingos.",
+    "dor_da_cidade": "Insegurança sobre estabilidade em terceirizadas e desgaste físico pelas jornadas em calor intenso.",
+    "dor_pessoal": "A angústia constante de viver sob contratos temporários de terceirizadas na Dutra, sem estabilidade para sonhar com o futuro do filho e refém do medo de ser descartado a qualquer corte de turno.",
+    "tensao_dramatica": "Guarda mágoa profunda de ter sido rejeitado em um concurso público no passado por não ter tido dinheiro para pagar a taxa de inscrição.",
+    "bordao": "Solda boa não aceita pressa; tem que ter pulso firme e calma na alma.",
+    "habitos": {
+      "alimentacao": "Comida farta de refeitório fabril, churrasco com linguiça artesanal aos sábados e cerveja bem gelada.",
+      "consumo": "Máscaras de solda com escurecimento automático de última geração e ferramentas manuais resistentes.",
+      "vestuario": "Jaquetas de couro de soldador na fábrica e camisa polo com bermuda jeans nos dias de descanso.",
+      "aversoes": "Falta de rigor nas normas de segurança do trabalho e atrasos de pagamento de fornecedores terceirizados.",
+      "paixoes": "Tocar pandeiro em rodas de samba no Galo Branco, consertar coisas em casa e torcer pelo São José EC."
+    },
+    "lugares_frequenta": [
+      "Campo do Galo Branco",
+      "Comércio de Eugênio de Melo",
+      "Estádio Martins Pereira"
+    ],
+    "veiculos_midia": [
+      "TV Vanguarda (@redevanguarda)",
+      "Rádio Stereo Vale (@stereovale)"
+    ],
+    "influenciadores_seguidos": [
+      "São José EC (@saojoseec_oficial)",
+      "Notícias SJC (@noticias_sjc)"
+    ],
+    "estilo_consumo_tag": "Técnico Metalúrgico & Raiz",
+    "foto": "data_personas/imagens_personagens/personagem_38_edson_ferreira.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 39,
+    "nome_completo": "Yasmin Ferreira",
+    "idade": 18,
+    "genero": "Mulher",
+    "raca_cor": "Parda",
+    "profissao": "Estudante de Ciências Sociais & Operadora de Caixa",
+    "bairro": "Jardim Santa Inês III",
+    "regiao": "Leste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Ônibus municipal e Caminhada",
+    "historia_resumida": "Primeira da família no ensino superior, trabalha durante o dia em mercado e estuda à noite. Questiona a concentração de lazer no eixo nobre.",
+    "dor_da_cidade": "Falta de ônibus noturno seguro na volta da aula e ingressos caros em eventos culturais da cidade.",
+    "dor_pessoal": "Exaustão lancinante de conciliar jornada de 8 horas em pé no caixa de mercado com estudos universitários puxados à noite.",
+    "tensao_dramatica": "Morre de vergonha de levar colegas da faculdade em sua casa humilde no Santa Inês III, inventando desculpas para nunca recebê-los.",
+    "bordao": "A periferia tem voz, tem cultura e não vai se calar na vitrine dos outros.",
+    "habitos": {
+      "alimentacao": "Marmitas rápidas, açaí no copo com leite condensado e salgados assados na faculdade.",
+      "consumo": "Livros acadêmicos em formato digital, recargas de internet móvel e roupas casuais básicas.",
+      "vestuario": "Calças jeans largas, ecobags de lona estampadas e tênis confortáveis para andar a pé.",
+      "aversoes": "Preconceito social em estabelecimentos de alto padrão e elitismo acadêmico.",
+      "paixoes": "Escrever poesias em saraus, rodas de rima e participar de manifestações estudantis."
+    },
+    "lugares_frequenta": [
+      "Ponto do Calçadão",
+      "Shopping Jardim Oriente",
+      "Batalhas de Rima de SJC"
+    ],
+    "veiculos_midia": [
+      "TikTok",
+      "Notícias SJC no Insta (@noticias_sjc)"
+    ],
+    "influenciadores_seguidos": [
+      "MC Paiva (@mcpaiva)",
+      "Explore SJC (@exploresjc)"
+    ],
+    "estilo_consumo_tag": "Jovem Periférica & Conectada",
+    "foto": "data_personas/imagens_personagens/personagem_39_yasmin_ferreira.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real",
+        "classe_ajustada"
+      ]
+    },
+    "imagem_status": [
+      "arquivo_precisa_ser_renomeado_em_disco"
+    ]
+  },
+  {
+    "id": 40,
+    "nome_completo": "Matheus 'Math' Lourenço",
+    "idade": 21,
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Barbeiro & Criador de Conteúdo de Barbearia",
+    "bairro": "Conjunto Dom Pedro II",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Moto 160cc financiada",
+    "historia_resumida": "Especialista em corte fade e pigmentação, atrai jovens de toda a zona sul para a barbearia do bairro e grava transformações no Instagram.",
+    "dor_da_cidade": "Preço elevado de máquinas e lâminas de precisão e instabilidade de faturamento nos dias frios e chuvosos.",
+    "dor_pessoal": "A pressão de ser o primeiro da turma a ter renda própria e o medo de que um mês ruim de agenda coloque tudo a perder.",
+    "tensao_dramatica": "Copia descaradamente tutoriais e cortes de barbeiros de Londres e Nova York, jurando para os clientes que são criações autorais suas.",
+    "bordao": "Na navalha não tem espaço para vacilo: régua máxima sempre.",
+    "habitos": {
+      "alimentacao": "Açaí turbinado com leite condensado, lanches de rua com batata frita e refrigerante gelado.",
+      "consumo": "Máquinas de corte profissionais de precisão (Wahl/Babyliss), pomadas modeladoras e tênis de marca.",
+      "vestuario": "Camisetas de time de basquete americano (NBA), bermudas jeans e correntes de prata.",
+      "aversoes": "Clientes que chegam atrasados sem avisar e pessoas que desvalorizam a arte da barbearia de periferia.",
+      "paixoes": "Batalhas de rima e hip-hop na zona sul, gravar vídeos de transformação de cortes e andar de moto."
+    },
+    "lugares_frequenta": [
+      "Praça do Dom Pedro II",
+      "Shopping Jardim Oriente",
+      "Pista de Skate do Satélite"
+    ],
+    "veiculos_midia": [
+      "Notícias SJC (@noticias_sjc)",
+      "TV Band Vale (@bandvaletv)"
+    ],
+    "influenciadores_seguidos": [
+      "MC Paiva (@mcpaiva)",
+      "Biel Grau (@bielgrau)"
+    ],
+    "estilo_consumo_tag": "Estilo Urbano & Freestyle",
+    "foto": "data_personas/imagens_personagens/personagem_40_matheus_lourenco.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "estereotipo_residual_corrigido"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 41,
+    "nome_completo": "Elza Aparecida Bueno",
+    "idade": 65,
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Produtora de Alfaces e Hortaliças da Roça",
+    "bairro": "Santana",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Kombi de entrega de feira e Caminhada",
+    "historia_resumida": "Acorda de madrugada para colher cheiro-verde, alfaces e legumes frescos na sua horta familiar e abastecer a feira livre de Santana e do Mercado.",
+    "dor_da_cidade": "Perdas na colheita durante períodos de tempestades fortes e falta de compradores regulares de atacado.",
+    "dor_pessoal": "O temor sufocante de ver a terra onde nasceu ser cercada por condomínios fechados e a angústia de envelhecer sabendo que ninguém vai continuar cultivando a horta da família.",
+    "tensao_dramatica": "Evita ir ao posto de saúde porque a fila come o dia inteiro e o dia inteiro é a horta. Trata o que dá para tratar em casa e adia o resto, fingindo para os filhos que já foi ao médico.",
+    "bordao": "A terra só devolve o que a gente planta com suor e respeito.",
+    "habitos": {
+      "alimentacao": "Verduras fresquinhas refogadas na banha de porco, angu de milho verde e café com leite da roça.",
+      "consumo": "Sementes orgânicas certificadas, adubo natural e lonas para estufas agrícolas.",
+      "vestuario": "Camisas de manga comprida para o sol, chapéu de palha com lenço e botas de borracha de cano alto.",
+      "aversoes": "Agrotóxicos pesados que contaminam a terra e atravessadores que querem pagar pouco na produção rural.",
+      "paixoes": "Cuidar de suas mudas na estufa, ir à missa de domingo no Bairro dos Freitas e reunir a família para o almoço caipira."
+    },
+    "lugares_frequenta": [
+      "Feira Livre de Santana",
+      "Igreja Matriz de Santana",
+      "Mercado Municipal"
+    ],
+    "veiculos_midia": [
+      "Rádio Nativa FM (@nativafmsjc)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Memória Joseense (@memoria_joseense)",
+      "Carlos Abranches (@carlosabranchesoficial)"
+    ],
+    "estilo_consumo_tag": "Orgânico & Agricultura Familiar",
+    "foto": "data_personas/imagens_personagens/personagem_41_elza_aparecida_bueno.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
+    ]
+  },
+  {
+    "id": 42,
+    "nome_completo": "Rafael 'Rafa' Brandão",
+    "idade": 38,
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Coordenador de Expedição e Frota na Dutra",
+    "bairro": "Cidade Vista Verde",
+    "regiao": "Leste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Carro sedan próprio e Linha Verde",
+    "historia_resumida": "Supervisiona centros de distribuição e frotas de carga no polo logístico da Dutra. Mora no Vista Verde e gosta das praças com árvores centenárias.",
+    "dor_da_cidade": "Lentidão e acidentes constantes na Dutra que impactam as janelas de entrega de mercadorias.",
+    "dor_pessoal": "Estresse contínuo de plantões 24h por telefone monitorando cargas e a perda de momentos preciosos do crescimento da filha pequena.",
+    "tensao_dramatica": "Assume uma postura durona e infalível com os motoristas terceirizados, mas tem crises de choro trancado no carro no estacionamento da empresa pela pressão de metas desumanas.",
+    "bordao": "Se a fábrica não parou e o caminhão chegou no horário, ninguém me dá parabéns; mas se atrasar dez minutos, o telefone não para de tocar.",
+    "habitos": {
+      "alimentacao": "Grelhados com legumes no almoço, massas artesanais com molhos encorpados e cervejas artesanais locais.",
+      "consumo": "Softwares de rastreamento e telemetria logística, equipamentos eletrônicos para home office e livros de gestão.",
+      "vestuario": "Camisas sociais sem gravata em tecidos tecnológicos antimanchas e calças chino elegantes.",
+      "aversoes": "Atrasos em relatórios operacionais e transportadoras que não cumprem os padrões de segurança de carga.",
+      "paixoes": "Correr pelas alamedas arborizadas do Vista Verde, andar de caiaque na represa e churrasco de fim de semana."
+    },
+    "lugares_frequenta": [
+      "Praças da Cidade Vista Verde",
+      "CenterVale Shopping",
+      "Restaurantes do Centro"
+    ],
+    "veiculos_midia": [
+      "CBN Vale (@cbnvale)",
+      "Diário de SJC (@diariodesjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Sanja Dicas (@sanjadicas)",
+      "Carlos Abranches (@carlosabranchesoficial)"
+    ],
+    "estilo_consumo_tag": "Logística & Gestão Estratégica",
+    "foto": "data_personas/imagens_personagens/personagem_42_rafael_brandao.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 43,
+    "nome_completo": "Sabrina Satoe Mori",
+    "idade": 30,
+    "genero": "Mulher",
+    "raca_cor": "Asiática",
+    "profissao": "Analista de Sistemas e Programadora Mobile",
+    "bairro": "Vila Industrial",
+    "regiao": "Leste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Bicicleta própria e Linha Verde (BRT elétrico)",
+    "historia_resumida": "Desenvolve códigos para aplicativos financeiros trabalhando parte em home office e parte em escritório tech. Aprecia arquitetura fabril histórica.",
+    "dor_da_cidade": "Custo crescente de moradia e escassez de opções de gastronomia asiática autêntica fora do eixo nobre.",
+    "dor_pessoal": "Pressão familiar conservadora tradicional para se casar e ter filhos, contrastando com sua ambição profissional independente.",
+    "tensao_dramatica": "Tem um perfil anônimo na internet onde publica resenhas ácidas e bem-humoradas detonando a mediocridade da cena cultural do Vale.",
+    "bordao": "Aplicativo bom é o que até minha vó consegue usar sem travar e sem me ligar no domingo.",
+    "habitos": {
+      "alimentacao": "Culinária fusion asiática, chás de jasmim orgânicos e pães de fermentação lenta com queijo branco.",
+      "consumo": "Dispositivos Apple de última geração para testes, cadeiras ergonômicas certificadas e fones com cancelamento de ruído.",
+      "vestuario": "Cardigãs minimalistas em tons pastéis, calças de alfaiataria confortáveis e tênis slip-on.",
+      "aversoes": "Sistemas corporativos legados lentos e falta de acessibilidade para usuários com deficiência visual em apps.",
+      "paixoes": "Desenhar ilustrações no iPad, fotografar detalhes arquitetônicos da Vila Maria e passeios de bicicleta no Vicentina."
+    },
+    "lugares_frequenta": [
+      "Parque da Cidade",
+      "Vila Industrial",
+      "CenterVale Shopping"
+    ],
+    "veiculos_midia": [
+      "Explore SJC (@exploresjc)",
+      "Meon Jornal (@meonjornal)"
+    ],
+    "influenciadores_seguidos": [
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
+    ],
+    "estilo_consumo_tag": "Mobile Tech & Estilo Minimalista",
+    "foto": "data_personas/imagens_personagens/personagem_43_sabrina_satoe_mori.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 44,
+    "nome_completo": "Geraldo 'Seu Geraldo' Dias",
+    "idade": 69,
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Mecânico Tradicional de Motores a Diesel",
+    "bairro": "Jardim Morumbi",
+    "regiao": "Sul",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Picape antiga a diesel e Caminhada no bairro",
+    "historia_resumida": "Mecânico veterano que socorre veículos a diesel, picapes e vans escolares no Morumbi há mais de 35 anos. Trabalha com chaves manuais e ouvido atento.",
+    "dor_da_cidade": "Dificuldade para obter peças de reposição confiáveis sem preços superfaturados em autopeças.",
+    "dor_pessoal": "A humilhação secreta de não entender os diagnósticos eletrônicos via scanner dos caminhões novos, sentindo que seu ouvido treinado por 40 anos virou peça de museu para os motoristas jovens.",
+    "tensao_dramatica": "Guarda em uma gaveta trancada da oficina notas promissórias e cheques sem fundos de 'amigos' que nunca pagaram seus consertos.",
+    "bordao": "Motor a diesel não mente: ou você escuta o barulho ou fica na beira da estrada.",
+    "habitos": {
+      "alimentacao": "Marmita de ferro com arroz, feijão e carne de panela, café coado na hora e paçoca caipira.",
+      "consumo": "Chaves mecânicas forjadas em cromo-vanádio, peças de reposição diesel originais e óleos lubrificantes de qualidade.",
+      "vestuario": "Macacão azul escuro de mecânico com manchas de graxa e boné de marca de caminhão.",
+      "aversoes": "Mecânicos desonestos que cobram por peças que não trocaram e ferramentas de baixa qualidade que quebram no torque.",
+      "paixoes": "Restaurar tratores agrícolas antigos no galpão, conversar com os viajantes da SP-50 e ouvir modão no rádio."
+    },
+    "lugares_frequenta": [
+      "Oficinas do Morumbi",
+      "Av. Andrômeda",
+      "Supermercado Shibata da Zona Sul"
+    ],
+    "veiculos_midia": [
+      "Rádio Nativa FM (@nativafmsjc)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Mecânica Descomplicada (@mecanicadescomplicada)",
+      "Carlos Abranches (@carlosabranchesoficial)"
+    ],
+    "estilo_consumo_tag": "Mecânica Pesada & Sabedoria",
+    "foto": "data_personas/imagens_personagens/personagem_44_geraldo_dias.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 45,
+    "nome_completo": "Patrícia 'Pati' Lemes",
+    "idade": 40,
+    "genero": "Mulher",
+    "raca_cor": "Parda",
+    "profissao": "Personal Organizer Residencial e Comercial",
+    "bairro": "Bosque dos Eucaliptos",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro hatch espaçoso e Ônibus eventual",
+    "historia_resumida": "Organiza armários, despensas e arquivos de escritórios na zona sul e centro. Ensina técnicas de categorização que economizam tempo.",
+    "dor_da_cidade": "Clientes que cancelam sessões em cima da hora e a dificuldade de encontrar caixas organizadoras a preço acessível.",
+    "dor_pessoal": "Sensação sufocante de que sua própria vida pessoal e financeira é caótica, em total contradição com a organização impecável que vende.",
+    "tensao_dramatica": "Seu próprio guarda-roupa em casa é uma bagunça caótica que ela esconde trancando a porta do quarto quando recebe visitas.",
+    "bordao": "Organização não é sobre dobrar roupas; é sobre devolver a paz para a sua mente.",
+    "habitos": {
+      "alimentacao": "Marmitas congeladas saudáveis e etiquetadas, saladas com sementes e sucos naturais prensados a frio.",
+      "consumo": "Caixas organizadoras de acrílico transparente, rotuladores eletrônicos térmicos e cabides padronizados de veludo.",
+      "vestuario": "Camisas polo brancas com seu logotipo bordado, calças confortáveis com elastano e tênis slip-on acolchoados.",
+      "aversoes": "Acumulação compulsiva de caixas vazias e pessoas que não valorizam a metodologia profissional de organização.",
+      "paixoes": "Passeios na Av. Ouro Fino no Bosque dos Eucaliptos, ler livros sobre minimalismo e reformas criativas de móveis."
+    },
+    "lugares_frequenta": [
+      "Avenida Ouro Fino",
+      "Vale Sul Shopping",
+      "Leroy Merlin do Satélite"
+    ],
+    "veiculos_midia": [
+      "Fica a Dica SJC (@ficaadicasjc)",
+      "Notícias SJC (@noticias_sjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Jonas Almeida (@jonas_almeida)",
+      "Kelly Maria (@kellymariaoficial)"
+    ],
+    "estilo_consumo_tag": "Organização & Praticidade",
+    "foto": "data_personas/imagens_personagens/personagem_45_patricia_lemes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 46,
+    "nome_completo": "Henrique 'Rique' Faria",
+    "idade": 26,
+    "genero": "Homem",
+    "raca_cor": "Negro",
+    "profissao": "Técnico de Fusão e Reparo de Fibra Óptica",
+    "bairro": "Jardim Santa Inês II",
+    "regiao": "Leste",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Utilitário da operadora e Moto 150cc",
+    "historia_resumida": "Sobe em escadas e postes para restabelecer cabos rompidos de telecomunicações em bairros da zona leste e sudeste com destreza.",
+    "dor_da_cidade": "Fiação emaranhada que oferece perigo e cobrança por metas diárias pesadas de restabelecimento.",
+    "dor_pessoal": "Medo constante de acidentes elétricos em postes e a cobrança da noiva para comprar um apartamento próprio na zona leste.",
+    "tensao_dramatica": "Diz à noiva que está guardando mais do que guarda. Parte do dinheiro vai para as noites com os colegas da firma, e a conta desse desencontro ele vai ter que prestar uma hora.",
+    "bordao": "A cidade não para porque a gente garante a conexão no poste.",
+    "habitos": {
+      "alimentacao": "Marmitex de frango com quiabo nos restaurantes da ZL, salgados assados nos postos e refrigerante no intervalo.",
+      "consumo": "Máquinas de fusão de fibra óptica portáteis, canetas laser de teste óptico e calçados com isolamento térmico.",
+      "vestuario": "Uniforme com faixas refletivas de alta visibilidade, capacete com jugular de segurança e óculos de proteção UV.",
+      "aversoes": "Clientes impacientes que culpam o instalador por instabilidades globais de servidores de internet.",
+      "paixoes": "Participar de torneios de videogame de futebol aos fins de semana, empinar pipa com o filho no campinho e churrasco."
+    },
+    "lugares_frequenta": [
+      "Comércio do Santa Inês",
+      "Shopping CenterVale",
+      "Praça de Lazer do Novo Horizonte"
+    ],
+    "veiculos_midia": [
+      "Notícias SJC (@noticias_sjc)",
+      "TV Thathi (@tvthathi)"
+    ],
+    "influenciadores_seguidos": [
+      "MC Paiva (@mcpaiva)",
+      "Trolando SJC (@trollandosaojose)"
+    ],
+    "estilo_consumo_tag": "Conectividade & Trabalho Técnico",
+    "foto": "data_personas/imagens_personagens/personagem_46_henrique_faria.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 47,
+    "nome_completo": "Marlene Cristina de Souza",
+    "idade": 43,
+    "genero": "Mulher",
+    "raca_cor": "Negra",
+    "profissao": "Garçonete Freelancer em Eventos e Buffets",
+    "bairro": "Jardim São Judas Tadeu",
+    "regiao": "Sudeste",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe D",
+    "meio_transporte_principal": "Ônibus municipal noturno e Racha de Uber",
+    "historia_resumida": "Trabalha em festas de casamento e corporativas servindo clientes na alta sociedade. Conhece o cotidiano duro de quem volta para casa na madrugada.",
+    "dor_da_cidade": "Falta de segurança nas paradas de ônibus vazias à noite e preconceito social velado em salões nobres.",
+    "dor_pessoal": "A sensação de humilhação ao circular como uma sombra invisível entre banquetes milionários na Vila Ema e voltar de madrugada para um bairro sem iluminação, sem saber se a diária vai fechar o aluguel.",
+    "tensao_dramatica": "Serve banquete a noite inteira e volta de madrugada num ponto sem luz. Guarda, dos bufês onde trabalha, as histórias que conta para os filhos no dia seguinte — nunca a humilhação.",
+    "bordao": "A gente serve o banquete dos outros de cabeça erguida, sem dever nada pra ninguém.",
+    "habitos": {
+      "alimentacao": "Café com pão na chapa de manhã, lanches rápidos durante eventos e refeição caseira em família.",
+      "consumo": "Sapatos pretos ortopédicos resistentes para eventos, meias de compressão e compras em atacados populares.",
+      "vestuario": "Camisa social preta, calça social escura e avental impecável para eventos.",
+      "aversoes": "Clientes esnobes em eventos e falta de consideração dos organizadores com transporte de retorno.",
+      "paixoes": "Cantar na igreja de São Judas, passear com os filhos no parque aos domingos e ouvir pagode."
+    },
+    "lugares_frequenta": [
+      "Praça do São Judas",
+      "Ponto Central de Ônibus",
+      "Mercado Municipal"
+    ],
+    "veiculos_midia": [
+      "Notícias SJC (@noticias_sjc)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Padre Júlio Lancellotti (@padrejulio.lancellotti)",
+      "Kelly Maria (@kellymariaoficial)"
+    ],
+    "estilo_consumo_tag": "Resistência & Trabalho Noturno",
+    "foto": "data_personas/imagens_personagens/personagem_47_marlene_cristina_de_souza.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "arquivo_precisa_ser_renomeado_em_disco"
+    ]
+  },
+  {
+    "id": 48,
+    "nome_completo": "Jair Messias da Silva",
+    "idade": 58,
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Pedreiro Especialista em Alvenaria e Pisos",
+    "bairro": "Parque Interlagos",
+    "regiao": "Sul",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Ônibus municipal e Bicicleta cargueira",
+    "historia_resumida": "Assentador de pisos e construtor com mais de 30 anos de ofício em obras na zona sul e leste. Preza pelo prumo certo e acabamento limpo.",
+    "dor_da_cidade": "Atrasos na entrega de areia e cimento nas obras e a distância das linhas de transporte público.",
+    "dor_pessoal": "A vergonha de não conseguir dar aos filhos o padrão de vida das casas de alto padrão que ele mesmo ergue tijolo por tijolo com as próprias mãos no Urbanova.",
+    "tensao_dramatica": "Assina contrato confiando no aperto de mão porque os termos jurídicos passam longe do que ele aprendeu. Já perdeu dinheiro assim duas vezes e continua achando que pedir para alguém explicar seria pior.",
+    "bordao": "Piso assentado no prumo é o espelho da honra do pedreiro.",
+    "habitos": {
+      "alimentacao": "Marmita reforçada com arroz, feijão, farofa e carne assada, café com biscoito na obra e suco de caju.",
+      "consumo": "Niveladores de piso de alta precisão, discos de corte diamantados para porcelanato e ferramentas elétricas.",
+      "vestuario": "Camisas polo de algodão resistentes, calças jeans grossas de trabalho e botas com solado de borracha.",
+      "aversoes": "Contratantes que atrasam o pagamento do serviço combinado na entrega da obra e pisos com defeito de fábrica empenados.",
+      "paixoes": "Cuidar dos seus netos no fim de semana, pescar na represa com os amigos do Pinheirinho e assistir jogos de futebol."
+    },
+    "lugares_frequenta": [
+      "Praça do Interlagos",
+      "Depósitos da Zona Sul",
+      "Shopping Jardim Oriente"
+    ],
+    "veiculos_midia": [
+      "Rádio Nativa FM (@nativafmsjc)",
+      "TV Vanguarda (@redevanguarda)"
+    ],
+    "influenciadores_seguidos": [
+      "Dicas de Obra do Mestre (@obramestre)",
+      "São José EC (@saojoseec_oficial)"
+    ],
+    "estilo_consumo_tag": "Construção & Trabalho Honesto",
+    "foto": "data_personas/imagens_personagens/personagem_48_jair_messias_da_silva.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 49,
+    "nome_completo": "Camila 'Cami' Valente",
+    "idade": 33,
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Farmacêutica em Drogaria Hospitalar",
+    "bairro": "Jardim das Indústrias",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe B",
+    "meio_transporte_principal": "Carro hatch flex e Caminhada",
+    "historia_resumida": "Responsável pela dispensação técnica de remédios em drogaria perto do anel viário, conferindo receitas e tirando dúvidas de clientes sobre remédios.",
+    "dor_da_cidade": "Sobrecarga de jornadas em fins de semana alternados e pressão comercial constante.",
+    "dor_pessoal": "Exaustão de absorver a dor de pacientes graves todos os dias e nenhum espaço na agenda para cuidar da própria cabeça.",
+    "tensao_dramatica": "Atende o balcão ouvindo a pior notícia da vida de estranhos e vai para casa sem ter com quem dividir nenhuma delas. Sabe exatamente o que recomendaria a si mesma, e não faz.",
+    "bordao": "Remédio cura o corpo, mas o acolhimento humano cura o desespero.",
+    "habitos": {
+      "alimentacao": "Shakes proteicos funcionais, saladas de grãos com azeite extravirgem e cafés espressos curtos.",
+      "consumo": "Balanças analíticas de alta precisão, softwares de controle magistral e cosméticos com fórmulas limpas.",
+      "vestuario": "Jalecos brancos estilizados com bordado impecável e calçados hospitalares anatômicos acolchoados.",
+      "aversoes": "Farmácias que adulteram fórmulas ou utilizam matérias-primas com laudos de pureza duvidosos.",
+      "paixoes": "Participar de congressos de farmacologia personalizada, aulas de dança de salão e piqueniques no Santos Dumont."
+    },
+    "lugares_frequenta": [
+      "Praça das Indústrias",
+      "CenterVale Shopping",
+      "Parque Santos Dumont"
+    ],
+    "veiculos_midia": [
+      "Meon Jornal (@meonjornal)",
+      "Explore SJC (@exploresjc)"
+    ],
+    "influenciadores_seguidos": [
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
+    ],
+    "estilo_consumo_tag": "Farmacêutica & Saúde Prática",
+    "foto": "data_personas/imagens_personagens/personagem_49_camila_valente.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica",
+        "dor_pessoal_despatologizada"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
+  },
+  {
+    "id": 50,
+    "nome_completo": "Diego 'Dih' Santos",
+    "idade": 28,
+    "genero": "Homem",
+    "raca_cor": "Negro",
+    "profissao": "Motorista de Aplicativo & Entregador Expresso",
+    "bairro": "Parque Interlagos",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro hatch alugado e Moto 160cc",
+    "historia_resumida": "Faz corridas e fretes rápidos de e-commerce e alimentos por toda a cidade, operando celular no suporte e conhecendo cada atalho.",
+    "dor_da_cidade": "Preço do combustível que não para de subir e a demora para embarcar passageiros em condomínios fechados.",
+    "dor_pessoal": "Sensação de estar preso numa roda-viva sem futuro profissional, trabalhando 14 horas por dia apenas para pagar o aluguel do carro e a gasolina.",
+    "tensao_dramatica": "Finge para a namorada que é dono do carro em que roda, morrendo de vergonha de admitir que o veículo é alugado.",
+    "bordao": "No volante não tem mimimi: cada quilômetro rodado é um passo mais perto da minha vitória.",
+    "habitos": {
+      "alimentacao": "Marmita térmica no banco do passageiro, salgados de estufa nos postos de GNV e garrafas de café térmico para os turnos da madrugada.",
+      "consumo": "Pneus aro 14 resistentes para asfalto acidentado, planos de dados 5G ilimitados, suportes magnéticos de celular para painel e lavagem rápida semanal.",
+      "vestuario": "Camisetas polo escuras confortáveis, bermudas jeans leves nos dias quentes e tênis macio para suportar horas nos pedais.",
+      "aversoes": "Passageiros que batem a porta do carro com força, cancelamentos após deslocamento longo e taxas abusivas de aluguel da locadora de veículos.",
+      "paixoes": "Ouvir podcasts de histórias reais e pagode nas madrugadas ao volante, cuidar da sua moto nos dias de folga e reunir os amigos para jogar truco."
+    },
+    "lugares_frequenta": [
+      "Postos de GNV da Av. Cidade Jardim",
       "Shopping Jardim Oriente",
       "Parque Interlagos"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Duas Rodas Notícias",
-        "handle": "duasrodas"
-      },
-      {
-        "nome": "Notícias SJC",
-        "handle": "noticias_sjc"
-      }
+      "Notícias SJC (@noticias_sjc)",
+      "012 News (@012news)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Motofilmador SJC",
-        "handle": "motoboy_sjc"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Trolando SJC (@trollandosaojose)",
+      "Beto Oliver (@betooliver)"
     ],
-    "estilo_consumo_tag": "Agilidade em Duas Rodas & Corre",
-    "foto": "data_personas/imagens_personagens/personagem_50_marlene_aparecida_schmidt.jpg"
+    "estilo_consumo_tag": "Agilidade no Trânsito & Autonomia",
+    "foto": "data_personas/imagens_personagens/personagem_50_diego_santos.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 51,
-    "nome_completo": "Sílvia Helena de Castro",
-    "idade": 49,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Professora de Balé Clássico & Dança Infantil",
-    "bairro": "Região do Putim",
-    "localizacao": "Putim, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro próprio",
-    "historia_resumida": "Dirige uma tradicional escola de dança e balé clássico na Vila Ema, tendo formado centenas de bailarinas da cidade para exames internacionais da Royal Academy of Dance.",
-    "dor_principal": "A escassez de teatros municipais com infraestrutura adequada de coxias e piso flutuante para grandes espetáculos de dança na cidade.",
+    "nome_completo": "Waldir 'Seu Waldir' Fagundes",
+    "idade": 52,
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Dono de Lanchonete e Café de Balcão",
+    "bairro": "Jardim Satélite",
+    "regiao": "Sul",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro utilitário e Caminhada matinal",
+    "historia_resumida": "Comanda lanchonete de sucos e salgados na Av. Andrômeda há mais de duas décadas, atendendo bancários, lojistas e famílias do bairro.",
+    "dor_da_cidade": "Concorrência predatória de grandes franquias de fast-food e a alta contínua nas contas de energia elétrica comercial.",
+    "dor_pessoal": "Terror de ver a lanchonete familiar falir e não ter como pagar a faculdade de medicina da filha que é seu maior orgulho.",
+    "tensao_dramatica": "Tem pavor de admitir que a lanchonete está perdendo clientela jovem para as cafeterias gourmet da Vila Ema e passa madrugadas conferindo o saldo bancário em pânico silencioso.",
+    "bordao": "Café quente no bule e acolhimento sincero seguram qualquer cliente fiel.",
     "habitos": {
-      "alimentacao": "Frutas frescas, iogurtes naturais com mel puro, chás calmantes e pratos leves de massa fresca italiana.",
-      "consumo": "Sapatilhas de ponta importadas, figurinos de tule nobre e sistemas de som acústico profissional para estúdio.",
-      "vestuario": "Collants de lycra elegantes com saias de chiffon, polainas de lã macias e sapatilhas de meia-ponta.",
-      "aversoes": "Falta de disciplina nos ensaios gerais e estabelecimentos que colocam música comercial excessivamente alta.",
-      "paixoes": "Assistir a transmissões de espetáculos do Bolshoi e do Royal Ballet, passear no Vicentina Aranha e cuidar de suas orquídeas."
+      "alimentacao": "Salgados tradicionais assados na hora, café expresso simples e almoço rápido no balcão da lanchonete.",
+      "consumo": "Fritadeiras elétricas profissionais, embalagens térmicas e compras em atacadistas da zona sul.",
+      "vestuario": "Camisa polo branca, calça de sarja resistente e calçado confortável para horas de pé.",
+      "aversoes": "Fornecedores que entregam produtos fora da data de validade e desonestidade de concorrentes.",
+      "paixoes": "Conversar com clientes fiéis no balcão, passeios no Parque da Cidade e assistir jogos de futebol."
     },
-    "lugares_frequenta_sjc": [
-      "Parque Vicentina Aranha",
-      "Teatro Municipal de SJC",
-      "Cafeterias da Vila Ema"
+    "lugares_frequenta": [
+      "Avenida Andrômeda",
+      "Praça do Centenário",
+      "Vale Sul Shopping"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Dança Brasil",
-        "handle": "dancabrasil"
-      },
-      {
-        "nome": "CBN Vale",
-        "handle": "cbnvale"
-      }
+      "Jornal O Vale (@jornalovale)",
+      "TV Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Royal Academy Brasil",
-        "handle": "royalacademy"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "Jonas Almeida (@jonas_almeida)"
     ],
-    "estilo_consumo_tag": "Arte Clássica & Disciplina",
-    "foto": "data_personas/imagens_personagens/personagem_51_claudinei_ribeiro_da_silva.jpg"
+    "estilo_consumo_tag": "Comércio Raiz & Tradicional",
+    "foto": "data_personas/imagens_personagens/personagem_51_waldir_fagundes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real"
+      ]
+    },
+    "imagem_status": [
+      "arquivo_precisa_ser_renomeado_em_disco"
+    ]
   },
   {
     "id": 52,
     "nome_completo": "Alexandre 'Xande' Pires",
     "idade": 46,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Empresário do Setor de Blindagem e Acessórios Automotivos",
-    "bairro": "São Judas Tadeu",
-    "localizacao": "São Judas Tadeu, São José dos Campos",
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Eletricista de Manutenção Predial e Bombas",
+    "bairro": "Putim",
     "regiao": "Sudeste",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Blindado Nível III-A",
-    "historia_resumida": "Proprietário de uma empresa especializada em blindagem automotiva e vidros balísticos que atende executivos e políticos do Vale e da capital. Vive no Urbanova e valoriza privacidade e proteção familiar.",
-    "dor_principal": "A complexidade da burocracia documental do Exército Brasileiro para homologação de novas tecnologias de blindagem balística leve.",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Moto própria e Furgão de ferramentas",
+    "historia_resumida": "Faz reparos elétricos em condomínios e pequenos comércios do Putim e região sudeste, com atendimento rápido via WhatsApp.",
+    "dor_da_cidade": "Clientes que tentam fazer reparos por conta própria e pioram o curto-circuito antes de chamar o profissional.",
+    "dor_pessoal": "O pânico de envelhecer sem nenhuma previdência ou patrimônio após duas décadas trabalhando de sol a sol, refém da incerteza de depender da caridade familiar se um dia sofrer uma queda de escada.",
+    "tensao_dramatica": "Investiu em ferramentas boas apostando em contratos que ainda não fechou, e agora corre atrás do prejuízo sem contar para a esposa. Duas décadas de trabalho e nenhuma previdência é o que tira seu sono.",
+    "bordao": "Água na caixa e luz no teto: se depender de mim, ninguém fica no escuro.",
     "habitos": {
-      "alimentacao": "Carnes nobres maturadas no dry aged, cervejas artesanais premium e almoços executivos no Colinas.",
-      "consumo": "Vidros balísticos curvos de alta transparência óptica, aramidas de proteção e tecnologia de monitoramento residencial.",
-      "vestuario": "Camisas polo de algodão egípcio preto, calças jeans confortáveis e relógio esportivo de titânio.",
-      "aversoes": "Prestadores de serviços que não respeitam normas rígidas de segurança e sigilo de clientes.",
-      "paixoes": "Praticar tiro esportivo em clube homologado, pilotar barcos na represa e passeios de quadriciclo na serra."
+      "alimentacao": "Marmitex com bife a cavalo e mandioca frita, refrigerante de tubaína em lata e café coado no balcão das lojas de ferragens.",
+      "consumo": "Multímetros digitais industriais de alta precisão, bombas submersas de reposição, chaves isoladas 1000V e fitas autofusão de alta performance.",
+      "vestuario": "Calças jeans grossas com bolsos utilitários para ferramentas, camisetas de algodão pesadas e botinas de segurança com biqueira de composite.",
+      "aversoes": "'Curiosos' que fazem gambiarras elétricas e tentam culpar o eletricista anterior, além de fios finos de alumínio cobreado de má qualidade.",
+      "paixoes": "Pescaria de barranco nas lagoas do Putim, ouvir moda sertaneja raiz na caminhonete e consertar motores elétricos na oficina de casa."
     },
-    "lugares_frequenta_sjc": [
-      "Colinas Shopping",
-      "Clube de Tiro do Vale",
-      "Restaurantes da Vila Ema"
+    "lugares_frequenta": [
+      "Lojas de Ferragens do Putim",
+      "Shopping CenterVale",
+      "Paróquia do Putim"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Segurança & Defesa",
-        "handle": "segurancabrasil"
-      },
-      {
-        "nome": "Valor Econômico",
-        "handle": "valoreconomico"
-      }
+      "Rádio Stereo Vale (@stereovale)",
+      "TV Thathi (@tvthathi)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Blindagem Brasil",
-        "handle": "blindagem_pro"
-      },
-      {
-        "nome": "Lucas Sanseverino",
-        "handle": "lucassanseverino"
-      }
+      "Mecânica Descomplicada (@mecanicadescomplicada)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
-    "estilo_consumo_tag": "Segurança & Tecnologia Balística",
-    "foto": "data_personas/imagens_personagens/personagem_52_sheila_maria_de_santana.jpg"
+    "estilo_consumo_tag": "Manutenção & Resolução Prática",
+    "foto": "data_personas/imagens_personagens/personagem_52_alexandre_pires.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 53,
     "nome_completo": "Débora 'Deby' Antunes",
     "idade": 25,
-    "genero_etnia": "Mulher Parda",
-    "profissao": "Atendente de Clínica Veterinária & Tosadora Especialista",
-    "bairro": "Santa Júlia",
-    "localizacao": "Santa Júlia, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Moto própria e Ônibus",
-    "historia_resumida": "Apaixonada por animais, especializou-se em tosa higiênica e banhos relaxantes para cães e gatos em uma das clínicas mais movimentadas do Jardim Satélite. Tem um talento especial para acalmar pets estressados.",
-    "dor_principal": "Tutores irresponsáveis que abandonam animais idosos ou negligenciam os tratamentos veterinários prescritos.",
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Banhista e Tosadora em Pet Shop de Bairro",
+    "bairro": "Jardim Satélite",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Linha Verde (BRT elétrico) e Bicicleta própria",
+    "historia_resumida": "Cuida com carinho da tosa e bem-estar de cães e gatos em pet shop familiar na zona sul. Apoia causas de resgate animal no bairro.",
+    "dor_da_cidade": "Tutores que não cuidam da vacinação e deixam animais cheios de carrapatos sem tratamento preventivo.",
+    "dor_pessoal": "A frustração de dedicar todo o seu afeto aos animais dos outros enquanto se sente incapaz de estruturar a própria independência financeira para sair da casa dos pais na periferia.",
+    "tensao_dramatica": "Trata melhor os cachorros dos outros do que qualquer pessoa já tratou ela. Sorri para o cliente arrogante e passa o resto do dia ensaiando mentalmente a resposta que nunca vai dar.",
+    "bordao": "Bicho não fala, mas sente quem cuida com o coração.",
     "habitos": {
       "alimentacao": "Lanches vegetarianos práticos, sucos de frutas da estação e comida caseira no almoço com a equipe do pet shop.",
       "consumo": "Tesouras japonesas de tosa de precisão, lâminas profissionais, xampus hipoalergênicos e acessórios pet fofos.",
@@ -2575,48 +3694,71 @@
       "aversoes": "Maus-tratos a animais e pessoas que compram bichos por modismo sem pensar no compromisso de longo prazo.",
       "paixoes": "Trabalhar como voluntária em feirinhas de adoção de animais em SJC, passear com seus cães resgatados e gravar vídeos pet."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Avenida Andrômeda",
       "Vale Sul Shopping",
-      "Parque da Cidade"
+      "Praça de Lazer do Satélite"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Pet Care Brasil",
-        "handle": "petcarebrasil"
-      },
-      {
-        "nome": "Explore SJC Pets",
-        "handle": "exploresjc"
-      }
+      "Explore SJC (@exploresjc)",
+      "Notícias SJC (@noticias_sjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Alexandre Rossi (Dr. Pet)",
-        "handle": "drpet"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Cuidado Animal & Afeto",
-    "foto": "data_personas/imagens_personagens/personagem_53_marcio_jose_da_rocha.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_53_debora_antunes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
+    ]
   },
   {
     "id": 54,
     "nome_completo": "Mauro 'Seu Mauro' Quintanilha",
     "idade": 63,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Tapeceiro Artesanal de Veículos e Estofados Antigos",
-    "bairro": "Residencial Flamboyant",
-    "localizacao": "Residencial Flamboyant, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Carro antigo restaurado e Caminhada",
-    "historia_resumida": "Herdeiro da tradição de tapeçaria automotiva em Santana, restaura interiores de carros clássicos, bancos de couro e poltronas de época com costura dupla manual perfeita.",
-    "dor_principal": "A dificuldade em encontrar couros bovinos legítimos tingidos no padrão original dos anos 70 e espumas de alta densidade duráveis.",
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Tapeceiro Artesanal de Veículos e Sofás",
+    "bairro": "Santana",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Carro popular antigo e Caminhada",
+    "historia_resumida": "Artesão do couro e da costura pesada em oficina tradicional de Santana, recuperando bancos e sofás que duram décadas.",
+    "dor_da_cidade": "Escassez de jovens com paciência para aprender o ofício e a invasão de produtos descartáveis de courino sintético.",
+    "dor_pessoal": "A amargura de presenciar a morte do seu ofício artesanal e a sensação de esquecimento ao ver que a cidade trocou a durabilidade do couro legítimo pelo consumo descartável da internet.",
+    "tensao_dramatica": "Guarda pedaços de couro nobre há 40 anos para fazer um jogo de estofamento perfeito que sonha em construir, mas nunca acha tempo.",
+    "bordao": "A máquina faz rápido, mas a mão do mestre faz pra durar uma vida inteira.",
     "habitos": {
       "alimentacao": "Comida de boteco tradicional, torresmo sequinho com limão, arroz com tutu de feijão e café fresco passado na hora.",
       "consumo": "Couros legítimos de curtumes selecionados, linhas de náilon de alta tenacidade e ferramentas manuais de tapeceiro.",
@@ -2624,48 +3766,68 @@
       "aversoes": "Materiais sintéticos plásticos que esfarelam com o calor do sol e clientes que exigem pressa em restaurações artísticas.",
       "paixoes": "Participar de encontros de carros clássicos no Parque da Cidade, ouvir sambas antigos no rádio e contar histórias de Santana."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Parque da Cidade",
       "Feira de Santana",
-      "Oficinas Tradicionais da Zona Norte"
+      "Oficinas Tradicionais do Bairro"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Classic Motors",
-        "handle": "classicmotors"
-      },
-      {
-        "nome": "Rádio Nativa FM",
-        "handle": "nativafmsjc"
-      }
+      "Rádio Nativa FM (@nativafmsjc)",
+      "TV Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Restauração Brasil",
-        "handle": "restauracaoclassicos"
-      },
-      {
-        "nome": "Memória Joseense",
-        "handle": "memoria_joseense"
-      }
+      "Memória Joseense (@memoria_joseense)",
+      "Carlos Abranches (@carlosabranchesoficial)"
     ],
-    "estilo_consumo_tag": "Restauração & Tradição Manual",
-    "foto": "data_personas/imagens_personagens/personagem_54_renata_silveira_camargo.jpg"
+    "estilo_consumo_tag": "Restauração & Ofício Tradicional",
+    "foto": "data_personas/imagens_personagens/personagem_54_mauro_quintanilha.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 55,
-    "nome_completo": "Renata 'Re' Schimidt",
+    "nome_completo": "Renata Vasconcelos",
     "idade": 36,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Engenheira de Telecomunicações & Redes de Alta Velocidade",
-    "bairro": "Vila Nova São José",
-    "localizacao": "Vila Nova São José, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "Carro SUV Híbrido",
-    "historia_resumida": "Planeja e executa a infraestrutura de antenas 5G e data centers de missão crítica para polos industriais e condomínios inteligentes do Vale. Vive no Aquarius pela conectividade e estilo de vida moderno.",
-    "dor_principal": "A demora nos processos de licenciamento municipal para instalação de novas antenas de telecomunicação urbana.",
+    "genero": "Mulher",
+    "raca_cor": "Parda",
+    "profissao": "Engenheira de Infraestrutura de Redes Ópticas",
+    "bairro": "Jardim Aquarius",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "SUV Híbrido e Patinete elétrico",
+    "historia_resumida": "Projeta anéis de fibra e estações rádio-base de alta performance para o setor industrial e centros de pesquisa de SJC.",
+    "dor_da_cidade": "Excesso de entraves em licenças ambientais e patrimoniais para passagem de dutos de telecomunicações subterrâneos.",
+    "dor_pessoal": "Machismo estrutural velado no setor de engenharia de telecomunicações, tendo que provar sua competência técnica em dobro todos os dias.",
+    "tensao_dramatica": "Entra em toda reunião de diretoria sabendo que vai ter que provar duas vezes o que qualquer colega prova uma. O corpo cobra o preço antes de cada apresentação, e ela chega dez minutos mais cedo só para se recompor sozinha.",
+    "bordao": "A cidade só percebe o trabalho da engenharia quando a internet cai e o mundo inteiro para.",
     "habitos": {
       "alimentacao": "Pratos equilibrados da culinária mediterrânea, café expresso gourmet e smoothies funcionais com sementes.",
       "consumo": "Equipamentos de análise de espectro de radiofrequência, gadgets tecnológicos inteligentes e viagens internacionais.",
@@ -2673,48 +3835,73 @@
       "aversoes": "Negacionismo tecnológico, teorias da conspiração sobre redes sem fio e fornecedores que não cumprem SLA.",
       "paixoes": "Praticar corrida de rua na Praça Ulisses Guimarães, leitura sobre inteligência artificial e degustação de vinhos brancos."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Praça Ulisses Guimarães",
       "Colinas Shopping",
       "Restaurantes da Av. São João"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Tele.Síntese Notícias",
-        "handle": "telesintese"
-      },
-      {
-        "nome": "Valor Econômico",
-        "handle": "valoreconomico"
-      }
+      "Life Informa (@lifeinforma)",
+      "Valor Econômico (@valoreconomico)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Telecom na Prática",
-        "handle": "telecompractice"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "Sanja Dicas (@sanjadicas)"
     ],
-    "estilo_consumo_tag": "Telecomunicações & Modernidade",
-    "foto": "data_personas/imagens_personagens/personagem_55_walter_egidio_guimaraes.jpg"
+    "estilo_consumo_tag": "Telecomunicações & Inovação",
+    "foto": "data_personas/imagens_personagens/personagem_55_renata_vasconcelos.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "nome_substituido_para_desacoplar_de_informante_real",
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "arquivo_precisa_ser_renomeado_em_disco",
+      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
+    ]
   },
   {
     "id": 56,
     "nome_completo": "Bruno 'Brunão' Marins",
     "idade": 34,
-    "genero_etnia": "Homem Negro",
-    "profissao": "Pitmaster & Proprietário de Defumados e Carnes Artesanais",
-    "bairro": "Jardim Santa Luzia",
-    "localizacao": "Jardim Santa Luzia, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "Empreendedorismo Intuitivo",
-    "faixa_renda": "Classe C1",
-    "meio_transporte_principal": "Picape utilitária",
-    "historia_resumida": "Especialista em churrasco americano e defumação lenta com lenhas frutíferas (macieira e laranjeira). Montou seu negócio de charcutaria e brisket artesanal no Bosque dos Ipês e faz eventos em toda a região.",
-    "dor_principal": "A alta oscilação nos preços dos cortes de carne bovina angus de primeira linha e o custo do frete de lenhas especiais.",
+    "genero": "Homem",
+    "raca_cor": "Negro",
+    "profissao": "Mestre Charcuteiro & Produtor de Defumados",
+    "bairro": "Bosque dos Ipês",
+    "regiao": "Sul",
+    "movimento_cultural": "Empreendedorismo Intuitivo",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Picape utilitária média a diesel",
+    "historia_resumida": "Fabrica linguiças artesanais e costelas defumadas em pit smoker no Bosque dos Ipês, fornecendo para eventos e feirinhas gastronômicas.",
+    "dor_da_cidade": "Alta nos custos de carnes selecionadas e embalagens a vácuo para distribuição.",
+    "dor_pessoal": "Exaustão física de trabalhar sob calor intenso de fornos e defumadores na madrugada e a incompreensão da família sobre seu estilo de vida rústico.",
+    "tensao_dramatica": "Em festas de família onde não pode opinar, come escondido linguiça industrializada comum com pão francês sentindo uma culpa infantil.",
+    "bordao": "Fumaça boa não engana o paladar: sabor artesanal exige tempo e lenha nobre.",
     "habitos": {
       "alimentacao": "Costelinha suína ao molho barbecue autoral, brisket defumado por doze horas, picles artesanais e cerveja gelada.",
       "consumo": "Pit smokers industriais de fluxo reverso, termômetros sem fio de alta precisão e facas artesanais de aço damasco.",
@@ -2722,97 +3909,140 @@
       "aversoes": "Carnes ressecadas mal preparadas e pessoas que colocam água no carvão do churrasco.",
       "paixoes": "Participar de festivais de churrasco e barbecue pelo Brasil, criar novos molhos artesanais e ouvir rock clássico."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Praças do Bosque dos Ipês",
       "Shopping Jardim Oriente",
       "Feiras Gastronômicas de SJC"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Barbecue Brasil",
-        "handle": "bbqbrasil"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Diário de SJC (@diariodesjc)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Netão Bom Beef",
-        "handle": "netaobombeef"
-      },
-      {
-        "nome": "Guia Gastronômico Vale",
-        "handle": "gastronomiavale"
-      }
+      "Netão Bom Beef (@netaobombeef)",
+      "Bora Comer SJC (@boracomersjc)"
     ],
     "estilo_consumo_tag": "Barbecue Artesanal & Fumaça Nobre",
-    "foto": "data_personas/imagens_personagens/personagem_56_wanderson_clayton_de_souza.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_56_bruno_marins.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 57,
     "nome_completo": "Lúcia Helena Guimarães",
     "idade": 56,
-    "genero_etnia": "Mulher Branca",
-    "profissao": "Assistente Social de Centro de Referência Municipal",
-    "bairro": "Bairro dos Marmelos",
-    "localizacao": "Bairro dos Marmelos, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Caminhada e Ônibus",
-    "historia_resumida": "Dedica sua carreira ao atendimento de famílias em situação de vulnerabilidade e idosos nos programas sociais da prefeitura. Mora no calçadão do centro e conhece todas as nuances e contrastes da cidade.",
-    "dor_principal": "A burocracia excessiva nos encaminhamentos de saúde pública e a escassez de vagas em abrigos de acolhimento social.",
+    "genero": "Mulher",
+    "raca_cor": "Branca",
+    "profissao": "Assistente Social da Rede de Proteção Básica",
+    "bairro": "Jardim Satélite",
+    "regiao": "Sul",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Ônibus municipal e Linha Verde",
+    "historia_resumida": "Atua em programas de segurança alimentar e apoio a famílias em extrema pobreza, articulando vagas em creches e postos de trabalho.",
+    "dor_da_cidade": "Demora na fila de espera para exames de saúde especializados no SUS e desamparo de famílias sem teto.",
+    "dor_pessoal": "O peso de testemunhar miséria e violência doméstica em série, e o medo de que a blindagem necessária para aguentar isso já tenha virado permanente.",
+    "tensao_dramatica": "Aprendeu a não chorar no atendimento porque chorar não resolve fila nenhuma. O que a assusta é perceber que essa couraça, que ela construiu para trabalhar, começou a ir junto para casa.",
+    "bordao": "Direito social não é esmola; é dignidade garantida pela Constituição.",
     "habitos": {
-      "alimentacao": "Comida simples e saudável, café com pão na chapa nas padarias históricas do calçadão e sopas nutritivas à noite.",
-      "consumo": "Livros de ciências sociais e direitos humanos em sebos do centro, produtos de higiene para doação e calçados confortáveis.",
+      "alimentacao": "Comida simples e saudável, café com pão na chapa nas padarias do bairro e sopas nutritivas à noite.",
+      "consumo": "Livros de ciências sociais e direitos humanos em sebos, itens de higiene para doação e calçados confortáveis.",
       "vestuario": "Calças de tecido maleável confortáveis, blusas de algodão estampadas discretas e bolsas grandes utilitárias.",
       "aversoes": "Aporofobia, preconceito contra populações periféricas e desperdício de verbas públicas destinadas à assistência social.",
-      "paixoes": "Participar de projetos voluntários de distribuição de alimentos, passear pelas praças do centro e ouvir música popular brasileira."
+      "paixoes": "Participar de projetos voluntários de distribuição de alimentos, passear pelas praças do bairro e ouvir MPB."
     },
-    "lugares_frequenta_sjc": [
-      "Praça Afonso Pena",
-      "Calçadão da Rua 15 de Novembro",
-      "Mercado Municipal de SJC"
+    "lugares_frequenta": [
+      "Centro Comunitário da Zona Sul",
+      "Mercado Municipal de SJC",
+      "Vale Sul Shopping"
     ],
     "veiculos_midia": [
-      {
-        "nome": "TV Vanguarda",
-        "handle": "redevanguarda"
-      },
-      {
-        "nome": "Portal G1 Vale",
-        "handle": "g1valeparaiba"
-      }
+      "Portal G1 Vale (@g1valeparaiba)",
+      "TV Vanguarda (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Padre Júlio Lancellotti",
-        "handle": "padrejulio.lancellotti"
-      },
-      {
-        "nome": "Carlos Abranches",
-        "handle": "carlosabranchesoficial"
-      }
+      "Carlos Abranches (@carlosabranchesoficial)",
+      "Padre Júlio Lancellotti (@padrejulio.lancellotti)"
     ],
     "estilo_consumo_tag": "Humanitário & Assistência Social",
-    "foto": "data_personas/imagens_personagens/personagem_57_rosana_cassia_dos_santos.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_57_lucia_helena_guimaraes.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica",
+        "dor_pessoal_despatologizada"
+      ]
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 58,
     "nome_completo": "Guilherme 'Gui' Esteves",
     "idade": 31,
-    "genero_etnia": "Homem Branco",
-    "profissao": "Executivo de Vendas de Software Corporativo (SaaS)",
-    "bairro": "Chácaras Reunidas",
-    "localizacao": "Chácaras Reunidas, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "A Cidade Prometida",
-    "faixa_renda": "Classe A",
-    "meio_transporte_principal": "SUV Premium Alemão",
-    "historia_resumida": "Negocia contratos milionários de softwares de gestão empresarial para indústrias e redes varejistas em todo o Brasil. Vive no Urbanova em busca de qualidade de vida, esportes e segurança.",
-    "dor_principal": "Ciclos longos e imprevisíveis de fechamento de contratos corporativos durante períodos de instabilidade econômica.",
+    "genero": "Homem",
+    "raca_cor": "Pardo",
+    "profissao": "Executivo de Contas Corporativas de Tecnologia",
+    "bairro": "Urbanova",
+    "regiao": "Oeste",
+    "movimento_cultural": "A Cidade Prometida",
+    "faixa_renda_narrativa": "Classe A",
+    "meio_transporte_principal": "SUV Premium Alemão e Bicicleta de montanha",
+    "historia_resumida": "Atende indústrias e holdings fechando contratos de automação de dados e segurança digital. Mora no Urbanova pelo contato com a natureza.",
+    "dor_da_cidade": "Dificuldade de atrair parceiros estratégicos de grandes capitais que ainda veem o interior com visão provinciana.",
+    "dor_pessoal": "Terror paralisante de não bater a meta trimestral e a dependência psicológica da validação constante em redes sociais corporativas.",
+    "tensao_dramatica": "Financiou 100% da compra do carro de luxo alemão e das roupas de grife, vivendo no limite do endividamento para manter o networking na alta sociedade.",
+    "bordao": "Reunião boa não é a que tem elogio, é a que termina com o diretor da fábrica pedindo o contrato pra assinar.",
     "habitos": {
       "alimentacao": "Pratos à base de salmão grelhado, jantares em restaurantes premiados da Vila Ema e cafés espressos de cápsula.",
       "consumo": "Gadgets da Apple de última geração, trajes esportivos de marcas premium e assinaturas de plataformas de negócios.",
@@ -2820,97 +4050,139 @@
       "aversoes": "Reuniões comerciais desestruturadas sem tomada de decisão e promessas de entrega não cumpridas.",
       "paixoes": "Jogar futevôlei nas quadras do Urbanova, passear de lancha na represa nos fins de semana e viajar para o exterior."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Colinas Shopping",
       "Quadras de Areia do Urbanova",
       "Restaurantes da Vila Ema"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Exame",
-        "handle": "exame"
-      },
-      {
-        "nome": "Valor Econômico",
-        "handle": "valoreconomico"
-      }
+      "Valor Econômico (@valoreconomico)",
+      "Life Informa (@lifeinforma)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Thiago Nigro (Primo Rico)",
-        "handle": "thiago.nigro"
-      },
-      {
-        "nome": "Lucas Sanseverino",
-        "handle": "lucassanseverino"
-      }
+      "Lucas Sanseverino (@lucassanseverino)",
+      "Thiago Nigro (@thiago.nigro)"
     ],
     "estilo_consumo_tag": "Corporativo & Vendas de Alta Renda",
-    "foto": "data_personas/imagens_personagens/personagem_58_hideo_kazuo_matsui.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_58_guilherme_esteves.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda"
+      ]
+    },
+    "imagem_status": [
+      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
+    ]
   },
   {
     "id": 59,
     "nome_completo": "Talita 'Tali' Rezende",
     "idade": 27,
-    "genero_etnia": "Mulher Parda",
-    "profissao": "Produtora Cultural & Gestora de Festivais de Música e Arte",
-    "bairro": "Jardim Santo Onofre",
-    "localizacao": "Jardim Santo Onofre, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "A Tribo Global",
-    "faixa_renda": "Classe B",
-    "meio_transporte_principal": "Carro compacto e Bicicleta",
-    "historia_resumida": "Organiza feiras de arte independente, festivais de jazz e mostras de cinema ao ar livre no Parque Vicentina Aranha e espaços alternativos de SJC, conectando artistas locais ao público jovem.",
-    "dor_principal": "A escassez de editais municipais de fomento à cultura independente e o excesso de burocracia para uso de espaços públicos.",
+    "genero": "Mulher",
+    "raca_cor": "Parda",
+    "profissao": "Coordenadora de Projetos de Artes Visuais",
+    "bairro": "Vila Industrial",
+    "regiao": "Leste",
+    "movimento_cultural": "A Tribo Global",
+    "faixa_renda_narrativa": "Classe C1",
+    "meio_transporte_principal": "Bicicleta própria e Ônibus municipal",
+    "historia_resumida": "Conecta grafiteiros, serigrafistas e músicos independentes para ocupações culturais em galpões industriais e praças de SJC.",
+    "dor_da_cidade": "Pouco espaço e investimento público para manifestações artísticas contemporâneas e juventude periférica.",
+    "dor_pessoal": "Precarização financeira crônica de viver de editais culturais incertos e a cobrança constante dos pais para prestar concurso público tradicional.",
+    "tensao_dramatica": "Quando os editais atrasam, aceita fazer bicos de design de panfletos bregas para lojas populares de colchões para pagar o aluguel.",
+    "bordao": "A arte que não incomoda o poder não é arte, é decoração de vitrine.",
     "habitos": {
-      "alimentacao": "Petiscos vegetarianos criativos, chás naturais aromatizados com gengibre e cervejas artesanais de microcervejarias do Vale.",
+      "alimentacao": "Petiscos vegetarianos criativos, chás naturais aromatizados com gengibre e cervejas artesanais do Vale.",
       "consumo": "Equipamentos de iluminação cênica portátil, cartazes em serigrafia autoral e livros de produção cultural.",
       "vestuario": "Roupas vintage garimpadas em brechós conceituais, jaquetas jeans customizadas e botas de cano curto.",
-      "aversoes": "Censura artística, falta de pontualidade em montagens de palco e preconceito contra manifestações culturais populares.",
-      "paixoes": "Descobrir novos músicos e bandas autorais do Vale, frequentar mostras no Sesc e viajar para bienais de arte."
+      "aversoes": "Censura artística, falta de pontualidade em montagens de palco e preconceito contra manifestações populares.",
+      "paixoes": "Descobrir novos músicos e artistas plásticos do Vale, frequentar mostras no Sesc e cinema autoral."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
+      "Galpões da Vila Industrial",
       "Parque Vicentina Aranha",
-      "Sesc São José dos Campos",
-      "Bares Culturais da Vila Ema"
+      "Sesc SJC"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Bravo Cultural",
-        "handle": "bravocultura"
-      },
-      {
-        "nome": "Explore SJC",
-        "handle": "exploresjc"
-      }
+      "Explore SJC (@exploresjc)",
+      "Meon Jornal (@meonjornal)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Cultura em SP",
-        "handle": "culturasp"
-      },
-      {
-        "nome": "Fica a Dica SJC",
-        "handle": "ficaadicasjc"
-      }
+      "Sanja Dicas (@sanjadicas)",
+      "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Cultura Independente & Vanguarda",
-    "foto": "data_personas/imagens_personagens/personagem_59_vanessa_beatriz_rossi.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_59_talita_rezende.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": []
+    },
+    "imagem_status": [
+      "ok"
+    ]
   },
   {
     "id": 60,
     "nome_completo": "Antônio Carlos 'Tonho' Viana",
     "idade": 60,
-    "genero_etnia": "Homem Pardo",
-    "profissao": "Apicultor & Produtor de Mel Silvestre da Serra da Mantiqueira",
-    "bairro": "Recanto dos Eucaliptos",
-    "localizacao": "Putim / Recanto dos Eucaliptos, São José dos Campos",
-    "regiao": "Sudeste",
-    "movimento": "Geografia da Inércia",
-    "faixa_renda": "Classe C2",
-    "meio_transporte_principal": "Caminhonete 4x4 e Cavalo",
-    "historia_resumida": "Cuida de mais de duzentas colmeias de abelhas nativas sem ferrão (Jataí, Mandaçaia) e abelhas melíferas nas matas preservadas de São Francisco Xavier, produzindo um dos méis mais premiados do Vale.",
-    "dor_principal": "O uso clandestino de defensivos agrícolas em lavouras vizinhas que intoxica e dizima enxames de abelhas nativas.",
+    "genero": "Homem",
+    "raca_cor": "Branco",
+    "profissao": "Apicultor e Produtor de Mel Silvestre da Serra",
+    "bairro": "São Francisco Xavier",
+    "regiao": "Norte",
+    "movimento_cultural": "Geografia da Inércia",
+    "faixa_renda_narrativa": "Classe C2",
+    "meio_transporte_principal": "Picape 4x4 e Cavalo de lida",
+    "historia_resumida": "Mantém colmeias de abelhas nativas nas matas preservadas de SFX, produzindo mel puro e conscientizando produtores rurais vizinhos.",
+    "dor_da_cidade": "Pulverização indiscriminada de defensivos em propriedades vizinhas que intoxica abelhas polinizadoras nativas.",
+    "dor_pessoal": "Pesar constante ao ver as matas nativas sendo loteadas clandestinamente e a preocupação com o futuro da saúde da esposa idosa.",
+    "tensao_dramatica": "Desconfia de médico e de exame, e resolve tudo com o que a serra dá. A esposa insiste, ele desconversa — e sabe que está adiando uma conversa que uma hora vai ter que ter.",
+    "bordao": "Se a abelha sumir da serra, o homem não dura cinco anos na terra.",
     "habitos": {
       "alimentacao": "Mel silvestre puro no café da manhã, queijo da serra com broa de fubá e comida caipira feita no fogão a lenha.",
       "consumo": "Macacões de apicultor com tela especial, centrífugas extratoras de mel em aço inox e embalagens de vidro esterilizadas.",
@@ -2918,35 +4190,56 @@
       "aversoes": "Méis adulterados com xarope de açúcar vendidos em feiras clandestinas e desmatamento de florestas nativas.",
       "paixoes": "Observar a dança das abelhas nas floradas da serra, tocar viola caipira no alpendre e prosear com os vizinhos de SFX."
     },
-    "lugares_frequenta_sjc": [
+    "lugares_frequenta": [
       "Vila de São Francisco Xavier",
-      "Trilhas das Lavras",
-      "Mercado da Cidade de SJC"
+      "Mirante da Pedra de São Francisco",
+      "Feira de SFX"
     ],
     "veiculos_midia": [
-      {
-        "nome": "Revista Apicultura Brasil",
-        "handle": "apiculturabrasil"
-      },
-      {
-        "nome": "Jornal de SFX",
-        "handle": "sfx_noticias"
-      }
+      "Jornal de SFX (@sfx_noticias)",
+      "Globo Rural (@redevanguarda)"
     ],
     "influenciadores_seguidos": [
-      {
-        "nome": "Abelhas Nativas Brasil",
-        "handle": "abelhasnativas"
-      },
-      {
-        "nome": "Explore SFX",
-        "handle": "exploresfx"
-      }
+      "Explore SFX (@exploresfx)",
+      "Rota Gastronômica da Mantiqueira (@rotamantiqueira)"
     ],
     "estilo_consumo_tag": "Apicultura Sustentável & Serra",
-    "foto": "data_personas/imagens_personagens/personagem_60_agostinho_celso_pires.jpg"
+    "foto": "data_personas/imagens_personagens/personagem_60_antonio_carlos_viana.jpg",
+    "procedencia": {
+      "camada": "composicao_ficcional_ancorada_em_pesquisa",
+      "com_lastro_na_pesquisa": [
+        "regiao",
+        "faixa_renda_narrativa",
+        "movimento_cultural",
+        "meio_transporte_principal",
+        "veiculos_midia",
+        "influenciadores_seguidos",
+        "dor_da_cidade"
+      ],
+      "elaboracao_ficcional": [
+        "nome_completo",
+        "idade",
+        "genero",
+        "raca_cor",
+        "profissao",
+        "historia_resumida",
+        "dor_pessoal",
+        "tensao_dramatica",
+        "bordao",
+        "habitos"
+      ],
+      "individuo_real_identificavel": false,
+      "revisoes_aplicadas": [
+        "identidade_redistribuida_para_quebrar_correlacao_raca_renda",
+        "tensao_reescrita_sem_atribuicao_moral_criminal_ou_clinica"
+      ]
+    },
+    "imagem_status": [
+      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
+    ]
   }
 ];
+  window.PERSONAS_SJC_DATA = PERSONAS_SJC_DATA;
 
   let currentActiveTab = 'oracle'; // 'oracle' ou 'dossier'
   let oracleScreenState = 'welcome'; // 'welcome' ou 'game'
@@ -3896,49 +5189,113 @@
     }
   }
 
-  function renderOracleWelcomeScreen() {
+      function renderOracleWelcomeScreen() {
     return `
-      <div class="space-y-8 animate-in fade-in duration-400">
+      <div class="space-y-6 animate-in fade-in duration-400">
         
-        <!-- ========================================================================= -->
-        <!-- LINHA 1: KAPY BOAS-VINDAS FLUTUANDO (ESQUERDA) + AÇÃO / CARD KAPY (DIREITA) -->
-        <!-- ========================================================================= -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+        <!-- Grid Principal da Tela Inicial -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          <!-- LADO ESQUERDO: KAPY BOAS-VINDAS FLUTUANDO (5 Colunas) -->
-          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center relative py-4 sm:py-6">
-            <!-- Brilho / Aura suave ao fundo -->
-            <div class="absolute w-56 h-56 sm:w-72 sm:h-72 bg-gradient-to-tr from-pink-200/50 via-purple-200/30 to-pink-100/40 rounded-full blur-2xl pointer-events-none -z-0"></div>
+          <!-- LADO ESQUERDO: METODOLOGIA & PESQUISA RADAR 2026 (7 Colunas) -->
+          <div class="lg:col-span-7 bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm flex flex-col justify-between space-y-6">
             
-            <div class="relative z-10 flex flex-col items-center">
-              <img 
-                src="data_personas/capivara/01_boas_vindas.png" 
-                alt="Kapy • Assessora do Oráculo SJC" 
-                class="w-56 sm:w-64 md:w-72 max-w-full h-auto object-contain cursor-pointer transition-transform hover:scale-105 select-none"
-                style="animation: capivaraFloat 3.2s ease-in-out infinite; filter: drop-shadow(0 18px 26px rgba(219, 39, 119, 0.25));"
-                onclick="window.startOracleGame(event)"
-                title="Clique para iniciar o Oráculo com a Kapy!"
-              />
-              <div class="mt-2 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-xs border border-pink-200 shadow-xs text-xs font-black text-pink-900">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>Kapy • Assessora de Inteligência</span>
+            <div class="space-y-4">
+              <!-- Selos de Inteligência -->
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-pink-100 text-pink-800 border border-pink-200">
+                  <i class="fa-solid fa-sparkles text-pink-600"></i> Metodologia Radar São José 2026
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                  <i class="fa-solid fa-database text-slate-500"></i> Big Data + Pesquisa Primária
+                </span>
+              </div>
+
+              <!-- Título & Subtítulo -->
+              <div class="space-y-2">
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+                  Como nascem as 60 Personas de São José dos Campos?
+                </h3>
+                <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                  Não são arquétipos genéricos. As 60 personas representam uma síntese viva e fidedigna da população joseense, desenvolvida a partir de um cruzamento rigoroso de inteligência de mercado:
+                </p>
+              </div>
+
+              <!-- 3 Pilares Metodológicos -->
+              <div class="grid grid-cols-1 gap-3.5 pt-1">
+                
+                <!-- Pilar 1: Pesquisa Radar 2026 -->
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-pink-300 transition-all flex items-start gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-base">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                  </div>
+                  <div class="space-y-0.5">
+                    <h4 class="text-xs font-black text-slate-900">1. Pesquisa Radar São José 2026</h4>
+                    <p class="text-[12px] text-slate-600 leading-snug">
+                      Entrevistas e questionários de campo cobrindo todas as macro-regiões de SJC, mapeando dores reais de consumo, mobilidade, renda e prioridades familiares.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Pilar 2: Big Data Municipal & Mídia Local -->
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 transition-all flex items-start gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-base">
+                    <i class="fa-solid fa-chart-network"></i>
+                  </div>
+                  <div class="space-y-0.5">
+                    <h4 class="text-xs font-black text-slate-900">2. Big Data da Plataforma & Mídia Local</h4>
+                    <p class="text-[12px] text-slate-600 leading-snug">
+                      Dados demográficos do IBGE cruzados com mais de 7.500 postagens e reportagens monitoradas na imprensa regional (Rede Vanguarda, O Vale, CBN Vale e portais de bairro).
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Pilar 3: 4 Movimentos Socioculturais -->
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-indigo-300 transition-all flex items-start gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 text-base">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                  </div>
+                  <div class="space-y-0.5">
+                    <h4 class="text-xs font-black text-slate-900">3. Quatro Movimentos Socioculturais</h4>
+                    <p class="text-[12px] text-slate-600 leading-snug">
+                      Classificação psicográfica dos estilos de vida da cidade: <em>A Tribo Global</em>, <em>A Cidade Prometida</em>, <em>Geografia da Inércia</em> e <em>Empreendedorismo Intuitivo</em>.
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
+
+            <!-- Rodapé Metodológico -->
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-check text-emerald-600"></i> 60 Personas com 20 Requisitos Auditados</span>
+              <span class="text-slate-400">Radar SJC Analytics</span>
+            </div>
+
           </div>
 
-          <!-- LADO DIREITO: CALL TO ACTION - TODA IDEIA DEIXA PISTAS (7 Colunas) -->
-          <div class="lg:col-span-7 bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm flex flex-col justify-between space-y-6 relative overflow-hidden">
+          <!-- LADO DIREITO: CALL TO ACTION - JOGAR ORÁCULO (Card Branco com Rostinho Flutuante da Kapy) -->
+          <div class="lg:col-span-5 bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm flex flex-col justify-between relative overflow-hidden">
             
             <div class="space-y-5">
               
-              <!-- Topo: Selo -->
+              <!-- Topo: Selo + Rostinho da Kapy Flutuando Sorrindo -->
               <div class="flex items-center justify-between gap-4">
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-100 border border-pink-200 text-xs font-black text-pink-700">
                   <i class="fa-solid fa-wand-magic-sparkles text-pink-500"></i> Experiência Interativa
                 </span>
-                <span class="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
-                  Radar SJC 2026
-                </span>
+
+                <!-- Rostinho da Kapy Flutuando e Sorrindo -->
+                <div class="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center">
+                  <div class="absolute inset-0 bg-pink-100 rounded-full blur-xs opacity-60"></div>
+                  <img 
+                    src="data_personas/capivara/kapy_avatar_smile.png" 
+                    alt="Rostinho da Kapy Sorrindo" 
+                    class="w-16 h-16 sm:w-20 sm:h-20 object-contain relative z-20 drop-shadow-md cursor-pointer transition-transform hover:scale-110 pointer-events-auto"
+                    style="animation: kapyHeadFloat 3.2s ease-in-out infinite; pointer-events: auto;"
+                    title="Olá! Sou a Kapy, assessora de inteligência!"
+                    onclick="window.startOracleGame(event)"
+                  />
+                </div>
               </div>
 
               <!-- Chamada Principal -->
@@ -3974,19 +5331,19 @@
             </div>
 
             <!-- Botões de Ação no Rodapé -->
-            <div class="pt-4 space-y-3 relative z-20 pointer-events-auto">
+            <div class="pt-6 space-y-3 relative z-20 pointer-events-auto">
               <button 
-                type="button" 
-                id="btn-start-oracle-reading" 
+                type="button"
+                id="btn-start-oracle-reading"
                 onclick="window.startOracleGame(event)" 
-                style="position: relative; z-index: 20; pointer-events: auto;" 
+                style="position: relative; z-index: 20; pointer-events: auto;"
                 class="w-full py-4 px-6 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-xl shadow-pink-500/25 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 cursor-pointer select-none"
               >
                 <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
                 <span>DEIXAR A KAPY LER MINHA IDEIA</span>
               </button>
 
-              <div class="text-center space-y-0.5 pt-0.5">
+              <div class="text-center space-y-1 pt-1">
                 <p class="text-[11px] text-slate-600 font-bold">
                   Uma leitura rápida, local e estratégica. Sem respostas genéricas.
                 </p>
@@ -3996,9 +5353,9 @@
               </div>
 
               <button 
-                type="button" 
+                type="button"
                 onclick="window.switchToDossierTab(event)" 
-                style="position: relative; z-index: 20; pointer-events: auto;" 
+                style="position: relative; z-index: 20; pointer-events: auto;"
                 class="w-full py-2.5 px-4 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
               >
                 <i class="fa-solid fa-cards-blank text-slate-500"></i>
@@ -4006,86 +5363,6 @@
               </button>
             </div>
 
-          </div>
-
-        </div>
-
-
-        <!-- ========================================================================= -->
-        <!-- LINHA 2: COMO NASCEM AS 60 PERSONAS DE SÃO JOSÉ DOS CAMPOS? (LARGURA TOTAL)-->
-        <!-- ========================================================================= -->
-        <div class="bg-white rounded-3xl p-7 sm:p-9 border border-slate-200 shadow-sm space-y-6">
-          
-          <div class="space-y-4">
-            <!-- Selos de Inteligência -->
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black bg-pink-100 text-pink-800 border border-pink-200">
-                <i class="fa-solid fa-sparkles text-pink-600"></i> Metodologia Radar São José 2026
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
-                <i class="fa-solid fa-database text-slate-500"></i> Big Data + Pesquisa Primária
-              </span>
-            </div>
-
-            <!-- Título & Subtítulo -->
-            <div class="space-y-2">
-              <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
-                Como nascem as 60 Personas de São José dos Campos?
-              </h3>
-              <p class="text-sm text-slate-600 leading-relaxed font-medium">
-                Não são arquétipos genéricos. As 60 personas representam uma síntese viva e fidedigna da população joseense, desenvolvida a partir de um cruzamento rigoroso de inteligência de mercado:
-              </p>
-            </div>
-
-            <!-- 3 Pilares Metodológicos (Disposição em 3 Colunas no Desktop) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              
-              <!-- Pilar 1: Pesquisa Radar 2026 -->
-              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-pink-300 transition-all flex flex-col justify-between gap-3">
-                <div class="space-y-2.5">
-                  <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-clipboard-check"></i>
-                  </div>
-                  <h4 class="text-xs font-black text-slate-900 leading-snug">1. Pesquisa Radar São José 2026</h4>
-                  <p class="text-[12px] text-slate-600 leading-relaxed">
-                    Entrevistas e questionários de campo cobrindo todas as macro-regiões de SJC, mapeando dores reais de consumo, mobilidade, renda e prioridades familiares.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Pilar 2: Big Data Municipal & Mídia Local -->
-              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 transition-all flex flex-col justify-between gap-3">
-                <div class="space-y-2.5">
-                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-chart-network"></i>
-                  </div>
-                  <h4 class="text-xs font-black text-slate-900 leading-snug">2. Big Data da Plataforma & Mídia Local</h4>
-                  <p class="text-[12px] text-slate-600 leading-relaxed">
-                    Dados demográficos do IBGE cruzados com mais de 7.500 postagens e reportagens monitoradas na imprensa regional (Rede Vanguarda, O Vale, CBN Vale e portais de bairro).
-                  </p>
-                </div>
-              </div>
-
-              <!-- Pilar 3: 4 Movimentos Socioculturais -->
-              <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-indigo-300 transition-all flex flex-col justify-between gap-3">
-                <div class="space-y-2.5">
-                  <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 text-base">
-                    <i class="fa-solid fa-compass-drafting"></i>
-                  </div>
-                  <h4 class="text-xs font-black text-slate-900 leading-snug">3. Quatro Movimentos Socioculturais</h4>
-                  <p class="text-[12px] text-slate-600 leading-relaxed">
-                    Classificação psicográfica dos estilos de vida da cidade: <em>A Tribo Global</em>, <em>A Cidade Prometida</em>, <em>Geografia da Inércia</em> e <em>Empreendedorismo Intuitivo</em>.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Rodapé Metodológico -->
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-check text-emerald-600"></i> 60 Personas com 20 Requisitos Auditados</span>
-            <span class="text-slate-400 font-bold">Radar SJC Analytics</span>
           </div>
 
         </div>
@@ -4154,7 +5431,7 @@
         </div>
 
         <!-- PAINEL DE PERGUNTAS E MESA SAGRADA (Lado Direito - 8 Colunas) -->
-        <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 md:p-9 border border-slate-200 shadow-md flex flex-col justify-start">
+        <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md flex flex-col justify-between min-h-[480px]">
           ${readingPhase !== 'idle' ? renderTableAnimationPhase() : getOracleStepContent()}
         </div>
 
@@ -4179,7 +5456,7 @@
     }, speed);
   }
 
-  function triggerOracleTypewriterForCurrentStep() {
+    function triggerOracleTypewriterForCurrentStep() {
     const texts = {
       1: "Olá! Sou a Kapy, sua assessora de inteligência. Como sua ideia, negócio ou projeto se posiciona em São José dos Campos?",
       2: "Qual é o perfil do público que você quer atrair ou engajar?",
@@ -4199,8 +5476,8 @@
   function getOracleStepContent() {
     if (currentOracleStep === 1) {
       return `
-        <div class="space-y-6 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
+        <div class="space-y-4 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4209,36 +5486,36 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'inovacao', 2)" class="oracle-option-card oracle-card-delay-1 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'inovacao' ? 'bg-purple-50 border-purple-500 shadow-md ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-globe"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Inovação, Cultura & Vanguarda</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Design, café especial, tecnologia e autenticidade.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'inovacao', 2)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'inovacao' ? 'bg-purple-50 border-purple-500 shadow-sm ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-globe"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Inovação, Cultura & Vanguarda</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Design, café especial, tecnologia e autenticidade.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'luxo', 2)" class="oracle-option-card oracle-card-delay-2 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'luxo' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-crown"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Alto Padrão & Internacional</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Exclusividade, condomínios fechados e prestígio.</p>
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'luxo', 2)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'luxo' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-crown"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Alto Padrão & Internacional</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Exclusividade, condomínios fechados e prestígio.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'tradicao', 2)" class="oracle-option-card oracle-card-delay-3 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'tradicao' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-landmark"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Tradição & Confiança Familiar</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Raízes de bairro, fidelidade e palavra dada.</p>
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'tradicao', 2)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'tradicao' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-landmark"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Tradição & Confiança Familiar</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Raízes de bairro, fidelidade e palavra dada.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q1_proposta', 'agilidade', 2)" class="oracle-option-card oracle-card-delay-4 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q1_proposta === 'agilidade' ? 'bg-cyan-50 border-cyan-500 shadow-md ring-2 ring-cyan-500/20' : 'bg-white border-slate-200 hover:border-cyan-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-cyan-100 text-cyan-700 border border-cyan-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-lightbulb"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Agilidade & Vida Real dos Bairros</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Resolução prática no WhatsApp e bom preço.</p>
+            <div onclick="window.selectOracleStepChoice('q1_proposta', 'agilidade', 2)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q1_proposta === 'agilidade' ? 'bg-cyan-50 border-cyan-500 shadow-sm ring-2 ring-cyan-500/20' : 'bg-white border-slate-200 hover:border-cyan-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 border border-cyan-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-lightbulb"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Agilidade & Vida Real dos Bairros</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Resolução prática no WhatsApp e bom preço.</p>
               </div>
             </div>
           </div>
@@ -4248,8 +5525,8 @@
 
     if (currentOracleStep === 2) {
       return `
-        <div class="space-y-6 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
+        <div class="space-y-4 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4258,36 +5535,36 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'alto', 3)" class="oracle-option-card oracle-card-delay-1 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'alto' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-gem"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Alto Padrão & Exclusividade</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Público de alta renda, sofisticado, exigente e seleto.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'alto', 3)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'alto' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-gem"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Alto Padrão & Exclusividade</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Público de alta renda, sofisticado, exigente e seleto.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'experiencia', 3)" class="oracle-option-card oracle-card-delay-2 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'experiencia' ? 'bg-purple-50 border-purple-500 shadow-md ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-mug-hot"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Experiência, Cultura & Estilo</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Valoriza autenticidade, vivências, significado e comunidade.</p>
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'experiencia', 3)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'experiencia' ? 'bg-purple-50 border-purple-500 shadow-sm ring-2 ring-purple-500/20' : 'bg-white border-slate-200 hover:border-purple-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-mug-hot"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Experiência, Cultura & Estilo</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Valoriza autenticidade, vivências, significado e comunidade.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'custo_beneficio', 3)" class="oracle-option-card oracle-card-delay-3 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'custo_beneficio' ? 'bg-blue-50 border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-scale-balanced"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Pragmático & Custo-Benefício</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Busca solidez, confiança, utilidade e clareza de resultados.</p>
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'custo_beneficio', 3)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'custo_beneficio' ? 'bg-blue-50 border-blue-500 shadow-sm ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Pragmático & Custo-Benefício</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Busca solidez, confiança, utilidade e clareza de resultados.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q2_ticket', 'economico', 3)" class="oracle-option-card oracle-card-delay-4 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q2_ticket === 'economico' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-tags"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Popular, Prático & Acessível</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Linguagem simples, agilidade no WhatsApp e fácil acesso.</p>
+            <div onclick="window.selectOracleStepChoice('q2_ticket', 'economico', 3)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q2_ticket === 'economico' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-tags"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Popular, Prático & Acessível</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Linguagem simples, agilidade no WhatsApp e fácil acesso.</p>
               </div>
             </div>
           </div>
@@ -4297,8 +5574,8 @@
 
     if (currentOracleStep === 3) {
       return `
-        <div class="space-y-6 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
+        <div class="space-y-4 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4307,52 +5584,52 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'centro', 4)" class="oracle-option-card oracle-card-delay-1 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'centro' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-city"></i></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'centro', 4)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'centro' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-city"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Centro</h4>
-                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Vila Ema, Vila Adyana, Centro Histórico, São Dimas e Apolo.</p>
+                <h4 class="text-xs font-black text-slate-900">Região Centro</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Vila Ema, Vila Adyana, Centro Histórico, São Dimas e Apolo.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sul', 4)" class="oracle-option-card oracle-card-delay-2 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sul' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-shop"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sul', 4)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sul' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-shop"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Sul</h4>
-                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Jardim Satélite, Floradas, Bosque dos Eucaliptos e Parque Industrial.</p>
+                <h4 class="text-xs font-black text-slate-900">Região Sul</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Jardim Satélite, Floradas, Bosque dos Eucaliptos e Parque Industrial.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'leste', 4)" class="oracle-option-card oracle-card-delay-3 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'leste' ? 'bg-blue-50 border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
-              <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-industry"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'leste', 4)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'leste' ? 'bg-blue-50 border-blue-500 shadow-sm ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-industry"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Leste</h4>
-                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Vista Verde, Eugênio de Melo, Galo Branco e Novo Horizonte.</p>
+                <h4 class="text-xs font-black text-slate-900">Região Leste</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Vista Verde, Eugênio de Melo, Galo Branco e Novo Horizonte.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'oeste', 4)" class="oracle-option-card oracle-card-delay-4 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'oeste' ? 'bg-pink-50 border-pink-500 shadow-md ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
-              <div class="w-11 h-11 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-tree-city"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'oeste', 4)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'oeste' ? 'bg-pink-50 border-pink-500 shadow-sm ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-tree-city"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Oeste</h4>
-                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Jardim Aquarius, Urbanova, Jardim das Colinas e Esplanada.</p>
+                <h4 class="text-xs font-black text-slate-900">Região Oeste</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Jardim Aquarius, Urbanova, Jardim das Colinas e Esplanada.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'norte', 4)" class="oracle-option-card oracle-card-delay-5 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'norte' ? 'bg-teal-50 border-teal-500 shadow-md ring-2 ring-teal-500/20' : 'bg-white border-slate-200 hover:border-teal-300 shadow-2xs'}">
-              <div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-700 border border-teal-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-mountain-sun"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'norte', 4)" class="oracle-option-card oracle-card-delay-5 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'norte' ? 'bg-teal-50 border-teal-500 shadow-sm ring-2 ring-teal-500/20' : 'bg-white border-slate-200 hover:border-teal-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 border border-teal-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-mountain-sun"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Norte</h4>
-                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Santana, Altos de Santana, Alto da Ponte e Buquirinha.</p>
+                <h4 class="text-xs font-black text-slate-900">Região Norte</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Santana, Altos de Santana, Alto da Ponte e Buquirinha.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sudeste', 4)" class="oracle-option-card oracle-card-delay-6 p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sudeste' ? 'bg-violet-50 border-violet-500 shadow-md ring-2 ring-violet-500/20' : 'bg-white border-slate-200 hover:border-violet-300 shadow-2xs'}">
-              <div class="w-11 h-11 rounded-xl bg-violet-100 text-violet-700 border border-violet-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-plane-departure"></i></div>
+            <div onclick="window.selectOracleStepChoice('q3_regiao', 'sudeste', 4)" class="oracle-option-card oracle-card-delay-6 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q3_regiao === 'sudeste' ? 'bg-violet-50 border-violet-500 shadow-sm ring-2 ring-violet-500/20' : 'bg-white border-slate-200 hover:border-violet-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 border border-violet-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-plane-departure"></i></div>
               <div class="space-y-0.5 min-w-0">
-                <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug">Região Sudeste</h4>
-                <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">Região do Putim, São Judas Tadeu, Flamboyant e Chácaras Reunidas.</p>
+                <h4 class="text-xs font-black text-slate-900">Região Sudeste</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Região do Putim, São Judas Tadeu, Flamboyant e Chácaras Reunidas.</p>
               </div>
             </div>
           </div>
@@ -4362,8 +5639,8 @@
 
     if (currentOracleStep === 4) {
       return `
-        <div class="space-y-6 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
+        <div class="space-y-4 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4372,36 +5649,36 @@
             </h3>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'instagram', 5)" class="oracle-option-card oracle-card-delay-1 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'instagram' ? 'bg-pink-50 border-pink-500 shadow-md ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-brands fa-instagram"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Instagram & Reels Autoral</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Estética visual, bastidores e influenciadores de SJC.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'instagram', 5)" class="oracle-option-card oracle-card-delay-1 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'instagram' ? 'bg-pink-50 border-pink-500 shadow-sm ring-2 ring-pink-500/20' : 'bg-white border-slate-200 hover:border-pink-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 border border-pink-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-brands fa-instagram"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Instagram & Reels Autoral</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Estética visual, bastidores e influenciadores de SJC.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'whatsapp', 5)" class="oracle-option-card oracle-card-delay-2 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'whatsapp' ? 'bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-brands fa-whatsapp"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">WhatsApp & Contato Direto</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Atendimento ágil, catálogo prático e tirar dúvidas na hora.</p>
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'whatsapp', 5)" class="oracle-option-card oracle-card-delay-2 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'whatsapp' ? 'bg-emerald-50 border-emerald-500 shadow-sm ring-2 ring-emerald-500/20' : 'bg-white border-slate-200 hover:border-emerald-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-brands fa-whatsapp"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">WhatsApp & Contato Direto</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Atendimento ágil, catálogo prático e tirar dúvidas na hora.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'google', 5)" class="oracle-option-card oracle-card-delay-3 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'google' ? 'bg-blue-50 border-blue-500 shadow-md ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Google, Tráfego Pago & SEO</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Busca no Google Maps, anúncios locais e avaliações.</p>
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'google', 5)" class="oracle-option-card oracle-card-delay-3 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'google' ? 'bg-blue-50 border-blue-500 shadow-sm ring-2 ring-blue-500/20' : 'bg-white border-slate-200 hover:border-blue-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 border border-blue-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Google, Tráfego Pago & SEO</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Busca no Google Maps, anúncios locais e avaliações.</p>
               </div>
             </div>
 
-            <div onclick="window.selectOracleStepChoice('q4_canal', 'eventos', 5)" class="oracle-option-card oracle-card-delay-4 p-5 sm:p-6 rounded-2xl sm:rounded-3xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-4 ${oracleAnswers.q4_canal === 'eventos' ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
-              <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-xl"><i class="fa-solid fa-users"></i></div>
-              <div class="space-y-1 min-w-0">
-                <h4 class="text-sm sm:text-base font-black text-slate-900 leading-snug">Boca a Boca, Parcerias & Eventos</h4>
-                <p class="text-xs sm:text-[13px] text-slate-600 leading-relaxed">Networking local, feiras, Vicentina Aranha e indicação.</p>
+            <div onclick="window.selectOracleStepChoice('q4_canal', 'eventos', 5)" class="oracle-option-card oracle-card-delay-4 p-4 rounded-2xl border-2 transition-all cursor-pointer hover:scale-[1.02] flex items-start gap-3.5 ${oracleAnswers.q4_canal === 'eventos' ? 'bg-amber-50 border-amber-500 shadow-sm ring-2 ring-amber-500/20' : 'bg-white border-slate-200 hover:border-amber-300 shadow-2xs'}">
+              <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 border border-amber-200 flex items-center justify-center shrink-0 text-lg"><i class="fa-solid fa-users"></i></div>
+              <div class="space-y-0.5 min-w-0">
+                <h4 class="text-xs font-black text-slate-900">Boca a Boca, Parcerias & Eventos</h4>
+                <p class="text-[11px] text-slate-600 leading-snug">Networking local, feiras, Vicentina Aranha e indicação.</p>
               </div>
             </div>
           </div>
@@ -4411,8 +5688,8 @@
 
     if (currentOracleStep === 5) {
       return `
-        <div class="space-y-6 animate-in fade-in duration-300">
-          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-6 sm:p-7">
+        <div class="space-y-4 animate-in fade-in duration-300">
+          <div class="relative bg-white border-2 border-pink-300 shadow-sm rounded-2xl sm:rounded-3xl p-5 sm:p-6">
             <div class="hidden lg:block absolute -left-3.5 top-8 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[14px] border-r-pink-300"></div>
             <div class="hidden lg:block absolute -left-[11px] top-[33px] w-0 h-0 border-t-[9px] border-t-transparent border-b-[9px] border-b-transparent border-r-[13px] border-r-white z-10"></div>
             
@@ -4421,34 +5698,34 @@
             </h3>
           </div>
 
-          <div class="space-y-3.5">
+          <div class="space-y-3">
             <textarea
               id="oracle-open-textarea"
-              rows="4"
+              rows="3"
               placeholder="Ex: Quero abrir uma cafeteria autoral no Aquarius, lançar um aplicativo de saúde para famílias na Zona Sul, ou promover um projeto cultural em Santana..."
               oninput="window.updateOracleOpenText(this.value)"
-              class="w-full p-5 text-sm sm:text-base bg-slate-50 border-2 border-slate-200 rounded-2xl font-medium text-slate-900 focus:outline-hidden focus:border-pink-500 focus:bg-white focus:ring-4 focus:ring-pink-500/10 transition-all resize-none shadow-inner"
+              class="w-full p-4 text-xs sm:text-sm bg-slate-50 border-2 border-slate-200 rounded-2xl font-medium text-slate-900 focus:outline-hidden focus:border-pink-500 focus:bg-white focus:ring-4 focus:ring-pink-500/10 transition-all resize-none shadow-inner"
             >${oracleAnswers.q5_texto_livre || ''}</textarea>
 
             <div class="flex flex-wrap items-center gap-2">
               <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Sugestões Rápidas:</span>
-              <button type="button" onclick="window.setOracleQuickPrompt('Como posicionar um serviço de alto padrão e ganhar a confiança do público mais exigente de SJC?')" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-pink-100 text-slate-700 hover:text-pink-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Como posicionar um serviço de alto padrão e ganhar a confiança do público mais exigente de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-pink-100 text-slate-700 hover:text-pink-800 transition-colors cursor-pointer border border-slate-200">
                 ⭐ Alto Padrão & Confiança
               </button>
-              <button type="button" onclick="window.setOracleQuickPrompt('Qual a melhor abordagem comercial no WhatsApp para converter rápido nos bairros de SJC?')" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Qual a melhor abordagem comercial no WhatsApp para converter rápido nos bairros de SJC?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-100 text-slate-700 hover:text-emerald-800 transition-colors cursor-pointer border border-slate-200">
                 💬 Vendas no WhatsApp & Bairros
               </button>
-              <button type="button" onclick="window.setOracleQuickPrompt('Como expandir um negócio local pelas redes sociais com apoio de influenciadores da cidade?')" class="text-xs font-bold px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-800 transition-colors cursor-pointer border border-slate-200">
+              <button type="button" onclick="window.setOracleQuickPrompt('Como expandir um negócio local pelas redes sociais com apoio de influenciadores da cidade?')" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-purple-100 text-slate-700 hover:text-purple-800 transition-colors cursor-pointer border border-slate-200">
                 📱 Redes Sociais & Influenciadores
               </button>
             </div>
           </div>
 
-          <div class="flex items-center justify-between pt-3">
+          <div class="flex items-center justify-between pt-2">
             <button type="button" onclick="window.setOracleStep(4)" class="px-5 py-3 rounded-xl font-bold text-xs text-slate-600 bg-slate-100 hover:bg-slate-200 transition-all cursor-pointer">
               ← Voltar
             </button>
-            <button type="button" onclick="window.startAuthenticTarotReadingSequence()" class="px-8 py-4 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-500/25 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer">
+            <button type="button" onclick="window.startAuthenticTarotReadingSequence()" class="px-8 py-3.5 rounded-2xl font-black text-sm text-white bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-500/25 transition-all transform hover:scale-[1.02] active:scale-95 flex items-center gap-3 cursor-pointer">
               <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
               <span>CONSULTAR O ORÁCULO DE SJC</span>
             </button>
@@ -4723,7 +6000,7 @@
                     Radar SJC 2026 • 477 Respondentes & 60 Personas
                   </span>
                 </div>
-                <h2 class="text-lg sm:text-xl font-bold uppercase tracking-tight text-slate-900 leading-tight">
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
                   ${r.titulo_leitura || r.tituloLeitura || 'Diagnóstico Estratégico de São José dos Campos'}
                 </h2>
               </div>
@@ -5237,252 +6514,744 @@
   // ----------------------------------------------------
   // DOSSIÊ COMPLETO (60 PERSONAS)
   // ----------------------------------------------------
+
+
+  // ================================================================
+  // DOSSIÊ COMPLETO DAS 60 PERSONAS (BRIEFING OFICIAL COM 3D TILT & FLIP)
+  // ================================================================
+
+  const MOVIMENTO_COLORS = {
+    'Geografia da Inércia': '#8B6914',
+    'A Cidade Prometida': '#1A3A6B',
+    'Mundo Globalizado': '#0E7E6E',
+    'A Tribo Global': '#0E7E6E',
+    'Consumo Intuitivo': '#C45200',
+    'Empreendedorismo Intuitivo': '#C45200'
+  };
+
+  const MOVIMENTO_TOKENS = {
+    'Geografia da Inércia': { bg: 'bg-amber-100', text: 'text-amber-900', border: 'border-amber-300', color: '#8B6914' },
+    'A Cidade Prometida': { bg: 'bg-blue-100', text: 'text-blue-900', border: 'border-blue-300', color: '#1A3A6B' },
+    'Mundo Globalizado': { bg: 'bg-teal-100', text: 'text-teal-900', border: 'border-teal-300', color: '#0E7E6E' },
+    'A Tribo Global': { bg: 'bg-teal-100', text: 'text-teal-900', border: 'border-teal-300', color: '#0E7E6E' },
+    'Consumo Intuitivo': { bg: 'bg-orange-100', text: 'text-orange-900', border: 'border-orange-300', color: '#C45200' },
+    'Empreendedorismo Intuitivo': { bg: 'bg-orange-100', text: 'text-orange-900', border: 'border-orange-300', color: '#C45200' }
+  };
+
+  function getMovimentoColor(mov) {
+    return MOVIMENTO_COLORS[mov] || '#8B6914';
+  }
+
+  function getMovimentoToken(mov) {
+    return MOVIMENTO_TOKENS[mov] || { bg: 'bg-slate-100', text: 'text-slate-800', border: 'border-slate-300', color: '#64748B' };
+  }
+
+  function deveUsarPlaceholder(persona) {
+    if (!persona) return true;
+    if (persona.imagem_status && persona.imagem_status.includes('ok')) {
+      return false;
+    }
+    const idsAfetados = [4, 8, 11, 15, 22, 24, 25, 30, 32, 33, 35, 37, 39, 41, 47, 51, 53, 55, 58, 60];
+    if (idsAfetados.includes(persona.id)) {
+      return true;
+    }
+    return false;
+  }
+
+  let dossierFilters = {
+    search: '',
+    regiao: [],
+    movimento: [],
+    renda: [],
+    faixaEtaria: [],
+    genero: [],
+    tag: []
+  };
+
+  let highlightedPersonaIds = new Set();
+
+  function parseUrlParamsToFilters() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('search')) dossierFilters.search = params.get('search');
+      if (params.get('regiao')) dossierFilters.regiao = params.get('regiao').split(',').filter(Boolean);
+      if (params.get('movimento')) dossierFilters.movimento = params.get('movimento').split(',').filter(Boolean);
+      if (params.get('renda')) dossierFilters.renda = params.get('renda').split(',').filter(Boolean);
+      if (params.get('etaria')) dossierFilters.faixaEtaria = params.get('etaria').split(',').filter(Boolean);
+      if (params.get('genero')) dossierFilters.genero = params.get('genero').split(',').filter(Boolean);
+      if (params.get('tag')) dossierFilters.tag = params.get('tag').split(',').filter(Boolean);
+    } catch (e) {}
+  }
+
+  function syncFiltersToUrl() {
+    try {
+      const params = new URLSearchParams();
+      if (dossierFilters.search) params.set('search', dossierFilters.search);
+      if (dossierFilters.regiao.length) params.set('regiao', dossierFilters.regiao.join(','));
+      if (dossierFilters.movimento.length) params.set('movimento', dossierFilters.movimento.join(','));
+      if (dossierFilters.renda.length) params.set('renda', dossierFilters.renda.join(','));
+      if (dossierFilters.faixaEtaria.length) params.set('etaria', dossierFilters.faixaEtaria.join(','));
+      if (dossierFilters.genero.length) params.set('genero', dossierFilters.genero.join(','));
+      if (dossierFilters.tag.length) params.set('tag', dossierFilters.tag.join(','));
+
+      const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + (window.location.hash || '#personas');
+      window.history.replaceState(null, '', newUrl);
+    } catch (e) {}
+  }
+
   function renderDossierView() {
     const container = document.getElementById('dossier-view-container');
     if (!container) return;
 
+    parseUrlParamsToFilters();
+
+    const regioes = ['Sul', 'Norte', 'Leste', 'Oeste', 'Centro', 'Sudeste'];
+    const movimentos = ['Geografia da Inércia', 'A Cidade Prometida', 'Mundo Globalizado', 'Consumo Intuitivo'];
+    const faixasEtarias = [
+      { label: 'Até 25 anos', val: '0-25' },
+      { label: '26 a 40 anos', val: '26-40' },
+      { label: '41 a 60 anos', val: '41-60' },
+      { label: '60+ anos', val: '60+' }
+    ];
+    const faixasRenda = ['Classe A', 'Classe B', 'Classe C1', 'Classe C2', 'Classe D/E'];
+    const generos = ['Homem', 'Mulher'];
+
+    const tagsSet = new Set();
+    PERSONAS_SJC_DATA.forEach(p => {
+      if (p.estilo_consumo_tag) tagsSet.add(p.estilo_consumo_tag);
+    });
+    const tags = Array.from(tagsSet).sort();
+
     container.innerHTML = `
-      <div class="space-y-6">
+      <div class="space-y-8 animate-in fade-in duration-300">
         
-        <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
-          <div class="relative w-full md:w-80">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-            <input 
-              type="text" 
-              id="filter-persona-search-dossier" 
-              placeholder="Buscar por nome, profissão, bairro..."
-              class="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-hidden focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20"
-              oninput="window.updateDossierSearch(this.value)"
-            />
+        <!-- Header do Dossiê -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-900 text-white">
+                  <i class="fa-solid fa-database"></i> Dossiê 60 Personas
+                </span>
+                <span id="dossier-count-badge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-pink-100 text-pink-900">
+                  Exibindo 60 de 60
+                </span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1.5">
+                Censo Comportamental das 60 Personas de SJC
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">
+                Passe o cursor sobre os cards para o efeito 3D Tilt e ver o bordão. Clique no card para girar e ver os 5 hábitos, ou clique no botão para abrir o dossiê detalhado.
+              </p>
+            </div>
+
+            <!-- Busca Rápida -->
+            <div class="relative w-full md:w-80">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+              <input 
+                type="text" 
+                id="dossier-search-input"
+                placeholder="Buscar por nome, bairro, profissão..." 
+                value="${dossierFilters.search}"
+                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-pink-500/30 focus:border-pink-500 transition-all"
+                oninput="window.handleDossierSearch(this.value)"
+              />
+            </div>
           </div>
 
-          <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <select id="filter-persona-regiao-dossier" class="px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700" onchange="window.updateDossierFilter('regiao', this.value)">
-              <option value="">Todas as Regiões</option>
-              <option value="Centro">Região Central</option>
-              <option value="Sul">Região Sul</option>
-              <option value="Leste">Região Leste</option>
-              <option value="Oeste">Região Oeste</option>
-              <option value="Norte">Região Norte</option>
-              <option value="Sudeste">Região Sudeste</option>
-            </select>
+          <!-- Grupos de Filtros Multi-Seleção -->
+          <div class="space-y-4 pt-4 border-t border-slate-100 text-xs">
+            
+            <!-- Região -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-extrabold text-slate-400 uppercase tracking-wider text-[10px] w-20">Região:</span>
+              <div class="flex flex-wrap gap-1.5">
+                ${regioes.map(r => `
+                  <button type="button" 
+                    onclick="window.toggleDossierFilter('regiao', '${r}')"
+                    data-filter-group="regiao"
+                    data-filter-val="${r}"
+                    class="filter-pill px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${dossierFilters.regiao.includes(r) ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}"
+                  >
+                    ${r}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
 
-            <button type="button" onclick="window.resetDossierFilters()" class="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5">
-              <i class="fa-solid fa-rotate-left text-[11px]"></i> Limpar
-            </button>
+            <!-- Movimento Cultural -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-extrabold text-slate-400 uppercase tracking-wider text-[10px] w-20">Movimento:</span>
+              <div class="flex flex-wrap gap-1.5">
+                ${movimentos.map(m => {
+                  const token = getMovimentoToken(m);
+                  const isSelected = dossierFilters.movimento.includes(m);
+                  return `
+                    <button type="button" 
+                      onclick="window.toggleDossierFilter('movimento', '${m}')"
+                      data-filter-group="movimento"
+                      data-filter-val="${m}"
+                      class="filter-pill px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${isSelected ? 'text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}"
+                      style="${isSelected ? `background-color: ${token.color};` : ''}"
+                    >
+                      ${m}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Faixa Etária -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-extrabold text-slate-400 uppercase tracking-wider text-[10px] w-20">Idade:</span>
+              <div class="flex flex-wrap gap-1.5">
+                ${faixasEtarias.map(fe => `
+                  <button type="button" 
+                    onclick="window.toggleDossierFilter('faixaEtaria', '${fe.val}')"
+                    data-filter-group="faixaEtaria"
+                    data-filter-val="${fe.val}"
+                    class="filter-pill px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${dossierFilters.faixaEtaria.includes(fe.val) ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}"
+                  >
+                    ${fe.label}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Faixa de Renda -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-extrabold text-slate-400 uppercase tracking-wider text-[10px] w-20">Renda:</span>
+              <div class="flex flex-wrap gap-1.5">
+                ${faixasRenda.map(fr => `
+                  <button type="button" 
+                    onclick="window.toggleDossierFilter('renda', '${fr}')"
+                    data-filter-group="renda"
+                    data-filter-val="${fr}"
+                    class="filter-pill px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${dossierFilters.renda.includes(fr) ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}"
+                  >
+                    ${fr}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Gênero -->
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="font-extrabold text-slate-400 uppercase tracking-wider text-[10px] w-20">Gênero:</span>
+              <div class="flex flex-wrap gap-1.5">
+                ${generos.map(g => `
+                  <button type="button" 
+                    onclick="window.toggleDossierFilter('genero', '${g}')"
+                    data-filter-group="genero"
+                    data-filter-val="${g}"
+                    class="filter-pill px-3 py-1 rounded-xl text-xs font-bold transition-all cursor-pointer ${dossierFilters.genero.includes(g) ? 'bg-slate-900 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}"
+                  >
+                    ${g}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Botão Limpar Filtros -->
+            <div class="pt-2 flex items-center justify-between">
+              <button type="button" 
+                onclick="window.clearAllDossierFilters()"
+                class="text-xs font-bold text-pink-600 hover:text-pink-700 underline cursor-pointer flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-filter-circle-xmark"></i> Limpar todos os filtros
+              </button>
+              <span class="text-[11px] text-slate-400">Clique nas cartas para virar frente/verso</span>
+            </div>
+
           </div>
         </div>
 
-        <div class="flex items-center justify-between">
-          <span id="dossier-count-display" class="text-xs font-extrabold text-slate-600 uppercase tracking-wider">
-            Mostrando 60 de 60 Personas de São José dos Campos
-          </span>
-          <span class="text-xs font-bold text-pink-700">60 Personas Auditadas</span>
-        </div>
-
-        <div id="dossier-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        <!-- Grid das 60 Personas com FLIP e 3D Tilt -->
+        <div id="dossier-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
       </div>
     `;
 
-    renderDossierGrid();
-    updateSidebarDiagnosis();
+    renderDossierCardsWithFlip();
   }
 
-  function updateDossierSearch(val) {
-    currentDossierFilter.search = val;
-    renderDossierGrid();
-  }
-
-  function updateDossierFilter(key, val) {
-    currentDossierFilter[key] = val;
-    renderDossierGrid();
-  }
-
-  function resetDossierFilters() {
-    currentDossierFilter = { search: '', regiao: '', movimento: '', consumo: '' };
-    const sInput = document.getElementById('filter-persona-search-dossier');
-    const mReg = document.getElementById('filter-persona-regiao-dossier');
-    if (sInput) sInput.value = '';
-    if (mReg) mReg.value = '';
-    renderDossierGrid();
-  }
-
-  function renderDossierGrid() {
-    const grid = document.getElementById('dossier-cards-grid');
-    const countDisplay = document.getElementById('dossier-count-display');
-    if (!grid) return;
-
-    const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-    const sVal = norm(currentDossierFilter.search);
-    const regVal = norm(currentDossierFilter.regiao);
-
-    const filtered = PERSONAS_SJC_DATA.filter(p => {
-      if (sVal) {
-        const searchPool = norm(`${p.nome_completo} ${p.profissao} ${p.bairro} ${p.regiao} ${p.dor_principal}`);
-        if (!searchPool.includes(sVal)) return false;
+  function filterPersonas() {
+    return PERSONAS_SJC_DATA.filter(p => {
+      if (dossierFilters.search) {
+        const q = dossierFilters.search.toLowerCase();
+        const matchName = (p.nome_completo || '').toLowerCase().includes(q);
+        const matchProf = (p.profissao || '').toLowerCase().includes(q);
+        const matchBairro = (p.bairro || '').toLowerCase().includes(q);
+        const matchMov = (p.movimento_cultural || '').toLowerCase().includes(q);
+        const matchTag = (p.estilo_consumo_tag || '').toLowerCase().includes(q);
+        if (!matchName && !matchProf && !matchBairro && !matchMov && !matchTag) return false;
       }
-      if (regVal) {
-        if (!norm(p.regiao).includes(regVal)) return false;
+
+      if (dossierFilters.regiao.length > 0) {
+        if (!dossierFilters.regiao.includes(p.regiao)) return false;
       }
+
+      if (dossierFilters.movimento.length > 0) {
+        if (!dossierFilters.movimento.includes(p.movimento_cultural)) return false;
+      }
+
+      if (dossierFilters.renda.length > 0) {
+        if (!dossierFilters.renda.includes(p.faixa_renda_narrativa)) return false;
+      }
+
+      if (dossierFilters.faixaEtaria.length > 0) {
+        const idade = p.idade;
+        const matchAge = dossierFilters.faixaEtaria.some(fe => {
+          if (fe === '0-25') return idade <= 25;
+          if (fe === '26-40') return idade >= 26 && idade <= 40;
+          if (fe === '41-60') return idade >= 41 && idade <= 60;
+          if (fe === '60+') return idade > 60;
+          return false;
+        });
+        if (!matchAge) return false;
+      }
+
+      if (dossierFilters.genero.length > 0) {
+        if (!dossierFilters.genero.includes(p.genero)) return false;
+      }
+
+      if (dossierFilters.tag.length > 0) {
+        if (!dossierFilters.tag.includes(p.estilo_consumo_tag)) return false;
+      }
+
       return true;
     });
+  }
 
-    if (countDisplay) {
-      countDisplay.innerText = `Mostrando ${filtered.length} de 60 Personas de São José dos Campos`;
-    }
-    const sidebarCount = document.getElementById('personas-sidebar-count');
-    if (sidebarCount) {
-      sidebarCount.innerText = filtered.length;
+  function renderDossierCardsWithFlip() {
+    const grid = document.getElementById('dossier-cards-grid');
+    const countBadge = document.getElementById('dossier-count-badge');
+    if (!grid) return;
+
+    const firstPositions = new Map();
+    grid.querySelectorAll('.persona-card-wrapper').forEach(el => {
+      const id = el.getAttribute('data-persona-id');
+      if (id) {
+        firstPositions.set(id, el.getBoundingClientRect());
+      }
+    });
+
+    const filtered = filterPersonas();
+    if (countBadge) {
+      countBadge.textContent = `Exibindo ${filtered.length} de ${PERSONAS_SJC_DATA.length}`;
     }
 
     if (filtered.length === 0) {
       grid.innerHTML = `
-        <div class="col-span-full bg-white p-12 rounded-3xl border border-slate-200 text-center space-y-3">
-          <i class="fa-solid fa-users-slash text-4xl text-slate-300"></i>
-          <h4 class="text-base font-bold text-slate-700">Nenhuma persona encontrada com esses filtros</h4>
-          <p class="text-xs text-slate-500">Tente ajustar a busca ou limpar os filtros regionais.</p>
+        <div class="col-span-full bg-white rounded-3xl p-12 border border-slate-200 text-center space-y-4">
+          <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-2xl">
+            <i class="fa-solid fa-users-slash"></i>
+          </div>
+          <h3 class="text-lg font-bold text-slate-800">Nenhuma persona encontrada</h3>
+          <p class="text-xs text-slate-500 max-w-md mx-auto">
+            Tente ajustar os filtros de região, movimento ou busca por texto para encontrar as personas correspondentes.
+          </p>
+          <button type="button" onclick="window.clearAllDossierFilters()" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition-all cursor-pointer">
+            Limpar todos os filtros
+          </button>
         </div>
       `;
       return;
     }
 
-    grid.innerHTML = filtered.map(p => {
-      const formattedId = String(p.id).padStart(2, '0');
-      const hab = p.habitos || {};
+    grid.innerHTML = filtered.map(p => renderSinglePersona3x4Card(p)).join('');
 
-      return `
-        <div class="pokemon-card card-bg-dourado" onclick="window.openPersonaModal(${p.id})">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <h3 class="font-black text-slate-900 text-base leading-tight">${p.nome_completo}</h3>
-              <span class="text-xs font-black text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">Nº ${formattedId}</span>
-            </div>
+    grid.querySelectorAll('.persona-card-wrapper').forEach(el => {
+      const id = el.getAttribute('data-persona-id');
+      const first = firstPositions.get(id);
+      if (first) {
+        const last = el.getBoundingClientRect();
+        const deltaX = first.left - last.left;
+        const deltaY = first.top - last.top;
+        if (deltaX !== 0 || deltaY !== 0) {
+          el.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+          el.style.transition = 'none';
+          requestAnimationFrame(() => {
+            el.style.transition = 'transform 300ms cubic-bezier(0.2, 0, 0, 1)';
+            el.style.transform = '';
+          });
+        }
+      }
+    });
 
-            <div class="pokemon-art-window">
-              <img 
-                src="${p.foto || 'data_personas/imagens_personagens/personagem_' + p.id + '.jpg'}" 
-                alt="${p.nome_completo}" 
-                class="w-full h-full object-cover object-top"
-              />
-              <div class="absolute bottom-2 right-2 flex items-center gap-1">
-                <span class="px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[10px] font-black text-white shadow-md">
-                  💰 ${p.faixa_renda}
-                </span>
-              </div>
-            </div>
-
-            <div class="pokemon-sub-bar">
-              📍 <strong>${p.bairro}</strong> (${p.regiao}) • 🎂 <strong>${p.idade} anos</strong> • 💼 <strong>${p.profissao}</strong>
-            </div>
-          </div>
-
-          <div class="pokemon-attacks-box space-y-2">
-            <div class="flex items-start gap-1.5 min-w-0">
-              <span class="text-sm shrink-0">🛍️</span>
-              <div class="min-w-0">
-                <span class="font-black text-slate-900 block leading-tight text-xs">Hábito de Consumo:</span>
-                <span class="text-[11px] text-slate-700 font-medium leading-snug">${hab.consumo || p.estiloConsumo || 'Consumo Local em SJC'}</span>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-1.5 min-w-0 border-t border-slate-100 pt-1.5">
-              <span class="text-sm shrink-0">💔</span>
-              <div class="min-w-0">
-                <span class="font-black text-slate-900 block leading-tight text-xs">Maior Dor:</span>
-                <span class="text-[11px] text-red-700 font-bold leading-snug">${p.dor_principal || 'Tempo e Logística'}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pokemon-footer-box space-y-1.5">
-            <p class="pokemon-flavor-text">
-              📖 "${p.historia || p.historia_resumida || ''}"
-            </p>
-            <div class="flex items-center justify-between text-[10px] font-bold text-slate-700 pt-1 border-t border-slate-200">
-              <span>✨ ORÁCULO RDR • SJC</span>
-              <span class="font-black text-slate-950 bg-white px-2 py-0.5 rounded border border-slate-300">Nº ${formattedId}/0060 ◆</span>
-            </div>
-          </div>
-
-        </div>
-      `;
-    }).join('');
+    init3DTiltAndFlip();
   }
 
-  // MODAL DE DETALHES
-  function openPersonaModal(id) {
-    const p = PERSONAS_SJC_DATA.find(x => x.id === id);
-    if (!p) return;
+  function renderSinglePersona3x4Card(p) {
+    const isSelected = highlightedPersonaIds.has(p.id);
+    const isDimmed = highlightedPersonaIds.size > 0 && !isSelected;
+    const movColor = getMovimentoColor(p.movimento_cultural);
+    const usePlaceholder = deveUsarPlaceholder(p);
+    const initialLetter = (p.nome_completo || 'P').charAt(0).toUpperCase();
 
-    let modal = document.getElementById('persona-modal');
+    const h = p.habitos || {};
+    const habitAlim = h.alimentacao || 'Padarias tradicionais e feiras locais.';
+    const habitCons = h.consumo || 'Comércio de bairro planejado.';
+    const habitVest = h.vestuario || 'Estilo urbano casual.';
+    const habitAver = h.aversoes || 'Atendimento desumanizado.';
+    const habitPaix = h.paixoes || 'Momentos em família e ar livre.';
+
+    return `
+      <div 
+        class="persona-card-wrapper relative w-full select-none ${isSelected ? 'persona--selected ring-4 ring-pink-500 rounded-2xl shadow-xl' : ''} ${isDimmed ? 'persona--dimmed opacity-40 grayscale-75 scale-95' : ''} transition-all duration-300"
+        data-persona-id="${p.id}"
+        style="perspective: 1000px;"
+      >
+        <!-- Card 3:4 Container com Flipping -->
+        <div 
+          class="persona-flipper relative w-full rounded-2xl shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer overflow-hidden border border-slate-200/80 bg-white"
+          style="aspect-ratio: 3 / 4; transform-style: preserve-3d;"
+          onclick="window.handlePersonaCardClick(event, ${p.id})"
+        >
+          
+          <!-- ==================== FRENTE DO CARD (3:4) ==================== -->
+          <div 
+            class="persona-card-front absolute inset-0 w-full h-full flex flex-col justify-between overflow-hidden bg-slate-900 text-white"
+            style="backface-visibility: hidden; transform: rotateY(0deg);"
+          >
+            <!-- Imagem / Placeholder -->
+            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+              ${!usePlaceholder ? `
+                <img 
+                  src="${p.foto || p.imagem_url}" 
+                  alt="${p.nome_completo}"
+                  class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  onerror="this.parentElement.innerHTML = '<div class=\\'w-full h-full flex items-center justify-center font-black text-6xl text-white\\' style=\\'background-color: ${movColor};\\' >${initialLetter}</div>';"
+                />
+              ` : `
+                <div class="w-full h-full flex flex-col items-center justify-center font-black text-white p-6 relative overflow-hidden" style="background-color: ${movColor};">
+                  <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                  <span class="text-7xl font-black tracking-tighter drop-shadow-md">${initialLetter}</span>
+                  <span class="text-[11px] font-extrabold uppercase tracking-widest text-white/80 mt-2">${p.movimento_cultural}</span>
+                </div>
+              `}
+
+              <div class="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-none"></div>
+              <div class="absolute bottom-0 inset-x-0 h-44 bg-gradient-to-t from-black/95 via-black/60 to-transparent pointer-events-none"></div>
+            </div>
+
+            <!-- Topo da Frente: ID Badge & Tag de Renda -->
+            <div class="relative z-10 p-3.5 flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-black/60 text-white backdrop-blur-md border border-white/20">
+                #${String(p.id).padStart(2, '0')}
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-white/90 text-slate-900 backdrop-blur-md shadow-xs">
+                ${p.faixa_renda_narrativa || p.faixa_renda}
+              </span>
+            </div>
+
+            <!-- Base da Frente: Overlay com Bordão + Info -->
+            <div class="relative z-10 p-4 space-y-1">
+              <div class="persona-bordao-overlay transition-all duration-300 transform translate-y-2 opacity-0 text-[11px] font-bold italic text-pink-200 bg-black/70 backdrop-blur-sm p-2 rounded-xl border border-white/10 mb-1 leading-snug">
+                "${p.bordao || p.frase_sintese || 'São José dos Campos é o meu lugar.'}"
+              </div>
+
+              <div class="space-y-0.5">
+                <h3 class="text-base font-black text-white tracking-tight leading-tight drop-shadow-sm line-clamp-1">
+                  ${p.nome_completo}
+                </h3>
+                <p class="text-[13px] font-semibold text-slate-200 line-clamp-1">
+                  ${p.idade} anos • ${p.profissao}
+                </p>
+                <p class="text-[12px] font-medium text-slate-300 flex items-center gap-1 line-clamp-1">
+                  <i class="fa-solid fa-location-dot text-pink-400 text-[10px]"></i>
+                  ${p.bairro} (${p.regiao})
+                </p>
+              </div>
+            </div>
+
+            <!-- Faixa Inferior de Movimento Cultural (28px) -->
+            <div 
+              class="relative z-10 h-7 px-3.5 flex items-center justify-between text-[11px] font-black text-white shrink-0"
+              style="background-color: ${movColor};"
+            >
+              <span class="truncate uppercase tracking-wider text-[10px]">${p.movimento_cultural}</span>
+              <i class="fa-solid fa-rotate text-[10px] opacity-80" title="Clique para virar"></i>
+            </div>
+          </div>
+
+
+          <!-- ==================== VERSO DO CARD (3:4) ==================== -->
+          <div 
+            class="persona-card-back absolute inset-0 w-full h-full bg-slate-900 text-slate-100 flex flex-col justify-between p-4 overflow-hidden"
+            style="backface-visibility: hidden; transform: rotateY(180deg);"
+          >
+            <!-- Header do Verso -->
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 shrink-0">
+              <div class="space-y-0.5">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-black text-white">#${p.id} ${p.nome_completo.split(' ')[0]}</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-slate-800 text-slate-300">${p.regiao}</span>
+                </div>
+                <p class="text-[10px] text-slate-400 font-medium truncate max-w-[180px]">${p.profissao}</p>
+              </div>
+              <button 
+                type="button" 
+                onclick="event.stopPropagation(); window.openPersonaModal(${p.id})"
+                class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-pink-600 hover:bg-pink-700 text-white transition-all cursor-pointer flex items-center gap-1 shadow-xs"
+              >
+                <span>Dossiê</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+              </button>
+            </div>
+
+            <!-- Scroll Interno dos 5 Hábitos Canônicos -->
+            <div class="flex-1 overflow-y-auto custom-card-scroll py-2.5 space-y-2.5 text-[11px] pr-1">
+              
+              <div class="space-y-0.5 bg-slate-800/60 p-2 rounded-xl border border-slate-700/50">
+                <span class="text-[9px] font-black uppercase tracking-wider text-pink-400 block">Perfil & História</span>
+                <p class="text-slate-300 leading-snug font-medium text-[11px]">${p.historia_resumida}</p>
+              </div>
+
+              <div class="space-y-1 bg-slate-800/60 p-2 rounded-xl border border-slate-700/50">
+                <span class="text-[9px] font-black uppercase tracking-wider text-amber-400 block">Dores & Tensões</span>
+                <p class="text-slate-300 leading-snug font-medium text-[10px]">
+                  <strong class="text-slate-100">Cidade:</strong> ${p.dor_da_cidade || p.dor_principal || 'Trânsito e mobilidade regional.'}
+                </p>
+                <p class="text-slate-300 leading-snug font-medium text-[10px]">
+                  <strong class="text-slate-100">Pessoal:</strong> ${p.dor_pessoal || 'Equilíbrio financeiro e segurança.'}
+                </p>
+              </div>
+
+              <div class="space-y-1 bg-slate-800/60 p-2 rounded-xl border border-slate-700/50">
+                <span class="text-[9px] font-black uppercase tracking-wider text-teal-400 block">5 Hábitos Canônicos</span>
+                
+                <div class="space-y-1 text-[10px]">
+                  <p class="text-slate-300"><strong class="text-slate-100">• Alimentação:</strong> ${habitAlim}</p>
+                  <p class="text-slate-300"><strong class="text-slate-100">• Consumo:</strong> ${habitCons}</p>
+                  <p class="text-slate-300"><strong class="text-slate-100">• Vestuário:</strong> ${habitVest}</p>
+                  <p class="text-slate-300"><strong class="text-slate-100">• Aversões:</strong> ${habitAver}</p>
+                  <p class="text-slate-300"><strong class="text-slate-100">• Paixões:</strong> ${habitPaix}</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Rodapé do Verso -->
+            <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[10px] text-slate-400 shrink-0">
+              <span class="truncate max-w-[170px] font-semibold text-slate-300">${p.estilo_consumo_tag || 'Consumo Geral'}</span>
+              <span class="text-[9px] text-pink-400 font-bold">Clique p/ virar <i class="fa-solid fa-rotate-left ml-0.5"></i></span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    `;
+  }
+
+  function init3DTiltAndFlip() {
+    const wrappers = document.querySelectorAll('.persona-card-wrapper');
+    wrappers.forEach(wrapper => {
+      const flipper = wrapper.querySelector('.persona-flipper');
+      const bordao = wrapper.querySelector('.persona-bordao-overlay');
+
+      wrapper.addEventListener('mousemove', (e) => {
+        if (wrapper.classList.contains('is-flipped')) return;
+        const rect = wrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((centerY - y) / centerY) * 8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+
+        flipper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        if (bordao) {
+          bordao.style.opacity = '1';
+          bordao.style.transform = 'translateY(0)';
+        }
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        if (wrapper.classList.contains('is-flipped')) {
+          flipper.style.transform = 'perspective(1000px) rotateY(180deg)';
+        } else {
+          flipper.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        }
+        if (bordao) {
+          bordao.style.opacity = '0';
+          bordao.style.transform = 'translateY(8px)';
+        }
+      });
+    });
+  }
+
+  window.handlePersonaCardClick = function(e, id) {
+    if (e.target.closest('button') || e.target.closest('a')) return;
+    const wrapper = document.querySelector(`.persona-card-wrapper[data-persona-id="${id}"]`);
+    if (!wrapper) return;
+    const flipper = wrapper.querySelector('.persona-flipper');
+    if (!flipper) return;
+
+    wrapper.classList.toggle('is-flipped');
+    if (wrapper.classList.contains('is-flipped')) {
+      flipper.style.transform = 'perspective(1000px) rotateY(180deg)';
+    } else {
+      flipper.style.transform = 'perspective(1000px) rotateY(0deg)';
+    }
+  };
+
+  window.toggleDossierFilter = function(group, val) {
+    if (!dossierFilters[group]) dossierFilters[group] = [];
+    const idx = dossierFilters[group].indexOf(val);
+    if (idx === -1) {
+      dossierFilters[group].push(val);
+    } else {
+      dossierFilters[group].splice(idx, 1);
+    }
+    syncFiltersToUrl();
+    renderDossierView();
+  };
+
+  window.handleDossierSearch = function(val) {
+    dossierFilters.search = val.trim();
+    syncFiltersToUrl();
+    renderDossierCardsWithFlip();
+  };
+
+  window.clearAllDossierFilters = function() {
+    dossierFilters = {
+      search: '',
+      regiao: [],
+      movimento: [],
+      renda: [],
+      faixaEtaria: [],
+      genero: [],
+      tag: []
+    };
+    const searchInput = document.getElementById('dossier-search-input');
+    if (searchInput) searchInput.value = '';
+    syncFiltersToUrl();
+    renderDossierView();
+  };
+
+  window.updateDossierSearch = window.handleDossierSearch;
+  window.updateDossierFilter = window.toggleDossierFilter;
+  window.resetDossierFilters = window.clearAllDossierFilters;
+
+  window.highlightPersonas = function(ids) {
+    highlightedPersonaIds = new Set(ids);
+    renderDossierCardsWithFlip();
+  };
+
+  window.clearHighlight = function() {
+    highlightedPersonaIds.clear();
+    renderDossierCardsWithFlip();
+  };
+
+  function openPersonaModal(id) {
+    const persona = PERSONAS_SJC_DATA.find(p => p.id === id);
+    if (!persona) return;
+
+    const modal = document.getElementById('persona-modal');
     if (!modal) return;
 
-    const hab = p.habitos || {};
-    const midias = (p.veiculos_midia || []).map(m => `<span class="px-2.5 py-1 bg-slate-100 border border-slate-200 rounded-lg text-xs font-bold text-slate-700">${m.nome || m}</span>`).join('') || '<span class="text-xs text-slate-500">Mídias regionais do Vale</span>';
-    const influenciadores = (p.influenciadores_seguidos || []).map(inf => `<span class="px-2.5 py-1 bg-pink-50 border border-pink-200 rounded-lg text-xs font-bold text-pink-900">@${inf.handle || inf.nome || inf}</span>`).join('') || '<span class="text-xs text-slate-500">Criadores locais de SJC</span>';
+    const avatar = document.getElementById('modal-persona-avatar');
+    const name = document.getElementById('modal-persona-name');
+    const movimento = document.getElementById('modal-persona-movimento');
+    const title = document.getElementById('modal-persona-title');
+    const location = document.getElementById('modal-persona-location');
+    const frase = document.getElementById('modal-persona-frase');
+    const dor = document.getElementById('modal-persona-dor');
+    const habitos = document.getElementById('modal-persona-habitos');
+    const influenciadores = document.getElementById('modal-persona-influenciadores');
 
-    const avatarEl = document.getElementById('modal-persona-avatar');
-    if (avatarEl) {
-      avatarEl.innerHTML = `<img src="${p.foto || 'data_personas/imagens_personagens/personagem_' + p.id + '.jpg'}" class="w-full h-full object-cover rounded-2xl" />`;
+    const movColor = getMovimentoColor(persona.movimento_cultural);
+    const usePlaceholder = deveUsarPlaceholder(persona);
+
+    if (avatar) {
+      if (!usePlaceholder) {
+        avatar.innerHTML = `<img src="${persona.foto || persona.imagem_url}" alt="${persona.nome_completo}" class="w-full h-full object-cover rounded-2xl" />`;
+        avatar.style.backgroundColor = 'transparent';
+      } else {
+        avatar.innerHTML = persona.nome_completo.charAt(0);
+        avatar.style.backgroundColor = movColor;
+      }
     }
 
-    const nameEl = document.getElementById('modal-persona-name');
-    if (nameEl) nameEl.innerText = p.nome_completo;
-
-    const movEl = document.getElementById('modal-persona-movimento');
-    if (movEl) movEl.innerText = p.movimento;
-
-    const titleEl = document.getElementById('modal-persona-title');
-    if (titleEl) titleEl.innerText = `${p.profissao} • ${p.idade} anos • ${p.faixa_renda}`;
-
-    const locEl = document.getElementById('modal-persona-location');
-    if (locEl) locEl.innerHTML = `<i class="fa-solid fa-location-dot text-pink-400 mr-1"></i> ${p.bairro} (${p.regiao})`;
-
-    const fraseEl = document.getElementById('modal-persona-frase');
-    if (fraseEl) fraseEl.innerText = `"${p.historia || p.historia_resumida || ''}"`;
-
-    const dorEl = document.getElementById('modal-persona-dor');
-    if (dorEl) dorEl.innerText = p.dor_principal;
-
-    const habListEl = document.getElementById('modal-persona-habitos');
-    if (habListEl) {
-      habListEl.innerHTML = `
-        <li class="text-xs text-slate-700"><strong>Alimentação:</strong> ${hab.alimentacao || 'Restaurantes e feiras de SJC'}</li>
-        <li class="text-xs text-slate-700"><strong>Consumo:</strong> ${hab.consumo || 'Comércio de bairro e shoppings'}</li>
-        <li class="text-xs text-slate-700"><strong>Vestuário:</strong> ${hab.vestuario || 'Confortável e funcional'}</li>
-        <li class="text-xs text-slate-700"><strong>Paixões:</strong> ${hab.paixoes || 'Parques e passeios em família'}</li>
+    if (name) name.textContent = persona.nome_completo;
+    if (movimento) {
+      movimento.textContent = persona.movimento_cultural;
+      movimento.style.borderColor = movColor;
+      movimento.style.color = movColor;
+      movimento.style.backgroundColor = '#F8FAFC';
+    }
+    if (title) title.textContent = `${persona.idade} anos • ${persona.profissao} • ${persona.faixa_renda_narrativa || persona.faixa_renda}`;
+    if (location) location.innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i> ${persona.bairro} (${persona.regiao}) • Transporte: ${persona.meio_transporte_principal}`;
+    if (frase) frase.textContent = persona.bordao || persona.frase_sintese || 'Sem bordão registrado.';
+    if (dor) {
+      dor.innerHTML = `
+        <div class="space-y-2">
+          <p><strong class="text-slate-800">História:</strong> ${persona.historia_resumida}</p>
+          <p><strong class="text-slate-800">Dor da Cidade:</strong> ${persona.dor_da_cidade || persona.dor_principal}</p>
+          <p><strong class="text-slate-800">Dor Pessoal:</strong> ${persona.dor_pessoal || 'Manutenção da estabilidade e renda.'}</p>
+          <p><strong class="text-slate-800">Tensão Dramática:</strong> ${persona.tensao_dramatica || 'Busca por validação e futuro melhor.'}</p>
+        </div>
       `;
     }
 
-    const infListEl = document.getElementById('modal-persona-influenciadores');
-    if (infListEl) {
-      infListEl.innerHTML = `
-        <div class="space-y-2 w-full">
-          <div>
-            <span class="text-[11px] font-black text-slate-600 block mb-1">Veículos de Mídia:</span>
-            <div class="flex flex-wrap gap-1.5">${midias}</div>
+    if (habitos) {
+      const h = persona.habitos || {};
+      habitos.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="font-bold text-slate-900 block mb-1">🍽️ Alimentação</span>
+            <p class="text-slate-600">${h.alimentacao || '-'}</p>
           </div>
-          <div>
-            <span class="text-[11px] font-black text-slate-600 block mb-1">Influenciadores Seguidos:</span>
-            <div class="flex flex-wrap gap-1.5">${influenciadores}</div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="font-bold text-slate-900 block mb-1">🛍️ Consumo</span>
+            <p class="text-slate-600">${h.consumo || '-'}</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="font-bold text-slate-900 block mb-1">👔 Vestuário</span>
+            <p class="text-slate-600">${h.vestuario || '-'}</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="font-bold text-slate-900 block mb-1">🚫 Aversões</span>
+            <p class="text-slate-600">${h.aversoes || '-'}</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 sm:col-span-2">
+            <span class="font-bold text-slate-900 block mb-1">❤️ Paixões</span>
+            <p class="text-slate-600">${h.paixoes || '-'}</p>
           </div>
         </div>
       `;
     }
 
-    modal.classList.remove('hidden');
+    if (influenciadores) {
+      const midias = (persona.veiculos_midia || []).map(m => typeof m === 'object' ? m.nome : m).join(', ');
+      const influs = (persona.influenciadores_seguidos || []).map(i => typeof i === 'object' ? i.nome : i).join(', ');
+      const lugares = (persona.lugares_frequenta || persona.lugares_frequenta_sjc || []).join(', ');
+      influenciadores.innerHTML = `
+        <div class="space-y-2 text-xs">
+          <p><strong class="text-slate-800">Lugares que frequenta:</strong> ${lugares || '-'}</p>
+          <p><strong class="text-slate-800">Mídias Locais:</strong> ${midias || '-'}</p>
+          <p><strong class="text-slate-800">Influenciadores:</strong> ${influs || '-'}</p>
+        </div>
+      `;
+    }
+
     modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
   }
 
   function closePersonaModal() {
     const modal = document.getElementById('persona-modal');
     if (modal) {
-      modal.classList.add('hidden');
       modal.style.display = 'none';
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
-    document.body.style.overflow = '';
   }
+
 
   function setOracleStep(step) {
     currentOracleStep = step;
@@ -5684,8 +7453,14 @@
     switchRadarDnaTab('dossier');
   };
 
+
+
+  // ==========================================
+  // EXPORTAÇÕES GLOBAIS E INICIALIZAÇÃO
+  // ==========================================
+
   window.resetPersonasFilters = function() {
-    resetDossierFilters();
+    clearAllDossierFilters();
   };
 
   window.exploreDeckDirectly = function() {
@@ -5707,11 +7482,16 @@
   window.setOracleQuickPrompt = setOracleQuickPrompt;
   window.startAuthenticTarotReadingSequence = startAuthenticTarotReadingSequence;
   window.resetOracleReading = resetOracleReading;
-  window.updateDossierSearch = updateDossierSearch;
-  window.updateDossierFilter = updateDossierFilter;
-  window.resetDossierFilters = resetDossierFilters;
   window.openPersonaModal = openPersonaModal;
   window.closePersonaModal = closePersonaModal;
+  window.renderDossierView = renderDossierView;
+  window.renderOracleView = renderOracleView;
+  window.startOracleGame = function(e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    oracleScreenState = 'game';
+    currentOracleStep = 1;
+    renderOracleView();
+  };
 
   document.addEventListener('DOMContentLoaded', () => {
     initRadarDnaModule();
@@ -5728,3 +7508,4 @@
     });
   });
 })();
+

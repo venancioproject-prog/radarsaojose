@@ -41,73 +41,178 @@
       overflow-x: hidden;
     }
 
-    /* ── NAVBAR ── */
-    .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+    
+    :root {
+      --content-max-width: 1280px;
+      --azul: #0B2545;
+      --azul-medio: #0b315c;
+      --azul-claro: #19afea;
+      --azul-suave: #e6eff1;
+      --vermelho: #ff2e2e;
+      --branco: #ffffff;
+      --cinza-claro: #f0f1f0;
+      --cinza-texto: #3a3a3a;
+      --preto: #0a0a0a;
+      --color-brand-cyan: #19afea;
+    }
+
+    
+/* ── CABEÇALHO FULL-WIDTH COM LOGO À ESQUERDA ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
+      background: rgba(11, 37, 69, 0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0 40px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .navbar-container {
+      width: 100%;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 48px;
-      background: rgba(11,37,69,0.97);
-      backdrop-filter: blur(10px);
+      gap: 24px;
     }
-    .navbar-logo img {
-      height: 45px;
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .navbar-brand img {
+      height: 40px;
       width: auto;
+      max-width: 170px;
+      object-fit: contain;
       display: block;
     }
-    .navbar-nav {
+
+    .navbar-menu {
       display: flex;
-      gap: 32px;
+      align-items: center;
+      gap: 28px;
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
-    .navbar-nav a {
-      color: rgba(255,255,255,0.7);
+
+    .navbar-menu a {
+      color: rgba(255, 255, 255, 0.78);
       text-decoration: none;
-      font-size: 0.78rem;
-      font-weight: 600;
+      font-size: 0.76rem;
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      transition: color 0.2s;
+      padding: 6px 2px;
+      transition: color 0.2s ease;
+      white-space: nowrap;
     }
-    .navbar-nav a:hover { color: var(--azul-claro); }
-    .navbar-cta {
+
+    .navbar-menu a:hover,
+    .navbar-menu a.active-nav {
+      color: var(--azul-claro);
+    }
+
+    .navbar-actions {
       display: flex;
-      gap: 12px;
       align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
     }
+
     .btn-nav-outline {
-      border: 1.5px solid rgba(255,255,255,0.3);
-      color: rgba(255,255,255,0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
       background: transparent;
-      padding: 9px 22px;
-      font-size: 0.75rem;
+      padding: 9px 20px;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      white-space: nowrap;
       font-family: 'Montserrat', sans-serif;
     }
-    .btn-nav-outline:hover { border-color: var(--azul-claro); color: var(--azul-claro); }
+
+    .btn-nav-outline:hover {
+      border-color: var(--azul-claro);
+      color: var(--azul-claro);
+      background: rgba(2, 132, 199, 0.08);
+    }
+
     .btn-nav-primary {
       background: var(--azul-claro);
-      color: var(--branco);
+      color: #FFFFFF;
       border: none;
-      padding: 10px 24px;
-      font-size: 0.75rem;
+      padding: 9px 20px;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
-      transition: opacity 0.2s;
+      border-radius: 8px;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      white-space: nowrap;
       font-family: 'Montserrat', sans-serif;
     }
-    .btn-nav-primary:hover { opacity: 0.85; }
+
+    .btn-nav-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .nav-toggle-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    @media (max-width: 1024px) {
+      .site-header { padding: 0 20px; }
+      .navbar-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0B2545;
+        padding: 24px;
+        gap: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      }
+      .navbar-menu.active { display: flex; }
+      .nav-toggle-btn { display: block; }
+      .btn-nav-outline { display: none; }
+    }
+
 
     /* ── HERO ── */
     .hero {
@@ -182,6 +287,7 @@
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
+      border-radius: 8px;
       transition: opacity 0.2s;
       font-family: 'Montserrat', sans-serif;
       display: inline-block;
@@ -198,6 +304,7 @@
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
+      border-radius: 8px;
       transition: border-color 0.2s;
       font-family: 'Montserrat', sans-serif;
       display: inline-flex;
@@ -511,6 +618,7 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
+      border-radius: 8px;
       transition: opacity 0.2s;
       font-family: 'Montserrat', sans-serif;
     }
@@ -949,7 +1057,13 @@
     /* ── RESPONSIVO MOBILE & TABLET ── */
     @media (max-width: 1024px) {
       .navbar { padding: 16px 24px; }
-      .navbar-logo img { height: 38px; }
+      .navbar-logo img {
+      height: 40px;
+      width: auto;
+      max-width: 170px;
+      display: block;
+      object-fit: contain;
+    }
       .navbar-nav { display: none; }
       .nav-toggle { display: block; }
 
@@ -996,6 +1110,7 @@
         justify-content: center;
         padding: 15px 24px;
         font-size: 0.82rem;
+        border-radius: 8px;
       }
       .hero-visual { display: none; }
 
@@ -1118,26 +1233,36 @@
 </head>
 <body>
 
-  <!-- ══ NAVBAR ══ -->
-  <nav class="navbar">
-    <a href="#" class="navbar-logo">
-      <img src="fotos_radar/logobranco.png" alt="Radar São José"  loading="lazy" />
-    </a>
-    <ul class="navbar-nav">
-      <li><a href="#solucoes">Soluções</a></li>
-      <li><a href="#planos">Planos</a></li>
-      <li><a href="#metodologia">Metodologia</a></li>
-      <li><a href="#manifesto">Manifesto</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <div class="navbar-cta">
-      <a href="#contato" class="btn-nav-outline">Falar com especialista</a>
-      <a href="app.html" class="btn-nav-primary">Acessar soluções</a>
-    </div>
-    <button class="nav-toggle" onclick="this.closest('nav').querySelector('.navbar-nav').style.display = this.closest('nav').querySelector('.navbar-nav').style.display === 'flex' ? 'none' : 'flex'">
-      <i class="fas fa-bars"></i>
-    </button>
-  </nav>
+    <!-- ══ CABEÇALHO PRINCIPAL SEMÂNTICO (LOGO • MENU • AÇÕES) ══ -->
+  <header class="site-header" role="banner">
+    <nav class="navbar-container" aria-label="Navegação Principal do Radar São José">
+      
+      <!-- 1. Logo à Esquerda -->
+      <a href="index.html" class="navbar-brand" title="Página Inicial - Radar São José">
+        <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="160" height="40" loading="eager" />
+      </a>
+
+      <!-- 2. Menu Central -->
+      <ul class="navbar-menu" id="primaryNavMenu" role="menubar">
+        <li role="none"><a href="#solucoes" role="menuitem">Soluções</a></li>
+        <li role="none"><a href="#planos" role="menuitem">Planos</a></li>
+        <li role="none"><a href="#metodologia" role="menuitem">Metodologia</a></li>
+        <li role="none"><a href="#manifesto" role="menuitem">Manifesto</a></li>
+        <li role="none"><a href="blog.html" role="menuitem">Blog</a></li>
+        <li role="none"><a href="#faq" role="menuitem">FAQ</a></li>
+      </ul>
+
+      <!-- 3. Botões e Ações à Direita -->
+      <div class="navbar-actions">
+        <a href="#contato" class="btn-nav-outline">Falar com especialista</a>
+        <a href="app.html" class="btn-nav-primary">Acessar soluções</a>
+        <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </nav>
+  </header>
 
   <!-- ══ HERO ══ -->
   <section class="hero">
@@ -1875,7 +2000,7 @@
   <footer>
     <div class="footer-inner">
       <p class="footer-brand">
-        <strong>Radar São José</strong> · Studio 8 · 2026
+        <strong>Radar São José</strong> · Studio 8 · 2026 · <a href="blog.html" style="color: rgba(255,255,255,0.7); text-decoration: underline; margin-left: 8px;">Blog</a>
       </p>
       <p class="footer-email">
         <a href="mailto:radarsaojose@studio8.com.br">radarsaojose@studio8.com.br</a>

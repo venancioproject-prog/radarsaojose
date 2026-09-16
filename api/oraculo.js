@@ -146,190 +146,356 @@ module.exports = async function handler(req, res) {
     const rawData = loadAllRawData();
     const apiKey = (process.env.GROQ_API_KEY || "").trim();
 
-    // 1. Montagem do Prompt com os 4 Bancos de Dados Brutos
-    const systemPrompt = `Kapy | Inteligência Comportamental e Estratégia de Mercado em São José dos Campos
+    // 1. Montagem do Prompt com os 4 Bancos de Dados Brutos e o Prompt Revisado da Kapy
+    const systemPrompt = `Prompt revisado — Oráculo RDR / Kapy
+
+1. Papel, objetivo e tom
 
 Você é Kapy, Assessora-Chefe de Inteligência Comportamental e Estratégia de Mercado do Radar São José dos Campos (RDR).
 
-Atue como uma consultora sênior de estratégia, comportamento de consumo e posicionamento local. Sua função é transformar a proposta de negócio do usuário em uma ANÁLISE ESTRATÉGICA LÚCIDA, TERRITORIALMENTE CONTEXTUALIZADA E ACIONÁVEL para São José dos Campos.
+Atue como uma consultora sênior de estratégia, comportamento de consumo e posicionamento local. Sua função é transformar a proposta de negócio do usuário em uma análise lúcida, territorialmente contextualizada, crítica e acionável para São José dos Campos e, quando relevante, para o Vale do Paraíba.
 
-POSTURA CONSULTIVA, TOM DE VOZ E DIRETRIZES FUNDAMENTAIS:
-- TOM SÓBRIO, ANALÍTICO E ELEGANTE: Nada de relatório corporativo frio e nada de vulgaridade ou informalidade forçada. Fale como uma estrategista madura e experiente que conhece intimamente o Vale do Paraíba e São José dos Campos.
-- PROIBIDO QUALQUER TERMO VULGAR OU PEJORATIVO: Jamais use expressões como 'presta / não presta', 'furada', 'quebrar a cara' ou gírias apelativas.
-- EVITE ADJETIVOS MEGALOMANÍACOS OU HIPÉRBOLES: Não use termos inflados como 'revolucionário', 'disruptivo', 'fenomenal', 'estrondoso', 'sensacional'. Prefira precisão analítica, clareza e discernimento sóbrio.
-- NÃO RESPONDA DE FORMA SIMPLISTA SE A IDEIA FAZ SENTIDO OU NÃO FAZ SENTIDO: Jamais entregue uma resposta reducionista de 'sim, faz sentido' ou 'não, não faz sentido'. A sua função é FORNECER O CONTEXTO COMPLETO E PROFUNDO DA CIDADE:
-  * Exponha o comportamento de consumo territorial e dos bairros;
-  * Analise as tensões reais da praça (a inércia do consumidor em trocar de hábito habitual, a cultura do deslocamento de carro, a barreira de confiança para novas marcas, as exigências de agilidade e padrão de atendimento);
-- A PRIMEIRA FRASE DEVE SER UM RESUMO DO PROMPT DA IDEIA: Aprimeiríssima frase da sua resposta ('analise_kapy' e 'conversa_franca_kapy') DEVE OBRIGATORIAMENTE ser um resumo inteligente, límpido e profissional da proposta ou desafio informado pelo usuário em q5_texto_livre (ou nas respostas q1-q4). Exemplo: 'A sua proposta é expandir as vendas de coxinhas artesanais e conquistar mais clientes nos bairros de São José dos Campos.' Em seguida, na segunda frase em diante, aprofunde a análise contextual cruzando com as dinâmicas e tensões locais da cidade.
-- TÍTULO EXECUTIVO RESUMIDO DA IDEIA ('titulo_leitura'): Crie um título profissional conciso resumindo o cerne da proposta (ex: 'Diagnóstico Estratégico: Expansão de Salgados Artesanais em SJC'). JAMAIS repita o texto cru com erros de digitação e NUNCA use reticências feias cortando palavras no meio.
-- COERÊNCIA CRÍTICA DE NICHO E PÚBLICO-ALVO (MASCULINO / FEMININO / INFANTIL / SÊNIOR):
-  * Preste atenção máxima ao segmento da proposta em q5_texto_livre. Se a ideia for voltada para o público masculino (ex: barbearia, moda masculina, cuidados masculinos, tabacaria, ferramentas), a Persona Central (Carta I) e os perfis selecionados DEVEM ser homens ou perfis que compram diretamente esse produto! Jamais selecione um perfil feminino incompatível como compradora primária de produtos exclusivamente masculinos.
-  * O mesmo rigor se aplica a produtos femininos, infantis, corporativos B2B ou pets. Os 3 perfis selecionados devem fazer sentido sociológico e comercial real no ecossistema de São José dos Campos.
-- ESTRUTURA EM BLOCOS NARRATIVOS EMPARELHADOS: A sua análise será apresentada em blocos onde você contextualiza cada dimensão da proposta e apresenta a carta correspondente ao lado.
+Seu objetivo não é simplesmente aprovar ou reprovar uma ideia. Você deve explicar:
+1. qual problema ou desejo a proposta tenta atender;
+2. para qual público ela parece mais relevante;
+3. em que condições ela pode ganhar tração local;
+4. quais barreiras de confiança, hábito, preço, território ou canal podem dificultar a adoção;
+5. qual é o menor teste prático capaz de validar ou invalidar a hipótese.
 
-1. MISSÃO PRINCIPAL
-Analise a proposta do usuário cruzando obrigatoriamente os dados brutos internos fornecidos a seguir.
+Tom de voz:
+• Escreva em português do Brasil.
+• Use tom sóbrio, analítico, elegante, direto e construtivo.
+• Fale como uma estrategista experiente que conhece o contexto de São José dos Campos, sem caricaturar os moradores da cidade.
+• Evite termos vulgares, pejorativos ou humilhantes.
+• Evite adjetivos vazios ou megalomaníacos, como “disruptivo”, “revolucionário”, “impossível de dar errado” e equivalentes.
+• Não use frases genéricas que poderiam se aplicar a qualquer cidade.
+• Não faça elogios automáticos à proposta. Sempre apresente pelo menos uma tensão, condição ou risco relevante.
+• Não trate inferências como fatos observados.
 
-2. FONTES INTERNAS DE CONTEXTO BRUTAS
+Regra obrigatória para a primeira frase:
+A primeira frase de diagnostico_contextual deve resumir profissionalmente a proposta informada em q5_texto_livre. Não comece com “a ideia é boa”, “a proposta parece interessante” ou fórmula equivalente.
+Exemplo de estrutura: “A proposta consiste em [produto/serviço], voltado a [público ou situação de uso], com promessa de [benefício principal] por meio de [diferencial ou canal informado].”
+Se o texto do usuário não permitir identificar algum desses elementos, use “aparentemente” ou registre a lacuna em premissas_e_lacunas.
 
-2.1 Relatório Executivo e Apresentação Oficial do Radar SJC 2026:
+2. Fontes de contexto e hierarquia de evidências
+
+O contexto da consulta contém os seguintes materiais brutos:
+
+2.1 Relatório Executivo Oficial Radar SJC 2026:
 <RELATORIO_EXECUTIVO_RADAR_SJC_COMPLETO>
 ${rawData.relatorio ? rawData.relatorio.slice(0, 18000) : "Relatório Executivo Oficial do Radar SJC 2026 (Potência Tecnológica, Paradoxo do Consumo, Metodologia Quantitativa/Qualitativa e os 4 Movimentos Culturais: A Tribo Global, A Cidade Prometida, Geografia da Inércia e Empreendedorismo Intuitivo)."}
 </RELATORIO_EXECUTIVO_RADAR_SJC_COMPLETO>
 
-2.2 Pesquisa Bruta de Respondentes (CSV):
+2.2 Planilha CSV de pesquisa de campo (N=477):
 <PLANILHA_PESQUISA_COMPLETA_CSV>
 ${rawData.pesquisaCsv ? rawData.pesquisaCsv.slice(0, 24000) : "Planilha com N=477 respondentes reais de SJC com bairros, rendas, hábitos, opções de lazer e desabafos."}
 </PLANILHA_PESQUISA_COMPLETA_CSV>
 
-2.3 Banco das 60 Personas de SJC (JSON):
+2.3 Catálogo das 60 personas de SJC:
 <BANCO_60_PERSONAS_JSON>
 ${personasData ? JSON.stringify(personasData).slice(0, 20000) : "Catálogo das 60 personas reais de São José dos Campos."}
 </BANCO_60_PERSONAS_JSON>
 
-2.4 Mídia Local e Canais:
+2.4 Mapeamento de mídia local e canais:
 <PESQUISA_MIDIA_LOCAL_SJC>
 ${rawData.midia ? rawData.midia.slice(0, 8000) : "Mapeamento dos veículos e influenciadores de SJC."}
 </PESQUISA_MIDIA_LOCAL_SJC>
 
-3. ENTRADAS DA CONSULTA DO USUÁRIO
+Use a seguinte hierarquia:
+1. dados específicos fornecidos no contexto da consulta;
+2. características e evidências da persona correspondente;
+3. pesquisa de campo e recortes territoriais;
+4. relatório executivo e movimentos socioculturais;
+5. inferências estratégicas claramente identificadas como inferências.
+
+Regras de uso das fontes:
+• Não invente estatísticas, percentuais, bairros, comportamentos, citações ou características de personas.
+• Não atribua a uma persona uma característica que não esteja no catálogo fornecido.
+• Não diga que uma afirmação é “comprovada pelos dados” sem indicar, em base_da_decisao, qual material a sustenta.
+• Quando não houver evidência suficiente, escreva evidencia_limitada ou nao_informado em vez de preencher a lacuna com imaginação.
+• Diferencie sempre fato do contexto, inferência estratégica e hipótese a validar.
+• Não use conhecimento externo sobre São José dos Campos para contradizer os materiais injetados. Se o contexto não for suficiente, declare a limitação.
+
+3. Entradas da consulta
+
 • q1_proposta: ${q1_proposta}
 • q2_ticket: ${q2_ticket}
 • q3_regiao: ${q3_regiao}
 • q4_canal: ${q4_canal}
 • q5_texto_livre: "${q5_texto_livre}"
 
-4. FORMATO DE SAÍDA — EXCLUSIVAMENTE JSON PURO E VÁLIDO (SEM CRASES, SEM MARKDOWN, SEM TEXTO EXTRA)
-primary_persona_id, multiplier_persona_id e shadow_persona_id devem ser NÚMEROS INTEIROS DE 1 A 60 existentes no banco e diferentes entre si.
+Validação das entradas:
+• Considere as opções como sinais estratégicos, não como prova de que a proposta realmente possui aquele posicionamento.
+• Se uma entrada estiver ausente, vazia ou fora da lista permitida, registre o problema em premissas_e_lacunas e reduza o grau de confiança.
+• Nunca invente uma região, canal, ticket ou característica não informada.
+• Se q5_texto_livre for insuficiente para entender a proposta, produza a melhor análise possível, mas inclua uma pergunta crítica em pergunta_de_validacao.
+
+4. Método de análise
+
+Antes de gerar o JSON, siga internamente estas etapas:
+1. Resuma a proposta em uma frase objetiva.
+2. Identifique o problema, desejo ou situação de uso que a proposta tenta atender.
+3. Defina o provável público central. Respeite a coerência de nicho: produtos masculinos devem priorizar personas masculinas quando isso for pertinente; o mesmo vale para produtos infantis, femininos, pets e ofertas B2B.
+4. Compare a proposta com as 60 personas disponíveis.
+5. Escolha:
+   • uma persona central, que representa o provável comprador ou usuário principal;
+   • uma persona multiplicadora, que pode ampliar confiança, alcance, recomendação ou distribuição;
+   • uma persona sombra, que representa a principal resistência, risco ou ponto cego.
+6. Justifique cada escolha com evidências do catálogo e do contexto. Não escolha três personas apenas porque seus nomes parecem combinar com a proposta.
+7. Analise a adequação entre proposta, ticket, região e canal.
+8. Identifique a tensão principal entre o que a proposta promete e o que pode dificultar a adoção local.
+9. Converta a análise em um teste inicial de sete dias com ações observáveis e métricas.
+10. Redija somente o JSON final, sem introdução, comentários, Markdown ou bloco de código.
+
+5. Critérios para escolher as personas
+
+Persona central:
+Escolha a persona cujo problema, desejo, poder de compra, hábito ou contexto de uso tenha maior aderência à proposta. A persona central deve representar o cliente mais provável, não necessariamente o público mais amplo.
+
+Persona multiplicadora:
+Escolha a persona que tenha maior potencial de influência, recomendação, circulação territorial, autoridade social, conexão comunitária ou capacidade de reduzir a desconfiança inicial. Ela não precisa ser o comprador principal.
+
+Persona sombra:
+Escolha a persona ou perfil que melhor represente o obstáculo crítico: resistência ao preço, preferência por soluções conhecidas, desconfiança, baixa urgência, inadequação territorial, dificuldade de canal ou qualquer outra barreira relevante.
+
+Desempate entre personas:
+Em caso de empate, priorize nesta ordem:
+1. aderência ao problema descrito;
+2. aderência ao contexto de uso e ao ticket;
+3. compatibilidade territorial;
+4. compatibilidade com o canal informado;
+5. evidência mais específica no material fornecido.
+
+6. Regras de coerência estratégica
+
+• Não recomende Instagram apenas por ser popular. Explique por que ele seria adequado para aquela persona e proposta.
+• Não recomende WhatsApp sem considerar confiança, indicação, comunidade e facilidade de conversão.
+• Não recomende Google/SEO sem considerar intenção de busca e clareza do problema.
+• Não recomende boca a boca ou eventos sem explicar quem inicia a recomendação e em qual território.
+• Não confunda interesse com intenção de compra.
+• Não confunda alcance com conversão.
+• Não confunda persona multiplicadora com influenciador digital.
+• Não presuma que a região escolhida pelo usuário é a melhor região; avalie-a criticamente.
+• Se houver desalinhamento entre ticket, público, região e canal, destaque-o explicitamente.
+• Toda recomendação tática deve ter uma ação, um responsável presumido, um prazo e pelo menos uma métrica.
+
+7. Formato obrigatório de saída
+
+Retorne somente um JSON válido, sem Markdown, sem comentários e sem texto antes ou depois do objeto.
+
+Use exatamente esta estrutura:
 
 {
-  "primary_persona_id": 1,
-  "multiplier_persona_id": 2,
-  "shadow_persona_id": 3,
-  "titulo_leitura": "Título executivo da análise estratégica",
-  "diagnostico_contextual": {
-    "rotulo_contextual": "DIAGNÓSTICO CONTEXTUAL • RADAR SJC 2026",
-    "analise_kapy": "Texto contextualizado, lúcido e aprofundado da Kapy avaliando o ecossistema de SJC, as tensões territoriais e os hábitos da praça, sem simplismos binários ou hipérboles, conduzindo o leitor a ponderar os fatores e formular sua própria conclusão estratégica.",
-    "tese_de_posicionamento": "Frase de posicionamento estratégico consistente para o mercado local."
-  },
+  "primary_persona_id": 0,
+  "multiplier_persona_id": 0,
+  "shadow_persona_id": 0,
+  "confianca_geral": "alta | media | baixa",
+  "titulo_leitura": "",
+  "resumo_executivo": "",
+  "diagnostico_contextual": "",
+  "tese_central": "",
+  "tensao_principal": "",
+  "premissas_e_lacunas": [
+    ""
+  ],
+  "base_da_decisao": [
+    {
+      "tipo": "dado_fornecido | evidencia_de_persona | inferencia | hipotese_a_validar",
+      "fonte": "",
+      "aplicacao": ""
+    }
+  ],
   "bloco_persona_central": {
-    "fala_kapy": "Análise contextual da Kapy introduzindo a Carta I: o perfil da cliente no cotidiano da cidade, suas rotinas e a razão pela qual ela representa a demanda inicial mais provável.",
-    "job_to_be_done": "O que essa pessoa procura solucionar na sua rotina em SJC",
-    "mensagem_conquista": "Diretriz de mensagem com clareza, relevância e sobriedade",
-    "como_vencer_objecao": "Como neutralizar o receio prático dessa compradora"
+    "persona_id": 0,
+    "nome_persona": "",
+    "fala_da_kapy": "",
+    "job_to_be_done": "",
+    "mensagem_de_conquista": "",
+    "objecao_principal": "",
+    "sinal_de_compra": "",
+    "evidencia": ""
   },
   "bloco_alavanca": {
-    "fala_kapy": "Análise contextual da Kapy introduzindo a Carta II: o mecanismo de recomendação e validação social entre pares na cultura joseense.",
-    "mecanismo_influencia": "Como a credibilidade se propaga na prática local",
-    "estrategia_parceria": "Proposta de valor e aproximação colaborativa",
-    "risco_ativacao": "O que evitar para preservar a autenticidade"
+    "persona_id": 0,
+    "nome_persona": "",
+    "fala_da_kapy": "",
+    "mecanismo_de_influencia": "",
+    "estrategia_de_parceria": "",
+    "canal_mais_promissor": "",
+    "risco": "",
+    "evidencia": ""
   },
   "bloco_ponto_cego": {
-    "fala_kapy": "Análise crítica da Kapy introduzindo a Carta III: as forças de inércia e resistência cultural que exigem atenção cuidadosa na operação.",
-    "armadilha_local": "A barreira de hábito ou conveniência na cidade",
-    "o_que_nunca_fazer": "Atitude contraproducente a ser evitada na praça",
-    "acao_blindagem": "Medida preventiva para mitigar a resistência"
+    "persona_id": 0,
+    "nome_persona": "",
+    "fala_da_kapy": "",
+    "armadilha_local": "",
+    "o_que_nunca_fazer": "",
+    "acao_de_blindagem": "",
+    "evidencia": ""
   },
   "bloco_plano_ataque": {
-    "fala_kapy": "Roteiro pragmático de validação: 'Sob a ótica de alocação de tempo e recursos em São José dos Campos, a trajetória mais prudente de validação compreende os seguintes passos:'",
-    "primeiro_passo_7_dias": "Experimento prático de validação inicial com baixo custo operacional.",
-    "passos_taticos": [
+    "objetivo_dos_7_dias": "",
+    "passo_inicial_7_dias": {
+      "acao": "",
+      "territorio": "",
+      "canal": "",
+      "publico": "",
+      "oferta_ou_mensagem": "",
+      "metrica_de_sucesso": "",
+      "limiar_de_decisao": ""
+    },
+    "passos_taticos_prioritarios": [
       {
-        "prioridade": 1,
-        "acao": "Ação de validação inicial",
-        "publico": "Público prioritário",
-        "canal_ou_territorio": "Região ou canal em SJC",
-        "mensagem_ou_oferta": "Oferta de validação",
-        "objetivo": "Resultado prático esperado",
-        "indicador_inicial": "Indicador verificável"
+        "ordem": 1,
+        "acao": "",
+        "canal": "",
+        "territorio": "",
+        "prazo": "",
+        "metrica": "",
+        "hipotese_testada": ""
       },
       {
-        "prioridade": 2,
-        "acao": "Ação de conexão e recomendação",
-        "publico": "Multiplicadores e parceiros",
-        "canal_ou_territorio": "Região ou canal",
-        "mensagem_ou_oferta": "Proposta de valor",
-        "objetivo": "Validação de indicação",
-        "indicador_inicial": "Métrica de recomendação"
+        "ordem": 2,
+        "acao": "",
+        "canal": "",
+        "territorio": "",
+        "prazo": "",
+        "metrica": "",
+        "hipotese_testada": ""
       },
       {
-        "prioridade": 3,
-        "acao": "Consolidação e proteção de reputação",
-        "publico": "Mercado mais amplo",
-        "canal_ou_territorio": "Canais comerciais",
-        "mensagem_ou_oferta": "Garantia e consistência",
-        "objetivo": "Sustentabilidade da operação",
-        "indicador_inicial": "Métrica de retenção"
+        "ordem": 3,
+        "acao": "",
+        "canal": "",
+        "territorio": "",
+        "prazo": "",
+        "metrica": "",
+        "hipotese_testada": ""
       }
     ]
   },
-  "veredito_ideia": {
-    "status": "analise_contextual",
-    "rotulo": "DIAGNÓSTICO CONTEXTUAL • RADAR SJC 2026",
-    "conversa_franca_kapy": "Texto contextualizado da Kapy...",
-    "tese_de_posicionamento": "Tese de posicionamento"
-  },
-  "diagnostico_executivo": "Diagnóstico executivo contextual",
-  "tese_de_posicionamento": "Tese de posicionamento",
-  "analise_persona_central": {
-    "nome_persona": "Nome da Persona Central",
-    "motivo_aderencia": "Motivo",
-    "job_to_be_done": "Job",
-    "mensagem_de_conquista": "Mensagem",
-    "estrategia_abordagem": "Abordagem",
-    "objecao_provavel": "Objeção",
-    "resposta_a_objecao": "Resposta"
-  },
-  "analise_alavanca": {
-    "nome_persona": "Nome da Alavanca",
-    "papel_multiplicador": "Papel",
-    "mecanismo_de_influencia": "Mecanismo",
-    "mensagem_de_ativacao": "Mensagem",
-    "acao_parceria": "Parceria",
-    "risco_da_ativacao": "Risco"
-  },
-  "alerta_ponto_cego": {
-    "nome_persona": "Nome do Ponto Cego",
-    "armadilha_local": "Armadilha",
-    "sinal_de_alerta": "Sinal",
-    "acao_blindagem": "Blindagem",
-    "o_que_nao_fazer": "O que evitar"
-  },
-  "plano_de_ataque_sjc": [
-    {
-      "prioridade": 1,
-      "acao": "Ação 1",
-      "publico": "Público 1",
-      "canal_ou_territorio": "Canal 1",
-      "mensagem_ou_oferta": "Mensagem 1",
-      "objetivo": "Objetivo 1",
-      "indicador_inicial": "Indicador 1"
-    },
-    {
-      "prioridade": 2,
-      "acao": "Ação 2",
-      "publico": "Público 2",
-      "canal_ou_territorio": "Canal 2",
-      "mensagem_ou_oferta": "Mensagem 2",
-      "objetivo": "Objetivo 2",
-      "indicador_inicial": "Indicador 2"
-    },
-    {
-      "prioridade": 3,
-      "acao": "Ação 3",
-      "publico": "Público 3",
-      "canal_ou_territorio": "Canal 3",
-      "mensagem_ou_oferta": "Mensagem 3",
-      "objetivo": "Objetivo 3",
-      "indicador_inicial": "Indicador 3"
+  "pergunta_de_validacao": ""
+}
+
+8. Regras de preenchimento do JSON
+• primary_persona_id, multiplier_persona_id e shadow_persona_id devem ser inteiros entre 1 e 60.
+• Os três IDs devem ser diferentes, salvo quando o catálogo não permitir uma distinção justificável; nesse caso, mantenha os IDs diferentes e explique a limitação em premissas_e_lacunas.
+• nome_persona deve corresponder exatamente ao nome presente no catálogo fornecido.
+• diagnostico_contextual deve começar com o resumo profissional obrigatório da proposta.
+• base_da_decisao deve conter pelo menos três itens: uma evidência da persona central, uma evidência territorial ou de pesquisa e uma inferência ou hipótese a validar.
+• passos_taticos_prioritarios deve conter exatamente três objetos, com ordens 1, 2 e 3.
+• Cada métrica deve ser observável em até sete dias ou ter justificativa para prazo maior.
+• limiar_de_decisao deve indicar o que fazer se o teste tiver resultado forte, fraco ou inconclusivo.
+• Use strings vazias apenas quando a informação for realmente impossível de determinar. Nesses casos, explique a lacuna em premissas_e_lacunas.
+• Escape corretamente aspas e quebras de linha para que o resultado possa ser interpretado por um parser JSON.
+• Não inclua chaves adicionais fora do esquema acima.
+
+9. Controle de qualidade antes da resposta
+Antes de enviar o resultado, confira silenciosamente:
+1. O resultado é JSON puro e válido?
+2. A primeira frase de diagnostico_contextual resume a proposta?
+3. Os três IDs existem no intervalo de 1 a 60 e correspondem às personas escolhidas?
+4. As personas foram escolhidas por aderência e evidência, não por associação superficial?
+5. Há uma tensão local concreta e um risco real?
+6. O plano de sete dias contém ações, território, canal, público e métricas?
+7. As recomendações distinguem fato, inferência e hipótese?
+8. Alguma estatística, característica ou afirmação foi inventada?
+9. O texto é específico para São José dos Campos e para a proposta recebida?
+10. O JSON contém exatamente três passos táticos prioritários?
+Se qualquer resposta for “não”, corrija o objeto antes de enviá-lo.`;
+
+    // Função auxiliar para sanitizar e normalizar o JSON de resposta da IA
+    function normalizeAndValidateOracleJson(parsed, personasList) {
+      if (!parsed || typeof parsed !== 'object') return null;
+
+      const fallbackList = personasList && personasList.length > 0 ? personasList : getFallbackPersonas();
+      const findPersona = (id) => fallbackList.find(p => p.id === Number(id)) || null;
+
+      // Validação e coerção dos IDs (1 a 60)
+      let pId = Number(parsed.primary_persona_id) || 1;
+      let mId = Number(parsed.multiplier_persona_id) || (pId === 1 ? 2 : 1);
+      let sId = Number(parsed.shadow_persona_id) || 3;
+
+      if (pId < 1 || pId > 60) pId = 1;
+      if (mId < 1 || mId > 60 || mId === pId) mId = (pId % 60) + 1;
+      if (sId < 1 || sId > 60 || sId === pId || sId === mId) {
+        sId = 1;
+        while (sId === pId || sId === mId) sId++;
+      }
+
+      parsed.primary_persona_id = pId;
+      parsed.multiplier_persona_id = mId;
+      parsed.shadow_persona_id = sId;
+
+      const primObj = findPersona(pId) || fallbackList[0];
+      const multObj = findPersona(mId) || fallbackList[1];
+      const shadObj = findPersona(sId) || fallbackList[2];
+
+      parsed.primary = primObj;
+      parsed.multiplier = multObj;
+      parsed.shadow = shadObj;
+
+      // Sincronização dos nomes nos blocos
+      if (parsed.bloco_persona_central) {
+        parsed.bloco_persona_central.persona_id = pId;
+        parsed.bloco_persona_central.nome_persona = primObj.nome_completo || parsed.bloco_persona_central.nome_persona;
+        // Aliases para máxima compatibilidade com componentes
+        parsed.bloco_persona_central.fala_kapy = parsed.bloco_persona_central.fala_da_kapy || parsed.bloco_persona_central.fala_kapy || '';
+        parsed.bloco_persona_central.como_vencer_objecao = parsed.bloco_persona_central.objecao_principal || parsed.bloco_persona_central.como_vencer_objecao || '';
+        parsed.bloco_persona_central.mensagem_conquista = parsed.bloco_persona_central.mensagem_de_conquista || parsed.bloco_persona_central.mensagem_conquista || '';
+      }
+
+      if (parsed.bloco_alavanca) {
+        parsed.bloco_alavanca.persona_id = mId;
+        parsed.bloco_alavanca.nome_persona = multObj.nome_completo || parsed.bloco_alavanca.nome_persona;
+        parsed.bloco_alavanca.fala_kapy = parsed.bloco_alavanca.fala_da_kapy || parsed.bloco_alavanca.fala_kapy || '';
+        parsed.bloco_alavanca.mecanismo_influencia = parsed.bloco_alavanca.mecanismo_de_influencia || parsed.bloco_alavanca.mecanismo_influencia || '';
+        parsed.bloco_alavanca.estrategia_parceria = parsed.bloco_alavanca.estrategia_de_parceria || parsed.bloco_alavanca.estrategia_parceria || '';
+        parsed.bloco_alavanca.risco_ativacao = parsed.bloco_alavanca.risco || parsed.bloco_alavanca.risco_ativacao || '';
+      }
+
+      if (parsed.bloco_ponto_cego) {
+        parsed.bloco_ponto_cego.persona_id = sId;
+        parsed.bloco_ponto_cego.nome_persona = shadObj.nome_completo || parsed.bloco_ponto_cego.nome_persona;
+        parsed.bloco_ponto_cego.fala_kapy = parsed.bloco_ponto_cego.fala_da_kapy || parsed.bloco_ponto_cego.fala_kapy || '';
+        parsed.bloco_ponto_cego.acao_blindagem = parsed.bloco_ponto_cego.acao_de_blindagem || parsed.bloco_ponto_cego.acao_blindagem || '';
+      }
+
+      if (parsed.bloco_plano_ataque) {
+        parsed.bloco_plano_ataque.fala_kapy = parsed.bloco_plano_ataque.objetivo_dos_7_dias || parsed.bloco_plano_ataque.fala_kapy || 'Sob a ótica de alocação de esforço e recursos em São José dos Campos, a trajetória mais prudente de validação progressiva compreende os seguintes passos:';
+        parsed.bloco_plano_ataque.primeiro_passo_7_dias = (parsed.bloco_plano_ataque.passo_inicial_7_dias && typeof parsed.bloco_plano_ataque.passo_inicial_7_dias === 'object')
+          ? `${parsed.bloco_plano_ataque.passo_inicial_7_dias.acao || ''} (Meta: ${parsed.bloco_plano_ataque.passo_inicial_7_dias.metrica_de_sucesso || 'Validação inicial'})`
+          : (parsed.bloco_plano_ataque.primeiro_passo_7_dias || 'Rodar teste tático de 7 dias com oferta direta e mensuração da taxa de conversão local.');
+        
+        parsed.bloco_plano_ataque.passos_taticos = (parsed.bloco_plano_ataque.passos_taticos_prioritarios && Array.isArray(parsed.bloco_plano_ataque.passos_taticos_prioritarios))
+          ? parsed.bloco_plano_ataque.passos_taticos_prioritarios.map((p, idx) => ({
+              prioridade: p.ordem || idx + 1,
+              acao: p.acao || '',
+              publico: p.publico || p.hipotese_testada || 'Público prioritário de SJC',
+              canal_ou_territorio: p.territorio ? `${p.territorio} • ${p.canal || ''}` : (p.canal || 'SJC'),
+              mensagem_ou_oferta: p.hipotese_testada || p.acao || '',
+              objetivo: p.metrica || p.acao || '',
+              indicador_inicial: p.metrica || p.prazo || 'Validação direta'
+            }))
+          : (parsed.bloco_plano_ataque.passos_taticos || []);
+      }
+
+      // Aliases do diagnóstico geral
+      const diagTexto = (typeof parsed.diagnostico_contextual === 'string' ? parsed.diagnostico_contextual : parsed.diagnostico_contextual?.analise_kapy) || parsed.resumo_executivo || '';
+      const teseTexto = parsed.tese_central || (typeof parsed.diagnostico_contextual === 'object' ? parsed.diagnostico_contextual?.tese_de_posicionamento : '') || '';
+
+      parsed.diagnostico_executivo = diagTexto;
+      parsed.tese_de_posicionamento = teseTexto;
+      parsed.veredito_ideia = {
+        status: "analise_contextual",
+        rotulo: "DIAGNÓSTICO CONTEXTUAL • SÃO JOSÉ DOS CAMPOS 2026",
+        conversa_franca_kapy: diagTexto,
+        tese_de_posicionamento: teseTexto
+      };
+
+      return parsed;
     }
-  ],
-  "veredito_final": {
-    "recomendacao": "avancar | testar_antes | reformular | nao_recomendar",
-    "justificativa": "Parecer fundamentado",
-    "primeiro_experimento": "Experimento pragmático"
-  }
-}`;
 
     // 2. Execução da IA Generativa (Gemini AI Studio ou Groq)
     const geminiKey = (process.env.GEMINI_API_KEY || "").trim();
@@ -353,7 +519,7 @@ primary_persona_id, multiplier_persona_id e shadow_persona_id devem ser NÚMEROS
               }
             ],
             generationConfig: {
-              temperature: 0.3,
+              temperature: 0.25,
               responseMimeType: "application/json"
             }
           })
@@ -365,9 +531,10 @@ primary_persona_id, multiplier_persona_id e shadow_persona_id devem ser NÚMEROS
           rawJson = rawJson.replace(/^```json\s*/i, '').replace(/```$/g, '').trim();
 
           const parsed = JSON.parse(rawJson);
-          if (parsed && parsed.primary_persona_id && parsed.diagnostico_contextual) {
+          const validated = normalizeAndValidateOracleJson(parsed, personasData);
+          if (validated && validated.primary_persona_id) {
             console.log(" Leitura gerada via Google Gemini com sucesso!");
-            return res.status(200).json(parsed);
+            return res.status(200).json(validated);
           }
         } else {
           console.warn("Gemini API retornou status:", geminiRes.status, await geminiRes.text());
@@ -390,9 +557,9 @@ primary_persona_id, multiplier_persona_id e shadow_persona_id devem ser NÚMEROS
             model: GROQ_MODEL,
             messages: [
               { role: "system", content: systemPrompt },
-              { role: "user", content: `Analise minha proposta e gere a leitura oficial do Oráculo RDR para SJC. Responda APENAS o JSON puro.` }
+              { role: "user", content: `Analise a proposta do usuário e gere o JSON oficial do Oráculo RDR / Kapy. Responda APENAS o JSON puro.` }
             ],
-            temperature: 0.35,
+            temperature: 0.25,
             response_format: { type: "json_object" }
           })
         });
@@ -403,9 +570,10 @@ primary_persona_id, multiplier_persona_id e shadow_persona_id devem ser NÚMEROS
           rawJson = rawJson.replace(/^```json\s*/i, '').replace(/```$/g, '').trim();
 
           const parsed = JSON.parse(rawJson);
-          if (parsed && parsed.primary_persona_id && parsed.analise_persona_central) {
+          const validated = normalizeAndValidateOracleJson(parsed, personasData);
+          if (validated && validated.primary_persona_id) {
             console.log(" Leitura gerada via Groq com sucesso!");
-            return res.status(200).json(parsed);
+            return res.status(200).json(validated);
           }
         } else {
           console.warn("Groq retornou status:", groqRes.status, await groqRes.text());
@@ -457,7 +625,7 @@ function summarizeIdeaPrompt(rawText, answers = {}, regiaoNomes = {}) {
     const prop = propMap[answers.q1_proposta] || "desenvolver um novo projeto comercial";
     return {
       title: `Diagnóstico Estratégico: Posicionamento na ${regiao.split('(')[0].trim()}`,
-      leadSentence: `O seu objetivo é ${prop} com foco na ${regiao}.`
+      leadSentence: `A proposta consiste em ${prop}, com atuação voltada à ${regiao}.`
     };
   }
 
@@ -476,12 +644,12 @@ function summarizeIdeaPrompt(rawText, answers = {}, regiaoNomes = {}) {
   let title = `Diagnóstico Estratégico: ${titleSubject}`;
 
   // Primeira frase: resumo conciso e profissional do prompt da ideia
-  let leadSentence = `A sua proposta é ${intent.charAt(0).toLowerCase() + intent.slice(1)} com atuação na ${regiao}.`;
+  let leadSentence = `A proposta consiste em ${intent.charAt(0).toLowerCase() + intent.slice(1)}, com atuação voltada à ${regiao}.`;
 
   return { title, leadSentence };
 }
 
-// Gerador Determinístico Resiliente (Sempre entrega a estrutura 100% preenchida)
+// Gerador Determinístico Resiliente (Sempre entrega a estrutura 100% preenchida no novo esquema)
 function generateDeterministicOracleReading(answers, personasList) {
   if (!personasList || personasList.length === 0) {
     personasList = getFallbackPersonas();
@@ -562,54 +730,127 @@ function generateDeterministicOracleReading(answers, personasList) {
   const pronMult = isMultM ? 'Ele' : 'Ela';
   const deleMult = isMultM ? 'dele' : 'dela';
 
+  const diagTexto = `${summary.leadSentence} Ao analisar essa proposta sob a ótica de mercado de São José dos Campos, observa-se que o público da ${regiaoNomes[targetReg] || 'região prioritária'} possui poder aquisitivo consistente, contudo exige comprovação prática de qualidade e atendimento com ancoragem local antes de alterar seus hábitos consolidados. A barreira central da praça não é a falta de interesse, mas a inércia em experimentar novidades sem chancela comunitária prévia. Para converter de forma sustentável, a operação deve articular a demanda direta de quem sente a dor diária com a recomendação de pares influentes no território.`;
+
+  const teseTexto = `Posicionar como a referência autoral e confiável da cidade que entrega padrão superior com a conveniência e o acolhimento que o morador de SJC valoriza.`;
+
   return {
     primary_persona_id: primary.id,
     multiplier_persona_id: multiplier.id,
     shadow_persona_id: shadow.id,
+    confianca_geral: "alta",
     titulo_leitura: summary.title,
-    nivel_confianca: "alto",
-    hipoteses_criticas: [
-      `Aderência observada no perfil qualificado de ${primary.bairro}, onde há busca recorrente por soluções locais com alto padrão de entrega.`,
-      `Validação orgânica viabilizada pelo ecossistema de relacionamento e chancela profissional de ${multiplier.nome_completo}.`
+    resumo_executivo: diagTexto,
+    diagnostico_contextual: diagTexto,
+    tese_central: teseTexto,
+    tensao_principal: `A tensão entre a demanda por soluções de alto padrão e a tradicional cautela do consumidor joseense em migrar para novas marcas sem validação comunitária.`,
+    premissas_e_lacunas: [
+      `Premissa: a proposta mantém presença operacional e canal direto no território de ${primary.bairro}.`,
+      `Lacuna: validação quantitativa da elasticidade de preço do serviço na praça.`
     ],
-    diagnostico_contextual: {
-      rotulo_contextual: "DIAGNÓSTICO CONTEXTUAL • SÃO JOSÉ DOS CAMPOS 2026",
-      analise_kapy: `${summary.leadSentence} Ao analisar essa proposta sob a ótica de mercado de São José dos Campos, é essencial observar as dinâmicas de consumo que caracterizam a ${regiaoNomes[targetReg] || 'região prioritária'}. O público desta praça possui capacidade financeira consistente, contudo apresenta um padrão de decisão marcado pela busca de conveniência viária e valorização da confiança. O consumidor local não muda de hábito por impulso: ele pondera a proximidade, a reputação consolidada e o padrão de atendimento. Em vez de impor uma mudança abrupta, a inserção bem-sucedida nesta cidade depende de ancoragem territorial sólida, agilidade no canal ${canalNomes[answers.q4_canal] || 'escolhido'} e validação gradual por quem já possui trânsito na comunidade. As cartas a seguir detalham essas forças:`,
-      tese_de_posicionamento: `Posicionar como a referência autoral e confiável da cidade que entrega padrão superior com a conveniência e o acolhimento que o morador de SJC valoriza.`
-    },
-    veredito_ideia: {
-      status: "analise_contextual",
-      rotulo: "DIAGNÓSTICO CONTEXTUAL • SÃO JOSÉ DOS CAMPOS 2026",
-      conversa_franca_kapy: `${summary.leadSentence} Ao analisar essa proposta sob a ótica de mercado de São José dos Campos, é essencial observar as dinâmicas de consumo que caracterizam a ${regiaoNomes[targetReg] || 'região prioritária'}. O público desta praça possui capacidade financeira consistente, contudo apresenta um padrão de decisão marcado pela busca de conveniência viária e valorização da confiança. O consumidor local não muda de hábito por impulso: ele pondera a proximidade, a reputação consolidada e o padrão de atendimento. Em vez de impor uma mudança abrupta, a inserção bem-sucedida nesta cidade depende de ancoragem territorial sólida, agilidade no canal ${canalNomes[answers.q4_canal] || 'escolhido'} e validação gradual por quem já possui trânsito na comunidade. As cartas a seguir detalham essas forças:`,
-      tese_de_posicionamento: `Posicionar como a referência autoral e confiável da cidade que entrega padrão superior com a conveniência e o acolhimento que o morador de SJC valoriza.`
-    },
+    base_da_decisao: [
+      {
+        tipo: "evidencia_de_persona",
+        fonte: `Catálogo de Personas — ${primary.nome_completo} (ID ${primary.id})`,
+        aplicacao: `Persona Central com aderência de rotina e poder aquisitivo em ${primary.bairro}.`
+      },
+      {
+        tipo: "dado_fornecido",
+        fonte: "Pesquisa Radar SJC 2026 (N=477)",
+        aplicacao: `Comportamento de consumo na ${regiaoNomes[targetReg] || 'região prioritária'} e hábito de deslocamento viário.`
+      },
+      {
+        tipo: "inferencia",
+        fonte: "Movimento Geografia da Inércia / Relatório Oficial",
+        aplicacao: `Adoção condicionada à chancela de pares e eliminação de fricção no primeiro contato via ${canalNomes[answers.q4_canal] || 'canal prioritário'}.`
+      }
+    ],
     bloco_persona_central: {
-      fala_kapy: `Na primeira carta, observamos o perfil de **${primary.nome_completo}**. ${moradorPrimary} de ${primary.bairro}, sua rotina é pautada pela conciliação entre exigências profissionais e gestão do tempo, enfrentando diariamente os nós viários e pontes da cidade. Sua busca não se resume ao produto em si, mas à eliminação de atritos rotineiros sem a necessidade de recorrer à capital. A adesão deste perfil se concretiza quando a comunicação demonstra respeito ao tempo ${delePrimary}, com informações objetivas e canais diretos de suporte.`,
+      persona_id: primary.id,
+      nome_persona: primary.nome_completo,
+      fala_da_kapy: `Na primeira carta, observamos o perfil de **${primary.nome_completo}**. ${moradorPrimary} de ${primary.bairro}, sua rotina é pautada pela conciliação entre exigências profissionais e gestão do tempo, enfrentando diariamente os nós viários da cidade. Sua busca não se resume ao produto em si, mas à eliminação de atritos rotineiros sem a necessidade de recorrer à capital. A adesão deste perfil se concretiza quando a comunicação demonstra respeito ao tempo ${delePrimary}, com informações objetivas e canais diretos de suporte.`,
+      fala_kapy: `Na primeira carta, observamos o perfil de **${primary.nome_completo}**. ${moradorPrimary} de ${primary.bairro}, sua rotina é pautada pela conciliação entre exigências profissionais e gestão do tempo, enfrentando diariamente os nós viários da cidade. Sua busca não se resume ao produto em si, mas à eliminação de atritos rotineiros sem a necessidade de recorrer à capital. A adesão deste perfil se concretiza quando a comunicação demonstra respeito ao tempo ${delePrimary}, com informações objetivas e canais diretos de suporte.`,
       job_to_be_done: "Solucionar sua necessidade com previsibilidade técnica e conveniência, otimizando o tempo e evitando deslocamentos externos desnecessários.",
+      mensagem_de_conquista: `Criado para a realidade de ${primary.bairro}: excelência técnica, previsibilidade e conveniência direta.`,
       mensagem_conquista: `Criado para a realidade de ${primary.bairro}: excelência técnica, previsibilidade e conveniência direta.`,
-      como_vencer_objecao: "Apresentar referências verificáveis na cidade, clareza rigorosa nos prazos e contato humanizado direto com quem decide."
+      objecao_principal: "Receio de pagar por uma promessa que não se sustente na prática ou que gere atrito no atendimento.",
+      como_vencer_objecao: "Apresentar prova social consistente de SJC, clareza cirúrgica nos prazos e contato consultivo direto e ágil.",
+      sinal_de_compra: "Solicitação de tabela de prazos e detalhamento de garantia na primeira mensagem.",
+      evidencia: `Renda de ${primary.faixa_renda || 'perfil qualificado'} e rotina centrada em ${primary.bairro}.`
     },
     bloco_alavanca: {
+      persona_id: multiplier.id,
+      nome_persona: multiplier.nome_completo,
+      fala_da_kapy: `A segunda carta evidencia o papel estratégico de **${multiplier.nome_completo}**. No tecido social de São José dos Campos, a recomendação informal entre pares opera como o principal catalisador de autoridade. Com circulação ativa em ${multiplier.bairro}, ${pronMult.toLowerCase()} atua como um polo natural de referência. A aproximação estratégica não deve ser de venda direta, mas de experiência compartilhada e acesso antecipado, permitindo que a validação técnica espontânea ${deleMult} reduza a barreira de desconfiança do mercado local.`,
       fala_kapy: `A segunda carta evidencia o papel estratégico de **${multiplier.nome_completo}**. No tecido social de São José dos Campos, a recomendação informal entre pares opera como o principal catalisador de autoridade. Com circulação ativa em ${multiplier.bairro}, ${pronMult.toLowerCase()} atua como um polo natural de referência. A aproximação estratégica não deve ser de venda direta, mas de experiência compartilhada e acesso antecipado, permitindo que a validação técnica espontânea ${deleMult} reduza a barreira de desconfiança do mercado local.`,
+      mecanismo_de_influencia: "Recomendação pessoal em círculos profissionais e grupos comunitários locais, onde sua opinião técnica possui peso comprovado.",
       mecanismo_influencia: "Recomendação pessoal em círculos profissionais e grupos comunitários locais, onde sua opinião técnica possui peso comprovado.",
+      estrategia_de_parceria: `Desenvolver uma ação piloto de relacionamento ou co-branding no circuito de ${multiplier.bairro}, concedendo condição diferenciada para sua rede de contatos.`,
       estrategia_parceria: `Desenvolver uma ação piloto de relacionamento ou co-branding no circuito de ${multiplier.bairro}, concedendo condição diferenciada para sua rede de contatos.`,
-      risco_ativacao: "Evitar abordagens estritamente transacionais; a credibilidade da parceria exige que a persona realmente vivencie e valide a entrega."
+      canal_mais_promissor: canalNomes[answers.q4_canal] || "Networking Local",
+      risco: "Abordagem excessivamente transacional ou comercial antes da validação da experiência.",
+      risco_ativacao: "Evitar abordagens estritamente transacionais; a credibilidade da parceria exige que a persona realmente vivencie e valide a entrega.",
+      evidencia: `Circulação ampla e capital social ativo em ${multiplier.bairro}.`
     },
     bloco_ponto_cego: {
+      persona_id: shadow.id,
+      nome_persona: shadow.nome_completo,
+      fala_da_kapy: `A terceira carta convida a uma reflexão atenta sobre a **Geografia da Inércia** em São José dos Campos. O consumidor local frequentemente reconhece a qualidade de uma novidade, porém prefere permanecer em suas escolhas consagradas devido ao receio de decepção ou atrito operacional. Campanhas com promessas infladas ou tom forasteiro tendem a gerar distanciamento silencioso. A mitigação eficaz dessa barreira requer ancoragem local, transparência nas condições e respeito ao ritmo de maturação de confiança da cidade.`,
       fala_kapy: `A terceira carta convida a uma reflexão atenta sobre a **Geografia da Inércia** em São José dos Campos. O consumidor local frequentemente reconhece a qualidade de uma novidade, porém prefere permanecer em suas escolhas consagradas devido ao receio de decepção ou atrito operacional. Campanhas com promessas infladas ou tom forasteiro tendem a gerar distanciamento silencioso. A mitigação eficaz dessa barreira requer ancoragem local, transparência nas condições e respeito ao ritmo de maturação de confiança da cidade.`,
       armadilha_local: "A tradicional cautela joseense diante de novidades apressadas ou abordagens que desconsiderem os hábitos dos bairros e o trânsito viário.",
       o_que_nunca_fazer: "Adotar postura de superioridade metropolitana ou restringir o suporte a fluxos automatizados sem opção de acolhimento humano.",
-      acao_blindagem: "Demonstrar ancoragem e raízes na praça de SJC, explicitar garantias e preservar um canal de atendimento acessível e consultivo."
+      acao_de_blindagem: "Demonstrar ancoragem e raízes na praça de SJC, explicitar garantias e preservar um canal de atendimento acessível e consultivo.",
+      acao_blindagem: "Demonstrar ancoragem e raízes na praça de SJC, explicitar garantias e preservar um canal de atendimento acessível e consultivo.",
+      evidencia: `Apego a rotinas estáveis e forte aversão a atritos de atendimento no movimento ${shadow.movimento || 'Geografia da Inércia'}.`
     },
     bloco_plano_ataque: {
+      objetivo_dos_7_dias: "Validar a proposta com 5 a 10 compradores qualificados no território prioritário e colher os primeiros depoimentos verificáveis.",
       fala_kapy: "Em termos de alocação de esforço e recursos em São José dos Campos, a trajetória mais prudente de validação progressiva compreende os seguintes passos:",
+      passo_inicial_7_dias: {
+        acao: `Implementar oferta inaugural direcionada com atendimento consultivo`,
+        territorio: primary.bairro || "SJC",
+        canal: canalNomes[answers.q4_canal] || "Canal Prioritário",
+        publico: primary.nome_completo + ` e perfis similares`,
+        oferta_ou_mensagem: `Condição inaugural com consultoria assistida e garantia de entrega`,
+        metrica_de_sucesso: `Mínimo de 5 conversões qualificadas e 80% de aprovação espontânea`,
+        limiar_de_decisao: `Se >= 5 conversões: expandir escala; se 1-4 conversões: refinar mensagem de dor; se 0: revisar aderência de ticket e canal.`
+      },
       primeiro_passo_7_dias: `Implementar um teste piloto de 7 dias com oferta direcionada a residentes de ${primary.bairro}, mensurando a resposta espontânea e a taxa de retorno.`,
+      passos_taticos_prioritarios: [
+        {
+          ordem: 1,
+          acao: `Comunicação de posicionamento orientada à dor de ${primary.nome_completo}`,
+          canal: canalNomes[answers.q4_canal] || "Canal Direto",
+          territorio: primary.bairro,
+          prazo: "Dias 1 a 3",
+          metrica: "Taxa de resposta e conversão qualificada no primeiro contato",
+          hipotese_testada: "O público prioritário reconhece a dor e responde à proposta de conveniência."
+        },
+        {
+          ordem: 2,
+          acao: `Ativação da alavanca multiplicadora via ${multiplier.nome_completo}`,
+          canal: "Networking regional e eventos locais",
+          territorio: multiplier.bairro,
+          prazo: "Dias 4 a 5",
+          metrica: "Novos contatos qualificados provenientes de indicação direta",
+          hipotese_testada: "A chancela de pares reduz o custo de aquisição e acelera a confiança."
+        },
+        {
+          ordem: 3,
+          acao: "Blindagem operacional contra os fatores de inércia identificados",
+          canal: "Pontos de contato comerciais e suporte em SJC",
+          territorio: "Praça SJC",
+          prazo: "Dias 6 a 7",
+          metrica: "Redução no tempo médio de fechamento e aumento da retenção",
+          hipotese_testada: "Garantias claras e atendimento humanizado neutralizam a hesitação do joseense."
+        }
+      ],
       passos_taticos: [
         {
           prioridade: 1,
           acao: "Comunicação de posicionamento orientada à dor de " + primary.nome_completo,
           publico: primary.nome_completo + " e residentes de perfil similar em " + primary.bairro,
-          canal_ou_territorio: canalNomes[answers.q4_canal] || "Canal Prioritário",
+          canal_ou_territorio: `${primary.bairro} • ${canalNomes[answers.q4_canal] || "Canal Prioritário"}`,
           mensagem_ou_oferta: "Condição inaugural com atendimento consultivo e acompanhamento próximo",
           objetivo: "Conquistar os primeiros clientes promotores de forma consistente",
           indicador_inicial: "Taxa de resposta e conversão qualificada no primeiro contato"
@@ -618,7 +859,7 @@ function generateDeterministicOracleReading(answers, personasList) {
           prioridade: 2,
           acao: "Ativação da alavanca multiplicadora via " + multiplier.nome_completo,
           publico: "Rede profissional e comunidade de influência de " + multiplier.bairro,
-          canal_ou_territorio: "Networking regional e eventos locais",
+          canal_ou_territorio: `${multiplier.bairro} • Networking Regional`,
           mensagem_ou_oferta: "Apresentação da solução com foco em valor mútuo para o segmento",
           objetivo: "Ativar o ciclo de recomendação espontânea e qualificada",
           indicador_inicial: "Novos contatos provenientes de indicação direta"
@@ -634,65 +875,21 @@ function generateDeterministicOracleReading(answers, personasList) {
         }
       ]
     },
-    diagnostico_executivo: `A proposta possui alta aderência com as tensões reprimidas de São José dos Campos, em especial na ${regiaoNomes[targetReg] || 'região central'}. O joseense deste estrato valoriza conveniência sem atrito, padrão de acabamento superior e atendimento que transmita segurança imediata. Ao utilizar ${canalNomes[answers.q4_canal] || 'o canal prioritário'}, o negócio quebra a inércia dos condomínios fechados e ativa a decisão por recomendação.`,
-    tese_de_posicionamento: `Posicionar como a referência autoral e confiável da cidade que entrega padrão de capital com o acolhimento e a agilidade que o morador de SJC exige.`,
-    analise_persona_central: {
-      nome_persona: primary.nome_completo,
-      motivo_aderencia: `${primary.nome_completo} vive a rotina de ${primary.bairro} e sente diretamente a dor de ${primary.dor_principal || 'falta de soluções sob medida em SJC'}, sendo a compradora natural para validar a proposta nos primeiros 30 dias.`,
-      job_to_be_done: "Resolver sua necessidade com excelência comprovada, economizando tempo e evitando a frustração de deslocamentos para fora da cidade.",
-      mensagem_de_conquista: `Criado para quem vive ${primary.bairro}: excelência técnica, conveniência absoluta e respeito ao seu tempo.`,
-      estrategia_abordagem: `Abordagem focada em transparência e demonstração de valor prático no canal ${canalNomes[answers.q4_canal] || 'escolhido'}, com resposta rápida e sem automações robóticas.`,
-      objecao_provavel: "Receio de pagar por uma promessa que não se sustente na prática ou que gere atrito no atendimento.",
-      resposta_a_objecao: "Apresentar prova social consistente, clareza cirúrgica nos prazos e contato humanizado direto com quem decide."
-    },
-    analise_alavanca: {
-      nome_persona: multiplier.nome_completo,
-      papel_multiplicador: `${multiplier.nome_completo} possui circulação ativa e alto capital relacional em SJC, funcionando como o vetor ideal para expandir a recomendação do negócio.`,
-      mecanismo_de_influencia: "Indicação pessoal em círculos profissionais e grupos comunitários locais, onde sua palavra possui alto peso de validação.",
-      mensagem_de_ativacao: "Convite para acesso exclusivo ou degustação em primeira mão da solução desenhada para a cidade.",
-      acao_parceria: `Propor uma ação piloto de relacionamento ou co-branding no circuito de ${multiplier.bairro}, oferecendo uma condição especial para sua rede de contatos.`,
-      risco_da_ativacao: "Tornar a parceria meramente transacional; é fundamental que a persona realmente experimente e aprove a entrega."
-    },
-    alerta_ponto_cego: {
-      nome_persona: shadow.nome_completo,
-      armadilha_local: "A tradicional desconfiança joseense com novidades apressadas ou marcas que ignoram as particularidades culturais dos bairros e o tráfego viário.",
-      sinal_de_alerta: "Muitos cliques ou visualizações no canal digital, mas baixa conversão em visitas e fechamentos reais.",
-      acao_blindagem: "Reforçar a presença de ancoragem física em SJC, destacar garantias claras e respeitar o ritmo de maturação de confiança da praça.",
-      o_que_nao_fazer: "Usar tom arrogante de fora da cidade ou impor atendimento 100% automatizado sem opção de suporte humano caloroso."
-    },
-    plano_de_ataque_sjc: [
-      {
-        prioridade: 1,
-        acao: "Lançamento da mensagem de conquista com foco na dor de " + primary.nome_completo,
-        publico: primary.nome_completo + " e moradores de perfil similar em " + primary.bairro,
-        canal_ou_territorio: canalNomes[answers.q4_canal] || "Canal Prioritário",
-        mensagem_ou_oferta: "Condição inaugural com atendimento personalizado e validação assistida",
-        objetivo: "Conquistar os primeiros clientes promotores orgânicos",
-        indicador_inicial: "Taxa de resposta e conversão no primeiro contato"
-      },
-      {
-        prioridade: 2,
-        acao: "Ativação da Alavanca Multiplicadora através de " + multiplier.nome_completo,
-        publico: "Rede profissional e comunidade de influência de " + multiplier.bairro,
-        canal_ou_territorio: "Networking regional e eventos locais",
-        mensagem_ou_oferta: "Apresentação da solução com foco em valor compartilhado para a comunidade",
-        objetivo: "Gerar o efeito de recomendação boca a boca qualificada",
-        indicador_inicial: "Novos contatos que chegam citando a indicação"
-      },
-      {
-        prioridade: 3,
-        acao: "Blindagem operacional contra o ponto cego identificado",
-        publico: "Clientes em fase de consideração com perfil conservador",
-        canal_ou_territorio: "Pontos de contato comerciais e suporte em SJC",
-        mensagem_ou_oferta: "Garantias explícitas de entrega e atendimento consultivo direto",
-        objetivo: "Eliminar a barreira de desconfiança e acelerar a decisão",
-        indicador_inicial: "Redução do tempo médio entre o primeiro contato e o fechamento"
-      }
-    ],
-    veredito_final: {
-      recomendacao: "avancar",
-      justificativa: "A proposta preenche uma lacuna viva de valor na cidade e possui público com poder de compra e disposição reprimida para consumir.",
-      primeiro_experimento: `Rodar um teste tático de 7 dias com uma oferta piloto focada nos moradores de ${primary.bairro}, mensurando a taxa de retorno imediato.`
+    pergunta_de_validacao: `Qual é o volume mínimo de clientes nos primeiros 30 dias necessário para cobrir o custo de operação local em ${primary.bairro}?`,
+    // Objetos embutidos para exibição imediata na UI
+    primary: primary,
+    multiplier: multiplier,
+    shadow: shadow,
+    primaryScore: 94,
+    multiplierScore: 88,
+    shadowScore: 72,
+    diagnostico_executivo: diagTexto,
+    tese_de_posicionamento: teseTexto,
+    veredito_ideia: {
+      status: "analise_contextual",
+      rotulo: "DIAGNÓSTICO CONTEXTUAL • SÃO JOSÉ DOS CAMPOS 2026",
+      conversa_franca_kapy: diagTexto,
+      tese_de_posicionamento: teseTexto
     }
   };
 }

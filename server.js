@@ -69,6 +69,9 @@ const server = http.createServer(async (req, res) => {
             },
             send: (data) => {
               res.end(data);
+            },
+            end: () => {
+              res.end();
             }
           };
         };
@@ -78,7 +81,7 @@ const server = http.createServer(async (req, res) => {
         };
         req.query = parsedUrl.query || {};
 
-        if (req.method === 'POST') {
+        if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
           let body = '';
           req.on('data', chunk => { body += chunk; });
           req.on('end', async () => {

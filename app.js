@@ -209,188 +209,418 @@ window.switchMainTab = function(tabName) {
 };
 
 // =========================================================================
-// MÓDULO INTERATIVO: TÚNEL DO TEMPO & HISTÓRIA DE SÃO JOSÉ DOS CAMPOS
+// MÓDULO INTERATIVO: RADAR SJC MEMÓRIA VIVA (CLEAN ANALYTICS UI)
 // =========================================================================
 
 window.historiaState = {
-  currentSubTab: 'timeline',
-  selectedYear: null
+  currentViewMode: 'timeline', // 'timeline' ou 'mapa'
+  currentSubTab: 'personalidades', // 'personalidades', 'prefeitos', 'acervos', 'participar'
+  selectedEra: 'all',
+  selectedEvidence: 'all',
+  searchQuery: '',
+  mapInstance: null,
+  mapMarkers: []
 };
 
 window.renderHistoriaDashboard = function() {
   const data = window.HISTORIA_SJC_DATA;
   if (!data) return;
 
-  // Atualizar contadores do sidebar
-  const totalCountEl = document.getElementById("historia-total-base-count");
-  if (totalCountEl) totalCountEl.textContent = data.eventos.length;
-
-  // Renderizar régua de anos
-  window.renderHistoriaYearsBar();
-
-  // Renderizar conteúdo inicial
+  // Renderizar a Linha do Tempo e Filtros
   window.filterHistoriaEvents();
+
+  // Renderizar Sub-abas (Personalidades e Prefeitos)
   window.renderHistoriaPersonalidades();
   window.renderHistoriaPrefeitos();
 };
 
-window.renderHistoriaYearsBar = function() {
-  const container = document.getElementById("historia-years-bar");
-  if (!container || !window.HISTORIA_SJC_DATA) return;
+window.selectHistoriaEra = function(eraId) {
+  window.historiaState.selectedEra = eraId;
 
-  const marcos = window.HISTORIA_SJC_DATA.marcosAnosDestaque;
-  let html = `<button type="button" onclick="window.selectHistoriaYear(null)" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${window.historiaState.selectedYear === null ? 'bg-purple-900 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'} cursor-pointer whitespace-nowrap">
-    Todos os Anos
-  </button>`;
-
-  marcos.forEach(ano => {
-    const active = window.historiaState.selectedYear === ano;
-    html += `<button type="button" onclick="window.selectHistoriaYear(${ano})" class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${active ? 'bg-purple-900 text-white shadow-xs' : 'bg-slate-100 hover:bg-slate-200 text-slate-700'} cursor-pointer whitespace-nowrap">
-      ${ano}
-    </button>`;
+  // Atualizar Pills visuais de Era
+  const eras = ['all', 'colonial', 'sanatorial', 'tecnologica', 'contemporanea'];
+  eras.forEach(e => {
+    const pill = document.getElementById(`pill-era-${e}`);
+    if (pill) {
+      if (e === eraId) {
+        pill.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+      } else {
+        pill.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+      }
+    }
   });
 
-  container.innerHTML = html;
+  window.filterHistoriaEvents();
 };
 
-window.selectHistoriaYear = function(ano) {
-  window.historiaState.selectedYear = ano;
-  window.renderHistoriaYearsBar();
-  window.filterHistoriaEvents();
+window.switchHistoriaViewMode = function(mode) {
+  window.historiaState.currentViewMode = mode;
+  const viewTimeline = document.getElementById("historia-view-timeline");
+  const viewMapa = document.getElementById("historia-view-mapa");
+  const btnTimeline = document.getElementById("btn-hist-mode-timeline");
+  const btnMapa = document.getElementById("btn-hist-mode-mapa");
+
+  if (mode === 'timeline') {
+    if (viewTimeline) viewTimeline.classList.remove("hidden");
+    if (viewMapa) viewMapa.classList.add("hidden");
+    if (btnTimeline) btnTimeline.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+    if (btnMapa) btnMapa.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+  } else if (mode === 'mapa') {
+    if (viewTimeline) viewTimeline.classList.add("hidden");
+    if (viewMapa) viewMapa.classList.remove("hidden");
+    if (btnTimeline) btnTimeline.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+    if (btnMapa) btnMapa.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+
+    setTimeout(() => {
+      window.initHistoriaMap();
+    }, 150);
+  }
 };
 
 window.filterHistoriaEvents = function() {
   const data = window.HISTORIA_SJC_DATA;
-  if (!data) return;
+  if (!data || !data.eventos) return;
 
-  const filterEpoca = document.getElementById("filter-historia-epoca")?.value || "all";
-  const filterEixo = document.getElementById("filter-historia-eixo")?.value || "all";
-  const filterConfianca = document.getElementById("filter-historia-confianca")?.value || "all";
-  const filterSearch = (document.getElementById("filter-historia-search")?.value || "").toLowerCase().trim();
+  const searchInput = document.getElementById("historia-search-input");
+  const evidenceSelect = document.getElementById("historia-evidence-select");
+  const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
+  const evidence = evidenceSelect ? evidenceSelect.value : "all";
+  const era = window.historiaState.selectedEra;
 
-  let filtered = data.eventos.filter(ev => {
-    // Ano selecionado na barra
-    if (window.historiaState.selectedYear && ev.ano !== window.historiaState.selectedYear) {
-      return false;
-    }
+  const filtered = data.eventos.filter(ev => {
+    // Filtro por Era
+    if (era !== 'all' && ev.eraId !== era) return false;
 
-    // Época
-    if (filterEpoca !== "all") {
-      const epocaObj = data.epocas.find(e => e.id === filterEpoca);
-      if (epocaObj && (ev.ano < epocaObj.minAno || ev.ano > epocaObj.maxAno)) {
-        return false;
-      }
-    }
+    // Filtro por Nível de Evidência
+    if (evidence !== 'all' && ev.evidencia !== evidence) return false;
 
-    // Eixo
-    if (filterEixo !== "all" && ev.eixo !== filterEixo) {
-      return false;
-    }
-
-    // Confiança
-    if (filterConfianca !== "all" && !ev.situacao.includes(filterConfianca)) {
-      return false;
-    }
-
-    // Busca textual
-    if (filterSearch) {
-      const searchBlob = `${ev.ano} ${ev.titulo} ${ev.resumo} ${ev.detalhes} ${ev.fontes}`.toLowerCase();
-      if (!searchBlob.includes(filterSearch)) return false;
+    // Filtro por Busca de Texto
+    if (query) {
+      const matchTitle = (ev.titulo || "").toLowerCase().includes(query);
+      const matchResumo = (ev.resumo || "").toLowerCase().includes(query);
+      const matchAno = String(ev.ano).includes(query);
+      const matchLocal = (ev.local || "").toLowerCase().includes(query);
+      const matchPessoas = (ev.pessoasEnvolvidas || []).some(p => p.toLowerCase().includes(query));
+      if (!matchTitle && !matchResumo && !matchAno && !matchLocal && !matchPessoas) return false;
     }
 
     return true;
   });
 
-  // Atualizar contador de filtrados
-  const countEl = document.getElementById("historia-filtered-records-count");
-  if (countEl) countEl.textContent = filtered.length;
+  // Atualizar Contadores (Top e Sidebar)
+  const counter = document.getElementById("historia-counter-badge");
+  if (counter) {
+    counter.textContent = `Mostrando ${filtered.length} de ${data.eventos.length} marcos`;
+  }
+  const sidebarFilteredCount = document.getElementById("historia-filtered-records-count");
+  const sidebarTotalCount = document.getElementById("historia-total-base-count");
+  if (sidebarFilteredCount) sidebarFilteredCount.textContent = filtered.length;
+  if (sidebarTotalCount) sidebarTotalCount.textContent = data.eventos.length;
 
-  window.renderHistoriaTimeline(filtered);
+  // Renderizar Cards
+  window.renderHistoriaTimelineCards(filtered);
+
+  // Se mapa estiver ativo, atualizar marcadores
+  if (window.historiaState.mapInstance) {
+    window.updateHistoriaMapMarkers(filtered);
+  }
 };
 
-window.renderHistoriaTimeline = function(eventosList) {
-  const container = document.getElementById("historia-timeline-container");
+window.renderHistoriaTimelineCards = function(events) {
+  const container = document.getElementById("historia-cards-container");
   if (!container) return;
 
-  if (eventosList.length === 0) {
+  if (!events || events.length === 0) {
     container.innerHTML = `
-      <div class="p-8 text-center bg-white rounded-2xl border border-slate-200 space-y-2">
-        <i class="fa-solid fa-hourglass-empty text-3xl text-slate-300"></i>
-        <p class="text-sm font-bold text-slate-700">Nenhum marco histórico encontrado para este filtro.</p>
-        <p class="text-xs text-slate-400">Tente ajustar a busca ou clicar em "Limpar Filtros de História".</p>
+      <div class="col-span-full p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-400 space-y-3">
+        <i class="fa-solid fa-folder-open text-4xl text-slate-300"></i>
+        <h4 class="text-sm font-bold text-slate-700">Nenhum marco histórico encontrado</h4>
+        <p class="text-xs text-slate-500">Tente ajustar seus termos de busca ou selecionar outra fase histórica.</p>
+        <button onclick="window.resetHistoriaFilters()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all cursor-pointer">
+          Limpar Filtros
+        </button>
       </div>
     `;
     return;
   }
 
-  // Mapear ícones por eixo
-  const eixoIconMap = {
-    fundacao: "fa-landmark text-amber-500",
-    saude: "fa-notes-medical text-rose-500",
-    ciencia: "fa-plane-departure text-cyan-600",
-    cultura: "fa-masks-theater text-purple-600",
-    ambiente: "fa-leaf text-emerald-600",
-    trabalho: "fa-industry text-indigo-600"
+  // Mapeamento de Badges de Evidência
+  const evidenciaBadges = {
+    documentado: { text: "Documentado", bg: "bg-emerald-50 text-emerald-700 border-emerald-200", icon: "fa-circle-check" },
+    corroborado: { text: "Corroborado", bg: "bg-blue-50 text-blue-700 border-blue-200", icon: "fa-circle-dot" },
+    em_investigacao: { text: "Em Investigação", bg: "bg-amber-50 text-amber-700 border-amber-200", icon: "fa-magnifying-glass" },
+    em_disputa: { text: "Em Disputa", bg: "bg-rose-50 text-rose-700 border-rose-200", icon: "fa-scale-unbalanced" }
   };
 
-  container.innerHTML = eventosList.map(ev => {
-    const iconClass = eixoIconMap[ev.eixo] || "fa-clock text-purple-600";
-    
-    let confiancaBadgeClass = "bg-emerald-50 text-emerald-800 border-emerald-200";
-    if (ev.situacao.includes("HIPÓTESE")) confiancaBadgeClass = "bg-amber-50 text-amber-800 border-amber-200";
-    if (ev.situacao.includes("CONFLITO")) confiancaBadgeClass = "bg-rose-50 text-rose-800 border-rose-200";
-    if (ev.situacao.includes("LACUNA")) confiancaBadgeClass = "bg-slate-100 text-slate-700 border-slate-300";
+  const eixoLabels = {
+    fundacao: "Institucional & Território",
+    saude: "Saúde & Sanatórios",
+    ciencia: "Ciência & Aeroespacial",
+    cultura: "Cultura & Sociedade",
+    ambiente: "Meio Ambiente & Território",
+    trabalho: "Indústria & Trabalho"
+  };
+
+  container.innerHTML = events.map(ev => {
+    const evBadge = evidenciaBadges[ev.evidencia] || evidenciaBadges.documentado;
+    const eixoName = eixoLabels[ev.eixo] || "História SJC";
+    const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial SJC", url: "https://www.camarasjc.sp.gov.br/promemoria/" };
 
     return `
-      <div class="relative group">
-        <!-- Marcador luminoso no trilho da timeline -->
-        <div class="absolute -left-[27px] sm:-left-[41px] top-1.5 w-6 h-6 rounded-full bg-white border-4 border-purple-600 shadow-sm group-hover:scale-125 transition-all flex items-center justify-center"></div>
-
-        <!-- Card do Evento Histórico -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-card hover:shadow-card-hover transition-all space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-            <div class="flex items-center gap-3">
-              <span class="text-lg font-black text-brand-950 font-mono bg-purple-50 border border-purple-100 px-3 py-1 rounded-xl">
-                ${ev.ano}
-              </span>
-              <span class="text-xs font-semibold text-slate-500">${ev.periodo}</span>
-            </div>
-            
-            <div class="flex items-center gap-2">
-              <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full border ${confiancaBadgeClass}">
-                ${ev.situacao}
-              </span>
-              <span class="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-xs">
-                <i class="fa-solid ${iconClass}"></i>
-              </span>
-            </div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4">
+        
+        <!-- Cabeçalho do Card: Ano + Categoria + Nível de Evidência -->
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-black bg-slate-900 text-white font-mono shadow-xs">
+              ${ev.ano}
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700">
+              ${eixoName}
+            </span>
           </div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border ${evBadge.bg}">
+            <i class="fa-solid ${evBadge.icon} text-[9px]"></i>
+            <span>${evBadge.text}</span>
+          </span>
+        </div>
 
-          <h3 class="text-base sm:text-lg font-black text-brand-950 leading-snug">
+        <!-- Título e Resumo -->
+        <div class="space-y-2">
+          <h3 class="text-base font-black text-slate-900 leading-snug">
             ${ev.titulo}
           </h3>
-
-          <p class="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
+          <p class="text-xs text-slate-600 font-medium leading-relaxed">
             ${ev.resumo}
           </p>
-
-          ${ev.detalhes ? `
-            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-600 leading-relaxed font-normal">
-              <strong class="text-brand-900 font-bold">Nota do Dossiê:</strong> ${ev.detalhes}
-            </div>
-          ` : ''}
-
-          <div class="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-100">
-            <span class="flex items-center gap-1.5 font-medium">
-              <i class="fa-solid fa-book-open text-purple-600"></i>
-              Fonte: <strong class="text-slate-600 font-semibold">${ev.fontes}</strong>
-            </span>
-            <span class="text-[10px] font-mono text-slate-400">ID: ${ev.id}</span>
-          </div>
         </div>
+
+        <!-- Citação Documental (quando houver) -->
+        ${ev.citacao ? `
+          <div class="p-3.5 rounded-xl bg-slate-50 border-l-4 border-teal-500 text-xs italic text-slate-700 font-medium">
+            ${ev.citacao}
+          </div>
+        ` : ''}
+
+        <!-- Rodapé do Card: Validação com Link Direto e Botão Dossiê -->
+        <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+          <!-- Link Direto para a Fonte Primária -->
+          <a 
+            href="${primSource.url}" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 transition-colors"
+            title="Validar diretamente na fonte oficial: ${primSource.nome}"
+          >
+            <i class="fa-solid fa-file-circle-check text-teal-600"></i>
+            <span class="max-w-[210px] truncate">Validar: ${primSource.nome}</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-teal-600"></i>
+          </a>
+
+          <!-- Botão Dossiê / Detalhes -->
+          <button 
+            type="button" 
+            onclick="window.openHistoriaFonteModal('${ev.id}')" 
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+          >
+            <i class="fa-solid fa-circle-info text-slate-500"></i>
+            <span>Dossiê & Fatos</span>
+          </button>
+        </div>
+
       </div>
     `;
   }).join('');
+};
+
+window.openHistoriaFonteModal = function(eventId) {
+  const data = window.HISTORIA_SJC_DATA;
+  if (!data || !data.eventos) return;
+
+  const ev = data.eventos.find(e => e.id === eventId);
+  if (!ev) return;
+
+  const modal = document.getElementById("historia-fonte-modal");
+  const titulo = document.getElementById("modal-fonte-titulo");
+  const conteudo = document.getElementById("modal-fonte-conteudo");
+  const linkExterno = document.getElementById("modal-fonte-link-externo");
+
+  if (!modal || !conteudo) return;
+
+  titulo.textContent = `${ev.ano} — ${ev.titulo}`;
+
+  const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial SJC", url: "https://www.camarasjc.sp.gov.br/promemoria/" };
+  if (linkExterno) {
+    linkExterno.href = primSource.url;
+    linkExterno.querySelector('span').textContent = `Acessar ${primSource.nome}`;
+  }
+
+  const fontesList = (ev.fontes || []).map(f => `
+    <li class="p-3 bg-white rounded-xl border border-slate-200 flex items-center justify-between gap-3">
+      <div>
+        <strong class="text-xs text-slate-900 block">${f.nome}</strong>
+        <span class="text-[10px] text-slate-500 font-semibold">${f.tipo || 'Acervo Histórico'}</span>
+      </div>
+      <a href="${f.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-teal-50 text-teal-700 hover:bg-teal-100 rounded-lg font-bold text-[11px] border border-teal-200 transition-colors shrink-0">
+        Ver Documento ↗
+      </a>
+    </li>
+  `).join('');
+
+  conteudo.innerHTML = `
+    <div class="space-y-3">
+      <div class="p-3.5 rounded-xl bg-teal-50/60 border border-teal-200 text-teal-950 space-y-1">
+        <span class="text-[10px] font-black uppercase tracking-wider text-teal-800 block">Nível de Evidência: ${ev.evidencia.toUpperCase()}</span>
+        <p class="text-xs font-semibold leading-relaxed">${ev.resumo}</p>
+      </div>
+
+      ${ev.detalhes ? `
+        <div class="space-y-1">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Contexto & Análise Historiográfica:</span>
+          <p class="text-xs text-slate-700 leading-relaxed font-medium bg-slate-50 p-3.5 rounded-xl border border-slate-200">${ev.detalhes}</p>
+        </div>
+      ` : ''}
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <span class="text-[10px] font-bold text-slate-500 uppercase block">Local Histórico</span>
+          <strong class="text-xs text-slate-800">${ev.local || 'São José dos Campos'}</strong>
+        </div>
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <span class="text-[10px] font-bold text-slate-500 uppercase block">Pessoas Envolvidas</span>
+          <strong class="text-xs text-slate-800">${(ev.pessoasEnvolvidas || []).join(', ') || 'Agentes Históricos'}</strong>
+        </div>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">Fontes Primárias & Custódia:</span>
+        <ul class="space-y-2">
+          ${fontesList}
+        </ul>
+      </div>
+    </div>
+  `;
+
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+};
+
+window.closeHistoriaFonteModal = function() {
+  const modal = document.getElementById("historia-fonte-modal");
+  if (modal) modal.classList.add("hidden");
+  document.body.style.overflow = "";
+};
+
+window.initHistoriaMap = function() {
+  const mapContainer = document.getElementById("historia-map-leaflet");
+  if (!mapContainer || typeof L === 'undefined') return;
+
+  if (window.historiaState.mapInstance) {
+    window.historiaState.mapInstance.invalidateSize();
+    return;
+  }
+
+  // Centro de São José dos Campos
+  const map = L.map('historia-map-leaflet', {
+    center: [-23.195, -45.895],
+    zoom: 12,
+    zoomControl: true
+  });
+
+  // Camada CartoDB Positron (Clean Light Theme)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  window.historiaState.mapInstance = map;
+
+  const data = window.HISTORIA_SJC_DATA;
+  if (data && data.eventos) {
+    window.updateHistoriaMapMarkers(data.eventos);
+  }
+};
+
+window.updateHistoriaMapMarkers = function(events) {
+  const map = window.historiaState.mapInstance;
+  if (!map || typeof L === 'undefined') return;
+
+  // Limpar marcadores anteriores
+  window.historiaState.mapMarkers.forEach(m => map.removeLayer(m));
+  window.historiaState.mapMarkers = [];
+
+  events.forEach(ev => {
+    if (!ev.lat || !ev.lng) return;
+
+    const markerIcon = L.divIcon({
+      className: 'historia-custom-pin',
+      html: `
+        <div style="background-color: #0f172a; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.25); border: 2px solid white; cursor: pointer;">
+          ${String(ev.ano).slice(-2)}
+        </div>
+      `,
+      iconSize: [32, 32],
+      iconAnchor: [16, 16]
+    });
+
+    const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial", url: "#" };
+
+    const popupHtml = `
+      <div style="padding: 6px; max-width: 240px; font-family: system-ui, sans-serif;">
+        <span style="font-size: 10px; font-weight: 800; color: #0891b2; text-transform: uppercase;">Ano ${ev.ano}</span>
+        <h4 style="margin: 4px 0 6px 0; font-size: 13px; font-weight: 800; color: #0f172a; line-height: 1.2;">${ev.titulo}</h4>
+        <p style="margin: 0 0 8px 0; font-size: 11px; color: #475569; line-height: 1.4;">${ev.resumo.slice(0, 110)}...</p>
+        <div style="display: flex; gap: 6px; align-items: center;">
+          <a href="${primSource.url}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #0891b2; text-decoration: none;">
+            Validar Fonte ↗
+          </a>
+        </div>
+      </div>
+    `;
+
+    const marker = L.marker([ev.lat, ev.lng], { icon: markerIcon }).bindPopup(popupHtml);
+    marker.addTo(map);
+    window.historiaState.mapMarkers.push(marker);
+  });
+};
+
+window.switchHistoriaSubTab = function(subTabName) {
+  const tabs = ['personalidades', 'prefeitos', 'acervos', 'participar'];
+  tabs.forEach(t => {
+    const el = document.getElementById(`subview-${t}`);
+    const btn = document.getElementById(`btn-sub-${t}`);
+
+    if (el) {
+      if (t === subTabName) {
+        el.classList.remove("hidden");
+      } else {
+        el.classList.add("hidden");
+      }
+    }
+
+    if (btn) {
+      if (t === subTabName) {
+        btn.className = "px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap";
+      } else if (t === 'participar') {
+        btn.className = "px-4 py-2 rounded-xl font-bold transition-all text-amber-800 hover:bg-amber-100/60 cursor-pointer whitespace-nowrap ml-auto";
+      } else {
+        btn.className = "px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap";
+      }
+    }
+  });
+};
+
+window.openPorQue1767Modal = function() {
+  const modal = document.getElementById("modal-porque-1767");
+  if (modal) modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+};
+
+window.closePorQue1767Modal = function() {
+  const modal = document.getElementById("modal-porque-1767");
+  if (modal) modal.classList.add("hidden");
+  document.body.style.overflow = "";
 };
 
 window.renderHistoriaPersonalidades = function() {
@@ -398,19 +628,20 @@ window.renderHistoriaPersonalidades = function() {
   if (!container || !window.HISTORIA_SJC_DATA) return;
 
   container.innerHTML = window.HISTORIA_SJC_DATA.personalidades.map(p => `
-    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 hover:border-purple-300 transition-all flex flex-col justify-between space-y-3">
-      <div class="space-y-2">
-        <div class="w-10 h-10 rounded-xl bg-brand-900 text-accent-cyan flex items-center justify-center text-lg font-black shadow-xs">
+    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 hover:border-teal-400 hover:shadow-md transition-all flex flex-col justify-between space-y-3">
+      <div class="space-y-2.5">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 text-teal-400 flex items-center justify-center text-base font-black shadow-xs">
           ${p.nome.charAt(0)}
         </div>
         <div>
-          <h4 class="text-sm font-black text-brand-950">${p.nome}</h4>
-          <p class="text-[11px] font-bold text-purple-700">${p.cargo}</p>
+          <h4 class="text-sm font-black text-slate-900">${p.nome}</h4>
+          <p class="text-[11px] font-bold text-teal-700">${p.cargo}</p>
+          <span class="text-[10px] font-mono text-slate-400">${p.periodo || ''}</span>
         </div>
         <p class="text-xs text-slate-600 font-medium leading-relaxed">${p.descricao}</p>
       </div>
-      <div>
-        <span class="inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800">
+      <div class="pt-2 border-t border-slate-200/60">
+        <span class="inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-700">
           ${p.tag}
         </span>
       </div>
@@ -422,53 +653,40 @@ window.renderHistoriaPrefeitos = function() {
   const tbody = document.getElementById("historia-prefeitos-table-body");
   if (!tbody || !window.HISTORIA_SJC_DATA) return;
 
-  tbody.innerHTML = window.HISTORIA_SJC_DATA.prefeitos.map(pref => `
-    <tr class="hover:bg-slate-50 transition-colors">
-      <td class="px-4 py-3 font-bold text-brand-900 whitespace-nowrap">${pref.periodo}</td>
-      <td class="px-4 py-3 font-black text-slate-900">${pref.nome}</td>
-      <td class="px-4 py-3 font-medium text-slate-600">${pref.cargo}</td>
-      <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">${pref.acesso}</span></td>
-      <td class="px-4 py-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold ${pref.situacao.includes('LACUNA') ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'}">${pref.situacao}</span></td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = window.HISTORIA_SJC_DATA.prefeitos.map(pref => {
+    const isLacuna = pref.situacao.includes('LACUNA') || pref.situacao.includes('INVESTIGAÇÃO');
+    const badgeClass = isLacuna ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300';
+    return `
+      <tr class="hover:bg-slate-50 transition-colors">
+        <td class="px-4 py-3 font-bold text-slate-900 whitespace-nowrap font-mono">${pref.periodo}</td>
+        <td class="px-4 py-3 font-black text-slate-900">${pref.nome}</td>
+        <td class="px-4 py-3 font-medium text-slate-600">${pref.cargo}</td>
+        <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">${pref.acesso}</span></td>
+        <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold ${badgeClass}">${pref.situacao}</span></td>
+      </tr>
+    `;
+  }).join('');
 };
 
 window.resetHistoriaFilters = function() {
-  const elEpoca = document.getElementById("filter-historia-epoca");
-  const elEixo = document.getElementById("filter-historia-eixo");
-  const elConfianca = document.getElementById("filter-historia-confianca");
-  const elSearch = document.getElementById("filter-historia-search");
-
-  if (elEpoca) elEpoca.value = "all";
-  if (elEixo) elEixo.value = "all";
-  if (elConfianca) elConfianca.value = "all";
-  if (elSearch) elSearch.value = "";
-
-  window.historiaState.selectedYear = null;
-  window.renderHistoriaYearsBar();
-  window.filterHistoriaEvents();
+  const searchInput = document.getElementById("historia-search-input");
+  const evidenceSelect = document.getElementById("historia-evidence-select");
+  if (searchInput) searchInput.value = "";
+  if (evidenceSelect) evidenceSelect.value = "all";
+  window.selectHistoriaEra('all');
 };
 
-window.switchHistoriaSubTab = function(subTabName) {
-  const tabs = ['timeline', 'personalidades', 'prefeitos', 'fontes'];
-  tabs.forEach(t => {
-    const el = document.getElementById(`historia-sub-${t}`);
-    const btn = document.getElementById(`btn-hist-sub-${t}`);
-    if (el) {
-      if (t === subTabName) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      }
-    }
-    if (btn) {
-      if (t === subTabName) {
-        btn.className = "px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-900 text-white shadow-xs cursor-pointer";
-      } else {
-        btn.className = "px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer";
-      }
-    }
-  });
+window.submitHistoriaSugestao = function(e) {
+  e.preventDefault();
+  const feedback = document.getElementById("sugestao-feedback-msg");
+  const form = document.getElementById("form-sugerir-historia");
+
+  if (feedback) feedback.classList.remove("hidden");
+  if (form) form.reset();
+
+  setTimeout(() => {
+    if (feedback) feedback.classList.add("hidden");
+  }, 7000);
 };
 
 const IMAGE_BANK_ITEMS = [
@@ -1017,6 +1235,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function checkActiveSession() {
+  const hash = (window.location.hash || "").replace("#", "").trim();
+  if (hash === "historia") {
+    showDashboard({ email: "visitante@radarsaojose.com" });
+    return;
+  }
   if (!supabaseClient) {
     showLogin();
     return;
@@ -29255,7 +29478,11 @@ window.handleConsultorSubmit = async function(e) {
   if (!input) return;
 
   const userQuestion = input.value.trim();
-  if (!userQuestion) return;
+  if (!userQuestion) {
+    input.focus();
+    alert("Por favor, digite uma ideia ou nicho de negócio para auditar (ex: 'Loja de calcinhas no Jardim da Granja').");
+    return;
+  }
 
   window.currentAuditedTopic = userQuestion;
   window.consultorChatHistory = [{ role: "user", content: userQuestion }];
@@ -29292,7 +29519,17 @@ window.handleConsultorSubmit = async function(e) {
       })
     });
 
-    const startData = await startRes.json();
+    const startText = await startRes.text();
+    let startData;
+    try {
+      startData = JSON.parse(startText);
+    } catch (parseErr) {
+      if (startText.includes("<!DOCTYPE") || startText.includes("<html") || startText.includes("<body")) {
+        throw new Error("O servidor local na porta atual está rodando em modo puramente estático e não possui as rotas da API ativas.\n\n👉 Para rodar localmente com o backend ativo, execute no terminal:\nnode server.js\n\nE abra no navegador:\nhttp://localhost:3000/app.html");
+      }
+      throw new Error(`Resposta não-JSON do servidor (HTTP ${startRes.status}): ${startText.slice(0, 150)}`);
+    }
+
     if (!startRes.ok || !startData.job_id) {
       throw new Error(startData.error || startData.details || `Falha ao iniciar processamento (HTTP ${startRes.status})`);
     }
@@ -29311,7 +29548,13 @@ window.handleConsultorSubmit = async function(e) {
 
       try {
         const statusRes = await fetch(`/api/consultor?action=status&job_id=${encodeURIComponent(jobId)}`);
-        const statusData = await statusRes.json();
+        const statusText = await statusRes.text();
+        let statusData;
+        try {
+          statusData = JSON.parse(statusText);
+        } catch (e) {
+          throw new Error(`Erro ao interpretar status da API (HTTP ${statusRes.status}): ${statusText.slice(0, 100)}`);
+        }
 
         if (!statusRes.ok) {
           if (statusData.error_code === "JOB_NOT_FOUND" || statusRes.status === 404) {
@@ -29338,15 +29581,8 @@ window.handleConsultorSubmit = async function(e) {
         if (statusData.status === "running" || statusData.status === "queued") {
           const progress = Math.min(95, Math.max(8, statusData.progress_percent || 10));
           if (loadingProgressBar) loadingProgressBar.style.width = progress + "%";
-          
-          let estText = "";
-          if (statusData.estimated_remaining_seconds > 0) {
-            const secs = statusData.estimated_remaining_seconds;
-            estText = secs > 60 ? ` (~${Math.ceil(secs / 60)} min)` : ` (~${secs}s)`;
-          }
-
           if (loadingStatusText) {
-            loadingStatusText.innerText = (statusData.message || statusData.current_module_label || "Processando cruzamento de microdados...") + estText;
+            loadingStatusText.innerText = statusData.message || `Processando ${statusData.current_module_label || 'Etapa ' + statusData.current_step}...`;
           }
         } else if (statusData.status === "completed") {
           isCompleted = true;
@@ -29355,7 +29591,13 @@ window.handleConsultorSubmit = async function(e) {
 
           // 3. Buscar Resultado Final Consolidado
           const resultRes = await fetch(`/api/consultor?action=result&job_id=${encodeURIComponent(jobId)}`);
-          const resultData = await resultRes.json();
+          const resultText = await resultRes.text();
+          let resultData;
+          try {
+            resultData = JSON.parse(resultText);
+          } catch (e) {
+            throw new Error(`Erro ao interpretar relatório final da API: ${resultText.slice(0, 100)}`);
+          }
 
           if (!resultRes.ok || !resultData.result) {
             throw new Error(resultData.error || "Erro ao resgatar o relatório consolidado.");

@@ -5,17 +5,42 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
+// Carregador autônomo de variáveis de ambiente (.env)
+function loadEnvLocal() {
+  const envCandidates = [
+    path.join(process.cwd(), '.env'),
+    path.join(__dirname, '..', '.env'),
+    path.join(__dirname, '.env')
+  ];
+  for (const p of envCandidates) {
+    if (fs.existsSync(p)) {
+      try {
+        const text = fs.readFileSync(p, 'utf8');
+        text.split('\n').forEach(line => {
+          const trimmed = line.trim();
+          if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+            const idx = trimmed.indexOf('=');
+            const k = trimmed.slice(0, idx).trim();
+            const v = trimmed.slice(idx + 1).replace(/^['"]|['"\r]$/g, '').trim();
+            if (k && !process.env[k]) {
+              process.env[k] = v;
+            }
+          }
+        });
+      } catch (e) {}
+    }
+  }
+}
+loadEnvLocal();
+
 // Configuração de Runtime Serverless Vercel
 exports.config = {
   maxDuration: 60
 };
 
-// Modelo Oficial Homologado na Groq
-const GROQ_MODEL = "qwen/qwen3.6-27b";
-const configuredModel = process.env.GROQ_MODEL || "qwen/qwen3.6-27b";
-if (configuredModel !== "qwen/qwen3.6-27b") {
-  throw new Error("INVALID_GROQ_MODEL: A aplicação deve usar qwen/qwen3.6-27b.");
-}
+// Modelos Oficiais Homologados
+const GROQ_MODEL = process.env.GROQ_MODEL || "qwen/qwen3.6-27b";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.6-flash";
 
 // Flags e Configurações
 const REQUIRE_PRESENTATION = String(process.env.REQUIRE_PRESENTATION || "true").toLowerCase() !== "false";
@@ -795,6 +820,8 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
 
   const usage = data.usage || {};
   return {
+    provider: "groq",
+    model: GROQ_MODEL,
     result: parsed,
     durationMs,
     outputChars: rawContent.length,
@@ -808,81 +835,271 @@ async function callGroqStep(apiKey, systemPrompt, userPayloadStr, maxTokens = 70
   };
 }
 
-// 6. BUILDER DE CONTEXTO POR ETAPA
-// 6. BUILDER DE CONTEXTO POR ETAPA
+// 5.1 CHAMADA AO GOOGLE GEMINI COM MULTI-MODEL FALLBACK E RESPONSE_MIME_TYPE JSON
+const GEMINI_MODELS_POOL = [
+  "gemini-3.5-flash-lite",
+  "gemini-flash-lite-latest",
+  "gemini-3.5-flash",
+  "gemini-3-flash-preview"
+];
+
+async function callGeminiStep(geminiKey, systemPrompt, userPayloadStr, maxTokens = 800, timeoutMs = 25000, stepLabel = "Etapa", temperature = 0.2) {
+  let lastError = null;
+  const modelsToTry = Array.from(new Set(GEMINI_MODELS_POOL));
+
+  for (const currentModel of modelsToTry) {
+    const startTime = Date.now();
+    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${geminiKey}`;
+
+    console.log(`[GEMINI START] ${stepLabel} - Enviando ${userPayloadStr.length} chars (Modelo: ${currentModel}, Temp: ${temperature})...`);
+
+    const requestBody = {
+      systemInstruction: {
+        parts: [{ text: systemPrompt }]
+      },
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: `Analise as informações e retorne SOMENTE o JSON puro conforme a especificação requerida para a etapa:\n\n${userPayloadStr}` }]
+        }
+      ],
+      generationConfig: {
+        temperature: temperature,
+        responseMimeType: "application/json",
+        maxOutputTokens: 4096
+      }
+    };
+
+    try {
+      const response = await fetchWithTimeout(geminiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody)
+      }, timeoutMs, `Gemini (${stepLabel} - ${currentModel})`);
+
+      const durationMs = Date.now() - startTime;
+
+      if (!response.ok) {
+        const errText = await response.text();
+        const errorObj = new Error(`GEMINI_API_ERROR: Falha na chamada do Gemini ${currentModel} (${response.status}): ${errText}`);
+        errorObj.status = response.status;
+        errorObj.durationMs = durationMs;
+        errorObj.rawErrorBody = errText;
+        errorObj.model_used = currentModel;
+        
+        const retryMatch = errText.match(/retry in ([0-9.]+)s?/i);
+        if (retryMatch) {
+          errorObj.retryAfterSeconds = Math.ceil(parseFloat(retryMatch[1]));
+        }
+        if (errText.includes("RESOURCE_EXHAUSTED") || errText.includes("Quota exceeded")) {
+          errorObj.isQuotaExhausted = false;
+        }
+
+        console.warn(`[GEMINI MODEL RETRY] Modelo ${currentModel} retornou status ${response.status}. Tentando próximo modelo...`);
+        lastError = errorObj;
+        continue; // Tenta o próximo modelo do pool
+      }
+
+      const data = await response.json();
+      const parts = data.candidates?.[0]?.content?.parts || [];
+      let rawContent = "";
+      for (let i = parts.length - 1; i >= 0; i--) {
+        if (parts[i]?.text && !parts[i]?.thought) {
+          rawContent = parts[i].text;
+          break;
+        }
+      }
+      if (!rawContent && parts.length > 0) {
+        rawContent = parts[parts.length - 1].text || "";
+      }
+      rawContent = rawContent.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/i, "").trim();
+
+      const firstBrace = rawContent.indexOf("{");
+      const lastBrace = rawContent.lastIndexOf("}");
+      if (firstBrace === -1 || lastBrace <= firstBrace) {
+        console.error(`[GEMINI PARSE FAILED] Resposta sem objeto JSON (${currentModel}, length: ${rawContent.length}):\n${rawContent}`);
+        const noJsonErr = new Error(`GEMINI_INVALID_JSON: A resposta do Gemini (${currentModel}) não contém um objeto JSON.`);
+        noJsonErr.error_code = "GROQ_INVALID_JSON";
+        lastError = noJsonErr;
+        continue;
+      }
+
+      const jsonText = rawContent.slice(firstBrace, lastBrace + 1);
+      let parsed;
+      try {
+        parsed = JSON.parse(jsonText);
+      } catch (parseErr) {
+        console.error(`[GEMINI JSON.PARSE ERROR] ${parseErr.message}. Modelo: ${currentModel}. Trecho: ${jsonText.slice(0, 200)}...`);
+        const invJsonErr = new Error(`GEMINI_INVALID_JSON: Falha ao interpretar JSON do Gemini (${currentModel}): ${parseErr.message}`);
+        invJsonErr.error_code = "GROQ_INVALID_JSON";
+        lastError = invJsonErr;
+        continue;
+      }
+
+      console.log(`[GEMINI SUCCESS] ${stepLabel} - Resposta recebida via ${currentModel} em ${durationMs}ms.`);
+
+      const usage = data.usageMetadata || {};
+      const inTokens = usage.promptTokenCount || Math.ceil((userPayloadStr.length + systemPrompt.length) / 3.8);
+      const outTokens = usage.candidatesTokenCount || Math.ceil(rawContent.length / 3.8);
+
+      return {
+        provider: "gemini",
+        model: currentModel,
+        result: parsed,
+        durationMs,
+        outputChars: rawContent.length,
+        inputChars: userPayloadStr.length + systemPrompt.length,
+        promptTokens: inTokens,
+        completionTokens: outTokens,
+        totalTokens: usage.totalTokenCount || (inTokens + outTokens),
+        remainingTokensBefore: null,
+        remainingTokensAfter: null,
+        rateLimitHeaders: {}
+      };
+    } catch (networkErr) {
+      console.warn(`[GEMINI ATTEMPT EXCEPTION] ${currentModel} (${stepLabel}): ${networkErr.message}`);
+      lastError = networkErr;
+    }
+  }
+
+  throw lastError || new Error("GEMINI_ALL_MODELS_FAILED: Nenhum modelo do Google Gemini respondeu com sucesso.");
+}
+
+// 5.2 ORQUESTRADOR UNIFICADO DE IA COM RESILIÊNCIA E PRIORIDADE (GEMINI PRIMEIRO)
+async function callAIStep({ groqKey, geminiKey, systemPrompt, userPayloadStr, maxTokens = 700, timeoutMs = 25000, stepLabel = "Etapa", temperature = 0.2 }) {
+  // 1. Prioridade Máxima: Tentar Google Gemini se chave configurada
+  if (geminiKey) {
+    try {
+      return await callGeminiStep(geminiKey, systemPrompt, userPayloadStr, maxTokens, timeoutMs, stepLabel, temperature);
+    } catch (geminiErr) {
+      console.warn(`[GEMINI PRIMARY FAILED] ${stepLabel}: ${geminiErr.message}`);
+      if (!groqKey) throw geminiErr;
+      console.log(`[AI FALLBACK] Acionando Groq como contingência para a etapa ${stepLabel}...`);
+    }
+  }
+
+  // 2. Fallback ou Primário se apenas Groq estiver configurado
+  if (groqKey) {
+    return await callGroqStep(groqKey, systemPrompt, userPayloadStr, maxTokens, timeoutMs, stepLabel, temperature);
+  }
+
+  throw new Error("AI_NOT_CONFIGURED: Nenhuma chave de IA válida (GEMINI_API_KEY ou GROQ_API_KEY) foi encontrada.");
+}
+
+// 6. BUILDER DE CONTEXTO POR ETAPA COM DADOS RICOS E PORCENTAGENS
 function buildStepContext(stepId, snapshot, job) {
   const ind = snapshot.indicators || {};
   const ibge = snapshot.ibge || {};
   const mov = snapshot.cultural_movements || {};
   const verb = snapshot.verbatims || [];
 
+  // Helper para formatar categorias de um indicador em porcentagens limpas
+  const formatIndPercent = (indicatorId) => {
+    const item = ind[indicatorId];
+    if (!item || !Array.isArray(item.categorias)) return "Não disponível";
+    return item.categorias.map(c => `${c.nome}: ${c.percentual}%`).join(" | ");
+  };
+
   switch (stepId) {
     case "visao_veredito_territorio":
       return {
         idea: job.idea,
-        total_sample_n: snapshot.totalN,
-        indicadores_chave: {
-          renda_predominante: "R$ 5k a 15k (35.6%) e Acima de R$ 15k (15.5%)",
-          regioes_mais_frequentadas: "Jardim Aquarius (64.2%), Vila Ema (51.8%), Centro (48.6%), Jardim Esplanada (38.9%)",
-          evasao_consumo_sp: "42.1% consomem gastronomia/moda em SP por falta de opcao local equivalente",
-          frequencia_saida: "46.3% saem 2 ou mais vezes por semana"
+        regra_obrigatoria_dados: "ATENÇÃO ESTRITA: Ao referenciar dados da pesquisa municipal de SJC, utilize SEMPRE porcentagens (ex: 42,1%, 35,6%, 64,2%), NUNCA números absolutos de pessoas ou contagens de amostra.",
+        indicadores_socioeconomicos_sjc: {
+          renda_familiar_porcentagens: formatIndPercent("renda_familiar"),
+          regioes_mais_frequentadas_porcentagens: formatIndPercent("regioes_frequentadas"),
+          evasao_consumo_outras_cidades: formatIndPercent("evasao_consumo"),
+          frequencia_de_saida_lazer: formatIndPercent("frequencia_saida"),
+          demanda_reprimida_lazer: formatIndPercent("demanda_reprimida")
         },
-        bairros_referencia: ["Jardim Aquarius", "Vila Ema", "Jardim Esplanada", "Urbanova", "Centro"]
+        contexto_demografico_ibge_2022: {
+          populacao_total: "697.054 habitantes (Censo 2022)",
+          densidade_urbana: "633,7 hab/km²",
+          pib_per_capita: "R$ 67.120 anuais",
+          grau_urbanizacao: "98,2%",
+          renda_domiciliar_media: "2,4 salários mínimos por domicílio",
+          concentracao_alta_renda: "Eixos Oeste (Aquarius, Esplanada, Urbanova) e Centro-Oeste (Vila Ema, Vila Adyana)"
+        },
+        bairros_principais_de_sjc: [
+          "Jardim Aquarius (Centro-Oeste: polo corporativo, verticalizado, alta densidade, alta renda, forte fluxo noturno e gastronômico)",
+          "Vila Ema (Centro-Oeste: polo boêmio e gastronômico consolidado, pedestres de classe A/B, ruas arborizadas, atrito de vagas)",
+          "Jardim Esplanada (Centro-Oeste: residencial nobre tradicional, próximo ao Parque Vicentina Aranha, público maduro de alta renda)",
+          "Urbanova (Oeste: condomínios horizontais fechados, famílias de altíssima renda, forte dependência de automóvel e conveniência)",
+          "Centro (Central: comércio popular intenso, serviços diurnos, menor apelo para gastronomia e lazer noturno premium)",
+          "Jardim Satélite / Floradas (Sul: maior polo comercial de massa da Zona Sul, classe média consolidada, avenida Andrômeda)"
+        ]
       };
 
     case "swot_causalidade_ambiente":
-      // Resumo do Step 1 com no máximo 500 caracteres
       const s1Res = job.partial_results?.visao_veredito_territorio || {};
-      const s1Text = `Postura: ${s1Res.veredito_postura || "avancar"}. Justificativa: ${s1Res.veredito_justificativa || ""}. Bairros: ${(s1Res.bairros || []).map(b => b.nome).join(", ")}. Zona Exclusao: ${s1Res.zona_exclusao || ""}`.slice(0, 500);
-
       return {
         idea: job.idea,
-        total_sample_n: snapshot.totalN,
-        indicadores_barreiras_preco: {
-          barreiras_saida: (ind.barreiras_saida?.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`),
-          criterios_escolha: (ind.criterios_escolha?.categorias || []).slice(0, 3).map(c => `${c.nome}: ${c.percentual}%`),
-          demanda_reprimida: (ind.demanda_reprimida?.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`)
+        regra_obrigatoria_dados: "ATENÇÃO ESTRITA: Utilize SEMPRE porcentagens (ex: 34,8%, 28,5%) para citar métricas da pesquisa, NUNCA números absolutos.",
+        tese_e_veredito_definidos_step1: {
+          postura: s1Res.veredito_postura || "avancar",
+          justificativa: s1Res.veredito_justificativa || "",
+          bairros_recomendados: (s1Res.bairros || []).map(b => `${b.nome} (${b.formato_recomendado})`),
+          zona_exclusao: s1Res.zona_exclusao || ""
         },
-        verbalizacoes_curtas: verb.slice(0, 2).map(v => ({ id: v.id, citacao: (v.citacao_original || "").slice(0, 100) })),
-        resumo_step1: s1Text
+        indicadores_de_atrito_e_decisao_consumidor: {
+          barreiras_para_sair_a_noite_porcentagens: formatIndPercent("barreiras_saida"),
+          criterios_escolha_bar_restaurante_porcentagens: formatIndPercent("criterios_escolha"),
+          redes_sociais_descoberta_porcentagens: formatIndPercent("redes_descoberta"),
+          habito_comprar_produtores_locais: formatIndPercent("produtores_locais"),
+          presenca_pets_domicilios: formatIndPercent("pets_posse")
+        },
+        amostra_verbatims_reais: verb.slice(0, 4).map(v => ({
+          citacao: v.citacao_original,
+          perfil: `${v.perfil.regiao} | Renda: ${v.perfil.renda} | Idade: ${v.perfil.idade}`
+        }))
       };
 
     case "selecao_graficos_matrizes":
+      const allIndicatorsSummary = Object.entries(ind).map(([id, i]) => ({
+        indicador_id: id,
+        titulo: i.coluna ? i.coluna.split("?")[0].replace(/^Qual\s+/i, '').trim() : id,
+        distribuicao_percentual: (i.categorias || []).slice(0, 4).map(c => `${c.nome}: ${c.percentual}%`).join(" | ")
+      }));
+
       return {
         idea: job.idea,
-        total_sample_n: snapshot.totalN,
-        indicadores_disponiveis: Object.entries(ind).slice(0, 6).map(([id, i]) => ({
-          indicador_id: id,
-          coluna: i.coluna ? i.coluna.split("?")[0].trim() : id,
-          top_dados: (i.categorias || []).slice(0, 2).map(c => `${c.nome}: ${c.percentual}%`).join(', ')
-        })),
-        resumo_step1: {
-          bairros: (job.partial_results?.visao_veredito_territorio?.bairros || []).map(b => b.nome),
-          zona_exclusao: job.partial_results?.visao_veredito_territorio?.zona_exclusao
-        },
-        resumo_step2: {
-          forca_chave: job.partial_results?.swot_causalidade_ambiente?.swot?.forcas?.[0]?.item,
-          fraqueza_chave: job.partial_results?.swot_causalidade_ambiente?.swot?.fraquezas?.[0]?.item,
-          problema_central: job.partial_results?.swot_causalidade_ambiente?.ishikawa?.problema_central
+        regra_obrigatoria_dados: "ATENÇÃO ESTRITA: Ao justificar os 3 gráficos e as matrizes, cite SEMPRE valores percentuais da pesquisa de SJC.",
+        catalogo_completo_indicadores_pesquisa: allIndicatorsSummary,
+        alinhamento_estrategico_acumulado: {
+          step1_bairros: (job.partial_results?.visao_veredito_territorio?.bairros || []).map(b => b.nome),
+          step1_zona_exclusao: job.partial_results?.visao_veredito_territorio?.zona_exclusao,
+          step2_problema_ishikawa: job.partial_results?.swot_causalidade_ambiente?.ishikawa?.problema_central,
+          step2_forcas_chave: (job.partial_results?.swot_causalidade_ambiente?.swot?.forcas || []).map(f => typeof f === 'object' ? f.texto : f)
         }
       };
 
     case "movimentos_vencedor_testes":
       return {
         idea: job.idea,
-        total_sample_n: snapshot.totalN,
-        quatro_movimentos: {
-          geografia_silencio: "Refúgio e desaceleração",
-          cidade_prometida: "Cosmopolitismo e consumo",
-          tribo_global: "Conexão digital e tendências",
-          empreendedorismo_intuitivo: "Autoralidade e economia criativa"
+        regra_obrigatoria_dados: "ATENÇÃO ESTRITA: Citar porcentagens da pesquisa (ex: 42,1% de evasão, 79,4% no Instagram, 52,8% pets, 58,9% produtores locais) para validar o fit cultural.",
+        quatro_movimentos_culturais_detalhados: {
+          "A Geografia da Inércia": {
+            eixo: "Espaço Público & Convivência Coletiva",
+            dinamica_sjc: "A cultura do conforto e estabilidade. O joseense valoriza segurança, tranquilidade e a vida em condomínio fechado, mas frequentemente cai na inércia da mesmice. Procura refúgios seguros, acolhedores e sem atrito para desacelerar."
+          },
+          "A Cidade Prometida": {
+            eixo: "Consumo Local vs Evasão Metropolitana",
+            dinamica_sjc: "A frustração com a oferta convencional de 'cidade de interior'. O público de alta renda de SJC quer marcas autorais, gastronomia premium e estética de ponta. Quando não encontra na cidade, foge para SP aos fins de semana (42,1% de evasão)."
+          },
+          "A Tribo Global": {
+            eixo: "Comunidades de Nicho & Lifestyle Cosmopolita",
+            dinamica_sjc: "Profissionais de tecnologia (Embraer, Inpe, DCTA, startups), designers, nômades e early adopters. Buscam ambientes modernos, café especial, pet-friendly (52,8%), sustentabilidade e experiências de padrão internacional."
+          },
+          "Empreendedorismo Intuitivo": {
+            eixo: "Autonomia Econômica & Produção Autoral",
+            dinamica_sjc: "A valorização da autoralidade e do feito à mão em SJC (58,9% compram de produtores locais). Negócios com produto artesanal excelente, mas que precisam de refinamento de marca, embalagem e canais digitais para escalar."
+          }
         },
-        verbatims_pool: verb.slice(0, 6).map(v => ({ id: v.id, citacao: (v.citacao_original || "").slice(0, 120) })),
-        indicadores_relevantes: {
-          evasao_sp: "42.1% viajam a SP",
-          redes: "Instagram e WhatsApp",
-          orgulho: "84.5% orgulho de morar"
-        }
+        verbatims_pool: verb.slice(0, 8).map(v => ({
+          id: v.id,
+          citacao: v.citacao_original,
+          perfil: `${v.perfil.regiao} | ${v.perfil.renda}`
+        }))
       };
 
     default:
@@ -890,7 +1107,7 @@ function buildStepContext(stepId, snapshot, job) {
   }
 }
 
-// 7. DEFINIÇÕES DOS 5 MÓDULOS STEP-DRIVEN
+// 7. DEFINIÇÕES DOS 5 MÓDULOS STEP-DRIVEN COM PROMPTS EXECUTIVOS E PROFUNDOS
 const MODULE_DEFINITIONS = [
   {
     stepIndex: 0,
@@ -903,60 +1120,85 @@ const MODULE_DEFINITIONS = [
     stepIndex: 1,
     id: "visao_veredito_territorio",
     label: "Tese Estratégica, Veredito Humano e Ranking Territorial",
-    message: "Formulando tese estratégica, veredito humano e vocação territorial...",
-    maxTokens: 500,
-    systemPrompt: `Consultor Radar SJC. Responda SOMENTE objeto JSON sem markdown.
-LIMITES: visao_estrategica_texto (ate 280c), veredito_postura ("avancar", "avancar_com_cautela" ou "pivotar"), veredito_justificativa (ate 160c), bairros (max 3 com nome, regiao, formato_recomendado, justificativa ate 100c, nivel_de_confianca "alta", "media" ou "baixa"), zona_exclusao (ate 140c).
+    message: "Formulando tese executiva aprofundada, posicionamento e vocação territorial...",
+    maxTokens: 1200,
+    systemPrompt: `Você é o Consultor Estratégico Sênior do Radar São José (nível McKinsey/Bain com vivência profunda no mercado corporativo e urbano de São José dos Campos).
+Sua missão é formular uma Tese Estratégica densa, cirúrgica e altamente fundamentada para o negócio analisado.
 
-JSON:
+DIRETRIZES FUNDAMENTAIS:
+1. REGRA MANDATÓRIA DE DADOS: Ao referenciar dados da pesquisa da cidade, cite SEMPRE porcentagens (ex: 42,1%, 35,6%, 64,2%), NUNCA contagens absolutas de respondentes.
+2. PROFUNDIDADE ANALÍTICA: Evite frases rasas, slogans de autoajuda ou generalidades. Conecte diretamente o modelo do negócio com a realidade de renda, comportamento e hábitos da população de SJC.
+3. ESTRUTURAÇÃO DO TEXTO EXECUTIVO (visao_estrategica_texto): Redija um texto corrido rico e substancial (entre 600 e 1.200 caracteres), cobrindo:
+   - Tese de Demanda & Oportunidade: Por que esse negócio faz sentido hoje em SJC frente aos dados de renda e hábitos de consumo.
+   - Posicionamento Competitivo & Modelo de Negócio: Proposta de valor, faixa estimada de ticket médio e o diferencial crítico para não ser apenas 'mais um' na cidade.
+   - Riscos Críticos de Viabilidade: Principais atritos de execução (saturação, custo de ocupação, barreira de preço).
+4. VEREDITO ESTRATÉGICO:
+   - postura: Exatamente "avancar", "avancar_com_cautela" ou "pivotar".
+   - justificativa: Análise executiva detalhada e franca (250 a 450 caracteres).
+5. RANKING TERRITORIAL (bairros): Selecione de 2 a 3 bairros prioritários com justificativas territoriais ricas (200 a 350 caracteres cada), avaliando fluxo de pedestres, facilidade de estacionamento, perfil do consumidor local e sinergia comercial.
+6. ZONA DE EXCLUSÃO: Análise densa (200 a 350 caracteres) identificando microterritórios ou formatos que devem ser rigorosamente evitados e o porquê econômico/operacional do veto.
+
+Responda SOMENTE um objeto JSON válido, sem markdown, sem blocos \`\`\`json:
 {
-  "visao_estrategica_texto": "Analise factual densa ate 280c.",
+  "visao_estrategica_texto": "Texto executivo denso e estruturado de 600 a 1200 caracteres.",
   "veredito_postura": "avancar",
-  "veredito_justificativa": "Justificativa do veredito ate 160c.",
+  "veredito_justificativa": "Justificativa franca de 250 a 450 caracteres.",
   "bairros": [
     {
       "nome": "Jardim Aquarius",
       "regiao": "Centro-Oeste",
-      "formato_recomendado": "Loja de Rua",
-      "justificativa": "Justificativa ate 100c.",
+      "formato_recomendado": "Loja de Rua com vitrine ativa / Hub Gastronômico",
+      "justificativa": "Análise detalhada de 200 a 350 caracteres com fluxo, vagas e perfil de renda.",
       "nivel_de_confianca": "alta"
     }
   ],
-  "zona_exclusao": "Zona ou formato a evitar ate 140c."
+  "zona_exclusao": "Análise de microterritórios e formatos a evitar de 200 a 350 caracteres."
 }`
   },
   {
     stepIndex: 2,
     id: "swot_causalidade_ambiente",
     label: "Matriz SWOT, PESTEL e Diagrama de Ishikawa",
-    message: "Auditando ambiente competitivo, causalidade Ishikawa e matriz SWOT...",
-    maxTokens: 500,
-    systemPrompt: `Consultor Radar SJC. Responda SOMENTE objeto JSON sem markdown ou texto extra.
-LIMITES: SWOT (2 forcas, 2 fraquezas, 2 oportunidades, 2 ameacas em ate 80c), PESTEL (P, E, S, T, E_env, L com fator e decisao_recomendada em ate 80c), ISHIKAWA (problema_central em ate 100c e 4 causas: Pessoas & Atendimento, Ambiente & Experiencia, Processos & Operacao, Produto & Precificacao em ate 80c).
+    message: "Auditando ambiente competitivo, causalidade Ishikawa e matriz SWOT ampliada...",
+    maxTokens: 1400,
+    systemPrompt: `Você é o Estrategista de Risco e Inteligência Competitiva do Radar SJC.
+Sua missão é realizar uma auditoria rigorosa de vulnerabilidades e fatores ambientais para a ideia em São José dos Campos.
 
-JSON:
+DIRETRIZES FUNDAMENTAIS:
+1. REGRA DE DADOS: Cite SEMPRE porcentagens da pesquisa municipal (ex: 28,5% reclamam de preços, 34,8% da mesmice, 72,4% exigem qualidade), NUNCA contagens absolutas.
+2. MATRIZ SWOT APROFUNDADA:
+   - 2 a 3 Forças estratégicas (120 a 220 caracteres cada) conectadas a diferenciais reais do modelo de negócio.
+   - 2 a 3 Fraquezas internas críticas (120 a 220 caracteres cada), como custo de locação no Aquarius/Vila Ema, atrito de contratação e capacitação de equipe.
+   - 2 a 3 Oportunidades de mercado (120 a 220 caracteres cada) apoiadas em brechas da cidade (evasão para SP, demanda reprimida).
+   - 2 a 3 Ameaças externas concretas (120 a 220 caracteres cada), como guerra de preços de concorrentes tradicionais ou mudanças econômicas.
+3. ANÁLISE PESTEL DETALHADA: Para cada dimensão (P, E, S, T, E_env, L), descreva o fator de SJC e a decisão gerencial recomendada (120 a 220 caracteres).
+4. DIAGRAMA DE ISHIKAWA DE ALTO IMPACTO:
+   - problema_central: O risco de fracasso mais provável do negócio em SJC (100 a 200 caracteres).
+   - causas: 4 causas-raiz detalhadas (140 a 240 caracteres cada) cobrindo 'Pessoas & Atendimento', 'Ambiente & Experiencia', 'Processos & Operacao' e 'Produto & Precificacao'.
+
+Responda SOMENTE um objeto JSON válido, sem markdown:
 {
   "swot": {
-    "forcas": [{ "item": "F1", "texto": "Texto ate 80c" }, { "item": "F2", "texto": "Texto ate 80c" }],
-    "fraquezas": [{ "item": "W1", "texto": "Texto ate 80c" }, { "item": "W2", "texto": "Texto ate 80c" }],
-    "oportunidades": [{ "item": "O1", "texto": "Texto ate 80c" }, { "item": "O2", "texto": "Texto ate 80c" }],
-    "ameacas": [{ "item": "T1", "texto": "Texto ate 80c" }, { "item": "T2", "texto": "Texto ate 80c" }]
+    "forcas": [{ "item": "F1", "texto": "Força estratégica densa de 120 a 220 caracteres." }],
+    "fraquezas": [{ "item": "W1", "texto": "Fraqueza real densa de 120 a 220 caracteres." }],
+    "oportunidades": [{ "item": "O1", "texto": "Oportunidade concreta de 120 a 220 caracteres." }],
+    "ameacas": [{ "item": "T1", "texto": "Ameaça competitiva de 120 a 220 caracteres." }]
   },
   "pestel": {
-    "P": { "fator": "Politico", "decisao_recomendada": "Decisao ate 80c" },
-    "E": { "fator": "Economico", "decisao_recomendada": "Decisao ate 80c" },
-    "S": { "fator": "Social", "decisao_recomendada": "Decisao ate 80c" },
-    "T": { "fator": "Tecnologico", "decisao_recomendada": "Decisao ate 80c" },
-    "E_env": { "fator": "Ambiental", "decisao_recomendada": "Decisao ate 80c" },
-    "L": { "fator": "Legal", "decisao_recomendada": "Decisao ate 80c" }
+    "P": { "fator": "Contexto Político/Regulatório SJC", "decisao_recomendada": "Decisão gerencial de 120 a 220 caracteres." },
+    "E": { "fator": "Contexto Econômico/Renda SJC", "decisao_recomendada": "Decisão gerencial de 120 a 220 caracteres." },
+    "S": { "fator": "Contexto Sociocultural SJC", "decisao_recomendada": "Decisão gerencial de 120 a 220 caracteres." },
+    "T": { "fator": "Contexto Tecnológico/Digital SJC", "decisao_recomendada": "Decisão gerencial de 120 a 220 caracteres." },
+    "E_env": { "fator": "Contexto Ambiental/Sustentabilidade", "decisao_recomendada": "Decisão gerencial de 120 a 220 caracteres." },
+    "L": { "fator": "Contexto Legal/Zoneamento", "decisao_recomendada": "Decisão gerencial de 120 a 220 caracteres." }
   },
   "ishikawa": {
-    "problema_central": "Problema central ate 100c",
+    "problema_central": "Problema central e causa primária de fracasso de 100 a 200 caracteres.",
     "causas": [
-      { "categoria": "Pessoas & Atendimento", "descricao": "Causa ate 80c" },
-      { "categoria": "Ambiente & Experiencia", "descricao": "Causa ate 80c" },
-      { "categoria": "Processos & Operacao", "descricao": "Causa ate 80c" },
-      { "categoria": "Produto & Precificacao", "descricao": "Causa ate 80c" }
+      { "categoria": "Pessoas & Atendimento", "descricao": "Causa-raiz detalhada de 140 a 240 caracteres." },
+      { "categoria": "Ambiente & Experiencia", "descricao": "Causa-raiz detalhada de 140 a 240 caracteres." },
+      { "categoria": "Processos & Operacao", "descricao": "Causa-raiz detalhada de 140 a 240 caracteres." },
+      { "categoria": "Produto & Precificacao", "descricao": "Causa-raiz detalhada de 140 a 240 caracteres." }
     ]
   }
 }`
@@ -966,55 +1208,58 @@ JSON:
     id: "selecao_graficos_matrizes",
     label: "Seleção Dinâmica de 3 Gráficos, Matriz VRIO e 5 Forças de Porter",
     message: "Cruzando indicadores da pesquisa oficial, VRIO e 5 Forças de Porter...",
-    maxTokens: 700,
-    systemPrompt: `Voce e um Engenheiro de Dados e Estrategista Competitivo em SJC.
-Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
+    maxTokens: 1800,
+    systemPrompt: `Você é o Engenheiro de Dados e Estrategista Competitivo do Radar SJC.
+Sua função é cruzar os microdados quantitativos da pesquisa municipal com matrizes clássicas de posicionamento de mercado.
 
-DIRETRIZES E LIMITES:
-1. SELECAO: Escolha EXATAMENTE 3 indicadores validos presentes na lista (use o indicador_id exato).
-2. GRAFICOS: motivo_da_escolha (ate 130c), leitura_analitica (ate 150c), o_que_nao_prova (ate 140c).
-3. VRIO: 4 itens (V, R, I, O) com analise em ate 110 caracteres cada.
-4. PORTER: 5 forcas com intensidade ("baixa", "media", "alta") e analise em ate 110 caracteres.
-5. MIX MARKETING: cinco_ps (Produto, Preco, Praca, Promocao, Pessoas em ate 90c) e oceano_azul (eliminar, reduzir, elevar, criar em ate 100c).
+DIRETRIZES FUNDAMENTAIS:
+1. SELEÇÃO DE 3 GRÁFICOS: Escolha EXATAMENTE 3 indicadores mais estratégicos para este negócio a partir da lista fornecida (use o indicador_id exato).
+   - motivo_da_escolha: Por que este indicador é indispensável para balizar este negócio (150 a 250 caracteres).
+   - leitura_analitica: Parecer aprofundado cruzando as PORCENTAGENS da pesquisa com a tomada de decisão do negócio (200 a 380 caracteres).
+   - o_que_nao_prova: Alerta de rigor metodológico sobre as limitações do dado (140 a 240 caracteres).
+2. MATRIZ VRIO: 4 itens (V, R, I, O) avaliando a sustentabilidade competitiva do modelo frente aos concorrentes de SJC (140 a 250 caracteres cada).
+3. 5 FORÇAS DE PORTER: Analise cada força com intensidade ("baixa", "media", "alta") e comentário estratégico fundamentado na dinâmica comercial local (140 a 250 caracteres cada).
+4. MIX DE MARKETING (5 Ps): Análises práticas de Produto, Preço (estratégia de ticket e percepção), Praça (canal e ponto), Promoção (canais digitais de conversão) e Pessoas (120 a 220 caracteres cada).
+5. OCEANO AZUL: Ações concretas de Eliminar, Reduzir, Elevar e Criar para fugir da comoditização (120 a 220 caracteres cada).
 
-ESTRUTURA JSON EXATA:
+Responda SOMENTE um objeto JSON válido, sem markdown:
 {
   "graficos_selecionados": [
     {
       "indicador_id": "renda_familiar",
-      "motivo_da_escolha": "Motivo em ate 130 caracteres",
-      "leitura_analitica": "Leitura em ate 150 caracteres",
-      "o_que_nao_prova": "Limite do dado em ate 140 caracteres"
+      "motivo_da_escolha": "Motivo estratégico fundamentado de 150 a 250 caracteres.",
+      "leitura_analitica": "Leitura analítica aprofundada com porcentagens da pesquisa de 200 a 380 caracteres.",
+      "o_que_nao_prova": "Ressalva metodológica de 140 a 240 caracteres."
     }
   ],
   "matrizes_estrategicas": {
     "vrio": [
-      { "letra": "V", "nome": "Valor", "analise": "Analise em ate 110 caracteres" },
-      { "letra": "R", "nome": "Raridade", "analise": "Analise em ate 110 caracteres" },
-      { "letra": "I", "nome": "Imitabilidade", "analise": "Analise em ate 110 caracteres" },
-      { "letra": "O", "nome": "Organizacao", "analise": "Analise em ate 110 caracteres" }
+      { "letra": "V", "nome": "Valor", "analise": "Análise VRIO consistente de 140 a 250 caracteres." },
+      { "letra": "R", "nome": "Raridade", "analise": "Análise VRIO consistente de 140 a 250 caracteres." },
+      { "letra": "I", "nome": "Imitabilidade", "analise": "Análise VRIO consistente de 140 a 250 caracteres." },
+      { "letra": "O", "nome": "Organizacao", "analise": "Análise VRIO consistente de 140 a 250 caracteres." }
     ],
     "porter": [
-      { "forca": "Rivalidade entre Concorrentes", "intensidade": "media", "analise": "Analise em ate 110 caracteres" },
-      { "forca": "Ameaca de Novos Entrantes", "intensidade": "media", "analise": "Analise em ate 110 caracteres" },
-      { "forca": "Produtos Substitutos", "intensidade": "alta", "analise": "Analise em ate 110 caracteres" },
-      { "forca": "Barganha dos Fornecedores", "intensidade": "baixa", "analise": "Analise em ate 110 caracteres" },
-      { "forca": "Barganha dos Clientes", "intensidade": "alta", "analise": "Analise em ate 110 caracteres" }
+      { "forca": "Rivalidade entre Concorrentes", "intensidade": "alta", "analise": "Análise de Porter em SJC de 140 a 250 caracteres." },
+      { "forca": "Ameaca de Novos Entrantes", "intensidade": "media", "analise": "Análise de Porter em SJC de 140 a 250 caracteres." },
+      { "forca": "Produtos Substitutos", "intensidade": "alta", "analise": "Análise de Porter em SJC de 140 a 250 caracteres." },
+      { "forca": "Barganha dos Fornecedores", "intensidade": "baixa", "analise": "Análise de Porter em SJC de 140 a 250 caracteres." },
+      { "forca": "Barganha dos Clientes", "intensidade": "alta", "analise": "Análise de Porter em SJC de 140 a 250 caracteres." }
     ]
   },
   "mix_marketing": {
     "cinco_ps": [
-      { "p": "Produto", "analise": "Analise em ate 90 caracteres" },
-      { "p": "Preco", "analise": "Analise em ate 90 caracteres" },
-      { "p": "Praca", "analise": "Analise em ate 90 caracteres" },
-      { "p": "Promocao", "analise": "Analise em ate 90 caracteres" },
-      { "p": "Pessoas", "analise": "Analise em ate 90 caracteres" }
+      { "p": "Produto", "analise": "Diretriz acionável de 120 a 220 caracteres." },
+      { "p": "Preco", "analise": "Diretriz acionável de 120 a 220 caracteres." },
+      { "p": "Praca", "analise": "Diretriz acionável de 120 a 220 caracteres." },
+      { "p": "Promocao", "analise": "Diretriz acionável de 120 a 220 caracteres." },
+      { "p": "Pessoas", "analise": "Diretriz acionável de 120 a 220 caracteres." }
     ],
     "oceano_azul": {
-      "eliminar": "Em ate 100 caracteres",
-      "reduzir": "Em ate 100 caracteres",
-      "elevar": "Em ate 100 caracteres",
-      "criar": "Em ate 100 caracteres"
+      "eliminar": "Ação de eliminar elementos obsoletos em 120 a 220 caracteres.",
+      "reduzir": "Ação de reduzir custos e atritos em 120 a 220 caracteres.",
+      "elevar": "Ação de elevar padrões acima da média em 120 a 220 caracteres.",
+      "criar": "Ação de criar novos atributos de valor em 120 a 220 caracteres."
     }
   }
 }`
@@ -1024,46 +1269,53 @@ ESTRUTURA JSON EXATA:
     id: "movimentos_vencedor_testes",
     label: "Movimentos Culturais, Verbalizações Reais e Plano de Validação",
     message: "Enquadrando no movimento cultural vencedor e selecionando verbalizações...",
-    maxTokens: 700,
-    systemPrompt: `Voce e um Antropologo Cultural e Estrategista de Negocios em SJC.
-Responda exclusivamente com um único objeto JSON válido, sem markdown, sem \`\`\`json, sem texto antes ou depois.
+    maxTokens: 1600,
+    systemPrompt: `Você é o Antropólogo Cultural e Estrategista de Comportamento do Radar SJC.
+Sua missão é posicionar o negócio no tecido cultural e identitário de São José dos Campos, respaldado por falas reais da população.
 
-DIRETRIZES E LIMITES:
-1. MOVIMENTO VENCEDOR: Escolha exatamente UM entre os 4 nomes oficiais: "A Geografia da Inércia", "A Cidade Prometida", "A Tribo Global" ou "Empreendedorismo Intuitivo".
-2. JUSTIFICATIVA: justificativa_densa (ate 250c), condicao_de_sucesso (ate 160c), risco_de_erro (ate 160c).
-3. 4 MOVIMENTOS: analise de cada um em ate 120 caracteres.
-4. VERBALIZACOES: Escolha de 2 a 4 verbalizacoes presentes no verbatims_pool mantendo id e citacao identicos.
-5. PLANO: 4 perguntas de entrevista de validacao em ate 130 caracteres cada.
+DIRETRIZES FUNDAMENTAIS:
+1. MOVIMENTO CULTURAL VENCEDOR: Escolha exatamente UM entre os 4 nomes oficiais:
+   - "A Geografia da Inércia"
+   - "A Cidade Prometida"
+   - "A Tribo Global"
+   - "Empreendedorismo Intuitivo"
+2. JUSTIFICATIVA DENSA DO VENCEDOR: Elabore um ensaio antropológico aprofundado (de 400 a 800 caracteres), demonstrando por que este movimento é o eixo gravitacional da proposta e como ele se conecta aos hábitos e desejos joseenses (cite porcentagens da pesquisa).
+3. CONDIÇÃO DE SUCESSO & RISCO DE ERRO:
+   - condicao_de_sucesso: O fator essencial inegociável para conquistar essa tribo cultural (200 a 350 caracteres).
+   - risco_de_erro: A armadilha que destruiria a autenticidade e a adesão da comunidade (200 a 350 caracteres).
+4. ANÁLISE 360º DOS 4 MOVIMENTOS: Análise profunda de cada um dos 4 movimentos em relação ao negócio proposto (160 a 280 caracteres cada).
+5. VERBALIZAÇÕES REAIS DO POOL: Escolha de 2 a 4 citações presentes no verbatims_pool mantendo o 'id' e a 'citacao' exatamente como recebidos, com justificativa analítica conectando a fala da pessoa à proposta (140 a 240 caracteres cada).
+6. GUIA DE ENTREVISTA DE VALIDAÇÃO (The Mom Test): Formule 4 perguntas investigativas abertas de validação de campo que investiguem comportamentos e dores reais passadas do cliente, sem induzir respostas favoráveis (140 a 250 caracteres cada).
 
-ESTRUTURA JSON EXATA:
+Responda SOMENTE um objeto JSON válido, sem markdown:
 {
   "movimentos_culturais": {
     "veredicto_final": {
       "nome_movimento": "A Cidade Prometida",
-      "justificativa_densa": "Justificativa em ate 250 caracteres",
-      "condicao_de_sucesso": "Condicao em ate 160 caracteres",
-      "risco_de_erro": "Risco em ate 160 caracteres"
+      "justificativa_densa": "Ensaio antropológico profundo e fundamentado de 400 a 800 caracteres com porcentagens.",
+      "condicao_de_sucesso": "Condição inegociável de 200 a 350 caracteres.",
+      "risco_de_erro": "Armadilha crítica de 200 a 350 caracteres."
     },
     "quatro_movimentos_analise": {
-      "geografia_silencio": "Analise em ate 120 caracteres",
-      "cidade_prometida": "Analise em ate 120 caracteres",
-      "tribo_global": "Analise em ate 120 caracteres",
-      "empreendedorismo_intuitivo": "Analise em ate 120 caracteres"
+      "geografia_silencio": "Análise cultural aprofundada de 160 a 280 caracteres.",
+      "cidade_prometida": "Análise cultural aprofundada de 160 a 280 caracteres.",
+      "tribo_global": "Análise cultural aprofundada de 160 a 280 caracteres.",
+      "empreendedorismo_intuitivo": "Análise cultural aprofundada de 160 a 280 caracteres."
     }
   },
   "verbalizacoes_selecionadas": [
     {
       "id": "id_exato",
-      "citacao": "Citacao exata",
-      "por_que_foi_selecionada": "Motivo em ate 120 caracteres"
+      "citacao": "Citacao exata recebida",
+      "por_que_foi_selecionada": "Justificativa analítica profunda de 140 a 240 caracteres."
     }
   ],
   "plano_de_validacao": {
     "guia_entrevista_perguntas": [
-      "Pergunta 1 em ate 130 caracteres",
-      "Pergunta 2 em ate 130 caracteres",
-      "Pergunta 3 em ate 130 caracteres",
-      "Pergunta 4 em ate 130 caracteres"
+      "Pergunta de entrevista investigativa no estilo Mom Test de 140 a 250 caracteres.",
+      "Pergunta de entrevista investigativa no estilo Mom Test de 140 a 250 caracteres.",
+      "Pergunta de entrevista investigativa no estilo Mom Test de 140 a 250 caracteres.",
+      "Pergunta de entrevista investigativa no estilo Mom Test de 140 a 250 caracteres."
     ]
   }
 }`
@@ -1315,6 +1567,8 @@ function assembleFinalReport(job, snapshot) {
 
   return {
     visao_estrategica_texto: mod1.visao_estrategica_texto,
+    veredito_postura: mod1.veredito_postura || "avancar",
+    veredito_justificativa: mod1.veredito_justificativa || "",
     bairros: mod1.bairros || [],
     zona_exclusao: mod1.zona_exclusao,
     swot: swotClean,
@@ -1359,7 +1613,8 @@ module.exports = async function handler(req, res) {
     const query = req.query || {};
     const action = String(query.action || body.action || "").toLowerCase().trim();
     const jobId = String(query.job_id || body.job_id || "").trim();
-    const apiKey = (process.env.GROQ_API_KEY || "").trim();
+    const apiKey = (process.env.GROQ_API_KEY || req.headers?.["x-groq-key"] || body.apiKey || "").trim();
+    const geminiKey = (process.env.GEMINI_API_KEY || req.headers?.["x-gemini-key"] || "").trim();
 
     // ROTA DE DIAGNÓSTICO (action === "diag")
     if (action === "diag") {
@@ -1368,7 +1623,9 @@ module.exports = async function handler(req, res) {
         server_time: new Date().toISOString(),
         node_env: process.env.NODE_ENV || "development",
         build_commit: process.env.VERCEL_GIT_COMMIT_SHA || "local_development",
-        model: GROQ_MODEL,
+        groq_model: GROQ_MODEL,
+        gemini_model: GEMINI_MODEL,
+        active_provider: geminiKey ? "gemini" : (apiKey ? "groq" : "none"),
         step: "visao_veredito_territorio",
         response_format_used: false,
         cwd: process.cwd(),
@@ -1376,7 +1633,8 @@ module.exports = async function handler(req, res) {
         presentation: loc,
         require_presentation: REQUIRE_PRESENTATION,
         supabase_url_configured: Boolean(SUPABASE_URL),
-        groq_api_key_configured: Boolean(apiKey)
+        groq_api_key_configured: Boolean(apiKey),
+        gemini_api_key_configured: Boolean(geminiKey)
       });
     }
 
@@ -1642,11 +1900,11 @@ module.exports = async function handler(req, res) {
           }
         }
 
-        // ETAPAS 1 A 4: CHAMADAS À GROQ
+        // ETAPAS 1 A 4: INFERÊNCIA ESTRATÉGICA VIA IA (GROQ OU GEMINI)
         let stepPayloadStr = "";
         try {
-          if (!apiKey) {
-            throw new Error("GROQ_NOT_CONFIGURED: Chave da API Groq ausente no servidor.");
+          if (!apiKey && !geminiKey) {
+            throw new Error("AI_NOT_CONFIGURED: Nenhuma chave de IA (GROQ_API_KEY ou GEMINI_API_KEY) está configurada no servidor.");
           }
 
           if (!activeJob.context_snapshot) {
@@ -1662,69 +1920,73 @@ module.exports = async function handler(req, res) {
             analysisContext: stepContext
           });
 
-          // Pré-checagem de Saldo Conhecido de Tokens da Groq
-          const estimatedTokensForThisCall = Math.ceil(((stepDef.systemPrompt?.length || 0) + (stepPayloadStr?.length || 0)) / 3.8) + (stepDef.maxTokens || 700);
-          if (GROQ_RATE_LIMIT_TRACKER.remainingTokens !== null && GROQ_RATE_LIMIT_TRACKER.remainingTokens <= 0) {
-            const resetWaitSec = GROQ_RATE_LIMIT_TRACKER.resetTokensSeconds || GROQ_RATE_LIMIT_TRACKER.retryAfterSeconds || 60;
-            const nextAllowedDate = new Date(Date.now() + (resetWaitSec * 1000));
-            const nextAllowedIso = nextAllowedDate.toISOString();
-            const hhMm = nextAllowedDate.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+          // Pré-checagem de Saldo Conhecido de Tokens da Groq (apenas se estiver usando Groq)
+          if (apiKey && !geminiKey) {
+            const estimatedTokensForThisCall = Math.ceil(((stepDef.systemPrompt?.length || 0) + (stepPayloadStr?.length || 0)) / 3.8) + (stepDef.maxTokens || 700);
+            if (GROQ_RATE_LIMIT_TRACKER.remainingTokens !== null && GROQ_RATE_LIMIT_TRACKER.remainingTokens <= 0) {
+              const resetWaitSec = GROQ_RATE_LIMIT_TRACKER.resetTokensSeconds || GROQ_RATE_LIMIT_TRACKER.retryAfterSeconds || 60;
+              const nextAllowedDate = new Date(Date.now() + (resetWaitSec * 1000));
+              const nextAllowedIso = nextAllowedDate.toISOString();
+              const hhMm = nextAllowedDate.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
 
-            console.warn(`[GROQ PREVENTIVE RATE LIMIT] Saldo de tokens conhecido (${GROQ_RATE_LIMIT_TRACKER.remainingTokens}) insuficiente para ${stepDef.label} (estimado: ${estimatedTokensForThisCall}). Aguardando janela de ${resetWaitSec}s...`);
+              console.warn(`[GROQ PREVENTIVE RATE LIMIT] Saldo de tokens conhecido (${GROQ_RATE_LIMIT_TRACKER.remainingTokens}) insuficiente para ${stepDef.label} (estimado: ${estimatedTokensForThisCall}). Aguardando janela de ${resetWaitSec}s...`);
 
-            // Reverter contagem de tentativa
-            activeJob.attempts_by_step[stepDef.id] = Math.max(0, (activeJob.attempts_by_step[stepDef.id] || 0) - 1);
-            activeJob.status = "waiting_rate_limit";
-            activeJob.retry_after_at = nextAllowedIso;
-            activeJob.next_allowed_request_at = nextAllowedIso;
-            activeJob.rate_limit_diagnostic = {
-              limit_type: "tokens",
-              headers: GROQ_RATE_LIMIT_TRACKER.lastHeaders || {},
-              wait_seconds: resetWaitSec,
-              rate_limit_attempts: (activeJob.rate_limit_attempts_by_step && activeJob.rate_limit_attempts_by_step[stepDef.id]) || 0,
-              next_allowed_request_at: nextAllowedIso,
-              hh_mm: hhMm,
-              remaining_tokens: GROQ_RATE_LIMIT_TRACKER.remainingTokens,
-              estimated_request_tokens: estimatedTokensForThisCall
-            };
-            activeJob.message = `Limite de tokens da Groq. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${resetWaitSec}s restantes)...`;
-            await releaseJobLock(activeJob);
+              // Reverter contagem de tentativa
+              activeJob.attempts_by_step[stepDef.id] = Math.max(0, (activeJob.attempts_by_step[stepDef.id] || 0) - 1);
+              activeJob.status = "waiting_rate_limit";
+              activeJob.retry_after_at = nextAllowedIso;
+              activeJob.next_allowed_request_at = nextAllowedIso;
+              activeJob.rate_limit_diagnostic = {
+                limit_type: "tokens",
+                headers: GROQ_RATE_LIMIT_TRACKER.lastHeaders || {},
+                wait_seconds: resetWaitSec,
+                rate_limit_attempts: (activeJob.rate_limit_attempts_by_step && activeJob.rate_limit_attempts_by_step[stepDef.id]) || 0,
+                next_allowed_request_at: nextAllowedIso,
+                hh_mm: hhMm,
+                remaining_tokens: GROQ_RATE_LIMIT_TRACKER.remainingTokens,
+                estimated_request_tokens: estimatedTokensForThisCall
+              };
+              activeJob.message = `Limite de tokens da Groq. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${resetWaitSec}s restantes)...`;
+              await releaseJobLock(activeJob);
 
-            return res.status(200).json(formatStatusResponse(activeJob, {
-              success: true,
-              status: "waiting_rate_limit",
-              wait_seconds: resetWaitSec,
-              estimated_remaining_seconds: resetWaitSec + 5,
-              message: activeJob.message
-            }));
+              return res.status(200).json(formatStatusResponse(activeJob, {
+                success: true,
+                status: "waiting_rate_limit",
+                wait_seconds: resetWaitSec,
+                estimated_remaining_seconds: resetWaitSec + 5,
+                message: activeJob.message
+              }));
+            }
           }
 
           let groqResult;
           const stepTemperature = stepDef.id === "visao_veredito_territorio" ? 0.55 : 0.2;
           try {
-            groqResult = await callGroqStep(
-              apiKey,
-              stepDef.systemPrompt,
-              stepPayloadStr,
-              stepDef.maxTokens || 700,
-              25000,
-              stepDef.label,
-              stepTemperature
-            );
+            groqResult = await callAIStep({
+              groqKey: apiKey,
+              geminiKey: geminiKey,
+              systemPrompt: stepDef.systemPrompt,
+              userPayloadStr: stepPayloadStr,
+              maxTokens: stepDef.maxTokens || 700,
+              timeoutMs: 25000,
+              stepLabel: stepDef.label,
+              temperature: stepTemperature
+            });
             validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
           } catch (firstAttemptErr) {
-            if (firstAttemptErr.error_code === "GROQ_EMPTY_GENERATION" || firstAttemptErr.message.includes("GROQ_INVALID_JSON")) {
+            if (firstAttemptErr.error_code === "GROQ_EMPTY_GENERATION" || firstAttemptErr.message.includes("GROQ_INVALID_JSON") || firstAttemptErr.message.includes("INVALID_JSON") || firstAttemptErr.message.includes("MODULE_EMPTY_RESULT")) {
               console.warn(`[RECOVERY RETRY] Reexecutando ${stepDef.id} com prompt restrito após erro JSON:`, firstAttemptErr.message);
               const recoverySystemPrompt = `${stepDef.systemPrompt}\n\nATENCAO: Sua resposta anterior nao pode ser validada. Retorne SOMENTE um objeto JSON valido, curto e completo, seguindo exatamente as chaves indicadas. Nao inclua markdown, explicacoes externas ou campos extras.`;
-              groqResult = await callGroqStep(
-                apiKey,
-                recoverySystemPrompt,
-                stepPayloadStr,
-                stepDef.maxTokens || 750,
-                25000,
-                `${stepDef.label} (Recovery Retry)`,
-                stepTemperature
-              );
+              groqResult = await callAIStep({
+                groqKey: apiKey,
+                geminiKey: geminiKey,
+                systemPrompt: recoverySystemPrompt,
+                userPayloadStr: stepPayloadStr,
+                maxTokens: stepDef.maxTokens || 750,
+                timeoutMs: 25000,
+                stepLabel: `${stepDef.label} (Recovery Retry)`,
+                temperature: stepTemperature
+              });
               validateModuleResult(stepDef.id, groqResult.result, activeJob.context_snapshot);
             } else {
               throw firstAttemptErr;
@@ -1794,14 +2056,14 @@ module.exports = async function handler(req, res) {
 
           if (err.isModelInvalid) {
             activeJob.status = "failed";
-            activeJob.error_code = "GROQ_MODEL_INVALID";
-            activeJob.message = `O modelo Groq configurado (${err.model_used}) é inválido ou foi descontinuado: ${err.message}`;
+            activeJob.error_code = "AI_MODEL_INVALID";
+            activeJob.message = `O modelo de IA configurado (${err.model_used || "ativo"}) é inválido ou foi descontinuado: ${err.message}`;
             activeJob.last_error = err.message;
             activeJob.retryable = false;
-          } else if (err.isQuotaExhausted || err.error_code === "GROQ_QUOTA_EXHAUSTED") {
+          } else if (err.isQuotaExhausted || err.error_code === "GROQ_QUOTA_EXHAUSTED" || err.error_code === "GEMINI_QUOTA_EXHAUSTED") {
             activeJob.status = "failed";
-            activeJob.error_code = "GROQ_QUOTA_EXHAUSTED";
-            activeJob.message = "A cota diária ou limite de tokens da Groq foi atingida. O processamento foi interrompido sem retentativas.";
+            activeJob.error_code = "AI_QUOTA_EXHAUSTED";
+            activeJob.message = "A cota diária ou limite de tokens da IA foi atingida. O processamento foi interrompido sem retentativas.";
             activeJob.last_error = err.message;
             activeJob.retryable = false;
           } else if (err.status === 429) {
@@ -1824,8 +2086,8 @@ module.exports = async function handler(req, res) {
 
             if (rateLimitCount > maxAllowedRateAttempts) {
               activeJob.status = "failed";
-              activeJob.error_code = limitType === "tokens" ? "GROQ_TOKEN_LIMIT_EXHAUSTED" : "GROQ_RATE_LIMIT_EXHAUSTED";
-              activeJob.message = `Limite de ${limitType} da Groq excedeu o máximo de 3 tentativas na etapa ${stepDef.label}.`;
+              activeJob.error_code = limitType === "tokens" ? "AI_TOKEN_LIMIT_EXHAUSTED" : "AI_RATE_LIMIT_EXHAUSTED";
+              activeJob.message = `Limite de ${limitType} da IA excedeu o máximo de 3 tentativas na etapa ${stepDef.label}.`;
               activeJob.last_error = err.message;
               activeJob.retryable = true;
             } else {
@@ -1838,7 +2100,6 @@ module.exports = async function handler(req, res) {
 
               let waitSeconds;
               if (headerCandidates.length > 0) {
-                // Respeitar integralmente o reset da Groq sem limitar artificialmente a 300s
                 waitSeconds = Math.max(...headerCandidates);
               } else {
                 waitSeconds = exponentialSec;
@@ -1876,9 +2137,9 @@ module.exports = async function handler(req, res) {
               };
 
               if (limitType === "tokens") {
-                activeJob.message = `Limite de tokens da Groq. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${waitSeconds}s restantes)...`;
+                activeJob.message = `Limite de tokens da IA. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${waitSeconds}s restantes)...`;
               } else {
-                activeJob.message = `Limite temporário de requisições. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${waitSeconds}s restantes)...`;
+                activeJob.message = `Limite temporário de requisições da IA. A etapa ${activeJob.current_step} será retomada após ${hhMm} (${waitSeconds}s restantes)...`;
               }
               activeJob.last_error = err.message;
               activeJob.retryable = true;

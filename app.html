@@ -483,7 +483,7 @@
     
     <!-- Top Header em Fundo Branco com Logo Oficial + Módulo Estatístico Dinâmico -->
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border shadow-sm">
-      <div class="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <div class="w-full px-4 sm:px-8 lg:px-10 h-[72px] flex items-center justify-between gap-4">
         
         <!-- Left: Logo Oficial em Fundo Branco e Título -->
         <div class="flex items-center gap-4">
@@ -491,7 +491,7 @@
             <img 
               src="fotos_radar/logo.png" 
               alt="Radar São José" 
-              class="h-11 sm:h-12 max-w-[190px] object-contain hover:opacity-90 transition-opacity"
+              class="h-10 max-w-[170px] object-contain hover:opacity-90 transition-opacity"
               onerror="this.src='fotos_radar/logobranco.png'"
             />
           </a>
@@ -740,15 +740,16 @@
                 </div>
               </div>
 
-              <!-- 3. Nível de Confiança -->
+              <!-- 3. Nível de Evidência -->
               <div>
-                <label for="filter-historia-confianca" class="block font-bold text-slate-700 mb-1">Status Historiográfico</label>
+                <label for="filter-historia-confianca" class="block font-bold text-slate-700 mb-1">Nível de Evidência</label>
                 <div class="relative">
                   <select id="filter-historia-confianca" onchange="window.filterHistoriaEvents()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 cursor-pointer appearance-none">
-                    <option value="all">Todos os Status</option>
-                    <option value="CONFIRMADO">CONFIRMADO (Fonte Oficial)</option>
-                    <option value="HIPÓTESE">HIPÓTESE / Tradição Oral</option>
-                    <option value="CONFLITO">CONFLITO / Divergência</option>
+                    <option value="all">Todos os Níveis de Evidência</option>
+                    <option value="documentado">🟢 Documentado (Fonte Primária)</option>
+                    <option value="corroborado">🔵 Corroborado (Fonte Secundária)</option>
+                    <option value="em_investigacao">🟡 Em Investigação (Qualificando)</option>
+                    <option value="em_disputa">🔴 Em Disputa (Conflito de Fontes)</option>
                   </select>
                   <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
                 </div>
@@ -5325,7 +5326,8 @@
                     <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Parques & Vizinhança</span>
                   </div>
                   <p class="text-xs text-slate-700 leading-relaxed">
-                    <strong>Transição Industrial $ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados a centros gastronômicos de bairro (Campolim), gerando forte circulação de fim de semana.
+                    <strong>Transição Industrial $
+ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados a centros gastronômicos de bairro (Campolim), gerando forte circulação de fim de semana.
                   </p>
                 </div>
 
@@ -10514,13 +10516,56 @@
                 <button 
                   type="submit" 
                   id="consultor-btn-send"
+                  onclick="window.handleConsultorSubmit(event)"
                   class="px-9 py-3.5 rounded-full text-white font-black text-sm tracking-wide bg-[#064e3b] hover:bg-[#047857] shadow-lg shadow-emerald-950/20 active:scale-95 transition-all duration-200 flex items-center gap-2 cursor-pointer"
                 >
+                  <i id="consultor-send-icon" class="fa-solid fa-wand-magic-sparkles text-xs"></i>
                   <span>Gerar Relatório</span>
                   <span class="font-bold text-emerald-300 text-xs font-mono">%</span>
                 </button>
               </div>
             </form>
+          </div>
+
+          <!-- Modal / Overlay de Loading do Consultor IA -->
+          <div id="ai-report-loading-overlay" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-emerald-100 text-center space-y-6 relative overflow-hidden">
+              <div class="absolute -top-12 -right-12 w-32 h-32 bg-emerald-400/20 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-teal-400/20 rounded-full blur-2xl pointer-events-none"></div>
+              
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-800 to-emerald-950 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-950/20 relative">
+                <i class="fa-solid fa-brain text-2xl animate-pulse text-emerald-300"></i>
+                <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500"></span>
+                </span>
+              </div>
+
+              <div class="space-y-1.5">
+                <h3 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">Auditando com IA & Microdados</h3>
+                <p id="ai-loading-status-text" class="text-xs text-slate-500 font-medium leading-relaxed min-h-[36px] flex items-center justify-center">
+                  Iniciando processamento analítico de São José dos Campos...
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+                  <div id="ai-loading-progress-bar" class="bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-500 h-full rounded-full transition-all duration-500 ease-out shadow-xs" style="width: 15%"></div>
+                </div>
+                <div class="flex justify-between items-center text-[10px] font-bold text-slate-400 px-1">
+                  <span>Preparação (N=476)</span>
+                  <span>5 Frameworks</span>
+                  <span>Dossiê Final</span>
+                </div>
+              </div>
+
+              <div class="p-3 bg-emerald-50/60 rounded-xl border border-emerald-200/60 flex items-center gap-2.5 text-left">
+                <i class="fa-solid fa-shield-halved text-emerald-700 text-xs shrink-0"></i>
+                <p class="text-[10px] text-emerald-950 font-medium leading-tight">
+                  Cruzando microdados municipais com 5 frameworks estratégicos de alta gestão.
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- Estado 2: Relatório Gerado em Tela Cheia (Alinhamento Perfeito com Painel e Relatório Executivo) -->
@@ -10559,112 +10604,268 @@
       <!-- TÚNEL DO TEMPO - HISTÓRIA DE SÃO JOSÉ DOS CAMPOS -->
       <!-- ========================================== -->
       
-<section id="historia-view" class="hidden flex-1 w-full space-y-8 pb-16 min-w-0 animate-in fade-in duration-700 ease-out">
-        <!-- Faixa Hero Full-Width (De Ponta a Ponta) -->
-        <!-- Faixa Hero Full-Width (De Ponta a Ponta) -->
-        <header id="historia-capa" class="w-full relative overflow-hidden bg-[#2c1810] backdrop-blur-md border-b border-amber-900/40 text-white shadow-xs min-h-[175px] md:min-h-[200px] py-6 sm:py-7 flex items-center px-4 sm:px-6 lg:px-8">
-          <div class="absolute inset-0 z-0 opacity-15 bg-cover bg-center mix-blend-luminosity" style="background-image: url('fotos_radar/photo_1.jpg');"></div>
-          <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#24130c] via-[#452214] to-[#1e0f09]"></div>
-          
-          <div class="max-w-7xl mx-auto w-full relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 h-full">
-            <div class="flex items-center gap-7 sm:gap-8">
-              <img src="fotos_radar/radar_logo_pure_white.png" alt="Radar São José" class="h-11 sm:h-12 object-contain shrink-0 drop-shadow-sm" />
-              
-              <div class="space-y-1.5">
-                <div class="flex items-center gap-2 flex-wrap">
-                  <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-700/30 text-amber-300 border border-amber-600/40">
-                    <i class="fa-solid fa-clock-rotate-left"></i> LINHA DO TEMPO
-                  </span>
-                  <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-slate-300 border border-white/10">
-                    Memória Viva de SJC
-                  </span>
-                </div>
-                
-                <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
-                  Linha do Tempo <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-orange-200">• Memória & Marcos</span>
-                </h1>
-                
-                <p class="text-xs sm:text-sm text-slate-300 font-medium max-w-2xl leading-relaxed">
-                  De aldeamento jesuíta em 1767 até o Polo Aeroespacial do século XXI. 7 Eras históricas e marcos urbanos.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-xs font-bold text-white">
-                <i class="fa-solid fa-calendar-check text-amber-300"></i>
-                <span>1767 a 2026</span>
+<section id="historia-view" class="hidden flex-1 w-full space-y-6 pb-16 min-w-0 animate-in fade-in duration-500 ease-out">
+        
+        <!-- 1. HERO EXECUTIVO CLEAN ANALYTICS -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+                <i class="fa-solid fa-clock-rotate-left text-teal-600"></i> Memória & História Urbana
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200">
+                <i class="fa-solid fa-certificate text-teal-600"></i> Marco Institucional: 27 de Julho de 1767 (259 Anos)
               </span>
             </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Radar SJC <span class="text-teal-600">História & Formação Territorial</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-3xl leading-relaxed">
+              Acervo cronológico e arqueologia urbana verificável de São José dos Campos. Todos os marcos possuem fonte documental primária identificada, separando a ancestralidade de quatro séculos de ocupação do marco oficial de emancipação de 1767.
+            </p>
           </div>
-        </header>
 
-        <!-- Régua Interativa de Anos Marcantes (Scrubber Bar) -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card space-y-3">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
-              <i class="fa-solid fa-sliders text-purple-600"></i>
-              Atalhos de Anos Marcantes
-            </h3>
-            <span class="text-[10px] text-slate-400 font-semibold">Clique para filtrar o ano exato</span>
+          <!-- Botão Modal Explicativo -->
+          <button 
+            type="button" 
+            onclick="window.openPorQue1767Modal()" 
+            class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 shrink-0 cursor-pointer self-start lg:self-center active:scale-95"
+          >
+            <i class="fa-solid fa-circle-question text-teal-400"></i>
+            <span>Por que 1767? (Entenda o Marco)</span>
+          </button>
+        </div>
+
+        <!-- 2. 4 CARDS DE KPIS EXECUTIVOS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- KPI 1 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-teal-50 text-teal-700 border border-teal-200/60 flex items-center justify-center text-lg font-black shrink-0">
+              <i class="fa-solid fa-landmark-flag"></i>
+            </div>
+            <div class="space-y-0.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Idade Institucional</span>
+              <div class="flex items-baseline gap-1.5">
+                <span class="text-2xl font-black text-slate-900">259 Anos</span>
+              </div>
+              <span class="text-[10px] font-semibold text-teal-700">Elevação a Vila (1767–2026)</span>
+            </div>
           </div>
-          <div id="historia-years-bar" class="flex items-center gap-2 overflow-x-auto pb-2">
-            <!-- Chips gerados dinamicamente via JS -->
+
+          <!-- KPI 2 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 border border-blue-200/60 flex items-center justify-center text-lg font-black shrink-0">
+              <i class="fa-solid fa-timeline"></i>
+            </div>
+            <div class="space-y-0.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Ocupação do Vale</span>
+              <div class="flex items-baseline gap-1.5">
+                <span class="text-2xl font-black text-slate-900">436 Anos</span>
+              </div>
+              <span class="text-[10px] font-semibold text-blue-700">Presença Indígena & Jesuítica</span>
+            </div>
+          </div>
+
+          <!-- KPI 3 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center justify-center text-lg font-black shrink-0">
+              <i class="fa-solid fa-file-shield"></i>
+            </div>
+            <div class="space-y-0.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Auditoria Documental</span>
+              <div class="flex items-baseline gap-1.5">
+                <span class="text-2xl font-black text-slate-900">31 Marcos</span>
+              </div>
+              <span class="text-[10px] font-semibold text-emerald-700">100% com Fonte Primária</span>
+            </div>
+          </div>
+
+          <!-- KPI 4 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
+            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-700 border border-amber-200/60 flex items-center justify-center text-lg font-black shrink-0">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <div class="space-y-0.5">
+              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Ruptura Tecnológica</span>
+              <div class="flex items-baseline gap-1.5">
+                <span class="text-2xl font-black text-slate-900">1950</span>
+              </div>
+              <span class="text-[10px] font-semibold text-amber-700">Criação do ITA / CTA / Embraer</span>
+            </div>
           </div>
         </div>
 
-        <!-- Sub-abas da Seção História -->
-        <div class="space-y-6">
-          <div class="flex items-center gap-2 border-b border-slate-200 pb-3 overflow-x-auto">
-            <button type="button" onclick="window.switchHistoriaSubTab('timeline')" id="btn-hist-sub-timeline" class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-brand-900 text-white shadow-xs cursor-pointer">
-              <i class="fa-solid fa-timeline mr-1.5"></i> Túnel do Tempo (Linha do Tempo)
-            </button>
-            <button type="button" onclick="window.switchHistoriaSubTab('personalidades')" id="btn-hist-sub-personalidades" class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">
-              <i class="fa-solid fa-user-astronaut mr-1.5"></i> Personalidades & Guardiões
-            </button>
-            <button type="button" onclick="window.switchHistoriaSubTab('prefeitos')" id="btn-hist-sub-prefeitos" class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">
-              <i class="fa-solid fa-building-columns mr-1.5"></i> Prefeitos & Dirigentes
-            </button>
-            <button type="button" onclick="window.switchHistoriaSubTab('fontes')" id="btn-hist-sub-fontes" class="px-4 py-2 rounded-xl text-xs font-extrabold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer">
-              <i class="fa-solid fa-book-bookmark mr-1.5"></i> Acervos & Transparência
-            </button>
-          </div>
+        <!-- 3. BARRA DE CONTROLE: PILLS DE ERAS & MODOS DE VISUALIZAÇÃO -->
+        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-4">
+          
+          <!-- Linha Superior: Pills de Eras e Modos -->
+          <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+            <!-- Eras em Pills -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 xl:pb-0" id="historia-eras-pills">
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('all')" 
+                id="pill-era-all" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-layer-group text-[11px]"></i>
+                <span>Todas as Fases (31)</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('colonial')" 
+                id="pill-era-colonial" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-landmark text-amber-600 text-[11px]"></i>
+                <span>1564–1863: Colonial & Vila</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('sanatorial')" 
+                id="pill-era-sanatorial" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-hospital text-rose-600 text-[11px]"></i>
+                <span>1864–1945: Cidade Sanatorial</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('tecnologica')" 
+                id="pill-era-tecnologica" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-rocket text-cyan-600 text-[11px]"></i>
+                <span>1946–2000: Aeroespacial & CTA</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('contemporanea')" 
+                id="pill-era-contemporanea" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-microchip text-teal-600 text-[11px]"></i>
+                <span>2001–Hoje: Tech & Smart City</span>
+              </button>
+            </div>
 
-          <!-- CONTEÚDO SUB-ABA 1: LINHA DO TEMPO VERTICAL -->
-          <div id="historia-sub-timeline" class="space-y-6">
-            <div id="historia-timeline-container" class="relative border-l-2 border-purple-200 ml-3 sm:ml-6 pl-4 sm:pl-8 space-y-8">
-              <!-- Renderizado dinamicamente via renderHistoriaTimeline() -->
+            <!-- Alternador de Visualização: Feed Analítico vs Mapa -->
+            <div class="flex items-center gap-2 shrink-0 border-t xl:border-t-0 pt-2 xl:pt-0 border-slate-100">
+              <span class="text-xs font-bold text-slate-500 mr-1 hidden sm:inline">Modo:</span>
+              <button 
+                type="button" 
+                onclick="window.switchHistoriaViewMode('timeline')" 
+                id="btn-hist-mode-timeline" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-list-check text-[11px]"></i>
+                <span>Linha do Tempo</span>
+              </button>
+              <button 
+                type="button" 
+                onclick="window.switchHistoriaViewMode('mapa')" 
+                id="btn-hist-mode-mapa" 
+                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+              >
+                <i class="fa-solid fa-map-location-dot text-rose-600 text-[11px]"></i>
+                <span>Mapa Geográfico</span>
+              </button>
             </div>
           </div>
 
-          <!-- CONTEÚDO SUB-ABA 2: PERSONALIDADES -->
-          <div id="historia-sub-personalidades" class="hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card">
-              <h3 class="text-base font-black text-brand-950 mb-1">Personalidades & Guardiões de Memória</h3>
-              <p class="text-xs text-slate-500 mb-6">Figuras fundamentais na formação científica, cultural, sanitária e política de São José dos Campos.</p>
+          <!-- Linha Inferior: Busca Rápida + Filtro de Evidência + Contador -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-100">
+            <div class="relative w-full sm:w-80">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+              <input 
+                type="text" 
+                id="historia-search-input" 
+                oninput="window.filterHistoriaEvents()" 
+                placeholder="Buscar evento, local, personagem ou tema..." 
+                class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/20 transition-all"
+              />
+            </div>
+
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+              <select 
+                id="historia-evidence-select" 
+                onchange="window.filterHistoriaEvents()" 
+                class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/20 cursor-pointer"
+              >
+                <option value="all">Todos os Níveis de Evidência</option>
+                <option value="documentado">Apenas Documentados (Oficiais)</option>
+                <option value="corroborado">Apenas Corroborados</option>
+                <option value="em_investigacao">Em Investigação</option>
+                <option value="em_disputa">Em Disputa Histórica</option>
+              </select>
+
+              <span id="historia-counter-badge" class="text-xs font-bold text-slate-500 whitespace-nowrap">
+                Mostrando 31 de 31 marcos
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. VISTA 1: FEED DE CARDS ANALÍTICOS COM LINKS DE VALIDAÇÃO -->
+        <div id="historia-view-timeline" class="space-y-4">
+          <div id="historia-cards-container" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- Cards preenchidos dinamicamente por window.renderHistoriaTimeline() -->
+          </div>
+        </div>
+
+        <!-- 5. VISTA 2: MAPA GEORREFERENCIADO LEAFLET -->
+        <div id="historia-view-mapa" class="hidden space-y-4">
+          <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
+                  <i class="fa-solid fa-map-location-dot text-rose-600"></i>
+                  Mapa Georreferenciado dos Marcos de São José dos Campos
+                </h3>
+                <p class="text-xs text-slate-500">Clique nos marcadores para validar a localização e inspecionar a fonte primária de cada acontecimento.</p>
+              </div>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 self-start sm:self-auto">
+                31 Pontos Mapeados
+              </span>
+            </div>
+            <div id="historia-map-leaflet" class="w-full h-[540px] rounded-xl border border-slate-200 overflow-hidden shadow-inner z-0"></div>
+          </div>
+        </div>
+
+        <!-- 6. ABAS COMPLEMENTARES DE PESQUISA & GOVERNANÇA -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+          <div class="flex items-center gap-2 border-b border-slate-200 px-5 pt-4 pb-3 overflow-x-auto text-xs bg-slate-50/50">
+            <button type="button" onclick="window.switchHistoriaSubTab('personalidades')" id="btn-sub-personalidades" class="px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap">
+              <i class="fa-solid fa-user-astronaut text-teal-600 mr-1.5"></i> Personalidades Históricas
+            </button>
+            <button type="button" onclick="window.switchHistoriaSubTab('prefeitos')" id="btn-sub-prefeitos" class="px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap">
+              <i class="fa-solid fa-building-columns text-blue-600 mr-1.5"></i> Série Histórica de Prefeitos
+            </button>
+            <button type="button" onclick="window.switchHistoriaSubTab('acervos')" id="btn-sub-acervos" class="px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap">
+              <i class="fa-solid fa-shield-halved text-emerald-600 mr-1.5"></i> Governança & Níveis de Evidência
+            </button>
+            <button type="button" onclick="window.switchHistoriaSubTab('participar')" id="btn-sub-participar" class="px-4 py-2 rounded-xl font-bold transition-all text-amber-800 hover:bg-amber-100/60 cursor-pointer whitespace-nowrap ml-auto">
+              <i class="fa-solid fa-hand-holding-heart text-amber-600 mr-1.5"></i> Sugerir / Contribuir
+            </button>
+          </div>
+
+          <div class="p-6">
+            <!-- Sub-aba Personalidades -->
+            <div id="subview-personalidades" class="space-y-4">
               <div id="historia-personalidades-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Renderizado via JS -->
               </div>
             </div>
-          </div>
 
-          <!-- CONTEÚDO SUB-ABA 3: PREFEITOS E CHEFES MUNICIPAIS -->
-          <div id="historia-sub-prefeitos" class="hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card space-y-4">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <div>
-                  <h3 class="text-base font-black text-brand-950">Galeria de Prefeitos, Intendentes e Dirigentes (1798 – 2028)</h3>
-                  <p class="text-xs text-slate-500">Série nominal compilada do acervo da Câmara Municipal com destaques para fases sanitárias e lacunas históricas.</p>
-                </div>
-                <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-100 text-purple-800">Pró-Memória SJC</span>
-              </div>
-              <div class="overflow-x-auto border border-slate-200 rounded-2xl">
+            <!-- Sub-aba Prefeitos -->
+            <div id="subview-prefeitos" class="hidden space-y-4">
+              <div class="overflow-x-auto border border-slate-200 rounded-xl">
                 <table class="w-full text-left text-xs">
                   <thead class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200">
                     <tr>
                       <th class="px-4 py-3">Período</th>
-                      <th class="px-4 py-3">Mandatário / Chefia</th>
-                      <th class="px-4 py-3">Cargo / Função</th>
+                      <th class="px-4 py-3">Mandatário / Titular</th>
+                      <th class="px-4 py-3">Função / Cargo</th>
                       <th class="px-4 py-3">Forma de Acesso</th>
                       <th class="px-4 py-3">Situação Documental</th>
                     </tr>
@@ -10675,32 +10876,170 @@
                 </table>
               </div>
             </div>
-          </div>
 
-          <!-- CONTEÚDO SUB-ABA 4: ACERVOS E TRANSPARÊNCIA -->
-          <div id="historia-sub-fontes" class="hidden space-y-6">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-card space-y-4">
-              <h3 class="text-base font-black text-brand-950">Custodiantes & Metodologia de Proveniência</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Este Túnel do Tempo foi construído integrando documentos do <strong>Arquivo Público do Município de SJC</strong>, <strong>Pró-Memória da Câmara Municipal</strong>, <strong>Fundação Cultural Cassiano Ricardo (FCCR)</strong>, <strong>INPE</strong>, <strong>ITA/DCTA</strong>, <strong>UNIVAP/CEHVAP</strong>, <strong>IBGE</strong> e <strong>ALESP</strong>.
-              </p>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
-                  <span class="font-black text-brand-900 flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-600"></i> CONFIRMADO</span>
-                  <p class="text-slate-600">Fato comprovado por ato normativo, lei municipal/provincial ou documento de arquivo primário público.</p>
+            <!-- Sub-aba Acervos e Níveis de Evidência -->
+            <div id="subview-acervos" class="hidden space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs space-y-2">
+                  <span class="font-black text-emerald-950 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-circle-check text-emerald-600"></i> DOCUMENTADO
+                  </span>
+                  <p class="text-emerald-900/90 leading-relaxed font-medium">
+                    Fato comprovado diretamente por ato normativo, lei, decreto oficial ou documento primário de arquivo público.
+                  </p>
                 </div>
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
-                  <span class="font-black text-brand-900 flex items-center gap-1.5"><i class="fa-solid fa-lightbulb text-amber-500"></i> HIPÓTESE</span>
-                  <p class="text-slate-600">Tradição oral ou reconstituição historiográfica baseada em fontes secundárias sem ata primária conservada.</p>
+                <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-xs space-y-2">
+                  <span class="font-black text-blue-950 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-circle-dot text-blue-600"></i> CORROBORADO
+                  </span>
+                  <p class="text-blue-900/90 leading-relaxed font-medium">
+                    Fato com duas ou mais fontes secundárias concordantes ou publicação de instituição de memória referenciada.
+                  </p>
                 </div>
-                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
-                  <span class="font-black text-brand-900 flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-rose-500"></i> CONFLITO</span>
-                  <p class="text-slate-600">Fontes primárias apresentando divergências de datas ou marcos (preservadas e expostas transparentemente).</p>
+                <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs space-y-2">
+                  <span class="font-black text-amber-950 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-magnifying-glass text-amber-600"></i> EM INVESTIGAÇÃO
+                  </span>
+                  <p class="text-amber-900/90 leading-relaxed font-medium">
+                    Fato relevante na tradição cuja fonte primária está em processo de qualificação e localização de acervo.
+                  </p>
+                </div>
+                <div class="p-4 rounded-xl bg-rose-50/70 border border-rose-200 text-xs space-y-2">
+                  <span class="font-black text-rose-950 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-scale-unbalanced text-rose-600"></i> EM DISPUTA
+                  </span>
+                  <p class="text-rose-900/90 leading-relaxed font-medium">
+                    Fontes confiáveis apresentam versões ou anos divergentes, preservadas com transparência.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-aba Participar -->
+            <div id="subview-participar" class="hidden space-y-4">
+              <form id="form-sugerir-historia" onsubmit="window.submitHistoriaSugestao(event)" class="space-y-4 max-w-2xl bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Seu Nome / Pesquisador *</label>
+                    <input type="text" id="sugestao-nome" required placeholder="Ex: Maria Pereira da Silva" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">E-mail ou Contato *</label>
+                    <input type="email" id="sugestao-contato" required placeholder="Ex: maria@exemplo.com" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Título do Relato ou Marco *</label>
+                  <input type="text" id="sugestao-titulo" required placeholder="Ex: Criação da Escola Técnica de Santana..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Descrição / Detalhes do Fato *</label>
+                  <textarea id="sugestao-detalhes" rows="3" required placeholder="Descreva o acontecimento, contexto, pessoas envolvidas e fontes..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20"></textarea>
+                </div>
+                <div class="pt-2 flex items-center justify-between">
+                  <span class="text-[11px] text-slate-400 font-medium">Contribuições passam por revisão editorial.</span>
+                  <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer active:scale-95">
+                    <i class="fa-solid fa-paper-plane text-xs text-teal-300"></i>
+                    <span>Enviar para Curadoria</span>
+                  </button>
+                </div>
+              </form>
+              <div id="sugestao-feedback-msg" class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                <div>
+                  <p class="font-bold">Contribuição recebida com sucesso!</p>
+                  <p class="text-[11px] font-normal text-emerald-800">Muito obrigado por enriquecer a memória de São José dos Campos.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- MODAL DE VALIDAÇÃO DE FONTE PRIMÁRIA -->
+        <div id="historia-fonte-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
+          <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4">
+              <div class="space-y-1">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200">
+                  <i class="fa-solid fa-file-shield"></i> Validação da Fonte Primária
+                </span>
+                <h3 id="modal-fonte-titulo" class="text-lg font-black text-slate-900">Documento Comprobatório</h3>
+              </div>
+              <button onclick="window.closeHistoriaFonteModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div id="modal-fonte-conteudo" class="space-y-4 text-xs text-slate-700 leading-relaxed">
+              <!-- Preenchido via JS -->
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a id="modal-fonte-link-externo" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all">
+                <span>Acessar Acervo Oficial</span>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+              </a>
+              <button onclick="window.closeHistoriaFonteModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all cursor-pointer">
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL EXPLICATIVO: POR QUE 1767? -->
+        <div id="modal-porque-1767" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
+          <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4">
+              <div class="space-y-1">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200">
+                  <i class="fa-solid fa-book-open-reader"></i> Esclarecimento Historiográfico
+                </span>
+                <h3 class="text-xl font-black text-slate-900">Por que 27 de Julho de 1767 é o Aniversário de SJC?</h3>
+              </div>
+              <button onclick="window.closePorQue1767Modal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed font-medium">
+              <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-200 text-teal-950 space-y-1.5">
+                <strong class="text-sm font-black flex items-center gap-2">
+                  <i class="fa-solid fa-scale-balanced text-teal-700"></i> O Marco Institucional de 259 Anos (1767 – 2026)
+                </strong>
+                <p>
+                  O marco legal e comemorativo adotado oficialmente pela <strong>Prefeitura Municipal</strong>, pela <strong>Câmara Municipal (Pró-Memória)</strong> e pelo <strong>IBGE</strong> é o dia <strong>27 de julho de 1767</strong>, quando o ouvidor-geral Salvador Pereira da Silva lavrou o <em>Auto de Ereção da Vila de São José do Paraíba</em>, instalando a primeira Câmara e o pelourinho. Em 2026, a cidade completa <strong>259 anos de emancipação político-administrativa</strong> (e 260 anos em 2027).
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <h4 class="font-black text-sm text-slate-900">E os "400 anos de história"?</h4>
+                <p>
+                  A expressão por vezes ouvida na cidade refere-se a uma <strong>hipótese de quatro séculos de ocupação territorial e presença humana contínua</strong> (desde os primeiros aldeamentos indígenas Guaianazes e fazendas jesuíticas no final do século XVI, por volta de 1564/1600).
+                </p>
+                <p>
+                  Contudo, os historiadores e fontes primárias convergem: não existe ato de fundação assinado em 1564. Portanto, a narrativa rigorosa separa a <strong>formação territorial ancestral</strong> (quatro séculos) da <strong>fundação institucional autônoma</strong> (259 anos a partir de 1767).
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 class="font-bold text-[11px] uppercase tracking-wider text-slate-500">Documentação e Fontes Oficiais:</h4>
+                <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
+                  <li><strong>Auto de Ereção da Vila (1767):</strong> Arquivo Público do Estado de SP / Pró-Memória da Câmara.</li>
+                  <li><strong>Lei Provincial Paulista nº 27 (1864):</strong> Elevação da Vila a Cidade de São José.</li>
+                  <li><strong>Lei Provincial nº 47 (1871):</strong> Oficialização do nome São José dos Campos.</li>
+                  <li><strong>Monografia Histórica do IBGE:</strong> Formação Administrativa Municipal de SJC.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+              <button onclick="window.closePorQue1767Modal()" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl cursor-pointer transition-all">
+                Compreendi o Marco
+              </button>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <!-- ========================================== -->
@@ -11533,12 +11872,12 @@
   </div>
 
   <!-- Custom Script -->
-  <script src="historia_sjc_data.js"></script>
+  <script src="historia_sjc_data.js?v=20260916_v5"></script>
   <script src="influenciadores_sjc_data.js"></script>
   <script src="personas_sjc_module.js"></script>
   <script src="midia_sjc/analise_midia_data.js?v=1789087000"></script>
   <script src="midia_sjc/comunidade_data.js?v=1789087000"></script>
-  <script src="app.js?v=1789087000"></script>
+  <script src="app.js?v=20260916_v5"></script>
   <script src="midia_dashboard.js?v=1789215000"></script>
   <script src="vetores_sinergia.js"></script>
   <script src="scroll_reveal.js"></script>
