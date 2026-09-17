@@ -1,5 +1,0 @@
-PERSONA: Yasmin Alencar Pires
-IDADE: 22
-LOCAL: Vila das Acácias (Alojamento do DCTA), São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 22yo northeastern Brazilian female engineering student at ITA, brilliant and intense gaze, messy hair, sitting at a desk with equations on paper, soft desk lamp light.

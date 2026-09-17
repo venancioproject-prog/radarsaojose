@@ -1,5 +1,0 @@
-PERSONA: Wagner Santos
-IDADE: 49
-LOCAL: Bairro Parque Industrial, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 49-year-old Brazilian rideshare driver with calloused hands and a thoughtful expression, inside his car parked in Parque Industrial, natural lighting, documentary style.

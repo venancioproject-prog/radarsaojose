@@ -29958,12 +29958,12 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
 
   const rawMov = data.movimentos_culturais || data.movimento_cultural || data.fit_movimentos_culturais;
   if (rawMov && typeof rawMov === 'object') {
-    const cards = rawMov.analise_cards || rawMov.cards || rawMov.analise || rawMov;
+    const cards = rawMov.quatro_movimentos_analise || rawMov.analise_cards || rawMov.cards || rawMov.analise || rawMov;
     if (cards && typeof cards === 'object') {
-      movimentosObj.analise_cards.geografia_silencio = cards.geografia_silencio || cards.geografia_do_silencio || cards.silencio || "";
-      movimentosObj.analise_cards.cidade_prometida = cards.cidade_prometida || cards.a_cidade_prometida || cards.prometida || "";
-      movimentosObj.analise_cards.tribo_global = cards.tribo_global || cards.a_tribo_global || cards.global || "";
-      movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.empreendedorismo_intuitivo || cards.intuitivo || cards.empreendedorismo || "";
+      movimentosObj.analise_cards.geografia_silencio = cards.reacao_geografia_silencio || cards.geografia_silencio || cards.geografia_do_silencio || cards.silencio || "";
+      movimentosObj.analise_cards.cidade_prometida = cards.reacao_cidade_prometida || cards.cidade_prometida || cards.a_cidade_prometida || cards.prometida || "";
+      movimentosObj.analise_cards.tribo_global = cards.reacao_tribo_global || cards.tribo_global || cards.a_tribo_global || cards.global || "";
+      movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.reacao_empreendedorismo_intuitivo || cards.empreendedorismo_intuitivo || cards.intuitivo || cards.empreendedorismo || "";
     }
     if (rawMov.veredicto_final && typeof rawMov.veredicto_final === 'object') {
       movimentosObj.veredicto_final.nome_movimento = rawMov.veredicto_final.nome_movimento || rawMov.veredicto_final.movimento || rawMov.veredicto_final.vencedor || rawMov.veredicto_final.titulo || "";
@@ -29976,12 +29976,12 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     try {
       const parsedMov = JSON.parse(rawMov);
       if (parsedMov && typeof parsedMov === 'object') {
-        const cards = parsedMov.analise_cards || parsedMov.cards || parsedMov;
+        const cards = parsedMov.quatro_movimentos_analise || parsedMov.analise_cards || parsedMov.cards || parsedMov;
         if (cards && typeof cards === 'object') {
-          movimentosObj.analise_cards.geografia_silencio = cards.geografia_silencio || cards.geografia_do_silencio || "";
-          movimentosObj.analise_cards.cidade_prometida = cards.cidade_prometida || cards.a_cidade_prometida || "";
-          movimentosObj.analise_cards.tribo_global = cards.tribo_global || cards.a_tribo_global || "";
-          movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.empreendedorismo_intuitivo || cards.intuitivo || "";
+          movimentosObj.analise_cards.geografia_silencio = cards.reacao_geografia_silencio || cards.geografia_silencio || cards.geografia_do_silencio || "";
+          movimentosObj.analise_cards.cidade_prometida = cards.reacao_cidade_prometida || cards.cidade_prometida || cards.a_cidade_prometida || "";
+          movimentosObj.analise_cards.tribo_global = cards.reacao_tribo_global || cards.tribo_global || cards.a_tribo_global || "";
+          movimentosObj.analise_cards.empreendedorismo_intuitivo = cards.reacao_empreendedorismo_intuitivo || cards.empreendedorismo_intuitivo || cards.intuitivo || "";
         }
         if (parsedMov.veredicto_final && typeof parsedMov.veredicto_final === 'object') {
           movimentosObj.veredicto_final.nome_movimento = parsedMov.veredicto_final.nome_movimento || parsedMov.veredicto_final.vencedor || "";
@@ -30141,7 +30141,9 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   const primaryChartCanvasId = "veredicto-mini-chart";
   dynamicChartsToRender.push({
     id: primaryChartCanvasId,
-    config: primaryChartConfig
+    config: primaryChartConfig,
+    isPrimaryVeredicto: true,
+    index: -1
   });
 
   // Processamento e Normalização Robusta dos Bairros
@@ -30172,17 +30174,17 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       return {
         nome: `Microterritório 0${idx + 1}`,
         regiao: "SJC",
+        formato_recomendado: "",
         justificativa: String(b).replace(/\\/g, '').trim()
       };
     }
     return {
       nome: String(b.nome || b.bairro || b.bairro_nome || b.titulo || `Microterritório 0${idx + 1}`).replace(/\\/g, '').trim(),
       regiao: String(b.regiao || b.macro_regiao || b.zona || "SJC").replace(/\\/g, '').trim(),
+      formato_recomendado: String(b.formato_recomendado || b.formato || "").replace(/\\/g, '').trim(),
       justificativa: String(b.justificativa || b.motivo || b.analise || b.fit || "").replace(/\\/g, '').trim()
     };
   });
-
-
 
   // Processamento e Normalização das 3 Verbalizações Reais (A Voz do Consumidor com Metadados Demográficos)
   let verbalizacoesList = [];
@@ -30198,21 +30200,27 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   if (Array.isArray(rawVerbalizacoes) && rawVerbalizacoes.length > 0) {
     verbalizacoesList = rawVerbalizacoes.map(item => {
       if (typeof item === 'object' && item !== null) {
+        const isIndireta = item.eh_inferencia_indireta !== undefined ? Boolean(item.eh_inferencia_indireta) : false;
         return {
           citacao: String(item.citacao || item.texto || item.frase || "").replace(/^["']|["']$/g, '').trim(),
           genero: sanitizeGenero(item.genero || item.sexo),
           idade: String(item.idade || "25-34 ANOS").toUpperCase().trim(),
           regiao: String(item.regiao || "ZONA SUL").toUpperCase().trim(),
-          renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().replace(/^RENDA:\s*/i, '').trim()
+          renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().replace(/^RENDA:\s*/i, '').trim(),
+          conexao_com_sua_ideia: String(item.conexao_com_sua_ideia || item.por_que_foi_selecionada || "").replace(/\\/g, '').trim(),
+          eh_inferencia_indireta: isIndireta,
+          tipo_de_conexao: item.tipo_de_conexao || (isIndireta ? "INFERENCIA_CONTEXTUAL" : "DIRETA_TEMATICA")
         };
       }
-      // Se for string antiga, tenta extrair ou normalizar
       return {
         citacao: String(item || "").replace(/^["']|["']$/g, '').trim(),
         genero: "MULHER",
         idade: "25-34 ANOS",
         regiao: "ZONA SUL",
-        renda: "R$ 5.6K - 12K"
+        renda: "R$ 5.6K - 12K",
+        conexao_com_sua_ideia: "",
+        eh_inferencia_indireta: false,
+        tipo_de_conexao: "DIRETA_TEMATICA"
       };
     });
   } else if (typeof rawVerbalizacoes === 'string' && rawVerbalizacoes.trim()) {
@@ -30221,12 +30229,16 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       if (Array.isArray(parsedVerb)) {
         verbalizacoesList = parsedVerb.map(item => {
           if (typeof item === 'object' && item !== null) {
+            const isIndireta = item.eh_inferencia_indireta !== undefined ? Boolean(item.eh_inferencia_indireta) : false;
             return {
               citacao: String(item.citacao || item.texto || item.frase || "").replace(/^["']|["']$/g, '').trim(),
               genero: sanitizeGenero(item.genero || item.sexo),
               idade: String(item.idade || "25-34 ANOS").toUpperCase().trim(),
               regiao: String(item.regiao || "ZONA SUL").toUpperCase().trim(),
-              renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().replace(/^RENDA:\s*/i, '').trim()
+              renda: String(item.renda || "R$ 5.6K - 12K").toUpperCase().replace(/^RENDA:\s*/i, '').trim(),
+              conexao_com_sua_ideia: String(item.conexao_com_sua_ideia || item.por_que_foi_selecionada || "").replace(/\\/g, '').trim(),
+              eh_inferencia_indireta: isIndireta,
+              tipo_de_conexao: item.tipo_de_conexao || (isIndireta ? "INFERENCIA_CONTEXTUAL" : "DIRETA_TEMATICA")
             };
           }
           return {
@@ -30234,7 +30246,10 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             genero: "MULHER",
             idade: "25-34 ANOS",
             regiao: "ZONA SUL",
-            renda: "R$ 5.6K - 12K"
+            renda: "R$ 5.6K - 12K",
+            conexao_com_sua_ideia: "",
+            eh_inferencia_indireta: false,
+            tipo_de_conexao: "DIRETA_TEMATICA"
           };
         });
       }
@@ -30244,7 +30259,10 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         genero: "MULHER",
         idade: "25-34 ANOS",
         regiao: "ZONA SUL",
-        renda: "R$ 5.6K - 12K"
+        renda: "R$ 5.6K - 12K",
+        conexao_com_sua_ideia: "",
+        eh_inferencia_indireta: false,
+        tipo_de_conexao: "DIRETA_TEMATICA"
       }];
     }
   }
@@ -30306,6 +30324,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
   let graficosList = [];
   if (Array.isArray(data.graficos_analiticos) && data.graficos_analiticos.length > 0) {
     graficosList = data.graficos_analiticos;
+  } else if (Array.isArray(data.graficos_selecionados) && data.graficos_selecionados.length > 0) {
+    graficosList = data.graficos_selecionados;
   } else {
     graficosList = [
       {
@@ -30332,14 +30352,14 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       },
       {
         chart_data: {
-          type: "bar",
-          title: "Distribuição de Renda Familiar por Fit",
-          labels: ["Até R$ 2.8k", "R$ 2.8k-5.6k", "R$ 5.6k-12k", "R$ 12k-26k", "Acima R$ 26k"],
-          data: [18.1, 32.3, 23.6, 14.2, 11.8],
-          highlight_label: "R$ 5.6k-12k"
+          type: "horizontalBar",
+          title: "Mobilidade e Logística de Transporte em SJC",
+          labels: ["Carro próprio", "Apps (Uber/99)", "Ônibus", "Linha Verde", "Bicicleta"],
+          data: [64.6, 56.8, 46.3, 12.8, 9.9],
+          highlight_index: 0
         },
-        pergunta_origem: "Qual é a faixa de renda familiar total mensal da sua residência? (IBGE / Radar SJC)",
-        parecer_analitico: "A classe média consolidada (R$ 2.8k a 12k) representa 55.9% da base municipal, oferecendo volume escalável enquanto as classes A/B (26.0%) sustentam o ticket médio elevado."
+        pergunta_origem: "Quais meios de transporte você usa? (marque todos que utilizar) (N=477 - Supabase)",
+        parecer_analitico: "64.6% dos respondentes utilizam carro próprio e 56.8% usam aplicativos, indicando que a facilidade de acesso viário e vagas de parada rápida são fatores preponderantes para atração e retenção de fluxo."
       }
     ];
   }
@@ -30349,6 +30369,7 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
     const cfg = item.chart_data || {};
     const perguntaOrigem = item.pergunta_origem || item.pergunta || item.origem || item.fonte || "";
     const parecerTexto = item.parecer_analitico || item.analise_texto || item.analise || item.justificativa || "Cruzamento estatístico validando a propensão de consumo e viabilidade no mercado joseense.";
+    const ressalvaMetodologica = item.o_que_nao_prova || "";
 
     dynamicChartsToRender.push({
       id: chartId,
@@ -30356,30 +30377,67 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       index: gIdx
     });
 
-    const cardIcons = [
-      "fa-arrows-left-right-to-line text-cyan-600",
-      "fa-chart-pie text-amber-500",
-      "fa-chart-column text-emerald-600"
-    ];
-    const cardBadges = [
-      { text: "GEOMETRIA URBANA", cls: "bg-cyan-50 text-cyan-800 border-cyan-200" },
-      { text: "OPORTUNIDADE DUAL", cls: "bg-amber-50 text-amber-800 border-amber-200" },
-      { text: "PODER DE COMPRA", cls: "bg-emerald-50 text-emerald-800 border-emerald-200" }
-    ];
+    const isProxy = Boolean(item.eh_proxy_comportamental);
+    let badgeText = "";
+    let badgeCls = "";
+    let currentIcon = "fa-chart-column text-cyan-600";
 
-    const currentIcon = cardIcons[gIdx % cardIcons.length];
-    const currentBadge = cardBadges[gIdx % cardBadges.length];
+    if (isProxy) {
+      badgeText = "PROXY COMPORTAMENTAL / ANALOGIA";
+      badgeCls = "bg-amber-100 text-amber-900 border-amber-300 font-black";
+      currentIcon = "fa-scale-unbalanced text-amber-600";
+    } else {
+      const indId = String(item.indicador_id || "").toLowerCase();
+      if (indId.includes("regiao") || indId.includes("transporte")) {
+        badgeText = "LOGÍSTICA & FLUXO URBANO";
+        badgeCls = "bg-cyan-50 text-cyan-800 border-cyan-200";
+        currentIcon = "fa-location-dot text-cyan-600";
+      } else if (indId.includes("rede") || indId.includes("influenciador") || indId.includes("instagram")) {
+        badgeText = "DESCOBERTA DIGITAL";
+        badgeCls = "bg-purple-50 text-purple-800 border-purple-200";
+        currentIcon = "fa-share-nodes text-purple-600";
+      } else if (indId.includes("falta") || indId.includes("barreira")) {
+        badgeText = "ATRITO & CARÊNCIA URBANA";
+        badgeCls = "bg-rose-50 text-rose-800 border-rose-200";
+        currentIcon = "fa-triangle-exclamation text-rose-600";
+      } else if (indId.includes("pet")) {
+        badgeText = "INFRAESTRUTURA PET";
+        badgeCls = "bg-emerald-50 text-emerald-800 border-emerald-200";
+        currentIcon = "fa-paw text-emerald-600";
+      } else if (indId.includes("produtores")) {
+        badgeText = "CONSUMO AUTORAL";
+        badgeCls = "bg-teal-50 text-teal-800 border-teal-200";
+        currentIcon = "fa-seedling text-teal-600";
+      } else if (indId.includes("saida") || indId.includes("evasao") || indId.includes("frequencia")) {
+        badgeText = "DINÂMICA DE CONSUMO";
+        badgeCls = "bg-amber-50 text-amber-800 border-amber-200";
+        currentIcon = "fa-arrows-left-right text-amber-600";
+      } else {
+        badgeText = "EVIDÊNCIA ESTATÍSTICA";
+        badgeCls = "bg-slate-100 text-slate-800 border-slate-200";
+        currentIcon = "fa-chart-pie text-slate-600";
+      }
+    }
+
+    const chartDisplayTitle = item.titulo_contextualizado || cfg.title || "Indicador Analítico SJC";
 
     return `
       <div class="p-5 sm:p-6 bg-white rounded-3xl border border-slate-200/90 shadow-card space-y-4 flex flex-col justify-between hover:shadow-card-hover transition-all">
         <div class="space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
-            <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100 gap-2">
+            <span class="text-xs font-black uppercase tracking-wider text-brand-950 flex items-center gap-2 truncate">
               <i class="fa-solid ${currentIcon}"></i>
-              ${cfg.title || "Indicador Analítico SJC"}
+              ${chartDisplayTitle}
             </span>
-            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border ${currentBadge.cls}">${currentBadge.text}</span>
+            <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border shrink-0 ${badgeCls}">${badgeText}</span>
           </div>
+
+          ${isProxy ? `
+            <div class="px-2.5 py-1.5 bg-amber-50/90 rounded-xl border border-amber-200 text-[10.5px] text-amber-900 leading-snug flex items-center gap-1.5">
+              <i class="fa-solid fa-triangle-exclamation text-amber-600 shrink-0"></i>
+              <span><strong>Aviso de Analogia:</strong> Indicador comportamental aplicado por inferência de padrão psicológico.</span>
+            </div>
+          ` : ''}
 
           ${perguntaOrigem ? `
             <div class="text-[11px] text-slate-500 italic leading-snug px-1 flex items-start gap-1.5">
@@ -30392,13 +30450,25 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
             <canvas id="${chartId}"></canvas>
           </div>
         </div>
-        <div class="pt-3 border-t border-slate-100 bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/50">
-          <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
-            <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
-          </span>
-          <p class="text-xs text-slate-700 leading-relaxed font-normal">
-            ${formatMarkdown(parecerTexto)}
-          </p>
+        <div class="pt-3 border-t border-slate-100 bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/50 space-y-2">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-accent-cyan uppercase tracking-wider block mb-1">
+              <i class="fa-solid fa-magnifying-glass-chart mr-1"></i> PARECER ANALÍTICO:
+            </span>
+            <p class="text-xs text-slate-700 leading-relaxed font-normal">
+              ${formatMarkdown(parecerTexto)}
+            </p>
+          </div>
+          ${ressalvaMetodologica ? `
+            <div class="pt-2 border-t border-slate-200/60">
+              <span class="text-[9.5px] font-mono font-bold text-amber-800 uppercase tracking-wider block mb-0.5">
+                <i class="fa-solid fa-triangle-exclamation mr-1 text-amber-600"></i> RESSALVA METODOLÓGICA:
+              </span>
+              <p class="text-[11px] text-slate-600 leading-snug font-normal">
+                ${formatMarkdown(ressalvaMetodologica)}
+              </p>
+            </div>
+          ` : ''}
         </div>
       </div>
     `;
@@ -30463,24 +30533,24 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
         </div>
       </div>
 
-      <!-- BLOCO 2: TOP 5 BAIRROS & FIT GEOGRÁFICO -->
+      <!-- BLOCO 2: MICROTERRITÓRIOS & VOCAÇÃO COMERCIAL -->
       <div class="p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4">
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-2 border-b border-slate-100">
             <div class="flex items-center gap-2.5">
               <i class="fa-solid fa-location-dot text-rose-500 text-sm"></i>
               <h3 class="text-xs sm:text-sm font-black uppercase tracking-widest text-brand-950 font-mono">
-                TOP 5 BAIRROS & FIT GEOGRÁFICO
+                MICROTERRITÓRIOS & VOCAÇÃO COMERCIAL
               </h3>
             </div>
             <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-              GEO-FIT SJC
+              INTELIGÊNCIA URBANA
             </span>
           </div>
 
           <div class="space-y-2.5 pt-1">
             ${bairrosList.length > 0 ? bairrosList.map((b, idx) => `
-              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1 hover:border-slate-300 transition-all">
+              <div class="p-3 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs space-y-1.5 hover:border-slate-300 transition-all">
                 <div class="flex items-center justify-between">
                   <span class="font-bold text-brand-950 text-xs flex items-center gap-1.5">
                     <i class="fa-solid fa-map-pin text-rose-500 text-[11px]"></i> 
@@ -30490,6 +30560,11 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                     ${b.regiao || "SJC"}
                   </span>
                 </div>
+                ${b.formato_recomendado ? `
+                  <div class="text-[10px] font-mono text-emerald-800 bg-emerald-50/90 px-2 py-0.5 rounded-md border border-emerald-200/80 inline-flex items-center gap-1.5 font-bold">
+                    <i class="fa-solid fa-store text-[9px] text-emerald-600"></i> ${b.formato_recomendado}
+                  </div>
+                ` : ''}
                 <p class="text-xs text-slate-600 leading-relaxed font-normal">
                   ${formatMarkdown(b.justificativa || "")}
                 </p>
@@ -30520,8 +30595,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
           </div>
         </div>
         <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-mono text-slate-400 font-bold">
-          <span>RECORTE GEOGRÁFICO</span>
-          <span class="text-emerald-700 font-bold">N=477 RESPONDENTES</span>
+          <span>PLANEJAMENTO URBANO</span>
+          <span class="text-emerald-700 font-bold">HEURÍSTICA DE MERCADO & ZONEAMENTO</span>
         </div>
       </div>
     </div>
@@ -30929,11 +31004,16 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 🌿 MOVIMENTO 01
               </span>
             </div>
-            <div class="p-3.5 space-y-1.5">
+            <div class="p-3.5 space-y-2">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A GEOGRAFIA DA INÉRCIA</h5>
-              <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                ${formatMarkdown(movimentosObj.analise_cards?.geografia_silencio || "Refúgio, sossego, áreas verdes e calmaria do estresse corporativo.")}
-              </p>
+              <div class="pt-1.5 border-t border-slate-200/60">
+                <span class="text-[9.5px] font-mono font-bold text-emerald-800 uppercase tracking-wider block mb-1">
+                  <i class="fa-solid fa-arrows-to-dot mr-1 text-emerald-600"></i>COMO ESTA TRIBO REAGE:
+                </span>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${formatMarkdown(movimentosObj.analise_cards?.geografia_silencio || "Refúgio, sossego, áreas verdes e calmaria do estresse corporativo.")}
+                </p>
+              </div>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -30953,11 +31033,16 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 👨‍👩‍👧‍👦 MOVIMENTO 02
               </span>
             </div>
-            <div class="p-3.5 space-y-1.5">
+            <div class="p-3.5 space-y-2">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A CIDADE PROMETIDA</h5>
-              <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                ${formatMarkdown(movimentosObj.analise_cards?.cidade_prometida || "Famílias que buscam segurança, estabilidade e moral tradicional.")}
-              </p>
+              <div class="pt-1.5 border-t border-slate-200/60">
+                <span class="text-[9.5px] font-mono font-bold text-sky-800 uppercase tracking-wider block mb-1">
+                  <i class="fa-solid fa-arrows-to-dot mr-1 text-sky-600"></i>COMO ESTA TRIBO REAGE:
+                </span>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${formatMarkdown(movimentosObj.analise_cards?.cidade_prometida || "Famílias que buscam segurança, estabilidade e moral tradicional.")}
+                </p>
+              </div>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -30977,11 +31062,16 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 🚀 MOVIMENTO 03
               </span>
             </div>
-            <div class="p-3.5 space-y-1.5">
+            <div class="p-3.5 space-y-2">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">A TRIBO GLOBAL</h5>
-              <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                ${formatMarkdown(movimentosObj.analise_cards?.tribo_global || "Engenheiros, tech, criativos e público cosmopolita.")}
-              </p>
+              <div class="pt-1.5 border-t border-slate-200/60">
+                <span class="text-[9.5px] font-mono font-bold text-purple-800 uppercase tracking-wider block mb-1">
+                  <i class="fa-solid fa-arrows-to-dot mr-1 text-purple-600"></i>COMO ESTA TRIBO REAGE:
+                </span>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${formatMarkdown(movimentosObj.analise_cards?.tribo_global || "Engenheiros, tech, criativos e público cosmopolita.")}
+                </p>
+              </div>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -31001,11 +31091,16 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
                 💡 MOVIMENTO 04
               </span>
             </div>
-            <div class="p-3.5 space-y-1.5">
+            <div class="p-3.5 space-y-2">
               <h5 class="text-xs font-black text-brand-950 uppercase tracking-wide">EMPREENDEDORISMO INTUITIVO</h5>
-              <p class="text-xs text-slate-600 leading-relaxed font-normal">
-                ${formatMarkdown(movimentosObj.analise_cards?.empreendedorismo_intuitivo || "A economia real dos bairros, prestadores de serviço e consumo prático.")}
-              </p>
+              <div class="pt-1.5 border-t border-slate-200/60">
+                <span class="text-[9.5px] font-mono font-bold text-amber-800 uppercase tracking-wider block mb-1">
+                  <i class="fa-solid fa-arrows-to-dot mr-1 text-amber-600"></i>COMO ESTA TRIBO REAGE:
+                </span>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal">
+                  ${formatMarkdown(movimentosObj.analise_cards?.empreendedorismo_intuitivo || "A economia real dos bairros, prestadores de serviço e consumo prático.")}
+                </p>
+              </div>
             </div>
           </div>
           <div class="p-3 bg-white/70 border-t border-slate-200/60 text-[10px] font-mono text-slate-500">
@@ -31124,18 +31219,29 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
-        ${verbalizacoesList.slice(0, 3).map((verb, vIdx) => `
-          <div class="p-5 sm:p-6 bg-slate-50/90 rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col justify-between space-y-3.5 hover:border-slate-300 transition-all">
+        ${verbalizacoesList.slice(0, 3).map((verb, vIdx) => {
+          const isIndireta = Boolean(verb.eh_inferencia_indireta) || verb.tipo_de_conexao === "INFERENCIA_CONTEXTUAL";
+          return `
+          <div class="p-5 sm:p-6 bg-slate-50/90 rounded-2xl border ${isIndireta ? 'border-amber-200/90' : 'border-slate-200/90'} shadow-2xs flex flex-col justify-between space-y-3.5 hover:border-slate-300 transition-all">
             <div class="space-y-3 flex-1">
               <div class="flex items-center justify-between">
-                <i class="fa-solid fa-quote-left text-amber-500 text-base"></i>
-                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-200/60">
-                  CITAÇÃO REAL 0${vIdx + 1}
+                <i class="fa-solid fa-quote-left ${isIndireta ? 'text-amber-500' : 'text-emerald-600'} text-base"></i>
+                <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded-md ${isIndireta ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300'} flex items-center gap-1">
+                  <i class="fa-solid ${isIndireta ? 'fa-compass text-amber-600' : 'fa-circle-check text-emerald-600'} text-[8px]"></i>
+                  ${isIndireta ? 'INFERÊNCIA DE CONTEXTO URBANO' : 'CITAÇÃO TEMÁTICA DIRETA'}
                 </span>
               </div>
               <p class="text-xs sm:text-[13px] text-slate-700 italic leading-relaxed font-medium">
                 ${formatMarkdown(String(verb.citacao || verb).replace(/^["']|["']$/g, '').trim())}
               </p>
+              ${verb.conexao_com_sua_ideia ? `
+                <div class="mt-2.5 p-2.5 ${isIndireta ? 'bg-amber-50/90 border-amber-200/80 text-amber-950' : 'bg-emerald-50/90 border-emerald-200/80 text-emerald-950'} rounded-xl border text-[11px] leading-relaxed">
+                  <span class="font-bold font-mono ${isIndireta ? 'text-amber-800' : 'text-emerald-800'} uppercase text-[9.5px] block mb-0.5">
+                    <i class="fa-solid ${isIndireta ? 'fa-compass text-amber-600' : 'fa-link text-emerald-600'} mr-1"></i> ${isIndireta ? 'INFERÊNCIA CONTEXTUAL COM SEU NEGÓCIO:' : 'CONEXÃO TEMÁTICA DIRETA:'}
+                  </span>
+                  ${formatMarkdown(verb.conexao_com_sua_ideia)}
+                </div>
+              ` : ''}
             </div>
             <div class="pt-3 border-t border-slate-200/60 flex items-center justify-between">
               <span class="text-[10px] sm:text-xs text-slate-500 font-semibold tracking-wider uppercase font-mono">
@@ -31144,7 +31250,8 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
               <span class="text-[10px] font-mono font-bold text-brand-900 shrink-0 ml-2">RADAR SJC</span>
             </div>
           </div>
-        `).join('')}
+        `;
+        }).join('')}
       </div>
     </div>
 
@@ -31318,37 +31425,36 @@ window.renderExecutiveReport = function(topic, rawData, customDate) {
       let bgColors = [];
       let isDualDonut = false;
 
-      if (cfg.type === "horizontalBar" || chartIndex === 0) {
-        // CARD 1: Gráfico de Barras Horizontais Limpas (Geometria Urbana)
+      const isPrimary = item.isPrimaryVeredicto === true || item.index === -1;
+      const palette = ["#00B4D8", "#0B2545", "#F59E0B", "#10B981", "#8B5CF6", "#EC4899", "#64748B"];
+
+      if (isPrimary) {
+        chartType = cfg.type === "doughnut" || cfg.type === "pie" ? "doughnut" : "bar";
+        indexAxis = cfg.type === "horizontalBar" ? "y" : "x";
+        isDualDonut = chartType === "doughnut";
+        bgColors = rawData.map((_, i) => palette[i % palette.length]);
+      } else if (cfg.type === "doughnut" || cfg.type === "pie") {
+        chartType = "doughnut";
+        isDualDonut = true;
+        const primaryColor = cfg.highlight_color || "#D97706";
+        bgColors = [primaryColor, "#0B2545", "#00B4D8", "#10B981", "#8B5CF6"];
+      } else if (cfg.type === "horizontalBar" || (rawLabels.length > 5 && rawLabels.some(l => l.length > 12))) {
         chartType = "bar";
         indexAxis = "y";
         const highlightIdx = cfg.highlight_index !== undefined ? cfg.highlight_index : 0;
         bgColors = rawData.map((_, i) => {
-          if (i === highlightIdx) return "#00B4D8"; // Cyan de Destaque para Região Principal
-          if (i === 1) return "#0B2545"; // Deep Navy
-          return "#94A3B8"; // Slate neutro para as demais
+          if (i === highlightIdx) return "#00B4D8";
+          if (i === 1) return "#0B2545";
+          return "#94A3B8";
         });
-      } else if (cfg.type === "doughnut" || cfg.type === "pie" || chartIndex === 1) {
-        // CARD 2: Donut de Impacto (Destaque Dual - Paradoxo de Evasão)
-        chartType = "doughnut";
-        isDualDonut = true;
-        // Dourado / Âmbar vibrante para Evasão (66.2%) vs Deep Navy institucional para Consumo Local (33.8%)
-        const primaryEvadeColor = cfg.highlight_color || "#D97706"; // Amber 600
-        bgColors = [primaryEvadeColor, "#0B2545", "#00B4D8", "#10B981"];
       } else {
-        // CARD 3: Colunas Verticais Dinâmicas com Destaque na Faixa de Renda Ideal (Poder de Compra)
         chartType = "bar";
         indexAxis = "x";
-        const highlightTarget = (cfg.highlight_label || "5.6k").toLowerCase();
-        bgColors = rawLabels.map((lbl, idx) => {
-          const lblStr = String(lbl).toLowerCase();
-          if (lblStr.includes("5.6k") || lblStr.includes("5.601") || lblStr.includes(highlightTarget) || idx === 2) {
-            return "#F59E0B"; // Dourado / Âmbar de Destaque da Tese
-          }
-          if (idx === 3 || idx === 4) {
-            return "#0B2545"; // Navy para Classes A/B
-          }
-          return "#CBD5E1"; // Slate claro neutro
+        const highlightIdx = cfg.highlight_index !== undefined ? cfg.highlight_index : 0;
+        bgColors = rawData.map((_, i) => {
+          if (i === highlightIdx) return "#F59E0B";
+          if (i % 2 === 0) return "#0B2545";
+          return "#00B4D8";
         });
       }
 

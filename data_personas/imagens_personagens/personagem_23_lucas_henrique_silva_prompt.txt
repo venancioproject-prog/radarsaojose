@@ -1,5 +1,0 @@
-PERSONA: Lucas Henrique Silva
-IDADE: 24
-LOCAL: Bairro Campo dos Alemães (Zona Sul), São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 24yo Afro-Brazilian male software developer in Campo dos Alemães, wearing a black hoodie and large headphones around his neck, standing under neon streetlights at night, gritty realistic urban aesthetic, 50mm lens.

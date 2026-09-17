@@ -1,5 +1,0 @@
-PERSONA: Cláudio 'Alemão' Silveira
-IDADE: 54
-LOCAL: Bairro Parque Industrial, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 54yo Brazilian male CNC technician in Parque Industrial, blue collar workwear, authentic tired but proud smile, industrial workshop background, 85mm lens, hyperrealistic portrait.

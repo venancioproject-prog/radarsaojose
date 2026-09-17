@@ -1,5 +1,0 @@
-PERSONA: Tiago Ramos
-IDADE: 33
-LOCAL: Bairro Eugênio de Melo, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 33-year-old Brazilian logistics supervisor in Eugênio de Melo, wearing a neat polo shirt, athletic build, focused and determined expression, industrial background, hyperrealistic.

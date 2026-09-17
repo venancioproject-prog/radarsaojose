@@ -1,5 +1,0 @@
-PERSONA: Lucas Henrique Silva
-IDADE: 24
-LOCAL: Bairro Campo dos Alemães, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 24-year-old Afro-Brazilian young man, junior programmer, wearing streetwear inside a modern tech hub in São José dos Campos, vibrant ambient lighting, documentary photography.

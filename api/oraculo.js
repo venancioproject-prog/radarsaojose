@@ -435,6 +435,10 @@ Se qualquer resposta for “não”, corrija o objeto antes de enviá-lo.`;
       parsed.primary = primObj;
       parsed.multiplier = multObj;
       parsed.shadow = shadObj;
+      parsed.tese_central = primObj;
+      parsed.alavanca_oculta = multObj;
+      parsed.ponto_cego = shadObj;
+      parsed.matching_personas = [pId, mId, sId];
 
       // Sincronização dos nomes nos blocos
       if (parsed.bloco_persona_central) {
@@ -486,7 +490,10 @@ Se qualquer resposta for “não”, corrija o objeto antes de enviá-lo.`;
       const teseTexto = parsed.tese_central || (typeof parsed.diagnostico_contextual === 'object' ? parsed.diagnostico_contextual?.tese_de_posicionamento : '') || '';
 
       parsed.diagnostico_executivo = diagTexto;
+      parsed.sintese = diagTexto;
+      parsed.analise_consultor = diagTexto;
       parsed.tese_de_posicionamento = teseTexto;
+      parsed.tese_central_texto = teseTexto;
       parsed.veredito_ideia = {
         status: "analise_contextual",
         rotulo: "DIAGNÓSTICO CONTEXTUAL • SÃO JOSÉ DOS CAMPOS 2026",
@@ -734,15 +741,26 @@ function generateDeterministicOracleReading(answers, personasList) {
 
   const teseTexto = `Posicionar como a referência autoral e confiável da cidade que entrega padrão superior com a conveniência e o acolhimento que o morador de SJC valoriza.`;
 
+  // Garantir objetos de persona completos com schema v2
+  primary.movimento_cultural = primary.movimento_cultural || primary.movimento;
+  primary.faixa_renda_narrativa = primary.faixa_renda_narrativa || primary.faixa_renda;
+  multiplier.movimento_cultural = multiplier.movimento_cultural || multiplier.movimento;
+  multiplier.faixa_renda_narrativa = multiplier.faixa_renda_narrativa || multiplier.faixa_renda;
+  shadow.movimento_cultural = shadow.movimento_cultural || shadow.movimento;
+  shadow.faixa_renda_narrativa = shadow.faixa_renda_narrativa || shadow.faixa_renda;
+
   return {
     primary_persona_id: primary.id,
     multiplier_persona_id: multiplier.id,
     shadow_persona_id: shadow.id,
     confianca_geral: "alta",
     titulo_leitura: summary.title,
+    sintese: diagTexto,
+    analise_consultor: diagTexto,
     resumo_executivo: diagTexto,
     diagnostico_contextual: diagTexto,
-    tese_central: teseTexto,
+    tese_de_posicionamento: teseTexto,
+    tese_central_texto: teseTexto,
     tensao_principal: `A tensão entre a demanda por soluções de alto padrão e a tradicional cautela do consumidor joseense em migrar para novas marcas sem validação comunitária.`,
     premissas_e_lacunas: [
       `Premissa: a proposta mantém presença operacional e canal direto no território de ${primary.bairro}.`,
@@ -776,7 +794,7 @@ function generateDeterministicOracleReading(answers, personasList) {
       objecao_principal: "Receio de pagar por uma promessa que não se sustente na prática ou que gere atrito no atendimento.",
       como_vencer_objecao: "Apresentar prova social consistente de SJC, clareza cirúrgica nos prazos e contato consultivo direto e ágil.",
       sinal_de_compra: "Solicitação de tabela de prazos e detalhamento de garantia na primeira mensagem.",
-      evidencia: `Renda de ${primary.faixa_renda || 'perfil qualificado'} e rotina centrada em ${primary.bairro}.`
+      evidencia: `Renda de ${primary.faixa_renda_narrativa || primary.faixa_renda || 'perfil qualificado'} e rotina centrada em ${primary.bairro}.`
     },
     bloco_alavanca: {
       persona_id: multiplier.id,
@@ -801,7 +819,7 @@ function generateDeterministicOracleReading(answers, personasList) {
       o_que_nunca_fazer: "Adotar postura de superioridade metropolitana ou restringir o suporte a fluxos automatizados sem opção de acolhimento humano.",
       acao_de_blindagem: "Demonstrar ancoragem e raízes na praça de SJC, explicitar garantias e preservar um canal de atendimento acessível e consultivo.",
       acao_blindagem: "Demonstrar ancoragem e raízes na praça de SJC, explicitar garantias e preservar um canal de atendimento acessível e consultivo.",
-      evidencia: `Apego a rotinas estáveis e forte aversão a atritos de atendimento no movimento ${shadow.movimento || 'Geografia da Inércia'}.`
+      evidencia: `Apego a rotinas estáveis e forte aversão a atritos de atendimento no movimento ${shadow.movimento_cultural || shadow.movimento || 'Geografia da Inércia'}.`
     },
     bloco_plano_ataque: {
       objetivo_dos_7_dias: "Validar a proposta com 5 a 10 compradores qualificados no território prioritário e colher os primeiros depoimentos verificáveis.",
@@ -876,15 +894,18 @@ function generateDeterministicOracleReading(answers, personasList) {
       ]
     },
     pergunta_de_validacao: `Qual é o volume mínimo de clientes nos primeiros 30 dias necessário para cobrir o custo de operação local em ${primary.bairro}?`,
-    // Objetos embutidos para exibição imediata na UI
+    // Objetos e arrays unificados
     primary: primary,
     multiplier: multiplier,
     shadow: shadow,
+    tese_central: primary,
+    alavanca_oculta: multiplier,
+    ponto_cego: shadow,
+    matching_personas: [primary.id, multiplier.id, shadow.id],
     primaryScore: 94,
     multiplierScore: 88,
     shadowScore: 72,
     diagnostico_executivo: diagTexto,
-    tese_de_posicionamento: teseTexto,
     veredito_ideia: {
       status: "analise_contextual",
       rotulo: "DIAGNÓSTICO CONTEXTUAL • SÃO JOSÉ DOS CAMPOS 2026",

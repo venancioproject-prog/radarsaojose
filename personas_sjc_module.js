@@ -72,8 +72,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_1_maria_do_carmo_paes.jpg"
   },
   {
     "id": 2,
@@ -143,8 +144,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_2_marcelo_albuquerque.jpg"
   },
   {
     "id": 3,
@@ -212,8 +214,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_3_larissa_aparecida_souza.jpg"
   },
   {
     "id": 4,
@@ -253,7 +256,7 @@
       "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Prestígio & Tradição Médica",
-    "foto": "data_personas/imagens_personagens/personagem_4_gustavo_meirelles.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_4_dr_gustavo_meirelles.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -284,8 +287,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_4_dr_gustavo_meirelles.jpg"
   },
   {
     "id": 5,
@@ -355,8 +359,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_5_tiago_ramos.jpg"
   },
   {
     "id": 6,
@@ -396,7 +401,7 @@
       "Padre da Paróquia Santana (@paroquiasantanasjc)"
     ],
     "estilo_consumo_tag": "Memória Afetiva & Raízes",
-    "foto": "data_personas/imagens_personagens/personagem_6_dirce_de_lourdes_prado.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_6_dona_dirce_de_lourdes_prado.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -424,8 +429,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_6_dona_dirce_de_lourdes_prado.jpg"
   },
   {
     "id": 7,
@@ -465,7 +471,7 @@
       "Explore SFX (@exploresfx)"
     ],
     "estilo_consumo_tag": "Sustentabilidade & Raiz Serrana",
-    "foto": "data_personas/imagens_personagens/personagem_7_benedito_alvarenga.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_7_benedito_seu_dito_alvarenga.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -493,8 +499,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_7_benedito_seu_dito_alvarenga.jpg"
   },
   {
     "id": 8,
@@ -534,7 +541,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Sofisticação & Autocuidado",
-    "foto": "data_personas/imagens_personagens/personagem_8_leticia_rocha.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_8_dra_leticia_rocha_figueiredo.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -564,8 +571,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_8_dra_leticia_rocha_figueiredo.jpg"
   },
   {
     "id": 9,
@@ -635,8 +643,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_9_wagner_santos.jpg"
   },
   {
     "id": 10,
@@ -704,8 +713,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_10_gabriel_marcondes_de_oliveira.jpg"
   },
   {
     "id": 11,
@@ -775,8 +785,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_11_valeria_fontes.jpg"
   },
   {
     "id": 12,
@@ -844,8 +855,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_12_kenji_takahashi.jpg"
   },
   {
     "id": 13,
@@ -915,8 +927,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_13_claudete_aparecida_da_silva.jpg"
   },
   {
     "id": 14,
@@ -984,8 +997,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_14_heloisa_castilho.jpg"
   },
   {
     "id": 15,
@@ -1025,7 +1039,7 @@
       "Bora Comer SJC (@boracomersjc)"
     ],
     "estilo_consumo_tag": "Gastronomia & Corre Comercial",
-    "foto": "data_personas/imagens_personagens/personagem_15_wellington_prates.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_15_wellington_well_prates.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1055,8 +1069,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_15_wellington_well_prates.jpg"
   },
   {
     "id": 16,
@@ -1126,8 +1141,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_16_osvaldo_martins_ferraz.jpg"
   },
   {
     "id": 17,
@@ -1167,7 +1183,7 @@
       "Sanja Dicas (@sanjadicas)"
     ],
     "estilo_consumo_tag": "Sensorial & Artesanal Nobre",
-    "foto": "data_personas/imagens_personagens/personagem_17_nayara_santos_neves.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_17_nayara_nai_santos_neves.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1195,8 +1211,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_17_nayara_nai_santos_neves.jpg"
   },
   {
     "id": 18,
@@ -1236,7 +1253,7 @@
       "ITA Oficial (@ita_oficial)"
     ],
     "estilo_consumo_tag": "Tecnológico & Aeroespacial",
-    "foto": "data_personas/imagens_personagens/personagem_18_carlos_eduardo_peixoto.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_18_carlos_eduardo_cadu_peixoto.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1266,8 +1283,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_18_carlos_eduardo_cadu_peixoto.jpg"
   },
   {
     "id": 19,
@@ -1338,8 +1356,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_19_aline_moreira_siqueira.jpg"
   },
   {
     "id": 20,
@@ -1409,8 +1428,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_20_renato_guimaraes_prado.jpg"
   },
   {
     "id": 21,
@@ -1450,7 +1470,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Universitária & Criativa",
-    "foto": "data_personas/imagens_personagens/personagem_21_beatriz_mendonca.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_21_beatriz_bia_mendonca.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1478,8 +1498,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_21_beatriz_bia_mendonca.jpg"
   },
   {
     "id": 22,
@@ -1519,7 +1540,7 @@
       "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Trabalho Pesado & Tradição Rural",
-    "foto": "data_personas/imagens_personagens/personagem_22_sebastiao_ribeiro.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_22_sebastiao_tiao_ribeiro.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1549,8 +1570,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_22_sebastiao_tiao_ribeiro.jpg"
   },
   {
     "id": 23,
@@ -1618,8 +1640,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_23_priscila_alencar.jpg"
   },
   {
     "id": 24,
@@ -1659,7 +1682,7 @@
       "Bora Comer SJC (@boracomersjc)"
     ],
     "estilo_consumo_tag": "Técnico Solar & Autonomia",
-    "foto": "data_personas/imagens_personagens/personagem_24_douglas_nogueira.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_24_douglas_dodo_nogueira.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1690,8 +1713,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_24_douglas_dodo_nogueira.jpg"
   },
   {
     "id": 25,
@@ -1761,8 +1785,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_25_wesley_nascimento.jpg"
   },
   {
     "id": 26,
@@ -1832,8 +1857,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_26_marcio_souza_e_silva.jpg"
   },
   {
     "id": 27,
@@ -1873,7 +1899,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Saúde Integrativa & Equilíbrio",
-    "foto": "data_personas/imagens_personagens/personagem_27_tatiane_camargo.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_27_tatiane_tati_camargo.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1901,8 +1927,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_27_tatiane_tati_camargo.jpg"
   },
   {
     "id": 28,
@@ -1942,7 +1969,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Técnico Prático & Confiança",
-    "foto": "data_personas/imagens_personagens/personagem_28_rodrigo_barbosa.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_28_rodrigo_digao_barbosa.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -1970,8 +1997,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_28_rodrigo_digao_barbosa.jpg"
   },
   {
     "id": 29,
@@ -2039,8 +2067,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_29_vera_lucia_bittencourt.jpg"
   },
   {
     "id": 30,
@@ -2110,8 +2139,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_30_neusa_de_oliveira.jpg"
   },
   {
     "id": 31,
@@ -2151,7 +2181,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Design & Criatividade Digital",
-    "foto": "data_personas/imagens_personagens/personagem_31_natalia_dornelles.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_31_natalia_nati_dornelles.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2181,8 +2211,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_31_natalia_nati_dornelles.jpg"
   },
   {
     "id": 32,
@@ -2253,8 +2284,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_32_claudio_aparecido_toledo.jpg"
   },
   {
     "id": 33,
@@ -2326,8 +2358,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_33_elaine_mendes.jpg"
   },
   {
     "id": 34,
@@ -2367,7 +2400,7 @@
       "Explore SJC (@exploresjc)"
     ],
     "estilo_consumo_tag": "Cibersegurança & Tech",
-    "foto": "data_personas/imagens_personagens/personagem_34_danilo_kuntz.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_34_danilo_dk_kuntz.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2397,8 +2430,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_34_danilo_dk_kuntz.jpg"
   },
   {
     "id": 35,
@@ -2469,8 +2503,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_35_rosana_maria_de_jesus.jpg"
   },
   {
     "id": 36,
@@ -2510,7 +2545,7 @@
       "Mecânica Descomplicada (@mecanicadescomplicada)"
     ],
     "estilo_consumo_tag": "Automotivo Estético & Corre",
-    "foto": "data_personas/imagens_personagens/personagem_36_vinicius_castanho.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_36_vinicius_vini_castanho.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2538,8 +2573,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_36_vinicius_vini_castanho.jpg"
   },
   {
     "id": 37,
@@ -2579,7 +2615,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Visual & Fotografia Sensível",
-    "foto": "data_personas/imagens_personagens/personagem_37_mariana_godoy.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_37_mariana_mari_godoy.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2609,9 +2645,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
+      "ok_8k"
     ],
-    "imagem_url": "data_personas/imagens_personagens/personagem_37_mariana_godoy.jpg"
+    "imagem_url": "data_personas/imagens_personagens/personagem_37_mariana_mari_godoy.jpg"
   },
   {
     "id": 38,
@@ -2651,7 +2687,7 @@
       "Notícias SJC (@noticias_sjc)"
     ],
     "estilo_consumo_tag": "Técnico Metalúrgico & Raiz",
-    "foto": "data_personas/imagens_personagens/personagem_38_edson_ferreira.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_38_edson_edinho_ferreira.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2679,8 +2715,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_38_edson_edinho_ferreira.jpg"
   },
   {
     "id": 39,
@@ -2751,8 +2788,9 @@
       ]
     },
     "imagem_status": [
-      "arquivo_precisa_ser_renomeado_em_disco"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_39_yasmin_ferreira.jpg"
   },
   {
     "id": 40,
@@ -2792,7 +2830,7 @@
       "Biel Grau (@bielgrau)"
     ],
     "estilo_consumo_tag": "Estilo Urbano & Freestyle",
-    "foto": "data_personas/imagens_personagens/personagem_40_matheus_lourenco.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_40_matheus_math_lourenco.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2822,8 +2860,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_40_matheus_math_lourenco.jpg"
   },
   {
     "id": 41,
@@ -2894,8 +2933,9 @@
       ]
     },
     "imagem_status": [
-      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_41_elza_aparecida_bueno.jpg"
   },
   {
     "id": 42,
@@ -2935,7 +2975,7 @@
       "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Logística & Gestão Estratégica",
-    "foto": "data_personas/imagens_personagens/personagem_42_rafael_brandao.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_42_rafael_rafa_brandao.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -2963,8 +3003,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_42_rafael_rafa_brandao.jpg"
   },
   {
     "id": 43,
@@ -3032,8 +3073,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_43_sabrina_satoe_mori.jpg"
   },
   {
     "id": 44,
@@ -3073,7 +3115,7 @@
       "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Mecânica Pesada & Sabedoria",
-    "foto": "data_personas/imagens_personagens/personagem_44_geraldo_dias.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_44_geraldo_seu_geraldo_dias.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3101,8 +3143,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_44_geraldo_seu_geraldo_dias.jpg"
   },
   {
     "id": 45,
@@ -3142,7 +3185,7 @@
       "Kelly Maria (@kellymariaoficial)"
     ],
     "estilo_consumo_tag": "Organização & Praticidade",
-    "foto": "data_personas/imagens_personagens/personagem_45_patricia_lemes.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_45_patricia_pati_lemes.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3170,8 +3213,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_45_patricia_pati_lemes.jpg"
   },
   {
     "id": 46,
@@ -3211,7 +3255,7 @@
       "Trolando SJC (@trollandosaojose)"
     ],
     "estilo_consumo_tag": "Conectividade & Trabalho Técnico",
-    "foto": "data_personas/imagens_personagens/personagem_46_henrique_faria.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_46_henrique_rique_faria.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3241,8 +3285,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_46_henrique_rique_faria.jpg"
   },
   {
     "id": 47,
@@ -3313,8 +3358,9 @@
       ]
     },
     "imagem_status": [
-      "arquivo_precisa_ser_renomeado_em_disco"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_47_marlene_cristina_de_souza.jpg"
   },
   {
     "id": 48,
@@ -3384,8 +3430,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_48_jair_messias_da_silva.jpg"
   },
   {
     "id": 49,
@@ -3425,7 +3472,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Farmacêutica & Saúde Prática",
-    "foto": "data_personas/imagens_personagens/personagem_49_camila_valente.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_49_camila_cami_valente.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3456,8 +3503,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_49_camila_cami_valente.jpg"
   },
   {
     "id": 50,
@@ -3497,7 +3545,7 @@
       "Beto Oliver (@betooliver)"
     ],
     "estilo_consumo_tag": "Agilidade no Trânsito & Autonomia",
-    "foto": "data_personas/imagens_personagens/personagem_50_diego_santos.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_50_diego_dih_santos.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3525,8 +3573,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_50_diego_dih_santos.jpg"
   },
   {
     "id": 51,
@@ -3566,7 +3615,7 @@
       "Jonas Almeida (@jonas_almeida)"
     ],
     "estilo_consumo_tag": "Comércio Raiz & Tradicional",
-    "foto": "data_personas/imagens_personagens/personagem_51_waldir_fagundes.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_51_waldir_seu_waldir_fagundes.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3596,8 +3645,9 @@
       ]
     },
     "imagem_status": [
-      "arquivo_precisa_ser_renomeado_em_disco"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_51_waldir_seu_waldir_fagundes.jpg"
   },
   {
     "id": 52,
@@ -3637,7 +3687,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Manutenção & Resolução Prática",
-    "foto": "data_personas/imagens_personagens/personagem_52_alexandre_pires.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_52_alexandre_xande_pires.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3667,8 +3717,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_52_alexandre_xande_pires.jpg"
   },
   {
     "id": 53,
@@ -3708,7 +3759,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Cuidado Animal & Afeto",
-    "foto": "data_personas/imagens_personagens/personagem_53_debora_antunes.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_53_debora_deby_antunes.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3739,8 +3790,9 @@
       ]
     },
     "imagem_status": [
-      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_53_debora_deby_antunes.jpg"
   },
   {
     "id": 54,
@@ -3780,7 +3832,7 @@
       "Carlos Abranches (@carlosabranchesoficial)"
     ],
     "estilo_consumo_tag": "Restauração & Ofício Tradicional",
-    "foto": "data_personas/imagens_personagens/personagem_54_mauro_quintanilha.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_54_mauro_seu_mauro_quintanilha.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3808,8 +3860,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_54_mauro_seu_mauro_quintanilha.jpg"
   },
   {
     "id": 55,
@@ -3881,9 +3934,9 @@
       ]
     },
     "imagem_status": [
-      "arquivo_precisa_ser_renomeado_em_disco",
-      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_55_renata_vasconcelos.jpg"
   },
   {
     "id": 56,
@@ -3923,7 +3976,7 @@
       "Bora Comer SJC (@boracomersjc)"
     ],
     "estilo_consumo_tag": "Barbecue Artesanal & Fumaça Nobre",
-    "foto": "data_personas/imagens_personagens/personagem_56_bruno_marins.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_56_bruno_brunao_marins.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -3951,8 +4004,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_56_bruno_brunao_marins.jpg"
   },
   {
     "id": 57,
@@ -4023,8 +4077,9 @@
       ]
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_57_lucia_helena_guimaraes.jpg"
   },
   {
     "id": 58,
@@ -4064,7 +4119,7 @@
       "Thiago Nigro (@thiago.nigro)"
     ],
     "estilo_consumo_tag": "Corporativo & Vendas de Alta Renda",
-    "foto": "data_personas/imagens_personagens/personagem_58_guilherme_esteves.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_58_guilherme_gui_esteves.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -4094,8 +4149,9 @@
       ]
     },
     "imagem_status": [
-      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_58_guilherme_gui_esteves.jpg"
   },
   {
     "id": 59,
@@ -4135,7 +4191,7 @@
       "Fica a Dica SJC (@ficaadicasjc)"
     ],
     "estilo_consumo_tag": "Cultura Independente & Vanguarda",
-    "foto": "data_personas/imagens_personagens/personagem_59_talita_rezende.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_59_talita_tali_rezende.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -4163,8 +4219,9 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "ok"
-    ]
+      "pendente_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_59_talita_tali_rezende.jpg"
   },
   {
     "id": 60,
@@ -4204,7 +4261,7 @@
       "Rota Gastronômica da Mantiqueira (@rotamantiqueira)"
     ],
     "estilo_consumo_tag": "Apicultura Sustentável & Serra",
-    "foto": "data_personas/imagens_personagens/personagem_60_antonio_carlos_viana.jpg",
+    "foto": "data_personas/imagens_personagens/personagem_60_antonio_carlos_tonho_viana.jpg",
     "procedencia": {
       "camada": "composicao_ficcional_ancorada_em_pesquisa",
       "com_lastro_na_pesquisa": [
@@ -4235,8 +4292,9 @@
       ]
     },
     "imagem_status": [
-      "IMAGEM_DESATUALIZADA_identidade_racial_alterada_regerar_retrato"
-    ]
+      "ok_8k"
+    ],
+    "imagem_url": "data_personas/imagens_personagens/personagem_60_antonio_carlos_tonho_viana.jpg"
   }
 ];
   window.PERSONAS_SJC_DATA = PERSONAS_SJC_DATA;
@@ -6919,7 +6977,7 @@
                 <img 
                   src="${p.foto || p.imagem_url}" 
                   alt="${p.nome_completo}"
-                  class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                   onerror="this.parentElement.innerHTML = '<div class=\\'w-full h-full flex items-center justify-center font-black text-6xl text-white\\' style=\\'background-color: ${movColor};\\' >${initialLetter}</div>';"
                 />

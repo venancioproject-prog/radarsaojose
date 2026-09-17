@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Editoria | Radar São José</title>
+  <meta id="pageDescription" name="description" content="Portal oficial de jornalismo de dados, indicadores municipais e inteligência econômica em São José dos Campos e Vale do Paraíba." />
+  <meta name="keywords" content="portal de notícias são josé dos campos, editoria sjc, economia sjc, tecnologia sjc, mobilidade sjc, radar são josé" />
+  <link rel="icon" type="image/png" href="fotos_radar/logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta id="ogTitle" property="og:title" content="Editoria | Radar São José" />
+  <meta id="ogDescription" property="og:description" content="Reportagens, indicadores e análises sobre São José dos Campos." />
+  <meta property="og:site_name" content="Radar São José" />
+  <meta property="og:image" content="https://radarsaojose.com.br/fotos_radar/capa_sjc_skyline.jpg" />
+
+  <!-- Google Fonts: Montserrat + Merriweather -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'system-ui', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#07172C',
+              navy: '#0B2545',
+              mid: '#0b315c',
+              red: '#DC2626',
+              cyan: '#0284C7',
+              gold: '#D97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --content-max-width: 1280px;
+      --color-brand-dark: #07172C;
+      --color-brand-navy: #0B2545;
+      --color-brand-blue: #0284C7;
+      --color-brand-cyan: #19afea;
+      --color-brand-red: #DC2626;
+      --color-surface-white: #FFFFFF;
+      --color-surface-subtle: #F8FAFC;
+      --color-surface-card: #FFFFFF;
+      --color-text-primary: #0F172A;
+      --color-text-secondary: #334155;
+      --color-text-muted: #64748B;
+      --color-border-subtle: #E2E8F0;
+      --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Merriweather', Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-surface-white) !important;
+      color: var(--color-text-primary);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── CABEÇALHO FULL-WIDTH COM LOGO À ESQUERDA ── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(11, 37, 69, 0.98);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 0 40px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .navbar-container {
+      width: 100%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .navbar-brand img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      transition: transform 0.25s ease;
+    }
+
+    .navbar-brand:hover img {
+      transform: scale(1.03);
+    }
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-menu a {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .navbar-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #0284C7;
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+
+    .navbar-menu a:hover,
+    .navbar-menu a.active-nav {
+      color: #FFFFFF;
+    }
+
+    .navbar-menu a:hover::after,
+    .navbar-menu a.active-nav::after {
+      width: 100%;
+    }
+
+    .navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .btn-nav-outline {
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.04);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-nav-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .btn-nav-primary {
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #FFFFFF;
+      background: #0284C7;
+      border: 1px solid #0284C7;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-nav-primary:hover {
+      background: #0369a1;
+      border-color: #0369a1;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.5);
+      transform: translateY(-1px);
+      color: #FFFFFF;
+    }
+
+    .nav-toggle-btn {
+      display: none;
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      .site-header { padding: 0 20px; }
+      .navbar-menu { gap: 18px; }
+      .btn-nav-outline { display: none; }
+    }
+
+    @media (max-width: 860px) {
+      .nav-toggle-btn { display: block; }
+      .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #0B2545;
+        flex-direction: column;
+        padding: 20px;
+        gap: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .navbar-menu.active { display: flex; }
+      .navbar-actions .btn-nav-primary { display: none; }
+    }
+
+    /* ── BANNER DE ASSINATURA ANIMADO ── */
+    .radar-subscription-banner {
+      background: radial-gradient(circle at 10% 20%, #0d2f59 0%, #07172C 55%, #050b14 100%);
+      border: 1px solid rgba(2, 132, 199, 0.25);
+      position: relative;
+    }
+
+    .radar-glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .radar-glow-1 {
+      width: 320px;
+      height: 320px;
+      background: rgba(2, 132, 199, 0.28);
+      top: -60px;
+      right: -40px;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+
+    .radar-glow-2 {
+      width: 260px;
+      height: 260px;
+      background: rgba(220, 38, 38, 0.2);
+      bottom: -60px;
+      left: 15%;
+      animation: pulseGlow 8s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.9) translateY(0); opacity: 0.35; }
+      100% { transform: scale(1.15) translateY(-15px); opacity: 0.65; }
+    }
+
+    .radar-scanline {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .radar-shimmer-btn {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #DC2626 0%, #B91C1C 50%, #991B1B 100%);
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.45);
+    }
+
+    .radar-shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: rotate(25deg);
+      animation: btnShimmer 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes btnShimmer {
+      0% { left: -70%; }
+      30% { left: 140%; }
+      100% { left: 140%; }
+    }
+
+    .radar-shimmer-btn:hover {
+      box-shadow: 0 12px 32px rgba(220, 38, 38, 0.7), 0 0 20px rgba(234, 88, 12, 0.5);
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    /* ── SCROLLBARS & HELPERS ── */
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  </style>
+</head>
+<body class="bg-white text-slate-900 font-sans antialiased">
+
+  <!-- ══ CABEÇALHO PRINCIPAL SEMÂNTICO (LOGO • MENU • AÇÕES) ══ -->
+  <header class="site-header" role="banner">
+    <nav class="navbar-container" aria-label="Navegação Principal do Radar São José">
+      
+      <!-- 1. Logo à Esquerda -->
+      <a href="index.html" class="navbar-brand" title="Página Inicial - Radar São José">
+        <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="160" height="40" loading="eager" />
+      </a>
+
+      <!-- 2. Menu Central -->
+      <ul class="navbar-menu" id="primaryNavMenu" role="menubar">
+        <li role="none"><a href="index.html#solucoes" role="menuitem">Soluções</a></li>
+        <li role="none"><a href="index.html#planos" role="menuitem">Planos</a></li>
+        <li role="none"><a href="index.html#metodologia" role="menuitem">Metodologia</a></li>
+        <li role="none"><a href="index.html#manifesto" role="menuitem">Manifesto</a></li>
+        <li role="none"><a href="blog.html" class="active-nav" role="menuitem" aria-current="page">Blog</a></li>
+        <li role="none"><a href="index.html#faq" role="menuitem">FAQ</a></li>
+      </ul>
+
+      <!-- 3. Botões e Ações à Direita -->
+      <div class="navbar-actions">
+        <a href="index.html#contato" class="btn-nav-outline">Falar com especialista</a>
+        <a href="app.html" class="btn-nav-primary">Acessar soluções</a>
+        <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- ══ BARRA DE EDITORIAS LOCAIS (DELINEADA, CONCISA & ELEGANTE) ══ -->
+  <nav class="bg-white border-b border-slate-200/90 py-3 px-4 sm:px-6 lg:px-8 sticky top-0 z-30 shadow-2xs backdrop-blur-md bg-white/95" aria-label="Editorias do Portal">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Lista de Categorias em Linha Única com Scroll Suave -->
+      <div class="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto scrollbar-none py-1" id="categoryNav">
+        <a href="blog.html" class="cat-btn px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="todas">
+          Todas
+        </a>
+        <div class="w-px h-5 bg-slate-200 shrink-0 mx-0.5"></div>
+        <a href="editoria.html?cat=tecnologia" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="tecnologia">
+          <i class="fa-solid fa-microchip text-pink-600 mr-1.5 text-xs"></i> Tecnologia
+        </a>
+        <a href="editoria.html?cat=mobilidade" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="mobilidade">
+          <i class="fa-solid fa-car-side text-amber-600 mr-1.5 text-xs"></i> Mobilidade
+        </a>
+        <a href="editoria.html?cat=moradia" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="moradia">
+          <i class="fa-solid fa-building text-purple-600 mr-1.5 text-xs"></i> Moradia
+        </a>
+        <a href="editoria.html?cat=emprego" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="emprego">
+          <i class="fa-solid fa-chart-line text-emerald-600 mr-1.5 text-xs"></i> Emprego
+        </a>
+        <a href="editoria.html?cat=cidade" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="cidade">
+          <i class="fa-solid fa-tree-city text-teal-600 mr-1.5 text-xs"></i> Cidade
+        </a>
+        <a href="editoria.html?cat=cultura" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="cultura">
+          <i class="fa-solid fa-masks-theater text-indigo-600 mr-1.5 text-xs"></i> Cultura
+        </a>
+      </div>
+
+      <!-- Campo de Busca Rápida Integrado -->
+      <div class="hidden lg:flex items-center relative w-44 xl:w-52 shrink-0">
+        <input type="text" id="searchInput" placeholder="Pesquisar nesta editoria..." onkeyup="if(window.searchArticles) searchArticles();" class="w-full bg-slate-50 text-slate-800 text-xs rounded-full pl-8 pr-3 py-1.5 border border-slate-200 focus:outline-none focus:bg-white focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition-all placeholder:text-slate-400" />
+        <i class="fa-solid fa-magnifying-glass absolute left-3 text-slate-400 text-xs"></i>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ══ FAIXA DE CONTEXTO EDITORIAL (RSS AO VIVO SJC + DATA + CLIMA + REGIÃO) ══ -->
+  <section class="bg-white border-b border-slate-200/90 py-3 px-4 sm:px-6 lg:px-8 shadow-xs" aria-label="Atualizações em Tempo Real">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      
+      <!-- RSS FEED AO VIVO DE SÃO JOSÉ DOS CAMPOS -->
+      <div class="flex-1 min-w-0 pr-0 md:pr-4">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+          <span class="inline-flex items-center gap-1.5 bg-red-50 text-red-600 border border-red-200 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+            <i class="fa-solid fa-rss text-[10px]"></i>
+            RSS AO VIVO • SJC NA MÍDIA
+          </span>
+          <span id="rssFeedSource" class="bg-cyan-50 text-cyan-800 border border-cyan-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
+            CNN Brasil / G1
+          </span>
+          <span id="rssFeedSync" class="text-[10px] text-slate-400 font-medium hidden sm:inline-block">
+            <i class="fa-solid fa-arrows-rotate text-[9px] mr-0.5 text-cyan-600"></i> Auto-sync 2x/dia
+          </span>
+        </div>
+
+        <div class="flex items-start justify-between gap-2.5">
+          <a id="rssFeedLink" href="https://news.google.com" target="_blank" rel="noopener noreferrer" class="group flex-1 min-w-0" title="Clique para abrir a notícia original completa">
+            <p id="rssFeedHeadline" class="text-xs sm:text-sm font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-all duration-200 line-clamp-2 leading-snug cursor-pointer">
+              Carregando matérias sobre São José dos Campos nos principais portais do país...
+            </p>
+          </a>
+
+          <div class="flex items-center gap-1 shrink-0 pt-0.5">
+            <button onclick="window.prevRssNews && window.prevRssNews()" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] transition-colors shadow-2xs" title="Notícia anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <span id="rssFeedCount" class="text-[10px] text-slate-600 font-mono px-0.5 font-bold">1/6</span>
+            <button onclick="window.nextRssNews && window.nextRssNews()" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] transition-colors shadow-2xs" title="Próxima notícia">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metadados da Edição: Data + Clima em SJC + Localização -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-2.5 text-xs text-slate-600 shrink-0">
+        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-2xs">
+          <i class="fa-regular fa-calendar text-cyan-700"></i>
+          <span id="portalCurrentDate">Quarta-feira, 16 de setembro de 2026</span>
+        </div>
+
+        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-2xs" id="sjcWeatherBadge" title="Clima em tempo real em São José dos Campos">
+          <i class="fa-solid fa-cloud-sun text-amber-500 text-sm" id="weatherIcon"></i>
+          <span id="weatherTemp" class="font-bold text-slate-900">23°C</span>
+          <span class="text-slate-300">•</span>
+          <span id="weatherCondition" class="text-slate-600 font-medium">SJC Agora</span>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 shadow-2xs">
+          <i class="fa-solid fa-location-dot text-rose-600"></i>
+          <span>São José dos Campos & RMVale</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ HERO EDITORIAL DA EDITORIA (67% HERO STORY + 33% DESTAQUES DA EDITORIA) ══ -->
+  <section class="bg-white text-slate-900 pt-6 pb-12 border-b border-slate-200" id="heroSection">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        
+        <!-- MANCHETE PRINCIPAL DA EDITORIA (COLUNA ESQUERDA 67%) -->
+        <article class="lg:col-span-8 flex flex-col justify-between bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs hover:shadow-md transition-shadow group">
+          
+          <div>
+            <!-- Kicker / Tags e Metadados -->
+            <div class="flex flex-wrap items-center gap-2.5 mb-3">
+              <span id="heroKicker" class="bg-red-600 text-white text-[11px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-2xs">
+                MANCHETE DA EDITORIA
+              </span>
+              <span id="heroBadgeCategory" class="bg-pink-50 text-pink-800 text-[11px] font-bold px-2.5 py-0.5 rounded border border-pink-200">
+                <i class="fa-solid fa-microchip mr-1 text-pink-600"></i>Tecnologia
+              </span>
+              <span class="text-slate-300">•</span>
+              <span id="heroReadingTime" class="text-xs text-slate-500 font-medium flex items-center gap-1">
+                <i class="fa-regular fa-clock text-slate-400"></i> 4 min de leitura
+              </span>
+              <span class="text-slate-300">•</span>
+              <span id="heroDate" class="text-xs text-slate-500 font-medium">
+                Carregando...
+              </span>
+            </div>
+
+            <!-- Grande Título da Manchete -->
+            <h1 class="text-2xl sm:text-3xl lg:text-[34px] font-black font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-[1.25] mb-3">
+              <a id="heroTitleLink" href="#" class="hover:underline decoration-red-600 decoration-2 underline-offset-4">
+                Carregando matéria principal da editoria...
+              </a>
+            </h1>
+
+            <!-- Linha Fina / Subtítulo Explicativo -->
+            <p id="heroSubtitle" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
+              Aguarde enquanto conectamos à base de jornalismo de dados do Radar São José.
+            </p>
+          </div>
+
+          <!-- Foto de Destaque da Manchete -->
+          <a id="heroImageLink" href="#" class="block relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-100 mb-6 shadow-inner">
+            <img id="heroImage" src="fotos_radar/capa_sjc_skyline.jpg" alt="Destaque da Editoria" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </a>
+
+          <!-- Rodapé do Card da Manchete: Botão + Autor -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-slate-100 gap-3">
+            <a id="heroCtaBtn" href="#" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 rounded-lg shadow-2xs hover:shadow transition-all">
+              Ler Análise Completa <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+            
+            <div class="flex items-center gap-2.5 text-xs text-slate-600">
+              <img id="heroAuthorAvatar" src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
+              <span>Por <strong id="heroAuthorName">Leonardo Venâncio</strong></span>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- BARRA LATERAL EDITORIAL (DESTAQUES DA EDITORIA - 33%) -->
+        <aside class="lg:col-span-4 flex flex-col justify-between gap-3">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-1">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-600"></div>
+              <h3 class="text-xs font-black uppercase tracking-widest text-slate-900">
+                DESTAQUES EM <span id="heroSidebarEditoriaName">SJC</span>
+              </h3>
+            </div>
+            <span class="text-[11px] text-cyan-700 font-bold">Análises Recentes</span>
+          </div>
+
+          <div id="heroSidebarContainer" class="flex-1 flex flex-col justify-between gap-3.5">
+            <div class="p-4 text-center text-xs text-slate-500">Carregando destaques...</div>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ BANNER DE ASSINATURA PREMIUM ALTA CONVERSÃO COM ANIMAÇÕES ══ -->
+  <section class="py-6 sm:py-8 bg-white" aria-label="Assinatura Radar Premium">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="radar-subscription-banner relative overflow-hidden rounded-2xl md:rounded-3xl p-6 sm:p-8 lg:p-10 text-white shadow-2xl">
+        
+        <div class="radar-glow-orb radar-glow-1"></div>
+        <div class="radar-glow-orb radar-glow-2"></div>
+        <div class="radar-scanline"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/35 text-cyan-300 text-[11px] font-bold uppercase tracking-widest backdrop-blur-md">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+              </span>
+              <i class="fa-solid fa-bolt text-amber-400"></i>
+              <span>Inteligência de Mercado Exclusiva • SJC</span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl lg:text-[36px] font-extrabold font-serif leading-tight text-white tracking-tight">
+              Decida o futuro do seu negócio com dados reais de <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-amber-300">São José dos Campos</span>.
+            </h2>
+
+            <p class="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed font-sans max-w-2xl">
+              Não opere no escuro. Tenha acesso irrestrito às pesquisas de consumo por bairro, relatórios de expansão comercial, poder de compra e ao Oráculo de IA calibrado com a economia joseense.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-2 gap-3 pt-2">
+              <div class="flex items-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-xl p-2.5 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-chart-pie text-sm"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[11px] sm:text-xs font-bold text-white truncate">+35 Bairros de SJC</div>
+                  <div class="text-[10px] text-slate-400 truncate">Renda, fluxo e consumo</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-xl p-2.5 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-robot text-sm"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[11px] sm:text-xs font-bold text-white truncate">Oráculo IA 24/7</div>
+                  <div class="text-[10px] text-slate-400 truncate">Consultor estratégico</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-xl p-2.5 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-file-lines text-sm"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[11px] sm:text-xs font-bold text-white truncate">Pesquisas Inéditas</div>
+                  <div class="text-[10px] text-slate-400 truncate">Tabulações proprietárias</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 rounded-xl p-2.5 transition-all group">
+                <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-300 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <i class="fa-solid fa-bell text-sm"></i>
+                </div>
+                <div class="min-w-0">
+                  <div class="text-[11px] sm:text-xs font-bold text-white truncate">Briefings Antecipados</div>
+                  <div class="text-[10px] text-slate-400 truncate">Receba antes de todos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="radar-cta-card relative bg-slate-900/85 backdrop-blur-xl border border-cyan-500/35 hover:border-cyan-400/60 rounded-2xl p-5 sm:p-6 shadow-2xl transition-all">
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 to-rose-600 text-white text-[10px] font-black uppercase tracking-wider shadow-sm animate-pulse">
+                  🔥 OFERTA DE LANÇAMENTO
+                </span>
+                <span class="text-[11px] text-slate-400 font-medium">Vagas Limitadas</span>
+              </div>
+
+              <div class="mb-4">
+                <div class="text-xs text-slate-400 line-through">De R$ 97,00/mês por</div>
+                <div class="flex items-baseline gap-1.5">
+                  <span class="text-xs font-bold text-slate-300">R$</span>
+                  <span class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">49<span class="text-xl">,90</span></span>
+                  <span class="text-xs text-slate-300 font-medium">/mês</span>
+                </div>
+                <p class="text-[11px] text-cyan-300 font-medium mt-0.5">ou economize ainda mais no plano anual</p>
+              </div>
+
+              <a href="index.html#planos" class="radar-shimmer-btn w-full py-3.5 px-6 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider text-white flex items-center justify-center gap-3 shadow-lg hover:shadow-cyan-500/30 transition-all transform hover:-translate-y-0.5 cursor-pointer block text-center">
+                <span>QUERO ASSINAR O RADAR AGORA</span>
+                <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+              </a>
+
+              <div class="mt-4 pt-3 border-t border-white/10 space-y-2">
+                <div class="flex items-center justify-between text-[10px] text-slate-300">
+                  <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved text-emerald-400"></i> 30 dias garantia</span>
+                  <span class="flex items-center gap-1"><i class="fa-solid fa-unlock-keyhole text-cyan-400"></i> Acesso imediato</span>
+                  <span class="flex items-center gap-1"><i class="fa-solid fa-ban text-rose-400"></i> Sem fidelidade</span>
+                </div>
+                
+                <div class="flex items-center justify-center gap-2 pt-1">
+                  <div class="flex -space-x-1.5">
+                    <img class="w-5 h-5 rounded-full ring-1 ring-white/30 object-cover" src="fotos_radar/LEONARDO.jpeg" alt="Usuário" />
+                    <div class="w-5 h-5 rounded-full bg-cyan-700 ring-1 ring-white/30 flex items-center justify-center text-[8px] font-bold text-white">JV</div>
+                    <div class="w-5 h-5 rounded-full bg-emerald-700 ring-1 ring-white/30 flex items-center justify-center text-[8px] font-bold text-white">MC</div>
+                  </div>
+                  <span class="text-[10px] text-slate-300 font-medium">
+                    ⭐⭐⭐⭐⭐ <strong class="text-white">+320 líderes</strong> de SJC já utilizam
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEED DE REPORTAGENS DA EDITORIA ══ -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white" id="feedReportagens">
+    
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 mb-8 border-b border-slate-200 gap-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-[0.2em] text-cyan-700" id="feedEditoriaBadge">Acervo Editorial</span>
+        <h2 class="text-2xl sm:text-3xl font-bold font-serif text-slate-900 mt-1" id="feedEditoriaTitle">
+          Matérias e Análises da Editoria
+        </h2>
+      </div>
+      <div class="text-xs text-slate-500">
+        Mostrando <span id="articleCount" class="font-bold text-slate-900">...</span> reportagens especializadas
+      </div>
+    </div>
+
+    <!-- Grid de Artigos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articlesGrid">
+      <div id="portalLoadingGrid" class="col-span-1 md:col-span-2 lg:col-span-3 py-20 text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cyan-50 text-cyan-600 text-xl mb-3 animate-spin"><i class="fa-solid fa-circle-notch"></i></div>
+        <div class="text-sm font-bold text-slate-800">Conectando ao banco de inteligência Supabase...</div>
+        <div class="text-xs text-slate-500 mt-1">Carregando as matérias da editoria em tempo real, da última postada para a primeira.</div>
+      </div>
+    </div>
+
+    <!-- Mensagem de Nenhum Resultado -->
+    <div id="noResults" class="hidden text-center py-16 bg-slate-50 rounded-2xl border border-dashed border-slate-300 mt-6">
+      <i class="fa-solid fa-folder-open text-4xl text-slate-400 mb-3"></i>
+      <h3 class="text-base font-bold text-slate-800" id="noResultsTitle">Nenhuma matéria encontrada nesta editoria</h3>
+      <p class="text-xs text-slate-500 mt-1" id="noResultsSubtitle">Novas matérias serão publicadas em breve pela redação.</p>
+      <a href="blog.html" class="inline-block mt-4 px-4 py-2 bg-[#0B2545] hover:bg-cyan-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer">
+        Ver Todas as Matérias do Blog
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ══ RADAR EXECUTIVE BRIEFING (NEWSLETTER EDITORIAL) ══ -->
+  <section class="bg-slate-50 border-t border-b border-slate-200 py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl border border-slate-200/90 p-8 sm:p-12 shadow-xs">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          <div class="lg:col-span-7">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-[11px] font-bold uppercase tracking-wider mb-4">
+              <i class="fa-regular fa-envelope-open text-cyan-600"></i> Radar Executive Briefing
+            </div>
+            <h3 class="text-2xl sm:text-3xl lg:text-[32px] font-bold font-serif text-slate-900 leading-tight mb-3">
+              A inteligência econômica de São José dos Campos no seu e-mail.
+            </h3>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+              Toda semana, um resumo executivo com movimentações de mercado, indicadores de consumo por bairro, dados de expansão e análises exclusivas preparadas pelos nossos cientistas de dados.
+            </p>
+            
+            <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500 font-medium">
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> Edição semanal gratuita</span>
+              <span class="text-slate-300">•</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> 100% livre de spam</span>
+              <span class="text-slate-300">•</span>
+              <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-600"></i> Cancele com 1 clique</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-slate-50 p-6 sm:p-8 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Acesso Gratuito</span>
+            </div>
+            
+            <form class="space-y-3" onsubmit="event.preventDefault(); const email = this.querySelector('input').value; alert('Sucesso! O e-mail ' + email + ' foi cadastrado no Radar Executive Briefing.'); this.reset();">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Seu e-mail corporativo ou pessoal:</label>
+                <input 
+                  type="email" 
+                  placeholder="ex: seu.nome@empresa.com.br" 
+                  required 
+                  class="w-full px-4 py-3 rounded-lg bg-white border border-slate-300 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-600 focus:ring-2 focus:ring-cyan-600/20 transition-all shadow-2xs" 
+                />
+              </div>
+
+              <button 
+                type="submit" 
+                class="w-full py-3.5 px-6 bg-[#0B2545] hover:bg-[#0284C7] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer"
+              >
+                <span>Cadastrar Gratuitamente</span>
+                <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+              </button>
+            </form>
+
+            <div class="mt-4 pt-4 border-t border-slate-200/80 flex items-center gap-2 text-[11px] text-slate-500">
+              <i class="fa-solid fa-users text-cyan-700"></i>
+              <span>Mais de <strong>1.450 empresários e analistas</strong> de SJC e região já leem.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER DO PORTAL ══ -->
+  <footer class="bg-[#050B14] text-slate-400 text-xs py-12 border-t border-white/5" role="contentinfo">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      
+      <div class="md:col-span-2">
+        <img src="fotos_radar/logobranco.png" alt="Radar São José" class="h-9 mb-4" loading="lazy" />
+        <p class="text-slate-400 leading-relaxed text-xs max-w-sm mb-4">
+          O <strong>Radar São José</strong> é a plataforma definitiva de inteligência e jornalismo de dados do Vale do Paraíba. Desenvolvido pelo <strong>Studio 8 Intelligence</strong> para transformar microdados em decisões executivas.
+        </p>
+        <p class="text-[11px] text-slate-500">
+          São José dos Campos - SP • Brasil
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-3">Editorias do Portal</h4>
+        <ul class="space-y-2">
+          <li><a href="editoria.html?cat=tecnologia" class="hover:text-cyan-400 transition-colors">Tecnologia</a></li>
+          <li><a href="editoria.html?cat=mobilidade" class="hover:text-cyan-400 transition-colors">Mobilidade</a></li>
+          <li><a href="editoria.html?cat=moradia" class="hover:text-cyan-400 transition-colors">Moradia</a></li>
+          <li><a href="editoria.html?cat=emprego" class="hover:text-cyan-400 transition-colors">Emprego</a></li>
+          <li><a href="editoria.html?cat=cidade" class="hover:text-cyan-400 transition-colors">Cidade</a></li>
+          <li><a href="editoria.html?cat=cultura" class="hover:text-cyan-400 transition-colors">Cultura</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-3">Plataforma & Soluções</h4>
+        <ul class="space-y-2">
+          <li><a href="index.html#solucoes" class="hover:text-cyan-400 transition-colors">Dash Pesquisa 2026</a></li>
+          <li><a href="index.html#solucoes" class="hover:text-cyan-400 transition-colors">Consultor IA</a></li>
+          <li><a href="index.html#planos" class="hover:text-cyan-400 transition-colors">Planos & Assinaturas</a></li>
+          <li><a href="app.html" class="hover:text-cyan-400 transition-colors">Acesso ao App</a></li>
+          <li><a href="login.html" class="hover:text-cyan-400 transition-colors">Área do Assinante</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-4">
+      <div>
+        &copy; 2026 Radar São José & Studio 8 Intelligence. Todos os direitos reservados.
+      </div>
+      <div class="flex gap-6">
+        <a href="index.html" class="hover:text-white transition-colors">Início</a>
+        <a href="blog.html" class="hover:text-white transition-colors">Portal de Notícias</a>
+        <a href="app.html" class="hover:text-white transition-colors">Dashboard Interativo</a>
+        <a href="index.html#contato" class="hover:text-white transition-colors">Contato</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── DATA ATUAL EM PORTUGUÊS ──
+    const dateEl = document.getElementById('portalCurrentDate');
+    if (dateEl) {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('pt-BR', options);
+      dateEl.textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    }
+
+    // ── CLIMA EM TEMPO REAL EM SÃO JOSÉ DOS CAMPOS ──
+    async function fetchSJCWeather() {
+      try {
+        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.18&longitude=-45.88&current=temperature_2m,is_day,weather_code&timezone=America%2FSao_Paulo');
+        if (!res.ok) return;
+        const data = await res.json();
+        const temp = Math.round(data.current.temperature_2m);
+        const code = data.current.weather_code;
+        const isDay = data.current.is_day;
+        
+        let condition = "Céu Limpo";
+        let iconClass = isDay ? "fa-sun text-amber-500" : "fa-moon text-indigo-400";
+
+        if (code === 0) {
+          condition = isDay ? "Ensolarado" : "Céu Limpo";
+          iconClass = isDay ? "fa-sun text-amber-500" : "fa-moon text-indigo-400";
+        } else if (code >= 1 && code <= 3) {
+          condition = "Parcialmente Nublado";
+          iconClass = isDay ? "fa-cloud-sun text-amber-500" : "fa-cloud-moon text-slate-400";
+        } else if (code >= 45 && code <= 48) {
+          condition = "Nevoeiro";
+          iconClass = "fa-smog text-slate-400";
+        } else if (code >= 51 && code <= 67) {
+          condition = "Chuva Leve";
+          iconClass = "fa-cloud-rain text-blue-500";
+        } else if (code >= 80 && code <= 82) {
+          condition = "Pancadas de Chuva";
+          iconClass = "fa-cloud-showers-heavy text-cyan-600";
+        } else if (code >= 95) {
+          condition = "Tempestade";
+          iconClass = "fa-cloud-bolt text-purple-600";
+        }
+
+        const tempEl = document.getElementById('weatherTemp');
+        const condEl = document.getElementById('weatherCondition');
+        const iconEl = document.getElementById('weatherIcon');
+
+        if (tempEl) tempEl.textContent = `${temp}°C`;
+        if (condEl) condEl.textContent = condition;
+        if (iconEl) iconEl.className = `fa-solid ${iconClass} text-sm`;
+      } catch (err) {
+        console.warn('Weather fetch error:', err);
+      }
+    }
+    fetchSJCWeather();
+
+    // ── RSS AO VIVO (SÃO JOSÉ DOS CAMPOS) ──
+    const DEFAULT_RSS_NEWS = [
+      {
+        title: "São José dos Campos lidera geração de empregos qualificados no Vale do Paraíba",
+        source: "G1 Vale do Paraíba",
+        link: "https://g1.globo.com/sp/vale-do-paraiba-regiao/",
+        time: "Hoje"
+      },
+      {
+        title: "Inovação e dados: setor imobiliário de São José dos Campos projeta expansão na zona oeste",
+        source: "CNN Brasil",
+        link: "https://www.cnnbrasil.com.br",
+        time: "Hoje"
+      },
+      {
+        title: "Parque Tecnológico de São José dos Campos amplia incentivo para startups e IA",
+        source: "Folha de S.Paulo",
+        link: "https://www1.folha.uol.com.br",
+        time: "Hoje"
+      },
+      {
+        title: "Pesquisa demográfica detalha evolução do poder de compra por bairros de SJC",
+        source: "Radar SJC Inteligência",
+        link: "artigos/perfil-habitantes-sao-jose-dos-campos.html",
+        time: "Hoje"
+      }
+    ];
+
+    let activeRssNews = [...DEFAULT_RSS_NEWS];
+    let currentRssIndex = 0;
+    let rssTimer = null;
+
+    function renderRSSItem(index) {
+      if (!activeRssNews || activeRssNews.length === 0) return;
+      currentRssIndex = (index + activeRssNews.length) % activeRssNews.length;
+      const item = activeRssNews[currentRssIndex];
+
+      const headlineEl = document.getElementById('rssFeedHeadline');
+      const sourceEl = document.getElementById('rssFeedSource');
+      const linkEl = document.getElementById('rssFeedLink');
+      const countEl = document.getElementById('rssFeedCount');
+
+      if (headlineEl) {
+        headlineEl.style.opacity = '0';
+        setTimeout(() => {
+          headlineEl.textContent = item.title;
+          headlineEl.style.opacity = '1';
+        }, 150);
+      }
+      if (sourceEl) sourceEl.textContent = item.source || 'Imprensa';
+      if (linkEl) linkEl.href = item.link || '#';
+      if (countEl) countEl.textContent = `${currentRssIndex + 1}/${activeRssNews.length}`;
+    }
+
+    function startRssRotation() {
+      if (rssTimer) clearInterval(rssTimer);
+      rssTimer = setInterval(() => {
+        renderRSSItem(currentRssIndex + 1);
+      }, 5500);
+    }
+    window.nextRssNews = () => { startRssRotation(); renderRSSItem(currentRssIndex + 1); };
+    window.prevRssNews = () => { startRssRotation(); renderRSSItem(currentRssIndex - 1); };
+
+    function isStrictlySjcNews(title, desc = '') {
+      const fullText = (title + ' ' + desc).toLowerCase();
+      const sjcMust = ['são josé dos campos', 'sao jose dos campos', 'são josé', 'sao jose', 'sjc', 'joseense', 'joseenses'];
+      const hasSjc = sjcMust.some(kw => fullText.includes(kw));
+      if (!hasSjc) return false;
+      const otherCities = ['taubaté', 'taubate', 'jacareí', 'jacarei', 'pindamonhangaba', 'guaratinguetá', 'caraguatatuba', 'ubatuba', 'ilhabela', 'são sebastião'];
+      const mentionsOther = otherCities.some(c => fullText.includes(c));
+      if (mentionsOther && !fullText.includes('são josé') && !fullText.includes('sao jose') && !fullText.includes('sjc')) {
+        return false;
+      }
+      return true;
+    }
+
+    async function fetchSJCRssFeed() {
+      renderRSSItem(0);
+      startRssRotation();
+      try {
+        const rssTarget = "https://news.google.com/rss/search?q=%22S%C3%A3o+Jos%C3%A9+dos+Campos%22+OR+%22SJC%22+OR+%22Joseense%22&hl=pt-BR&gl=BR&ceid=BR:pt-419";
+        const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssTarget)}`;
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+        const response = await fetch(apiUrl, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.status === 'ok' && Array.isArray(data.items) && data.items.length > 0) {
+            const fetched = [];
+            data.items.forEach(item => {
+              if (item.title && item.link) {
+                let cleanTitle = item.title;
+                let source = "Imprensa";
+                if (cleanTitle.includes(" - ")) {
+                  const parts = cleanTitle.split(" - ");
+                  source = parts.pop().trim();
+                  cleanTitle = parts.join(" - ").trim();
+                }
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = cleanTitle;
+                cleanTitle = tempDiv.textContent || cleanTitle;
+                if (!isStrictlySjcNews(cleanTitle, item.description || '')) return;
+                fetched.push({
+                  title: cleanTitle,
+                  source: source,
+                  link: item.link,
+                  time: item.pubDate ? new Date(item.pubDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Hoje'
+                });
+              }
+            });
+            if (fetched.length >= 3) {
+              activeRssNews = fetched.slice(0, 10);
+              renderRSSItem(0);
+              startRssRotation();
+            }
+          }
+        }
+      } catch (err) {
+        // Fallback robusto já ativo
+      }
+    }
+    fetchSJCRssFeed();
+
+    // ── DICIONÁRIO DE EDITORIAS & CONFIGURAÇÃO DINÂMICA ──
+    const CATEGORY_MAP = {
+      'tecnologia': {
+        label: 'Tecnologia',
+        fullLabel: 'Tecnologia & Inovação',
+        slug: 'tecnologia',
+        icon: 'fa-microchip',
+        color: 'bg-pink-600',
+        text: 'text-pink-700',
+        border: 'border-pink-200',
+        bgBadge: 'bg-pink-50 text-pink-800',
+        keywords: ['tec', 'inov', 'ciênc', 'ita', 'tecnologia', 'aerospacial', 'startup']
+      },
+      'mobilidade': {
+        label: 'Mobilidade',
+        fullLabel: 'Mobilidade & Infraestrutura',
+        slug: 'mobilidade',
+        icon: 'fa-car-side',
+        color: 'bg-amber-600',
+        text: 'text-amber-700',
+        border: 'border-amber-200',
+        bgBadge: 'bg-amber-50 text-amber-800',
+        keywords: ['mobi', 'transp', 'dutra', 'infra', 'mobilidade', 'ônibus', 'ponte', 'rodovia']
+      },
+      'moradia': {
+        label: 'Moradia',
+        fullLabel: 'Moradia & Mercado Imobiliário',
+        slug: 'moradia',
+        icon: 'fa-building',
+        color: 'bg-purple-600',
+        text: 'text-purple-700',
+        border: 'border-purple-200',
+        bgBadge: 'bg-purple-50 text-purple-800',
+        keywords: ['mora', 'imob', 'alug', 'moradia', 'bairro', 'apartamento', 'casa', 'condomínio']
+      },
+      'emprego': {
+        label: 'Emprego',
+        fullLabel: 'Emprego & Economia Local',
+        slug: 'emprego',
+        icon: 'fa-chart-line',
+        color: 'bg-emerald-600',
+        text: 'text-emerald-700',
+        border: 'border-emerald-200',
+        bgBadge: 'bg-emerald-50 text-emerald-800',
+        keywords: ['econ', 'empreg', 'trabalh', 'indús', 'vaga', 'salário', 'renda', 'comércio']
+      },
+      'cidade': {
+        label: 'Cidade',
+        fullLabel: 'Cidade, Demografia & Saúde',
+        slug: 'cidade',
+        icon: 'fa-tree-city',
+        color: 'bg-teal-600',
+        text: 'text-teal-700',
+        border: 'border-teal-200',
+        bgBadge: 'bg-teal-50 text-teal-800',
+        keywords: ['cidade', 'popul', 'censo', 'saúde', 'hospital', 'ambiente', 'clima', 'enchentes', 'habitantes']
+      },
+      'cultura': {
+        label: 'Cultura',
+        fullLabel: 'Cultura, Lazer & Sociedade',
+        slug: 'cultura',
+        icon: 'fa-masks-theater',
+        color: 'bg-indigo-600',
+        text: 'text-indigo-700',
+        border: 'border-indigo-200',
+        bgBadge: 'bg-indigo-50 text-indigo-800',
+        keywords: ['cult', 'even', 'arte', 'músic', 'show', 'teatro', 'gastronomia', 'parque', 'turismo']
+      }
+    };
+
+    function resolveCategory(cat) {
+      if (!cat) return CATEGORY_MAP['cidade'];
+      const c = cat.toLowerCase().trim();
+      
+      // Correspondência direta
+      if (CATEGORY_MAP[c]) return CATEGORY_MAP[c];
+      
+      // Prioridade estrita (Moradia antes de Mobilidade para evitar colisão de 'imobiliário' com 'mobi')
+      const priorityOrder = ['moradia', 'tecnologia', 'mobilidade', 'emprego', 'cultura', 'cidade'];
+      for (const key of priorityOrder) {
+        const meta = CATEGORY_MAP[key];
+        if (meta && meta.keywords.some(kw => c.includes(kw))) {
+          return meta;
+        }
+      }
+      
+      // Fallback dinâmico para qualquer nova categoria criada no Supabase no futuro
+      const capitalized = cat.charAt(0).toUpperCase() + cat.slice(1);
+      return {
+        label: capitalized,
+        fullLabel: capitalized,
+        slug: c.replace(/\s+/g, '-'),
+        icon: 'fa-folder-open',
+        color: 'bg-cyan-700',
+        text: 'text-cyan-700',
+        border: 'border-cyan-200',
+        bgBadge: 'bg-cyan-50 text-cyan-800',
+        keywords: [c]
+      };
+    }
+
+    function postBelongsToCategory(post, targetSlug) {
+      if (!targetSlug || targetSlug === 'todas') return true;
+      const target = targetSlug.toLowerCase().trim();
+      const resolved = resolveCategory(post.category);
+      if (resolved.slug === target) return true;
+      
+      const rawCat = (post.category || '').toLowerCase();
+      if (rawCat === target || rawCat.includes(target) || target.includes(rawCat)) return true;
+      
+      const targetMeta = CATEGORY_MAP[target];
+      if (targetMeta && targetMeta.keywords) {
+        if (targetMeta.keywords.some(kw => rawCat.includes(kw))) return true;
+      }
+      return false;
+    }
+
+    function formatPortalDate(isoStr) {
+      if (!isoStr) return 'Recente';
+      try {
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return 'Recente';
+        const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()} às ${hours}:${minutes}`;
+      } catch (e) {
+        return 'Recente';
+      }
+    }
+
+    function getArticleUrl(slug) {
+      return `artigo.html?slug=${encodeURIComponent(slug)}`;
+    }
+
+    function renderPortalArticleCard(post) {
+      const catMeta = resolveCategory(post.category);
+      const formattedDate = formatPortalDate(post.published_at || post.created_at);
+      const readTime = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
+      const author = post.author_name || 'Leonardo Venâncio';
+      const isMayumi = author.toLowerCase().includes('mayumi');
+      const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+      const coverUrl = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+      const articleUrl = getArticleUrl(post.slug);
+      const excerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
+
+      return `
+        <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="${catMeta.slug}">
+          <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
+            <img src="${coverUrl}" alt="${post.title} - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+            <div class="absolute top-3 left-3">
+              <span class="${catMeta.color} text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
+                <i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}
+              </span>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
+                <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> ${readTime}</span>
+                <span>•</span>
+                <span>${formattedDate}</span>
+              </div>
+              <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
+                <a href="${articleUrl}">${post.title}</a>
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
+                ${excerpt}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <img src="${authorAvatarSrc}" alt="${author}" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+                <span class="text-xs font-medium text-slate-700">${author}</span>
+              </div>
+              <a href="${articleUrl}" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
+                Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function updateHeroSection(heroPost, sidebarPosts, currentCatMeta) {
+      if (!heroPost) {
+        document.getElementById('heroSection').style.display = 'none';
+        return;
+      }
+      document.getElementById('heroSection').style.display = 'block';
+
+      const catMeta = resolveCategory(heroPost.category) || currentCatMeta;
+      const articleUrl = getArticleUrl(heroPost.slug);
+      const formattedDate = formatPortalDate(heroPost.published_at || heroPost.created_at);
+      const readTime = (heroPost.seo_metadata && heroPost.seo_metadata.read_time) || '4 min de leitura';
+      const excerpt = heroPost.excerpt || (heroPost.seo_metadata && heroPost.seo_metadata.bluf_summary) || heroPost.title;
+      const coverUrl = heroPost.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+
+      const catEl = document.getElementById('heroBadgeCategory');
+      if (catEl) {
+        catEl.className = `${catMeta.bgBadge} text-[11px] font-bold px-2.5 py-0.5 rounded border ${catMeta.border}`;
+        catEl.innerHTML = `<i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}`;
+      }
+
+      const kickerEl = document.getElementById('heroKicker');
+      if (kickerEl) {
+        kickerEl.textContent = `MANCHETE • ${catMeta.label.toUpperCase()}`;
+      }
+
+      const timeEl = document.getElementById('heroReadingTime');
+      if (timeEl) timeEl.innerHTML = `<i class="fa-regular fa-clock text-slate-400"></i> ${readTime}`;
+
+      const dateEl = document.getElementById('heroDate');
+      if (dateEl) dateEl.textContent = formattedDate;
+
+      const titleLink = document.getElementById('heroTitleLink');
+      if (titleLink) {
+        titleLink.href = articleUrl;
+        titleLink.textContent = heroPost.title;
+      }
+
+      const subEl = document.getElementById('heroSubtitle');
+      if (subEl) subEl.textContent = excerpt;
+
+      const imgLink = document.getElementById('heroImageLink');
+      if (imgLink) imgLink.href = articleUrl;
+
+      const imgEl = document.getElementById('heroImage');
+      if (imgEl) {
+        imgEl.src = coverUrl;
+        imgEl.alt = `${heroPost.title} - Radar São José dos Campos`;
+      }
+
+      const ctaBtn = document.getElementById('heroCtaBtn');
+      if (ctaBtn) ctaBtn.href = articleUrl;
+
+      const authorName = document.getElementById('heroAuthorName');
+      const authorVal = heroPost.author_name || 'Leonardo Venâncio';
+      if (authorName) authorName.textContent = authorVal;
+
+      const authorAvatar = document.getElementById('heroAuthorAvatar');
+      if (authorAvatar) {
+        const isMayumi = authorVal.toLowerCase().includes('mayumi');
+        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+        authorAvatar.alt = authorVal;
+      }
+
+      // Sidebar lateral (Destaques da Editoria)
+      const sidebarTitle = document.getElementById('heroSidebarEditoriaName');
+      if (sidebarTitle) sidebarTitle.textContent = currentCatMeta.label.toUpperCase();
+
+      const sidebarContainer = document.getElementById('heroSidebarContainer');
+      if (sidebarContainer) {
+        if (Array.isArray(sidebarPosts) && sidebarPosts.length > 0) {
+          sidebarContainer.innerHTML = sidebarPosts.map(post => {
+            const sCat = resolveCategory(post.category);
+            const sUrl = getArticleUrl(post.slug);
+            const sRead = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
+            const sCover = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+            const sExcerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
+
+            return `
+              <article class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-600/60 hover:shadow-md transition-all group flex items-center gap-3.5">
+                <div class="relative w-24 sm:w-28 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-slate-200 shadow-2xs">
+                  <img src="${sCover}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5 mb-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider ${sCat.text} truncate">${sCat.label}</span>
+                    <span class="text-slate-300 text-[10px]">•</span>
+                    <span class="text-slate-500 text-[10px] whitespace-nowrap">${sRead}</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-colors line-clamp-2 leading-snug">
+                    <a href="${sUrl}">${post.title}</a>
+                  </h4>
+                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-1 leading-normal hidden sm:block">${sExcerpt}</p>
+                </div>
+              </article>
+            `;
+          }).join('');
+        } else {
+          sidebarContainer.innerHTML = `
+            <div class="p-6 text-center bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500">
+              <i class="fa-solid fa-layer-group text-slate-400 text-lg mb-2"></i>
+              <p>Mais análises sobre ${currentCatMeta.label} serão publicadas em breve.</p>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // ── BUSCA RÁPIDA ──
+    function searchArticles() {
+      const input = document.getElementById('searchInput');
+      if (!input) return;
+      const term = input.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#articlesGrid .article-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (!term || text.includes(term)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const countEl = document.getElementById('articleCount');
+      if (countEl) countEl.textContent = visibleCount;
+      const noRes = document.getElementById('noResults');
+      if (noRes) {
+        if (visibleCount === 0) noRes.classList.remove('hidden');
+        else noRes.classList.add('hidden');
+      }
+    }
+    window.searchArticles = searchArticles;
+
+    // ── CARREGAMENTO DINÂMICO SUPABASE (SUPORTE ESCALÁVEL A QUALQUER CATEGORIA) ──
+    const SUPABASE_BLOG_URL = "https://tocyvysucpslayzglixq.supabase.co";
+    const SUPABASE_BLOG_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+
+    async function loadEditoriaPage() {
+      // 1. Identificar a editoria passada na URL
+      const urlParams = new URLSearchParams(window.location.search);
+      let catParam = (urlParams.get('cat') || urlParams.get('editoria') || 'tecnologia').toLowerCase().trim();
+      
+      // Se for 'todas', redireciona para a home geral do blog
+      if (catParam === 'todas') {
+        window.location.href = 'blog.html';
+        return;
+      }
+
+      const currentCatMeta = resolveCategory(catParam);
+      
+      // 2. Atualizar Título e Metadados da Página
+      document.title = `${currentCatMeta.label} | Radar São José dos Campos`;
+      const pageDesc = document.getElementById('pageDescription');
+      if (pageDesc) pageDesc.content = `Reportagens, indicadores e análises de inteligência sobre ${currentCatMeta.fullLabel} em São José dos Campos.`;
+      const ogTitle = document.getElementById('ogTitle');
+      if (ogTitle) ogTitle.content = `${currentCatMeta.label} | Radar São José`;
+      const ogDesc = document.getElementById('ogDescription');
+      if (ogDesc) ogDesc.content = `Cobertura especializada sobre ${currentCatMeta.fullLabel} em São José dos Campos.`;
+
+      // 3. Atualizar Título da Seção do Feed
+      const feedTitle = document.getElementById('feedEditoriaTitle');
+      if (feedTitle) feedTitle.textContent = `${currentCatMeta.fullLabel} em São José dos Campos`;
+      const feedBadge = document.getElementById('feedEditoriaBadge');
+      if (feedBadge) feedBadge.textContent = `Acervo de ${currentCatMeta.label}`;
+
+      // 4. Marcar o Botão Ativo na Barra de Navegação
+      const navButtons = document.querySelectorAll('#categoryNav .cat-btn');
+      let foundMatchingBtn = false;
+      navButtons.forEach(btn => {
+        const bCat = btn.getAttribute('data-cat') || '';
+        if (bCat === currentCatMeta.slug || bCat === catParam) {
+          btn.className = 'cat-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-[#0B2545] text-white shadow-sm shrink-0 border border-[#0B2545] cursor-pointer';
+          foundMatchingBtn = true;
+        } else {
+          btn.className = 'cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0 cursor-pointer';
+        }
+      });
+
+      // Se for uma categoria nova do banco que ainda não estava nos botões estáticos, adiciona dinamicamente
+      if (!foundMatchingBtn && currentCatMeta.slug) {
+        const navContainer = document.getElementById('categoryNav');
+        if (navContainer) {
+          const newBtn = document.createElement('a');
+          newBtn.href = `editoria.html?cat=${encodeURIComponent(currentCatMeta.slug)}`;
+          newBtn.className = 'cat-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-[#0B2545] text-white shadow-sm shrink-0 border border-[#0B2545] cursor-pointer';
+          newBtn.setAttribute('data-cat', currentCatMeta.slug);
+          newBtn.innerHTML = `<i class="fa-solid ${currentCatMeta.icon} mr-1.5 text-xs"></i> ${currentCatMeta.label}`;
+          navContainer.appendChild(newBtn);
+        }
+      }
+
+      // 5. Buscar Artigos no Banco Supabase
+      let allPosts = [];
+      try {
+        const supRes = await fetch(`${SUPABASE_BLOG_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&select=*`, {
+          headers: {
+            'apikey': SUPABASE_BLOG_KEY,
+            'Authorization': `Bearer ${SUPABASE_BLOG_KEY}`
+          }
+        });
+        if (supRes.ok) {
+          allPosts = await supRes.json();
+        }
+      } catch (err) {
+        console.warn('[Editoria] Supabase warn:', err);
+      }
+
+      if (!allPosts || allPosts.length === 0) {
+        try {
+          const apiRes = await fetch('/api/posts?status=published&sortBy=published_at&order=desc&limit=100');
+          if (apiRes.ok) {
+            const data = await apiRes.json();
+            if (data && data.success && Array.isArray(data.posts)) {
+              allPosts = data.posts;
+            }
+          }
+        } catch (apiErr) {
+          console.warn('[Editoria] Local API fallback warn:', apiErr);
+        }
+      }
+
+      // 6. Filtrar rigorosamente as matérias desta editoria
+      let editoriaPosts = [];
+      if (Array.isArray(allPosts)) {
+        // Ordenação estrita: da última postada (mais recente) para a primeira
+        allPosts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
+        editoriaPosts = allPosts.filter(p => postBelongsToCategory(p, currentCatMeta.slug));
+      }
+
+      const countEl = document.getElementById('articleCount');
+      if (countEl) countEl.textContent = editoriaPosts.length;
+
+      const grid = document.getElementById('articlesGrid');
+      const noRes = document.getElementById('noResults');
+
+      if (editoriaPosts.length === 0) {
+        // Estado sem matérias nesta categoria
+        if (grid) grid.innerHTML = '';
+        if (noRes) {
+          noRes.classList.remove('hidden');
+          const noTitle = document.getElementById('noResultsTitle');
+          if (noTitle) noTitle.textContent = `Nenhuma matéria encontrada em ${currentCatMeta.label}`;
+          const noSub = document.getElementById('noResultsSubtitle');
+          if (noSub) noSub.textContent = `A equipe editorial está preparando novas análises e reportagens sobre ${currentCatMeta.label}.`;
+        }
+        updateHeroSection(null, [], currentCatMeta);
+        return;
+      }
+
+      if (noRes) noRes.classList.add('hidden');
+
+      // 7. Hero da Editoria:
+      // Matéria de Capa desta Editoria: se houver alguma com is_featured na editoria, usa ela; senão a mais recente (posts[0])
+      let heroPost = editoriaPosts.find(p => p.is_featured === true);
+      if (!heroPost) heroPost = editoriaPosts[0];
+
+      // Próximos destaques laterais desta editoria (até 3)
+      const sidebarPosts = editoriaPosts.filter(p => p.id !== heroPost.id && p.slug !== heroPost.slug).slice(0, 3);
+      updateHeroSection(heroPost, sidebarPosts, currentCatMeta);
+
+      // 8. Grid Inferior: exibe todas as matérias desta editoria
+      if (grid) {
+        grid.innerHTML = editoriaPosts.map(renderPortalArticleCard).join('');
+      }
+    }
+
+    loadEditoriaPage();
+  </script>
+</body>
+</html>

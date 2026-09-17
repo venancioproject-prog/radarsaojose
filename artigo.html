@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Matéria | Radar São José</title>
+  <meta name="description" id="pageDescription" content="Portal oficial de jornalismo de dados, análises demográficas, econômicas e pesquisas municipais em São José dos Campos e Vale do Paraíba." />
+  <link rel="icon" type="image/png" href="fotos_radar/logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" id="ogTitle" content="Radar São José | Inteligência de Dados" />
+  <meta property="og:description" id="ogDesc" content="Análises e dados de São José dos Campos" />
+  <meta property="og:site_name" content="Radar São José" />
+  <meta property="og:image" id="ogImage" content="fotos_radar/capa_sjc_skyline.jpg" />
+
+  <!-- Google Fonts: Montserrat + Merriweather -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'system-ui', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#0B2545',
+              dark: '#07172C',
+              mid: '#0b315c',
+              red: '#DC2626',
+              cyan: '#0284C7',
+              gold: '#D97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Montserrat', system-ui, sans-serif;
+      color: #1e293b;
+      background-color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    .site-header {
+      background: #0B2545;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+    }
+
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-menu a {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .navbar-menu a:hover {
+      color: #0284C7;
+    }
+
+    .article-body h2 {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      line-height: 1.35;
+      border-left: 4px solid #DC2626;
+      padding-left: 0.75rem;
+    }
+
+    .article-body h3 {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-body p {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #334155;
+      margin-bottom: 1.35rem;
+    }
+
+    .article-body ul, .article-body ol {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #334155;
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .article-body ul { list-style-type: disc; }
+    .article-body ol { list-style-type: decimal; }
+
+    .article-body blockquote {
+      border-left: 4px solid #0284C7;
+      background: #f0f9ff;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 0.75rem 0.75rem 0;
+      font-style: italic;
+      color: #0369a1;
+    }
+
+    .article-body strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .article-body img {
+      border-radius: 0.75rem;
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+  </style>
+</head>
+<body class="bg-[#f8fafc] text-slate-900 font-sans antialiased">
+
+  <!-- CABEÇALHO -->
+  <header class="site-header" role="banner">
+    <div class="navbar-container">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="fotos_radar/logobranco.png" alt="Radar São José" class="h-9 w-auto" />
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 navbar-menu">
+        <a href="index.html#solucoes">Soluções</a>
+        <a href="index.html#planos">Planos</a>
+        <a href="blog.html" class="text-cyan-400">Blog do Radar</a>
+        <a href="admin-crm.html#blog" class="text-xs text-amber-300 font-bold bg-amber-950/40 px-3 py-1 rounded-md border border-amber-500/30">
+          <i class="fa-solid fa-pen-to-square mr-1"></i>Editar no CRM
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm">
+          <i class="fa-solid fa-arrow-left text-[11px]"></i> Voltar ao Portal
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- LOADING / ERROR SPINNER -->
+  <div id="loadingState" class="max-w-4xl mx-auto px-4 py-20 text-center">
+    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-50 text-cyan-600 text-2xl mb-4 animate-spin">
+      <i class="fa-solid fa-circle-notch"></i>
+    </div>
+    <h3 class="text-lg font-bold text-slate-800 mb-1">Carregando análise e dados...</h3>
+    <p class="text-xs text-slate-500">Buscando as informações mais recentes do banco de inteligência.</p>
+  </div>
+
+  <div id="errorState" class="hidden max-w-xl mx-auto px-4 py-20 text-center">
+    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-2xl">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+    <h3 class="text-xl font-bold text-slate-900 mb-2">Matéria não encontrada</h3>
+    <p class="text-sm text-slate-600 mb-6">Não conseguimos localizar a matéria informada ou ela pode ter sido arquivada.</p>
+    <a href="blog.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider">
+      <i class="fa-solid fa-newspaper"></i> Ir para a Página Inicial do Blog
+    </a>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL DO ARTIGO -->
+  <main id="articleContainer" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6 uppercase tracking-wider">
+      <a href="index.html" class="hover:text-cyan-700">Radar SJC</a>
+      <span>/</span>
+      <a href="blog.html" class="hover:text-cyan-700">Blog</a>
+      <span>/</span>
+      <a id="breadcrumbCategoryLink" href="blog.html" class="hover:underline"><span id="breadcrumbCategory" class="text-cyan-800 font-bold">Demografia & População</span></a>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      
+      <!-- Coluna Principal do Artigo -->
+      <article class="lg:col-span-8 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
+        
+        <!-- Kicker e Metadados do Topo -->
+        <div class="flex flex-wrap items-center gap-2.5 mb-4">
+          <a id="postCategoryBadgeLink" href="blog.html"><span id="postCategoryBadge" class="bg-sky-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded shadow-sm hover:opacity-90 transition-opacity">
+            Demografia & População
+          </span></a>
+          <span class="text-slate-300">•</span>
+          <span id="postReadingTime" class="text-xs text-slate-500 font-medium flex items-center gap-1">
+            <i class="fa-regular fa-clock text-slate-400"></i> 4 min de leitura
+          </span>
+          <span class="text-slate-300">•</span>
+          <span id="postDate" class="text-xs text-slate-500 font-medium">16 de Setembro de 2026</span>
+        </div>
+
+        <!-- Título -->
+        <h1 id="postTitle" class="text-2xl sm:text-4xl font-extrabold font-serif text-slate-950 leading-tight mb-4">
+          Carregando título...
+        </h1>
+
+        <!-- Linha Fina / Subtítulo -->
+        <p id="postSubtitle" class="text-base sm:text-lg text-slate-600 leading-relaxed mb-6 font-sans">
+          Carregando resumo...
+        </p>
+
+        <!-- Informações do Autor -->
+        <div class="flex items-center justify-between py-4 border-y border-slate-100 mb-8 text-xs text-slate-600">
+          <div class="flex items-center gap-3">
+            <img id="postAuthorAvatar" src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-10 h-10 rounded-full object-cover ring-2 ring-slate-100" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+            <div>
+              <div id="postAuthorName" class="font-bold text-slate-900">Leonardo Venâncio</div>
+              <div id="postAuthorRole" class="text-slate-500">Head de Inteligência e Ciência de Dados no Radar São José</div>
+            </div>
+          </div>
+          <div id="postShareArea" class="flex items-center gap-2">
+            <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link da matéria copiado!');" class="p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors" title="Copiar link">
+              <i class="fa-solid fa-link"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Foto de Capa com Legenda e Créditos -->
+        <div class="mb-8">
+          <div class="aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-100 shadow-inner">
+            <img id="postCoverImage" src="fotos_radar/capa_sjc_skyline.jpg" alt="Foto de capa" class="w-full h-full object-cover" />
+          </div>
+          <div id="postCoverMeta" class="mt-2 text-right text-[11px] text-slate-400 italic"></div>
+        </div>
+
+        <!-- Sumário Automático de Tópicos (se houver h2 no texto) -->
+        <div id="tocContainer" class="hidden mb-8 p-5 bg-slate-50 border border-slate-200 rounded-xl">
+          <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-list-ol text-cyan-600"></i> Neste artigo você verá:
+          </h4>
+          <ul id="tocList" class="space-y-1.5 text-xs text-cyan-700 font-semibold"></ul>
+        </div>
+
+        <!-- Corpo do Artigo -->
+        <div id="postContentBody" class="article-body">
+          <p>Conteúdo da matéria em carregamento...</p>
+        </div>
+
+        <!-- FAQs em Sanfona (se houver) -->
+        <div id="faqSection" class="hidden mt-12 pt-8 border-t border-slate-200">
+          <h3 class="text-lg font-bold font-serif text-slate-900 mb-4 flex items-center gap-2">
+            <i class="fa-regular fa-circle-question text-cyan-600"></i> Perguntas Frequentes sobre o Tema
+          </h3>
+          <div id="faqAccordion" class="space-y-3"></div>
+        </div>
+
+        <!-- Tags do Artigo -->
+        <div id="tagsContainer" class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap items-center gap-2"></div>
+
+      </article>
+
+      <!-- Barra Lateral (Destaques e Assinatura) -->
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <!-- Box de Assinatura Radar Premium -->
+        <div class="bg-gradient-to-br from-[#0B2545] to-[#07172C] text-white p-6 rounded-2xl border border-white/10 shadow-lg relative overflow-hidden">
+          <div class="relative z-10">
+            <span class="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-sm inline-block mb-3">
+              ASSINATURA RADAR
+            </span>
+            <h4 class="text-base font-bold font-serif leading-snug mb-2">
+              Tome decisões em São José dos Campos com dados oficiais
+            </h4>
+            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+              Acesse relatórios demográficos completos, mapeamento imobiliário e inteligência municipal exclusiva.
+            </p>
+            <a href="index.html#planos" class="block text-center py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all">
+              Conhecer Planos
+            </a>
+          </div>
+        </div>
+
+        <!-- Matérias Mais Recentes -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+            <h4 class="text-xs font-black uppercase tracking-widest text-slate-900">
+              ÚLTIMAS ANÁLISES
+            </h4>
+            <a href="blog.html" class="text-[11px] text-cyan-700 font-bold hover:underline">Ver todas</a>
+          </div>
+          <div id="sidebarRecentArticles" class="space-y-3"></div>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#07172C] text-slate-400 text-xs py-10 border-t border-white/10 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <img src="fotos_radar/logobranco.png" alt="Radar São José" class="h-7" />
+        <span>&copy; 2026 Radar São José & Studio 8 Intelligence.</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="blog.html" class="hover:text-cyan-400">Portal de Notícias</a>
+        <span>•</span>
+        <a href="index.html" class="hover:text-cyan-400">Página Inicial</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+
+    const CATEGORY_MAP = {
+      'Demografia & População': { icon: 'fa-users', color: 'bg-sky-600' },
+      'Economia & Empregos': { icon: 'fa-chart-line', color: 'bg-emerald-600' },
+      'Imobiliário & Moradia': { icon: 'fa-building', color: 'bg-purple-600' },
+      'Inovação & Tecnologia': { icon: 'fa-microchip', color: 'bg-pink-600' },
+      'Mobilidade & Infraestrutura': { icon: 'fa-car-side', color: 'bg-amber-600' },
+      'Saúde, Ambiente & Cidade': { icon: 'fa-tree-city', color: 'bg-teal-600' }
+    };
+
+    function formatDate(isoStr) {
+      if (!isoStr) return 'Hoje';
+      try {
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return 'Hoje';
+        const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()} às ${hours}:${minutes}`;
+      } catch (e) {
+        return 'Hoje';
+      }
+    }
+
+    async function loadArticle() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+
+      if (!slug) {
+        document.getElementById('loadingState').classList.add('hidden');
+        document.getElementById('errorState').classList.remove('hidden');
+        return;
+      }
+
+      let post = null;
+
+      // 1. Tenta Supabase REST direto
+      try {
+        const supRes = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts?slug=eq.${encodeURIComponent(slug)}&select=*`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+        if (supRes.ok) {
+          const list = await supRes.json();
+          if (list && list.length > 0) post = list[0];
+        }
+      } catch (err) {
+        console.warn('Supabase fetch error:', err);
+      }
+
+      // 2. Fallback via API Local
+      if (!post) {
+        try {
+          const apiRes = await fetch(`/api/posts?slug=${encodeURIComponent(slug)}`);
+          if (apiRes.ok) {
+            const data = await apiRes.json();
+            if (data && data.success && data.post) post = data.post;
+          }
+        } catch (apiErr) {
+          console.warn('API fetch error:', apiErr);
+        }
+      }
+
+      document.getElementById('loadingState').classList.add('hidden');
+
+      if (!post) {
+        document.getElementById('errorState').classList.remove('hidden');
+        return;
+      }
+
+      // Preencher página com dados reais
+      document.getElementById('articleContainer').classList.remove('hidden');
+
+      // Título e SEO
+      document.title = `${post.title} | Radar São José`;
+      const pDesc = document.getElementById('pageDescription');
+      if (pDesc) pDesc.content = post.excerpt || post.title;
+
+      const breadcrumbCat = document.getElementById('breadcrumbCategory');
+      if (breadcrumbCat) breadcrumbCat.textContent = post.category || 'Geral';
+
+      function getCategorySlug(cat) {
+        const c = (cat || '').toLowerCase();
+        if (c.includes('mora') || c.includes('imob')) return 'moradia';
+        if (c.includes('tec') || c.includes('inov')) return 'tecnologia';
+        if (c.includes('mobilidade') || c.includes('transp')) return 'mobilidade';
+        if (c.includes('empr') || c.includes('econ')) return 'emprego';
+        if (c.includes('cult') || c.includes('arte')) return 'cultura';
+        return 'cidade';
+      }
+      const catSlug = getCategorySlug(post.category);
+      const editoriaUrl = 'editoria.html?cat=' + catSlug;
+      const bcLink = document.getElementById('breadcrumbCategoryLink');
+      if (bcLink) bcLink.href = editoriaUrl;
+      const catBadgeLink = document.getElementById('postCategoryBadgeLink');
+      if (catBadgeLink) catBadgeLink.href = editoriaUrl;
+
+      const catBadge = document.getElementById('postCategoryBadge');
+      if (catBadge) {
+        const catInfo = CATEGORY_MAP[post.category] || { icon: 'fa-tag', color: 'bg-cyan-600' };
+        catBadge.className = `${catInfo.color} text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded shadow-sm`;
+        catBadge.innerHTML = `<i class="fa-solid ${catInfo.icon} mr-1"></i>${post.category || 'Demografia & População'}`;
+      }
+
+      const readTime = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
+      document.getElementById('postReadingTime').innerHTML = `<i class="fa-regular fa-clock text-slate-400"></i> ${readTime}`;
+      document.getElementById('postDate').textContent = formatDate(post.published_at || post.created_at);
+
+      document.getElementById('postTitle').textContent = post.title;
+      document.getElementById('postSubtitle').textContent = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || '';
+
+      const authorName = post.author_name || 'Leonardo Venâncio';
+      document.getElementById('postAuthorName').textContent = authorName;
+      document.getElementById('postAuthorRole').textContent = post.author_role || 'Head de Inteligência e Ciência de Dados no Radar São José';
+      const authorAvatar = document.getElementById('postAuthorAvatar');
+      if (authorAvatar) {
+        const isMayumi = authorName.toLowerCase().includes('mayumi');
+        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+        authorAvatar.alt = authorName;
+      }
+
+      // Capa e Metadados de Imagem
+      const coverImg = document.getElementById('postCoverImage');
+      const coverUrl = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+      coverImg.src = coverUrl;
+      coverImg.alt = (post.seo_metadata && post.seo_metadata.cover_image_alt) || post.title;
+
+      const metaContainer = document.getElementById('postCoverMeta');
+      const caption = post.seo_metadata && post.seo_metadata.cover_image_caption;
+      const credit = post.seo_metadata && post.seo_metadata.cover_image_credit;
+      let metaText = '';
+      if (caption) metaText += caption;
+      if (caption && credit) metaText += ' • ';
+      if (credit) metaText += `Foto: ${credit}`;
+      if (metaText) metaContainer.textContent = metaText;
+
+      // Conteúdo HTML
+      const contentContainer = document.getElementById('postContentBody');
+      let rawContent = post.content || '';
+      
+      // Se o conteúdo tiver tags markdown não convertidas simples (como ### ou ##)
+      if (rawContent && !rawContent.includes('<p>') && !rawContent.includes('<div>')) {
+        rawContent = rawContent
+          .split('\n\n')
+          .map(paragraph => {
+            const p = paragraph.trim();
+            if (p.startsWith('### ')) return `<h3>${p.replace('### ', '')}</h3>`;
+            if (p.startsWith('## ')) return `<h2>${p.replace('## ', '')}</h2>`;
+            if (p.startsWith('# ')) return `<h2>${p.replace('# ', '')}</h2>`;
+            return `<p>${p}</p>`;
+          })
+          .join('');
+      }
+      contentContainer.innerHTML = rawContent;
+
+      // Sumário Dinâmico de H2
+      const headings = contentContainer.querySelectorAll('h2');
+      const tocContainer = document.getElementById('tocContainer');
+      const tocList = document.getElementById('tocList');
+      if (headings.length > 1 && tocContainer && tocList) {
+        tocList.innerHTML = '';
+        headings.forEach((h, idx) => {
+          if (!h.id) h.id = 'topico-' + (idx + 1);
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#${h.id}" class="hover:underline flex items-start gap-1.5"><span class="text-cyan-600 font-bold">•</span><span>${h.textContent}</span></a>`;
+          tocList.appendChild(li);
+        });
+        tocContainer.classList.remove('hidden');
+      }
+
+      // FAQs
+      const faqs = (post.seo_metadata && post.seo_metadata.faq) || [];
+      if (Array.isArray(faqs) && faqs.length > 0) {
+        const faqSection = document.getElementById('faqSection');
+        const faqAccordion = document.getElementById('faqAccordion');
+        if (faqSection && faqAccordion) {
+          faqSection.classList.remove('hidden');
+          faqAccordion.innerHTML = faqs.map((f, i) => `
+            <details class="p-4 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer group">
+              <summary class="font-bold text-xs sm:text-sm text-slate-800 list-none flex items-center justify-between">
+                <span>${f.question}</span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform text-xs"></i>
+              </summary>
+              <p class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans pt-2 border-t border-slate-200/60">
+                ${f.answer}
+              </p>
+            </details>
+          `).join('');
+        }
+      }
+
+      // Tags
+      const tags = post.tags || [];
+      const tagsContainer = document.getElementById('tagsContainer');
+      if (Array.isArray(tags) && tags.length > 0 && tagsContainer) {
+        tagsContainer.innerHTML = '<span class="text-xs font-bold text-slate-500 uppercase tracking-wider mr-2"><i class="fa-solid fa-tags"></i> Tags:</span>' +
+          tags.map(t => `<span class="bg-slate-100 text-slate-700 text-[11px] font-semibold px-2.5 py-1 rounded-full border border-slate-200">${t}</span>`).join('');
+      }
+
+      // Carregar Matérias Recentes para a Barra Lateral
+      loadSidebarRecents(post.slug);
+    }
+
+    async function loadSidebarRecents(currentSlug) {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&limit=5&select=title,slug,published_at,category,cover_image_url`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+        if (res.ok) {
+          const list = await res.json();
+          const filtered = list.filter(p => p.slug !== currentSlug).slice(0, 3);
+          const container = document.getElementById('sidebarRecentArticles');
+          if (container && filtered.length > 0) {
+            container.innerHTML = filtered.map(p => `
+              <a href="artigo.html?slug=${encodeURIComponent(p.slug)}" class="block p-2.5 rounded-xl hover:bg-slate-50 transition-colors group">
+                <span class="text-[10px] font-bold text-cyan-700 uppercase tracking-wider block mb-1">${p.category || 'Demografia'}</span>
+                <h5 class="text-xs font-bold font-serif text-slate-900 group-hover:text-cyan-700 line-clamp-2 leading-snug">${p.title}</h5>
+              </a>
+            `).join('');
+          }
+        }
+      } catch (e) {}
+    }
+
+    loadArticle();
+  </script>
+</body>
+</html>

@@ -1,5 +1,0 @@
-PERSONA: Dr. Gustavo Meirelles Rocha
-IDADE: 38
-LOCAL: Bairro Vista Verde, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 38yo Brazilian male biotech professor in Vista Verde, intellectual look, glasses, standing in front of a window with green foliage outside, soft indoor light, hyperrealistic.

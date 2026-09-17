@@ -1,5 +1,0 @@
-PERSONA: Dona Maria do Carmo Prado
-IDADE: 68
-LOCAL: Bairro Santana, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 68-year-old Brazilian woman with a warm and knowing expression, standing inside a traditional grocery store in Santana, soft natural window light, documentary style, hyperrealistic.

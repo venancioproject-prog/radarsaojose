@@ -1,5 +1,0 @@
-PERSONA: Dr. Gustavo Meirelles
-IDADE: 38
-LOCAL: Bairro Vista Verde, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 38-year-old Brazilian male university professor in Vista Verde, surrounded by books and a bicycle, contemplative and intellectual look, soft indoor light, hyperrealistic.

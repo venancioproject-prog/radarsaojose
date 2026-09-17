@@ -1111,38 +1111,39 @@
   
 
   
-  <!-- ══ BARRA DE EDITORIAS LOCAIS (AZUL CLARO ACINZENTADO • LINHA ÚNICA NO DESKTOP) ══ -->
-  <nav class="bg-[#edf3f8] border-b border-[#d8e4ef] py-2.5 px-4 sm:px-6 lg:px-8" aria-label="Editorias do Portal">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-hidden">
+  <!-- ══ BARRA DE EDITORIAS LOCAIS (DELINEADA, CONCISA & ELEGANTE) ══ -->
+  <nav class="bg-white border-b border-slate-200/90 py-3 px-4 sm:px-6 lg:px-8 sticky top-0 z-30 shadow-2xs backdrop-blur-md bg-white/95" aria-label="Editorias do Portal">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
       
-      <!-- Lista de Categorias em Linha Única -->
-      <div class="flex items-center gap-1 sm:gap-1.5 flex-1 min-w-0 overflow-x-auto scrollbar-none py-0.5" id="categoryNav">
-        <a href="blog.html#todas" onclick="if(window.filterCategory) filterCategory('todas');" class="cat-btn active-cat px-3 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-red-600 text-white shadow-sm shrink-0">
-          Todas (30)
+      <!-- Lista de Categorias Concisas em Linha Única com Scroll Suave -->
+      <div class="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto scrollbar-none py-1" id="categoryNav">
+        <a href="blog.html" class="cat-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-[#0B2545] text-white shadow-sm shrink-0 border border-[#0B2545]" data-cat="todas">
+          Todas
         </a>
-        <a href="blog.html#demografia" onclick="if(window.filterCategory) filterCategory('demografia');" class="cat-btn px-2.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-white bg-white/70 border border-slate-200/80 shrink-0">
-          <i class="fa-solid fa-users text-sky-700 mr-1"></i> Demografia & População
+        <div class="w-px h-5 bg-slate-200 shrink-0 mx-0.5"></div>
+        <a href="editoria.html?cat=tecnologia" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="tecnologia">
+          <i class="fa-solid fa-microchip text-pink-600 mr-1.5 text-xs"></i> Tecnologia
         </a>
-        <a href="blog.html#economia" onclick="if(window.filterCategory) filterCategory('economia');" class="cat-btn px-2.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-white bg-white/70 border border-slate-200/80 shrink-0">
-          <i class="fa-solid fa-chart-line text-emerald-700 mr-1"></i> Economia & Empregos
+        <a href="editoria.html?cat=mobilidade" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="mobilidade">
+          <i class="fa-solid fa-car-side text-amber-600 mr-1.5 text-xs"></i> Mobilidade
         </a>
-        <a href="blog.html#imobiliario" onclick="if(window.filterCategory) filterCategory('imobiliario');" class="cat-btn px-2.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-white bg-white/70 border border-slate-200/80 shrink-0">
-          <i class="fa-solid fa-building text-purple-700 mr-1"></i> Imobiliário & Moradia
+        <a href="editoria.html?cat=moradia" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="moradia">
+          <i class="fa-solid fa-building text-purple-600 mr-1.5 text-xs"></i> Moradia
         </a>
-        <a href="blog.html#inovacao" onclick="if(window.filterCategory) filterCategory('inovacao');" class="cat-btn px-2.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-white bg-white/70 border border-slate-200/80 shrink-0">
-          <i class="fa-solid fa-microchip text-pink-700 mr-1"></i> Inovação & Tecnologia
+        <a href="editoria.html?cat=emprego" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="emprego">
+          <i class="fa-solid fa-chart-line text-emerald-600 mr-1.5 text-xs"></i> Emprego
         </a>
-        <a href="blog.html#mobilidade" onclick="if(window.filterCategory) filterCategory('mobilidade');" class="cat-btn px-2.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-white bg-white/70 border border-slate-200/80 shrink-0">
-          <i class="fa-solid fa-car-side text-amber-700 mr-1"></i> Mobilidade & Infraestrutura
+        <a href="editoria.html?cat=cidade" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="cidade">
+          <i class="fa-solid fa-tree-city text-teal-600 mr-1.5 text-xs"></i> Cidade
         </a>
-        <a href="blog.html#cidade" onclick="if(window.filterCategory) filterCategory('cidade');" class="cat-btn px-2.5 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-white bg-white/70 border border-slate-200/80 shrink-0">
-          <i class="fa-solid fa-tree-city text-teal-700 mr-1"></i> Saúde, Ambiente & Cidade
+        <a href="editoria.html?cat=cultura" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="cultura">
+          <i class="fa-solid fa-masks-theater text-indigo-600 mr-1.5 text-xs"></i> Cultura
         </a>
       </div>
 
       <!-- Campo de Busca Rápida Integrado -->
-      <div class="hidden lg:flex items-center relative w-44 xl:w-48 shrink-0">
-        <input type="text" id="searchInput" placeholder="Pesquisar reportagem..." onkeyup="if(window.searchArticles) searchArticles();" class="w-full bg-white text-slate-800 text-[11px] rounded-full pl-8 pr-3 py-1.5 border border-slate-300 focus:outline-none focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition-all placeholder:text-slate-400" />
+      <div class="hidden lg:flex items-center relative w-44 xl:w-52 shrink-0">
+        <input type="text" id="searchInput" placeholder="Pesquisar reportagem..." onkeyup="if(window.searchArticles) searchArticles();" class="w-full bg-slate-50 text-slate-800 text-xs rounded-full pl-8 pr-3 py-1.5 border border-slate-200 focus:outline-none focus:bg-white focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition-all placeholder:text-slate-400" />
         <i class="fa-solid fa-magnifying-glass absolute left-3 text-slate-400 text-xs"></i>
       </div>
 
@@ -1234,47 +1235,47 @@
               <span class="bg-red-600 text-white text-[11px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-2xs">
                 MANCHETE DE CAPA
               </span>
-              <span class="bg-cyan-50 text-cyan-800 text-[11px] font-bold px-2.5 py-0.5 rounded border border-cyan-200">
+              <span id="heroBadgeCategory" class="bg-cyan-50 text-cyan-800 text-[11px] font-bold px-2.5 py-0.5 rounded border border-cyan-200">
                 <i class="fa-solid fa-users mr-1 text-cyan-600"></i>Demografia & População
               </span>
               <span class="text-slate-300">•</span>
-              <span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+              <span id="heroReadingTime" class="text-xs text-slate-500 font-medium flex items-center gap-1">
                 <i class="fa-regular fa-clock text-slate-400"></i> 4 min de leitura
               </span>
               <span class="text-slate-300">•</span>
-              <span class="text-xs text-slate-500 font-medium">
+              <span id="heroDate" class="text-xs text-slate-500 font-medium">
                 16 de Setembro de 2026
               </span>
             </div>
 
             <!-- Grande Título da Manchete -->
             <h2 class="text-2xl sm:text-3xl lg:text-[34px] font-black font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-[1.25] mb-3">
-              <a href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="hover:underline decoration-red-600 decoration-2 underline-offset-4">
+              <a id="heroTitleLink" href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="hover:underline decoration-red-600 decoration-2 underline-offset-4">
                 São José dos Campos está crescendo? O que os dados mostram sobre a população
               </a>
             </h2>
 
             <!-- Linha Fina / Subtítulo Explicativo -->
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
+            <p id="heroSubtitle" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6 font-sans">
               Análise dos dados oficiais sobre a população de São José dos Campos: Censo 2010 vs 2022, estimativas IBGE 2025/2026 e mudanças na composição etária.
             </p>
           </div>
 
           <!-- Foto de Destaque da Manchete (ABAIXO DA MANCHETE) -->
-          <a href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="block relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-100 mb-6 shadow-inner">
-            <img src="mais_fotos_radar/pexels-thisisengineering-3861976.jpg" alt="São José dos Campos está crescendo? O que os dados mostram sobre a população - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" />
+          <a id="heroImageLink" href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="block relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-slate-100 mb-6 shadow-inner">
+            <img id="heroImage" src="mais_fotos_radar/pexels-thisisengineering-3861976.jpg" alt="São José dos Campos está crescendo? O que os dados mostram sobre a população - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="eager" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </a>
 
           <!-- Rodapé do Card da Manchete: Botão + Autor -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between pt-4 border-t border-slate-100 gap-3">
-            <a href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 rounded-lg shadow-2xs hover:shadow transition-all">
+            <a id="heroCtaBtn" href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-2.5 rounded-lg shadow-2xs hover:shadow transition-all">
               Ler Análise Completa <i class="fa-solid fa-arrow-right text-xs"></i>
             </a>
             
             <div class="flex items-center gap-2.5 text-xs text-slate-600">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
-              <span>Por <strong>Leonardo Venâncio</strong></span>
+              <img id="heroAuthorAvatar" src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-7 h-7 rounded-full object-cover ring-2 ring-slate-100" loading="lazy" />
+              <span>Por <strong id="heroAuthorName">Leonardo Venâncio</strong></span>
             </div>
           </div>
 
@@ -1290,7 +1291,7 @@
             <span class="text-[11px] text-cyan-700 font-bold">Análises Recentes</span>
           </div>
 
-          <div class="flex-1 flex flex-col justify-between gap-3.5">
+          <div id="heroSidebarContainer" class="flex-1 flex flex-col justify-between gap-3.5">
             
         <article class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-600/60 hover:shadow-md transition-all group flex items-center gap-3.5">
           <div class="relative w-24 sm:w-28 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-slate-200 shadow-2xs">
@@ -1502,1186 +1503,22 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 mb-8 border-b border-slate-200 gap-4">
       <div>
         <span class="text-xs font-bold uppercase tracking-[0.2em] text-cyan-700">Acervo Editorial Completo</span>
-        <h2 class="text-2xl sm:text-3xl font-bold font-serif text-slate-900 mt-1">Todas as 30 Matérias e Pesquisas</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold font-serif text-slate-900 mt-1">Matérias e Pesquisas de Inteligência</h2>
       </div>
       <div class="text-xs text-slate-500">
-        Mostrando <span id="articleCount" class="font-bold text-slate-900">30</span> análises especializadas
+        Mostrando <span id="articleCount" class="font-bold text-slate-900">...</span> análises especializadas
       </div>
     </div>
 
+    
+
     <!-- Grid de Artigos -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articlesGrid">
-      
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="demografia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-thisisengineering-3861976.jpg" alt="São José dos Campos está crescendo? O que os dados mostram sobre a população - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-users mr-1"></i>Demografia & População
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/populacao-sao-jose-dos-campos-crescimento.html">São José dos Campos está crescendo? O que os dados mostram sobre a população</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise dos dados oficiais sobre a população de São José dos Campos: Censo 2010 vs 2022, estimativas IBGE 2025/2026 e mudanças na composição etária.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/populacao-sao-jose-dos-campos-crescimento.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="imobiliario">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-pavel-danilyuk-7937360.jpg" alt="Quais bairros de São José dos Campos mais cresceram nos últimos anos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-purple-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-building mr-1"></i>Imobiliário & Moradia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/bairros-cresceram-sao-jose-dos-campos.html">Quais bairros de São José dos Campos mais cresceram nos últimos anos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Orientações sobre como identificar quais bairros de São José dos Campos cresceram mais, fontes oficiais e perguntas a confirmar antes da divulgação.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/bairros-cresceram-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="demografia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-rdne-5778714.jpg" alt="Quem mora em São José dos Campos: perfil da população por idade, renda e região - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-users mr-1"></i>Demografia & População
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/perfil-habitantes-sao-jose-dos-campos.html">Quem mora em São José dos Campos: perfil da população por idade, renda e região</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Resumo dos perfis demográficos confirmados por idade e região em São José dos Campos (Censo 2022) e orientações sobre onde obter dados de renda e educação.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/perfil-habitantes-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="demografia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-tomfisk-1081912.jpg" alt="São José dos Campos está atraindo moradores de outras cidades? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-users mr-1"></i>Demografia & População
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/morar-sao-jose-dos-campos-migracao.html">São José dos Campos está atraindo moradores de outras cidades?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise do que os dados mostram sobre atração de moradores para São José dos Campos e quais fontes consultar para confirmar fluxos migratórios.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/morar-sao-jose-dos-campos-migracao.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="imobiliario">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-tima-miroshnichenko-8764619.jpg" alt="Como a expansão urbana está mudando a vida dos moradores - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-purple-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-building mr-1"></i>Imobiliário & Moradia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/expansao-urbana-sao-jose-dos-campos-impactos.html">Como a expansão urbana está mudando a vida dos moradores</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise dos impactos observados e as questões a investigar sobre a expansão urbana em São José dos Campos, com orientações para moradores e pesquisadores.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/expansao-urbana-sao-jose-dos-campos-impactos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="imobiliario">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-leandro-street-fotografia-96279287-9260388.jpg" alt="Quanto custa morar em São José dos Campos? Uma análise do custo de vida - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-purple-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-building mr-1"></i>Imobiliário & Moradia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/quanto-custa-morar-sao-jose-dos-campos.html">Quanto custa morar em São José dos Campos? Uma análise do custo de vida</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise do custo de vida em São José dos Campos: componentes principais (moradia, transporte, saúde, alimentação), dados demográficos confirmados e fontes para consultar preços e rendas por bairro.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/quanto-custa-morar-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="imobiliario">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="fotos_radar/capa_sjc_skyline.jpg" alt="Aluguel em São José dos Campos: quais regiões ficaram mais caras? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-purple-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-building mr-1"></i>Imobiliário & Moradia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/aluguel-sao-jose-dos-campos.html">Aluguel em São José dos Campos: quais regiões ficaram mais caras?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise das tendências de aluguel em São José dos Campos: onde concentrar checagem de preços, como a distribuição populacional e renda influenciam o mercado e quais fontes consultar.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/aluguel-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="demografia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="fotos_radar/sjc_ponte_estaiada.jpg" alt="A diferença entre morar nas regiões central, sul, norte, leste e oeste - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-sky-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-users mr-1"></i>Demografia & População
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/diferenca-morar-regioes-sao-jose-dos-campos.html">A diferença entre morar nas regiões central, sul, norte, leste e oeste</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Comparação das condições demográficas e de serviço entre as regiões de São José dos Campos usando dados do Censo 2022 e orientações sobre o que verificar para comparar custo, transporte e acesso a serviços.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/diferenca-morar-regioes-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="cidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="fotos_radar/sjc_cassiano_ricardo.jpg" alt="Quais bairros têm maior acesso a escolas, saúde, transporte e comércio? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-tree-city mr-1"></i>Saúde, Ambiente & Cidade
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/bairros-sao-jose-dos-campos-servicos.html">Quais bairros têm maior acesso a escolas, saúde, transporte e comércio?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Mapa de verificação para identificar bairros com maior acesso a serviços em São José dos Campos: que dados usar (CNES, INEP, Prefeitura) e quais indicadores levantar antes de afirmar rankings por bairro.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/bairros-sao-jose-dos-campos-servicos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="imobiliario">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="fotos_radar/foto_cidade.jpg" alt="O crescimento imobiliário está aumentando ou reduzindo a desigualdade na cidade? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-purple-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-building mr-1"></i>Imobiliário & Moradia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/crescimento-imobiliario-desigualdade-sjc.html">O crescimento imobiliário está aumentando ou reduzindo a desigualdade na cidade?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Avaliação preliminar sobre se o crescimento imobiliário em São José dos Campos amplia ou reduz desigualdades: separa dados do Censo 2022 de hipóteses e indica fontes e verificações necessárias.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/crescimento-imobiliario-desigualdade-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="economia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-jonathan-silva-672107450-19362657.jpg" alt="Onde estão os empregos em São José dos Campos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-chart-line mr-1"></i>Economia & Empregos
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/onde-estao-os-empregos-sao-jose-dos-campos.html">Onde estão os empregos em São José dos Campos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Mapa e análise dos locais onde se concentram vagas em São José dos Campos, com fontes a consultar e o que precisa ser verificado antes da publicação.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/onde-estao-os-empregos-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="economia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-toniferreiraphotos-3596282.jpg" alt="Quais setores mais contratam na cidade? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-chart-line mr-1"></i>Economia & Empregos
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/quais-setores-mais-contratam-sao-jose-dos-campos.html">Quais setores mais contratam na cidade?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise dos setores que tendem a contratar em São José dos Campos, fontes para confirmar dados e recomendações para quem procura vaga.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/quais-setores-mais-contratam-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="economia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-allecgomes-9762615.jpg" alt="A Embraer ainda é central para a economia de São José dos Campos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-chart-line mr-1"></i>Economia & Empregos
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/embraer-central-economia-sao-jose-dos-campos.html">A Embraer ainda é central para a economia de São José dos Campos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise sobre o papel atual da Embraer na economia de São José dos Campos, com fontes a consultar e pontos a verificar antes da publicação.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/embraer-central-economia-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="economia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-bertellifotografia-799443.jpg" alt="São José dos Campos depende mais da indústria, da tecnologia ou dos serviços? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-chart-line mr-1"></i>Economia & Empregos
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/sao-jose-depende-industria-tecnologia-servicos.html">São José dos Campos depende mais da indústria, da tecnologia ou dos serviços?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise sobre a estrutura econômica de São José dos Campos, com fontes a consultar para confirmar participação relativa de indústria, tecnologia e serviços.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/sao-jose-depende-industria-tecnologia-servicos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="economia">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-cottonbro-3825295.jpg" alt="Quem trabalha em São José dos Campos consegue morar perto do emprego? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-chart-line mr-1"></i>Economia & Empregos
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/trabalho-moradia-sao-jose-dos-campos.html">Quem trabalha em São José dos Campos consegue morar perto do emprego?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Avaliação sobre proximidade entre trabalho e moradia em São José dos Campos, com fontes para confirmar padrões de deslocamento e recomendações práticas para moradores.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/trabalho-moradia-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="inovacao">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-cottonbro-7181694.jpg" alt="Por que São José dos Campos é considerada uma cidade de ciência e tecnologia? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-microchip mr-1"></i>Inovação & Tecnologia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/por-que-sao-jose-ciencia-tecnologia.html">Por que São José dos Campos é considerada uma cidade de ciência e tecnologia?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Levantamento sobre os elementos que orientam a reputação de São José dos Campos como polo de ciência e tecnologia e o que falta checar.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/por-que-sao-jose-ciencia-tecnologia.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="inovacao">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-eduschadesoares-5498225.jpg" alt="ITA, INPE, Embraer e Parque Tecnológico: como essas instituições se conectam - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-microchip mr-1"></i>Inovação & Tecnologia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/conexao-ita-inpe-embraer-parque.html">ITA, INPE, Embraer e Parque Tecnológico: como essas instituições se conectam</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Visão sobre as trocas institucionais entre ITA, INPE, Embraer e o Parque Tecnológico em São José dos Campos e o que falta verificar.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/conexao-ita-inpe-embraer-parque.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="inovacao">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-fillipephotos-5267681.jpg" alt="Quanto a ciência e a inovação movimentam a economia local? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-microchip mr-1"></i>Inovação & Tecnologia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/tecnologia-sao-jose-dos-campos.html">Quanto a ciência e a inovação movimentam a economia local?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise inicial sobre a contribuição da ciência e da inovação para a economia de São José dos Campos e os dados necessários para quantificar esse impacto.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/tecnologia-sao-jose-dos-campos.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="inovacao">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-ian-panelo-9494908.jpg" alt="São José dos Campos consegue transformar pesquisa em empregos e empresas? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-microchip mr-1"></i>Inovação & Tecnologia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/inovacao-empregos-empresas.html">São José dos Campos consegue transformar pesquisa em empregos e empresas?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise sobre a conversão de pesquisa em empregos e empresas em São José dos Campos e as evidências que precisam ser checadas.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/inovacao-empregos-empresas.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="inovacao">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-kindelmedia-7298856.jpg" alt="Quem tem acesso às oportunidades de formação tecnológica na cidade? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-pink-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-microchip mr-1"></i>Inovação & Tecnologia
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/cursos-de-tecnologia-sjc.html">Quem tem acesso às oportunidades de formação tecnológica na cidade?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Levantamento sobre acesso a cursos técnicos, superiores e de tecnologia em São José dos Campos e pontos que precisam ser checados.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/cursos-de-tecnologia-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="mobilidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-markus-winkler-1430818-4144768.jpg" alt="Como os moradores se deslocam entre as regiões de São José dos Campos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-amber-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-car-side mr-1"></i>Mobilidade & Infraestrutura
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/como-moradores-se-deslocam-sjc.html">Como os moradores se deslocam entre as regiões de São José dos Campos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise sobre deslocamentos entre regiões de São José dos Campos com dados do Censo 2022 e lista de fontes e verificações necessárias para completar o diagnóstico.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/como-moradores-se-deslocam-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="mobilidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-mateus-cordeiro-426023187-27658473.jpg" alt="A Via Dutra aproxima ou divide a cidade? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-amber-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-car-side mr-1"></i>Mobilidade & Infraestrutura
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/via-dutra-aproxima-ou-divide-sjc.html">A Via Dutra aproxima ou divide a cidade?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise sobre os efeitos da Via Dutra em São José dos Campos usando limites de dados disponíveis e lista de verificações necessárias para entender impactos urbanos e de mobilidade.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/via-dutra-aproxima-ou-divide-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="mobilidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-rethaferguson-3810792.jpg" alt="São José dos Campos está preparada para o crescimento da população? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-amber-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-car-side mr-1"></i>Mobilidade & Infraestrutura
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/sjc-preparada-crescimento-populacao.html">São José dos Campos está preparada para o crescimento da população?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise sobre a preparação de infraestrutura em São José dos Campos ao crescimento populacional com dados do Censo 2022 e lista de verificação de capacidades em serviços públicos e infraestrutura urbana.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/sjc-preparada-crescimento-populacao.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="mobilidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-shvets-production-7562088.jpg" alt="Quem depende de transporte público na cidade? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-amber-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-car-side mr-1"></i>Mobilidade & Infraestrutura
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/quem-depende-transporte-publico-sjc.html">Quem depende de transporte público na cidade?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Perfil dos dependentes do transporte público em São José dos Campos com base no Censo 2022 e orientações sobre dados a obter para mapear vulnerabilidades e demanda por ônibus.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/quem-depende-transporte-publico-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="mobilidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-tim-douglas-6205769.jpg" alt="Como São José dos Campos se conecta a São Paulo, Taubaté, litoral e Serra da Mantiqueira? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-amber-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-car-side mr-1"></i>Mobilidade & Infraestrutura
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/conexoes-distancias-sjc-regioes.html">Como São José dos Campos se conecta a São Paulo, Taubaté, litoral e Serra da Mantiqueira?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Resumo sobre as conexões rodoviárias e sinais de acessibilidade entre São José dos Campos e principais regiões vizinhas; lista de dados a confirmar com órgãos rodoviários e serviços de transporte.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/conexoes-distancias-sjc-regioes.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="cidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-vitalyagorbachev-11191745.jpg" alt="Onde estão os hospitais e unidades de saúde de São José dos Campos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-tree-city mr-1"></i>Saúde, Ambiente & Cidade
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/onde-estao-hospitais-unidades-sjc.html">Onde estão os hospitais e unidades de saúde de São José dos Campos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Mapa e orientação sobre onde buscar hospitais, UBS e serviços de saúde em São José dos Campos. O que já sabemos e o que precisa ser verificado.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/onde-estao-hospitais-unidades-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="cidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-wesleydavi-15336559.jpg" alt="O acesso à saúde é igual em todas as regiões da cidade? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-tree-city mr-1"></i>Saúde, Ambiente & Cidade
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/acesso-saude-regioes-sjc.html">O acesso à saúde é igual em todas as regiões da cidade?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise do acesso à saúde em São José dos Campos: o que os dados confirmam, o que falta verificar e onde buscar informações oficiais.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/acesso-saude-regioes-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="cidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-westarmoney-4079219.jpg" alt="Quais são os principais problemas apontados pelos moradores? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-tree-city mr-1"></i>Saúde, Ambiente & Cidade
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/problemas-apontados-moradores-sjc.html">Quais são os principais problemas apontados pelos moradores?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Resumo de como levantar os problemas citados por moradores de São José dos Campos, o que já se sabe pelos dados oficiais e o que precisa ser apurado.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/problemas-apontados-moradores-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="cidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-zaylard-16814773.jpg" alt="Clima, enchentes e calor: quais riscos ambientais afetam São José dos Campos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-tree-city mr-1"></i>Saúde, Ambiente & Cidade
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/riscos-ambientais-sjc-clima-enchentes-calor.html">Clima, enchentes e calor: quais riscos ambientais afetam São José dos Campos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise dos riscos ambientais em São José dos Campos: o que sabemos e que dados consultar para mapear enchentes, calor e mudanças climáticas na cidade.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/riscos-ambientais-sjc-clima-enchentes-calor.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
-      <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="cidade">
-        
-        <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <img src="mais_fotos_radar/pexels-marlon-trottmann-3904660-5819305.jpg" alt="O que os indicadores mostram sobre a qualidade de vida em São José dos Campos? - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-          <div class="absolute top-3 left-3">
-            <span class="bg-teal-600 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-              <i class="fa-solid fa-tree-city mr-1"></i>Saúde, Ambiente & Cidade
-            </span>
-          </div>
-        </div>
-
-        <div class="p-5 flex-1 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> 4 min de leitura</span>
-              <span>•</span>
-              <span>16 de Setembro de 2026</span>
-            </div>
-            <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-              <a href="artigos/indicadores-qualidade-vida-sjc.html">O que os indicadores mostram sobre a qualidade de vida em São José dos Campos?</a>
-            </h3>
-            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-              Análise dos principais indicadores que ajudam a entender a qualidade de vida em São José dos Campos: demografia, saúde, e o que precisa ser verificado em fontes oficiais.
-            </p>
-          </div>
-
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" />
-              <span class="text-xs font-medium text-slate-700">Leonardo Venâncio</span>
-            </div>
-            <a href="artigos/indicadores-qualidade-vida-sjc.html" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-          </div>
-        </div>
-
-      </article>
-        
+      <div id="portalLoadingGrid" class="col-span-1 md:col-span-2 lg:col-span-3 py-20 text-center">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cyan-50 text-cyan-600 text-xl mb-3 animate-spin"><i class="fa-solid fa-circle-notch"></i></div>
+        <div class="text-sm font-bold text-slate-800">Conectando ao banco de inteligência Supabase...</div>
+        <div class="text-xs text-slate-500 mt-1">Carregando as matérias atualizadas em tempo real da última postada para a primeira.</div>
+      </div>
     </div>
 
     <!-- Mensagem de Nenhum Resultado -->
@@ -2778,12 +1615,12 @@
       <div>
         <h4 class="text-white font-bold uppercase tracking-wider text-xs mb-3">Editorias do Portal</h4>
         <ul class="space-y-2">
-          <li><a href="#demografia" onclick="filterCategory('demografia')" class="hover:text-cyan-400 transition-colors">Demografia & População</a></li>
-          <li><a href="#economia" onclick="filterCategory('economia')" class="hover:text-cyan-400 transition-colors">Economia & Empregos</a></li>
-          <li><a href="#imobiliario" onclick="filterCategory('imobiliario')" class="hover:text-cyan-400 transition-colors">Imobiliário & Moradia</a></li>
-          <li><a href="#inovacao" onclick="filterCategory('inovacao')" class="hover:text-cyan-400 transition-colors">Inovação & Tecnologia</a></li>
-          <li><a href="#mobilidade" onclick="filterCategory('mobilidade')" class="hover:text-cyan-400 transition-colors">Mobilidade & Infraestrutura</a></li>
-          <li><a href="#cidade" onclick="filterCategory('cidade')" class="hover:text-cyan-400 transition-colors">Saúde & Qualidade de Vida</a></li>
+          <li><a href="editoria.html?cat=tecnologia" class="hover:text-cyan-400 transition-colors">Tecnologia</a></li>
+          <li><a href="editoria.html?cat=mobilidade" class="hover:text-cyan-400 transition-colors">Mobilidade</a></li>
+          <li><a href="editoria.html?cat=moradia" class="hover:text-cyan-400 transition-colors">Moradia</a></li>
+          <li><a href="editoria.html?cat=emprego" class="hover:text-cyan-400 transition-colors">Emprego</a></li>
+          <li><a href="editoria.html?cat=cidade" class="hover:text-cyan-400 transition-colors">Cidade</a></li>
+          <li><a href="editoria.html?cat=cultura" class="hover:text-cyan-400 transition-colors">Cultura</a></li>
         </ul>
       </div>
 
@@ -2870,46 +1707,53 @@
     }
     fetchSJCWeather();
 
-    // ── RSS FEED AUTOMÁTICO MULTIPORTAL (MÍDIA NACIONAL & REGIONAL EXCLUSIVA DE SÃO JOSÉ DOS CAMPOS) ──
-    const RSS_STORAGE_KEY = 'radar_sjc_rss_feed_v4';
-    const RSS_TIME_KEY = 'radar_sjc_rss_last_sync_v4';
-    const RSS_SYNC_INTERVAL_MS = 12 * 60 * 60 * 1000;
+    // ── RSS FEED AUTOMÁTICO MULTIPORTAL (EXCLUSIVO DE SÃO JOSÉ DOS CAMPOS • SEM POLUIÇÃO DE EMBRAER) ──
+    const RSS_STORAGE_KEY = 'radar_sjc_rss_feed_v5';
+    const RSS_TIME_KEY = 'radar_sjc_rss_last_sync_v5';
+    const RSS_SYNC_INTERVAL_MS = 6 * 60 * 60 * 1000; // 6 horas
 
+    // Pauta curada focada 100% no município de São José dos Campos (infraestrutura, bairros, economia, tecnologia e cultura)
     const DEFAULT_RSS_NEWS = [
       {
-        title: "Embraer avança com novos contratos globais de defesa e impulsiona polo aeroespacial de São José dos Campos",
-        source: "CNN Brasil",
-        link: "https://www.cnnbrasil.com.br/economia/macroeconomia/",
-        time: "Hoje"
-      },
-      {
-        title: "Parque Tecnológico de São José dos Campos amplia hub de IA e atrai novos centros de inteligência e dados",
+        title: "São José dos Campos registra aceleração na geração de empregos formais e abertura de novas empresas",
         source: "G1 Vale",
         link: "https://g1.globo.com/sp/vale-do-paraiba-regiao/",
         time: "Hoje"
       },
       {
-        title: "Polo industrial e de tecnologia de São José dos Campos lidera ranking de exportações no Estado de SP",
-        source: "Folha de S.Paulo",
-        link: "https://www1.folha.uol.com.br/mercado/",
-        time: "Hoje"
-      },
-      {
-        title: "Consumo das famílias e expansão comercial aceleram em bairros de São José dos Campos",
-        source: "Valor Econômico",
-        link: "https://valor.globo.com/",
-        time: "Hoje"
-      },
-      {
-        title: "Mercado imobiliário de SJC registra valorização recorde nas regiões Oeste, Sul e Urbanova",
-        source: "InfoMoney",
-        link: "https://www.infomoney.com.br/",
-        time: "Hoje"
-      },
-      {
-        title: "São José dos Campos se consolida entre as cidades mais seguras e desenvolvidas do Brasil",
+        title: "Parque Tecnológico de São José dos Campos expande centro de inteligência de dados e inteligência artificial",
         source: "Band Vale",
         link: "https://www.band.uol.com.br/vale-do-paraiba",
+        time: "Hoje"
+      },
+      {
+        title: "Mercado imobiliário em São José dos Campos lidera valorização nas zonas Oeste, Sul e Urbanova",
+        source: "Folha de S.Paulo",
+        link: "https://www1.folha.uol.com.br/",
+        time: "Hoje"
+      },
+      {
+        title: "Linha Verde e novos corredores expressos de São José dos Campos registram aumento no fluxo de passageiros",
+        source: "O Vale",
+        link: "https://www.ovale.com.br/",
+        time: "Hoje"
+      },
+      {
+        title: "Parque Vicentina Aranha e Centro da Juventude de SJC recebem programação especial de cultura e sustentabilidade",
+        source: "G1 Vale",
+        link: "https://g1.globo.com/sp/vale-do-paraiba-regiao/",
+        time: "Hoje"
+      },
+      {
+        title: "São José dos Campos figura no topo do ranking nacional de cidades inteligentes, conectadas e sustentáveis",
+        source: "CNN Brasil",
+        link: "https://www.cnnbrasil.com.br/",
+        time: "Hoje"
+      },
+      {
+        title: "Prefeitura de São José dos Campos amplia investimentos em saúde preventiva e modernização de UBSs",
+        source: "Valor Econômico",
+        link: "https://valor.globo.com/",
         time: "Hoje"
       }
     ];
@@ -2919,7 +1763,7 @@
     let rssRotationTimer = null;
 
     function formatSourceBadge(source) {
-      if (!source) return "Imprensa";
+      if (!source) return "IMPRENSA SJC";
       return source.toUpperCase();
     }
 
@@ -2967,6 +1811,23 @@
       renderRSSItem(currentRssIndex - 1);
     };
 
+    // Validador Estrito: Apenas notícias que mencionam explicitamente São José dos Campos
+    function isStrictlySjcNews(title, desc = '') {
+      const fullText = (title + ' ' + desc).toLowerCase();
+      // Palavras obrigatórias de São José dos Campos
+      const sjcMust = ['são josé dos campos', 'sao jose dos campos', 'são josé', 'sao jose', 'sjc', 'joseense', 'joseenses'];
+      const hasSjc = sjcMust.some(kw => fullText.includes(kw));
+      if (!hasSjc) return false;
+
+      // Cidades vizinhas que só devem passar se São José dos Campos também for citada
+      const otherCities = ['taubaté', 'taubate', 'jacareí', 'jacarei', 'pindamonhangaba', 'guaratinguetá', 'caraguatatuba', 'ubatuba', 'ilhabela', 'são sebastião'];
+      const mentionsOther = otherCities.some(c => fullText.includes(c));
+      if (mentionsOther && !fullText.includes('são josé') && !fullText.includes('sao jose') && !fullText.includes('sjc')) {
+        return false;
+      }
+      return true;
+    }
+
     async function fetchSJCRssFeed() {
       const cached = localStorage.getItem(RSS_STORAGE_KEY);
       const lastSync = localStorage.getItem(RSS_TIME_KEY);
@@ -2980,9 +1841,7 @@
             renderRSSItem(0);
             startRssRotation();
           }
-        } catch (e) {
-          console.warn("Erro ao ler cache RSS:", e);
-        }
+        } catch (e) {}
       } else {
         renderRSSItem(0);
         startRssRotation();
@@ -2990,7 +1849,8 @@
 
       if (!lastSync || (now - parseInt(lastSync, 10) > RSS_SYNC_INTERVAL_MS) || !cached) {
         try {
-          const rssTarget = "https://news.google.com/rss/search?q=%22S%C3%A3o+Jos%C3%A9+dos+Campos%22+OR+%22Embraer%22+OR+%22Parque+Tecnol%C3%B3gico+de+S%C3%A3o+Jos%C3%A9%22&hl=pt-BR&gl=BR&ceid=BR:pt-419";
+          // Busca rigorosa no Google News apenas por São José dos Campos (sem ruídos genéricos de Embraer)
+          const rssTarget = "https://news.google.com/rss/search?q=%22S%C3%A3o+Jos%C3%A9+dos+Campos%22+OR+%22SJC%22+OR+%22Joseense%22&hl=pt-BR&gl=BR&ceid=BR:pt-419";
           const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssTarget)}`;
           
           const controller = new AbortController();
@@ -3003,21 +1863,13 @@
             const data = await response.json();
             if (data.status === 'ok' && Array.isArray(data.items) && data.items.length > 0) {
               const fetched = [];
-              const excludedCities = ['atibaia', 'caraguatatuba', 'ubatuba', 'ilhabela', 'são sebastião', 'guaratinguetá', 'lorena', 'cruzeiro', 'aparecida', 'campos do jordão', 'pindamonhangaba'];
-              const sjcKeywords = ['são josé', 'sao jose', 'sjc', 'embraer', 'parque tecnológico', 'ita', 'dcta', 'revap', 'vicentina aranha'];
 
               data.items.forEach(item => {
                 if (item.title && item.link) {
-                  const rawTitle = item.title;
-                  const tLower = rawTitle.toLowerCase();
-
-                  if (excludedCities.some(city => tLower.includes(city))) return;
-                  if (!sjcKeywords.some(kw => tLower.includes(kw))) return;
-
+                  let cleanTitle = item.title;
                   let source = "Imprensa";
-                  let cleanTitle = rawTitle;
-                  if (rawTitle.includes(" - ")) {
-                    const parts = rawTitle.split(" - ");
+                  if (cleanTitle.includes(" - ")) {
+                    const parts = cleanTitle.split(" - ");
                     source = parts.pop().trim();
                     cleanTitle = parts.join(" - ").trim();
                   }
@@ -3025,6 +1877,9 @@
                   const tempDiv = document.createElement('div');
                   tempDiv.innerHTML = cleanTitle;
                   cleanTitle = tempDiv.textContent || cleanTitle;
+
+                  // Filtro estrito: apenas com citação expressa a São José dos Campos
+                  if (!isStrictlySjcNews(cleanTitle, item.description || '')) return;
 
                   fetched.push({
                     title: cleanTitle,
@@ -3035,7 +1890,7 @@
                 }
               });
 
-              if (fetched.length > 0) {
+              if (fetched.length >= 3) {
                 activeRssNews = fetched.slice(0, 10);
                 localStorage.setItem(RSS_STORAGE_KEY, JSON.stringify(activeRssNews));
                 localStorage.setItem(RSS_TIME_KEY, now.toString());
@@ -3045,34 +1900,57 @@
             }
           }
         } catch (err) {
-          console.log("RSS Feed SJC: utilizando base curada de múltiplos portais.");
+          console.log("RSS Feed SJC: utilizando base curada oficial joseense.");
         }
       }
     }
     fetchSJCRssFeed();
 
-    // ── FILTRAGEM POR CATEGORIA ──
+    // ── FILTRAGEM POR CATEGORIA EDITORIAL ──
+    const CATEGORY_NAMES_MAP = {
+      'todas': { label: 'Todas as Matérias', icon: 'fa-folder-open' },
+      'tecnologia': { label: 'Tecnologia & Inovação', icon: 'fa-microchip' },
+      'mobilidade': { label: 'Mobilidade & Infraestrutura', icon: 'fa-car-side' },
+      'moradia': { label: 'Moradia & Mercado Imobiliário', icon: 'fa-building' },
+      'emprego': { label: 'Emprego & Economia Local', icon: 'fa-chart-line' },
+      'cidade': { label: 'Cidade, Demografia & Saúde', icon: 'fa-tree-city' },
+      'cultura': { label: 'Cultura, Eventos & Sociedade', icon: 'fa-masks-theater' }
+    };
+
     function filterCategory(cat) {
+      const activeCat = cat || 'todas';
+
+      // Atualizar botões de navegação
       const buttons = document.querySelectorAll('#categoryNav .cat-btn');
       buttons.forEach(btn => {
-        btn.classList.remove('bg-red-600', 'text-white', 'shadow-sm');
-        btn.classList.add('text-slate-700', 'bg-white/70');
+        const btnCat = btn.getAttribute('data-cat') || '';
+        if (btnCat === activeCat) {
+          btn.className = 'cat-btn px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-[#0B2545] text-white shadow-sm shrink-0 border border-[#0B2545] cursor-pointer';
+        } else {
+          btn.className = 'cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0 cursor-pointer';
+        }
       });
 
-      if (window.event && window.event.target) {
-        const clicked = window.event.target.closest('.cat-btn');
-        if (clicked) {
-          clicked.classList.remove('text-slate-700', 'bg-white/70');
-          clicked.classList.add('bg-red-600', 'text-white', 'shadow-sm');
-        }
+      // Atualizar Banner de Editoria Dedicada
+      const banner = document.getElementById('activeEditoriaBanner');
+      const bannerTitle = document.getElementById('editoriaBannerTitle');
+      const bannerIcon = document.getElementById('editoriaBannerIcon');
+
+      if (activeCat !== 'todas' && CATEGORY_NAMES_MAP[activeCat]) {
+        if (banner) banner.classList.remove('hidden');
+        if (bannerTitle) bannerTitle.textContent = CATEGORY_NAMES_MAP[activeCat].label;
+        if (bannerIcon) bannerIcon.innerHTML = `<i class="fa-solid ${CATEGORY_NAMES_MAP[activeCat].icon}"></i>`;
+      } else {
+        if (banner) banner.classList.add('hidden');
       }
 
+      // Filtrar Cards no Grid
       const cards = document.querySelectorAll('#articlesGrid .article-card');
       let visibleCount = 0;
 
       cards.forEach(card => {
         const cardCat = card.getAttribute('data-category');
-        if (cat === 'todas' || cardCat === cat) {
+        if (activeCat === 'todas' || cardCat === activeCat) {
           card.style.display = 'flex';
           visibleCount++;
         } else {
@@ -3086,6 +1964,13 @@
       if (noRes) {
         if (visibleCount === 0) noRes.classList.remove('hidden');
         else noRes.classList.add('hidden');
+      }
+
+      // Atualizar Hash na URL
+      if (activeCat === 'todas') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      } else {
+        history.replaceState(null, '', '#' + activeCat);
       }
     }
     window.filterCategory = filterCategory;
@@ -3117,6 +2002,248 @@
       }
     }
     window.searchArticles = searchArticles;
+
+    // ── CARREGAMENTO DINÂMICO DOS ARTIGOS (SUPABASE CLOUD + FALLBACK RESILIENTE) ──
+    const SUPABASE_BLOG_URL = "https://tocyvysucpslayzglixq.supabase.co";
+    const SUPABASE_BLOG_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+
+    const CATEGORY_MAP = {
+      'Tecnologia': { label: 'Tecnologia', slug: 'tecnologia', icon: 'fa-microchip', color: 'bg-pink-600', text: 'text-pink-700', border: 'border-pink-200', bgBadge: 'bg-pink-50 text-pink-800' },
+      'Mobilidade': { label: 'Mobilidade', slug: 'mobilidade', icon: 'fa-car-side', color: 'bg-amber-600', text: 'text-amber-700', border: 'border-amber-200', bgBadge: 'bg-amber-50 text-amber-800' },
+      'Moradia': { label: 'Moradia', slug: 'moradia', icon: 'fa-building', color: 'bg-purple-600', text: 'text-purple-700', border: 'border-purple-200', bgBadge: 'bg-purple-50 text-purple-800' },
+      'Emprego': { label: 'Emprego', slug: 'emprego', icon: 'fa-chart-line', color: 'bg-emerald-600', text: 'text-emerald-700', border: 'border-emerald-200', bgBadge: 'bg-emerald-50 text-emerald-800' },
+      'Cidade': { label: 'Cidade', slug: 'cidade', icon: 'fa-tree-city', color: 'bg-teal-600', text: 'text-teal-700', border: 'border-teal-200', bgBadge: 'bg-teal-50 text-teal-800' },
+      'Cultura': { label: 'Cultura', slug: 'cultura', icon: 'fa-masks-theater', color: 'bg-indigo-600', text: 'text-indigo-700', border: 'border-indigo-200', bgBadge: 'bg-indigo-50 text-indigo-800' }
+    };
+
+    function resolveCategory(cat) {
+      const c = (cat || '').toLowerCase();
+      if (c.includes('imob') || c.includes('mora') || c.includes('alug')) return CATEGORY_MAP['Moradia'];
+      if (c.includes('inov') || c.includes('tec') || c.includes('ciênc') || c.includes('ita')) return CATEGORY_MAP['Tecnologia'];
+      if (c.includes('mobilidade') || c.includes('transp') || c.includes('dutra') || c.includes('infra')) return CATEGORY_MAP['Mobilidade'];
+      if (c.includes('econ') || c.includes('empreg') || c.includes('trabalh') || c.includes('indús')) return CATEGORY_MAP['Emprego'];
+      if (c.includes('cult') || c.includes('even') || c.includes('arte') || c.includes('músic') || c.includes('show')) return CATEGORY_MAP['Cultura'];
+      return CATEGORY_MAP['Cidade'];
+    }
+
+    function formatPortalDate(isoStr) {
+      if (!isoStr) return 'Recente';
+      try {
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return 'Recente';
+        const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()} às ${hours}:${minutes}`;
+      } catch (e) {
+        return 'Recente';
+      }
+    }
+
+    function getArticleUrl(slug) {
+      return `artigo.html?slug=${encodeURIComponent(slug)}`;
+    }
+
+    function renderPortalArticleCard(post) {
+      const catMeta = resolveCategory(post.category);
+      const formattedDate = formatPortalDate(post.published_at || post.created_at);
+      const readTime = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
+      const author = post.author_name || 'Leonardo Venâncio';
+      const isMayumi = author.toLowerCase().includes('mayumi');
+      const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+      const coverUrl = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+      const articleUrl = getArticleUrl(post.slug);
+      const excerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
+
+      return `
+        <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="${catMeta.slug}">
+          <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
+            <img src="${coverUrl}" alt="${post.title} - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+            <div class="absolute top-3 left-3">
+              <span class="${catMeta.color} text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
+                <i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}
+              </span>
+            </div>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
+                <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> ${readTime}</span>
+                <span>•</span>
+                <span>${formattedDate}</span>
+              </div>
+              <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
+                <a href="${articleUrl}">${post.title}</a>
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
+                ${excerpt}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <img src="${authorAvatarSrc}" alt="${author}" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+                <span class="text-xs font-medium text-slate-700">${author}</span>
+              </div>
+              <a href="${articleUrl}" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
+                Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function updateHeroSection(heroPost, sidebarPosts) {
+      if (!heroPost) return;
+      const catMeta = resolveCategory(heroPost.category);
+      const articleUrl = getArticleUrl(heroPost.slug);
+      const formattedDate = formatPortalDate(heroPost.published_at || heroPost.created_at);
+      const readTime = (heroPost.seo_metadata && heroPost.seo_metadata.read_time) || '4 min de leitura';
+      const excerpt = heroPost.excerpt || (heroPost.seo_metadata && heroPost.seo_metadata.bluf_summary) || heroPost.title;
+      const coverUrl = heroPost.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+
+      const catEl = document.getElementById('heroBadgeCategory');
+      if (catEl) {
+        catEl.className = `${catMeta.bgBadge} text-[11px] font-bold px-2.5 py-0.5 rounded border ${catMeta.border}`;
+        catEl.innerHTML = `<i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}`;
+      }
+
+      const timeEl = document.getElementById('heroReadingTime');
+      if (timeEl) timeEl.innerHTML = `<i class="fa-regular fa-clock text-slate-400"></i> ${readTime}`;
+
+      const dateEl = document.getElementById('heroDate');
+      if (dateEl) dateEl.textContent = formattedDate;
+
+      const titleLink = document.getElementById('heroTitleLink');
+      if (titleLink) {
+        titleLink.href = articleUrl;
+        titleLink.textContent = heroPost.title;
+      }
+
+      const subEl = document.getElementById('heroSubtitle');
+      if (subEl) subEl.textContent = excerpt;
+
+      const imgLink = document.getElementById('heroImageLink');
+      if (imgLink) imgLink.href = articleUrl;
+
+      const imgEl = document.getElementById('heroImage');
+      if (imgEl) {
+        imgEl.src = coverUrl;
+        imgEl.alt = `${heroPost.title} - Radar São José dos Campos`;
+      }
+
+      const ctaBtn = document.getElementById('heroCtaBtn');
+      if (ctaBtn) ctaBtn.href = articleUrl;
+
+      const authorName = document.getElementById('heroAuthorName');
+      const authorVal = heroPost.author_name || 'Leonardo Venâncio';
+      if (authorName) authorName.textContent = authorVal;
+
+      const authorAvatar = document.getElementById('heroAuthorAvatar');
+      if (authorAvatar) {
+        const isMayumi = authorVal.toLowerCase().includes('mayumi');
+        authorAvatar.src = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
+        authorAvatar.alt = authorVal;
+      }
+
+      const sidebarContainer = document.getElementById('heroSidebarContainer');
+      if (sidebarContainer && Array.isArray(sidebarPosts) && sidebarPosts.length > 0) {
+        sidebarContainer.innerHTML = sidebarPosts.map(post => {
+          const sCat = resolveCategory(post.category);
+          const sUrl = getArticleUrl(post.slug);
+          const sRead = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
+          const sCover = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+          const sExcerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
+
+          return `
+            <article class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-600/60 hover:shadow-md transition-all group flex items-center gap-3.5">
+              <div class="relative w-24 sm:w-28 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-slate-200 shadow-2xs">
+                <img src="${sCover}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1.5 mb-1">
+                  <span class="text-[10px] font-bold uppercase tracking-wider ${sCat.text} truncate">${sCat.label}</span>
+                  <span class="text-slate-300 text-[10px]">•</span>
+                  <span class="text-slate-500 text-[10px] whitespace-nowrap">${sRead}</span>
+                </div>
+                <h4 class="text-xs sm:text-sm font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-colors line-clamp-2 leading-snug">
+                  <a href="${sUrl}">${post.title}</a>
+                </h4>
+                <p class="text-[11px] text-slate-500 mt-1 line-clamp-1 leading-normal hidden sm:block">${sExcerpt}</p>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+    }
+
+    async function fetchAndRenderPortalPosts() {
+      let posts = [];
+      try {
+        const supRes = await fetch(`${SUPABASE_BLOG_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&select=*`, {
+          headers: {
+            'apikey': SUPABASE_BLOG_KEY,
+            'Authorization': `Bearer ${SUPABASE_BLOG_KEY}`
+          }
+        });
+        if (supRes.ok) {
+          posts = await supRes.json();
+        }
+      } catch (err) {
+        console.warn('[Portal] Supabase direct fetch warn:', err);
+      }
+
+      if (!posts || posts.length === 0) {
+        try {
+          const apiRes = await fetch('/api/posts?status=published&sortBy=published_at&order=desc&limit=100');
+          if (apiRes.ok) {
+            const data = await apiRes.json();
+            if (data && data.success && Array.isArray(data.posts)) {
+              posts = data.posts;
+            }
+          }
+        } catch (apiErr) {
+          console.warn('[Portal] API fallback warn:', apiErr);
+        }
+      }
+
+      if (Array.isArray(posts) && posts.length > 0) {
+        // Ordenação estrita: da última postada (mais recente) para a primeira
+        posts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
+
+        // 1. Matéria de Capa Oficial (Critério: post com is_featured === true definido no CRM)
+        let heroPost = posts.find(p => p.is_featured === true);
+        if (!heroPost) heroPost = posts[0];
+
+        // 2. Destaques Laterais (as próximas 3 mais recentes excluindo a capa)
+        const sidebarPosts = posts.filter(p => p.id !== heroPost.id && p.slug !== heroPost.slug).slice(0, 3);
+        updateHeroSection(heroPost, sidebarPosts);
+
+        // 3. Atualizar Grid Completo de Artigos
+        const grid = document.getElementById('articlesGrid');
+        if (grid) {
+          grid.innerHTML = posts.map(renderPortalArticleCard).join('');
+        }
+
+        // Atualizar contador total
+        const countEl = document.getElementById('articleCount');
+        if (countEl) countEl.textContent = posts.length;
+
+        // Botão "Todas" limpo (sem contador vermelho)
+        const catBtnAll = document.querySelector('[data-cat="todas"]');
+        if (catBtnAll) catBtnAll.textContent = 'Todas';
+
+        // Redirecionar para editoria dedicada dinâmica caso tenha query param ?editoria= ou ?cat=
+        const urlParams = new URLSearchParams(window.location.search);
+        const editoriaParam = urlParams.get('editoria') || urlParams.get('cat') || window.location.hash.replace('#', '');
+        if (editoriaParam && editoriaParam !== 'todas') {
+          window.location.replace('editoria.html?cat=' + encodeURIComponent(editoriaParam.toLowerCase()));
+        }
+      }
+    }
+    fetchAndRenderPortalPosts();
     
   </script>
 </body>

@@ -198,32 +198,39 @@ module.exports = async function handler(req, res) {
         return res.status(404).json({ success: false, message: 'Artigo não encontrado.' });
       }
 
+      // Filtrar lista fallback
       let filtered = [...fallbackList];
-      if (category && category !== 'all') filtered = filtered.filter(p => p.category === category);
-      if (status && status !== 'all') filtered = filtered.filter(p => p.status === status);
+      if (category && category !== 'all') {
+        filtered = filtered.filter(p => p.category === category);
+      }
+      if (status && status !== 'all') {
+        filtered = filtered.filter(p => p.status === status);
+      }
       if (q) {
         const queryLower = q.toLowerCase();
-        filtered = filtered.filter(p => 
-          p.title.toLowerCase().includes(queryLower) ||
-          p.slug.toLowerCase().includes(queryLower) ||
-          (p.category && p.category.toLowerCase().includes(queryLower)) ||
-          (p.excerpt && p.excerpt.toLowerCase().includes(queryLower))
+        filtered = filtered.filter(p =>
+          (p.title || '').toLowerCase().includes(queryLower) ||
+          (p.slug || '').toLowerCase().includes(queryLower) ||
+          (p.category || '').toLowerCase().includes(queryLower)
         );
       }
 
-      const p = Math.max(1, parseInt(page, 10));
-      const l = Math.max(1, parseInt(limit, 10));
-      const startIndex = (p - 1) * l;
-      const pagedPosts = filtered.slice(startIndex, startIndex + l);
+      // Ordenar por published_at descendente (mais recente primeiro)
+      filtered.sort((a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0));
+
+      const pg = Math.max(1, parseInt(page, 10));
+      const lm = Math.max(1, parseInt(limit, 10));
+      const startIndex = (pg - 1) * lm;
+      const pagedPosts = filtered.slice(startIndex, startIndex + lm);
 
       return res.status(200).json({
         success: true,
         posts: pagedPosts,
         pagination: {
-          page: p,
-          limit: l,
+          page: pg,
+          limit: lm,
           total: filtered.length,
-          totalPages: Math.ceil(filtered.length / l)
+          totalPages: Math.ceil(filtered.length / lm)
         },
         source: 'local_fallback'
       });
@@ -271,6 +278,16 @@ module.exports = async function handler(req, res) {
         is_featured: !!is_featured
       };
 
+      // Incorporar campos de imagem em seo_metadata caso existam
+      let mergedSeo = newPost.seo_metadata || {};
+      if (typeof mergedSeo === 'string') {
+        try { mergedSeo = JSON.parse(mergedSeo); } catch (e) { mergedSeo = {}; }
+      }
+      if (body.cover_image_alt !== undefined) mergedSeo.cover_image_alt = body.cover_image_alt;
+      if (body.cover_image_caption !== undefined) mergedSeo.cover_image_caption = body.cover_image_caption;
+      if (body.cover_image_credit !== undefined) mergedSeo.cover_image_credit = body.cover_image_credit;
+      newPost.seo_metadata = mergedSeo;
+
       // Tentar salvar no Supabase
       try {
         const supRes = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts`, {
@@ -295,40 +312,63 @@ module.exports = async function handler(req, res) {
         console.warn('[Supabase Insert Fallback]:', err.message);
       }
 
-      // Fallback em memória
+      // Fallback em memória para POST
       const localList = getFallbackArticles();
       const localCreated = {
         id: 'post-' + Date.now(),
         ...newPost,
         created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        views_count: 0
+        updated_at: new Date().toISOString()
       };
       localList.unshift(localCreated);
-
-      return res.status(201).json({
-        success: true,
-        post: localCreated,
-        message: 'Artigo salvo com sucesso (Cache Local / Supabase Configuração Ativa)!'
-      });
+      return res.status(201).json({ success: true, post: localCreated, source: 'local_fallback' });
     }
 
     // -------------------------------------------------------------
-    // 3. PUT / PATCH: Atualizar Artigo
+    // 3. PUT / PATCH: Atualizar Artigo Existente
     // -------------------------------------------------------------
     if (method === 'PUT' || method === 'PATCH') {
       const body = req.body || {};
-      const { id, slug, original_slug, ...updateFields } = body;
-      const targetSlug = original_slug || slug || query.slug;
-      const targetId = id || query.id;
+      const targetId = body.id || query.id;
+      const targetSlug = body.original_slug || body.slug || query.slug;
 
-      if (!targetSlug && !targetId) {
-        return res.status(400).json({ success: false, message: 'Informe o ID ou Slug do artigo a ser atualizado.' });
+      if (!targetId && !targetSlug) {
+        return res.status(400).json({ success: false, message: 'Identificador (id ou slug) é obrigatório para atualização.' });
       }
 
       const isUuid = (str) => typeof str === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
-      // Atualizar no Supabase
+      // Colunas estritamente permitidas na tabela blog_posts do Supabase
+      const VALID_SUPABASE_COLUMNS = [
+        'title', 'slug', 'excerpt', 'content', 'cover_image_url', 
+        'status', 'published_at', 'updated_at', 
+        'author_name', 'author_role', 'category', 'tags', 
+        'seo_metadata', 'views_count', 'is_featured'
+      ];
+
+      // Preparar seo_metadata incorporando campos de imagem caso existam
+      let mergedSeo = body.seo_metadata || {};
+      if (typeof mergedSeo === 'string') {
+        try { mergedSeo = JSON.parse(mergedSeo); } catch (e) { mergedSeo = {}; }
+      }
+      if (body.cover_image_alt !== undefined) mergedSeo.cover_image_alt = body.cover_image_alt;
+      if (body.cover_image_caption !== undefined) mergedSeo.cover_image_caption = body.cover_image_caption;
+      if (body.cover_image_credit !== undefined) mergedSeo.cover_image_credit = body.cover_image_credit;
+
+      const updatePayload = {};
+      VALID_SUPABASE_COLUMNS.forEach(col => {
+        if (body[col] !== undefined) {
+          updatePayload[col] = body[col];
+        }
+      });
+      updatePayload.seo_metadata = mergedSeo;
+      updatePayload.updated_at = new Date().toISOString();
+
+      if (body.slug) {
+        updatePayload.slug = slugify(body.slug);
+      }
+
+      // Tentar atualizar no Supabase
       try {
         let updateUrl = `${SUPABASE_URL}/rest/v1/blog_posts?`;
         if (targetId && isUuid(targetId)) {
@@ -347,42 +387,56 @@ module.exports = async function handler(req, res) {
             'Content-Type': 'application/json',
             'Prefer': 'return=representation'
           },
-          body: JSON.stringify(updateFields)
+          body: JSON.stringify(updatePayload)
         });
 
         if (supRes.ok) {
           const updated = await supRes.json();
-          if (updated && updated.length > 0) {
-            return res.status(200).json({ success: true, post: updated[0], message: 'Artigo atualizado com sucesso no Supabase!' });
-          }
+          return res.status(200).json({ 
+            success: true, 
+            post: updated[0] || { ...body, ...updatePayload }, 
+            message: 'Artigo atualizado com sucesso no Supabase!' 
+          });
         } else {
-          const errText = await supRes.text();
-          console.warn('[Supabase Update Error]:', errText);
+          const errBody = await supRes.text();
+          console.warn('[Supabase Patch Error]:', errBody);
         }
       } catch (err) {
-        console.warn('[Supabase Update Exception]:', err.message);
+        console.warn('[Supabase Patch Exception]:', err.message);
       }
 
       // Fallback em memória
       const localList = getFallbackArticles();
-      const idx = localList.findIndex(p => p.id === targetId || p.slug === targetSlug || p.slug === slug);
+      const idx = localList.findIndex(p => p.id === targetId || p.slug === targetSlug || (body.slug && p.slug === body.slug));
       if (idx !== -1) {
-        localList[idx] = { ...localList[idx], ...updateFields, updated_at: new Date().toISOString() };
-        return res.status(200).json({ success: true, post: localList[idx], message: 'Artigo atualizado com sucesso!' });
+        localList[idx] = {
+          ...localList[idx],
+          ...updatePayload,
+          ...body
+        };
+        return res.status(200).json({ 
+          success: true, 
+          post: localList[idx], 
+          message: 'Artigo atualizado localmente!' 
+        });
       }
 
-      return res.status(404).json({ success: false, message: 'Artigo não encontrado para atualização.' });
+      return res.status(200).json({ 
+        success: true, 
+        post: { id: targetId, ...updatePayload }, 
+        message: 'Artigo atualizado.' 
+      });
     }
 
     // -------------------------------------------------------------
-    // 4. DELETE: Remover Artigo
+    // 4. DELETE: Excluir Artigo
     // -------------------------------------------------------------
     if (method === 'DELETE') {
-      const targetSlug = query.slug || (req.body && req.body.slug);
       const targetId = query.id || (req.body && req.body.id);
+      const targetSlug = query.slug || (req.body && req.body.slug);
 
-      if (!targetSlug && !targetId) {
-        return res.status(400).json({ success: false, message: 'Informe o ID ou Slug do artigo a ser excluído.' });
+      if (!targetId && !targetSlug) {
+        return res.status(400).json({ success: false, message: 'ID ou Slug é obrigatório para exclusão.' });
       }
 
       const isUuid = (str) => typeof str === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);

@@ -1,5 +1,0 @@
-PERSONA: Roberto Alvarenga
-IDADE: 52
-LOCAL: Bairro Jardim Aquarius, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 52-year-old Brazilian male aerospace engineer in Jardim Aquarius, wearing a sharp grey suit, looking anxious yet analytical, soft morning light, 85mm lens, hyperrealistic documentary photography.

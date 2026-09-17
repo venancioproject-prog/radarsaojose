@@ -1,5 +1,0 @@
-PERSONA: Gabriel Martins
-IDADE: 21
-LOCAL: Bairro Bosque dos Eucaliptos, São José dos Campos
-PROMPT:
-Cinematic 8k portrait of a 21-year-old Brazilian young man, barber and content creator, holding a skateboard near the Estaiada bridge in São José dos Campos, sunset lighting, urban aesthetic, hyperrealistic.
