@@ -378,7 +378,16 @@
 
     async function loadArticle() {
       const params = new URLSearchParams(window.location.search);
-      const slug = params.get('slug');
+      let slug = params.get('slug');
+
+      // Fallback: se acessado por rota amigável /artigos/slug ou /artigo/slug
+      if (!slug) {
+        const path = window.location.pathname;
+        const match = path.match(/\/(?:artigos|artigo)\/([^/?#]+)/);
+        if (match && match[1]) {
+          slug = decodeURIComponent(match[1].replace(/\.html$/, ''));
+        }
+      }
 
       if (!slug) {
         document.getElementById('loadingState').classList.add('hidden');
