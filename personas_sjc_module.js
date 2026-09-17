@@ -1857,7 +1857,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_26_marcio_souza_e_silva.jpg"
   },
@@ -1927,7 +1927,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_27_tatiane_tati_camargo.jpg"
   },
@@ -1997,7 +1997,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_28_rodrigo_digao_barbosa.jpg"
   },
@@ -2067,7 +2067,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_29_vera_lucia_bittencourt.jpg"
   },
@@ -2211,7 +2211,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_31_natalia_nati_dornelles.jpg"
   },
@@ -2430,7 +2430,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_34_danilo_dk_kuntz.jpg"
   },
@@ -2573,7 +2573,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_36_vinicius_vini_castanho.jpg"
   },
@@ -2715,7 +2715,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_38_edson_edinho_ferreira.jpg"
   },
@@ -2860,7 +2860,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_40_matheus_math_lourenco.jpg"
   },
@@ -3003,7 +3003,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_42_rafael_rafa_brandao.jpg"
   },
@@ -3073,7 +3073,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_43_sabrina_satoe_mori.jpg"
   },
@@ -3143,7 +3143,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_44_geraldo_seu_geraldo_dias.jpg"
   },
@@ -3213,7 +3213,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_45_patricia_pati_lemes.jpg"
   },
