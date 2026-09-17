@@ -429,7 +429,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_6_dona_dirce_de_lourdes_prado.jpg"
   },
@@ -499,7 +499,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_7_benedito_seu_dito_alvarenga.jpg"
   },
@@ -643,7 +643,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_9_wagner_santos.jpg"
   },
@@ -713,7 +713,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_10_gabriel_marcondes_de_oliveira.jpg"
   },
@@ -855,7 +855,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_12_kenji_takahashi.jpg"
   },
@@ -927,7 +927,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_13_claudete_aparecida_da_silva.jpg"
   },
@@ -997,7 +997,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_14_heloisa_castilho.jpg"
   },
@@ -1141,7 +1141,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_16_osvaldo_martins_ferraz.jpg"
   },
@@ -1211,7 +1211,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_17_nayara_nai_santos_neves.jpg"
   },
@@ -1283,7 +1283,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_18_carlos_eduardo_cadu_peixoto.jpg"
   },
@@ -1356,7 +1356,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_19_aline_moreira_siqueira.jpg"
   },
@@ -1428,7 +1428,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_20_renato_guimaraes_prado.jpg"
   },
@@ -1498,7 +1498,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_21_beatriz_bia_mendonca.jpg"
   },
@@ -1640,7 +1640,7 @@
       "revisoes_aplicadas": []
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_23_priscila_alencar.jpg"
   },

@@ -149,6 +149,11 @@
             <span>Blog & Posts (CMS)</span>
           </button>
 
+          <button onclick="switchTab('plan')" id="nav-plan" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
+            <i class="fa-solid fa-briefcase text-base text-slate-400 w-5"></i>
+            <span>Business Plan</span>
+          </button>
+
           <button onclick="switchTab('relatorios')" id="nav-relatorios" class="w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
             <i class="fa-solid fa-file-invoice-dollar text-base text-slate-400 w-5"></i>
             <span>Relatórios & MRR</span>
@@ -604,6 +609,151 @@
         </section>
 
       </main>
+    </div>
+
+    <!-- ==================== TAB: BUSINESS PLAN (PLANO DE NEGÓCIOS EDITÁVEL) ==================== -->
+    <div id="tab-plan" class="tab-content hidden flex-1 flex flex-col">
+      
+      <!-- BUSINESS PLAN SUB-HEADER / TOOLBAR -->
+      <div class="bg-white border-b border-slate-200 px-6 sm:px-8 py-5 flex flex-col xl:flex-row xl:items-center justify-between gap-4 sticky top-0 z-20 shadow-2xs">
+        <div>
+          <div class="flex items-center gap-2 text-[11px] font-bold text-cyan-700 uppercase tracking-wider mb-1">
+            <i class="fa-solid fa-briefcase"></i>
+            <span>Plano Estratégico de Negócios • Radar São José</span>
+            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Documento Vivo • 100% Editável
+            </span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Business Plan & Arquitetura de Crescimento B2B</h1>
+          <p class="text-xs text-slate-500 font-medium">Tese de investimento, modelo de receita recorrente (MRR), segmentação ICP, GTM e vantagens competitivas em São José dos Campos. Clique em qualquer texto para editar.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+          <div id="planSaveIndicator" class="text-[11px] font-semibold text-slate-400 flex items-center gap-1.5 px-3 py-1 bg-slate-50 rounded-lg border border-slate-200">
+            <i class="fa-solid fa-check text-emerald-500"></i>
+            <span>Salvo no navegador</span>
+          </div>
+
+          <button type="button" onclick="saveBusinessPlan(true)" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-emerald-600/20 transition-all cursor-pointer">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Salvar Alterações</span>
+          </button>
+
+          <button type="button" onclick="addNewPlanCard()" class="px-3.5 py-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer">
+            <i class="fa-solid fa-plus text-cyan-600"></i>
+            <span>+ Novo Bloco</span>
+          </button>
+
+          <button type="button" onclick="exportBusinessPlanMarkdown()" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer" title="Copiar plano completo em Markdown">
+            <i class="fa-solid fa-copy text-slate-500"></i>
+            <span>Copiar MD</span>
+          </button>
+
+          <button type="button" onclick="resetBusinessPlan()" class="p-2 rounded-xl border border-slate-200 hover:bg-rose-50 hover:text-rose-600 text-slate-400 text-xs transition-colors cursor-pointer" title="Restaurar modelo original">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- BUSINESS PLAN BODY -->
+      <div class="p-6 sm:p-8 space-y-8 flex-grow max-w-7xl w-full mx-auto">
+
+        <!-- BANNER DE INTELIGÊNCIA EXECUTIVA -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0B2545] via-[#133E6D] to-[#0B2545] text-white shadow-xl relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="relative z-10 space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-cyan-300 text-xs font-bold uppercase tracking-wider border border-white/10 backdrop-blur-xs">
+              <i class="fa-solid fa-compass-drafting text-cyan-400"></i> Tese Central de Investimento
+            </div>
+            <h2 id="planHeroTitle" contenteditable="true" spellcheck="false" class="text-xl sm:text-3xl font-black tracking-tight leading-snug focus:ring-2 focus:ring-cyan-400 focus:bg-white/10 rounded-xl p-1 transition-all outline-none">
+              O Sistema Operacional de Inteligência de Mercado e Mídia de São José dos Campos
+            </h2>
+            <p id="planHeroDesc" contenteditable="true" spellcheck="false" class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-4xl focus:ring-2 focus:ring-cyan-400 focus:bg-white/10 rounded-xl p-1 transition-all outline-none">
+              O que plataformas globais como Bloomberg e CoStar construíram para os mercados financeiros e imobiliários, o <strong class="text-cyan-300">Radar São José</strong> entrega em nível hiperlocal para a capital tecnológica do Brasil. Monetizamos com assinaturas B2B SaaS de alto LTV, mídia comissionada orientada a dados e rede de vendas autônoma de alta capilaridade.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4 KPI TARGET CARDS -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- KPI 1 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">Mercado Alvo (TAM/SAM/SOM)</span>
+              <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-sm shadow-2xs">
+                <i class="fa-solid fa-bullseye"></i>
+              </div>
+            </div>
+            <div id="planKpi1Val" contenteditable="true" spellcheck="false" class="text-2xl font-black text-slate-900 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">R$ 14,8M / ano</div>
+            <p id="planKpi1Sub" contenteditable="true" spellcheck="false" class="text-xs text-slate-500 font-medium mt-1 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">SAM: 4.200 empresas em SJC nos setores de alto valor</p>
+          </div>
+
+          <!-- KPI 2 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">Meta de MRR (Ano 2)</span>
+              <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm shadow-2xs">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+            </div>
+            <div id="planKpi2Val" contenteditable="true" spellcheck="false" class="text-2xl font-black text-slate-900 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">R$ 150.000 / mês</div>
+            <p id="planKpi2Sub" contenteditable="true" spellcheck="false" class="text-xs text-emerald-600 font-bold mt-1 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">R$ 1,8M ARR projetado com 750 clientes pagantes</p>
+          </div>
+
+          <!-- KPI 3 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">Unit Economics</span>
+              <div class="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-sm shadow-2xs">
+                <i class="fa-solid fa-scale-balanced"></i>
+              </div>
+            </div>
+            <div id="planKpi3Val" contenteditable="true" spellcheck="false" class="text-2xl font-black text-slate-900 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">LTV / CAC = 17x</div>
+            <p id="planKpi3Sub" contenteditable="true" spellcheck="false" class="text-xs text-slate-500 font-medium mt-1 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">CAC: R$ 280 | LTV: R$ 4.776 | Payback: 1,4 meses</p>
+          </div>
+
+          <!-- KPI 4 -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-400">Moat & Defensabilidade</span>
+              <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-sm shadow-2xs">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+            </div>
+            <div id="planKpi4Val" contenteditable="true" spellcheck="false" class="text-2xl font-black text-slate-900 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">722 Respondentes</div>
+            <p id="planKpi4Sub" contenteditable="true" spellcheck="false" class="text-xs text-slate-500 font-medium mt-1 focus:ring-2 focus:ring-cyan-400 rounded p-0.5 outline-none">Dados primários auditados + 10 personas profundas de SJC</p>
+          </div>
+        </section>
+
+        <!-- CONTAINER DINÂMICO DOS 8 MÓDULOS DO BUSINESS PLAN -->
+        <div id="planCardsContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Os cards estruturados são gerados e hidratados via JavaScript com suporte total a edição inline e salvamento contínuo -->
+        </div>
+
+        <!-- CALL TO ACTION / EXPORTAÇÃO RÁPIDA -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#0B2545] text-cyan-400 flex items-center justify-center text-base shrink-0">
+              <i class="fa-solid fa-file-export"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-slate-900">Precisa apresentar este plano a investidores, parceiros ou bancos?</h4>
+              <p class="text-xs text-slate-500">Exporte este documento completo em formato Markdown ou gere PDF executivo com 1 clique.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <button type="button" onclick="exportBusinessPlanMarkdown()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition-all flex items-center gap-2">
+              <i class="fa-solid fa-copy text-slate-600"></i> Copiar Texto Formatado
+            </button>
+            <button type="button" onclick="window.print()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 rounded-xl text-xs font-black transition-all flex items-center gap-2 shadow-sm">
+              <i class="fa-solid fa-print"></i> Imprimir / PDF
+            </button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <!-- ==================== TAB 3: RELATÓRIOS ==================== -->
@@ -1676,6 +1826,10 @@
 
       if (tabId === 'blog' && typeof fetchBlogPosts === 'function') {
         fetchBlogPosts(1);
+      }
+
+      if (tabId === 'plan' && typeof loadBusinessPlan === 'function') {
+        loadBusinessPlan();
       }
     }
 
@@ -4055,13 +4209,707 @@
         }
       });
     }
+// =========================================================================
+// BUSINESS PLAN - CONTROLLER & PERSISTÊNCIA INTERATIVA 100% EDITÁVEL
+// =========================================================================
+
+const DEFAULT_BUSINESS_PLAN = {
+  hero: {
+    title: "O Sistema Operacional de Inteligência de Mercado e Mídia de São José dos Campos",
+    desc: "O que plataformas globais como Bloomberg e CoStar construíram para os mercados financeiros e imobiliários, o <strong class=\"text-cyan-300\">Radar São José</strong> entrega em nível hiperlocal para a capital tecnológica do Brasil. Monetizamos com assinaturas B2B SaaS de alto LTV, mídia comissionada orientada a dados e rede de vendas autônoma de alta capilaridade."
+  },
+  kpis: {
+    kpi1Val: "R$ 14,8M / ano",
+    kpi1Sub: "SAM: 4.200 empresas em SJC nos setores de alto valor",
+    kpi2Val: "R$ 150.000 / mês",
+    kpi2Sub: "R$ 1,8M ARR projetado com 750 clientes pagantes",
+    kpi3Val: "LTV / CAC = 17x",
+    kpi3Sub: "CAC: R$ 280 | LTV: R$ 4.776 | Payback: 1,4 meses",
+    kpi4Val: "722 Respondentes",
+    kpi4Sub: "Dados primários auditados + 10 personas profundas de SJC"
+  },
+  modules: [
+    {
+      id: "mod-1",
+      number: "01",
+      tag: "Visão Geral & Tese",
+      tagColor: "bg-blue-50 text-blue-700 border-blue-200",
+      icon: "fa-solid fa-compass",
+      title: "Sumário Executivo & Tese de Oportunidade",
+      summary: "Posicionamento estratégico do Radar São José como o ecossistema definitivo de inteligência territorial, mídia de alta autoridade e intermediação comercial em São José dos Campos.",
+      points: [
+        {
+          label: "A Dor do Mercado",
+          text: "Decisões corporativas de expansão, abertura de pontos, precificação de serviços e campanhas de marketing em São José dos Campos continuam sendo tomadas no escuro ou com dados genéricos defasados do Censo 2010/2022. Construtoras perdem milhões errando tipologia de empreendimentos; redes de varejo falham ao subestimar a fuga de consumo para São Paulo capital."
+        },
+        {
+          label: "A Solução Radar São José",
+          text: "Um 'Sistema Operacional de Inteligência Municipal' que une dados comportamentais primários (722 respondentes reais de 6 macrorregiões da cidade), painéis analíticos interativos, inteligência artificial preditiva (Oráculo / Consultor SJC) e mídia de marca de alta autoridade."
+        },
+        {
+          label: "Timing e Janela de Oportunidade",
+          text: "O boom de verticalização das zonas Oeste e Sul (Aquarius, Urbanova, Jardim das Colinas) somado à consolidação da busca generativa (Google AI Overviews e ChatGPT) exige dados hiperlocais estruturados que nenhuma consultoria nacional possui."
+        }
+      ],
+      metrics: [
+        { label: "TAM Estimado (Brasil)", val: "R$ 850M" },
+        { label: "População Mapeada", val: "722 Munícipes" },
+        { label: "Margem Bruta Software", val: "88%" }
+      ]
+    },
+    {
+      id: "mod-2",
+      number: "02",
+      tag: "Mercado & ICP",
+      tagColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      icon: "fa-solid fa-bullseye",
+      title: "Tamanho de Mercado (TAM, SAM, SOM) & ICPs",
+      summary: "Dimensionamento do mercado endereçável e segmentação detalhada do Perfil de Cliente Ideal (ICP) B2B em São José dos Campos e no Vale do Paraíba.",
+      points: [
+        {
+          label: "TAM (Mercado Total Endereçável)",
+          text: "R$ 850 Milhões / ano no Brasil correspondentes a plataformas de inteligência de geomarketing, análise de renda e mídia programática hiperlocal em cidades polo acima de 500 mil habitantes."
+        },
+        {
+          label: "SAM (Mercado Disponível em SJC/RMVale)",
+          text: "R$ 14,8 Milhões / ano representando ~4.200 empresas com faturamento acima de R$ 1,2M/ano: Incorporadoras, Construtoras, Redes Médicas e Odontológicas, Colégios Particulares, Concessionárias e Hubs de Gastronomia."
+        },
+        {
+          label: "SOM (Meta Operacional 24 Meses)",
+          text: "R$ 1,8 Milhão ARR (R$ 150.000 MRR) alcançando 750 assinantes corporativos ativos na plataforma (market share de ~18% do nicho qualificado de SJC)."
+        },
+        {
+          label: "ICPs Primários (Ideal Customer Profile)",
+          text: "1) Incorporadoras & Construtoras (demandam inteligência demográfica e capacidade de absorção por m²); 2) Redes de Saúde & Educação Privada (estudos de evasão e atração por bairro); 3) Agências de Marketing & Consultores (utilizam os dados como diferencial competitivo para clientes)."
+        }
+      ],
+      metrics: [
+        { label: "SAM Qualificado", val: "4.200 Empresas" },
+        { label: "SOM Meta 24M", val: "750 Assinantes" },
+        { label: "ARR Projetado", val: "R$ 1.800.000" }
+      ]
+    },
+    {
+      id: "mod-3",
+      number: "03",
+      tag: "Solução & Produto",
+      tagColor: "bg-indigo-50 text-indigo-700 border-indigo-200",
+      icon: "fa-solid fa-layer-group",
+      title: "Proposta de Valor & Portfólio de Produtos",
+      summary: "Quatro linhas de produtos integradas que resolvem desde a decisão de investimento de capital até a geração contínua de demanda para os clientes.",
+      points: [
+        {
+          label: "1. Radar Data & Dashboards SaaS",
+          text: "Interface web moderna com mapas interativos, filtros dinâmicos por região (Centro, Aquarius, Colinas, Sul, Leste, Norte, Urbanova), pirâmide de renda, matriz de mobilidade e índices de satisfação dos munícipes."
+        },
+        {
+          label: "2. Oráculo / Consultor IA de SJC",
+          text: "Agente inteligente alimentado com a base dos 722 questionários auditados e dados municipais. Responde perguntas como: 'Qual o melhor bairro para abrir um bistrô de ticket R$ 120?' ou 'Onde está concentrada a demanda por escolas bilíngues?' em segundos com fundamentação quantitativa."
+        },
+        {
+          label: "3. Radar Mídia & Brand Journalism",
+          text: "Mídia editorial de altíssima autoridade. Produção de matérias aprofundadas com Schema FAQ estruturado e otimização BLUF (Bottom Line Up Front), garantindo primeira posição nos motores de busca e citações orgânicas em IA Overviews."
+        },
+        {
+          label: "4. Dossiês & Estudos de Expansão Customizados",
+          text: "Relatórios sob encomenda (white label ou co-branded) para reuniões de conselho e comitês de crédito de grandes empreendimentos imobiliários e comerciais."
+        }
+      ],
+      metrics: [
+        { label: "Nº de Personas Mapeadas", val: "10 Personas" },
+        { label: "Tempo Resposta Consultor IA", val: "< 1,8 seg" },
+        { label: "Indexação Schema FAQ", val: "100% dos Artigos" }
+      ]
+    },
+    {
+      id: "mod-4",
+      number: "04",
+      tag: "Monetização & Pricing",
+      tagColor: "bg-purple-50 text-purple-700 border-purple-200",
+      icon: "fa-solid fa-money-bill-wave",
+      title: "Modelos de Receita & Estrutura de Preços",
+      summary: "Engenharia de receita multi-stream combinando Software as a Service (MRR recorrente), Mídia Institucional Patrocinada e Estudos Customizados de Alto Valor.",
+      points: [
+        {
+          label: "Plano Starter / Essencial - R$ 197 / mês",
+          text: "Acesso à plataforma de inteligência de dados, indicadores consolidados da cidade, visualização de mapas demográficos e 1 usuário ativo. Indicado para corretores autônomos, prestadores de serviços e pequenos comércios."
+        },
+        {
+          label: "Plano Pro Growth - R$ 497 / mês (Produto Carro-Chefe)",
+          text: "Acesso integral aos dashboards com segmentação por bairros, Consultor IA ilimitado, dados de comportamento das 10 personas, exportação de relatórios em PDF/CSV e até 3 usuários. Voltado para médias empresas, clínicas e colégios."
+        },
+        {
+          label: "Plano Enterprise / Construtora - R$ 1.490 / mês",
+          text: "Acesso multi-usuário corporativo, API de integração com CRM/BI interno, análises customizadas de novos empreendimentos, suporte consultivo trimestral e cota de 1 matéria patrocinada semestral no portal editorial."
+        },
+        {
+          label: "Brand Publishing & Native Advertising",
+          text: "Artigos e reportagens patrocinadas: R$ 1.500 (matéria avulsa padrão SEO) a R$ 4.800 (especial multimídia + distribuição na base de assinantes + destaque permanente no portal)."
+        }
+      ],
+      metrics: [
+        { label: "Ticket Médio (ARPU)", val: "R$ 398 / mês" },
+        { label: "Receita Mídia Média", val: "R$ 2.400 / cota" },
+        { label: "Margem de Contribuição", val: "91%" }
+      ]
+    },
+    {
+      id: "mod-5",
+      number: "05",
+      tag: "Go-To-Market (GTM)",
+      tagColor: "bg-amber-50 text-amber-700 border-amber-200",
+      icon: "fa-solid fa-rocket",
+      title: "Estratégia de Aquisição (GTM) & Canais de Venda",
+      summary: "Mecanismo triplo de tração comercial: Força de vendas externa comissionada (afiliados), autoridade orgânica (GEO/SEO) e prospecção direta orientada a dados.",
+      points: [
+        {
+          label: "1. Rede de Afiliados & Vendedores Autônomos (Motor de Escala)",
+          text: "Parceria com profissionais de vendas locais, corretores de imóveis e consultores B2B através do 'Portal do Vendedor' (painel-afiliado.html). Comissões recorrentes agressivas de 15% a 25% sobre o MRR gerado, transformando o ecossistema de vendas da cidade em força comercial do Radar."
+        },
+        {
+          label: "2. Generative Engine Optimization (GEO) & Mídia Inbound",
+          text: "Conteúdo editorial de ponta focado em perguntas de alta intenção ('Onde morar em SJC', 'Bairros com maior valorização imobiliária em 2026'). O Radar vira a resposta oficial do Google e das IAs, atraindo organicamente executivos e empresários que procuram dados locais."
+        },
+        {
+          label: "3. Outbound Consultivo Baseado em Gatilhos Territoriais",
+          text: "Prospecção ativa direcionada a decisores (C-level, Diretores de Expansão). O SDR/executivo aborda a empresa com um insight real e exclusivo do Radar sobre o bairro onde ela atua, gerando taxa de conversão em demonstração superior a 35%."
+        },
+        {
+          label: "4. Alianças Estratégicas Locais",
+          text: "Convênios com a ACI (Associação Comercial e Industrial de SJC), SEBRAE Vale do Paraíba, CRECI e sindicatos patronais para concessão de planos com benefício corporativo e workshops de dados."
+        }
+      ],
+      metrics: [
+        { label: "Comissão Afiliados", val: "15% - 25% Recorrente" },
+        { label: "Taxa Demo Outbound", val: "38%" },
+        { label: "Meta Afiliados Ativos", val: "30 no Trimestre 1" }
+      ]
+    },
+    {
+      id: "mod-6",
+      number: "06",
+      tag: "Unit Economics & Finanças",
+      tagColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      icon: "fa-solid fa-chart-line",
+      title: "Unit Economics, Curva de MRR & Projeções (24 Meses)",
+      summary: "Eficiência de capital excepcional com métricas de software de classe mundial, payback ultrarrápido e alavancagem operacional.",
+      points: [
+        {
+          label: "Unit Economics Fundamentais",
+          text: "CAC Médio: R$ 280 (reduzido pelo programa de afiliados sem folha fixa de vendas). ARPU Médio: R$ 398/mês. Churn Mensal Projetado: 2,8%. Vida Média do Cliente (Lifetime): 12 meses (R$ 4.776 LTV). Relação LTV / CAC: 17,0x (Benchmark SaaS: > 3x). Payback: 1,4 meses."
+        },
+        {
+          label: "Evolução do MRR e Base de Clientes (Roadmap Financeiro)",
+          text: "• Mês 6: 65 clientes | MRR R$ 25.000 | ARR R$ 300.000\n• Mês 12: 165 clientes | MRR R$ 65.000 | ARR R$ 780.000\n• Mês 18: 320 clientes | MRR R$ 105.000 | ARR R$ 1.260.000\n• Mês 24: 750 clientes pagantes | MRR R$ 150.000 | ARR R$ 1.800.000."
+        },
+        {
+          label: "Estrutura de Custos Operacionais",
+          text: "Infraestrutura Serverless (Vercel + Supabase + APIs LLM): R$ 1.800/mês para até 1.000 clientes simultâneos. Comissões de Afiliados: Variável (20% do faturamento faturado). Margem EBITDA projetada no Ano 2: 68%."
+        }
+      ],
+      metrics: [
+        { label: "CAC Médio", val: "R$ 280" },
+        { label: "LTV / CAC", val: "17x" },
+        { label: "Payback do CAC", val: "1,4 meses" },
+        { label: "Margem EBITDA Ano 2", val: "68%" }
+      ]
+    },
+    {
+      id: "mod-7",
+      number: "07",
+      tag: "Moat & Competição",
+      tagColor: "bg-rose-50 text-rose-700 border-rose-200",
+      icon: "fa-solid fa-shield-halved",
+      title: "Fosso Defensivo (Moat) & Análise Competitiva",
+      summary: "Barreiras de entrada intransponíveis que protegem as margens e a dominância do Radar São José contra entrantes e consultorias genéricas.",
+      points: [
+        {
+          label: "Diferencial de Dados Primários Auditados",
+          text: "Consultorias nacionais (Geofusion, Cognatis, Neoway) utilizam dados secundários modelados por algoritmos matemáticos a partir do Censo 2010. O Radar São José possui dados primários frescos colhidos diretamente com 722 chefes de família da cidade, captando comportamentos sutis de gasto e lazer."
+        },
+        {
+          label: "Barreira de Custo e Acessibilidade",
+          text: "Ferramentas tradicionais de geomarketing cobram contratos anuais mínimos de R$ 35.000 a R$ 80.000 + taxas pesadas de setup. O Radar democratiza o acesso a partir de R$ 197/mês, capturando o 'long-tail' de 4.000 empresas de médio porte inacessíveis aos grandes players."
+        },
+        {
+          label: "Sinergia de Mídia e Software (Flywheel)",
+          text: "O portal de conteúdo traz tráfego, audiência qualificada e confiança institucional. A confiança converte em vendas do software SaaS. O uso do software gera novos dados e insights que alimentam novos artigos virais. Esse ciclo cria um flywheel imbatível."
+        }
+      ],
+      metrics: [
+        { label: "Amostra Primária", val: "722 Famílias" },
+        { label: "Economia vs Concorrência", val: "90% menor" },
+        { label: "Efeito Flywheel", val: "Mídia + Dados + IA" }
+      ]
+    },
+    {
+      id: "mod-8",
+      number: "08",
+      tag: "Operação & Roadmap",
+      tagColor: "bg-slate-50 text-slate-800 border-slate-300",
+      icon: "fa-solid fa-list-check",
+      title: "Plano de Operações, Governança & Expansão Regional",
+      summary: "Milestones trimestrais de execução e preparação do modelo de franquia ou replicação para as demais capitais regionais do estado.",
+      points: [
+        {
+          label: "Fase 1: Go-to-Market & Tração SJC (Meses 01 a 06)",
+          text: "Ativação comercial dos 30 primeiros parceiros afiliados; integração completa do gateway de pagamento com cobrança recorrente no cartão e PIX; formalização de parcerias institucionais com entidades de classe de SJC; atingimento de R$ 25k MRR."
+        },
+        {
+          label: "Fase 2: Consolidação & Escala de Mídia (Meses 07 a 12)",
+          text: "Lançamento do aplicativo móvel para assinantes Pro; expansão do Oráculo IA com relatórios preditivos automáticos de abertura de filiais; comercialização de cotas de patrocínio anuais de mídia; meta de R$ 65k MRR."
+        },
+        {
+          label: "Fase 3: Expansão Territorial (Meses 13 a 24)",
+          text: "Replicação do playbook em cidades-irmãs do Vale do Paraíba e interior paulista: 'Radar Taubaté', 'Radar Jacareí' e 'Radar Campinas'. O software já nasce multi-tenant e pronto para absorver novas bases geográficas instantaneamente."
+        }
+      ],
+      metrics: [
+        { label: "Meta Mês 6", val: "R$ 25k MRR" },
+        { label: "Meta Mês 12", val: "R$ 65k MRR" },
+        { label: "Próximas Cidades", val: "Taubaté & Jacareí" }
+      ]
+    }
+  ]
+};
+
+const PLAN_STORAGE_KEY = 'radarsaojose_business_plan_v2';
+let planSaveDebounceTimer = null;
+
+// Carrega o plano do LocalStorage ou padrão
+function getStoredBusinessPlan() {
+  try {
+    const raw = localStorage.getItem(PLAN_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.modules && Array.isArray(parsed.modules) && parsed.modules.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.warn('Erro ao carregar Business Plan do localStorage:', e);
+  }
+  return DEFAULT_BUSINESS_PLAN;
+}
+
+// Inicializa e renderiza a aba de Business Plan
+function loadBusinessPlan() {
+  const plan = getStoredBusinessPlan();
+
+  // Hidrata Hero Banner
+  const heroTitle = document.getElementById('planHeroTitle');
+  const heroDesc = document.getElementById('planHeroDesc');
+  if (heroTitle && plan.hero && plan.hero.title) heroTitle.innerText = plan.hero.title;
+  if (heroDesc && plan.hero && plan.hero.desc) heroDesc.innerHTML = plan.hero.desc;
+
+  // Hidrata KPIs
+  if (plan.kpis) {
+    const setVal = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.innerText = val; };
+    setVal('planKpi1Val', plan.kpis.kpi1Val);
+    setVal('planKpi1Sub', plan.kpis.kpi1Sub);
+    setVal('planKpi2Val', plan.kpis.kpi2Val);
+    setVal('planKpi2Sub', plan.kpis.kpi2Sub);
+    setVal('planKpi3Val', plan.kpis.kpi3Val);
+    setVal('planKpi3Sub', plan.kpis.kpi3Sub);
+    setVal('planKpi4Val', plan.kpis.kpi4Val);
+    setVal('planKpi4Sub', plan.kpis.kpi4Sub);
+  }
+
+  // Renderiza cards dos módulos
+  renderBusinessPlanCards(plan.modules);
+
+  // Escuta inputs no container para auto-save contínuo
+  attachPlanLiveListeners();
+}
+
+// Renderiza os cards de módulos estratégicos
+function renderBusinessPlanCards(modules) {
+  const container = document.getElementById('planCardsContainer');
+  if (!container) return;
+
+  container.innerHTML = modules.map((mod, idx) => `
+    <div id="${mod.id || 'mod-' + idx}" class="plan-card bg-white rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col p-6 space-y-5" data-mod-id="${mod.id || 'mod-' + idx}">
+      
+      <!-- Top Card Bar -->
+      <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-slate-900 text-cyan-400 flex items-center justify-center text-sm font-black shrink-0 shadow-2xs">
+            <i class="${mod.icon || 'fa-solid fa-briefcase'}"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Módulo ${mod.number || String(idx + 1).padStart(2, '0')}</span>
+              <span class="plan-card-tag px-2 py-0.5 rounded-full text-[10px] font-bold border ${mod.tagColor || 'bg-slate-100 text-slate-700 border-slate-200'}" contenteditable="true" spellcheck="false">
+                ${mod.tag || 'Estratégia'}
+              </span>
+            </div>
+            <h3 class="plan-card-title text-base sm:text-lg font-black text-slate-900 leading-snug mt-0.5 focus:ring-2 focus:ring-cyan-400 rounded outline-none" contenteditable="true" spellcheck="false">
+              ${mod.title || 'Título do Módulo'}
+            </h3>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button type="button" onclick="deletePlanCard('${mod.id || 'mod-' + idx}')" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer" title="Excluir este bloco">
+            <i class="fa-solid fa-trash-can text-xs"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Resumo do Módulo -->
+      <p class="plan-card-summary text-xs text-slate-600 leading-relaxed font-medium bg-slate-50/80 p-3 rounded-xl border border-slate-100 focus:ring-2 focus:ring-cyan-400 rounded outline-none" contenteditable="true" spellcheck="false">
+        ${mod.summary || 'Resumo do bloco...'}
+      </p>
+
+      <!-- Pontos Estratégicos -->
+      <div class="plan-points-container space-y-3 flex-grow">
+        ${(mod.points || []).map((pt, pIdx) => `
+          <div class="plan-point-item p-3 rounded-xl border border-slate-100 bg-white hover:border-slate-300 transition-colors">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <div class="plan-point-label text-xs font-black text-[#0B2545] uppercase tracking-wide focus:ring-1 focus:ring-cyan-400 rounded outline-none" contenteditable="true" spellcheck="false">
+                ${pt.label || 'Tópico ' + (pIdx + 1)}
+              </div>
+              <button type="button" onclick="this.closest('.plan-point-item').remove(); triggerPlanAutoSave();" class="text-slate-300 hover:text-rose-500 text-[10px] p-0.5" title="Remover este item">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div class="plan-point-text text-xs text-slate-600 leading-relaxed focus:ring-1 focus:ring-cyan-400 rounded outline-none whitespace-pre-line" contenteditable="true" spellcheck="false">
+              ${pt.text || ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Botão Adicionar Ponto -->
+      <button type="button" onclick="addPointToCard('${mod.id || 'mod-' + idx}')" class="w-full py-1.5 px-3 rounded-lg border border-dashed border-slate-200 text-slate-500 hover:text-cyan-700 hover:border-cyan-300 hover:bg-cyan-50/40 text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+        <i class="fa-solid fa-plus text-xs"></i> Adicionar Ponto / Tópico
+      </button>
+
+      <!-- Métricas / Indicadores Chave do Módulo -->
+      <div class="pt-3 border-t border-slate-100">
+        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-2">Métricas Chave</span>
+        <div class="plan-metrics-container grid grid-cols-2 sm:grid-cols-3 gap-2">
+          ${(mod.metrics || []).map((m) => `
+            <div class="plan-metric-item p-2 rounded-lg bg-slate-50 border border-slate-100 text-center">
+              <div class="plan-metric-val text-xs font-black text-slate-900 focus:ring-1 focus:ring-cyan-400 rounded outline-none" contenteditable="true" spellcheck="false">${m.val || '-'}</div>
+              <div class="plan-metric-label text-[10px] font-bold text-slate-400 focus:ring-1 focus:ring-cyan-400 rounded outline-none mt-0.5" contenteditable="true" spellcheck="false">${m.label || 'Métrica'}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+    </div>
+  `).join('');
+}
+
+// Vincula listeners para monitoramento em tempo real de edições
+function attachPlanLiveListeners() {
+  const tabPlan = document.getElementById('tab-plan');
+  if (!tabPlan) return;
+
+  tabPlan.querySelectorAll('[contenteditable="true"]').forEach(el => {
+    // Evita duplicar listeners
+    if (el.dataset.hasPlanListener) return;
+    el.dataset.hasPlanListener = 'true';
+
+    el.addEventListener('input', () => {
+      triggerPlanAutoSave();
+    });
+    el.addEventListener('blur', () => {
+      saveBusinessPlan(false);
+    });
+  });
+}
+
+// Dispara salvamento com debounce (600ms) e indicador visual
+function triggerPlanAutoSave() {
+  const indicator = document.getElementById('planSaveIndicator');
+  if (indicator) {
+    indicator.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-amber-500"></i> <span>Salvando alterações...</span>';
+    indicator.className = 'text-[11px] font-semibold text-amber-700 flex items-center gap-1.5 px-3 py-1 bg-amber-50 rounded-lg border border-amber-200';
+  }
+
+  clearTimeout(planSaveDebounceTimer);
+  planSaveDebounceTimer = setTimeout(() => {
+    saveBusinessPlan(false);
+  }, 600);
+}
+
+// Salva todo o Business Plan da interface no LocalStorage
+function saveBusinessPlan(showFeedback = false) {
+  try {
+    const heroTitle = document.getElementById('planHeroTitle')?.innerText?.trim() || DEFAULT_BUSINESS_PLAN.hero.title;
+    const heroDesc = document.getElementById('planHeroDesc')?.innerHTML?.trim() || DEFAULT_BUSINESS_PLAN.hero.desc;
+
+    const getVal = (id, fallback) => document.getElementById(id)?.innerText?.trim() || fallback;
+    const kpis = {
+      kpi1Val: getVal('planKpi1Val', DEFAULT_BUSINESS_PLAN.kpis.kpi1Val),
+      kpi1Sub: getVal('planKpi1Sub', DEFAULT_BUSINESS_PLAN.kpis.kpi1Sub),
+      kpi2Val: getVal('planKpi2Val', DEFAULT_BUSINESS_PLAN.kpis.kpi2Val),
+      kpi2Sub: getVal('planKpi2Sub', DEFAULT_BUSINESS_PLAN.kpis.kpi2Sub),
+      kpi3Val: getVal('planKpi3Val', DEFAULT_BUSINESS_PLAN.kpis.kpi3Val),
+      kpi3Sub: getVal('planKpi3Sub', DEFAULT_BUSINESS_PLAN.kpis.kpi3Sub),
+      kpi4Val: getVal('planKpi4Val', DEFAULT_BUSINESS_PLAN.kpis.kpi4Val),
+      kpi4Sub: getVal('planKpi4Sub', DEFAULT_BUSINESS_PLAN.kpis.kpi4Sub),
+    };
+
+    // Coleta módulos dos cards renderizados
+    const cardEls = document.querySelectorAll('#planCardsContainer .plan-card');
+    const modules = [];
+
+    cardEls.forEach((card, idx) => {
+      const id = card.dataset.modId || ('mod-' + (idx + 1));
+      const tag = card.querySelector('.plan-card-tag')?.innerText?.trim() || 'Estratégia';
+      const title = card.querySelector('.plan-card-title')?.innerText?.trim() || `Módulo ${idx + 1}`;
+      const summary = card.querySelector('.plan-card-summary')?.innerText?.trim() || '';
+
+      const points = [];
+      card.querySelectorAll('.plan-point-item').forEach(ptEl => {
+        const label = ptEl.querySelector('.plan-point-label')?.innerText?.trim() || '';
+        const text = ptEl.querySelector('.plan-point-text')?.innerText?.trim() || '';
+        if (label || text) points.push({ label, text });
+      });
+
+      const metrics = [];
+      card.querySelectorAll('.plan-metric-item').forEach(mEl => {
+        const val = mEl.querySelector('.plan-metric-val')?.innerText?.trim() || '';
+        const label = mEl.querySelector('.plan-metric-label')?.innerText?.trim() || '';
+        if (val || label) metrics.push({ val, label });
+      });
+
+      modules.push({
+        id,
+        number: String(idx + 1).padStart(2, '0'),
+        tag,
+        tagColor: 'bg-slate-100 text-slate-700 border-slate-200',
+        icon: 'fa-solid fa-layer-group',
+        title,
+        summary,
+        points,
+        metrics
+      });
+    });
+
+    const fullPlan = {
+      hero: { title: heroTitle, desc: heroDesc },
+      kpis,
+      modules: modules.length > 0 ? modules : DEFAULT_BUSINESS_PLAN.modules
+    };
+
+    localStorage.setItem(PLAN_STORAGE_KEY, JSON.stringify(fullPlan));
+
+    const indicator = document.getElementById('planSaveIndicator');
+    if (indicator) {
+      const timeStr = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      indicator.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> <span>Salvo às ${timeStr}</span>`;
+      indicator.className = 'text-[11px] font-semibold text-slate-500 flex items-center gap-1.5 px-3 py-1 bg-slate-50 rounded-lg border border-slate-200';
+    }
+
+    if (showFeedback && typeof showToast === 'function') {
+      showToast('Business Plan salvo com sucesso!', 'success');
+    }
+  } catch (err) {
+    console.error('Falha ao salvar Business Plan:', err);
+    if (showFeedback && typeof showToast === 'function') {
+      showToast('Erro ao salvar Business Plan no navegador.', 'error');
+    }
+  }
+}
+
+// Adiciona um novo bloco/card ao Business Plan
+function addNewPlanCard() {
+  const container = document.getElementById('planCardsContainer');
+  if (!container) return;
+
+  const currentCount = container.querySelectorAll('.plan-card').length;
+  const newId = 'mod-' + Date.now();
+  const newNum = String(currentCount + 1).padStart(2, '0');
+
+  const newMod = {
+    id: newId,
+    number: newNum,
+    tag: 'Novo Bloco',
+    tagColor: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+    icon: 'fa-solid fa-circle-plus',
+    title: 'Novo Módulo Estratégico',
+    summary: 'Clique para descrever o objetivo e a metodologia deste bloco...',
+    points: [
+      { label: 'Estratégia Principal', text: 'Descreva a iniciativa, prazos e responsáveis...' }
+    ],
+    metrics: [
+      { label: 'Meta Chave', val: '100%' },
+      { label: 'Prazo', val: '90 dias' }
+    ]
+  };
+
+  const plan = getStoredBusinessPlan();
+  plan.modules.push(newMod);
+  localStorage.setItem(PLAN_STORAGE_KEY, JSON.stringify(plan));
+  loadBusinessPlan();
+
+  // Rola até o novo bloco
+  setTimeout(() => {
+    const newCardEl = document.getElementById(newId);
+    if (newCardEl) {
+      newCardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const titleEl = newCardEl.querySelector('.plan-card-title');
+      if (titleEl) titleEl.focus();
+    }
+  }, 100);
+
+  if (typeof showToast === 'function') {
+    showToast(`Novo Módulo ${newNum} adicionado com sucesso!`, 'info');
+  }
+}
+
+// Adiciona um novo ponto a um card específico
+function addPointToCard(cardId) {
+  const card = document.getElementById(cardId);
+  if (!card) return;
+
+  const pointsContainer = card.querySelector('.plan-points-container');
+  if (!pointsContainer) return;
+
+  const newPointEl = document.createElement('div');
+  newPointEl.className = 'plan-point-item p-3 rounded-xl border border-slate-100 bg-white hover:border-slate-300 transition-colors';
+  newPointEl.innerHTML = `
+    <div class="flex items-center justify-between gap-2 mb-1">
+      <div class="plan-point-label text-xs font-black text-[#0B2545] uppercase tracking-wide focus:ring-1 focus:ring-cyan-400 rounded outline-none" contenteditable="true" spellcheck="false">
+        Novo Tópico
+      </div>
+      <button type="button" onclick="this.closest('.plan-point-item').remove(); triggerPlanAutoSave();" class="text-slate-300 hover:text-rose-500 text-[10px] p-0.5" title="Remover este item">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="plan-point-text text-xs text-slate-600 leading-relaxed focus:ring-1 focus:ring-cyan-400 rounded outline-none whitespace-pre-line" contenteditable="true" spellcheck="false">
+      Clique para detalhar esta nova diretriz ou indicador...
+    </div>
+  `;
+  pointsContainer.appendChild(newPointEl);
+  attachPlanLiveListeners();
+  triggerPlanAutoSave();
+
+  const labelEl = newPointEl.querySelector('.plan-point-label');
+  if (labelEl) labelEl.focus();
+}
+
+// Exclui um card específico
+function deletePlanCard(cardId) {
+  if (!confirm('Deseja realmente remover este bloco do Business Plan?')) return;
+
+  const card = document.getElementById(cardId);
+  if (card) {
+    card.classList.add('opacity-0', 'scale-95');
+    setTimeout(() => {
+      card.remove();
+      saveBusinessPlan(false);
+      if (typeof showToast === 'function') {
+        showToast('Bloco removido!', 'info');
+      }
+    }, 200);
+  }
+}
+
+// Restaura o Business Plan para o modelo padrão executivo
+function resetBusinessPlan() {
+  if (!confirm('Tem certeza de que deseja restaurar o modelo original do Business Plan? Todas as suas edições personalizadas serão substituídas pela versão executiva padrão.')) {
+    return;
+  }
+  localStorage.removeItem(PLAN_STORAGE_KEY);
+  loadBusinessPlan();
+  if (typeof showToast === 'function') {
+    showToast('Business Plan restaurado para a versão executiva padrão!', 'info');
+  }
+}
+
+// Exporta o Business Plan completo em Markdown limpo para a área de transferência
+function exportBusinessPlanMarkdown() {
+  try {
+    const heroTitle = document.getElementById('planHeroTitle')?.innerText?.trim() || 'RADAR SÃO JOSÉ - BUSINESS PLAN';
+    const heroDesc = document.getElementById('planHeroDesc')?.innerText?.trim() || '';
+
+    const kpi1Val = document.getElementById('planKpi1Val')?.innerText?.trim() || '';
+    const kpi1Sub = document.getElementById('planKpi1Sub')?.innerText?.trim() || '';
+    const kpi2Val = document.getElementById('planKpi2Val')?.innerText?.trim() || '';
+    const kpi2Sub = document.getElementById('planKpi2Sub')?.innerText?.trim() || '';
+    const kpi3Val = document.getElementById('planKpi3Val')?.innerText?.trim() || '';
+    const kpi3Sub = document.getElementById('planKpi3Sub')?.innerText?.trim() || '';
+    const kpi4Val = document.getElementById('planKpi4Val')?.innerText?.trim() || '';
+    const kpi4Sub = document.getElementById('planKpi4Sub')?.innerText?.trim() || '';
+
+    let md = `# ${heroTitle}\n\n`;
+    md += `> ${heroDesc}\n\n`;
+    md += `## 🎯 METAS & INDICADORES CHAVE\n`;
+    md += `- **Mercado Alvo (TAM/SAM/SOM)**: ${kpi1Val} — _${kpi1Sub}_\n`;
+    md += `- **Meta de MRR (Ano 2)**: ${kpi2Val} — _${kpi2Sub}_\n`;
+    md += `- **Unit Economics**: ${kpi3Val} — _${kpi3Sub}_\n`;
+    md += `- **Moat & Defensabilidade**: ${kpi4Val} — _${kpi4Sub}_\n\n`;
+    md += `---\n\n## 📚 MÓDULOS ESTRATÉGICOS\n\n`;
+
+    const cardEls = document.querySelectorAll('#planCardsContainer .plan-card');
+    cardEls.forEach((card, idx) => {
+      const tag = card.querySelector('.plan-card-tag')?.innerText?.trim() || '';
+      const title = card.querySelector('.plan-card-title')?.innerText?.trim() || `Módulo ${idx + 1}`;
+      const summary = card.querySelector('.plan-card-summary')?.innerText?.trim() || '';
+
+      md += `### ${String(idx + 1).padStart(2, '0')}. ${title} [${tag}]\n\n`;
+      if (summary) md += `**Visão Geral**: ${summary}\n\n`;
+
+      card.querySelectorAll('.plan-point-item').forEach(ptEl => {
+        const label = ptEl.querySelector('.plan-point-label')?.innerText?.trim() || '';
+        const text = ptEl.querySelector('.plan-point-text')?.innerText?.trim() || '';
+        if (label || text) {
+          md += `#### ${label}\n${text}\n\n`;
+        }
+      });
+
+      const metrics = [];
+      card.querySelectorAll('.plan-metric-item').forEach(mEl => {
+        const val = mEl.querySelector('.plan-metric-val')?.innerText?.trim() || '';
+        const label = mEl.querySelector('.plan-metric-label')?.innerText?.trim() || '';
+        if (val || label) metrics.push(`**${label}**: ${val}`);
+      });
+
+      if (metrics.length > 0) {
+        md += `*Métricas Chave*: ${metrics.join(' | ')}\n\n`;
+      }
+      md += `---\n\n`;
+    });
+
+    navigator.clipboard.writeText(md).then(() => {
+      if (typeof showToast === 'function') {
+        showToast('Business Plan copiado em Markdown para a área de transferência!', 'success');
+      }
+    }).catch(() => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = md;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (typeof showToast === 'function') {
+        showToast('Business Plan copiado em Markdown!', 'success');
+      }
+    });
+  } catch (err) {
+    console.error('Erro ao exportar Markdown:', err);
+    if (typeof showToast === 'function') {
+      showToast('Não foi possível copiar o texto automaticamente.', 'error');
+    }
+  }
+}
+
+
     renderCrm();
     fetchBlogPosts(1);
+    if (typeof loadBusinessPlan === 'function') {
+      loadBusinessPlan();
+    }
 
-    // Auto switch tab if URL has hash (e.g. #blog)
+    // Auto switch tab if URL has hash (e.g. #blog, #plan)
     if (window.location.hash) {
       const hash = window.location.hash.replace('#', '');
-      if (['crm', 'blog', 'relatorios', 'config'].includes(hash)) {
+      if (['crm', 'blog', 'plan', 'relatorios', 'config'].includes(hash)) {
         switchTab(hash);
       }
     }

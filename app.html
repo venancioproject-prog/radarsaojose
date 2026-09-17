@@ -698,90 +698,215 @@
               </button>
             </div>
           </div>
-          <div id="sidebar-historia-filters-container" class="space-y-5 hidden">
-            <div class="bg-amber-50/80 rounded-xl p-3 border border-amber-100">
-              <p class="text-[10px] font-bold uppercase tracking-wider text-amber-900">Marcos Encontrados</p>
-              <div class="flex items-baseline gap-1 mt-0.5">
-                <span id="historia-filtered-records-count" class="text-xl font-black text-brand-900">0</span>
-                <span class="text-xs font-semibold text-slate-500">de <span id="historia-total-base-count" class="font-bold text-slate-800">0</span> eventos</span>
+          <div id="sidebar-historia-filters-container" class="space-y-4 hidden pb-6">
+            <!-- 1. Contador de Marcos Encontrados & Reset -->
+            <div class="bg-amber-50/80 rounded-2xl p-3.5 border border-amber-200/70 shadow-2xs flex items-center justify-between">
+              <div>
+                <p class="text-[10px] font-extrabold uppercase tracking-wider text-[#8c6239]">Marcos no Acervo</p>
+                <div class="flex items-baseline gap-1 mt-0.5">
+                  <span id="historia-filtered-records-count" class="text-xl font-black text-slate-900">31</span>
+                  <span class="text-xs font-semibold text-slate-500">de <span id="historia-total-base-count" class="font-bold text-slate-700">31</span> marcos</span>
+                </div>
+              </div>
+              <button 
+                type="button" 
+                onclick="window.resetHistoriaFilters()" 
+                class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200 text-[11px] font-bold transition-all shadow-2xs cursor-pointer flex items-center gap-1"
+                title="Redefinir todos os filtros"
+              >
+                <i class="fa-solid fa-rotate-left text-[10px]"></i>
+                <span>Limpar</span>
+              </button>
+            </div>
+
+            <!-- 2. Busca Rápida no Rio -->
+            <div>
+              <label for="historia-search-input" class="block text-[11px] font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Buscar no Rio</label>
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-xs pointer-events-none"></i>
+                <input 
+                  type="text" 
+                  id="historia-search-input" 
+                  oninput="window.filterHistoriaEvents()" 
+                  placeholder="Ex: ITA, Embraer, 1767..." 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-600 transition-all"
+                />
               </div>
             </div>
 
-            <div class="space-y-3.5 text-xs">
-              <!-- 1. Época Histórica -->
-              <div>
-                <label for="filter-historia-epoca" class="block font-bold text-slate-700 mb-1">Época Histórica</label>
-                <div class="relative">
-                  <select id="filter-historia-epoca" onchange="window.filterHistoriaEvents()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 cursor-pointer appearance-none">
-                    <option value="all">Todas as Épocas</option>
-                    <option value="colonial">Colonial & Vila (1564 – 1863)</option>
-                    <option value="sanatorial">Fase Sanatorial (1864 – 1945)</option>
-                    <option value="tecnologica">Era Tecnológica (1946 – 2000)</option>
-                    <option value="contemporanea">Século XXI (2001 – 2026)</option>
-                  </select>
-                  <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
-                </div>
+            <!-- 3. Nível de Evidência (100% SEM EMOJIS) -->
+            <div>
+              <label for="historia-evidence-select" class="block text-[11px] font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Nível de Evidência</label>
+              <div class="relative">
+                <select 
+                  id="historia-evidence-select" 
+                  onchange="window.filterHistoriaEvents()" 
+                  class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-600 cursor-pointer appearance-none"
+                >
+                  <option value="all">Todos os Níveis de Evidência</option>
+                  <option value="documentado">Documentado (Fonte Primária)</option>
+                  <option value="corroborado">Corroborado (Fonte Secundária)</option>
+                  <option value="em_investigacao">Em Investigação (Qualificando)</option>
+                  <option value="em_disputa">Em Disputa (Conflito de Fontes)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
               </div>
+            </div>
 
-              <!-- 2. Eixo Temático -->
-              <div>
-                <label for="filter-historia-eixo" class="block font-bold text-slate-700 mb-1">Eixo Temático</label>
-                <div class="relative">
-                  <select id="filter-historia-eixo" onchange="window.filterHistoriaEvents()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 cursor-pointer appearance-none">
-                    <option value="all">Todos os Eixos</option>
-                    <option value="fundacao">Fundação & Política</option>
-                    <option value="saude">Saúde & Sanatórios</option>
-                    <option value="ciencia">Educação, Ciência & Aviação</option>
-                    <option value="cultura">Cultura & Patrimônio</option>
-                    <option value="ambiente">Meio Ambiente & Urbano</option>
-                    <option value="trabalho">Trabalho & Memória Social</option>
-                  </select>
-                  <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
-                </div>
-              </div>
-
-              <!-- 3. Nível de Evidência -->
-              <div>
-                <label for="filter-historia-confianca" class="block font-bold text-slate-700 mb-1">Nível de Evidência</label>
-                <div class="relative">
-                  <select id="filter-historia-confianca" onchange="window.filterHistoriaEvents()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 cursor-pointer appearance-none">
-                    <option value="all">Todos os Níveis de Evidência</option>
-                    <option value="documentado">🟢 Documentado (Fonte Primária)</option>
-                    <option value="corroborado">🔵 Corroborado (Fonte Secundária)</option>
-                    <option value="em_investigacao">🟡 Em Investigação (Qualificando)</option>
-                    <option value="em_disputa">🔴 Em Disputa (Conflito de Fontes)</option>
-                  </select>
-                  <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 pointer-events-none absolute right-3 top-3"></i>
-                </div>
-              </div>
-
-              <!-- 4. Busca por Texto -->
-              <div>
-                <label for="filter-historia-search" class="block font-bold text-slate-700 mb-1">Buscar Palavra ou Evento</label>
-                <div class="relative">
-                  <input 
-                    type="text" 
-                    id="filter-historia-search" 
-                    oninput="window.filterHistoriaEvents()"
-                    placeholder="Ex: Embraer, ITA, 1767, Banhado..." 
-                    class="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 text-xs"
-                  />
-                  <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
-                </div>
-              </div>
-
-              <!-- Botão Reset -->
-              <div class="pt-2">
+            <!-- 4. Controles de Navegação no Rio -->
+            <div>
+              <span class="block text-[11px] font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Navegação Temporal</span>
+              <div class="grid grid-cols-2 gap-2">
                 <button 
                   type="button" 
-                  onclick="window.resetHistoriaFilters()" 
-                  class="w-full py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                  onclick="window.scrollHistoriaRiver(-650)" 
+                  class="py-2 px-3 rounded-xl text-xs font-bold bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                  title="Navegar para o passado"
                 >
-                  <i class="fa-solid fa-rotate-left text-[10px]"></i>
-                  <span>Limpar Filtros de História</span>
+                  <i class="fa-solid fa-arrow-left text-[11px]"></i>
+                  <span>Passado</span>
+                </button>
+                <button 
+                  type="button" 
+                  onclick="window.scrollHistoriaRiver(650)" 
+                  class="py-2 px-3 rounded-xl text-xs font-bold bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-2xs transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                  title="Navegar para o futuro"
+                >
+                  <span>Futuro</span>
+                  <i class="fa-solid fa-arrow-right text-[11px]"></i>
                 </button>
               </div>
             </div>
+
+            <!-- 5. Fases Históricas (Pills Verticais na Sidebar) -->
+            <div>
+              <span class="block text-[11px] font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Fases Históricas</span>
+              <div class="space-y-1.5" id="historia-eras-pills">
+                <button 
+                  type="button" 
+                  onclick="window.selectHistoriaEra('all')" 
+                  id="pill-era-all" 
+                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-xs flex items-center justify-between cursor-pointer"
+                >
+                  <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-[11px]"></i>
+                    <span>Todas as Fases</span>
+                  </span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded-md bg-white/20 font-mono">31</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  onclick="window.selectHistoriaEra('colonial')" 
+                  id="pill-era-colonial" 
+                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <i class="fa-solid fa-landmark text-[11px] text-[#8c6239]"></i>
+                    <span class="truncate">Colonial & Vila</span>
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono">1564–1863</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  onclick="window.selectHistoriaEra('sanatorial')" 
+                  id="pill-era-sanatorial" 
+                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <i class="fa-solid fa-hospital text-[11px] text-rose-700"></i>
+                    <span class="truncate">Cidade Sanatorial</span>
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono">1864–1945</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  onclick="window.selectHistoriaEra('tecnologica')" 
+                  id="pill-era-tecnologica" 
+                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <i class="fa-solid fa-plane-departure text-[11px] text-cyan-700"></i>
+                    <span class="truncate">CTA & Aeroespacial</span>
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono">1946–2000</span>
+                </button>
+
+                <button 
+                  type="button" 
+                  onclick="window.selectHistoriaEra('contemporanea')" 
+                  id="pill-era-contemporanea" 
+                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <i class="fa-solid fa-microchip text-[11px] text-emerald-700"></i>
+                    <span class="truncate">Smart City</span>
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono">2001–Hoje</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="h-px bg-slate-200/80 my-2"></div>
+
+            <!-- 6. Indicadores Historiográficos (Cards na Sidebar) -->
+            <div>
+              <span class="block text-[11px] font-bold text-slate-700 mb-2 uppercase tracking-wider">Indicadores-Chave</span>
+              <div class="space-y-2">
+                
+                <!-- KPI 1: Marco Institucional -->
+                <div class="bg-white rounded-xl p-3 border border-slate-200/80 shadow-2xs flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-200/80 flex items-center justify-center text-sm shrink-0 text-[#8c6239]">
+                    <i class="fa-solid fa-landmark-flag"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Marco Institucional</span>
+                    <strong class="text-sm font-black text-slate-900 block leading-tight">259 Anos</strong>
+                    <span class="text-[10px] font-medium text-slate-500 truncate block">Elevação a Vila (1767–2026)</span>
+                  </div>
+                </div>
+
+                <!-- KPI 2: Ocupação do Vale -->
+                <div class="bg-white rounded-xl p-3 border border-slate-200/80 shadow-2xs flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200/80 flex items-center justify-center text-sm shrink-0 text-blue-700">
+                    <i class="fa-solid fa-timeline"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Ocupação do Vale</span>
+                    <strong class="text-sm font-black text-slate-900 block leading-tight">462 Anos</strong>
+                    <span class="text-[10px] font-medium text-slate-500 truncate block">Presença Indígena & Jesuítica</span>
+                  </div>
+                </div>
+
+                <!-- KPI 3: Auditoria Documental -->
+                <div class="bg-white rounded-xl p-3 border border-slate-200/80 shadow-2xs flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-sm shrink-0 text-emerald-700">
+                    <i class="fa-solid fa-file-shield"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Auditoria Documental</span>
+                    <strong class="text-sm font-black text-slate-900 block leading-tight">31 Marcos</strong>
+                    <span class="text-[10px] font-medium text-slate-500 truncate block">100% com Fonte Primária</span>
+                  </div>
+                </div>
+
+                <!-- KPI 4: Ruptura Tecnológica -->
+                <div class="bg-white rounded-xl p-3 border border-slate-200/80 shadow-2xs flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-200/80 flex items-center justify-center text-sm shrink-0 text-amber-700">
+                    <i class="fa-solid fa-rocket"></i>
+                  </div>
+                  <div class="min-w-0">
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Ruptura Tecnológica</span>
+                    <strong class="text-sm font-black text-slate-900 block leading-tight">1950 ➔ Hoje</strong>
+                    <span class="text-[10px] font-medium text-slate-500 truncate block">CTA • ITA • Embraer • INPE</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
 
 
@@ -10611,239 +10736,154 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
       <!-- TÚNEL DO TEMPO - HISTÓRIA DE SÃO JOSÉ DOS CAMPOS -->
       <!-- ========================================== -->
       
-<section id="historia-view" class="hidden flex-1 w-full space-y-6 pb-16 min-w-0 animate-in fade-in duration-500 ease-out">
+<section id="historia-view" class="hidden flex-1 w-full space-y-2.5 pb-8 min-w-0 animate-in fade-in duration-500 ease-out">
         
-        <!-- 1. HERO EXECUTIVO CLEAN ANALYTICS -->
-        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="space-y-2">
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
-                <i class="fa-solid fa-clock-rotate-left text-teal-600"></i> Memória & História Urbana
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200">
-                <i class="fa-solid fa-certificate text-teal-600"></i> Marco Institucional: 27 de Julho de 1767 (259 Anos)
-              </span>
+        <!-- 1. HEADER EXECUTIVO COMPACTO -->
+        <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-2xs flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-lg shrink-0 text-[#8c6239]">
+              <i class="fa-solid fa-water"></i>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Radar SJC <span class="text-teal-600">História & Formação Territorial</span>
-            </h1>
-            <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-3xl leading-relaxed">
-              Acervo cronológico e arqueologia urbana verificável de São José dos Campos. Todos os marcos possuem fonte documental primária identificada, separando a ancestralidade de quatro séculos de ocupação do marco oficial de emancipação de 1767.
-            </p>
-          </div>
-
-          <!-- Botão Modal Explicativo -->
-          <button 
-            type="button" 
-            onclick="window.openPorQue1767Modal()" 
-            class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 shrink-0 cursor-pointer self-start lg:self-center active:scale-95"
-          >
-            <i class="fa-solid fa-circle-question text-teal-400"></i>
-            <span>Por que 1767? (Entenda o Marco)</span>
-          </button>
-        </div>
-
-        <!-- 2. 4 CARDS DE KPIS EXECUTIVOS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- KPI 1 -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-teal-50 text-teal-700 border border-teal-200/60 flex items-center justify-center text-lg font-black shrink-0">
-              <i class="fa-solid fa-landmark-flag"></i>
-            </div>
-            <div class="space-y-0.5">
-              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Idade Institucional</span>
-              <div class="flex items-baseline gap-1.5">
-                <span class="text-2xl font-black text-slate-900">259 Anos</span>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <h1 class="text-base sm:text-xl font-black text-slate-900 tracking-tight truncate">
+                  O Rio da Memória <span class="text-[#8c6239] font-extrabold">• Rio Paraíba do Sul & Rio Comprido</span>
+                </h1>
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200 shrink-0">
+                  <i class="fa-solid fa-certificate text-amber-700 text-[9px]"></i> 1767: 259 Anos
+                </span>
               </div>
-              <span class="text-[10px] font-semibold text-teal-700">Elevação a Vila (1767–2026)</span>
+              <p class="text-xs text-slate-500 font-medium truncate mt-0.5">
+                Águas barrentas históricas de São José dos Campos. Navegue horizontalmente pelo leito do tempo de 1564 aos dias de hoje.
+              </p>
             </div>
           </div>
 
-          <!-- KPI 2 -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 border border-blue-200/60 flex items-center justify-center text-lg font-black shrink-0">
-              <i class="fa-solid fa-timeline"></i>
-            </div>
-            <div class="space-y-0.5">
-              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Ocupação do Vale</span>
-              <div class="flex items-baseline gap-1.5">
-                <span class="text-2xl font-black text-slate-900">436 Anos</span>
-              </div>
-              <span class="text-[10px] font-semibold text-blue-700">Presença Indígena & Jesuítica</span>
-            </div>
-          </div>
-
-          <!-- KPI 3 -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/60 flex items-center justify-center text-lg font-black shrink-0">
-              <i class="fa-solid fa-file-shield"></i>
-            </div>
-            <div class="space-y-0.5">
-              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Auditoria Documental</span>
-              <div class="flex items-baseline gap-1.5">
-                <span class="text-2xl font-black text-slate-900">31 Marcos</span>
-              </div>
-              <span class="text-[10px] font-semibold text-emerald-700">100% com Fonte Primária</span>
-            </div>
-          </div>
-
-          <!-- KPI 4 -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-start gap-4">
-            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-700 border border-amber-200/60 flex items-center justify-center text-lg font-black shrink-0">
-              <i class="fa-solid fa-rocket"></i>
-            </div>
-            <div class="space-y-0.5">
-              <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Ruptura Tecnológica</span>
-              <div class="flex items-baseline gap-1.5">
-                <span class="text-2xl font-black text-slate-900">1950</span>
-              </div>
-              <span class="text-[10px] font-semibold text-amber-700">Criação do ITA / CTA / Embraer</span>
-            </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button 
+              type="button" 
+              onclick="window.openPorQue1767Modal()" 
+              class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer active:scale-95"
+            >
+              <i class="fa-solid fa-circle-question text-amber-300 text-xs"></i>
+              <span>Por que 1767?</span>
+            </button>
           </div>
         </div>
 
-        <!-- 3. BARRA DE CONTROLE: PILLS DE ERAS & MODOS DE VISUALIZAÇÃO -->
-        <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-4">
+        <!-- 3. O RIO HORIZONTAL DA MEMÓRIA (CANVAS EXPANDIDO: H=930px PARA VISUALIZAÇÃO TOTAL DOS CARDS) -->
+        <div class="relative w-full rounded-3xl bg-[#F4F7F9] border border-slate-200/80 shadow-md overflow-hidden p-3 sm:p-4">
           
-          <!-- Linha Superior: Pills de Eras e Modos -->
-          <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-            <!-- Eras em Pills -->
-            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 xl:pb-0" id="historia-eras-pills">
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('all')" 
-                id="pill-era-all" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-layer-group text-[11px]"></i>
-                <span>Todas as Fases (31)</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('colonial')" 
-                id="pill-era-colonial" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-landmark text-amber-600 text-[11px]"></i>
-                <span>1564–1863: Colonial & Vila</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('sanatorial')" 
-                id="pill-era-sanatorial" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-hospital text-rose-600 text-[11px]"></i>
-                <span>1864–1945: Cidade Sanatorial</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('tecnologica')" 
-                id="pill-era-tecnologica" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-rocket text-cyan-600 text-[11px]"></i>
-                <span>1946–2000: Aeroespacial & CTA</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('contemporanea')" 
-                id="pill-era-contemporanea" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-microchip text-teal-600 text-[11px]"></i>
-                <span>2001–Hoje: Tech & Smart City</span>
-              </button>
-            </div>
-
-            <!-- Alternador de Visualização: Feed Analítico vs Mapa -->
-            <div class="flex items-center gap-2 shrink-0 border-t xl:border-t-0 pt-2 xl:pt-0 border-slate-100">
-              <span class="text-xs font-bold text-slate-500 mr-1 hidden sm:inline">Modo:</span>
-              <button 
-                type="button" 
-                onclick="window.switchHistoriaViewMode('timeline')" 
-                id="btn-hist-mode-timeline" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-list-check text-[11px]"></i>
-                <span>Linha do Tempo</span>
-              </button>
-              <button 
-                type="button" 
-                onclick="window.switchHistoriaViewMode('mapa')" 
-                id="btn-hist-mode-mapa" 
-                class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
-              >
-                <i class="fa-solid fa-map-location-dot text-rose-600 text-[11px]"></i>
-                <span>Mapa Geográfico</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Linha Inferior: Busca Rápida + Filtro de Evidência + Contador -->
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-100">
-            <div class="relative w-full sm:w-80">
-              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
-              <input 
-                type="text" 
-                id="historia-search-input" 
-                oninput="window.filterHistoriaEvents()" 
-                placeholder="Buscar evento, local, personagem ou tema..." 
-                class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/20 transition-all"
-              />
-            </div>
-
-            <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-              <select 
-                id="historia-evidence-select" 
-                onchange="window.filterHistoriaEvents()" 
-                class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/20 cursor-pointer"
-              >
-                <option value="all">Todos os Níveis de Evidência</option>
-                <option value="documentado">Apenas Documentados (Oficiais)</option>
-                <option value="corroborado">Apenas Corroborados</option>
-                <option value="em_investigacao">Em Investigação</option>
-                <option value="em_disputa">Em Disputa Histórica</option>
-              </select>
-
-              <span id="historia-counter-badge" class="text-xs font-bold text-slate-500 whitespace-nowrap">
-                Mostrando 31 de 31 marcos
+          <!-- Banner Superior de Instrução e Geografia do Rio -->
+          <div class="flex items-center justify-between px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-xl mb-2 border border-slate-200/60 text-xs">
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-600 animate-pulse"></span>
+              <strong class="text-slate-800 font-extrabold uppercase tracking-wider text-[11px]">Leito Histórico do Rio Paraíba do Sul & Afluentes (SJC)</strong>
+              <span class="hidden md:inline text-slate-300">•</span>
+              <span class="hidden md:inline text-slate-500 font-medium">
+                <i class="fa-solid fa-arrows-left-right text-amber-700 mr-1"></i> Deslize para os lados ou use a roda do mouse sobre o rio
               </span>
             </div>
+            
+            <div class="flex items-center gap-3">
+              <span class="text-[11px] font-mono font-bold text-slate-400">1564 ➔ 2026</span>
+            </div>
           </div>
-        </div>
 
-        <!-- 4. VISTA 1: FEED DE CARDS ANALÍTICOS COM LINKS DE VALIDAÇÃO -->
-        <div id="historia-view-timeline" class="space-y-4">
-          <div id="historia-cards-container" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <!-- Cards preenchidos dinamicamente por window.renderHistoriaTimeline() -->
-          </div>
-        </div>
+          <!-- VIEWPORT DO RIO COM BOTÕES FLUTUANTES LATERAIS -->
+          <div class="relative w-full group">
+            <!-- Botão Flutuante Esquerda -->
+            <button 
+              type="button" 
+              onclick="window.scrollHistoriaRiver(-650)" 
+              class="absolute left-3 top-[70%] -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-[#734f2b] hover:text-slate-950 shadow-[0_8px_30px_rgba(0,0,0,0.18)] border border-amber-200/80 flex items-center justify-center text-base transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+              title="Navegar para a esquerda (Passado)"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
-        <!-- 5. VISTA 2: MAPA GEORREFERENCIADO LEAFLET -->
-        <div id="historia-view-mapa" class="hidden space-y-4">
-          <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/80 shadow-sm space-y-3">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
-                  <i class="fa-solid fa-map-location-dot text-rose-600"></i>
-                  Mapa Georreferenciado dos Marcos de São José dos Campos
-                </h3>
-                <p class="text-xs text-slate-500">Clique nos marcadores para validar a localização e inspecionar a fonte primária de cada acontecimento.</p>
+            <!-- Botão Flutuante Direita -->
+            <button 
+              type="button" 
+              onclick="window.scrollHistoriaRiver(650)" 
+              class="absolute right-3 top-[70%] -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-[#734f2b] hover:text-slate-950 shadow-[0_8px_30px_rgba(0,0,0,0.18)] border border-amber-200/80 flex items-center justify-center text-base transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+              title="Navegar para a direita (Futuro)"
+            >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <div id="historia-river-viewport"  class="relative w-full h-[525px] overflow-x-auto overflow-y-hidden rounded-2xl bg-[#F4F7F9] select-none scroll-smooth">
+            <div id="historia-river-track" class="relative h-full" style="min-width: 17200px;">
+              
+              <!-- SVG do Rio: Gradiente Marrom Claro + Margens Irregulares e Bancos de Areia -->
+              <svg id="historia-river-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- Gradiente do Rio Marrom Claro (Águas Barrentas do Paraíba) -->
+                  <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#b88a58" />
+                    <stop offset="15%" stop-color="#a87c4a" />
+                    <stop offset="35%" stop-color="#c49764" />
+                    <stop offset="55%" stop-color="#ad8151" />
+                    <stop offset="75%" stop-color="#9a6e3d" />
+                    <stop offset="90%" stop-color="#b58756" />
+                    <stop offset="100%" stop-color="#b88a58" />
+                  </linearGradient>
+
+                  <!-- Margens de Várzea e Areia Dourada -->
+                  <linearGradient id="riverSandbanks" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#eedfc9" stop-opacity="0.9" />
+                    <stop offset="25%" stop-color="#e5d2b7" stop-opacity="0.85" />
+                    <stop offset="50%" stop-color="#f2e4d0" stop-opacity="0.9" />
+                    <stop offset="75%" stop-color="#e5d0b3" stop-opacity="0.85" />
+                    <stop offset="100%" stop-color="#eedfc9" stop-opacity="0.9" />
+                  </linearGradient>
+
+                  <filter id="riverShadow" x="-10%" y="-10%" width="120%" height="120%">
+                    <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#6b4c25" flood-opacity="0.22" />
+                  </filter>
+                </defs>
+
+                <!-- Margem Irregular Externa (Praias e Várzea) -->
+                <path id="river-sand-path" fill="none" stroke="url(#riverSandbanks)" stroke-width="170" stroke-linecap="round" />
+                
+                <!-- Leito Principal das Águas Barrentas do Rio -->
+                <path id="river-main-path" fill="none" stroke="url(#riverGradient)" stroke-width="110" stroke-linecap="round" filter="url(#riverShadow)" />
+                
+                <!-- Correntezas e Linhas Fluviais -->
+                <path id="river-inner-stream" fill="none" stroke="#f7ede1" stroke-width="5" stroke-dasharray="28 20" opacity="0.55" />
+                <path id="river-secondary-stream" fill="none" stroke="#8c6239" stroke-width="3" stroke-dasharray="16 28" opacity="0.35" />
+              </svg>
+
+              <!-- SVG das Linhas Conectoras aos Cards -->
+              <svg id="historia-connectors-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Injetado dinamicamente via JS -->
+              </svg>
+
+              <!-- Camada de Marcos Geográficos de SJC no Rio (Curva do Banhado, Ponte dos Jesuítas, Santana) -->
+              <div id="historia-geo-landmarks-container" class="absolute inset-0 pointer-events-none">
+                <!-- Injetado dinamicamente via JS -->
               </div>
-              <span class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 self-start sm:self-auto">
-                31 Pontos Mapeados
-              </span>
+
+              <!-- Camada de Pedras / Nós dos Anos -->
+              <div id="historia-stones-container" class="absolute inset-0 pointer-events-auto">
+                <!-- Injetado dinamicamente via JS -->
+              </div>
+
+              <!-- Camada de Cards Flutuantes (Acima e Abaixo) -->
+              <div id="historia-cards-container" class="absolute inset-0 pointer-events-auto">
+                <!-- Injetado dinamicamente via JS -->
+              </div>
+
             </div>
-            <div id="historia-map-leaflet" class="w-full h-[540px] rounded-xl border border-slate-200 overflow-hidden shadow-inner z-0"></div>
+          </div>
           </div>
         </div>
 
-        <!-- 6. ABAS COMPLEMENTARES DE PESQUISA & GOVERNANÇA -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <!-- 4. ABAS COMPLEMENTARES DE PESQUISA & GOVERNANÇA -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mt-6">
           <div class="flex items-center gap-2 border-b border-slate-200 px-5 pt-4 pb-3 overflow-x-auto text-xs bg-slate-50/50">
             <button type="button" onclick="window.switchHistoriaSubTab('personalidades')" id="btn-sub-personalidades" class="px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap">
-              <i class="fa-solid fa-user-astronaut text-teal-600 mr-1.5"></i> Personalidades Históricas
+              <i class="fa-solid fa-user-astronaut text-[#8c6239] mr-1.5"></i> Personalidades Históricas
             </button>
             <button type="button" onclick="window.switchHistoriaSubTab('prefeitos')" id="btn-sub-prefeitos" class="px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap">
               <i class="fa-solid fa-building-columns text-blue-600 mr-1.5"></i> Série Histórica de Prefeitos
@@ -10946,7 +10986,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
                 <div class="pt-2 flex items-center justify-between">
                   <span class="text-[11px] text-slate-400 font-medium">Contribuições passam por revisão editorial.</span>
                   <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer active:scale-95">
-                    <i class="fa-solid fa-paper-plane text-xs text-teal-300"></i>
+                    <i class="fa-solid fa-paper-plane text-xs text-amber-300"></i>
                     <span>Enviar para Curadoria</span>
                   </button>
                 </div>
@@ -10963,12 +11003,12 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
         </div>
 
         <!-- MODAL DE VALIDAÇÃO DE FONTE PRIMÁRIA -->
-        <div id="historia-fonte-modal" style="display: none;" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center p-4 animate-in fade-in duration-200">
+        <div id="historia-fonte-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
           <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
             <div class="flex items-start justify-between border-b border-slate-100 pb-4">
               <div class="space-y-1">
-                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200">
-                  <i class="fa-solid fa-file-shield"></i> Validação da Fonte Primária
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-200">
+                  <i class="fa-solid fa-file-shield text-amber-700"></i> Validação da Fonte Primária
                 </span>
                 <h3 id="modal-fonte-titulo" class="text-lg font-black text-slate-900">Documento Comprobatório</h3>
               </div>
@@ -10982,7 +11022,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
             </div>
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <a id="modal-fonte-link-externo" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all">
+              <a id="modal-fonte-link-externo" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-[#8c6239] hover:bg-[#734f2b] text-white font-bold text-xs rounded-xl shadow-xs transition-all">
                 <span>Acessar Acervo Oficial</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
               </a>
@@ -10994,12 +11034,12 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
         </div>
 
         <!-- MODAL EXPLICATIVO: POR QUE 1767? -->
-        <div id="modal-porque-1767" style="display: none;" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center p-4 animate-in fade-in duration-200">
+        <div id="modal-porque-1767" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
           <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
             <div class="flex items-start justify-between border-b border-slate-100 pb-4">
               <div class="space-y-1">
-                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-800 border border-teal-200">
-                  <i class="fa-solid fa-book-open-reader"></i> Esclarecimento Historiográfico
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-200">
+                  <i class="fa-solid fa-book-open-reader text-amber-700"></i> Esclarecimento Historiográfico
                 </span>
                 <h3 class="text-xl font-black text-slate-900">Por que 27 de Julho de 1767 é o Aniversário de SJC?</h3>
               </div>
@@ -11009,9 +11049,9 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed font-medium">
-              <div class="p-4 rounded-xl bg-teal-50/60 border border-teal-200 text-teal-950 space-y-1.5">
+              <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1.5">
                 <strong class="text-sm font-black flex items-center gap-2">
-                  <i class="fa-solid fa-scale-balanced text-teal-700"></i> O Marco Institucional de 259 Anos (1767 – 2026)
+                  <i class="fa-solid fa-scale-balanced text-amber-700"></i> O Marco Institucional de 259 Anos (1767 – 2026)
                 </strong>
                 <p>
                   O marco legal e comemorativo adotado oficialmente pela <strong>Prefeitura Municipal</strong>, pela <strong>Câmara Municipal (Pró-Memória)</strong> e pelo <strong>IBGE</strong> é o dia <strong>27 de julho de 1767</strong>, quando o ouvidor-geral Salvador Pereira da Silva lavrou o <em>Auto de Ereção da Vila de São José do Paraíba</em>, instalando a primeira Câmara e o pelourinho. Em 2026, a cidade completa <strong>259 anos de emancipação político-administrativa</strong> (e 260 anos em 2027).
@@ -11847,7 +11887,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
   <script src="personas_sjc_module.js"></script>
   <script src="midia_sjc/analise_midia_data.js?v=1789087000"></script>
   <script src="midia_sjc/comunidade_data.js?v=1789087000"></script>
-  <script src="app.js?v=20260916_v6"></script>
+  <script src="app.js?v=20260917_river_v5"></script>
   <script src="midia_dashboard.js?v=1789215000"></script>
   <script src="vetores_sinergia.js"></script>
   <script src="scroll_reveal.js"></script>

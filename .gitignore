@@ -28,6 +28,8 @@ Thumbs.db
 *.pdf
 *.zip
 *.tar.gz
+*.exe
+Gemini_Generated_Image_*
 
 # Pastas de mídia duplicadas ou de arquivos brutos (fotos_radar é a pasta oficial do app)
 "Mais fotos radar/"

@@ -211,70 +211,107 @@ window.switchMainTab = function(tabName) {
 // =========================================================================
 // MÓDULO INTERATIVO: RADAR SJC MEMÓRIA VIVA (CLEAN ANALYTICS UI)
 // =========================================================================
+// MÓDULO INTERATIVO: RADAR SJC O RIO DA MEMÓRIA (UI/UX RIO HORIZONTAL)
+// =========================================================================
+// MÓDULO INTERATIVO: RADAR SJC O RIO DA MEMÓRIA (UI/UX RIO HORIZONTAL)
+// =========================================================================
+// MÓDULO INTERATIVO: RADAR SJC O RIO DA MEMÓRIA (UI/UX RIO HORIZONTAL SJC)
+// =========================================================================
 
 window.historiaState = {
-  currentViewMode: 'timeline', // 'timeline' ou 'mapa'
-  currentSubTab: 'personalidades', // 'personalidades', 'prefeitos', 'acervos', 'participar'
   selectedEra: 'all',
   selectedEvidence: 'all',
   searchQuery: '',
-  mapInstance: null,
-  mapMarkers: []
+  activeEventId: null
 };
+
+// Equação dos meandros do Rio Paraíba do Sul / Rio Comprido (centralizado em Y = 460 num canvas de 930px)
+function getRiverCenterY(x) {
+  const baseline = 385;
+  return baseline + 
+    Math.sin((x - 100) * 0.0028) * 35 + 
+    Math.cos((x - 100) * 0.0016) * 15;
+}
 
 window.renderHistoriaDashboard = function() {
   const data = window.HISTORIA_SJC_DATA;
   if (!data) return;
 
-  // Renderizar a Linha do Tempo e Filtros
+  // Suporte a parâmetros via URL (?era=... ou ?scroll=...)
+  const params = new URLSearchParams(window.location.search);
+  const eraParam = params.get("era");
+  if (eraParam && window.historiaState && window.historiaState.selectedEra !== eraParam) {
+    window.historiaState.selectedEra = eraParam;
+  }
+
+  // Filtrar e renderizar o Rio da Memória
   window.filterHistoriaEvents();
 
-  // Renderizar Sub-abas (Personalidades e Prefeitos)
+  // Sub-abas (Personalidades e Prefeitos)
   window.renderHistoriaPersonalidades();
   window.renderHistoriaPrefeitos();
+
+  // Inicializar Scroll Hijacking
+  window.initRiverScrollHijacking();
+
+  const scrollParam = params.get("scroll");
+  if (scrollParam) {
+    const vp = document.getElementById("historia-river-viewport");
+    if (vp) vp.scrollLeft = parseInt(scrollParam, 10);
+  }
+};
+
+window.initRiverScrollHijacking = function() {
+  const viewport = document.getElementById("historia-river-viewport");
+  if (!viewport || viewport._hasWheelListener) return;
+
+  viewport.addEventListener("wheel", function(e) {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      viewport.scrollLeft += e.deltaY * 1.6;
+    }
+  }, { passive: false });
+
+  viewport._hasWheelListener = true;
+};
+
+window.scrollHistoriaRiver = function(amount) {
+  const viewport = document.getElementById("historia-river-viewport");
+  if (viewport) {
+    viewport.scrollBy({ left: amount, behavior: 'smooth' });
+  }
 };
 
 window.selectHistoriaEra = function(eraId) {
   window.historiaState.selectedEra = eraId;
 
-  // Atualizar Pills visuais de Era
   const eras = ['all', 'colonial', 'sanatorial', 'tecnologica', 'contemporanea'];
   eras.forEach(e => {
     const pill = document.getElementById(`pill-era-${e}`);
     if (pill) {
       if (e === eraId) {
-        pill.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+        pill.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-xs flex items-center justify-between cursor-pointer";
       } else {
-        pill.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
+        pill.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer";
       }
     }
   });
 
   window.filterHistoriaEvents();
+
+  // Rolar suavemente de volta ao início ao alternar de fase
+  const viewport = document.getElementById("historia-river-viewport");
+  if (viewport) {
+    viewport.scrollTo({ left: 0, behavior: 'smooth' });
+  }
 };
 
-window.switchHistoriaViewMode = function(mode) {
-  window.historiaState.currentViewMode = mode;
-  const viewTimeline = document.getElementById("historia-view-timeline");
-  const viewMapa = document.getElementById("historia-view-mapa");
-  const btnTimeline = document.getElementById("btn-hist-mode-timeline");
-  const btnMapa = document.getElementById("btn-hist-mode-mapa");
-
-  if (mode === 'timeline') {
-    if (viewTimeline) viewTimeline.classList.remove("hidden");
-    if (viewMapa) viewMapa.classList.add("hidden");
-    if (btnTimeline) btnTimeline.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
-    if (btnMapa) btnMapa.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
-  } else if (mode === 'mapa') {
-    if (viewTimeline) viewTimeline.classList.add("hidden");
-    if (viewMapa) viewMapa.classList.remove("hidden");
-    if (btnTimeline) btnTimeline.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
-    if (btnMapa) btnMapa.className = "px-3.5 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-sm flex items-center gap-1.5 cursor-pointer whitespace-nowrap";
-
-    setTimeout(() => {
-      window.initHistoriaMap();
-    }, 150);
-  }
+window.resetHistoriaFilters = function() {
+  const searchInput = document.getElementById("historia-search-input");
+  const evidenceSelect = document.getElementById("historia-evidence-select");
+  if (searchInput) searchInput.value = "";
+  if (evidenceSelect) evidenceSelect.value = "all";
+  window.selectHistoriaEra("all");
 };
 
 window.filterHistoriaEvents = function() {
@@ -288,149 +325,245 @@ window.filterHistoriaEvents = function() {
   const era = window.historiaState.selectedEra;
 
   const filtered = data.eventos.filter(ev => {
-    // Filtro por Era
     if (era !== 'all' && ev.eraId !== era) return false;
-
-    // Filtro por Nível de Evidência
     if (evidence !== 'all' && ev.evidencia !== evidence) return false;
-
-    // Filtro por Busca de Texto
     if (query) {
       const matchTitle = (ev.titulo || "").toLowerCase().includes(query);
       const matchResumo = (ev.resumo || "").toLowerCase().includes(query);
       const matchAno = String(ev.ano).includes(query);
       const matchLocal = (ev.local || "").toLowerCase().includes(query);
-      const matchPessoas = (ev.pessoasEnvolvidas || []).some(p => p.toLowerCase().includes(query));
-      if (!matchTitle && !matchResumo && !matchAno && !matchLocal && !matchPessoas) return false;
+      if (!matchTitle && !matchResumo && !matchAno && !matchLocal) return false;
     }
-
     return true;
   });
 
-  // Atualizar Contadores (Top e Sidebar)
+  // Atualizar contadores
   const counter = document.getElementById("historia-counter-badge");
-  if (counter) {
-    counter.textContent = `Mostrando ${filtered.length} de ${data.eventos.length} marcos`;
-  }
+  if (counter) counter.textContent = `Mostrando ${filtered.length} de ${data.eventos.length} marcos`;
+
   const sidebarFilteredCount = document.getElementById("historia-filtered-records-count");
   const sidebarTotalCount = document.getElementById("historia-total-base-count");
   if (sidebarFilteredCount) sidebarFilteredCount.textContent = filtered.length;
   if (sidebarTotalCount) sidebarTotalCount.textContent = data.eventos.length;
 
-  // Renderizar Cards
-  window.renderHistoriaTimelineCards(filtered);
-
-  // Se mapa estiver ativo, atualizar marcadores
-  if (window.historiaState.mapInstance) {
-    window.updateHistoriaMapMarkers(filtered);
-  }
+  // Renderizar o Rio com os eventos filtrados
+  window.renderRiverCanvas(filtered);
 };
 
-window.renderHistoriaTimelineCards = function(events) {
-  const container = document.getElementById("historia-cards-container");
-  if (!container) return;
+window.renderRiverCanvas = function(events) {
+  const track = document.getElementById("historia-river-track");
+  const svgSand = document.getElementById("river-sand-path");
+  const svgMain = document.getElementById("river-main-path");
+  const svgStream = document.getElementById("river-inner-stream");
+  const svgSecStream = document.getElementById("river-secondary-stream");
+  const connectorsSvg = document.getElementById("historia-connectors-svg");
+  const landmarksContainer = document.getElementById("historia-geo-landmarks-container");
+  const stonesContainer = document.getElementById("historia-stones-container");
+  const cardsContainer = document.getElementById("historia-cards-container");
 
-  if (!events || events.length === 0) {
-    container.innerHTML = `
-      <div class="col-span-full p-12 text-center bg-white rounded-2xl border border-slate-200 text-slate-400 space-y-3">
-        <i class="fa-solid fa-folder-open text-4xl text-slate-300"></i>
-        <h4 class="text-sm font-bold text-slate-700">Nenhum marco histórico encontrado</h4>
-        <p class="text-xs text-slate-500">Tente ajustar seus termos de busca ou selecionar outra fase histórica.</p>
-        <button onclick="window.resetHistoriaFilters()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all cursor-pointer">
-          Limpar Filtros
-        </button>
-      </div>
-    `;
-    return;
+  if (!track || !svgMain || !stonesContainer || !cardsContainer) return;
+
+  const SLOT_WIDTH = 520;
+  const START_X = 400;
+  const totalWidth = Math.max(1800, START_X + events.length * SLOT_WIDTH + 700);
+
+  track.style.minWidth = `${totalWidth}px`;
+
+  // 1. Gerar curva SVG contínua do Rio com margens irregulares (ondas naturais de sedimentos)
+  const step = 25;
+  let riverPathD = `M 0 ${getRiverCenterY(0)}`;
+  let sandPathD = `M 0 ${getRiverCenterY(0)}`;
+  let streamPathD = `M 0 ${getRiverCenterY(0) - 10}`;
+  let secStreamPathD = `M 0 ${getRiverCenterY(0) + 12}`;
+
+  for (let x = step; x <= totalWidth + 100; x += step) {
+    const baseY = getRiverCenterY(x);
+    // Perturbações harmônicas de relevo para margens irregulares naturais
+    const riverNoise = Math.sin(x * 0.012) * 6 + Math.cos(x * 0.025) * 4;
+    const sandNoise = Math.sin(x * 0.008) * 12 + Math.cos(x * 0.018) * 8;
+
+    riverPathD += ` L ${x} ${baseY + riverNoise}`;
+    sandPathD += ` L ${x} ${baseY + sandNoise}`;
+    streamPathD += ` L ${x} ${baseY + riverNoise - 10}`;
+    secStreamPathD += ` L ${x} ${baseY + riverNoise + 14}`;
   }
 
-  // Mapeamento de Badges de Evidência
+  if (svgSand) svgSand.setAttribute("d", sandPathD);
+  if (svgMain) svgMain.setAttribute("d", riverPathD);
+  if (svgStream) svgStream.setAttribute("d", streamPathD);
+  if (svgSecStream) svgSecStream.setAttribute("d", secStreamPathD);
+
+  // 2. Badges de Evidência Historiográfica
   const evidenciaBadges = {
-    documentado: { text: "Documentado", bg: "bg-emerald-50 text-emerald-700 border-emerald-200", icon: "fa-circle-check" },
-    corroborado: { text: "Corroborado", bg: "bg-blue-50 text-blue-700 border-blue-200", icon: "fa-circle-dot" },
-    em_investigacao: { text: "Em Investigação", bg: "bg-amber-50 text-amber-700 border-amber-200", icon: "fa-magnifying-glass" },
-    em_disputa: { text: "Em Disputa", bg: "bg-rose-50 text-rose-700 border-rose-200", icon: "fa-scale-unbalanced" }
+    documentado: { text: "Documentado", bg: "bg-emerald-50 text-emerald-800 border-emerald-300", icon: "fa-circle-check" },
+    corroborado: { text: "Corroborado", bg: "bg-blue-50 text-blue-800 border-blue-300", icon: "fa-circle-dot" },
+    em_investigacao: { text: "Em Investigação", bg: "bg-amber-50 text-amber-800 border-amber-300", icon: "fa-magnifying-glass" },
+    em_disputa: { text: "Em Disputa", bg: "bg-rose-50 text-rose-800 border-rose-300", icon: "fa-scale-unbalanced" }
   };
 
-  const eixoLabels = {
-    fundacao: "Institucional & Território",
-    saude: "Saúde & Sanatórios",
-    ciencia: "Ciência & Aeroespacial",
-    cultura: "Cultura & Sociedade",
-    ambiente: "Meio Ambiente & Território",
-    trabalho: "Indústria & Trabalho"
-  };
+  let stonesHtml = '';
+  let cardsHtml = '';
+  let connectorsSvgHtml = '';
 
-  container.innerHTML = events.map(ev => {
+  // 3. Marcos Geográficos da passagem do Rio por São José dos Campos
+  const geoLandmarks = [
+    { x: 380, name: "Várzea do Rio Comprido (Encontro das Águas)", icon: "fa-seedling" },
+    { x: 1420, name: "Ponte dos Jesuítas (Travessia Colonial 1690)", icon: "fa-bridge" },
+    { x: 2460, name: "Curva do Banhado (Colina Histórica SJC)", icon: "fa-mountain-sun" },
+    { x: 3500, name: "Porto das Canoas & Foz da Ressaca", icon: "fa-sailboat" },
+    { x: 5580, name: "Santana & Meandro da Tecelagem Parahyba", icon: "fa-industry" },
+    { x: 7660, name: "Planície Fluvial do DCTA & Bacia Hidrográfica", icon: "fa-plane-departure" }
+  ];
+
+  let landmarksHtml = '';
+  geoLandmarks.forEach(geo => {
+    if (geo.x < totalWidth) {
+      const geoY = getRiverCenterY(geo.x);
+      landmarksHtml += `
+        <div 
+          class="absolute px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/90 text-[#734f2b] border border-[#d9c4aa] shadow-xs flex items-center gap-1.5 pointer-events-auto transition-transform hover:scale-105"
+          style="left: ${geo.x - 110}px; top: ${geoY + 46}px; z-index: 15;"
+        >
+          <i class="fa-solid ${geo.icon} text-amber-700"></i>
+          <span>${geo.name}</span>
+        </div>
+      `;
+    }
+  });
+  if (landmarksContainer) landmarksContainer.innerHTML = landmarksHtml;
+
+  events.forEach((ev, i) => {
+    const stoneX = START_X + i * SLOT_WIDTH;
+    const stoneY = getRiverCenterY(stoneX);
+
+    // Posicionamento harmônico com total folga vertical no container h-[930px]
+    // Se o rio está na metade inferior (Y >= 460), o card fica ACIMA (top: 25px).
+    // Se o rio está na metade superior (Y < 460), o card fica ABAIXO (top: 575px).
+    // Cards sempre posicionados acima do rio (100% de visibilidade vertical na tela)
+    const cardWidth = 370;
+    const cardLeft = stoneX - 185;
+    const cardTop = 15;
+    const cardAnchorX = stoneX;
+    const cardAnchorY = cardTop + 230;
+    const stoneAnchorY = stoneY - 26;
+
+    // Linha conectora suave em curva de Bézier
+    connectorsSvgHtml += `
+      <path 
+        d="M ${stoneX} ${stoneAnchorY} C ${stoneX} ${(stoneAnchorY + cardAnchorY) / 2}, ${cardAnchorX} ${(stoneAnchorY + cardAnchorY) / 2}, ${cardAnchorX} ${cardAnchorY}" 
+        stroke="rgba(168, 140, 106, 0.7)" 
+        stroke-width="1.8" 
+        stroke-dasharray="4 3" 
+        fill="none" 
+      />
+      <circle cx="${stoneX}" cy="${stoneAnchorY}" r="3.5" fill="#8c6239" />
+      <circle cx="${cardAnchorX}" cy="${cardAnchorY}" r="3.5" fill="#ad8151" />
+    `;
+
+    // Pedra / Ilhota (Nó do Ano) com textura fluvial do Paraíba
+    stonesHtml += `
+      <div 
+        onclick="window.focusHistoriaEvent('${ev.id}', ${stoneX})" 
+        class="group absolute cursor-pointer select-none"
+        style="left: ${stoneX - 40}px; top: ${stoneY - 28}px; width: 80px; height: 56px; z-index: 30;"
+        title="Ano ${ev.ano}: ${ev.titulo}"
+      >
+        <!-- Halo de ondulação e água barrenta com espuma suave -->
+        <div class="absolute -inset-2.5 rounded-[50%/40%] border-2 border-white/80 shadow-[0_0_18px_rgba(184,138,88,0.55)] pointer-events-none group-hover:scale-125 transition-transform duration-300"></div>
+
+        <!-- Pedra 3D Polida (Mineral Fluvial) -->
+        <div class="w-full h-full rounded-[50%/40%] bg-gradient-to-br from-[#faf8f5] via-[#e5dcd0] to-[#bfae95] border-2 border-white shadow-[0_12px_24px_rgba(92,62,30,0.35),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.25)] flex items-center justify-center font-mono font-black text-[#422c15] text-sm tracking-tight group-hover:scale-110 group-hover:shadow-[0_16px_32px_rgba(140,98,57,0.5)] transition-all duration-200">
+          ${ev.ano}
+        </div>
+      </div>
+    `;
+
+    // Card de Conteúdo Flutuante (Dimensões compactas e calibradas para 100% de visibilidade)
     const evBadge = evidenciaBadges[ev.evidencia] || evidenciaBadges.documentado;
-    const eixoName = eixoLabels[ev.eixo] || "História SJC";
     const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial SJC", url: "https://www.camarasjc.sp.gov.br/promemoria/" };
 
-    return `
-      <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-4">
-        
-        <!-- Cabeçalho do Card: Ano + Categoria + Nível de Evidência -->
-        <div class="flex items-center justify-between gap-2 flex-wrap">
-          <div class="flex items-center gap-2">
-            <span class="px-3 py-1 rounded-full text-xs font-black bg-slate-900 text-white font-mono shadow-xs">
-              ${ev.ano}
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700">
-              ${eixoName}
-            </span>
-          </div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold border ${evBadge.bg}">
+    cardsHtml += `
+      <div 
+        id="card-${ev.id}"
+        class="absolute bg-white rounded-2xl p-5 shadow-[0_14px_35px_-5px_rgba(0,0,0,0.08)] border border-slate-100/90 flex flex-col justify-between space-y-3 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.12)] hover:-translate-y-1"
+        style="left: ${cardLeft}px; top: ${cardTop}px; width: ${cardWidth}px; max-height: 235px; z-index: 20;"
+      >
+        <!-- Topo: Ano em badge preto + Nível de Evidência -->
+        <div class="flex items-center justify-between gap-2">
+          <span class="px-3.5 py-1 rounded-full text-xs font-black bg-slate-950 text-white font-mono shadow-xs">
+            ${ev.ano}
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-extrabold border ${evBadge.bg}">
             <i class="fa-solid ${evBadge.icon} text-[9px]"></i>
             <span>${evBadge.text}</span>
           </span>
         </div>
 
         <!-- Título e Resumo -->
-        <div class="space-y-2">
-          <h3 class="text-base font-black text-slate-900 leading-snug">
+        <div class="space-y-1">
+          <h3 class="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight">
             ${ev.titulo}
           </h3>
-          <p class="text-xs text-slate-600 font-medium leading-relaxed">
+          <p class="text-xs text-slate-600 font-medium leading-relaxed line-clamp-2">
             ${ev.resumo}
           </p>
         </div>
 
-        <!-- Citação Documental (quando houver) -->
+        <!-- Citação de Época com barra ambar/dourada -->
         ${ev.citacao ? `
-          <div class="p-3.5 rounded-xl bg-slate-50 border-l-4 border-teal-500 text-xs italic text-slate-700 font-medium">
-            ${ev.citacao}
+          <div class="p-2.5 rounded-xl bg-amber-50/80 border-l-4 border-amber-600 text-xs italic text-amber-950 font-medium leading-snug line-clamp-2">
+            «${ev.citacao}»
           </div>
         ` : ''}
 
-        <!-- Rodapé do Card: Validação com Link Direto e Botão Dossiê -->
-        <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
-          <!-- Link Direto para a Fonte Primária -->
+        <!-- Rodapé: Validação de Fonte Primária + Dossiê (TOTALMENTE VISÍVEL) -->
+        <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
           <a 
             href="${primSource.url}" 
             target="_blank" 
             rel="noopener noreferrer" 
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-200 transition-colors"
-            title="Validar diretamente na fonte oficial: ${primSource.nome}"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 transition-colors"
+            title="Validar na fonte oficial: ${primSource.nome}"
           >
-            <i class="fa-solid fa-file-circle-check text-teal-600"></i>
-            <span class="max-w-[210px] truncate">Validar: ${primSource.nome}</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-teal-600"></i>
+            <i class="fa-solid fa-file-circle-check text-amber-700"></i>
+            <span class="max-w-[170px] truncate">Validar: ${primSource.nome}</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-amber-700"></i>
           </a>
 
-          <!-- Botão Dossiê / Detalhes -->
           <button 
             type="button" 
             onclick="window.openHistoriaFonteModal('${ev.id}')" 
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
+            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
           >
             <i class="fa-solid fa-circle-info text-slate-500"></i>
             <span>Dossiê & Fatos</span>
           </button>
         </div>
-
       </div>
     `;
-  }).join('');
+  });
+
+  connectorsSvg.innerHTML = connectorsSvgHtml;
+  stonesContainer.innerHTML = stonesHtml;
+  cardsContainer.innerHTML = cardsHtml;
+};
+
+window.focusHistoriaEvent = function(eventId, stoneX) {
+  const viewport = document.getElementById("historia-river-viewport");
+  if (viewport) {
+    viewport.scrollTo({
+      left: Math.max(0, stoneX - 450),
+      behavior: 'smooth'
+    });
+  }
+
+  const card = document.getElementById(`card-${eventId}`);
+  if (card) {
+    card.classList.add("ring-2", "ring-amber-500", "scale-[1.02]");
+    setTimeout(() => {
+      card.classList.remove("ring-2", "ring-amber-500", "scale-[1.02]");
+    }, 2000);
+  }
 };
 
 window.openHistoriaFonteModal = function(eventId) {
@@ -461,7 +594,7 @@ window.openHistoriaFonteModal = function(eventId) {
         <strong class="text-xs text-slate-900 block">${f.nome}</strong>
         <span class="text-[10px] text-slate-500 font-semibold">${f.tipo || 'Acervo Histórico'}</span>
       </div>
-      <a href="${f.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-teal-50 text-teal-700 hover:bg-teal-100 rounded-lg font-bold text-[11px] border border-teal-200 transition-colors shrink-0">
+      <a href="${f.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-amber-50 text-amber-900 hover:bg-amber-100 rounded-lg font-bold text-[11px] border border-amber-200 transition-colors shrink-0">
         Ver Documento ↗
       </a>
     </li>
@@ -469,8 +602,8 @@ window.openHistoriaFonteModal = function(eventId) {
 
   conteudo.innerHTML = `
     <div class="space-y-3">
-      <div class="p-3.5 rounded-xl bg-teal-50/60 border border-teal-200 text-teal-950 space-y-1">
-        <span class="text-[10px] font-black uppercase tracking-wider text-teal-800 block">Nível de Evidência: ${ev.evidencia.toUpperCase()}</span>
+      <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1">
+        <span class="text-[10px] font-black uppercase tracking-wider text-amber-800 block">Nível de Evidência: ${ev.evidencia.toUpperCase()}</span>
         <p class="text-xs font-semibold leading-relaxed">${ev.resumo}</p>
       </div>
 
@@ -501,92 +634,14 @@ window.openHistoriaFonteModal = function(eventId) {
     </div>
   `;
 
-  modal.style.display = "flex";
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 };
 
 window.closeHistoriaFonteModal = function() {
   const modal = document.getElementById("historia-fonte-modal");
-  if (modal) {
-    modal.style.display = "none";
-    modal.classList.add("hidden");
-  }
+  if (modal) modal.classList.add("hidden");
   document.body.style.overflow = "";
-};
-
-window.initHistoriaMap = function() {
-  const mapContainer = document.getElementById("historia-map-leaflet");
-  if (!mapContainer || typeof L === 'undefined') return;
-
-  if (window.historiaState.mapInstance) {
-    window.historiaState.mapInstance.invalidateSize();
-    return;
-  }
-
-  // Centro de São José dos Campos
-  const map = L.map('historia-map-leaflet', {
-    center: [-23.195, -45.895],
-    zoom: 12,
-    zoomControl: true
-  });
-
-  // Camada CartoDB Positron (Clean Light Theme)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
-    subdomains: 'abcd',
-    maxZoom: 19
-  }).addTo(map);
-
-  window.historiaState.mapInstance = map;
-
-  const data = window.HISTORIA_SJC_DATA;
-  if (data && data.eventos) {
-    window.updateHistoriaMapMarkers(data.eventos);
-  }
-};
-
-window.updateHistoriaMapMarkers = function(events) {
-  const map = window.historiaState.mapInstance;
-  if (!map || typeof L === 'undefined') return;
-
-  // Limpar marcadores anteriores
-  window.historiaState.mapMarkers.forEach(m => map.removeLayer(m));
-  window.historiaState.mapMarkers = [];
-
-  events.forEach(ev => {
-    if (!ev.lat || !ev.lng) return;
-
-    const markerIcon = L.divIcon({
-      className: 'historia-custom-pin',
-      html: `
-        <div style="background-color: #0f172a; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.25); border: 2px solid white; cursor: pointer;">
-          ${String(ev.ano).slice(-2)}
-        </div>
-      `,
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
-    });
-
-    const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial", url: "#" };
-
-    const popupHtml = `
-      <div style="padding: 6px; max-width: 240px; font-family: system-ui, sans-serif;">
-        <span style="font-size: 10px; font-weight: 800; color: #0891b2; text-transform: uppercase;">Ano ${ev.ano}</span>
-        <h4 style="margin: 4px 0 6px 0; font-size: 13px; font-weight: 800; color: #0f172a; line-height: 1.2;">${ev.titulo}</h4>
-        <p style="margin: 0 0 8px 0; font-size: 11px; color: #475569; line-height: 1.4;">${ev.resumo.slice(0, 110)}...</p>
-        <div style="display: flex; gap: 6px; align-items: center;">
-          <a href="${primSource.url}" target="_blank" rel="noopener noreferrer" style="font-size: 11px; font-weight: 700; color: #0891b2; text-decoration: none;">
-            Validar Fonte ↗
-          </a>
-        </div>
-      </div>
-    `;
-
-    const marker = L.marker([ev.lat, ev.lng], { icon: markerIcon }).bindPopup(popupHtml);
-    marker.addTo(map);
-    window.historiaState.mapMarkers.push(marker);
-  });
 };
 
 window.switchHistoriaSubTab = function(subTabName) {
@@ -617,19 +672,13 @@ window.switchHistoriaSubTab = function(subTabName) {
 
 window.openPorQue1767Modal = function() {
   const modal = document.getElementById("modal-porque-1767");
-  if (modal) {
-    modal.style.display = "flex";
-    modal.classList.remove("hidden");
-  }
+  if (modal) modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 };
 
 window.closePorQue1767Modal = function() {
   const modal = document.getElementById("modal-porque-1767");
-  if (modal) {
-    modal.style.display = "none";
-    modal.classList.add("hidden");
-  }
+  if (modal) modal.classList.add("hidden");
   document.body.style.overflow = "";
 };
 
@@ -638,14 +687,14 @@ window.renderHistoriaPersonalidades = function() {
   if (!container || !window.HISTORIA_SJC_DATA) return;
 
   container.innerHTML = window.HISTORIA_SJC_DATA.personalidades.map(p => `
-    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 hover:border-teal-400 hover:shadow-md transition-all flex flex-col justify-between space-y-3">
+    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 hover:border-amber-400 hover:shadow-md transition-all flex flex-col justify-between space-y-3">
       <div class="space-y-2.5">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 text-teal-400 flex items-center justify-center text-base font-black shadow-xs">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 text-amber-300 flex items-center justify-center text-base font-black shadow-xs">
           ${p.nome.charAt(0)}
         </div>
         <div>
           <h4 class="text-sm font-black text-slate-900">${p.nome}</h4>
-          <p class="text-[11px] font-bold text-teal-700">${p.cargo}</p>
+          <p class="text-[11px] font-bold text-amber-800">${p.cargo}</p>
           <span class="text-[10px] font-mono text-slate-400">${p.periodo || ''}</span>
         </div>
         <p class="text-xs text-slate-600 font-medium leading-relaxed">${p.descricao}</p>
@@ -676,14 +725,6 @@ window.renderHistoriaPrefeitos = function() {
       </tr>
     `;
   }).join('');
-};
-
-window.resetHistoriaFilters = function() {
-  const searchInput = document.getElementById("historia-search-input");
-  const evidenceSelect = document.getElementById("historia-evidence-select");
-  if (searchInput) searchInput.value = "";
-  if (evidenceSelect) evidenceSelect.value = "all";
-  window.selectHistoriaEra('all');
 };
 
 window.submitHistoriaSugestao = function(e) {
