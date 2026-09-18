@@ -3285,7 +3285,7 @@
       ]
     },
     "imagem_status": [
-      "pendente_8k"
+      "ok_8k"
     ],
     "imagem_url": "data_personas/imagens_personagens/personagem_46_henrique_rique_faria.jpg"
   },
