@@ -291,16 +291,35 @@
         const { data: { session } } = await supabaseClient.auth.getSession();
         if (session && session.user) {
           const user = session.user;
-          const userEmail = user.email;
+          const userEmail = user.email || "";
           const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
 
-          localStorage.setItem('userRole', 'usuario');
           localStorage.setItem('userName', userName);
           localStorage.setItem('userEmail', userEmail);
           localStorage.setItem('authProvider', 'google');
 
-          // Entra direto no Dashboard
-          window.location.href = "app.html";
+          if (userEmail.toLowerCase().includes('admin')) {
+            localStorage.setItem('userRole', 'admin');
+            window.location.href = "admin-crm.html";
+            return;
+          }
+          if (userEmail.toLowerCase().includes('vendedor')) {
+            localStorage.setItem('userRole', 'vendedor');
+            window.location.href = "painel-afiliado.html";
+            return;
+          }
+
+          localStorage.setItem('userRole', 'usuario');
+          if (!localStorage.getItem('userPlan')) {
+            localStorage.setItem('userPlan', 'gratis');
+          }
+
+          const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + userEmail) || localStorage.getItem('onboardingCompleted');
+          if (!hasCompletedOnboarding) {
+            window.location.href = "formulario-radar.html";
+          } else {
+            window.location.href = "app.html";
+          }
         }
       }
     }
@@ -327,37 +346,68 @@
 
       // Fallback
       setTimeout(() => {
-        quickLogin("usuario.google@radarsaojose.com.br", "Usuário Google SJC", "usuario");
+        const email = "usuario.google@radarsaojose.com.br";
+        const name = "Usuário Google SJC";
+        localStorage.setItem('userRole', 'usuario');
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('authProvider', 'google');
+        if (!localStorage.getItem('userPlan')) localStorage.setItem('userPlan', 'gratis');
+
+        const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
+        if (!hasCompletedOnboarding) {
+          window.location.href = "formulario-radar.html";
+        } else {
+          window.location.href = "app.html";
+        }
       }, 800);
     }
 
-    function quickLogin(email, name, role) {
+    function quickLogin(email, name, role, isNewRegister = false) {
       localStorage.setItem('userRole', role);
       localStorage.setItem('userName', name);
       localStorage.setItem('userEmail', email);
+      if (!localStorage.getItem('userPlan')) {
+        localStorage.setItem('userPlan', 'gratis');
+      }
       
       if (role === 'admin') {
         window.location.href = "admin-crm.html";
       } else if (role === 'vendedor') {
         window.location.href = "painel-afiliado.html";
       } else {
-        window.location.href = "app.html";
+        const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
+        if (isNewRegister || !hasCompletedOnboarding) {
+          window.location.href = "formulario-radar.html";
+        } else {
+          window.location.href = "app.html";
+        }
       }
     }
 
     function handleAuthSubmit(e) {
-      e.preventDefault();
+      if (e) {
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+      }
       const email = document.getElementById('email').value.trim();
       const pass = document.getElementById('password').value;
-      const nome = document.getElementById('nome').value.trim();
+      const nome = document.getElementById('nome')?.value?.trim();
+      const isNewRegister = authMode === 'register';
+
+      if (!email || !pass) {
+        alert("Por favor, preencha todos os campos.");
+        return false;
+      }
 
       if (email.toLowerCase().includes('admin')) {
-        quickLogin(email, 'Admin Master', 'admin');
+        quickLogin(email, 'Admin Master', 'admin', false);
       } else if (email.toLowerCase().includes('vendedor')) {
-        quickLogin(email, 'Lucas Vendedor', 'vendedor');
+        quickLogin(email, 'Lucas Vendedor', 'vendedor', false);
       } else {
-        quickLogin(email, nome || 'Usuário ' + email.split('@')[0], 'usuario');
+        quickLogin(email, nome || 'Usuário ' + email.split('@')[0], 'usuario', isNewRegister);
       }
+      return false;
     }
 
     document.getElementById('year-current').innerText = new Date().getFullYear();

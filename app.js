@@ -1209,7 +1209,23 @@ async function checkActiveSession() {
 
   const savedEmail = localStorage.getItem('userEmail');
   const savedName = localStorage.getItem('userName');
+  const savedRole = localStorage.getItem('userRole') || 'usuario';
+
   if (savedEmail) {
+    if (savedRole === 'admin') {
+      const adminSim = document.getElementById("admin-role-simulator");
+      if (adminSim) adminSim.classList.remove("hidden");
+    } else if (savedRole === 'vendedor') {
+      window.location.href = "painel-afiliado.html";
+      return;
+    } else {
+      const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + savedEmail) || localStorage.getItem('onboardingCompleted');
+      if (!hasCompletedOnboarding) {
+        window.location.href = "formulario-radar.html";
+        return;
+      }
+    }
+
     showDashboard({ email: savedEmail, user_metadata: { full_name: savedName } });
     return;
   }
@@ -1222,6 +1238,30 @@ async function checkActiveSession() {
     const { data: { session }, error } = await supabaseClient.auth.getSession();
     if (error) throw error;
     if (session && session.user) {
+      const user = session.user;
+      const userEmail = user.email || "";
+      const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
+      localStorage.setItem('userEmail', userEmail);
+      localStorage.setItem('userName', userName);
+
+      if (userEmail.toLowerCase().includes('admin')) {
+        localStorage.setItem('userRole', 'admin');
+        const adminSim = document.getElementById("admin-role-simulator");
+        if (adminSim) adminSim.classList.remove("hidden");
+      } else if (userEmail.toLowerCase().includes('vendedor')) {
+        localStorage.setItem('userRole', 'vendedor');
+        window.location.href = "painel-afiliado.html";
+        return;
+      } else {
+        localStorage.setItem('userRole', 'usuario');
+        if (!localStorage.getItem('userPlan')) localStorage.setItem('userPlan', 'gratis');
+        const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + userEmail) || localStorage.getItem('onboardingCompleted');
+        if (!hasCompletedOnboarding) {
+          window.location.href = "formulario-radar.html";
+          return;
+        }
+      }
+
       showDashboard(session.user);
     } else {
       showLogin();
@@ -1244,6 +1284,8 @@ async function handleLogin(e) {
 
   const email = (document.getElementById("email")?.value || emailInput?.value || "").trim();
   const password = document.getElementById("password")?.value || passwordInput?.value || "";
+  const nome = document.getElementById("nome_cadastro")?.value?.trim() || "";
+  const isRegisterMode = document.getElementById("app-field-nome") && !document.getElementById("app-field-nome").classList.contains("hidden");
 
   if (!email || !password) {
     showLoginAlert("Por favor, preencha todos os campos.", "error");
@@ -1280,13 +1322,24 @@ async function handleLogin(e) {
     }
   }
 
-  // Fallback e persistência de sessão de usuário
-  const userName = email.split("@")[0];
+  // Persistência de sessão de usuário
+  const userName = loggedInUser?.user_metadata?.full_name || nome || email.split("@")[0];
   localStorage.setItem("userRole", "usuario");
-  localStorage.setItem("userName", loggedInUser?.user_metadata?.full_name || userName);
+  localStorage.setItem("userName", userName);
   localStorage.setItem("userEmail", email);
+  if (!localStorage.getItem("userPlan")) {
+    localStorage.setItem("userPlan", "gratis");
+  }
+
+  const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
 
   setLoginLoading(false);
+
+  if (isRegisterMode || !hasCompletedOnboarding) {
+    window.location.href = "formulario-radar.html";
+    return false;
+  }
+
   showDashboard(loggedInUser || { email, user_metadata: { full_name: userName } });
   return false;
 }
@@ -1323,12 +1376,250 @@ function hideLoginAlert() {
   loginErrorAlert.innerHTML = "";
 }
 
+// ==========================================
+// 5.1 PLANOS, PAYWALL (BLUR) & ASAAS GATEWAY
+// ==========================================
+window.currentSelectedPlan = "plano_10";
+
+window.openPlanUpgradeModal = function(preferredPlan = "plano_10") {
+  window.currentSelectedPlan = preferredPlan;
+  const modal = document.getElementById("modal-planos-asaas");
+  if (modal) modal.classList.remove("hidden");
+  window.selectPlan(preferredPlan);
+};
+
+window.closePlanUpgradeModal = function() {
+  const modal = document.getElementById("modal-planos-asaas");
+  if (modal) modal.classList.add("hidden");
+};
+
+window.selectPlan = function(planId) {
+  window.currentSelectedPlan = planId;
+  const checkoutSection = document.getElementById("asaas-checkout-section");
+  const planNameLabel = document.getElementById("checkout-selected-plan-name");
+
+  if (planId === "gratis") {
+    if (checkoutSection) checkoutSection.classList.add("hidden");
+    localStorage.setItem("userPlan", "gratis");
+    window.applyPlanRestrictions();
+    return;
+  }
+
+  if (checkoutSection) checkoutSection.classList.remove("hidden");
+  if (planNameLabel) {
+    planNameLabel.textContent = planId === "plano_15" ? "Radar Premium Pro (R$ 15/mês)" : "Radar Pesquisa (R$ 10/mês)";
+  }
+};
+
+window.setPaymentMethod = function(method) {
+  const pixBtn = document.getElementById("btn-pay-pix");
+  const cardBtn = document.getElementById("btn-pay-card");
+  const boletoBtn = document.getElementById("btn-pay-boleto");
+
+  const pixContent = document.getElementById("pay-content-pix");
+  const cardContent = document.getElementById("pay-content-card");
+  const boletoContent = document.getElementById("pay-content-boleto");
+
+  const activeBtnClass = "px-3.5 py-1.5 rounded-xl font-bold text-xs bg-brand-900 text-white shadow-xs cursor-pointer flex items-center gap-1.5";
+  const inactiveBtnClass = "px-3.5 py-1.5 rounded-xl font-bold text-xs bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 cursor-pointer flex items-center gap-1.5";
+
+  if (pixBtn) pixBtn.className = method === "pix" ? activeBtnClass : inactiveBtnClass;
+  if (cardBtn) cardBtn.className = method === "card" ? activeBtnClass : inactiveBtnClass;
+  if (boletoBtn) boletoBtn.className = method === "boleto" ? activeBtnClass : inactiveBtnClass;
+
+  if (pixContent) pixContent.classList.toggle("hidden", method !== "pix");
+  if (cardContent) cardContent.classList.toggle("hidden", method !== "card");
+  if (boletoContent) boletoContent.classList.toggle("hidden", method !== "boleto");
+};
+
+window.copyPixCode = function() {
+  const input = document.getElementById("pix-copy-input");
+  if (input) {
+    navigator.clipboard.writeText(input.value).then(() => {
+      alert("Chave Pix Copia e Cola copiada para a área de transferência!");
+    });
+  }
+};
+
+window.simulateInstantPayment = function() {
+  const targetPlan = window.currentSelectedPlan || "plano_10";
+  localStorage.setItem("userPlan", targetPlan);
+  window.applyPlanRestrictions();
+  window.closePlanUpgradeModal();
+  alert("🎉 Pagamento aprovado com sucesso via Asaas! Seu acesso ao " + (targetPlan === "plano_15" ? "Plano Radar Premium (R$ 15/mês)" : "Plano Radar Pesquisa (R$ 10/mês)") + " foi desbloqueado.");
+};
+
+window.simulatePlanChange = function(simulatedPlan) {
+  if (simulatedPlan === "admin") {
+    localStorage.setItem("userRole", "admin");
+    localStorage.setItem("userPlan", "plano_15");
+  } else {
+    localStorage.setItem("userPlan", simulatedPlan);
+  }
+  window.applyPlanRestrictions();
+};
+
+window.applyPlanRestrictions = function() {
+  const userRole = localStorage.getItem("userRole") || "usuario";
+  const userPlan = (userRole === "admin") ? (localStorage.getItem("userPlan") || "plano_15") : (localStorage.getItem("userPlan") || "gratis");
+  
+  const badgeEl = document.getElementById("user-plan-badge");
+  const upgradeBtn = document.getElementById("btn-open-upgrade-modal");
+
+  if (badgeEl) {
+    if (userPlan === "plano_15" || userRole === "admin") {
+      badgeEl.textContent = userRole === "admin" ? "Admin Master" : "Plano Premium (R$ 15)";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300";
+      if (upgradeBtn) upgradeBtn.classList.add("hidden");
+    } else if (userPlan === "plano_10") {
+      badgeEl.textContent = "Radar Pesquisa (R$ 10)";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-brand-100 text-brand-900 border border-brand-300";
+      if (upgradeBtn) {
+        upgradeBtn.classList.remove("hidden");
+        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-cyan-300"></i><span class="hidden xs:inline">Upgrade R$ 15</span>';
+      }
+    } else {
+      badgeEl.textContent = "Plano Gratuito";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200";
+      if (upgradeBtn) {
+        upgradeBtn.classList.remove("hidden");
+        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-cyan-300"></i><span class="hidden xs:inline">Upgrade</span>';
+      }
+    }
+  }
+
+  // 1. Aplicação de Blur no Relatório Executivo para Plano Grátis
+  const reportView = document.getElementById("executive-report-view");
+  if (reportView) {
+    let reportPaywall = document.getElementById("report-paywall-overlay");
+    if (userPlan === "gratis") {
+      reportView.classList.add("paywall-blur-active");
+      if (!reportPaywall) {
+        const overlay = document.createElement("div");
+        overlay.id = "report-paywall-overlay";
+        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-brand-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.innerHTML = `
+          <div class="max-w-lg bg-white p-8 rounded-3xl shadow-2xl border border-brand-200 text-center space-y-4 animate-in zoom-in-95">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-brand-100 text-brand-900 flex items-center justify-center text-2xl font-black shadow-inner">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="text-xl font-black text-brand-950">Relatório Executivo Completo</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Os 8 capítulos aprofundados, cruzamentos de barreiras noturnas, mobilidade e propensão de consumo são exclusivos para assinantes.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
+              <button onclick="window.openPlanUpgradeModal('plano_10')" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
+                Desbloquear por R$ 10/mês
+              </button>
+              <button onclick="window.switchMainTab('dashboard')" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
+                Voltar ao Dashboard
+              </button>
+            </div>
+          </div>
+        `;
+        reportView.parentNode.appendChild(overlay);
+      }
+    } else {
+      reportView.classList.remove("paywall-blur-active");
+      if (reportPaywall) reportPaywall.remove();
+      const danglingOverlay = document.getElementById("report-paywall-overlay");
+      if (danglingOverlay) danglingOverlay.remove();
+    }
+  }
+
+  // 2. Aplicação de Blur no Módulo de Mídia (para Grátis e Plano R$ 10)
+  const midiaView = document.getElementById("midia-dashboard-view");
+  if (midiaView) {
+    let midiaPaywall = document.getElementById("midia-paywall-overlay");
+    if (userPlan === "gratis" || userPlan === "plano_10") {
+      midiaView.classList.add("paywall-blur-active");
+      if (!midiaPaywall) {
+        const overlay = document.createElement("div");
+        overlay.id = "midia-paywall-overlay";
+        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-brand-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.innerHTML = `
+          <div class="max-w-lg bg-white p-8 rounded-3xl shadow-2xl border border-cyan-200 text-center space-y-4 animate-in zoom-in-95">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-cyan-100 text-cyan-900 flex items-center justify-center text-2xl font-black shadow-inner">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="text-xl font-black text-brand-950">Radar de Mídia & Notícias SJC</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              A análise completa de veículos locais, canais digitais e audiência de São José dos Campos está disponível no Plano Radar Premium.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
+              <button onclick="window.openPlanUpgradeModal('plano_15')" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-brand-900 hover:from-cyan-500 hover:to-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
+                Desbloquear por R$ 15/mês
+              </button>
+              <button onclick="window.switchMainTab('dashboard')" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
+                Voltar ao Dashboard
+              </button>
+            </div>
+          </div>
+        `;
+        midiaView.parentNode.appendChild(overlay);
+      }
+    } else {
+      midiaView.classList.remove("paywall-blur-active");
+      if (midiaPaywall) midiaPaywall.remove();
+      const danglingOverlay = document.getElementById("midia-paywall-overlay");
+      if (danglingOverlay) danglingOverlay.remove();
+    }
+  }
+
+  // 3. Aplicação de Blur no Módulo de Personas (para Grátis e Plano R$ 10)
+  const personasView = document.getElementById("personas-view");
+  if (personasView) {
+    let personasPaywall = document.getElementById("personas-paywall-overlay");
+    if (userPlan === "gratis" || userPlan === "plano_10") {
+      personasView.classList.add("paywall-blur-active");
+      if (!personasPaywall) {
+        const overlay = document.createElement("div");
+        overlay.id = "personas-paywall-overlay";
+        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-brand-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.innerHTML = `
+          <div class="max-w-lg bg-white p-8 rounded-3xl shadow-2xl border border-cyan-200 text-center space-y-4 animate-in zoom-in-95">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-cyan-100 text-cyan-900 flex items-center justify-center text-2xl font-black shadow-inner">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="text-xl font-black text-brand-950">Personas Comportamentais SJC</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Os 4 clusters aprofundados de comportamento, hábitos e consumo do morador joseense estão disponíveis no Plano Radar Premium.
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
+              <button onclick="window.openPlanUpgradeModal('plano_15')" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-brand-900 hover:from-cyan-500 hover:to-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
+                Desbloquear por R$ 15/mês
+              </button>
+              <button onclick="window.switchMainTab('dashboard')" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
+                Voltar ao Dashboard
+              </button>
+            </div>
+          </div>
+        `;
+        personasView.parentNode.appendChild(overlay);
+      }
+    } else {
+      personasView.classList.remove("paywall-blur-active");
+      if (personasPaywall) personasPaywall.remove();
+      const danglingOverlay = document.getElementById("personas-paywall-overlay");
+      if (danglingOverlay) danglingOverlay.remove();
+    }
+  }
+};
+
 function showDashboard(user) {
   loginScreen.classList.add("hidden");
   dashboardScreen.classList.remove("hidden");
   if (user && user.email) {
     userEmailDisplay.textContent = user.email;
   }
+
+  const userRole = localStorage.getItem("userRole") || "usuario";
+  const adminSim = document.getElementById("admin-role-simulator");
+  if (userRole === "admin" && adminSim) {
+    adminSim.classList.remove("hidden");
+  }
+
+  window.applyPlanRestrictions();
   fetchSurveyData();
 
   const hash = (window.location.hash || "").replace("#", "").trim();

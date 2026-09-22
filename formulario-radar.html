@@ -565,6 +565,9 @@
       localStorage.setItem('userEmail', payload.email);
       localStorage.setItem('userName', payload.nome);
       localStorage.setItem('userRole', 'usuario');
+      localStorage.setItem('userPlan', 'gratis');
+      localStorage.setItem('onboardingCompleted', 'true');
+      localStorage.setItem('onboardingCompleted_' + payload.email, 'true');
 
       // 2. Tentar persistência no Supabase (se RPC disponível)
       try {

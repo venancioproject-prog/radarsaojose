@@ -565,6 +565,33 @@
             <span id="active-filters-badge" class="hidden w-2 h-2 rounded-full bg-accent-cyan"></span>
           </button>
 
+          <!-- Plan Badge & Upgrade Button -->
+          <div id="user-plan-badge-container" class="flex items-center gap-2">
+            <span id="user-plan-badge" class="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+              Plano Gratuito
+            </span>
+            <button 
+              id="btn-open-upgrade-modal" 
+              onclick="window.openPlanUpgradeModal()" 
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black text-white bg-gradient-to-r from-cyan-600 to-brand-900 hover:from-cyan-500 hover:to-brand-800 shadow-sm hover:shadow transition-all active:scale-95 cursor-pointer"
+            >
+              <i class="fa-solid fa-gem text-cyan-300"></i>
+              <span class="hidden xs:inline">Upgrade</span>
+            </button>
+          </div>
+
+          <!-- Admin Role Simulator (Visible only when role === 'admin') -->
+          <div id="admin-role-simulator" class="hidden md:flex items-center gap-1.5 bg-amber-50 border border-amber-300 px-2.5 py-1 rounded-xl text-[11px] font-bold text-amber-900">
+            <i class="fa-solid fa-eye text-amber-600 text-xs"></i>
+            <span>Simular:</span>
+            <select id="select-admin-simulate-plan" onchange="window.simulatePlanChange(this.value)" class="bg-white border border-amber-300 rounded px-1.5 py-0.5 text-xs font-bold text-slate-800 focus:outline-none">
+              <option value="admin">👑 Admin (Total)</option>
+              <option value="gratis">🔒 Grátis (Blur)</option>
+              <option value="plano_10">📊 R$ 10 (Pesquisa)</option>
+              <option value="plano_15">🚀 R$ 15 (Premium)</option>
+            </select>
+          </div>
+
                     
 
           
@@ -11930,6 +11957,231 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
     </footer>
   </div>
 
+  <!-- ======================================================== -->
+  <!-- MODAL DE PLANOS & ASSINATURA ASAAS (3 PLANOS: R$0, R$10, R$15) -->
+  <!-- ======================================================== -->
+  <div id="modal-planos-asaas" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity duration-300">
+    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-5 bg-brand-950 text-white flex items-center justify-between border-b border-brand-900 shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-400 text-brand-950 flex items-center justify-center font-black text-lg shadow-md">
+            <i class="fa-solid fa-gem"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-black tracking-tight">Planos & Assinatura Radar São José</h3>
+            <p class="text-xs text-slate-300">Desbloqueie inteligência analítica profunda e relatórios executivos</p>
+          </div>
+        </div>
+        <button onclick="window.closePlanUpgradeModal()" class="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-white/10 transition-colors cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Cards de Planos + Checkout Asaas) -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1">
+        
+        <!-- Grid de 3 Planos -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- 1. Plano Gratuito -->
+          <div id="card-plan-gratis" class="plan-card rounded-2xl border-2 border-slate-200 p-5 flex flex-col justify-between hover:border-slate-300 transition-all bg-slate-50/50">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-200 text-slate-700 mb-3">
+                Freemium
+              </span>
+              <h4 class="text-base font-black text-slate-900">Plano Gratuito</h4>
+              <div class="mt-2 mb-4">
+                <span class="text-2xl font-black text-slate-900">R$ 0</span>
+                <span class="text-xs text-slate-500">/ acesso permanente</span>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-600 font-medium">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-xs"></i> Amostra geral dos bairros</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-xs"></i> KPIs principais da cidade</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600 text-xs"></i> Banco de Imagens SJC</li>
+                <li class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-lock text-slate-400 text-xs"></i> Relatórios com desfoque (blur)</li>
+                <li class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-lock text-slate-400 text-xs"></i> Mídia e Personas bloqueados</li>
+              </ul>
+            </div>
+            <button onclick="window.selectPlan('gratis')" class="w-full mt-5 py-2.5 px-3 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-all cursor-pointer">
+              Plano Atual
+            </button>
+          </div>
+
+          <!-- 2. Plano Radar Pesquisa (R$ 10) -->
+          <div id="card-plan-10" class="plan-card relative rounded-2xl border-2 border-brand-500 bg-brand-50/20 p-5 flex flex-col justify-between shadow-md hover:shadow-lg transition-all">
+            <span class="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-900 text-white shadow-xs">
+              Mais Popular
+            </span>
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand-100 text-brand-900 mb-3">
+                Pesquisa Completa
+              </span>
+              <h4 class="text-base font-black text-brand-950">Radar Pesquisa</h4>
+              <div class="mt-2 mb-4">
+                <span class="text-2xl font-black text-brand-900">R$ 10</span>
+                <span class="text-xs text-slate-500">/ mês</span>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-700 font-medium">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-600 text-xs"></i> <strong>Tudo do Plano Gratuito</strong></li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-600 text-xs"></i> Base de 477 respondentes</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-600 text-xs"></i> 8 Capítulos do Relatório Executivo</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-600 text-xs"></i> Cruzamento demográfico completo</li>
+                <li class="flex items-center gap-2 text-slate-400"><i class="fa-solid fa-lock text-slate-400 text-xs"></i> Radar de Mídia & Personas</li>
+              </ul>
+            </div>
+            <button onclick="window.selectPlan('plano_10')" class="w-full mt-5 py-2.5 px-3 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
+              Assinar por R$ 10/mês
+            </button>
+          </div>
+
+          <!-- 3. Plano Radar Premium (R$ 15) -->
+          <div id="card-plan-15" class="plan-card relative rounded-2xl border-2 border-cyan-500 bg-gradient-to-b from-cyan-50/40 to-white p-5 flex flex-col justify-between shadow-md hover:shadow-lg transition-all">
+            <span class="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-cyan-600 to-emerald-600 text-white shadow-xs">
+              Acesso Total
+            </span>
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-100 text-cyan-950 mb-3">
+                Master & Mídia
+              </span>
+              <h4 class="text-base font-black text-slate-900">Radar Premium</h4>
+              <div class="mt-2 mb-4">
+                <span class="text-2xl font-black text-cyan-900">R$ 15</span>
+                <span class="text-xs text-slate-500">/ mês</span>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-700 font-medium">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-star text-amber-500 text-xs"></i> <strong>Acesso 100% Irrestrito</strong></li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Pesquisa & Relatório Completo</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Módulo Mídia & Notícias SJC</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Personas Comportamentais</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Exportação de Dados e Gráficos</li>
+              </ul>
+            </div>
+            <button onclick="window.selectPlan('plano_15')" class="w-full mt-5 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-brand-900 hover:from-cyan-500 hover:to-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
+              Assinar por R$ 15/mês
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Checkout / Pagamento Asaas (Aparece ao selecionar plano de 10 ou 15) -->
+        <div id="asaas-checkout-section" class="hidden rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+            <div>
+              <h4 class="text-sm font-black text-slate-900">Finalizar Assinatura &bull; <span id="checkout-selected-plan-name" class="text-brand-900">Radar Pesquisa (R$ 10/mês)</span></h4>
+              <p class="text-xs text-slate-500">Pagamento 100% Seguro integrado via Gateway Asaas</p>
+            </div>
+            <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-black">Asaas Oficial</span>
+          </div>
+
+          <!-- Abas de Pagamento (PIX / Cartão / Boleto) -->
+          <div class="flex gap-2 border-b border-slate-200 pb-2">
+            <button id="btn-pay-pix" onclick="window.setPaymentMethod('pix')" class="px-3.5 py-1.5 rounded-xl font-bold text-xs bg-brand-900 text-white shadow-xs cursor-pointer flex items-center gap-1.5">
+              <i class="fa-brands fa-pix"></i> PIX Instantâneo
+            </button>
+            <button id="btn-pay-card" onclick="window.setPaymentMethod('card')" class="px-3.5 py-1.5 rounded-xl font-bold text-xs bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 cursor-pointer flex items-center gap-1.5">
+              <i class="fa-solid fa-credit-card"></i> Cartão de Crédito
+            </button>
+            <button id="btn-pay-boleto" onclick="window.setPaymentMethod('boleto')" class="px-3.5 py-1.5 rounded-xl font-bold text-xs bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 cursor-pointer flex items-center gap-1.5">
+              <i class="fa-solid fa-barcode"></i> Boleto
+            </button>
+          </div>
+
+          <!-- Conteúdo PIX -->
+          <div id="pay-content-pix" class="space-y-3">
+            <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col sm:flex-row items-center gap-4">
+              <div class="w-32 h-32 bg-slate-100 border border-slate-300 rounded-xl flex items-center justify-center p-2 shrink-0">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=00020101021226830014br.gov.bcb.pix2561pix.asaas.com/qr/stat/radarsaojose_assinatura5204000053039865802BR5920Radar%20Sao%20Jose6014Sao%20Jose%20Campos62070503***6304" alt="QR Code Pix Asaas" class="w-full h-full object-contain rounded-lg" />
+              </div>
+              <div class="space-y-2 flex-1 text-center sm:text-left">
+                <span class="text-xs font-bold text-slate-700 block">Chave Copia e Cola:</span>
+                <div class="flex items-center gap-2">
+                  <input id="pix-copy-input" type="text" readonly value="00020101021226830014br.gov.bcb.pix2561pix.asaas.com/qr/stat/radarsaojose_assinatura" class="w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-700" />
+                  <button onclick="window.copyPixCode()" class="px-3 py-2 bg-brand-900 hover:bg-brand-800 text-white rounded-lg text-xs font-bold shrink-0 cursor-pointer">
+                    <i class="fa-solid fa-copy"></i> Copiar
+                  </button>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium">Liberação instantânea após a leitura do QR Code pelo app do seu banco.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo Cartão -->
+          <div id="pay-content-card" class="hidden space-y-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="sm:col-span-2">
+                <label class="block font-bold text-slate-700 mb-1">Número do Cartão</label>
+                <input type="text" placeholder="0000 0000 0000 0000" class="w-full p-2.5 bg-white border border-slate-300 rounded-xl font-mono text-xs" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Validade (MM/AA)</label>
+                <input type="text" placeholder="12/28" class="w-full p-2.5 bg-white border border-slate-300 rounded-xl font-mono text-xs" />
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">CVV</label>
+                <input type="text" placeholder="123" class="w-full p-2.5 bg-white border border-slate-300 rounded-xl font-mono text-xs" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo Boleto -->
+          <div id="pay-content-boleto" class="hidden space-y-2 text-xs">
+            <p class="text-slate-600 font-medium">O boleto bancário será gerado e enviado para seu e-mail cadastrado com vencimento em 3 dias úteis.</p>
+          </div>
+
+          <!-- Botões de Ação de Pagamento -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200">
+            <span class="text-[11px] text-slate-400 font-medium">Ambiente Asaas Integrado &bull; Chave Prod Ativa</span>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <button onclick="window.simulateInstantPayment()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Confirmar Pagamento & Liberar Acesso</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs font-medium text-slate-500">
+        <span>Garantia de 7 dias ou seu dinheiro de volta &bull; Cancele quando quiser</span>
+        <button onclick="window.closePlanUpgradeModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl transition-colors cursor-pointer">
+          Fechar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    /* Paywall Blur Styles */
+    .paywall-blur-active {
+      filter: blur(8px) !important;
+      pointer-events: none !important;
+      user-select: none !important;
+      opacity: 0.55 !important;
+      transition: filter 0.3s ease;
+    }
+    .paywall-overlay-container {
+      position: relative;
+    }
+    .paywall-lock-banner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 35;
+      background: rgba(11, 37, 69, 0.40);
+      backdrop-filter: blur(2px);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      text-align: center;
+    }
+  </style>
 
   <!-- Custom Script -->
   <script src="historia_sjc_data.js?v=20260916_v6"></script>
@@ -12279,15 +12531,25 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
       }
 
       // Fallback
+      const email = "usuario.google@radarsaojose.com.br";
+      const name = "Usuário Google SJC";
       localStorage.setItem('userRole', 'usuario');
-      localStorage.setItem('userName', 'Usuário Google SJC');
-      localStorage.setItem('userEmail', 'usuario.google@radarsaojose.com.br');
+      localStorage.setItem('userName', name);
+      localStorage.setItem('userEmail', email);
       localStorage.setItem('authProvider', 'google');
+      if (!localStorage.getItem('userPlan')) localStorage.setItem('userPlan', 'gratis');
       
+      const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
+      if (!hasCompletedOnboarding) {
+        window.location.href = "formulario-radar.html";
+        return;
+      }
+
       const loginScreen = document.getElementById('login-screen');
       const dashboardScreen = document.getElementById('dashboard-screen');
       if (loginScreen) loginScreen.classList.add('hidden');
       if (dashboardScreen) dashboardScreen.classList.remove('hidden');
+      if (typeof window.applyPlanRestrictions === 'function') window.applyPlanRestrictions();
     }
   </script>
 
