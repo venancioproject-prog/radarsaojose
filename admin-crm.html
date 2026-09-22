@@ -137,9 +137,12 @@
 
         <!-- Navigation Tabs -->
         <nav class="p-4 space-y-1.5 text-xs font-bold tracking-wider uppercase">
-          <button type="button" onclick="switchTab('crm')" id="nav-crm" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl bg-[#0B2545] text-white font-extrabold shadow-sm shadow-slate-900/10 text-left transition-all">
-            <i class="fa-solid fa-users-gear text-base text-cyan-400 w-5"></i>
-            <span>Assinantes (CRM)</span>
+          <button type="button" onclick="switchTab('crm')" id="nav-crm" class="cursor-pointer w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[#0B2545] text-white font-extrabold shadow-sm shadow-slate-900/10 text-left transition-all">
+            <div class="flex items-center gap-3.5">
+              <i class="fa-solid fa-users-gear text-base text-cyan-400 w-5"></i>
+              <span>Assinantes (CRM)</span>
+            </div>
+            <span id="sidebarLeadAlertBadge" class="hidden px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-500 text-white animate-pulse">0</span>
           </button>
           
           <button type="button" onclick="switchTab('blog')" id="nav-blog" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
@@ -228,6 +231,52 @@
       <!-- CRM METRICS & VIEWS BODY -->
       <div class="p-6 sm:p-8 space-y-6 flex-grow">
         
+        <!-- BANNER DE AVISOS DE LEADS & SLA EM TEMPO REAL -->
+        <div id="crmAlertsContainer" class="space-y-3">
+          <!-- Alerta 1: Novos Leads Inbound -->
+          <div id="alertNewLeadsBanner" class="hidden p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0B2545] via-[#07172C] to-[#0B2545] text-white border border-cyan-500/40 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-xl bg-cyan-400/20 text-cyan-300 flex items-center justify-center text-xl shrink-0 border border-cyan-400/40 animate-pulse">
+                <i class="fa-solid fa-bell-concierge"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-black uppercase tracking-wider text-cyan-300">Aviso Comercial de Entrada Inbound</span>
+                  <span id="alertNewLeadsCount" class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-cyan-400 text-slate-950">0 novos</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/10 text-cyan-200">SLA 15min / 1h</span>
+                </div>
+                <p class="text-xs text-slate-200 mt-1">Leads inbound com decisão comercial mapeada aguardando o primeiro contato com a pergunta sagrada.</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="filterByLeadAlert('new_leads')" class="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-md flex items-center gap-2">
+                <i class="fa-solid fa-filter"></i>
+                <span>Atender Novos Leads</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Alerta 2: Próximos Passos & SLA Atrasados -->
+          <div id="alertOverdueSlaBanner" class="hidden p-4 sm:p-5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl shrink-0 border border-rose-300">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-black uppercase tracking-wider text-rose-700">Atenção aos Prazos de SLA</span>
+                  <span id="alertOverdueCount" class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-600 text-white">0 pendentes</span>
+                </div>
+                <p class="text-xs text-rose-800 mt-1">Existem próximos passos e contatos prioritários com prazo de atendimento expirado.</p>
+              </div>
+            </div>
+            <button onclick="filterByLeadAlert('overdue')" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs flex items-center gap-2 shrink-0">
+              <i class="fa-solid fa-clock"></i>
+              <span>Ver Atrasados</span>
+            </button>
+          </div>
+        </div>
+
         <!-- 4 KPI Cards Executivos -->
         <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <!-- Card 1: Total Assinantes -->
@@ -239,10 +288,10 @@
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="kpiActiveSubs">1.248</span>
-              <span class="inline-flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+12.5%</span>
+              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="kpiActiveSubs">0</span>
+              <span class="inline-flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Ativos</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2 font-medium">98.6% taxa de adimplência em SJC</p>
+            <p class="text-[11px] text-slate-400 mt-2 font-medium">Contas e assinantes na plataforma</p>
           </div>
 
           <!-- Card 2: Receita Mensal MRR -->
@@ -254,40 +303,40 @@
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="kpiTotalMrr">R$ 48.950</span>
-              <span class="inline-flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+8.2%</span>
+              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="kpiTotalMrr">R$ 0</span>
+              <span class="inline-flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Mensal</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-2 font-medium">Faturamento recorrente consolidado</p>
           </div>
 
-          <!-- Card 3: Ticket Médio -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
+          <!-- Card 3: Novos Leads Inbound -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow cursor-pointer" onclick="filterByLeadAlert('new_leads')">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Ticket Médio / Conta</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Leads Inbound (SLA)</span>
               <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-lg shadow-2xs">
-                <i class="fa-solid fa-receipt"></i>
+                <i class="fa-solid fa-bolt"></i>
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-black text-slate-900">R$ 39,22</span>
-              <span class="inline-flex items-center text-xs font-bold text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded-full">/mês</span>
+              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="kpiNewLeadsCount">0</span>
+              <span class="inline-flex items-center text-xs font-bold text-cyan-600 bg-cyan-50 px-2 py-0.5 rounded-full">Funil</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2 font-medium">Crescimento com planos Enterprise</p>
+            <p class="text-[11px] text-slate-400 mt-2 font-medium">Decisões comerciais declaradas</p>
           </div>
 
-          <!-- Card 4: Taxa de Churn -->
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
+          <!-- Card 4: Próximos Passos Vencidos -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow cursor-pointer" onclick="filterByLeadAlert('overdue')">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Taxa de Churn</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Ações em Atraso</span>
               <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-lg shadow-2xs">
-                <i class="fa-solid fa-arrow-trend-down"></i>
+                <i class="fa-solid fa-clock-rotate-left"></i>
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-black text-slate-900">0.4%</span>
-              <span class="inline-flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Excelente</span>
+              <span class="text-2xl sm:text-3xl font-black text-slate-900" id="kpiOverdueCount">0</span>
+              <span class="inline-flex items-center text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full">Alerta</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2 font-medium">Meta interna &lt; 1.5% ao mês</p>
+            <p class="text-[11px] text-slate-400 mt-2 font-medium">Contatos que passaram do prazo</p>
           </div>
         </section>
 
@@ -296,27 +345,27 @@
           <div class="p-5 sm:p-6 border-b border-slate-200 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
             <div class="relative flex-1 max-w-lg">
               <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-              <input type="text" id="crmSearch" oninput="handleCrmFilter()" placeholder="Buscar empresa, contato, e-mail, telefone ou bairro..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white transition-all" />
+              <input type="text" id="crmSearch" oninput="handleCrmFilter()" placeholder="Buscar empresa, projeto, contato, pergunta, e-mail ou bairro..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white transition-all" />
             </div>
 
             <div class="flex flex-wrap items-center gap-3">
               <!-- Filtro de Etapa do Funil -->
               <select id="stageFilter" onchange="handleCrmFilter()" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
-                <option value="all">Todas as Etapas (Pipeline)</option>
-                <option value="lead">📥 Novos Leads</option>
+                <option value="all">Todas as Etapas</option>
+                <option value="lead">📥 Novos Leads Inbound</option>
                 <option value="qualificacao">🎯 Qualificação / Demo</option>
                 <option value="proposta">📑 Proposta Enviada</option>
                 <option value="ativo">✅ Assinante Ativo</option>
                 <option value="churn">⚠️ Em Risco / Churn</option>
               </select>
 
-              <!-- Filtro de Plano -->
-              <select id="planFilter" onchange="handleCrmFilter()" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
-                <option value="all">Todos os Planos</option>
-                <option value="Enterprise">Enterprise (R$ 149/mês)</option>
-                <option value="Pro">Pro Inteligência (R$ 49/mês)</option>
-                <option value="Starter">Starter (R$ 29/mês)</option>
-                <option value="Vitalício">Vitalício</option>
+              <!-- Filtro de SLA / Alerta -->
+              <select id="slaFilter" onchange="handleCrmFilter()" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <option value="all">Todos os SLAs</option>
+                <option value="overdue">🚨 Atrasados / Vencidos</option>
+                <option value="Alta">⚡ Alta Prioridade (15 min)</option>
+                <option value="Média">⏱️ Média Prioridade (1h)</option>
+                <option value="Normal">🟢 Normal (4h)</option>
               </select>
 
               <!-- Filtro de Bairro de SJC -->
@@ -345,12 +394,12 @@
               <table class="w-full text-left border-collapse text-xs sm:text-sm">
                 <thead class="bg-slate-50/80 text-slate-600 text-[11px] font-black uppercase tracking-wider border-b border-slate-200">
                   <tr>
-                    <th class="py-4 px-6">Empresa & Contato</th>
-                    <th class="py-4 px-6">Localização / Bairro</th>
+                    <th class="py-4 px-6">Empresa, Decisor & Papel</th>
+                    <th class="py-4 px-6">Decisão & Projeto em SJC</th>
+                    <th class="py-4 px-6">Pergunta Principal (Intocável)</th>
+                    <th class="py-4 px-6">SLA & Próximo Passo</th>
                     <th class="py-4 px-6">Contato Rápido</th>
-                    <th class="py-4 px-6">Plano & MRR</th>
                     <th class="py-4 px-6">Etapa do Funil</th>
-                    <th class="py-4 px-6">Data</th>
                     <th class="py-4 px-6 text-right">Ações</th>
                   </tr>
                 </thead>
@@ -362,10 +411,10 @@
 
             <!-- Rodapé da Tabela -->
             <div class="p-4 sm:p-5 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-              <div>Mostrando <span id="showingCount" class="font-bold text-slate-800">0</span> de <span id="totalCount" class="font-bold text-slate-800">0</span> registros corporativos</div>
+              <div>Mostrando <span id="showingCount" class="font-bold text-slate-800">0</span> de <span id="totalCount" class="font-bold text-slate-800">0</span> contas e oportunidades mapeadas</div>
               <div class="flex items-center gap-2 text-[11px] text-slate-400">
                 <i class="fa-solid fa-shield-check text-emerald-500"></i>
-                <span>Base corporativa sincronizada em São José dos Campos</span>
+                <span>Base comercial B2B integrada e sincronizada em São José dos Campos</span>
               </div>
             </div>
           </div>
@@ -1421,15 +1470,15 @@
 
   <!-- ==================== MODAL: NOVO ASSINANTE / LEAD CRM ==================== -->
   <div id="subscriberModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
       <div class="p-6 bg-[#0B2545] text-white flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-base">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg">
             <i class="fa-solid fa-user-plus"></i>
           </div>
           <div>
-            <h3 class="text-base font-black">Cadastrar Novo Lead / Assinante B2B</h3>
-            <p class="text-[11px] text-slate-300">Gestão comercial de contas em São José dos Campos</p>
+            <h3 class="text-base font-black">Novo Lead & Oportunidade Comercial</h3>
+            <p class="text-[11px] text-slate-300">Mapeamento da decisão, empresa, pergunta sagrada e SLA em São José dos Campos</p>
           </div>
         </div>
         <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1">
@@ -1438,88 +1487,172 @@
       </div>
       
       <form id="subscriberForm" onsubmit="saveSubscriber(event)" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto custom-scrollbar">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Empresa <span class="text-rose-500">*</span></label>
-            <input type="text" id="modalEmpresa" required placeholder="Ex: TecVale Soluções" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+        
+        <!-- Bloco 1: Empresa & Decisor -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-3">
+          <span class="text-[10px] font-black uppercase tracking-wider text-cyan-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-building"></i> Dados da Empresa & Contato
+          </span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Empresa / Razão Social <span class="text-rose-500">*</span></label>
+              <input type="text" id="modalEmpresa" required placeholder="Ex: InovaTech SJC" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nome do Contato <span class="text-rose-500">*</span></label>
+              <input type="text" id="modalNome" required placeholder="Ex: Carlos Eduardo" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            </div>
           </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nome do Contato <span class="text-rose-500">*</span></label>
-            <input type="text" id="modalNome" required placeholder="Ex: Fernanda Lima" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Cargo / Função</label>
+              <input type="text" id="modalCargo" placeholder="Ex: Diretor de Expansão" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Papel na Decisão</label>
+              <select id="modalPapelDecisao" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Decisor Final" selected>Decisor Final</option>
+                <option value="Avaliador Técnico">Avaliador Técnico</option>
+                <option value="Influenciador">Influenciador</option>
+                <option value="Usuário / Pesquisador">Usuário / Pesquisador</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Relação com SJC</label>
+              <select id="modalRelacaoSjc" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Sede própria em SJC" selected>Sede própria em SJC</option>
+                <option value="Filial / Operação">Filial / Operação</option>
+                <option value="Planejando entrar em SJC">Planejando entrar em SJC</option>
+                <option value="Consumidor local">Consumidor local</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">WhatsApp <span class="text-rose-500">*</span></label>
+              <input type="tel" id="modalWhatsapp" required placeholder="(12) 99123-4567" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">E-mail Corporativo <span class="text-rose-500">*</span></label>
+              <input type="email" id="modalEmail" required placeholder="carlos@empresa.com.br" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">WhatsApp / Telefone <span class="text-rose-500">*</span></label>
-            <input type="tel" id="modalWhatsapp" required placeholder="(12) 99123-4567" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+        <!-- Bloco 2: Diagnóstico da Decisão & Projeto -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-3">
+          <span class="text-[10px] font-black uppercase tracking-wider text-cyan-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-bullseye"></i> Diagnóstico da Decisão Comercial
+          </span>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tipo de Decisão</label>
+              <select id="modalTipoDecisao" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Expansão de Negócio">Expansão de Negócio</option>
+                <option value="Abertura de Filial / Unidade">Abertura de Filial</option>
+                <option value="Compra Imobiliária / Ponto Comercial">Compra Imobiliária</option>
+                <option value="Validação de Mercado">Validação de Mercado</option>
+                <option value="Lançamento de Produto">Lançamento de Produto</option>
+                <option value="Pesquisa de Opinião">Pesquisa de Opinião</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nome do Projeto</label>
+              <input type="text" id="modalProjetoNome" placeholder="Ex: Unidade Aquarius 2026" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Estágio do Projeto</label>
+              <select id="modalEstagioProjeto" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Ideação">Ideação</option>
+                <option value="Em Estudo de Viabilidade" selected>Em Estudo de Viabilidade</option>
+                <option value="Em Negociação / Seleção">Em Negociação / Seleção</option>
+                <option value="Em Execução">Em Execução</option>
+              </select>
+            </div>
           </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Bairro em SJC</label>
+              <select id="modalBairro" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Jd. Aquarius">Jd. Aquarius (Zona Oeste)</option>
+                <option value="Vila Ema">Vila Ema (Centro)</option>
+                <option value="Jd. das Colinas">Jd. das Colinas (Zona Oeste)</option>
+                <option value="Urbanova">Urbanova (Zona Oeste)</option>
+                <option value="Jd. Satélite">Jd. Satélite (Zona Sul)</option>
+                <option value="Centro">Centro Histórico</option>
+                <option value="Eugênio de Melo">Eugênio de Melo / PIT (Zona Leste)</option>
+                <option value="Putim">Putim / Embraer (Zona Sudeste)</option>
+                <option value="Geral SJC">Toda a Cidade de SJC</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Prazo de Decisão</label>
+              <select id="modalPrazo" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Imediato (< 30 dias)">Imediato (&lt; 30 dias)</option>
+                <option value="30 a 60 dias" selected>30 a 60 dias</option>
+                <option value="3 a 6 meses">3 a 6 meses</option>
+                <option value="1 ano">1 ano</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Faixa de Investimento</label>
+              <select id="modalFaixaValor" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+                <option value="Até R$ 50 mil">Até R$ 50 mil</option>
+                <option value="R$ 50 mil a R$ 200 mil" selected>R$ 50k a R$ 200k</option>
+                <option value="R$ 200 mil a R$ 1 Milhão">R$ 200k a R$ 1M</option>
+                <option value="Acima de R$ 1 Milhão">Acima de R$ 1 Milhão</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Pergunta Principal Intocável -->
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">E-mail Corporativo <span class="text-rose-500">*</span></label>
-            <input type="email" id="modalEmail" required placeholder="fernanda@tecvale.com.br" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            <label class="block text-[11px] font-black text-amber-900 uppercase mb-1 flex items-center gap-1.5">
+              <i class="fa-solid fa-lock text-amber-600"></i> Pergunta Principal Declarada (Sagrada / Intocável)
+            </label>
+            <textarea id="modalPerguntaPrincipal" rows="2" placeholder="O que o cliente precisa descobrir para tomar essa decisão? (Ex: Qual é a renda média e o fluxo de pedestres na Av. Cassiano Ricardo?)" class="w-full px-3.5 py-2.5 bg-amber-50/60 border border-amber-300 rounded-xl text-xs font-medium text-amber-950 focus:ring-2 focus:ring-amber-500 focus:outline-none"></textarea>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Bloco 3: Funil, SLA & Próximo Passo -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Bairro em SJC</label>
-            <select id="modalBairro" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none">
-              <option value="Jd. Aquarius">Jd. Aquarius (Zona Oeste)</option>
-              <option value="Vila Ema">Vila Ema (Centro)</option>
-              <option value="Jd. das Colinas">Jd. das Colinas (Zona Oeste)</option>
-              <option value="Urbanova">Urbanova (Zona Oeste)</option>
-              <option value="Jd. Satélite">Jd. Satélite (Zona Sul)</option>
-              <option value="Centro">Centro Histórico</option>
-              <option value="Eugênio de Melo">Eugênio de Melo / PIT (Zona Leste)</option>
-              <option value="Putim">Putim / Embraer (Zona Sudeste)</option>
-              <option value="Outro">Outro Bairro de SJC</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Setor Econômico</label>
-            <select id="modalSetor" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none">
-              <option value="Tecnologia & Inovação">Tecnologia & Inovação</option>
-              <option value="Imobiliário & Construção">Imobiliário & Construção</option>
-              <option value="Varejo & Comércio">Varejo & Comércio</option>
-              <option value="Saúde & Medicina">Saúde & Medicina</option>
-              <option value="Aeroespacial & Defesa">Aeroespacial & Defesa</option>
-              <option value="Educação">Educação</option>
-              <option value="Gastronomia">Gastronomia</option>
-              <option value="Indústria & Logística">Indústria & Logística</option>
-              <option value="Serviços & Consultoria">Serviços & Consultoria</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Plano</label>
-            <select id="modalPlano" onchange="updateDefaultMrr()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none">
-              <option value="Enterprise">Enterprise (R$ 149/mês)</option>
-              <option value="Pro" selected>Pro Inteligência (R$ 49/mês)</option>
-              <option value="Starter">Starter (R$ 29/mês)</option>
-              <option value="Vitalício">Vitalício</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Etapa no Funil</label>
-            <select id="modalStage" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none">
-              <option value="lead">📥 Novo Lead</option>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Etapa no Funil</label>
+            <select id="modalStage" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+              <option value="lead" selected>📥 Novo Lead</option>
               <option value="qualificacao">🎯 Qualificação / Demo</option>
               <option value="proposta">📑 Proposta Enviada</option>
-              <option value="ativo" selected>✅ Assinante Ativo</option>
+              <option value="ativo">✅ Assinante Ativo</option>
               <option value="churn">⚠️ Churn / Inativo</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">MRR (R$/mês)</label>
-            <input type="number" id="modalMrr" step="0.01" value="49.00" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Prioridade SLA</label>
+            <select id="modalSlaPrioridade" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+              <option value="Alta" selected>🚨 Alta (15 min)</option>
+              <option value="Média">⚡ Média (1 hr)</option>
+              <option value="Normal">🟢 Normal (4 hrs)</option>
+              <option value="Nutrição">🌱 Nutrição / Sem Pressa</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Plano & MRR</label>
+            <select id="modalPlano" onchange="updateDefaultMrr()" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none">
+              <option value="Enterprise">Enterprise (R$ 149/mês)</option>
+              <option value="Pro" selected>Pro Inteligência (R$ 49/mês)</option>
+              <option value="Starter">Starter (R$ 29/mês)</option>
+              <option value="Free">Gratuito / Pesquisa</option>
+            </select>
+            <input type="hidden" id="modalMrr" value="49.00" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Anotações Comerciais Iniciais</label>
-          <textarea id="modalNotas" rows="2" placeholder="Ex: Solicitou dados sobre expansão na Zona Oeste..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-cyan-400 focus:outline-none"></textarea>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Próximo Passo Comercial Definido</label>
+          <input type="text" id="modalProximoPasso" placeholder="Ex: Ligar via WhatsApp para responder sobre o fluxo na Av. Cassiano Ricardo" class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-cyan-400 focus:outline-none" />
         </div>
 
         <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
@@ -1527,7 +1660,7 @@
             Cancelar
           </button>
           <button type="submit" class="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-wider shadow-md hover:shadow-cyan-500/20 transition-all">
-            Salvar Lead / Assinante
+            Salvar Lead / Oportunidade
           </button>
         </div>
       </form>
@@ -1535,15 +1668,15 @@
   </div>
 
   <!-- ======================================================= -->
-  <!-- MODAL: FICHA COMPLETA DO CLIENTE & HISTÓRICO DE ACESSO -->
+  <!-- MODAL: FICHA COMPLETA DO CLIENTE, DECISÃO & SLA CRM -->
   <!-- ======================================================= -->
-  <div id="customerDetailsModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
+  <div id="customerDetailsModal" class="fixed inset-0 bg-slate-900/75 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden my-auto animate-in fade-in zoom-in-95 duration-200">
       
-      <!-- Header do Cliente -->
+      <!-- Header Executivo da Ficha -->
       <div class="p-6 bg-[#0B2545] text-white flex items-start justify-between">
         <div class="flex items-center gap-4">
-          <div id="custModalAvatar" class="w-14 h-14 rounded-2xl bg-cyan-500 text-slate-950 font-black text-xl flex items-center justify-center shadow-md">
+          <div id="custModalAvatar" class="w-14 h-14 rounded-2xl bg-cyan-500 text-slate-950 font-black text-xl flex items-center justify-center shadow-md shrink-0">
             --
           </div>
           <div>
@@ -1551,9 +1684,10 @@
               <h3 id="custModalEmpresa" class="text-lg font-black text-white">Empresa</h3>
               <span id="custModalPlanBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/20 text-white">Plano</span>
               <span id="custModalStageBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300">Ativo</span>
+              <span id="custModalSlaBadge" class="text-[10px] font-black px-2 py-0.5 rounded-md bg-rose-500 text-white">SLA Alta</span>
             </div>
-            <p id="custModalContato" class="text-xs text-slate-300 mt-0.5">Contato • Cargo</p>
-            <p id="custModalBairro" class="text-[11px] text-cyan-300 font-semibold mt-1"><i class="fa-solid fa-location-dot mr-1"></i>São José dos Campos</p>
+            <p id="custModalContato" class="text-xs text-slate-300 mt-1">Contato • Cargo • Papel</p>
+            <p id="custModalBairro" class="text-[11px] text-cyan-300 font-semibold mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>São José dos Campos</p>
           </div>
         </div>
         <button onclick="closeCustomerDetails()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
@@ -1562,14 +1696,60 @@
       </div>
 
       <div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
-        <!-- Contatos & Ações Imediatas -->
+        
+        <!-- 1. DESTAQUE SAGRADO: PERGUNTA PRINCIPAL DECLARADA (INTOCÁVEL) -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-cyan-500/10 border-2 border-amber-400/50 shadow-sm relative overflow-hidden">
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-[10px] font-black uppercase tracking-wider text-amber-900 bg-amber-200/80 px-2.5 py-1 rounded-md flex items-center gap-1.5">
+              <i class="fa-solid fa-lock text-amber-700"></i> Pergunta Principal Declarada pelo Lead (Intocável)
+            </span>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Guia de Abordagem</span>
+          </div>
+          <p id="custModalPerguntaPrincipal" class="text-sm sm:text-base font-extrabold text-[#0B2545] leading-relaxed italic mt-2">
+            "Carregando pergunta declarada do decisor..."
+          </p>
+          <div class="text-[10px] text-amber-800/80 font-semibold mt-2.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Esta é a dor exata informada pelo cliente. Nenhuma abordagem comercial deve ignorar esta questão.</span>
+          </div>
+        </div>
+
+        <!-- 2. DIAGNÓSTICO DA DECISÃO & PROJETO -->
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+          <span class="text-[10px] font-black uppercase tracking-wider text-slate-500 block">
+            <i class="fa-solid fa-bullseye text-cyan-600 mr-1"></i> Mapeamento da Decisão Comercial & Projeto
+          </span>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            <div class="p-2.5 bg-white rounded-lg border border-slate-100">
+              <span class="text-[9px] font-black text-slate-400 uppercase block">Tipo de Decisão</span>
+              <span id="custModalTipoDecisao" class="font-bold text-slate-800">--</span>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-100">
+              <span class="text-[9px] font-black text-slate-400 uppercase block">Projeto Declarado</span>
+              <span id="custModalProjetoNome" class="font-bold text-slate-800">--</span>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-100">
+              <span class="text-[9px] font-black text-slate-400 uppercase block">Estágio</span>
+              <span id="custModalEstagioProjeto" class="font-bold text-slate-800">--</span>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-slate-100">
+              <span class="text-[9px] font-black text-slate-400 uppercase block">Prazo / Faixa</span>
+              <span id="custModalPrazoValor" class="font-bold text-slate-800">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CONTATOS RÁPIDOS & SLA EM TEMPO REAL -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">WhatsApp & Telefone</span>
+            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">WhatsApp Comercial (Decisor)</span>
             <div class="flex items-center justify-between gap-2">
-              <span id="custModalWhatsapp" class="font-bold text-slate-900 text-sm">--</span>
-              <a id="custModalWaLink" href="#" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-xs transition-colors">
-                <i class="fa-brands fa-whatsapp text-sm"></i> Chamar
+              <div>
+                <span id="custModalWhatsapp" class="font-bold text-slate-900 text-sm">--</span>
+                <div id="custModalPapelBadge" class="text-[10px] text-cyan-700 font-bold">Decisor Final</div>
+              </div>
+              <a id="custModalWaLink" href="#" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs shadow-xs transition-colors">
+                <i class="fa-brands fa-whatsapp text-base"></i> Abrir Chat
               </a>
             </div>
           </div>
@@ -1577,7 +1757,7 @@
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
             <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-1">E-mail Corporativo</span>
             <div class="flex items-center justify-between gap-2">
-              <span id="custModalEmail" class="font-bold text-slate-900 text-xs truncate max-w-[200px]">--</span>
+              <span id="custModalEmail" class="font-bold text-slate-900 text-xs truncate max-w-[180px]">--</span>
               <a id="custModalEmailLink" href="#" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs transition-colors">
                 <i class="fa-regular fa-envelope"></i> E-mail
               </a>
@@ -1585,36 +1765,29 @@
           </div>
         </div>
 
-        <!-- Dados do Contrato & MRR -->
-        <div class="grid grid-cols-3 gap-3 p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
-          <div>
-            <span class="text-[10px] font-bold uppercase text-slate-400 block">Mensalidade (MRR)</span>
-            <span id="custModalMrr" class="text-base font-black text-slate-900">R$ 0,00</span>
+        <!-- 4. GESTÃO DO PRÓXIMO PASSO & SLA -->
+        <div class="p-4 rounded-xl bg-blue-50/60 border border-blue-200 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-black uppercase tracking-wider text-blue-900 flex items-center gap-1.5">
+              <i class="fa-solid fa-clock-rotate-left text-blue-600"></i> Próximo Passo Comercial & Status de SLA
+            </span>
+            <span id="custModalSlaStatusPill" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-100 text-blue-800">No Prazo</span>
           </div>
-          <div class="border-x border-slate-200">
-            <span class="text-[10px] font-bold uppercase text-slate-400 block">Início da Conta</span>
-            <span id="custModalData" class="text-xs font-bold text-slate-800">--</span>
+          <div class="p-3 bg-white rounded-xl border border-blue-100 text-xs text-slate-800 font-semibold" id="custModalProximoPasso">
+            Nenhum próximo passo agendado.
           </div>
-          <div>
-            <span class="text-[10px] font-bold uppercase text-slate-400 block">Setor de Atuação</span>
-            <span id="custModalSetor" class="text-xs font-bold text-slate-800">--</span>
-          </div>
-        </div>
-
-        <!-- Histórico de Acesso na Plataforma Radar -->
-        <div>
-          <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
-            <i class="fa-solid fa-clock-rotate-left text-cyan-600"></i> Histórico de Atividade no Radar SJC
-          </h4>
-          <div id="custModalHistorico" class="space-y-2">
-            <!-- Itens de histórico via JS -->
+          <div class="flex gap-2">
+            <input type="text" id="custModalNextStepInput" placeholder="Atualizar próximo passo (ex: Enviar estudo comparativo Aquarius vs Colinas)..." class="flex-1 px-3.5 py-2 bg-white border border-blue-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
+            <button type="button" onclick="updateCustomerNextStep()" class="px-3.5 py-2 bg-[#0B2545] hover:bg-[#07172C] text-white font-bold text-xs rounded-xl shadow-xs transition-colors">
+              Salvar Passo
+            </button>
           </div>
         </div>
 
-        <!-- Anotações Comerciais & CRM Notes -->
+        <!-- 5. ANOTAÇÕES COMERCIAIS & HISTÓRICO -->
         <div>
           <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-2">
-            <i class="fa-solid fa-note-sticky text-amber-500"></i> Anotações Comerciais & Follow-up
+            <i class="fa-solid fa-note-sticky text-amber-500"></i> Anotações Comerciais & Log de Interações
           </h4>
           <div id="custModalNotas" class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-xl text-xs text-amber-950 leading-relaxed font-medium mb-3">
             Nenhuma anotação registrada.
@@ -1626,6 +1799,7 @@
             </button>
           </div>
         </div>
+
       </div>
 
       <div class="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
@@ -2025,7 +2199,7 @@
     }
 
     // =========================================================================
-    // CRM PROFISSIONAL B2B - RADAR SÃO JOSÉ DOS CAMPOS
+    // CRM PROFISSIONAL B2B (v1.1) - RADAR SÃO JOSÉ DOS CAMPOS
     // =========================================================================
     const DEFAULT_SUBSCRIBERS = [
       {
@@ -2033,6 +2207,8 @@
         empresa: "Andrade & Filhos Varejo",
         nome: "Juliana Andrade",
         cargo: "Diretora Comercial",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
         setor: "Varejo & Comércio",
         bairro: "Jd. Aquarius",
         regiao: "Zona Oeste",
@@ -2045,6 +2221,15 @@
         data: "12/09/2026",
         avatar: "JA",
         avatarBg: "bg-blue-600",
+        tipo_decisao: "Expansão de Negócio",
+        projeto_nome: "Nova Unidade Aquarius 2026",
+        estagio_projeto: "Em Execução",
+        prazo_decisao: "Imediato (< 30 dias)",
+        faixa_valor: "R$ 200 mil a R$ 1 Milhão",
+        pergunta_principal: "Qual é a densidade de tráfego e ticket médio nas transversais da Av. Cassiano Ricardo no período noturno?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Apresentar benchmark de fluxo comercial da Zona Oeste",
+        proximo_passo_data: "2026-09-20",
         notas: "Cliente enterprise com 8 lojas físicas no Vale. Usa os dados de tráfego para expansão.",
         historico: [
           "Exportou Relatório Demografia Aquarius",
@@ -2057,6 +2242,8 @@
         empresa: "Embraer Engenharia & Projetos",
         nome: "Carlos Eduardo Ramos",
         cargo: "Head de Suprimentos & Facilities",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
         setor: "Aeroespacial & Defesa",
         bairro: "Putim",
         regiao: "Zona Sudeste",
@@ -2069,6 +2256,15 @@
         data: "10/09/2026",
         avatar: "CR",
         avatarBg: "bg-emerald-600",
+        tipo_decisao: "Validação de Mercado",
+        projeto_nome: "Mapeamento Mobilidade Sudeste",
+        estagio_projeto: "Em Estudo de Viabilidade",
+        prazo_decisao: "30 a 60 dias",
+        faixa_valor: "Acima de R$ 1 Milhão",
+        pergunta_principal: "Como o novo corredor de ônibus da Zona Sudeste alterou o tempo de deslocamento dos colaboradores?",
+        sla_prioridade: "Normal",
+        proximo_passo: "Enviar cruzamento de linhas de ônibus com horários de turno",
+        proximo_passo_data: "2026-09-25",
         notas: "Contrato corporativo renovado anualmente. Acessa dados de mobilidade dos funcionários.",
         historico: [
           "Consulta Mapa de Ônibus & Mobilidade",
@@ -2080,6 +2276,8 @@
         empresa: "Clínica Bem Estar SJC",
         nome: "Dra. Fernanda Silveira",
         cargo: "Sócia-Diretora Médica",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
         setor: "Saúde & Medicina",
         bairro: "Vila Ema",
         regiao: "Centro",
@@ -2092,6 +2290,15 @@
         data: "08/09/2026",
         avatar: "FS",
         avatarBg: "bg-amber-600",
+        tipo_decisao: "Abertura de Filial / Unidade",
+        projeto_nome: "Expansão Clínica Vila Ema",
+        estagio_projeto: "Em Negociação / Seleção",
+        prazo_decisao: "30 a 60 dias",
+        faixa_valor: "R$ 50 mil a R$ 200 mil",
+        pergunta_principal: "Qual a concentração de famílias das classes A/B sem plano de saúde privado na região central?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Apresentar proposta de customização Enterprise para 5 consultórios",
+        proximo_passo_data: "2026-09-18",
         notas: "Aguardando aprovação da diretoria para upgrade ao plano Enterprise.",
         historico: [
           "Download Demonstração Dados Demográficos",
@@ -2103,6 +2310,8 @@
         empresa: "PIT SJC Tech Hub & Startups",
         nome: "Marcelo Toledo",
         cargo: "Gerente de Inovação",
+        papel_decisao: "Avaliador Técnico",
+        relacao_sjc: "Filial / Operação",
         setor: "Tecnologia & Inovação",
         bairro: "Eugênio de Melo",
         regiao: "Zona Leste",
@@ -2115,6 +2324,15 @@
         data: "01/09/2026",
         avatar: "MT",
         avatarBg: "bg-indigo-600",
+        tipo_decisao: "Validação de Mercado",
+        projeto_nome: "Radar Tech Startups",
+        estagio_projeto: "Em Execução",
+        prazo_decisao: "Imediato (< 30 dias)",
+        faixa_valor: "R$ 200 mil a R$ 1 Milhão",
+        pergunta_principal: "Quantas empresas de base tecnológica se instalaram no eixo Eugênio de Melo no último biênio?",
+        sla_prioridade: "Média",
+        proximo_passo: "Reunião de alinhamento trimestral de dados",
+        proximo_passo_data: "2026-09-28",
         notas: "Hub de aceleração conectado ao Parque Tecnológico de São José dos Campos.",
         historico: [
           "Acesso API Radar",
@@ -2123,101 +2341,45 @@
       },
       {
         id: 5,
-        empresa: "Colégio Novo Horizonte",
-        nome: "Patrícia Nogueira",
-        cargo: "Diretora Pedagógica",
-        setor: "Educação",
-        bairro: "Jd. das Colinas",
+        empresa: "Construtora Vale Imperial",
+        nome: "Renata Fagundes",
+        cargo: "Diretora de Incorporação",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
+        setor: "Imobiliário & Construção",
+        bairro: "Urbanova",
         regiao: "Zona Oeste",
-        whatsapp: "12982334455",
-        email: "patricia@novohorizontesjc.com.br",
-        plano: "Starter",
-        mrr: 29.00,
-        stage: "ativo",
-        status: "Ativo",
-        data: "28/08/2026",
-        avatar: "PN",
-        avatarBg: "bg-purple-600",
-        notas: "Monitorando faixa etária escolar de 0 a 14 anos na Zona Oeste.",
+        whatsapp: "12981776655",
+        email: "renata@valeimperial.com.br",
+        plano: "Enterprise",
+        mrr: 149.00,
+        stage: "lead",
+        status: "Pendente",
+        data: "Hoje",
+        avatar: "RF",
+        avatarBg: "bg-blue-500",
+        tipo_decisao: "Compra Imobiliária / Ponto Comercial",
+        projeto_nome: "Lançamento Reserva Urbanova",
+        estagio_projeto: "Em Estudo de Viabilidade",
+        prazo_decisao: "Imediato (< 30 dias)",
+        faixa_valor: "Acima de R$ 1 Milhão",
+        pergunta_principal: "Qual a demanda reprimida por apartamentos de 3 e 4 dormitórios de alto padrão no Urbanova?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Realizar primeiro contato no WhatsApp com dossiê de demanda do Urbanova",
+        proximo_passo_data: "2026-09-22",
+        notas: "Lead recente capturado no blog no artigo sobre expansão urbana no Urbanova.",
         historico: [
-          "Consulta Pirâmide Etária Colinas",
-          "Exportação Gráfico IBGE"
+          "Baixou E-book Demografia SJC",
+          "Preencheu Formulário de Decisão Comercial"
         ]
       },
       {
         id: 6,
-        empresa: "Restaurante Vila Ema Bistrô",
-        nome: "Rodrigo Mendonça",
-        cargo: "Proprietário",
-        setor: "Gastronomia",
-        bairro: "Vila Ema",
-        regiao: "Centro",
-        whatsapp: "12981998877",
-        email: "rodrigo@vilaemagourmet.com.br",
-        plano: "Starter",
-        mrr: 29.00,
-        stage: "churn",
-        status: "Cancelado",
-        data: "15/07/2026",
-        avatar: "RM",
-        avatarBg: "bg-rose-600",
-        notas: "Pausou temporariamente por reforma no salão. Retorno previsto para outubro.",
-        historico: [
-          "Solicitação de pausa temporária",
-          "Ticket de Suporte atendido"
-        ]
-      },
-      {
-        id: 7,
-        empresa: "Imobiliária Aquarius Prime",
-        nome: "Beatriz Castilho",
-        cargo: "Head de Novos Lançamentos",
-        setor: "Imobiliário & Construção",
-        bairro: "Jd. Aquarius",
-        regiao: "Zona Oeste",
-        whatsapp: "12996554433",
-        email: "beatriz@aquariusprime.com.br",
-        plano: "Vitalício",
-        mrr: 0.00,
-        stage: "ativo",
-        status: "Ativo",
-        data: "20/06/2026",
-        avatar: "BC",
-        avatarBg: "bg-cyan-600",
-        notas: "Assinante pioneira vitalícia. Utiliza relatórios de m² e vacância para captação.",
-        historico: [
-          "Pesquisa Bairros Mais Procurados",
-          "Relatório de Valorização M²"
-        ]
-      },
-      {
-        id: 8,
-        empresa: "Agência Vale Criativo",
-        nome: "Gabriel Vasconcelos",
-        cargo: "Diretor de Mídia",
-        setor: "Serviços & Consultoria",
-        bairro: "Jd. Satélite",
-        regiao: "Zona Sul",
-        whatsapp: "12988112233",
-        email: "gabriel@valecriativo.com.br",
-        plano: "Pro",
-        mrr: 49.00,
-        stage: "ativo",
-        status: "Ativo",
-        data: "14/09/2026",
-        avatar: "GV",
-        avatarBg: "bg-teal-600",
-        notas: "Usa inteligência geográfica para planejar campanhas locais para clientes de SJC.",
-        historico: [
-          "Consulta Mapa Geográfico",
-          "Geração de Relatório de Densidade"
-        ]
-      },
-      {
-        id: 9,
         empresa: "LogVale Transportes & Cargas",
         nome: "Roberto Siqueira",
         cargo: "Gerente de Operações",
+        papel_decisao: "Avaliador Técnico",
+        relacao_sjc: "Planejando entrar em SJC",
         setor: "Indústria & Logística",
         bairro: "Eugênio de Melo",
         regiao: "Zona Leste",
@@ -2230,41 +2392,29 @@
         data: "15/09/2026",
         avatar: "RS",
         avatarBg: "bg-amber-600",
+        tipo_decisao: "Abertura de Filial / Unidade",
+        projeto_nome: "Galpão Logístico Dutra Leste",
+        estagio_projeto: "Em Negociação / Seleção",
+        prazo_decisao: "30 a 60 dias",
+        faixa_valor: "R$ 500 mil a R$ 1 Milhão",
+        pergunta_principal: "Qual é a velocidade média e restrições de tráfego de caminhões pesados nos acessos à Dutra em Eugênio de Melo?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Enviar relatório técnico de zoneamento viário",
+        proximo_passo_data: "2026-09-19",
         notas: "Agendou demonstração técnica das rotas e zoneamento industrial via Dutra/Carvalho Pinto.",
         historico: [
           "Solicitou Demonstração pelo Site",
           "Acessou Dados de Infraestrutura Viária"
-        ]
-      },
-      {
-        id: 10,
-        empresa: "Construtora Vale Imperial",
-        nome: "Renata Fagundes",
-        cargo: "Diretora de Incorporação",
-        setor: "Imobiliário & Construção",
-        bairro: "Urbanova",
-        regiao: "Zona Oeste",
-        whatsapp: "12981776655",
-        email: "renata@valeimperial.com.br",
-        plano: "Enterprise",
-        mrr: 149.00,
-        stage: "lead",
-        status: "Pendente",
-        data: "16/09/2026",
-        avatar: "RF",
-        avatarBg: "bg-blue-500",
-        notas: "Lead recente capturado no blog no artigo sobre expansão urbana no Urbanova.",
-        historico: [
-          "Baixou E-book Demografia SJC",
-          "Preencheu Formulário de Parceria"
         ]
       }
     ];
 
     // Carrega do localStorage ou inicia com a base enriquecida
     let subscribers = [];
+    let customLeadFilter = null;
+
     try {
-      const stored = localStorage.getItem('radarsaojose_crm_subscribers_v2');
+      const stored = localStorage.getItem('radarsaojose_crm_subscribers_v3');
       if (stored) {
         subscribers = JSON.parse(stored);
       } else {
@@ -2278,10 +2428,12 @@
         if (!alreadyExists) {
           const initials = (inb.nome || 'L').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
           subscribers.unshift({
-            id: 1000 + idx,
+            id: 2000 + idx,
             empresa: inb.empresa_nome || `${inb.nome} (Pessoa Física)`,
             nome: inb.nome,
-            cargo: inb.cargo || inb.perfil,
+            cargo: inb.cargo || inb.perfil || 'Decisor',
+            papel_decisao: inb.perfil === 'empresario' ? 'Decisor Final' : (inb.perfil === 'gestor' ? 'Avaliador Técnico' : 'Usuário / Pesquisador'),
+            relacao_sjc: inb.cidade_mora ? `Mora em ${inb.cidade_mora}` : 'São José dos Campos',
             setor: inb.segmento || 'Consumidor / Pesquisa',
             bairro: inb.regiao_bairro || inb.cidade_mora || 'SJC',
             regiao: inb.regiao_bairro || 'São José dos Campos',
@@ -2289,28 +2441,37 @@
             email: inb.email,
             plano: inb.tem_decisao ? 'Enterprise' : 'Free / Pesquisa',
             mrr: inb.tem_decisao ? 149.00 : 0.00,
-            stage: inb.tem_decisao ? 'lead' : 'ativo',
-            status: inb.tem_decisao ? 'Pendente' : 'Ativo',
-            data: new Date(inb.created_at || Date.now()).toLocaleDateString('pt-BR'),
+            stage: 'lead',
+            status: 'Pendente',
+            data: 'Novo Inbound',
             avatar: initials,
             avatarBg: inb.tem_decisao ? 'bg-cyan-600' : 'bg-emerald-600',
-            notas: `[Pergunta Principal]: ${inb.pergunta_principal || 'N/A'}\n[Projeto]: ${inb.projeto_nome || 'N/A'} (${inb.estagio_projeto || 'N/A'})\n[Prazo]: ${inb.prazo_decisao || 'N/A'} | [Valor]: ${inb.faixa_valor || 'N/A'}`,
+            tipo_decisao: inb.tipo_decisao || (inb.tem_decisao ? 'Expansão Comercial' : 'Pesquisa de Opinião'),
+            projeto_nome: inb.projeto_nome || 'Projeto Mapeado Inbound',
+            estagio_projeto: inb.estagio_projeto || 'Em Estudo',
+            prazo_decisao: inb.prazo_decisao || '30 a 60 dias',
+            faixa_valor: inb.faixa_valor || 'R$ 50k a R$ 200k',
+            pergunta_principal: inb.pergunta_principal || 'Como os dados do Radar São José podem apoiar a tomada de decisão no mercado local?',
+            sla_prioridade: inb.tem_decisao ? 'Alta' : 'Normal',
+            proximo_passo: 'Realizar primeiro contato via WhatsApp com abordagem da pergunta sagrada',
+            proximo_passo_data: new Date().toISOString().split('T')[0],
+            notas: `[Pergunta Sagrada]: ${inb.pergunta_principal || 'N/A'}\n[Projeto]: ${inb.projeto_nome || 'N/A'}\n[Prazo]: ${inb.prazo_decisao || 'N/A'}`,
             historico: [
               `Formulário Inbound preenchido em ${new Date(inb.created_at || Date.now()).toLocaleDateString('pt-BR')}`,
-              inb.tem_decisao ? 'Sinal comercial ativo: Decisão declarada' : 'Cadastrado para pesquisa de mercado'
+              inb.tem_decisao ? 'Sinal comercial ativo: Decisão declarada com SLA Prioritário' : 'Cadastrado para pesquisa de mercado'
             ]
           });
         }
       });
 
-      localStorage.setItem('radarsaojose_crm_subscribers_v2', JSON.stringify(subscribers));
+      localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
     } catch (err) {
       subscribers = [...DEFAULT_SUBSCRIBERS];
     }
 
     function persistSubscribers() {
       try {
-        localStorage.setItem('radarsaojose_crm_subscribers_v2', JSON.stringify(subscribers));
+        localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
       } catch (err) {
         console.warn('Erro ao persistir no localStorage:', err);
       }
@@ -2341,20 +2502,38 @@
       renderCrm();
     }
 
+    function isStepOverdue(stepDate) {
+      if (!stepDate) return false;
+      const today = new Date().toISOString().split('T')[0];
+      return stepDate < today;
+    }
+
+    function getSlaBadge(sla, isOverdue = false) {
+      if (isOverdue) {
+        return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-black bg-rose-100 text-rose-800 border border-rose-300 animate-pulse"><i class="fa-solid fa-clock-rotate-left"></i> Atrasado</span>';
+      }
+      if (sla === 'Alta') {
+        return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-black bg-rose-50 text-rose-700 border border-rose-200"><i class="fa-solid fa-bolt text-rose-500"></i> Alta (15m)</span>';
+      }
+      if (sla === 'Média') {
+        return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-black bg-amber-50 text-amber-800 border border-amber-200"><i class="fa-solid fa-hourglass-half text-amber-600"></i> Média (1h)</span>';
+      }
+      return '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">Normal (4h)</span>';
+    }
+
     function getPlanBadge(plan) {
-      if (plan === 'Enterprise') return '<span class="px-2.5 py-0.5 rounded-md text-[11px] font-black bg-purple-100 text-purple-800 border border-purple-200">Enterprise</span>';
-      if (plan === 'Pro') return '<span class="px-2.5 py-0.5 rounded-md text-[11px] font-black bg-blue-100 text-blue-800 border border-blue-200">Pro Inteligência</span>';
-      if (plan === 'Vitalício') return '<span class="px-2.5 py-0.5 rounded-md text-[11px] font-black bg-cyan-100 text-cyan-800 border border-cyan-200">Vitalício</span>';
-      return '<span class="px-2.5 py-0.5 rounded-md text-[11px] font-black bg-slate-100 text-slate-700 border border-slate-200">Starter</span>';
+      if (plan === 'Enterprise') return '<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-purple-100 text-purple-800 border border-purple-200">Enterprise</span>';
+      if (plan === 'Pro') return '<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200">Pro</span>';
+      return '<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">Starter</span>';
     }
 
     function getStageBadge(stage) {
       const map = {
-        lead: '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Novo Lead</span>',
-        qualificacao: '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Qualificação</span>',
-        proposta: '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Proposta</span>',
-        ativo: '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Ativo (MRR)</span>',
-        churn: '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Em Risco / Churn</span>'
+        lead: '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200"><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>Novo Lead</span>',
+        qualificacao: '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Qualificação</span>',
+        proposta: '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Proposta</span>',
+        ativo: '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Ativo (MRR)</span>',
+        churn: '<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Churn</span>'
       };
       return map[stage] || map.ativo;
     }
@@ -2364,16 +2543,32 @@
       return digits.startsWith('55') ? digits : '55' + digits;
     }
 
-    function formatWhatsAppLink(phone, empresa, nome) {
-      const clean = formatWhatsAppNumber(phone);
-      const text = encodeURIComponent(`Olá ${nome || ''}, tudo bem? Sou da equipe executiva do Radar São José. Como estão as análises de inteligência da ${empresa || 'sua empresa'}?`);
+    function formatWhatsAppPitch(sub) {
+      const clean = formatWhatsAppNumber(sub.whatsapp);
+      const questionSnippet = sub.pergunta_principal ? `"${sub.pergunta_principal.substring(0, 60)}..."` : 'sua tomada de decisão';
+      const text = encodeURIComponent(`Olá ${sub.nome || ''}, tudo bem? Sou da equipe de inteligência do Radar São José. Analisamos a sua questão sobre ${questionSnippet} e separamos os dados de mercado de SJC para o seu projeto.`);
       return `https://wa.me/${clean}?text=${text}`;
+    }
+
+    function filterByLeadAlert(alertType) {
+      customLeadFilter = alertType;
+      const stageSelect = document.getElementById('stageFilter');
+      const slaSelect = document.getElementById('slaFilter');
+
+      if (alertType === 'new_leads') {
+        if (stageSelect) stageSelect.value = 'lead';
+        if (slaSelect) slaSelect.value = 'all';
+      } else if (alertType === 'overdue') {
+        if (slaSelect) slaSelect.value = 'overdue';
+        if (stageSelect) stageSelect.value = 'all';
+      }
+      renderCrm();
     }
 
     function getFilteredSubscribers() {
       const search = (document.getElementById('crmSearch')?.value || '').toLowerCase().trim();
       const stage = document.getElementById('stageFilter')?.value || 'all';
-      const plan = document.getElementById('planFilter')?.value || 'all';
+      const sla = document.getElementById('slaFilter')?.value || 'all';
       const neighborhood = document.getElementById('neighborhoodFilter')?.value || 'all';
 
       return subscribers.filter(sub => {
@@ -2382,22 +2577,25 @@
           (sub.nome && sub.nome.toLowerCase().includes(search)) ||
           (sub.email && sub.email.toLowerCase().includes(search)) ||
           (sub.bairro && sub.bairro.toLowerCase().includes(search)) ||
-          (sub.whatsapp && sub.whatsapp.includes(search));
+          (sub.pergunta_principal && sub.pergunta_principal.toLowerCase().includes(search)) ||
+          (sub.projeto_nome && sub.projeto_nome.toLowerCase().includes(search));
 
         const matchesStage = stage === 'all' || sub.stage === stage;
-        const matchesPlan = plan === 'all' || sub.plano === plan;
+        const isOverdue = isStepOverdue(sub.proximo_passo_data);
+        const matchesSla = sla === 'all' || (sla === 'overdue' ? isOverdue : sub.sla_prioridade === sla);
         const matchesNeighborhood = neighborhood === 'all' || (sub.bairro && sub.bairro.includes(neighborhood));
 
-        return matchesSearch && matchesStage && matchesPlan && matchesNeighborhood;
+        return matchesSearch && matchesStage && matchesSla && matchesNeighborhood;
       });
     }
 
     function handleCrmFilter() {
+      customLeadFilter = null;
       renderCrm();
     }
 
     function renderCrm() {
-      updateCrmKpis();
+      updateCrmKpisAndAlerts();
       if (currentCrmView === 'table') {
         renderCrmTable();
       } else {
@@ -2405,17 +2603,62 @@
       }
     }
 
-    function updateCrmKpis() {
+    function updateCrmKpisAndAlerts() {
       const activeSubs = subscribers.filter(s => s.stage === 'ativo');
       const totalMrr = subscribers
         .filter(s => s.stage === 'ativo')
         .reduce((sum, s) => sum + (parseFloat(s.mrr) || 0), 0);
 
+      const newLeads = subscribers.filter(s => s.stage === 'lead');
+      const overdueItems = subscribers.filter(s => isStepOverdue(s.proximo_passo_data) && s.stage !== 'churn' && s.stage !== 'ativo');
+
+      // KPIs
       const kpiActive = document.getElementById('kpiActiveSubs');
       if (kpiActive) kpiActive.innerText = activeSubs.length.toLocaleString('pt-BR');
 
       const kpiMrr = document.getElementById('kpiTotalMrr');
       if (kpiMrr) kpiMrr.innerText = 'R$ ' + totalMrr.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+      const kpiNewLeads = document.getElementById('kpiNewLeadsCount');
+      if (kpiNewLeads) kpiNewLeads.innerText = newLeads.length;
+
+      const kpiOverdue = document.getElementById('kpiOverdueCount');
+      if (kpiOverdue) kpiOverdue.innerText = overdueItems.length;
+
+      // Alertas Visuais no Topo
+      const alertNewLeadsBanner = document.getElementById('alertNewLeadsBanner');
+      const alertNewLeadsCount = document.getElementById('alertNewLeadsCount');
+      if (alertNewLeadsBanner && alertNewLeadsCount) {
+        if (newLeads.length > 0) {
+          alertNewLeadsBanner.classList.remove('hidden');
+          alertNewLeadsCount.innerText = `${newLeads.length} novos`;
+        } else {
+          alertNewLeadsBanner.classList.add('hidden');
+        }
+      }
+
+      const alertOverdueBanner = document.getElementById('alertOverdueSlaBanner');
+      const alertOverdueCount = document.getElementById('alertOverdueCount');
+      if (alertOverdueBanner && alertOverdueCount) {
+        if (overdueItems.length > 0) {
+          alertOverdueBanner.classList.remove('hidden');
+          alertOverdueCount.innerText = `${overdueItems.length} pendentes`;
+        } else {
+          alertOverdueBanner.classList.add('hidden');
+        }
+      }
+
+      // Badge no Menu Lateral
+      const sidebarBadge = document.getElementById('sidebarLeadAlertBadge');
+      if (sidebarBadge) {
+        const totalAlerts = newLeads.length + overdueItems.length;
+        if (totalAlerts > 0) {
+          sidebarBadge.classList.remove('hidden');
+          sidebarBadge.innerText = totalAlerts;
+        } else {
+          sidebarBadge.classList.add('hidden');
+        }
+      }
     }
 
     function renderCrmTable() {
@@ -2430,17 +2673,19 @@
       if (!tbody) return;
 
       if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-12 text-center text-slate-400 font-semibold"><i class="fa-solid fa-magnifying-glass text-2xl text-slate-300 block mb-2"></i>Nenhum lead ou assinante encontrado para os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="py-12 text-center text-slate-400 font-semibold"><i class="fa-solid fa-magnifying-glass text-2xl text-slate-300 block mb-2"></i>Nenhum registro encontrado para os filtros selecionados.</td></tr>';
         return;
       }
 
       tbody.innerHTML = filtered.map(sub => {
-        const waLink = formatWhatsAppLink(sub.whatsapp, sub.empresa, sub.nome);
-        const mrrFormatted = parseFloat(sub.mrr || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const waLink = formatWhatsAppPitch(sub);
+        const isOverdue = isStepOverdue(sub.proximo_passo_data);
+        const questionText = sub.pergunta_principal || 'Sem pergunta informada.';
+        const shortQuestion = questionText.length > 65 ? questionText.substring(0, 62) + '...' : questionText;
 
         return `
           <tr class="hover:bg-slate-50/80 transition-colors">
-            <!-- Empresa & Contato -->
+            <!-- Empresa & Decisor -->
             <td class="py-4 px-6">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl ${sub.avatarBg || 'bg-blue-600'} text-white flex items-center justify-center font-black text-xs shadow-xs shrink-0">
@@ -2450,39 +2695,61 @@
                   <button onclick="openCustomerDetails(${sub.id})" class="font-extrabold text-slate-900 hover:text-cyan-600 text-left transition-colors text-sm flex items-center gap-1.5">
                     <span>${sub.empresa}</span>
                   </button>
-                  <div class="text-[11px] text-slate-500 font-medium">${sub.nome} ${sub.cargo ? '• ' + sub.cargo : ''}</div>
-                  <span class="inline-block text-[9px] font-bold text-slate-400 uppercase tracking-wider">${sub.setor || 'Geral'}</span>
+                  <div class="text-[11px] text-slate-600 font-semibold mt-0.5">
+                    ${sub.nome} <span class="text-slate-400 font-normal">• ${sub.cargo || 'Contato'}</span>
+                  </div>
+                  <span class="inline-block mt-0.5 px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider bg-slate-100 text-cyan-800">
+                    ${sub.papel_decisao || 'Decisor'}
+                  </span>
                 </div>
               </div>
             </td>
 
-            <!-- Localização / Bairro -->
+            <!-- Decisão, Projeto & Bairro -->
             <td class="py-4 px-6">
-              <div class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                <i class="fa-solid fa-location-dot text-cyan-600 text-[11px]"></i>
-                <span>${sub.bairro || 'São José dos Campos'}</span>
+              <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5">
+                <span class="px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 text-[10px] font-black">${sub.tipo_decisao || 'Decisão'}</span>
               </div>
-              <div class="text-[10px] text-slate-400 font-semibold">${sub.regiao || 'São José dos Campos'}</div>
+              <div class="text-xs font-bold text-slate-700 mt-1">${sub.projeto_nome || 'Projeto SJC'}</div>
+              <div class="text-[10px] text-slate-400 font-semibold mt-0.5 flex items-center gap-1">
+                <i class="fa-solid fa-location-dot text-cyan-600"></i> ${sub.bairro || 'SJC'} (${sub.regiao || 'São José'})
+              </div>
+            </td>
+
+            <!-- Pergunta Principal Intocável -->
+            <td class="py-4 px-6 max-w-xs">
+              <div class="p-2.5 bg-amber-50/70 border border-amber-200/80 rounded-xl cursor-pointer hover:bg-amber-100/70 transition-colors" onclick="openCustomerDetails(${sub.id})" title="Clique para ver a ficha completa com a pergunta sagrada">
+                <div class="flex items-center gap-1 text-[9px] font-black uppercase text-amber-800 mb-1">
+                  <i class="fa-solid fa-lock text-amber-600"></i> Pergunta Declarada
+                </div>
+                <p class="text-[11px] text-slate-800 font-semibold leading-snug line-clamp-2">
+                  "${shortQuestion}"
+                </p>
+              </div>
+            </td>
+
+            <!-- SLA & Próximo Passo -->
+            <td class="py-4 px-6">
+              <div>${getSlaBadge(sub.sla_prioridade, isOverdue)}</div>
+              <div class="text-[11px] text-slate-700 font-medium mt-1.5 max-w-[180px] leading-tight">
+                ${sub.proximo_passo || 'Aguardando definição'}
+              </div>
+              <div class="text-[10px] text-slate-400 font-mono mt-1">
+                Prazo: ${sub.proximo_passo_data ? new Date(sub.proximo_passo_data + 'T12:00:00').toLocaleDateString('pt-BR') : 'N/A'}
+              </div>
             </td>
 
             <!-- Contato Rápido -->
             <td class="py-4 px-6">
               <div class="flex items-center gap-2">
-                <a href="${waLink}" target="_blank" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs border border-emerald-200 transition-colors shadow-2xs" title="Conversar no WhatsApp">
-                  <i class="fa-brands fa-whatsapp text-sm text-emerald-600"></i>
+                <a href="${waLink}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-xs transition-colors" title="Conversar no WhatsApp com Pitch da Pergunta">
+                  <i class="fa-brands fa-whatsapp text-sm"></i>
                   <span>WhatsApp</span>
                 </a>
                 <a href="mailto:${sub.email}" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Enviar E-mail">
                   <i class="fa-regular fa-envelope text-sm"></i>
                 </a>
               </div>
-              <div class="text-[10px] text-slate-400 font-mono mt-1">${sub.whatsapp || ''}</div>
-            </td>
-
-            <!-- Plano & MRR -->
-            <td class="py-4 px-6">
-              <div>${getPlanBadge(sub.plano)}</div>
-              <div class="text-xs font-extrabold text-slate-900 mt-1 font-mono">${mrrFormatted}<span class="text-[10px] text-slate-400 font-normal">/mês</span></div>
             </td>
 
             <!-- Etapa do Funil -->
@@ -2490,15 +2757,10 @@
               ${getStageBadge(sub.stage)}
             </td>
 
-            <!-- Data -->
-            <td class="py-4 px-6 text-slate-500 font-medium text-xs">
-              ${sub.data || 'Recente'}
-            </td>
-
             <!-- Ações -->
             <td class="py-4 px-6 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <button onclick="openCustomerDetails(${sub.id})" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-[#0B2545] hover:text-white text-slate-700 text-xs font-bold transition-all shadow-2xs" title="Ver Ficha Completa">
+                <button onclick="openCustomerDetails(${sub.id})" class="px-3 py-1.5 rounded-lg bg-[#0B2545] hover:bg-[#07172C] text-white text-xs font-bold transition-all shadow-2xs" title="Ver Ficha Completa do Lead">
                   <i class="fa-solid fa-address-card mr-1"></i> Ficha
                 </button>
                 <div class="relative inline-block text-left">
@@ -2543,8 +2805,8 @@
         }
 
         colList.innerHTML = items.map(sub => {
-          const waLink = formatWhatsAppLink(sub.whatsapp, sub.empresa, sub.nome);
-          const mrrFormatted = parseFloat(sub.mrr || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+          const waLink = formatWhatsAppPitch(sub);
+          const isOverdue = isStepOverdue(sub.proximo_passo_data);
 
           return `
             <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-2xs hover:shadow-md transition-all space-y-2.5">
@@ -2557,15 +2819,19 @@
                     ${sub.empresa}
                   </button>
                 </div>
-                ${getPlanBadge(sub.plano)}
+                ${getSlaBadge(sub.sla_prioridade, isOverdue)}
               </div>
 
-              <div class="text-[11px] text-slate-500 font-medium">
-                ${sub.nome} • <span class="text-cyan-700 font-semibold">${sub.bairro || 'SJC'}</span>
+              <div class="text-[11px] text-slate-600 font-medium">
+                ${sub.nome} • <span class="text-cyan-700 font-bold">${sub.bairro || 'SJC'}</span>
+              </div>
+
+              <div class="p-2 bg-amber-50 rounded-lg text-[10px] font-semibold text-amber-950 line-clamp-2">
+                <i class="fa-solid fa-lock text-amber-600 mr-1"></i> "${sub.pergunta_principal || 'N/A'}"
               </div>
 
               <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span class="font-black text-slate-900 font-mono">${mrrFormatted}</span>
+                <span class="font-extrabold text-slate-900 text-[11px]">${sub.tipo_decisao || 'Comercial'}</span>
                 <div class="flex items-center gap-1">
                   <a href="${waLink}" target="_blank" class="p-1.5 rounded-lg text-emerald-600 hover:bg-emerald-50 transition-colors" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
@@ -2597,6 +2863,9 @@
         if (sub.stage === 'ativo') sub.status = 'Ativo';
         else if (sub.stage === 'churn') sub.status = 'Cancelado';
         else sub.status = 'Pendente';
+
+        sub.historico = sub.historico || [];
+        sub.historico.unshift(`Etapa alterada para ${sub.stage.toUpperCase()} em ${new Date().toLocaleDateString('pt-BR')}`);
 
         persistSubscribers();
         showToast(`Etapa atualizada para "${sub.stage.toUpperCase()}"`);
@@ -2632,14 +2901,23 @@
       e.preventDefault();
       const empresa = document.getElementById('modalEmpresa').value.trim();
       const nome = document.getElementById('modalNome').value.trim();
+      const cargo = document.getElementById('modalCargo').value.trim() || 'Decisor Comercial';
+      const papel_decisao = document.getElementById('modalPapelDecisao').value;
+      const relacao_sjc = document.getElementById('modalRelacaoSjc').value;
       const whatsapp = document.getElementById('modalWhatsapp').value.trim();
       const email = document.getElementById('modalEmail').value.trim();
+      const tipo_decisao = document.getElementById('modalTipoDecisao').value;
+      const projeto_nome = document.getElementById('modalProjetoNome').value.trim() || 'Projeto Expansão SJC';
+      const estagio_projeto = document.getElementById('modalEstagioProjeto').value;
       const bairro = document.getElementById('modalBairro').value;
-      const setor = document.getElementById('modalSetor').value;
-      const plano = document.getElementById('modalPlano').value;
+      const prazo_decisao = document.getElementById('modalPrazo').value;
+      const faixa_valor = document.getElementById('modalFaixaValor').value;
+      const pergunta_principal = document.getElementById('modalPerguntaPrincipal').value.trim() || 'Como os dados de inteligência podem respaldar essa expansão?';
       const stage = document.getElementById('modalStage').value;
-      const mrr = parseFloat(document.getElementById('modalMrr').value) || 0;
-      const notas = document.getElementById('modalNotas').value.trim();
+      const sla_prioridade = document.getElementById('modalSlaPrioridade').value;
+      const plano = document.getElementById('modalPlano').value;
+      const mrr = parseFloat(document.getElementById('modalMrr').value) || 49.00;
+      const proximo_passo = document.getElementById('modalProximoPasso').value.trim() || 'Entrar em contato via WhatsApp com estudo preliminar';
 
       const initials = (empresa || nome).split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
@@ -2654,12 +2932,23 @@
         id: Date.now(),
         empresa,
         nome,
-        cargo: "Decisor Comercial",
-        setor,
+        cargo,
+        papel_decisao,
+        relacao_sjc,
+        setor: "Corporativo B2B",
         bairro,
         regiao,
         whatsapp,
         email,
+        tipo_decisao,
+        projeto_nome,
+        estagio_projeto,
+        prazo_decisao,
+        faixa_valor,
+        pergunta_principal,
+        sla_prioridade,
+        proximo_passo,
+        proximo_passo_data: new Date().toISOString().split('T')[0],
         plano,
         mrr,
         stage,
@@ -2667,15 +2956,15 @@
         data: "Hoje",
         avatar: initials,
         avatarBg: "bg-[#0B2545]",
-        notas: notas || "Novo contato cadastrado no CRM.",
-        historico: ["Cadastro registrado no CRM Comercial"]
+        notas: `[Pergunta Sagrada]: ${pergunta_principal}`,
+        historico: ["Cadastro registrado no CRM Comercial B2B"]
       };
 
       subscribers.unshift(newSub);
       persistSubscribers();
       closeModal();
       e.target.reset();
-      showToast("Novo registro corporativo cadastrado com sucesso!");
+      showToast("Novo lead corporativo cadastrado com sucesso!");
     }
 
     function deleteSubscriber(id) {
@@ -2686,42 +2975,51 @@
       }
     }
 
-    // Modal Ficha Completa do Cliente
+    // Modal Ficha Completa do Cliente & Decisão
     function openCustomerDetails(id) {
       const sub = subscribers.find(s => s.id === id);
       if (!sub) return;
 
       selectedCustomerId = id;
       document.getElementById('custModalAvatar').innerText = sub.avatar || 'SJ';
-      document.getElementById('custModalAvatar').className = `w-14 h-14 rounded-2xl ${sub.avatarBg || 'bg-cyan-500'} text-white font-black text-xl flex items-center justify-center shadow-md`;
+      document.getElementById('custModalAvatar').className = `w-14 h-14 rounded-2xl ${sub.avatarBg || 'bg-cyan-500'} text-white font-black text-xl flex items-center justify-center shadow-md shrink-0`;
       document.getElementById('custModalEmpresa').innerText = sub.empresa;
-      document.getElementById('custModalContato').innerText = `${sub.nome} • ${sub.cargo || 'Contato'}`;
+      document.getElementById('custModalContato').innerText = `${sub.nome} • ${sub.cargo || 'Contato'} • ${sub.papel_decisao || 'Decisor'}`;
       document.getElementById('custModalBairro').innerHTML = `<i class="fa-solid fa-location-dot mr-1"></i>${sub.bairro || 'SJC'} (${sub.regiao || 'São José dos Campos'})`;
       
       document.getElementById('custModalPlanBadge').innerHTML = getPlanBadge(sub.plano);
       document.getElementById('custModalStageBadge').innerHTML = getStageBadge(sub.stage);
 
+      const isOverdue = isStepOverdue(sub.proximo_passo_data);
+      document.getElementById('custModalSlaBadge').innerHTML = getSlaBadge(sub.sla_prioridade, isOverdue);
+
+      // Pergunta Principal Sagrada
+      document.getElementById('custModalPerguntaPrincipal').innerText = `"${sub.pergunta_principal || 'Como os dados do Radar São José podem apoiar a tomada de decisão no mercado local?'}"`;
+
+      // Diagnóstico da Decisão
+      document.getElementById('custModalTipoDecisao').innerText = sub.tipo_decisao || 'Expansão';
+      document.getElementById('custModalProjetoNome').innerText = sub.projeto_nome || 'Projeto Mapeado';
+      document.getElementById('custModalEstagioProjeto').innerText = sub.estagio_projeto || 'Em Estudo';
+      document.getElementById('custModalPrazoValor').innerText = `${sub.prazo_decisao || '30-60 dias'} • ${sub.faixa_valor || 'R$ 50k-200k'}`;
+
+      // Contatos
       document.getElementById('custModalWhatsapp').innerText = sub.whatsapp || 'Não informado';
-      const waLink = formatWhatsAppLink(sub.whatsapp, sub.empresa, sub.nome);
+      document.getElementById('custModalPapelBadge').innerText = sub.papel_decisao || 'Decisor Final';
+      const waLink = formatWhatsAppPitch(sub);
       document.getElementById('custModalWaLink').href = waLink;
 
       document.getElementById('custModalEmail').innerText = sub.email;
       document.getElementById('custModalEmailLink').href = 'mailto:' + sub.email;
 
-      const mrrFormatted = parseFloat(sub.mrr || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      document.getElementById('custModalMrr').innerText = mrrFormatted;
-      document.getElementById('custModalData').innerText = sub.data || 'Recente';
-      document.getElementById('custModalSetor').innerText = sub.setor || 'Corporativo';
+      // SLA & Próximo Passo
+      const slaStatusEl = document.getElementById('custModalSlaStatusPill');
+      if (slaStatusEl) {
+        slaStatusEl.className = isOverdue ? 'text-[10px] font-black px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 animate-pulse' : 'text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800';
+        slaStatusEl.innerText = isOverdue ? '⚠️ SLA Vencido' : 'No Prazo';
+      }
 
-      // Histórico
-      const histEl = document.getElementById('custModalHistorico');
-      const histItems = sub.historico && sub.historico.length ? sub.historico : ['Acesso à plataforma Radar São José'];
-      histEl.innerHTML = histItems.map(item => `
-        <div class="flex items-center gap-2.5 p-2.5 bg-slate-50 rounded-xl border border-slate-200/80 text-xs text-slate-700">
-          <i class="fa-solid fa-check text-cyan-600 text-[11px]"></i>
-          <span>${item}</span>
-        </div>
-      `).join('');
+      document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo || 'Nenhum próximo passo agendado.';
+      document.getElementById('custModalNextStepInput').value = '';
 
       // Notas
       document.getElementById('custModalNotas').innerText = sub.notas || 'Sem anotações no momento.';
@@ -2735,6 +3033,25 @@
       selectedCustomerId = null;
     }
 
+    function updateCustomerNextStep() {
+      if (!selectedCustomerId) return;
+      const sub = subscribers.find(s => s.id === selectedCustomerId);
+      const input = document.getElementById('custModalNextStepInput');
+      const text = input ? input.value.trim() : '';
+      if (!sub || !text) return;
+
+      sub.proximo_passo = text;
+      // Atualiza data do próximo passo para hoje
+      sub.proximo_passo_data = new Date().toISOString().split('T')[0];
+      sub.historico = sub.historico || [];
+      sub.historico.unshift(`Próximo passo atualizado: ${text} em ${new Date().toLocaleDateString('pt-BR')}`);
+
+      persistSubscribers();
+      document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo;
+      input.value = '';
+      showToast("Próximo passo atualizado com sucesso!");
+    }
+
     function saveCustomerNote() {
       if (!selectedCustomerId) return;
       const sub = subscribers.find(s => s.id === selectedCustomerId);
@@ -2746,7 +3063,7 @@
       const formattedNote = `[${dateStr}] ${text}`;
       sub.notas = sub.notas ? `${sub.notas} | ${formattedNote}` : formattedNote;
       sub.historico = sub.historico || [];
-      sub.historico.unshift(`Anotação adicionada: ${text}`);
+      sub.historico.unshift(`Anotação: ${text}`);
 
       persistSubscribers();
       document.getElementById('custModalNotas').innerText = sub.notas;
@@ -2765,17 +3082,17 @@
     }
 
     function exportCSV() {
-      let csv = "ID,Empresa,Contato,Telefone,Email,Bairro,Regiao,Setor,Plano,MRR,Etapa,Data\n";
+      let csv = "ID,Empresa,Contato,Papel,Telefone,Email,Bairro,Regiao,TipoDecisao,Projeto,PerguntaPrincipal,Plano,MRR,Etapa,SLA\n";
       subscribers.forEach(s => {
-        csv += `${s.id},"${s.empresa || ''}","${s.nome || ''}","${s.whatsapp || ''}","${s.email || ''}","${s.bairro || ''}","${s.regiao || ''}","${s.setor || ''}","${s.plano || ''}",${s.mrr || 0},"${s.stage || ''}","${s.data || ''}"\n`;
+        csv += `${s.id},"${s.empresa || ''}","${s.nome || ''}","${s.papel_decisao || ''}","${s.whatsapp || ''}","${s.email || ''}","${s.bairro || ''}","${s.regiao || ''}","${s.tipo_decisao || ''}","${s.projeto_nome || ''}","${(s.pergunta_principal || '').replace(/"/g, '""')}",${s.plano || ''},${s.mrr || 0},"${s.stage || ''}","${s.sla_prioridade || ''}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "crm_assinantes_radar_sao_jose.csv";
+      link.download = "crm_decisoes_radar_sao_jose.csv";
       link.click();
-      showToast("Relatório CSV de clientes exportado!");
+      showToast("Relatório CSV de decisões e clientes exportado!");
     }
 
     // Inicialização de Menu Mobile
