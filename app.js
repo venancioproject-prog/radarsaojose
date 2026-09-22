@@ -117,12 +117,49 @@ window.switchMainTab = function(tabName) {
     if (midiaView) { midiaView.classList.remove("hidden"); activeView = midiaView; }
     if (midiaFiltersContainer) midiaFiltersContainer.classList.remove("hidden");
     if (btnMidia) btnMidia.className = activeBtnClass;
-    
     if (typeof window.onSwitchToMidiaTab === "function") {
       window.onSwitchToMidiaTab();
-    } else {
-      const loadingState = document.getElementById("midia-loading-state");
-      const dashboardContent = document.getElementById("midia-dashboard-content");
+    }
+  } else if (tabName === "report") {
+    if (reportView) { reportView.classList.remove("hidden"); activeView = reportView; }
+    if (reportIndex) reportIndex.classList.remove("hidden");
+    if (btnReport) btnReport.className = activeBtnClass;
+    if (typeof renderExecutiveReport === "function") {
+      renderExecutiveReport(typeof allSurveyRecords !== 'undefined' && allSurveyRecords.length ? allSurveyRecords : (window.FALLBACK_SURVEY_RECORDS || []));
+    }
+  } else if (tabName === "ibge") {
+    if (ibgeView) { ibgeView.classList.remove("hidden"); activeView = ibgeView; }
+    if (ibgeFiltersContainer) ibgeFiltersContainer.classList.remove("hidden");
+    if (btnIbge) btnIbge.className = activeBtnClass;
+  } else if (tabName === "image-bank") {
+    if (imageBankView) { imageBankView.classList.remove("hidden"); activeView = imageBankView; }
+    if (imageBankFiltersContainer) imageBankFiltersContainer.classList.remove("hidden");
+    if (btnImageBank) btnImageBank.className = activeBtnClass;
+    if (typeof renderImageBank === "function") {
+      renderImageBank();
+    }
+  } else if (tabName === "historia") {
+    if (historiaView) { historiaView.classList.remove("hidden"); activeView = historiaView; }
+    if (historiaFiltersContainer) historiaFiltersContainer.classList.remove("hidden");
+    if (btnHistoria) btnHistoria.className = activeBtnClass;
+    if (typeof window.renderHistoriaDashboard === "function") {
+      window.renderHistoriaDashboard();
+    }
+  } else if (tabName === "personas") {
+    if (personasView) { personasView.classList.remove("hidden"); activeView = personasView; }
+    if (personasFiltersContainer) personasFiltersContainer.classList.remove("hidden");
+    if (btnPersonas) btnPersonas.className = activeBtnClass;
+    if (typeof window.renderPersonasDashboard === "function") {
+      window.renderPersonasDashboard();
+    }
+  } else {
+    // Default: dashboard
+    if (dashboardView) { dashboardView.classList.remove("hidden"); activeView = dashboardView; }
+    if (filtersContainer) filtersContainer.classList.remove("hidden");
+    if (btnDashboard) btnDashboard.className = activeBtnClass;
+  }
+
+  if (activeView) {
     void activeView.offsetWidth; // trigger reflow
     activeView.classList.add("animate-in", "fade-in");
   }
@@ -1199,7 +1236,10 @@ async function checkActiveSession() {
 // 5. AUTENTICAÇÃO
 // ==========================================
 async function handleLogin(e) {
-  if (e && e.preventDefault) e.preventDefault();
+  if (e) {
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+  }
   hideLoginAlert();
 
   const email = (document.getElementById("email")?.value || emailInput?.value || "").trim();
@@ -1207,7 +1247,7 @@ async function handleLogin(e) {
 
   if (!email || !password) {
     showLoginAlert("Por favor, preencha todos os campos.", "error");
-    return;
+    return false;
   }
 
   setLoginLoading(true);
@@ -1218,13 +1258,13 @@ async function handleLogin(e) {
     localStorage.setItem("userName", "Admin Master");
     localStorage.setItem("userEmail", email);
     window.location.href = "admin-crm.html";
-    return;
+    return false;
   } else if (email.toLowerCase().includes("vendedor")) {
     localStorage.setItem("userRole", "vendedor");
     localStorage.setItem("userName", "Lucas Vendedor");
     localStorage.setItem("userEmail", email);
     window.location.href = "painel-afiliado.html";
-    return;
+    return false;
   }
 
   let loggedInUser = null;
@@ -1248,6 +1288,7 @@ async function handleLogin(e) {
 
   setLoginLoading(false);
   showDashboard(loggedInUser || { email, user_metadata: { full_name: userName } });
+  return false;
 }
 
 async function handleLogout() {
