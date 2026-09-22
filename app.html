@@ -401,8 +401,8 @@
     <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-brand-950/75 pointer-events-none"></div>
 
     <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100/20 p-8 sm:p-10 relative z-10 backdrop-blur-lg">
-      <div class="text-center mb-8">
-        <div class="inline-flex items-center justify-center mb-4">
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center mb-3">
           <!-- Logo Oficial Radar São José -->
           <img 
             src="fotos_radar/logo_login_oficial.png?v=3" 
@@ -415,9 +415,58 @@
         <p class="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Inteligência & Análise 2026/2027</p>
       </div>
 
+      <!-- Abas Limpas: Entrar vs Novo Usuário -->
+      <div class="flex p-1 bg-slate-100 rounded-xl mb-5 text-xs font-bold uppercase tracking-wider">
+        <button type="button" id="appTabEntrarBtn" onclick="setAppAuthMode('login')" class="flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all">
+          Entrar
+        </button>
+        <button type="button" id="appTabNovoBtn" onclick="setAppAuthMode('register')" class="flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all">
+          Novo Usuário
+        </button>
+      </div>
+
+      <!-- Botão Oficial: Entrar com o Google -->
+      <div class="mb-5">
+        <button type="button" onclick="loginWithGoogleApp()" class="w-full py-3 px-4 bg-white hover:bg-slate-50 active:scale-[0.99] text-slate-700 font-bold rounded-xl text-xs uppercase tracking-wider border border-slate-300 shadow-xs hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-3">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span id="appGoogleBtnLabel">Entrar com o Google</span>
+        </button>
+
+        <div class="relative flex items-center justify-center my-4">
+          <div class="border-t border-slate-200 w-full"></div>
+          <span class="bg-white px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 absolute">
+            ou preencha os dados
+          </span>
+        </div>
+      </div>
+
       <div id="login-error-alert" class="hidden mb-6 p-4 rounded-xl text-xs font-semibold border transition-all"></div>
 
       <form id="login-form" class="space-y-4" onsubmit="event.preventDefault();">
+        
+        <!-- Campo Nome (Novo Usuário) -->
+        <div id="app-field-nome" class="hidden">
+          <label for="nome_cadastro" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+            Nome Completo
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <input 
+              type="text" 
+              id="nome_cadastro" 
+              placeholder="Seu nome completo" 
+              class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+            />
+          </div>
+        </div>
+
         <div>
           <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
             E-mail Institucional
@@ -1338,7 +1387,7 @@
                 <!-- NAVEGAÇÃO DE MÓDULOS (Top Nav 8 Colunas - Cores Atualizadas) -->
                 <!-- NAVEGAÇÃO DE MÓDULOS (Top Nav 8 Colunas - Cinza Elegante + Pop-ups Tooltips no Hover) -->
         <nav id="global-module-nav" class="w-full sticky top-20 z-40 bg-slate-50/95 backdrop-blur-md py-2.5 px-3 sm:px-4 lg:px-6 border-b border-slate-200/80 shadow-xs">
-          <div class="max-w-7xl mx-auto grid grid-cols-8 gap-1 sm:gap-1.5 py-0.5 relative">
+          <div class="max-w-7xl mx-auto grid grid-cols-6 gap-1.5 sm:gap-2 py-0.5 relative">
             
             <!-- 1. Report Pesquisa -->
             <div class="relative group flex justify-center">
@@ -1351,12 +1400,12 @@
                 title="Relatório executivo & Dossiê completo da pesquisa"
                 class="nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 shadow-2xs cursor-pointer text-center leading-tight whitespace-nowrap"
               >
-                <i class="fa-solid fa-file-lines text-blue-900 text-xs sm:text-sm shrink-0 group-hover:scale-110 transition-transform"></i>
+                <i class="fa-solid fa-file-invoice text-indigo-600 text-xs sm:text-sm shrink-0 group-hover:scale-110 transition-transform"></i>
                 <span class="truncate">Report Pesquisa</span>
               </button>
               <!-- Popup Tooltip Box -->
               <div class="opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none absolute -bottom-11 left-1/2 -translate-x-1/2 z-50 px-3 py-1.5 bg-slate-900 text-white text-[11px] font-semibold rounded-xl shadow-2xl border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
                 <span>Relatório executivo & Dossiê completo da pesquisa</span>
               </div>
             </div>
@@ -1418,45 +1467,7 @@
               </div>
             </div>
 
-            <!-- 5. Radar DNA -->
-            <div class="relative group flex justify-center">
-              <button 
-                type="button" 
-                id="btn-nav-personas" 
-                onclick="window.switchMainTab('personas')" 
-                title="60 Personas e arquétipos comportamentais de SJC"
-                class="nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 shadow-2xs cursor-pointer text-center leading-tight whitespace-nowrap"
-              >
-                <i class="fa-solid fa-users-viewfinder text-emerald-500 text-xs sm:text-sm shrink-0 group-hover:scale-110 transition-transform"></i>
-                <span class="truncate">Oráculo RDR</span>
-              </button>
-              <!-- Popup Tooltip Box -->
-              <div class="opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none absolute -bottom-11 left-1/2 -translate-x-1/2 z-50 px-3 py-1.5 bg-slate-900 text-white text-[11px] font-semibold rounded-xl shadow-2xl border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                <span>60 Personas e arquétipos comportamentais de SJC</span>
-              </div>
-            </div>
-
-            <!-- 6. Consultor IA -->
-            <div class="relative group flex justify-center">
-              <button 
-                type="button" 
-                id="btn-nav-consultor" 
-                onclick="window.switchMainTab('ai-report')" 
-                title="Auditoria e diagnósticos estratégicos com IA"
-                class="nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 shadow-2xs cursor-pointer text-center leading-tight whitespace-nowrap"
-              >
-                <i class="fa-solid fa-wand-magic-sparkles text-orange-500 text-xs sm:text-sm shrink-0 group-hover:scale-110 transition-transform"></i>
-                <span class="truncate">Consultor IA</span>
-              </button>
-              <!-- Popup Tooltip Box -->
-              <div class="opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none absolute -bottom-11 left-1/2 -translate-x-1/2 z-50 px-3 py-1.5 bg-slate-900 text-white text-[11px] font-semibold rounded-xl shadow-2xl border border-slate-700 whitespace-nowrap flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-                <span>Auditoria e diagnósticos estratégicos com IA</span>
-              </div>
-            </div>
-
-            <!-- 7. Linha do Tempo -->
+            <!-- 5. Linha do Tempo -->
             <div class="relative group flex justify-center">
               <button 
                 type="button" 
@@ -10771,7 +10782,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
           </div>
         </div>
 
-        <!-- 3. O RIO HORIZONTAL DA MEMÓRIA (CANVAS EXPANDIDO: H=930px PARA VISUALIZAÇÃO TOTAL DOS CARDS) -->
+        <!-- 3. O RIO HORIZONTAL DA MEMÓRIA (CANVAS EXPANDIDO: H=525px) -->
         <div class="relative w-full rounded-3xl bg-[#F4F7F9] border border-slate-200/80 shadow-md overflow-hidden p-3 sm:p-4">
           
           <!-- Banner Superior de Instrução e Geografia do Rio -->
@@ -10812,76 +10823,115 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
               <i class="fa-solid fa-chevron-right"></i>
             </button>
 
-            <div id="historia-river-viewport"  class="relative w-full h-[525px] overflow-x-auto overflow-y-hidden rounded-2xl bg-[#F4F7F9] select-none scroll-smooth">
-            <div id="historia-river-track" class="relative h-full" style="min-width: 17200px;">
-              
-              <!-- SVG do Rio: Gradiente Marrom Claro + Margens Irregulares e Bancos de Areia -->
-              <svg id="historia-river-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <!-- Gradiente do Rio Marrom Claro (Águas Barrentas do Paraíba) -->
-                  <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#b88a58" />
-                    <stop offset="15%" stop-color="#a87c4a" />
-                    <stop offset="35%" stop-color="#c49764" />
-                    <stop offset="55%" stop-color="#ad8151" />
-                    <stop offset="75%" stop-color="#9a6e3d" />
-                    <stop offset="90%" stop-color="#b58756" />
-                    <stop offset="100%" stop-color="#b88a58" />
-                  </linearGradient>
-
-                  <!-- Margens de Várzea e Areia Dourada -->
-                  <linearGradient id="riverSandbanks" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#eedfc9" stop-opacity="0.9" />
-                    <stop offset="25%" stop-color="#e5d2b7" stop-opacity="0.85" />
-                    <stop offset="50%" stop-color="#f2e4d0" stop-opacity="0.9" />
-                    <stop offset="75%" stop-color="#e5d0b3" stop-opacity="0.85" />
-                    <stop offset="100%" stop-color="#eedfc9" stop-opacity="0.9" />
-                  </linearGradient>
-
-                  <filter id="riverShadow" x="-10%" y="-10%" width="120%" height="120%">
-                    <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#6b4c25" flood-opacity="0.22" />
-                  </filter>
-                </defs>
-
-                <!-- Margem Irregular Externa (Praias e Várzea) -->
-                <path id="river-sand-path" fill="none" stroke="url(#riverSandbanks)" stroke-width="170" stroke-linecap="round" />
+            <div id="historia-river-viewport" class="relative w-full h-[525px] overflow-x-auto overflow-y-hidden rounded-2xl bg-[#F4F7F9] select-none scroll-smooth">
+              <div id="historia-river-track" class="relative h-full" style="min-width: 17200px;">
                 
-                <!-- Leito Principal das Águas Barrentas do Rio -->
-                <path id="river-main-path" fill="none" stroke="url(#riverGradient)" stroke-width="110" stroke-linecap="round" filter="url(#riverShadow)" />
-                
-                <!-- Correntezas e Linhas Fluviais -->
-                <path id="river-inner-stream" fill="none" stroke="#f7ede1" stroke-width="5" stroke-dasharray="28 20" opacity="0.55" />
-                <path id="river-secondary-stream" fill="none" stroke="#8c6239" stroke-width="3" stroke-dasharray="16 28" opacity="0.35" />
-              </svg>
+                <!-- SVG do Rio: Gradiente Orgânico Curvo + Margens Sinuosas e Correntes Fluídas -->
+                <svg id="historia-river-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <!-- Gradiente do Rio Marrom Claro (Águas Barrentas do Paraíba com Iluminação Fluvial de Alta Definição) -->
+                    <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#b4834f" />
+                      <stop offset="15%" stop-color="#a4723e" />
+                      <stop offset="30%" stop-color="#c89b69" />
+                      <stop offset="48%" stop-color="#ab7b47" />
+                      <stop offset="68%" stop-color="#996835" />
+                      <stop offset="85%" stop-color="#bc8b56" />
+                      <stop offset="100%" stop-color="#a97743" />
+                    </linearGradient>
 
-              <!-- SVG das Linhas Conectoras aos Cards -->
-              <svg id="historia-connectors-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Injetado dinamicamente via JS -->
-              </svg>
+                    <!-- Margens de Várzea e Praias Fluviais Orgânicas Translúcidas -->
+                    <linearGradient id="riverSandbanks" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#f5ede0" stop-opacity="0.85" />
+                      <stop offset="25%" stop-color="#ebdccb" stop-opacity="0.9" />
+                      <stop offset="50%" stop-color="#f8f1e7" stop-opacity="0.85" />
+                      <stop offset="75%" stop-color="#ebd9c5" stop-opacity="0.9" />
+                      <stop offset="100%" stop-color="#f5ede0" stop-opacity="0.85" />
+                    </linearGradient>
 
-              <!-- Camada de Marcos Geográficos de SJC no Rio (Curva do Banhado, Ponte dos Jesuítas, Santana) -->
-              <div id="historia-geo-landmarks-container" class="absolute inset-0 pointer-events-none">
-                <!-- Injetado dinamicamente via JS -->
+                    <filter id="riverShadow" x="-10%" y="-10%" width="120%" height="120%">
+                      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#543715" flood-opacity="0.22" />
+                    </filter>
+                  </defs>
+
+                  <!-- Margem Irregular Externa (Praias de Várzea Suaves) -->
+                  <path id="river-sand-path" fill="none" stroke="url(#riverSandbanks)" stroke-width="155" stroke-linecap="round" stroke-linejoin="round" />
+                  
+                  <!-- Leito Principal Curvo e Sinuoso do Rio -->
+                  <path id="river-main-path" fill="none" stroke="url(#riverGradient)" stroke-width="96" stroke-linecap="round" stroke-linejoin="round" filter="url(#riverShadow)" />
+
+                  <!-- Correnteza Interna / Streamlines Refletivas -->
+                  <path id="river-inner-stream" fill="none" stroke="#fae8b2" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 36" opacity="0.65" />
+                  <path id="river-secondary-stream" fill="none" stroke="#fff5d6" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 48" opacity="0.5" />
+                  <path id="river-third-stream" fill="none" stroke="#7a4f21" stroke-width="2" stroke-linecap="round" stroke-dasharray="24 64" opacity="0.4" />
+                </svg>
+
+                <!-- Conectores Verticais de Dados (Linhas Suaves dos Marcos aos Cards) -->
+                <svg id="historia-connectors-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg"></svg>
+
+                <!-- Marcos Geográficos do Rio (Ponte dos Jesuítas, Banhado, etc.) -->
+                <div id="historia-geo-landmarks-container" class="absolute inset-0 pointer-events-none"></div>
+
+                <!-- Ilhotas e Pedras Históricas no Rio (Milestone Nodes) -->
+                <div id="historia-stones-container" class="absolute inset-0 pointer-events-none"></div>
+
+                <!-- Cards Históricos Flutuantes (Posicionados no topo h=15px) -->
+                <div id="historia-cards-container" class="absolute inset-0 pointer-events-none"></div>
+
               </div>
-
-              <!-- Camada de Pedras / Nós dos Anos -->
-              <div id="historia-stones-container" class="absolute inset-0 pointer-events-auto">
-                <!-- Injetado dinamicamente via JS -->
-              </div>
-
-              <!-- Camada de Cards Flutuantes (Acima e Abaixo) -->
-              <div id="historia-cards-container" class="absolute inset-0 pointer-events-auto">
-                <!-- Injetado dinamicamente via JS -->
-              </div>
-
             </div>
           </div>
+
+          <!-- Bottom Timeline Scrubber Bar / Mini-mapa de Eras -->
+          <div class="mt-3 pt-3 border-t border-slate-200/70 flex items-center justify-between gap-2 flex-wrap">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span class="text-[11px] font-bold text-slate-500 mr-1 flex items-center gap-1">
+                <i class="fa-solid fa-timeline text-[#8c6239]"></i> Saltar para:
+              </span>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('colonial')" 
+                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/80 transition-colors cursor-pointer"
+              >
+                Colonial (1564–1863)
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('sanatorial')" 
+                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-200/80 transition-colors cursor-pointer"
+              >
+                Sanatorial (1864–1945)
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('tecnologica')" 
+                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-200/80 transition-colors cursor-pointer"
+              >
+                Tecnológica (1946–2000)
+              </button>
+              <button 
+                type="button" 
+                onclick="window.selectHistoriaEra('contemporanea')" 
+                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200/80 transition-colors cursor-pointer"
+              >
+                Contemporânea (2001–2026)
+              </button>
+            </div>
+            
+            <button 
+              type="button" 
+              onclick="window.scrollHistoriaRiver(-99999)" 
+              class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-colors flex items-center gap-1 cursor-pointer ml-auto"
+            >
+              <i class="fa-solid fa-backward-step text-[10px]"></i> Início (1564)
+            </button>
           </div>
+
         </div>
 
-        <!-- 4. ABAS COMPLEMENTARES DE PESQUISA & GOVERNANÇA -->
-        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mt-6">
-          <div class="flex items-center gap-2 border-b border-slate-200 px-5 pt-4 pb-3 overflow-x-auto text-xs bg-slate-50/50">
+        <!-- 4. SUB-ABAS DE MEMÓRIA (PERSONALIDADES, PREFEITOS, ACERVOS, PARTICIPAR) -->
+        <div class="mt-6 bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden">
+          <div class="px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex items-center gap-2 overflow-x-auto">
             <button type="button" onclick="window.switchHistoriaSubTab('personalidades')" id="btn-sub-personalidades" class="px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap">
               <i class="fa-solid fa-user-astronaut text-[#8c6239] mr-1.5"></i> Personalidades Históricas
             </button>
@@ -11887,7 +11937,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
   <script src="personas_sjc_module.js"></script>
   <script src="midia_sjc/analise_midia_data.js?v=1789087000"></script>
   <script src="midia_sjc/comunidade_data.js?v=1789087000"></script>
-  <script src="app.js?v=20260917_river_v5"></script>
+  <script src="app.js?v=20260918_river_round_v3"></script>
   <script src="midia_dashboard.js?v=1789215000"></script>
   <script src="vetores_sinergia.js"></script>
   <script src="scroll_reveal.js"></script>
@@ -12183,6 +12233,62 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
         });
       });
     })();
+  </script>
+
+  <!-- Google & Auth Handlers para app.html -->
+  <script>
+    function setAppAuthMode(mode) {
+      const tabEntrar = document.getElementById('appTabEntrarBtn');
+      const tabNovo = document.getElementById('appTabNovoBtn');
+      const fieldNome = document.getElementById('app-field-nome');
+      const btnText = document.getElementById('btn-login-text');
+      const googleLabel = document.getElementById('appGoogleBtnLabel');
+
+      if (mode === 'login') {
+        if (tabEntrar) tabEntrar.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
+        if (tabNovo) tabNovo.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all";
+        if (fieldNome) fieldNome.classList.add('hidden');
+        if (btnText) btnText.innerText = 'Entrar no Painel';
+        if (googleLabel) googleLabel.innerText = 'Entrar com o Google';
+      } else {
+        if (tabNovo) tabNovo.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
+        if (tabEntrar) tabEntrar.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all";
+        if (fieldNome) fieldNome.classList.remove('hidden');
+        if (btnText) btnText.innerText = 'Cadastrar & Acessar';
+        if (googleLabel) googleLabel.innerText = 'Cadastrar com o Google';
+      }
+    }
+
+    async function loginWithGoogleApp() {
+      const btn = document.getElementById('btn-login');
+      if (btn) btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i><span>Conectando ao Google...</span>';
+
+      if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+        try {
+          const { error } = await supabaseClient.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              redirectTo: window.location.origin + window.location.pathname
+            }
+          });
+          if (error) throw error;
+          return;
+        } catch (err) {
+          console.warn("Erro no OAuth Supabase em app.html:", err);
+        }
+      }
+
+      // Fallback
+      localStorage.setItem('userRole', 'usuario');
+      localStorage.setItem('userName', 'Usuário Google SJC');
+      localStorage.setItem('userEmail', 'usuario.google@radarsaojose.com.br');
+      localStorage.setItem('authProvider', 'google');
+      
+      const loginScreen = document.getElementById('login-screen');
+      const dashboardScreen = document.getElementById('dashboard-screen');
+      if (loginScreen) loginScreen.classList.add('hidden');
+      if (dashboardScreen) dashboardScreen.classList.remove('hidden');
+    }
   </script>
 
 </body>

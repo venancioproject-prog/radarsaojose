@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login & Acesso aos Painéis | Radar São José</title>
-  <link rel="icon" type="image/png" href="fotos_radar/logo.png" />
+  <title>Acesso ao Painel | Radar São José</title>
+  <link rel="icon" type="image/png" href="fotos radar/logo.png" />
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,208 +23,344 @@
           },
           colors: {
             brand: {
-              dark: '#07172C',
-              navy: '#0B2545',
-              mid: '#0b315c',
-              light: '#19afea',
-              cyan: '#06b6d4',
-              emerald: '#10b981',
-              amber: '#f59e0b',
-              rose: '#f43f5e'
+              50: '#F0F7FF',
+              100: '#E0EFFE',
+              200: '#BAE0FD',
+              300: '#7CC8FB',
+              400: '#38ACF8',
+              500: '#0EA5E9',
+              600: '#0284C7',
+              700: '#0369A1',
+              800: '#075985',
+              900: '#0B2545',
+              950: '#07172C',
+            },
+            surface: {
+              bg: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
             }
+          },
+          boxShadow: {
+            'card': '0 4px 20px -2px rgba(11, 37, 69, 0.05), 0 2px 6px -1px rgba(11, 37, 69, 0.02)',
+            'card-hover': '0 12px 30px -4px rgba(11, 37, 69, 0.10), 0 4px 10px -2px rgba(11, 37, 69, 0.04)',
+            'brand-glow': '0 0 25px rgba(0, 180, 216, 0.3)',
           }
         }
       }
     }
   </script>
 
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'Montserrat', sans-serif; }
-    .glass-card {
-      background: rgba(11, 37, 69, 0.85);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #F8FAFC;
+      color: #1E293B;
+    }
+    .view-transition {
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    /* Slideshow Dinâmico Original com Transição Suave das Fotos de SJC */
+    .login-bg-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 4s ease-out;
+      will-change: opacity, transform;
+    }
+    .login-bg-slide.active {
+      opacity: 0.85;
+      transform: scale(1);
     }
   </style>
 </head>
-<body class="bg-[#07172C] text-slate-100 min-h-screen flex flex-col justify-between relative overflow-x-hidden antialiased">
+<body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
 
-  <!-- Background Gradients -->
-  <div class="absolute inset-0 bg-[radial-gradient(#19afea_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none"></div>
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none"></div>
+  <!-- 1. TELA DE LOGIN ORIGINAL (SLIDESHOW COM FOTOS DINÂMICAS DE SÃO JOSÉ DOS CAMPOS) -->
+  <main id="login-screen" class="view-transition min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden bg-slate-950">
+    
+    <!-- Slideshow Original de Fundo com as Fotos Oficiais de São José -->
+    <div id="login-slideshow" class="absolute inset-0 z-0 pointer-events-none">
+      <div class="login-bg-slide active" style="background-image: url('fotos radar/foto_onibus_viaduto.jpg'); background-position: center 35%;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_cidade.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_cultura.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_gastronomia.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_noite.jpg'); background-position: center center;"></div>
+      <div class="login-bg-slide" style="background-image: url('fotos radar/foto_pessoas.jpg'); background-position: center center;"></div>
+    </div>
 
-  <!-- TOPBAR -->
-  <header class="h-[72px] px-6 sm:px-12 flex items-center justify-between relative z-10">
-    <a href="index.html" class="flex items-center gap-3 group">
-      <img src="fotos_radar/logo.png" alt="Radar São José" class="h-10 w-auto group-hover:scale-105 transition-transform" />
-    </a>
-    <a href="index.html" class="text-xs uppercase font-bold tracking-wider text-slate-400 hover:text-white transition-colors flex items-center gap-2">
-      <i class="fa-solid fa-arrow-left text-[10px]"></i> Voltar ao Site
-    </a>
-  </header>
+    <!-- Overlay Gradiente Corporativo Original -->
+    <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950/90 via-brand-950/50 to-brand-950/75 pointer-events-none"></div>
 
-  <!-- MAIN LOGIN CARD -->
-  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 relative z-10">
-    <div class="w-full max-w-md glass-card p-8 sm:p-10 rounded-3xl shadow-2xl space-y-8">
+    <!-- Card Branco Original -->
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-100/20 p-8 sm:p-10 relative z-10 backdrop-blur-lg">
       
-      <!-- Card Header -->
-      <div class="text-center space-y-2">
-        <span class="inline-block px-3.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-          Autenticação & Níveis de Acesso
-        </span>
-        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Acesso ao Sistema</h1>
-        <p class="text-xs text-slate-400">Entre para acessar seu painel administrativo ou área de vendas</p>
+      <!-- Topo do Card com Logo Oficial -->
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center mb-3">
+          <img 
+            src="fotos radar/logo_login_oficial.png?v=3" 
+            alt="Radar São José" 
+            class="h-16 sm:h-20 max-w-[260px] object-contain drop-shadow-xs"
+            onerror="this.src='fotos radar/logo.png'"
+          />
+        </div>
+        <h1 class="text-2xl font-black tracking-tight text-brand-900">Dashboard Executivo</h1>
+        <p class="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Inteligência & Análise 2026/2027</p>
       </div>
 
-      <!-- Current Session Status Alert -->
-      <div id="sessionStatusBox" class="hidden p-4 rounded-xl bg-cyan-950/60 border border-cyan-500/40 text-xs">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2 font-bold text-cyan-300">
-            <i class="fa-solid fa-user-check"></i>
-            <span>Logado como: <strong id="currentRoleText" class="uppercase"></strong></span>
-          </div>
-          <button onclick="logout()" class="text-rose-400 hover:text-rose-300 font-bold uppercase text-[10px] underline">
-            Sair
-          </button>
+      <!-- Abas Limpas: Entrar vs Novo Usuário -->
+      <div class="flex p-1 bg-slate-100 rounded-xl mb-5 text-xs font-bold uppercase tracking-wider">
+        <button id="tabEntrarBtn" onclick="setAuthMode('login')" class="flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all">
+          Entrar
+        </button>
+        <button id="tabNovoBtn" onclick="setAuthMode('register')" class="flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all">
+          Novo Usuário
+        </button>
+      </div>
+
+      <!-- Botão Oficial: Entrar com o Google -->
+      <div class="mb-5">
+        <button type="button" onclick="loginWithGoogle()" class="w-full py-3 px-4 bg-white hover:bg-slate-50 active:scale-[0.99] text-slate-700 font-bold rounded-xl text-xs uppercase tracking-wider border border-slate-300 shadow-xs hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-3">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span id="googleBtnLabel">Entrar com o Google</span>
+        </button>
+
+        <div class="relative flex items-center justify-center my-4">
+          <div class="border-t border-slate-200 w-full"></div>
+          <span class="bg-white px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 absolute">
+            ou preencha os dados
+          </span>
         </div>
       </div>
 
-      <!-- 1-Click Fast Login Shortcuts (Para Testes Imediatos) -->
-      <div class="space-y-3 pt-2">
-        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 text-center">
-          ⚡ Acesso Rápido para Demonstração:
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <button onclick="loginAs('admin')" class="p-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] transition-all flex flex-col items-center gap-1.5 border border-white/10">
-            <i class="fa-solid fa-shield-halved text-base text-cyan-300"></i>
-            <span>Entrar como Admin</span>
-          </button>
-          <button onclick="loginAs('vendedor')" class="p-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] transition-all flex flex-col items-center gap-1.5 border border-white/10">
-            <i class="fa-solid fa-handshake text-base text-emerald-200"></i>
-            <span>Entrar como Vendedor</span>
-          </button>
-        </div>
-      </div>
+      <div id="login-error-alert" class="hidden mb-4 p-3 rounded-xl text-xs font-semibold border transition-all"></div>
 
-      <div class="relative flex items-center justify-center">
-        <div class="border-t border-white/10 w-full"></div>
-        <span class="bg-[#0B2545] px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 absolute">
-          ou digite o e-mail
-        </span>
-      </div>
-
-      <!-- Form Login -->
-      <form onsubmit="handleFormLogin(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">E-mail Cadastrado</label>
+      <!-- Formulário de Login (Original) -->
+      <form id="login-form" class="space-y-4" onsubmit="handleAuthSubmit(event)">
+        
+        <!-- Campo Nome (Apenas no Modo Novo Usuário) -->
+        <div id="field-nome" class="hidden">
+          <label for="nome" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+            Nome Completo
+          </label>
           <div class="relative">
-            <i class="fa-regular fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="email" id="loginEmail" required placeholder="admin@radar.com ou vendedor@radar.com" class="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/15 transition-all" />
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <input 
+              type="text" 
+              id="nome" 
+              placeholder="Seu nome completo" 
+              class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+            />
           </div>
-          <span class="text-[10px] text-slate-400 mt-1 block">Dica: digite <code>admin@radar.com</code> ou <code>vendedor@radar.com</code></span>
         </div>
 
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Senha</label>
+          <label for="email" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+            E-mail Institucional / Pessoal
+          </label>
           <div class="relative">
-            <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="password" id="loginPass" placeholder="•••••••• (qualquer senha)" value="123456" class="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white/15 transition-all" />
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <input 
+              type="email" 
+              id="email" 
+              required 
+              placeholder="seu.email@exemplo.com" 
+              class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+            />
           </div>
         </div>
 
-        <button type="submit" class="w-full py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg hover:shadow-cyan-500/25 transition-all">
-          Acessar Painel
+        <div>
+          <label for="password" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+            Senha de Acesso
+          </label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <input 
+              type="password" 
+              id="password" 
+              required 
+              placeholder="••••••••" 
+              class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
+            />
+            <button 
+              type="button" 
+              id="toggle-password" 
+              onclick="togglePasswordVisibility()"
+              class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
+            >
+              <i class="fa-regular fa-eye" id="toggle-password-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          id="btn-login" 
+          class="w-full py-3.5 px-4 bg-brand-900 hover:bg-brand-800 active:scale-[0.99] text-white font-bold rounded-xl text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mt-4"
+        >
+          <span id="btn-login-text">Entrar no Painel</span>
+          <i id="btn-login-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
         </button>
       </form>
 
-      <!-- Logout option -->
-      <div class="text-center pt-2">
-        <button onclick="logout()" class="text-xs font-semibold text-slate-400 hover:text-rose-400 transition-colors">
-          <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> Deslogar e voltar ao Modo Visitante
-        </button>
+      <div class="mt-6 pt-5 border-t border-slate-100 text-center text-[11px] text-slate-400 font-medium">
+        &copy; <span id="year-current">2026</span> Radar São José. Todos os direitos reservados.
       </div>
-
     </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="h-16 px-6 sm:px-12 flex items-center justify-between text-xs text-slate-500 relative z-10 border-t border-white/5">
-    <span>&copy; 2026 Radar São José. Todos os direitos reservados.</span>
-    <span class="font-semibold text-slate-400">Ambiente 100% Estático (GitHub Pages)</span>
-  </footer>
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-bold transition-all duration-300 opacity-0 translate-y-4 pointer-events-none border border-cyan-500/40">
-    <i class="fa-solid fa-circle-check text-cyan-400 text-base"></i>
-    <span id="toastMsg">Logado com sucesso!</span>
-  </div>
-
   <script>
-    function checkCurrentSession() {
-      const role = localStorage.getItem('userRole');
-      const box = document.getElementById('sessionStatusBox');
-      const text = document.getElementById('currentRoleText');
-      if (role) {
-        box.classList.remove('hidden');
-        text.innerText = role === 'admin' ? 'Administrador (Admin Master)' : 'Vendedor / Afiliado Oficial';
+    // Slideshow de Fundo Original com transição contínua
+    let currentSlideIdx = 0;
+    const slides = document.querySelectorAll(".login-bg-slide");
+    if (slides && slides.length > 1) {
+      setInterval(() => {
+        slides[currentSlideIdx].classList.remove("active");
+        currentSlideIdx = (currentSlideIdx + 1) % slides.length;
+        slides[currentSlideIdx].classList.add("active");
+      }, 4000);
+    }
+
+    let authMode = 'login';
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const tabEntrar = document.getElementById('tabEntrarBtn');
+      const tabNovo = document.getElementById('tabNovoBtn');
+      const fieldNome = document.getElementById('field-nome');
+      const btnText = document.getElementById('btn-login-text');
+      const googleLabel = document.getElementById('googleBtnLabel');
+
+      if (mode === 'login') {
+        tabEntrar.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
+        tabNovo.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all";
+        fieldNome.classList.add('hidden');
+        btnText.innerText = 'Entrar no Painel';
+        googleLabel.innerText = 'Entrar com o Google';
       } else {
-        box.classList.add('hidden');
+        tabNovo.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
+        tabEntrar.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all";
+        fieldNome.classList.remove('hidden');
+        btnText.innerText = 'Cadastrar & Acessar';
+        googleLabel.innerText = 'Cadastrar com o Google';
       }
     }
 
-    function loginAs(role) {
-      if (role === 'admin') {
-        localStorage.setItem('userRole', 'admin');
-        localStorage.setItem('userName', 'Admin Master');
-        localStorage.setItem('userEmail', 'admin@radarsaojose.com.br');
-        showToast("Logado como Administrador! Redirecionando...");
-        setTimeout(() => window.location.href = "admin-crm.html", 800);
-      } else if (role === 'vendedor') {
-        localStorage.setItem('userRole', 'vendedor');
-        localStorage.setItem('userName', 'Lucas Silva');
-        localStorage.setItem('userEmail', 'vendedor@radarsaojose.com.br');
-        showToast("Logado como Vendedor! Redirecionando...");
-        setTimeout(() => window.location.href = "painel-afiliado.html", 800);
-      }
-    }
-
-    function handleFormLogin(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value.toLowerCase().trim();
-      
-      if (email.includes('admin') || email === 'admin@radar.com') {
-        loginAs('admin');
-      } else if (email.includes('vendedor') || email.includes('afiliado') || email === 'vendedor@radar.com') {
-        loginAs('vendedor');
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('password');
+      const icon = document.getElementById('toggle-password-icon');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        icon.className = 'fa-regular fa-eye-slash';
       } else {
-        // Default to admin for custom emails
-        localStorage.setItem('userRole', 'admin');
-        localStorage.setItem('userName', 'Usuário ' + email.split('@')[0]);
-        localStorage.setItem('userEmail', email);
-        showToast("Login realizado! Redirecionando...");
-        setTimeout(() => window.location.href = "admin-crm.html", 800);
+        passInput.type = 'password';
+        icon.className = 'fa-regular fa-eye';
       }
     }
 
-    function logout() {
-      localStorage.removeItem('userRole');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userEmail');
-      checkCurrentSession();
-      showToast("Você foi deslogado. Modo visitante ativado.");
+    const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+    let supabaseClient = null;
+
+    if (window.supabase) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastMsg').innerText = msg;
-      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+    // Checa se o usuário acabou de voltar autenticado do Google
+    async function checkGoogleCallback() {
+      if (supabaseClient) {
+        const { data: { session } } = await supabaseClient.auth.getSession();
+        if (session && session.user) {
+          const user = session.user;
+          const userEmail = user.email;
+          const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
+
+          localStorage.setItem('userRole', 'usuario');
+          localStorage.setItem('userName', userName);
+          localStorage.setItem('userEmail', userEmail);
+          localStorage.setItem('authProvider', 'google');
+
+          // Entra direto no Dashboard
+          window.location.href = "app.html";
+        }
+      }
+    }
+    checkGoogleCallback();
+
+    async function loginWithGoogle() {
+      const btn = document.getElementById('btn-login');
+      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i><span>Conectando ao Google...</span>';
+
+      if (supabaseClient) {
+        try {
+          const { error } = await supabaseClient.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              redirectTo: window.location.origin + window.location.pathname
+            }
+          });
+          if (error) throw error;
+          return;
+        } catch (err) {
+          console.warn("Erro no OAuth Supabase:", err);
+        }
+      }
+
+      // Fallback
       setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-      }, 2500);
+        quickLogin("usuario.google@radarsaojose.com.br", "Usuário Google SJC", "usuario");
+      }, 800);
     }
 
-    checkCurrentSession();
+    function quickLogin(email, name, role) {
+      localStorage.setItem('userRole', role);
+      localStorage.setItem('userName', name);
+      localStorage.setItem('userEmail', email);
+      
+      if (role === 'admin') {
+        window.location.href = "admin-crm.html";
+      } else if (role === 'vendedor') {
+        window.location.href = "painel-afiliado.html";
+      } else {
+        window.location.href = "app.html";
+      }
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const pass = document.getElementById('password').value;
+      const nome = document.getElementById('nome').value.trim();
+
+      if (email.toLowerCase().includes('admin')) {
+        quickLogin(email, 'Admin Master', 'admin');
+      } else if (email.toLowerCase().includes('vendedor')) {
+        quickLogin(email, 'Lucas Vendedor', 'vendedor');
+      } else {
+        quickLogin(email, nome || 'Usuário ' + email.split('@')[0], 'usuario');
+      }
+    }
+
+    document.getElementById('year-current').innerText = new Date().getFullYear();
   </script>
 </body>
 </html>

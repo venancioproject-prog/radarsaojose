@@ -1400,38 +1400,38 @@
             <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Dashboard analítico completo</li>
             <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Relatório comportamental</li>
           </ul>
-          <a href="index.html" class="btn-plan btn-plan-outline">Criar conta grátis</a>
+          <a href="login.html" class="btn-plan btn-plan-outline">Criar conta grátis</a>
         </div>
 
-        <!-- PRO -->
+        <!-- PRO (R$ 10) -->
         <div class="plan-card destaque">
           <div class="plan-badge">Mais popular</div>
           <p class="plan-name">Pro</p>
-          <div class="plan-price">Sob <span style="font-size:1.8rem; color: white;">consulta</span></div>
-          <p class="plan-tagline">Dashboard completo + relatório comportamental + acesso guiado com especialista.</p>
+          <div class="plan-price">R$ 10 <span>/ mês</span></div>
+          <p class="plan-tagline">Dashboard analítico completo + cruzamento de dados de 477 respondentes e clipping local.</p>
           <ul class="plan-features">
             <li><i class="fas fa-check"></i>Tudo do plano Gratuito</li>
             <li><i class="fas fa-check"></i>Dashboard analítico interativo completo</li>
             <li><i class="fas fa-check"></i>Relatório comportamental (3 camadas)</li>
             <li><i class="fas fa-check"></i>Curadoria de Mídia — clipping SJC</li>
-            <li><i class="fas fa-check"></i>1 sessão de leitura aplicada</li>
+            <li><i class="fas fa-check"></i>Acesso individual oficial</li>
           </ul>
-          <a href="#contato" class="btn-plan btn-plan-solid">Falar com especialista</a>
+          <a href="javascript:void(0)" onclick="openAsaasCheckout('pro')" class="btn-plan btn-plan-solid">Assinar Plano Pro (R$ 10)</a>
         </div>
 
-        <!-- EMPRESARIAL -->
+        <!-- EMPRESARIAL (R$ 15) -->
         <div class="plan-card">
           <p class="plan-name">Empresarial</p>
-          <div class="plan-price">Sob <span style="font-size:1.8rem; color: white;">consulta</span></div>
-          <p class="plan-tagline">Para empresas com expansão, decisão estratégica ou múltiplos usuários.</p>
+          <div class="plan-price">R$ 15 <span>/ mês</span></div>
+          <p class="plan-tagline">Acesso ilimitado + Consultor IA Oráculo + relatórios executivos e suporte prioritário.</p>
           <ul class="plan-features">
             <li><i class="fas fa-check"></i>Tudo do plano Pro</li>
+            <li><i class="fas fa-check"></i>Consultor IA Oráculo McKinsey liberado</li>
             <li><i class="fas fa-check"></i>Múltiplos acessos simultâneos</li>
-            <li><i class="fas fa-check"></i>Sessões de leitura aplicada recorrentes</li>
-            <li><i class="fas fa-check"></i>Recortes personalizados por segmento</li>
-            <li><i class="fas fa-check"></i>Suporte dedicado Studio 8</li>
+            <li><i class="fas fa-check"></i>Recortes e diagnósticos de decisão</li>
+            <li><i class="fas fa-check"></i>Suporte prioritário Studio 8</li>
           </ul>
-          <a href="#contato" class="btn-plan btn-plan-red">Solicitar proposta</a>
+          <a href="javascript:void(0)" onclick="openAsaasCheckout('enterprise')" class="btn-plan btn-plan-red">Assinar Empresarial (R$ 15)</a>
         </div>
       </div>
     </div>
@@ -2115,5 +2115,7 @@
       if (event.target == modal) { closeModal(); }
     }
   </script>
+  <!-- Asaas Checkout Integration -->
+  <script src="asaas-checkout-modal.js"></script>
 </body>
 </html>

@@ -2269,8 +2269,41 @@
         subscribers = JSON.parse(stored);
       } else {
         subscribers = [...DEFAULT_SUBSCRIBERS];
-        localStorage.setItem('radarsaojose_crm_subscribers_v2', JSON.stringify(subscribers));
       }
+
+      // Sincroniza leads vindos do Formulário de Entrada Inbound
+      const inbounds = JSON.parse(localStorage.getItem('radar_crm_inbound') || '[]');
+      inbounds.forEach((inb, idx) => {
+        const alreadyExists = subscribers.some(s => s.email === inb.email);
+        if (!alreadyExists) {
+          const initials = (inb.nome || 'L').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+          subscribers.unshift({
+            id: 1000 + idx,
+            empresa: inb.empresa_nome || `${inb.nome} (Pessoa Física)`,
+            nome: inb.nome,
+            cargo: inb.cargo || inb.perfil,
+            setor: inb.segmento || 'Consumidor / Pesquisa',
+            bairro: inb.regiao_bairro || inb.cidade_mora || 'SJC',
+            regiao: inb.regiao_bairro || 'São José dos Campos',
+            whatsapp: (inb.whatsapp || '').replace(/\D/g, ''),
+            email: inb.email,
+            plano: inb.tem_decisao ? 'Enterprise' : 'Free / Pesquisa',
+            mrr: inb.tem_decisao ? 149.00 : 0.00,
+            stage: inb.tem_decisao ? 'lead' : 'ativo',
+            status: inb.tem_decisao ? 'Pendente' : 'Ativo',
+            data: new Date(inb.created_at || Date.now()).toLocaleDateString('pt-BR'),
+            avatar: initials,
+            avatarBg: inb.tem_decisao ? 'bg-cyan-600' : 'bg-emerald-600',
+            notas: `[Pergunta Principal]: ${inb.pergunta_principal || 'N/A'}\n[Projeto]: ${inb.projeto_nome || 'N/A'} (${inb.estagio_projeto || 'N/A'})\n[Prazo]: ${inb.prazo_decisao || 'N/A'} | [Valor]: ${inb.faixa_valor || 'N/A'}`,
+            historico: [
+              `Formulário Inbound preenchido em ${new Date(inb.created_at || Date.now()).toLocaleDateString('pt-BR')}`,
+              inb.tem_decisao ? 'Sinal comercial ativo: Decisão declarada' : 'Cadastrado para pesquisa de mercado'
+            ]
+          });
+        }
+      });
+
+      localStorage.setItem('radarsaojose_crm_subscribers_v2', JSON.stringify(subscribers));
     } catch (err) {
       subscribers = [...DEFAULT_SUBSCRIBERS];
     }

@@ -123,80 +123,6 @@ window.switchMainTab = function(tabName) {
     } else {
       const loadingState = document.getElementById("midia-loading-state");
       const dashboardContent = document.getElementById("midia-dashboard-content");
-      if (loadingState) loadingState.classList.add("hidden");
-      if (dashboardContent) dashboardContent.classList.remove("hidden");
-      if (typeof window.renderMidiaDashboard === "function") {
-        window.renderMidiaDashboard();
-      }
-    }
-  } else if (tabName === "historia") {
-    if (historiaView) { historiaView.classList.remove("hidden"); activeView = historiaView; }
-    if (historiaFiltersContainer) historiaFiltersContainer.classList.remove("hidden");
-    if (btnHistoria) btnHistoria.className = activeBtnClass;
-
-    if (typeof window.renderHistoriaDashboard === "function") {
-      window.renderHistoriaDashboard();
-    }
-  } else if (tabName === "personas") {
-    if (personasView) { personasView.classList.remove("hidden"); activeView = personasView; }
-    if (personasFiltersContainer) personasFiltersContainer.classList.remove("hidden");
-    if (btnPersonas) btnPersonas.className = activeBtnClass;
-
-    if (typeof window.renderPersonasModule === "function") {
-      window.renderPersonasModule();
-    }
-  } else if (tabName === "report") {
-    reportView.classList.remove("hidden");
-    activeView = reportView;
-    if (reportIndex) reportIndex.classList.remove("hidden");
-    if (btnReport) btnReport.className = activeBtnClass;
-
-    if (typeof window.renderExecutiveReportCharts === "function") {
-      window.renderExecutiveReportCharts(window.currentFilteredRecords || allSurveyRecords);
-    }
-    if (typeof window.renderInfluenciadoresModule === "function") {
-      window.renderInfluenciadoresModule();
-    }
-  } else if (tabName === "ai-report") {
-    if (aiReportView) { aiReportView.classList.remove("hidden"); activeView = aiReportView; }
-    if (consultorSidebarContainer) consultorSidebarContainer.classList.remove("hidden");
-    if (btnAiReport) btnAiReport.className = activeBtnClass;
-
-    if (typeof window.renderAuditHistoryList === "function") window.renderAuditHistoryList();
-    const input = document.getElementById("consultor-input");
-    const introView = document.getElementById("consultor-intro-view");
-    const inputView = document.getElementById("consultor-input-view");
-    const reportView = document.getElementById("consultor-report-view");
-
-    if (reportView && !reportView.classList.contains("hidden")) {
-      // Já está no relatório
-    } else if (inputView && !inputView.classList.contains("hidden")) {
-      if (input) setTimeout(() => input.focus(), 150);
-    } else {
-      if (introView) introView.classList.remove("hidden");
-      if (inputView) inputView.classList.add("hidden");
-    }
-  } else if (tabName === "ibge") {
-    if (ibgeView) { ibgeView.classList.remove("hidden"); activeView = ibgeView; }
-    if (ibgeFiltersContainer) ibgeFiltersContainer.classList.remove("hidden");
-    if (btnIbge) btnIbge.className = activeBtnClass;
-
-    if (typeof window.renderIbgeCharts === "function") window.renderIbgeCharts();
-  } else if (tabName === "image-bank") {
-    if (imageBankView) { imageBankView.classList.remove("hidden"); activeView = imageBankView; }
-    if (imageBankFiltersContainer) imageBankFiltersContainer.classList.remove("hidden");
-    if (btnImageBank) btnImageBank.className = activeBtnClass;
-    if (typeof window.renderImageBank === "function") window.renderImageBank();
-  } else {
-    dashboardView.classList.remove("hidden");
-    activeView = dashboardView;
-    if (filtersContainer) filtersContainer.classList.remove("hidden");
-    if (btnDashboard) btnDashboard.className = activeBtnClass;
-  }
-
-  // Efeito suave de transição (fade-in)
-  if (activeView) {
-    activeView.classList.remove("animate-in", "fade-in");
     void activeView.offsetWidth; // trigger reflow
     activeView.classList.add("animate-in", "fade-in");
   }
@@ -228,9 +154,10 @@ window.historiaState = {
 // Equação dos meandros do Rio Paraíba do Sul / Rio Comprido (centralizado em Y = 460 num canvas de 930px)
 function getRiverCenterY(x) {
   const baseline = 385;
+  // Meandros suaves perfeitamente circulares/arredondados, sem harmônicos que achatam o topo
   return baseline + 
-    Math.sin((x - 100) * 0.0028) * 35 + 
-    Math.cos((x - 100) * 0.0016) * 15;
+    Math.sin((x - 120) * 0.0042) * 44 + 
+    Math.sin((x - 120) * 0.0021 + 0.8) * 22;
 }
 
 window.renderHistoriaDashboard = function() {
@@ -350,12 +277,40 @@ window.filterHistoriaEvents = function() {
   window.renderRiverCanvas(filtered);
 };
 
+// Gerador de curva ultra-suave contínua (Catmull-Rom to Cubic Bezier) com amostragem fina
+function buildSmoothRiverSpline(totalWidth, yOffset = 0, phaseOffset = 0, amplitudeScale = 1.0) {
+  const points = [];
+  const step = 12; // Alta densidade de pontos para curva 100% orgânica sem nenhuma faceta
+  for (let x = -80; x <= totalWidth + 400; x += step) {
+    const y = (getRiverCenterY(x + phaseOffset) - 385) * amplitudeScale + 385 + yOffset;
+    points.push({ x, y });
+  }
+  if (points.length < 2) return '';
+
+  let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i === 0 ? 0 : i - 1];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] || p2;
+
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+    d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+  }
+  return d;
+}
+
 window.renderRiverCanvas = function(events) {
   const track = document.getElementById("historia-river-track");
   const svgSand = document.getElementById("river-sand-path");
   const svgMain = document.getElementById("river-main-path");
   const svgStream = document.getElementById("river-inner-stream");
   const svgSecStream = document.getElementById("river-secondary-stream");
+  const svgThirdStream = document.getElementById("river-third-stream");
   const connectorsSvg = document.getElementById("historia-connectors-svg");
   const landmarksContainer = document.getElementById("historia-geo-landmarks-container");
   const stonesContainer = document.getElementById("historia-stones-container");
@@ -365,54 +320,44 @@ window.renderRiverCanvas = function(events) {
 
   const SLOT_WIDTH = 520;
   const START_X = 400;
-  const totalWidth = Math.max(1800, START_X + events.length * SLOT_WIDTH + 700);
+  const totalWidth = Math.max(2000, START_X + events.length * SLOT_WIDTH + 750);
 
   track.style.minWidth = `${totalWidth}px`;
 
-  // 1. Gerar curva SVG contínua do Rio com margens irregulares (ondas naturais de sedimentos)
-  const step = 25;
-  let riverPathD = `M 0 ${getRiverCenterY(0)}`;
-  let sandPathD = `M 0 ${getRiverCenterY(0)}`;
-  let streamPathD = `M 0 ${getRiverCenterY(0) - 10}`;
-  let secStreamPathD = `M 0 ${getRiverCenterY(0) + 12}`;
-
-  for (let x = step; x <= totalWidth + 100; x += step) {
-    const baseY = getRiverCenterY(x);
-    // Perturbações harmônicas de relevo para margens irregulares naturais
-    const riverNoise = Math.sin(x * 0.012) * 6 + Math.cos(x * 0.025) * 4;
-    const sandNoise = Math.sin(x * 0.008) * 12 + Math.cos(x * 0.018) * 8;
-
-    riverPathD += ` L ${x} ${baseY + riverNoise}`;
-    sandPathD += ` L ${x} ${baseY + sandNoise}`;
-    streamPathD += ` L ${x} ${baseY + riverNoise - 10}`;
-    secStreamPathD += ` L ${x} ${baseY + riverNoise + 14}`;
-  }
+  // 1. Curvas de Bézier contínuas multi-camadas (Várzea, Leito Principal e Streamlines)
+  const sandPathD = buildSmoothRiverSpline(totalWidth, 0, 0, 1.0);
+  const riverPathD = buildSmoothRiverSpline(totalWidth, 0, 0, 1.0);
+  const streamPathD = buildSmoothRiverSpline(totalWidth, -14, 25, 0.95);
+  const secStreamPathD = buildSmoothRiverSpline(totalWidth, 14, -25, 1.05);
+  const thirdStreamPathD = buildSmoothRiverSpline(totalWidth, -2, 10, 1.0);
 
   if (svgSand) svgSand.setAttribute("d", sandPathD);
   if (svgMain) svgMain.setAttribute("d", riverPathD);
   if (svgStream) svgStream.setAttribute("d", streamPathD);
   if (svgSecStream) svgSecStream.setAttribute("d", secStreamPathD);
+  if (svgThirdStream) svgThirdStream.setAttribute("d", thirdStreamPathD);
 
-  // 2. Badges de Evidência Historiográfica
+  // 2. Badges de Evidência Historiográfica de Alta Precisão (Design SaaS Minimalista)
   const evidenciaBadges = {
-    documentado: { text: "Documentado", bg: "bg-emerald-50 text-emerald-800 border-emerald-300", icon: "fa-circle-check" },
-    corroborado: { text: "Corroborado", bg: "bg-blue-50 text-blue-800 border-blue-300", icon: "fa-circle-dot" },
-    em_investigacao: { text: "Em Investigação", bg: "bg-amber-50 text-amber-800 border-amber-300", icon: "fa-magnifying-glass" },
-    em_disputa: { text: "Em Disputa", bg: "bg-rose-50 text-rose-800 border-rose-300", icon: "fa-scale-unbalanced" }
+    documentado: { text: "Documentado", bg: "bg-emerald-50 text-emerald-800 border-emerald-200/80", dot: "bg-emerald-500" },
+    corroborado: { text: "Corroborado", bg: "bg-blue-50 text-blue-800 border-blue-200/80", dot: "bg-blue-500" },
+    em_investigacao: { text: "Em Investigação", bg: "bg-amber-50 text-amber-800 border-amber-200/80", dot: "bg-amber-500" },
+    em_disputa: { text: "Em Disputa", bg: "bg-rose-50 text-rose-800 border-rose-200/80", dot: "bg-rose-500" }
   };
 
   let stonesHtml = '';
   let cardsHtml = '';
   let connectorsSvgHtml = '';
 
-  // 3. Marcos Geográficos da passagem do Rio por São José dos Campos
+  // 3. Marcos Geográficos da passagem do Rio Paraíba / Rio Comprido por São José dos Campos
   const geoLandmarks = [
     { x: 380, name: "Várzea do Rio Comprido (Encontro das Águas)", icon: "fa-seedling" },
     { x: 1420, name: "Ponte dos Jesuítas (Travessia Colonial 1690)", icon: "fa-bridge" },
     { x: 2460, name: "Curva do Banhado (Colina Histórica SJC)", icon: "fa-mountain-sun" },
     { x: 3500, name: "Porto das Canoas & Foz da Ressaca", icon: "fa-sailboat" },
     { x: 5580, name: "Santana & Meandro da Tecelagem Parahyba", icon: "fa-industry" },
-    { x: 7660, name: "Planície Fluvial do DCTA & Bacia Hidrográfica", icon: "fa-plane-departure" }
+    { x: 7660, name: "Planície Fluvial do DCTA & Bacia Hidrográfica", icon: "fa-plane-departure" },
+    { x: 10800, name: "Eixo de Expansão Metropolitana & Vale do Paraíba", icon: "fa-city" }
   ];
 
   let landmarksHtml = '';
@@ -421,10 +366,11 @@ window.renderRiverCanvas = function(events) {
       const geoY = getRiverCenterY(geo.x);
       landmarksHtml += `
         <div 
-          class="absolute px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-white/90 text-[#734f2b] border border-[#d9c4aa] shadow-xs flex items-center gap-1.5 pointer-events-auto transition-transform hover:scale-105"
-          style="left: ${geo.x - 110}px; top: ${geoY + 46}px; z-index: 15;"
+          class="absolute px-3 py-1 rounded-full text-[10.5px] font-black uppercase tracking-wider bg-white/95 text-slate-800 border border-amber-200/90 shadow-[0_4px_12px_rgba(0,0,0,0.06)] backdrop-blur-md flex items-center gap-1.5 pointer-events-auto transition-transform hover:scale-105 select-none"
+          style="left: ${geo.x - 110}px; top: ${geoY + 54}px; z-index: 15;"
         >
-          <i class="fa-solid ${geo.icon} text-amber-700"></i>
+          <span class="w-2 h-2 rounded-full bg-amber-600"></span>
+          <i class="fa-solid ${geo.icon} text-amber-700 text-xs"></i>
           <span>${geo.name}</span>
         </div>
       `;
@@ -436,128 +382,100 @@ window.renderRiverCanvas = function(events) {
     const stoneX = START_X + i * SLOT_WIDTH;
     const stoneY = getRiverCenterY(stoneX);
 
-    // Posicionamento harmônico com total folga vertical no container h-[930px]
-    // Se o rio está na metade inferior (Y >= 460), o card fica ACIMA (top: 25px).
-    // Se o rio está na metade superior (Y < 460), o card fica ABAIXO (top: 575px).
-    // Cards sempre posicionados acima do rio (100% de visibilidade vertical na tela)
-    const cardWidth = 370;
-    const cardLeft = stoneX - 185;
+    // Layout calibrado para caber perfeitamente na tela de laptop/desktop sem scroll vertical
+    const cardWidth = 380;
+    const cardLeft = stoneX - (cardWidth / 2);
     const cardTop = 15;
-    const cardAnchorX = stoneX;
-    const cardAnchorY = cardTop + 230;
-    const stoneAnchorY = stoneY - 26;
 
-    // Linha conectora suave em curva de Bézier
+    // 1. Linha conectora vertical suave (Bézier do fundo do card até a pedra do leito)
     connectorsSvgHtml += `
       <path 
-        d="M ${stoneX} ${stoneAnchorY} C ${stoneX} ${(stoneAnchorY + cardAnchorY) / 2}, ${cardAnchorX} ${(stoneAnchorY + cardAnchorY) / 2}, ${cardAnchorX} ${cardAnchorY}" 
-        stroke="rgba(168, 140, 106, 0.7)" 
-        stroke-width="1.8" 
-        stroke-dasharray="4 3" 
+        d="M ${stoneX} 245 C ${stoneX} ${245 + (stoneY - 245) * 0.4}, ${stoneX} ${stoneY - 25}, ${stoneX} ${stoneY}" 
         fill="none" 
+        stroke="#8c6239" 
+        stroke-width="2" 
+        stroke-dasharray="3 4" 
+        opacity="0.65"
       />
-      <circle cx="${stoneX}" cy="${stoneAnchorY}" r="3.5" fill="#8c6239" />
-      <circle cx="${cardAnchorX}" cy="${cardAnchorY}" r="3.5" fill="#ad8151" />
     `;
 
-    // Pedra / Ilhota (Nó do Ano) com textura fluvial do Paraíba
+    // 2. Pedra / Marco do Leito do Rio (Milestone Node)
     stonesHtml += `
       <div 
-        onclick="window.focusHistoriaEvent('${ev.id}', ${stoneX})" 
-        class="group absolute cursor-pointer select-none"
-        style="left: ${stoneX - 40}px; top: ${stoneY - 28}px; width: 80px; height: 56px; z-index: 30;"
-        title="Ano ${ev.ano}: ${ev.titulo}"
+        class="absolute -translate-x-1/2 -translate-y-1/2 group cursor-pointer pointer-events-auto transition-transform duration-300 hover:scale-110 select-none"
+        style="left: ${stoneX}px; top: ${stoneY}px; z-index: 25;"
+        onclick="window.focusHistoriaEvent('${ev.id}', ${stoneX})"
       >
-        <!-- Halo de ondulação e água barrenta com espuma suave -->
-        <div class="absolute -inset-2.5 rounded-[50%/40%] border-2 border-white/80 shadow-[0_0_18px_rgba(184,138,88,0.55)] pointer-events-none group-hover:scale-125 transition-transform duration-300"></div>
-
-        <!-- Pedra 3D Polida (Mineral Fluvial) -->
-        <div class="w-full h-full rounded-[50%/40%] bg-gradient-to-br from-[#faf8f5] via-[#e5dcd0] to-[#bfae95] border-2 border-white shadow-[0_12px_24px_rgba(92,62,30,0.35),inset_0_2px_4px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.25)] flex items-center justify-center font-mono font-black text-[#422c15] text-sm tracking-tight group-hover:scale-110 group-hover:shadow-[0_16px_32px_rgba(140,98,57,0.5)] transition-all duration-200">
-          ${ev.ano}
+        <div class="absolute -inset-2.5 rounded-full bg-amber-400/20 blur-[3px] group-hover:bg-amber-400/40 transition-colors animate-pulse"></div>
+        <div class="relative flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 text-slate-900 border-2 border-[#8c6239] shadow-[0_6px_16px_rgba(0,0,0,0.14)] backdrop-blur-md">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#8c6239]"></span>
+          <span class="text-xs font-black tracking-tight text-slate-900">${ev.ano}</span>
         </div>
       </div>
     `;
 
-    // Card de Conteúdo Flutuante (Dimensões compactas e calibradas para 100% de visibilidade)
-    const evBadge = evidenciaBadges[ev.evidencia] || evidenciaBadges.documentado;
-    const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial SJC", url: "https://www.camarasjc.sp.gov.br/promemoria/" };
+    // 3. Card Flutuante Superior (SaaS Clean Glass Card)
+    const badge = evidenciaBadges[ev.evidencia] || evidenciaBadges.documentado;
+    const fonteButtonHtml = ev.fontePrimaria ? `
+      <button 
+        type="button" 
+        onclick="window.openHistoriaFonteModal('${ev.id}')" 
+        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold text-[#8c6239] hover:text-[#5a3e21] bg-amber-50 hover:bg-amber-100 border border-amber-200/80 transition-all cursor-pointer"
+      >
+        <i class="fa-solid fa-file-shield text-xs"></i>
+        <span>Ver Fonte Primária</span>
+      </button>
+    ` : '';
 
     cardsHtml += `
       <div 
-        id="card-${ev.id}"
-        class="absolute bg-white rounded-2xl p-5 shadow-[0_14px_35px_-5px_rgba(0,0,0,0.08)] border border-slate-100/90 flex flex-col justify-between space-y-3 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.12)] hover:-translate-y-1"
-        style="left: ${cardLeft}px; top: ${cardTop}px; width: ${cardWidth}px; max-height: 235px; z-index: 20;"
+        id="historia-card-${ev.id}"
+        class="absolute w-[380px] h-[230px] rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_10px_25px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_35px_rgba(0,0,0,0.12)] hover:border-amber-300/80 transition-all duration-300 pointer-events-auto flex flex-col justify-between p-4.5 select-none"
+        style="left: ${cardLeft}px; top: ${cardTop}px; z-index: 20;"
       >
-        <!-- Topo: Ano em badge preto + Nível de Evidência -->
-        <div class="flex items-center justify-between gap-2">
-          <span class="px-3.5 py-1 rounded-full text-xs font-black bg-slate-950 text-white font-mono shadow-xs">
-            ${ev.ano}
-          </span>
-          <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-extrabold border ${evBadge.bg}">
-            <i class="fa-solid ${evBadge.icon} text-[9px]"></i>
-            <span>${evBadge.text}</span>
-          </span>
-        </div>
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${badge.bg} border">
+              <span class="w-1.5 h-1.5 rounded-full ${badge.dot}"></span>
+              ${badge.text}
+            </span>
+            <span class="text-[11px] font-black tracking-wide text-slate-400">
+              ${ev.dataExata ? ev.dataExata : ev.ano}
+            </span>
+          </div>
 
-        <!-- Título e Resumo -->
-        <div class="space-y-1">
-          <h3 class="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight">
+          <h4 class="text-sm font-black text-slate-900 leading-snug line-clamp-2 mb-1.5 hover:text-[#8c6239] transition-colors">
             ${ev.titulo}
-          </h3>
-          <p class="text-xs text-slate-600 font-medium leading-relaxed line-clamp-2">
+          </h4>
+
+          <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 font-normal">
             ${ev.resumo}
           </p>
         </div>
 
-        <!-- Citação de Época com barra ambar/dourada -->
-        ${ev.citacao ? `
-          <div class="p-2.5 rounded-xl bg-amber-50/80 border-l-4 border-amber-600 text-xs italic text-amber-950 font-medium leading-snug line-clamp-2">
-            «${ev.citacao}»
+        <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2 mt-auto">
+          <div class="flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 truncate">
+            <i class="fa-solid fa-location-dot text-amber-700 text-xs shrink-0"></i>
+            <span class="truncate">${ev.local || "São José dos Campos"}</span>
           </div>
-        ` : ''}
-
-        <!-- Rodapé: Validação de Fonte Primária + Dossiê (TOTALMENTE VISÍVEL) -->
-        <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
-          <a 
-            href="${primSource.url}" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 transition-colors"
-            title="Validar na fonte oficial: ${primSource.nome}"
-          >
-            <i class="fa-solid fa-file-circle-check text-amber-700"></i>
-            <span class="max-w-[170px] truncate">Validar: ${primSource.nome}</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-amber-700"></i>
-          </a>
-
-          <button 
-            type="button" 
-            onclick="window.openHistoriaFonteModal('${ev.id}')" 
-            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors cursor-pointer"
-          >
-            <i class="fa-solid fa-circle-info text-slate-500"></i>
-            <span>Dossiê & Fatos</span>
-          </button>
+          ${fonteButtonHtml}
         </div>
       </div>
     `;
   });
 
-  connectorsSvg.innerHTML = connectorsSvgHtml;
-  stonesContainer.innerHTML = stonesHtml;
-  cardsContainer.innerHTML = cardsHtml;
+  if (connectorsSvg) connectorsSvg.innerHTML = connectorsSvgHtml;
+  if (stonesContainer) stonesContainer.innerHTML = stonesHtml;
+  if (cardsContainer) cardsContainer.innerHTML = cardsHtml;
 };
 
 window.focusHistoriaEvent = function(eventId, stoneX) {
   const viewport = document.getElementById("historia-river-viewport");
-  if (viewport) {
-    viewport.scrollTo({
-      left: Math.max(0, stoneX - 450),
-      behavior: 'smooth'
-    });
+  if (viewport && stoneX !== undefined) {
+    const targetScroll = Math.max(0, stoneX - (viewport.clientWidth / 2));
+    viewport.scrollTo({ left: targetScroll, behavior: 'smooth' });
   }
-
-  const card = document.getElementById(`card-${eventId}`);
+  const card = document.getElementById(`historia-card-${eventId}`);
   if (card) {
     card.classList.add("ring-2", "ring-amber-500", "scale-[1.02]");
     setTimeout(() => {
@@ -569,166 +487,127 @@ window.focusHistoriaEvent = function(eventId, stoneX) {
 window.openHistoriaFonteModal = function(eventId) {
   const data = window.HISTORIA_SJC_DATA;
   if (!data || !data.eventos) return;
-
   const ev = data.eventos.find(e => e.id === eventId);
-  if (!ev) return;
+  if (!ev || !ev.fontePrimaria) return;
 
   const modal = document.getElementById("historia-fonte-modal");
-  const titulo = document.getElementById("modal-fonte-titulo");
-  const conteudo = document.getElementById("modal-fonte-conteudo");
-  const linkExterno = document.getElementById("modal-fonte-link-externo");
+  const titleEl = document.getElementById("modal-fonte-titulo");
+  const contentEl = document.getElementById("modal-fonte-conteudo");
+  const linkEl = document.getElementById("modal-fonte-link-externo");
 
-  if (!modal || !conteudo) return;
-
-  titulo.textContent = `${ev.ano} — ${ev.titulo}`;
-
-  const primSource = (ev.fontes && ev.fontes[0]) ? ev.fontes[0] : { nome: "Arquivo Oficial SJC", url: "https://www.camarasjc.sp.gov.br/promemoria/" };
-  if (linkExterno) {
-    linkExterno.href = primSource.url;
-    linkExterno.querySelector('span').textContent = `Acessar ${primSource.nome}`;
+  if (titleEl) titleEl.textContent = ev.fontePrimaria.documento || ev.titulo;
+  if (contentEl) {
+    contentEl.innerHTML = `
+      <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/80 space-y-1">
+        <div class="text-[10px] uppercase font-black tracking-wider text-amber-800">Marco Referenciado:</div>
+        <div class="font-bold text-slate-900 text-xs">${ev.ano} &bull; ${ev.titulo}</div>
+      </div>
+      <div class="space-y-2 text-xs">
+        <div><strong class="font-bold text-slate-900">Instituição Guardiã:</strong> ${ev.fontePrimaria.instituicao || "Acervo Histórico Oficial"}</div>
+        <div><strong class="font-bold text-slate-900">Tipo de Documento:</strong> ${ev.fontePrimaria.tipo || "Documento Primário"}</div>
+        <div><strong class="font-bold text-slate-900">Localização / Código no Acervo:</strong> <span class="font-mono text-slate-800 bg-slate-100 px-1.5 py-0.5 rounded">${ev.fontePrimaria.localizacao || "Consultar Acervo"}</span></div>
+        ${ev.fontePrimaria.trecho ? `<div class="p-3 bg-slate-50 border-l-2 border-amber-500 rounded-r-lg italic text-slate-700 font-serif">"${ev.fontePrimaria.trecho}"</div>` : ''}
+      </div>
+    `;
   }
-
-  const fontesList = (ev.fontes || []).map(f => `
-    <li class="p-3 bg-white rounded-xl border border-slate-200 flex items-center justify-between gap-3">
-      <div>
-        <strong class="text-xs text-slate-900 block">${f.nome}</strong>
-        <span class="text-[10px] text-slate-500 font-semibold">${f.tipo || 'Acervo Histórico'}</span>
-      </div>
-      <a href="${f.url}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-amber-50 text-amber-900 hover:bg-amber-100 rounded-lg font-bold text-[11px] border border-amber-200 transition-colors shrink-0">
-        Ver Documento ↗
-      </a>
-    </li>
-  `).join('');
-
-  conteudo.innerHTML = `
-    <div class="space-y-3">
-      <div class="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1">
-        <span class="text-[10px] font-black uppercase tracking-wider text-amber-800 block">Nível de Evidência: ${ev.evidencia.toUpperCase()}</span>
-        <p class="text-xs font-semibold leading-relaxed">${ev.resumo}</p>
-      </div>
-
-      ${ev.detalhes ? `
-        <div class="space-y-1">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Contexto & Análise Historiográfica:</span>
-          <p class="text-xs text-slate-700 leading-relaxed font-medium bg-slate-50 p-3.5 rounded-xl border border-slate-200">${ev.detalhes}</p>
-        </div>
-      ` : ''}
-
-      <div class="grid grid-cols-2 gap-3">
-        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-          <span class="text-[10px] font-bold text-slate-500 uppercase block">Local Histórico</span>
-          <strong class="text-xs text-slate-800">${ev.local || 'São José dos Campos'}</strong>
-        </div>
-        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-          <span class="text-[10px] font-bold text-slate-500 uppercase block">Pessoas Envolvidas</span>
-          <strong class="text-xs text-slate-800">${(ev.pessoasEnvolvidas || []).join(', ') || 'Agentes Históricos'}</strong>
-        </div>
-      </div>
-
-      <div class="space-y-2 pt-1">
-        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700 block">Fontes Primárias & Custódia:</span>
-        <ul class="space-y-2">
-          ${fontesList}
-        </ul>
-      </div>
-    </div>
-  `;
-
-  modal.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
+  if (linkEl) {
+    if (ev.fontePrimaria.url) {
+      linkEl.href = ev.fontePrimaria.url;
+      linkEl.classList.remove("hidden");
+    } else {
+      linkEl.classList.add("hidden");
+    }
+  }
+  if (modal) modal.classList.remove("hidden");
 };
 
 window.closeHistoriaFonteModal = function() {
   const modal = document.getElementById("historia-fonte-modal");
   if (modal) modal.classList.add("hidden");
-  document.body.style.overflow = "";
-};
-
-window.switchHistoriaSubTab = function(subTabName) {
-  const tabs = ['personalidades', 'prefeitos', 'acervos', 'participar'];
-  tabs.forEach(t => {
-    const el = document.getElementById(`subview-${t}`);
-    const btn = document.getElementById(`btn-sub-${t}`);
-
-    if (el) {
-      if (t === subTabName) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      }
-    }
-
-    if (btn) {
-      if (t === subTabName) {
-        btn.className = "px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap";
-      } else if (t === 'participar') {
-        btn.className = "px-4 py-2 rounded-xl font-bold transition-all text-amber-800 hover:bg-amber-100/60 cursor-pointer whitespace-nowrap ml-auto";
-      } else {
-        btn.className = "px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap";
-      }
-    }
-  });
 };
 
 window.openPorQue1767Modal = function() {
   const modal = document.getElementById("modal-porque-1767");
   if (modal) modal.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
 };
 
 window.closePorQue1767Modal = function() {
   const modal = document.getElementById("modal-porque-1767");
   if (modal) modal.classList.add("hidden");
-  document.body.style.overflow = "";
+};
+
+window.switchHistoriaSubTab = function(tabName) {
+  const tabs = ['personalidades', 'prefeitos', 'acervos', 'participar'];
+  tabs.forEach(t => {
+    const btn = document.getElementById(`btn-sub-${t}`);
+    const view = document.getElementById(`subview-${t}`);
+    if (t === tabName) {
+      if (btn) btn.className = "px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap";
+      if (view) view.classList.remove("hidden");
+    } else {
+      if (btn) btn.className = "px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap";
+      if (view) view.classList.add("hidden");
+    }
+  });
 };
 
 window.renderHistoriaPersonalidades = function() {
   const container = document.getElementById("historia-personalidades-grid");
-  if (!container || !window.HISTORIA_SJC_DATA) return;
+  if (!container) return;
+  const data = window.HISTORIA_SJC_DATA;
+  if (!data || !data.personalidades) return;
 
-  container.innerHTML = window.HISTORIA_SJC_DATA.personalidades.map(p => `
-    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 hover:border-amber-400 hover:shadow-md transition-all flex flex-col justify-between space-y-3">
-      <div class="space-y-2.5">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 text-amber-300 flex items-center justify-center text-base font-black shadow-xs">
-          ${p.nome.charAt(0)}
-        </div>
+  let html = '';
+  data.personalidades.forEach(p => {
+    html += `
+      <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md transition-all space-y-2 flex flex-col justify-between">
         <div>
-          <h4 class="text-sm font-black text-slate-900">${p.nome}</h4>
-          <p class="text-[11px] font-bold text-amber-800">${p.cargo}</p>
-          <span class="text-[10px] font-mono text-slate-400">${p.periodo || ''}</span>
+          <div class="flex items-center gap-2 mb-1.5">
+            <div class="w-8 h-8 rounded-full bg-amber-100 text-[#8c6239] flex items-center justify-center font-black text-xs shrink-0">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <h5 class="font-black text-xs text-slate-900 leading-tight">${p.nome}</h5>
+              <span class="text-[10px] font-bold text-amber-800">${p.periodo}</span>
+            </div>
+          </div>
+          <p class="text-[11px] font-bold text-slate-700 mb-1">${p.papel}</p>
+          <p class="text-[11px] text-slate-500 leading-relaxed line-clamp-3">${p.contribuicao}</p>
         </div>
-        <p class="text-xs text-slate-600 font-medium leading-relaxed">${p.descricao}</p>
+        ${p.legado ? `<div class="pt-2 border-t border-slate-100 text-[10px] text-slate-400 font-medium"><strong>Legado:</strong> ${p.legado}</div>` : ''}
       </div>
-      <div class="pt-2 border-t border-slate-200/60">
-        <span class="inline-block text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-700">
-          ${p.tag}
-        </span>
-      </div>
-    </div>
-  `).join('');
+    `;
+  });
+  container.innerHTML = html;
 };
 
 window.renderHistoriaPrefeitos = function() {
   const tbody = document.getElementById("historia-prefeitos-table-body");
-  if (!tbody || !window.HISTORIA_SJC_DATA) return;
+  if (!tbody) return;
+  const data = window.HISTORIA_SJC_DATA;
+  if (!data || !data.prefeitos) return;
 
-  tbody.innerHTML = window.HISTORIA_SJC_DATA.prefeitos.map(pref => {
-    const isLacuna = pref.situacao.includes('LACUNA') || pref.situacao.includes('INVESTIGAÇÃO');
-    const badgeClass = isLacuna ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300';
-    return `
-      <tr class="hover:bg-slate-50 transition-colors">
-        <td class="px-4 py-3 font-bold text-slate-900 whitespace-nowrap font-mono">${pref.periodo}</td>
-        <td class="px-4 py-3 font-black text-slate-900">${pref.nome}</td>
-        <td class="px-4 py-3 font-medium text-slate-600">${pref.cargo}</td>
-        <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">${pref.acesso}</span></td>
-        <td class="px-4 py-3"><span class="px-2.5 py-0.5 rounded-md text-[10px] font-extrabold ${badgeClass}">${pref.situacao}</span></td>
+  let html = '';
+  data.prefeitos.forEach((pref, idx) => {
+    html += `
+      <tr class="${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-amber-50/40 transition-colors">
+        <td class="px-4 py-2.5 font-bold font-mono text-slate-800 text-[11px] whitespace-nowrap">${pref.periodo}</td>
+        <td class="px-4 py-2.5 font-bold text-slate-900">${pref.nome}</td>
+        <td class="px-4 py-2.5 text-slate-600">${pref.cargo || "Prefeito Municipal"}</td>
+        <td class="px-4 py-2.5 text-slate-500">${pref.formaAcesso || "Eleito / Nomeado"}</td>
+        <td class="px-4 py-2.5">
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">
+            <i class="fa-solid fa-check text-emerald-600"></i> ${pref.situacaoDocumental || "Homologado"}
+          </span>
+        </td>
       </tr>
     `;
-  }).join('');
+  });
+  tbody.innerHTML = html;
 };
 
 window.submitHistoriaSugestao = function(e) {
-  e.preventDefault();
+  if (e) e.preventDefault();
   const feedback = document.getElementById("sugestao-feedback-msg");
   const form = document.getElementById("form-sugerir-historia");
 
@@ -743,7 +622,6 @@ window.submitHistoriaSugestao = function(e) {
 const IMAGE_BANK_ITEMS = [
   ["Mais fotos_radar/IMG_2777.jpg", "Comércio de rua", "Comércio"],
   ["Mais fotos_radar/IMG_2780.jpg", "Vida urbana", "Cidade"],
-  ["Mais fotos_radar/IMG_2792.jpg", "Ônibus municipal", "Mobilidade"],
   ["Mais fotos_radar/IMG_2808.jpg", "Transporte coletivo", "Mobilidade"],
   ["Mais fotos_radar/IMG_2809.jpg", "Embarque e circulação", "Mobilidade"],
   ["Mais fotos_radar/IMG_2810.jpg", "Circulação urbana", "Mobilidade"],
