@@ -428,8 +428,15 @@
     const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
     let supabaseClient = null;
 
-    if (window.supabase) {
-      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    if (window.supabase && typeof window.supabase.createClient === 'function') {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      });
+      window.supabaseClient = supabaseClient;
     }
 
     let currentStep = 1;
@@ -556,12 +563,7 @@
         origem: 'Formulário Radar Inbound'
       };
 
-      // 1. Salvar no LocalStorage (Garantia de persistência local para CRM)
-      const existingLeads = JSON.parse(localStorage.getItem('radar_crm_inbound') || '[]');
-      existingLeads.unshift({ ...payload, created_at: new Date().toISOString() });
-      localStorage.setItem('radar_crm_inbound', JSON.stringify(existingLeads));
-
-      // Salva sessão do usuário
+      // Salva sessão local do usuário
       localStorage.setItem('userEmail', payload.email);
       localStorage.setItem('userName', payload.nome);
       localStorage.setItem('userRole', 'usuario');
@@ -569,58 +571,212 @@
       localStorage.setItem('onboardingCompleted', 'true');
       localStorage.setItem('onboardingCompleted_' + payload.email, 'true');
 
-      // 2. Atualizar tabela profiles no Supabase para liberar o acesso permanente
+      // Backup local preventivo para resiliência offline
       try {
-        if (supabaseClient) {
-          const { data: { session } } = await supabaseClient.auth.getSession();
-          if (session && session.user) {
-            await supabaseClient
+        const existingLeads = JSON.parse(localStorage.getItem('radar_crm_inbound') || '[]');
+        existingLeads.unshift({ ...payload, created_at: new Date().toISOString() });
+        localStorage.setItem('radar_crm_inbound', JSON.stringify(existingLeads.slice(0, 50)));
+      } catch (e) {}
+
+      // =========================================================================
+      // GRAVAÇÃO REAL DE LEAD NO SUPABASE (crm_pessoas & crm_oportunidades)
+      // =========================================================================
+      const client = window.supabaseClient || supabaseClient;
+
+      if (!client) {
+        console.error("[CRM Onboarding Fatal] Cliente Supabase não inicializado.");
+        showToast("Erro: Conexão com o banco indisponível.", true);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> <span>Finalizar & Enviar</span>';
+        return;
+      }
+
+      try {
+        console.log("[CRM Onboarding] Iniciando gravação do lead no Supabase:", payload.email);
+
+        // 1. Obter sessão do usuário autenticado (se existente) e atualizar profile
+        let authUserId = null;
+        try {
+          const { data: { session }, error: sessionError } = await client.auth.getSession();
+          if (sessionError) {
+            console.warn("[CRM Onboarding] Erro ao obter sessão:", sessionError.message);
+          } else if (session && session.user) {
+            authUserId = session.user.id;
+            const { error: profError } = await client
               .from('profiles')
               .update({
                 nome: payload.nome,
                 onboarding_completed: true,
                 updated_at: new Date().toISOString()
               })
-              .eq('id', session.user.id);
+              .eq('id', authUserId);
+
+            if (profError) {
+              console.error("[CRM Onboarding] Erro ao atualizar profiles:", profError.message, profError);
+            } else {
+              console.log("[CRM Onboarding] Perfil de usuário atualizado com sucesso.");
+            }
           }
-
-          const { data, error } = await supabaseClient.rpc('crm_submit_intake_form', {
-            p_nome: payload.nome,
-            p_email: payload.email,
-            p_whatsapp: payload.whatsapp,
-            p_perfil: payload.perfil,
-            p_cidade_mora: payload.cidade_mora,
-            p_cidade_trabalha: payload.cidade_trabalha,
-            p_relacao_sjc: payload.relacao_sjc,
-            p_motivo_entrada: payload.motivo_entrada,
-            p_motivo_entrada_detalhe: payload.motivo_entrada_detalhe,
-            p_empresa_nome: payload.empresa_nome || null,
-            p_cargo: payload.cargo || null,
-            p_segmento: payload.segmento || null,
-            p_tamanho: payload.tamanho || null,
-            p_empresa_relacao_sjc: payload.empresa_relacao_sjc || null,
-            p_tem_decisao: payload.tem_decisao,
-            p_tipo_decisao: payload.tipo_decisao,
-            p_outra_decisao: payload.outra_decisao,
-            p_projeto_nome: payload.projeto_nome,
-            p_regiao_bairro: payload.regiao_bairro,
-            p_estagio_projeto: payload.estagio_projeto,
-            p_prazo_decisao: payload.prazo_decisao,
-            p_faixa_valor: payload.faixa_valor,
-            p_pergunta_principal: payload.pergunta_principal,
-            p_perguntas_secundarias: payload.perguntas_secundarias,
-            p_origem: payload.origem
-          });
-          console.log("Supabase intake result:", data, error);
+        } catch (sErr) {
+          console.warn("[CRM Onboarding] Verificação de sessão falhou:", sErr);
         }
-      } catch (err) {
-        console.warn("Supabase sync warning (operando em modo local):", err);
-      }
 
-      showToast("Diagnóstico e cadastro recebidos com sucesso!");
-      setTimeout(() => {
-        window.location.href = "app.html";
-      }, 1200);
+        // 2. Processar Empresa (crm_empresas) caso informada
+        let empresaId = null;
+        if (payload.empresa_nome && payload.empresa_nome.trim() !== '') {
+          try {
+            const { data: empData, error: empError } = await client
+              .from('crm_empresas')
+              .insert([{
+                nome: payload.empresa_nome.trim(),
+                segmento: payload.segmento || null,
+                tamanho: payload.tamanho || null,
+                relacao_sjc: payload.empresa_relacao_sjc || null
+              }])
+              .select('id')
+              .maybeSingle();
+
+            if (empError) {
+              console.error("[CRM Onboarding] Erro ao inserir crm_empresas:", empError.message, empError);
+              // Tenta localizar empresa existente pelo nome
+              const { data: existingEmp, error: findEmpErr } = await client
+                .from('crm_empresas')
+                .select('id')
+                .ilike('nome', payload.empresa_nome.trim())
+                .maybeSingle();
+
+              if (!findEmpErr && existingEmp) {
+                empresaId = existingEmp.id;
+              }
+            } else if (empData) {
+              empresaId = empData.id;
+              console.log("[CRM Onboarding] Empresa vinculada:", empresaId);
+            }
+          } catch (eErr) {
+            console.error("[CRM Onboarding] Exceção em crm_empresas:", eErr);
+          }
+        }
+
+        // 3. Inserir lead na tabela crm_pessoas
+        let pessoaId = null;
+        const pessoaRecord = {
+          auth_user_id: authUserId,
+          nome: payload.nome,
+          email: payload.email,
+          whatsapp: payload.whatsapp || null,
+          perfil: payload.perfil || 'Profissional de empresa',
+          cidade_mora: payload.cidade_mora || 'São José dos Campos',
+          cidade_trabalha: payload.cidade_trabalha || null,
+          relacao_sjc: Array.isArray(payload.relacao_sjc) ? payload.relacao_sjc : [],
+          motivo_entrada: payload.motivo_entrada || null,
+          motivo_entrada_detalhe: payload.motivo_entrada_detalhe || null,
+          tem_decisao: Boolean(payload.tem_decisao),
+          origem: payload.origem || 'Formulário Radar Inbound'
+        };
+
+        try {
+          const { data: pesData, error: pesError } = await client
+            .from('crm_pessoas')
+            .insert([pessoaRecord])
+            .select('id')
+            .maybeSingle();
+
+          if (pesError) {
+            console.error("[CRM Onboarding] Erro ao inserir em crm_pessoas:", pesError.message, pesError);
+            // Se for violação de unique constraint (e-mail já cadastrado), busca o registro existente
+            const { data: existingPes, error: findPesErr } = await client
+              .from('crm_pessoas')
+              .select('id')
+              .eq('email', payload.email)
+              .maybeSingle();
+
+            if (findPesErr) {
+              console.error("[CRM Onboarding] Erro ao consultar crm_pessoas existente:", findPesErr.message, findPesErr);
+            }
+
+            if (existingPes) {
+              pessoaId = existingPes.id;
+              // Atualiza os dados do lead existente
+              const { error: updatePesErr } = await client
+                .from('crm_pessoas')
+                .update({
+                  nome: payload.nome,
+                  whatsapp: payload.whatsapp || null,
+                  perfil: payload.perfil || 'Profissional de empresa',
+                  cidade_mora: payload.cidade_mora || 'São José dos Campos',
+                  cidade_trabalha: payload.cidade_trabalha || null,
+                  relacao_sjc: Array.isArray(payload.relacao_sjc) ? payload.relacao_sjc : [],
+                  motivo_entrada: payload.motivo_entrada || null,
+                  motivo_entrada_detalhe: payload.motivo_entrada_detalhe || null,
+                  tem_decisao: Boolean(payload.tem_decisao)
+                })
+                .eq('id', pessoaId);
+
+              if (updatePesErr) {
+                console.error("[CRM Onboarding] Erro ao atualizar crm_pessoas existente:", updatePesErr.message, updatePesErr);
+              } else {
+                console.log("[CRM Onboarding] Lead existente atualizado em crm_pessoas:", pessoaId);
+              }
+            }
+          } else if (pesData) {
+            pessoaId = pesData.id;
+            console.log("[CRM Onboarding] Lead inserido com sucesso em crm_pessoas:", pessoaId);
+          }
+        } catch (pErr) {
+          console.error("[CRM Onboarding] Exceção crítica ao gravar crm_pessoas:", pErr);
+        }
+
+        // 4. Inserir oportunidade na tabela crm_oportunidades (Pipeline Lead novo)
+        try {
+          const oportRecord = {
+            pessoa_id: pessoaId || undefined,
+            empresa_id: empresaId || undefined,
+            titulo: payload.projeto_nome || payload.tipo_decisao || `Lead - ${payload.empresa_nome || payload.nome}`,
+            tipo_decisao: payload.tipo_decisao || (payload.tem_decisao ? 'Decisão Declarada' : 'Pesquisa de Mercado'),
+            projeto_nome: payload.projeto_nome || null,
+            regiao_bairro: payload.regiao_bairro || payload.cidade_mora || 'São José dos Campos',
+            estagio_projeto: payload.estagio_projeto || 'Em Estudo',
+            prazo_decisao: payload.prazo_decisao || 'A definir',
+            faixa_valor: payload.faixa_valor || 'A definir',
+            pergunta_principal: payload.pergunta_principal || 'Como os dados do Radar São José apoiam essa decisão?',
+            perguntas_secundarias: payload.perguntas_secundarias || null,
+            etapa_pipeline: 'Lead novo',
+            prioridade_sla: payload.prazo_decisao === 'Já estou decidindo' ? 'Alta' : 'Normal',
+            responsavel: 'Leonardo Venâncio',
+            proximo_passo: 'Realizar primeiro contato e validar contexto',
+            status: 'Ativa',
+            origem: payload.origem || 'Formulário Radar Inbound'
+          };
+
+          // Evita envio de chaves indefinidas para prevenir rejeição de constraints
+          if (!oportRecord.pessoa_id) delete oportRecord.pessoa_id;
+          if (!oportRecord.empresa_id) delete oportRecord.empresa_id;
+
+          const { data: oppData, error: oppError } = await client
+            .from('crm_oportunidades')
+            .insert([oportRecord])
+            .select('id');
+
+          if (oppError) {
+            console.error("[CRM Onboarding] Erro ao inserir crm_oportunidades:", oppError.message, oppError);
+          } else {
+            console.log("[CRM Onboarding] Card gerado em crm_oportunidades com sucesso:", oppData);
+          }
+        } catch (oErr) {
+          console.error("[CRM Onboarding] Exceção crítica ao salvar crm_oportunidades:", oErr);
+        }
+
+        showToast("Diagnóstico e cadastro recebidos com sucesso!");
+        setTimeout(() => {
+          window.location.href = "app.html";
+        }, 1200);
+
+      } catch (fatalErr) {
+        console.error("[CRM Onboarding Fatal Exception]:", fatalErr);
+        showToast("Erro ao registrar diagnóstico no sistema.", true);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-check-circle"></i> <span>Finalizar & Enviar</span>';
+      }
     }
 
     function showToast(msg, isError = false) {
