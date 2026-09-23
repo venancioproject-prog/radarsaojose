@@ -1560,7 +1560,11 @@ window.simulatePlanChange = function(simulatedPlan) {
 };
 window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder total da pesquisa", returnTab = "historia", returnLabel = "Explorar Linha do Tempo") {
   return `
-    <div class="paywall-dark-card max-w-xl w-full mx-auto bg-slate-950/95 text-white p-8 sm:p-10 rounded-3xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl text-center space-y-6 animate-in zoom-in-95 duration-300 pointer-events-auto">
+    <!-- Cortina de Transição Fade-Out (Fundo Claro / Slate-50 - Zero Blur) -->
+    <div class="paywall-fade-curtain absolute -top-36 sm:-top-48 left-0 right-0 h-36 sm:h-48 bg-gradient-to-b from-transparent via-slate-50/80 to-[#F8FAFC] pointer-events-none z-10"></div>
+
+    <!-- Card Escuro Flutuante (Alta Conversão & Contraste Harmonioso no Tema Claro) -->
+    <div class="paywall-dark-card max-w-xl w-full mx-auto relative z-20 bg-slate-950 text-white p-8 sm:p-10 rounded-3xl border border-slate-800 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.35),0_0_35px_rgba(6,182,212,0.12)] text-center space-y-6 animate-in zoom-in-95 duration-300 pointer-events-auto">
       
       <!-- Icon Badge Minimalista -->
       <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-emerald-400/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400 text-2xl shadow-lg">
@@ -1661,7 +1665,7 @@ window.applyPlanRestrictions = function() {
       if (!dashPaywall) {
         dashPaywall = document.createElement("div");
         dashPaywall.id = "dash-paywall-overlay";
-        dashPaywall.className = "paywall-block-wrapper";
+        dashPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
         dashPaywall.innerHTML = window.createPaywallDarkOverlayHtml(
           "Desbloqueie o poder total da pesquisa",
           "historia",
@@ -1703,7 +1707,7 @@ window.applyPlanRestrictions = function() {
         if (!reportPaywall) {
           reportPaywall = document.createElement("div");
           reportPaywall.id = "report-paywall-overlay";
-          reportPaywall.className = "paywall-block-wrapper";
+          reportPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
           reportPaywall.innerHTML = window.createPaywallDarkOverlayHtml(
             "Desbloqueie o poder total da pesquisa",
             "image-bank",
