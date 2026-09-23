@@ -3598,10 +3598,17 @@
       document.getElementById('custModalPerguntaPrincipal').innerText = `"${sub.pergunta_principal || 'Como os dados do Radar São José apoiam essa decisão?'}"`;
 
       // Diagnóstico da Decisão
-      document.getElementById('custModalTipoDecisao').innerText = sub.tipo_decisao || 'Qualificação Comercial';
-      document.getElementById('custModalProjetoNome').innerText = sub.projeto_nome || 'Lead Radar São José';
-      document.getElementById('custModalEstagioProjeto').innerText = sub.estagio_projeto || 'Em Qualificação';
-      document.getElementById('custModalPrazoValor').innerText = `${sub.prazo_decisao || '30 a 60 dias'} • ${sub.faixa_valor || 'A definir'}`;
+      const isPesquisa = !sub.tem_decisao || sub.tipo_decisao === 'Pesquisa de Opinião' || sub.tipo_decisao === 'Pesquisa & Mercado';
+      const tipoDecisaoText = isPesquisa ? 'Pesquisa de Mercado' : (sub.tipo_decisao || 'Decisão Comercial');
+      const projetoText = (sub.projeto_nome && sub.projeto_nome !== 'Projeto Mapeado Inbound' && sub.projeto_nome !== 'Lead Inbound Supabase' && sub.projeto_nome !== 'Lead Formulário Radar') ? sub.projeto_nome : (isPesquisa ? 'Apenas Pesquisa' : 'Não informado');
+      const estagioText = isPesquisa ? 'Pesquisa / Estudo' : (sub.estagio_projeto || 'Em Qualificação');
+      const prazoText = (sub.prazo_decisao && sub.prazo_decisao !== '30 a 60 dias') ? sub.prazo_decisao : (isPesquisa ? 'Sem prazo' : (sub.prazo_decisao || 'A definir'));
+      const faixaText = (sub.faixa_valor && sub.faixa_valor !== 'R$ 50k a R$ 200k' && sub.faixa_valor !== 'A definir') ? sub.faixa_valor : (isPesquisa ? 'Não aplicável' : 'Não declarada');
+
+      document.getElementById('custModalTipoDecisao').innerText = tipoDecisaoText;
+      document.getElementById('custModalProjetoNome').innerText = projetoText;
+      document.getElementById('custModalEstagioProjeto').innerText = estagioText;
+      document.getElementById('custModalPrazoValor').innerText = `${prazoText} • ${faixaText}`;
 
       // Contatos
       document.getElementById('custModalWhatsapp').innerText = sub.whatsapp || 'Não informado';
