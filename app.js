@@ -1200,6 +1200,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   await checkActiveSession();
 });
 
+// ============================================================================
+// ESTADO GLOBAL SEGURO EM MEMÓRIA
+// ============================================================================
+window.appState = {
+  user: null,
+  profile: null,
+  role: 'usuario',
+  plan_type: 'gratis'
+};
+
+// ============================================================================
+// INICIALIZAÇÃO SEGURA DE SESSÃO VIA SUPABASE DATABASE (PROFILES)
+// ============================================================================
 async function checkActiveSession() {
   const hash = (window.location.hash || "").replace("#", "").trim();
   if (hash === "historia") {
@@ -1207,67 +1220,80 @@ async function checkActiveSession() {
     return;
   }
 
-  const savedEmail = localStorage.getItem('userEmail');
-  const savedName = localStorage.getItem('userName');
-  const savedRole = localStorage.getItem('userRole') || 'usuario';
-
-  if (savedEmail) {
-    if (savedRole === 'admin') {
-      const adminSim = document.getElementById("admin-role-simulator");
-      if (adminSim) adminSim.classList.remove("hidden");
-    } else if (savedRole === 'vendedor') {
-      window.location.href = "painel-afiliado.html";
-      return;
-    } else {
-      const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + savedEmail) || localStorage.getItem('onboardingCompleted');
-      if (!hasCompletedOnboarding) {
-        window.location.href = "formulario-radar.html";
-        return;
-      }
-    }
-
-    showDashboard({ email: savedEmail, user_metadata: { full_name: savedName } });
-    return;
+  // Garante cliente Supabase inicializado
+  if (!supabaseClient && typeof initSupabase === "function") {
+    initSupabase();
   }
 
   if (!supabaseClient) {
+    console.warn("Supabase Client não disponível. Redirecionando para login.");
     showLogin();
     return;
   }
+
   try {
-    const { data: { session }, error } = await supabaseClient.auth.getSession();
-    if (error) throw error;
-    if (session && session.user) {
-      const user = session.user;
-      const userEmail = user.email || "";
-      const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
-      localStorage.setItem('userEmail', userEmail);
-      localStorage.setItem('userName', userName);
+    // 1. Obter sessão real criptografada
+    const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
 
-      if (userEmail.toLowerCase().includes('admin')) {
-        localStorage.setItem('userRole', 'admin');
-        const adminSim = document.getElementById("admin-role-simulator");
-        if (adminSim) adminSim.classList.remove("hidden");
-      } else if (userEmail.toLowerCase().includes('vendedor')) {
-        localStorage.setItem('userRole', 'vendedor');
-        window.location.href = "painel-afiliado.html";
-        return;
-      } else {
-        localStorage.setItem('userRole', 'usuario');
-        if (!localStorage.getItem('userPlan')) localStorage.setItem('userPlan', 'gratis');
-        const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + userEmail) || localStorage.getItem('onboardingCompleted');
-        if (!hasCompletedOnboarding) {
-          window.location.href = "formulario-radar.html";
-          return;
-        }
-      }
-
-      showDashboard(session.user);
-    } else {
+    if (sessionError || !session || !session.user) {
+      console.info("Nenhuma sessão válida ativa.");
       showLogin();
+      return;
     }
+
+    const user = session.user;
+
+    // 2. Buscar papel (role) e plano autoritativo na tabela profiles
+    const { data: profile, error: profileError } = await supabaseClient
+      .from("profiles")
+      .select("id, email, nome, role, plan_type, onboarding_completed")
+      .eq("id", user.id)
+      .single();
+
+    if (profileError || !profile) {
+      console.warn("Perfil não encontrado no Supabase. Redirecionando para onboarding...");
+      window.location.href = "formulario-radar.html";
+      return;
+    }
+
+    // 3. Verificação estrita de Onboarding
+    if (!profile.onboarding_completed) {
+      window.location.href = "formulario-radar.html";
+      return;
+    }
+
+    // 4. Salvar estado autorizado em memória segura e sincronizar session storage
+    window.appState.user = user;
+    window.appState.profile = profile;
+    window.appState.role = profile.role || "usuario";
+    window.appState.plan_type = profile.plan_type || "gratis";
+
+    localStorage.setItem("userEmail", profile.email || user.email);
+    localStorage.setItem("userName", profile.nome || user.user_metadata?.full_name || (user.email ? user.email.split('@')[0] : ''));
+    localStorage.setItem("userRole", window.appState.role);
+    localStorage.setItem("userPlan", window.appState.plan_type);
+
+    // 5. Redirecionamentos para papéis especiais
+    if (window.appState.role === "vendedor") {
+      window.location.href = "painel-afiliado.html";
+      return;
+    }
+
+    if (window.appState.role === "admin") {
+      const adminSim = document.getElementById("admin-role-simulator");
+      if (adminSim) adminSim.classList.remove("hidden");
+    }
+
+    // 6. Exibe o dashboard com os dados validados
+    showDashboard(user);
+
+    // 7. Aplica regras visuais do plano real
+    if (typeof window.applyPlanRestrictions === "function") {
+      window.applyPlanRestrictions();
+    }
+
   } catch (err) {
-    console.error("Erro ao verificar sessão:", err.message);
+    console.error("Falha na validação de sessão segura:", err);
     showLogin();
   }
 }
@@ -1440,13 +1466,83 @@ window.copyPixCode = function() {
     });
   }
 };
+// ============================================================================
+// CHECKOUT REAL INTEGRADO AO ASAAS (/api/asaas-checkout)
+// ============================================================================
+window.processarAssinaturaReal = async function(planId) {
+  const targetPlan = planId || window.currentSelectedPlan || "plano_10";
+  const supabase = window._supabase || window.supabaseClient;
+  const payBtn = document.getElementById("btn-confirm-payment-asaas") || (typeof event !== 'undefined' ? event?.currentTarget : null);
+  const originalBtnText = payBtn ? payBtn.innerHTML : '';
+
+  try {
+    let sessionUser = window.appState?.user;
+    let userEmail = window.appState?.profile?.email || (sessionUser && sessionUser.email) || localStorage.getItem("userEmail");
+    let userName = window.appState?.profile?.nome || (sessionUser && sessionUser.user_metadata?.full_name) || localStorage.getItem("userName") || (userEmail ? userEmail.split('@')[0] : 'Usuário Radar');
+
+    if (!userEmail && supabase) {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session && session.user) {
+        sessionUser = session.user;
+        userEmail = session.user.email;
+        userName = session.user.user_metadata?.full_name || userEmail.split('@')[0];
+      }
+    }
+
+    if (!userEmail) {
+      alert("Por favor, faça login para prosseguir com a assinatura.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    if (payBtn) {
+      payBtn.disabled = true;
+      payBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i><span>Gerando Fatura Asaas...</span>';
+    }
+
+    const planKey = (targetPlan === 'plano_15' || targetPlan === 'enterprise' || targetPlan === 'empresarial') ? 'enterprise' : 'pro';
+
+    const response = await fetch('/api/asaas-checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: userName,
+        email: userEmail,
+        plan: planKey,
+        billingType: 'UNDEFINED'
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.message || "Erro ao comunicar com o gateway Asaas.");
+    }
+
+    if (result.invoiceUrl || result.paymentUrl) {
+      window.open(result.invoiceUrl || result.paymentUrl, '_blank');
+      alert("🎉 Fatura gerada com sucesso! Uma nova aba foi aberta para você concluir o pagamento com Pix, Cartão ou Boleto.");
+    } else if (result.pixQrCodeUrl) {
+      window.open(result.pixQrCodeUrl, '_blank');
+    } else {
+      alert("Cobrança gerada com sucesso! Verifique seu e-mail para concluir o pagamento.");
+    }
+
+  } catch (error) {
+    console.error("Erro no processamento da assinatura Asaas:", error);
+    alert(`Não foi possível iniciar o pagamento: ${error.message}`);
+  } finally {
+    if (payBtn) {
+      payBtn.disabled = false;
+      payBtn.innerHTML = originalBtnText;
+    }
+  }
+};
 
 window.simulateInstantPayment = function() {
-  const targetPlan = window.currentSelectedPlan || "plano_10";
-  localStorage.setItem("userPlan", targetPlan);
-  window.applyPlanRestrictions();
-  window.closePlanUpgradeModal();
-  alert("🎉 Pagamento aprovado com sucesso via Asaas! Seu acesso ao " + (targetPlan === "plano_15" ? "Plano Radar Premium (R$ 15/mês)" : "Plano Radar Pesquisa (R$ 10/mês)") + " foi desbloqueado.");
+  window.processarAssinaturaReal(window.currentSelectedPlan || "plano_10");
 };
 
 window.simulatePlanChange = function(simulatedPlan) {
@@ -1511,8 +1607,10 @@ window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder tota
 };
 
 window.applyPlanRestrictions = function() {
-  const userRole = localStorage.getItem("userRole") || "usuario";
-  const userPlan = (userRole === "admin") ? (localStorage.getItem("userPlan") || "plano_15") : (localStorage.getItem("userPlan") || "gratis");
+  const userRole = window.appState?.role || localStorage.getItem("userRole") || "usuario";
+  const userPlan = (userRole === "admin") 
+    ? (window.appState?.plan_type || localStorage.getItem("userPlan") || "plano_15") 
+    : (window.appState?.plan_type || localStorage.getItem("userPlan") || "gratis");
   
   const badgeEl = document.getElementById("user-plan-badge");
   const upgradeBtn = document.getElementById("btn-open-upgrade-modal");

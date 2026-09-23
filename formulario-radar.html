@@ -569,9 +569,21 @@
       localStorage.setItem('onboardingCompleted', 'true');
       localStorage.setItem('onboardingCompleted_' + payload.email, 'true');
 
-      // 2. Tentar persistência no Supabase (se RPC disponível)
+      // 2. Atualizar tabela profiles no Supabase para liberar o acesso permanente
       try {
         if (supabaseClient) {
+          const { data: { session } } = await supabaseClient.auth.getSession();
+          if (session && session.user) {
+            await supabaseClient
+              .from('profiles')
+              .update({
+                nome: payload.nome,
+                onboarding_completed: true,
+                updated_at: new Date().toISOString()
+              })
+              .eq('id', session.user.id);
+          }
+
           const { data, error } = await supabaseClient.rpc('crm_submit_intake_form', {
             p_nome: payload.nome,
             p_email: payload.email,

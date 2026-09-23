@@ -285,41 +285,52 @@
       supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
-    // Checa se o usuário acabou de voltar autenticado do Google
+    // Checa se o usuário acabou de voltar autenticado do Google OAuth
     async function checkGoogleCallback() {
       if (supabaseClient) {
-        const { data: { session } } = await supabaseClient.auth.getSession();
-        if (session && session.user) {
-          const user = session.user;
-          const userEmail = user.email || "";
-          const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
+        try {
+          const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+          if (sessionError) throw sessionError;
 
-          localStorage.setItem('userName', userName);
-          localStorage.setItem('userEmail', userEmail);
-          localStorage.setItem('authProvider', 'google');
+          if (session && session.user) {
+            const user = session.user;
+            const userEmail = user.email || "";
+            const userName = user.user_metadata?.full_name || user.user_metadata?.name || userEmail.split('@')[0];
 
-          if (userEmail.toLowerCase().includes('admin')) {
-            localStorage.setItem('userRole', 'admin');
-            window.location.href = "admin-crm.html";
-            return;
-          }
-          if (userEmail.toLowerCase().includes('vendedor')) {
-            localStorage.setItem('userRole', 'vendedor');
-            window.location.href = "painel-afiliado.html";
-            return;
-          }
+            // Consulta perfil real no Supabase
+            const { data: profile, error: profError } = await supabaseClient
+              .from('profiles')
+              .select('id, email, nome, role, plan_type, onboarding_completed')
+              .eq('id', user.id)
+              .single();
 
-          localStorage.setItem('userRole', 'usuario');
-          if (!localStorage.getItem('userPlan')) {
-            localStorage.setItem('userPlan', 'gratis');
-          }
+            const userRole = profile?.role || 'usuario';
+            const userPlan = profile?.plan_type || 'gratis';
+            const hasCompletedOnboarding = profile ? Boolean(profile.onboarding_completed) : false;
 
-          const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + userEmail) || localStorage.getItem('onboardingCompleted');
-          if (!hasCompletedOnboarding) {
-            window.location.href = "formulario-radar.html";
-          } else {
-            window.location.href = "app.html";
+            localStorage.setItem('userName', profile?.nome || userName);
+            localStorage.setItem('userEmail', userEmail);
+            localStorage.setItem('userRole', userRole);
+            localStorage.setItem('userPlan', userPlan);
+            localStorage.setItem('authProvider', 'google');
+
+            if (userRole === 'admin') {
+              window.location.href = "admin-crm.html";
+              return;
+            }
+            if (userRole === 'vendedor') {
+              window.location.href = "painel-afiliado.html";
+              return;
+            }
+
+            if (!hasCompletedOnboarding) {
+              window.location.href = "formulario-radar.html";
+            } else {
+              window.location.href = "app.html";
+            }
           }
+        } catch (err) {
+          console.warn("Nenhuma sessão de callback detectada ou erro:", err);
         }
       }
     }
@@ -327,65 +338,39 @@
 
     async function loginWithGoogle() {
       const btn = document.getElementById('btn-login');
-      btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i><span>Conectando ao Google...</span>';
-
-      if (supabaseClient) {
-        try {
-          const { error } = await supabaseClient.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-              redirectTo: window.location.origin + window.location.pathname
-            }
-          });
-          if (error) throw error;
-          return;
-        } catch (err) {
-          console.warn("Erro no OAuth Supabase:", err);
-        }
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i><span>Conectando ao Google...</span>';
       }
 
-      // Fallback
-      setTimeout(() => {
-        const email = "usuario.google@radarsaojose.com.br";
-        const name = "Usuário Google SJC";
-        localStorage.setItem('userRole', 'usuario');
-        localStorage.setItem('userName', name);
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('authProvider', 'google');
-        if (!localStorage.getItem('userPlan')) localStorage.setItem('userPlan', 'gratis');
-
-        const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
-        if (!hasCompletedOnboarding) {
-          window.location.href = "formulario-radar.html";
-        } else {
-          window.location.href = "app.html";
+      if (!supabaseClient) {
+        alert("Erro de conexão: Cliente de autenticação não inicializado.");
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-brands fa-google text-rose-500 text-lg"></i><span>Continuar com Google</span>';
         }
-      }, 800);
-    }
-
-    function quickLogin(email, name, role, isNewRegister = false) {
-      localStorage.setItem('userRole', role);
-      localStorage.setItem('userName', name);
-      localStorage.setItem('userEmail', email);
-      if (!localStorage.getItem('userPlan')) {
-        localStorage.setItem('userPlan', 'gratis');
+        return;
       }
-      
-      if (role === 'admin') {
-        window.location.href = "admin-crm.html";
-      } else if (role === 'vendedor') {
-        window.location.href = "painel-afiliado.html";
-      } else {
-        const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
-        if (isNewRegister || !hasCompletedOnboarding) {
-          window.location.href = "formulario-radar.html";
-        } else {
-          window.location.href = "app.html";
+
+      try {
+        const { error } = await supabaseClient.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: window.location.origin + window.location.pathname
+          }
+        });
+        if (error) throw error;
+      } catch (err) {
+        console.error("Erro no login com Google:", err);
+        alert("Não foi possível conectar com o Google: " + (err.message || "Tente novamente mais tarde."));
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-brands fa-google text-rose-500 text-lg"></i><span>Continuar com Google</span>';
         }
       }
     }
 
-    function handleAuthSubmit(e) {
+    async function handleAuthSubmit(e) {
       if (e) {
         if (typeof e.preventDefault === 'function') e.preventDefault();
         if (typeof e.stopPropagation === 'function') e.stopPropagation();
@@ -400,12 +385,72 @@
         return false;
       }
 
-      if (email.toLowerCase().includes('admin')) {
-        quickLogin(email, 'Admin Master', 'admin', false);
-      } else if (email.toLowerCase().includes('vendedor')) {
-        quickLogin(email, 'Lucas Vendedor', 'vendedor', false);
-      } else {
-        quickLogin(email, nome || 'Usuário ' + email.split('@')[0], 'usuario', isNewRegister);
+      const submitBtn = document.querySelector("#auth-form button[type='submit']");
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i><span>Processando...</span>';
+      }
+
+      try {
+        if (!supabaseClient) throw new Error("Cliente Supabase não disponível.");
+
+        if (isNewRegister) {
+          const { data: signUpData, error: signUpErr } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+              data: { full_name: nome || email.split('@')[0] }
+            }
+          });
+          if (signUpErr) throw signUpErr;
+
+          localStorage.setItem('userEmail', email);
+          localStorage.setItem('userName', nome || email.split('@')[0]);
+          localStorage.setItem('userRole', 'usuario');
+          localStorage.setItem('userPlan', 'gratis');
+          window.location.href = "formulario-radar.html";
+        } else {
+          const { data: signInData, error: signInErr } = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+          });
+          if (signInErr) throw signInErr;
+
+          const user = signInData.user;
+          const { data: profile } = await supabaseClient
+            .from('profiles')
+            .select('id, email, nome, role, plan_type, onboarding_completed')
+            .eq('id', user.id)
+            .single();
+
+          const role = profile?.role || 'usuario';
+          const plan = profile?.plan_type || 'gratis';
+          const onboardingDone = profile ? Boolean(profile.onboarding_completed) : false;
+
+          localStorage.setItem('userEmail', user.email);
+          localStorage.setItem('userName', profile?.nome || user.user_metadata?.full_name || email.split('@')[0]);
+          localStorage.setItem('userRole', role);
+          localStorage.setItem('userPlan', plan);
+
+          if (role === 'admin') {
+            window.location.href = "admin-crm.html";
+          } else if (role === 'vendedor') {
+            window.location.href = "painel-afiliado.html";
+          } else if (!onboardingDone) {
+            window.location.href = "formulario-radar.html";
+          } else {
+            window.location.href = "app.html";
+          }
+        }
+      } catch (err) {
+        console.error("Erro na autenticação:", err);
+        alert("Erro ao autenticar: " + (err.message || "Verifique suas credenciais."));
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
       }
       return false;
     }
