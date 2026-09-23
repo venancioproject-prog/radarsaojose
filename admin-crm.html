@@ -3585,7 +3585,21 @@
       }
     }
 
-        // Instant & Resilient Articles Fetcher (Always loads all 30 posts from Supabase Cloud)
+        function syncPortalCacheToLocalStorage() {
+      try {
+        if (Array.isArray(allFetchedPosts)) {
+          const published = allFetchedPosts
+            .filter(p => p.status === 'published')
+            .map(({ content, ...rest }) => rest);
+          localStorage.setItem('radarsaojose_portal_posts_cache_v2', JSON.stringify(published));
+          localStorage.setItem('radarsaojose_portal_posts_cache_time', Date.now().toString());
+        }
+      } catch (e) {
+        console.warn('Could not update localStorage portal cache:', e);
+      }
+    }
+
+    // Instant & Resilient Articles Fetcher (Always loads all 30 posts from Supabase Cloud)
     async function fetchBlogPosts(page = 1) {
       blogCurrentPage = page;
       const searchVal = document.getElementById('blogSearch') ? document.getElementById('blogSearch').value.trim() : '';
@@ -3610,6 +3624,7 @@
             // Ordenar estritamente da última postada para a primeira
             allFetchedPosts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
             updateDbBadge('supabase', supData.length);
+            syncPortalCacheToLocalStorage();
             filterAndRenderBlogTable(page, searchVal, catVal, statusVal);
             return;
           }
@@ -4341,6 +4356,7 @@
 
         // Reordenar todo o array em memória da mais recente para a mais antiga
         allFetchedPosts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
+        syncPortalCacheToLocalStorage();
 
         const isEdit = !!id;
         const popupMsg = isEdit ? 'Alterações realizadas com sucesso' : 'Matéria publicada com sucesso';
@@ -4504,6 +4520,7 @@
         });
       }
       post.is_featured = newFeatured;
+      syncPortalCacheToLocalStorage();
 
       filterAndRenderBlogTable(blogCurrentPage, '', 'all', 'all');
 
@@ -4547,6 +4564,7 @@
       const newStatus = (currentStatus === 'published') ? 'draft' : 'published';
       const post = allFetchedPosts.find(p => p.id === identifier || p.slug === identifier);
       if (post) post.status = newStatus;
+      syncPortalCacheToLocalStorage();
 
       try {
         await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?or=(id.eq.${encodeURIComponent(identifier)},slug.eq.${encodeURIComponent(identifier)})`, {
@@ -4568,6 +4586,7 @@
     async function deletePost(identifier) {
       if (confirm("Deseja realmente excluir permanentemente este artigo do blog?")) {
         allFetchedPosts = allFetchedPosts.filter(p => p.id !== identifier && p.slug !== identifier);
+        syncPortalCacheToLocalStorage();
         try {
           await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?or=(id.eq.${encodeURIComponent(identifier)},slug.eq.${encodeURIComponent(identifier)})`, {
             method: 'DELETE',
