@@ -43,6 +43,30 @@
           return;
         }
 
+        // =========================================================================
+        // SUPER ADMIN BYPASS (Donos do Sistema)
+        // =========================================================================
+        const SUPER_ADMINS = ['venancio.project@gmail.com', 'gamersilvaesilva@gmail.com'];
+        const userEmail = (session.user.email || '').toLowerCase().trim();
+
+        if (SUPER_ADMINS.includes(userEmail)) {
+          console.log("[Auth Guard] Super Admin reconhecido via bypass:", userEmail);
+          const adminName = session.user.user_metadata?.nome || session.user.user_metadata?.full_name || (userEmail.includes('venancio') ? 'Venâncio' : 'Silva') || 'Super Admin';
+          window.currentAdminUser = {
+            id: session.user.id,
+            email: session.user.email,
+            nome: adminName,
+            role: 'admin'
+          };
+          localStorage.setItem("userRole", "admin");
+          localStorage.setItem("userName", adminName);
+          localStorage.setItem("userEmail", session.user.email);
+
+          // Libera renderização da tela imediatamente
+          document.documentElement.style.visibility = 'visible';
+          return;
+        }
+
         // Consulta perfil e role real na tabela profiles
         const { data: profile, error: profileError } = await window.supabaseClient
           .from('profiles')
