@@ -2438,9 +2438,7 @@
       }
     }
 
-    function persistSubscribers() {
-      renderCrm();
-    }
+    
 
     let currentCrmView = 'table';
     let selectedCustomerId = null;
@@ -2656,7 +2654,7 @@
                   ${sub.avatar || 'SJC'}
                 </div>
                 <div>
-                  <button onclick="openCustomerDetails(${sub.id})" class="font-extrabold text-slate-900 hover:text-cyan-600 text-left transition-colors text-sm flex items-center gap-1.5">
+                  <button onclick="openCustomerDetails('${sub.id}')" class="font-extrabold text-slate-900 hover:text-cyan-600 text-left transition-colors text-sm flex items-center gap-1.5">
                     <span>${sub.empresa}</span>
                   </button>
                   <div class="text-[11px] text-slate-600 font-semibold mt-0.5">
@@ -2682,7 +2680,7 @@
 
             <!-- Pergunta Principal Intocável -->
             <td class="py-4 px-6 max-w-xs">
-              <div class="p-2.5 bg-amber-50/70 border border-amber-200/80 rounded-xl cursor-pointer hover:bg-amber-100/70 transition-colors" onclick="openCustomerDetails(${sub.id})" title="Clique para ver a ficha completa com a pergunta sagrada">
+              <div class="p-2.5 bg-amber-50/70 border border-amber-200/80 rounded-xl cursor-pointer hover:bg-amber-100/70 transition-colors" onclick="openCustomerDetails('${sub.id}')" title="Clique para ver a ficha completa com a pergunta sagrada">
                 <div class="flex items-center gap-1 text-[9px] font-black uppercase text-amber-800 mb-1">
                   <i class="fa-solid fa-lock text-amber-600"></i> Pergunta Declarada
                 </div>
@@ -2724,22 +2722,22 @@
             <!-- Ações -->
             <td class="py-4 px-6 text-right">
               <div class="flex items-center justify-end gap-1.5">
-                <button onclick="openCustomerDetails(${sub.id})" class="px-3 py-1.5 rounded-lg bg-[#0B2545] hover:bg-[#07172C] text-white text-xs font-bold transition-all shadow-2xs" title="Ver Ficha Completa do Lead">
+                <button onclick="openCustomerDetails('${sub.id}')" class="px-3 py-1.5 rounded-lg bg-[#0B2545] hover:bg-[#07172C] text-white text-xs font-bold transition-all shadow-2xs" title="Ver Ficha Completa do Lead">
                   <i class="fa-solid fa-address-card mr-1"></i> Ficha
                 </button>
                 <div class="relative inline-block text-left">
-                  <button onclick="toggleActionMenu(${sub.id})" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
+                  <button onclick="toggleActionMenu('${sub.id}')" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                   </button>
                   <div id="actionMenu-${sub.id}" class="hidden absolute right-0 mt-1 w-44 bg-white rounded-xl shadow-xl border border-slate-200 py-1.5 z-30 text-xs font-bold">
-                    <button onclick="advanceStage(${sub.id}, 1)" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 text-slate-700 flex items-center gap-2">
+                    <button onclick="advanceStage('${sub.id}', 1)" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 text-slate-700 flex items-center gap-2">
                       <i class="fa-solid fa-arrow-right text-cyan-600"></i> Avançar Etapa
                     </button>
-                    <button onclick="advanceStage(${sub.id}, -1)" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 text-slate-700 flex items-center gap-2">
+                    <button onclick="advanceStage('${sub.id}', -1)" class="w-full text-left px-3.5 py-2 hover:bg-slate-50 text-slate-700 flex items-center gap-2">
                       <i class="fa-solid fa-arrow-left text-amber-500"></i> Voltar Etapa
                     </button>
                     <div class="border-t border-slate-100 my-1"></div>
-                    <button onclick="deleteSubscriber(${sub.id})" class="w-full text-left px-3.5 py-2 hover:bg-rose-50 text-rose-600 flex items-center gap-2">
+                    <button onclick="deleteSubscriber('${sub.id}')" class="w-full text-left px-3.5 py-2 hover:bg-rose-50 text-rose-600 flex items-center gap-2">
                       <i class="fa-solid fa-trash-can"></i> Excluir Registro
                     </button>
                   </div>
@@ -2779,7 +2777,7 @@
                   <div class="w-7 h-7 rounded-lg ${sub.avatarBg || 'bg-blue-600'} text-white font-black text-[10px] flex items-center justify-center shrink-0">
                     ${sub.avatar || 'SJ'}
                   </div>
-                  <button onclick="openCustomerDetails(${sub.id})" class="font-extrabold text-slate-900 hover:text-cyan-600 text-xs text-left leading-tight">
+                  <button onclick="openCustomerDetails('${sub.id}')" class="font-extrabold text-slate-900 hover:text-cyan-600 text-xs text-left leading-tight">
                     ${sub.empresa}
                   </button>
                 </div>
@@ -2800,10 +2798,10 @@
                   <a href="${waLink}" target="_blank" class="p-1.5 rounded-lg text-emerald-600 hover:bg-emerald-50 transition-colors" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
                   </a>
-                  <button onclick="advanceStage(${sub.id}, -1)" class="p-1 rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100" title="Voltar Etapa">
+                  <button onclick="advanceStage('${sub.id}', -1)" class="p-1 rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100" title="Voltar Etapa">
                     <i class="fa-solid fa-chevron-left text-[10px]"></i>
                   </button>
-                  <button onclick="advanceStage(${sub.id}, 1)" class="p-1 rounded text-slate-400 hover:text-cyan-600 hover:bg-slate-100" title="Avançar Etapa">
+                  <button onclick="advanceStage('${sub.id}', 1)" class="p-1 rounded text-slate-400 hover:text-cyan-600 hover:bg-slate-100" title="Avançar Etapa">
                     <i class="fa-solid fa-chevron-right text-[10px]"></i>
                   </button>
                 </div>
@@ -2861,7 +2859,7 @@
       else mrrInput.value = '0.00';
     }
 
-    function saveSubscriber(e) {
+    async function saveSubscriber(e) {
       e.preventDefault();
       const empresa = document.getElementById('modalEmpresa').value.trim();
       const nome = document.getElementById('modalNome').value.trim();
@@ -2883,52 +2881,68 @@
       const mrr = parseFloat(document.getElementById('modalMrr').value) || 49.00;
       const proximo_passo = document.getElementById('modalProximoPasso').value.trim() || 'Entrar em contato via WhatsApp com estudo preliminar';
 
-      const initials = (empresa || nome).split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+      try {
+        const client = window.supabaseClient;
+        if (client) {
+          let pessoaId = null;
+          try {
+            const { data: pesData } = await client
+              .from('crm_pessoas')
+              .insert([{
+                nome,
+                email: email.toLowerCase(),
+                whatsapp: whatsapp || null,
+                perfil: cargo,
+                cidade_mora: relacao_sjc,
+                tem_decisao: true,
+                origem: 'CRM Admin'
+              }])
+              .select('id')
+              .single();
+            if (pesData) pessoaId = pesData.id;
+          } catch (pErr) {
+            console.warn('[CRM Save Pessoa]:', pErr.message);
+          }
 
-      let regiao = "São José dos Campos";
-      if (['Jd. Aquarius', 'Jd. das Colinas', 'Urbanova'].includes(bairro)) regiao = "Zona Oeste";
-      else if (['Jd. Satélite'].includes(bairro)) regiao = "Zona Sul";
-      else if (['Vila Ema', 'Centro'].includes(bairro)) regiao = "Centro";
-      else if (['Eugênio de Melo'].includes(bairro)) regiao = "Zona Leste";
-      else if (['Putim'].includes(bairro)) regiao = "Zona Sudeste";
+          try {
+            const pipelineMap = {
+              'lead': 'Lead novo',
+              'qualificacao': 'Qualificação',
+              'proposta': 'Proposta',
+              'ativo': 'Ganho',
+              'churn': 'Perdido'
+            };
 
-      const newSub = {
-        id: Date.now(),
-        empresa,
-        nome,
-        cargo,
-        papel_decisao,
-        relacao_sjc,
-        setor: "Corporativo B2B",
-        bairro,
-        regiao,
-        whatsapp,
-        email,
-        tipo_decisao,
-        projeto_nome,
-        estagio_projeto,
-        prazo_decisao,
-        faixa_valor,
-        pergunta_principal,
-        sla_prioridade,
-        proximo_passo,
-        proximo_passo_data: new Date().toISOString().split('T')[0],
-        plano,
-        mrr,
-        stage,
-        status: stage === 'ativo' ? 'Ativo' : (stage === 'churn' ? 'Cancelado' : 'Pendente'),
-        data: "Hoje",
-        avatar: initials,
-        avatarBg: "bg-[#0B2545]",
-        notas: `[Pergunta Sagrada]: ${pergunta_principal}`,
-        historico: ["Cadastro registrado no CRM Comercial B2B"]
-      };
+            await client
+              .from('crm_oportunidades')
+              .insert([{
+                pessoa_id: pessoaId,
+                titulo: projeto_nome || `Decisão - ${empresa || nome}`,
+                tipo_decisao,
+                projeto_nome,
+                regiao_bairro: bairro,
+                estagio_projeto,
+                prazo_decisao,
+                faixa_valor,
+                pergunta_principal,
+                etapa_pipeline: pipelineMap[stage] || 'Lead novo',
+                prioridade_sla: sla_prioridade,
+                proximo_passo,
+                status: stage === 'ativo' ? 'Ativo' : 'Pendente'
+              }]);
+          } catch (oErr) {
+            console.warn('[CRM Save Oportunidade]:', oErr.message);
+          }
+        }
 
-      subscribers.unshift(newSub);
-      persistSubscribers();
-      closeModal();
-      e.target.reset();
-      showToast("Novo lead corporativo cadastrado com sucesso!");
+        closeModal();
+        e.target.reset();
+        showToast("Novo lead corporativo salvo no Supabase!");
+        await fetchCRMDataFromSupabase();
+      } catch (err) {
+        console.error('[CRM Save Error]:', err);
+        showToast("Erro ao salvar lead: " + (err.message || err), "error");
+      }
     }
 
     function deleteSubscriber(id) {
@@ -3010,7 +3024,6 @@
       sub.historico = sub.historico || [];
       sub.historico.unshift(`Próximo passo atualizado: ${text} em ${new Date().toLocaleDateString('pt-BR')}`);
 
-      persistSubscribers();
       document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo;
       input.value = '';
       showToast("Próximo passo atualizado com sucesso!");
@@ -3029,7 +3042,6 @@
       sub.historico = sub.historico || [];
       sub.historico.unshift(`Anotação: ${text}`);
 
-      persistSubscribers();
       document.getElementById('custModalNotas').innerText = sub.notas;
       input.value = '';
       showToast("Anotação comercial salva!");
