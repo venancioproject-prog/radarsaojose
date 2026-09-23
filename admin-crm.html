@@ -1797,9 +1797,21 @@
             <p id="custModalBairro" class="text-[11px] text-cyan-300 font-semibold mt-0.5"><i class="fa-solid fa-location-dot mr-1"></i>São José dos Campos</p>
           </div>
         </div>
-        <button onclick="closeCustomerDetails()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5 bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/15 text-xs">
+            <span class="text-[11px] text-slate-300 font-medium">Etapa:</span>
+            <select id="custModalStageSelect" onchange="changeCustomerStageFromModal(this.value)" class="bg-[#07172C] text-white text-xs font-bold px-2.5 py-1 rounded-lg border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer">
+              <option value="lead">Lead novo</option>
+              <option value="qualificacao">Qualificação</option>
+              <option value="proposta">Proposta</option>
+              <option value="ativo">Ganho (Ativo)</option>
+              <option value="churn">Perdido</option>
+            </select>
+          </div>
+          <button onclick="closeCustomerDetails()" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
       </div>
 
       <div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
@@ -1883,27 +1895,59 @@
           <div class="p-3 bg-white rounded-xl border border-blue-100 text-xs text-slate-800 font-semibold" id="custModalProximoPasso">
             Nenhum próximo passo agendado.
           </div>
-          <div class="flex gap-2">
-            <input type="text" id="custModalNextStepInput" placeholder="Atualizar próximo passo (ex: Enviar estudo comparativo Aquarius vs Colinas)..." class="flex-1 px-3.5 py-2 bg-white border border-blue-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
-            <button type="button" onclick="updateCustomerNextStep()" class="px-3.5 py-2 bg-[#0B2545] hover:bg-[#07172C] text-white font-bold text-xs rounded-xl shadow-xs transition-colors">
-              Salvar Passo
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+            <input type="text" id="custModalNextStepInput" placeholder="Atualizar próximo passo (ex: Enviar estudo comparativo Aquarius vs Colinas)..." class="sm:col-span-8 px-3.5 py-2 bg-white border border-blue-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400" />
+            <input type="date" id="custModalNextStepDate" class="sm:col-span-4 px-3 py-2 bg-white border border-blue-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 cursor-pointer" />
+          </div>
+          <div class="flex justify-end">
+            <button type="button" onclick="updateCustomerNextStep()" class="px-4 py-2 bg-[#0B2545] hover:bg-[#07172C] text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1.5">
+              <i class="fa-solid fa-check"></i> Salvar Próximo Passo
             </button>
           </div>
         </div>
 
-        <!-- 5. ANOTAÇÕES COMERCIAIS & HISTÓRICO -->
-        <div>
-          <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-2">
-            <i class="fa-solid fa-note-sticky text-amber-500"></i> Anotações Comerciais & Log de Interações
-          </h4>
-          <div id="custModalNotas" class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-xl text-xs text-amber-950 leading-relaxed font-medium mb-3">
-            Nenhuma anotação registrada.
+        <!-- 5. ANOTAÇÕES COMERCIAIS & LINHA DO TEMPO INTERATIVA -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-2">
+              <i class="fa-solid fa-timeline text-cyan-600"></i> Linha do Tempo & Histórico de Interações
+            </h4>
+            <span class="text-[10px] font-semibold text-slate-400" id="custModalTimelineCount">0 interações</span>
           </div>
-          <div class="flex gap-2">
-            <input type="text" id="custNewNoteInput" placeholder="Adicionar nova anotação de contato..." class="flex-1 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:bg-white" />
-            <button type="button" onclick="saveCustomerNote()" class="px-4 py-2 bg-[#0B2545] hover:bg-[#07172C] text-white font-bold text-xs rounded-xl shadow-xs transition-colors">
-              Salvar Nota
-            </button>
+
+          <!-- Caixa de Adicionar Interação -->
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-[11px] font-bold text-slate-600">Tipo de Contato:</span>
+              <div class="flex items-center gap-1.5 flex-wrap" id="activityTypeSelector">
+                <button type="button" onclick="selectActivityType('Observação')" data-type="Observação" class="activity-type-btn px-2.5 py-1 rounded-lg text-xs font-bold border transition-all bg-[#0B2545] text-white border-[#0B2545]">
+                  <i class="fa-solid fa-note-sticky mr-1"></i> Anotação
+                </button>
+                <button type="button" onclick="selectActivityType('WhatsApp')" data-type="WhatsApp" class="activity-type-btn px-2.5 py-1 rounded-lg text-xs font-bold border transition-all bg-white text-slate-700 border-slate-200 hover:bg-slate-100">
+                  <i class="fa-brands fa-whatsapp text-emerald-600 mr-1"></i> WhatsApp
+                </button>
+                <button type="button" onclick="selectActivityType('Ligação')" data-type="Ligação" class="activity-type-btn px-2.5 py-1 rounded-lg text-xs font-bold border transition-all bg-white text-slate-700 border-slate-200 hover:bg-slate-100">
+                  <i class="fa-solid fa-phone text-blue-600 mr-1"></i> Ligação
+                </button>
+                <button type="button" onclick="selectActivityType('Reunião')" data-type="Reunião" class="activity-type-btn px-2.5 py-1 rounded-lg text-xs font-bold border transition-all bg-white text-slate-700 border-slate-200 hover:bg-slate-100">
+                  <i class="fa-solid fa-handshake text-purple-600 mr-1"></i> Reunião
+                </button>
+              </div>
+            </div>
+
+            <textarea id="custNewNoteInput" rows="2" placeholder="Descreva o que foi conversado ou anotado neste contato..." class="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-400 custom-scrollbar resize-none"></textarea>
+
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] text-slate-400 font-medium">Salva na linha do tempo do CRM e no Supabase</span>
+              <button type="button" onclick="saveCustomerNote()" class="px-4 py-2 bg-[#0B2545] hover:bg-[#07172C] text-white font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-plus"></i> Registrar Interação
+              </button>
+            </div>
+          </div>
+
+          <!-- Feed da Timeline -->
+          <div id="custModalTimeline" class="space-y-2.5 pt-2 max-h-64 overflow-y-auto custom-scrollbar pr-1">
+            <!-- Injetado dinamicamente -->
           </div>
         </div>
 
@@ -3444,9 +3488,94 @@
       }
     }
 
-    // Modal Ficha Completa do Cliente & Decisão
-    function openCustomerDetails(id) {
-      const sub = subscribers.find(s => s.id === id);
+    // Modal Ficha Completa do Cliente & Decisão (Interativo & Real-Time)
+    let selectedActivityType = 'Observação';
+
+    function selectActivityType(type) {
+      selectedActivityType = type;
+      document.querySelectorAll('.activity-type-btn').forEach(btn => {
+        if (btn.getAttribute('data-type') === type) {
+          btn.className = "activity-type-btn px-2.5 py-1 rounded-lg text-xs font-bold border transition-all bg-[#0B2545] text-white border-[#0B2545]";
+        } else {
+          btn.className = "activity-type-btn px-2.5 py-1 rounded-lg text-xs font-bold border transition-all bg-white text-slate-700 border-slate-200 hover:bg-slate-100";
+        }
+      });
+    }
+
+    function renderCustomerTimeline(sub) {
+      const container = document.getElementById('custModalTimeline');
+      const countEl = document.getElementById('custModalTimelineCount');
+      if (!container) return;
+
+      const items = Array.isArray(sub.historico) ? sub.historico : [];
+      if (countEl) countEl.innerText = `${items.length} registro(s)`;
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-6 text-slate-400 bg-slate-50/50 rounded-xl border border-dashed border-slate-200">
+            <i class="fa-regular fa-clock text-2xl mb-1 text-slate-300 block"></i>
+            <span class="text-xs">Nenhuma interação registrada ainda. Use o campo acima para adicionar o primeiro contato.</span>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = items.map((item, idx) => {
+        let tipo = 'Observação';
+        let texto = '';
+        let dataStr = sub.data || 'Hoje';
+        let autor = 'Sistema';
+
+        if (typeof item === 'string') {
+          texto = item;
+          if (texto.toLowerCase().includes('whatsapp')) tipo = 'WhatsApp';
+          else if (texto.toLowerCase().includes('etapa')) tipo = 'Etapa';
+          else if (texto.toLowerCase().includes('passo')) tipo = 'Próximo Passo';
+          else if (texto.toLowerCase().includes('cadastrado') || texto.toLowerCase().includes('origem')) tipo = 'Origem';
+        } else if (typeof item === 'object' && item !== null) {
+          tipo = item.tipo || 'Observação';
+          texto = item.observacao || item.texto || '';
+          dataStr = item.data ? new Date(item.data).toLocaleString('pt-BR') : dataStr;
+          autor = item.responsavel || autor;
+        }
+
+        // Ícones e cores por tipo
+        let iconClass = 'fa-solid fa-note-sticky text-amber-500';
+        let badgeBg = 'bg-amber-50 text-amber-800 border-amber-200';
+        if (tipo === 'WhatsApp') {
+          iconClass = 'fa-brands fa-whatsapp text-emerald-500';
+          badgeBg = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+        } else if (tipo === 'Ligação') {
+          iconClass = 'fa-solid fa-phone text-blue-500';
+          badgeBg = 'bg-blue-50 text-blue-800 border-blue-200';
+        } else if (tipo === 'Reunião') {
+          iconClass = 'fa-solid fa-handshake text-purple-500';
+          badgeBg = 'bg-purple-50 text-purple-800 border-purple-200';
+        } else if (tipo === 'Etapa') {
+          iconClass = 'fa-solid fa-arrows-split-up-and-left text-cyan-600';
+          badgeBg = 'bg-cyan-50 text-cyan-800 border-cyan-200';
+        } else if (tipo === 'Próximo Passo') {
+          iconClass = 'fa-solid fa-clock-rotate-left text-indigo-500';
+          badgeBg = 'bg-indigo-50 text-indigo-800 border-indigo-200';
+        } else if (tipo === 'Origem') {
+          iconClass = 'fa-solid fa-sparkles text-rose-500';
+          badgeBg = 'bg-slate-100 text-slate-700 border-slate-200';
+        }
+
+        return `
+          <div class="p-3 bg-white rounded-xl border border-slate-200/90 shadow-2xs hover:border-slate-300 transition-colors">
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[10px] font-black border ${badgeBg}">
+                <i class="${iconClass}"></i> ${tipo}
+              </span>
+              <span class="text-[10px] text-slate-400 font-semibold">${dataStr} • ${autor}</span>
+            </div>
+            <p class="text-xs text-slate-700 font-medium leading-relaxed">${texto}</p>
+          </div>`;
+      }).join('');
+    }
+
+    async function openCustomerDetails(id) {
+      const sub = subscribers.find(s => String(s.id) === String(id));
       if (!sub) return;
 
       selectedCustomerId = id;
@@ -3459,17 +3588,20 @@
       document.getElementById('custModalPlanBadge').innerHTML = getPlanBadge(sub.plano);
       document.getElementById('custModalStageBadge').innerHTML = getStageBadge(sub.stage);
 
+      const stageSelect = document.getElementById('custModalStageSelect');
+      if (stageSelect) stageSelect.value = sub.stage || 'lead';
+
       const isOverdue = isStepOverdue(sub.proximo_passo_data);
       document.getElementById('custModalSlaBadge').innerHTML = getSlaBadge(sub.sla_prioridade, isOverdue);
 
       // Pergunta Principal Sagrada
-      document.getElementById('custModalPerguntaPrincipal').innerText = `"${sub.pergunta_principal || 'Como os dados do Radar São José podem apoiar a tomada de decisão no mercado local?'}"`;
+      document.getElementById('custModalPerguntaPrincipal').innerText = `"${sub.pergunta_principal || 'Como os dados do Radar São José apoiam essa decisão?'}"`;
 
       // Diagnóstico da Decisão
-      document.getElementById('custModalTipoDecisao').innerText = sub.tipo_decisao || 'Expansão';
-      document.getElementById('custModalProjetoNome').innerText = sub.projeto_nome || 'Projeto Mapeado';
-      document.getElementById('custModalEstagioProjeto').innerText = sub.estagio_projeto || 'Em Estudo';
-      document.getElementById('custModalPrazoValor').innerText = `${sub.prazo_decisao || '30-60 dias'} • ${sub.faixa_valor || 'R$ 50k-200k'}`;
+      document.getElementById('custModalTipoDecisao').innerText = sub.tipo_decisao || 'Qualificação Comercial';
+      document.getElementById('custModalProjetoNome').innerText = sub.projeto_nome || 'Lead Radar São José';
+      document.getElementById('custModalEstagioProjeto').innerText = sub.estagio_projeto || 'Em Qualificação';
+      document.getElementById('custModalPrazoValor').innerText = `${sub.prazo_decisao || '30 a 60 dias'} • ${sub.faixa_valor || 'A definir'}`;
 
       // Contatos
       document.getElementById('custModalWhatsapp').innerText = sub.whatsapp || 'Não informado';
@@ -3477,8 +3609,8 @@
       const waLink = formatWhatsAppPitch(sub);
       document.getElementById('custModalWaLink').href = waLink;
 
-      document.getElementById('custModalEmail').innerText = sub.email;
-      document.getElementById('custModalEmailLink').href = 'mailto:' + sub.email;
+      document.getElementById('custModalEmail').innerText = sub.email || 'Não informado';
+      document.getElementById('custModalEmailLink').href = sub.email ? ('mailto:' + sub.email) : '#';
 
       // SLA & Próximo Passo
       const slaStatusEl = document.getElementById('custModalSlaStatusPill');
@@ -3487,14 +3619,52 @@
         slaStatusEl.innerText = isOverdue ? '⚠️ SLA Vencido' : 'No Prazo';
       }
 
-      document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo || 'Nenhum próximo passo agendado.';
-      document.getElementById('custModalNextStepInput').value = '';
+      document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo ? `${sub.proximo_passo} (Data: ${sub.proximo_passo_data || 'Não definida'})` : 'Nenhum próximo passo agendado.';
+      document.getElementById('custModalNextStepInput').value = sub.proximo_passo || '';
+      document.getElementById('custModalNextStepDate').value = sub.proximo_passo_data || new Date().toISOString().split('T')[0];
 
-      // Notas
-      document.getElementById('custModalNotas').innerText = sub.notas || 'Sem anotações no momento.';
-      document.getElementById('custNewNoteInput').value = '';
+      // Reset de Inputs de Anotação
+      selectActivityType('Observação');
+      const noteInput = document.getElementById('custNewNoteInput');
+      if (noteInput) noteInput.value = '';
 
+      // Renderizar Timeline Inicial
+      renderCustomerTimeline(sub);
       document.getElementById('customerDetailsModal').classList.remove('hidden');
+
+      // Buscar histórico remoto em crm_atividades se o ID for UUID no Supabase
+      const client = window.supabaseClient;
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(id));
+      if (client && isUuid) {
+        try {
+          const { data: acts, error: actErr } = await client
+            .from('crm_atividades')
+            .select('*')
+            .eq('oportunidade_id', id)
+            .order('data_atividade', { ascending: false });
+
+          if (!actErr && Array.isArray(acts) && acts.length > 0) {
+            acts.forEach(a => {
+              const alreadyHas = (sub.historico || []).some(h => 
+                (typeof h === 'object' && h.id === a.id) || 
+                (typeof h === 'string' && h.includes(a.observacao))
+              );
+              if (!alreadyHas) {
+                sub.historico.unshift({
+                  id: a.id,
+                  tipo: a.tipo || 'Observação',
+                  observacao: a.observacao,
+                  responsavel: a.responsavel || 'Equipe',
+                  data: a.data_atividade || a.created_at
+                });
+              }
+            });
+            renderCustomerTimeline(sub);
+          }
+        } catch (e) {
+          console.warn('[CRM Fetch Atividades Warn]:', e.message);
+        }
+      }
     }
 
     function closeCustomerDetails() {
@@ -3502,40 +3672,116 @@
       selectedCustomerId = null;
     }
 
+    async function changeCustomerStageFromModal(newStage) {
+      if (!selectedCustomerId) return;
+      const sub = subscribers.find(s => String(s.id) === String(selectedCustomerId));
+      if (!sub || sub.stage === newStage) return;
+
+      const previousStage = sub.stage;
+      sub.stage = newStage;
+      if (newStage === 'ativo') sub.status = 'Ativo';
+      else if (newStage === 'churn') sub.status = 'Cancelado';
+      else sub.status = 'Pendente';
+
+      const logMsg = `Etapa alterada para ${newStage.toUpperCase()}`;
+      sub.historico = sub.historico || [];
+      sub.historico.unshift({
+        tipo: 'Etapa',
+        observacao: logMsg,
+        responsavel: 'Admin',
+        data: new Date().toISOString()
+      });
+
+      // Persistir no storage
+      try {
+        localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+      } catch (e) {}
+
+      document.getElementById('custModalStageBadge').innerHTML = getStageBadge(sub.stage);
+      renderCustomerTimeline(sub);
+      renderCrm();
+      showToast(`Etapa alterada para "${newStage.toUpperCase()}" com sucesso!`);
+
+      // Persistir no Supabase em segundo plano
+      const client = window.supabaseClient;
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(selectedCustomerId));
+      if (client && isUuid) {
+        const pipelineMap = {
+          'lead': 'Lead novo',
+          'qualificacao': 'Qualificação',
+          'proposta': 'Proposta',
+          'ativo': 'Ganho',
+          'churn': 'Perdido'
+        };
+        try {
+          await client.from('crm_oportunidades').update({
+            etapa_pipeline: pipelineMap[newStage] || 'Lead novo',
+            status: newStage === 'ativo' ? 'Ganha' : (newStage === 'churn' ? 'Perdida' : 'Ativa')
+          }).eq('id', selectedCustomerId);
+
+          await client.from('crm_atividades').insert([{
+            oportunidade_id: selectedCustomerId,
+            tipo: 'Etapa',
+            observacao: logMsg,
+            responsavel: 'Admin'
+          }]);
+        } catch (e) {
+          console.warn('[CRM Supabase Modal Stage Warn]:', e.message);
+        }
+      }
+    }
+
     async function updateCustomerNextStep() {
       if (!selectedCustomerId) return;
       const sub = subscribers.find(s => String(s.id) === String(selectedCustomerId));
-      const input = document.getElementById('custModalNextStepInput');
-      const text = input ? input.value.trim() : '';
+      const textInput = document.getElementById('custModalNextStepInput');
+      const dateInput = document.getElementById('custModalNextStepDate');
+      
+      const text = textInput ? textInput.value.trim() : '';
+      const stepDate = dateInput ? dateInput.value : new Date().toISOString().split('T')[0];
       if (!sub || !text) return;
 
-      const client = window.supabaseClient;
-      const today = new Date().toISOString().split('T')[0];
-
       sub.proximo_passo = text;
-      sub.proximo_passo_data = today;
+      sub.proximo_passo_data = stepDate;
       sub.historico = sub.historico || [];
-      sub.historico.unshift(`Próximo passo atualizado: ${text} em ${new Date().toLocaleDateString('pt-BR')}`);
+      const logEntry = {
+        tipo: 'Próximo Passo',
+        observacao: `Novo próximo passo agendado para ${stepDate}: ${text}`,
+        responsavel: 'Admin',
+        data: new Date().toISOString()
+      };
+      sub.historico.unshift(logEntry);
 
-      document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo;
-      input.value = '';
+      // Persistir localmente de imediato
+      try {
+        localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+      } catch (e) {}
 
-      if (client) {
+      document.getElementById('custModalProximoPasso').innerText = `${text} (Data: ${stepDate})`;
+      renderCustomerTimeline(sub);
+      renderCrm();
+      showToast("Próximo passo salvo e agendado com sucesso!");
+
+      // Persistir no Supabase em segundo plano
+      const client = window.supabaseClient;
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(selectedCustomerId));
+      if (client && isUuid) {
         try {
-          await client
-            .from('crm_oportunidades')
-            .update({
-              proximo_passo: text,
-              data_proximo_passo: today
-            })
-            .eq('id', selectedCustomerId);
+          await client.from('crm_oportunidades').update({
+            proximo_passo: text,
+            data_proximo_passo: stepDate
+          }).eq('id', selectedCustomerId);
+
+          await client.from('crm_atividades').insert([{
+            oportunidade_id: selectedCustomerId,
+            tipo: 'Próximo Passo',
+            observacao: logEntry.observacao,
+            responsavel: 'Admin'
+          }]);
         } catch (e) {
-          console.warn('[CRM Update Next Step Supabase]:', e);
+          console.warn('[CRM Supabase Next Step Warn]:', e.message);
         }
       }
-
-      renderCrm();
-      showToast("Próximo passo atualizado com sucesso!");
     }
 
     async function saveCustomerNote() {
@@ -3543,32 +3789,50 @@
       const sub = subscribers.find(s => String(s.id) === String(selectedCustomerId));
       const input = document.getElementById('custNewNoteInput');
       const text = input ? input.value.trim() : '';
-      if (!sub || !text) return;
+      if (!sub || !text) {
+        showToast("Digite o conteúdo da anotação antes de salvar.", "warning");
+        return;
+      }
 
       const client = window.supabaseClient;
       const dateStr = new Date().toLocaleDateString('pt-BR');
-      const formattedNote = `[${dateStr}] ${text}`;
-      sub.notas = sub.notas ? `${sub.notas} | ${formattedNote}` : formattedNote;
+      const logEntry = {
+        tipo: selectedActivityType || 'Observação',
+        observacao: text,
+        responsavel: 'Admin',
+        data: new Date().toISOString()
+      };
+
       sub.historico = sub.historico || [];
-      sub.historico.unshift(`Anotação: ${text}`);
+      sub.historico.unshift(logEntry);
+      
+      const formattedNote = `[${dateStr} - ${logEntry.tipo}] ${text}`;
+      sub.notas = sub.notas ? `${sub.notas} | ${formattedNote}` : formattedNote;
 
-      document.getElementById('custModalNotas').innerText = sub.notas;
+      // 1. Persistir localmente de imediato no cache de inscritos
+      try {
+        localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+      } catch (e) {}
+
       input.value = '';
+      renderCustomerTimeline(sub);
+      renderCrm();
+      showToast(`Interação (${logEntry.tipo}) registrada com sucesso!`);
 
-      if (client) {
+      // 2. Persistir no Supabase na tabela crm_atividades
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(selectedCustomerId));
+      if (client && isUuid) {
         try {
-          await client
-            .from('crm_oportunidades')
-            .update({
-              pergunta_principal: sub.notas
-            })
-            .eq('id', selectedCustomerId);
+          await client.from('crm_atividades').insert([{
+            oportunidade_id: selectedCustomerId,
+            tipo: logEntry.tipo,
+            observacao: text,
+            responsavel: 'Admin'
+          }]);
         } catch (e) {
-          console.warn('[CRM Update Notes Supabase]:', e);
+          console.warn('[CRM Supabase Atividades Insert Warn]:', e.message);
         }
       }
-
-      showToast("Anotação comercial salva!");
     }
 
     async function deleteSubscriberFromModal() {
