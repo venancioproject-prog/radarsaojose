@@ -1458,6 +1458,57 @@ window.simulatePlanChange = function(simulatedPlan) {
   }
   window.applyPlanRestrictions();
 };
+window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder total da pesquisa", returnTab = "historia", returnLabel = "Explorar Linha do Tempo") {
+  return `
+    <div class="paywall-dark-card max-w-xl w-full mx-auto bg-slate-950/95 text-white p-8 sm:p-10 rounded-3xl border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl text-center space-y-6 animate-in zoom-in-95 duration-300 pointer-events-auto">
+      
+      <!-- Icon Badge Minimalista -->
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-emerald-400/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400 text-2xl shadow-lg">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+
+      <!-- Título & Copy Sagrada -->
+      <div class="space-y-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          Recurso Exclusivo
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+          ${title}
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed max-w-md mx-auto">
+          Tenha acesso ilimitado a relatórios aprofundados, métricas avançadas e dados exclusivos do Radar SJC sem restrições.
+        </p>
+      </div>
+
+      <!-- Botão de Conversão em Destaque -->
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button 
+          type="button"
+          onclick="window.openPlanUpgradeModal('plano_10')" 
+          class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+        >
+          <i class="fa-solid fa-bolt text-slate-950"></i>
+          <span>Assinar Agora &bull; R$ 10/mês</span>
+        </button>
+        <button 
+          type="button"
+          onclick="window.switchMainTab('${returnTab}')" 
+          class="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs border border-white/10 transition-colors cursor-pointer"
+        >
+          ${returnLabel}
+        </button>
+      </div>
+
+      <!-- Benefícios Resumidos -->
+      <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-4 text-[11px] text-slate-400 font-semibold flex-wrap">
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> 477 Respondentes</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> 8 Capítulos Executivos</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> Desbloqueio Imediato</span>
+      </div>
+    </div>
+  `;
+};
 
 window.applyPlanRestrictions = function() {
   const userRole = localStorage.getItem("userRole") || "usuario";
@@ -1488,7 +1539,33 @@ window.applyPlanRestrictions = function() {
     }
   }
 
-  // 1. Aplicação de Blur no Relatório Executivo para Plano Grátis
+  // 1. DASH PESQUISA (DashPesquisa): Aplicação de Blur + Dark Paywall Overlay na visualização de dados aprofundados para Plano Grátis
+  const dashChartsGrid = document.getElementById("dynamic-charts-grid");
+  const dashboardView = document.getElementById("dashboard-view");
+  if (dashChartsGrid && dashboardView) {
+    let dashPaywall = document.getElementById("dash-paywall-overlay");
+    if (userPlan === "gratis") {
+      dashChartsGrid.classList.add("paywall-blur-active");
+      if (!dashPaywall) {
+        const overlay = document.createElement("div");
+        overlay.id = "dash-paywall-overlay";
+        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.innerHTML = window.createPaywallDarkOverlayHtml(
+          "Desbloqueie o poder total da pesquisa",
+          "historia",
+          "Explorar Linha do Tempo"
+        );
+        dashboardView.appendChild(overlay);
+      }
+    } else {
+      dashChartsGrid.classList.remove("paywall-blur-active");
+      if (dashPaywall) dashPaywall.remove();
+      const danglingOverlay = document.getElementById("dash-paywall-overlay");
+      if (danglingOverlay) danglingOverlay.remove();
+    }
+  }
+
+  // 2. REPORT PESQUISA (ReportPesquisa): Aplicação de Blur + Dark Paywall Overlay para Plano Grátis
   const reportView = document.getElementById("executive-report-view");
   if (reportView) {
     let reportPaywall = document.getElementById("report-paywall-overlay");
@@ -1497,27 +1574,13 @@ window.applyPlanRestrictions = function() {
       if (!reportPaywall) {
         const overlay = document.createElement("div");
         overlay.id = "report-paywall-overlay";
-        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-brand-950/60 backdrop-blur-xs pointer-events-auto";
-        overlay.innerHTML = `
-          <div class="max-w-lg bg-white p-8 rounded-3xl shadow-2xl border border-brand-200 text-center space-y-4 animate-in zoom-in-95">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-brand-100 text-brand-900 flex items-center justify-center text-2xl font-black shadow-inner">
-              <i class="fa-solid fa-lock"></i>
-            </div>
-            <h3 class="text-xl font-black text-brand-950">Relatório Executivo Completo</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Os 8 capítulos aprofundados, cruzamentos de barreiras noturnas, mobilidade e propensão de consumo são exclusivos para assinantes.
-            </p>
-            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
-              <button onclick="window.openPlanUpgradeModal('plano_10')" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
-                Desbloquear por R$ 10/mês
-              </button>
-              <button onclick="window.switchMainTab('dashboard')" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
-                Voltar ao Dashboard
-              </button>
-            </div>
-          </div>
-        `;
-        reportView.parentNode.appendChild(overlay);
+        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.innerHTML = window.createPaywallDarkOverlayHtml(
+          "Desbloqueie o poder total da pesquisa",
+          "image-bank",
+          "Explorar Lentes SJC"
+        );
+        reportView.appendChild(overlay);
       }
     } else {
       reportView.classList.remove("paywall-blur-active");
@@ -1527,82 +1590,29 @@ window.applyPlanRestrictions = function() {
     }
   }
 
-  // 2. Aplicação de Blur no Módulo de Mídia (para Grátis e Plano R$ 10)
+  // 3. MÓDULOS COM ACESSO TOTAL NO PLANO GRÁTIS:
+  // - Radar Hub (ibge-view) -> TOTALMENTE VISÍVEL / SEM BLUR
+  // - Linha do Tempo (historia-view) -> TOTALMENTE VISÍVEL / SEM BLUR
+  // - Lentes SJC (image-bank-view) -> TOTALMENTE VISÍVEL / SEM BLUR
+  const ibgeView = document.getElementById("ibge-view");
+  const historiaView = document.getElementById("historia-view");
+  const imageBankView = document.getElementById("image-bank-view");
+
+  if (ibgeView) ibgeView.classList.remove("paywall-blur-active");
+  if (historiaView) historiaView.classList.remove("paywall-blur-active");
+  if (imageBankView) imageBankView.classList.remove("paywall-blur-active");
+
   const midiaView = document.getElementById("midia-dashboard-view");
   if (midiaView) {
-    let midiaPaywall = document.getElementById("midia-paywall-overlay");
-    if (userPlan === "gratis" || userPlan === "plano_10") {
-      midiaView.classList.add("paywall-blur-active");
-      if (!midiaPaywall) {
-        const overlay = document.createElement("div");
-        overlay.id = "midia-paywall-overlay";
-        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-brand-950/60 backdrop-blur-xs pointer-events-auto";
-        overlay.innerHTML = `
-          <div class="max-w-lg bg-white p-8 rounded-3xl shadow-2xl border border-cyan-200 text-center space-y-4 animate-in zoom-in-95">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-cyan-100 text-cyan-900 flex items-center justify-center text-2xl font-black shadow-inner">
-              <i class="fa-solid fa-lock"></i>
-            </div>
-            <h3 class="text-xl font-black text-brand-950">Radar de Mídia & Notícias SJC</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              A análise completa de veículos locais, canais digitais e audiência de São José dos Campos está disponível no Plano Radar Premium.
-            </p>
-            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
-              <button onclick="window.openPlanUpgradeModal('plano_15')" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-brand-900 hover:from-cyan-500 hover:to-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
-                Desbloquear por R$ 15/mês
-              </button>
-              <button onclick="window.switchMainTab('dashboard')" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
-                Voltar ao Dashboard
-              </button>
-            </div>
-          </div>
-        `;
-        midiaView.parentNode.appendChild(overlay);
-      }
-    } else {
-      midiaView.classList.remove("paywall-blur-active");
-      if (midiaPaywall) midiaPaywall.remove();
-      const danglingOverlay = document.getElementById("midia-paywall-overlay");
-      if (danglingOverlay) danglingOverlay.remove();
-    }
+    midiaView.classList.remove("paywall-blur-active");
+    const midiaPaywall = document.getElementById("midia-paywall-overlay");
+    if (midiaPaywall) midiaPaywall.remove();
   }
-
-  // 3. Aplicação de Blur no Módulo de Personas (para Grátis e Plano R$ 10)
   const personasView = document.getElementById("personas-view");
   if (personasView) {
-    let personasPaywall = document.getElementById("personas-paywall-overlay");
-    if (userPlan === "gratis" || userPlan === "plano_10") {
-      personasView.classList.add("paywall-blur-active");
-      if (!personasPaywall) {
-        const overlay = document.createElement("div");
-        overlay.id = "personas-paywall-overlay";
-        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-brand-950/60 backdrop-blur-xs pointer-events-auto";
-        overlay.innerHTML = `
-          <div class="max-w-lg bg-white p-8 rounded-3xl shadow-2xl border border-cyan-200 text-center space-y-4 animate-in zoom-in-95">
-            <div class="w-14 h-14 mx-auto rounded-2xl bg-cyan-100 text-cyan-900 flex items-center justify-center text-2xl font-black shadow-inner">
-              <i class="fa-solid fa-lock"></i>
-            </div>
-            <h3 class="text-xl font-black text-brand-950">Personas Comportamentais SJC</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Os 4 clusters aprofundados de comportamento, hábitos e consumo do morador joseense estão disponíveis no Plano Radar Premium.
-            </p>
-            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
-              <button onclick="window.openPlanUpgradeModal('plano_15')" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-brand-900 hover:from-cyan-500 hover:to-brand-800 text-white font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer">
-                Desbloquear por R$ 15/mês
-              </button>
-              <button onclick="window.switchMainTab('dashboard')" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors cursor-pointer">
-                Voltar ao Dashboard
-              </button>
-            </div>
-          </div>
-        `;
-        personasView.parentNode.appendChild(overlay);
-      }
-    } else {
-      personasView.classList.remove("paywall-blur-active");
-      if (personasPaywall) personasPaywall.remove();
-      const danglingOverlay = document.getElementById("personas-paywall-overlay");
-      if (danglingOverlay) danglingOverlay.remove();
-    }
+    personasView.classList.remove("paywall-blur-active");
+    const personasPaywall = document.getElementById("personas-paywall-overlay");
+    if (personasPaywall) personasPaywall.remove();
   }
 };
 
