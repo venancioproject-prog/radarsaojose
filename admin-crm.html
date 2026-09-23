@@ -2812,25 +2812,100 @@
       });
     }
 
-    function advanceStage(id, direction) {
+    async function advanceStage(id, direction) {
       const stages = ['lead', 'qualificacao', 'proposta', 'ativo', 'churn'];
-      const sub = subscribers.find(s => s.id === id);
+      const sub = subscribers.find(s => String(s.id) === String(id));
       if (!sub) return;
 
-      const currIdx = stages.indexOf(sub.stage || 'ativo');
+      const currIdx = stages.indexOf(sub.stage || 'lead');
       const nextIdx = currIdx + direction;
 
-      if (nextIdx >= 0 && nextIdx < stages.length) {
-        sub.stage = stages[nextIdx];
-        if (sub.stage === 'ativo') sub.status = 'Ativo';
-        else if (sub.stage === 'churn') sub.status = 'Cancelado';
-        else sub.status = 'Pendente';
+      if (nextIdx < 0 || nextIdx >= stages.length) return;
 
-        sub.historico = sub.historico || [];
-        sub.historico.unshift(`Etapa alterada para ${sub.stage.toUpperCase()} em ${new Date().toLocaleDateString('pt-BR')}`);
+      const previousStage = sub.stage;
+      const previousStatus = sub.status;
+      const nextStage = stages[nextIdx];
 
-        persistSubscribers();
-        showToast(`Etapa atualizada para "${sub.stage.toUpperCase()}"`);
+      // Mapeamento para o pipeline do banco de dados (crm_oportunidades)
+      const pipelineMap = {
+        'lead': 'Lead novo',
+        'qualificacao': 'Qualificação',
+        'proposta': 'Proposta',
+        'ativo': 'Ganho',
+        'churn': 'Perdido'
+      };
+      const pipelineEtapa = pipelineMap[nextStage] || 'Lead novo';
+      const statusBanco = nextStage === 'ativo' ? 'Ganha' : (nextStage === 'churn' ? 'Perdida' : 'Ativa');
+
+      // 1. Optimistic UI: atualiza estado e interface antes de chamar a API
+      sub.stage = nextStage;
+      if (nextStage === 'ativo') sub.status = 'Ativo';
+      else if (nextStage === 'churn') sub.status = 'Cancelado';
+      else sub.status = 'Pendente';
+
+      sub.historico = sub.historico || [];
+      sub.historico.unshift(`Etapa alterada para ${nextStage.toUpperCase()} em ${new Date().toLocaleDateString('pt-BR')}`);
+
+      renderCrm();
+      showToast(`Atualizando etapa para "${nextStage.toUpperCase()}"...`);
+
+      // 2. Persistência real no Supabase
+      try {
+        const client = window.supabaseClient || (window.supabase && typeof window.supabase.createClient === 'function' ? window.supabase.createClient(
+          "https://tocyvysucpslayzglixq.supabase.co",
+          "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT"
+        ) : null);
+
+        if (!client) {
+          throw new Error("Cliente Supabase indisponível.");
+        }
+
+        let updated = false;
+
+        // Tenta atualizar na tabela crm_oportunidades
+        const { error: oppError } = await client
+          .from('crm_oportunidades')
+          .update({
+            etapa_pipeline: pipelineEtapa,
+            status: statusBanco
+          })
+          .eq('id', id);
+
+        if (!oppError) {
+          updated = true;
+        } else {
+          console.warn('[CRM Update Kanban] crm_oportunidades warn:', oppError.message);
+        }
+
+        // Fallback: se o registro vier diretamente de crm_pessoas
+        if (!updated) {
+          const { error: pesError } = await client
+            .from('crm_pessoas')
+            .update({
+              tem_decisao: (nextStage !== 'lead')
+            })
+            .eq('id', id);
+
+          if (!pesError) {
+            updated = true;
+          }
+        }
+
+        if (!updated && oppError) {
+          throw oppError;
+        }
+
+        showToast(`Etapa "${nextStage.toUpperCase()}" sincronizada com sucesso!`);
+      } catch (err) {
+        // Rollback da Optimistic UI em caso de falha
+        console.error('[CRM Kanban Update Error]:', err);
+        sub.stage = previousStage;
+        sub.status = previousStatus;
+        if (sub.historico && sub.historico.length > 0) {
+          sub.historico.shift();
+        }
+        renderCrm();
+        showToast("Erro ao sincronizar etapa com o banco: " + (err.message || err), "error");
       }
     }
 
@@ -2945,11 +3020,66 @@
       }
     }
 
-    function deleteSubscriber(id) {
-      if (confirm("Remover este registro comercial do CRM?")) {
-        subscribers = subscribers.filter(s => s.id !== id);
-        persistSubscribers();
-        showToast("Registro removido do CRM.");
+    async function deleteSubscriber(id) {
+      if (!id) return;
+      const sub = subscribers.find(s => String(s.id) === String(id));
+      const nomeOuEmpresa = sub ? (sub.empresa || sub.nome) : 'este registro';
+
+      if (!confirm(`Deseja realmente excluir permanentemente o registro de "${nomeOuEmpresa}" do CRM?`)) {
+        return;
+      }
+
+      const client = window.supabaseClient || (window.supabase && typeof window.supabase.createClient === 'function' ? window.supabase.createClient(
+        "https://tocyvysucpslayzglixq.supabase.co",
+        "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT"
+      ) : null);
+
+      if (!client) {
+        showToast("Erro: Cliente Supabase não inicializado.", "error");
+        return;
+      }
+
+      showToast("Excluindo registro do banco de dados...");
+      try {
+        let deleted = false;
+
+        // 1. Tentar exclusão em crm_oportunidades
+        const { error: oppError } = await client
+          .from('crm_oportunidades')
+          .delete()
+          .eq('id', id);
+
+        if (!oppError) {
+          deleted = true;
+        } else {
+          console.warn("[CRM Delete] crm_oportunidades:", oppError.message);
+        }
+
+        // 2. Tentar exclusão em crm_pessoas
+        const { error: pesError } = await client
+          .from('crm_pessoas')
+          .delete()
+          .eq('id', id);
+
+        if (!pesError) {
+          deleted = true;
+        } else {
+          console.warn("[CRM Delete] crm_pessoas:", pesError.message);
+        }
+
+        if (!deleted && oppError && pesError) {
+          throw new Error(oppError.message || pesError.message);
+        }
+
+        if (selectedCustomerId && String(selectedCustomerId) === String(id)) {
+          closeCustomerDetails();
+        }
+
+        showToast("Registro comercial removido do Supabase com sucesso!");
+        await fetchCRMDataFromSupabase();
+      } catch (err) {
+        console.error("[CRM Delete Error]:", err);
+        showToast("Erro ao excluir registro: " + (err.message || err), "error");
       }
     }
 
@@ -3011,31 +3141,50 @@
       selectedCustomerId = null;
     }
 
-    function updateCustomerNextStep() {
+    async function updateCustomerNextStep() {
       if (!selectedCustomerId) return;
-      const sub = subscribers.find(s => s.id === selectedCustomerId);
+      const sub = subscribers.find(s => String(s.id) === String(selectedCustomerId));
       const input = document.getElementById('custModalNextStepInput');
       const text = input ? input.value.trim() : '';
       if (!sub || !text) return;
 
+      const client = window.supabaseClient;
+      const today = new Date().toISOString().split('T')[0];
+
       sub.proximo_passo = text;
-      // Atualiza data do próximo passo para hoje
-      sub.proximo_passo_data = new Date().toISOString().split('T')[0];
+      sub.proximo_passo_data = today;
       sub.historico = sub.historico || [];
       sub.historico.unshift(`Próximo passo atualizado: ${text} em ${new Date().toLocaleDateString('pt-BR')}`);
 
       document.getElementById('custModalProximoPasso').innerText = sub.proximo_passo;
       input.value = '';
+
+      if (client) {
+        try {
+          await client
+            .from('crm_oportunidades')
+            .update({
+              proximo_passo: text,
+              data_proximo_passo: today
+            })
+            .eq('id', selectedCustomerId);
+        } catch (e) {
+          console.warn('[CRM Update Next Step Supabase]:', e);
+        }
+      }
+
+      renderCrm();
       showToast("Próximo passo atualizado com sucesso!");
     }
 
-    function saveCustomerNote() {
+    async function saveCustomerNote() {
       if (!selectedCustomerId) return;
-      const sub = subscribers.find(s => s.id === selectedCustomerId);
+      const sub = subscribers.find(s => String(s.id) === String(selectedCustomerId));
       const input = document.getElementById('custNewNoteInput');
       const text = input ? input.value.trim() : '';
       if (!sub || !text) return;
 
+      const client = window.supabaseClient;
       const dateStr = new Date().toLocaleDateString('pt-BR');
       const formattedNote = `[${dateStr}] ${text}`;
       sub.notas = sub.notas ? `${sub.notas} | ${formattedNote}` : formattedNote;
@@ -3044,17 +3193,26 @@
 
       document.getElementById('custModalNotas').innerText = sub.notas;
       input.value = '';
+
+      if (client) {
+        try {
+          await client
+            .from('crm_oportunidades')
+            .update({
+              pergunta_principal: sub.notas
+            })
+            .eq('id', selectedCustomerId);
+        } catch (e) {
+          console.warn('[CRM Update Notes Supabase]:', e);
+        }
+      }
+
       showToast("Anotação comercial salva!");
     }
 
-    function deleteSubscriberFromModal() {
+    async function deleteSubscriberFromModal() {
       if (!selectedCustomerId) return;
-      if (confirm("Deseja realmente excluir este cliente do CRM?")) {
-        subscribers = subscribers.filter(s => s.id !== selectedCustomerId);
-        persistSubscribers();
-        closeCustomerDetails();
-        showToast("Cliente removido do CRM.");
-      }
+      await deleteSubscriber(selectedCustomerId);
     }
 
     function exportCSV() {
