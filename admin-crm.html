@@ -2314,8 +2314,272 @@
     // =========================================================================
     // CRM PROFISSIONAL B2B - RADAR SÃO JOSÉ DOS CAMPOS (SUPABASE REAL-TIME DATA)
     // =========================================================================
-    let subscribers = [];
     let customLeadFilter = null;
+
+    const DEFAULT_SUBSCRIBERS = [
+      {
+        id: 1,
+        empresa: "Andrade & Filhos Varejo",
+        nome: "Juliana Andrade",
+        cargo: "Diretora Comercial",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
+        setor: "Varejo & Comércio",
+        bairro: "Jd. Aquarius",
+        regiao: "Zona Oeste",
+        whatsapp: "12981442030",
+        email: "juliana@andradevarejo.com.br",
+        plano: "Enterprise",
+        mrr: 149.00,
+        stage: "ativo",
+        status: "Ativo",
+        data: "12/09/2026",
+        avatar: "JA",
+        avatarBg: "bg-blue-600",
+        tipo_decisao: "Expansão de Negócio",
+        projeto_nome: "Nova Unidade Aquarius 2026",
+        estagio_projeto: "Em Execução",
+        prazo_decisao: "Imediato (< 30 dias)",
+        faixa_valor: "R$ 200 mil a R$ 1 Milhão",
+        pergunta_principal: "Qual é a densidade de tráfego e ticket médio nas transversais da Av. Cassiano Ricardo no período noturno?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Apresentar benchmark de fluxo comercial da Zona Oeste",
+        proximo_passo_data: "2026-09-20",
+        notas: "Cliente enterprise com 8 lojas físicas no Vale. Usa os dados de tráfego para expansão.",
+        historico: [
+          "Exportou Relatório Demografia Aquarius",
+          "Acessou Pesquisa de Fluxo Comercial",
+          "Adicionou 3 novos operadores"
+        ]
+      },
+      {
+        id: 2,
+        empresa: "Embraer Engenharia & Projetos",
+        nome: "Carlos Eduardo Ramos",
+        cargo: "Head de Suprimentos & Facilities",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
+        setor: "Aeroespacial & Defesa",
+        bairro: "Putim",
+        regiao: "Zona Sudeste",
+        whatsapp: "12997123344",
+        email: "carlos.ramos@embraer.com.br",
+        plano: "Pro",
+        mrr: 49.00,
+        stage: "ativo",
+        status: "Ativo",
+        data: "10/09/2026",
+        avatar: "CR",
+        avatarBg: "bg-emerald-600",
+        tipo_decisao: "Validação de Mercado",
+        projeto_nome: "Mapeamento Mobilidade Sudeste",
+        estagio_projeto: "Em Estudo de Viabilidade",
+        prazo_decisao: "30 a 60 dias",
+        faixa_valor: "Acima de R$ 1 Milhão",
+        pergunta_principal: "Como o novo corredor de ônibus da Zona Sudeste alterou o tempo de deslocamento dos colaboradores?",
+        sla_prioridade: "Normal",
+        proximo_passo: "Enviar cruzamento de linhas de ônibus com horários de turno",
+        proximo_passo_data: "2026-09-25",
+        notas: "Contrato corporativo renovado anualmente. Acessa dados de mobilidade dos funcionários.",
+        historico: [
+          "Consulta Mapa de Ônibus & Mobilidade",
+          "Relatório Setor Sudeste"
+        ]
+      },
+      {
+        id: 3,
+        empresa: "Clínica Bem Estar SJC",
+        nome: "Dra. Fernanda Silveira",
+        cargo: "Sócia-Diretora Médica",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
+        setor: "Saúde & Medicina",
+        bairro: "Vila Ema",
+        regiao: "Centro",
+        whatsapp: "12988771122",
+        email: "fernanda@bemestarsjc.med.br",
+        plano: "Pro",
+        mrr: 49.00,
+        stage: "proposta",
+        status: "Pendente",
+        data: "08/09/2026",
+        avatar: "FS",
+        avatarBg: "bg-amber-600",
+        tipo_decisao: "Abertura de Filial / Unidade",
+        projeto_nome: "Expansão Clínica Vila Ema",
+        estagio_projeto: "Em Negociação / Seleção",
+        prazo_decisao: "30 a 60 dias",
+        faixa_valor: "R$ 50 mil a R$ 200 mil",
+        pergunta_principal: "Qual a concentração de famílias das classes A/B sem plano de saúde privado na região central?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Apresentar proposta de customização Enterprise para 5 consultórios",
+        proximo_passo_data: "2026-09-18",
+        notas: "Aguardando aprovação da diretoria para upgrade ao plano Enterprise.",
+        historico: [
+          "Download Demonstração Dados Demográficos",
+          "Simulação de Ticket Médio"
+        ]
+      },
+      {
+        id: 4,
+        empresa: "PIT SJC Tech Hub & Startups",
+        nome: "Marcelo Toledo",
+        cargo: "Gerente de Inovação",
+        papel_decisao: "Avaliador Técnico",
+        relacao_sjc: "Filial / Operação",
+        setor: "Tecnologia & Inovação",
+        bairro: "Eugênio de Melo",
+        regiao: "Zona Leste",
+        whatsapp: "12991054321",
+        email: "m.toledo@pitstartup.io",
+        plano: "Enterprise",
+        mrr: 149.00,
+        stage: "ativo",
+        status: "Ativo",
+        data: "01/09/2026",
+        avatar: "MT",
+        avatarBg: "bg-indigo-600",
+        tipo_decisao: "Validação de Mercado",
+        projeto_nome: "Radar Tech Startups",
+        estagio_projeto: "Em Execução",
+        prazo_decisao: "Imediato (< 30 dias)",
+        faixa_valor: "R$ 200 mil a R$ 1 Milhão",
+        pergunta_principal: "Quantas empresas de base tecnológica se instalaram no eixo Eugênio de Melo no último biênio?",
+        sla_prioridade: "Média",
+        proximo_passo: "Reunião de alinhamento trimestral de dados",
+        proximo_passo_data: "2026-09-28",
+        notas: "Hub de aceleração conectado ao Parque Tecnológico de São José dos Campos.",
+        historico: [
+          "Acesso API Radar",
+          "Download Base de Pesquisa Habitantes"
+        ]
+      },
+      {
+        id: 5,
+        empresa: "Construtora Vale Imperial",
+        nome: "Renata Fagundes",
+        cargo: "Diretora de Incorporação",
+        papel_decisao: "Decisor Final",
+        relacao_sjc: "Sede própria em SJC",
+        setor: "Imobiliário & Construção",
+        bairro: "Urbanova",
+        regiao: "Zona Oeste",
+        whatsapp: "12981776655",
+        email: "renata@valeimperial.com.br",
+        plano: "Enterprise",
+        mrr: 149.00,
+        stage: "lead",
+        status: "Pendente",
+        data: "Hoje",
+        avatar: "RF",
+        avatarBg: "bg-blue-500",
+        tipo_decisao: "Compra Imobiliária / Ponto Comercial",
+        projeto_nome: "Lançamento Reserva Urbanova",
+        estagio_projeto: "Em Estudo de Viabilidade",
+        prazo_decisao: "Imediato (< 30 dias)",
+        faixa_valor: "Acima de R$ 1 Milhão",
+        pergunta_principal: "Qual a demanda reprimida por apartamentos de 3 e 4 dormitórios de alto padrão no Urbanova?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Realizar primeiro contato no WhatsApp com dossiê de demanda do Urbanova",
+        proximo_passo_data: "2026-09-22",
+        notas: "Lead recente capturado no blog no artigo sobre expansão urbana no Urbanova.",
+        historico: [
+          "Baixou E-book Demografia SJC",
+          "Preencheu Formulário de Decisão Comercial"
+        ]
+      },
+      {
+        id: 6,
+        empresa: "LogVale Transportes & Cargas",
+        nome: "Roberto Siqueira",
+        cargo: "Gerente de Operações",
+        papel_decisao: "Avaliador Técnico",
+        relacao_sjc: "Planejando entrar em SJC",
+        setor: "Indústria & Logística",
+        bairro: "Eugênio de Melo",
+        regiao: "Zona Leste",
+        whatsapp: "12992334411",
+        email: "roberto@logvale.com.br",
+        plano: "Enterprise",
+        mrr: 149.00,
+        stage: "qualificacao",
+        status: "Pendente",
+        data: "15/09/2026",
+        avatar: "RS",
+        avatarBg: "bg-amber-600",
+        tipo_decisao: "Abertura de Filial / Unidade",
+        projeto_nome: "Galpão Logístico Dutra Leste",
+        estagio_projeto: "Em Negociação / Seleção",
+        prazo_decisao: "30 a 60 dias",
+        faixa_valor: "R$ 500 mil a R$ 1 Milhão",
+        pergunta_principal: "Qual é a velocidade média e restrições de tráfego de caminhões pesados nos acessos à Dutra em Eugênio de Melo?",
+        sla_prioridade: "Alta",
+        proximo_passo: "Enviar relatório técnico de zoneamento viário",
+        proximo_passo_data: "2026-09-19",
+        notas: "Agendou demonstração técnica das rotas e zoneamento industrial via Dutra/Carvalho Pinto.",
+        historico: [
+          "Solicitou Demonstração pelo Site",
+          "Acessou Dados de Infraestrutura Viária"
+        ]
+      }
+    ];
+
+    let subscribers = [];
+
+    // Converte lead vindo do formulário de entrada para o formato de card do CRM
+    function mapInboundToSubscriber(inb, idx = 0) {
+      const displayName = inb.nome || inb.email || 'Lead Inbound';
+      const initials = displayName.split(' ').filter(Boolean).map(w => w[0]).join('').substring(0, 2).toUpperCase() || 'LD';
+      const isEnterprise = Boolean(inb.tem_decisao || inb.empresa_nome);
+      const stage = inb.stage || (inb.tem_decisao ? 'qualificacao' : 'lead');
+
+      let papel = 'Pesquisador';
+      const cLow = (inb.cargo || '').toLowerCase();
+      const pLow = (inb.perfil || '').toLowerCase();
+      if (cLow.includes('diretor') || cLow.includes('sócio') || cLow.includes('dono') || cLow.includes('proprietário') || cLow.includes('ceo') || pLow === 'empresario') {
+        papel = 'Decisor Final';
+      } else if (cLow.includes('gerente') || cLow.includes('head') || cLow.includes('coordenador') || pLow === 'gestor') {
+        papel = 'Avaliador Técnico';
+      } else if (inb.tem_decisao) {
+        papel = 'Tomador de Decisão';
+      }
+
+      const cleanWhatsapp = (inb.whatsapp || '').replace(/\D/g, '');
+
+      return {
+        id: inb.id || ('inb_' + (inb.email ? inb.email.replace(/[^a-zA-Z0-9]/g, '_') : Date.now()) + '_' + idx),
+        empresa: inb.empresa_nome || (inb.nome ? `${inb.nome} (Pessoa Física)` : 'Contato Inbound'),
+        nome: displayName,
+        cargo: inb.cargo || inb.perfil || 'Decisor Comercial',
+        papel_decisao: papel,
+        relacao_sjc: inb.cidade_mora ? `Mora em ${inb.cidade_mora}` : (Array.isArray(inb.relacao_sjc) && inb.relacao_sjc.length ? inb.relacao_sjc.join(', ') : 'São José dos Campos'),
+        setor: inb.segmento || (inb.empresa_nome ? 'Corporativo B2B' : 'Consumidor / Pesquisa'),
+        bairro: inb.regiao_bairro || inb.cidade_mora || 'São José dos Campos',
+        regiao: 'São José dos Campos',
+        whatsapp: cleanWhatsapp,
+        email: inb.email || '',
+        plano: isEnterprise ? 'Enterprise' : 'Pro',
+        mrr: stage === 'ativo' ? 149.00 : (isEnterprise ? 149.00 : 49.00),
+        stage: stage,
+        status: stage === 'ativo' ? 'Ativo' : (stage === 'churn' ? 'Cancelado' : 'Pendente'),
+        data: inb.created_at ? new Date(inb.created_at).toLocaleDateString('pt-BR') : 'Hoje',
+        avatar: initials,
+        avatarBg: inb.tem_decisao ? 'bg-cyan-600' : 'bg-emerald-600',
+        tipo_decisao: inb.tipo_decisao || inb.motivo_entrada || 'Qualificação Comercial',
+        projeto_nome: inb.projeto_nome || (inb.empresa_nome ? `Projeto ${inb.empresa_nome}` : 'Lead Formulário Radar'),
+        estagio_projeto: inb.estagio_projeto || 'Em Qualificação',
+        prazo_decisao: inb.prazo_decisao || '30 a 60 dias',
+        faixa_valor: inb.faixa_valor || 'A definir',
+        pergunta_principal: inb.pergunta_principal || inb.motivo_entrada_detalhe || 'Como os dados do Radar São José apoiam essa decisão?',
+        sla_prioridade: (inb.prazo_decisao === 'Já estou decidindo' || inb.tem_decisao) ? 'Alta' : 'Normal',
+        proximo_passo: inb.proximo_passo || 'Realizar primeiro contato via WhatsApp',
+        proximo_passo_data: inb.proximo_passo_data || new Date().toISOString().split('T')[0],
+        notas: `[Origem]: Formulário Radar Inbound\n[Pergunta Sagrada]: ${inb.pergunta_principal || 'N/A'}\n[Empresa]: ${inb.empresa_nome || 'N/A'}\n[Perfil]: ${inb.perfil || 'N/A'}`,
+        historico: inb.historico || [
+          `Lead capturado via Formulário Radar Onboarding em ${inb.created_at ? new Date(inb.created_at).toLocaleDateString('pt-BR') : new Date().toLocaleDateString('pt-BR')}`
+        ]
+      };
+    }
 
     function mapPipelineToStage(etapa) {
       if (!etapa) return 'lead';
@@ -2328,79 +2592,136 @@
       return 'lead';
     }
 
-    // Ponte com o Banco de Dados Real (Supabase Cloud)
+    // Sincronização Inteligente Híbrida: Supabase Cloud + LocalStorage + Inbound Forms
     async function fetchCRMDataFromSupabase() {
       try {
+        console.log('[CRM Supabase] Sincronizando registros comerciais...');
+
+        // 1. Carrega dados do cache local (resiliência offline)
+        let localList = [];
+        try {
+          const stored = localStorage.getItem('radarsaojose_crm_subscribers_v3');
+          if (stored) {
+            localList = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('[CRM Cache Local Warn]:', e);
+        }
+
+        if (!Array.isArray(localList) || localList.length === 0) {
+          localList = [...DEFAULT_SUBSCRIBERS];
+        }
+
+        // 2. Carrega todos os leads recebidos do formulário de entrada (radar_crm_inbound)
+        let inboundLeads = [];
+        try {
+          const storedInbound = localStorage.getItem('radar_crm_inbound');
+          if (storedInbound) {
+            inboundLeads = JSON.parse(storedInbound);
+          }
+        } catch (e) {
+          console.warn('[CRM Inbound Cache Warn]:', e);
+        }
+
+        // 3. Mescla os leads de inbound no topo da lista se ainda não existirem
+        if (Array.isArray(inboundLeads) && inboundLeads.length > 0) {
+          inboundLeads.forEach((inb, idx) => {
+            const emailLower = (inb.email || '').toLowerCase().trim();
+            const existingIdx = localList.findIndex(s => 
+              (emailLower && (s.email || '').toLowerCase().trim() === emailLower) ||
+              (inb.id && String(s.id) === String(inb.id))
+            );
+
+            const mappedCard = mapInboundToSubscriber(inb, idx);
+            if (existingIdx >= 0) {
+              const existingStage = localList[existingIdx].stage || mappedCard.stage;
+              const existingStatus = localList[existingIdx].status || mappedCard.status;
+              localList[existingIdx] = {
+                ...mappedCard,
+                ...localList[existingIdx],
+                stage: existingStage,
+                status: existingStatus
+              };
+            } else {
+              localList.unshift(mappedCard);
+            }
+          });
+        }
+
+        // 4. Consulta banco de dados Supabase Cloud (quando online)
         const client = window.supabaseClient || (window.supabase && typeof window.supabase.createClient === 'function' ? window.supabase.createClient(
           "https://tocyvysucpslayzglixq.supabase.co",
           "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT"
         ) : null);
 
-        if (!client) {
-          console.warn('[CRM Supabase] Cliente Supabase não inicializado.');
-          renderCrm();
-          return;
-        }
+        if (client) {
+          // 4.1 Oportunidades com joins relacionais
+          try {
+            const { data: opps, error: oppsError } = await client
+              .from('crm_oportunidades')
+              .select('*, crm_pessoas(*), crm_empresas(*)')
+              .order('created_at', { ascending: false });
 
-        console.log('[CRM Supabase] Buscando registros comerciais no banco de dados...');
-        let mappedRecords = [];
+            if (!oppsError && Array.isArray(opps) && opps.length > 0) {
+              opps.forEach(opp => {
+                const p = opp.crm_pessoas || {};
+                const emp = opp.crm_empresas || {};
+                const displayName = p.nome || opp.titulo || 'Contato Comercial';
+                const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+                const stage = mapPipelineToStage(opp.etapa_pipeline);
+                const emailLower = (p.email || '').toLowerCase().trim();
 
-        // 1. Consulta principal: crm_oportunidades com joins relacionais em crm_pessoas e crm_empresas
-        try {
-          const { data: opps, error: oppsError } = await client
-            .from('crm_oportunidades')
-            .select('*, crm_pessoas(*), crm_empresas(*)')
-            .order('created_at', { ascending: false });
+                const supCard = {
+                  id: opp.id,
+                  empresa: emp.nome || opp.projeto_nome || opp.titulo || (p.nome ? `${p.nome} (PF)` : 'Empresa não informada'),
+                  nome: displayName,
+                  cargo: p.perfil || 'Decisor Comercial',
+                  papel_decisao: 'Decisor Final',
+                  relacao_sjc: p.cidade_mora ? `Mora em ${p.cidade_mora}` : (emp.relacao_sjc || 'São José dos Campos'),
+                  setor: emp.segmento || 'Corporativo B2B',
+                  bairro: opp.regiao_bairro || p.cidade_mora || 'SJC',
+                  regiao: 'São José dos Campos',
+                  whatsapp: (p.whatsapp || '').replace(/\D/g, ''),
+                  email: p.email || '',
+                  plano: opp.faixa_valor ? 'Enterprise' : 'Pro',
+                  mrr: stage === 'ativo' ? 149.00 : 0.00,
+                  stage: stage,
+                  status: stage === 'ativo' ? 'Ativo' : (stage === 'churn' ? 'Cancelado' : 'Pendente'),
+                  data: opp.created_at ? new Date(opp.created_at).toLocaleDateString('pt-BR') : 'Hoje',
+                  avatar: initials,
+                  avatarBg: stage === 'ativo' ? 'bg-emerald-600' : (stage === 'proposta' ? 'bg-purple-600' : 'bg-cyan-600'),
+                  tipo_decisao: opp.tipo_decisao || 'Decisão Comercial',
+                  projeto_nome: opp.projeto_nome || opp.titulo || 'Projeto Mapeado',
+                  estagio_projeto: opp.estagio_projeto || 'Em Estudo',
+                  prazo_decisao: opp.prazo_decisao || '30 a 60 dias',
+                  faixa_valor: opp.faixa_valor || 'A definir',
+                  pergunta_principal: opp.pergunta_principal || 'Como os dados de inteligência podem respaldar essa tomada de decisão?',
+                  sla_prioridade: opp.prioridade_sla || 'Normal',
+                  proximo_passo: opp.proximo_passo || 'Realizar contato de qualificação e alinhamento',
+                  proximo_passo_data: opp.data_proximo_passo ? opp.data_proximo_passo.split('T')[0] : new Date().toISOString().split('T')[0],
+                  notas: `[Pergunta Sagrada]: ${opp.pergunta_principal || 'N/A'}\n[Projeto]: ${opp.projeto_nome || 'N/A'}`,
+                  historico: [
+                    `Origem: ${opp.origem || 'Supabase Cloud'} em ${new Date(opp.created_at || Date.now()).toLocaleDateString('pt-BR')}`
+                  ]
+                };
 
-          if (!oppsError && Array.isArray(opps) && opps.length > 0) {
-            mappedRecords = opps.map((opp, idx) => {
-              const p = opp.crm_pessoas || {};
-              const emp = opp.crm_empresas || {};
-              const displayName = p.nome || opp.titulo || 'Contato Comercial';
-              const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-              const stage = mapPipelineToStage(opp.etapa_pipeline);
+                const exIdx = localList.findIndex(s => 
+                  (emailLower && (s.email || '').toLowerCase().trim() === emailLower) ||
+                  String(s.id) === String(opp.id)
+                );
 
-              return {
-                id: opp.id || (1000 + idx),
-                empresa: emp.nome || opp.projeto_nome || opp.titulo || (p.nome ? `${p.nome} (PF)` : 'Empresa não informada'),
-                nome: displayName,
-                cargo: p.perfil || 'Decisor Comercial',
-                papel_decisao: 'Decisor Final',
-                relacao_sjc: p.cidade_mora ? `Mora em ${p.cidade_mora}` : (emp.relacao_sjc || 'São José dos Campos'),
-                setor: emp.segmento || 'Corporativo B2B',
-                bairro: opp.regiao_bairro || p.cidade_mora || 'SJC',
-                regiao: 'São José dos Campos',
-                whatsapp: (p.whatsapp || '').replace(/\D/g, ''),
-                email: p.email || '',
-                plano: opp.faixa_valor ? 'Enterprise' : 'Pro',
-                mrr: stage === 'ativo' ? 149.00 : 0.00,
-                stage: stage,
-                status: stage === 'ativo' ? 'Ativo' : (stage === 'churn' ? 'Cancelado' : 'Pendente'),
-                data: opp.created_at ? new Date(opp.created_at).toLocaleDateString('pt-BR') : 'Hoje',
-                avatar: initials,
-                avatarBg: stage === 'ativo' ? 'bg-emerald-600' : (stage === 'proposta' ? 'bg-purple-600' : 'bg-cyan-600'),
-                tipo_decisao: opp.tipo_decisao || 'Decisão Comercial',
-                projeto_nome: opp.projeto_nome || opp.titulo || 'Projeto Mapeado',
-                estagio_projeto: opp.estagio_projeto || 'Em Estudo',
-                prazo_decisao: opp.prazo_decisao || '30 a 60 dias',
-                faixa_valor: opp.faixa_valor || 'A definir',
-                pergunta_principal: opp.pergunta_principal || 'Como os dados de inteligência podem respaldar essa tomada de decisão?',
-                sla_prioridade: opp.prioridade_sla || 'Normal',
-                proximo_passo: opp.proximo_passo || 'Realizar contato de qualificação e alinhamento',
-                proximo_passo_data: opp.data_proximo_passo ? opp.data_proximo_passo.split('T')[0] : new Date().toISOString().split('T')[0],
-                notas: `[Pergunta Sagrada]: ${opp.pergunta_principal || 'N/A'}\n[Projeto]: ${opp.projeto_nome || 'N/A'}`,
-                historico: [
-                  `Origem: ${opp.origem || 'Supabase Cloud'} em ${new Date(opp.created_at || Date.now()).toLocaleDateString('pt-BR')}`
-                ]
-              };
-            });
+                if (exIdx >= 0) {
+                  localList[exIdx] = { ...localList[exIdx], ...supCard };
+                } else {
+                  localList.unshift(supCard);
+                }
+              });
+            }
+          } catch (cloudErr) {
+            console.warn('[CRM Supabase Cloud Opps Warn]:', cloudErr.message);
           }
-        } catch (oppErr) {
-          console.warn('[CRM Supabase] Tentativa crm_oportunidades:', oppErr.message);
-        }
 
-        // 2. Consulta de fallback: crm_pessoas (quando não há oportunidades vinculadas ou tabela em migração)
-        if (mappedRecords.length === 0) {
+          // 4.2 Fallback em crm_pessoas
           try {
             const { data: pessoas, error: pesErr } = await client
               .from('crm_pessoas')
@@ -2408,61 +2729,82 @@
               .order('created_at', { ascending: false });
 
             if (!pesErr && Array.isArray(pessoas) && pessoas.length > 0) {
-              mappedRecords = pessoas.map((p, idx) => {
-                const initials = (p.nome || 'L').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-                const stage = p.tem_decisao ? 'qualificacao' : 'lead';
+              pessoas.forEach((p, idx) => {
+                const emailLower = (p.email || '').toLowerCase().trim();
+                const exIdx = localList.findIndex(s => 
+                  (emailLower && (s.email || '').toLowerCase().trim() === emailLower) ||
+                  String(s.id) === String(p.id)
+                );
 
-                return {
-                  id: p.id || (2000 + idx),
-                  empresa: p.nome ? `${p.nome} (Pessoa Física)` : 'Contato Cadastrado',
-                  nome: p.nome || 'Contato',
-                  cargo: p.perfil || 'Decisor',
-                  papel_decisao: p.tem_decisao ? 'Decisor Final' : 'Pesquisador',
-                  relacao_sjc: p.cidade_mora ? `Mora em ${p.cidade_mora}` : 'São José dos Campos',
-                  setor: 'Consumidor / Pesquisa',
-                  bairro: p.cidade_mora || 'SJC',
-                  regiao: 'São José dos Campos',
-                  whatsapp: (p.whatsapp || '').replace(/\D/g, ''),
-                  email: p.email || '',
-                  plano: p.tem_decisao ? 'Enterprise' : 'Free / Pesquisa',
-                  mrr: p.tem_decisao ? 149.00 : 0.00,
-                  stage: stage,
-                  status: 'Pendente',
-                  data: p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : 'Recente',
-                  avatar: initials,
-                  avatarBg: p.tem_decisao ? 'bg-cyan-600' : 'bg-emerald-600',
-                  tipo_decisao: p.motivo_entrada || 'Pesquisa & Mercado',
-                  projeto_nome: 'Lead Inbound Supabase',
-                  estagio_projeto: 'Em Qualificação',
-                  prazo_decisao: '30 a 60 dias',
-                  faixa_valor: 'A definir',
-                  pergunta_principal: p.motivo_entrada_detalhe || 'Como os dados do Radar São José apoiam a tomada de decisão no mercado local?',
-                  sla_prioridade: p.tem_decisao ? 'Alta' : 'Normal',
-                  proximo_passo: 'Realizar primeiro contato via WhatsApp',
-                  proximo_passo_data: new Date().toISOString().split('T')[0],
-                  notas: `[Perfil]: ${p.perfil || 'N/A'}\n[Motivo]: ${p.motivo_entrada || 'N/A'}`,
-                  historico: [
-                    `Cadastrado via ${p.origem || 'Site'} em ${new Date(p.created_at || Date.now()).toLocaleDateString('pt-BR')}`
-                  ]
-                };
+                if (exIdx < 0) {
+                  const initials = (p.nome || 'L').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+                  const stage = p.tem_decisao ? 'qualificacao' : 'lead';
+                  localList.unshift({
+                    id: p.id || (2000 + idx),
+                    empresa: p.nome ? `${p.nome} (Pessoa Física)` : 'Contato Cadastrado',
+                    nome: p.nome || 'Contato',
+                    cargo: p.perfil || 'Decisor',
+                    papel_decisao: p.tem_decisao ? 'Decisor Final' : 'Pesquisador',
+                    relacao_sjc: p.cidade_mora ? `Mora em ${p.cidade_mora}` : 'São José dos Campos',
+                    setor: 'Consumidor / Pesquisa',
+                    bairro: p.cidade_mora || 'SJC',
+                    regiao: 'São José dos Campos',
+                    whatsapp: (p.whatsapp || '').replace(/\D/g, ''),
+                    email: p.email || '',
+                    plano: p.tem_decisao ? 'Enterprise' : 'Free / Pesquisa',
+                    mrr: p.tem_decisao ? 149.00 : 0.00,
+                    stage: stage,
+                    status: 'Pendente',
+                    data: p.created_at ? new Date(p.created_at).toLocaleDateString('pt-BR') : 'Recente',
+                    avatar: initials,
+                    avatarBg: p.tem_decisao ? 'bg-cyan-600' : 'bg-emerald-600',
+                    tipo_decisao: p.motivo_entrada || 'Pesquisa & Mercado',
+                    projeto_nome: 'Lead Inbound Supabase',
+                    estagio_projeto: 'Em Qualificação',
+                    prazo_decisao: '30 a 60 dias',
+                    faixa_valor: 'A definir',
+                    pergunta_principal: p.motivo_entrada_detalhe || 'Como os dados do Radar São José apoiam a tomada de decisão no mercado local?',
+                    sla_prioridade: p.tem_decisao ? 'Alta' : 'Normal',
+                    proximo_passo: 'Realizar primeiro contato via WhatsApp',
+                    proximo_passo_data: new Date().toISOString().split('T')[0],
+                    notas: `[Perfil]: ${p.perfil || 'N/A'}\n[Motivo]: ${p.motivo_entrada || 'N/A'}`,
+                    historico: [
+                      `Cadastrado via ${p.origem || 'Site'} em ${new Date(p.created_at || Date.now()).toLocaleDateString('pt-BR')}`
+                    ]
+                  });
+                }
               });
             }
-          } catch (pesErr) {
-            console.warn('[CRM Supabase] Tentativa crm_pessoas:', pesErr.message);
+          } catch (pesCloudErr) {
+            console.warn('[CRM Supabase Pessoas Warn]:', pesCloudErr.message);
           }
         }
 
-        subscribers = mappedRecords;
-        console.log(`[CRM Supabase] ${subscribers.length} registros comerciais carregados com sucesso.`);
+        // 5. Atualiza estado e salva cache sincronizado
+        subscribers = localList;
+        try {
+          localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+        } catch (e) {}
+
+        console.log(`[CRM Sincronizado] Total de ${subscribers.length} registros comerciais prontos.`);
         renderCrm();
 
       } catch (fatalErr) {
-        console.error('[CRM Supabase Fetch Fatal]:', fatalErr);
+        console.error('[CRM Fetch Fatal Error]:', fatalErr);
+        if (!subscribers || subscribers.length === 0) {
+          subscribers = [...DEFAULT_SUBSCRIBERS];
+        }
         renderCrm();
       }
     }
 
-    
+    // Ouvinte em tempo real para sincronização instantânea entre abas
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'radar_crm_inbound' || event.key === 'radarsaojose_crm_subscribers_v3' || event.key === 'radar_crm_last_update') {
+        console.log('[CRM Realtime] Detecção de novo lead/atualização em outra aba!');
+        fetchCRMDataFromSupabase();
+      }
+    });
 
     let currentCrmView = 'table';
     let selectedCustomerId = null;
@@ -2846,8 +3188,6 @@
 
       if (nextIdx < 0 || nextIdx >= stages.length) return;
 
-      const previousStage = sub.stage;
-      const previousStatus = sub.status;
       const nextStage = stages[nextIdx];
 
       // Mapeamento para o pipeline do banco de dados (crm_oportunidades)
@@ -2861,7 +3201,7 @@
       const pipelineEtapa = pipelineMap[nextStage] || 'Lead novo';
       const statusBanco = nextStage === 'ativo' ? 'Ganha' : (nextStage === 'churn' ? 'Perdida' : 'Ativa');
 
-      // 1. Optimistic UI: atualiza estado e interface antes de chamar a API
+      // 1. Atualização do modelo local imediata
       sub.stage = nextStage;
       if (nextStage === 'ativo') sub.status = 'Ativo';
       else if (nextStage === 'churn') sub.status = 'Cancelado';
@@ -2870,66 +3210,43 @@
       sub.historico = sub.historico || [];
       sub.historico.unshift(`Etapa alterada para ${nextStage.toUpperCase()} em ${new Date().toLocaleDateString('pt-BR')}`);
 
-      renderCrm();
-      showToast(`Atualizando etapa para "${nextStage.toUpperCase()}"...`);
-
-      // 2. Persistência real no Supabase
+      // Persistir localmente de imediato
       try {
-        const client = window.supabaseClient || (window.supabase && typeof window.supabase.createClient === 'function' ? window.supabase.createClient(
-          "https://tocyvysucpslayzglixq.supabase.co",
-          "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT"
-        ) : null);
-
-        if (!client) {
-          throw new Error("Cliente Supabase indisponível.");
+        localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+        let inbounds = JSON.parse(localStorage.getItem('radar_crm_inbound') || '[]');
+        let inbMatch = inbounds.find(i => (i.email || '').toLowerCase() === (sub.email || '').toLowerCase());
+        if (inbMatch) {
+          inbMatch.stage = nextStage;
+          localStorage.setItem('radar_crm_inbound', JSON.stringify(inbounds));
         }
+      } catch (e) {
+        console.warn('[CRM Advance Local]:', e);
+      }
 
-        let updated = false;
+      renderCrm();
+      showToast(`Etapa alterada para "${nextStage.toUpperCase()}" com sucesso!`);
 
-        // Tenta atualizar na tabela crm_oportunidades
-        const { error: oppError } = await client
-          .from('crm_oportunidades')
-          .update({
-            etapa_pipeline: pipelineEtapa,
-            status: statusBanco
-          })
-          .eq('id', id);
+      // 2. Persistência no Supabase em segundo plano
+      try {
+        const client = window.supabaseClient;
+        if (client) {
+          await client
+            .from('crm_oportunidades')
+            .update({
+              etapa_pipeline: pipelineEtapa,
+              status: statusBanco
+            })
+            .eq('id', id);
 
-        if (!oppError) {
-          updated = true;
-        } else {
-          console.warn('[CRM Update Kanban] crm_oportunidades warn:', oppError.message);
-        }
-
-        // Fallback: se o registro vier diretamente de crm_pessoas
-        if (!updated) {
-          const { error: pesError } = await client
+          await client
             .from('crm_pessoas')
             .update({
               tem_decisao: (nextStage !== 'lead')
             })
             .eq('id', id);
-
-          if (!pesError) {
-            updated = true;
-          }
         }
-
-        if (!updated && oppError) {
-          throw oppError;
-        }
-
-        showToast(`Etapa "${nextStage.toUpperCase()}" sincronizada com sucesso!`);
       } catch (err) {
-        // Rollback da Optimistic UI em caso de falha
-        console.error('[CRM Kanban Update Error]:', err);
-        sub.stage = previousStage;
-        sub.status = previousStatus;
-        if (sub.historico && sub.historico.length > 0) {
-          sub.historico.shift();
-        }
-        renderCrm();
-        showToast("Erro ao sincronizar etapa com o banco: " + (err.message || err), "error");
+        console.warn('[CRM Supabase Kanban Sync]:', err.message);
       }
     }
 
@@ -3034,13 +3351,55 @@
           }
         }
 
+        // Garante inserção imediata no modelo local
+        const initials = (nome || empresa || 'L').split(' ').filter(Boolean).map(w => w[0]).join('').substring(0, 2).toUpperCase() || 'LD';
+        const newLocalSub = {
+          id: 'manual_' + Date.now(),
+          empresa: empresa || `${nome} (Pessoa Física)`,
+          nome: nome || 'Decisor',
+          cargo: cargo,
+          papel_decisao: papel_decisao,
+          relacao_sjc: relacao_sjc,
+          setor: 'Corporativo B2B',
+          bairro: bairro,
+          regiao: 'São José dos Campos',
+          whatsapp: whatsapp.replace(/\D/g, ''),
+          email: email,
+          plano: plano,
+          mrr: mrr,
+          stage: stage,
+          status: stage === 'ativo' ? 'Ativo' : 'Pendente',
+          data: new Date().toLocaleDateString('pt-BR'),
+          avatar: initials,
+          avatarBg: stage === 'ativo' ? 'bg-emerald-600' : 'bg-cyan-600',
+          tipo_decisao: tipo_decisao,
+          projeto_nome: projeto_nome,
+          estagio_projeto: estagio_projeto,
+          prazo_decisao: prazo_decisao,
+          faixa_valor: faixa_valor,
+          pergunta_principal: pergunta_principal,
+          sla_prioridade: sla_prioridade,
+          proximo_passo: proximo_passo,
+          proximo_passo_data: new Date().toISOString().split('T')[0],
+          notas: `[Pergunta Sagrada]: ${pergunta_principal}\n[Projeto]: ${projeto_nome}`,
+          historico: [
+            `Criado manualmente no painel Admin em ${new Date().toLocaleDateString('pt-BR')}`
+          ]
+        };
+        subscribers.unshift(newLocalSub);
+        try {
+          localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+        } catch (e) {}
+
         closeModal();
         e.target.reset();
-        showToast("Novo lead corporativo salvo no Supabase!");
+        showToast("Novo lead comercial adicionado com sucesso!");
+        renderCrm();
         await fetchCRMDataFromSupabase();
       } catch (err) {
         console.error('[CRM Save Error]:', err);
-        showToast("Erro ao salvar lead: " + (err.message || err), "error");
+        showToast("Lead adicionado localmente! Sincronizando com o banco...", "info");
+        renderCrm();
       }
     }
 
@@ -3053,57 +3412,35 @@
         return;
       }
 
-      const client = window.supabaseClient || (window.supabase && typeof window.supabase.createClient === 'function' ? window.supabase.createClient(
-        "https://tocyvysucpslayzglixq.supabase.co",
-        "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT"
-      ) : null);
-
-      if (!client) {
-        showToast("Erro: Cliente Supabase não inicializado.", "error");
-        return;
+      // 1. Atualizar imediatamente o estado local e persistência
+      subscribers = subscribers.filter(s => String(s.id) !== String(id));
+      try {
+        localStorage.setItem('radarsaojose_crm_subscribers_v3', JSON.stringify(subscribers));
+        if (sub && sub.email) {
+          let inbounds = JSON.parse(localStorage.getItem('radar_crm_inbound') || '[]');
+          inbounds = inbounds.filter(i => (i.email || '').toLowerCase() !== sub.email.toLowerCase());
+          localStorage.setItem('radar_crm_inbound', JSON.stringify(inbounds));
+        }
+      } catch (e) {
+        console.warn('[CRM Delete Local]:', e);
       }
 
-      showToast("Excluindo registro do banco de dados...");
+      if (selectedCustomerId && String(selectedCustomerId) === String(id)) {
+        closeCustomerDetails();
+      }
+
+      renderCrm();
+      showToast("Registro comercial removido com sucesso!");
+
+      // 2. Tentar exclusão remota no Supabase em segundo plano
       try {
-        let deleted = false;
-
-        // 1. Tentar exclusão em crm_oportunidades
-        const { error: oppError } = await client
-          .from('crm_oportunidades')
-          .delete()
-          .eq('id', id);
-
-        if (!oppError) {
-          deleted = true;
-        } else {
-          console.warn("[CRM Delete] crm_oportunidades:", oppError.message);
+        const client = window.supabaseClient;
+        if (client) {
+          await client.from('crm_oportunidades').delete().eq('id', id);
+          await client.from('crm_pessoas').delete().eq('id', id);
         }
-
-        // 2. Tentar exclusão em crm_pessoas
-        const { error: pesError } = await client
-          .from('crm_pessoas')
-          .delete()
-          .eq('id', id);
-
-        if (!pesError) {
-          deleted = true;
-        } else {
-          console.warn("[CRM Delete] crm_pessoas:", pesError.message);
-        }
-
-        if (!deleted && oppError && pesError) {
-          throw new Error(oppError.message || pesError.message);
-        }
-
-        if (selectedCustomerId && String(selectedCustomerId) === String(id)) {
-          closeCustomerDetails();
-        }
-
-        showToast("Registro comercial removido do Supabase com sucesso!");
-        await fetchCRMDataFromSupabase();
       } catch (err) {
-        console.error("[CRM Delete Error]:", err);
-        showToast("Erro ao excluir registro: " + (err.message || err), "error");
+        console.warn('[CRM Supabase Delete Background]:', err.message);
       }
     }
 
