@@ -164,6 +164,10 @@ window.switchMainTab = function(tabName) {
     activeView.classList.add("animate-in", "fade-in");
   }
 
+  if (typeof window.applyPlanRestrictions === "function") {
+    window.applyPlanRestrictions();
+  }
+
   // 2. Restaurar a posição de rolagem salva da aba de destino (ou 0 se for a primeira visita)
   const targetScrollY = window.tabScrollPositions[tabName] !== undefined ? window.tabScrollPositions[tabName] : 0;
   setTimeout(() => {
@@ -1637,17 +1641,18 @@ window.applyPlanRestrictions = function() {
     }
   }
 
-  // 1. DASH PESQUISA (DashPesquisa): Aplicação de Blur + Dark Paywall Overlay na visualização de dados aprofundados para Plano Grátis
-  const dashChartsGrid = document.getElementById("dynamic-charts-grid");
+  // 1. DASH PESQUISA (DashPesquisa): Aplicação de Teaser Paywall (Fade & Lock) para Plano Grátis
   const dashboardView = document.getElementById("dashboard-view");
-  if (dashChartsGrid && dashboardView) {
+  const dashChartsGrid = document.getElementById("dynamic-charts-grid");
+  if (dashboardView) {
     let dashPaywall = document.getElementById("dash-paywall-overlay");
     if (userPlan === "gratis") {
-      dashChartsGrid.classList.add("paywall-blur-active");
+      dashboardView.classList.add("teaser-paywall-locked");
+      if (dashChartsGrid) dashChartsGrid.classList.remove("paywall-blur-active");
       if (!dashPaywall) {
         const overlay = document.createElement("div");
         overlay.id = "dash-paywall-overlay";
-        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.className = "absolute bottom-0 left-0 w-full z-30 flex items-end justify-center pb-8 sm:pb-12 px-4 pointer-events-auto";
         overlay.innerHTML = window.createPaywallDarkOverlayHtml(
           "Desbloqueie o poder total da pesquisa",
           "historia",
@@ -1656,23 +1661,25 @@ window.applyPlanRestrictions = function() {
         dashboardView.appendChild(overlay);
       }
     } else {
-      dashChartsGrid.classList.remove("paywall-blur-active");
+      dashboardView.classList.remove("teaser-paywall-locked");
+      if (dashChartsGrid) dashChartsGrid.classList.remove("paywall-blur-active");
       if (dashPaywall) dashPaywall.remove();
       const danglingOverlay = document.getElementById("dash-paywall-overlay");
       if (danglingOverlay) danglingOverlay.remove();
     }
   }
 
-  // 2. REPORT PESQUISA (ReportPesquisa): Aplicação de Blur + Dark Paywall Overlay para Plano Grátis
+  // 2. REPORT PESQUISA (ReportPesquisa): Aplicação de Teaser Paywall (Fade & Lock) para Plano Grátis
   const reportView = document.getElementById("executive-report-view");
   if (reportView) {
     let reportPaywall = document.getElementById("report-paywall-overlay");
     if (userPlan === "gratis") {
-      reportView.classList.add("paywall-blur-active");
+      reportView.classList.add("teaser-paywall-locked");
+      reportView.classList.remove("paywall-blur-active");
       if (!reportPaywall) {
         const overlay = document.createElement("div");
         overlay.id = "report-paywall-overlay";
-        overlay.className = "fixed inset-0 z-40 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs pointer-events-auto";
+        overlay.className = "absolute bottom-0 left-0 w-full z-30 flex items-end justify-center pb-8 sm:pb-12 px-4 pointer-events-auto";
         overlay.innerHTML = window.createPaywallDarkOverlayHtml(
           "Desbloqueie o poder total da pesquisa",
           "image-bank",
@@ -1681,6 +1688,7 @@ window.applyPlanRestrictions = function() {
         reportView.appendChild(overlay);
       }
     } else {
+      reportView.classList.remove("teaser-paywall-locked");
       reportView.classList.remove("paywall-blur-active");
       if (reportPaywall) reportPaywall.remove();
       const danglingOverlay = document.getElementById("report-paywall-overlay");
@@ -1689,25 +1697,36 @@ window.applyPlanRestrictions = function() {
   }
 
   // 3. MÓDULOS COM ACESSO TOTAL NO PLANO GRÁTIS:
-  // - Radar Hub (ibge-view) -> TOTALMENTE VISÍVEL / SEM BLUR
-  // - Linha do Tempo (historia-view) -> TOTALMENTE VISÍVEL / SEM BLUR
-  // - Lentes SJC (image-bank-view) -> TOTALMENTE VISÍVEL / SEM BLUR
+  // - Radar Hub (ibge-view) -> TOTALMENTE VISÍVEL / SEM TRAVA
+  // - Linha do Tempo (historia-view) -> TOTALMENTE VISÍVEL / SEM TRAVA
+  // - Lentes SJC (image-bank-view) -> TOTALMENTE VISÍVEL / SEM TRAVA
   const ibgeView = document.getElementById("ibge-view");
   const historiaView = document.getElementById("historia-view");
   const imageBankView = document.getElementById("image-bank-view");
 
-  if (ibgeView) ibgeView.classList.remove("paywall-blur-active");
-  if (historiaView) historiaView.classList.remove("paywall-blur-active");
-  if (imageBankView) imageBankView.classList.remove("paywall-blur-active");
+  if (ibgeView) {
+    ibgeView.classList.remove("teaser-paywall-locked");
+    ibgeView.classList.remove("paywall-blur-active");
+  }
+  if (historiaView) {
+    historiaView.classList.remove("teaser-paywall-locked");
+    historiaView.classList.remove("paywall-blur-active");
+  }
+  if (imageBankView) {
+    imageBankView.classList.remove("teaser-paywall-locked");
+    imageBankView.classList.remove("paywall-blur-active");
+  }
 
   const midiaView = document.getElementById("midia-dashboard-view");
   if (midiaView) {
+    midiaView.classList.remove("teaser-paywall-locked");
     midiaView.classList.remove("paywall-blur-active");
     const midiaPaywall = document.getElementById("midia-paywall-overlay");
     if (midiaPaywall) midiaPaywall.remove();
   }
   const personasView = document.getElementById("personas-view");
   if (personasView) {
+    personasView.classList.remove("teaser-paywall-locked");
     personasView.classList.remove("paywall-blur-active");
     const personasPaywall = document.getElementById("personas-paywall-overlay");
     if (personasPaywall) personasPaywall.remove();
