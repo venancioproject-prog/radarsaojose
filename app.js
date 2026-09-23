@@ -124,8 +124,8 @@ window.switchMainTab = function(tabName) {
     if (reportView) { reportView.classList.remove("hidden"); activeView = reportView; }
     if (reportIndex) reportIndex.classList.remove("hidden");
     if (btnReport) btnReport.className = activeBtnClass;
-    if (typeof renderExecutiveReport === "function") {
-      renderExecutiveReport(typeof allSurveyRecords !== 'undefined' && allSurveyRecords.length ? allSurveyRecords : (window.FALLBACK_SURVEY_RECORDS || []));
+    if (typeof window.renderExecutiveReportCharts === "function") {
+      window.renderExecutiveReportCharts(typeof allSurveyRecords !== 'undefined' && allSurveyRecords.length ? allSurveyRecords : (window.FALLBACK_SURVEY_RECORDS || []));
     }
   } else if (tabName === "ibge") {
     if (ibgeView) { ibgeView.classList.remove("hidden"); activeView = ibgeView; }
@@ -1641,65 +1641,94 @@ window.applyPlanRestrictions = function() {
     }
   }
 
-  // 1. DASH PESQUISA (DashPesquisa): Aplicação de Teaser Paywall (Fade & Lock) para Plano Grátis
+  // 1. DASH PESQUISA (DashPesquisa): Arquitetura Inject & Hide para Plano Grátis
   const dashboardView = document.getElementById("dashboard-view");
   const dashChartsGrid = document.getElementById("dynamic-charts-grid");
-  if (dashboardView) {
+  if (dashboardView && dashChartsGrid) {
+    const allSections = Array.from(dashChartsGrid.querySelectorAll(":scope > section"));
     let dashPaywall = document.getElementById("dash-paywall-overlay");
+
     if (userPlan === "gratis") {
-      dashboardView.classList.add("teaser-paywall-locked");
-      if (dashChartsGrid) dashChartsGrid.classList.remove("paywall-blur-active");
+      // Deixa os 2 primeiros blocos visíveis e oculta os blocos 3 em diante
+      allSections.forEach((sec, idx) => {
+        if (idx >= 2) {
+          sec.classList.add("hidden");
+        } else {
+          sec.classList.remove("hidden");
+        }
+      });
+
       if (!dashPaywall) {
-        const overlay = document.createElement("div");
-        overlay.id = "dash-paywall-overlay";
-        overlay.className = "absolute bottom-0 left-0 w-full z-30 flex items-end justify-center pb-8 sm:pb-12 px-4 pointer-events-auto";
-        overlay.innerHTML = window.createPaywallDarkOverlayHtml(
+        dashPaywall = document.createElement("div");
+        dashPaywall.id = "dash-paywall-overlay";
+        dashPaywall.className = "paywall-block-wrapper";
+        dashPaywall.innerHTML = window.createPaywallDarkOverlayHtml(
           "Desbloqueie o poder total da pesquisa",
           "historia",
           "Explorar Linha do Tempo"
         );
-        dashboardView.appendChild(overlay);
+        // Insere logo após o 2º bloco visível
+        if (allSections.length >= 2 && allSections[1].nextSibling) {
+          dashChartsGrid.insertBefore(dashPaywall, allSections[1].nextSibling);
+        } else {
+          dashChartsGrid.appendChild(dashPaywall);
+        }
       }
     } else {
-      dashboardView.classList.remove("teaser-paywall-locked");
-      if (dashChartsGrid) dashChartsGrid.classList.remove("paywall-blur-active");
+      // Usuário Assinante ou Admin: exibe todos os blocos e remove paywall
+      allSections.forEach(sec => sec.classList.remove("hidden"));
       if (dashPaywall) dashPaywall.remove();
-      const danglingOverlay = document.getElementById("dash-paywall-overlay");
-      if (danglingOverlay) danglingOverlay.remove();
+      const danglingDash = document.getElementById("dash-paywall-overlay");
+      if (danglingDash) danglingDash.remove();
     }
+
+    dashboardView.classList.remove("teaser-paywall-locked");
+    dashChartsGrid.classList.remove("paywall-blur-active");
   }
 
-  // 2. REPORT PESQUISA (ReportPesquisa): Aplicação de Teaser Paywall (Fade & Lock) para Plano Grátis
+  // 2. REPORT PESQUISA (ReportPesquisa): Arquitetura Inject & Hide para Plano Grátis
   const reportView = document.getElementById("executive-report-view");
   if (reportView) {
+    const articles = Array.from(reportView.querySelectorAll(":scope > article"));
+    const cap1Index = articles.findIndex(a => a.id === "rep-capitulo-1");
     let reportPaywall = document.getElementById("report-paywall-overlay");
+
     if (userPlan === "gratis") {
-      reportView.classList.add("teaser-paywall-locked");
-      reportView.classList.remove("paywall-blur-active");
-      if (!reportPaywall) {
-        const overlay = document.createElement("div");
-        overlay.id = "report-paywall-overlay";
-        overlay.className = "absolute bottom-0 left-0 w-full z-30 flex items-end justify-center pb-8 sm:pb-12 px-4 pointer-events-auto";
-        overlay.innerHTML = window.createPaywallDarkOverlayHtml(
-          "Desbloqueie o poder total da pesquisa",
-          "image-bank",
-          "Explorar Lentes SJC"
-        );
-        reportView.appendChild(overlay);
+      if (cap1Index !== -1) {
+        // Oculta o Capítulo 1 e todos os capítulos e análises subsequentes
+        for (let i = cap1Index; i < articles.length; i++) {
+          articles[i].classList.add("hidden");
+        }
+
+        if (!reportPaywall) {
+          reportPaywall = document.createElement("div");
+          reportPaywall.id = "report-paywall-overlay";
+          reportPaywall.className = "paywall-block-wrapper";
+          reportPaywall.innerHTML = window.createPaywallDarkOverlayHtml(
+            "Desbloqueie o poder total da pesquisa",
+            "image-bank",
+            "Explorar Lentes SJC"
+          );
+          // Insere exatamente antes do Capítulo 1
+          reportView.insertBefore(reportPaywall, articles[cap1Index]);
+        }
       }
     } else {
-      reportView.classList.remove("teaser-paywall-locked");
-      reportView.classList.remove("paywall-blur-active");
+      // Usuário Assinante ou Admin: exibe todos os capítulos e remove paywall
+      articles.forEach(art => art.classList.remove("hidden"));
       if (reportPaywall) reportPaywall.remove();
-      const danglingOverlay = document.getElementById("report-paywall-overlay");
-      if (danglingOverlay) danglingOverlay.remove();
+      const danglingReport = document.getElementById("report-paywall-overlay");
+      if (danglingReport) danglingReport.remove();
     }
+
+    reportView.classList.remove("teaser-paywall-locked");
+    reportView.classList.remove("paywall-blur-active");
   }
 
-  // 3. MÓDULOS COM ACESSO TOTAL NO PLANO GRÁTIS:
-  // - Radar Hub (ibge-view) -> TOTALMENTE VISÍVEL / SEM TRAVA
-  // - Linha do Tempo (historia-view) -> TOTALMENTE VISÍVEL / SEM TRAVA
-  // - Lentes SJC (image-bank-view) -> TOTALMENTE VISÍVEL / SEM TRAVA
+  // 3. MÓDULOS COM ACESSO TOTAL NO PLANO GRÁTIS (100% Liberados):
+  // - Radar Hub (ibge-view) -> TOTALMENTE VISÍVEL / SEM BLOQUEIO
+  // - Linha do Tempo (historia-view) -> TOTALMENTE VISÍVEL / SEM BLOQUEIO
+  // - Lentes SJC (image-bank-view) -> TOTALMENTE VISÍVEL / SEM BLOQUEIO
   const ibgeView = document.getElementById("ibge-view");
   const historiaView = document.getElementById("historia-view");
   const imageBankView = document.getElementById("image-bank-view");
@@ -2126,6 +2155,9 @@ function applyCombinedFilters() {
   processAndRenderDynamicCharts(filtered);
   if (typeof window.renderExecutiveReportCharts === "function") {
     window.renderExecutiveReportCharts(filtered);
+  }
+  if (typeof window.applyPlanRestrictions === "function") {
+    window.applyPlanRestrictions();
   }
 }
 
