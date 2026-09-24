@@ -4,7 +4,7 @@
 // Desenvolvido para: Leonardo Venâncio & Mayumi Nagano
 // =========================================================================
 
-const PLAN_STORAGE_KEY_V5 = 'radarsaojose_business_plan_sebrae_v5';
+const PLAN_STORAGE_KEY_V6 = 'radarsaojose_business_plan_sebrae_v6';
 
 // Dados Oficiais Padronizados baseados no Documento-Base (Setembro/2026)
 const DEFAULT_BUSINESS_PLAN_DATA = {
@@ -228,44 +228,125 @@ const DEFAULT_BUSINESS_PLAN_DATA = {
   },
 
   financial_plan: {
-    capex_investments: [
-      { item: "Notebooks de Alta Performance (Apple M3 / Dell XPS)", qty: 2, unit_val: 12000, total: 24000 },
-      { item: "Estações de Trabalho Ergonômicas & Monitores 4K", qty: 2, unit_val: 4500, total: 9000 },
-      { item: "Kits de Pesquisa de Campo & Gravadores de Áudio/Vídeo", qty: 2, unit_val: 3500, total: 7000 },
-      { item: "Infraestrutura de Rede, Backup e Segurança Física", qty: 1, unit_val: 10000, total: 10000 }
+    // 5.1 Investimentos Fixos (Tabelas A, B, C)
+    investimentos_fixos_a_maquinas: [
+      { item: "Notebooks de Alta Performance (Apple M3 / Dell XPS)", qty: 2, unit_val: 12000 },
+      { item: "Monitores 4K & Hubs Thunderbolt de Alta Resolução", qty: 2, unit_val: 2500 },
+      { item: "Kits de Pesquisa de Campo & Gravadores Digitais de Áudio/Vídeo", qty: 2, unit_val: 1500 },
+      { item: "Infraestrutura de Rede, Servidor de Backup Local & Segurança", qty: 1, unit_val: 5000 }
     ],
+    investimentos_fixos_b_moveis: [
+      { item: "Estações de Trabalho Ergonômicas & Cadeiras NR-17", qty: 2, unit_val: 2000 },
+      { item: "Mobiliário Auxiliar, Arquivos e Suportes", qty: 1, unit_val: 1500 }
+    ],
+    investimentos_fixos_c_veiculos: [],
+
+    // 5.2 Capital de Giro (Tabela A Estoque Inicial + Tabela B Prazos & Caixa Mínimo)
+    estoque_inicial: [
+      { item: "Kits de Boas-Vindas & Dossiês Impressos Executivos", qty: 50, unit_val: 40 },
+      { item: "Material Gráfico de Apoio a Pesquisadores de Campo", qty: 100, unit_val: 15 }
+    ],
+    prazos_vendas: [
+      { prazo: "À vista (Pix / Cartão 1x)", pct_vendas: 40, dias: 0 },
+      { prazo: "30 dias (Boleto / Faturamento)", pct_vendas: 45, dias: 30 },
+      { prazo: "60 dias (Parcelamento Corporativo)", pct_vendas: 15, dias: 60 }
+    ],
+    prazos_compras: [
+      { prazo: "À vista (Pix / Débito)", pct_compras: 30, dias: 0 },
+      { prazo: "30 dias (Faturamento Fornecedores)", pct_compras: 70, dias: 30 }
+    ],
+    necessidade_dias_estoque: 5,
+
+    // 5.3 Investimentos Pré-Operacionais
     pre_operational_investments: [
       { item: "Registro de Marca no INPI (Radar São José)", val: 3500 },
       { item: "Assessoria Jurídica, Contratos SaaS & Termos LGPD", val: 5500 },
       { item: "Pesquisa de Campo Primária (722 Munícipes em 6 Regiões)", val: 12000 },
       { item: "Identidade Visual, Branding & Domínios Corporativos", val: 4000 }
     ],
-    inputs: {
-      annualSubscribers: 20,
-      annualPrice: 12000,
-      appliedIntelProjects: 6,
-      appliedIntelAvgPrice: 8000,
-      customResearchProjects: 2,
-      customResearchAvgPrice: 18000,
-      blogSponsorships: 8,
-      blogSponsorshipAvgPrice: 2500,
-      taxRatePct: 6.0,
-      affiliateCommissionPct: 20.0,
-      gatewayRatePct: 3.2,
-      cogsPerUserYear: 380,
-      directServiceCosts: 12000,
-      proLaboreLeonardo: 6000,
-      proLaboreMayumi: 5000,
-      staffPayroll: 3500,
-      cloudTools: 1200,
-      accounting: 800,
-      officeInternet: 600,
-      otherFixed: 900,
-      annualDepreciation: 4500,
-      avgSalesReceiptDays: 15,
-      avgPaymentDays: 25,
-      cacEstimate: 850
-    }
+
+    // 5.4 Fontes de Recursos
+    fontes_recursos: [
+      { fonte: "Recursos Próprios - Leonardo Venâncio (Sócio Administrador)", val: 48000 },
+      { fonte: "Recursos Próprios - Mayumi Nagano (Sócia Pesquisadora)", val: 32000 },
+      { fonte: "Reinvestimento de Fluxo de Caixa Inicial do Negócio", val: 15000 }
+    ],
+
+    // 5.5 Estimativa de Faturamento Mensal (e 5.6 Insumos Unitários)
+    faturamento_produtos: [
+      {
+        name: "Assinatura Anual Radar São José (SaaS B2B)",
+        qty: 20,
+        price: 12000,
+        is_subscription: true,
+        unit_cogs: 380,
+        insumos: [
+          { name: "Hospedagem Vercel Edge & Supabase Pro", qty: 1, unit_cost: 150 },
+          { name: "Tokens de IA Groq LPU & Gemini Flash", qty: 1, unit_cost: 130 },
+          { name: "Suporte e Ativação por Usuário", qty: 1, unit_cost: 100 }
+        ]
+      },
+      {
+        name: "Estudos de Inteligência Aplicada (Sob Demanda)",
+        qty: 6,
+        price: 8000,
+        is_subscription: false,
+        unit_cogs: 800,
+        insumos: [
+          { name: "Mineração de Microdados & Diagramação de Dossiê", qty: 1, unit_cost: 800 }
+        ]
+      },
+      {
+        name: "Pesquisa Personalizada de Campo (SJC)",
+        qty: 2,
+        price: 18000,
+        is_subscription: false,
+        unit_cogs: 3000,
+        insumos: [
+          { name: "Diárias de Pesquisadores de Campo & Tabulação", qty: 1, unit_cost: 3000 }
+        ]
+      },
+      {
+        name: "Matéria Patrocinada no Blog do Radar",
+        qty: 8,
+        price: 2500,
+        is_subscription: false,
+        unit_cogs: 200,
+        insumos: [
+          { name: "Revisão Editorial de Dados & Otimização SEO", qty: 1, unit_cost: 200 }
+        ]
+      }
+    ],
+
+    // 5.7 Custos de Comercialização (Impostos & Gastos com Vendas)
+    custos_comercializacao_impostos: [
+      { name: "Simples Nacional (Serviços TI e Pesquisa - Anexo III/V)", pct: 6.0 }
+    ],
+    custos_comercializacao_vendas: [
+      { name: "Comissão Programa Parceiros Afiliados", pct: 10.0 },
+      { name: "Taxas Gateway de Pagamento (Cartão / Pix Asaas)", pct: 3.2 }
+    ],
+
+    // 5.9 Custos com Mão de Obra
+    mao_de_obra: [
+      { role: "Assistente Comercial & SDR B2B (Fase 2)", num_empregados: 1, salario: 2500, encargos_pct: 40.0 }
+    ],
+
+    // 5.10 Depreciação
+    depreciacao_ativos: [
+      { item: "Equipamentos de Informática e Hardware", valor_bem: 34000, vida_util_anos: 5 },
+      { item: "Móveis e Utensílios de Escritório", valor_bem: 5500, vida_util_anos: 10 }
+    ],
+
+    // 5.11 Custos Fixos Operacionais Mensais
+    custos_fixos_operacionais: [
+      { name: "Pró-Labore Leonardo Venâncio (CEO & Head Dados)", custo_mensal: 6000 },
+      { name: "Pró-Labore Mayumi Nagano (Head Pesquisa & Conteúdo)", custo_mensal: 5000 },
+      { name: "Infraestrutura Cloud, Supabase & OpenAI/Groq APIs", custo_mensal: 1200 },
+      { name: "Serviços Contábeis Especializados SaaS", custo_mensal: 800 },
+      { name: "Internet Fibra Óptica Dedicada & Telefonia", custo_mensal: 600 },
+      { name: "Softwares, Ferramentas de Produtividade & Licenças", custo_mensal: 900 }
+    ]
   },
 
   swot: [
@@ -314,7 +395,7 @@ let planAutoSaveTimer = null;
 
 function loadBusinessPlan() {
   try {
-    const raw = localStorage.getItem(PLAN_STORAGE_KEY_V5);
+    const raw = localStorage.getItem(PLAN_STORAGE_KEY_V6);
     if (raw) {
       currentBusinessPlan = JSON.parse(raw);
     }
@@ -322,7 +403,7 @@ function loadBusinessPlan() {
     console.warn("[Business Plan] Falha ao carregar do localStorage:", err);
   }
 
-  if (!currentBusinessPlan || !currentBusinessPlan.financial_plan) {
+  if (!currentBusinessPlan || !currentBusinessPlan.financial_plan || !currentBusinessPlan.financial_plan.faturamento_produtos) {
     currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
   } else {
     // Garante que o Plano Operacional e Arquitetura completa estejam sempre preenchidos se o cache local estiver vazio
@@ -334,6 +415,10 @@ function loadBusinessPlan() {
     // Garante que o quadro de tarefas Monday.com esteja sempre preenchido
     if (!currentBusinessPlan.monday_tasks || !Array.isArray(currentBusinessPlan.monday_tasks) || currentBusinessPlan.monday_tasks.length === 0) {
       currentBusinessPlan.monday_tasks = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA.monday_tasks));
+    }
+    // Garante que a estrutura oficial financeira SEBRAE esteja completa
+    if (!currentBusinessPlan.financial_plan.investimentos_fixos_a_maquinas || !currentBusinessPlan.financial_plan.faturamento_produtos) {
+      currentBusinessPlan.financial_plan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA.financial_plan));
     }
   }
 
@@ -351,7 +436,7 @@ async function syncWithBackend() {
       const data = await res.json();
       if (data && data.plan && data.fromCloud) {
         currentBusinessPlan = data.plan;
-        localStorage.setItem(PLAN_STORAGE_KEY_V5, JSON.stringify(currentBusinessPlan));
+        localStorage.setItem(PLAN_STORAGE_KEY_V6, JSON.stringify(currentBusinessPlan));
         renderAllPlanSections();
         updateSyncIndicator(true, "Sincronizado com Supabase Cloud");
         return;
@@ -384,7 +469,7 @@ async function saveBusinessPlan(showFeedback = true) {
   collectFormInputs();
 
   // Salva no localStorage
-  localStorage.setItem(PLAN_STORAGE_KEY_V5, JSON.stringify(currentBusinessPlan));
+  localStorage.setItem(PLAN_STORAGE_KEY_V6, JSON.stringify(currentBusinessPlan));
 
   // Envia para o backend Supabase
   try {
@@ -413,7 +498,7 @@ function resetBusinessPlanToDefaults() {
     return;
   }
   currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
-  localStorage.setItem(PLAN_STORAGE_KEY_V5, JSON.stringify(currentBusinessPlan));
+  localStorage.setItem(PLAN_STORAGE_KEY_V6, JSON.stringify(currentBusinessPlan));
   renderAllPlanSections();
   saveBusinessPlan(false);
   if (typeof showToast === 'function') {
@@ -1119,42 +1204,57 @@ function updateStaffField(idx, field, val) {
 }
 
 // =========================================================================
-// 6. PLANO FINANCEIRO ULTRA-DETALHADO & CÁLCULOS AUTOMÁTICOS
+// 6. PLANO FINANCEIRO SEBRAE OFICIAL (5.1 A 5.13) & CÁLCULOS AUTOMATIZADOS
 // =========================================================================
 
 function renderSectionFinancial() {
-  renderCapexTable();
-  renderPreOpTable();
-  hydrateFinancialInputs();
+  renderSection51InvestimentosFixos();
+  renderSection52CapitalDeGiro();
+  renderSection53PreOperacional();
+  renderSection54FontesRecursos();
+  renderSection55Faturamento();
+  renderSection56CustosUnitarios();
+  renderSection57CustosComercializacao();
+  renderSection59MaoDeObra();
+  renderSection510Depreciacao();
+  renderSection511CustosFixos();
   recalculateAllFinancials();
 }
 
-function renderCapexTable() {
-  const container = document.getElementById('capexTableBody');
+// -------------------------------------------------------------------------
+// 5.1 ESTIMATIVA DOS INVESTIMENTOS FIXOS (TABELAS A, B, C)
+// -------------------------------------------------------------------------
+
+function renderSection51InvestimentosFixos() {
+  renderFixosTable('A', 'fixosTableA_Body', currentBusinessPlan.financial_plan.investimentos_fixos_a_maquinas || []);
+  renderFixosTable('B', 'fixosTableB_Body', currentBusinessPlan.financial_plan.investimentos_fixos_b_moveis || []);
+  renderFixosTable('C', 'fixosTableC_Body', currentBusinessPlan.financial_plan.investimentos_fixos_c_veiculos || []);
+}
+
+function renderFixosTable(tableType, containerId, items) {
+  const container = document.getElementById(containerId);
   if (!container) return;
 
-  const items = currentBusinessPlan.financial_plan.capex_investments || [];
-  let totalCapex = 0;
-
+  let subtotal = 0;
   container.innerHTML = items.map((item, idx) => {
-    const itemTotal = (Number(item.qty) || 1) * (Number(item.unit_val) || 0);
-    totalCapex += itemTotal;
+    const total = (Number(item.qty) || 0) * (Number(item.unit_val) || 0);
+    subtotal += total;
     return `
       <tr class="border-b border-slate-100 hover:bg-slate-50/50 text-xs">
-        <td class="px-4 py-2.5 font-bold text-slate-800">
-          <input type="text" value="${escapeHtml(item.item)}" onchange="updateCapexField(${idx}, 'item', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 focus:bg-white rounded px-1 outline-none" />
+        <td class="px-3 py-2.5 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(item.item)}" onchange="updateFixosField('${tableType}', ${idx}, 'item', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 focus:bg-white rounded px-1 outline-none" />
         </td>
-        <td class="px-4 py-2.5 text-center">
-          <input type="number" min="1" value="${item.qty || 1}" onchange="updateCapexField(${idx}, 'qty', Number(this.value)); renderCapexTable(); recalculateAllFinancials();" class="w-14 text-center px-1 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
+        <td class="px-3 py-2.5 text-center">
+          <input type="number" min="1" value="${item.qty || 1}" onchange="updateFixosField('${tableType}', ${idx}, 'qty', Number(this.value))" class="w-16 text-center px-1.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
         </td>
-        <td class="px-4 py-2.5 text-right">
-          <input type="number" step="100" value="${item.unit_val || 0}" onchange="updateCapexField(${idx}, 'unit_val', Number(this.value)); renderCapexTable(); recalculateAllFinancials();" class="w-24 text-right px-1 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
+        <td class="px-3 py-2.5 text-right">
+          <input type="number" step="100" value="${item.unit_val || 0}" onchange="updateFixosField('${tableType}', ${idx}, 'unit_val', Number(this.value))" class="w-28 text-right px-1.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
         </td>
-        <td class="px-4 py-2.5 text-right font-black text-slate-900">
-          ${formatMoney(itemTotal)}
+        <td class="px-3 py-2.5 text-right font-black text-slate-900">
+          ${formatMoney(total)}
         </td>
-        <td class="px-4 py-2.5 text-right">
-          <button type="button" onclick="deleteCapexRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1" title="Excluir item">
+        <td class="px-3 py-2.5 text-right">
+          <button type="button" onclick="deleteFixosRow('${tableType}', ${idx})" class="text-slate-300 hover:text-rose-600 p-1" title="Excluir item">
             <i class="fa-solid fa-trash-can text-xs"></i>
           </button>
         </td>
@@ -1162,41 +1262,227 @@ function renderCapexTable() {
     `;
   }).join('');
 
-  const elTotal = document.getElementById('capexTotalDisplay');
-  if (elTotal) elTotal.innerText = formatMoney(totalCapex);
+  setText(`subtotalFixos${tableType}`, formatMoney(subtotal));
 }
 
-function addNewCapexRow() {
-  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
-  if (!currentBusinessPlan.financial_plan) currentBusinessPlan.financial_plan = {};
-  if (!Array.isArray(currentBusinessPlan.financial_plan.capex_investments)) currentBusinessPlan.financial_plan.capex_investments = [];
-  currentBusinessPlan.financial_plan.capex_investments.push({
-    item: "Novo Equipamento / Móvel",
+function addNewFixosRow(tableType) {
+  const f = currentBusinessPlan.financial_plan;
+  const key = tableType === 'A' ? 'investimentos_fixos_a_maquinas' : (tableType === 'B' ? 'investimentos_fixos_b_moveis' : 'investimentos_fixos_c_veiculos');
+  if (!Array.isArray(f[key])) f[key] = [];
+  f[key].push({
+    item: tableType === 'A' ? 'Novo Equipamento / Máquina' : (tableType === 'B' ? 'Novo Móvel / Utensílio' : 'Novo Veículo / Ativo'),
     qty: 1,
-    unit_val: 3000,
-    total: 3000
+    unit_val: 2000
   });
-  renderCapexTable();
+  renderSection51InvestimentosFixos();
   recalculateAllFinancials();
   saveBusinessPlan(false);
 }
 
-function deleteCapexRow(idx) {
-  if (!confirm('Deseja excluir este item de investimento fixo?')) return;
-  currentBusinessPlan.financial_plan.capex_investments.splice(idx, 1);
-  renderCapexTable();
+function deleteFixosRow(tableType, idx) {
+  const f = currentBusinessPlan.financial_plan;
+  const key = tableType === 'A' ? 'investimentos_fixos_a_maquinas' : (tableType === 'B' ? 'investimentos_fixos_b_moveis' : 'investimentos_fixos_c_veiculos');
+  if (!confirm('Deseja excluir este item dos investimentos fixos?')) return;
+  f[key].splice(idx, 1);
+  renderSection51InvestimentosFixos();
   recalculateAllFinancials();
   saveBusinessPlan(false);
 }
 
-function updateCapexField(idx, field, val) {
-  if (currentBusinessPlan.financial_plan.capex_investments[idx]) {
-    currentBusinessPlan.financial_plan.capex_investments[idx][field] = val;
+function updateFixosField(tableType, idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  const key = tableType === 'A' ? 'investimentos_fixos_a_maquinas' : (tableType === 'B' ? 'investimentos_fixos_b_moveis' : 'investimentos_fixos_c_veiculos');
+  if (f[key] && f[key][idx]) {
+    f[key][idx][field] = val;
+    renderSection51InvestimentosFixos();
+    recalculateAllFinancials();
     saveBusinessPlan(false);
   }
 }
 
-function renderPreOpTable() {
+// -------------------------------------------------------------------------
+// 5.2 CAPITAL DE GIRO (ESTOQUE INICIAL + CAIXA MÍNIMO EM 5 PASSOS)
+// -------------------------------------------------------------------------
+
+function renderSection52CapitalDeGiro() {
+  // Tabela A: Estoque Inicial
+  const containerEst = document.getElementById('estoqueTableBody');
+  if (containerEst) {
+    const items = currentBusinessPlan.financial_plan.estoque_inicial || [];
+    let totalEst = 0;
+    containerEst.innerHTML = items.map((item, idx) => {
+      const total = (Number(item.qty) || 0) * (Number(item.unit_val) || 0);
+      totalEst += total;
+      return `
+        <tr class="border-b border-slate-100 hover:bg-slate-50/50 text-xs">
+          <td class="px-3 py-2 font-bold text-slate-800">
+            <input type="text" value="${escapeHtml(item.item)}" onchange="updateEstoqueField(${idx}, 'item', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 focus:bg-white rounded px-1 outline-none" />
+          </td>
+          <td class="px-3 py-2 text-center">
+            <input type="number" min="1" value="${item.qty || 1}" onchange="updateEstoqueField(${idx}, 'qty', Number(this.value))" class="w-16 text-center px-1.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
+          </td>
+          <td class="px-3 py-2 text-right">
+            <input type="number" step="5" value="${item.unit_val || 0}" onchange="updateEstoqueField(${idx}, 'unit_val', Number(this.value))" class="w-24 text-right px-1.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
+          </td>
+          <td class="px-3 py-2 text-right font-black text-slate-900">${formatMoney(total)}</td>
+          <td class="px-3 py-2 text-right">
+            <button type="button" onclick="deleteEstoqueRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+    setText('totalEstoqueInicialDisplay', formatMoney(totalEst));
+  }
+
+  // Passo 1: Contas a Receber
+  const containerPV = document.getElementById('prazosVendasTableBody');
+  if (containerPV) {
+    const prazos = currentBusinessPlan.financial_plan.prazos_vendas || [];
+    let pmv = 0;
+    containerPV.innerHTML = prazos.map((pv, idx) => {
+      const medPond = ((Number(pv.pct_vendas) || 0) / 100) * (Number(pv.dias) || 0);
+      pmv += medPond;
+      return `
+        <tr class="border-b border-slate-100 text-xs">
+          <td class="px-3 py-2 font-semibold text-slate-800">
+            <input type="text" value="${escapeHtml(pv.prazo)}" onchange="updatePrazoVendaField(${idx}, 'prazo', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+          </td>
+          <td class="px-3 py-2 text-center">
+            <input type="number" step="5" max="100" min="0" value="${pv.pct_vendas || 0}" onchange="updatePrazoVendaField(${idx}, 'pct_vendas', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" /> %
+          </td>
+          <td class="px-3 py-2 text-center">
+            <input type="number" min="0" value="${pv.dias || 0}" onchange="updatePrazoVendaField(${idx}, 'dias', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+          </td>
+          <td class="px-3 py-2 text-right font-black text-cyan-800">${medPond.toFixed(1)} dias</td>
+          <td class="px-3 py-2 text-right">
+            <button type="button" onclick="deletePrazoVendaRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+    setText('pmvTotalDisplay', `${pmv.toFixed(1)} dias`);
+  }
+
+  // Passo 2: Fornecedores
+  const containerPC = document.getElementById('prazosComprasTableBody');
+  if (containerPC) {
+    const prazos = currentBusinessPlan.financial_plan.prazos_compras || [];
+    let pmc = 0;
+    containerPC.innerHTML = prazos.map((pc, idx) => {
+      const medPond = ((Number(pc.pct_compras) || 0) / 100) * (Number(pc.dias) || 0);
+      pmc += medPond;
+      return `
+        <tr class="border-b border-slate-100 text-xs">
+          <td class="px-3 py-2 font-semibold text-slate-800">
+            <input type="text" value="${escapeHtml(pc.prazo)}" onchange="updatePrazoCompraField(${idx}, 'prazo', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+          </td>
+          <td class="px-3 py-2 text-center">
+            <input type="number" step="5" max="100" min="0" value="${pc.pct_compras || 0}" onchange="updatePrazoCompraField(${idx}, 'pct_compras', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" /> %
+          </td>
+          <td class="px-3 py-2 text-center">
+            <input type="number" min="0" value="${pc.dias || 0}" onchange="updatePrazoCompraField(${idx}, 'dias', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+          </td>
+          <td class="px-3 py-2 text-right font-black text-cyan-800">${medPond.toFixed(1)} dias</td>
+          <td class="px-3 py-2 text-right">
+            <button type="button" onclick="deletePrazoCompraRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+    setText('pmcTotalDisplay', `${pmc.toFixed(1)} dias`);
+  }
+
+  // Passo 3: Estoques (dias)
+  setInputValue('finInput_diasEstoque', currentBusinessPlan.financial_plan.necessidade_dias_estoque || 5);
+}
+
+function addNewEstoqueRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.estoque_inicial)) f.estoque_inicial = [];
+  f.estoque_inicial.push({ item: "Novo Item de Estoque", qty: 10, unit_val: 50 });
+  renderSection52CapitalDeGiro();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deleteEstoqueRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (!confirm('Deseja excluir este item de estoque?')) return;
+  f.estoque_inicial.splice(idx, 1);
+  renderSection52CapitalDeGiro();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updateEstoqueField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.estoque_inicial && f.estoque_inicial[idx]) {
+    f.estoque_inicial[idx][field] = val;
+    renderSection52CapitalDeGiro();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+function addNewPrazoVendaRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.prazos_vendas)) f.prazos_vendas = [];
+  f.prazos_vendas.push({ prazo: "Novo Prazo", pct_vendas: 10, dias: 45 });
+  renderSection52CapitalDeGiro();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deletePrazoVendaRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  f.prazos_vendas.splice(idx, 1);
+  renderSection52CapitalDeGiro();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updatePrazoVendaField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.prazos_vendas && f.prazos_vendas[idx]) {
+    f.prazos_vendas[idx][field] = val;
+    renderSection52CapitalDeGiro();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+function addNewPrazoCompraRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.prazos_compras)) f.prazos_compras = [];
+  f.prazos_compras.push({ prazo: "Novo Prazo Fornecedor", pct_compras: 10, dias: 45 });
+  renderSection52CapitalDeGiro();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deletePrazoCompraRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  f.prazos_compras.splice(idx, 1);
+  renderSection52CapitalDeGiro();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updatePrazoCompraField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.prazos_compras && f.prazos_compras[idx]) {
+    f.prazos_compras[idx][field] = val;
+    renderSection52CapitalDeGiro();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+// -------------------------------------------------------------------------
+// 5.3 INVESTIMENTOS PRÉ-OPERACIONAIS
+// -------------------------------------------------------------------------
+
+function renderSection53PreOperacional() {
   const container = document.getElementById('preOpTableBody');
   if (!container) return;
 
@@ -1211,10 +1497,10 @@ function renderPreOpTable() {
           <input type="text" value="${escapeHtml(item.item)}" onchange="updatePreOpField(${idx}, 'item', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 focus:bg-white rounded px-1 outline-none" />
         </td>
         <td class="px-4 py-2.5 text-right font-black text-slate-900">
-          <input type="number" step="500" value="${item.val || 0}" onchange="updatePreOpField(${idx}, 'val', Number(this.value)); renderPreOpTable(); recalculateAllFinancials();" class="w-28 text-right px-1 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
+          <input type="number" step="500" value="${item.val || 0}" onchange="updatePreOpField(${idx}, 'val', Number(this.value))" class="w-28 text-right px-1 py-1 bg-slate-50 border border-slate-200 rounded font-bold" />
         </td>
         <td class="px-4 py-2.5 text-right">
-          <button type="button" onclick="deletePreOpRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1" title="Excluir taxa/despesa">
+          <button type="button" onclick="deletePreOpRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1" title="Excluir despesa">
             <i class="fa-solid fa-trash-can text-xs"></i>
           </button>
         </td>
@@ -1222,220 +1508,867 @@ function renderPreOpTable() {
     `;
   }).join('');
 
-  const elTotal = document.getElementById('preOpTotalDisplay');
-  if (elTotal) elTotal.innerText = formatMoney(totalPreOp);
+  setText('preOpTotalDisplay', formatMoney(totalPreOp));
 }
 
 function addNewPreOpRow() {
-  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
-  if (!currentBusinessPlan.financial_plan) currentBusinessPlan.financial_plan = {};
-  if (!Array.isArray(currentBusinessPlan.financial_plan.pre_operational_investments)) currentBusinessPlan.financial_plan.pre_operational_investments = [];
-  currentBusinessPlan.financial_plan.pre_operational_investments.push({
-    item: "Nova Taxa / Desenvolvimento",
-    val: 2500
-  });
-  renderPreOpTable();
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.pre_operational_investments)) f.pre_operational_investments = [];
+  f.pre_operational_investments.push({ item: "Nova Taxa / Desenvolvimento", val: 2500 });
+  renderSection53PreOperacional();
   recalculateAllFinancials();
   saveBusinessPlan(false);
 }
 
 function deletePreOpRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
   if (!confirm('Deseja excluir este item pré-operacional?')) return;
-  currentBusinessPlan.financial_plan.pre_operational_investments.splice(idx, 1);
-  renderPreOpTable();
+  f.pre_operational_investments.splice(idx, 1);
+  renderSection53PreOperacional();
   recalculateAllFinancials();
   saveBusinessPlan(false);
 }
 
 function updatePreOpField(idx, field, val) {
-  if (currentBusinessPlan.financial_plan.pre_operational_investments[idx]) {
-    currentBusinessPlan.financial_plan.pre_operational_investments[idx][field] = val;
+  const f = currentBusinessPlan.financial_plan;
+  if (f.pre_operational_investments && f.pre_operational_investments[idx]) {
+    f.pre_operational_investments[idx][field] = val;
+    renderSection53PreOperacional();
+    recalculateAllFinancials();
     saveBusinessPlan(false);
   }
 }
 
-function hydrateFinancialInputs() {
-  const inp = currentBusinessPlan.financial_plan.inputs || {};
-  for (const [key, val] of Object.entries(inp)) {
-    const el = document.getElementById(`finInput_${key}`);
-    if (el) el.value = val;
+// -------------------------------------------------------------------------
+// 5.4 FONTES DE RECURSOS (TABELA 2)
+// -------------------------------------------------------------------------
+
+function renderSection54FontesRecursos() {
+  const container = document.getElementById('fontesRecursosTableBody');
+  if (!container) return;
+
+  const fontes = currentBusinessPlan.financial_plan.fontes_recursos || [];
+  let totalFontes = 0;
+
+  container.innerHTML = fontes.map((f, idx) => {
+    totalFontes += Number(f.val || 0);
+    return `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(f.fonte)}" onchange="updateFonteField(${idx}, 'fonte', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <input type="number" step="1000" value="${f.val || 0}" onchange="updateFonteField(${idx}, 'val', Number(this.value))" class="w-28 text-right font-bold bg-slate-50 border border-slate-200 rounded px-1 py-1" />
+        </td>
+        <td id="fontePct_${idx}" class="px-3 py-2 text-right font-black text-cyan-800">0%</td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteFonteRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  setText('totalFontesDisplay', formatMoney(totalFontes));
+}
+
+function addNewFonteRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.fontes_recursos)) f.fontes_recursos = [];
+  f.fontes_recursos.push({ fonte: "Nova Fonte de Recursos", val: 10000 });
+  renderSection54FontesRecursos();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deleteFonteRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (!confirm('Deseja excluir esta fonte de recursos?')) return;
+  f.fontes_recursos.splice(idx, 1);
+  renderSection54FontesRecursos();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updateFonteField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.fontes_recursos && f.fontes_recursos[idx]) {
+    f.fontes_recursos[idx][field] = val;
+    renderSection54FontesRecursos();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
   }
 }
 
-// Coleta e Recálculo Global em Tempo Real
-function recalculateAllFinancials() {
-  if (!currentBusinessPlan) return;
+// -------------------------------------------------------------------------
+// 5.5 ESTIMATIVA DO FATURAMENTO MENSAL & INDICADORES SAAS
+// -------------------------------------------------------------------------
 
-  const inp = currentBusinessPlan.financial_plan.inputs || {};
+function renderSection55Faturamento() {
+  const container = document.getElementById('faturamentoTableBody');
+  if (!container) return;
 
-  // Atualiza valores a partir dos inputs na tela se existirem
-  for (const key of Object.keys(inp)) {
-    const el = document.getElementById(`finInput_${key}`);
-    if (el) inp[key] = Number(el.value);
+  const prods = currentBusinessPlan.financial_plan.faturamento_produtos || [];
+  let totalFat = 0;
+
+  container.innerHTML = prods.map((p, idx) => {
+    const total = (Number(p.qty) || 0) * (Number(p.price) || 0);
+    totalFat += total;
+    return `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(p.name)}" onchange="updateProdutoField(${idx}, 'name', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-center">
+          <input type="number" min="0" value="${p.qty || 0}" onchange="updateProdutoField(${idx}, 'qty', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-1" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <input type="number" step="500" value="${p.price || 0}" onchange="updateProdutoField(${idx}, 'price', Number(this.value))" class="w-28 text-right font-black text-emerald-700 bg-slate-50 border border-slate-200 rounded px-1 py-1" />
+        </td>
+        <td class="px-3 py-2 text-right font-black text-slate-900">${formatMoney(total)}</td>
+        <td class="px-3 py-2 text-center">
+          <input type="checkbox" ${p.is_subscription ? 'checked' : ''} onchange="updateProdutoField(${idx}, 'is_subscription', this.checked)" title="Marcar se for receita recorrente (SaaS)" class="rounded text-cyan-600 focus:ring-cyan-500" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteProdutoRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  setText('totalFaturamentoDisplay', formatMoney(totalFat));
+}
+
+function addNewProdutoRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.faturamento_produtos)) f.faturamento_produtos = [];
+  f.faturamento_produtos.push({
+    name: "Novo Produto / Serviço",
+    qty: 1,
+    price: 5000,
+    is_subscription: false,
+    unit_cogs: 500,
+    insumos: [{ name: "Insumo Inicial", qty: 1, unit_cost: 500 }]
+  });
+  renderSection55Faturamento();
+  renderSection56CustosUnitarios();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deleteProdutoRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (!confirm('Deseja excluir este produto/serviço da estimativa de vendas?')) return;
+  f.faturamento_produtos.splice(idx, 1);
+  renderSection55Faturamento();
+  renderSection56CustosUnitarios();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updateProdutoField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.faturamento_produtos && f.faturamento_produtos[idx]) {
+    f.faturamento_produtos[idx][field] = val;
+    renderSection55Faturamento();
+    renderSection56CustosUnitarios();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+// -------------------------------------------------------------------------
+// 5.6 CUSTOS UNITÁRIOS DE MATERIAIS / INSUMOS POR PRODUTO & 5.8 CMV
+// -------------------------------------------------------------------------
+
+function renderSection56CustosUnitarios() {
+  const container = document.getElementById('custosUnitariosContainer');
+  if (!container) return;
+
+  const prods = currentBusinessPlan.financial_plan.faturamento_produtos || [];
+  container.innerHTML = prods.map((p, pIdx) => {
+    const insumos = p.insumos || [];
+    let subtotalInsumos = 0;
+    const insumosRows = insumos.map((ins, insIdx) => {
+      const total = (Number(ins.qty) || 0) * (Number(ins.unit_cost) || 0);
+      subtotalInsumos += total;
+      return `
+        <tr class="border-b border-slate-100 text-xs">
+          <td class="px-3 py-1.5 font-medium text-slate-800">
+            <input type="text" value="${escapeHtml(ins.name)}" onchange="updateInsumoField(${pIdx}, ${insIdx}, 'name', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+          </td>
+          <td class="px-3 py-1.5 text-center">
+            <input type="number" min="1" value="${ins.qty || 1}" onchange="updateInsumoField(${pIdx}, ${insIdx}, 'qty', Number(this.value))" class="w-14 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+          </td>
+          <td class="px-3 py-1.5 text-right">
+            <input type="number" step="10" value="${ins.unit_cost || 0}" onchange="updateInsumoField(${pIdx}, ${insIdx}, 'unit_cost', Number(this.value))" class="w-24 text-right font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+          </td>
+          <td class="px-3 py-1.5 text-right font-black text-slate-900">${formatMoney(total)}</td>
+          <td class="px-3 py-1.5 text-right">
+            <button type="button" onclick="deleteInsumoRow(${pIdx}, ${insIdx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+
+    p.unit_cogs = subtotalInsumos;
+
+    return `
+      <div class="bg-slate-50/70 p-4 rounded-2xl border border-slate-200 space-y-3">
+        <div class="flex items-center justify-between">
+          <h5 class="text-xs font-black text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-cyan-600"></i>
+            <span>${escapeHtml(p.name)}</span>
+          </h5>
+          <button type="button" onclick="addNewInsumoRow(${pIdx})" class="px-2.5 py-1 rounded-lg bg-cyan-50 text-cyan-800 border border-cyan-200 text-[11px] font-bold hover:bg-cyan-100">+ Insumo/API</button>
+        </div>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="bg-slate-50 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                <th class="px-3 py-2">Material / Insumo / API</th>
+                <th class="px-3 py-2 text-center">Quantidade</th>
+                <th class="px-3 py-2 text-right">Custo Unitário</th>
+                <th class="px-3 py-2 text-right">Total</th>
+                <th class="px-3 py-2 text-right">Ação</th>
+              </tr>
+            </thead>
+            <tbody>${insumosRows}</tbody>
+            <tfoot>
+              <tr class="bg-slate-50 font-black text-xs border-t border-slate-200">
+                <td colspan="3" class="px-3 py-2 text-slate-700">Custo Unitário Total do Produto:</td>
+                <td class="px-3 py-2 text-right text-emerald-800">${formatMoney(subtotalInsumos)}</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function addNewInsumoRow(pIdx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.faturamento_produtos && f.faturamento_produtos[pIdx]) {
+    if (!Array.isArray(f.faturamento_produtos[pIdx].insumos)) f.faturamento_produtos[pIdx].insumos = [];
+    f.faturamento_produtos[pIdx].insumos.push({ name: "Novo Insumo / Serviço Cloud", qty: 1, unit_cost: 100 });
+    renderSection56CustosUnitarios();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+function deleteInsumoRow(pIdx, insIdx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.faturamento_produtos && f.faturamento_produtos[pIdx] && f.faturamento_produtos[pIdx].insumos) {
+    f.faturamento_produtos[pIdx].insumos.splice(insIdx, 1);
+    renderSection56CustosUnitarios();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+function updateInsumoField(pIdx, insIdx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.faturamento_produtos && f.faturamento_produtos[pIdx] && f.faturamento_produtos[pIdx].insumos && f.faturamento_produtos[pIdx].insumos[insIdx]) {
+    f.faturamento_produtos[pIdx].insumos[insIdx][field] = val;
+    renderSection56CustosUnitarios();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+// -------------------------------------------------------------------------
+// 5.7 CUSTOS DE COMERCIALIZAÇÃO (IMPOSTOS & GASTOS COM VENDAS)
+// -------------------------------------------------------------------------
+
+function renderSection57CustosComercializacao() {
+  const containerImp = document.getElementById('comercializacaoImpostosTableBody');
+  if (containerImp) {
+    const impostos = currentBusinessPlan.financial_plan.custos_comercializacao_impostos || [];
+    containerImp.innerHTML = impostos.map((imp, idx) => `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(imp.name)}" onchange="updateImpostoField(${idx}, 'name', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-center">
+          <input type="number" step="0.5" max="100" min="0" value="${imp.pct || 0}" onchange="updateImpostoField(${idx}, 'pct', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" /> %
+        </td>
+        <td class="px-3 py-2 text-right font-medium text-slate-500" id="impFat_${idx}">R$ 0</td>
+        <td class="px-3 py-2 text-right font-black text-rose-600" id="impTotal_${idx}">R$ 0</td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteImpostoRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `).join('');
   }
 
-  // Totais de Capex e Pré-Op
-  const capexTotal = (currentBusinessPlan.financial_plan.capex_investments || []).reduce((acc, i) => acc + ((Number(i.qty) || 1) * (Number(i.unit_val) || 0)), 0);
-  const preOpTotal = (currentBusinessPlan.financial_plan.pre_operational_investments || []).reduce((acc, i) => acc + Number(i.val || 0), 0);
+  const containerGV = document.getElementById('comercializacaoVendasTableBody');
+  if (containerGV) {
+    const gastos = currentBusinessPlan.financial_plan.custos_comercializacao_vendas || [];
+    containerGV.innerHTML = gastos.map((gv, idx) => `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(gv.name)}" onchange="updateGastoVendaField(${idx}, 'name', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-center">
+          <input type="number" step="0.5" max="100" min="0" value="${gv.pct || 0}" onchange="updateGastoVendaField(${idx}, 'pct', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" /> %
+        </td>
+        <td class="px-3 py-2 text-right font-medium text-slate-500" id="gvFat_${idx}">R$ 0</td>
+        <td class="px-3 py-2 text-right font-black text-amber-700" id="gvTotal_${idx}">R$ 0</td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteGastoVendaRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `).join('');
+  }
+}
 
-  // 1. Receitas
-  const annualSubscribers = Number(inp.annualSubscribers || 20);
-  const annualPrice = Number(inp.annualPrice || 12000);
-  const saasAnnual = annualSubscribers * annualPrice;
-  const mrrEquiv = saasAnnual / 12;
+function addNewImpostoRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.custos_comercializacao_impostos)) f.custos_comercializacao_impostos = [];
+  f.custos_comercializacao_impostos.push({ name: "Novo Tributo / Taxa", pct: 2.0 });
+  renderSection57CustosComercializacao();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
 
-  const appliedTotal = Number(inp.appliedIntelProjects || 6) * Number(inp.appliedIntelAvgPrice || 8000);
-  const customTotal = Number(inp.customResearchProjects || 2) * Number(inp.customResearchAvgPrice || 18000);
-  const blogTotal = Number(inp.blogSponsorships || 8) * Number(inp.blogSponsorshipAvgPrice || 2500);
+function deleteImpostoRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  f.custos_comercializacao_impostos.splice(idx, 1);
+  renderSection57CustosComercializacao();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
 
-  const grossRevenue = saasAnnual + appliedTotal + customTotal + blogTotal;
-  const taxes = grossRevenue * (Number(inp.taxRatePct || 6.0) / 100);
-  const netRevenue = grossRevenue - taxes;
+function updateImpostoField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.custos_comercializacao_impostos && f.custos_comercializacao_impostos[idx]) {
+    f.custos_comercializacao_impostos[idx][field] = val;
+    renderSection57CustosComercializacao();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
 
-  // 2. Custos Variáveis
-  const cogsSaaS = annualSubscribers * Number(inp.cogsPerUserYear || 380);
-  const comissao = saasAnnual * (Number(inp.affiliateCommissionPct || 20.0) / 100);
-  const gateway = grossRevenue * (Number(inp.gatewayRatePct || 3.2) / 100);
-  const directCosts = Number(inp.directServiceCosts || 12000);
-  const totalVariable = cogsSaaS + comissao + gateway + directCosts;
+function addNewGastoVendaRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.custos_comercializacao_vendas)) f.custos_comercializacao_vendas = [];
+  f.custos_comercializacao_vendas.push({ name: "Novo Gasto com Vendas / Comissão", pct: 5.0 });
+  renderSection57CustosComercializacao();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
 
-  // 3. Margem de Contribuição
-  const margemContrib = netRevenue - totalVariable;
-  const margemContribPct = netRevenue > 0 ? (margemContrib / netRevenue) * 100 : 0;
-  const margemUnitContrato = annualPrice * (1 - (Number(inp.taxRatePct) + Number(inp.affiliateCommissionPct) + Number(inp.gatewayRatePct)) / 100) - Number(inp.cogsPerUserYear);
+function deleteGastoVendaRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  f.custos_comercializacao_vendas.splice(idx, 1);
+  renderSection57CustosComercializacao();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
 
-  // 4. Custos Fixos (Opex)
-  const fixosMensais = Number(inp.proLaboreLeonardo || 6000) + Number(inp.proLaboreMayumi || 5000) +
-    Number(inp.staffPayroll || 3500) + Number(inp.cloudTools || 1200) + Number(inp.accounting || 800) +
-    Number(inp.officeInternet || 600) + Number(inp.otherFixed || 900);
-  const fixosAnuais = fixosMensais * 12;
-  const deprecAnual = Number(inp.annualDepreciation || 4500);
+function updateGastoVendaField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.custos_comercializacao_vendas && f.custos_comercializacao_vendas[idx]) {
+    f.custos_comercializacao_vendas[idx][field] = val;
+    renderSection57CustosComercializacao();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
 
-  // 5. EBITDA e Lucro Líquido
-  const ebitda = margemContrib - fixosAnuais;
-  const lucroLiquidoAnual = ebitda - deprecAnual;
-  const lucroLiquidoMensal = lucroLiquidoAnual / 12;
-  const margemLiquidaPct = grossRevenue > 0 ? (lucroLiquidoAnual / grossRevenue) * 100 : 0;
+// -------------------------------------------------------------------------
+// 5.9 CUSTOS COM MÃO DE OBRA
+// -------------------------------------------------------------------------
 
-  // 6. Capital de Giro
-  const diasCiclo = Math.max(1, Number(inp.avgSalesReceiptDays || 15) - Number(inp.avgPaymentDays || 25) + 30);
-  const custoDiario = (fixosAnuais + totalVariable) / 365;
-  const nlcg = custoDiario * diasCiclo;
-  const reservaContingencia = fixosMensais * 3;
-  const capitalGiroTotal = nlcg + reservaContingencia;
+function renderSection59MaoDeObra() {
+  const container = document.getElementById('maoDeObraTableBody');
+  if (!container) return;
 
-  // 7. Investimento Total
-  const investimentoTotal = capexTotal + preOpTotal + capitalGiroTotal;
+  const staff = currentBusinessPlan.financial_plan.mao_de_obra || [];
+  let totalMO = 0;
 
-  // 8. Indicadores Oficiais de Viabilidade
-  const peReaisAnual = margemContribPct > 0 ? (fixosAnuais / (margemContribPct / 100)) : 0;
-  const peReaisMensal = peReaisAnual / 12;
-  const peAssinantes = margemUnitContrato > 0 ? Math.ceil(fixosAnuais / margemUnitContrato) : 0;
+  container.innerHTML = staff.map((mo, idx) => {
+    const encVal = ((Number(mo.encargos_pct) || 0) / 100) * (Number(mo.salario) || 0);
+    const totalFuncao = ((Number(mo.salario) || 0) + encVal) * (Number(mo.num_empregados) || 0);
+    totalMO += totalFuncao;
+    return `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(mo.role)}" onchange="updateMaoDeObraField(${idx}, 'role', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-center">
+          <input type="number" min="1" value="${mo.num_empregados || 1}" onchange="updateMaoDeObraField(${idx}, 'num_empregados', Number(this.value))" class="w-14 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <input type="number" step="100" value="${mo.salario || 0}" onchange="updateMaoDeObraField(${idx}, 'salario', Number(this.value))" class="w-24 text-right font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+        </td>
+        <td class="px-3 py-2 text-center">
+          <input type="number" step="5" max="150" min="0" value="${mo.encargos_pct || 0}" onchange="updateMaoDeObraField(${idx}, 'encargos_pct', Number(this.value))" class="w-16 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" /> %
+        </td>
+        <td class="px-3 py-2 text-right text-slate-600">${formatMoney(encVal)}</td>
+        <td class="px-3 py-2 text-right font-black text-slate-900">${formatMoney(totalFuncao)}</td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteMaoDeObraRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `;
+  }).join('');
 
-  const lucratividadePct = grossRevenue > 0 ? (lucroLiquidoAnual / grossRevenue) * 100 : 0;
-  const rentabilidadePct = investimentoTotal > 0 ? (lucroLiquidoAnual / investimentoTotal) * 100 : 0;
-  const paybackMeses = lucroLiquidoMensal > 0 ? Number((investimentoTotal / lucroLiquidoMensal).toFixed(1)) : 999;
+  setText('totalMaoDeObraDisplay', formatMoney(totalMO));
+}
 
-  // Atualização Visual dos Cards no Topo e DRE
-  setText('kpiGrossRevenue', formatMoney(grossRevenue));
-  setText('kpiMrrEquiv', `${formatMoney(mrrEquiv)} / mês`);
+function addNewMaoDeObraRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.mao_de_obra)) f.mao_de_obra = [];
+  f.mao_de_obra.push({ role: "Nova Função / Colaborador", num_empregados: 1, salario: 2000, encargos_pct: 40.0 });
+  renderSection59MaoDeObra();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deleteMaoDeObraRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (!confirm('Deseja excluir esta função da mão de obra?')) return;
+  f.mao_de_obra.splice(idx, 1);
+  renderSection59MaoDeObra();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updateMaoDeObraField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.mao_de_obra && f.mao_de_obra[idx]) {
+    f.mao_de_obra[idx][field] = val;
+    renderSection59MaoDeObra();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+// -------------------------------------------------------------------------
+// 5.10 DEPRECIAÇÃO DOS ATIVOS
+// -------------------------------------------------------------------------
+
+function renderSection510Depreciacao() {
+  const container = document.getElementById('depreciacaoTableBody');
+  if (!container) return;
+
+  const deps = currentBusinessPlan.financial_plan.depreciacao_ativos || [];
+  let totalDeprecMensal = 0;
+
+  container.innerHTML = deps.map((dep, idx) => {
+    const vidaUtil = Number(dep.vida_util_anos) || 5;
+    const anual = (Number(dep.valor_bem) || 0) / vidaUtil;
+    const mensal = anual / 12;
+    totalDeprecMensal += mensal;
+    return `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(dep.item)}" onchange="updateDepreciacaoField(${idx}, 'item', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <input type="number" step="500" value="${dep.valor_bem || 0}" onchange="updateDepreciacaoField(${idx}, 'valor_bem', Number(this.value))" class="w-24 text-right font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" />
+        </td>
+        <td class="px-3 py-2 text-center">
+          <input type="number" min="1" max="50" value="${dep.vida_util_anos || 5}" onchange="updateDepreciacaoField(${idx}, 'vida_util_anos', Number(this.value))" class="w-14 text-center font-bold bg-slate-50 border border-slate-200 rounded px-1 py-0.5" /> anos
+        </td>
+        <td class="px-3 py-2 text-right text-slate-600">${formatMoney(anual)}</td>
+        <td class="px-3 py-2 text-right font-black text-rose-700">${formatMoney(mensal)}</td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteDepreciacaoRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  setText('totalDepreciacaoMensalDisplay', formatMoney(totalDeprecMensal));
+}
+
+function addNewDepreciacaoRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.depreciacao_ativos)) f.depreciacao_ativos = [];
+  f.depreciacao_ativos.push({ item: "Novo Bem Depreciável", valor_bem: 5000, vida_util_anos: 5 });
+  renderSection510Depreciacao();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deleteDepreciacaoRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  f.depreciacao_ativos.splice(idx, 1);
+  renderSection510Depreciacao();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updateDepreciacaoField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.depreciacao_ativos && f.depreciacao_ativos[idx]) {
+    f.depreciacao_ativos[idx][field] = val;
+    renderSection510Depreciacao();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+// -------------------------------------------------------------------------
+// 5.11 CUSTOS FIXOS OPERACIONAIS MENSAIS
+// -------------------------------------------------------------------------
+
+function renderSection511CustosFixos() {
+  const container = document.getElementById('custosFixosTableBody');
+  if (!container) return;
+
+  const fixos = currentBusinessPlan.financial_plan.custos_fixos_operacionais || [];
+  let totalFixosGerais = 0;
+
+  container.innerHTML = fixos.map((cf, idx) => {
+    totalFixosGerais += Number(cf.custo_mensal || 0);
+    return `
+      <tr class="border-b border-slate-100 text-xs">
+        <td class="px-3 py-2 font-bold text-slate-800">
+          <input type="text" value="${escapeHtml(cf.name)}" onchange="updateCustoFixoField(${idx}, 'name', this.value)" class="w-full bg-transparent border-0 border-b border-transparent focus:border-cyan-500 rounded px-1 outline-none" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <input type="number" step="100" value="${cf.custo_mensal || 0}" onchange="updateCustoFixoField(${idx}, 'custo_mensal', Number(this.value))" class="w-28 text-right font-black text-slate-900 bg-slate-50 border border-slate-200 rounded px-1.5 py-1" />
+        </td>
+        <td class="px-3 py-2 text-right">
+          <button type="button" onclick="deleteCustoFixoRow(${idx})" class="text-slate-300 hover:text-rose-600 p-1"><i class="fa-solid fa-trash-can text-xs"></i></button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  setText('subtotalCustosFixosOperacionaisDisplay', formatMoney(totalFixosGerais));
+}
+
+function addNewCustoFixoRow() {
+  const f = currentBusinessPlan.financial_plan;
+  if (!Array.isArray(f.custos_fixos_operacionais)) f.custos_fixos_operacionais = [];
+  f.custos_fixos_operacionais.push({ name: "Nova Despesa Fixa Mensal", custo_mensal: 500 });
+  renderSection511CustosFixos();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function deleteCustoFixoRow(idx) {
+  const f = currentBusinessPlan.financial_plan;
+  if (!confirm('Deseja excluir este custo fixo?')) return;
+  f.custos_fixos_operacionais.splice(idx, 1);
+  renderSection511CustosFixos();
+  recalculateAllFinancials();
+  saveBusinessPlan(false);
+}
+
+function updateCustoFixoField(idx, field, val) {
+  const f = currentBusinessPlan.financial_plan;
+  if (f.custos_fixos_operacionais && f.custos_fixos_operacionais[idx]) {
+    f.custos_fixos_operacionais[idx][field] = val;
+    renderSection511CustosFixos();
+    recalculateAllFinancials();
+    saveBusinessPlan(false);
+  }
+}
+
+// -------------------------------------------------------------------------
+// RECALCULO COMPLETO E ENCADEADO DO MOTOR FINANCEIRO SEBRAE
+// -------------------------------------------------------------------------
+
+function recalculateAllFinancials() {
+  if (!currentBusinessPlan || !currentBusinessPlan.financial_plan) return;
+
+  const f = currentBusinessPlan.financial_plan;
+
+  // 1. Investimentos Fixos (5.1)
+  const totA = (f.investimentos_fixos_a_maquinas || []).reduce((acc, i) => acc + ((Number(i.qty) || 0) * (Number(i.unit_val) || 0)), 0);
+  const totB = (f.investimentos_fixos_b_moveis || []).reduce((acc, i) => acc + ((Number(i.qty) || 0) * (Number(i.unit_val) || 0)), 0);
+  const totC = (f.investimentos_fixos_c_veiculos || []).reduce((acc, i) => acc + ((Number(i.qty) || 0) * (Number(i.unit_val) || 0)), 0);
+  const totalInvestimentosFixos = totA + totB + totC;
+
+  setText('subtotalFixosA', formatMoney(totA));
+  setText('subtotalFixosB', formatMoney(totB));
+  setText('subtotalFixosC', formatMoney(totC));
+  setText('totalInvestimentosFixosDisplay', formatMoney(totalInvestimentosFixos));
+
+  // 2. Pré-Operacionais (5.3)
+  const totalPreOperacional = (f.pre_operational_investments || []).reduce((acc, i) => acc + (Number(i.val) || 0), 0);
+  setText('preOpTotalDisplay', formatMoney(totalPreOperacional));
+
+  // 3. Faturamento Mensal (5.5) & Indicadores SaaS
+  let faturamentoMensalTotal = 0;
+  let totalAssinantes = 0;
+  (f.faturamento_produtos || []).forEach(p => {
+    const tot = (Number(p.qty) || 0) * (Number(p.price) || 0);
+    faturamentoMensalTotal += tot;
+    if (p.is_subscription) {
+      totalAssinantes += Number(p.qty) || 0;
+    }
+  });
+  const mrr = faturamentoMensalTotal;
+  const arr = mrr * 12;
+
+  setText('totalFaturamentoDisplay', formatMoney(faturamentoMensalTotal));
+  setText('saasMrrDisplay', formatMoney(mrr));
+  setText('saasArrDisplay', formatMoney(arr));
+  setText('saasSubscribersDisplay', `${totalAssinantes} clientes`);
+
+  // 4. CMV / Materiais Diretos (5.8)
+  let cmvTotal = 0;
+  const cmvContainer = document.getElementById('cmvTableBody');
+  if (cmvContainer) {
+    cmvContainer.innerHTML = (f.faturamento_produtos || []).map(p => {
+      const unitCogs = Number(p.unit_cogs) || 0;
+      const cmdTot = (Number(p.qty) || 0) * unitCogs;
+      cmvTotal += cmdTot;
+      return `
+        <tr class="border-b border-slate-100 text-xs">
+          <td class="px-3 py-2 font-bold text-slate-800">${escapeHtml(p.name)}</td>
+          <td class="px-3 py-2 text-center font-bold text-slate-700">${p.qty || 0}</td>
+          <td class="px-3 py-2 text-right font-medium text-slate-600">${formatMoney(unitCogs)}</td>
+          <td class="px-3 py-2 text-right font-black text-rose-700">${formatMoney(cmdTot)}</td>
+        </tr>
+      `;
+    }).join('');
+    setText('totalCmvDisplay', formatMoney(cmvTotal));
+  } else {
+    (f.faturamento_produtos || []).forEach(p => {
+      cmvTotal += (Number(p.qty) || 0) * (Number(p.unit_cogs) || 0);
+    });
+  }
+
+  // 5. Custos de Comercialização (5.7)
+  let subtotal1Impostos = 0;
+  (f.custos_comercializacao_impostos || []).forEach((imp, idx) => {
+    const val = ((Number(imp.pct) || 0) / 100) * faturamentoMensalTotal;
+    subtotal1Impostos += val;
+    setText(`impFat_${idx}`, formatMoney(faturamentoMensalTotal));
+    setText(`impTotal_${idx}`, formatMoney(val));
+  });
+
+  let subtotal2GastosVendas = 0;
+  (f.custos_comercializacao_vendas || []).forEach((gv, idx) => {
+    const val = ((Number(gv.pct) || 0) / 100) * faturamentoMensalTotal;
+    subtotal2GastosVendas += val;
+    setText(`gvFat_${idx}`, formatMoney(faturamentoMensalTotal));
+    setText(`gvTotal_${idx}`, formatMoney(val));
+  });
+
+  const totalComercializacao = subtotal1Impostos + subtotal2GastosVendas;
+  setText('subtotal1ImpostosDisplay', formatMoney(subtotal1Impostos));
+  setText('subtotal2GastosVendasDisplay', formatMoney(subtotal2GastosVendas));
+  setText('totalComercializacaoDisplay', formatMoney(totalComercializacao));
+
+  // Custos Variáveis Totais
+  const custosVariaveisTotais = cmvTotal + totalComercializacao;
+
+  // 6. Mão de Obra (5.9)
+  let totalMaoDeObra = (f.mao_de_obra || []).reduce((acc, mo) => {
+    const encVal = ((Number(mo.encargos_pct) || 0) / 100) * (Number(mo.salario) || 0);
+    return acc + (((Number(mo.salario) || 0) + encVal) * (Number(mo.num_empregados) || 0));
+  }, 0);
+  setText('totalMaoDeObraDisplay', formatMoney(totalMaoDeObra));
+
+  // 7. Depreciação (5.10)
+  let totalDepreciacaoMensal = (f.depreciacao_ativos || []).reduce((acc, dep) => {
+    const vidaUtil = Number(dep.vida_util_anos) || 5;
+    return acc + (((Number(dep.valor_bem) || 0) / vidaUtil) / 12);
+  }, 0);
+  setText('totalDepreciacaoMensalDisplay', formatMoney(totalDepreciacaoMensal));
+
+  // 8. Custos Fixos Operacionais (5.11)
+  let totalFixosGerais = (f.custos_fixos_operacionais || []).reduce((acc, cf) => acc + (Number(cf.custo_mensal) || 0), 0);
+  setText('subtotalCustosFixosOperacionaisDisplay', formatMoney(totalFixosGerais));
+  const totalCustosFixosMensais = totalFixosGerais + totalMaoDeObra + totalDepreciacaoMensal;
+  setText('totalCustosFixosGeraisDisplay', formatMoney(totalCustosFixosMensais));
+
+  // 9. Capital de Giro & Caixa Mínimo em 5 Passos (5.2)
+  const totalEstoqueInicial = (f.estoque_inicial || []).reduce((acc, i) => acc + ((Number(i.qty) || 0) * (Number(i.unit_val) || 0)), 0);
+  setText('totalEstoqueInicialDisplay', formatMoney(totalEstoqueInicial));
+
+  let pmv = (f.prazos_vendas || []).reduce((acc, pv) => acc + (((Number(pv.pct_vendas) || 0) / 100) * (Number(pv.dias) || 0)), 0);
+  let pmc = (f.prazos_compras || []).reduce((acc, pc) => acc + (((Number(pc.pct_compras) || 0) / 100) * (Number(pc.dias) || 0)), 0);
+  const nme = Number(getInputValue('finInput_diasEstoque', f.necessidade_dias_estoque || 5));
+  f.necessidade_dias_estoque = nme;
+
+  const subtotal1Prazos = pmv + nme;
+  const subtotal2Prazos = pmc;
+  const necessidadeLiquidaDias = subtotal1Prazos - subtotal2Prazos;
+
+  // Passo 5: Caixa Mínimo
+  const custoTotalEmpresaMensal = totalCustosFixosMensais + custosVariaveisTotais;
+  const custoTotalDiario = custoTotalEmpresaMensal / 30;
+  const caixaMinimo = Math.max(0, custoTotalDiario * necessidadeLiquidaDias);
+  const totalCapitalDeGiro = totalEstoqueInicial + caixaMinimo;
+
+  // Atualiza Passo 4 e 5 no HTML
+  setText('passo4_pmv', `${pmv.toFixed(1)} dias`);
+  setText('passo4_nme', `${nme.toFixed(1)} dias`);
+  setText('passo4_sub1', `${subtotal1Prazos.toFixed(1)} dias`);
+  setText('passo4_pmc', `${pmc.toFixed(1)} dias`);
+  setText('passo4_sub2', `${subtotal2Prazos.toFixed(1)} dias`);
+  setText('passo4_liq', `${necessidadeLiquidaDias.toFixed(1)} dias`);
+
+  setText('passo5_fixo', formatMoney(totalCustosFixosMensais));
+  setText('passo5_var', formatMoney(custosVariaveisTotais));
+  setText('passo5_tot', formatMoney(custoTotalEmpresaMensal));
+  setText('passo5_diario', formatMoney(custoTotalDiario));
+  setText('passo5_dias', `${necessidadeLiquidaDias.toFixed(1)} dias`);
+  setText('passo5_caixaMinimo', formatMoney(caixaMinimo));
+
+  setText('resumoEstoqueInicial', formatMoney(totalEstoqueInicial));
+  setText('resumoCaixaMinimo', formatMoney(caixaMinimo));
+  setText('resumoCapitalGiroTotal', formatMoney(totalCapitalDeGiro));
+
+  // 10. Investimento Total (5.4)
+  const investimentoTotal = totalInvestimentosFixos + totalCapitalDeGiro + totalPreOperacional;
+  setText('invTot_fixos', formatMoney(totalInvestimentosFixos));
+  setText('invTot_giro', formatMoney(totalCapitalDeGiro));
+  setText('invTot_preop', formatMoney(totalPreOperacional));
+  setText('invTot_geral', formatMoney(investimentoTotal));
+
+  if (investimentoTotal > 0) {
+    setText('invTot_fixos_pct', `${((totalInvestimentosFixos / investimentoTotal) * 100).toFixed(1)}%`);
+    setText('invTot_giro_pct', `${((totalCapitalDeGiro / investimentoTotal) * 100).toFixed(1)}%`);
+    setText('invTot_preop_pct', `${((totalPreOperacional / investimentoTotal) * 100).toFixed(1)}%`);
+  }
+
+  // Atualiza % Fontes de Recursos
+  let totalFontes = 0;
+  (f.fontes_recursos || []).forEach((fr, idx) => {
+    totalFontes += Number(fr.val || 0);
+    const pct = investimentoTotal > 0 ? ((Number(fr.val || 0) / investimentoTotal) * 100) : 0;
+    setText(`fontePct_${idx}`, `${pct.toFixed(1)}%`);
+  });
+  setText('totalFontesDisplay', formatMoney(totalFontes));
+
+  // Validador de Fontes
+  const elValidaFontes = document.getElementById('validaFontesPill');
+  if (elValidaFontes) {
+    const diff = Math.abs(totalFontes - investimentoTotal);
+    if (diff < 100) {
+      elValidaFontes.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200";
+      elValidaFontes.innerHTML = `<i class="fa-solid fa-circle-check"></i> 100% Coberto: Fontes (R$ ${formatMoney(totalFontes)}) = Total (R$ ${formatMoney(investimentoTotal)})`;
+    } else {
+      elValidaFontes.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 animate-pulse";
+      elValidaFontes.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Atenção: Fontes (R$ ${formatMoney(totalFontes)}) ≠ Investimento Total (R$ ${formatMoney(investimentoTotal)})`;
+    }
+  }
+
+  // 11. Demonstrativo de Resultados / DRE (5.12)
+  const receitaTotal = faturamentoMensalTotal;
+  const margemContribuicao = receitaTotal - custosVariaveisTotais;
+  const margemContribuicaoPct = receitaTotal > 0 ? ((margemContribuicao / receitaTotal) * 100) : 0;
+  const indiceMargemContribuicao = receitaTotal > 0 ? (margemContribuicao / receitaTotal) : 0;
+  const lucroLiquidoMensal = margemContribuicao - totalCustosFixosMensais;
+  const lucroLiquidoAnual = lucroLiquidoMensal * 12;
+  const margemLiquidaPct = receitaTotal > 0 ? ((lucroLiquidoMensal / receitaTotal) * 100) : 0;
+
+  setText('dre_receita', formatMoney(receitaTotal));
+  setText('dre_cmv', `- ${formatMoney(cmvTotal)}`);
+  setText('dre_cmv_pct', receitaTotal > 0 ? `${((cmvTotal / receitaTotal) * 100).toFixed(1)}%` : '0%');
+  setText('dre_impostos', `- ${formatMoney(subtotal1Impostos)}`);
+  setText('dre_impostos_pct', receitaTotal > 0 ? `${((subtotal1Impostos / receitaTotal) * 100).toFixed(1)}%` : '0%');
+  setText('dre_vendas', `- ${formatMoney(subtotal2GastosVendas)}`);
+  setText('dre_vendas_pct', receitaTotal > 0 ? `${((subtotal2GastosVendas / receitaTotal) * 100).toFixed(1)}%` : '0%');
+  setText('dre_custosVarTotais', `- ${formatMoney(custosVariaveisTotais)}`);
+  setText('dre_custosVarTotais_pct', receitaTotal > 0 ? `${((custosVariaveisTotais / receitaTotal) * 100).toFixed(1)}%` : '0%');
+  setText('dre_margemContribuicao', formatMoney(margemContribuicao));
+  setText('dre_margemContribuicao_pct', `${margemContribuicaoPct.toFixed(1)}%`);
+  setText('dre_custosFixosTotais', `- ${formatMoney(totalCustosFixosMensais)}`);
+  setText('dre_custosFixosTotais_pct', receitaTotal > 0 ? `${((totalCustosFixosMensais / receitaTotal) * 100).toFixed(1)}%` : '0%');
+  setText('dre_lucroLiquido', formatMoney(lucroLiquidoMensal));
+  setText('dre_lucroLiquido_pct', `${margemLiquidaPct.toFixed(1)}%`);
+  setText('dre_lucroLiquidoAnual', formatMoney(lucroLiquidoAnual));
+
+  // 12. Indicadores de Viabilidade (5.13)
+  const peReaisMensal = indiceMargemContribuicao > 0 ? (totalCustosFixosMensais / indiceMargemContribuicao) : 0;
+  const peReaisAnual = peReaisMensal * 12;
+
+  // PE em unidades
+  const precoMedioUnitario = totalAssinantes > 0 ? (receitaTotal / totalAssinantes) : 12000;
+  const custoVarUnitarioMedio = totalAssinantes > 0 ? (custosVariaveisTotais / totalAssinantes) : 0;
+  const margemUnit = precoMedioUnitario - custoVarUnitarioMedio;
+  const peUnidades = margemUnit > 0 ? Math.ceil(totalCustosFixosMensais / margemUnit) : 0;
+
+  const lucratividadePct = receitaTotal > 0 ? ((lucroLiquidoMensal / receitaTotal) * 100) : 0;
+  const rentabilidadePct = investimentoTotal > 0 ? ((lucroLiquidoAnual / investimentoTotal) * 100) : 0;
+  const paybackAnos = lucroLiquidoAnual > 0 ? (investimentoTotal / lucroLiquidoAnual) : 999;
+  const paybackMeses = paybackAnos * 12;
+
+  setText('ind_pe_rs', `${formatMoney(peReaisMensal)} / mês (${formatMoney(peReaisAnual)}/ano)`);
+  setText('ind_pe_unidades', `${peUnidades} contratos / mês`);
+  setText('ind_lucratividade', `${lucratividadePct.toFixed(1)}%`);
+  setText('ind_rentabilidade', `${rentabilidadePct.toFixed(1)}% a.a.`);
+  setText('ind_payback', paybackMeses < 120 ? `${paybackMeses.toFixed(1)} meses (${paybackAnos.toFixed(1)} anos)` : 'Inviável no ritmo atual');
+
+  // Atualiza Cards no Topo da Seção
+  setText('kpiGrossRevenue', formatMoney(receitaTotal * 12));
+  setText('kpiMrrEquiv', `${formatMoney(mrr)} / mês`);
   setText('kpiNetProfit', formatMoney(lucroLiquidoAnual));
   setText('kpiNetProfitMonthly', `+ ${formatMoney(lucroLiquidoMensal)} / mês`);
-  setText('kpiBreakEven', `${peAssinantes} Assinantes (${formatMoney(peReaisMensal)}/mês)`);
-  setText('kpiPayback', `${paybackMeses} meses`);
+  setText('kpiBreakEven', `${peUnidades} Clientes (${formatMoney(peReaisMensal)}/mês)`);
+  setText('kpiPayback', paybackMeses < 120 ? `${paybackMeses.toFixed(1)} meses` : '> 10 anos');
 
-  // Tabela DRE
-  setText('dreGrossRevenue', formatMoney(grossRevenue));
-  setText('dreTaxes', `- ${formatMoney(taxes)}`);
-  setText('dreNetRevenue', formatMoney(netRevenue));
-  setText('dreVariableCosts', `- ${formatMoney(totalVariable)}`);
-  setText('dreContributionMargin', `${formatMoney(margemContrib)} (${margemContribPct.toFixed(1)}%)`);
-  setText('dreFixedCosts', `- ${formatMoney(fixosAnuais)}`);
-  setText('dreDepreciation', `- ${formatMoney(deprecAnual)}`);
-  setText('dreEbitda', formatMoney(ebitda));
-  setText('dreNetProfit', formatMoney(lucroLiquidoAnual));
-  setText('dreNetMargin', `${margemLiquidaPct.toFixed(1)}%`);
+  // 13. Construção de Cenários (6)
+  renderSection6Cenarios(receitaTotal, custosVariaveisTotais, totalCustosFixosMensais);
 
-  // Cards de Viabilidade
-  setText('viaPeReais', formatMoney(peReaisAnual));
-  setText('viaPeClientes', `${peAssinantes} assinantes de R$ 12k`);
-  setText('viaLucratividade', `${lucratividadePct.toFixed(1)}%`);
-  setText('viaRentabilidade', `${rentabilidadePct.toFixed(1)}%`);
-  setText('viaPayback', `${paybackMeses} Meses`);
-  setText('viaInvestimentoTotal', formatMoney(investimentoTotal));
-  setText('viaCapitalGiro', formatMoney(capitalGiroTotal));
-
-  // Renderiza Gráficos
-  renderDreBreakdownChart(fixosAnuais, totalVariable, taxes, Math.max(0, lucroLiquidoAnual));
-  renderBreakEvenChart(peReaisAnual, grossRevenue, fixosAnuais, totalVariable);
+  // Gráficos Chart.js
+  renderDreBreakdownChart(totalCustosFixosMensais, custosVariaveisTotais, subtotal1Impostos, Math.max(0, lucroLiquidoMensal));
+  renderBreakEvenChart(peReaisMensal, receitaTotal, totalCustosFixosMensais, custosVariaveisTotais);
 }
 
-// =========================================================================
-// 7. SIMULADOR DE CENÁRIOS INTERATIVO COM SLIDERS
-// =========================================================================
+// -------------------------------------------------------------------------
+// 6. CONSTRUÇÃO DE CENÁRIOS (PESSIMISTA, PROVÁVEL, OTIMISTA)
+// -------------------------------------------------------------------------
 
-function updateScenarioSimulator() {
-  const sliderSub = document.getElementById('simSliderSubscribers');
-  const sliderPrice = document.getElementById('simSliderPrice');
-  const sliderApplied = document.getElementById('simSliderApplied');
-  const sliderCostVar = document.getElementById('simSliderCostVar');
+function renderSection6Cenarios(recProv, varProv, fixProv) {
+  const propVar = recProv > 0 ? (varProv / recProv) : 0;
 
-  const baseSub = sliderSub ? Number(sliderSub.value) : 20;
-  const basePrice = sliderPrice ? Number(sliderPrice.value) : 12000;
-  const baseApplied = sliderApplied ? Number(sliderApplied.value) : 6;
-  const costVarPct = sliderCostVar ? Number(sliderCostVar.value) : 0;
+  // Pessimista (-25%)
+  const recPess = recProv * 0.75;
+  const varPess = recPess * propVar;
+  const fixPess = fixProv;
+  const margemPess = recPess - varPess;
+  const lucroPess = margemPess - fixPess;
+  const margemPessPct = recPess > 0 ? (lucroPess / recPess) * 100 : 0;
 
-  // Atualiza labels dos sliders
-  setText('simLabelSubscribers', `${baseSub} clientes`);
-  setText('simLabelPrice', formatMoney(basePrice));
-  setText('simLabelApplied', `${baseApplied} projetos`);
-  setText('simLabelCostVar', `${costVarPct >= 0 ? '+' : ''}${costVarPct}%`);
+  // Provável (100%)
+  const margemProv = recProv - varProv;
+  const lucroProv = margemProv - fixProv;
+  const margemProvPct = recProv > 0 ? (lucroProv / recProv) * 100 : 0;
 
-  // 1. Cenário Pessimista (-50% clientes, -15% preço, +15% custos)
-  const pessSub = Math.max(4, Math.floor(baseSub * 0.5));
-  const pessPrice = Math.floor(basePrice * 0.85);
-  const pessApplied = Math.max(1, Math.floor(baseApplied * 0.3));
-  const pessGross = (pessSub * pessPrice) + (pessApplied * 6000) + (1 * 15000) + (2 * 2000);
-  const pessFixed = (17000 * 12) * (1 + (costVarPct + 15) / 100);
-  const pessVar = (pessSub * 450) + (pessGross * 0.28);
-  const pessProfit = (pessGross * 0.94) - pessVar - pessFixed - 4500;
-  const pessMargin = pessGross > 0 ? (pessProfit / pessGross) * 100 : 0;
+  // Otimista (+35%)
+  const recOtim = recProv * 1.35;
+  const varOtim = recOtim * propVar;
+  const fixOtim = fixProv;
+  const margemOtim = recOtim - varOtim;
+  const lucroOtim = margemOtim - fixOtim;
+  const margemOtimPct = recOtim > 0 ? (lucroOtim / recOtim) * 100 : 0;
 
-  // 2. Cenário Provável (Valores dos Sliders)
-  const provGross = (baseSub * basePrice) + (baseApplied * 8000) + (2 * 18000) + (8 * 2500);
-  const provFixed = (17000 * 12) * (1 + costVarPct / 100);
-  const provVar = (baseSub * 380) + (provGross * 0.25);
-  const provProfit = (provGross * 0.94) - provVar - provFixed - 4500;
-  const provMargin = provGross > 0 ? (provProfit / provGross) * 100 : 0;
+  setText('cen_pess_rec', formatMoney(recPess));
+  setText('cen_pess_var', `- ${formatMoney(varPess)}`);
+  setText('cen_pess_fix', `- ${formatMoney(fixPess)}`);
+  setText('cen_pess_lucro', formatMoney(lucroPess));
+  setText('cen_pess_margem', `${margemPessPct.toFixed(1)}%`);
 
-  // 3. Cenário Otimista (+60% clientes, +15% preço, custos fixos estáveis)
-  const otimSub = Math.floor(baseSub * 1.6);
-  const otimPrice = Math.floor(basePrice * 1.15);
-  const otimApplied = Math.floor(baseApplied * 1.8);
-  const otimGross = (otimSub * otimPrice) + (otimApplied * 10000) + (4 * 22000) + (16 * 3000);
-  const otimFixed = (17000 * 12) * (1 + (costVarPct - 5) / 100);
-  const otimVar = (otimSub * 350) + (otimGross * 0.23);
-  const otimProfit = (otimGross * 0.94) - otimVar - otimFixed - 4500;
-  const otimMargin = otimGross > 0 ? (otimProfit / otimGross) * 100 : 0;
+  setText('cen_prov_rec', formatMoney(recProv));
+  setText('cen_prov_var', `- ${formatMoney(varProv)}`);
+  setText('cen_prov_fix', `- ${formatMoney(fixProv)}`);
+  setText('cen_prov_lucro', formatMoney(lucroProv));
+  setText('cen_prov_margem', `${margemProvPct.toFixed(1)}%`);
 
-  // Atualiza Cards do Simulador
-  setText('simPessGross', formatMoney(pessGross));
-  setText('simPessProfit', formatMoney(pessProfit));
-  setText('simPessMargin', `${pessMargin.toFixed(1)}%`);
+  setText('cen_otim_rec', formatMoney(recOtim));
+  setText('cen_otim_var', `- ${formatMoney(varOtim)}`);
+  setText('cen_otim_fix', `- ${formatMoney(fixOtim)}`);
+  setText('cen_otim_lucro', formatMoney(lucroOtim));
+  setText('cen_otim_margem', `${margemOtimPct.toFixed(1)}%`);
 
-  setText('simProvGross', formatMoney(provGross));
-  setText('simProvProfit', formatMoney(provProfit));
-  setText('simProvMargin', `${provMargin.toFixed(1)}%`);
-
-  setText('simOtimGross', formatMoney(otimGross));
-  setText('simOtimProfit', formatMoney(otimProfit));
-  setText('simOtimMargin', `${otimMargin.toFixed(1)}%`);
-
-  // Gráfico do Simulador
   renderScenarioChart(
-    [pessGross, provGross, otimGross],
-    [pessFixed + pessVar, provFixed + provVar, otimFixed + otimVar],
-    [pessProfit, provProfit, otimProfit]
+    [recPess, recProv, recOtim],
+    [varPess + fixPess, varProv + fixProv, varOtim + fixOtim],
+    [lucroPess, lucroProv, lucroOtim]
   );
 }
 

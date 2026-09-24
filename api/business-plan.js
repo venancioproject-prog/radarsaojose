@@ -485,7 +485,7 @@ module.exports = async function handler(req, res) {
     // POST: Salvar Plano de Negócios & Recalcular no Servidor
     if (req.method === 'POST' || req.method === 'PUT') {
       const payload = req.body || {};
-      const finInputs = payload.financial_plan?.inputs || SESEED_FALLBACK_PLAN.financial_plan.inputs;
+      const finInputs = payload.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs;
       
       const capexTotal = (payload.financial_plan?.capex_investments || []).reduce((acc, i) => acc + (Number(i.total) || (Number(i.qty) * Number(i.unit_val)) || 0), 0) || 50000;
       const preOpTotal = (payload.financial_plan?.pre_operational_investments || []).reduce((acc, i) => acc + (Number(i.val) || 0), 0) || 25000;
