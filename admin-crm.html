@@ -812,162 +812,48 @@
       </div>
 
       <!-- BARRA DE NAVEGAÇÃO RÁPIDA (QUICK-JUMP BUTTONS) -->
-      <div class="bg-slate-100/90 backdrop-blur-md border-b border-slate-200 px-6 py-2.5 sticky top-[81px] z-20 overflow-x-auto custom-scrollbar flex items-center gap-2">
-        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 mr-1 shrink-0">Ir para Seção:</span>
-        <button type="button" onclick="jumpToPlanSection('sec-monday')" id="btn-jump-sec-monday" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-cyan-600 text-white text-[11px] font-black uppercase tracking-wider flex items-center gap-1.5 shadow-2xs hover:bg-cyan-500 shrink-0 transition-all">
-          <i class="fa-solid fa-table-columns text-cyan-200"></i>
-          <span>Quadro Monday (Leo & Mayumi)</span>
+      <div class="bg-slate-100/95 backdrop-blur-md border-b border-slate-200 px-4 sm:px-6 py-2 sticky top-[81px] z-20 flex flex-wrap items-center gap-1.5 justify-start">
+        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 mr-1 shrink-0">Seções:</span>
+        <button type="button" onclick="jumpToPlanSection('sec-executivo')" id="btn-jump-sec-executivo" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-[#0B2545] text-white text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-xs transition-all">
+          <i class="fa-solid fa-briefcase text-cyan-300"></i>
+          <span>1. Sumário</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-executivo')" id="btn-jump-sec-executivo" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
-          <i class="fa-solid fa-briefcase text-slate-400"></i>
-          <span>1. Sumário Executivo</span>
-        </button>
-        <button type="button" onclick="jumpToPlanSection('sec-mercado')" id="btn-jump-sec-mercado" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-mercado')" id="btn-jump-sec-mercado" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-chart-pie text-slate-400"></i>
-          <span>2. Análise de Mercado</span>
+          <span>2. Mercado</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-marketing')" id="btn-jump-sec-marketing" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-marketing')" id="btn-jump-sec-marketing" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-bullhorn text-slate-400"></i>
-          <span>3. Plano de Marketing</span>
+          <span>3. Marketing</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-operacional')" id="btn-jump-sec-operacional" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-operacional')" id="btn-jump-sec-operacional" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-gears text-slate-400"></i>
-          <span>4. Plano Operacional</span>
+          <span>4. Operacional</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-financeiro')" id="btn-jump-sec-financeiro" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-financeiro')" id="btn-jump-sec-financeiro" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-calculator text-emerald-600"></i>
-          <span>5. Financeiro Cirúrgico</span>
+          <span>5. Financeiro</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-cenarios')" id="btn-jump-sec-cenarios" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-cenarios')" id="btn-jump-sec-cenarios" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-sliders text-indigo-600"></i>
-          <span>6. Simulador de Cenários</span>
+          <span>6. Cenários</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-swot')" id="btn-jump-sec-swot" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-swot')" id="btn-jump-sec-swot" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-shield-halved text-amber-500"></i>
-          <span>7. Matriz SWOT</span>
+          <span>7. SWOT</span>
         </button>
-        <button type="button" onclick="jumpToPlanSection('sec-avaliacao')" id="btn-jump-sec-avaliacao" class="plan-jump-btn px-3 py-1.5 rounded-xl bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shrink-0 transition-all">
+        <button type="button" onclick="jumpToPlanSection('sec-avaliacao')" id="btn-jump-sec-avaliacao" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
           <i class="fa-solid fa-clipboard-check text-slate-400"></i>
-          <span>8. Avaliação Final</span>
+          <span>8. Avaliação</span>
+        </button>
+        <button type="button" onclick="jumpToPlanSection('sec-monday')" id="btn-jump-sec-monday" class="plan-jump-btn px-2.5 py-1 rounded-lg bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all">
+          <i class="fa-solid fa-table-columns text-cyan-600"></i>
+          <span>Quadro Monday</span>
         </button>
       </div>
 
       <!-- CORPO PRINCIPAL DE MÓDULOS -->
       <div class="p-6 sm:p-8 space-y-12 flex-grow max-w-7xl w-full mx-auto pb-24">
-
-        <!-- ==================== MÓDULO MONDAY.COM: DIVISÃO DE TAREFAS ==================== -->
-        <section id="sec-monday" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden p-6 sm:p-8 space-y-6">
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-            <div>
-              <div class="flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-cyan-600 mb-1">
-                <i class="fa-solid fa-table-columns"></i>
-                <span>Gestão Ágil de Execução • Padrão Monday.com</span>
-              </div>
-              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Divisão de Metas: Leonardo & Mayumi</h2>
-              <p class="text-xs text-slate-500">Acompanhamento em tempo real de quem faz o quê no plano de negócios com status coloridos, prioridades e progresso percentual.</p>
-            </div>
-
-            <!-- Botão Adicionar Tarefa -->
-            <button type="button" onclick="addNewMondayTask()" class="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-black text-xs uppercase tracking-wider flex items-center gap-2 transition-all shadow-sm cursor-pointer self-start lg:self-auto">
-              <i class="fa-solid fa-plus"></i>
-              <span>Nova Tarefa</span>
-            </button>
-          </div>
-
-          <!-- BARRAS DE PROGRESSO: GERAL, LEONARDO E MAYUMI -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Progresso Geral -->
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
-              <div class="flex items-center justify-between text-xs font-bold text-slate-700">
-                <span class="flex items-center gap-2">
-                  <i class="fa-solid fa-bars-progress text-cyan-600"></i> Progresso Geral do Plano
-                </span>
-                <span id="mondayOverallPct" class="font-black text-cyan-700">0%</span>
-              </div>
-              <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-                <div id="mondayOverallBar" class="bg-cyan-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <!-- Progresso Leonardo -->
-            <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-200/80 space-y-2">
-              <div class="flex items-center justify-between text-xs font-bold text-blue-900">
-                <span class="flex items-center gap-2">
-                  <img src="fotos_radar/LEONARDO.jpeg" class="w-5 h-5 rounded-full object-cover border border-blue-300" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
-                  <span>Leonardo Venâncio</span>
-                </span>
-                <span id="mondayLeoPct" class="font-black text-blue-700">0%</span>
-              </div>
-              <div class="w-full bg-blue-200/60 rounded-full h-2.5 overflow-hidden">
-                <div id="mondayLeoBar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <!-- Progresso Mayumi -->
-            <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-200/80 space-y-2">
-              <div class="flex items-center justify-between text-xs font-bold text-purple-900">
-                <span class="flex items-center gap-2">
-                  <img src="fotos_radar/mayumi.jpg" class="w-5 h-5 rounded-full object-cover border border-purple-300" onerror="this.src='fotos_radar/mayumi.jpg'" />
-                  <span>Mayumi Nagano</span>
-                </span>
-                <span id="mondayMayPct" class="font-black text-purple-700">0%</span>
-              </div>
-              <div class="w-full bg-purple-200/60 rounded-full h-2.5 overflow-hidden">
-                <div id="mondayMayBar" class="bg-purple-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- BARRA DE FILTROS MONDAY -->
-          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Filtrar Responsável:</span>
-              <button type="button" onclick="setMondayFilter('all')" id="filter-monday-all" class="px-3 py-1.5 rounded-xl bg-[#0B2545] text-white text-xs font-bold shadow-xs transition-all">Todos</button>
-              <button type="button" onclick="setMondayFilter('leonardo')" id="filter-monday-leonardo" class="px-3 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1.5">
-                <img src="fotos_radar/LEONARDO.jpeg" class="w-4 h-4 rounded-full object-cover" />
-                <span>Leonardo</span>
-              </button>
-              <button type="button" onclick="setMondayFilter('mayumi')" id="filter-monday-mayumi" class="px-3 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1.5">
-                <img src="fotos_radar/mayumi.jpg" class="w-4 h-4 rounded-full object-cover" />
-                <span>Mayumi</span>
-              </button>
-            </div>
-
-            <div class="flex items-center gap-2">
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Status:</span>
-              <select onchange="setMondayStatusFilter(this.value)" class="text-xs font-bold px-3 py-1.5 bg-white border border-slate-200 rounded-xl outline-none">
-                <option value="all">Todos os Status</option>
-                <option value="todo">A Fazer</option>
-                <option value="in_progress">Em Andamento</option>
-                <option value="done">Concluído</option>
-                <option value="blocked">Travado</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- TABELA MONDAY INTERATIVA -->
-          <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-2xs custom-scrollbar">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-wider text-slate-500">
-                  <th class="px-4 py-3">Tarefa / Entrega Estratégica</th>
-                  <th class="px-4 py-3">Responsável</th>
-                  <th class="px-4 py-3">Fase / Módulo</th>
-                  <th class="px-4 py-3 text-center">Status Monday</th>
-                  <th class="px-4 py-3 text-center">Prioridade</th>
-                  <th class="px-4 py-3 text-center">Prazo</th>
-                  <th class="px-4 py-3 text-right">Ações</th>
-                </tr>
-              </thead>
-              <tbody id="mondayTasksTableBody" class="divide-y divide-slate-100 bg-white">
-                <!-- Hidratado via JavaScript -->
-              </tbody>
-            </table>
-          </div>
-          <p class="text-[11px] text-slate-400 italic">
-            * Dica: Clique nos botões de Status (ex: "Em Andamento") e Prioridade para alternar seus valores instantaneamente!
-          </p>
-        </section>
 
         <!-- ==================== SEÇÃO 1: SUMÁRIO EXECUTIVO ==================== -->
         <section id="sec-executivo" class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
@@ -1751,6 +1637,120 @@
               </button>
             </div>
           </div>
+        </section>
+
+        <!-- ==================== MÓDULO MONDAY.COM: DIVISÃO DE TAREFAS ==================== -->
+        <section id="sec-monday" class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden p-6 sm:p-8 space-y-6">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div>
+              <div class="flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-cyan-600 mb-1">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Gestão Ágil de Execução • Padrão Monday.com</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Divisão de Metas: Leonardo & Mayumi</h2>
+              <p class="text-xs text-slate-500">Acompanhamento em tempo real de quem faz o quê no plano de negócios com status coloridos, prioridades e progresso percentual.</p>
+            </div>
+
+            <!-- Botão Adicionar Tarefa -->
+            <button type="button" onclick="addNewMondayTask()" class="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 active:scale-95 text-white font-black text-xs uppercase tracking-wider flex items-center gap-2 transition-all shadow-sm cursor-pointer self-start lg:self-auto">
+              <i class="fa-solid fa-plus"></i>
+              <span>Nova Tarefa</span>
+            </button>
+          </div>
+
+          <!-- BARRAS DE PROGRESSO: GERAL, LEONARDO E MAYUMI -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Progresso Geral -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-700">
+                <span class="flex items-center gap-2">
+                  <i class="fa-solid fa-bars-progress text-cyan-600"></i> Progresso Geral do Plano
+                </span>
+                <span id="mondayOverallPct" class="font-black text-cyan-700">0%</span>
+              </div>
+              <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                <div id="mondayOverallBar" class="bg-cyan-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Progresso Leonardo -->
+            <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-200/80 space-y-2">
+              <div class="flex items-center justify-between text-xs font-bold text-blue-900">
+                <span class="flex items-center gap-2">
+                  <img src="fotos_radar/LEONARDO.jpeg" class="w-5 h-5 rounded-full object-cover border border-blue-300" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+                  <span>Leonardo Venâncio</span>
+                </span>
+                <span id="mondayLeoPct" class="font-black text-blue-700">0%</span>
+              </div>
+              <div class="w-full bg-blue-200/60 rounded-full h-2.5 overflow-hidden">
+                <div id="mondayLeoBar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Progresso Mayumi -->
+            <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-200/80 space-y-2">
+              <div class="flex items-center justify-between text-xs font-bold text-purple-900">
+                <span class="flex items-center gap-2">
+                  <img src="fotos_radar/mayumi.jpg" class="w-5 h-5 rounded-full object-cover border border-purple-300" onerror="this.src='fotos_radar/mayumi.jpg'" />
+                  <span>Mayumi Nagano</span>
+                </span>
+                <span id="mondayMayPct" class="font-black text-purple-700">0%</span>
+              </div>
+              <div class="w-full bg-purple-200/60 rounded-full h-2.5 overflow-hidden">
+                <div id="mondayMayBar" class="bg-purple-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BARRA DE FILTROS MONDAY -->
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Filtrar Responsável:</span>
+              <button type="button" onclick="setMondayFilter('all')" id="filter-monday-all" class="px-3 py-1.5 rounded-xl bg-[#0B2545] text-white text-xs font-bold shadow-xs transition-all">Todos</button>
+              <button type="button" onclick="setMondayFilter('leonardo')" id="filter-monday-leonardo" class="px-3 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1.5">
+                <img src="fotos_radar/LEONARDO.jpeg" class="w-4 h-4 rounded-full object-cover" />
+                <span>Leonardo</span>
+              </button>
+              <button type="button" onclick="setMondayFilter('mayumi')" id="filter-monday-mayumi" class="px-3 py-1.5 rounded-xl bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 text-xs font-bold transition-all flex items-center gap-1.5">
+                <img src="fotos_radar/mayumi.jpg" class="w-4 h-4 rounded-full object-cover" />
+                <span>Mayumi</span>
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">Status:</span>
+              <select onchange="setMondayStatusFilter(this.value)" class="text-xs font-bold px-3 py-1.5 bg-white border border-slate-200 rounded-xl outline-none">
+                <option value="all">Todos os Status</option>
+                <option value="todo">A Fazer</option>
+                <option value="in_progress">Em Andamento</option>
+                <option value="done">Concluído</option>
+                <option value="blocked">Travado</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- TABELA MONDAY INTERATIVA -->
+          <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-2xs custom-scrollbar">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-wider text-slate-500">
+                  <th class="px-4 py-3">Tarefa / Entrega Estratégica</th>
+                  <th class="px-4 py-3">Responsável</th>
+                  <th class="px-4 py-3">Fase / Módulo</th>
+                  <th class="px-4 py-3 text-center">Status Monday</th>
+                  <th class="px-4 py-3 text-center">Prioridade</th>
+                  <th class="px-4 py-3 text-center">Prazo</th>
+                  <th class="px-4 py-3 text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="mondayTasksTableBody" class="divide-y divide-slate-100 bg-white">
+                <!-- Hidratado via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+          <p class="text-[11px] text-slate-400 italic">
+            * Dica: Clique nos botões de Status (ex: "Em Andamento") e Prioridade para alternar seus valores instantaneamente!
+          </p>
         </section>
 
       </div>

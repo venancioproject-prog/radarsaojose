@@ -331,6 +331,10 @@ function loadBusinessPlan() {
         currentBusinessPlan.operational_plan.layout_architecture.length < 100) {
       currentBusinessPlan.operational_plan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA.operational_plan));
     }
+    // Garante que o quadro de tarefas Monday.com esteja sempre preenchido
+    if (!currentBusinessPlan.monday_tasks || !Array.isArray(currentBusinessPlan.monday_tasks) || currentBusinessPlan.monday_tasks.length === 0) {
+      currentBusinessPlan.monday_tasks = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA.monday_tasks));
+    }
   }
 
   // Tenta sincronizar com o backend em background
@@ -633,21 +637,27 @@ function setMondayStatusFilter(status = 'all') {
 }
 
 function addNewMondayTask() {
+  if (!currentBusinessPlan) {
+    currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  }
+  if (!Array.isArray(currentBusinessPlan.monday_tasks)) {
+    currentBusinessPlan.monday_tasks = [];
+  }
   const newTask = {
     id: 'task-' + Date.now(),
     title: 'Nova meta de execução do plano',
-    responsible: mondayFilterResponsible === 'mayumi' ? 'mayumi' : 'leonardo',
-    phase: 'Comercial & Escala',
+    responsible: mondayFilterResponsible === 'mayumi' ? 'mayumi' : (mondayFilterResponsible === 'leonardo' ? 'leonardo' : 'ambos'),
+    phase: 'Estratégia & Escala',
     status: 'todo',
     priority: 'medium',
-    due_date: 'Jan/2027',
+    due_date: 'Dez/2026',
     notes: ''
   };
-  currentBusinessPlan.monday_tasks.push(newTask);
+  currentBusinessPlan.monday_tasks.unshift(newTask);
   renderMondayBoard();
   saveBusinessPlan(false);
   if (typeof showToast === 'function') {
-    showToast('Nova tarefa adicionada ao quadro Monday.com!', 'info');
+    showToast('Nova tarefa adicionada ao quadro!', 'info');
   }
 }
 
@@ -804,6 +814,8 @@ function renderCapitalSocialTable() {
 }
 
 function addNewPartner() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!Array.isArray(currentBusinessPlan.partners)) currentBusinessPlan.partners = [];
   const newPartner = {
     id: 'partner-' + Date.now(),
     name: 'Novo Sócio',
@@ -883,6 +895,9 @@ function renderCompetitorsTable() {
 }
 
 function addNewCompetitor() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!currentBusinessPlan.market_analysis) currentBusinessPlan.market_analysis = {};
+  if (!Array.isArray(currentBusinessPlan.market_analysis.competitors)) currentBusinessPlan.market_analysis.competitors = [];
   currentBusinessPlan.market_analysis.competitors.push({
     name: "Novo Concorrente",
     quality: "Média",
@@ -940,6 +955,9 @@ function renderSuppliersTable() {
 }
 
 function addNewSupplier() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!currentBusinessPlan.market_analysis) currentBusinessPlan.market_analysis = {};
+  if (!Array.isArray(currentBusinessPlan.market_analysis.suppliers)) currentBusinessPlan.market_analysis.suppliers = [];
   currentBusinessPlan.market_analysis.suppliers.push({
     name: "Novo Fornecedor",
     items: "Serviço de Infra / Software",
@@ -1005,6 +1023,9 @@ function renderPricingTable() {
 }
 
 function addNewPricingRow() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!currentBusinessPlan.marketing_plan) currentBusinessPlan.marketing_plan = {};
+  if (!Array.isArray(currentBusinessPlan.marketing_plan.pricing_strategy)) currentBusinessPlan.marketing_plan.pricing_strategy = [];
   currentBusinessPlan.marketing_plan.pricing_strategy.push({
     product: "Novo Serviço",
     price: "R$ 3.000",
@@ -1070,6 +1091,9 @@ function renderStaffTable() {
 }
 
 function addNewStaffRow() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!currentBusinessPlan.operational_plan) currentBusinessPlan.operational_plan = {};
+  if (!Array.isArray(currentBusinessPlan.operational_plan.staff_requirements)) currentBusinessPlan.operational_plan.staff_requirements = [];
   currentBusinessPlan.operational_plan.staff_requirements.push({
     role: "Novo Cargo / Função",
     qualification: "Nível Superior / Técnico",
@@ -1143,6 +1167,9 @@ function renderCapexTable() {
 }
 
 function addNewCapexRow() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!currentBusinessPlan.financial_plan) currentBusinessPlan.financial_plan = {};
+  if (!Array.isArray(currentBusinessPlan.financial_plan.capex_investments)) currentBusinessPlan.financial_plan.capex_investments = [];
   currentBusinessPlan.financial_plan.capex_investments.push({
     item: "Novo Equipamento / Móvel",
     qty: 1,
@@ -1200,6 +1227,9 @@ function renderPreOpTable() {
 }
 
 function addNewPreOpRow() {
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!currentBusinessPlan.financial_plan) currentBusinessPlan.financial_plan = {};
+  if (!Array.isArray(currentBusinessPlan.financial_plan.pre_operational_investments)) currentBusinessPlan.financial_plan.pre_operational_investments = [];
   currentBusinessPlan.financial_plan.pre_operational_investments.push({
     item: "Nova Taxa / Desenvolvimento",
     val: 2500
@@ -1441,6 +1471,9 @@ function renderSwotMatrix() {
 function addNewSwotItem(quadrant) {
   const desc = prompt(`Adicionar item no quadrante (${quadrant.toUpperCase()}):`);
   if (!desc || !desc.trim()) return;
+
+  if (!currentBusinessPlan) currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  if (!Array.isArray(currentBusinessPlan.swot)) currentBusinessPlan.swot = [];
 
   const newItem = {
     id: 'swot-' + Date.now(),
