@@ -324,6 +324,13 @@ function loadBusinessPlan() {
 
   if (!currentBusinessPlan || !currentBusinessPlan.financial_plan) {
     currentBusinessPlan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA));
+  } else {
+    // Garante que o Plano Operacional e Arquitetura completa estejam sempre preenchidos se o cache local estiver vazio
+    if (!currentBusinessPlan.operational_plan || 
+        !currentBusinessPlan.operational_plan.layout_architecture || 
+        currentBusinessPlan.operational_plan.layout_architecture.length < 100) {
+      currentBusinessPlan.operational_plan = JSON.parse(JSON.stringify(DEFAULT_BUSINESS_PLAN_DATA.operational_plan));
+    }
   }
 
   // Tenta sincronizar com o backend em background
@@ -1664,4 +1671,18 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+// Auto-inicialização quando o DOM estiver pronto
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      loadBusinessPlan();
+    });
+  } else {
+    // DOM já está carregado
+    setTimeout(() => {
+      loadBusinessPlan();
+    }, 50);
+  }
 }
