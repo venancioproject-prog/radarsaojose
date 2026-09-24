@@ -667,8 +667,60 @@
 
 
           <!-- ========================================== -->
-          <!-- SIDEBAR: FILTROS DINÂMICOS DA HISTÓRIA DE SJC -->
+          <!-- SIDEBAR: FILTROS DINÂMICOS DA HISTÓRIA & GEOGRAFIA DE SJC -->
           <!-- ========================================== -->
+          <div id="sidebar-historia-filters-container" class="space-y-5 hidden">
+            <!-- Box de Metadados / Resumo Historiográfico -->
+            <div class="bg-gradient-to-br from-cyan-950/40 to-slate-900/80 rounded-2xl p-3.5 border border-cyan-800/40 shadow-2xs text-white">
+              <p class="text-[10px] font-black uppercase tracking-wider text-cyan-300">Atlas Historiográfico</p>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span id="historia-total-base-count" class="text-xl font-black text-white">31</span>
+                <span class="text-xs font-semibold text-slate-300">marcos auditados</span>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-1">1767 • 259 anos de autonomia político-administrativa de SJC.</p>
+            </div>
+
+            <div class="space-y-3.5 text-xs">
+              <!-- Filtro por Época / Era -->
+              <div>
+                <label class="block font-bold text-slate-700 mb-1.5">Fases Históricas</label>
+                <div class="space-y-1.5">
+                  <button type="button" onclick="window.selectHistoriaEra('all')" id="pill-era-all" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-xs flex items-center justify-between cursor-pointer">
+                    <span>Todas as Fases</span>
+                    <span id="side-count-era-all" class="text-[10px] px-2 py-0.5 rounded-md bg-white/20">31</span>
+                  </button>
+                  <button type="button" onclick="window.selectHistoriaEra('colonial')" id="pill-era-colonial" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Colonial (1564–1863)</span>
+                    <span id="side-count-era-colonial" class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">5</span>
+                  </button>
+                  <button type="button" onclick="window.selectHistoriaEra('sanatorial')" id="pill-era-sanatorial" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Sanatorial (1864–1945)</span>
+                    <span id="side-count-era-sanatorial" class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">8</span>
+                  </button>
+                  <button type="button" onclick="window.selectHistoriaEra('tecnologica')" id="pill-era-tecnologica" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-500"></span> Aeroespacial (1946–2000)</span>
+                    <span id="side-count-era-tecnologica" class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">10</span>
+                  </button>
+                  <button type="button" onclick="window.selectHistoriaEra('contemporanea')" id="pill-era-contemporanea" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 flex items-center justify-between cursor-pointer">
+                    <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-teal-500"></span> Smart City (2001–2026)</span>
+                    <span id="side-count-era-contemporanea" class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">8</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Atalho Dossiê 1767 -->
+              <button 
+                type="button" 
+                onclick="window.openPorQue1767Modal()" 
+                class="w-full py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold flex items-center justify-between transition-all cursor-pointer"
+              >
+                <span class="flex items-center gap-1.5">
+                  <i class="fa-solid fa-scale-balanced text-amber-700"></i> Por que 1767?
+                </span>
+                <i class="fa-solid fa-arrow-right text-[10px] text-amber-600"></i>
+              </button>
+            </div>
+          </div>
           
           <!-- SIDEBAR: LENTES SJC (Acervo Visual) -->
           <div id="sidebar-image-bank-filters-container" class="space-y-5 hidden">
@@ -862,13 +914,13 @@
                   type="button" 
                   onclick="window.selectHistoriaEra('all')" 
                   id="pill-era-all" 
-                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-xs flex items-center justify-between cursor-pointer"
+                  class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold transition-all bg-brand-900 text-white shadow-xs flex items-center justify-between cursor-pointer"
                 >
                   <span class="flex items-center gap-2">
                     <i class="fa-solid fa-layer-group text-[11px]"></i>
                     <span>Todas as Fases</span>
                   </span>
-                  <span class="text-[10px] px-1.5 py-0.5 rounded-md bg-white/20 font-mono">31</span>
+                  <span id="count-era-all" class="text-[10px] px-1.5 py-0.5 rounded-md bg-white/20 font-mono">31</span>
                 </button>
 
                 <button 
@@ -881,7 +933,7 @@
                     <i class="fa-solid fa-landmark text-[11px] text-[#8c6239]"></i>
                     <span class="truncate">Colonial & Vila</span>
                   </span>
-                  <span class="text-[10px] text-slate-400 font-mono">1564–1863</span>
+                  <span id="count-era-colonial" class="text-[10px] text-slate-400 font-mono">8</span>
                 </button>
 
                 <button 
@@ -894,7 +946,7 @@
                     <i class="fa-solid fa-hospital text-[11px] text-rose-700"></i>
                     <span class="truncate">Cidade Sanatorial</span>
                   </span>
-                  <span class="text-[10px] text-slate-400 font-mono">1864–1945</span>
+                  <span id="count-era-sanatorial" class="text-[10px] text-slate-400 font-mono">6</span>
                 </button>
 
                 <button 
@@ -907,7 +959,7 @@
                     <i class="fa-solid fa-plane-departure text-[11px] text-cyan-700"></i>
                     <span class="truncate">CTA & Aeroespacial</span>
                   </span>
-                  <span class="text-[10px] text-slate-400 font-mono">1946–2000</span>
+                  <span id="count-era-tecnologica" class="text-[10px] text-slate-400 font-mono">11</span>
                 </button>
 
                 <button 
@@ -920,7 +972,7 @@
                     <i class="fa-solid fa-microchip text-[11px] text-emerald-700"></i>
                     <span class="truncate">Smart City</span>
                   </span>
-                  <span class="text-[10px] text-slate-400 font-mono">2001–Hoje</span>
+                  <span id="count-era-contemporanea" class="text-[10px] text-slate-400 font-mono">6</span>
                 </button>
               </div>
             </div>
@@ -10774,345 +10826,670 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
       <!-- TÚNEL DO TEMPO - HISTÓRIA DE SÃO JOSÉ DOS CAMPOS -->
       <!-- ========================================== -->
       
-<section id="historia-view" class="hidden flex-1 w-full space-y-2.5 pb-8 min-w-0 animate-in fade-in duration-500 ease-out">
+<section id="historia-view" class="hidden flex-1 w-full space-y-8 pb-16 min-w-0 animate-in fade-in duration-700 ease-out">
         
-        <!-- 1. HEADER EXECUTIVO COMPACTO -->
-        <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-slate-200/80 shadow-2xs flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-lg shrink-0 text-[#8c6239]">
-              <i class="fa-solid fa-water"></i>
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <h1 class="text-base sm:text-xl font-black text-slate-900 tracking-tight truncate">
-                  O Rio da Memória <span class="text-[#8c6239] font-extrabold">• Rio Paraíba do Sul & Rio Comprido</span>
-                </h1>
-                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-900 border border-amber-200 shrink-0">
-                  <i class="fa-solid fa-certificate text-amber-700 text-[9px]"></i> 1767: 259 Anos
-                </span>
-              </div>
-              <p class="text-xs text-slate-500 font-medium truncate mt-0.5">
-                Águas barrentas históricas de São José dos Campos. Navegue horizontalmente pelo leito do tempo de 1564 aos dias de hoje.
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2 shrink-0">
-            <button 
-              type="button" 
-              onclick="window.openPorQue1767Modal()" 
-              class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer active:scale-95"
-            >
-              <i class="fa-solid fa-circle-question text-amber-300 text-xs"></i>
-              <span>Por que 1767?</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. O RIO HORIZONTAL DA MEMÓRIA (CANVAS EXPANDIDO: H=525px) -->
-        <div class="relative w-full rounded-3xl bg-[#F4F7F9] border border-slate-200/80 shadow-md overflow-hidden p-3 sm:p-4">
+        <!-- FAIXA HERO FULL-WIDTH PADRONIZADA (IGUAL A TODOS OS MÓDULOS) -->
+        <header class="w-full relative overflow-hidden bg-[#1c1917] backdrop-blur-md border-b border-amber-900/40 text-white shadow-xs min-h-[175px] md:min-h-[200px] py-6 sm:py-7 flex items-center px-4 sm:px-6 lg:px-8">
+          <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center mix-blend-luminosity" style="background-image: url('fotos_radar/capa_sjc_skyline.jpg');"></div>
+          <div class="absolute inset-0 z-0 bg-gradient-to-r from-[#1c1917] via-[#292524] to-[#1c1917]"></div>
           
-          <!-- Banner Superior de Instrução e Geografia do Rio -->
-          <div class="flex items-center justify-between px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-xl mb-2 border border-slate-200/60 text-xs">
-            <div class="flex items-center gap-2.5 flex-wrap">
-              <span class="w-2.5 h-2.5 rounded-full bg-amber-600 animate-pulse"></span>
-              <strong class="text-slate-800 font-extrabold uppercase tracking-wider text-[11px]">Leito Histórico do Rio Paraíba do Sul & Afluentes (SJC)</strong>
-              <span class="hidden md:inline text-slate-300">•</span>
-              <span class="hidden md:inline text-slate-500 font-medium">
-                <i class="fa-solid fa-arrows-left-right text-amber-700 mr-1"></i> Deslize para os lados ou use a roda do mouse sobre o rio
-              </span>
-            </div>
-            
-            <div class="flex items-center gap-3">
-              <span class="text-[11px] font-mono font-bold text-slate-400">1564 ➔ 2026</span>
-            </div>
-          </div>
-
-          <!-- VIEWPORT DO RIO COM BOTÕES FLUTUANTES LATERAIS -->
-          <div class="relative w-full group">
-            <!-- Botão Flutuante Esquerda -->
-            <button 
-              type="button" 
-              onclick="window.scrollHistoriaRiver(-650)" 
-              class="absolute left-3 top-[70%] -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-[#734f2b] hover:text-slate-950 shadow-[0_8px_30px_rgba(0,0,0,0.18)] border border-amber-200/80 flex items-center justify-center text-base transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
-              title="Navegar para a esquerda (Passado)"
-            >
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-
-            <!-- Botão Flutuante Direita -->
-            <button 
-              type="button" 
-              onclick="window.scrollHistoriaRiver(650)" 
-              class="absolute right-3 top-[70%] -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/95 hover:bg-white text-[#734f2b] hover:text-slate-950 shadow-[0_8px_30px_rgba(0,0,0,0.18)] border border-amber-200/80 flex items-center justify-center text-base transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
-              title="Navegar para a direita (Futuro)"
-            >
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
-            <div id="historia-river-viewport" class="relative w-full h-[525px] overflow-x-auto overflow-y-hidden rounded-2xl bg-[#F4F7F9] select-none scroll-smooth">
-              <div id="historia-river-track" class="relative h-full" style="min-width: 17200px;">
+          <div class="max-w-7xl mx-auto w-full relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 h-full">
+            <div class="flex items-center gap-7 sm:gap-8">
+              <img src="fotos_radar/radar_logo_pure_white.png" alt="Radar São José" class="h-11 sm:h-12 object-contain shrink-0 drop-shadow-sm" />
+              
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                    <i class="fa-solid fa-clock-rotate-left"></i> LINHA DO TEMPO
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-bold bg-white/10 text-slate-300 border border-white/10">
+                    1767 • 259 Anos de Emancipação
+                  </span>
+                  <span id="historia-counter-badge" class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-200 border border-amber-400/30">
+                    31 de 31 marcos
+                  </span>
+                </div>
                 
-                <!-- SVG do Rio: Gradiente Orgânico Curvo + Margens Sinuosas e Correntes Fluídas -->
-                <svg id="historia-river-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <!-- Gradiente do Rio Marrom Claro (Águas Barrentas do Paraíba com Iluminação Fluvial de Alta Definição) -->
-                    <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#b4834f" />
-                      <stop offset="15%" stop-color="#a4723e" />
-                      <stop offset="30%" stop-color="#c89b69" />
-                      <stop offset="48%" stop-color="#ab7b47" />
-                      <stop offset="68%" stop-color="#996835" />
-                      <stop offset="85%" stop-color="#bc8b56" />
-                      <stop offset="100%" stop-color="#a97743" />
-                    </linearGradient>
-
-                    <!-- Margens de Várzea e Praias Fluviais Orgânicas Translúcidas -->
-                    <linearGradient id="riverSandbanks" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stop-color="#f5ede0" stop-opacity="0.85" />
-                      <stop offset="25%" stop-color="#ebdccb" stop-opacity="0.9" />
-                      <stop offset="50%" stop-color="#f8f1e7" stop-opacity="0.85" />
-                      <stop offset="75%" stop-color="#ebd9c5" stop-opacity="0.9" />
-                      <stop offset="100%" stop-color="#f5ede0" stop-opacity="0.85" />
-                    </linearGradient>
-
-                    <filter id="riverShadow" x="-10%" y="-10%" width="120%" height="120%">
-                      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#543715" flood-opacity="0.22" />
-                    </filter>
-                  </defs>
-
-                  <!-- Margem Irregular Externa (Praias de Várzea Suaves) -->
-                  <path id="river-sand-path" fill="none" stroke="url(#riverSandbanks)" stroke-width="155" stroke-linecap="round" stroke-linejoin="round" />
-                  
-                  <!-- Leito Principal Curvo e Sinuoso do Rio -->
-                  <path id="river-main-path" fill="none" stroke="url(#riverGradient)" stroke-width="96" stroke-linecap="round" stroke-linejoin="round" filter="url(#riverShadow)" />
-
-                  <!-- Correnteza Interna / Streamlines Refletivas -->
-                  <path id="river-inner-stream" fill="none" stroke="#fae8b2" stroke-width="5" stroke-linecap="round" stroke-dasharray="14 36" opacity="0.65" />
-                  <path id="river-secondary-stream" fill="none" stroke="#fff5d6" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 48" opacity="0.5" />
-                  <path id="river-third-stream" fill="none" stroke="#7a4f21" stroke-width="2" stroke-linecap="round" stroke-dasharray="24 64" opacity="0.4" />
-                </svg>
-
-                <!-- Conectores Verticais de Dados (Linhas Suaves dos Marcos aos Cards) -->
-                <svg id="historia-connectors-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg"></svg>
-
-                <!-- Marcos Geográficos do Rio (Ponte dos Jesuítas, Banhado, etc.) -->
-                <div id="historia-geo-landmarks-container" class="absolute inset-0 pointer-events-none"></div>
-
-                <!-- Ilhotas e Pedras Históricas no Rio (Milestone Nodes) -->
-                <div id="historia-stones-container" class="absolute inset-0 pointer-events-none"></div>
-
-                <!-- Cards Históricos Flutuantes (Posicionados no topo h=15px) -->
-                <div id="historia-cards-container" class="absolute inset-0 pointer-events-none"></div>
-
+                <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+                  História Municipal <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">• O Rio da Memória</span>
+                </h1>
+                
+                <p class="text-xs sm:text-sm text-slate-300 font-medium max-w-2xl leading-relaxed">
+                  Atlas cronológico pelo leito do Rio Paraíba do Sul e Rio Comprido com fontes primárias auditadas.
+                </p>
               </div>
             </div>
-          </div>
 
-          <!-- Bottom Timeline Scrubber Bar / Mini-mapa de Eras -->
-          <div class="mt-3 pt-3 border-t border-slate-200/70 flex items-center justify-between gap-2 flex-wrap">
-            <div class="flex items-center gap-1.5 flex-wrap">
-              <span class="text-[11px] font-bold text-slate-500 mr-1 flex items-center gap-1">
-                <i class="fa-solid fa-timeline text-[#8c6239]"></i> Saltar para:
-              </span>
+            <div class="flex items-center gap-3 shrink-0">
               <button 
                 type="button" 
-                onclick="window.selectHistoriaEra('colonial')" 
-                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/80 transition-colors cursor-pointer"
+                onclick="window.openPorQue1767Modal()" 
+                class="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer active:scale-95"
               >
-                Colonial (1564–1863)
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('sanatorial')" 
-                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-200/80 transition-colors cursor-pointer"
-              >
-                Sanatorial (1864–1945)
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('tecnologica')" 
-                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-50 hover:bg-cyan-100 text-cyan-900 border border-cyan-200/80 transition-colors cursor-pointer"
-              >
-                Tecnológica (1946–2000)
-              </button>
-              <button 
-                type="button" 
-                onclick="window.selectHistoriaEra('contemporanea')" 
-                class="px-2.5 py-1 rounded-lg text-xs font-bold bg-teal-50 hover:bg-teal-100 text-teal-900 border border-teal-200/80 transition-colors cursor-pointer"
-              >
-                Contemporânea (2001–2026)
+                <i class="fa-solid fa-circle-question text-slate-950 text-xs"></i>
+                <span>Por que 1767? (259 Anos)</span>
               </button>
             </div>
+          </div>
+        </header>
+
+        <!-- CONTEÚDO CENTRAL ALINHADO AO MAX-W-7XL: HUB DE APLICAÇÕES HISTÓRICAS & GEOGRÁFICAS -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          
+          <!-- 1. BARRA DE INDICADORES RÁPIDOS DE MEMÓRIA & TERRITÓRIO -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs">
+              <span class="text-[10px] font-black uppercase tracking-wider text-amber-700">Marco Oficial</span>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="text-2xl font-black text-slate-900">259</span>
+                <span class="text-xs font-bold text-slate-500">anos (1767)</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5 truncate">Autonomia político-administrativa</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs">
+              <span class="text-[10px] font-black uppercase tracking-wider text-cyan-700">Atlas Cronológico</span>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="text-2xl font-black text-slate-900">31</span>
+                <span class="text-xs font-bold text-slate-500">marcos auditados</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5 truncate">De 1564 até o presente (2026)</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs">
+              <span class="text-[10px] font-black uppercase tracking-wider text-blue-700">Matriz Territorial</span>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="text-2xl font-black text-slate-900">7</span>
+                <span class="text-xs font-bold text-slate-500">regiões oficiais</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5 truncate">Bacias, relevo e identidade</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs">
+              <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700">Toponímia Urbana</span>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="text-2xl font-black text-slate-900">100%</span>
+                <span class="text-xs font-bold text-slate-500">história viva</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5 truncate">Origem e significado dos bairros</p>
+            </div>
+          </div>
+
+          <!-- 2. GRADE DE 4 APLICAÇÕES PRINCIPAIS (PORTAL / HUB INICIAL) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <button 
-              type="button" 
-              onclick="window.scrollHistoriaRiver(-99999)" 
-              class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 transition-colors flex items-center gap-1 cursor-pointer ml-auto"
-            >
-              <i class="fa-solid fa-backward-step text-[10px]"></i> Início (1564)
-            </button>
+            <!-- APP 1: LINHA DO TEMPO (O RIO DA MEMÓRIA) -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-card-hover transition-all duration-300 p-6 flex flex-col justify-between group">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-cyan-700 text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-water"></i>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-100 text-cyan-900">
+                    Cronologia Interativa
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-lg font-black text-slate-900 group-hover:text-cyan-800 transition-colors">
+                    Linha do Tempo Oficial
+                  </h3>
+                  <p class="text-xs text-slate-500 font-semibold mt-0.5">O Rio da Memória (1564 ➔ 2026)</p>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                  Navegue pelo leito histórico do Rio Paraíba do Sul e Rio Comprido. Conheça os 31 marcos fundamentais desde as origens indígenas e a emancipação de 1767 até o polo aeroespacial e smart city.
+                </p>
+
+                <div class="flex items-center gap-2 flex-wrap pt-2">
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">4 Eras Históricas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Fontes Auditadas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Scroll Fluvial</span>
+                </div>
+              </div>
+
+              <button 
+                type="button" 
+                onclick="window.openAppModal('timeline')" 
+                class="mt-6 w-full py-3 px-4 rounded-2xl bg-brand-900 hover:bg-brand-800 active:scale-95 text-white text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+              >
+                <i class="fa-solid fa-timeline text-cyan-400"></i>
+                <span>Abrir Linha do Tempo [Rio da Memória]</span>
+              </button>
+            </div>
+
+            <!-- APP 2: MAPA DAS REGIÕES DA CIDADE -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-card-hover transition-all duration-300 p-6 flex flex-col justify-between group">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-blue-100 text-blue-900">
+                    Geografia & Território
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-lg font-black text-slate-900 group-hover:text-blue-800 transition-colors">
+                    Mapa das Regiões Municipais
+                  </h3>
+                  <p class="text-xs text-slate-500 font-semibold mt-0.5">As 7 Zonas Geográficas de SJC</p>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                  Explore o mapa interativo dividido por regiões: Zona Sul, Zona Oeste, Zona Leste, Zona Norte, Centro, Zona Sudeste e São Francisco Xavier. Veja o relevo, a ocupação urbana e a história de cada setor.
+                </p>
+
+                <div class="flex items-center gap-2 flex-wrap pt-2">
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">7 Regiões Mapeadas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Bacias Hidrográficas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Marcos Urbanos</span>
+                </div>
+              </div>
+
+              <button 
+                type="button" 
+                onclick="window.openAppModal('regioes')" 
+                class="mt-6 w-full py-3 px-4 rounded-2xl bg-slate-900 hover:bg-slate-800 active:scale-95 text-white text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+              >
+                <i class="fa-solid fa-earth-americas text-blue-400"></i>
+                <span>Explorar Mapa das Regiões</span>
+              </button>
+            </div>
+
+            <!-- APP 3: DICIONÁRIO DOS BAIRROS (ORIGEM DOS NOMES) -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-card-hover transition-all duration-300 p-6 flex flex-col justify-between group">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-book-atlas"></i>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-900">
+                    Origem & Toponímia
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-lg font-black text-slate-900 group-hover:text-emerald-800 transition-colors">
+                    Dicionário dos Bairros
+                  </h3>
+                  <p class="text-xs text-slate-500 font-semibold mt-0.5">A História por trás dos Nomes</p>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                  Por que Santana? De onde veio o nome Eugênio de Melo, Putim, Aquarius, Satélite ou Urbanova? Consulte o catálogo com a etimologia, o período de loteamento e as curiosidades de cada bairro.
+                </p>
+
+                <div class="flex items-center gap-2 flex-wrap pt-2">
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Busca em Tempo Real</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Origem Histórica</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Curiosidades</span>
+                </div>
+              </div>
+
+              <button 
+                type="button" 
+                onclick="window.openAppModal('bairros')" 
+                class="mt-6 w-full py-3 px-4 rounded-2xl bg-emerald-700 hover:bg-emerald-600 active:scale-95 text-white text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+              >
+                <i class="fa-solid fa-magnifying-glass text-emerald-300"></i>
+                <span>Consultar Dicionário de Bairros</span>
+              </button>
+            </div>
+
+            <!-- APP 4: PERSONAGENS & GALERIA DE PREFEITOS -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-card-hover transition-all duration-300 p-6 flex flex-col justify-between group">
+              <div class="space-y-3.5">
+                <div class="flex items-center justify-between">
+                  <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700 text-xl group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-users-line"></i>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-900">
+                    Memória Social & Política
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class="text-lg font-black text-slate-900 group-hover:text-amber-800 transition-colors">
+                    Personagens & Prefeitos
+                  </h3>
+                  <p class="text-xs text-slate-500 font-semibold mt-0.5">Pioneiros & Série Histórica de Gestores</p>
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed font-medium">
+                  Conheça os homens e mulheres que moldaram a ciência, a saúde e a infraestrutura de SJC, além da tabela cronológica completa de todos os prefeitos e intendentes desde o século XIX até hoje.
+                </p>
+
+                <div class="flex items-center gap-2 flex-wrap pt-2">
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Biografias Ilustradas</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Mandatos e Cargos</span>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">Situação Documental</span>
+                </div>
+              </div>
+
+              <button 
+                type="button" 
+                onclick="window.openAppModal('prefeitos')" 
+                class="mt-6 w-full py-3 px-4 rounded-2xl bg-amber-600 hover:bg-amber-500 active:scale-95 text-slate-950 text-xs font-black shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
+              >
+                <i class="fa-solid fa-user-astronaut text-slate-950"></i>
+                <span>Ver Personagens & Prefeitos</span>
+              </button>
+            </div>
+
           </div>
 
         </div>
 
-        <!-- 4. SUB-ABAS DE MEMÓRIA (PERSONALIDADES, PREFEITOS, ACERVOS, PARTICIPAR) -->
-        <div class="mt-6 bg-white rounded-3xl border border-slate-200/80 shadow-md overflow-hidden">
-          <div class="px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex items-center gap-2 overflow-x-auto">
-            <button type="button" onclick="window.switchHistoriaSubTab('personalidades')" id="btn-sub-personalidades" class="px-4 py-2 rounded-xl font-bold transition-all bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer whitespace-nowrap">
-              <i class="fa-solid fa-user-astronaut text-[#8c6239] mr-1.5"></i> Personalidades Históricas
-            </button>
-            <button type="button" onclick="window.switchHistoriaSubTab('prefeitos')" id="btn-sub-prefeitos" class="px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap">
-              <i class="fa-solid fa-building-columns text-blue-600 mr-1.5"></i> Série Histórica de Prefeitos
-            </button>
-            <button type="button" onclick="window.switchHistoriaSubTab('acervos')" id="btn-sub-acervos" class="px-4 py-2 rounded-xl font-bold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer whitespace-nowrap">
-              <i class="fa-solid fa-shield-halved text-emerald-600 mr-1.5"></i> Governança & Níveis de Evidência
-            </button>
-            <button type="button" onclick="window.switchHistoriaSubTab('participar')" id="btn-sub-participar" class="px-4 py-2 rounded-xl font-bold transition-all text-amber-800 hover:bg-amber-100/60 cursor-pointer whitespace-nowrap ml-auto">
-              <i class="fa-solid fa-hand-holding-heart text-amber-600 mr-1.5"></i> Sugerir / Contribuir
-            </button>
-          </div>
+        <!-- ============================================================== -->
+        <!-- MODAIS GRANDES DE APLICAÇÃO (POPUPS EM TELA CHEIA / OVERLAYS) -->
+        <!-- ============================================================== -->
 
-          <div class="p-6">
-            <!-- Sub-aba Personalidades -->
-            <div id="subview-personalidades" class="space-y-4">
-              <div id="historia-personalidades-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- MODAL 1: LINHA DO TEMPO (O RIO DA MEMÓRIA COM SVG FLUVIAL) -->
+        <div id="modal-app-timeline" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div class="w-full max-w-[96vw] lg:max-w-7xl h-[92vh] bg-[#071524] rounded-3xl border border-cyan-800/60 shadow-2xl flex flex-col overflow-hidden text-white">
+            
+            <!-- Header do Modal -->
+            <div class="px-6 py-4 border-b border-cyan-900/60 bg-slate-900/90 flex items-center justify-between gap-4 shrink-0">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300">
+                  <i class="fa-solid fa-water"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-black text-white">Linha do Tempo Oficial — O Rio da Memória</h3>
+                  <p class="text-[11px] text-cyan-300/80 font-medium">Bacia do Rio Paraíba do Sul & Rio Comprido (1564 ➔ 2026)</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span class="hidden md:inline text-[11px] text-slate-400 mr-2">Use o scroll ou as setas do teclado (← / →)</span>
+                <button type="button" onclick="window.closeAppModal('timeline')" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer">
+                  <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Barra de Filtros e Busca Fluvial -->
+            <div class="px-6 py-3 border-b border-cyan-950 bg-[#040e1a] flex items-center justify-between gap-3 flex-wrap shrink-0 text-xs">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button type="button" onclick="window.selectHistoriaEra('all')" id="modal-tab-era-all" class="px-3 py-1 rounded-lg font-bold bg-cyan-600 text-white">Todas</button>
+                <button type="button" onclick="window.selectHistoriaEra('colonial')" id="modal-tab-era-colonial" class="px-3 py-1 rounded-lg font-bold bg-amber-950/80 text-amber-300 border border-amber-700/50">Colonial</button>
+                <button type="button" onclick="window.selectHistoriaEra('sanatorial')" id="modal-tab-era-sanatorial" class="px-3 py-1 rounded-lg font-bold bg-rose-950/80 text-rose-300 border border-rose-700/50">Sanatorial</button>
+                <button type="button" onclick="window.selectHistoriaEra('tecnologica')" id="modal-tab-era-tecnologica" class="px-3 py-1 rounded-lg font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-700/50">Aeroespacial</button>
+                <button type="button" onclick="window.selectHistoriaEra('contemporanea')" id="modal-tab-era-contemporanea" class="px-3 py-1 rounded-lg font-bold bg-teal-950/80 text-teal-300 border border-teal-700/50">Smart City</button>
+              </div>
+
+              <div class="flex items-center gap-2 ml-auto">
+                <div class="relative">
+                  <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-xs"></i>
+                  <input 
+                    type="text" 
+                    id="modal-historia-search" 
+                    oninput="window.filterHistoriaEventsFromModal(this.value)" 
+                    placeholder="Buscar marco..." 
+                    class="pl-8 pr-3 py-1.5 bg-slate-900 text-white rounded-xl border border-cyan-900 text-xs focus:border-cyan-400 focus:outline-none w-48 sm:w-64"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Viewport do Rio com Navegação Horizontal Nativa e SVG -->
+            <div class="relative flex-1 w-full overflow-hidden p-4">
+              <!-- Botão Flutuante Esquerda -->
+              <button 
+                type="button" 
+                onclick="window.scrollHistoriaRiver(-550)" 
+                class="absolute left-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-slate-900/90 text-cyan-300 hover:text-white shadow-2xl border border-cyan-500/40 flex items-center justify-center text-sm transition-all hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+
+              <!-- Botão Flutuante Direita -->
+              <button 
+                type="button" 
+                onclick="window.scrollHistoriaRiver(550)" 
+                class="absolute right-6 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-slate-900/90 text-cyan-300 hover:text-white shadow-2xl border border-cyan-500/40 flex items-center justify-center text-sm transition-all hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-md"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+              <div id="historia-river-viewport" class="relative w-full h-full overflow-x-auto overflow-y-hidden rounded-2xl bg-gradient-to-b from-[#06182a] via-[#09223a] to-[#041220] select-none scroll-smooth" style="touch-action: pan-x;">
+                <div id="historia-river-track" class="relative h-full" style="min-width: 2000px;">
+                  
+                  <!-- SVG do Rio: Curvas Fluídas e Águas com Profundidade Real -->
+                  <svg id="historia-river-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="riverWaterGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0284c7" />
+                        <stop offset="20%" stop-color="#0ea5e9" />
+                        <stop offset="40%" stop-color="#0369a1" />
+                        <stop offset="60%" stop-color="#0284c7" />
+                        <stop offset="80%" stop-color="#0ea5e9" />
+                        <stop offset="100%" stop-color="#0369a1" />
+                      </linearGradient>
+                      <linearGradient id="riverShoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#064e3b" stop-opacity="0.5" />
+                        <stop offset="50%" stop-color="#0f766e" stop-opacity="0.4" />
+                        <stop offset="100%" stop-color="#064e3b" stop-opacity="0.5" />
+                      </linearGradient>
+                      <filter id="riverGlow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#0284c7" flood-opacity="0.35" />
+                      </filter>
+                    </defs>
+
+                    <path id="river-sand-path" fill="none" stroke="url(#riverShoreGradient)" stroke-width="140" stroke-linecap="round" stroke-linejoin="round" />
+                    <path id="river-main-path" fill="none" stroke="url(#riverWaterGradient)" stroke-width="78" stroke-linecap="round" stroke-linejoin="round" filter="url(#riverGlow)" />
+                    <path id="river-inner-stream" fill="none" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 40" opacity="0.8" />
+                    <path id="river-secondary-stream" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-dasharray="8 50" opacity="0.65" />
+                  </svg>
+
+                  <svg id="historia-connectors-svg" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg"></svg>
+                  <div id="historia-geo-landmarks-container" class="absolute inset-0 pointer-events-none"></div>
+                  <div id="historia-stones-container" class="absolute inset-0 pointer-events-none"></div>
+                  <div id="historia-cards-container" class="absolute inset-0 pointer-events-none"></div>
+                  <div id="historia-empty-state" class="hidden absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-30">
+                    <h4 class="text-sm font-black text-white mb-1">Nenhum marco encontrado</h4>
+                    <p class="text-xs text-slate-400">Tente buscar por outro termo.</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MODAL 2: MAPA DAS 7 REGIÕES DA CIDADE -->
+        <div id="modal-app-regioes" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div class="w-full max-w-6xl h-[90vh] bg-[#071322] rounded-3xl border border-cyan-800/60 shadow-2xl flex flex-col overflow-hidden text-white">
+            
+            <div class="px-6 py-4 border-b border-cyan-900/60 bg-slate-900/90 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center text-blue-300">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-black text-white">Mapa das 7 Regiões Municipais</h3>
+                  <p class="text-[11px] text-blue-300/80 font-medium">Geografia, Relevo & História Territorial de São José dos Campos</p>
+                </div>
+              </div>
+              <button type="button" onclick="window.closeAppModal('regioes')" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+              </button>
+            </div>
+
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden">
+              <!-- Mapa Interativo SVG na Esquerda (7 cols) -->
+              <div class="lg:col-span-7 bg-[#040e1a] p-4 flex flex-col justify-between relative select-none">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                  <span><i class="fa-solid fa-hand-pointer text-cyan-400 mr-1"></i> Clique em uma região para ver detalhes:</span>
+                  <span id="map-active-region-tag" class="font-bold text-cyan-300">Zona Sul Selecionada</span>
+                </div>
+
+                <div class="flex-1 relative flex items-center justify-center">
+                  <svg id="modal-regioes-map-svg" class="w-full h-full max-h-[460px]" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
+                    <!-- Conteúdo Renderizado via JS -->
+                  </svg>
+                </div>
+
+                <!-- Botões de Atalho Rápido de Regiões -->
+                <div class="pt-3 border-t border-cyan-950 flex items-center gap-1.5 flex-wrap text-[11px]">
+                  <button type="button" onclick="window.selectRegiao('sul')" class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold hover:bg-amber-500/40">Sul</button>
+                  <button type="button" onclick="window.selectRegiao('oeste')" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold hover:bg-cyan-500/40">Oeste</button>
+                  <button type="button" onclick="window.selectRegiao('leste')" class="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/40 font-bold hover:bg-blue-500/40">Leste</button>
+                  <button type="button" onclick="window.selectRegiao('norte')" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold hover:bg-emerald-500/40">Norte</button>
+                  <button type="button" onclick="window.selectRegiao('centro')" class="px-2.5 py-1 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold hover:bg-purple-500/40">Centro</button>
+                  <button type="button" onclick="window.selectRegiao('sudeste')" class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold hover:bg-rose-500/40">Sudeste</button>
+                  <button type="button" onclick="window.selectRegiao('sfx')" class="px-2.5 py-1 rounded-lg bg-teal-500/20 text-teal-300 border border-teal-500/40 font-bold hover:bg-teal-500/40">SFX</button>
+                </div>
+              </div>
+
+              <!-- Painel de Detalhes da Região Selecionada na Direita (5 cols) -->
+              <div id="modal-regiao-details-panel" class="lg:col-span-5 bg-slate-900 p-6 overflow-y-auto space-y-4 border-t lg:border-t-0 lg:border-l border-cyan-900/60">
+                <!-- Preenchido via JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MODAL 3: DICIONÁRIO DOS BAIRROS -->
+        <div id="modal-app-bairros" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div class="w-full max-w-6xl h-[90vh] bg-white rounded-3xl border border-slate-200 shadow-2xl flex flex-col overflow-hidden text-slate-900">
+            
+            <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-800">
+                  <i class="fa-solid fa-book-atlas"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-black text-slate-900">Dicionário dos Bairros de São José dos Campos</h3>
+                  <p class="text-[11px] text-slate-500 font-medium">Origem dos Nomes, Toponímia & História da Ocupação Urbana</p>
+                </div>
+              </div>
+              <button type="button" onclick="window.closeAppModal('bairros')" class="p-2 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-200 transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+              </button>
+            </div>
+
+            <!-- Barra de Busca e Filtro de Região -->
+            <div class="px-6 py-3 border-b border-slate-200 bg-white flex items-center justify-between gap-3 flex-wrap shrink-0">
+              <div class="relative flex-1 max-w-md">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                <input 
+                  type="text" 
+                  id="bairros-search-input" 
+                  oninput="window.filterBairros(this.value)" 
+                  placeholder="Buscar bairro (ex: Santana, Aquarius, Putim, Eugênio de Melo)..." 
+                  class="w-full pl-9 pr-3 py-2 text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 focus:outline-none transition-all shadow-2xs"
+                />
+              </div>
+
+              <div class="flex items-center gap-1.5 overflow-x-auto text-xs">
+                <button type="button" onclick="window.filterBairrosByRegiao('all')" id="bairros-tab-all" class="px-3 py-1.5 rounded-xl font-bold bg-emerald-800 text-white shadow-xs">Todos</button>
+                <button type="button" onclick="window.filterBairrosByRegiao('sul')" id="bairros-tab-sul" class="px-3 py-1.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100">Zona Sul</button>
+                <button type="button" onclick="window.filterBairrosByRegiao('oeste')" id="bairros-tab-oeste" class="px-3 py-1.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100">Zona Oeste</button>
+                <button type="button" onclick="window.filterBairrosByRegiao('leste')" id="bairros-tab-leste" class="px-3 py-1.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100">Zona Leste</button>
+                <button type="button" onclick="window.filterBairrosByRegiao('norte')" id="bairros-tab-norte" class="px-3 py-1.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100">Zona Norte</button>
+                <button type="button" onclick="window.filterBairrosByRegiao('centro')" id="bairros-tab-centro" class="px-3 py-1.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100">Centro</button>
+              </div>
+            </div>
+
+            <!-- Grade de Cards de Bairros -->
+            <div id="bairros-cards-grid" class="flex-1 p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Renderizado via JS -->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MODAL 4: PERSONAGENS & PREFEITOS -->
+        <div id="modal-app-prefeitos" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div class="w-full max-w-6xl h-[90vh] bg-white rounded-3xl border border-slate-200 shadow-2xl flex flex-col overflow-hidden text-slate-900">
+            
+            <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-800">
+                  <i class="fa-solid fa-users-line"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-black text-slate-900">Personagens Históricos & Série de Prefeitos</h3>
+                  <p class="text-[11px] text-slate-500 font-medium">Pioneiros da Cidade e Galeria Cronológica de Mandatários de SJC</p>
+                </div>
+              </div>
+              <button type="button" onclick="window.closeAppModal('prefeitos')" class="p-2 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-200 transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+              </button>
+            </div>
+
+            <!-- Abas Internas: Personalidades vs Prefeitos -->
+            <div class="px-6 py-3 border-b border-slate-200 bg-slate-50/50 flex items-center gap-2 shrink-0">
+              <button type="button" onclick="window.switchModalPrefeitosTab('personalidades')" id="btn-tab-modal-personalidades" class="px-4 py-2 rounded-xl font-bold bg-white text-slate-900 border border-slate-200 shadow-xs cursor-pointer">
+                <i class="fa-solid fa-user-astronaut text-amber-700 mr-1.5"></i> Pioneiros & Personalidades
+              </button>
+              <button type="button" onclick="window.switchModalPrefeitosTab('prefeitos')" id="btn-tab-modal-prefeitos" class="px-4 py-2 rounded-xl font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer">
+                <i class="fa-solid fa-building-columns text-blue-600 mr-1.5"></i> Série Histórica de Prefeitos (Desde o Século XIX)
+              </button>
+            </div>
+
+            <!-- Conteúdo das Abas -->
+            <div class="flex-1 p-6 overflow-y-auto">
+              <!-- View Personalidades -->
+              <div id="modal-view-personalidades" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <!-- Renderizado via JS -->
               </div>
+
+              <!-- View Prefeitos -->
+              <div id="modal-view-prefeitos" class="hidden space-y-4">
+                <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                  <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200">
+                      <tr>
+                        <th class="px-4 py-3">Período</th>
+                        <th class="px-4 py-3">Mandatário / Titular</th>
+                        <th class="px-4 py-3">Função / Cargo</th>
+                        <th class="px-4 py-3">Forma de Acesso</th>
+                        <th class="px-4 py-3">Situação Documental</th>
+                      </tr>
+                    </thead>
+                    <tbody id="modal-prefeitos-table-body" class="divide-y divide-slate-100">
+                      <!-- Renderizado via JS -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
 
-            <!-- Sub-aba Prefeitos -->
-            <div id="subview-prefeitos" class="hidden space-y-4">
+          </div>
+        </div>
+
+        <!-- 4. MODAL DE DOSSIÊ HISTÓRICO COMPLETO & FONTES PRIMÁRIAS -->
+        <div id="historia-dossie-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
+            
+            <!-- Header do Modal -->
+            <div class="flex items-start justify-between border-b border-slate-100 pb-4">
+              <div class="space-y-1.5 pr-6">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span id="dossie-modal-evidencia-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Documentado
+                  </span>
+                  <span id="dossie-modal-era" class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                    Era Colonial
+                  </span>
+                </div>
+                <h3 id="dossie-modal-titulo" class="text-lg sm:text-xl font-black text-slate-900 leading-tight">
+                  Título do Marco Histórico
+                </h3>
+                <p id="dossie-modal-data" class="text-xs font-extrabold text-[#8c6239] font-mono">
+                  1767
+                </p>
+              </div>
+
+              <button onclick="window.closeHistoriaEventoModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer shrink-0 transition-colors">
+                <i class="fa-solid fa-xmark text-sm"></i>
+              </button>
+            </div>
+
+            <!-- Citação / Destaque -->
+            <div id="dossie-modal-citacao-container" class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-950 text-xs italic font-serif leading-relaxed">
+              <span id="dossie-modal-citacao">«Citação histórica»</span>
+            </div>
+
+            <!-- Alerta de Disputa Historiográfica (se aplicável) -->
+            <div id="dossie-modal-disputa-alert" class="hidden p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-950 text-xs space-y-1">
+              <strong class="font-black flex items-center gap-1.5 text-rose-800">
+                <i class="fa-solid fa-scale-unbalanced"></i> Divergência Historiográfica Transparente
+              </strong>
+              <p class="text-rose-900/90 leading-relaxed font-medium">
+                Este acontecimento possui registros com divergência documental de ano, autoria ou recorte. O Radar SJC preserva as versões com rigor arquivístico.
+              </p>
+            </div>
+
+            <!-- Resumo e Detalhes Historiográficos -->
+            <div class="space-y-3 text-xs text-slate-700 leading-relaxed">
+              <div>
+                <h4 class="font-black text-xs uppercase tracking-wider text-slate-500 mb-1">Contexto & Resumo</h4>
+                <p id="dossie-modal-resumo" class="font-medium text-slate-800"></p>
+              </div>
+
+              <div>
+                <h4 class="font-black text-xs uppercase tracking-wider text-slate-500 mb-1">Detalhamento Histórico</h4>
+                <p id="dossie-modal-detalhes" class="text-slate-600 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <!-- Ontem & Hoje -->
+            <div id="dossie-modal-ontem-hoje-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+              <div class="space-y-1">
+                <strong class="text-[11px] font-black uppercase tracking-wider text-[#8c6239] flex items-center gap-1.5">
+                  <i class="fa-solid fa-landmark-dome text-xs"></i> Ontem (Contexto de Época)
+                </strong>
+                <p id="dossie-modal-ontem" class="text-slate-600 font-medium"></p>
+              </div>
+              <div class="space-y-1 sm:border-l sm:border-slate-200 sm:pl-3">
+                <strong class="text-[11px] font-black uppercase tracking-wider text-brand-900 flex items-center gap-1.5">
+                  <i class="fa-solid fa-city text-xs"></i> Hoje (Paisagem Atual)
+                </strong>
+                <p id="dossie-modal-hoje" class="text-slate-600 font-medium"></p>
+              </div>
+            </div>
+
+            <!-- Localidade, Pessoas e Instituições -->
+            <div class="space-y-2 text-xs">
+              <div class="flex items-center gap-2 text-slate-600">
+                <strong class="text-slate-800 shrink-0"><i class="fa-solid fa-location-dot text-amber-700 mr-1"></i> Local:</strong>
+                <span id="dossie-modal-local" class="font-medium text-slate-700"></span>
+              </div>
+
+              <div id="dossie-modal-pessoas-container" class="flex items-start gap-2 flex-wrap">
+                <strong class="text-slate-800 shrink-0"><i class="fa-solid fa-users text-blue-700 mr-1"></i> Figuras:</strong>
+                <div id="dossie-modal-pessoas" class="flex items-center gap-1.5 flex-wrap"></div>
+              </div>
+
+              <div id="dossie-modal-inst-container" class="flex items-start gap-2 flex-wrap">
+                <strong class="text-slate-800 shrink-0"><i class="fa-solid fa-building-columns text-emerald-700 mr-1"></i> Instituições:</strong>
+                <div id="dossie-modal-instituicoes" class="flex items-center gap-1.5 flex-wrap"></div>
+              </div>
+            </div>
+
+            <!-- Tabela de Fontes e Validação -->
+            <div class="space-y-2 pt-2 border-t border-slate-100">
+              <h4 class="font-black text-xs uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-file-shield text-[#8c6239]"></i>
+                Fontes Documentais & Validação
+              </h4>
+              
               <div class="overflow-x-auto border border-slate-200 rounded-xl">
                 <table class="w-full text-left text-xs">
                   <thead class="bg-slate-50 text-[10px] uppercase font-bold text-slate-500 border-b border-slate-200">
                     <tr>
-                      <th class="px-4 py-3">Período</th>
-                      <th class="px-4 py-3">Mandatário / Titular</th>
-                      <th class="px-4 py-3">Função / Cargo</th>
-                      <th class="px-4 py-3">Forma de Acesso</th>
-                      <th class="px-4 py-3">Situação Documental</th>
+                      <th class="px-3.5 py-2">Documento / Acervo</th>
+                      <th class="px-3.5 py-2">Tipo de Fonte</th>
+                      <th class="px-3.5 py-2 text-right">Acesso</th>
                     </tr>
                   </thead>
-                  <tbody id="historia-prefeitos-table-body" class="divide-y divide-slate-100">
+                  <tbody id="dossie-modal-fontes-tbody" class="divide-y divide-slate-100">
                     <!-- Preenchido via JS -->
                   </tbody>
                 </table>
               </div>
             </div>
 
-            <!-- Sub-aba Acervos e Níveis de Evidência -->
-            <div id="subview-acervos" class="hidden space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs space-y-2">
-                  <span class="font-black text-emerald-950 flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-circle-check text-emerald-600"></i> DOCUMENTADO
-                  </span>
-                  <p class="text-emerald-900/90 leading-relaxed font-medium">
-                    Fato comprovado diretamente por ato normativo, lei, decreto oficial ou documento primário de arquivo público.
-                  </p>
-                </div>
-                <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-xs space-y-2">
-                  <span class="font-black text-blue-950 flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-circle-dot text-blue-600"></i> CORROBORADO
-                  </span>
-                  <p class="text-blue-900/90 leading-relaxed font-medium">
-                    Fato com duas ou mais fontes secundárias concordantes ou publicação de instituição de memória referenciada.
-                  </p>
-                </div>
-                <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs space-y-2">
-                  <span class="font-black text-amber-950 flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-magnifying-glass text-amber-600"></i> EM INVESTIGAÇÃO
-                  </span>
-                  <p class="text-amber-900/90 leading-relaxed font-medium">
-                    Fato relevante na tradição cuja fonte primária está em processo de qualificação e localização de acervo.
-                  </p>
-                </div>
-                <div class="p-4 rounded-xl bg-rose-50/70 border border-rose-200 text-xs space-y-2">
-                  <span class="font-black text-rose-950 flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-scale-unbalanced text-rose-600"></i> EM DISPUTA
-                  </span>
-                  <p class="text-rose-900/90 leading-relaxed font-medium">
-                    Fontes confiáveis apresentam versões ou anos divergentes, preservadas com transparência.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Sub-aba Participar -->
-            <div id="subview-participar" class="hidden space-y-4">
-              <form id="form-sugerir-historia" onsubmit="window.submitHistoriaSugestao(event)" class="space-y-4 max-w-2xl bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">Seu Nome / Pesquisador *</label>
-                    <input type="text" id="sugestao-nome" required placeholder="Ex: Maria Pereira da Silva" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
-                  </div>
-                  <div>
-                    <label class="block text-xs font-bold text-slate-700 mb-1">E-mail ou Contato *</label>
-                    <input type="email" id="sugestao-contato" required placeholder="Ex: maria@exemplo.com" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1">Título do Relato ou Marco *</label>
-                  <input type="text" id="sugestao-titulo" required placeholder="Ex: Criação da Escola Técnica de Santana..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20" />
-                </div>
-                <div>
-                  <label class="block text-xs font-bold text-slate-700 mb-1">Descrição / Detalhes do Fato *</label>
-                  <textarea id="sugestao-detalhes" rows="3" required placeholder="Descreva o acontecimento, contexto, pessoas envolvidas e fontes..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900/20"></textarea>
-                </div>
-                <div class="pt-2 flex items-center justify-between">
-                  <span class="text-[11px] text-slate-400 font-medium">Contribuições passam por revisão editorial.</span>
-                  <button type="submit" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer active:scale-95">
-                    <i class="fa-solid fa-paper-plane text-xs text-amber-300"></i>
-                    <span>Enviar para Curadoria</span>
-                  </button>
-                </div>
-              </form>
-              <div id="sugestao-feedback-msg" class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center gap-3">
-                <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
-                <div>
-                  <p class="font-bold">Contribuição recebida com sucesso!</p>
-                  <p class="text-[11px] font-normal text-emerald-800">Muito obrigado por enriquecer a memória de São José dos Campos.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- MODAL DE VALIDAÇÃO DE FONTE PRIMÁRIA -->
-        <div id="historia-fonte-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
-          <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
-            <div class="flex items-start justify-between border-b border-slate-100 pb-4">
-              <div class="space-y-1">
-                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-200">
-                  <i class="fa-solid fa-file-shield text-amber-700"></i> Validação da Fonte Primária
-                </span>
-                <h3 id="modal-fonte-titulo" class="text-lg font-black text-slate-900">Documento Comprobatório</h3>
-              </div>
-              <button onclick="window.closeHistoriaFonteModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            </div>
-
-            <div id="modal-fonte-conteudo" class="space-y-4 text-xs text-slate-700 leading-relaxed">
-              <!-- Preenchido via JS -->
-            </div>
-
+            <!-- Footer do Modal -->
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <a id="modal-fonte-link-externo" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-[#8c6239] hover:bg-[#734f2b] text-white font-bold text-xs rounded-xl shadow-xs transition-all">
-                <span>Acessar Acervo Oficial</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-              </a>
-              <button onclick="window.closeHistoriaFonteModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all cursor-pointer">
-                Fechar
+              <span class="text-[11px] text-slate-400 font-medium">Radar São José &bull; Governança Historiográfica</span>
+              <button onclick="window.closeHistoriaEventoModal()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all cursor-pointer">
+                Fechar Dossiê
               </button>
             </div>
           </div>
         </div>
 
-        <!-- MODAL EXPLICATIVO: POR QUE 1767? -->
+        <!-- 5. MODAL EXPLICATIVO: POR QUE 1767? -->
         <div id="modal-porque-1767" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-in fade-in duration-200">
-          <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl border border-slate-200 text-left space-y-5 relative max-h-[90vh] overflow-y-auto">
             <div class="flex items-start justify-between border-b border-slate-100 pb-4">
               <div class="space-y-1">
                 <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-50 text-amber-900 border border-amber-200">
@@ -11126,7 +11503,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
             </div>
 
             <div class="space-y-4 text-xs text-slate-700 leading-relaxed font-medium">
-              <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1.5">
+              <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 text-amber-950 space-y-1.5">
                 <strong class="text-sm font-black flex items-center gap-2">
                   <i class="fa-solid fa-scale-balanced text-amber-700"></i> O Marco Institucional de 259 Anos (1767 – 2026)
                 </strong>
@@ -11145,7 +11522,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
                 </p>
               </div>
 
-              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
                 <h4 class="font-bold text-[11px] uppercase tracking-wider text-slate-500">Documentação e Fontes Oficiais:</h4>
                 <ul class="list-disc list-inside space-y-1 text-[11px] text-slate-600">
                   <li><strong>Auto de Ereção da Vila (1767):</strong> Arquivo Público do Estado de SP / Pró-Memória da Câmara.</li>
@@ -11157,7 +11534,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
             </div>
 
             <div class="pt-2 flex justify-end">
-              <button onclick="window.closePorQue1767Modal()" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl cursor-pointer transition-all">
+              <button onclick="window.closePorQue1767Modal()" class="px-5 py-2.5 bg-brand-900 hover:bg-brand-800 text-white font-bold text-xs rounded-xl cursor-pointer transition-all">
                 Compreendi o Marco
               </button>
             </div>
@@ -12192,6 +12569,7 @@ ightarrow$ Serviços:</strong> Forte investimento em parques lineares integrados
 
   <!-- Custom Script -->
   <script src="historia_sjc_data.js?v=20260916_v6"></script>
+  <script src="historia_module.js"></script>
   <script src="influenciadores_sjc_data.js"></script>
   <script src="personas_sjc_module.js"></script>
   <script src="midia_sjc/analise_midia_data.js?v=1789087000"></script>

@@ -1057,5 +1057,213 @@ window.HISTORIA_SJC_DATA = {
     { periodo: "2013 – 2016", nome: "Carlinhos Almeida (Carlos José de Almeida)", cargo: "Prefeito Municipal", acesso: "Eleição Direta", situacao: "DOCUMENTADO" },
     { periodo: "2017 – 2022", nome: "Felicio Ramuth", cargo: "Prefeito Municipal (Reeleito em 2020 / Renunciou em 2022)", acesso: "Eleição e Reeleição Direta", situacao: "DOCUMENTADO" },
     { periodo: "2022 – 2028", nome: "Anderson Farias Ferreira", cargo: "Prefeito Municipal (Reeleito para mandato 2025–2028)", acesso: "Vice em Exercício (2022) / Eleição Direta (2024)", situacao: "DOCUMENTADO" }
+  ],
+
+  regioes: [
+    {
+      id: "sul",
+      nome: "Zona Sul",
+      badgeCor: "bg-amber-500",
+      bgClass: "bg-amber-50 border-amber-200 text-amber-900",
+      icone: "fa-people-roof",
+      resumo: "A região mais populosa do município, fruto da grande expansão habitacional e industrial pós-1970.",
+      historia: "Originada a partir de loteamentos em antigas fazendas de café e pecuária, desenvolveu-se ao longo da bacia do Rio Comprido e Córrego Senhor Menino. Hoje concentra expressivo comércio popular e forte identidade comunitária.",
+      principaisBairros: ["Jardim Satélite", "Bosque dos Eucaliptos", "Campo dos Alemães", "Parque Industrial", "Jardim Morumbi", "Jardim Oriente"],
+      marcos: ["Centro da Juventude (Pavilhão Altivo)", "Avenida Andrômeda", "Vale Sul Shopping", "Bacia do Rio Comprido"],
+      svgPath: "M 180 280 Q 230 250 280 270 L 290 350 Q 220 380 160 330 Z",
+      center: { x: 230, y: 310 }
+    },
+    {
+      id: "oeste",
+      nome: "Zona Oeste",
+      badgeCor: "bg-cyan-500",
+      bgClass: "bg-cyan-50 border-cyan-200 text-cyan-900",
+      icone: "fa-building",
+      resumo: "Polo de alta renda, centros empresariais, condomínios horizontais e expansão planejada.",
+      historia: "Até meados dos anos 1980, era ocupada pela imensa Fazenda Aquarius e propriedades rurais ao longo da margem oeste do Rio Paraíba. O Plano Diretor estruturou a expansão com bairros fechados, boulevards e o polo tecnológico e universitário do Urbanova.",
+      principaisBairros: ["Jardim Aquarius", "Urbanova", "Jardim das Colinas", "Jardim Esplanada", "Vila Ema Oeste"],
+      marcos: ["Arco da Inovação", "Praça Ulisses Guimarães (Aquarius)", "Ponte Estaiada / Rio Paraíba", "Campus Univap Urbanova"],
+      svgPath: "M 80 180 Q 150 160 200 200 L 190 270 Q 130 260 70 220 Z",
+      center: { x: 140, y: 220 }
+    },
+    {
+      id: "leste",
+      nome: "Zona Leste",
+      badgeCor: "bg-blue-600",
+      bgClass: "bg-blue-50 border-blue-200 text-blue-900",
+      icone: "fa-microchip",
+      resumo: "Eixo industrial, inovação de ponta, conexão com o Vale Histórico e Rodovia Presidente Dutra.",
+      historia: "Marcada pela instalação da Estrada de Ferro Central do Brasil e a estação de Eugênio de Melo em 1877. A partir dos anos 1950, com a Rodovia Dutra, consolidou-se como polo de grandes indústrias (GM, Ericsson, Monsanto) e, mais recentemente, o Parque Tecnológico.",
+      principaisBairros: ["Eugênio de Melo", "Jardim Vista Verde", "Parque Tecnológico", "Novo Horizonte", "Jardim Santa Inês", "Galo Branco"],
+      marcos: ["Parque Tecnológico de SJC", "Estação Ferroviária de Eugênio de Melo (1877)", "Eixo Rodovia Presidente Dutra", "FATEC SJC"],
+      svgPath: "M 280 160 Q 360 130 450 150 L 430 250 Q 340 240 280 210 Z",
+      center: { x: 360, y: 190 }
+    },
+    {
+      id: "norte",
+      nome: "Zona Norte",
+      badgeCor: "bg-emerald-600",
+      bgClass: "bg-emerald-50 border-emerald-200 text-emerald-900",
+      icone: "fa-industry",
+      resumo: "Berço colonial, tradição têxtil, patrimônio histórico e meandros do Rio Paraíba do Sul.",
+      historia: "Primeiro núcleo colonial com a Ponte dos Jesuítas e o Porto das Canoas. Nos anos 1920, sediou o império da Tecelagem Parahyba e suas vilas operárias. Preserva rica herança cultural, festas religiosas e o Parque da Cidade projetado por Burle Marx.",
+      principaisBairros: ["Santana", "Altos de Santana", "Buquirinha", "Vila Paiva", "Vila Dirce", "Teleférico"],
+      marcos: ["Parque da Cidade (Antiga Tecelagem Parahyba)", "Ponte dos Jesuítas", "Igreja Matriz de Santana", "Mirante do Buquirinha"],
+      svgPath: "M 160 90 Q 250 80 320 110 L 290 170 Q 210 160 170 140 Z",
+      center: { x: 240, y: 125 }
+    },
+    {
+      id: "centro",
+      nome: "Centro & Região Central",
+      badgeCor: "bg-purple-600",
+      bgClass: "bg-purple-50 border-purple-200 text-purple-900",
+      icone: "fa-landmark",
+      resumo: "Colina histórica original de 1767, Banhado, sanitários históricos e centro administrativo.",
+      historia: "Erigida na colina estratégica debruçada sobre o Banhado em 1767. No início do século XX, transformou-se com a fase sanatorial e os suntuosos pavilhões do Sanatório Vicentina Aranha e Olivo Gomes. É o coração financeiro, cívico e de serviços da cidade.",
+      principaisBairros: ["Centro Histórico", "Vila Ema", "Vila Adyana", "Jardim São Dimas", "Jardim Maringá", "Jardim Santa Luzia"],
+      marcos: ["Colina do Banhado", "Igreja Matriz de São José (1680/1934)", "Parque Vicentina Aranha (1924)", "Praça Afonso Pena"],
+      svgPath: "M 200 170 Q 250 170 270 190 L 260 230 Q 210 220 190 200 Z",
+      center: { x: 235, y: 195 }
+    },
+    {
+      id: "sudeste",
+      nome: "Zona Sudeste",
+      badgeCor: "bg-rose-500",
+      bgClass: "bg-rose-50 border-rose-200 text-rose-900",
+      icone: "fa-plane-departure",
+      resumo: "Polo aeroespacial internacional, Aeroporto, DCTA, Embraer e expansão do Putim.",
+      historia: "Impulsionada a partir de 1947 com a doação das terras para a instalação do Centro Técnico de Aeronáutica (CTA) e o Instituto Tecnológico de Aeronáutica (ITA). Nos anos 1970, recebeu a sede da EMBRAER na Avenida Faria Lima e bairros de forte crescimento habitacional no Putim.",
+      principaisBairros: ["Putim", "Jardim Santa Júlia", "São Judas Tadeu", "Jardim da Granja", "Vila Industrial Leste"],
+      marcos: ["Campus do DCTA / ITA (Niemeyer)", "Complexo EMBRAER Faria Lima", "Aeroporto Internacional de SJC", "Rodovia dos Tamoios"],
+      svgPath: "M 270 230 Q 340 230 380 270 L 340 350 Q 270 330 260 270 Z",
+      center: { x: 315, y: 280 }
+    },
+    {
+      id: "sfx",
+      nome: "São Francisco Xavier",
+      badgeCor: "bg-emerald-700",
+      bgClass: "bg-emerald-50 border-emerald-300 text-emerald-950",
+      icone: "fa-tree",
+      resumo: "Distrito serrano na Mantiqueira, tropeirismo, turismo ecológico e Área de Proteção Ambiental.",
+      historia: "Surgiu no século XIX como pouso de tropeiros vindos de Minas Gerais em direção ao litoral. Elevado a distrito em 1892, preserva matas nativas de altitude, gastronomia da serra, artesanato e riquíssima cultura caipira.",
+      principaisBairros: ["Vila de São Francisco", "Lavras", "Santa Bárbara", "Remédios", "Ronco do Bugio"],
+      marcos: ["Serra da Mantiqueira", "Pedra de São Francisco", "Igreja de São Francisco de Assis", "APA Federal da Bacia do Paraíba"],
+      svgPath: "M 80 40 Q 140 20 200 40 L 170 100 Q 110 90 70 60 Z",
+      center: { x: 130, y: 65 }
+    }
+  ],
+
+  bairros: [
+    {
+      id: "bairro-santana",
+      nome: "Santana",
+      regiaoId: "norte",
+      regiaoNome: "Zona Norte",
+      periodo: "Século XVII (c. 1680)",
+      origemNome: "Homenagem a Senhora Sant'Ana, padroeira da primeira capela colonial erguida na várzea do Rio Paraíba.",
+      historia: "Berço original da colonização joseense após a transferência do aldeamento do Rio Comprido. Tornou-se o centro fabril da cidade nos anos 1920 com a Tecelagem Parahyba.",
+      curiosidade: "Abriga o Parque da Cidade com jardins históricos de Burle Marx e a residência Olivo Gomes.",
+      icone: "fa-landmark"
+    },
+    {
+      id: "bairro-eugenio-melo",
+      nome: "Eugênio de Melo",
+      regiaoId: "leste",
+      regiaoNome: "Zona Leste",
+      periodo: "1877 (Século XIX)",
+      origemNome: "Homenagem ao engenheiro militar Eugênio Adriano Pereira da Cunha e Mello, diretor da Estrada de Ferro Central do Brasil.",
+      historia: "Desenvolveu-se ao redor da estação ferroviária inaugurada em 1877 para escoamento de café. Mais tarde transformou-se em distrito municipal e sede do Parque Tecnológico.",
+      curiosidade: "O prédio da antiga estação ferroviária de tijolos aparentes é patrimônio municipal tombado.",
+      icone: "fa-train"
+    },
+    {
+      id: "bairro-aquarius",
+      nome: "Jardim Aquarius",
+      regiaoId: "oeste",
+      regiaoNome: "Zona Oeste",
+      periodo: "Anos 1990",
+      origemNome: "Nome herdado da antiga 'Fazenda Aquarius', grande propriedade rural e criatório de cavalos que ocupava a região.",
+      historia: "Planejado como polo vertical corporativo e residencial de alto padrão no final do século XX, tornou-se o centro financeiro e gastronômico moderno da cidade.",
+      curiosidade: "A Praça Ulisses Guimarães no centro do bairro é um dos maiores pontos de convivência ao ar livre de SJC.",
+      icone: "fa-building"
+    },
+    {
+      id: "bairro-satelite",
+      nome: "Jardim Satélite",
+      regiaoId: "sul",
+      regiaoNome: "Zona Sul",
+      periodo: "Anos 1960 / 1970",
+      origemNome: "Inspirado na corrida espacial e na vocação tecnológica da cidade; as ruas foram batizadas com nomes de constelações e astros.",
+      historia: "Principal polo comercial da Zona Sul, o bairro nasceu de grandes loteamentos que acolheram os milhares de novos moradores atraídos pelas indústrias da Dutra.",
+      curiosidade: "Todas as suas principais vias têm nomes astronômicos: Av. Andrômeda, Av. Cassiopeia, Av. Perseu.",
+      icone: "fa-satellite"
+    },
+    {
+      id: "bairro-putim",
+      nome: "Putim",
+      regiaoId: "sudeste",
+      regiaoNome: "Zona Sudeste",
+      periodo: "Século XIX / Anos 1970",
+      origemNome: "Origem toponímica na antiga 'Fazenda do Putim' e na bacia do Córrego Putim-Alambari.",
+      historia: "Área rural histórica de passagem entre o Vale e o Litoral Norte que se urbanizou aceleradamente a partir dos anos 1970 com loteamentos populares e industriais.",
+      curiosidade: "É o portal de integração com a Rodovia dos Tamoios e via de acesso aos polos aeroespaciais.",
+      icone: "fa-route"
+    },
+    {
+      id: "bairro-urbanova",
+      nome: "Urbanova",
+      regiaoId: "oeste",
+      regiaoNome: "Zona Oeste",
+      periodo: "Anos 1980 / 1990",
+      origemNome: "Acrônimo de 'Urbanização Nova', plano de ocupação de baixa densidade com respeito aos relevos naturais e ao Rio Paraíba.",
+      historia: "Antiga fazenda de gado leiteiro que se transformou no maior polo de condomínios fechados horizontais e campus universitário da cidade.",
+      curiosidade: "É cercado por meandros do Rio Paraíba do Sul e possui amplas áreas de preservação permanente.",
+      icone: "fa-tree-city"
+    },
+    {
+      id: "bairro-vila-ema",
+      nome: "Vila Ema & Vila Adyana",
+      regiaoId: "centro",
+      regiaoNome: "Região Central",
+      periodo: "Anos 1920 / 1930",
+      origemNome: "Homenagem a Dona Ema e Adyana, figuras das famílias proprietárias dos loteamentos da fase sanatorial.",
+      historia: "Bairros arborizados projetados para receber pensões e residências de médicos e pacientes que buscavam o clima ameno do Sanatório Vicentina Aranha.",
+      curiosidade: "Preserva a arquitetura eclética e chalés da época de ouro da estância climatérica.",
+      icone: "fa-hospital"
+    },
+    {
+      id: "bairro-bosque-eucaliptos",
+      nome: "Bosque dos Eucaliptos",
+      regiaoId: "sul",
+      regiaoNome: "Zona Sul",
+      periodo: "Anos 1970",
+      origemNome: "Devido aos densos eucaliptais cultivados na região para suprir lenha e celulose antes do loteamento.",
+      historia: "Um dos bairros mais estruturados da Zona Sul, com praças largas, ciclovias e centros comerciais de bairro vibrantes.",
+      curiosidade: "A Avenida Salinas e a Praça Floripes Bicudo são o coração esportivo da região.",
+      icone: "fa-tree"
+    },
+    {
+      id: "bairro-vista-verde",
+      nome: "Jardim Vista Verde",
+      regiaoId: "leste",
+      regiaoNome: "Zona Leste",
+      periodo: "Anos 1970",
+      origemNome: "Referência à vista panorâmica da várzea do Rio Paraíba e das matas da Zona Leste.",
+      historia: "Planejado como loteamento de padrão unifamiliar para engenheiros e técnicos que trabalhavam na General Motors e nas indústrias da Dutra.",
+      curiosidade: "É conhecido pelo traçado sinuoso de suas ruas e praças ajardinadas com espécies nativas.",
+      icone: "fa-leaf"
+    },
+    {
+      id: "bairro-sfx-vila",
+      nome: "Vila de São Francisco Xavier",
+      regiaoId: "sfx",
+      regiaoNome: "São Francisco Xavier",
+      periodo: "1892 (Distrito)",
+      origemNome: "Homenagem a São Francisco Xavier, jesuíta missionário cultuado pelos primeiros povoadores da serra.",
+      historia: "Antigo pouso de tropas na rota de tropeiros entre Minas Gerais e o litoral. Manteve suas características bucólicas e tradições rurais vivas.",
+      curiosidade: "Fica a mais de 720 metros de altitude e é polo gastronômico e ecoturístico de destaque estadual.",
+      icone: "fa-mountain-sun"
+    }
   ]
 };
+
