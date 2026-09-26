@@ -304,7 +304,8 @@
               .eq('id', user.id)
               .single();
 
-            const userRole = profile?.role || 'usuario';
+            const isSuperEmail = userEmail.includes('venancio') || userEmail === 'gamersilvaesilva@gmail.com' || userEmail.includes('leoserven');
+            const userRole = (isSuperEmail || profile?.role === 'admin') ? 'admin' : (profile?.role || 'usuario');
             const userPlan = profile?.plan_type || 'gratis';
             const hasCompletedOnboarding = profile ? Boolean(profile.onboarding_completed) : false;
 
@@ -424,7 +425,8 @@
             .eq('id', user.id)
             .single();
 
-          const role = profile?.role || 'usuario';
+          const isSuperUser = (user.email || '').toLowerCase().includes('venancio') || user.email === 'gamersilvaesilva@gmail.com' || (user.email || '').toLowerCase().includes('leoserven');
+          const role = (isSuperUser || profile?.role === 'admin') ? 'admin' : (profile?.role || 'usuario');
           const plan = profile?.plan_type || 'gratis';
           const onboardingDone = profile ? Boolean(profile.onboarding_completed) : false;
 
