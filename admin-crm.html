@@ -3458,10 +3458,7 @@
           <!-- KPI 1: Universo Filtrado -->
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between min-h-[130px]">
             <div class="flex items-center justify-between gap-2">
-              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Universo Filtrado</span>
-              <div class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xs shrink-0 shadow-2xs">
-                <i class="fa-solid fa-building"></i>
-              </div>
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Total de Empresas</span>
             </div>
             <div class="py-1 space-y-0.5">
               <strong id="kpiTotalEmpresas" class="text-3xl font-black text-slate-900 tracking-tight leading-none block"><span class="skeleton-shimmer h-8 w-28 inline-block"></span></strong>
@@ -3473,9 +3470,6 @@
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between min-h-[130px]">
             <div class="flex items-center justify-between gap-2">
               <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Capital Social</span>
-              <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs shrink-0 shadow-2xs">
-                <i class="fa-solid fa-sack-dollar"></i>
-              </div>
             </div>
             <div class="py-1 space-y-0.5">
               <strong id="kpiCapitalTotal" class="text-3xl font-black text-slate-900 tracking-tight leading-none block truncate" title="Capital Social Total"><span class="skeleton-shimmer h-8 w-32 inline-block"></span></strong>
@@ -3490,9 +3484,6 @@
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between min-h-[130px]">
             <div class="flex items-center justify-between gap-2">
               <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Maturidade CNPJ</span>
-              <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs shrink-0 shadow-2xs">
-                <i class="fa-solid fa-calendar-check"></i>
-              </div>
             </div>
             <div class="py-1 space-y-0.5">
               <div class="flex items-baseline gap-1">
@@ -3509,10 +3500,7 @@
           <!-- KPI 4: Formalização MEI -->
           <div class="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between min-h-[130px]">
             <div class="flex items-center justify-between gap-2">
-              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Formalização MEI</span>
-              <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xs shrink-0 shadow-2xs">
-                <i class="fa-solid fa-scale-balanced"></i>
-              </div>
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Porcentagem de MEI's</span>
             </div>
             <div class="py-1 space-y-0.5">
               <div class="flex items-baseline gap-1">
@@ -3537,259 +3525,81 @@
               <p class="text-xs text-slate-500">Consulte detalhadamente os CNPJs ativos, contatos e responsáveis conforme os filtros territoriais e setoriais</p>
             </div>
 
-            <!-- Busca Rápida Debounced -->
-            <div class="flex items-center gap-2">
-              <div class="relative w-64 sm:w-80">
+                        <!-- Ações da Tabela (Busca, Exportação e Paginação) -->
+            <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+              <div class="relative w-full sm:w-64">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                 <input type="text" id="filterSearchTable" placeholder="Buscar por Razão, Fantasia, CNPJ ou Contato..." 
                        class="w-full pl-9 pr-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none" />
               </div>
-              <span id="tableRecordsCountBadge" class="px-3 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-black shrink-0">
-                0 registros
-              </span>
-            </div>
-          </div>
+              
+              <div class="flex items-center gap-2 shrink-0">
+                <!-- Contador -->
+                <span id="tableRecordsCountBadge" class="hidden sm:inline-block px-3 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-black shrink-0">
+                  0 registros
+                </span>
 
-          <!-- Tabela de Empresas -->
-          <div class="overflow-x-auto rounded-2xl border border-slate-100 custom-scrollbar">
-            <table id="tableEmpresasSjc" class="w-full text-left text-xs border-collapse">
-              <thead class="sticky top-0 bg-slate-50 border-b border-slate-200 z-10 select-none">
-                <tr class="text-[10px] font-black uppercase tracking-wider text-slate-500">
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('cnpj')" data-sort-col="cnpj" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por CNPJ">
-                      <span>CNPJ</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('razao_social')" data-sort-col="razao_social" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por Razão Social">
-                      <span>Razão Social / Fantasia</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('nome_responsavel')" data-sort-col="nome_responsavel" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por Responsável">
-                      <span>Responsável</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('telefone')" data-sort-col="telefone" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por Telefone">
-                      <span>Telefone</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('email')" data-sort-col="email" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por E-mail">
-                      <span>E-mail</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('bairro')" data-sort-col="bairro" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por Bairro">
-                      <span>Bairro</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5">
-                    <button type="button" onclick="window.sortTableBy('setor_cnae_codigo')" data-sort-col="setor_cnae_codigo" class="sort-header-btn group flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap" title="Ordenar por Macro-Setor">
-                      <span>Macro-Setor</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5 text-right">
-                    <button type="button" onclick="window.sortTableBy('capital_social')" data-sort-col="capital_social" class="sort-header-btn group flex items-center justify-end gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap w-full" title="Ordenar por Capital Social">
-                      <span>Capital Social</span>
-                      <i class="fa-solid fa-sort-down text-[11px] text-blue-600"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5 text-center">
-                    <button type="button" onclick="window.sortTableBy('porte')" data-sort-col="porte" class="sort-header-btn group flex items-center justify-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap w-full" title="Ordenar por Porte">
-                      <span>Porte</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5 text-center">
-                    <button type="button" onclick="window.sortTableBy('data_inicio_atividade')" data-sort-col="data_inicio_atividade" class="sort-header-btn group flex items-center justify-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap w-full" title="Ordenar por Idade">
-                      <span>Idade</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                  <th class="py-3 px-3.5 text-center">
-                    <button type="button" onclick="window.sortTableBy('opcao_mei')" data-sort-col="opcao_mei" class="sort-header-btn group flex items-center justify-center gap-1.5 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap w-full" title="Ordenar por Regime">
-                      <span>Regime</span>
-                      <i class="fa-solid fa-sort text-[10px] text-slate-300 group-hover:text-blue-500"></i>
-                    </button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody id="tableEmpresasSjcBody" class="divide-y divide-slate-100">
-                <!-- Registros via JS -->
-              </tbody>
-            </table>
-          </div>
+                <!-- Paginação Superior -->
+                <button type="button" id="tableBtnPrevTop" class="px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold uppercase transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer" title="Página Anterior">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button type="button" id="tableBtnNextTop" class="px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold uppercase transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer" title="Próxima Página">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
 
-          <!-- Paginação Server-Side -->
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-3 border-t border-slate-100 text-xs">
-            <div id="tableCurrentPageIndicator" class="font-bold text-slate-500">
-              Página 1 de 1
-            </div>
-
-            <div class="flex items-center gap-2">
-              <button type="button" id="tableBtnPrev" class="px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold uppercase tracking-wider transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
-                <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
-              </button>
-              <button type="button" id="tableBtnNext" class="px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold uppercase tracking-wider transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
-                Próxima <i class="fa-solid fa-chevron-right ml-1"></i>
-              </button>
-            </div>
+                <!-- Baixar CSV -->
+                <button type="button" id="btnExportCsv" onclick="window.exportFilteredEmpresasCSV()" class="px-3 py-2 rounded-xl border border-slate-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold flex items-center gap-2 transition-colors cursor-pointer" title="Baixar registros filtrados em CSV">
+                  <i class="fa-solid fa-file-csv"></i>
+                  <span class="hidden lg:inline">CSV</span>
+                </button>
+              </div>
+            </div></div>
           </div>
         </div>
 
-        <!-- 3. BLOCO: MAPA STREET-LEVEL & FATURAMENTO PRESUMIDO (GRÁFICO DE BARRAS) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- 4. BLOCO: FATURAMENTO, DISTRIBUIÇÃO E RANKING (3 COLUNAS) -->
+        <div id="sec-macro-setores" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
-          <!-- MAPA STREET-LEVEL (7 Colunas - Visual Apple Maps & Heatmap) -->
-          <div id="sec-mapa" class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-2xs p-5 sm:p-6 flex flex-col h-full">
-            <div class="map-card-header flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3 shrink-0">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
-                  <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Geolocalização & Densidade Empresarial</h3>
-                </div>
-                <p class="text-xs text-slate-500 mt-0.5">Plotagem territorial de São José dos Campos com modos executivos de visualização</p>
-              </div>
-
-              <!-- Ações do Mapa -->
-              <div class="flex items-center gap-2">
-                <span id="mapTotalPolosBadge" class="px-2.5 py-1 rounded-xl bg-slate-100 text-slate-700 text-xs font-black shrink-0">
-                  125.647 Empresas em SJC
-                </span>
-                <button type="button" id="btnMapResetZoom" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all shadow-xs cursor-pointer flex items-center gap-1.5" title="Centralizar Mapa">
-                  <i class="fa-solid fa-crosshairs text-blue-600 text-xs"></i>
-                  <span>Centralizar SJC</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Barra de Modos de Visualização & Regiões de SJC -->
-            <div class="flex flex-wrap items-center justify-between gap-2 pt-2.5 pb-1 shrink-0">
-              <!-- Modos de Visualização -->
-              <div class="inline-flex p-0.5 bg-slate-100/90 border border-slate-200/80 rounded-xl text-xs font-bold shadow-2xs">
-                <button type="button" id="btnMapModeClusters" onclick="window.setMapVisualizationMode('clusters')" class="map-mode-btn px-2.5 py-1 rounded-lg transition-all bg-white text-slate-900 shadow-xs cursor-pointer">
-                  <i class="fa-solid fa-circle-nodes text-blue-600 mr-1"></i> Clusters
-                </button>
-                <button type="button" id="btnMapModeHeatmap" onclick="window.setMapVisualizationMode('heatmap')" class="map-mode-btn px-2.5 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-900 cursor-pointer">
-                  <i class="fa-solid fa-fire text-amber-500 mr-1"></i> Calor
-                </button>
-                <button type="button" id="btnMapModeMacro" onclick="window.setMapVisualizationMode('macro')" class="map-mode-btn px-2.5 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-900 cursor-pointer">
-                  <i class="fa-solid fa-map text-emerald-600 mr-1"></i> Macrozonas
-                </button>
-              </div>
-
-              <!-- Atalhos por Região -->
-              <div class="flex items-center gap-1 overflow-x-auto no-scrollbar text-[11px] font-semibold">
-                <button type="button" onclick="window.flyToRegion('ALL')" class="region-pill px-2 py-0.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors cursor-pointer">Toda SJC</button>
-                <button type="button" onclick="window.flyToRegion('SUL')" class="region-pill px-2 py-0.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors cursor-pointer">Sul</button>
-                <button type="button" onclick="window.flyToRegion('OESTE')" class="region-pill px-2 py-0.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors cursor-pointer">Oeste</button>
-                <button type="button" onclick="window.flyToRegion('CENTRO')" class="region-pill px-2 py-0.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors cursor-pointer">Centro</button>
-                <button type="button" onclick="window.flyToRegion('LESTE')" class="region-pill px-2 py-0.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors cursor-pointer">Leste</button>
-                <button type="button" onclick="window.flyToRegion('NORTE')" class="region-pill px-2 py-0.5 rounded-lg border border-slate-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 transition-colors cursor-pointer">Norte</button>
-              </div>
-            </div>
-
-            <!-- Busca Rápida no Mapa e Container Leaflet (Apple Maps Look) -->
-            <div class="map-wrapper relative flex-1 flex flex-col min-h-[500px] w-full mt-2">
-              <div id="marketIntelMap" class="flex-1 w-full min-h-[500px] rounded-2xl border border-slate-200/90 bg-slate-100 overflow-hidden relative shadow-sm z-10" style="min-height: 500px; flex-grow: 1;"></div>
-              
-              <!-- Map Skeleton Loader (Initial Load) -->
-              <div id="mapSkeleton" class="absolute inset-0 skeleton-shimmer flex items-center justify-center z-15 pointer-events-none rounded-2xl transition-opacity duration-300">
-                <div class="flex items-center gap-2 text-slate-400 font-semibold text-xs bg-white/80 backdrop-blur-xs px-3.5 py-2 rounded-xl shadow-xs">
-                  <i class="fa-solid fa-map-location-dot animate-pulse text-blue-600"></i>
-                  <span>Carregando dados territoriais...</span>
-                </div>
-              </div>
-
-              <!-- Busca Flutuante Sobre o Mapa -->
-              <div class="absolute top-3 right-3 z-20">
-                <div class="relative">
-                  <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                  <input type="text" id="mapSearchBairroInput" placeholder="Ir para bairro ou rua..." 
-                         class="pl-9 pr-3.5 py-1.5 bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-md shadow-slate-200/60 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 w-56 transition-all" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Carrossel de Bairros Principais de SJC (Sem poluir a tela do mapa) -->
-            <div class="pt-2 shrink-0">
-              <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1">
-                <span class="font-bold flex items-center gap-1"><i class="fa-solid fa-location-crosshairs text-blue-600"></i> Principais Polos Empresariais (Clique para aproximar):</span>
-              </div>
-              <div id="mapBairroQuickStrip" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-                <!-- Injetado dinamicamente via JS com pills limpas dos bairros de SJC -->
-              </div>
-            </div>
-
-            <!-- Legenda Apple Maps Street-Level -->
-            <div class="map-card-legend flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-500 pt-2.5 mt-2 border-t border-slate-100 shrink-0">
-              <div id="mapLegendItems" class="flex items-center gap-3.5 flex-wrap">
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#007AFF] inline-block shadow-xs"></span> <b class="text-slate-800">TI & Serviços</b></span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#34C759] inline-block shadow-xs"></span> <b class="text-slate-800">Comércio</b></span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF9500] inline-block shadow-xs"></span> <b class="text-slate-800">Indústria & Constr.</b></span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#AF52DE] inline-block shadow-xs"></span> <b class="text-slate-800">Saúde</b></span>
-                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#FF2D55] inline-block shadow-xs"></span> <b class="text-slate-800">Alimentação</b></span>
-              </div>
-              <span id="mapInteractionModeNote" class="text-[10px] text-blue-700 font-bold bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md inline-flex items-center gap-1 shrink-0">
-                <i class="fa-solid fa-circle-nodes text-[9px] text-blue-600"></i> Agrupamento dinâmico (Aproxime para ver cada rua)
-              </span>
-            </div>
-          </div>
-
-          <!-- FATURAMENTO PRESUMIDO: GRÁFICO DE BARRAS (5 Colunas) -->
-          <div id="sec-treemap" class="lg:col-span-5 bg-white rounded-3xl border border-slate-200 shadow-2xs p-5 sm:p-6 flex flex-col h-full justify-between">
+          <!-- FATURAMENTO PRESUMIDO -->
+          <div id="sec-treemap" class="bg-white rounded-3xl border border-slate-200 shadow-2xs p-5 sm:p-6 flex flex-col h-full space-y-4">
             <div class="border-b border-slate-100 pb-3 shrink-0">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
                 <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Faturamento Presumido</h3>
               </div>
-              <p class="text-xs text-slate-500 mt-0.5">Distribuição estimada por porte fiscal e faixa de faturamento anual (clique na barra para filtrar)</p>
+              <p class="text-xs text-slate-500 mt-0.5">Distribuição estimada por porte fiscal e faixa de faturamento anual</p>
             </div>
-
-            <!-- Gráfico de Barras Chart.js -->
-            <div class="h-60 relative flex items-center justify-center my-2 shrink-0">
+            <div class="h-64 relative flex items-center justify-center flex-grow">
               <canvas id="chartFaturamentoBarras"></canvas>
             </div>
-
-            <!-- Lista Sumária das 4 Faixas -->
-            <div id="faturamentoSummaryList" class="space-y-2 pt-3 border-t border-slate-100 shrink-0">
-              <!-- Injetado dinamicamente via JS -->
-            </div>
+            <div id="faturamentoSummaryList" class="hidden"></div>
           </div>
-        </div>
 
-        <!-- 4. DISTRIBUIÇÃO POR MACRO-SETORES (IBGE) & RANKING - DIRETAMENTE ABAIXO DA TABELA -->
-        <div id="sec-macro-setores" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 shadow-2xs p-6 space-y-4">
-            <div class="border-b border-slate-100 pb-3">
+          <!-- DISTRIBUIÇÃO POR MACRO-SETORES -->
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-2xs p-5 sm:p-6 flex flex-col h-full space-y-4">
+            <div class="border-b border-slate-100 pb-3 shrink-0">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
                 <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Distribuição por Macro-Setores</h3>
               </div>
               <p class="text-xs text-slate-500 mt-0.5">Participação percentual dos principais segmentos de mercado</p>
             </div>
-
-            <div class="h-64 relative flex items-center justify-center">
+            <div class="h-64 relative flex items-center justify-center flex-grow">
               <canvas id="chartMacroSetoresPizza"></canvas>
             </div>
-            <div id="macroSetoresLegendContainer" class="flex flex-wrap gap-2 pt-2 text-xs"></div>
+            <div id="macroSetoresLegendContainer" class="flex flex-wrap gap-2 pt-2 text-xs shrink-0"></div>
           </div>
 
-          <div class="lg:col-span-5 bg-white rounded-3xl border border-slate-200 shadow-2xs p-6 space-y-4">
-            <div class="border-b border-slate-100 pb-3">
-              <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Ranking dos Principais Segmentos</h3>
+          <!-- RANKING DOS PRINCIPAIS SEGMENTOS -->
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-2xs p-5 sm:p-6 flex flex-col h-full space-y-4">
+            <div class="border-b border-slate-100 pb-3 shrink-0">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                <h3 class="text-sm font-black text-slate-900 uppercase tracking-wider">Ranking dos Principais Segmentos</h3>
+              </div>
               <p class="text-xs text-slate-500 mt-0.5">Volume absoluto e participação de mercado em SJC</p>
             </div>
-            <div id="macroSetoresRankingList" class="space-y-2.5 overflow-y-auto max-h-80 custom-scrollbar pr-1"></div>
+            <div id="macroSetoresRankingList" class="space-y-2.5 overflow-y-auto h-64 custom-scrollbar pr-1 flex-grow"></div>
           </div>
         </div>
 

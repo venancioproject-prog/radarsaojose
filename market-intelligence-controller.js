@@ -3235,22 +3235,27 @@
     // Paginação da Tabela
     const btnPrev = document.getElementById('tableBtnPrev');
     const btnNext = document.getElementById('tableBtnNext');
-    if (btnPrev) {
-      btnPrev.addEventListener('click', () => {
-        if (MarketIntelState.pagination.page > 1) {
-          MarketIntelState.pagination.page--;
-          loadPaginatedTable();
-        }
-      });
-    }
-    if (btnNext) {
-      btnNext.addEventListener('click', () => {
-        if (MarketIntelState.pagination.page < MarketIntelState.pagination.totalPages) {
-          MarketIntelState.pagination.page++;
-          loadPaginatedTable();
-        }
-      });
-    }
+    const btnPrevTop = document.getElementById('tableBtnPrevTop');
+    const btnNextTop = document.getElementById('tableBtnNextTop');
+
+    const handlePrev = () => {
+      if (MarketIntelState.pagination.page > 1) {
+        MarketIntelState.pagination.page--;
+        loadPaginatedTable();
+      }
+    };
+
+    const handleNext = () => {
+      if (MarketIntelState.pagination.page < MarketIntelState.pagination.totalPages) {
+        MarketIntelState.pagination.page++;
+        loadPaginatedTable();
+      }
+    };
+
+    if (btnPrev) btnPrev.addEventListener('click', handlePrev);
+    if (btnNext) btnNext.addEventListener('click', handleNext);
+    if (btnPrevTop) btnPrevTop.addEventListener('click', handlePrev);
+    if (btnNextTop) btnNextTop.addEventListener('click', handleNext);
   }
 
   // 12. RESET COMPLETO DE FILTROS (SINGLE SOURCE OF TRUTH + TOM SELECT API)
