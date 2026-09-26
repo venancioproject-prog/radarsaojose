@@ -893,7 +893,7 @@
           
           <button type="button" onclick="switchTab('blog')" id="nav-blog" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
             <i class="fa-solid fa-newspaper text-base text-slate-400 w-5"></i>
-            <span>Blog & Posts (CMS)</span>
+            <span>Redação</span>
           </button>
 
           <button type="button" onclick="switchTab('plan')" id="nav-plan" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
@@ -1253,27 +1253,16 @@
         <!-- ==================== TAB 2: BLOG CMS & POSTS (GEO/E-E-A-T & CLOUD STORAGE) ==================== -->
     <div id="tab-blog" class="tab-content hidden flex-1 flex flex-col">
       
-      <!-- BLOG SUB-HEADER / TOOLBAR -->
-      <div class="bg-white border-b border-slate-200 px-6 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 sticky top-0 z-20 shadow-2xs">
-        <div class="flex items-center gap-3">
-          <div>
-            <div class="flex items-center gap-2 text-[11px] font-bold text-cyan-700 uppercase tracking-wider mb-1">
-              <i class="fa-solid fa-feather-pointed"></i>
-              <span>CMS Editorial & SEO Intelligence • São José dos Campos</span>
-            </div>
-            <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
-              <span>Gestão do Blog & CMS em Nuvem</span>
-              <span id="dbStatusBadge" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Supabase Conectado
-              </span>
-            </h1>
-            <p class="text-xs text-slate-500 font-medium hidden sm:block">Editor Rich Text, upload em nuvem (Vercel/Supabase Storage) e otimização para AI Overviews</p>
-          </div>
+      <!-- REDAÇÃO SUB-HEADER / TOOLBAR (ALTURA IDÊNTICA AO PLANO DE NEGÓCIOS) -->
+      <div id="blogTopActionBar" class="bg-white border-b border-slate-200/80 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between gap-4 sticky top-0 z-20 shadow-2xs">
+        <div class="min-w-0">
+          <h1 class="text-[17px] sm:text-[19px] font-bold text-slate-900 tracking-tight leading-snug">
+            Redação
+          </h1>
         </div>
 
         <div class="flex items-center gap-3">
-          <button onclick="openNewPostModal()" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-cyan-500/20 transition-all">
+          <button onclick="openNewPostModal()" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-cyan-500/20 transition-all cursor-pointer">
             <i class="fa-solid fa-plus text-slate-950"></i>
             <span>Nova Matéria</span>
           </button>
@@ -1329,16 +1318,16 @@
 
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs hover:shadow-md transition-shadow">
             <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Visualizações Totais</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Número de Editorias</span>
               <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-lg">
-                <i class="fa-solid fa-chart-line"></i>
+                <i class="fa-solid fa-layer-group"></i>
               </div>
             </div>
             <div class="flex items-baseline gap-2">
-              <span class="text-2xl sm:text-3xl font-black text-purple-600" id="blogTotalViews">0</span>
-              <span class="inline-flex items-center text-xs font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Acumulado</span>
+              <span class="text-2xl sm:text-3xl font-black text-purple-600" id="blogTotalCategories">6</span>
+              <span class="inline-flex items-center text-xs font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full">Ativas</span>
             </div>
-            <p class="text-[11px] text-slate-400 mt-2 font-medium">Tráfego orgânico e citações em IAs</p>
+            <p class="text-[11px] text-slate-400 mt-2 font-medium">Categorias editoriais ativas no portal</p>
           </div>
         </section>
 
@@ -7413,11 +7402,22 @@
       const total = totalCount || allPosts.length;
       const publishedCount = allPosts.filter(p => p.status === 'published').length;
       const draftCount = allPosts.filter(p => p.status === 'draft').length;
-      let totalViews = allPosts.reduce((acc, p) => acc + (parseInt(p.views_count) || 0), 0);
+
+      // Calcular número de editorias ativas no acervo
+      const defaultCategories = ['Tecnologia', 'Mobilidade', 'Moradia', 'Emprego', 'Cidade', 'Cultura'];
+      const uniqueCats = new Set(defaultCategories);
+      if (Array.isArray(allPosts)) {
+        allPosts.forEach(p => {
+          if (p.category && p.category.trim()) {
+            uniqueCats.add(p.category.trim());
+          }
+        });
+      }
 
       const totalEl = document.getElementById('blogTotalPosts');
       const pubEl = document.getElementById('blogPublishedPosts');
       const draftEl = document.getElementById('blogDraftPosts');
+      const catEl = document.getElementById('blogTotalCategories');
       const viewsEl = document.getElementById('blogTotalViews');
       const showCountEl = document.getElementById('showingPostsCount');
       const totalCountEl = document.getElementById('totalPostsCount');
@@ -7425,7 +7425,8 @@
       if (totalEl) totalEl.innerText = total;
       if (pubEl) pubEl.innerText = publishedCount;
       if (draftEl) draftEl.innerText = draftCount;
-      if (viewsEl) viewsEl.innerText = (totalViews > 0 ? totalViews.toLocaleString('pt-BR') : '78.640');
+      if (catEl) catEl.innerText = uniqueCats.size;
+      if (viewsEl) viewsEl.innerText = uniqueCats.size;
       
       if (showCountEl) {
         const start = total === 0 ? 0 : startIndex + 1;
