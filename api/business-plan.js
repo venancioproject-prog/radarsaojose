@@ -239,6 +239,49 @@ function simulateScenarios(basePlan) {
 /**
  * Validação rigorosa do Capital Social (deve somar 100%)
  */
+
+// =========================================================================
+// CRONOGRAMA FINANCEIRO MÊS A MÊS (15 MESES: OUT/2026 A DEZ/2027)
+// =========================================================================
+
+const DEFAULT_MONTHLY_TIMELINE = [
+  { month: "Out/2026", newSubs: 2, totalSubs: 2, mrr: 2000, servicesRev: 2500, grossRev: 4500, varCosts: 950, fixedCosts: 13500, netProfit: -9950, cumulativeCash: -9950, milestone: "🚀 Lançamento Oficial (Operação Enxuta Leo + Mayumi)" },
+  { month: "Nov/2026", newSubs: 2, totalSubs: 4, mrr: 4000, servicesRev: 8000, grossRev: 12000, varCosts: 2400, fixedCosts: 13500, netProfit: -3900, cumulativeCash: -13850, milestone: "Ativação dos primeiros corretores parceiros em SJC" },
+  { month: "Dez/2026", newSubs: 2, totalSubs: 6, mrr: 6000, servicesRev: 15000, grossRev: 21000, varCosts: 4200, fixedCosts: 13500, netProfit: 3300, cumulativeCash: -10550, milestone: "🎯 Ponto de Equilíbrio Atingido (Empresa já dá lucro no 3º mês!)" },
+  { month: "Jan/2027", newSubs: 3, totalSubs: 9, mrr: 9000, servicesRev: 10500, grossRev: 19500, varCosts: 3900, fixedCosts: 15500, netProfit: 100, cumulativeCash: -10450, milestone: "👤 Contratação 1: Assistente de Suporte e Vendas (+R$ 2.000)" },
+  { month: "Fev/2027", newSubs: 3, totalSubs: 12, mrr: 12000, servicesRev: 10500, grossRev: 22500, varCosts: 4500, fixedCosts: 15500, netProfit: 2500, cumulativeCash: -7950, milestone: "Aceleração de prospecção nas Zonas Oeste e Sul" },
+  { month: "Mar/2027", newSubs: 3, totalSubs: 15, mrr: 15000, servicesRev: 16000, grossRev: 31000, varCosts: 6200, fixedCosts: 15500, netProfit: 9300, milestone: "Projetos de Inteligência Aplicada com construtoras de SJC" },
+  { month: "Abr/2027", newSubs: 3, totalSubs: 18, mrr: 18000, servicesRev: 13000, grossRev: 31000, varCosts: 6200, fixedCosts: 15500, netProfit: 9300, cumulativeCash: 10650, milestone: "Receita recorrente supera R$ 18.000 / mês e caixa vira positivo!" },
+  { month: "Mai/2027", newSubs: 4, totalSubs: 22, mrr: 22000, servicesRev: 18000, grossRev: 40000, varCosts: 8000, fixedCosts: 15500, netProfit: 16500, cumulativeCash: 27150, milestone: "Forte penetração em clínicas do Aquarius e Vila Ema" },
+  { month: "Jun/2027", newSubs: 4, totalSubs: 26, mrr: 26000, servicesRev: 20500, grossRev: 46500, varCosts: 9300, fixedCosts: 18000, netProfit: 19200, cumulativeCash: 46350, milestone: "✍️ Contratação 2: Redator / Jornalista de Dados (+R$ 2.500)" },
+  { month: "Jul/2027", newSubs: 4, totalSubs: 30, mrr: 30000, servicesRev: 18000, grossRev: 48000, varCosts: 9600, fixedCosts: 18000, netProfit: 20400, cumulativeCash: 66750, milestone: "🎯 Marca de 30 Assinantes Anuais superada!" },
+  { month: "Ago/2027", newSubs: 4, totalSubs: 34, mrr: 34000, servicesRev: 22000, grossRev: 56000, varCosts: 11200, fixedCosts: 18000, netProfit: 26800, cumulativeCash: 93550, milestone: "Lucro líquido mensal supera R$ 26.000 no bolso" },
+  { month: "Set/2027", newSubs: 4, totalSubs: 38, mrr: 38000, servicesRev: 18000, grossRev: 56000, varCosts: 11200, fixedCosts: 18000, netProfit: 26800, cumulativeCash: 120350, milestone: "1 Ano Completo: Primeiras renovações da edição 2026/2027" },
+  { month: "Out/2027", newSubs: 4, totalSubs: 42, mrr: 42000, servicesRev: 24000, grossRev: 66000, varCosts: 13200, fixedCosts: 20000, netProfit: 32800, cumulativeCash: 153150, milestone: "Início da transição física de espaço próprio independente do Studio 8" },
+  { month: "Nov/2027", newSubs: 4, totalSubs: 46, mrr: 46000, servicesRev: 20000, grossRev: 66000, varCosts: 13200, fixedCosts: 20000, netProfit: 32800, cumulativeCash: 185950, milestone: "Campanha especial corporativa para planejamento 2028" },
+  { month: "Dez/2027", newSubs: 4, totalSubs: 50, mrr: 50000, servicesRev: 28000, grossRev: 78000, varCosts: 15600, fixedCosts: 20000, netProfit: 42400, cumulativeCash: 228350, milestone: "🏆 Fechamento 2027: 50 Clientes Anuais | R$ 50k MRR | R$ 42k Lucro Mensal" }
+];
+
+function calculateMonthlyTimeline(customTimeline = []) {
+  const rows = (customTimeline && customTimeline.length > 0) ? customTimeline : DEFAULT_MONTHLY_TIMELINE;
+  let runningCash = 0;
+  return rows.map((r, i) => {
+    const grossRev = Number(r.grossRev || ((Number(r.mrr) || 0) + (Number(r.servicesRev) || 0)));
+    const varCosts = Number(r.varCosts || Math.round(grossRev * 0.20));
+    const fixedCosts = Number(r.fixedCosts || 15000);
+    const netProfit = Number(r.netProfit !== undefined ? r.netProfit : (grossRev - varCosts - fixedCosts));
+    runningCash += netProfit;
+    return {
+      ...r,
+      grossRev,
+      varCosts,
+      fixedCosts,
+      netProfit,
+      cumulativeCash: runningCash
+    };
+  });
+}
+
 function validateCapitalDistribution(partners = []) {
   if (!Array.isArray(partners) || partners.length === 0) {
     return { valid: false, sum: 0, message: "Pelo menos um sócio deve ser cadastrado." };
@@ -370,6 +413,7 @@ const SEED_FALLBACK_PLAN = {
     ]
   },
   financial_plan: {
+    monthly_timeline: DEFAULT_MONTHLY_TIMELINE,
     capex_investments: [
       { item: "Notebooks de Alta Performance (Apple M3 / Dell XPS)", qty: 2, unit_val: 12000, total: 24000 },
       { item: "Estações de Trabalho Ergonômicas & Monitores 4K", qty: 2, unit_val: 4500, total: 9000 },
@@ -583,3 +627,6 @@ module.exports.calculateFinancialIndicators = calculateFinancialIndicators;
 module.exports.simulateScenarios = simulateScenarios;
 module.exports.validateCapitalDistribution = validateCapitalDistribution;
 module.exports.SEED_FALLBACK_PLAN = SEED_FALLBACK_PLAN;
+
+module.exports.DEFAULT_MONTHLY_TIMELINE = DEFAULT_MONTHLY_TIMELINE;
+module.exports.calculateMonthlyTimeline = calculateMonthlyTimeline;
