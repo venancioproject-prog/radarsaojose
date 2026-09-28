@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "data": [
+    {
+      "idRegiao": 12,
+      "codRegiao": 12,
+      "nome": "Araçatuba"
+    },
+    {
+      "idRegiao": 6,
+      "codRegiao": 6,
+      "nome": "Bauru"
+    },
+    {
+      "idRegiao": 4,
+      "codRegiao": 4,
+      "nome": "Campinas"
+    },
+    {
+      "idRegiao": 1,
+      "codRegiao": 1,
+      "nome": "Capital"
+    },
+    {
+      "idRegiao": 2,
+      "codRegiao": 2,
+      "nome": "Grande São Paulo (exclui a Capital)"
+    },
+    {
+      "idRegiao": 11,
+      "codRegiao": 11,
+      "nome": "Piracicaba"
+    },
+    {
+      "idRegiao": 10,
+      "codRegiao": 10,
+      "nome": "Presidente Prudente"
+    },
+    {
+      "idRegiao": 5,
+      "codRegiao": 5,
+      "nome": "Ribeirão Preto"
+    },
+    {
+      "idRegiao": 8,
+      "codRegiao": 8,
+      "nome": "Santos"
+    },
+    {
+      "idRegiao": 7,
+      "codRegiao": 7,
+      "nome": "São José do Rio Preto"
+    },
+    {
+      "idRegiao": 3,
+      "codRegiao": 3,
+      "nome": "São José dos Campos"
+    },
+    {
+      "idRegiao": 9,
+      "codRegiao": 9,
+      "nome": "Sorocaba"
+    }
+  ]
+}

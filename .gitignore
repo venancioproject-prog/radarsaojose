@@ -65,6 +65,11 @@ entrada_*.txt
 commands.json
 *.sql
 *.py
+!scripts/ai_data_auditor.py
+!scripts/homologation_test.py
+!scripts/test_saude_auditoria.py
+!scripts/test_seguranca_auditoria.py
+temp_shp/
 build_clean_app.js
 gerar_csv.js
 inject_missing_filters.js

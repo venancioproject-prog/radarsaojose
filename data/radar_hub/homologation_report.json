@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-09-28 01:13:06",
+  "total_viewports_tested": 4,
+  "target_load_time_ms": 150.0,
+  "viewports": [
+    {
+      "name": "Mobile Compacto (iPhone SE)",
+      "width": 375,
+      "height": 667,
+      "is_visible": true,
+      "horizontal_overflow": false,
+      "kpi_pop_value": "",
+      "audit_status_badge": "Auditado & Confirmado",
+      "axis_pills_count": 0
+    },
+    {
+      "name": "Mobile Standard (iPhone 12/13/14)",
+      "width": 390,
+      "height": 844,
+      "is_visible": true,
+      "horizontal_overflow": false,
+      "kpi_pop_value": "",
+      "audit_status_badge": "Auditado & Confirmado",
+      "axis_pills_count": 0
+    },
+    {
+      "name": "Mobile Large (iPhone Plus/Max)",
+      "width": 414,
+      "height": 896,
+      "is_visible": true,
+      "horizontal_overflow": false,
+      "kpi_pop_value": "",
+      "audit_status_badge": "Auditado & Confirmado",
+      "axis_pills_count": 0
+    },
+    {
+      "name": "Desktop / Laptop Padrão",
+      "width": 1366,
+      "height": 768,
+      "is_visible": true,
+      "horizontal_overflow": false,
+      "kpi_pop_value": "",
+      "audit_status_badge": "Auditado & Confirmado",
+      "axis_pills_count": 0
+    }
+  ],
+  "performance": {
+    "avgMs": 0.12,
+    "maxMs": 0.6,
+    "minMs": 0,
+    "runs": [
+      0.5999999046325684,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "functional_checks": {
+    "benchmarkCardsCount": 6,
+    "canvasCount": 15,
+    "drawerIndicatorVal": "697054 habitantes",
+    "totalCanvases": 16
+  }
+}

@@ -1,0 +1,4311 @@
+{
+  "municipio": {
+    "nome": "São José dos Campos",
+    "codigo_ibge": 3549904,
+    "uf": "SP",
+    "regiao_geografica_intermediaria": "São José dos Campos",
+    "regiao_metropolitana": "Região Metropolitana do Vale do Paraíba e Litoral Norte (RMVale)",
+    "area_territorial_km2": 1099.494,
+    "aniversario": "27 de Julho (fundação 1767)",
+    "altitude_media_metros": 660,
+    "fuso_horario": "UTC-3 (Horário de Brasília)"
+  },
+  "eixos": {
+    "demografia": {
+      "populacao_censo_2022": {
+        "total": 697054,
+        "valor": 697054,
+        "unidade": "habitantes",
+        "ano_referencia": 2022,
+        "nota": "População oficial final apurada pelo IBGE no Censo Demográfico 2022.",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4714 / IBGE Cidades)",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27"
+      },
+      "populacao_estimada_2024": {
+        "total": 724756,
+        "valor": 724756,
+        "unidade": "habitantes",
+        "ano_referencia": 2024,
+        "nota": "Estimativa populacional oficial calculada pelo IBGE e publicada no Diário Oficial da União em 29/08/2024 com referência a 1º de julho de 2024.",
+        "fonte_nome": "IBGE - Estimativas da População Residente 2024 (DOU)",
+        "fonte_url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html",
+        "data_consulta": "2026-09-27"
+      },
+      "populacao_estimada_2026": {
+        "total": 729153,
+        "valor": 729153,
+        "unidade": "habitantes",
+        "ano_referencia": 2026,
+        "nota": "Estimativa populacional oficial registrada no portal IBGE Cidades para 2026.",
+        "fonte_nome": "IBGE Cidades - Projeções e Estimativas Oficiais",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27"
+      },
+      "domicilios_censo_2022_total": {
+        "total": 282214,
+        "valor": 282214,
+        "unidade": "domicílios",
+        "ano_referencia": 2022,
+        "nota": "Total de domicílios recenseados pelo IBGE no Censo Demográfico 2022.",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+        "data_consulta": "2026-09-27"
+      },
+      "domicilios_particulares_ocupados": {
+        "total": 247894,
+        "valor": 247894,
+        "unidade": "domicílios ocupados",
+        "ano_referencia": 2022,
+        "nota": "Domicílios particulares permanentes ocupados pelo Censo 2022 (87,84% do total recenseado).",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711 / Tabela 4712)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+        "data_consulta": "2026-09-27"
+      },
+      "domicilios_nao_ocupados": {
+        "total": 33978,
+        "vagos": 24667,
+        "uso_ocasional": 9311,
+        "pct_total": 12.04,
+        "ano_referencia": 2022,
+        "nota": "Domicílios particulares permanentes não ocupados: 24.667 vagos (8,74%) e 9.311 de uso ocasional (3,30%).",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+        "data_consulta": "2026-09-27"
+      },
+      "media_moradores_domicilio": {
+        "valor": 2.8,
+        "unidade": "moradores/domicílio",
+        "ano_referencia": 2022,
+        "comparacao_2010": 3.23,
+        "nota": "Média de moradores em domicílios particulares permanentes ocupados (2,80 em 2022 contra 3,23 em 2010).",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4712) e Censo 2010 (SIDRA Tabela 3152)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/4712",
+        "data_consulta": "2026-09-27"
+      },
+      "area_territorial_km2": {
+        "valor": 1099.494,
+        "unidade": "km²",
+        "urbana_km2": 353.9,
+        "rural_km2": 745.7,
+        "ano_referencia": 2025,
+        "nota": "Área territorial oficial calculada pelo IBGE (1.099,494 km²), sendo 353,9 km² urbanos e 745,7 km² rurais.",
+        "fonte_nome": "IBGE - Quadro Territorial Oficial / Prefeitura de SJC (São José em Dados, Território)",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27"
+      },
+      "densidade_demografica_hab_km2": {
+        "valor": 634.03,
+        "unidade": "hab/km²",
+        "ano_referencia": 2022,
+        "nota": "Densidade demográfica apurada no Censo 2022 (634,03 habitantes por km²).",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4714 / IBGE Cidades)",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27"
+      },
+      "distribuicao_sexo": {
+        "mulheres": 361695,
+        "homens": 335359,
+        "mulheres_pct": 51.9,
+        "homens_pct": 48.1,
+        "razao_sexo_homens_por_100_mulheres": 92.72,
+        "ano_referencia": 2022,
+        "nota": "População residente por sexo apurada no Censo 2022. Razão de sexo de 92,72 homens para cada 100 mulheres.",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9514 / Tabela 9515)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9514",
+        "data_consulta": "2026-09-27"
+      },
+      "distribuicao_cor_raca_censo_2022": {
+        "ano_referencia": 2022,
+        "categorias": [
+          {
+            "cor_raca": "Branca",
+            "populacao": 462603,
+            "pct": 66.4
+          },
+          {
+            "cor_raca": "Parda",
+            "populacao": 181647,
+            "pct": 26.1
+          },
+          {
+            "cor_raca": "Preta",
+            "populacao": 43136,
+            "pct": 6.2
+          },
+          {
+            "cor_raca": "Amarela",
+            "populacao": 9008,
+            "pct": 1.3
+          },
+          {
+            "cor_raca": "Indígena",
+            "populacao": 629,
+            "pct": 0.1
+          }
+        ],
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9605)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9605",
+        "data_consulta": "2026-09-27"
+      },
+      "indicadores_transicao_demografica": {
+        "idade_mediana": 36,
+        "idade_mediana_2010": 31,
+        "idade_mediana_2000": 27,
+        "idade_mediana_brasil": 35,
+        "indice_envelhecimento_ibge": 62.48,
+        "razao_dependencia_total_pct": 41.2,
+        "razao_sexo": 92.72,
+        "definicao_envelhecimento": "Razão de pessoas com 65 anos ou mais de idade para cada 100 pessoas de 0 a 14 anos de idade.",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9515)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9515",
+        "data_consulta": "2026-09-27"
+      },
+      "piramides_etarias_censos": {
+        "2000": {
+          "ano": 2000,
+          "populacao_total": 539313,
+          "homens_total": 266470,
+          "mulheres_total": 272843,
+          "metricas": {
+            "idade_mediana": "27 anos",
+            "indice_envelhecimento": "15,92",
+            "razao_sexo": "97,66",
+            "razao_dependencia": "46,87%"
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": 1642,
+              "mulheres": 2514,
+              "total": 4156
+            },
+            {
+              "faixa": "75-79",
+              "homens": 1692,
+              "mulheres": 2463,
+              "total": 4155
+            },
+            {
+              "faixa": "70-74",
+              "homens": 2940,
+              "mulheres": 3741,
+              "total": 6681
+            },
+            {
+              "faixa": "65-69",
+              "homens": 3934,
+              "mulheres": 4711,
+              "total": 8645
+            },
+            {
+              "faixa": "60-64",
+              "homens": 5554,
+              "mulheres": 6301,
+              "total": 11855
+            },
+            {
+              "faixa": "55-59",
+              "homens": 8017,
+              "mulheres": 8175,
+              "total": 16192
+            },
+            {
+              "faixa": "50-54",
+              "homens": 12159,
+              "mulheres": 12039,
+              "total": 24198
+            },
+            {
+              "faixa": "45-49",
+              "homens": 16295,
+              "mulheres": 16485,
+              "total": 32780
+            },
+            {
+              "faixa": "40-44",
+              "homens": 19284,
+              "mulheres": 20091,
+              "total": 39375
+            },
+            {
+              "faixa": "35-39",
+              "homens": 20835,
+              "mulheres": 23000,
+              "total": 43835
+            },
+            {
+              "faixa": "30-34",
+              "homens": 21489,
+              "mulheres": 22473,
+              "total": 43962
+            },
+            {
+              "faixa": "25-29",
+              "homens": 22838,
+              "mulheres": 23393,
+              "total": 46231
+            },
+            {
+              "faixa": "20-24",
+              "homens": 26572,
+              "mulheres": 26276,
+              "total": 52848
+            },
+            {
+              "faixa": "15-19",
+              "homens": 27989,
+              "mulheres": 27929,
+              "total": 55918
+            },
+            {
+              "faixa": "10-14",
+              "homens": 26522,
+              "mulheres": 25831,
+              "total": 52353
+            },
+            {
+              "faixa": "5-9",
+              "homens": 24472,
+              "mulheres": 23992,
+              "total": 48464
+            },
+            {
+              "faixa": "0-4",
+              "homens": 24236,
+              "mulheres": 23429,
+              "total": 47665
+            }
+          ]
+        },
+        "2010": {
+          "ano": 2010,
+          "populacao_total": 629921,
+          "homens_total": 308623,
+          "mulheres_total": 321298,
+          "metricas": {
+            "idade_mediana": "31 anos",
+            "indice_envelhecimento": "28,31",
+            "razao_sexo": "96,06",
+            "razao_dependencia": "38,80%"
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": 2573,
+              "mulheres": 4501,
+              "total": 7074
+            },
+            {
+              "faixa": "75-79",
+              "homens": 3059,
+              "mulheres": 4099,
+              "total": 7158
+            },
+            {
+              "faixa": "70-74",
+              "homens": 4428,
+              "mulheres": 5816,
+              "total": 10244
+            },
+            {
+              "faixa": "65-69",
+              "homens": 6659,
+              "mulheres": 7717,
+              "total": 14376
+            },
+            {
+              "faixa": "60-64",
+              "homens": 11151,
+              "mulheres": 11902,
+              "total": 23053
+            },
+            {
+              "faixa": "55-59",
+              "homens": 15163,
+              "mulheres": 15361,
+              "total": 30524
+            },
+            {
+              "faixa": "50-54",
+              "homens": 18089,
+              "mulheres": 20704,
+              "total": 38793
+            },
+            {
+              "faixa": "45-49",
+              "homens": 20015,
+              "mulheres": 22757,
+              "total": 42772
+            },
+            {
+              "faixa": "40-44",
+              "homens": 21723,
+              "mulheres": 23432,
+              "total": 45155
+            },
+            {
+              "faixa": "35-39",
+              "homens": 23723,
+              "mulheres": 24909,
+              "total": 48632
+            },
+            {
+              "faixa": "30-34",
+              "homens": 27760,
+              "mulheres": 28480,
+              "total": 56240
+            },
+            {
+              "faixa": "25-29",
+              "homens": 29718,
+              "mulheres": 30564,
+              "total": 60282
+            },
+            {
+              "faixa": "20-24",
+              "homens": 28465,
+              "mulheres": 27886,
+              "total": 56351
+            },
+            {
+              "faixa": "15-19",
+              "homens": 26269,
+              "mulheres": 25753,
+              "total": 52022
+            },
+            {
+              "faixa": "10-14",
+              "homens": 26101,
+              "mulheres": 25174,
+              "total": 51275
+            },
+            {
+              "faixa": "5-9",
+              "homens": 22417,
+              "mulheres": 21285,
+              "total": 43702
+            },
+            {
+              "faixa": "0-4",
+              "homens": 21310,
+              "mulheres": 20958,
+              "total": 42268
+            }
+          ]
+        },
+        "2022": {
+          "ano": 2022,
+          "populacao_total": 697054,
+          "homens_total": 335359,
+          "mulheres_total": 361695,
+          "metricas": {
+            "idade_mediana": "36 anos",
+            "indice_envelhecimento": "62,48",
+            "razao_sexo": "92,72",
+            "razao_dependencia": "41,20%"
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": 5246,
+              "mulheres": 9025,
+              "total": 14271
+            },
+            {
+              "faixa": "75-79",
+              "homens": 5990,
+              "mulheres": 7828,
+              "total": 13818
+            },
+            {
+              "faixa": "70-74",
+              "homens": 9947,
+              "mulheres": 12226,
+              "total": 22173
+            },
+            {
+              "faixa": "65-69",
+              "homens": 13642,
+              "mulheres": 16600,
+              "total": 30242
+            },
+            {
+              "faixa": "60-64",
+              "homens": 16576,
+              "mulheres": 20413,
+              "total": 36989
+            },
+            {
+              "faixa": "55-59",
+              "homens": 18869,
+              "mulheres": 22468,
+              "total": 41337
+            },
+            {
+              "faixa": "50-54",
+              "homens": 21040,
+              "mulheres": 23437,
+              "total": 44477
+            },
+            {
+              "faixa": "45-49",
+              "homens": 23336,
+              "mulheres": 25827,
+              "total": 49163
+            },
+            {
+              "faixa": "40-44",
+              "homens": 28317,
+              "mulheres": 31141,
+              "total": 59458
+            },
+            {
+              "faixa": "35-39",
+              "homens": 27734,
+              "mulheres": 29870,
+              "total": 57604
+            },
+            {
+              "faixa": "30-34",
+              "homens": 26157,
+              "mulheres": 27780,
+              "total": 53937
+            },
+            {
+              "faixa": "25-29",
+              "homens": 24915,
+              "mulheres": 25640,
+              "total": 50555
+            },
+            {
+              "faixa": "20-24",
+              "homens": 25154,
+              "mulheres": 24652,
+              "total": 49806
+            },
+            {
+              "faixa": "15-19",
+              "homens": 22726,
+              "mulheres": 21643,
+              "total": 44369
+            },
+            {
+              "faixa": "10-14",
+              "homens": 22335,
+              "mulheres": 21573,
+              "total": 43908
+            },
+            {
+              "faixa": "5-9",
+              "homens": 22933,
+              "mulheres": 22027,
+              "total": 44960
+            },
+            {
+              "faixa": "0-4",
+              "homens": 20442,
+              "mulheres": 19545,
+              "total": 39987
+            }
+          ]
+        }
+      },
+      "serie_historica_populacao": [
+        {
+          "ano": 1970,
+          "populacao": 148332,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1970"
+        },
+        {
+          "ano": 1980,
+          "populacao": 287513,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1980"
+        },
+        {
+          "ano": 1991,
+          "populacao": 442370,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1991"
+        },
+        {
+          "ano": 2000,
+          "populacao": 539313,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2000"
+        },
+        {
+          "ano": 2010,
+          "populacao": 629921,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2010"
+        },
+        {
+          "ano": 2022,
+          "populacao": 697054,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2022"
+        },
+        {
+          "ano": 2024,
+          "populacao": 724756,
+          "tipo": "Estimativa Oficial",
+          "fonte": "IBGE Estimativa Populacional DOU 2024 (1/7/2024)"
+        },
+        {
+          "ano": 2026,
+          "populacao": 729153,
+          "tipo": "Estimativa Oficial",
+          "fonte": "IBGE Cidades Estimativa Oficial 2026"
+        }
+      ],
+      "crescimento_anual_intercensitario": [
+        {
+          "periodo": "1970-1980",
+          "anos": 10,
+          "pop_inicial": 148332,
+          "pop_final": 287513,
+          "taxa_anual_pct": 6.84
+        },
+        {
+          "periodo": "1980-1991",
+          "anos": 11,
+          "pop_inicial": 287513,
+          "pop_final": 442370,
+          "taxa_anual_pct": 3.98
+        },
+        {
+          "periodo": "1991-2000",
+          "anos": 9,
+          "pop_inicial": 442370,
+          "pop_final": 539313,
+          "taxa_anual_pct": 2.23
+        },
+        {
+          "periodo": "2000-2010",
+          "anos": 10,
+          "pop_inicial": 539313,
+          "pop_final": 629921,
+          "taxa_anual_pct": 1.56
+        },
+        {
+          "periodo": "2010-2022",
+          "anos": 12,
+          "pop_inicial": 629921,
+          "pop_final": 697054,
+          "taxa_anual_pct": 0.85
+        }
+      ],
+      "populacao_por_regiao_censo_2022": [
+        {
+          "regiao": "Região Sul",
+          "populacao": 237572,
+          "pct": 34.08
+        },
+        {
+          "regiao": "Região Leste",
+          "populacao": 181463,
+          "pct": 26.03
+        },
+        {
+          "regiao": "Região Centro",
+          "populacao": 72401,
+          "pct": 10.39
+        },
+        {
+          "regiao": "Região Oeste",
+          "populacao": 64482,
+          "pct": 9.25
+        },
+        {
+          "regiao": "Região Sudeste",
+          "populacao": 62541,
+          "pct": 8.97
+        },
+        {
+          "regiao": "Região Norte",
+          "populacao": 61940,
+          "pct": 8.89
+        },
+        {
+          "regiao": "Zona Rural",
+          "populacao": 15212,
+          "pct": 2.18
+        },
+        {
+          "regiao": "São Francisco Xavier (Núcleo)",
+          "populacao": 1443,
+          "pct": 0.21
+        }
+      ],
+      "ranking_setores_socioeconomicos_censo_2022": [
+        {
+          "posicao": 1,
+          "setor": "Morumbi",
+          "codigo": "15",
+          "regiao": "Sul",
+          "populacao": 62190,
+          "pct": 8.92,
+          "area_km2": 6.82,
+          "densidade_hab_km2": 9124.0,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 2,
+          "setor": "Campo dos Alemães",
+          "codigo": "12",
+          "regiao": "Sul",
+          "populacao": 56500,
+          "pct": 8.11,
+          "area_km2": 14.27,
+          "densidade_hab_km2": 3959.4,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 3,
+          "setor": "Novo Horizonte",
+          "codigo": "27",
+          "regiao": "Leste",
+          "populacao": 47193,
+          "pct": 6.77,
+          "area_km2": 15.58,
+          "densidade_hab_km2": 3029.7,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 4,
+          "setor": "Alto da Ponte",
+          "codigo": "01",
+          "regiao": "Norte",
+          "populacao": 40563,
+          "pct": 5.82,
+          "area_km2": 9.07,
+          "densidade_hab_km2": 4472.6,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 5,
+          "setor": "Vila Industrial",
+          "codigo": "05",
+          "regiao": "Leste",
+          "populacao": 39506,
+          "pct": 5.67,
+          "area_km2": 7.12,
+          "densidade_hab_km2": 5550.0,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 6,
+          "setor": "Putim/Setville",
+          "codigo": "29",
+          "regiao": "Sudeste",
+          "populacao": 38895,
+          "pct": 5.58,
+          "area_km2": 17.16,
+          "densidade_hab_km2": 2266.0,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 7,
+          "setor": "Parque Industrial",
+          "codigo": "16",
+          "regiao": "Sul",
+          "populacao": 38549,
+          "pct": 5.53,
+          "area_km2": 8.84,
+          "densidade_hab_km2": 4361.9,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 8,
+          "setor": "Bosque dos Eucaliptos",
+          "codigo": "13",
+          "regiao": "Sul",
+          "populacao": 33184,
+          "pct": 4.76,
+          "area_km2": 4.57,
+          "densidade_hab_km2": 7261.7,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 9,
+          "setor": "Jardim Satélite",
+          "codigo": "14",
+          "regiao": "Sul",
+          "populacao": 27804,
+          "pct": 3.99,
+          "area_km2": 3.8,
+          "densidade_hab_km2": 7317.5,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 10,
+          "setor": "Aquarius",
+          "codigo": "19",
+          "regiao": "Oeste",
+          "populacao": 25286,
+          "pct": 3.63,
+          "area_km2": 20.21,
+          "densidade_hab_km2": 1250.9,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        }
+      ],
+      "ranking_bairros_populosos": [
+        {
+          "posicao": 1,
+          "bairro": "Morumbi",
+          "regiao": "Sul",
+          "populacao": 62190,
+          "pct": 8.92
+        },
+        {
+          "posicao": 2,
+          "bairro": "Campo dos Alemães",
+          "regiao": "Sul",
+          "populacao": 56500,
+          "pct": 8.11
+        },
+        {
+          "posicao": 3,
+          "bairro": "Novo Horizonte",
+          "regiao": "Leste",
+          "populacao": 47193,
+          "pct": 6.77
+        },
+        {
+          "posicao": 4,
+          "bairro": "Alto da Ponte",
+          "regiao": "Norte",
+          "populacao": 40563,
+          "pct": 5.82
+        },
+        {
+          "posicao": 5,
+          "bairro": "Vila Industrial",
+          "regiao": "Leste",
+          "populacao": 39506,
+          "pct": 5.67
+        },
+        {
+          "posicao": 6,
+          "bairro": "Putim/Setville",
+          "regiao": "Sudeste",
+          "populacao": 38895,
+          "pct": 5.58
+        },
+        {
+          "posicao": 7,
+          "bairro": "Parque Industrial",
+          "regiao": "Sul",
+          "populacao": 38549,
+          "pct": 5.53
+        },
+        {
+          "posicao": 8,
+          "bairro": "Bosque dos Eucaliptos",
+          "regiao": "Sul",
+          "populacao": 33184,
+          "pct": 4.76
+        },
+        {
+          "posicao": 9,
+          "bairro": "Jardim Satélite",
+          "regiao": "Sul",
+          "populacao": 27804,
+          "pct": 3.99
+        },
+        {
+          "posicao": 10,
+          "bairro": "Aquarius",
+          "regiao": "Oeste",
+          "populacao": 25286,
+          "pct": 3.63
+        }
+      ],
+      "religiao_censo_amostra_2022": [
+        {
+          "categoria": "Católica Apostólica Romana",
+          "sjc_pct": 58.2,
+          "sp_pct": 60.1,
+          "brasil_pct": 56.7
+        },
+        {
+          "categoria": "Evangélica",
+          "sjc_pct": 25.4,
+          "sp_pct": 24.1,
+          "brasil_pct": 26.9
+        },
+        {
+          "categoria": "Sem religião",
+          "sjc_pct": 8.9,
+          "sp_pct": 8.1,
+          "brasil_pct": 9.3
+        },
+        {
+          "categoria": "Espírita",
+          "sjc_pct": 4.3,
+          "sp_pct": 3.3,
+          "brasil_pct": 2.2
+        },
+        {
+          "categoria": "Umbanda e Candomblé",
+          "sjc_pct": 0.8,
+          "sp_pct": 0.9,
+          "brasil_pct": 0.7
+        },
+        {
+          "categoria": "Outras religiosidades / Tradições",
+          "sjc_pct": 2.4,
+          "sp_pct": 3.5,
+          "brasil_pct": 4.2
+        }
+      ],
+      "alfabetizacao_censo_2022": {
+        "taxa_sjc": 97.86,
+        "taxa_homens": 98.12,
+        "taxa_mulheres": 97.63,
+        "taxa_sp": 96.92,
+        "taxa_brasil": 93.0,
+        "faixa_etaria": "15 anos ou mais de idade",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9543)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9543",
+        "data_consulta": "2026-09-27"
+      },
+      "piramide_etaria_censo_2022": [
+        {
+          "faixa": "0-4",
+          "homens": 18120,
+          "mulheres": 17430,
+          "total": 35550
+        },
+        {
+          "faixa": "5-9",
+          "homens": 20450,
+          "mulheres": 19680,
+          "total": 40130
+        },
+        {
+          "faixa": "10-14",
+          "homens": 21890,
+          "mulheres": 21120,
+          "total": 43010
+        },
+        {
+          "faixa": "15-19",
+          "homens": 23640,
+          "mulheres": 22910,
+          "total": 46550
+        },
+        {
+          "faixa": "20-24",
+          "homens": 26180,
+          "mulheres": 25840,
+          "total": 52020
+        },
+        {
+          "faixa": "25-29",
+          "homens": 27430,
+          "mulheres": 27890,
+          "total": 55320
+        },
+        {
+          "faixa": "30-34",
+          "homens": 28150,
+          "mulheres": 29310,
+          "total": 57460
+        },
+        {
+          "faixa": "35-39",
+          "homens": 27920,
+          "mulheres": 29840,
+          "total": 57760
+        },
+        {
+          "faixa": "40-44",
+          "homens": 27150,
+          "mulheres": 29610,
+          "total": 56760
+        },
+        {
+          "faixa": "45-49",
+          "homens": 24230,
+          "mulheres": 26980,
+          "total": 51210
+        },
+        {
+          "faixa": "50-54",
+          "homens": 22180,
+          "mulheres": 25340,
+          "total": 47520
+        },
+        {
+          "faixa": "55-59",
+          "homens": 20110,
+          "mulheres": 23720,
+          "total": 43830
+        },
+        {
+          "faixa": "60-64",
+          "homens": 17420,
+          "mulheres": 21180,
+          "total": 38600
+        },
+        {
+          "faixa": "65-69",
+          "homens": 13910,
+          "mulheres": 17820,
+          "total": 31730
+        },
+        {
+          "faixa": "70-74",
+          "homens": 9840,
+          "mulheres": 13410,
+          "total": 23250
+        },
+        {
+          "faixa": "75-79",
+          "homens": 6120,
+          "mulheres": 9180,
+          "total": 15300
+        },
+        {
+          "faixa": "80+",
+          "homens": 5571,
+          "mulheres": 9683,
+          "total": 15254
+        }
+      ],
+      "distritos_oficiais": [
+        {
+          "distrito": "Distrito Sede",
+          "populacao": 542110,
+          "pct": 77.8
+        },
+        {
+          "distrito": "Eugênio de Melo",
+          "populacao": 118420,
+          "pct": 17.0
+        },
+        {
+          "distrito": "São Francisco Xavier",
+          "populacao": 36524,
+          "pct": 5.2
+        }
+      ],
+      "fonte_nome": "IBGE - Censo Demográfico 2022 / SIDRA",
+      "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+      "data_consulta": "2026-09-27"
+    },
+    "saude": {
+      "mortalidade_infantil": {
+        "taxa_oficial_sms_2024": 8.2,
+        "obitos_2024": 66,
+        "nascidos_vivos_2024": 8048,
+        "taxa_oficial_sms_2025_preliminar": 7.65,
+        "obitos_2025": 61,
+        "nascidos_vivos_2025": 7974,
+        "taxa_ibge_cidades_2025": 7.77,
+        "unidade": "óbitos por mil nascidos vivos",
+        "definicao_metrica": "Taxa de Mortalidade Infantil (TMI) = (Óbitos de menores de 1 ano de mães residentes ÷ Nascidos vivos de mães residentes) × 1.000",
+        "meta_ods_3_2_neonatal": 12.0,
+        "meta_ods_3_2_menores_5_anos": 25.0,
+        "divergencia_oficial_nota": "O IBGE Cidades divulga 7,77 óbitos/mil para 2025, enquanto o Relatório de Gestão da Secretaria de Saúde de SJC (Quadri 3/2025) registra 8,20 para 2024 e 7,65 para 2025 (preliminar). A variação reflete a defasagem temporal entre os bancos diretos da vigilância municipal e a consolidação do SIM/SINASC no Ministério da Saúde.",
+        "fonte_nome": "SMS-SJC (Relatório de Gestão 2025) / IBGE Cidades / Ministério da Saúde (SIM/SINASC)",
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "data_consulta": "2026-09-28"
+      },
+      "mortalidade_infantil_serie": [
+        {
+          "ano": 2010,
+          "taxa": 10.42,
+          "taxa_por_mil_nascidos": 10.42,
+          "obitos_menores_1_ano": 89,
+          "nascidos_vivos": 8541,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2012,
+          "taxa": 9.85,
+          "taxa_por_mil_nascidos": 9.85,
+          "obitos_menores_1_ano": 84,
+          "nascidos_vivos": 8528,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2014,
+          "taxa": 9.4,
+          "taxa_por_mil_nascidos": 9.4,
+          "obitos_menores_1_ano": 81,
+          "nascidos_vivos": 8617,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2016,
+          "taxa": 9.15,
+          "taxa_por_mil_nascidos": 9.15,
+          "obitos_menores_1_ano": 78,
+          "nascidos_vivos": 8525,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2018,
+          "taxa": 8.92,
+          "taxa_por_mil_nascidos": 8.92,
+          "obitos_menores_1_ano": 76,
+          "nascidos_vivos": 8520,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2019,
+          "taxa": 8.7,
+          "taxa_por_mil_nascidos": 8.7,
+          "obitos_menores_1_ano": 74,
+          "nascidos_vivos": 8506,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2020,
+          "taxa": 8.35,
+          "taxa_por_mil_nascidos": 8.35,
+          "obitos_menores_1_ano": 68,
+          "nascidos_vivos": 8144,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2021,
+          "taxa": 8.9,
+          "taxa_por_mil_nascidos": 8.9,
+          "obitos_menores_1_ano": 71,
+          "nascidos_vivos": 7978,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2022,
+          "taxa": 8.12,
+          "taxa_por_mil_nascidos": 8.12,
+          "obitos_menores_1_ano": 64,
+          "nascidos_vivos": 7882,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2023,
+          "taxa": 8.41,
+          "taxa_por_mil_nascidos": 8.41,
+          "obitos_menores_1_ano": 67,
+          "nascidos_vivos": 7962,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2024,
+          "taxa": 8.2,
+          "taxa_por_mil_nascidos": 8.2,
+          "obitos_menores_1_ano": 66,
+          "nascidos_vivos": 8048,
+          "status": "Consolidado SMS-SJC / SIM"
+        },
+        {
+          "ano": 2025,
+          "taxa": 7.65,
+          "taxa_por_mil_nascidos": 7.65,
+          "obitos_menores_1_ano": 61,
+          "nascidos_vivos": 7974,
+          "status": "Preliminar SMS-SJC (7,77 no IBGE Cidades)"
+        }
+      ],
+      "leitos_hospitalares_cnes": {
+        "competencia": "12/2024 (Consolidado CNES/DataSUS)",
+        "ano": 2024,
+        "total_leitos": 1894,
+        "leitos_sus": 846,
+        "leitos_nao_sus": 1048,
+        "taxa_leitos_por_mil_hab": 2.61,
+        "leitos_clinicos_cirurgicos": {
+          "sus": 698,
+          "nao_sus": 864,
+          "total": 1562
+        },
+        "leitos_uti_adulto": {
+          "sus": 102,
+          "nao_sus": 138,
+          "total": 240
+        },
+        "leitos_uti_pediatrica": {
+          "sus": 18,
+          "nao_sus": 16,
+          "total": 34
+        },
+        "leitos_uti_neonatal": {
+          "sus": 28,
+          "nao_sus": 30,
+          "total": 58
+        },
+        "leitos_uti_total": {
+          "sus": 148,
+          "nao_sus": 184,
+          "total": 332
+        },
+        "nota_metodologica": "Leitos hospitalares cadastrados/existentes no CNES (capacidade instalada cadastrada). Total = 1.562 Clínicos/Cirúrgicos + 332 UTI = 1.894 leitos. SUS = 698 + 148 = 846 leitos; Não-SUS = 864 + 184 = 1.048 leitos.",
+        "fonte_nome": "Ministério da Saúde / DataSUS - CNES (Cadastro Nacional de Estabelecimentos de Saúde)",
+        "fonte_url": "https://dadosabertos.saude.gov.br/dataset/hospitais-e-leitos",
+        "data_consulta": "2026-09-28"
+      },
+      "leitos_serie_historica": [
+        {
+          "ano": 2019,
+          "total": 1780,
+          "sus": 790,
+          "nao_sus": 990,
+          "uti_total": 290,
+          "competencia": "12/2019"
+        },
+        {
+          "ano": 2020,
+          "total": 1890,
+          "sus": 860,
+          "nao_sus": 1030,
+          "uti_total": 350,
+          "competencia": "12/2020"
+        },
+        {
+          "ano": 2021,
+          "total": 1940,
+          "sus": 910,
+          "nao_sus": 1030,
+          "uti_total": 360,
+          "competencia": "12/2021"
+        },
+        {
+          "ano": 2022,
+          "total": 1820,
+          "sus": 810,
+          "nao_sus": 1010,
+          "uti_total": 315,
+          "competencia": "12/2022"
+        },
+        {
+          "ano": 2023,
+          "total": 1849,
+          "sus": 824,
+          "nao_sus": 1025,
+          "uti_total": 326,
+          "competencia": "12/2023"
+        },
+        {
+          "ano": 2024,
+          "total": 1894,
+          "sus": 846,
+          "nao_sus": 1048,
+          "uti_total": 332,
+          "competencia": "12/2024"
+        },
+        {
+          "ano": 2025,
+          "total": 1912,
+          "sus": 854,
+          "nao_sus": 1058,
+          "uti_total": 328,
+          "competencia": "12/2025"
+        },
+        {
+          "ano": 2026,
+          "total": 1928,
+          "sus": 860,
+          "nao_sus": 1068,
+          "uti_total": 324,
+          "competencia": "08/2026"
+        }
+      ],
+      "cobertura_vacinal_por_ano": {
+        "2024": [
+          {
+            "vacina": "Tríplice Viral D1 (SCR)",
+            "imunobiologico": "Tríplice Viral (Sarampo, Caxumba, Rubéola)",
+            "dose": "1ª Dose (D1)",
+            "faixa_etaria": "1 ano de idade (12 meses)",
+            "cobertura_pct": 98.5,
+            "meta_pni": 95.0,
+            "status": "Meta Atingida"
+          },
+          {
+            "vacina": "BCG (Tuberculose)",
+            "imunobiologico": "BCG",
+            "dose": "Dose Única ao nascer",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 94.2,
+            "meta_pni": 90.0,
+            "status": "Meta Atingida"
+          },
+          {
+            "vacina": "Hepatite B",
+            "imunobiologico": "Hepatite B",
+            "dose": "Dose ao nascer / 30 dias",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 92.8,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pneumocócica 10V",
+            "imunobiologico": "Pneumocócica 10-Valente",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 89.05,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Rotavírus Humano",
+            "imunobiologico": "Rotavírus Humano G1P[8]",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 86.4,
+            "meta_pni": 90.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pentavalente",
+            "imunobiologico": "Pentavalente (DTP + Hib + HepB)",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 85.9,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Poliomielite (VIP/VOP)",
+            "imunobiologico": "Poliomielite Inativada/Oral",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 85.7,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          }
+        ],
+        "2025": [
+          {
+            "vacina": "Tríplice Viral D1 (SCR)",
+            "imunobiologico": "Tríplice Viral (Sarampo, Caxumba, Rubéola)",
+            "dose": "1ª Dose (D1)",
+            "faixa_etaria": "1 ano de idade (12 meses)",
+            "cobertura_pct": 91.44,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "BCG (Tuberculose)",
+            "imunobiologico": "BCG",
+            "dose": "Dose Única ao nascer",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 90.8,
+            "meta_pni": 90.0,
+            "status": "Meta Atingida"
+          },
+          {
+            "vacina": "Hepatite B",
+            "imunobiologico": "Hepatite B",
+            "dose": "Dose ao nascer / 30 dias",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 89.5,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pneumocócica 10V",
+            "imunobiologico": "Pneumocócica 10-Valente",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 88.74,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Rotavírus Humano",
+            "imunobiologico": "Rotavírus Humano G1P[8]",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 84.1,
+            "meta_pni": 90.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Poliomielite (VIP/VOP)",
+            "imunobiologico": "Poliomielite Inativada/Oral",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 85.45,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pentavalente",
+            "imunobiologico": "Pentavalente (DTP + Hib + HepB)",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 82.64,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          }
+        ]
+      },
+      "causas_mortalidade_geral_por_ano": {
+        "2023": {
+          "ano": 2023,
+          "status": "Consolidado SIM / DataSUS",
+          "total_obitos": 4716,
+          "populacao_base": "Óbitos por Residência em São José dos Campos",
+          "categorias": [
+            {
+              "causa": "Doenças do Aparelho Circulatório",
+              "cid10": "Capítulo IX (I00-I99)",
+              "obitos": 1284,
+              "pct": 27.23,
+              "detalhes": "Infarto agudo do miocárdio, AVC, cardiopatias isquêmicas"
+            },
+            {
+              "causa": "Neoplasias (Tumores / Câncer)",
+              "cid10": "Capítulo II (C00-D48)",
+              "obitos": 996,
+              "pct": 21.12,
+              "detalhes": "Câncer de traqueia/brônquios/pulmão, mama, cólon, próstata"
+            },
+            {
+              "causa": "Doenças do Aparelho Respiratório",
+              "cid10": "Capítulo X (J00-J99)",
+              "obitos": 614,
+              "pct": 13.02,
+              "detalhes": "Pneumonias, DPOC e insuficiência respiratória"
+            },
+            {
+              "causa": "Causas Externas (Acidentes e Violência)",
+              "cid10": "Capítulo XX (V01-Y98)",
+              "obitos": 418,
+              "pct": 8.86,
+              "detalhes": "Acidentes de transporte, quedas acidentais, agressões"
+            },
+            {
+              "causa": "Doenças Endócrinas (Diabetes, etc.)",
+              "cid10": "Capítulo IV (E00-E90)",
+              "obitos": 312,
+              "pct": 6.62,
+              "detalhes": "Diabetes Mellitus e distúrbios metabólicos"
+            },
+            {
+              "causa": "Doenças do Aparelho Digestivo",
+              "cid10": "Capítulo XI (K00-K93)",
+              "obitos": 248,
+              "pct": 5.26,
+              "detalhes": "Cirrose hepática, hemorragias digestivas, pancreatites"
+            },
+            {
+              "causa": "Doenças Infecciosas e Parasitárias",
+              "cid10": "Capítulo I (A00-B99)",
+              "obitos": 198,
+              "pct": 4.2,
+              "detalhes": "Sepse, tuberculose e infecções bacterianas/virais"
+            },
+            {
+              "causa": "Demais Causas e Mal Definidas",
+              "cid10": "Capítulos V-VIII, XII-XIX",
+              "obitos": 646,
+              "pct": 13.69,
+              "detalhes": "Doenças neurológicas, renais, sintomas e causas mal definidas"
+            }
+          ]
+        },
+        "2024": {
+          "ano": 2024,
+          "status": "Preliminar SIM / SMS-SJC",
+          "total_obitos": 4820,
+          "populacao_base": "Óbitos por Residência em São José dos Campos",
+          "categorias": [
+            {
+              "causa": "Doenças do Aparelho Circulatório",
+              "cid10": "Capítulo IX (I00-I99)",
+              "obitos": 1302,
+              "pct": 27.01,
+              "detalhes": "Infarto agudo do miocárdio, AVC, cardiopatias"
+            },
+            {
+              "causa": "Neoplasias (Tumores / Câncer)",
+              "cid10": "Capítulo II (C00-D48)",
+              "obitos": 1026,
+              "pct": 21.29,
+              "detalhes": "Câncer de pulmão, mama, cólon, próstata"
+            },
+            {
+              "causa": "Doenças do Aparelho Respiratório",
+              "cid10": "Capítulo X (J00-J99)",
+              "obitos": 636,
+              "pct": 13.2,
+              "detalhes": "Pneumonias e DPOC"
+            },
+            {
+              "causa": "Causas Externas (Acidentes e Violência)",
+              "cid10": "Capítulo XX (V01-Y98)",
+              "obitos": 410,
+              "pct": 8.51,
+              "detalhes": "Acidentes de trânsito, quedas e outras causas externas"
+            },
+            {
+              "causa": "Doenças Endócrinas (Diabetes, etc.)",
+              "cid10": "Capítulo IV (E00-E90)",
+              "obitos": 324,
+              "pct": 6.72,
+              "detalhes": "Diabetes Mellitus"
+            },
+            {
+              "causa": "Doenças do Aparelho Digestivo",
+              "cid10": "Capítulo XI (K00-K93)",
+              "obitos": 252,
+              "pct": 5.23,
+              "detalhes": "Cirrose e doenças gastrointestinais"
+            },
+            {
+              "causa": "Doenças Infecciosas e Parasitárias",
+              "cid10": "Capítulo I (A00-B99)",
+              "obitos": 194,
+              "pct": 4.02,
+              "detalhes": "Sepse e infecções bacterianas/virais"
+            },
+            {
+              "causa": "Demais Causas e Mal Definidas",
+              "cid10": "Capítulos V-VIII, XII-XIX",
+              "obitos": 676,
+              "pct": 14.02,
+              "detalhes": "Doenças do sistema nervoso, geniturinário e outras"
+            }
+          ]
+        }
+      },
+      "estabelecimentos_saude_cnes": {
+        "ano": 2024,
+        "total": 528,
+        "hospitais_gerais_especializados": 12,
+        "unidades_basicas_saude_ubs_esf": 45,
+        "upas_prontos_atendimentos": 6,
+        "clinicas_ambulatorios": 348,
+        "centros_atencao_psicossocial_caps": 6,
+        "laboratorios_diagnostico": 88,
+        "farmacias_populares_dispensarios": 23,
+        "fonte_nome": "Ministério da Saúde - CNES / DataSUS",
+        "fonte_url": "http://cnes.datasus.gov.br/",
+        "data_consulta": "2026-09-28"
+      },
+      "cobertura_atencao_basica_serie": [
+        {
+          "ano": 2019,
+          "cobertura_pct": 72.4
+        },
+        {
+          "ano": 2020,
+          "cobertura_pct": 74.1
+        },
+        {
+          "ano": 2021,
+          "cobertura_pct": 75.8
+        },
+        {
+          "ano": 2022,
+          "cobertura_pct": 78.3
+        },
+        {
+          "ano": 2023,
+          "cobertura_pct": 81.2
+        },
+        {
+          "ano": 2024,
+          "cobertura_pct": 83.5
+        }
+      ],
+      "natalidade_sinasc_2023": {
+        "nascidos_vivos": 7962,
+        "partos_cesareos_pct": 59.4,
+        "partos_vaginais_pct": 40.6,
+        "prematuros_pct": 9.8,
+        "maes_adolescentes_menor_20_pct": 7.9,
+        "fonte_nome": "Ministério da Saúde - SINASC (Sistema de Nascidos Vivos)",
+        "fonte_url": "https://datasus.saude.gov.br/nascidos-vivos-desde-1994",
+        "data_consulta": "2026-09-28"
+      },
+      "fonte_nome": "Ministério da Saúde (DataSUS / CNES / SIM / SINASC) / SMS-SJC / IBGE Cidades",
+      "fonte_url": "https://datasus.saude.gov.br/",
+      "data_consulta": "2026-09-28",
+      "nascidos_vivos_sinasc": {
+        "total_2024": 7463,
+        "total_2023": 8090,
+        "parto_cesareo_2024": 4660,
+        "parto_vaginal_2024": 2801,
+        "parto_ignorado_2024": 2,
+        "pct_cesareo_2024": 62.44,
+        "pct_vaginal_2024": 37.53,
+        "serie_historica_parto": [
+          {
+            "ano": 2010,
+            "nascidos_vivos": 9637,
+            "parto_vaginal": 3366,
+            "parto_cesareo": 6250,
+            "parto_ignorado": 21,
+            "pct_cesareo": 64.85,
+            "pct_vaginal": 34.93,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2011,
+            "nascidos_vivos": 9632,
+            "parto_vaginal": 3306,
+            "parto_cesareo": 6317,
+            "parto_ignorado": 9,
+            "pct_cesareo": 65.58,
+            "pct_vaginal": 34.32,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2012,
+            "nascidos_vivos": 9550,
+            "parto_vaginal": 3303,
+            "parto_cesareo": 6202,
+            "parto_ignorado": 45,
+            "pct_cesareo": 64.94,
+            "pct_vaginal": 34.59,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2013,
+            "nascidos_vivos": 9555,
+            "parto_vaginal": 3179,
+            "parto_cesareo": 6357,
+            "parto_ignorado": 19,
+            "pct_cesareo": 66.53,
+            "pct_vaginal": 33.27,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2014,
+            "nascidos_vivos": 9937,
+            "parto_vaginal": 3519,
+            "parto_cesareo": 6409,
+            "parto_ignorado": 9,
+            "pct_cesareo": 64.5,
+            "pct_vaginal": 35.41,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2015,
+            "nascidos_vivos": 9808,
+            "parto_vaginal": 3718,
+            "parto_cesareo": 6088,
+            "parto_ignorado": 2,
+            "pct_cesareo": 62.07,
+            "pct_vaginal": 37.91,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2016,
+            "nascidos_vivos": 9562,
+            "parto_vaginal": 3728,
+            "parto_cesareo": 5834,
+            "parto_ignorado": 0,
+            "pct_cesareo": 61.01,
+            "pct_vaginal": 38.99,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2017,
+            "nascidos_vivos": 9743,
+            "parto_vaginal": 3715,
+            "parto_cesareo": 6028,
+            "parto_ignorado": 0,
+            "pct_cesareo": 61.87,
+            "pct_vaginal": 38.13,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2018,
+            "nascidos_vivos": 9686,
+            "parto_vaginal": 3757,
+            "parto_cesareo": 5928,
+            "parto_ignorado": 1,
+            "pct_cesareo": 61.2,
+            "pct_vaginal": 38.79,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2019,
+            "nascidos_vivos": 9076,
+            "parto_vaginal": 3624,
+            "parto_cesareo": 5441,
+            "parto_ignorado": 11,
+            "pct_cesareo": 59.95,
+            "pct_vaginal": 39.93,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2020,
+            "nascidos_vivos": 8682,
+            "parto_vaginal": 3422,
+            "parto_cesareo": 5260,
+            "parto_ignorado": 0,
+            "pct_cesareo": 60.58,
+            "pct_vaginal": 39.42,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2021,
+            "nascidos_vivos": 8545,
+            "parto_vaginal": 3430,
+            "parto_cesareo": 5115,
+            "parto_ignorado": 0,
+            "pct_cesareo": 59.86,
+            "pct_vaginal": 40.14,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2022,
+            "nascidos_vivos": 8072,
+            "parto_vaginal": 3103,
+            "parto_cesareo": 4969,
+            "parto_ignorado": 0,
+            "pct_cesareo": 61.56,
+            "pct_vaginal": 38.44,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2023,
+            "nascidos_vivos": 8090,
+            "parto_vaginal": 3174,
+            "parto_cesareo": 4916,
+            "parto_ignorado": 0,
+            "pct_cesareo": 60.77,
+            "pct_vaginal": 39.23,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2024,
+            "nascidos_vivos": 7463,
+            "parto_vaginal": 2801,
+            "parto_cesareo": 4660,
+            "parto_ignorado": 2,
+            "pct_cesareo": 62.44,
+            "pct_vaginal": 37.53,
+            "status": "Consolidado SINASC / Preliminar SMS"
+          }
+        ],
+        "faixa_etaria_mae_2024": [
+          {
+            "faixa": "Menor de 15 anos",
+            "nascidos": 16,
+            "pct": 0.21
+          },
+          {
+            "faixa": "15 a 19 anos",
+            "nascidos": 508,
+            "pct": 6.81
+          },
+          {
+            "faixa": "20 a 24 anos",
+            "nascidos": 1398,
+            "pct": 18.73
+          },
+          {
+            "faixa": "25 a 29 anos",
+            "nascidos": 1956,
+            "pct": 26.21
+          },
+          {
+            "faixa": "30 a 34 anos",
+            "nascidos": 1848,
+            "pct": 24.76
+          },
+          {
+            "faixa": "35 a 39 anos",
+            "nascidos": 1324,
+            "pct": 17.74
+          },
+          {
+            "faixa": "40 a 44 anos",
+            "nascidos": 382,
+            "pct": 5.12
+          },
+          {
+            "faixa": "45 a 49 anos",
+            "nascidos": 29,
+            "pct": 0.39
+          },
+          {
+            "faixa": "50 anos ou mais",
+            "nascidos": 2,
+            "pct": 0.03
+          }
+        ],
+        "fonte_nome": "Ministério da Saúde - SINASC (Sistema de Informações sobre Nascidos Vivos / TabNet DataSUS)",
+        "fonte_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sinasc/cnv/nvsp.def",
+        "data_consulta": "2026-09-28"
+      },
+      "dengue_sinan": {
+        "casos_2024": 98219,
+        "casos_2023": 1059,
+        "media_historica_2010_2023": 1876,
+        "pico_historico_anterior_2015": 14509,
+        "serie_historica": [
+          {
+            "ano": 2010,
+            "casos": 688,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2011,
+            "casos": 2380,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2012,
+            "casos": 154,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2013,
+            "casos": 839,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2014,
+            "casos": 832,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2015,
+            "casos": 14509,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2016,
+            "casos": 1731,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2017,
+            "casos": 438,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2018,
+            "casos": 198,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2019,
+            "casos": 670,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2020,
+            "casos": 452,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2021,
+            "casos": 619,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2022,
+            "casos": 1695,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2023,
+            "casos": 1059,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2024,
+            "casos": 98219,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          }
+        ],
+        "nota_metodologica": "Série de casos CONFIRMADOS de dengue autóctone e importada em residentes de SJC. Fonte primária: Boletins Epidemiológicos e Notas Oficiais da Vigilância Epidemiológica da Prefeitura de SJC (2006-2018) e SINAN Online/DataSUS (2019-2024). Divergências entre notificados e confirmados: a série apresenta apenas confirmados.",
+        "fonte_nome": "Prefeitura de SJC (Vigilância Epidemiológica) & Ministério da Saúde - SINAN Online / DataSUS",
+        "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+        "data_consulta": "2026-09-28"
+      },
+      "internacoes_sih": {
+        "total_internacoes_2024": 54709,
+        "total_internacoes_2023": 52425,
+        "serie_historica": [
+          {
+            "ano": 2010,
+            "internacoes": 30963
+          },
+          {
+            "ano": 2011,
+            "internacoes": 33766
+          },
+          {
+            "ano": 2012,
+            "internacoes": 33784
+          },
+          {
+            "ano": 2013,
+            "internacoes": 31611
+          },
+          {
+            "ano": 2014,
+            "internacoes": 30937
+          },
+          {
+            "ano": 2015,
+            "internacoes": 32823
+          },
+          {
+            "ano": 2016,
+            "internacoes": 33348
+          },
+          {
+            "ano": 2017,
+            "internacoes": 35142
+          },
+          {
+            "ano": 2018,
+            "internacoes": 39625
+          },
+          {
+            "ano": 2019,
+            "internacoes": 46743
+          },
+          {
+            "ano": 2020,
+            "internacoes": 41915
+          },
+          {
+            "ano": 2021,
+            "internacoes": 43811
+          },
+          {
+            "ano": 2022,
+            "internacoes": 47241
+          },
+          {
+            "ano": 2023,
+            "internacoes": 52425
+          },
+          {
+            "ano": 2024,
+            "internacoes": 54709
+          }
+        ],
+        "top_causas_2024": [
+          {
+            "causa": "Doenças do Aparelho Circulatório",
+            "capitulo": "Cap. IX (I00-I99)",
+            "internacoes": 7914,
+            "pct": 14.47
+          },
+          {
+            "causa": "Doenças do Aparelho Digestivo",
+            "capitulo": "Cap. XI (K00-K93)",
+            "internacoes": 7035,
+            "pct": 12.86
+          },
+          {
+            "causa": "Neoplasias (Tumores)",
+            "capitulo": "Cap. II (C00-D48)",
+            "internacoes": 6913,
+            "pct": 12.64
+          },
+          {
+            "causa": "Lesões, Envenenamentos e Causas Externas",
+            "capitulo": "Cap. XIX (S00-T98)",
+            "internacoes": 6093,
+            "pct": 11.14
+          },
+          {
+            "causa": "Gravidez, Parto e Puerpério",
+            "capitulo": "Cap. XV (O00-O99)",
+            "internacoes": 5596,
+            "pct": 10.23
+          },
+          {
+            "causa": "Doenças do Aparelho Respiratório",
+            "capitulo": "Cap. X (J00-J99)",
+            "internacoes": 4515,
+            "pct": 8.25
+          },
+          {
+            "causa": "Doenças do Aparelho Geniturinário",
+            "capitulo": "Cap. XIV (N00-N99)",
+            "internacoes": 4106,
+            "pct": 7.51
+          },
+          {
+            "causa": "Doenças Infecciosas e Parasitárias",
+            "capitulo": "Cap. I (A00-B99)",
+            "internacoes": 2430,
+            "pct": 4.44
+          }
+        ],
+        "top_causas_2023": [
+          {
+            "causa": "Doenças do Aparelho Circulatório",
+            "capitulo": "Cap. IX",
+            "internacoes": 7680,
+            "pct": 14.65
+          },
+          {
+            "causa": "Doenças do Aparelho Digestivo",
+            "capitulo": "Cap. XI",
+            "internacoes": 6840,
+            "pct": 13.05
+          },
+          {
+            "causa": "Neoplasias (Tumores)",
+            "capitulo": "Cap. II",
+            "internacoes": 6620,
+            "pct": 12.63
+          },
+          {
+            "causa": "Lesões e Causas Externas",
+            "capitulo": "Cap. XIX",
+            "internacoes": 5890,
+            "pct": 11.23
+          },
+          {
+            "causa": "Gravidez, Parto e Puerpério",
+            "capitulo": "Cap. XV",
+            "internacoes": 5510,
+            "pct": 10.51
+          },
+          {
+            "causa": "Doenças do Aparelho Respiratório",
+            "capitulo": "Cap. X",
+            "internacoes": 4410,
+            "pct": 8.41
+          },
+          {
+            "causa": "Doenças do Aparelho Geniturinário",
+            "capitulo": "Cap. XIV",
+            "internacoes": 3950,
+            "pct": 7.53
+          },
+          {
+            "causa": "Doenças Infecciosas e Parasitárias",
+            "capitulo": "Cap. I",
+            "internacoes": 2340,
+            "pct": 4.46
+          }
+        ],
+        "nota_metodologica": "Internações Hospitalares de Residentes de São José dos Campos pagas pelo SUS (SIH/SUS - Autorizações de Internação Hospitalar - AIH Aprovadas).",
+        "fonte_nome": "Ministério da Saúde - SIH/SUS (Sistema de Informações Hospitalares / TabNet DataSUS)",
+        "fonte_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nisp.def",
+        "data_consulta": "2026-09-28"
+      },
+      "atencao_basica_cnes_sia": {
+        "unidades_basicas_saude_ubs": 45,
+        "equipes_saude_familia_esf": 142,
+        "cobertura_atencao_primaria_pct_2024": 83.5,
+        "atendimentos_consultas_2024": 1418520,
+        "serie_cobertura": [
+          {
+            "ano": 2019,
+            "cobertura_pct": 72.4,
+            "consultas_atendimentos": 1120450
+          },
+          {
+            "ano": 2020,
+            "cobertura_pct": 74.1,
+            "consultas_atendimentos": 890320
+          },
+          {
+            "ano": 2021,
+            "cobertura_pct": 75.8,
+            "consultas_atendimentos": 1045600
+          },
+          {
+            "ano": 2022,
+            "cobertura_pct": 78.3,
+            "consultas_atendimentos": 1238900
+          },
+          {
+            "ano": 2023,
+            "cobertura_pct": 81.2,
+            "consultas_atendimentos": 1342100
+          },
+          {
+            "ano": 2024,
+            "cobertura_pct": 83.5,
+            "consultas_atendimentos": 1418520
+          }
+        ],
+        "nota_metodologica": "Indicadores de Atenção Primária à Saúde compilados a partir do Cadastro Nacional de Estabelecimentos de Saúde (CNES), e-Gestor Atenção Básica e Relatório de Gestão SMS-SJC.",
+        "fonte_nome": "Ministério da Saúde (e-Gestor AB / CNES) & Secretaria Municipal de Saúde de SJC",
+        "fonte_url": "https://egestorab.saude.gov.br/",
+        "data_consulta": "2026-09-28",
+        "unidades_basicas_saude_cnes": 40,
+        "unidades_basicas_saude_rede_municipal": 45,
+        "audit_status": "CONFIRMADO"
+      },
+      "procedimentos_sia_sih": {
+        "ano_referencia": 2024,
+        "total_ambulatorial_2024": 8120500,
+        "total_hospitalar_2024": 168900,
+        "serie_producao": [
+          {
+            "ano": 2019,
+            "ambulatorial": 6120400,
+            "hospitalar": 142800,
+            "total": 6263200
+          },
+          {
+            "ano": 2020,
+            "ambulatorial": 4890300,
+            "hospitalar": 128500,
+            "total": 5018800
+          },
+          {
+            "ano": 2021,
+            "ambulatorial": 5680100,
+            "hospitalar": 135200,
+            "total": 5815300
+          },
+          {
+            "ano": 2022,
+            "ambulatorial": 6940200,
+            "hospitalar": 148600,
+            "total": 7088800
+          },
+          {
+            "ano": 2023,
+            "ambulatorial": 7650800,
+            "hospitalar": 162400,
+            "total": 7813200
+          },
+          {
+            "ano": 2024,
+            "ambulatorial": 8120500,
+            "hospitalar": 168900,
+            "total": 8289400
+          }
+        ],
+        "top_ambulatoriais_2024": [
+          {
+            "procedimento": "Exames Laboratoriais (Patologia Clínica)",
+            "quantidade": 4120500,
+            "pct": 50.74
+          },
+          {
+            "procedimento": "Consultas Médicas (Especializada e Básica)",
+            "quantidade": 1840300,
+            "pct": 22.66
+          },
+          {
+            "procedimento": "Procedimentos de Enfermagem e Curativos",
+            "quantidade": 1150200,
+            "pct": 14.16
+          },
+          {
+            "procedimento": "Diagnóstico por Imagem (RX, USG, Tomografia)",
+            "quantidade": 412800,
+            "pct": 5.08
+          },
+          {
+            "procedimento": "Fisioterapia e Reabilitação Física",
+            "quantidade": 215400,
+            "pct": 2.65
+          }
+        ],
+        "top_hospitalares_2024": [
+          {
+            "procedimento": "Partos (Cesarianos e Vaginais SUS)",
+            "quantidade": 5596,
+            "pct": 24.28
+          },
+          {
+            "procedimento": "Cirurgias Digestivas e Hérnias",
+            "quantidade": 4820,
+            "pct": 20.91
+          },
+          {
+            "procedimento": "Tratamento de Doenças Cardiovasculares e AVC",
+            "quantidade": 4650,
+            "pct": 20.17
+          },
+          {
+            "procedimento": "Ortopedia e Tratamento de Fraturas / Traumas",
+            "quantidade": 4180,
+            "pct": 18.13
+          },
+          {
+            "procedimento": "Tratamentos Oncológicos e Quimioterapia (Intern.)",
+            "quantidade": 3890,
+            "pct": 16.88
+          }
+        ],
+        "nota_metodologica": "Volume físico de procedimentos ambulatoriais aprovados no SIA/SUS (BPA/APAC) e atos cirúrgicos/clínicos hospitalares registrados no SIH/SUS.",
+        "fonte_nome": "Ministério da Saúde (SIA/SUS e SIH/SUS) / SMS-SJC Relatório Quadrimestral",
+        "fonte_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sia/cnv/qasp.def",
+        "data_consulta": "2026-09-28",
+        "audit_status": "SUSPENSO_PARA_REVISAO",
+        "status_metodologico": "INDISPONIVEL_EM_REVISAO",
+        "nota_suspensao": "O volume de procedimentos ambulatoriais SUS está sendo auditado diretamente no SIA/DataSUS para garantir fidedignidade antes da publicação."
+      }
+    },
+    "seguranca": {
+      "taxa_homicidios_dolosos_serie": [
+        {
+          "ano": 2001,
+          "vitimas": 248,
+          "ocorrencias": 231,
+          "taxa_por_100k": 46.2,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2002,
+          "vitimas": 238,
+          "ocorrencias": 220,
+          "taxa_por_100k": 43.1,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2003,
+          "vitimas": 224,
+          "ocorrencias": 208,
+          "taxa_por_100k": 39.5,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2004,
+          "vitimas": 205,
+          "ocorrencias": 192,
+          "taxa_por_100k": 35.2,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2005,
+          "vitimas": 182,
+          "ocorrencias": 170,
+          "taxa_por_100k": 30.5,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2006,
+          "vitimas": 164,
+          "ocorrencias": 152,
+          "taxa_por_100k": 26.9,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2007,
+          "vitimas": 145,
+          "ocorrencias": 136,
+          "taxa_por_100k": 23.3,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2008,
+          "vitimas": 130,
+          "ocorrencias": 122,
+          "taxa_por_100k": 20.4,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2009,
+          "vitimas": 118,
+          "ocorrencias": 110,
+          "taxa_por_100k": 18.2,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2010,
+          "vitimas": 95,
+          "ocorrencias": 89,
+          "taxa_por_100k": 15.1,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2011,
+          "vitimas": 88,
+          "ocorrencias": 82,
+          "taxa_por_100k": 13.7,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2012,
+          "vitimas": 98,
+          "ocorrencias": 90,
+          "taxa_por_100k": 14.9,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2013,
+          "vitimas": 84,
+          "ocorrencias": 78,
+          "taxa_por_100k": 12.5,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2014,
+          "vitimas": 79,
+          "ocorrencias": 74,
+          "taxa_por_100k": 11.5,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2015,
+          "vitimas": 72,
+          "ocorrencias": 67,
+          "taxa_por_100k": 10.3,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2016,
+          "vitimas": 77,
+          "ocorrencias": 74,
+          "taxa_por_100k": 10.88,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2017,
+          "vitimas": 61,
+          "ocorrencias": 46,
+          "taxa_por_100k": 6.69,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2018,
+          "vitimas": 49,
+          "ocorrencias": 39,
+          "taxa_por_100k": 5.58,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2019,
+          "vitimas": 36,
+          "ocorrencias": 35,
+          "taxa_por_100k": 4.95,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2020,
+          "vitimas": 37,
+          "ocorrencias": 37,
+          "taxa_por_100k": 5.17,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2021,
+          "vitimas": 47,
+          "ocorrencias": 45,
+          "taxa_por_100k": 6.28,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2022,
+          "vitimas": 47,
+          "ocorrencias": 46,
+          "taxa_por_100k": 6.14,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2023,
+          "vitimas": 44,
+          "ocorrencias": 44,
+          "taxa_por_100k": 6.28,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2024,
+          "vitimas": 23,
+          "ocorrencias": 23,
+          "taxa_por_100k": 3.28,
+          "verificacao": "primaria"
+        },
+        {
+          "ano": 2025,
+          "vitimas": 33,
+          "ocorrencias": 29,
+          "taxa_por_100k": 4.12,
+          "verificacao": "primaria"
+        }
+      ],
+      "ocorrencias_mensais_2023_2024": {
+        "2023": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 20,
+            "furto_veiculo": 113,
+            "roubo_outros": 131,
+            "furto_outros": 504,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 128,
+            "roubo_outros": 132,
+            "furto_outros": 440,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 126,
+            "roubo_outros": 103,
+            "furto_outros": 521,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 104,
+            "roubo_outros": 97,
+            "furto_outros": 484,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 99,
+            "roubo_outros": 132,
+            "furto_outros": 559,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 13,
+            "furto_veiculo": 103,
+            "roubo_outros": 96,
+            "furto_outros": 558,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 135,
+            "roubo_outros": 78,
+            "furto_outros": 554,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 8,
+            "furto_veiculo": 95,
+            "roubo_outros": 101,
+            "furto_outros": 601,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 9,
+            "furto_veiculo": 57,
+            "roubo_outros": 75,
+            "furto_outros": 474,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 80,
+            "roubo_outros": 89,
+            "furto_outros": 500,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 97,
+            "roubo_outros": 72,
+            "furto_outros": 489,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": 7,
+            "roubo_veiculo": 18,
+            "furto_veiculo": 83,
+            "roubo_outros": 95,
+            "furto_outros": 411,
+            "latrocinio": 0
+          }
+        ],
+        "2024": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 5,
+            "furto_veiculo": 78,
+            "roubo_outros": 73,
+            "furto_outros": 517,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 59,
+            "roubo_outros": 84,
+            "furto_outros": 401,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 44,
+            "roubo_outros": 81,
+            "furto_outros": 450,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 51,
+            "roubo_outros": 90,
+            "furto_outros": 440,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 46,
+            "roubo_outros": 73,
+            "furto_outros": 405,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 51,
+            "roubo_outros": 72,
+            "furto_outros": 425,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 59,
+            "roubo_outros": 89,
+            "furto_outros": 449,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 52,
+            "roubo_outros": 87,
+            "furto_outros": 352,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": 0,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 60,
+            "roubo_outros": 85,
+            "furto_outros": 413,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 19,
+            "furto_veiculo": 64,
+            "roubo_outros": 77,
+            "furto_outros": 520,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 76,
+            "roubo_outros": 80,
+            "furto_outros": 425,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 17,
+            "furto_veiculo": 84,
+            "roubo_outros": 74,
+            "furto_outros": 444,
+            "latrocinio": 0
+          }
+        ],
+        "2025": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 55,
+            "roubo_outros": 71,
+            "furto_outros": 468,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 55,
+            "roubo_outros": 65,
+            "furto_outros": 441,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 54,
+            "roubo_outros": 56,
+            "furto_outros": 472,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 51,
+            "roubo_outros": 47,
+            "furto_outros": 430,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 5,
+            "furto_veiculo": 67,
+            "roubo_outros": 74,
+            "furto_outros": 401,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": 5,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 46,
+            "roubo_outros": 34,
+            "furto_outros": 412,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 51,
+            "roubo_outros": 42,
+            "furto_outros": 425,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 53,
+            "roubo_outros": 40,
+            "furto_outros": 408,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 9,
+            "furto_veiculo": 84,
+            "roubo_outros": 50,
+            "furto_outros": 563,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 4,
+            "furto_veiculo": 70,
+            "roubo_outros": 54,
+            "furto_outros": 484,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 73,
+            "roubo_outros": 45,
+            "furto_outros": 436,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 5,
+            "furto_veiculo": 79,
+            "roubo_outros": 37,
+            "furto_outros": 405,
+            "latrocinio": 0
+          }
+        ]
+      },
+      "ocorrencias_anuais_por_categoria": {
+        "2018": {
+          "homicidio_doloso": 39,
+          "roubo_veiculo": 707,
+          "furto_veiculo": 2193,
+          "roubo_outros": 2844,
+          "furto_outros": 5688,
+          "latrocinio": 10
+        },
+        "2019": {
+          "homicidio_doloso": 35,
+          "roubo_veiculo": 452,
+          "furto_veiculo": 1806,
+          "roubo_outros": 2206,
+          "furto_outros": 5126,
+          "latrocinio": 2
+        },
+        "2020": {
+          "homicidio_doloso": 37,
+          "roubo_veiculo": 276,
+          "furto_veiculo": 986,
+          "roubo_outros": 1809,
+          "furto_outros": 4025,
+          "latrocinio": 0
+        },
+        "2021": {
+          "homicidio_doloso": 45,
+          "roubo_veiculo": 302,
+          "furto_veiculo": 800,
+          "roubo_outros": 1675,
+          "furto_outros": 4969,
+          "latrocinio": 2
+        },
+        "2022": {
+          "homicidio_doloso": 46,
+          "roubo_veiculo": 245,
+          "furto_veiculo": 1286,
+          "roubo_outros": 1359,
+          "furto_outros": 5640,
+          "latrocinio": 3
+        },
+        "2023": {
+          "homicidio_doloso": 44,
+          "roubo_veiculo": 158,
+          "furto_veiculo": 1220,
+          "roubo_outros": 1201,
+          "furto_outros": 6095,
+          "latrocinio": 2
+        },
+        "2024": {
+          "homicidio_doloso": 23,
+          "roubo_veiculo": 143,
+          "furto_veiculo": 724,
+          "roubo_outros": 965,
+          "furto_outros": 5241,
+          "latrocinio": 2
+        },
+        "2025": {
+          "homicidio_doloso": 29,
+          "roubo_veiculo": 87,
+          "furto_veiculo": 738,
+          "roubo_outros": 615,
+          "furto_outros": 5345,
+          "latrocinio": 1
+        }
+      },
+      "produtividade_policial_2024": {
+        "prisoes_efetuadas": 2170,
+        "flagrantes_lavrados": 1295,
+        "inqueritos_policiais_instaurados": 5647,
+        "veiculos_recuperados": 452,
+        "armas_fogo_apreendidas": 199,
+        "trafico_entorpecentes": 438
+      },
+      "taxas_delito_ssp": [
+        {
+          "idUnidade": 560,
+          "ano": "2025",
+          "homicidios": "4,12",
+          "furtos": "760,01",
+          "roubos": "87,45",
+          "frvHabitantes": "117,31",
+          "furtoVeiculo": "143,65",
+          "rouboVeiculo": "16,93",
+          "frvVeiculos": "160,59"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2024",
+          "homicidios": "3,28",
+          "furtos": "748,38",
+          "roubos": "137,80",
+          "frvHabitantes": "123,80",
+          "furtoVeiculo": "145,22",
+          "rouboVeiculo": "28,68",
+          "frvVeiculos": "173,90"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2023",
+          "homicidios": "6,28",
+          "furtos": "870,33",
+          "roubos": "171,50",
+          "frvHabitantes": "196,77",
+          "furtoVeiculo": "252,13",
+          "rouboVeiculo": "32,65",
+          "frvVeiculos": "284,78"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2022",
+          "homicidios": "6,14",
+          "furtos": "752,73",
+          "roubos": "181,38",
+          "frvHabitantes": "204,33",
+          "furtoVeiculo": "272,39",
+          "rouboVeiculo": "51,89",
+          "frvVeiculos": "324,28"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2021",
+          "homicidios": "6,28",
+          "furtos": "693,33",
+          "roubos": "233,71",
+          "frvHabitantes": "153,76",
+          "furtoVeiculo": "172,58",
+          "rouboVeiculo": "65,15",
+          "frvVeiculos": "237,72"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2020",
+          "homicidios": "5,17",
+          "furtos": "562,20",
+          "roubos": "252,68",
+          "frvHabitantes": "176,27",
+          "furtoVeiculo": "217,18",
+          "rouboVeiculo": "60,79",
+          "frvVeiculos": "277,97"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2019",
+          "homicidios": "4,95",
+          "furtos": "724,88",
+          "roubos": "311,95",
+          "frvHabitantes": "319,31",
+          "furtoVeiculo": "403,70",
+          "rouboVeiculo": "101,04",
+          "frvVeiculos": "504,74"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2018",
+          "homicidios": "5,58",
+          "furtos": "814,47",
+          "roubos": "407,23",
+          "frvHabitantes": "415,25",
+          "furtoVeiculo": "506,27",
+          "rouboVeiculo": "163,22",
+          "frvVeiculos": "669,48"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2017",
+          "homicidios": "6,69",
+          "furtos": "903,65",
+          "roubos": "456,41",
+          "frvHabitantes": "473,86",
+          "furtoVeiculo": "588,04",
+          "rouboVeiculo": "181,99",
+          "frvVeiculos": "770,02"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2016",
+          "homicidios": "10,88",
+          "furtos": "937,64",
+          "roubos": "625,58",
+          "frvHabitantes": "473,38",
+          "furtoVeiculo": "572,05",
+          "rouboVeiculo": "206,24",
+          "frvVeiculos": "778,29"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2015",
+          "homicidios": "9,52",
+          "furtos": "802,76",
+          "roubos": "514,60",
+          "frvHabitantes": "422,12",
+          "furtoVeiculo": "486,86",
+          "rouboVeiculo": "214,05",
+          "frvVeiculos": "700,91"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2014",
+          "homicidios": "8,29",
+          "furtos": "797,58",
+          "roubos": "481,59",
+          "frvHabitantes": "448,44",
+          "furtoVeiculo": "459,48",
+          "rouboVeiculo": "296,00",
+          "frvVeiculos": "755,48"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2013",
+          "homicidios": "9,93",
+          "furtos": "892,91",
+          "roubos": "438,59",
+          "frvHabitantes": "443,93",
+          "furtoVeiculo": "494,53",
+          "rouboVeiculo": "272,19",
+          "frvVeiculos": "766,73"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2012",
+          "homicidios": "10,21",
+          "furtos": "929,68",
+          "roubos": "466,15",
+          "frvHabitantes": "441,86",
+          "furtoVeiculo": "512,42",
+          "rouboVeiculo": "279,23",
+          "frvVeiculos": "791,65"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2011",
+          "homicidios": "9,72",
+          "furtos": "944,84",
+          "roubos": "546,92",
+          "frvHabitantes": "448,42",
+          "furtoVeiculo": "495,46",
+          "rouboVeiculo": "342,72",
+          "frvVeiculos": "838,18"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2010",
+          "homicidios": "8,74",
+          "furtos": "973,76",
+          "roubos": "562,54",
+          "frvHabitantes": "401,05",
+          "furtoVeiculo": "499,65",
+          "rouboVeiculo": "291,20",
+          "frvVeiculos": "790,84"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2009",
+          "homicidios": "11,13",
+          "furtos": "959,56",
+          "roubos": "620,72",
+          "frvHabitantes": "441,14",
+          "furtoVeiculo": "565,30",
+          "rouboVeiculo": "359,61",
+          "frvVeiculos": "924,91"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2008",
+          "homicidios": "9,33",
+          "furtos": "931,98",
+          "roubos": "523,37",
+          "frvHabitantes": "453,14",
+          "furtoVeiculo": "651,54",
+          "rouboVeiculo": "365,64",
+          "frvVeiculos": "1.017,19"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2007",
+          "homicidios": "11,63",
+          "furtos": "1.080,56",
+          "roubos": "561,46",
+          "frvHabitantes": "400,00",
+          "furtoVeiculo": "621,87",
+          "rouboVeiculo": "349,25",
+          "frvVeiculos": "971,11"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2006",
+          "homicidios": "14,50",
+          "furtos": "1.124,31",
+          "roubos": "569,74",
+          "frvHabitantes": "519,68",
+          "furtoVeiculo": "838,23",
+          "rouboVeiculo": "513,37",
+          "frvVeiculos": "1.351,60"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2005",
+          "homicidios": "14,55",
+          "furtos": "1.164,96",
+          "roubos": "593,69",
+          "frvHabitantes": "548,85",
+          "furtoVeiculo": "928,10",
+          "rouboVeiculo": "590,48",
+          "frvVeiculos": "1.518,58"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2004",
+          "homicidios": "24,16",
+          "furtos": "1.037,13",
+          "roubos": "502,84",
+          "frvHabitantes": "493,97",
+          "furtoVeiculo": "912,36",
+          "rouboVeiculo": "518,62",
+          "frvVeiculos": "1.430,98"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2003",
+          "homicidios": "30,90",
+          "furtos": "951,67",
+          "roubos": "586,89",
+          "frvHabitantes": "484,13",
+          "furtoVeiculo": "897,01",
+          "rouboVeiculo": "546,42",
+          "frvVeiculos": "1.443,42"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2002",
+          "homicidios": "33,37",
+          "furtos": "853,89",
+          "roubos": "513,34",
+          "frvHabitantes": "464,89",
+          "furtoVeiculo": "921,39",
+          "rouboVeiculo": "515,89",
+          "frvVeiculos": "1.437,27"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2001",
+          "homicidios": "42,15",
+          "furtos": "840,37",
+          "roubos": "535,50",
+          "frvHabitantes": "567,79",
+          "furtoVeiculo": "1.078,90",
+          "rouboVeiculo": "744,86",
+          "frvVeiculos": "1.823,77"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2000",
+          "homicidios": "48,71",
+          "furtos": "957,24",
+          "roubos": "564,79",
+          "frvHabitantes": "604,76",
+          "furtoVeiculo": "-",
+          "rouboVeiculo": "-",
+          "frvVeiculos": "-"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "1999",
+          "homicidios": "47,85",
+          "furtos": "870,79",
+          "roubos": "573,62",
+          "frvHabitantes": "474,32",
+          "furtoVeiculo": "-",
+          "rouboVeiculo": "-",
+          "frvVeiculos": "-"
+        }
+      ],
+      "ranking_cidades_500k_2024": [
+        {
+          "posicao": 1,
+          "cidade": "São José dos Campos",
+          "taxa_100k": 3.28,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 2,
+          "cidade": "São Bernardo do Campo",
+          "taxa_100k": 3.7,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 3,
+          "cidade": "São Paulo",
+          "taxa_100k": 4.21,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 4,
+          "cidade": "Osasco",
+          "taxa_100k": 4.24,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 5,
+          "cidade": "Santo André",
+          "taxa_100k": 4.25,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 6,
+          "cidade": "Ribeirão Preto",
+          "taxa_100k": 4.54,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 7,
+          "cidade": "Guarulhos",
+          "taxa_100k": 5.03,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 8,
+          "cidade": "Sorocaba",
+          "taxa_100k": 7.23,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 9,
+          "cidade": "Campinas",
+          "taxa_100k": 7.54,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 10,
+          "cidade": "São José do Rio Preto",
+          "taxa_100k": 8.86,
+          "verificacao": "primaria"
+        }
+      ],
+      "esclarecimento_deic_2024": {
+        "total_homicidios": 23,
+        "taxa_esclarecimento_pct": 87.0,
+        "fonte": "Divisão de Homicídios do DEIC São José dos Campos",
+        "verificacao": "secundaria",
+        "meios_empregados": [
+          {
+            "meio": "Arma de Fogo",
+            "casos": 14,
+            "pct": 60.9
+          },
+          {
+            "meio": "Arma Branca (Faca)",
+            "casos": 5,
+            "pct": 21.7
+          },
+          {
+            "meio": "Agressão Física / Espancamento",
+            "casos": 2,
+            "pct": 8.7
+          },
+          {
+            "meio": "Asfixia / Estrangulamento",
+            "casos": 1,
+            "pct": 4.3
+          },
+          {
+            "meio": "Outros Meios",
+            "casos": 1,
+            "pct": 4.3
+          }
+        ]
+      },
+      "programa_sao_jose_unida": {
+        "ano_criacao": 2017,
+        "ocorrencias_atendidas": 2948,
+        "veiculos_recuperados": 674,
+        "procurados_recapturados": 298,
+        "pessoas_detidas_cameras": 1373,
+        "acoes_integradas": 800,
+        "satisfacao_indsat_pontos": 681,
+        "aprovacao_populacao_pct": 86.2,
+        "fonte": "Prefeitura Municipal de São José dos Campos (Secretaria de Proteção ao Cidadão / CSI)",
+        "fonte_url": "https://www.sjc.sp.gov.br/noticias/2025/janeiro/03/sao-jose-tem-o-menor-numero-de-homicidio-da-historia/",
+        "verificacao": "secundaria"
+      }
+    },
+    "meio_ambiente": {
+      "qualidade_ar_cetesb_2023": {
+        "estacao_jd_satelite": {
+          "tipo": "Automática Urbana",
+          "poluentes_monitorados": [
+            "MP10",
+            "MP2.5",
+            "O3",
+            "NO2",
+            "CO"
+          ],
+          "classificacao_anual": "Boa na maior parte do ano; episódios moderados no inverno por inversão térmica",
+          "dias_boa": 312,
+          "dias_boa_pct": 82.4,
+          "dias_moderada_pct": 15.6,
+          "dias_ruim_pct": 2.0
+        },
+        "estacao_vista_verde": {
+          "tipo": "Automática Industrial/Rodoviária",
+          "poluentes_monitorados": [
+            "MP10",
+            "O3",
+            "SO2"
+          ],
+          "classificacao_anual": "Influenciada pelo eixo Dutra e polo petroquímico; índices dentro dos padrões Conama",
+          "dias_boa": 324,
+          "dias_boa_pct": 79.8,
+          "dias_moderada_pct": 17.5,
+          "dias_ruim_pct": 2.7
+        },
+        "fonte_nome": "CETESB - Rede de Monitoramento da Qualidade do Ar",
+        "fonte_url": "https://cetesb.sp.gov.br/ar/qualidade-do-ar/",
+        "data_consulta": "2026-09-27"
+      },
+      "qualidade_ar_cetesb_mensal_2023_2024": {
+        "2023": [
+          {
+            "mes": "Jan",
+            "dias_boa": 28,
+            "dias_moderada": 3,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Fev",
+            "dias_boa": 26,
+            "dias_moderada": 2,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Mar",
+            "dias_boa": 29,
+            "dias_moderada": 2,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Abr",
+            "dias_boa": 26,
+            "dias_moderada": 4,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Mai",
+            "dias_boa": 23,
+            "dias_moderada": 7,
+            "dias_ruim": 1
+          },
+          {
+            "mes": "Jun",
+            "dias_boa": 21,
+            "dias_moderada": 8,
+            "dias_ruim": 1
+          },
+          {
+            "mes": "Jul",
+            "dias_boa": 19,
+            "dias_moderada": 10,
+            "dias_ruim": 2
+          },
+          {
+            "mes": "Ago",
+            "dias_boa": 18,
+            "dias_moderada": 11,
+            "dias_ruim": 2
+          },
+          {
+            "mes": "Set",
+            "dias_boa": 20,
+            "dias_moderada": 9,
+            "dias_ruim": 1
+          },
+          {
+            "mes": "Out",
+            "dias_boa": 25,
+            "dias_moderada": 6,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Nov",
+            "dias_boa": 27,
+            "dias_moderada": 3,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Dez",
+            "dias_boa": 29,
+            "dias_moderada": 2,
+            "dias_ruim": 0
+          }
+        ],
+        "2024": [
+          {
+            "mes": "Jan",
+            "dias_boa": 29,
+            "dias_moderada": 2,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Fev",
+            "dias_boa": 27,
+            "dias_moderada": 2,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Mar",
+            "dias_boa": 28,
+            "dias_moderada": 3,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Abr",
+            "dias_boa": 25,
+            "dias_moderada": 5,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Mai",
+            "dias_boa": 22,
+            "dias_moderada": 8,
+            "dias_ruim": 1
+          },
+          {
+            "mes": "Jun",
+            "dias_boa": 20,
+            "dias_moderada": 9,
+            "dias_ruim": 1
+          },
+          {
+            "mes": "Jul",
+            "dias_boa": 17,
+            "dias_moderada": 11,
+            "dias_ruim": 3
+          },
+          {
+            "mes": "Ago",
+            "dias_boa": 14,
+            "dias_moderada": 13,
+            "dias_ruim": 4
+          },
+          {
+            "mes": "Set",
+            "dias_boa": 16,
+            "dias_moderada": 11,
+            "dias_ruim": 3
+          },
+          {
+            "mes": "Out",
+            "dias_boa": 24,
+            "dias_moderada": 7,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Nov",
+            "dias_boa": 27,
+            "dias_moderada": 3,
+            "dias_ruim": 0
+          },
+          {
+            "mes": "Dez",
+            "dias_boa": 29,
+            "dias_moderada": 2,
+            "dias_ruim": 0
+          }
+        ]
+      },
+      "focos_queimadas_inpe_serie": [
+        {
+          "ano": 2012,
+          "focos": 45
+        },
+        {
+          "ano": 2014,
+          "focos": 78
+        },
+        {
+          "ano": 2016,
+          "focos": 52
+        },
+        {
+          "ano": 2017,
+          "focos": 61
+        },
+        {
+          "ano": 2018,
+          "focos": 42
+        },
+        {
+          "ano": 2019,
+          "focos": 58
+        },
+        {
+          "ano": 2020,
+          "focos": 89
+        },
+        {
+          "ano": 2021,
+          "focos": 74
+        },
+        {
+          "ano": 2022,
+          "focos": 38
+        },
+        {
+          "ano": 2023,
+          "focos": 46
+        },
+        {
+          "ano": 2024,
+          "focos": 94
+        }
+      ],
+      "saneamento_snis_2022": {
+        "indice_coleta_esgoto_pct": 98.6,
+        "indice_tratamento_esgoto_pct": 95.8,
+        "atendimento_agua_tratada_pct": 99.8,
+        "perda_distribuicao_agua_pct": 22.4,
+        "fonte_nome": "SNIS - Sistema Nacional de Informações sobre Saneamento",
+        "fonte_url": "http://www.snis.gov.br/",
+        "data_consulta": "2026-09-27"
+      },
+      "saneamento_snis_sabesp_2022_2023": {
+        "atendimento_agua_tratada_pct": 99.8,
+        "coleta_esgoto_pct": 98.5,
+        "tratamento_esgoto_pct_da_agua_consumida": 98.2,
+        "perda_distribuicao_agua_pct": 22.4,
+        "populacao_atendida_agua": 695600,
+        "populacao_atendida_esgoto": 686500,
+        "fonte_nome": "SNIS - Sistema Nacional de Informações sobre Saneamento / Sabesp",
+        "fonte_url": "http://www.snis.gov.br/",
+        "data_consulta": "2026-09-27"
+      },
+      "cobertura_vegetal_e_conservacao": {
+        "area_protegida_total_km2": 692.5,
+        "percentual_territorio_protegido": 63.0,
+        "area_verde_urbana_m2_por_hab": 18.4,
+        "unidades_conservacao": [
+          {
+            "nome": "APA Estadual de São Francisco Xavier",
+            "categoria": "Uso Sustentável",
+            "area_ha": 11500
+          },
+          {
+            "nome": "Parque Estadual Mananciais de Campos do Jordão",
+            "categoria": "Proteção Integral",
+            "area_ha": 340
+          },
+          {
+            "nome": "Parque Natural Municipal Augusto Ruschi",
+            "categoria": "Proteção Integral",
+            "area_ha": 250
+          },
+          {
+            "nome": "ARIE Cerâmica e Cerrado",
+            "categoria": "Uso Sustentável",
+            "area_ha": 120
+          }
+        ],
+        "fonte_nome": "Secretaria de Urbanismo e Sustentabilidade de SJC / Fundação Florestal",
+        "fonte_url": "https://www.sjc.sp.gov.br/servicos/urbanismo-e-sustentabilidade/",
+        "data_consulta": "2026-09-27"
+      },
+      "fonte_nome": "CETESB / INPE Queimadas / SNIS / Sabesp",
+      "fonte_url": "https://cetesb.sp.gov.br/",
+      "data_consulta": "2026-09-27"
+    },
+    "economia": {
+      "pib_municipal_oficial": {
+        "pib_corrente_reais_milhoes_2021": 45208.8,
+        "pib_corrente_reais_milhoes_2022": 56653.3,
+        "pib_per_capita_reais_2022": 81200.0,
+        "pib_total_2023_bilhoes": 61.4,
+        "pib_per_capita_reais_2023": 88077.14,
+        "posicao_ranking_estadual": 9,
+        "posicao_ranking_nacional": 23,
+        "fonte_nome": "IBGE - Produto Interno Bruto dos Municípios / Fundação SEADE",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/pesquisa/38/46996",
+        "fonte_pib_2023": "IBGE PIB Municípios 2023, divulgado 19/12/2025",
+        "nota_composicao_setorial": "Abertura setorial disponível via API SIDRA Tabela 5938 (variáveis 513, 517, 6575) para 2002–2021. Carregada dinamicamente no frontend.",
+        "data_consulta": "2026-09-27"
+      },
+      "pib_serie_historica": [
+        {
+          "ano": 2010,
+          "pib_milhoes": 25848.1,
+          "pib_per_capita": 40020.0
+        },
+        {
+          "ano": 2012,
+          "pib_milhoes": 26584.7,
+          "pib_per_capita": 46210.0
+        },
+        {
+          "ano": 2014,
+          "pib_milhoes": 30343.7,
+          "pib_per_capita": 52680.0
+        },
+        {
+          "ano": 2016,
+          "pib_milhoes": 41630.2,
+          "pib_per_capita": 55740.0
+        },
+        {
+          "ano": 2018,
+          "pib_milhoes": 39694.8,
+          "pib_per_capita": 60520.0
+        },
+        {
+          "ano": 2019,
+          "pib_milhoes": 43562.3,
+          "pib_per_capita": 61840.0
+        },
+        {
+          "ano": 2020,
+          "pib_milhoes": 39363.7,
+          "pib_per_capita": 60610.0
+        },
+        {
+          "ano": 2021,
+          "pib_milhoes": 45208.8,
+          "pib_per_capita": 61320.0
+        },
+        {
+          "ano": 2022,
+          "pib_milhoes": 56653.3,
+          "pib_per_capita": 81200.0
+        },
+        {
+          "ano": 2023,
+          "pib_milhoes": 61400.0,
+          "pib_per_capita": 88077.14
+        }
+      ],
+      "novo_caged_2023": {
+        "estoque_dez_2023": 212800,
+        "salario_medio_formal_sm": 3.4,
+        "salario_medio_formal_reais": 4820.0,
+        "fonte_nome": "Ministério do Trabalho e Emprego - Novo CAGED",
+        "fonte_url": "http://pdet.mte.gov.br/novo-caged",
+        "data_consulta": "2026-09-27"
+      },
+      "emprego_formal_novo_caged": {
+        "estoque_carteiras_assinadas_2023": 211530,
+        "estoque_carteiras_assinadas_2024": 214042,
+        "salario_medio_formal_sm": 3.4,
+        "salario_medio_formal_reais": 4820.0,
+        "saldo_anual_historico": [
+          {
+            "ano": 2018,
+            "saldo": 1820
+          },
+          {
+            "ano": 2019,
+            "saldo": 2410
+          },
+          {
+            "ano": 2020,
+            "saldo": -1840
+          },
+          {
+            "ano": 2021,
+            "saldo": 8420
+          },
+          {
+            "ano": 2022,
+            "saldo": 4910
+          },
+          {
+            "ano": 2023,
+            "saldo": 3280
+          },
+          {
+            "ano": 2024,
+            "saldo": 2512
+          }
+        ],
+        "distribuicao_setorial_emprego_2023": [
+          {
+            "setor": "Serviços",
+            "vagas": 112100,
+            "pct": 53.0
+          },
+          {
+            "setor": "Indústria",
+            "vagas": 54980,
+            "pct": 26.0
+          },
+          {
+            "setor": "Comércio",
+            "vagas": 33840,
+            "pct": 16.0
+          },
+          {
+            "setor": "Construção Civil",
+            "vagas": 9510,
+            "pct": 4.5
+          },
+          {
+            "setor": "Agropecuária",
+            "vagas": 1100,
+            "pct": 0.5
+          }
+        ],
+        "fonte_nome": "Ministério do Trabalho e Emprego - Novo CAGED",
+        "fonte_url": "http://pdet.mte.gov.br/novo-caged",
+        "data_consulta": "2026-09-27"
+      },
+      "caged_mensal_2023_2024": {
+        "2023": [
+          {
+            "mes": "Jan",
+            "admissoes": 7450,
+            "desligamentos": 7180,
+            "saldo": 270
+          },
+          {
+            "mes": "Fev",
+            "admissoes": 7890,
+            "desligamentos": 7320,
+            "saldo": 570
+          },
+          {
+            "mes": "Mar",
+            "admissoes": 8420,
+            "desligamentos": 7910,
+            "saldo": 510
+          },
+          {
+            "mes": "Abr",
+            "admissoes": 7650,
+            "desligamentos": 7340,
+            "saldo": 310
+          },
+          {
+            "mes": "Mai",
+            "admissoes": 8110,
+            "desligamentos": 7720,
+            "saldo": 390
+          },
+          {
+            "mes": "Jun",
+            "admissoes": 7920,
+            "desligamentos": 7580,
+            "saldo": 340
+          },
+          {
+            "mes": "Jul",
+            "admissoes": 7840,
+            "desligamentos": 7510,
+            "saldo": 330
+          },
+          {
+            "mes": "Ago",
+            "admissoes": 8310,
+            "desligamentos": 7890,
+            "saldo": 420
+          },
+          {
+            "mes": "Set",
+            "admissoes": 8050,
+            "desligamentos": 7690,
+            "saldo": 360
+          },
+          {
+            "mes": "Out",
+            "admissoes": 8200,
+            "desligamentos": 7910,
+            "saldo": 290
+          },
+          {
+            "mes": "Nov",
+            "admissoes": 8120,
+            "desligamentos": 7840,
+            "saldo": 280
+          },
+          {
+            "mes": "Dez",
+            "admissoes": 6120,
+            "desligamentos": 6910,
+            "saldo": -790
+          }
+        ],
+        "2024": [
+          {
+            "mes": "Jan",
+            "admissoes": 7610,
+            "desligamentos": 7340,
+            "saldo": 270
+          },
+          {
+            "mes": "Fev",
+            "admissoes": 8040,
+            "desligamentos": 7490,
+            "saldo": 550
+          },
+          {
+            "mes": "Mar",
+            "admissoes": 8510,
+            "desligamentos": 8020,
+            "saldo": 490
+          },
+          {
+            "mes": "Abr",
+            "admissoes": 7820,
+            "desligamentos": 7480,
+            "saldo": 340
+          },
+          {
+            "mes": "Mai",
+            "admissoes": 8290,
+            "desligamentos": 7890,
+            "saldo": 400
+          },
+          {
+            "mes": "Jun",
+            "admissoes": 8010,
+            "desligamentos": 7710,
+            "saldo": 300
+          },
+          {
+            "mes": "Jul",
+            "admissoes": 8190,
+            "desligamentos": 7696,
+            "saldo": 494
+          },
+          {
+            "mes": "Ago",
+            "admissoes": 8450,
+            "desligamentos": 8110,
+            "saldo": 340
+          },
+          {
+            "mes": "Set",
+            "admissoes": 8210,
+            "desligamentos": 7910,
+            "saldo": 300
+          },
+          {
+            "mes": "Out",
+            "admissoes": 8340,
+            "desligamentos": 8080,
+            "saldo": 260
+          },
+          {
+            "mes": "Nov",
+            "admissoes": 8250,
+            "desligamentos": 8010,
+            "saldo": 240
+          },
+          {
+            "mes": "Dez",
+            "admissoes": 6340,
+            "desligamentos": 7112,
+            "saldo": -772
+          }
+        ]
+      },
+      "empresas_ativas_receita_federal_2023": {
+        "total_cnpjs_ativos": 88420,
+        "total_cnpjs_ativos_2024": 92140,
+        "meis_ativos": 51240,
+        "microempresas_me": 25180,
+        "empresas_pequeno_porte_epp": 6920,
+        "medias_e_grandes_empresas": 5080,
+        "distribuicao_por_atividade": [
+          {
+            "setor": "Serviços e Tecnologia",
+            "pct": 58.2
+          },
+          {
+            "setor": "Comércio Varejista/Atacadista",
+            "pct": 28.4
+          },
+          {
+            "setor": "Indústria de Transformação",
+            "pct": 8.6
+          },
+          {
+            "setor": "Construção Civil",
+            "pct": 4.8
+          }
+        ],
+        "fonte_nome": "Receita Federal do Brasil / Portal Empresa Fácil SJC",
+        "fonte_url": "https://solucoes.receita.fazenda.gov.br/",
+        "data_consulta": "2026-09-27"
+      },
+      "fonte_nome": "IBGE / Ministério do Trabalho (CAGED) / Receita Federal",
+      "fonte_url": "https://www.ibge.gov.br/",
+      "data_consulta": "2026-09-27"
+    },
+    "educacao": {
+      "ideb_inep_serie": [
+        {
+          "ano": 2005,
+          "anos_iniciais": 5.1,
+          "anos_iniciais_fundamental": 5.1,
+          "meta_iniciais": 4.8,
+          "anos_finais": 4.3,
+          "meta_finais": 3.9
+        },
+        {
+          "ano": 2007,
+          "anos_iniciais": 5.5,
+          "anos_iniciais_fundamental": 5.5,
+          "meta_iniciais": 5.0,
+          "anos_finais": 4.4,
+          "meta_finais": 4.1
+        },
+        {
+          "ano": 2009,
+          "anos_iniciais": 5.8,
+          "anos_iniciais_fundamental": 5.8,
+          "meta_iniciais": 5.4,
+          "anos_finais": 4.6,
+          "meta_finais": 4.4
+        },
+        {
+          "ano": 2011,
+          "anos_iniciais": 6.1,
+          "anos_iniciais_fundamental": 6.1,
+          "meta_iniciais": 5.7,
+          "anos_finais": 4.9,
+          "meta_finais": 4.7
+        },
+        {
+          "ano": 2013,
+          "anos_iniciais": 6.4,
+          "anos_iniciais_fundamental": 6.4,
+          "meta_iniciais": 6.0,
+          "anos_finais": 5.1,
+          "meta_finais": 5.0
+        },
+        {
+          "ano": 2015,
+          "anos_iniciais": 6.7,
+          "anos_iniciais_fundamental": 6.7,
+          "meta_iniciais": 6.2,
+          "anos_finais": 5.2,
+          "meta_finais": 5.2
+        },
+        {
+          "ano": 2017,
+          "anos_iniciais": 7.0,
+          "anos_iniciais_fundamental": 7.0,
+          "meta_iniciais": 6.5,
+          "anos_finais": 5.3,
+          "meta_finais": 5.5
+        },
+        {
+          "ano": 2019,
+          "anos_iniciais": 7.1,
+          "anos_iniciais_fundamental": 7.1,
+          "meta_iniciais": 6.7,
+          "anos_finais": 5.7,
+          "meta_finais": 5.7
+        },
+        {
+          "ano": 2021,
+          "anos_iniciais": 6.6,
+          "anos_iniciais_fundamental": 6.6,
+          "meta_iniciais": 6.9,
+          "anos_finais": 5.5,
+          "meta_finais": 6.0
+        },
+        {
+          "ano": 2023,
+          "anos_iniciais": 6.8,
+          "anos_iniciais_fundamental": 6.8,
+          "meta_iniciais": 7.0,
+          "anos_finais": 5.8,
+          "meta_finais": 6.2
+        }
+      ],
+      "matriculas_censo_escolar_2023": {
+        "ano": 2023,
+        "total_matriculas": 142850,
+        "educacao_infantil": 31240,
+        "ensino_fundamental": 68420,
+        "ensino_medio": 24980,
+        "educacao_profissional_tecnica": 8920,
+        "educacao_jovens_adultos_eja": 4120,
+        "educacao_especial": 5170,
+        "ensino_superior_graduacao": 42100,
+        "fonte_nome": "INEP / MEC - Censo Escolar da Educação Básica",
+        "fonte_url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/censo-escolar",
+        "data_consulta": "2026-09-27"
+      },
+      "matriculas_por_rede_censo_2023": [
+        {
+          "rede": "Municipal",
+          "matriculas": 56420,
+          "pct": 39.5
+        },
+        {
+          "rede": "Estadual",
+          "matriculas": 48910,
+          "pct": 34.2
+        },
+        {
+          "rede": "Privada",
+          "matriculas": 34980,
+          "pct": 24.5
+        },
+        {
+          "rede": "Federal",
+          "matriculas": 2540,
+          "pct": 1.8
+        }
+      ],
+      "indicadores_socioeducacionais": {
+        "taxa_escolarizacao_6_a_14_anos": 99.09,
+        "idhm_educacao": 0.764,
+        "taxa_analfabetismo_15_anos_mais": 2.1,
+        "fonte_nome": "IBGE Cidades / Atlas do Desenvolvimento Humano",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27"
+      },
+      "fonte_nome": "INEP / MEC - Instituto Nacional de Estudos e Pesquisas Educacionais",
+      "fonte_url": "https://www.gov.br/inep/pt-br",
+      "data_consulta": "2026-09-27"
+    },
+    "mobilidade": {
+      "frota_veiculos_senatran_2023": {
+        "ano": 2023,
+        "total": 468920,
+        "total_veiculos": 468920,
+        "automoveis": 298410,
+        "motocicletas": 79420,
+        "comerciais_leves_caminhonetes": 51240,
+        "caminhoes_tratores": 14980,
+        "onibus_microonibus": 5890,
+        "outros_reboques": 18980,
+        "taxa_motorizacao_veic_por_hab": 0.67,
+        "fonte_nome": "SENATRAN - Secretaria Nacional de Trânsito",
+        "fonte_url": "https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-senatran/frota-de-veiculos-2024",
+        "data_consulta": "2026-09-27"
+      },
+      "frota_veiculos_serie_historica": [
+        {
+          "ano": 2012,
+          "total": 352100,
+          "automoveis": 234100,
+          "motos": 54200
+        },
+        {
+          "ano": 2015,
+          "total": 395400,
+          "automoveis": 258900,
+          "motos": 64100
+        },
+        {
+          "ano": 2018,
+          "total": 428900,
+          "automoveis": 278100,
+          "motos": 70900
+        },
+        {
+          "ano": 2020,
+          "total": 444200,
+          "automoveis": 286400,
+          "motos": 73800
+        },
+        {
+          "ano": 2022,
+          "total": 459800,
+          "automoveis": 293200,
+          "motos": 76900
+        },
+        {
+          "ano": 2023,
+          "total": 468920,
+          "automoveis": 298410,
+          "motos": 79420
+        },
+        {
+          "ano": 2024,
+          "total": 476500,
+          "automoveis": 302800,
+          "motos": 81900
+        }
+      ],
+      "fatalidades_transito_infosiga_serie": [
+        {
+          "ano": 2015,
+          "obitos": 86,
+          "taxa_por_100k": 12.6,
+          "total_obitos": 86
+        },
+        {
+          "ano": 2016,
+          "obitos": 80,
+          "taxa_por_100k": 11.8,
+          "total_obitos": 80
+        },
+        {
+          "ano": 2017,
+          "obitos": 75,
+          "taxa_por_100k": 11.0,
+          "total_obitos": 75
+        },
+        {
+          "ano": 2018,
+          "obitos": 72,
+          "taxa_por_100k": 10.4,
+          "total_obitos": 72
+        },
+        {
+          "ano": 2019,
+          "obitos": 68,
+          "taxa_por_100k": 9.7,
+          "total_obitos": 68
+        },
+        {
+          "ano": 2020,
+          "obitos": 61,
+          "taxa_por_100k": 8.5,
+          "total_obitos": 61
+        },
+        {
+          "ano": 2021,
+          "obitos": 67,
+          "taxa_por_100k": 9.3,
+          "total_obitos": 67
+        },
+        {
+          "ano": 2022,
+          "obitos": 70,
+          "taxa_por_100k": 10.0,
+          "total_obitos": 70
+        },
+        {
+          "ano": 2023,
+          "obitos": 74,
+          "taxa_por_100k": 10.6,
+          "total_obitos": 74
+        },
+        {
+          "ano": 2024,
+          "obitos": 82,
+          "taxa_por_100k": 11.3,
+          "total_obitos": 82
+        }
+      ],
+      "fatalidades_transito_mensal_2023_2024": {
+        "2023": [
+          {
+            "mes": "Jan",
+            "obitos": 6
+          },
+          {
+            "mes": "Fev",
+            "obitos": 5
+          },
+          {
+            "mes": "Mar",
+            "obitos": 7
+          },
+          {
+            "mes": "Abr",
+            "obitos": 6
+          },
+          {
+            "mes": "Mai",
+            "obitos": 8
+          },
+          {
+            "mes": "Jun",
+            "obitos": 6
+          },
+          {
+            "mes": "Jul",
+            "obitos": 5
+          },
+          {
+            "mes": "Ago",
+            "obitos": 7
+          },
+          {
+            "mes": "Set",
+            "obitos": 6
+          },
+          {
+            "mes": "Out",
+            "obitos": 6
+          },
+          {
+            "mes": "Nov",
+            "obitos": 6
+          },
+          {
+            "mes": "Dez",
+            "obitos": 6
+          }
+        ],
+        "2024": [
+          {
+            "mes": "Jan",
+            "obitos": 7
+          },
+          {
+            "mes": "Fev",
+            "obitos": 6
+          },
+          {
+            "mes": "Mar",
+            "obitos": 8
+          },
+          {
+            "mes": "Abr",
+            "obitos": 7
+          },
+          {
+            "mes": "Mai",
+            "obitos": 9
+          },
+          {
+            "mes": "Jun",
+            "obitos": 6
+          },
+          {
+            "mes": "Jul",
+            "obitos": 7
+          },
+          {
+            "mes": "Ago",
+            "obitos": 7
+          },
+          {
+            "mes": "Set",
+            "obitos": 6
+          },
+          {
+            "mes": "Out",
+            "obitos": 7
+          },
+          {
+            "mes": "Nov",
+            "obitos": 6
+          },
+          {
+            "mes": "Dez",
+            "obitos": 6
+          }
+        ]
+      },
+      "perfil_vitimas_transito_infosiga": [
+        {
+          "modal": "Motociclistas",
+          "pct": 49.5
+        },
+        {
+          "modal": "Pedestres (Atropelamentos)",
+          "pct": 21.8
+        },
+        {
+          "modal": "Ocupantes de Automóvel",
+          "pct": 18.2
+        },
+        {
+          "modal": "Ciclistas",
+          "pct": 8.1
+        },
+        {
+          "modal": "Outros / Não Especificado",
+          "pct": 2.4
+        }
+      ],
+      "fonte_nome": "SENATRAN / Detran-SP (Infosiga SP)",
+      "fonte_url": "https://infosiga.detran.sp.gov.br/",
+      "data_consulta": "2026-09-27"
+    },
+    "financas": {
+      "execucao_orcamentaria_2023_reais_milhoes": {
+        "receita_total_arrecadada": 3842.6,
+        "despesa_total_liquidada": 3721.4,
+        "resultado_orcamentario_superavit": 121.2,
+        "aplicacao_saude_asps_pct": 27.2,
+        "aplicacao_educacao_mde_pct": 25.5,
+        "despesa_total_pessoal_rcl_pct": 41.8,
+        "fonte_nome": "TCE-SP / SICONFI",
+        "fonte_url": "https://www.tce.sp.gov.br/painel-gestao/",
+        "data_consulta": "2026-09-27"
+      },
+      "orcamento_municipal_tce_siconfi_2023": {
+        "receita_arrecadada_reais_milhoes": 3842.6,
+        "despesa_liquidada_reais_milhoes": 3721.4,
+        "superavit_orcamentario_reais_milhoes": 121.2,
+        "despesa_pessoal_pct_receita_corrente_liquida": 41.8,
+        "limite_alerta_lei_resp_fiscal_pct": 48.6,
+        "limite_maximo_lrf_pct": 54.0,
+        "indice_efetividade_gestao_iegm_tce": "B+ (Muito Efetiva)",
+        "fonte_nome": "TCE-SP / SICONFI - Sistema de Informações Contábeis e Fiscais",
+        "fonte_url": "https://www.tce.sp.gov.br/painel-gestao/",
+        "data_consulta": "2026-09-27"
+      },
+      "orcamento_serie_historica": [
+        {
+          "ano": 2018,
+          "receita_milhoes": 2680.0,
+          "despesa_milhoes": 2610.0,
+          "superavit_milhoes": 70.0
+        },
+        {
+          "ano": 2019,
+          "receita_milhoes": 2890.0,
+          "despesa_milhoes": 2810.0,
+          "superavit_milhoes": 80.0
+        },
+        {
+          "ano": 2020,
+          "receita_milhoes": 3020.0,
+          "despesa_milhoes": 2980.0,
+          "superavit_milhoes": 40.0
+        },
+        {
+          "ano": 2021,
+          "receita_milhoes": 3390.0,
+          "despesa_milhoes": 3210.0,
+          "superavit_milhoes": 180.0
+        },
+        {
+          "ano": 2022,
+          "receita_milhoes": 3680.0,
+          "despesa_milhoes": 3540.0,
+          "superavit_milhoes": 140.0
+        },
+        {
+          "ano": 2023,
+          "receita_milhoes": 3842.6,
+          "despesa_milhoes": 3721.4,
+          "superavit_milhoes": 121.2
+        },
+        {
+          "ano": 2024,
+          "receita_milhoes": 4210.0,
+          "despesa_milhoes": 4085.0,
+          "superavit_milhoes": 125.0
+        }
+      ],
+      "despesas_por_funcao_governo_2023_reais_milhoes": [
+        {
+          "funcao": "Saúde",
+          "valor_milhoes": 1012.4,
+          "pct": 27.2
+        },
+        {
+          "funcao": "Educação",
+          "valor_milhoes": 948.8,
+          "pct": 25.5
+        },
+        {
+          "funcao": "Urbanismo e Obras",
+          "valor_milhoes": 521.0,
+          "pct": 14.0
+        },
+        {
+          "funcao": "Administração Geral",
+          "valor_milhoes": 372.1,
+          "pct": 10.0
+        },
+        {
+          "funcao": "Transporte e Mobilidade Urbana",
+          "valor_milhoes": 297.7,
+          "pct": 8.0
+        },
+        {
+          "funcao": "Segurança Pública",
+          "valor_milhoes": 130.2,
+          "pct": 3.5
+        },
+        {
+          "funcao": "Assistência Social",
+          "valor_milhoes": 111.6,
+          "pct": 3.0
+        },
+        {
+          "funcao": "Saneamento e Gestão Ambiental",
+          "valor_milhoes": 93.0,
+          "pct": 2.5
+        },
+        {
+          "funcao": "Demais Funções (Cultura, Esporte, Habitação)",
+          "valor_milhoes": 234.6,
+          "pct": 6.3
+        }
+      ],
+      "composicao_receitas_2023": [
+        {
+          "origem": "ISS (Imposto Sobre Serviços)",
+          "valor_milhoes": 842.0,
+          "pct": 21.9
+        },
+        {
+          "origem": "ICMS (Cota-Parte Estadual)",
+          "valor_milhoes": 798.0,
+          "pct": 20.8
+        },
+        {
+          "origem": "IPTU (Imposto Predial e Territorial)",
+          "valor_milhoes": 452.0,
+          "pct": 11.8
+        },
+        {
+          "origem": "IPVA (Cota-Parte Estadual)",
+          "valor_milhoes": 312.0,
+          "pct": 8.1
+        },
+        {
+          "origem": "FPM (Fundo de Participação dos Municípios)",
+          "valor_milhoes": 286.0,
+          "pct": 7.4
+        },
+        {
+          "origem": "Transferências SUS e FNDE",
+          "valor_milhoes": 542.0,
+          "pct": 14.1
+        },
+        {
+          "origem": "Outras Receitas Correntes e de Capital",
+          "valor_milhoes": 610.6,
+          "pct": 15.9
+        }
+      ],
+      "fonte_nome": "Tribunal de Contas do Estado de São Paulo (TCE-SP) / SICONFI STN",
+      "fonte_url": "https://www.tce.sp.gov.br/painel-gestao/",
+      "data_consulta": "2026-09-27"
+    }
+  }
+}

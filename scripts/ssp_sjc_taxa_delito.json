@@ -1,0 +1,302 @@
+{
+  "success": true,
+  "data": [
+    {
+      "idUnidade": 560,
+      "ano": "2025",
+      "homicidios": "4,12",
+      "furtos": "760,01",
+      "roubos": "87,45",
+      "frvHabitantes": "117,31",
+      "furtoVeiculo": "143,65",
+      "rouboVeiculo": "16,93",
+      "frvVeiculos": "160,59"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2024",
+      "homicidios": "3,28",
+      "furtos": "748,38",
+      "roubos": "137,80",
+      "frvHabitantes": "123,80",
+      "furtoVeiculo": "145,22",
+      "rouboVeiculo": "28,68",
+      "frvVeiculos": "173,90"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2023",
+      "homicidios": "6,28",
+      "furtos": "870,33",
+      "roubos": "171,50",
+      "frvHabitantes": "196,77",
+      "furtoVeiculo": "252,13",
+      "rouboVeiculo": "32,65",
+      "frvVeiculos": "284,78"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2022",
+      "homicidios": "6,14",
+      "furtos": "752,73",
+      "roubos": "181,38",
+      "frvHabitantes": "204,33",
+      "furtoVeiculo": "272,39",
+      "rouboVeiculo": "51,89",
+      "frvVeiculos": "324,28"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2021",
+      "homicidios": "6,28",
+      "furtos": "693,33",
+      "roubos": "233,71",
+      "frvHabitantes": "153,76",
+      "furtoVeiculo": "172,58",
+      "rouboVeiculo": "65,15",
+      "frvVeiculos": "237,72"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2020",
+      "homicidios": "5,17",
+      "furtos": "562,20",
+      "roubos": "252,68",
+      "frvHabitantes": "176,27",
+      "furtoVeiculo": "217,18",
+      "rouboVeiculo": "60,79",
+      "frvVeiculos": "277,97"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2019",
+      "homicidios": "4,95",
+      "furtos": "724,88",
+      "roubos": "311,95",
+      "frvHabitantes": "319,31",
+      "furtoVeiculo": "403,70",
+      "rouboVeiculo": "101,04",
+      "frvVeiculos": "504,74"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2018",
+      "homicidios": "5,58",
+      "furtos": "814,47",
+      "roubos": "407,23",
+      "frvHabitantes": "415,25",
+      "furtoVeiculo": "506,27",
+      "rouboVeiculo": "163,22",
+      "frvVeiculos": "669,48"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2017",
+      "homicidios": "6,69",
+      "furtos": "903,65",
+      "roubos": "456,41",
+      "frvHabitantes": "473,86",
+      "furtoVeiculo": "588,04",
+      "rouboVeiculo": "181,99",
+      "frvVeiculos": "770,02"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2016",
+      "homicidios": "10,88",
+      "furtos": "937,64",
+      "roubos": "625,58",
+      "frvHabitantes": "473,38",
+      "furtoVeiculo": "572,05",
+      "rouboVeiculo": "206,24",
+      "frvVeiculos": "778,29"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2015",
+      "homicidios": "9,52",
+      "furtos": "802,76",
+      "roubos": "514,60",
+      "frvHabitantes": "422,12",
+      "furtoVeiculo": "486,86",
+      "rouboVeiculo": "214,05",
+      "frvVeiculos": "700,91"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2014",
+      "homicidios": "8,29",
+      "furtos": "797,58",
+      "roubos": "481,59",
+      "frvHabitantes": "448,44",
+      "furtoVeiculo": "459,48",
+      "rouboVeiculo": "296,00",
+      "frvVeiculos": "755,48"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2013",
+      "homicidios": "9,93",
+      "furtos": "892,91",
+      "roubos": "438,59",
+      "frvHabitantes": "443,93",
+      "furtoVeiculo": "494,53",
+      "rouboVeiculo": "272,19",
+      "frvVeiculos": "766,73"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2012",
+      "homicidios": "10,21",
+      "furtos": "929,68",
+      "roubos": "466,15",
+      "frvHabitantes": "441,86",
+      "furtoVeiculo": "512,42",
+      "rouboVeiculo": "279,23",
+      "frvVeiculos": "791,65"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2011",
+      "homicidios": "9,72",
+      "furtos": "944,84",
+      "roubos": "546,92",
+      "frvHabitantes": "448,42",
+      "furtoVeiculo": "495,46",
+      "rouboVeiculo": "342,72",
+      "frvVeiculos": "838,18"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2010",
+      "homicidios": "8,74",
+      "furtos": "973,76",
+      "roubos": "562,54",
+      "frvHabitantes": "401,05",
+      "furtoVeiculo": "499,65",
+      "rouboVeiculo": "291,20",
+      "frvVeiculos": "790,84"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2009",
+      "homicidios": "11,13",
+      "furtos": "959,56",
+      "roubos": "620,72",
+      "frvHabitantes": "441,14",
+      "furtoVeiculo": "565,30",
+      "rouboVeiculo": "359,61",
+      "frvVeiculos": "924,91"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2008",
+      "homicidios": "9,33",
+      "furtos": "931,98",
+      "roubos": "523,37",
+      "frvHabitantes": "453,14",
+      "furtoVeiculo": "651,54",
+      "rouboVeiculo": "365,64",
+      "frvVeiculos": "1.017,19"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2007",
+      "homicidios": "11,63",
+      "furtos": "1.080,56",
+      "roubos": "561,46",
+      "frvHabitantes": "400,00",
+      "furtoVeiculo": "621,87",
+      "rouboVeiculo": "349,25",
+      "frvVeiculos": "971,11"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2006",
+      "homicidios": "14,50",
+      "furtos": "1.124,31",
+      "roubos": "569,74",
+      "frvHabitantes": "519,68",
+      "furtoVeiculo": "838,23",
+      "rouboVeiculo": "513,37",
+      "frvVeiculos": "1.351,60"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2005",
+      "homicidios": "14,55",
+      "furtos": "1.164,96",
+      "roubos": "593,69",
+      "frvHabitantes": "548,85",
+      "furtoVeiculo": "928,10",
+      "rouboVeiculo": "590,48",
+      "frvVeiculos": "1.518,58"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2004",
+      "homicidios": "24,16",
+      "furtos": "1.037,13",
+      "roubos": "502,84",
+      "frvHabitantes": "493,97",
+      "furtoVeiculo": "912,36",
+      "rouboVeiculo": "518,62",
+      "frvVeiculos": "1.430,98"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2003",
+      "homicidios": "30,90",
+      "furtos": "951,67",
+      "roubos": "586,89",
+      "frvHabitantes": "484,13",
+      "furtoVeiculo": "897,01",
+      "rouboVeiculo": "546,42",
+      "frvVeiculos": "1.443,42"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2002",
+      "homicidios": "33,37",
+      "furtos": "853,89",
+      "roubos": "513,34",
+      "frvHabitantes": "464,89",
+      "furtoVeiculo": "921,39",
+      "rouboVeiculo": "515,89",
+      "frvVeiculos": "1.437,27"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2001",
+      "homicidios": "42,15",
+      "furtos": "840,37",
+      "roubos": "535,50",
+      "frvHabitantes": "567,79",
+      "furtoVeiculo": "1.078,90",
+      "rouboVeiculo": "744,86",
+      "frvVeiculos": "1.823,77"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "2000",
+      "homicidios": "48,71",
+      "furtos": "957,24",
+      "roubos": "564,79",
+      "frvHabitantes": "604,76",
+      "furtoVeiculo": "-",
+      "rouboVeiculo": "-",
+      "frvVeiculos": "-"
+    },
+    {
+      "idUnidade": 560,
+      "ano": "1999",
+      "homicidios": "47,85",
+      "furtos": "870,79",
+      "roubos": "573,62",
+      "frvHabitantes": "474,32",
+      "furtoVeiculo": "-",
+      "rouboVeiculo": "-",
+      "frvVeiculos": "-"
+    }
+  ]
+}

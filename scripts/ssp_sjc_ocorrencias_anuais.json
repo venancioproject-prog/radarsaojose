@@ -1,0 +1,255 @@
+{
+  "success": true,
+  "data": [
+    {
+      "idUnidade": 560,
+      "ano": 2025,
+      "homicidio": 29,
+      "furto": 5345,
+      "roubo": 615,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 825
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2024,
+      "homicidio": 23,
+      "furto": 5241,
+      "roubo": 965,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 867
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2023,
+      "homicidio": 44,
+      "furto": 6095,
+      "roubo": 1201,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 1378
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2022,
+      "homicidio": 46,
+      "furto": 5640,
+      "roubo": 1359,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 1531
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2021,
+      "homicidio": 45,
+      "furto": 4969,
+      "roubo": 1675,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 1102
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2020,
+      "homicidio": 37,
+      "furto": 4025,
+      "roubo": 1809,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 1262
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2019,
+      "homicidio": 35,
+      "furto": 5126,
+      "roubo": 2206,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2258
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2018,
+      "homicidio": 39,
+      "furto": 5688,
+      "roubo": 2844,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2900
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2017,
+      "homicidio": 46,
+      "furto": 6213,
+      "roubo": 3138,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 3258
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2016,
+      "homicidio": 74,
+      "furto": 6376,
+      "roubo": 4254,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 3219
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2015,
+      "homicidio": 64,
+      "furto": 5399,
+      "roubo": 3461,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2839
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2014,
+      "homicidio": 55,
+      "furto": 5293,
+      "roubo": 3196,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2976
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2013,
+      "homicidio": 65,
+      "furto": 5847,
+      "roubo": 2872,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2907
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2012,
+      "homicidio": 66,
+      "furto": 6007,
+      "roubo": 3012,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2855
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2011,
+      "homicidio": 62,
+      "furto": 6024,
+      "roubo": 3487,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2859
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2010,
+      "homicidio": 55,
+      "furto": 6126,
+      "roubo": 3539,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2523
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2009,
+      "homicidio": 69,
+      "furto": 5947,
+      "roubo": 3847,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2734
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2008,
+      "homicidio": 57,
+      "furto": 5693,
+      "roubo": 3197,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2768
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2007,
+      "homicidio": 70,
+      "furto": 6505,
+      "roubo": 3380,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2408
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2006,
+      "homicidio": 86,
+      "furto": 6670,
+      "roubo": 3380,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 3083
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2005,
+      "homicidio": 85,
+      "furto": 6807,
+      "roubo": 3469,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 3207
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2004,
+      "homicidio": 139,
+      "furto": 5967,
+      "roubo": 2893,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2842
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2003,
+      "homicidio": 175,
+      "furto": 5390,
+      "roubo": 3324,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2742
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2002,
+      "homicidio": 186,
+      "furto": 4759,
+      "roubo": 2861,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 2591
+    },
+    {
+      "idUnidade": 560,
+      "ano": 2001,
+      "homicidio": 231,
+      "furto": 4606,
+      "roubo": 2935,
+      "furtoVeiculo": 0,
+      "rouboVeiculo": 0,
+      "frv": 3112
+    }
+  ]
+}

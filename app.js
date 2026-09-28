@@ -1135,155 +1135,53 @@ window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder tota
 };
 
 window.applyPlanRestrictions = function() {
-  const userRole = window.appState?.role || localStorage.getItem("userRole") || "usuario";
-  const userPlan = (userRole === "admin") 
-    ? (window.appState?.plan_type || localStorage.getItem("userPlan") || "plano_15") 
-    : (window.appState?.plan_type || localStorage.getItem("userPlan") || "gratis");
+  const userRole = window.appState?.role || localStorage.getItem("userRole") || "admin";
+  const userPlan = "plano_15"; // Acesso total liberado sem blur/paywall
   
   const badgeEl = document.getElementById("user-plan-badge");
   const upgradeBtn = document.getElementById("btn-open-upgrade-modal");
 
   if (badgeEl) {
-    if (userPlan === "plano_15" || userRole === "admin") {
-      badgeEl.textContent = userRole === "admin" ? "Admin Master" : "Plano Premium (R$ 15)";
-      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300";
-      if (upgradeBtn) upgradeBtn.classList.add("hidden");
-    } else if (userPlan === "plano_10") {
-      badgeEl.textContent = "Radar Pesquisa (R$ 10)";
-      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-brand-100 text-brand-900 border border-brand-300";
-      if (upgradeBtn) {
-        upgradeBtn.classList.remove("hidden");
-        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-cyan-300"></i><span class="hidden xs:inline">Upgrade R$ 15</span>';
-      }
-    } else {
-      badgeEl.textContent = "Plano Gratuito";
-      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200";
-      if (upgradeBtn) {
-        upgradeBtn.classList.remove("hidden");
-        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-cyan-300"></i><span class="hidden xs:inline">Upgrade</span>';
-      }
-    }
+    badgeEl.textContent = "Radar Premium Pro";
+    badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300";
+    if (upgradeBtn) upgradeBtn.classList.add("hidden");
   }
 
-  // 1. DASH PESQUISA (DashPesquisa): Arquitetura Inject & Hide para Plano Grátis
+  // 1. DASH PESQUISA: Exibir 100% dos blocos (Zero Blur / Zero Paywall)
   const dashboardView = document.getElementById("dashboard-view");
   const dashChartsGrid = document.getElementById("dynamic-charts-grid");
   if (dashboardView && dashChartsGrid) {
     const allSections = Array.from(dashChartsGrid.querySelectorAll(":scope > section"));
-    let dashPaywall = document.getElementById("dash-paywall-overlay");
-
-    if (userPlan === "gratis") {
-      // Deixa os 2 primeiros blocos visíveis e oculta os blocos 3 em diante
-      allSections.forEach((sec, idx) => {
-        if (idx >= 2) {
-          sec.classList.add("hidden");
-        } else {
-          sec.classList.remove("hidden");
-        }
-      });
-
-      if (!dashPaywall) {
-        dashPaywall = document.createElement("div");
-        dashPaywall.id = "dash-paywall-overlay";
-        dashPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
-        dashPaywall.innerHTML = window.createPaywallDarkOverlayHtml(
-          "Desbloqueie o poder total da pesquisa",
-          "historia",
-          "Explorar Linha do Tempo"
-        );
-        // Insere logo após o 2º bloco visível
-        if (allSections.length >= 2 && allSections[1].nextSibling) {
-          dashChartsGrid.insertBefore(dashPaywall, allSections[1].nextSibling);
-        } else {
-          dashChartsGrid.appendChild(dashPaywall);
-        }
-      }
-    } else {
-      // Usuário Assinante ou Admin: exibe todos os blocos e remove paywall
-      allSections.forEach(sec => sec.classList.remove("hidden"));
-      if (dashPaywall) dashPaywall.remove();
-      const danglingDash = document.getElementById("dash-paywall-overlay");
-      if (danglingDash) danglingDash.remove();
-    }
-
+    allSections.forEach(sec => sec.classList.remove("hidden"));
+    const dashPaywall = document.getElementById("dash-paywall-overlay");
+    if (dashPaywall) dashPaywall.remove();
     dashboardView.classList.remove("teaser-paywall-locked");
     dashChartsGrid.classList.remove("paywall-blur-active");
   }
 
-  // 2. REPORT PESQUISA (ReportPesquisa): Arquitetura Inject & Hide para Plano Grátis
+  // 2. REPORT PESQUISA: Exibir 100% dos capítulos
   const reportView = document.getElementById("executive-report-view");
   if (reportView) {
     const articles = Array.from(reportView.querySelectorAll(":scope > article"));
-    const cap1Index = articles.findIndex(a => a.id === "rep-capitulo-1");
-    let reportPaywall = document.getElementById("report-paywall-overlay");
-
-    if (userPlan === "gratis") {
-      if (cap1Index !== -1) {
-        // Oculta o Capítulo 1 e todos os capítulos e análises subsequentes
-        for (let i = cap1Index; i < articles.length; i++) {
-          articles[i].classList.add("hidden");
-        }
-
-        if (!reportPaywall) {
-          reportPaywall = document.createElement("div");
-          reportPaywall.id = "report-paywall-overlay";
-          reportPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
-          reportPaywall.innerHTML = window.createPaywallDarkOverlayHtml(
-            "Desbloqueie o poder total da pesquisa",
-            "image-bank",
-            "Explorar Lentes SJC"
-          );
-          // Insere exatamente antes do Capítulo 1
-          reportView.insertBefore(reportPaywall, articles[cap1Index]);
-        }
-      }
-    } else {
-      // Usuário Assinante ou Admin: exibe todos os capítulos e remove paywall
-      articles.forEach(art => art.classList.remove("hidden"));
-      if (reportPaywall) reportPaywall.remove();
-      const danglingReport = document.getElementById("report-paywall-overlay");
-      if (danglingReport) danglingReport.remove();
-    }
-
+    articles.forEach(art => art.classList.remove("hidden"));
+    const reportPaywall = document.getElementById("report-paywall-overlay");
+    if (reportPaywall) reportPaywall.remove();
     reportView.classList.remove("teaser-paywall-locked");
     reportView.classList.remove("paywall-blur-active");
   }
 
-  // 3. MÓDULOS COM ACESSO TOTAL NO PLANO GRÁTIS (100% Liberados):
-  // - Radar Hub (ibge-view) -> TOTALMENTE VISÍVEL / SEM BLOQUEIO
-  // - Linha do Tempo (historia-view) -> TOTALMENTE VISÍVEL / SEM BLOQUEIO
-  // - Lentes SJC (image-bank-view) -> TOTALMENTE VISÍVEL / SEM BLOQUEIO
-  const ibgeView = document.getElementById("ibge-view");
-  const historiaView = document.getElementById("historia-view");
-  const imageBankView = document.getElementById("image-bank-view");
+  // 3. MÓDULOS TOTALMENTE LIBERADOS
+  ['ibge-view', 'historia-view', 'image-bank-view', 'midia-dashboard-view', 'personas-view'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.remove("teaser-paywall-locked", "paywall-blur-active");
+    }
+  });
 
-  if (ibgeView) {
-    ibgeView.classList.remove("teaser-paywall-locked");
-    ibgeView.classList.remove("paywall-blur-active");
-  }
-  if (historiaView) {
-    historiaView.classList.remove("teaser-paywall-locked");
-    historiaView.classList.remove("paywall-blur-active");
-  }
-  if (imageBankView) {
-    imageBankView.classList.remove("teaser-paywall-locked");
-    imageBankView.classList.remove("paywall-blur-active");
-  }
-
-  const midiaView = document.getElementById("midia-dashboard-view");
-  if (midiaView) {
-    midiaView.classList.remove("teaser-paywall-locked");
-    midiaView.classList.remove("paywall-blur-active");
-    const midiaPaywall = document.getElementById("midia-paywall-overlay");
-    if (midiaPaywall) midiaPaywall.remove();
-  }
-  const personasView = document.getElementById("personas-view");
-  if (personasView) {
-    personasView.classList.remove("teaser-paywall-locked");
-    personasView.classList.remove("paywall-blur-active");
-    const personasPaywall = document.getElementById("personas-paywall-overlay");
-    if (personasPaywall) personasPaywall.remove();
-  }
+  const midiaPaywall = document.getElementById("midia-paywall-overlay");
+  if (midiaPaywall) midiaPaywall.remove();
+  const personasPaywall = document.getElementById("personas-paywall-overlay");
+  if (personasPaywall) personasPaywall.remove();
 };
 
 function showDashboard(user) {
