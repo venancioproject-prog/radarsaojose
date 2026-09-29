@@ -1731,12 +1731,53 @@
       <!-- BARRA SUPERIOR FIXA COMBINADA (Ações + Ribbon Word + Navegação Seções) -->
       <header id="planStickyHeader" class="sticky top-0 z-30 no-print flex flex-col w-full min-w-0">
         <!-- 2. PRIMEIRA LINHA — IDENTIDADE DO DOCUMENTO -->
-        <div id="planTopActionBar" class="bg-white border-b border-slate-200/80 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
-          <div class="min-w-0">
-            <h1 class="text-[17px] sm:text-[19px] font-bold text-slate-900 tracking-tight leading-snug">
-              Plano de Negócios
-            </h1>
-            <span id="planSaveStatusBadge" class="hidden"><i id="planSaveStatusIcon"></i><span id="planSaveStatusText"></span></span>
+        <!-- 2. PRIMEIRA LINHA — IDENTIDADE DO DOCUMENTO & SINCRONIZAÇÃO EM NUVEM -->
+        <div id="planTopActionBar" class="bg-white border-b border-slate-200/80 px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between gap-4 flex-wrap">
+          <div class="flex items-center gap-3 min-w-0">
+            <div>
+              <h1 class="text-[17px] sm:text-[19px] font-bold text-slate-900 tracking-tight leading-snug">
+                Plano de Negócios
+              </h1>
+              <p class="text-[11px] text-slate-500 font-medium">Radar São José • Planejamento Estratégico 2026–2027</p>
+            </div>
+            <div id="planSaveStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-2xs transition-all">
+              <i id="planSaveStatusIcon" class="fa-solid fa-cloud-arrow-up text-emerald-600 text-[10px]"></i>
+              <span id="planSaveStatusText">Sincronizado na Nuvem</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <!-- Botão Sincronizar Agora -->
+            <button type="button" id="btnManualSync" onclick="manualSyncBusinessPlan()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs transition-all active:scale-95 cursor-pointer" title="Sincronizar imediatamente com a Nuvem Supabase">
+              <i id="btnManualSyncIcon" class="fa-solid fa-arrows-rotate text-xs"></i>
+              <span>Sincronizar Agora</span>
+            </button>
+
+            <!-- Seletor de Perfil Ativo / Sócios Colaboradores -->
+            <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+              <span class="text-[10px] font-semibold text-slate-500 uppercase px-1.5 hidden md:inline">Editor:</span>
+              <button type="button" id="btnUserLeo" onclick="toggleActiveCollaborator('leonardo')" class="relative flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium cursor-pointer transition-all hover:bg-white" title="Editar como Leonardo Venâncio">
+                <span id="avatarBadge-leonardo" class="w-6 h-6 rounded-full bg-gradient-to-tr from-blue-700 to-indigo-600 text-white flex items-center justify-center text-[9px] font-black shadow-xs ring-2 ring-indigo-500">LV</span>
+                <span class="hidden lg:inline text-[11px] font-semibold text-slate-700">Leonardo</span>
+                <span id="dot-status-leonardo" class="w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white"></span>
+                <span id="tooltip-status-leonardo" class="hidden"></span>
+              </button>
+              <button type="button" id="btnUserMay" onclick="toggleActiveCollaborator('mayumi')" class="relative flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium cursor-pointer transition-all hover:bg-white" title="Editar como Mayumi Nagano / Maira">
+                <span id="avatarBadge-mayumi" class="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-700 to-pink-600 text-white flex items-center justify-center text-[9px] font-black shadow-xs opacity-75 ring-1 ring-transparent">MN</span>
+                <span class="hidden lg:inline text-[11px] font-semibold text-slate-700">Maira / Mayumi</span>
+                <span id="dot-status-mayumi" class="w-2 h-2 rounded-full bg-slate-300 ring-1 ring-white"></span>
+                <span id="tooltip-status-mayumi" class="hidden"></span>
+              </button>
+            </div>
+
+            <!-- Botões Secundários: PDF & Reset -->
+            <button type="button" onclick="exportBusinessPlanPDF()" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-2xs transition-all active:scale-95 cursor-pointer" title="Exportar ou Imprimir PDF">
+              <i class="fa-solid fa-file-pdf text-rose-500 text-xs"></i>
+              <span class="hidden sm:inline">PDF</span>
+            </button>
+            <button type="button" onclick="resetBusinessPlanToDefaults()" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-rose-600 text-xs font-medium transition-all cursor-pointer" title="Restaurar versão original do Plano">
+              <i class="fa-solid fa-rotate-left text-xs"></i>
+            </button>
           </div>
         </div>
 

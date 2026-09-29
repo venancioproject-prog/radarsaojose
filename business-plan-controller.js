@@ -2206,10 +2206,21 @@ function initPlanScrollSpy() {
 }
 
 // =========================================================================
-// 6. PERSISTÊNCIA & RESTAURAÇÃO (localStorage + Supabase Cloud)
+// 6. PERSISTÊNCIA & SINCRONIZAÇÃO EM NUVEM (Supabase Cloud + localStorage)
+// Sincronização Bidirecional Direta em Tempo Real (Leonardo & Mayumi / Maira)
 // =========================================================================
 
-// Resolve URLs de API com tolerância a servidores estáticos locais (Python na porta 8000, LiveServer 5500, etc.)
+const PLAN_SUPABASE_CLOUD_URL = "https://tocyvysucpslayzglixq.supabase.co";
+const PLAN_SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+const PLAN_SYNC_SLUG = "system-business-plan-blocks-v2";
+
+function getPlanSupabaseConfig() {
+  const url = (typeof window !== 'undefined' && window.SUPABASE_URL) ? window.SUPABASE_URL : PLAN_SUPABASE_CLOUD_URL;
+  const key = (typeof window !== 'undefined' && window.SUPABASE_ANON_KEY) ? window.SUPABASE_ANON_KEY : PLAN_SUPABASE_ANON_KEY;
+  return { url, key };
+}
+
+// Resolve URLs de API com tolerância a servidores estáticos locais
 function resolvePlanApiUrl(path) {
   if (typeof window !== 'undefined') {
     const loc = window.location;
@@ -2220,13 +2231,13 @@ function resolvePlanApiUrl(path) {
   return path;
 }
 
-
+// Chamador HTTP fallback para rota serverless Vercel
 async function callPlanBlocksApi(method = 'GET', payload = null) {
   const primaryUrl = resolvePlanApiUrl('/api/plan-blocks');
   const candidateUrls = [
     primaryUrl,
-    'http://localhost:3000/api/plan-blocks',
-    '/api/plan-blocks'
+    '/api/plan-blocks',
+    'http://localhost:3000/api/plan-blocks'
   ].filter((v, i, a) => a.indexOf(v) === i);
 
   for (const url of candidateUrls) {
@@ -2242,6 +2253,365 @@ async function callPlanBlocksApi(method = 'GET', payload = null) {
     } catch (e) {}
   }
   return null;
+}
+
+/**
+ * Busca estado completo diretamente do Supabase Cloud (com tolerância a falhas)
+ */
+async function fetchPlanStateFromCloud() {
+  const { url, key } = getPlanSupabaseConfig();
+
+  // 1. Tenta via window.supabaseClient oficial se disponível
+  if (typeof window !== 'undefined' && window.supabaseClient && typeof window.supabaseClient.from === 'function') {
+    try {
+      const { data, error } = await window.supabaseClient
+        .from('blog_posts')
+        .select('*')
+        .eq('slug', PLAN_SYNC_SLUG)
+        .maybeSingle();
+      if (!error && data) {
+        return data;
+      }
+    } catch (e) {
+      console.warn('[Cloud Sync] supabaseClient warning:', e.message);
+    }
+  }
+
+  // 2. Requisição REST direta ao Supabase Cloud com apikey pública (independe de sessão ou serverless)
+  try {
+    const res = await fetch(`${url}/rest/v1/blog_posts?slug=eq.${PLAN_SYNC_SLUG}&select=*`, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`
+      }
+    });
+    if (res.ok) {
+      const rows = await res.json();
+      if (Array.isArray(rows) && rows.length > 0) {
+        return rows[0];
+      }
+    }
+  } catch (e) {
+    console.warn('[Cloud Sync] Fetch direto REST Supabase warning:', e.message);
+  }
+
+  // 3. Fallback adicional via Serverless API (/api/plan-blocks)
+  try {
+    const apiRes = await callPlanBlocksApi('GET');
+    if (apiRes && apiRes.ok) {
+      const json = await apiRes.json();
+      if (json && json.success && json.data) {
+        return json.data;
+      }
+    }
+  } catch (e) {}
+
+  return null;
+}
+
+/**
+ * Persiste estado completo na nuvem Supabase (compartilhado entre Leonardo e Mayumi / Maira)
+ */
+async function savePlanStateToCloud(forceImmediate = false) {
+  const { url, key } = getPlanSupabaseConfig();
+  const nowIso = new Date().toISOString();
+  currentPlanState.updated_at = nowIso;
+
+  // Persiste imediatamente no localStorage local
+  try {
+    localStorage.setItem(PLAN_STORAGE_KEY_V2, JSON.stringify(currentPlanState));
+  } catch (e) {}
+
+  const activeUser = (typeof PlanRealtimeCollab !== 'undefined' && PlanRealtimeCollab.activeUser) ? PlanRealtimeCollab.activeUser : 'leonardo';
+
+  const fullPayload = {
+    planState: {
+      tickets: currentPlanState.tickets,
+      fixedCosts: currentPlanState.fixedCosts,
+      proLabore: currentPlanState.proLabore,
+      taxRate: currentPlanState.taxRate,
+      initialDebt: currentPlanState.initialDebt,
+      supplierDebt: currentPlanState.supplierDebt,
+      mix: currentPlanState.mix,
+      annualPaymentMix: currentPlanState.annualPaymentMix,
+      annualDiscount: currentPlanState.annualDiscount,
+      mondayTasks: currentPlanState.mondayTasks,
+      scenarios: currentPlanState.scenarios,
+      PlanState: (typeof window !== 'undefined' && window.PlanState) ? window.PlanState : PlanState
+    },
+    PlanState: (typeof window !== 'undefined' && window.PlanState) ? window.PlanState : PlanState,
+    tickets: currentPlanState.tickets,
+    fixedCosts: currentPlanState.fixedCosts,
+    proLabore: currentPlanState.proLabore,
+    taxRate: currentPlanState.taxRate,
+    initialDebt: currentPlanState.initialDebt,
+    supplierDebt: currentPlanState.supplierDebt,
+    mix: currentPlanState.mix,
+    annualPaymentMix: currentPlanState.annualPaymentMix,
+    annualDiscount: currentPlanState.annualDiscount,
+    mondayTasks: currentPlanState.mondayTasks,
+    scenarios: currentPlanState.scenarios,
+    blocks: currentPlanState.customBlocks || [],
+    miniSpreadsheets: (currentPlanState.customBlocks || []).filter(b => b.type === 'mini_spreadsheet'),
+    chatHistory: [],
+    editedTexts: currentPlanState.editedTexts || {},
+    tableContents: currentPlanState.tableContents || {},
+    financialSheet: currentPlanState.financialSheet || [],
+    swotCards: currentPlanState.swotCards || [],
+    updated_at: nowIso,
+    saved_by: activeUser
+  };
+
+  const meta = {
+    blocks: fullPayload.blocks,
+    mini_spreadsheets: fullPayload.miniSpreadsheets,
+    chat_history: [],
+    edited_texts: fullPayload.editedTexts,
+    table_contents: fullPayload.tableContents,
+    financial_sheet: fullPayload.financialSheet,
+    swot_cards: fullPayload.swotCards,
+    updated_at: nowIso,
+    saved_by: activeUser
+  };
+
+  const bodyContent = JSON.stringify(fullPayload);
+  updateSyncIndicator(false, 'Salvando na nuvem...');
+
+  let savedOk = false;
+
+  // 1. Tenta atualizar via window.supabaseClient
+  if (typeof window !== 'undefined' && window.supabaseClient && typeof window.supabaseClient.from === 'function') {
+    try {
+      const { error } = await window.supabaseClient
+        .from('blog_posts')
+        .update({
+          content: bodyContent,
+          seo_metadata: meta,
+          updated_at: nowIso
+        })
+        .eq('slug', PLAN_SYNC_SLUG);
+      if (!error) savedOk = true;
+    } catch (e) {
+      console.warn('[Cloud Sync] update supabaseClient warning:', e.message);
+    }
+  }
+
+  // 2. Se não salvou, executa PATCH direto na REST API do Supabase com public anon key
+  if (!savedOk) {
+    try {
+      const patchRes = await fetch(`${url}/rest/v1/blog_posts?slug=eq.${PLAN_SYNC_SLUG}`, {
+        method: 'PATCH',
+        headers: {
+          'apikey': key,
+          'Authorization': `Bearer ${key}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          content: bodyContent,
+          seo_metadata: meta,
+          updated_at: nowIso
+        })
+      });
+      if (patchRes.ok) {
+        savedOk = true;
+      }
+    } catch (e) {
+      console.warn('[Cloud Sync] PATCH REST Supabase warning:', e.message);
+    }
+  }
+
+  // 3. Fallback adicional via Serverless API
+  if (!savedOk) {
+    try {
+      const apiRes = await callPlanBlocksApi('POST', fullPayload);
+      if (apiRes && apiRes.ok) savedOk = true;
+    } catch (e) {}
+  }
+
+  if (savedOk) {
+    updateSyncIndicator(true, 'Sincronizado na Nuvem');
+    if (typeof PlanRealtimeCollab !== 'undefined') {
+      PlanRealtimeCollab.lastRemoteSyncTs = new Date(nowIso).getTime();
+      PlanRealtimeCollab.broadcastChange('plan_state_changed', fullPayload);
+    }
+    return true;
+  } else {
+    updateSyncIndicator(true, 'Salvo no navegador (offline)');
+    return false;
+  }
+}
+
+/**
+ * Aplica estado remoto ao estado local em memória e atualiza DOM reativamente
+ */
+function applyRemotePlanState(remoteData, notify = true) {
+  if (!remoteData) return false;
+
+  let payload = remoteData;
+  if (typeof remoteData.content === 'string') {
+    try {
+      payload = JSON.parse(remoteData.content);
+    } catch (e) {
+      console.warn('[Plan Sync] Erro ao parsear content do Supabase:', e);
+      return false;
+    }
+  } else if (remoteData.data) {
+    payload = remoteData.data;
+  }
+
+  // Evita sobrescrever estado com objeto vazio ou inválido
+  if (!payload || (typeof payload !== 'object')) return false;
+
+  const remoteTs = new Date(payload.updated_at || remoteData.updated_at || 0).getTime();
+  currentPlanState.updated_at = payload.updated_at || remoteData.updated_at || new Date().toISOString();
+
+  // 1. Dados financeiros e premissas
+  const planStateData = payload.planState || payload;
+  if (planStateData) {
+    if (planStateData.tickets) currentPlanState.tickets = Object.assign({}, currentPlanState.tickets, planStateData.tickets);
+    if (planStateData.fixedCosts) currentPlanState.fixedCosts = Object.assign({}, currentPlanState.fixedCosts, planStateData.fixedCosts);
+    if (planStateData.proLabore) currentPlanState.proLabore = Object.assign({}, currentPlanState.proLabore, planStateData.proLabore);
+    if (planStateData.taxRate !== undefined && !isNaN(Number(planStateData.taxRate))) currentPlanState.taxRate = Number(planStateData.taxRate);
+    if (planStateData.initialDebt !== undefined && !isNaN(Number(planStateData.initialDebt))) currentPlanState.initialDebt = Number(planStateData.initialDebt);
+    if (planStateData.supplierDebt !== undefined && !isNaN(Number(planStateData.supplierDebt))) currentPlanState.supplierDebt = Number(planStateData.supplierDebt);
+    if (planStateData.scenarios) currentPlanState.scenarios = planStateData.scenarios;
+    if (planStateData.PlanState) Object.assign(PlanState, planStateData.PlanState);
+    if (planStateData.mondayTasks && Array.isArray(planStateData.mondayTasks) && planStateData.mondayTasks.length > 0) {
+      currentPlanState.mondayTasks = planStateData.mondayTasks;
+    }
+  }
+
+  // Top-level overrides se presentes
+  if (payload.tickets) currentPlanState.tickets = Object.assign({}, currentPlanState.tickets, payload.tickets);
+  if (payload.fixedCosts) currentPlanState.fixedCosts = Object.assign({}, currentPlanState.fixedCosts, payload.fixedCosts);
+  if (payload.proLabore) currentPlanState.proLabore = Object.assign({}, currentPlanState.proLabore, payload.proLabore);
+  if (payload.mondayTasks && Array.isArray(payload.mondayTasks) && payload.mondayTasks.length > 0) {
+    currentPlanState.mondayTasks = payload.mondayTasks;
+  }
+
+  // 2. Blocos Customizados
+  const blocks = payload.blocks || remoteData.seo_metadata?.blocks;
+  if (blocks && Array.isArray(blocks)) {
+    currentPlanState.customBlocks = blocks;
+  }
+
+  // 3. Textos editados inline
+  const editedTexts = payload.editedTexts || remoteData.seo_metadata?.edited_texts;
+  if (editedTexts && typeof editedTexts === 'object' && Object.keys(editedTexts).length > 0) {
+    currentPlanState.editedTexts = Object.assign({}, currentPlanState.editedTexts, editedTexts);
+    if (typeof document !== 'undefined') {
+      Object.keys(currentPlanState.editedTexts).forEach(textId => {
+        const el = document.querySelector(`[data-text-id="${textId}"]`);
+        if (el && document.activeElement !== el) {
+          el.innerHTML = currentPlanState.editedTexts[textId];
+        }
+      });
+    }
+  }
+
+  // 4. Tabelas descritivas interativas
+  const tableContents = payload.tableContents || remoteData.seo_metadata?.table_contents;
+  if (tableContents && typeof tableContents === 'object' && Object.keys(tableContents).length > 0) {
+    currentPlanState.tableContents = Object.assign({}, currentPlanState.tableContents, tableContents);
+    if (typeof document !== 'undefined') {
+      Object.keys(currentPlanState.tableContents).forEach(tblId => {
+        const tbody = document.getElementById(tblId);
+        if (tbody && currentPlanState.tableContents[tblId]) {
+          tbody.innerHTML = currentPlanState.tableContents[tblId];
+        }
+      });
+    }
+  }
+
+  // 5. Planilha financeira interativa
+  const sheet = payload.financialSheet || remoteData.seo_metadata?.financial_sheet;
+  if (sheet && Array.isArray(sheet) && sheet.length > 0) {
+    currentPlanState.financialSheet = sheet;
+    if (window._spreadsheetInitialized && typeof window.initSpreadsheet === 'function') {
+      window._spreadsheetInitialized = false;
+      window.initSpreadsheet('spreadsheetContainer');
+      window._spreadsheetInitialized = true;
+    }
+  }
+
+  // 6. SWOT Cards
+  const swot = payload.swotCards || remoteData.seo_metadata?.swot_cards;
+  if (swot && Array.isArray(swot) && swot.length > 0) {
+    currentPlanState.swotCards = swot;
+    if (window._swotCanvasInitialized && typeof window.applySwotRemoteUpdate === 'function') {
+      window.applySwotRemoteUpdate(swot);
+    }
+  }
+
+  // 7. Persiste espelho localmente no navegador
+  try {
+    localStorage.setItem(PLAN_STORAGE_KEY_V2, JSON.stringify(currentPlanState));
+  } catch (e) {}
+
+  // 8. Atualiza DOM e Cálculos
+  if (typeof syncInputCellsFromState === 'function') syncInputCellsFromState();
+  if (PlanFinancialEngine && PlanFinancialEngine.recalculateAll) PlanFinancialEngine.recalculateAll();
+  if (typeof renderMondayBoard === 'function') renderMondayBoard();
+  if (typeof renderCustomBlocks === 'function') renderCustomBlocks();
+
+  if (notify && typeof PlanRealtimeCollab !== 'undefined' && PlanRealtimeCollab.showCollabToast) {
+    const author = (payload.saved_by === 'mayumi' || payload.saved_by === 'maira') ? 'Maira / Mayumi' : 'Leonardo';
+    const initials = (payload.saved_by === 'mayumi' || payload.saved_by === 'maira') ? 'MN' : 'LV';
+    PlanRealtimeCollab.showCollabToast(
+      initials,
+      `Sincronizado com ${author}`,
+      'Alterações em nuvem aplicadas na sua tela com sucesso'
+    );
+  }
+
+  return true;
+}
+
+/**
+ * Acionamento manual de sincronização para o botão no cabeçalho
+ */
+async function manualSyncBusinessPlan() {
+  const icon = document.getElementById('btnManualSyncIcon');
+  if (icon) icon.classList.add('fa-spin');
+  updateSyncIndicator(false, 'Sincronizando...');
+
+  try {
+    const remoteData = await fetchPlanStateFromCloud();
+    if (remoteData) {
+      let payload = remoteData;
+      if (typeof remoteData.content === 'string') {
+        try { payload = JSON.parse(remoteData.content); } catch (e) {}
+      } else if (remoteData.data) {
+        payload = remoteData.data;
+      }
+
+      const remoteTs = new Date(payload.updated_at || remoteData.updated_at || 0).getTime();
+      const localTs = currentPlanState.updated_at ? new Date(currentPlanState.updated_at).getTime() : 0;
+
+      if (remoteTs > localTs) {
+        applyRemotePlanState(remoteData, true);
+        if (typeof PlanRealtimeCollab !== 'undefined') {
+          PlanRealtimeCollab.lastRemoteSyncTs = remoteTs;
+        }
+      } else {
+        await savePlanStateToCloud(true);
+      }
+    } else {
+      await savePlanStateToCloud(true);
+    }
+
+    updateSyncIndicator(true, 'Sincronizado na Nuvem');
+    if (typeof PlanRealtimeCollab !== 'undefined' && PlanRealtimeCollab.showCollabToast) {
+      PlanRealtimeCollab.showCollabToast('✓', 'Sincronização Concluída', 'Todos os dados estão 100% atualizados na Nuvem');
+    }
+  } catch (err) {
+    console.error('[Manual Sync Error]:', err);
+    updateSyncIndicator(false, 'Erro ao sincronizar nuvem');
+  } finally {
+    if (icon) icon.classList.remove('fa-spin');
+  }
 }
 
 // =========================================================================
@@ -2266,14 +2636,14 @@ const PlanRealtimeCollab = {
   detectActiveUser() {
     try {
       const savedUser = localStorage.getItem('business_plan_collab_user');
-      if (savedUser === 'leonardo' || savedUser === 'mayumi') {
-        this.activeUser = savedUser;
+      if (savedUser === 'leonardo' || savedUser === 'mayumi' || savedUser === 'maira') {
+        this.activeUser = (savedUser === 'maira') ? 'mayumi' : savedUser;
         return;
       }
       if (typeof window !== 'undefined' && window.currentAdminUser) {
         const email = (window.currentAdminUser.email || '').toLowerCase();
         const nome = (window.currentAdminUser.nome || '').toLowerCase();
-        if (email.includes('mayumi') || nome.includes('mayumi')) {
+        if (email.includes('mayumi') || nome.includes('mayumi') || email.includes('maira') || nome.includes('maira')) {
           this.activeUser = 'mayumi';
           return;
         }
@@ -2283,20 +2653,21 @@ const PlanRealtimeCollab = {
   },
 
   setActiveUser(userId) {
-    if (userId !== 'leonardo' && userId !== 'mayumi') return;
-    this.activeUser = userId;
-    try { localStorage.setItem('business_plan_collab_user', userId); } catch (e) {}
+    const normalized = (userId === 'maira') ? 'mayumi' : userId;
+    if (normalized !== 'leonardo' && normalized !== 'mayumi') return;
+    this.activeUser = normalized;
+    try { localStorage.setItem('business_plan_collab_user', normalized); } catch (e) {}
     this.updateUserAvatarsUI();
     this.trackLocalPresence();
     this.showCollabToast(
-      userId === 'leonardo' ? 'LV' : 'MN',
+      normalized === 'leonardo' ? 'LV' : 'MN',
       'Editor Ativo Alterado',
-      `Você está editando como ${this.getUserDisplayName(userId)}`
+      `Você está editando como ${this.getUserDisplayName(normalized)}`
     );
   },
 
   getUserDisplayName(userId) {
-    return userId === 'leonardo' ? 'Leonardo Venâncio' : 'Mayumi Nagano';
+    return userId === 'leonardo' ? 'Leonardo Venâncio' : 'Mayumi Nagano / Maira';
   },
 
   getUserInitials(userId) {
@@ -2564,54 +2935,30 @@ const PlanRealtimeCollab = {
     clearInterval(this.pollTimer);
     this.pollTimer = setInterval(async () => {
       try {
-        const res = await callPlanBlocksApi('GET');
-        if (res && res.ok) {
-          const json = await res.json();
-          if (json && json.success && json.data) {
-            const remote = json.data;
-            const remoteTs = new Date(remote.updated_at || 0).getTime();
-            if (remoteTs > this.lastRemoteSyncTs && this.lastRemoteSyncTs > 0) {
-              let changed = false;
-              if (remote.blocks && JSON.stringify(remote.blocks) !== JSON.stringify(currentPlanState.customBlocks)) {
-                currentPlanState.customBlocks = remote.blocks;
-                if (typeof renderCustomBlocks === 'function') renderCustomBlocks();
-                changed = true;
-              }
-              if (remote.planState) {
-                if (remote.planState.tickets) currentPlanState.tickets = remote.planState.tickets;
-                if (remote.planState.fixedCosts) currentPlanState.fixedCosts = remote.planState.fixedCosts;
-                if (remote.planState.proLabore) currentPlanState.proLabore = remote.planState.proLabore;
-                if (remote.planState.mondayTasks) currentPlanState.mondayTasks = remote.planState.mondayTasks;
-                if (typeof syncInputCellsFromState === 'function') syncInputCellsFromState();
-                if (PlanFinancialEngine && PlanFinancialEngine.recalculateAll) {
-                  PlanFinancialEngine.recalculateAll();
-                }
-                if (typeof renderMondayBoard === 'function') renderMondayBoard();
-                changed = true;
-              }
-              if (remote.editedTexts && typeof document !== 'undefined') {
-                Object.keys(remote.editedTexts).forEach(k => {
-                  if (document.activeElement?.getAttribute('data-text-id') !== k) {
-                    const el = document.querySelector(`[data-text-id="${k}"]`);
-                    if (el) el.innerHTML = remote.editedTexts[k];
-                  }
-                });
-                currentPlanState.editedTexts = Object.assign({}, currentPlanState.editedTexts, remote.editedTexts);
-              }
-              if (changed) {
-                const other = this.activeUser === 'leonardo' ? 'Mayumi' : 'Leonardo';
-                this.showCollabToast(
-                  this.activeUser === 'leonardo' ? 'MN' : 'LV',
-                  `Sincronizado com ${other}`,
-                  'Alterações remotas aplicadas com sucesso'
-                );
-              }
+        const remoteData = await fetchPlanStateFromCloud();
+        if (remoteData) {
+          let payload = remoteData;
+          if (typeof remoteData.content === 'string') {
+            try { payload = JSON.parse(remoteData.content); } catch (e) {}
+          } else if (remoteData.data) {
+            payload = remoteData.data;
+          }
+
+          const remoteTs = new Date(payload.updated_at || remoteData.updated_at || 0).getTime();
+          const localTs = currentPlanState.updated_at ? new Date(currentPlanState.updated_at).getTime() : 0;
+
+          if (remoteTs > this.lastRemoteSyncTs && this.lastRemoteSyncTs > 0) {
+            const remoteSavedBy = payload.saved_by || remoteData.saved_by;
+            if (remoteSavedBy !== this.activeUser || remoteTs > (localTs + 1500)) {
+              applyRemotePlanState(remoteData, true);
             }
-            this.lastRemoteSyncTs = Math.max(this.lastRemoteSyncTs, remoteTs || Date.now());
+          }
+          if (remoteTs > 0) {
+            this.lastRemoteSyncTs = Math.max(this.lastRemoteSyncTs, remoteTs);
           }
         }
       } catch (e) {}
-    }, 7000);
+    }, 4500);
   }
 };
 
@@ -2634,67 +2981,54 @@ function triggerAutoSave() {
   autoSaveDebounceTimer = setTimeout(() => {
     try {
       localStorage.setItem(PLAN_STORAGE_KEY_V2, JSON.stringify(currentPlanState));
-      updateSyncIndicator(true, 'Salvo no navegador');
     } catch (e) {
       console.warn('[Business Plan] Erro ao salvar localmente:', e);
-      updateSyncIndicator(false, 'Erro ao salvar localmente');
     }
-  }, 300);
+  }, 250);
 
-  // 2. Sincronização em nuvem com Supabase (compartilhada entre Leonardo e Mayumi)
+  // 2. Sincronização em nuvem com Supabase (compartilhada entre Leonardo e Maira / Mayumi)
   clearTimeout(supabaseSyncDebounceTimer);
   supabaseSyncDebounceTimer = setTimeout(async () => {
     try {
-      const payload = {
-        planState: {
-          tickets: currentPlanState.tickets,
-          fixedCosts: currentPlanState.fixedCosts,
-          proLabore: currentPlanState.proLabore,
-          taxRate: currentPlanState.taxRate,
-          mondayTasks: currentPlanState.mondayTasks,
-          scenarios: currentPlanState.scenarios,
-          PlanState: PlanState
-        },
-        PlanState: PlanState,
-        blocks: currentPlanState.customBlocks || [],
-        miniSpreadsheets: (currentPlanState.customBlocks || []).filter(b => b.type === 'mini_spreadsheet'),
-        chatHistory: [],
-        editedTexts: currentPlanState.editedTexts || {},
-        financialSheet: currentPlanState.financialSheet || [],
-        swotCards: currentPlanState.swotCards || []
-      };
-      const res = await callPlanBlocksApi('POST', payload);
-      if (res && res.ok) {
-        updateSyncIndicator(true, 'Sincronizado Supabase');
-      }
+      await savePlanStateToCloud(false);
     } catch (err) {
       console.warn('[Business Plan] Falha na sincronização Supabase:', err.message);
+      updateSyncIndicator(true, 'Salvo no navegador');
     }
-  }, 1000);
+  }, 600);
 }
 
 function updateSyncIndicator(saved = true, msg = 'Salvo') {
+  if (typeof document === 'undefined') return;
   const el = document.getElementById('planSaveStatusText');
   const icon = document.getElementById('planSaveStatusIcon');
   const badge = document.getElementById('planSaveStatusBadge');
+  
+  if (badge) {
+    badge.classList.remove('hidden');
+    if (saved) {
+      badge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-2xs transition-all';
+    } else {
+      badge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200 shadow-2xs transition-all';
+    }
+  }
+
   if (el) {
-    if (msg === 'Todas as alterações salvas' || msg === 'Salvo') {
-      el.textContent = 'Salvo';
-    } else if (msg === 'Salvando alterações...' || msg === 'Salvando...') {
-      el.textContent = 'Salvando...';
+    if (msg === 'Todas as alterações salvas' || msg === 'Salvo' || msg === 'Sincronizado Supabase' || msg === 'Sincronizado na Nuvem') {
+      el.textContent = 'Sincronizado na Nuvem';
+    } else if (msg === 'Salvando alterações...' || msg === 'Salvando...' || msg === 'Salvando na nuvem...' || msg === 'Sincronizando...') {
+      el.textContent = msg;
     } else {
       el.textContent = msg;
     }
   }
+
   if (icon) {
     if (saved) {
-      icon.className = 'fa-solid fa-check text-emerald-500 text-[10px]';
+      icon.className = 'fa-solid fa-cloud-arrow-up text-emerald-600 text-[10px]';
     } else {
-      icon.className = 'fa-solid fa-arrows-rotate fa-spin text-amber-500 text-[10px]';
+      icon.className = 'fa-solid fa-arrows-rotate fa-spin text-amber-600 text-[10px]';
     }
-  }
-  if (badge) {
-    badge.title = saved ? 'Todas as alterações foram salvas automaticamente.' : 'Salvando alterações...';
   }
 }
 
@@ -2934,88 +3268,41 @@ async function loadBusinessPlan(forceDefaults = false) {
       PlanRealtimeCollab.init();
     }
 
-    // Sincronização em segundo plano via Supabase (Leonardo & Mayumi)
+    // Sincronização em segundo plano via Supabase (Leonardo & Mayumi / Maira)
     if (!forceDefaults) {
       try {
-        const res = await callPlanBlocksApi('GET');
-        if (res && res.ok) {
-          const json = await res.json();
-          if (json && json.success && json.data) {
-            const remoteData = json.data;
-            let needsRerender = false;
-
-            if (remoteData.blocks && Array.isArray(remoteData.blocks) && remoteData.blocks.length > 0) {
-              currentPlanState.customBlocks = remoteData.blocks;
-              needsRerender = true;
-            }
-            // (chatHistory removido – agente IA desativado)
-            if (remoteData.tableContents && Object.keys(remoteData.tableContents).length > 0) {
-      currentPlanState.tableContents = Object.assign({}, currentPlanState.tableContents, remoteData.tableContents);
-      Object.keys(remoteData.tableContents).forEach(tblId => {
-        const tbody = document.getElementById(tblId);
-        if (tbody && remoteData.tableContents[tblId]) {
-          tbody.innerHTML = remoteData.tableContents[tblId];
-        }
-      });
-    }
-
-    if (remoteData.editedTexts && Object.keys(remoteData.editedTexts).length > 0) {
-              currentPlanState.editedTexts = Object.assign({}, currentPlanState.editedTexts, remoteData.editedTexts);
-              Object.keys(currentPlanState.editedTexts).forEach(textId => {
-                const el = document.querySelector(`[data-text-id="${textId}"]`);
-                if (el && currentPlanState.editedTexts[textId]) {
-                  el.innerHTML = currentPlanState.editedTexts[textId];
-                }
-              });
-            }
-            // Restaura PlanState do Supabase se existir (PROBLEMA 5)
-            if (remoteData.PlanState || (remoteData.planState && remoteData.planState.PlanState)) {
-              const loadedPlanState = remoteData.PlanState || remoteData.planState.PlanState;
-              Object.assign(PlanState, loadedPlanState);
-            }
-
-            if (remoteData.planState) {
-              if (remoteData.planState.tickets) currentPlanState.tickets = remoteData.planState.tickets;
-              if (remoteData.planState.fixedCosts) currentPlanState.fixedCosts = remoteData.planState.fixedCosts;
-              if (remoteData.planState.proLabore) currentPlanState.proLabore = remoteData.planState.proLabore;
-              if (remoteData.planState.mondayTasks) currentPlanState.mondayTasks = remoteData.planState.mondayTasks;
-              if (remoteData.planState.scenarios) currentPlanState.scenarios = remoteData.planState.scenarios;
-              syncInputCellsFromState();
-              recalcularTudo();
-              renderMondayBoard();
-            } else {
-              syncInputCellsFromState();
-              recalcularTudo();
-            }
-
-            if (needsRerender) {
-              renderCustomBlocks();
-            }
-
-            // Carrega planilha financeira colaborativa
-            if (remoteData.financialSheet && Array.isArray(remoteData.financialSheet) && remoteData.financialSheet.length > 0) {
-              currentPlanState.financialSheet = remoteData.financialSheet;
-              if (window._spreadsheetInitialized && typeof window.initSpreadsheet === 'function') {
-                window._spreadsheetInitialized = false;
-                window.initSpreadsheet('spreadsheetContainer');
-                window._spreadsheetInitialized = true;
-              }
-            }
-
-            // Carrega cards SWOT colaborativos
-            if (remoteData.swotCards && Array.isArray(remoteData.swotCards) && remoteData.swotCards.length > 0) {
-              currentPlanState.swotCards = remoteData.swotCards;
-              if (window._swotCanvasInitialized && typeof window.applySwotRemoteUpdate === 'function') {
-                window.applySwotRemoteUpdate(remoteData.swotCards);
-              }
-            }
-
-            updateSyncIndicator(true, 'Sincronizado Supabase');
+        const remoteData = await fetchPlanStateFromCloud();
+        if (remoteData) {
+          let payload = remoteData;
+          if (typeof remoteData.content === 'string') {
+            try { payload = JSON.parse(remoteData.content); } catch (e) {}
+          } else if (remoteData.data) {
+            payload = remoteData.data;
           }
+
+          const remoteTs = new Date(payload.updated_at || remoteData.updated_at || 0).getTime();
+          const localTs = currentPlanState.updated_at ? new Date(currentPlanState.updated_at).getTime() : 0;
+
+          // Se a nuvem tem dados e é mais recente (ou se local não tem timestamp), aplica da nuvem
+          if (remoteTs >= localTs || !localTs) {
+            applyRemotePlanState(remoteData, false);
+            if (typeof PlanRealtimeCollab !== 'undefined') {
+              PlanRealtimeCollab.lastRemoteSyncTs = remoteTs;
+            }
+            updateSyncIndicator(true, 'Sincronizado na Nuvem');
+          } else if (localTs > remoteTs) {
+            // Local mais recente: salva local na nuvem
+            await savePlanStateToCloud(true);
+          }
+        } else {
+          updateSyncIndicator(true, 'Salvo no navegador');
         }
       } catch (cloudErr) {
         console.warn('[Business Plan] Erro ao sincronizar com Supabase:', cloudErr.message);
+        updateSyncIndicator(true, 'Salvo no navegador');
       }
+    } else {
+      await savePlanStateToCloud(true);
     }
   } catch (err) {
     console.error('[Business Plan] Erro ao carregar plano:', err);
@@ -3613,6 +3900,10 @@ if (typeof window !== 'undefined') {
   window.switchPlanWorkspaceView = switchPlanWorkspaceView;
   window.PlanState = PlanState;
   window.recalcularTudo = recalcularTudo;
+  window.fetchPlanStateFromCloud = fetchPlanStateFromCloud;
+  window.savePlanStateToCloud = savePlanStateToCloud;
+  window.applyRemotePlanState = applyRemotePlanState;
+  window.manualSyncBusinessPlan = manualSyncBusinessPlan;
 
   if (typeof document !== 'undefined') {
     if (document.readyState === 'loading') {
@@ -3636,6 +3927,10 @@ if (typeof module !== 'undefined' && module.exports) {
     toggleActiveCollaborator,
     insertDirectCustomBlock,
     insertDirectMiniSpreadsheet,
-    switchPlanWorkspaceView
+    switchPlanWorkspaceView,
+    fetchPlanStateFromCloud,
+    savePlanStateToCloud,
+    applyRemotePlanState,
+    manualSyncBusinessPlan
   };
 }
