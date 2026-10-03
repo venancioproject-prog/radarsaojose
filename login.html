@@ -376,12 +376,12 @@
         if (typeof e.preventDefault === 'function') e.preventDefault();
         if (typeof e.stopPropagation === 'function') e.stopPropagation();
       }
-      const email = document.getElementById('email').value.trim();
-      const pass = document.getElementById('password').value;
-      const nome = document.getElementById('nome')?.value?.trim();
+      const email = document.getElementById('email')?.value?.trim() || '';
+      const password = document.getElementById('password')?.value || '';
+      const nome = document.getElementById('nome')?.value?.trim() || '';
       const isNewRegister = authMode === 'register';
 
-      if (!email || !pass) {
+      if (!email || !password) {
         alert("Por favor, preencha todos os campos.");
         return false;
       }
@@ -399,7 +399,7 @@
         if (isNewRegister) {
           const { data: signUpData, error: signUpErr } = await supabaseClient.auth.signUp({
             email,
-            password,
+            password: String(password),
             options: {
               data: { full_name: nome || email.split('@')[0] }
             }
@@ -414,7 +414,7 @@
         } else {
           const { data: signInData, error: signInErr } = await supabaseClient.auth.signInWithPassword({
             email,
-            password
+            password: String(password)
           });
           if (signInErr) throw signInErr;
 
