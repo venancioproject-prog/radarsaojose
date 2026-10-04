@@ -1154,116 +1154,1382 @@ window.HISTORIA_SJC_DATA = {
   ],
 
   bairros: [
-    {
-      id: "bairro-santana",
-      nome: "Santana",
-      regiaoId: "norte",
-      regiaoNome: "Zona Norte",
-      periodo: "Século XVII (c. 1680)",
-      origemNome: "Homenagem a Senhora Sant'Ana, padroeira da primeira capela colonial erguida na várzea do Rio Paraíba.",
-      historia: "Berço original da colonização joseense após a transferência do aldeamento do Rio Comprido. Tornou-se o centro fabril da cidade nos anos 1920 com a Tecelagem Parahyba.",
-      curiosidade: "Abriga o Parque da Cidade com jardins históricos de Burle Marx e a residência Olivo Gomes.",
-      icone: "fa-landmark"
-    },
-    {
-      id: "bairro-eugenio-melo",
-      nome: "Eugênio de Melo",
-      regiaoId: "leste",
-      regiaoNome: "Zona Leste",
-      periodo: "1877 (Século XIX)",
-      origemNome: "Homenagem ao engenheiro militar Eugênio Adriano Pereira da Cunha e Mello, diretor da Estrada de Ferro Central do Brasil.",
-      historia: "Desenvolveu-se ao redor da estação ferroviária inaugurada em 1877 para escoamento de café. Mais tarde transformou-se em distrito municipal e sede do Parque Tecnológico.",
-      curiosidade: "O prédio da antiga estação ferroviária de tijolos aparentes é patrimônio municipal tombado.",
-      icone: "fa-train"
-    },
-    {
-      id: "bairro-aquarius",
-      nome: "Jardim Aquarius",
-      regiaoId: "oeste",
-      regiaoNome: "Zona Oeste",
-      periodo: "Anos 1990",
-      origemNome: "Nome herdado da antiga 'Fazenda Aquarius', grande propriedade rural e criatório de cavalos que ocupava a região.",
-      historia: "Planejado como polo vertical corporativo e residencial de alto padrão no final do século XX, tornou-se o centro financeiro e gastronômico moderno da cidade.",
-      curiosidade: "A Praça Ulisses Guimarães no centro do bairro é um dos maiores pontos de convivência ao ar livre de SJC.",
-      icone: "fa-building"
-    },
-    {
-      id: "bairro-satelite",
-      nome: "Jardim Satélite",
-      regiaoId: "sul",
-      regiaoNome: "Zona Sul",
-      periodo: "Anos 1960 / 1970",
-      origemNome: "Inspirado na corrida espacial e na vocação tecnológica da cidade; as ruas foram batizadas com nomes de constelações e astros.",
-      historia: "Principal polo comercial da Zona Sul, o bairro nasceu de grandes loteamentos que acolheram os milhares de novos moradores atraídos pelas indústrias da Dutra.",
-      curiosidade: "Todas as suas principais vias têm nomes astronômicos: Av. Andrômeda, Av. Cassiopeia, Av. Perseu.",
-      icone: "fa-satellite"
-    },
-    {
-      id: "bairro-putim",
-      nome: "Putim",
-      regiaoId: "sudeste",
-      regiaoNome: "Zona Sudeste",
-      periodo: "Século XIX / Anos 1970",
-      origemNome: "Origem toponímica na antiga 'Fazenda do Putim' e na bacia do Córrego Putim-Alambari.",
-      historia: "Área rural histórica de passagem entre o Vale e o Litoral Norte que se urbanizou aceleradamente a partir dos anos 1970 com loteamentos populares e industriais.",
-      curiosidade: "É o portal de integração com a Rodovia dos Tamoios e via de acesso aos polos aeroespaciais.",
-      icone: "fa-route"
-    },
-    {
-      id: "bairro-urbanova",
-      nome: "Urbanova",
-      regiaoId: "oeste",
-      regiaoNome: "Zona Oeste",
-      periodo: "Anos 1980 / 1990",
-      origemNome: "Acrônimo de 'Urbanização Nova', plano de ocupação de baixa densidade com respeito aos relevos naturais e ao Rio Paraíba.",
-      historia: "Antiga fazenda de gado leiteiro que se transformou no maior polo de condomínios fechados horizontais e campus universitário da cidade.",
-      curiosidade: "É cercado por meandros do Rio Paraíba do Sul e possui amplas áreas de preservação permanente.",
-      icone: "fa-tree-city"
-    },
-    {
-      id: "bairro-vila-ema",
-      nome: "Vila Ema & Vila Adyana",
-      regiaoId: "centro",
-      regiaoNome: "Região Central",
-      periodo: "Anos 1920 / 1930",
-      origemNome: "Homenagem a Dona Ema e Adyana, figuras das famílias proprietárias dos loteamentos da fase sanatorial.",
-      historia: "Bairros arborizados projetados para receber pensões e residências de médicos e pacientes que buscavam o clima ameno do Sanatório Vicentina Aranha.",
-      curiosidade: "Preserva a arquitetura eclética e chalés da época de ouro da estância climatérica.",
-      icone: "fa-hospital"
-    },
-    {
-      id: "bairro-bosque-eucaliptos",
-      nome: "Bosque dos Eucaliptos",
-      regiaoId: "sul",
-      regiaoNome: "Zona Sul",
-      periodo: "Anos 1970",
-      origemNome: "Devido aos densos eucaliptais cultivados na região para suprir lenha e celulose antes do loteamento.",
-      historia: "Um dos bairros mais estruturados da Zona Sul, com praças largas, ciclovias e centros comerciais de bairro vibrantes.",
-      curiosidade: "A Avenida Salinas e a Praça Floripes Bicudo são o coração esportivo da região.",
-      icone: "fa-tree"
-    },
-    {
-      id: "bairro-vista-verde",
-      nome: "Jardim Vista Verde",
-      regiaoId: "leste",
-      regiaoNome: "Zona Leste",
-      periodo: "Anos 1970",
-      origemNome: "Referência à vista panorâmica da várzea do Rio Paraíba e das matas da Zona Leste.",
-      historia: "Planejado como loteamento de padrão unifamiliar para engenheiros e técnicos que trabalhavam na General Motors e nas indústrias da Dutra.",
-      curiosidade: "É conhecido pelo traçado sinuoso de suas ruas e praças ajardinadas com espécies nativas.",
-      icone: "fa-leaf"
-    },
-    {
-      id: "bairro-sfx-vila",
-      nome: "Vila de São Francisco Xavier",
-      regiaoId: "sfx",
-      regiaoNome: "São Francisco Xavier",
-      periodo: "1892 (Distrito)",
-      origemNome: "Homenagem a São Francisco Xavier, jesuíta missionário cultuado pelos primeiros povoadores da serra.",
-      historia: "Antigo pouso de tropas na rota de tropeiros entre Minas Gerais e o litoral. Manteve suas características bucólicas e tradições rurais vivas.",
-      curiosidade: "Fica a mais de 720 metros de altitude e é polo gastronômico e ecoturístico de destaque estadual.",
-      icone: "fa-mountain-sun"
-    }
-  ]
+  {
+    "id": "bairro-sfx-vila",
+    "nome": "São Francisco Xavier (Vila Central)",
+    "regiaoId": "sfx",
+    "regiaoNome": "São Francisco Xavier",
+    "periodo": "1892 (Elevação a Distrito)",
+    "origemNome": "Homenagem a São Francisco Xavier, padroeiro dos tropeiros e viajantes que cruzavam a Mantiqueira.",
+    "historia": "Surgido como ponto de pouso de tropas na rota comercial entre o Sul de Minas Gerais e o Vale do Paraíba. Tornou-se distrito de paz em 1892 pela Lei Estadual nº 69.",
+    "curiosidade": "Preserva a Igreja de São Francisco de 1898 e é Área de Proteção Ambiental (APA Estadual).",
+    "fonte": "FCCR / Pró-Memória SJC",
+    "fonteUrl": "https://fccr.sp.gov.br/"
+  },
+  {
+    "id": "bairro-sfx-santa-barbara",
+    "nome": "Santa Bárbara (SFX)",
+    "regiaoId": "sfx",
+    "regiaoNome": "São Francisco Xavier",
+    "periodo": "Século XIX",
+    "origemNome": "Invocação a Santa Bárbara, protetora contra raios e tempestades nas escarpas da serra.",
+    "historia": "Núcleo rural histórico ao longo dos afluentes do Rio do Peixe, caracterizado por pequenas propriedades agropecuárias, alambiques artesanais e mata atlântica de altitude.",
+    "curiosidade": "Abriga nascentes preservadas e trilhas ecológicas que conectam à crista da Serra da Mantiqueira.",
+    "fonte": "Pró-Memória Câmara SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-sfx-lavras",
+    "nome": "Lavras (SFX)",
+    "regiaoId": "sfx",
+    "regiaoNome": "São Francisco Xavier",
+    "periodo": "Século XVIII / XIX",
+    "origemNome": "Referência às antigas lavras (garimpos e faisqueiras de ouro) exploradas no curso alto dos ribeirões serranos.",
+    "historia": "Povoamento tradicional de montanha ligado aos ciclos de exploração mineral e posterior cultivo de milho, feijão e pecuária leiteira de altitude.",
+    "curiosidade": "Famoso pelas cachoeiras das Lavras e pequenos produtores de queijos artesanais.",
+    "fonte": "História Oral & Acervo FCCR",
+    "fonteUrl": "https://fccr.sp.gov.br/"
+  },
+  {
+    "id": "bairro-sfx-remedios",
+    "nome": "Remédios (SFX)",
+    "regiaoId": "sfx",
+    "regiaoNome": "São Francisco Xavier",
+    "periodo": "Século XIX",
+    "origemNome": "Homenagem a Nossa Senhora dos Remédios, devoção mariana dos primeiros sitiantes do vale serrano.",
+    "historia": "Comunidade rural encravada na divisa serrana com Joanópolis e Minas Gerais, polo de artesanato em madeira e turismo rural regenerativo.",
+    "curiosidade": "Mantém celebrações tradicionais de Folia de Reis e festas comunitárias centenárias.",
+    "fonte": "Pró-Memória Univap",
+    "fonteUrl": "https://www.univap.br/"
+  },
+{
+    "id": "bairro-santana",
+    "nome": "Santana",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Século XIX; bairro formado antes da industrialização dos anos 1920",
+    "origemNome": "Santana tem o nome de sua padroeira, Sant’Ana. A cronologia do Pró-Memória de São José dos Campos, acervo mantido pela Câmara, Fundação Cultural Cassiano Ricardo e Univap, registra o início da construção da igreja em 1869, por moradores da margem do Paraíba.",
+    "historia": "O bairro já existia quando as cerâmicas e a Tecelagem Parahyba chegaram, nos anos 1920. As fábricas atraíram trabalhadores e mudaram a rotina de Santana. A tecelagem também construiu moradias, escola e uma cooperativa de alimentos para seus empregados.",
+    "curiosidade": "A origem religiosa e a história operária convivem no mesmo bairro. A igreja e os antigos espaços industriais ajudam a reconhecer essas duas camadas de Santana.",
+    "fonte": "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Cronologia. Pró-Memória, [s.d.]",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/cronologia-sjc/",
+    "fontePagina": "",
+    "fichaHistoria": [
+        {
+            "titulo": "A igreja de Sant’Ana",
+            "texto": "A cronologia relaciona a formação do bairro à construção da igreja e à devoção à padroeira. O ano de 1869 marca o início da obra registrado nesse documento."
+        },
+        {
+            "titulo": "A vida em torno da fábrica",
+            "texto": "As historiadoras Maria Aparecida Papali, Valéria Zanetti e Maria José Acedo del Olmo descrevem Santana como o primeiro bairro industrial da cidade. Mulheres e crianças também trabalhavam nas fábricas. Moradia e serviços oferecidos pela tecelagem atendiam os empregados, enquanto ampliavam o controle da empresa sobre sua vida fora do trabalho."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Cronologia. Pró-Memória, [s.d.].",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/cronologia-sjc/",
+            "trecho": "Entrada de 1869: igreja, formação do bairro e padroeira."
+        },
+        {
+            "referencia": "PAPALI, Maria Aparecida; ZANETTI, Valéria; OLMO, Maria José Acedo del. São José dos Campos e sua história. Pró-Memória, [s.d.].",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/historia-sjc/",
+            "trecho": "Parágrafos sobre a primeira industrialização, Santana e o trabalho nas fábricas."
+        }
+    ],
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-altos-santana",
+    "nome": "Altos de Santana",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Década de 1980",
+    "origemNome": "O nome faz referência a Santana e aos “altos” do terreno. O estudo sobre a formação do bairro não registra quem escolheu essa denominação.",
+    "historia": "Altos de Santana foi loteado nos anos 1980, em terras da antiga Fazenda Boa Vista, ao lado do Telespark.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "O bairro visto de cima",
+            "texto": "O trabalho de Gabriel Henrique dos Santos Ferreira traz uma fotografia aérea de 1985. Nela, é possível observar o desenho do loteamento nos primeiros anos de sua formação. A imagem está na página 95 do estudo."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "95",
+            "paginaPdf": 95,
+            "trecho": "Texto sobre a Fazenda Boa Vista e fotografia aérea do Jardim Altos de Santana em 1985 (figura 56)."
+        }
+    ],
+    "fontePagina": "95",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-alto-da-ponte",
+    "nome": "Alto da Ponte",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Registrado na década de 1920",
+    "origemNome": "“Alto da Ponte” reúne referências ao relevo e a uma travessia. O nome já aparece na relação de bairros dos anos 1920; esse registro não explica a escolha da denominação.",
+    "historia": "Alto da Ponte aparece entre os núcleos antigos da região. A urbanização avançou com loteamentos abertos do outro lado do Rio Paraíba, ao norte de Santana.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "Caminhos da região",
+            "texto": "Em 2018, a Prefeitura registrou a integração da linha de ônibus do Sertãozinho com outras linhas no Alto da Ponte, na Rua Audemo Veneziani. O bairro é uma referência de acesso para quem se desloca entre essas localidades."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "39",
+            "paginaPdf": 39,
+            "trecho": "Tabela 3: registro de Alto da Ponte entre os bairros da década de 1920."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Linhas alimentadoras melhoram o transporte coletivo nos bairros. São José dos Campos, 14 set. 2018.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2018/setembro/14/linhas-alimentadoras-melhoram-o-transporte-coletivo-nos-bairros/",
+            "trecho": "Trecho sobre a linha Sertãozinho–Alto da Ponte."
+        }
+    ],
+    "fontePagina": "39",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-vila-paiva",
+    "nome": "Vila Paiva",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "1981 — loteamento",
+    "origemNome": "Vila Paiva está registrada com esse nome no estudo da urbanização da cidade. A possível homenagem a uma família Paiva ainda não tem identificação na fonte.",
+    "historia": "O loteamento foi aberto em 1981, perto de Altos de Santana e Telespark.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "A abertura do loteamento",
+            "texto": "O estudo de Gabriel Henrique dos Santos Ferreira situa Vila Paiva na expansão da Zona Norte dos anos 1980. A data de 1981 se refere ao loteamento, quando a área foi dividida em lotes; ela não informa quando chegaram os primeiros moradores."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "102–103",
+            "paginaPdf": 102,
+            "trecho": "Trecho que data o loteamento da Vila Paiva em 1981 e situa o bairro na expansão da Zona Norte."
+        }
+    ],
+    "fontePagina": "102–103",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-telespark",
+    "nome": "Telespark",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "1959 — loteamento",
+    "origemNome": "A denominação registrada é Jardim Telespark. A fonte que data o loteamento não informa de onde veio a palavra Telespark.",
+    "historia": "O Jardim Telespark foi loteado em 1959, na região do Alto da Ponte, em uma área até então rural.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "De área rural a loteamento",
+            "texto": "A pesquisa da Univap inclui o Telespark entre os loteamentos que ampliaram a ocupação ao norte do Rio Paraíba. O bairro surgiu nessa expansão, depois da abertura de Vila Veneziani e Vila Cândida."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "68",
+            "paginaPdf": 68,
+            "trecho": "Trecho sobre o loteamento do Jardim Telespark em 1959."
+        }
+    ],
+    "fontePagina": "68",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-vila-nova-sao-jose",
+    "nome": "Vila Nova São José",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Loteamento registrado no cadastro municipal",
+    "origemNome": "Vila Nova São José é o nome que aparece na planta municipal do loteamento. O documento não informa o motivo da escolha.",
+    "historia": "A planta reúne o traçado das ruas e a divisão dos terrenos da Vila Nova São José. É o registro cadastral do bairro disponível no acervo municipal de loteamentos.",
+    "curiosidade": "",
+    "fonte": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Vila Nova São José: planta de loteamento. São José dos Campos, [s.d.].",
+    "fonteUrl": "https://servicos.sjc.sp.gov.br/Mapas_de_loteamentos/Arquivos/nova_sao_jose_vl.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "A planta do bairro",
+            "texto": "A referência abaixo abre a planta original, em uma única página. Ela permite consultar a organização dos lotes. O documento não traz uma data segura de formação nem um relato sobre os primeiros moradores."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Vila Nova São José: planta de loteamento. São José dos Campos, [s.d.].",
+            "url": "https://servicos.sjc.sp.gov.br/Mapas_de_loteamentos/Arquivos/nova_sao_jose_vl.pdf",
+            "pagina": "1",
+            "paginaPdf": 1,
+            "trecho": "Planta cadastral: confirma a denominação e o desenho dos lotes; não identifica a pessoa homenageada."
+        }
+    ],
+    "fontePagina": "1",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-vila-cristina",
+    "nome": "Vila Cristina",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "1987 — loteamento",
+    "origemNome": "O nome Vila Cristina aparece na planta do loteamento. A identidade da Cristina homenageada não é informada nesse documento nem no estudo consultado.",
+    "historia": "Vila Cristina foi loteada em 1987, perto de Santana.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "Um loteamento perto de Santana",
+            "texto": "A pesquisa da Univap registra a abertura de Vila Cristina durante a expansão dos anos 1980. A planta municipal, também disponível abaixo, mostra a divisão dos terrenos do bairro."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "102–103",
+            "paginaPdf": 102,
+            "trecho": "Trecho sobre o loteamento de Vila Cristina em 1987."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Vila Cristina: planta de loteamento. São José dos Campos, [s.d.].",
+            "url": "https://servicos.sjc.sp.gov.br/Mapas_de_loteamentos/Arquivos/cristina_vl.pdf",
+            "pagina": "1",
+            "paginaPdf": 1,
+            "trecho": "Planta cadastral: confirma a denominação e o desenho dos lotes; não identifica a pessoa homenageada."
+        }
+    ],
+    "fontePagina": "102–103",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-vila-dirce",
+    "nome": "Vila Dirce",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Bairro citado em estudo sobre a urbanização",
+    "origemNome": "Vila Dirce já aparece com esse nome no estudo sobre o crescimento da cidade. A fonte não identifica quem foi Dirce.",
+    "historia": "O bairro abriga o mirante José Rosa de Morais, de onde se avista grande parte de São José dos Campos. O espaço fica perto do Parque Alberto Simões.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "O mirante",
+            "texto": "Em 2023, a Prefeitura anunciou a revitalização do deck, dos bancos e da área de lazer do mirante. A notícia informa que o acesso ao local é feito a pé."
+        },
+        {
+            "titulo": "Uma área avaliada para moradias",
+            "texto": "O estudo da urbanização cita Vila Dirce entre os locais avaliados para o empreendimento que se instalou em Cidade Vista Verde. O terreno foi descartado por causa do relevo."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "88",
+            "paginaPdf": 88,
+            "trecho": "Trecho sobre a avaliação de terrenos para o empreendimento Cidade Vista Verde."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Mirante da Vila Dirce é opção turística neste feriado em São José. São José dos Campos, 7 jun. 2023.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2023/junho/07/mirante-da-vila-dirce-e-opcao-turistica-neste-feriado-em-sao-jose/",
+            "trecho": "Localização e descrição do mirante José Rosa de Morais."
+        }
+    ],
+    "fontePagina": "88",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-jardim-guimaraes",
+    "nome": "Jardim Guimarães",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "1981 — loteamento",
+    "origemNome": "Jardim Guimarães é o nome registrado no estudo sobre os loteamentos da cidade. A fonte não esclarece se Guimarães se refere a uma família ou a um lugar.",
+    "historia": "O bairro foi loteado em 1981, perto de Altos de Santana e Telespark. Na Praça da Bica, uma nascente faz parte da história da comunidade.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "A água da Praça da Bica",
+            "texto": "Em 2019, a Prefeitura anunciou a revitalização da nascente com apoio do Rotary Club Oeste. A notícia dizia que a mina d’água fazia parte da comunidade havia cerca de 50 anos. A obra incluiu melhorias no acesso, no corrimão e na iluminação, além do plantio de árvores nativas."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "102–103",
+            "paginaPdf": 102,
+            "trecho": "Trecho que data o loteamento em 1981."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Nascente do Jardim Guimarães recebe revitalização com apoio do Rotary. São José dos Campos, 27 fev. 2019.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2019/fevereiro/27/nascente-do-jardim-guimaraes-recebe-revitalizacao-com-apoio-do-rotary/",
+            "trecho": "Revitalização da nascente localizada no bairro."
+        }
+    ],
+    "fontePagina": "102–103",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-buquirinha-1",
+    "nome": "Buquirinha I",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Nome regional registrado na década de 1920",
+    "origemNome": "Buquirinha é um nome antigo da região, presente em registros dos anos 1920. Buquirinha I conserva essa denominação e acrescenta o numeral. A lista antiga não explica a origem da palavra.",
+    "historia": "Buquirinha I integra o conjunto de comunidades atendidas pela Estratégia Saúde da Família do Buquirinha desde a ampliação anunciada em 2011.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "Saúde perto de casa",
+            "texto": "A notícia de 2011 descreve um atendimento voltado também a moradores distantes das unidades de saúde, pessoas acamadas e famílias sem condições de transporte. Buquirinha I aparece na relação ao lado de outras comunidades da região."
+        },
+        {
+            "titulo": "O nome antigo e o bairro atual",
+            "texto": "A relação histórica traz apenas “Buquirinha”, sem numeração. Esse registro comprova a antiguidade do nome regional, mas não estabelece a data de criação do Buquirinha I."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "39",
+            "paginaPdf": 39,
+            "trecho": "Tabela 3: registro histórico de Buquirinha, sem numeração."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Estratégia Saúde da Família começa no Buquirinha. São José dos Campos, 29 set. 2011.",
+            "url": "https://servicos.sjc.sp.gov.br/arquivonoticias/noticia.aspx?noticia_id=10599",
+            "trecho": "Relação dos bairros atendidos, com Buquirinha I, Buquirinha II e Mirante apresentados separadamente."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura; IPPLAN. Avaliação de áreas de risco do município de São José dos Campos: relatório completo do Plano Municipal de Redução de Risco, fases I e II. São José dos Campos, [s.d.].",
+            "url": "https://www.sjc.sp.gov.br/media/xqcpxfrh/pmrr_final_i_e_ii.pdf",
+            "pagina": "13",
+            "paginaPdf": 13,
+            "trecho": "Tabela de datas de mapeamento de 2016; distingue Buquirinha I, Mirante do Buquirinha e Buquirinha II / Pedra D’Água I."
+        }
+    ],
+    "fontePagina": "39",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-buquirinha-2",
+    "nome": "Buquirinha II",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Núcleos identificados em documentos municipais",
+    "origemNome": "Buquirinha II leva o nome antigo da região, acrescido do numeral. Os documentos municipais o identificam separadamente do Mirante do Buquirinha.",
+    "historia": "Buquirinha II aparece na relação de comunidades atendidas pela Estratégia Saúde da Família em 2011. No levantamento municipal de 2016, a área foi registrada como “Buquirinha II / Pedra D’Água I”.",
+    "curiosidade": "",
+    "fonte": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Estratégia Saúde da Família começa no Buquirinha. São José dos Campos, 29 set. 2011.",
+    "fonteUrl": "https://servicos.sjc.sp.gov.br/arquivonoticias/noticia.aspx?noticia_id=10599",
+    "fichaHistoria": [
+        {
+            "titulo": "O bairro nos registros municipais",
+            "texto": "A Prefeitura inclui Buquirinha II na área de atendimento de saúde do Buquirinha. O Plano Municipal de Redução de Risco registra um levantamento no local em 4 de outubro de 2016. Essa data é a da visita técnica, não a da fundação do bairro."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Estratégia Saúde da Família começa no Buquirinha. São José dos Campos, 29 set. 2011.",
+            "url": "https://servicos.sjc.sp.gov.br/arquivonoticias/noticia.aspx?noticia_id=10599",
+            "trecho": "Relação dos bairros atendidos, com Buquirinha I, Buquirinha II e Mirante apresentados separadamente."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura; IPPLAN. Avaliação de áreas de risco do município de São José dos Campos: relatório completo do Plano Municipal de Redução de Risco, fases I e II. São José dos Campos, [s.d.].",
+            "url": "https://www.sjc.sp.gov.br/media/xqcpxfrh/pmrr_final_i_e_ii.pdf",
+            "pagina": "13",
+            "paginaPdf": 13,
+            "trecho": "Tabela de datas de mapeamento de 2016; distingue Buquirinha I, Mirante do Buquirinha e Buquirinha II / Pedra D’Água I."
+        }
+    ],
+    "fontePagina": "",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-mirante-buquirinha",
+    "nome": "Mirante do Buquirinha",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Núcleos identificados em documentos municipais",
+    "origemNome": "Mirante do Buquirinha conserva o nome regional Buquirinha. A Prefeitura o registra como uma comunidade própria, separada de Buquirinha I e II.",
+    "historia": "O Rio Buquira faz parte do cotidiano do Mirante. Em março de 2024, o transbordamento do rio alagou o bairro, segundo a Prefeitura.",
+    "curiosidade": "",
+    "fonte": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Estratégia Saúde da Família começa no Buquirinha. São José dos Campos, 29 set. 2011.",
+    "fonteUrl": "https://servicos.sjc.sp.gov.br/arquivonoticias/noticia.aspx?noticia_id=10599",
+    "fichaHistoria": [
+        {
+            "titulo": "O rio e as moradias",
+            "texto": "A notícia sobre as chuvas de março de 2024 cita o Mirante do Buquirinha entre os bairros atingidos, junto de Taquari e Costinha. O Mirante também aparece separadamente na relação de atendimento de saúde de 2011 e no levantamento municipal de áreas de risco de 2016."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Estratégia Saúde da Família começa no Buquirinha. São José dos Campos, 29 set. 2011.",
+            "url": "https://servicos.sjc.sp.gov.br/arquivonoticias/noticia.aspx?noticia_id=10599",
+            "trecho": "Relação dos bairros atendidos, com Buquirinha I, Buquirinha II e Mirante apresentados separadamente."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura; IPPLAN. Avaliação de áreas de risco do município de São José dos Campos: relatório completo do Plano Municipal de Redução de Risco, fases I e II. São José dos Campos, [s.d.].",
+            "url": "https://www.sjc.sp.gov.br/media/xqcpxfrh/pmrr_final_i_e_ii.pdf",
+            "pagina": "13",
+            "paginaPdf": 13,
+            "trecho": "Tabela de datas de mapeamento de 2016; distingue Buquirinha I, Mirante do Buquirinha e Buquirinha II / Pedra D’Água I."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. São Francisco Xavier recebe manutenção e libera estradas. São José dos Campos, 7 mar. 2024.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2024/marco/07/sao-francisco-xavier-recebe-manutencao-e-libera-estradas/",
+            "trecho": "Transbordamento do Rio Buquira e intervenções nas estradas, incluindo Pouso Frio."
+        }
+    ],
+    "fontePagina": "",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-freitas",
+    "nome": "Bairro dos Freitas",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Registrado na década de 1920",
+    "origemNome": "O nome Freitas já aparece na lista de bairros dos anos 1920. A forma “Bairro dos Freitas” sugere uma referência familiar, mas o registro não identifica as pessoas que deram nome ao lugar.",
+    "historia": "Freitas está entre os bairros antigos registrados no município. Em 2011, a Prefeitura o incluiu na área atendida pelas equipes de saúde do Buquirinha.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "Atendimento na região",
+            "texto": "A ampliação da Estratégia Saúde da Família levou atendimento a comunidades mais afastadas das unidades de saúde. O Bairro dos Freitas aparece na mesma relação que Água Soca, Taquari e Costinha."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "39",
+            "paginaPdf": 39,
+            "trecho": "Tabela 3: entrada Freitas na relação da década de 1920."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Estratégia Saúde da Família começa no Buquirinha. São José dos Campos, 29 set. 2011.",
+            "url": "https://servicos.sjc.sp.gov.br/arquivonoticias/noticia.aspx?noticia_id=10599",
+            "trecho": "Relação dos bairros atendidos, com Buquirinha I, Buquirinha II e Mirante apresentados separadamente."
+        }
+    ],
+    "fontePagina": "39",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-costinha",
+    "nome": "Costinha",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Comunidade identificada em registros municipais",
+    "origemNome": "Costinha é a denominação usada nos registros municipais. A origem do nome não está explicada nas fontes reunidas aqui.",
+    "historia": "Uma homenagem local lembra Joel Pinto de Araújo, que trabalhou na Tecelagem Parahyba, distribuiu leite na região e participou do futebol amador.",
+    "curiosidade": "",
+    "fonte": "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Joel Araújo é rua no Costinha. São José dos Campos, 6 dez. 2013.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/noticias/2373/joel-araujo-e-rua-no-costinha",
+    "fichaHistoria": [
+        {
+            "titulo": "A homenagem a Joel",
+            "texto": "Em dezembro de 2013, a Câmara noticiou a aprovação de uma proposta para dar o nome de Joel Pinto de Araújo à praça no fim da travessa Hercílio Rodrigues. Ele foi diretor do Frigorífico FC e morreu em 2008. O título da notícia fala em rua; o corpo do texto identifica uma praça."
+        },
+        {
+            "titulo": "O Rio Buquira",
+            "texto": "Costinha foi um dos bairros atingidos pelo transbordamento do Rio Buquira em março de 2024, segundo a Prefeitura."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Joel Araújo é rua no Costinha. São José dos Campos, 6 dez. 2013.",
+            "url": "https://www.camarasjc.sp.gov.br/noticias/2373/joel-araujo-e-rua-no-costinha",
+            "trecho": "Corpo da notícia: proposta de denominação de praça e trajetória do homenageado."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. São Francisco Xavier recebe manutenção e libera estradas. São José dos Campos, 7 mar. 2024.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2024/marco/07/sao-francisco-xavier-recebe-manutencao-e-libera-estradas/",
+            "trecho": "Transbordamento do Rio Buquira e intervenções nas estradas, incluindo Pouso Frio."
+        }
+    ],
+    "fontePagina": "",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-bonsucesso",
+    "nome": "Bonsucesso",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Registrado na década de 1920",
+    "origemNome": "A lista de bairros dos anos 1920 registra “Bom Sucesso”. A comunidade tem uma capela dedicada a Nossa Senhora do Bonsucesso. A fonte não esclarece se a devoção deu nome ao lugar ou se o bairro já se chamava assim.",
+    "historia": "Bonsucesso aparece nos registros antigos do município e é identificado pela Prefeitura como uma comunidade da área rural da região norte.",
+    "curiosidade": "",
+    "fonte": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+    "fichaHistoria": [
+        {
+            "titulo": "Um encontro na capela",
+            "texto": "Em maio de 2018, moradores se reuniram no salão paroquial da Capela Nossa Senhora do Bonsucesso para discutir o Plano Diretor. Mais de 60 pessoas participaram do encontro, segundo a notícia municipal."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "39",
+            "paginaPdf": 39,
+            "trecho": "Tabela 3: entrada Bom Sucesso."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Moradores discutem Plano Diretor no Novo Horizonte e Bonsucesso. São José dos Campos, 12 maio 2018.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2018/maio/12/moradores-discutem-plano-diretor-no-novo-horizonte-e-bonsucesso/",
+            "trecho": "Localização rural do bairro e encontro no salão da Capela Nossa Senhora do Bonsucesso."
+        }
+    ],
+    "fontePagina": "39",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-turvo",
+    "nome": "Turvo",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Registrado na década de 1920",
+    "origemNome": "Turvo é um nome da região registrado desde a década de 1920. A antiga Usina do Turvo também o recebeu. As fontes reunidas aqui não explicam a origem da denominação.",
+    "historia": "A Usina do Turvo participou do início do abastecimento elétrico da cidade. Ela foi desativada depois que a Light adquiriu a empresa, em 1928.",
+    "curiosidade": "",
+    "fonte": "SÃO JOSÉ DOS CAMPOS ANTIGAMENTE. Usina do Turvo. Estudo Patrimônio Perdido: o passado em ruínas (FCCR, 2004). São José dos Campos, [s.d.].",
+    "fonteUrl": "https://www.sjcantigamente.com.br/usina-do-turvo/",
+    "fichaHistoria": [
+        {
+            "titulo": "A casa de força",
+            "texto": "O estudo da Fundação Cultural Cassiano Ricardo reúne imagens da usina em 1922 e das ruínas em 2003, no bairro do Turvo, na Estrada do Bom Sucesso. O texto foi publicado no site São José dos Campos Antigamente, com os créditos dos pesquisadores e do Departamento de Patrimônio Histórico da Fundação."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS ANTIGAMENTE. Usina do Turvo. Estudo Patrimônio Perdido: o passado em ruínas (FCCR, 2004). São José dos Campos, [s.d.].",
+            "url": "https://www.sjcantigamente.com.br/usina-do-turvo/",
+            "trecho": "Reprodução identificada do estudo do Departamento de Patrimônio Histórico da FCCR."
+        },
+        {
+            "referencia": "FERREIRA, Gabriel Henrique dos Santos. O processo histórico de urbanização de São José dos Campos entre 1940 e 2000. 2024. Trabalho de Graduação (História) — Faculdade de Educação e Artes, Universidade do Vale do Paraíba, São José dos Campos, 2024.",
+            "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf",
+            "pagina": "39",
+            "paginaPdf": 39,
+            "trecho": "Tabela 3: entrada Turvo."
+        }
+    ],
+    "fontePagina": "",
+    "contextoFonte": "O Pró-Memória de São José dos Campos é um núcleo de pesquisa e um acervo público de história da cidade, resultado da parceria entre a Câmara Municipal, a Fundação Cultural Cassiano Ricardo e a Univap, por meio de sua mantenedora, a Fundação Valeparaibana de Ensino.",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-pouso-frio",
+    "nome": "Pouso Frio",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Localidade e estrada registradas pelo município",
+    "origemNome": "O nome Pouso Frio permanece na denominação da estrada que atende a localidade. As fontes consultadas não confirmam a história de que ali havia uma parada de tropeiros.",
+    "historia": "Pouso Frio aparece nos registros de manutenção das estradas de São Francisco Xavier. Em março de 2024, a Prefeitura retirou barreiras da via após chuvas que provocaram deslizamentos na região.",
+    "curiosidade": "",
+    "fonte": "SÃO JOSÉ DOS CAMPOS. Prefeitura. São Francisco Xavier recebe manutenção e libera estradas. São José dos Campos, 7 mar. 2024.",
+    "fonteUrl": "https://www.sjc.sp.gov.br/noticias/2024/marco/07/sao-francisco-xavier-recebe-manutencao-e-libera-estradas/",
+    "fichaHistoria": [
+        {
+            "titulo": "A estrada do Pouso Frio",
+            "texto": "A notícia municipal relaciona a estrada às vias desobstruídas em São Francisco Xavier. Ela documenta o trabalho de acesso à localidade após as chuvas. A referência territorial é o distrito de São Francisco Xavier."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. São Francisco Xavier recebe manutenção e libera estradas. São José dos Campos, 7 mar. 2024.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2024/marco/07/sao-francisco-xavier-recebe-manutencao-e-libera-estradas/",
+            "trecho": "Transbordamento do Rio Buquira e intervenções nas estradas, incluindo Pouso Frio."
+        }
+    ],
+    "fontePagina": "",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-aguas-canindu",
+    "nome": "Águas do Canindu",
+    "regiaoId": "norte",
+    "regiaoNome": "Zona Norte",
+    "periodo": "Regularização documentada desde 2022",
+    "origemNome": "A Prefeitura usa a denominação Águas de Canindu. As notícias sobre o bairro não explicam a origem de Canindu.",
+    "historia": "A regularização dos terrenos faz parte da história recente do bairro. Em 2022, a Prefeitura anunciou visitas às casas e cadastramento de moradores em parte da comunidade, em parceria com o programa estadual Cidade Legal.",
+    "curiosidade": "",
+    "fonte": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Regularização do Águas de Canindu entra em nova etapa. São José dos Campos, 8 fev. 2022.",
+    "fonteUrl": "https://www.sjc.sp.gov.br/noticias/2022/fevereiro/08/regularizacao-do-aguas-de-canindu-entra-em-nova-etapa/",
+    "fichaHistoria": [
+        {
+            "titulo": "O processo de regularização",
+            "texto": "Em fevereiro de 2026, a Prefeitura anunciou um ponto de apoio para moradores de Águas de Canindu e Chácaras Havaí. A notícia previa levantamento dos lotes e estudos ambientais antes da titulação. O processo ainda estava em andamento na ocasião."
+        }
+    ],
+    "fontesRevisadas": [
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Regularização do Águas de Canindu entra em nova etapa. São José dos Campos, 8 fev. 2022.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2022/fevereiro/08/regularizacao-do-aguas-de-canindu-entra-em-nova-etapa/",
+            "trecho": "Regularização parcial e visitas domiciliares."
+        },
+        {
+            "referencia": "SÃO JOSÉ DOS CAMPOS. Prefeitura. Ponto de apoio tira dúvidas sobre regularização no Canindu e Havaí. São José dos Campos, 6 fev. 2026.",
+            "url": "https://www.sjc.sp.gov.br/noticias/2026/fevereiro/06/ponto-de-apoio-tira-duvidas-sobre-regularizacao-no-canindu-e-havai/",
+            "trecho": "Ponto de atendimento e próximas etapas anunciadas, sem afirmar titulação concluída."
+        }
+    ],
+    "fontePagina": "",
+    "tituloOrigem": "Sobre o nome"
+},
+  {
+    "id": "bairro-satelite",
+    "nome": "Jardim Satélite",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1960 / 1970",
+    "origemNome": "Inspirado na corrida espacial e na vocação aeroespacial da cidade; ruas batizadas com nomes de astros e constelações.",
+    "historia": "Antiga fazenda de gado leiteiro que foi loteada nos anos 60. A instalação da fábrica da São Paulo Alpargatas em 1960 acelerou a chegada de milhares de trabalhadores.",
+    "curiosidade": "Possui as avenidas Andrômeda, Cassiopeia e Perseu, constituindo o maior centro comercial a céu aberto da Zona Sul.",
+    "fonte": "Pró-Memória SJC / SJC Antigamente",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-floradas-sao-jose",
+    "nome": "Floradas de São José",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1980 / 1990",
+    "origemNome": "Alusão à arborização florida planejada no paisagismo dos canteiros e praças.",
+    "historia": "Bairro residencial planejado contíguo ao Jardim Satélite, com condomínios de médio e alto padrão e ampla rede de comércio.",
+    "curiosidade": "Abriga o Vale Sul Shopping (antigo Shopping Colavep), um dos maiores polos comerciais da Região Metropolitana do Vale.",
+    "fonte": "Associação Comercial de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-bosque-eucaliptos",
+    "nome": "Bosque dos Eucaliptos",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1970",
+    "origemNome": "Referência às grandes plantações de eucalipto cultivadas para celulose antes da urbanização.",
+    "historia": "Loteado nos anos 70 para acolher técnicos e metalúrgicos das indústrias da Via Dutra, tornou-se um dos bairros mais arborizados e com vida própria da Zona Sul.",
+    "curiosidade": "A Avenida Salinas e a Praça Floripes Bicudo são centros vibrantes de feiras livres e esportes ao ar livre.",
+    "fonte": "Pró-Memória Câmara SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-parque-industrial",
+    "nome": "Parque Industrial",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1960",
+    "origemNome": "Planejado inicialmente para abrigar indústrias leves ao longo da Dutra, consolidou-se como bairro estritamente residencial.",
+    "historia": "Um dos bairros mais tradicionais e valorizados da Zona Sul, com praças largas, o Hospital Regional e o complexo da Johnson & Johnson no entorno.",
+    "curiosidade": "A Praça Dom Pedro II no centro do bairro é ponto de encontro tradicional de famílias e eventos culturais.",
+    "fonte": "SJC Antigamente",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-jardim-oriente",
+    "nome": "Jardim Oriente",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1958",
+    "origemNome": "Homenagem aos imigrantes japoneses e à fundação da fábrica da Kanebo do Brasil (fiação e tecelagem nipônica).",
+    "historia": "Glebas rurais loteadas pelo pioneiro Torataro Takitani para acolher as famílias operárias da Kanebo e de outras manufaturas.",
+    "curiosidade": "Sede do Shopping Jardim Oriente, construído nas instalações restauradas da antiga fábrica Kanebo.",
+    "fonte": "Diocese de SJC / Acervo Histórico Kanebo",
+    "fonteUrl": "https://www.diocese-sjc.org.br/"
+  },
+  {
+    "id": "bairro-jardim-america",
+    "nome": "Jardim América",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1938 / 1960",
+    "origemNome": "Denominado originalmente de Colônia Paraíso e mais tarde renomeado em homenagem ao continente americano.",
+    "historia": "Bairro estratégico que faz a ligação entre o Centro e a Zona Sul. Nos anos 1970 recebeu o famoso Pavilhão de Eventos, hoje o Centro da Juventude.",
+    "curiosidade": "O Centro da Juventude com projeto arquitetônico moderno e pista de skate é um dos maiores pontos de lazer municipal.",
+    "fonte": "Prefeitura de SJC / Pró-Memória",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-portugal",
+    "nome": "Jardim Portugal",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1970",
+    "origemNome": "Homenagem à comunidade de imigrantes e descendentes portugueses estabelecidos em São José dos Campos.",
+    "historia": "Loteamento residencial de casas térreas e sobrados com ruas batizadas em homenagem a cidades lusitanas como Coimbra, Lisboa e Porto.",
+    "curiosidade": "Vizinho ao Bosque dos Eucaliptos e Parque Industrial, é um dos bairros mais silenciosos da região.",
+    "fonte": "Câmara Municipal SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-31-de-marco",
+    "nome": "Conjunto Residencial 31 de Março",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1968 / 1970",
+    "origemNome": "Data de fundação institucional do núcleo habitacional financiado pelo BNH (Banco Nacional da Habitação).",
+    "historia": "Primeiro grande conjunto habitacional planejado da Zona Sul, construído para atender à demanda de moradia popular para operários industriais.",
+    "curiosidade": "Possui praças centrais, centro comunitário ativo e ruas com forte arborização consolidada.",
+    "fonte": "Acervo Cohab / BNH",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-cruzeiro-do-sul",
+    "nome": "Jardim Cruzeiro do Sul",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1970",
+    "origemNome": "Alusão à constelação símbolo do Hemisfério Sul, em consonância com a toponímia astronômica da região.",
+    "historia": "Loteamento popular contíguo ao Jardim Satélite, caracterizado por comércio de proximidade e forte identidade comunitária.",
+    "curiosidade": "Integra o polo de prestadores de serviços automotivos e reformas da Zona Sul.",
+    "fonte": "Secretaria de Urbanismo SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-palmeiras-sao-jose",
+    "nome": "Palmeiras de São José",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1980",
+    "origemNome": "Presença de palmeiras imperiais e jerivás plantados no projeto urbanístico inicial.",
+    "historia": "Bairro residencial planejado vizinho ao Parque Industrial, com fácil acesso ao Anel Viário e à Via Dutra.",
+    "curiosidade": "Bairro com traçado viário organizado em bolsões residenciais com baixo fluxo de veículos pesados.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-estoril",
+    "nome": "Jardim Estoril",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1970",
+    "origemNome": "Nome inspirado na famosa estância balnear portuguesa de Estoril.",
+    "historia": "Loteamento de padrão intermediário entre o Bosque dos Eucaliptos e o Jardim Oriente, com escolas e praças de vizinhança.",
+    "curiosidade": "Concentra clínicas odontológicas, academias e escolas infantis tradicionais da Zona Sul.",
+    "fonte": "Câmara Municipal SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-madureira",
+    "nome": "Jardim Madureira",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1970",
+    "origemNome": "Homenagem aos antigos proprietários de chácaras de cultivo de café e pecuária.",
+    "historia": "Pequeno enclave residencial calmo situado entre as grandes avenidas da Zona Sul.",
+    "curiosidade": "Preserva características de vila familiar onde vizinhos residem há várias gerações.",
+    "fonte": "Prefeitura — relação oficial de bairros da Casa do Idoso Norte",
+    "fonteUrl": "https://siteprefeitura.sjc.gov.br/transicao/SASC/ANEXO%203%20-%20Diretoria%20Administrativa/Editais%20de%20Chamamento/EC%202017/EC%2009%202017%20casa%20idoso%20norte.pdf"
+  },
+  {
+    "id": "bairro-campo-dos-alemaes",
+    "nome": "Campo dos Alemães",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1906 / 1984",
+    "origemNome": "Em 1906 a Companhia de Extração Tanífera Alemã estocava materiais e árvores de acácia na área ao longo da ferrovia.",
+    "historia": "Na década de 1980 tornou-se o maior loteamento de habitação de interesse social da cidade. É hoje um polo de juventude, cultura hip-hop e arte urbana reconhecido nacionalmente.",
+    "curiosidade": "O Parque Ribeirão Vermelho no bairro é um dos mais modernos complexos públicos de lazer e piscinas de São José dos Campos.",
+    "fonte": "Pró-Memória Univap / FCCR",
+    "fonteUrl": "https://www.univap.br/"
+  },
+  {
+    "id": "bairro-dom-pedro-1",
+    "nome": "Conjunto Habitacional Dom Pedro I",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1982",
+    "origemNome": "Homenagem ao primeiro Imperador do Brasil e artífice da Independência de 1822.",
+    "historia": "Conjunto construído pela CDHU/Prefeitura para famílias de trabalhadores industriais e prestadores de serviços da Zona Sul.",
+    "curiosidade": "Famoso pelo intenso comércio de calçadas, padarias e feiras comunitárias.",
+    "fonte": "CDHU / Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-dom-pedro-2",
+    "nome": "Conjunto Habitacional Dom Pedro II",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1986",
+    "origemNome": "Homenagem a Dom Pedro II, monarca que incentivou as ferrovias e a ciência no Vale do Paraíba.",
+    "historia": "Segunda etapa do complexo habitacional do Dom Pedro, ampliou a malha viária e as escolas estaduais da região.",
+    "curiosidade": "Possui forte tradição em futebol de várzea e projetos esportivos de base.",
+    "fonte": "Secretaria de Habitação SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-parque-interlagos",
+    "nome": "Parque Interlagos",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1985 (22 de Setembro)",
+    "origemNome": "Presença de lagoas naturais formadas na bacia do Rio Comprido (Fazenda Aymoré).",
+    "historia": "Inaugurado oficialmente em 22 de setembro de 1985 nas terras da antiga Fazenda Aymoré. Inicialmente planejado como loteamento fechado, consolidou-se como bairro popular.",
+    "curiosidade": "A Lagoa Ayrton Senna da Silva no coração do bairro é um cartão-postal de lazer, pesca e caminhadas da comunidade.",
+    "fonte": "Acervo Histórico SJC / Wikipedia",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-cidade-morumbi",
+    "nome": "Cidade Morumbi",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1980",
+    "origemNome": "Origem tupi mbyra-mbi (colina verdejante / morro redondo).",
+    "historia": "Um dos bairros mais populosos e dinâmicos de São José dos Campos, estruturado ao longo da antiga Estrada Velha Rio-São Paulo.",
+    "curiosidade": "Abriga um exemplar centenário da árvore Guapuruvu tombado por lei como patrimônio histórico e ambiental municipal.",
+    "fonte": "Conselho Municipal de Preservação (COMPHAC)",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-colonial",
+    "nome": "Jardim Colonial",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1980",
+    "origemNome": "Referência estilística ao período colonial brasileiro e ao traçado das vilas históricas.",
+    "historia": "Bairro comercialmente muito forte na Zona Sul, famoso por atrair milhares de pessoas de toda a região metropolitana para compras de produtos populares.",
+    "curiosidade": "Sede da tradicionalíssima Feira do Colonial aos domingos, uma das maiores feiras de rua do Vale do Paraíba.",
+    "fonte": "Prefeitura — Decreto Municipal nº 18.812/2021",
+    "fonteUrl": "https://servicos.sjc.sp.gov.br/Legislacao/Arquivos/Decretos/2021/DE_2021_00018812.pdf"
+  },
+  {
+    "id": "bairro-jardim-imperial",
+    "nome": "Jardim Imperial",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1990",
+    "origemNome": "Denominação que remete ao período do Império do Brasil, vizinho ao Colonial e Dom Pedro.",
+    "historia": "Expansão imobiliária que atendeu à crescente classe trabalhadora da Zona Sul nos anos 90 com comércio diversificado.",
+    "curiosidade": "Ponto de confluência de novas linhas de transporte coletivo e ciclovias integradas.",
+    "fonte": "Secretaria de Transportes SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-bosque-dos-ipes",
+    "nome": "Bosque dos Ipês",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "1998",
+    "origemNome": "Planejamento ambiental com plantio maciço de ipês-amarelos e ipês-roxos em suas alamedas.",
+    "historia": "Loteado no final dos anos 1990 com foco em famílias jovens e condomínios de sobrados contemporâneos.",
+    "curiosidade": "A florada anual dos ipês no inverno transforma as ruas do bairro em atração visual.",
+    "fonte": "MHK Construtora / Prefeitura SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-parque-uniao",
+    "nome": "Parque União",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1980",
+    "origemNome": "Simboliza a união das famílias fundadoras e da associação de moradores na conquista de asfalto e água tratada.",
+    "historia": "Núcleo de ocupação popular autoconstruída com sólidas redes de cooperação comunitária.",
+    "curiosidade": "Mantém uma das mais antigas associações comunitárias ativas da Zona Sul.",
+    "fonte": "Pró-Memória Univap",
+    "fonteUrl": "https://www.univap.br/"
+  },
+  {
+    "id": "bairro-pinheirinho-palmares",
+    "nome": "Pinheirinho dos Palmares",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "2016",
+    "origemNome": "Homenagem à luta por moradia das famílias do antigo Pinheirinho e ao Quilombo dos Palmares.",
+    "historia": "Bairro planejado inaugurado em dezembro de 2016 com 1.461 unidades habitacionais do programa Minha Casa Minha Vida no extremo sul da cidade.",
+    "curiosidade": "Conjunto modelo com escolas de tempo integral, UBS e áreas de preservação ambiental no entorno.",
+    "fonte": "Ministério das Cidades / Prefeitura SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-torrao-de-ouro",
+    "nome": "Torrão de Ouro",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1970",
+    "origemNome": "Alusão à fertilidade do solo argiloso e avermelhado das antigas fazendas de café.",
+    "historia": "Área de transição rural-urbana na bacia do Rio Comprido que se consolidou com chácaras e pequenas residências familiares.",
+    "curiosidade": "Próximo à divisa com Jacareí e rodeado por áreas verdes de preservação.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-chacaras-reunidas",
+    "nome": "Chácaras Reunidas",
+    "regiaoId": "sul",
+    "regiaoNome": "Zona Sul",
+    "periodo": "Anos 1950 / 1970",
+    "origemNome": "Unificação de dezenas de pequenas chácaras agrícolas situadas entre a Via Dutra e a antiga ferrovia.",
+    "historia": "Transformou-se no maior polo de pequenas e médias indústrias metalmecânicas, usinagem e logística de São José dos Campos.",
+    "curiosidade": "Concentra mais de 500 empresas fornecedoras da cadeia aeroespacial, automotiva e de serviços pesados.",
+    "fonte": "CIESM / Associação Comercial de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-eugenio-melo",
+    "nome": "Eugênio de Melo (Distrito)",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "1877 (Inauguração da Estação Ferroviária)",
+    "origemNome": "Homenagem ao engenheiro militar Eugênio Adriano Pereira da Cunha e Mello, diretor da Estrada de Ferro Central do Brasil.",
+    "historia": "Originalmente chamada Vila de Nossa Senhora dos Cafezais. Desenvolveu-se no ciclo do café ao redor da estação férrea de 1877. Elevado a Distrito em 1934.",
+    "curiosidade": "Sede do Parque Tecnológico de São José dos Campos e da histórica Casa de Cultura Rancho do Tropeiro.",
+    "fonte": "Pró-Memória Câmara SJC / FCCR",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-galo-branco",
+    "nome": "Galo Branco",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Século XIX / Anos 1960",
+    "origemNome": "Antiga venda e pouso de tropeiros cujo símbolo era um cata-vento em formato de galo branco de lata.",
+    "historia": "Ponto de travessia do café e de tropeiros na divisa com Caçapava, tornou-se grande polo residencial operário com a chegada da General Motors nos anos 50.",
+    "curiosidade": "Conserva tradição centenária de festas juninas e celebrações tropeiras.",
+    "fonte": "FCCR / História Oral",
+    "fonteUrl": "https://fccr.sp.gov.br/"
+  },
+  {
+    "id": "bairro-vista-verde",
+    "nome": "Cidade Vista Verde",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "1970",
+    "origemNome": "Referência à vista panorâmica e ao traçado urbanístico de Cidade-Jardim repleto de praças verdes.",
+    "historia": "Planejado e construído nos anos 70 para abrigar engenheiros e técnicos qualificados da Refinaria Henrique Lage (Revap) e da General Motors.",
+    "curiosidade": "Projetado com ruas sem saída (cul-de-sac) que convergem para praças circulares ajardinadas.",
+    "fonte": "Acervo Petrobras / SJC Antigamente",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-novo-horizonte",
+    "nome": "Parque Novo Horizonte",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "1978 (24 de Setembro)",
+    "origemNome": "Idealizado pelo líder sindical Pedro Rocha (Sintricom) como um novo horizonte de moradia digna para os operários da construção civil.",
+    "historia": "Inaugurado em 24 de setembro de 1978 na antiga Fazenda Santa Emília com cerca de 500 lotes. É o coração pulsante e cultural da Zona Leste.",
+    "curiosidade": "Todas as suas ruas têm nomes de profissões (ex: Rua dos Pedreiros, Rua dos Eletricistas) e celebra a famosa Festa do Trabalhador todo 1º de Maio.",
+    "fonte": "Sintricom / Wikipedia / Câmara SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-santa-herminia",
+    "nome": "Santa Hermínia",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1980",
+    "origemNome": "Homenagem a Hermínia, matriarca da família proprietária da fazenda que originou o loteamento.",
+    "historia": "Bairro popular que se expandiu paralelamente ao Novo Horizonte e Jardim Mariana na Zona Leste.",
+    "curiosidade": "Forte presença de pequenas padarias, serralherias e iniciativas comunitárias de bairro.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-mariana",
+    "nome": "Jardim Mariana I & II",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1980",
+    "origemNome": "Denominação em homenagem a Mariana, figura benfeitora das primeiras famílias moradoras da gleba.",
+    "historia": "Loteamento residencial de trabalhadores que atuam no Parque Tecnológico, GM e indústrias automotivas.",
+    "curiosidade": "Conectado diretamente pela Avenida Tancredo Neves e corredor viário da Zona Leste.",
+    "fonte": "Secretaria de Urbanismo SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-sao-judas-tadeu",
+    "nome": "São Judas Tadeu",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1960",
+    "origemNome": "Invocação ao Santo das Causas Impossíveis, padroeiro da capela comunitária erguida pelos moradores.",
+    "historia": "Situado entre a Avenida Pedro Friggi e o campus do DCTA, acolheu operários e militares na expansão dos anos 60.",
+    "curiosidade": "A Paróquia São Judas Tadeu é centro de grandes peregrinações anuais em 28 de outubro.",
+    "fonte": "Diocese de SJC",
+    "fonteUrl": "https://www.diocese-sjc.org.br/"
+  },
+  {
+    "id": "bairro-jardim-cerejeiras",
+    "nome": "Jardim Cerejeiras",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1980",
+    "origemNome": "Extensão do conceito floral do Novo Horizonte com ruas batizadas em homenagem a datas comemorativas das profissões.",
+    "historia": "Desenvolveu-se em continuidade física com o Parque Novo Horizonte, formando um dos maiores eixos residenciais da cidade.",
+    "curiosidade": "Diferente do Novo Horizonte que tem nomes de profissões, o Cerejeiras traz os dias das profissões (ex: Rua Dia do Professor).",
+    "fonte": "Pró-Memória Univap",
+    "fonteUrl": "https://www.univap.br/"
+  },
+  {
+    "id": "bairro-vila-tatetuba",
+    "nome": "Vila Tatetuba",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "1953 (19 de Abril)",
+    "origemNome": "Origem tupi taitetu-yba (lugar dos caititus / porcos-do-mato) e antiga olaria colonial.",
+    "historia": "Loteado oficialmente em 19 de abril de 1953 com o impulso da construção da Via Dutra. Na região foram encontradas urnas funerárias indígenas pré-coloniais.",
+    "curiosidade": "Sede da tradicional Sociedade Amigos de Bairro e polo histórico de indústrias cerâmicas.",
+    "fonte": "Diego Del Passo / Pró-Memória SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-vila-tesouro",
+    "nome": "Vila Tesouro",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1950",
+    "origemNome": "Lenda popular transmitida por antigos tropeiros sobre moedas de ouro enterradas na rota colonial.",
+    "historia": "Loteado no auge da industrialização da Zona Leste para acolher operários e migrantes de várias partes do Brasil.",
+    "curiosidade": "Sede de projetos culturais da FCCR e espaço de preservação da memória operária da cidade.",
+    "fonte": "FCCR / Fundação Cultural Cassiano Ricardo",
+    "fonteUrl": "https://fccr.sp.gov.br/"
+  },
+  {
+    "id": "bairro-vila-industrial",
+    "nome": "Vila Industrial",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "1920 / 1950",
+    "origemNome": "Vocação fabril pioneira da cidade, abrigando fábricas de louça, tecidos e oficinas da Estrada de Ferro.",
+    "historia": "Coração histórico da classe operária de São José dos Campos. Tornou-se sede do Hospital Municipal, do Tiro de Guerra e do lendário Estádio Martins Pereira.",
+    "curiosidade": "Abriga o Estádio Martins Pereira (1970), templo do futebol joseense onde jogou a Águia do Vale (São José EC).",
+    "fonte": "Pró-Memória SJC / SJC Antigamente",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-santa-ines",
+    "nome": "Jardim Santa Inês I & II",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1980",
+    "origemNome": "Invocação a Santa Inês, padroeira da capela comunitária erguida nos primeiros anos de ocupação.",
+    "historia": "Bairro no extremo leste que cresceu com a chegada de trabalhadores de serviços e do Parque Tecnológico.",
+    "curiosidade": "Possui forte identidade de vizinhança e praça com pista de caminhada e academia ao ar livre.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-coqueiro",
+    "nome": "Jardim Coqueiro",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1970",
+    "origemNome": "Presença de coqueiros e palmeiras na antiga propriedade rural desmembrada.",
+    "historia": "Pequeno loteamento residencial da Zona Leste vizinho à Vila Tesouro e Tatetuba.",
+    "curiosidade": "Conhecido por suas oficinas mecânicas especializadas e comércio de peças.",
+    "fonte": "Secretaria de Planejamento Urbano",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-motorama",
+    "nome": "Jardim Motorama",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1970",
+    "origemNome": "Inspirado na era do automobilismo e na proximidade com a Via Dutra e a fábrica da GM.",
+    "historia": "Bairro residencial planejado com praças arborizadas, escolas municipais e fácil acesso à Avenida Pedro Friggi.",
+    "curiosidade": "A Praça Matriz do Motorama é famosa pelos quiosques gastronômicos e encontros de carros clássicos.",
+    "fonte": "Câmara Municipal SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-diamante",
+    "nome": "Jardim Diamante",
+    "regiaoId": "leste",
+    "regiaoNome": "Zona Leste",
+    "periodo": "Anos 1980",
+    "origemNome": "Toponímia alusiva a pedras preciosas, conferindo padrão de valorização ao loteamento.",
+    "historia": "Bairro residencial calmo situado entre o Vista Verde e o Motorama.",
+    "curiosidade": "Possui bolsões exclusivamente residenciais com praças bem cuidadas pelos próprios moradores.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-granja",
+    "nome": "Jardim da Granja",
+    "regiaoId": "sudeste",
+    "regiaoNome": "Zona Sudeste",
+    "periodo": "1975",
+    "origemNome": "Antigas granjas avícolas que ocupavam a região (Granja Itambi foi a última a resistir).",
+    "historia": "Povoado nos anos 70 para atender engenheiros e técnicos da EMBRAER, INPE e CTA estabelecidos na Avenida dos Astronautas.",
+    "curiosidade": "Bairro com comércio gastronômico muito tradicional e proximidade imediata com o Aeroporto Internacional.",
+    "fonte": "Pró-Memória Univap / Embraer",
+    "fonteUrl": "https://www.univap.br/"
+  },
+  {
+    "id": "bairro-jardim-uira",
+    "nome": "Jardim Uirá",
+    "regiaoId": "sudeste",
+    "regiaoNome": "Zona Sudeste",
+    "periodo": "Anos 1980",
+    "origemNome": "Origem no tupi guyra/uira (pássaro / o que voa), simbolizando a vocação aeronáutica local.",
+    "historia": "Bairro residencial nobre da Região Sudeste, vizinho ao complexo aeroespacial e amplamente arborizado.",
+    "curiosidade": "Abriga o tradicional Restaurante Trairão e residências de oficiais e pesquisadores do ITA/DCTA.",
+    "fonte": "SJC Antigamente",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-dcta-acacias",
+    "nome": "DCTA / Vila das Acácias",
+    "regiaoId": "sudeste",
+    "regiaoNome": "Zona Sudeste",
+    "periodo": "1950",
+    "origemNome": "Departamento de Ciência e Tecnologia Aeroespacial e vilas militares planejadas com acácias floridas.",
+    "historia": "Campus do DCTA/ITA projetado pelo arquiteto Oscar Niemeyer sob coordenação do Marechal Casimiro Montenegro Filho a partir de 1950.",
+    "curiosidade": "Complexo tombado pelo IPHAN como patrimônio arquitetônico e berço da engenharia aeronáutica e espacial brasileira.",
+    "fonte": "IPHAN / Acervo Histórico DCTA/ITA",
+    "fonteUrl": "http://www.ita.br/"
+  },
+  {
+    "id": "bairro-putim",
+    "nome": "Putim",
+    "regiaoId": "sudeste",
+    "regiaoNome": "Zona Sudeste",
+    "periodo": "Século XIX / Anos 1970",
+    "origemNome": "Origem toponímica na histórica Fazenda do Putim e na bacia do Córrego Putim-Alambari.",
+    "historia": "Antigo entreposto rural de ligação com a Serra do Mar e Litoral Norte. Tornou-se um dos principais eixos de expansão habitacional com a Rodovia dos Tamoios.",
+    "curiosidade": "Portal de acesso para o Aeroporto Internacional de SJC e conexão direta com Caraguatatuba e São Sebastião.",
+    "fonte": "Pró-Memória Câmara SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-residencial-flamboyant",
+    "nome": "Residencial Flamboyant",
+    "regiaoId": "sudeste",
+    "regiaoNome": "Zona Sudeste",
+    "periodo": "Anos 1990 / 2000",
+    "origemNome": "Alamedas planejadas com flamboyants de flores vermelhas exuberantes.",
+    "historia": "Área que passou por rápida verticalização residencial moderna ao lado da Avenida dos Astronautas e do INPE.",
+    "curiosidade": "Bairro preferido por engenheiros recém-formados e pesquisadores do polo espacial.",
+    "fonte": "Secretaria de Urbanismo SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-santa-julia",
+    "nome": "Jardim Santa Júlia",
+    "regiaoId": "sudeste",
+    "regiaoNome": "Zona Sudeste",
+    "periodo": "Anos 1990",
+    "origemNome": "Homenagem a Santa Júlia e à família proprietária da antiga fazenda desmembrada.",
+    "historia": "Bairro residencial em expressivo crescimento na Região Sudeste, contíguo à Via Cambuí e Tamoios.",
+    "curiosidade": "Beneficiado diretamente pela abertura da Via Cambuí, conectando a Zona Sudeste à Zona Leste em poucos minutos.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-aquarius",
+    "nome": "Jardim Aquarius",
+    "regiaoId": "oeste",
+    "regiaoNome": "Zona Oeste",
+    "periodo": "Anos 1990",
+    "origemNome": "Herança da antiga Fazenda Aquarius, grande haras e propriedade agropecuária que ocupava toda a colina oeste.",
+    "historia": "Planejado no final do século XX como novo centro financeiro, corporativo e residencial de alto padrão. Concentra os edifícios mais modernos da cidade.",
+    "curiosidade": "A Praça Ulisses Guimarães no centro do bairro é o principal ponto de caminhada, eventos ao ar livre e gastronomia de food trucks.",
+    "fonte": "Pró-Memória SJC / Prefeitura SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-urbanova",
+    "nome": "Urbanova (Alphaville / Paratehy)",
+    "regiaoId": "oeste",
+    "regiaoNome": "Zona Oeste",
+    "periodo": "1980 / 1990",
+    "origemNome": "Acrônimo de Urbanização Nova, plano de ocupação de baixa densidade respeitando os relevos e o Rio Paraíba.",
+    "historia": "Antigas fazendas leiteiras transformadas no maior polo de condomínios fechados horizontais, haras e sede do campus principal da Universidade do Vale do Paraíba (Univap).",
+    "curiosidade": "Cercado pelos meandros do Rio Paraíba e Parque Ribeirão Vermelho, com o imponente Arco da Inovação em sua rota de acesso.",
+    "fonte": "Univap / Pró-Memória",
+    "fonteUrl": "https://www.univap.br/"
+  },
+  {
+    "id": "bairro-esplanada",
+    "nome": "Jardim Esplanada",
+    "regiaoId": "oeste",
+    "regiaoNome": "Zona Oeste",
+    "periodo": "Anos 1970",
+    "origemNome": "Topografia em platô (esplanada) debruçada sobre o Rio Paraíba e o Banhado.",
+    "historia": "Bairro tradicional nobre de casas amplas, praças centenárias, colégios de excelência e polo médico contíguo ao Parque Vicentina Aranha.",
+    "curiosidade": "Abriga o histórico Shopping Esplanada, um dos pioneiros centros comerciais de bairro de São José dos Campos.",
+    "fonte": "SJC Antigamente / COMPHAC",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-colinas",
+    "nome": "Jardim das Colinas",
+    "regiaoId": "oeste",
+    "regiaoNome": "Zona Oeste",
+    "periodo": "Anos 1980",
+    "origemNome": "Relevo ondulado suave com vista panorâmica para o Vale do Paraíba.",
+    "historia": "Loteamento fechado de altíssimo padrão que impulsionou a criação do Colinas Shopping e hotéis executivos internacionais.",
+    "curiosidade": "Sede do Colinas Shopping e do Teatro Colinas, importante polo cultural e gastronômico da cidade.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-industrias",
+    "nome": "Jardim das Indústrias",
+    "regiaoId": "oeste",
+    "regiaoNome": "Zona Oeste",
+    "periodo": "1960",
+    "origemNome": "Desmembramento da Fazenda Paraíso e proximidade com o complexo da Johnson & Johnson na Dutra.",
+    "historia": "Lançado em 1960. Apesar do nome industrial, transformou-se em bairro predominantemente residencial, muito arborizado e valorizado na Zona Oeste.",
+    "curiosidade": "Sua praça central com pista de cooper e parquinho infantil é uma das mais frequentadas da cidade.",
+    "fonte": "Pró-Memória Univap",
+    "fonteUrl": "https://www.univap.br/"
+  },
+  {
+    "id": "bairro-centro-historico",
+    "nome": "Centro Histórico (Rua 15 / Praça Afonso Pena)",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "1767 (Marco Zero Oficial)",
+    "origemNome": "Núcleo original da fundação da Vila de São José do Paraíba pelo Ouvidor Afonso Botelho.",
+    "historia": "Colina histórica onde se ergueram a primeira Câmara, o Pelourinho e a Igreja Matriz. Tornou-se o coração bancário, cívico e de comércio tradicional de rua.",
+    "curiosidade": "A Praça Afonso Pena era o antigo Largo da Matriz e a Rua 15 de Novembro foi o centro econômico do ciclo cafeeiro.",
+    "fonte": "Pró-Memória Câmara SJC / FCCR",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-vila-ema",
+    "nome": "Vila Ema",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "1920 / 1930",
+    "origemNome": "Homenagem a Dona Ema, matriarca da família proprietária das primeiras pensões sanatoriais.",
+    "historia": "Bairro nobre que abrigava residências de médicos sanitaristas e pensionatos da fase da tuberculose. Tornou-se o principal corredor gastronômico de alta gastronomia e bistrôs da cidade.",
+    "curiosidade": "Preserva chalés e casarões da década de 1930 integrados a restaurantes de culinária internacional contemporânea.",
+    "fonte": "COMPHAC / FCCR",
+    "fonteUrl": "https://fccr.sp.gov.br/"
+  },
+  {
+    "id": "bairro-vila-adyana",
+    "nome": "Vila Adyana",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "1924",
+    "origemNome": "Homenagem a Dona Adyana, da família que loteou o entorno do Sanatório Vicentina Aranha.",
+    "historia": "Bairro símbolo da fase sanatorial, acolhendo o suntuoso Parque Vicentina Aranha e mais tarde o Parque Santos Dumont. É o principal polo médico e de advocacia da cidade.",
+    "curiosidade": "Abriga dois dos maiores parques urbanos municipais: o Vicentina Aranha e o Santos Dumont (com réplica do 14-Bis).",
+    "fonte": "Pró-Memória SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-vila-betania",
+    "nome": "Vila Betânia",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "Anos 1950",
+    "origemNome": "Inspiração bíblica em Betânia (lugar de acolhimento e repouso).",
+    "historia": "Bairro residencial central que se transformou em complexo hospitalar de referência (Hospital Santos Dumont, Policlin, AME).",
+    "curiosidade": "Localização estratégica entre o Parque Santos Dumont e a Avenida Nelson D Ávila.",
+    "fonte": "Prefeitura de SJC",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-sao-dimas",
+    "nome": "Jardim São Dimas",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "1940",
+    "origemNome": "Construção da capela dedicada a São Dimas. No século XVIII o local era conhecido como Largo do Lava-Pés dos tropeiros.",
+    "historia": "Antigo ponto de parada de viajantes que lavavam os pés no Córrego da Cavinha. Tornou-se polo universitário com a instalação da Faculdade de Odontologia da UNESP nos anos 50.",
+    "curiosidade": "A Catedral de São Dimas com seus vitrais monumentais é sede da Diocese de São José dos Campos.",
+    "fonte": "Diocese de SJC / Unesp / Pró-Memória",
+    "fonteUrl": "https://www.diocese-sjc.org.br/"
+  },
+  {
+    "id": "bairro-monte-castelo",
+    "nome": "Monte Castelo",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "1945",
+    "origemNome": "Homenagem aos pracinhas brasileiros da Força Expedicionária Brasileira (FEB) na Batalha de Monte Castello (Itália, 1945).",
+    "historia": "Loteado no término da Segunda Guerra Mundial em homenagem aos heróis joseenses da FEB. Bairro tradicional que abriga escolas técnicas e o CenterVale Shopping no entorno.",
+    "curiosidade": "Possui ruas com nomes de generais e heróis militares da campanha brasileira na Segunda Guerra.",
+    "fonte": "Associação dos Veteranos da FEB / Pró-Memória SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/promemoria/"
+  },
+  {
+    "id": "bairro-vila-maria",
+    "nome": "Vila Maria",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "Anos 1930",
+    "origemNome": "Homenagem a Maria, proprietária de antigas chácaras da baixada central.",
+    "historia": "Bairro tradicional de operários e comerciantes que trabalhavam nas fábricas do centro e na ferrovia.",
+    "curiosidade": "Preserva padarias históricas, bares tradicionais e ambiente de vizinhança acolhedora.",
+    "fonte": "SJC Antigamente",
+    "fonteUrl": "https://sjcantigamente.com.br/"
+  },
+  {
+    "id": "bairro-jardim-paulista",
+    "nome": "Jardim Paulista",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "Anos 1950",
+    "origemNome": "Homenagem ao Estado e ao povo paulista.",
+    "historia": "Bairro residencial e comercial consolidado que conecta o Centro à Zona Leste e à Rodoviária Nova (Terminal Rodoviário Frederico Ozanam).",
+    "curiosidade": "Suas ruas homenageiam bandeirantes e personagens da história colonial de São Paulo.",
+    "fonte": "Câmara Municipal SJC",
+    "fonteUrl": "https://www.camarasjc.sp.gov.br/"
+  },
+  {
+    "id": "bairro-jardim-augusta",
+    "nome": "Jardim Augusta",
+    "regiaoId": "centro",
+    "regiaoNome": "Região Central",
+    "periodo": "Anos 1960",
+    "origemNome": "Homenagem a Dona Augusta, pioneira das primeiras chácaras do entorno.",
+    "historia": "Bairro que abriga o CenterVale Shopping (inaugurado em 1987), a sede da TV Vanguarda (afiliada Globo) e hotéis executivos.",
+    "curiosidade": "Polo comercial de grande fluxo diário e conexão com o Anel Viário e Rodovia Presidente Dutra.",
+    "fonte": "Prefeitura de SJC / CenterVale",
+    "fonteUrl": "https://www.sjc.sp.gov.br/"
+  }
+]
 };
-
