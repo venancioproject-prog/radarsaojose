@@ -1,0 +1,128 @@
+{
+  "scope": "economia",
+  "round": "P1-2026-10-04",
+  "homologated": false,
+  "store": "data/radar_hub/economia_evidence_2026-10-04.json",
+  "indicators": {
+    "econ_pib_municipal": {
+      "value": 45208.807937,
+      "period": "2021",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "ibge-pib-2021-milhoes",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_pib_municipal_2022": {
+      "value": 56653.326722,
+      "period": "2022",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "ibge-pib-2022-milhoes",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_pib_per_capita": {
+      "value": 88077.14,
+      "period": "2023",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "ibge-pib-2023-pib_per_capita",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_pib_per_capita_2022": {
+      "value": 81231.79,
+      "period": "2022",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "ibge-pib-2022-pib_per_capita",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_pib_setor_servicos_pct": {
+      "value": 43.04027614954009,
+      "period": "2021",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "econ_pib_setor_servicos_pct",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_pib_setor_industria_pct": {
+      "value": 36.40700036801769,
+      "period": "2021",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "econ_pib_setor_industria_pct",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_caged_estoque": {
+      "value": 196405,
+      "period": "2023-12",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "mte-202608-2023-12-estoque",
+      "url": "https://drive.usercontent.google.com/download?id=1LFiRd5cYqCLbBv7udPWtus6h4cF3GaA0&export=download",
+      "sha256": "d36c8ebe54e3e10ea877f5ea4dd6798a0a276c4fcff262c73102f4b9c8459e7d"
+    },
+    "econ_caged_estoque_2024": {
+      "value": 205024,
+      "period": "2024-12",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "mte-202608-2024-12-estoque",
+      "url": "https://drive.usercontent.google.com/download?id=1LFiRd5cYqCLbBv7udPWtus6h4cF3GaA0&export=download",
+      "sha256": "d36c8ebe54e3e10ea877f5ea4dd6798a0a276c4fcff262c73102f4b9c8459e7d"
+    },
+    "econ_caged_saldo_2024": {
+      "value": 8619,
+      "period": "2024",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "mte-202608-saldo-2024",
+      "url": "https://drive.usercontent.google.com/download?id=1LFiRd5cYqCLbBv7udPWtus6h4cF3GaA0&export=download",
+      "sha256": "d36c8ebe54e3e10ea877f5ea4dd6798a0a276c4fcff262c73102f4b9c8459e7d"
+    },
+    "econ_salario_medio": {
+      "value": 3.3,
+      "period": "2022",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "cempre-1606-2022",
+      "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9510/periodos/2022-2024/variaveis/1606%7C10143%7C706%7C367?localidades=N6%5B3549904%5D&classificacao=12762%5B117897%5D",
+      "sha256": "9d59e931b1487606f5d5d7fca96f8e64f37b3fa48b88afc6c818eed389c291d8"
+    },
+    "econ_total_empresas_ativas": {
+      "value": null,
+      "period": "2024",
+      "status": "NAO_VERIFICADO",
+      "evidence_id": "econ_total_empresas_ativas",
+      "url": "https://www.gov.br/receitafederal/dados/cnpj-metadados.pdf",
+      "sha256": "0a52d6bdfb61a07425e352a0e692932306a5ec9ecad682f5f9e28059e1a5fce0"
+    },
+    "econ_pib_municipal_2023": {
+      "value": 61394.524128,
+      "period": "2023",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "ibge-pib-2023-milhoes",
+      "url": "https://ftp.ibge.gov.br/Pib_Municipios/2022_2023/base/base_de_dados_2010_2023_txt.zip",
+      "sha256": "1179047b0bcc527a776f5479a534a4b2d99d362491331b0f6b465871f9164090"
+    },
+    "econ_cempre_unidades_locais_2024": {
+      "value": 48163,
+      "period": "2024",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "cempre-706-2024",
+      "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9510/periodos/2022-2024/variaveis/1606%7C10143%7C706%7C367?localidades=N6%5B3549904%5D&classificacao=12762%5B117897%5D",
+      "sha256": "9d59e931b1487606f5d5d7fca96f8e64f37b3fa48b88afc6c818eed389c291d8"
+    },
+    "econ_cempre_organizacoes_2024": {
+      "value": 45981,
+      "period": "2024",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "cempre-367-2024",
+      "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9510/periodos/2022-2024/variaveis/1606%7C10143%7C706%7C367?localidades=N6%5B3549904%5D&classificacao=12762%5B117897%5D",
+      "sha256": "9d59e931b1487606f5d5d7fca96f8e64f37b3fa48b88afc6c818eed389c291d8"
+    },
+    "econ_caged_estoque_2026_08": {
+      "value": 215122,
+      "period": "2026-08",
+      "status": "VALIDADO_EXTERNAMENTE",
+      "evidence_id": "mte-202608-2026-08-estoque",
+      "url": "https://drive.usercontent.google.com/download?id=1LFiRd5cYqCLbBv7udPWtus6h4cF3GaA0&export=download",
+      "sha256": "d36c8ebe54e3e10ea877f5ea4dd6798a0a276c4fcff262c73102f4b9c8459e7d"
+    }
+  }
+}

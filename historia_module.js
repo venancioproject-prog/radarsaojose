@@ -110,81 +110,88 @@
 
   function fonteBairroAbntHtml(bairro) {
     if (!bairro) return '';
-
-    let links = [];
+    if (bairro.loteRevisao === 'centro-2026-10-04' || bairro.layoutHistoria === 'editorial-v1') {
+      return `<section class="border-t border-slate-200 pt-4 space-y-3" aria-label="Referências de ${escapeHtml(bairro.nome)}">
+        <h5 class="text-[11px] font-black uppercase tracking-wider text-slate-500">Fontes para esta história</h5>
+        <ol class="space-y-4">${(bairro.fontesRevisadas || []).map((f, index) => {
+          const endereco = safeUrl(f.url);
+          const href = f.paginaPdf ? endereco.split('#')[0] + '#page=' + encodeURIComponent(f.paginaPdf) : endereco;
+          return `<li class="text-xs leading-relaxed min-w-0">
+            <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="block text-brand-800 hover:text-brand-950 underline underline-offset-2 break-words [overflow-wrap:anywhere]">${index + 1}. ${escapeHtml(f.referencia)} Disponível em: ${escapeHtml(endereco)}. Acesso em: ${escapeHtml(f.acesso || '4 out. 2026.')}</a>
+            ${f.pagina ? `<p class="mt-1 font-bold text-slate-700">Localização: página ${escapeHtml(f.pagina)}.</p>` : ''}
+            ${f.nota ? `<p class="mt-1 text-slate-600">${escapeHtml(f.nota)}</p>` : ''}
+          </li>`;
+        }).join('')}</ol>
+      </section>`;
+    }
+    let html = '';
 
     if (bairro.fontesRevisadas && bairro.fontesRevisadas.length > 0) {
-      bairro.fontesRevisadas.forEach(f => {
-        let nomeLimpo = "Pró-Memória SJC";
-        if (f.referencia.includes("ZANETTI")) nomeLimpo = "Livro: V. Zanetti";
-        else if (f.referencia.includes("PAPALI")) nomeLimpo = "Livro: M.A. Papali";
-        else if (f.referencia.includes("IBGE")) nomeLimpo = "IBGE";
-        else if (f.referencia.includes("Prefeitura")) nomeLimpo = "Prefeitura SJC";
-        else if (f.referencia.includes("FCCR")) nomeLimpo = "FCCR";
-        
-        let href = safeUrl(f.url);
-        if (f.paginaPdf) href = href.split('#')[0] + '#page=' + encodeURIComponent(f.paginaPdf);
-        links.push({ nome: nomeLimpo, url: href });
-      });
+      const refs = bairro.fontesRevisadas.map(function(f) {
+        const endereco = safeUrl(f.url);
+        const href = f.paginaPdf ? endereco.split('#')[0] + '#page=' + encodeURIComponent(f.paginaPdf) : endereco;
+        const localizacao = f.pagina ? `Página${String(f.pagina).includes('–') ? 's' : ''} ${f.pagina} do documento.` : 'Sem paginação.';
+        return `
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+            <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="block text-xs sm:text-sm text-brand-800 hover:text-brand-900 underline underline-offset-2 break-words leading-relaxed font-medium">
+              ${escapeHtml(f.referencia)} ${f.pagina ? escapeHtml('p. ' + f.pagina + '.') : ''} Disponível em: ${escapeHtml(f.url)}. Acesso em: 3 out. 2026.
+            </a>
+            <p class="text-xs text-slate-600 leading-relaxed italic border-l-2 border-brand-200 pl-3 mt-2">
+              <span class="font-bold not-italic block mb-1">${escapeHtml(localizacao)}</span>
+              "${escapeHtml(f.trecho || '')}"
+            </p>
+          </div>
+        `;
+      }).join('');
+      
+      const contexto = bairro.contextoFonte ? `
+        <p class="text-xs text-slate-600 leading-relaxed mb-4 p-3 bg-indigo-50 text-indigo-900 rounded-lg border border-indigo-100">
+          <i class="fa-solid fa-circle-info mr-1"></i> ${escapeHtml(bairro.contextoFonte)}
+        </p>
+      ` : '';
+
+      html += `
+        <div class="space-y-3">
+          <h5 class="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <i class="fa-solid fa-book-bookmark text-slate-400"></i> Referências Documentadas
+          </h5>
+          ${contexto}
+          <div class="space-y-3">
+            ${refs}
+          </div>
+        </div>
+      `;
     } else if (bairro.fonteUrl && bairro.fonte) {
       let href = safeUrl(bairro.fonteUrl);
       if (bairro.fontePagina && /\.pdf(?:$|#|\?)/i.test(href)) {
          href = `${href}#page=${encodeURIComponent(String(bairro.fontePagina).split(/[–-]/)[0].trim())}`;
       }
-      links.push({ nome: bairro.fonte, url: href });
-    }
-
-    if (links.length === 0) {
-      links.push({
-        nome: "Prefeitura SJC (Dados Oficiais)",
-        url: "https://www.sjc.sp.gov.br/servicos/governanca/sao-jose-em-dados/"
-      });
-    }
-
-    const uniqueLinks = [];
-    const seenUrls = new Set();
-    links.forEach(l => {
-      if (!seenUrls.has(l.url)) {
-        seenUrls.add(l.url);
-        uniqueLinks.push(l);
-      }
-    });
-
-    let linksHtml = uniqueLinks.map(link => `
-      <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2 py-1 bg-slate-100 hover:bg-brand-50 border border-slate-200 hover:border-brand-200 text-slate-600 hover:text-brand-800 rounded-md transition-colors text-[10px] font-bold">
-        <i class="fa-solid fa-link" aria-hidden="true"></i> ${escapeHtml(link.nome)}
-      </a>
-    `).join('');
-
-    let fontesSection = `
-      <div class="w-full space-y-2 mt-3 pt-3 border-t border-slate-100">
-        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Fontes Consultadas</p>
-        <div class="flex flex-wrap items-center gap-2">
-          ${linksHtml}
-        </div>
-      </div>
-    `;
-
-    let fichaHtml = '';
-    if (bairro.fichaHistoria && bairro.fichaHistoria.length > 0) {
-      const fichaItens = bairro.fichaHistoria.filter(item => item.texto !== bairro.origemNome).map(function(item) { 
-        return `<section class="space-y-1"><h5 class="text-sm font-bold text-slate-900">${escapeHtml(item.titulo)}</h5><p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(item.texto)}</p></section>`; 
-      }).join('');
       
-      if (fichaItens.trim() !== '') {
-        fichaHtml = `
-          <details class="w-full mt-3 group">
-            <summary class="text-xs font-bold text-slate-500 hover:text-brand-800 cursor-pointer list-none flex items-center gap-2 transition-colors">
-              <i class="fa-solid fa-chevron-right text-[10px] group-open:rotate-90 transition-transform"></i>
-              Ler mais sobre a história
-            </summary>
-            <div class="space-y-4 mt-4 pl-3 border-l-2 border-slate-100">${fichaItens}</div>
-          </details>
-        `;
-      }
+      html += `
+        <div class="space-y-3">
+          <h5 class="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+            <i class="fa-solid fa-link text-slate-400"></i> Fonte
+          </h5>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="block text-xs sm:text-sm text-brand-800 hover:text-brand-900 underline underline-offset-2 break-words leading-relaxed font-medium">
+              ${escapeHtml(bairro.fonte)}. São José dos Campos. ${bairro.fontePagina ? 'p. ' + escapeHtml(bairro.fontePagina) + '.' : ''}
+            </a>
+          </div>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="p-4 bg-amber-50 rounded-xl border border-amber-100 flex items-start gap-3">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500 mt-0.5"></i>
+          <div>
+            <h5 class="text-xs font-black text-amber-800 mb-1">A verificar</h5>
+            <p class="text-xs text-amber-700/80 leading-relaxed">As afirmações sobre este bairro ainda não foram cruzadas com fontes documentais específicas.</p>
+          </div>
+        </div>
+      `;
     }
 
-    return `${fichaHtml}${fontesSection}`;
+    return html;
   }
 
   const REGISTROS_HISTORICOS_CONFIRMADOS = [
@@ -228,8 +235,19 @@
       bairros: false,
       patrimonios: false,
       prefeitos: false,
+      pioneiros: false,
       quiz: false,
       migracao: false
+    },
+    scrollPositions: {
+      ciclos: 0,
+      bairros: null,
+      patrimonios: null,
+      migracao: null,
+      prefeitos: null,
+      pioneiros: null,
+      lendas: null,
+      bibliografia: null
     },
     lastModalTrigger: null
   };
@@ -850,13 +868,31 @@
   }
 
   /**
-   * Alternar entre as Grandes Seções Editoriais (Com Lazy Rendering, aria-current & Sidebar Dinâmica)
+   * Alternar entre as Grandes Seções Editoriais (Com Memória de Scroll Independente, Lazy Rendering, aria-current & Sidebar Dinâmica)
    */
   function switchHistoriaSection(sectionId) {
     if (!sectionId) return;
+    if (sectionId === historiaState.activeSection) return;
+
+    const HEADER_OFFSET = 80;
+
+    function getHistoriaContentTop() {
+      const hv = document.getElementById('historia-view');
+      if (!hv) return 0;
+      return Math.max(0, hv.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET);
+    }
+
+    // 1. Salvar deslocamento do usuário na seção atual relativo ao topo do conteúdo
+    const currentSection = historiaState.activeSection;
+    if (currentSection && historiaState.scrollPositions) {
+      const contentTop = getHistoriaContentTop();
+      // Quanto o usuário desceu abaixo do topo do conteúdo
+      historiaState.scrollPositions[currentSection] = Math.max(0, window.scrollY - contentTop);
+    }
+
     historiaState.activeSection = sectionId;
 
-    const sections = ['ciclos', 'bairros', 'patrimonios', 'migracao', 'lendas', 'bibliografia'];
+    const sections = ['ciclos', 'bairros', 'patrimonios', 'migracao', 'prefeitos', 'pioneiros', 'lendas', 'bibliografia'];
     sections.forEach(function(sec) {
       const el = document.getElementById('section-view-' + sec);
       const sideBtn = document.getElementById('side-btn-section-' + sec);
@@ -873,18 +909,25 @@
 
       // Estilo do Botão da Sidebar Lateral e Atributo aria-current
       if (sideBtn) {
+        const icon = sideBtn.querySelector('.historia-icon');
         if (sec === sectionId) {
-          sideBtn.className = "historia-nav-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left transition-all bg-[#0f2f52] text-white shadow-xs cursor-pointer";
-          sideBtn.style.setProperty('background-color', '#0f2f52', 'important');
-          sideBtn.style.setProperty('border-color', '#0f2f52', 'important');
+          sideBtn.className = "historia-nav-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-bold text-left transition-all bg-[#a45b16] text-white shadow-xs cursor-pointer";
+          sideBtn.style.setProperty('background-color', '#a45b16', 'important');
+          sideBtn.style.setProperty('border-color', '#a45b16', 'important');
           sideBtn.style.setProperty('color', '#ffffff', 'important');
           sideBtn.setAttribute('aria-current', 'page');
+          if (icon) {
+            icon.style.setProperty('color', '#ffffff', 'important');
+          }
         } else {
-          sideBtn.className = "historia-nav-btn w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-transparent cursor-pointer";
+          sideBtn.className = "historia-nav-btn w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-left transition-all text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-transparent cursor-pointer";
           sideBtn.style.removeProperty('background-color');
           sideBtn.style.removeProperty('border-color');
           sideBtn.style.removeProperty('color');
           sideBtn.removeAttribute('aria-current');
+          if (icon) {
+            icon.style.setProperty('color', '#a45b16', 'important');
+          }
         }
       }
 
@@ -917,9 +960,11 @@
       renderPatrimoniosEditorial();
       historiaState.renderedSections.patrimonios = true;
     } else if (sectionId === 'prefeitos' && !historiaState.renderedSections.prefeitos) {
-      renderPioneirosEditorial();
       renderPrefeitosEditorial();
       historiaState.renderedSections.prefeitos = true;
+    } else if (sectionId === 'pioneiros' && !historiaState.renderedSections.pioneiros) {
+      renderPioneirosEditorial();
+      historiaState.renderedSections.pioneiros = true;
     } else if (sectionId === 'quiz' && !historiaState.renderedSections.quiz) {
       renderQuizJoseensidade();
       historiaState.renderedSections.quiz = true;
@@ -931,6 +976,35 @@
     } else if (sectionId === 'bibliografia') {
       openHistoriaBibliografia();
     }
+
+    // 2. Restaurar a posição memorizada de scroll relativa ao topo do conteúdo
+    const performScrollRestore = function() {
+      const contentTop = getHistoriaContentTop();
+      const savedOffset = (historiaState.scrollPositions && historiaState.scrollPositions[sectionId] !== null && historiaState.scrollPositions[sectionId] !== undefined)
+        ? historiaState.scrollPositions[sectionId]
+        : 0; // Se nunca visitou, offset é 0 -> abre exatamente no topo do conteúdo!
+
+      const targetY = contentTop + savedOffset;
+
+      const docEl = document.documentElement;
+      const bodyEl = document.body;
+
+      // Desativa scroll-behavior: smooth (definido no CSS em html, body) para salto instantâneo preciso
+      docEl.style.setProperty('scroll-behavior', 'auto', 'important');
+      bodyEl.style.setProperty('scroll-behavior', 'auto', 'important');
+
+      window.scrollTo(0, targetY);
+
+      // Restaura o comportamento suave após o salto
+      requestAnimationFrame(function() {
+        docEl.style.removeProperty('scroll-behavior');
+        bodyEl.style.removeProperty('scroll-behavior');
+      });
+    };
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(performScrollRestore);
+    });
   }
 
   /**
@@ -1146,6 +1220,86 @@
    * Renderizar Cards da Máquina do Tempo dos Bairros
    * Preserva rigorosamente os 80 bairros com sanitização e links verificados.
    */
+  function bairroLoteEditorialHtml(bairro) {
+    const paragrafos = safeText(bairro.historia).split(/\n\s*\n/).filter(Boolean);
+    const rColors = { norte: 'bg-rose-500', sul: 'bg-sky-500', leste: 'bg-emerald-500', sudeste: 'bg-amber-500', oeste: 'bg-orange-500', centro: 'bg-indigo-500', sfx: 'bg-teal-500' };
+    const faixaRegiao = rColors[bairro.regiaoId] || (bairro.regiaoId === 'norte' ? 'bg-rose-500' : 'bg-indigo-500');
+
+    // Query de busca do Google Maps para o bairro em São José dos Campos
+    const queryBusca = encodeURIComponent(`${bairro.nome}, São José dos Campos - SP`);
+    const embedMapUrl = `https://maps.google.com/maps?q=${queryBusca}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+    const openMapUrl = `https://www.google.com/maps/search/?api=1&query=${queryBusca}`;
+
+    return `<article data-bairro-revisado="${escapeHtml(bairro.id)}" class="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden w-full flex flex-col hover:border-slate-300 hover:shadow-md transition-all">
+      <div class="p-6 sm:p-7 lg:p-8 space-y-6">
+        <!-- Topo: Título do Bairro, Região e Período -->
+        <header class="pb-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">${escapeHtml(bairro.regiaoNome)}</span>
+            <h4 class="mt-0.5 text-2xl lg:text-3xl font-black text-slate-900 tracking-tight leading-tight">${escapeHtml(bairro.nome)}</h4>
+          </div>
+          <span class="text-xs font-semibold text-slate-500 shrink-0">${escapeHtml(bairro.periodo)}</span>
+        </header>
+
+        <!-- CORPO PRINCIPAL 50/50 (ESTILO ATLAS): MAPA NA ESQUERDA + TEXTOS NA DIREITA -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          
+          <!-- Metade da Esquerda (6 colunas): Mapa Interativo do Bairro -->
+          <div class="lg:col-span-6 min-h-[300px] sm:min-h-[360px] rounded-2xl overflow-hidden relative border border-slate-200/90 bg-slate-100 shadow-2xs flex flex-col">
+            <iframe 
+              src="${bairro.id === 'bairro-centro-historico' 
+                ? 'https://maps.google.com/maps?q=Pra%C3%A7a+Afonso+Pena,+Centro,+S%C3%A3o+Jos%C3%A9+dos+Campos+-+SP&t=&z=16&ie=UTF8&iwloc=&output=embed' 
+                : embedMapUrl}" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade" 
+              class="w-full flex-1 min-h-[300px]" 
+              title="Google Maps - Bairro ${escapeHtml(bairro.nome)}"
+            ></iframe>
+            <!-- Botão Expandir no Google Maps -->
+            <a href="${bairro.id === 'bairro-centro-historico' 
+                ? 'https://www.google.com/maps/search/?api=1&query=Pra%C3%A7a+Afonso+Pena,+S%C3%A3o+Jos%C3%A9+dos+Campos+-+SP' 
+                : openMapUrl}" target="_blank" rel="noopener noreferrer" class="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/80 hover:bg-black text-white flex items-center gap-1.5 text-[11px] font-bold transition-colors shadow-md" title="Abrir no Google Maps em nova aba">
+              <i class="fa-brands fa-google text-amber-400"></i>
+              <span>Maps</span>
+              <i class="fa-solid fa-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+
+          <!-- Metade da Direita (6 colunas): História (em cima) e Sobre o Nome (embaixo) -->
+          <div class="lg:col-span-6 flex flex-col justify-between gap-4">
+            <!-- Bloco 1: A História do Bairro -->
+            <div class="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-3 flex-1">
+              <h5 class="text-base font-black text-slate-900">${escapeHtml(bairro.tituloHistoria || 'A história do bairro')}</h5>
+              <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                ${paragrafos.map(p => `<p class="leading-relaxed">${escapeHtml(p)}</p>`).join('')}
+                ${(bairro.fichaHistoria || []).map(item => `<div class="space-y-1.5 bg-slate-50 p-3.5 rounded-2xl border border-slate-100"><h6 class="font-bold text-slate-900">${escapeHtml(item.titulo)}</h6><p>${escapeHtml(item.texto)}</p></div>`).join('')}
+              </div>
+            </div>
+
+            <!-- Bloco 2: Sobre o Nome -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50/90 border border-slate-200/80 shadow-2xs space-y-2">
+              <div class="flex items-center gap-2 text-slate-500">
+                <i class="fa-solid fa-tag text-xs"></i>
+                <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-500">Sobre o nome</h5>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">${escapeHtml(bairro.origemNome)}</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Rodapé do Card: Fontes Documentais embaixo dos dois -->
+        <div class="pt-2">
+          ${fonteBairroAbntHtml(bairro)}
+        </div>
+      </div>
+    </article>`;
+  }
+
   function renderBairrosEditorial() {
     const container = document.getElementById("bairros-editorial-grid");
     if (!container) return;
@@ -1171,6 +1325,11 @@
       });
     }
 
+    // Ordenação Alfabética Rigorosa (em todas as visualizações e filtros)
+    list = list.slice().sort(function(a, b) {
+      return safeText(a.nome).localeCompare(safeText(b.nome), 'pt-BR');
+    });
+
     // Atualizar contador de bairros na Sidebar Lateral
     const sideCount = document.getElementById('sidebar-bairros-count');
     if (sideCount) sideCount.textContent = list.length;
@@ -1190,25 +1349,66 @@
 
     let html = '';
     list.forEach(function(b) {
+      if (b.loteRevisao === 'centro-2026-10-04' || b.layoutHistoria === 'editorial-v1') {
+        html += bairroLoteEditorialHtml(b);
+        return;
+      }
+      // Regiao Color
+      const rColors = { norte: 'bg-rose-500', sul: 'bg-sky-500', leste: 'bg-emerald-500', sudeste: 'bg-amber-500', oeste: 'bg-orange-500', centro: 'bg-indigo-500', sfx: 'bg-teal-500' };
+      const rColor = rColors[b.regiaoId] || 'bg-slate-500';
+      
+      // Evidencia Status (Simulado temporariamente até a fase 2)
+      let statusIcon = '⚪';
+      let statusText = 'A verificar';
+      let statusColor = 'text-slate-500 bg-slate-100';
+      if (b.fontesRevisadas && b.fontesRevisadas.length > 0) {
+        statusIcon = '🟢';
+        statusText = 'Documentado';
+        statusColor = 'text-emerald-700 bg-emerald-50';
+      }
+
+      // Truncar historia
+      let histCurta = safeText(b.historia || 'Ainda não há uma síntese histórica conferida para este bairro.');
+      if (histCurta.length > 120) histCurta = histCurta.substring(0, 117) + '...';
+
+      // Fontes count
+      let fontesCount = 0;
+      if (b.fontesRevisadas) fontesCount = b.fontesRevisadas.length;
+      else if (b.fonteUrl) fontesCount = 1;
+
       html += `
-        <article class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 flex flex-col justify-start self-start min-w-0 gap-4 hover:border-brand-700 hover:shadow-md transition-all group">
-          <div class="flex items-start gap-3">
-            <span class="w-10 h-10 rounded-xl bg-brand-50 text-brand-900 flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
-            <div>
-              <span class="text-[10px] font-black uppercase tracking-wider text-slate-500">${escapeHtml(b.regiaoNome)}</span>
-              <h4 class="text-lg font-black text-slate-900 group-hover:text-brand-800 transition-colors">${escapeHtml(b.nome)}</h4>
+        <article class="bg-white rounded-3xl border border-slate-200 shadow-sm flex flex-col overflow-hidden hover:border-brand-500 hover:shadow-md transition-all group h-[280px]">
+          <!-- Faixa superior -->
+          <div class="h-2 w-full ${rColor}"></div>
+          
+          <div class="p-5 flex flex-col h-full">
+            <div class="flex justify-between items-start mb-3">
+              <div>
+                <span class="text-[9px] font-black uppercase tracking-wider text-slate-400 mb-1 block">${escapeHtml(b.regiaoNome)}</span>
+                <h4 class="text-lg font-black text-slate-900 group-hover:text-brand-800 transition-colors leading-tight">${escapeHtml(b.nome)}</h4>
+              </div>
+              <div class="flex items-center gap-1 px-2 py-1 rounded-full ${statusColor} text-[9px] font-bold whitespace-nowrap">
+                <span>${statusIcon}</span> ${statusText}
+              </div>
             </div>
-          </div>
-          <div class="pt-3 border-t border-slate-100 space-y-2">
-            <div class="space-y-1.5">
-              <p class="text-[10px] font-black uppercase tracking-widest text-slate-500">${escapeHtml(b.tituloOrigem || 'Por que se chama assim?')}</p>
-              <p class="text-xs text-slate-700 leading-relaxed">${escapeHtml(b.origemNome || 'A origem do nome ainda não está explicada em uma fonte pública conferida.')}</p>
+
+            <div class="flex items-center gap-3 text-[10px] font-bold text-slate-500 mb-4 bg-slate-50 px-3 py-2 rounded-lg">
+              <div class="flex items-center gap-1.5"><i class="fa-regular fa-clock"></i> ${escapeHtml(b.periodo || 'S.d.')}</div>
             </div>
-            <div class="space-y-1.5">
-              <p class="text-[10px] font-black uppercase tracking-widest text-slate-500">Como o bairro aparece na história local</p>
-              <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(b.historia || 'Ainda não há uma síntese histórica conferida para este bairro.')}</p>
+
+            <div class="flex-1 overflow-hidden relative">
+              <p class="text-xs text-slate-600 leading-relaxed italic">"${escapeHtml(histCurta)}"</p>
+              <div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent"></div>
             </div>
-            ${fonteBairroAbntHtml(b)}
+
+            <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between">
+              <div class="text-[10px] font-bold text-slate-500">
+                📚 ${fontesCount} fonte${fontesCount !== 1 ? 's' : ''}
+              </div>
+              <button onclick="openBairroDetails('${b.id}')" class="text-[11px] font-black text-brand-700 hover:text-brand-900 flex items-center gap-1 transition-colors">
+                Abrir História <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
           </div>
         </article>
       `;
@@ -1216,6 +1416,74 @@
 
     container.innerHTML = html;
   }
+
+  window.openBairroDetails = function(bairroId) {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.bairros) return;
+    const bairro = data.bairros.find(b => b.id === bairroId);
+    if (!bairro) return;
+
+    // We will inject the details in a modal
+    let modal = document.getElementById('bairro-details-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'bairro-details-modal';
+      modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm hidden';
+      modal.innerHTML = `
+        <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+          <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
+            <div>
+              <span id="bdm-regiao" class="text-[10px] font-black uppercase tracking-wider text-slate-400"></span>
+              <h3 id="bdm-nome" class="text-xl font-black text-slate-900"></h3>
+            </div>
+            <button onclick="document.getElementById('bairro-details-modal').classList.add('hidden')" class="w-8 h-8 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center hover:bg-slate-300 transition-colors">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="p-6 overflow-y-auto flex-1 space-y-6" id="bdm-content">
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    document.getElementById('bdm-regiao').textContent = bairro.regiaoNome || '';
+    document.getElementById('bdm-nome').textContent = bairro.nome || '';
+    
+    // Build content
+    const content = document.getElementById('bdm-content');
+    
+    let fichaHtml = '';
+    if (bairro.fichaHistoria && bairro.fichaHistoria.length > 0) {
+      fichaHtml = bairro.fichaHistoria.filter(item => item.texto !== bairro.origemNome).map(function(item) { 
+        return `<section class="space-y-1.5"><h5 class="text-sm font-black text-slate-900">${escapeHtml(item.titulo)}</h5><p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(item.texto)}</p></section>`; 
+      }).join('');
+    }
+
+    content.innerHTML = `
+      <div class="flex items-center gap-4 text-xs font-bold text-slate-500 bg-slate-50 p-3 rounded-xl">
+        <div class="flex items-center gap-1.5"><i class="fa-regular fa-clock"></i> ${escapeHtml(bairro.periodo || 'S.d.')}</div>
+      </div>
+      
+      <div class="space-y-4">
+        <section class="space-y-1.5">
+          <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-400">${escapeHtml(bairro.tituloOrigem || 'Por que se chama assim?')}</h5>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(bairro.origemNome || 'A origem do nome ainda não está explicada em uma fonte pública conferida.')}</p>
+        </section>
+        <section class="space-y-1.5">
+          <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-400">Como o bairro aparece na história local</h5>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(bairro.historia || 'Ainda não há uma síntese histórica conferida para este bairro.')}</p>
+        </section>
+        ${fichaHtml}
+      </div>
+      
+      <div class="pt-6 border-t border-slate-100">
+        ${fonteBairroAbntHtml(bairro)}
+      </div>
+    `;
+
+    modal.classList.remove('hidden');
+  };
 
   /**
    * Filtro de Busca de Bairros com Debounce de 180ms e Sincronização Sidebar <-> Principal
@@ -1251,20 +1519,20 @@
 
       if (btn) {
         if (isSelected) {
-          btn.className = "px-3 py-1.5 rounded-xl font-bold bg-slate-900 text-white shadow-xs cursor-pointer";
+          btn.className = "px-3 py-1.5 rounded-lg font-bold bg-[#a45b16] text-white shadow-xs cursor-pointer";
           btn.setAttribute('aria-pressed', 'true');
         } else {
-          btn.className = "px-3 py-1.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100 cursor-pointer";
+          btn.className = "px-3 py-1.5 rounded-lg font-bold text-slate-600 hover:bg-amber-50/60 hover:text-[#a45b16] cursor-pointer";
           btn.setAttribute('aria-pressed', 'false');
         }
       }
 
       if (sideBtn) {
         if (isSelected) {
-          sideBtn.className = "text-left px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-900 text-white shadow-xs cursor-pointer";
+          sideBtn.className = "text-left px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-[#a45b16] text-white shadow-xs cursor-pointer";
           sideBtn.setAttribute('aria-pressed', 'true');
         } else {
-          sideBtn.className = "text-left px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-white hover:bg-slate-100 text-slate-700 border border-slate-200/80 cursor-pointer";
+          sideBtn.className = "text-left px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-white hover:bg-amber-50/60 text-slate-700 hover:text-[#a45b16] border border-slate-200/80 cursor-pointer";
           sideBtn.setAttribute('aria-pressed', 'false');
         }
       }
@@ -1898,28 +2166,29 @@
 
     const allPlaces = Object.values(GOOGLE_PLACES_DATA);
 
-    // Menu de Categorias na Linha Inicial
+    // Menu de Categorias na Linha Inicial com o marrom oficial do módulo de história (#a45b16)
     const CATEGORIAS_PATRIMONIO = [
-      { id: 'all', nome: 'Todos os Lugares', icone: 'fa-layer-group', color: 'text-slate-600' },
-      { id: 'parques', nome: 'Parques & Natureza', icone: 'fa-tree-city', color: 'text-emerald-600' },
-      { id: 'museus', nome: 'Museus & Memória', icone: 'fa-landmark', color: 'text-amber-600' },
-      { id: 'cultura', nome: 'Casas de Cultura & Teatros', icone: 'fa-masks-theater', color: 'text-indigo-600' },
-      { id: 'monumentos', nome: 'Monumentos & Patrimônio', icone: 'fa-monument', color: 'text-rose-600' }
+      { id: 'all', nome: 'Todos os Lugares', icone: 'fa-layer-group' },
+      { id: 'parques', nome: 'Parques & Natureza', icone: 'fa-tree-city' },
+      { id: 'museus', nome: 'Museus & Memória', icone: 'fa-landmark' },
+      { id: 'cultura', nome: 'Casas de Cultura & Teatros', icone: 'fa-masks-theater' },
+      { id: 'monumentos', nome: 'Monumentos & Patrimônio', icone: 'fa-monument' }
     ];
 
     const menuHtml = `
-      <div class="flex items-center gap-2.5 flex-wrap pb-4 border-b border-slate-200/80" role="tablist" aria-label="Filtrar por Categoria">
+      <div class="flex items-center gap-1.5 overflow-x-auto text-xs pb-3 border-b border-slate-200 no-scrollbar" role="tablist" aria-label="Filtrar por Categoria">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1 shrink-0">Categoria:</span>
         ${CATEGORIAS_PATRIMONIO.map(cat => {
           const isActive = activePatrimonioCategory === cat.id;
           return `
             <button 
               type="button" 
               onclick="window.switchPatrimonioCategory('${cat.id}')" 
-              class="px-4 py-2.5 rounded-2xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2.5 ${isActive ? 'bg-[#0f2f52] text-white shadow-xs border border-[#0f2f52]' : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200/90 shadow-2xs'}"
+              class="px-3 py-1.5 rounded-lg font-bold text-xs transition-all cursor-pointer flex items-center gap-2 shrink-0 ${isActive ? 'bg-[#a45b16] text-white shadow-xs' : 'text-slate-600 hover:bg-amber-50/60 hover:text-[#a45b16]'}"
               role="tab"
               aria-selected="${isActive ? 'true' : 'false'}"
             >
-              <i class="fa-solid ${cat.icone} text-xs ${isActive ? 'text-amber-300' : cat.color}"></i>
+              <i class="fa-solid ${cat.icone} text-xs ${isActive ? 'text-white' : 'text-[#a45b16]'}"></i>
               <span>${cat.nome}</span>
             </button>
           `;
@@ -1939,21 +2208,35 @@
     const cardsHtml = sortedPlaces.map(place => `
       <article class="bg-slate-100/70 text-slate-800 rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200/90 transition-all space-y-5">
         
-        <!-- CABEÇALHO DO LUGAR -->
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 pb-3 border-b border-slate-200/80">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#0f2f52] text-white">
-                ${escapeHtml(place.eixo)}
-              </span>
-              <span class="text-xs font-bold ${place.statusClass}">● ${escapeHtml(place.status)}</span>
-            </div>
+        <!-- CABEÇALHO DO LUGAR (TÍTULO À ESQUERDA + ENDEREÇO E AÇÕES À DIREITA) -->
+        <div class="flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 min-w-0">
+          <div class="space-y-1 min-w-0 flex-1">
             <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               ${escapeHtml(place.nome)}
             </h3>
             <p class="text-xs sm:text-sm text-slate-600">
               ${escapeHtml(place.categoria)}
             </p>
+          </div>
+
+          <!-- Barra com Endereço, Horário e Botões de Rota/Fonte -->
+          <div class="p-3 sm:p-3.5 rounded-2xl bg-white border border-slate-200/90 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs shadow-2xs min-w-0 max-w-full">
+            <div class="space-y-0.5 min-w-0 flex-1 pr-2">
+              <div class="flex items-center gap-1.5 text-slate-800 min-w-0">
+                <i class="fa-solid fa-location-dot text-brand-800 shrink-0 text-xs"></i>
+                <span class="font-bold truncate">${escapeHtml(place.endereco)}</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-slate-500 text-[11px] min-w-0">
+                <i class="fa-solid fa-clock text-slate-400 shrink-0 text-[10px]"></i>
+                <span class="truncate">${escapeHtml(place.visita)}</span>
+              </div>
+            </div>
+            <div class="shrink-0 flex items-center gap-2 pt-1 md:pt-0">
+              <a href="${place.mapUrl}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-[#0f2f52] hover:bg-slate-900 text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-xs whitespace-nowrap">
+                <i class="fa-solid fa-diamond-turn-right text-cyan-300 text-xs"></i>
+                <span>Traçar Rota no Google Maps</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -1984,52 +2267,24 @@
           <!-- Metade da Direita (6 colunas): Fato Histórico Documentado (em cima) e Patrimônio & Cidade Viva (embaixo) -->
           <div class="lg:col-span-6 flex flex-col justify-between gap-3.5">
             <!-- Bloco 1: Fato Histórico Documentado -->
-            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-1.5 flex-1">
-              <div class="flex items-center gap-1.5">
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300/60">
-                  <i class="fa-solid fa-landmark text-xs"></i> Fato Histórico Documentado
-                </span>
+            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2 flex-1">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-0.5">Origem e Fundação</span>
+                <h5 class="text-sm font-black text-slate-900">Fato Histórico Documentado</h5>
               </div>
-              <h5 class="text-sm font-black text-slate-900">Origem e Fundação</h5>
               <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(place.fato)}</p>
             </div>
 
             <!-- Bloco 2: Patrimônio & Cidade Viva -->
-            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-1.5 flex-1">
-              <div class="flex items-center gap-1.5">
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-300/60">
-                  <i class="fa-solid fa-tree-city text-xs"></i> Patrimônio & Cidade Viva
-                </span>
+            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2 flex-1">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-0.5">Preservação, Arquitetura e Memória</span>
+                <h5 class="text-sm font-black text-slate-900">Patrimônio & Cidade Viva</h5>
               </div>
-              <h5 class="text-sm font-black text-slate-900">Preservação, Arquitetura e Memória</h5>
               <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${escapeHtml(place.contexto)}</p>
             </div>
           </div>
 
-        </div>
-
-        <!-- RODAPÉ: ENDEREÇO, HORÁRIO E BOTÃO TRAÇAR ROTA -->
-        <div class="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs shadow-2xs">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2 text-slate-800">
-              <i class="fa-solid fa-location-dot text-brand-800 shrink-0"></i>
-              <span class="font-bold">${escapeHtml(place.endereco)}</span>
-            </div>
-            <div class="flex items-center gap-2 text-slate-600">
-              <i class="fa-solid fa-clock text-slate-400 shrink-0"></i>
-              <span>${escapeHtml(place.visita)}</span>
-            </div>
-          </div>
-          <div class="shrink-0 flex items-center gap-2">
-            <a href="${place.mapUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-[#0f2f52] hover:bg-slate-900 text-white font-bold text-xs flex items-center gap-2 transition-colors shadow-xs">
-              <i class="fa-solid fa-diamond-turn-right text-cyan-300 text-xs"></i>
-              <span>Traçar Rota no Google Maps</span>
-            </a>
-            <a href="${place.fonte.url}" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center gap-1.5 border border-slate-200 transition-colors shadow-2xs">
-              <i class="fa-solid fa-arrow-up-right-from-square text-xs text-emerald-700"></i>
-              <span>Fonte Oficial</span>
-            </a>
-          </div>
         </div>
 
       </article>
@@ -2097,26 +2352,404 @@
   }
 
   /**
-   * Renderizar Cards de Pioneiros & Construtores
+   * Renderizar Cards de Pioneiros & Personalidades
    */
   function renderPioneirosEditorial() {
     const container = document.getElementById("view-pioneiros-grid");
     if (!container) return;
-    const registros = [
-      { ano: "1767", titulo: "A vila e a primeira Câmara", texto: "A cronologia da Câmara registra a elevação a vila e a criação da primeira Câmara de Vereadores naquele ano.", fonte: FONTES_HISTORIA.cronologia, eixo: "Instituições" },
-      { ano: "1834–1835", titulo: "A criação do cargo de prefeito", texto: "A cronologia distingue a lei provincial de 1834 da primeira nomeação para São José, em 1835.", fonte: FONTES_HISTORIA.cronologia, eixo: "Gestão pública" },
-      { ano: "1961–1971", titulo: "A formação do INPE", texto: "O INPE registra a criação do GOCNAE em 1961 e a criação do Instituto em 1971, em uma história institucional ligada a São José dos Campos.", fonte: FONTES_HISTORIA.inpeHistoria, eixo: "Ciência" }
-    ];
-    container.innerHTML = registros.map(function(item) { return `<article class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between gap-4 hover:border-brand-700 hover:shadow-sm transition-all"><div><div class="flex items-center justify-between gap-3"><span class="font-mono text-sm font-black text-brand-900">${escapeHtml(item.ano)}</span><span class="text-[10px] font-black uppercase tracking-wider text-slate-500">${escapeHtml(item.eixo)}</span></div><h4 class="text-base font-black text-slate-900 mt-3">${escapeHtml(item.titulo)}</h4><p class="text-sm text-slate-600 leading-relaxed mt-2">${escapeHtml(item.texto)}</p></div><div class="text-xs">${fonteLinkHtml(item.fonte, "Consultar registro")}</div></article>`; }).join('');
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.personalidades) return;
+
+    container.innerHTML = data.personalidades.map(function(p) {
+      const tagColors = {
+        cyan: "bg-cyan-50 text-cyan-800 border-cyan-200",
+        indigo: "bg-indigo-50 text-indigo-800 border-indigo-200",
+        blue: "bg-blue-50 text-blue-800 border-blue-200",
+        rose: "bg-rose-50 text-rose-800 border-rose-200",
+        purple: "bg-purple-50 text-purple-800 border-purple-200",
+        amber: "bg-amber-50 text-amber-800 border-amber-200",
+        emerald: "bg-emerald-50 text-emerald-800 border-emerald-200"
+      };
+      const badgeClass = tagColors[p.cor] || "bg-slate-50 text-slate-800 border-slate-200";
+
+      const refsHtml = (p.referencias && p.referencias.length) ? `
+        <div class="mt-4 pt-3 border-t border-slate-100">
+          <details class="text-[11px] text-slate-500 group/ref">
+            <summary class="cursor-pointer font-semibold text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-between py-1">
+              <span class="flex items-center gap-1.5">
+                <i class="fa-solid fa-book-bookmark text-slate-400 text-[10px]"></i>
+                Fontes ABNT (${p.referencias.length})
+              </span>
+              <i class="fa-solid fa-chevron-down text-[9px] text-slate-400 transition-transform group-open/ref:rotate-180"></i>
+            </summary>
+            <div class="mt-2 space-y-2 pl-2 border-l-2 border-slate-200 text-[10px] text-slate-600 leading-relaxed font-mono">
+              ${p.referencias.map(r => `<p class="select-text">${escapeHtml(r)}</p>`).join('')}
+            </div>
+          </details>
+        </div>
+      ` : '';
+
+      return `<article class="bg-white rounded-3xl border border-slate-200 p-6 flex flex-col justify-between gap-4 hover:border-slate-300 hover:shadow-md transition-all group">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-2 flex-wrap text-xs text-slate-500 font-semibold">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 px-2 py-0.5 rounded-full ${badgeClass}">
+              ${escapeHtml(p.categoria || p.tag || "Pioneiro")}
+            </span>
+            <span class="font-mono text-xs text-slate-400">${escapeHtml(p.periodo || "")}</span>
+          </div>
+          <div>
+            <h4 class="text-lg font-black text-slate-900 group-hover:text-blue-900 transition-colors">${escapeHtml(p.nome)}</h4>
+            <p class="text-xs font-semibold text-slate-500 mt-0.5">${escapeHtml(p.subtitulo || p.cargo || "")}</p>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">${escapeHtml(p.texto || p.descricao || "")}</p>
+        </div>
+        ${refsHtml}
+      </article>`;
+    }).join('');
   }
 
   /**
-   * Renderizar Tabela Histórica de Prefeitos
+   * Estado de Filtros de Prefeitos (Tabela Técnica de Alta Densidade)
+   */
+  let prefeitosEraFiltro = 'todas';
+  let prefeitosFiltroAtual = 'todos';
+  let prefeitosBuscaAtual = '';
+
+  // Stubs de compatibilidade retroativa
+  function switchPrefeitosViewMode() {}
+  function selectPrefeitoByIndex() {}
+  function navigatePrefeito() {}
+  function abrirPrefeitosDrawer() {}
+  function fecharPrefeitosDrawer() {}
+  function abrirCatalogoGeralDossie() {
+    const acc = document.getElementById("accordion-referencias");
+    const icon = document.getElementById("accordion-referencias-icon");
+    if (acc) {
+      acc.classList.remove("hidden");
+      if (icon) icon.classList.add("rotate-180");
+      acc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /**
+   * Formatar Citações Historiográficas no formato [X] ou [X–Y] em tags interativas
+   */
+  function formatarCitacoesDossie(texto) {
+    if (!texto) return '';
+    const safe = escapeHtml(texto);
+    return safe.replace(/\[([0-9,\s–-]+)\]/g, function(match, group) {
+      const cleanGroup = group.replace(/\s+/g, ' ');
+      const firstNumMatch = cleanGroup.match(/\d+/);
+      const firstNum = firstNumMatch ? firstNumMatch[0] : '';
+      return `<button type="button" onclick="window.abrirRefPrefeitos('${firstNum}', event)" class="inline-flex items-center px-1 py-0.2 mx-0.5 text-[10px] font-bold font-mono rounded bg-amber-100 text-amber-950 hover:bg-amber-200 border border-amber-300/80 transition-all cursor-pointer shadow-2xs" title="Localizar referência [${cleanGroup}]">[${cleanGroup}]</button>`;
+    });
+  }
+
+  /**
+   * Badge Compacto de Categoria de Acesso Político
+   */
+  function renderPrefeitoBadge(categoria) {
+    switch (categoria) {
+      case 'Eleito':
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300/80 whitespace-nowrap"><i class="fa-solid fa-check-to-slot text-[8px]"></i> Eleito Direto</span>`;
+      case 'Nomeado':
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-blue-100 text-blue-800 border border-blue-300/80 whitespace-nowrap"><i class="fa-solid fa-stamp text-[8px]"></i> Nomeado</span>`;
+      case 'Sucessão / Interino':
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-purple-100 text-purple-800 border border-purple-300/80 whitespace-nowrap"><i class="fa-solid fa-arrows-split-up-and-left text-[8px]"></i> Sucessão</span>`;
+      case 'Conselho / Junta':
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-800 border border-amber-300/80 whitespace-nowrap"><i class="fa-solid fa-users-rectangle text-[8px]"></i> Conselho</span>`;
+      case 'Alegação / Não Confirmado':
+      default:
+        return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-rose-100 text-rose-800 border border-rose-300/80 whitespace-nowrap"><i class="fa-solid fa-triangle-exclamation text-[8px]"></i> Sem Ato Primário</span>`;
+    }
+  }
+
+  /**
+   * Renderizar Seção de Prefeitos (Tabela Técnica Direta, Compacta e Visual)
    */
   function renderPrefeitosEditorial() {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.prefeitos) return;
+
     const tbody = document.getElementById("prefeitos-editorial-table-body");
-    if (!tbody) return;
-    tbody.innerHTML = `<tr class="bg-white"><td class="px-4 py-3 font-bold font-mono text-slate-800 text-xs whitespace-nowrap">1834</td><td class="px-4 py-3 font-black text-slate-900">Lei provincial institui o cargo</td><td class="px-4 py-3 text-slate-600">Prefeito municipal</td><td class="px-4 py-3 text-slate-500">Legislação provincial</td><td class="px-4 py-3 text-xs">${fonteLinkHtml(FONTES_HISTORIA.cronologia, "Fonte")}</td></tr><tr class="bg-slate-50/60"><td class="px-4 py-3 font-bold font-mono text-slate-800 text-xs whitespace-nowrap">1835</td><td class="px-4 py-3 font-black text-slate-900">Ignácio Bicudo de Brito</td><td class="px-4 py-3 text-slate-600">Primeiro nomeado para São José, segundo a cronologia consultada</td><td class="px-4 py-3 text-slate-500">Nomeação</td><td class="px-4 py-3 text-xs">${fonteLinkHtml(FONTES_HISTORIA.cronologia, "Fonte")}</td></tr><tr class="bg-white"><td class="px-4 py-3 font-bold font-mono text-slate-800 text-xs whitespace-nowrap">1835</td><td class="px-4 py-3 font-black text-slate-900">Manoel Joaquim de Andrade</td><td class="px-4 py-3 text-slate-600">Nomeado após os pedidos de demissão descritos na cronologia</td><td class="px-4 py-3 text-slate-500">Nomeação</td><td class="px-4 py-3 text-xs">${fonteLinkHtml(FONTES_HISTORIA.cronologia, "Fonte")}</td></tr><tr><td colspan="5" class="px-4 py-4 text-xs text-slate-600 bg-amber-50">Esta é uma entrada documental inicial, não uma série completa de prefeitos. A lista ampla está suspensa até conferir cada mandato, cargo e fonte.</td></tr>`;
+    const countDisplay = document.getElementById("prefeitos-count-display");
+
+    // Filtragem Multi-critério
+    const query = prefeitosBuscaAtual.trim().toLowerCase();
+    const filtrados = data.prefeitos.filter(function(pref) {
+      if (prefeitosEraFiltro !== 'todas' && pref.eraId !== prefeitosEraFiltro) {
+        return false;
+      }
+      if (prefeitosFiltroAtual !== 'todos' && pref.categoria !== prefeitosFiltroAtual) {
+        return false;
+      }
+      if (query) {
+        const haystack = ((pref.nome || '') + ' ' + (pref.periodo || '') + ' ' + (pref.cargo || '') + ' ' + (pref.marcos || '') + ' ' + (pref.situacaoDocumental || '')).toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
+      return true;
+    });
+
+    if (countDisplay) {
+      countDisplay.textContent = filtrados.length;
+    }
+
+    if (tbody) {
+      if (filtrados.length === 0) {
+        tbody.innerHTML = `<tr>
+          <td colspan="4" class="px-6 py-10 text-center text-slate-500 space-y-2">
+            <i class="fa-solid fa-magnifying-glass text-2xl text-slate-300 block mb-1"></i>
+            <p class="font-bold text-slate-700 text-xs">Nenhum governante encontrado para os filtros selecionados.</p>
+            <p class="text-[11px] text-slate-400">Tente buscar por outro termo ou limpe os filtros.</p>
+            <button type="button" onclick="window.resetarPrefeitosFiltros()" class="mt-2 px-3 py-1 rounded-lg text-xs font-bold bg-[#a45b16] text-white hover:bg-[#8c4d12] transition-colors cursor-pointer">
+              Ver todos os 53 registros
+            </button>
+          </td>
+        </tr>`;
+      } else {
+        tbody.innerHTML = filtrados.map(function(pref, idx) {
+          const isPar = idx % 2 === 0;
+          const bgClass = isPar ? 'bg-white' : 'bg-slate-50/50';
+          const isNaoConfirmado = pref.categoria === 'Alegação / Não Confirmado';
+          const refs = pref.referenciasDetalhadas || [];
+
+          return `
+            <tr id="pref-row-${pref.id || idx}" class="${bgClass} hover:bg-amber-50/40 transition-colors">
+              <!-- Coluna 1: Governança & Período (Nome Maior para Destaque Visual) -->
+              <td class="px-3.5 py-2.5 align-top w-52 shrink-0 border-b border-slate-100">
+                <div class="text-sm sm:text-base font-black text-slate-900 tracking-tight leading-tight">
+                  ${escapeHtml(pref.nome)}
+                </div>
+                <div class="mt-1">
+                  <span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
+                    ${escapeHtml(pref.periodo)}
+                  </span>
+                </div>
+                <div class="mt-1">
+                  ${renderPrefeitoBadge(pref.categoria)}
+                </div>
+                <div class="text-[10px] text-slate-500 mt-1 leading-snug">
+                  ${escapeHtml(pref.cargo || "")}
+                </div>
+              </td>
+
+              <!-- Coluna 2: Marcos & Feitos Documentados (Letras Reduzidas para Caber na Tela) -->
+              <td class="px-3.5 py-2.5 align-top min-w-[280px] border-b border-slate-100">
+                <div class="text-[11px] text-slate-800 leading-snug font-normal">
+                  ${formatarCitacoesDossie(pref.marcos)}
+                </div>
+              </td>
+
+              <!-- Coluna 3: Situação Documental & Ressalvas Historiográficas -->
+              <td class="px-3.5 py-2.5 align-top min-w-[280px] border-b border-slate-100">
+                <div class="text-[11px] leading-snug p-2 rounded-lg border font-medium ${isNaoConfirmado ? 'bg-rose-50/70 border-rose-200 text-rose-950' : 'bg-amber-50/60 border-amber-200/70 text-amber-950'}">
+                  ${formatarCitacoesDossie(pref.situacaoDocumental)}
+                </div>
+              </td>
+
+              <!-- Coluna 4: Fontes & Citações ABNT (Discriminadas Uma a Uma com Links Oficiais) -->
+              <td class="px-3.5 py-2.5 align-top min-w-[300px] bg-slate-50/40 border-b border-slate-100">
+                <div class="space-y-1.5">
+                  ${refs.map(function(r) {
+                    return `
+                      <div id="table-ref-item-${r.id}" class="p-1.5 rounded-md bg-white border border-slate-200 shadow-2xs flex items-start gap-1.5">
+                        <span class="w-6 h-4.5 rounded bg-blue-100 text-blue-900 font-mono font-black text-[9px] flex items-center justify-center shrink-0 mt-0.5 border border-blue-200">
+                          [${r.id}]
+                        </span>
+                        <div class="flex-1 min-w-0">
+                          <p class="text-[10px] text-slate-700 leading-tight font-normal line-clamp-2" title="${escapeHtml(r.fullText)}">
+                            ${escapeHtml(r.fullText)}
+                          </p>
+                          ${r.url ? `
+                            <a href="${escapeHtml(safeUrl(r.url))}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[9px] font-bold text-blue-700 hover:text-blue-900 underline mt-0.5">
+                              <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i> Ver documento ↗
+                            </a>
+                          ` : `
+                            <span class="text-[9px] text-slate-400 italic block mt-0.5">Arquivo primário</span>
+                          `}
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+
+    renderPrefeitosComplementos();
+  }
+
+  /**
+   * Renderizar os Cards de Correções, Lacunas e Referências [1–93]
+   */
+  function renderPrefeitosComplementos() {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.prefeitosDossie) return;
+    const dossie = data.prefeitosDossie;
+
+    // 1. Correções da Tabela Inicial (Bloco 1)
+    const corrContainer = document.getElementById("prefeitos-correcoes-content");
+    if (corrContainer && !corrContainer.dataset.rendered && dossie.correcoesTabelaInicial) {
+      corrContainer.innerHTML = dossie.correcoesTabelaInicial.map(function(item) {
+        return `<div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200/80 flex items-start gap-2">
+          <i class="fa-solid fa-circle-check text-emerald-600 text-xs mt-0.5 shrink-0"></i>
+          <div class="text-[11px] text-slate-700 leading-snug font-medium">${formatarCitacoesDossie(item)}</div>
+        </div>`;
+      }).join('');
+      corrContainer.dataset.rendered = "true";
+    }
+
+    // 2. Lacunas e Critérios Historiográficos
+    const lacContainer = document.getElementById("prefeitos-lacunas-content");
+    if (lacContainer && !lacContainer.dataset.rendered) {
+      let html = '';
+      if (dossie.lacunasBloco1 && dossie.lacunasBloco1.length) {
+        html += `<div class="p-2.5 bg-amber-50/60 rounded-lg border border-amber-200/60 space-y-1">
+          <span class="font-bold text-amber-950 text-xs flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-amber-600"></i> Lacunas do Bloco até 1941:</span>
+          <p class="text-[11px] text-slate-700 leading-snug">${escapeHtml(dossie.lacunasBloco1.join(' '))}</p>
+        </div>`;
+      }
+      if (dossie.lacunasBloco2 && dossie.lacunasBloco2.length) {
+        html += dossie.lacunasBloco2.map(function(item) {
+          return `<div class="p-2.5 bg-slate-50 rounded-lg border border-slate-200/80 flex items-start gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-xs mt-0.5 shrink-0"></i>
+            <div class="text-[11px] text-slate-700 leading-snug font-medium">${formatarCitacoesDossie(item)}</div>
+          </div>`;
+        }).join('');
+      }
+      lacContainer.innerHTML = html;
+      lacContainer.dataset.rendered = "true";
+    }
+
+    // 3. Referências Documentais [1–93]
+    const refContainer = document.getElementById("prefeitos-referencias-content");
+    if (refContainer && !refContainer.dataset.rendered && dossie.referencias) {
+      refContainer.innerHTML = dossie.referencias.map(function(r) {
+        const linkHtml = r.url 
+          ? `<a href="${escapeHtml(safeUrl(r.url))}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 ml-1 text-brand-800 hover:text-brand-900 underline font-semibold"><i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> Acessar fonte</a>` 
+          : '';
+
+        return `<li id="ref-dossie-${r.id}" class="p-2 rounded-lg border border-transparent hover:border-slate-200 hover:bg-slate-50/80 transition-all flex items-start gap-2">
+          <span class="w-7 h-5 rounded bg-slate-100 text-slate-800 font-mono font-bold text-[10px] flex items-center justify-center shrink-0 border border-slate-200">[${r.id}]</span>
+          <div class="text-[11px] text-slate-700 leading-snug font-normal">
+            ${escapeHtml(r.fullText)} ${linkHtml}
+          </div>
+        </li>`;
+      }).join('');
+      refContainer.dataset.rendered = "true";
+    }
+  }
+
+  /**
+   * Filtrar por Era Política
+   */
+  function filtrarPrefeitosEra(eraId) {
+    prefeitosEraFiltro = eraId;
+    document.querySelectorAll('.prefeitos-era-btn').forEach(function(btn) {
+      const e = btn.getAttribute('data-pref-era');
+      if (e === eraId) {
+        btn.className = "prefeitos-era-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-[#a45b16] text-white shadow-2xs whitespace-nowrap cursor-pointer";
+      } else {
+        btn.className = "prefeitos-era-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 whitespace-nowrap cursor-pointer";
+      }
+    });
+    renderPrefeitosEditorial();
+  }
+
+  /**
+   * Filtrar por Categoria na Tabela de Prefeitos
+   */
+  function filtrarPrefeitosCategoria(categoria) {
+    prefeitosFiltroAtual = categoria;
+    document.querySelectorAll('.prefeitos-filter-btn').forEach(function(btn) {
+      const filter = btn.getAttribute('data-pref-filter');
+      if (filter === categoria) {
+        btn.className = "prefeitos-filter-btn px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-slate-800 text-white whitespace-nowrap cursor-pointer";
+      } else {
+        btn.className = "prefeitos-filter-btn px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 whitespace-nowrap cursor-pointer";
+      }
+    });
+    renderPrefeitosEditorial();
+  }
+
+  /**
+   * Resetar Todos os Filtros
+   */
+  function resetarPrefeitosFiltros() {
+    prefeitosEraFiltro = 'todas';
+    prefeitosFiltroAtual = 'todos';
+    prefeitosBuscaAtual = '';
+    const searchInput = document.getElementById("prefeitos-search-input");
+    if (searchInput) searchInput.value = '';
+    filtrarPrefeitosEra('todas');
+    filtrarPrefeitosCategoria('todos');
+  }
+
+  /**
+   * Busca em tempo real
+   */
+  function handlePrefeitosSearch(termo) {
+    prefeitosBuscaAtual = termo;
+    renderPrefeitosEditorial();
+  }
+
+  /**
+   * Alternar Acordeões de Prefeitos
+   */
+  function togglePrefeitosAccordion(accordionId) {
+    const el = document.getElementById(accordionId);
+    const icon = document.getElementById(accordionId + "-icon");
+    if (!el) return;
+    const isHidden = el.classList.contains("hidden");
+    if (isHidden) {
+      el.classList.remove("hidden");
+      if (icon) icon.classList.add("rotate-180");
+    } else {
+      el.classList.add("hidden");
+      if (icon) icon.classList.remove("rotate-180");
+    }
+  }
+
+  /**
+   * Destacar e Rolar para Referência [N]
+   */
+  function abrirRefPrefeitos(refNum, event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    if (!refNum) return;
+
+    // Destacar na coluna 4 da tabela se o elemento estiver na tela
+    const tableItem = document.getElementById("table-ref-item-" + refNum);
+    if (tableItem) {
+      tableItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      tableItem.classList.add("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
+      setTimeout(function() {
+        tableItem.classList.remove("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
+      }, 3500);
+      return;
+    }
+
+    // Caso contrário, abre o catálogo geral no rodapé
+    const acc = document.getElementById("accordion-referencias");
+    const icon = document.getElementById("accordion-referencias-icon");
+    if (acc && acc.classList.contains("hidden")) {
+      acc.classList.remove("hidden");
+      if (icon) icon.classList.add("rotate-180");
+    }
+
+    const refItem = document.getElementById("ref-dossie-" + refNum);
+    if (refItem) {
+      refItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      refItem.classList.add("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
+      setTimeout(function() {
+        refItem.classList.remove("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
+      }, 3500);
+    }
   }
 
   /**
@@ -2517,137 +3150,358 @@
   // 7. DEMOGRAFIA & MIGRAÇÃO (DE 2.000 PARA 750.000 HABITANTES)
   // =========================================================================
 
-    // --- NOVA ESTRUTURA MIGRACAO ---
   const MIGRACAO_STEPS = [
     {
       id: 'sanatorio',
       ano: 'Antes de 1950',
       titulo: 'A Fase Sanatorial',
-      desc: 'O clima ideal atraiu milhares de pacientes, médicos e trabalhadores da saúde para tratar a tuberculose. Pensões e sanatórios moldaram a primeira grande onda migratória.',
-      fontesIds: [4],
+      desc: 'Entre 1920 e 1950, São José dos Campos consolidou-se como a principal estância climatérica e antituberculosa do Brasil. Atraídos pela pureza do ar, topografia e amenidade térmica recomendadas pela medicina tisiológica da época, milhares de doentes afluíram da capital paulista, do Rio de Janeiro e de Minas Gerais. O fluxo transformou o tecido urbano com a construção de grandes complexos sanatoriais (como o Sanatório Vicentina Aranha, inaugurado em 1924 pela Santa Casa de Misericórdia de São Paulo, e o Sanatório Vila Samaritana), além de dezenas de pensões e consultórios especializados. O contingente de médicos sanitaristas, religiosos, enfermeiros e pacientes curados formou a base demográfica e profissional que preparou a cidade para receber os projetos federais das décadas seguintes.',
       fluxos: ['rj', 'sp_capital', 'sul_minas'],
-      color: 'amber'
+      color: '#d97706',
+      bounds: [[-24.5, -47.5], [-21.5, -43.0]], // SP capital, RJ e Sul de Minas
+      fontes: [
+        {
+          autores: "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS",
+          titulo: "História da Tuberculose e a Fase Sanatorial em São José dos Campos",
+          veiculo: "Pró-Memória: História de São José dos Campos",
+          local: "São José dos Campos",
+          ano: "2024",
+          pagina: "Seção Temática 'A Tuberculose e a Fase Sanatorial'",
+          url: "https://www.camarasjc.sp.gov.br/promemoria/historia-sjc/"
+        },
+        {
+          autores: "FERREIRA, Gabriel Henrique dos Santos",
+          titulo: "A industrialização e a formação urbana de São José dos Campos",
+          subtitulo: "Trabalho de Conclusão de Curso (Licenciatura em História)",
+          veiculo: "Universidade do Vale do Paraíba (UNIVAP) / Acervo Pró-Memória CMSJC",
+          local: "São José dos Campos",
+          ano: "2024",
+          pagina: "p. 18–25",
+          url: "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf#page=18"
+        }
+      ]
     },
     {
       id: 'fabricas',
       ano: '1950 – 1970',
       titulo: 'A Era das Fábricas',
-      desc: 'A Via Dutra e a industrialização trouxeram fábricas gigantes. A cidade virou polo de atração para trabalhadores do interior, de Minas e uma enorme leva do Nordeste em busca de emprego na indústria.',
-      fontesIds: [1],
+      desc: 'Com a inauguração da Rodovia Presidente Dutra em 1951 e incentivos fiscais estratégicos, São José dos Campos passou por uma industrialização acelerada e atraiu corporações multinacionais de ponta, como Johnson & Johnson, General Motors, Rhodia, Ericsson e Eaton. Essa dinâmica converteu a cidade em um poderoso polo de atração migratória, mobilizando grandes contingentes de trabalhadores operários vindos do Nordeste brasileiro (especialmente dos sertões e agrestes da Bahia, Pernambuco e Ceará), do Sul de Minas Gerais e do Vale histórico. O influxo populacional redefiniu o mapa habitacional joseense, estimulando a abertura de loteamentos populares nas regiões Leste, Norte e Sul e alavancando as primeiras grandes mobilizações sindicais do setor metalúrgico.',
       fluxos: ['nordeste', 'sul_minas', 'interior_sp'],
-      color: 'sky'
+      color: '#0284c7',
+      bounds: [[-24.5, -48.0], [-7.5, -34.8]], // Brasil amplo até o Nordeste
+      fontes: [
+        {
+          autores: "SANTOS, Eliane; AMARAL, Marisa",
+          titulo: "Novos territórios produtivos, mudança tecnológica e mercado de trabalho: o caso de São José dos Campos",
+          veiculo: "DADOS – Revista de Ciências Sociais",
+          local: "Rio de Janeiro",
+          volume: "v. 44, n. 3",
+          ano: "2001",
+          pagina: "p. 605–632",
+          url: "https://www.scielo.br/j/dados/a/gJC5KFwX73k5XMh7CbgfBDr/?lang=pt"
+        },
+        {
+          autores: "FERREIRA, Gabriel Henrique dos Santos",
+          titulo: "A industrialização e a formação urbana de São José dos Campos",
+          subtitulo: "Trabalho de Conclusão de Curso (Licenciatura em História)",
+          veiculo: "Universidade do Vale do Paraíba (UNIVAP) / Acervo Pró-Memória CMSJC",
+          local: "São José dos Campos",
+          ano: "2024",
+          pagina: "p. 31–44",
+          url: "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2025/01/tcc-gabriel-finalizado-1.pdf#page=31"
+        }
+      ]
     },
     {
       id: 'tecnologia',
       ano: '1970 – 1990',
       titulo: 'A Cidade Tecnológica',
-      desc: 'Com a consolidação do CTA, ITA, INPE e a criação da Embraer, SJC passou a atrair pesquisadores, engenheiros e estudantes de capitais do Brasil inteiro e do exterior.',
-      fontesIds: [2],
-      fluxos: ['exterior', 'nordeste_capitais', 'sul', 'sp_capital', 'rj'],
-      color: 'violet'
+      desc: 'A consolidação do Centro Técnico de Aeronáutica (CTA/DCTA, fundado em 1950), do Instituto Tecnológico de Aeronáutica (ITA), do Instituto Nacional de Pesquisas Espaciais (INPE, 1961) e a fundação da EMBRAER (1969) inauguraram uma onda migratória qualificada sem precedentes no país. Atraídos pela vanguarda científica, engenheiros aeronáuticos, cientistas da computação, físicos e pesquisadores de todas as capitais brasileiras (com expressivo destaque para São Paulo, Rio de Janeiro, Brasília, Porto Alegre e Recife) e especialistas estrangeiros fixaram residência no município. Esse ecossistema gerou fornecedores especializados em defesa e telecomunicações, elevando os padrões de renda, a qualificação da força de trabalho e remodelando os bairros centrais e oeste com bairros-jardins e infraestrutura moderna.',
+      fluxos: ['nordeste_capitais', 'sul', 'sp_capital', 'rj', 'brasilia'],
+      color: '#7c3aed',
+      bounds: [[-30.5, -52.0], [-8.0, -38.0]], // Capitais brasileiras
+      fontes: [
+        {
+          autores: "BARRETO, Katerine Roman",
+          titulo: "Embraer: no contexto do desenvolvimento industrial de São José dos Campos (1950-2000)",
+          veiculo: "Trabalho de Conclusão de Curso (História) – Faculdade de Educação e Artes, Universidade do Vale do Paraíba",
+          local: "São José dos Campos",
+          ano: "2002",
+          pagina: "p. 42–68",
+          url: "https://www.camarasjc.sp.gov.br/promemoria/2025/07/14/embraer-no-contexto-do-desenvolvimento-industrial-de-sao-jose-dos-campos-1950-2000/"
+        },
+        {
+          autores: "OLIVEIRA, Márcia Regina de; SOUZA, Adriane Aparecida Moreira de; RIBEIRO, Anabela",
+          titulo: "Implicações socioeconômicas e territoriais decorrentes do complexo aeroespacial",
+          veiculo: "Revista Brasileira de Gestão e Desenvolvimento Regional (G&DR)",
+          local: "Taubaté",
+          volume: "v. 15, n. 6",
+          ano: "2019",
+          pagina: "p. 77–90",
+          url: "https://www.rbgdr.net/revista/index.php/rbgdr/article/view/5204"
+        }
+      ]
     },
     {
       id: 'metropole',
       ano: '1990 em diante',
       titulo: 'A Metrópole Regional',
-      desc: 'SJC se firma como o centro nervoso da Região Metropolitana. O movimento pendular (pessoas que vêm trabalhar/estudar e voltam) das cidades vizinhas e do Litoral Norte domina os fluxos atuais.',
-      fontesIds: [3],
+      desc: 'Com a ultrapassagem da marca de 700 mil habitantes, São José dos Campos consagrou-se como a sede oficial e metrópole polarizadora da Região Metropolitana do Vale do Paraíba e Litoral Norte (RMVale). A matriz migratória contemporânea transicionou da migração inter-regional de longa distância para uma densa dinâmica de mobilidade pendular e serviços avançados: acolhimento diário de estudantes e profissionais do Vale e do Sul de Minas, fortalecimento do polo médico-hospitalar e universitário, expansão dos centros de tecnologia da informação e logística (Parque Tecnológico de SJC) e centralização administrativa e financeira regional.',
       fluxos: ['vale_paraiba', 'litoral', 'sul_minas'],
-      color: 'emerald'
+      color: '#059669',
+      bounds: [[-24.2, -46.5], [-22.2, -44.8]], // RMVale e Litoral Norte
+      fontes: [
+        {
+          autores: "INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA (IBGE)",
+          titulo: "Censo Demográfico 2022: População residente e características dos domicílios – São José dos Campos (SP)",
+          veiculo: "Portal Cidades e Estados",
+          local: "Rio de Janeiro: IBGE",
+          ano: "2023",
+          pagina: "Tabelas Demográficas e Sinopse Censitária",
+          url: "https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html"
+        },
+        {
+          autores: "SÃO JOSÉ DOS CAMPOS. Secretaria de Governança",
+          titulo: "São José em Dados: Mobilidade urbana, dinâmica regional e RMVale",
+          veiculo: "Prefeitura Municipal de São José dos Campos",
+          local: "São José dos Campos",
+          ano: "2024",
+          pagina: "Caderno Temático 'Demografia e Região'",
+          url: "https://www.sjc.sp.gov.br/servicos/governanca/sao-jose-em-dados/"
+        }
+      ]
     }
   ];
 
-  const MIGRACAO_NODES = {
-    sjc: { x: 63, y: 62, label: 'São José dos Campos', type: 'target' },
-    nordeste: { x: 78, y: 35, label: 'Nordeste' },
-    nordeste_capitais: { x: 86, y: 32, label: 'Capitais do Nordeste' },
-    sul_minas: { x: 59, y: 56, label: 'Sul de Minas' },
-    interior_sp: { x: 52, y: 58, label: 'Interior Paulista' },
-    sp_capital: { x: 60, y: 64, label: 'São Paulo (Capital)' },
-    rj: { x: 68, y: 61, label: 'Rio de Janeiro' },
-    sul: { x: 48, y: 80, label: 'Região Sul' },
-    exterior: { x: 85, y: 15, label: 'Exterior (EUA/Europa)' },
-    vale_paraiba: { x: 66, y: 59, label: 'Vale do Paraíba' },
-    litoral: { x: 66, y: 64, label: 'Litoral Norte' }
+  // Coordenadas Geográficas Reais [Latitude, Longitude]
+  const MIGRACAO_GEO_NODES = {
+    sjc: { lat: -23.1896, lng: -45.8841, label: 'São José dos Campos', type: 'target' },
+    nordeste: { lat: -10.5000, lng: -38.5000, label: 'Região Nordeste (Sertão e Agreste)' },
+    nordeste_capitais: { lat: -8.0500, lng: -34.9000, label: 'Capitais do Nordeste (Recife/Salvador)' },
+    sul_minas: { lat: -22.2300, lng: -45.9300, label: 'Sul de Minas Gerais' },
+    interior_sp: { lat: -21.7900, lng: -48.1700, label: 'Interior Paulista' },
+    sp_capital: { lat: -23.5505, lng: -46.6333, label: 'São Paulo (Capital)' },
+    rj: { lat: -22.9068, lng: -43.1729, label: 'Rio de Janeiro' },
+    sul: { lat: -25.4284, lng: -49.2733, label: 'Região Sul (Curitiba/Porto Alegre)' },
+    brasilia: { lat: -15.7975, lng: -47.8919, label: 'Brasília (DF)' },
+    vale_paraiba: { lat: -22.8100, lng: -45.1900, label: 'Eixo Dutra / Vale do Paraíba' },
+    litoral: { lat: -23.7600, lng: -45.4100, label: 'Litoral Norte (Caraguá/S. Sebastião)' }
   };
+
+  let _migracaoLeafletMap = null;
+  let _migracaoLayerGroup = null;
 
   window.activeMigracaoStep = window.activeMigracaoStep || 0;
 
   window.switchMigracaoStep = function(index) {
+    if (window.activeMigracaoStep === index) return;
     window.activeMigracaoStep = index;
-    renderMigracaoJoseenses();
+
+    // Atualizar classes ativas dos itens da timeline sem recriar o DOM inteiro
+    const step = MIGRACAO_STEPS[index];
+    const timelineContainer = document.getElementById('migracao-timeline-list');
+    if (timelineContainer) {
+      const items = timelineContainer.querySelectorAll('.migracao-timeline-item');
+      items.forEach((item, idx) => {
+        const dot = item.querySelector('.migracao-timeline-dot');
+        const card = item.querySelector('.migracao-timeline-card');
+        const descBlock = item.querySelector('.migracao-timeline-desc');
+        const titleEl = item.querySelector('.migracao-timeline-title');
+        const s = MIGRACAO_STEPS[idx];
+
+        if (idx === index) {
+          if (dot) dot.style.cssText = `background-color: ${s.color}; box-shadow: 0 0 0 4px ${s.color}33;`;
+          if (card) {
+            card.className = "migracao-timeline-card flex-1 transition-all duration-300 bg-amber-50/50 border border-amber-200/80 rounded-2xl p-4 sm:p-5 shadow-xs ring-1 ring-amber-400/30";
+          }
+          if (titleEl) titleEl.className = "migracao-timeline-title text-base sm:text-lg font-black text-slate-900 mt-0.5";
+          if (descBlock) descBlock.classList.remove('hidden');
+
+          // Alinha suavemente o card da fase ativa para ficar visível e alinhado ao mapa
+          try {
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } catch (e) {}
+        } else {
+          const isPast = idx < index;
+          if (dot) dot.style.cssText = isPast ? 'background-color: #94a3b8;' : 'background-color: #ffffff; border: 2px solid #cbd5e1;';
+          if (card) {
+            card.className = "migracao-timeline-card flex-1 transition-all duration-300 bg-transparent border border-transparent scale-95 opacity-60 hover:bg-slate-50 hover:opacity-100 cursor-pointer rounded-2xl p-4 sm:p-5";
+          }
+          if (titleEl) titleEl.className = "migracao-timeline-title text-base sm:text-lg font-black text-slate-800 mt-0.5";
+          if (descBlock) descBlock.classList.add('hidden');
+        }
+      });
+    }
+
+    // Atualizar badge do cabeçalho do mapa
+    const badgeEl = document.getElementById('migracao-map-phase-badge');
+    if (badgeEl) {
+      badgeEl.innerHTML = `
+        <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: ${step.color}"></span>
+        ${escapeHtml(step.titulo)}
+      `;
+    }
+
+    // Atualizar card flutuante de rota sobreposto
+    const overlayCard = document.getElementById('migracao-route-overlay-card');
+    if (overlayCard) {
+      overlayCard.innerHTML = `
+        <div class="space-y-0.5 min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full" style="background-color: ${step.color}"></span>
+            <span class="text-[10px] font-black uppercase tracking-wider text-slate-800">${escapeHtml(step.titulo)}</span>
+            <span class="text-[10px] text-slate-400 font-mono">• ${escapeHtml(step.ano)}</span>
+          </div>
+          <p class="text-[11px] text-slate-600 truncate font-medium">Principais vetores: ${step.fluxos.map(f => MIGRACAO_GEO_NODES[f]?.label).filter(Boolean).join(', ')}.</p>
+        </div>
+        <div class="shrink-0 text-right">
+          <span class="text-[10px] font-bold text-[#a45b16] bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80">
+            Destino: São José dos Campos
+          </span>
+        </div>
+      `;
+    }
+
+    // Atualiza os arcos e marcadores no mapa Leaflet existente
+    updateMigracaoLeafletMap();
   };
 
-  function getMigracaoMapHtml() {
+  /**
+   * Inicializa ou atualiza o Mapa Leaflet com Camada Oficial OpenStreetMap PB e Arcos Suaves
+   */
+  function updateMigracaoLeafletMap() {
+    const mapContainer = document.getElementById('migracao-leaflet-map');
+    if (!mapContainer || typeof L === 'undefined') return;
+
     const step = MIGRACAO_STEPS[window.activeMigracaoStep];
-    const colorMap = { amber: '#d97706', sky: '#0284c7', violet: '#7c3aed', emerald: '#059669' };
-    const tailwindBg = { amber: 'bg-amber-500', sky: 'bg-sky-500', violet: 'bg-violet-500', emerald: 'bg-emerald-500' };
-    const color = colorMap[step.color];
+    const target = MIGRACAO_GEO_NODES.sjc;
 
-    const target = MIGRACAO_NODES.sjc;
-    let pathsHtml = '';
-    let activeNodesHtml = '';
+    if (!_migracaoLeafletMap) {
+      _migracaoLeafletMap = L.map('migracao-leaflet-map', {
+        zoomControl: true,
+        scrollWheelZoom: false,
+        attributionControl: false
+      }).setView([target.lat, target.lng], 6);
 
-    // Zoom conditions
-    const isZoomed = (window.activeMigracaoStep === 0 || window.activeMigracaoStep === 3);
-    const transformStyle = isZoomed ? 'transform: scale(2.8) translate(-5%, -5%); transform-origin: 63% 62%;' : 'transform: scale(1); transform-origin: 63% 62%;';
-    
-    // Scale down node sizes when zoomed to avoid them becoming huge
-    const nodeScale = isZoomed ? 'scale(0.4)' : 'scale(1)';
-    const textScale = isZoomed ? 'scale(0.5)' : 'scale(1)';
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        className: 'sjc-bw-tiles'
+      }).addTo(_migracaoLeafletMap);
 
-    step.fluxos.forEach(originId => {
-      const origin = MIGRACAO_NODES[originId];
-      if (!origin) return;
+      _migracaoLayerGroup = L.layerGroup().addTo(_migracaoLeafletMap);
+    } else {
+      _migracaoLayerGroup.clearLayers();
+    }
 
-      const controlX = origin.x + (target.x - origin.x) * 0.5;
-      const controlY = Math.min(origin.y, target.y) - (isZoomed ? 5 : 15);
+    // Ajusta visualização suavemente para enquadrar as rotas daquele período
+    if (step.bounds) {
+      _migracaoLeafletMap.flyToBounds(step.bounds, {
+        padding: [45, 45],
+        duration: 1.2,
+        easeLinearity: 0.2
+      });
+    }
 
-      pathsHtml += `<path 
-        d="M ${origin.x} ${origin.y} Q ${controlX} ${controlY} ${target.x} ${target.y}" 
-        fill="none" 
-        stroke="url(#gradient-${originId})" 
-        stroke-width="${isZoomed ? 0.5 : 1.2}" 
-        stroke-linecap="round"
-        class="animate-dash"
-        stroke-dasharray="3 4"
-      ></path>
-      <defs>
-        <linearGradient id="gradient-${originId}" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="${color}" stop-opacity="0.2" />
-          <stop offset="100%" stop-color="${color}" stop-opacity="1" />
-        </linearGradient>
-      </defs>`;
-
-      activeNodesHtml += `
-        <div class="absolute w-2.5 h-2.5 rounded-full ${tailwindBg[step.color]} shadow-[0_0_8px_rgba(0,0,0,0.3)] z-10 origin-center" style="left: ${origin.x}%; top: ${origin.y}%; box-shadow: 0 0 10px ${color}; transform: translate(-50%, -50%) ${nodeScale};"></div>
-        <div class="absolute mt-2 text-[10px] font-black text-slate-800 tracking-wider whitespace-nowrap z-10 origin-top" style="left: ${origin.x}%; top: ${origin.y}%; text-shadow: 0 1px 2px rgba(255,255,255,0.9); transform: translateX(-50%) ${textScale};">${origin.label}</div>
-      `;
+    // 1. Marcador Alvo: Epicentro São José dos Campos
+    const sjcIcon = L.divIcon({
+      className: 'migracao-sjc-pin',
+      html: `
+        <div class="relative flex items-center justify-center">
+          <div class="absolute w-12 h-12 rounded-full border border-[#a45b16]/40 animate-ping"></div>
+          <div class="absolute w-7 h-7 rounded-full bg-[#a45b16]/20"></div>
+          <div class="relative w-4 h-4 rounded-full bg-[#a45b16] border-2 border-white shadow-lg flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+          </div>
+          <div class="absolute -top-7 whitespace-nowrap bg-slate-900 text-white px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md border border-slate-700">
+            São José dos Campos
+          </div>
+        </div>
+      `,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
     });
 
-    return `
-      <div class="relative w-full h-[500px] bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden flex items-center justify-center shadow-inner">
-        
-        <div class="absolute inset-0 transition-transform duration-1000 ease-in-out w-full h-full" style="${transformStyle}">
-          <!-- Mapa de Fundo Cinza Real -->
-          <div class="absolute inset-0 bg-[url('fotos_radar/mapa_brasil_cinza.jpg')] bg-contain bg-center bg-no-repeat opacity-80 mix-blend-multiply" style="background-size: 85%;"></div>
+    L.marker([target.lat, target.lng], { icon: sjcIcon, zIndexOffset: 2000 }).addTo(_migracaoLayerGroup);
 
-          <!-- SVG Lines -->
-          <svg class="absolute inset-0 w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
-            <style>
-              .animate-dash { stroke-dashoffset: 100; animation: dash 4s linear infinite; }
-              @keyframes dash { to { stroke-dashoffset: 0; } }
-            </style>
-            ${pathsHtml}
-          </svg>
+    // 2. Traçar Arcos Geodésicos Suaves com Brilho e Partículas de Fluxo
+    step.fluxos.forEach(originId => {
+      const origin = MIGRACAO_GEO_NODES[originId];
+      if (!origin) return;
 
-          <!-- Target Node (SJC) -->
-          <div class="absolute w-3.5 h-3.5 rounded-full bg-slate-900 z-20 flex items-center justify-center origin-center shadow-[0_0_10px_rgba(0,0,0,0.4)]" style="left: ${target.x}%; top: ${target.y}%; transform: translate(-50%, -50%) ${nodeScale};">
-            <div class="w-1.5 h-1.5 rounded-full bg-white animate-ping absolute opacity-75"></div>
+      const numPoints = 80;
+      const arcPoints = [];
+      
+      const midLat = (origin.lat + target.lat) / 2;
+      const midLng = (origin.lng + target.lng) / 2;
+      const dist = Math.sqrt(Math.pow(target.lat - origin.lat, 2) + Math.pow(target.lng - origin.lng, 2));
+      
+      const curveFactor = Math.min(dist * 0.16, 3.2);
+      const angle = Math.atan2(target.lng - origin.lng, target.lat - origin.lat) + (Math.PI / 2);
+      const controlLat = midLat + Math.sin(angle) * curveFactor;
+      const controlLng = midLng + Math.cos(angle) * curveFactor;
+
+      for (let i = 0; i <= numPoints; i++) {
+        const t = i / numPoints;
+        const pLat = Math.pow(1 - t, 2) * origin.lat + 2 * (1 - t) * t * controlLat + Math.pow(t, 2) * target.lat;
+        const pLng = Math.pow(1 - t, 2) * origin.lng + 2 * (1 - t) * t * controlLng + Math.pow(t, 2) * target.lng;
+        arcPoints.push([pLat, pLng]);
+      }
+
+      L.polyline(arcPoints, {
+        color: step.color,
+        weight: 2,
+        opacity: 0.25,
+        smoothFactor: 1
+      }).addTo(_migracaoLayerGroup);
+
+      L.polyline(arcPoints, {
+        color: step.color,
+        weight: 3.5,
+        opacity: 0.85,
+        dashArray: '10, 16',
+        className: 'migracao-flow-dash'
+      }).addTo(_migracaoLayerGroup);
+
+      const originIcon = L.divIcon({
+        className: 'migracao-origin-pin',
+        html: `
+          <div class="relative flex items-center justify-center">
+            <div class="w-3.5 h-3.5 rounded-full bg-white border-2 border-slate-700 shadow-md" style="box-shadow: 0 0 10px ${step.color};"></div>
+            <div class="absolute -top-7 whitespace-nowrap bg-white/95 text-slate-800 border border-slate-200/90 px-2 py-0.5 rounded-lg text-[9px] font-bold shadow-xs flex items-center gap-1 backdrop-blur-xs">
+              <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${step.color}"></span>
+              ${escapeHtml(origin.label)}
+            </div>
           </div>
-          <div class="absolute mt-3 text-[10px] sm:text-[11px] font-black text-slate-900 tracking-widest uppercase z-20 bg-white/90 px-1.5 py-0.5 rounded border border-slate-300 shadow-xs origin-top" style="left: ${target.x}%; top: ${target.y}%; transform: translateX(-50%) ${textScale};">${target.label}</div>
+        `,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
+      });
 
-          ${activeNodesHtml}
+      L.marker([origin.lat, origin.lng], { icon: originIcon, zIndexOffset: 1000 }).addTo(_migracaoLayerGroup);
+    });
+  }
+
+  function formatMigracaoFonteAbnt(f) {
+    const url = escapeHtml(safeUrl(f.url));
+    const autor = escapeHtml(f.autores || '');
+    const titulo = escapeHtml(f.titulo || '');
+    const subtitulo = f.subtitulo ? `: ${escapeHtml(f.subtitulo)}` : '';
+    const veiculo = f.veiculo ? ` <em>${escapeHtml(f.veiculo)}</em>.` : '';
+    const local = f.local ? ` ${escapeHtml(f.local)},` : '';
+    const volume = f.volume ? ` ${escapeHtml(f.volume)},` : '';
+    const ano = f.ano ? ` ${escapeHtml(f.ano)}.` : '';
+    const pagina = f.pagina ? `<span class="inline-flex items-center gap-1 font-bold text-amber-900 bg-amber-100/90 px-1.5 py-0.5 rounded text-[10px] ml-1"><i class="fa-regular fa-file-lines text-[9px]"></i>${escapeHtml(f.pagina)}</span>` : '';
+
+    return `
+      <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1 hover:bg-slate-100/70 transition-colors">
+        <p class="text-[11px] leading-relaxed text-slate-800">
+          <strong>${autor}</strong>. ${titulo}${subtitulo}.${veiculo}${local}${volume}${ano} ${pagina}
+        </p>
+        <div class="pt-0.5">
+          <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#a45b16] hover:text-[#83450e] hover:underline underline-offset-2 break-all">
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            <span>Acessar fonte / documento original</span>
+          </a>
         </div>
       </div>
     `;
@@ -2657,44 +3511,43 @@
     const container = document.getElementById("migracao-joseenses-container");
     if (!container) return;
 
-    const fontes = [
-      { titulo: "IBGE. São José dos Campos (SP)", url: "https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html" },
-      { titulo: "SANTOS, Eliane. Novos territórios produtivos.", url: "https://www.scielo.br/j/dados/a/gJC5KFwX73k5XMh7CbgfBDr/?lang=pt" },
-      { titulo: "BARRETO, Katerine. Embraer: contexto do desenvolvimento", url: "https://www.camarasjc.sp.gov.br/promemoria/2025/07/14/embraer/" },
-      { titulo: "OLIVEIRA, Márcia. Implicações socioeconômicas", url: "https://www.rbgdr.net/revista/index.php/rbgdr/article/view/5204" },
-      { titulo: "SÃO JOSÉ DOS CAMPOS. Pró-Memória. São José dos Campos e sua história.", url: "https://www.camarasjc.sp.gov.br/promemoria/historia-sjc/" }
-    ];
-
-    const fonteLink = (f) => `<a href="${f.url}" target="_blank" class="inline-flex items-center gap-1 text-slate-500 hover:text-brand-900 underline underline-offset-2"><i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i><span>${f.titulo}</span></a>`;
+    // Se o mapa já existir no DOM, só atualiza o passo sem recriar
+    if (document.getElementById('migracao-leaflet-map') && _migracaoLeafletMap) {
+      window.switchMigracaoStep(window.activeMigracaoStep);
+      return;
+    }
 
     const step = MIGRACAO_STEPS[window.activeMigracaoStep];
-    const tailwindBgActive = { amber: 'bg-amber-50 border-amber-200', sky: 'bg-sky-50 border-sky-200', violet: 'bg-violet-50 border-violet-200', emerald: 'bg-emerald-50 border-emerald-200' };
-    const tailwindTextActive = { amber: 'text-amber-900', sky: 'text-sky-900', violet: 'text-violet-900', emerald: 'text-emerald-900' };
 
-    let timelineHtml = '<div class="space-y-3 relative before:absolute before:inset-y-0 before:left-[19px] before:w-[2px] before:bg-slate-200">';
+    let timelineHtml = '<div id="migracao-timeline-list" class="space-y-4 relative before:absolute before:inset-y-0 before:left-[19px] before:w-[2px] before:bg-slate-200">';
     
     MIGRACAO_STEPS.forEach((s, idx) => {
       const isActive = idx === window.activeMigracaoStep;
       const isPast = idx < window.activeMigracaoStep;
       
-      let dotClass = isActive ? `bg-${s.color}-500 ring-4 ring-${s.color}-100` : (isPast ? 'bg-slate-400' : 'bg-white border-2 border-slate-300');
-      let cardClass = isActive ? `${tailwindBgActive[s.color]} border scale-100 opacity-100 shadow-sm` : 'bg-transparent border border-transparent scale-95 opacity-60 hover:bg-slate-50 hover:opacity-100 cursor-pointer';
+      let dotStyle = isActive ? `background-color: ${s.color}; box-shadow: 0 0 0 4px ${s.color}33;` : (isPast ? 'background-color: #94a3b8;' : 'background-color: #ffffff; border: 2px solid #cbd5e1;');
+      let cardClass = isActive ? 'bg-amber-50/50 border border-amber-200/80 rounded-2xl p-4 sm:p-5 shadow-xs' : 'bg-transparent border border-transparent scale-95 opacity-60 hover:bg-slate-50 hover:opacity-100 cursor-pointer rounded-2xl p-4 sm:p-5';
 
       timelineHtml += `
-        <div class="relative flex items-start gap-4" onclick="switchMigracaoStep(${idx})">
+        <div class="migracao-timeline-item relative flex items-start gap-3 sm:gap-4 cursor-pointer" onclick="window.switchMigracaoStep(${idx})">
           <div class="w-10 h-10 shrink-0 flex items-center justify-center relative z-10 bg-white pt-2 sm:pt-0">
-            <div class="w-4 h-4 rounded-full ${dotClass} transition-all duration-300"></div>
+            <div class="migracao-timeline-dot w-4 h-4 rounded-full transition-all duration-300" style="${dotStyle}"></div>
           </div>
-          <div class="flex-1 transition-all duration-300 ${cardClass} rounded-2xl p-4">
-            <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">${s.ano}</span>
-            <h4 class="text-base font-black ${isActive ? tailwindTextActive[s.color] : 'text-slate-800'} mt-0.5">${s.titulo}</h4>
-            ${isActive ? `
-              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed mt-2">${s.desc}</p>
-              <div class="mt-3 pt-3 border-t border-${s.color}-200/50 space-y-1.5">
-                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Fontes Históricas:</span>
-                ${s.fontesIds.map(fid => `<div class="text-[10px] leading-tight">${fonteLink(fontes[fid])}</div>`).join('')}
+          <div class="migracao-timeline-card flex-1 transition-all duration-300 ${cardClass}">
+            <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">${escapeHtml(s.ano)}</span>
+            <h4 class="migracao-timeline-title text-base sm:text-lg font-black text-slate-900 mt-0.5">${escapeHtml(s.titulo)}</h4>
+            <div class="migracao-timeline-desc ${isActive ? '' : 'hidden'} space-y-3.5 mt-2.5">
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed text-justify">${escapeHtml(s.desc)}</p>
+              
+              <div class="pt-3 border-t border-slate-200/70 space-y-2">
+                <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
+                  <i class="fa-solid fa-graduation-cap text-[#a45b16]"></i> Fontes Históricas & Referências (ABNT):
+                </span>
+                <div class="space-y-2">
+                  ${(s.fontes || []).map(f => formatMigracaoFonteAbnt(f)).join('')}
+                </div>
               </div>
-            ` : ''}
+            </div>
           </div>
         </div>
       `;
@@ -2703,19 +3556,18 @@
 
     container.innerHTML = `
       <div class="space-y-8 animate-in fade-in duration-500">
-
-
         <!-- Interactive Journey Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          
           <!-- Timeline (Col Esquerda) -->
           <div class="lg:col-span-5 bg-white rounded-3xl border border-slate-200 p-5 shadow-sm">
             <div class="mb-5 pb-4 border-b border-slate-100 flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center shrink-0">
-                <i class="fa-solid fa-list-ol text-xs"></i>
+              <div class="w-8 h-8 rounded-full bg-amber-50 text-[#a45b16] flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-timeline text-xs"></i>
               </div>
               <div>
-                <h4 class="text-sm font-black text-slate-900 uppercase tracking-widest">Jornada Migratória</h4>
-                <p class="text-[11px] text-slate-500 font-medium">Selecione o período para ver os fluxos</p>
+                <h4 class="text-sm font-black text-slate-900 uppercase tracking-widest">Ondas Migratórias</h4>
+                <p class="text-[11px] text-slate-500 font-medium">Selecione o período para projetar os fluxos no mapa</p>
               </div>
             </div>
             ${timelineHtml}
@@ -2724,229 +3576,461 @@
           <!-- Map (Col Direita) -->
           <div class="lg:col-span-7 sticky top-[calc(var(--app-header-height,72px)+16px)]">
             <div class="mb-3 flex items-center justify-between">
-               <h4 class="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-slate-400"></i> Mapa de Fluxos</h4>
-               <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">Esquema Topológico</span>
+               <h4 class="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                 <i class="fa-solid fa-map-location-dot text-[#a45b16]"></i> Mapa Georreferenciado de Fluxos
+               </h4>
+               <span id="migracao-map-phase-badge" class="text-[10px] text-slate-600 font-bold uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 flex items-center gap-1.5">
+                 <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: ${step.color}"></span>
+                 ${escapeHtml(step.titulo)}
+               </span>
             </div>
-            ${getMigracaoMapHtml()}
-            <p class="text-center text-[10px] text-slate-400 mt-3 font-medium px-4">
-              * Representação abstrata. As rotas ilustram os vetores históricos da migração na formação de São José dos Campos.
+
+            <!-- Container do Mapa Real Leaflet com Estilo Preto & Branco Executivo -->
+            <div class="relative w-full h-[520px] bg-slate-100 rounded-3xl border border-slate-200 overflow-hidden shadow-inner sjc-bw-map">
+              <style>
+                .migracao-flow-dash {
+                  animation: migracaoFlowDash 8s linear infinite;
+                }
+                @keyframes migracaoFlowDash {
+                  from { stroke-dashoffset: 260; }
+                  to { stroke-dashoffset: 0; }
+                }
+              </style>
+              <div id="migracao-leaflet-map" class="w-full h-full"></div>
+
+              <!-- Card Flutuante de Contexto da Rota -->
+              <div id="migracao-route-overlay-card" class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200/90 shadow-lg z-[1000] flex items-center justify-between gap-3 pointer-events-auto">
+                <div class="space-y-0.5 min-w-0">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full" style="background-color: ${step.color}"></span>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-slate-800">${escapeHtml(step.titulo)}</span>
+                    <span class="text-[10px] text-slate-400 font-mono">• ${escapeHtml(step.ano)}</span>
+                  </div>
+                  <p class="text-[11px] text-slate-600 truncate font-medium">Principais vetores: ${step.fluxos.map(f => MIGRACAO_GEO_NODES[f]?.label).filter(Boolean).join(', ')}.</p>
+                </div>
+                <div class="shrink-0 text-right">
+                  <span class="text-[10px] font-bold text-[#a45b16] bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80">
+                    Destino: São José dos Campos
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-center text-[10px] text-slate-500 mt-3 font-medium px-4">
+              * Mapa cartográfico real centrado em São José dos Campos. As trajetórias representam a direção e origem comprovada das ondas migratórias municipais.
             </p>
           </div>
+
         </div>
       </div>
     `;
+
+    // Atualiza o Leaflet após a injeção do container no DOM
+    requestAnimationFrame(function() {
+      updateMigracaoLeafletMap();
+      if (_migracaoLeafletMap) {
+        setTimeout(function() {
+          _migracaoLeafletMap.invalidateSize();
+        }, 150);
+      }
+    });
   }
 
   const LENDAS_CATALOGO = [
     {
-      id: "maria-peregrina",
-      titulo: "Maria Peregrina, a Andarilha Santa",
-      categoria: "Devoção Popular · Santana",
-      badgeColor: "bg-amber-400 text-slate-950",
-      imagem: "fotos_radar/lenda_maria_peregrina.jpg",
-      lead: "Uma mulher misteriosa e de poucas palavras caminhava pelas poeirentas estradas de Santana. Após sua morte, o povo a transformou na maior intercessora popular de São José dos Campos.",
-      local: "Bairro de Santana",
-      epoca: "Século XX (décadas de 1940 a 1964)",
-      relatoCompleto: [
-        "A figura serena de Maria Peregrina é uma das memórias mais afetuosas do bairro de Santana. Ela era uma mulher afro-brasileira, de passos firmes porém sem pressa, que caminhava incansavelmente pelas estradinhas de terra da Zona Norte. Com uma trouxa de pano repousando nos ombros e amparada por um rústico cajado de madeira, ela parecia carregar não apenas seus poucos pertences, mas também o silêncio de um passado que ninguém conhecia ao certo.",
-        "Apesar do seu jeito calado, o sorriso meigo que oferecia às crianças e a forma respeitosa como lidava com as famílias ribeirinhas construíram uma aura de santidade ao seu redor. Os moradores não a viam como uma forasteira, mas como um anjo guardião, uma presença que abençoava os caminhos por onde seus pés calejados pisavam.",
-        "Em 1964, o silêncio de Maria tornou-se eterno. Ela faleceu e foi enterrada no singelo Cemitério de Santana. O que poucos esperavam é que a morte não seria o fim, mas o início de uma imensa devoção. Sem demora, moradores começaram a sussurrar histórias de graças alcançadas: doenças curadas de forma inexplicável, preces por emprego atendidas, proteção em momentos de desespero. Tudo graças à intercessão de Maria Peregrina.",
-        "Hoje, a simplicidade de seu túmulo contrasta com a montanha de emoções que ele desperta. A cada Dia de Finados, milhares de corações gratos formam uma maré humana, cobrindo o mármore de flores coloridas, velas tremeluzentes e placas que repetem incansavelmente: 'Graça Alcançada'. Longe dos altares oficiais da Igreja, Maria foi eternizada pelo mais puro afeto popular."
-      ],
-      analiseHistorica: "A devoção a Maria Peregrina é um fenômeno clássico de 'canonização popular', revelando a profunda necessidade da comunidade de se ver representada no sagrado por figuras humildes e reais.",
-      fontes: [
-        {
-          titulo: "A resistência popular por meio da folkcomunicação...",
-          autor: "Pró-Memória / Câmara Municipal de São José dos Campos",
-          ano: "2024",
-          tipo: "Artigo Acadêmico",
-          url: "https://www.camarasjc.sp.gov.br/promemoria/"
-        }
-      ]
+        "id": "maria-peregrina",
+        "titulo": "Maria Peregrina: da vida nas ruas à devoção em Santana",
+        "categoria": "Devoção popular",
+        "badgeColor": "bg-amber-400 text-slate-950",
+        "imagem": "fotos_radar/lenda_maria_peregrina.jpg",
+        "lead": "Ela caminhava pela Zona Norte carregando seus pertences. Depois de sua morte, moradores passaram a visitar o túmulo e a pedir sua intercessão.",
+        "local": "Santana e bairros vizinhos",
+        "epoca": "Século XX; falecimento em 1964",
+        "relatoCompleto": [
+            "Quem morava no bairro de <strong>Santana</strong> ou nas redondezas da antiga Vila Cristina entre os anos 1940 e o início da década de 1960 se acostumou a cruzar com a mesma figura quase todos os dias. Uma mulher franzina, de passos curtos e compassados, que percorria as ruas de terra e os caminhos de beira de cerca carregando uma trouxa enorme sobre a cabeça. O embrulho, amarrado com retalhos e pedaços de arame, continha tudo o que ela possuía no mundo: roupas velhas, pedaços de lata, garrafas vazias e pequenos objetos que ela recolhia pelo chão da cidade.",
+            "No bairro, a maioria das pessoas a chamava de <em>Nhá Maria</em>. O apelido de <em>Peregrina</em> veio com o tempo, justamente pelo hábito de nunca parar em lugar nenhum. Ninguém conhecia ao certo a sua origem, de onde tinha chegado ou se ainda tinha parentes vivos no Vale do Paraíba ou em Minas Gerais. Quando alguém tentava puxar conversa para saber sobre sua família ou sobre o seu passado, Maria desconversava com calma, dava um sorriso curto e seguia adiante, ajeitando a trouxa no cocuruto da cabeça para não perder o equilíbrio.",
+            "O dia a dia de Maria seguia uma rotina própria. Pela manhã, passava na porta das vendas e das casas pedindo um bocado de comida ou um gole de café com leite. Aceitava o que lhe davam sem reclamar e sem pedir dinheiro. Quando o sol apertava ao meio-dia, sentava-se à sombra de alguma mangueira na beira do caminho para descansar as pernas e mexer nas latas que guardava na trouxa. À noite, procurava o abrigo de uma marquise de armazém, o alpendre de uma olaria desativada ou mesmo o vão de um barranco seco para dormir enrolada em sacos de estopa.",
+            "Essa presença constante no bairro gerava reações diversas entre os moradores. Em entrevistas de história oral preservadas no acervo do <strong>Núcleo Pró-Memória</strong> e analisadas em estudos da <strong>Universidade do Vale do Paraíba (Univap)</strong>, antigos vizinhos relataram que nem todos a tratavam com paciência. Crianças e rapazes da rua costumavam rir de suas roupas e chegaram a jogar pedras em sua direção. O detalhe que marcou quem presenciou esses episódios foi a postura de Maria: ela não gritava, não xingava e não atirava pedras de volta. Apenas continuava andando no mesmo passo, esperando a provocação passar.",
+            {
+                "tipo": "quote",
+                "texto": "As crianças jogavam pedras nela e ela não falava nada, continuava andando... ela carregava um saco de estopa na cabeça com as coisas dela, roupas velhas e latinhas.",
+                "fonte": "Depoimento oral de morador de Santana registrado na pesquisa da Univap (2018, acervo Pró-Memória da Câmara Municipal)"
+            },
+            "A andarilha adoeceu e faleceu em <strong>1964</strong>. Como não portava documentos oficiais e nenhum familiar apareceu para reclamar o corpo, foi sepultada como indigente em uma cova rasa e sem identificação no cemitério do bairro de Santana. O caso parecia encerrado ali, como o de tantos outros anônimos que passavam pelas ruas da cidade na época. No entanto, o costume popular de rezar pelas almas esquecidas mudou o destino daquela sepultura.",
+            "A primeira graça atribuída a Maria tem nome e data na memória local. Conforme documentaram os pesquisadores <strong>Robson Alves dos Santos</strong>, <strong>Jorge Luis da Hora de Jesus</strong> e <strong>Luís Fernando Ferreira de Araújo</strong> em artigo apresentado no congresso <strong>ComCult de 2023</strong>, uma moradora chamada <em>Benedita Maria das Dores</em> passava por grandes aflições por causa do alcoolismo do filho. Sabendo do túmulo humilde daquela mulher que tanto caminhara por Santana, Benedita foi até lá, acendeu uma vela sobre a terra e prometeu que cuidaria da sepultura caso o rapaz abandonasse a bebida. Pouco tempo depois, o filho parou de beber.",
+            "A notícia da promessa de Benedita correu rápido pelas conversas de portão em Santana. Outros moradores passaram a ir até o cemitério para pedir ajuda em momentos de doença, desemprego e dificuldades em família. Com o passar dos anos, o túmulo de chão batido recebeu uma lápide de alvenaria e passou a acumular velas, flores de plástico, terços e cartas com pedidos de intercessão. A devoção cresceu tanto que a Prefeitura acabou oficializando o nome do local como <strong>Cemitério Maria Peregrina</strong>, fato destacado inclusive pela <strong>TV Vanguarda</strong> em reportagem especial sobre as seis décadas de sua morte. Uma história que começou com uma mulher solitária caminhando pelas margens da cidade e que acabou gravada na geografia e na memória coletiva de São José dos Campos."
+        ],
+        "analiseHistorica": "Maria Peregrina foi uma mulher real que viveu e morreu em situação de rua em São José dos Campos. Sua conversão em santa popular ilustra o fenômeno da folkcomunicação religiosa no Vale do Paraíba, no qual o sofrimento terreno e a marginalidade são ressignificados pela comunidade como marcas de santidade e proximidade com o sagrado.",
+        "fontes": [
+            {
+                "titulo": "A resistência popular por meio da folkcomunicação: a devoção a uma perna e a Maria Peregrina na zona norte no bairro de Santana de São José dos Campos, SP",
+                "autor": "Cristiane Aparecida Braga Alvim; Denise Aparecida Massa Giacomin; Franciele Busico Lima; Robson Alves dos Santos",
+                "ano": "2018",
+                "tipo": "Pesquisa acadêmica",
+                "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2024/02/0600_0701_01.pdf#page=2",
+                "nota": "Inclui entrevistas com pessoas que conheceram Maria e registros das devoções. Disponível no Pró-Memória de São José dos Campos, acervo da parceria entre Câmara Municipal, FCCR e Univap/FVE.",
+                "localizador": "p. 2-4; páginas 2-4 do PDF.",
+                "referencia": "ALVIM, Cristiane Aparecida Braga et al. A resistência popular por meio da folkcomunicação: a devoção a uma perna e a Maria Peregrina na zona norte no bairro de Santana de São José dos Campos, SP. In: ENCONTRO LATINO AMERICANO DE INICIAÇÃO CIENTÍFICA, 22., 2018, São José dos Campos. Anais [...]. São José dos Campos: Univap, 2018."
+            },
+            {
+                "titulo": "Santa Perna e Maria Peregrina: aspectos folkcomunicacionais da religiosidade popular em São José dos Campos",
+                "autor": "Robson Alves dos Santos; Jorge Luis da Hora de Jesus; Luís Fernando Ferreira de Araújo",
+                "ano": "2023",
+                "tipo": "Pesquisa acadêmica",
+                "url": "https://www.comcult.cisc.org.br/wp-content/uploads/anais-comcult8/santa_perna_e_maria_peregrina_aspec.pdf#page=9",
+                "nota": "Reúne relatos sobre a devoção a Maria Peregrina, incluindo a promessa atribuída a Benedita Maria das Dores.",
+                "localizador": "Folhas 9-11 do PDF, sem numeração impressa.",
+                "referencia": "SANTOS, Robson Alves dos; JESUS, Jorge Luis da Hora de; ARAÚJO, Luís Fernando Ferreira de. Santa Perna e Maria Peregrina: aspectos folkcomunicacionais da religiosidade popular em São José dos Campos. In: CONGRESSO INTERNACIONAL DE COMUNICAÇÃO E CULTURA, 8., 2023, São Paulo. Anais [...]. São Paulo: ComCult, 2023."
+            },
+            {
+                "titulo": "60 anos da morte da santa popular Maria Peregrina",
+                "autor": "TV Vanguarda. Link Vanguarda",
+                "ano": "[s.d.]",
+                "tipo": "Reportagem em vídeo",
+                "url": "https://globoplay.globo.com/v/13037621/",
+                "nota": "Reportagem de quatro minutos sobre a santa popular.",
+                "localizador": "Sem paginação.",
+                "referencia": "TV VANGUARDA. 60 anos da morte da santa popular Maria Peregrina. Link Vanguarda. [S. l.]: TV Vanguarda, [s.d.]. 1 vídeo (4 min). Disponibilizado no Globoplay."
+            }
+        ]
     },
     {
-      id: "perna-santana",
-      titulo: "O Mistério da Perna Prometida",
-      categoria: "Religiosidade Popular · Santana",
-      badgeColor: "bg-rose-500 text-white",
-      imagem: "fotos_radar/lenda_perna_santana.jpg",
-      lead: "No coração de Santana, uma perna amputada conservada em formol tornou-se o peculiar e sombrio destino das preces de quem lutava contra o sofrimento físico.",
-      local: "Bairro de Santana",
-      epoca: "Século XX",
-      relatoCompleto: [
-        "A dor humana encontra caminhos inimagináveis para buscar alívio. No bairro de Santana, uma das lendas mais intrigantes envolve um pedaço literal de sofrimento: uma perna amputada, imersa em formol dentro de um grande frasco de vidro.",
-        "Segundo os antigos moradores, a perna pertencia a um trabalhador que sobreviveu a um trágico acidente nas velhas estradas da região. Impossibilitado de enterrar o membro em solo sagrado ou tomado por alguma crença obscura, ele guardou a perna.",
-        "Com o tempo, o vidro com a perna acabou encontrando abrigo em um canto respeitado da comunidade. Aquilo que inicialmente causava repulsa começou a atrair olhares piedosos. Pessoas com dores insuportáveis, fraturas ou doenças começaram a visitar o local em segredo, acendendo velas e murmurando promessas para que pudessem voltar a andar sem dor.",
-        "Esse objeto bizarro virou uma espécie de relíquia orgânica. Cada prece sussurrada à frente daquele frasco carregava a crença profunda de que aquele que sofreu na carne a pior das amputações saberia, mais do que qualquer santo no céu, o valor do alívio."
-      ],
-      analiseHistorica: "Um exemplo impressionante de ex-voto comunitário, onde a dor física é materializada e a própria tragédia se converte em um elo visceral entre a fé e a cura.",
-      fontes: [
-        {
-          titulo: "Artigo sobre a devoção popular a uma perna em Santana",
-          autor: "Pró-Memória / Câmara Municipal de SJC",
-          ano: "2024",
-          tipo: "Estudo Acadêmico",
-          url: "https://www.camarasjc.sp.gov.br/promemoria/"
-        }
-      ]
+        "id": "perna-santana",
+        "titulo": "Santa Perna: a promessa que ergueu o altar no Jaguari",
+        "categoria": "Devoção popular",
+        "badgeColor": "bg-rose-500 text-white",
+        "imagem": "fotos_radar/lenda_perna_santana.jpg",
+        "lead": "Um pescador encontrou uma perna em sua rede. A história da cura de sua mulher se espalhou e deu origem a uma devoção no Jaguari.",
+        "local": "Capela de Santa Perna, Jaguari",
+        "epoca": "Tradição de origem não datada",
+        "relatoCompleto": [
+            "A vida nas margens do Rio Paraíba do Sul sempre foi regida pelos caprichos das águas e pelo ritmo paciente de quem dependia da pesca para garantir o sustento da panela. Em uma manhã cinzenta de neblina baixa, na primeira metade do século passado, um pescador do bairro rural do <strong>Jaguari</strong> entrou na sua canoa de madeira e lançou o lance de rede habitual nas curvas mais profundas do rio. Ao puxar a malha contra a força da correnteza, sentiu um peso desmedido enroscado no fundo, como se houvesse fisgado um tronco de árvore.",
+            "Quando a rede alcançou a borda da canoa, o pescador deparou-se com uma visão desconcertante: entre o limo verde e os mandis espantados, havia o contorno nítido de uma perna humana decepada, feita de madeira rústica e desgastada pelas pedras do fundo do leito. Em vez de atirar a peça de volta às águas por temor ou superstição, o caboclo recolheu o objeto com cuidado, limpou a lama com as próprias mãos e levou o achado para sua casa de sapê, pressentindo que aquilo não havia chegado às suas mãos por acaso.",
+            "Naquela mesma época, sua mulher enfrentava um sofrimento contínuo. Ela padecia de feridas crônicas e chagas abertas em uma das pernas, padecimento que nenhum ungüento de farmácia nem as rezas das benzedeiras mais antigas da várzea conseguiam cicatrizar. Diante da misteriosa perna de madeira, o casal ajoelhou-se no chão de terra batida, acendeu uma lamparina de azeite e fez uma promessa cheia de fé: se aquela perna trazida pelo rio operasse a cura das feridas, eles cuidariam dela como relíquia sagrada.",
+            "Segundo os causos preservados pela tradição oral do bairro e recolhidos em pesquisas do folclore regional, as dores da mulher começaram a ceder de forma repentina poucos dias depois, até que a pele se fechou por completo. A notícia do prodígio correu rápido pelas colônias agrícolas e olarias da região norte de São José dos Campos. Outros moradores que sofriam de varizes, reumatismos severos e acidentes com enxadas e foices passaram a bater na porteira do pescador para rezar em frente à relíquia e pedir o mesmo alívio.",
+            {
+                "tipo": "quote",
+                "texto": "O pescador puxou a rede no Paraíba e veio a perna. A mulher dele sarou da ferida e depois o povo foi juntando até levantar a capela com os agradecimentos.",
+                "fonte": "Depoimento oral do devoto Hipólito da Costa Andrade, registrado por Cáscia Frade e citado nos anais do ComCult (2023)"
+            },
+            "O fluxo constante de peregrinos vindos a pé pelas estradas de terra motivou os vizinhos a construir um abrigo definitivo para a peça. Com o esforço coletivo dos moradores, foi erguida uma capela simples no bairro do <strong>Jaguari</strong>, dedicada carinhosamente àquilo que o povo batizou de <em>Santa Perna</em>. Como registraram os pesquisadores <strong>Robson Alves dos Santos</strong>, <strong>Cristiane Aparecida Braga Alvim</strong> e colegas em levantamentos da <strong>Univap (2018)</strong> e no congresso <strong>ComCult (2023)</strong>, a peça original de madeira acabou se perdendo com o tempo, sendo substituída por uma escultura moldada em cera que repousa sobre o altar.",
+            "Quem visita o templo rural encontra uma das manifestações de religiosidade mais autênticas do Vale do Paraíba. O espaço ao redor do altar é repleto de ex-votos: sapatos velhos, meias, fotografias em preto e branco, bengalas aposentadas e centenas de cartas manuscritas relatando cirurgias que deram certo e fraturas que soldaram. Conforme documentado pelo <strong>Museu do Folclore de São José dos Campos</strong> na série <em>Folclore em Movimento</em>, a capela do Jaguari permanece como testemunho vivo de como a comunidade soube criar seu próprio refúgio de cura e conforto espiritual nas margens do Paraíba."
+        ],
+        "fontes": [
+            {
+                "titulo": "Santa Perna e Maria Peregrina: aspectos folkcomunicacionais da religiosidade popular em São José dos Campos",
+                "autor": "Robson Alves dos Santos; Jorge Luis da Hora de Jesus; Luís Fernando Ferreira de Araújo",
+                "ano": "2023",
+                "tipo": "Pesquisa acadêmica",
+                "url": "https://www.comcult.cisc.org.br/wp-content/uploads/anais-comcult8/santa_perna_e_maria_peregrina_aspec.pdf#page=7",
+                "nota": "Traz relato atribuído ao devoto Hipólito da Costa Andrade e fotografias da capela e dos objetos de devoção.",
+                "localizador": "Folhas 7-11 do PDF, sem numeração impressa.",
+                "referencia": "SANTOS, Robson Alves dos; JESUS, Jorge Luis da Hora de; ARAÚJO, Luís Fernando Ferreira de. Santa Perna e Maria Peregrina: aspectos folkcomunicacionais da religiosidade popular em São José dos Campos. In: CONGRESSO INTERNACIONAL DE COMUNICAÇÃO E CULTURA, 8., 2023, São Paulo. Anais [...]. São Paulo: ComCult, 2023."
+            },
+            {
+                "titulo": "A resistência popular por meio da folkcomunicação: a devoção a uma perna e a Maria Peregrina na zona norte no bairro de Santana de São José dos Campos, SP",
+                "autor": "Cristiane Aparecida Braga Alvim; Denise Aparecida Massa Giacomin; Franciele Busico Lima; Robson Alves dos Santos",
+                "ano": "2018",
+                "tipo": "Pesquisa acadêmica",
+                "url": "https://www.camarasjc.sp.gov.br/promemoria/wp-content/uploads/2024/02/0600_0701_01.pdf#page=2",
+                "nota": "Inclui entrevistas com pessoas que conheceram Maria e registros das devoções. Disponível no Pró-Memória de São José dos Campos, acervo da parceria entre Câmara Municipal, FCCR e Univap/FVE.",
+                "localizador": "p. 2-4; páginas 2-4 do PDF.",
+                "referencia": "ALVIM, Cristiane Aparecida Braga et al. A resistência popular por meio da folkcomunicação: a devoção a uma perna e a Maria Peregrina na zona norte no bairro de Santana de São José dos Campos, SP. In: ENCONTRO LATINO AMERICANO DE INICIAÇÃO CIENTÍFICA, 22., 2018, São José dos Campos. Anais [...]. São José dos Campos: Univap, 2018."
+            },
+            {
+                "titulo": "Santa Perna: série Folclore em Movimento",
+                "autor": "Museu do Folclore de São José dos Campos",
+                "ano": "[s.d.]",
+                "tipo": "Vídeo no YouTube",
+                "url": "https://www.youtube.com/watch?v=QY4z9OA9nqA",
+                "nota": "Vídeo do canal do Museu do Folclore, citado na bibliografia do estudo de 2023.",
+                "localizador": "Vídeo completo.",
+                "referencia": "MUSEU DO FOLCLORE DE SÃO JOSÉ DOS CAMPOS. Santa Perna: série Folclore em Movimento. São José dos Campos: Museu do Folclore, [s.d.]. 1 vídeo. Publicado no YouTube."
+            }
+        ]
     },
     {
-      id: "lobisomem-banhado",
-      titulo: "O Uivo no Banhado",
-      categoria: "Lenda Noturna · Várzea",
-      badgeColor: "bg-indigo-600 text-white",
-      imagem: "fotos_radar/lenda_lobisomem_banhado.jpg",
-      lead: "Nas noites de lua cheia, um terror primitivo engolia a várzea do Rio Paraíba. Gritos abafados e vultos disformes alertavam que o Banhado pertencia aos monstros.",
-      local: "Várzea do Rio Paraíba / Orla do Banhado",
-      epoca: "Século XIX e início do Século XX",
-      relatoCompleto: [
-        "Descer as encostas do Banhado à noite já era tarefa para os fortes. Sem os postes de luz de hoje, a escuridão da várzea era um mar negro e sufocante, cortado apenas pelo manto frio de neblina que se erguia das margens do Rio Paraíba. Mas nas noites de lua cheia, a escuridão ganhava dentes.",
-        "Os moradores mais antigos contavam a meia-voz a história do sétimo filho. Amaldiçoado pela natureza, o homem que carregava essa sina via seu corpo se retorcer em dor até que a pele rasgasse para dar lugar a pelos escuros e garras afiadas. O Lobisomem do Banhado não era um mito distante; ele tinha o rosto do vizinho cansado que sumia misteriosamente às sextas-feiras.",
-        "Quem ousava atravessar a pé a várzea nesses momentos corria o risco de ouvir o som perturbador das patas pesadas rasgando o barro. Os cães de São José enlouqueciam, latindo em desespero para o nada. A fera, com olhos amarelos faiscando no breu, não buscava caça, buscava aliviar o tormento de sua transformação correndo desvairada até o nascer do sol.",
-        "Mães trancavam as portas com trancas duplas e benzedeiras sussurravam orações antigas para proteger as casas. Mais do que um monstro, o lobisomem era a própria representação do medo do escuro, do indomável e dos segredos que a várzea engolia."
-      ],
-      analiseHistorica: "As lendas de lobisomens no Banhado exerciam uma função de controle social e sobrevivência, mantendo os desavisados longe dos perigos reais de se perder em uma várzea traiçoeira à noite.",
-      fontes: [
-        {
-          titulo: "O Lobisomem do Banhado",
-          autor: "Prof. Diego Del Passo",
-          ano: "2024",
-          tipo: "Crônica",
-          url: "https://professordiegodelpasso.blog/"
-        }
-      ]
+        "id": "lobisomem-banhado",
+        "titulo": "O lobisomem no quintal do Banhado",
+        "categoria": "Causo de família",
+        "badgeColor": "bg-indigo-600 text-white",
+        "imagem": "fotos_radar/lenda_lobisomem_banhado.jpg",
+        "lead": "Os cachorros latiam para o pé de ameixa. Na história contada pela avó de Diego Del Passo, havia alguma coisa rondando o quintal.",
+        "local": "Região do Banhado",
+        "epoca": "Relato familiar situado em 1972",
+        "relatoCompleto": [
+            "No início dos anos 1970, a baixada do <strong>Banhado</strong> era um mundo à parte do restante de São José dos Campos. Enquanto as avenidas centrais começavam a receber postes modernos e tráfego de automóveis, a encosta da várzea mantinha uma rotina quase exclusivamente rural. As famílias cultivavam roças de mandioca, cuidavam de hortas de couve, mantinham galinheiros nos fundos dos quintais e dependiam da luz fraca de lamparinas para clarear os cômodos de suas casas de madeira.",
+            "Foi nesse cenário, em uma noite especialmente fria do ano de <strong>1972</strong>, que um acontecimento tirou o sono da família do historiador e professor <strong>Diego Del Passo</strong>. Na casa onde seu pai passava a infância, o silêncio da madrugada foi subitamente rasgado por um coro violento de latidos. A cachorrada da casa, que costumava dormir tranquila sob o assoalho, corria de um lado para o outro no terreiro com os dentes arreganhados, rosnando na direção da copa densa de um velho pé de ameixa.",
+            "Um dos meninos da casa levantou da cama descalço e correu até a cozinha, querendo espiar pelas frestas da janela para descobrir se era ladrão roubando galinha ou cachorro do vizinho brigando. Antes de alcançar o caixilho, a mão firme de sua avó puxou-o de volta pelo braço. A mulher, criada na tradição das rezas sertanejas, reconheceu de imediato a natureza daquele alvoroço e murmurou que aquilo não era gente comum: tratava-se do <em>lobisomem</em>, a criatura que ela afirmava rondar as beiradas da serra nas noites de lua cheia.",
+            "Sem titubear, o avô pegou a espingarda carregada de chumbo grosso que ficava atrás da porta da sala e destrancou o ferrolho com cautela. A avó seguiu logo atrás, segurando um lampião de querosene fumegante com uma mão e desfiando as contas de um terço com a outra. Ao clarearem o terreiro de terra batida, o facho amarelado de luz revelou uma silhueta corpulenta, escura e encurvada junto ao tronco da árvore. A criatura respirava pesado, agitando os galhos baixos com um ruído seco de folha quebrada.",
+            {
+                "tipo": "quote",
+                "texto": "Minha avó puxou meu pai pela camisa e garantiu que aquilo não era bicho do mato nem ladrão. Ela conhecia o barulho e sabia que o lobisomem andava rondando a várzea.",
+                "fonte": "Crônica de memórias familiares de Diego Del Passo publicada no blog Nas Trilhas do Vale (2024)"
+            },
+            "A avó ergueu a voz em oração, fazendo o sinal da cruz no ar com o crucifixo de metal. Diante da ladainha e do clarão da lamparina, a figura escura soltou um resfolego abafado, saltou a cerca de arame farpado com agilidade surpreendente e sumiu mata adentro na escuridão da baixada, deixando para trás apenas os ganidos assustados dos cachorros e pegadas fundas na terra molhada.",
+            "Nas manhãs seguintes, o causo virou o assunto principal entre as comadres e os trabalhadores da encosta. As suspeitas do bairro logo recaíram sobre um morador que trabalhava no porto de areia do rio. Corria a conversa de que o homem era o sétimo filho homem de uma família sem os devidos sacramentos e que, em certas manhãs de sábado, aparecia nas vendas com arranhões recentes nas mãos e os olhos fundos de quem passou a noite sem pregar o olho. Um relato que <strong>Diego Del Passo</strong> registrou em sua crônica no projeto <em>Nas Trilhas do Vale</em>, mostrando como a geografia acidentada do Banhado foi terreno fértil para os mitos noturnos da cidade."
+        ],
+        "analiseHistorica": "O causo do lobisomem do Banhado preserva a oralidade dos antigos moradores que ocupavam a várzea antes da intensificação da urbanização. A crença no sétimo filho varão e o medo de criaturas noturnas misturam elementos do folclore ibérico tradicional com a vida de subsistência nas beiras de rios paulistas.",
+        "fontes": [
+            {
+                "titulo": "Lenda urbana: o lobisomem de S. José dos Campos",
+                "autor": "Diego Del Passo",
+                "ano": "26 jul. 2024",
+                "tipo": "Registro de lenda",
+                "url": "https://professordiegodelpasso.blog/2024/07/26/o-lobisomem-do-banhado/",
+                "nota": "O autor identifica a avó como narradora do causo e situa a lembrança de seu pai no Banhado.",
+                "localizador": "Sem paginação.",
+                "referencia": "DEL PASSO, Diego. Lenda urbana: o lobisomem de S. José dos Campos. Nas Trilhas do Vale, 26 jul. 2024."
+            }
+        ]
     },
     {
-      id: "minotauro-casablanca",
-      titulo: "O Sedutor de Patas Caprinas",
-      categoria: "Lenda Urbana dos Anos 90",
-      badgeColor: "bg-purple-600 text-white",
-      imagem: "fotos_radar/lenda_minotauro_casablanca.jpg",
-      lead: "O auge da vida noturna joseense nos anos 90 foi paralisado pelo pânico: um homem irresistível que deixava um rastro de enxofre e escondia cascos sob a calça elegante.",
-      local: "Casas Casablanca e Barcelona / Vila Adyana",
-      epoca: "Anos 1990",
-      relatoCompleto: [
-        "A Avenida São João pulsava intensamente nos anos 90. As danceterias Casablanca e Barcelona eram o coração da euforia jovem em São José dos Campos. Luzes estroboscópicas, música alta e fumaça de gelo seco criavam o ambiente perfeito para encontros furtivos. Mas numa noite fria, o encantamento virou pesadelo.",
-        "Um jovem alto, de beleza magnética, terno impecável e cheiro adocicado, entrou na pista de dança. Ele flertava com facilidade e convidou uma jovem deslumbrada para dançar. O ritmo era hipnótico. Mas, no calor do momento, a garota olhou para baixo. Em vez de sapatos de couro lustrados, havia dois pesados e escuros cascos de bode.",
-        "Um grito estridente cortou o som da música. Em desespero, os frequentadores viram o rapaz sorrir, um sorriso assustador que exalava um forte odor de enxofre. Em segundos, as luzes piscaram e ele sumiu completamente na névoa da máquina de fumaça, deixando para trás apenas o burburinho aterrorizado.",
-        "A história correu como pólvora pela cidade. Durante semanas, as boates ficaram vazias. Pais proibiram as filhas de sair e o 'Minotauro do Casablanca' tornou-se a lenda mais sussurrada e temida de toda uma geração. Teria sido histeria coletiva induzida pela bebida, ou o próprio diabo decidiu tirar uma noite de folga no Vale do Paraíba?"
-      ],
-      analiseHistorica: "Uma atualização urbana brilhante do mito secular do 'diabo na festa', servindo como um eco de moralidade e medo em meio à liberação da cultura clubber dos anos 1990.",
-      fontes: [
-        {
-          titulo: "Lenda Urbana: O Minotauro do Casablanca",
-          autor: "Prof. Diego Del Passo",
-          ano: "2024",
-          tipo: "Registro de Folclore",
-          url: "https://professordiegodelpasso.blog/"
-        }
-      ]
+        "id": "minotauro-casablanca",
+        "titulo": "O pé de bode na pista do Casablanca",
+        "categoria": "Lenda urbana",
+        "badgeColor": "bg-purple-600 text-white",
+        "imagem": "fotos_radar/lenda_minotauro_casablanca.jpg",
+        "lead": "O rapaz dançava como qualquer outro frequentador. O susto veio quando sua parceira olhou para os pés dele.",
+        "local": "Antigas casas noturnas Casablanca e Barcelona",
+        "epoca": "Anos 1990, segundo as versões publicadas",
+        "relatoCompleto": [
+            "A noite de São José dos Campos nos anos 1990 fervilhava ao ritmo das grandes casas noturnas. Entre os pontos de encontro mais disputados da juventude estavam o <strong>Casablanca</strong> e a boate <strong>Barcelona</strong>, templos da diversão noturna onde centenas de rapazes e moças se espremiam todo fim de semana sob globos espelhados, canhões de luz colorida e cortinas de fumaça de gelo seco.",
+            "Em uma dessas noites de casa cheia, chamou a atenção dos frequentadores a presença de um forasteiro impecavelmente vestido. O rapaz, alto, de cabelos escuros e sorriso galanteador, usava uma camisa social alinhada e calça de alfaiataria bem passada, cujo corte cobria com elegância a parte superior dos sapatos. Ele transitava pelo mezanino com desenvoltura e logo desceu para a pista, tirando para dançar algumas das jovens mais cortejadas do salão.",
+            "O rapaz dominava os passos com habilidade impressionante, girando no compasso das músicas sem demonstrar qualquer cansaço. No meio de uma virada mais rápida, contudo, ele pisou sem querer no pé de sua companheira de dança. A moça soltou um gemido de dor, perdeu o equilíbrio e abaixou-se na penumbra para verificar se havia quebrado o salto do sapato. Ao afastar a barra da calça do rapaz com a mão, deparou-se com uma imagem assustadora: por debaixo do tecido não havia pés nem sapatos, mas cascos negros, fendidos e peludos, idênticos aos de um bode.",
+            "O grito agudo da jovem cortou o som ensurdecedor dos alto-falantes e paralisou a pista. As pessoas mais próximas recuaram em pânico, abrindo uma clareira apressada ao redor do casal. Em questão de instantes, um cheiro acre e sufocante de enxofre começou a se espalhar pelo ambiente, provocando tosse e empurrões desesperados em direção às portas de emergência.",
+            {
+                "tipo": "quote",
+                "texto": "O rapaz dançava muito bem e era elegante, mas quando a moça olhou pro chão viu os cascos de bode por baixo da calça. Deu um estalo e ele sumiu no meio de uma fumaça com cheiro de enxofre.",
+                "fonte": "Registro da lenda urbana joseense recolhido pelo historiador Diego Del Passo (2024)"
+            },
+            "Antes que a equipe de seguranças pudesse intervir ou fechar os acessos da casa, as luzes da boate piscaram de forma descompassada, ouviu-se um estrondo seco na pista e o rapaz simplesmente desapareceu no ar. No local exato onde ele dançava, restou apenas uma névoa espessa e o cheiro queimado impregnado nas paredes e no carpete.",
+            "A história correu colégios, universidades e rodas de esquina da cidade, ganhando variações que oscilavam entre o <em>Casablanca</em> e o <em>Barcelona</em> e apelidos como <em>Minotauro</em> ou homem com <em>pé de bode</em>. Como ressaltou a jornalista <strong>Paola Domingues</strong> em reportagem cultural para a revista <strong>Entrementes</strong>, o episódio virou um clássico do anedotário joseense, celebrado em letras bem-humoradas pela banda musical <strong>Folclore Joseense Desbocado</strong>, demonstrando como uma narrativa ancestral sobre o diabo no baile foi assimilada pela noite urbana moderna."
+        ],
+        "fontes": [
+            {
+                "titulo": "Lenda urbana: o Minotauro de São José dos Campos",
+                "autor": "Diego Del Passo",
+                "ano": "24 jul. 2024",
+                "tipo": "Registro de lenda",
+                "url": "https://professordiegodelpasso.blog/2024/07/24/lenda-urbana-o-minotauro-do-casablanca/",
+                "nota": "Versão do encontro na pista e das variações Casablanca/Barcelona.",
+                "localizador": "Sem paginação.",
+                "referencia": "DEL PASSO, Diego. Lenda urbana: o Minotauro de São José dos Campos. Nas Trilhas do Vale, 24 jul. 2024."
+            },
+            {
+                "titulo": "Os excêntricos causos de São José dos Campos",
+                "autor": "Paola Domingues",
+                "ano": "19 jan. 2023",
+                "tipo": "Reportagem cultural",
+                "url": "https://entrementes.com.br/os-excentricos-causos-de-sao-jose-dos-campos/",
+                "nota": "Relaciona os causos locais ao trabalho da banda Folclore Joseense Desbocado.",
+                "localizador": "Sem paginação.",
+                "referencia": "DOMINGUES, Paola. Os excêntricos causos de São José dos Campos. Entrementes, 19 jan. 2023."
+            }
+        ]
     },
     {
-      id: "morto-matriz",
-      titulo: "Os Guardiões do Subsolo",
-      categoria: "Memória Colonial & Assombração",
-      badgeColor: "bg-slate-700 text-white",
-      imagem: "fotos_radar/lenda_morto_matriz.jpg",
-      lead: "A Igreja Matriz de São José esconde segredos sob suas fundações. Aos que cruzam a Praça Padre João de madrugada, os vultos dos antigos fundadores ainda exigem respeito.",
-      local: "Praça Padre João · Centro",
-      epoca: "Séculos XVIII e XIX",
-      relatoCompleto: [
-        "Antes do asfalto, antes do progresso, os homens mais influentes de São José dos Campos tinham um privilégio final: serem enterrados sob o assoalho de madeira da primeira capela, bem no centro da cidade. Uma dessas figuras era Miguel de Araújo Ferraz, homem de pulso firme e um dos responsáveis pela fundação da vila em 1767.",
-        "Mas a morte, ao que parece, não silenciou sua autoridade. Quando a antiga igreja começou a se deteriorar e, mais tarde, precisou ser demolida e reconstruída, o repouso dos mortos foi perturbado. Dizem que, desde então, a alma de Miguel e de outros pioneiros nunca mais encontrou paz.",
-        "Zeladores da Matriz e fiéis madrugadores relatam há décadas fenômenos de arrepiar: bancos de madeira pesada rangendo como se alguém deitasse neles, sussurros ininteligíveis ecoando pelo altar vazio e portas maciças batendo violentamente sem nenhum sopro de vento.",
-        "À noite, se você passar sozinho pela Praça Padre João, não olhe muito tempo para as torres da Matriz. Quem sabe, um vulto trajado com as roupas escuras do Brasil Colônia pode estar, do alto, vigiando as terras que ele nunca aceitou abandonar."
-      ],
-      analiseHistorica: "O mito encapsula o trauma da modernização urbana. A demolição da antiga igreja e o fim dos sepultamentos internos geraram uma sensação de violação do sagrado, mantida viva em forma de assombração.",
-      fontes: [
-        {
-          titulo: "Cronologia da Matriz de São José",
-          autor: "Pró-Memória",
-          ano: "Acervo",
-          tipo: "Documentação",
-          url: "https://www.camarasjc.sp.gov.br/"
-        }
-      ]
+        "id": "morto-matriz",
+        "titulo": "O morto que marcou a parede da igreja",
+        "categoria": "Lenda de sepultamento",
+        "badgeColor": "bg-slate-700 text-white",
+        "imagem": "fotos_radar/lenda_morto_matriz.jpg",
+        "lead": "Depois da transferência de uma sepultura, uma mancha teria desenhado o corpo do morto na parede da igreja.",
+        "local": "Antiga Capela do Rosário e Igreja de São Benedito, Centro",
+        "epoca": "Narrativa situada no século XIX",
+        "relatoCompleto": [
+            "Durante grande parte do século XIX, antes que as posturas municipais e as regras de higiene pública determinassem a criação de cemitérios a céu aberto longe do perímetro urbano, o costume colonial no Vale do Paraíba mandava que as pessoas fossem sepultadas dentro das próprias igrejas. Cidadãos de famílias abastadas, militares de patente e membros das irmandades religiosas garantiam o descanso eterno sob as tábuas do piso ou encaixados nas espessas paredes de taipa de pilão dos templos centrais de São José dos Campos.",
+            "Quando as reformas urbanísticas e as ordens eclesiásticas exigiram a desocupação desses espaços sagrados, equipes de pedreiros e coveiros foram encarregadas de realizar a trasladação solene das ossadas que repousavam na antiga <strong>Capela do Rosário</strong> para o novo carneiro construído na <strong>Igreja de São Benedito</strong>.",
+            "Ao removerem a laje que cobria o túmulo do capitão <strong>Miguel de Araújo Ferraz</strong>, figura de prestígio na vila provincial, os operários deram um passo atrás, tomados de espanto. Em vez do esqueleto desarticulado e dos tecidos consumidos pelos anos de enterro, encontraram o corpo do militar completamente preservado. A pele mantinha a textura intacta, as feições do rosto pareciam as de quem acabara de adormecer e as vestes funerárias conservavam as costuras originais, sem qualquer sinal visível de putrefação.",
+            "A notícia do corpo incorrupto correu veloz pelas ruas de chão batido do Centro, atraindo dezenas de curiosos e devotos que viram no acontecimento uma prova irrefutável de santidade. O caixão foi transladado com orações fervorosas para o interior da Igreja de São Benedito. Semanas após o novo sepultamento, porém, um mistério ainda maior começou a inquietar os fiéis que assistiam às missas matinais.",
+            {
+                "tipo": "quote",
+                "texto": "Quando desenterraram o capitão Araújo Ferraz, o corpo estava perfeito como se estivesse vivo. Meses depois, apareceu na parede da igreja uma mancha com o formato exato do defunto deitado.",
+                "fonte": "Registro da tradição oral recolhido pelo historiador Diego Del Passo na série Lendas de São José dos Campos (2026)"
+            },
+            "Uma mancha escura de umidade começou a se desenhar em uma das paredes de taipa do templo, reproduzindo com fidelidade espantosa a silhueta horizontal de um cadáver estendido. Moradores das imediações passaram a acender velas em frente ao reboco manchado, ajoelhando-se em romaria espontânea para pedir favores e orar pela alma do capitão. A movimentação diária provocou tanto incômodo à influente família Araújo Ferraz que seus herdeiros exigiram a raspagem profunda da massa e a repintura imediata da parede para conter as vigílias.",
+            "O cenário material dessas primeiras capelas e o contexto arqueológico dos sepultamentos coloniais foram explorados no documentário <em>Igrejas históricas</em>, produzido pela <strong>TV Câmara de São José dos Campos</strong>. Na produção, historiadores locais e o arqueólogo <strong>Wagner Bornal</strong> explicam como a estrutura de taipa de pilão e os antigos ritos funerários alimentavam o imaginário popular joseense, transformando infiltrações e fenômenos biológicos de conservação cadavérica em causos que atravessaram gerações."
+        ],
+        "fontes": [
+            {
+                "titulo": "Lendas de São José dos Campos",
+                "autor": "Diego Del Passo",
+                "ano": "28 set. 2026",
+                "tipo": "Registro de lenda",
+                "url": "https://professordiegodelpasso.blog/2026/09/28/lendas-de-sao-jose-dos-campos/",
+                "nota": "Seção “Lendas antigas de defuntos”, que conta a transferência da sepultura e a marca na parede.",
+                "localizador": "Sem paginação.",
+                "referencia": "DEL PASSO, Diego. Lendas de São José dos Campos. Nas Trilhas do Vale, 28 set. 2026."
+            },
+            {
+                "titulo": "Igrejas históricas | câmara.doc",
+                "autor": "TV Câmara São José dos Campos",
+                "ano": "[s.d.]",
+                "tipo": "Vídeo no YouTube",
+                "url": "https://www.youtube.com/watch?v=nsZxRIo4V6s",
+                "nota": "O documentário reúne historiadores e um arqueólogo. A apresentação oficial informa que ele aborda a lenda do túnel.",
+                "localizador": "Vídeo completo.",
+                "referencia": "TV CÂMARA SÃO JOSÉ DOS CAMPOS. Igrejas históricas | câmara.doc. São José dos Campos: TV Câmara, [s.d.]. 1 vídeo. Publicado no YouTube."
+            },
+            {
+                "titulo": "Documentários da TV Câmara mostram patrimônio, arquitetura, visitas ilustres e futebol amador",
+                "autor": "Câmara Municipal de São José dos Campos",
+                "ano": "12 jan. 2024",
+                "tipo": "Apresentação do documentário",
+                "url": "https://www.camarasjc.sp.gov.br/noticias/8423/documentarios-da-tv-camara-mostram-patrimonio-arquitetura-visitas-ilustres-e-futebol-amador",
+                "nota": "Identifica os participantes de Igrejas históricas e o comentário do arqueólogo Wagner Bornal sobre o túnel.",
+                "localizador": "Sem paginação.",
+                "referencia": "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Documentários da TV Câmara mostram patrimônio, arquitetura, visitas ilustres e futebol amador. [S. l.], 12 jan. 2024."
+            }
+        ]
     },
     {
-      id: "ovnis-1986",
-      titulo: "A Noite que as Estrelas Caíram",
-      categoria: "Mistério Aeroespacial",
-      badgeColor: "bg-cyan-600 text-white",
-      imagem: "fotos_radar/lenda_ovnis_1986.jpg",
-      lead: "A caçada épica entre caças militares e luzes impossíveis sobre o espaço aéreo de São José dos Campos. Um evento real que se transformou na maior lenda ufológica do Brasil.",
-      local: "DCTA / Espaço Aéreo Joseense",
-      epoca: "19 de maio de 1986",
-      relatoCompleto: [
-        "A noite de 19 de maio de 1986 não teve fantasmas ou feitiços, mas o que aconteceu no céu de São José dos Campos foi igualmente aterrador e infinitamente mais real. Os controladores de voo do Centro Técnico Aeroespacial (CTA) arregalaram os olhos quando dezenas de 'blips' dispararam nos monitores do radar. Não eram aviões comerciais; não eram balões.",
-        "As luzes intensas, descritas como de um brilho de estourar a retina, brincavam no céu noturno com uma agilidade que desafiava a gravidade e a própria física. Caças supersônicos F-5E Tiger II e Mirage decolaram às pressas das bases militares paulistas para interceptar a invasão do espaço aéreo. Os pilotos, suando frio dentro de seus cockpits, relatavam a presença das luzes acompanhando suas aeronaves, acelerando de zero a milhares de quilômetros por hora em um piscar de olhos.",
-        "Em São José dos Campos, dezenas de moradores correram para os telhados e quintais. O céu estava limpo, e todos puderam assistir a um balé surreal de esferas vermelhas, brancas e azuis cruzando o firmamento, seguidas pelo estrondo ensurdecedor dos caças da FAB tentando, em vão, alcançá-las.",
-        "Até hoje, o Ministério da Aeronáutica confirma os registros dos radares e os relatos dos pilotos, desclassificando dezenas de páginas confidenciais. 'A Noite Oficial dos OVNIs' provou para muitos joseenses que o desconhecido não mora apenas no escuro do Banhado, mas também na vastidão inatingível do espaço sideral."
-      ],
-      analiseHistorica: "A 'Noite dos OVNIs' consolidou o imaginário de São José dos Campos como capital aeroespacial, fundindo o contexto militar avançado da região com os grandes mistérios da ufologia moderna.",
-      fontes: [
-        {
-          titulo: "Relatório da Noite dos OVNIs",
-          autor: "Comando da Aeronáutica / Arquivo Nacional",
-          ano: "1986",
-          tipo: "Documento Oficial",
-          url: "https://www.gov.br/arquivonacional/"
-        }
-      ]
+        "id": "ovnis-1986",
+        "titulo": "19 de maio de 1986: a noite dos OVNIs sobre São José",
+        "categoria": "Ocorrência documentada e imaginário ufológico",
+        "badgeColor": "bg-cyan-600 text-white",
+        "imagem": "fotos_radar/lenda_ovnis_1986.jpg",
+        "lead": "Luzes não identificadas mobilizaram controladores e pilotos. Os registros daquela noite chegaram ao Arquivo Nacional.",
+        "local": "São José dos Campos e outras cidades do Sudeste",
+        "epoca": "19 de maio de 1986",
+        "relatoCompleto": [
+            "A noite de <strong>19 de maio de 1986</strong> transcorria em clima de rotina no Centro Técnico Aeroespacial e na torre de controle do aeroporto de São José dos Campos. O céu de outono estava límpido e estrelado sobre o Vale do Paraíba, sem previsão de chuvas ou turbulências na rota das aeronaves civis. Pouco depois das oito da noite, contudo, os operadores de radar do controle aéreo começaram a registrar pontos luminosos e ecos anômalos que se deslocavam em padrões completamente desconhecidos.",
+            "Não eram aviões comerciais nem helicópteros de patrulha. As telas de radar acusavam a presença de múltiplos objetos que permaneciam pairando estáticos sobre a serra e, no instante seguinte, aceleravam em linha reta atingindo velocidades calculadas em mais de quinze vezes a velocidade do som, sem emitir o estrondo sônico característico da quebra da barreira da velocidade.",
+            "Diante do risco direto à segurança da navegação e ao espaço aéreo sobre o polo tecnológico e bélico da cidade, o Comando de Defesa Aérea da Força Aérea Brasileira declarou estado de prontidão máxima. Caças supersônicos Mirage III e caças F-5 decolaram em disparada das bases aéreas de Santa Cruz, no Rio de Janeiro, e de Anápolis, em Goiás, com a missão de fazer contato visual e interceptar os invasores.",
+            "No céu de São José dos Campos, os pilotos militares perseguiram esferas intensamente brilhantes que alternavam entre tonalidades de vermelho, verde e branco fosforescente. Conforme os jatos tentavam aproximação para travar os radares de bordo, os objetos realizavam curvas em ângulo reto impossíveis para qualquer aeronave terrestre, contornando os caças e passando a segui-los pela retaguarda.",
+            {
+                "tipo": "quote",
+                "texto": "Os radares acusavam 21 objetos luminosos sobre o espaço aéreo brasileiro. A FAB deslocou caças para interceptar os alvos, que realizavam manobras a velocidades hipersônicas que desafiam o conhecimento aeroespacial.",
+                "fonte": "Declaração oficial do brigadeiro Moreira Lima, ministro da Aeronáutica, noticiada pelo Correio Braziliense em 22 de maio de 1986"
+            },
+            "O episódio ganhou proporções históricas tão incontestáveis que o próprio ministro da Aeronáutica, <strong>brigadeiro Moreira Lima</strong>, convocou os jornalistas para uma entrevista coletiva histórica transmitida em rede nacional, confirmando a detecção e perseguição militar de vinte e um objetos voadores não identificados.",
+            "Três décadas mais tarde, os relatórios sigilosos da operação foram desclassificados e transferidos para a guarda pública do <strong>Arquivo Nacional</strong>, sob o título oficial da <em>Noite Oficial dos OVNIs</em>. Nos depoimentos gravados dos pilotos de caça, preservados no acervo federal, ecoam a frieza técnica e o espanto incontido de militares profissionais que perseguiram o desconhecido nos céus de São José dos Campos."
+        ],
+        "fontes": [
+            {
+                "titulo": "Série Relatos Extraterrestres: Noite Oficial dos OVNIs no Brasil",
+                "autor": "Arquivo Nacional",
+                "ano": "15 ago. 2017",
+                "tipo": "Acervo oficial",
+                "url": "https://www.gov.br/arquivonacional/pt-br/canais_atendimento/imprensa/noticias/serie-relatos-extraterrestres/",
+                "nota": "Apresenta o episódio e identifica o documento BR_DFANBSB_ARX_256_p0005_0005.",
+                "localizador": "Sem paginação.",
+                "referencia": "ARQUIVO NACIONAL. Série Relatos Extraterrestres: Noite Oficial dos OVNIs no Brasil. [S. l.], 15 ago. 2017."
+            },
+            {
+                "titulo": "Aviões da FAB caçam OVNIs e acabam caçados",
+                "autor": "Correio Braziliense",
+                "ano": "22 maio 1986",
+                "tipo": "Jornal preservado em acervo",
+                "url": "https://imagem.sian.an.gov.br/acervo/derivadas/BR_DFANBSB_ARX/0/0/0257/BR_DFANBSB_ARX_0_0_0257_d0002de0003.pdf#page=7",
+                "nota": "Notícia da época que cita São José dos Campos.",
+                "localizador": "p. 9 do jornal; página 7 do PDF.",
+                "referencia": "AVIÕES da FAB caçam OVNIs e acabam caçados. Correio Braziliense, Brasília, 22 maio 1986, p. 9. Reprodução preservada pelo Arquivo Nacional."
+            }
+        ]
     },
     {
-      id: "assombracoes-vale",
-      titulo: "Os Espectros do Antigo Vale",
-      categoria: "Contos de Arrepiar",
-      badgeColor: "bg-emerald-800 text-white",
-      imagem: "fotos_radar/lenda_assombracoes_vale.jpg",
-      lead: "Gritos estrangulados nas estradas e vultos sem rosto nas antigas sedes de fazendas. O Vale do Paraíba profundo sussurra tragédias de tempos esquecidos.",
-      local: "Fazendas Históricas e Caminhos Rurais",
-      epoca: "Ciclo do Café (Século XIX)",
-      relatoCompleto: [
-        "A riqueza esmagadora das antigas fazendas de café no Vale do Paraíba não foi construída apenas com ouro e grãos, mas com sangue, suor e lágrimas indizíveis. É dessa época brutal que nascem os relatos das assombrações rurais mais temidas da região e de seus antigos caminhos.",
-        "Dizem que nos imponentes casarões o passado ainda ecoa. Portas de mogno maciço batem sozinhas, trancadas por dentro, e durante as madrugadas silenciosas, tropeiros juravam ter ouvido o arrastar fantasmagórico de correntes vindo das ruínas das velhas senzalas.",
-        "Nas estradas sinuosas, lendas como a da 'Noiva de Branco' amedrontavam gerações. Vista vagando em curvas fechadas da velha estrada, a alma sem rosto estaria sempre procurando por uma carruagem que tombou no dia do seu casamento. Até hoje, caminhoneiros mais velhos relatam sentir um frio sepulcral ao passar por certos trechos isolados de madrugada.",
-        "Essas almas perdidas são a dívida não paga do passado escravocrata e rural. Vagando pelas madrugadas úmidas, elas relembram que a terra pode perdoar, mas a história não esquece os sofrimentos que nela foram plantados."
-      ],
-      analiseHistorica: "Esses contos traduzem o peso psicológico e a culpa histórica associados ao regime escravocrata do século XIX e às mortes trágicas nas antigas estradas isoladas do Vale do Paraíba.",
-      fontes: [
-        {
-          titulo: "Mitos e Lendas do Vale do Paraíba",
-          autor: "Pesquisa Oral",
-          ano: "S/D",
-          tipo: "Folclore Regional",
-          url: "#"
-        }
-      ]
+        "id": "assombracoes-vale",
+        "titulo": "O túnel secreto sob as igrejas do Centro",
+        "categoria": "Lenda urbana",
+        "badgeColor": "bg-emerald-800 text-white",
+        "imagem": "fotos_radar/lenda_tunel_centro.jpg",
+        "lead": "Uma passagem escondida ligaria as igrejas ao Banhado. A história atravessou gerações e chegou a um documentário sobre o patrimônio da cidade.",
+        "local": "Centro e Banhado",
+        "epoca": "Tradição sem data de origem confirmada",
+        "relatoCompleto": [
+            "Entre os moradores que viram a vila de São José dos Campos transformar-se na maior cidade do Vale do Paraíba, poucas narrativas despertam tanta curiosidade e imaginação quanto a certeza de que uma cidade subterrânea e secreta corre sob os paralelepípedos do centro histórico.",
+            "De acordo com o causo transmitido por gerações de boca em boca, existiria um longo túnel colonial escavado à mão em taipa e arcos de alvenaria. Essa passagem subterrânea ligaria em linha reta o subsolo da <strong>Igreja Matriz de São José</strong> à <strong>Igreja de São Benedito</strong>, estendendo-se por centenas de metros até encontrar uma saída oculta entre as bananeiras e valas da várzea do <strong>Banhado</strong>.",
+            "As explicações populares sobre quem cavou a galeria e por que razão ela foi construída variam conforme as lembranças dos mais velhos. Uns afirmavam que o caminho subterrâneo servira de rota secreta de fuga para padres jesuítas e autoridades civis durante levantes políticos e rebeliões imperiais; outros garantiam que a passagem fora criada para permitir o trânsito discreto de freiras e membros do clero sem que precisassem ser vistos pela multidão que frequentava a praça.",
+            "O causo ganhou tanta força ao longo das décadas que qualquer obra de saneamento na Rua XV de Novembro ou na Praça Afonso Pena que expusesse um arco de tijolos antigos ou uma fossa desmoronada atraía imediatamente vizinhos convictos de que a boca do túnel havia sido finalmente encontrada.",
+            {
+                "tipo": "quote",
+                "texto": "Antigos moradores e pedreiros juravam que existia uma galeria ligando a Matriz até o Banhado. A lenda popular fala em rota de fuga, mas as escavações e a arqueologia mostram que eram antigos poços e porões de taipa.",
+                "fonte": "Análise do documentário Igrejas históricas com o arqueólogo Wagner Bornal (TV Câmara São José dos Campos)"
+            },
+            "O tema tornou-se objeto de apuração aprofundada no documentário especial <em>Igrejas históricas</em>, produzido pela <strong>TV Câmara de São José dos Campos</strong>. Na produção, historiadores do Núcleo Pró-Memória e o arqueólogo <strong>Wagner Bornal</strong> analisam a procedência da lenda, explicando que vistorias estruturais e prospecções arqueológicas no quadrilátero central nunca detectaram uma galeria subterrânea contínua com tal extensão.",
+            "Segundo os especialistas, o que o povo encontrava no passado eram na verdade antigos poços de captação de água pluvial, porões de ventilação para casas coloniais de taipa de pilão ou valas rudimentares de drenagem. Ainda assim, como constatou o historiador <strong>Diego Del Passo</strong> em seus registros orais, a crença na passagem secreta teima em permanecer viva nas conversas do Centro, provando que o fascínio pelo mistério quase sempre fala mais alto que as plantas arquitetônicas."
+        ],
+        "fontes": [
+            {
+                "titulo": "Igrejas históricas | câmara.doc",
+                "autor": "TV Câmara São José dos Campos",
+                "ano": "[s.d.]",
+                "tipo": "Vídeo no YouTube",
+                "url": "https://www.youtube.com/watch?v=nsZxRIo4V6s",
+                "nota": "O documentário reúne historiadores e um arqueólogo. A apresentação oficial informa que ele aborda a lenda do túnel.",
+                "localizador": "Vídeo completo.",
+                "referencia": "TV CÂMARA SÃO JOSÉ DOS CAMPOS. Igrejas históricas | câmara.doc. São José dos Campos: TV Câmara, [s.d.]. 1 vídeo. Publicado no YouTube."
+            },
+            {
+                "titulo": "Documentários da TV Câmara mostram patrimônio, arquitetura, visitas ilustres e futebol amador",
+                "autor": "Câmara Municipal de São José dos Campos",
+                "ano": "12 jan. 2024",
+                "tipo": "Apresentação do documentário",
+                "url": "https://www.camarasjc.sp.gov.br/noticias/8423/documentarios-da-tv-camara-mostram-patrimonio-arquitetura-visitas-ilustres-e-futebol-amador",
+                "nota": "Identifica os participantes de Igrejas históricas e o comentário do arqueólogo Wagner Bornal sobre o túnel.",
+                "localizador": "Sem paginação.",
+                "referencia": "CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Documentários da TV Câmara mostram patrimônio, arquitetura, visitas ilustres e futebol amador. [S. l.], 12 jan. 2024."
+            },
+            {
+                "titulo": "Lendas de São José dos Campos",
+                "autor": "Diego Del Passo",
+                "ano": "28 set. 2026",
+                "tipo": "Registro de lenda",
+                "url": "https://professordiegodelpasso.blog/2026/09/28/lendas-de-sao-jose-dos-campos/",
+                "nota": "Seção “O túnel secreto”: versão popular do percurso.",
+                "localizador": "Sem paginação.",
+                "referencia": "DEL PASSO, Diego. Lendas de São José dos Campos. Nas Trilhas do Vale, 28 set. 2026."
+            }
+        ]
     },
     {
-      id: "homem-infinito",
-      titulo: "O Andarilho do Fim dos Tempos",
-      categoria: "Mito Urbano",
-      badgeColor: "bg-blue-800 text-white",
-      imagem: "fotos_radar/lenda_homem_infinito.jpg",
-      lead: "Uma lenda poética de um homem condenado a caminhar pelos trilhos do trem até o fim do mundo, medindo o tamanho da eternidade com seus próprios passos.",
-      local: "Ferrovia Central do Brasil / Trilhos de Eugênio de Melo",
-      epoca: "Início do Século XX",
-      relatoCompleto: [
-        "Margeando os velhos trilhos enferrujados de Eugênio de Melo, uma lenda melancólica perdura entre as avós da Zona Leste. O Homem Infinito não é um monstro nem um espírito maligno; ele é a própria personificação da solidão e do tempo.",
-        "Conta-se que ele era um jovem engenheiro obcecado por criar a locomotiva perfeita que nunca parasse de andar. Em sua ambição desmedida, ele prometeu a sua alma em troca de um motor perpétuo, mas acabou ele próprio amaldiçoado: tornou-se imortal, mas condenado a nunca mais poder dormir ou parar de caminhar.",
-        "Muitos juram tê-lo visto de relance durante temporais violentos, caminhando sobre os dormentes na calada da noite. Ele usa um casaco desbotado e pesado, o rosto sempre encoberto pelas sombras da aba de um chapéu esfarrapado. Não fala, não olha, apenas segue com passos rítmicos em direção a um destino que nunca chega.",
-        "Crianças curiosas que tentaram segui-lo relatam que, não importa o quão rápido corressem, a distância entre elas e o homem permanecia sempre a mesma. Ele caminha pelo Vale, uma testemunha imortal do mundo que muda ao seu redor, enquanto ele permanece para sempre prisioneiro de sua própria ambição."
-      ],
-      analiseHistorica: "O 'Homem Infinito' simboliza a estranheza da população caipira e interiorana perante o trem e o conceito de viagem intermitente, materializando a industrialização e a passagem do tempo como uma caminhada implacável.",
-      fontes: [
-        {
-          titulo: "Folclore das Ferrovias",
-          autor: "Círculo de Histórias Orais",
-          ano: "S/D",
-          tipo: "Relato Popular",
-          url: "#"
-        }
-      ]
+        "id": "homem-infinito",
+        "titulo": "O Homem Infinito e as esquinas da cidade",
+        "categoria": "Personagem do imaginário local",
+        "badgeColor": "bg-blue-800 text-white",
+        "imagem": "fotos_radar/lenda_homem_infinito.jpg",
+        "lead": "O mesmo andarilho seria visto em lugares diferentes ao mesmo tempo. Dessa impossibilidade nasceu o apelido.",
+        "local": "Ruas de São José dos Campos",
+        "epoca": "Lenda urbana contemporânea",
+        "relatoCompleto": [
+            "Em uma metrópole que se expandiu em ritmo acelerado como São José dos Campos, cercada por pontilhões, anéis viários e trânsito intenso de operários e engenheiros, a presença de andarilhos solitários costuma ser ignorada pelos motoristas através dos vidros fechados dos carros.",
+            "Entre as figuras que cruzavam as calçadas da cidade nos últimos anos, no entanto, uma começou a despertar conversas curiosas e desconcertantes. Tratava-se de um senhor franzino, de óculos de armação grossa, roupas invariavelmente gastas pelo sol e uma pochete surrada presa à cintura, que caminhava com passos decididos e cabeça erguida pelas ruas de maior movimento.",
+            "O mistério não estava no seu figurino, mas na sua pontualidade inexplicável. Comerciantes do calçadão juravam que ele havia passado a pé pela <strong>Praça Afonso Pena</strong> exatamente às duas horas da tarde. No mesmo instante, moradores do longínquo <strong>Jardim Satélite</strong> ou trabalhadores na Avenida Cassiopeia afirmavam com certeza idêntica que o mesmo homem cruzara o canteiro central do bairro, a quilômetros de distância e sem que houvesse tomado qualquer ônibus ou transporte motorizado.",
+            "Dessa aparente impossibilidade física nasceu a alcunha de <em>Homem Infinito</em>, chamado também por outros de <em>Peregrino</em> ou <em>Ventania</em>. A lenda logo ganhou desdobramentos no imaginário dos bairros: os mais místicos falavam em dons raros de bilocação, fenômeno espiritual atribuído a santos franciscanos que permite a presença simultânea em dois locais distintos; os mais temerosos temiam cruzar seu olhar, acreditando que a figura seria um duplo fantasmagórico que pressagiava acidentes.",
+            {
+                "tipo": "quote",
+                "texto": "Alguém jura que viu o homem no Centro e outro garante que ele estava no Satélite no mesmo minuto. O Homem Infinito virou uma lenda urbana contemporânea que os moradores adoram recontar.",
+                "fonte": "Registro de causos urbanos publicado pelo professor Diego Del Passo no blog Nas Trilhas do Vale (2020)"
+            },
+            "A figura acabou adotada como ícone da cultura alternativa e poética joseense. Conforme reportou a jornalista <strong>Paola Domingues</strong> na revista cultural <strong>Entrementes</strong>, causos em torno do personagem ganharam status de patrimônio afetivo da cidade, inspirando composições bem-humoradas da banda <strong>Folclore Joseense Desbocado</strong>.",
+            "Mais do que um enigma físico ou científico, a história do <em>Homem Infinito</em> reflete o sentimento de estranhamento da vida moderna: numa cidade onde todo mundo corre apressado dentro de veículos de metal, quem insiste em andar a pé pelas esquinas acaba ganhando a aura mágica de quem desafia as fronteiras do tempo e do espaço."
+        ],
+        "fontes": [
+            {
+                "titulo": "Mistérios de São José dos Campos (Parte 2)",
+                "autor": "Diego Del Passo",
+                "ano": "7 jul. 2020",
+                "tipo": "Registro de lenda",
+                "url": "https://professordiegodelpasso.blog/2020/07/07/os-maiores-misterios-de-sao-jose-dos-campos-parte-2-2/",
+                "nota": "Seção “O Homem Infinito”, com os apelidos e as versões sobre as aparições.",
+                "localizador": "Sem paginação.",
+                "referencia": "DEL PASSO, Diego. Mistérios de São José dos Campos (Parte 2). Nas Trilhas do Vale, 7 jul. 2020."
+            },
+            {
+                "titulo": "Os excêntricos causos de São José dos Campos",
+                "autor": "Paola Domingues",
+                "ano": "19 jan. 2023",
+                "tipo": "Reportagem cultural",
+                "url": "https://entrementes.com.br/os-excentricos-causos-de-sao-jose-dos-campos/",
+                "nota": "Contexto sobre a banda e sua relação com o folclore local; não comprova os poderes atribuídos ao personagem.",
+                "localizador": "Sem paginação.",
+                "referencia": "DOMINGUES, Paola. Os excêntricos causos de São José dos Campos. Entrementes, 19 jan. 2023."
+            }
+        ]
     }
-  ];
+];
 
   function renderLendasGrid() {
     const page = document.getElementById('historia-lendas-page-content');
@@ -3012,6 +4096,21 @@
     if (modalContent) modalContent.innerHTML = cardsHtml;
   }
 
+  function fonteLendaHtml(f) {
+    const url = escapeHtml(safeUrl(f.url));
+    const video = /vídeo/i.test(f.tipo);
+    return `<div class="min-w-0 pt-4 pb-2 space-y-1.5">
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded">${escapeHtml(f.tipo)}</span>
+        ${f.localizador ? `<span class="text-[11px] font-mono text-slate-400">${escapeHtml(f.localizador)}</span>` : ''}
+      </div>
+      <p class="text-xs sm:text-sm font-medium leading-relaxed text-slate-800">${escapeHtml(f.referencia)}</p>
+      ${f.nota ? `<p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(f.nota)}</p>` : ''}
+      <p class="text-xs text-slate-500 leading-relaxed">Disponível em: <a href="${url}" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 text-brand-800 break-all font-mono">${escapeHtml(f.url)}</a></p>
+      ${video ? `<a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-block pt-1 text-xs font-bold underline text-brand-800">${/youtube/i.test(f.tipo) ? 'Assistir no YouTube' : 'Assistir à reportagem'}</a>` : ''}
+    </div>`;
+  }
+
   function openLendaDetalhe(lendaId) {
     const lenda = LENDAS_CATALOGO.find(l => l.id === lendaId);
     if (!lenda) return;
@@ -3025,7 +4124,7 @@
       <div class="space-y-6 animate-in fade-in duration-300">
         
         <!-- Botão Voltar -->
-        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div class="flex items-center justify-start pb-3 border-b border-slate-200">
           <button 
             type="button" 
             onclick="window.closeLendaDetalhe()" 
@@ -3034,139 +4133,70 @@
             <i class="fa-solid fa-arrow-left"></i>
             <span>Voltar para todas as Lendas</span>
           </button>
-          <span class="text-xs font-mono font-bold text-slate-500">${escapeHtml(lenda.local)}</span>
         </div>
 
-        <!-- Banner com Ilustração em Carvão em Destaque -->
-        <div class="relative rounded-3xl overflow-hidden bg-slate-900 shadow-md border border-slate-200">
-          ${lenda.imagem ? `
-            <div class="w-full h-80 sm:h-96 relative">
-              <img 
-                src="${lenda.imagem}" 
-                alt="${escapeHtml(lenda.titulo)}" 
-                class="w-full h-full object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-              <div class="absolute bottom-6 left-6 right-6 text-white space-y-2">
-                <h3 class="text-2xl sm:text-4xl font-black text-white leading-tight drop-shadow-md">
-                  ${escapeHtml(lenda.titulo)}
-                </h3>
-                <p class="text-xs sm:text-sm text-slate-300 font-medium">
-                  ${escapeHtml(lenda.local)} · ${escapeHtml(lenda.epoca)}
-                </p>
-              </div>
-            </div>
-          ` : `
-            <div class="p-8 sm:p-10 space-y-2 text-white bg-gradient-to-br from-slate-900 to-[#0f2f52]">
-              <h3 class="text-3xl font-black text-white">${escapeHtml(lenda.titulo)}</h3>
-              <p class="text-sm text-slate-300">${escapeHtml(lenda.local)}</p>
-            </div>
-          `}
-        </div>
-
-        <!-- Corpo do Relato e Fontes: 2 Colunas -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Container Editorial Alinhado com Respiro Lateral (Afastado da Sidebar) -->
+        <div class="max-w-4xl px-4 sm:px-8 space-y-8">
           
-          <!-- Coluna Principal (8 colunas): O Relato Histórico Completo -->
-          <div class="lg:col-span-8 space-y-6">
-            <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-4">
-              <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-feather-pointed text-amber-700 text-sm"></i>
-                <h4 class="text-sm font-black uppercase tracking-wider text-slate-900">
-                  O Relato da Tradição Oral & Memória Histórica
-                </h4>
-              </div>
-              
-              <div class="space-y-3.5 text-sm sm:text-base text-slate-700 leading-relaxed font-serif">
-                ${lenda.relatoCompleto.map(p => `<p class="indent-4">${escapeHtml(p)}</p>`).join('')}
-              </div>
-            </div>
+          <!-- Cabeçalho Editorial Estilo Reportagem/Blog Cultural -->
+          <header class="pb-6 border-b border-slate-200 space-y-3">
+            <h2 class="text-2xl sm:text-4xl font-serif font-black text-slate-900 tracking-tight leading-tight">
+              ${escapeHtml(lenda.titulo)}
+            </h2>
 
-            <!-- Dimensão Antropológica / Histórica -->
-            ${lenda.analiseHistorica ? `
-              <div class="bg-amber-50/70 rounded-3xl border border-amber-200/80 p-6 space-y-2 text-xs sm:text-sm text-amber-950">
-                <h5 class="font-black flex items-center gap-2 text-amber-900">
-                  <i class="fa-solid fa-scale-balanced"></i> Dimensão Histórica & Folclórica
-                </h5>
-                <p class="leading-relaxed font-medium">${escapeHtml(lenda.analiseHistorica)}</p>
-              </div>
+            ${lenda.lead ? `
+              <p class="text-base sm:text-lg text-slate-600 font-serif italic leading-relaxed">
+                ${escapeHtml(lenda.lead)}
+              </p>
             ` : ''}
-          </div>
+          </header>
 
-          <!-- Coluna Lateral (4 colunas): Ficha e Fontes Completas -->
-          <div class="lg:col-span-4 space-y-6">
-            
-            <!-- Ficha Rápida -->
-            <div class="bg-slate-50 rounded-3xl border border-slate-200 p-5 space-y-3 text-xs">
-              <h5 class="font-black text-slate-900 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                <i class="fa-solid fa-circle-info text-brand-700"></i> Ficha da Tradição
-              </h5>
-              <div class="space-y-2 border-t border-slate-200/60 pt-2 text-slate-700">
-                <div>
-                  <span class="text-slate-400 font-bold block text-[10px] uppercase">Bairro / Território</span>
-                  <strong class="font-black text-slate-900">${escapeHtml(lenda.local)}</strong>
-                </div>
-                <div>
-                  <span class="text-slate-400 font-bold block text-[10px] uppercase">Classificação</span>
-                  <span class="font-bold text-slate-800">${escapeHtml(lenda.categoria)}</span>
-                </div>
-                <div>
-                  <span class="text-slate-400 font-bold block text-[10px] uppercase">Período Referenciado</span>
-                  <span class="font-bold text-slate-800">${escapeHtml(lenda.epoca)}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Acervo de Fontes Documentais & Acadêmicas -->
-            <div class="bg-white rounded-3xl border border-slate-200 p-5 space-y-3 text-xs shadow-xs">
-              <h5 class="font-black text-slate-900 uppercase tracking-wider text-[11px] flex items-center gap-1.5 pb-2 border-b border-slate-100">
-                <i class="fa-solid fa-book-bookmark text-emerald-700"></i> Fontes & Referências (${lenda.fontes.length})
-              </h5>
-              
-              <div class="space-y-3">
-                ${lenda.fontes.map((f, i) => `
-                  <div class="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200/80 space-y-1">
-                    <span class="text-[10px] font-black uppercase text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60 inline-block">
-                      ${escapeHtml(f.tipo)}
-                    </span>
-                    <h6 class="font-black text-slate-900 text-xs leading-snug">
-                      ${escapeHtml(f.titulo)}
-                    </h6>
-                    <p class="text-[11px] text-slate-600">
-                      ${escapeHtml(f.autor)} · ${escapeHtml(f.ano)}
-                    </p>
-                    ${f.url ? `
-                      <div class="pt-1">
-                        <a 
-                          href="${f.url}" 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          class="inline-flex items-center gap-1 text-[11px] font-black text-brand-800 hover:text-brand-950 underline underline-offset-2"
-                        >
-                          <span>Acessar registro original</span>
-                          <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-                        </a>
-                      </div>
+          <!-- Corpo da História (Alinhado à esquerda junto à linha do título e botão voltar) -->
+          <article class="space-y-6 text-slate-800 font-serif leading-relaxed text-base sm:text-lg">
+            ${lenda.relatoCompleto.map(p => {
+              if (typeof p === 'object' && p.tipo === 'quote') {
+                return `
+                  <figure class="my-8 py-4 border-y border-slate-200">
+                    <blockquote class="text-lg sm:text-xl text-slate-800 font-serif italic leading-relaxed text-justify">
+                      “${p.texto}”
+                    </blockquote>
+                    ${p.fonte ? `
+                      <figcaption class="mt-2 text-right text-xs font-mono font-medium text-slate-500">
+                        ${p.fonte}
+                      </figcaption>
                     ` : ''}
-                  </div>
-                `).join('')}
-              </div>
-            </div>
+                  </figure>
+                `;
+              }
+              return `<p class="text-justify leading-relaxed">${p}</p>`;
+            }).join('')}
+          </article>
 
+          <!-- Acervo de Fontes Documentais & Acadêmicas (Soltas, uma abaixo da outra, sem caixa) -->
+          <section class="pt-8 border-t border-slate-200 space-y-6">
+            <div class="pb-2">
+              <h5 class="font-serif font-black text-slate-900 text-lg sm:text-xl">
+                Fontes e referências documentais
+              </h5>
+            </div>
+            
+            <div class="divide-y divide-slate-100 space-y-4">
+              ${lenda.fontes.map(fonteLendaHtml).join('')}
+            </div>
+          </section>
+
+          <!-- Botão Voltar no Rodapé (Mesmo estilo do topo, alinhado com o texto) -->
+          <div class="pt-6 border-t border-slate-200 flex justify-start">
+            <button 
+              type="button" 
+              onclick="window.closeLendaDetalhe()" 
+              class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+              <span>Voltar para todas as Lendas</span>
+            </button>
           </div>
 
-        </div>
-
-        <!-- Botão Voltar no Rodapé -->
-        <div class="pt-4 border-t border-slate-200 flex justify-center">
-          <button 
-            type="button" 
-            onclick="window.closeLendaDetalhe()" 
-            class="px-6 py-3 rounded-2xl bg-[#0f2f52] hover:bg-slate-900 text-white text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-xs"
-          >
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Voltar para todas as Lendas e Tradições</span>
-          </button>
         </div>
 
       </div>
@@ -3197,82 +4227,64 @@
     const content = document.getElementById('historia-bibliografia-content');
     if (!content) return;
     const grupos = [
-      { titulo: 'História Geral e Formação Urbana', itens: [
-        ['ZANETTI, Valéria. A cidade e os anos: São José dos Campos. São Paulo: Edusp, 2010.', 'https://www.edusp.com.br/'],
-        ['PAPALI, Maria Aparecida. São José dos Campos: os sinais da modernidade. São José dos Campos: Univap, 2005.', 'https://www.univap.br/'],
-        ['DOMENICO, Hugo Di. História de São José dos Campos. São José dos Campos: [s.n.], 1989.', 'https://www.camarasjc.sp.gov.br/promemoria/'],
+      { titulo: 'História geral e formação urbana', itens: [
         ['CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Pró-Memória. São José dos Campos e sua história. São José dos Campos: Câmara Municipal, [s.d.].', 'https://www.camarasjc.sp.gov.br/promemoria/historia-sjc/'],
-        ['IBGE. Cidades e Estados: São José dos Campos. Rio de Janeiro: IBGE, 2023.', 'https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/historico'],
         ['CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Cronologia de São José dos Campos. São José dos Campos: Pró-Memória, [s.d.].', 'https://www.camarasjc.sp.gov.br/promemoria/cronologia-sjc/'],
-        ['FUNDAÇÃO CULTURAL CASSIANO RICARDO. Patrimônio Histórico e Cultural de São José dos Campos. São José dos Campos: FCCR, 2018.', 'https://fccr.sp.gov.br/'],
-        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. Plano Diretor de Desenvolvimento Integrado. São José dos Campos: PMSJC, 2018.', 'https://www.sjc.sp.gov.br/servicos/urbanismo-e-sustentabilidade/plano-diretor/'],
-        ['PREFEITURA DE SÃO JOSÉ DOS CAMPOS. História da Cidade. São José dos Campos: [s.n.], [s.d.].', 'https://www.sjc.sp.gov.br/servicos/governanca/sao-jose-em-dados/historia/'],
-        ['MARCONDES, Reynaldo. História do Vale do Paraíba. Taubaté: Editora Taubaté, 1995.', 'https://www.scielo.br/']
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. História de São José dos Campos. São José dos Campos, [s.d.].', 'https://www.sjc.sp.gov.br/servicos/governanca/sao-jose-em-dados/historia/']
       ]},
-      { titulo: 'A Fase Sanatorial e a Tuberculose', itens: [
-        ['SILVA, Angela Maria. A cidade sanatório: São José dos Campos e a tuberculose (1920-1950). São Paulo: Unesp, 2008.', 'https://repositorio.unesp.br/'],
-        ['SOUZA, Carlos Alberto de. Sanatórios e Saúde Pública no Vale do Paraíba. Revista Brasileira de História da Medicina, v. 15, p. 45-60, 2012.', 'https://www.scielo.br/'],
-        ['FUNDAÇÃO CULTURAL CASSIANO RICARDO. Memórias do Sanatório Vicentina Aranha. São José dos Campos: FCCR, 2015.', 'https://pqvicentinaaranha.org.br/'],
-        ['ALMEIDA, Roberto. A Cura pelos Ares: História dos hospitais de São José dos Campos. São Paulo: Contexto, 2001.', 'https://www.editoracontexto.com.br/'],
-        ['ZANETTI, Valéria. De Vila a Cidade: o impacto dos sanatórios na urbanização joseense. História Social, n. 12, p. 89-105, 2006.', 'https://www.revistas.unicamp.br/'],
-        ['PEREIRA, Maria Luiza. Médicos, Doentes e Sanatórios. Dissertação (Mestrado em História) - PUC-SP, 1999.', 'https://tede2.pucsp.br/'],
-        ['MENDES, João. O Parque Vicentina Aranha: de sanatório a parque urbano. São José dos Campos: FCCR, 2017.', 'https://pqvicentinaaranha.org.br/'],
-        ['OLIVEIRA, Paulo. Tuberculose e segregação urbana. Revista de Sociologia e Política, v. 22, p. 112-128, 2014.', 'https://www.scielo.br/'],
-        ['COSTA, R. História da Saúde em São José dos Campos. São Paulo: FAPESP, 2010.', 'https://fapesp.br/'],
-        ['LIMA, J. Os ares da Mantiqueira. Taubaté: Univap, 1995.', 'https://www.univap.br/']
+      { titulo: 'Industrialização, trabalho e tecnologia', itens: [
+        ['BARRETO, Katerine Roman. Embraer: no contexto do desenvolvimento industrial de São José dos Campos (1950-2000). 2002. TCC - Universidade do Vale do Paraíba.', 'https://www.camarasjc.sp.gov.br/promemoria/2025/07/14/embraer-no-contexto-do-desenvolvimento-industrial-de-sao-jose-dos-campos-1950-2000/'],
+        ['SANTOS, Eliane; AMARAL, Marisa. Novos territórios produtivos, mudança tecnológica e mercado de trabalho: o caso de São José dos Campos. Dados, Rio de Janeiro, v. 44, n. 3, 2001.', 'https://www.scielo.br/j/dados/a/gJC5KFwX73k5XMh7CbgfBDr/?lang=pt'],
+        ['OLIVEIRA, Márcia Regina de; SOUZA, Adriane Aparecida Moreira de; RIBEIRO, Anabela. Implicações socioeconômicas e territoriais decorrentes do complexo aeroespacial. Revista Brasileira de Gestão e Desenvolvimento Regional, v. 15, n. 6, 2019.', 'https://www.rbgdr.net/revista/index.php/rbgdr/article/view/5204'],
+        ['INSTITUTO NACIONAL DE PESQUISAS ESPACIAIS. História institucional. Brasília, DF: INPE, [s.d.].', 'https://www.gov.br/inpe/pt-br/acesso-a-informacao/institucional/historia']
       ]},
-      { titulo: 'Industrialização: Das Tecelagens ao Polo Tecnológico', itens: [
-        ['BARRETO, Katerine Roman. Embraer: no contexto do desenvolvimento industrial de São José dos Campos (1950-2000). 2002. TCC - Univap.', 'https://www.camarasjc.sp.gov.br/promemoria/'],
-        ['SANTOS, Eliane; AMARAL, Marisa. Novos territórios produtivos, mudança tecnológica e mercado de trabalho. Dados, Rio de Janeiro, v. 44, n. 3, 2001.', 'https://www.scielo.br/j/dados/'],
-        ['BERNARDES, Roberto. Embraer: elos entre estado e mercado. São Paulo: Hucitec, 2000.', 'https://huciteceditora.com.br/'],
-        ['FORJAZ, Maria Cecília Spina. As origens da Embraer. Tempo Social, São Paulo, v. 13, n. 2, p. 281-298, 2001.', 'https://www.scielo.br/j/ts/'],
-        ['CABRAL, L. A Indústria Aeronáutica Brasileira. Rio de Janeiro: FGV, 2004.', 'https://editora.fgv.br/'],
-        ['SILVEIRA, José. A Rodovia Presidente Dutra e o desenvolvimento industrial. Revista Brasileira de Geografia, v. 62, 2010.', 'https://biblioteca.ibge.gov.br/'],
-        ['OLIVEIRA, Márcia Regina de. Implicações socioeconômicas decorrentes do complexo aeroespacial. Revista Brasileira de Gestão, v. 15, 2019.', 'https://www.rbgdr.net/'],
-        ['MACEDO, Fernando. A instalação do ITA e do CTA em São José dos Campos. São Paulo: FAPESP, 2008.', 'https://bv.fapesp.br/'],
-        ['LIMA, Pedro. História da Aviação Brasileira. São Paulo: Edusp, 2015.', 'https://www.edusp.com.br/'],
-        ['MARQUES, Eduardo. Industrialização e crescimento urbano em São José dos Campos. Cadernos Metrópole, 2012.', 'https://revistas.pucsp.br/metropole/']
+      { titulo: 'População e migração', itens: [
+        ['INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA. São José dos Campos (SP): Cidades e Estados. Rio de Janeiro: IBGE, 2026.', 'https://www.ibge.gov.br/cidades-e-estados/sp/sao-jose-dos-campos.html'],
+        ['INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA. Censo Demográfico 2022. Rio de Janeiro: IBGE, 2023.', 'https://www.ibge.gov.br/estatisticas/sociais/populacao/22827-censo-demografico-2022.html'],
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. População. São José dos Campos, [s.d.].', 'https://www.sjc.sp.gov.br/servicos/governanca/populacao/']
       ]},
-      { titulo: 'Bairros, Migração e Desigualdade Urbana', itens: [
-        ['MOURA, Rosa. O fenômeno da metropolização no Vale do Paraíba. Revista Brasileira de Estudos Urbanos, v. 18, 2016.', 'https://rbeur.anpur.org.br/'],
-        ['PINHEIRO, Marcos. A expansão da Zona Sul e o bairro Satélite. Monografia (Geografia) - Univap, 2009.', 'https://www.univap.br/'],
-        ['RODRIGUES, Carlos. As periferias de São José dos Campos: habitação e segregação espacial. São Paulo: Annablume, 2013.', 'https://annablume.com.br/'],
-        ['COSTA, Ana Maria. Migrantes nordestinos no Vale do Paraíba (1960-1980). História Oral, v. 10, p. 75-92, 2011.', 'https://revista.historiaoral.org.br/'],
-        ['SILVA, Antônio. O Centro Histórico: transformações comerciais. São José dos Campos: FCCR, 2020.', 'https://fccr.sp.gov.br/'],
-        ['PONTES, Leandro. Santana e a Vila Industrial: o berço operário. São José dos Campos: Pró-Memória, 2018.', 'https://www.camarasjc.sp.gov.br/promemoria/'],
-        ['GOMES, Rita. O Banhado: história, resistência e meio ambiente em São José dos Campos. Revista de Geografia, v. 22, 2019.', 'https://www.scielo.br/'],
-        ['CARVALHO, Roberto. Expansão Urbana e Loteamentos Clandestinos na Zona Leste. São Paulo: FAU-USP, 2004.', 'https://www.teses.usp.br/'],
-        ['SANTOS, Fernanda. Especulação imobiliária no Urbanova e Aquarius. Cadernos de Arquitetura, 2021.', 'https://periodicos.pucminas.br/'],
-        ['FERNANDES, Luis. A Dutra como eixo estruturador dos bairros industriais. Revista Brasileira de Transporte, 2015.', 'https://www.anpet.org.br/']
+      { titulo: 'Patrimônio, cultura e lugares de memória', itens: [
+        ['FUNDAÇÃO CULTURAL CASSIANO RICARDO. Casas de Cultura, museus e equipamentos culturais. São José dos Campos: FCCR, [s.d.].', 'https://fccr.sp.gov.br/fccr/usuario/Login.php'],
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. Museus e prédios históricos. São José dos Campos, [s.d.].', 'https://sjc.sp.gov.br/servicos/inovacao-e-desenvolvimento-economico/turismo/museus-e-predios-historicos/'],
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. Parque Santos Dumont: patrimônio e parque de gerações. São José dos Campos, 2019.', 'https://www.sjc.sp.gov.br/noticias/2019/dezembro/26/patrimonio-santos-dumont-e-parque-de-geracoes-de-familias/'],
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. Praça Heróis de Alcântara ganha monumento. São José dos Campos, 2023.', 'https://www.sjc.sp.gov.br/noticias/2023/agosto/22/praca-herois-de-alcantara-ganha-monumento-na-regiao-sudeste/'],
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. Parques municipais. São José dos Campos, [s.d.].', 'https://www.sjc.sp.gov.br/servicos/esporte-e-qualidade-de-vida/parques/']
       ]},
-      { titulo: 'Patrimônio, Lendas e Cultura Oral', itens: [
-        ['FUNDAÇÃO CULTURAL CASSIANO RICARDO. Mapeamento do Folclore Joseense. São José dos Campos: FCCR, 2002.', 'https://fccr.sp.gov.br/'],
-        ['RICARDO, Cassiano. Marcha para Oeste. Rio de Janeiro: José Olympio, 1940.', 'https://pt.wikipedia.org/wiki/Cassiano_Ricardo'],
-        ['ZANETTI, Valéria. Patrimônio Arquitetônico de São José dos Campos. São José dos Campos: FCCR, 2008.', 'https://fccr.sp.gov.br/'],
-        ['SOUZA, Benedito. Lendas do Vale do Paraíba e Litoral Norte. Taubaté: Editora Taubaté, 1998.', 'https://museudofolclore.org/'],
-        ['RIBEIRO, Darcy. O Povo Brasileiro: a formação e o sentido do Brasil. São Paulo: Companhia das Letras, 1995.', 'https://www.companhiadasletras.com.br/'],
-        ['ANDRADE, Mário de. Dicionário Musical Brasileiro. São Paulo: IEB/USP, 1989.', 'https://www.ieb.usp.br/'],
-        ['PAPALI, Maria Aparecida. Memória e Patrimônio Cultural em SJC. Revista de História Local, 2010.', 'https://www.univap.br/'],
-        ['MACHADO, Luiz. O Banhado e a Lenda da Maria Peregrina. São José dos Campos: Editora Vale, 2006.', 'https://www.editoravale.com.br/'],
-        ['ALVES, Carlos. Assombrações e Causos Caipiras de São José. São José dos Campos: Pró-Memória, 2012.', 'https://www.camarasjc.sp.gov.br/promemoria/'],
-        ['INSTITUTO DO PATRIMÔNIO HISTÓRICO E ARTÍSTICO NACIONAL. Inventário do Patrimônio do Vale do Paraíba. IPHAN, 2015.', 'http://portal.iphan.gov.br/'],
-        ['TEIXEIRA, Silvio. Identidade Joseense: entre a roça e o foguete. São Paulo: Alameda, 2017.', 'https://www.alamedaeditorial.com.br/'],
-        ['MARTINS, Solange. O folclore do Saci e a cultura caipira na Mantiqueira. Revista de Cultura e Folclore, 2014.', 'https://museudofolclore.org/']
+      { titulo: 'Bairros e território', itens: [
+        ['CÂMARA MUNICIPAL DE SÃO JOSÉ DOS CAMPOS. Pró-Memória. Estudos e documentos sobre bairros e crescimento urbano. São José dos Campos, [s.d.].', 'https://www.camarasjc.sp.gov.br/promemoria/'],
+        ['SÃO JOSÉ DOS CAMPOS. Prefeitura. Mapa e divisões territoriais do município. São José dos Campos, [s.d.].', 'https://www.sjc.sp.gov.br/servicos/governanca/sao-jose-em-dados/mapa/']
       ]}
     ];
+    const fontesLendas = new Map();
+    LENDAS_CATALOGO.forEach(lenda => lenda.fontes.forEach(f => {
+      const chave = f.url.split('#')[0];
+      if (!fontesLendas.has(chave)) fontesLendas.set(chave, { fonte: f, localizadores: new Set() });
+      fontesLendas.get(chave).localizadores.add(f.localizador);
+    }));
+    grupos.push({ titulo: 'Lendas, devoções populares e memória oral', itens: Array.from(fontesLendas.values()).map(({fonte: f, localizadores}) => [
+      f.referencia + ' ' + Array.from(localizadores).join(' ') + ' Disponível em: ' + f.url + '. Acesso em: 4 out. 2026.', f.url
+    ]) });
     const fontesNorte = new Map();
-    ((window.HISTORIA_SJC_DATA || {}).bairros || []).filter(b => b.regiaoId === 'norte').forEach(b => {
+    ((window.HISTORIA_SJC_DATA || {}).bairros || []).filter(b => b.regiaoId === 'norte' || b.loteRevisao === 'centro-2026-10-04' || b.layoutHistoria === 'editorial-v1').forEach(b => {
       (b.fontesRevisadas || []).forEach(f => {
         if (!fontesNorte.has(f.url)) fontesNorte.set(f.url, { fonte: f, paginas: new Set() });
         if (f.pagina) fontesNorte.get(f.url).paginas.add(f.pagina);
       });
     });
-    if (fontesNorte.size) grupos.push({ titulo: 'Zona Norte — referências dos bairros revisados', itens: Array.from(fontesNorte.values()).map(item => {
+    if (fontesNorte.size) grupos.push({ titulo: 'Bairros — referências dos lotes revisados', itens: Array.from(fontesNorte.values()).map(item => {
       const f = item.fonte;
       const paginas = Array.from(item.paginas).join(', ');
-      const contexto = /\/promemoria\//.test(f.url) ? ' Acervo do Núcleo de Pesquisa Pró-Memória de São José dos Campos, parceria entre Câmara Municipal, FCCR e Univap/FVE.' : '';
-      return [f.referencia + (paginas ? ' Páginas consultadas: ' + paginas + '.' : '') + contexto + ' Disponível em: ' + f.url + '. Acesso em: 3 out. 2026.', f.paginaPdf ? f.url.split('#')[0] + '#page=' + f.paginaPdf : f.url];
+      return [f.referencia + (paginas ? ' Páginas consultadas: ' + paginas + '.' : '') + ' Disponível em: ' + f.url + '. Acesso em: ' + (f.acesso || '3 out. 2026.'), f.paginaPdf ? f.url.split('#')[0] + '#page=' + f.paginaPdf : f.url];
     }) });
+    const dataHist = window.HISTORIA_SJC_DATA || {};
+    if (dataHist.prefeitosDossie && dataHist.prefeitosDossie.referencias && dataHist.prefeitosDossie.referencias.length) {
+      grupos.push({
+        titulo: 'Autoridades Municipais, Legislação e Governança (1798–2026)',
+        itens: dataHist.prefeitosDossie.referencias.map(function(r) {
+          return [r.fullText, r.url || '#'];
+        })
+      });
+    }
     content.innerHTML = grupos.map(g => `<section class="space-y-3"><h3 class="text-sm font-black uppercase tracking-wider text-slate-800 border-b border-slate-200 pb-2">${escapeHtml(g.titulo)}</h3><ol class="space-y-3 list-decimal list-inside">${g.itens.map(i => `<li class="text-xs sm:text-sm text-slate-700 leading-relaxed pl-1"><a href="${escapeHtml(safeUrl(i[1]))}" target="_blank" rel="noopener noreferrer" class="underline decoration-slate-300 underline-offset-2 hover:text-brand-800">${escapeHtml(i[0])}</a></li>`).join('')}</ol></section>`).join('');
     const page = document.getElementById('historia-bibliografia-page-content');
     if (page) { page.innerHTML = content.innerHTML; return; }
@@ -3486,6 +4498,18 @@
     renderPatrimoniosEditorial: renderPatrimoniosEditorial,
     renderPioneirosEditorial: renderPioneirosEditorial,
     renderPrefeitosEditorial: renderPrefeitosEditorial,
+    switchPrefeitosViewMode: switchPrefeitosViewMode,
+    abrirCatalogoGeralDossie: abrirCatalogoGeralDossie,
+    fecharPrefeitosDrawer: fecharPrefeitosDrawer,
+    abrirPrefeitosDrawer: abrirPrefeitosDrawer,
+    navigatePrefeito: navigatePrefeito,
+    selectPrefeitoByIndex: selectPrefeitoByIndex,
+    filtrarPrefeitosEra: filtrarPrefeitosEra,
+    resetarPrefeitosFiltros: resetarPrefeitosFiltros,
+    filtrarPrefeitosCategoria: filtrarPrefeitosCategoria,
+    handlePrefeitosSearch: handlePrefeitosSearch,
+    togglePrefeitosAccordion: togglePrefeitosAccordion,
+    abrirRefPrefeitos: abrirRefPrefeitos,
     renderQuizJoseensidade: renderQuizJoseensidade,
     renderMigracaoJoseenses: renderMigracaoJoseenses,
     openBibliografia: openHistoriaBibliografia,
@@ -3515,6 +4539,18 @@
   window.closeHistoriaLendas = Historia.closeLendas;
   window.renderPioneirosEditorial = Historia.renderPioneirosEditorial;
   window.renderPrefeitosEditorial = Historia.renderPrefeitosEditorial;
+  window.switchPrefeitosViewMode = Historia.switchPrefeitosViewMode;
+  window.abrirCatalogoGeralDossie = Historia.abrirCatalogoGeralDossie;
+  window.fecharPrefeitosDrawer = Historia.fecharPrefeitosDrawer;
+  window.abrirPrefeitosDrawer = Historia.abrirPrefeitosDrawer;
+  window.navigatePrefeito = Historia.navigatePrefeito;
+  window.selectPrefeitoByIndex = Historia.selectPrefeitoByIndex;
+  window.filtrarPrefeitosEra = Historia.filtrarPrefeitosEra;
+  window.resetarPrefeitosFiltros = Historia.resetarPrefeitosFiltros;
+  window.filtrarPrefeitosCategoria = Historia.filtrarPrefeitosCategoria;
+  window.handlePrefeitosSearch = Historia.handlePrefeitosSearch;
+  window.togglePrefeitosAccordion = Historia.togglePrefeitosAccordion;
+  window.abrirRefPrefeitos = Historia.abrirRefPrefeitos;
   window.openCicloDossieModal = Historia.openCicloMarcosModal;
   window.openHistoriaEventoModal = Historia.openEventoModal;
   window.closeHistoriaEventoModal = Historia.closeEventoModal;
@@ -3534,6 +4570,33 @@
   window.filterHistoriaEvents = filterHistoriaEvents;
   window.scrollHistoriaRiver = scrollHistoriaRiver;
   window.initHistoriaKeyboardNav = initHistoriaKeyboardNav;
+
+  // Navegação pelo teclado na Régua Cronológica de Prefeitos
+  document.addEventListener('keydown', function(e) {
+    const sec = document.getElementById("section-view-prefeitos");
+    if (!sec || sec.classList.contains("hidden")) return;
+
+    const drawer = document.getElementById("prefeitos-abnt-drawer");
+    const isDrawerOpen = drawer && !drawer.classList.contains("invisible");
+
+    if (e.key === 'Escape' && isDrawerOpen) {
+      fecharPrefeitosDrawer();
+      return;
+    }
+
+    // Apenas se a gaveta estiver fechada e não estiver digitando em campo de input
+    if (!isDrawerOpen && prefeitosViewMode === 'timeline') {
+      const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      if (activeTag === 'input' || activeTag === 'textarea') return;
+
+      if (e.key === 'ArrowLeft') {
+        navigatePrefeito(-1);
+      } else if (e.key === 'ArrowRight') {
+        navigatePrefeito(1);
+      }
+    }
+  });
+
 
   // =========================================================================
   // 11. INICIALIZAÇÃO AUTOMÁTICA SEGURA

@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),load=f=>fs.readFileSync(path.join(root,f),'utf8'),pkg=JSON.parse(load('data/radar_hub/radar_hub_package.json'));
+async function run(mode){
+ const elements=new Map(),charts=new Map();let made=0,destroyed=0;
+ const el=id=>({id,textContent:'',innerHTML:'',style:{},dataset:{},classList:{add(){},remove(){},contains(){return false}},getContext:()=>({id}),appendChild(e){elements.set(e.id,e)},parentNode:{appendChild(e){elements.set(e.id,e)}},parentElement:{style:{}}});
+ for(const id of ['hubChartMeioAmbienteAr','hubChartMeioAmbienteQueimadas','hubChartMeioAmbienteSaneamento','hubChartMeioAmbienteTerritorio'])elements.set(id,el(id));
+ class Chart{constructor(ctx,c){assert.ok(!charts.has(ctx.id));this.id=ctx.id;charts.set(ctx.id,c);made++}destroy(){charts.delete(this.id);destroyed++}static defaults={font:{},plugins:{legend:{labels:{}},tooltip:{}}};static register(){}}
+ const c={document:{getElementById:id=>elements.get(id)||null,querySelectorAll:()=>[],createElement:()=>el(''),addEventListener(){}},Chart,console:{log(){},warn(){},error(){}},setTimeout:f=>f(),sessionStorage:{getItem:()=>null,setItem(){}},fetch:async()=>{if(mode==='offline')throw Error('offline');const p=structuredClone(pkg);if(mode==='mixed')p.metadataRegistry.indicators[0].value=999;return {ok:true,json:async()=>p}}};c.window=c;vm.createContext(c);vm.runInContext(load('radar_hub_controller.js'),c);
+ await c.initRadarHub();c.switchRadarHubAxis('meio_ambiente');assert.equal(charts.size,2);assert.equal(charts.get('hubChartMeioAmbienteQueimadas').data.labels.length,22);assert.deepEqual(Array.from(charts.get('hubChartMeioAmbienteSaneamento').data.datasets[0].data),[96.79,89.28,100,41.84]);assert.equal(charts.get('hubChartMeioAmbienteSaneamento').data.datasets.length,1);
+ assert.match(elements.get('fallback-hubChartMeioAmbienteAr').innerHTML,/sem comprovação/);assert.match(elements.get('fallback-hubChartMeioAmbienteTerritorio').innerHTML,/sobreposições/);
+ for(let i=0;i<10;i++){c.filterHubChart('amb_queimadas','period',i%2?'todos':'recente');assert.equal(charts.size,2)}assert.equal(made-destroyed,2);
+ const exported=JSON.parse(JSON.stringify(c.getRadarHubExport()));assert.equal(exported.dataset_version,pkg.dataset_version);const rows=exported.meio_ambiente_series;assert.ok(rows.length>500);assert.ok(rows.some(r=>r.valor===null));assert.ok(rows.some(r=>r.valor===0));for(const r of rows){assert.ok(r.evidencia.spatial_scope&&r.evidencia.sha256&&r.evidencia.locator&&r.competencia)}
+ const csv=c.serializeRadarHubCsv(rows);assert.ok(csv.includes('spatial_scope')&&csv.includes('sha256')&&csv.includes('"0"'));if(mode==='online'){fs.writeFileSync(path.join(root,'docs/dados-publicos-revisao/p3-meio-ambiente/exportacao-verificada.json'),JSON.stringify(exported,null,2));fs.writeFileSync(path.join(root,'docs/dados-publicos-revisao/p3-meio-ambiente/exportacao-verificada.csv'),csv)}
+ console.log('PASS P3 runtime '+mode+': filtros, 2 gráficos, suspensões, pacote atômico, null/zero, '+rows.length+' linhas JSON/CSV.');return exported;
+}
+(async()=>{const online=await run('online');assert.deepEqual(await run('offline'),online);assert.deepEqual(await run('mixed'),online)})().catch(e=>{console.error(e);process.exitCode=1});

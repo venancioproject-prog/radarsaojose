@@ -17,6 +17,23 @@ if (window.Chart && window.ChartDataLabels) {
   Chart.register(ChartDataLabels);
 }
 
+// Helpers de Contraste para Modo Noturno em Gráficos
+function isAppDarkMode() {
+  return document.documentElement.classList.contains('dark');
+}
+function getRadarChartTextColor() {
+  return isAppDarkMode() ? '#F8FAFC' : '#0F172A';
+}
+function getRadarChartMutedColor() {
+  return isAppDarkMode() ? '#CBD5E1' : '#64748B';
+}
+function getRadarChartAxisTickColor() {
+  return isAppDarkMode() ? '#E2E8F0' : '#1E293B';
+}
+function getRadarChartGridColor() {
+  return isAppDarkMode() ? 'rgba(255, 255, 255, 0.08)' : '#F1F5F9';
+}
+
 // Navegação instantânea e suave para os blocos de pesquisa
 window.scrollToSection = function(sectionId) {
   if (!sectionId) return;
@@ -36,6 +53,18 @@ window.scrollToSection = function(sectionId) {
 // Alternância de Abas SPA com Preservação de Posição de Rolagem (Scroll State)
 window.currentMainTab = "dashboard";
 window.tabScrollPositions = {};
+
+// Keep the active mobile destination visible without moving the document.
+window.syncMobileModuleNav = function() {
+  const nav = document.getElementById("app-module-nav-mobile");
+  const active = nav?.querySelector(".is-active");
+  if (!nav || !active || !nav.clientWidth) return;
+  const navRect = nav.getBoundingClientRect();
+  const activeRect = active.getBoundingClientRect();
+  if (activeRect.left < navRect.left || activeRect.right > navRect.right) {
+    nav.scrollLeft += activeRect.left - navRect.left - (nav.clientWidth - activeRect.width) / 2;
+  }
+};
 
 window.switchMainTab = function(tabName) {
   // 1. Salvar a posição de rolagem atual da aba de onde o usuário está saindo
@@ -70,6 +99,8 @@ window.switchMainTab = function(tabName) {
   const filtersContainer = document.getElementById("sidebar-filters-container");
   const ibgeFiltersContainer = document.getElementById("sidebar-ibge-filters-container");
   const midiaFiltersContainer = document.getElementById("sidebar-midia-filters-container");
+  const historiaNavContainer = document.getElementById("sidebar-historia-navigation-container");
+  const historiaEventFiltersContainer = document.getElementById("sidebar-historia-event-filters-container");
   const historiaFiltersContainer = document.getElementById("sidebar-historia-filters-container");
   const imageBankFiltersContainer = document.getElementById("sidebar-image-bank-filters-container");
   const personasFiltersContainer = document.getElementById("sidebar-personas-filters-container");
@@ -78,8 +109,8 @@ window.switchMainTab = function(tabName) {
 
   if (!dashboardView || !reportView) return;
 
-  const inactiveBtnClass = "nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-300 border border-slate-200 shadow-2xs cursor-pointer text-center leading-tight whitespace-nowrap";
-  const activeBtnClass = "nav-module-btn w-full h-[48px] sm:h-[50px] flex items-center justify-center gap-1 sm:gap-1.5 px-1 sm:px-2 rounded-2xl text-[10px] sm:text-[11px] lg:text-xs font-bold transition-all bg-slate-600 text-white border-slate-500 shadow-md cursor-pointer text-center leading-tight whitespace-nowrap";
+  const inactiveBtnClass = "app-nav-link text-[13px] lg:text-[14px] font-medium text-slate-500 hover:text-slate-900 transition-colors py-2 whitespace-nowrap cursor-pointer";
+  const activeBtnClass = "app-nav-link is-active text-[13px] lg:text-[14px] font-semibold text-slate-900 transition-colors py-2 whitespace-nowrap cursor-pointer";
 
   // Esconder todas as abas
   dashboardView.classList.add("hidden");
@@ -95,6 +126,8 @@ window.switchMainTab = function(tabName) {
   if (filtersContainer) filtersContainer.classList.add("hidden");
   if (ibgeFiltersContainer) ibgeFiltersContainer.classList.add("hidden");
   if (midiaFiltersContainer) midiaFiltersContainer.classList.add("hidden");
+  if (historiaNavContainer) historiaNavContainer.classList.add("hidden");
+  if (historiaEventFiltersContainer) historiaEventFiltersContainer.classList.add("hidden");
   if (historiaFiltersContainer) historiaFiltersContainer.classList.add("hidden");
   if (imageBankFiltersContainer) imageBankFiltersContainer.classList.add("hidden");
   if (personasFiltersContainer) personasFiltersContainer.classList.add("hidden");
@@ -140,6 +173,8 @@ window.switchMainTab = function(tabName) {
     }
   } else if (tabName === "historia") {
     if (historiaView) { historiaView.classList.remove("hidden"); activeView = historiaView; }
+    if (historiaNavContainer) historiaNavContainer.classList.remove("hidden");
+    if (historiaEventFiltersContainer) historiaEventFiltersContainer.classList.remove("hidden");
     if (historiaFiltersContainer) historiaFiltersContainer.classList.remove("hidden");
     if (btnHistoria) btnHistoria.className = activeBtnClass;
     if (typeof window.renderHistoriaDashboard === "function") {
@@ -159,6 +194,40 @@ window.switchMainTab = function(tabName) {
     if (btnDashboard) btnDashboard.className = activeBtnClass;
   }
 
+  // Controlar botão Limpar no topo da sidebar: exibir SOMENTE na aba Pesquisa (dashboard)
+  const btnResetFiltersEl = document.getElementById("btn-reset-filters");
+  if (btnResetFiltersEl) {
+    const isDashboardTab = !tabName || tabName === "dashboard";
+    btnResetFiltersEl.classList.toggle("hidden", !isDashboardTab);
+  }
+
+  // Controlar título da sidebar: "Filtros e Recortes" somente em Pesquisa Quantitativa (dashboard) e Inteligência de Mídia (midia)
+  const sidebarHeaderTitleEl = document.getElementById("sidebar-header-title");
+  if (sidebarHeaderTitleEl) {
+    const isFiltersTab = tabName === "midia" || tabName === "dashboard" || !tabName;
+    sidebarHeaderTitleEl.textContent = isFiltersTab ? "Filtros e Recortes" : "Menu";
+  }
+
+  // Alternar hero do módulo correspondente no topo panorâmico
+  const heroContainer = document.getElementById("app-hero-container");
+  const allHeroWrappers = document.querySelectorAll("[data-hero-wrapper]");
+  // Modules outside this project stage retain their original in-column header.
+  if (heroContainer) heroContainer.classList.toggle("hidden", !Array.from(allHeroWrappers).some(hw => hw.getAttribute("data-hero-wrapper") === tabName));
+  allHeroWrappers.forEach(hw => {
+    hw.classList.toggle("hidden", hw.getAttribute("data-hero-wrapper") !== tabName);
+  });
+  // Keep the active state accessible on desktop and mobile navigation.
+  document.querySelectorAll("#app-module-nav [data-module], #app-module-nav-mobile [data-module]").forEach(link => {
+    if (link.getAttribute("data-module") === tabName) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+  // Alternar links mobile
+  document.querySelectorAll(".app-nav-link-mobile").forEach(link => {
+    link.classList.toggle("is-active", link.getAttribute("data-module") === tabName);
+  });
+
+  window.syncMobileModuleNav();
+
   if (activeView) {
     void activeView.offsetWidth; // trigger reflow
     activeView.classList.add("animate-in", "fade-in");
@@ -176,304 +245,9 @@ window.switchMainTab = function(tabName) {
 };
 
 // =========================================================================
-// MÓDULO INTERATIVO: LINHA DO TEMPO / HISTÓRIA MUNICIPAL
-// (Implementação Modular Completa isolada em historia_module.js)
+// MÓDULO INTERATIVO: LENTES SJC (Acervo Visual Aberto)
+// (Implementação Modular Completa isolada em lentes_sjc_module.js)
 // =========================================================================
-
-const IMAGE_BANK_ITEMS = [
-  ["Mais fotos_radar/IMG_2777.jpg", "Comércio de rua", "Comércio"],
-  ["Mais fotos_radar/IMG_2780.jpg", "Vida urbana", "Cidade"],
-  ["Mais fotos_radar/IMG_2808.jpg", "Transporte coletivo", "Mobilidade"],
-  ["Mais fotos_radar/IMG_2809.jpg", "Embarque e circulação", "Mobilidade"],
-  ["Mais fotos_radar/IMG_2810.jpg", "Circulação urbana", "Mobilidade"],
-  ["Mais fotos_radar/IMG_2813.jpg", "Via e iluminação", "Infraestrutura"],
-  ["Mais fotos_radar/IMG_2815.jpg", "Malha viária", "Mobilidade"],
-  ["Mais fotos_radar/IMG_2822.jpg", "Galeria comercial", "Comércio"],
-  ["Mais fotos_radar/IMG_2838.jpg", "Comércio e consumo", "Comércio"],
-  ["Mais fotos_radar/IMG_2839.jpg", "Centro comercial", "Comércio"],
-  ["Mais fotos_radar/IMG_2840.jpg", "Circulação no centro", "Cidade"],
-  ["Mais fotos_radar/IMG_2841.jpg", "Serviços urbanos", "Cidade"],
-  ["Mais fotos_radar/IMG_2857.jpg", "Memória urbana", "Patrimônio"],
-  ["Mais fotos_radar/IMG_2858.jpg", "Infraestrutura urbana", "Infraestrutura"],
-  ["Mais fotos_radar/IMG_2863.jpg", "Paisagem e deslocamento", "Cidade"],
-  ["Mais fotos_radar/IMG_2865.jpg", "Espaço construído", "Infraestrutura"],
-  ["Mais fotos_radar/IMG_2868.jpg", "Conexão entre regiões", "Mobilidade"],
-  ["Mais fotos_radar/IMG_2874.jpg", "Paisagem construída", "Cidade"],
-  ["Mais fotos_radar/IMG_2875.jpg", "Tecido urbano", "Cidade"],
-  ["Mais fotos_radar/IMG_2883.jpg", "Ponte e conexão", "Infraestrutura"],
-  ["Mais fotos_radar/IMG_2890.jpg", "Centro e cultura", "Cultura"],
-  ["Mais fotos_radar/IMG_2893.jpg", "Espaço público", "Cultura"],
-  ["Mais fotos_radar/IMG_2896.jpg", "Memória e arquitetura", "Patrimônio"],
-  ["Mais fotos_radar/IMG_2898.jpg", "Modernização urbana", "Infraestrutura"],
-  ["Mais fotos_radar/IMG_2899.jpg", "Cidade em transformação", "Cidade"],
-  ["Mais fotos_radar/IMG_2902.jpg", "Área verde", "Lazer"],
-  ["Mais fotos_radar/IMG_2904.jpg", "Capital humano e cidade", "Cidade"],
-  ["Mais fotos_radar/IMG_2905.jpg", "Espaço de lazer", "Lazer"],
-  ["Mais fotos_radar/IMG_2906.jpg", "Paisagem e convivência", "Lazer"],
-  ["Mais fotos_radar/IMG_2911.jpg", "Área de permanência", "Lazer"],
-  ["Mais fotos_radar/IMG_2912.jpg", "Parque e infraestrutura", "Lazer"],
-  ["Mais fotos_radar/IMG_2914.jpg", "Áreas abertas", "Lazer"],
-  ["Mais fotos_radar/IMG_2915.jpg", "Serviço público", "Serviços"],
-  ["Mais fotos_radar/IMG_2916.jpg", "Circulação e cuidado", "Serviços"],
-  ["Mais fotos_radar/IMG_2919.jpg", "Equipamento urbano", "Serviços"],
-  ["fotos_radar/capa_sjc_skyline.jpg", "Panorama de São José dos Campos", "Cidade"],
-  ["fotos_radar/foto_cultura.jpg", "Cultura e cidade", "Cultura"],
-  ["fotos_radar/foto_noite.jpg", "Cidade à noite", "Cidade"],
-  ["fotos_radar/foto_onibus_viaduto.jpg", "Ônibus sob viaduto", "Mobilidade"],
-  ["fotos_radar/sjc_ponte_estaiada.jpg", "Arco da Inovação", "Infraestrutura"]
-];
-
-let imageBankInitialized = false;
-let imageBankCategory = "Todos";
-let currentLightboxImage = null;
-
-function renderImageBank() {
-  const grid = document.getElementById("image-bank-grid");
-  const filters = document.getElementById("image-bank-filters");
-  const search = document.getElementById("image-bank-search");
-  const count = document.getElementById("image-bank-count");
-  if (!grid || !filters || !search || !count) return;
-
-  if (!imageBankInitialized) {
-    const categories = ["Todos", ...new Set(IMAGE_BANK_ITEMS.map(([, , category]) => category))];
-    filters.innerHTML = categories.map(category => `
-      <button type="button" data-image-category="${category}" class="rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${category === "Todos" ? "border-brand-900 bg-brand-900 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:text-brand-900"}">${category}</button>
-    `).join("");
-    filters.addEventListener("click", event => {
-      const button = event.target.closest("[data-image-category]");
-      if (!button) return;
-      imageBankCategory = button.dataset.imageCategory;
-      filters.querySelectorAll("[data-image-category]").forEach(item => {
-        const active = item === button;
-        item.className = `rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${active ? "border-brand-900 bg-brand-900 text-white" : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:text-brand-900"}`;
-      });
-      renderImageBank();
-    });
-    search.addEventListener("input", renderImageBank);
-
-    // Fechar lightbox ao pressionar ESC
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeImageLightbox();
-    });
-
-    imageBankInitialized = true;
-  }
-
-  const query = search.value.trim().toLocaleLowerCase("pt-BR");
-  const filtered = IMAGE_BANK_ITEMS.filter(([, title, category]) => {
-    const matchesCategory = imageBankCategory === "Todos" || category === imageBankCategory;
-    return matchesCategory && (!query || `${title} ${category}`.toLocaleLowerCase("pt-BR").includes(query));
-  });
-
-  window.currentFilteredImageBank = filtered;
-
-  count.textContent = `${filtered.length} ${filtered.length === 1 ? "imagem disponível" : "imagens disponíveis"} para uso gratuito no projeto`;
-  
-  grid.innerHTML = filtered.map(([src, title, category], index) => {
-    const filename = src.split("/").pop().replace(/\.[^/.]+$/, "");
-    const thumbSrc = `thumbnails/${filename}_thumb.webp`;
-    return `
-    <article class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover flex flex-col justify-between">
-      <div 
-        class="relative aspect-[4/3] overflow-hidden bg-slate-100 cursor-zoom-in"
-        onclick="window.openImageLightbox(${index})"
-        title="Clique para ampliar a foto"
-      >
-        <img src="${thumbSrc}" onerror="this.onerror=null;this.src='${src}'" alt="${title} em São José dos Campos" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-        <span class="absolute left-3 top-3 rounded-full bg-brand-950/85 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-accent-cyan">${category}</span>
-        <div class="absolute inset-0 bg-brand-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-          <span class="px-3 py-1.5 rounded-full bg-white/90 text-brand-950 text-xs font-bold shadow-md flex items-center gap-1.5">
-            <i class="fa-solid fa-magnifying-glass-plus text-accent-cyan"></i> Ampliar
-          </span>
-        </div>
-      </div>
-      <div class="p-4">
-        <div class="flex items-start justify-between gap-3">
-          <div class="min-w-0 flex-1">
-            <h3 class="truncate text-sm font-black text-brand-950">${title}</h3>
-            <p class="mt-0.5 truncate text-[11px] font-medium text-slate-500">
-              <i class="fa-solid fa-camera text-[10px] text-brand-500 mr-1"></i>Foto: André Paixão Studio 8
-            </p>
-          </div>
-          <a href="${src}" download title="Baixar foto original em alta resolução" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-900 transition hover:bg-brand-900 hover:text-white active:scale-95 shadow-2xs">
-            <i class="fa-solid fa-download"></i>
-          </a>
-        </div>
-        <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-          <button 
-            type="button" 
-            onclick="window.copyImageAttribution(this, '${title}')"
-            class="text-[11px] font-bold text-slate-500 hover:text-brand-900 flex items-center gap-1.5 transition-colors cursor-pointer py-1"
-            title="Copiar créditos da imagem"
-          >
-            <i class="fa-solid fa-copy text-[10px]"></i>
-            <span>Copiar Crédito</span>
-          </button>
-          <button 
-            type="button" 
-            onclick="window.openImageLightbox(${index})"
-            class="text-[11px] font-bold text-accent-cyan hover:text-brand-700 flex items-center gap-1 transition-colors cursor-pointer py-1"
-          >
-            <span>Ver Detalhes</span>
-            <i class="fa-solid fa-arrow-right text-[9px]"></i>
-          </button>
-        </div>
-      </div>
-    </article>
-  `;
-  }).join("");
-}
-
-function openImageLightbox(index) {
-  const images = window.currentFilteredImageBank || IMAGE_BANK_ITEMS;
-  const item = images[index];
-  if (!item) return;
-
-  const [src, title, category] = item;
-  currentLightboxImage = { src, title, category };
-
-  const modal = document.getElementById("image-lightbox-modal");
-  const modalImg = document.getElementById("modal-image-src");
-  const modalTitle = document.getElementById("modal-image-title");
-  const modalCategory = document.getElementById("modal-image-category");
-  const modalDownload = document.getElementById("modal-download-link");
-
-  if (!modal || !modalImg || !modalTitle || !modalCategory || !modalDownload) return;
-
-  modalImg.src = src;
-  modalTitle.textContent = title;
-  modalCategory.textContent = category;
-  modalDownload.href = src;
-  modalDownload.setAttribute("download", src.split("/").pop());
-
-  modal.classList.remove("hidden");
-  document.body.style.overflow = "hidden";
-}
-
-function closeImageLightbox() {
-  const modal = document.getElementById("image-lightbox-modal");
-  if (modal) modal.classList.add("hidden");
-  document.body.style.overflow = "";
-}
-
-function copyGlobalAttribution() {
-  const text = "Foto: André Paixão Studio 8 / Radar São José";
-  navigator.clipboard.writeText(text).then(() => {
-    const btnText = document.getElementById("btn-copy-attribution-text");
-    if (btnText) {
-      const original = btnText.textContent;
-      btnText.textContent = "Crédito Copiado!";
-      setTimeout(() => { btnText.textContent = original; }, 2000);
-    }
-  }).catch(() => {
-    prompt("Copie a atribuição abaixo:", text);
-  });
-}
-
-function copyModalAttribution() {
-  const text = currentLightboxImage 
-    ? `Foto: André Paixão Studio 8 (${currentLightboxImage.title} - Radar São José)` 
-    : "Foto: André Paixão Studio 8 / Radar São José";
-
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById("modal-copy-btn");
-    if (btn) {
-      const originalHtml = btn.innerHTML;
-      btn.innerHTML = `<i class="fa-solid fa-check text-emerald-600"></i> <span class="text-emerald-700">Copiado!</span>`;
-      setTimeout(() => { btn.innerHTML = originalHtml; }, 2000);
-    }
-  }).catch(() => {
-    prompt("Copie a atribuição abaixo:", text);
-  });
-}
-
-function copyImageAttribution(buttonEl, title) {
-  const text = `Foto: André Paixão Studio 8 (${title} - Radar São José)`;
-  navigator.clipboard.writeText(text).then(() => {
-    if (buttonEl) {
-      const originalHtml = buttonEl.innerHTML;
-      buttonEl.innerHTML = `<i class="fa-solid fa-check text-emerald-600 text-[10px]"></i> <span class="text-emerald-700">Copiado!</span>`;
-      setTimeout(() => { buttonEl.innerHTML = originalHtml; }, 2000);
-    }
-  }).catch(() => {
-    prompt("Copie a atribuição abaixo:", text);
-  });
-}
-
-async function downloadImageBankZip() {
-  const images = window.currentFilteredImageBank || IMAGE_BANK_ITEMS;
-  if (!images || !images.length) {
-    alert("Nenhuma imagem selecionada para download.");
-    return;
-  }
-
-  if (typeof JSZip === "undefined" || typeof saveAs === "undefined") {
-    alert("Biblioteca de compactação ZIP indisponível no momento.");
-    return;
-  }
-
-  const btnZipText = document.getElementById("btn-zip-text");
-  const originalText = btnZipText ? btnZipText.textContent : "Baixar Seleção (.ZIP)";
-  
-  try {
-    if (btnZipText) btnZipText.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Compactando 0/${images.length}...`;
-    
-    const zip = new JSZip();
-    const folder = zip.folder("Radar_Sao_Jose_Acervo_Visual");
-    
-    // Adicionar arquivo de licença / atribuição no ZIP
-    folder.file("LEIAME_ATRIBUICAO.txt", 
-      "ACERVO VISUAL - RADAR SÃO JOSÉ DOS CAMPOS\n" +
-      "=========================================\n\n" +
-      "Créditos e Atribuição Obrigatória:\n" +
-      "Fotografias por: André Paixão Studio 8\n" +
-      "Projeto: Radar São José\n\n" +
-      "Uso autorizado para projetos, apresentações, redes sociais e mídias com a devida citação do autor.\n"
-    );
-
-    let completed = 0;
-    const fetchPromises = images.map(async ([src, title]) => {
-      try {
-        const response = await fetch(src);
-        if (!response.ok) throw new Error(`Falha ao carregar ${src}`);
-        const blob = await response.blob();
-        const filename = src.split("/").pop();
-        folder.file(filename, blob);
-        completed++;
-        if (btnZipText) {
-          btnZipText.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Compactando ${completed}/${images.length}...`;
-        }
-      } catch (err) {
-        console.warn("Erro ao incluir imagem no ZIP:", src, err);
-      }
-    });
-
-    await Promise.all(fetchPromises);
-
-    if (btnZipText) btnZipText.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Gerando arquivo ZIP...`;
-
-    const content = await zip.generateAsync({ type: "blob" });
-    const categoryName = imageBankCategory === "Todos" ? "Completo" : imageBankCategory;
-    saveAs(content, `Radar_SJC_Fotos_${categoryName}.zip`);
-
-    if (btnZipText) {
-      btnZipText.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i> Download Pronto!`;
-      setTimeout(() => { btnZipText.textContent = originalText; }, 3000);
-    }
-  } catch (error) {
-    console.error("Erro ao gerar ZIP:", error);
-    alert("Ocorreu um erro ao gerar o arquivo ZIP. Tente baixar individualmente.");
-    if (btnZipText) btnZipText.textContent = originalText;
-  }
-}
-
-window.renderImageBank = renderImageBank;
-window.openImageLightbox = openImageLightbox;
-window.closeImageLightbox = closeImageLightbox;
-window.copyGlobalAttribution = copyGlobalAttribution;
-window.copyModalAttribution = copyModalAttribution;
-window.copyImageAttribution = copyImageAttribution;
-window.downloadImageBankZip = downloadImageBankZip;
 
 // ==========================================
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
@@ -601,6 +375,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Helpers do Menu de Usuário Dropdown
+  window.toggleUserMenu = function() {
+    const dropdown = document.getElementById("user-menu-dropdown");
+    const chevron = document.getElementById("user-menu-chevron");
+    const btn = document.getElementById("user-menu-btn");
+    if (!dropdown) return;
+    const isExpanded = !dropdown.classList.contains("hidden");
+    if (isExpanded) {
+      dropdown.classList.add("hidden");
+      if (chevron) chevron.classList.remove("rotate-180");
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    } else {
+      dropdown.classList.remove("hidden");
+      if (chevron) chevron.classList.add("rotate-180");
+      if (btn) btn.setAttribute("aria-expanded", "true");
+    }
+  };
+
+  window.closeUserMenu = function() {
+    const dropdown = document.getElementById("user-menu-dropdown");
+    const chevron = document.getElementById("user-menu-chevron");
+    const btn = document.getElementById("user-menu-btn");
+    if (dropdown && !dropdown.classList.contains("hidden")) {
+      dropdown.classList.add("hidden");
+      if (chevron) chevron.classList.remove("rotate-180");
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    }
+  };
+
+  document.addEventListener("click", function(event) {
+    const wrapper = document.getElementById("user-menu-dropdown-wrapper");
+    if (wrapper && !wrapper.contains(event.target)) {
+      window.closeUserMenu();
+    }
+  });
+
+  document.addEventListener("keydown", event => {
+    const dropdown = document.getElementById("user-menu-dropdown");
+    if (event.key === "Escape" && dropdown && !dropdown.classList.contains("hidden")) {
+      window.closeUserMenu();
+      document.getElementById("user-menu-btn")?.focus();
+    }
+  });
+
   const btnDemoView = document.getElementById("btn-demo-view");
   if (btnDemoView) {
     btnDemoView.addEventListener("click", () => {
@@ -685,6 +503,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         filterSidebar.classList.remove("flex");
       }
     }
+    window.syncMobileModuleNav();
   });
 
   function updateActiveFiltersBadge() {
@@ -1189,6 +1008,9 @@ function showDashboard(user) {
   dashboardScreen.classList.remove("hidden");
   if (user && user.email) {
     userEmailDisplay.textContent = user.email;
+    const userInitial = user.email.trim().charAt(0).toUpperCase();
+    const avatarCircle = document.getElementById("user-avatar-circle");
+    if (avatarCircle) avatarCircle.textContent = userInitial;
   }
 
   const userRole = localStorage.getItem("userRole") || "usuario";
@@ -1587,8 +1409,15 @@ function resetAllFilters() {
   ALL_FILTER_ELEMENTS.forEach(select => {
     if (select) select.value = "TODOS";
   });
+  if (typeof window.resetLentesFilters === "function") {
+    window.resetLentesFilters();
+  }
   applyCombinedFilters();
+  if (typeof updateActiveFiltersBadge === "function") {
+    updateActiveFiltersBadge();
+  }
 }
+window.resetAllFilters = resetAllFilters;
 
 function getField(row, possibleKeys) {
   if (!row) return "";
@@ -3184,7 +3013,7 @@ function renderIncomeGreenChart(canvasId, dataMap) {
           }
         },
         datalabels: {
-          color: "#064E3B",
+          color: () => document.documentElement.classList.contains('dark') ? '#34D399' : '#064E3B',
           anchor: "end",
           align: "right",
           font: { weight: 800, size: 12 },
@@ -3196,8 +3025,11 @@ function renderIncomeGreenChart(canvasId, dataMap) {
         }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 } } },
-        y: { grid: { color: "#F1F5F9" }, ticks: { font: { size: 10, weight: 600 } } }
+        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: () => document.documentElement.classList.contains('dark') ? '#CBD5E1' : '#64748B' } },
+        y: { 
+          grid: { color: () => document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.08)' : '#F1F5F9' }, 
+          ticks: { font: { size: 10, weight: 600 }, color: () => document.documentElement.classList.contains('dark') ? '#E2E8F0' : '#1E293B' } 
+        }
       }
     }
   });
@@ -7264,7 +7096,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
     "#BAE6FD"  // Sky pastel
   ];
 
-  Chart.defaults.font.family = "'Montserrat', sans-serif";
+  Chart.defaults.font.family = "'Inter', system-ui, -apple-system, sans-serif";
   // Gradiente suave para gráficos de linha
   let bgFillColor = "rgba(0, 180, 216, 0.15)";
   if (isLine && ctx) {
@@ -7394,7 +7226,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         datalabels: {
           color: function() {
             if (type === "doughnut" || type === "pie") return "#FFFFFF";
-            return "#0B2545";
+            return document.documentElement.classList.contains('dark') ? '#F8FAFC' : '#0B2545';
           },
           anchor: isBar ? (isHorizontal ? "end" : "end") : (isLine ? "top" : "center"),
           align: isBar ? (isHorizontal ? "right" : "top") : (isLine ? "top" : "center"),
@@ -7417,7 +7249,7 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
           grid: { display: false },
           ticks: {
             font: { size: 10, weight: 600 },
-            color: "#1E293B",
+            color: () => document.documentElement.classList.contains('dark') ? '#E2E8F0' : '#1E293B',
             autoSkip: false,
             padding: 12,
             crossAlign: "far"
@@ -7425,20 +7257,21 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         },
         x: {
           beginAtZero: true,
-          grid: { color: "#F1F5F9" },
+          grid: { color: () => document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.08)' : '#F1F5F9' },
           ticks: {
             font: { size: 10 },
+            color: () => document.documentElement.classList.contains('dark') ? '#CBD5E1' : '#64748B',
             precision: 0
           }
         }
       } : (isBar || isLine ? {
         y: {
           beginAtZero: true,
-          grid: { color: "#F1F5F9" },
+          grid: { color: () => document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.08)' : '#F1F5F9' },
           ticks: {
             precision: 0,
             font: { size: 10, weight: 600 },
-            color: "#334155",
+            color: () => document.documentElement.classList.contains('dark') ? '#CBD5E1' : '#334155',
             autoSkip: false,
             padding: 8
           }
@@ -7446,7 +7279,8 @@ function renderAdvancedChart(canvasId, type, dataMap, options = {}) {
         x: {
           grid: { display: false },
           ticks: {
-            font: { size: 10 }
+            font: { size: 10 },
+            color: () => document.documentElement.classList.contains('dark') ? '#CBD5E1' : '#64748B'
           }
         }
       } : {})
@@ -28669,234 +28503,18 @@ function renderExecutivePersonasCards() {
   `).join('');
 }
 
-window.renderExecutiveReportCharts = function(records) {
-  // If records is filtered to a tiny subset (e.g. single click in sidebar), preserve full city base for executive presentation
-  const baseRecords = (records && records.length >= 20) ? records : (allSurveyRecords && allSurveyRecords.length > 0 ? allSurveyRecords : (typeof demoRecords !== 'undefined' ? demoRecords : []));
-  if (!baseRecords || baseRecords.length === 0) return;
-
+window.renderExecutiveReportCharts = function() {
   renderExecutivePersonasCards();
-
-  const total = baseRecords.length;
-
-  // Atualizar contadores do Header do Relatório
-  const repStatSample = document.getElementById("rep-stat-sample");
-  const repStatMargin = document.getElementById("rep-stat-margin");
-  if (repStatSample) repStatSample.textContent = total.toLocaleString("pt-BR");
-  if (repStatMargin) repStatMargin.textContent = "±" + calculateMarginOfError(total) + "%";
-
-  // 1. Contagens de Orgulho e Evasão
-  let countOrgulho = 0;
-  let countEvasao = 0;
-  let countOpcoesSim = 0;
-  let countMatchNao = 0;
-  let countFreqRegular = 0;
-  let countGastariaMais = 0;
-
-  const regiaoLazerCounts = {};
-  const barreirasCounts = {};
-  const mobilidadeCounts = {};
-  const musicaCounts = {};
-
-  baseRecords.forEach(r => {
-    // Orgulho
-    const pride = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
-    if (pride && (pride.toLowerCase().includes("sim") || pride.toLowerCase().includes("muito"))) countOrgulho++;
-
-    // Evasão (Quem vai sempre ou às vezes para outras cidades)
-    const evasao = getField(r, ["Você costuma ir para outras cidades para passear ou comer fora", "outras_cidades"]);
-    if (evasao && (evasao.toLowerCase().includes("sim") || evasao.toLowerCase().includes("vezes"))) {
-      countEvasao++;
-    }
-
-    // Opções
-    const opcoes = getField(r, ["Você acha que a cidade tem boas opções de cultura e eventos?", "opcoes_cultura"]);
-    if (opcoes && opcoes.toLowerCase().startsWith("sim")) countOpcoesSim++;
-
-    // Match de Eventos
-    const match = getField(r, ["Você sente que as festas e eventos da cidade combinam com o se", "festas_combinam"]);
-    if (match && match.toLowerCase().startsWith("não")) countMatchNao++;
-
-    // Frequência
-    const freq = getField(r, ["Com que frequência você sai para passear ou se divertir na ci", "frequencia_lazer"]);
-    if (freq && !freq.toLowerCase().includes("raramente") && !freq.toLowerCase().includes("não costumo") && !freq.toLowerCase().includes("nunca")) {
-      countFreqRegular++;
-    }
-
-    // Gastaria mais
-    const gastaria = getField(r, ["Se tivesse mais opções de lazer que você gosta, você gastar", "gastaria_mais_lazer"]);
-    if (gastaria && gastaria.toLowerCase().startsWith("sim")) countGastariaMais++;
-
-    // Região de Lazer
-    const regLazer = getField(r, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]);
-    if (regLazer) {
-      let k = regLazer.replace("Região ", "").replace("Zona ", "").trim();
-      regiaoLazerCounts[k] = (regiaoLazerCounts[k] || 0) + 1;
-    }
-
-    // Barreiras Noite
-    const barreira = getField(r, ["Qual a maior dificuldade para sair à noite em São José?", "dificuldade_noite"]);
-    if (barreira) {
-      const parts = barreira.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
-      parts.forEach(p => {
-        let clean = p.length > 30 ? p.substring(0, 27) + "..." : p;
-        barreirasCounts[clean] = (barreirasCounts[clean] || 0) + 1;
-      });
-    }
-
-    // Mobilidade
-    const mob = getField(r, ["Quais meios de transporte você usa? (marque todos que utilizar", "meios_transporte"]);
-    if (mob) {
-      const normalizedMob = mob.replace(/Apps de transporte \(Uber,\s*99\)/gi, "Apps de Transporte (Uber/99)");
-      const parts = normalizedMob.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
-      const seenMob = new Set();
-      parts.forEach(p => {
-        let clean = p;
-        if (clean.includes("Carro próprio")) clean = "Carro Próprio";
-        else if (clean.includes("Uber") || clean.includes("99") || clean.includes("Apps de Transporte") || clean.includes("aplicativo")) clean = "Apps de Transporte (Uber/99)";
-        else if (clean.includes("Ônibus") || clean.includes("público")) clean = "Ônibus Coletivo";
-        else if (clean.includes("Linha Verde") || clean.includes("VLP")) clean = "Linha Verde";
-        else if (clean.includes("Bicicleta")) clean = "Bicicleta Própria";
-        else if (clean.includes("Moto própria")) clean = "Moto Própria";
-        else if (clean.includes("Apps de Bike")) clean = "Apps de Bike";
-        else if (clean.includes("Carro alugado")) clean = "Carro Alugado";
-        else if (clean.includes("Patinete")) clean = "Patinete";
-        seenMob.add(clean);
-      });
-      seenMob.forEach(k => {
-        mobilidadeCounts[k] = (mobilidadeCounts[k] || 0) + 1;
-      });
-    }
-
-    // Música
-    const musica = getField(r, ["Quais tipos de música você mais gosta de ouvir?", "musica"]);
-    if (musica) {
-      const parts = musica.split(/[,;\n]/).map(s => s.trim()).filter(Boolean);
-      parts.forEach(p => {
-        let clean = p.trim();
-        musicaCounts[clean] = (musicaCounts[clean] || 0) + 1;
+  return window.RadarReportUI.render({
+    url: SUPABASE_URL, key: SUPABASE_ANON_KEY,
+    bar: renderReportChartBar, sankey: renderReportChartSankey,
+    clear: () => {
+      Object.keys(executiveChartInstances).forEach(id => {
+        executiveChartInstances[id].destroy(); delete executiveChartInstances[id];
       });
     }
   });
-
-  const pctOrgulho = total > 0 ? ((countOrgulho / total) * 100).toFixed(1) : "74.2";
-  const pctEvasao = total > 0 ? ((countEvasao / total) * 100).toFixed(1) : "66.2";
-  const pctOpcoes = total > 0 ? ((countOpcoesSim / total) * 100).toFixed(1) : "50.7";
-  const pctMatchNao = total > 0 ? ((countMatchNao / total) * 100).toFixed(1) : "60.0";
-  const pctFreq = total > 0 ? ((countFreqRegular / total) * 100).toFixed(1) : "84.7";
-  const pctGastaria = total > 0 ? ((countGastariaMais / total) * 100).toFixed(1) : "69.6";
-
-  // Atualizar DOM values
-  const elValOrgulho = document.getElementById("rep-val-orgulho");
-  const elValEvasao = document.getElementById("rep-val-evasao");
-  const elBarOrgulho = document.getElementById("rep-bar-orgulho");
-  const elBarEvasao = document.getElementById("rep-bar-evasao");
-
-  if (elValOrgulho) elValOrgulho.textContent = pctOrgulho + "%";
-  if (elValEvasao) elValEvasao.textContent = pctEvasao + "%";
-  if (elBarOrgulho) elBarOrgulho.style.width = Math.min(100, Math.max(5, pctOrgulho)) + "%";
-  if (elBarEvasao) elBarEvasao.style.width = Math.min(100, Math.max(5, pctEvasao)) + "%";
-
-  const elPilarOpcoes = document.getElementById("rep-pilar-opcoes");
-  const elPilarMatch = document.getElementById("rep-pilar-match");
-  const elPilarFreq = document.getElementById("rep-pilar-freq");
-  const elPilarDisp = document.getElementById("rep-pilar-disp");
-
-  if (elPilarOpcoes) elPilarOpcoes.textContent = pctOpcoes + "% Sim";
-  if (elPilarMatch) elPilarMatch.textContent = pctMatchNao + "% Não";
-  if (elPilarFreq) elPilarFreq.textContent = pctFreq + "% Regular";
-  if (elPilarDisp) elPilarDisp.textContent = pctGastaria + "% Gastariam+";
-
-  // 1. Chart Orgulho vs Evasão (Doughnut)
-  renderReportChartDoughnut("repChartOrgulhoEvasao", [
-    { label: "Orgulho da Cidade", value: countOrgulho, color: "#0B2545" },
-    { label: "Evasão para Outras Cidades", value: countEvasao, color: "#F43F5E" },
-    { label: "Retenção / Outros", value: Math.max(0, total - countOrgulho), color: "#94A3B8" }
-  ]);
-
-  const sankeyFlows = {};
-  baseRecords.forEach(r => {
-    const origemRaw = getField(r, ["Região", "Regiao", "região", "regiao", "Em qual bairro você mora?", "bairro"]);
-    let origem = origemRaw ? origemRaw.trim() : "Outras Regiões";
-    if (origem.length > 20) origem = origem.substring(0, 18) + "...";
-
-    const destinoRaw = getField(r, ["Qual região da cidade você mais frequenta quando sai de casa?", "regiao_frequenta"]);
-    let destino = destinoRaw ? destinoRaw.replace("Região ", "").replace("Zona ", "").trim() : "Outros";
-    if (destino.length > 20) destino = destino.substring(0, 18) + "...";
-
-    const key = `Origem: ${origem}|||Destino: ${destino}`;
-    sankeyFlows[key] = (sankeyFlows[key] || 0) + 1;
-  });
-
-  const sankeyData = Object.entries(sankeyFlows)
-    .filter(([_, flow]) => flow > 0)
-    .map(([key, flow]) => {
-      const [from, to] = key.split("|||");
-      return { from, to, flow };
-    });
-
-  renderReportChartSankey("repChartSankeyLazer", sankeyData);
-
-  // 2. Chart Concentração Regional Lazer (Bar Chart - TODOS)
-  const sortedRegiao = Object.entries(regiaoLazerCounts).sort((a, b) => b[1] - a[1]);
-  renderReportChartBar("repChartLazerRegiao", sortedRegiao.map(e => e[0]), sortedRegiao.map(e => e[1]), "#0284C7", total);
-
-  // 3. Chart Barreiras da Noite (TODAS)
-  const sortedBarreiras = Object.entries(barreirasCounts).sort((a, b) => b[1] - a[1]);
-  renderReportChartBar("repChartBarreirasNoite", sortedBarreiras.map(e => e[0]), sortedBarreiras.map(e => e[1]), "#E11D48", total);
-
-  // 4. Chart Mobilidade Urbana (TODOS)
-  const sortedMob = Object.entries(mobilidadeCounts).sort((a, b) => b[1] - a[1]);
-  renderReportChartBar("repChartMobilidade", sortedMob.map(e => e[0]), sortedMob.map(e => e[1]), "#059669", total);
-
-  // 5. Chart Música (TODOS OS 10 RITMOS)
-  const sortedMusica = Object.entries(musicaCounts).sort((a, b) => b[1] - a[1]);
-  renderReportChartBar("repChartMusica", sortedMusica.map(e => e[0]), sortedMusica.map(e => e[1]), "#7C3AED", total);
 };
-
-function renderReportChartDoughnut(canvasId, items) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-
-  if (executiveChartInstances[canvasId]) {
-    executiveChartInstances[canvasId].destroy();
-  }
-
-  const ctx = canvas.getContext("2d");
-  executiveChartInstances[canvasId] = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: items.map(i => i.label),
-      datasets: [{
-        data: items.map(i => i.value),
-        backgroundColor: items.map(i => i.color),
-        borderWidth: 2,
-        borderColor: "#FFFFFF"
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: "65%",
-      plugins: {
-        legend: {
-          position: "bottom",
-          labels: { boxWidth: 12, font: { family: "Montserrat", size: 10, weight: "600" } }
-        },
-        datalabels: {
-          display: true,
-          color: "#FFFFFF",
-          font: { family: "Montserrat", weight: "bold", size: 10 },
-          formatter: (value, ctx) => {
-            const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
-            if (!sum || value === 0) return "";
-            const pct = ((value / sum) * 100).toFixed(0);
-            return pct > 8 ? pct + "%" : "";
-          }
-        }
-      }
-    }
-  });
-}
 
 function renderReportChartSankey(canvasId, sankeyData) {
   const canvas = document.getElementById(canvasId);
@@ -28963,7 +28581,7 @@ function renderReportChartSankey(canvasId, sankeyData) {
               size: 11,
               weight: "bold"
             },
-            color: "#0F172A"
+            color: () => document.documentElement.classList.contains('dark') ? '#F8FAFC' : '#0F172A'
           }
         }]
       },
@@ -28977,7 +28595,7 @@ function renderReportChartSankey(canvasId, sankeyData) {
             callbacks: {
               label: (ctx) => {
                 const item = ctx.raw;
-                return ` ${item.from} → ${item.to}: ${item.flow} fluxo`;
+                return ` ${item.from} → ${item.to}: ${item.formatted}`;
               }
             }
           }
@@ -28987,7 +28605,9 @@ function renderReportChartSankey(canvasId, sankeyData) {
   }
 }
 
-function renderReportChartBar(canvasId, labels, data, color, total) {
+function renderReportChartBar(canvasId, categories, color) {
+  const labels = categories.map(c => c.category);
+  const data = categories.map(c => c.value);
   try {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
@@ -29052,9 +28672,7 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
           tooltip: {
             callbacks: {
               label: (context) => {
-                const val = context.raw || 0;
-                const pct = total > 0 ? ((val / total) * 100).toFixed(1) : "0.0";
-                return " " + pct + "%";
+                return " " + categories[context.dataIndex].formatted;
               }
             }
           },
@@ -29062,12 +28680,9 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
             anchor: "end",
             align: "end",
             offset: 8,
-            color: "#0F172A",
+            color: () => document.documentElement.classList.contains('dark') ? '#F8FAFC' : '#0F172A',
             font: { family: "Montserrat", weight: "bold", size: 11 },
-            formatter: (value) => {
-              const pct = total > 0 ? ((value / total) * 100).toFixed(1) : "0.0";
-              return pct + "%";
-            }
+            formatter: (value, context) => categories[context.dataIndex].formatted
           }
         },
         scales: {
@@ -29080,7 +28695,7 @@ function renderReportChartBar(canvasId, labels, data, color, total) {
             grid: { display: false },
             ticks: {
               font: { family: "Montserrat", size: 11, weight: "700" },
-              color: "#1E293B",
+              color: () => document.documentElement.classList.contains('dark') ? '#E2E8F0' : '#1E293B',
               autoSkip: false,
               padding: 10
             }
@@ -32053,7 +31668,7 @@ function renderIbgePibChart() {
       plugins: {
         legend: {
           position: "bottom",
-          labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12, padding: 8, color: "#0F172A" }
+          labels: { font: { family: "Montserrat", size: 10, weight: "bold" }, boxWidth: 12, padding: 8, color: () => getRadarChartTextColor() }
         },
         datalabels: {
           color: "#FFFFFF",
@@ -32119,7 +31734,7 @@ function renderIbgeHistoricoPopChart() {
           anchor: "end",
           offset: 6,
           clip: false,
-          color: "#0B2545",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 10.5, weight: "bold" },
           formatter: (val) => val >= 1000 ? (val / 1000).toFixed(1) + "k" : val
         },
@@ -32133,16 +31748,16 @@ function renderIbgeHistoricoPopChart() {
         y: {
           beginAtZero: false,
           grace: "15%",
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
           ticks: {
             font: { family: "Montserrat", size: 9 },
-            color: "#64748B",
+            color: () => getRadarChartMutedColor(),
             callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + "k" : v
           }
         },
         x: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: () => getRadarChartAxisTickColor() }
         }
       }
     }
@@ -32209,7 +31824,7 @@ function renderIbgeFaixasEtariasChart() {
           align: "top",
           offset: 4,
           clip: false,
-          color: "#0F172A",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
         },
@@ -32223,12 +31838,12 @@ function renderIbgeFaixasEtariasChart() {
         y: {
           beginAtZero: true,
           grace: "18%",
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + "k" : v }
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: () => getRadarChartMutedColor(), callback: (v) => v >= 1000 ? (v / 1000).toFixed(0) + "k" : v }
         },
         x: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: () => getRadarChartAxisTickColor() }
         }
       }
     }
@@ -32270,7 +31885,7 @@ function renderIbgeEmpregoChart() {
         datalabels: {
           anchor: "end",
           align: "right",
-          color: "#0F172A",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
         },
@@ -32283,12 +31898,12 @@ function renderIbgeEmpregoChart() {
       scales: {
         x: {
           beginAtZero: true,
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: () => getRadarChartMutedColor(), callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
         },
         y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" }, color: () => getRadarChartAxisTickColor() }
         }
       }
     }
@@ -32330,7 +31945,7 @@ function renderIbgeEmpresasSetorChart() {
         datalabels: {
           anchor: "end",
           align: "right",
-          color: "#0F172A",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k" : v
         },
@@ -32343,12 +31958,12 @@ function renderIbgeEmpresasSetorChart() {
       scales: {
         x: {
           beginAtZero: true,
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: () => getRadarChartMutedColor(), callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
         },
         y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 9, weight: "bold" }, color: () => getRadarChartAxisTickColor() }
         }
       }
     }
@@ -32377,7 +31992,7 @@ function renderIbgeFrotaChart() {
         data: data,
         backgroundColor: ["#E11D48", "#F59E0B", "#0B2545", "#00B4D8"],
         borderWidth: 2,
-        borderColor: "#FFFFFF"
+        borderColor: () => isAppDarkMode() ? "#0F172A" : "#FFFFFF"
       }]
     },
     options: {
@@ -32387,7 +32002,7 @@ function renderIbgeFrotaChart() {
       plugins: {
         legend: {
           position: "bottom",
-          labels: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: "#0F172A", boxWidth: 12, padding: 6 }
+          labels: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: () => getRadarChartTextColor(), boxWidth: 12, padding: 6 }
         },
         datalabels: {
           color: "#FFFFFF",
@@ -32443,7 +32058,7 @@ function renderIbgeFaixasRendaPopChart() {
         datalabels: {
           anchor: "end",
           align: "right",
-          color: "#0F172A",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 11, weight: "bold" },
           formatter: (v) => v >= 1000 ? (v / 1000).toFixed(1) + "k hab." : v + " hab."
         },
@@ -32456,12 +32071,12 @@ function renderIbgeFaixasRendaPopChart() {
       scales: {
         x: {
           beginAtZero: true,
-          grid: { color: "rgba(226, 232, 240, 0.7)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: "#64748B", callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 10, weight: "bold" }, color: () => getRadarChartMutedColor(), callback: (v) => v >= 1000 ? (v / 1000) + "k" : v }
         },
         y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 11, weight: "bold" }, color: "#0B2545" }
+          ticks: { font: { family: "Montserrat", size: 11, weight: "bold" }, color: () => getRadarChartAxisTickColor() }
         }
       }
     }
@@ -32506,7 +32121,7 @@ function renderIbgeBairrosPopChart() {
         datalabels: {
           anchor: "end",
           align: "right",
-          color: "#0F172A",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v + "%"
         },
@@ -32520,12 +32135,12 @@ function renderIbgeBairrosPopChart() {
         x: {
           beginAtZero: true,
           suggestedMax: 40,
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v + "%" }
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: () => getRadarChartMutedColor(), callback: (v) => v + "%" }
         },
         y: {
           grid: { display: false },
-          ticks: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: "#1E293B" }
+          ticks: { font: { family: "Montserrat", size: 9.5, weight: "bold" }, color: () => getRadarChartAxisTickColor() }
         }
       }
     }
@@ -32546,7 +32161,7 @@ function renderIbgeBairrosRendaChart() {
   if (regionFilter !== "todos") {
     const regionMap = { oeste: 0, centro: 1, sul: 2, sudeste: 3, leste: 4, norte: 5, sao_francisco: 6 };
     const targetIdx = regionMap[regionFilter];
-    bgColors = bgColors.map((c, i) => i === targetIdx ? c : "#CBD5E1");
+    bgColors = bgColors.map((c, i) => i === targetIdx ? c : (isAppDarkMode() ? "#334155" : "#CBD5E1"));
   }
 
   window.ibgeChartInstances["bairrosRenda"] = new Chart(canvas.getContext("2d"), {
@@ -32579,7 +32194,7 @@ function renderIbgeBairrosRendaChart() {
           align: "top",
           offset: 4,
           clip: false,
-          color: "#0F172A",
+          color: () => getRadarChartTextColor(),
           font: { family: "Montserrat", size: 10, weight: "bold" },
           formatter: (v) => v.toFixed(1) + " SM"
         },
@@ -32594,14 +32209,14 @@ function renderIbgeBairrosRendaChart() {
           beginAtZero: true,
           grace: "18%",
           suggestedMax: 12,
-          grid: { color: "rgba(226, 232, 240, 0.6)", borderDash: [4, 4] },
-          ticks: { font: { family: "Montserrat", size: 9 }, color: "#64748B", callback: (v) => v + " SM" }
+          grid: { color: () => getRadarChartGridColor(), borderDash: [4, 4] },
+          ticks: { font: { family: "Montserrat", size: 9 }, color: () => getRadarChartMutedColor(), callback: (v) => v + " SM" }
         },
         x: {
           grid: { display: false },
           ticks: { 
             font: { family: "Montserrat", size: 8.5, weight: "bold" }, 
-            color: "#1E293B",
+            color: () => getRadarChartAxisTickColor(),
             maxRotation: 25,
             minRotation: 15
           }

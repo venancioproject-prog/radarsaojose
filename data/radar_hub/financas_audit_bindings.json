@@ -1,0 +1,278 @@
+{
+  "scope": "financas",
+  "round": "P2-2026-10-05",
+  "homologated": false,
+  "store": "data/radar_hub/financas_evidence_2026-10-05.json",
+  "indicators": {
+    "fin_orcamento_realizado": {
+      "value": 4232.54069793,
+      "period": "2023-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-fin_orcamento_realizado-milhoes",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2023&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "40ca288b8ec719a0e05d201ab962b876e95ceb3977864614733d69016513e8ae",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_orcamento_realizado_2024": {
+      "value": 4809.50591362,
+      "period": "2024-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-fin_orcamento_realizado_2024-milhoes",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2024&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "d907700c1a4fd4dd862cdca28ed50fd408d39d4bf454cc27fe11156c0ab9f6c9",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_despesa_liquidada_2023": {
+      "value": 4352.95133087,
+      "period": "2023-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-fin_despesa_liquidada_2023-milhoes",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2023&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "40ca288b8ec719a0e05d201ab962b876e95ceb3977864614733d69016513e8ae",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_superavit_orcamentario_2023": {
+      "value": -263.13743907,
+      "period": "2023-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-fin_superavit_orcamentario_2023-milhoes",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2023&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "40ca288b8ec719a0e05d201ab962b876e95ceb3977864614733d69016513e8ae",
+      "accounting_stage": "Resultado orçamentário calculado do balanço RREO"
+    },
+    "fin_despesa_saude_pct": {
+      "value": 27.63,
+      "period": "2023-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2023-6-row-2796",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2023&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "40ca288b8ec719a0e05d201ab962b876e95ceb3977864614733d69016513e8ae",
+      "accounting_stage": "% Aplicado Até o Bimestre"
+    },
+    "fin_despesa_educacao_pct": {
+      "value": 25.84,
+      "period": "2023-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2023-6-row-2764",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2023&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "40ca288b8ec719a0e05d201ab962b876e95ceb3977864614733d69016513e8ae",
+      "accounting_stage": "% Aplicado Até o Bimestre"
+    },
+    "fin_despesa_pessoal_rcl_pct": {
+      "value": 28.09,
+      "period": "2023-RGF-Q3",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rgf-2023-3-row-169",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2023&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "a7e8c82f38b4fc6f5f71db504f2a76228a1e59af06f119988a0682a27f990069",
+      "accounting_stage": "% sobre a RCL Ajustada"
+    },
+    "fin_receita_iss_milhoes": {
+      "value": 548.05296156,
+      "period": "2023",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-fin_receita_iss_milhoes-milhoes",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/dca?an_exercicio=2023&id_ente=3549904",
+      "sha256": "e52b5022eafd303c3fde3bd972dd4b6f1abbd603a297930d01d3be909367a403",
+      "accounting_stage": "Receitas Brutas Realizadas"
+    },
+    "fin_previsao_inicial_2025": {
+      "value": 4876124000,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2788",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_previsao_atualizada_2025": {
+      "value": 4876124000,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2789",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_receita_realizada_2025": {
+      "value": 5112491710.24,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2790",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_dotacao_inicial_2025": {
+      "value": 4914093000,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2793",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_dotacao_atualizada_2025": {
+      "value": 5489238632.18,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2794",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_despesa_empenhada_2025": {
+      "value": 5245931732.4,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2795",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_despesa_liquidada_2025": {
+      "value": 5115661287.57,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2796",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_despesa_paga_2025": {
+      "value": 5046568546.33,
+      "period": "2025-RREO-B6",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rreo-2025-6-row-2797",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Até o Bimestre"
+    },
+    "fin_resultado_orcamentario_2025": {
+      "value": -133440022.16,
+      "period": "2025-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-resultado-orcamentario-2025",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "Resultado orçamentário calculado do balanço RREO"
+    },
+    "fin_realizacao_receita_pct_2025": {
+      "value": 104.84745076704365,
+      "period": "2025-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-realizacao_receita_pct-2025",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "realizacao_receita_pct"
+    },
+    "fin_empenhado_dotacao_pct_2025": {
+      "value": 95.56756563007404,
+      "period": "2025-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-empenhado_dotacao_pct-2025",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "empenhado_dotacao_pct"
+    },
+    "fin_liquidado_dotacao_pct_2025": {
+      "value": 93.19436866125754,
+      "period": "2025-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-liquidado_dotacao_pct-2025",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "liquidado_dotacao_pct"
+    },
+    "fin_pago_dotacao_pct_2025": {
+      "value": 91.93567422529419,
+      "period": "2025-RREO-B6",
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "p2-pago_dotacao_pct-2025",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rreo?an_exercicio=2025&id_ente=3549904&nr_periodo=6&co_tipo_demonstrativo=RREO",
+      "sha256": "6cf607cb447f8941c75d9ad82384b37081b69086f616422c0f482747ff6f9a56",
+      "accounting_stage": "pago_dotacao_pct"
+    },
+    "fin_dividaconsolidada_2025": {
+      "value": null,
+      "period": "2025-RGF-Q3",
+      "status": "NAO_VERIFICADO",
+      "evidence_id": "p2-rgf-2025-3-row-218",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "e5f4dc3dabc470c1d1cbe4b786190779ba5cafa780c97369cf1c512e2c9da9cb",
+      "accounting_stage": "Até o 3º Quadrimestre"
+    },
+    "fin_dividaconsolidadaliquida_2025": {
+      "value": null,
+      "period": "2025-RGF-Q3",
+      "status": "NAO_VERIFICADO",
+      "evidence_id": "p2-rgf-2025-3-row-279",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "e5f4dc3dabc470c1d1cbe4b786190779ba5cafa780c97369cf1c512e2c9da9cb",
+      "accounting_stage": "Até o 3º Quadrimestre"
+    },
+    "fin_percentualdadclsobrearcl_2025": {
+      "value": null,
+      "period": "2025-RGF-Q3",
+      "status": "NAO_VERIFICADO",
+      "evidence_id": "p2-rgf-2025-3-row-299",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "e5f4dc3dabc470c1d1cbe4b786190779ba5cafa780c97369cf1c512e2c9da9cb",
+      "accounting_stage": "Até o 3º Quadrimestre"
+    },
+    "fin_pessoal_despesacompessoaltotal_2025": {
+      "value": null,
+      "period": "2025-RGF-Q3",
+      "status": "NAO_VERIFICADO",
+      "evidence_id": "p2-rgf-2025-3-row-207",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "e5f4dc3dabc470c1d1cbe4b786190779ba5cafa780c97369cf1c512e2c9da9cb",
+      "accounting_stage": "Valor"
+    },
+    "fin_pessoal_receitacorrenteliquidaajustada_2025": {
+      "value": 4258756143.71,
+      "period": "2025-RGF-Q3",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rgf-2025-3-row-206",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "e5f4dc3dabc470c1d1cbe4b786190779ba5cafa780c97369cf1c512e2c9da9cb",
+      "accounting_stage": "Valor"
+    },
+    "fin_pessoal_pct_2025": {
+      "value": 26.99,
+      "period": "2025-RGF-Q3",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-rgf-2025-3-row-208",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2025&id_ente=3549904&in_periodicidade=Q&nr_periodo=3&co_tipo_demonstrativo=RGF&co_poder=E",
+      "sha256": "e5f4dc3dabc470c1d1cbe4b786190779ba5cafa780c97369cf1c512e2c9da9cb",
+      "accounting_stage": "% sobre a RCL Ajustada"
+    },
+    "fin_investimentos_empenhadas_2025": {
+      "value": 241888190.77,
+      "period": "2025",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-dca-2025-row-622",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/dca?an_exercicio=2025&id_ente=3549904",
+      "sha256": "2945fa6bfef739f2ebf76091f27af7e6ce506e076a68d7a547953c8239bd0714",
+      "accounting_stage": "Despesas Empenhadas"
+    },
+    "fin_investimentos_liquidadas_2025": {
+      "value": 211167807.29,
+      "period": "2025",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-dca-2025-row-623",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/dca?an_exercicio=2025&id_ente=3549904",
+      "sha256": "2945fa6bfef739f2ebf76091f27af7e6ce506e076a68d7a547953c8239bd0714",
+      "accounting_stage": "Despesas Liquidadas"
+    },
+    "fin_investimentos_pagas_2025": {
+      "value": 209298129.25,
+      "period": "2025",
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "p2-dca-2025-row-624",
+      "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/dca?an_exercicio=2025&id_ente=3549904",
+      "sha256": "2945fa6bfef739f2ebf76091f27af7e6ce506e076a68d7a547953c8239bd0714",
+      "accounting_stage": "Despesas Pagas"
+    }
+  }
+}

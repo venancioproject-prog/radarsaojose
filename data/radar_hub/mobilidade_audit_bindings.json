@@ -1,0 +1,61 @@
+{
+  "round": "P4",
+  "homologated": false,
+  "status": "PENDENTE_REVISAO_HUMANA",
+  "indicators": {
+    "mob_frota_total": {
+      "value": 483879.0,
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "mob:a49e91b23c326268fd55",
+      "period": "2023-12"
+    },
+    "mob_frota_total_2024": {
+      "value": 498566,
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "mob:965299cb7d028f4cd6bc",
+      "period": "2024-12"
+    },
+    "mob_frota_automoveis": {
+      "value": 321770.0,
+      "status": "CONFIRMADO_FONTE_OFICIAL",
+      "evidence_id": "mob:62ee92eeaa4d55d99e3e",
+      "period": "2023-12"
+    },
+    "mob_frota_motocicletas": {
+      "value": 75315.0,
+      "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+      "evidence_id": "mob:calc:motos:2023-12",
+      "period": "2023-12"
+    },
+    "mob_taxa_motorizacao": {
+      "value": null,
+      "status": "SUSPENSO",
+      "evidence_id": null,
+      "period": "2023"
+    },
+    "mob_fatalidades_transito": {
+      "value": null,
+      "status": "SUSPENSO",
+      "evidence_id": null,
+      "period": "2023"
+    },
+    "mob_fatalidades_transito_2024": {
+      "value": null,
+      "status": "SUSPENSO",
+      "evidence_id": null,
+      "period": "2024"
+    },
+    "mob_vitimas_motociclistas_pct": {
+      "value": null,
+      "status": "SUSPENSO",
+      "evidence_id": null,
+      "period": "2023"
+    }
+  },
+  "series_count": 16174,
+  "evidence_store": "data/radar_hub/mobilidade_evidence_2026-10-05.json",
+  "suspensions": {
+    "infosiga": "Dados não baixados; séries e perfil suspensos.",
+    "motorizacao": "Sem denominador populacional externo compatível."
+  }
+}

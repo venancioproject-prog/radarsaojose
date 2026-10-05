@@ -1,0 +1,655 @@
+{
+  "validation_scope": "local; não confirma fontes oficiais",
+  "divergences": [
+    {
+      "id": "demo_populacao_estimada_2024",
+      "ground_truth": 724756,
+      "registry": 725450,
+      "audit_report_historico": 725450,
+      "fallback_atual": 725450,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_populacao_estimada_2026",
+      "ground_truth": 729153,
+      "registry": 737396,
+      "audit_report_historico": 737396,
+      "fallback_atual": 737396,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_domicilios_total",
+      "ground_truth": 282214,
+      "registry": 253180,
+      "audit_report_historico": 253180,
+      "fallback_atual": 253180,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_media_moradores",
+      "ground_truth": 2.8,
+      "registry": 2.75,
+      "audit_report_historico": 2.75,
+      "fallback_atual": 2.75,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_area_territorial",
+      "ground_truth": 1099.494,
+      "registry": 1099.4,
+      "audit_report_historico": 1099.4,
+      "fallback_atual": 1099.4,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_densidade_demografica",
+      "ground_truth": 634.03,
+      "registry": 634.3,
+      "audit_report_historico": 634.3,
+      "fallback_atual": 634.3,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_populacao_mulheres",
+      "ground_truth": 361695,
+      "registry": 358983,
+      "audit_report_historico": 358983,
+      "fallback_atual": 358983,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_populacao_homens",
+      "ground_truth": 335359,
+      "registry": 338071,
+      "audit_report_historico": 338071,
+      "fallback_atual": 338071,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_razao_sexo",
+      "ground_truth": 92.72,
+      "registry": 94.17,
+      "audit_report_historico": 94.17,
+      "fallback_atual": 94.17,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "demo_indice_envelhecimento_2022",
+      "ground_truth": 62.48,
+      "registry": 81.6,
+      "audit_report_historico": 81.6,
+      "fallback_atual": 81.6,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_taxa_homicidios",
+      "ground_truth": "vínculo não determinado",
+      "registry": 3.28,
+      "audit_report_historico": 6.31,
+      "fallback_atual": 3.28,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_roubos_veiculos_2024",
+      "ground_truth": "vínculo não determinado",
+      "registry": 143,
+      "audit_report_historico": 118,
+      "fallback_atual": 143,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_furtos_veiculos_2024",
+      "ground_truth": "vínculo não determinado",
+      "registry": 724,
+      "audit_report_historico": 1140,
+      "fallback_atual": 724,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_roubos_gerais",
+      "ground_truth": "vínculo não determinado",
+      "registry": 965,
+      "audit_report_historico": 1845,
+      "fallback_atual": 965,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_produtividade_prisoes",
+      "ground_truth": 2170,
+      "registry": 2170,
+      "audit_report_historico": 2418,
+      "fallback_atual": 2170,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_sao_jose_unida",
+      "ground_truth": 2948,
+      "registry": 2948,
+      "audit_report_historico": "ausente",
+      "fallback_atual": 2948,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_ranking_500k",
+      "ground_truth": "vínculo não determinado",
+      "registry": 3.28,
+      "audit_report_historico": "ausente",
+      "fallback_atual": 3.28,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_esclarecimento_deic",
+      "ground_truth": 87.0,
+      "registry": 87.0,
+      "audit_report_historico": "ausente",
+      "fallback_atual": 87.0,
+      "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+    },
+    {
+      "id": "seg_furtos_veiculos_2023",
+      "ground_truth": "não vinculado",
+      "registry": "ausente",
+      "audit_report_historico": 1220,
+      "fallback_atual": "ausente",
+      "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+    },
+    {
+      "id": "seg_homicidios_dolosos_2023",
+      "ground_truth": "não vinculado",
+      "registry": "ausente",
+      "audit_report_historico": 44,
+      "fallback_atual": "ausente",
+      "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+    },
+    {
+      "id": "seg_roubos_veiculos_2023",
+      "ground_truth": "não vinculado",
+      "registry": "ausente",
+      "audit_report_historico": 157,
+      "fallback_atual": "ausente",
+      "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+    },
+    {
+      "id": "seg_taxa_homicidios_2024",
+      "ground_truth": "não vinculado",
+      "registry": "ausente",
+      "audit_report_historico": 3.17,
+      "fallback_atual": "ausente",
+      "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+    },
+    {
+      "id": "seg_violencia_mulher_medidas",
+      "ground_truth": "não vinculado",
+      "registry": "ausente",
+      "audit_report_historico": 1842,
+      "fallback_atual": "ausente",
+      "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+    }
+  ],
+  "economia": {
+    "validation_scope": "valores ligados à evidência externa preservada; sem homologação humana",
+    "current_divergences": [],
+    "legacy_unresolved": [
+      {
+        "value": 204815,
+        "previous_meaning": "trecho antigo dizia dezembro/2024",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "finding": "Não foi localizado nos estoques municipais extraídos das duas edições; não atribuída revisão, competência ou universo sem prova.",
+        "matches": []
+      },
+      {
+        "value": 211530,
+        "previous_meaning": "GT dizia 2023",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "finding": "Não foi localizado nos estoques municipais extraídos das duas edições; não atribuída revisão, competência ou universo sem prova.",
+        "matches": []
+      },
+      {
+        "value": 212800,
+        "previous_meaning": "registry e GT alternativo diziam 2023",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "finding": "Não foi localizado nos estoques municipais extraídos das duas edições; não atribuída revisão, competência ou universo sem prova.",
+        "matches": []
+      },
+      {
+        "value": 214042,
+        "previous_meaning": "registry e GT diziam 2024",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "finding": "Não foi localizado nos estoques municipais extraídos das duas edições; não atribuída revisão, competência ou universo sem prova.",
+        "matches": []
+      }
+    ]
+  },
+  "financas": {
+    "validation_scope": "P2: vínculos a evidência externa preservada; sem homologação humana",
+    "current_unresolved": [
+      {
+        "indicator": "DTP Executivo 2025 Q3, valor absoluto",
+        "siconfi": 1149579006.7,
+        "municipal": 1149583873.74,
+        "difference": -4867.04,
+        "status": "DIVERGENCIA_NAO_RESOLVIDA",
+        "siconfi_evidence_id": "p2-rgf-2025-3-row-207",
+        "municipal_evidence_id": "p2-municipal-dtp-2025-divergente",
+        "revision_record": {
+          "exercicio": 2025,
+          "cod_ibge": 3549904,
+          "populacao": 725419,
+          "instituicao": "Prefeitura Municipal de São José dos Campos - SP",
+          "entregavel": "Relatório de Gestão Fiscal",
+          "periodo": 3,
+          "periodicidade": "Q",
+          "status_relatorio": "RE",
+          "data_status": "2026-04-30T22:30:38Z",
+          "forma_envio": "M",
+          "tipo_relatorio": "P"
+        },
+        "revision_source": {
+          "name": "siconfi-entregas-2025",
+          "requested_url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "accessed_at": "2026-10-05T00:49:25.391685-03:00",
+          "page": 0,
+          "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "status_code": 200,
+          "content_type": "application/json",
+          "raw_file": "data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2025.json",
+          "sha256": "1e66fba8b62d920e63ece0af6e4dcc08d5a1a839e8d4cacb60d603c59b0abb2a",
+          "bytes": 12025,
+          "items": 39,
+          "hasMore": false
+        },
+        "municipal_generated_at": "30/01/2026 16:58:48",
+        "explanation": "RGF SICONFI retificado em 30/04/2026, posterior ao PDF municipal de janeiro. A versão distinta está demonstrada; o ajuste de R$ 4.867,04 não foi isolado em documento comparativo. Valor absoluto suspenso, sem escolher fonte silenciosamente."
+      },
+      {
+        "indicator": "DÍVIDA CONSOLIDADA - DC (I) — 2025 Q3",
+        "siconfi": 848432816.17,
+        "municipal": 783099344.84,
+        "difference": 65333471.33,
+        "status": "DIVERGENCIA_NAO_RESOLVIDA",
+        "siconfi_evidence_id": "p2-rgf-2025-3-row-218",
+        "municipal_evidence_id": "p2-municipal-DividaConsolidada-2025-divergente",
+        "revision_record": {
+          "exercicio": 2025,
+          "cod_ibge": 3549904,
+          "populacao": 725419,
+          "instituicao": "Prefeitura Municipal de São José dos Campos - SP",
+          "entregavel": "Relatório de Gestão Fiscal",
+          "periodo": 3,
+          "periodicidade": "Q",
+          "status_relatorio": "RE",
+          "data_status": "2026-04-30T22:30:38Z",
+          "forma_envio": "M",
+          "tipo_relatorio": "P"
+        },
+        "revision_source": {
+          "name": "siconfi-entregas-2025",
+          "requested_url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "accessed_at": "2026-10-05T00:49:25.391685-03:00",
+          "page": 0,
+          "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "status_code": 200,
+          "content_type": "application/json",
+          "raw_file": "data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2025.json",
+          "sha256": "1e66fba8b62d920e63ece0af6e4dcc08d5a1a839e8d4cacb60d603c59b0abb2a",
+          "bytes": 12025,
+          "items": 39,
+          "hasMore": false
+        },
+        "municipal_generated_at": "30/01/2026 16:58:48",
+        "explanation": "API SICONFI e PDF municipal apresentam valores distintos após retificação registrada. Ajuste exato não reconciliado. Indicador suspenso, sem escolher um valor."
+      },
+      {
+        "indicator": "DÍVIDA CONSOLIDADA LÍQUIDA (DCL) (III) = (I - II) — 2025 Q3",
+        "siconfi": 705075250.34,
+        "municipal": 639741779.01,
+        "difference": 65333471.33,
+        "status": "DIVERGENCIA_NAO_RESOLVIDA",
+        "siconfi_evidence_id": "p2-rgf-2025-3-row-279",
+        "municipal_evidence_id": "p2-municipal-DividaConsolidadaLiquida-2025-divergente",
+        "revision_record": {
+          "exercicio": 2025,
+          "cod_ibge": 3549904,
+          "populacao": 725419,
+          "instituicao": "Prefeitura Municipal de São José dos Campos - SP",
+          "entregavel": "Relatório de Gestão Fiscal",
+          "periodo": 3,
+          "periodicidade": "Q",
+          "status_relatorio": "RE",
+          "data_status": "2026-04-30T22:30:38Z",
+          "forma_envio": "M",
+          "tipo_relatorio": "P"
+        },
+        "revision_source": {
+          "name": "siconfi-entregas-2025",
+          "requested_url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "accessed_at": "2026-10-05T00:49:25.391685-03:00",
+          "page": 0,
+          "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "status_code": 200,
+          "content_type": "application/json",
+          "raw_file": "data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2025.json",
+          "sha256": "1e66fba8b62d920e63ece0af6e4dcc08d5a1a839e8d4cacb60d603c59b0abb2a",
+          "bytes": 12025,
+          "items": 39,
+          "hasMore": false
+        },
+        "municipal_generated_at": "30/01/2026 16:58:48",
+        "explanation": "API SICONFI e PDF municipal apresentam valores distintos após retificação registrada. Ajuste exato não reconciliado. Indicador suspenso, sem escolher um valor."
+      },
+      {
+        "indicator": "% da DCL sobre a RCL AJUSTADA (III/VI) — 2025 Q3",
+        "siconfi": 16.49,
+        "municipal": 14.96,
+        "difference": 1.53,
+        "status": "DIVERGENCIA_NAO_RESOLVIDA",
+        "siconfi_evidence_id": "p2-rgf-2025-3-row-299",
+        "municipal_evidence_id": "p2-municipal-PercentualDaDCLSobreARCL-2025-divergente",
+        "revision_record": {
+          "exercicio": 2025,
+          "cod_ibge": 3549904,
+          "populacao": 725419,
+          "instituicao": "Prefeitura Municipal de São José dos Campos - SP",
+          "entregavel": "Relatório de Gestão Fiscal",
+          "periodo": 3,
+          "periodicidade": "Q",
+          "status_relatorio": "RE",
+          "data_status": "2026-04-30T22:30:38Z",
+          "forma_envio": "M",
+          "tipo_relatorio": "P"
+        },
+        "revision_source": {
+          "name": "siconfi-entregas-2025",
+          "requested_url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "accessed_at": "2026-10-05T00:49:25.391685-03:00",
+          "page": 0,
+          "url": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/extrato_entregas?an_referencia=2025&id_ente=3549904",
+          "status_code": 200,
+          "content_type": "application/json",
+          "raw_file": "data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2025.json",
+          "sha256": "1e66fba8b62d920e63ece0af6e4dcc08d5a1a839e8d4cacb60d603c59b0abb2a",
+          "bytes": 12025,
+          "items": 39,
+          "hasMore": false
+        },
+        "municipal_generated_at": "30/01/2026 16:58:48",
+        "explanation": "API SICONFI e PDF municipal apresentam valores distintos após retificação registrada. Ajuste exato não reconciliado. Indicador suspenso, sem escolher um valor."
+      }
+    ],
+    "legacy_decisions": [
+      {
+        "id": "fin_orcamento_realizado",
+        "name": "Receita orçamentária realizada — RREO consolidado 2023",
+        "before": 3842.6,
+        "after": 4232.54069793,
+        "exercise": 2023,
+        "period": "2023-RREO-B6",
+        "unit": "R$ milhões",
+        "concept": "Receita orçamentária realizada — RREO consolidado 2023",
+        "accounting_stage": "Até o Bimestre",
+        "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+        "evidence_id": "p2-fin_orcamento_realizado-milhoes",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_orcamento_realizado_2024",
+        "name": "Receita orçamentária realizada — RREO consolidado 2024",
+        "before": 4210.0,
+        "after": 4809.50591362,
+        "exercise": 2024,
+        "period": "2024-RREO-B6",
+        "unit": "R$ milhões",
+        "concept": "Receita orçamentária realizada — RREO consolidado 2024",
+        "accounting_stage": "Até o Bimestre",
+        "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+        "evidence_id": "p2-fin_orcamento_realizado_2024-milhoes",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_despesa_liquidada_2023",
+        "name": "Despesa orçamentária liquidada — RREO consolidado 2023",
+        "before": 3721.4,
+        "after": 4352.95133087,
+        "exercise": 2023,
+        "period": "2023-RREO-B6",
+        "unit": "R$ milhões",
+        "concept": "Despesa orçamentária liquidada — RREO consolidado 2023",
+        "accounting_stage": "Até o Bimestre",
+        "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+        "evidence_id": "p2-fin_despesa_liquidada_2023-milhoes",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_superavit_orcamentario_2023",
+        "name": "Resultado orçamentário — receita realizada menos despesa empenhada (2023)",
+        "before": 121.2,
+        "after": -263.13743907,
+        "exercise": 2023,
+        "period": "2023-RREO-B6",
+        "unit": "R$ milhões",
+        "concept": "Resultado orçamentário — receita realizada menos despesa empenhada (2023)",
+        "accounting_stage": "Resultado orçamentário calculado do balanço RREO",
+        "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+        "evidence_id": "p2-fin_superavit_orcamentario_2023-milhoes",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_despesa_saude_pct",
+        "name": "Aplicação em ASPS — percentual publicado no RREO (2023)",
+        "before": 27.2,
+        "after": 27.63,
+        "exercise": 2023,
+        "period": "2023-RREO-B6",
+        "unit": "% da base de impostos e transferências do demonstrativo ASPS",
+        "concept": "Despesas com Ações e Serviços Públicos de Saúde Executadas com Recursos de Impostos",
+        "accounting_stage": "% Aplicado Até o Bimestre",
+        "status": "CONFIRMADO_FONTE_OFICIAL",
+        "evidence_id": "p2-rreo-2023-6-row-2796",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_despesa_educacao_pct",
+        "name": "Aplicação em MDE — percentual publicado no RREO (2023)",
+        "before": 25.5,
+        "after": 25.84,
+        "exercise": 2023,
+        "period": "2023-RREO-B6",
+        "unit": "% da base de impostos e transferências do demonstrativo MDE",
+        "concept": "Mínimo Anual de <18% / 25%> das Receitas de Impostos na Manutenção e Desenvolvimento do Ensino",
+        "accounting_stage": "% Aplicado Até o Bimestre",
+        "status": "CONFIRMADO_FONTE_OFICIAL",
+        "evidence_id": "p2-rreo-2023-6-row-2764",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_despesa_pessoal_rcl_pct",
+        "name": "Despesa total com pessoal — Executivo / RCL ajustada (2023-Q3)",
+        "before": 41.8,
+        "after": 28.09,
+        "exercise": 2023,
+        "period": "2023-RGF-Q3",
+        "unit": "% da RCL ajustada para pessoal",
+        "concept": "DESPESA TOTAL COM PESSOAL - DTP (VIII) = (IIIa + IIIb)",
+        "accounting_stage": "% sobre a RCL Ajustada",
+        "status": "CONFIRMADO_FONTE_OFICIAL",
+        "evidence_id": "p2-rgf-2023-3-row-169",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      },
+      {
+        "id": "fin_receita_iss_milhoes",
+        "name": "ISSQN — receita bruta realizada na DCA (2023)",
+        "before": 842.0,
+        "after": 548.05296156,
+        "exercise": 2023,
+        "period": "2023",
+        "unit": "R$ milhões",
+        "concept": "ISSQN — receita bruta realizada na DCA (2023)",
+        "accounting_stage": "Receitas Brutas Realizadas",
+        "status": "CALCULADO_A_PARTIR_DE_FONTES_OFICIAIS",
+        "evidence_id": "p2-fin_receita_iss_milhoes-milhoes",
+        "decision": "CORRIGIDO_COM_EVIDENCIA_P2",
+        "reason": "Valor/período/estágio legado não comprovado. Substituído pelo registro exato do exercício, com conceito explícito. O ID de superávit é preservado por compatibilidade, mas nome e fórmula são de resultado assinado."
+      }
+    ]
+  },
+  "meio_ambiente": {
+    "validation_scope": "P3 aguardando revisão humana",
+    "legacy_decisions": [
+      {
+        "id": "amb_qualidade_ar_cetesb",
+        "name": "Dias de Ar 'Bom' - Estação Jardim Satélite",
+        "before": 312,
+        "after": null,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "reason": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico.",
+        "evidence_id": null,
+        "url": null,
+        "old_definition": "Dias com Índice de Qualidade do Ar (IQAr) enquadrado na faixa 'Boa' (82,4% do ano).",
+        "new_definition": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico."
+      },
+      {
+        "id": "amb_qualidade_ar_vista_verde",
+        "name": "Dias de Ar 'Bom' - Estação Vista Verde",
+        "before": 324,
+        "after": null,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "reason": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico.",
+        "evidence_id": null,
+        "url": null,
+        "old_definition": "Monitoramento contínuo com sensores telemétricos na zona leste (79,8% de dias classificados como 'Bom').",
+        "new_definition": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico."
+      },
+      {
+        "id": "amb_focos_queimadas_2024",
+        "name": "Focos de Calor e Queimadas (INPE 2024)",
+        "before": 94,
+        "after": 10,
+        "before_period": "2024",
+        "period": "2024",
+        "status": "CONFIRMADO",
+        "reason": "Substituído por dado externo reproduzível do produto e competência declarados.",
+        "evidence_id": "amb:5882b0becda22e39786b",
+        "url": "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/EstadosBr_sat_ref/SP/focos_br_sp_ref_2024.zip",
+        "old_definition": "Detecção de anomalias térmicas capturadas pelos sensores MODIS e VIIRS a bordo de satélites ambientais.",
+        "new_definition": "Focos — satélite de referência; código nativo satélite de referência; {\"formula\": \"COUNT(registros municipais no arquivo anual integral)\", \"components\": [\"8c497c60-f8af-3ca3-825c-71728c70308f\", \"b35a29d1-1d70-30a6-bd4e-3e74b7ba8985\", \"463e1938-4d04-3978-a66c-9f606f50d5de\", \"21fbfbbd-33c3-3005-9192-8d80d4e23a31\", \"815870af-f71b-315f-940a-d3297aad33ca\", \"1df069b6-ec10-3145-b6bb-3adf637bbe4a\", \"7e04d4f4-a8f2-3f51-b0a1-4401ed1d4ed7\", \"9a64a439-628d-3673-ab66-26acc1b610c6\", \"ef1fba7f-b043-3c92-bb03-c6a53544a31d\", \"034e28ed-6545-3e88-8c98-3f6fab9b9f80\"]}; numerador: contagem; denominador: não se aplica"
+      },
+      {
+        "id": "amb_focos_queimadas_2023",
+        "name": "Focos de Calor e Queimadas (INPE 2023)",
+        "before": 46,
+        "after": 8,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "CONFIRMADO",
+        "reason": "Substituído por dado externo reproduzível do produto e competência declarados.",
+        "evidence_id": "amb:6c42b98efeb5aa75a92b",
+        "url": "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/EstadosBr_sat_ref/SP/focos_br_sp_ref_2023.zip",
+        "old_definition": "Total anual de focos de calor processados pelo satélite de referência do INPE.",
+        "new_definition": "Focos — satélite de referência; código nativo satélite de referência; {\"formula\": \"COUNT(registros municipais no arquivo anual integral)\", \"components\": [\"1a12ca14-bdc6-3172-b128-67454aeef3ec\", \"1b0a2e1d-82cc-3f7c-950b-b116b866107e\", \"2a637e8c-3e3c-3579-b868-8dd2f209f895\", \"776979ba-9092-3119-b569-93b33b566511\", \"b27718c7-d411-3731-8c69-0b6200f29694\", \"63e487c7-dda0-3085-bef2-91c0463eb721\", \"3443c33b-ea3e-317e-9b95-8f75efe640b6\", \"e86d2cea-d560-3eba-9e64-8b8003a1bbc4\"]}; numerador: contagem; denominador: não se aplica"
+      },
+      {
+        "id": "amb_saneamento_agua_tratada",
+        "name": "Índice de Atendimento de Água Tratada",
+        "before": 99.8,
+        "after": 98.64,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "CONFIRMADO",
+        "reason": "Substituído por dado externo reproduzível do produto e competência declarados.",
+        "evidence_id": "amb:70116fa5feade1350c10",
+        "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/arquivos/SINISA_Resultados_Ref2023.zip",
+        "old_definition": "População total atendida por rede pública de abastecimento de água potável.",
+        "new_definition": "Atendimento da população total com rede de abastecimento de água; código nativo IAG0001; null; numerador: população total atendida com rede de água; denominador: população total de referência"
+      },
+      {
+        "id": "amb_saneamento_esgoto",
+        "name": "Índice de Coleta de Esgoto Sanitário",
+        "before": 98.6,
+        "after": null,
+        "before_period": "2022",
+        "period": "2022",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "reason": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico.",
+        "evidence_id": null,
+        "url": null,
+        "old_definition": "Percentual de domicílios urbanos conectados à rede coletora pública de esgoto da Sabesp.",
+        "new_definition": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico."
+      },
+      {
+        "id": "amb_saneamento_tratamento_esgoto",
+        "name": "Índice de Tratamento do Esgoto Coletado",
+        "before": 95.8,
+        "after": 100.0,
+        "before_period": "2022",
+        "period": "2022",
+        "status": "CONFIRMADO",
+        "reason": "Substituído por dado externo reproduzível do produto e competência declarados.",
+        "evidence_id": "amb:a2ade20744c89b103d22",
+        "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis/produtos-do-snis/diagnosticos/diagnostico_tematico_visao_geral_ae_snis_2023_atualizado2.zip",
+        "old_definition": "Volume de efluente bruto submetido a tratamento nas ETEs antes do descarte nos corpos hídricos.",
+        "new_definition": "Índice de tratamento de esgoto; código nativo IN016; null; numerador: volume de esgoto tratado, conforme ajustes do glossário; denominador: volume de esgoto coletado, conforme ajustes do glossário"
+      },
+      {
+        "id": "amb_saneamento_perdas_distribuicao",
+        "name": "Índice de Perdas na Distribuição de Água",
+        "before": 22.4,
+        "after": 36.49,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "CONFIRMADO",
+        "reason": "Substituído por dado externo reproduzível do produto e competência declarados.",
+        "evidence_id": "amb:0cb44a5e118f05eebf1a",
+        "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/arquivos/SINISA_Resultados_Ref2023.zip",
+        "old_definition": "Percentual do volume de água potável produzido que é perdido em vazamentos antes de chegar ao hidrômetro.",
+        "new_definition": "Perdas totais de água na distribuição; código nativo IAG2013; null; numerador: perdas totais de distribuição conforme glossário; denominador: volume de distribuição conforme glossário"
+      },
+      {
+        "id": "amb_area_protegida_km2",
+        "name": "Área sob Proteção Ambiental e Unidades de Conservação",
+        "before": 692.5,
+        "after": null,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "reason": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico.",
+        "evidence_id": null,
+        "url": null,
+        "old_definition": "Soma das áreas de APAs, parques naturais municipais e estaduais no território joseense.",
+        "new_definition": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico."
+      },
+      {
+        "id": "amb_percentual_territorio_protegido",
+        "name": "Percentual do Território sob Proteção Ambiental",
+        "before": 63.0,
+        "after": null,
+        "before_period": "2023",
+        "period": "2023",
+        "status": "ORIGEM_NAO_COMPROVADA",
+        "reason": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico.",
+        "evidence_id": null,
+        "url": null,
+        "old_definition": "Razão entre os 692,5 km² protegidos e a área total de 1.099,4 km² do município.",
+        "new_definition": "Indicador legado sem evidência externa suficiente; preservar ausência. Coleta domiciliar não substituída por indicador volumétrico."
+      }
+    ],
+    "unresolved": [
+      "Ar anual/mensal legado",
+      "União geométrica de áreas protegidas",
+      "Coleta domiciliar legada",
+      "Histórico municipal meteorológico/hidrológico",
+      "Metodologia área urbanizada 2022 na API",
+      "Resíduos: massa per capita publicada exige reconciliação com informações brutas"
+    ]
+  }
+}

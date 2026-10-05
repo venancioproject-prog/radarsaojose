@@ -1,0 +1,154 @@
+{
+  "scope": "meio_ambiente",
+  "round": "P3 2026-10-05",
+  "homologated": false,
+  "indicators": {
+    "amb_qualidade_ar_cetesb": {
+      "value": null,
+      "status": "ORIGEM_NAO_COMPROVADA",
+      "period": "2023",
+      "evidence_id": null,
+      "url": "https://cetesb.sp.gov.br/ar/qualidade-do-ar/"
+    },
+    "amb_qualidade_ar_vista_verde": {
+      "value": null,
+      "status": "ORIGEM_NAO_COMPROVADA",
+      "period": "2023",
+      "evidence_id": null,
+      "url": "https://cetesb.sp.gov.br/ar/qualidade-do-ar/"
+    },
+    "amb_focos_queimadas_2024": {
+      "value": 10,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:5882b0becda22e39786b",
+      "url": "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/EstadosBr_sat_ref/SP/focos_br_sp_ref_2024.zip"
+    },
+    "amb_focos_queimadas_2023": {
+      "value": 8,
+      "status": "CONFIRMADO",
+      "period": "2023",
+      "evidence_id": "amb:6c42b98efeb5aa75a92b",
+      "url": "https://dataserver-coids.inpe.br/queimadas/queimadas/focos/csv/anual/EstadosBr_sat_ref/SP/focos_br_sp_ref_2023.zip"
+    },
+    "amb_saneamento_agua_tratada": {
+      "value": 98.64,
+      "status": "CONFIRMADO",
+      "period": "2023",
+      "evidence_id": "amb:70116fa5feade1350c10",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/arquivos/SINISA_Resultados_Ref2023.zip"
+    },
+    "amb_saneamento_esgoto": {
+      "value": null,
+      "status": "ORIGEM_NAO_COMPROVADA",
+      "period": "2022",
+      "evidence_id": null,
+      "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60030/resultados/3549904"
+    },
+    "amb_saneamento_tratamento_esgoto": {
+      "value": 100.0,
+      "status": "CONFIRMADO",
+      "period": "2022",
+      "evidence_id": "amb:a2ade20744c89b103d22",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis/produtos-do-snis/diagnosticos/diagnostico_tematico_visao_geral_ae_snis_2023_atualizado2.zip"
+    },
+    "amb_saneamento_perdas_distribuicao": {
+      "value": 36.49,
+      "status": "CONFIRMADO",
+      "period": "2023",
+      "evidence_id": "amb:0cb44a5e118f05eebf1a",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/arquivos/SINISA_Resultados_Ref2023.zip"
+    },
+    "amb_area_protegida_km2": {
+      "value": null,
+      "status": "ORIGEM_NAO_COMPROVADA",
+      "period": "2023",
+      "evidence_id": null,
+      "url": "https://www.sjc.sp.gov.br/servicos/urbanismo-e-sustentabilidade/"
+    },
+    "amb_percentual_territorio_protegido": {
+      "value": null,
+      "status": "ORIGEM_NAO_COMPROVADA",
+      "period": "2023",
+      "evidence_id": null,
+      "url": "https://www.sjc.sp.gov.br/servicos/urbanismo-e-sustentabilidade/"
+    },
+    "amb_p3_sinisa_IAG0001": {
+      "value": 99.39,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:d949655df8fb12c9aa78",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_Resultados_Ref2024.zip"
+    },
+    "amb_p3_sinisa_IES0001": {
+      "value": 97.77,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:9390689da419fbf931ab",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_ESGOTO_Planilhas_2024.zip"
+    },
+    "amb_p3_sinisa_IES2004": {
+      "value": 100,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:5b329332e35cd2e096a1",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_ESGOTO_Planilhas_2024.zip"
+    },
+    "amb_p3_sinisa_IAG2013": {
+      "value": 32.13,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:91f9c8cdf415f9a5d61f",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_Resultados_Ref2024.zip"
+    },
+    "amb_p3_sinisa_IRS0001": {
+      "value": 100,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:f0bef84ab8aedf0df91f",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_RESIDUOS_planilhas_2024.zip"
+    },
+    "amb_p3_sinisa_IRS0005": {
+      "value": 98.72,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:821df4ac26ce71b9c2d7",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_RESIDUOS_planilhas_2024.zip"
+    },
+    "amb_p3_sinisa_IRS3010": {
+      "value": 1.65,
+      "status": "CONFIRMADO",
+      "period": "2024",
+      "evidence_id": "amb:6a0c44a6f9740509eefc",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/sinisa/resultados-sinisa/SINISA_RESIDUOS_planilhas_2024.zip"
+    },
+    "amb_p3_vegetacao_nativa": {
+      "value": 26.94,
+      "status": "CONFIRMADO",
+      "period": "2020",
+      "evidence_id": "amb:c3e77394aaa06c6e280a",
+      "url": "https://datageo.ambiente.sp.gov.br/geoserver/datageo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=datageo:IndiceCoberturaVegetalNativa2020&outputFormat=application/json&maxFeatures=1000"
+    },
+    "amb_p3_arborizacao_censo": {
+      "value": 85.55,
+      "status": "CONFIRMADO",
+      "period": "2022",
+      "evidence_id": "amb:30caf11b0a30e76f8d94",
+      "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60029/resultados/3549904"
+    },
+    "amb_p3_esgoto_censo": {
+      "value": 95.67,
+      "status": "CONFIRMADO",
+      "period": "2022",
+      "evidence_id": "amb:c299c089e764cb7ec9cc",
+      "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60030/resultados/3549904"
+    },
+    "amb_p3_snis_IN055": {
+      "value": 96.79,
+      "status": "CONFIRMADO",
+      "period": "2022",
+      "evidence_id": "amb:84e4c73bef245f8d15e2",
+      "url": "https://www.gov.br/cidades/pt-br/acesso-a-informacao/acoes-e-programas/saneamento/snis/produtos-do-snis/diagnosticos/diagnostico_tematico_visao_geral_ae_snis_2023_atualizado2.zip"
+    }
+  }
+}

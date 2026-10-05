@@ -24,14 +24,16 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Relatórios brutos pesados e arquivos confidenciais
+# Arquivos pesados binarios e de apresentacao
 *.pdf
 *.zip
 *.tar.gz
 *.exe
+*.pptx
+*.bin
 Gemini_Generated_Image_*
 
-# Pastas de mídia duplicadas ou de arquivos brutos (fotos_radar é a pasta oficial do app)
+# Pastas de midia duplicadas ou de arquivos brutos
 "Mais fotos radar/"
 Mais fotos radar/
 "fotos radar/"
@@ -39,7 +41,7 @@ fotos radar/
 "mais_fotos_radar/"
 mais_fotos_radar/
 
-# Datasets gigantescos e brutos de scraping / processamento (dados já estão no Supabase)
+# Datasets gigantescos e brutos de scraping / processamento (dados ja estao no Supabase)
 midia_sjc/*.json
 !midia_sjc/comunidade_comentarios_sjc.json
 midia_sjc/*.csv
@@ -47,14 +49,50 @@ midia_sjc/*.js
 !midia_sjc/comunidade_data.js
 midia_sjc/*.zip
 
-# Planilhas e dados brutos temporários
+# Radar Hub - Ignorar extracoes brutas pesadas e repositorios de evidencia gigabytes
+data/radar_hub/*_raw_*/
+data/radar_hub/*_raw_*
+data/radar_hub/*_evidence_*.json
+data/radar_hub/*_extraido_*.json
+data/radar_hub/*_extraida_*.json
+data/radar_hub/*_legacy_*.json
+data/radar_hub/radar_hub_package.json
+scripts/data_extracted/
+recuperado_*.js
+update_bairros.js
+sources_parsed.json
+
+
+# Planilhas e dados brutos temporarios
 *.csv
 respostas.csv.csv
 INFLUENCIADORES_RADAR_SJC.csv
 all_cap1_ground_truth.json
 dados_pesquisa_477.json
+all_cards_compiled.json
+all_cards_summary.txt
+all_sources_ordered.txt
+cards_detailed.json
+consolidated_references.txt
+parsed_cards.json
+url_results.json
+saida_1_pioneiros.md
+saida_2_pioneiros.json
 
-# Scripts e arquivos temporários de migração/testes
+# Dumps, scratches e logs de IA/extracao
+dump_*.txt
+dossier_*.txt
+scratch_*.txt
+last_lines.txt
+user_prompt_*.txt
+section*.txt
+sources_*.txt
+prefeitos_*.txt
+personalidades_raw.txt
+docs/
+tmp/
+
+# Scripts e arquivos temporarios de migracao/testes
 teste_*.jpg
 teste_*.png
 app_recovered.html
@@ -63,6 +101,8 @@ apresentacao_comparativo_*.md
 diff_app.txt
 entrada_*.txt
 commands.json
+temp_checkpoint.js
+migracao_new.js
 *.sql
 *.py
 !scripts/ai_data_auditor.py

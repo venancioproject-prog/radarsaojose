@@ -1,11 +1,38 @@
-﻿# Excluir arquivos pesados do deploy da Vercel
-*.pdf
+# Documentacao e logs
+README.md
+docs/
+*.md
 *.txt
 *.csv
-import_supabase.sql
+*.sql
+*.log
 
-# Excluir pastas brutas/locais de midia que nao sao usadas no index.html
-fotos radar/
+# Scripts de dados e testes locais
+scripts/
+tests/
+__tests__/
+*.py
+*.cjs
+*.sh
+tmp/
+
+# Dumps e evidencias brutas de processamento
+data/radar_hub/*_raw_*/
+data/radar_hub/*_raw_*
+data/radar_hub/*_evidence_*.json
+data/radar_hub/*_extraido_*.json
+scripts/data_extracted/
+
+# Pastas de fotos descontinuadas
+"Mais fotos radar/"
 Mais fotos radar/
-Landing page_files/
-Landing page.html
+"fotos radar/"
+fotos radar/
+"mais_fotos_radar/"
+mais_fotos_radar/
+
+# Configuracoes de IDE e CI
+.github/
+.vscode/
+.idea/
+.git/

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-28 01:13:06",
+  "timestamp": "2026-10-04 23:18:35",
   "total_viewports_tested": 4,
   "target_load_time_ms": 150.0,
   "viewports": [
@@ -9,9 +9,10 @@
       "height": 667,
       "is_visible": true,
       "horizontal_overflow": false,
-      "kpi_pop_value": "",
-      "audit_status_badge": "Auditado & Confirmado",
-      "axis_pills_count": 0
+      "kpi_emprego_value": "Dado não disponível",
+      "init_awaited_ms": 114.59999999403954,
+      "audit_status_badge": "Auditoria não carregada",
+      "axis_pills_count": 10
     },
     {
       "name": "Mobile Standard (iPhone 12/13/14)",
@@ -19,9 +20,10 @@
       "height": 844,
       "is_visible": true,
       "horizontal_overflow": false,
-      "kpi_pop_value": "",
-      "audit_status_badge": "Auditado & Confirmado",
-      "axis_pills_count": 0
+      "kpi_emprego_value": "Dado não disponível",
+      "init_awaited_ms": 23,
+      "audit_status_badge": "Auditoria não carregada",
+      "axis_pills_count": 10
     },
     {
       "name": "Mobile Large (iPhone Plus/Max)",
@@ -29,9 +31,10 @@
       "height": 896,
       "is_visible": true,
       "horizontal_overflow": false,
-      "kpi_pop_value": "",
-      "audit_status_badge": "Auditado & Confirmado",
-      "axis_pills_count": 0
+      "kpi_emprego_value": "Dado não disponível",
+      "init_awaited_ms": 27.5,
+      "audit_status_badge": "Auditoria não carregada",
+      "axis_pills_count": 10
     },
     {
       "name": "Desktop / Laptop Padrão",
@@ -39,21 +42,22 @@
       "height": 768,
       "is_visible": true,
       "horizontal_overflow": false,
-      "kpi_pop_value": "",
-      "audit_status_badge": "Auditado & Confirmado",
-      "axis_pills_count": 0
+      "kpi_emprego_value": "Dado não disponível",
+      "init_awaited_ms": 22,
+      "audit_status_badge": "Auditoria não carregada",
+      "axis_pills_count": 10
     }
   ],
   "performance": {
-    "avgMs": 0.12,
-    "maxMs": 0.6,
-    "minMs": 0,
+    "avgMs": 25.08,
+    "maxMs": 34.2,
+    "minMs": 18.8,
     "runs": [
-      0.5999999046325684,
-      0,
-      0,
-      0,
-      0
+      34.19999998807907,
+      19.599999994039536,
+      23.900000005960464,
+      18.80000001192093,
+      28.900000005960464
     ]
   },
   "functional_checks": {
@@ -61,5 +65,7 @@
     "canvasCount": 15,
     "drawerIndicatorVal": "697054 habitantes",
     "totalCanvases": 16
-  }
+  },
+  "validation_scope": "comportamento de software; não valida fontes oficiais",
+  "controller_js_errors": []
 }

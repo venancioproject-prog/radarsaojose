@@ -19,6 +19,22 @@
   let midiaSortColumn = 'engajamento_total';
   let midiaSortOrder = 'desc';
 
+  function isMidiaDarkMode() {
+    return document.documentElement.classList.contains('dark');
+  }
+  function getMidiaTextColor() {
+    return isMidiaDarkMode() ? '#F8FAFC' : '#0B2545';
+  }
+  function getMidiaMutedColor() {
+    return isMidiaDarkMode() ? '#CBD5E1' : '#64748B';
+  }
+  function getMidiaTickColor() {
+    return isMidiaDarkMode() ? '#E2E8F0' : '#1E293B';
+  }
+  function getMidiaGridColor() {
+    return isMidiaDarkMode() ? 'rgba(255, 255, 255, 0.08)' : '#F1F5F9';
+  }
+
   const THEME_COLORS = {
     brandDark: '#0B2545',
     brandBlue: '#2070aa',
@@ -601,7 +617,7 @@
             anchor: 'end',
             align: 'top',
             offset: 4,
-            color: '#0B2545',
+            color: () => getMidiaTextColor(),
             font: { family: 'Montserrat', weight: 'bold', size: 11 },
             formatter: (val) => val.toLocaleString('pt-BR')
           }
@@ -611,17 +627,17 @@
             grid: { display: false },
             ticks: {
               font: { family: 'Montserrat', weight: '600', size: 10 },
-              color: '#334155',
+              color: () => getMidiaMutedColor(),
               maxRotation: 45,
               minRotation: 25
             }
           },
           y: {
             beginAtZero: true,
-            grid: { color: '#F1F5F9' },
+            grid: { color: () => getMidiaGridColor() },
             ticks: {
               font: { family: 'Montserrat', size: 10 },
-              color: '#64748B',
+              color: () => getMidiaMutedColor(),
               precision: 0
             }
           }
@@ -699,7 +715,7 @@
             anchor: 'end',
             align: 'right',
             offset: 4,
-            color: '#0B2545',
+            color: () => getMidiaTextColor(),
             font: { family: 'Montserrat', weight: 'bold', size: 10 },
             formatter: (val) => val >= 1000 ? (val / 1000).toFixed(1) + 'k' : val.toLocaleString('pt-BR')
           }
@@ -707,12 +723,12 @@
         scales: {
           x: {
             beginAtZero: true,
-            grid: { color: '#F1F5F9' },
-            ticks: { font: { family: 'Montserrat', size: 10 }, color: '#64748B' }
+            grid: { color: () => getMidiaGridColor() },
+            ticks: { font: { family: 'Montserrat', size: 10 }, color: () => getMidiaMutedColor() }
           },
           y: {
             grid: { display: false },
-            ticks: { font: { family: 'Montserrat', weight: '600', size: 11 }, color: '#1E293B' }
+            ticks: { font: { family: 'Montserrat', weight: '600', size: 11 }, color: () => getMidiaTickColor() }
           }
         }
       }
@@ -1363,7 +1379,7 @@
             }
           },
           datalabels: {
-            color: '#000000',
+            color: () => isMidiaDarkMode() ? '#FFFFFF' : '#000000',
             align: 'right',
             anchor: 'center',
             offset: 20,
@@ -1387,10 +1403,10 @@
           y: {
             stacked: true,
             beginAtZero: true,
-            grid: { color: '#F1F5F9' },
+            grid: { color: () => getMidiaGridColor() },
             ticks: {
               font: { family: 'Montserrat', size: 10 },
-              color: '#64748B',
+              color: () => getMidiaMutedColor(),
               callback: (v) => v.toLocaleString('pt-BR')
             }
           }
@@ -1706,7 +1722,7 @@
             anchor: 'end',
             align: 'right',
             offset: 4,
-            color: '#0B2545',
+            color: () => getMidiaTextColor(),
             font: { family: 'Montserrat', weight: 'bold', size: 10 },
             formatter: (val) => {
               const totalBase = filteredMidiaRecords.length;
@@ -1718,12 +1734,12 @@
         scales: {
           x: {
             beginAtZero: true,
-            grid: { color: '#F1F5F9' },
-            ticks: { font: { family: 'Montserrat', size: 10 }, color: '#64748B', precision: 0 }
+            grid: { color: () => getMidiaGridColor() },
+            ticks: { font: { family: 'Montserrat', size: 10 }, color: () => getMidiaMutedColor(), precision: 0 }
           },
           y: {
             grid: { display: false },
-            ticks: { font: { family: 'Montserrat', weight: '600', size: 11 }, color: '#1E293B' }
+            ticks: { font: { family: 'Montserrat', weight: '600', size: 11 }, color: () => getMidiaTickColor() }
           }
         }
       }
@@ -2045,15 +2061,15 @@
         scales: {
           x: {
             grid: { display: false },
-            ticks: { font: { family: 'Montserrat', size: 11 }, color: '#64748B' }
+            ticks: { font: { family: 'Montserrat', size: 11 }, color: () => getMidiaMutedColor() }
           },
           y: {
             type: 'linear',
             display: true,
             position: 'left',
-            title: { display: true, text: 'N de Posts', font: { family: 'Montserrat', size: 11, weight: 'bold' }, color: '#2563EB' },
-            grid: { color: '#F1F5F9' },
-            ticks: { font: { family: 'Montserrat', size: 10 }, color: '#64748B' }
+            title: { display: true, text: 'N de Posts', font: { family: 'Montserrat', size: 11, weight: 'bold' }, color: '#38BDF8' },
+            grid: { color: () => getMidiaGridColor() },
+            ticks: { font: { family: 'Montserrat', size: 10 }, color: () => getMidiaMutedColor() }
           },
           y1: {
             type: 'linear',
@@ -2063,7 +2079,7 @@
             grid: { drawOnChartArea: false },
             ticks: { 
                 font: { family: 'Montserrat', size: 10 }, 
-                color: '#64748B',
+                color: () => getMidiaMutedColor(),
                 callback: function(value) {
                     return value >= 1000000 ? (value / 1000000).toFixed(1) + 'M' : value >= 1000 ? (value / 1000).toFixed(1) + 'k' : value;
                 }

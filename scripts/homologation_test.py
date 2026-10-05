@@ -54,6 +54,7 @@ def run_homologation():
     print("=" * 70)
 
     opts = Options()
+    opts.set_capability('goog:loggingPrefs', {'browser':'ALL'})
     opts.add_argument('--headless=new')
     opts.add_argument('--disable-gpu')
     opts.add_argument('--no-sandbox')
@@ -83,6 +84,9 @@ def run_homologation():
         for vp in viewports:
             print(f"\n📱 Testando Viewport: {vp['name']} ({vp['width']}x{vp['height']})...")
             driver.set_window_size(vp['width'], vp['height'])
+            driver.execute_cdp_cmd('Emulation.setDeviceMetricsOverride', {
+                'width': vp['width'], 'height': vp['height'], 'deviceScaleFactor': 1,
+                'mobile': vp['type'] == 'mobile'})
             driver.get(f"http://127.0.0.1:{PORT}/app.html")
 
             # Aguarda a página carregar
@@ -101,8 +105,15 @@ def run_homologation():
                 return t0;
             """)
 
-            # Aguarda o controller preencher os dados
-            time.sleep(0.4)
+            # Aguarda efetivamente a Promise: medir só o despacho escondia falhas.
+            init_result = driver.execute_async_script("""
+                const done = arguments[arguments.length - 1];
+                const start = performance.now();
+                window.initRadarHub().then(() => done({ok:true, elapsed:performance.now()-start}))
+                    .catch(e => done({ok:false, error:String(e)}));
+            """)
+            assert init_result['ok'], init_result
+
 
             # Medição de tempo de resposta do Radar Hub via performance.now()
             metrics = driver.execute_script("""
@@ -116,7 +127,7 @@ def run_homologation():
                 const hasHorizontalOverflow = docWidth > (winWidth + 2); // tolerância de subpixel
 
                 // Checagem do Top KPI de população
-                const kpiPopElem = document.getElementById('hub-kpi-pop');
+                const kpiPopElem = document.getElementById('hub-kpi-emprego');
                 const kpiPopText = kpiPopElem ? kpiPopElem.textContent.trim() : '';
 
                 // Checagem do Badge de Auditoria
@@ -124,10 +135,10 @@ def run_homologation():
                 const auditStatusText = auditTextElem ? auditTextElem.textContent.trim() : '';
 
                 // Checagem das 9 pills de eixos
-                const axisPills = document.querySelectorAll('.hub-axis-pill');
+                const axisPills = document.querySelectorAll('[id^="sidebar-btn-hub-axis-"]');
 
                 return {
-                    loadTimeMs: Math.round(t1 - window._lastInitStart || 45),
+                    loadTimeMs: null, // latência real é medida na Promise acima
                     isVisible: isVisible,
                     docWidth: docWidth,
                     winWidth: winWidth,
@@ -138,13 +149,19 @@ def run_homologation():
                 };
             """)
 
+            assert metrics['isVisible'], 'Radar Hub invisível'
+            assert metrics['auditStatusText'] == 'Auditoria não carregada', metrics
+            assert metrics['kpiPopText'] == 'Dado não disponível', metrics
+            assert metrics['axisPillsCount'] >= 9, metrics
+            assert not metrics['hasHorizontalOverflow'], metrics
             vp_result = {
                 "name": vp['name'],
                 "width": vp['width'],
                 "height": vp['height'],
                 "is_visible": metrics['isVisible'],
                 "horizontal_overflow": metrics['hasHorizontalOverflow'],
-                "kpi_pop_value": metrics['kpiPopText'],
+                "kpi_emprego_value": metrics['kpiPopText'],
+                "init_awaited_ms": init_result["elapsed"],
                 "audit_status_badge": metrics['auditStatusText'],
                 "axis_pills_count": metrics['axisPillsCount']
             }
@@ -160,29 +177,35 @@ def run_homologation():
         # ======================================================================
         print("\n⏱️  Medindo latência de carregamento do Radar Hub (Cache Local)...")
         driver.set_window_size(1366, 768)
+        driver.execute_cdp_cmd('Emulation.clearDeviceMetricsOverride', {})
         driver.get(f"http://127.0.0.1:{PORT}/app.html")
         time.sleep(0.5)
 
-        perf_results = driver.execute_script("""
+        perf_results = driver.execute_async_script("""
+            const done = arguments[arguments.length - 1];
+            (async () => {
             const times = [];
             for (let i = 0; i < 5; i++) {
                 const t0 = performance.now();
-                window.initRadarHub();
+                await window.initRadarHub();
                 const t1 = performance.now();
                 times.push(t1 - t0);
             }
             const avg = times.reduce((a, b) => a + b, 0) / times.length;
             const min = Math.min(...times);
             const max = Math.max(...times);
-            return {
+            done({
                 runs: times,
                 avgMs: Number(avg.toFixed(2)),
                 minMs: Number(min.toFixed(2)),
                 maxMs: Number(max.toFixed(2))
-            };
+            });
+            })().catch(error => done({error:String(error)}));
         """)
 
+        assert "error" not in perf_results, perf_results
         report["performance"] = perf_results
+        report["validation_scope"] = "comportamento de software; não valida fontes oficiais"
         perf_ok = perf_results['avgMs'] < 150.0
         print(f"   {'⚡ META ATINGIDA' if perf_ok else '⚠️ ACIMA DA META'}: Média de {perf_results['avgMs']} ms (Min: {perf_results['minMs']} ms, Max: {perf_results['maxMs']} ms | Meta: < 150 ms)")
 
@@ -239,6 +262,9 @@ def run_homologation():
             };
         """)
 
+        errors = [entry for entry in driver.get_log('browser') if entry.get('level') == 'SEVERE' and 'radar_hub_controller.js' in entry.get('message','')]
+        assert not errors, errors
+        report['controller_js_errors'] = errors
         report["functional_checks"] = functional
         print(f"   ✅ Canvases de Gráficos: {functional['canvasCount']}/{functional['totalCanvases']} ativos no DOM")
         print(f"   ✅ Ficha Técnica (Drawer): Valor no Drawer = {functional['drawerIndicatorVal']}")
@@ -251,7 +277,7 @@ def run_homologation():
         print(f"\n📋 Relatório de Homologação gravado em: {report_file}")
 
         print("\n" + "=" * 70)
-        print("🎯 RESULTADO GERAL DA HOMOLOGAÇÃO (FASE 5): APROVADO COM LOUVOR")
+        print("🎯 RESULTADO GERAL DA HOMOLOGAÇÃO (FASE 5): VERIFICAÇÕES DE SOFTWARE CONCLUÍDAS; NÃO É AUDITORIA DE FONTES")
         print("=" * 70)
 
         return report

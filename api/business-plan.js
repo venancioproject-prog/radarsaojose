@@ -37,7 +37,10 @@ loadEnv();
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
+// Credencial privilegiada para operações administrativas de backend (fail-closed: nunca substitui por anon key)
+function getSupabaseServiceKey() {
+  return process.env.SUPABASE_SERVICE_ROLE_KEY || null;
+}
 
 // =========================================================================
 // MOTOR FINANCEIRO CIRÚRGICO SEBRAE + SAAS
@@ -481,22 +484,411 @@ const SEED_FALLBACK_PLAN = {
 };
 
 // =========================================================================
+// SEGURANÇA & CONTROLE DE ACESSO (SUPABASE AUTH & RBAC SERVER-SIDE)
+// =========================================================================
+
+const SUPER_ADMIN_EMAILS = [
+  'venancio.project@gmail.com',
+  'gamersilvaesilva@gmail.com',
+  'leonardo@radarsaojose.com.br',
+  'leoserven@gmail.com'
+];
+
+/**
+ * Extrai e valida o token Bearer via Supabase Auth (/auth/v1/user)
+ * Retorna { ok: true, user } ou { ok: false, status, error, code }
+ */
+async function authenticateSupabaseRequest(req) {
+  const headers = req.headers || {};
+  const authHeader = headers.authorization || headers.Authorization || '';
+
+  if (!authHeader || !authHeader.toLowerCase().startsWith('bearer ')) {
+    return {
+      ok: false,
+      status: 401,
+      error: 'Não autorizado. Token de autenticação Bearer ausente ou formato inválido.',
+      code: 'UNAUTHORIZED'
+    };
+  }
+
+  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+  if (!token) {
+    return {
+      ok: false,
+      status: 401,
+      error: 'Token de autenticação vazio.',
+      code: 'UNAUTHORIZED'
+    };
+  }
+
+  try {
+    const authRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'apikey': SUPABASE_ANON_KEY
+      }
+    });
+
+    if (!authRes.ok) {
+      const errBody = await authRes.json().catch(() => ({}));
+      return {
+        ok: false,
+        status: 401,
+        error: 'Token de autenticação inválido, expirado ou revogado.',
+        code: 'UNAUTHORIZED',
+        details: errBody.message || errBody.msg || errBody.error_description
+      };
+    }
+
+    const user = await authRes.json();
+    if (!user || !user.id) {
+      return {
+        ok: false,
+        status: 401,
+        error: 'Usuário não identificado a partir do token fornecido.',
+        code: 'UNAUTHORIZED'
+      };
+    }
+
+    return { ok: true, user };
+  } catch (err) {
+    console.error('[Auth Error Business Plan]:', err.message);
+    return {
+      ok: false,
+      status: 500,
+      error: 'Erro interno ao validar autenticação com o provedor.',
+      code: 'AUTH_SERVER_ERROR'
+    };
+  }
+}
+
+/**
+ * Validação de Autorização Administrativa (RBAC) no Servidor
+ * Aceita EXCLUSIVAMENTE fontes controladas pelo servidor:
+ * 1) Lista explícita de superadministradores no backend (SUPER_ADMIN_EMAILS)
+ * 2) app_metadata.role === 'admin' (definido apenas por service_role no Supabase)
+ * 3) app_metadata.is_admin === true (definido apenas por service_role no Supabase)
+ * 4) profiles.role === 'admin' (consultado server-side com SUPABASE_SERVICE_ROLE_KEY)
+ * 
+ * NUNCA utiliza user_metadata, body.role, query.role ou header.role para concessão de privilégios.
+ */
+async function isUserAdmin(user) {
+  if (!user || typeof user !== 'object') return false;
+
+  // 1. Verificação autoritativa por e-mail na lista de superadministradores do backend
+  const email = (user.email || '').toLowerCase().trim();
+  if (email && SUPER_ADMIN_EMAILS.includes(email)) {
+    return true;
+  }
+
+  // 2. Verificação de claims administrativas em app_metadata (protegido contra edição pelo usuário)
+  const appRole = (user.app_metadata?.role || '').toLowerCase().trim();
+  if (appRole === 'admin') {
+    return true;
+  }
+  if (user.app_metadata?.is_admin === true) {
+    return true;
+  }
+
+  // 3. Consulta autoritativa da tabela profiles no Supabase via SUPABASE_SERVICE_KEY
+  // (Requer chave de serviço; se não configurada, opera em fail-closed)
+  const serviceKey = getSupabaseServiceKey();
+  if (SUPABASE_URL && serviceKey && user.id) {
+    try {
+      const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${encodeURIComponent(user.id)}&select=role`, {
+        method: 'GET',
+        headers: {
+          'apikey': serviceKey,
+          'Authorization': `Bearer ${serviceKey}`
+        }
+      });
+      if (profileRes.ok) {
+        const rows = await profileRes.json();
+        if (Array.isArray(rows) && rows.length > 0 && rows[0].role === 'admin') {
+          return true;
+        }
+      }
+    } catch (profileErr) {
+      console.warn('[Admin Check] Aviso ao consultar profile no Supabase:', profileErr.message);
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Whitelist rígida de campos permitidos no Plano de Negócios.
+ * Remove quaisquer injeções de campos administrativos (ex: role, is_admin, created_by, owner_id)
+ * ou propriedades arbitrárias que possam causar poluição de protótipo ou vulnerabilidades.
+ */
+function sanitizeBusinessPlanPayload(rawPayload) {
+  if (!rawPayload || typeof rawPayload !== 'object' || Array.isArray(rawPayload)) {
+    return null;
+  }
+
+  const clean = {};
+
+  if (typeof rawPayload.title === 'string') clean.title = rawPayload.title.trim().slice(0, 300);
+  if (typeof rawPayload.company_name === 'string') clean.company_name = rawPayload.company_name.trim().slice(0, 200);
+  if (typeof rawPayload.cnpj === 'string') clean.cnpj = rawPayload.cnpj.trim().slice(0, 30);
+  if (typeof rawPayload.version === 'string') clean.version = rawPayload.version.trim().slice(0, 50);
+
+  if (rawPayload.executive_summary && typeof rawPayload.executive_summary === 'object' && !Array.isArray(rawPayload.executive_summary)) {
+    clean.executive_summary = {
+      business_description: String(rawPayload.executive_summary.business_description || ''),
+      mission: String(rawPayload.executive_summary.mission || ''),
+      legal_form: String(rawPayload.executive_summary.legal_form || ''),
+      tax_regime: String(rawPayload.executive_summary.tax_regime || ''),
+      tax_detail: String(rawPayload.executive_summary.tax_detail || ''),
+      sectors: Array.isArray(rawPayload.executive_summary.sectors) ? rawPayload.executive_summary.sectors.map(String) : [],
+      location: String(rawPayload.executive_summary.location || ''),
+      funding_sources: String(rawPayload.executive_summary.funding_sources || '')
+    };
+  }
+
+  if (Array.isArray(rawPayload.partners)) {
+    clean.partners = rawPayload.partners.map(p => ({
+      id: String(p.id || ''),
+      name: String(p.name || ''),
+      role: String(p.role || ''),
+      email: String(p.email || ''),
+      phone: String(p.phone || ''),
+      city_state: String(p.city_state || ''),
+      address: String(p.address || ''),
+      profile_bio: String(p.profile_bio || ''),
+      responsibilities: String(p.responsibilities || ''),
+      capital_value: Number(p.capital_value) || 0,
+      capital_percent: Number(p.capital_percent) || 0
+    }));
+  }
+
+  if (rawPayload.market_analysis && typeof rawPayload.market_analysis === 'object' && !Array.isArray(rawPayload.market_analysis)) {
+    clean.market_analysis = rawPayload.market_analysis;
+  }
+  if (rawPayload.marketing_plan && typeof rawPayload.marketing_plan === 'object' && !Array.isArray(rawPayload.marketing_plan)) {
+    clean.marketing_plan = rawPayload.marketing_plan;
+  }
+  if (rawPayload.operational_plan && typeof rawPayload.operational_plan === 'object' && !Array.isArray(rawPayload.operational_plan)) {
+    clean.operational_plan = rawPayload.operational_plan;
+  }
+
+  if (rawPayload.financial_plan && typeof rawPayload.financial_plan === 'object' && !Array.isArray(rawPayload.financial_plan)) {
+    clean.financial_plan = {
+      inputs: (rawPayload.financial_plan.inputs && typeof rawPayload.financial_plan.inputs === 'object')
+        ? rawPayload.financial_plan.inputs
+        : {},
+      capex_investments: Array.isArray(rawPayload.financial_plan.capex_investments)
+        ? rawPayload.financial_plan.capex_investments
+        : [],
+      pre_operational_investments: Array.isArray(rawPayload.financial_plan.pre_operational_investments)
+        ? rawPayload.financial_plan.pre_operational_investments
+        : [],
+      monthly_timeline: Array.isArray(rawPayload.financial_plan.monthly_timeline)
+        ? rawPayload.financial_plan.monthly_timeline
+        : []
+    };
+  }
+
+  if (Array.isArray(rawPayload.swot)) clean.swot = rawPayload.swot;
+  if (Array.isArray(rawPayload.monday_tasks)) clean.monday_tasks = rawPayload.monday_tasks;
+  if (rawPayload.evaluation && typeof rawPayload.evaluation === 'object' && !Array.isArray(rawPayload.evaluation)) {
+    clean.evaluation = {
+      final_reflection: String(rawPayload.evaluation.final_reflection || '')
+    };
+  }
+
+  return clean;
+}
+
+/**
+ * Localiza e atualiza de forma estrita e unívoca o registro oficial do Plano de Negócios.
+ * Garante que:
+ * - Se SUPABASE_SERVICE_ROLE_KEY não estiver configurada: erro fail-closed (500).
+ * - Se 0 registros ativos: insere o plano oficial ativo deterministamente.
+ * - Se 1 registro ativo: atualiza estritamente pela chave primária (id = targetId), NUNCA por is_active em massa.
+ * - Se > 1 registros ativos: bloqueia com erro 409 (Conflict) para impedir corrupção acidental em lote.
+ */
+async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, userEmail) {
+  const serviceKey = getSupabaseServiceKey();
+  if (!SUPABASE_URL || !serviceKey) {
+    return {
+      persisted: false,
+      statusCode: 500,
+      error: 'Erro de configuração: SUPABASE_SERVICE_ROLE_KEY ausente para persistência administrativa.',
+      code: 'CONFIG_SERVICE_ROLE_KEY_MISSING'
+    };
+  }
+
+  // 1. Busca planos ativos existentes ordenados por data
+  let queryRes;
+  try {
+    queryRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=id,version,updated_at&order=updated_at.desc`, {
+      method: 'GET',
+      headers: {
+        'apikey': serviceKey,
+        'Authorization': `Bearer ${serviceKey}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  } catch (err) {
+    return {
+      persisted: false,
+      statusCode: 502,
+      error: 'Falha de comunicação com o banco de dados Supabase.',
+      code: 'DATABASE_CONNECTION_ERROR'
+    };
+  }
+
+  if (!queryRes.ok) {
+    const errText = await queryRes.text().catch(() => '');
+    return {
+      persisted: false,
+      statusCode: queryRes.status === 404 ? 404 : 500,
+      error: `Erro retornado pelo banco de dados (${queryRes.status}): ${errText.slice(0, 150)}`,
+      code: queryRes.status === 404 ? 'TABLE_NOT_FOUND' : 'DATABASE_ERROR'
+    };
+  }
+
+  const activeRows = await queryRes.json();
+
+  // CENÁRIO A: Mais de 1 plano ativo detectado (Conflito de Integridade) -> Bloqueio Preventivo
+  if (Array.isArray(activeRows) && activeRows.length > 1) {
+    console.error(`[Business Plan] Conflito de integridade: ${activeRows.length} planos ativos detectados no banco.`);
+    return {
+      persisted: false,
+      statusCode: 409,
+      error: `Conflito de integridade: múltiplos planos (${activeRows.length}) marcados como ativos. A operação foi abortada para evitar sobrescrita acidental em lote.`,
+      code: 'MULTIPLE_ACTIVE_PLANS_CONFLICT'
+    };
+  }
+
+  // CENÁRIO B: Exatamente 1 plano ativo encontrado -> Atualização DETERMINÍSTICA por ID único
+  if (Array.isArray(activeRows) && activeRows.length === 1) {
+    const targetId = activeRows[0].id;
+    try {
+      const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?id=eq.${encodeURIComponent(targetId)}`, {
+        method: 'PATCH',
+        headers: {
+          'apikey': serviceKey,
+          'Authorization': `Bearer ${serviceKey}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify({
+          data: sanitizedPayload,
+          financial_kpis: calculatedKpis,
+          updated_at: new Date().toISOString(),
+          updated_by: userEmail || 'admin'
+        })
+      });
+
+      if (!patchRes.ok) {
+        return {
+          persisted: false,
+          statusCode: patchRes.status,
+          error: 'Falha ao atualizar o plano de negócios no banco de dados.',
+          code: 'DATABASE_UPDATE_ERROR'
+        };
+      }
+
+      const updatedRows = await patchRes.json().catch(() => []);
+      return {
+        persisted: true,
+        statusCode: 200,
+        targetId,
+        updatedCount: Array.isArray(updatedRows) ? updatedRows.length : 1
+      };
+    } catch (dbErr) {
+      return {
+        persisted: false,
+        statusCode: 500,
+        error: dbErr.message,
+        code: 'DATABASE_EXCEPTION'
+      };
+    }
+  }
+
+  // CENÁRIO C: 0 planos ativos encontrados -> Inserção determinística do plano oficial ativo
+  try {
+    const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans`, {
+      method: 'POST',
+      headers: {
+        'apikey': serviceKey,
+        'Authorization': `Bearer ${serviceKey}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        title: sanitizedPayload.title || SEED_FALLBACK_PLAN.title,
+        company_name: sanitizedPayload.company_name || SEED_FALLBACK_PLAN.company_name,
+        cnpj: sanitizedPayload.cnpj || SEED_FALLBACK_PLAN.cnpj,
+        version: sanitizedPayload.version || SEED_FALLBACK_PLAN.version,
+        is_active: true,
+        data: sanitizedPayload,
+        financial_kpis: calculatedKpis,
+        updated_at: new Date().toISOString(),
+        updated_by: userEmail || 'admin'
+      })
+    });
+
+    if (!insertRes.ok) {
+      return {
+        persisted: false,
+        statusCode: insertRes.status,
+        error: 'Falha ao inicializar novo plano de negócios no banco de dados.',
+        code: 'DATABASE_INSERT_ERROR'
+      };
+    }
+
+    const insertedRows = await insertRes.json().catch(() => []);
+    const newId = Array.isArray(insertedRows) && insertedRows[0] ? insertedRows[0].id : null;
+    return {
+      persisted: true,
+      statusCode: 200,
+      targetId: newId,
+      inserted: true
+    };
+  } catch (err) {
+    return {
+      persisted: false,
+      statusCode: 500,
+      error: err.message,
+      code: 'DATABASE_EXCEPTION'
+    };
+  }
+}
+
+// =========================================================================
 // HANDLER PRINCIPAL VERCEL SERVERLESS
 // =========================================================================
 
 module.exports = async function handler(req, res) {
+  // Cabeçalhos de Segurança e CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(204).end();
+  }
+
+  // Verificação de Métodos HTTP Permitidos (Rejeita DELETE, PATCH, etc.)
+  const allowedMethods = ['GET', 'POST', 'PUT', 'OPTIONS'];
+  if (!allowedMethods.includes(req.method)) {
+    res.setHeader('Allow', 'GET, POST, PUT, OPTIONS');
+    return res.status(405).json({
+      success: false,
+      error: `Método ${req.method} não permitido neste endpoint.`,
+      code: 'METHOD_NOT_ALLOWED'
+    });
   }
 
   try {
-    const { action } = req.query;
+    const query = req.query || {};
+    const { action } = query;
 
-    // Ação: Calcular Indicadores isolados (Útil para simulação reativa no frontend)
+    // Ação: Calcular Indicadores isolados (Simulação puramente em memória, stateless)
     if (action === 'calculate' && req.method === 'POST') {
       const { inputs, capexTotal, preOpTotal } = req.body || {};
       const calculated = calculateFinancialIndicators(inputs, capexTotal, preOpTotal);
@@ -508,15 +900,54 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Ação: Restaurar Padrão do Documento-Base
+    // Ação: Restaurar Padrão do Documento-Base (Operação administrativa crítica: Exige Admin)
     if (action === 'reset' && req.method === 'POST') {
+      const auth = await authenticateSupabaseRequest(req);
+      if (!auth.ok) {
+        return res.status(auth.status).json({
+          success: false,
+          error: auth.error,
+          code: auth.code
+        });
+      }
+
+      const isAdmin = await isUserAdmin(auth.user);
+      if (!isAdmin) {
+        return res.status(403).json({
+          success: false,
+          error: 'Acesso negado. Apenas administradores podem restaurar ou resetar o Plano de Negócios.',
+          code: 'FORBIDDEN'
+        });
+      }
+
+      // Fail-closed se SUPABASE_SERVICE_KEY não estiver configurada no servidor
+      const serviceKey = getSupabaseServiceKey();
+      if (!serviceKey) {
+        return res.status(500).json({
+          success: false,
+          error: 'Erro de configuração interna do servidor para operações de persistência administrativa.',
+          code: 'CONFIG_SERVICE_ROLE_KEY_MISSING'
+        });
+      }
+
       const calculated = calculateFinancialIndicators(SEED_FALLBACK_PLAN.financial_plan.inputs, 50000, 25000);
       const scenarios = simulateScenarios(SEED_FALLBACK_PLAN.financial_plan.inputs);
       const capitalValidation = validateCapitalDistribution(SEED_FALLBACK_PLAN.partners);
 
+      const saveResult = await saveBusinessPlanToSupabase(SEED_FALLBACK_PLAN, calculated, auth.user?.email);
+      if (!saveResult.persisted) {
+        return res.status(saveResult.statusCode || 500).json({
+          success: false,
+          error: saveResult.error,
+          code: saveResult.code
+        });
+      }
+
       return res.status(200).json({
         success: true,
-        message: "Plano restaurado com sucesso para os dados oficiais do Documento-Base (Set/2026).",
+        persistedToCloud: true,
+        targetId: saveResult.targetId,
+        message: "Plano de Negócios restaurado com sucesso para os dados oficiais do Documento-Base por administrador.",
         plan: {
           ...SEED_FALLBACK_PLAN,
           calculated_kpis: calculated,
@@ -526,92 +957,143 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // POST: Salvar Plano de Negócios & Recalcular no Servidor
+    // POST / PUT: Salvar Plano de Negócios & Recalcular no Servidor (Exige Admin)
     if (req.method === 'POST' || req.method === 'PUT') {
-      const payload = req.body || {};
-      const finInputs = payload.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs;
-      
-      const capexTotal = (payload.financial_plan?.capex_investments || []).reduce((acc, i) => acc + (Number(i.total) || (Number(i.qty) * Number(i.unit_val)) || 0), 0) || 50000;
-      const preOpTotal = (payload.financial_plan?.pre_operational_investments || []).reduce((acc, i) => acc + (Number(i.val) || 0), 0) || 25000;
+      // 1. Autenticação JWT no Supabase Auth
+      const auth = await authenticateSupabaseRequest(req);
+      if (!auth.ok) {
+        return res.status(auth.status).json({
+          success: false,
+          error: auth.error,
+          code: auth.code
+        });
+      }
+
+      // 2. Autorização RBAC no Servidor
+      const isAdmin = await isUserAdmin(auth.user);
+      if (!isAdmin) {
+        return res.status(403).json({
+          success: false,
+          error: 'Acesso negado. Apenas administradores autenticados têm permissão para modificar o Plano de Negócios.',
+          code: 'FORBIDDEN'
+        });
+      }
+
+      // 3. Sanitização e Whitelisting do Payload
+      const sanitizedPayload = sanitizeBusinessPlanPayload(req.body);
+      if (!sanitizedPayload || Object.keys(sanitizedPayload).length === 0) {
+        return res.status(400).json({
+          success: false,
+          error: 'Corpo da requisição inválido ou vazio.',
+          code: 'BAD_REQUEST'
+        });
+      }
+
+      // 4. Fail-closed se SUPABASE_SERVICE_KEY não estiver configurada no servidor
+      const serviceKey = getSupabaseServiceKey();
+      if (!serviceKey) {
+        return res.status(500).json({
+          success: false,
+          error: 'Erro de configuração interna do servidor para operações de persistência administrativa.',
+          code: 'CONFIG_SERVICE_ROLE_KEY_MISSING'
+        });
+      }
+
+      const finInputs = sanitizedPayload.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs;
+      const capexTotal = (sanitizedPayload.financial_plan?.capex_investments || []).reduce(
+        (acc, i) => acc + (Number(i.total) || (Number(i.qty) * Number(i.unit_val)) || 0),
+        0
+      ) || 50000;
+      const preOpTotal = (sanitizedPayload.financial_plan?.pre_operational_investments || []).reduce(
+        (acc, i) => acc + (Number(i.val) || 0),
+        0
+      ) || 25000;
 
       const calculated = calculateFinancialIndicators(finInputs, capexTotal, preOpTotal);
       const scenarios = simulateScenarios(finInputs);
-      const capitalValidation = validateCapitalDistribution(payload.partners || SEED_FALLBACK_PLAN.partners);
+      const capitalValidation = validateCapitalDistribution(sanitizedPayload.partners || SEED_FALLBACK_PLAN.partners);
 
-      // Tenta persistir no Supabase se as credenciais estiverem disponíveis
-      let persistedToCloud = false;
-      if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-        try {
-          const fetchRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true`, {
-            method: 'PATCH',
-            headers: {
-              'apikey': SUPABASE_SERVICE_KEY,
-              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=representation'
-            },
-            body: JSON.stringify({
-              data: payload,
-              financial_kpis: calculated,
-              updated_at: new Date().toISOString()
-            })
-          });
-          if (fetchRes.ok) {
-            persistedToCloud = true;
-          }
-        } catch (dbErr) {
-          console.warn("[Backend] Supabase Cloud sync bypass:", dbErr.message);
-        }
+      // 5. Persistência Protegida e Determinística no Supabase Cloud (Single Target ID)
+      const saveResult = await saveBusinessPlanToSupabase(sanitizedPayload, calculated, auth.user?.email);
+      if (!saveResult.persisted) {
+        return res.status(saveResult.statusCode || 500).json({
+          success: false,
+          error: saveResult.error,
+          code: saveResult.code
+        });
       }
 
       return res.status(200).json({
         success: true,
-        persistedToCloud,
-        message: "Plano de Negócios e Tarefas calculados e salvos com sucesso.",
+        persistedToCloud: true,
+        targetId: saveResult.targetId,
+        message: "Plano de Negócios salvo e recalculado com sucesso por administrador.",
         calculated_kpis: calculated,
         scenarios,
         capital_validation: capitalValidation
       });
     }
 
-    // GET: Buscar Plano Ativo (ou Fallback Oficial)
-    let activePlan = JSON.parse(JSON.stringify(SEED_FALLBACK_PLAN));
-    let fromCloud = false;
-
-    if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-      try {
-        const fetchRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=*&limit=1`, {
-          method: 'GET',
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json'
-          }
+    // GET: Buscar Plano Ativo (Dado Estratégico Sensível: Exige Autenticação e Perfil de Admin)
+    if (req.method === 'GET') {
+      const auth = await authenticateSupabaseRequest(req);
+      if (!auth.ok) {
+        return res.status(auth.status).json({
+          success: false,
+          error: 'Acesso restrito. Autenticação de administrador necessária para consultar o Plano de Negócios estratégico.',
+          code: auth.code
         });
-        if (fetchRes.ok) {
-          const rows = await fetchRes.json();
-          if (Array.isArray(rows) && rows.length > 0 && rows[0].data && Object.keys(rows[0].data).length > 0) {
-            activePlan = { ...activePlan, ...rows[0].data, id: rows[0].id };
-            fromCloud = true;
-          }
-        }
-      } catch (dbErr) {
-        console.warn("[Backend] Falha na consulta remota Supabase, usando seed local:", dbErr.message);
       }
+
+      const isAdmin = await isUserAdmin(auth.user);
+      if (!isAdmin) {
+        return res.status(403).json({
+          success: false,
+          error: 'Acesso negado. Apenas administradores podem visualizar o Plano de Negócios confidencial.',
+          code: 'FORBIDDEN'
+        });
+      }
+
+      let activePlan = JSON.parse(JSON.stringify(SEED_FALLBACK_PLAN));
+      let fromCloud = false;
+
+      // Se a service key estiver configurada, busca do Supabase com identificação unívoca
+      const serviceKey = getSupabaseServiceKey();
+      if (SUPABASE_URL && serviceKey) {
+        try {
+          const fetchRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=*&order=updated_at.desc&limit=1`, {
+            method: 'GET',
+            headers: {
+              'apikey': serviceKey,
+              'Authorization': `Bearer ${serviceKey}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          if (fetchRes.ok) {
+            const rows = await fetchRes.json();
+            if (Array.isArray(rows) && rows.length > 0 && rows[0].data && Object.keys(rows[0].data).length > 0) {
+              activePlan = { ...activePlan, ...rows[0].data, id: rows[0].id };
+              fromCloud = true;
+            }
+          }
+        } catch (dbErr) {
+          console.warn("[Backend] Falha na consulta remota Supabase, usando seed local:", dbErr.message);
+        }
+      }
+
+      const calculated = calculateFinancialIndicators(activePlan.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs);
+      const scenarios = simulateScenarios(activePlan.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs);
+      const capitalValidation = validateCapitalDistribution(activePlan.partners || SEED_FALLBACK_PLAN.partners);
+
+      return res.status(200).json({
+        success: true,
+        fromCloud,
+        plan: activePlan,
+        calculated_kpis: calculated,
+        scenarios,
+        capital_validation: capitalValidation
+      });
     }
-
-    const calculated = calculateFinancialIndicators(activePlan.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs);
-    const scenarios = simulateScenarios(activePlan.financial_plan?.inputs || SEED_FALLBACK_PLAN.financial_plan.inputs);
-    const capitalValidation = validateCapitalDistribution(activePlan.partners || SEED_FALLBACK_PLAN.partners);
-
-    return res.status(200).json({
-      success: true,
-      fromCloud,
-      plan: activePlan,
-      calculated_kpis: calculated,
-      scenarios,
-      capital_validation: capitalValidation
-    });
 
   } catch (error) {
     console.error("[Backend Error Business Plan]:", error);
@@ -627,6 +1109,16 @@ module.exports.calculateFinancialIndicators = calculateFinancialIndicators;
 module.exports.simulateScenarios = simulateScenarios;
 module.exports.validateCapitalDistribution = validateCapitalDistribution;
 module.exports.SEED_FALLBACK_PLAN = SEED_FALLBACK_PLAN;
-
 module.exports.DEFAULT_MONTHLY_TIMELINE = DEFAULT_MONTHLY_TIMELINE;
 module.exports.calculateMonthlyTimeline = calculateMonthlyTimeline;
+
+// Exportações de funções de segurança para auditoria e suíte de testes
+module.exports.authenticateSupabaseRequest = authenticateSupabaseRequest;
+module.exports.isUserAdmin = isUserAdmin;
+module.exports.sanitizeBusinessPlanPayload = sanitizeBusinessPlanPayload;
+module.exports.saveBusinessPlanToSupabase = saveBusinessPlanToSupabase;
+module.exports.getSupabaseServiceKey = getSupabaseServiceKey;
+module.exports.SUPER_ADMIN_EMAILS = SUPER_ADMIN_EMAILS;
+
+
+
