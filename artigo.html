@@ -351,17 +351,13 @@
       <!-- Coluna Principal do Artigo -->
       <article class="lg:col-span-8 bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
         
-        <!-- Kicker e Metadados do Topo -->
-        <div class="flex flex-wrap items-center gap-2.5 mb-4">
-          <a id="postCategoryBadgeLink" href="blog.html"><span id="postCategoryBadge" class="bg-sky-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded shadow-sm hover:opacity-90 transition-opacity">
-            Demografia & População
-          </span></a>
-          <span class="text-slate-300">•</span>
-          <span id="postReadingTime" class="text-xs text-slate-500 font-medium flex items-center gap-1">
+        <!-- Metadados do Topo -->
+        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-4 font-medium">
+          <span id="postReadingTime" class="flex items-center gap-1">
             <i class="fa-regular fa-clock text-slate-400"></i> 4 min de leitura
           </span>
           <span class="text-slate-300">•</span>
-          <span id="postDate" class="text-xs text-slate-500 font-medium">16 de Setembro de 2026</span>
+          <span id="postDate">16 de Setembro de 2026</span>
         </div>
 
         <!-- Título -->
@@ -640,15 +636,6 @@
       const editoriaUrl = 'editoria.html?cat=' + catSlug;
       const bcLink = document.getElementById('breadcrumbCategoryLink');
       if (bcLink) bcLink.href = editoriaUrl;
-      const catBadgeLink = document.getElementById('postCategoryBadgeLink');
-      if (catBadgeLink) catBadgeLink.href = editoriaUrl;
-
-      const catBadge = document.getElementById('postCategoryBadge');
-      if (catBadge) {
-        const catInfo = CATEGORY_MAP[post.category] || { icon: 'fa-tag', color: 'bg-cyan-600' };
-        catBadge.className = `${catInfo.color} text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded shadow-sm`;
-        catBadge.innerHTML = `<i class="fa-solid ${catInfo.icon} mr-1"></i>${post.category || 'Demografia & População'}`;
-      }
 
       const readTime = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
       document.getElementById('postReadingTime').innerHTML = `<i class="fa-regular fa-clock text-slate-400"></i> ${readTime}`;
