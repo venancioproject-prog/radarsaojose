@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Radar São José | Plataforma de Inteligência de Mercado Local</title>
-  <meta name="description" content="A plataforma de inteligência de mercado local sobre São José dos Campos. Banco de imagens gratuito, dados IBGE e dashboard analítico com 477 respondentes." />
+  <meta name="description" content="Inteligência de mercado para quem decide em São José dos Campos. Pesquisa com 477 moradores, dados públicos, análises e inteligência de mídia em uma plataforma por assinatura." />
+
+  <link rel="stylesheet" href="landing-modules.css" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="fotos_radar/logo.png" />
@@ -71,16 +73,13 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0;
+      padding: 0 40px;
       width: 100%;
       box-sizing: border-box;
     }
 
     .navbar-container {
       width: 100%;
-      max-width: var(--header-max-width, 1440px);
-      margin: 0 auto;
-      padding: 0 var(--header-gutter, 32px);
       height: 72px;
       display: flex;
       align-items: center;
@@ -203,6 +202,7 @@
     }
 
     @media (max-width: 1024px) {
+      .site-header { padding: 0 24px; }
       .navbar-menu {
         display: none;
         flex-direction: column;
@@ -230,7 +230,7 @@
         url('fotos_radar/capa_sjc_skyline.jpg') center 50% / cover no-repeat;
       display: flex;
       align-items: center;
-      padding: 120px 48px 80px;
+      padding: 120px 40px 80px;
       position: relative;
       overflow: hidden;
     }
@@ -238,8 +238,8 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      max-width: 560px;
-      margin-left: 110px;
+      max-width: 580px;
+      margin-left: 84px; /* Alinhado perfeitamente com a linha do final do logo */
       position: relative;
       z-index: 2;
     }
@@ -574,14 +574,26 @@
     .plans-section { background: var(--preto); }
     .plans-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2px;
       margin-top: 60px;
       background: rgba(255,255,255,0.08);
     }
     .plan-card {
       background: #111;
-      padding: 44px 36px;
+      padding: 38px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .plan-card .btn-plan {
+      margin-top: auto;
+    }
+    .plans-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: 32px;
+      line-height: 1.6;
     }
     .plan-card.destaque {
       background: var(--azul);
@@ -679,11 +691,20 @@
 
     /* ── COMO FUNCIONA ── */
     .how-section { background: var(--branco); }
-    .steps-grid {
+    .how-layout {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.85fr);
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+    .how-intro {
+      max-width: 440px;
+    }
+    .how-section .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 2px;
-      margin-top: 60px;
+      margin-top: 0;
       background: rgba(11,49,92,0.12);
     }
     .step-card {
@@ -1032,13 +1053,18 @@
 
     /* ── FORM / CONTATO ── */
     .contact-section { background: var(--preto); }
+    .contact-header {
+      margin-bottom: 32px;
+    }
+    .contact-logo img { height: 52px; margin-bottom: 20px; display: block; }
     .contact-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: clamp(40px, 6vw, 80px);
       align-items: center;
     }
-    .contact-logo img { height: 60px; margin-bottom: 28px; }
+    .contact-proposal .section-title { margin-bottom: 20px; }
+    .contact-proposal .section-desc { margin-top: 0; }
     .contact-eyebrow {
       display: inline-block;
       background: var(--vermelho);
@@ -1207,7 +1233,9 @@
       .carousel-btn { display: none; }
       .platform-grid { grid-template-columns: 1fr; margin-top: 40px; }
       .platform-card { width: 300px; min-width: 300px; flex: 0 0 300px; }
-      .plans-grid { grid-template-columns: 1fr; }
+      .plans-grid { grid-template-columns: repeat(2, 1fr); }
+      .how-layout { grid-template-columns: 1fr; gap: 40px; }
+      .how-intro { max-width: 100%; }
       .how-section .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .insights-grid { grid-template-columns: 1fr; }
       .video-inner { grid-template-columns: 1fr; }
@@ -1223,6 +1251,7 @@
     }
 
     @media (max-width: 640px) {
+      .plans-grid { grid-template-columns: 1fr !important; }
       .navbar { padding: 14px 20px; }
       .hero { padding: 105px 20px 60px; }
       .hero-title { font-size: 2.1rem; }
@@ -1234,7 +1263,7 @@
       .manifesto-text { column-count: 1; }
     }
 
-    /* ── MANIFESTO ── */
+    /* ── MANIFESTO / QUEM FAZ ── */
     .manifesto-section {
       background: #091321;
       color: white;
@@ -1242,8 +1271,12 @@
       position: relative;
     }
     .manifesto-inner {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(40px, 6vw, 80px);
+      align-items: start;
     }
     .manifesto-label {
       color: var(--azul-claro);
@@ -1252,58 +1285,75 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       display: block;
-      text-align: center;
+      text-align: left;
+    }
+    .manifesto-title,
+    .manifesto-highlight {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+      line-height: 1.25;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: white;
+      margin-bottom: 24px;
+      text-align: left;
     }
     .manifesto-text {
       font-family: var(--font-ui);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.85);
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.78);
       font-weight: 400;
-      column-count: 2;
-      column-gap: 40px;
     }
     .manifesto-text p {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+    }
+    .manifesto-text p:last-child {
+      margin-bottom: 0;
     }
     .manifesto-text strong {
       color: white;
       font-weight: 600;
     }
-    .manifesto-highlight {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      line-height: 1.5;
-      font-weight: 600;
-      letter-spacing: -0.015em;
-      color: white;
-      margin-bottom: 40px !important;
-      text-align: center;
-      column-span: all;
+    .manifesto-authors {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+    .author-card {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .author-card:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
     }
     .author-photo {
-      width: 180px;
-      height: 180px;
+      width: 104px;
+      height: 104px;
+      min-width: 104px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 24px;
+      margin-bottom: 0;
       border: 3px solid var(--azul-claro);
       filter: grayscale(100%);
     }
-    .manifesto-authors {
-      margin-top: 60px;
-      padding-top: 60px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+    .author-info {
+      flex: 1;
+      min-width: 0;
     }
     .author-card h4 {
       color: white;
       font-family: var(--font-display);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       letter-spacing: -0.015em;
       margin-bottom: 4px;
       font-weight: 600;
@@ -1311,18 +1361,44 @@
     .author-card .author-role {
       color: var(--azul-claro);
       font-family: var(--font-ui);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
     }
     .author-card .author-bio {
       font-family: var(--font-ui);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 400;
       line-height: 1.6;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.65);
+      margin: 0;
+    }
+    @media (max-width: 900px) {
+      .manifesto-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .manifesto-authors {
+        margin-top: 16px;
+      }
+    }
+    @media (max-width: 600px) {
+      .manifesto-section { padding: 70px 24px; }
+      .author-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .author-photo {
+        width: 88px;
+        height: 88px;
+        min-width: 88px;
+      }
+    }
+      @media (max-width: 600px) {
+      .how-section .steps-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1331,7 +1407,7 @@
     <!-- ══ CABEÇALHO PRINCIPAL SEMÂNTICO (LOGO • MENU • AÇÕES) ══ -->
   <header class="site-header" role="banner">
     <nav class="navbar-container" aria-label="Navegação Principal do Radar São José">
-      
+
       <!-- 1. Logo à Esquerda -->
       <a href="index.html" class="navbar-brand" title="Página Inicial - Radar São José">
         <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="160" height="40" loading="eager" />
@@ -1342,7 +1418,7 @@
         <li role="none"><a href="#solucoes" role="menuitem">Soluções</a></li>
         <li role="none"><a href="#planos" role="menuitem">Planos</a></li>
         <li role="none"><a href="#metodologia" role="menuitem">Metodologia</a></li>
-        <li role="none"><a href="#manifesto" role="menuitem">Manifesto</a></li>
+        <li role="none"><a href="#manifesto" role="menuitem">Quem faz</a></li>
         <li role="none"><a href="blog.html" role="menuitem">Blog</a></li>
         <li role="none"><a href="#faq" role="menuitem">FAQ</a></li>
       </ul>
@@ -1350,8 +1426,8 @@
       <!-- 3. Botões e Ações à Direita -->
       <div class="navbar-actions">
         <a href="#contato" class="btn-nav-outline">Falar com especialista</a>
-        <a href="app.html" class="btn-nav-primary">Acessar soluções</a>
-        <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+        <a href="app.html" class="btn-nav-primary">Criar conta grátis</a>
+        <button class="nav-toggle-btn" aria-controls="primaryNavMenu" aria-label="Abrir Menu de Navegação" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -1363,20 +1439,14 @@
   <section class="hero">
     <div class="hero-inner">
       <div>
-        <p class="hero-label">Soluções de inteligência de mercado local</p>
-        <h1 class="hero-title">
-          Entenda São José<br>
-          <span>antes</span> de decidir<br>
-          onde investir.
-        </h1>
-        <p class="hero-desc">
-          O <strong>Radar São José</strong> é um conjunto de soluções com dados comportamentais, demográficos e culturais profundos sobre São José dos Campos — organizadas para que empresas tomem decisões mais precisas sobre expansão, posicionamento e oferta.
-        </p>
+        <p class="hero-label">Para quem faz negócio em São José dos Campos</p>
+        <h1 class="hero-title">Dados de São José<br>para quem precisa<br><span>decidir onde investir.</span></h1>
+        <p class="hero-desc">O <strong>Radar São José</strong> é uma plataforma de inteligência de mercado para quem faz negócio na cidade. Reúne dados públicos, pesquisa com 477 moradores e análises de comportamento para estudar um público, avaliar uma expansão ou preparar uma proposta. Comece gratuitamente por <strong>Dados Públicos, História e Banco de Imagens.</strong></p>
         <div class="hero-btns">
-          <a href="app.html" class="btn-primary">Criar conta grátis</a>
-          <a href="#planos" class="btn-outline">
+          <a href="app.html" class="btn-primary">Criar minha conta gratuita</a>
+          <a href="#solucoes" class="btn-outline">
             <i class="fas fa-layer-group"></i>
-            Ver planos
+            Conhecer a plataforma
           </a>
         </div>
       </div>
@@ -1384,199 +1454,220 @@
   </section>
 
 
-  <!-- ══ O QUE AS SOLUÇÕES OFERECEM ══ -->
-  <section class="section platform-section" id="solucoes">
+  <!-- Módulos: demonstrações reais da plataforma -->
+  <section class="section platform-section module-showcase" id="solucoes" aria-labelledby="modules-heading">
     <div class="section-inner">
-      <p class="section-label dark">As soluções</p>
-      <h2 class="section-title">Não é um relatório. É uma lente<br>para o mercado local.</h2>
-      <p class="section-desc">
-        Acesse dados, imagens e análises sobre São José dos Campos — organizados em módulos para cada momento da sua decisão.
-      </p>
-
-      <div class="carousel-wrapper">
-        <button class="carousel-btn prev-btn" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-        <button class="carousel-btn next-btn" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
-        <div class="platform-grid">
-        <!-- 1: Dashboard Radar -->
-        <div class="platform-card premium" onclick="openSolutionModal('Dash Pesquisa 2026', 'O Dash Pesquisa 2026 oferece dados interativos inéditos sobre São José dos Campos. Cruzamos variáveis de renda, comportamento, hábitos de consumo e mobilidade urbana para gerar mapas de calor exclusivos. Ideal para validar expansões, encontrar novos públicos e tomar decisões de negócio com embasamento estatístico de 477 moradores.')">
-          <img src="mais_fotos_radar/pexels-thisisengineering-3861976.jpg" class="card-img" alt="Dashboard Radar" loading="lazy" />
-          <span class="card-badge badge-premium">Dashboard Dinâmico</span>
-          <h3 class="card-title"><i class="fas fa-chart-pie"></i>Dash Pesquisa 2026</h3>
-          <p class="card-desc">Filtros interativos sobre comportamento, consumo e mobilidade em SJC. Cruze variáveis e identifique oportunidades em tempo real.</p>
-          <ul class="card-items">
-            <li><i class="fas fa-check"></i>Filtros por renda, bairro, idade e perfil</li>
-            <li><i class="fas fa-check"></i>Mapa de calor de consumo por região</li>
-          </ul>
+      <div class="module-showcase-header">
+        <div class="module-showcase-intro">
+          <p class="section-label dark">Conheça por dentro</p>
+      <h2 class="section-title" id="modules-heading">O que você encontra<br>dentro do Radar.</h2>
+      <p class="section-desc">Consulte um indicador para sua próxima reunião. Encontre uma foto da cidade para a apresentação. Depois, se precisar investigar hábitos de consumo, conheça a pesquisa e as análises dos planos pagos. Essa é a proposta da inteligência como serviço: uma base local à qual você pode voltar a cada nova decisão.</p>
         </div>
-
-        <!-- 2: Radar News -->
-        <div class="platform-card premium" onclick="openSolutionModal('Radar Clipping', 'Monitoramento completo da opinião pública e da mídia local. O Radar Clipping varre as principais fontes de notícias e redes da cidade para identificar menções, analisar sentimentos e mapear tendências. Descubra exatamente como os eventos e marcas estão repercutindo em tempo real.')">
-          <img src="mais_fotos_radar/pexels-pavel-danilyuk-7937360.jpg" class="card-img" alt="Radar News" loading="lazy" />
-          <span class="card-badge badge-premium" style="background: #e11d48;">Big Data</span>
-          <h3 class="card-title"><i class="fas fa-satellite-dish"></i>Radar Clipping</h3>
-          <p class="card-desc">Monitoramento de mídia, notícias e opinião pública em SJC. Entenda como a cidade repercute marcas, eventos e tendências.</p>
-          <ul class="card-items">
-            <li><i class="fas fa-check"></i>Clipping e análise de notícias locais</li>
-            <li><i class="fas fa-check"></i>Termômetro de sentimento e tendências</li>
-          </ul>
-        </div>
-
-        <!-- 3: Relatório de IA -->
-        <div class="platform-card premium" onclick="openSolutionModal('Consultor IA', 'O Consultor IA é o seu consultor estratégico automatizado. Utilizando inteligência artificial avançada, ele cruza instantaneamente todo o nosso banco de dados com o seu segmento de mercado, gerando relatórios precisos, análises SWOT e insights focados em conversão e oportunidade.')">
-          <img src="mais_fotos_radar/pexels-tima-miroshnichenko-8764619.jpg" class="card-img" alt="Relatório de IA" loading="lazy" />
-          <span class="card-badge badge-premium" style="background: var(--azul-claro);">Gerador</span>
-          <h3 class="card-title"><i class="fas fa-robot"></i>Consultor IA</h3>
-          <p class="card-desc">Auditoria estratégica automatizada. Nossa inteligência artificial cruza os dados da plataforma para gerar insights imediatos.</p>
-          <ul class="card-items">
-            <li><i class="fas fa-check"></i>Geração instantânea de análises</li>
-            <li><i class="fas fa-check"></i>Foco direto no seu segmento</li>
-          </ul>
-        </div>
-
-        <!-- 4: Radar São José 2026 Pesquisa Completa -->
-        <div class="platform-card premium" onclick="openSolutionModal('Report Pesquisa 2026', 'O material executivo definitivo sobre São José dos Campos. Uma apresentação densa baseada em 3 camadas metodológicas: dados quantitativos rigorosos, análise qualitativa de tendências e observação etnográfica. A visão mais completa para quem precisa dominar o mercado local.')">
-          <img src="mais_fotos_radar/pexels-rdne-5778714.jpg" class="card-img" alt="Radar São José 2026 Pesquisa Completa" loading="lazy" />
-          <span class="card-badge badge-premium" style="background: #f59e0b; color: #fff;">Pro</span>
-          <h3 class="card-title"><i class="fas fa-file-alt"></i>Report Pesquisa 2026</h3>
-          <p class="card-desc">Apresentação executiva profunda com 3 camadas metodológicas: quantitativa, qualitativa e invasão de cenários (etnografia).</p>
-          <ul class="card-items">
-            <li><i class="fas fa-check"></i>Pesquisa quantitativa (477 respondentes)</li>
-            <li><i class="fas fa-check"></i>Observação etnográfica real de SJC</li>
-          </ul>
-        </div>
-
-        <!-- 5: Demografia & IBGE -->
-        <div class="platform-card" onclick="openSolutionModal('Radar Hub', 'Acesse a verdadeira fonte oficial dos dados de São José dos Campos. Reunimos informações vitais do IBGE, censo demográfico, distribuição de renda e faixas etárias, organizando tudo em painéis visuais fáceis de consultar e cruzar.')">
-          <img src="mais_fotos_radar/pexels-tomfisk-1081912.jpg" class="card-img" alt="Demografia IBGE" loading="lazy" />
-          <span class="card-badge badge-free" style="background: #0ea5e9;">Oficial</span>
-          <h3 class="card-title"><i class="fas fa-landmark"></i>Radar Hub</h3>
-          <p class="card-desc">Censo e microdados sobre SJC organizados. Renda, faixa etária, perfil familiar e distribuição geográfica — prontos para usar.</p>
-          <ul class="card-items">
-            <li><i class="fas fa-check"></i>Dados populacionais por bairro e zona</li>
-            <li><i class="fas fa-check"></i>Visualizações e recortes já preparados</li>
-          </ul>
-        </div>
-
-        <!-- 6: Banco de Imagens -->
-        <div class="platform-card" onclick="openSolutionModal('Lentes SJC', 'Nosso acervo visual aberto. O Lentes SJC oferece dezenas de fotografias profissionais de altíssima qualidade de diversas regiões, avenidas e ícones culturais de São José dos Campos. Perfeito para enriquecer apresentações e materiais de marketing regional sem custos adicionais.')">
-          <img src="mais_fotos_radar/pexels-leandro-street-fotografia-96279287-9260388.jpg" class="card-img" alt="Banco de imagens gratuito" loading="lazy" />
-          <span class="card-badge badge-free">Gratuito</span>
-          <h3 class="card-title"><i class="fas fa-images"></i>Lentes SJC</h3>
-          <p class="card-desc">Acervo fotográfico de São José dos Campos — ruas, bairros, cultura e vida urbana. Disponível para download gratuito.</p>
-          <ul class="card-items">
-            <li><i class="fas fa-check"></i>Alta resolução para apresentações</li>
-            <li><i class="fas fa-check"></i>Atualizado continuamente pela Studio 8</li>
-          </ul>
-        </div>
+        <nav class="module-jump" aria-label="Conheça os módulos">
+          <a href="#modulo-dados">
+            <span class="jump-icon"><i class="fa-solid fa-chart-simple"></i></span>
+            <div class="jump-meta">
+              <span class="jump-num">01 • Gratuito</span>
+              <span class="jump-title">Dados Públicos</span>
+            </div>
+          </a>
+          <a href="#modulo-historia">
+            <span class="jump-icon"><i class="fa-solid fa-landmark"></i></span>
+            <div class="jump-meta">
+              <span class="jump-num">02 • Gratuito</span>
+              <span class="jump-title">História</span>
+            </div>
+          </a>
+          <a href="#modulo-imagens">
+            <span class="jump-icon"><i class="fa-solid fa-images"></i></span>
+            <div class="jump-meta">
+              <span class="jump-num">03 • Gratuito</span>
+              <span class="jump-title">Banco de Imagens</span>
+            </div>
+          </a>
+          <a href="#modulo-pesquisa">
+            <span class="jump-icon is-pro"><i class="fa-solid fa-chart-pie"></i></span>
+            <div class="jump-meta">
+              <span class="jump-num is-pro">04 • Assinatura</span>
+              <span class="jump-title">Pesquisa Quantitativa</span>
+            </div>
+          </a>
+          <a href="#modulo-report">
+            <span class="jump-icon is-pro"><i class="fa-solid fa-file-lines"></i></span>
+            <div class="jump-meta">
+              <span class="jump-num is-pro">05 • Assinatura</span>
+              <span class="jump-title">Report Exclusivo</span>
+            </div>
+          </a>
+          <a href="#modulo-midia">
+            <span class="jump-icon is-pro"><i class="fa-solid fa-bullhorn"></i></span>
+            <div class="jump-meta">
+              <span class="jump-num is-pro">06 • Assinatura</span>
+              <span class="jump-title">Inteligência de Mídia</span>
+            </div>
+          </a>
+        </nav>
       </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PLANOS ══ -->
-  <section class="section plans-section" id="planos">
-    <div class="section-inner">
-      <p class="section-label" style="color: rgba(255,255,255,0.45)">Acesso</p>
-      <h2 class="section-title light">Escolha seu plano.</h2>
-      <p class="section-desc" style="color: rgba(255,255,255,0.55)">
-        Do básico ao estratégico — comece gratuitamente e expanda conforme sua necessidade.
-      </p>
-
-      <div class="plans-grid">
-        <!-- GRATUITO -->
-        <div class="plan-card">
-          <p class="plan-name">Gratuito</p>
-          <div class="plan-price">R$ 0 <span>/ sempre</span></div>
-          <p class="plan-tagline">Crie sua conta e acesse imediatamente o banco de imagens e os dados do IBGE.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i>Banco de imagens profissionais de SJC</li>
-            <li><i class="fas fa-check"></i>Dados IBGE Censo 2022 organizados</li>
-            <li><i class="fas fa-check"></i>Prévia dos insights da plataforma</li>
-            <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Dashboard analítico completo</li>
-            <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Relatório comportamental</li>
-          </ul>
-          <a href="login.html" class="btn-plan btn-plan-outline">Criar conta grátis</a>
+      <article class="module-story" id="modulo-dados" aria-labelledby="titulo-dados">
+        <div class="module-copy">
+          <p class="module-eyebrow"><span>01 / Dados Públicos</span><span class="module-access">Acesso gratuito</span></p>
+          <h3 id="titulo-dados">O que os indicadores dizem<br> sobre São José.</h3>
+          <p>Antes de escolher um ponto ou estudar uma expansão, consulte os indicadores de São José. População, economia e serviços públicos ficam reunidos por tema, com fontes e períodos de referência.</p>
+          <ul><li>Demografia, economia, saúde, educação, segurança, mobilidade e meio ambiente.</li><li>Recortes territoriais e comparação com outras cidades.</li><li>Referências para conferir de onde vem cada indicador.</li></ul>
+          <div class="module-use"><h4>Para usar no negócio</h4><p>Comece a avaliar um território com os dados da cidade. Depois, confronte essa leitura com a realidade do ponto e do seu público.</p></div>
+          <a href="app.html" class="btn-primary">Criar minha conta gratuita</a>
         </div>
-
-        <!-- PRO (R$ 10) -->
-        <div class="plan-card destaque">
-          <div class="plan-badge">Mais popular</div>
-          <p class="plan-name">Pro</p>
-          <div class="plan-price">R$ 10 <span>/ mês</span></div>
-          <p class="plan-tagline">Dashboard analítico completo + cruzamento de dados de 477 respondentes e clipping local.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i>Tudo do plano Gratuito</li>
-            <li><i class="fas fa-check"></i>Dashboard analítico interativo completo</li>
-            <li><i class="fas fa-check"></i>Relatório comportamental (3 camadas)</li>
-            <li><i class="fas fa-check"></i>Curadoria de Mídia — clipping SJC</li>
-            <li><i class="fas fa-check"></i>Acesso individual oficial</li>
-          </ul>
-          <a href="javascript:void(0)" onclick="openAsaasCheckout('pro')" class="btn-plan btn-plan-solid">Assinar Plano Pro (R$ 10)</a>
+        <figure class="module-demo">
+          <div class="module-demo-bar"><span class="module-demo-dot" aria-hidden="true"></span><span>Dados Públicos</span><span>Dentro do Radar</span></div>
+          <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/module-tours/dados.jpg" aria-label="Demonstração de Dados Públicos" aria-describedby="legenda-dados" width="864" height="594">
+            <source data-src="assets/module-tours/dados.mp4" type="video/mp4" />
+            Seu navegador não reproduz este vídeo. <a href="assets/module-tours/dados.mp4">Baixar a demonstração de Dados Públicos</a>.
+          </video>
+          <figcaption id="legenda-dados">Indicadores da cidade organizados por tema, com fontes e referências.</figcaption>
+        </figure>
+      </article>
+      <article class="module-story" id="modulo-historia" aria-labelledby="titulo-historia">
+        <div class="module-copy">
+          <p class="module-eyebrow"><span>02 / História</span><span class="module-access">Acesso gratuito</span></p>
+          <h3 id="titulo-historia">Como São José<br> chegou até aqui.</h3>
+          <p>A cidade da aviação também passou pelo café, pela ferrovia e pelos sanatórios. Percorra os períodos que ajudam a explicar a formação de São José e as mudanças na vida dos bairros.</p>
+          <ul><li>Cinco períodos históricos, das origens à cidade contemporânea.</li><li>Textos de contexto e registros organizados em uma linha do tempo.</li><li>Referências abertas para continuar a pesquisa.</li></ul>
+          <div class="module-use"><h4>Para quem quer conhecer a cidade</h4><p>Use o módulo para pesquisar, preparar uma apresentação ou entender melhor os lugares por onde você passa.</p></div>
+          <a href="app.html" class="btn-primary">Criar minha conta gratuita</a>
         </div>
-
-        <!-- EMPRESARIAL (R$ 15) -->
-        <div class="plan-card">
-          <p class="plan-name">Empresarial</p>
-          <div class="plan-price">R$ 15 <span>/ mês</span></div>
-          <p class="plan-tagline">Acesso ilimitado + Consultor IA Oráculo + relatórios executivos e suporte prioritário.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i>Tudo do plano Pro</li>
-            <li><i class="fas fa-check"></i>Consultor IA Oráculo McKinsey liberado</li>
-            <li><i class="fas fa-check"></i>Múltiplos acessos simultâneos</li>
-            <li><i class="fas fa-check"></i>Recortes e diagnósticos de decisão</li>
-            <li><i class="fas fa-check"></i>Suporte prioritário Studio 8</li>
-          </ul>
-          <a href="javascript:void(0)" onclick="openAsaasCheckout('enterprise')" class="btn-plan btn-plan-red">Assinar Empresarial (R$ 15)</a>
+        <figure class="module-demo">
+          <div class="module-demo-bar"><span class="module-demo-dot" aria-hidden="true"></span><span>História</span><span>Dentro do Radar</span></div>
+          <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/module-tours/historia.jpg" aria-label="Demonstração de História" aria-describedby="legenda-historia" width="864" height="594">
+            <source data-src="assets/module-tours/historia.mp4" type="video/mp4" />
+            Seu navegador não reproduz este vídeo. <a href="assets/module-tours/historia.mp4">Baixar a demonstração de História</a>.
+          </video>
+          <figcaption id="legenda-historia">Percorra os períodos e os registros da formação de São José.</figcaption>
+        </figure>
+      </article>
+      <article class="module-story" id="modulo-imagens" aria-labelledby="titulo-imagens">
+        <div class="module-copy">
+          <p class="module-eyebrow"><span>03 / Banco de Imagens</span><span class="module-access">Acesso gratuito</span></p>
+          <h3 id="titulo-imagens">Sua apresentação<br> com a cara de São José.</h3>
+          <p>Quando a proposta é para um cliente daqui, a imagem também precisa fazer sentido. Encontre fotografias da cidade, dos espaços de lazer e da circulação nos bairros.</p>
+          <ul><li>Fotografias autorais de São José dos Campos.</li><li>Ampliação das imagens e download do arquivo original.</li><li>Crédito do fotógrafo e condições de uso junto da fotografia.</li></ul>
+          <div class="module-use"><h4>Na próxima proposta</h4><p>Escolha uma imagem do território que você está apresentando, baixe o original e mantenha a atribuição indicada no acervo.</p></div>
+          <a href="app.html" class="btn-primary">Criar minha conta gratuita</a>
         </div>
-      </div>
+        <figure class="module-demo">
+          <div class="module-demo-bar"><span class="module-demo-dot" aria-hidden="true"></span><span>Banco de Imagens</span><span>Dentro do Radar</span></div>
+          <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/module-tours/imagens.jpg" aria-label="Demonstração de Banco de Imagens" aria-describedby="legenda-imagens" width="864" height="594">
+            <source data-src="assets/module-tours/imagens.mp4" type="video/mp4" />
+            Seu navegador não reproduz este vídeo. <a href="assets/module-tours/imagens.mp4">Baixar a demonstração de Banco de Imagens</a>.
+          </video>
+          <figcaption id="legenda-imagens">Conheça as fotografias disponíveis no acervo da cidade.</figcaption>
+        </figure>
+      </article>
+      <article class="module-story" id="modulo-pesquisa" aria-labelledby="titulo-pesquisa">
+        <div class="module-copy">
+          <p class="module-eyebrow"><span>04 / Pesquisa Quantitativa</span><span class="module-access paid">Conteúdo por assinatura</span></p>
+          <h3 id="titulo-pesquisa">Quem compra de você<br> tem hábitos além da compra.</h3>
+          <p>Como o morador se desloca? Onde procura lazer? Quanto ganha a família? Explore as respostas de 477 moradores e compare os recortes que interessam ao seu negócio.</p>
+          <ul><li>Gráficos sobre perfil, renda, trabalho, qualidade de vida e consumo.</li><li>Mobilidade, cultura e lazer, mídia e streaming, relacionamento, política, economia, mundo pet e voz da população.</li><li>Filtros por perfil e região para investigar diferenças na amostra.</li></ul>
+          <div class="module-use"><h4>Uma pergunta para começar</h4><p>Antes de mudar sua oferta, confira como o perfil que você pretende atender aparece na pesquisa. A coleta tem período próprio; os resultados não são um retrato em tempo real.</p></div>
+          <a href="#planos" class="btn-outline module-paid-cta">Conhecer o plano Dash</a>
+        </div>
+        <figure class="module-demo">
+          <div class="module-demo-bar"><span class="module-demo-dot" aria-hidden="true"></span><span>Pesquisa Quantitativa</span><span>Dentro do Radar</span></div>
+          <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/module-tours/pesquisa.jpg" aria-label="Demonstração de Pesquisa Quantitativa" aria-describedby="legenda-pesquisa" width="864" height="594">
+            <source data-src="assets/module-tours/pesquisa.mp4" type="video/mp4" />
+            Seu navegador não reproduz este vídeo. <a href="assets/module-tours/pesquisa.mp4">Baixar a demonstração de Pesquisa Quantitativa</a>.
+          </video>
+          <figcaption id="legenda-pesquisa">Veja os gráficos de perfil, renda e trabalho dos participantes da pesquisa.</figcaption>
+        </figure>
+      </article>
+      <article class="module-story" id="modulo-report" aria-labelledby="titulo-report">
+        <div class="module-copy">
+          <p class="module-eyebrow"><span>05 / Report Exclusivo</span><span class="module-access paid">Conteúdo por assinatura</span></p>
+          <h3 id="titulo-report">Entrevistas e observação<br> para ler junto dos dados.</h3>
+          <p>Leia o estudo sobre comportamento, consumo e vida urbana em São José. O Report aproxima os resultados da pesquisa das entrevistas em profundidade e da observação de campo.</p>
+          <ul><li>Leitura dos resultados quantitativos com contexto local.</li><li>Entrevistas em profundidade e registros da Invasão de Cenários.</li><li>Análises de movimentos culturais e oportunidades para discussão.</li></ul>
+          <div class="module-use"><h4>Para levar à reunião</h4><p>Prepare uma discussão sobre posicionamento com dados e relatos da cidade. O vídeo mostra a abertura e a prévia disponível do estudo.</p></div>
+          <a href="#planos" class="btn-outline module-paid-cta">Conhecer o plano Report</a>
+        </div>
+        <figure class="module-demo">
+          <div class="module-demo-bar"><span class="module-demo-dot" aria-hidden="true"></span><span>Report Exclusivo</span><span>Dentro do Radar</span></div>
+          <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/module-tours/report.jpg" aria-label="Demonstração de Report Exclusivo" aria-describedby="legenda-report" width="864" height="594">
+            <source data-src="assets/module-tours/report.mp4" type="video/mp4" />
+            Seu navegador não reproduz este vídeo. <a href="assets/module-tours/report.mp4">Baixar a demonstração de Report Exclusivo</a>.
+          </video>
+          <figcaption id="legenda-report">Uma prévia da abertura do estudo sobre comportamento e consumo.</figcaption>
+        </figure>
+      </article>
+      <article class="module-story" id="modulo-midia" aria-labelledby="titulo-midia">
+        <div class="module-copy">
+          <p class="module-eyebrow"><span>06 / Inteligência de Mídia</span><span class="module-access paid">Conteúdo por assinatura</span></p>
+          <h3 id="titulo-midia">Antes de anunciar,<br> entenda a conversa local.</h3>
+          <p>Veja os temas que aparecem nos canais de notícias e como o público reage. Consulte os recortes de publicações e engajamento para preparar o planejamento de comunicação.</p>
+          <ul><li>Comparações entre canais e temas da cobertura local.</li><li>Painéis de engajamento, sentimento e distribuição das publicações.</li><li>Leituras sobre repercussão para orientar perguntas e escolhas de mídia.</li><li>Mapeamento de influenciadores locais e personas comportamentais no plano Mídia.</li></ul>
+          <div class="module-use"><h4>Para planejar a comunicação</h4><p>Compare o volume de publicações com as interações. Um canal com mais posts nem sempre é o que concentra mais engajamento. Confira o período da base ao usar os números.</p></div>
+          <a href="#planos" class="btn-outline module-paid-cta">Conhecer o plano Mídia</a>
+        </div>
+        <figure class="module-demo">
+          <div class="module-demo-bar"><span class="module-demo-dot" aria-hidden="true"></span><span>Inteligência de Mídia</span><span>Dentro do Radar</span></div>
+          <video autoplay loop muted playsinline disablepictureinpicture disableremoteplayback preload="none" poster="assets/module-tours/midia.jpg" aria-label="Demonstração de Inteligência de Mídia" aria-describedby="legenda-midia" width="864" height="594">
+            <source data-src="assets/module-tours/midia.mp4" type="video/mp4" />
+            Seu navegador não reproduz este vídeo. <a href="assets/module-tours/midia.mp4">Baixar a demonstração de Inteligência de Mídia</a>.
+          </video>
+          <figcaption id="legenda-midia">Compare publicações e engajamento dos canais acompanhados.</figcaption>
+        </figure>
+      </article>
     </div>
   </section>
 
   <!-- ══ COMO FUNCIONA ══ -->
   <section class="section how-section">
     <div class="section-inner">
-      <p class="section-label dark">Como funciona</p>
-      <h2 class="section-title">Uma pergunta concreta muda<br>a qualidade da decisão.</h2>
+      <div class="how-layout">
+        <div class="how-intro">
+          <p class="section-label dark">Como funciona</p>
+          <h2 class="section-title">O que fazer<br>na primeira visita.</h2>
+        </div>
 
-      <div class="steps-grid">
+        <div class="steps-grid">
         <div class="step-card">
           <p class="step-num">01</p>
           <div class="step-icon"><i class="fas fa-user-plus"></i></div>
           <h3 class="step-title">Crie sua conta</h3>
-          <p class="step-desc">Cadastro gratuito em menos de 2 minutos. Acesso imediato ao banco de imagens e dados IBGE.</p>
+          <p class="step-desc">Abra a plataforma, escolha Novo Usuário e siga as etapas de cadastro.</p>
         </div>
         <div class="step-card">
           <p class="step-num">02</p>
           <div class="step-icon"><i class="fas fa-search"></i></div>
           <h3 class="step-title">Explore os dados</h3>
-          <p class="step-desc">Filtre por região, renda, perfil e comportamento. Veja a cidade como ela realmente é — não como você imagina.</p>
+          <p class="step-desc">Consulte os indicadores da cidade, percorra a linha do tempo e conheça o acervo de fotografias.</p>
         </div>
         <div class="step-card">
           <p class="step-num">03</p>
           <div class="step-icon"><i class="fas fa-glasses"></i></div>
-          <h3 class="step-title">Leitura aplicada</h3>
-          <p class="step-desc">Conecte os dados ao movimento concreto da sua empresa: expansão, posicionamento, comunicação ou oferta.</p>
+          <h3 class="step-title">Leve para o seu trabalho</h3>
+          <p class="step-desc">Separe uma referência para sua reunião ou uma fotografia para a apresentação, respeitando os créditos do acervo.</p>
         </div>
         <div class="step-card">
           <p class="step-num">04</p>
           <div class="step-icon"><i class="fas fa-location-arrow"></i></div>
-          <h3 class="step-title">Próximo passo</h3>
-          <p class="step-desc">Você leva uma leitura mais clara para decidir o que investigar, priorizar ou colocar em ação.</p>
+          <h3 class="step-title">Escolha seu acesso</h3>
+          <p class="step-desc">Continue com os módulos gratuitos ou escolha um plano anual para acessar os conteúdos de pesquisa e inteligência de mercado.</p>
         </div>
+      </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ══ INSIGHTS — DADOS DA PLATAFORMA ══ -->
+  <!-- ══ INSIGHTS. DADOS DA PLATAFORMA ══ -->
   <section class="section insights-section">
     <div class="section-inner">
       <div class="insights-grid">
         <div class="insights-left">
-          <p class="section-label" style="color: rgba(123,217,240,0.9)">Existe demanda. A pergunta é onde ela escapa.</p>
-          <h2 class="section-title light">A cidade combina orgulho, poder de consumo e uma busca constante por experiências.</h2>
+          <p class="section-label" style="color: rgba(123,217,240,0.9)">O que a pesquisa permite investigar</p>
+          <h2 class="section-title light">O morador gosta da cidade.<br>Onde ele escolhe consumir?</h2>
           <p class="section-desc light">
-            O Radar ajuda a identificar o espaço entre intenção e escolha — e a transformar esse espaço em vantagem competitiva.
+            Compare o que os moradores procuram com o que encontram na cidade. Esses recortes ajudam a levantar perguntas sobre sua oferta.
           </p>
           <div class="insight-cards">
             <div class="insight-card">
@@ -1592,7 +1683,7 @@
               <div class="insight-label">gastariam mais com opções locais melhores</div>
             </div>
           </div>
-          <p class="insights-note">Resultados da pesquisa quantitativa do Radar São José. Os dados orientam hipóteses de mercado e não representam promessa de resultado financeiro.</p>
+          <p class="insights-note">Percentuais arredondados da pesquisa com 477 participantes. As respostas ajudam a investigar hábitos e intenções; não são previsão de vendas.</p>
         </div>
         <div class="insights-right" style="margin-left: 50px;">
           <img src="fotos_radar/mapa_origem_entrevistados.png" alt="Origem dos Entrevistados - 477 Respondentes em 100 Bairros" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);"  loading="lazy" />
@@ -1604,119 +1695,13 @@
     </div>
   </section>
 
-  <!-- ══ STATS BAR ══ -->
-  <div class="stats-bar">
-    <div class="stats-bar-inner">
-      <div class="stat-item">
-        <div class="stat-num">477</div>
-        <div class="stat-label">Respondentes válidos</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">95<span class="stat-suffix">%</span></div>
-        <div class="stat-label">Nível de confiança</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">±4,5<span class="stat-suffix">%</span></div>
-        <div class="stat-label">Margem de erro</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Camadas metodológicas</div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ══ VIDEO — DASHBOARD EM AÇÃO ══ -->
-  <section class="section video-section">
-    <div class="section-inner">
-      <div class="video-inner">
-        <div class="video-wrap">
-          <video
-            src="https://studio8.com.br/wp-content/uploads/2026/08/Design-sem-nome-2-1.mp4"
-            controls
-            preload="metadata"
-            controlslist="nodownload">
-          </video>
-        </div>
-        <div class="video-text">
-          <p class="section-label dark">O dashboard · inteligência em uso</p>
-          <h2 class="section-title">Veja o Radar entrar na decisão.</h2>
-          <p class="section-desc">
-            Neste vídeo, você acompanha a central de inteligência do Radar em ação. A leitura cruza perfil, renda, idade e regiões da cidade para revelar onde o joseense consome, o que procura e quais oportunidades ficam fora dos relatórios padrão.
-          </p>
-          <ul class="checklist">
-            <li><i class="fas fa-check"></i>Mais de 470 respostas válidas organizadas por perfil e território</li>
-            <li><i class="fas fa-check"></i>Sinais de consumo, lacunas locais e motivações de escolha</li>
-            <li><i class="fas fa-check"></i>Uma leitura preparada para discussões estratégicas de diretoria</li>
-          </ul>
-          <div style="margin-top: 32px;">
-            <a href="#contato" class="btn-primary">Acessar o dashboard</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FOTOS DA CIDADE ══ -->
-  <section class="fotos-section" id="banco-imagens">
-    <div class="section-inner section" style="padding-bottom: 0;">
-      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-        <div style="flex: 1 1 500px; max-width: 580px;">
-          <p class="section-label" style="color: rgba(255,255,255,0.45)">Banco de imagens · gratuito</p>
-          <h2 class="section-title light" style="margin-bottom: 20px;">São José dos Campos,<br>em alta resolução.</h2>
-          <p class="section-desc" style="color: rgba(255,255,255,0.7); margin-bottom: 0;">
-            Sempre foi muito difícil encontrar fotografias de qualidade e em alta resolução da nossa cidade para usar em apresentações, campanhas e materiais de marketing. Criamos este acervo para suprir essa demanda do mercado local.
-          </p>
-        </div>
-        
-        <div style="flex: 1 1 400px; max-width: 500px; background: rgba(25, 175, 234, 0.08); border-left: 3px solid var(--azul-claro); padding: 24px; border-radius: 0 8px 8px 0;">
-          <p style="color: var(--branco); font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;">Projeto Colaborativo 🤝</p>
-          <p style="color: rgba(255,255,255,0.75); font-size: 0.85rem; line-height: 1.6; margin-bottom: 0;">
-            Queremos registrar e movimentar a cidade juntos! Se você é fotógrafo ou tem fotos incríveis de SJC e quer ajudar a construir esse banco de imagens, envie seu material para <br><a href="mailto:contato@studio8.com.br" style="color: var(--azul-claro); text-decoration: none; font-weight: 600;">contato@studio8.com.br</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 48px 96px; position: relative;">
-      <!-- Menos imagens, com pointer-events: none (via CSS) para não baixar/arrastar -->
-      <div class="fotos-grid" style="margin-top: 40px; opacity: 0.4; filter: blur(2px) grayscale(50%);">
-        <div class="foto-item tall">
-          <img src="fotos_radar/capa_sjc_skyline.jpg" alt="São José dos Campos - Skyline" loading="lazy" />
-        </div>
-        <div class="foto-item">
-          <img src="fotos_radar/foto_cidade.jpg" alt="São José dos Campos" loading="lazy" />
-        </div>
-        <div class="foto-item">
-          <img src="fotos_radar/sjc_ponte_estaiada.jpg" alt="Ponte estaiada SJC" loading="lazy" />
-        </div>
-        <div class="foto-item">
-          <img src="fotos_radar/foto_pessoas.jpg" alt="Pessoas de São José" loading="lazy" />
-        </div>
-      </div>
-
-      <!-- Overlay bloqueando a galeria com call to action -->
-      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10;">
-        <div style="background: rgba(11,37,69,0.9); backdrop-filter: blur(8px); padding: 40px 48px; border-radius: 12px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); max-width: 420px; width: 90%;">
-          <i class="fas fa-lock" style="font-size: 2.2rem; color: var(--azul-claro); margin-bottom: 20px;"></i>
-          <h3 style="color: white; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 12px;">Acervo Fechado</h3>
-          <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; margin: 0 auto 28px;">
-            Crie sua conta gratuitamente para visualizar e fazer download das fotografias em alta resolução.
-          </p>
-          <a href="app.html" class="btn-primary" style="display: block; width: 100%;">Criar Conta Grátis</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ══ METODOLOGIA ══ -->
   <section class="section metodo-section" id="metodologia">
     <div class="section-inner">
       <p class="section-label dark">Metodologia / 03 camadas</p>
-      <h2 class="section-title">Uma decisão importante merece<br>uma pergunta melhor.</h2>
+      <h2 class="section-title">De onde vêm<br>as análises do Radar.</h2>
       <p class="metodo-desc">
-        Cada método responde a uma pergunta diferente. Juntos, eles mostram o que o consumidor diz, o que sente e o que realmente faz nos espaços de convivência da cidade.
+        O estudo combina respostas a questionários, entrevistas em profundidade e observação de campo. Os Dados Públicos complementam essa leitura com indicadores e fontes oficiais.
       </p>
 
       <div class="metodo-grid">
@@ -1728,12 +1713,12 @@
         <div class="metodo-card">
           <p class="metodo-card-sub">Qualitativa</p>
           <h3 class="metodo-card-title">O que a cidade sente em palavras.</h3>
-          <p class="metodo-card-desc">Perfis em profundidade para identificar desejos, tensões, motivações e contradições — a alma por trás dos dados estatísticos.</p>
+          <p class="metodo-card-desc">Entrevistas em profundidade para entender as experiências e os motivos por trás das respostas à pesquisa.</p>
         </div>
         <div class="metodo-card">
           <p class="metodo-card-sub">Invasão de Cenários</p>
           <h3 class="metodo-card-title">O que a cidade faz na vida real.</h3>
-          <p class="metodo-card-desc">Observação etnográfica em pontos estratégicos: bares, feiras, shoppings e espaços públicos. Comportamento real quando ninguém está perguntando.</p>
+          <p class="metodo-card-desc">Observação etnográfica em pontos estratégicos: bares, feiras, shoppings e espaços públicos. Registros do uso desses espaços no período observado.</p>
         </div>
       </div>
 
@@ -1763,43 +1748,43 @@
       <div class="regioes-inner">
         <div>
           <p class="section-label" style="color: rgba(123,217,240,0.9)">Leitura territorial</p>
-          <h2 class="section-title light">A cidade não se comporta como um único mercado.</h2>
+          <h2 class="section-title light">Qual decisão está na sua mesa hoje?</h2>
           <p class="section-desc light">
-            Regiões, perfis, deslocamentos e expectativas diferentes formam mercados dentro do mesmo CEP. O Radar organiza essas diferenças para que sua empresa pare de falar com uma cidade abstrata.
+            Abrir uma unidade e preparar uma campanha pedem leituras diferentes. Use os módulos para investigar a pergunta que importa agora para o seu negócio.
           </p>
 
           <div class="regioes-grid">
             <div class="regiao-card">
-              <p class="regiao-nome">Zona Oeste</p>
-              <h4 class="regiao-titulo">Elite e Qualidade</h4>
-              <p class="regiao-desc">Renda R$ 12k–26k. Lazer 73% local. Maior qualidade de vida da cidade.</p>
+              <p class="regiao-nome">Expansão</p>
+              <h4 class="regiao-titulo">Estudar um território</h4>
+              <p class="regiao-desc">Consulte os indicadores públicos e compare os recortes disponíveis antes de aprofundar a avaliação de um ponto.</p>
             </div>
             <div class="regiao-card">
-              <p class="regiao-nome">Zona Sul</p>
-              <h4 class="regiao-titulo">Polo Autossuficiente</h4>
-              <p class="regiao-desc">Renda R$ 5,6k–12k. Bairros 25–34 anos. Não apenas dormitório.</p>
+              <p class="regiao-nome">Oferta</p>
+              <h4 class="regiao-titulo">Conhecer hábitos de consumo</h4>
+              <p class="regiao-desc">Explore o que os participantes da pesquisa relatam sobre lazer, deslocamento e escolhas do cotidiano.</p>
             </div>
             <div class="regiao-card">
-              <p class="regiao-nome">Zona Norte</p>
-              <h4 class="regiao-titulo">Demanda Reprimida</h4>
-              <p class="regiao-desc">Alta dependência de transporte. Maior potencial de conversão de consumo local.</p>
+              <p class="regiao-nome">Comunicação</p>
+              <h4 class="regiao-titulo">Preparar a próxima campanha</h4>
+              <p class="regiao-desc">Consulte os canais e temas da base de mídia para discutir onde sua mensagem pode fazer sentido.</p>
             </div>
             <div class="regiao-card">
-              <p class="regiao-nome">Centro</p>
-              <h4 class="regiao-titulo">Hiperconcentração</h4>
-              <p class="regiao-desc">41,8% do lazer acontece no eixo Centro-Oeste. Aquarius e Vila Adyana em destaque.</p>
+              <p class="regiao-nome">Apresentação</p>
+              <h4 class="regiao-titulo">Sustentar uma proposta</h4>
+              <p class="regiao-desc">41,8% do lazer acontece no eixo Apresentação-Oeste. Aquarius e Vila Adyana em destaque.</p>
             </div>
           </div>
         </div>
         <div class="regioes-visual" style="position: relative; border-radius: 8px; overflow: hidden; height: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
           <!-- Foto de fundo (substituindo a imagem tipografada estática) -->
           <img src="fotos_radar/sjc_cassiano_ricardo.jpg" alt="Comércio de rua em SJC" style="width: 100%; height: 100%; object-fit: cover;"  loading="lazy" />
-          
+
           <!-- Overlay com texto HTML editável -->
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(11,37,69,0.9) 0%, rgba(11,37,69,0.2) 70%, rgba(11,37,69,0.5) 100%); padding: 48px 40px; display: flex; flex-direction: column;">
             <p style="color: white; font-size: 1.75rem; font-weight: 600; font-family: var(--font-display); line-height: 1.35; letter-spacing: -0.015em; text-shadow: 0 2px 10px rgba(0,0,0,0.6); margin: 0;">
-              Comportamento real não acontece <span style="color: var(--azul-claro);">atrás de telas.</span><br><br>
-              <span style="font-size: 1.4rem; font-weight: 500; opacity: 0.95;">Acontece na rua, no trajeto e na escolha que vem antes da compra.</span>
+              Sua próxima decisão começa com <span style="color: var(--azul-claro);">uma pergunta concreta.</span><br><br>
+              <span style="font-size: 1.4rem; font-weight: 500; opacity: 0.95;">Escolha um território, um público ou um tema e procure as referências disponíveis no Radar.</span>
             </p>
           </div>
         </div>
@@ -1807,288 +1792,148 @@
     </div>
   </section>
 
-  <!-- ══ CTA MEIO ══ -->
-  <div class="cta-mid">
-    <div class="cta-mid-inner">
-      <div>
-        <span class="cta-tag">O que você pode investigar</span>
-        <h2 class="cta-title">Quais regiões concentram o público que você quer alcançar?</h2>
-        <p class="cta-sub">O que impede uma intenção de consumo de virar escolha local? Quais experiências ainda estão subatendidas? Como diferentes perfis percebem sua categoria?</p>
-      </div>
-      <div>
-        <a href="app.html" class="btn-primary" style="white-space: nowrap;">Acessar as soluções</a>
-      </div>
-    </div>
-  </div>
-
   <!-- ══ NOSSO MANIFESTO ══ -->
   <section class="section manifesto-section" id="manifesto">
     <div class="manifesto-inner">
-      <span class="manifesto-label">Nosso Manifesto</span>
-      
-      <div class="manifesto-text">
-        <p class="manifesto-highlight">
-          São José dos Campos. A potência do Vale do Paraíba que constrói máquinas voadoras, que cortam os céus mundo afora. O maior polo aeronáutico da América Latina, cidade tecnológica, à frente do seu tempo. Mão de obra qualificada, renda alta. Gente boa trabalha aqui.
-        </p>
-        
-        <p>Mas tem uma coisa que é pouco debatida: o dinheiro que entra some, vai pras cidades vizinhas que oferecem o que São José ainda não possui. <br>
-        Não porque não tenha comércio e oferta. Tem. <br>
-        Não porque não tenha gente com grana. Tem, e muita.<br>
-        Consumidor não falta! Então o que realmente falta?</p>
-        
-        <p>São José ainda tem fama de distrito industrial que "dorme cedo". E essa fama é igual a boato de botequim: começa pequeno, ninguém sabe quem inventou, mas todo mundo repete e acabou que virou verdade…</p>
-        
-        <p>Enquanto a fama cresce, bons negócios vão para outras cidades e quem vem pra cá espanta a concorrência local, muitas vezes de forma selvagem e rápida. E você, empreendedor, executivo, comerciante, dono de loja, dono de restaurante, fica aí coçando a cabeça, sem entender por que a venda não engrena. Porque o ticket médio não sobe. Porque o lead do tráfego está desqualificado e suas campanhas estão cada vez mais caras? Porque os talentos da sua empresa saem e você não consegue contratar mais gente? Porque vários empresários estão indo a bancarrota e como o seu negócio não vai ser o próximo?</p>
-        
-        <p>Sabe por quê? <strong>Você não conhece São José vivendo nas ruas</strong>, no cotidiano, nos detalhes da cidade que fazem o Joseense comprar, voltar, ou nunca nem passar por você, ainda.</p>
-        
-        <p>A cidade tem uma cultura de contratar institutos de pesquisa de fora do estado. E apesar de reconhecermos a importância deles, também sabemos que esses caras nunca sentaram para comer um bolinho caipira na praça do São Dimas em pleno frio de junho. Nunca desceram o famoso morro do Habib's e sentiram aquele frio que embrulha a barriga e faz as nossas crianças levantarem os braços todas as vezes fingindo que estão numa montanha russa. <strong>Eles chegam com uma planilha. A gente entrega vida, São José de verdade.</strong></p>
-        
-        <p>Não é falta de demanda. Não é falta de poder de compra. É falta de informação real sobre onde, quando e como o dinheiro do Joseense se move!</p>
-        
-        <p>É por isso que o Radar São José existe. Porque ninguém antes mergulhou nos movimentos que de fato norteiam esta cidade. No rigor técnico e multidisciplinar que usamos para mapear o que ninguém quis ver: a Capital do Vale não precisa de mais achismos. Precisa de dados reais. E nós temos!</p>
+      <div class="manifesto-content">
+        <span class="manifesto-label">Quem faz o Radar</span>
+        <h2 class="manifesto-title">Uma pesquisa feita para entender a vida de quem mora, consome e trabalha em São José.</h2>
+        <div class="manifesto-text">
+          <p>O Radar nasceu de perguntas presentes no comércio e nos bairros: onde o morador procura lazer, como escolhe o que consumir e o que sente falta na cidade. O estudo reúne 477 respostas, entrevistas em profundidade e observação de campo.</p>
+          <p>Hoje, a plataforma aproxima essa pesquisa de indicadores públicos, fotografias e análises de mídia. O trabalho do Studio 8 é organizar essas referências para que você consiga consultá-las quando surgir uma nova questão no negócio.</p>
+        </div>
       </div>
 
       <div class="manifesto-authors">
         <div class="author-card">
           <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="author-photo" loading="lazy" />
-          <h4>Leonardo Venâncio</h4>
-          <div class="author-role">Consultor de Pesquisa - Studio 8</div>
-          <p class="author-bio">Pesquisador e consultor com mais de uma década de experiência em inteligência de mercado para marcas como Ambev, Pernod Ricard, Sadia e CNN Brasil. Nasceu em São José dos Campos, construiu carreira em São Paulo e nunca parou de olhar para o Vale com os dois olhos: o de quem foi criado aqui e o de quem aprendeu a ler mercado lá fora.</p>
+          <div class="author-info">
+            <h4>Leonardo Venâncio</h4>
+            <div class="author-role">Consultor de Pesquisa - Studio 8</div>
+            <p class="author-bio">Pesquisador e consultor com mais de uma década de experiência em inteligência de mercado para marcas como Ambev, Pernod Ricard, Sadia e CNN Brasil. Nasceu em São José dos Campos, construiu carreira em São Paulo e nunca parou de olhar para o Vale com os dois olhos: o de quem foi criado aqui e o de quem aprendeu a ler mercado lá fora.</p>
+          </div>
         </div>
         <div class="author-card">
           <img src="fotos_radar/mayumi.jpg" alt="Mayumi Nagano" class="author-photo" loading="lazy" />
-          <h4>Mayumi Nagano</h4>
-          <div class="author-role">Estrategista de Tráfego e Cultura - Studio 8</div>
-          <p class="author-bio">Empreendedora desde 2016 e especialista em automação, tráfego pago e growth para escala em performance digital. Ajuda a transformar a inteligência de dados em ação e crescimento real para negócios em São José dos Campos e região.</p>
+          <div class="author-info">
+            <h4>Mayumi Nagano</h4>
+            <div class="author-role">Estrategista de Tráfego e Cultura - Studio 8</div>
+            <p class="author-bio">Empreendedora desde 2016 e especialista em automação, tráfego pago e growth para escala em performance digital. Ajuda a transformar a inteligência de dados em ação e crescimento real para negócios em São José dos Campos e região.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ══ PLANOS ══ -->
+  <section class="section plans-section" id="planos">
+    <div class="section-inner">
+      <p class="section-label" style="color: rgba(255,255,255,0.45)">Acesso</p>
+      <h2 class="section-title light">Quando precisar aprofundar,<br>escolha seu plano.</h2>
+      <p class="section-desc" style="color: rgba(255,255,255,0.55)">
+        Escolha pela decisão que você precisa tomar. Todos os planos pagos incluem acesso por um ano.
+      </p>
+
+      <div class="plans-grid">
+        <!-- PLANO GRÁTIS -->
+        <div class="plan-card" id="plano-gratis">
+          <p class="plan-name">Plano Grátis</p>
+          <div class="plan-price"><span>Acesso livre</span> R$ 0</div>
+          <p class="plan-tagline">Sem cartão e sem compromisso.<br><strong>100% gratuito</strong> para sempre.</p>
+          <p class="plan-tagline">História, Banco de Imagens e Dados Públicos no acesso gratuito.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check" aria-hidden="true"></i>Dados Públicos e indicadores de SJC</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>História e linha do tempo da cidade</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Banco de Imagens em alta resolução</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Acesso gratuito imediato</li>
+          </ul>
+          <a href="app.html" class="btn-plan btn-plan-outline">Criar conta gratuita</a>
+        </div>
+
+        <!-- PLANO DASH -->
+        <div class="plan-card">
+
+          <p class="plan-name">Plano Dash</p>
+          <div class="plan-price"><span>12× de</span> R$ 269,90</div>
+          <p class="plan-tagline">Sem juros no cartão. Total anual: R$ 3.238,80.<br><strong>R$ 2.914,92 à vista no Pix</strong> (10% de desconto).</p>
+          <p class="plan-tagline">Para investigar o público e comparar os recortes da pesquisa.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check" aria-hidden="true"></i>Pesquisa Quantitativa completa</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>30 gráficos interativos</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Filtros por gênero, idade, renda e região</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Base de 477 moradores</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Recortes de perfil e comportamento</li>
+          </ul>
+          <a href="app.html" class="btn-plan btn-plan-outline">Criar conta para contratar</a>
+        </div>
+        <div class="plan-card destaque">
+          <div class="plan-badge">Recomendado</div>
+          <p class="plan-name">Plano Report</p>
+          <div class="plan-price"><span>12× de</span> R$ 489,90</div>
+          <p class="plan-tagline">Sem juros no cartão. Total anual: R$ 5.878,80.<br><strong>R$ 5.290,92 à vista no Pix</strong> (10% de desconto).</p>
+          <p class="plan-tagline">Para levar uma análise mais completa à próxima reunião de decisão.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check" aria-hidden="true"></i>Tudo do plano Dash</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Report Exclusivo completo</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>10 entrevistas em profundidade</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Observação de campo: Invasão de Cenários</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Análises de comportamento e consumo</li>
+          </ul>
+          <a href="app.html" class="btn-plan btn-plan-solid">Criar conta para contratar</a>
+        </div>
+        <div class="plan-card">
+
+          <p class="plan-name">Plano Mídia</p>
+          <div class="plan-price"><span>12× de</span> R$ 1.190,00</div>
+          <p class="plan-tagline">Sem juros no cartão. Total anual: R$ 14.280,00.<br><strong>R$ 12.852,00 à vista no Pix</strong> (10% de desconto).</p>
+          <p class="plan-tagline">Para equipes que planejam comunicação e precisam acompanhar a cidade.</p>
+          <ul class="plan-features">
+            <li><i class="fas fa-check" aria-hidden="true"></i>Tudo do plano Report</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Inteligência de Mídia e notícias de SJC</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Mapeamento de influenciadores locais</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>Personas comportamentais</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i>3 usuários: titular e 2 convidados</li>
+          </ul>
+          <a href="app.html" class="btn-plan btn-plan-outline">Criar conta para contratar</a>
+        </div>
+      </div>
+      <p class="plans-note">Os planos pagos têm vigência anual. O valor em 12 parcelas corresponde ao pagamento do período de um ano.</p>
+    </div>
+  </section>
+
 
   <!-- ══ FAQ ══ -->
-  <section class="section faq-section" id="faq">
-    <div class="section-inner">
-      <div class="faq-inner">
-        <div>
-          <p class="section-label dark">Base de decisão / FAQ</p>
-          <h2 class="section-title">Clareza antes da conversa.</h2>
-        </div>
-        <div>
-          <div class="faq-list">
+  <section class="section faq-section" id="faq"><div class="section-inner"><div class="faq-inner"><div><p class="section-label dark">Antes de criar sua conta</p><h2 class="section-title">O que você<br>precisa saber.</h2></div><div class="faq-list">
+<details><summary>O que é o Radar São José?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">É uma plataforma de inteligência de mercado sobre São José dos Campos. Reúne dados públicos, história, fotografias, pesquisa com moradores, análises de comportamento e inteligência de mídia. Você consulta os módulos conforme a pergunta que precisa investigar.</p></details>
+<details><summary>Preciso pagar para criar uma conta?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Não. A conta dá acesso gratuito a História, Banco de Imagens e Dados Públicos. A Pesquisa Quantitativa completa, o Report Exclusivo e a Inteligência de Mídia fazem parte dos planos pagos.</p></details>
+<details><summary>Como faço meu cadastro?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Clique em Criar minha conta gratuita. Na tela da plataforma, escolha Novo Usuário e siga as etapas de cadastro. Se você já tem uma conta, use Entrar.</p></details>
+<details><summary>O que posso fazer na primeira visita?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Abra Dados Públicos para consultar um indicador. No Banco de Imagens, encontre uma fotografia para sua apresentação e confira os créditos e condições de uso. Em História, percorra os períodos da formação de São José.</p></details>
+<details><summary>Qual plano faz sentido para o meu trabalho?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">O Dash inclui a Pesquisa Quantitativa. O Report acrescenta o estudo executivo, entrevistas e observação de campo. O Mídia reúne esses conteúdos com inteligência de mídia, influenciadores, personas e acesso para três usuários. A contratação é anual, com as condições apresentadas nos planos.</p></details>
+<details><summary>Os dados são atualizados em tempo real?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Cada base tem seu período de referência. A pesquisa reúne uma coleta com 477 moradores; os indicadores públicos e os painéis de mídia têm referências próprias. Consulte a fonte, a data e a base de cada recorte antes de interpretar os resultados.</p></details>
+<details><summary>Posso usar as fotografias nas minhas apresentações?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Consulte os créditos e as condições de uso apresentados junto de cada fotografia. O acervo permite ampliar as imagens e baixar o arquivo original.</p></details>
+<details><summary>Posso acessar pelo celular?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Sim. Para comparar gráficos e explorar análises com mais espaço, use um computador ou tablet.</p></details>
+</div></div></div></section>
 
-            <details open>
-              <summary>
-                O Radar é uma pesquisa ou uma plataforma?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">É uma plataforma de inteligência de mercado local. A pesquisa, as análises e o dashboard trabalham juntos para transformar comportamento em decisões mais específicas sobre São José dos Campos.</p>
-            </details>
-
-            <details>
-              <summary>
-                O que está disponível gratuitamente?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Com cadastro gratuito você acessa o banco de imagens profissionais de SJC e os dados do IBGE organizados. O dashboard analítico completo e o relatório comportamental são módulos premium — fale conosco para saber mais.</p>
-            </details>
-
-            <details>
-              <summary>
-                Como faço para criar minha conta?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Acesse a plataforma pelo botão "Criar conta grátis". O cadastro é rápido — nome, e-mail e senha. Você já fica com acesso imediato ao banco de imagens e aos dados IBGE.</p>
-            </details>
-
-            <details>
-              <summary>
-                Por onde começamos uma conversa sobre o Radar?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Começamos por uma decisão concreta: expansão, posicionamento, comunicação, oferta, território ou outra escolha que dependa de entender melhor o mercado local. Você não precisa de um briefing pronto.</p>
-            </details>
-
-            <details>
-              <summary>
-                O Radar garante aumento de vendas?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Não. O Radar não promete resultado financeiro específico. Ele reduz incertezas, mostra comportamentos reais e ajuda sua equipe a tomar decisões mais bem informadas sobre o mercado de SJC.</p>
-            </details>
-
-            <details>
-              <summary>
-                Para qual tipo de empresa o Radar é mais indicado?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Empresas de varejo, serviços, gastronomia, saúde, educação e incorporadoras que estão em fase de expansão, buscando reposicionamento ou querendo aprofundar seu entendimento sobre o consumidor joseense.</p>
-            </details>
-
-            <details>
-              <summary>
-                Como os dados do dashboard são atualizados?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Os dados demográficos seguem as divulgações oficiais do IBGE, enquanto os módulos comportamentais e o painel de Radar Clipping recebem atualizações contínuas pela equipe de dados do Studio 8.</p>
-            </details>
-
-            <details>
-              <summary>
-                Posso baixar os gráficos do painel para usar na minha apresentação?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Sim, assinantes dos planos Premium e Empresarial podem exportar recortes, relatórios em PDF e gráficos em alta resolução diretamente do dashboard para embasar apresentações executivas e comitês.</p>
-            </details>
-
-            <details>
-              <summary>
-                O banco de imagens gratuitas tem alguma restrição de direitos autorais?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">As imagens do acervo colaborativo são livres para uso em campanhas, mídias sociais e apresentações da sua empresa, desde que mantenham o contexto original e não sejam comercializadas ou revendidas isoladamente.</p>
-            </details>
-
-            <details>
-              <summary>
-                O Relatório de IA pode ser focado apenas no meu segmento?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Sim! A plataforma cruza a base qualitativa e quantitativa geral da cidade e permite que a Inteligência Artificial extraia análises e cenários focados exatamente no seu nicho de atuação e desafio de negócios.</p>
-            </details>
-
-            <details>
-              <summary>
-                Como funciona a 'Invasão de Cenários'?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">É nossa metodologia etnográfica. A equipe vai a campo (shoppings, parques, ruas comerciais) para observar o comportamento real do consumidor de SJC em seu habitat, sem interferências de questionários, captando como ele age de verdade.</p>
-            </details>
-
-            <details>
-              <summary>
-                Qual a fonte primária dos dados demográficos da plataforma?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Utilizamos os microdados mais recentes do IBGE (Censo 2022), mas eles são tratados, refinados e cruzados especificamente para a realidade dos bairros e zonas de São José dos Campos, facilitando a leitura estratégica e local.</p>
-            </details>
-
-            <details>
-              <summary>
-                É possível contratar uma pesquisa exclusiva além da plataforma?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Com certeza. Além da assinatura da plataforma, o Studio 8 realiza projetos de inteligência, branding e pesquisas ad-hoc sob medida para desafios muito específicos que a sua marca precisa desvendar.</p>
-            </details>
-
-            <details>
-              <summary>
-                O Radar Clipping monitora quais redes?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Monitoramos grandes portais de notícias locais, menções públicas em redes e o termômetro de opinião geral sobre eventos, problemas urbanos e tendências que moldam o humor da cidade.</p>
-            </details>
-
-            <details>
-              <summary>
-                Consigo acessar o Radar pelo celular?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Sim, a plataforma web é responsiva. Porém, devido à alta densidade de informações e cruzamento de gráficos no dashboard analítico, recomendamos o uso via desktop ou tablet para uma experiência de análise mais confortável.</p>
-            </details>
-
-            <details>
-              <summary>
-                Vocês têm dados de outras cidades do Vale do Paraíba?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Neste primeiro momento, o projeto Radar é verticalizado, sendo 100% focado e aprofundado exclusivamente na dinâmica cultural, demográfica e comportamental de São José dos Campos.</p>
-            </details>
-
-            <details>
-              <summary>
-                O que significa a margem de erro de ±4,5%?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Significa que, com um nível de confiança de 95%, os resultados da nossa pesquisa quantitativa (477 respostas locais válidas) refletem com precisão a realidade da população de SJC, podendo variar no máximo 4,5 pontos para cima ou para baixo.</p>
-            </details>
-
-            <details>
-              <summary>
-                Posso dividir meu acesso premium com minha equipe?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Depende do plano. As assinaturas Pro e Empresarial contam com permissões e acessos dedicados para que múltiplos líderes e gestores da sua empresa consultem a base simultaneamente.</p>
-            </details>
-
-            <details>
-              <summary>
-                A inteligência artificial lê dados confidenciais da minha empresa?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">Não. A IA do Radar atua apenas consultando a nossa própria base de dados (pesquisas, IBGE e cenários de SJC). Nenhum dado proprietário do seu negócio é exposto, ingerido ou armazenado pelo nosso gerador de análises.</p>
-            </details>
-
-            <details>
-              <summary>
-                O que muda entre o plano Pro e o plano Empresarial?
-                <i class="fas fa-plus faq-icon"></i>
-              </summary>
-              <p class="faq-answer">O plano Empresarial oferece, além da plataforma completa, workshops de imersão presenciais, acompanhamento contínuo e apresentações executivas guiadas pela nossa equipe de estrategistas para o board da sua empresa.</p>
-            </details>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ CONTATO / FORMULÁRIO ══ -->
+  <!-- Cadastro gratuito -->
   <section class="section contact-section" id="contato">
     <div class="section-inner">
-      <div class="contact-inner">
-        <div>
-          <div class="contact-logo">
-            <img src="fotos_radar/logobranco.png" alt="Radar São José"  loading="lazy" />
-          </div>
-          <span class="contact-eyebrow">Primeiro movimento</span>
-          <h2 class="section-title light">Qual movimento da sua empresa precisa de mais clareza?</h2>
-          <p class="section-desc" style="color: rgba(255,255,255,0.55); margin-top: 16px;">
-            Conte qual decisão você está avaliando. A equipe do Studio 8 entra em contato para entender o contexto e definir o próximo passo mais útil para a sua decisão.
-          </p>
-          <div class="contact-red-line">
-            <p>Quando a leitura aponta uma questão que pede mais evidência, definimos juntos o próximo nível de investigação e acompanhamento.</p>
-          </div>
-        </div>
-
-        <div>
-          <div class="form-group">
-            <input type="text" placeholder="Nome completo" />
-          </div>
-          <div class="form-group">
-            <input type="email" placeholder="E-mail corporativo" required />
-          </div>
-          <div class="form-group">
-            <input type="tel" placeholder="WhatsApp" />
-          </div>
-          <div class="form-group">
-            <select>
-              <option value="" disabled selected>Qual é o seu objetivo principal?</option>
-              <option>Expansão / nova unidade em SJC</option>
-              <option>Posicionamento de marca local</option>
-              <option>Comunicação e campanhas territoriais</option>
-              <option>Estratégia de oferta e produto</option>
-              <option>Inteligência de mercado / pesquisa</option>
-              <option>Outro</option>
-            </select>
-          </div>
-          <div style="margin-top: 8px;">
-            <a href="mailto:radarsaojose@studio8.com.br" class="btn-primary" style="display: block; text-align: center; width: 100%; background: var(--azul-claro);">Enviar mensagem</a>
-          </div>
-          <p class="form-note">Ou fale direto pelo WhatsApp: <a href="https://wa.me/5512991661925" style="color: var(--azul-claro); text-decoration: none;">+55 12 99166-1925</a></p>
-        </div>
+      <div class="contact-header">
+        <div class="contact-logo"><img src="fotos_radar/logobranco.png" alt="Radar São José" loading="lazy" /></div>
+        <span class="contact-eyebrow">Comece pelo acesso gratuito</span>
       </div>
-    </div>
+      <div class="contact-inner">
+        <div class="contact-proposal">
+          <h2 class="section-title light">Na próxima proposta,<br>leve São José com você.</h2>
+          <p class="section-desc" style="color:#cbd5e1">Consulte um indicador da cidade, escolha uma fotografia para sua apresentação ou conheça a história de um lugar. Sua primeira visita já pode ajudar no trabalho que você está preparando.</p>
+        </div>
+        <div class="signup-close">
+        <h3>Três módulos para começar gratuitamente.</h3>
+        <p>Dados Públicos, História e Banco de Imagens. Conheça a plataforma antes de escolher uma assinatura.</p>
+        <a href="app.html" class="btn-primary">Criar minha conta gratuita</a>
+        <p class="signup-help">Na próxima tela, escolha <strong>Novo Usuário</strong>. Já tem conta? Use <strong>Entrar</strong>.</p>
+        <p class="signup-contact">Precisa falar com a equipe? <a href="https://wa.me/5512991661925">WhatsApp</a> · <a href="mailto:radarsaojose@studio8.com.br">E-mail</a></p>
+      </div>
+    </div></div>
   </section>
 
   <!-- ══ FOOTER ══ -->
@@ -2105,6 +1950,7 @@
 
   <!-- ── JS: FAQ + navbar mobile ── -->
   <script>
+    
     // Fecha outros details quando um abre
     document.querySelectorAll('details').forEach(d => {
       d.addEventListener('toggle', () => {
@@ -2116,56 +1962,9 @@
       });
     });
 
-    // Contador animado nos stats
-    function animateCounter(el, target, suffix) {
-      let start = 0;
-      const duration = 1800;
-      const step = timestamp => {
-        if (!start) start = timestamp;
-        const progress = Math.min((timestamp - start) / duration, 1);
-        const val = progress * target;
-        el.textContent = Number.isInteger(target) ? Math.floor(val) : val.toFixed(1);
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const nums = entry.target.querySelectorAll('.stat-num');
-          nums.forEach(el => {
-            const raw = el.textContent.replace(/[^0-9.]/g, '');
-            const target = parseFloat(raw);
-            if (!isNaN(target)) animateCounter(el, target);
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    const statsBar = document.querySelector('.stats-bar');
-    if (statsBar) observer.observe(statsBar);
   </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.querySelector('.platform-grid');
-      const prevBtn = document.querySelector('.prev-btn');
-      const nextBtn = document.querySelector('.next-btn');
-      
-      if (grid && prevBtn && nextBtn) {
-        const scrollAmount = 384; // largura do card (360) + gap (24)
-        
-        prevBtn.addEventListener('click', () => {
-          grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        });
-        
-        nextBtn.addEventListener('click', () => {
-          grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        });
-      }
-    });
-  </script>
+  <script src="landing-modules.js" defer></script>
+
   <!-- Modal de Detalhes da Solução -->
   <div id="solutionModal" class="solution-modal">
     <div class="solution-modal-content">
@@ -2224,5 +2023,6 @@
   </script>
   <!-- Asaas Checkout Integration -->
   <script src="asaas-checkout-modal.js"></script>
+
 </body>
 </html>
