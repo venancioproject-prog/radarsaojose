@@ -428,8 +428,8 @@
 
       <!-- Campo de Busca Rápida Integrado -->
       <div class="hidden lg:flex items-center relative w-44 xl:w-52 shrink-0">
-        <input type="text" id="searchInput" placeholder="Pesquisar nesta editoria..." onkeyup="if(window.searchArticles) searchArticles();" class="w-full bg-slate-50 text-slate-800 text-xs rounded-md pl-8 pr-3 py-1.5 border border-slate-200 focus:outline-none focus:bg-white focus:border-slate-400 transition-all placeholder:text-slate-400" />
-        <i class="fa-solid fa-magnifying-glass absolute left-2.5 text-slate-400 text-xs"></i>
+        <input type="text" id="searchInput" placeholder="Pesquisar nesta editoria..." oninput="if(window.searchArticles) searchArticles();" onkeyup="if(window.searchArticles) searchArticles();" onkeydown="if(event.key==='Enter'){ event.preventDefault(); if(window.searchArticles) searchArticles(); document.getElementById('feed')?.scrollIntoView({behavior:'smooth'}); }" class="w-full bg-slate-50 text-slate-800 text-xs rounded-md pl-8 pr-3 py-1.5 border border-slate-200 focus:outline-none focus:bg-white focus:border-slate-400 transition-all placeholder:text-slate-400" />
+        <i class="fa-solid fa-magnifying-glass absolute left-2.5 text-slate-400 text-xs cursor-pointer hover:text-slate-700" onclick="if(window.searchArticles) searchArticles(); document.getElementById('feed')?.scrollIntoView({behavior:'smooth'});"></i>
       </div>
 
     </div>
@@ -636,7 +636,7 @@
   </section>
 
   <!-- ══ BANNER DE ASSINATURA PREMIUM ALTA CONVERSÃO COM ANIMAÇÕES ══ -->
-  <section class="py-6 sm:py-8 bg-white" aria-label="Assinatura Radar Premium">
+  <section class="py-6 sm:py-8 bg-white" id="subscriptionBanner" aria-label="Assinatura Radar Premium">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="radar-subscription-banner relative overflow-hidden rounded-2xl md:rounded-3xl p-6 sm:p-8 lg:p-10 text-white shadow-2xl">
         
@@ -774,6 +774,19 @@
       <div class="text-xs text-slate-500">
         Mostrando <span id="articleCount" class="font-bold text-slate-900">...</span> reportagens especializadas
       </div>
+    </div>
+
+    <!-- Barra de Feedback da Pesquisa Ativa -->
+    <div id="searchFeedback" class="hidden mb-8 p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between text-xs text-slate-700 shadow-2xs">
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 rounded-lg bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold shrink-0">
+          <i class="fa-solid fa-magnifying-glass text-xs"></i>
+        </div>
+        <span id="searchFeedbackText" class="text-xs text-slate-700"></span>
+      </div>
+      <button onclick="clearSearch()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:border-rose-300 hover:bg-rose-50 text-rose-600 hover:text-rose-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors cursor-pointer shrink-0">
+        <i class="fa-solid fa-xmark text-xs"></i> Limpar pesquisa
+      </button>
     </div>
 
     <!-- Grid de Artigos -->
@@ -1527,16 +1540,38 @@
       }
     }
 
-    // ── BUSCA RÁPIDA ──
+    // ── BUSCA RÁPIDA EM TEMPO REAL COM SUPORTE A ACENTOS E FEEDBACK VISUAL ──
+    function normalizeSearchText(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim();
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+      });
+    }
+
     function searchArticles() {
       const input = document.getElementById('searchInput');
       if (!input) return;
-      const term = input.value.toLowerCase().trim();
+      const rawTerm = input.value.trim();
+      const term = normalizeSearchText(rawTerm);
       const cards = document.querySelectorAll('#articlesGrid .article-card');
+      const heroSec = document.getElementById('heroSection');
+      const subBanner = document.getElementById('subscriptionBanner');
+      const searchFeedback = document.getElementById('searchFeedback');
+      const searchFeedbackText = document.getElementById('searchFeedbackText');
+      const countEl = document.getElementById('articleCount');
+      const noRes = document.getElementById('noResults');
+
       let visibleCount = 0;
 
       cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
+        const text = normalizeSearchText(card.textContent);
         if (!term || text.includes(term)) {
           card.style.display = 'flex';
           visibleCount++;
@@ -1545,15 +1580,39 @@
         }
       });
 
-      const countEl = document.getElementById('articleCount');
       if (countEl) countEl.textContent = visibleCount;
-      const noRes = document.getElementById('noResults');
-      if (noRes) {
-        if (visibleCount === 0) noRes.classList.remove('hidden');
-        else noRes.classList.add('hidden');
+
+      if (term.length > 0) {
+        // Esconde o bloco de capa editorial e banner de assinatura para trazer os resultados diretamente ao topo
+        if (heroSec) heroSec.classList.add('hidden');
+        if (subBanner) subBanner.classList.add('hidden');
+        if (searchFeedback) searchFeedback.classList.remove('hidden');
+        if (searchFeedbackText) {
+          searchFeedbackText.innerHTML = `Resultados da pesquisa por <strong class="text-slate-900 font-bold">"${escapeHtml(rawTerm)}"</strong>: <span class="font-bold text-cyan-700">${visibleCount}</span> ${visibleCount === 1 ? 'matéria encontrada' : 'matérias encontradas'}`;
+        }
+        if (noRes) {
+          if (visibleCount === 0) noRes.classList.remove('hidden');
+          else noRes.classList.add('hidden');
+        }
+      } else {
+        // Restaura a visualização padrão
+        if (heroSec) heroSec.classList.remove('hidden');
+        if (subBanner) subBanner.classList.remove('hidden');
+        if (searchFeedback) searchFeedback.classList.add('hidden');
+        if (noRes) noRes.classList.add('hidden');
       }
     }
     window.searchArticles = searchArticles;
+
+    function clearSearch() {
+      const input = document.getElementById('searchInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      searchArticles();
+    }
+    window.clearSearch = clearSearch;
 
     // ── CARREGAMENTO DINÂMICO SUPABASE (SUPORTE ESCALÁVEL A QUALQUER CATEGORIA) ──
     const SUPABASE_BLOG_URL = "https://tocyvysucpslayzglixq.supabase.co";
@@ -1696,9 +1755,27 @@
       if (grid) {
         grid.innerHTML = editoriaPosts.map(renderPortalArticleCard).join('');
       }
+
+      // Se já havia termo digitado na barra de pesquisa, aplica imediatamente
+      const activeSearchInput = document.getElementById('searchInput');
+      if (activeSearchInput && activeSearchInput.value.trim()) {
+        searchArticles();
+      }
     }
 
-    loadEditoriaPage();
+    loadEditoriaPage().then(() => {
+      const searchUrlParam = new URLSearchParams(window.location.search).get('q') || new URLSearchParams(window.location.search).get('busca');
+      if (searchUrlParam) {
+        const sInp = document.getElementById('searchInput');
+        if (sInp) {
+          sInp.value = searchUrlParam;
+          searchArticles();
+          setTimeout(() => {
+            document.getElementById('feed')?.scrollIntoView({ behavior: 'smooth' });
+          }, 150);
+        }
+      }
+    });
   </script>
   <!-- Script de Vagas em Tempo Real SJC (Atualizado 2x/dia) -->
   <script src="js/vagas-sjc.js"></script>

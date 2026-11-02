@@ -478,9 +478,9 @@
       </div>
 
       <!-- Campo de Busca Rápida Integrado -->
-      <div class="hidden lg:flex items-center relative w-44 xl:w-48 shrink-0">
-        <input type="text" id="searchInput" placeholder="Pesquisar reportagem..." onkeyup="if(window.searchArticles) searchArticles();" class="w-full bg-white text-slate-800 text-[11px] rounded-full pl-8 pr-3 py-1.5 border border-slate-300 focus:outline-none focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition-all placeholder:text-slate-400" />
-        <i class="fa-solid fa-magnifying-glass absolute left-3 text-slate-400 text-xs"></i>
+      <div class="hidden lg:flex items-center relative w-44 xl:w-52 shrink-0">
+        <input type="text" id="searchInput" placeholder="Pesquisar reportagem..." onkeydown="if(event.key==='Enter'){ event.preventDefault(); if(this.value.trim()) window.location.href='../blog.html?q=' + encodeURIComponent(this.value.trim()); }" class="w-full bg-slate-50 text-slate-800 text-xs rounded-md pl-8 pr-3 py-1.5 border border-slate-200 focus:outline-none focus:bg-white focus:border-slate-400 transition-all placeholder:text-slate-400" />
+        <i class="fa-solid fa-magnifying-glass absolute left-2.5 text-slate-400 text-xs cursor-pointer hover:text-slate-700" onclick="var inp=document.getElementById('searchInput'); if(inp && inp.value.trim()) window.location.href='../blog.html?q=' + encodeURIComponent(inp.value.trim());"></i>
       </div>
 
     </div>
