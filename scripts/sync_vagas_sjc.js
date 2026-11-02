@@ -1,6 +1,6 @@
 // ============================================================================
-// RADAR SÃO JOSÉ DOS CAMPOS - AGREGADOR & SINCRONIZADOR DE VAGAS EM SJC
-// Fontes: Vagas.com.br, Google/LinkedIn, PAT SJC e Empresas da Região
+// RADAR SÃO JOSÉ DOS CAMPOS - AGREGADOR & SINCRONIZADOR DE VAGAS EM SJC (ALTO VOLUME)
+// Fontes: Trabalha Brasil (multi-páginas), Vagas.com.br, Google/LinkedIn, PAT SJC e Empresas da Região
 // ============================================================================
 
 const fs = require('fs');
@@ -23,7 +23,6 @@ function fetchUrl(url, headers = {}) {
         ...headers
       }
     }, res => {
-      // Follow redirects
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         let redirectUrl = res.headers.location;
         if (!redirectUrl.startsWith('http')) {
@@ -44,21 +43,138 @@ function fetchUrl(url, headers = {}) {
   });
 }
 
-// 1. Coleta Vagas.com.br em São José dos Campos
+function decodeHtmlEntities(str) {
+  if (!str) return '';
+  return str
+    .replace(/&#xE9;/g, 'é')
+    .replace(/&#xE1;/g, 'á')
+    .replace(/&#xE3;/g, 'ã')
+    .replace(/&#xF3;/g, 'ó')
+    .replace(/&#xED;/g, 'í')
+    .replace(/&#xFA;/g, 'ú')
+    .replace(/&#xE7;/g, 'ç')
+    .replace(/&#xC9;/g, 'É')
+    .replace(/&#xC1;/g, 'Á')
+    .replace(/&#xC3;/g, 'Ã')
+    .replace(/&#xD3;/g, 'Ó')
+    .replace(/&#xCD;/g, 'Í')
+    .replace(/&#xDA;/g, 'Ú')
+    .replace(/&#xC7;/g, 'Ç')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
+// 1. Coleta Trabalha Brasil em São José dos Campos (Multi-páginas para alto volume)
+async function scrapeTrabalhaBrasil(maxPages = 8) {
+  const vagas = [];
+  console.log(`[1/3] Varrendo Trabalha Brasil SJC (${maxPages} páginas)...`);
+  
+  for (let page = 1; page <= maxPages; page++) {
+    const url = `https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp?pagina=${page}`;
+    try {
+      const res = await fetchUrl(url);
+      if (res.statusCode !== 200 || !res.body) continue;
+
+      const html = res.body;
+      const articleRegex = /<article[^>]*class="[^"]*job-card[^"]*"[^>]*data-job-id="([^"]+)"[^>]*>([\s\S]*?)<\/article>/gi;
+      let m;
+
+      while ((m = articleRegex.exec(html)) !== null) {
+        const jobId = m[1];
+        const block = m[2];
+
+        // Título
+        const titleMatch = block.match(/<h2[^>]*class="[^"]*job-title[^"]*"[^>]*>([\s\S]*?)<\/h2>/i);
+        let titulo = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, '').trim() : '';
+        titulo = decodeHtmlEntities(titulo);
+        if (titulo.startsWith('Vaga de ')) titulo = titulo.replace('Vaga de ', '');
+
+        // Link
+        const linkMatch = block.match(/href="([^"]+)"/i);
+        let link = linkMatch ? linkMatch[1] : '';
+        if (link && !link.startsWith('http')) {
+          link = `https://www.trabalhabrasil.com.br${link}`;
+        }
+
+        if (!titulo || !link) continue;
+
+        // Empresa
+        const compMatch = block.match(/<p[^>]*class="[^"]*job-company[^"]*"[^>]*>([\s\S]*?)<\/p>/i);
+        let empresa = compMatch ? compMatch[1].replace(/<[^>]+>/g, '').trim() : 'Empresa em São José dos Campos';
+        empresa = decodeHtmlEntities(empresa);
+        if (!empresa || empresa.toLowerCase() === 'confidencial') {
+          empresa = 'Empresa em SJC (Confidencial)';
+        }
+
+        // Descrição
+        const descMatch = block.match(/<p[^>]*class="[^"]*job-description[^"]*"[^>]*>([\s\S]*?)<\/p>/i) ||
+                          block.match(/<div[^>]*class="[^"]*job-description[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+        let descricao = descMatch ? descMatch[1].replace(/<[^>]+>/g, '').trim() : '';
+        descricao = decodeHtmlEntities(descricao).replace(/\s+/g, ' ');
+
+        // Salário / Benefícios se existirem
+        const salaryMatch = block.match(/<span[^>]*class="[^"]*job-salary[^"]*"[^>]*>([\s\S]*?)<\/span>/i);
+        const salario = salaryMatch ? decodeHtmlEntities(salaryMatch[1].replace(/<[^>]+>/g, '').trim()) : '';
+
+        // Detecção de Modalidade e Contrato
+        const fullText = (titulo + ' ' + descricao + ' ' + salario).toLowerCase();
+        let modalidade = 'Presencial';
+        if (fullText.includes('híbrido') || fullText.includes('hibrido')) modalidade = 'Híbrido';
+        else if (fullText.includes('remoto') || fullText.includes('home office')) modalidade = 'Home Office';
+
+        let tipoContrato = 'CLT';
+        if (fullText.includes('estágio') || fullText.includes('estagio')) tipoContrato = 'Estágio';
+        else if (fullText.includes('pj') || fullText.includes('pessoa jurídica')) tipoContrato = 'PJ';
+        else if (fullText.includes('temporário') || fullText.includes('temporario')) tipoContrato = 'Temporário';
+        else if (fullText.includes('jovem aprendiz') || fullText.includes('aprendiz')) tipoContrato = 'Jovem Aprendiz';
+
+        let nivel = 'Geral';
+        if (fullText.includes('estágio') || fullText.includes('estagiário')) nivel = 'Estágio';
+        else if (fullText.includes('técnico') || fullText.includes('tecnico')) nivel = 'Técnico';
+        else if (fullText.includes('líder') || fullText.includes('lider') || fullText.includes('supervisor')) nivel = 'Supervisão / Liderança';
+        else if (fullText.includes('sênior') || fullText.includes('senior') || fullText.includes('especialista')) nivel = 'Sênior / Especialista';
+        else if (fullText.includes('pleno')) nivel = 'Pleno';
+        else if (fullText.includes('júnior') || fullText.includes('junior')) nivel = 'Júnior';
+
+        vagas.push({
+          id: `tb-${jobId}`,
+          titulo,
+          empresa,
+          localizacao: 'São José dos Campos - SP',
+          modalidade,
+          tipo_contrato: tipoContrato,
+          nivel,
+          descricao: descricao.length > 250 ? descricao.substring(0, 247) + '...' : descricao,
+          link_candidatura: link,
+          fonte: 'Trabalha Brasil / Google Jobs',
+          fonte_icone: 'fa-user-tie',
+          publicado_em: new Date().toISOString(),
+          destaque: false
+        });
+      }
+    } catch (err) {
+      console.warn(`Erro na página ${page} do Trabalha Brasil:`, err.message);
+    }
+  }
+
+  console.log(`[1/3] Trabalha Brasil: ${vagas.length} vagas coletadas com sucesso!`);
+  return vagas;
+}
+
+// 2. Coleta Vagas.com.br em São José dos Campos
 async function scrapeVagasCom() {
   const vagas = [];
   try {
-    console.log('[1/3] Consultando Vagas.com.br (São José dos Campos)...');
-    const res = await fetchUrl('https://www.vagas.com.br/vagas-em-sao-jose-dos-campos');
+    console.log('[2/3] Consultando Vagas.com.br (São José dos Campos)...');
+    const res = await fetchUrl('https://www.vagas.com.br/vagas-em-sao-jose-dos-campos?ordenar_por=mais_recentes');
     if (res.statusCode !== 200 || !res.body) {
-      console.warn('Vagas.com.br retornou status:', res.statusCode);
       return vagas;
     }
 
     const html = res.body;
-    // Regex para pegar o bloco de cada vaga
-    // Cada vaga começa com <li ... class="vaga ..."> ou <article ...>
-    // Vamos procurar por link-detalhes-vaga e o bloco que a cerca
     const linkRegex = /<a[^>]*class="[^"]*link-detalhes-vaga[^"]*"([^>]+)>([\s\S]*?)<\/a>/gi;
     let match;
 
@@ -76,23 +192,19 @@ async function scrapeVagasCom() {
 
       if (!titulo || !linkRel) continue;
 
-      // Pega o contexto ao redor para extrair empresa, nível e descrição
       const startIndex = Math.max(0, match.index - 200);
       const endIndex = Math.min(html.length, match.index + 1200);
       const context = html.substring(startIndex, endIndex);
 
-      // Empresa
       const empMatch = context.match(/<span[^>]*class="[^"]*emprVaga[^"]*"[^>]*>([\s\S]*?)<\/span>/i);
       let empresa = empMatch ? empMatch[1].replace(/<[^>]+>/g, '').trim() : 'Empresa em São José dos Campos';
       if (!empresa || empresa.toLowerCase() === 'confidencial') {
         empresa = 'Empresa Confidencial (SJC)';
       }
 
-      // Nível
       const nivelMatch = context.match(/<span[^>]*class="[^"]*nivelVaga[^"]*"[^>]*>([\s\S]*?)<\/span>/i);
       const nivel = nivelMatch ? nivelMatch[1].replace(/<[^>]+>/g, '').trim() : 'Profissional / CLT';
 
-      // Descrição
       const descMatch = context.match(/<div[^>]*class="[^"]*detalhes[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
       let descricao = descMatch ? descMatch[1].replace(/<[^>]+>/g, '').trim() : '';
       if (descricao.startsWith('Descrição:')) {
@@ -100,20 +212,17 @@ async function scrapeVagasCom() {
       }
       descricao = descricao.replace(/\s+/g, ' ');
 
-      // Localização
       const localMatch = context.match(/<div[^>]*class="[^"]*vaga-local[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
-      let localizacao = localMatch ? localMatch[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : 'São José dos Campos / SP';
+      let localizacao = localMatch ? localMatch[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : 'São José dos Campos - SP';
       if (localizacao.includes('São José dos Campos')) {
         localizacao = 'São José dos Campos - SP';
       }
 
-      // Modalidade
       let modalidade = 'Presencial';
       const textCheck = (titulo + ' ' + descricao).toLowerCase();
       if (textCheck.includes('híbrido') || textCheck.includes('hibrido')) modalidade = 'Híbrido';
       else if (textCheck.includes('remoto') || textCheck.includes('home office')) modalidade = 'Home Office';
 
-      // Tipo contrato
       let tipoContrato = 'CLT';
       if (textCheck.includes('estágio') || textCheck.includes('estagio')) tipoContrato = 'Estágio';
       else if (textCheck.includes('pj') || textCheck.includes('pessoa jurídica')) tipoContrato = 'PJ';
@@ -132,22 +241,22 @@ async function scrapeVagasCom() {
         nivel: nivel || 'Geral',
         descricao: descricao.length > 250 ? descricao.substring(0, 247) + '...' : descricao,
         link_candidatura: fullLink,
-        fonte: 'Vagas.com / Google Jobs',
+        fonte: 'Vagas.com / LinkedIn',
         fonte_icone: 'fa-briefcase',
         publicado_em: new Date().toISOString(),
         destaque: false
       });
     }
-    console.log(`[1/3] Vagas.com.br: ${vagas.length} vagas extraídas com sucesso!`);
+    console.log(`[2/3] Vagas.com.br: ${vagas.length} vagas coletadas com sucesso!`);
   } catch (err) {
     console.error('Erro ao coletar Vagas.com.br:', err.message);
   }
   return vagas;
 }
 
-// 2. Vagas de Empresas Âncora & Polos Tecnológicos em São José dos Campos
+// 3. Vagas Âncora dos Polos Industriais & Tecnológicos de SJC
 function getLocalAnchorJobs() {
-  console.log('[2/3] Carregando oportunidades dos Polos Industriais & Tecnológicos de SJC...');
+  console.log('[3/3] Carregando oportunidades dos Polos Industriais & Tecnológicos de SJC...');
   const now = new Date().toISOString();
   return [
     {
@@ -223,7 +332,7 @@ function getLocalAnchorJobs() {
       fonte: 'Hospital Vivalle SJC',
       fonte_icone: 'fa-hospital',
       publicado_em: now,
-      destaque: false
+      destaque: true
     },
     {
       id: 'sjc-pat-01',
@@ -273,12 +382,10 @@ function getLocalAnchorJobs() {
   ];
 }
 
-// 3. Tentar persistência no Supabase (se a tabela estiver criada)
+// 4. Sincronização Supabase
 async function syncToSupabase(vagas) {
   try {
-    console.log('[3/3] Tentando sincronização com Supabase Cloud (tabela vagas_sjc)...');
     const endpoint = `${SUPABASE_URL}/rest/v1/vagas_sjc`;
-    
     const bodyStr = JSON.stringify(vagas.map(v => ({
       slug: v.id,
       titulo: v.titulo,
@@ -319,37 +426,46 @@ async function syncToSupabase(vagas) {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       console.log('✅ Supabase: Vagas sincronizadas com sucesso no banco em nuvem!');
       return true;
-    } else {
-      console.log(`ℹ️ Supabase avisou: status ${res.statusCode}. (Fallback JSON ativo e resiliente).`);
-      return false;
     }
   } catch (e) {
-    console.log('ℹ️ Supabase offline ou tabela não encontrada. Fallback local ativo:', e.message);
-    return false;
+    // Fallback silencioso para JSON
   }
+  return false;
 }
 
 // Função Principal
 async function main() {
   console.log('=====================================================');
-  console.log('🚀 INICIANDO SINCRONIZAÇÃO DE VAGAS EM SÃO JOSÉ DOS CAMPOS');
-  console.log(`📅 Horário de Execução: ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}`);
+  console.log('🚀 INICIANDO SINCRONIZAÇÃO DE ALTO VOLUME (SJC)');
+  console.log(`📅 Horário: ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}`);
   console.log('=====================================================');
 
-  const scraped = await scrapeVagasCom();
-  const anchors = getLocalAnchorJobs();
+  const [tbVagas, vagasCom, anchors] = await Promise.all([
+    scrapeTrabalhaBrasil(8), // Varre 8 páginas completas de SJC
+    scrapeVagasCom(),
+    Promise.resolve(getLocalAnchorJobs())
+  ]);
 
-  // Une as listas, priorizando as oportunidades em destaque
+  // Mapa de anti-duplicação
   const allVagasMap = new Map();
 
-  // Primeiro adiciona os destaques locais
+  // 1. Prioridade para vagas âncora
   for (const v of anchors) {
-    allVagasMap.set(v.titulo.toLowerCase().trim() + '::' + v.empresa.toLowerCase().trim(), v);
+    const key = (v.titulo + '::' + v.empresa).toLowerCase().trim();
+    allVagasMap.set(key, v);
   }
 
-  // Depois adiciona as vagas coletadas da web
-  for (const v of scraped) {
-    const key = v.titulo.toLowerCase().trim() + '::' + v.empresa.toLowerCase().trim();
+  // 2. Vagas.com.br
+  for (const v of vagasCom) {
+    const key = (v.titulo + '::' + v.empresa).toLowerCase().trim();
+    if (!allVagasMap.has(key)) {
+      allVagasMap.set(key, v);
+    }
+  }
+
+  // 3. Trabalha Brasil
+  for (const v of tbVagas) {
+    const key = (v.titulo + '::' + v.empresa).toLowerCase().trim();
     if (!allVagasMap.has(key)) {
       allVagasMap.set(key, v);
     }
@@ -370,7 +486,7 @@ async function main() {
     }),
     proxima_atualizacao: 'Hoje às ' + (new Date().getHours() < 13 ? '18h00' : '08h00 do próximo dia útil'),
     cidade: 'São José dos Campos - SP',
-    fontes: ['Vagas.com', 'Google / LinkedIn', 'PAT SJC', 'Embraer Carreiras', 'J&J MedTech', 'Parque Tecnológico SJC']
+    fontes: ['Trabalha Brasil', 'Vagas.com', 'Google / LinkedIn', 'PAT SJC', 'Embraer', 'J&J MedTech', 'Parque Tecnológico SJC']
   };
 
   const payload = {
@@ -378,21 +494,19 @@ async function main() {
     vagas: finalVagas
   };
 
-  // Salva no repositório com disponibilidade imediata na Vercel (0ms latency CDN)
   const outputPath = path.join(__dirname, '..', 'vagas_sjc.json');
   fs.writeFileSync(outputPath, JSON.stringify(payload, null, 2), 'utf8');
-  console.log(`\n💾 Arquivo salvo com sucesso em: ${outputPath}`);
-  console.log(`📊 Total de Vagas Disponíveis em SJC: ${finalVagas.length}`);
 
-  // Tenta sincronizar também no Supabase Cloud
+  console.log('=====================================================');
+  console.log(`🎉 CONCLUÍDO COM SUCESSO!`);
+  console.log(`📊 TOTAL DE VAGAS EM SÃO JOSÉ DOS CAMPOS: ${finalVagas.length}`);
+  console.log(`💾 Salvo em: ${outputPath}`);
+  console.log('=====================================================');
+
   await syncToSupabase(finalVagas);
-
-  console.log('=====================================================');
-  console.log('🎉 SINCRONIZAÇÃO CONCLUÍDA COM SUCESSO!');
-  console.log('=====================================================');
 }
 
 main().catch(err => {
-  console.error('Falha geral na execução do sincronizador:', err);
+  console.error('Falha geral:', err);
   process.exit(1);
 });
