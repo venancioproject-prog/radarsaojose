@@ -9,7 +9,8 @@
   <link rel="canonical" href="https://radarsaojose.com.br/blog.html" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="fotos_radar/logo.png" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=radar-r-1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-radar-r-32.png?v=radar-r-1" />
 
   <!-- Open Graph -->
   <meta property="og:locale" content="pt_BR" />
@@ -154,9 +155,9 @@
     }
 
     .navbar-brand img {
-      height: 40px;
+      height: 28px;
       width: auto;
-      max-width: 170px;
+      max-width: 119px;
       object-fit: contain;
       display: block;
     }
@@ -370,6 +371,7 @@
     .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
     
   </style>
+  <link rel="stylesheet" href="header-brand.css?v=20261102-alinhamento" />
 </head>
 <body class="bg-white text-slate-900 font-sans antialiased">
 
@@ -571,7 +573,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
         
         <!-- MANCHETE PRINCIPAL COM TÍTULO EM CIMA DA FOTO (PADRÃO EDITORIAL SKELETON) -->
-        <article id="heroMainArticle" class="lg:col-span-8 flex flex-col justify-between bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs hover:shadow-md transition-shadow group">
+        <article id="heroMainArticle" class="lg:col-span-8 flex flex-col justify-between group lg:pr-8 lg:border-r lg:border-slate-200/80">
           
           <!-- Bloco Superior: Tags + Grande Manchete + Linha Fina (EM CIMA DA FOTO) -->
           <div>
@@ -642,25 +644,25 @@
             <span class="text-[11px] text-cyan-700 font-bold">Análises Recentes</span>
           </div>
 
-          <div id="heroSidebarContainer" class="flex-1 flex flex-col justify-between gap-3.5">
-            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3.5 animate-pulse">
-              <div class="w-24 sm:w-28 h-20 rounded-lg bg-slate-200 shrink-0"></div>
+          <div id="heroSidebarContainer" class="flex-1 flex flex-col divide-y divide-slate-100">
+            <div class="py-3.5 flex items-start gap-3.5 animate-pulse">
+              <div class="w-24 sm:w-28 h-20 rounded-md bg-slate-200 shrink-0"></div>
               <div class="flex-1 space-y-2">
                 <div class="h-3 w-16 bg-slate-200 rounded"></div>
                 <div class="h-4 w-full bg-slate-200 rounded"></div>
                 <div class="h-3 w-3/4 bg-slate-100 rounded"></div>
               </div>
             </div>
-            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3.5 animate-pulse">
-              <div class="w-24 sm:w-28 h-20 rounded-lg bg-slate-200 shrink-0"></div>
+            <div class="py-3.5 flex items-start gap-3.5 animate-pulse">
+              <div class="w-24 sm:w-28 h-20 rounded-md bg-slate-200 shrink-0"></div>
               <div class="flex-1 space-y-2">
                 <div class="h-3 w-16 bg-slate-200 rounded"></div>
                 <div class="h-4 w-full bg-slate-200 rounded"></div>
                 <div class="h-3 w-3/4 bg-slate-100 rounded"></div>
               </div>
             </div>
-            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3.5 animate-pulse">
-              <div class="w-24 sm:w-28 h-20 rounded-lg bg-slate-200 shrink-0"></div>
+            <div class="py-3.5 flex items-start gap-3.5 animate-pulse">
+              <div class="w-24 sm:w-28 h-20 rounded-md bg-slate-200 shrink-0"></div>
               <div class="flex-1 space-y-2">
                 <div class="h-3 w-16 bg-slate-200 rounded"></div>
                 <div class="h-4 w-full bg-slate-200 rounded"></div>
@@ -850,118 +852,108 @@
 
     <!-- Grid de Artigos (Skeletons de Carregamento Neutro) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="articlesGrid">
-      <div class="article-skeleton bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col animate-pulse">
-        <div class="aspect-[16/10] bg-slate-200"></div>
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="h-3 w-28 bg-slate-200 rounded mb-3"></div>
-            <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-            <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-            <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-            <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse">
+        <div>
+          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
+          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
+          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
+          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
+          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
+          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
+            <div class="h-3 w-20 bg-slate-200 rounded"></div>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-slate-200"></div>
-              <div class="h-3 w-20 bg-slate-200 rounded"></div>
-            </div>
-            <div class="h-3 w-10 bg-slate-200 rounded"></div>
-          </div>
+          <div class="h-3 w-10 bg-slate-200 rounded"></div>
         </div>
       </div>
-      <div class="article-skeleton bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col animate-pulse">
-        <div class="aspect-[16/10] bg-slate-200"></div>
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="h-3 w-28 bg-slate-200 rounded mb-3"></div>
-            <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-            <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-            <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-            <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse">
+        <div>
+          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
+          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
+          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
+          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
+          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
+          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
+            <div class="h-3 w-20 bg-slate-200 rounded"></div>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-slate-200"></div>
-              <div class="h-3 w-20 bg-slate-200 rounded"></div>
-            </div>
-            <div class="h-3 w-10 bg-slate-200 rounded"></div>
-          </div>
+          <div class="h-3 w-10 bg-slate-200 rounded"></div>
         </div>
       </div>
-      <div class="article-skeleton bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col animate-pulse">
-        <div class="aspect-[16/10] bg-slate-200"></div>
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="h-3 w-28 bg-slate-200 rounded mb-3"></div>
-            <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-            <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-            <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-            <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse">
+        <div>
+          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
+          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
+          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
+          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
+          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
+          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
+            <div class="h-3 w-20 bg-slate-200 rounded"></div>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-slate-200"></div>
-              <div class="h-3 w-20 bg-slate-200 rounded"></div>
-            </div>
-            <div class="h-3 w-10 bg-slate-200 rounded"></div>
-          </div>
+          <div class="h-3 w-10 bg-slate-200 rounded"></div>
         </div>
       </div>
-      <div class="article-skeleton bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col animate-pulse hidden md:flex">
-        <div class="aspect-[16/10] bg-slate-200"></div>
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="h-3 w-28 bg-slate-200 rounded mb-3"></div>
-            <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-            <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-            <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-            <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse hidden md:flex">
+        <div>
+          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
+          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
+          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
+          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
+          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
+          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
+            <div class="h-3 w-20 bg-slate-200 rounded"></div>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-slate-200"></div>
-              <div class="h-3 w-20 bg-slate-200 rounded"></div>
-            </div>
-            <div class="h-3 w-10 bg-slate-200 rounded"></div>
-          </div>
+          <div class="h-3 w-10 bg-slate-200 rounded"></div>
         </div>
       </div>
-      <div class="article-skeleton bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col animate-pulse hidden lg:flex">
-        <div class="aspect-[16/10] bg-slate-200"></div>
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="h-3 w-28 bg-slate-200 rounded mb-3"></div>
-            <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-            <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-            <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-            <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse hidden lg:flex">
+        <div>
+          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
+          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
+          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
+          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
+          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
+          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
+            <div class="h-3 w-20 bg-slate-200 rounded"></div>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-slate-200"></div>
-              <div class="h-3 w-20 bg-slate-200 rounded"></div>
-            </div>
-            <div class="h-3 w-10 bg-slate-200 rounded"></div>
-          </div>
+          <div class="h-3 w-10 bg-slate-200 rounded"></div>
         </div>
       </div>
-      <div class="article-skeleton bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs flex flex-col animate-pulse hidden lg:flex">
-        <div class="aspect-[16/10] bg-slate-200"></div>
-        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-          <div>
-            <div class="h-3 w-28 bg-slate-200 rounded mb-3"></div>
-            <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
-            <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
-            <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
-            <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+      <div class="article-skeleton flex flex-col justify-between border-b border-slate-200/80 pb-6 animate-pulse hidden lg:flex">
+        <div>
+          <div class="aspect-[16/10] bg-slate-200 rounded-lg mb-3.5"></div>
+          <div class="h-3 w-28 bg-slate-200 rounded mb-2.5"></div>
+          <div class="h-5 w-full bg-slate-200 rounded mb-2"></div>
+          <div class="h-5 w-3/4 bg-slate-200 rounded mb-3"></div>
+          <div class="h-3.5 w-full bg-slate-100 rounded mb-1.5"></div>
+          <div class="h-3.5 w-4/5 bg-slate-100 rounded"></div>
+        </div>
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-full bg-slate-200"></div>
+            <div class="h-3 w-20 bg-slate-200 rounded"></div>
           </div>
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-6 h-6 rounded-full bg-slate-200"></div>
-              <div class="h-3 w-20 bg-slate-200 rounded"></div>
-            </div>
-            <div class="h-3 w-10 bg-slate-200 rounded"></div>
-          </div>
+          <div class="h-3 w-10 bg-slate-200 rounded"></div>
+        </div>
+      </div>
         </div>
       </div>
     </div>
@@ -1683,40 +1675,38 @@
       const excerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
 
       return `
-        <article class="article-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-2xs hover:shadow-lg transition-all flex flex-col group" data-category="${catMeta.slug}">
-          <div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
-            <img src="${coverUrl}" alt="${post.title} - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
-            <div class="absolute top-3 left-3">
-              <span class="${catMeta.color} text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow-sm">
-                <i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}
-              </span>
+        <article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6 transition-all" data-category="${catMeta.slug}">
+          <div>
+            <div class="relative aspect-[16/10] overflow-hidden rounded-lg bg-slate-100 mb-3.5">
+              <img src="${coverUrl}" alt="${post.title} - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+              <div class="absolute top-3 left-3">
+                <span class="${catMeta.color} text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
+                  <i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}
+                </span>
+              </div>
             </div>
+
+            <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+              <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-slate-400"></i> ${readTime}</span>
+              <span>•</span>
+              <span>${formattedDate}</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
+              <a href="${articleUrl}" class="hover:underline decoration-1 underline-offset-2">${post.title}</a>
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
+              ${excerpt}
+            </p>
           </div>
 
-          <div class="p-5 flex-1 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-2 text-xs text-slate-600 mb-2">
-                <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-cyan-700"></i> ${readTime}</span>
-                <span>•</span>
-                <span>${formattedDate}</span>
-              </div>
-              <h3 class="text-base font-bold font-serif text-slate-950 group-hover:text-cyan-700 transition-colors leading-snug mb-2 line-clamp-2">
-                <a href="${articleUrl}">${post.title}</a>
-              </h3>
-              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-4 font-sans">
-                ${excerpt}
-              </p>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <div class="flex items-center gap-2">
+              <img src="${authorAvatarSrc}" alt="${author}" class="w-5 h-5 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
+              <span class="font-medium text-slate-600">${author}</span>
             </div>
-
-            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <img src="${authorAvatarSrc}" alt="${author}" class="w-6 h-6 rounded-full object-cover ring-1 ring-slate-200" onerror="this.src='fotos_radar/LEONARDO.jpeg'" />
-                <span class="text-xs font-medium text-slate-700">${author}</span>
-              </div>
-              <a href="${articleUrl}" class="text-xs font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
-                Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
-              </a>
-            </div>
+            <a href="${articleUrl}" class="font-bold text-cyan-700 group-hover:text-cyan-800 flex items-center gap-1 transition-colors">
+              Ler <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
           </div>
         </article>
       `;
@@ -1788,8 +1778,8 @@
           const sExcerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
 
           return `
-            <article class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-cyan-600/60 hover:shadow-md transition-all group flex items-center gap-3.5">
-              <div class="relative w-24 sm:w-28 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-slate-200 shadow-2xs">
+            <article class="py-3.5 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors group flex items-start gap-3.5">
+              <div class="relative w-24 sm:w-28 h-20 flex-shrink-0 rounded-md overflow-hidden bg-slate-100">
                 <img src="${sCover}" alt="${post.title.replace(/"/g, '&quot;')}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
               </div>
               <div class="flex-1 min-w-0">
