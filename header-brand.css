@@ -1,0 +1,133 @@
+/* Posição única da marca em todos os cabeçalhos de navegação. */
+:root {
+  --radar-header-inset: 24px;
+  --radar-header-row-height: 71px;
+  --radar-header-logo-height: 28px;
+  --font-ui: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.site-header {
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+}
+
+.site-header .navbar-container,
+#main-app-header .app-header-row,
+#admin-app-header > .admin-header-row {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: var(--radar-header-row-height);
+  min-height: var(--radar-header-row-height);
+  margin: 0;
+  padding: 0 var(--radar-header-inset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-header .navbar-brand,
+#main-app-header a:has(> #mainAppLogo),
+#admin-app-header a:has(> #mainHeaderLogo) {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header .navbar-brand img,
+#main-app-header #mainAppLogo,
+#admin-app-header #mainHeaderLogo {
+  display: block;
+  height: var(--radar-header-logo-height);
+  width: auto;
+  max-width: 119px;
+  margin: 0;
+  object-fit: contain;
+}
+
+/* ── PADRONIZAÇÃO TIPOGRÁFICA GERAL DOS CABEÇALHOS (FONTE INTER) ── */
+.site-header,
+.site-header .navbar-menu,
+.site-header .navbar-menu a,
+.site-header .navbar-actions,
+.site-header .btn-nav-outline,
+.site-header .btn-nav-primary {
+  font-family: var(--font-ui) !important;
+}
+
+.site-header .navbar-menu a {
+  font-family: var(--font-ui) !important;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.76rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 6px 2px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.site-header .navbar-menu a:hover,
+.site-header .navbar-menu a.active-nav {
+  color: #0284C7 !important;
+  font-weight: 600 !important;
+}
+
+.site-header .btn-nav-outline {
+  font-family: var(--font-ui) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: transparent !important;
+  padding: 9px 20px !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.site-header .btn-nav-outline:hover {
+  border-color: #0284C7 !important;
+  color: #0284C7 !important;
+  background: rgba(2, 132, 199, 0.08) !important;
+}
+
+.site-header .btn-nav-primary {
+  font-family: var(--font-ui) !important;
+  background: #0284C7 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 9px 20px !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  white-space: nowrap;
+}
+
+.site-header .btn-nav-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 767px) {
+  :root { --radar-header-inset: 16px; }
+}
