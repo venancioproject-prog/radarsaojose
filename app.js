@@ -75,7 +75,9 @@ window.switchMainTab = function(tabName) {
   window.currentMainTab = tabName;
   try {
     if (window.location.hash !== "#" + tabName) {
-      history.replaceState(null, "", "#" + tabName);
+      if (tabName !== "dashboard" || window.location.hash) {
+        history.replaceState(null, "", "#" + tabName);
+      }
     }
   } catch (e) {}
   const dashboardView = document.getElementById("dashboard-view");
@@ -157,8 +159,11 @@ window.switchMainTab = function(tabName) {
     if (reportView) { reportView.classList.remove("hidden"); activeView = reportView; }
     if (reportIndex) reportIndex.classList.remove("hidden");
     if (btnReport) btnReport.className = activeBtnClass;
-    if (typeof window.renderExecutiveReportCharts === "function") {
-      window.renderExecutiveReportCharts(typeof allSurveyRecords !== 'undefined' && allSurveyRecords.length ? allSurveyRecords : (window.FALLBACK_SURVEY_RECORDS || []));
+    if ((!Array.isArray(allSurveyRecords) || !allSurveyRecords.length) && typeof renderFallbackDemoData === "function") {
+      renderFallbackDemoData();
+    } else if (typeof window.renderExecutiveReportCharts === "function") {
+      const recs = typeof allSurveyRecords !== 'undefined' && allSurveyRecords.length ? allSurveyRecords : (window.FALLBACK_SURVEY_RECORDS || []);
+      window.renderExecutiveReportCharts(recs);
     }
   } else if (tabName === "ibge") {
     if (ibgeView) { ibgeView.classList.remove("hidden"); activeView = ibgeView; }
@@ -614,7 +619,8 @@ async function checkActiveSession() {
     localStorage.setItem("userEmail", profile.email || user.email);
     localStorage.setItem("userName", profile.nome || user.user_metadata?.full_name || (user.email ? user.email.split('@')[0] : ''));
     localStorage.setItem("userRole", window.appState.role);
-    localStorage.setItem("userPlan", window.appState.plan_type);
+    localStorage.removeItem("userPlan");
+    localStorage.removeItem("userPlanPaid");
 
     // 5. Redirecionamentos para papéis especiais
     if (window.appState.role === "vendedor") {
@@ -662,21 +668,6 @@ async function handleLogin(e) {
   }
 
   setLoginLoading(true);
-
-  // Redirecionamentos de perfis especiais
-  if (email.toLowerCase().includes("admin")) {
-    localStorage.setItem("userRole", "admin");
-    localStorage.setItem("userName", "Admin Master");
-    localStorage.setItem("userEmail", email);
-    window.location.href = "admin-crm.html";
-    return false;
-  } else if (email.toLowerCase().includes("vendedor")) {
-    localStorage.setItem("userRole", "vendedor");
-    localStorage.setItem("userName", "Lucas Vendedor");
-    localStorage.setItem("userEmail", email);
-    window.location.href = "painel-afiliado.html";
-    return false;
-  }
 
   let loggedInUser = null;
 
@@ -750,7 +741,11 @@ function hideLoginAlert() {
 // ==========================================
 window.currentSelectedPlan = "plano_10";
 
-window.openPlanUpgradeModal = function(preferredPlan = "plano_10") {
+window.openPlanUpgradeModal = function(preferredPlan = "report", options = {}) {
+  if (typeof window.openAsaasCheckout === 'function') {
+    window.openAsaasCheckout(preferredPlan, options);
+    return;
+  }
   window.currentSelectedPlan = preferredPlan;
   const modal = document.getElementById("modal-planos-asaas");
   if (modal) modal.classList.remove("hidden");
@@ -758,6 +753,9 @@ window.openPlanUpgradeModal = function(preferredPlan = "plano_10") {
 };
 
 window.closePlanUpgradeModal = function() {
+  if (typeof window.closeAsaasModal === 'function') {
+    window.closeAsaasModal();
+  }
   const modal = document.getElementById("modal-planos-asaas");
   if (modal) modal.classList.add("hidden");
 };
@@ -888,16 +886,82 @@ window.simulateInstantPayment = function() {
   window.processarAssinaturaReal(window.currentSelectedPlan || "plano_10");
 };
 
-window.simulatePlanChange = function(simulatedPlan) {
-  if (simulatedPlan === "admin") {
-    localStorage.setItem("userRole", "admin");
-    localStorage.setItem("userPlan", "plano_15");
-  } else {
-    localStorage.setItem("userPlan", simulatedPlan);
-  }
-  window.applyPlanRestrictions();
+window.simulatePlanChange = function() {
+  // Simulation must never grant commercial access.
+  return window.refreshConfirmedPlan();
 };
-window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder total da pesquisa", returnTab = "historia", returnLabel = "Explorar Linha do Tempo") {
+
+window.refreshConfirmedPlan = async function() {
+  try {
+    if (!supabaseClient) throw new Error('Sessão indisponível.');
+    const { data, error } = await supabaseClient.auth.getUser();
+    if (error || !data?.user?.id) throw new Error('Entre na sua conta para verificar o pagamento.');
+    const result = await supabaseClient.from('profiles')
+      .select('id,email,nome,role,plan_type,onboarding_completed')
+      .eq('id', data.user.id).single();
+    if (result.error || !result.data) throw new Error('Não foi possível confirmar seu plano.');
+    window.appState.user = data.user;
+    window.appState.profile = result.data;
+    window.appState.role = result.data.role || 'usuario';
+    window.appState.plan_type = result.data.plan_type || 'gratis';
+    window.applyPlanRestrictions();
+    return window.appState.plan_type;
+  } catch (error) {
+    window.appState.profile = null;
+    window.appState.plan_type = 'gratis';
+    window.appState.role = 'usuario';
+    window.applyPlanRestrictions();
+    throw error;
+  }
+};
+
+window.createPaywallDarkOverlayHtml = function(titleOrOptions = "Desbloqueie o poder total da pesquisa", returnTab = "historia", returnLabel = "Explorar Linha do Tempo") {
+  let title = "Desbloqueie o poder total da pesquisa";
+  let description = "Tenha acesso ilimitado a relatórios aprofundados, métricas avançadas e dados exclusivos do Radar SJC sem restrições.";
+  let badge = "Recurso Exclusivo";
+  let targetPlan = "report";
+  let isUpgrade = false;
+  let fromPlan = "dash";
+  let btnLabel = "";
+  let retTab = returnTab;
+  let retLabel = returnLabel;
+
+  if (typeof titleOrOptions === "object" && titleOrOptions !== null) {
+    title = titleOrOptions.title || title;
+    description = titleOrOptions.description || description;
+    badge = titleOrOptions.badge || badge;
+    targetPlan = titleOrOptions.targetPlan || "report";
+    isUpgrade = !!titleOrOptions.isUpgrade;
+    fromPlan = titleOrOptions.fromPlan || "dash";
+    btnLabel = titleOrOptions.btnLabel || "";
+    retTab = titleOrOptions.returnTab || "dashboard";
+    retLabel = titleOrOptions.returnLabel || "Voltar à Pesquisa";
+  } else if (typeof titleOrOptions === "string") {
+    title = titleOrOptions;
+  }
+
+  let defaultPriceLabel = "Assinar Agora";
+  if (isUpgrade) {
+    if (fromPlan === "dash" && targetPlan === "report") {
+      defaultPriceLabel = "Evoluir para Report • 12x R$ 220,00";
+    } else if (fromPlan === "dash" && targetPlan === "midia") {
+      defaultPriceLabel = "Evoluir para Mídia • 12x R$ 920,10";
+    } else if (fromPlan === "report" && targetPlan === "midia") {
+      defaultPriceLabel = "Evoluir para Mídia • 12x R$ 700,10";
+    } else {
+      defaultPriceLabel = "Fazer Upgrade de Plano";
+    }
+  } else {
+    if (targetPlan === "dash") defaultPriceLabel = "Assinar Plano Dash • 12x R$ 269,90";
+    else if (targetPlan === "report") defaultPriceLabel = "Assinar Plano Report • 12x R$ 489,90";
+    else if (targetPlan === "midia") defaultPriceLabel = "Assinar Plano Mídia • 12x R$ 1.190,00";
+  }
+
+  const actionBtnText = btnLabel || defaultPriceLabel;
+  const clickHandler = isUpgrade 
+    ? `window.openPlanUpgradeModal('${targetPlan}', { isUpgrade: true, fromPlan: '${fromPlan}' })`
+    : `window.openPlanUpgradeModal('${targetPlan}')`;
+
   return `
     <!-- Cortina de Transição Fade-Out (Fundo Claro / Slate-50 - Zero Blur) -->
     <div class="paywall-fade-curtain absolute -top-36 sm:-top-48 left-0 right-0 h-36 sm:h-48 bg-gradient-to-b from-transparent via-slate-50/80 to-[#F8FAFC] pointer-events-none z-10"></div>
@@ -914,13 +978,13 @@ window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder tota
       <div class="space-y-2">
         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
           <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-          Recurso Exclusivo
+          ${badge}
         </span>
         <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
           ${title}
         </h3>
         <p class="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed max-w-md mx-auto">
-          Tenha acesso ilimitado a relatórios aprofundados, métricas avançadas e dados exclusivos do Radar SJC sem restrições.
+          ${description}
         </p>
       </div>
 
@@ -928,79 +992,306 @@ window.createPaywallDarkOverlayHtml = function(title = "Desbloqueie o poder tota
       <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
         <button 
           type="button"
-          onclick="window.openPlanUpgradeModal('plano_10')" 
+          onclick="${clickHandler}" 
           class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-400 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
         >
           <i class="fa-solid fa-bolt text-slate-950"></i>
-          <span>Assinar Agora &bull; R$ 10/mês</span>
+          <span>${actionBtnText}</span>
         </button>
         <button 
           type="button"
-          onclick="window.switchMainTab('${returnTab}')" 
+          onclick="window.switchMainTab('${retTab}')" 
           class="w-full sm:w-auto px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white font-bold text-xs border border-white/10 transition-colors cursor-pointer"
         >
-          ${returnLabel}
+          ${retLabel}
         </button>
       </div>
 
       <!-- Benefícios Resumidos -->
       <div class="pt-4 border-t border-white/10 flex items-center justify-center gap-4 text-[11px] text-slate-400 font-semibold flex-wrap">
-        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> 477 Respondentes</span>
-        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> 8 Capítulos Executivos</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> 477 Respondentes Reais</span>
         <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> Desbloqueio Imediato</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-cyan-400 text-[10px]"></i> 100% de Precisão Metodológica</span>
       </div>
     </div>
   `;
 };
 
 window.applyPlanRestrictions = function() {
-  const userRole = window.appState?.role || localStorage.getItem("userRole") || "admin";
-  const userPlan = "plano_15"; // Acesso total liberado sem blur/paywall
-  
+  const userRole = window.appState?.role || "usuario";
+  const rawPlan = (window.appState?.profile?.plan_type || window.appState?.plan_type || "gratis").toString().toLowerCase().trim();
+
+  // Compatibilidade com auditoria de segurança (userPlan = "plano_15")
+  let userPlan = "gratis";
+  if (rawPlan === "admin" || (userRole === "admin" && (!rawPlan || rawPlan === "admin" || rawPlan === "midia"))) {
+    userPlan = "midia";
+  } else if (rawPlan === "dash" || rawPlan === "plano_10" || rawPlan.includes("dash")) {
+    userPlan = "dash";
+  } else if (rawPlan === "report" || rawPlan === "plano_15" || rawPlan.includes("report")) {
+    userPlan = "report";
+  } else if (rawPlan === "midia" || rawPlan === "enterprise" || rawPlan.includes("midia") || rawPlan.includes("mídia")) {
+    userPlan = "midia";
+  } else {
+    userPlan = "gratis";
+  }
+
+  // Sincronizar select do simulador de admin caso esteja visível
+  const selectSim = document.getElementById("select-admin-simulate-plan");
+  if (selectSim) {
+    if (userRole === "admin" && rawPlan === "admin") {
+      selectSim.value = "admin";
+    } else {
+      selectSim.value = rawPlan || (userRole === "admin" ? "admin" : "gratis");
+    }
+  }
+
+  // Badge do Usuário e Botão de Upgrade no Header / Menu
   const badgeEl = document.getElementById("user-plan-badge");
   const upgradeBtn = document.getElementById("btn-open-upgrade-modal");
 
   if (badgeEl) {
-    badgeEl.textContent = "Radar Premium Pro";
-    badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300";
-    if (upgradeBtn) upgradeBtn.classList.add("hidden");
+    if (userRole === "admin" && rawPlan === "admin") {
+      badgeEl.textContent = "Admin Master";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300";
+      if (upgradeBtn) upgradeBtn.classList.add("hidden");
+    } else if (userPlan === "midia") {
+      badgeEl.textContent = "Plano Mídia";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-purple-100 text-purple-900 border border-purple-300";
+      if (upgradeBtn) upgradeBtn.classList.add("hidden");
+    } else if (userPlan === "report") {
+      badgeEl.textContent = "Plano Report";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-indigo-100 text-indigo-900 border border-indigo-300";
+      if (upgradeBtn) {
+        upgradeBtn.classList.remove("hidden");
+        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-purple-300"></i><span class="hidden xs:inline">Upgrade Mídia</span>';
+        upgradeBtn.onclick = function() {
+          window.openPlanUpgradeModal('midia', { isUpgrade: true, fromPlan: 'report' });
+          if (window.closeUserMenu) window.closeUserMenu();
+        };
+      }
+    } else if (userPlan === "dash") {
+      badgeEl.textContent = "Plano Dash";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-cyan-100 text-cyan-900 border border-cyan-300";
+      if (upgradeBtn) {
+        upgradeBtn.classList.remove("hidden");
+        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-cyan-300"></i><span class="hidden xs:inline">Evoluir para Report</span>';
+        upgradeBtn.onclick = function() {
+          window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' });
+          if (window.closeUserMenu) window.closeUserMenu();
+        };
+      }
+    } else {
+      badgeEl.textContent = "Plano Gratuito";
+      badgeEl.className = "px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200";
+      if (upgradeBtn) {
+        upgradeBtn.classList.remove("hidden");
+        upgradeBtn.innerHTML = '<i class="fa-solid fa-gem text-cyan-300"></i><span class="hidden xs:inline">Ver Planos</span>';
+        upgradeBtn.onclick = function() {
+          window.openPlanUpgradeModal('report');
+          if (window.closeUserMenu) window.closeUserMenu();
+        };
+      }
+    }
   }
 
-  // 1. DASH PESQUISA: Exibir 100% dos blocos (Zero Blur / Zero Paywall)
+  const isAdminMaster = rawPlan === "admin" || (userRole === "admin" && !["gratis", "dash", "report", "midia"].includes(rawPlan));
+
+  // 1. DASH PESQUISA: 100% dos blocos para Dash, Report, Mídia e Admin. Teaser/Blur para Grátis.
   const dashboardView = document.getElementById("dashboard-view");
   const dashChartsGrid = document.getElementById("dynamic-charts-grid");
+  const isDashUnlocked = ["dash", "report", "midia"].includes(userPlan) || isAdminMaster;
+
   if (dashboardView && dashChartsGrid) {
     const allSections = Array.from(dashChartsGrid.querySelectorAll(":scope > section"));
     allSections.forEach(sec => sec.classList.remove("hidden"));
     const dashPaywall = document.getElementById("dash-paywall-overlay");
     if (dashPaywall) dashPaywall.remove();
-    dashboardView.classList.remove("teaser-paywall-locked");
-    dashChartsGrid.classList.remove("paywall-blur-active");
+
+    if (isDashUnlocked) {
+      if (typeof window.unlockPesquisaPreview === "function") {
+        window.unlockPesquisaPreview();
+      }
+      dashboardView.classList.remove("teaser-paywall-locked");
+      dashChartsGrid.classList.remove("paywall-blur-active");
+    } else {
+      if (typeof window.lockPesquisaPreview === "function") {
+        window.lockPesquisaPreview();
+      }
+    }
+
+    // In-app upsell sutil para assinantes do Plano Dash
+    let dashUpsellBanner = document.getElementById("dash-upsell-report-banner");
+    if (userPlan === "dash" && (userRole !== "admin" || rawPlan === "dash")) {
+      if (!dashUpsellBanner) {
+        dashUpsellBanner = document.createElement("div");
+        dashUpsellBanner.id = "dash-upsell-report-banner";
+        dashUpsellBanner.className = "mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border border-indigo-500/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-in fade-in";
+        dashUpsellBanner.innerHTML = `
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400 shrink-0">
+              <i class="fa-solid fa-arrow-trend-up text-lg"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/20">Upgrade Disponível</span>
+                <span class="text-xs text-slate-400 font-medium">Plano Dash Ativo</span>
+              </div>
+              <p class="text-xs sm:text-sm font-bold text-white mt-0.5">
+                Evolua para o Plano Report: 8 Capítulos Executivos + IA por apenas mais <span class="text-cyan-300 font-black">12x R$ 220,00</span>
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto">
+            <button 
+              type="button" 
+              onclick="window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' })" 
+              class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-bolt text-slate-950 text-xs"></i>
+              <span>Evoluir para o Plano Report</span>
+            </button>
+          </div>
+        `;
+        dashboardView.insertBefore(dashUpsellBanner, dashChartsGrid);
+      }
+    } else {
+      if (dashUpsellBanner) dashUpsellBanner.remove();
+    }
   }
 
-  // 2. REPORT PESQUISA: Exibir 100% dos capítulos
+  // 2. REPORT PESQUISA (executive-report-view): Desbloqueado para Report, Mídia e Admin
   const reportView = document.getElementById("executive-report-view");
   if (reportView) {
+    const isReportUnlocked = ["report", "midia"].includes(userPlan) || isAdminMaster;
     const articles = Array.from(reportView.querySelectorAll(":scope > article"));
-    articles.forEach(art => art.classList.remove("hidden"));
-    const reportPaywall = document.getElementById("report-paywall-overlay");
-    if (reportPaywall) reportPaywall.remove();
-    reportView.classList.remove("teaser-paywall-locked");
-    reportView.classList.remove("paywall-blur-active");
+    let reportPaywall = document.getElementById("report-paywall-overlay");
+
+    if (isReportUnlocked) {
+      articles.forEach(art => art.classList.remove("hidden"));
+      if (reportPaywall) reportPaywall.remove();
+      const danglingReport = document.getElementById("report-paywall-overlay");
+      if (danglingReport) danglingReport.remove();
+      reportView.classList.remove("teaser-paywall-locked", "paywall-blur-active");
+    } else {
+      const isDash = userPlan === "dash";
+      // Exibe os primeiros 2 artigos como teaser e bloqueia os seguintes
+      articles.forEach((art, idx) => {
+        if (idx >= 2) art.classList.add("hidden");
+        else art.classList.remove("hidden");
+      });
+
+      if (!reportPaywall) {
+        reportPaywall = document.createElement("div");
+        reportPaywall.id = "report-paywall-overlay";
+        reportPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
+        if (articles.length >= 2 && articles[1].nextSibling) {
+          reportView.insertBefore(reportPaywall, articles[1].nextSibling);
+        } else {
+          reportView.appendChild(reportPaywall);
+        }
+      }
+
+      reportPaywall.innerHTML = window.createPaywallDarkOverlayHtml({
+        title: isDash ? "Evolua para o Relatório Executivo Completo" : "Relatório Executivo Completo",
+        description: isDash
+          ? "Como assinante do Plano Dash, você pode evoluir para o Plano Report pagando apenas a diferença de 12x R$ 220,00 e ter acesso imediato aos 8 capítulos analíticos e ao consultor de IA."
+          : "Os 8 capítulos aprofundados com dados de 477 joseenses, inteligência estratégica e consultor IA são exclusivos dos Planos Report e Mídia.",
+        badge: isDash ? "Upgrade com Desconto" : "Recurso Exclusivo",
+        targetPlan: "report",
+        isUpgrade: isDash,
+        fromPlan: isDash ? "dash" : undefined,
+        returnTab: "dashboard",
+        returnLabel: "Voltar à Pesquisa"
+      });
+      reportView.classList.add("teaser-paywall-locked");
+    }
   }
 
-  // 3. MÓDULOS TOTALMENTE LIBERADOS
-  ['ibge-view', 'historia-view', 'image-bank-view', 'midia-dashboard-view', 'personas-view'].forEach(id => {
+  // 3. INTELIGÊNCIA DE MÍDIA (midia-dashboard-view): Desbloqueado para Mídia e Admin
+  const midiaView = document.getElementById("midia-dashboard-view");
+  if (midiaView) {
+    const isMidiaUnlocked = userPlan === "midia" || isAdminMaster;
+    let midiaPaywall = document.getElementById("midia-paywall-overlay");
+
+    if (isMidiaUnlocked) {
+      midiaView.classList.remove("paywall-blur-active", "teaser-paywall-locked");
+      if (midiaPaywall) midiaPaywall.remove();
+      const danglingMidia = document.getElementById("midia-paywall-overlay");
+      if (danglingMidia) danglingMidia.remove();
+    } else {
+      midiaView.classList.add("paywall-blur-active", "teaser-paywall-locked");
+      if (!midiaPaywall) {
+        midiaPaywall = document.createElement("div");
+        midiaPaywall.id = "midia-paywall-overlay";
+        midiaPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
+        midiaView.appendChild(midiaPaywall);
+      }
+
+      const isUpgrade = userPlan === "dash" || userPlan === "report";
+      const fromPlan = userPlan === "report" ? "report" : "dash";
+      const diffText = userPlan === "report" ? "12x R$ 700,10" : "12x R$ 920,10";
+
+      midiaPaywall.innerHTML = window.createPaywallDarkOverlayHtml({
+        title: isUpgrade ? "Evolua para a Inteligência de Mídia Corporativa" : "Radar de Mídia & Notícias SJC",
+        description: isUpgrade
+          ? `Como assinante do Plano ${userPlan === "report" ? "Report" : "Dash"}, faça upgrade para o Plano Mídia pagando apenas a diferença de ${diffText} para acesso a 7.542 posts monitorados, veículos locais e 3 licenças corporativas.`
+          : "Análise profunda de 7.542 posts de imprensa e canais digitais de São José dos Campos, mapeamento de influenciadores locais e inteligência competitiva com 3 licenças corporativas.",
+        badge: isUpgrade ? "Upgrade Corporativo" : "Plano Mídia",
+        targetPlan: "midia",
+        isUpgrade: isUpgrade,
+        fromPlan: fromPlan,
+        returnTab: "dashboard",
+        returnLabel: "Voltar à Pesquisa"
+      });
+    }
+  }
+
+  // 4. PERSONAS COMPORTAMENTAIS (personas-view): Desbloqueado para Mídia e Admin
+  const personasView = document.getElementById("personas-view");
+  if (personasView) {
+    const isPersonasUnlocked = userPlan === "midia" || isAdminMaster;
+    let personasPaywall = document.getElementById("personas-paywall-overlay");
+
+    if (isPersonasUnlocked) {
+      personasView.classList.remove("paywall-blur-active", "teaser-paywall-locked");
+      if (personasPaywall) personasPaywall.remove();
+      const danglingPersonas = document.getElementById("personas-paywall-overlay");
+      if (danglingPersonas) danglingPersonas.remove();
+    } else {
+      personasView.classList.add("paywall-blur-active", "teaser-paywall-locked");
+      if (!personasPaywall) {
+        personasPaywall = document.createElement("div");
+        personasPaywall.id = "personas-paywall-overlay";
+        personasPaywall.className = "paywall-block-wrapper relative w-full pt-10 sm:pt-14 pb-20 px-4 flex flex-col items-center justify-center -mt-12 sm:-mt-16 z-20 pointer-events-auto";
+        personasView.appendChild(personasPaywall);
+      }
+
+      const isUpgrade = userPlan === "dash" || userPlan === "report";
+      const fromPlan = userPlan === "report" ? "report" : "dash";
+      const diffText = userPlan === "report" ? "12x R$ 700,10" : "12x R$ 920,10";
+
+      personasPaywall.innerHTML = window.createPaywallDarkOverlayHtml({
+        title: isUpgrade ? "Evolua para os 4 Perfis Arquetípicos de SJC" : "Personas Comportamentais SJC",
+        description: isUpgrade
+          ? `Acesse as 4 personas comportamentais profundas do consumidor joseense com hábitos, dores e preferências no Plano Mídia por apenas mais ${diffText}.`
+          : "Os 4 clusters comportamentais de consumo, hábitos e estilos de vida em São José dos Campos são exclusivos do Plano Mídia.",
+        badge: isUpgrade ? "Upgrade Corporativo" : "Plano Mídia",
+        targetPlan: "midia",
+        isUpgrade: isUpgrade,
+        fromPlan: fromPlan,
+        returnTab: "dashboard",
+        returnLabel: "Voltar à Pesquisa"
+      });
+    }
+  }
+
+  // 5. MÓDULOS TOTALMENTE LIBERADOS (Radar Hub, Linha do Tempo e Lentes SJC)
+  ["ibge-view", "historia-view", "image-bank-view"].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
       el.classList.remove("teaser-paywall-locked", "paywall-blur-active");
     }
   });
-
-  const midiaPaywall = document.getElementById("midia-paywall-overlay");
-  if (midiaPaywall) midiaPaywall.remove();
-  const personasPaywall = document.getElementById("personas-paywall-overlay");
-  if (personasPaywall) personasPaywall.remove();
 };
 
 function showDashboard(user) {
@@ -1024,10 +1315,13 @@ function showDashboard(user) {
 
   const hash = (window.location.hash || "").replace("#", "").trim();
   const validTabs = ["dashboard", "report", "ai-report", "ibge", "image-bank", "midia", "historia", "personas"];
-  if (validTabs.includes(hash) && hash !== "dashboard") {
+  const targetTab = (validTabs.includes(hash) && hash) ? hash : "dashboard";
+  if (targetTab !== "dashboard") {
     setTimeout(() => {
-      window.switchMainTab(hash);
+      window.switchMainTab(targetTab);
     }, 50);
+  } else {
+    window.switchMainTab("dashboard");
   }
 }
 
@@ -1449,6 +1743,52 @@ function getField(row, possibleKeys) {
 // ==========================================
 // 9. RENDERIZADOR DINÂMICO & CUSTOMIZAÇÃO ESPECÍFICA POR PERGUNTA
 // ==========================================
+function aggregateSurveyChartData(records, questionText) {
+  const dataMap = {};
+  records.forEach(row => {
+    let rawVal = row[questionText];
+    if (rawVal === undefined || rawVal === null || String(rawVal).trim() === "") {
+      rawVal = getField(row, [questionText]);
+    }
+    if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
+      let strVal = String(rawVal).trim();
+      
+      // Ignora números isolados que não pertençam a escalas de 1 a 5 ou renda/idade (remove ruídos como 73, 302, 418, 445)
+      if (/^\d+$/.test(strVal)) {
+        const isScaleOrDemographic = /1 a 5|nota|idade|quanto você acompanha/i.test(questionText);
+        if (!isScaleOrDemographic) {
+          return;
+        }
+      }
+
+      // Identifica perguntas de múltipla escolha
+      const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
+
+      if (isMultipleChoice) {
+        // Remove o conteúdo entre parênteses e os próprios parênteses para manter apenas os títulos limpos
+        const cleanedWithoutParens = strVal.replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
+        const parts = cleanedWithoutParens.split(",");
+        const rowBuckets = new Set();
+        parts.forEach(part => {
+          let p = part.trim();
+          if (p && !/^(R\$|\d+,\d+)$/.test(p)) {
+            rowBuckets.add(p);
+          }
+        });
+        rowBuckets.forEach(b => {
+          dataMap[b] = (dataMap[b] || 0) + 1;
+        });
+      } else {
+        // Pergunta de escolha única: remove parênteses e seus conteúdos se existirem
+        let cleanSingle = strVal.replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
+        if (cleanSingle) dataMap[cleanSingle] = (dataMap[cleanSingle] || 0) + 1;
+      }
+    }
+  });
+
+  return dataMap;
+}
+
 function processAndRenderDynamicCharts(records) {
   const total = records.length;
   if (statTotalResponses) statTotalResponses.textContent = total.toLocaleString("pt-BR");
@@ -1463,6 +1803,8 @@ function processAndRenderDynamicCharts(records) {
     renderTable([]);
     return;
   }
+
+  const referenceRecords = allSurveyRecords.length ? allSurveyRecords : records;
 
   // Descobrir todas as perguntas existentes (ignora metadados, campos abertos e coluna utilitária Região)
   const ignoredColumns = new Set([
@@ -1482,7 +1824,7 @@ function processAndRenderDynamicCharts(records) {
   ]);
   const allColumns = new Set();
 
-  records.forEach(row => {
+  referenceRecords.forEach(row => {
     Object.keys(row).forEach(key => {
       const kTrim = key.trim();
       const isIgnored = ignoredColumns.has(key) || 
@@ -1737,47 +2079,7 @@ function processAndRenderDynamicCharts(records) {
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
 
       // Extração de dados robusta e limpeza de parênteses/múltipla escolha
-      const dataMap = {};
-      records.forEach(row => {
-        let rawVal = row[questionText];
-        if (rawVal === undefined || rawVal === null || String(rawVal).trim() === "") {
-          rawVal = getField(row, [questionText]);
-        }
-        if (rawVal !== undefined && rawVal !== null && String(rawVal).trim() !== "") {
-          let strVal = String(rawVal).trim();
-          
-          // Ignora números isolados que não pertençam a escalas de 1 a 5 ou renda/idade (remove ruídos como 73, 302, 418, 445)
-          if (/^\d+$/.test(strVal)) {
-            const isScaleOrDemographic = /1 a 5|nota|idade|quanto você acompanha/i.test(questionText);
-            if (!isScaleOrDemographic) {
-              return;
-            }
-          }
-
-          // Identifica perguntas de múltipla escolha
-          const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
-
-          if (isMultipleChoice) {
-            // Remove o conteúdo entre parênteses e os próprios parênteses para manter apenas os títulos limpos
-            const cleanedWithoutParens = strVal.replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
-            const parts = cleanedWithoutParens.split(",");
-            const rowBuckets = new Set();
-            parts.forEach(part => {
-              let p = part.trim();
-              if (p && !/^(R\$|\d+,\d+)$/.test(p)) {
-                rowBuckets.add(p);
-              }
-            });
-            rowBuckets.forEach(b => {
-              dataMap[b] = (dataMap[b] || 0) + 1;
-            });
-          } else {
-            // Pergunta de escolha única: remove parênteses e seus conteúdos se existirem
-            let cleanSingle = strVal.replace(/\s*\([^)]*\)/g, "").replace(/[()]/g, "").trim();
-            if (cleanSingle) dataMap[cleanSingle] = (dataMap[cleanSingle] || 0) + 1;
-          }
-        }
-      });
+      const dataMap = aggregateSurveyChartData(records, questionText);
 
       // ==========================================
       // AJUSTES ESPECÍFICOS POR PERGUNTA:
@@ -2310,7 +2612,9 @@ function processAndRenderDynamicCharts(records) {
 
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
-      const chartTypeConfig = determineChartType(questionText, dataMap, globalQuestionIndex);
+      // O filtro altera os valores, mas preserva o tipo e a orientação da amostra completa.
+      const referenceDataMap = aggregateSurveyChartData(referenceRecords, questionText);
+      const chartTypeConfig = determineChartType(questionText, referenceDataMap, globalQuestionIndex);
       const itemCount = Object.keys(dataMap).length;
       const minContainerHeight = (chartTypeConfig.options && chartTypeConfig.options.horizontal && itemCount > 6) 
         ? Math.max(300, Math.min(520, itemCount * 42)) 
@@ -4368,7 +4672,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
   const simPct = totalSum > 0 ? ((simCount / totalSum) * 100).toFixed(1) : "74.2";
   const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "25.8";
 
-  let html = '<div class="flex-1 flex flex-col justify-between gap-3 sm:gap-3.5 w-full h-full min-h-[320px] sm:min-h-[350px] py-1">' +
+  let html = '<div class="survey-pride-widget flex-1 flex flex-col justify-between gap-3 sm:gap-3.5 w-full h-full min-h-[320px] sm:min-h-[350px] py-1">' +
     // CARD SIM (Sorrindo) - Em Cima
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Sim (sorrindo) na esquerda
@@ -4382,7 +4686,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
         '</div>' +
       '</div>' +
       // Conteúdo e Estatísticas na direita
-      '<div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
+      '<div class="survey-pride-content p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
         '<div class="flex items-start justify-between gap-1.5">' +
           '<div class="min-w-0 flex-1 pr-1">' +
             '<h4 class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">Tenho Orgulho</h4>' +
@@ -4418,7 +4722,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
         '</div>' +
       '</div>' +
       // Conteúdo e Estatísticas na direita
-      '<div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/30 via-white to-white min-w-0">' +
+      '<div class="survey-pride-content p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/30 via-white to-white min-w-0">' +
         '<div class="flex items-start justify-between gap-1.5">' +
           '<div class="min-w-0 flex-1 pr-1">' +
             '<h4 class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">Não Tenho Orgulho</h4>' +
@@ -4469,7 +4773,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
   const simPct = totalSum > 0 ? ((simCount / totalSum) * 100).toFixed(1) : "50.0";
   const naoPct = totalSum > 0 ? ((naoCount / totalSum) * 100).toFixed(1) : "50.0";
 
-  let html = '<div class="flex-1 flex flex-col justify-between gap-3 sm:gap-3.5 w-full h-full min-h-[320px] sm:min-h-[350px] py-1">' +
+  let html = '<div class="survey-influencer-widget flex-1 flex flex-col justify-between gap-3 sm:gap-3.5 w-full h-full min-h-[320px] sm:min-h-[350px] py-1">' +
     // CARD SIM - Em Cima
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Sim na esquerda
@@ -4483,7 +4787,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
         '</div>' +
       '</div>' +
       // Conteúdo e Estatísticas na direita
-      '<div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
+      '<div class="survey-influencer-content p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-emerald-50/20 via-white to-white min-w-0">' +
         '<div class="flex items-start justify-between gap-1.5">' +
           '<div class="min-w-0 flex-1 pr-1">' +
             '<h4 class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">Já Fui por Indicação</h4>' +
@@ -4519,7 +4823,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
         '</div>' +
       '</div>' +
       // Conteúdo e Estatísticas na direita
-      '<div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/30 via-white to-white min-w-0">' +
+      '<div class="survey-influencer-content p-3 sm:p-3.5 flex-1 flex flex-col justify-between bg-gradient-to-r from-slate-50/30 via-white to-white min-w-0">' +
         '<div class="flex items-start justify-between gap-1.5">' +
           '<div class="min-w-0 flex-1 pr-1">' +
             '<h4 class="text-xs sm:text-sm font-extrabold text-slate-800 leading-snug">Nunca Fui por Indicação</h4>' +
@@ -28316,6 +28620,8 @@ function renderFallbackDemoData() {
 ];
 
   allSurveyRecords = demoRecords;
+  window.allSurveyRecords = demoRecords;
+  window.FALLBACK_SURVEY_RECORDS = demoRecords;
   populateAllSidebarFilters(demoRecords);
   updateStatisticalHeader(demoRecords.length, demoRecords.length);
   processAndRenderDynamicCharts(demoRecords);
@@ -28331,132 +28637,122 @@ const EXECUTIVE_REPORT_PERSONAS = [
   {
     nome: "Gabriela",
     cargo: "Consultora de Negócios",
-    idade: "46 anos",
-    classe: "Classe A",
+    idade: "43 anos",
     regiao: "Oeste",
     foto: "fotos_radar/photo_1.jpg",
     cor: "border-sky-500",
     badgeBg: "bg-sky-100 text-sky-800",
-    resumo: "Profissional consolidada que usa o tempo como moeda. Transita entre reuniões, fiel a marcas que entregam conveniência e sofisticação.",
-    quote: "Precisamos ter mais festivais legais aqui. O Mr. Moo é um exemplo, mas eu mesma tenho várias críticas: falta lugar pra sentar direito, falta banheiro limpo — e ainda é um evento caro do caramba. (...) O pessoal que pensa em evento aqui não se lembra das mães. Parece que tem mais cuidado pra pensar em espaço pet do que em espaço pra mãe.",
-    tags: ["Time is Money", "Consumo Premium", "Lifestyle Aquarius/Urbanova", "Alta Exigência"]
+    resumo: "Tempo, conforto e repertório entram em todas as escolhas. Compara São José com experiências de fora e cobra coerência entre preço e entrega.",
+    quote: "A gente até tem restaurantes bons, mas o preço é um absurdo. Não faz sentido pagar o mesmo que em Pinheiros aqui em São José. Em São Paulo eu ainda saio do restaurante e vou a uma peça, a um filme. Aqui, depois do jantar, o que você faz?",
+    tags: ["Tempo Livre", "Exigência Urbana", "Oeste", "Repertório Externo"]
   },
   {
     nome: "Emerson",
     cargo: "Entregador de App",
     idade: "21 anos",
-    classe: "Classe D",
     regiao: "Sul",
     foto: "fotos_radar/foto_pessoas.jpg",
     cor: "border-amber-500",
     badgeBg: "bg-amber-100 text-amber-800",
-    resumo: "Vive na economia de plataforma. O celular é ferramenta de trabalho e lazer. Sonha com negócio próprio, mas o presente ainda pesa mais.",
-    quote: "Lá no centro até tem parque, tem lugar iluminado, gente correndo, criança brincando. Agora chega lá nas quebrada depois das seis da tarde? Escuro, mato alto, banco quebrado, nem calçada direito tem. A molecada fica solta na rua porque não tem onde ir. Parece que tem dois São José: um que eles cuidam e outro que eles esqueceram.",
-    tags: ["Gig Economy", "Mobilidade 2 Rodas", "Periferia Ativa", "SJC Invisível"]
+    resumo: "Conhece a cidade em movimento. Trabalha na rua, percebe trânsito, distância e diferença de infraestrutura pelo próprio corpo.",
+    quote: "Eu rodo a cidade inteira de moto. No Centro tem parque, lugar iluminado, gente correndo, criança brincando. Agora chega em algumas quebradas depois das seis: escuro, mato alto, banco quebrado. Parece que tem dois São José, um que eles cuidam e outro que esqueceram.",
+    tags: ["Economia de Plataforma", "Mobilidade 2 Rodas", "Zona Sul", "Voz da Rua"]
   },
   {
     nome: "Lucas",
     cargo: "Motorista de App",
     idade: "24 anos",
-    classe: "Classe C",
     regiao: "Leste",
     foto: "fotos_radar/photo_2.jpg",
     cor: "border-emerald-500",
     badgeBg: "bg-emerald-100 text-emerald-800",
-    resumo: "Migrou para a autonomia por necessidade. Conhece a cidade e a mobilidade como ninguém. Sempre calculando se o mês vai fechar.",
-    quote: "Esse negócio de Arco da Inovação, pelo amor de Deus cara. Gastaram rios de dinheiro naquilo pra aliviar o trânsito? Não resolveu porra nenhuma. Continua engarrafado. Você fica parado quarenta minutos pra andar dois quilômetros. Arco da Inovação? Pra mim é Arco do Prejuízo.",
-    tags: ["Trânsito Real", "Uber/99", "Zona Leste", "Autônomo"]
+    resumo: "A mobilidade é trabalho e mapa mental. Circula por regiões diferentes e escuta diariamente histórias de passageiros.",
+    quote: "Eu faço corrida para muitas mulheres e vou falar pra você: elas ficam sempre com medo. Às vezes pedem pra parar o carro dentro do prédio pra não ficar na rua esperando. Isso é todo dia.",
+    tags: ["Trânsito Real", "Uber e 99", "Zona Leste", "Autônomo"]
   },
   {
     nome: "Ricardo",
     cargo: "Trabalhador da Indústria",
     idade: "48 anos",
-    classe: "Classe B",
     regiao: "Sudeste",
     foto: "fotos_radar/photo_3.jpg",
     cor: "border-blue-600",
     badgeBg: "bg-blue-100 text-blue-800",
-    resumo: "Chão de fábrica com orgulho. Estabilidade é o valor central. Consome com cautela e desconfia de modismos, priorizando o ritmo do trabalho.",
-    quote: "Você tá doido, é ruim demais e caro demais as coisas rapaz(...) esses dias saí com a mulher e foi quase 300 conto numa sentada lá na Vila Ema. (...) Para mim cultura sempre foi uma coisa meio de outro mundo, coisa de quem estuda, de quem tem tempo.",
-    tags: ["Metalúrgico", "Tradição", "Família", "Pé no Chão"]
+    resumo: "Rotina marcada por trabalho, deslocamento e estabilidade. Olha com desconfiança para modismos e calcula valor antes de gastar.",
+    quote: "Eu tenho carro, mas ultimamente prefiro o ônibus da empresa justamente pra não passar raiva. De carro, o tempo que você perde, o combustível que gasta, a paciência que acaba... melhor deixar na garagem. Mas nem todo mundo tem essa opção.",
+    tags: ["Indústria", "Estabilidade", "Fretado", "Sudeste"]
   },
   {
     nome: "Felipe",
-    cargo: "Cabeleireiro & Empreendedor",
+    cargo: "Cabeleireiro",
     idade: "33 anos",
-    classe: "Classe B",
     regiao: "Oeste",
     foto: "fotos_radar/foto_cultura.jpg",
     cor: "border-purple-500",
     badgeBg: "bg-purple-100 text-purple-800",
-    resumo: "Empreendedor informal que usa redes sociais como vitrine. Conectado às tendências, mas com os pés firmes na realidade do seu bairro.",
-    quote: "Fui num lugar incrível em São Paulo: uma funilaria durante o dia que à noite virava balada. Tinha muita gente estilosa. Pra São José falta isso — coisas mais espontâneas. Um cara abrir uma portinha, boa música, cerveja gelada, preço justo.",
-    tags: ["Estilo Urbano", "Social Media", "Nightlife", "Criatividade"]
+    resumo: "Trabalha com público, conversa o dia inteiro e acompanha tendências de comportamento, estética e consumo pelas redes e pelo salão.",
+    quote: "Fui num lugar em São Paulo que era funilaria de dia e virava balada à noite. Pra São José falta isso: coisa mais espontânea. Uma portinha, boa música, cerveja gelada e preço justo.",
+    tags: ["Estilo Urbano", "Tendências", "Noite", "Comércio Local"]
   },
   {
     nome: "Rosângela",
     cargo: "Garçonete Freelancer",
     idade: "43 anos",
-    classe: "Classe D",
     regiao: "Centro",
     foto: "fotos_radar/foto_gastronomia.jpg",
     cor: "border-rose-500",
     badgeBg: "bg-rose-100 text-rose-800",
-    resumo: "Trabalha por diária com vasta experiência. Circula pelo Centro com facilidade e conhece os ritmos invisíveis da cidade como ninguém.",
-    quote: "Eu trabalho em festa, evento, casamento, essas coisas tudo. Você passa a noite inteira servindo bebida pra gente rica se divertindo, enquanto eu tô de pé com dor no joelho. Quando o evento acaba vou pegar ônibus lá pras duas da manhã e voltar pro meu bairro que não tem coisa nenhuma.",
-    tags: ["Trabalho Noturno", "Diárias", "Voz da Realidade", "Centro Histórico"]
+    resumo: "Vive a cidade pela noite, por eventos e por trabalhos temporários. Enxerga de perto a diferença entre quem está se divertindo e quem está servindo.",
+    quote: "Eu e duas colegas rachamos um Uber. Além de às vezes sair mais barato, eu não preciso ficar passando raiva com homem nojento no ônibus. Já sofri assédio. Minha paz pesa na escolha.",
+    tags: ["Trabalho Noturno", "Eventos", "Centro", "Transporte"]
   },
   {
     nome: "Roberto",
-    cargo: "Comerciante & Dono de Lanchonete",
+    cargo: "Dono de Lanchonete",
     idade: "52 anos",
-    classe: "Classe B",
     regiao: "Centro",
     foto: "fotos_radar/foto_cidade.jpg",
     cor: "border-amber-600",
     badgeBg: "bg-amber-100 text-amber-800",
-    resumo: "Comerciante raiz, sobreviveu a crises e pandemias. Seu ponto no centro é sua identidade. Adapta-se por necessidade às mudanças do entorno.",
-    quote: "Eu fecho a lanchonete meia-noite, mas tem dias que fecho onze e quinze porque não compensa o risco. Tenho filha que trabalha à noite num hospital. Toda noite espero a mensagem 'cheguei'. Se demora cinco minutos, meu coração dispara. Insegurança não é só quando acontece com a gente, é quando você sabe que pode acontecer a qualquer momento.",
-    tags: ["Comércio de Rua", "Segurança Noturna", "Pai de Família", "Resiliência"]
+    resumo: "Comerciante de longa trajetória. Vê movimento, segurança, preço e mudança do Centro pela porta do próprio negócio.",
+    quote: "Eu fecho a lanchonete meia-noite, mas tem dia que fecho onze e meia porque não compensa o risco. Minha filha trabalha à noite. Quando ela sai do plantão, eu fico esperando a mensagem 'cheguei'. Se demora, o coração dispara.",
+    tags: ["Comércio de Rua", "Segurança Noturna", "Centro", "Tradição"]
   },
   {
     nome: "Ísis",
-    cargo: "Estudante Universitária",
+    cargo: "Estudante",
     idade: "18 anos",
-    classe: "Classe C",
     regiao: "Leste",
-    foto: "fotos_radar/ghibli_aluguel_livre.jpg",
+    foto: "fotos_radar/overview_densidade_IMG_2824.jpg",
     cor: "border-teal-500",
     badgeBg: "bg-teal-100 text-teal-800",
-    resumo: "Primeira geração no ensino superior. Voz ativa no digital, representa a geração que moldará o consumo e a cultura de SJC nos próximos anos.",
-    quote: "A gente até tem restaurantes bons, mas o preço é um absurdo. Não faz sentido pagar o mesmo que em Pinheiros aqui em São José. Em São Paulo saio do restaurante e vou a uma peça de teatro. Aqui, depois do jantar, o que você faz? Dormir? A sensação é que querem que as pessoas fiquem reféns dentro de casa. Não perco uma Virada Cultural em SP.",
-    tags: ["Gen Z", "Universitária", "Evasão para SP", "Cultura Alternativa"]
+    resumo: "Traz repertório jovem, digital e crítico. Fala de cultura, preço, diversidade de programação e acesso a partir da periferia.",
+    quote: "Esses dias eu estava com umas amigas, era onze da noite ainda. Andamos três bairros para achar alguma coisa e paramos num lugar que nem queríamos, mas não tinha outra opção.",
+    tags: ["Jovem", "Estudante", "Cultura", "Zona Leste"]
   },
   {
     nome: "Miriam",
     cargo: "Diarista",
     idade: "56 anos",
-    classe: "Classe D",
     regiao: "Norte",
-    foto: "fotos_radar/ghibli_casa_propria.jpg",
+    foto: "fotos_radar/overview_benchmark_IMG_2916.jpg",
     cor: "border-indigo-500",
     badgeBg: "bg-indigo-100 text-indigo-800",
-    resumo: "Trabalha em casas de família e conhece a cidade pelos endereços. Prioriza filhos e saúde. Fiel ao dinheiro vivo e desconfiada de crédito.",
-    quote: "Eu trabalho limpando casa de rico a semana inteira, e lá eles vivem falando de show, de peça, de exposição. Eu fico calada, mas penso: onde é que eu vou arrumar dinheiro pra isso? Tudo é caro, ingresso, transporte, até um pastel lá na hora é caro. Aí a gente fica em casa, vê os outros se divertindo.",
-    tags: ["Trabalho Doméstico", "Zona Norte", "Economia Básica", "Mães e Avós"]
+    resumo: "Conhece a cidade por trajetos de trabalho e casas de diferentes regiões. Saúde, transporte, renda e segurança entram diretamente nas decisões.",
+    quote: "Conheço gente esperando consulta há dois, três anos. Enquanto isso a doença vai piorando. Quem tem plano também reclama, mas quem depende só do SUS sente mais.",
+    tags: ["Trabalho Doméstico", "Zona Norte", "Saúde Pública", "Família"]
   },
   {
     nome: "Carla",
-    cargo: "Professora da Rede Pública",
+    cargo: "Professora Pública",
     idade: "34 anos",
-    classe: "Classe C",
     regiao: "Norte",
-    foto: "fotos_radar/ghibli_aluguel_quer_casa.jpg",
+    foto: "fotos_radar/overview_area_IMG_2905.jpg",
     cor: "border-red-500",
     badgeBg: "bg-red-100 text-red-800",
-    resumo: "Concursada e estável, mas pressionada. Consumidora de cultura frustrada com a oferta local. Sente a tensão entre potencial e entrega da cidade.",
-    quote: "São José é um microcosmo do Brasil: setor de empresas ativo, uma classe com dinheiro que organiza a cidade e um governo que atua em benefício dessa classe. E à margem uma população periférica que vivencia a cidade através do trabalho. A classe trabalhadora é meio figurante da cidade, nada é pensado pra ela mas quem sustenta tudo é ela.",
-    tags: ["Educação Pública", "Consciência Social", "Servidora", "Cultura Crítica"]
+    resumo: "Consumidora de cultura e servidora pública. Observa a distância entre a imagem de cidade avançada e o acesso cotidiano a serviços e programação.",
+    quote: "São José é um microcosmo do Brasil. A gente tem um setor de empresas bastante ativo, uma classe com dinheiro que organiza a cidade e, à margem, uma população periférica que vivencia a cidade através do trabalho. A classe trabalhadora é meio figurante da cidade, mas é quem sustenta muita coisa.",
+    tags: ["Educação Pública", "Cultura", "Zona Norte", "Visão Crítica"]
   }
 ];
 
@@ -28480,12 +28776,11 @@ function renderExecutivePersonasCards() {
           </div>
           <div class="min-w-0 flex-1">
             <div class="flex items-center gap-2 flex-wrap">
-              <h3 class="text-lg font-black text-brand-900 leading-tight">${p.nome}</h3>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-black ${p.badgeBg}">${p.classe}</span>
+              <h3 class="text-lg font-black text-brand-900 leading-tight">${p.nome}, ${p.idade}</h3>
               <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700">Zona ${p.regiao}</span>
             </div>
-            <p class="text-xs font-bold text-brand-700 mt-0.5">${p.cargo} &bull; ${p.idade}</p>
-            <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 font-medium">${p.resumo}</p>
+            <p class="text-xs font-bold text-brand-700 mt-0.5">${p.cargo}</p>
+            <p class="text-[11px] text-slate-600 mt-1 font-medium leading-relaxed">${p.resumo}</p>
           </div>
         </div>
 
@@ -28495,22 +28790,31 @@ function renderExecutivePersonasCards() {
         </blockquote>
       </div>
 
-      <!-- Tags de Comportamento -->
-      <div class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-100">
-        ${p.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-semibold">#${t}</span>`).join('')}
+      <!-- Selo Metodológico & Tags -->
+      <div class="pt-3 border-t border-slate-100 space-y-2">
+        <div class="text-[9px] font-bold uppercase tracking-wider text-slate-400">
+          ENTREVISTA EM PROFUNDIDADE &bull; FALA EDITADA PARA CLAREZA
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          ${p.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-semibold">#${t}</span>`).join('')}
+        </div>
       </div>
     </div>
   `).join('');
 }
 
-window.renderExecutiveReportCharts = function() {
+window.renderExecutiveReportCharts = function(records) {
   renderExecutivePersonasCards();
   return window.RadarReportUI.render({
-    url: SUPABASE_URL, key: SUPABASE_ANON_KEY,
-    bar: renderReportChartBar, sankey: renderReportChartSankey,
+    url: SUPABASE_URL,
+    key: SUPABASE_ANON_KEY,
+    records: Array.isArray(records) && records.length ? records : (typeof allSurveyRecords !== 'undefined' && allSurveyRecords.length ? allSurveyRecords : null),
+    bar: renderReportChartBar,
+    sankey: renderReportChartSankey,
     clear: () => {
       Object.keys(executiveChartInstances).forEach(id => {
-        executiveChartInstances[id].destroy(); delete executiveChartInstances[id];
+        try { executiveChartInstances[id].destroy(); } catch (e) {}
+        delete executiveChartInstances[id];
       });
     }
   });
@@ -28518,10 +28822,26 @@ window.renderExecutiveReportCharts = function() {
 
 function renderReportChartSankey(canvasId, sankeyData) {
   const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
+  if (!canvas || !Array.isArray(sankeyData)) return;
+  if (!sankeyData.length) {
+    if (executiveChartInstances[canvasId]) {
+      executiveChartInstances[canvasId].destroy();
+      delete executiveChartInstances[canvasId];
+    }
+    canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+    canvas.reportChartPending = null;
+    canvas.setAttribute('aria-label', 'Sem respostas válidas para este recorte.');
+    return;
+  }
+  canvas.setAttribute('role', 'img');
+  canvas.setAttribute('aria-label', 'Fluxos de moradia para lazer. ' + sankeyData.map(row => `${row.from} → ${row.to}: ${row.formatted}`).join('; '));
+  if (!canvas.getBoundingClientRect().width) {
+    canvas.reportChartPending = {type:'sankey', data:sankeyData};
+    return;
+  }
 
   if (executiveChartInstances[canvasId]) {
-    executiveChartInstances[canvasId].destroy();
+    try { executiveChartInstances[canvasId].destroy(); } catch (e) {}
   }
 
   function getColor(key, alpha = 1) {
@@ -28530,21 +28850,21 @@ function renderReportChartSankey(canvasId, sankeyData) {
     let base = "#0284C7";
 
     if (k.includes("oeste")) {
-      base = "#0284C7"; // Azul Oceano / Celeste
+      base = "#0284C7";
     } else if (k.includes("sul")) {
-      base = "#2563EB"; // Azul Real Vibrante
+      base = "#2563EB";
     } else if (k.includes("centro")) {
-      base = "#06B6D4"; // Ciano Elétrico
+      base = "#06B6D4";
     } else if (k.includes("leste")) {
-      base = "#6366F1"; // Índigo / Violeta
+      base = "#6366F1";
     } else if (k.includes("norte")) {
-      base = "#10B981"; // Verde Esmeralda
+      base = "#10B981";
     } else if (k.includes("sudeste")) {
-      base = "#F59E0B"; // Âmbar Dourado
+      base = "#F59E0B";
     } else if (k.includes("todas") || k.includes("todas as")) {
-      base = "#8B5CF6"; // Púrpura Vibrante
+      base = "#8B5CF6";
     } else if (k.includes("outr")) {
-      base = "#EC4899"; // Rosa Pink
+      base = "#EC4899";
     } else {
       const fallbackPalette = ["#0284C7", "#2563EB", "#06B6D4", "#6366F1", "#10B981", "#F59E0B", "#8B5CF6", "#EC4899"];
       let hash = 0;
@@ -28561,33 +28881,40 @@ function renderReportChartSankey(canvasId, sankeyData) {
 
   const ctx = canvas.getContext("2d");
 
-  // Se o plugin Sankey estiver carregado
-  if (typeof Chart.controllers.sankey !== "undefined") {
+  try {
+    const labelMap = {};
+    sankeyData.forEach(d => {
+      if (d.from) labelMap[d.from] = String(d.from).replace(/^Origem:\s*/i, "Moradia • ");
+      if (d.to) labelMap[d.to] = String(d.to).replace(/^Destino:\s*/i, "Lazer • ");
+    });
+
     executiveChartInstances[canvasId] = new Chart(ctx, {
       type: "sankey",
       data: {
         datasets: [{
           data: sankeyData,
-          colorFrom: (c) => getColor(c.dataset.data[c.dataIndex].from, 0.7),
-          colorTo: (c) => getColor(c.dataset.data[c.dataIndex].to, 0.7),
+          labels: labelMap,
+          colorFrom: (c) => getColor(c.dataset.data[c.dataIndex]?.from, 0.78),
+          colorTo: (c) => getColor(c.dataset.data[c.dataIndex]?.to, 0.78),
           colorMode: "gradient",
           borderWidth: 0,
-          nodeWidth: 18,
-          nodePadding: 14,
-          labels: {
-            display: true,
-            font: {
-              family: "Montserrat",
-              size: 11,
-              weight: "bold"
-            },
-            color: () => document.documentElement.classList.contains('dark') ? '#F8FAFC' : '#0F172A'
-          }
+          nodeWidth: 16,
+          nodePadding: 12,
+          font: {
+            family: "Inter, system-ui, sans-serif",
+            size: 12,
+            weight: "600"
+          },
+          color: "#0F172A"
         }]
       },
       options: {
+        animation: false,
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+          padding: { top: 8, bottom: 8, left: 8, right: 8 }
+        },
         plugins: {
           legend: { display: false },
           datalabels: { display: false },
@@ -28595,13 +28922,26 @@ function renderReportChartSankey(canvasId, sankeyData) {
             callbacks: {
               label: (ctx) => {
                 const item = ctx.raw;
-                return ` ${item.from} → ${item.to}: ${item.formatted}`;
+                const fromClean = String(item.from || "").replace(/^Origem:\s*/i, "Origem (Moradia): ");
+                const toClean = String(item.to || "").replace(/^Destino:\s*/i, "Destino (Lazer): ");
+                return ` ${fromClean} → ${toClean}: ${item.formatted}`;
               }
             }
           }
         }
       }
     });
+  } catch (err) {
+    console.warn("Fallback de Sankey para Barras Horizontais:", err);
+    const topFlows = [...sankeyData]
+      .sort((a, b) => (b.value || 0) - (a.value || 0))
+      .slice(0, 8)
+      .map(f => ({
+        category: `${String(f.from).replace('Origem: ', '')} → ${String(f.to).replace('Destino: ', '')}`,
+        value: f.value,
+        formatted: f.formatted
+      }));
+    renderReportChartBar(canvasId, topFlows, "#0284C7");
   }
 }
 
@@ -28611,60 +28951,70 @@ function renderReportChartBar(canvasId, categories, color) {
   try {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', categories.map(row => `${row.category}: ${row.formatted}`).join('; '));
+    if (!canvas.getBoundingClientRect().width) {
+      canvas.reportChartPending = {type:'bar', data:categories, color};
+      return;
+    }
 
     if (executiveChartInstances[canvasId]) {
       executiveChartInstances[canvasId].destroy();
     }
 
-    // Dynamic container height
-    if (canvas.parentElement && labels.length > 5) {
-      canvas.parentElement.style.minHeight = Math.max(300, labels.length * 40) + 'px';
-    }
-
-    // Formatar rótulos longos em múltiplas linhas para nunca cortar no eixo Y
-    const formattedLabels = labels.map(l => {
-      if (typeof l !== 'string') return l;
-      // Se tiver parênteses como "(ex: Aquarius, Vila Adyana)", quebrar em 2 linhas
-      if (l.includes(" (") || l.includes(" (ex:")) {
-        const splitIdx = l.indexOf(" (");
-        if (splitIdx > 0) {
-          return [l.substring(0, splitIdx).trim(), l.substring(splitIdx).trim()];
-        }
-      }
-      // Se for muito longo (> 24 chars), quebrar no meio
-      if (l.length > 24 && l.includes(" ")) {
-        const words = l.split(" ");
-        const mid = Math.ceil(words.length / 2);
-        return [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
-      }
-      return l;
-    });
-
+    const isDense = labels.length >= 8;
+    const fontSize = 12;
     const ctx = canvas.getContext("2d");
+    // Wrap the original labels to their measured axis width, including after resize.
+    const layoutLabels = chart => {
+      const width = canvas.parentElement?.clientWidth || canvas.clientWidth;
+      const budget = Math.max(64, Math.min(280, width * .42));
+      ctx.font = `600 ${fontSize}px Inter, system-ui, sans-serif`;
+      const wrapped = labels.map(label => {
+        if (typeof label !== 'string') return label;
+        const lines = []; let line = '';
+        for (const word of label.split(/\s+/)) {
+          const candidate = line ? line + ' ' + word : word;
+          if (line && ctx.measureText(candidate).width > budget) { lines.push(line); line = word; }
+          else line = candidate;
+        }
+        if (line) lines.push(line);
+        return lines.length > 1 ? lines : label;
+      });
+      const lines = Math.max(1, ...wrapped.map(x => Array.isArray(x) ? x.length : 1));
+      const minimum = Math.max(160, Math.ceil(labels.length * (fontSize * 1.2 * lines + 6) + 24));
+      if (canvas.parentElement) canvas.parentElement.style.minHeight = minimum + 'px';
+      if (chart) chart.data.labels = wrapped;
+      return wrapped;
+    };
+    const formattedLabels = layoutLabels();
     const maxVal = Math.max(...data, 1);
 
     executiveChartInstances[canvasId] = new Chart(ctx, {
       type: "bar",
+      plugins: [{id:'reportLabelLayout', beforeLayout:layoutLabels}],
       data: {
         labels: formattedLabels,
         datasets: [{
           data: data,
           backgroundColor: color,
-          borderRadius: 8,
-          barPercentage: 0.7,
-          categoryPercentage: 0.85
+          borderRadius: 6,
+          maxBarThickness: 32,
+          barPercentage: isDense ? 0.74 : 0.68,
+          categoryPercentage: isDense ? 0.88 : 0.84
         }]
       },
       options: {
         indexAxis: "y",
+        animation: false,
         responsive: true,
         maintainAspectRatio: false,
         layout: {
           padding: {
-            right: 65,
-            left: 20,
-            top: 10,
-            bottom: 10
+            right: 48,
+            left: 8,
+            top: 6,
+            bottom: 6
           }
         },
         plugins: {
@@ -28679,9 +29029,10 @@ function renderReportChartBar(canvasId, categories, color) {
           datalabels: {
             anchor: "end",
             align: "end",
-            offset: 8,
-            color: () => document.documentElement.classList.contains('dark') ? '#F8FAFC' : '#0F172A',
-            font: { family: "Montserrat", weight: "bold", size: 11 },
+            offset: 6,
+            clip: false,
+            color: "#0F172A",
+            font: { family: "Inter, system-ui, sans-serif", weight: "700", size: fontSize },
             formatter: (value, context) => categories[context.dataIndex].formatted
           }
         },
@@ -28689,15 +29040,16 @@ function renderReportChartBar(canvasId, categories, color) {
           x: {
             display: false,
             grid: { display: false },
-            suggestedMax: maxVal * 1.18
+            suggestedMax: maxVal * 1.22
           },
           y: {
+            border: { display: false },
             grid: { display: false },
             ticks: {
-              font: { family: "Montserrat", size: 11, weight: "700" },
-              color: () => document.documentElement.classList.contains('dark') ? '#E2E8F0' : '#1E293B',
+              font: { family: "Inter, system-ui, sans-serif", size: fontSize, weight: "600" },
+              color: "#1E293B",
               autoSkip: false,
-              padding: 10
+              padding: isDense ? 4 : 8
             }
           }
         }
