@@ -19,7 +19,7 @@
   <!-- Google Fonts: Montserrat + Merriweather -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Tailwind CSS CDN -->
@@ -80,7 +80,22 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── CABEÇALHO FULL-WIDTH COM LOGO À ESQUERDA ── */
+    /* ── CABEÇALHO FULL-WIDTH (SINCRONIZADO COM A LANDING PAGE) ── */
+    :root {
+      --font-display: "Sora", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-ui: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --azul: #0B2545;
+      --azul-medio: #0b315c;
+      --azul-claro: #19afea;
+      --azul-suave: #e6eff1;
+      --vermelho: #ff2e2e;
+      --branco: #ffffff;
+      --cinza-claro: #f0f1f0;
+      --cinza-texto: #3a3a3a;
+      --preto: #0a0a0a;
+      --color-brand-cyan: #19afea;
+    }
+
     .site-header {
       position: sticky;
       top: 0;
@@ -102,26 +117,23 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
+      gap: 24px;
+      box-sizing: border-box;
     }
 
     .navbar-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      text-decoration: none;
       flex-shrink: 0;
+      text-decoration: none;
     }
 
     .navbar-brand img {
       height: 40px;
       width: auto;
+      max-width: 170px;
       object-fit: contain;
-      transition: transform 0.25s ease;
-    }
-
-    .navbar-brand:hover img {
-      transform: scale(1.03);
+      display: block;
     }
 
     .navbar-menu {
@@ -134,40 +146,22 @@
     }
 
     .navbar-menu a {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.78rem;
-      font-weight: 700;
+      color: rgba(255, 255, 255, 0.78);
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      text-decoration: none;
-      transition: color 0.2s ease, transform 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 0;
-      position: relative;
-    }
-
-    .navbar-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #0284C7;
-      transition: width 0.25s ease;
-      border-radius: 2px;
+      padding: 6px 2px;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+      font-family: var(--font-ui);
     }
 
     .navbar-menu a:hover,
     .navbar-menu a.active-nav {
-      color: #FFFFFF;
-    }
-
-    .navbar-menu a:hover::after,
-    .navbar-menu a.active-nav::after {
-      width: 100%;
+      color: var(--azul-claro);
+      font-weight: 600;
     }
 
     .navbar-actions {
@@ -178,65 +172,85 @@
     }
 
     .btn-nav-outline {
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      color: rgba(255, 255, 255, 0.9);
+      background: transparent;
+      padding: 9px 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       text-decoration: none;
-      color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      border-radius: 8px;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
       white-space: nowrap;
+      font-family: var(--font-ui);
     }
 
     .btn-nav-outline:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.5);
-      color: #FFFFFF;
-      transform: translateY(-1px);
+      border-color: var(--azul-claro);
+      color: var(--azul-claro);
+      background: rgba(2, 132, 199, 0.08);
     }
 
     .btn-nav-primary {
+      background: var(--azul-claro);
+      color: #FFFFFF;
+      border: none;
       padding: 9px 20px;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 800;
+      font-size: 0.72rem;
+      font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       text-decoration: none;
-      color: #FFFFFF;
-      background: #0284C7;
-      border: 1px solid #0284C7;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
-      transition: all 0.2s ease;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: opacity 0.2s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
       white-space: nowrap;
+      font-family: var(--font-ui);
     }
 
     .btn-nav-primary:hover {
-      background: #0369a1;
-      border-color: #0369a1;
-      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.5);
+      opacity: 0.92;
       transform: translateY(-1px);
-      color: #FFFFFF;
     }
 
     .nav-toggle-btn {
       display: none;
       background: none;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: none;
       color: #FFFFFF;
-      font-size: 1.2rem;
-      padding: 8px 12px;
-      border-radius: 6px;
+      font-size: 1.25rem;
       cursor: pointer;
+      padding: 8px;
     }
 
     @media (max-width: 1024px) {
-      .site-header { padding: 0 20px; }
-      .navbar-menu { gap: 18px; }
+      .site-header { padding: 0 24px; }
+      .navbar-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #0B2545;
+        padding: 24px;
+        gap: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      }
+      .navbar-menu.active { display: flex; }
+      .nav-toggle-btn { display: block; }
       .btn-nav-outline { display: none; }
     }
 
@@ -354,7 +368,7 @@
   <!-- ══ CABEÇALHO PRINCIPAL SEMÂNTICO (LOGO • MENU • AÇÕES) ══ -->
   <header class="site-header" role="banner">
     <nav class="navbar-container" aria-label="Navegação Principal do Radar São José">
-      
+
       <!-- 1. Logo à Esquerda -->
       <a href="index.html" class="navbar-brand" title="Página Inicial - Radar São José">
         <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="160" height="40" loading="eager" />
@@ -365,7 +379,7 @@
         <li role="none"><a href="index.html#solucoes" role="menuitem">Soluções</a></li>
         <li role="none"><a href="index.html#planos" role="menuitem">Planos</a></li>
         <li role="none"><a href="index.html#metodologia" role="menuitem">Metodologia</a></li>
-        <li role="none"><a href="index.html#manifesto" role="menuitem">Manifesto</a></li>
+        <li role="none"><a href="index.html#manifesto" role="menuitem">Quem faz</a></li>
         <li role="none"><a href="blog.html" class="active-nav" role="menuitem" aria-current="page">Blog</a></li>
         <li role="none"><a href="index.html#faq" role="menuitem">FAQ</a></li>
       </ul>
@@ -373,7 +387,7 @@
       <!-- 3. Botões e Ações à Direita -->
       <div class="navbar-actions">
         <a href="index.html#contato" class="btn-nav-outline">Falar com especialista</a>
-        <a href="app.html" class="btn-nav-primary">Acessar soluções</a>
+        <a href="app.html" class="btn-nav-primary">Criar conta grátis</a>
         <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>

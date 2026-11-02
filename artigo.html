@@ -18,7 +18,7 @@
   <!-- Google Fonts: Montserrat + Merriweather -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- Tailwind CSS CDN -->
@@ -165,26 +165,33 @@
 
   <!-- CABEÇALHO -->
   <header class="site-header" role="banner">
-    <div class="navbar-container">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="fotos_radar/logobranco.png" alt="Radar São José" class="h-9 w-auto" />
+    <nav class="navbar-container" aria-label="Navegação Principal do Radar São José">
+
+      <!-- 1. Logo à Esquerda -->
+      <a href="index.html" class="navbar-brand" title="Página Inicial - Radar São José">
+        <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="160" height="40" loading="eager" />
       </a>
 
-      <nav class="hidden md:flex items-center gap-6 navbar-menu">
-        <a href="index.html#solucoes">Soluções</a>
-        <a href="index.html#planos">Planos</a>
-        <a href="blog.html" class="text-cyan-400">Blog do Radar</a>
-        <a href="admin-crm.html#blog" class="text-xs text-amber-300 font-bold bg-amber-950/40 px-3 py-1 rounded-md border border-amber-500/30">
-          <i class="fa-solid fa-pen-to-square mr-1"></i>Editar no CRM
-        </a>
-      </nav>
+      <!-- 2. Menu Central -->
+      <ul class="navbar-menu" id="primaryNavMenu" role="menubar">
+        <li role="none"><a href="index.html#solucoes" role="menuitem">Soluções</a></li>
+        <li role="none"><a href="index.html#planos" role="menuitem">Planos</a></li>
+        <li role="none"><a href="index.html#metodologia" role="menuitem">Metodologia</a></li>
+        <li role="none"><a href="index.html#manifesto" role="menuitem">Quem faz</a></li>
+        <li role="none"><a href="blog.html" class="active-nav" role="menuitem" aria-current="page">Blog</a></li>
+        <li role="none"><a href="index.html#faq" role="menuitem">FAQ</a></li>
+      </ul>
 
-      <div class="flex items-center gap-3">
-        <a href="blog.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm">
-          <i class="fa-solid fa-arrow-left text-[11px]"></i> Voltar ao Portal
-        </a>
+      <!-- 3. Botões e Ações à Direita -->
+      <div class="navbar-actions">
+        <a href="index.html#contato" class="btn-nav-outline">Falar com especialista</a>
+        <a href="app.html" class="btn-nav-primary">Criar conta grátis</a>
+        <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </div>
-    </div>
+
+    </nav>
   </header>
 
   <!-- LOADING / ERROR SPINNER -->
