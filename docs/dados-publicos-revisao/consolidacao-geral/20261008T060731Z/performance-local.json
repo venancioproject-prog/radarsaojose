@@ -1,0 +1,30 @@
+[
+  {
+    "file": "data/radar_hub/radar_hub_package.json",
+    "disk_bytes": 35842381,
+    "gzip6_bytes_simulated": 1630014,
+    "gzip_seconds": 0.7196972999954596,
+    "python_parse_seconds": [
+      0.5609751000010874,
+      0.37514800000644755,
+      0.3575940000009723
+    ],
+    "network_transfer": "NÃO MEDIDO; gzip local não comprova compressão HTTP"
+  },
+  {
+    "file": "radar_hub_controller.js",
+    "disk_bytes": 22545803,
+    "gzip6_bytes_simulated": 1405647,
+    "gzip_seconds": 0.41868419999809703,
+    "python_parse_seconds": [],
+    "network_transfer": "NÃO MEDIDO; gzip local não comprova compressão HTTP"
+  },
+  {
+    "file": "app.html",
+    "disk_bytes": 977226,
+    "gzip6_bytes_simulated": 152260,
+    "gzip_seconds": 0.029676699996343814,
+    "python_parse_seconds": [],
+    "network_transfer": "NÃO MEDIDO; gzip local não comprova compressão HTTP"
+  }
+]

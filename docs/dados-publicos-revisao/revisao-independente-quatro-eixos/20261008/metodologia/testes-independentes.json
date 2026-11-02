@@ -1,0 +1,179 @@
+{
+  "checks": [
+    {
+      "check": "hash inep-sinopses.html",
+      "pass": true
+    },
+    {
+      "check": "HTTP inep-sinopses.html",
+      "pass": true
+    },
+    {
+      "check": "hash inep-metas.html",
+      "pass": true
+    },
+    {
+      "check": "HTTP inep-metas.html",
+      "pass": true
+    },
+    {
+      "check": "hash ibge-escolarizacao.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP ibge-escolarizacao.json",
+      "pass": true
+    },
+    {
+      "check": "hash ssp-metodologia.pdf",
+      "pass": true
+    },
+    {
+      "check": "HTTP ssp-metodologia.pdf",
+      "pass": true
+    },
+    {
+      "check": "hash ssp2024.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP ssp2024.json",
+      "pass": true
+    },
+    {
+      "check": "hash ssp2025.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP ssp2025.json",
+      "pass": true
+    },
+    {
+      "check": "hash ssp-produtividade2024.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP ssp-produtividade2024.json",
+      "pass": true
+    },
+    {
+      "check": "hash cnes202412.html",
+      "pass": true
+    },
+    {
+      "check": "HTTP cnes202412.html",
+      "pass": true
+    },
+    {
+      "check": "hash sms2025.pdf",
+      "pass": true
+    },
+    {
+      "check": "HTTP sms2025.pdf",
+      "pass": true
+    },
+    {
+      "check": "hash rag2025.pdf",
+      "pass": true
+    },
+    {
+      "check": "HTTP rag2025.pdf",
+      "pass": true
+    },
+    {
+      "check": "hash sidra9923.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP sidra9923.json",
+      "pass": true
+    },
+    {
+      "check": "hash sidra9923-metadados.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP sidra9923-metadados.json",
+      "pass": true
+    },
+    {
+      "check": "hash sidra6579.json",
+      "pass": true
+    },
+    {
+      "check": "HTTP sidra6579.json",
+      "pass": true
+    },
+    {
+      "check": "hash estimativas2026.xlsx",
+      "pass": true
+    },
+    {
+      "check": "HTTP estimativas2026.xlsx",
+      "pass": true
+    },
+    {
+      "check": "ssp2024.json id37: total e soma",
+      "pass": true
+    },
+    {
+      "check": "ssp2024.json id22: total e soma",
+      "pass": true
+    },
+    {
+      "check": "ssp-produtividade2024.json id88: total e soma",
+      "pass": true
+    },
+    {
+      "check": "ssp2024.json id38: total e soma",
+      "pass": true
+    },
+    {
+      "check": "ssp2025.json id38: total e soma",
+      "pass": true
+    },
+    {
+      "check": "ssp2025.json id41: total e soma",
+      "pass": true
+    },
+    {
+      "check": "roubo outros inclui carga/banco",
+      "pass": true
+    },
+    {
+      "check": "estimativa 2024",
+      "pass": true
+    },
+    {
+      "check": "estimativa 2026",
+      "pass": true
+    },
+    {
+      "check": "particao urbano rural",
+      "pass": true
+    },
+    {
+      "check": "taxa urbana",
+      "pass": true
+    },
+    {
+      "check": "XLSX 2026 municipio e populacao",
+      "pass": true
+    }
+  ],
+  "xlsx_rows": [
+    [
+      "municípios",
+      [
+        "SP",
+        35,
+        49904,
+        "São José dos Campos",
+        729153,
+        null,
+        null
+      ]
+    ]
+  ],
+  "count": 40
+}

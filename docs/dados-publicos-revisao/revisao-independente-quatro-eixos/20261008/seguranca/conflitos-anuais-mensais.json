@@ -1,0 +1,44 @@
+[
+  {
+    "year": 2001,
+    "variable": "homicidio",
+    "annual": 231,
+    "monthly_sum": 229,
+    "decision": "CONFLITO_FONTE_PRIMARIA; não escolher por recência"
+  },
+  {
+    "year": 2001,
+    "variable": "roubo",
+    "annual": 2935,
+    "monthly_sum": 2910,
+    "decision": "CONFLITO_FONTE_PRIMARIA; não escolher por recência"
+  },
+  {
+    "year": 2001,
+    "variable": "furto",
+    "annual": 4606,
+    "monthly_sum": 4528,
+    "decision": "CONFLITO_FONTE_PRIMARIA; não escolher por recência"
+  },
+  {
+    "year": 2001,
+    "variable": "frv",
+    "annual": 3112,
+    "monthly_sum": 3079,
+    "decision": "CONFLITO_FONTE_PRIMARIA"
+  },
+  {
+    "year": 2015,
+    "idDelito": 132,
+    "native_total": 13,
+    "published": 0,
+    "decision": "REJEITAR_SEM_COMPETENCIA_PUBLICADA"
+  },
+  {
+    "year": 2015,
+    "idDelito": 133,
+    "native_total": 316,
+    "published": 0,
+    "decision": "REJEITAR_SEM_COMPETENCIA_PUBLICADA"
+  }
+]

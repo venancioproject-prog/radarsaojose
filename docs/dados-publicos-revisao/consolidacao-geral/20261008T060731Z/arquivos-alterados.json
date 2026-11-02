@@ -1,0 +1,314 @@
+[
+  {
+    "path": ".gitignore",
+    "before_sha256": "b35063ad259531b8cfc990476b135a440a603ec35bea6b1f536ee622084af67e",
+    "after_sha256": "33204211dfda94ee4ef81e58fc07e806a80c65ad97bfd2ea0d8f046d8e3a9b3d",
+    "bytes": 5943,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "app.html",
+    "before_sha256": "a12599a755cf04cfa18fcfefdf122a5ea7fac4bd78655fcab0f053d8f2c89a64",
+    "after_sha256": "5ff117f1c6d446bfe08e0d7aac6cf74d37e34f1b54b70ac3857d8591afcc5334",
+    "bytes": 978450,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/consolidacao_evidence_2026-10-08.json",
+    "before_sha256": null,
+    "after_sha256": "01a15335d1ab617505a9064bbd8411cd017c298f8fdf3d2b583b0f69f9e8aef5",
+    "bytes": 1265597,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/consolidacao_status.json",
+    "before_sha256": null,
+    "after_sha256": "89a805b1f66181ffe77ee0ea2092cb37d4db81fcc0bc06f41a950ea31c1e75f1",
+    "bytes": 517,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/mobilidade_reconciliation_20261008.json",
+    "before_sha256": null,
+    "after_sha256": "3698412c1cf085c861a97ab4284954b0d288155efd57436ab9be7424e67930eb",
+    "bytes": 29549,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/radar_hub_consistency.json",
+    "before_sha256": "df41b82e992ec6bcc33a573a68eb8b8a459c57616c2359bd81ced895f1be7b02",
+    "after_sha256": "a5c165d273568081e4f8febbcbe9be0f88898a1fec944c8edfd326a8331cfbf9",
+    "bytes": 33087,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/radar_hub_package.json",
+    "before_sha256": "ce6ff8e69d9ce93a3d38d1f736b8081cc37097a95b9d320b508283a2363fe066",
+    "after_sha256": "6af7bfc9c40607aa9beeb83b58acf0e47d2c8976eac9dd6ed6587089c1c8b99e",
+    "bytes": 22440492,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/saude_documental_modelo_20261008/manifest.json",
+    "before_sha256": null,
+    "after_sha256": "a40e23d36defba95134a05f048868c688128a7bad605da8ae73def850e636aed",
+    "bytes": 433,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/saude_documental_modelo_20261008/sjc_metadata_registry.json.before",
+    "before_sha256": null,
+    "after_sha256": "569ba29c83abc43f2fa5566b3f75f738fbe2fa20280c9bdca393e540086a9362",
+    "bytes": 20764,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/saude_documental_modelo_20261008/sjc_open_data_ground_truth.json.before",
+    "before_sha256": null,
+    "after_sha256": "d29f8e86a65812ed31c08abaa39681f73fc2c1bd1b0a3c6a163ca7316fc6e933",
+    "bytes": 38018,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/saude_documental_rag2025_layout_20261008.txt",
+    "before_sha256": null,
+    "after_sha256": "11f49ca197a281c6ba5a10861d78048c4fb2e6acb6d3c133784cebe90a1c134f",
+    "bytes": 281088,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/sjc_metadata_registry.json",
+    "before_sha256": "3aa030805e6f02b053c8055e7a712f27f3fb619a5819c91fb4cccd21bf794e60",
+    "after_sha256": "aa7ea20e4776472ed3e1cc92a58f8234b401293a755398a75662906d513ad32b",
+    "bytes": 457354,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/sjc_open_data_ground_truth.json",
+    "before_sha256": "5fd0940aa1bc86e9491d16d7bbe6b484a9621803c8f9ac5f065e1e585c560913",
+    "after_sha256": "214cee161de1c62b8e2e88fd8960a165097d103afa5624919dcc92d2f69f9079",
+    "bytes": 33971752,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/sjc_regioes_geo.json",
+    "before_sha256": "39d19f47071f540ae7aacfef4ea4f1f67dd37e54364a43ad7f01815e7c508cd6",
+    "after_sha256": "aea57119924e6ef2488799184eceb8852b87a387bb5f87e362a686b1d877dac2",
+    "bytes": 1364025,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/sjc_setores_geo_bundle.js",
+    "before_sha256": "ca68be176f10a7bc3d349369a057da8ebaa6cefc31da9e3df13cc07ae07348d6",
+    "after_sha256": "56169e2af6a3d863a42bdfccc8a70a24d437f8d452e7284bf355f3e8978c8c09",
+    "bytes": 759619,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "data/radar_hub/sjc_setores_socioeconomicos_geo.json",
+    "before_sha256": "292c7661e483aa1b0265f7f138791b121fefb332842cdff0f66847a3cc822957",
+    "after_sha256": "21589cd1b2886cc316dbf1b58025a2c0e466fe4a095b3e1510ddc1db60db45d4",
+    "bytes": 1293929,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "radar_hub_controller.js",
+    "before_sha256": "fb0bf94aa1117c51c0f01ed7c92db312778560d411cc6a71b578e502408964ec",
+    "after_sha256": "e7027478f98e8dd25e82d2f1e4d246bd0f4465f957a4579f806147a2b56f7964",
+    "bytes": 22676945,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/build_radar_hub_package.py",
+    "before_sha256": "757dbb35c8bfb560ed6c78cec97e66206576878db2c6aa69b6f8017305a97613",
+    "after_sha256": "81bc2e019fc86c54a159d815229c036b96d76f0dd60ed333d5b2adf3471f7907",
+    "bytes": 3301,
+    "kind": "alterado nesta operação",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_browser_test.py",
+    "before_sha256": null,
+    "after_sha256": "9675e92fe4bae1da4b18e4c8023994377782dd855343de16bbcc1050da0b6343",
+    "bytes": 7705,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_censo_extract.py",
+    "before_sha256": null,
+    "after_sha256": "afd9afac99d3b3d4c0c30d671c0f1a1bb46867ae1b3988c393d0b72eb45ed395",
+    "bytes": 1528,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_diagnostico.py",
+    "before_sha256": null,
+    "after_sha256": "f83550d5ddf7ff8f0ad0d1fc3b2f896dceb6adeee7878914a10673fd6fee5799",
+    "bytes": 4006,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_documentar.py",
+    "before_sha256": null,
+    "after_sha256": "3c5df319052cc3cdc4edbe927433c135420c97052bb66ed233db585bc462e3f1",
+    "bytes": 44376,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_educacao_extract.py",
+    "before_sha256": null,
+    "after_sha256": "8aacc18608876cdbf353553c8d21e13e12d1ae7f8141b3653b239bcb2d0dd51d",
+    "bytes": 3067,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_entrega_tests.py",
+    "before_sha256": null,
+    "after_sha256": "62de5c3fca78ec3057fedf9f407e035d3a1d079a33127370255119f972ff2e4d",
+    "bytes": 2942,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_evidence_overlay.py",
+    "before_sha256": null,
+    "after_sha256": "6786d4f09d6d493c670a674b531feea6b79af22d83c4d9d21c083926398d01bc",
+    "bytes": 2719,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_external_tests.py",
+    "before_sha256": null,
+    "after_sha256": "ca42840800a22290fed4522fc69dd02eccfc7e6843a71a85910f3e9280d51e7c",
+    "bytes": 2710,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_fontes.py",
+    "before_sha256": null,
+    "after_sha256": "ceb278c2a74ad84c32d5b226a92c15468cf8937701106e2b90a46c4c2517b680",
+    "bytes": 1833,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_fontes_tests.py",
+    "before_sha256": null,
+    "after_sha256": "1277f5fc5fd81ac5e12ea8cf6db2b853e00316e3d2c38825868d00263e853169",
+    "bytes": 4946,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_integridade.py",
+    "before_sha256": null,
+    "after_sha256": "1b2c21515c70a836758bb460255f08a40acfcced9ea0ffcd835842068c76f4a3",
+    "bytes": 4792,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_preservar_saude.py",
+    "before_sha256": null,
+    "after_sha256": "225bbb1569170ec28856deff2a9c80e930a5a49844a07ce8b2be101bfd434c38",
+    "bytes": 2640,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_quarentena.py",
+    "before_sha256": null,
+    "after_sha256": "53c4010b1d0d6b6e334d8ab4b5de1962660f419d33aee3674786b9a455004dc3",
+    "bytes": 4776,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_reconciliar.py",
+    "before_sha256": null,
+    "after_sha256": "c3decdf76600a23500eb7c7ead60451e1abec66cc9e162dcba4364f3b8dec25d",
+    "bytes": 16876,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_requirements.txt",
+    "before_sha256": null,
+    "after_sha256": "2511e60a839b7c1b722b9dcfef3e88247f4a286b9dbee88c196f55a433c19ac3",
+    "bytes": 112,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_runtime_patch.py",
+    "before_sha256": null,
+    "after_sha256": "268e35ac66e0840ae4256b46827eaf6584538c946b0485a4b5b165cc476f7ac2",
+    "bytes": 11015,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_runtime_tests.py",
+    "before_sha256": null,
+    "after_sha256": "64c2e64f4ed29b547f4d13ebc478493f2d06a662f05ed01117a7bbc806011bf3",
+    "bytes": 1446,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_sidra.py",
+    "before_sha256": null,
+    "after_sha256": "445e2784d3f3c1f4fd05d1d46c4127f8952c5887ed2a38636202e4253439e6a5",
+    "bytes": 1932,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_test_guard.cjs",
+    "before_sha256": null,
+    "after_sha256": "15e2c216c0134550daa35113d2f350d33d08f6cc5a238fddab24658eb5f92a60",
+    "bytes": 812,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/consolidacao_versionar.py",
+    "before_sha256": null,
+    "after_sha256": "9209d99d1113a6ff094a1446b569f62398031af1374e5eb037f3ad60fd705c0e",
+    "bytes": 4748,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  },
+  {
+    "path": "scripts/saude_documental_20261002.py",
+    "before_sha256": null,
+    "after_sha256": "945f9f3ae863d1ced8c74e8eaa4d1d1f7746dd1d879d0353db86a03f34083894",
+    "bytes": 14590,
+    "kind": "novo",
+    "note": "Mudanças prévias ao snapshot permanecem fora desta lista; status inicial preservado."
+  }
+]

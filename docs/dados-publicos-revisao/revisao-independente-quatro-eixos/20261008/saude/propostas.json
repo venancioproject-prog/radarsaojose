@@ -1,0 +1,425 @@
+[
+  {
+    "indicator_id": "saude_mortalidade_infantil",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-infantil-sjc-2010-2025.json",
+      "trecho_bruto": "SMS-SJC Relatorio de Gestao Quadri 3/2025 Pag. 26: Taxa de Mortalidade Infantil 2024 = 8,20 obitos/mil (66 obitos e 8.048 nascidos vivos); preliminar 2025 = 7,65 (61 obitos e 7.974 nascidos vivos); IBGE Cidades = 7,77"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "trecho_bruto": "Valor conferido: 8.2; referência: 2024; 2025: 7,65; página/seção: 26.",
+      "source_system": "SMS-SJC; SIM e SINASC citados na pactuação interfederativa, Prestação de Contas Q3/2025 p.26",
+      "audit_date": "2026-10-08",
+      "name": "Taxa de mortalidade infantil publicada pela SMS",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Anual; separar resultados anuais dos quadrimestrais",
+      "base_year": 2024
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_leitos_hospitalares_total",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC (Municipio 3549904): 1.894 leitos hospitalares totais cadastrados (846 SUS e 1.048 Privado/Nao-SUS)"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_leitos_sus",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 846 leitos SUS (698 clinicos/cirurgicos + 102 UTI adulto + 18 UTI ped + 28 UTI neo = 846)"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_leitos_nao_sus",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 1.048 leitos Nao-SUS (864 clinicos/cirurgicos + 138 UTI adulto + 16 UTI ped + 30 UTI neo = 1.048)"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_taxa_leitos_mil_hab",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 1.894 leitos / 724.756 hab (IBGE DOU 2024) * 1.000 = 2,61 leitos por mil habitantes"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_leitos_uti_adulto",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 240 leitos de UTI Adulto (102 SUS e 138 Nao-SUS)"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_leitos_uti_pediatrica",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 34 leitos UTI Pediatrica (18 SUS, 16 Nao-SUS) e 58 leitos UTI Neonatal (28 SUS, 30 Nao-SUS), totalizando 92 leitos"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_estabelecimentos_total",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-estabelecimentos-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 825 estabelecimentos de saude cadastrados no total (40 UBSs CNES, 5 UPAs, 11 hospitais, 6 CAPS)"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "CNES histórico municipal; escopo suspenso",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_cobertura_atencao_basica",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json",
+      "trecho_bruto": "e-Gestor AB / SMS-SJC 2024: 83,5% de cobertura populacional da atencao basica com 142 equipes de Saude da Familia e 1.418.520 consultas realizadas"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "trecho_bruto": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24.",
+      "source_system": "SMS-SJC/e-Gestor MS; indicadores ICSAP/APS, Prestação de Contas Q3/2025 p.24",
+      "audit_date": "2026-10-08",
+      "name": "Cobertura populacional estimada da Atenção Primária à Saúde (APS)",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Resultado anual publicado; 2024 usa última referência MS abril/2024",
+      "base_year": 2024
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_nascidos_vivos_sinasc",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sinasc-nascidos-vivos-parto-sjc-2010-2024.json",
+      "trecho_bruto": "SINASC 2024 SJC: 7.463 nascidos vivos de maes residentes (4.660 cesareos e 2.801 vaginais); distribuicao por 9 faixas etarias maternas"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "trecho_bruto": "Valor conferido: 7463; referência: 2024; página/seção: 6.",
+      "source_system": "MS/SVS/DASIS/SINASC; RAG SMS-SJC 2025 p.6, consulta13/05/2026",
+      "audit_date": "2026-10-08",
+      "name": "Nascidos vivos por residência da mãe (SINASC)",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Anual; ano nascimento e residência da mãe",
+      "base_year": 2024
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_cobertura_vacinal_bcg",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json",
+      "trecho_bruto": "PNI / RNDS SJC 2024: Cobertura vacinal BCG em menores de 1 ano = 60,93% (meta PNI: 90,0%); preliminar 2025 = 91,67%"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "trecho_bruto": "Valor conferido: 60.93; referência: 2024; parcial 2025: 91,67%; página/seção: balanço municipal.",
+      "source_system": "SMS-SJC; Retrospectiva de Saúde23/12/2025, parágrafo BCG",
+      "audit_date": "2026-10-08",
+      "name": "Cobertura vacinal BCG publicada no balanço municipal",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos",
+      "frequency": "Anual2024; 2025 parcial na publicação23/12/2025",
+      "base_year": 2024
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_dengue_sinan",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sinan-dengue-casos-sjc-2010-2024.json",
+      "trecho_bruto": "SINAN / SMS-SJC 2024: 98.219 casos confirmados de dengue no total de 2024 (megaepidemia); 98.163 na SE 1-50 parcial; media historica 2010-2023 = 1.876"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "trecho_bruto": "Valor conferido: 98163; referência: 2024, SE 1–50 (parcial); página/seção: balanço municipal.",
+      "source_system": "SMS-SJC; SINAN citado na Retrospectiva de Saúde23/12/2025",
+      "audit_date": "2026-10-08",
+      "name": "Casos confirmados de dengue — balanço SMS SE1–50/2024",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Parcial; semanas epidemiológicas1–50",
+      "base_year": "2024, SE1–50"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_internacoes_sih",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sih-internacoes-hospitalares-sjc-2024.json",
+      "trecho_bruto": "SIH/SUS 2024 SJC: 54.709 internacoes totais de residentes aprovadas; Top 1 aparelho circulatorio com 7.914 AIHs"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "trecho_bruto": "Valor conferido: 38738; referência: 2024; página/seção: 6–7.",
+      "source_system": "MS/SIH/SUS; RAG SMS-SJC2025 pp.6–7, consulta13/05/2026",
+      "audit_date": "2026-10-08",
+      "name": "Internações SUS de residentes (SIH/SUS)",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Anual; competência SIH, residência do paciente",
+      "base_year": 2024
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_atencao_basica_cnes_sia",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json",
+      "trecho_bruto": "CNES / e-Gestor / SMS-SJC 2024: 83,5% de cobertura APS, 40 UBSs CNES (45 rede municipal), 142 equipes de Saude da Familia e 1.418.520 consultas"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "trecho_bruto": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24.",
+      "source_system": "SMS-SJC/e-Gestor MS; indicadores ICSAP/APS, Prestação de Contas Q3/2025 p.24",
+      "audit_date": "2026-10-08",
+      "name": "Cobertura populacional estimada da Atenção Primária à Saúde (APS)",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Resultado anual publicado; 2024 usa última referência MS abril/2024",
+      "base_year": 2024
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_procedimentos_sia_sih",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sia-sih-procedimentos-status-suspensao.json",
+      "trecho_bruto": "DataSUS SIA/SIH-SUS: Indicador temporariamente suspenso para revisao metodologica dos denominadores de alta complexidade e producao ambulatorial municipal"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "SMS-SJC; fonte primária citada na evidência",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_causas_mortalidade",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-geral-cid10-sjc-2023-2024.json",
+      "trecho_bruto": "SIM 2024 SJC: 5.028 obitos de residentes categorizados por capitulos CID-10 com fechamento em 100,0% (Aparelho Circulatorio 27%, Neoplasias 21%, Respiratorio 13%)"
+    },
+    "after": {
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "trecho_bruto": "Valor conferido: 4677; referência: 2023; 2024: 5.028; página/seção: 7.",
+      "source_system": "MS/SVS/CGIAE/SIM; RAG SMS-SJC2025 p.7, consulta13/05/2026",
+      "audit_date": "2026-10-08",
+      "name": "Óbitos de residentes por capítulos CID-10 (SIM)",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos; Ministério da Saúde (sistema citado pelo documento)",
+      "frequency": "Anual; ano do óbito e residência do falecido",
+      "base_year": 2023
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_cobertura_vacinal",
+    "action": "ARCHIVE_LEGACY_METADATA_AND_REBIND",
+    "before": {
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json",
+      "trecho_bruto": "PNI / RNDS SJC: Cobertura vacinal multianual mapeada para 7 imunobiologicos prioritarios em 2024 e 2025 com discriminacao de faixas etarias e metas oficiais"
+    },
+    "after": {
+      "raw_file": null,
+      "trecho_bruto": null,
+      "source_system": "SMS-SJC; fonte primária citada na evidência",
+      "audit_date": "2026-10-08"
+    },
+    "promotion": false
+  },
+  {
+    "indicator_id": "saude_internacoes_sih",
+    "action": "METADATA",
+    "before": {
+      "unit": "internacoes (AIHs)"
+    },
+    "after": {
+      "unit": "internações SUS de residentes",
+      "frequency": "Anual (ano de competência do SIH)",
+      "source_system": "SIH/SUS; Morbidade Hospitalar por residência, reproduzida no RAG 2025"
+    },
+    "reason": "AIHs totais incluem prorrogações e não equivalem à medida internações."
+  },
+  {
+    "indicator_id": "saude_atencao_basica_cnes_sia",
+    "action": "METADATA",
+    "before": {
+      "name": "Atenção Primária à Saúde e Cobertura ESF"
+    },
+    "after": {
+      "name": "Cobertura populacional estimada da Atenção Primária à Saúde (APS)"
+    },
+    "reason": "61,63 é APS; não cobertura ESF isolada."
+  },
+  {
+    "action": "EXPAND_GT_SERIES_AFTER_INDEPENDENT_QA",
+    "fields": {
+      "nascidos_vivos_sinasc.serie_nascidos_vivos": "SINASC2015–2024",
+      "internacoes_sih.serie_historica": "SIH2015–2025",
+      "sim_residentes_serie": "SIM2015–2024"
+    },
+    "evidence": "historicos-rag-proposta.json",
+    "all_original_versions": "historicos-rag-todas-edicoes.json",
+    "revisions": "quebras-revisoes-rag.json"
+  },
+  {
+    "action": "ADD_DISTINCT_CVE_SERIES_AFTER_INDEPENDENT_QA",
+    "field": "dengue_sinan.serie_cve_residencia",
+    "evidence": "dengue-cve-extracao.json",
+    "reason": "CVE2019–2025 por residência. Não substituir comparativos SMS SE1–50 nem atribuir diferenças exclusivamente às semanas finais."
+  },
+  {
+    "indicator_id": "saude_mortalidade_infantil",
+    "action": "UPDATE_EXISTING_CONFIRMED_PERIOD_AFTER_QA",
+    "before": 8.2,
+    "after": 7.65,
+    "base_year": 2025,
+    "page": 26,
+    "primary": {
+      "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/q2025.pdf",
+      "accessed_at": "2026-10-08T07:51:40.309909+00:00",
+      "http_status": "200",
+      "exit_code": 0,
+      "error": "",
+      "bytes": 3011984,
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6"
+    },
+    "reason": "Competência mais recente do mesmo indicador e universo, publicada explicitamente. Não é promoção de suspenso; manter edição e limitações (taxas publicadas não recalculadas)."
+  },
+  {
+    "indicator_id": "saude_cobertura_atencao_basica",
+    "action": "UPDATE_EXISTING_CONFIRMED_PERIOD_AFTER_QA",
+    "before": 61.63,
+    "after": 57.95,
+    "base_year": 2025,
+    "page": 24,
+    "primary": {
+      "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/q2025.pdf",
+      "accessed_at": "2026-10-08T07:51:40.309909+00:00",
+      "http_status": "200",
+      "exit_code": 0,
+      "error": "",
+      "bytes": 3011984,
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6"
+    },
+    "reason": "Competência mais recente do mesmo indicador e universo, publicada explicitamente. Não é promoção de suspenso; manter edição e limitações (taxas publicadas não recalculadas)."
+  },
+  {
+    "indicator_id": "saude_atencao_basica_cnes_sia",
+    "action": "UPDATE_EXISTING_CONFIRMED_PERIOD_AFTER_QA",
+    "before": 61.63,
+    "after": 57.95,
+    "base_year": 2025,
+    "page": 24,
+    "primary": {
+      "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/q2025.pdf",
+      "accessed_at": "2026-10-08T07:51:40.309909+00:00",
+      "http_status": "200",
+      "exit_code": 0,
+      "error": "",
+      "bytes": 3011984,
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6"
+    },
+    "reason": "Competência mais recente do mesmo indicador e universo, publicada explicitamente. Não é promoção de suspenso; manter edição e limitações (taxas publicadas não recalculadas)."
+  },
+  {
+    "indicator_id": "saude_internacoes_sih",
+    "action": "UPDATE_EXISTING_CONFIRMED_PERIOD_AFTER_QA",
+    "before": 38738,
+    "after": 41846,
+    "base_year": 2025,
+    "page": "6–7",
+    "primary": {
+      "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "accessed_at": "2026-10-08T07:51:42.140067+00:00",
+      "http_status": "200",
+      "exit_code": 0,
+      "error": "",
+      "bytes": 467239,
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20"
+    },
+    "reason": "Competência mais recente do mesmo indicador e universo, publicada explicitamente. Não é promoção de suspenso; manter edição e limitações (taxas publicadas não recalculadas)."
+  },
+  {
+    "indicator_id": "saude_causas_mortalidade",
+    "action": "UPDATE_EXISTING_CONFIRMED_PERIOD_AFTER_QA",
+    "before": 4677,
+    "after": 5028,
+    "base_year": 2024,
+    "page": 7,
+    "primary": {
+      "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "accessed_at": "2026-10-08T07:51:42.140067+00:00",
+      "http_status": "200",
+      "exit_code": 0,
+      "error": "",
+      "bytes": 467239,
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20"
+    },
+    "reason": "Competência mais recente do mesmo indicador e universo, publicada explicitamente. Não é promoção de suspenso; manter edição e limitações (taxas publicadas não recalculadas)."
+  }
+]

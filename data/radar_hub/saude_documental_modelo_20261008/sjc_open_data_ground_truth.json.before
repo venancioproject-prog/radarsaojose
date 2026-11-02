@@ -1,0 +1,1157 @@
+{
+  "role": "Modelo de estrutura legado, não dado ativo",
+  "eixos": {
+    "saude": {
+      "mortalidade_infantil": {
+        "taxa_oficial_sms_2024": 8.2,
+        "obitos_2024": 66,
+        "nascidos_vivos_2024": 8048,
+        "taxa_oficial_sms_2025_preliminar": 7.65,
+        "obitos_2025": 61,
+        "nascidos_vivos_2025": 7974,
+        "taxa_ibge_cidades_2025": 7.77,
+        "unidade": "óbitos por mil nascidos vivos",
+        "definicao_metrica": "Taxa de Mortalidade Infantil (TMI) = (Óbitos de menores de 1 ano de mães residentes ÷ Nascidos vivos de mães residentes) × 1.000",
+        "meta_ods_3_2_neonatal": 12.0,
+        "meta_ods_3_2_menores_5_anos": 25.0,
+        "divergencia_oficial_nota": "O IBGE Cidades divulga 7,77 óbitos/mil para 2025, enquanto o Relatório de Gestão da Secretaria de Saúde de SJC (Quadri 3/2025) registra 8,20 para 2024 e 7,65 para 2025 (preliminar). A variação reflete a defasagem temporal entre os bancos diretos da vigilância municipal e a consolidação do SIM/SINASC no Ministério da Saúde.",
+        "fonte_nome": "SMS-SJC (Relatório de Gestão 2025) / IBGE Cidades / Ministério da Saúde (SIM/SINASC)",
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "data_consulta": "2026-09-28"
+      },
+      "mortalidade_infantil_serie": [
+        {
+          "ano": 2010,
+          "taxa": 10.42,
+          "taxa_por_mil_nascidos": 10.42,
+          "obitos_menores_1_ano": 89,
+          "nascidos_vivos": 8541,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2012,
+          "taxa": 9.85,
+          "taxa_por_mil_nascidos": 9.85,
+          "obitos_menores_1_ano": 84,
+          "nascidos_vivos": 8528,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2014,
+          "taxa": 9.4,
+          "taxa_por_mil_nascidos": 9.4,
+          "obitos_menores_1_ano": 81,
+          "nascidos_vivos": 8617,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2016,
+          "taxa": 9.15,
+          "taxa_por_mil_nascidos": 9.15,
+          "obitos_menores_1_ano": 78,
+          "nascidos_vivos": 8525,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2018,
+          "taxa": 8.92,
+          "taxa_por_mil_nascidos": 8.92,
+          "obitos_menores_1_ano": 76,
+          "nascidos_vivos": 8520,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2019,
+          "taxa": 8.7,
+          "taxa_por_mil_nascidos": 8.7,
+          "obitos_menores_1_ano": 74,
+          "nascidos_vivos": 8506,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2020,
+          "taxa": 8.35,
+          "taxa_por_mil_nascidos": 8.35,
+          "obitos_menores_1_ano": 68,
+          "nascidos_vivos": 8144,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2021,
+          "taxa": 8.9,
+          "taxa_por_mil_nascidos": 8.9,
+          "obitos_menores_1_ano": 71,
+          "nascidos_vivos": 7978,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2022,
+          "taxa": 8.12,
+          "taxa_por_mil_nascidos": 8.12,
+          "obitos_menores_1_ano": 64,
+          "nascidos_vivos": 7882,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2023,
+          "taxa": 8.41,
+          "taxa_por_mil_nascidos": 8.41,
+          "obitos_menores_1_ano": 67,
+          "nascidos_vivos": 7962,
+          "status": "Consolidado SIM/SINASC"
+        },
+        {
+          "ano": 2024,
+          "taxa": 8.2,
+          "taxa_por_mil_nascidos": 8.2,
+          "obitos_menores_1_ano": 66,
+          "nascidos_vivos": 8048,
+          "status": "Consolidado SMS-SJC / SIM"
+        },
+        {
+          "ano": 2025,
+          "taxa": 7.65,
+          "taxa_por_mil_nascidos": 7.65,
+          "obitos_menores_1_ano": 61,
+          "nascidos_vivos": 7974,
+          "status": "Preliminar SMS-SJC (7,77 no IBGE Cidades)"
+        }
+      ],
+      "leitos_hospitalares_cnes": {
+        "competencia": "12/2024 (Consolidado CNES/DataSUS)",
+        "ano": 2024,
+        "total_leitos": 1894,
+        "leitos_sus": 846,
+        "leitos_nao_sus": 1048,
+        "taxa_leitos_por_mil_hab": 2.61,
+        "leitos_clinicos_cirurgicos": {
+          "sus": 698,
+          "nao_sus": 864,
+          "total": 1562
+        },
+        "leitos_uti_adulto": {
+          "sus": 102,
+          "nao_sus": 138,
+          "total": 240
+        },
+        "leitos_uti_pediatrica": {
+          "sus": 18,
+          "nao_sus": 16,
+          "total": 34
+        },
+        "leitos_uti_neonatal": {
+          "sus": 28,
+          "nao_sus": 30,
+          "total": 58
+        },
+        "leitos_uti_total": {
+          "sus": 148,
+          "nao_sus": 184,
+          "total": 332
+        },
+        "nota_metodologica": "Leitos hospitalares cadastrados/existentes no CNES (capacidade instalada cadastrada). Total = 1.562 Clínicos/Cirúrgicos + 332 UTI = 1.894 leitos. SUS = 698 + 148 = 846 leitos; Não-SUS = 864 + 184 = 1.048 leitos.",
+        "fonte_nome": "Ministério da Saúde / DataSUS - CNES (Cadastro Nacional de Estabelecimentos de Saúde)",
+        "fonte_url": "https://dadosabertos.saude.gov.br/dataset/hospitais-e-leitos",
+        "data_consulta": "2026-09-28"
+      },
+      "leitos_serie_historica": [
+        {
+          "ano": 2019,
+          "total": 1780,
+          "sus": 790,
+          "nao_sus": 990,
+          "uti_total": 290,
+          "competencia": "12/2019"
+        },
+        {
+          "ano": 2020,
+          "total": 1890,
+          "sus": 860,
+          "nao_sus": 1030,
+          "uti_total": 350,
+          "competencia": "12/2020"
+        },
+        {
+          "ano": 2021,
+          "total": 1940,
+          "sus": 910,
+          "nao_sus": 1030,
+          "uti_total": 360,
+          "competencia": "12/2021"
+        },
+        {
+          "ano": 2022,
+          "total": 1820,
+          "sus": 810,
+          "nao_sus": 1010,
+          "uti_total": 315,
+          "competencia": "12/2022"
+        },
+        {
+          "ano": 2023,
+          "total": 1849,
+          "sus": 824,
+          "nao_sus": 1025,
+          "uti_total": 326,
+          "competencia": "12/2023"
+        },
+        {
+          "ano": 2024,
+          "total": 1894,
+          "sus": 846,
+          "nao_sus": 1048,
+          "uti_total": 332,
+          "competencia": "12/2024"
+        },
+        {
+          "ano": 2025,
+          "total": 1912,
+          "sus": 854,
+          "nao_sus": 1058,
+          "uti_total": 328,
+          "competencia": "12/2025"
+        },
+        {
+          "ano": 2026,
+          "total": 1928,
+          "sus": 860,
+          "nao_sus": 1068,
+          "uti_total": 324,
+          "competencia": "08/2026"
+        }
+      ],
+      "cobertura_vacinal_por_ano": {
+        "2024": [
+          {
+            "vacina": "Tríplice Viral D1 (SCR)",
+            "imunobiologico": "Tríplice Viral (Sarampo, Caxumba, Rubéola)",
+            "dose": "1ª Dose (D1)",
+            "faixa_etaria": "1 ano de idade (12 meses)",
+            "cobertura_pct": 98.5,
+            "meta_pni": 95.0,
+            "status": "Meta Atingida"
+          },
+          {
+            "vacina": "BCG (Tuberculose)",
+            "imunobiologico": "BCG",
+            "dose": "Dose Única ao nascer",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 94.2,
+            "meta_pni": 90.0,
+            "status": "Meta Atingida"
+          },
+          {
+            "vacina": "Hepatite B",
+            "imunobiologico": "Hepatite B",
+            "dose": "Dose ao nascer / 30 dias",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 92.8,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pneumocócica 10V",
+            "imunobiologico": "Pneumocócica 10-Valente",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 89.05,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Rotavírus Humano",
+            "imunobiologico": "Rotavírus Humano G1P[8]",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 86.4,
+            "meta_pni": 90.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pentavalente",
+            "imunobiologico": "Pentavalente (DTP + Hib + HepB)",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 85.9,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Poliomielite (VIP/VOP)",
+            "imunobiologico": "Poliomielite Inativada/Oral",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 85.7,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          }
+        ],
+        "2025": [
+          {
+            "vacina": "Tríplice Viral D1 (SCR)",
+            "imunobiologico": "Tríplice Viral (Sarampo, Caxumba, Rubéola)",
+            "dose": "1ª Dose (D1)",
+            "faixa_etaria": "1 ano de idade (12 meses)",
+            "cobertura_pct": 91.44,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "BCG (Tuberculose)",
+            "imunobiologico": "BCG",
+            "dose": "Dose Única ao nascer",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 90.8,
+            "meta_pni": 90.0,
+            "status": "Meta Atingida"
+          },
+          {
+            "vacina": "Hepatite B",
+            "imunobiologico": "Hepatite B",
+            "dose": "Dose ao nascer / 30 dias",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 89.5,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pneumocócica 10V",
+            "imunobiologico": "Pneumocócica 10-Valente",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 88.74,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Rotavírus Humano",
+            "imunobiologico": "Rotavírus Humano G1P[8]",
+            "dose": "2ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 84.1,
+            "meta_pni": 90.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Poliomielite (VIP/VOP)",
+            "imunobiologico": "Poliomielite Inativada/Oral",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 85.45,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          },
+          {
+            "vacina": "Pentavalente",
+            "imunobiologico": "Pentavalente (DTP + Hib + HepB)",
+            "dose": "3ª Dose",
+            "faixa_etaria": "Menores de 1 ano",
+            "cobertura_pct": 82.64,
+            "meta_pni": 95.0,
+            "status": "Abaixo da Meta"
+          }
+        ]
+      },
+      "causas_mortalidade_geral_por_ano": {
+        "2023": {
+          "ano": 2023,
+          "status": "Consolidado SIM / DataSUS",
+          "total_obitos": 4716,
+          "populacao_base": "Óbitos por Residência em São José dos Campos",
+          "categorias": [
+            {
+              "causa": "Doenças do Aparelho Circulatório",
+              "cid10": "Capítulo IX (I00-I99)",
+              "obitos": 1284,
+              "pct": 27.23,
+              "detalhes": "Infarto agudo do miocárdio, AVC, cardiopatias isquêmicas"
+            },
+            {
+              "causa": "Neoplasias (Tumores / Câncer)",
+              "cid10": "Capítulo II (C00-D48)",
+              "obitos": 996,
+              "pct": 21.12,
+              "detalhes": "Câncer de traqueia/brônquios/pulmão, mama, cólon, próstata"
+            },
+            {
+              "causa": "Doenças do Aparelho Respiratório",
+              "cid10": "Capítulo X (J00-J99)",
+              "obitos": 614,
+              "pct": 13.02,
+              "detalhes": "Pneumonias, DPOC e insuficiência respiratória"
+            },
+            {
+              "causa": "Causas Externas (Acidentes e Violência)",
+              "cid10": "Capítulo XX (V01-Y98)",
+              "obitos": 418,
+              "pct": 8.86,
+              "detalhes": "Acidentes de transporte, quedas acidentais, agressões"
+            },
+            {
+              "causa": "Doenças Endócrinas (Diabetes, etc.)",
+              "cid10": "Capítulo IV (E00-E90)",
+              "obitos": 312,
+              "pct": 6.62,
+              "detalhes": "Diabetes Mellitus e distúrbios metabólicos"
+            },
+            {
+              "causa": "Doenças do Aparelho Digestivo",
+              "cid10": "Capítulo XI (K00-K93)",
+              "obitos": 248,
+              "pct": 5.26,
+              "detalhes": "Cirrose hepática, hemorragias digestivas, pancreatites"
+            },
+            {
+              "causa": "Doenças Infecciosas e Parasitárias",
+              "cid10": "Capítulo I (A00-B99)",
+              "obitos": 198,
+              "pct": 4.2,
+              "detalhes": "Sepse, tuberculose e infecções bacterianas/virais"
+            },
+            {
+              "causa": "Demais Causas e Mal Definidas",
+              "cid10": "Capítulos V-VIII, XII-XIX",
+              "obitos": 646,
+              "pct": 13.69,
+              "detalhes": "Doenças neurológicas, renais, sintomas e causas mal definidas"
+            }
+          ]
+        },
+        "2024": {
+          "ano": 2024,
+          "status": "Preliminar SIM / SMS-SJC",
+          "total_obitos": 4820,
+          "populacao_base": "Óbitos por Residência em São José dos Campos",
+          "categorias": [
+            {
+              "causa": "Doenças do Aparelho Circulatório",
+              "cid10": "Capítulo IX (I00-I99)",
+              "obitos": 1302,
+              "pct": 27.01,
+              "detalhes": "Infarto agudo do miocárdio, AVC, cardiopatias"
+            },
+            {
+              "causa": "Neoplasias (Tumores / Câncer)",
+              "cid10": "Capítulo II (C00-D48)",
+              "obitos": 1026,
+              "pct": 21.29,
+              "detalhes": "Câncer de pulmão, mama, cólon, próstata"
+            },
+            {
+              "causa": "Doenças do Aparelho Respiratório",
+              "cid10": "Capítulo X (J00-J99)",
+              "obitos": 636,
+              "pct": 13.2,
+              "detalhes": "Pneumonias e DPOC"
+            },
+            {
+              "causa": "Causas Externas (Acidentes e Violência)",
+              "cid10": "Capítulo XX (V01-Y98)",
+              "obitos": 410,
+              "pct": 8.51,
+              "detalhes": "Acidentes de trânsito, quedas e outras causas externas"
+            },
+            {
+              "causa": "Doenças Endócrinas (Diabetes, etc.)",
+              "cid10": "Capítulo IV (E00-E90)",
+              "obitos": 324,
+              "pct": 6.72,
+              "detalhes": "Diabetes Mellitus"
+            },
+            {
+              "causa": "Doenças do Aparelho Digestivo",
+              "cid10": "Capítulo XI (K00-K93)",
+              "obitos": 252,
+              "pct": 5.23,
+              "detalhes": "Cirrose e doenças gastrointestinais"
+            },
+            {
+              "causa": "Doenças Infecciosas e Parasitárias",
+              "cid10": "Capítulo I (A00-B99)",
+              "obitos": 194,
+              "pct": 4.02,
+              "detalhes": "Sepse e infecções bacterianas/virais"
+            },
+            {
+              "causa": "Demais Causas e Mal Definidas",
+              "cid10": "Capítulos V-VIII, XII-XIX",
+              "obitos": 676,
+              "pct": 14.02,
+              "detalhes": "Doenças do sistema nervoso, geniturinário e outras"
+            }
+          ]
+        }
+      },
+      "estabelecimentos_saude_cnes": {
+        "ano": 2024,
+        "total": 528,
+        "hospitais_gerais_especializados": 12,
+        "unidades_basicas_saude_ubs_esf": 45,
+        "upas_prontos_atendimentos": 6,
+        "clinicas_ambulatorios": 348,
+        "centros_atencao_psicossocial_caps": 6,
+        "laboratorios_diagnostico": 88,
+        "farmacias_populares_dispensarios": 23,
+        "fonte_nome": "Ministério da Saúde - CNES / DataSUS",
+        "fonte_url": "http://cnes.datasus.gov.br/",
+        "data_consulta": "2026-09-28"
+      },
+      "cobertura_atencao_basica_serie": [
+        {
+          "ano": 2019,
+          "cobertura_pct": 72.4
+        },
+        {
+          "ano": 2020,
+          "cobertura_pct": 74.1
+        },
+        {
+          "ano": 2021,
+          "cobertura_pct": 75.8
+        },
+        {
+          "ano": 2022,
+          "cobertura_pct": 78.3
+        },
+        {
+          "ano": 2023,
+          "cobertura_pct": 81.2
+        },
+        {
+          "ano": 2024,
+          "cobertura_pct": 83.5
+        }
+      ],
+      "natalidade_sinasc_2023": {
+        "nascidos_vivos": 7962,
+        "partos_cesareos_pct": 59.4,
+        "partos_vaginais_pct": 40.6,
+        "prematuros_pct": 9.8,
+        "maes_adolescentes_menor_20_pct": 7.9,
+        "fonte_nome": "Ministério da Saúde - SINASC (Sistema de Nascidos Vivos)",
+        "fonte_url": "https://datasus.saude.gov.br/nascidos-vivos-desde-1994",
+        "data_consulta": "2026-09-28"
+      },
+      "fonte_nome": "Ministério da Saúde (DataSUS / CNES / SIM / SINASC) / SMS-SJC / IBGE Cidades",
+      "fonte_url": "https://datasus.saude.gov.br/",
+      "data_consulta": "2026-09-28",
+      "nascidos_vivos_sinasc": {
+        "total_2024": 7463,
+        "total_2023": 8090,
+        "parto_cesareo_2024": 4660,
+        "parto_vaginal_2024": 2801,
+        "parto_ignorado_2024": 2,
+        "pct_cesareo_2024": 62.44,
+        "pct_vaginal_2024": 37.53,
+        "serie_historica_parto": [
+          {
+            "ano": 2010,
+            "nascidos_vivos": 9637,
+            "parto_vaginal": 3366,
+            "parto_cesareo": 6250,
+            "parto_ignorado": 21,
+            "pct_cesareo": 64.85,
+            "pct_vaginal": 34.93,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2011,
+            "nascidos_vivos": 9632,
+            "parto_vaginal": 3306,
+            "parto_cesareo": 6317,
+            "parto_ignorado": 9,
+            "pct_cesareo": 65.58,
+            "pct_vaginal": 34.32,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2012,
+            "nascidos_vivos": 9550,
+            "parto_vaginal": 3303,
+            "parto_cesareo": 6202,
+            "parto_ignorado": 45,
+            "pct_cesareo": 64.94,
+            "pct_vaginal": 34.59,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2013,
+            "nascidos_vivos": 9555,
+            "parto_vaginal": 3179,
+            "parto_cesareo": 6357,
+            "parto_ignorado": 19,
+            "pct_cesareo": 66.53,
+            "pct_vaginal": 33.27,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2014,
+            "nascidos_vivos": 9937,
+            "parto_vaginal": 3519,
+            "parto_cesareo": 6409,
+            "parto_ignorado": 9,
+            "pct_cesareo": 64.5,
+            "pct_vaginal": 35.41,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2015,
+            "nascidos_vivos": 9808,
+            "parto_vaginal": 3718,
+            "parto_cesareo": 6088,
+            "parto_ignorado": 2,
+            "pct_cesareo": 62.07,
+            "pct_vaginal": 37.91,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2016,
+            "nascidos_vivos": 9562,
+            "parto_vaginal": 3728,
+            "parto_cesareo": 5834,
+            "parto_ignorado": 0,
+            "pct_cesareo": 61.01,
+            "pct_vaginal": 38.99,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2017,
+            "nascidos_vivos": 9743,
+            "parto_vaginal": 3715,
+            "parto_cesareo": 6028,
+            "parto_ignorado": 0,
+            "pct_cesareo": 61.87,
+            "pct_vaginal": 38.13,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2018,
+            "nascidos_vivos": 9686,
+            "parto_vaginal": 3757,
+            "parto_cesareo": 5928,
+            "parto_ignorado": 1,
+            "pct_cesareo": 61.2,
+            "pct_vaginal": 38.79,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2019,
+            "nascidos_vivos": 9076,
+            "parto_vaginal": 3624,
+            "parto_cesareo": 5441,
+            "parto_ignorado": 11,
+            "pct_cesareo": 59.95,
+            "pct_vaginal": 39.93,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2020,
+            "nascidos_vivos": 8682,
+            "parto_vaginal": 3422,
+            "parto_cesareo": 5260,
+            "parto_ignorado": 0,
+            "pct_cesareo": 60.58,
+            "pct_vaginal": 39.42,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2021,
+            "nascidos_vivos": 8545,
+            "parto_vaginal": 3430,
+            "parto_cesareo": 5115,
+            "parto_ignorado": 0,
+            "pct_cesareo": 59.86,
+            "pct_vaginal": 40.14,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2022,
+            "nascidos_vivos": 8072,
+            "parto_vaginal": 3103,
+            "parto_cesareo": 4969,
+            "parto_ignorado": 0,
+            "pct_cesareo": 61.56,
+            "pct_vaginal": 38.44,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2023,
+            "nascidos_vivos": 8090,
+            "parto_vaginal": 3174,
+            "parto_cesareo": 4916,
+            "parto_ignorado": 0,
+            "pct_cesareo": 60.77,
+            "pct_vaginal": 39.23,
+            "status": "Consolidado SINASC"
+          },
+          {
+            "ano": 2024,
+            "nascidos_vivos": 7463,
+            "parto_vaginal": 2801,
+            "parto_cesareo": 4660,
+            "parto_ignorado": 2,
+            "pct_cesareo": 62.44,
+            "pct_vaginal": 37.53,
+            "status": "Consolidado SINASC / Preliminar SMS"
+          }
+        ],
+        "faixa_etaria_mae_2024": [
+          {
+            "faixa": "Menor de 15 anos",
+            "nascidos": 16,
+            "pct": 0.21
+          },
+          {
+            "faixa": "15 a 19 anos",
+            "nascidos": 508,
+            "pct": 6.81
+          },
+          {
+            "faixa": "20 a 24 anos",
+            "nascidos": 1398,
+            "pct": 18.73
+          },
+          {
+            "faixa": "25 a 29 anos",
+            "nascidos": 1956,
+            "pct": 26.21
+          },
+          {
+            "faixa": "30 a 34 anos",
+            "nascidos": 1848,
+            "pct": 24.76
+          },
+          {
+            "faixa": "35 a 39 anos",
+            "nascidos": 1324,
+            "pct": 17.74
+          },
+          {
+            "faixa": "40 a 44 anos",
+            "nascidos": 382,
+            "pct": 5.12
+          },
+          {
+            "faixa": "45 a 49 anos",
+            "nascidos": 29,
+            "pct": 0.39
+          },
+          {
+            "faixa": "50 anos ou mais",
+            "nascidos": 2,
+            "pct": 0.03
+          }
+        ],
+        "fonte_nome": "Ministério da Saúde - SINASC (Sistema de Informações sobre Nascidos Vivos / TabNet DataSUS)",
+        "fonte_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sinasc/cnv/nvsp.def",
+        "data_consulta": "2026-09-28"
+      },
+      "dengue_sinan": {
+        "casos_2024": 98219,
+        "casos_2023": 1059,
+        "media_historica_2010_2023": 1876,
+        "pico_historico_anterior_2015": 14509,
+        "serie_historica": [
+          {
+            "ano": 2010,
+            "casos": 688,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2011,
+            "casos": 2380,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2012,
+            "casos": 154,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2013,
+            "casos": 839,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2014,
+            "casos": 832,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2015,
+            "casos": 14509,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2016,
+            "casos": 1731,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2017,
+            "casos": 438,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2018,
+            "casos": 198,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2019,
+            "casos": 670,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2020,
+            "casos": 452,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2021,
+            "casos": 619,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2022,
+            "casos": 1695,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2023,
+            "casos": 1059,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          },
+          {
+            "ano": 2024,
+            "casos": 98219,
+            "status_metodologico": "CASOS CONFIRMADOS"
+          }
+        ],
+        "nota_metodologica": "Série de casos CONFIRMADOS de dengue autóctone e importada em residentes de SJC. Fonte primária: Boletins Epidemiológicos e Notas Oficiais da Vigilância Epidemiológica da Prefeitura de SJC (2006-2018) e SINAN Online/DataSUS (2019-2024). Divergências entre notificados e confirmados: a série apresenta apenas confirmados.",
+        "fonte_nome": "Prefeitura de SJC (Vigilância Epidemiológica) & Ministério da Saúde - SINAN Online / DataSUS",
+        "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+        "data_consulta": "2026-09-28"
+      },
+      "internacoes_sih": {
+        "total_internacoes_2024": 54709,
+        "total_internacoes_2023": 52425,
+        "serie_historica": [
+          {
+            "ano": 2010,
+            "internacoes": 30963
+          },
+          {
+            "ano": 2011,
+            "internacoes": 33766
+          },
+          {
+            "ano": 2012,
+            "internacoes": 33784
+          },
+          {
+            "ano": 2013,
+            "internacoes": 31611
+          },
+          {
+            "ano": 2014,
+            "internacoes": 30937
+          },
+          {
+            "ano": 2015,
+            "internacoes": 32823
+          },
+          {
+            "ano": 2016,
+            "internacoes": 33348
+          },
+          {
+            "ano": 2017,
+            "internacoes": 35142
+          },
+          {
+            "ano": 2018,
+            "internacoes": 39625
+          },
+          {
+            "ano": 2019,
+            "internacoes": 46743
+          },
+          {
+            "ano": 2020,
+            "internacoes": 41915
+          },
+          {
+            "ano": 2021,
+            "internacoes": 43811
+          },
+          {
+            "ano": 2022,
+            "internacoes": 47241
+          },
+          {
+            "ano": 2023,
+            "internacoes": 52425
+          },
+          {
+            "ano": 2024,
+            "internacoes": 54709
+          }
+        ],
+        "top_causas_2024": [
+          {
+            "causa": "Doenças do Aparelho Circulatório",
+            "capitulo": "Cap. IX (I00-I99)",
+            "internacoes": 7914,
+            "pct": 14.47
+          },
+          {
+            "causa": "Doenças do Aparelho Digestivo",
+            "capitulo": "Cap. XI (K00-K93)",
+            "internacoes": 7035,
+            "pct": 12.86
+          },
+          {
+            "causa": "Neoplasias (Tumores)",
+            "capitulo": "Cap. II (C00-D48)",
+            "internacoes": 6913,
+            "pct": 12.64
+          },
+          {
+            "causa": "Lesões, Envenenamentos e Causas Externas",
+            "capitulo": "Cap. XIX (S00-T98)",
+            "internacoes": 6093,
+            "pct": 11.14
+          },
+          {
+            "causa": "Gravidez, Parto e Puerpério",
+            "capitulo": "Cap. XV (O00-O99)",
+            "internacoes": 5596,
+            "pct": 10.23
+          },
+          {
+            "causa": "Doenças do Aparelho Respiratório",
+            "capitulo": "Cap. X (J00-J99)",
+            "internacoes": 4515,
+            "pct": 8.25
+          },
+          {
+            "causa": "Doenças do Aparelho Geniturinário",
+            "capitulo": "Cap. XIV (N00-N99)",
+            "internacoes": 4106,
+            "pct": 7.51
+          },
+          {
+            "causa": "Doenças Infecciosas e Parasitárias",
+            "capitulo": "Cap. I (A00-B99)",
+            "internacoes": 2430,
+            "pct": 4.44
+          }
+        ],
+        "top_causas_2023": [
+          {
+            "causa": "Doenças do Aparelho Circulatório",
+            "capitulo": "Cap. IX",
+            "internacoes": 7680,
+            "pct": 14.65
+          },
+          {
+            "causa": "Doenças do Aparelho Digestivo",
+            "capitulo": "Cap. XI",
+            "internacoes": 6840,
+            "pct": 13.05
+          },
+          {
+            "causa": "Neoplasias (Tumores)",
+            "capitulo": "Cap. II",
+            "internacoes": 6620,
+            "pct": 12.63
+          },
+          {
+            "causa": "Lesões e Causas Externas",
+            "capitulo": "Cap. XIX",
+            "internacoes": 5890,
+            "pct": 11.23
+          },
+          {
+            "causa": "Gravidez, Parto e Puerpério",
+            "capitulo": "Cap. XV",
+            "internacoes": 5510,
+            "pct": 10.51
+          },
+          {
+            "causa": "Doenças do Aparelho Respiratório",
+            "capitulo": "Cap. X",
+            "internacoes": 4410,
+            "pct": 8.41
+          },
+          {
+            "causa": "Doenças do Aparelho Geniturinário",
+            "capitulo": "Cap. XIV",
+            "internacoes": 3950,
+            "pct": 7.53
+          },
+          {
+            "causa": "Doenças Infecciosas e Parasitárias",
+            "capitulo": "Cap. I",
+            "internacoes": 2340,
+            "pct": 4.46
+          }
+        ],
+        "nota_metodologica": "Internações Hospitalares de Residentes de São José dos Campos pagas pelo SUS (SIH/SUS - Autorizações de Internação Hospitalar - AIH Aprovadas).",
+        "fonte_nome": "Ministério da Saúde - SIH/SUS (Sistema de Informações Hospitalares / TabNet DataSUS)",
+        "fonte_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nisp.def",
+        "data_consulta": "2026-09-28"
+      },
+      "atencao_basica_cnes_sia": {
+        "unidades_basicas_saude_ubs": 45,
+        "equipes_saude_familia_esf": 142,
+        "cobertura_atencao_primaria_pct_2024": 83.5,
+        "atendimentos_consultas_2024": 1418520,
+        "serie_cobertura": [
+          {
+            "ano": 2019,
+            "cobertura_pct": 72.4,
+            "consultas_atendimentos": 1120450
+          },
+          {
+            "ano": 2020,
+            "cobertura_pct": 74.1,
+            "consultas_atendimentos": 890320
+          },
+          {
+            "ano": 2021,
+            "cobertura_pct": 75.8,
+            "consultas_atendimentos": 1045600
+          },
+          {
+            "ano": 2022,
+            "cobertura_pct": 78.3,
+            "consultas_atendimentos": 1238900
+          },
+          {
+            "ano": 2023,
+            "cobertura_pct": 81.2,
+            "consultas_atendimentos": 1342100
+          },
+          {
+            "ano": 2024,
+            "cobertura_pct": 83.5,
+            "consultas_atendimentos": 1418520
+          }
+        ],
+        "nota_metodologica": "Indicadores de Atenção Primária à Saúde compilados a partir do Cadastro Nacional de Estabelecimentos de Saúde (CNES), e-Gestor Atenção Básica e Relatório de Gestão SMS-SJC.",
+        "fonte_nome": "Ministério da Saúde (e-Gestor AB / CNES) & Secretaria Municipal de Saúde de SJC",
+        "fonte_url": "https://egestorab.saude.gov.br/",
+        "data_consulta": "2026-09-28",
+        "unidades_basicas_saude_cnes": 40,
+        "unidades_basicas_saude_rede_municipal": 45,
+        "audit_status": "CONFIRMADO"
+      },
+      "procedimentos_sia_sih": {
+        "ano_referencia": 2024,
+        "total_ambulatorial_2024": 8120500,
+        "total_hospitalar_2024": 168900,
+        "serie_producao": [
+          {
+            "ano": 2019,
+            "ambulatorial": 6120400,
+            "hospitalar": 142800,
+            "total": 6263200
+          },
+          {
+            "ano": 2020,
+            "ambulatorial": 4890300,
+            "hospitalar": 128500,
+            "total": 5018800
+          },
+          {
+            "ano": 2021,
+            "ambulatorial": 5680100,
+            "hospitalar": 135200,
+            "total": 5815300
+          },
+          {
+            "ano": 2022,
+            "ambulatorial": 6940200,
+            "hospitalar": 148600,
+            "total": 7088800
+          },
+          {
+            "ano": 2023,
+            "ambulatorial": 7650800,
+            "hospitalar": 162400,
+            "total": 7813200
+          },
+          {
+            "ano": 2024,
+            "ambulatorial": 8120500,
+            "hospitalar": 168900,
+            "total": 8289400
+          }
+        ],
+        "top_ambulatoriais_2024": [
+          {
+            "procedimento": "Exames Laboratoriais (Patologia Clínica)",
+            "quantidade": 4120500,
+            "pct": 50.74
+          },
+          {
+            "procedimento": "Consultas Médicas (Especializada e Básica)",
+            "quantidade": 1840300,
+            "pct": 22.66
+          },
+          {
+            "procedimento": "Procedimentos de Enfermagem e Curativos",
+            "quantidade": 1150200,
+            "pct": 14.16
+          },
+          {
+            "procedimento": "Diagnóstico por Imagem (RX, USG, Tomografia)",
+            "quantidade": 412800,
+            "pct": 5.08
+          },
+          {
+            "procedimento": "Fisioterapia e Reabilitação Física",
+            "quantidade": 215400,
+            "pct": 2.65
+          }
+        ],
+        "top_hospitalares_2024": [
+          {
+            "procedimento": "Partos (Cesarianos e Vaginais SUS)",
+            "quantidade": 5596,
+            "pct": 24.28
+          },
+          {
+            "procedimento": "Cirurgias Digestivas e Hérnias",
+            "quantidade": 4820,
+            "pct": 20.91
+          },
+          {
+            "procedimento": "Tratamento de Doenças Cardiovasculares e AVC",
+            "quantidade": 4650,
+            "pct": 20.17
+          },
+          {
+            "procedimento": "Ortopedia e Tratamento de Fraturas / Traumas",
+            "quantidade": 4180,
+            "pct": 18.13
+          },
+          {
+            "procedimento": "Tratamentos Oncológicos e Quimioterapia (Intern.)",
+            "quantidade": 3890,
+            "pct": 16.88
+          }
+        ],
+        "nota_metodologica": "Volume físico de procedimentos ambulatoriais aprovados no SIA/SUS (BPA/APAC) e atos cirúrgicos/clínicos hospitalares registrados no SIH/SUS.",
+        "fonte_nome": "Ministério da Saúde (SIA/SUS e SIH/SUS) / SMS-SJC Relatório Quadrimestral",
+        "fonte_url": "http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sia/cnv/qasp.def",
+        "data_consulta": "2026-09-28",
+        "audit_status": "SUSPENSO_PARA_REVISAO",
+        "status_metodologico": "INDISPONIVEL_EM_REVISAO",
+        "nota_suspensao": "O volume de procedimentos ambulatoriais SUS está sendo auditado diretamente no SIA/DataSUS para garantir fidedignidade antes da publicação."
+      }
+    }
+  }
+}

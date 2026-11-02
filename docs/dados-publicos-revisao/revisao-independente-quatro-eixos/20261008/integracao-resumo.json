@@ -1,0 +1,58 @@
+{
+  "stage": "INTEGRATED",
+  "counts": {
+    "educacao": 1940,
+    "saude": 179,
+    "seguranca": 7287,
+    "demografia": 110
+  },
+  "families": {
+    "educacao": {
+      "inep_ideb_saeb_rendimento": 741,
+      "censo_matriculas": 42,
+      "censo_matriculas_por_rede": 12,
+      "censo_docentes": 3,
+      "censo_estabelecimentos": 3,
+      "censo_turmas": 3,
+      "distorcao_idade_serie": 272,
+      "rendimento": 864
+    },
+    "saude": {
+      "sinasc_residentes_rag": 10,
+      "sih_residentes_rag": 11,
+      "sim_residentes_rag": 10,
+      "dengue_cve_anual": 7,
+      "dengue_cve_mensal": 84,
+      "cnes_codigos_202412": 52,
+      "indicadores_competencias_revisadas": 5
+    },
+    "seguranca": {
+      "ssp_anuais_por_delito": 545,
+      "ssp_mensais_por_delito": 6540,
+      "ssp_taxas_publicadas": 189,
+      "ssp_produtividade_2024": 13
+    },
+    "demografia": {
+      "estimativas_populacionais": 22,
+      "censos_populacionais": 6,
+      "piramide_etaria_censo_2022": 63,
+      "situacao_domicilio_2022": 3,
+      "domicilios_especies_2022": 13,
+      "indicadores_derivados_revisados": 3
+    }
+  },
+  "registry_nulls": 28,
+  "new_registry_values": {
+    "demo_populacao_estimada_2024": 724756,
+    "demo_populacao_estimada_2026": 729153,
+    "demo_taxa_urbanizacao": 98.72,
+    "saude_mortalidade_infantil": 7.65,
+    "saude_cobertura_atencao_basica": 57.95,
+    "saude_internacoes_sih": 41846,
+    "saude_atencao_basica_cnes_sia": 57.95,
+    "seg_roubos_veiculos_2024": 143,
+    "seg_furtos_veiculos_2024": 724,
+    "seg_produtividade_prisoes": 2170,
+    "saude_causas_mortalidade": 5028
+  }
+}

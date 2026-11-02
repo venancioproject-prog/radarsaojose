@@ -1,0 +1,114 @@
+[
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\inep-sinopses.html",
+    "url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+    "http_status": 200,
+    "sha256": "10ca990e1c8bd82cb5a6cf76716248303b7a1199146824e502434452f391ff35",
+    "bytes": 223075,
+    "accessed_at": "2026-10-08T08:06:09.278069+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\inep-metas.html",
+    "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/metas",
+    "http_status": 200,
+    "sha256": "1255236c353434cfb5b9d1137022f4bcfaa7568dae9dbfe1c1448c8053da8205",
+    "bytes": 213020,
+    "accessed_at": "2026-10-08T08:06:08.375200+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ibge-escolarizacao.json",
+    "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60045?localidade=354990",
+    "http_status": 200,
+    "sha256": "d7f2e8e5564e37c5af86055f0c92af24a329bba9c233cbc54ee6fbbe888a97bb",
+    "bytes": 866,
+    "accessed_at": "2026-10-08T08:06:08.344180+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp-metodologia.pdf",
+    "url": "https://www.ssp.sp.gov.br/assets/download/Dados_Abertos.pdf",
+    "http_status": 200,
+    "sha256": "ee970b03a05a4aa94e1ee06653e71426d0a4c4b26889a505f08617b0af062db9",
+    "bytes": 757243,
+    "accessed_at": "2026-10-08T08:06:08.530135+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp2024.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "http_status": 200,
+    "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+    "bytes": 7537,
+    "accessed_at": "2026-10-08T08:06:08.538393+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp2025.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2025&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "http_status": 200,
+    "sha256": "2c997fee00b7471f1a51f63150fa79b60c150c66839e9f00e271855dbb892f0a",
+    "bytes": 7536,
+    "accessed_at": "2026-10-08T08:06:08.591949+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp-produtividade2024.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=9&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "http_status": 200,
+    "sha256": "fcbd1db005759f0eba638d4684b136b50865a1fa91d10486cdabbb5ea7413ed8",
+    "bytes": 4519,
+    "accessed_at": "2026-10-08T08:06:08.529136+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\cnes202412.html",
+    "url": "https://cnes2.datasus.gov.br/Mod_Ind_Tipo_Leito.asp?VEstado=35&VMun=354990&VComp=202412",
+    "http_status": 200,
+    "sha256": "53a92a29112e4981a084f2d59aba6c386f24f464c06b95e459ec5c3a9aab5da6",
+    "bytes": 78460,
+    "accessed_at": "2026-10-08T08:06:09.339365+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sms2025.pdf",
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+    "http_status": 200,
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+    "bytes": 3011984,
+    "accessed_at": "2026-10-08T08:06:11.190712+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\rag2025.pdf",
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "http_status": 200,
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+    "bytes": 467239,
+    "accessed_at": "2026-10-08T08:06:10.563144+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sidra9923.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9923/n6/3549904/v/93/p/2022/c1/all",
+    "http_status": 200,
+    "sha256": "8ea6918720c326407dc76f1ee0c5a14a73f09c98ab29538d4b86ec7316f94441",
+    "bytes": 1368,
+    "accessed_at": "2026-10-08T08:06:10.424744+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sidra9923-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9923/metadados",
+    "http_status": 200,
+    "sha256": "312303a127603e4e3574d69d893f81fb25675942d4c63ea9ba3dc08fc70a63d0",
+    "bytes": 836,
+    "accessed_at": "2026-10-08T08:06:10.436266+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sidra6579.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/6579/n6/3549904/v/9324/p/all",
+    "http_status": 200,
+    "sha256": "7ca6639ed31965f7089d75a806fea60868f7fdcc9f4d3748f3071d5bd1213320",
+    "bytes": 6534,
+    "accessed_at": "2026-10-08T08:06:10.474329+00:00"
+  },
+  {
+    "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\estimativas2026.xlsx",
+    "url": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/estimativa_dou_2026.xlsx",
+    "http_status": 200,
+    "sha256": "6d512a1e48506fbbfa252ba407aabc2160b07329fa652411ef7d39bd63f49284",
+    "bytes": 247136,
+    "accessed_at": "2026-10-08T08:06:10.688562+00:00"
+  }
+]

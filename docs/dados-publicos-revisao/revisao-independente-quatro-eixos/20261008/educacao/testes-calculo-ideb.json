@@ -1,0 +1,1525 @@
+{
+  "status": "PASS",
+  "count": 66,
+  "methodology": "Nota média padronizada N e índice de rendimento P publicados com2decimais; IDEBcom1. Verifica interseção dos intervalos de arredondamento. Não recalcula pesos de escolas a partir de dados ausentes; não usa média aritmética por rede.",
+  "tests": [
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2005",
+      "ideb": 4.8,
+      "N": 5.044068,
+      "P": 0.955408,
+      "product": 4.819142919744,
+      "published_rounding_interval_product": [
+        4.789170539744,
+        4.8491652997440005
+      ],
+      "ideb_rounding_interval": [
+        4.75,
+        4.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2005",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2005",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2005"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2007",
+      "ideb": 4.9,
+      "N": 5.035041,
+      "P": 0.964402,
+      "product": 4.855803610482,
+      "published_rounding_interval_product": [
+        4.825831395482,
+        4.885825825482
+      ],
+      "ideb_rounding_interval": [
+        4.8500000000000005,
+        4.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2007",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2007",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2007"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2009",
+      "ideb": 5.5,
+      "N": 5.661346,
+      "P": 0.972554,
+      "product": 5.505964697684,
+      "published_rounding_interval_product": [
+        5.472820197684,
+        5.5391591976840004
+      ],
+      "ideb_rounding_interval": [
+        5.45,
+        5.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2009",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2009",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2009"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2011",
+      "ideb": 5.6,
+      "N": 5.727591,
+      "P": 0.981248,
+      "product": 5.620187213568,
+      "published_rounding_interval_product": [
+        5.586668018568001,
+        5.653756408568
+      ],
+      "ideb_rounding_interval": [
+        5.55,
+        5.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2011",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2011",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2011"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2013",
+      "ideb": 5.8,
+      "N": 5.898141,
+      "P": 0.983384,
+      "product": 5.800137489144,
+      "published_rounding_interval_product": [
+        5.765754864144,
+        5.834570114144
+      ],
+      "ideb_rounding_interval": [
+        5.75,
+        5.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2013",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2013",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2013"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2015",
+      "ideb": 6.5,
+      "N": 6.561197,
+      "P": 0.986406,
+      "product": 6.4720040879819996,
+      "published_rounding_interval_product": [
+        6.434291072982,
+        6.509767102982
+      ],
+      "ideb_rounding_interval": [
+        6.45,
+        6.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2015",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2015",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2015"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2017",
+      "ideb": 6.8,
+      "N": 6.913359,
+      "P": 0.987341,
+      "product": 6.825842788419,
+      "published_rounding_interval_product": [
+        6.786364288419,
+        6.8653712884189995
+      ],
+      "ideb_rounding_interval": [
+        6.75,
+        6.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2017",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2017",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2017"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2019",
+      "ideb": 6.9,
+      "N": 6.996471,
+      "P": 0.991457,
+      "product": 6.936700148247,
+      "published_rounding_interval_product": [
+        6.8967855082469995,
+        6.976664788247
+      ],
+      "ideb_rounding_interval": [
+        6.8500000000000005,
+        6.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2019",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2019",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2019"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2021",
+      "ideb": 6.5,
+      "N": 6.553511,
+      "P": 0.994798,
+      "product": 6.519419635778,
+      "published_rounding_interval_product": [
+        6.481703090778,
+        6.557186180778
+      ],
+      "ideb_rounding_interval": [
+        6.45,
+        6.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2021",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2021",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2021"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2023",
+      "ideb": 6.6,
+      "N": 6.640835,
+      "P": 0.995593,
+      "product": 6.611568840155,
+      "published_rounding_interval_product": [
+        6.573411700155,
+        6.649775980154999
+      ],
+      "ideb_rounding_interval": [
+        6.55,
+        6.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2023",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2023",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2023"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Estadual",
+      "year": "2025",
+      "ideb": 6.9,
+      "N": 6.945303,
+      "P": 0.99338,
+      "product": 6.89932509414,
+      "published_rounding_interval_product": [
+        6.85965667914,
+        6.93904350914
+      ],
+      "ideb_rounding_interval": [
+        6.8500000000000005,
+        6.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Estadual:VL_OBSERVADO_2025",
+        "cons:ideb:iniciais:Estadual:VL_NOTA_MEDIA_2025",
+        "cons:ideb:iniciais:Estadual:VL_INDICADOR_REND_2025"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2005",
+      "ideb": 5.2,
+      "N": 5.398607,
+      "P": 0.968513,
+      "product": 5.228621061391,
+      "published_rounding_interval_product": [
+        5.196810461391,
+        5.260481661391
+      ],
+      "ideb_rounding_interval": [
+        5.15,
+        5.25
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2005",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2005",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2005"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2007",
+      "ideb": 5.6,
+      "N": 5.688647,
+      "P": 0.979391,
+      "product": 5.571409673977,
+      "published_rounding_interval_product": [
+        5.538094483977,
+        5.604774863976999
+      ],
+      "ideb_rounding_interval": [
+        5.55,
+        5.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2007",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2007",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2007"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2009",
+      "ideb": 5.9,
+      "N": 6.129751,
+      "P": 0.968257,
+      "product": 5.935174314007,
+      "published_rounding_interval_product": [
+        5.899709274007,
+        5.970689354007
+      ],
+      "ideb_rounding_interval": [
+        5.8500000000000005,
+        5.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2009",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2009",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2009"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2011",
+      "ideb": 6.1,
+      "N": 6.244703,
+      "P": 0.974783,
+      "product": 6.087230324449,
+      "published_rounding_interval_product": [
+        6.051157894449,
+        6.123352754449
+      ],
+      "ideb_rounding_interval": [
+        6.05,
+        6.1499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2011",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2011",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2011"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2013",
+      "ideb": 6.5,
+      "N": 6.615722,
+      "P": 0.983076,
+      "product": 6.503757520872,
+      "published_rounding_interval_product": [
+        6.465788530872,
+        6.541776510871999
+      ],
+      "ideb_rounding_interval": [
+        6.45,
+        6.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2013",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2013",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2013"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2015",
+      "ideb": 6.7,
+      "N": 6.814713,
+      "P": 0.986745,
+      "product": 6.724383979185,
+      "published_rounding_interval_product": [
+        6.685401689185,
+        6.763416269185
+      ],
+      "ideb_rounding_interval": [
+        6.65,
+        6.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2015",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2015",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2015"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2017",
+      "ideb": 7.0,
+      "N": 7.002822,
+      "P": 0.994526,
+      "product": 6.964488552372,
+      "published_rounding_interval_product": [
+        6.924526812372,
+        7.004500292372001
+      ],
+      "ideb_rounding_interval": [
+        6.95,
+        7.05
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2017",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2017",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2017"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2019",
+      "ideb": 7.1,
+      "N": 7.085443,
+      "P": 0.997188,
+      "product": 7.065518734284,
+      "published_rounding_interval_product": [
+        7.025130579283999,
+        7.105956889283998
+      ],
+      "ideb_rounding_interval": [
+        7.05,
+        7.1499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2019",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2019",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2019"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2021",
+      "ideb": 6.8,
+      "N": 6.763927,
+      "P": 1.0,
+      "product": 6.763927,
+      "published_rounding_interval_product": [
+        6.7251323649999994,
+        6.802771634999999
+      ],
+      "ideb_rounding_interval": [
+        6.75,
+        6.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2021",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2021",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2021"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2023",
+      "ideb": 6.8,
+      "N": 6.846847,
+      "P": 0.9998,
+      "product": 6.8454776306000005,
+      "published_rounding_interval_product": [
+        6.8062693956,
+        6.8847358656
+      ],
+      "ideb_rounding_interval": [
+        6.75,
+        6.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2023",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2023",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2023"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Municipal",
+      "year": "2025",
+      "ideb": 6.9,
+      "N": 6.912858,
+      "P": 1.0,
+      "product": 6.912858,
+      "published_rounding_interval_product": [
+        6.87331871,
+        6.952447289999999
+      ],
+      "ideb_rounding_interval": [
+        6.8500000000000005,
+        6.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Municipal:VL_OBSERVADO_2025",
+        "cons:ideb:iniciais:Municipal:VL_NOTA_MEDIA_2025",
+        "cons:ideb:iniciais:Municipal:VL_INDICADOR_REND_2025"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2005",
+      "ideb": 5.0,
+      "N": 5.210984,
+      "P": 0.960672,
+      "product": 5.006046421248,
+      "published_rounding_interval_product": [
+        4.975213141248,
+        5.036929701248
+      ],
+      "ideb_rounding_interval": [
+        4.95,
+        5.05
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2005",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2005",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2005"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2007",
+      "ideb": 5.2,
+      "N": 5.313313,
+      "P": 0.972612,
+      "product": 5.1677919835560004,
+      "published_rounding_interval_product": [
+        5.136387358556,
+        5.199246608556
+      ],
+      "ideb_rounding_interval": [
+        5.15,
+        5.25
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2007",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2007",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2007"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2009",
+      "ideb": 5.7,
+      "N": 5.869753,
+      "P": 0.973556,
+      "product": 5.714533251668,
+      "published_rounding_interval_product": [
+        5.680341706668,
+        5.748774796668
+      ],
+      "ideb_rounding_interval": [
+        5.65,
+        5.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2009",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2009",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2009"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2011",
+      "ideb": 5.8,
+      "N": 5.967087,
+      "P": 0.977979,
+      "product": 5.835685777173,
+      "published_rounding_interval_product": [
+        5.800985447173001,
+        5.870436107173
+      ],
+      "ideb_rounding_interval": [
+        5.75,
+        5.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2011",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2011",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2011"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2013",
+      "ideb": 6.2,
+      "N": 6.284572,
+      "P": 0.983352,
+      "product": 6.179946445344,
+      "published_rounding_interval_product": [
+        6.143631825344,
+        6.216311065344
+      ],
+      "ideb_rounding_interval": [
+        6.15,
+        6.25
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2013",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2013",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2013"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2015",
+      "ideb": 6.6,
+      "N": 6.707253,
+      "P": 0.986299,
+      "product": 6.615356926647,
+      "published_rounding_interval_product": [
+        6.576914166647,
+        6.653849686647
+      ],
+      "ideb_rounding_interval": [
+        6.55,
+        6.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2015",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2015",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2015"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2017",
+      "ideb": 6.9,
+      "N": 6.961176,
+      "P": 0.991258,
+      "product": 6.900321399408,
+      "published_rounding_interval_product": [
+        6.8605842294079995,
+        6.940108569407999
+      ],
+      "ideb_rounding_interval": [
+        6.8500000000000005,
+        6.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2017",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2017",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2017"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2019",
+      "ideb": 7.0,
+      "N": 7.046637,
+      "P": 0.994751,
+      "product": 7.009649202387,
+      "published_rounding_interval_product": [
+        6.969467262387,
+        7.049881142387
+      ],
+      "ideb_rounding_interval": [
+        6.95,
+        7.05
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2019",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2019",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2019"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2021",
+      "ideb": 6.7,
+      "N": 6.676332,
+      "P": 0.997799,
+      "product": 6.661637393268,
+      "published_rounding_interval_product": [
+        6.6232917382680006,
+        6.700033048268001
+      ],
+      "ideb_rounding_interval": [
+        6.65,
+        6.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2021",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2021",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2021"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2023",
+      "ideb": 6.8,
+      "N": 6.807938,
+      "P": 0.999199,
+      "product": 6.802484841661999,
+      "published_rounding_interval_product": [
+        6.763474156661999,
+        6.8415455266619984
+      ],
+      "ideb_rounding_interval": [
+        6.75,
+        6.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2023",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2023",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2023"
+      ]
+    },
+    {
+      "stage": "iniciais",
+      "network": "Pública",
+      "year": "2025",
+      "ideb": 6.9,
+      "N": 6.919456,
+      "P": 0.998799,
+      "product": 6.911145733344,
+      "published_rounding_interval_product": [
+        6.871579458344001,
+        6.950762008343999
+      ],
+      "ideb_rounding_interval": [
+        6.8500000000000005,
+        6.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:iniciais:Pública:VL_OBSERVADO_2025",
+        "cons:ideb:iniciais:Pública:VL_NOTA_MEDIA_2025",
+        "cons:ideb:iniciais:Pública:VL_INDICADOR_REND_2025"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2005",
+      "ideb": 4.3,
+      "N": 4.889957,
+      "P": 0.878599,
+      "product": 4.296311330243,
+      "published_rounding_interval_product": [
+        4.2674935502430005,
+        4.325179110243
+      ],
+      "ideb_rounding_interval": [
+        4.25,
+        4.35
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2005",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2005",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2005"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2007",
+      "ideb": 4.2,
+      "N": 4.7495,
+      "P": 0.889715,
+      "product": 4.2257013925,
+      "published_rounding_interval_product": [
+        4.1975303175,
+        4.253922467500001
+      ],
+      "ideb_rounding_interval": [
+        4.15,
+        4.25
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2007",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2007",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2007"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2009",
+      "ideb": 4.5,
+      "N": 4.925167,
+      "P": 0.906843,
+      "product": 4.466353217781,
+      "published_rounding_interval_product": [
+        4.437218167781,
+        4.495538267781
+      ],
+      "ideb_rounding_interval": [
+        4.45,
+        4.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2009",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2009",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2009"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2011",
+      "ideb": 4.5,
+      "N": 4.931,
+      "P": 0.910881,
+      "product": 4.491554211,
+      "published_rounding_interval_product": [
+        4.462369806000001,
+        4.520788616
+      ],
+      "ideb_rounding_interval": [
+        4.45,
+        4.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2011",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2011",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2011"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2013",
+      "ideb": 4.7,
+      "N": 4.977333,
+      "P": 0.938434,
+      "product": 4.670898516522,
+      "published_rounding_interval_product": [
+        4.641344681522,
+        4.700502351521999
+      ],
+      "ideb_rounding_interval": [
+        4.65,
+        4.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2013",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2013",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2013"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2015",
+      "ideb": 4.9,
+      "N": 5.243667,
+      "P": 0.939881,
+      "product": 4.928422983627,
+      "published_rounding_interval_product": [
+        4.897530243627,
+        4.959365723627
+      ],
+      "ideb_rounding_interval": [
+        4.8500000000000005,
+        4.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2015",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2015",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2015"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2017",
+      "ideb": 5.0,
+      "N": 5.385833,
+      "P": 0.923838,
+      "product": 4.975637187054,
+      "published_rounding_interval_product": [
+        4.944113832054001,
+        5.007210542054
+      ],
+      "ideb_rounding_interval": [
+        4.95,
+        5.05
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2017",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2017",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2017"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2019",
+      "ideb": 5.3,
+      "N": 5.576167,
+      "P": 0.957364,
+      "product": 5.338421543788,
+      "published_rounding_interval_product": [
+        5.305778888788,
+        5.371114198788
+      ],
+      "ideb_rounding_interval": [
+        5.25,
+        5.35
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2019",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2019",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2019"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2021",
+      "ideb": 5.5,
+      "N": 5.663667,
+      "P": 0.97973,
+      "product": 5.54886446991,
+      "published_rounding_interval_product": [
+        5.5156724849100005,
+        5.58210645491
+      ],
+      "ideb_rounding_interval": [
+        5.45,
+        5.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2021",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2021",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2021"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2023",
+      "ideb": 5.3,
+      "N": 5.497833,
+      "P": 0.972872,
+      "product": 5.348687786376,
+      "published_rounding_interval_product": [
+        5.316359261376,
+        5.381066311375999
+      ],
+      "ideb_rounding_interval": [
+        5.25,
+        5.35
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2023",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2023",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2023"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Estadual",
+      "year": "2025",
+      "ideb": 5.4,
+      "N": 5.600333,
+      "P": 0.971935,
+      "product": 5.443159654355,
+      "published_rounding_interval_product": [
+        5.410323314355,
+        5.476045994355
+      ],
+      "ideb_rounding_interval": [
+        5.3500000000000005,
+        5.45
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Estadual:VL_OBSERVADO_2025",
+        "cons:ideb:finais:Estadual:VL_NOTA_MEDIA_2025",
+        "cons:ideb:finais:Estadual:VL_INDICADOR_REND_2025"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2005",
+      "ideb": 4.9,
+      "N": 5.019833,
+      "P": 0.972441,
+      "product": 4.881491422353,
+      "published_rounding_interval_product": [
+        4.851555052353,
+        4.911477792353
+      ],
+      "ideb_rounding_interval": [
+        4.8500000000000005,
+        4.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2005",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2005",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2005"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2007",
+      "ideb": 5.0,
+      "N": 5.158667,
+      "P": 0.969857,
+      "product": 5.003169300619001,
+      "published_rounding_interval_product": [
+        4.972551680619,
+        5.033836920619
+      ],
+      "ideb_rounding_interval": [
+        4.95,
+        5.05
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2007",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2007",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2007"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2009",
+      "ideb": 5.1,
+      "N": 5.291,
+      "P": 0.965985,
+      "product": 5.111026635,
+      "published_rounding_interval_product": [
+        5.07976671,
+        5.14233656
+      ],
+      "ideb_rounding_interval": [
+        5.05,
+        5.1499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2009",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2009",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2009"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2011",
+      "ideb": 5.4,
+      "N": 5.4915,
+      "P": 0.978272,
+      "product": 5.372180688,
+      "published_rounding_interval_product": [
+        5.339856828,
+        5.404554548
+      ],
+      "ideb_rounding_interval": [
+        5.3500000000000005,
+        5.45
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2011",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2011",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2011"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2013",
+      "ideb": 5.2,
+      "N": 5.296167,
+      "P": 0.981311,
+      "product": 5.197186934937,
+      "published_rounding_interval_product": [
+        5.165824544937,
+        5.228599324937
+      ],
+      "ideb_rounding_interval": [
+        5.15,
+        5.25
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2013",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2013",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2013"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2015",
+      "ideb": 5.6,
+      "N": 5.6935,
+      "P": 0.98438,
+      "product": 5.604567530000001,
+      "published_rounding_interval_product": [
+        5.571203130000001,
+        5.6379819300000005
+      ],
+      "ideb_rounding_interval": [
+        5.55,
+        5.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2015",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2015",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2015"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2017",
+      "ideb": 5.8,
+      "N": 5.847333,
+      "P": 0.991743,
+      "product": 5.7990515714190005,
+      "published_rounding_interval_product": [
+        5.764881191419001,
+        5.833271951419
+      ],
+      "ideb_rounding_interval": [
+        5.75,
+        5.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2017",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2017",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2017"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2019",
+      "ideb": 5.9,
+      "N": 5.931667,
+      "P": 0.997248,
+      "product": 5.9153430524160004,
+      "published_rounding_interval_product": [
+        5.880723477416001,
+        5.950012627416
+      ],
+      "ideb_rounding_interval": [
+        5.8500000000000005,
+        5.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2019",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2019",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2019"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2021",
+      "ideb": 5.7,
+      "N": 5.7305,
+      "P": 0.9995,
+      "product": 5.727634750000001,
+      "published_rounding_interval_product": [
+        5.69400975,
+        5.76130975
+      ],
+      "ideb_rounding_interval": [
+        5.65,
+        5.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2021",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2021",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2021"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2023",
+      "ideb": 5.8,
+      "N": 5.843667,
+      "P": 1.0,
+      "product": 5.843667,
+      "published_rounding_interval_product": [
+        5.809473665,
+        5.877910334999999
+      ],
+      "ideb_rounding_interval": [
+        5.75,
+        5.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2023",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2023",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2023"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Municipal",
+      "year": "2025",
+      "ideb": 6.0,
+      "N": 5.970167,
+      "P": 1.0,
+      "product": 5.970167,
+      "published_rounding_interval_product": [
+        5.935341165,
+        6.005042834999999
+      ],
+      "ideb_rounding_interval": [
+        5.95,
+        6.05
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Municipal:VL_OBSERVADO_2025",
+        "cons:ideb:finais:Municipal:VL_NOTA_MEDIA_2025",
+        "cons:ideb:finais:Municipal:VL_INDICADOR_REND_2025"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2005",
+      "ideb": 4.5,
+      "N": 4.949167,
+      "P": 0.91914,
+      "product": 4.54897735638,
+      "published_rounding_interval_product": [
+        4.51966082138,
+        4.578343891379999
+      ],
+      "ideb_rounding_interval": [
+        4.45,
+        4.55
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2005",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2005",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2005"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2007",
+      "ideb": 4.6,
+      "N": 4.930833,
+      "P": 0.925854,
+      "product": 4.565231456382,
+      "published_rounding_interval_product": [
+        4.5359730213819995,
+        4.5945398913819995
+      ],
+      "ideb_rounding_interval": [
+        4.55,
+        4.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2007",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2007",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2007"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2009",
+      "ideb": 4.8,
+      "N": 5.093,
+      "P": 0.933316,
+      "product": 4.753378388,
+      "published_rounding_interval_product": [
+        4.723271808,
+        4.783534968
+      ],
+      "ideb_rounding_interval": [
+        4.75,
+        4.85
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2009",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2009",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2009"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2011",
+      "ideb": 4.9,
+      "N": 5.177,
+      "P": 0.942008,
+      "product": 4.876775415999999,
+      "published_rounding_interval_product": [
+        4.8462053759999995,
+        4.907395456
+      ],
+      "ideb_rounding_interval": [
+        4.8500000000000005,
+        4.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2011",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2011",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2011"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2013",
+      "ideb": 4.9,
+      "N": 5.1225,
+      "P": 0.958731,
+      "product": 4.911099547499999,
+      "published_rounding_interval_product": [
+        4.8807183924999995,
+        4.9415307025
+      ],
+      "ideb_rounding_interval": [
+        4.8500000000000005,
+        4.95
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2013",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2013",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2013"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2015",
+      "ideb": 5.2,
+      "N": 5.445,
+      "P": 0.962824,
+      "product": 5.24257668,
+      "published_rounding_interval_product": [
+        5.2105625600000005,
+        5.2746408
+      ],
+      "ideb_rounding_interval": [
+        5.15,
+        5.25
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2015",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2015",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2015"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2017",
+      "ideb": 5.4,
+      "N": 5.624333,
+      "P": 0.961935,
+      "product": 5.410242764355,
+      "published_rounding_interval_product": [
+        5.377336424355,
+        5.443199104355
+      ],
+      "ideb_rounding_interval": [
+        5.3500000000000005,
+        5.45
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2017",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2017",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2017"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2019",
+      "ideb": 5.7,
+      "N": 5.774333,
+      "P": 0.979397,
+      "product": 5.6553644172010005,
+      "published_rounding_interval_product": [
+        5.621620767201001,
+        5.689158067201
+      ],
+      "ideb_rounding_interval": [
+        5.65,
+        5.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2019",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2019",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2019"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2021",
+      "ideb": 5.6,
+      "N": 5.698333,
+      "P": 0.990495,
+      "product": 5.644170344835,
+      "published_rounding_interval_product": [
+        5.610751204835,
+        5.677639484835
+      ],
+      "ideb_rounding_interval": [
+        5.55,
+        5.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2021",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2021",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2021"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2023",
+      "ideb": 5.6,
+      "N": 5.6885,
+      "P": 0.987721,
+      "product": 5.6186509085,
+      "published_rounding_interval_product": [
+        5.5852948035,
+        5.6520570135
+      ],
+      "ideb_rounding_interval": [
+        5.55,
+        5.6499999999999995
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2023",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2023",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2023"
+      ]
+    },
+    {
+      "stage": "finais",
+      "network": "Pública",
+      "year": "2025",
+      "ideb": 5.7,
+      "N": 5.808667,
+      "P": 0.987986,
+      "product": 5.738881674662,
+      "published_rounding_interval_product": [
+        5.704923409662,
+        5.772889939662
+      ],
+      "ideb_rounding_interval": [
+        5.65,
+        5.75
+      ],
+      "pass": true,
+      "evidence_ids": [
+        "cons:ideb:finais:Pública:VL_OBSERVADO_2025",
+        "cons:ideb:finais:Pública:VL_NOTA_MEDIA_2025",
+        "cons:ideb:finais:Pública:VL_INDICADOR_REND_2025"
+      ]
+    }
+  ]
+}

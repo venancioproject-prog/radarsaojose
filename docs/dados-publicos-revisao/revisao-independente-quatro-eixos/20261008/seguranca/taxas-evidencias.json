@@ -1,0 +1,3404 @@
+[
+  {
+    "evidence_id": "indep:ssp:taxa:2025:homicidios",
+    "year": 2025,
+    "value": 4.12,
+    "native": "4,12",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2025:furtos",
+    "year": 2025,
+    "value": 760.01,
+    "native": "760,01",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2025:roubos",
+    "year": 2025,
+    "value": 87.45,
+    "native": "87,45",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2025:frvHabitantes",
+    "year": 2025,
+    "value": 117.31,
+    "native": "117,31",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2025:furtoVeiculo",
+    "year": 2025,
+    "value": 143.65,
+    "native": "143,65",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2025:rouboVeiculo",
+    "year": 2025,
+    "value": 16.93,
+    "native": "16,93",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2025:frvVeiculos",
+    "year": 2025,
+    "value": 160.59,
+    "native": "160,59",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2025",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:homicidios",
+    "year": 2024,
+    "value": 3.28,
+    "native": "3,28",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:furtos",
+    "year": 2024,
+    "value": 748.38,
+    "native": "748,38",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:roubos",
+    "year": 2024,
+    "value": 137.8,
+    "native": "137,80",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:frvHabitantes",
+    "year": 2024,
+    "value": 123.8,
+    "native": "123,80",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:furtoVeiculo",
+    "year": 2024,
+    "value": 145.22,
+    "native": "145,22",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:rouboVeiculo",
+    "year": 2024,
+    "value": 28.68,
+    "native": "28,68",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2024:frvVeiculos",
+    "year": 2024,
+    "value": 173.9,
+    "native": "173,90",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2024",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:homicidios",
+    "year": 2023,
+    "value": 6.28,
+    "native": "6,28",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:furtos",
+    "year": 2023,
+    "value": 870.33,
+    "native": "870,33",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:roubos",
+    "year": 2023,
+    "value": 171.5,
+    "native": "171,50",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:frvHabitantes",
+    "year": 2023,
+    "value": 196.77,
+    "native": "196,77",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:furtoVeiculo",
+    "year": 2023,
+    "value": 252.13,
+    "native": "252,13",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:rouboVeiculo",
+    "year": 2023,
+    "value": 32.65,
+    "native": "32,65",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2023:frvVeiculos",
+    "year": 2023,
+    "value": 284.78,
+    "native": "284,78",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2023",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:homicidios",
+    "year": 2022,
+    "value": 6.14,
+    "native": "6,14",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:furtos",
+    "year": 2022,
+    "value": 752.73,
+    "native": "752,73",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:roubos",
+    "year": 2022,
+    "value": 181.38,
+    "native": "181,38",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:frvHabitantes",
+    "year": 2022,
+    "value": 204.33,
+    "native": "204,33",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:furtoVeiculo",
+    "year": 2022,
+    "value": 272.39,
+    "native": "272,39",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:rouboVeiculo",
+    "year": 2022,
+    "value": 51.89,
+    "native": "51,89",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2022:frvVeiculos",
+    "year": 2022,
+    "value": 324.28,
+    "native": "324,28",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2022",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:homicidios",
+    "year": 2021,
+    "value": 6.28,
+    "native": "6,28",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:furtos",
+    "year": 2021,
+    "value": 693.33,
+    "native": "693,33",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:roubos",
+    "year": 2021,
+    "value": 233.71,
+    "native": "233,71",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:frvHabitantes",
+    "year": 2021,
+    "value": 153.76,
+    "native": "153,76",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:furtoVeiculo",
+    "year": 2021,
+    "value": 172.58,
+    "native": "172,58",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:rouboVeiculo",
+    "year": 2021,
+    "value": 65.15,
+    "native": "65,15",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2021:frvVeiculos",
+    "year": 2021,
+    "value": 237.72,
+    "native": "237,72",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2021",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:homicidios",
+    "year": 2020,
+    "value": 5.17,
+    "native": "5,17",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:furtos",
+    "year": 2020,
+    "value": 562.2,
+    "native": "562,20",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:roubos",
+    "year": 2020,
+    "value": 252.68,
+    "native": "252,68",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:frvHabitantes",
+    "year": 2020,
+    "value": 176.27,
+    "native": "176,27",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:furtoVeiculo",
+    "year": 2020,
+    "value": 217.18,
+    "native": "217,18",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:rouboVeiculo",
+    "year": 2020,
+    "value": 60.79,
+    "native": "60,79",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2020:frvVeiculos",
+    "year": 2020,
+    "value": 277.97,
+    "native": "277,97",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2020",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:homicidios",
+    "year": 2019,
+    "value": 4.95,
+    "native": "4,95",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:furtos",
+    "year": 2019,
+    "value": 724.88,
+    "native": "724,88",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:roubos",
+    "year": 2019,
+    "value": 311.95,
+    "native": "311,95",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:frvHabitantes",
+    "year": 2019,
+    "value": 319.31,
+    "native": "319,31",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:furtoVeiculo",
+    "year": 2019,
+    "value": 403.7,
+    "native": "403,70",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:rouboVeiculo",
+    "year": 2019,
+    "value": 101.04,
+    "native": "101,04",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2019:frvVeiculos",
+    "year": 2019,
+    "value": 504.74,
+    "native": "504,74",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2019",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:homicidios",
+    "year": 2018,
+    "value": 5.58,
+    "native": "5,58",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:furtos",
+    "year": 2018,
+    "value": 814.47,
+    "native": "814,47",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:roubos",
+    "year": 2018,
+    "value": 407.23,
+    "native": "407,23",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:frvHabitantes",
+    "year": 2018,
+    "value": 415.25,
+    "native": "415,25",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:furtoVeiculo",
+    "year": 2018,
+    "value": 506.27,
+    "native": "506,27",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:rouboVeiculo",
+    "year": 2018,
+    "value": 163.22,
+    "native": "163,22",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2018:frvVeiculos",
+    "year": 2018,
+    "value": 669.48,
+    "native": "669,48",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2018",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:homicidios",
+    "year": 2017,
+    "value": 6.69,
+    "native": "6,69",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:furtos",
+    "year": 2017,
+    "value": 903.65,
+    "native": "903,65",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:roubos",
+    "year": 2017,
+    "value": 456.41,
+    "native": "456,41",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:frvHabitantes",
+    "year": 2017,
+    "value": 473.86,
+    "native": "473,86",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:furtoVeiculo",
+    "year": 2017,
+    "value": 588.04,
+    "native": "588,04",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:rouboVeiculo",
+    "year": 2017,
+    "value": 181.99,
+    "native": "181,99",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2017:frvVeiculos",
+    "year": 2017,
+    "value": 770.02,
+    "native": "770,02",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2017",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:homicidios",
+    "year": 2016,
+    "value": 10.88,
+    "native": "10,88",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:furtos",
+    "year": 2016,
+    "value": 937.64,
+    "native": "937,64",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:roubos",
+    "year": 2016,
+    "value": 625.58,
+    "native": "625,58",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:frvHabitantes",
+    "year": 2016,
+    "value": 473.38,
+    "native": "473,38",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:furtoVeiculo",
+    "year": 2016,
+    "value": 572.05,
+    "native": "572,05",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:rouboVeiculo",
+    "year": 2016,
+    "value": 206.24,
+    "native": "206,24",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2016:frvVeiculos",
+    "year": 2016,
+    "value": 778.29,
+    "native": "778,29",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2016",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:homicidios",
+    "year": 2015,
+    "value": 9.52,
+    "native": "9,52",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:furtos",
+    "year": 2015,
+    "value": 802.76,
+    "native": "802,76",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:roubos",
+    "year": 2015,
+    "value": 514.6,
+    "native": "514,60",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:frvHabitantes",
+    "year": 2015,
+    "value": 422.12,
+    "native": "422,12",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:furtoVeiculo",
+    "year": 2015,
+    "value": 486.86,
+    "native": "486,86",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:rouboVeiculo",
+    "year": 2015,
+    "value": 214.05,
+    "native": "214,05",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2015:frvVeiculos",
+    "year": 2015,
+    "value": 700.91,
+    "native": "700,91",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2015",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:homicidios",
+    "year": 2014,
+    "value": 8.29,
+    "native": "8,29",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:furtos",
+    "year": 2014,
+    "value": 797.58,
+    "native": "797,58",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:roubos",
+    "year": 2014,
+    "value": 481.59,
+    "native": "481,59",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:frvHabitantes",
+    "year": 2014,
+    "value": 448.44,
+    "native": "448,44",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:furtoVeiculo",
+    "year": 2014,
+    "value": 459.48,
+    "native": "459,48",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:rouboVeiculo",
+    "year": 2014,
+    "value": 296.0,
+    "native": "296,00",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2014:frvVeiculos",
+    "year": 2014,
+    "value": 755.48,
+    "native": "755,48",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2014",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:homicidios",
+    "year": 2013,
+    "value": 9.93,
+    "native": "9,93",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:furtos",
+    "year": 2013,
+    "value": 892.91,
+    "native": "892,91",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:roubos",
+    "year": 2013,
+    "value": 438.59,
+    "native": "438,59",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:frvHabitantes",
+    "year": 2013,
+    "value": 443.93,
+    "native": "443,93",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:furtoVeiculo",
+    "year": 2013,
+    "value": 494.53,
+    "native": "494,53",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:rouboVeiculo",
+    "year": 2013,
+    "value": 272.19,
+    "native": "272,19",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2013:frvVeiculos",
+    "year": 2013,
+    "value": 766.73,
+    "native": "766,73",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2013",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:homicidios",
+    "year": 2012,
+    "value": 10.21,
+    "native": "10,21",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:furtos",
+    "year": 2012,
+    "value": 929.68,
+    "native": "929,68",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:roubos",
+    "year": 2012,
+    "value": 466.15,
+    "native": "466,15",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:frvHabitantes",
+    "year": 2012,
+    "value": 441.86,
+    "native": "441,86",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:furtoVeiculo",
+    "year": 2012,
+    "value": 512.42,
+    "native": "512,42",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:rouboVeiculo",
+    "year": 2012,
+    "value": 279.23,
+    "native": "279,23",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2012:frvVeiculos",
+    "year": 2012,
+    "value": 791.65,
+    "native": "791,65",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2012",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:homicidios",
+    "year": 2011,
+    "value": 9.72,
+    "native": "9,72",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:furtos",
+    "year": 2011,
+    "value": 944.84,
+    "native": "944,84",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:roubos",
+    "year": 2011,
+    "value": 546.92,
+    "native": "546,92",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:frvHabitantes",
+    "year": 2011,
+    "value": 448.42,
+    "native": "448,42",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:furtoVeiculo",
+    "year": 2011,
+    "value": 495.46,
+    "native": "495,46",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:rouboVeiculo",
+    "year": 2011,
+    "value": 342.72,
+    "native": "342,72",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2011:frvVeiculos",
+    "year": 2011,
+    "value": 838.18,
+    "native": "838,18",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2011",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:homicidios",
+    "year": 2010,
+    "value": 8.74,
+    "native": "8,74",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:furtos",
+    "year": 2010,
+    "value": 973.76,
+    "native": "973,76",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:roubos",
+    "year": 2010,
+    "value": 562.54,
+    "native": "562,54",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:frvHabitantes",
+    "year": 2010,
+    "value": 401.05,
+    "native": "401,05",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:furtoVeiculo",
+    "year": 2010,
+    "value": 499.65,
+    "native": "499,65",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:rouboVeiculo",
+    "year": 2010,
+    "value": 291.2,
+    "native": "291,20",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2010:frvVeiculos",
+    "year": 2010,
+    "value": 790.84,
+    "native": "790,84",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2010",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:homicidios",
+    "year": 2009,
+    "value": 11.13,
+    "native": "11,13",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:furtos",
+    "year": 2009,
+    "value": 959.56,
+    "native": "959,56",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:roubos",
+    "year": 2009,
+    "value": 620.72,
+    "native": "620,72",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:frvHabitantes",
+    "year": 2009,
+    "value": 441.14,
+    "native": "441,14",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:furtoVeiculo",
+    "year": 2009,
+    "value": 565.3,
+    "native": "565,30",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:rouboVeiculo",
+    "year": 2009,
+    "value": 359.61,
+    "native": "359,61",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2009:frvVeiculos",
+    "year": 2009,
+    "value": 924.91,
+    "native": "924,91",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2009",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:homicidios",
+    "year": 2008,
+    "value": 9.33,
+    "native": "9,33",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:furtos",
+    "year": 2008,
+    "value": 931.98,
+    "native": "931,98",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:roubos",
+    "year": 2008,
+    "value": 523.37,
+    "native": "523,37",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:frvHabitantes",
+    "year": 2008,
+    "value": 453.14,
+    "native": "453,14",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:furtoVeiculo",
+    "year": 2008,
+    "value": 651.54,
+    "native": "651,54",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:rouboVeiculo",
+    "year": 2008,
+    "value": 365.64,
+    "native": "365,64",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2008:frvVeiculos",
+    "year": 2008,
+    "value": 1017.19,
+    "native": "1.017,19",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2008",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:homicidios",
+    "year": 2007,
+    "value": 11.63,
+    "native": "11,63",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:furtos",
+    "year": 2007,
+    "value": 1080.56,
+    "native": "1.080,56",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:roubos",
+    "year": 2007,
+    "value": 561.46,
+    "native": "561,46",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:frvHabitantes",
+    "year": 2007,
+    "value": 400.0,
+    "native": "400,00",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:furtoVeiculo",
+    "year": 2007,
+    "value": 621.87,
+    "native": "621,87",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:rouboVeiculo",
+    "year": 2007,
+    "value": 349.25,
+    "native": "349,25",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2007:frvVeiculos",
+    "year": 2007,
+    "value": 971.11,
+    "native": "971,11",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2007",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:homicidios",
+    "year": 2006,
+    "value": 14.5,
+    "native": "14,50",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:furtos",
+    "year": 2006,
+    "value": 1124.31,
+    "native": "1.124,31",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:roubos",
+    "year": 2006,
+    "value": 569.74,
+    "native": "569,74",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:frvHabitantes",
+    "year": 2006,
+    "value": 519.68,
+    "native": "519,68",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:furtoVeiculo",
+    "year": 2006,
+    "value": 838.23,
+    "native": "838,23",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:rouboVeiculo",
+    "year": 2006,
+    "value": 513.37,
+    "native": "513,37",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2006:frvVeiculos",
+    "year": 2006,
+    "value": 1351.6,
+    "native": "1.351,60",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2006",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:homicidios",
+    "year": 2005,
+    "value": 14.55,
+    "native": "14,55",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:furtos",
+    "year": 2005,
+    "value": 1164.96,
+    "native": "1.164,96",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:roubos",
+    "year": 2005,
+    "value": 593.69,
+    "native": "593,69",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:frvHabitantes",
+    "year": 2005,
+    "value": 548.85,
+    "native": "548,85",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:furtoVeiculo",
+    "year": 2005,
+    "value": 928.1,
+    "native": "928,10",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:rouboVeiculo",
+    "year": 2005,
+    "value": 590.48,
+    "native": "590,48",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2005:frvVeiculos",
+    "year": 2005,
+    "value": 1518.58,
+    "native": "1.518,58",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2005",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:homicidios",
+    "year": 2004,
+    "value": 24.16,
+    "native": "24,16",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:furtos",
+    "year": 2004,
+    "value": 1037.13,
+    "native": "1.037,13",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:roubos",
+    "year": 2004,
+    "value": 502.84,
+    "native": "502,84",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:frvHabitantes",
+    "year": 2004,
+    "value": 493.97,
+    "native": "493,97",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:furtoVeiculo",
+    "year": 2004,
+    "value": 912.36,
+    "native": "912,36",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:rouboVeiculo",
+    "year": 2004,
+    "value": 518.62,
+    "native": "518,62",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2004:frvVeiculos",
+    "year": 2004,
+    "value": 1430.98,
+    "native": "1.430,98",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2004",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:homicidios",
+    "year": 2003,
+    "value": 30.9,
+    "native": "30,90",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:furtos",
+    "year": 2003,
+    "value": 951.67,
+    "native": "951,67",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:roubos",
+    "year": 2003,
+    "value": 586.89,
+    "native": "586,89",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:frvHabitantes",
+    "year": 2003,
+    "value": 484.13,
+    "native": "484,13",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:furtoVeiculo",
+    "year": 2003,
+    "value": 897.01,
+    "native": "897,01",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:rouboVeiculo",
+    "year": 2003,
+    "value": 546.42,
+    "native": "546,42",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2003:frvVeiculos",
+    "year": 2003,
+    "value": 1443.42,
+    "native": "1.443,42",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2003",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:homicidios",
+    "year": 2002,
+    "value": 33.37,
+    "native": "33,37",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:furtos",
+    "year": 2002,
+    "value": 853.89,
+    "native": "853,89",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:roubos",
+    "year": 2002,
+    "value": 513.34,
+    "native": "513,34",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:frvHabitantes",
+    "year": 2002,
+    "value": 464.89,
+    "native": "464,89",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:furtoVeiculo",
+    "year": 2002,
+    "value": 921.39,
+    "native": "921,39",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:rouboVeiculo",
+    "year": 2002,
+    "value": 515.89,
+    "native": "515,89",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2002:frvVeiculos",
+    "year": 2002,
+    "value": 1437.27,
+    "native": "1.437,27",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2002",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:homicidios",
+    "year": 2001,
+    "value": 42.15,
+    "native": "42,15",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:furtos",
+    "year": 2001,
+    "value": 840.37,
+    "native": "840,37",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:roubos",
+    "year": 2001,
+    "value": 535.5,
+    "native": "535,50",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:frvHabitantes",
+    "year": 2001,
+    "value": 567.79,
+    "native": "567,79",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:furtoVeiculo",
+    "year": 2001,
+    "value": 1078.9,
+    "native": "1.078,90",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:rouboVeiculo",
+    "year": 2001,
+    "value": 744.86,
+    "native": "744,86",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2001:frvVeiculos",
+    "year": 2001,
+    "value": 1823.77,
+    "native": "1.823,77",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2001",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:homicidios",
+    "year": 2000,
+    "value": 48.71,
+    "native": "48,71",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:furtos",
+    "year": 2000,
+    "value": 957.24,
+    "native": "957,24",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:roubos",
+    "year": 2000,
+    "value": 564.79,
+    "native": "564,79",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:frvHabitantes",
+    "year": 2000,
+    "value": 604.76,
+    "native": "604,76",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:furtoVeiculo",
+    "year": 2000,
+    "value": null,
+    "native": "-",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:rouboVeiculo",
+    "year": 2000,
+    "value": null,
+    "native": "-",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:2000:frvVeiculos",
+    "year": 2000,
+    "value": null,
+    "native": "-",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "2000",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:homicidios",
+    "year": 1999,
+    "value": 47.85,
+    "native": "47,85",
+    "unit": "ocorrências de homicídio doloso /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "homicidios"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:furtos",
+    "year": 1999,
+    "value": 870.79,
+    "native": "870,79",
+    "unit": "ocorrências de furto /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "furtos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:roubos",
+    "year": 1999,
+    "value": 573.62,
+    "native": "573,62",
+    "unit": "ocorrências de roubo /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "roubos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:frvHabitantes",
+    "year": 1999,
+    "value": 474.32,
+    "native": "474,32",
+    "unit": "furto e roubo de veículos /100 mil habitantes",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "frvHabitantes"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:furtoVeiculo",
+    "year": 1999,
+    "value": null,
+    "native": "-",
+    "unit": "furto de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "furtoVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:rouboVeiculo",
+    "year": 1999,
+    "value": null,
+    "native": "-",
+    "unit": "roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "rouboVeiculo"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  },
+  {
+    "evidence_id": "indep:ssp:taxa:1999:frvVeiculos",
+    "year": 1999,
+    "value": null,
+    "native": "-",
+    "unit": "furto e roubo de veículos /100 mil veículos",
+    "denominator_source": "Fundação SEADE para habitantes, conforme PDA2025p20; valor exato da população/frota não consta neste endpoint",
+    "denominator_value": null,
+    "raw_file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "locator": {
+      "idUnidade": 560,
+      "ano": "1999",
+      "field": "frvVeiculos"
+    },
+    "method": "Taxa nativa publicada; não recalcular comIBGEatual nem inverter taxa arredondada para obter denominador."
+  }
+]

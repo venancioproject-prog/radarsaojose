@@ -1,0 +1,270 @@
+[
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/q2025.pdf",
+    "accessed_at": "2026-10-08T07:51:40.309909+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 3011984,
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+    "accessed_at": "2026-10-08T07:51:42.140067+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 467239,
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2024_1_20250228153444.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/q2024.pdf",
+    "accessed_at": "2026-10-08T07:51:56.251835+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 2330981,
+    "sha256": "3eb5ff2345c8f2dd910b3becb860b559db8b5efc54bd0da5fedc03a11e984f3f"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+    "accessed_at": "2026-10-08T07:51:58.699758+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 416946,
+    "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/relatorio_anual_gestao.aspx",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/catalogo.html",
+    "accessed_at": "2026-10-08T07:52:19.383754+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 66958,
+    "sha256": "685e88f23f5d663691d44bd123cb0f9f00c5300acb67d0ac46083aaaad4c7c83"
+  },
+  {
+    "url": "https://cnes2.datasus.gov.br/Mod_Ind_Tipo_Leito.asp?VEstado=35&VMun=354990&VComp=202412",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cnes-leitos-202412.html",
+    "accessed_at": "2026-10-08T07:52:24.152056+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 78460,
+    "sha256": "53a92a29112e4981a084f2d59aba6c386f24f464c06b95e459ec5c3a9aab5da6"
+  },
+  {
+    "url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/retrospectiva.html",
+    "accessed_at": "2026-10-08T07:52:24.801613+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 39974,
+    "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0"
+  },
+  {
+    "url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/dengue2019.html",
+    "accessed_at": "2026-10-08T07:52:25.216385+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 27934,
+    "sha256": "ffea05df0a2095407434ca93263f4cae50520377dae3df30901e01a560749ee1"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+    "accessed_at": "2026-10-08T07:53:47.180373+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 457059,
+    "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+    "accessed_at": "2026-10-08T07:53:56.876220+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 422961,
+    "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+    "accessed_at": "2026-10-08T07:54:05.084823+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 796996,
+    "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+    "accessed_at": "2026-10-08T07:54:13.493229+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 1782546,
+    "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+    "accessed_at": "2026-10-08T07:54:21.507341+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 629755,
+    "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2018_1_20240808134133.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2018.pdf",
+    "accessed_at": "2026-10-08T07:54:30.561117+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 629801,
+    "sha256": "a7bcd5c38aaf10a5a0936d4a84244ca6fdb0d80299479f3f69a4b84dd246b048"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2017_1_20240808134124.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2017.pdf",
+    "accessed_at": "2026-10-08T07:54:32.293304+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 629801,
+    "sha256": "a7bcd5c38aaf10a5a0936d4a84244ca6fdb0d80299479f3f69a4b84dd246b048"
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2016_1_20240808134115.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2016.pdf",
+    "accessed_at": "2026-10-08T07:54:34.217801+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 884547,
+    "sha256": "e9c9b24ce2d21e1e03694f07183edcb8d1720bfc55e4fe03e0dc966a1fd5381e"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2020/dengue2020_import_res.csv",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue2020_import_res.csv",
+    "accessed_at": "2026-10-08T07:56:47.671901+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 115156,
+    "sha256": "928491b27ee6957b16e8a18d8dd19ecf175b8ae13518accaf599781cfbbec133"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2021/dengue2021_mes.csv",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue2021_mes.csv",
+    "accessed_at": "2026-10-08T07:56:48.242650+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 90530,
+    "sha256": "123008a1f158b1907cd799036053cd5c1711f07387796f05fdb151d1357beda6"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2022/dengue2022_mes.csv",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue2022_mes.csv",
+    "accessed_at": "2026-10-08T07:56:48.663378+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 117936,
+    "sha256": "bad1777de37ac5336c14bb1bb7885dd51edcd32f717e721a7de7df7a7054d581"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2023/dengue23_mes.csv",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue23_mes.csv",
+    "accessed_at": "2026-10-08T07:56:49.016731+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 107727,
+    "sha256": "a955c6ed3978b1e73e2e43eff4b1f72ffc0a77c1f5ce6a622f3a64e8f5aa6a0e"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2019/dengue2019_import_res.csv",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue2019_import_res.csv",
+    "accessed_at": "2026-10-08T07:57:37.314894+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 108284,
+    "sha256": "81408a86f0ee90249b324e8067edb400c1efe3df1d0270ac2f211ca99058f135"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2024/dengue24_mes.csv",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue24_mes.csv",
+    "accessed_at": "2026-10-08T07:57:37.682016+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 114187,
+    "sha256": "9c1daa9099de409528440137da8678a0c1cdcd0fb8ee4fcd75744416bd5d07e3"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/resources/cve-centro-de-vigilancia-epidemiologica/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/dados/dengue/2025/dengue_csv_2025.zip",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-dengue_csv_2025.zip",
+    "accessed_at": "2026-10-08T07:57:37.998821+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 67298,
+    "sha256": "e744567834343f317a4a8d13a7cb7aebe964835d71ac55966ce78d7d1884f225"
+  },
+  {
+    "url": "https://bvsms.saude.gov.br/bvs/saudelegis/gm/2025/prt6878_25_04_2025.html",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/pni-portaria2025.html",
+    "accessed_at": "2026-10-08T07:59:53.202212+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 110705,
+    "sha256": "706b8b90d2d9947b5682975b9832ced01f91fdc23653c4f60daa3e18822f8b06"
+  },
+  {
+    "url": "https://tabnet.datasus.gov.br/cgi/sih/Proced_hosp_loc_int_2008.pdf",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/sih-notas.pdf",
+    "accessed_at": "2026-10-08T08:00:14.450020+00:00",
+    "http_status": "000",
+    "exit_code": 28,
+    "error": "curl: (28) Failed to connect to tabnet.datasus.gov.br:443 after 21161 ms: Could not connect to server\n"
+  },
+  {
+    "url": "https://www.saude.sp.gov.br/cve-centro-de-vigilancia-epidemiologica-prof.-alexandre-vranjac/areas-de-vigilancia/doencas-de-transmissao-por-vetores-e-zoonoses/arboviroses-urbanas/dados-estatisticos/dengue-dados-estatisticos",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cve-catalogo.html",
+    "accessed_at": "2026-10-08T08:00:15.746269+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 132904,
+    "sha256": "20e2eb592e33abe3d808899583e9d6a5f9c89fe60a9d959779686a1d2653765a"
+  },
+  {
+    "url": "https://wiki.datasus.gov.br/cnes/index.php/Pain%C3%A9is_ElastiCNES",
+    "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/cnes-metodologia.html",
+    "accessed_at": "2026-10-08T08:00:17.085859+00:00",
+    "http_status": "200",
+    "exit_code": 0,
+    "error": "",
+    "bytes": 71881,
+    "sha256": "4f8b2b3ebccc15e726f73dea45898b93e4982960291324d2897676b0a509dadc"
+  }
+]

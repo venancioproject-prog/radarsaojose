@@ -1,0 +1,1076 @@
+
+PAGE 1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PLANO DE DADOS 
+ABERTOS – PDA 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SECRETARIA DA SEGURANÇA PÚBLICA 
+GOVERNO DO ESTADO DE SÃO PAULO 
+ 
+Publicado em 21 de maio de 2025. 
+
+PAGE 2
+SECRETÁRIO DA SEGURANÇA PÚBLICA  
+Guilherme Muraro Derrite  
+ 
+SECRETÁRIO EXECUTIVO  
+Osvaldo Nico Gonçalves  
+ 
+CHEFE DE GABINETE  
+Paulo Maurício Maculevicius Ferreira 
+ 
+OUVIDORA SETORIAL 
+Dilene Alessandra Cristina Magri Squassoni 
+ 
+COORDENADOR DO GRUPO DE TECNOLOGIA DA INFORMAÇÃO  
+Marcelo Douglas de Souza 
+ 
+DELEGADO DE POLÍCIA 
+MAURÍCIO CORREALI 
+ 
+CAPITÃO PM 
+JEANNE SUELEM TAVARES 
+ 
+PERITO CRIMINAL 
+ANTÔNIO CARMINO SALERNO JÚNIOR 
+  
+
+PAGE 3
+SUMÁRIO 
+1. INTRODUÇÃO ................................................................................................................ 3 
+2. CENÁRIO INSTITUCIONAL ............................................................................................. 4 
+3. OBJETIVOS DO PLANO DE DADOS ABERTOS ................................................................ 5 
+3.1 Objetivo Geral ......................................................................................................... 5 
+3.2 Objetivos Específicos .............................................................................................. 5 
+4. CONSTRUÇÃO E EXECUÇÃO DO PLANO DE DADOS ABERTOS ...................................... 6 
+5. DADOS SELECIONADOS PARA ABERTURA .................................................................... 7 
+5.1. Base: Chamados recebidos pelo número de emergência 190 .............................. 8 
+5.2. Base: Convênios firmados pela SSP ....................................................................... 9 
+6. PUBLICIZAÇÃO ............................................................................................................ 10 
+7. MONITORAMENTO E COMUNICAÇÃO ....................................................................... 11 
+8. PLANO DE AÇÃO ......................................................................................................... 12 
+8.1. Cronograma de Elaboração do PDA ..................................................................... 13 
+8.2. Cronograma de Abertura das Bases de Dados .................................................... 13 
+9. CONSIDERAÇÕES FINAIS ............................................................................................. 14 
+ANEXO - BASES DE DADOS JÁ PUBLICADAS EM TRANSPARÊNCIA ATIVA PELA 
+SECRETARIA DA SEGURANÇA PÚBLICA DO ESTADO DE SÃO PAULO: ............................ 15 
+ 
+ 
+1. INTRODUÇÃO 
+A elaboração do Plano de Dados Abertos (PDA) da Secretaria da Segurança Pública 
+do Estado de São Paulo para o biênio 2025 -2027 alinha-se à Política de Dados 
+Abertos da Administração Pública direta e autárquica do Estado de São Paulo, 
+instituída pelo Decreto Estadual nº 68.769, de 14 de agosto de 2024, e regulamentada 
+pela Resolução CGE nº 14, de 24 de setembro de 2024. Este plano tem como objetivo 
+orientar a sistematização da abertura de dados públicos produzidos o u acumulados 
+pela SSP, assegurando o acesso amplo e irrestrito a informações de interesse público, 
+ressalvadas as hipóteses legais de sigilo. 
+A Secretaria da Segurança Pública do Estado de São Paulo, ciente da importância da 
+transparência e da prestação de contas à sociedade, já vem implementando, de forma 
+contínua, iniciativas voltadas à divulgação ativa de informações relacionadas às suas 
+políticas e ações. Com o objetivo de fortalecer a confiança do cidadão nas instituições 
+
+PAGE 4
+de segurança pública, a Secretaria adota práticas consolidadas de transparência ativa, 
+disponibilizando uma série de dados e relatórios que refletem suas atividades e 
+resultados. 
+Essas informações incluem, mas não se limitam a, estatísticas sobre criminalidade, 
+ações de prevenção, programas de segurança pública, investimentos realizados e 
+resultados obtidos. A publicação regular desses dados permite que a população 
+acompanhe de for ma clara e objetiva as iniciativas da secretaria, promovendo um 
+ambiente de diálogo e participação cidadã. 
+Além disso, a transparência ativa contribui para a responsabilização dos gestores 
+públicos, uma vez que possibilita que os cidadãos monitorem e avaliem a eficácia das 
+políticas implementadas. A Secretaria da Segurança Pública reafirma, com este Plano, 
+seu compromisso com a transparência, a melhoria contínua da gestão e o 
+fortalecimento da comunicação institucional, assegurando que as informações 
+estejam acessíveis a todos, em linguagem clara e em formatos abertos e reutilizáveis. 
+A presente iniciativa integra -se aos instrumentos de planejamento e gestão da 
+Secretaria, como o Plano Plurianual do Governo do Estado, o Planejamento 
+Estratégico da SSP -SP e as diretrizes do Programa SP+Integridade, refletindo uma 
+visão de segurança públi ca orientada por dados, evidências e participação cidadã. 
+Dessa forma, o PDA 2025 configura -se como ferramenta estratégica de governança 
+pública, inovação institucional e fortalecimento do controle social no âmbito da 
+segurança pública estadual. 
+ 
+2. CENÁRIO INSTITUCIONAL 
+A Secretaria da Segurança Pública do Estado de São Paulo (SSP -SP) é o órgão 
+responsável pela formulação, coordenação e implementação da política estadual de 
+segurança pública, bem como pela supervisão e articulação das atividades 
+desenvolvidas pelas polícias Civil, Militar e Técnico-Científica. Sua missão institucional 
+é garantir à sociedade paulista o pleno exercício da cidadania por meio da 
+preservação da ordem pública, da integridade das pessoas e do patrimônio. 
+Nesse contexto, a SSP -SP atua de maneira integrada com os demais órgãos do 
+Governo do Estado, com o Poder Judiciário, o Ministério Público, a Defensoria Pública, 
+e com a sociedade civil, visando à promoção de políticas públicas baseadas em 
+evidências, à prevenção e repressão qualificada à criminalidade e à melhoria contínua 
+dos serviços prestados ao cidadão. 
+
+PAGE 5
+A atuação da Secretaria está orientada por instrumentos de planejamento estratégico 
+e normativos que consolidam seu compromisso com a eficiência, a inovação e a 
+integridade institucional. Entre eles destacam-se o Plano Plurianual do Estado de São 
+Paulo (PPA 2024 –2027), o Plano de Integridade da SSP -SP, os planos setoriais de 
+modernização administrativa e digitalização de serviços públicos, além do conjunto 
+de normativos internos que regulam a gestão da informação, a proteção de dados 
+pessoais e a transparência ativa. 
+A elaboração deste Plano de Dados Abertos insere -se em uma agenda institucional 
+mais ampla de fortalecimento da governança pública, da valorização da gestão 
+orientada por resultados e da ampliação do controle social. Ao sistematizar a abertura 
+de dados púb licos produzidos ou custodiados pela Secretaria, o PDA busca não 
+apenas atender às exigências legais, mas também promover a cultura de dados 
+abertos como ferramenta estratégica de inovação, participação e qualificação da 
+gestão pública no campo da segurança. 
+Ademais, a SSP -SP reconhece que a transparência ativa e o acesso à informação 
+constituem pilares essenciais da democracia e da confiança institucional. Nesse 
+sentido, o PDA 2025-2026 reafirma o compromisso da Secretaria com a produção e 
+a divulgação de dados confiáveis, tempestivos, em formatos abertos, com linguagem 
+acessível e valor informativo para pesquisadores, gestores públicos, imprensa e 
+cidadãos em geral. 
+ 
+3. OBJETIVOS DO PLANO DE DADOS ABERTOS  
+ 
+3.1 Objetivo Geral 
+Promover a sistematização, ampliação e qualificação da política de 
+dados abertos da Secretaria da Segurança Pública do Estado de São Paulo, 
+fortalecendo os princípios da transparência ativa, do controle social, da governança 
+pública e da gestão baseada em evidências, por meio da disponibilização de dados 
+públicos em formatos abertos, acessíveis e reutilizáveis. 
+ 
+3.2 Objetivos Específicos 
+• Ampliar o acesso da sociedade às informações produzidas ou custodiadas pela 
+SSP-SP, assegurando a publicidade e a clareza dos dados, respeitadas as restrições 
+legais de sigilo e proteção de dados pessoais; 
+
+PAGE 6
+• Incentivar a participação cidadã nos temas de segurança pública, permitindo 
+que pesquisadores, organizações da sociedade civil, veículos de imprensa e cidadãos 
+em geral possam utilizar os dados para análises, diagnósticos e proposição de 
+políticas públicas; 
+• Aprimorar a tomada de decisão e a formulação de políticas públicas baseadas 
+em dados concretos, confiáveis e atualizados; 
+• Estimular a inovação e o desenvolvimento de soluções tecnológicas por meio 
+do uso e reuso de dados públicos, favorecendo a criação de ferramentas, estudos e 
+serviços voltados à melhoria da segurança pública; 
+• Promover a integração entre os órgãos vinculados à SSP, ampliando o 
+compartilhamento interno de informações e a cultura de governança orientada por 
+dados; 
+• Reforçar a responsabilização institucional e a prestação de contas perante a 
+sociedade, ao garantir a abertura e a rastreabilidade de informações sobre a atuação 
+da Secretaria; 
+• Fortalecer a infraestrutura de gestão da informação e os processos de 
+curadoria e atualização das bases de dados públicas da SSP-SP. 
+ 
+4. CONSTRUÇÃO E EXECUÇÃO DO PLANO DE DADOS 
+ABERTOS 
+A elaboração do Plano de Dados Abertos da Secretaria da Segurança Pública do 
+Estado de São Paulo (PDA SSP 2025) foi conduzida por Grupo de Trabalho instituído 
+por meio da Resolução SSP nº 05/2025, com representantes da Ouvidoria Setorial, da 
+Coordenadoria de Tecnologia da Informaç ão (GTI), das Polícias Civil e Militar e da 
+Superintendência da Polícia Técnico-Científica. Os trabalhos seguiram as diretrizes do 
+Decreto nº 68.769/2024, da Resolução CGE nº 14/2024 e do Manual de Elaboração 
+de PDAs da Controladoria Geral do Estado (CGE-SP). 
+O processo de construção do PDA foi documentado por meio de reuniões técnicas, 
+atas e correspondências institucionais que registram os marcos da execução do plano. 
+Dentre os principais documentos produzidos destacam-se: 
+• Convocação oficial da Ouvidoria Setorial para formação do GT; 
+
+PAGE 7
+• 1ª Reunião do Grupo de Trabalho,  em que se discutiu a consolidação do 
+inventário de dados, a necessidade de aplicação da matriz de priorização 
+sobre bases de dados adicionais (além das já publicadas) e a análise do grau 
+de sigilo das informações; 
+• 2ª Reunião do Grupo de Trabalho , definiu-se os prazos de implantação para 
+as novas bases de dados priorizadas — Convênios e Chamados do 190 —, 
+com cronograma fixado em 6 e 8 meses, respectivamente; 
+• Planilha de Inventário de Bases compiladas pela CGE, recebida e validada pelas 
+equipes técnicas da SSP. 
+O Grupo de Trabalho iniciou suas atividades com o levantamento e validação do 
+inventário de bases de dados sob a responsabilidade da Pasta, avaliando a natureza 
+das informações, o grau de sigilo, o formato dos dados e o nível atual de publicização. 
+Esse levantamento seguiu o modelo estabelecido no Anexo I do Manual da CGE. 
+Posteriormente, foi aplicada a matriz de priorização, com base nos critérios definidos 
+no Anexo II da Resolução CGE nº 14/2024, a fim de selecionar as bases a serem abertas 
+no biênio de vigência do plano. As bases escolhidas foram: 
+• Chamados recebidos pelo número de emergência 190 – sob responsabilidade 
+da Polícia Militar; 
+• Convênios firmados pela SSP  – sob responsabilidade da Assessoria Técnic o-
+Policial (ATP) da Secretaria. 
+Essas bases foram selecionadas por seu elevado interesse público, baixo risco de 
+exposição de dados sensíveis e viabilidade técnica de abertura, conforme discutido e 
+deliberado nas reuniões técnicas. 
+As etapas seguintes envolveram o planejamento do cronograma de abertura, a 
+designação dos responsáveis técnicos por cada base e a articulação com as áreas 
+operacionais para garantir a regularidade da atualização, a disponibilização em 
+formato aberto e a ca talogação conforme os padrões definidos pela Controladoria 
+Geral do Estado. 
+A execução do plano será monitorada pela Ouvidoria Setorial e pela Coordenadoria 
+de Tecnologia da Informação, sob coordenação da autoridade designada nos termos 
+do artigo 7º do Decreto nº 68.769/2024. Relatórios de acompanhamento serão 
+elaborados e encaminhados à CGE conforme o cronograma estipulado. 
+5. DADOS SELECIONADOS PARA ABERTURA 
+Com base no inventário de bases de dados da Secretaria da 
+Segurança Pública do Estado de São Paulo (SSP -SP) e na aplicação da matriz de 
+
+PAGE 8
+priorização estabelecida pela Resolução CGE nº 14/2024, foram selecionadas, para 
+abertura durante o biênio 2025–2027, duas novas bases de dados que ainda não 
+estavam publicadas em formato aberto e padronizado: Chamados do número de 
+emergência 190 e Convênios firmados pela SSP. 
+A seleção considerou critérios como o grau de interesse público, a 
+frequência de solicitação em transparência passiva, a viabilidade técnica de 
+abertura, o impacto potencial para o aprimoramento da gestão e a possibilidade 
+de uso por parte da sociedade civil e pesquisadores. As bases já publicadas no site 
+da SSP (em especial os bancos de dados estatísticos) foram mantidas com seus 
+respectivos vínculos e não compuseram a matriz de priorização, por já estarem em 
+conformidade com os princípios da política de dados abertos. 
+ 
+5.1. Base: Chamados recebidos pelo número de emergência 190 
+• Órgão responsável: Polícia Militar do Estado de São Paulo 
+• Descrição: Quantitativo total de chamadas recebidas pelo serviço telefônico 
+de emergência 190, com desagregações por período e localização 
+geográfica, respeitadas as restrições legais quanto à identificação de 
+indivíduos. 
+• Justificativa da priorização: Alta demanda social e institucional por 
+informações sobre o volume de atendimento emergencial; relevância para 
+diagnósticos de gestão e planejamento policial; possibilidade de uso em 
+estudos sobre percepção de segurança, resposta policial e estatísticas 
+operacionais. 
+• Prazo de implantação: 6 meses 
+• Periodicidade de atualização: Mensal 
+• Responsável técnico: Centro de Operações da Polícia Militar (COPOM), com 
+apoio da Coordenadoria de Tecnologia da Informação 
+ 
+A quantidade de chamados recebidos pelo serviço telefônico de 
+emergência “190” é um dado de fácil extração e sistematização, uma vez que todos 
+os registros são automaticamente catalogados pelos sistemas de atendimento do 
+Centro de Operações da Polícia Militar (COPOM) e controlados pela Divisão de 
+Sistemas de Administração de Dados – Coordenadoria Operacional da Polícia 
+Militar (Coord Op PM). A divulgação do vol ume total de ligações pode contribuir 
+para demonstrar à sociedade o nível de demanda enfrentado diariamente pela 
+PMESP.  
+
+PAGE 9
+Ressalta-se que a divulgação dos chamados de forma segmentada 
+por “natureza da ocorrência” exige cautela, pois a classificação inicial da solicitação 
+é feita com base na descrição fornecida pelo solicitante, sem conhecimento 
+técnico, legal ou precisão terminológica. Tal circunstância pode gerar discrepâncias 
+entre o motivo alegado na chamada de emerg ência e a ocorrência efetivamente 
+constatada pela guarnição no local, como nos casos em que o cidadão relata ter 
+sido vítima de roubo, quando na realidade ocorreu um furto. 
+Com base no exposto acima, é necessário destacar que o número 
+elevado de chamadas de determinadas naturezas pode não refletir o cenário de 
+maneira realista, podendo gerar repercussão social desproporcional ou indevida, 
+contribuindo para a formação de percepções equivocadas sobre a segurança 
+pública. A ssim, é preciso advertir que a  simples contagem de chamadas sob 
+determinadas classificações não reflete, necessariamente, a efetiva incidência 
+criminal ou a gravidade dos casos atendidos. 
+Assim, é importante que  a divulgação desses dados  seja 
+acompanhada de metodologia clara a ser estabelecida pela Polícia Militar quanto 
+a sua coleta, contextualização estatística e advertência quanto às limitações da 
+natureza informativa inicial, evitando  que o dado bruto gere interpretações 
+alarmistas ou sirva de fundamento para diagnósticos equivocados sobre a 
+criminalidade. 
+Estima-se que, em até 6 (seis) meses, os dados estarão à disposição 
+da população no site oficial da Secretaria da Segurança Pública. 
+ 
+5.2. Base: Convênios firmados pela SSP 
+• Órgão responsável: Secretaria da Segurança Pública – Assessoria Técnico-
+Policial (ATP) 
+• Descrição: Relação dos convênios firmados pela SSP com municípios, 
+entidades públicas e privadas, contendo número do convênio, objeto, valores 
+envolvidos, vigência, situação e partes conveniadas, bem como edição e 
+vigência das Resoluções Secretariais. 
+• Justificativa da priorização: Alta relevância para o controle social e a análise 
+da alocação de recursos e parcerias institucionais; possibilidade de integração 
+com outras bases de transparência orçamentária; facilidade de extração e 
+publicação. 
+• Prazo de implantação: 8 meses 
+• Periodicidade de atualização: Diária 
+• Responsável técnico: Assessoria Técnico-Policial (ATP), com apoio do Grupo 
+de Tecnologia da Informação 
+
+PAGE 10
+ 
+A transparência constitui princípio constitucional inafastável, conforme, reforçado 
+pela Lei de Acesso à Informação (Lei nº 12.527/11), que determina em seu art. 8º a 
+divulgação proativa de informações de interesse coletivo. Os convênios e parcerias, 
+que mobilizam recursos públicos, efetivo e estrutura operacional, são 
+inequivocamente matéria de interesse social. 
+A legislação atual confere amparo à publicização desses dados. O Decreto Estadual 
+nº 68.769/24 regulamenta a política de dados abertos, enquanto a Lei nº 14.133/21 
+(Nova Lei de Licitações) e a Lei nº 13.019/14 (Marco Regulatório das Organizações 
+da Sociedade Civil) impõem a publicidade de contratos, convênios e parcerias com 
+entidades privadas. Alé m disso, o Decreto nº 66.173/2021, que atualiza os 
+procedimentos de transparência ativa e passiva no âmbito estadual, reforça a 
+obrigatoriedade de disponibilização de informações relacionadas a transferências 
+voluntárias, convênios e outros instrumentos co ngêneres, alinhando -se aos 
+princípios da publicidade e da eficiência. 
+A abertura do banco de dados do Sistema de Informações da Assessoria Técnico-
+Policial – ATP, da Secretaria da Segurança Pública possibilitará ao cidadão , de 
+forma mais simplificada, a consulta à edição e vigência das Resoluções Secretariais, 
+bem como, à celebração e vigência de convênios da Pasta, Polícia Militar, Polícia 
+Civil e Polícia Técnico-Científica. 
+Estima-se que, em até 8 (oito) meses, os dados estarão à disposição da população 
+no site oficial da Secretaria da Segurança Pública. 
+ 
+As demais bases de dados já são publicadas regularmente no site da SSP , 
+sobretudo no campo “Estatística” da Coordenadoria de Análise e Planejamento 
+(CAP), com ampla divulgação mensal e trimestral, além de ferramentas interativas 
+(como os painéis SPVida, SPCarga e SP Cenas de Uso), em conformidade com os 
+princípios da transparência ativa. 
+As novas bases serão disponibilizadas em formato aberto (.csv/.xlsx), com 
+metadados descritivos, linguagem cidadã e orientações para reuso. A 
+nomenclatura e a estrutura de apresentação seguirão os padrões definidos pela 
+CGE, para posterior catalogação no P ortal de Dados Abertos do Estado de São 
+Paulo. 
+ 
+6. PUBLICIZAÇÃO 
+
+PAGE 11
+A Secretaria da Segurança Pública do Estado de São Paulo já mantém, em seu portal 
+institucional, a disponibilização sistemática de diversas bases de dados no campo 
+“Estatística” e nas seções de “Transparência”, garantindo o acesso público a 
+informações atu alizadas sobre criminalidade, produtividade policial, convênios, 
+contratos, receitas e despesas. 
+Enquanto o Portal Estadual de Dados Abertos estiver em fase de implementação, as 
+bases previstas no presente Plano serão publicadas diretamente no site oficial da SSP-
+SP, no menu “Transparência”, sob o submenu “Dados Abertos”, conforme diretrizes 
+estabelecidas pela Controladoria Geral do Estado. As bases estarão disponíveis em 
+formato aberto, processável por máquina, com periodicidade definida, metadados 
+descritivos e linguagem acessível. 
+A publicização seguirá os seguintes parâmetros: 
+• Formato de arquivo: preferencialmente CSV e XLSX, conforme a estrutura dos 
+dados; 
+• Metadados: cada base conterá título, descrição, período de abrangência, 
+órgão responsável, frequência de atualização e explicitação da política pública 
+associada; 
+• Linguagem cidadã: os conjuntos de dados serão descritos com termos claros 
+e compreensíveis ao público geral, sem prejuízo de rigor técnico; 
+• Links permanentes: as bases terão links fixos de acesso, com possibilidade de 
+download direto, sem exigência de cadastro prévio ou autenticação. 
+Após a publicação inicial no site da SSP-SP, será realizada a catalogação das bases no 
+Portal Estadual de Dados Abertos, seguindo a nomenclatura, estrutura e campos 
+definidos no presente PDA, de modo a garantir a integração e padronização com as 
+demais secretarias e entidades do Governo do Estado. 
+As ações de publicação e manutenção das bases estarão sob a responsabilidade 
+direta da Coordenadoria de Tecnologia da Informação (GTI) , em articulação com os 
+setores técnicos responsáveis por cada base (COPOM, ATP), sob supervisão da 
+Ouvidoria Setorial , autoridade designada nos termos do artigo 7º do Decreto nº 
+68.769/2024. 
+7. MONITORAMENTO E COMUNICAÇÃO 
+A execução do Plano de Dados Abertos da Secretaria da Segurança Pública do Estado 
+de São Paulo será acompanhada por estrutura de governança composta pela 
+Ouvidoria Setorial, designada como autoridade responsável nos termos do artigo 7º 
+do Decreto Estadual nº 68.769/2024, e pela Coordenadoria de Tecnologia da 
+
+PAGE 12
+Informação (GTI), que atuará como unidade executora da publicação e manutenção 
+técnica das bases de dados abertas. 
+O monitoramento das ações previstas no PDA será realizado por meio das seguintes 
+estratégias: 
+• Acompanhamento contínuo da execução dos prazos estipulados na matriz de 
+priorização e no cronograma de abertura de dados; 
+• Elaboração de relatórios de andamento  semestrais, contendo o status de 
+implantação das bases priorizadas, dificuldades enfrentadas, atualizações 
+realizadas e propostas de aprimoramento; 
+• Reuniões periódicas internas entre os setores responsáveis para alinhamento 
+das entregas e resolução de obstáculos técnicos ou operacionais; 
+• Controle de versões e registros de publicação , garantindo a rastreabilidade 
+dos conjuntos de dados publicados e a verificação de sua integridade; 
+• Identificação de riscos e medidas mitigatórias , especialmente no que tange à 
+proteção de dados pessoais e à segurança institucional, conforme a Lei nº 
+13.709/2018 (LGPD). 
+Em relação à comunicação, a SSP-SP promoverá ações voltadas à ampla divulgação 
+dos dados abertos e à sensibilização dos públicos interessados, como: 
+• Avisos no site oficial da SSP sobre novas bases disponibilizadas; 
+• Inclusão de notícias e informativos em canais institucionais , como boletins 
+internos e redes sociais da Secretaria; 
+• Participação em eventos promovidos pela Controladoria Geral do Estado , 
+visando à troca de experiências e ao fortalecimento da política estadual de 
+dados abertos; 
+• Estímulo à reutilização dos dados pela sociedade civil, imprensa, academia e 
+setor privado, inclusive com inserção de seções explicativas e orientações no 
+portal. 
+A SSP compromete-se a tratar o Plano de Dados Abertos como um instrumento vivo, 
+sujeito a avaliações e aprimoramentos constantes, mantendo canal aberto com a 
+sociedade por meio da Ouvidoria Setorial para o recebimento de sugestões, críticas 
+e demandas relacionadas à abertura de informações públicas. 
+8. PLANO DE AÇÃO 
+A execução do Plano de Dados Abertos da Secretaria da Segurança Pública do Estado 
+de São Paulo será guiada por um conjunto de ações distribuídas ao longo do biênio 
+2025–2027. O plano de ação contempla três eixos principais: (i) a elaboração do PDA, 
+
+PAGE 13
+(ii) a abertura das bases de dados priorizadas e (iii) ações de promoção, divulgação e 
+incentivo ao uso dos dados abertos. 
+8.1. Cronograma de Elaboração do PDA 
+Ação Responsável Prazo 
+Constituição do Grupo de 
+Trabalho 
+Secretaria da Segurança Pública (nos 
+termos da Resolução SSP nº 05/2025) 
+Fevereiro de 
+2025 
+Levantamento e 
+consolidação do inventário 
+de bases 
+Coordenadoria de Tecnologia da 
+Informação, Polícia Civil, Polícia Militar, 
+Superintendência da Polícia Técnico-
+Científica 
+Fevereiro/Março 
+2025 
+Aplicação da matriz de 
+priorização Grupo de Trabalho e Ouvidoria Setorial até 14 de março 
+2025 
+Redação final do Plano de 
+Dados Abertos Ouvidoria Setorial e Grupo de Trabalho Março/Abril 2025 
+Encaminhamento à alta 
+administração da Secretaria 
+e à CGE 
+Ouvidoria Setorial Abril/2025 
+8.2. Cronograma de Abertura das Bases de Dados 
+Base de Dados Responsável Técnico Prazo de 
+Abertura 
+Frequência de 
+Atualização 
+Chamados do 
+número de 
+emergência “190” 
+Centro de Operações da Polícia Militar, 
+com apoio da Coordenadoria de 
+Tecnologia da Informação 
+Setembro 
+de 2025 Mensal 
+Convênios 
+firmados pela 
+Secretaria 
+Assessoria Técnico-Policial da Secretaria 
+da Segurança Pública, com apoio da 
+Coordenadoria de Tecnologia da 
+Informação 
+Novembro 
+de 2025 Diário 
+As demais bases de dados já publicadas no site da Secretaria da Segurança Pública, em 
+especial na seção “Estatística”, continuarão a ser atualizadas regularmente conforme os 
+cronogramas já consolidados. 
+8.3. Ações de Promoção e Uso dos Dados Abertos 
+
+PAGE 14
+Ação Responsável Prazo 
+Publicação de notícia institucional 
+sobre o Plano de Dados Abertos 
+Ouvidoria Setorial e Assessoria de 
+Comunicação da Secretaria Abril de 2025 
+Atualização do site com seção 
+dedicada aos dados abertos 
+Coordenadoria de Tecnologia da 
+Informação e Assessoria de 
+Comunicação 
+Maio de 2025 
+Participação no curso da 
+Controladoria Geral do Estado sobre 
+dados abertos 
+Todos os membros do Grupo de 
+Trabalho 
+Março de 2025 
+(realizado) 
+Envio de relatório semestral de 
+monitoramento à Controladoria 
+Geral do Estado 
+Ouvidoria Setorial 
+Setembro de 
+2025 / Março 
+2026 
+Avaliação interna e revisão do plano 
+para o ciclo seguinte (2027–2028) 
+Ouvidoria Setorial e 
+Coordenadoria de Tecnologia da 
+Informação 
+Dezembro de 
+2026 
+ 
+9. CONSIDERAÇÕES FINAIS 
+A elaboração do Plano de Dados Abertos 2025 –2026 da Secretaria da Segurança 
+Pública do Estado de São Paulo representa um passo estratégico no fortalecimento 
+da transparência, da integridade institucional e da governança pública orientada por 
+dados. A sistematização da política de abertura de dados neste plano visa consolidar 
+e ampliar os esforços já empreendidos pela Pasta no campo da transparência ativa, 
+respondendo às diretrizes legais e às expectativas da sociedade por maior acesso à 
+informação, accountability e participação cidadã. 
+A Secretaria reafirma seu compromisso com a disponibilização de informações 
+públicas em formatos abertos, com clareza, regularidade e responsabilidade. A 
+abertura das bases selecionadas neste ciclo – Chamados do número de emergência 
+“190” e Convênios firmados pela Secretaria – está alinhada às prioridades de interesse 
+público e à capacidade técnica da Pasta, e será conduzida de forma segura, com 
+respeito à legislação vigente, especialmente à Lei Geral de Proteção de Dados 
+Pessoais (Lei nº 13.709/2018). 
+O Plano ora apresentado constitui instrumento dinâmico e passível de revisão, 
+devendo ser continuamente aprimorado à luz dos avanços tecnológicos, das 
+
+PAGE 15
+demandas da sociedade e das orientações da Controladoria Geral do Estado. A 
+implementação das ações aqui previstas será acompanhada por equipe técnica 
+multidisciplinar, garantindo a execução do cronograma e o cumprimento dos 
+compromissos assumidos. 
+Por fim, a Secretaria da Segurança Pública entende que a transparência e a abertura 
+de dados não se limitam à publicação de informações, mas configuram um eixo 
+estruturante de uma gestão pública moderna, colaborativa e orientada à obtenção 
+de resultados concretos para o cidadão paulista. 
+ 
+ANEXO - BASES DE DADOS  JÁ PUBLICADAS EM 
+TRANSPARÊNCIA ATIVA PELA SECRETARIA DA SEGURANÇA 
+PÚBLICA DO ESTADO DE SÃO PAULO: 
+PLANO DE AÇÃO 2024 
+https://www.ssp.sp.gov.br/assets/download/planos-aplicacao-2024.pdf 
+CONTRATOS E COMPRAS PÚBLICAS 
+https://www.ssp.sp.gov.br/transparencia/contratos-e-compras-publicas 
+CONVÊNIOS, REPASSES E TRANSFERÊNCIAS 
+https://www.ssp.sp.gov.br/transparencia/convenios-repasses-transferencias 
+RECEITAS E DESPESAS 
+https://www.ssp.sp.gov.br/transparencia/receitas-e-despesas 
+REMUNERAÇÃO MENSAL DOS SERVIDORES PÚBLICOS E DIÁRIAS E PASSAGENS 
+AÉREAS 
+https://www.ssp.sp.gov.br/transparencia/servidores-publicos 
+RESOLUÇÃO SSP 516/2000  
+https://www.doe.sp.gov.br/executivo/secretaria-da-seguranca-publica/ 
+A SSP, visando garantir a total transparência das informações de 
+ocorrências envolvendo policiais, publica mensalmente, no Diário Oficial do Estado, 
+
+PAGE 16
+os dados coletados e tabulados pelas Corregedorias das Polícias Civil e Militar, com 
+os seguintes indicadores: 
+AMBAS AS POLÍCIAS: 
+1. Vítimas não policiais: 
+a. Mortas homicídio doloso: 
+• Por policiais em serviço 
+• Por policiais fora de serviço 
+b. Mortas homicídio culposo 
+• Por policiais em serviço 
+• Por policiais fora de serviço 
+c. Feridas lesão corporal dolosa 
+• Por policiais em serviço 
+• Por policiais fora de serviço 
+d. Feridas lesão corporal culposa 
+• Por policiais em serviço 
+• Por policiais fora de serviço 
+e. Lesão corporal decorrente de intervenção policial 
+• Por policiais em serviço 
+• Por policiais fora de serviço 
+f. Morte decorrente de intervenção policial 
+• Por policiais em serviço 
+• Por policiais fora de serviço 
+ 
+2. Vítimas policiais: 
+a. Mortos: 
+• Em serviço 
+• Fora de serviço 
+ 
+b. Feridos: 
+• Em serviço 
+• Fora de serviço 
+POLÍCIA CIVIL: 
+1. Policiais Civis encaminhados ao serviço de apoio psicológico da Acadepol 
+2. Procedimentos Instaurados: 
+• Boletins de Ocorrência 
+• Inquéritos Policiais 
+• Apurações Preliminares 
+
+PAGE 17
+• Sindicâncias Administrativas 
+• Processos Administrativos 
+• Processos Administrativos – LC 1151/11 – LC 1152/11 
+POLÍCIA MILITAR: 
+1. Número de policiais militares inscritos durante o mês corrente no Programa 
+de Apoio e Acompanhamento ao Policial Militar – PPAPM 
+2. Procedimentos Instaurados: 
+• Auto de prisão em flagrante delito militar 
+• Inquérito Policial Militar 
+• Sindicâncias 
+• Conselhos de Disciplina 
+• Conselhos de Justificação  
+• Processo Administrativo Disciplinar  
+• Termo de Deserção 
+NÚMEROS SEM MISTÉRIO – SISTEMA ESTADUAL DE COLETA DE ESTATÍSTICA 
+CRIMINAL 
+A SSP/SP - Secretaria da Segurança Pública do Estado de São Paulo, 
+em seu site oficial (https://www.ssp.sp.gov.br/), já disponibiliza para a população 
+dados e informações estatísticas dos indicadores criminais e de produtividade 
+policial, com disponibilização, inclusive,  da base de dados em formato aberto, de 
+forma a permitir ao interessado pesquisas individualizadas.
+ 
+Em 2023, foi publicada a Resolução SSP nº 035 de 25 de maio de 2023 
+(complementada pela Resolução  SSP nº 045, de 10 de julho de 2023), que instituiu 
+Grupo de Trabalho para análise e normatização dos instrumentos e mecanismos de 
+ampliação da transparência do Sistema Estadual de Co leta de Estatísticas Criminais. 
+
+
+PAGE 18
+Referido grupo apresentou as Notas Técnicas e Relatório que podem ser consultados 
+no link que segue: 
+https://www.ssp.sp.gov.br/estatistica/nota-tecnica 
+ 
+Indicadores da criminalidade do Estado de São Paulo 
+Em uma iniciativa pioneira, São Paulo divulga mensalmente os dados 
+estatísticos da criminalidade, por Estado, área, município e unidade policial. Os índices 
+também são divulgados trimestralmente, cumprindo a Resolução SSP 161, que dispõe 
+sobre o encaminhamento das informações ao Diário Oficial, bem como a divulgação 
+no site da SSP, no prazo de trinta dias após o encerramento do trimestre.  
+ 
+As estatísticas criminais são utilizadas para retratar a situação da 
+segurança pública e permitir o planejamento de ações policiais e de investimentos no 
+setor. Em São Paulo, a compilação dos dados é feita pela Secretaria da Segurança 
+Pública, por interméd io da Coordenadoria de Análise e Planejamento (CAP) - 
+responsável pela análise dos dados de interesse policial e pela realização de estudos 
+para prevenir e reprimir a criminalidade. 
+ 
+A coleta de dados criminais em todo o Estado de São Paulo padroniza 
+e organiza o fluxo de números coletados junto às polícias, a partir do registro de 
+ocorrências criminais. Seu conteúdo ajuda a monitorar a evolução das tendências dos 
+principais indicadores criminais do período, bem como na tomada de decisões no 
+âmbito do Estado e das polícias. 
+Os dados devem ser interpretados sempre com prudência, pois estão 
+sujeitos a uma série de limites de validade e confiabilidade: eles são antes um retrato 
+do processo social de notificação de crimes do que uma reprodução fiel do universo 
+criminal de um dete rminado local. Para que um crime faça parte das estatísticas 
+oficiais, são necessárias três etapas sucessivas: o crime deve ser detectado, notificado 
+às autoridades policiais e, por último, registrado no boletim de ocorrência. 
+Vale lembrar que nem sempre um aumento dos dados de criminalidade 
+oficiais pode ser interpretado como piora da situação de segurança pública; ao 
+contrário, nos locais onde é grande a ‘cifra negra’, o aumento nos crimes notificados 
+é considerado um indicador positivo de credibilidade e produtividade policial. 
+Estatísticas mensais e trimestrais 
+ 
+Os dados estatísticos do Estado de São Paulo são divulgados na página 
+oficial da SSP em data anterior à publicação oficial em Diário Oficial do Estado (Lei 
+
+PAGE 19
+Estadual nº 9.155/95 e Resolução SSP nº 161/01). No período compreendido entre a 
+divulgação inicial e a publicação oficial em Diário Oficial, há possibilidade de 
+retificações que são atualizadas automaticamente nesta página. 
+Ação policial 
+ 
+Armas de fogo apreendidas, flagrantes de tráfico de entorpecentes, 
+prisões efetuadas e população carcerária são considerados indicadores de atividade 
+policial, pois tratam de crimes sem vítima e decorrem, diretamente, da ação policial. 
+Sendo assim, quando há crescimento desses índices, o indicador é positivo, pois 
+significa que a polícia atuou mais.  
+Dados de Roubos, Furtos, Homicídios, Latrocínios e Lesões Corporais 
+Seguidas de Morte atualizados em 31 de julho de 2023 e disponíveis para a consulta 
+mensal e transparência conforme previsto no cronograma da RES SSP 45/23. 
+Em face da necessidade de complementação das validações dos dados 
+obtidos pelo GT de revisão de indicadores criminais do ano de 2022, por parte da 
+Polícia Civil, deixamos de publicar na presente data os dados estabelecidos na Nota 
+Técnica – Resolução 35/2023. Tão logo sejam alcançadas as aludidas validações, os 
+dados serão publicados pelo GT para revisão de indicadores criminais do ano de 2022. 
+Nota Explicativa 
+Resultados Complementares – 20 de outubro 2023 
+Em atendimento ao previsto na RESOLUÇÃO SSP nº 45 de 10 de julho 
+de 2023 conforme previsto em seu Art. 1º, publicam-se os dados complementares de 
+acordo com o cronograma até o dia 20 de outubro. 
+Especificamente acerca do indicador de Extorsão Mediante Sequestro, 
+considerando que fora identificada inconsistência nos dados publicados a partir de 
+janeiro de 2020, decorrentes de alterações provocadas pelo DECRETO Nº 64.809 de 
+2020 publicam-se nesta oportunidade os dados consolidados desde janeiro de 2020, 
+de acordo com a natureza (rubrica – Art.159 CP) indicada pelo Delegado de Polícia 
+no momento do registro do respectivo boletim de ocorrência. 
+DADOS DOS INDICADORES CRIMINAIS E DE PRODUTIVIDADE POLICIAL 
+DISPONÍVEIS PARA CONSULTA NO SITE DA SSP OU NO DIÁRIO OFICIAL DO 
+ESTADO  
+https://www.ssp.sp.gov.br/estatistica 
+DADOS MENSAIS  
+
+PAGE 20
+https://www.ssp.sp.gov.br/estatistica/dados-mensais 
+1. TAXA DE DELITO  
+ 
+Homicídio doloso por 100 mil habitantes / Furto por 100 mil habitantes / Roubo por 
+100 mil habitantes / Furto e Roubo de Veículo por 100 mil habitantes / Furto por 100 
+mil veículos / Roubo por 100 mil veículos / Furto e Roubo de Veículo por 100 mil 
+veículos 
+De 1999 a 2024 por Município 
+FONTE: 
+• Até 2000: Dados da Res SSP 150/95. 
+• 2001: Dados da Res SSP 160/01. 
+População residente: Fundação SEADE. 
+Projeções de população flutuante para estâncias turísticas: Fundação SEADE. 
+Para os municípios que são considerados estâncias turísticas, a população flutuante 
+utilizada para as taxas do ano de 2012 a 2015 foram projetadas. 
+Os dados estatísticos do Estado de São Paulo são divulgados nesta página em data 
+anterior à publicação oficial em Diário Oficial do Estado (Lei Estadual nº 9.155/95 e 
+Resolução SSP nº 161/01). No período compreendido entre a divulgação inicial e a 
+publicação oficial em Diário Oficial, há possibilidade de retificações que são 
+atualizadas automaticamente nesta página. 
+2. TAXA DE HOMICÍDIO  
+Taxa da quantidade de ocorrências e vítimas de homicídio doloso (taxa por 100 mil 
+ocorrências de homicídios dolosos e taxa por 100 mil vítimas de homicídios dolosos) 
+De 2001 a 2025, por Estado, Capital, Grande São Paulo e Interior, com 
+especificidades por cada região do Interior. 
+3. OCORRÊNCIAS POLICIAIS REGISTRADAS POR ANO 
+De 1999 a 2024 por município 
+FONTE: 
+• Até 2000: Dados da Res SSP 150/95. 
+• 2001: Dados da Res SSP 160/01. 
+
+PAGE 21
+Os dados estatísticos do Estado de São Paulo são divulgados nesta 
+página em data anterior à publicação oficial em Diário Oficial do Estado (Lei 
+Estadual nº 9.155/95 e Resolução SSP nº 161/01). No período compreendido entre a 
+divulgação inicial e a publicação oficial em Diário Oficial, há possibilidade de 
+retificações que são atualizadas automaticamente nesta página. 
+4. OCORRÊNCIAS POLICIAIS REGISTRADAS POR MÊS 
+Ocorrências Criminais e Produtividade Policial 
+De 2001 a 2025 por Região 
+Ocorrências Criminais 
+FONTE: Departamento de Polícia Civil, Polícia Militar e Superintendência da Polícia 
+Técnico-Científica 
+• (1) Soma de Roubo - Outros, Roubo de Carga e Roubo a Banco. 
+• (2) Homicídio Doloso inclui Homicídio Doloso por Acidente de Trânsito. 
+• (3) Nº de Vítimas de Homicídio Doloso inclui Nº de Vítimas de Homicídio 
+Doloso por Acidente de Trânsito. 
+• (4) Soma de Estupro e Estupro de Vulnerável. 
+• (…) Dados não disponíveis. 
+• Os dados estatísticos do Estado de São Paulo são divulgados nesta página 
+em data anterior à publicação oficial em Diário Oficial do Estado (Lei Estadual 
+nº 9.155/95 e Resolução SSP nº 161/01). No período compreendido entre a 
+divulgação inicial e a publicação oficial em Diário Oficial, há possibilidade de 
+retificações que são atualizadas automaticamente nesta página. 
+Nota: 
+Até junho de 2001: delitos por local de registro. A partir de julho de 2001: delitos por 
+local de ocorrência. 
+Produtividade Policial - Naturezas:  
+• Ocorrências de porte de entorpecentes 
+• Ocorrências de tráfico de entorpecentes 
+• Ocorrências de apreensão de entorpecentes (1) 
+• Ocorrências de porte ilegal de arma 
+• Nº de armas de fogo apreendidas 
+• Nº de flagrantes lavrados 
+• Nº de infratores apreendidos em flagrante 
+• Nº de infratores apreendidos por mandado 
+• Nº de infratores presos em flagrante 
+• Nº de infratores presos por mandado 
+
+PAGE 22
+• Nº de prisões efetuadas 
+• Nº de veículos recuperados 
+• Total de inquéritos policiais instaurados 
+ FONTE: RES SSP 160/01 
+• (1) São computadas somente as ocorrências em que houve apenas 
+apreensão de entorpecentes (sem pessoas envolvidas). 
+• (…) Dados não disponíveis. 
+• Os dados estatísticos do Estado de São Paulo são divulgados nesta página 
+em data anterior à publicação oficial em Diário Oficial do Estado (Lei Estadual 
+nº 9.155/95 e Resolução SSP nº 161/01). No período compreendido entre a 
+divulgação inicial e a publicação oficial em Diário Oficial, há possibilidade de 
+retificações que são atualizadas automaticamente nesta página. 
+DADOS TRIMESTRAIS  
+https://www.ssp.sp.gov.br/estatistica/dados-trimestrais 
+Lei 9155/95 
+Resolução SSP 161/01 
+De 1995 a 2023 
+Possibilita ao interessado acesso às seguintes informações, agrupadas 
+por Capital, Grande São Paulo, e cada região do Interior: 
+1. Ocorrências policiais registradas, por natureza 
+2. Atividades de polícia judiciária: 
+• Total de boletins de ocorrência 
+• Total de termos circunstanciados lavrados pela Polícia Civil 
+• Total de inquéritos instaurados 
+3. Ocorrências envolvendo policiais civis (dados da Corregedoria da Polícia 
+Civil): 
+• Pessoas mortas em confronto com a polícia civil em serviço (casos de 
+morte em decorrência de intervenção policial, excluídos homicídio 
+doloso e culposo) 
+• Pessoas mortas por policiais civis de folga (casos de morte em 
+decorrência de intervenção policial, excluídos homicídio doloso e 
+culposo) 
+• Pessoas feridas em confronto com a polícia civil em serviço 
+
+PAGE 23
+• Pessoas feridas por policiais civis de folga 
+• Policiais civis mortos em serviço 
+• Policiais civis mortos de folga 
+• Policiais civis feridos em serviço 
+• Policiais civis feridos de folga 
+4. Atividades policiais: 
+• Prisões efetuadas (em flagrante + por mandado) 
+• Nº de pessoas presas em flagrante 
+• Nº de pessoas presas por mandado 
+• Nº de autos de apreensão (art. 173 ECA) 
+• Nº de infratores apreendidos em flagrante 
+• Nº de infratores apreendidos por mandado 
+• Nº de revistas pessoais/identificação (Dados de Revistas Pessoais no 
+Interior inclui também CPRv e CPAmb) 
+• Armas de fogo apreendidas 
+• Nº de veículos recuperados 
+5. Ocorrências envolvendo policiais militares (dados da Corregedoria da Polícia 
+Militar): 
+• Pessoas mortas em confronto com a polícia militar em serviço (casos 
+de morte em decorrência de intervenção policial, excluídos homicídio 
+doloso e culposo) 
+• Pessoas mortas por policiais militares de folga ( até março de 2015, a 
+Corregedoria da Polícia Militar utilizava uma categoria específica 
+denominada "Homicídio doloso - fora de serviço (reações)", 
+contabilizando somente os casos em que consideravam presentes 
+excludentes de ilicitude. Eram excluídos portan to, os homicídios 
+dolosos e culposos. Esses dados sempre foram publicados no DOE, no 
+último dia do mês seguinte da ocorrência dos dados.  A partir de abril 
+de 2015, a Polícia Militar adequou à exata classificação da Res. SSP 
+40/15, passando a contabilizar todos os casos de morte em decorrência 
+de qualquer intervenção considerada lícita do policial militar em folga, 
+inclusive os casos em que presentes as excludentes de ilicitude. 
+Continuam excluídos os homicídios dolosos, inclusive "homicídios 
+múltiplos" e culposos, que são contabilizados nos termos da Res. SSP 
+160) 
+• Pessoas feridas em confronto com a polícia militar em serviço 
+• Pessoas feridas por policiais militares de folga 
+• Policiais militares mortos em serviço 
+• Policiais militares mortos de folga 
+• Policiais militares feridos em serviço 
+
+PAGE 24
+• Policiais militares feridos de folga 
+6. Ocorrências policiais registradas, por tipo 
+7. Laudos Periciais do Instituto Médico Legal Expedidos – IML (Dados da 
+Superintendência da Polícia Técnico Científica) 
+• Anatomia Patológica 
+• Clínica Médica 
+• Necroscópico 
+• Odontologia Legal 
+• Tanatologia Forense 
+• Toxicologia Forense 
+8. Laudos Periciais do Instituto de Criminalística Expedidos – IC (Dados da 
+Superintendência da Polícia Técnico Científica): 
+• Acidente de trânsito 
+• Análise instrumental 
+• Laudos forenses 
+• Coleta de material 
+• Crimes contra a pessoa 
+• Crimes contra o meio ambiente 
+• Crimes contra o patrimônio 
+• Documentoscopia 
+• Entorpecentes 
+• Identificação criminal 
+• Identificação veicular 
+PAINEL DE DADOS ESTATÍSTICOS 
+https://www.ssp.sp.gov.br/estatistica/painel-estatistico 
+O interessado seleciona os dados de interesse e navega nos 
+indicadores criminais e de produtividade por ano de referência, sendo possível o 
+comparativo entre os anos. 
+CONSULTAS 
+https://www.ssp.sp.gov.br/estatistica/consultas 
+
+PAGE 25
+ 
+Possibilita o download da base de dados criminais e de produtividade, 
+morte decorrente de intervenção policial, celulares, veículos e objetos subtraídos, bem 
+como de registros de óbitos pelo IML, em planilha excel (formato xlsx). 
+DADOS ESTATÍSTCOS DO CORPO DE BOMBEIROS DO ESTADO DE SÃO PAULO 
+https://www.ssp.sp.gov.br/estatistica/corpo-de-bombeiros 
+De 2016 a 2025 
+• Acidentes de trânsito com vítima 
+• Acidentes traumáticos 
+• Atividades educativas 
+• Desabamentos/soterramentos 
+• Incêndios em edificações não sujeitas ao Regulamento de Segurança Contra 
+Incêndios (RSCI) das edificações e áreas de risco do Estado de São Paulo 
+• Incêndios em vegetação 
+• Incêndios em veículos 
+• Vistorias técnicas de regularização 
+• Incêndios em edificações sujeitas ao RSCI 
+• Área atingida, em metros quadrados, em incêndios em edificações sujeitas ao 
+RSCI 
+• Ocorrências emergenciais de urgência, previamente definidas, atendidas 
+dentro do tempo resposta de 20 minutos 
+• Óbitos por afogamento em áreas de interesse de Segurança Pública 
+relacionadas às atividades de bombeiros. 
+
+
+PAGE 26
+ 
+RELATÓRIOS E ESTUDOS 
+https://www.ssp.sp.gov.br/estatistica/relatorios-e-estudos 
+Possibilita ao interessado baixar arquivos com relatórios e estudos 
+acerca da alteração de natureza jurídica de ocorrências decorrente de morte 
+superveniente de vítimas ou de nova interpretação dos fatos no curso das 
+investigações policiais (de 2015 a 2024 ); da diferença entre homicídios dolosos 
+praticados por policiais e letalidade policial, bem como do Manual de Interpretação 
+dos Dados Criminais 
+INDICADORES CRIMINAIS DE MAIOR INTERESSE DOS CIDADÃOS: 
+SP VIDA 
+Sistema de Informação e Prevenção de Crimes Contra a Vida 
+https://www.ssp.sp.gov.br/estatistica/spvida 
+Traz um painel interativo possibilitando ao interessado navegar nas 
+informações dos indicadores de homicídio doloso, feminicídio, latrocínio, lesão 
+corporal seguida de morte e morte suspeita, além de possibilitar o download de 
+planilha excel da base de dados dessas ocorrências.  
+ 
+ 
+
+
+PAGE 27
+SP CENAS DE USO 
+Sistema de Monitoramento das Cenas de Uso 
+https://www.ssp.sp.gov.br/estatistica/sistema-monitoramento-cenas-abertas 
+Segurança Pública nas regiões de cenas de uso do Centro da Capital 
+A presente ferramenta, que passou a ser disponibilizada para a 
+população de São Paulo no sítio eletrônico da Secretaria da Segurança Pública, 
+apresenta um diagnóstico semanal das principais questões afetas à segurança pública 
+presentes nas áreas da região central da capital paulista relacionadas direta ou 
+indiretamente às denominadas cenas de uso, com o objetivo de garantir o direito 
+fundamental de todos os paulistas de informações sobre os problemas criminais que 
+afetam a região em que vivem, assim como sobre as ações desenvolvidas pelo Poder 
+Público para enfrentamento dos problemas e os seus respectivos resultados. 
+A segurança pública nesta região da capital foi sendo degradada dia 
+após dia, especialmente na última década e deriva de problemas complexos 
+relacionados principalmente a questões de saúde, assistência social, desenvolvimento 
+urbano e econômico. Neste início do ano de 2023, o Governo do Estado de São Paulo 
+e a Prefeitura da capital paulista aprofundaram o processo de integração das ações e 
+operações conjuntas na região com o objetivo de reverter esse processo de 
+degradação e, efetivamente, devolver a qualid ade de vida e segurança à todas as 
+pessoas que moram, trabalham ou de algum modo, frequentam aquela região. Afinal, 
+São Paulo somos todos. 
+Desde janeiro representantes das Secretarias da Segurança Pública, 
+Administração Penitenciária, Saúde, Assistência Social, Desenvolvimento urbano e 
+econômico, estaduais e municipais, têm se reunido, semanalmente, para diagnosticar, 
+definir ações e metas e avaliar os resultados dos trabalhos que tem se intensificado e 
+ampliado a cada dia naqueles locais. 
+Agora, compromissada com a mais ampla transparência e com o dever 
+de prestação de contas com a sociedade, o Governo do Estado passa a compartilhar 
+com a população, com atualização semanal, dados e informações relacionadas com 
+a criminalidade de rua que mais afeta a sociedade naquele local (roubos e furtos) bem 
+como as ações de segurança pública ou a ela relacionadas que estão sendo realizadas 
+pelas polícias para prevenir e reprimir os crimes e, gradualmente, devolver à 
+segurança à população naquela região. 
+A presente iniciativa consiste em uma ação inédita no Brasil que 
+demonstra a coragem e o compromisso do Governo com toda a população do Estado 
+e se fundamenta em experiências internacionais de sucesso que demonstram que os 
+problemas de segurança pública, p or mais complexo que sejam, só se resolvem 
+
+PAGE 28
+quando começam a ser enfrentados de modo franco, direto, transparente e de 
+maneira integrada não apenas entre os diversos entes públicos, mas, principalmente, 
+em conjunto com a população. 
+O QUE CONSTA NO MAPA? 
+O Diagnóstico Criminal é feito com base nas ocorrências registradas 
+nos boletins policiais elaborados que relatem crimes praticados em um dos dias 
+indicados pela semana em estudo (data do fato) nas áreas relacionadas à maior 
+concentração das cenas de uso aberto que foram se consolidando ao longo da última 
+década no centro da capital (03º e 77º DP ou 2ª Cia do 7º BPM/M e 2ª Cia do 13º 
+BPM/M). Os dados e informações são extraídos da base da Secretaria da Segurança 
+Pública alimentada com dados do Sistema de Polícia Judiciária (SPJ). 
+Em um primeiro momento são extraídos todos os registros policiais que 
+tenham a natureza roubo ou furto. Posteriormente, os registros resultantes da 
+extração são objeto de uma análise qualitativa que classifica os eventos de acordo 
+com suas características e modus operandi dos criminosos de modo a facilitar a 
+compreensão de cada fenômeno de acordo com sua complexidade. Por fim, por meio 
+do georreferenciamento dos pontos de interesse, é gerado um mapa de dispersão 
+com ícones específicos para cada tipo de even to, indicando sua concentração 
+espacial, dia da semana e período. 
+Não são apresentados no mapa que representa o Diagnóstico Criminal 
+os furtos nos quais a vítima não indicou o momento exato ou local no qual a subtração 
+teria ocorrido (por exemplo quando relata que percebeu que sua carteira ou celular 
+havia sido subtraído da bolsa quando chegou em casa, no serviço ou ao sair de um 
+transporte público, etc). Isso é feito para evitar erros de diagnóstico e garantir uma 
+identificação mais precisa dos locais com maior concentração criminal. 
+Diariamente os policiais da região tem acesso ao diagnóstico criminal 
+completo para que possam melhor realizar o planejamento operacional para 
+prevenção e repressão dos crimes e os resultados que vem sendo alcançados. Ao final 
+de cada semana, os principais dados do diagnóstico criminal, observadas as restrições 
+legais em especial no que diz respeito aos dados pessoais, passa a ser disponibilizado 
+para a sociedade a fim de que melhor entenda os problemas que estão sendo 
+enfrentados, as ações realizadas e os resultados que estão sendo alcançados. 
+
+PAGE 29
+ 
+SP CARGA 
+Sistema de Informação e Prevenção a Crimes praticados contra o transporte de Carga 
+(Resolução SSP nº 30, de 11/05/2023). 
+https://www.ssp.sp.gov.br/estatistica/spcarga 
+Traz um painel interativo possibilitando ao interessado navegar nas 
+informações dos indicadores de furto, receptação e roubo de carga. 
+ 
+
+
+PAGE 30
+VIOLÊNCIA CONTRA A MULHER 
+https://www.ssp.sp.gov.br/estatistica/violencia-contra-a-mulher 
+Traz informações estatísticas de crimes contra a mulher, de 2011 a 2025, 
+dos seguintes indicadores criminais: 
+• homicídio doloso (exclui feminicídio) 
+• feminicídio 
+• homicídio culposo 
+• tentativa de homicídio 
+• lesão corporal dolosa 
+• maus tratos 
+• calúnia – difamação – injúria 
+• constrangimento ilegal 
+• ameaça 
+• invasão de domicílio 
+• dano 
+• estupro consumado 
+• estupro tentado 
+• estupro de vulnerável consumado 
+• estupro de vilnerável tentado 
+• outros crimes contra a dignidade sexual 
+DADOS DE 2018 A 2023 
+1. As quantidades relativas às naturezas de Homicídio Doloso (Exclui 
+Feminicídio), Feminicídio, Estupro e Estupro de Vulnerável (consumado e 
+tentado) referem -se à quantidade de vítimas, havendo ou não violência 
+doméstica associada no Boletim de Ocorrência se ndo que a fonte de dados 
+utilizada para a consolidação foi o R.D.O. (Registro Digital de Ocorrência) até 
+2022 e o Sistema Estadual de Coleta de Estatística Criminal (Resolução SSP nº 
+160/01) e SP VIDA (Resolução nº SSP 15 de 01 de março de 2023) a partir d e 
+janeiro de 2023;  
+2. As quantidades relativas à Feminicídio referem -se aos casos nos quais a a 
+agravante prevista no inciso VI, do §2º do art. 121 do código penal foi incluída, 
+pela unidade policial, entre as naturezas constantes do respectivo Boletim de 
+Ocorrência; 
+3. As quantidades relativas às demais naturezas (Homicídio Culposo, Tentativa 
+de Homicídio, Lesão Corporal Dolosa, Maus tratos, Calúnia – Difamação – 
+Injúria, Constrangimento Ilegal, Ameaça, Invasão de Domicílio, Dano e Outros 
+Crimes Contra a Dignidade Sexual foram informadas pela Polícia Civil por meio 
+da extração de dados do Boletim Estatístico Eletrônico (B.E.E.) da Polícia Civil. 
+
+PAGE 31
+DADOS A PARTIR DE JANEIRO DE 2024 
+4.  As quantidades relativas às naturezas de Homicídio Doloso (Exclui 
+Feminicídio), Feminicídio, Estupro e Estupro de Vulnerável (consumado e 
+tentado) referem -se à quantidade de vítimas, havendo ou não violência 
+doméstica associada no Boletim de Ocorrência s endo que a fonte de dados 
+utilizada para a consolidação permaneceu sendo o Sistema Estadual de Coleta 
+de Estatística Criminal (Resolução SSP nº 160/01) e SP VIDA (Resolução nº SSP 
+15 de 01 de março de 2023);  
+5. As quantidades relativas à Feminicídio refe rem-se aos casos nos quais a a 
+agravante prevista no inciso VI, do §2º do art. 121 do código penal foi incluída, 
+pela unidade policial, entre as naturezas constantes do respectivo Boletim de 
+Ocorrência; 
+6. As quantidades relativas às demais naturezas (Homicídio Culposo, Tentativa 
+de Homicídio, Lesão Corporal Dolosa, Maus tratos, Calúnia – Difamação – 
+Injúria, Constrangimento Ilegal, Ameaça, Invasão de Domicílio, Dano e Outros 
+Crimes Contra a Dignidade Sexual) referem-se apenas aos casos nos quais tais 
+crimes foram vinculados, no Boletim de Ocorrência, à violências doméstica 
+sendo que a fonte de dados utilizada para a consolidação passou a ser, a partir 
+da divulgação relativa a janeiro de 2024, o Sistema Estadual de Coleta de 
+Estatística Criminal (Resolução SSP Nº 160/01) e o Sistema de Polícia Judiciária 
+(SPJ) da Polícia Civil em virtude de inconsistências identificadas nos dados 
+extraídos do Boletim Estatístico Eletrônico (B.E.E.) da Polícia Civil o que, 
+inclusive, motivou a retificação, em 28 de fevereiro d e 2024, dos dados dos 
+dados relativos a janeiro de 2024. 
+ 

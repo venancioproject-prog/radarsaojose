@@ -1,0 +1,3 @@
+PASS online: cards, filtros, 22 anos, estoque, anual, ficha e exportação.
+PASS offline: cards, filtros, 22 anos, estoque, anual, ficha e exportação.
+PASS offline null/zero: cards, filtros, 22 anos, estoque, anual, ficha e exportação.

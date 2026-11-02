@@ -1,0 +1,132 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "2024:delito38:native",
+      "actual": 23,
+      "expected": 23,
+      "pass": true
+    },
+    {
+      "check": "2024:delito38:sum12",
+      "actual": 23,
+      "expected": 23,
+      "pass": true
+    },
+    {
+      "check": "2024:delito38:published",
+      "actual": 12,
+      "expected": 12,
+      "pass": true
+    },
+    {
+      "check": "2024:delito41:native",
+      "actual": 23,
+      "expected": 23,
+      "pass": true
+    },
+    {
+      "check": "2024:delito41:sum12",
+      "actual": 23,
+      "expected": 23,
+      "pass": true
+    },
+    {
+      "check": "2024:delito41:published",
+      "actual": 12,
+      "expected": 12,
+      "pass": true
+    },
+    {
+      "check": "2024:delito37:native",
+      "actual": 143,
+      "expected": 143,
+      "pass": true
+    },
+    {
+      "check": "2024:delito37:sum12",
+      "actual": 143,
+      "expected": 143,
+      "pass": true
+    },
+    {
+      "check": "2024:delito37:published",
+      "actual": 12,
+      "expected": 12,
+      "pass": true
+    },
+    {
+      "check": "2024:delito22:native",
+      "actual": 724,
+      "expected": 724,
+      "pass": true
+    },
+    {
+      "check": "2024:delito22:sum12",
+      "actual": 724,
+      "expected": 724,
+      "pass": true
+    },
+    {
+      "check": "2024:delito22:published",
+      "actual": 12,
+      "expected": 12,
+      "pass": true
+    },
+    {
+      "check": "2024:delito30:native",
+      "actual": 965,
+      "expected": 965,
+      "pass": true
+    },
+    {
+      "check": "2024:delito30:sum12",
+      "actual": 965,
+      "expected": 965,
+      "pass": true
+    },
+    {
+      "check": "2024:delito30:published",
+      "actual": 12,
+      "expected": 12,
+      "pass": true
+    },
+    {
+      "check": "roubo_total_inclui_carga_banco",
+      "actual": 965,
+      "expected": 965,
+      "pass": true
+    },
+    {
+      "check": "2025:ocorrencias",
+      "actual": 29,
+      "expected": 29,
+      "pass": true
+    },
+    {
+      "check": "2025:vitimas",
+      "actual": 33,
+      "expected": 33,
+      "pass": true
+    },
+    {
+      "check": "2024:prisoes_nativas",
+      "actual": 2170,
+      "expected": 2170,
+      "pass": true
+    },
+    {
+      "check": "2024:prisoes_soma12",
+      "actual": 2170,
+      "expected": 2170,
+      "pass": true
+    },
+    {
+      "check": "2024:nao_somar_outras_categorias",
+      "actual": 2531,
+      "expected": 2531,
+      "pass": true
+    }
+  ],
+  "scope": "Nova captura externa pelo integrador; não compara GT consigo mesmo."
+}

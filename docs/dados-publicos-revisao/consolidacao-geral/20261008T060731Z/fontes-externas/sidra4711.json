@@ -1,0 +1,47 @@
+[
+  {
+    "NC": "Nível Territorial (Código)",
+    "NN": "Nível Territorial",
+    "MC": "Unidade de Medida (Código)",
+    "MN": "Unidade de Medida",
+    "V": "Valor",
+    "D1C": "Município (Código)",
+    "D1N": "Município",
+    "D2C": "Variável (Código)",
+    "D2N": "Variável",
+    "D3C": "Ano (Código)",
+    "D3N": "Ano",
+    "D4C": "Espécie (Código)",
+    "D4N": "Espécie"
+  },
+  {
+    "NC": "6",
+    "NN": "Município",
+    "MC": "1708",
+    "MN": "Domicílios",
+    "V": "282214",
+    "D1C": "3549904",
+    "D1N": "São José dos Campos (SP)",
+    "D2C": "617",
+    "D2N": "Domicílios recenseados",
+    "D3C": "2022",
+    "D3N": "2022",
+    "D4C": "59993",
+    "D4N": "Total"
+  },
+  {
+    "NC": "6",
+    "NN": "Município",
+    "MC": "2",
+    "MN": "Percentual",
+    "V": "100.00",
+    "D1C": "3549904",
+    "D1N": "São José dos Campos (SP)",
+    "D2C": "1000617",
+    "D2N": "Domicílios recenseados - percentual do total geral",
+    "D3C": "2022",
+    "D3N": "2022",
+    "D4C": "59993",
+    "D4N": "Total"
+  }
+]

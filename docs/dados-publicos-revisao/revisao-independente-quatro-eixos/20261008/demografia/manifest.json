@@ -1,0 +1,218 @@
+[
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra6579.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/6579/n6/3549904/v/9324/p/all",
+    "status_http": 200,
+    "sha256": "7ca6639ed31965f7089d75a806fea60868f7fdcc9f4d3748f3071d5bd1213320",
+    "bytes": 6534,
+    "accessed_at": "2026-10-08T07:59:59.824336+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra9514-quinquenal.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9514/n6/3549904/v/93/p/2022/c2/all/c287/100362,93070,93084,93085,93086,93087,93088,93089,93090,93091,93092,93093,93094,93095,93096,93097,93098,49108,49109,60040,60041,6653/c12311/113635",
+    "status_http": 400,
+    "sha256": "b74a5b6fa08046c71aad168babd5a1a76832f3638c91617b99201c8defdf26a5",
+    "bytes": 62,
+    "accessed_at": "2026-10-08T07:59:59.693787+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\municipal-populacao.html",
+    "url": "https://www.sjc.sp.gov.br/servicos/governanca/populacao/",
+    "status_http": 200,
+    "sha256": "2072f74dfaf21397c235a5e67e1f97b08436e61eb96eb7bd6774129d2e1a155a",
+    "bytes": 133975,
+    "accessed_at": "2026-10-08T07:59:59.689607+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\mapa-setores.pdf",
+    "url": "https://www.sjc.sp.gov.br/media/xsenkby1/18_mapa16_setores_socioeconomicos.pdf",
+    "status_http": 200,
+    "sha256": "37ca6048a6aa833fd903a80bbca57699e0fc93103468e6d16424d424d8def684",
+    "bytes": 7531564,
+    "accessed_at": "2026-10-08T08:00:03.516215+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\caderno-tecnico.pdf",
+    "url": "https://www.sjc.sp.gov.br/media/11wgbczj/cadernotecnico_final.pdf",
+    "status_http": 200,
+    "sha256": "57651bd0db615a5828c845a5afc3aa3a358e815301eed9bb94c21113cdfd74d4",
+    "bytes": 2098062,
+    "accessed_at": "2026-10-08T08:00:01.403931+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra4714.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/4714/n6/3549904/v/all/p/2022",
+    "status_http": 200,
+    "sha256": "3d3098541730a46b96a9ca969fe254418d16ef16be7461993a06228596535793",
+    "bytes": 1217,
+    "accessed_at": "2026-10-08T07:59:59.761209+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra4711.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/4711/n6/3549904/v/all/p/2022",
+    "status_http": 200,
+    "sha256": "248e59cedcfebfe31fdf1b656a146346539cf1d84f1e6f1a88d80e7806465e42",
+    "bytes": 1080,
+    "accessed_at": "2026-10-08T08:00:02.137238+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra4712.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/4712/n6/3549904/v/all/p/2022",
+    "status_http": 200,
+    "sha256": "89ed3f20e4050d82722748cb21704bf1a3e1a61cb42269d7fa9649bc7b455dfd",
+    "bytes": 1278,
+    "accessed_at": "2026-10-08T08:00:02.130601+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra9515.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9515/n6/3549904/v/all/p/2022",
+    "status_http": 200,
+    "sha256": "5c38d81cbb3d44a0d80e07bc90892b823d34961258dff1b6fe668d1e7da4088b",
+    "bytes": 1154,
+    "accessed_at": "2026-10-08T08:00:02.366754+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\estimativas-diretorio.html",
+    "url": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/",
+    "status_http": 200,
+    "sha256": "59cb53c7ef024cc6a4778dbdd8c4d532f8208d5916c298a32d675e3e22327102",
+    "bytes": 20309,
+    "accessed_at": "2026-10-08T08:00:02.355415+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra9514-quinquenal-correto.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9514/n6/3549904/v/93/p/2022/c2/all/c287/100362,93070,93084,93085,93086,93087,93088,93089,93090,93091,93092,93093,93094,93095,93096,93097,93098,49108,49109,60040,60041,6653/c286/113635",
+    "status_http": 200,
+    "sha256": "56552b8007c070a910e2adac8b9c25311fa36cc07df86b9156df2d202f49649e",
+    "bytes": 26998,
+    "accessed_at": "2026-10-08T08:00:55.339104+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\9514-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9514/metadados",
+    "status_http": 200,
+    "sha256": "1d049151ee97b2f42705a7a53cead75fbe2cc6e63f528cafe548655823a6e911",
+    "bytes": 8542,
+    "accessed_at": "2026-10-08T08:00:55.094966+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\6579-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/6579/metadados",
+    "status_http": 200,
+    "sha256": "6172ae800a704ad21cfd4f8ae55c2864ef688d172aa305341e84b3964cf45962",
+    "bytes": 444,
+    "accessed_at": "2026-10-08T08:00:55.085453+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra9922.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9922/n6/3549904/v/all/p/2022",
+    "status_http": 200,
+    "sha256": "bcb903de7407834e9c9c0cd6acd1c891403b4998879b3a9929569528216dec10",
+    "bytes": 1491,
+    "accessed_at": "2026-10-08T08:00:55.671498+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\estimativa2026.xls",
+    "url": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/estimativa_dou_2026.xls",
+    "status_http": 404,
+    "sha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+    "bytes": 196,
+    "accessed_at": "2026-10-08T08:00:55.582119+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\estimativa2026.xlsx",
+    "url": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/estimativa_dou_2026.xlsx",
+    "status_http": 200,
+    "sha256": "6d512a1e48506fbbfa252ba407aabc2160b07329fa652411ef7d39bd63f49284",
+    "bytes": 247136,
+    "accessed_at": "2026-10-08T08:01:36.732976+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\4711-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/4711/metadados",
+    "status_http": 200,
+    "sha256": "8c09b9a7a8d6438e8c4c1d81d390c7939060ad1ae7228d8f71072248bc345863",
+    "bytes": 1614,
+    "accessed_at": "2026-10-08T08:01:37.761038+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\9922-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9922/metadados",
+    "status_http": 200,
+    "sha256": "d9f92ee4850ffa5075934ecfe4ed81e84b5a175d8154051a8f5b2554b9405ba5",
+    "bytes": 1186,
+    "accessed_at": "2026-10-08T08:01:38.829793+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra9923.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9923/n6/3549904/v/93/p/2022/c1/all",
+    "status_http": 200,
+    "sha256": "8ea6918720c326407dc76f1ee0c5a14a73f09c98ab29538d4b86ec7316f94441",
+    "bytes": 1368,
+    "accessed_at": "2026-10-08T08:02:09.539846+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\9923-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9923/metadados",
+    "status_http": 200,
+    "sha256": "312303a127603e4e3574d69d893f81fb25675942d4c63ea9ba3dc08fc70a63d0",
+    "bytes": 836,
+    "accessed_at": "2026-10-08T08:02:09.676120+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra4711-especies.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/4711/n6/3549904/v/617/p/2022/c1965/all",
+    "status_http": 400,
+    "sha256": "6a5c715bbf834ae098d22098eac0a89c1fb712599e6bb1fccfa4d6740cbcfea6",
+    "bytes": 61,
+    "accessed_at": "2026-10-08T08:02:09.532773+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra9605.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9605/n6/3549904/v/93/p/2022/c86/all",
+    "status_http": 200,
+    "sha256": "480fe06401c1eb7a1bf7fbb5f12fa86a11d9aa0eb4ec7f1061a68ffdf5f15925",
+    "bytes": 2286,
+    "accessed_at": "2026-10-08T08:02:09.538778+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra202-historica.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/202/n6/3549904/v/93/p/all/c2/0/c1/0",
+    "status_http": 200,
+    "sha256": "0a5db316e5fcb6057dfbf043ff240a9cf38e1faa728e51709987341f599caf6d",
+    "bytes": 2222,
+    "accessed_at": "2026-10-08T08:02:09.555310+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\geo-diretorio.html",
+    "url": "https://ftp.ibge.gov.br/Organizacao_do_Territorio/Malhas_Territoriais/Malhas_de_setores_censitarios__divisoes_intramunicipais/2022/Malha_de_divisoes_intramunicipais/",
+    "status_http": 404,
+    "sha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+    "bytes": 196,
+    "accessed_at": "2026-10-08T08:02:09.580980+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\sidra4711-especies-correto.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/4711/n6/3549904/v/617/p/2022/c3/all",
+    "status_http": 200,
+    "sha256": "85c2de8de10c0e7ae29b4bf50af6bacee7fe3d21e3d7ae85c1cbde2e121fa612",
+    "bytes": 4854,
+    "accessed_at": "2026-10-08T08:03:05.547242+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\estimativa-metodologia2026.pdf",
+    "url": "https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/nota_metodologica_2026.pdf",
+    "status_http": 404,
+    "sha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+    "bytes": 196,
+    "accessed_at": "2026-10-08T08:03:06.163871+00:00"
+  },
+  {
+    "file": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\demografia\\brutos\\estimativas-produto.html",
+    "url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-population.html",
+    "status_http": 403,
+    "sha256": "c5e1eee0fc438fce8765758656bb4b93a5bb49ba261a5649ad83e279d77c7d61",
+    "bytes": 5732,
+    "accessed_at": "2026-10-08T08:03:06.989880+00:00"
+  }
+]

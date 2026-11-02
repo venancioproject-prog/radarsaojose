@@ -1,0 +1,162 @@
+{
+  "sources_existing": [
+    {
+      "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\data\\radar_hub\\educacao_raw_2026-10-08\\ideb-iniciais2025.zip",
+      "sha256": "89100286327ab07a4b1318ba51974d62da90af334f663bedf6374cb67298a3e7",
+      "member": "divulgacao_anos_iniciais_municipios_2025/divulgacao_anos_iniciais_municipios_2025.xlsx",
+      "member_sha256": "e132cd0ab83179ffc8263029e67db737aebf84a6977b38fbe3e25bcaf96ba774"
+    },
+    {
+      "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\fontes-externas\\ideb-finais2025.zip",
+      "sha256": "5f81ae18d33567608f10551d4f563a6879afc0182ff28cfd81e913958a30a6b3",
+      "member": "divulgacao_anos_finais_municipios_2025/divulgacao_anos_finais_municipios_2025.xlsx",
+      "member_sha256": "0a54ddd3010781033273dcfb318baef22c3136345ca0c64125c4a33daebc6ed4"
+    },
+    {
+      "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\fontes-externas\\sinopse2023.zip",
+      "sha256": "6a29e549ea381ccb74a8b0aeec8b7fd1e4ec00c43bb83eae3ecc5c91bd7a88f5",
+      "member": "sinopse_estatistica_censo_escolar_2023/Sinopse_Estatistica_da_Educação_Basica_2023.xlsx",
+      "member_sha256": "f670cb10f248fb7caf477bb79bb63513b0f6efdd5dd002efd6c0555c649cf0c5"
+    },
+    {
+      "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\educacao\\raw\\sinopse2024.zip",
+      "sha256": "b1555ecc1df586e17a1f34f692fbf248927fba4dd00cb91bb98fd7fdfe1c65cb",
+      "member": "sinopse_estatistica_censo_escolar_2024/Sinopse_Estatistica_da_Educação_Basica_2024.xlsx",
+      "member_sha256": "12d6adb4f6538c18538348ba48c09b3d3d2db37117a321c99d6ac7ece9930042"
+    },
+    {
+      "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\educacao\\raw\\sinopse2025.zip",
+      "sha256": "a8a41fcd487e98dc26c9107dfd92f403641983b2737d50497bac3e47b4f051c8",
+      "member": "Sinopse_Estatistica_da_Educação_Basica_2025_V2/Sinopse_Estatistica_da_Educação_Basica_2025_V2.xlsx",
+      "member_sha256": "af3a0f13731214730c4baa362bfc542c526c8c81d31c48e699919623c491462c"
+    }
+  ],
+  "new_sources": [
+    {
+      "year": 2024,
+      "tables": 165,
+      "sha256": "b1555ecc1df586e17a1f34f692fbf248927fba4dd00cb91bb98fd7fdfe1c65cb",
+      "member_sha256": "12d6adb4f6538c18538348ba48c09b3d3d2db37117a321c99d6ac7ece9930042",
+      "member": "sinopse_estatistica_censo_escolar_2024/Sinopse_Estatistica_da_Educação_Basica_2024.xlsx",
+      "raw_reference": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/raw/sinopse2024.zip",
+      "bytes": 145089739,
+      "catalog_url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+      "source_url": "https://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2024.zip",
+      "retrieval": "HTTPoficial direto; não houve tentativaHTTPS individual2024; motivação falhaTLSdo mesmohostno2025.",
+      "accessed_at": "2026-10-08T08:00:40.628909+00:00"
+    },
+    {
+      "year": 2025,
+      "tables": 259,
+      "sha256": "a8a41fcd487e98dc26c9107dfd92f403641983b2737d50497bac3e47b4f051c8",
+      "member_sha256": "af3a0f13731214730c4baa362bfc542c526c8c81d31c48e699919623c491462c",
+      "member": "Sinopse_Estatistica_da_Educação_Basica_2025_V2/Sinopse_Estatistica_da_Educação_Basica_2025_V2.xlsx",
+      "raw_reference": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/raw/sinopse2025.zip",
+      "bytes": 232142480,
+      "catalog_url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+      "source_url": "https://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2025.zip",
+      "retrieval": "HTTP oficial após reset HTTPS; hash preservado, sem desativar TLS",
+      "accessed_at": "2026-10-08T08:01:42.176068+00:00"
+    }
+  ],
+  "raw_files": [
+    {
+      "file": "censo-catalogo.html",
+      "sha256": "10ca990e1c8bd82cb5a6cf76716248303b7a1199146824e502434452f391ff35",
+      "bytes": 223075,
+      "url_retrieval": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+      "url_original": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "HTTPS comvalidação normal do sistema"
+    },
+    {
+      "file": "distorcao2025.html",
+      "sha256": "2638daf5958ed4267bdac15800ad43c94c6bbff0e946d1b0deb76e2d1e6b4cba",
+      "bytes": 210423,
+      "url_retrieval": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-distorcao-idade-serie/2025",
+      "url_original": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-distorcao-idade-serie/2025",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "HTTPS comvalidação normal do sistema"
+    },
+    {
+      "file": "ibge60045.json",
+      "sha256": "d7f2e8e5564e37c5af86055f0c92af24a329bba9c233cbc54ee6fbbe888a97bb",
+      "bytes": 866,
+      "url_retrieval": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60045?localidade=354990",
+      "url_original": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60045?localidade=354990",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "HTTPS comvalidação normal do sistema"
+    },
+    {
+      "file": "rendimento2025.html",
+      "sha256": "8d9603b2cabb105f8f53640bc3e790abb49fffe7b8733c90b37cdb586f006c80",
+      "bytes": 210357,
+      "url_retrieval": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar/2025",
+      "url_original": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais/taxas-de-rendimento-escolar/2025",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "HTTPS comvalidação normal do sistema"
+    },
+    {
+      "file": "rendimento2025.zip",
+      "sha256": "69d238494d4dec7aa537403354e5730ccb1191ccc76705b0e77deb892eff63b2",
+      "bytes": 32853597,
+      "url_retrieval": "http://download.inep.gov.br/informacoes_estatisticas/indicadores_educacionais/2025/tx_rend_municipios_2025.zip",
+      "url_original": "https://download.inep.gov.br/informacoes_estatisticas/indicadores_educacionais/2025/tx_rend_municipios_2025.zip",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "DownloadHTTP no hostINÉP oficial; HTTPS2025falhou(reset),semTLSdesativado. Statusnão capturado; não inventado."
+    },
+    {
+      "file": "sinopse2024.zip",
+      "sha256": "b1555ecc1df586e17a1f34f692fbf248927fba4dd00cb91bb98fd7fdfe1c65cb",
+      "bytes": 145089739,
+      "url_retrieval": "http://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2024.zip",
+      "url_original": "https://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2024.zip",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "DownloadHTTP no hostINÉP oficial; HTTPS2025falhou(reset),semTLSdesativado. Statusnão capturado; não inventado."
+    },
+    {
+      "file": "sinopse2025.zip",
+      "sha256": "a8a41fcd487e98dc26c9107dfd92f403641983b2737d50497bac3e47b4f051c8",
+      "bytes": 232142480,
+      "url_retrieval": "http://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2025.zip",
+      "url_original": "https://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2025.zip",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "DownloadHTTP no hostINÉP oficial; HTTPS2025falhou(reset),semTLSdesativado. Statusnão capturado; não inventado."
+    },
+    {
+      "file": "TDI2025.zip",
+      "sha256": "91f8f4c9f3609c7c3c9d4af9318371d6ab9c91c13e8dadeaef3e56e7a5c38a9b",
+      "bytes": 14418115,
+      "url_retrieval": "http://download.inep.gov.br/informacoes_estatisticas/indicadores_educacionais/2025/TDI_2025_MUNICIPIOS.zip",
+      "url_original": "https://download.inep.gov.br/informacoes_estatisticas/indicadores_educacionais/2025/TDI_2025_MUNICIPIOS.zip",
+      "accessed_date": "2026-10-08",
+      "http_status": null,
+      "curl_exit_code": 0,
+      "transport_note": "DownloadHTTP no hostINÉP oficial; HTTPS2025falhou(reset),semTLSdesativado. Statusnão capturado; não inventado."
+    }
+  ],
+  "errors": [
+    {
+      "file": "sinopse2025.zip",
+      "attempt_url": "https://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2025.zip",
+      "curl_exit_code": 35,
+      "message": "Recv failure: Connection was reset",
+      "outcome": "Recuperado pelo hostoficialHTTP; zipíntegro"
+    }
+  ],
+  "generated_at": "2026-10-08T08:04:07.721234+00:00"
+}

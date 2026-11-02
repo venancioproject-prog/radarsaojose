@@ -1,0 +1,283 @@
+{
+  "status": "PASS",
+  "censo_years": [
+    2023,
+    2024,
+    2025
+  ],
+  "rate_checks": [
+    {
+      "test": "Rendimento Total Total FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Total FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Total FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Total MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Total FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Total FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Total FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Total MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Total FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Total FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Total FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Total MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Federal MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Federal MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Estadual FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Estadual FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Estadual FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Estadual MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Estadual FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Estadual FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Estadual FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Estadual MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Estadual FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Estadual FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Estadual FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Estadual MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Municipal FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Municipal FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Municipal FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Municipal FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Municipal FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Municipal FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Municipal FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Municipal FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Privada FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Privada FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Privada FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Privada MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Privada FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Privada FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Privada FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Privada MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Pública FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Pública FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Pública FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Total Pública MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Pública FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Pública FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Pública FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Urbana Pública MED",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Pública FUN",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Pública FUN_AI",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Pública FUN_AF",
+      "sum": 100.0,
+      "pass": true
+    },
+    {
+      "test": "Rendimento Rural Pública MED",
+      "sum": 100.0,
+      "pass": true
+    }
+  ],
+  "new_rate_rows": 32,
+  "rate_evidence_cells": 1136,
+  "censo_invariants": "urbano+rural por rede=total; creche+pré=infantil; AI+AF=EF; comuns+exclusivas=especial"
+}

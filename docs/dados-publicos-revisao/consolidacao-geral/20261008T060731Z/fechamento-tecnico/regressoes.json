@@ -1,0 +1,47 @@
+[
+  {
+    "test": "test_radar_hub_p0.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_economia_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_economia_visual.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_financas_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_financas_visual.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_meio_ambiente_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_mobilidade_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_saude_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  },
+  {
+    "test": "test_fechamento_tecnico.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado"
+  }
+]

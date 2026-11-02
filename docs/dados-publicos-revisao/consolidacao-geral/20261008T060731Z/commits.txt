@@ -1,0 +1,40 @@
+76f3d507eaca24a40b6061dfafbcab8c49dbe1fc 2026-10-05T07:17:29-03:00 feat(radar): add editorial visual modules, optimize asset weights, aggressive caching & update configurations
+24570e079a4ea7d431dec1d6b4272ff719c091be 2026-10-04T00:03:38-03:00 chore(historia): checkpoint antes da restauracao das fontes dos bairros
+3be539c9f82a032db079f76600b2805082483ec8 2026-10-03T19:12:51-03:00 fix(auth): pass password as clean string in login.html
+57a60b949a21483f75ba3bac5a654cf54ca2900f 2026-09-29T02:21:35-03:00 fix(collab): sincronizacao em nuvem bidirecional direta via Supabase para Leonardo e Maira
+76b659eb242151b4bfc449b7386feb8bc14d858f 2026-09-28T19:13:16-03:00 feat(audit): integracao primaria SSP-SP e Saude SJC, remocao total de blur e liberacao de acesso
+a10c91e0673b5e4996fc6294f867612ddc59126b 2026-09-26T15:16:26-03:00 fix(landing): encapsular estilos e ocultar modal de checkout asaas por padrao
+cdb324972d436c9184edc21b8dd96f43d5ac6819 2026-09-26T14:53:29-03:00 fix(crm): simplificar cabecalho da redacao com altura identica ao business plan, card de editorias e renomear botao para Redacao
+afa0db6615421a4b392872f5d5f5b7580a3f9112 2026-09-26T14:38:18-03:00 fix(ui): restore full table and map, add top pagination and CSV export, align 3-column charts
+b356411f9497acc98c59afb3fdce90d5c68b376b 2026-09-26T14:27:51-03:00 feat(ui): update layout, KPIs, and table actions
+7745ac8f59c3007f26e59d2080d300a693cc5f9d 2026-09-26T07:32:11-03:00 fix(auth): prevent redirect loop, recognize admin credentials and ensure seamless access
+1910ae58ae70364e49c570ba35374cfb2715aeac 2026-09-26T07:24:38-03:00 fix(vercel): remove public dir to restore root static file serving for admin-crm.html
+54b020c7a2679fa5ffe7412d278e98c791cf9b64 2026-09-26T07:21:49-03:00 fix(vercel): remove deprecated memory setting
+9fcd35b4ecb823b284f51547c6bc2bf1de382465 2026-09-26T07:15:10-03:00 feat(business-plan): add task calendar view, editable task modal, and clean up deploy footprint
+42928aa626af6bd1eef3090bfde41edd86a82283 2026-09-24T17:56:01-03:00 feat(financial): implement complete SEBRAE financial module (5.1-5.13) and scenario simulator (6)
+48961fcc9a730da2786c81eed7d86e845f37ee2a 2026-09-24T17:44:47-03:00 feat(business-plan): move monday tasks to bottom, fix navigation buttons wrap without scroll, and enhance all add buttons resilience
+b869b47ab932af2d7c3b992087daece052dc9f89 2026-09-24T17:23:32-03:00 fix(admin-crm): import business-plan-controller.js and auto-hydrate section 4 operational plan
+cf0003a86ca50b161f9207aff3909289ef0c972d 2026-09-24T17:14:20-03:00 feat(business-plan): complete full section 4 operational plan and tech architecture documentation
+1d438e40399c8cace6974f6d345c23f568563ae5 2026-09-23T02:57:53-03:00 fix(crm): limpar placeholders falsos e exibir valores realistas na ficha do decisor
+687008f2cb23b265d0e1ad6d9ab77a4609af5b9e 2026-09-23T02:49:37-03:00 feat(crm): implementar ficha do cliente interativa com timeline real e integracao crm_atividades
+feed09e20da902e6e715c37431d5b361099ade32 2026-09-23T02:35:22-03:00 fix(crm): ponte hibrida local-cloud para sincronizacao imediata de leads e correcao sql rls
+918211319ad11e572b908fdf53e12489b58473cc 2026-09-23T02:14:08-03:00 style: reformular tela de onboarding para o tema claro oficial (Light Mode)
+b992a8317b50997b1d5de2c7073513d99625ef39 2026-09-23T02:06:52-03:00 fix: conectar formulário de onboarding com as tabelas do CRM no supabase
+3c0d8abd0f40c7345a727bb6114eab918bc43299 2026-09-23T01:54:01-03:00 fix: adicionar e-mails dos donos como super admins no Auth Guard
+7519b316b832fcf5478d2220f8243421453ab5bd 2026-09-23T01:48:59-03:00 feat: integrar exclusão e update do kanban com o supabase
+1f2954a3816efb129523b6079cffa9ae78cc8ef1 2026-09-23T01:44:58-03:00 feat(blog): implementar skeleton screen moderno e remover 100% dos dados estaticos do HTML
+b2e2d505823cd98deffc1d76861738cc69b240e5 2026-09-23T01:35:46-03:00 fix(blog): carregar materias reais do supabase instantaneamente sem piscar ou mostrar tela default
+40a91fdb27c4f34276a1a70a745d5119a2cb2109 2026-09-23T01:23:39-03:00 feat: implementar Auth Guard anti-FOUC e fetch real de CRM via Supabase em admin-crm.html
+517d18f182baa2972ecccbd5ca0265aadcaa83d3 2026-09-23T01:01:32-03:00 style: ajustar fade do Teaser Paywall para tema claro (Light Mode) e remover blur
+87cd3b45ead1699d514faef48bd3a6fc5565b1bc 2026-09-23T00:31:42-03:00 feat: implementar Teaser Paywall com arquitetura Inject & Hide e corrigir renderExecutiveReportCharts
+8c24a5cffcf06efdb445b2ac6b421b80f17459ad 2026-09-23T00:19:15-03:00 feat: implementar Teaser Paywall com cortina de fade e corte scroll max-height
+3db917481eeb4aa082d3fec2e46197634d4ee918 2026-09-23T00:14:55-03:00 feat: refatorar autenticacao segura com Supabase profiles, integracao real Asaas e limpeza de mocks
+bbd942147afb3a8b8bf636d08e1ba3e5dee873d1 2026-09-22T23:54:47-03:00 feat: implementar regras de controle de acesso freemium e paywall dark mode para plano gratis
+1d8d6b42a14aad06c0bf53290e64cc4035ba10e1 2026-09-22T20:05:25-03:00 feat(auth-plans): onboarding obrigatorio para novos usuarios, niveis de acesso com efeito blur paywall e modal de planos asaas
+3517e870eae9335b4aa0f874efa7ca8909f6c672 2026-09-22T19:48:19-03:00 fix(auth): corrigir sintaxe de navegacao e manipulador de login prevenindo recarregamento de tela
+32e743f76570395ba229b354e25055521b4c2a9e 2026-09-22T19:40:38-03:00 feat(crm-auth): restore email login, upgrade CRM v1.1 dashboard with untouchable question and real-time SLA lead alerts
+d717daa6ac5653d085fc417befc68a5e5e4acd0a 2026-09-22T19:16:27-03:00 feat: integracao crm mvp, supabase, asaas checkout 3 planos e login google; desacoplamento de ia para fase 2
+01bd1c77a6a1cdd0bbaf893842ef5b4b961f8463 2026-09-17T21:04:10-03:00 fix(cms): corrigir clique dos botoes, navegacao de abas e implementar Business Plan SEBRAE
+6b31c6ec7e98d74af0dfde062534c5504882230e 2026-09-17T20:41:05-03:00 feat(cms): implementar Business Plan didatico SEBRAE com dicionario For Dummies e projecao financeira mes a mes (Out/26 a Dez/27)
+e95140774f982ade24a487f7a764929dc26df6e5 2026-09-17T20:29:48-03:00 feat(cms): adicionar bloco interativo e 100% editavel de Business Plan com 8 modulos estrategicos
+e736babe8040a04f566f9ee6de7a5dd4dff810b1 2026-09-17T03:44:40-03:00 fix(blog): corrigir link de visualizacao do artigo publicado, adicionar popup com botao ver no blog e rewrites

@@ -1,0 +1,414 @@
+{
+  "date": "2026-10-08",
+  "scripts_count": 66,
+  "scripts": [
+    {
+      "path": "scripts/apply_economia_audit.py",
+      "sha256": "f5204c52adb283f8081850deb7266ed61dd0d7a0b42a68f5f5fa1f8107f71043",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/apply_financas_audit.py",
+      "sha256": "37bc7deb1241ffba43db7fd4b3a3e1b66b3c84b6aead2f306a66008100cbbd6d",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/apply_meio_ambiente_p3.py",
+      "sha256": "47a84ff7b5012530d8fc3027eca11f497888a39dd30a089bbef845be92c0be44",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/apply_mobilidade_p4.py",
+      "sha256": "83b2917a4185015e907e5e33613c502cbaa88cf4ffc63e192a0e390466384266",
+      "local_dependencies": [
+        "scripts/mobilidade_evidence_core.py"
+      ]
+    },
+    {
+      "path": "scripts/apply_mobilidade_runtime.py",
+      "sha256": "b4778e7891fcc7713af8cc3c0adb3054602ae2078420c10a360b6cd15a12fdd7",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py"
+      ]
+    },
+    {
+      "path": "scripts/build_economia_audit.py",
+      "sha256": "0bac5f273edc79b40c00f54b64f8fbe1c318d55a447914b152e263b016cce1cc",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/build_financas_audit.py",
+      "sha256": "1e3a04515c0cfb3263d6f3a35556b13f4f7004b5dd17549c6f9c68c6f76689b7",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/build_meio_ambiente_evidence.py",
+      "sha256": "38f7bf52ede0e23e9db610235e37da48a8cb5b2af3922a7d1593ad5f3aeb8a9b",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py",
+        "scripts/meio_ambiente_workbooks.py"
+      ]
+    },
+    {
+      "path": "scripts/build_mobilidade_additional.py",
+      "sha256": "9515e72e9303c342b7c8577d4ab8a4b929d2721782562b0fd9154eac9a388f12",
+      "local_dependencies": [
+        "scripts/mobilidade_evidence_core.py"
+      ]
+    },
+    {
+      "path": "scripts/build_mobilidade_fleet.py",
+      "sha256": "0486dabeecba74f4a79dc230d75814ee2c78af84aee63b111982cfec05506445",
+      "local_dependencies": [
+        "scripts/meio_ambiente_workbooks.py",
+        "scripts/mobilidade_evidence_core.py"
+      ]
+    },
+    {
+      "path": "scripts/build_mobilidade_transit.py",
+      "sha256": "ebba92762e10ab5be5c0c6835235069d3756c118bfaca703a6eb3b9e5af2696e",
+      "local_dependencies": [
+        "scripts/mobilidade_evidence_core.py"
+      ]
+    },
+    {
+      "path": "scripts/build_radar_hub_package.py",
+      "sha256": "81bc2e019fc86c54a159d815229c036b96d76f0dd60ed333d5b2adf3471f7907",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/collect_educacao_p5_catalogs.py",
+      "sha256": "c20b31c325ce22801ff93ba1f48de6c9d25a9c271c9c28f1e413cb4afa14af3f",
+      "local_dependencies": [
+        "scripts/educacao_p5_core.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_educacao_p5_initial.py",
+      "sha256": "c52d64997e4382ab54c8f4c5bb0e8d0b3463a2907b45281c44fed34d17d8cdaa",
+      "local_dependencies": [
+        "scripts/educacao_p5_core.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_financas_p2.py",
+      "sha256": "a35ffdb5cb1b0acde5a50cd62fd7bf1c5fced802be0c1848f1754668423766dc",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/collect_financas_references.py",
+      "sha256": "75e3603565e42a6cbc30bf9c90c89ea9c1c98c830377a358450317ddd27c3d86",
+      "local_dependencies": [
+        "scripts/collect_financas_p2.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_meio_ambiente_additional.py",
+      "sha256": "b85b80689ba7a1b2c1fb5cd0a1c0463415257e6f4bb84d18aef5fab6f1d673a0",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_meio_ambiente_extended.py",
+      "sha256": "a0a703cc920ea15e95c968bc553e069abd03eb788823d65dfca4c8419809d57c",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_meio_ambiente_history.py",
+      "sha256": "728bbb64f37ca8b9a78910c388660d08edcab96aebae16e42f370646fb581006",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_meio_ambiente_p3.py",
+      "sha256": "72ae7659b8242b68a8fbfa7bcec51fd3bdd76997891b079004508d63e7370db9",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/collect_meio_ambiente_remaining.py",
+      "sha256": "aa9335b157657ad491abdc55e3030aaadc3df1a11b3a43890d160e8de99bc3ff",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_meio_ambiente_snis_history.py",
+      "sha256": "5451a17c7888bbe0c4830853eaa6574db9e7465f61283730829e2e68ee85dfeb",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_alternatives.py",
+      "sha256": "28973ad3ca0acb39785c4c8804248bce9bb4aebaee07eb6503c2b145d94b6e70",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py",
+        "scripts/inspect_mobilidade_sources.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_anac.py",
+      "sha256": "bd5936816036f5d27adc0ab820b30b78f874bf354a7ec8c18649ba32dbb90f6f",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py",
+        "scripts/inspect_mobilidade_sources.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_extended.py",
+      "sha256": "68a55bc443da5a4836783793055f9bf529c569fccb6c47a9cbb919997283d2e2",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py",
+        "scripts/inspect_mobilidade_sources.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_histories.py",
+      "sha256": "a0ff731c7a8f31fed01d0a691a93ac35ae9f2e3f169d6433315a5072ab108095",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py",
+        "scripts/inspect_mobilidade_sources.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_initial_sources.py",
+      "sha256": "0ebacc18cb6d89b2fc2a7d9ee37f6ecd0694e60d3a06b036603dc10dd104b931",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_more_sources.py",
+      "sha256": "7d4e8933f15ef09b7f87b6744bfd27cb80e853ab71739b86c4fe08f53ce0b6ec",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py",
+        "scripts/inspect_mobilidade_sources.py"
+      ]
+    },
+    {
+      "path": "scripts/collect_mobilidade_p4.py",
+      "sha256": "0f158147f5c7c5575de1e2839673b3ed0405c25ca8f59d14125dd3fdca952c1f",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_browser_test.py",
+      "sha256": "9675e92fe4bae1da4b18e4c8023994377782dd855343de16bbcc1050da0b6343",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_censo_extract.py",
+      "sha256": "afd9afac99d3b3d4c0c30d671c0f1a1bb46867ae1b3988c393d0b72eb45ed395",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_diagnostico.py",
+      "sha256": "f83550d5ddf7ff8f0ad0d1fc3b2f896dceb6adeee7878914a10673fd6fee5799",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_documentar.py",
+      "sha256": "3c5df319052cc3cdc4edbe927433c135420c97052bb66ed233db585bc462e3f1",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_educacao_extract.py",
+      "sha256": "8aacc18608876cdbf353553c8d21e13e12d1ae7f8141b3653b239bcb2d0dd51d",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_entrega_tests.py",
+      "sha256": "62de5c3fca78ec3057fedf9f407e035d3a1d079a33127370255119f972ff2e4d",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_evidence_overlay.py",
+      "sha256": "6786d4f09d6d493c670a674b531feea6b79af22d83c4d9d21c083926398d01bc",
+      "local_dependencies": [
+        "scripts/build_radar_hub_package.py"
+      ]
+    },
+    {
+      "path": "scripts/consolidacao_external_tests.py",
+      "sha256": "ca42840800a22290fed4522fc69dd02eccfc7e6843a71a85910f3e9280d51e7c",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_fontes.py",
+      "sha256": "ceb278c2a74ad84c32d5b226a92c15468cf8937701106e2b90a46c4c2517b680",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_fontes_tests.py",
+      "sha256": "1277f5fc5fd81ac5e12ea8cf6db2b853e00316e3d2c38825868d00263e853169",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_integridade.py",
+      "sha256": "1b2c21515c70a836758bb460255f08a40acfcced9ea0ffcd835842068c76f4a3",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_preservar_saude.py",
+      "sha256": "225bbb1569170ec28856deff2a9c80e930a5a49844a07ce8b2be101bfd434c38",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_quarentena.py",
+      "sha256": "53c4010b1d0d6b6e334d8ab4b5de1962660f419d33aee3674786b9a455004dc3",
+      "local_dependencies": [
+        "scripts/build_radar_hub_package.py"
+      ]
+    },
+    {
+      "path": "scripts/consolidacao_reconciliar.py",
+      "sha256": "c3decdf76600a23500eb7c7ead60451e1abec66cc9e162dcba4364f3b8dec25d",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_runtime_patch.py",
+      "sha256": "268e35ac66e0840ae4256b46827eaf6584538c946b0485a4b5b165cc476f7ac2",
+      "local_dependencies": [
+        "scripts/build_radar_hub_package.py"
+      ]
+    },
+    {
+      "path": "scripts/consolidacao_runtime_tests.py",
+      "sha256": "64c2e64f4ed29b547f4d13ebc478493f2d06a662f05ed01117a7bbc806011bf3",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_sidra.py",
+      "sha256": "445e2784d3f3c1f4fd05d1d46c4127f8952c5887ed2a38636202e4253439e6a5",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_snapshot.py",
+      "sha256": "f3ba8504f0dfcc4dc85c069b162bb82207578fb562465fec704e7806c1f2a847",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/consolidacao_versionar.py",
+      "sha256": "9209d99d1113a6ff094a1446b569f62398031af1374e5eb037f3ad60fd705c0e",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/document_meio_ambiente_p3.py",
+      "sha256": "d6ef73220a1ca0f98d5b4ff7486e3ce1b64021492b409504d8bf073cab6330a9",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/economia_sources.py",
+      "sha256": "78b2f4e73892828afe6d84c0ae51da840bb28597e6a6cb58f58aaac5704dbc08",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/educacao_p5_core.py",
+      "sha256": "215ca7ac9fa6b520d20a10973b41b3a360175029b294a1d632528a02a19863b5",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/enrich_meio_ambiente_p3.py",
+      "sha256": "6e2666a2f5b223db40e392f44ab2018171b9ac7be0330034840ac9cf0beabea7",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/finalize_meio_ambiente_p3.py",
+      "sha256": "7e016a9e388f829cc9384a67b606b30fc8cb03dd989391a5fe62370ab5a2dda1",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py"
+      ]
+    },
+    {
+      "path": "scripts/generate_geo_bundle.py",
+      "sha256": "4eee100439c298ccc0bf0fb61ace99c110de85b0a76a85684678c13785105a19",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/inspect_mobilidade_sources.py",
+      "sha256": "798ea3edb02457e09ad10c2fa9ff963ca092ed8b3ba2c05f07fec5cb82701e94",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py"
+      ]
+    },
+    {
+      "path": "scripts/meio_ambiente_workbooks.py",
+      "sha256": "f8305df9fbd09acc9ddddcc105606c586da234062ac38dd5c1325f860afb85f9",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/mobilidade_evidence_core.py",
+      "sha256": "f1ad0f4b21bc3ff29addc572f4f09ce98a8af85a79076dd0ca1e5b1cf570c8da",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py"
+      ]
+    },
+    {
+      "path": "scripts/registrar_p4_pendencias_20261008.py",
+      "sha256": "18ca6598f416079d5eb408b2c5d9e5fb3caf701ee38bf78f1e2fc83ea1951325",
+      "local_dependencies": [
+        "scripts/educacao_p5_core.py"
+      ]
+    },
+    {
+      "path": "scripts/report_economia_audit.py",
+      "sha256": "c5839ee889ffceb8e279ec7d4f99c2da8f5cbfdbbb295e579f9757ece7e80f62",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/report_financas_audit.py",
+      "sha256": "e17446f87400e6a75fd72707bc1d20a710b42cc784898f98f617102af3326296",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/report_mobilidade_p4.py",
+      "sha256": "8c5bc911299a95490040f48da5203b018def13c5a9f1f0aea708e3e6b9c37ccd",
+      "local_dependencies": [
+        "scripts/collect_mobilidade_p4.py"
+      ]
+    },
+    {
+      "path": "scripts/saude_documental_20261002.py",
+      "sha256": "945f9f3ae863d1ced8c74e8eaa4d1d1f7746dd1d879d0353db86a03f34083894",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/test_economia_audit.py",
+      "sha256": "f6cc5c270217aca70e6691a3e4a5bca776881840c4be1dda5aaa326a8a0bd599",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/test_financas_audit.py",
+      "sha256": "1b5ed69dbf0fb21eb72622aad6e228bc11902d46509046b9004a16c3df0b4637",
+      "local_dependencies": []
+    },
+    {
+      "path": "scripts/test_meio_ambiente_p3.py",
+      "sha256": "d229c635ac1a9c6a04552b863f70ff38d961195375b95ad64a3a672e939114f2",
+      "local_dependencies": [
+        "scripts/collect_meio_ambiente_p3.py",
+        "scripts/meio_ambiente_workbooks.py"
+      ]
+    },
+    {
+      "path": "scripts/test_mobilidade_p4.py",
+      "sha256": "a832c350db1ee0e48ab7c3a3e63babe75e2ce083cea5fcefea974d29a9f7e222",
+      "local_dependencies": [
+        "scripts/build_mobilidade_fleet.py",
+        "scripts/mobilidade_evidence_core.py"
+      ]
+    }
+  ],
+  "commit_created": false,
+  "push": false,
+  "note": "Novos scripts incluídos no índice Git; mudanças preexistentes de arquivos da aplicação não foram adicionadas ao índice. Brutos/evidences pesados preservados localmente e identificados em manifests; recuperar por SHA em outro clone."
+}

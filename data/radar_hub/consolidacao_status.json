@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-08",
+  "homologated": false,
+  "journal": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/reconciliacao-aplicada.json",
+  "report": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/relatorio-final.md",
+  "note": "Consolidacao tecnica, nao homologacao; pendencias por eixo documentadas.",
+  "evidence_store": "data/radar_hub/consolidacao_evidence_2026-10-08.json",
+  "mobilidade_reconciliation": "data/radar_hub/mobilidade_reconciliation_20261008.json"
+}

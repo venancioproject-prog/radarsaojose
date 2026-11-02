@@ -1,0 +1,25 @@
+{
+  "package_inline_equal": false,
+  "ground_truth_equal": false,
+  "registry_equal": true,
+  "dataset_version": "sha256:71a0494aede105b418ab395af8f170f3e8ba3df5744dae9121a103356c913a19",
+  "package_keys": [
+    "schema_version",
+    "dataset_version",
+    "source_registry_version",
+    "audit_status",
+    "auditReport",
+    "audit_note",
+    "groundTruth",
+    "metadataRegistry",
+    "benchmark",
+    "historicalAudit",
+    "consistency",
+    "economiaAudit",
+    "financasAudit",
+    "meioAmbienteAudit",
+    "mobilidadeAudit",
+    "evidences"
+  ],
+  "app_js_sha256": "3063186d953be5055dae85f6b3371342922bed66249bd5387215bc8d5b0f9934"
+}

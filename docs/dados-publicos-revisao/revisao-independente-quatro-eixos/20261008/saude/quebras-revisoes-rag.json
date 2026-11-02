@@ -1,0 +1,233 @@
+[
+  {
+    "family": "sih",
+    "year": 2020,
+    "versions": [
+      {
+        "family": "sih",
+        "year": 2020,
+        "value": 30894,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2020,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+        "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+        "source_query_date": "22/03/2021",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                              2016               2017                2018               2019               2020",
+        "native_total_row": "Total                                                                                                                                 28863               29421                31482               34510               30894"
+      },
+      {
+        "family": "sih",
+        "year": 2020,
+        "value": 30895,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2021,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+        "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+        "source_query_date": "24/02/2022",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                                         2017                  2018                   2019                  2020                   2021",
+        "native_total_row": "Total                                                                                                                                                           29421                   31482                   34510                   30895                   32995"
+      },
+      {
+        "family": "sih",
+        "year": 2020,
+        "value": 30895,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2022,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+        "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+        "source_query_date": "24/03/2023",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                 2018            2019            2020            2021            2022",
+        "native_total_row": "Total                                                                                                         31482            34510            30895            32995           35282"
+      },
+      {
+        "family": "sih",
+        "year": 2020,
+        "value": 30895,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2023,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+        "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+        "source_query_date": "15/03/2024",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+        "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+      },
+      {
+        "family": "sih",
+        "year": 2020,
+        "value": 30895,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2024,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+        "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+        "source_query_date": "25/03/2025",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+        "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+      }
+    ],
+    "rationale": "Mesmo escopo de residência e variável. Revisão documental de base publicada em consultas distintas; preservar todas edições e usar consulta documentada no RAG2025 quando presente, sem média/interpolação."
+  },
+  {
+    "family": "sih",
+    "year": 2023,
+    "versions": [
+      {
+        "family": "sih",
+        "year": 2023,
+        "value": 37007,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2023,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+        "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+        "source_query_date": "15/03/2024",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+        "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+      },
+      {
+        "family": "sih",
+        "year": 2023,
+        "value": 37008,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2024,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+        "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+        "source_query_date": "25/03/2025",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+        "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+      },
+      {
+        "family": "sih",
+        "year": 2023,
+        "value": 37008,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2025,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "source_query_date": "13/05/2026",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+        "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+      }
+    ],
+    "rationale": "Mesmo escopo de residência e variável. Revisão documental de base publicada em consultas distintas; preservar todas edições e usar consulta documentada no RAG2025 quando presente, sem média/interpolação."
+  },
+  {
+    "family": "sih",
+    "year": 2024,
+    "versions": [
+      {
+        "family": "sih",
+        "year": 2024,
+        "value": 38737,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2024,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+        "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+        "source_query_date": "25/03/2025",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+        "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+      },
+      {
+        "family": "sih",
+        "year": 2024,
+        "value": 38738,
+        "unit": "internações SUS",
+        "scope": "residência paciente",
+        "edition": 2025,
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "source_query_date": "13/05/2026",
+        "pages": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+        "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+      }
+    ],
+    "rationale": "Mesmo escopo de residência e variável. Revisão documental de base publicada em consultas distintas; preservar todas edições e usar consulta documentada no RAG2025 quando presente, sem média/interpolação."
+  }
+]

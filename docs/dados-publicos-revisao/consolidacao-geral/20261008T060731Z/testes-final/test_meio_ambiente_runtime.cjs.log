@@ -1,0 +1,3 @@
+PASS P3 runtime online: filtros, 2 gráficos, suspensões, pacote atômico, null/zero, 656 linhas JSON/CSV.
+PASS P3 runtime offline: filtros, 2 gráficos, suspensões, pacote atômico, null/zero, 656 linhas JSON/CSV.
+PASS P3 runtime mixed: filtros, 2 gráficos, suspensões, pacote atômico, null/zero, 656 linhas JSON/CSV.

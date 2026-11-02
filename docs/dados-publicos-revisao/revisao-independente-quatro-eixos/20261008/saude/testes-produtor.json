@@ -1,0 +1,511 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "test": "SINASC 2021",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SINASC 2022",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SINASC 2023",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SINASC 2024",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH 2021",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH 2022",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH 2023",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH 2024",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM total 2023",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM fechamento 2023",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 IX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 II",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 X",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 XX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 IV",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 XI",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2023 I",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 XV",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 XI",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 IX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 II",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 XIX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 X",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 XIV",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2023 I",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM total 2024",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM fechamento 2024",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 IX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 II",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 X",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 XX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 IV",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 XI",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIM capitulo 2024 I",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 XV",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 XI",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 IX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 XIX",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 II",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 XIV",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 X",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "SIH top 2024 I",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Taxa infantil impressa 8,2",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Taxa infantil impressa 7,65",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Denominador não inferido obitos_2024",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Denominador não inferido nascidos_vivos_2024",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Denominador não inferido obitos_2025",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Denominador não inferido nascidos_vivos_2025",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "APS publicada 61,63",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "APS publicada 57,95",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 85,90",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 89,05",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 98,5",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 85,7",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 82,64",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 88,74",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 91,44",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "PNI publicada 85,45",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_mortalidade_infantil",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_leitos_hospitalares_total",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_leitos_sus",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_leitos_nao_sus",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_taxa_leitos_mil_hab",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_leitos_uti_adulto",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_leitos_uti_pediatrica",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_estabelecimentos_total",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_cobertura_atencao_basica",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_nascidos_vivos_sinasc",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_cobertura_vacinal_bcg",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_dengue_sinan",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_internacoes_sih",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_atencao_basica_cnes_sia",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_procedimentos_sia_sih",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash primário saude_causas_mortalidade",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Suspensão saude_cobertura_vacinal",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo q2025.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2025.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo q2024.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2024.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo catalogo.html",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cnes-leitos-202412.html",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo retrospectiva.html",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo dengue2019.html",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2023.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2022.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2021.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2020.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2019.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2018.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2017.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo rag2016.pdf",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue2020_import_res.csv",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue2021_mes.csv",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue2022_mes.csv",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue23_mes.csv",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue2019_import_res.csv",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue24_mes.csv",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-dengue_csv_2025.zip",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo pni-portaria2025.html",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cve-catalogo.html",
+      "pass_": true,
+      "detail": null
+    },
+    {
+      "test": "Hash novo cnes-metodologia.html",
+      "pass_": true,
+      "detail": null
+    }
+  ],
+  "independent_validation_required": true
+}

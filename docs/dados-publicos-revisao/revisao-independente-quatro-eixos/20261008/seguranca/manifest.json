@@ -1,0 +1,347 @@
+[
+  {
+    "name": "municipios",
+    "url": "https://www.ssp.sp.gov.br/v1/Municipios/RecuperaMunicipios",
+    "retrieved_utc": "2026-10-08T07:51:42.434256+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\municipios.json",
+    "sha256": "50d7a1ff9c52b30d8b317af58116f52ea15420e765747df093ccd300790f69f2",
+    "bytes": 47754
+  },
+  {
+    "name": "ocorrencias",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560",
+    "retrieved_utc": "2026-10-08T07:51:42.643581+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\ocorrencias.json",
+    "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212",
+    "bytes": 2900
+  },
+  {
+    "name": "taxas",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "retrieved_utc": "2026-10-08T07:51:42.907222+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\taxas.json",
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+    "bytes": 4965
+  },
+  {
+    "name": "pda",
+    "url": "https://www.ssp.sp.gov.br/assets/download/Dados_Abertos.pdf",
+    "retrieved_utc": "2026-10-08T07:51:43.572931+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\pda.pdf",
+    "sha256": "ee970b03a05a4aa94e1ee06653e71426d0a4c4b26889a505f08617b0af062db9",
+    "bytes": 757243
+  },
+  {
+    "name": "mensal-2023",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2023&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:51:44.024000+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2023.json",
+    "sha256": "dd3cc1b7cbd30036695eeb202fe268fb07cd2c773f59fdb3917eac67b04c7d42",
+    "bytes": 7561
+  },
+  {
+    "name": "mensal-2024",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:51:44.474729+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2024.json",
+    "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+    "bytes": 7537
+  },
+  {
+    "name": "mensal-2025",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2025&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:51:44.967777+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2025.json",
+    "sha256": "2c997fee00b7471f1a51f63150fa79b60c150c66839e9f00e271855dbb892f0a",
+    "bytes": 7536
+  },
+  {
+    "name": "mensal-2026",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2026&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:51:45.391092+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2026.json",
+    "sha256": "5e832a8940a4c76bd638eddef11fceb4bc047fbebb583552651c41ab8acb128d",
+    "bytes": 7471
+  },
+  {
+    "name": "mensal-2001",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2001&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.169258+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2001.json",
+    "sha256": "db40239dcbd456c671da89588ddf9c86805ef91ebf083467d47992867d2763b1",
+    "bytes": 6659
+  },
+  {
+    "name": "mensal-2002",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2002&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.059772+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2002.json",
+    "sha256": "ac982b56a1a61160552359eb3b8c47a6203f292b32a4a01cd172a350d815d9e6",
+    "bytes": 6654
+  },
+  {
+    "name": "mensal-2003",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2003&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.012436+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2003.json",
+    "sha256": "82cfaa8ad158a12252455e07ce1812c8de523f4003f5ea2835dcb94de9954e19",
+    "bytes": 6659
+  },
+  {
+    "name": "mensal-2004",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2004&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:11.833070+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2004.json",
+    "sha256": "eb2e88552c1c122c972ff388e85a8b95413d583cc27ba65b9cfe4e40eadf7409",
+    "bytes": 6654
+  },
+  {
+    "name": "mensal-2005",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2005&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.059772+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2005.json",
+    "sha256": "1fbef3af0627bb06f6c79e87fb7d693915d50cf4ffcd46f6e333c35beb144bc8",
+    "bytes": 6640
+  },
+  {
+    "name": "mensal-2006",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2006&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:11.877934+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2006.json",
+    "sha256": "7813cf6a927c837deb1af1156d88bb8d92f860bae2fc679ec3b5fd869ed71684",
+    "bytes": 6634
+  },
+  {
+    "name": "mensal-2007",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2007&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.630981+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2007.json",
+    "sha256": "b5dc3a3745b52f777d126cda45ade75a8208830b83409581610b9d9c64d89279",
+    "bytes": 6626
+  },
+  {
+    "name": "mensal-2008",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2008&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.769922+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2008.json",
+    "sha256": "35d7cd7ac6251134fca88247c8653c0020d4b8dd306dfa7478fb7739f36c2d91",
+    "bytes": 6627
+  },
+  {
+    "name": "mensal-2009",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2009&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.877035+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2009.json",
+    "sha256": "21873522db3d7cdd950b32ae832f955df07c9b0524062792e6b880ee63836fcf",
+    "bytes": 6625
+  },
+  {
+    "name": "mensal-2010",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2010&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.821790+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2010.json",
+    "sha256": "ce5b3391c3853d95308de6b76a2555e96085ccc60dea8584d143c618b7a9c2e2",
+    "bytes": 6306
+  },
+  {
+    "name": "mensal-2011",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2011&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.991995+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2011.json",
+    "sha256": "91bb01173c247b2aec132f2544f9954e031f730a178ee4165d092049417bcb67",
+    "bytes": 5617
+  },
+  {
+    "name": "mensal-2012",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2012&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:12.928734+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2012.json",
+    "sha256": "ef2cdfc6249d401d4d030921e5234d953997e9c28b465914940a88107482634e",
+    "bytes": 6313
+  },
+  {
+    "name": "mensal-2013",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2013&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:13.399796+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2013.json",
+    "sha256": "450c9faa7fb5f1e4210e635260e0e7cbc72b603830b4a9932a5a1a752b358959",
+    "bytes": 6309
+  },
+  {
+    "name": "mensal-2014",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2014&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:13.691589+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2014.json",
+    "sha256": "41be64286ecb8cf035f7474f960115479dee1437c7b31a03f0ccdd4b10f57ce4",
+    "bytes": 6306
+  },
+  {
+    "name": "mensal-2015",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2015&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:13.535654+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2015.json",
+    "sha256": "6fb85247091952f3ed1799409c238fb000d473de64c2a7f577ac237bed61de2c",
+    "bytes": 6916
+  },
+  {
+    "name": "mensal-2016",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2016&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:13.770014+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2016.json",
+    "sha256": "7922fd7ef1403e40884236c6fc0e42f136b0a5409aaac1736c43c405caa5dd4c",
+    "bytes": 6944
+  },
+  {
+    "name": "mensal-2017",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2017&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:13.814701+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2017.json",
+    "sha256": "aacce3dbb1294b0267fcb003bf9aa8255e2ade488ef8327b004a0d3151d66f27",
+    "bytes": 7577
+  },
+  {
+    "name": "mensal-2018",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2018&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:13.947692+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2018.json",
+    "sha256": "52318c228be3f127a3d7d443cea33abdc671efa2c2145181ce12bcf974ef219f",
+    "bytes": 7583
+  },
+  {
+    "name": "mensal-2019",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2019&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:14.304870+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2019.json",
+    "sha256": "4432ac19b8e4822e7822e06c49ba5e2329ab1bf334fb583ea11a96e78aef8922",
+    "bytes": 7581
+  },
+  {
+    "name": "mensal-2020",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2020&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:14.305873+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2020.json",
+    "sha256": "8e5aa2240ef27dd916b26c1c5b0f0b02ac545f693a0c6583a4023f948a9d18ac",
+    "bytes": 7562
+  },
+  {
+    "name": "mensal-2021",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2021&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:14.564920+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2021.json",
+    "sha256": "f45aa6dc870cb3dc8a175dfe32cb09669bb6fa06cab3a7487057d5b84c06e614",
+    "bytes": 7562
+  },
+  {
+    "name": "mensal-2022",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2022&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:52:14.336527+00:00",
+    "exit_code": 0,
+    "error": "",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\mensal-2022.json",
+    "sha256": "a67c946c6a3384a00b358dd0baaef34f66203a0a21f620c47f4f1c3d6f894f78",
+    "bytes": 7563
+  },
+  {
+    "name": "produtividade-2024.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=9&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "retrieved_utc": "2026-10-08T07:53:17.339761+00:00",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\produtividade-2024.json",
+    "sha256": "fcbd1db005759f0eba638d4684b136b50865a1fa91d10486cdabbb5ea7413ed8",
+    "bytes": 4519,
+    "exit_code": 0
+  },
+  {
+    "name": "csi-2025-noticia.html",
+    "url": "https://www.sjc.sp.gov.br/noticias/2025/janeiro/03/sao-jose-tem-o-menor-numero-de-homicidio-da-historia/",
+    "retrieved_utc": "2026-10-08T07:53:17.768161+00:00",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\csi-2025-noticia.html",
+    "sha256": "434ff2bea2c8725470edeef74196efc6c91fa240c3981afa61fec27fff7c71ef",
+    "bytes": 27565,
+    "exit_code": 0
+  },
+  {
+    "name": "csi-ata-2025.pdf",
+    "url": "https://www.sjc.sp.gov.br/media/zmtcrcma/ata-reuni%C3%A3o-ordin%C3%A1ria-conselho-municipal-seguran%C3%A7a-11-de-dezembro-de-2025.pdf",
+    "retrieved_utc": "2026-10-08T07:53:18.333019+00:00",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\csi-ata-2025.pdf",
+    "sha256": "8c717071a5466fbfa9d6144a175219a73b1ed3b54779ca02ecd8416b20795897",
+    "bytes": 666196,
+    "exit_code": 0
+  },
+  {
+    "name": "portal-main.js",
+    "url": "https://www.ssp.sp.gov.br/main.1f62405c7a447c0a.js",
+    "retrieved_utc": "2026-10-08T07:53:18.333019+00:00",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\portal-main.js",
+    "sha256": "60b555ea419aec53b7cec259850bc1657faa4673f9f56c3ea349362e3eb48a50",
+    "bytes": 1673938,
+    "exit_code": 0
+  },
+  {
+    "name": "portal-mensal.html",
+    "url": "https://www.ssp.sp.gov.br/estatistica/dados-mensais",
+    "retrieved_utc": "2026-10-08T07:53:18.336011+00:00",
+    "path": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\seguranca\\portal-mensal.html",
+    "sha256": "7de4936ab01804296513769b2e92c62ea0d056765ee18d5e7f04bbc91c699f8b",
+    "bytes": 26370,
+    "exit_code": 0
+  }
+]

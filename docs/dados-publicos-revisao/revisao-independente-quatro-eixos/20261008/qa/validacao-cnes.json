@@ -1,0 +1,1674 @@
+{
+  "status": "PASS",
+  "checks_count": 213,
+  "checks": [
+    {
+      "code": "01",
+      "field": "description",
+      "actual": "BUCO MAXILO FACIAL",
+      "pass_": true
+    },
+    {
+      "code": "01",
+      "field": "existing",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "01",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "01",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "02",
+      "field": "description",
+      "actual": "CARDIOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "02",
+      "field": "existing",
+      "actual": 3,
+      "pass_": true
+    },
+    {
+      "code": "02",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "02",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "03",
+      "field": "description",
+      "actual": "CIRURGIA GERAL",
+      "pass_": true
+    },
+    {
+      "code": "03",
+      "field": "existing",
+      "actual": 287,
+      "pass_": true
+    },
+    {
+      "code": "03",
+      "field": "second_column",
+      "actual": 212,
+      "pass_": true
+    },
+    {
+      "code": "03",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "04",
+      "field": "description",
+      "actual": "ENDOCRINOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "04",
+      "field": "existing",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "04",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "04",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "05",
+      "field": "description",
+      "actual": "GASTROENTEROLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "05",
+      "field": "existing",
+      "actual": 9,
+      "pass_": true
+    },
+    {
+      "code": "05",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "05",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "06",
+      "field": "description",
+      "actual": "GINECOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "06",
+      "field": "existing",
+      "actual": 10,
+      "pass_": true
+    },
+    {
+      "code": "06",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "06",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "08",
+      "field": "description",
+      "actual": "NEFROLOGIAUROLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "08",
+      "field": "existing",
+      "actual": 14,
+      "pass_": true
+    },
+    {
+      "code": "08",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "08",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "09",
+      "field": "description",
+      "actual": "NEUROCIRURGIA",
+      "pass_": true
+    },
+    {
+      "code": "09",
+      "field": "existing",
+      "actual": 5,
+      "pass_": true
+    },
+    {
+      "code": "09",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "09",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "11",
+      "field": "description",
+      "actual": "OFTALMOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "11",
+      "field": "existing",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "11",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "11",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "12",
+      "field": "description",
+      "actual": "ONCOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "12",
+      "field": "existing",
+      "actual": 2,
+      "pass_": true
+    },
+    {
+      "code": "12",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "12",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "13",
+      "field": "description",
+      "actual": "ORTOPEDIATRAUMATOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "13",
+      "field": "existing",
+      "actual": 32,
+      "pass_": true
+    },
+    {
+      "code": "13",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "13",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "14",
+      "field": "description",
+      "actual": "OTORRINOLARINGOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "14",
+      "field": "existing",
+      "actual": 9,
+      "pass_": true
+    },
+    {
+      "code": "14",
+      "field": "second_column",
+      "actual": 1,
+      "pass_": true
+    },
+    {
+      "code": "14",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "15",
+      "field": "description",
+      "actual": "PLASTICA",
+      "pass_": true
+    },
+    {
+      "code": "15",
+      "field": "existing",
+      "actual": 9,
+      "pass_": true
+    },
+    {
+      "code": "15",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "15",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "16",
+      "field": "description",
+      "actual": "TORACICA",
+      "pass_": true
+    },
+    {
+      "code": "16",
+      "field": "existing",
+      "actual": 3,
+      "pass_": true
+    },
+    {
+      "code": "16",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "16",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "67",
+      "field": "description",
+      "actual": "TRANSPLANTE",
+      "pass_": true
+    },
+    {
+      "code": "67",
+      "field": "existing",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "67",
+      "field": "second_column",
+      "actual": 3,
+      "pass_": true
+    },
+    {
+      "code": "67",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "90",
+      "field": "description",
+      "actual": "QUEIMADO ADULTO",
+      "pass_": true
+    },
+    {
+      "code": "90",
+      "field": "existing",
+      "actual": 1,
+      "pass_": true
+    },
+    {
+      "code": "90",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "90",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "91",
+      "field": "description",
+      "actual": "QUEIMADO PEDIATRICO",
+      "pass_": true
+    },
+    {
+      "code": "91",
+      "field": "existing",
+      "actual": 1,
+      "pass_": true
+    },
+    {
+      "code": "91",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "91",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "31",
+      "field": "description",
+      "actual": "AIDS",
+      "pass_": true
+    },
+    {
+      "code": "31",
+      "field": "existing",
+      "actual": 2,
+      "pass_": true
+    },
+    {
+      "code": "31",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "31",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "32",
+      "field": "description",
+      "actual": "CARDIOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "32",
+      "field": "existing",
+      "actual": 12,
+      "pass_": true
+    },
+    {
+      "code": "32",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "32",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "33",
+      "field": "description",
+      "actual": "CLINICA GERAL",
+      "pass_": true
+    },
+    {
+      "code": "33",
+      "field": "existing",
+      "actual": 329,
+      "pass_": true
+    },
+    {
+      "code": "33",
+      "field": "second_column",
+      "actual": 210,
+      "pass_": true
+    },
+    {
+      "code": "33",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "35",
+      "field": "description",
+      "actual": "DERMATOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "35",
+      "field": "existing",
+      "actual": 2,
+      "pass_": true
+    },
+    {
+      "code": "35",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "35",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "36",
+      "field": "description",
+      "actual": "GERIATRIA",
+      "pass_": true
+    },
+    {
+      "code": "36",
+      "field": "existing",
+      "actual": 26,
+      "pass_": true
+    },
+    {
+      "code": "36",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "36",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "38",
+      "field": "description",
+      "actual": "HEMATOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "38",
+      "field": "existing",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "38",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "38",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "40",
+      "field": "description",
+      "actual": "NEFROUROLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "40",
+      "field": "existing",
+      "actual": 11,
+      "pass_": true
+    },
+    {
+      "code": "40",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "40",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "41",
+      "field": "description",
+      "actual": "NEONATOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "41",
+      "field": "existing",
+      "actual": 2,
+      "pass_": true
+    },
+    {
+      "code": "41",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "41",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "42",
+      "field": "description",
+      "actual": "NEUROLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "42",
+      "field": "existing",
+      "actual": 10,
+      "pass_": true
+    },
+    {
+      "code": "42",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "42",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "44",
+      "field": "description",
+      "actual": "ONCOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "44",
+      "field": "existing",
+      "actual": 20,
+      "pass_": true
+    },
+    {
+      "code": "44",
+      "field": "second_column",
+      "actual": 14,
+      "pass_": true
+    },
+    {
+      "code": "44",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "46",
+      "field": "description",
+      "actual": "PNEUMOLOGIA",
+      "pass_": true
+    },
+    {
+      "code": "46",
+      "field": "existing",
+      "actual": 6,
+      "pass_": true
+    },
+    {
+      "code": "46",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "46",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "66",
+      "field": "description",
+      "actual": "UNIDADE ISOLAMENTO",
+      "pass_": true
+    },
+    {
+      "code": "66",
+      "field": "existing",
+      "actual": 15,
+      "pass_": true
+    },
+    {
+      "code": "66",
+      "field": "second_column",
+      "actual": 3,
+      "pass_": true
+    },
+    {
+      "code": "66",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "10",
+      "field": "description",
+      "actual": "OBSTETRICIA CIRURGICA",
+      "pass_": true
+    },
+    {
+      "code": "10",
+      "field": "existing",
+      "actual": 78,
+      "pass_": true
+    },
+    {
+      "code": "10",
+      "field": "second_column",
+      "actual": 55,
+      "pass_": true
+    },
+    {
+      "code": "10",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "43",
+      "field": "description",
+      "actual": "OBSTETRICIA CLINICA",
+      "pass_": true
+    },
+    {
+      "code": "43",
+      "field": "existing",
+      "actual": 68,
+      "pass_": true
+    },
+    {
+      "code": "43",
+      "field": "second_column",
+      "actual": 29,
+      "pass_": true
+    },
+    {
+      "code": "43",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "45",
+      "field": "description",
+      "actual": "PEDIATRIA CLINICA",
+      "pass_": true
+    },
+    {
+      "code": "45",
+      "field": "existing",
+      "actual": 102,
+      "pass_": true
+    },
+    {
+      "code": "45",
+      "field": "second_column",
+      "actual": 63,
+      "pass_": true
+    },
+    {
+      "code": "45",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "68",
+      "field": "description",
+      "actual": "PEDIATRIA CIRURGICA",
+      "pass_": true
+    },
+    {
+      "code": "68",
+      "field": "existing",
+      "actual": 39,
+      "pass_": true
+    },
+    {
+      "code": "68",
+      "field": "second_column",
+      "actual": 22,
+      "pass_": true
+    },
+    {
+      "code": "68",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "34",
+      "field": "description",
+      "actual": "CRONICOS",
+      "pass_": true
+    },
+    {
+      "code": "34",
+      "field": "existing",
+      "actual": 52,
+      "pass_": true
+    },
+    {
+      "code": "34",
+      "field": "second_column",
+      "actual": 2,
+      "pass_": true
+    },
+    {
+      "code": "34",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "47",
+      "field": "description",
+      "actual": "PSIQUIATRIA",
+      "pass_": true
+    },
+    {
+      "code": "47",
+      "field": "existing",
+      "actual": 301,
+      "pass_": true
+    },
+    {
+      "code": "47",
+      "field": "second_column",
+      "actual": 100,
+      "pass_": true
+    },
+    {
+      "code": "47",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "48",
+      "field": "description",
+      "actual": "REABILITACAO",
+      "pass_": true
+    },
+    {
+      "code": "48",
+      "field": "existing",
+      "actual": 1,
+      "pass_": true
+    },
+    {
+      "code": "48",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "48",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "07",
+      "field": "description",
+      "actual": "CIRURGICO/DIAGNOSTICO/TERAPEUTICO",
+      "pass_": true
+    },
+    {
+      "code": "07",
+      "field": "existing",
+      "actual": 77,
+      "pass_": true
+    },
+    {
+      "code": "07",
+      "field": "second_column",
+      "actual": 26,
+      "pass_": true
+    },
+    {
+      "code": "07",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "69",
+      "field": "description",
+      "actual": "AIDS",
+      "pass_": true
+    },
+    {
+      "code": "69",
+      "field": "existing",
+      "actual": 6,
+      "pass_": true
+    },
+    {
+      "code": "69",
+      "field": "second_column",
+      "actual": 6,
+      "pass_": true
+    },
+    {
+      "code": "69",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "72",
+      "field": "description",
+      "actual": "GERIATRIA",
+      "pass_": true
+    },
+    {
+      "code": "72",
+      "field": "existing",
+      "actual": 5,
+      "pass_": true
+    },
+    {
+      "code": "72",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "72",
+      "field": "second_column_label",
+      "actual": "SUS",
+      "pass_": true
+    },
+    {
+      "code": "74",
+      "field": "description",
+      "actual": "UTI-A TIPO I",
+      "pass_": true
+    },
+    {
+      "code": "74",
+      "field": "existing",
+      "actual": 8,
+      "pass_": true
+    },
+    {
+      "code": "74",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "74",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "75",
+      "field": "description",
+      "actual": "UTI-A TIPO II",
+      "pass_": true
+    },
+    {
+      "code": "75",
+      "field": "existing",
+      "actual": 133,
+      "pass_": true
+    },
+    {
+      "code": "75",
+      "field": "second_column",
+      "actual": 101,
+      "pass_": true
+    },
+    {
+      "code": "75",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "76",
+      "field": "description",
+      "actual": "UTI-A TIPO III",
+      "pass_": true
+    },
+    {
+      "code": "76",
+      "field": "existing",
+      "actual": 84,
+      "pass_": true
+    },
+    {
+      "code": "76",
+      "field": "second_column",
+      "actual": 12,
+      "pass_": true
+    },
+    {
+      "code": "76",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "78",
+      "field": "description",
+      "actual": "UTI PEDIATRICA - TIPO II",
+      "pass_": true
+    },
+    {
+      "code": "78",
+      "field": "existing",
+      "actual": 18,
+      "pass_": true
+    },
+    {
+      "code": "78",
+      "field": "second_column",
+      "actual": 18,
+      "pass_": true
+    },
+    {
+      "code": "78",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "79",
+      "field": "description",
+      "actual": "UTI-PED TIPO III",
+      "pass_": true
+    },
+    {
+      "code": "79",
+      "field": "existing",
+      "actual": 5,
+      "pass_": true
+    },
+    {
+      "code": "79",
+      "field": "second_column",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "79",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "80",
+      "field": "description",
+      "actual": "UTI NEONATAL - TIPO I",
+      "pass_": true
+    },
+    {
+      "code": "80",
+      "field": "existing",
+      "actual": 10,
+      "pass_": true
+    },
+    {
+      "code": "80",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "80",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "81",
+      "field": "description",
+      "actual": "UTI NEONATAL - TIPO II",
+      "pass_": true
+    },
+    {
+      "code": "81",
+      "field": "existing",
+      "actual": 39,
+      "pass_": true
+    },
+    {
+      "code": "81",
+      "field": "second_column",
+      "actual": 22,
+      "pass_": true
+    },
+    {
+      "code": "81",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "82",
+      "field": "description",
+      "actual": "UTI NEONATAL - TIPO III",
+      "pass_": true
+    },
+    {
+      "code": "82",
+      "field": "existing",
+      "actual": 10,
+      "pass_": true
+    },
+    {
+      "code": "82",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "82",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "83",
+      "field": "description",
+      "actual": "UTI-Q",
+      "pass_": true
+    },
+    {
+      "code": "83",
+      "field": "existing",
+      "actual": 5,
+      "pass_": true
+    },
+    {
+      "code": "83",
+      "field": "second_column",
+      "actual": 4,
+      "pass_": true
+    },
+    {
+      "code": "83",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "85",
+      "field": "description",
+      "actual": "UCO TIPO II",
+      "pass_": true
+    },
+    {
+      "code": "85",
+      "field": "existing",
+      "actual": 12,
+      "pass_": true
+    },
+    {
+      "code": "85",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "85",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "86",
+      "field": "description",
+      "actual": "UCO TIPO III",
+      "pass_": true
+    },
+    {
+      "code": "86",
+      "field": "existing",
+      "actual": 6,
+      "pass_": true
+    },
+    {
+      "code": "86",
+      "field": "second_column",
+      "actual": 0,
+      "pass_": true
+    },
+    {
+      "code": "86",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "92",
+      "field": "description",
+      "actual": "UNIDADE DE CUIDADOS INTERMEDIARIOS NEONATAL CONVENCIONAL",
+      "pass_": true
+    },
+    {
+      "code": "92",
+      "field": "existing",
+      "actual": 16,
+      "pass_": true
+    },
+    {
+      "code": "92",
+      "field": "second_column",
+      "actual": 16,
+      "pass_": true
+    },
+    {
+      "code": "92",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    },
+    {
+      "code": "95",
+      "field": "description",
+      "actual": "UCI-A",
+      "pass_": true
+    },
+    {
+      "code": "95",
+      "field": "existing",
+      "actual": 6,
+      "pass_": true
+    },
+    {
+      "code": "95",
+      "field": "second_column",
+      "actual": 6,
+      "pass_": true
+    },
+    {
+      "code": "95",
+      "field": "second_column_label",
+      "actual": "HABILITADOS",
+      "pass_": true
+    }
+  ],
+  "rows": [
+    {
+      "code": "01",
+      "description": "BUCO MAXILO FACIAL",
+      "existing": 4,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "02",
+      "description": "CARDIOLOGIA",
+      "existing": 3,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "03",
+      "description": "CIRURGIA GERAL",
+      "existing": 287,
+      "second_column": 212,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "04",
+      "description": "ENDOCRINOLOGIA",
+      "existing": 4,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "05",
+      "description": "GASTROENTEROLOGIA",
+      "existing": 9,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "06",
+      "description": "GINECOLOGIA",
+      "existing": 10,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "08",
+      "description": "NEFROLOGIAUROLOGIA",
+      "existing": 14,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "09",
+      "description": "NEUROCIRURGIA",
+      "existing": 5,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "11",
+      "description": "OFTALMOLOGIA",
+      "existing": 4,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "12",
+      "description": "ONCOLOGIA",
+      "existing": 2,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "13",
+      "description": "ORTOPEDIATRAUMATOLOGIA",
+      "existing": 32,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "14",
+      "description": "OTORRINOLARINGOLOGIA",
+      "existing": 9,
+      "second_column": 1,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "15",
+      "description": "PLASTICA",
+      "existing": 9,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "16",
+      "description": "TORACICA",
+      "existing": 3,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "67",
+      "description": "TRANSPLANTE",
+      "existing": 4,
+      "second_column": 3,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "90",
+      "description": "QUEIMADO ADULTO",
+      "existing": 1,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "91",
+      "description": "QUEIMADO PEDIATRICO",
+      "existing": 1,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "1"
+    },
+    {
+      "code": "31",
+      "description": "AIDS",
+      "existing": 2,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "32",
+      "description": "CARDIOLOGIA",
+      "existing": 12,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "33",
+      "description": "CLINICA GERAL",
+      "existing": 329,
+      "second_column": 210,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "35",
+      "description": "DERMATOLOGIA",
+      "existing": 2,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "36",
+      "description": "GERIATRIA",
+      "existing": 26,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "38",
+      "description": "HEMATOLOGIA",
+      "existing": 4,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "40",
+      "description": "NEFROUROLOGIA",
+      "existing": 11,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "41",
+      "description": "NEONATOLOGIA",
+      "existing": 2,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "42",
+      "description": "NEUROLOGIA",
+      "existing": 10,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "44",
+      "description": "ONCOLOGIA",
+      "existing": 20,
+      "second_column": 14,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "46",
+      "description": "PNEUMOLOGIA",
+      "existing": 6,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "66",
+      "description": "UNIDADE ISOLAMENTO",
+      "existing": 15,
+      "second_column": 3,
+      "second_column_label": "SUS",
+      "type": "2"
+    },
+    {
+      "code": "10",
+      "description": "OBSTETRICIA CIRURGICA",
+      "existing": 78,
+      "second_column": 55,
+      "second_column_label": "SUS",
+      "type": "4"
+    },
+    {
+      "code": "43",
+      "description": "OBSTETRICIA CLINICA",
+      "existing": 68,
+      "second_column": 29,
+      "second_column_label": "SUS",
+      "type": "4"
+    },
+    {
+      "code": "45",
+      "description": "PEDIATRIA CLINICA",
+      "existing": 102,
+      "second_column": 63,
+      "second_column_label": "SUS",
+      "type": "5"
+    },
+    {
+      "code": "68",
+      "description": "PEDIATRIA CIRURGICA",
+      "existing": 39,
+      "second_column": 22,
+      "second_column_label": "SUS",
+      "type": "5"
+    },
+    {
+      "code": "34",
+      "description": "CRONICOS",
+      "existing": 52,
+      "second_column": 2,
+      "second_column_label": "SUS",
+      "type": "6"
+    },
+    {
+      "code": "47",
+      "description": "PSIQUIATRIA",
+      "existing": 301,
+      "second_column": 100,
+      "second_column_label": "SUS",
+      "type": "6"
+    },
+    {
+      "code": "48",
+      "description": "REABILITACAO",
+      "existing": 1,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "6"
+    },
+    {
+      "code": "07",
+      "description": "CIRURGICO/DIAGNOSTICO/TERAPEUTICO",
+      "existing": 77,
+      "second_column": 26,
+      "second_column_label": "SUS",
+      "type": "7"
+    },
+    {
+      "code": "69",
+      "description": "AIDS",
+      "existing": 6,
+      "second_column": 6,
+      "second_column_label": "SUS",
+      "type": "7"
+    },
+    {
+      "code": "72",
+      "description": "GERIATRIA",
+      "existing": 5,
+      "second_column": 0,
+      "second_column_label": "SUS",
+      "type": "7"
+    },
+    {
+      "code": "74",
+      "description": "UTI-A TIPO I",
+      "existing": 8,
+      "second_column": 0,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "75",
+      "description": "UTI-A TIPO II",
+      "existing": 133,
+      "second_column": 101,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "76",
+      "description": "UTI-A TIPO III",
+      "existing": 84,
+      "second_column": 12,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "78",
+      "description": "UTI PEDIATRICA - TIPO II",
+      "existing": 18,
+      "second_column": 18,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "79",
+      "description": "UTI-PED TIPO III",
+      "existing": 5,
+      "second_column": 4,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "80",
+      "description": "UTI NEONATAL - TIPO I",
+      "existing": 10,
+      "second_column": 0,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "81",
+      "description": "UTI NEONATAL - TIPO II",
+      "existing": 39,
+      "second_column": 22,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "82",
+      "description": "UTI NEONATAL - TIPO III",
+      "existing": 10,
+      "second_column": 0,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "83",
+      "description": "UTI-Q",
+      "existing": 5,
+      "second_column": 4,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "85",
+      "description": "UCO TIPO II",
+      "existing": 12,
+      "second_column": 0,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "86",
+      "description": "UCO TIPO III",
+      "existing": 6,
+      "second_column": 0,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "92",
+      "description": "UNIDADE DE CUIDADOS INTERMEDIARIOS NEONATAL CONVENCIONAL",
+      "existing": 16,
+      "second_column": 16,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    },
+    {
+      "code": "95",
+      "description": "UCI-A",
+      "existing": 6,
+      "second_column": 6,
+      "second_column_label": "HABILITADOS",
+      "type": "3"
+    }
+  ],
+  "sha256": "53a92a29112e4981a084f2d59aba6c386f24f464c06b95e459ec5c3a9aab5da6",
+  "decision": "APROVAR apenas códigos individuais existentes por local do estabelecimento e competência202412. Coluna complementar HABILITADOS não é SUS; nenhum total geral/SUS/UTI ou número de estabelecimentos promovido; nove KPI Saúde suspensos permanecem null."
+}

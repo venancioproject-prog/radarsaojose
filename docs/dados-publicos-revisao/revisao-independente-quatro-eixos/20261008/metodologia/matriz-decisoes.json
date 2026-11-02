@@ -1,0 +1,531 @@
+{
+  "reviewer": "metodologia independente",
+  "date": "2026-10-08",
+  "promotion_count": 6,
+  "own_capture_manifest": "manifest.json",
+  "own_numeric_checks": "testes-independentes.json",
+  "decisions": [
+    {
+      "axis": "seguranca",
+      "key": "seg_roubo_veiculos",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "Valor e soma dos 12 meses reproduzidos por captura própria. Município SSP560, ano2024. Prisões são variável administrativa nativa, não pessoas únicas.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp2024.json",
+        "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+        "http_status": 200,
+        "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+        "bytes": 7537,
+        "accessed_at": "2026-10-08T08:06:08.538393+00:00"
+      },
+      "locator": {
+        "idDelito": 37,
+        "ano": 2024,
+        "grupoDelito": 6,
+        "municipio": 560
+      },
+      "value": 143
+    },
+    {
+      "axis": "seguranca",
+      "key": "seg_furto_veiculos",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "Valor e soma dos 12 meses reproduzidos por captura própria. Município SSP560, ano2024. Prisões são variável administrativa nativa, não pessoas únicas.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp2024.json",
+        "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+        "http_status": 200,
+        "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+        "bytes": 7537,
+        "accessed_at": "2026-10-08T08:06:08.538393+00:00"
+      },
+      "locator": {
+        "idDelito": 22,
+        "ano": 2024,
+        "grupoDelito": 6,
+        "municipio": 560
+      },
+      "value": 724
+    },
+    {
+      "axis": "seguranca",
+      "key": "seg_prisoes",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "Valor e soma dos 12 meses reproduzidos por captura própria. Município SSP560, ano2024. Prisões são variável administrativa nativa, não pessoas únicas.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp-produtividade2024.json",
+        "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=9&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+        "http_status": 200,
+        "sha256": "fcbd1db005759f0eba638d4684b136b50865a1fa91d10486cdabbb5ea7413ed8",
+        "bytes": 4519,
+        "accessed_at": "2026-10-08T08:06:08.529136+00:00"
+      },
+      "locator": {
+        "idDelito": 88,
+        "ano": 2024,
+        "grupoDelito": 9,
+        "municipio": 560
+      },
+      "value": 2170
+    },
+    {
+      "axis": "demografia",
+      "key": "demo_populacao_estimada_2024",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "Estimativa oficial IBGE, referência1julho, não projeção criada no Radar; mudar narrativa legada, preservar histórico.2026 também reproduzido em XLSXDOU.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sidra6579.json",
+        "url": "https://apisidra.ibge.gov.br/values/t/6579/n6/3549904/v/9324/p/all",
+        "http_status": 200,
+        "sha256": "7ca6639ed31965f7089d75a806fea60868f7fdcc9f4d3748f3071d5bd1213320",
+        "bytes": 6534,
+        "accessed_at": "2026-10-08T08:06:10.474329+00:00"
+      },
+      "locator": {
+        "municipio": "3549904",
+        "variavel": 9324,
+        "ano": 2024
+      },
+      "value": 724756
+    },
+    {
+      "axis": "demografia",
+      "key": "demo_populacao_estimada_2026",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "Estimativa oficial IBGE, referência1julho, não projeção criada no Radar; mudar narrativa legada, preservar histórico.2026 também reproduzido em XLSXDOU.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sidra6579.json",
+        "url": "https://apisidra.ibge.gov.br/values/t/6579/n6/3549904/v/9324/p/all",
+        "http_status": 200,
+        "sha256": "7ca6639ed31965f7089d75a806fea60868f7fdcc9f4d3748f3071d5bd1213320",
+        "bytes": 6534,
+        "accessed_at": "2026-10-08T08:06:10.474329+00:00"
+      },
+      "locator": {
+        "municipio": "3549904",
+        "variavel": 9324,
+        "ano": 2026
+      },
+      "value": 729153
+    },
+    {
+      "axis": "demografia",
+      "key": "demo_taxa_urbanizacao",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "688155/697054*100 arredondado2casas=98.72. Classificação IBGE Censo2022. Divergência municipal681842 não reconciliada.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sidra9923.json",
+        "url": "https://apisidra.ibge.gov.br/values/t/9923/n6/3549904/v/93/p/2022/c1/all",
+        "http_status": 200,
+        "sha256": "8ea6918720c326407dc76f1ee0c5a14a73f09c98ab29538d4b86ec7316f94441",
+        "bytes": 1368,
+        "accessed_at": "2026-10-08T08:06:10.424744+00:00"
+      },
+      "locator": {
+        "municipio": "3549904",
+        "variavel": 93,
+        "ano": 2022,
+        "situacao_urbana": 1,
+        "situacao_total": 6795
+      },
+      "value": 98.72
+    },
+    {
+      "axis": "educacao",
+      "key": "id eb redes etapas2005–2025",
+      "status": "APROVADO_METODOLOGICAMENTE",
+      "reason": "Resultados agregados INEP publicados por rede/etapa. Não média simples entre redes, não percentual proficientes; produtoN*P com tolerância precisão publicada. QA deve validar células XLSX. Metas2023/2025 continuam null.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\inep-metas.html",
+        "url": "https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/metas",
+        "http_status": 200,
+        "sha256": "1255236c353434cfb5b9d1137022f4bcfaa7568dae9dbfe1c1448c8053da8205",
+        "bytes": 213020,
+        "accessed_at": "2026-10-08T08:06:08.375200+00:00"
+      }
+    },
+    {
+      "axis": "educacao",
+      "key": "censo2023–2025",
+      "status": "APROVADO_COM_QUEBRA",
+      "reason": "Ano/edição/arquivo/células distintos; layout2025V2 altera colunas e IFTP. Rede disjunta pode somar; docente/etapas, educação especial e profissional sobrepõem. Matrícula não pessoa única. Sem substituir campos2023 por2025.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\inep-sinopses.html",
+        "url": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica",
+        "http_status": 200,
+        "sha256": "10ca990e1c8bd82cb5a6cf76716248303b7a1199146824e502434452f391ff35",
+        "bytes": 223075,
+        "accessed_at": "2026-10-08T08:06:09.278069+00:00"
+      }
+    },
+    {
+      "axis": "educacao",
+      "key": "profissional_tecnica2023",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "Preservar7316 da coluna17 como Técnica de nível médio;7322 da coluna16 é educação profissional total separado. Não renomear técnica como total ou interpretar diferença como erro.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "educacao",
+      "key": "denominador_percentuais",
+      "status": "CORRIGIR",
+      "reason": "Eliminar142850 hardcoded; total163965 do mesmo recorte2023. Guardar null/zero inválido; rede soma100, categorias com sobreposição não têm obrigação100.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "educacao",
+      "key": "escolarizacao",
+      "status": "APROVADO_COM_RECORTE",
+      "reason": "99.09 Censo2022 e97.4 Censo2010 residentes6–14. Não matrícula, PNAD ou INEP; absolutos não inferidos da porcentagem.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ibge-escolarizacao.json",
+        "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60045?localidade=354990",
+        "http_status": 200,
+        "sha256": "d7f2e8e5564e37c5af86055f0c92af24a329bba9c233cbc54ee6fbbe888a97bb",
+        "bytes": 866,
+        "accessed_at": "2026-10-08T08:06:08.344180+00:00"
+      }
+    },
+    {
+      "axis": "saude",
+      "key": "atualizacao_ativos",
+      "status": "APROVADO_DOCUMENTALMENTE",
+      "reason": "Mortalidade2025=7.65 anual; APS2025=57.95 estimada e não ESF; SIH2025=41846 residentes; SIM2024=5028. QA deve reproduzir tabela/cabeçalhos. Anos anteriores preservados. Taxas sem numeradores publicados não passam a cálculos próprios.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\rag2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "http_status": 200,
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "bytes": 467239,
+        "accessed_at": "2026-10-08T08:06:10.563144+00:00"
+      },
+      "locator": {
+        "paginas_relevantes": "RAG tabela morbidade/mortalidade; SMSQ3/2025 p24–27"
+      }
+    },
+    {
+      "axis": "saude",
+      "key": "historico_rag2015–2025",
+      "status": "APROVADO_COM_REVISOES",
+      "reason": "Mesma variável/residência demonstradas antes de escolher revisão;31observações com todas85edições no histórico. RAG é fonte primária municipal que reproduz DATASUS, não extração nacional direta. SIH internações não AIHs pagas indistintas;2025SINASC/SIM ausentes.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\rag2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "http_status": 200,
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "bytes": 467239,
+        "accessed_at": "2026-10-08T08:06:10.563144+00:00"
+      }
+    },
+    {
+      "axis": "saude",
+      "key": "dengue_cve2019–2025",
+      "status": "APROVADO_SERIE_SEPARADA",
+      "reason": "Municipio residência3549904, mês início sintomas, confirmado autóctone/importado/notificado separados. Não fundir totaisCVE com SMSSE1–50. Datas/edições revisáveis. QA deve validar filtro municipal distintoGVE e84meses.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "saude",
+      "key": "9_kpis_suspensos",
+      "status": "MANTER_SUSPENSO",
+      "reason": "CNES total/SUS/UTI/estabelecimentos não redefinidos para universos existentes. Produção/agregados sem prova mantêm null. Acesso novo à fonte não torna o KPI antigo equivalente.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\cnes202412.html",
+        "url": "https://cnes2.datasus.gov.br/Mod_Ind_Tipo_Leito.asp?VEstado=35&VMun=354990&VComp=202412",
+        "http_status": 200,
+        "sha256": "53a92a29112e4981a084f2d59aba6c386f24f464c06b95e459ec5c3a9aab5da6",
+        "bytes": 78460,
+        "accessed_at": "2026-10-08T08:06:09.339365+00:00"
+      }
+    },
+    {
+      "axis": "saude",
+      "key": "CNES_linhas_nativas",
+      "status": "APROVADO_SERIE_NATIVA_LIMITADA_EXPORTACAO",
+      "reason": "Após QA separado reproduzir52linhas/seletores, aceitar GTseries_auditadas.cnes_codigos_202412 exclusivamente como52códigos nativos discretos, exportáveisJSON/CSV, semKPI/plot/agregação. Preservar tr/código/source/hash e segunda_coluna_label original SUS versus HABILITADOS por grupo. Existentes não é total convencional, HABILITADOS não SUS; não calcular nãoSUS por subtração. Todos9KPIsSaúde permanecemnull. A classificação/aprovação das linhas não homologa rótulos antigos ou equivalência de universos.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\cnes202412.html",
+        "url": "https://cnes2.datasus.gov.br/Mod_Ind_Tipo_Leito.asp?VEstado=35&VMun=354990&VComp=202412",
+        "http_status": 200,
+        "sha256": "53a92a29112e4981a084f2d59aba6c386f24f464c06b95e459ec5c3a9aab5da6",
+        "bytes": 78460,
+        "accessed_at": "2026-10-08T08:06:09.339365+00:00"
+      },
+      "locator": {
+        "competencia": "202412",
+        "municipio": "354990",
+        "codigos_adulto": [
+          74,
+          75,
+          76
+        ]
+      },
+      "qa_dependency": "Reprodução separada52linhas e213checks comunicada pelo integrador; localizar artefato QA na integração, não prova autossuficiente desta decisão."
+    },
+    {
+      "axis": "seguranca",
+      "key": "series2001",
+      "status": "SUSPENDER_QUATRO_CONTAGENS_CANONICAS",
+      "reason": "Homicídio231/229;roubos2935/2910;furtos4606/4528;FRV3112/3079. Preservar duas edições. Quebra registro→ocorrência emjul2001documentada não comprova causa específica. TaxaSEADE42.15 pode permanecer publicada separadamente sem inferir denominador.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp-metodologia.pdf",
+        "url": "https://www.ssp.sp.gov.br/assets/download/Dados_Abertos.pdf",
+        "http_status": 200,
+        "sha256": "ee970b03a05a4aa94e1ee06653e71426d0a4c4b26889a505f08617b0af062db9",
+        "bytes": 757243,
+        "accessed_at": "2026-10-08T08:06:08.530135+00:00"
+      },
+      "locator": {
+        "paginas": [
+          20,
+          21,
+          22
+        ]
+      }
+    },
+    {
+      "axis": "seguranca",
+      "key": "series_mensais2001–2026",
+      "status": "APROVADO_COM_LACUNAS",
+      "reason": "Não confundir vítimas/ocorrências;2025=33/29.2015IDs132/133semcompetência válida ficamnull;2026Jan–Ago somente, mesesfuturosnull. Ausência deID≠zero. Soma crimes não soma pessoas.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp2025.json",
+        "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2025&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+        "http_status": 200,
+        "sha256": "2c997fee00b7471f1a51f63150fa79b60c150c66839e9f00e271855dbb892f0a",
+        "bytes": 7536,
+        "accessed_at": "2026-10-08T08:06:08.591949+00:00"
+      },
+      "locator": {
+        "idOcorrencias": 38,
+        "idVitimas": 41
+      }
+    },
+    {
+      "axis": "seguranca",
+      "key": "taxas1999–2025",
+      "status": "APROVADO_PUBLICADO",
+      "reason": "Denom SSP éSEADE; taxa veicular pode ser por100milveículos. Não recalcular comIBGE/inverter arredondamento.",
+      "independent_numerical_qa_required": true,
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\ssp-metodologia.pdf",
+        "url": "https://www.ssp.sp.gov.br/assets/download/Dados_Abertos.pdf",
+        "http_status": 200,
+        "sha256": "ee970b03a05a4aa94e1ee06653e71426d0a4c4b26889a505f08617b0af062db9",
+        "bytes": 757243,
+        "accessed_at": "2026-10-08T08:06:08.530135+00:00"
+      },
+      "locator": {
+        "paginas": [
+          20,
+          21,
+          22
+        ]
+      }
+    },
+    {
+      "axis": "seguranca",
+      "key": "CSI_DEIC_ranking",
+      "status": "MANTER_SUSPENSO",
+      "reason": "CSI2948cumulativo desde implantação não anual2024. DEICcoorte/numerador/denom e rankinguniverso integral ausentes. Não somar universos administrativos.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "demografia",
+      "key": "piramide2022_historicos_domicilios",
+      "status": "APROVADO_COM_UNIVERSOS",
+      "reason": "21faixas disjuntasSIDRA9514;80+ pode agregado exato. Censos6observações e estimativas22 observações séries separadas; seminterpolação. Média2.80=moradores695312/permanentesocupados247894, não697054. QA deve reextrair células/fontes. Censos seis pontos1970–2022 e estimativas22pontos2001–2026 em famílias distintas, exportação somente, gategráfico mantido. Comparabilidade temporal condicionada a limites territoriais e revisões de cada edição; sem documentação dessas mudanças não inferir crescimento homogêneo nem extrapolar décadas ausentes/1960. Não unir Censo+estimativa como tendência contínua.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "demografia",
+      "key": "35_poligonos",
+      "status": "MANTER_SUSPENSO",
+      "reason": "Tabela39áreas textuais e8regiões não crosswalk para35geometrias. CD_BAIRRO e setor namespaces distintos. População/densidade/ranknull; áreas hardcoded não comprovadas. Preservar geometria sem join por nome.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "demografia",
+      "key": "cor_raca_religiao_piramides_antigas",
+      "status": "MANTER_SUSPENSO",
+      "reason": "Residual31cor/raça não alocar artificialmente; falta nota/validação. Pirâmides2000/2010 e demais auxiliares não reproduzidos, mantêmnull.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "todos",
+      "key": "autoridade_legada",
+      "status": "CORRIGIR_COM_HISTORICO",
+      "reason": "Arquivar campos raw_file/trecho_bruto/narrativas contraditórios sem apagar originais; alinhar nome/unidade/fonte/competência/verificação à evidência ativa. Não deixar textos antigos promoverem valores suspensos.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "todos",
+      "key": "gates_visualizacao",
+      "status": "MANTER_QUARENTENA",
+      "reason": "Nova evidência será exportável separadamente; não levantar gate integral só porque há subset comprovado. Corrigir labels/denominador de componentes existentes semredesenho; app.js intocado.",
+      "independent_numerical_qa_required": true
+    },
+    {
+      "axis": "saude",
+      "key": "saude_mortalidade_infantil",
+      "status": "APROVADO_ATUALIZACAO_ATIVO_APOS_QA",
+      "before": {
+        "value": 8.2,
+        "competencia": 2024
+      },
+      "after": {
+        "value": 7.65,
+        "competencia": 2025
+      },
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sms2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "http_status": 200,
+        "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+        "bytes": 3011984,
+        "accessed_at": "2026-10-08T08:06:11.190712+00:00"
+      },
+      "locator": {
+        "page": 26,
+        "column": "Resultado2025"
+      },
+      "reason": "Taxa publicada anual por mil nascidos vivos; resultado2025 preliminar/revisável, não3ºquadrimestre6.77. Numeradores/denominadores não publicados: não inventar/recalcular. Preservar ano anterior na série, rótulos/unidades e histórico. Nove suspensões mantidas.",
+      "independent_numerical_qa_required": true,
+      "promotion_of_suspended": false,
+      "own_reproduction": "adendo_saude.py"
+    },
+    {
+      "axis": "saude",
+      "key": "saude_cobertura_atencao_basica",
+      "status": "APROVADO_ATUALIZACAO_ATIVO_APOS_QA",
+      "before": {
+        "value": 61.63,
+        "competencia": 2024
+      },
+      "after": {
+        "value": 57.95,
+        "competencia": 2025
+      },
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sms2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "http_status": 200,
+        "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+        "bytes": 3011984,
+        "accessed_at": "2026-10-08T08:06:11.190712+00:00"
+      },
+      "locator": {
+        "page": 24,
+        "column": "Resultado2025"
+      },
+      "reason": "Cobertura populacional estimada APS, não ESF; colunaResultado2025, não pessoa observada. Dado2024últimoMSabril, edição2025documental distinta. Preservar ano anterior na série, rótulos/unidades e histórico. Nove suspensões mantidas.",
+      "independent_numerical_qa_required": true,
+      "promotion_of_suspended": false,
+      "own_reproduction": "adendo_saude.py"
+    },
+    {
+      "axis": "saude",
+      "key": "saude_atencao_basica_cnes_sia",
+      "status": "APROVADO_ATUALIZACAO_ATIVO_APOS_QA",
+      "before": {
+        "value": 61.63,
+        "competencia": 2024
+      },
+      "after": {
+        "value": 57.95,
+        "competencia": 2025
+      },
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\sms2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "http_status": 200,
+        "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+        "bytes": 3011984,
+        "accessed_at": "2026-10-08T08:06:11.190712+00:00"
+      },
+      "locator": {
+        "page": 24,
+        "column": "Resultado2025"
+      },
+      "reason": "Mesmo indicadorAPS duplicado nos doisIDs. Atualizar ambos coerentemente; não criar duas medidas independentes nem agregar. Preservar ano anterior na série, rótulos/unidades e histórico. Nove suspensões mantidas.",
+      "independent_numerical_qa_required": true,
+      "promotion_of_suspended": false,
+      "own_reproduction": "adendo_saude.py"
+    },
+    {
+      "axis": "saude",
+      "key": "saude_internacoes_sih",
+      "status": "APROVADO_ATUALIZACAO_ATIVO_APOS_QA",
+      "before": {
+        "value": 38738,
+        "competencia": 2024
+      },
+      "after": {
+        "value": 41846,
+        "competencia": 2025
+      },
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\rag2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "http_status": 200,
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "bytes": 467239,
+        "accessed_at": "2026-10-08T08:06:10.563144+00:00"
+      },
+      "locator": {
+        "page": "6–7",
+        "column": "2025"
+      },
+      "reason": "Internações SUS de residentes/anoSIH, consulta13/05/2026, revisável. Não todasAIHs, não atendimento em hospitaisSJC. Preservar ano anterior na série, rótulos/unidades e histórico. Nove suspensões mantidas.",
+      "independent_numerical_qa_required": true,
+      "promotion_of_suspended": false,
+      "own_reproduction": "adendo_saude.py"
+    },
+    {
+      "axis": "saude",
+      "key": "saude_causas_mortalidade",
+      "status": "APROVADO_ATUALIZACAO_ATIVO_APOS_QA",
+      "before": {
+        "value": 4677,
+        "competencia": 2023
+      },
+      "after": {
+        "value": 5028,
+        "competencia": 2024
+      },
+      "source": {
+        "file": "C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\metodologia\\raw\\rag2025.pdf",
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "http_status": 200,
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "bytes": 467239,
+        "accessed_at": "2026-10-08T08:06:10.563144+00:00"
+      },
+      "locator": {
+        "page": 7,
+        "column": "2024"
+      },
+      "reason": "Óbitos residentesSIM por anoóbito, consulta13/05/2026.2025não disponível; não atualizar para2025nem inferir causa/pessoa. Preservar ano anterior na série, rótulos/unidades e histórico. Nove suspensões mantidas.",
+      "independent_numerical_qa_required": true,
+      "promotion_of_suspended": false,
+      "own_reproduction": "adendo_saude.py"
+    }
+  ],
+  "acceptance": "Integração depende de QA independente e decisão do integrador; não homologação integral.",
+  "active_health_period_updates": 5
+}

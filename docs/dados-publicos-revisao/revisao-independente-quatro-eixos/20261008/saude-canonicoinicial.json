@@ -1,0 +1,1434 @@
+{
+  "axis": "saude",
+  "indicators": [
+    {
+      "indicator_id": "saude_mortalidade_infantil",
+      "name": "Taxa de Mortalidade Infantil (por mil nascidos vivos)",
+      "category": "saude",
+      "value": 8.2,
+      "unit": "obitos por mil nascidos vivos",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024; 2025: 7,65",
+      "frequency": "Anual",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Taxas publicadas pela SMS. O relatório não informa os numeradores e denominadores desta tabela. Não recalcular com uma extração SINASC de outra data. A meta 9,00 é a referência municipal de 2022 impressa no relatório, não meta ODS neonatal.",
+      "methodology": "Taxas publicadas pela SMS. O relatório não informa os numeradores e denominadores desta tabela. Não recalcular com uma extração SINASC de outra data. A meta 9,00 é a referência municipal de 2022 impressa no relatório, não meta ODS neonatal.",
+      "official_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_mortalidade_infantil",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+        "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+        "locator": {
+          "page": 26,
+          "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "excerpt": "Valor conferido: 8.2; referência: 2024; 2025: 7,65; página/seção: 26."
+        },
+        "value": 8.2,
+        "unit": "obitos por mil nascidos vivos",
+        "period": "2024; 2025: 7,65",
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-infantil-sjc-2010-2025.json",
+      "trecho_bruto": "SMS-SJC Relatorio de Gestao Quadri 3/2025 Pag. 26: Taxa de Mortalidade Infantil 2024 = 8,20 obitos/mil (66 obitos e 8.048 nascidos vivos); preliminar 2025 = 7,65 (61 obitos e 7.974 nascidos vivos); IBGE Cidades = 7,77",
+      "evidence_id": "cons:saude:saude_mortalidade_infantil",
+      "competencia": "2024; 2025: 7,65"
+    },
+    {
+      "indicator_id": "saude_leitos_hospitalares_total",
+      "name": "Total de Leitos Hospitalares Cadastrados (CNES)",
+      "category": "saude",
+      "value": null,
+      "unit": "leitos cadastrados",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Mensal (Competência Dezembro/2024)",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "methodology": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC (Municipio 3549904): 1.894 leitos hospitalares totais cadastrados (846 SUS e 1.048 Privado/Nao-SUS)",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_leitos_sus",
+      "name": "Leitos Hospitalares SUS",
+      "category": "saude",
+      "value": null,
+      "unit": "leitos SUS",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Mensal",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "methodology": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 846 leitos SUS (698 clinicos/cirurgicos + 102 UTI adulto + 18 UTI ped + 28 UTI neo = 846)",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_leitos_nao_sus",
+      "name": "Leitos Hospitalares Nao-SUS / Privados",
+      "category": "saude",
+      "value": null,
+      "unit": "leitos privados",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Mensal",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "methodology": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 1.048 leitos Nao-SUS (864 clinicos/cirurgicos + 138 UTI adulto + 16 UTI ped + 30 UTI neo = 1.048)",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_taxa_leitos_mil_hab",
+      "name": "Taxa de Leitos por Mil Habitantes",
+      "category": "saude",
+      "value": null,
+      "unit": "leitos por mil hab.",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Anual",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "methodology": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 1.894 leitos / 724.756 hab (IBGE DOU 2024) * 1.000 = 2,61 leitos por mil habitantes",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_leitos_uti_adulto",
+      "name": "Leitos de UTI Adulto",
+      "category": "saude",
+      "value": null,
+      "unit": "leitos UTI adulto",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Mensal",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "methodology": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 240 leitos de UTI Adulto (102 SUS e 138 Nao-SUS)",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_leitos_uti_pediatrica",
+      "name": "Leitos de UTI Pediatrica e Neonatal",
+      "category": "saude",
+      "value": null,
+      "unit": "leitos UTI ped/neo",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Mensal",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "methodology": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 34 leitos UTI Pediatrica (18 SUS, 16 Nao-SUS) e 58 leitos UTI Neonatal (28 SUS, 30 Nao-SUS), totalizando 92 leitos",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_estabelecimentos_total",
+      "name": "Total de Estabelecimentos de Saude Cadastrados (CNES)",
+      "category": "saude",
+      "value": null,
+      "unit": "estabelecimentos",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "12/2024",
+      "frequency": "Mensal",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente.",
+      "methodology": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente.",
+      "official_url": "https://cnes.datasus.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-estabelecimentos-sjc-202412.json",
+      "trecho_bruto": "CNES Dez/2024 SJC: 825 estabelecimentos de saude cadastrados no total (40 UBSs CNES, 5 UPAs, 11 hospitais, 6 CAPS)",
+      "evidence_id": null,
+      "competencia": "12/2024"
+    },
+    {
+      "indicator_id": "saude_cobertura_atencao_basica",
+      "name": "Cobertura da Atenção Primária à Saúde",
+      "category": "saude",
+      "value": 61.63,
+      "unit": "%",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024 (último dado MS: abril)",
+      "frequency": "Mensal",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+      "methodology": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+      "official_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_cobertura_atencao_basica",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+        "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+        "locator": {
+          "page": 24,
+          "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+        },
+        "value": 61.63,
+        "unit": "%",
+        "period": "2024 (último dado MS: abril)",
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json",
+      "trecho_bruto": "e-Gestor AB / SMS-SJC 2024: 83,5% de cobertura populacional da atencao basica com 142 equipes de Saude da Familia e 1.418.520 consultas realizadas",
+      "evidence_id": "cons:saude:saude_cobertura_atencao_basica",
+      "competencia": "2024 (último dado MS: abril)"
+    },
+    {
+      "indicator_id": "saude_nascidos_vivos_sinasc",
+      "name": "Nascidos Vivos e Via de Parto (SINASC)",
+      "category": "saude",
+      "value": 7463,
+      "unit": "nascidos vivos",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024",
+      "frequency": "Anual",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Totais por residência da mãe confirmados. Vias de parto e idade materna não discriminadas nesta tabela; gráfico por via suspenso até obter extração SINASC.",
+      "methodology": "Totais por residência da mãe confirmados. Vias de parto e idade materna não discriminadas nesta tabela; gráfico por via suspenso até obter extração SINASC.",
+      "official_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_nascidos_vivos_sinasc",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "locator": {
+          "page": 6,
+          "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "excerpt": "Valor conferido: 7463; referência: 2024; página/seção: 6."
+        },
+        "value": 7463,
+        "unit": "nascidos vivos",
+        "period": "2024",
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sinasc-nascidos-vivos-parto-sjc-2010-2024.json",
+      "trecho_bruto": "SINASC 2024 SJC: 7.463 nascidos vivos de maes residentes (4.660 cesareos e 2.801 vaginais); distribuicao por 9 faixas etarias maternas",
+      "evidence_id": "cons:saude:saude_nascidos_vivos_sinasc",
+      "competencia": "2024"
+    },
+    {
+      "indicator_id": "saude_cobertura_vacinal_bcg",
+      "name": "Cobertura Vacinal BCG em Crianças",
+      "category": "saude",
+      "value": 60.93,
+      "unit": "%",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024; parcial 2025: 91,67%",
+      "frequency": "Anual / Quadrimestral",
+      "geographic_level": "Municipal (Código IBGE: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Balanço municipal de 23/12/2025; 2025 parcial, não fechamento anual.",
+      "methodology": "Balanço municipal de 23/12/2025; 2025 parcial, não fechamento anual.",
+      "official_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_cobertura_vacinal_bcg",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+        "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+        "locator": {
+          "page": null,
+          "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+          "excerpt": "Valor conferido: 60.93; referência: 2024; parcial 2025: 91,67%; página/seção: balanço municipal."
+        },
+        "value": 60.93,
+        "unit": "%",
+        "period": "2024; parcial 2025: 91,67%",
+        "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json",
+      "trecho_bruto": "PNI / RNDS SJC 2024: Cobertura vacinal BCG em menores de 1 ano = 60,93% (meta PNI: 90,0%); preliminar 2025 = 91,67%",
+      "evidence_id": "cons:saude:saude_cobertura_vacinal_bcg",
+      "competencia": "2024; parcial 2025: 91,67%"
+    },
+    {
+      "indicator_id": "saude_dengue_sinan",
+      "name": "Casos confirmados de dengue (SE 1–50 de 2024)",
+      "category": "saude",
+      "value": 98163,
+      "unit": "casos confirmados",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024, SE 1–50 (parcial)",
+      "frequency": "Anual / Semanal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "2010–2018: balanços anuais. 2019–2023: lacunas sem comprovação, não são zeros. 2024: somente SE 1–50, fonte retrospectiva de 23/12/2025. Não calcular média 2010–2023 nem comparar o recorte parcial como ano completo.",
+      "methodology": "2010–2018: balanços anuais. 2019–2023: lacunas sem comprovação, não são zeros. 2024: somente SE 1–50, fonte retrospectiva de 23/12/2025. Não calcular média 2010–2023 nem comparar o recorte parcial como ano completo.",
+      "official_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_dengue_sinan",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+        "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+        "locator": {
+          "page": null,
+          "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+          "excerpt": "Valor conferido: 98163; referência: 2024, SE 1–50 (parcial); página/seção: balanço municipal."
+        },
+        "value": 98163,
+        "unit": "casos confirmados",
+        "period": "2024, SE 1–50 (parcial)",
+        "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sinan-dengue-casos-sjc-2010-2024.json",
+      "trecho_bruto": "SINAN / SMS-SJC 2024: 98.219 casos confirmados de dengue no total de 2024 (megaepidemia); 98.163 na SE 1-50 parcial; media historica 2010-2023 = 1.876",
+      "evidence_id": "cons:saude:saude_dengue_sinan",
+      "competencia": "2024, SE 1–50 (parcial)"
+    },
+    {
+      "indicator_id": "saude_internacoes_sih",
+      "name": "Internações Hospitalares no SUS (SIH/SUS)",
+      "category": "saude",
+      "value": 38738,
+      "unit": "internacoes (AIHs)",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024",
+      "frequency": "Anual / Mensal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Internações SUS por município de residência, segundo capítulo CID-10; não confundir com internações ocorridas nos hospitais de SJC nem com todas as AIHs. Extração 13/05/2026.",
+      "methodology": "Internações SUS por município de residência, segundo capítulo CID-10; não confundir com internações ocorridas nos hospitais de SJC nem com todas as AIHs. Extração 13/05/2026.",
+      "official_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_internacoes_sih",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "locator": {
+          "page": "6–7",
+          "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "excerpt": "Valor conferido: 38738; referência: 2024; página/seção: 6–7."
+        },
+        "value": 38738,
+        "unit": "internacoes (AIHs)",
+        "period": "2024",
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sih-internacoes-hospitalares-sjc-2024.json",
+      "trecho_bruto": "SIH/SUS 2024 SJC: 54.709 internacoes totais de residentes aprovadas; Top 1 aparelho circulatorio com 7.914 AIHs",
+      "evidence_id": "cons:saude:saude_internacoes_sih",
+      "competencia": "2024"
+    },
+    {
+      "indicator_id": "saude_atencao_basica_cnes_sia",
+      "name": "Atenção Primária à Saúde e Cobertura ESF",
+      "category": "saude",
+      "value": 61.63,
+      "unit": "%",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024 (último dado MS: abril)",
+      "frequency": "Mensal / Quadrimestral",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+      "methodology": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+      "official_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_atencao_basica_cnes_sia",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+        "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+        "locator": {
+          "page": 24,
+          "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+        },
+        "value": 61.63,
+        "unit": "%",
+        "period": "2024 (último dado MS: abril)",
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json",
+      "trecho_bruto": "CNES / e-Gestor / SMS-SJC 2024: 83,5% de cobertura APS, 40 UBSs CNES (45 rede municipal), 142 equipes de Saude da Familia e 1.418.520 consultas",
+      "evidence_id": "cons:saude:saude_atencao_basica_cnes_sia",
+      "competencia": "2024 (último dado MS: abril)"
+    },
+    {
+      "indicator_id": "saude_procedimentos_sia_sih",
+      "name": "Producao de Servicos SUS (SIA/SIH)",
+      "category": "saude",
+      "value": null,
+      "unit": "procedimentos",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024",
+      "frequency": "Anual / Mensal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema.",
+      "methodology": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema.",
+      "official_url": "https://datasus.saude.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sia-sih-procedimentos-status-suspensao.json",
+      "trecho_bruto": "DataSUS SIA/SIH-SUS: Indicador temporariamente suspenso para revisao metodologica dos denominadores de alta complexidade e producao ambulatorial municipal",
+      "evidence_id": null,
+      "competencia": "2024"
+    },
+    {
+      "indicator_id": "saude_causas_mortalidade",
+      "name": "Óbitos de residentes por capítulos CID-10",
+      "category": "saude",
+      "value": 4677,
+      "unit": "obitos de residentes",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2023; 2024: 5.028",
+      "frequency": "Anual / Mensal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "SIM por residência, RAG 2025. 2023: 4.677; 2024: 5.028. Sete capítulos e demais causas, sem sobreposição.",
+      "methodology": "SIM por residência, RAG 2025. 2023: 4.677; 2024: 5.028. Sete capítulos e demais causas, sem sobreposição.",
+      "official_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:saude:saude_causas_mortalidade",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+        "locator": {
+          "page": 7,
+          "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "excerpt": "Valor conferido: 4677; referência: 2023; 2024: 5.028; página/seção: 7."
+        },
+        "value": 4677,
+        "unit": "obitos de residentes",
+        "period": "2023; 2024: 5.028",
+        "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-geral-cid10-sjc-2023-2024.json",
+      "trecho_bruto": "SIM 2024 SJC: 5.028 obitos de residentes categorizados por capitulos CID-10 com fechamento em 100,0% (Aparelho Circulatorio 27%, Neoplasias 21%, Respiratorio 13%)",
+      "evidence_id": "cons:saude:saude_causas_mortalidade",
+      "competencia": "2023; 2024: 5.028"
+    },
+    {
+      "indicator_id": "saude_cobertura_vacinal",
+      "name": "Cobertura Vacinal do Calendario Basico (PNI)",
+      "category": "saude",
+      "value": null,
+      "unit": "%",
+      "source_agency": "Secretaria Municipal de Saúde de São José dos Campos / Ministério da Saúde",
+      "source_system": "Relatórios e balanços oficiais; ver fonte, página e recorte na evidência",
+      "base_year": "2024",
+      "frequency": "Anual / Mensal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-10-02",
+      "valid_until": null,
+      "context_warning": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada.",
+      "methodology": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada.",
+      "official_url": "https://pni.saude.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada."
+      },
+      "last_checked": "2026-10-08",
+      "raw_file": "data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json",
+      "trecho_bruto": "PNI / RNDS SJC: Cobertura vacinal multianual mapeada para 7 imunobiologicos prioritarios em 2024 e 2025 com discriminacao de faixas etarias e metas oficiais",
+      "evidence_id": null,
+      "competencia": "2024"
+    }
+  ],
+  "ground_truth": {
+    "mortalidade_infantil": {
+      "taxa_oficial_sms_2024": 8.2,
+      "taxa_oficial_sms_2025_preliminar": 7.65,
+      "unidade": "óbitos de menores de 1 ano por mil nascidos vivos",
+      "meta_municipal_referencia_2022": 9.0,
+      "definicao_metrica": "Óbitos de menores de 1 ano residentes / nascidos vivos de mães residentes × 1.000.",
+      "fonte_nome": "SMS-SJC / Prestação de Contas 3º quadrimestre de 2025",
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "pagina": 26,
+      "data_consulta": "2026-10-02",
+      "nota_metodologica": "Taxas publicadas pela SMS. O relatório não informa os numeradores e denominadores desta tabela. Não recalcular com uma extração SINASC de outra data. A meta 9,00 é a referência municipal de 2022 impressa no relatório, não meta ODS neonatal.",
+      "audit_status": "CONFIRMADO",
+      "obitos_2024": null,
+      "nascidos_vivos_2024": null,
+      "obitos_2025": null,
+      "nascidos_vivos_2025": null,
+      "taxa_ibge_cidades_2025": null
+    },
+    "mortalidade_infantil_serie": [
+      {
+        "ano": 2023,
+        "taxa": 10.0,
+        "taxa_por_mil_nascidos": 10.0,
+        "status": "Taxa publicada SMS; contagens não discriminadas",
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2024_1_20250228153444.pdf",
+        "pagina": 24,
+        "data_consulta": "2026-10-02",
+        "nota_metodologica": "",
+        "audit_status": "CONFIRMADO"
+      },
+      {
+        "ano": 2024,
+        "taxa": 8.2,
+        "taxa_por_mil_nascidos": 8.2,
+        "status": "Taxa publicada SMS; contagens não discriminadas",
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "pagina": 26,
+        "data_consulta": "2026-10-02",
+        "nota_metodologica": "",
+        "audit_status": "CONFIRMADO"
+      },
+      {
+        "ano": 2025,
+        "taxa": 7.65,
+        "taxa_por_mil_nascidos": 7.65,
+        "status": "Taxa publicada SMS; contagens não discriminadas",
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "pagina": 26,
+        "data_consulta": "2026-10-02",
+        "nota_metodologica": "",
+        "audit_status": "CONFIRMADO"
+      }
+    ],
+    "leitos_hospitalares_cnes": {
+      "fonte_url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?cnes/cnv/leiintsp.def",
+      "data_consulta": "2026-10-02",
+      "audit_status": "PENDENTE_VERIFICACAO",
+      "nota_metodologica": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    },
+    "leitos_serie_historica": [],
+    "cobertura_vacinal_por_ano": {
+      "2024": [
+        {
+          "vacina": "Tríplice Viral D1 (SCR)",
+          "imunobiologico": "Tríplice Viral (Sarampo, Caxumba, Rubéola)",
+          "dose": "1ª Dose (D1)",
+          "faixa_etaria": "1 ano de idade (12 meses)",
+          "cobertura_pct": 98.5,
+          "meta_pni": 95.0,
+          "status": "Meta atingida",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "BCG (Tuberculose)",
+          "imunobiologico": "BCG",
+          "dose": "Dose Única ao nascer",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 60.93,
+          "meta_pni": 90.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "Balanço oficial publicado em 23/12/2025; 2025 é parcial na data da publicação, sem fechamento anual declarado.",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "Hepatite B",
+          "imunobiologico": "Hepatite B",
+          "dose": "Dose ao nascer / 30 dias",
+          "faixa_etaria": "Até 30 dias de vida",
+          "cobertura_pct": null,
+          "meta_pni": 95.0,
+          "status": "Sem comprovação nesta auditoria",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "data_consulta": "2026-10-02",
+          "audit_status": "PENDENTE_VERIFICACAO",
+          "nota_metodologica": "Vacina não discriminada na tabela consultada; ausência de comprovação não significa cobertura zero."
+        },
+        {
+          "vacina": "Pneumocócica 10V",
+          "imunobiologico": "Pneumocócica 10-Valente",
+          "dose": "2ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 89.05,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "Rotavírus Humano",
+          "imunobiologico": "Rotavírus Humano G1P[8]",
+          "dose": "2ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": null,
+          "meta_pni": 90.0,
+          "status": "Sem comprovação nesta auditoria",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "data_consulta": "2026-10-02",
+          "audit_status": "PENDENTE_VERIFICACAO",
+          "nota_metodologica": "Vacina não discriminada na tabela consultada; ausência de comprovação não significa cobertura zero."
+        },
+        {
+          "vacina": "Pentavalente",
+          "imunobiologico": "Pentavalente (DTP + Hib + HepB)",
+          "dose": "3ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 85.9,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "Poliomielite (VIP/VOP)",
+          "imunobiologico": "Poliomielite Inativada/Oral",
+          "dose": "3ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 85.7,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        }
+      ],
+      "2025": [
+        {
+          "vacina": "Tríplice Viral D1 (SCR)",
+          "imunobiologico": "Tríplice Viral (Sarampo, Caxumba, Rubéola)",
+          "dose": "1ª Dose (D1)",
+          "faixa_etaria": "1 ano de idade (12 meses)",
+          "cobertura_pct": 91.44,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "BCG (Tuberculose)",
+          "imunobiologico": "BCG",
+          "dose": "Dose Única ao nascer",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 91.67,
+          "meta_pni": 90.0,
+          "status": "Meta atingida",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "Balanço oficial publicado em 23/12/2025; 2025 é parcial na data da publicação, sem fechamento anual declarado.",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "Hepatite B",
+          "imunobiologico": "Hepatite B",
+          "dose": "Dose ao nascer / 30 dias",
+          "faixa_etaria": "Até 30 dias de vida",
+          "cobertura_pct": null,
+          "meta_pni": 95.0,
+          "status": "Sem comprovação nesta auditoria",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "data_consulta": "2026-10-02",
+          "audit_status": "PENDENTE_VERIFICACAO",
+          "nota_metodologica": "Vacina não discriminada na tabela consultada; ausência de comprovação não significa cobertura zero."
+        },
+        {
+          "vacina": "Pneumocócica 10V",
+          "imunobiologico": "Pneumocócica 10-Valente",
+          "dose": "2ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 88.74,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "Rotavírus Humano",
+          "imunobiologico": "Rotavírus Humano G1P[8]",
+          "dose": "2ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": null,
+          "meta_pni": 90.0,
+          "status": "Sem comprovação nesta auditoria",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "data_consulta": "2026-10-02",
+          "audit_status": "PENDENTE_VERIFICACAO",
+          "nota_metodologica": "Vacina não discriminada na tabela consultada; ausência de comprovação não significa cobertura zero."
+        },
+        {
+          "vacina": "Poliomielite (VIP/VOP)",
+          "imunobiologico": "Poliomielite Inativada/Oral",
+          "dose": "3ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 85.45,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "vacina": "Pentavalente",
+          "imunobiologico": "Pentavalente (DTP + Hib + HepB)",
+          "dose": "3ª Dose",
+          "faixa_etaria": "Menores de 1 ano",
+          "cobertura_pct": 82.64,
+          "meta_pni": 95.0,
+          "status": "Abaixo da meta",
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "pagina": 27,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        }
+      ]
+    },
+    "causas_mortalidade_geral_por_ano": {
+      "2023": {
+        "ano": 2023,
+        "status": "SIM / RAG 2025, extração 13/05/2026",
+        "total_obitos": 4677,
+        "categorias": [
+          {
+            "causa": "Doenças do Aparelho Circulatório",
+            "cid10": "Capítulo IX (I00-I99)",
+            "obitos": 1147,
+            "pct": 24.52,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Neoplasias (Tumores / Câncer)",
+            "cid10": "Capítulo II (C00-D48)",
+            "obitos": 939,
+            "pct": 20.08,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças do Aparelho Respiratório",
+            "cid10": "Capítulo X (J00-J99)",
+            "obitos": 434,
+            "pct": 9.28,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Causas Externas (Acidentes e Violência)",
+            "cid10": "Capítulo XX (V01-Y98)",
+            "obitos": 488,
+            "pct": 10.43,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças Endócrinas (Diabetes, etc.)",
+            "cid10": "Capítulo IV (E00-E90)",
+            "obitos": 344,
+            "pct": 7.36,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças do Aparelho Digestivo",
+            "cid10": "Capítulo XI (K00-K93)",
+            "obitos": 230,
+            "pct": 4.92,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças Infecciosas e Parasitárias",
+            "cid10": "Capítulo I (A00-B99)",
+            "obitos": 223,
+            "pct": 4.77,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Demais Causas e Mal Definidas",
+            "cid10": "Demais capítulos, inclusive XVIII (causas mal definidas)",
+            "obitos": 872,
+            "pct": 18.64,
+            "detalhes": "Total SIM menos os sete capítulos apresentados separadamente."
+          }
+        ],
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "pagina": 7,
+        "data_consulta": "2026-10-02",
+        "nota_metodologica": "Óbitos por residência; sete capítulos destacados e demais capítulos agrupados. Percentuais podem apresentar diferença de arredondamento.",
+        "audit_status": "CONFIRMADO"
+      },
+      "2024": {
+        "ano": 2024,
+        "status": "SIM / RAG 2025, extração 13/05/2026",
+        "total_obitos": 5028,
+        "categorias": [
+          {
+            "causa": "Doenças do Aparelho Circulatório",
+            "cid10": "Capítulo IX (I00-I99)",
+            "obitos": 1126,
+            "pct": 22.39,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Neoplasias (Tumores / Câncer)",
+            "cid10": "Capítulo II (C00-D48)",
+            "obitos": 1015,
+            "pct": 20.19,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças do Aparelho Respiratório",
+            "cid10": "Capítulo X (J00-J99)",
+            "obitos": 546,
+            "pct": 10.86,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Causas Externas (Acidentes e Violência)",
+            "cid10": "Capítulo XX (V01-Y98)",
+            "obitos": 461,
+            "pct": 9.17,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças Endócrinas (Diabetes, etc.)",
+            "cid10": "Capítulo IV (E00-E90)",
+            "obitos": 414,
+            "pct": 8.23,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças do Aparelho Digestivo",
+            "cid10": "Capítulo XI (K00-K93)",
+            "obitos": 267,
+            "pct": 5.31,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Doenças Infecciosas e Parasitárias",
+            "cid10": "Capítulo I (A00-B99)",
+            "obitos": 296,
+            "pct": 5.89,
+            "detalhes": "Agregado do capítulo; diagnósticos individuais não discriminados nesta tabela."
+          },
+          {
+            "causa": "Demais Causas e Mal Definidas",
+            "cid10": "Demais capítulos, inclusive XVIII (causas mal definidas)",
+            "obitos": 903,
+            "pct": 17.96,
+            "detalhes": "Total SIM menos os sete capítulos apresentados separadamente."
+          }
+        ],
+        "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "pagina": 7,
+        "data_consulta": "2026-10-02",
+        "nota_metodologica": "Óbitos por residência; sete capítulos destacados e demais capítulos agrupados. Percentuais podem apresentar diferença de arredondamento.",
+        "audit_status": "CONFIRMADO"
+      }
+    },
+    "estabelecimentos_saude_cnes": {
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "data_consulta": "2026-10-02",
+      "audit_status": "PENDENTE_VERIFICACAO",
+      "nota_metodologica": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente."
+    },
+    "cobertura_atencao_basica_serie": [
+      {
+        "ano": 2024,
+        "cobertura_pct": 61.63
+      },
+      {
+        "ano": 2025,
+        "cobertura_pct": 57.95
+      }
+    ],
+    "natalidade_sinasc_2023": {
+      "nascidos_vivos": 8090,
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "pagina": 6,
+      "data_consulta": "2026-10-02",
+      "nota_metodologica": "",
+      "audit_status": "CONFIRMADO"
+    },
+    "fonte_nome": "SMS-SJC; SIM, SINASC, SIH, SISAB e CNES citados nos relatórios oficiais",
+    "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "data_consulta": "2026-10-02",
+    "nascidos_vivos_sinasc": {
+      "total_2024": 7463,
+      "total_2023": 8090,
+      "serie_historica_parto": [],
+      "serie_nascidos_vivos": [
+        {
+          "ano": 2021,
+          "nascidos_vivos": 8545,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": 6,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2022,
+          "nascidos_vivos": 8072,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": 6,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2023,
+          "nascidos_vivos": 8090,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": 6,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2024,
+          "nascidos_vivos": 7463,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": 6,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        }
+      ],
+      "parto_cesareo_2024": null,
+      "parto_vaginal_2024": null,
+      "parto_ignorado_2024": null,
+      "pct_cesareo_2024": null,
+      "pct_vaginal_2024": null,
+      "faixa_etaria_mae_2024": [],
+      "desagregacao_status": "PENDENTE_VERIFICACAO",
+      "fonte_nome": "SINASC / RAG 2025",
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "pagina": 6,
+      "data_consulta": "2026-10-02",
+      "nota_metodologica": "Totais por residência da mãe confirmados. Vias de parto e idade materna não discriminadas nesta tabela; gráfico por via suspenso até obter extração SINASC.",
+      "audit_status": "CONFIRMADO"
+    },
+    "dengue_sinan": {
+      "casos_2024": null,
+      "casos_2023": null,
+      "media_historica_2010_2023": null,
+      "pico_historico_anterior_2015": 14509,
+      "casos_2024_se_1_50": 98163,
+      "casos_2025_se_1_50": 5529,
+      "serie_historica": [
+        {
+          "ano": 2010,
+          "casos": 688,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2011,
+          "casos": 2380,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2012,
+          "casos": 154,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2013,
+          "casos": 839,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2014,
+          "casos": 832,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2015,
+          "casos": 14509,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2016,
+          "casos": 1731,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2017,
+          "casos": 438,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2018,
+          "casos": 198,
+          "periodo": "Ano completo",
+          "status_metodologico": "Balanço municipal anual",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2019,
+          "casos": null,
+          "periodo": "Ano completo",
+          "status_metodologico": "Pendente de comprovação"
+        },
+        {
+          "ano": 2020,
+          "casos": null,
+          "periodo": "Ano completo",
+          "status_metodologico": "Pendente de comprovação"
+        },
+        {
+          "ano": 2021,
+          "casos": null,
+          "periodo": "Ano completo",
+          "status_metodologico": "Pendente de comprovação"
+        },
+        {
+          "ano": 2022,
+          "casos": null,
+          "periodo": "Ano completo",
+          "status_metodologico": "Pendente de comprovação"
+        },
+        {
+          "ano": 2023,
+          "casos": null,
+          "periodo": "Ano completo",
+          "status_metodologico": "Pendente de comprovação"
+        },
+        {
+          "ano": 2024,
+          "casos": 98163,
+          "periodo": "SE 1–50 (parcial)",
+          "status_metodologico": "Casos confirmados; semanas epidemiológicas 1 a 50",
+          "fonte_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+          "pagina": null,
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        }
+      ],
+      "fonte_nome": "Vigilância Epidemiológica / Prefeitura de SJC",
+      "fonte_url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+      "pagina": null,
+      "data_consulta": "2026-10-02",
+      "nota_metodologica": "2010–2018: balanços anuais. 2019–2023: lacunas sem comprovação, não são zeros. 2024: somente SE 1–50, fonte retrospectiva de 23/12/2025. Não calcular média 2010–2023 nem comparar o recorte parcial como ano completo.",
+      "audit_status": "CONFIRMADO"
+    },
+    "internacoes_sih": {
+      "total_internacoes_2024": 38738,
+      "total_internacoes_2023": 37008,
+      "serie_historica": [
+        {
+          "ano": 2021,
+          "internacoes": 32995,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": "6–7",
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2022,
+          "internacoes": 35282,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": "6–7",
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2023,
+          "internacoes": 37008,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": "6–7",
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        },
+        {
+          "ano": 2024,
+          "internacoes": 38738,
+          "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+          "pagina": "6–7",
+          "data_consulta": "2026-10-02",
+          "nota_metodologica": "",
+          "audit_status": "CONFIRMADO"
+        }
+      ],
+      "fonte_nome": "SIH/SUS - RAG 2025",
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "pagina": "6–7",
+      "data_consulta": "2026-10-02",
+      "nota_metodologica": "Internações SUS por município de residência, segundo capítulo CID-10; não confundir com internações ocorridas nos hospitais de SJC nem com todas as AIHs. Extração 13/05/2026.",
+      "audit_status": "CONFIRMADO",
+      "top_causas_2023": [
+        {
+          "causa": "Gravidez parto e puerpério",
+          "capitulo": "Cap. XV",
+          "internacoes": 5456,
+          "pct": 14.74
+        },
+        {
+          "causa": "Doenças do aparelho digestivo",
+          "capitulo": "Cap. XI",
+          "internacoes": 4854,
+          "pct": 13.12
+        },
+        {
+          "causa": "Doenças do aparelho circulatório",
+          "capitulo": "Cap. IX",
+          "internacoes": 4169,
+          "pct": 11.27
+        },
+        {
+          "causa": "Neoplasias (tumores)",
+          "capitulo": "Cap. II",
+          "internacoes": 3775,
+          "pct": 10.2
+        },
+        {
+          "causa": "Lesões enven e alg out conseq causas externas",
+          "capitulo": "Cap. XIX",
+          "internacoes": 3488,
+          "pct": 9.42
+        },
+        {
+          "causa": "Doenças do aparelho respiratório",
+          "capitulo": "Cap. X",
+          "internacoes": 3358,
+          "pct": 9.07
+        },
+        {
+          "causa": "Doenças do aparelho geniturinário",
+          "capitulo": "Cap. XIV",
+          "internacoes": 3229,
+          "pct": 8.73
+        },
+        {
+          "causa": "Algumas doenças infecciosas e parasitárias",
+          "capitulo": "Cap. I",
+          "internacoes": 1299,
+          "pct": 3.51
+        }
+      ],
+      "top_causas_2024": [
+        {
+          "causa": "Gravidez parto e puerpério",
+          "capitulo": "Cap. XV",
+          "internacoes": 5053,
+          "pct": 13.04
+        },
+        {
+          "causa": "Doenças do aparelho digestivo",
+          "capitulo": "Cap. XI",
+          "internacoes": 5050,
+          "pct": 13.04
+        },
+        {
+          "causa": "Doenças do aparelho circulatório",
+          "capitulo": "Cap. IX",
+          "internacoes": 4701,
+          "pct": 12.14
+        },
+        {
+          "causa": "Lesões enven e alg out conseq causas externas",
+          "capitulo": "Cap. XIX",
+          "internacoes": 3737,
+          "pct": 9.65
+        },
+        {
+          "causa": "Neoplasias (tumores)",
+          "capitulo": "Cap. II",
+          "internacoes": 3673,
+          "pct": 9.48
+        },
+        {
+          "causa": "Doenças do aparelho geniturinário",
+          "capitulo": "Cap. XIV",
+          "internacoes": 3256,
+          "pct": 8.41
+        },
+        {
+          "causa": "Doenças do aparelho respiratório",
+          "capitulo": "Cap. X",
+          "internacoes": 3190,
+          "pct": 8.23
+        },
+        {
+          "causa": "Algumas doenças infecciosas e parasitárias",
+          "capitulo": "Cap. I",
+          "internacoes": 2091,
+          "pct": 5.4
+        }
+      ]
+    },
+    "atencao_basica_cnes_sia": {
+      "unidades_basicas_saude_ubs": 40,
+      "unidades_basicas_saude_cnes": 40,
+      "unidades_basicas_saude_rede_municipal": null,
+      "competencia_ubs": "12/2025",
+      "equipes_saude_familia_esf": null,
+      "cobertura_atencao_primaria_pct_2024": 61.63,
+      "atendimentos_consultas_2024": 978233,
+      "serie_cobertura": [
+        {
+          "ano": 2024,
+          "cobertura_pct": 61.63,
+          "consultas_atendimentos": 978233,
+          "referencia_cobertura": "Último dado MS: abril/2024",
+          "fonte_cobertura": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "fonte_atendimentos": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf"
+        },
+        {
+          "ano": 2025,
+          "cobertura_pct": 57.95,
+          "consultas_atendimentos": 1285049,
+          "referencia_cobertura": "Resultado 2025 publicado pela SMS",
+          "fonte_cobertura": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+          "fonte_atendimentos": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf"
+        }
+      ],
+      "fonte_nome": "SMS-SJC / e-Gestor; SISAB; CNES",
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "pagina": 24,
+      "data_consulta": "2026-10-02",
+      "nota_metodologica": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+      "audit_status": "CONFIRMADO"
+    },
+    "procedimentos_sia_sih": {
+      "fonte_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "data_consulta": "2026-10-02",
+      "audit_status": "SUSPENSO_PARA_REVISAO",
+      "nota_metodologica": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema."
+    }
+  }
+}

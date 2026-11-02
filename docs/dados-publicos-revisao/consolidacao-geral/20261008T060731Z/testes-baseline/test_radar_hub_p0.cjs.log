@@ -1,0 +1,15 @@
+online: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+throw: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+404: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+invalid-json: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+mixed: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+old: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+TypeError: Cannot read properties of undefined (reading 'appendChild')
+    at showChartFallback (evalmachine.<anonymous>:226:25)
+    at renderMeioAmbienteArChart (evalmachine.<anonymous>:3418:5)
+    at renderAxisCharts (evalmachine.<anonymous>:4555:7)
+    at evalmachine.<anonymous>:4808:9
+    at setTimeout (C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_radar_hub_p0.cjs:25:35)
+    at window.switchRadarHubAxis (evalmachine.<anonymous>:4806:5)
+    at run (C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_radar_hub_p0.cjs:85:15)
+    at async C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_radar_hub_p0.cjs:96:108

@@ -1,0 +1,7 @@
+# Prompt para a IA revisora
+
+Revise a consolidação do Radar São José de 08/10/2026, IBGE 3549904. Comece lendo relatorio-final.md, matriz-consolidacao.json, divergencias.md, antes-depois-indicadores.json, pendencias-metodologicas.md e testes.md desta rodada. Confirme o fingerprint em consolidacao_status/registry/package e examine a evidência externa, não apenas a UI nem alegações de outras IAs.
+
+Preserve app.js, fontes e auditorias anteriores. Não deploy, screenshots, redesenho, interpolação, null→zero ou promoção de suspensos. Para bilhetagem, o override por evidence ID prevalece sobre o store P4 histórico; não usar TOTAL/MÉDIA como mês. P4 não está homologada. Diferencie ocorrência/vítima, APS/ESF, residência/local de atendimento, matrículas/alunos, rede/etapa, IDEB/SAEB, escolarização/matrícula e despesa empenhada/liquidada.
+
+Refaça os testes de reprodução indicados, informe o que é VM e Chrome real e não apresente fixture do módulo como E2E do login. Revise as sete dimensões de cada eixo sem um status único PRONTO. Proponha primeiro as expansões históricas da matriz-oportunidades, com URL, edição, competência, unidade, definição, município, metodologia, bruto/hash e procedimento por indicador. Catálogo disponível não é série já comprovada. Não iniciar expansão nem mudança substancial da arquitetura antes da autorização humana correspondente. Entregue divergências sustentadas por fontes e um parecer de aceite com ressalvas explícitas.

@@ -1,0 +1,50 @@
+{
+  "captured_before_integration": true,
+  "files": [
+    {
+      "file": "app.js",
+      "sha256": "3063186d953be5055dae85f6b3371342922bed66249bd5387215bc8d5b0f9934",
+      "bytes": 2205286
+    },
+    {
+      "file": "data/radar_hub/sjc_setores_socioeconomicos_geo.json",
+      "sha256": "21589cd1b2886cc316dbf1b58025a2c0e466fe4a095b3e1510ddc1db60db45d4",
+      "bytes": 1293929
+    },
+    {
+      "file": "data/radar_hub/sjc_setores_geo_bundle.js",
+      "sha256": "56169e2af6a3d863a42bdfccc8a70a24d437f8d452e7284bf355f3e8978c8c09",
+      "bytes": 759619
+    },
+    {
+      "file": "data/radar_hub/sjc_regioes_geo.json",
+      "sha256": "aea57119924e6ef2488799184eceb8852b87a387bb5f87e362a686b1d877dac2",
+      "bytes": 1364025
+    },
+    {
+      "file": "data/radar_hub/economia_audit_bindings.json",
+      "sha256": "eaa0f3935a8ed964d66f899962dffa29124ccdbe2c6e4923ba8e3aba6e6a6eb0",
+      "bytes": 6075
+    },
+    {
+      "file": "data/radar_hub/financas_audit_bindings.json",
+      "sha256": "971e67a4c3ef48ccebf2cd5f10360361114e2fa475366fd490c4f8873cdc0956",
+      "bytes": 14876
+    },
+    {
+      "file": "data/radar_hub/meio_ambiente_audit_bindings.json",
+      "sha256": "4a6f5adf035cf646a848e88c36cb76cbfefacaca5f479d37d10c5f3c88dc3806",
+      "bytes": 6506
+    },
+    {
+      "file": "data/radar_hub/mobilidade_audit_bindings.json",
+      "sha256": "8cb0b5e10e37722de546d3fb90b0afbcc8bfc695b70e3aaf525fd1e463e5cf23",
+      "bytes": 1723
+    },
+    {
+      "file": "data/radar_hub/mobilidade_reconciliation_20261008.json",
+      "sha256": "3698412c1cf085c861a97ab4284954b0d288155efd57436ab9be7424e67930eb",
+      "bytes": 29549
+    }
+  ]
+}

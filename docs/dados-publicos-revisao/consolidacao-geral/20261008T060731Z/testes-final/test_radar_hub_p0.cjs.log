@@ -1,0 +1,9 @@
+online: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+throw: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+404: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+invalid-json: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+mixed: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+old: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+TypeError: Cannot read properties of undefined (reading 'data')
+    at run (C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_radar_hub_p0.cjs:87:35)
+    at async C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_radar_hub_p0.cjs:96:108

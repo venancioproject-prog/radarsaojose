@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "SMS APS annual2025 page24, distinct quarterly columns",
+      "pass_": true,
+      "value": 57.95
+    },
+    {
+      "check": "SMS mortality annual2025 page26, distinct quarterly columns",
+      "pass_": true,
+      "value": 7.65
+    },
+    {
+      "check": "sih2025 independent RAG QA already reproduced",
+      "pass_": true,
+      "value": 41846
+    },
+    {
+      "check": "sim2024 independent RAG QA already reproduced",
+      "pass_": true,
+      "value": 5028
+    }
+  ],
+  "decision": "APROVAR COM LIMITES: atualizar os cinco IDs existentes para competências publicadas; APS é cobertura populacional estimada das equipes APS, não ESF; mortalidade é taxa publicada preliminar, sem inferir numerador/denominador; preservar recortes antigos datados e nove suspensões.",
+  "raw": "docs\\dados-publicos-revisao\\revisao-independente-quatro-eixos\\20261008\\saude\\raw\\q2025.pdf",
+  "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+  "pages": [
+    24,
+    26
+  ]
+}

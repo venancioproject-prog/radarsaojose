@@ -1,0 +1,3882 @@
+[
+  {
+    "path": ".agents/teamwork/ORIGINAL_REQUEST.md",
+    "bytes": 9160,
+    "sha256": "529720349ffb85256da1b6edc2d9a0d463ba2078bd3699d12a93b14dc0bd585c",
+    "mtime_utc": "2026-10-06T09:50:36.760713+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/sentinel_1/BRIEFING.md",
+    "bytes": 2169,
+    "sha256": "696193b27823a1f7be2cba51a58b98794871ef69dbcce35a980136f0134877cf",
+    "mtime_utc": "2026-10-06T19:25:39.078068+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/sentinel_1/handoff.md",
+    "bytes": 1704,
+    "sha256": "794d34daedf794de2095c30c6ef87ad219fbd645144d3fc3b381701b9a522a56",
+    "mtime_utc": "2026-10-06T09:51:37.594755+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m1_1/BRIEFING.md",
+    "bytes": 4265,
+    "sha256": "0f33c1fe1761e951558f564c39b441f37fc083ccf9d34593a8e76bfa882c86e8",
+    "mtime_utc": "2026-10-06T10:45:28.416678+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m1_1/context.md",
+    "bytes": 545,
+    "sha256": "7c6051e7a5fa83a14437f44efdd3acddc08df9471f2aa9ec68719affaa91cf4c",
+    "mtime_utc": "2026-10-06T10:36:06.798041+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m1_1/DISPATCH.md",
+    "bytes": 1350,
+    "sha256": "27fce15ee56ba7f5e0bdf7ba53020a4e7514ec7459847e152f037888771600f3",
+    "mtime_utc": "2026-10-06T10:36:46.097160+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m1_1/handoff.md",
+    "bytes": 11653,
+    "sha256": "a9af05fde15db4f238552b58fa9b83dd2805b527fa04808d107e03518cf03405",
+    "mtime_utc": "2026-10-06T10:46:10.602220+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m1_1/progress.md",
+    "bytes": 936,
+    "sha256": "44674331f57c3c899f0a2e768c7dbf8d8e141509a457f3383b9c3c3e3b6cc949",
+    "mtime_utc": "2026-10-06T10:45:36.207591+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_1/BRIEFING.md",
+    "bytes": 2340,
+    "sha256": "9efb17cc31ac80acaf763f5877731e398e5d6c215f1d4ef46cf7291202685ff4",
+    "mtime_utc": "2026-10-06T11:12:57.945743+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_1/context.md",
+    "bytes": 545,
+    "sha256": "afd8aa7524893fc91d9eb02f4c949a8638c41a7aa4a6c6c926d5b4b45a8149c7",
+    "mtime_utc": "2026-10-06T11:11:46.972401+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_1/DISPATCH.md",
+    "bytes": 1508,
+    "sha256": "23b4a3b7cd27855edfeaa3ac1b7c3e4d654048a3a44585ccd0475155b695071a",
+    "mtime_utc": "2026-10-06T11:12:33.320070+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_1/progress.md",
+    "bytes": 975,
+    "sha256": "b31ff4d345943e5855852981b6b7a16acefa9663c0f50fd02915f0906727b21b",
+    "mtime_utc": "2026-10-06T11:13:04.480201+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/audit_checks.py",
+    "bytes": 12281,
+    "sha256": "6afdfc6aeddb69d65b10c60a3ee225385bd786047c23475a93f68c9576f57606",
+    "mtime_utc": "2026-10-06T15:36:54.428635+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/BRIEFING.md",
+    "bytes": 3855,
+    "sha256": "97e9fe100291ad5248dbf6a2ac77cd33336149bddccb456c9f0fa575162e66dd",
+    "mtime_utc": "2026-10-06T15:41:19.766656+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/context.md",
+    "bytes": 868,
+    "sha256": "fbe7c806fc02928a0603c5f3be346c71cae93d92562df69d80e71d89bbed2fd2",
+    "mtime_utc": "2026-10-06T15:32:26.722743+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/DISPATCH.md",
+    "bytes": 2426,
+    "sha256": "5dbd37001ff59676a5d3036900a78135d1a0313ffceccf267486655a14db5975",
+    "mtime_utc": "2026-10-06T15:32:58.720027+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/handoff.md",
+    "bytes": 9052,
+    "sha256": "3c8673f26409f217f889401673821697fbcc879fa1cc290ae11191d2c27d7f61",
+    "mtime_utc": "2026-10-06T15:41:55.601273+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/progress.md",
+    "bytes": 1492,
+    "sha256": "6b8085a9499f07dd3d826d04a2bc91647de9dddf36d674c92f08bfc772973cdf",
+    "mtime_utc": "2026-10-06T15:41:29.018062+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_auditor_m2_iter2_1/raw_derivation_check.py",
+    "bytes": 1805,
+    "sha256": "7a2370a35d450edbf26432a2250c11584cf7860c7edf76c57f4e337d0757b934",
+    "mtime_utc": "2026-10-06T15:38:55.464682+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_1/BRIEFING.md",
+    "bytes": 3539,
+    "sha256": "88315b32cd11cae33585c5a37e6a83e6f7ab68d14e28d91d23de95c3393f50fd",
+    "mtime_utc": "2026-10-06T10:45:17.478358+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_1/context.md",
+    "bytes": 544,
+    "sha256": "4bb9850395f26425a298c53227d04a5f2374d4a58c2425115042afd0ceda6872",
+    "mtime_utc": "2026-10-06T10:35:51.886878+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_1/DISPATCH.md",
+    "bytes": 1246,
+    "sha256": "a0008a8776b6da67f020e5f7612371ee19ef5cecc01d636893c5b4a999d0f47f",
+    "mtime_utc": "2026-10-06T10:36:47.699796+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_1/handoff.md",
+    "bytes": 8893,
+    "sha256": "45db0e8c98fba78119c02c64b5d4a54db5754582183ac9b6af37a21add80a288",
+    "mtime_utc": "2026-10-06T10:45:44.910042+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_1/progress.md",
+    "bytes": 1183,
+    "sha256": "7374b9c5d073cb23c3069cc110dc8bdbfe8f1a570d591fa4bf590854327ee04f",
+    "mtime_utc": "2026-10-06T10:45:00.407691+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_2/BRIEFING.md",
+    "bytes": 3208,
+    "sha256": "4e7b31754a41d3f0d36f4edb77f5cf6f6d1f52e09908173e2b749ae910313799",
+    "mtime_utc": "2026-10-06T10:45:01.260187+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_2/context.md",
+    "bytes": 544,
+    "sha256": "8e972fc5dcf8e0e049b298f5556f87a90bbde876220a4c1cf02530902396cab2",
+    "mtime_utc": "2026-10-06T10:35:59.194562+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_2/DISPATCH.md",
+    "bytes": 1116,
+    "sha256": "365aca40dd310634cbc740e26f62f7cee7cd46ab6ca7bc85ed73ebe9795f44db",
+    "mtime_utc": "2026-10-06T10:36:48.846148+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_2/handoff.md",
+    "bytes": 8250,
+    "sha256": "0699b7da81d074d130528f19643b79d9d5be9ab0ae571a1fdacc09825edbaa3f",
+    "mtime_utc": "2026-10-06T10:45:23.744857+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m1_2/progress.md",
+    "bytes": 844,
+    "sha256": "d054625f1184c18a6d119be9a240bbebf77e813cac329645bb343b6ec0ee2f99",
+    "mtime_utc": "2026-10-06T10:44:47.495472+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_1/BRIEFING.md",
+    "bytes": 1937,
+    "sha256": "41d45ff031bce155fc11a28a74b487a0d5f748fdc00eb84464307669dd22990c",
+    "mtime_utc": "2026-10-06T11:12:31.628611+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_1/context.md",
+    "bytes": 544,
+    "sha256": "79c062776a21b625123aa7017ccf52cef1487855ea98b7851400b91a6d3bb7a6",
+    "mtime_utc": "2026-10-06T11:11:29.732739+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_1/DISPATCH.md",
+    "bytes": 1437,
+    "sha256": "1aad31915e0f547294690e34abd76ac77ed70fbb8d9f4ffac54a11f01106501b",
+    "mtime_utc": "2026-10-06T11:12:21.892657+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_1/progress.md",
+    "bytes": 773,
+    "sha256": "65eb1d57ee3fc2d32bb0907c5701ef0fa9bbdfa69be12d147f80ecd7a9d020e3",
+    "mtime_utc": "2026-10-06T11:12:36.235097+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_2/BRIEFING.md",
+    "bytes": 2066,
+    "sha256": "912433d9abe005867f812d91cf03d73d906c004d04a8f0e6b665d813121db6c8",
+    "mtime_utc": "2026-10-06T11:12:28.581341+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_2/context.md",
+    "bytes": 544,
+    "sha256": "7eea62ae80ed69b3af5bf0cfb6423fdbd33d8b2ef388d6b98fae85941001e529",
+    "mtime_utc": "2026-10-06T11:11:39.865209+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_2/DISPATCH.md",
+    "bytes": 1338,
+    "sha256": "68eae9a4ed5a4535e298477ae7f39ebbe7f664d2795b2b138f73bb4510081323",
+    "mtime_utc": "2026-10-06T11:12:20.770374+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_challenger_m2_2/progress.md",
+    "bytes": 978,
+    "sha256": "644306fb6677a0ceb3d75bf3cd19392e991ef80c262bc56c61287f1b67eef400",
+    "mtime_utc": "2026-10-06T11:12:33.950606+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/BRIEFING.md",
+    "bytes": 1741,
+    "sha256": "8eef0a5d63601839b12c25f00567b235a40deaa4ad88e1fb84758a6ea8cc058d",
+    "mtime_utc": "2026-10-06T19:33:24.361253+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/check_test.py",
+    "bytes": 1222,
+    "sha256": "878cc80ac464f97548ed23f7d72edb0305f771737f7fddd8ad31ce5e637a995b",
+    "mtime_utc": "2026-10-06T19:35:00.931552+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/context.md",
+    "bytes": 1264,
+    "sha256": "0058e8288fda1e0d56178bc5ac61abdf47dcd267e76f6b5da7168e0dbebb291e",
+    "mtime_utc": "2026-10-06T19:31:55.079379+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/DISPATCH.md",
+    "bytes": 1475,
+    "sha256": "058538111cefb87ab9c8f339af60bfde0d19eb2de70ced84ddd5430a3584a863",
+    "mtime_utc": "2026-10-06T19:33:15.035261+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/inspect_package_saude.py",
+    "bytes": 1023,
+    "sha256": "c594e0d81513f10afeab4d791b602bda25d8f2b601ac842d9d2e0ff3b6f1f96b",
+    "mtime_utc": "2026-10-06T19:38:28.101147+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/inspect_pkg_meta_saude.py",
+    "bytes": 785,
+    "sha256": "eb6b49ece9dc7f73cb986cc5f76ff413d6da935c816ac59d88cdad608a11cd52",
+    "mtime_utc": "2026-10-06T19:38:42.640822+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/inspect_registry_saude.py",
+    "bytes": 700,
+    "sha256": "dc0f3cca660fc833d8ca43d3630a11efc6f2002484681b191cc032c964a1398d",
+    "mtime_utc": "2026-10-06T19:37:43.725241+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_1/progress.md",
+    "bytes": 214,
+    "sha256": "f7ef7954de11996462410e15ca58ab22b86ec08bacb519a8e93ef763e1b30521",
+    "mtime_utc": "2026-10-06T19:33:29.340111+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_2/BRIEFING.md",
+    "bytes": 2262,
+    "sha256": "12b689d68c92ce4617cb6d2f021cc92cd1431ec4fb2bc17697e89285def79a71",
+    "mtime_utc": "2026-10-06T19:33:09.537488+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_2/context.md",
+    "bytes": 1348,
+    "sha256": "2109b966cb5282020c32457c0211d6afee33563b6af204c8a67a693ec3aa5e4a",
+    "mtime_utc": "2026-10-06T19:32:16.147596+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_2/DISPATCH.md",
+    "bytes": 1524,
+    "sha256": "3db806104a88727cd328e492a8a29fd9532bd13fe64b15d68d863b212854ec81",
+    "mtime_utc": "2026-10-06T19:32:48.979955+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_2/progress.md",
+    "bytes": 836,
+    "sha256": "6414f141c4d575f0db9d0326fce7b944ed72ddf365946ba1499935d569a2332f",
+    "mtime_utc": "2026-10-06T19:33:21.520022+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_3/BRIEFING.md",
+    "bytes": 1461,
+    "sha256": "bfbb85dbe5710f6c2f1021606141372d86c34af296acf6b39a8481acf4ebe2d8",
+    "mtime_utc": "2026-10-06T19:33:37.692051+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_3/context.md",
+    "bytes": 1296,
+    "sha256": "9cb7e8c5e2d635df41320d92eb96562144d84585b56217bb02d4e874a4dc09d3",
+    "mtime_utc": "2026-10-06T19:32:21.524973+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_3/DISPATCH.md",
+    "bytes": 1404,
+    "sha256": "414ca0c597e43ab06edd06050cdd46e2ea34b1044a5ceaa674ad29823fe3c771",
+    "mtime_utc": "2026-10-06T19:32:46.115916+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_m3_3/progress.md",
+    "bytes": 735,
+    "sha256": "34c03b9c18e8438a2fcccb3e6d98af61e979177de485bde432021193b6e1dc05",
+    "mtime_utc": "2026-10-06T19:33:31.883161+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/BRIEFING.md",
+    "bytes": 1846,
+    "sha256": "eee8f3a98f48a99afed8fab2d46dd7a4cdc93b44457146956e2a151437561a20",
+    "mtime_utc": "2026-10-06T07:38:25.591768+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/DISPATCH.md",
+    "bytes": 1741,
+    "sha256": "479dcaf39948efd435a73bef23c8edb72ebb3dfc12bd33a69d7f1b56199f9602",
+    "mtime_utc": "2026-10-06T07:38:13.250351+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/find_presentation_logic.py",
+    "bytes": 2026,
+    "sha256": "ca4c8a9a422a1292ea34bf6b91880e3a488b589fd546271839ee63aaba6138a5",
+    "mtime_utc": "2026-10-06T07:41:46.844999+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/inspect_slides.py",
+    "bytes": 697,
+    "sha256": "2dc9b2ad1bdc3a61e666076da3f5c9a792ff17d9c2c45771350dc183f65eabee",
+    "mtime_utc": "2026-10-06T07:41:01.821917+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/probe_app_js.py",
+    "bytes": 1428,
+    "sha256": "f6312ec2e7e3488dfb4f04f4ea71b367ac3fd9f5c52b653986497d0a60e45da0",
+    "mtime_utc": "2026-10-06T07:41:29.563096+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/probe_architecture.py",
+    "bytes": 2039,
+    "sha256": "296a49f1a4e935a09efe66b1b7abc9b02cf4d1ea4879cafec47419c2c704f0f0",
+    "mtime_utc": "2026-10-06T07:41:16.279832+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_codebase/progress.md",
+    "bytes": 884,
+    "sha256": "e800a5d3451b4690c62e67cd4f682777a6dbc85fd89455ef94aeef0d4cd00974",
+    "mtime_utc": "2026-10-06T07:38:30.429388+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data/BRIEFING.md",
+    "bytes": 1776,
+    "sha256": "2af4c2ef25422e0f80082e2e5dd87485f836ded013ad9447772f1208585e04b2",
+    "mtime_utc": "2026-10-06T07:38:18.530980+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data/DISPATCH.md",
+    "bytes": 1962,
+    "sha256": "109f554f041cf63d46df553780ad83d62caa12d6d34ff2e911f9f501aefda0b0",
+    "mtime_utc": "2026-10-06T07:38:12.174665+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data/progress.md",
+    "bytes": 800,
+    "sha256": "ccca044847f9e34f68d6e6fa1852c0dc564e45be7e3a9e915cbf16e0d0eb3080",
+    "mtime_utc": "2026-10-06T07:38:23.404422+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/analysis.md",
+    "bytes": 27994,
+    "sha256": "b42572975e60fabf5bd06aa727dccd0be3b424f34972ab07ec1d2a5f0d4fe289",
+    "mtime_utc": "2026-10-06T10:07:30.052285+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/BRIEFING.md",
+    "bytes": 3182,
+    "sha256": "93f5d827cfc6c674e45b4fbbf900c4ac21ebfb28ca6f3c68e21a272b41abc8c0",
+    "mtime_utc": "2026-10-06T10:08:05.487089+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/context.md",
+    "bytes": 399,
+    "sha256": "0525be74ac564f06488270d8cbeeb15d6305485d06586d52385a92ec20705554",
+    "mtime_utc": "2026-10-06T09:57:05.173851+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/DISPATCH.md",
+    "bytes": 2288,
+    "sha256": "e2ddcd2a20ecc695f9e404826946f64c742447d3e5aacc5830882459d23489a3",
+    "mtime_utc": "2026-10-06T09:58:06.324146+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/handoff.md",
+    "bytes": 8965,
+    "sha256": "4f295718d589c19fa9afedb80af10a5e5a5edb1f8d0091635fa92967bce41b2e",
+    "mtime_utc": "2026-10-06T10:07:55.545116+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_check_appjs.py",
+    "bytes": 644,
+    "sha256": "9101810d5aff1cbc61e9cc783f0f007775f215cbe540394b01fd9e18adbec5a1",
+    "mtime_utc": "2026-10-06T10:04:18.792333+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_check_ideb.py",
+    "bytes": 816,
+    "sha256": "b16f3b9820cb8d820aab0e21f4bb9146eb867dc0d960c301cd44f3d2e90f4dba",
+    "mtime_utc": "2026-10-06T10:04:48.538402+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_emdash.py",
+    "bytes": 535,
+    "sha256": "53b53d07baba9c55aa0bb7f914e94c234b64c897160199508f4dfa34413c2bc5",
+    "mtime_utc": "2026-10-06T10:03:54.702045+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_find_emdash_locations.py",
+    "bytes": 602,
+    "sha256": "efb20aeded3b457d3c73545fe26e6a7d79e9a183f6d46170cf3cec56356fab3c",
+    "mtime_utc": "2026-10-06T10:05:27.392002+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_saude_ssp.py",
+    "bytes": 1148,
+    "sha256": "a6a03bf4855408e537c4bd338ddff5919866193c661f416f89d96ee23beed61a",
+    "mtime_utc": "2026-10-06T10:05:53.033158+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_ssp.py",
+    "bytes": 914,
+    "sha256": "289025713c0fcce67d760da8aea78ec20ec5755bf793f0d42b6f9b40b25c3b57",
+    "mtime_utc": "2026-10-06T10:06:07.565914+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_survey.py",
+    "bytes": 2245,
+    "sha256": "c21a695fea89a769d747b202b18e1c39bccdd36dd149d8280c57a3482f91822a",
+    "mtime_utc": "2026-10-06T10:01:51.197917+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_test_runner.py",
+    "bytes": 1805,
+    "sha256": "711eb705bfa521f2074f74f21071ce99d8b414de162e58054f993706777d8581",
+    "mtime_utc": "2026-10-06T10:02:20.539401+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_data_o2/progress.md",
+    "bytes": 802,
+    "sha256": "deb65e592a482ce35d39a539942c95c444f01df617f031ce1887281f50edf591",
+    "mtime_utc": "2026-10-06T10:08:13.277791+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_editorial/BRIEFING.md",
+    "bytes": 1367,
+    "sha256": "5a68f54a14fee4fffda9b6e7736e5e7434c51ade817248ae227f54c40a2c8d2b",
+    "mtime_utc": "2026-10-06T07:38:21.346515+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_editorial/DISPATCH.md",
+    "bytes": 2425,
+    "sha256": "b6760bd3339363b7aa02f5fd265cbc7b79f121ba4937baa48b08e471d064497b",
+    "mtime_utc": "2026-10-06T07:38:15.537639+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_editorial/inspect_app.py",
+    "bytes": 1103,
+    "sha256": "2e8e96a0fc6cc73a90cb79e69c7f13c2bc8e926358f5ed2e4709264d278c35cc",
+    "mtime_utc": "2026-10-06T07:41:49.718507+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_editorial/progress.md",
+    "bytes": 788,
+    "sha256": "74c1c188b20715ef423c86fe6a3c15c87b7d9c09075e9549cf3b49089bda2951",
+    "mtime_utc": "2026-10-06T07:38:25.701921+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_frontend_o2/analysis.md",
+    "bytes": 29343,
+    "sha256": "11c2920fd9006bdb0fbc4c8efffa89d018bcfe0034e42075fac9616753146d43",
+    "mtime_utc": "2026-10-06T10:09:08.034472+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_frontend_o2/BRIEFING.md",
+    "bytes": 2902,
+    "sha256": "a0a0ecbd98e417a3ed931ce6b2fb46954b53744910d7884c7bc95032f122a02a",
+    "mtime_utc": "2026-10-06T10:10:00.612970+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_frontend_o2/context.md",
+    "bytes": 421,
+    "sha256": "a22367e8a773b078268491214f402c28d925f16c98995794b3af92153b908659",
+    "mtime_utc": "2026-10-06T09:57:27.912962+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_frontend_o2/DISPATCH.md",
+    "bytes": 2255,
+    "sha256": "37fc9911584c9ec992736c7b0c0248dde1086efe28062366ba73e6a37522c0de",
+    "mtime_utc": "2026-10-06T09:58:05.914023+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_frontend_o2/handoff.md",
+    "bytes": 9138,
+    "sha256": "330c31506eaf4506d9abad9acbbcf0f6e6a1940dc4e697ef8d70dc9820e2c5e9",
+    "mtime_utc": "2026-10-06T10:09:43.476837+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_frontend_o2/progress.md",
+    "bytes": 1161,
+    "sha256": "bf544216a325b1b3b3ec7fadee1da6acd08007ecebcafede5d181a37685f0169",
+    "mtime_utc": "2026-10-06T10:07:48.902688+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/analysis.md",
+    "bytes": 24098,
+    "sha256": "eabbdcb668bf6fbf926f9dc51229dd486d042bf0c7a951931f1001376618d032",
+    "mtime_utc": "2026-10-06T10:14:31.332586+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/BRIEFING.md",
+    "bytes": 2372,
+    "sha256": "f764f422b2b038a315fe6c56b38f3142a3140f48f965eed77ede2cf2ea8a0d03",
+    "mtime_utc": "2026-10-06T10:15:27.497173+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/context.md",
+    "bytes": 408,
+    "sha256": "4fe5539b2a56e8a59eb7b930d5653cbc6af69ccd7d734c243cc174e884267b7f",
+    "mtime_utc": "2026-10-06T09:57:09.815532+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/DISPATCH.md",
+    "bytes": 2015,
+    "sha256": "0ffe0994fafc94432bf3e0af4a80171812f52a4cbd64a75f1f08fe9f3e726392",
+    "mtime_utc": "2026-10-06T09:58:10.700785+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/handoff.md",
+    "bytes": 9634,
+    "sha256": "461df649f7804eb4ce4a9e3820acd25b01286fc65f53116c293c69813ceac365",
+    "mtime_utc": "2026-10-06T10:14:59.454490+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/progress.md",
+    "bytes": 652,
+    "sha256": "01f1f5c25f0fd4f630459835676493c86d4b4fe7e2f04a0cc22029ca00458eb6",
+    "mtime_utc": "2026-10-06T10:15:13.956576+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/runner_survey.py",
+    "bytes": 6454,
+    "sha256": "234f2b3b84d58c16e2780a54dfb6c912c9bc55980c8f2451e2af7240a854ab3e",
+    "mtime_utc": "2026-10-06T10:01:22.798340+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_explorer_survey_tests_o2/survey_results.json",
+    "bytes": 47317,
+    "sha256": "6c30b91b55f9a822945aed6b4253a112b2a2d706e73d5e921536604531e709dc",
+    "mtime_utc": "2026-10-06T10:03:42.752303+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_1/BRIEFING.md",
+    "bytes": 4270,
+    "sha256": "3ec3bdea4deec3d1cc64b2b9c4e68b2b0c9b6942e604b7c5bb9f3131abe3c8da",
+    "mtime_utc": "2026-10-06T07:38:34.689739+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_1/context.md",
+    "bytes": 549,
+    "sha256": "fa4756cbce897548b641ce90d4fd99080784eb966249a480d34dcd94b02424fb",
+    "mtime_utc": "2026-10-06T07:36:02.415488+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_1/DISPATCH.md",
+    "bytes": 1870,
+    "sha256": "c3546328692ee7ad04e0c087f9a173ec0d2292a9e5e3945b4b1649bab11187ef",
+    "mtime_utc": "2026-10-06T07:36:25.452216+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_1/progress.md",
+    "bytes": 971,
+    "sha256": "78d146c4edd5f69901bcd78b94d41cbc3a940c454f3d368b68fc0d3062c18237",
+    "mtime_utc": "2026-10-06T07:40:07.887239+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/BRIEFING.md",
+    "bytes": 7107,
+    "sha256": "28bc5a95bd900e46652e3bc14c1ca1b86ae9afcd1ab85084b72af859441480bb",
+    "mtime_utc": "2026-10-06T15:47:21.254864+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/context.md",
+    "bytes": 1335,
+    "sha256": "477f7be78c9cf46f63c723991bb346632ce0a4b0da3b173430962ad2e981ef0c",
+    "mtime_utc": "2026-10-06T09:51:01.156775+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/DISPATCH.md",
+    "bytes": 1670,
+    "sha256": "955ba6a3306a9ea5918ec716de2c5eab6a8da9f2d0e4b32121fa5c24fec3a4ca",
+    "mtime_utc": "2026-10-06T09:56:12.874294+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/GATE_STATUS.md",
+    "bytes": 1266,
+    "sha256": "1a9421776e181ffa0caeff6dae208625ccc4aac993dc48d721e756ce736aba3b",
+    "mtime_utc": "2026-10-06T15:42:32.907030+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/handoff.md",
+    "bytes": 8181,
+    "sha256": "77d8eb9397724818b9a8d266a2ad492276efa8ea50e19e409778842b0b760f93",
+    "mtime_utc": "2026-10-06T15:44:08.230146+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/progress.md",
+    "bytes": 1675,
+    "sha256": "f445fdfee308ef4673c517aa388f47e532e24f20919b77476f6b11c63704dd34",
+    "mtime_utc": "2026-10-06T16:20:43.550575+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_2/PROJECT.md",
+    "bytes": 6252,
+    "sha256": "f2666b0287ecfdc3376ad8889a5180cfe582627a9356f28b332e3e84267d6886",
+    "mtime_utc": "2026-10-06T15:42:48.172928+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_3/BRIEFING.md",
+    "bytes": 3713,
+    "sha256": "72a51e1bab3ac82e99687a775883df4132fac81e834266de9a483c5f246e8c7f",
+    "mtime_utc": "2026-10-06T19:32:51.545759+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_3/context.md",
+    "bytes": 2272,
+    "sha256": "b2c559544954dc0c138eba01006e3bb6de5e7700ca4c398d6da749c4f06a437b",
+    "mtime_utc": "2026-10-06T19:24:56.871023+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_3/DISPATCH.md",
+    "bytes": 2008,
+    "sha256": "7683c99bda26180264cb3a6cc4f78d0bbf14495e450c8b29347f34748957db5b",
+    "mtime_utc": "2026-10-06T19:25:28.419931+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_3/GATE_STATUS.md",
+    "bytes": 378,
+    "sha256": "45328a4c227d7bc4871dcc15733782c6f40956f7ff05130cb9cc2a526388629c",
+    "mtime_utc": "2026-10-06T19:31:39.904377+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_3/progress.md",
+    "bytes": 862,
+    "sha256": "7d30323877feb0da754b712e39c739a346e5fb9a5bbde02bcf1d5eece8d71f24",
+    "mtime_utc": "2026-10-06T19:32:58.134286+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_orchestrator_3/PROJECT.md",
+    "bytes": 6310,
+    "sha256": "60ba2504e9b5aebd9b8c78c939888977c54e285a14c5280b209a6bd893ccf58d",
+    "mtime_utc": "2026-10-06T19:30:49.320488+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_1/BRIEFING.md",
+    "bytes": 3350,
+    "sha256": "cdcb7e784dc28c74e3ca0c41eb5bcb49c9578ff9eed8b39f0e76399e5695ba34",
+    "mtime_utc": "2026-10-06T10:44:35.847460+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_1/context.md",
+    "bytes": 540,
+    "sha256": "e2b5311c2fcf7664a8ef76e9dbb21eff098aa73f983c9f207467c12d044d7226",
+    "mtime_utc": "2026-10-06T10:35:38.947166+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_1/DISPATCH.md",
+    "bytes": 1638,
+    "sha256": "1b7d5de29374b54913dc20dcec7bef3209f12ec005f1763f9762e66973c21b5f",
+    "mtime_utc": "2026-10-06T10:36:49.329432+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_1/handoff.md",
+    "bytes": 9859,
+    "sha256": "79b99888ca0cb4bfddb53e5158ad7c13f6672079cfcee048214fd35b4ba87d94",
+    "mtime_utc": "2026-10-06T10:45:18.144315+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_1/progress.md",
+    "bytes": 762,
+    "sha256": "904f6aee87495d546e2a7f7ba4cb3eadb62b011e582e823546cfbea51629fe3e",
+    "mtime_utc": "2026-10-06T10:44:47.435462+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_2/BRIEFING.md",
+    "bytes": 3731,
+    "sha256": "18df0fd3883ac7242da88c6b6866882cad21c4e4e34afd8a3e17307a45d6b8ce",
+    "mtime_utc": "2026-10-06T10:47:08.931441+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_2/context.md",
+    "bytes": 540,
+    "sha256": "233d37e576ca78d1029bc1af48e7acd834d278d817239723ce0f260781a7e162",
+    "mtime_utc": "2026-10-06T10:35:46.161408+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_2/DISPATCH.md",
+    "bytes": 1519,
+    "sha256": "3166c7eb655e02929f29b2f24ac0ba4d5729aae8f6f330a4bc272454d074e04e",
+    "mtime_utc": "2026-10-06T10:36:46.831910+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_2/handoff.md",
+    "bytes": 13480,
+    "sha256": "1c2516a9c9d60e8fd595dad39b441deda2501aa3becc0e00bb1312a0111ed92c",
+    "mtime_utc": "2026-10-06T10:47:47.961789+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m1_2/progress.md",
+    "bytes": 665,
+    "sha256": "510e8b6c727969c9b79ada1cb02f98a1126fc8a1eb3555f9033e1c0dc5e6c972",
+    "mtime_utc": "2026-10-06T10:47:53.100265+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_1/BRIEFING.md",
+    "bytes": 3780,
+    "sha256": "a1d1a35c7efb7b6d398bd6bbfd39d218ab1e052b3040c18d350f7e7bec681551",
+    "mtime_utc": "2026-10-06T14:38:04.082812+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_1/context.md",
+    "bytes": 540,
+    "sha256": "83f4ef51dd82c5930aaba2183473f1a4a403b925ef800f1fc3c768720dfdcc94",
+    "mtime_utc": "2026-10-06T11:11:07.791436+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_1/DISPATCH.md",
+    "bytes": 2429,
+    "sha256": "592037c37a7c5676865fd72d900207e124479b9806818fa135b769e6480e9377",
+    "mtime_utc": "2026-10-06T14:25:42.270041+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_1/handoff.md",
+    "bytes": 13121,
+    "sha256": "c8b3393669364bd918df7ea2dd57007047450b8af8677debb75ea617ea4032bb",
+    "mtime_utc": "2026-10-06T14:38:45.430505+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_1/progress.md",
+    "bytes": 1014,
+    "sha256": "f195407cbb849fec73b14d0c1a6c7b1e41a88aff785fce75d2118d62a0bd7628",
+    "mtime_utc": "2026-10-06T14:38:11.660656+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_1/verify_m2_adversarial.py",
+    "bytes": 13273,
+    "sha256": "90a091b345db54467fd0510d8422d2a64307571e7dc8986d1112a759f190b090",
+    "mtime_utc": "2026-10-06T11:16:37.181971+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/BRIEFING.md",
+    "bytes": 3699,
+    "sha256": "4b5b50db6b66892ae9717b780ef5e03327dcb3b188a51a3abc62acf2d0717ab1",
+    "mtime_utc": "2026-10-06T14:44:03.424979+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/context.md",
+    "bytes": 540,
+    "sha256": "1b72240a3e836686507cbfb8d65c1287abf238e0644b4d8e769d9a089bded9f3",
+    "mtime_utc": "2026-10-06T11:11:22.847493+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/DISPATCH.md",
+    "bytes": 1476,
+    "sha256": "c7cd11404fc2f561aa93b590d1337a8550214d635a89f9c6ad5733c4c9aefabe",
+    "mtime_utc": "2026-10-06T14:29:25.697885+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/handoff.md",
+    "bytes": 14433,
+    "sha256": "7ea955f64c756871ecec33935cac7f317c384da6b44727feca5e9a78fc11b466",
+    "mtime_utc": "2026-10-06T14:44:56.200060+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/inspect_raw_contents.py",
+    "bytes": 1666,
+    "sha256": "511b05080948b75e6118a7a79f6852a3f8c5f570de797e48a9faeeac222a60a9",
+    "mtime_utc": "2026-10-06T11:14:06.716058+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/progress.md",
+    "bytes": 1279,
+    "sha256": "c642fc015e254bd9bc351f5970905c54eaa703fe385e1c3a5b4b463ba42495e5",
+    "mtime_utc": "2026-10-06T14:44:11.849948+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/verify_cross_consistency.py",
+    "bytes": 4053,
+    "sha256": "6d0436a8a6b69a57929feb3dc3a974fc34dc3e5a3726b7da2c7c5ab734313c34",
+    "mtime_utc": "2026-10-06T11:14:24.735789+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/verify_m2_independent.py",
+    "bytes": 3796,
+    "sha256": "4be06f7b9eaf52266a639780cdebbd25ea7c5466a1c7f064f15a1cbc4eb43fbd",
+    "mtime_utc": "2026-10-06T11:13:54.848037+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_2/verify_raw_payloads.py",
+    "bytes": 6189,
+    "sha256": "7f2377a1ec96e73f79975d67fcbbf36980328469621df1aa1bdbe113f3b06834",
+    "mtime_utc": "2026-10-06T11:15:22.225178+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_1/BRIEFING.md",
+    "bytes": 3942,
+    "sha256": "1e5ba3c36e4e0a9a6ffcf5b9897a168e3f69fd8d4e3e441f695c507437eeb36f",
+    "mtime_utc": "2026-10-06T15:30:51.247205+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_1/context.md",
+    "bytes": 600,
+    "sha256": "920dcf4e8499d48738c90cbf745b56c416d2685863b09cee7615798b27c318eb",
+    "mtime_utc": "2026-10-06T15:21:48.770786+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_1/DISPATCH.md",
+    "bytes": 2301,
+    "sha256": "63c218f1658f9215e96e418624d9010793ce186fc157beb482e5a7198d843ccd",
+    "mtime_utc": "2026-10-06T15:22:28.224136+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_1/handoff.md",
+    "bytes": 14176,
+    "sha256": "4d0dba258fa9f8013838ccc36cac1c70aa267e3b6515965999784543c64d61c2",
+    "mtime_utc": "2026-10-06T15:31:36.873531+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_1/progress.md",
+    "bytes": 1081,
+    "sha256": "aea7eee535ea9db78fe02816930abe2c23dc92652e695eeeb115835084d1397c",
+    "mtime_utc": "2026-10-06T15:30:57.651739+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_2/BRIEFING.md",
+    "bytes": 3488,
+    "sha256": "ca3f3877f733e8cf634ac55671fa555a21f35954bd0006144ad2fd7e1e25347e",
+    "mtime_utc": "2026-10-06T15:29:46.223471+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_2/context.md",
+    "bytes": 602,
+    "sha256": "5cd38471055d40e51c36219a6e03c05a38ef723e368bcd7eb8adaa960592f33e",
+    "mtime_utc": "2026-10-06T15:21:54.946759+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_2/DISPATCH.md",
+    "bytes": 2161,
+    "sha256": "0c6714528eed95bf84720139536c0d8bb62101003878eee295b310e0852c89ce",
+    "mtime_utc": "2026-10-06T15:22:24.221281+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_2/handoff.md",
+    "bytes": 10776,
+    "sha256": "0872abc30d58cfe130a57edeb22c451abca050916f1c4ed03679be56f29ec9b9",
+    "mtime_utc": "2026-10-06T15:30:26.660961+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_reviewer_m2_iter2_2/progress.md",
+    "bytes": 810,
+    "sha256": "48f57d35bb10aa5453be1be09dc3e486746becf5a7acec19cba6fdc287612966",
+    "mtime_utc": "2026-10-06T15:29:53.050374+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m1/BRIEFING.md",
+    "bytes": 3917,
+    "sha256": "910e49d4ba919ea6b734acf0821c1bc692a657e3405161b5b1a215e4a840dd4e",
+    "mtime_utc": "2026-10-06T10:34:41.122346+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m1/context.md",
+    "bytes": 563,
+    "sha256": "bf9ee2b7000e3a33615f9a00b8453308af6dede35f2e5b0bcb6e807946dd93c0",
+    "mtime_utc": "2026-10-06T10:17:34.696141+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m1/DISPATCH.md",
+    "bytes": 3165,
+    "sha256": "77201f74e6565c0d1f797073611f39be9fe2721d09001261aed664ac9ea4ad4a",
+    "mtime_utc": "2026-10-06T10:30:44.121341+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m1/handoff.md",
+    "bytes": 6107,
+    "sha256": "a30c472d6c1ff6e42eb4481e6c2a0c920b7119cd3311105ef156e09649239173",
+    "mtime_utc": "2026-10-06T10:35:11.876767+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m1/progress.md",
+    "bytes": 1582,
+    "sha256": "ecccfa3a0b2403a29c3008eaad2202debc9ba96dc66eef702c59d0c95b295adf",
+    "mtime_utc": "2026-10-06T10:34:51.265098+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/apply_m2_reconciliations.py",
+    "bytes": 8408,
+    "sha256": "7d4b0677006ea564ecf43516d0b8ca3a1396aaecf9f31798b3a96342c1949fd7",
+    "mtime_utc": "2026-10-06T11:03:10.608190+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/BRIEFING.md",
+    "bytes": 5021,
+    "sha256": "b569ba98fe7d73676a3cba3df8f927faa5fa000a13c28fabbe6fb86215241145",
+    "mtime_utc": "2026-10-06T11:09:13.793733+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/build_m2_raw_and_evidence.py",
+    "bytes": 11731,
+    "sha256": "b272672211e705a4a35e30555192f3f6fce290e13891e682fc47c96078480966",
+    "mtime_utc": "2026-10-06T11:01:17.179195+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/context.md",
+    "bytes": 560,
+    "sha256": "b0387a0ebaa3a2f530096a56b5855d67e16b39a55d2eaa970cb1678b44b15e05",
+    "mtime_utc": "2026-10-06T10:48:37.157379+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/create_evidence_stores.py",
+    "bytes": 20563,
+    "sha256": "a304de59d7d37c23efaaeaece2d22a9074b06515183ce28d151b9d5783ff3e2b",
+    "mtime_utc": "2026-10-06T11:02:18.257644+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/DISPATCH.md",
+    "bytes": 4733,
+    "sha256": "0ca6fb5cc6979456c527b2f7473a37157a0f59d7283c73eba91ed809172309ea",
+    "mtime_utc": "2026-10-06T11:06:51.958463+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/fetch_primary_data.py",
+    "bytes": 1801,
+    "sha256": "c45bc213ae3283cb31748ec610c535301ad1eede9e5e770275b4a90b700e517e",
+    "mtime_utc": "2026-10-06T10:55:06.116186+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/handoff.md",
+    "bytes": 9317,
+    "sha256": "2e02d7344b90c11b69c9ab43f395ef4a3c9fb15b2905295703132f7d63d9bf99",
+    "mtime_utc": "2026-10-06T11:10:07.919610+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/progress.md",
+    "bytes": 2913,
+    "sha256": "09e4baecdc54c563aadc882409ba6e7d8ca38b56197397dfdbcbe47678cb11df",
+    "mtime_utc": "2026-10-06T11:09:25.606309+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2/test_m2_auditoria.py",
+    "bytes": 8509,
+    "sha256": "edca98febc40445df7faffd8860cf2748af4f1309a92f2caba2005e5a2ef5289",
+    "mtime_utc": "2026-10-06T11:08:26.348903+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2_remediation/BRIEFING.md",
+    "bytes": 3063,
+    "sha256": "d7784e5faf8a3dc5db86cba7985500a380572c4370efbcc1bc03c7945b538d56",
+    "mtime_utc": "2026-10-06T15:20:49.786578+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2_remediation/context.md",
+    "bytes": 699,
+    "sha256": "90b38010160d275cfa3c9021c385dbe836c117280577e824445ba9924961887e",
+    "mtime_utc": "2026-10-06T14:47:44.121813+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2_remediation/DISPATCH.md",
+    "bytes": 4671,
+    "sha256": "2f30f318bd1dd53d5743e1e28161182233e3e79aedb0bc42209e6370160502a2",
+    "mtime_utc": "2026-10-06T14:48:20.545309+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2_remediation/handoff.md",
+    "bytes": 8741,
+    "sha256": "1c90279b783485bc1aafa12591d8a99065947eac9f84ab8cc3737b8b38f85ddc",
+    "mtime_utc": "2026-10-06T15:20:16.162891+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m2_remediation/progress.md",
+    "bytes": 771,
+    "sha256": "5240cdead550424a495226175376044a53ff68188faed674f39e70a5696dbee9",
+    "mtime_utc": "2026-10-06T15:19:15.383608+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3/apply_m3_reconciliations.py",
+    "bytes": 9151,
+    "sha256": "e1abf5dc396cbf6481e8bcfcaf7a421b2f48e1bcfc1c0a4a6d11b5cf449fca22",
+    "mtime_utc": "2026-10-06T16:06:40.436219+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3/BRIEFING.md",
+    "bytes": 2310,
+    "sha256": "178848252523f214899df6c4706336de17901e9ad8cb60c90edfd187b487aefc",
+    "mtime_utc": "2026-10-06T15:47:41.969469+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3/build_m3_stores.py",
+    "bytes": 45793,
+    "sha256": "9898e6c5d17a9ca063aa35ff5650272bc6fdced85691b794086403d388695646",
+    "mtime_utc": "2026-10-06T16:05:35.371341+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3/context.md",
+    "bytes": 574,
+    "sha256": "d33afd4a55a0590f273796036b2a7fa700dd7b8ad740aa28957f8ae9330f4bd4",
+    "mtime_utc": "2026-10-06T15:46:26.703298+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3/DISPATCH.md",
+    "bytes": 5115,
+    "sha256": "6f15cac5e5478828580bc3cbd85df64347c176fd9aa91ccdf82fcee5d3d9885d",
+    "mtime_utc": "2026-10-06T15:47:31.841805+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3/progress.md",
+    "bytes": 231,
+    "sha256": "c4cba0d5c4239da55eb53d46a253de28d4f0852e9dad9d76b779400674b11d2f",
+    "mtime_utc": "2026-10-06T15:47:50.143972+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": ".agents/teamwork/teamwork_preview_worker_m3_completion/context.md",
+    "bytes": 666,
+    "sha256": "d2013143c7249d36dde9a6102954d80ae60106bc4cb2994723f77aa88368d725",
+    "mtime_utc": "2026-10-06T16:43:26.598364+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/backup_step3_before_text_apply/app.html",
+    "bytes": 1047520,
+    "sha256": "5651023cb9d26fd0297d79cd94aa530dbc2d5ff458d72147f6d27474c5f64145",
+    "mtime_utc": "2026-10-06T07:41:31.950686+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/backup_step3_before_text_apply/app.js",
+    "bytes": 2058096,
+    "sha256": "292ded523155260ff6ceacfa1b515830802ab67e1801ed884d4dc143c8218d9a",
+    "mtime_utc": "2026-10-06T07:13:50.605220+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/backup_step3_before_text_apply/report-bindings.js",
+    "bytes": 12753,
+    "sha256": "09d72cd71daba05dfd057272a9b85ac2de13f22b8ea54de07ae8fd7159969f95",
+    "mtime_utc": "2026-10-06T07:53:07.644746+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/backup_step3_before_text_apply/report-editorial.css",
+    "bytes": 10537,
+    "sha256": "2f2959b71086f96317d105a60f22aacd4a0edbec4cded0345c6a01fdd99b6f9c",
+    "mtime_utc": "2026-10-06T06:58:02.338401+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/backup_step3_before_text_apply/report-metrics-ui.js",
+    "bytes": 18136,
+    "sha256": "3f544723dc9a382e839d3036fea017e6fa4c0e739890ede4c6689b6bcc61577e",
+    "mtime_utc": "2026-10-06T07:54:29.593706+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/backup_step3_before_text_apply/semaforo_module.js",
+    "bytes": 6508,
+    "sha256": "352f79031565e1966587f351fbb6b038334e9a31b3d8e4bc2b7a0064ef1edf0f",
+    "mtime_utc": "2026-10-06T05:51:55.198048+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/radar_2026_pre_implementation_backup/app.html",
+    "bytes": 966749,
+    "sha256": "6296b56376a68e7eb1d5914f6a866e2b14e05c25745b4ac55f12d7f4cd74af78",
+    "mtime_utc": "2026-10-06T06:19:24.347877+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/radar_2026_pre_implementation_backup/app.js",
+    "bytes": 2205286,
+    "sha256": "3063186d953be5055dae85f6b3371342922bed66249bd5387215bc8d5b0f9934",
+    "mtime_utc": "2026-10-06T05:52:47.041254+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "backups/radar_2026_pre_implementation_backup/report-editorial.css",
+    "bytes": 9974,
+    "sha256": "143a44b09f9d887510c27a0a52134e482fc89942b4bac10038e29db3e1c5c8af",
+    "mtime_utc": "2026-10-06T04:26:13.978114+00:00",
+    "tracked": false,
+    "ignored": false
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0-fallbacks-inicial.txt",
+    "bytes": 3524,
+    "sha256": "b669254ebecd6bce19d8de5de55e81688518ee6d59709172e454fe204bc810e6",
+    "mtime_utc": "2026-10-05T02:02:43.744846+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/prompt-outra-ia.md",
+    "bytes": 3791,
+    "sha256": "5caf3a6acd78c82b7084ea2c2b7dde2b7472a2fa949123991c5e778c9cfe96c7",
+    "mtime_utc": "2026-10-05T01:54:42.710677+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/relatorio-base-2026-10-04.md",
+    "bytes": 14625,
+    "sha256": "36a2a0a380124d378035cc05fbd35a16b08b044f8c7ed518f2be9d7ff7b2040f",
+    "mtime_utc": "2026-10-05T01:54:42.709675+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/dataviz-final/relatorio-final.md",
+    "bytes": 2722,
+    "sha256": "04480ad6a1f21ae15b283873c0da324a003284347043baac6c521da21837b1ed",
+    "mtime_utc": "2026-10-06T14:23:33.085967+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/diagnostico-inicial.json",
+    "bytes": 463211,
+    "sha256": "d261c1eed5238cd39c1b237406030ce474b0e87f945510c29be4fb77bd6f057e",
+    "mtime_utc": "2026-10-05T02:03:28.217195+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/divergencias.json",
+    "bytes": 7193,
+    "sha256": "ab686ef89f269e4c4ce59ac8824f4a98438c17a83972d55b2dcea6dd8ad79878",
+    "mtime_utc": "2026-10-05T02:17:31.074476+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/divergencias.md",
+    "bytes": 3894,
+    "sha256": "821e221a915d56ac8b855002266249baee6e664db2379fcd6ab69b02490060ce",
+    "mtime_utc": "2026-10-05T02:17:31.075482+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/exportacao-verificada.csv",
+    "bytes": 64556,
+    "sha256": "b58375624257d1e322b42c704d66cfc8934194ac39f5e33ccf078864dc8f553c",
+    "mtime_utc": "2026-10-05T02:23:59.828676+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/exportacao-verificada.json",
+    "bytes": 91861,
+    "sha256": "c5bdd62f573bbc3f85b6ab6be1e55932018fd08dd77ccab62a0c74a6d6097839",
+    "mtime_utc": "2026-10-05T02:23:59.825141+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/fallbacks.md",
+    "bytes": 12688,
+    "sha256": "cb0dac7baaa63074d492c7c841a55c05899cde66d4d2640b75afcbff071c6f82",
+    "mtime_utc": "2026-10-05T02:23:19.488321+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/git-app-js-preexistente.diff",
+    "bytes": 38710,
+    "sha256": "30ff0ce02142345510ef5a695617b0e43c0144c5d864777090a61fcfdf731169",
+    "mtime_utc": "2026-10-05T02:25:04.430785+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/git-final-stat.txt",
+    "bytes": 9397,
+    "sha256": "bdd2cf928d5b4532dda4d205316fb7da45e495693967b48ac87b2e78c2dae6dd",
+    "mtime_utc": "2026-10-05T02:25:04.357093+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/git-final-status.txt",
+    "bytes": 21456,
+    "sha256": "8c893af159d31aae8654b6318b50748b2d8a49c3117cc6f9b5948c8c5f21b6dc",
+    "mtime_utc": "2026-10-05T02:25:03.626392+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/git-inicial.txt",
+    "bytes": 21189,
+    "sha256": "bada3b5c10270f81c0acd96c657df615a618f580d9afa4f8dd056c2ade32b7ec",
+    "mtime_utc": "2026-10-05T02:03:28.292726+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/inventario-fontes.json",
+    "bytes": 7320,
+    "sha256": "e2325ee88d6fae0d8f13507bfcdaaafafae526a7a0d3c77e18b3e90b4fa29f3f",
+    "mtime_utc": "2026-10-05T02:21:52.432304+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/matriz-cobertura.csv",
+    "bytes": 57458,
+    "sha256": "3984dd79543e4e1af01ded7dafff692801d3db87b5eac5c8d3a9d89f68a20335",
+    "mtime_utc": "2026-10-05T02:17:31.072955+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/matriz-cobertura.json",
+    "bytes": 99687,
+    "sha256": "debf2e2548e2b86bd85de161d701ba1f1b648aeb897befcc1f5df5b4857f82b6",
+    "mtime_utc": "2026-10-05T02:17:31.067955+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/relatorio-final.md",
+    "bytes": 104819,
+    "sha256": "61bc2cc01b2a839769243668bccc98fbe5dc91d947aaca05cd6c22eac59fda5f",
+    "mtime_utc": "2026-10-05T02:25:04.433300+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/rotas-auditor.md",
+    "bytes": 15983,
+    "sha256": "a6c7b6390068ad02684e17cd522f78c1dca850cf0200c6f749b490af865cc35d",
+    "mtime_utc": "2026-10-05T02:25:04.463396+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-auditor.txt",
+    "bytes": 11059,
+    "sha256": "46a28790b8d09b22d0287e2b87589d5fe08449270f2884d32bb3c7bd1f21f0a0",
+    "mtime_utc": "2026-10-05T02:23:59.666510+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-csv.txt",
+    "bytes": 93,
+    "sha256": "32d834cd6ecfa4238a643c3a7288689c168f06cea0601d792ef3717019368914",
+    "mtime_utc": "2026-10-05T02:18:01.262980+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-homologacao-corrigido.txt",
+    "bytes": 2214,
+    "sha256": "b9c14739f36055df75b29d961a336d668c3835766c35e4ad228ff7266fa0313b",
+    "mtime_utc": "2026-10-05T02:18:48.577001+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-homologacao.txt",
+    "bytes": 3565,
+    "sha256": "4aa126dac393af74ab97e9d39a1a4379b58299f1a5f6a413740b9abb4eed99c3",
+    "mtime_utc": "2026-10-05T02:08:21.011868+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-runtime-p0.txt",
+    "bytes": 707,
+    "sha256": "2cb0359a69ab6e12132771c2698beda5eee775fab04d2ab4870b1227123e2b37",
+    "mtime_utc": "2026-10-05T02:23:59.869279+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-runtime-saude.txt",
+    "bytes": 115,
+    "sha256": "4fba5e87ebd949a8e6a26b5c91736cc01f2242350609507efdfabe911ff4debc",
+    "mtime_utc": "2026-10-05T02:23:59.956621+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-saude-legado.txt",
+    "bytes": 741,
+    "sha256": "4607d0b1232d98d31b4260101654ea2526a2622fe3d25e482228d644cd449301",
+    "mtime_utc": "2026-10-05T02:07:56.378869+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/test-seguranca-legado.txt",
+    "bytes": 1466,
+    "sha256": "5cd156afc55971d51de8f3ab871072b14eb347b12b1de04532bac2745cc079d7",
+    "mtime_utc": "2026-10-05T02:07:56.540958+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p0/verificacao-preservacao.txt",
+    "bytes": 289,
+    "sha256": "7f269f1fe6b9a308c27fca9b4a021f3162bd8889505717e4a08fce0906ba5ca6",
+    "mtime_utc": "2026-10-05T02:23:19.494510+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/app.html.before",
+    "bytes": 1041767,
+    "sha256": "51b68db17b3f68d5eabb441903dd8da7ff9954be37feb638bbadc3afddd257d5",
+    "mtime_utc": "2026-10-05T03:21:27.390150+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/arquivos-alterados.txt",
+    "bytes": 1128,
+    "sha256": "5e7acfdafbabbdad7d76f6ec7f94154e44cb8535bb078b389c63ea560c5778d9",
+    "mtime_utc": "2026-10-05T03:37:37.081376+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/exportacao-series.csv",
+    "bytes": 260752,
+    "sha256": "afae81131758b300859a3b183edbc431e0b2fb6c617a2c496a74e65f364ecb42",
+    "mtime_utc": "2026-10-06T19:37:06.114533+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/exportacao-series.json",
+    "bytes": 411712,
+    "sha256": "00906f0583fd724a925f0839673c39ddac58e819203301983e66bb3c91eba32a",
+    "mtime_utc": "2026-10-06T19:37:06.109524+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/git-final-app-js.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T03:37:37.076375+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/git-final-stat.txt",
+    "bytes": 9254,
+    "sha256": "d31d83e33d9a22360caca87a3286d46128861b8649aef026e879617ba571d4e5",
+    "mtime_utc": "2026-10-05T03:37:37.005300+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/git-final-status.txt",
+    "bytes": 21477,
+    "sha256": "9602f5576e64dca9428d810e8a0d37fc89af7b46eccf8939e44308c58450aa13",
+    "mtime_utc": "2026-10-05T03:37:36.280795+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/git-inicial-app-js.diff",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T03:21:27.379111+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/git-inicial-stat.txt",
+    "bytes": 9254,
+    "sha256": "a505ef2da876ad0f274ac19d4004287e5ab1e1070f003f7085d5c2b03e0235c0",
+    "mtime_utc": "2026-10-05T03:21:27.305128+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/git-inicial-status.txt",
+    "bytes": 21419,
+    "sha256": "ad121a267c5e385ed2944587ee187769db3f4109df505b7c935720733cd1c6a6",
+    "mtime_utc": "2026-10-05T03:21:26.542072+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/radar_hub_controller.js.before",
+    "bytes": 752922,
+    "sha256": "b20b0135d5f9ee8421f3f4e4678b2e75b46459b85163ee65c60ebf9945bde305",
+    "mtime_utc": "2026-10-05T03:21:27.392771+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/relatorio-final.md",
+    "bytes": 10773,
+    "sha256": "fdd17e050bdc1212da2783a68b79222e488a04c0f911188d293014cd2817a061",
+    "mtime_utc": "2026-10-05T03:37:37.078396+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/snapshot-inicial.json",
+    "bytes": 855,
+    "sha256": "50b03b02c7157c41cf8aa31893d66427d89433c4bcf3423ddf425fe335618ff0",
+    "mtime_utc": "2026-10-05T03:21:27.388642+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-1-economia/teste-browser-sem-imagens.json",
+    "bytes": 37056,
+    "sha256": "1f898e68d1ef208f4552d0fbf2709b826e63002eefead2f4b4c60a2131b3a833",
+    "mtime_utc": "2026-10-06T19:24:38.774893+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/app.html.before",
+    "bytes": 1040747,
+    "sha256": "73ac1a1640497e45f446864ea580c743827042bf105c5e87e3b7175b7881e378",
+    "mtime_utc": "2026-10-05T02:32:52.531715+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/arquivos-p1.txt",
+    "bytes": 4658,
+    "sha256": "12615e643ebdd3a6ad3ef4277687a81684a5b07d0ef54f9ec7db4fdd537099b7",
+    "mtime_utc": "2026-10-05T03:06:46.438160+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/build_radar_hub_package.py.before",
+    "bytes": 2060,
+    "sha256": "84e294816d6567531fc92281103b38c20f2e7b082924d151370170af4c811064",
+    "mtime_utc": "2026-10-05T02:32:52.532726+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/disponibilidade-investigada.json",
+    "bytes": 7096,
+    "sha256": "b19cda89dd637cf2f6060fa910f497ae63b289d5190855dd4fa11e95fb5f1332",
+    "mtime_utc": "2026-10-05T03:00:40.733348+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/economia-desktop.png",
+    "bytes": 240850,
+    "sha256": "eb0696083f02c940c7c2c08a41d73b7b5b985dd03c391b6b332a7ce041643638",
+    "mtime_utc": "2026-10-05T03:06:12.146078+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/exportacao-verificada.csv",
+    "bytes": 252918,
+    "sha256": "3ae946b2780e76de6aa673c8f32927917347eeae960bf182a92ce97e94947994",
+    "mtime_utc": "2026-10-06T10:03:26.600142+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/exportacao-verificada.json",
+    "bytes": 323907,
+    "sha256": "977b893cbb481dfde5235e14790ffbd7c613107ca9c5beb1b628dd3c47fbf21e",
+    "mtime_utc": "2026-10-06T10:03:26.597829+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/git-final-app-js.diff",
+    "bytes": 38710,
+    "sha256": "30ff0ce02142345510ef5a695617b0e43c0144c5d864777090a61fcfdf731169",
+    "mtime_utc": "2026-10-05T03:07:15.457594+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/git-final-stat.txt",
+    "bytes": 9388,
+    "sha256": "8d45503d1b94cd69afdd6c1b9990d91455ebd7a2fccd86aee2e795fec60471ef",
+    "mtime_utc": "2026-10-05T03:07:15.396197+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/git-final-status.txt",
+    "bytes": 21639,
+    "sha256": "8db2e227245e7b926dc524c6dd0c6955212162a0e3ad1846515dfadb4257b3a9",
+    "mtime_utc": "2026-10-05T03:07:14.744550+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/git-inicial-app-js.diff",
+    "bytes": 38710,
+    "sha256": "30ff0ce02142345510ef5a695617b0e43c0144c5d864777090a61fcfdf731169",
+    "mtime_utc": "2026-10-05T02:32:53.320257+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/git-inicial-stat.txt",
+    "bytes": 9397,
+    "sha256": "bdd2cf928d5b4532dda4d205316fb7da45e495693967b48ac87b2e78c2dae6dd",
+    "mtime_utc": "2026-10-05T02:32:53.249597+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/git-inicial-status.txt",
+    "bytes": 21456,
+    "sha256": "8c893af159d31aae8654b6318b50748b2d8a49c3117cc6f9b5948c8c5f21b6dc",
+    "mtime_utc": "2026-10-05T02:32:52.581170+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/inventario-anterior.json",
+    "bytes": 12856,
+    "sha256": "984371e3f14e49981d4ff76dee28de68899088ed34e44a8d1a826ea4992722ec",
+    "mtime_utc": "2026-10-05T03:01:51.780960+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/matriz-completa.json",
+    "bytes": 93823,
+    "sha256": "7d9c6f61f8ef7bc13c1810e8366b92e0239a5e0678b46bc964e064ad4bcc414b",
+    "mtime_utc": "2026-10-05T03:02:10.213175+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/matriz-economia-final.json",
+    "bytes": 18093,
+    "sha256": "34aa7bb77c92be027d39caaa26336d59a0749e68b1a0ecd0e70dde0fce25abfa",
+    "mtime_utc": "2026-10-05T03:02:10.214169+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/matriz-economia.csv",
+    "bytes": 2323,
+    "sha256": "79d5c11fc9731654f0030cd005ada6cbf480b9b013d5dcf539f609c5ad7b7f51",
+    "mtime_utc": "2026-10-05T03:01:51.781960+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/matriz-economia.json",
+    "bytes": 17030,
+    "sha256": "ab16f187f539ac87d86c20aebe28d0dca66c8346b5d0a51e4d78a90b6d8e3cc9",
+    "mtime_utc": "2026-10-05T03:01:51.781960+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/prompt-revisao-outra-ia.md",
+    "bytes": 1638,
+    "sha256": "842803351400c17ab88b27a0f04426abce1d245c754b7435c9add84af9f176a4",
+    "mtime_utc": "2026-10-05T03:07:15.460601+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/radar_hub_consistency.json.before",
+    "bytes": 7715,
+    "sha256": "becacd50be720fa729ad44fd822742dee3f9dd0dc1eb854098908dbdec66320c",
+    "mtime_utc": "2026-10-05T02:32:52.529708+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/radar_hub_controller.js.before",
+    "bytes": 618938,
+    "sha256": "96e3e17eac69b78e6935a062cad16fa30bb940e11b27295a2813887d25b9f2a9",
+    "mtime_utc": "2026-10-05T02:32:52.530716+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/radar_hub_p0_matrix.py.before",
+    "bytes": 11805,
+    "sha256": "f44f07ceb65ab3b58af77a2537e0a46a4f3fba90b04b5b179bf8524581abbbe3",
+    "mtime_utc": "2026-10-05T02:32:52.532726+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/radar_hub_package.json.before",
+    "bytes": 359451,
+    "sha256": "3c58e87207c05816cc5b2b61f70507b53deea2ddaea3c1553ceee5123c0ebf3e",
+    "mtime_utc": "2026-10-05T02:32:52.525673+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/relatorio-final.md",
+    "bytes": 34690,
+    "sha256": "5cfbf406fab8b992ea534d663683ccad086a745975e57341f3273ec99ccf9ad5",
+    "mtime_utc": "2026-10-05T03:07:15.460601+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/sjc_metadata_registry.json.before",
+    "bytes": 118948,
+    "sha256": "965a46b333f28a8cfdffa0465d3d79d52962db37a5f933f7becbb7a5b03e4f04",
+    "mtime_utc": "2026-10-05T02:32:52.528641+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/sjc_open_data_ground_truth.json.before",
+    "bytes": 133940,
+    "sha256": "f22c5c0f716b461d4b7518d0272a4cf17a501ad3f122a1e1bde0cba7fd88a18a",
+    "mtime_utc": "2026-10-05T02:32:52.527642+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/snapshot-inicial.json",
+    "bytes": 265099,
+    "sha256": "afd9a95f9947012f5fbf2ae7f2a26bf22589def6604fcbb7c81877c72f380c64",
+    "mtime_utc": "2026-10-05T02:32:53.332295+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p1-economia/teste-navegador.json",
+    "bytes": 1288,
+    "sha256": "452ecdb9b1cfd8a07980ea183b6e394b57cb2268e4d17fd424afca882aae58bf",
+    "mtime_utc": "2026-10-05T03:06:12.147065+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/app.html.before",
+    "bytes": 1058825,
+    "sha256": "452d7e92783da5c45a8ef5b39b71ec946efcfd99d7dccc75d3eefd39fcd533c1",
+    "mtime_utc": "2026-10-05T04:35:44.922724+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/exportacao-verificada.csv",
+    "bytes": 9353306,
+    "sha256": "8686a18934fcf614320c35fb55539245d23b2987f31524024a563c4fe7c0cb45",
+    "mtime_utc": "2026-10-06T19:37:07.609713+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/exportacao-verificada.json",
+    "bytes": 10477528,
+    "sha256": "f9ccfd846a994e304a8ab5c1adb6a365ff0c17023d69eeb8494df97c76389795",
+    "mtime_utc": "2026-10-06T19:37:07.591692+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/git-after-appjs.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T04:46:15.753726+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/git-after-stat.txt",
+    "bytes": 9384,
+    "sha256": "6d921fad75071bfd06bd2e750b5d005a1e5f7076f75a014fd5dca3b82d16c53e",
+    "mtime_utc": "2026-10-05T04:46:15.690646+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/git-after-status.txt",
+    "bytes": 21714,
+    "sha256": "224902308b5e7bf4ee3e6941080e7121c303d527da72d3041e397ce5d2320227",
+    "mtime_utc": "2026-10-05T04:46:14.815016+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/git-before-appjs.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T04:35:46.016933+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/git-before-stat.txt",
+    "bytes": 9384,
+    "sha256": "febed092273e65c90cbf0a41541b4e280d8b1add7195b1954481294d81365301",
+    "mtime_utc": "2026-10-05T04:35:45.950236+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/git-before-status.txt",
+    "bytes": 21656,
+    "sha256": "b156e69711ca7277ea70731fb3f5327c6a700d601199595aed2d1804e0df93be",
+    "mtime_utc": "2026-10-05T04:35:44.979680+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/radar_hub_controller.js.before",
+    "bytes": 12045069,
+    "sha256": "2dc905395a6ecd76199087eae1daabc2e4d2672fed7a3aedf303043f6a5b1140",
+    "mtime_utc": "2026-10-05T04:35:44.933200+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/relatorio-final.md",
+    "bytes": 17867,
+    "sha256": "ee60d3768a198ee1d063a04fd8029b0c586a3d475c6b470b1c7b906b9706052b",
+    "mtime_utc": "2026-10-05T04:46:15.758260+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/snapshot.json",
+    "bytes": 2183,
+    "sha256": "fe192b3ca93e0f5502d5449f2afdfb1295118468f7461d6e76a0672fb8748c80",
+    "mtime_utc": "2026-10-05T04:35:44.917634+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/teste-browser-sem-imagens.json",
+    "bytes": 22944,
+    "sha256": "699eacc631c9ad7c819dc842d83e1694d397577fb9aa03d5ecab3633015d4abf",
+    "mtime_utc": "2026-10-06T10:07:09.068294+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-1-financas/teste-evidencia-escopo.json",
+    "bytes": 321,
+    "sha256": "d63d2c589b756c16e31a935604c59185b7e52efb6365db142f479683ba1ea423",
+    "mtime_utc": "2026-10-05T04:43:02.106061+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/agregados-tce.json",
+    "bytes": 2254,
+    "sha256": "fd96ea4b8c9ad03386c0ef4394877d954bb94134781a496aa1c48e40f3ef5716",
+    "mtime_utc": "2026-10-05T04:21:16.169763+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/app.html.before",
+    "bytes": 1058629,
+    "sha256": "9773b9ff93f87603b71e74ba39b4aa48d6ef0fac69d9b6e8e6d93f860494c97c",
+    "mtime_utc": "2026-10-05T03:42:45.588388+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/app.js.before",
+    "bytes": 2203765,
+    "sha256": "146094c72ad81fdb776ea9abd4fb88ee025b661246663a0ac0a40f92db94a33b",
+    "mtime_utc": "2026-10-05T03:42:45.586836+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/arquivos-alterados.txt",
+    "bytes": 16877,
+    "sha256": "dffcc0fb53d5b5f832447cbb8c0f759606e7acf92e84cb13bf2ac973772a3354",
+    "mtime_utc": "2026-10-05T04:23:09.649993+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/build_radar_hub_package.py.before",
+    "bytes": 2266,
+    "sha256": "f14425f11340fcd0eb86e928e090378a762addf4ed9b52da73af1157e7b08f65",
+    "mtime_utc": "2026-10-05T03:42:45.600475+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/conferencia-pdfs-municipais.json",
+    "bytes": 5339,
+    "sha256": "618f926d0f3fc992889ce53e9bb8f09f9a532ae0577e81831bf66e9e1b457f35",
+    "mtime_utc": "2026-10-05T04:21:15.257540+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/dca-2023-catalogo.txt",
+    "bytes": 96415,
+    "sha256": "c89cb7044fb4463c32369a720b3b4dc8c41252b25865975f2cd52967d0626db0",
+    "mtime_utc": "2026-10-05T03:45:08.044489+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/divergencias-nao-resolvidas.json",
+    "bytes": 6987,
+    "sha256": "ffec1f858753648e15ffb616c6f59827515bc00711d470a07c3785ed9d9ebe70",
+    "mtime_utc": "2026-10-05T04:21:15.256540+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/economia_audit_bindings.json.before",
+    "bytes": 6075,
+    "sha256": "eaa0f3935a8ed964d66f899962dffa29124ccdbe2c6e4923ba8e3aba6e6a6eb0",
+    "mtime_utc": "2026-10-05T03:42:45.597476+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/economia_evidence_2026-10-04.json.before",
+    "bytes": 1446241,
+    "sha256": "8319a682cfffe509300464d1273ab207438a9c941988f34f0f38f4473e1377b3",
+    "mtime_utc": "2026-10-05T03:42:45.599475+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/economia_visual.js.before",
+    "bytes": 32346,
+    "sha256": "827d5cbcdbbdafbab57c0aaece4a155b04d406777dfec11c2591b981062be707",
+    "mtime_utc": "2026-10-05T03:42:45.590394+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/exportacao-verificada.csv",
+    "bytes": 9625618,
+    "sha256": "d6c93d1db087fd6d9677db863e5441964d31d03ae9326373c6e4ad5b8449d567",
+    "mtime_utc": "2026-10-06T10:03:30.939050+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/exportacao-verificada.json",
+    "bytes": 13255488,
+    "sha256": "986ddcb61e0c4087aeb1f3ce08cb4a0ade3cd68be5243ed984850fe937e64427",
+    "mtime_utc": "2026-10-06T10:03:30.790322+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/fontes-consultadas.csv",
+    "bytes": 57883,
+    "sha256": "0d46e67426f37ff0d0e37e1f33edcc909891ccb2b3999525a6fd674432b66827",
+    "mtime_utc": "2026-10-05T04:23:08.547164+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/git-final-app-js.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T04:23:09.609179+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/git-final-stat.txt",
+    "bytes": 9384,
+    "sha256": "15304bb9871c1fa90b806c23534dea5b5bc9f4fe02065656c7fa49bdbbd21d5d",
+    "mtime_utc": "2026-10-05T04:23:09.539143+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/git-final-status.txt",
+    "bytes": 21656,
+    "sha256": "b156e69711ca7277ea70731fb3f5327c6a700d601199595aed2d1804e0df93be",
+    "mtime_utc": "2026-10-05T04:23:08.594637+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/git-inicial-app-js.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T03:42:45.584315+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/git-inicial-stat.txt",
+    "bytes": 9254,
+    "sha256": "d31d83e33d9a22360caca87a3286d46128861b8649aef026e879617ba571d4e5",
+    "mtime_utc": "2026-10-05T03:42:45.486173+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/git-inicial-status.txt",
+    "bytes": 21477,
+    "sha256": "9602f5576e64dca9428d810e8a0d37fc89af7b46eccf8939e44308c58450aa13",
+    "mtime_utc": "2026-10-05T03:42:44.756159+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/hashes-iniciais.json",
+    "bytes": 1173,
+    "sha256": "58cb9b8a3b733c4212f911730b34340e75d592df4eac1ed4e8e3667aa6cfae18",
+    "mtime_utc": "2026-10-05T03:42:45.612016+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/inventario-inicial.csv",
+    "bytes": 5093,
+    "sha256": "ac17a9929b199c6a9c31c67722abacb5b5fec8f07490ef78db8eae42bc89bb87",
+    "mtime_utc": "2026-10-05T04:23:08.220152+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/inventario-inicial.json",
+    "bytes": 6605,
+    "sha256": "2278a5cea280e7a5d41d7d3b7203d102047b43ca64acf99078bd191db91edb60",
+    "mtime_utc": "2026-10-05T04:23:08.219146+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/inventario-inicial.md",
+    "bytes": 5165,
+    "sha256": "465c1d54be381718887fe68f84c729f1fde18ec3fa291a8a3fbd2658d0c6dbb0",
+    "mtime_utc": "2026-10-05T04:23:08.221159+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/layout-dca-2023-texto.txt",
+    "bytes": 501871,
+    "sha256": "11be80eb032f28998047ac182d724cc645e58606e548c6db21292195c163c842",
+    "mtime_utc": "2026-10-05T03:46:33.739496+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/layout-rgf-2023-texto.txt",
+    "bytes": 36308,
+    "sha256": "938893779896baa410dee4f3ecc89f4cee46b35c9ef2b37483821b81604b57dc",
+    "mtime_utc": "2026-10-05T03:46:35.989479+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/layout-rreo-2023-texto.txt",
+    "bytes": 124542,
+    "sha256": "0ca794e374cfc1f14197e2a7faa44d045c23f7fb9d68f56aec9af0de24831f73",
+    "mtime_utc": "2026-10-05T03:46:35.482205+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/matriz-indicadores-final.json",
+    "bytes": 19023,
+    "sha256": "1b271cfd093037355ce964aa163c21081c67b413e287fe0277e7b5c462c169c4",
+    "mtime_utc": "2026-10-05T04:22:00.617160+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/matriz-oportunidades-financas.csv",
+    "bytes": 17558,
+    "sha256": "250f197502c9f473622086d7565de7d4896da2caccd0a7d95e04ef29a3fd5cb6",
+    "mtime_utc": "2026-10-05T04:23:08.544070+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/matriz-oportunidades-financas.json",
+    "bytes": 32679,
+    "sha256": "a28dc4e82f8cade75d01bbae89d99ac2f0f01b0db7c906936da2cd74bf61f6d7",
+    "mtime_utc": "2026-10-05T04:23:08.543068+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/matriz-oportunidades-financas.md",
+    "bytes": 19006,
+    "sha256": "ca37f1d302c20a0a886f55bed3d55b6a312faf382b868ed83730959e1835a136",
+    "mtime_utc": "2026-10-05T04:23:08.544070+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rgf-2023-000008364-texto.txt",
+    "bytes": 29738,
+    "sha256": "8dc3c2bac22d108bc04a148610b2b8ecaa48a562d5374cdc5334c5241aeecc88",
+    "mtime_utc": "2026-10-05T03:49:23.137607+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rgf-2024-000009206-texto.txt",
+    "bytes": 30112,
+    "sha256": "650fa0a8b791dd4bdfa8600a86d1279aac2ca7729c3d42948f0c29b3d5ad7999",
+    "mtime_utc": "2026-10-05T03:49:23.404593+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rgf-2025-000009766-texto.txt",
+    "bytes": 30154,
+    "sha256": "f7ef005c540be2fb4f26de97a6c75eb973282ef3a7b45aa937e8e33b4a7e7b4c",
+    "mtime_utc": "2026-10-05T03:49:23.664728+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002362-texto.txt",
+    "bytes": 5252,
+    "sha256": "493e81c5e0f9d8e1cddf63141f6dd7aa238e8de9b0b4c0eb2e2280d8097012b6",
+    "mtime_utc": "2026-10-05T03:49:23.727717+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002363-texto.txt",
+    "bytes": 1360,
+    "sha256": "c5895704541cd3b247055b18138d33e767a7060223f3ed438be6e26359432338",
+    "mtime_utc": "2026-10-05T03:49:23.747160+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002364-texto.txt",
+    "bytes": 8867,
+    "sha256": "e1fa6df230038ad4f47876e0c4c1190e1bdeeddf6c273690c5d9997d7ac12d15",
+    "mtime_utc": "2026-10-05T03:49:23.857049+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002365-texto.txt",
+    "bytes": 4479,
+    "sha256": "c67c0f2eff38eb8f9264b80f3f0503505c83795a91edd7ac51c70a21816a1d8c",
+    "mtime_utc": "2026-10-05T03:49:23.903006+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002366-texto.txt",
+    "bytes": 2755,
+    "sha256": "d00116a69a1b00957b231af5e43e32ab3ff8b35c902a0fb14da3ebdd2ce8002e",
+    "mtime_utc": "2026-10-05T03:49:23.933811+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002367-texto.txt",
+    "bytes": 3803,
+    "sha256": "af075850c0aeeb08d60ba6257d5c64ea99ce2a72e36f0ebf19a0a71ce78860d2",
+    "mtime_utc": "2026-10-05T03:49:23.970350+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002368-texto.txt",
+    "bytes": 1736,
+    "sha256": "1a81dcea4cba3269f2c2da8ec0f38c1370cc1f94656ce34f9d97e1b3125ab269",
+    "mtime_utc": "2026-10-05T03:49:24.003122+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002369-texto.txt",
+    "bytes": 1237,
+    "sha256": "1d70efd57eb7d81abda722ccdbc795630437609afb65b2d2a2289b2c5653b148",
+    "mtime_utc": "2026-10-05T03:49:24.018656+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002370-texto.txt",
+    "bytes": 1914,
+    "sha256": "fca2463036145a311301a0b07cba653ce3f8d86b49a3f4da9fae580c6f591746",
+    "mtime_utc": "2026-10-05T03:49:24.044054+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2023-000008363-texto.txt",
+    "bytes": 109251,
+    "sha256": "676d4c14feefe73f88a24a06f9518e129217a200863804d8e28df67d0b1867f6",
+    "mtime_utc": "2026-10-05T03:49:25.438295+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2024-000009205-texto.txt",
+    "bytes": 109636,
+    "sha256": "8f4537b8ea8dda989e522279a518f15ea856af160f2778803c9339ccd20fcbe5",
+    "mtime_utc": "2026-10-05T03:49:27.377267+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2025-000009765-texto.txt",
+    "bytes": 110395,
+    "sha256": "05a4fdd111ffdbbc706ae8875793b4ff0c91c017c8dd4c6e616810a8c52e46fc",
+    "mtime_utc": "2026-10-05T03:49:29.552597+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2026-4-texto.txt",
+    "bytes": 92946,
+    "sha256": "b0f9bcff7e5f0b738e491d3c61adda608b7b79c4e1292306fcbd4d22bd962b84",
+    "mtime_utc": "2026-10-05T03:46:37.925538+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/radar_hub_consistency.json.before",
+    "bytes": 8120,
+    "sha256": "e64cf91ec1b57355d0ef8c75f7a69a5514e1c79e882616ee0225cd36c7190099",
+    "mtime_utc": "2026-10-05T03:42:45.596477+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/radar_hub_controller.js.before",
+    "bytes": 753538,
+    "sha256": "64f318f1abf4fdbfc362ff5e197b661cbc72f13b4454137e154d5f7ee0f151dd",
+    "mtime_utc": "2026-10-05T03:42:45.589395+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/radar_hub_package.json.before",
+    "bytes": 512957,
+    "sha256": "b38fe08ee94e8907efcd55df2bb1d5dd28c90cef0e57bac709da09353cdba115",
+    "mtime_utc": "2026-10-05T03:42:45.593395+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/reconciliacao-fontes.json",
+    "bytes": 4625,
+    "sha256": "4f9ead57ea0e021125709c094f7e6e3509aa9e223c18bc7e0c22e02b8e2d8391",
+    "mtime_utc": "2026-10-05T04:21:15.257540+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/reconciliacao-indicadores.csv",
+    "bytes": 3219,
+    "sha256": "ff0e29ccc877624365ceabdf52760a06edb8553b221355b0fe0850d7a7dfbafa",
+    "mtime_utc": "2026-10-05T04:23:08.545596+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/reconciliacao-indicadores.json",
+    "bytes": 6454,
+    "sha256": "0f666d75803a0991da45a00f3cf85a2b9efcee9ee78696532b111a2017c2634d",
+    "mtime_utc": "2026-10-05T04:21:16.168759+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/relatorio-final.md",
+    "bytes": 29971,
+    "sha256": "2b196b95d219ee6f9571e393b9635c824c3e5d8c4ff5ce0d26e2a741088d1afa",
+    "mtime_utc": "2026-10-05T04:23:08.549720+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/resultados-testes.json",
+    "bytes": 779,
+    "sha256": "587d347723ccb42c95511bcddbd43dbc3b5a30b5eb7eaacddbb068e0c1ddabd4",
+    "mtime_utc": "2026-10-05T04:22:47.478443+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/rgf-2023-3-catalogo.txt",
+    "bytes": 38275,
+    "sha256": "bbb08d17507bc991dfa4e2d1d60266e73250a19e62fbf1c16324bc945d6d3468",
+    "mtime_utc": "2026-10-05T03:45:08.056650+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/rreo-2023-6-catalogo.txt",
+    "bytes": 14343,
+    "sha256": "1038c2d960d6cd357cd6a88c4c7622a5b72dd3b2ed7007c44f0cc8c27c65b332",
+    "mtime_utc": "2026-10-05T03:45:08.054132+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/series-historicas.csv",
+    "bytes": 1003336,
+    "sha256": "72681ae0eae802bee2276a59e8c66b229ad5da45e0e2cb14a51d46f063012f44",
+    "mtime_utc": "2026-10-05T04:23:08.318896+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/series-historicas.json",
+    "bytes": 1775773,
+    "sha256": "8a4a90c9411837a984cd82b4b084e83490ecdbfabd53f828ae7d7d8b59d24aa8",
+    "mtime_utc": "2026-10-05T04:23:08.293849+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/sjc_metadata_registry.json.before",
+    "bytes": 145511,
+    "sha256": "5af0ca38c8eacbad341bf76c276161885e3d07bad074f08efa6e02adbca2270c",
+    "mtime_utc": "2026-10-05T03:42:45.592396+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/sjc_open_data_ground_truth.json.before",
+    "bytes": 247003,
+    "sha256": "53182b7fdda068e1f216360f9a03eb9d03b6c30108627150758616274b06e27e",
+    "mtime_utc": "2026-10-05T03:42:45.591398+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/snapshot-inicial.json",
+    "bytes": 398057,
+    "sha256": "96b1af4840c741c0afc8d7010fe2f297ed744f0d449f08745a496db49f1ee2bc",
+    "mtime_utc": "2026-10-05T03:42:45.625550+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/teste-browser-sem-imagens.json",
+    "bytes": 3141,
+    "sha256": "eacb5f6227fd0544e26256a87f224fd3db2206d6fd6088a20c3f5785519b4483",
+    "mtime_utc": "2026-10-05T04:22:43.651669+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/teste-evidencia-escopo.json",
+    "bytes": 321,
+    "sha256": "d63d2c589b756c16e31a935604c59185b7e52efb6365db142f479683ba1ea423",
+    "mtime_utc": "2026-10-05T04:22:38.638665+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/testes-runtime.txt",
+    "bytes": 2154,
+    "sha256": "e6b178df18223a0c96fffa4c7e48e6694b4788b48cbf7473d7c7e44cc7acbd18",
+    "mtime_utc": "2026-10-05T04:22:47.477416+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/compatibilidade-p0/exportacao-verificada.csv",
+    "bytes": 252802,
+    "sha256": "bb19f0f04d2ec42a2d8fab19e7e5c3df791de5efe6071fced5a18d2e8738b1b4",
+    "mtime_utc": "2026-10-06T11:17:02.665680+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p2-financas/compatibilidade-p0/exportacao-verificada.json",
+    "bytes": 323791,
+    "sha256": "5b0a5bacbb4941dd11936ca5002ed79406f2ad12d15a65dc0a4b780bc3862d68",
+    "mtime_utc": "2026-10-06T11:17:02.660154+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/antes-depois.md",
+    "bytes": 25470,
+    "sha256": "fd5593a6a7b94f9ed3591cb9303242bb4c2e388d6fe29378a916b884a2d2b7f1",
+    "mtime_utc": "2026-10-05T05:33:06.047790+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/app.html.before",
+    "bytes": 1075612,
+    "sha256": "4430f13f51df0b86b112d3ed15fe5e780c8e21c89667da9429d251427567f7a2",
+    "mtime_utc": "2026-10-05T04:52:47.943157+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/arquivos-alterados-p3.json",
+    "bytes": 5795,
+    "sha256": "7fb7374b0e10bb820fdb39347251b3b160cce483afc716466e9b1a660881a616",
+    "mtime_utc": "2026-10-05T05:35:05.497311+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/campos-diretos-legados.json",
+    "bytes": 33773,
+    "sha256": "b6e7b9dbd29fa78f346a07bb4b42ec7fee79b36c41d591f27a4f4c8f7ec807f7",
+    "mtime_utc": "2026-10-05T05:31:43.871028+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/exportacao-verificada.csv",
+    "bytes": 4957275,
+    "sha256": "f3ef8dcf23b468c7f9856f4cb1a98afaaee4867abf5c87210dc1b886aa71f292",
+    "mtime_utc": "2026-10-06T19:37:09.439332+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/exportacao-verificada.json",
+    "bytes": 6278596,
+    "sha256": "4134d624937b41413d1b20956c8513f3cb9cb0e10685661f39d90008ab589d2f",
+    "mtime_utc": "2026-10-06T19:37:09.421228+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/extracao-planilhas.json",
+    "bytes": 19791,
+    "sha256": "ef5ece53294c536abef89861fac2903ff605b0802dda4d5922621d2ffefb5d4c",
+    "mtime_utc": "2026-10-05T05:29:36.911031+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/git-after-appjs.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T05:35:05.273433+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/git-after-stat.txt",
+    "bytes": 9384,
+    "sha256": "6387bf25ea90dd92e2e1c536f53d0daefbac60cdf4026986b7b4479faebebd0b",
+    "mtime_utc": "2026-10-05T05:35:05.190447+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/git-after-status.txt",
+    "bytes": 21959,
+    "sha256": "d852c1c8e8e70cef5967ab407ea6878fbdf11638467de0702982b785dcb7de61",
+    "mtime_utc": "2026-10-05T05:35:04.035293+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/git-before-appjs.txt",
+    "bytes": 37927,
+    "sha256": "1bc028a0785c7bfe65232907ea16fdba35b00920abd8e74ef490a142538407ce",
+    "mtime_utc": "2026-10-05T04:52:48.959767+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/git-before-stat.txt",
+    "bytes": 9384,
+    "sha256": "759dbdb17f0b654232aee30fbc515751bbcb7fa6052ba1acfae08319a765cee2",
+    "mtime_utc": "2026-10-05T04:52:48.896904+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/git-before-status.txt",
+    "bytes": 21714,
+    "sha256": "224902308b5e7bf4ee3e6941080e7121c303d527da72d3041e397ce5d2320227",
+    "mtime_utc": "2026-10-05T04:52:48.003267+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/inventario-inicial.json",
+    "bytes": 22352,
+    "sha256": "0192f9fb907322b960e7f90b1c2616ccd1553d82169fb26495f0e60fc0131ba2",
+    "mtime_utc": "2026-10-05T04:52:48.960762+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-cobertura.csv",
+    "bytes": 64661,
+    "sha256": "97f32b6510d06bbc7c6e3e98efbac8edba9f9bac3d37665146d6c183a82b7fc4",
+    "mtime_utc": "2026-10-05T05:33:06.037287+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-cobertura.json",
+    "bytes": 100313,
+    "sha256": "05eb3461e5fd2bba744c1a8172226a7e3f0d1548bc0754b1c81d3b184758303a",
+    "mtime_utc": "2026-10-05T05:33:06.031759+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-cobertura.md",
+    "bytes": 38373,
+    "sha256": "bc3fdf69429c01dc63fc6659de86d9bcf68eda97869b554367d1e779f8fac77c",
+    "mtime_utc": "2026-10-05T05:33:06.039807+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-legados.json",
+    "bytes": 8808,
+    "sha256": "87b40868162615f04ef78a77d364b04e78313fd931c894e027be121a8c63d0a0",
+    "mtime_utc": "2026-10-05T05:31:43.870022+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-oportunidades-meio-ambiente.csv",
+    "bytes": 5044,
+    "sha256": "aabb34c632a2d7369d43f158040b5bf7386b17abf79f490e01c535398d349eb2",
+    "mtime_utc": "2026-10-05T05:33:06.041804+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-oportunidades-meio-ambiente.json",
+    "bytes": 7487,
+    "sha256": "c1dc2208176f87ea93656366f48c8ad20582a4b1c2ccd23b6acbfe1931fd4c23",
+    "mtime_utc": "2026-10-05T05:33:06.040808+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/matriz-oportunidades-meio-ambiente.md",
+    "bytes": 5472,
+    "sha256": "8470e68e38c3c0612b9b79d949a9c7a67e7a19c9cf6b9cfc0f25219773c99977",
+    "mtime_utc": "2026-10-05T05:33:06.043247+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/radar_hub_controller.js.before",
+    "bytes": 12045317,
+    "sha256": "d8612bfa4f3e2493da4a944a1b1cabed62a9e138bf2c54b98830c1c99027f3ff",
+    "mtime_utc": "2026-10-05T04:52:47.954153+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/reconciliacao-divergencias.json",
+    "bytes": 1659,
+    "sha256": "f5259e2c9201893c5cbb9af901bb1c2cc8719b92fed20d29a44ab6d64e16f4a4",
+    "mtime_utc": "2026-10-05T05:33:06.048807+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/referencias-metodologicas-extraidas.json",
+    "bytes": 847129,
+    "sha256": "8a4510bec52e4496d54c35343d0c212c45c6e79b8b23ee1e6fdf3670c4152f3a",
+    "mtime_utc": "2026-10-05T05:33:06.025724+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/relatorio-final.md",
+    "bytes": 13747,
+    "sha256": "341d15484013189ef8752ca29f6d19d7eacbac52f9424cafb51e9a529de2db3d",
+    "mtime_utc": "2026-10-05T05:33:06.049806+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/snapshot-inicial.json",
+    "bytes": 11672425,
+    "sha256": "3a6f201078e3a1cb916b0c17c059ad4a03c1c4bf32c66eb65f1e1dd00e7710e6",
+    "mtime_utc": "2026-10-05T04:52:47.940158+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/testes-escopo.json",
+    "bytes": 54114,
+    "sha256": "fea35c1d3b9fee8cf450bb7dbad7e16572bef393383ac909659bccf728cbb5f9",
+    "mtime_utc": "2026-10-05T05:34:58.775620+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/testes.txt",
+    "bytes": 2465,
+    "sha256": "2b7a84623275260f5406224e5eea189e10c8d1bd4083d16e7f8a015bb84c7fe4",
+    "mtime_utc": "2026-10-05T05:35:03.973916+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_economia_visual/exportacao-series.csv",
+    "bytes": 260752,
+    "sha256": "630a352f9840649118ae3c9a8504808d409a7d5a9791d594f4299b51c70cfbb2",
+    "mtime_utc": "2026-10-05T05:35:01.541050+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_economia_visual/exportacao-series.json",
+    "bytes": 411712,
+    "sha256": "85db5ff931ed0ada15f6c52ff3646728ff393824a56b53e65d2a19132d743d22",
+    "mtime_utc": "2026-10-05T05:35:01.534528+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_financas_visual/exportacao-verificada.csv",
+    "bytes": 9372860,
+    "sha256": "559cb387770b8fc3cfd94160287cd2f8cf6ef1eb75d816e73e16a275d08ed07b",
+    "mtime_utc": "2026-10-05T05:35:02.354184+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_financas_visual/exportacao-verificada.json",
+    "bytes": 10497082,
+    "sha256": "bf6d7a5f41d2497ef8e1d9c6c7b9cb4fe8bd84b8ab157bdb6b1108bb335cc7bf",
+    "mtime_utc": "2026-10-05T05:35:02.338291+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_radar_hub_p0/exportacao-verificada.csv",
+    "bytes": 252918,
+    "sha256": "3ae946b2780e76de6aa673c8f32927917347eeae960bf182a92ce97e94947994",
+    "mtime_utc": "2026-10-06T10:09:04.044399+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_radar_hub_p0/exportacao-verificada.json",
+    "bytes": 323907,
+    "sha256": "977b893cbb481dfde5235e14790ffbd7c613107ca9c5beb1b628dd3c47fbf21e",
+    "mtime_utc": "2026-10-06T10:09:04.041395+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/anac-sbsj-linhas-selecionadas.json",
+    "bytes": 7578620,
+    "sha256": "d0e5c0657574fc44b5a7802d7492bbb4eddf7eaf44e54a10b518ec881c9d2799",
+    "mtime_utc": "2026-10-05T09:28:25.649657+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/antes-depois-registry.json",
+    "bytes": 49342,
+    "sha256": "7764d4371901a35baf3796482429de8f177bd9c770c576dde8532d27934875fd",
+    "mtime_utc": "2026-10-05T09:46:41.702630+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/antes-depois.md",
+    "bytes": 25370,
+    "sha256": "e49568743f85e6e878c109f3a09fb29ee290521044da7bea79bde2e9c8d16955",
+    "mtime_utc": "2026-10-05T09:50:35.657814+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/app.html.before",
+    "bytes": 1082261,
+    "sha256": "bebba03de54c137ee612d9928418deef136397cadda350b1493bbfe0bc37488d",
+    "mtime_utc": "2026-10-05T08:49:37.728063+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/arquivos-e-hashes.json",
+    "bytes": 67480,
+    "sha256": "06c1b84dd5bf7354877171e7e5658986cc1c9f7045675915899f7a4f099de674",
+    "mtime_utc": "2026-10-05T09:50:39.122571+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/auditoria-transporte-2019-texto.txt",
+    "bytes": 28,
+    "sha256": "d92b9b8fad1e11b3a62063ce0cc73bdc4fad214b6ceb247086588bf1e10f767d",
+    "mtime_utc": "2026-10-05T09:14:05.041448+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/cicloviario-2024-alternativo.pdf.text.json",
+    "bytes": 48,
+    "sha256": "8d262307196a3cb7b77a8a8a670be62a2a3f1d6080e7c5cc26da473d7e87b8d5",
+    "mtime_utc": "2026-10-05T09:03:26.100455+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/cicloviario-atual.pdf.text.json",
+    "bytes": 46738,
+    "sha256": "0bb2aa5fe6bce725820370a3ca47995df377d128f991f77236b5d1b7188ec582",
+    "mtime_utc": "2026-10-05T09:03:27.461765+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/cicloviario.html.texto.json",
+    "bytes": 3949,
+    "sha256": "0550e1c1b388fb09eaeb3261fe0ddc76aeaa92be2f0ea17ee8610eaf4b27332f",
+    "mtime_utc": "2026-10-05T09:36:55.648059+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/declaracao-obrigatoria.json",
+    "bytes": 3517,
+    "sha256": "fcf152e0e6929a0600490eac6660655bc6083850a92f4d6c348c95b5238e8eff",
+    "mtime_utc": "2026-10-05T09:50:35.677497+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/declaracao-obrigatoria.md",
+    "bytes": 3597,
+    "sha256": "847689267c8f45eb194bfb24bf5fcd00804ce6028c589a12f301a621658813e2",
+    "mtime_utc": "2026-10-05T09:50:35.677497+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/divergencias.json",
+    "bytes": 5863,
+    "sha256": "8f678f05d934e494e4ebc64b4b79c5d5d3e522c0885c08cff5d9a43a4aa53d75",
+    "mtime_utc": "2026-10-05T09:50:35.676496+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/documento-ntp_4_historico_maio2024.pdf.text.json",
+    "bytes": 32518,
+    "sha256": "b459ea443938cb29588678d6771b7ba62053ced231d24a2c10599ff5b4ab2893",
+    "mtime_utc": "2026-10-05T09:17:57.958255+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/documento-ntp_5_mobilidadeeletrica_maio2024.pdf.text.json",
+    "bytes": 31922,
+    "sha256": "0cc19163fc702ec1fb3921ff501c24b4491ffd4b0d159abe4a5647e3c27e83a6",
+    "mtime_utc": "2026-10-05T09:17:58.837526+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/documento-ntp_6_linhaverdevlp_maio2024.pdf.text.json",
+    "bytes": 28591,
+    "sha256": "cd033604ed6428dd6f272e2b03603c04949bc908d8acf1d970a0c811196a0dfe",
+    "mtime_utc": "2026-10-05T09:18:01.105884+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/duplicatas-e-revisoes.json",
+    "bytes": 18546,
+    "sha256": "dcbbf8c7895342842130788af5386b979229c3606fe21a263fedd251ac540789",
+    "mtime_utc": "2026-10-05T09:46:41.701551+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/escolar-alvaras.html.texto.json",
+    "bytes": 8267,
+    "sha256": "671f816cdbfec980e00c07c2e954848507b12bd06c0ffc6859578cd2abc0eb4e",
+    "mtime_utc": "2026-10-05T09:36:55.630524+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/estacionamento.html.texto.json",
+    "bytes": 8059,
+    "sha256": "301b4e89138e47b632b55a2557378685ca95b9b9252e8da2d72973f4d1b7fe46",
+    "mtime_utc": "2026-10-05T09:36:55.643048+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/exportacao-verificada.csv",
+    "bytes": 43809195,
+    "sha256": "39d87f219eaec183ab7855265ed217ed808f4e84f07e860e91b90b40c498f154",
+    "mtime_utc": "2026-10-06T19:37:12.514761+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/exportacao-verificada.json",
+    "bytes": 55557188,
+    "sha256": "7acbc84453decd6f2c61268dd237580c601020c20144aeca938fe86e1d83e959",
+    "mtime_utc": "2026-10-06T19:37:12.379945+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/extracao-frota.json",
+    "bytes": 4396,
+    "sha256": "54c3d1882a6ad0ab44a94e070b5679317bb5f348c39ac3908fe2c0cb6873e648",
+    "mtime_utc": "2026-10-05T09:08:53.263342+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/extracao-transporte-pendencias.json",
+    "bytes": 4,
+    "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "mtime_utc": "2026-10-05T09:19:56.738466+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/fontes-consultadas.md",
+    "bytes": 37037,
+    "sha256": "9c5b25946a42b6fc11cd9ef2c7564bd4a76ff16195309e22a8794db85beb848e",
+    "mtime_utc": "2026-10-05T09:50:35.697795+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-before-appjs.txt",
+    "bytes": 38354,
+    "sha256": "640d3cfca02d9f9b785bc4fd0216a18b452bdafcfb7b930a3b1cbbdfebd26da4",
+    "mtime_utc": "2026-10-05T08:49:38.891734+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-before-stat.txt",
+    "bytes": 9448,
+    "sha256": "ee922806ed86f9a33de18838da62bb8b9d27e5f9bd84c0da0887fa7de6e920ff",
+    "mtime_utc": "2026-10-05T08:49:38.823638+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-before-status.txt",
+    "bytes": 21972,
+    "sha256": "2ec0b1b48dde2c330103b651b762d5ba929d54af27d251671e5aa87a50ea16d3",
+    "mtime_utc": "2026-10-05T08:49:37.794551+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-final-appjs.txt",
+    "bytes": 38354,
+    "sha256": "640d3cfca02d9f9b785bc4fd0216a18b452bdafcfb7b930a3b1cbbdfebd26da4",
+    "mtime_utc": "2026-10-05T09:50:36.961611+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-final-stat.txt",
+    "bytes": 9450,
+    "sha256": "3c55bba223fb814cd3edc48db46376ab6629149db9beb39171735e261099af65",
+    "mtime_utc": "2026-10-05T09:50:36.899648+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-final-status.txt",
+    "bytes": 22765,
+    "sha256": "ec29f13ca6935a9c16470d77805bde00aca15ccbe4c6c3f7f4581ae9877175be",
+    "mtime_utc": "2026-10-05T09:50:35.745300+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/git-preservacao.json",
+    "bytes": 413,
+    "sha256": "13e2010ba92f3bb133145bcb2764216a8a6b312725bff6863d45052e8da6f472",
+    "mtime_utc": "2026-10-05T09:50:36.965609+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/ground-truth-antes.json",
+    "bytes": 15047167,
+    "sha256": "0fdcdd06299245f6dc559d4f66d6a7db0f6d47131a6317398e2010c25208d104",
+    "mtime_utc": "2026-10-05T09:46:42.073989+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/inventario-inicial.json",
+    "bytes": 16971,
+    "sha256": "d299c96165bcf0ef3b820acbb0bb36a91a00df0f2f8aaa9fd5f3669d1b0ad502",
+    "mtime_utc": "2026-10-05T08:49:38.892742+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/matriz-cobertura.json",
+    "bytes": 631348,
+    "sha256": "94f3548ca3d70d2959d294e5df26dd99b2f15bdb04d10bdf4969e4e93afda190",
+    "mtime_utc": "2026-10-05T09:50:35.653300+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/matriz-cobertura.md",
+    "bytes": 197293,
+    "sha256": "574ffa7a98353ea74c3387a42310f7166a7d96bf240b9b5d963ba9678b437de7",
+    "mtime_utc": "2026-10-05T09:50:35.655299+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/matriz-oportunidades-mobilidade.json",
+    "bytes": 11191,
+    "sha256": "336facf5bff29d29f66b173a97d9910a918b8c490e3f83818f331b165f35331e",
+    "mtime_utc": "2026-10-05T09:50:35.656807+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/matriz-oportunidades-mobilidade.md",
+    "bytes": 8342,
+    "sha256": "94cabbd3d90e1cc254ff71aca73da50f3c997cbbe834c7ab1e012224754b8b42",
+    "mtime_utc": "2026-10-05T09:50:35.656807+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/obras-2019-2025.pdf.text.json",
+    "bytes": 118894,
+    "sha256": "27706fca45906a5eb311406c637fce0e8f56a188c89c98d7cae5a730555bccb6",
+    "mtime_utc": "2026-10-05T09:18:03.905498+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/pendencias-continuidade-2026-10-08.json",
+    "bytes": 27232,
+    "sha256": "51de2592c61cb93835af272be5a6685a39870509bf15939f1317eb3ed80f711e",
+    "mtime_utc": "2026-10-08T05:58:51.677902+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/pendencias-continuidade-2026-10-08.md",
+    "bytes": 2581,
+    "sha256": "8682441c365ed1dd984988dd283198c68aa3b3303b63b9250b3f6ebd03acd84f",
+    "mtime_utc": "2026-10-08T05:58:51.679051+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/planmob-indicadores.pdf.text.json",
+    "bytes": 24219,
+    "sha256": "2b924144ce577ef8b76d3c90fff0b92e500be547aa79e2ee8cdb8312cbeb0c9e",
+    "mtime_utc": "2026-10-05T09:18:02.090743+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/prompt-continuidade.md",
+    "bytes": 2263,
+    "sha256": "6e8726614434ef1bbd99417f2299aeaff64fa1d351b7f384d6bbdd1e1f04caef",
+    "mtime_utc": "2026-10-05T09:50:37.660162+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/radares.html.texto.json",
+    "bytes": 3924,
+    "sha256": "4cbd080e548fe131d4367f8c55f453dbbacf08123eae9006876d5a6cf790f216",
+    "mtime_utc": "2026-10-05T09:36:55.637529+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/radar_hub_controller.js.before",
+    "bytes": 18339586,
+    "sha256": "d388755b67d4d44b49333231f27cb33c63a9812e9cd60e68a90d785266fbc00d",
+    "mtime_utc": "2026-10-05T08:49:37.744365+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/relatorio-final.md",
+    "bytes": 222131,
+    "sha256": "f1e21c211e853edd41b38cfe603faa3c16c49e96e6a3c74a03d56cb8ed55fb20",
+    "mtime_utc": "2026-10-08T05:57:39.288792+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/resumo-p4.json",
+    "bytes": 1641,
+    "sha256": "654ae0bb34ff09937d476442353d8ab7d7c7c4483b30e0b5d7974c7854e14f6d",
+    "mtime_utc": "2026-10-05T09:50:37.657649+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/revisoes-km.json",
+    "bytes": 36791,
+    "sha256": "7c463468590b92f1ec69b145d285689f9aac7287b0af4e781d1fa50668680d73",
+    "mtime_utc": "2026-10-05T09:19:56.740483+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/snapshot-inicial.json",
+    "bytes": 17956165,
+    "sha256": "5ccc7bc4a62de736ebe52829ca2cd62e57cd122ca46ac583aefa1664913ec712",
+    "mtime_utc": "2026-10-05T08:49:37.723067+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/testes-reproducao.json",
+    "bytes": 936,
+    "sha256": "6282b3fdb2d6d8517685c9664dcc1644d7fc34a1b09ebaf525c5fd215ae9bb2e",
+    "mtime_utc": "2026-10-05T09:48:51.190953+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/testes-runtime.json",
+    "bytes": 223,
+    "sha256": "acf14d28fdafba04fa9dee621a08faf2d9667917bb2b7905e3240be86d7333a6",
+    "mtime_utc": "2026-10-06T19:37:12.519784+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/textos-transporte-extraidos.json",
+    "bytes": 678098,
+    "sha256": "ffab758135e3d3de43ec3884569f49dd71dabf3bfc045536219e935fccee763d",
+    "mtime_utc": "2026-10-05T09:19:56.736030+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/transporte-adaptado.html.texto.json",
+    "bytes": 6706,
+    "sha256": "368b3c77fefb5cf349bf14887722a05737cc1de184b857cf4eca37d59e07af69",
+    "mtime_utc": "2026-10-05T09:36:55.625993+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/transporte-bilhetagem-2013.pdf.text.json",
+    "bytes": 17987,
+    "sha256": "4879b4c02eca685a6dfedd78110e58ccef6b791a74d8ce2bd46626d67b467c37",
+    "mtime_utc": "2026-10-05T08:51:46.155718+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/transporte-bilhetagem-2026.pdf.text.json",
+    "bytes": 22685,
+    "sha256": "24057413c986dcc3557f5a6631452871dec8fd2ff619839bdafaa8b1ea574499",
+    "mtime_utc": "2026-10-05T08:51:45.446140+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/transporte-ipk-2026.pdf.text.json",
+    "bytes": 11269,
+    "sha256": "04a16150b247dad604aedf4ae0d949850fb21d0763cf0bf0117b2413e2027452",
+    "mtime_utc": "2026-10-05T08:51:45.750695+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/transporte-km-2026.pdf.text.json",
+    "bytes": 23014,
+    "sha256": "7e106edac75fed6c269fe61808a690ef4fda6b79351ff77a217434264bb57c72",
+    "mtime_utc": "2026-10-05T08:51:45.678830+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/transporte-linhas-2026.pdf.text.json",
+    "bytes": 16544,
+    "sha256": "07aae7e7e6a6eb9b093a274580e63a5776d41f94684d56482902567b57d231b5",
+    "mtime_utc": "2026-10-05T08:51:45.910483+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_economia_visual/exportacao-series.csv",
+    "bytes": 260752,
+    "sha256": "afae81131758b300859a3b183edbc431e0b2fb6c617a2c496a74e65f364ecb42",
+    "mtime_utc": "2026-10-05T09:48:34.125535+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_economia_visual/exportacao-series.json",
+    "bytes": 411712,
+    "sha256": "00906f0583fd724a925f0839673c39ddac58e819203301983e66bb3c91eba32a",
+    "mtime_utc": "2026-10-05T09:48:34.119015+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_financas_visual/exportacao-verificada.csv",
+    "bytes": 9372860,
+    "sha256": "ee5ef6c43e9ff0d777c65c9e1ee4172bdf1cf409abbe0bd3154a0717e1826e51",
+    "mtime_utc": "2026-10-05T09:48:33.445200+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_financas_visual/exportacao-verificada.json",
+    "bytes": 10497082,
+    "sha256": "dd31b67dbf91d40bb7f8b746feb38b2677803dd801f19e76891b321650495613",
+    "mtime_utc": "2026-10-05T09:48:33.423168+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_meio_ambiente_runtime/exportacao-verificada.csv",
+    "bytes": 4959031,
+    "sha256": "4ef2391b41aa642e070a2997ebda0672261b263cba79a8dd6d9cb40fe86c3b36",
+    "mtime_utc": "2026-10-05T09:48:33.305688+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_meio_ambiente_runtime/exportacao-verificada.json",
+    "bytes": 6280468,
+    "sha256": "4a775a39e7e4d5c7b378ea919ad58502ccee2434ffdb5a139f6f3c8e26503a0b",
+    "mtime_utc": "2026-10-05T09:48:33.290541+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_radar_hub_p0/exportacao-verificada.csv",
+    "bytes": 252918,
+    "sha256": "3ae946b2780e76de6aa673c8f32927917347eeae960bf182a92ce97e94947994",
+    "mtime_utc": "2026-10-06T10:09:12.180667+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_radar_hub_p0/exportacao-verificada.json",
+    "bytes": 323907,
+    "sha256": "977b893cbb481dfde5235e14790ffbd7c613107ca9c5beb1b628dd3c47fbf21e",
+    "mtime_utc": "2026-10-06T10:09:12.175131+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/app.html.before",
+    "bytes": 977226,
+    "sha256": "a12599a755cf04cfa18fcfefdf122a5ea7fac4bd78655fcab0f053d8f2c89a64",
+    "mtime_utc": "2026-10-08T05:57:43.513582+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/git-before-appjs.txt",
+    "bytes": 15008,
+    "sha256": "ef77551d82589c0704c8db33a2fc1181ac99605f87ab831efe0bab511097a8d5",
+    "mtime_utc": "2026-10-08T05:57:45.475610+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/git-before-stat.txt",
+    "bytes": 813,
+    "sha256": "c69b2273f2990859dfeef0524bd145bbb321ab283c32d49b5699fd82cdff8a21",
+    "mtime_utc": "2026-10-08T05:57:45.202051+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/git-before-status.txt",
+    "bytes": 455,
+    "sha256": "daa70ff083e441ed1ed6b8b71c861abfb8388b4c1994afbc77d088244c7ddd79",
+    "mtime_utc": "2026-10-08T05:57:43.691914+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/inventario-inicial.json",
+    "bytes": 22531,
+    "sha256": "fbe7ebb99f2e3c8766dd1c7baa2f4f7a6542feb904a2e74b289f383c6e64f4fb",
+    "mtime_utc": "2026-10-08T05:57:43.511570+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/radar_hub_controller.js.before",
+    "bytes": 22545803,
+    "sha256": "fb0bf94aa1117c51c0f01ed7c92db312778560d411cc6a71b578e502408964ec",
+    "mtime_utc": "2026-10-08T05:57:43.541763+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/runtime-educacao-inicial.js",
+    "bytes": 9921,
+    "sha256": "7b97f22e2c66ca5a3f6446770f545db61ad51fbd19b2c8b28512eeb1eb9405c4",
+    "mtime_utc": "2026-10-08T06:00:03.935264+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/snapshot-inicial.json",
+    "bytes": 35677194,
+    "sha256": "e4a95aa8efbeb24a54ccc81b13879b55767d8b4cec66b49116fcb080c649eb60",
+    "mtime_utc": "2026-10-08T05:57:43.500534+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-educacao/ui-educacao-inicial.html",
+    "bytes": 8227,
+    "sha256": "76eb058db8585fdcfda6e97fd51d6b37c6fff7849e8c58f974b5d4022b1211cb",
+    "mtime_utc": "2026-10-08T06:00:03.949779+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-saude/antes-depois.md",
+    "bytes": 858,
+    "sha256": "a465e6fbfbbc4d4dc928141addf66b376727a52c9b04d39248a03284a0cad2b8",
+    "mtime_utc": "2026-10-06T14:23:33.077439+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-saude/matriz-cobertura.md",
+    "bytes": 750,
+    "sha256": "ddeee58b9554177f678a1b70ce6f8190bf4f8741b96cd88074fc95b11accc73b",
+    "mtime_utc": "2026-10-06T14:23:33.078440+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-saude/matriz-oportunidades.md",
+    "bytes": 411,
+    "sha256": "eaf29aeb442176b6668c91140c2a5b2072a1167ae9ac347dd0054b7f680aca38",
+    "mtime_utc": "2026-10-06T14:23:33.080443+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p5-saude/relatorio-final.md",
+    "bytes": 2251,
+    "sha256": "be26d68294b1151730461e20b18247597fbd5075327491512fcc07d97117d0a3",
+    "mtime_utc": "2026-10-06T14:23:33.076445+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p6-seguranca/antes-depois.md",
+    "bytes": 791,
+    "sha256": "9c2587f788c7400cda125bdfabaaef49804951c2454c788f5bbe9e57b02c19e6",
+    "mtime_utc": "2026-10-06T14:23:33.081441+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p6-seguranca/matriz-cobertura.md",
+    "bytes": 621,
+    "sha256": "e1199b6037176280d790606c4b50de6120009cd1359b99862e3c80dd6d3a3440",
+    "mtime_utc": "2026-10-06T14:23:33.082954+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p6-seguranca/matriz-oportunidades.md",
+    "bytes": 291,
+    "sha256": "c3695f337ad820afc7886e27c576fa4f0f4a6285b8682ad52810e92ba146108c",
+    "mtime_utc": "2026-10-06T14:23:33.083963+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p6-seguranca/relatorio-final.md",
+    "bytes": 1604,
+    "sha256": "778de11942266fbf475b233063226bf83f8908e5df51e53ea350c993b2d81904",
+    "mtime_utc": "2026-10-06T14:23:33.081441+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p7-demografia/antes-depois.md",
+    "bytes": 4070,
+    "sha256": "6a005165cbb98f1dd2a9329f66a6eee678cb6fe6a3ae71db46793717f96ca98e",
+    "mtime_utc": "2026-10-06T11:04:42.074296+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p7-demografia/matriz-cobertura.md",
+    "bytes": 2739,
+    "sha256": "4cba51a3daecac1fd0c1305b2c7a039f83db86325d73f7657001eca45c06b7e0",
+    "mtime_utc": "2026-10-06T11:04:54.197909+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p7-demografia/matriz-oportunidades.md",
+    "bytes": 3259,
+    "sha256": "55534ff81f27d32fc1dc7f9685f96e23602bc7e2286e3328253be351ea90e833",
+    "mtime_utc": "2026-10-06T11:05:15.345234+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p7-demografia/relatorio-final.md",
+    "bytes": 6863,
+    "sha256": "2ef29fe3cef7b3d7d7b66869be60754c8bef163438ba19c41c1c0aa14ee8b6a0",
+    "mtime_utc": "2026-10-06T11:04:27.069130+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p8-educacao/antes-depois.md",
+    "bytes": 2840,
+    "sha256": "0a1485cfda9f76662ea367c4ea45d9097e671af1525413ba09647eeed8c87b06",
+    "mtime_utc": "2026-10-06T11:06:01.061793+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p8-educacao/matriz-cobertura.md",
+    "bytes": 1857,
+    "sha256": "a0a0b9f011f1b3ab19084ac4337f73b8bde70459bbaaa45eb7b6e4269421de1c",
+    "mtime_utc": "2026-10-06T11:06:20.372431+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p8-educacao/matriz-oportunidades.md",
+    "bytes": 2186,
+    "sha256": "5a4dd3db1686589a2b0ed01702784d24707fd348c385e6721312d7a06a42458d",
+    "mtime_utc": "2026-10-06T11:06:32.515350+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/p8-educacao/relatorio-final.md",
+    "bytes": 5183,
+    "sha256": "00661947e31346fce05a754059d9ad28827a083001d929a9139ad0a211aaf1ce",
+    "mtime_utc": "2026-10-06T11:05:45.738635+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/revisao-multiagente/matriz-confianca-global.md",
+    "bytes": 1033,
+    "sha256": "7b0c2449975c5d7a4df0ae727257c008332deefc9266280fcd55eee0a940433c",
+    "mtime_utc": "2026-10-06T14:23:33.084962+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "docs/dados-publicos-revisao/revisao-multiagente/relatorio-revisao-global.md",
+    "bytes": 2928,
+    "sha256": "9661c601b1d966efb97410e9d531e27fc045c85a2be0544a7411a53b533e8a61",
+    "mtime_utc": "2026-10-06T14:23:33.083963+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/app.html.before",
+    "bytes": 1095888,
+    "sha256": "aa2014513afde9dac3ef9675f7d58f0bfc9adbf5b28726b8af65b2fecf914e66",
+    "mtime_utc": "2026-09-29T21:58:48.906683+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/apply_data.py",
+    "bytes": 17428,
+    "sha256": "9468807fcf28193a3d5a175598b5833fab7d8a0f4de0ada6fb9542dccde1974c",
+    "mtime_utc": "2026-10-03T00:55:37.908816+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/apply_ui.py",
+    "bytes": 14139,
+    "sha256": "a77ec9d072d1ea21a773d90cb098113b13a32abd74f0c4b3a864b5bb391afcbc",
+    "mtime_utc": "2026-10-03T00:55:38.137481+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/audit_report.json.before",
+    "bytes": 54228,
+    "sha256": "8a79dc66d44758bc45d55f6f3c05653c1306ef57a290c9eb939a9d428e61a314",
+    "mtime_utc": "2026-09-28T03:33:35.887198+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/preview.html",
+    "bytes": 45639,
+    "sha256": "e82f028a14533cf435aa3dd06e16d27b36063a17691ee374df68c31306ae93de",
+    "mtime_utc": "2026-10-03T00:57:43.457479+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2024-layout.txt",
+    "bytes": 71601,
+    "sha256": "f4d4d21ac9f15f2fe907f345f97d3a253d84d9cfd9c266356eb3036370d0dfd4",
+    "mtime_utc": "2026-10-03T00:44:07.422913+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2024.pdf",
+    "bytes": 2330981,
+    "sha256": "3eb5ff2345c8f2dd910b3becb860b559db8b5efc54bd0da5fedc03a11e984f3f",
+    "mtime_utc": "2026-10-03T00:43:20.761822+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2024.txt",
+    "bytes": 31639,
+    "sha256": "23ae3adb5fe09328f7582c5e3db147c6bc64f4552f6956df30c6416e4442b80f",
+    "mtime_utc": "2026-10-03T00:43:22.923927+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2025-24.png",
+    "bytes": 159682,
+    "sha256": "6dec66d900c0e548158b25ab7e018fa8f8442b8295689ee5d0f29aec1705896d",
+    "mtime_utc": "2026-10-03T00:46:02.736973+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2025-26.png",
+    "bytes": 132370,
+    "sha256": "1c9713286ac415bcae20899cc0de996c2f4fc48ce33332efeb42b730ec0cbce3",
+    "mtime_utc": "2026-10-03T00:46:02.859438+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2025-27.png",
+    "bytes": 189058,
+    "sha256": "f187d58fc817138d66176bff3850e2046c9588292ed3dfbea1cfbe0c4fc5fb62",
+    "mtime_utc": "2026-10-03T00:46:02.902624+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2025-layout.txt",
+    "bytes": 68954,
+    "sha256": "1dc22242babdc59bcc246317a76e9a4a043c3264224d11094482f8b585065685",
+    "mtime_utc": "2026-10-03T00:44:08.189061+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2025.pdf",
+    "bytes": 3011984,
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+    "mtime_utc": "2026-10-03T00:43:22.934868+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/q2025.txt",
+    "bytes": 30316,
+    "sha256": "e6fe34427199673e6354972fc11a9cb79aa304b404b340b918cf0581f8fe4e70",
+    "mtime_utc": "2026-10-03T00:43:23.589773+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/radar_hub_controller.js.before",
+    "bytes": 481207,
+    "sha256": "315793f7a3c08772433f9ee5e20940e49b5938e03da093eee69028611d37c3ce",
+    "mtime_utc": "2026-09-28T05:23:08.767079+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2024-layout.txt",
+    "bytes": 299312,
+    "sha256": "4f9f1dfc5976e6e8674c28a5ccba86c2c213dcfd1a56c9207a335fa2a87a3527",
+    "mtime_utc": "2026-10-03T00:43:59.371817+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2024.pdf",
+    "bytes": 416946,
+    "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+    "mtime_utc": "2026-10-03T00:43:14.036569+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2024.txt",
+    "bytes": 173825,
+    "sha256": "9a4319d9c0aa50820e1e317efb651b1784f67097f506d8a63b5e567a3196dc65",
+    "mtime_utc": "2026-10-03T00:43:22.932353+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2025-6.png",
+    "bytes": 145550,
+    "sha256": "80d12ae6cd92b7dafb5dfe32d62169189dfa9c4ee1e4d075a550a1add3bf9e4a",
+    "mtime_utc": "2026-10-03T00:46:02.655583+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2025-7.png",
+    "bytes": 156464,
+    "sha256": "7d9ae52c6fdaf24bc44de858835d4dfed87468e35a49f6fa35e273c17ebb7e4a",
+    "mtime_utc": "2026-10-03T00:46:02.684040+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2025-layout.txt",
+    "bytes": 281088,
+    "sha256": "11f49ca197a281c6ba5a10861d78048c4fb2e6acb6d3c133784cebe90a1c134f",
+    "mtime_utc": "2026-10-03T00:44:06.588294+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2025.pdf",
+    "bytes": 467239,
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+    "mtime_utc": "2026-10-03T00:43:13.297412+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/rag2025.txt",
+    "bytes": 175376,
+    "sha256": "e08e3e138c665c24703a883df1c2a66e0287551c22f7222fe8b711d0b0eeb668",
+    "mtime_utc": "2026-10-03T00:43:21.988380+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/sjc_metadata_registry.json.before",
+    "bytes": 107209,
+    "sha256": "4d78e1c560cc3dbb6ec0f9e80fdb5109da564f9d033cd4408d5492add2078244",
+    "mtime_utc": "2026-09-29T16:52:11.894572+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/sjc_open_data_ground_truth.json.before",
+    "bytes": 134379,
+    "sha256": "8e8ba1453e847ca5e2fa496f111937d55321e25c5092d851851321ff4eaefd76",
+    "mtime_utc": "2026-09-29T16:52:11.900525+00:00",
+    "tracked": false,
+    "ignored": true
+  },
+  {
+    "path": "tmp/saude-audit/tables.png",
+    "bytes": 602049,
+    "sha256": "fe5e74a9bd632b2f2c9f2614b5bfb4a92e2b490d3f7c2290705521a04aa70703",
+    "mtime_utc": "2026-10-03T00:46:03.066172+00:00",
+    "tracked": false,
+    "ignored": true
+  }
+]

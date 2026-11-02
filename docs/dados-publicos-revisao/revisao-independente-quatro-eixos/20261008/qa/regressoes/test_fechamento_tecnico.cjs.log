@@ -1,0 +1,4 @@
+PASS fechamento: remoto=false, offline=false; 8 eixos, 42 IDs, 6 combinações de filtros, CSV/JSON, carga concorrente e sem duplicação padrão.
+PASS fechamento: remoto=false, offline=true; 8 eixos, 42 IDs, 6 combinações de filtros, CSV/JSON, carga concorrente e sem duplicação padrão.
+PASS fechamento: remoto=true, offline=false; 8 eixos, 42 IDs, 6 combinações de filtros, CSV/JSON, carga concorrente e sem duplicação padrão.
+PASS fechamento: remoto=true, offline=true; 8 eixos, 42 IDs, 6 combinações de filtros, CSV/JSON, carga concorrente e sem duplicação padrão.

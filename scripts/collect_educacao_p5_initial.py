@@ -1,0 +1,5 @@
+from educacao_p5_core import *
+snapshot()
+for n,u in [('ideb-resultados.html','https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados'),('censo-microdados.html','https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar'),('censo-sinopses.html','https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica'),('indicadores.html','https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/indicadores-educacionais'),('saeb-resultados.html','https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb/resultados'),('ibge-escolarizacao.json','https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores/60045/resultados/3549904'),('prefeitura-educacao.html','https://www.sjc.sp.gov.br/secretarias/educacao-e-cidadania/')]:fetch(n,u)
+for f in ['ideb-resultados.html','censo-sinopses.html','indicadores.html','censo-microdados.html']:
+ print(f,[(u,l) for u,l in links(f) if any(t in (u+' '+l).lower() for t in ['.zip','.xls','municip','rendimento','distor','2025','2023','docente','matric'])][:45],flush=True)

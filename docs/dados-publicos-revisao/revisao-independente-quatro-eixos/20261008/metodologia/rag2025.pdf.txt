@@ -1,0 +1,7590 @@
+
+PAGE 1
+Relatório Anual de Gestão 
+2025
+GEORGE LUCAS ZENHA DE TOLEDO 
+Secretário(a) de Saúde
+REPÚBLICA FEDERATIVA DO BRASIL
+ESTADO: SAO PAULO
+MUNICÍPIO: SAO JOSE DOS CAMPOS
+https://digisusgmp.saude.gov.br
+1 de 51
+
+PAGE 2
+Sumário
+1. Identificação
+1.1. Informações Territoriais
+1.2. Secretaria de Saúde
+1.3. Informações da Gestão
+1.4. Fundo de Saúde
+1.5. Plano de Saúde
+1.6. Informações sobre Regionalização
+1.7. Conselho de Saúde
+1.8. Casa Legislativa
+2. Introdução
+3. Dados Demográficos e de Morbimortalidade
+3.1. População estimada por sexo e faixa etária
+3.2. Nascidos Vivos
+3.3. Principais causas de internação por local de residência
+3.4. Mortalidade por grupos de causas
+4. Dados da Produção de Serviços no SUS
+4.1. Produção de Atenção Básica
+4.2. Produção de Urgência e Emergência por Grupo de Procedimentos
+4.3. Produção de Atenção Psicossocial por Forma de Organização
+4.4. Produção de Atenção Ambulatorial Especializada e Hospitalar por Grupo de Procedimentos
+4.5. Produção de Assistência Farmacêutica
+4.6. Produção de Vigilância em Saúde por Grupo de Procedimentos
+5. Rede Física Prestadora de Serviços ao SUS
+5.1. Por tipo de estabelecimento e gestão
+5.2. Por natureza jurídica
+5.3. Consórcios em saúde
+6. Profissionais de Saúde Trabalhando no SUS
+7. Programação Anual de Saúde - PAS
+7.1. Diretrizes, objetivos, metas e indicadores
+8. Indicadores de Pactuação Interfederativa
+9. Execução Orçamentária e Financeira
+9.1. Execução da programação por fonte de recurso, subfunção e categoria econômica
+9.2. Indicadores financeiros
+9.3. Relatório Resumido da Execução Orçamentária (RREO)
+9.4. Execução orçamentária e financeira de recursos federais transferidos fundo a fundo, segundo bloco de financiamento e programa de trabalho
+9.5. Relatório de Execução de Recursos Repassados por Emenda Parlamentar
+10. Auditorias
+11. Análises e Considerações Gerais
+12. Recomendações para o Próximo Exercício
+https://digisusgmp.saude.gov.br
+2 de 51
+
+PAGE 3
+1. Identificação
+1.1. Informações Territoriais
+UF
+SP
+Município
+SÃO JOSÉ DOS CAMPOS
+Região de Saúde
+Alto Vale do Paraíba
+Área
+1.099,61 Km²
+População
+727.078 Hab
+Densidade Populacional
+662 Hab/Km²
+Fonte: Departamento de Informática do SUS (DATASUS)
+ 
+Data da consulta: 13/05/2026
+1 
+.2. Secretaria de Saúde
+Nome do Órgão
+SECRETARIA MUNICIPAL DE SAUDE DE SAO JOSE DOS CAMPOS
+Número CNES
+6427464
+CNPJ
+A informação não foi identificada na base de dados
+CNPJ da Mantenedora
+46643466000106
+Endereço
+RUA OBIDOS 140
+Email
+saude@sjc.sp.gov.br
+Telefone
+12 32121200
+Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
+ 
+Data da consulta: 13/05/2026
+1 
+.3. Informações da Gestão
+Prefeito(a)
+ANDERSON FARIAS FERREIRA
+Secretário(a) de Saúde 
+cadastrado
+no período
+GEORGE LUCAS ZENHA DE TOLEDO
+E-mail secretário(a)
+saude@sjc.sp.gov.br
+Telefone secretário(a)
+1232121329
+Fonte: Sistema de Informações sobre Orçamentos Públicos em Saúde (SIOPS)
+ 
+Data da consulta: 13/05/2026
+ 
+Período de referência: 01/09/2025 - 31/12/2025
+1.4. Fundo de Saúde
+Instrumento de criação
+LEI
+Data de criação
+12/1991
+CNPJ
+12.998.458/0001-60
+Natureza Jurídica
+FUNDO PUBLICO DA ADMINISTRACAO DIRETA MUNICIPAL
+Nome do Gestor do Fundo
+George Lucas Zenha de Toledo
+Fonte: Sistema de Informações sobre Orçamentos Públicos em Saúde (SIOPS)
+ 
+Data da consulta: 13/05/2026
+1.5. Plano de Saúde
+Período do Plano de Saúde
+2022-2025
+Status do Plano
+Aprovado
+Fonte: DIGISUS Gestor - Módulo Planejamento (DIGISUSGMP) - Consulta Online
+ 
+Data da consulta: 04/04/2023
+1.6. Informações sobre Regionalização
+Região de Saúde: Alto Vale do Paraíba
+Município
+Área (Km²)
+População (Hab)
+Densidade
+CAÇAPAVA
+369.907
+100071
+270,53
+IGARATÁ
+293.322
+10984
+37,45
+JACAREÍ
+460.073
+250952
+545,46
+https://digisusgmp.saude.gov.br
+3 de 51
+
+PAGE 4
+JAMBEIRO
+183.758
+6611
+35,98
+MONTEIRO LOBATO
+332.74
+4205
+12,64
+PARAIBUNA
+809.794
+17959
+22,18
+SANTA BRANCA
+275.004
+14219
+51,70
+SÃO JOSÉ DOS CAMPOS
+1099.613
+727078
+661,21
+Fonte: Departamento de Informática do SUS (DATASUS)
+Ano de referência: 2025
+1 
+.7. Conselho de Saúde
+Intrumento Legal de Criação
+LEI
+Endereço
+Rua Óbidos
+E-mail
+Telefone
+Nome do Presidente
+Edvan Ricardo de Sousa
+Número de conselheiros por segmento
+Usuários
+27
+Governo
+10
+Trabalhadores
+14
+Prestadores
+5
+Fonte: Sistema de Informações sobre Orçamentos Públicos em Saúde (SIOPS)
+ 
+Ano de referência:
+1 .8. Casa Legislativa
+Considerações
+O presente Relatório Anual de Gestão tem por objetivo demonstrar os resultados alcançados no período de janeiro à dezembro de 2025. Também, quando
+necessário, apontará possíveis correções ou ajustes visando o cumprimento das metas propostas. Apresenta a Programação Anual de Saúde de 2025 em
+acordo com as diretrizes (eixos) e objetivos estabelecidos no Plano de Saúde 2022-2025. 
+1º RDQA
+Data de Apresentação na Casa Legislativa
+
+2º RDQA
+Data de Apresentação na Casa Legislativa
+
+3º RDQA
+Data de Apresentação na Casa Legislativa
+
+https://digisusgmp.saude.gov.br
+4 de 51
+
+PAGE 5
+2. Introdução
+Análises e Considerações sobre Introdução
+O Relatório Anual de Gestão (RAG) é o instrumento de planejamento do SUS que apresenta os desdobramentos das ações previstas e os resultados
+alcançados com a execução da Programação Anual de Saúde (PAS), apurados com base no conjunto de ações, metas e indicadores e orienta eventuais
+redirecionamentos que se fizerem necessários ao Plano de Saúde (PS) e às programações seguintes, conforme preconiza o item IV do art. 4º da Lei nº
+8.142, de 28 de dezembro de 1990, referenciado também na Lei Complementar nº 141, de 13 de janeiro de 2012. Os eixos/diretrizes que norteiam este
+Relatório Anual de Gestão 2025 foram formalizados no Plano de Saúde 2022-2025 da Secretaria de Saúde de São José dos Campos. 
+https://digisusgmp.saude.gov.br
+5 de 51
+
+PAGE 6
+3. Dados Demográficos e de Morbimortalidade
+A disponibilização dos dados do SINASC, SIM e SIH, no DGMP, depende do prazo de publicação, respectivamente, pelos DAENT/SVSA e DRAC/SAES
+3.1. População estimada por sexo e faixa etária
+Período: 2025
+Faixa Etária
+Masculino
+Feminino
+Total
+0 a 4 anos
+20.870
+19.847
+40.717
+5 a 9 anos
+24.562
+23.292
+47.854
+10 a 14 anos
+25.082
+24.005
+49.087
+15 a 19 anos
+24.222
+23.320
+47.542
+20 a 29 anos
+50.900
+50.263
+101.163
+30 a 39 anos
+53.402
+55.686
+109.088
+40 a 49 anos
+54.955
+59.995
+114.950
+50 a 59 anos
+41.715
+47.258
+88.973
+60 a 69 anos
+31.302
+39.219
+70.521
+70 a 79 anos
+17.885
+23.300
+41.185
+80 anos e mais
+5.963
+10.035
+15.998
+Total
+350.858
+376.220
+727.078
+Fonte: Estimativas preliminares elaboradas pelo Ministério da Saúde/SVS/DASNT/CGIAE (DataSUS/Tabnet)
+ 
+Data da consulta: 13/05/2026.
+3.2. Nascidos Vivos
+Número de nascidos vivos por residência da mãe.
+Unidade Federação
+2021
+2022
+2023
+2024
+SAO JOSE DOS CAMPOS
+8.545
+8.072
+8.090
+7.463
+Fonte: Sistema de Informações sobre Nascidos Vivos (MS/SVS/DASIS/SINASC)
+ 
+Data da consulta: 13/05/2026.
+3.3. Principais causas de internação por local de residência
+Morbidade Hospitalar de residentes, segundo capítulo da CID-10.
+Capítulo CID-10
+2021
+2022
+2023
+2024
+2025
+I. 
+Algumas doenças infecciosas e parasitárias
+3.244
+1.418
+1.299
+2.091
+1.722
+II. 
+Neoplasias (tumores)
+3.527
+3.484
+3.775
+3.673
+3.961
+III. Doenças sangue órgãos hemat e transt imunitár
+332
+324
+360
+416
+415
+IV. 
+Doenças endócrinas nutricionais e metabólicas
+480
+519
+579
+792
+1.017
+V. 
+Transtornos mentais e comportamentais
+664
+739
+805
+846
+1.024
+VI. 
+Doenças do sistema nervoso
+655
+854
+944
+969
+1.054
+VII. Doenças do olho e anexos
+497
+598
+781
+657
+694
+VIII.Doenças do ouvido e da apófise mastóide
+23
+33
+40
+66
+89
+IX. 
+Doenças do aparelho circulatório
+3.525
+4.391
+4.169
+4.701
+5.453
+X. 
+Doenças do aparelho respiratório
+2.433
+3.488
+3.358
+3.190
+2.882
+XI. 
+Doenças do aparelho digestivo
+3.666
+4.177
+4.854
+5.050
+5.818
+XII. Doenças da pele e do tecido subcutâneo
+505
+560
+636
+788
+822
+XIII.Doenças sist osteomuscular e tec conjuntivo
+469
+767
+605
+565
+793
+XIV. Doenças do aparelho geniturinário
+2.416
+2.750
+3.229
+3.256
+3.513
+XV. 
+Gravidez parto e puerpério
+5.275
+5.560
+5.456
+5.053
+5.563
+XVI. Algumas afec originadas no período perinatal
+573
+624
+596
+575
+604
+XVII.Malf cong deformid e anomalias cromossômicas
+252
+281
+323
+403
+346
+XVIII.Sint sinais e achad anorm ex clín e laborat
+410
+468
+552
+597
+789
+XIX. Lesões enven e alg out conseq causas externas
+3.066
+3.439
+3.488
+3.737
+4.158
+https://digisusgmp.saude.gov.br
+6 de 51
+
+PAGE 7
+XX. 
+Causas externas de morbidade e mortalidade
+-
+-
+-
+-
+-
+XXI. Contatos com serviços de saúde
+983
+808
+1.159
+1.313
+1.129
+CID 10ª Revisão não disponível ou não preenchido
+-
+-
+-
+-
+-
+Total
+32.995
+35.282
+37.008
+38.738
+41.846
+Fonte: Sistema de Informações Hospitalares do SUS (SIH/SUS)
+ 
+Data da consulta: 13/05/2026.
+3.4. Mortalidade por grupos de causas
+Mortalidade de residentes, segundo capítulo CID-10
+Capítulo CID-10
+2021
+2022
+2023
+2024
+I. 
+Algumas doenças infecciosas e parasitárias
+1.552
+446
+223
+296
+II. 
+Neoplasias (tumores)
+930
+884
+939
+1.015
+III. Doenças sangue órgãos hemat e transt imunitár
+18
+14
+23
+21
+IV. 
+Doenças endócrinas nutricionais e metabólicas
+255
+403
+344
+414
+V. 
+Transtornos mentais e comportamentais
+80
+124
+117
+128
+VI. 
+Doenças do sistema nervoso
+216
+283
+305
+307
+VII. Doenças do olho e anexos
+-
+-
+-
+-
+VIII.Doenças do ouvido e da apófise mastóide
+1
+1
+2
+2
+IX. 
+Doenças do aparelho circulatório
+1.119
+1.090
+1.147
+1.126
+X. 
+Doenças do aparelho respiratório
+439
+426
+434
+546
+XI. 
+Doenças do aparelho digestivo
+244
+241
+230
+267
+XII. Doenças da pele e do tecido subcutâneo
+26
+39
+30
+43
+XIII.Doenças sist osteomuscular e tec conjuntivo
+18
+41
+38
+32
+XIV. Doenças do aparelho geniturinário
+246
+219
+213
+251
+XV. 
+Gravidez parto e puerpério
+9
+5
+5
+5
+XVI. Algumas afec originadas no período perinatal
+45
+49
+37
+30
+XVII.Malf cong deformid e anomalias cromossômicas
+29
+28
+48
+28
+XVIII.Sint sinais e achad anorm ex clín e laborat
+84
+40
+54
+56
+XIX. Lesões enven e alg out conseq causas externas
+-
+-
+-
+-
+XX. 
+Causas externas de morbidade e mortalidade
+388
+472
+488
+461
+XXI. Contatos com serviços de saúde
+-
+-
+-
+-
+XXII.Códigos para propósitos especiais
+-
+-
+-
+-
+Total
+5.699
+4.805
+4.677
+5.028
+Fonte: Sistema de Informações sobre Mortalidade (MS/SVS/CGIAE/SIM-TABNET)
+ 
+Data da consulta: 13/05/2026.
+Análises e Considerações sobre Dados Demográficos e de Morbimortalidade
+A população estimada reduziu-se de 737.310 (2024) para 727.078 (2025), variação de ¿1,4%, com retração nas faixas 0¿4 e 20¿29 anos e aumento nas
+faixas 70¿79 e 80+, indicando progressão do envelhecimento populacional e menor proporção de jovens.
+Internações hospitalares residenciais aumentaram de 38.738 (2024) para 41.846 (2025), acréscimo de 8,0% (SIH). Os capítulos CID-10 com maiores
+aumentos absolutos foram: aparelho circulatório (+752), aparelho digestivo (+768), doenças endócrinas/metabólicas (+225) e transtornos mentais
+(+178). Também houve incremento em neoplasias e causas externas, sugerindo maior necessidade de atenção especializada e gestão de leitos.
+Observação: os registros de Nascidos Vivos e de Mortalidade para 2025 não estavam disponíveis na base consultada; portanto a análise exclui
+comparações de SINASC e SIM e considera apenas estimativas populacionais e SIH (internações).
+Interpretação técnica e recomendações:
+O padrão (envelhecimento + aumento de internações por circulatório, digestivo, endócrino e neoplasias) indica necessidade de reforço na atenção
+primária para controle de fatores de risco; priorizar programas de detecção precoce e seguimento crônico.
+Planejar capacidade hospitalar orientada às demandas crescentes (especialidades cardiologia, gastroenterologia, endocrinologia, saúde mental e
+oncologia) e ampliar ações de prevenção comunitária
+.
+https://digisusgmp.saude.gov.br
+7 de 51
+
+PAGE 8
+4. Dados da Produção de Serviços no SUS
+A disponibilização dos dados do SIS AB, SIA e SIH, no DGMP, depende do prazo de publicação, respectivamente, pelos DESF/SAPS e DRAC/SAES
+4.1. Produção de Atenção Básica
+Tipo de Produção
+Quantidade
+Visita Domiciliar
+289.298
+Atendimento Individual
+1.285.049
+Procedimento
+2.773.827
+Atendimento Odontológico
+106.780
+Fonte: Sistema de informação em Saúde para a Atenção Básica – SISAB
+4.2. Produção de Urgência e Emergência por Grupo de Procedimentos
+Caráter de atendimento: Urgência
+Grupo procedimento
+Sistema de Informações Ambulatoriais
+Sistema de Informacões Hospitalares
+Qtd. aprovada
+Valor aprovado
+AIH Pagas
+Valor total
+01 Acoes de promocao e prevencao em saude
+338
+-
+-
+-
+02 Procedimentos com finalidade diagnostica
+335.336
+4.346.708,40
+35
+29.357,52
+03 Procedimentos clinicos
+1.030.402
+3.655.573,05
+21.563
+29.868.516,14
+04 Procedimentos cirurgicos
+5.302
+148.395,56
+8.169
+21.217.973,97
+05 Transplantes de orgaos, tecidos e celulas
+-
+-
+32
+126.685,94
+06 Medicamentos
+-
+-
+-
+-
+07 Orteses, proteses e materiais especiais
+-
+-
+-
+-
+08 Acoes complementares da atencao a saude
+-
+-
+-
+-
+09
+Procedimentos para Ofertas de Cuidados Integrados"
+-
+-
+-
+-
+Total
+1.371.378
+8.150.677,01
+29.799
+51.242.533,57
+Fonte: Sistemas de Informações Ambulatoriais do SUS (SIA/SUS) e Sistema de Informações Hospitalares do SUS (SIH/SUS)
+ 
+Data da consulta: 13/05/2026.
+4.3. Produção de Atenção Psicossocial por Forma de Organização
+Sistema de Informações Ambulatoriais
+Forma de Organização
+Qtd. aprovada
+Valor aprovado
+030108 Atendimento/Acompanhamento psicossocial
+131.639
+163.323,23
+Sistema de Informacões Hospitalares
+Forma de Organização
+AIH Pagas
+Valor total
+030317 Tratamento dos transtornos mentais e comportamentais
+1.883
+2.352.556,47
+Fonte: Sistemas de Informações Ambulatoriais do SUS (SIA/SUS) e Sistema de Informações Hospitalares do SUS (SIH/SUS)
+ 
+Data da consulta: 13/05/2026.
+4.4. Produção de Atenção Ambulatorial Especializada e Hospitalar por Grupo de Procedimentos
+Grupo procedimento
+Sistema de Informações Ambulatoriais
+Sistema de Informacões Hospitalares
+Qtd. aprovada
+Valor aprovado
+AIH Pagas
+Valor total
+01 Acoes de promocao e prevencao em saude
+169.396
+25.530,32
+-
+-
+02 Procedimentos com finalidade diagnostica
+6.921.129
+68.272.308,48
+65
+36.240,18
+03 Procedimentos clinicos
+6.150.603
+47.751.718,35
+23.054
+30.504.359,99
+04 Procedimentos cirurgicos
+41.124
+7.576.972,70
+17.078
+35.465.543,19
+05 Transplantes de orgaos, tecidos e celulas
+190
+126.239,76
+53
+621.924,55
+06 Medicamentos
+-
+-
+-
+-
+07 Orteses, proteses e materiais especiais
+62.791
+708.675,31
+-
+-
+https://digisusgmp.saude.gov.br
+8 de 51
+
+PAGE 9
+08 Acoes complementares da atencao a saude
+42.339
+245.068,80
+-
+-
+09
+Procedimentos para Ofertas de Cuidados Integrados"
+3.661
+578.260,00
+-
+-
+Total
+13.391.233
+125.284.773,72
+40.250
+66.628.067,91
+Fonte: Sistema de Informações Ambulatoriais do SUS (SIA/SUS) e Sistema de Informações Hospitalares do SUS 
+(SIH/SUS) 
+Data da consulta: 13/05/2026.
+4.5. Produção de Assistência Farmacêutica
+Esse item refere-se ao componente especializado da assistência farmacêutica, sob gestão da esfera 
+estadual. 
+Portanto, não há produção sob gestão municipal.
+4.6. Produção de Vigilância em Saúde por Grupo de Procedimentos
+Financiamento: Vigilância em Saúde
+Grupo procedimento
+Sistema de Informações Ambulatoriais
+Qtd. aprovada
+Valor aprovado
+01 Acoes de promocao e prevencao em saude
+11.171
+-
+02 Procedimentos com finalidade diagnostica
+35.950
+-
+03 Procedimentos clinicos
+31
+-
+Total
+47.152
+-
+Fonte: Sistemas de Informações Ambulatoriais do SUS (SIA/SUS)
+Data da consulta: 13/05/2026.
+Análises e Considerações sobre Dados da Produção de Serviços no SUS
+A Comparação entres o RAG de 2025 com de 2024 demonstrou que:
+Atenção Básica:
+ visitas domiciliares caíram de 305.308 para 289.298 (¿5,2%), enquanto atendimentos individuais aumentaram de 978.233 para
+1.285.049 (+31,4%) e procedimentos de APS de 1.804.072 para 2.773.827 (+53,7%); atendimentos odontológicos subiram 9% (97.990 ¿ 106.780). Isso
+indica deslocamento do cuidado para unidades e maior atividade ambulatorial, possível ganho de cobertura porém com queda nas visitas domiciliares
+principalmente pela dimunição do efetivo de agentes comunitários de Saúde.
+Urgência/Emergência: 
+expressivo aumento de produção ambulatorial urgente ¿ diagnósticos (106.000 ¿ 335.336) e procedimentos clínicos (163.593 ¿
+1.030.402); procedimentos cirúrgicos ambulatoriais também cresceram (1.656 ¿ 5.302). AIH hospitalares e valores mantiveram pressão significativa sobre
+custos e leitos. O padrão sugere maior procura por urgência ambulatorial e manutenção da demanda por internação.
+Atenção Psicossocial:
+ atendimentos ambulatoriais caíram (141.733 ¿ 131.639, ¿7,2%) enquanto AIH por transtornos mentais aumentaram (1.716 ¿
+1.883; +9,7%) com leve elevação dos gastos hospitalares, sinalizando possível deslocamento de casos à internação ou maior gravidade dos internados.
+Ambulatorial especializada e hospitalar:
+ alto volume de atos diagnósticos e clínicos (SIA total 13,39M em 2025) e aumento de procedimentos
+cirúrgicos e transplantes; impacto financeiro elevado e necessidade de gestão de capacidade especializada. Vigilância em Saúde teve queda (53.447 ¿
+47.152; ¿11,8%), risco para detecção precoce.
+Recomendações
+:
+Fortalecer APS resolutiva (matriciamento, protocolos em cardiometabólico, endocrino e saúde mental) para reduzir encaminhamentos e internações
+evitáveis, inclusão de equipe Emulti para ganhou na prevenção e cuidado integrado
+Otimizar regulação e gestão de leitos, priorizando cirurgias eletivas e fluxo de urgência para reduzir custos e tempo de permanência.
+Recuperar capacidade de vigilância e visitas domiciliares para detecção precoce e redução de eventos que geram internação.
+https://digisusgmp.saude.gov.br
+9 de 51
+
+PAGE 10
+5. Rede Física Prestadora de Serviços ao SUS
+5.1. Por tipo de estabelecimento e gestão
+A disponibilização dos dados do SCNES, no DGMP, depende do prazo de publicação pelo DRAC/SAES.
+Período 12/2025
+Rede física de estabelecimentos de saúde por tipo de estabelecimentos
+Tipo de Estabelecimento
+Dupla
+Estadual
+Municipal
+Total
+HOSPITAL GERAL
+0
+2
+4
+6
+CONSULTORIO ISOLADO
+0
+0
+3
+3
+CENTRAL DE ABASTECIMENTO
+0
+1
+1
+2
+POSTO DE SAUDE
+0
+1
+0
+1
+HOSPITAL ESPECIALIZADO
+0
+1
+2
+3
+UNIDADE MOVEL DE NIVEL PRE-HOSPITALAR NA AREA DE URGENCIA
+0
+0
+9
+9
+HOSPITAL/DIA - ISOLADO
+0
+0
+3
+3
+UNIDADE DE VIGILANCIA EM SAUDE
+0
+1
+1
+2
+PRONTO ATENDIMENTO
+0
+0
+5
+5
+CENTRAL DE REGULACAO DO ACESSO
+0
+0
+1
+1
+POLICLINICA
+0
+0
+14
+14
+CENTRAL DE GESTAO EM SAUDE
+0
+0
+1
+1
+CENTRO DE ATENCAO HEMOTERAPIA E OU HEMATOLOGICA
+0
+0
+1
+1
+CENTRO DE SAUDE/UNIDADE BASICA
+0
+1
+39
+40
+CLINICA/CENTRO DE ESPECIALIDADE
+0
+2
+44
+46
+FARMACIA
+0
+1
+0
+1
+UNIDADE DE APOIO DIAGNOSE E TERAPIA (SADT ISOLADO)
+0
+0
+11
+11
+UNIDADE MISTA
+0
+0
+1
+1
+CENTRO DE ATENCAO PSICOSSOCIAL
+0
+0
+4
+4
+CENTRAL DE REGULACAO MEDICA DAS URGENCIAS
+0
+0
+1
+1
+Total
+0
+10
+145
+155
+Observação: Os dados apresentados referem-se ao número de estabelecimentos de saúde públicos ou prestadores de serviços ao SUS
+ 
+Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
+ 
+Data da consulta: 13/05/2026.
+5.2. Por natureza jurídica
+Período 12/2025
+Rede física de estabelecimentos de saúde por natureza jurídica
+Natureza Jurídica
+Municipal
+Estadual
+Dupla
+Total
+ADMINISTRACAO PUBLICA
+ORGAO PUBLICO DO PODER EXECUTIVO ESTADUAL OU DO DISTRITO FEDERAL
+0
+8
+0
+8
+MUNICIPIO
+80
+0
+0
+80
+FUNDACAO PUBLICA DE DIREITO PRIVADO MUNICIPAL
+1
+0
+0
+1
+ENTIDADES EMPRESARIAIS
+EMPRESARIO (INDIVIDUAL)
+1
+0
+0
+1
+SOCIEDADE EMPRESARIA LIMITADA
+42
+0
+0
+42
+SOCIEDADE SIMPLES LIMITADA
+8
+0
+0
+8
+SOCIEDADE SIMPLES PURA
+1
+0
+0
+1
+ENTIDADES SEM FINS LUCRATIVOS
+FUNDACAO PRIVADA
+1
+0
+0
+1
+ASSOCIACAO PRIVADA
+11
+2
+0
+13
+PESSOAS FISICAS
+Total
+145
+10
+0
+155
+https://digisusgmp.saude.gov.br
+10 de 51
+
+PAGE 11
+Observação: Os dados apresentados referem-se ao número de estabelecimentos de saúde públicos ou prestadores de serviços ao SUS
+ 
+Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
+ 
+Data da consulta: 13/05/2026.
+5.3. Consórcios em saúde
+O ente não está vinculado a consórcio público em saúde
+Análises e Considerações sobre Rede Física Prestadora de Serviços ao SUS
+Em São José dos Campos 
+a configuração da rede manteve-se estável entre 2024 e 2025, com total de 155 estabelecimentos em ambos os anos e
+predominância municipal (145 municipais; 10 estaduais). 
+Distribuição por tipo (pontos principais):
+ O parque de APS permaneceu consolidado ¿ 40 Centros de Saúde/UBS em ambos os anos e presença de
+39 consultórios/postos/consultórios isolados (variação nula), assegurando capilaridade territorial para atenção primária. 
+Mudanças relevantes:
+ Houve ajuste na oferta de serviços especializados ambulatoriais ¿ redução de clínicas/centros de especialidade de 49 para 44
+e compensação por aumento de Policlínicas de 10 para 14, indicando reconfiguração da oferta especializada em direção a unidades com maior
+integração (policlínicas). O número de hospitais gerais, unidades móveis pré¿hospitalares e pronto¿atendimentos manteve¿se estável, assim como a
+quantidade de UBS/centros e SADT isolados (12 ¿ 11 SADT, leve redução).
+Natureza jurídica: 
+A administração municipal continua sendo a base da oferta (81 ¿ 80 estabelecimentos municipais, leve redução de 1), enquanto o
+setor privado empresarial mostra pequena variação (sociedades empresariais limitadas 40 ¿ 42; sociedades simples limitada 9 ¿ 8), mantendo o arranjo
+misto público¿privado para serviços especializados. Não há consórcio público registrado.
+Interpretação: 
+A estabilidade numérica global indica manutenção da capacidade instalada, porém as microvariações (redução de clínicas
+especializadas, aumento de policlínicas, leve queda em SADT) apontam para uma reorganização direcionada à integração e centralização de
+especialidades em unidades policlínicas, possivelmente para otimizar fluxos de referência e ampliar resolutividade. A pequena redução de
+estabelecimentos de natureza municipal (¿1) sugere ajustes administrativos pontuais, sem impacto substantivo na cobertura. 
+Recomendações objetivas:
+Validar distribuição geográfica das alterações (policlínicas + UBS) para garantir equidade territorial e evitar vazios assistenciais, com ampliação de
+unidade básicas de saúde em locais onde a população ja saturou a capacidade da unidade
+Monitorar indicadores de desempenho por estabelecimento (taxa de ocupação hospitalar, tempo de espera por especialidade, produção SIA/SIH)
+para verificar se a reconfiguração melhora resolutividade, utilizando painel de controle unico e municipal.
+Formalizar protocolos de referência/contrarreferência entre policlínicas, SADT e hospitais para aproveitar ganhos de integração e reduzir
+duplicidade de serviços, com a garantia de um prontuario unico e universal, para que não sejam gastos recursos desnecessários ao longo do
+cuidado.
+https://digisusgmp.saude.gov.br
+11 de 51
+
+PAGE 12
+6. Profissionais de Saúde Trabalhando no SUS
+A disponibilização dos dados do SCNES, no DGMP, depende do prazo de publicação pelo DRAC/SAES.
+Período 02/2025
+Postos de trabalho ocupados, por ocupação e forma de contratação
+Adm. do Estabelecimento
+Formas de contratação
+CBOs
+médicos
+CBOs
+enfermeiro
+CBOs (outros) nível
+superior
+CBOs (outros) nível
+médio
+CBOs
+ACS
+Pública (NJ grupo 1)
+Autônomos (0209, 0210)
+81
+1
+1
+5
+0
+Bolsistas (07)
+85
+0
+0
+0
+0
+Estatutários e empregados públicos
+(0101, 0102)
+316
+242
+259
+890
+148
+Intermediados por outra entidade (08)
+1.777
+570
+328
+1.594
+3
+Residentes e estagiários (05, 06)
+174
+4
+4
+0
+0
+Privada (NJ grupos 2, 4 e
+5)
+Autônomos (0209, 0210)
+260
+1
+174
+3
+0
+Bolsistas (07)
+51
+1
+1
+0
+0
+Celetistas (0105)
+1
+26
+33
+160
+0
+Informais (09)
+1
+0
+2
+0
+0
+Intermediados por outra entidade (08)
+3
+0
+0
+0
+0
+Residentes e estagiários (05, 06)
+0
+0
+2
+0
+0
+Sem Fins Lucrativos (NJ
+grupo 3)
+Autônomos (0209, 0210)
+1.131
+0
+79
+2
+0
+Celetistas (0105)
+3
+188
+178
+670
+0
+Informais (09)
+1
+0
+4
+0
+0
+Intermediados por outra entidade (08)
+32
+0
+2
+0
+0
+Residentes e estagiários (05, 06)
+56
+0
+0
+0
+0
+Postos de trabalho ocupados, por Contrato Temporário e Cargos em Comissão
+Adm. do
+Estabelecimento
+Formas de contratação
+CBOs
+médicos
+CBOs
+enfermeiro
+CBOs (outros) nível
+superior
+CBOs (outros)
+nível médio
+CBOs
+ACS
+Pública (NJ grupo 1)
+Contratos temporários e cargos em comissão
+(010301, 010302, 0104)
+1
+2
+28
+0
+0
+Privada (NJ grupos 2, 4
+e 5)
+Contratos temporários e cargos em comissão
+(010301, 010302, 0104)
+0
+1
+1
+5
+0
+Sem Fins Lucrativos (NJ
+grupo 3)
+Contratos temporários e cargos em comissão
+(010301, 010302, 0104)
+2
+0
+0
+0
+0
+Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
+ 
+Data da consulta: 27/05/2026.
+Postos de trabalho ocupados, por ocupação e forma de contratação
+Adm. do Estabelecimento
+Formas de contratação
+2021
+2022
+2023
+2024
+Privada (NJ grupos 2, 4 e 5)
+Autônomos (0209, 0210)
+336
+378
+374
+433
+Celetistas (0105)
+228
+229
+199
+226
+Informais (09)
+4
+2
+2
+2
+Intermediados por outra entidade (08)
+9
+9
+1
+1
+Residentes e estagiários (05, 06)
+0
+0
+5
+2
+Pública (NJ grupo 1)
+Autônomos (0209, 0210)
+88
+65
+76
+112
+Bolsistas (07)
+31
+33
+98
+99
+Estatutários e empregados públicos (0101,
+0102)
+2.517
+2.510
+2.396
+2.393
+Informais (09)
+1
+0
+0
+0
+Intermediados por outra entidade (08)
+5.128
+6.185
+5.715
+6.006
+Residentes e estagiários (05, 06)
+151
+169
+170
+207
+Sem fins lucrativos (NJ grupo 3)
+Autônomos (0209, 0210)
+1.083
+1.183
+1.079
+1.149
+Celetistas (0105)
+954
+1.101
+1.401
+1.512
+Informais (09)
+0
+0
+5
+6
+Intermediados por outra entidade (08)
+2
+23
+22
+32
+https://digisusgmp.saude.gov.br
+12 de 51
+
+PAGE 13
+Residentes e estagiários (05, 06)
+60
+55
+52
+50
+Postos de trabalho ocupados, por Contrato Temporário e Cargos em Comissão
+Adm. do Estabelecimento
+Formas de contratação
+2021
+2022
+2023
+2024
+Privada (NJ grupos 2, 4 e 5)
+Contratos temporários e cargos em
+comissão (010301, 010302, 0104)
+7
+7
+1
+1
+Pública (NJ grupo 1)
+Contratos temporários e cargos em
+comissão (010301, 010302, 0104)
+35
+35
+44
+48
+Sem fins lucrativos (NJ grupo 3)
+Contratos temporários e cargos em
+comissão (010301, 010302, 0104)
+0
+0
+1
+2
+Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
+ 
+Data da consulta: 27/05/2026.
+Análises e Considerações sobre Profissionais de Saúde Trabalhando no SUS
+Em relação aos proﬁssionais de Saúde no SUS de São José dos Campos, entendemos que o quadro de proﬁssionais manteve o padrão misto de vínculos,
+com predominância de postos intermediados por outras entidades e forte presença do setor sem ﬁns lucrativos; observam¿se aumentos modestos em
+autônomos e celetistas no setor privado e crescimento de postos intermediados na gestão pública entre 2023¿2025.
+Composição e mudança relevante:
+ Em 2024 já havia grande contingente intermediado (1.645 médicos; 506 enfermeiros); em 2025 esse contingente
+aumentou para 1.777 médicos e 570 enfermeiros, sinalizando maior terceirização operacional de proﬁssionais de alta qualiﬁcação. Os estatutários
+públicos sofreram leve redução de médicos (331 ¿ 316) enquanto enfermeiros estatutários cresceram (233 ¿ 242), mantendo núcleo público estável,
+porém com transferência de atividades para contratos intermediados. 
+Formas de contratação: 
+Entre 2021¿2025 há elevação consistente de postos intermediados na esfera pública (5.128 ¿ 6.006 em 2024) e crescimento de
+celetistas e autônomos no sem ﬁns lucrativos/privado, o que indica estratégia de ﬂexibilidade de RH para responder à demanda; residentes e estagiários
+também aumentaram (170 ¿ 207), contribuindo para formação e rotatividade. O baixo valor de proﬁssionais aptos nos ultimos concursos públicos afeta
+diretamente tais ações.
+Impactos operacionais e riscos:
+ a dependência crescente de intermediados pode comprometer continuidade, supervisão e padronização clínica, além
+de fragilizar planejamento de carreira e retenção; redução marginal de estatutários médicos exige atenção para capacidade de gestão clínica
+permanente, hoje o medelo de organização social mais o incremento do programa mais médicos afetou diretamente o quadro médico.
+Recomendações:
+Mapear funções críticas hoje atendidas por intermediados e desenhar plano para ampliar vínculos estáveis onde estratégico (reduzir rotatividade em
+serviços-chave).
+Estruturar supervisão e protocolos clínicos obrigatórios para equipes terceirizadas; incluir indicadores de qualidade clínica no contrato.
+Implementar painel mensal de RH (por ocupação, vínculo, turnover, residentes) para planejamento de recrutamento e capacitação alinhado à
+demanda assistencial.
+https://digisusgmp.saude.gov.br
+13 de 51
+
+PAGE 14
+7. Programação Anual de Saúde - PAS
+7.1. Diretrizes, objetivos, metas e indicadores
+DIRETRIZ Nº 1 - Promover acesso e resolutividade das ações e serviços da atenção primária de forma integrada e planejada
+OBJETIVO Nº 1 .1 
+- Utilizar mecanismos que propiciem a ampliação do ACESSO à Atenção Básica
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aumentar a
+abrangência de
+atuação da Atenção
+Primária 
+(CMS
+2019)
+Cobertura
+populacional
+estimada da Atenção
+Primária (APS)
+Percentual
+2021
+45,22
+70,00
+70,00
+Percentual
+58,43
+83,47
+Ação Nº 1 - (1.1.1.1) Contratação por concurso público Médicos para reposição de aposentados/exonerados - INDICADOR: Número de 10
+clínicos, 10 pediatras, 10 gineco-obstetras contratados. - META: 3
+Ação Nº 2 - (1.1.1.2) Manter o credenciamento de equipes de atenção primária (EAP) no Ministério da Saúde (MS 2019) - INDICADOR:
+Número de EAP credenciadas. - META: 60,0%.
+Ação Nº 3 - (1.1.1.3) Ampliação de UBS sob gestão de Organizações Sociais (SMS 2021) - INDICADOR: Número de UBS sob gestão de OS -
+META: 10.
+Ação Nº 4 - (1.1.1.4) Ampliar o horário de atendimento das Unidades Básicas de Saúde SMS - INDICADOR: Número de UBS com horário
+ampliado - META: 34.
+Ação Nº 5 - (1.1.1.5) Monitoramento pelas Equipes dos beneficiários através do E-SAMS - INDICADOR: Proporção de beneficiários
+acompanhados pelas equipes através do E-SAMS - META: 60%.
+Ação Nº 6 - (1.1.1.6) Adequação estrutural das UBS (reformas, construções e amplicações) (SMS) Número de UBS reformadas,
+construídas e/ou ampliadas - META: 20
+2. Aumentar a
+abrangência de
+atuação das
+equipes de
+Estratégia de Saúde
+da Família (MS
+100%) (CMS 2019)
+Cobertura
+populacional
+estimada pelas
+equipes de estratégia
+de saúde da família
+(ESF)
+Percentual
+2021
+24,66
+45,00
+45,00
+Percentual
+41,53
+92,29
+Ação Nº 1 - (1.1.2.1) Ampliar as Equipes de Saúde da Família ESF (MS) - INDICADOR: Número de Equipes de Saúde da Família - META:
+106.
+Ação Nº 2 - (1.1.2.2) Contratar Médicos para ESF (40horas semanais) (MS) - INDICADOR: Contratar médicos de Saúde da Família -
+META:1.
+Ação Nº 3 - (1.1.2.3) Ampliação de UBS com ESF sob a gestão de OS (SMS) - INDICADOR: Número de UBS com ESF sob a gestão de OS -
+META: 8.
+3. Aumentar a
+abrangência de
+atuação das
+equipes de saúde
+de bucal na atenção
+primária (MS 50%)
+(Sispacto 2021)
+Cobertura
+populacional
+estimada de saúde
+bucal na atenção
+primária
+Percentual
+2021
+23,07
+30,00
+30,00
+Percentual
+10,38
+34,60
+Ação Nº 1 - (1.1.3.1) Contratar dentistas para Equipes de Saúde Bucal (ESB) com carga horária de 40h (SMS) - INDICADOR: Número de
+dentistas contratados - META: 46.
+Ação Nº 2 - (1.1.3.2) Contratar Auxiliar em Saúde Bucal (ASB) para Equipes de Saúde Bucal (ESB) com carga horária 40h (MS) -
+INDICADOR: Número de ASB contratados - META: 20.
+Ação Nº 3 - (1.1.1.3) Credenciar as Equipes de Saúde Bucal - Número de equipes homologadas pelo MS - META: 70.
+4. Aumentar a
+abrangência de
+atuação dos
+agentes
+comunitários de
+saúde (MS 100%)
+(MS E-Gestor SUS)
+Cobertura
+populacional
+estimada pelos
+agentes comunitários
+de saúde (ACS)
+Percentual
+2021
+22,61
+42,00
+35,00
+Percentual
+17,77
+50,77
+Ação Nº 1 - (1.1.4.1) Contratação de Agentes Comunitários de Saúde - INDICADOR: Número de ACS - META 424.
+5. Realizar
+monitoramento dos
+beneficiários sociais
+conforme diretrizes
+do Ministério da
+Saúde (Sispacto
+2021)
+Cobertura de
+acompanhamentos
+das
+condicionalidades de
+saúde do Programa
+Bolsa Família (PBF)
+Percentual
+2021
+32,01
+70,00
+70,00
+Percentual
+69,13
+98,76
+https://digisusgmp.saude.gov.br
+14 de 51
+
+PAGE 15
+Ação Nº 1 - (1.1.5.1) Ampliar a coleta de dados, utilizando a transmissão de dados coletados na Atenção Primária através do SAMS -
+INDICADOR: Cobertura de beneficiários acompanhados pelo Programa Auxílio Brasil - META: 70,0%.
+6. Aumentar a
+abrangência de
+atuação de médicos
+e enfermeiros na
+atenção primária
+(PMAQ 2017)
+Proporção de
+atendimentos de
+demanda espontânea
+de médicos e
+enfermeiros na
+atenção básica
+(consultas no dia e
+atendimento de
+urgência)
+Percentual
+2020
+28,50
+40,00
+40,00
+Percentual
+32,32
+80,80
+Ação Nº 1 - (1.1.6.1) Implementar o sistema de agendamento com aumento da proporção de vagas para demanda espontânea das
+consultas médicas - INDICADOR: Proporção de atendimento de demanda espontânea de consulta médica - META 2023: 30,0%.
+Ação Nº 2 - (1.1.6.2) Implementar o sistema de agendamento com aumento da proporção de vagas para demanda espontânea das
+consultas de enfermagem - INDICADOR: Proporção de atendimento de demanda espontânea de consulta de enfermagem - META: 60,0%.
+7. Reduzir a
+Proporção de
+Internações por
+Condições Sensíveis
+à Atenção Básica
+(Sispacto 2015)
+Proporção de
+Internações por
+Condições Sensíveis
+à Atenção Básica
+(ICSAB)
+Percentual
+2020
+22,00
+20,00
+20,00
+Percentual
+20,81
+104,05
+Ação Nº 1 - (1.1.7.1) Ampliar as de Equipes de Saúde da Família - INDICADOR: Número de Equipes de Saúde da Família - META: 106.
+Ação Nº 2 - (1.1.7.2) Implantar o atendimento domiciliar na atenção primária com equipe multidisciplinar (médico, enfermeiro, téc. de
+enf., dentista, aux. em saúde bucal, fisioterapeuta, fonoaudiólogo, nutricionista(SMS) - INDICADOR: Número de Equipes Multidisciplinares
+de atendimento domiciliar - META: 1.
+8. Reduzir o
+absenteísmo em
+consultas médicas
+agendadas na
+atenção primária
+(SMS 2019)
+Proporção de faltas
+em consultas
+médicas agendadas
+na atenção primária
+Percentual
+2020
+15,20
+15,00
+15,00
+Percentual
+15,90
+106,00
+Ação Nº 1 - (1.1.8.1) Utilizar ferramentas virtuais como whatsApp institucional para agendamentos, reagendamento, desmarcações e
+orientações - INDICADOR: Número de unidades que disponibilizam ferramentas virtuais de comunicação - META: 40.
+9. Aumentar o
+acompanhamento
+clínico por
+hipertensão arterial,
+diabete melito e
+obesidade na
+atenção primária
+(CMS 2019)
+Índice de
+atendimentos por
+condição de saúde
+avaliada (hipertensão
+arterial, diabete
+melito e obesidade)
+Índice
+2020
+0,40
+0,40
+0,40
+Índice
+0,70
+175,00
+Ação Nº 1 - (1.1.9.1) Realizar capacitação dos profissionais abordando registro de dados no prontuário eletrônico - INDICADOR: Proporção
+de profissionais médicos e enfermeiros capacitados quanto ao registro de informações no sistema.- META: 100%
+Ação Nº 2 - (1.1.9.2) Criação de relatório de acompanhamento das dcnt (hipertensão, diabetes). - INDICADOR: Quantidade de relatórios
+de acompanhamento entregues - META: 2.
+10. Aumentar o
+acesso ao
+tratamento
+programado em
+odontologia na
+atenção primária
+(PMAQ 2017)
+Cobertura de
+primeira consulta
+odontológica
+programática
+Percentual
+2019
+7,60
+15,00
+15,00
+Percentual
+6,20
+41,33
+Ação Nº 1 - (1.1.10.1) Manter parceria para atendimento das urgências odontológicas para ampliar o número de primeiras consultas
+odontol. programáticas nas UBS (SMS) - INDICADOR: Número de atendimentos de urgência por ano - META: 14.000.
+11. Melhorar a
+saúde bucal por
+meio de ações
+preventivas
+(Sispacto 2015)
+Média da ação
+coletiva de
+escovação dental
+supervisionada
+Percentual
+2019
+1,19
+3,00
+3,00
+Percentual
+0,30
+10,00
+Ação Nº 1 - (1.1.11.1) Ampliar atuação dos agentes comunitários de saúde no desenvolvimento de ações coletivas de escovação
+supervisionada em seu território - INDICADOR: Número de ações por mês por equipe de Saúde da Família - META: 1.
+12. Ampliar o
+acesso à Atenção
+Primária por meio
+do acolhimento
+(CMS 2019)
+Proporção de
+unidades básicas de
+saúde com
+acolhimento
+implantado
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (1.1.12.2) Revisão do Protocolo de Escuta à Demanda Espontânea - INDICADOR: Protocolo revisado - META: 1.
+Ação Nº 2 - (1.1.12.3) Implantar o Trabalho Padronizado (TP) na recepção - INDICADOR: Número de UBS com Trabalho Padronizado (TP)
+na recepção - META: 40.
+https://digisusgmp.saude.gov.br
+15 de 51
+
+PAGE 16
+OBJETIVO Nº 1 .2 
+- Utilizar mecanismos que propiciem a ampliação da RESOLUTIVIDADE da Atenção Básica
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Melhorar a
+resolutividade dos
+serviços
+odontológicos para
+assistência
+individual atenção
+primária (PMAQ
+2017)
+Razão entre
+tratamentos
+concluídos e
+iniciados
+Razão
+2020
+0,82
+1,00
+1,00
+Razão
+0,70
+70,00
+Ação Nº 1 - (1.2.1.1) Aquisição de atendimentos de urgências odontológicas incluindo procedimentos necessários para resolução do
+quadro (SMS 2021) - INDICADOR: Número de atendimentos de urgência por ano - META: 22.000.
+Ação Nº 2 - (1.2.1.2) Contratação de auxiliar de saúde bucal (SMS 2021) - INDICADOR: Contratar 10 auxiliares de saúde bucal com carga
+horária 40h - META: 22.
+2. Melhorar a
+capacidade
+resolutiva da
+atenção primária
+(PMAQ 2017)
+Proporção de
+encaminhamentos
+médicos na atenção
+básica para serviço
+especializado
+Percentual
+29,60
+20,00
+20,00
+Percentual
+29,00
+145,00
+Ação Nº 1 - (1.2.2.1) Ampliar o matriciamento para os profissionais da APS - INDICADOR: Número de unidades que receberam
+matriciamento - META: 40.
+Ação Nº 2 - (1.2.2.2) Implementação da telemedicina através de interconsulta com especialista - INDICADOR: Número de especialidades
+na telemedicina - META: 3.
+3. Revisão da
+territorialização das
+áreas de
+abrangência das
+unidades básicas de
+Saúde e ESF (CMS
+2019)
+Proporção de
+Revisão da
+territorialização das
+áreas de
+abrangêciada das
+UBS e ESF
+Percentual
+2020
+50,00
+100,00
+100,00
+Percentual
+0
+0
+Ação Nº 1 - (1.2.3.1) Atualizar a territorialização das áreas de abrangência das UBS (CMS 2019) - INDICADOR: Unidades com área de
+abrangência atualizada - META: 90,0.
+DIRETRIZ Nº 2 - Promover a ampliação da oferta, do acesso e da atenção dos serviços da atenção secundária.
+OBJETIVO Nº 2 .1 
+- Ampliar o acesso a serviços de diagnóstico de média e alta complexidade no município
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir o Tempo
+de espera por
+consulta médica
+especializada (CMS
+2019)
+Proporção de
+especialidades com
+tempo de espera até
+180 dias
+Percentual
+2020
+86,00
+90,00
+90,00
+Percentual
+69,00
+76,67
+Ação Nº 1 - (2.1.1.1) Ampliar a contratação de médicos especialistas de acordo com a análise da demanda.- INDICADOR: Número de
+médicos especialistas contratados - META: 39..
+Ação Nº 2 - (2.1.1.2) Implantar a Telemedicina nas especialidades médicas - INDICADOR: Número de especialidade médicas com
+Telemedicina implantada - META 2023: 5.
+2. Parametrização
+de todas as
+especialidades (CMS
+2019)
+Proporção de
+questionários
+implantados em
+relação ao total de
+especialidades
+Percentual
+2020
+0,00
+100
+60
+Número
+50,00
+83,33
+Ação Nº 1 - (2.1.2.1) Desenvolver protocolos no sistema SAMS. Obs: responsabilidade Núcleos - INDICADOR: Número de protocolos
+desenvolvidos - META 24.
+OBJETIVO Nº 2 .2 
+- Ampliar o acesso às ações de REABILITAÇÃO das Pessoas com Deficiência
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+https://digisusgmp.saude.gov.br
+16 de 51
+
+PAGE 17
+1. Adequar a
+concessão de
+órteses, próteses
+e materiais
+auxiliares para
+locomoção (CMS
+2019)
+Proporção de cadeiras
+de rodas, órteses,
+próteses e materiais
+auxiliares para
+locomoção
+concedidas
+Número
+2020
+50
+100,00
+100,00
+Percentual
+21,80
+21,80
+Ação Nº 1 - (2.2.1.2) Compra das próteses de membros inferiores e superiores para atender a demanda anual em 10 % - INDICADOR:
+Número de próteses de membros inferiores e superiores comprados para atender a demanda anual em 10% - META: 32.
+Ação Nº 2 - (2.2.1.1) Compra das cadeiras de rodas e de banho para atender a demanda em até 12 meses da data de solicitação (Plano
+de Gestão de Governo) - INDICADOR: Número de cadeiras de rodas e de banho compradas - META: 200.
+Ação Nº 3 - (2.2.1.3) Compra de órteses e equipamentos de apoio à locomoção para atender a demanda em até 2 meses da solicitação
+(SMS 2021) - INDICADOR: Número de órteses e equipamentos de apoio à locomoção para atender a demanda em até 2 meses da
+solicitação - META: 350.
+2. Adequar o
+número
+atendimento em
+fisioterapia (CMS
+2019)
+Número de
+atendimentos
+mensais ofertados
+versus demanda
+Número
+2020
+144.000
+221.708
+221.708
+Número
+225.000,00
+101,48
+Ação Nº 1 - (2.2.2.1) Contratar fisioterapeutas para atender 100% da demanda de pacientes neuropatas infantil e adulto, TEA elegíveis
+para as URs - INDICADOR: Número de fisioterapeutas contratados - META: 5
+3. Ampliar
+atendimentos ao
+Transtorno do
+Espectro Autista
+(TEA) na
+primeira infância
+(SMS 2021)
+Proporção de
+atendimentos
+mensais ofertados
+Transtorno do
+Espectro Autista
+(TEA) na primeira
+infância versus
+demanda
+Percentual
+2021
+30,00
+50,00
+50,00
+Percentual
+12,00
+24,00
+Ação Nº 1 - (2.2.3.1) Contratação de fonoaudiólogos - INDICADOR: Número de fonoaudiólogos contratados - META: 3.
+Ação Nº 2 - (2.2.3.2) Contratação de terapeutas ocupacionais - INDICADOR: Número de terapeutas ocupacionais contratados - META: 1.
+Ação Nº 3 - (2.2.3.3) Contratação de psicólogos - INDICADOR: Número de psicólogos contratados - META: 1.
+Ação Nº 4 - (2.2.3.4) Contratação de assistente social - INDICADOR: Número de assistentes sociais contratados - META: 3
+4. Adequar o
+número de
+sessões de
+fonoaudiologia
+no município
+(SMS 2021)
+Número de sessões
+de fonoaudiologia no
+município versus
+demanda
+Percentual
+2020
+0,00
+70,00
+70,00
+Percentual
+30,00
+42,86
+Ação Nº 1 - (2.2.4.1) Contratação de fonoaudiólogo - item 2.2.3.1 para aumentar o Número de sessões de fonoaudiologia no município -
+INDICADOR: Número de sessões de fonoaudiologia no município - META: 4.000.
+5. Implantar o
+novo Centro de
+Reabilitação
+(CMS 2019 e
+Plano de Gestão
+Governo)
+Construir/reformar o
+Centro de
+Reabilitação
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+60,00
+60,00
+Ação Nº 1 - (2.2.5.1) Construção do Centro de Reabilitação - INDICADOR: Criar o Novo Centro de Reabilitação de Alta complexidade -
+META: 100,0%.
+OBJETIVO Nº 2 .3 
+- Ampliar o acesso e a resolutividade na atenção à SAÚDE MENTAL
+Descrição da
+Meta
+Indicador para
+monitoramento
+e avaliação da
+meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta 2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aumentar a
+resolutividade das
+equipes de
+atenção primária
+em saúde mental
+(CMS 2019 e
+Sispacto 2021)
+Cobertura de
+Centros de
+Atenção
+Psicossocial e
+Ambulatórios
+Taxa
+2020
+0,88
+1,00
+1,00
+Taxa
+1,00
+100,00
+Ação Nº 1 - (2.3.1.3) Transformar o CAPS I SUL em CAPS II (SMS 2021) - INDICADOR: CAPS CPAS II SUL implantado - META: 100,0%.
+2. Aumentar a
+resolutividade das
+equipes de
+atenção primária
+em saúde mental
+(CMS 2019 e
+Sispacto 2021)
+Proporção de
+ações de
+matriciamento
+sistemático
+realizadas por
+CAPS com equipes
+de Atenção Básica
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+https://digisusgmp.saude.gov.br
+17 de 51
+
+PAGE 18
+Ação Nº 1 - ( 2.3.2.1) Capacitação Técnica dos novos profissionais médicos e de enfermagem que ingressarem na APS em relação RAPS
+(SMS 2021) - INDICADOR: Número de novos profissionais médicos e de enfermagem que ingressaram na APS em relação RAPS - META:
+100.
+3. Implantar o
+atendimento em
+Telemedicina de
+Saúde Mental em
+Psiquiatria (CMS
+2019)
+Número de
+interconsultas em
+Psiquiatria
+Número
+2020
+0
+700
+Não
+programada
+Número
+4. Implantar o
+atendimento em
+Telemedicina de
+Saúde Mental em
+Psicologia (CMS
+2019)
+Número de
+interconsultas em
+Psicologia
+Número
+2020
+0
+3.500
+0
+Número
+0
+0
+Ação Nº 1 - (2.3.4.1) Contratar e implantar de Telemedicina de Saúde Mental em Psicologia - INDICADOR: Serviço Contratado e
+implantado - META: 0,0%.
+5. Espaço para
+atender os
+autistas em
+atividades de vida
+diária, com
+atendimentos em
+psicoterapia,
+fonoaudiologia,
+fisioterapia,
+terapia
+ocupacional,
+psiquiatria e
+neurologia
+Proporção do
+Centro de
+Referência ao
+Transtorno do
+Espectro Autista
+(TEA) implantado
+Percentual
+2020
+0,00
+100,00
+20,00
+Percentual
+11,00
+55,00
+Ação Nº 1 - (2.3.5.2) Contratação do serviço em parceria com o GAIA - INDICADOR: Serviço Contratado - META: 100.
+6. Ampliar
+atendimentos de
+portadores de TEA
+da Rede de
+Inclusão ao
+Autista (RIA) (SMS
+2021)
+Proporção do
+Centro de
+Referência ao
+Transtorno do
+Espectro Autista
+(TEA) implantado
+Percentual
+2021
+60,00
+40,00
+30,00
+Percentual
+30,00
+100,00
+Ação Nº 1 - (2.3.6.1) Contratar profissionais para ampliar o atendimento ao autista - INDICADOR: Efetivo do CAPS INFANTIL e ambulatório
+CVV Infantil ampliado - META: 10.
+OBJETIVO Nº 2 .4 
+- Investir no processo de desinstitucionalização dos pacientes moradores de hospitais psiquiátricos em SAÚDE
+MENTAL
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Implantar e
+credenciar
+residências
+terapêuticas para
+pacientes egressos
+de hospital
+psiquiátrico (MS
+2018)
+Número de residências
+terapêuticas
+implantadas e
+credenciadas para
+pacientes egressos de
+hospital psiquiátrico
+Número
+2020
+10
+10
+10
+Número
+8,00
+80,00
+Ação Nº 1 - (2.4.1.1.) Habilitar unidades do Serviço Residencial Terapêutico, tipo I e tipo II (SMS 2021) - INDICADOR: Número de Unidades
+do Serviço Residencial Terapêutico, tipo I e tipo II habilitados - META 7
+DIRETRIZ Nº 3 - Garantir o acesso da população a serviços pré-hospitalares e hospitalares de qualidade
+OBJETIVO Nº 3 .1 
+- Ampliar o acesso aos serviços do Samu
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aperfeiçoar a atenção
+às vítimas de acidentes
+pelas unidades de
+atendimento pré-
+hospitalares móveis 
+(SMS
+2021)
+Número de pessoas
+que foram atendidas
+pela motolância no
+período
+Número
+2020
+0
+1.700.000
+2.700
+Número
+2.853,00
+105,67
+Ação Nº 1 - (3.1.1.1) Educação permanente com foco na qualidade da assistência para equipes (Política Nacional de Educação Permanente -
+MS 2018) - INDICADOR: Percentual de profissionais que realizaram EPS - META: 100%..
+https://digisusgmp.saude.gov.br
+18 de 51
+
+PAGE 19
+Ação Nº 2 - (3.1.1.2.) Implantação da motolância com objetivo de diminuir o tempo do primeiro atendimento casos graves Portaria MS 1.010
+de 21 de maio de 2012 e (SMS) - INDICADOR: Tempo médio de reposta ao atendimento em minutos - META: 18..
+2. Avaliar a satisfação
+dos usuários com os
+serviços do Samu 
+(SMS
+2021)
+Proporção de
+avaliação ótima/boa
+de clientes com os
+serviços do Samu
+Percentual
+2020
+90,00
+90,00
+90,00
+Percentual
+93,60
+104,00
+Ação Nº 1 - (3.1.2.1) Realizar pesquisa com usuários dos serviços do Samu - INDICADOR: Proporção de aprovação dos usuários dos serviços
+do Samu - META: 90.
+OBJETIVO Nº 3 .2 
+- Melhorar a QUALIDADE dos serviços de urgência e emergência
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Avaliar a satisfação
+dos usuários atendidos
+nas unidades de
+atendimento pré-
+hospitalares fixas (SMS
+2021)
+Proporção de
+avaliação boa/muito
+boa de clientes com
+os serviços das
+unidades de
+atendimento pré-
+hospitalares fixas.
+Percentual
+2020
+86,00
+90,00
+90,00
+Percentual
+90,40
+100,44
+Ação Nº 1 - (3.2.1.1) Padronizar os protocolos assistenciais e de segurança do paciente e diretrizes terapêuticas nos agravos de urgência e
+emergência (SMS 2021) - INDICADOR: Número anual de protocolos assistenciais e de diretrizes terapêuticas nos agravos de urgência e
+emergência padronizados - meta: 9.
+2. Implementar Comitê
+Municipal Gestor de
+Urgência e Emergência-
+Grupo Temático Trauma
+(Componentes, reunião
+bimestral, Decreto e
+Regimento) (SMS 2021)
+Número de reuniões
+bimestrais
+Número
+2020
+4
+6
+6
+Número
+3,00
+50,00
+Ação Nº 1 - (3.2.2.1) Identificar principais causas de internação e óbito na urgência e emergência (SMS 2019) - INDICADOR: Fazer relatório
+bimestral - META: 12.
+Ação Nº 2 - (3.2.2.2) Propor ações de prevenção (SMS 2021) - INDICADOR: Proporção de ações de melhoria desencadeadas a partir dos
+dados obtidos do relatório bimestral - META: 50%.
+3. Reduzir os óbitos nas
+internações por infarto
+agudo do miocárdio
+(IAM) (Sispacto 2016)
+Proporção de óbitos
+nas internações por
+infarto agudo do
+miocárdio (IAM) na
+rede municipal
+Percentual
+2020
+12,00
+10,00
+10,00
+Percentual
+6,23
+62,30
+Ação Nº 1 - (3.2.3.1) Manutenção do projeto SPRINT com treinamento e reciclagem da equipe, protocolos e fluxos (Politica Nacional de
+Educação Permanente MS2018 (SMS 2019) 0 INDICADOR: Percentual de profissionais que realizaram EPS - META: 75%.
+OBJETIVO Nº 3 .3 
+- Ampliar o ACOLHIMENTO nas unidades de urgência e emergência
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Implantar e integrar
+o prontuário eletrônico
+na rede de saúde do
+município (SMS 2021)
+Proporção de fases
+implantadas
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+60,00
+60,00
+Ação Nº 1 - (3.3.1.2) Avaliar a adequação da classificação de risco nas unidades fixas de urgência e emergência (SMS 2021) - INDICADOR:
+Proporção de assertividade da classificação de risco segundo protocolo reconhecido - META: 100%.
+2. Avaliar a adequação
+do tempo de chegada
+(em minutos) do
+paciente na
+recepção/classificação
+de risco e atendimento
+inicial do médico (SMS
+2021)
+Proporção de
+pacientes com tempo
+médio para
+atendimento inicial do
+médico desde a
+chegada do paciente
+na
+recepção/calssificação
+de risco até 120
+minutos.
+Percentual
+2021
+80,00
+90,00
+90,00
+Percentual
+90,00
+100,00
+Ação Nº 1 - (3.3.2.1) Monitorar o tempo de atendimento do paciente classificado como verde/azul, desde a recepção (FAA) até o atendimento
+inicial do médico.- INDICADOR: Proporção de atendimento com tempo menor que 120 minutos - META: 90%.
+https://digisusgmp.saude.gov.br
+19 de 51
+
+PAGE 20
+3. Adotar política
+pública para
+atendimento prioritário
+nas UPAs, às pessoas
+vulneráveis (pessoas
+com deficiência,
+idosos, crianças,
+gestantes, lactantes),
+excluindo
+urgência/emergência
+(SMS 2021)
+Nº de políticas e
+rotinas adotadas para
+priorização do
+atendimento às
+pessoas vulneráveis
+Número
+2020
+0
+5
+5
+Número
+5,00
+100,00
+Ação Nº 1 - (3.3.3.1) Adoção de protocolo, rotina e infraestruturas que demonstrem a priorização no atendimento às pessoas vulneráveis nas
+situações não urgentes (SMS 2021) - INDICADOR: Proporção de ADV+SIA+LEP+CAP+DIV realizados - META: 95%.
+OBJETIVO Nº 3 .4 
+- Aperfeiçoar o acesso e a assistência hospitalar no município
+Descrição da Meta
+Indicador para
+monitoramento
+e avaliação da
+meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Ampliar o Hospital
+Municipal com mais leitos
+de UTI e enfermaria para
+oferecer melhor conforto e
+privacidade na enfermaria
+coletiva (Plano de Gestão
+de Governo)
+Número de leitos
+criados por ano
+Número
+2020
+0
+62
+20
+Número
+16,00
+80,00
+Ação Nº 1 - (3.4.1.1) Remanejamento da pediatria do hospital de retaguarda - INDICADOR: Remanejamento da pediatria do hospital de
+retaguarda realizado - META: 100%.
+2. Criação da Central de
+Imagens (Plano de Gestão
+de Governo)
+Proporção de
+implantação da
+Central de
+Imagens
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+0
+Ação Nº 1 - (3.4.2.1) Preparação da estrutura física para instalação dos equipamentos - INDICADOR: Estrutura física concluída e aparelhos de
+TC e RNM instalados - META: 50%.
+3. Manutenção e Ampliação
+do número de enfermeiros
+do Projeto Trainee (SMS
+2021)
+Número de
+enfermeiros no
+Projeto Trainee
+Número
+2020
+0
+30
+30
+Número
+0
+Ação Nº 1 - (3.4.3.1) Estudo de viabilidade de ampliação de vagas para enfermeiro trainee - INDICADOR: Estudo de viabilidade de ampliação
+de vagas para enfermeiro trainee concluído - META: 0%.
+OBJETIVO Nº 3 .5 
+- Manter serviços, leitos e planos de contingência adequados para assistência hospitalar à covid-19
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir a
+letalidade por covid-
+19 (SMS 2021)
+Taxa de letalidade por
+covid-19
+Percentual
+2020
+2,10
+2,00
+2,00
+Percentual
+0,49
+24,50
+Ação Nº 1 - (3.5.1.1) Manutenção do setor COVID com redução de leitos e avaliação periódica de acordo com o comitê (SMS 2021) -
+INDICADOR: Setor COVID com redução de leitos e avaliação periódica de acordo com o comitê mantido - META: 0%.
+2. Avaliar a qualidade
+da atenção aos
+pacientes internados
+por covid-19
+hospitalar (SMS
+2021)
+Taxa de alta curado de
+pacientes internados
+com covid-19 nos
+hospitais do município
+Percentual
+2020
+70,00
+100,00
+Percentual
+94,34
+94,34
+Ação Nº 1 - (3.5.2.1) Identificação dos pontos de criticidade - INDICADOR: Padronizar novos processos de trabalho e revisar existentes -
+META: 100%.
+OBJETIVO Nº 3 .6 
+- Ampliar e melhorar a frota de Transporte Sanitário e aperfeiçoar o fluxo de atendimento
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Adequar o
+Transporte Sanitário
+às necessidades da
+população (CMS
+2019)
+Proporção de
+solicitações por
+Transporte Sanitário
+para paciente acamados
+atendidas
+Percentual
+2020
+80,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (3.6.1.1) Auditar a realização dos exames e consultas agendadas para transporte de pacientes acamados - INDICADOR:
+Proporção de agendamentos solicitados no mês realizados - META: 92.
+https://digisusgmp.saude.gov.br
+20 de 51
+
+PAGE 21
+DIRETRIZ Nº 4 - Reduzir ou controlar a ocorrência de doenças transmissíveis, não transmissíveis e agravos por meio de medidas de
+prevenção, controle
+OBJETIVO Nº 4 .1 
+- Contribuir para o MONITORAMENTO da morbimortalidade por doenças crônicas não transmissíveis (DCNT) e
+redução dos seus fatores risco
+Descrição da Meta
+Indicador para
+monitoramento
+e avaliação da
+meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir a
+mortalidade
+prematura pelas
+doenças crônicas não
+transmissíveis
+(Sispacto 2017)
+Taxa de
+mortalidade
+prematura (de 30
+a 69 anos) pelo
+conjunto das 4
+principais DCNT
+(doenças do
+aparelho
+circulatório,
+câncer, diabetes e
+doenças
+respiratórias
+crônicas)
+Taxa
+2020
+303,79
+270,00
+270,00
+Taxa
+253,11
+93,74
+Ação Nº 1 - (4.1.1.1) Ampliar o Projeto de Hortas Comunitárias nas UBS (SMS 2022) - INDICADOR: Proporção de UBS com Hortas
+Comunitárias - META: 60%.
+Ação Nº 2 - (4.1.1.2) Ampliar o Projeto ALECRIM (atendimento em grupo para crianças e adolescentes com excesso de peso corporal)
+(SMS 2022) - INDICADOR: Proporção de UBS com grupo do Projeto ALECRIM - META: 60,0%.
+Ação Nº 3 - (4.1.1.3) Aumentar a prática de atividade física dos usuários das UBSs e CAPS (SMS 2017) - INDICADOR: Aumentar o número
+de adesões no Projeto Caminhar das UBS e CAPS - META: 2.000.
+Ação Nº 4 - (4.1.1.4) Implementar as ações de educação permanente do Projeto Caminhar junto a Secretaria de Esportes e Qualidade de
+Vida academias mais o Projeto Cidade em Movimento (SMS 2021) - INDICADOR: Manter parceria com Cidade em Movimento (1
+treinamento por Semestre) - META: 1.
+Ação Nº 5 - (4.1.1.5) Ampliar as práticas integrativas e complementares nas Unidades de APS - INDICADOR: Número de Unidades de APS
+com pelo menos 02 modalidades em PICS - META: 28.
+Ação Nº 6 - (4.1.1.6) Ampliação do atendimento de Reiki (SMS 2021) - INDICADOR: Implantar o atendimento de Reiki em mais Unidades
+de saúde - META: 20.
+Ação Nº 7 - (4.1.1.7) Oferecer supervisão e educação permanente aos facilitadores do atendimento Reiki (SMS 2021) - INDICADOR:
+Número de supervisões e educação permanente aos facilitadores do atendimento Reiki - META: 2.
+Ação Nº 8 - (4.1.1.8) Educação permanente com Treinamento Perfumado Nível I e Nível II para facilitadores Liam Gong - INDICADOR:
+Realizar 1 Treinamento Perfumado Nível I e II para facilitadores Liam Gong no 1ºsem - META: 1.
+Ação Nº 9 - (4.1.1.10) Educação permanente aos facilitadores da Shantala (SMS 2021) - INDICADOR: Número de equipes de shantala
+supervisionadas no ano - META: 15.
+Ação Nº 10 - (4.1.1.11) Atendimento com a prestação de serviço voluntário em PICS na modalidade Reiki (SMS 2021) - INDICADOR:
+Número de unidades com atendimento voluntário em PICS na modalidade Reiki - META: 8.
+Ação Nº 11 - (4.1.1.12) Aumentar a captação de pacientes com asma de 02 a 18 anos pelo programa de ASMA em 5% ao ano (SMS 2021)
+- INDICADOR: Número de pacientes de 02 a 18 anos cadastrados no programa ASMA - META : 4.000.
+Ação Nº 12 - (4.1.1.15) Termo de referencia para inserção Da modalidade 
+Musicoterapia para atendimento de crianças de 2 a 5 anos com
+TEA - 300 atendimentos/mês - META 300
+2. Reduzir a
+complicações de
+quedas em idosos
+com 60 e mais anos
+(CMS 2019 e
+Sispacto 2015)
+Taxa de internação
+hospitalar por
+quedas na
+população com 60
+e mais anos (por
+100 mil idosos)
+Taxa
+2020
+40,60
+38,00
+38,00
+Taxa
+57,80
+152,11
+Ação Nº 1 - (4.1.2.1) Retomar o Projeto de Prevenção de Quedas nas UBS (SMS 2021) - INDICADOR: Implementar o programa contra
+quedas em idosos 20 UBS (Cartilha de Prevenção de Quedas em Idosos e Vídeos educativos) - META: 50.
+Ação Nº 2 - (4.1.2.2) Buscar integração com outros equip./secretarias (Esporte-Sasc) - INDICADOR: Número de ações de saúde realizadas
+em parceria com outras secretarias - META: 3.
+3. Aumentar a
+captação e
+monitoramento de
+cadastrados no
+programa de
+hipertensos e
+diabéticos (SMS
+2021)
+Número de
+pacientes
+acompanhados
+pelo programa de
+hipertensos e
+diabéticos
+Número
+2020
+70.286
+87.856
+150.000
+Número
+158.053,00
+105,37
+https://digisusgmp.saude.gov.br
+21 de 51
+
+PAGE 22
+Ação Nº 1 - (4.1.3.1) Aumentar a proporção de pessoas hipertensas acompanhadas com pressão arterial aferida em cada semestre
+(Programa Previne Brasi) - INDICADOR: Proporção de pessoas hipertensas com pressão arterial aferida em cada semestre - META: 50,0%.
+Ação Nº 2 - (4.1.3.2) Aumentar a proporção de diabéticos acompanhados com solicitação de hemoglobina glicada (Previne Brasil) -
+INDICADOR: Proporção de diabéticos com solicitação de hemoglobina glicada - META: 50,0%.
+4. Ampliar a atenção
+aos pacientes com
+demências (Doença
+de Alzheimer e
+outras demências)
+(Plano de Gestão de
+Governo)
+Conclusão da
+construção e
+implantação do
+Centro de
+Referência em
+Doença de
+Alzheimer e outras
+Demências por
+fases de
+implantação
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+0
+0
+Ação Nº 1 - (4.1.4.1) Fortalecimento da educação em saúde da população por meio de campanhas, mídias sociais e materiais específicos
+- INDICADOR: Número de ações ou campanhas de educação em saúde voltadas à pop. ao ano - META:5.
+Ação Nº 2 - (4.1.4.1) Oferecer supervisão e educação permanente aos profissionais envolvidos no tratamento dos pacientes com
+demência - INDICADOR: Número de profissionais treinados ao ano - META: 90..
+5. Ampliar a
+capacidade de
+atenção aos
+pacientes com
+demências (doença
+de Alzheimer e
+outras demências)
+(Plano de Gestão de
+Governo)
+Número de
+pacientes
+monitorados
+Número
+2021
+500
+2.500
+2.500
+Número
+808,00
+32,32
+Ação Nº 1 - (4.1.5.1) Promover a busca ativa de pacientes para monitoramento - INDICADOR: Número de pacientes monitorados com no
+máximo 5 meses de intervalo entre atendimentos e consultas - META: 800.
+6. Aumentar a
+proporção de
+pacientes com tempo
+máximo de 30 dias
+entre a suspeita
+diagnóstica de
+câncer e a realização
+do exame e/ou
+procedimento
+cirúrgico para a
+confirmação do
+diagnóstico
+oncológico (MS-LEI
+Nº 13.896, de 30-10-
+2019)
+Proporção de
+pacientes
+atendidos em
+menos de 30 dias
+entre a suspeita
+diagnóstica de
+câncer e a
+realização do
+exame e/ou
+procedimento
+cirúrgico para a
+confirmação do
+diagnóstico
+oncológico
+Percentual
+2020
+80,00
+90,00
+90,00
+Percentual
+90,00
+100,00
+Ação Nº 1 - (4.1.6.1) Disponibilização de um Centro de Apoio para o diagnóstico cirúrgico dos pacientes com suspeita oncológica - biópsia
+ou cirurgia (CMS 2019) - INDICADOR: Nº de biópsias realizadas em até 30 dias da solicitação para pacientes com suspeita oncológica. -
+META: N/A
+Ação Nº 2 - (4.1.6.3) Fortalecimento das campanhas preventivas por meio de vídeos educativos em sala de espera (SMS 2019) -
+INDICADOR: Elaboração de ao menos 4 vídeos preventivos novos ao ano - META: 5.
+https://digisusgmp.saude.gov.br
+22 de 51
+
+PAGE 23
+7. Aumentar a
+proporção de
+pacientes com tempo
+máximo de 60 dias
+para ter o tratamento
+de doença oncológica
+no SUS. O prazo
+começa a ser
+contado a partir do
+dia em que for
+definido o
+diagnóstico de
+neoplasia maligna,
+com laudo patológico
+Atuação nos fatores
+limitantes atuais
+para aumento da
+propoção de
+pacientes tratados
+em até 60 dias -
+relacionados ao
+tratamento cirúrgico
+e exames de
+estadiamento para
+definição do
+tratamento (MS-Lei
+Nº 12.732, de 22-11-
+2012)
+Proporção de
+pacientes
+atendidos em até
+60 dias para ter o
+tratamento de
+doença oncológica
+no SUS
+Percentual
+2020
+79,49
+100,00
+100,00
+Percentual
+90,00
+90,00
+Ação Nº 1 - (4.1.7.1) Aumentar a oferta de exames até de exames para estadiamento (Resson. Magnética e Cintilografia Óssea) -
+INDICADOR: Credenciamento uma de outra unidade hospitalar para atender a demanda por cirurgia oncológica - META: 50%.
+Ação Nº 2 - (4.1.7.2) Aumentar a capacidade estrutural do H. Pio XII (centro cirúrgico e leitos de UTI) - INDICADOR: Aumento da
+capacidade estrutural do H. Pio XII em centro cirúrgico e leitos de UTI - META: 20%.
+8. Oferecer consulta
+com nutricionista
+para os
+encaminhamentos
+classificados como
+prioridade Muito Alta
+em 30 dias (SMS
+2017)
+Proporção de
+consulta com
+nutricionista para
+os
+encaminhamentos
+classificados como
+prioridade Muito
+Alta em 30 dias
+Percentual
+2020
+42,90
+85,00
+85,00
+Percentual
+77,70
+91,41
+Ação Nº 1 - (4.1.8.1) Ampliar o acesso ao atendimento nutricional (SMS 2021), Aumentar a proporção de UBS com atendimento
+nutricional com a contratação de 4 nutricionistas. META 85
+OBJETIVO Nº 4 .2 
+- Saúde da criança: vigilância da mortalidade infantil e perinatal; atenção à saúde do recém-nascido; atenção à
+promoção e apoio ao aleitamento materno e; atenção ao acompanhamento do crescimento e desenvolvimento
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir a mortalidade
+infantil (menores de 1
+ano de vida) (CMS 2019
+e Sispacto 2021)
+Taxa de mortalidade
+infantil
+Taxa
+2020
+9,35
+9,00
+9,00
+Taxa
+7,65
+85,00
+Ação Nº 1 - (4.2.1.1) Aumentar a prevalência de aleitamento materno exclusivo em menores de 6 meses (SMS 2021) - INDICADOR: Taxa
+de prevalência de aleitamento materno exclusivo em menores de 6 meses - META: 70,0%.
+Ação Nº 2 - (4.2.1.2) I - Garantir proporção de gestantes com pelo menos seis consultas pré-natal realizadas, sendo a 1ª até a 20ª sem.
+de gestação (Programa Previne Brasil 2019) Meta MS: >= 80% - INDICADOR: Proporção de gestantes com pelo menos seis consultas pré-
+natal realizadas, sendo a 1ª até a 20ª semana de gestação - META: 86,0%.
+2. Reduzir a mortalidade
+perinatal (fetal e
+menores de 7 dias de
+vida) (SMS 2021)
+Taxa de mortalidade
+perinatal
+Taxa
+2020
+13,25
+11,00
+11,00
+Taxa
+12,04
+109,45
+Ação Nº 1 - (4.2.2.2) Aumentar o parto normal (%) - INDICADOR: Proporção de parto normal - META: 42,0%.
+Ação Nº 2 - (4.2.2.1) Reduzir a prematuridade (%) (manter ação protocolo implantado de uso de progesterona para prevenção) -
+INDICADOR: Taxa de recém-nascidos prematuros - META: 12,0%.
+Ação Nº 3 - (4.2.2.3) Realizar 2 exames de ultrassom por gestante conforme o protocolo Rede Cegonha. - INDICADOR: Proporção de
+gestantes com 2 ou + exames ultrassonográficos durante a gestação - META: 100,0%.
+OBJETIVO Nº 4 .3 
+- Saúde da Mulher: atenção à saúde reprodutiva; atenção à saúde sexual; atenção ao câncer de mama e de colo do
+útero
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+https://digisusgmp.saude.gov.br
+23 de 51
+
+PAGE 24
+1. Reduzir a
+mortalidade
+materna 
+(CMS
+2019 e Sispacto
+2021)
+Número de óbitos
+maternos
+Número
+2020
+1
+100
+1
+Número
+4,00
+400,00
+Ação Nº 1 - (4.3.1.1) Capacitar as equipes de atendimento pré-natal para melhores práticas - INDICADOR: Proporção de médicos e
+enfermeiros da assistência pré-natal capacitados - META: 100%.
+2. Reduzir a
+gravidez na
+adolescência na
+faixa etária de 10
+a 19 anos
+(Sispacto 2021)
+Proporção de gravidez
+na adolescência de 10 a
+19 anos
+Percentual
+2020
+8,86
+8,10
+7,10
+Percentual
+6,74
+94,93
+Ação Nº 1 - ((4.3.2.1) Colocação de LARCs (contraceptivo reversível de longa duração) em adolescentes - INDICADOR: Proporção de
+adolescentes usuárias do SUS em uso de LARCs - META: 20,0%.
+3. Adequar o
+acesso das
+gestantes aos
+serviços
+odontológicos para
+assistência
+individual
+(Programa Previne
+Brasil) MS: >=
+90%
+III - Proporção de
+gestantes com
+atendimento
+odontológico realizado
+(MS >= 90,00)
+Percentual
+2020
+0,00
+60,00
+60,00
+Percentual
+37,00
+61,67
+Ação Nº 1 - (4.3.3.1) Promover capacitação/ treinamento para equipe (saúde bucal e gerentes) sobre atend. odontológico para gestantes
+- INDICADOR: Uma capacitação para Gerentes e uma capacitação para Equipe Saúde Bucal - META: 2
+4. IV - Aumentar a
+cobertura de
+exame
+citopatológico
+(Programa Previne
+Brasil) Meta MS:
+>= 80%
+IV - Cobertura de exame
+citopatológico
+Percentual
+2020
+0,00
+80,00
+80,00
+Percentual
+26,00
+32,50
+Ação Nº 1 - (4.3.4.1) Matriciamento das unidades para sensibilização de médicos e equipe de enfermagem da necessidade da ampliação
+e registro da coleta do preventivo - INDICADOR: Proporção de unidades que receberam o matriciamento - META: 80%.
+Ação Nº 2 - (4.3.4.2) Aumentar a cobertura de exames patológicos do colo do útero em mulheres de 25 a 64 anos - INDICADOR: Razão de
+exames citopatológicos do colo do útero em mulheres de 25 a 64 anos na população residente de determinado local e a população da
+mesma faixa etária - META: 0,60.
+Ação Nº 3 - (4.3.4.3) Aumentar a oferta de exames preventivos - INDICADOR: Número de mutirões de coleta de preventivo com foco nas
+mulheres de 25 a 64 anos ao ano - META: 12.
+5. Garantir a
+realização de
+exames para sífilis
+e HIV em
+gestantes
+(Programa Previne
+Brasil – MS 2019)
+Proporção de gestantes
+com realização de
+exames para sífilis e
+HIV
+Percentual
+2020
+0,00
+95,00
+95,00
+Percentual
+55,00
+57,89
+Ação Nº 1 - (4.3.5.1) Implantar a carteira digital de pré-natal e vacinação para facilitar o acompanhamento (SMS 2021) - INDICADOR:
+Implantar a carteira digital de pré-natal e vacinação para facilitar o acompanhamento - META: 100,0%.
+6. Aumentar a
+realização de
+exames de
+mamografia de
+rastreamento em
+mulheres de 50 a
+69 anos (Sispacto
+2017)
+Razão de exames de
+mamografia de
+rastreamento realizados
+em mulheres de 50 a
+69 anos na população
+residente de
+determinado local e
+pop. da mesma faixa
+etária.
+Razão
+2020
+0,40
+0,45
+0,45
+Razão
+0,40
+88,89
+Ação Nº 1 - (4.3.6.2) Realizar supervisão do cumprimento do Protocolo de Ações de Detecção Precoce do Câncer de Mama e seguimento
+dos casos através Supervisão permanente dos casos com mamografia alterada Birads 4 e 5 - INDICADOR: Proporção de casos alterados
+supervisionados - META: 100,0%.
+Ação Nº 2 - (4.3.6.1) Supervisão da demanda de exames de mamografia diagnóstica e USG mamas nos casos suspeitos para garantir
+exames de mamografia diagnóstica, mamografia com compressão focal e magnificação e ultrassom de mama para os casos suspeitos -
+INDICADOR: Proporção de casos suspeitos supervisionados - META: 100,0%.
+Ação Nº 3 - (4.3.6.3) Matriciamento das unidades para sensibilização da equipe de saúde quanto à importância da captação das
+mulheres para a realização da mamografia - INDICADOR: Proporção de unidades que receberam o matriciamento - META: 80%.
+OBJETIVO Nº 4 .4 
+- Saúde Bucal – Oferecer atenção especializada em saúde bucal
+https://digisusgmp.saude.gov.br
+24 de 51
+
+PAGE 25
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir a
+demanda
+reprimida das
+especialidades
+odontológicas em
+ENDODONTIA
+com a
+Implantação do
+CEO (CMS 2019)
+Criação do CEO por
+fases de implantação
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (4.4.1.1) Reduzir a demanda de especialidades odontológicas - Endodontia (CMS 2019) - INDICADOR: Número de pacientes
+atendidos em endodontia - META: 1.500.
+Ação Nº 2 - (4.4.1.2) Reduzir a demanda de especialidades odontológicas - Prótese dentária da demanda (3% da pop.) (CMS 2019) -
+INDICADOR: Número de pacientes atendidos com prótese dentária - META: 750.
+2. Implantação do
+PAD (Programa
+de atendimento
+domiciliar)
+Odontológico
+(SMS 2021)
+Número de
+atendimentos
+odontológicos à
+pacientes
+acamados/domiciliados
+Número
+2020
+0
+4
+4
+Número
+4,00
+100,00
+Ação Nº 1 - (4.4.2.1) Garantir o acesso ao tratamento odontológico dos pacientes acamados/domiciliados - INDICADOR: Número de
+atendimentos odontológicos à pacientes acamados/domiciliados - META: 800.
+Ação Nº 2 - (4.4.2.2) Garantir o acesso ao tratamento odontológico dos pacientes acamados/domiciliados - INDICADOR: Número de
+pacientes inscritos no PAD com atendimento odontológico realizado - META: 380.
+3. Implantação da
+Residência
+Uniprofissional
+em Odontologia
+hospitalar
+(pacientes
+internados em
+UTI/Enfermaria)
+(SMS 2021)
+Número de residentes
+em atendimento
+hospitalar para
+pacientes internados
+em UTI/Enfermaria
+Número
+2020
+0
+2
+2
+Número
+0
+0
+Ação Nº 1 - (4.4.3.4) Manter o atendimento odontológico pela equipe de cirurgiões bucomaxilofaciais no HM - INDICADOR: Número de
+pacientes atendidos pela equipe de cirurgiões bucomaxilofaciais no HM - META: 900.
+Ação Nº 2 - (4.4.3.1) Criar o marco legal para implantação Residência Uniprofissional em Odontologia - INDICADOR: Realizar o cadastro
+da Comissão de Residência Multiprofissional no MEC e elaborar o Plano Político Pedagógico - META: 1.
+Ação Nº 3 - (4.4.3.2) Manter o atendimento odontológico beira leito aos pacientes internados no HM - INDICADOR: Número de pacientes
+internados que receberam atendimento odontológico beira leito no HM - META: 650.
+Ação Nº 4 - (4.4.3.3) Manter o atendimento odontológico para pacientes com deficiência no HM - INDICADOR: Número de pacientes com
+deficiência que receberam atendimento odontológico no HM - META: 400.
+OBJETIVO Nº 4 .5 
+- Fortalecer as medidas de vigilância epidemiológica de doenças e agravos de notificação
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aumentar a
+investigação dos
+óbitos de
+mulheres em
+idade fértil (10 a
+49 anos)
+investigados
+(Sispacto 2021)
+MS => 90%
+Proporção de óbitos de
+mulheres em idade
+fértil (10 a 49 anos)
+investigados.
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+98,20
+98,20
+Ação Nº 1 - (4.5.1.1) Capacitar a rede pública e privada (hospitais, UPA e UBS sobre a suspeição diagnóstica precoce da morte materna
+(SMS 2021) - INDICADOR: Realizar um treinamento anual (reciclagem ou capacitação) para toda a rede de saúde suspeição diagnóstica
+precoce da morte materna - META: 1.
+2. Aumentar a
+proporção de
+registro de óbitos
+com causa básica
+definida (Sispacto
+2021) MS =>
+95%
+Proporção de registro
+de óbitos com causa
+básica definida
+Percentual
+2020
+96,83
+95,00
+95,00
+Percentual
+98,80
+104,00
+Ação Nº 1 - (4.5.2.1) Pesquisar possíveis diagnósticos do óbito em todos os óbitos por causa mal definida em prontuários, no SAMS, em
+investigações junto aos familiares e nos serviços médicos (SMS 2021) - INDICADOR: Proporção de óbitos por causas mal definidas
+investigados em prontuários, no SAMS, em investigações junto aos familiares e nos serviços médicos - META: 95,0%.
+https://digisusgmp.saude.gov.br
+25 de 51
+
+PAGE 26
+Ação Nº 2 - (4.5.2.3) Capacitar/sensibilizar membros da comissão de óbitos representante dos hospitais da rede pública e privada para
+preenchimento do atestado de óbito. - INDICADOR: Proporção de membros da comissão de óbitos dos hospitais da rede pública e privada
+para preench. atestado de óbito - META: 100%.
+3. Aumentar a
+proporção de
+casos encerrados
+de doenças de
+notificação
+compulsória
+imediata (DNCI)
+em até 60 dias
+após notificação
+(Sispacto 2021)
+MS =>85%
+Proporção de casos de
+doenças de notificação
+compulsória imediata
+(DNCI) encerrados em
+até 60 dias após
+notificação
+Percentual
+2020
+98,00
+98,00
+98,00
+Percentual
+100,00
+102,04
+Ação Nº 1 - (4.5.3.1) Capacitar a rede pública e privada (hospitais, UPA e UBS) visando a suspeição diagnóstica precoce - INDICADOR:
+Realizar uma capacitação anual para 100% da rede pública e privada sobre o tema visando a suspeição diagnóstica precoce - META: 35.
+4. Reduzir o
+número de casos
+novos de sífilis
+congênita em
+menores de um
+ano (Sispacto
+2021) MS: 0,5 por
+1.000 nascidos
+vivos
+Taxa de incidência de
+sífilis congênita em
+menores de um ano de
+idade (por 1.000
+Nascidos vivos)
+Taxa
+2020
+7,30
+3,00
+3,00
+Taxa
+19,56
+652,00
+Ação Nº 1 - (4.5.4.1) Ampliar serviços com oferta de testagem rápida e testagem convencional (Todos os CAPS e UPA) (SMS (2021) -
+INDICADOR: Número de serviços com oferta de testagem rápida e testagem convencional - META: 65.
+Ação Nº 2 - (4.5.4.2) Convocar UBS onde há diagnóstico de sífilis congênita recente (SMS 2021) para participação das discussões no
+Comitê de Sífilis Congênita. Participação das UBS envolvidas nos casos em todas as reuniões. META 100
+5. Reduzir o
+número de casos
+novos de AIDS em
+menores de 5
+anos (Sispacto
+2021)
+Número de casos novos
+de aids em menores de
+5 anos.
+Número
+2020
+0
+0
+Número
+0
+0
+Ação Nº 1 - (4.5.5.1) Capacitar as maternidades sobre o pré-natal adequado com a testagem rápida no 1º e no 3º trim. e na hora do parto
+e assegurar que todas tenham o kit de redução de danos para o parto (SMS 2021) - INDICADOR: Realizar uma capacitação anual para
+100% das maternidades sobre o pré-natal adequado - META: 6.
+Ação Nº 2 - (4.5.5.2) Sensibilizar e capacitar os agentes comunitários das ESF/ atenção básica sobre Sífilis, HIV e consequências da
+transmissão vertical (TV) (SMS 2021) - INDICADOR: Realizar um evento anual de sensibilização e capacitação dos agentes comunitários
+das ESF/ atenção básica sobre Sífilis , HIV e consequências da transmissão Vertical (TV) - META: 1.
+6. Aumentar a
+cobertura vacinal
+na infância
+(Sispacto 2021)
+MS: 100%
+Proporção de vacinas
+selecionadas do
+Calend. Nac. de
+Vacinação para
+crianças menores de
+dois anos de idade -
+Pentavalente 3ª dose,
+Pneumocóccica 10-
+valente 2ª dose,
+Poliomielite 3ª dose e
+Tríplice viral 1ª dose -
+com cobertura vacinal
+preconizada
+Percentual
+2020
+25,00
+100,00
+100,00
+Percentual
+0
+0
+Ação Nº 1 - (4.5.6.2) Sensibilizar a população em geral sobre a importância da vacinação(SMS 2021) - INDICADOR: Realizar uma
+campanha publicitária anual para sensibilizar a população em geral sobre a importância da vacinação - META: 2.
+Ação Nº 2 - (4.5.6.1) Capacitar e atualizar a rede de saúde pública e privada - serviços de imunização e sala de vacina - INDICADOR:
+Realizar capacitações e atualizar a rede de saúde pública e privada (serviços de imunização e sala de vacina) - 25
+7. V - Aumentar a
+cobertura vacinal
+de poliomielite
+inativada e de
+pentavalente
+(Programa
+Previne Brasil)
+MS: 95%
+V - Cobertura vacinal
+de poliomielite
+inativada e de
+pentavalente
+Percentual
+2020
+50,00
+95,00
+95,00
+Percentual
+85,45
+89,95
+Ação Nº 1 - (4.5.7.1) Elaborar novo Plano de aumento de cobertura vacinal - INDICADOR: Criar um Plano - META: 1.
+8. Aumentar a
+cobertura vacinal
+contra covid-19
+(SMS 2021)
+Cobertura vacinal
+contra covid-19
+Percentual
+2021
+70,00
+90,00
+90,00
+Percentual
+25,23
+28,03
+https://digisusgmp.saude.gov.br
+26 de 51
+
+PAGE 27
+Ação Nº 1 - 4.5.8.1 Sensibilizar a população em geral sobre a importância da Vacinação por campanhas publicitárias (SMS 2021) -
+INDICADOR: Realizar uma campanha publicitária anual para sensibilizar a população em geral sobre a importância da vacinação contra a
+covid-19 - META 1.
+9. Reduzir a
+letalidade por
+infecção pelo
+vírus influenza
+(SMS 2017) Séria
+histórica de 6,0
+Taxa de letalidade por
+infecção pelo vírus
+influenza (por 100
+casos)
+Taxa
+2021
+1,50
+1,50
+1,50
+Taxa
+6,10
+406,67
+Ação Nº 1 - (4.5.9.1) Capacitar a rede pública e privada: hospitais, UPAs e UBS sobre os temas de Vigilância Epidemiológica visando a
+suspeição diagnóstica precoce - INDICADOR: Realizar uma capacitação anual para a toda a rede pública e privada: hospitais, UPAs e UBS
+sobre os temas de Vigilância Epidemiológica visando a suspeição diagnóstica precoce - META: 1.
+Ação Nº 2 - (4.5.9.2) Aumentar a cobertura vacinal contra Influenza - INDICADOR: Cobertura vacinal contra influenza com meta alcançada
+por meio da ação publicidade e de capacitação dos profissionais - META: 90,0%.
+10. Aumentar
+proporção de cura
+de casos novos de
+hanseníase
+(Sispacto 2021)
+MS: 83,5%
+Proporção de cura dos
+casos novos de
+hanseníase
+diagnosticados nos
+anos das coortes
+Percentual
+2020
+99,00
+90,00
+90,00
+Percentual
+100,00
+111,11
+Ação Nº 1 - (4.5.10.1) Capacitar a rede pública e privada (hospitais, UPA e UBS) visando a suspeição diagnóstica precoce da hanseníase
+(SMS 2021) - INDICADOR: Realizar uma capacitação anual para 50% da rede pública e privada sobre diagnóstico precoce da hanseníase -
+META; 1.
+Ação Nº 2 - (4.5.10.2) Manter o fornecimento de cesta básica durante o tratamento da hanseníase como incentivo a adesão e para o
+fortalecimento do organismo doente (SMS) - INDICADOR: Fornecer de cesta básica durante o tratamento da hanseníase para todos os
+pacientes (equivale a 100% da meta) - META: 100,0%.
+Ação Nº 3 - (4.5.10.3) Sensibilizar a população em geral sobre a importância do diagnóstico precoce da hanseníase (SMS) - INDICADOR:
+Realizar uma campanha publicitária anual para sensibilizar a população em geral sobre a importância do diagnóstico precoce da
+hanseníase - META: 1.
+11. Reduzir
+número de casos
+novos de
+Tuberculose
+Número de casos novos
+de tuberculose
+Número
+2020
+150
+130
+130
+Número
+194,00
+149,23
+Ação Nº 1 - (4.5.11.2) Capacitar a rede pública e privada (hospitais, UPA e UBS) visando a suspeição diagnóstica precoce da tuberculose -
+INDICADOR: Realizar uma capacitação anual para 100% da rede pública e privada sobre diagnóstico precoce da tuberculose. META 4.
+Ação Nº 2 - (4.5.11.1) Aumentar a proporção de exames realizados nos contatos de Tuberculose com captação precoce de casos
+primários - INDICADOR: Proporção de exames realizados nos contatos de Tuberculose por meio de capacitação de profissionais e
+sensibilização dos paciente e familiares com ações publicitárias - META: 80,0%.
+Ação Nº 3 - (4.5.11.3) Incentivar busca ativa de casos e avaliação de contatos dos pacientes com Tuberculose - INDICADOR: Realizar uma
+capacitação semestral da rede de At Bas sobre o tema busca ativa de casos e avaliação de contatos de tuberculose - META: 4.
+12. Reduzir a
+mortalidade por
+covid-19
+Taxa de mortalidade
+por covid-19 por 100
+mil hab.
+Taxa
+2020
+77,40
+20,00
+20,00
+Taxa
+1,60
+8,00
+Ação Nº 1 - (4.5.12.1) Monitorar diariamente a taxa de ocupação de leitos públicos e privados de UTI para garantia de suporte adequado
+para o paciente (SMS 2021) - INDICADOR: Proporção de monitorização diária da taxa de ocupação de leitos públicos e privados de UTI -
+META: 100,0%.
+13. Reduzir e
+Aprimorar a
+atenção aos casos
+de violência
+interpessoal e
+autoprovocada do
+município (CMS
+2019 e SS 2019)
+Taxa de mortalidade de
+mulheres por causas
+violentas
+Taxa
+2020
+4,04
+3,00
+1,50
+Taxa
+0,83
+55,33
+Ação Nº 1 - (4.5.13.1) Capacitar a rede pública e privada (hospitais, UPAS e UBS) visando a suspeição precoce da violência contra a
+mulher - INDICADOR: Realizar uma capacitação anual para 50% da rede pública e privada sobre o tema suspeição precoce da violência
+contra a mulher - META: 1.
+OBJETIVO Nº 4 .6 
+- Reduzir formas graves e óbitos (Dengue, Chikungunya, Zika Vírus e Febre Amarela)
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da
+meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir mortalidade
+por arboviroses (dengue,
+chikungunya, zika e febre
+amarela) (SMS 2021)
+Taxa de
+mortalidade por
+arboviroses (por
+1000 mil hab.)
+Taxa
+2020
+0,55
+0,00
+Taxa
+1,23
+0
+Ação Nº 1 - (4.6.1.1) Atender todos os casos de arboviroses notificados - INDICADOR: Proporção de casos atendidos em relação aos casos
+notificados - META: 100%.
+https://digisusgmp.saude.gov.br
+27 de 51
+
+PAGE 28
+Ação Nº 2 - (4.6.1.2) Capacitar a rede pública e privada (hospitais, UPA e UBS) sobre a suspeição diagnóstica precoce das arboviroses -
+INDICADOR: Realizar 2 capacitações anuais para a rede pública e privada sobre a suspeição diagnóstica precoce das arboviroses - META:
+10.
+Ação Nº 3 - (4.6.1.3) Monitorar a circulação viral - INDICADOR: Realizar 2 coletas para monitoramento por semana (cota liberada pela
+SES, podendo ser suspensa por definição deste) - META: 96.
+OBJETIVO Nº 4 .7 
+- Reduzir a transmissão e a incidência das arboviroses urbanas (Dengue, Chikungunya, Zika Vírus e Febre Amarela)
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir incidência de
+arboviroses (dengue,
+chikungunya, zika e febre
+amarela) (SMS 2021)
+Taxa de incidência
+de arboviroses (por
+1000 mil hab.)
+Taxa
+2019
+91,90
+70,00
+70,00
+Taxa
+817,70
+1.168,14
+Ação Nº 1 - (4.7.1.1) Manter a cobertura de imóveis visitados para controle vetorial da dengue (Sispacto 2021) - INDICADOR: Número de
+4 ciclos por ano que atingiram mínimo de 80% de cobertura de imóveis visitados para controle vetorial da dengue (equivale a 100% da
+meta) - META: 100,0%.
+Ação Nº 2 - (4.7.1.2) Acompanhar os níveis de infestação por região e os recipientes positivos predominantes - INDICADOR: Realizar 4
+Avaliações de Densidade Larvária (ADL) no ano (janeiro, abril, julho e outubro) (equivale a 100% da meta) - META: 50,0%.
+Ação Nº 3 - (4.7.1.3) Avaliar o risco de adoecimento da população pelas arboviroses (MS <1,0) - INDICADOR: Índice de Breteau - IB (MS),
+Índice Predial e de Recipientes - IR (SJC) - META: 0,99.
+Ação Nº 4 - (4.7.1.4) Adequar o quadro funcional de agentes de combate de endemias (ACE) conforme Portaria MS 06/2017 (SMS 2021) -
+INDICADOR: Número de 215 ACE no quadro funcional no ano - META: 100,0%.
+OBJETIVO Nº 4 .8 
+- Manter em zero a incidência de Raiva Humana
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Monitorar a
+incidência de casos
+de raiva humana
+(SMS 2021)
+Número de casos
+raiva humana
+Número
+2020
+0
+0
+Número
+0
+0
+Ação Nº 1 - (4.8.1.1) Capacitar as UBS para acomp. dos animais agressores, que geraram acid. por mordedura ou arranhadura, em atend.
+ao Progr. de Raiva Urbana - INDICADOR: Realizar uma capacitação anual para acompanhamento dos animais agressores, que geraram
+acidentes por mordedura ou arranhadura - META: 1.
+Ação Nº 2 - (4.8.1.2) Realizar acompanhamento de cães e gatos agressores durante período de observação (10 dias) - INDICADOR:
+Acompanhamento durante 10 dias de 100% dos cães e gatos envolv. em acid. por mordedura e/ou arranhadura notif. via SINAN e que
+sejam passíveis de obs. - META: 100,0%.
+Ação Nº 3 - (4.8.1.3) Capacitar a rede de saúde (hospitais e UPAS) visando a suspeição diagnóstica precoce - INDICADOR: Realizar uma
+capacitação anual para a rede de saúde (hospitais e UPAS) do município visando a suspeição diagnóstica precoce - META: 1.
+Ação Nº 4 - (4.8.1.4) Realizar a vacinação emergencial e o acompanhamento de cães e gatos contactantes de morcegos - INDICADOR:
+Submeter à vacinação emergencial e realizar o acomp. (conforme preconizado pelo MS) de 100% dos cães e gatos contactantes de
+morcegos notificados à Vig. à Entomológica e Zoonose - META: 100,0%.
+Ação Nº 5 - (4.8.1.5) Sensibilizar a rede de médicos veterinários para envio ao CCZ de amostras para pesquisa do vírus rábico em
+laboratórios credenciados em caso de animais suspeitos em óbito ou acometimento neurológico - INDICADOR: Encaminhamento de
+mailings contendo informativos mensais para os Médicos Veterinários cadastrados na Vigilância Entomológica e Zoonose - META: 3.
+Ação Nº 6 - (4.8.1.6) Realizar campanha informativa para divulgação do posto fixo de vacinação de cães e gatos e alerta sobre acidentes
+antirrábicos envolvendo animais de companhia, de produção, silvestres e morcegos - INDICADOR: Veicular campanha informativa visando
+alertar a população sobre acidentes antirrábicos envolvendo animais de companhia, de produção, silvestres e morcegos e reforçando a
+importância da vacinação e sua disponibilização no posto fixo de vacinação no CCZ - META: 1.
+OBJETIVO Nº 4 .9 
+- Manter em Zero a incidência de Leishmaniose Visceral
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Reduzir a incidência
+de casos de
+leishmaniose visceral
+(SMS 2021)
+Número de casos
+leishmaniose visceral
+Número
+2020
+0
+0
+Número
+0
+0
+Ação Nº 1 - (4.9.1.1) Sensibilizar a rede de médicos veterinários para envio ao CCZ de amostras de animais suspeitos de leishmaniose ou
+oriundos de áreas endêmicas da doença - INDICADOR: Encaminhamento de mailings contendo informativos mensais para os Médicos
+Veterinários cadastrados na Vigilância Entomológica e Zoonose - META: 3.
+Ação Nº 2 - (4.9.1.2) Realizar acompanhamento de cães positivos para leishmaniose - INDICADOR: Acompanhamento de 100% dos cães
+positivos para leishmaniose (a partir de confirmação em laboratório oficial) durante toda a vida do animal - META: 100,0%.
+OBJETIVO Nº 4 .10 
+- Manter em zero número de óbitos por acidente com animais peçonhentos
+https://digisusgmp.saude.gov.br
+28 de 51
+
+PAGE 29
+Descrição da Meta
+Indicador para
+monitoramento
+e avaliação da
+meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Realizar a
+investigação e
+atendimento dos casos
+de acidente
+envolvendo animais
+peçonhentos
+notificados via SINAN
+(SMS 2021)
+Proporção de
+casos atendidos
+em relação aos
+notificados
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (4.10.1.1) Realizar palestras de orientação quanto aos riscos relacionados à fauna sinantrópica e seus principais métodos de
+prevenção para grupos/entidades da sociedade civil - INDICADOR: Realização de 06 palestras para grupos/entidades da sociedade civil.
+META 4
+Ação Nº 2 - (4.10.1.2) Realizar monitoramento de presença de animais peçonhentos nos cemitérios municipais e arredores (SMS 2021) -
+INDICADOR: Realização de uma visita mensal nos cemitérios Padre Rodolfo, Horto da Paz, Colônia Paraíso, Maria Peregrina e Eugênio de
+Melo e de uma visita trimestral ao cemitério de São Francisco Xavier para monitoramento de presença de animais peçonhentos - META:
+108.
+OBJETIVO Nº 4 .11 
+- Aprimorar o marco regulatório e as ações de vigilância sanitária e ambiental
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aferir a
+qualidade da
+água para
+consumo
+humano
+(Comus 2021)
+Percentual de
+conformidade das
+amostras de água para
+consumo humano quanto
+aos parâmetros coliformes
+totais, cloro residual livre e
+turbidez
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+99,78
+99,78
+Ação Nº 1 - (4.11.1.1) Realizar análises em todas as amostras de água para consumo humano quanto aos parâmetros coliformes totais,
+cloro residual livre e turbidez (Sispacto 2021) - INDICADOR: indicador: Proporção de análises em todas as amostras de água para
+consumo humano quanto aos parâmetros coliformes totais, cloro residual livre e turbidez - META: 100,0%.
+Ação Nº 2 - (4.11.1.3) Fiscalizar a qualidade da água junto à empresa responsável pelo sistema de abastecimento de água para consumo
+humano - INDICADOR: Razão de solicitações de ações corretivas para cada caso de não conformidade em relação a cada amostra não
+conforme - META: 0:0.
+2. Intervir no
+menor tempo
+em riscos
+iminentes à
+saúde
+Proporção de atendimentos
+em serviços com
+notificação de suspeita de
+surtos, com demanda
+encaminhada pela VE
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (4.11.2.1) Realizar no mín. 1 insp. sanitária nos serv. de saúde e interesse a saúde de alta complex.: hemoterapia e ind. de
+medic..; serv. de diálise e nefrol; serv. de TC; serv. de diagn. c/uso de rad. ioniz.; serv. de RM; serv. de quimiot.; câmara hiperb.; ativ. de
+repr. hum. assist.; ativ. de atend. Hosp.; ativ. em atend. em PS e ILPI - INDIC: Prop de realiz. de no mín. 6 gr. de ações de Vig. Sanit.
+consid. necess. à todos os mun./ano - META: 100,0%.
+OBJETIVO Nº 4 .12 
+- Contribuir para o controle da morbimortalidade por doenças ocupacionais e acidentes de trabalho
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Promover políticas
+públicas de incentivo
+às condições seguras
+de trabalho para
+reduçã da ocorrência
+de acidentes graves
+Taxa de incidência de
+acidente de trabalho
+grave na PEAO com
+10 e mais anos de
+idade
+Taxa
+2020
+62,31
+50,00
+50,00
+Taxa
+10,22
+20,44
+Ação Nº 1 - (4.12.1.8) Realizar visitas técnicas para avaliação de possível relação entre doença ocupacional e condições de trabalho.
+INDICADOR: Realizar inspeções para análise de fatores de risco, presentes no ambiente de trabalho, que possam ter relação de
+casualidade ao surgimento ou agravamento de doenças. META: 20
+Ação Nº 2 - (4.12.1.1) Conscientizar a empregadores e empregados sobre a prevenção dos acidentes de trabalho, (SMS 2021) -
+INDICADOR: Realizar anualmente evento de conscientização à prevenção dos acidentes de trabalho e sensibilização do tema por
+campanha publicitária - META: 2.
+Ação Nº 3 - (4.12.1.2) Estabelecer a agenda de formação em educação permanente da Rede de Atenção à Saúde para atendimento de
+acidentados do trabalho, estabelecer a agenda de formação em educação em Saúde do Trabalhador - INDICADOR: Capacitar pelo menos
+por ano 25% da rede pública e privada para aprimoramento do acompanhamento e tratamento de agravos e doenças relacionados ao
+trabalho, realização de eventos de educação em saúde do trabalhador para instituições públicas e privadas em SJC - META: 30,0%.
+Ação Nº 4 - (4.12.1.3) Verificar as condições de ambiente de trabalho e segurança dos processos de produção, propondo medidas
+preventivas e corretivas - INDICADOR: Realizar visitas técnicas em Saúde do Trabalhador com embasamento em Ações de controle
+estatístico e levantamento das principais causas de doenças e agravos relacionados ao trabalho em estabelecimentos gerais - META: 40.
+https://digisusgmp.saude.gov.br
+29 de 51
+
+PAGE 30
+Ação Nº 5 - (4.12.1.4) Conhecer as principais causas de acidentes de trabalho graves para subsidiar ações educativas de natureza
+preventivas e corretivas de processos - INDICADOR: Realização de investigação de acidentes do trabalho graves - META: 100%.
+Ação Nº 6 - (4.12.1.5) Realizar inspeções para verificação da exposição a benzeno. INDICADOR: Realizar inspeções em estabelecimentos
+em que haja exposição de trabalhadores ao agente químico benzeno, propondo medidas de caráter preventivo e de controle nos
+ambientes de trabalho
+Ação Nº 7 - (4.12.1.7) Sensibilizar a população trabalhadora e instituições empregadoras sobre a temática da Segurança e Saúde do
+Trabalhador. INDICADOR: Conscientizar a população sobre os serviços prestados pelo CEREST e medidas preventivas a acidentes e
+doenças ocupacionais . META: 3.
+OBJETIVO Nº 4 .13 
+- Implementar Política Pública de Saúde Animal
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta 2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Ampliar
+atendimento
+médico
+veterinário para
+população de
+baixa renda (SMS
+2021)
+Número de
+atendimentos de
+exames clínicos e
+cirurgias animais no
+serviço veterinário
+terceirizado
+Número
+2020
+150
+250
+Não
+programada
+Número
+2. Ampliar
+castrações e
+microchipagem
+de cães e gatos
+(SMS 2021)
+Número de animais
+castrados
+Número
+2020
+6.260
+9.000
+5.000
+Número
+4.700,00
+94,00
+Ação Nº 1 - (4.13.2.1) Ampliar a oferta de dias para castração dos animais de munícipes - INDICADOR: Aumentar em 10% a oferta de dias
+de evento de castração de cães e gatos - META: 50.
+3. Fortalecer a
+Política de Posse
+Responsável no
+munícipio (SMS
+2021)
+Número de
+atendimentos pelo
+canal 156 referente
+a casos de animais
+abandonados e em
+situação de maus
+tratos
+Número
+2020
+256
+120
+500
+Número
+462,00
+92,40
+Ação Nº 1 - (4.13.3.2) Sensibilizar a população sobre o tema de posse responsável, abandono e maus tratos - INDICADOR: Realizar uma
+campanha publicitária anual para sensibilização da população sobre ao tema de posse responsável, abandono e maus tratos META: 1.
+Ação Nº 2 - (4.13.3.3) Sensibilizar o público escolar a partir de 4 anos em parceria com a Secretaria de Educação e Diretoria Regional de
+Ensino (escolas, públicas e privadas) referente ao tema: posse responsável, abandono e maus tratos) - INDICADOR: Realizar uma
+capacitação anual e uma sensibilização semestral para diretores de escolas sobre o tema: posse responsável, abandono e maus tratos -
+META: 1.
+Ação Nº 3 - (4.13.3.4) Incentivar adoção e posse responsável - INDICADOR: Implantar o Programa de Adoção Digital no site da Prefeitura -
+META: 1.
+Ação Nº 4 - (4.13.3.5) Proteger a saúde animal - INDICADOR: Criar Estatuto da Saúde Animal. - META: 1.
+DIRETRIZ Nº 5 - Aperfeiçoar a gestão do SUS visando a garantia do acesso a bens e serviços de saúde equitativos e de qualidade,
+oferecendo a alternativa assistencial mais adequada à necessidade do cidadão
+OBJETIVO Nº 5 .1 
+- Exercer ações regulatórias para oferta de procedimentos ambulatoriais e hospitalares, fundamentadas em
+protocolos técnicos e baseadas na pactuação de referências regional
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Garantir a
+realização de
+auditoria regular ou
+ordinária através do
+Componente
+Municipal de
+Auditoria no SUS
+tanto para serviços
+próprios como
+privados
+(conveniados e
+contratados)
+Proporção de
+precessos auditados
+por competencia de
+execução
+Percentual
+2020
+0,00
+40,00
+40,00
+Percentual
+30,00
+75,00
+Ação Nº 1 - (5.1.1.1) Verificar se as ações e os serv. de saúde estão sendo realizados em conform. com os padrões os crit. estabelecidos.
+Detectar situações de não conform. e aprofundar na verific. e análise. Auditar as estrut., os processos e os resultados - INDICADOR: Duas
+capacitações/treinamentos para a equipe técnica administrativa e médica referente a normativa vigente do Ministério da Saúde - META:
+10%.
+https://digisusgmp.saude.gov.br
+30 de 51
+
+PAGE 31
+2. Reduzir o tempo
+de espera para
+cirurgias eletivas
+(CMS 2019)
+Tempo médio (em
+dias) de espera
+paraexames de
+média e alta
+complexidade
+Número
+2020
+262
+305
+305
+Número
+320,00
+104,92
+Ação Nº 1 - (5.1.2.1) Ampliar a oferta de vagas para Cirurgias Eletivas no HM - INDICADOR: Aumentar no mínimo 20% a oferta de Cir
+Eletivas do HM em relação a 2022 - META: 10,0%.
+Ação Nº 2 - (5.1.2.2) Abertura de licitação para realização de Cirurgias Eletivas na Rede Complementar - INDICADOR: Aumentar no
+mínimo 20% a oferta de Cir Eletivas do Município através da Rede Complementar em relação a 2022 - META: 10,0%.
+3. Reduzir o tempo
+de espera para
+exames de média e
+alta complexidade
+(CMS 2019)
+Tempo médio (em
+dias) de espera
+paraexames de
+média e alta
+complexidade
+Número
+2020
+262
+7.500
+75
+Número
+174,00
+232,00
+Ação Nº 1 - (5.1.3.1) Ampliar Oferta para exames de média e alta complexidade - INDICADOR: Aumentar em até 20% a oferta de exames
+de média e alta complexidade em relação a 2022. META: 25 - META: 20,0%.
+4. Implementar
+protocolos de
+regulação para
+procedimentos de
+média e alta
+complexidade 
+(SMS
+2020)
+Proporção de
+procedimentos de
+média complexidade
+regulados
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (5.1.4.1) Revisão/atualização de protocolos clínicos e diretrizes terapêuticas com base nas normativas do MS e órgão
+reguladores - INDICADOR: - Implantação e treinamentos da equipe técnica e médica da central de regulação ambulatorial e hospitalar -
+META: 90,0%.
+Ação Nº 2 - (5.1.4.2) Aumentar protocolos parametrizados automaticamente no sistema e-SAMS - INDICADOR: Proporção de exames de
+média e alta complexidade parametrizados automaticamente no e-SAMS - META: 50,0%.
+5. Informatizar o
+processo de
+faturamento
+hospitalar e
+ambulatorial, com
+interface entre
+sistemas (SMS
+2020)
+Proporção de
+prestadores/serviços
+ambularial (consulta
+e exames) e
+hospitalar (AIH)
+informatizados
+Percentual
+2020
+0,00
+70,00
+70,00
+Percentual
+50,00
+71,43
+Ação Nº 1 - (5.1.5.1) Atualizar sistema de Faturamento Ambulatorial 100% online - INDICADOR: Modulo de faturamento ambulatorial
+atualizado e integrado ao e-SAMS - META: 50,0%.
+6. Aprimorar o
+sistema (SAMS) de
+regulação hospitalar
+e ambulatorial (SMS
+2020)
+Proporção de
+procedimentos
+informatizados de
+média a alta
+complexidade
+Percentual
+2020
+0,00
+70,00
+70,00
+Percentual
+100,00
+142,86
+Ação Nº 1 - (5.1.6.1) Atualizar sistema de Regulação Ambulatorial e Hospitalar 100% online - INDICADOR: Modulo de Regulação
+atualizado e integrado ao e-SAMS - META: 100,0%.
+7. Garantir que
+todos os
+agendamentos
+solicitados pelos
+pacientes para o
+Programa TFD -
+Tratamento Fora do
+Domicilio, seja
+realizado em
+cumprimento a
+Portaria SAS/MS nº
+55 /1999 e Decreto
+Municipal nº 18881
+de agosto/2021
+(SMS 2020)
+Proporção de
+solicitações por
+processo
+administrativo
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (5.1.7.1) - Manter a oferta de serviços de transportes por fretamento intermunicipal, veículos adequados, seja individual ou
+coletivo, seguindo a legislação sanitária e Código de Trânsito Brasileiro vigentes - INDICADOR: Realizar diariamente a programação e
+roteirização das viagens conforme agendamento efetivado pelos serviços, segundo o fluxo de referência estadual - META: 100,0%.
+DIRETRIZ Nº 6 - Promover ações que garantam e ampliem o acesso da população a medicamentos e insumos estratégicos, com
+qualidade, segurança, eficácia, em tempo oportuno, promovendo seu uso racional
+https://digisusgmp.saude.gov.br
+31 de 51
+
+PAGE 32
+OBJETIVO Nº 6 .1 
+- Qualificar os serviços de Assistência Farmacêutica no município
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aprimorar o
+Sistema
+informatizado de
+Gestão de
+assistência
+farmacêutica (WEB
+Service) (envio de
+dados e
+dispensação) (CMS
+2019) (Comissão
+de Farmácia)
+Proporção de
+conclusão do Sistema
+Informatizado de
+Gestão de Assistência
+Farmacêutica (WEB
+Service) (realizado
+envio de dados)
+Percentual
+2020
+50,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (6.1.1.1) Alimentação automática (Compras e Almoxarifado) no Webservice - META: 100,0%.
+2. Revisão
+periódica da
+padronização de
+medicamentos e
+dos demais
+insumos de saúde
+(SMS 2019)
+(Comissão de
+Farmácia)
+Proporção de
+padronizações de
+medicamentos e dos
+demais insumos de
+saúde realizadas em
+relação às demandas
+por padronização
+aprovadas pela
+Comissão de Farmácia
+e Terapêutica
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (6.1.2.1) Reativação da Comissão de Farmácia - INDICADOR: Comissão de Farmácia nomeada - META:
+Ação Nº 2 - (6.1.2.2) Reunião semestral ou quando houver demanda - INDICADOR: Mínimo de 1 reunião realizada por SEMESTRE - META:
+3. Reduzir o
+número de
+medicamentos e
+materiais em falta
+nas Unidades de
+Saúde (SMS 2021)
+(mínimo de 95%)
+(DAG)
+Proporção semanal de
+itens em falta nas
+unidades de saúde
+Percentual
+2020
+97,00
+95,00
+95,00
+Percentual
+97,99
+103,15
+Ação Nº 1 - (6.1.3.1) Implantação de entrega semanal em até 80% das unidades (Farmácia Lean) - INDICADOR: Logística semanal
+implantada - META:
+4. Implantação de
+entrega semanal
+em até 80% das
+unidades
+(Farmácia Lean)
+(SMS 2021) (DAG)
+Implementação de
+logística semanal em
+45 unidades
+Número
+2021
+20
+40
+45
+Número
+32,00
+71,11
+Ação Nº 1 - (6.1.4.1) Elaboração de cronograma 2022 - INDICADOR: 10 unidades/ano - META: N/A
+5. Implantação de
+serviço de logística
+no Almoxarifado
+da Saúde (SMS
+2021)
+Implementar controle
+de estoque com
+código de barra e
+gestão logistica
+(Consumo médio
+mensal,
+monitoramento de
+estoque, ponto de
+equilibrio, dupla
+conferência po rmeio
+de sistema próprio)
+Percentual
+2020
+0,00
+100,00
+15,00
+Percentual
+100,00
+666,67
+Ação Nº 1 - (6.1.5.1) Elaboração de projeto e orçamento - INDICADOR: Concluir projeto até set/22 - SEM META.
+Ação Nº 2 - (6.1.5.2) Análise e aprovação de projeto (viabilidade) - INDICADOR: Concluir até novembro/22 - SEM META.
+Ação Nº 3 - (6.1.5.3) Implantação parcial do sistema - INDICADOR: Implantação gradativa por setores (Ex: Vacinas, medicam., materiais
+hospital. etc) - SEM META.
+DIRETRIZ Nº 7 - Realizar o Planejamento, a Administração, a Informação e a Comunicação no SUS dentro da necessidade da população e
+seguindo a legislação vigente
+OBJETIVO Nº 7 .1 
+- Realizar o Planejamento, a Administração, a Informação e a Comunicação no SUS dentro da necessidade da
+população e seguindo a legislação vigente
+https://digisusgmp.saude.gov.br
+32 de 51
+
+PAGE 33
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Elaborar e
+aprovar os
+instrumentos de
+planejamento do
+SUS dentro dos
+prazos legais (MS -
+LC 141 13jan2012)
+Proporção de
+instrumentos de
+planejamento do SUS
+elaborados e
+aprovados dentro do
+prazo legal
+Percentual
+2020
+100,00
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (7.1.1.1) Coordenação e validação pela comissão de Instrumentos de Gestão do SUS - INDICADOR: Proporção de instrumentos
+de gestão do SUS validados pela comissão em tempo hábil - META: 100,0%.
+OBJETIVO Nº 7 .2 
+- Alimentação de forma qualificada dos dados (mensal e sistemática) dos Bancos de Dados dos Sistemas Nacionais
+do MS
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Atualizar o
+sistema SAMS
+atendendo as
+diretrizes do
+Ministério da Saúde
+(CMS 2019)
+Proporção de
+atualização do
+sistema SAMS
+atendendo as
+diretrizes do
+Ministério da Saúde
+Percentual
+2020
+40,60
+100,00
+100,00
+Percentual
+66,00
+66,00
+Ação Nº 1 - (7.2.1.1) Implementar os módulos de atenção à saúde - INDICADOR: Proporção de módulos de prontuário do paciente
+implantados - META: 100%.
+2. Integração de
+toda rede de Saúde
+(Pública e
+Contratada)
+Proporção de
+Integração de toda
+rede de Saúde
+(Pública e
+Contratada)
+Percentual
+2020
+20,64
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (7.2.2.1) Implementar o sistema SAMS integrado - INDICADOR: Proporção de comunicação entre os equipamentos de saúde -
+META: 80%.
+3. Implantação de
+ferramentas de
+informação e apoio a
+decisões do gestor
+(CMS 2019)
+Proporção de
+implantação de
+ferramentas de
+informação e apoio a
+decisões versus
+demanda
+Percentual
+2020
+100,00
+100,00
+0,00
+Percentual
+100,00
+0
+Ação Nº 1 - (7.2.3.1) Implantação de ferramentas de gestão de informações - INDICADOR: Proporção de implementação de relatórios por
+Ferramenta de BI - META: 100%
+4. Implantação de
+ferramentas de
+informação em
+saúde para os
+usuários do SUS
+(CMS 2019)
+Número de
+ferramentas de
+informação em
+sáude implantadas
+para os usuários do
+SUS (Saúde na mão
+e Gestão à Vista)
+Número
+2020
+2
+2
+4
+Número
+8,00
+200,00
+Ação Nº 1 - (7.2.4.1) Elaboração de ferramentas para facilidade de informação ao usuário - INDICADOR: Número de ferramentas de
+acesso à informações pelo paciente implantadas - META: 2.
+5. Desenvolvimento
+de Software visando
+a inclusão de
+prestações de
+contas dos
+Contratos de Gestão
+e convênios (DAG)
+Prestações de contas
+mensais
+Percentual
+2020
+0,00
+100,00
+100,00
+Percentual
+0
+0
+Ação Nº 1 - (7.2.5.1) Desenvolvimento de Software - INDICADOR: Prestações de contas mensais - META: 1.
+OBJETIVO Nº 7 .3 
+- Adequação da Infraestrutura de Tecnologia de Informação
+Descrição da
+Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+https://digisusgmp.saude.gov.br
+33 de 51
+
+PAGE 34
+1. Avaliar e
+melhorar a
+estrutura para
+informatização da
+saúde e
+conectividade SMS
+2019)
+Proporção de
+avaliação e melhora
+da estrutura para
+informatização da
+Saúde e
+conectividade
+Percentual
+2020
+19,45
+100,00
+100,00
+Percentual
+100,00
+100,00
+Ação Nº 1 - (7.3.1.1) Avaliar estrutura de conectividade - INDICADOR: Proporção de avaliação de rede e diagnóstico - META: 100%.
+Ação Nº 2 - (7.3.1.2) Aumentar a estrutura de conectividade - INDICADOR: Proporção de ampliação da conectividade em equipamentos
+da saúde - META: 100%.
+DIRETRIZ Nº 8 - Fortalecer o processo de participação social nas instâncias gestoras do SUS
+OBJETIVO Nº 8 .1 
+- Obter uma participação ampla da população com relação às necessidades de saúde
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Participação social
+no Sistema de Saúde
+Público do município
+(MS – Pactuação
+Interfederativa)
+Realização de 12
+reuniões ordinárias do
+Comus
+Número
+2020
+12
+12
+12
+Número
+12,00
+100,00
+Ação Nº 1 - (8.1.1.1) Realização de reuniões ordinárias e extraordinárias - INDICADOR: Doze reuniões realizadas no ano - META: 12.
+2. Realizar reuniões
+de audiências
+públicas de
+Prestação de Contas
+(MS – Pactuação
+Interfederativa)
+Número de reuniões de
+audiências públicas de
+Prestação de Contas
+realizadas
+Número
+2020
+4
+3
+3
+Número
+3,00
+100,00
+Ação Nº 1 - (8.1.2.1) Realizar prestação de contas - INDICADOR: Realizar 3 prestações de contas - META: 3.
+3. Realizar ações de
+Educação
+Permanente para
+Conselheiros de
+Saúde (MS –
+Pactuação
+Interfederativa)
+Número de ações de
+Educação Permanente
+para Conselheiros do
+COMUS e CGUs
+realizadas/ano em
+relação ao planejado
+Número
+2020
+2
+2
+2
+Número
+3,00
+150,00
+Ação Nº 1 - (8.1.3.1) Treinamentos para Conselheiros - INDICADOR: Número de treinamentos realizados - META: 2.
+DIRETRIZ Nº 9 - Ampliar e aperfeiçoar a Educação Permanente e a produção do Conhecimento Científico para profissionais de saúde,
+prestadores de serviços, usuários e população, bem como a integração serviço-escola
+OBJETIVO Nº 9 .1 
+- Construir propostas de capacitação e treinamentos visando desenvolvimento de competências no trabalho em
+equipe, no apoio matricial e na incorporação do conceito ampliado de saúde
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida -
+Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Aumentar as
+capacitações
+baseadas na realidade
+do serviço com
+planejamento
+realizado em conjunto:
+servidores e
+coordenadorias (CMS
+2019)
+Número de
+capacitações
+(pessoas treinadas)
+baseadas na
+realidade do serviço
+com planejamento
+realizado em
+conjunto: servidores
+e coordenadorias
+Número
+2020
+10.700
+2.500
+4.500
+Número
+4.031,00
+89,58
+Ação Nº 1 - (9.1.1.1) Ampliar a oferta de capacitações aos servidores - INDICADOR: Número de capacitações oferecidas ao ano - META 55.
+https://digisusgmp.saude.gov.br
+34 de 51
+
+PAGE 35
+2. Aumentar a
+participação dos
+trabalhadores de
+saúde em eventos
+científicos correlatos à
+sua área de atuação
+de acordo com a
+portaria nº
+008/SMS/07
+estimulando a
+apresentação nestes
+eventos de
+experiências bem-
+sucedidas no SUS
+(SMS 2021)
+Número de
+participações de
+trabalhadores de
+saúde em eventos
+científicos
+correlatos à sua
+área de atuação de
+acordo com a
+portaria nº
+008/SMS/07
+Número
+2020
+5
+100
+100
+Número
+19,00
+19,00
+Ação Nº 1 - (9.1.2.1) Estimular a participação dos servidores por meio da educação em metodologias ativas - INDICADOR: Número de
+capacitações utilizando metodologias ativas - META: 15
+3. Valorizar o
+compromisso dos
+trabalhadores em
+saúde por meio de
+emissão de
+certificados (SMS
+2021)
+Certificar instrutores
+e alunos em
+capacitações sem
+avaliação
+Percentual
+2020
+0,00
+90,00
+90,00
+Percentual
+77,42
+86,02
+Ação Nº 1 - (9.1.3.1) Emitir certificados para todas as atividades de capacitação, mediante avaliação de aproveitamento - INDICADOR:
+Proporção de certificados emitidos por capacitação - META: 95%.
+OBJETIVO Nº 9 .2 
+- Colaborar para realização de pesquisas no SUS e para o SUS por graduandos e pós-graduandos de diferentes
+profissões advindas de instituições reconhecidas pelo MEC e apoio à produção científica interna
+Descrição da Meta
+Indicador para
+monitoramento e
+avaliação da meta
+Unidade
+de
+medida
+Ano -
+Linha-
+Base
+Linha-
+Base
+Meta
+Plano(2022-
+2025)
+Meta
+2025
+Unidade
+de
+medida
+- Meta
+Polaridade
+Resultado
+Anual
+% meta
+alcançada
+da PAS
+1. Estabelecer
+parcerias com as
+instituições de ensino
+e com os servidores
+públicos da saúde
+para realização de
+pesquisas e
+incorporação de
+tecnologias de
+interesse do SUS no
+município 
+(CMS 2019)
+Número de parcerias
+com as instituições de
+ensino e com os
+servidores públicos da
+saúde para realização
+de pesquisas e
+incorporação de
+tecnologias de
+interesse do SUS no
+município
+Número
+2020
+8
+15
+15
+Número
+15,00
+100,00
+Ação Nº 1 - (9.2.1.1) Ampliar a participação das instituições de ensino promovendo eventos de cooperação mútua - INDICADOR: Número
+de eventos de saúde em conjunto com as instituições de saúde - META: 20.
+2. Fomentar a
+produção do
+conhecimento
+científico,
+promovendo o acesso
+da população às
+tecnologias em saúde
+de forma equitativa,
+igualitária,
+progressiva e
+sustentável (SMS
+2021)
+Número de pesquisas
+científicas produzidas e
+divulgadas/ano
+Número
+2020
+0
+3
+3
+Número
+9,00
+300,00
+Ação Nº 1 - (9.2.2.1) Aumentar a divulgação de eventos promovidos pelo Ministério da Saúde para submissão de trabalhos científicos -
+INDICADOR: Número de eventos divulgados na secretaria com adesão dos servidores - META: 15.
+Demonstrativo da vinculação das metas anualizadas com a Subfunção
+Subfunções
+Descrição das Metas por Subfunção
+Meta
+programada
+para o
+exercício
+Resultados
+301 - Atenção
+Básica
+Aumentar a abrangência de atuação da Atenção Primária 
+(CMS 2019)
+70,00
+58,43
+Estabelecer parcerias com as instituições de ensino e com os servidores públicos da saúde para
+realização de pesquisas e incorporação de tecnologias de interesse do SUS no município 
+(CMS 2019)
+15
+15
+Aumentar as capacitações baseadas na realidade do serviço com planejamento realizado em conjunto:
+servidores e coordenadorias (CMS 2019)
+4.500
+4.031
+Participação social no Sistema de Saúde Público do município (MS – Pactuação Interfederativa)
+12
+12
+Avaliar e melhorar a estrutura para informatização da saúde e conectividade SMS 2019)
+100,00
+100,00
+https://digisusgmp.saude.gov.br
+35 de 51
+
+PAGE 36
+Atualizar o sistema SAMS atendendo as diretrizes do Ministério da Saúde (CMS 2019)
+100,00
+66,00
+Elaborar e aprovar os instrumentos de planejamento do SUS dentro dos prazos legais (MS - LC 141
+13jan2012)
+100,00
+100,00
+Reduzir a demanda reprimida das especialidades odontológicas em ENDODONTIA com a Implantação do
+CEO (CMS 2019)
+100,00
+100,00
+Reduzir a mortalidade materna 
+(CMS 2019 e Sispacto 2021)
+1
+4
+Reduzir a mortalidade infantil (menores de 1 ano de vida) (CMS 2019 e Sispacto 2021)
+9,00
+7,65
+Reduzir a mortalidade prematura pelas doenças crônicas não transmissíveis (Sispacto 2017)
+270,00
+253,11
+Melhorar a resolutividade dos serviços odontológicos para assistência individual atenção primária (PMAQ
+2017)
+1,00
+0,70
+Aumentar a abrangência de atuação das equipes de Estratégia de Saúde da Família (MS 100%) (CMS
+2019)
+45,00
+41,53
+Fomentar a produção do conhecimento científico, promovendo o acesso da população às tecnologias em
+saúde de forma equitativa, igualitária, progressiva e sustentável (SMS 2021)
+3
+9
+Aumentar a participação dos trabalhadores de saúde em eventos científicos correlatos à sua área de
+atuação de acordo com a portaria nº 008/SMS/07 estimulando a apresentação nestes eventos de
+experiências bem-sucedidas no SUS (SMS 2021)
+100
+19
+Realizar reuniões de audiências públicas de Prestação de Contas (MS – Pactuação Interfederativa)
+3
+3
+Integração de toda rede de Saúde (Pública e Contratada)
+100,00
+100,00
+Implantação do PAD (Programa de atendimento domiciliar) Odontológico (SMS 2021)
+4
+4
+Reduzir a gravidez na adolescência na faixa etária de 10 a 19 anos (Sispacto 2021)
+7,10
+6,74
+Reduzir a mortalidade perinatal (fetal e menores de 7 dias de vida) (SMS 2021)
+11,00
+12,04
+Reduzir a complicações de quedas em idosos com 60 e mais anos (CMS 2019 e Sispacto 2015)
+38,00
+57,80
+Melhorar a capacidade resolutiva da atenção primária (PMAQ 2017)
+20,00
+29,00
+Aumentar a abrangência de atuação das equipes de saúde de bucal na atenção primária (MS 50%)
+(Sispacto 2021)
+30,00
+10,38
+Valorizar o compromisso dos trabalhadores em saúde por meio de emissão de certificados (SMS 2021)
+90,00
+77,42
+Realizar ações de Educação Permanente para Conselheiros de Saúde (MS – Pactuação Interfederativa)
+2
+3
+Implantação de ferramentas de informação e apoio a decisões do gestor (CMS 2019)
+0,00
+100,00
+Implantação da Residência Uniprofissional em Odontologia hospitalar (pacientes internados em
+UTI/Enfermaria) (SMS 2021)
+2
+0
+Adequar o acesso das gestantes aos serviços odontológicos para assistência individual 
+(Programa Previne
+Brasil) MS: >= 90%
+60,00
+37,00
+Aumentar a captação e monitoramento de cadastrados no programa de hipertensos e diabéticos (SMS
+2021)
+150.000
+158.053
+Revisão da territorialização das áreas de abrangência das unidades básicas de Saúde e ESF (CMS 2019)
+100,00
+0,00
+Aumentar a abrangência de atuação dos agentes comunitários de saúde (MS 100%) (MS E-Gestor SUS)
+35,00
+17,77
+Implantação de ferramentas de informação em saúde para os usuários do SUS (CMS 2019)
+4
+8
+IV - Aumentar a cobertura de exame citopatológico (Programa Previne Brasil) Meta MS: >= 80%
+80,00
+26,00
+Ampliar a atenção aos pacientes com demências (Doença de Alzheimer e outras demências) (Plano de
+Gestão de Governo)
+100,00
+0,00
+Realizar monitoramento dos beneficiários sociais conforme diretrizes do Ministério da Saúde (Sispacto
+2021)
+70,00
+69,13
+Desenvolvimento de Software visando a inclusão de prestações de contas dos Contratos de Gestão e
+convênios (DAG)
+100,00
+0,00
+Garantir a realização de exames para sífilis e HIV em gestantes (Programa Previne Brasil – MS 2019)
+95,00
+55,00
+Ampliar a capacidade de atenção aos pacientes com demências (doença de Alzheimer e outras
+demências) 
+(Plano de Gestão de Governo)
+2.500
+808
+Aumentar a abrangência de atuação de médicos e enfermeiros na atenção primária (PMAQ 2017)
+40,00
+32,32
+Aumentar a realização de exames de mamografia de rastreamento em mulheres de 50 a 69 anos
+(Sispacto 2017)
+0,45
+0,40
+Aumentar a proporção de pacientes com tempo máximo de 30 dias entre a suspeita diagnóstica de
+câncer e a realização do exame e/ou procedimento cirúrgico para a confirmação do diagnóstico
+oncológico (MS-LEI Nº 13.896, de 30-10-2019)
+90,00
+90,00
+Reduzir a Proporção de Internações por Condições Sensíveis à Atenção Básica 
+(Sispacto 2015)
+20,00
+20,81
+https://digisusgmp.saude.gov.br
+36 de 51
+
+PAGE 37
+Aumentar a proporção de pacientes com tempo máximo de 60 dias para ter o tratamento de doença
+oncológica no SUS. O prazo começa a ser contado a partir do dia em que for definido o diagnóstico de
+neoplasia maligna, com laudo patológico Atuação nos fatores limitantes atuais para aumento da
+propoção de pacientes tratados em até 60 dias - relacionados ao tratamento cirúrgico e exames de
+estadiamento para definição do tratamento (MS-Lei Nº 12.732, de 22-11-2012)
+100,00
+90,00
+Reduzir o absenteísmo em consultas médicas agendadas na atenção primária (SMS 2019)
+15,00
+15,90
+Oferecer consulta com nutricionista para os encaminhamentos classificados como prioridade Muito Alta
+em 30 dias (SMS 2017)
+85,00
+77,70
+Aumentar o acompanhamento clínico por hipertensão arterial, diabete melito e obesidade na atenção
+primária (CMS 2019)
+0,40
+0,70
+Aumentar o acesso ao tratamento programado em odontologia na atenção primária 
+(PMAQ 2017)
+15,00
+6,20
+Melhorar a saúde bucal por meio de ações preventivas (Sispacto 2015)
+3,00
+0,30
+Ampliar o acesso à Atenção Primária por meio do acolhimento 
+(CMS 2019)
+100,00
+100,00
+302 -
+Assistência
+Hospitalar e
+Ambulatorial
+Reduzir o Tempo de espera por consulta médica especializada (CMS 2019)
+90,00
+69,00
+Garantir a realização de auditoria regular ou ordinária através do Componente Municipal de Auditoria no
+SUS tanto para serviços próprios como privados (conveniados e contratados)
+40,00
+30,00
+Adequar o Transporte Sanitário às necessidades da população (CMS 2019)
+100,00
+100,00
+Reduzir a letalidade por covid-19 (SMS 2021)
+2,00
+0,49
+Ampliar o Hospital Municipal com mais leitos de UTI e enfermaria para oferecer melhor conforto e
+privacidade na enfermaria coletiva (Plano de Gestão de Governo)
+20
+16
+Implantar e integrar o prontuário eletrônico na rede de saúde do município (SMS 2021)
+100,00
+60,00
+Avaliar a satisfação dos usuários atendidos nas unidades de atendimento pré-hospitalares fixas (SMS
+2021)
+90,00
+90,40
+Aperfeiçoar a atenção às vítimas de acidentes pelas unidades de atendimento pré-hospitalares móveis
+(SMS 2021)
+2.700
+2.853
+Implantar e credenciar residências terapêuticas para pacientes egressos de hospital psiquiátrico (MS
+2018)
+10
+8
+Aumentar a resolutividade das equipes de atenção primária em saúde mental (CMS 2019 e Sispacto
+2021)
+1,00
+1,00
+Adequar a concessão de órteses, próteses e materiais auxiliares para locomoção (CMS 2019)
+100,00
+21,80
+Parametrização de todas as especialidades (CMS 2019)
+60
+50
+Reduzir o tempo de espera para cirurgias eletivas (CMS 2019)
+305
+320
+Avaliar a qualidade da atenção aos pacientes internados por covid-19 hospitalar (SMS 2021)
+100,00
+94,34
+Criação da Central de Imagens (Plano de Gestão de Governo)
+100,00
+0,00
+Avaliar a adequação do tempo de chegada (em minutos) do paciente na recepção/classificação de risco e
+atendimento inicial do médico (SMS 2021)
+90,00
+90,00
+Implementar Comitê Municipal Gestor de Urgência e Emergência- Grupo Temático Trauma (Componentes,
+reunião bimestral, Decreto e Regimento) (SMS 2021)
+6
+3
+Avaliar a satisfação dos usuários com os serviços do Samu 
+(SMS 2021)
+90,00
+93,60
+Aumentar a resolutividade das equipes de atenção primária em saúde mental (CMS 2019 e Sispacto
+2021)
+100,00
+100,00
+Adequar o número atendimento em fisioterapia (CMS 2019)
+221.708
+225.000
+Ampliar atendimentos ao Transtorno do Espectro Autista (TEA) na primeira infância (SMS 2021)
+50,00
+12,00
+Reduzir o tempo de espera para exames de média e alta complexidade (CMS 2019)
+75
+174
+Manutenção e Ampliação do número de enfermeiros do Projeto Trainee (SMS 2021)
+30
+0
+Adotar política pública para atendimento prioritário nas UPAs, às pessoas vulneráveis (pessoas com
+deficiência, idosos, crianças, gestantes, lactantes), excluindo urgência/emergência (SMS 2021)
+5
+5
+Reduzir os óbitos nas internações por infarto agudo do miocárdio (IAM) (Sispacto 2016)
+10,00
+6,23
+Adequar o número de sessões de fonoaudiologia no município (SMS 2021)
+70,00
+30,00
+Implementar protocolos de regulação para procedimentos de média e alta complexidade 
+(SMS 2020)
+100,00
+100,00
+Implantar o atendimento em Telemedicina de Saúde Mental em Psicologia (CMS 2019)
+0
+0
+Implantar o novo Centro de Reabilitação (CMS 2019 e Plano de Gestão Governo)
+100,00
+60,00
+Informatizar o processo de faturamento hospitalar e ambulatorial, com interface entre sistemas (SMS
+2020)
+70,00
+50,00
+Espaço para atender os autistas em atividades de vida diária, com atendimentos em psicoterapia,
+fonoaudiologia, fisioterapia, terapia ocupacional, psiquiatria e neurologia
+20,00
+11,00
+Ampliar atendimentos de portadores de TEA da Rede de Inclusão ao Autista (RIA) (SMS 2021)
+30,00
+30,00
+https://digisusgmp.saude.gov.br
+37 de 51
+
+PAGE 38
+Aprimorar o sistema (SAMS) de regulação hospitalar e ambulatorial (SMS 2020)
+70,00
+100,00
+Garantir que todos os agendamentos solicitados pelos pacientes para o Programa TFD - Tratamento Fora
+do Domicilio, seja realizado em cumprimento a Portaria SAS/MS nº 55 /1999 e Decreto Municipal nº 18881
+de agosto/2021 (SMS 2020)
+100,00
+100,00
+303 - Suporte
+Profilático e
+Terapêutico
+Aprimorar o Sistema informatizado de Gestão de assistência farmacêutica (WEB Service) (envio de dados
+e dispensação) (CMS 2019) (Comissão de Farmácia)
+100,00
+100,00
+Revisão periódica da padronização de medicamentos e dos demais insumos de saúde (SMS 2019)
+(Comissão de Farmácia)
+100,00
+100,00
+Reduzir o número de medicamentos e materiais em falta nas Unidades de Saúde (SMS 2021) 
+(mínimo de
+95%) 
+(DAG)
+95,00
+97,99
+Implantação de entrega semanal em até 80% das unidades (Farmácia Lean) (SMS 2021) (DAG)
+45
+32
+Implantação de serviço de logística no Almoxarifado da Saúde (SMS 2021)
+15,00
+100,00
+304 -
+Vigilância
+Sanitária
+Aferir a qualidade da água para consumo humano 
+(Comus 2021)
+100,00
+99,78
+Intervir no menor tempo em riscos iminentes à saúde
+100,00
+100,00
+305 -
+Vigilância
+Epidemiológica
+Aumentar a investigação dos óbitos de mulheres em idade fértil (10 a 49 anos) investigados (Sispacto
+2021) MS => 90%
+100,00
+98,20
+Promover políticas públicas de incentivo às condições seguras de trabalho para reduçã da ocorrência de
+acidentes graves
+50,00
+10,22
+Realizar a investigação e atendimento dos casos de acidente envolvendo animais peçonhentos
+notificados via SINAN (SMS 2021)
+100,00
+100,00
+Reduzir a incidência de casos de leishmaniose visceral 
+(SMS 2021)
+0
+0
+Monitorar a incidência de casos de raiva humana (SMS 2021)
+0
+0
+Reduzir incidência de arboviroses (dengue, chikungunya, zika e febre amarela) (SMS 2021)
+70,00
+817,70
+Reduzir mortalidade por arboviroses (dengue, chikungunya, zika e febre amarela) (SMS 2021)
+0,00
+1,23
+Aumentar a proporção de registro de óbitos com causa básica definida (Sispacto 2021) MS => 95%
+95,00
+98,80
+Ampliar castrações e microchipagem de cães e gatos (SMS 2021)
+5.000
+4.700
+Aumentar a proporção de casos encerrados de doenças de notificação compulsória imediata (DNCI) em
+até 60 dias após notificação (Sispacto 2021) MS =>85%
+98,00
+100,00
+Fortalecer a Política de Posse Responsável no munícipio (SMS 2021)
+500
+462
+Reduzir o número de casos novos de sífilis congênita em menores de um ano (Sispacto 2021) MS: 0,5 por
+1.000 nascidos vivos
+3,00
+19,56
+Reduzir o número de casos novos de AIDS em menores de 5 anos (Sispacto 2021)
+0
+0
+Aumentar a cobertura vacinal na infância (Sispacto 2021) MS: 100%
+100,00
+0,00
+V - Aumentar a cobertura vacinal de poliomielite inativada e de pentavalente (Programa Previne Brasil)
+MS: 95%
+95,00
+85,45
+Aumentar a cobertura vacinal contra covid-19 
+(SMS 2021)
+90,00
+25,23
+Reduzir a letalidade por infecção pelo vírus influenza (SMS 2017) Séria histórica de 6,0
+1,50
+6,10
+Aumentar proporção de cura de casos novos de hanseníase (Sispacto 2021) MS: 83,5%
+90,00
+100,00
+Reduzir número de casos novos de Tuberculose
+130
+194
+Reduzir a mortalidade por covid-19
+20,00
+1,60
+Reduzir e Aprimorar a atenção aos casos de violência interpessoal e autoprovocada do município (CMS
+2019 e SS 2019)
+1,50
+0,83
+https://digisusgmp.saude.gov.br
+38 de 51
+
+PAGE 39
+Demonstrativo da Programação de Despesas com Saúde por Subfunção, Categoria Econômica e Fonte de Recursos
+Subfunções
+Categoria
+Econômica
+Recursos
+ordinários
+- Fonte
+Livre (R$)
+Receita de impostos
+e de transferência
+de impostos (receita
+própria - R$)
+Transferências de
+fundos à Fundo de
+Recursos do SUS,
+provenientes do
+Governo Federal
+(R$)
+Transferências de
+fundos ao Fundo
+de Recursos do
+SUS, provenientes
+do Governo
+Estadual (R$)
+Transferências
+de convênios
+destinados à
+Saúde (R$)
+Operações
+de Crédito
+vinculadas
+à Saúde
+(R$)
+Royalties
+do
+petróleo
+destinados
+à Saúde
+(R$)
+Outros recursos
+destinados à
+Saúde (R$)
+Total(R$)
+0 - Informações
+Complementares
+Corrente
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+Capital
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+122 -
+Administração
+Geral
+Corrente
+N/A
+24.265.000,00
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+24.265.000,00
+Capital
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+301 - Atenção
+Básica
+Corrente
+N/A
+179.089.000,00
+39.201.000,00
+4.000.000,00
+43.000,00
+N/A
+N/A
+N/A
+222.333.000,00
+Capital
+N/A
+1.010.000,00
+150.000,00
+N/A
+1.800.000,00
+N/A
+N/A
+N/A
+2.960.000,00
+302 - Assistência
+Hospitalar e
+Ambulatorial
+Corrente
+N/A
+529.316.000,00
+219.981.000,00
+56.442.000,00
+N/A
+N/A
+N/A
+N/A
+805.739.000,00
+Capital
+N/A
+4.000.000,00
+N/A
+N/A
+4.451.000,00
+N/A
+N/A
+N/A
+8.451.000,00
+303 - Suporte
+Profilático e
+Terapêutico
+Corrente
+N/A
+27.600.000,00
+4.230.000,00
+5.100.000,00
+N/A
+N/A
+N/A
+N/A
+36.930.000,00
+Capital
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+304 - Vigilância
+Sanitária
+Corrente
+N/A
+11.334.000,00
+802.000,00
+N/A
+N/A
+N/A
+N/A
+1.031.000,00
+13.167.000,00
+Capital
+N/A
+40.000,00
+N/A
+N/A
+N/A
+N/A
+N/A
+40.000,00
+80.000,00
+305 - Vigilância
+Epidemiológica
+Corrente
+N/A
+17.240.000,00
+8.653.000,00
+1.000.000,00
+N/A
+N/A
+N/A
+N/A
+26.893.000,00
+Capital
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+306 -
+Alimentação e
+Nutrição
+Corrente
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+Capital
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+N/A
+0,00
+Fonte: DIGISUS Gestor - Módulo Planejamento (DIGISUSGMP) - Consulta Online
+ 
+Data da consulta: 27/05/2026.
+Análises e Considerações sobre Programação Anual de Saúde - PAS
+A Programação Anual de Saúde (PAS) 2025 de São José dos Campos alcançou 33% das metas (57 de 173), com execução orçamentária de R$1,14 bilhão,
+sendo 96% em despesas correntes concentradas em Atenção Básica (44%) e Assistência Hospitalar (52%).
+O desempenho foi heterogêneo: excelência absoluta na Diretriz 8 (Participação Social, 100% - 12 reuniões COMUS e 3 audiências), Diretriz 3
+(Urgência/Emergência, 59% - Samu motolância 105,67%, letalidade COVID 24,5% da meta) e Vigilância Sanitária (100% - água potável 99,78%). A Diretriz
+4 (Prevenção) obteve 31%, com sucessos em mortalidade infantil (7,65 vs meta 9,0), hipertensos/diabéticos (158.053 vs 150.000) e hanseníase (100%
+cura), mas falhas em vacinas infância (0%) e sífilis congênita.
+Críticas graves emergem na Diretriz 2 (Secundária, 18%) com reabilitação PCD em 21,8% (órteses/próteses), telemedicina mental zerada e Centro
+Reabilitação em 60%; Diretriz 6 (Farmácia, 20%) com Web Service 50% informatizado; e Diretriz 9 (Educação, 20%) sem pesquisas cientíﬁcas. A APS
+(27%) apresenta cobertura parcial mas resolutividade baixa (encaminhamentos 29% vs meta 20%), agravada por territorialização zerada.
+A PAS 2025 demonstra capacidade operacional em urgência e vigilância, mas fragilidades estruturais em secundária, reabilitação e informatização
+demandam intervenção imediata para elevar a execução média.
+Tais aspectos foram considerados e estão alinhados para correção no Plano Pluri Anual 2026-2029 e do PAS 2026 aprovado.
+https://digisusgmp.saude.gov.br
+39 de 51
+
+PAGE 40
+8. Indicadores de Pactuação Interfederativa
+O processo de Pactuação Interfederativa de Indicadores foi 
+descontinuado
+ com a revogação da Resolução nº 8/2016 a partir da publicação da Resolução de
+Consolidação CIT nº 1/2021. 
+Para mais informações, consultar a 
+Nota Técnica nº 20/2021-DGIP/SE/MS
+Fonte: DIGISUS Gestor - Módulo Planejamento (DIGISUSGMP) - Consulta Online
+ 
+Data da consulta: 27/05/2026.
+https://digisusgmp.saude.gov.br
+40 de 51
+
+PAGE 41
+9. Execução Orçamentária e Financeira
+A disponibilização dos dados do SIOPS, no DGMP, depende do prazo de publicação pelo FNS/SE/MS.
+9.1. Execução da programação por fonte de recurso, subfunção e categoria econômica
+Despesa Total em Saúde por Fonte e Subfunção
+Subfunções
+Recursos
+Ordinários
+- Fonte
+Livre
+Receitas de
+Impostos e de
+Transferência de
+Impostos - Saúde
+Transferências Fundo a
+Fundo de Recursos do
+SUS provenientes do
+Governo Federal
+Transferências Fundo a
+Fundo de Recursos do
+SUS provenientes do
+Governo Estadual
+Transferências
+de Convênios
+destinadas à
+Saúde
+Operações
+de Crédito
+vinculadas à
+Saúde
+Transferências da
+União - inciso I do art.
+5º da Lei
+Complementar
+173/2020
+Royalties do
+Petróleo
+destinados à
+Saúde
+Outros
+Recursos
+Destinados à
+Saúde
+TOTAL
+301 - Atenção
+Básica
+Corrente
+0,00
+170.491.390,63
+41.599.396,55
+5.667.086,13
+0,00
+0,00
+0,00
+0,00
+110.197,48
+217.868.070,79
+Capital
+0,00
+257.397,39
+3.009.235,11
+0,00
+0,00
+0,00
+0,00
+0,00
+3.710.813,33
+6.977.445,83
+302 -
+Assistência
+Hospitalar e
+Ambulatorial
+Corrente
+0,00
+519.689.262,47
+231.029.721,27
+55.737.853,01
+0,00
+0,00
+0,00
+0,00
+1.920.000,00
+808.376.836,75
+Capital
+0,00
+1.065.962,92
+12.303.310,38
+0,00
+0,00
+0,00
+0,00
+0,00
+20.921.279,67
+34.290.552,97
+303 - Suporte
+Profilático e
+Terapêutico
+Corrente
+0,00
+21.910.985,42
+5.699.233,00
+6.270.452,87
+0,00
+0,00
+0,00
+0,00
+0,00
+33.880.671,29
+Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+304 -
+Vigilância
+Sanitária
+Corrente
+0,00
+10.263.015,87
+448.421,10
+0,00
+0,00
+0,00
+0,00
+0,00
+1.385.994,00
+12.097.430,97
+Capital
+0,00
+158.690,34
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+38.259,54
+196.949,88
+305 -
+Vigilância
+Epidemiológica
+Corrente
+0,00
+11.427.327,48
+8.963.719,51
+2.851.234,37
+0,00
+0,00
+0,00
+0,00
+0,00
+23.242.281,36
+Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+306 -
+Alimentação e
+Nutrição
+Corrente
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Outras
+Subfunções
+Corrente
+0,00
+33.802.656,77
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+33.802.656,77
+Capital
+0,00
+3.997.000,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+3.997.000,00
+TOTAL
+0,00
+773.063.689,29
+303.053.036,92
+70.526.626,38
+0,00
+0,00
+0,00
+0,00
+28.086.544,02
+1.174.729.896,61
+(*) ASPS: Ações e Serviços Públicos em Saúde
+Fonte: Sistema de Informações sobre Orçamentos Públicos em Saúde (SIOPS)
+Data da consulta: 13/05/2026.
+9.2. Indicadores financeiros
+Indicadores do Ente Federado
+Indicador
+Transmissão
+Única
+1.1
+Participação da receita de impostos na receita 
+total do Município
+31,48 
+%  
+1.2
+Participação das transferências 
+intergovernamentais na receita total do Município
+62,45 
+%  
+1.3
+Participação % das Transferências para a Saúde 
+(SUS) no total de recursos transferidos para o Município
+10,09 
+%  
+1.4
+Participação % das Transferências da União para 
+a Saúde no total de recursos transferidos para a saúde no Município 
+ 
+77,05 
+%  
+1.5
+Participação % das Transferências da União para 
+a Saúde (SUS) no total de Transferências da União para o 
+Município
+48,75 
+%  
+1.6
+Participação % da Receita de Impostos e 
+Transferências Constitucionais e Legais na Receita Total do Município
+71,04 
+%  
+2.1
+Despesa total com Saúde, em R$/hab, sob a 
+responsabilidade do Município, por habitante
+R$ 
+1.610,62 
+ 
+2.2
+Participação da despesa com pessoal na despesa 
+total com Saúde
+22,35 
+%  
+2.3
+Participação da despesa com 
+medicamentos na despesa total com Saúde
+3,27 
+%  
+2.4
+Participação da desp. com serviços 
+de terceiros - pessoa jurídica na despesa total com Saúde
+23,01 
+%  
+2.5
+Participação da despesa com 
+investimentos na despesa total com Saúde
+3,88 
+%  
+2.6
+Despesas com Instituições Privadas Sem Fins Lucrativos
+39,09 
+%  
+3.1
+Participação das transferências 
+para a Saúde em relação à despesa total do Município com saúde
+25,22 
+%  
+3.2
+Participação da receita própria 
+aplicada em Saúde conforme a LC141/2012
+23,10 
+%  
+Fonte: Sistema de Informações sobre Orçamentos Públicos em Saúde (SIOPS)
+Data da consulta: 13/05/2026.
+9.3. Relatório Resumido da Execução Orçamentária (RREO)
+RECEITAS RESULTANTES DE IMPOSTOS E
+TRANSFERÊNCIAS CONSTITUCIONAIS E LEGAIS
+PREVISÃO INICIAL
+PREVISÃO
+ATUALIZADA (a)
+RECEITAS REALIZADAS
+Até o Bimestre (b)
+% (b/a) x 100
+RECEITA DE IMPOSTOS 
+(I)
+1.378.844.000,00
+1.378.844.000,00
+1.467.652.447,24
+106,44
+Receita Resultante do Imposto Predial e Territorial Urbano -
+IPTU
+385.022.000,00
+385.022.000,00
+417.023.235,24
+108,31
+Receita Resultante do Imposto sobre Transmissão Inter Vivos -
+ITBI
+99.638.000,00
+99.638.000,00
+114.894.863,70
+115,31
+https://digisusgmp.saude.gov.br
+41 de 51
+
+PAGE 42
+Receita Resultante do Imposto sobre Serviços de Qualquer
+Natureza - ISS
+656.364.000,00
+656.364.000,00
+703.481.265,83
+107,18
+Receita Resultante do Imposto sobre a Renda e Proventos de
+Qualquer Natureza Retido na Fonte - IRRF
+237.820.000,00
+237.820.000,00
+232.253.082,47
+97,66
+RECEITA DE TRANSFERÊNCIAS CONSTITUCIONAIS E LEGAIS (II)
+1.777.431.000,00
+1.777.431.000,00
+1.844.571.100,44
+103,78
+Cota-Parte FPM
+132.952.000,00
+132.952.000,00
+135.987.712,53
+102,28
+Cota-Parte ITR
+431.000,00
+431.000,00
+455.815,61
+105,76
+Cota-Parte do IPVA
+247.427.000,00
+247.427.000,00
+250.418.514,46
+101,21
+Cota-Parte do ICMS
+1.387.158.000,00
+1.387.158.000,00
+1.447.268.715,66
+104,33
+Cota-Parte do IPI - Exportação
+9.463.000,00
+9.463.000,00
+10.440.342,18
+110,33
+Compensações Financeiras Provenientes de Impostos e
+Transferências Constitucionais
+0,00
+0,00
+0,00
+0,00
+TOTAL DAS RECEITAS RESULTANTES DE IMPOSTOS E
+TRANFERÊNCIAS CONSTITUCIONAIS E LEGAIS - (III) = (I) + (II)
+3.156.275.000,00
+3.156.275.000,00
+3.312.223.547,68
+104,94
+DESPESAS COM
+AÇÕES E
+SERVIÇOS
+PÚBLICOS DE
+SAÚDE (ASPS) -
+POR SUBFUNÇÃO
+E CATEGORIA
+ECONÔMICA
+DOTAÇÃO
+INICIAL
+DOTAÇÃO
+ATUALIZADA
+(c)
+DESPESAS
+EMPENHADAS
+DESPESAS
+LIQUIDADAS
+DESPESAS PAGAS
+Inscritas em
+Restos a
+Pagar Não
+Processados
+(g)
+Até o
+bimestre (d)
+%
+(d/c) x
+100
+Até o
+bimestre (e)
+% (e/c)
+x 100
+Até o
+bimestre (f)
+%
+(f/c) x
+100
+ATENÇÃO BÁSICA
+(IV)
+180.099.000,00
+171.125.792,85
+170.748.788,02
+99,78
+167.557.417,17
+97,91
+164.289.231,94
+96,00
+3.191.370,85
+Despesas Correntes
+179.089.000,00
+170.868.362,85
+170.491.390,63
+99,78
+167.300.019,78
+97,91
+164.032.112,55
+96,00
+3.191.370,85
+Despesas de Capital
+1.010.000,00
+257.430,00
+257.397,39
+99,99
+257.397,39
+99,99
+257.119,39
+99,88
+0,00
+ASSISTÊNCIA
+HOSPITALAR E
+AMBULATORIAL 
+(V)
+533.316.000,00
+521.527.744,62
+523.778.582,42
+100,43
+519.784.112,38
+99,67
+515.130.916,37
+98,77
+3.994.470,04
+Despesas Correntes
+529.316.000,00
+520.423.520,92
+522.710.689,94
+100,44
+519.719.429,78
+99,86
+515.066.233,77
+98,97
+2.991.260,16
+Despesas de Capital
+4.000.000,00
+1.104.223,70
+1.067.892,48
+96,71
+64.682,60
+5,86
+64.682,60
+5,86
+1.003.209,88
+SUPORTE
+PROFILÁTICO E
+TERAPÊUTICO 
+(VI)
+27.600.000,00
+21.931.920,00
+21.910.985,42
+99,90
+21.858.783,04
+99,67
+21.599.752,34
+98,49
+52.202,38
+Despesas Correntes
+27.600.000,00
+21.931.920,00
+21.910.985,42
+99,90
+21.858.783,04
+99,67
+21.599.752,34
+98,49
+52.202,38
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+VIGILÂNCIA
+SANITÁRIA 
+(VII)
+11.374.000,00
+10.854.420,00
+10.421.706,21
+96,01
+10.056.621,75
+92,65
+9.791.843,99
+90,21
+365.084,46
+Despesas Correntes
+11.334.000,00
+10.695.720,00
+10.263.015,87
+95,95
+9.897.931,41
+92,54
+9.633.153,65
+90,07
+365.084,46
+Despesas de Capital
+40.000,00
+158.700,00
+158.690,34
+99,99
+158.690,34
+99,99
+158.690,34
+99,99
+0,00
+VIGILÂNCIA
+EPIDEMIOLÓGICA
+(VIII)
+17.240.000,00
+11.655.000,00
+11.427.327,48
+98,05
+11.297.327,48
+96,93
+11.297.327,48
+96,93
+130.000,00
+Despesas Correntes
+17.240.000,00
+11.655.000,00
+11.427.327,48
+98,05
+11.297.327,48
+96,93
+11.297.327,48
+96,93
+130.000,00
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+ALIMENTAÇÃO E
+NUTRIÇÃO (IX)
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Despesas Correntes
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+OUTRAS
+SUBFUNÇÕES (X)
+24.265.000,00
+38.228.350,00
+37.799.656,77
+98,88
+37.254.656,77
+97,45
+37.254.656,77
+97,45
+545.000,00
+Despesas Correntes
+24.265.000,00
+34.231.350,00
+33.802.656,77
+98,75
+33.257.656,77
+97,16
+33.257.656,77
+97,16
+545.000,00
+Despesas de Capital
+0,00
+3.997.000,00
+3.997.000,00
+100,00
+3.997.000,00
+100,00
+3.997.000,00
+100,00
+0,00
+TOTAL (XI) = (IV + V
++ VI + VII + VIII + IX
++ X)
+793.894.000,00
+775.323.227,47
+776.087.046,32
+100,10
+767.808.918,59
+99,03
+759.363.728,89
+97,94
+8.278.127,73
+APURAÇÃO DO CUMPRIMENTO DO LIMITE MÍNIMO PARA APLICAÇÃO
+EM ASPS
+DESPESAS
+EMPENHADAS (d)
+DESPESAS
+LIQUIDADAS (e)
+DESPESAS PAGAS (f)
+Total das Despesas com ASPS (XII) = (XI)
+776.087.046,32
+767.808.918,59
+759.363.728,89
+https://digisusgmp.saude.gov.br
+42 de 51
+
+PAGE 43
+(-) Restos a Pagar Inscritos Indevidamente no Exercício sem Disponibilidade
+Financeira (XIII)
+10.651.953,15
+N/A
+N/A
+(-) Despesas Custeadas com Recursos Vinculados à Parcela do Percentual
+Mínimo que não foi Aplicada em ASPS em Exercícios Anteriores (XIV)
+0,00
+0,00
+0,00
+(-) Despesas Custeadas com Disponibilidade de Caixa Vinculada aos Restos
+a Pagar Cancelados (XV)
+0,00
+0,00
+0,00
+(=) VALOR APLICADO EM ASPS (XVI) = (XII - XIII - XIV - XV)
+765.435.093,17
+767.808.918,59
+759.363.728,89
+Despesa Mínima a ser Aplicada em ASPS (XVII) = (III) x 15% (LC 141/2012)
+496.833.532,15
+Despesa Mínima a ser Aplicada em ASPS (XVII) = (III) x % (Lei Orgânica
+Municipal)
+N/A
+Diferença entre o Valor Aplicado e a Despesa Mínima a ser Aplicada (XVIII) =
+(XVI (d ou e) - XVII)
+268.601.561,02
+270.975.386,44
+262.530.196,74
+Limite não Cumprido (XIX) = (XVIII) (Quando valor for inferior a zero)
+0,00
+0,00
+0,00
+PERCENTUAL DA RECEITA 
+DE IMPOSTOS E TRANSFERÊNCIAS
+CONSTITUCIONAIS E LEGAIS APLICADO EM ASPS 
+(XVI / III)*100 (mínimo de
+15% conforme LC n° 141/2012 ou % da Lei Orgânica Municipal)
+23,10
+23,18
+22,92
+CONTROLE DO VALOR REFERENTE AO PERCENTUAL
+MÍNIMO NÃO CUMPRIDO EM EXERCÍCIOS ANTERIORES
+PARA FINS DE APLICAÇÃO DOS RECURSOS
+VINCULADOS CONFORME ARTIGOS 25 E 26 DA LC
+141/2012
+Saldo Inicial
+(no exercício
+atual) (h)
+Despesas Custeadas no Exercício de Referência
+Saldo Final
+(não aplicado)
+(l) = (h - (i ou
+j))
+Empenhadas
+(i)
+Liquidadas (j)
+Pagas (k)
+Diferença de limite não cumprido em 2024
+0,00
+0,00
+0,00
+0,00
+0,00
+Diferença de limite não cumprido em 2023
+0,00
+0,00
+0,00
+0,00
+0,00
+Diferença de limite não cumprido em 2022
+0,00
+0,00
+0,00
+0,00
+0,00
+Diferença de limite não cumprido em 2021
+0,00
+0,00
+0,00
+0,00
+0,00
+Diferença de limite não cumprido em exercícios anteriores
+0,00
+0,00
+0,00
+0,00
+0,00
+TOTAL DA DIFERENÇA DE LIMITE NÃO CUMPRIDO EM
+EXERCÍCIOS ANTERIORES (XX)
+0,00
+0,00
+0,00
+0,00
+0,00
+EXERCÍCIO
+DO
+EMPENHO
+Valor Mínimo
+para
+aplicação em
+ASPS (m)
+Valor
+aplicado em
+ASPS no
+exercício (n)
+Valor
+aplicado além
+do limite
+mínimo (o) =
+(n - m), se
+Total
+inscrito em
+RP no
+exercício (p)
+RPNP Inscritos
+Indevidamente
+no Exercício
+sem
+Disponibilidade
+Financeira q =
+(XIIId)
+Valor
+inscrito em
+RP
+considerado
+no Limite
+(r) = (p - (o
++ q)) se
+Total de RP
+pagos (s)
+Total de RP
+a pagar (t)
+Total de RP
+cancelados
+prescritos
+Empenhos
+de 2025
+496.833.532,15
+765.435.093,17
+268.601.561,02
+16.723.317,43
+10.651.953,15
+0,00
+0,00
+16.723.317,43
+Empenhos
+de 2024
+466.681.195,55
+811.808.318,20
+345.127.122,65
+48.234.837,14
+0,00
+0,00
+46.712.766,54
+0,00
+1.522.070,60
+Empenhos
+de 2023
+412.539.981,53
+742.501.341,20
+329.961.359,67
+8.787,30
+25.309.544,74
+0,00
+0,00
+8.787,30
+Empenhos
+de 2022
+392.961.294,19
+689.175.150,50
+296.213.856,31
+2.064,95
+40.727.720,47
+0,00
+0,00
+2.064,95
+Empenhos
+de 2021
+358.584.905,68
+673.485.529,00
+314.900.623,32
+1.760,00
+18.534.506,05
+0,00
+0,00
+1.760,00
+Empenhos
+de 2020
+301.917.577,04
+567.930.246,19
+266.012.669,15
+805,00
+11.819.427,86
+0,00
+205,00
+0,00
+Empenhos
+de 2019
+300.506.310,30
+558.177.998,12
+257.671.687,82
+2.723,99
+17.853.209,73
+0,00
+0,00
+0,00
+Empenhos
+de 2018
+277.087.337,33
+525.059.203,55
+247.971.866,22
+0,00
+12.064.520,95
+0,00
+0,00
+0,00
+Empenhos
+de 2017
+257.018.684,66
+495.038.289,09
+238.019.604,43
+0,00
+10.674.818,87
+0,00
+0,00
+0,00
+Empenhos
+de 2016
+241.124.303,15
+466.410.826,39
+225.286.523,24
+0,00
+10.784.110,17
+0,00
+0,00
+0,00
+Empenhos
+de 2015
+230.399.307,98
+455.529.115,32
+225.129.807,34
+0,00
+8.996.130,65
+0,00
+0,00
+0,00
+Empenhos
+de 2014
+221.479.180,50
+412.222.242,06
+190.743.061,56
+0,00
+7.578.456,30
+0,00
+0,00
+0,00
+Empenhos
+de 2013
+209.492.775,58
+387.603.647,48
+178.110.871,90
+0,00
+2.135.546,69
+0,00
+0,00
+0,00
+2
+https://digisusgmp.saude.gov.br
+43 de 51
+
+PAGE 44
+TOTAL DOS RESTOS A PAGAR CANCELADOS OU PRESCRITOS ATÉ O FINAL DO EXERCÍCIO ATUAL QUE AFETARAM O
+CUMPRIMENTO DO LIMITE (XXI) (soma dos saldos negativos da coluna "r")
+0,00
+TOTAL DOS RESTOS A PAGAR CANCELADOS OU PRESCRITOS ATÉ O FINAL DO EXERCÍCIO ANTERIOR QUE AFETARAM O
+CUMPRIMENTO DO LIMITE (XXII) (valor informado no demonstrativo do exercício anterior)
+0,00
+TOTAL DOS RESTOS A PAGAR CANCELADOS OU PRESCRITOS NO EXERCÍCIO ATUAL QUE AFETARAM O CUMPRIMENTO DO
+LIMITE (XXIII) = (XXI - XVII) (Artigo 24 § 1º e 2º da LC 141/2012)
+0,00
+CONTROLE DE RESTOS A PAGAR CANCELADOS OU
+PRESCRITOS CONSIDERADOS PARA FINS DE
+APLICAÇÃO DA DISPONIBILIDADE DE CAIXA
+CONFORME ARTIGO 24§ 1º e 2º DA LC 141/2012
+Saldo Inicial
+(w)
+Despesas Custeadas no Exercício de Referência
+Saldo Final
+(não
+aplicado)
+(aa) = (w - (x
+ou y))
+Empenhadas
+(x)
+Liquidadas (y)
+Pagas (z)
+Restos a pagar cancelados ou prescritos em 2025 a ser
+compensados (XXIV)
+0,00
+0,00
+0,00
+0,00
+0,00
+Restos a pagar cancelados ou prescritos em 2024 a ser
+compensados (XXV)
+0,00
+0,00
+0,00
+0,00
+0,00
+Restos a pagar cancelados ou prescritos em 2023 a ser
+compensados (XXVI)
+0,00
+0,00
+0,00
+0,00
+0,00
+Restos a pagar cancelados ou prescritos em exercícios
+anteriores a serem compensados (XXVII)
+0,00
+0,00
+0,00
+0,00
+0,00
+TOTAL DE RESTOS A PAGAR CANCELADOS OU PRESCRITOS
+A COMPENSAR (XXVIII)
+0,00
+0,00
+0,00
+0,00
+0,00
+RECEITAS ADICIONAIS PARA O FINANCIAMENTO DA SAÚDE
+NÃO COMPUTADAS NO CÁLCULO DO MÍNIMO
+PREVISÃO INICIAL
+PREVISÃO
+ATUALIZADA (a)
+RECEITAS REALIZADAS
+Até o Bimestre
+(b)
+% (b/a) x 100
+RECEITAS DE TRANSFERÊNCIAS PARA A SAÚDE 
+(XXIX)
+337.100.000,00
+337.100.000,00
+295.372.777,41
+87,62
+Provenientes da União
+271.838.000,00
+271.838.000,00
+227.591.287,12
+83,72
+Provenientes dos Estados
+65.262.000,00
+65.262.000,00
+67.781.490,29
+103,86
+Provenientes de Outros Municípios
+0,00
+0,00
+0,00
+0,00
+RECEITA DE OPERAÇÕES DE CRÉDITO INTERNAS E EXTERNAS
+VINCULADAS A SAÚDE (XXX)
+0,00
+0,00
+0,00
+0,00
+OUTRAS RECEITAS (XXXI)
+0,00
+0,00
+0,00
+0,00
+TOTAL RECEITAS ADICIONAIS PARA FINANCIAMENTO DA SAÚDE
+(XXXII) = (XXIX + XXX + XXXI)
+337.100.000,00
+337.100.000,00
+295.372.777,41
+87,62
+DESPESAS COM
+SAUDE POR
+SUBFUNÇÕES E
+CATEGORIA
+ECONÔMICA NÃO
+COMPUTADAS NO
+CÁLCULO DO
+MÍNIMO
+DOTAÇÃO
+INICIAL
+DOTAÇÃO
+ATUALIZADA
+(c)
+DESPESAS
+EMPENHADAS
+DESPESAS
+LIQUIDADAS
+DESPESAS PAGAS
+Inscritas em
+Restos a
+Pagar não
+Processados
+(g)
+Até o
+bimestre (d)
+%
+(d/c)
+x 100
+Até o
+bimestre (e)
+%
+(e/c) x
+100
+Até o
+bimestre (f)
+%
+(f/c)
+x
+100
+ATENÇÃO BÁSICA
+(XXXIII)
+45.194.000,00
+56.171.810,00
+54.096.728,60
+96,31
+48.679.532,31
+86,66
+47.862.066,07
+85,21
+5.417.196,29
+Despesas Correntes
+43.244.000,00
+47.965.130,00
+47.376.680,16
+98,77
+43.469.169,77
+90,63
+43.349.432,72
+90,38
+3.907.510,39
+Despesas de Capital
+1.950.000,00
+8.206.680,00
+6.720.048,44
+81,89
+5.210.362,54
+63,49
+4.512.633,35
+54,99
+1.509.685,90
+ASSISTÊNCIA
+HOSPITALAR E
+AMBULATORIAL
+(XXXIV)
+280.874.000,00
+334.387.674,00
+315.201.734,24
+94,26
+294.264.264,74
+88,00
+282.663.895,89
+84,53
+20.937.469,50
+Despesas Correntes
+276.423.000,00
+292.196.206,00
+281.977.144,19
+96,50
+273.873.447,69
+93,73
+262.463.128,84
+89,82
+8.103.696,50
+Despesas de Capital
+4.451.000,00
+42.191.468,00
+33.224.590,05
+78,75
+20.390.817,05
+48,33
+20.200.767,05
+47,88
+12.833.773,00
+SUPORTE
+PROFILÁTICO E
+TERAPÊUTICO (XXXV)
+9.330.000,00
+12.023.028,00
+11.969.685,87
+99,56
+11.901.586,09
+98,99
+11.621.865,95
+96,66
+68.099,78
+Despesas Correntes
+9.330.000,00
+12.023.028,00
+11.969.685,87
+99,56
+11.901.586,09
+98,99
+11.621.865,95
+96,66
+68.099,78
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+VIGILÂNCIA SANITÁRIA
+(XXXVI)
+1.873.000,00
+3.367.960,00
+1.872.674,64
+55,60
+1.707.934,98
+50,71
+1.580.226,24
+46,92
+164.739,66
+Despesas Correntes
+1.833.000,00
+3.327.960,00
+1.834.415,10
+55,12
+1.669.675,44
+50,17
+1.541.966,70
+46,33
+164.739,66
+Despesas de Capital
+40.000,00
+40.000,00
+38.259,54
+95,65
+38.259,54
+95,65
+38.259,54
+95,65
+0,00
+1
+https://digisusgmp.saude.gov.br
+44 de 51
+
+PAGE 45
+VIGILÂNCIA
+EPIDEMIOLÓGICA
+(XXXVII)
+9.653.000,00
+13.267.083,00
+11.814.953,88
+89,05
+11.562.333,68
+87,15
+11.495.198,94
+86,64
+252.620,20
+Despesas Correntes
+9.653.000,00
+13.267.083,00
+11.814.953,88
+89,05
+11.562.333,68
+87,15
+11.495.198,94
+86,64
+252.620,20
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+ALIMENTAÇÃO E
+NUTRIÇÃO (XXXVIII)
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Despesas Correntes
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+OUTRAS SUBFUNÇÕES
+(XXXIX)
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Despesas Correntes
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+Despesas de Capital
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+TOTAL DAS DESPESAS
+NÃO COMPUTADAS NO
+CÁLCULO DO MÍNIMO
+(XL) = (XXXIII + XXXIV
++ XXXV + XXXVI +
+XXXVII + XXXVIII+
+XXXIX)
+346.924.000,00
+419.217.555,00
+394.955.777,23
+94,21
+368.115.651,80
+87,81
+355.223.253,09
+84,73
+26.840.125,43
+DESPESAS
+TOTAIS COM
+SAÚDE
+EXECUTADAS
+COM COM
+RECURSOS
+PRÓPRIOS E
+COM
+RECURSOS
+TRANSFERIDOS
+DE OUTROS
+ENTES
+DOTAÇÃO
+INICIAL
+DOTAÇÃO
+ATUALIZADA
+(c)
+DESPESAS
+EMPENHADAS
+DESPESAS
+LIQUIDADAS
+DESPESAS PAGAS
+Inscritas em
+Restos a
+Pagar não
+Processados
+(g)
+Até o bimestre
+(d)
+%
+(d/c)
+x 100
+Até o bimestre
+(e)
+%
+(e/c)
+x
+100
+Até o bimestre
+(f)
+%
+(f/c)
+x
+100
+ATENÇÃO
+BÁSICA(XLI) =
+(IV + XXXIII)
+225.293.000,00
+227.297.602,85
+224.845.516,62
+98,92
+216.236.949,48
+95,13
+212.151.298,01
+93,34
+8.608.567,14
+ASSISTÊNCIA
+HOSPITALAR E
+AMBULATORIAL
+(XLII) = (V +
+XXXIV)
+814.190.000,00
+855.915.418,62
+838.980.316,66
+98,02
+814.048.377,12
+95,11
+797.794.812,26
+93,21
+24.931.939,54
+SUPORTE
+PROFILÁTICO E
+TERAPÊUTICO
+(XLIII) = (VI +
+XXXV)
+36.930.000,00
+33.954.948,00
+33.880.671,29
+99,78
+33.760.369,13
+99,43
+33.221.618,29
+97,84
+120.302,16
+VIGILÂNCIA
+SANITÁRIA (XLIV)
+= (VII + XXXVI)
+13.247.000,00
+14.222.380,00
+12.294.380,85
+86,44
+11.764.556,73
+82,72
+11.372.070,23
+79,96
+529.824,12
+VIGILÂNCIA
+EPIDEMIOLÓGICA
+(XLV) = (VIII +
+XXXVII)
+26.893.000,00
+24.922.083,00
+23.242.281,36
+93,26
+22.859.661,16
+91,72
+22.792.526,42
+91,46
+382.620,20
+ALIMENTAÇÃO E
+NUTRIÇÃO (XLVI)
+= (IX + XXXVIII)
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+0,00
+OUTRAS
+SUBFUNÇÕES
+(XLVII) = (X +
+XXXIX)
+24.265.000,00
+38.228.350,00
+37.799.656,77
+98,88
+37.254.656,77
+97,45
+37.254.656,77
+97,45
+545.000,00
+TOTAL DAS
+DESPESAS COM
+SAÚDE (XLVIII) =
+(XI + XL)
+1.140.818.000,00
+1.194.540.782,47
+1.171.042.823,55
+98,03
+1.135.924.570,39
+95,09
+1.114.586.981,98
+93,31
+35.118.253,16
+https://digisusgmp.saude.gov.br
+45 de 51
+
+PAGE 46
+(-) Despesas da
+Fonte:
+Transferências
+da União - inciso
+I do art. 5º da Lei
+Complementar
+173/2020
+346.924.000,00
+419.217.555,00
+394.955.777,23
+94,21
+368.115.651,80
+87,81
+355.223.253,09
+84,73
+26.840.125,43
+TOTAL DAS
+DESPESAS
+EXECUTADAS
+COM RECURSOS
+PRÓPRIOS (XLIX)
+793.894.000,00
+775.323.227,47
+776.087.046,32
+100,10
+767.808.918,59
+99,03
+759.363.728,89
+97,94
+8.278.127,73
+FONTE: SIOPS, São Paulo30/01/26 07:43:24
+1 - Nos cinco primeiros bimestres do exercício, o acompanhamento será feito com base na despesa liquidada. No último bimestre do exercício, o valor deverá corresponder ao total da despesa empenhada.
+2 - Até o exercício de 2018, o controle da execução dos restos a pagar considerava apenas os valores dos restos a pagar não processados (regra antiga). A partir do exercício de 2019, o controle da execução dos restos a pagar
+considera os restos a pagar processados e não processados (regra nova).
+3 - Essas despesas são consideradas executadas pelo ente transferidor.
+9.4. Execução orçamentária e financeira de recursos federais transferidos fundo a fundo, segundo bloco de financiamento e programa de trabalho
+Bloco de Financiamento
+Programas de Trabalho
+Valor
+Transferido
+em 2025 
+(Fonte: FNS)
+Valor
+Executado
+Estruturação da Rede de
+Serviços Públicos de Saúde
+1030151198581 - ESTRUTURAÇÃO DA REDE DE SERVIÇOS DE ATENÇÃO PRIMÁRIA DE SAÚDE
+R$ 2.765.371,00
+2609370,00
+1030251188535 - ESTRUTURAÇÃO DE UNIDADES DE ATENÇÃO ESPECIALIZADA EM SAÚDE
+R$ 7.503.000,00
+3960782,62
+Manutenção das Ações e
+Serviços Públicos de Saúde
+10122512100UW - ASSISTÊNCIA FINANCEIRA COMPLEMENTAR AOS ESTADOS, AO DISTRITO FEDERAL E AOS
+MUNICÍPIOS PARA O PAGAMENTO DO PISO SALARIAL DOS PROFISSIONAIS DA ENFERMAGEM
+R$ 6.097.257,89
+6296765,25
+10301511900UC - TRANSFERÊNCIA AOS ENTES FEDERATIVOS PARA O PAGAMENTO DOS VENCIMENTOS DOS
+AGENTES COMUNITÁRIOS DE SAÚDE
+R$ 9.092.820,00
+9081799,72
+103015119219A - PISO DA ATENÇÃO PRIMÁRIA EM SAÚDE
+R$
+32.063.491,35
+31129301,32
+10301511921CE - IMPLEMENTACAO DE POLITICAS DE ATENCAO PRIMARIA A SAUDE - NACIONAL
+R$ 204.197,20
+204197,20
+1030151192E89 - INCREMENTO TEMPORÁRIO AO CUSTEIO DOS SERVIÇOS DE ATENÇÃO PRIMÁRIA EM SAÚDE
+PARA CUMPRIMENTO DAS METAS - NACIONAL
+R$ 635.000,00
+135580,71
+1030251182E90 - INCREMENTO TEMPORÁRIO AO CUSTEIO DOS SERVIÇOS DE ASSISTÊNCIA HOSPITALAR E
+AMBULATORIAL PARA CUMPRIMENTO DAS METAS - NACIONAL
+R$ 4.975.000,00
+4454873,94
+1030251188585 - ATENÇÃO À SAÚDE DA POPULAÇÃO PARA PROCEDIMENTOS NO MAC
+R$
+146.985.885,04
+215145212,02
+10303511720AE - PROMOÇÃO DA ASSISTÊNCIA FARMACÊUTICA E INSUMOS ESTRATÉGICOS NA ATENÇÃO
+PRIMÁRIA EM SAÚDE
+R$ 5.715.843,60
+5631790,95
+10304512320AB - INCENTIVO FINANCEIRO AOS ESTADOS, DISTRITO FEDERAL E MUNICÍPIOS PARA EXECUÇÃO
+DE AÇÕES DE VIGILÂNCIA SANITÁRIA
+R$ 461.410,00
+442000,00
+10305512300UB - TRANSFERÊNCIA AOS ENTES FEDERATIVOS PARA O PAGAMENTO DOS VENCIMENTOS DOS
+AGENTES DE COMBATE ÀS ENDEMIAS
+R$ 7.277.292,00
+7245869,23
+10305512320AL - APOIO AOS ESTADOS, DISTRITO FEDERAL E - NACIONAL
+R$ 249.791,92
+124895,96
+10305512320AL - APOIO AOS ESTADOS, DISTRITO FEDERAL E MUNICÍPIOS PARA A VIGILÂNCIA EM SAÚDE
+R$ 1.990.225,66
+831336,38
+10305512320AL - INCENTIVO FINANCEIRO AOS ESTADOS, DISTRITO FEDERAL E MUNICÍPIOS PARA A
+VIGILÂNCIA EM SAÚDE
+R$ 843.289,08
+453967,22
+10306513320QH - IMPLEMENTAÇÃO DA SEGURANÇA ALIMENTAR E NUTRICIONAL NA SAÚDE
+R$ 114.118,69
+4812,00
+Fonte: Fundo Nacional de Saúde (FNS)
+1 – Os valores pagos em outro exercício fiscal mesmo tendo sua memória de cálculo e ano anterior, não estarão sendo computados para aquela prestação de contas.
+2 – Para efeitos de despesa executada deve ser considerada a despesa empenhada no exercício fiscal.
+9.5. Relatório de Execução de Recursos Repassados por Emenda Parlamentar
+Não há informações cadastradas para o período do Relatório de Execução de Recursos Repassados por Emenda Parlamentar.
+Análises e Considerações sobre Execução Orçamentária e Financeira
+A Programação Anual de Saúde (PAS) 2025 apresentou execução orçamentária robusta, com orçamento de R$ 1,57 bilhão e elevados índices de execução
+financeira (98,03% empenhado, 95,09% liquidado e 93,31% pago), demonstrando capacidade de planejamento e execução da gestão municipal. O
+município cumpriu com ampla margem a LC 141/2012, aplicando 23,10% da receita própria em saúde, acima do mínimo constitucional de 15%,
+evidenciando priorização do setor. O gasto per capita alcançou R$ 1.610,62 por habitante, com predominância de financiamento municipal (66% ¿ R$ 773
+milhões), complementado por transferências federais do SUS (45% ¿ R$ 531 milhões) e estaduais (6% ¿ R$ 71 milhões), reforçando a elevada participação
+do tesouro municipal no custeio da saúde.
+https://digisusgmp.saude.gov.br
+46 de 51
+
+PAGE 47
+10. Auditorias
+Não há informações cadastradas para o período das Auditorias.
+Fonte: Sistema Nacional de Auditoria do SUS (SISAUD-SUS)
+ 
+Data da consulta: 27/05/2026.
+Outras Auditorias
+Fonte: DIGISUS Gestor - Módulo Planejamento (DIGISUSGMP) - Consulta Online
+ 
+Data da consulta: 27/05/2026.
+Análises e Considerações sobre Auditorias
+Com a finalidade de fortalecer a gestão do Sistema Único de Saúde (SUS), contribuindo para a alocação e utilização adequada dos recursos, a garantia do
+acesso e a qualidade da atenção a saúde oferecida aos cidadãos faz-se necessária apuração de possíveis fraudes e descumprimento de cláusulas
+contratuais por parte dos prestadores em desrespeito as normativas do SUS e leis vigentes. 
+https://digisusgmp.saude.gov.br
+47 de 51
+
+PAGE 48
+11. Análises e Considerações Gerais
+A gestão da saúde em 2025 executou R$1,57 bilhão, reaﬁrmando o elevado compromisso de São José dos Campos com a saúde pública ao destinar
+23,10% da receita própria (R$773 milhões) ao SUS, superando em 54% o mínimo constitucional da LC 141/2012, em contraste com repasses federais
+(45% - R$531M) e estaduais insuﬁcientes (6% - R$71M). Essa robustez ﬁnanceira sustenta gasto per capita de R$1.610,62/habitante, posicionando SJC
+acima da média nacional.
+A alocação estratégica priorizou Assistência Hospitalar/Ambulatorial (52% - R$843M) e Atenção Básica (44% - R$225M), reconhecendo a APS como porta
+de entrada essencial ante envelhecimento populacional (quedas idosos 57,8/100mil), cronicidade crescente (hipertensos/diabéticos +105%) e tecnologias
+custosas. Persistem gargalos: leitos SUS especializados insuficientes, Central Imagens (0%), reabilitação PCD (21,8%) e ampliação da APS.
+O aumento da demanda reﬂete envelhecimento demográﬁco, DCNT (mortalidade prematura -17%), custos tecnológicos, desigualdades, surtos
+transmissíveis (arboviroses 817,70/100mil) e baixa adesão preventiva . Urgência/Emergência (Dir.3 - 59%, motolância 105,67%) absorve demandas
+complexas, gerando superlotação.
+A gestão 2026 prioriza absolutamente a reestruturação da APS, integrando ESF (41,53%) e EAP em modelo territorializado (0¿100%) e resolutivo
+(encaminhamentos 29¿20%). Ampliação de especialidades (46 dentistas ESB, 39 médicos) e infraestrutura (R$30M - Central Imagens, Reabilitação,
+Alzheimer) enfrentarão o estrangulamento da rede; digitalização total (prontuário/SAMS/telemedicina) otimizará fluxos.
+São José dos Campos mantém a saúde como prioridade estratégica, transformando execução ﬁnanceira de R$1,57 bilhão em excelência assistencial via
+planejamento focado, execução disciplinada e correção estrutural imediata.
+https://digisusgmp.saude.gov.br
+48 de 51
+
+PAGE 49
+12. Recomendações para o Próximo Exercício
+Análises e Considerações sobre Recomendações para o Próximo Exercício
+O município de São José dos Campos mantém compromisso com a saúde pública no período, sustentando importante participação de recursos próprios no
+ﬁnanciamento do sistema municipal de saúde, em cenário ainda marcado pela insuﬁciência relativa dos repasses das demais esferas governamentais
+frente ao crescimento contínuo das demandas assistenciais.
+A aplicação dos recursos seguirá priorizando a qualiﬁcação e ampliação da rede de Média e Alta Complexidade, sem prejuízo do fortalecimento da
+Atenção Primária à Saúde, reconhecida como eixo estruturante e ordenador do cuidado. Nesse contexto, permanecem desaﬁos relacionados à
+insuﬁciência de leitos SUS, especialmente nas especialidades clínicas e hospitalares estratégicas, impactando o ﬂuxo assistencial e o acesso oportuno da
+população.
+O aumento progressivo da demanda pelos serviços de saúde continua associado a fatores estruturais e epidemiológicos, como o envelhecimento
+populacional, a maior prevalência de doenças crônicas não transmissíveis, a incorporação de novas tecnologias em saúde, o aumento dos custos
+assistenciais, as desigualdades sociais, além da persistência e emergência de doenças transmissíveis e das diﬁculdades relacionadas à promoção de
+hábitos de vida saudáveis.
+Os serviços de Urgência e Emergência permanecem exercendo papel central como porta de entrada do sistema de saúde, absorvendo demandas
+espontâneas de diferentes níveis de complexidade, o que contribui para a pressão assistencial e episódios recorrentes de superlotação das unidades.
+Diante desse cenário, a gestão municipal reaﬁrma como diretriz estratégica o fortalecimento da Atenção Primária à Saúde, com ampliação da capacidade
+resolutiva das equipes, com a implantação de equipe Emulti, integração dos modelos assistenciais da Estratégia Saúde da Família (ESF), das Equipes de
+Atenção Primária (EAP) e Equipes de Saúde Bucal (ESB),  incorporação de tecnologias digitais em saúde e qualiﬁcação das linhas de cuidado, visando um
+modelo mais preventivo, integrado, territorializado e centrado nas necessidades da população.
+Adicionalmente, será intensiﬁcada a ampliação do acesso às especialidades médicas, exames e serviços de apoio diagnóstico e terapêutico, buscando
+reduzir gargalos assistenciais, qualiﬁcar a regulação do acesso, diminuir o tempo de espera e promover maior eﬁciência e integralidade na atenção à
+saúde no período.
+ 
+GEORGE LUCAS ZENHA DE TOLEDO 
+Secretário(a) de Saúde 
+SÃO JOSÉ DOS CAMPOS/SP, 2025
+https://digisusgmp.saude.gov.br
+49 de 51
+
+PAGE 50
+Identificação
+Considerações:
+Considerando o relatado na introdução atendendo a Legislação pertinente, consideramos apto para prosseguimento.
+Introdução
+Considerações:
+Considerando o relatado na introdução atendendo a Legislação pertinente, consideramos apto para prosseguimento.
+Dados Demográficos e de Morbimortalidade
+Considerações:
+As análises expendidas correspondem plenamente às condições fáticas do município e são acolhidas pelo Conselho de Saúde.
+Dados da Produção de Serviços no SUS
+Considerações:
+As análises expendidas correspondem plenamente às condições fáticas do município, tratam do tema considerando as modiﬁcações
+implementadas pelo Ministério da Saúde no que diz respeito aos bancos de dados, que não foram plenamente implementados, obrigando
+registros divididos em bancos distintos. Os dados apesar dos lançamentos em bancos variados, correspondem à produção e são acolhidos
+pelo Conselho de Saúde.
+Rede Física Prestadora de Serviços ao SUS
+Considerações:
+As análises expendidas correspondem plenamente às condições fáticas do município e são acolhidas pelo Conselho de Saúde
+Profissionais de Saúde Trabalhando no SUS
+Considerações:
+Os dados correspondem aos registros existentes no CNES no momento de sua captação, sendo portanto passível de inadequação, em face de
+possível desatualização dos dados por parte dos serviços alimentadores. Nas condições fáticas são acolhidas pelo Conselho de Saúde.
+Programação Anual de Saúde - PAS
+Considerações:
+Apesar de que o acompanhamento ideal das ações se dessem de forma mais regular-quadrimestral, os dados foram satisfatoriamente
+apurados e lançados e correspondem plenamente às condições fáticas do município no momento de sua elaboração e são acolhidas pelo
+Conselho de Saúde.
+Indicadores de Pactuação Interfederativa
+Considerações:
+Sem Parecer
+Execução Orçamentária e Financeira
+Considerações:
+Os dados da execução orçamentária e ﬁnanceira são gerenciados pelo Fundo Municipal de Saúde que os apresenta e disponibiliza
+regularmente para análise das comissões de acompanhamento do Conselho. A matriz de dados é o SIOPS/MS, portanto, banco de dados
+oﬁcial no tocante aos recursos ﬁnanceiros utilizados nas ações de serviços de saúde. Veriﬁcada sua regularidade, são as mesmas acolhidas
+pelo Conselho.
+Auditorias
+Considerações:
+As análises expendidas correspondem plenamente às condições fáticas do município e são acolhidas pelo Conselho de Saúde.
+Análises e Considerações Gerais
+Parecer do Conselho de Saúde:
+REPÚBLICA FEDERATIVA DO BRASIL
+ESTADO: SAO PAULO
+MUNICÍPIO: SAO JOSE DOS CAMPOS 
+Relatório Anual de Gestão - 2025 
+Parecer do Conselho de Saúde
+https://digisusgmp.saude.gov.br
+50 de 51
+
+PAGE 51
+O Conselho destaca alguns pontos críticos que as respostas
+ainda não resolveram plenamente. Destacamos: 
+Atenção Secundária:
+ É o ponto mais
+sensível, com apenas 18% de execução. Não podemos normalizar filas de espera de
+até 180 dias para consultas especializadas. 
+Vulnerabilidade 
+na Prevenção: 
+A cobertura vacinal para COVID-19 em apenas 25,23% é um dado preocupante que
+exige estratégias mais agressivas de busca ativa. 
+Transparência de Dados:
+ Identificamos que o relatório mistura dados de 2025 com o acumulado de anos anteriores. Para o controle so
+cial ser eficiente, a informação
+ 
+precisa ser clara, padronizada e atualizada.
+ 
+Mediante os pontos identificados acima o Conselho 
+faz a aprovação do Relatório 
+Anual de Gestão 2025 ( RAG 2025)
+ com Ressalva.
+Recomendações para o Próximo Exercício
+Considerações:
+O Conselho Municipal de Saúde ¿ COMUS de São José dos Campos solicita que a Secretaria de Saúde tome as seguintes providências:
+ 
+Apresente um Plano de Providências (Plano de Trabalho ¿ como será feita a correção do itens que não atingiram o resultado esperado)
+Apresente os dados de 2026 ( e anos seguintes) nos próximos relatórios, de forma mais clara eliminando-se dubiedades. 
+Status do Parecer: Aprovado com Ressalvas
+SÃO JOSÉ DOS CAMPOS/SP, 27 de Maio de 2026 
+Conselho Municipal de Saúde de São José Dos Campos
+https://digisusgmp.saude.gov.br
+51 de 51

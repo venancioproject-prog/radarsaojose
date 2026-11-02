@@ -1,0 +1,20 @@
+## main...origin/main
+ M admin-crm.html
+ M app.html
+ M app.js
+ M data/radar_hub/sjc_metadata_registry.json
+ M data/radar_hub/sjc_open_data_ground_truth.json
+ M radar_hub_controller.js
+ M report-bindings.js
+ M report-editorial.css
+ M report-metrics-ui.js
+ M scripts/test-report-ui.cjs
+ M semaforo_module.js
+ M server.js
+?? .agents/
+?? app.updated.html
+?? backups/
+?? download.png
+?? eleicoes-2026-controller.js
+?? pacote_antigravity_eleicoes_2026/
+?? reconciliacao_sistot_2026/

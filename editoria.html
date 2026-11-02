@@ -404,6 +404,11 @@
         <a href="editoria.html?cat=emprego" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="emprego">
           <i class="fa-solid fa-chart-line text-emerald-600 mr-1.5 text-xs"></i> Emprego
         </a>
+        <button onclick="window.openVagasModal && window.openVagasModal()" class="px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white border border-emerald-300 transition-all shrink-0 flex items-center gap-1.5 shadow-2xs cursor-pointer group" title="Ver vagas de emprego abertas em São José dos Campos (revisadas às 08h e 18h)">
+          <i class="fa-solid fa-briefcase text-emerald-600 group-hover:text-white text-xs"></i>
+          <span>Vagas SJC</span>
+          <span class="vagas-count-badge bg-emerald-600 group-hover:bg-emerald-800 text-white text-[10px] px-1.5 py-0.2 rounded-full font-black">28</span>
+        </button>
         <a href="editoria.html?cat=cidade" class="cat-btn px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap transition-all text-slate-700 hover:text-slate-950 hover:bg-slate-100 bg-white border border-slate-200/90 shrink-0" data-cat="cidade">
           <i class="fa-solid fa-tree-city text-teal-600 mr-1.5 text-xs"></i> Cidade
         </a>
@@ -691,6 +696,9 @@
 
   <!-- ══ FEED DE REPORTAGENS DA EDITORIA ══ -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white" id="feedReportagens">
+    
+    <!-- PAINEL INTERATIVO DE VAGAS EM SÃO JOSÉ DOS CAMPOS (EXCLUSIVO EDITORIA DE EMPREGO) -->
+    <div id="painelVagasInline" class="hidden"></div>
     
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-6 mb-8 border-b border-slate-200 gap-4">
       <div>
@@ -1369,6 +1377,16 @@
       if (ogDesc) ogDesc.content = `Cobertura especializada sobre ${currentCatMeta.fullLabel} em São José dos Campos.`;
 
       // 3. Atualizar Título da Seção do Feed
+      // Ativar painel de vagas se for editoria de emprego
+      const pVagas = document.getElementById('painelVagasInline');
+      if (pVagas) {
+        if (currentCatMeta.slug === 'emprego' || catParam === 'emprego') {
+          pVagas.classList.remove('hidden');
+        } else {
+          pVagas.classList.add('hidden');
+        }
+      }
+
       const feedTitle = document.getElementById('feedEditoriaTitle');
       if (feedTitle) feedTitle.textContent = `${currentCatMeta.fullLabel} em São José dos Campos`;
       const feedBadge = document.getElementById('feedEditoriaBadge');
@@ -1477,5 +1495,7 @@
 
     loadEditoriaPage();
   </script>
+  <!-- Script de Vagas em Tempo Real SJC (Atualizado 2x/dia) -->
+  <script src="js/vagas-sjc.js"></script>
 </body>
 </html>

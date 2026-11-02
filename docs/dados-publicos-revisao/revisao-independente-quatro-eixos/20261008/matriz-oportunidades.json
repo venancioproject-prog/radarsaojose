@@ -1,0 +1,50 @@
+[
+  {
+    "axis": "educacao",
+    "opportunity": "Sinopses anteriores a2023 e indicadores de fluxo de outras edições",
+    "official_source": "INEP / Sinopses Estatísticas e Indicadores Educacionais",
+    "next_check": "Baixar cada edição, conferir mudanças de colunas, rede/etapa, notas, territorialidade e sinais de ausência antes de integrar."
+  },
+  {
+    "axis": "educacao",
+    "opportunity": "Infraestrutura, estabelecimentos, docentes e modalidades por escola",
+    "official_source": "INEP / Censo Escolar e microdados oficiais",
+    "next_check": "Validar situação da escola, município da escola versus residência e deduplicação de docentes; não inferir aluno único de matrícula."
+  },
+  {
+    "axis": "saude",
+    "opportunity": "Dados nacionais SIM/SINASC/SIH e anos anteriores dos RAG",
+    "official_source": "DATASUS / TabNet / arquivos DBC; RAG2016–2018 já capturados",
+    "next_check": "Reproduzir residência e versão; extrair PDFs antigos/OCR auditado; não anunciar extração nacional que sofreu timeout."
+  },
+  {
+    "axis": "saude",
+    "opportunity": "CNES mensal por estabelecimento/status e vacinação com denominadores",
+    "official_source": "MS / CNES / PNI / e-Gestor",
+    "next_check": "Definir hospital-dia/complementares/UTI/SUS e situação cadastral; preservar estimativas APS e versões PNI."
+  },
+  {
+    "axis": "seguranca",
+    "opportunity": "Produtividade de outros anos, SPVida e BOs",
+    "official_source": "SSP-SP / APIs e plano de dados abertos",
+    "next_check": "Reproduzir dicionário histórico, retificações, vítima/ocorrência, deduplicação de BOs; não agregar instituições."
+  },
+  {
+    "axis": "seguranca",
+    "opportunity": "Resolver2001, ranking e esclarecimento",
+    "official_source": "SSP-SP / FundaçãoSEADE / DEIC",
+    "next_check": "Obter edição oficial reconciliada, população/frota, universo completo de municípios e coorte/denominador DEIC."
+  },
+  {
+    "axis": "demografia",
+    "opportunity": "Correspondência dos35polígonos e39áreas textuais municipais",
+    "official_source": "Prefeitura / GeoSanja / legislação / IBGE malhas",
+    "next_check": "Obter camada original/versionada e crosswalk explícito; validar chaves, geometria e agregação de setores censitários. Não usar semelhança de nomes."
+  },
+  {
+    "axis": "demografia",
+    "opportunity": "Cor/raça, alfabetização, indígenas, favelas, quilombolas e censos antigos",
+    "official_source": "IBGE / SIDRA / produtos temáticos do Censo",
+    "next_check": "Reproduzir classificações e universos próprios, residual31, denominadores e séries por edição; nenhum preenchimento artificial."
+  }
+]

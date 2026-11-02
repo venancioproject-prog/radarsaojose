@@ -1,0 +1,3 @@
+PASS P4 runtime online: gráfico preservado, lacunas, suspensões, filtros, 16174 linhas JSON/CSV.
+PASS P4 runtime offline: gráfico preservado, lacunas, suspensões, filtros, 16174 linhas JSON/CSV.
+PASS P4 runtime mixed: gráfico preservado, lacunas, suspensões, filtros, 16174 linhas JSON/CSV.

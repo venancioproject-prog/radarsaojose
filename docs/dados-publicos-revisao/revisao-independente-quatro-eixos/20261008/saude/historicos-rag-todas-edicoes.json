@@ -1,0 +1,4995 @@
+{
+  "observations": [
+    {
+      "family": "sinasc",
+      "year": 2015,
+      "value": 9808,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Unidade Federação                                                  2015                           2016                           2017",
+      "native_total_row": "São José dos Campos                                                9.808                          9.562                          9.743"
+    },
+    {
+      "family": "sinasc",
+      "year": 2016,
+      "value": 9562,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Unidade Federação                                                  2015                           2016                           2017",
+      "native_total_row": "São José dos Campos                                                9.808                          9.562                          9.743"
+    },
+    {
+      "family": "sinasc",
+      "year": 2017,
+      "value": 9743,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Unidade Federação                                                  2015                           2016                           2017",
+      "native_total_row": "São José dos Campos                                                9.808                          9.562                          9.743"
+    },
+    {
+      "family": "sih",
+      "year": 2015,
+      "value": 30245,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                  2015            2016            2017            2018            2019",
+      "native_total_row": "Total                                                                                                        30245           28863            29421            31482           34510"
+    },
+    {
+      "family": "sih",
+      "year": 2016,
+      "value": 28863,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                  2015            2016            2017            2018            2019",
+      "native_total_row": "Total                                                                                                        30245           28863            29421            31482           34510"
+    },
+    {
+      "family": "sih",
+      "year": 2017,
+      "value": 29421,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                  2015            2016            2017            2018            2019",
+      "native_total_row": "Total                                                                                                        30245           28863            29421            31482           34510"
+    },
+    {
+      "family": "sih",
+      "year": 2018,
+      "value": 31482,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                  2015            2016            2017            2018            2019",
+      "native_total_row": "Total                                                                                                        30245           28863            29421            31482           34510"
+    },
+    {
+      "family": "sih",
+      "year": 2019,
+      "value": 34510,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                  2015            2016            2017            2018            2019",
+      "native_total_row": "Total                                                                                                        30245           28863            29421            31482           34510"
+    },
+    {
+      "family": "sim",
+      "year": 2015,
+      "value": 3743,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                                  2015               2016               2017",
+      "native_total_row": "Total                                                                                                                              3.743             3.870              3.772"
+    },
+    {
+      "family": "sim",
+      "year": 2016,
+      "value": 3870,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                                  2015               2016               2017",
+      "native_total_row": "Total                                                                                                                              3.743             3.870              3.772"
+    },
+    {
+      "family": "sim",
+      "year": 2017,
+      "value": 3772,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2019,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+      "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657",
+      "source_query_date": "25/03/2020",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "native_header": "Capítulo CID-10                                                                  2015               2016               2017",
+      "native_total_row": "Total                                                                                                                              3.743             3.870              3.772"
+    },
+    {
+      "family": "sinasc",
+      "year": 2016,
+      "value": 9562,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                     2016                           2017                           2018                           2019",
+      "native_total_row": "São José dos Campos                                                    9562                           9743                           9686                           9076"
+    },
+    {
+      "family": "sinasc",
+      "year": 2017,
+      "value": 9743,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                     2016                           2017                           2018                           2019",
+      "native_total_row": "São José dos Campos                                                    9562                           9743                           9686                           9076"
+    },
+    {
+      "family": "sinasc",
+      "year": 2018,
+      "value": 9686,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                     2016                           2017                           2018                           2019",
+      "native_total_row": "São José dos Campos                                                    9562                           9743                           9686                           9076"
+    },
+    {
+      "family": "sinasc",
+      "year": 2019,
+      "value": 9076,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                     2016                           2017                           2018                           2019",
+      "native_total_row": "São José dos Campos                                                    9562                           9743                           9686                           9076"
+    },
+    {
+      "family": "sih",
+      "year": 2016,
+      "value": 28863,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                              2016               2017                2018               2019               2020",
+      "native_total_row": "Total                                                                                                                                 28863               29421                31482               34510               30894"
+    },
+    {
+      "family": "sih",
+      "year": 2017,
+      "value": 29421,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                              2016               2017                2018               2019               2020",
+      "native_total_row": "Total                                                                                                                                 28863               29421                31482               34510               30894"
+    },
+    {
+      "family": "sih",
+      "year": 2018,
+      "value": 31482,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                              2016               2017                2018               2019               2020",
+      "native_total_row": "Total                                                                                                                                 28863               29421                31482               34510               30894"
+    },
+    {
+      "family": "sih",
+      "year": 2019,
+      "value": 34510,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                              2016               2017                2018               2019               2020",
+      "native_total_row": "Total                                                                                                                                 28863               29421                31482               34510               30894"
+    },
+    {
+      "family": "sih",
+      "year": 2020,
+      "value": 30894,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                              2016               2017                2018               2019               2020",
+      "native_total_row": "Total                                                                                                                                 28863               29421                31482               34510               30894"
+    },
+    {
+      "family": "sim",
+      "year": 2016,
+      "value": 3870,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                          2016                 2017                2018                2019",
+      "native_total_row": "Total                                                                                                                                                       3870                3772                3977                4210"
+    },
+    {
+      "family": "sim",
+      "year": 2017,
+      "value": 3772,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                          2016                 2017                2018                2019",
+      "native_total_row": "Total                                                                                                                                                       3870                3772                3977                4210"
+    },
+    {
+      "family": "sim",
+      "year": 2018,
+      "value": 3977,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                          2016                 2017                2018                2019",
+      "native_total_row": "Total                                                                                                                                                       3870                3772                3977                4210"
+    },
+    {
+      "family": "sim",
+      "year": 2019,
+      "value": 4210,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2020,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+      "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc",
+      "source_query_date": "22/03/2021",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                          2016                 2017                2018                2019",
+      "native_total_row": "Total                                                                                                                                                       3870                3772                3977                4210"
+    },
+    {
+      "family": "sinasc",
+      "year": 2017,
+      "value": 9743,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                                            2017                                     2018                                      2019",
+      "native_total_row": "São José dos Campos                                                                          9743                                     9686                                      9076"
+    },
+    {
+      "family": "sinasc",
+      "year": 2018,
+      "value": 9686,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                                            2017                                     2018                                      2019",
+      "native_total_row": "São José dos Campos                                                                          9743                                     9686                                      9076"
+    },
+    {
+      "family": "sinasc",
+      "year": 2019,
+      "value": 9076,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                                            2017                                     2018                                      2019",
+      "native_total_row": "São José dos Campos                                                                          9743                                     9686                                      9076"
+    },
+    {
+      "family": "sih",
+      "year": 2017,
+      "value": 29421,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                         2017                  2018                   2019                  2020                   2021",
+      "native_total_row": "Total                                                                                                                                                           29421                   31482                   34510                   30895                   32995"
+    },
+    {
+      "family": "sih",
+      "year": 2018,
+      "value": 31482,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                         2017                  2018                   2019                  2020                   2021",
+      "native_total_row": "Total                                                                                                                                                           29421                   31482                   34510                   30895                   32995"
+    },
+    {
+      "family": "sih",
+      "year": 2019,
+      "value": 34510,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                         2017                  2018                   2019                  2020                   2021",
+      "native_total_row": "Total                                                                                                                                                           29421                   31482                   34510                   30895                   32995"
+    },
+    {
+      "family": "sih",
+      "year": 2020,
+      "value": 30895,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                         2017                  2018                   2019                  2020                   2021",
+      "native_total_row": "Total                                                                                                                                                           29421                   31482                   34510                   30895                   32995"
+    },
+    {
+      "family": "sih",
+      "year": 2021,
+      "value": 32995,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                         2017                  2018                   2019                  2020                   2021",
+      "native_total_row": "Total                                                                                                                                                           29421                   31482                   34510                   30895                   32995"
+    },
+    {
+      "family": "sim",
+      "year": 2017,
+      "value": 3772,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                                    2017                      2018                       2019",
+      "native_total_row": "Total                                                                                                                                                                                                        3772                      3977                      4210"
+    },
+    {
+      "family": "sim",
+      "year": 2018,
+      "value": 3977,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                                    2017                      2018                       2019",
+      "native_total_row": "Total                                                                                                                                                                                                        3772                      3977                      4210"
+    },
+    {
+      "family": "sim",
+      "year": 2019,
+      "value": 4210,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2021,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+      "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933",
+      "source_query_date": "24/02/2022",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                                    2017                      2018                       2019",
+      "native_total_row": "Total                                                                                                                                                                                                        3772                      3977                      4210"
+    },
+    {
+      "family": "sinasc",
+      "year": 2018,
+      "value": 9686,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                      2018                       2019                        2020",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                     9686                        9076                       8682"
+    },
+    {
+      "family": "sinasc",
+      "year": 2019,
+      "value": 9076,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                      2018                       2019                        2020",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                     9686                        9076                       8682"
+    },
+    {
+      "family": "sinasc",
+      "year": 2020,
+      "value": 8682,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                      2018                       2019                        2020",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                     9686                        9076                       8682"
+    },
+    {
+      "family": "sih",
+      "year": 2018,
+      "value": 31482,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2018            2019            2020            2021            2022",
+      "native_total_row": "Total                                                                                                         31482            34510            30895            32995           35282"
+    },
+    {
+      "family": "sih",
+      "year": 2019,
+      "value": 34510,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2018            2019            2020            2021            2022",
+      "native_total_row": "Total                                                                                                         31482            34510            30895            32995           35282"
+    },
+    {
+      "family": "sih",
+      "year": 2020,
+      "value": 30895,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2018            2019            2020            2021            2022",
+      "native_total_row": "Total                                                                                                         31482            34510            30895            32995           35282"
+    },
+    {
+      "family": "sih",
+      "year": 2021,
+      "value": 32995,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2018            2019            2020            2021            2022",
+      "native_total_row": "Total                                                                                                         31482            34510            30895            32995           35282"
+    },
+    {
+      "family": "sih",
+      "year": 2022,
+      "value": 35282,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2018            2019            2020            2021            2022",
+      "native_total_row": "Total                                                                                                         31482            34510            30895            32995           35282"
+    },
+    {
+      "family": "sim",
+      "year": 2018,
+      "value": 3977,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                    2018              2019               2020",
+      "native_total_row": "Total                                                                                                                                          3977              4210              4651"
+    },
+    {
+      "family": "sim",
+      "year": 2019,
+      "value": 4210,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                    2018              2019               2020",
+      "native_total_row": "Total                                                                                                                                          3977              4210              4651"
+    },
+    {
+      "family": "sim",
+      "year": 2020,
+      "value": 4651,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2022,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+      "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723",
+      "source_query_date": "24/03/2023",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                    2018              2019               2020",
+      "native_total_row": "Total                                                                                                                                          3977              4210              4651"
+    },
+    {
+      "family": "sinasc",
+      "year": 2019,
+      "value": 9076,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                              2019                        2020                       2021                        2022",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                                 9076                        8682                       8545                        8072"
+    },
+    {
+      "family": "sinasc",
+      "year": 2020,
+      "value": 8682,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                              2019                        2020                       2021                        2022",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                                 9076                        8682                       8545                        8072"
+    },
+    {
+      "family": "sinasc",
+      "year": 2021,
+      "value": 8545,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                              2019                        2020                       2021                        2022",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                                 9076                        8682                       8545                        8072"
+    },
+    {
+      "family": "sinasc",
+      "year": 2022,
+      "value": 8072,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                              2019                        2020                       2021                        2022",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                                 9076                        8682                       8545                        8072"
+    },
+    {
+      "family": "sih",
+      "year": 2019,
+      "value": 34510,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+      "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+    },
+    {
+      "family": "sih",
+      "year": 2020,
+      "value": 30895,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+      "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+    },
+    {
+      "family": "sih",
+      "year": 2021,
+      "value": 32995,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+      "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+    },
+    {
+      "family": "sih",
+      "year": 2022,
+      "value": 35282,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+      "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+    },
+    {
+      "family": "sih",
+      "year": 2023,
+      "value": 37007,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                  2019               2020                2021               2022               2023",
+      "native_total_row": "Total                                                                                                                                                34510               30895                32995                35282                37007"
+    },
+    {
+      "family": "sim",
+      "year": 2019,
+      "value": 4210,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                    2019                 2020                2021                 2022",
+      "native_total_row": "Total                                                                                                                                                                       4210                4651                 5699                 4805"
+    },
+    {
+      "family": "sim",
+      "year": 2020,
+      "value": 4651,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                    2019                 2020                2021                 2022",
+      "native_total_row": "Total                                                                                                                                                                       4210                4651                 5699                 4805"
+    },
+    {
+      "family": "sim",
+      "year": 2021,
+      "value": 5699,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                    2019                 2020                2021                 2022",
+      "native_total_row": "Total                                                                                                                                                                       4210                4651                 5699                 4805"
+    },
+    {
+      "family": "sim",
+      "year": 2022,
+      "value": 4805,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2023,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+      "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0",
+      "source_query_date": "15/03/2024",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                                    2019                 2020                2021                 2022",
+      "native_total_row": "Total                                                                                                                                                                       4210                4651                 5699                 4805"
+    },
+    {
+      "family": "sinasc",
+      "year": 2020,
+      "value": 8682,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                            2020                      2021                       2022                      2023",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                               8682                      8545                       8072                      8090"
+    },
+    {
+      "family": "sinasc",
+      "year": 2021,
+      "value": 8545,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                            2020                      2021                       2022                      2023",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                               8682                      8545                       8072                      8090"
+    },
+    {
+      "family": "sinasc",
+      "year": 2022,
+      "value": 8072,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                            2020                      2021                       2022                      2023",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                               8682                      8545                       8072                      8090"
+    },
+    {
+      "family": "sinasc",
+      "year": 2023,
+      "value": 8090,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                                            2020                      2021                       2022                      2023",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                                               8682                      8545                       8072                      8090"
+    },
+    {
+      "family": "sih",
+      "year": 2020,
+      "value": 30895,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+      "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+    },
+    {
+      "family": "sih",
+      "year": 2021,
+      "value": 32995,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+      "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+    },
+    {
+      "family": "sih",
+      "year": 2022,
+      "value": 35282,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+      "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+    },
+    {
+      "family": "sih",
+      "year": 2023,
+      "value": 37008,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+      "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+    },
+    {
+      "family": "sih",
+      "year": 2024,
+      "value": 38737,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                               2020               2021              2022               2023              2024",
+      "native_total_row": "Total                                                                                                                                  30895              32995              35282              37008              38737"
+    },
+    {
+      "family": "sim",
+      "year": 2020,
+      "value": 4651,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                           2020               2021               2022              2023",
+      "native_total_row": "Total                                                                                                                                                       4651               5699               4805              4677"
+    },
+    {
+      "family": "sim",
+      "year": 2021,
+      "value": 5699,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                           2020               2021               2022              2023",
+      "native_total_row": "Total                                                                                                                                                       4651               5699               4805              4677"
+    },
+    {
+      "family": "sim",
+      "year": 2022,
+      "value": 4805,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                           2020               2021               2022              2023",
+      "native_total_row": "Total                                                                                                                                                       4651               5699               4805              4677"
+    },
+    {
+      "family": "sim",
+      "year": 2023,
+      "value": 4677,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2024,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+      "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664",
+      "source_query_date": "25/03/2025",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                                           2020               2021               2022              2023",
+      "native_total_row": "Total                                                                                                                                                       4651               5699               4805              4677"
+    },
+    {
+      "family": "sinasc",
+      "year": 2021,
+      "value": 8545,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                               2021                     2022                    2023                     2024",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                              8.545                    8.072                   8.090                    7.463"
+    },
+    {
+      "family": "sinasc",
+      "year": 2022,
+      "value": 8072,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                               2021                     2022                    2023                     2024",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                              8.545                    8.072                   8.090                    7.463"
+    },
+    {
+      "family": "sinasc",
+      "year": 2023,
+      "value": 8090,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                               2021                     2022                    2023                     2024",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                              8.545                    8.072                   8.090                    7.463"
+    },
+    {
+      "family": "sinasc",
+      "year": 2024,
+      "value": 7463,
+      "unit": "nascidos vivos",
+      "scope": "residência mãe",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Unidade Federação                                               2021                     2022                    2023                     2024",
+      "native_total_row": "SAO JOSE DOS CAMPOS                                              8.545                    8.072                   8.090                    7.463"
+    },
+    {
+      "family": "sih",
+      "year": 2021,
+      "value": 32995,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+      "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+    },
+    {
+      "family": "sih",
+      "year": 2022,
+      "value": 35282,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+      "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+    },
+    {
+      "family": "sih",
+      "year": 2023,
+      "value": 37008,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+      "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+    },
+    {
+      "family": "sih",
+      "year": 2024,
+      "value": 38738,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+      "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+    },
+    {
+      "family": "sih",
+      "year": 2025,
+      "value": 41846,
+      "unit": "internações SUS",
+      "scope": "residência paciente",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                 2021             2022             2023             2024             2025",
+      "native_total_row": "Total                                                                                                    32.995            35.282           37.008            38.738           41.846"
+    },
+    {
+      "family": "sim",
+      "year": 2021,
+      "value": 5699,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                           2021             2022              2023             2024",
+      "native_total_row": "Total                                                                                                                       5.699             4.805            4.677             5.028"
+    },
+    {
+      "family": "sim",
+      "year": 2022,
+      "value": 4805,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                           2021             2022              2023             2024",
+      "native_total_row": "Total                                                                                                                       5.699             4.805            4.677             5.028"
+    },
+    {
+      "family": "sim",
+      "year": 2023,
+      "value": 4677,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                           2021             2022              2023             2024",
+      "native_total_row": "Total                                                                                                                       5.699             4.805            4.677             5.028"
+    },
+    {
+      "family": "sim",
+      "year": 2024,
+      "value": 5028,
+      "unit": "óbitos",
+      "scope": "residência falecido",
+      "edition": 2025,
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "source_query_date": "13/05/2026",
+      "pages": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "native_header": "Capítulo CID-10                                                           2021             2022              2023             2024",
+      "native_total_row": "Total                                                                                                                       5.699             4.805            4.677             5.028"
+    }
+  ],
+  "tables": [
+    {
+      "family": "sih",
+      "edition": 2019,
+      "years": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2015": 1213,
+            "2016": 1019,
+            "2017": 977,
+            "2018": 868,
+            "2019": 1179
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2015": 2645,
+            "2016": 2569,
+            "2017": 2623,
+            "2018": 3144,
+            "2019": 3664
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2015": 209,
+            "2016": 171,
+            "2017": 206,
+            "2018": 245,
+            "2019": 275
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2015": 539,
+            "2016": 483,
+            "2017": 419,
+            "2018": 352,
+            "2019": 410
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2015": 535,
+            "2016": 731,
+            "2017": 665,
+            "2018": 797,
+            "2019": 804
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2015": 541,
+            "2016": 499,
+            "2017": 463,
+            "2018": 570,
+            "2019": 630
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2015": 326,
+            "2016": 137,
+            "2017": 189,
+            "2018": 263,
+            "2019": 493
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2015": 78,
+            "2016": 39,
+            "2017": 37,
+            "2018": 28,
+            "2019": 57
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2015": 3478,
+            "2016": 3232,
+            "2017": 3480,
+            "2018": 3567,
+            "2019": 3806
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2015": 3266,
+            "2016": 3633,
+            "2017": 3445,
+            "2018": 3013,
+            "2019": 3222
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2015": 3359,
+            "2016": 2936,
+            "2017": 3195,
+            "2018": 3488,
+            "2019": 4520
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2015": 557,
+            "2016": 442,
+            "2017": 405,
+            "2018": 568,
+            "2019": 629
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2015": 557,
+            "2016": 474,
+            "2017": 433,
+            "2018": 569,
+            "2019": 821
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2015": 1899,
+            "2016": 1748,
+            "2017": 1831,
+            "2018": 2347,
+            "2019": 2667
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2015": 6180,
+            "2016": 5943,
+            "2017": 6007,
+            "2018": 6076,
+            "2019": 5768
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2015": 635,
+            "2016": 506,
+            "2017": 685,
+            "2018": 705,
+            "2019": 646
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2015": 276,
+            "2016": 203,
+            "2017": 284,
+            "2018": 351,
+            "2019": 412
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2015": 464,
+            "2016": 457,
+            "2017": 455,
+            "2018": 550,
+            "2019": 455
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2015": 2977,
+            "2016": 3063,
+            "2017": 2976,
+            "2018": 3258,
+            "2019": 3283
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2015": 13,
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2015": 498,
+            "2016": 578,
+            "2017": 646,
+            "2018": 723,
+            "2019": 769
+          }
+        }
+      },
+      "totals": {
+        "2015": 30245,
+        "2016": 28863,
+        "2017": 29421,
+        "2018": 31482,
+        "2019": 34510
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+        "accessed_at": "2026-10-08T07:54:21.507341+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 629755,
+        "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657"
+      },
+      "source_query_date": "25/03/2020"
+    },
+    {
+      "family": "sim",
+      "edition": 2019,
+      "years": [
+        2015,
+        2016,
+        2017
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2015": 190,
+            "2016": 159,
+            "2017": 194
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2015": 791,
+            "2016": 817,
+            "2017": 789
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2015": 18,
+            "2016": 17,
+            "2017": 21
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2015": 173,
+            "2016": 188,
+            "2017": 213
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2015": 78,
+            "2016": 28,
+            "2017": 37
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2015": 144,
+            "2016": 166,
+            "2017": 156
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2015": null,
+            "2016": null,
+            "2017": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2015": null,
+            "2016": null,
+            "2017": null
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2015": 849,
+            "2016": 999,
+            "2017": 986
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2015": 473,
+            "2016": 471,
+            "2017": 438
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2015": 205,
+            "2016": 195,
+            "2017": 200
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2015": 16,
+            "2016": 19,
+            "2017": 14
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2015": 18,
+            "2016": 17,
+            "2017": 16
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2015": 150,
+            "2016": 148,
+            "2017": 164
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2015": 1,
+            "2016": 3,
+            "2017": 5
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2015": 78,
+            "2016": 50,
+            "2017": 56
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2015": 45,
+            "2016": 36,
+            "2017": 34
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2015": 203,
+            "2016": 195,
+            "2017": 209
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2015": null,
+            "2016": null,
+            "2017": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2015": 311,
+            "2016": 362,
+            "2017": 240
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2015": null,
+            "2016": null,
+            "2017": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2015": null,
+            "2016": null,
+            "2017": null
+          }
+        }
+      },
+      "totals": {
+        "2015": 3743,
+        "2016": 3870,
+        "2017": 3772
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2019_1_20240808134140.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2019.pdf",
+        "accessed_at": "2026-10-08T07:54:21.507341+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 629755,
+        "sha256": "a44ab7d69c22be8ed65e7308938056f178c7c8bbce9b08ac82727967e1021657"
+      },
+      "source_query_date": "25/03/2020"
+    },
+    {
+      "family": "sih",
+      "edition": 2020,
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2016": 1019,
+            "2017": 977,
+            "2018": 868,
+            "2019": 1179,
+            "2020": 1714
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2016": 2569,
+            "2017": 2623,
+            "2018": 3144,
+            "2019": 3664,
+            "2020": 3226
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2016": 171,
+            "2017": 206,
+            "2018": 245,
+            "2019": 275,
+            "2020": 292
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2016": 483,
+            "2017": 419,
+            "2018": 352,
+            "2019": 410,
+            "2020": 403
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2016": 731,
+            "2017": 665,
+            "2018": 797,
+            "2019": 804,
+            "2020": 573
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2016": 499,
+            "2017": 463,
+            "2018": 570,
+            "2019": 630,
+            "2020": 550
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2016": 137,
+            "2017": 189,
+            "2018": 263,
+            "2019": 493,
+            "2020": 216
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2016": 39,
+            "2017": 37,
+            "2018": 28,
+            "2019": 57,
+            "2020": 34
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2016": 3232,
+            "2017": 3480,
+            "2018": 3567,
+            "2019": 3806,
+            "2020": 3693
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2016": 3633,
+            "2017": 3445,
+            "2018": 3013,
+            "2019": 3222,
+            "2020": 2474
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2016": 2936,
+            "2017": 3195,
+            "2018": 3488,
+            "2019": 4520,
+            "2020": 3853
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2016": 442,
+            "2017": 405,
+            "2018": 568,
+            "2019": 629,
+            "2020": 443
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2016": 474,
+            "2017": 433,
+            "2018": 569,
+            "2019": 821,
+            "2020": 533
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2016": 1748,
+            "2017": 1831,
+            "2018": 2347,
+            "2019": 2667,
+            "2020": 2388
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2016": 5943,
+            "2017": 6007,
+            "2018": 6076,
+            "2019": 5768,
+            "2020": 5461
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2016": 506,
+            "2017": 685,
+            "2018": 705,
+            "2019": 646,
+            "2020": 719
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2016": 203,
+            "2017": 284,
+            "2018": 351,
+            "2019": 412,
+            "2020": 258
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2016": 457,
+            "2017": 455,
+            "2018": 550,
+            "2019": 455,
+            "2020": 386
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2016": 3063,
+            "2017": 2976,
+            "2018": 3258,
+            "2019": 3283,
+            "2020": 2894
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null,
+            "2020": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2016": 578,
+            "2017": 646,
+            "2018": 723,
+            "2019": 769,
+            "2020": 784
+          }
+        }
+      },
+      "totals": {
+        "2016": 28863,
+        "2017": 29421,
+        "2018": 31482,
+        "2019": 34510,
+        "2020": 30894
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+        "accessed_at": "2026-10-08T07:54:13.493229+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 1782546,
+        "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc"
+      },
+      "source_query_date": "22/03/2021"
+    },
+    {
+      "family": "sim",
+      "edition": 2020,
+      "years": [
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2016": 159,
+            "2017": 194,
+            "2018": 178,
+            "2019": 127
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2016": 817,
+            "2017": 789,
+            "2018": 861,
+            "2019": 880
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2016": 17,
+            "2017": 21,
+            "2018": 12,
+            "2019": 17
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2016": 188,
+            "2017": 213,
+            "2018": 275,
+            "2019": 298
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2016": 28,
+            "2017": 37,
+            "2018": 16,
+            "2019": 53
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2016": 166,
+            "2017": 156,
+            "2018": 186,
+            "2019": 221
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2016": 999,
+            "2017": 986,
+            "2018": 888,
+            "2019": 1058
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2016": 471,
+            "2017": 438,
+            "2018": 468,
+            "2019": 481
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2016": 195,
+            "2017": 200,
+            "2018": 231,
+            "2019": 208
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2016": 19,
+            "2017": 14,
+            "2018": 26,
+            "2019": 24
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2016": 17,
+            "2017": 16,
+            "2018": 42,
+            "2019": 43
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2016": 148,
+            "2017": 164,
+            "2018": 170,
+            "2019": 202
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2016": 3,
+            "2017": 5,
+            "2018": 1,
+            "2019": 3
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2016": 50,
+            "2017": 56,
+            "2018": 67,
+            "2019": 57
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2016": 36,
+            "2017": 34,
+            "2018": 32,
+            "2019": 30
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2016": 195,
+            "2017": 209,
+            "2018": 189,
+            "2019": 193
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2016": 362,
+            "2017": 240,
+            "2018": 335,
+            "2019": 315
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2016": null,
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        }
+      },
+      "totals": {
+        "2016": 3870,
+        "2017": 3772,
+        "2018": 3977,
+        "2019": 4210
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2020_1_20240808134148.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2020.pdf",
+        "accessed_at": "2026-10-08T07:54:13.493229+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 1782546,
+        "sha256": "0dca803351b115786abd60622f331b58e5a28e489f801f8b0a6b4c71c0692dfc"
+      },
+      "source_query_date": "22/03/2021"
+    },
+    {
+      "family": "sih",
+      "edition": 2021,
+      "years": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2017": 977,
+            "2018": 868,
+            "2019": 1179,
+            "2020": 1714,
+            "2021": 3244
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2017": 2623,
+            "2018": 3144,
+            "2019": 3664,
+            "2020": 3226,
+            "2021": 3527
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2017": 206,
+            "2018": 245,
+            "2019": 275,
+            "2020": 292,
+            "2021": 332
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2017": 419,
+            "2018": 352,
+            "2019": 410,
+            "2020": 403,
+            "2021": 480
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2017": 665,
+            "2018": 797,
+            "2019": 804,
+            "2020": 573,
+            "2021": 664
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2017": 463,
+            "2018": 570,
+            "2019": 630,
+            "2020": 550,
+            "2021": 655
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2017": 189,
+            "2018": 263,
+            "2019": 493,
+            "2020": 216,
+            "2021": 497
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2017": 37,
+            "2018": 28,
+            "2019": 57,
+            "2020": 34,
+            "2021": 23
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2017": 3480,
+            "2018": 3567,
+            "2019": 3806,
+            "2020": 3693,
+            "2021": 3525
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2017": 3445,
+            "2018": 3013,
+            "2019": 3222,
+            "2020": 2474,
+            "2021": 2433
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2017": 3195,
+            "2018": 3488,
+            "2019": 4520,
+            "2020": 3853,
+            "2021": 3666
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2017": 405,
+            "2018": 568,
+            "2019": 629,
+            "2020": 443,
+            "2021": 505
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2017": 433,
+            "2018": 569,
+            "2019": 821,
+            "2020": 533,
+            "2021": 469
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2017": 1831,
+            "2018": 2347,
+            "2019": 2667,
+            "2020": 2388,
+            "2021": 2416
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2017": 6007,
+            "2018": 6076,
+            "2019": 5768,
+            "2020": 5462,
+            "2021": 5275
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2017": 685,
+            "2018": 705,
+            "2019": 646,
+            "2020": 719,
+            "2021": 573
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2017": 284,
+            "2018": 351,
+            "2019": 412,
+            "2020": 258,
+            "2021": 252
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2017": 455,
+            "2018": 550,
+            "2019": 455,
+            "2020": 386,
+            "2021": 410
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2017": 2976,
+            "2018": 3258,
+            "2019": 3283,
+            "2020": 2894,
+            "2021": 3066
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2017": null,
+            "2018": null,
+            "2019": null,
+            "2020": null,
+            "2021": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2017": 646,
+            "2018": 723,
+            "2019": 769,
+            "2020": 784,
+            "2021": 983
+          }
+        }
+      },
+      "totals": {
+        "2017": 29421,
+        "2018": 31482,
+        "2019": 34510,
+        "2020": 30895,
+        "2021": 32995
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+        "accessed_at": "2026-10-08T07:54:05.084823+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 796996,
+        "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933"
+      },
+      "source_query_date": "24/02/2022"
+    },
+    {
+      "family": "sim",
+      "edition": 2021,
+      "years": [
+        2017,
+        2018,
+        2019
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2017": 194,
+            "2018": 178,
+            "2019": 127
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2017": 789,
+            "2018": 861,
+            "2019": 880
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2017": 21,
+            "2018": 12,
+            "2019": 17
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2017": 213,
+            "2018": 275,
+            "2019": 298
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2017": 37,
+            "2018": 16,
+            "2019": 53
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2017": 156,
+            "2018": 186,
+            "2019": 221
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2017": 986,
+            "2018": 888,
+            "2019": 1058
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2017": 438,
+            "2018": 468,
+            "2019": 481
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2017": 200,
+            "2018": 231,
+            "2019": 208
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2017": 14,
+            "2018": 26,
+            "2019": 24
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2017": 16,
+            "2018": 42,
+            "2019": 43
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2017": 164,
+            "2018": 170,
+            "2019": 202
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2017": 5,
+            "2018": 1,
+            "2019": 3
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2017": 56,
+            "2018": 67,
+            "2019": 57
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2017": 34,
+            "2018": 32,
+            "2019": 30
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2017": 209,
+            "2018": 189,
+            "2019": 193
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2017": 240,
+            "2018": 335,
+            "2019": 315
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2017": null,
+            "2018": null,
+            "2019": null
+          }
+        }
+      },
+      "totals": {
+        "2017": 3772,
+        "2018": 3977,
+        "2019": 4210
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2021_1_20240808134156.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2021.pdf",
+        "accessed_at": "2026-10-08T07:54:05.084823+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 796996,
+        "sha256": "e000e4a03965bff3c0d316b626b3b3cf25275994eee112ed35c2392c10cd9933"
+      },
+      "source_query_date": "24/02/2022"
+    },
+    {
+      "family": "sih",
+      "edition": 2022,
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2018": 868,
+            "2019": 1179,
+            "2020": 1714,
+            "2021": 3244,
+            "2022": 1418
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2018": 3144,
+            "2019": 3664,
+            "2020": 3226,
+            "2021": 3527,
+            "2022": 3484
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2018": 245,
+            "2019": 275,
+            "2020": 292,
+            "2021": 332,
+            "2022": 324
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2018": 352,
+            "2019": 410,
+            "2020": 403,
+            "2021": 480,
+            "2022": 519
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2018": 797,
+            "2019": 804,
+            "2020": 573,
+            "2021": 664,
+            "2022": 739
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2018": 570,
+            "2019": 630,
+            "2020": 550,
+            "2021": 655,
+            "2022": 854
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2018": 263,
+            "2019": 493,
+            "2020": 216,
+            "2021": 497,
+            "2022": 598
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2018": 28,
+            "2019": 57,
+            "2020": 34,
+            "2021": 23,
+            "2022": 33
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2018": 3567,
+            "2019": 3806,
+            "2020": 3693,
+            "2021": 3525,
+            "2022": 4391
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2018": 3013,
+            "2019": 3222,
+            "2020": 2474,
+            "2021": 2433,
+            "2022": 3488
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2018": 3488,
+            "2019": 4520,
+            "2020": 3853,
+            "2021": 3666,
+            "2022": 4177
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2018": 568,
+            "2019": 629,
+            "2020": 443,
+            "2021": 505,
+            "2022": 560
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2018": 569,
+            "2019": 821,
+            "2020": 533,
+            "2021": 469,
+            "2022": 767
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2018": 2347,
+            "2019": 2667,
+            "2020": 2388,
+            "2021": 2416,
+            "2022": 2750
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2018": 6076,
+            "2019": 5768,
+            "2020": 5462,
+            "2021": 5275,
+            "2022": 5560
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2018": 705,
+            "2019": 646,
+            "2020": 719,
+            "2021": 573,
+            "2022": 624
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2018": 351,
+            "2019": 412,
+            "2020": 258,
+            "2021": 252,
+            "2022": 281
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2018": 550,
+            "2019": 455,
+            "2020": 386,
+            "2021": 410,
+            "2022": 468
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2018": 3258,
+            "2019": 3283,
+            "2020": 2894,
+            "2021": 3066,
+            "2022": 3439
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2018": null,
+            "2019": null,
+            "2020": null,
+            "2021": null,
+            "2022": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2018": 723,
+            "2019": 769,
+            "2020": 784,
+            "2021": 983,
+            "2022": 808
+          }
+        }
+      },
+      "totals": {
+        "2018": 31482,
+        "2019": 34510,
+        "2020": 30895,
+        "2021": 32995,
+        "2022": 35282
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+        "accessed_at": "2026-10-08T07:53:56.876220+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 422961,
+        "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723"
+      },
+      "source_query_date": "24/03/2023"
+    },
+    {
+      "family": "sim",
+      "edition": 2022,
+      "years": [
+        2018,
+        2019,
+        2020
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2018": 178,
+            "2019": 127,
+            "2020": 731
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2018": 861,
+            "2019": 880,
+            "2020": 901
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2018": 12,
+            "2019": 17,
+            "2020": 8
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2018": 275,
+            "2019": 298,
+            "2020": 249
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2018": 16,
+            "2019": 53,
+            "2020": 84
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2018": 186,
+            "2019": 221,
+            "2020": 176
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2018": null,
+            "2019": null,
+            "2020": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2018": null,
+            "2019": null,
+            "2020": 1
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2018": 888,
+            "2019": 1058,
+            "2020": 1103
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2018": 468,
+            "2019": 481,
+            "2020": 417
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2018": 231,
+            "2019": 208,
+            "2020": 217
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2018": 26,
+            "2019": 24,
+            "2020": 18
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2018": 42,
+            "2019": 43,
+            "2020": 32
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2018": 170,
+            "2019": 202,
+            "2020": 172
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2018": 1,
+            "2019": 3,
+            "2020": 3
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2018": 67,
+            "2019": 57,
+            "2020": 47
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2018": 32,
+            "2019": 30,
+            "2020": 34
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2018": 189,
+            "2019": 193,
+            "2020": 115
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2018": null,
+            "2019": null,
+            "2020": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2018": 335,
+            "2019": 315,
+            "2020": 343
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2018": null,
+            "2019": null,
+            "2020": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2018": null,
+            "2019": null,
+            "2020": null
+          }
+        }
+      },
+      "totals": {
+        "2018": 3977,
+        "2019": 4210,
+        "2020": 4651
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2022_1_20240808134203.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2022.pdf",
+        "accessed_at": "2026-10-08T07:53:56.876220+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 422961,
+        "sha256": "728b291bd8389cdf42df759acbee46b9ee839f8f6ce3960c040ff2546444c723"
+      },
+      "source_query_date": "24/03/2023"
+    },
+    {
+      "family": "sih",
+      "edition": 2023,
+      "years": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2019": 1179,
+            "2020": 1714,
+            "2021": 3244,
+            "2022": 1418,
+            "2023": 1299
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2019": 3664,
+            "2020": 3226,
+            "2021": 3527,
+            "2022": 3484,
+            "2023": 3775
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2019": 275,
+            "2020": 292,
+            "2021": 332,
+            "2022": 324,
+            "2023": 360
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2019": 410,
+            "2020": 403,
+            "2021": 480,
+            "2022": 519,
+            "2023": 579
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2019": 804,
+            "2020": 573,
+            "2021": 664,
+            "2022": 739,
+            "2023": 805
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2019": 630,
+            "2020": 550,
+            "2021": 655,
+            "2022": 854,
+            "2023": 944
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2019": 493,
+            "2020": 216,
+            "2021": 497,
+            "2022": 598,
+            "2023": 781
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2019": 57,
+            "2020": 34,
+            "2021": 23,
+            "2022": 33,
+            "2023": 40
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2019": 3806,
+            "2020": 3693,
+            "2021": 3525,
+            "2022": 4391,
+            "2023": 4169
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2019": 3222,
+            "2020": 2474,
+            "2021": 2433,
+            "2022": 3488,
+            "2023": 3358
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2019": 4520,
+            "2020": 3853,
+            "2021": 3666,
+            "2022": 4177,
+            "2023": 4853
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2019": 629,
+            "2020": 443,
+            "2021": 505,
+            "2022": 560,
+            "2023": 636
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2019": 821,
+            "2020": 533,
+            "2021": 469,
+            "2022": 767,
+            "2023": 605
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2019": 2667,
+            "2020": 2388,
+            "2021": 2416,
+            "2022": 2750,
+            "2023": 3229
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2019": 5768,
+            "2020": 5462,
+            "2021": 5275,
+            "2022": 5560,
+            "2023": 5456
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2019": 646,
+            "2020": 719,
+            "2021": 573,
+            "2022": 624,
+            "2023": 596
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2019": 412,
+            "2020": 258,
+            "2021": 252,
+            "2022": 281,
+            "2023": 323
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2019": 455,
+            "2020": 386,
+            "2021": 410,
+            "2022": 468,
+            "2023": 552
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2019": 3283,
+            "2020": 2894,
+            "2021": 3066,
+            "2022": 3439,
+            "2023": 3488
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2019": null,
+            "2020": null,
+            "2021": null,
+            "2022": null,
+            "2023": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2019": 769,
+            "2020": 784,
+            "2021": 983,
+            "2022": 808,
+            "2023": 1159
+          }
+        }
+      },
+      "totals": {
+        "2019": 34510,
+        "2020": 30895,
+        "2021": 32995,
+        "2022": 35282,
+        "2023": 37007
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+        "accessed_at": "2026-10-08T07:53:47.180373+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 457059,
+        "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0"
+      },
+      "source_query_date": "15/03/2024"
+    },
+    {
+      "family": "sim",
+      "edition": 2023,
+      "years": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2019": 127,
+            "2020": 731,
+            "2021": 1552,
+            "2022": 446
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2019": 880,
+            "2020": 901,
+            "2021": 930,
+            "2022": 884
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2019": 17,
+            "2020": 8,
+            "2021": 18,
+            "2022": 14
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2019": 298,
+            "2020": 249,
+            "2021": 255,
+            "2022": 403
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2019": 53,
+            "2020": 84,
+            "2021": 80,
+            "2022": 124
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2019": 221,
+            "2020": 176,
+            "2021": 216,
+            "2022": 283
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2019": null,
+            "2020": null,
+            "2021": null,
+            "2022": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2019": null,
+            "2020": 1,
+            "2021": 1,
+            "2022": 1
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2019": 1058,
+            "2020": 1103,
+            "2021": 1119,
+            "2022": 1090
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2019": 481,
+            "2020": 417,
+            "2021": 439,
+            "2022": 426
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2019": 208,
+            "2020": 217,
+            "2021": 244,
+            "2022": 241
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2019": 24,
+            "2020": 18,
+            "2021": 26,
+            "2022": 39
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2019": 43,
+            "2020": 32,
+            "2021": 18,
+            "2022": 41
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2019": 202,
+            "2020": 172,
+            "2021": 246,
+            "2022": 219
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2019": 3,
+            "2020": 3,
+            "2021": 9,
+            "2022": 5
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2019": 57,
+            "2020": 47,
+            "2021": 45,
+            "2022": 49
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2019": 30,
+            "2020": 34,
+            "2021": 29,
+            "2022": 28
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2019": 193,
+            "2020": 115,
+            "2021": 84,
+            "2022": 40
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2019": null,
+            "2020": null,
+            "2021": null,
+            "2022": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2019": 315,
+            "2020": 343,
+            "2021": 388,
+            "2022": 472
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2019": null,
+            "2020": null,
+            "2021": null,
+            "2022": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2019": null,
+            "2020": null,
+            "2021": null,
+            "2022": null
+          }
+        }
+      },
+      "totals": {
+        "2019": 4210,
+        "2020": 4651,
+        "2021": 5699,
+        "2022": 4805
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2023_1_20240808134210.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2023.pdf",
+        "accessed_at": "2026-10-08T07:53:47.180373+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 457059,
+        "sha256": "2186c0b123086f355f45a96f094dfdac9870eb89c3fed231661fd7d0b0fbb6b0"
+      },
+      "source_query_date": "15/03/2024"
+    },
+    {
+      "family": "sih",
+      "edition": 2024,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2020": 1714,
+            "2021": 3244,
+            "2022": 1418,
+            "2023": 1299,
+            "2024": 2091
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2020": 3226,
+            "2021": 3527,
+            "2022": 3484,
+            "2023": 3775,
+            "2024": 3673
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2020": 292,
+            "2021": 332,
+            "2022": 324,
+            "2023": 360,
+            "2024": 416
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2020": 403,
+            "2021": 480,
+            "2022": 519,
+            "2023": 579,
+            "2024": 792
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2020": 573,
+            "2021": 664,
+            "2022": 739,
+            "2023": 805,
+            "2024": 846
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2020": 550,
+            "2021": 655,
+            "2022": 854,
+            "2023": 944,
+            "2024": 969
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2020": 216,
+            "2021": 497,
+            "2022": 598,
+            "2023": 781,
+            "2024": 657
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2020": 34,
+            "2021": 23,
+            "2022": 33,
+            "2023": 40,
+            "2024": 66
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2020": 3693,
+            "2021": 3525,
+            "2022": 4391,
+            "2023": 4169,
+            "2024": 4700
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2020": 2474,
+            "2021": 2433,
+            "2022": 3488,
+            "2023": 3358,
+            "2024": 3190
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2020": 3853,
+            "2021": 3666,
+            "2022": 4177,
+            "2023": 4854,
+            "2024": 5050
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2020": 443,
+            "2021": 505,
+            "2022": 560,
+            "2023": 636,
+            "2024": 788
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2020": 533,
+            "2021": 469,
+            "2022": 767,
+            "2023": 605,
+            "2024": 565
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2020": 2388,
+            "2021": 2416,
+            "2022": 2750,
+            "2023": 3229,
+            "2024": 3256
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2020": 5462,
+            "2021": 5275,
+            "2022": 5560,
+            "2023": 5456,
+            "2024": 5053
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2020": 719,
+            "2021": 573,
+            "2022": 624,
+            "2023": 596,
+            "2024": 575
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2020": 258,
+            "2021": 252,
+            "2022": 281,
+            "2023": 323,
+            "2024": 403
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2020": 386,
+            "2021": 410,
+            "2022": 468,
+            "2023": 552,
+            "2024": 597
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2020": 2894,
+            "2021": 3066,
+            "2022": 3439,
+            "2023": 3488,
+            "2024": 3737
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2020": null,
+            "2021": null,
+            "2022": null,
+            "2023": null,
+            "2024": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2020": 784,
+            "2021": 983,
+            "2022": 808,
+            "2023": 1159,
+            "2024": 1313
+          }
+        }
+      },
+      "totals": {
+        "2020": 30895,
+        "2021": 32995,
+        "2022": 35282,
+        "2023": 37008,
+        "2024": 38737
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+        "accessed_at": "2026-10-08T07:51:58.699758+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 416946,
+        "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664"
+      },
+      "source_query_date": "25/03/2025"
+    },
+    {
+      "family": "sim",
+      "edition": 2024,
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2020": 731,
+            "2021": 1552,
+            "2022": 446,
+            "2023": 223
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2020": 901,
+            "2021": 930,
+            "2022": 884,
+            "2023": 939
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2020": 8,
+            "2021": 18,
+            "2022": 14,
+            "2023": 23
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2020": 249,
+            "2021": 255,
+            "2022": 403,
+            "2023": 344
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2020": 84,
+            "2021": 80,
+            "2022": 124,
+            "2023": 117
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2020": 176,
+            "2021": 216,
+            "2022": 283,
+            "2023": 305
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2020": null,
+            "2021": null,
+            "2022": null,
+            "2023": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2020": 1,
+            "2021": 1,
+            "2022": 1,
+            "2023": 2
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2020": 1103,
+            "2021": 1119,
+            "2022": 1090,
+            "2023": 1147
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2020": 417,
+            "2021": 439,
+            "2022": 426,
+            "2023": 434
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2020": 217,
+            "2021": 244,
+            "2022": 241,
+            "2023": 230
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2020": 18,
+            "2021": 26,
+            "2022": 39,
+            "2023": 30
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2020": 32,
+            "2021": 18,
+            "2022": 41,
+            "2023": 38
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2020": 172,
+            "2021": 246,
+            "2022": 219,
+            "2023": 213
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2020": 3,
+            "2021": 9,
+            "2022": 5,
+            "2023": 5
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2020": 47,
+            "2021": 45,
+            "2022": 49,
+            "2023": 37
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2020": 34,
+            "2021": 29,
+            "2022": 28,
+            "2023": 48
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2020": 115,
+            "2021": 84,
+            "2022": 40,
+            "2023": 54
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2020": null,
+            "2021": null,
+            "2022": null,
+            "2023": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2020": 343,
+            "2021": 388,
+            "2022": 472,
+            "2023": 488
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2020": null,
+            "2021": null,
+            "2022": null,
+            "2023": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2020": null,
+            "2021": null,
+            "2022": null,
+            "2023": null
+          }
+        }
+      },
+      "totals": {
+        "2020": 4651,
+        "2021": 5699,
+        "2022": 4805,
+        "2023": 4677
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2024_1_20260630122038.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2024.pdf",
+        "accessed_at": "2026-10-08T07:51:58.699758+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 416946,
+        "sha256": "704a95d15921a404a3a7439ca015260259b8572cdf907fc7836174abe2ce4664"
+      },
+      "source_query_date": "25/03/2025"
+    },
+    {
+      "family": "sih",
+      "edition": 2025,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2021": 3244,
+            "2022": 1418,
+            "2023": 1299,
+            "2024": 2091,
+            "2025": 1722
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2021": 3527,
+            "2022": 3484,
+            "2023": 3775,
+            "2024": 3673,
+            "2025": 3961
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2021": 332,
+            "2022": 324,
+            "2023": 360,
+            "2024": 416,
+            "2025": 415
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2021": 480,
+            "2022": 519,
+            "2023": 579,
+            "2024": 792,
+            "2025": 1017
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2021": 664,
+            "2022": 739,
+            "2023": 805,
+            "2024": 846,
+            "2025": 1024
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2021": 655,
+            "2022": 854,
+            "2023": 944,
+            "2024": 969,
+            "2025": 1054
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2021": 497,
+            "2022": 598,
+            "2023": 781,
+            "2024": 657,
+            "2025": 694
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2021": 23,
+            "2022": 33,
+            "2023": 40,
+            "2024": 66,
+            "2025": 89
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2021": 3525,
+            "2022": 4391,
+            "2023": 4169,
+            "2024": 4701,
+            "2025": 5453
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2021": 2433,
+            "2022": 3488,
+            "2023": 3358,
+            "2024": 3190,
+            "2025": 2882
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2021": 3666,
+            "2022": 4177,
+            "2023": 4854,
+            "2024": 5050,
+            "2025": 5818
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2021": 505,
+            "2022": 560,
+            "2023": 636,
+            "2024": 788,
+            "2025": 822
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2021": 469,
+            "2022": 767,
+            "2023": 605,
+            "2024": 565,
+            "2025": 793
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2021": 2416,
+            "2022": 2750,
+            "2023": 3229,
+            "2024": 3256,
+            "2025": 3513
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2021": 5275,
+            "2022": 5560,
+            "2023": 5456,
+            "2024": 5053,
+            "2025": 5563
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2021": 573,
+            "2022": 624,
+            "2023": 596,
+            "2024": 575,
+            "2025": 604
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2021": 252,
+            "2022": 281,
+            "2023": 323,
+            "2024": 403,
+            "2025": 346
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2021": 410,
+            "2022": 468,
+            "2023": 552,
+            "2024": 597,
+            "2025": 789
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2021": 3066,
+            "2022": 3439,
+            "2023": 3488,
+            "2024": 3737,
+            "2025": 4158
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2021": null,
+            "2022": null,
+            "2023": null,
+            "2024": null,
+            "2025": null
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2021": 983,
+            "2022": 808,
+            "2023": 1159,
+            "2024": 1313,
+            "2025": 1129
+          }
+        }
+      },
+      "totals": {
+        "2021": 32995,
+        "2022": 35282,
+        "2023": 37008,
+        "2024": 38738,
+        "2025": 41846
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+        "accessed_at": "2026-10-08T07:51:42.140067+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 467239,
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20"
+      },
+      "source_query_date": "13/05/2026"
+    },
+    {
+      "family": "sim",
+      "edition": 2025,
+      "years": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "rows": {
+        "I": {
+          "label": "Algumas doenças infecciosas e parasitárias",
+          "values": {
+            "2021": 1552,
+            "2022": 446,
+            "2023": 223,
+            "2024": 296
+          }
+        },
+        "II": {
+          "label": "Neoplasias (tumores)",
+          "values": {
+            "2021": 930,
+            "2022": 884,
+            "2023": 939,
+            "2024": 1015
+          }
+        },
+        "III": {
+          "label": "Doenças sangue órgãos hemat e transt imunitár",
+          "values": {
+            "2021": 18,
+            "2022": 14,
+            "2023": 23,
+            "2024": 21
+          }
+        },
+        "IV": {
+          "label": "Doenças endócrinas nutricionais e metabólicas",
+          "values": {
+            "2021": 255,
+            "2022": 403,
+            "2023": 344,
+            "2024": 414
+          }
+        },
+        "V": {
+          "label": "Transtornos mentais e comportamentais",
+          "values": {
+            "2021": 80,
+            "2022": 124,
+            "2023": 117,
+            "2024": 128
+          }
+        },
+        "VI": {
+          "label": "Doenças do sistema nervoso",
+          "values": {
+            "2021": 216,
+            "2022": 283,
+            "2023": 305,
+            "2024": 307
+          }
+        },
+        "VII": {
+          "label": "Doenças do olho e anexos",
+          "values": {
+            "2021": null,
+            "2022": null,
+            "2023": null,
+            "2024": null
+          }
+        },
+        "VIII": {
+          "label": "Doenças do ouvido e da apófise mastóide",
+          "values": {
+            "2021": 1,
+            "2022": 1,
+            "2023": 2,
+            "2024": 2
+          }
+        },
+        "IX": {
+          "label": "Doenças do aparelho circulatório",
+          "values": {
+            "2021": 1119,
+            "2022": 1090,
+            "2023": 1147,
+            "2024": 1126
+          }
+        },
+        "X": {
+          "label": "Doenças do aparelho respiratório",
+          "values": {
+            "2021": 439,
+            "2022": 426,
+            "2023": 434,
+            "2024": 546
+          }
+        },
+        "XI": {
+          "label": "Doenças do aparelho digestivo",
+          "values": {
+            "2021": 244,
+            "2022": 241,
+            "2023": 230,
+            "2024": 267
+          }
+        },
+        "XII": {
+          "label": "Doenças da pele e do tecido subcutâneo",
+          "values": {
+            "2021": 26,
+            "2022": 39,
+            "2023": 30,
+            "2024": 43
+          }
+        },
+        "XIII": {
+          "label": "Doenças sist osteomuscular e tec conjuntivo",
+          "values": {
+            "2021": 18,
+            "2022": 41,
+            "2023": 38,
+            "2024": 32
+          }
+        },
+        "XIV": {
+          "label": "Doenças do aparelho geniturinário",
+          "values": {
+            "2021": 246,
+            "2022": 219,
+            "2023": 213,
+            "2024": 251
+          }
+        },
+        "XV": {
+          "label": "Gravidez parto e puerpério",
+          "values": {
+            "2021": 9,
+            "2022": 5,
+            "2023": 5,
+            "2024": 5
+          }
+        },
+        "XVI": {
+          "label": "Algumas afec originadas no período perinatal",
+          "values": {
+            "2021": 45,
+            "2022": 49,
+            "2023": 37,
+            "2024": 30
+          }
+        },
+        "XVII": {
+          "label": "Malf cong deformid e anomalias cromossômicas",
+          "values": {
+            "2021": 29,
+            "2022": 28,
+            "2023": 48,
+            "2024": 28
+          }
+        },
+        "XVIII": {
+          "label": "Sint sinais e achad anorm ex clín e laborat",
+          "values": {
+            "2021": 84,
+            "2022": 40,
+            "2023": 54,
+            "2024": 56
+          }
+        },
+        "XIX": {
+          "label": "Lesões enven e alg out conseq causas externas",
+          "values": {
+            "2021": null,
+            "2022": null,
+            "2023": null,
+            "2024": null
+          }
+        },
+        "XX": {
+          "label": "Causas externas de morbidade e mortalidade",
+          "values": {
+            "2021": 388,
+            "2022": 472,
+            "2023": 488,
+            "2024": 461
+          }
+        },
+        "XXI": {
+          "label": "Contatos com serviços de saúde",
+          "values": {
+            "2021": null,
+            "2022": null,
+            "2023": null,
+            "2024": null
+          }
+        },
+        "XXII": {
+          "label": "Códigos para propósitos especiais",
+          "values": {
+            "2021": null,
+            "2022": null,
+            "2023": null,
+            "2024": null
+          }
+        }
+      },
+      "totals": {
+        "2021": 5699,
+        "2022": 4805,
+        "2023": 4677,
+        "2024": 5028
+      },
+      "source": {
+        "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "raw": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/raw/rag2025.pdf",
+        "accessed_at": "2026-10-08T07:51:42.140067+00:00",
+        "http_status": "200",
+        "exit_code": 0,
+        "error": "",
+        "bytes": 467239,
+        "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20"
+      },
+      "source_query_date": "13/05/2026"
+    }
+  ]
+}

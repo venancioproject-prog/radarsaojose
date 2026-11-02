@@ -1,0 +1,3239 @@
+.agents/teamwork/teamwork_preview_auditor_m2_iter2_1/audit_checks.py
+.agents/teamwork/teamwork_preview_auditor_m2_iter2_1/raw_derivation_check.py
+.agents/teamwork/teamwork_preview_explorer_m3_1/check_test.py
+.agents/teamwork/teamwork_preview_explorer_m3_1/inspect_package_saude.py
+.agents/teamwork/teamwork_preview_explorer_m3_1/inspect_pkg_meta_saude.py
+.agents/teamwork/teamwork_preview_explorer_m3_1/inspect_registry_saude.py
+.agents/teamwork/teamwork_preview_explorer_survey_codebase/find_presentation_logic.py
+.agents/teamwork/teamwork_preview_explorer_survey_codebase/inspect_slides.py
+.agents/teamwork/teamwork_preview_explorer_survey_codebase/probe_app_js.py
+.agents/teamwork/teamwork_preview_explorer_survey_codebase/probe_architecture.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_check_appjs.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_check_ideb.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_emdash.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_find_emdash_locations.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_saude_ssp.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_ssp.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_survey.py
+.agents/teamwork/teamwork_preview_explorer_survey_data_o2/helper_test_runner.py
+.agents/teamwork/teamwork_preview_explorer_survey_editorial/inspect_app.py
+.agents/teamwork/teamwork_preview_explorer_survey_tests_o2/runner_survey.py
+.agents/teamwork/teamwork_preview_reviewer_m2_1/verify_m2_adversarial.py
+.agents/teamwork/teamwork_preview_reviewer_m2_2/inspect_raw_contents.py
+.agents/teamwork/teamwork_preview_reviewer_m2_2/verify_cross_consistency.py
+.agents/teamwork/teamwork_preview_reviewer_m2_2/verify_m2_independent.py
+.agents/teamwork/teamwork_preview_reviewer_m2_2/verify_raw_payloads.py
+.agents/teamwork/teamwork_preview_worker_m2/apply_m2_reconciliations.py
+.agents/teamwork/teamwork_preview_worker_m2/build_m2_raw_and_evidence.py
+.agents/teamwork/teamwork_preview_worker_m2/create_evidence_stores.py
+.agents/teamwork/teamwork_preview_worker_m2/fetch_primary_data.py
+.agents/teamwork/teamwork_preview_worker_m2/test_m2_auditoria.py
+.agents/teamwork/teamwork_preview_worker_m3/apply_m3_reconciliations.py
+.agents/teamwork/teamwork_preview_worker_m3/build_m3_stores.py
+.env
+002_market_intelligence_empresas_sjc.sql
+003_quarentena_outliers_extremos.sql
+004_macro_setores_ibge.sql
+005_multi_select_and_performance.sql
+006_mapa_street_level_points.sql
+007_filtros_cascata_cnaes.sql
+008_todas_empresas_sjc_contatos.sql
+CPF e RG Yeye.pdf
+Claude Setup.exe
+"Comprovante de resid\303\252ncia Yeye.pdf"
+Curriculo yeye Sueide Kinte - 2026.pdf
+Gemini_Generated_Image_34b41j34b41j34b4.jpg
+INFLUENCIADORES_RADAR_SJC.csv
+"Mais fotos radar/APRESENTA\303\207\303\203O FINAL.pdf"
+"Mais fotos radar/APRESENTA\303\207\303\203O FINAL.pptx"
+"Mais fotos radar/APRESENTA\303\207\303\203O FINAL.txt"
+"Mais fotos radar/Andr\303\251 Paix\303\243o - Studio 8.jpeg"
+Mais fotos radar/Gemini_Generated_Image_nnaqqrnnaqqrnnaq.png
+Mais fotos radar/Gemini_Generated_Image_s0j4mps0j4mps0j4.jpg
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada.html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/165470665362a0d1dd07bca_1654706653_3x2_md-300x200.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/213950_2"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/28062023-pzzb1669.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/435462_2"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/911"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/AGIF24081819055499-scaled-aspect-ratio-512-320-300x188.webp"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/AGIF24081819055499-scaled-aspect-ratio-512-320-768x480.webp"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/An0EMjQG"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/BAd-Bunny.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Carla-Marins-300x225.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Carla-Marins-768x576.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Cp0L2bMNDmkFysOVTbgbxg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Djonga.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Eclipse-Liunar-768x404.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/F221212AVS20-1320x880.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Hugo-Motta.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/MONTAGENS-PARA-TNC-1-768x512.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Nethanyahu-e-Trump-300x195.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Nuno-Leal-Maia-243x300.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Nuno-Leal-Maia.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Patinadores-russos-acidente-300x200.webp"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Senado-federal.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Tati-Weston-Webb-300x179.webp"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Trump-Orchestra-300x218.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/XHS-english-thumbnail.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ads.html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/aframe.html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/americana"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/apollo.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/archive.min.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/archive.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/athena(1).js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/athena.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_29c256855536bec44217dc33bbff5ecb.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_144e12840511769c6c1d2940e92dfe00.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_3d550afa5e56b857249a34c8a1acdf36.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_546a7a80db72a470fd0c661faf47c3a7.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_8f406d598780dd48accb2d3189e2d25b.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_935b17143c45eb1482a1d9d8ba02c307.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_9b87db4f17376b1eeff7686abb0f4d02.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_fd349bc2b967f68e1d2528ac6396f906.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/banner-styles.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/banner.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/banner.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/braga-netto-300x180.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/briga-entre-atleticanos-e-cruzeirenses-300x169.avif"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/bukele-768x432.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/bundle-playback.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/chevron.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/clevelandart"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/close-circle-dark.svg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/close-circle-white.svg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/confronto-de-torcidas-recife-300x179.jpeg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/congresso-nacional-300x200.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/consolelivingroom"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/container_kzRD6OIl.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/cooktop-electrolux-4-bocas-por-inducao-automatico-com-zona-unicook-102103561139.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/cropped-Design-sem-nome.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/css2"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/donation-banner.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/etree"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/f(1).txt"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/f.txt"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/gaza-jornal-nacional-300x169.avif"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/geladeira-refrigerador-brastemp-554l-frost-free-french-door-bro85ak-092311191729.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/history-in-hd-cTz5-T7voqQ-unsplash-300x200.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/hooks.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/i18n.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ia-topnav.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/iconochive.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/images-96-300x205.jpeg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/images-96.jpeg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/integra-da-denuncia-de-bolsonaro-300x201.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/internetarcade"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/jquery-1.10.2.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/jquery.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/lazysizes.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/librivoxaudio"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/lula-jan-2023-ricardo-stuckert-720x475-1.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/machado-de-xango-justica.jpeg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/metropolitanmuseumofart-gallery"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/oruam-241x300.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/oruam.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/polyfill-support.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/polyfill.min.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/renata-vitrine-do-seu-fifi-bbb_widelg-300x169.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/renata-vitrine-do-seu-fifi-bbb_widelg-768x432.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ruffle.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/runner.html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script(1).js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script(2).js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script(3).js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/smart-tv-samsung-65-4k-wi-fi-tizen-crystal-uhd-65du7700-092501311421.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/styles.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/tropas_norte-coreanas_na_russia.jpg"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/tv"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ui.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/view(1).html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/view(2).html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/view.html"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/web.css"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/webcomponents-bundle.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/widgetOL.png"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/wombat.js.download"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/yONxw_"
+"Mais fotos radar/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/zrt_lookup.html"
+Mais fotos radar/IMG_2777.jpg
+Mais fotos radar/IMG_2780.jpg
+Mais fotos radar/IMG_2784.jpg
+Mais fotos radar/IMG_2785.jpg
+Mais fotos radar/IMG_2786.jpg
+Mais fotos radar/IMG_2789.jpg
+Mais fotos radar/IMG_2791.jpg
+Mais fotos radar/IMG_2792.jpg
+Mais fotos radar/IMG_2808.jpg
+Mais fotos radar/IMG_2809.jpg
+Mais fotos radar/IMG_2810-2.jpg
+Mais fotos radar/IMG_2810.jpg
+Mais fotos radar/IMG_2811.jpg
+Mais fotos radar/IMG_2813.jpg
+Mais fotos radar/IMG_2815-2.jpg
+Mais fotos radar/IMG_2815.jpg
+Mais fotos radar/IMG_2822.jpg
+Mais fotos radar/IMG_2824.jpg
+Mais fotos radar/IMG_2826.jpg
+Mais fotos radar/IMG_2829.jpg
+Mais fotos radar/IMG_2830.jpg
+Mais fotos radar/IMG_2831.jpg
+Mais fotos radar/IMG_2832.jpg
+Mais fotos radar/IMG_2833.jpg
+Mais fotos radar/IMG_2838.jpg
+Mais fotos radar/IMG_2839.jpg
+Mais fotos radar/IMG_2840.jpg
+Mais fotos radar/IMG_2841.jpg
+Mais fotos radar/IMG_2842.jpg
+Mais fotos radar/IMG_2843.jpg
+Mais fotos radar/IMG_2844.jpg
+Mais fotos radar/IMG_2845.jpg
+Mais fotos radar/IMG_2846.jpg
+Mais fotos radar/IMG_2847.jpg
+Mais fotos radar/IMG_2857.jpg
+Mais fotos radar/IMG_2858.jpg
+Mais fotos radar/IMG_2863.jpg
+Mais fotos radar/IMG_2865.jpg
+Mais fotos radar/IMG_2866.jpg
+Mais fotos radar/IMG_2868.jpg
+Mais fotos radar/IMG_2874.jpg
+Mais fotos radar/IMG_2875.jpg
+Mais fotos radar/IMG_2879.jpg
+Mais fotos radar/IMG_2882.jpg
+Mais fotos radar/IMG_2883.jpg
+Mais fotos radar/IMG_2888.jpg
+Mais fotos radar/IMG_2889.jpg
+Mais fotos radar/IMG_2890.jpg
+Mais fotos radar/IMG_2892.jpg
+Mais fotos radar/IMG_2893.jpg
+Mais fotos radar/IMG_2896.jpg
+Mais fotos radar/IMG_2898.jpg
+Mais fotos radar/IMG_2899.jpg
+Mais fotos radar/IMG_2902.jpg
+Mais fotos radar/IMG_2904.jpg
+Mais fotos radar/IMG_2905-2.jpg
+Mais fotos radar/IMG_2905.jpg
+Mais fotos radar/IMG_2906.jpg
+Mais fotos radar/IMG_2907.jpg
+Mais fotos radar/IMG_2911.jpg
+Mais fotos radar/IMG_2912.jpg
+Mais fotos radar/IMG_2914.jpg
+Mais fotos radar/IMG_2915.jpg
+Mais fotos radar/IMG_2916.jpg
+Mais fotos radar/IMG_2919.jpg
+Mais fotos radar/IMG_2921.jpg
+Mais fotos radar/Simounao.jpg
+Mais fotos radar/chico_buarque_de_1966_album_capa.webp
+Mais fotos radar/desktop.ini
+"Mais fotos radar/globotrends2026-oxygen-completo-2-_c\303\263pia (1).pdf"
+"Mais fotos radar/globotrends2026-oxygen-completo-2-_c\303\263pia (2).pdf"
+"Mais fotos radar/globotrends2026-oxygen-completo-2-_c\303\263pia.pdf"
+Mais fotos radar/image (3).png
+Mais fotos radar/logo.png.png
+Mais fotos radar/logo_sem_fundo.png
+Mais fotos radar/logobranco.png
+Mais fotos radar/logobranco_sem_fundo.png
+Mais fotos radar/logos_streaming_png.zip
+Mais fotos radar/logos_streaming_png/Amazon_Prime_Video.png
+Mais fotos radar/logos_streaming_png/Apple_TV_Plus.png
+Mais fotos radar/logos_streaming_png/Deezer.png
+Mais fotos radar/logos_streaming_png/Disney_Plus.png
+Mais fotos radar/logos_streaming_png/Game_Pass.png
+Mais fotos radar/logos_streaming_png/Globoplay.png
+Mais fotos radar/logos_streaming_png/Max.png
+Mais fotos radar/logos_streaming_png/Netflix.png
+Mais fotos radar/logos_streaming_png/Paramount_Plus.png
+Mais fotos radar/logos_streaming_png/PlayStation_Plus.png
+Mais fotos radar/logos_streaming_png/README.md
+Mais fotos radar/logos_streaming_png/Spotify.png
+Mais fotos radar/logos_streaming_png/Star_Plus.png
+Mais fotos radar/logos_streaming_png/YouTube_Music.png
+Mais fotos radar/pexels-79380313-9007297.jpg
+Mais fotos radar/pexels-a1bda-30720848.jpg
+Mais fotos radar/pexels-achilles-720459.jpg
+Mais fotos radar/pexels-adarsh-mp-31499386.jpg
+Mais fotos radar/pexels-afitab-152665775-25753650.jpg
+Mais fotos radar/pexels-alex-nasto-182045-582635.jpg
+Mais fotos radar/pexels-alexander-mass-748453803-31052829.jpg
+Mais fotos radar/pexels-alina-1008702-33471546.jpg
+Mais fotos radar/pexels-allecgomes-9762615.jpg
+Mais fotos radar/pexels-aloevera-18221972.jpg
+Mais fotos radar/pexels-amar-30792656.jpg
+Mais fotos radar/pexels-anderson-alves-2158767102-35661521.jpg
+Mais fotos radar/pexels-andrea-prochilo-3062027-36702875.jpg
+Mais fotos radar/pexels-anete-lusina-5240545.jpg
+Mais fotos radar/pexels-angelo-capitanio-423939654-17055631.jpg
+Mais fotos radar/pexels-anna-nekrashevich-7550886.jpg
+Mais fotos radar/pexels-annevandervalk-33323196.jpg
+Mais fotos radar/pexels-apex-31902633.jpg
+Mais fotos radar/pexels-artempodrez-7773980.jpg
+Mais fotos radar/pexels-arth-443963208-31996252.jpg
+Mais fotos radar/pexels-asphotography-96612.jpg
+Mais fotos radar/pexels-ayush-mann-2953262-12027458.jpg
+Mais fotos radar/pexels-ben-mack-6775241.jpg
+Mais fotos radar/pexels-bertellifotografia-33714868.jpg
+Mais fotos radar/pexels-bertellifotografia-799443.jpg
+Mais fotos radar/pexels-beyzaa-yurtkuran-279977530-17941537.jpg
+Mais fotos radar/pexels-black-ice-551383-1314529.jpg
+Mais fotos radar/pexels-bohlemedia-1089932-768x512.jpg
+Mais fotos radar/pexels-brett-sayles-4864255.jpg
+Mais fotos radar/pexels-brian-forsyth-3819674-5684830.jpg
+Mais fotos radar/pexels-bulat843-1243575272-35072810.jpg
+Mais fotos radar/pexels-byfotografa-36213470.jpg
+Mais fotos radar/pexels-caleboquendo-3023317.jpg
+Mais fotos radar/pexels-castorlystock-5139206-768x512.jpg
+Mais fotos radar/pexels-cihad-yildiz-2160041419-36477548.jpg
+Mais fotos radar/pexels-clement-eastwood-3211666-5406964.jpg
+Mais fotos radar/pexels-clipping-marketing-digital-2150566657-31207972.jpg
+Mais fotos radar/pexels-cottonbro-3825295.jpg
+Mais fotos radar/pexels-cottonbro-3951628.jpg
+Mais fotos radar/pexels-cottonbro-5473950.jpg
+Mais fotos radar/pexels-cottonbro-6153354.jpg
+Mais fotos radar/pexels-cottonbro-6491797.jpg
+Mais fotos radar/pexels-cottonbro-6899765.jpg
+Mais fotos radar/pexels-cottonbro-7181694.jpg
+Mais fotos radar/pexels-cottonbro-8369201.jpg
+Mais fotos radar/pexels-crisphotography-27819035.jpg
+Mais fotos radar/pexels-cup-of-couple-6632857.jpg
+Mais fotos radar/pexels-cup-of-couple-8015667.jpg
+Mais fotos radar/pexels-daniel-dan-47825192-7623482-768x480.jpg
+Mais fotos radar/pexels-dimkidama-14286757.jpg
+Mais fotos radar/pexels-dmitry93-27000640.jpg
+Mais fotos radar/pexels-eduschadesoares-5498225.jpg
+Mais fotos radar/pexels-ekaterina-bolovtsova-6077240.jpg
+Mais fotos radar/pexels-ekaterina-bolovtsova-6077326-300x200.jpg
+Mais fotos radar/pexels-ekaterina-bolovtsova-7358313.jpg
+Mais fotos radar/pexels-elina-araja-1743227-3314838.jpg
+Mais fotos radar/pexels-elizabeth-ferreira-1040803688-30461204.jpg
+Mais fotos radar/pexels-energepic-com-27411-159888-300x225.jpg
+Mais fotos radar/pexels-eva-bronzini-7597895.jpg
+Mais fotos radar/pexels-eye4dtail-792032.jpg
+Mais fotos radar/pexels-felipe-silva-1458994757-32118967.jpg
+Mais fotos radar/pexels-fillipephotos-5267681.jpg
+Mais fotos radar/pexels-gian-tripodoro-2151345262-33607761.jpg
+Mais fotos radar/pexels-giovanna-kamimura-399616174-37105186.jpg
+Mais fotos radar/pexels-goumbik-618775-768x509.jpg
+Mais fotos radar/pexels-haim-charbit-46102840-12789438.jpg
+Mais fotos radar/pexels-helenalopes-27175532.jpg
+Mais fotos radar/pexels-helloaesthe-18933280.jpg
+Mais fotos radar/pexels-hert-25243016.jpg
+Mais fotos radar/pexels-i-brahim-bozkurt-491138230-35530397.jpg
+Mais fotos radar/pexels-ian-panelo-9494908.jpg
+Mais fotos radar/pexels-ibertola-2681319.jpg
+Mais fotos radar/pexels-imvitordiniz-31227672.jpg
+Mais fotos radar/pexels-iryna-olar-1411337-7830501.jpg
+Mais fotos radar/pexels-ivo-brasil-335441-6310123.jpg
+Mais fotos radar/pexels-james-l-349383308-15068453.jpg
+Mais fotos radar/pexels-jean-depocas-1110767-6420235.jpg
+Mais fotos radar/pexels-jefferson-guimaraes-santana-385497410-16631011.jpg
+Mais fotos radar/pexels-jibarofoto-14001854.jpg
+Mais fotos radar/pexels-jonathan-silva-672107450-19362657.jpg
+Mais fotos radar/pexels-jonathanborba-3563173.jpg
+Mais fotos radar/pexels-juan-burgos-2487109-4494496.jpg
+Mais fotos radar/pexels-juliano-astc-1623739-12080838.jpg
+Mais fotos radar/pexels-jyjyjyjy-20162106.jpg
+Mais fotos radar/pexels-karola-g-5412400.jpg
+Mais fotos radar/pexels-karola-g-5877645.jpg
+Mais fotos radar/pexels-karola-g-6345342.jpg
+Mais fotos radar/pexels-karola-g-8005029.jpg
+Mais fotos radar/pexels-keeganjchecks-4379890.jpg
+Mais fotos radar/pexels-kelly-2928254.jpg
+Mais fotos radar/pexels-kindelmedia-6867966.jpg
+Mais fotos radar/pexels-kindelmedia-7298856.jpg
+Mais fotos radar/pexels-leandro-street-fotografia-96279287-9260388.jpg
+Mais fotos radar/pexels-life-of-pix-2391.jpg
+Mais fotos radar/pexels-lilartsy-6228234.jpg
+Mais fotos radar/pexels-magda-ehlers-pexels-37601650.jpg
+Mais fotos radar/pexels-margerretta-902757.jpg
+Mais fotos radar/pexels-maria-luisa-coxi-1010611408-20266615.jpg
+Mais fotos radar/pexels-marina-zasorina-7635014.jpg
+Mais fotos radar/pexels-markus-winkler-1430818-4144768.jpg
+Mais fotos radar/pexels-marlon-trottmann-3904660-5819305.jpg
+Mais fotos radar/pexels-mateus-cordeiro-426023187-27658473.jpg
+Mais fotos radar/pexels-mati-5952645.jpg
+Mais fotos radar/pexels-max-fischer-5212675.jpg
+Mais fotos radar/pexels-miff-ibra-387362143-32839945.jpg
+Mais fotos radar/pexels-nadin-sh-78971847-9435435.jpg
+Mais fotos radar/pexels-negativespace-97080.jpg
+Mais fotos radar/pexels-ninthgrid-2149521550-30677716.jpg
+Mais fotos radar/pexels-oktay-koseoglu-42034955-28358822.jpg
+Mais fotos radar/pexels-ola-dapo-1754561-3463090.jpg
+Mais fotos radar/pexels-pavel-danilyuk-7937360.jpg
+Mais fotos radar/pexels-pavel-danilyuk-8000651.jpg
+Mais fotos radar/pexels-pavel-danilyuk-8438979.jpg
+Mais fotos radar/pexels-pixabay-272254.jpg
+Mais fotos radar/pexels-pixabay-37862.jpg
+Mais fotos radar/pexels-prismattco-33484995.jpg
+Mais fotos radar/pexels-quang-nguyen-vinh-222549-10615510.jpg
+Mais fotos radar/pexels-rdne-10474305.jpg
+Mais fotos radar/pexels-rdne-5778714.jpg
+Mais fotos radar/pexels-rdne-8293771.jpg
+Mais fotos radar/pexels-rdne-8783151.jpg
+Mais fotos radar/pexels-rethaferguson-3810792.jpg
+Mais fotos radar/pexels-rezwan-1145434-768x512.jpg
+Mais fotos radar/pexels-rickyrecap-1683345.jpg
+Mais fotos radar/pexels-robert-clark-504241532-30262978.jpg
+Mais fotos radar/pexels-rocketmann-prod-9486847.jpg
+Mais fotos radar/pexels-ron-lach-9783835.jpg
+Mais fotos radar/pexels-sanketgraphy-35396230.jpg
+Mais fotos radar/pexels-saya-azeem-246343485-32072854.jpg
+Mais fotos radar/pexels-shahcian-34771673.jpg
+Mais fotos radar/pexels-shvets-production-7562088.jpg
+Mais fotos radar/pexels-shvetsa-5029919.jpg
+Mais fotos radar/pexels-shvetsa-6250946.jpg
+Mais fotos radar/pexels-shvetsa-6899207.jpg
+Mais fotos radar/pexels-silverkblack-36733333.jpg
+Mais fotos radar/pexels-simge-tek-595852070-19475469.jpg
+Mais fotos radar/pexels-tara-clark-89384110-9070122.jpg
+Mais fotos radar/pexels-taryn-elliott-5405596.jpg
+Mais fotos radar/pexels-thisisengineering-3861976.jpg
+Mais fotos radar/pexels-thngocbich-760714.jpg
+Mais fotos radar/pexels-tim-douglas-6205769.jpg
+Mais fotos radar/pexels-tim-samuel-5835456.jpg
+Mais fotos radar/pexels-tima-miroshnichenko-5336988.jpg
+Mais fotos radar/pexels-tima-miroshnichenko-7991506.jpg
+Mais fotos radar/pexels-tima-miroshnichenko-8764619.jpg
+Mais fotos radar/pexels-tkirkgoz-11488980.jpg
+Mais fotos radar/pexels-tomfisk-1081912.jpg
+Mais fotos radar/pexels-toniferreiraphotos-3596282.jpg
+Mais fotos radar/pexels-vickievj-5536347.jpg
+Mais fotos radar/pexels-vitalyagorbachev-11191745.jpg
+Mais fotos radar/pexels-vladbagacian-5624027.jpg
+Mais fotos radar/pexels-weavehall-collective-746895245-18650060.jpg
+Mais fotos radar/pexels-wendel-natan-2069237-14391463.jpg
+Mais fotos radar/pexels-wesleydavi-15336559.jpg
+Mais fotos radar/pexels-westarmoney-4079219.jpg
+Mais fotos radar/pexels-yankrukov-7693153.jpg
+Mais fotos radar/pexels-yaren-aysan-447180044-16824177.jpg
+Mais fotos radar/pexels-yuncaba-11650874.jpg
+Mais fotos radar/pexels-zaylard-16814773.jpg
+NF SET - VIEJO.pdf
+REFERENCIA.pdf
+__pycache__/draft_bloco1.cpython-312.pyc
+__pycache__/gerar_personas_pipeline.cpython-312.pyc
+__pycache__/validate_helpers.cpython-312.pyc
+add_lazy.py
+add_map_logic.py
+add_timeline_html.py
+add_timeline_js.py
+all_cap1_ground_truth.json
+all_cards_compiled.json
+all_cards_summary.txt
+all_sources_ordered.txt
+api/data/apresentacao-final.txt
+app_backup_antes_insights_qualitativos.html
+app_recovered.html
+apply_fixes.py
+apresentacao-final.txt
+apresentacao_comparativo_antes_depois.md
+apresentacao_final.pdf
+apresentacao_final.txt
+atualizar_pacote_antigravity_sistot_2026.py
+atualizar_pacote_antigravity_sistot_2026_v2.py
+atualizar_pacote_antigravity_sistot_2026_v3 (1).py
+atualizar_pacote_antigravity_sistot_2026_v3.py
+build_and_validate_all_cards.py
+build_clean_app.js
+build_consolidated_refs.py
+build_pioneiros.py
+build_references_map.py
+cards_detailed.json
+check_results.py
+check_schema.py
+check_urls.py
+clear_centro_sources.py
+commands.json
+consolidated_references.txt
+create_and_populate_analise_midia_sjc.sql
+dados_pesquisa_477.json
+dados_pesquisa_limpos.csv
+dados_pesquisa_raw.csv
+data/apresentacao-final.txt
+data/migrations/001_business_plan_sebrae.sql
+data/migrations/002_market_intelligence_empresas_sjc.sql
+data/migrations/003_quarentena_outliers_extremos.sql
+data/migrations/004_macro_setores_ibge.sql
+data/migrations/005_multi_select_and_performance.sql
+data/migrations/006_mapa_street_level_points.sql
+data/migrations/007_filtros_cascata_cnaes.sql
+data/migrations/008_todas_empresas_sjc_contatos.sql
+data/migrations/009_hardening_crm_rls.sql
+data/radar_hub/demografia_evidence_2026-10-06.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-4711-domicilios-especie-sjc.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-4711-metadados.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-4712-domicilios-ocupados-moradores-sjc.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-4714-metadados.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-4714-populacao-area-densidade-sjc.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-9514-metadados.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-9514-sexo-sjc.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-9515-metadados.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-9515-transicao-demografica-sjc.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-estimativas-2024-dou.json
+data/radar_hub/demografia_raw_2026-10-06/ibge-projecao-tendencial-2026.json
+data/radar_hub/demografia_raw_2026-10-06/seade-urbanizacao-sjc.json
+data/radar_hub/economia_evidence_2026-10-04.json
+data/radar_hub/economia_raw_2026-10-04/access_log.json
+data/radar_hub/economia_raw_2026-10-04/ibge-5938-metadata.json
+data/radar_hub/economia_raw_2026-10-04/ibge-5938-periodos.json
+data/radar_hub/economia_raw_2026-10-04/ibge-base-index.html
+data/radar_hub/economia_raw_2026-10-04/ibge-base2002-2009.zip
+data/radar_hub/economia_raw_2026-10-04/ibge-base2010-2023.zip
+data/radar_hub/economia_raw_2026-10-04/ibge-cempre-9510-metadata.json
+data/radar_hub/economia_raw_2026-10-04/ibge-cempre-methodology.pdf
+data/radar_hub/economia_raw_2026-10-04/ibge-cempre-sjc.json
+data/radar_hub/economia_raw_2026-10-04/ibge-cempre.html
+data/radar_hub/economia_raw_2026-10-04/ibge-download-index.html
+data/radar_hub/economia_raw_2026-10-04/ibge-pib-methodology.pdf
+data/radar_hub/economia_raw_2026-10-04/ibge-pib-sjc.json
+data/radar_hub/economia_raw_2026-10-04/ibge-salary.json
+data/radar_hub/economia_raw_2026-10-04/ibge-sjc.html
+data/radar_hub/economia_raw_2026-10-04/mapa-empresas.html
+data/radar_hub/economia_raw_2026-10-04/mdic-dados.html
+data/radar_hub/economia_raw_2026-10-04/mte-2026-folder.html
+data/radar_hub/economia_raw_2026-10-04/mte-202608-folder.html
+data/radar_hub/economia_raw_2026-10-04/mte-ago2026-drive.html
+data/radar_hub/economia_raw_2026-10-04/mte-ago2026.html
+data/radar_hub/economia_raw_2026-10-04/mte-ago2026.xlsx
+data/radar_hub/economia_raw_2026-10-04/mte-dez2024-current.html
+data/radar_hub/economia_raw_2026-10-04/mte-dez2024.html
+data/radar_hub/economia_raw_2026-10-04/mte-dez2024.xlsx
+data/radar_hub/economia_raw_2026-10-04/mte-methodology.pdf
+data/radar_hub/economia_raw_2026-10-04/mte-rais-current.html
+data/radar_hub/economia_raw_2026-10-04/mte-rais.html
+data/radar_hub/economia_raw_2026-10-04/mte-tables-drive.html
+data/radar_hub/economia_raw_2026-10-04/receita-archive-index.html
+data/radar_hub/economia_raw_2026-10-04/receita-cadastros.html
+data/radar_hub/economia_raw_2026-10-04/receita-cnpj-cadastro.html
+data/radar_hub/economia_raw_2026-10-04/receita-cnpj-official.html
+data/radar_hub/economia_raw_2026-10-04/receita-cnpj.html
+data/radar_hub/economia_raw_2026-10-04/rfb-layout.pdf
+data/radar_hub/educacao_evidence_2026-10-06.json
+data/radar_hub/educacao_raw_2026-10-06/ibge-10045-escolarizacao-sjc.json
+data/radar_hub/educacao_raw_2026-10-06/inep-censo-escolar-2023-sjc.json
+data/radar_hub/educacao_raw_2026-10-06/inep-ideb-metadados.json
+data/radar_hub/educacao_raw_2026-10-06/inep-ideb-sjc-2023.json
+data/radar_hub/educacao_raw_2026-10-08/adequacao-docente.html
+data/radar_hub/educacao_raw_2026-10-08/censo-microdados.html
+data/radar_hub/educacao_raw_2026-10-08/censo-sinopses.html
+data/radar_hub/educacao_raw_2026-10-08/consultas.json
+data/radar_hub/educacao_raw_2026-10-08/distorcao.html
+data/radar_hub/educacao_raw_2026-10-08/ibge-escolarizacao.json
+data/radar_hub/educacao_raw_2026-10-08/ibge-metadados10058.json
+data/radar_hub/educacao_raw_2026-10-08/ideb-arquivos.html
+data/radar_hub/educacao_raw_2026-10-08/ideb-iniciais2025.zip
+data/radar_hub/educacao_raw_2026-10-08/ideb-resultados.html
+data/radar_hub/educacao_raw_2026-10-08/indicadores.html
+data/radar_hub/educacao_raw_2026-10-08/media-alunos.html
+data/radar_hub/educacao_raw_2026-10-08/prefeitura-educacao.html
+data/radar_hub/educacao_raw_2026-10-08/rendimentos.html
+data/radar_hub/educacao_raw_2026-10-08/saeb-2023.html
+data/radar_hub/educacao_raw_2026-10-08/saeb-2025.html
+data/radar_hub/educacao_raw_2026-10-08/saeb-resultados.html
+data/radar_hub/financas_evidence_2026-10-05.json
+data/radar_hub/financas_raw_2026-10-05/access_log.json
+data/radar_hub/financas_raw_2026-10-05/api-layout.html
+data/radar_hub/financas_raw_2026-10-05/dca-2011.html
+data/radar_hub/financas_raw_2026-10-05/dca-2011.json
+data/radar_hub/financas_raw_2026-10-05/dca-2012.json
+data/radar_hub/financas_raw_2026-10-05/dca-2013.json
+data/radar_hub/financas_raw_2026-10-05/dca-2014.json
+data/radar_hub/financas_raw_2026-10-05/dca-2015.json
+data/radar_hub/financas_raw_2026-10-05/dca-2016.json
+data/radar_hub/financas_raw_2026-10-05/dca-2017.json
+data/radar_hub/financas_raw_2026-10-05/dca-2018.json
+data/radar_hub/financas_raw_2026-10-05/dca-2019.json
+data/radar_hub/financas_raw_2026-10-05/dca-2020.json
+data/radar_hub/financas_raw_2026-10-05/dca-2021.json
+data/radar_hub/financas_raw_2026-10-05/dca-2022.json
+data/radar_hub/financas_raw_2026-10-05/dca-2023.json
+data/radar_hub/financas_raw_2026-10-05/dca-2024.json
+data/radar_hub/financas_raw_2026-10-05/dca-2025.json
+data/radar_hub/financas_raw_2026-10-05/finbra-historico.html
+data/radar_hub/financas_raw_2026-10-05/finbra-legado-2012.zip
+data/radar_hub/financas_raw_2026-10-05/finbra-legado-page.html
+data/radar_hub/financas_raw_2026-10-05/layout-dca-2023.pdf
+data/radar_hub/financas_raw_2026-10-05/layout-dca-2025.pdf
+data/radar_hub/financas_raw_2026-10-05/layout-rgf-2023.pdf
+data/radar_hub/financas_raw_2026-10-05/layout-rreo-2023.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-contas.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rgf-2023.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rgf-2024.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rgf-2025.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rreo-2012.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rreo-2023.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rreo-2024.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-lista-rreo-2025.html
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rgf-2023-000008364.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rgf-2024-000009206.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rgf-2025-000009766.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002362.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002363.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002364.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002365.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002366.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002367.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002368.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002369.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2012-000002370.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2023-000008363.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2024-000009205.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2025-000009765.pdf
+data/radar_hub/financas_raw_2026-10-05/prefeitura-rreo-2026-4.pdf
+data/radar_hub/financas_raw_2026-10-05/rgf-2013-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2013-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2013-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2014-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2014-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2014-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2015-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2015-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2015-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2016-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2016-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2016-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2017-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2017-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2017-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2018-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2018-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2018-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2019-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2019-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2019-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2020-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2020-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2020-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2021-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2021-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2021-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2022-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2022-2.html
+data/radar_hub/financas_raw_2026-10-05/rgf-2022-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2022-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2023-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2023-2.html
+data/radar_hub/financas_raw_2026-10-05/rgf-2023-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2023-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2024-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2024-2.html
+data/radar_hub/financas_raw_2026-10-05/rgf-2024-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2024-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2025-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2025-2.html
+data/radar_hub/financas_raw_2026-10-05/rgf-2025-2.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2025-3.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2026-1.json
+data/radar_hub/financas_raw_2026-10-05/rgf-2026-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2013-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2013-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2013-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2013-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2013-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2013-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2014-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2014-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2014-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2014-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2014-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2014-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2015-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2015-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2015-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2015-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2015-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2015-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2016-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2016-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2016-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2016-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2016-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2016-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2017-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2017-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2017-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2017-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2017-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2017-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2018-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2018-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2018-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2018-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2018-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2018-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2019-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2019-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2019-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2019-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2019-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2019-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2020-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2020-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2020-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2020-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2020-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2020-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2021-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2021-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2021-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2021-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2021-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2021-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2022-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2022-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2022-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2022-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2022-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2022-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2023-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2023-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2023-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2023-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2023-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2023-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2024-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2024-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2024-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2024-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2024-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2024-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2025-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2025-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2025-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2025-4.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2025-5.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2025-6.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2026-1.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2026-2.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2026-3.json
+data/radar_hub/financas_raw_2026-10-05/rreo-2026-4.json
+data/radar_hub/financas_raw_2026-10-05/siconfi-documentacao.html
+data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2023.json
+data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2024.json
+data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2025.json
+data/radar_hub/financas_raw_2026-10-05/siconfi-entregas-2026.json
+data/radar_hub/financas_raw_2026-10-05/siconfi-extrato-2023.json
+data/radar_hub/financas_raw_2026-10-05/siconfi-swagger.html
+data/radar_hub/financas_raw_2026-10-05/tce-api-doc.html
+data/radar_hub/financas_raw_2026-10-05/tce-despesas-2023.zip
+data/radar_hub/financas_raw_2026-10-05/tce-despesas-2024.zip
+data/radar_hub/financas_raw_2026-10-05/tce-municipios.json
+data/radar_hub/financas_raw_2026-10-05/tce-painel-2023.html
+data/radar_hub/financas_raw_2026-10-05/tce-painel-2024.html
+data/radar_hub/financas_raw_2026-10-05/tce-painel-2025.html
+data/radar_hub/financas_raw_2026-10-05/tce-painel-2026.html
+data/radar_hub/financas_raw_2026-10-05/tce-receitas-2023.zip
+data/radar_hub/financas_raw_2026-10-05/tce-receitas-2024.zip
+data/radar_hub/meio_ambiente_evidence_2026-10-05.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/ana-api-acesso.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/ana-estacoes.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/ana-pluvio.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/apa-sfx.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/ar-o3-2023-metadata.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/ar-o3-2023-service.xml
+data/radar_hub/meio_ambiente_raw_2026-10-05/arborizacao-municipal.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-aguas-2023.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-ar-2023.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-ar-2024-www.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-ar-2024.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-ar-indice.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-estacoes.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-layer0.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-layer6.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-0.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-1.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-2.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-3.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-4.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-5.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-valid-0.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-valid-1.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-valid-2.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-valid-3.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-valid-4.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-pol-valid-5.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-qualar-info.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/cetesb-stations-sjc.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/consultas.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/emissoes-municipal.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/ibge-arborizacao.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/ibge-area-urbanizada.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/ibge-censo-esgoto.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/ibge-metadados.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/ibge-municipio.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inmet-conv.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inmet-estacoes-conv.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/inmet-estacoes.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/inmet-historicos.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inmet-taubate-teste.json
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-anual.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-dados.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-faq-official.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-faq.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2003.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2004.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2005.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2006.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2007.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2008.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2009.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2010.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2011.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2012.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2013.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2014.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2015.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2016.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2017.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2018.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2019.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2020.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2021.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2022.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2023.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-focos_br_sp_ref_2024.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-sp-files.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/inpe-sp-index.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-Glossario_Indicadores_SINISA_2024.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-Glossario_Indicadores_SINISA_AGUAS_PLUVIAIS1.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-Glossario_Indicadores_SINISA_RESIDUOS.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-GlossrioIndicadores_ESGOTO_2024.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-GlossriodeIndicadores_GUA_2024.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-INDICADORES_SINISA_ABASTECIMENTO_DE_AGUA_2024_v2.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-INDICADORES_SINISA_ESGOTAMENTOSANITRIO_2024_V2.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/metodo-copy_of_Glossario_Indicadores_SINISA_AGUAS_PLUVIAIS.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/parque-ruschi.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-2023.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-2025.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-agua-2024.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-agua-glossario.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-esgoto-2023.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-esgoto-2024.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-esgoto-links.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-portal.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-residuos-2024.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/sinisa-resultados.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-2010.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-2022.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-Glossario_Indicadores_AE2022.pdf
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-Planilhas_AP2022.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-agua-2022.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-agua-archive.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-1995.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-1996.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-1997.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-1998.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-1999.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2000.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2001.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2002.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2003.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2004.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2005.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2006.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2007.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2008.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2009.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2010.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2011.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2012.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2013.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2014.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2015.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2016.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2017.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2018.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2019.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2020.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-ano-2021.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-diagnosticos.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-historical-index.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1995-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1996-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1996-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1997-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1997-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1998-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1998-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1999-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-1999-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2000-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2000-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2001-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2001-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2001-2.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2003-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2003-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2004-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2004-2.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2005-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2005-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2006-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2006-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2007-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2007-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2008-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2008-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2008-2.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2009-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2018-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2019-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2020-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-planilhas-2021-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2010-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2010-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2011-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2011-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2012-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2012-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2013-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2013-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2014-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2014-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2015-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2015-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2016-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2016-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2017-0.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/snis-regionais-2017-1.zip
+data/radar_hub/meio_ambiente_raw_2026-10-05/vegetacao-2020-metadata.html
+data/radar_hub/meio_ambiente_raw_2026-10-05/vegetacao-2020-metadata.xml
+data/radar_hub/meio_ambiente_raw_2026-10-05/vegetacao-2020.json
+data/radar_hub/mobilidade_adicional_extraido_2026-10-05.json
+data/radar_hub/mobilidade_evidence_2026-10-05.json
+data/radar_hub/mobilidade_frota_extraida_2026-10-05.json
+data/radar_hub/mobilidade_raw_2026-10-05/anac-Movimentacoes_Aeroportuarias_201903.csv
+data/radar_hub/mobilidade_raw_2026-10-05/anac-Movimentacoes_Aeroportuarias_201904.csv
+data/radar_hub/mobilidade_raw_2026-10-05/anac-estatistica-arquivos-direto.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-estatistica-completa.csv
+data/radar_hub/mobilidade_raw_2026-10-05/anac-estatistica-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-estatistica-metadados.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2019-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2020-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2021-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2022-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2023-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2024-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-2025-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-arquivos.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao-metadados.html
+data/radar_hub/mobilidade_raw_2026-10-05/anac-movimentacao.html
+data/radar_hub/mobilidade_raw_2026-10-05/antt-41e17089-991d-4e66-8515-7c2885bc5c3b.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/antt-5cec4e90-24d4-4a43-84e1-121a422bbcd5.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/antt-7f622637-a442-4f3c-8360-aebc41806ca3.csv
+data/radar_hub/mobilidade_raw_2026-10-05/antt-dados.html
+data/radar_hub/mobilidade_raw_2026-10-05/antt-trafego-catalogo.json
+data/radar_hub/mobilidade_raw_2026-10-05/artesp-dados.html
+data/radar_hub/mobilidade_raw_2026-10-05/cicloviario-2024-alternativo.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/cicloviario-2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/cicloviario-atual.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/cicloviario.html
+data/radar_hub/mobilidade_raw_2026-10-05/consultas.json
+data/radar_hub/mobilidade_raw_2026-10-05/der-trafego.html
+data/radar_hub/mobilidade_raw_2026-10-05/der-vdm-2024.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/der-vdm-metadados.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/documento-ntp_3_autonomia_recarga_bev_maio2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/documento-ntp_4_historico_maio2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/documento-ntp_5_mobilidadeeletrica_maio2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/documento-ntp_6_linhaverdevlp_maio2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/documento-relatorio_tusjc.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/escolar-alvaras.html
+data/radar_hub/mobilidade_raw_2026-10-05/estacionamento.html
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28122.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28123.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28124.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28125.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28126.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28127.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28128.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28129.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28130.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28131.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28132.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-28133.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78162.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78163.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78164.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78165.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78166.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78167.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78168.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78169.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-78170.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-metadados.json
+data/radar_hub/mobilidade_raw_2026-10-05/ibge-frota-total.json
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-catalogo.json
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-dados-abertos.html
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-dados-rest.zip
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-dicionario-atual.zip
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-dicionario-rest.zip
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-glossario.html
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-historico.html
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga-main.js
+data/radar_hub/mobilidade_raw_2026-10-05/infosiga.html
+data/radar_hub/mobilidade_raw_2026-10-05/mobilidade-servicos.html
+data/radar_hub/mobilidade_raw_2026-10-05/municipio-sjdados-2016.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/obras-2019-2025.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/planmob-indicadores.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/radares.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2000.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2001.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2002.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2003.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2004.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2005.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2006.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2007.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2008.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2009.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2010.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2011.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2012.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2013.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2014.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2015.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2016.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2017.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2018.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2019.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2020.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2021.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2022.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2023.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2024.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2025.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-2026.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-anteriores2000.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-catalogo.json
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-indice.html
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2013-12.zip
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2014-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2015-12-extracted.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2015-12.rar
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2016-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2017-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2017-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2018-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2018-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2019-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2020-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2020-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2021-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2021-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2022-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2023-12.xls
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2024-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2025-12.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-01.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-02.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-04.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-05.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-06.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-07.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/senatran-municipal-2026-08.xlsx
+data/radar_hub/mobilidade_raw_2026-10-05/sim-metadados.html
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-adaptado.html
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2013.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2014.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2015.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2016.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2017.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2018.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2019.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2020.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2021.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2022.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2023.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2025.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-bilhetagem-2026.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-catalogo.json
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-documentos.html
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2013.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2014.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2015.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2016.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2017.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2018.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2019.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2020.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2021.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2022.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2023.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2025.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-ipk-2026.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-itinerarios.html
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2013.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2014.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2015.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2016.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2017.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2018.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2019.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2020.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2021.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2022.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2023.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2025.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-km-2026.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2013.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2014.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2015.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2016.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2017.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2018.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2019.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2020.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2021.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2022.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2023.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2024.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2025.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-linhas-2026.pdf
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-operacionais-alternativo.html
+data/radar_hub/mobilidade_raw_2026-10-05/transporte-operacionais.html
+data/radar_hub/mobilidade_transporte_extraido_2026-10-05.json
+data/radar_hub/radar_hub_package.json
+data/radar_hub/saude_evidence_2026-10-02.json
+data/radar_hub/saude_evidence_2026-10-06.json
+data/radar_hub/saude_legacy_2026-10-02.json
+data/radar_hub/saude_raw_2026-10-06/datasus-cnes-estabelecimentos-sjc-202412.json
+data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json
+data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json
+data/radar_hub/saude_raw_2026-10-06/datasus-sia-sih-procedimentos-status-suspensao.json
+data/radar_hub/saude_raw_2026-10-06/datasus-sih-internacoes-hospitalares-sjc-2024.json
+data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-geral-cid10-sjc-2023-2024.json
+data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-infantil-sjc-2010-2025.json
+data/radar_hub/saude_raw_2026-10-06/datasus-sinan-dengue-casos-sjc-2010-2024.json
+data/radar_hub/saude_raw_2026-10-06/datasus-sinasc-nascidos-vivos-parto-sjc-2010-2024.json
+data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json
+data/radar_hub/saude_raw_2026-10-06/sms-sjc-relatorio-gestao-rag-2025.json
+data/radar_hub/seguranca_evidence_2026-10-06.json
+data/radar_hub/seguranca_raw_2026-10-06/csi-sao-jose-unida-monitoramento-2024.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-api-metadata-sjc-id560.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-homicidios-serie-sjc-2001-2025.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-mensais-crimes-sjc-2018-2025.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ocorrencias-anuais-sjc-2001-2025.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-produtividade-policial-sjc-2024.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ranking-deic-esclarecimento-2024.json
+data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-taxas-delito-sjc-2001-2025.json
+data_personas/capivara_tarot_prototipo/capivara_tarot_prototipo/documentacao/embutir_imagem.py
+data_personas/capivara_tarot_prototipo/capivara_tarot_prototipo/documentacao/embutir_sem_fundo.py
+data_personas/capivara_tarot_prototipo/capivara_tarot_prototipo/documentacao/limpar_expressoes.py
+data_personas/capivara_tarot_prototipo/capivara_tarot_prototipo/documentacao/preparar_referencia.py
+data_personas/capivara_tarot_prototipo/capivara_tarot_prototipo/documentacao/remover_quadriculado.py
+data_personas/personas_sjc_60_auditadas.csv
+diff_app.txt
+docs/apresentacao/fase3-metricas.md
+"docs/apresentacoes_internas/APRESENTA\303\207\303\203O FINAL.pdf"
+"docs/apresentacoes_internas/APRESENTA\303\207\303\203O FINAL.pptx"
+"docs/apresentacoes_internas/APRESENTA\303\207\303\203O FINAL.txt"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada.html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/165470665362a0d1dd07bca_1654706653_3x2_md-300x200.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/213950_2"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/28062023-pzzb1669.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/435462_2"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/911"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/AGIF24081819055499-scaled-aspect-ratio-512-320-300x188.webp"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/AGIF24081819055499-scaled-aspect-ratio-512-320-768x480.webp"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/An0EMjQG"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/BAd-Bunny.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Carla-Marins-300x225.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Carla-Marins-768x576.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Cp0L2bMNDmkFysOVTbgbxg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Djonga.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Eclipse-Liunar-768x404.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/F221212AVS20-1320x880.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Hugo-Motta.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/MONTAGENS-PARA-TNC-1-768x512.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Nethanyahu-e-Trump-300x195.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Nuno-Leal-Maia-243x300.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Nuno-Leal-Maia.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Patinadores-russos-acidente-300x200.webp"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Senado-federal.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Tati-Weston-Webb-300x179.webp"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/Trump-Orchestra-300x218.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/XHS-english-thumbnail.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ads.html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/aframe.html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/americana"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/apollo.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/archive.min.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/archive.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/athena(1).js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/athena.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_29c256855536bec44217dc33bbff5ecb.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_144e12840511769c6c1d2940e92dfe00.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_3d550afa5e56b857249a34c8a1acdf36.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_546a7a80db72a470fd0c661faf47c3a7.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_8f406d598780dd48accb2d3189e2d25b.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_935b17143c45eb1482a1d9d8ba02c307.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_9b87db4f17376b1eeff7686abb0f4d02.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/autoptimize_single_fd349bc2b967f68e1d2528ac6396f906.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/banner-styles.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/banner.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/banner.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/braga-netto-300x180.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/briga-entre-atleticanos-e-cruzeirenses-300x169.avif"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/bukele-768x432.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/bundle-playback.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/chevron.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/clevelandart"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/close-circle-dark.svg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/close-circle-white.svg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/confronto-de-torcidas-recife-300x179.jpeg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/congresso-nacional-300x200.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/consolelivingroom"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/container_kzRD6OIl.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/cooktop-electrolux-4-bocas-por-inducao-automatico-com-zona-unicook-102103561139.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/cropped-Design-sem-nome.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/css2"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/donation-banner.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/etree"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/f(1).txt"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/f.txt"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/gaza-jornal-nacional-300x169.avif"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/geladeira-refrigerador-brastemp-554l-frost-free-french-door-bro85ak-092311191729.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/history-in-hd-cTz5-T7voqQ-unsplash-300x200.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/hooks.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/i18n.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ia-topnav.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/iconochive.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/images-96-300x205.jpeg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/images-96.jpeg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/integra-da-denuncia-de-bolsonaro-300x201.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/internetarcade"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/jquery-1.10.2.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/jquery.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/lazysizes.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/librivoxaudio"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/lula-jan-2023-ricardo-stuckert-720x475-1.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/machado-de-xango-justica.jpeg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/metropolitanmuseumofart-gallery"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/oruam-241x300.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/oruam.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/polyfill-support.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/polyfill.min.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/renata-vitrine-do-seu-fifi-bbb_widelg-300x169.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/renata-vitrine-do-seu-fifi-bbb_widelg-768x432.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ruffle.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/runner.html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script(1).js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script(2).js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script(3).js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/script.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/smart-tv-samsung-65-4k-wi-fi-tizen-crystal-uhd-65du7700-092501311421.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/styles.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/tropas_norte-coreanas_na_russia.jpg"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/tv"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/ui.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/view(1).html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/view(2).html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/view.html"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/web.css"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/webcomponents-bundle.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/widgetOL.png"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/wombat.js.download"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/yONxw_"
+"docs/apresentacoes_internas/Home - TN&C - Tend\303\252ncias, Not\303\255cias e Cultura - Informa\303\247\303\243o relevante e atualizada_files/zrt_lookup.html"
+"docs/apresentacoes_internas/globotrends2026-oxygen-completo-2-_c\303\263pia (1).pdf"
+"docs/apresentacoes_internas/globotrends2026-oxygen-completo-2-_c\303\263pia (2).pdf"
+"docs/apresentacoes_internas/globotrends2026-oxygen-completo-2-_c\303\263pia.pdf"
+docs/apresentacoes_internas/logos_streaming_png.zip
+docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/branches.txt
+docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/commits.txt
+docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/diff.txt
+docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/inventario.json
+docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/status.txt
+docs/dados-publicos-revisao/dataviz-final/relatorio-final.md
+docs/dados-publicos-revisao/p0-fallbacks-inicial.txt
+docs/dados-publicos-revisao/p0/diagnostico-inicial.json
+docs/dados-publicos-revisao/p0/divergencias.json
+docs/dados-publicos-revisao/p0/divergencias.md
+docs/dados-publicos-revisao/p0/exportacao-verificada.csv
+docs/dados-publicos-revisao/p0/exportacao-verificada.json
+docs/dados-publicos-revisao/p0/fallbacks.md
+docs/dados-publicos-revisao/p0/git-app-js-preexistente.diff
+docs/dados-publicos-revisao/p0/git-final-stat.txt
+docs/dados-publicos-revisao/p0/git-final-status.txt
+docs/dados-publicos-revisao/p0/git-inicial.txt
+docs/dados-publicos-revisao/p0/inventario-fontes.json
+docs/dados-publicos-revisao/p0/matriz-cobertura.csv
+docs/dados-publicos-revisao/p0/matriz-cobertura.json
+docs/dados-publicos-revisao/p0/relatorio-final.md
+docs/dados-publicos-revisao/p0/rotas-auditor.md
+docs/dados-publicos-revisao/p0/test-auditor.txt
+docs/dados-publicos-revisao/p0/test-csv.txt
+docs/dados-publicos-revisao/p0/test-homologacao-corrigido.txt
+docs/dados-publicos-revisao/p0/test-homologacao.txt
+docs/dados-publicos-revisao/p0/test-runtime-p0.txt
+docs/dados-publicos-revisao/p0/test-runtime-saude.txt
+docs/dados-publicos-revisao/p0/test-saude-legado.txt
+docs/dados-publicos-revisao/p0/test-seguranca-legado.txt
+docs/dados-publicos-revisao/p0/verificacao-preservacao.txt
+docs/dados-publicos-revisao/p1-1-economia/app.html.before
+docs/dados-publicos-revisao/p1-1-economia/arquivos-alterados.txt
+docs/dados-publicos-revisao/p1-1-economia/exportacao-series.csv
+docs/dados-publicos-revisao/p1-1-economia/exportacao-series.json
+docs/dados-publicos-revisao/p1-1-economia/git-final-app-js.txt
+docs/dados-publicos-revisao/p1-1-economia/git-final-stat.txt
+docs/dados-publicos-revisao/p1-1-economia/git-final-status.txt
+docs/dados-publicos-revisao/p1-1-economia/git-inicial-app-js.diff
+docs/dados-publicos-revisao/p1-1-economia/git-inicial-stat.txt
+docs/dados-publicos-revisao/p1-1-economia/git-inicial-status.txt
+docs/dados-publicos-revisao/p1-1-economia/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p1-1-economia/relatorio-final.md
+docs/dados-publicos-revisao/p1-1-economia/snapshot-inicial.json
+docs/dados-publicos-revisao/p1-1-economia/teste-browser-sem-imagens.json
+docs/dados-publicos-revisao/p1-economia/app.html.before
+docs/dados-publicos-revisao/p1-economia/arquivos-p1.txt
+docs/dados-publicos-revisao/p1-economia/build_radar_hub_package.py.before
+docs/dados-publicos-revisao/p1-economia/disponibilidade-investigada.json
+docs/dados-publicos-revisao/p1-economia/economia-desktop.png
+docs/dados-publicos-revisao/p1-economia/exportacao-verificada.csv
+docs/dados-publicos-revisao/p1-economia/exportacao-verificada.json
+docs/dados-publicos-revisao/p1-economia/git-final-app-js.diff
+docs/dados-publicos-revisao/p1-economia/git-final-stat.txt
+docs/dados-publicos-revisao/p1-economia/git-final-status.txt
+docs/dados-publicos-revisao/p1-economia/git-inicial-app-js.diff
+docs/dados-publicos-revisao/p1-economia/git-inicial-stat.txt
+docs/dados-publicos-revisao/p1-economia/git-inicial-status.txt
+docs/dados-publicos-revisao/p1-economia/inventario-anterior.json
+docs/dados-publicos-revisao/p1-economia/matriz-completa.json
+docs/dados-publicos-revisao/p1-economia/matriz-economia-final.json
+docs/dados-publicos-revisao/p1-economia/matriz-economia.csv
+docs/dados-publicos-revisao/p1-economia/matriz-economia.json
+docs/dados-publicos-revisao/p1-economia/prompt-revisao-outra-ia.md
+docs/dados-publicos-revisao/p1-economia/radar_hub_consistency.json.before
+docs/dados-publicos-revisao/p1-economia/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p1-economia/radar_hub_p0_matrix.py.before
+docs/dados-publicos-revisao/p1-economia/radar_hub_package.json.before
+docs/dados-publicos-revisao/p1-economia/relatorio-final.md
+docs/dados-publicos-revisao/p1-economia/sjc_metadata_registry.json.before
+docs/dados-publicos-revisao/p1-economia/sjc_open_data_ground_truth.json.before
+docs/dados-publicos-revisao/p1-economia/snapshot-inicial.json
+docs/dados-publicos-revisao/p1-economia/teste-navegador.json
+docs/dados-publicos-revisao/p2-1-financas/app.html.before
+docs/dados-publicos-revisao/p2-1-financas/exportacao-verificada.csv
+docs/dados-publicos-revisao/p2-1-financas/exportacao-verificada.json
+docs/dados-publicos-revisao/p2-1-financas/git-after-appjs.txt
+docs/dados-publicos-revisao/p2-1-financas/git-after-stat.txt
+docs/dados-publicos-revisao/p2-1-financas/git-after-status.txt
+docs/dados-publicos-revisao/p2-1-financas/git-before-appjs.txt
+docs/dados-publicos-revisao/p2-1-financas/git-before-stat.txt
+docs/dados-publicos-revisao/p2-1-financas/git-before-status.txt
+docs/dados-publicos-revisao/p2-1-financas/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p2-1-financas/relatorio-final.md
+docs/dados-publicos-revisao/p2-1-financas/snapshot.json
+docs/dados-publicos-revisao/p2-1-financas/teste-browser-sem-imagens.json
+docs/dados-publicos-revisao/p2-1-financas/teste-evidencia-escopo.json
+docs/dados-publicos-revisao/p2-financas/agregados-tce.json
+docs/dados-publicos-revisao/p2-financas/app.html.before
+docs/dados-publicos-revisao/p2-financas/app.js.before
+docs/dados-publicos-revisao/p2-financas/arquivos-alterados.txt
+docs/dados-publicos-revisao/p2-financas/build_radar_hub_package.py.before
+docs/dados-publicos-revisao/p2-financas/compatibilidade-p0/exportacao-verificada.csv
+docs/dados-publicos-revisao/p2-financas/compatibilidade-p0/exportacao-verificada.json
+docs/dados-publicos-revisao/p2-financas/conferencia-pdfs-municipais.json
+docs/dados-publicos-revisao/p2-financas/dca-2023-catalogo.txt
+docs/dados-publicos-revisao/p2-financas/divergencias-nao-resolvidas.json
+docs/dados-publicos-revisao/p2-financas/economia_audit_bindings.json.before
+docs/dados-publicos-revisao/p2-financas/economia_evidence_2026-10-04.json.before
+docs/dados-publicos-revisao/p2-financas/economia_visual.js.before
+docs/dados-publicos-revisao/p2-financas/exportacao-verificada.csv
+docs/dados-publicos-revisao/p2-financas/exportacao-verificada.json
+docs/dados-publicos-revisao/p2-financas/fontes-consultadas.csv
+docs/dados-publicos-revisao/p2-financas/git-final-app-js.txt
+docs/dados-publicos-revisao/p2-financas/git-final-stat.txt
+docs/dados-publicos-revisao/p2-financas/git-final-status.txt
+docs/dados-publicos-revisao/p2-financas/git-inicial-app-js.txt
+docs/dados-publicos-revisao/p2-financas/git-inicial-stat.txt
+docs/dados-publicos-revisao/p2-financas/git-inicial-status.txt
+docs/dados-publicos-revisao/p2-financas/hashes-iniciais.json
+docs/dados-publicos-revisao/p2-financas/inventario-inicial.csv
+docs/dados-publicos-revisao/p2-financas/inventario-inicial.json
+docs/dados-publicos-revisao/p2-financas/inventario-inicial.md
+docs/dados-publicos-revisao/p2-financas/layout-dca-2023-texto.txt
+docs/dados-publicos-revisao/p2-financas/layout-rgf-2023-texto.txt
+docs/dados-publicos-revisao/p2-financas/layout-rreo-2023-texto.txt
+docs/dados-publicos-revisao/p2-financas/matriz-indicadores-final.json
+docs/dados-publicos-revisao/p2-financas/matriz-oportunidades-financas.csv
+docs/dados-publicos-revisao/p2-financas/matriz-oportunidades-financas.json
+docs/dados-publicos-revisao/p2-financas/matriz-oportunidades-financas.md
+docs/dados-publicos-revisao/p2-financas/prefeitura-rgf-2023-000008364-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rgf-2024-000009206-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rgf-2025-000009766-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002362-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002363-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002364-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002365-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002366-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002367-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002368-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002369-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2012-000002370-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2023-000008363-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2024-000009205-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2025-000009765-texto.txt
+docs/dados-publicos-revisao/p2-financas/prefeitura-rreo-2026-4-texto.txt
+docs/dados-publicos-revisao/p2-financas/radar_hub_consistency.json.before
+docs/dados-publicos-revisao/p2-financas/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p2-financas/radar_hub_package.json.before
+docs/dados-publicos-revisao/p2-financas/reconciliacao-fontes.json
+docs/dados-publicos-revisao/p2-financas/reconciliacao-indicadores.csv
+docs/dados-publicos-revisao/p2-financas/reconciliacao-indicadores.json
+docs/dados-publicos-revisao/p2-financas/relatorio-final.md
+docs/dados-publicos-revisao/p2-financas/resultados-testes.json
+docs/dados-publicos-revisao/p2-financas/rgf-2023-3-catalogo.txt
+docs/dados-publicos-revisao/p2-financas/rreo-2023-6-catalogo.txt
+docs/dados-publicos-revisao/p2-financas/series-historicas.csv
+docs/dados-publicos-revisao/p2-financas/series-historicas.json
+docs/dados-publicos-revisao/p2-financas/sjc_metadata_registry.json.before
+docs/dados-publicos-revisao/p2-financas/sjc_open_data_ground_truth.json.before
+docs/dados-publicos-revisao/p2-financas/snapshot-inicial.json
+docs/dados-publicos-revisao/p2-financas/teste-browser-sem-imagens.json
+docs/dados-publicos-revisao/p2-financas/teste-evidencia-escopo.json
+docs/dados-publicos-revisao/p2-financas/testes-runtime.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/antes-depois.md
+docs/dados-publicos-revisao/p3-meio-ambiente/app.html.before
+docs/dados-publicos-revisao/p3-meio-ambiente/arquivos-alterados-p3.json
+docs/dados-publicos-revisao/p3-meio-ambiente/campos-diretos-legados.json
+docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_economia_visual/exportacao-series.csv
+docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_economia_visual/exportacao-series.json
+docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_financas_visual/exportacao-verificada.csv
+docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_financas_visual/exportacao-verificada.json
+docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_radar_hub_p0/exportacao-verificada.csv
+docs/dados-publicos-revisao/p3-meio-ambiente/compatibilidade/test_radar_hub_p0/exportacao-verificada.json
+docs/dados-publicos-revisao/p3-meio-ambiente/exportacao-verificada.csv
+docs/dados-publicos-revisao/p3-meio-ambiente/exportacao-verificada.json
+docs/dados-publicos-revisao/p3-meio-ambiente/extracao-planilhas.json
+docs/dados-publicos-revisao/p3-meio-ambiente/git-after-appjs.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/git-after-stat.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/git-after-status.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/git-before-appjs.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/git-before-stat.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/git-before-status.txt
+docs/dados-publicos-revisao/p3-meio-ambiente/inventario-inicial.json
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-cobertura.csv
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-cobertura.json
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-cobertura.md
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-legados.json
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-oportunidades-meio-ambiente.csv
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-oportunidades-meio-ambiente.json
+docs/dados-publicos-revisao/p3-meio-ambiente/matriz-oportunidades-meio-ambiente.md
+docs/dados-publicos-revisao/p3-meio-ambiente/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p3-meio-ambiente/reconciliacao-divergencias.json
+docs/dados-publicos-revisao/p3-meio-ambiente/referencias-metodologicas-extraidas.json
+docs/dados-publicos-revisao/p3-meio-ambiente/relatorio-final.md
+docs/dados-publicos-revisao/p3-meio-ambiente/snapshot-inicial.json
+docs/dados-publicos-revisao/p3-meio-ambiente/testes-escopo.json
+docs/dados-publicos-revisao/p3-meio-ambiente/testes.txt
+docs/dados-publicos-revisao/p4-mobilidade/anac-sbsj-linhas-selecionadas.json
+docs/dados-publicos-revisao/p4-mobilidade/antes-depois-registry.json
+docs/dados-publicos-revisao/p4-mobilidade/antes-depois.md
+docs/dados-publicos-revisao/p4-mobilidade/app.html.before
+docs/dados-publicos-revisao/p4-mobilidade/arquivos-e-hashes.json
+docs/dados-publicos-revisao/p4-mobilidade/auditoria-transporte-2019-texto.txt
+docs/dados-publicos-revisao/p4-mobilidade/cicloviario-2024-alternativo.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/cicloviario-atual.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/cicloviario.html.texto.json
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_economia_visual/exportacao-series.csv
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_economia_visual/exportacao-series.json
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_financas_visual/exportacao-verificada.csv
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_financas_visual/exportacao-verificada.json
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_meio_ambiente_runtime/exportacao-verificada.csv
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_meio_ambiente_runtime/exportacao-verificada.json
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_radar_hub_p0/exportacao-verificada.csv
+docs/dados-publicos-revisao/p4-mobilidade/compatibilidade/test_radar_hub_p0/exportacao-verificada.json
+docs/dados-publicos-revisao/p4-mobilidade/declaracao-obrigatoria.json
+docs/dados-publicos-revisao/p4-mobilidade/declaracao-obrigatoria.md
+docs/dados-publicos-revisao/p4-mobilidade/divergencias.json
+docs/dados-publicos-revisao/p4-mobilidade/documento-ntp_4_historico_maio2024.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/documento-ntp_5_mobilidadeeletrica_maio2024.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/documento-ntp_6_linhaverdevlp_maio2024.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/duplicatas-e-revisoes.json
+docs/dados-publicos-revisao/p4-mobilidade/escolar-alvaras.html.texto.json
+docs/dados-publicos-revisao/p4-mobilidade/estacionamento.html.texto.json
+docs/dados-publicos-revisao/p4-mobilidade/exportacao-verificada.csv
+docs/dados-publicos-revisao/p4-mobilidade/exportacao-verificada.json
+docs/dados-publicos-revisao/p4-mobilidade/extracao-frota.json
+docs/dados-publicos-revisao/p4-mobilidade/extracao-transporte-pendencias.json
+docs/dados-publicos-revisao/p4-mobilidade/fontes-consultadas.md
+docs/dados-publicos-revisao/p4-mobilidade/git-before-appjs.txt
+docs/dados-publicos-revisao/p4-mobilidade/git-before-stat.txt
+docs/dados-publicos-revisao/p4-mobilidade/git-before-status.txt
+docs/dados-publicos-revisao/p4-mobilidade/git-final-appjs.txt
+docs/dados-publicos-revisao/p4-mobilidade/git-final-stat.txt
+docs/dados-publicos-revisao/p4-mobilidade/git-final-status.txt
+docs/dados-publicos-revisao/p4-mobilidade/git-preservacao.json
+docs/dados-publicos-revisao/p4-mobilidade/ground-truth-antes.json
+docs/dados-publicos-revisao/p4-mobilidade/inventario-inicial.json
+docs/dados-publicos-revisao/p4-mobilidade/matriz-cobertura.json
+docs/dados-publicos-revisao/p4-mobilidade/matriz-cobertura.md
+docs/dados-publicos-revisao/p4-mobilidade/matriz-oportunidades-mobilidade.json
+docs/dados-publicos-revisao/p4-mobilidade/matriz-oportunidades-mobilidade.md
+docs/dados-publicos-revisao/p4-mobilidade/obras-2019-2025.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/pendencias-continuidade-2026-10-08.json
+docs/dados-publicos-revisao/p4-mobilidade/pendencias-continuidade-2026-10-08.md
+docs/dados-publicos-revisao/p4-mobilidade/planmob-indicadores.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/prompt-continuidade.md
+docs/dados-publicos-revisao/p4-mobilidade/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p4-mobilidade/radares.html.texto.json
+docs/dados-publicos-revisao/p4-mobilidade/relatorio-final.md
+docs/dados-publicos-revisao/p4-mobilidade/resumo-p4.json
+docs/dados-publicos-revisao/p4-mobilidade/revisoes-km.json
+docs/dados-publicos-revisao/p4-mobilidade/snapshot-inicial.json
+docs/dados-publicos-revisao/p4-mobilidade/testes-reproducao.json
+docs/dados-publicos-revisao/p4-mobilidade/testes-runtime.json
+docs/dados-publicos-revisao/p4-mobilidade/textos-transporte-extraidos.json
+docs/dados-publicos-revisao/p4-mobilidade/transporte-adaptado.html.texto.json
+docs/dados-publicos-revisao/p4-mobilidade/transporte-bilhetagem-2013.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/transporte-bilhetagem-2026.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/transporte-ipk-2026.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/transporte-km-2026.pdf.text.json
+docs/dados-publicos-revisao/p4-mobilidade/transporte-linhas-2026.pdf.text.json
+docs/dados-publicos-revisao/p5-educacao/app.html.before
+docs/dados-publicos-revisao/p5-educacao/git-before-appjs.txt
+docs/dados-publicos-revisao/p5-educacao/git-before-stat.txt
+docs/dados-publicos-revisao/p5-educacao/git-before-status.txt
+docs/dados-publicos-revisao/p5-educacao/inventario-inicial.json
+docs/dados-publicos-revisao/p5-educacao/radar_hub_controller.js.before
+docs/dados-publicos-revisao/p5-educacao/runtime-educacao-inicial.js
+docs/dados-publicos-revisao/p5-educacao/snapshot-inicial.json
+docs/dados-publicos-revisao/p5-educacao/ui-educacao-inicial.html
+docs/dados-publicos-revisao/p5-saude/antes-depois.md
+docs/dados-publicos-revisao/p5-saude/matriz-cobertura.md
+docs/dados-publicos-revisao/p5-saude/matriz-oportunidades.md
+docs/dados-publicos-revisao/p5-saude/relatorio-final.md
+docs/dados-publicos-revisao/p6-seguranca/antes-depois.md
+docs/dados-publicos-revisao/p6-seguranca/matriz-cobertura.md
+docs/dados-publicos-revisao/p6-seguranca/matriz-oportunidades.md
+docs/dados-publicos-revisao/p6-seguranca/relatorio-final.md
+docs/dados-publicos-revisao/p7-demografia/antes-depois.md
+docs/dados-publicos-revisao/p7-demografia/matriz-cobertura.md
+docs/dados-publicos-revisao/p7-demografia/matriz-oportunidades.md
+docs/dados-publicos-revisao/p7-demografia/relatorio-final.md
+docs/dados-publicos-revisao/p8-educacao/antes-depois.md
+docs/dados-publicos-revisao/p8-educacao/matriz-cobertura.md
+docs/dados-publicos-revisao/p8-educacao/matriz-oportunidades.md
+docs/dados-publicos-revisao/p8-educacao/relatorio-final.md
+docs/dados-publicos-revisao/prompt-outra-ia.md
+docs/dados-publicos-revisao/relatorio-base-2026-10-04.md
+docs/dados-publicos-revisao/revisao-multiagente/matriz-confianca-global.md
+docs/dados-publicos-revisao/revisao-multiagente/relatorio-revisao-global.md
+docs/historia-auditoria/README.md
+docs/historia-auditoria/bairros-centro-lote1-2026-10-04.md
+docs/historia-auditoria/bairros-leste-2026-10-04.md
+docs/historia-auditoria/bairros-norte-lote2-2026-10-04.md
+docs/historia-auditoria/bairros-norte-lote3-2026-10-04.md
+docs/historia-auditoria/bairros-oeste-sfx-2026-10-04.md
+docs/historia-auditoria/bairros-pesquisa.md
+docs/historia-auditoria/bairros-sudeste-2026-10-04.md
+docs/historia-auditoria/bairros-sul-lote1-2026-10-04.md
+docs/historia-auditoria/bairros-sul-lote2-2026-10-04.md
+docs/historia-auditoria/inventario.json
+docs/historia-auditoria/lendas-revisao-2026-10-04.md
+docs/historia-auditoria/zona-norte-revisao-2026-10-03.md
+docs/radar-2026/ANTIGRAVITY_EXECUCAO_FINAL.md
+docs/radar-2026/PROMPT_MASTER_FULL.txt
+docs/radar-2026/RADAR_SJC_2026_APPROVED_TEXT_FULL.md
+docs/radar-2026/RADAR_SJC_2026_MASTER_COPY_VISUAL_DEFINITIVO.md
+docs/radar-2026/equipe/00_DIAGNOSTICO_GERAL.md
+docs/radar-2026/equipe/01_DIRECAO_EDITORIAL.md
+docs/radar-2026/equipe/02_QUANTI_NOVAS_DESCOBERTAS.md
+docs/radar-2026/equipe/03_COPY_REVISADA_COMPLETA.md
+docs/radar-2026/equipe/04_DIRECAO_VISUAL.md
+docs/radar-2026/equipe/05_MAPA_DE_ASSETS.md
+docs/radar-2026/equipe/06_PLANO_DATA_VIZ.md
+docs/radar-2026/equipe/07_PLANO_MESTRE_TELA_A_TELA.md
+docs/radar-2026/equipe/08_GATE_PRE_IMPLEMENTACAO.md
+docs/radar-2026/equipe/09_QA_FINAL.md
+docs/radar-2026/equipe/DIAGNOSTICO_COMPLETO_115_TELAS.json
+docs/radar-2026/equipe/METRICAS_EXATAS_SUPABASE_CH1.json
+docs/radar-2026/equipe/SURVEY_FULL_DISTRIBUTIONS.json
+docs/radar-2026/head_articles/01_rep-contexto.html
+docs/radar-2026/head_articles/02_rep-equipe.html
+docs/radar-2026/head_articles/03_art_03.html
+docs/radar-2026/head_articles/04_rep-pergunta-estrategica.html
+docs/radar-2026/head_articles/05_rep-metodologia-integrada.html
+docs/radar-2026/head_articles/06_rep-como-analisamos.html
+docs/radar-2026/head_articles/07_rep-metodologia-integrada.html
+docs/radar-2026/head_articles/08_art_08.html
+docs/radar-2026/head_articles/09_art_09.html
+docs/radar-2026/head_articles/10_art_10.html
+docs/radar-2026/head_articles/11_art_11.html
+docs/radar-2026/head_articles/12_art_12.html
+docs/radar-2026/head_articles/13_art_13.html
+docs/radar-2026/head_articles/14_art_14.html
+docs/radar-2026/head_articles/15_rep-capitulo-1.html
+docs/radar-2026/head_articles/16_rep-paradoxo.html
+docs/radar-2026/head_articles/17_rep-uso-oferta-identificacao.html
+docs/radar-2026/head_articles/18_rep-fluxo-lazer.html
+docs/radar-2026/head_articles/19_art_19.html
+docs/radar-2026/head_articles/20_art_20.html
+docs/radar-2026/head_articles/21_art_21.html
+docs/radar-2026/head_articles/22_top-10-influenciadores-grid.html
+docs/radar-2026/head_articles/23_art_23.html
+docs/radar-2026/head_articles/24_repChartMobilidade.html
+docs/radar-2026/head_articles/25_repChartMusica.html
+docs/radar-2026/head_articles/26_repChartBarreirasNoite.html
+docs/radar-2026/head_articles/27_art_27.html
+docs/radar-2026/head_articles/28_rep-radiografia-regional.html
+docs/radar-2026/head_articles/29_rep-genero-geracoes.html
+docs/radar-2026/head_articles/30_art_30.html
+docs/radar-2026/head_articles/31_art_31.html
+docs/radar-2026/head_articles/32_art_32.html
+docs/radar-2026/head_articles/33_art_33.html
+docs/radar-2026/head_articles/34_art_34.html
+docs/radar-2026/head_articles/35_rep-capitulo-2.html
+docs/radar-2026/head_articles/36_rep-personagens.html
+docs/radar-2026/head_articles/37_rep-insights-qualitativos.html
+docs/radar-2026/head_articles/38_art_38.html
+docs/radar-2026/head_articles/39_art_39.html
+docs/radar-2026/head_articles/40_art_40.html
+docs/radar-2026/head_articles/41_art_41.html
+docs/radar-2026/head_articles/42_art_42.html
+docs/radar-2026/head_articles/43_art_43.html
+docs/radar-2026/head_articles/44_art_44.html
+docs/radar-2026/head_articles/45_art_45.html
+docs/radar-2026/head_articles/46_art_46.html
+docs/radar-2026/head_articles/47_rep-capitulo-4.html
+docs/radar-2026/head_articles/48_art_48.html
+docs/radar-2026/head_articles/49_art_49.html
+docs/radar-2026/head_articles/50_rep-mov-geografia-inercia.html
+docs/radar-2026/head_articles/51_art_51.html
+docs/radar-2026/head_articles/52_rep-mov-cidade-prometida.html
+docs/radar-2026/head_articles/53_art_53.html
+docs/radar-2026/head_articles/54_rep-mov-tribo-global.html
+docs/radar-2026/head_articles/55_art_55.html
+docs/radar-2026/head_articles/56_rep-mov-emp-intuitivo.html
+docs/radar-2026/head_articles/57_art_57.html
+docs/radar-2026/head_articles/58_rep-sinergia.html
+docs/radar-2026/head_articles/59_art_59.html
+docs/radar-2026/head_articles/60_art_60.html
+docs/radar-2026/head_articles/61_art_61.html
+docs/radar-2026/head_articles/62_art_62.html
+docs/radar-2026/head_articles/63_art_63.html
+docs/radar-2026/head_articles/64_art_64.html
+docs/radar-2026/head_articles/65_art_65.html
+docs/radar-2026/head_articles/66_rep-semaforo-playbook.html
+docs/radar-2026/head_articles/67_rep-veredito-mapa-mina.html
+docs/radar-2026/head_articles/68_rep-50-ideias.html
+docs/radar-2026/head_articles/69_art_69.html
+docs/radar-2026/inv_head.json
+docs/radar-2026/inv_wt.json
+docs/radar-2026/prompt_master_equipe.txt
+docs/radar-2026/prompt_master_equipe_full.txt
+docs/radar-2026/telas_parsed.json
+docs/radar-2026/tools/__pycache__/build_ch0_intro.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/build_ch1_quanti.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/build_ch2_quali.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/build_ch3_movimentos.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/build_ch4_futuro.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/build_ch5_encerramento.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/build_chap0.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/prototype_builder.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/test_segment_lines.cpython-312.pyc
+docs/radar-2026/tools/__pycache__/test_voices_renderer.cpython-312.pyc
+docs/radar-2026/tools/all_telas_mapped.json
+docs/radar-2026/tools/analyze_deep.py
+docs/radar-2026/tools/analyze_tela_refs.py
+docs/radar-2026/tools/apply_agent7_implementation.py
+docs/radar-2026/tools/apply_approved_text_complete.py
+docs/radar-2026/tools/apply_complete_ch1_data.py
+docs/radar-2026/tools/apply_real_supabase_data_to_ch1.py
+docs/radar-2026/tools/apply_rm_fixes.py
+docs/radar-2026/tools/article_inventory.json
+docs/radar-2026/tools/assemble_master_app.py
+docs/radar-2026/tools/audit_all_115_screens.py
+docs/radar-2026/tools/audit_all_screens_layout.py
+docs/radar-2026/tools/audit_and_extract_quanti.py
+docs/radar-2026/tools/audit_and_fix_all_ch1_cards.py
+docs/radar-2026/tools/audit_ch1.py
+docs/radar-2026/tools/audit_chapter1_data.py
+docs/radar-2026/tools/audit_final_integrity.py
+docs/radar-2026/tools/audit_generated_screens.py
+docs/radar-2026/tools/audit_globo_gente_115.py
+docs/radar-2026/tools/audit_globo_gente_summary.json
+docs/radar-2026/tools/audit_text_overlap.py
+docs/radar-2026/tools/build_agente1_document.py
+docs/radar-2026/tools/build_agente3_copy.py
+docs/radar-2026/tools/build_agente4_document.py
+docs/radar-2026/tools/build_agente5_document.py
+docs/radar-2026/tools/build_agente6_document.py
+docs/radar-2026/tools/build_agente7_master_plan.py
+docs/radar-2026/tools/build_ch0_intro.py
+docs/radar-2026/tools/build_ch1_quanti.py
+docs/radar-2026/tools/build_ch2_quali.py
+docs/radar-2026/tools/build_ch3_movimentos.py
+docs/radar-2026/tools/build_ch4_futuro.py
+docs/radar-2026/tools/build_ch5_encerramento.py
+docs/radar-2026/tools/build_chap0.py
+docs/radar-2026/tools/build_chap1.py
+docs/radar-2026/tools/build_executive_report.py
+docs/radar-2026/tools/build_presentation_master.py
+docs/radar-2026/tools/build_updated_report.py
+docs/radar-2026/tools/calc_all_distributions.py
+docs/radar-2026/tools/categorize_archetypes.py
+docs/radar-2026/tools/categorize_screens.py
+docs/radar-2026/tools/check_051.py
+docs/radar-2026/tools/check_051_details.py
+docs/radar-2026/tools/check_all_dashes_in_articles.py
+docs/radar-2026/tools/check_all_telas.py
+docs/radar-2026/tools/check_art14_update.py
+docs/radar-2026/tools/check_art_components.py
+docs/radar-2026/tools/check_b18.py
+docs/radar-2026/tools/check_backup_content.py
+docs/radar-2026/tools/check_chap0_lengths.py
+docs/radar-2026/tools/check_chart_scripts.py
+docs/radar-2026/tools/check_datalabels_reg.py
+docs/radar-2026/tools/check_diff_screens.py
+docs/radar-2026/tools/check_emdash_telas.py
+docs/radar-2026/tools/check_encoding.py
+docs/radar-2026/tools/check_gastro.py
+docs/radar-2026/tools/check_gastro_div.py
+docs/radar-2026/tools/check_gifs.py
+docs/radar-2026/tools/check_hooks.py
+docs/radar-2026/tools/check_js_bindings.py
+docs/radar-2026/tools/check_load.py
+docs/radar-2026/tools/check_master_tela33.py
+docs/radar-2026/tools/check_media_refs.py
+docs/radar-2026/tools/check_personas_js.py
+docs/radar-2026/tools/check_real_pet_data.py
+docs/radar-2026/tools/check_sidebar_targets.py
+docs/radar-2026/tools/check_studio8.py
+docs/radar-2026/tools/check_svgs.py
+docs/radar-2026/tools/check_t18_tag.py
+docs/radar-2026/tools/check_tela_103.py
+docs/radar-2026/tools/check_telas_text.py
+docs/radar-2026/tools/check_videos.py
+docs/radar-2026/tools/clean_parsed_json.py
+docs/radar-2026/tools/compare_backup_curr.py
+docs/radar-2026/tools/compare_chap0_detail.py
+docs/radar-2026/tools/compare_chap1_detail.py
+docs/radar-2026/tools/compare_text_samples.py
+docs/radar-2026/tools/compute_clean_multi_metrics.py
+docs/radar-2026/tools/debug_audit.py
+docs/radar-2026/tools/deep_analysis.json
+docs/radar-2026/tools/diff_app_js.py
+docs/radar-2026/tools/diffinv.py
+docs/radar-2026/tools/dump_ch1_screens.py
+docs/radar-2026/tools/dump_ch2.py
+docs/radar-2026/tools/dump_ch3.py
+docs/radar-2026/tools/dump_ch3_details.py
+docs/radar-2026/tools/dump_ch4_details.py
+docs/radar-2026/tools/dump_ch5_details.py
+docs/radar-2026/tools/extract_app_assets.py
+docs/radar-2026/tools/extract_head_articles.py
+docs/radar-2026/tools/fast_find_special_ids.py
+docs/radar-2026/tools/find_canvases.py
+docs/radar-2026/tools/find_capa.py
+docs/radar-2026/tools/find_chart_ids.py
+docs/radar-2026/tools/find_dashes_in_rm_ui.py
+docs/radar-2026/tools/find_disk_personas.py
+docs/radar-2026/tools/find_exec_view_bounds.py
+docs/radar-2026/tools/find_inf_grid.py
+docs/radar-2026/tools/find_mais_fotos.py
+docs/radar-2026/tools/find_missing_numbers_screen.py
+docs/radar-2026/tools/find_persona_mentions.py
+docs/radar-2026/tools/find_persona_telas.py
+docs/radar-2026/tools/find_personas_app_js.py
+docs/radar-2026/tools/find_pet_cards.py
+docs/radar-2026/tools/find_pres.py
+docs/radar-2026/tools/find_pres_css.py
+docs/radar-2026/tools/find_rm_calls.py
+docs/radar-2026/tools/find_rm_canvases.py
+docs/radar-2026/tools/find_sankey_js.py
+docs/radar-2026/tools/find_sankey_rest.py
+docs/radar-2026/tools/find_sem_markup.py
+docs/radar-2026/tools/find_sidebar_index.py
+docs/radar-2026/tools/find_tela_14_lines.py
+docs/radar-2026/tools/find_tela_18_lines.py
+docs/radar-2026/tools/fix_113_114_h3.py
+docs/radar-2026/tools/fix_matrix_cats.py
+docs/radar-2026/tools/fix_quanti_and_charts.py
+docs/radar-2026/tools/fix_remaining_9_and_cliches.py
+docs/radar-2026/tools/fix_rm_paradox.py
+docs/radar-2026/tools/fix_t008_real_data.py
+docs/radar-2026/tools/fix_t050.py
+docs/radar-2026/tools/fix_t23_title.py
+docs/radar-2026/tools/generate_after_json.py
+docs/radar-2026/tools/generate_all_115_screens.py
+docs/radar-2026/tools/generate_all_quanti_metrics.py
+docs/radar-2026/tools/generate_app_html.py
+docs/radar-2026/tools/generate_baseline.py
+docs/radar-2026/tools/generate_ch1_crosstabs.py
+docs/radar-2026/tools/generate_chap1.py
+docs/radar-2026/tools/generate_clean_ch1_data.py
+docs/radar-2026/tools/generate_clean_presentation.py
+docs/radar-2026/tools/generate_editorial_direction.py
+docs/radar-2026/tools/generate_phase0_diagnostic_data.py
+docs/radar-2026/tools/generated_115_articles.json
+docs/radar-2026/tools/head_report.html
+docs/radar-2026/tools/inspect_113_114.py
+docs/radar-2026/tools/inspect_19_30.py
+docs/radar-2026/tools/inspect_31_48.py
+docs/radar-2026/tools/inspect_52_53.py
+docs/radar-2026/tools/inspect_75_80.py
+docs/radar-2026/tools/inspect_all_articles.py
+docs/radar-2026/tools/inspect_all_assets.py
+docs/radar-2026/tools/inspect_all_media.py
+docs/radar-2026/tools/inspect_app_html.py
+docs/radar-2026/tools/inspect_app_rm_render.py
+docs/radar-2026/tools/inspect_art22.py
+docs/radar-2026/tools/inspect_articles.py
+docs/radar-2026/tools/inspect_articles_structure.py
+docs/radar-2026/tools/inspect_assets.py
+docs/radar-2026/tools/inspect_backup_004.py
+docs/radar-2026/tools/inspect_backup_4_12_14.py
+docs/radar-2026/tools/inspect_backup_samples.py
+docs/radar-2026/tools/inspect_backup_vs_approved.py
+docs/radar-2026/tools/inspect_ch0.py
+docs/radar-2026/tools/inspect_ch0_telas.py
+docs/radar-2026/tools/inspect_ch1_lines.py
+docs/radar-2026/tools/inspect_ch1_sample.py
+docs/radar-2026/tools/inspect_ch1_targets.py
+docs/radar-2026/tools/inspect_ch2_lines.py
+docs/radar-2026/tools/inspect_ch2_targets.py
+docs/radar-2026/tools/inspect_ch3_targets.py
+docs/radar-2026/tools/inspect_ch3_telas.py
+docs/radar-2026/tools/inspect_ch4_targets.py
+docs/radar-2026/tools/inspect_ch4_telas.py
+docs/radar-2026/tools/inspect_chap0.py
+docs/radar-2026/tools/inspect_chap0_approved_details.py
+docs/radar-2026/tools/inspect_chap1_approved.py
+docs/radar-2026/tools/inspect_chap1_copy.py
+docs/radar-2026/tools/inspect_chap1_elements.py
+docs/radar-2026/tools/inspect_chap1_metrics.py
+docs/radar-2026/tools/inspect_chap2_approved.py
+docs/radar-2026/tools/inspect_chap2_copy.py
+docs/radar-2026/tools/inspect_chap2_quotes.py
+docs/radar-2026/tools/inspect_chap3_4_approved.py
+docs/radar-2026/tools/inspect_chap3_4_copy.py
+docs/radar-2026/tools/inspect_chapters.py
+docs/radar-2026/tools/inspect_gen_113.py
+docs/radar-2026/tools/inspect_gen_50.py
+docs/radar-2026/tools/inspect_head_ch3.py
+docs/radar-2026/tools/inspect_head_ch4.py
+docs/radar-2026/tools/inspect_headings.py
+docs/radar-2026/tools/inspect_json_keys.py
+docs/radar-2026/tools/inspect_key_screens.py
+docs/radar-2026/tools/inspect_lines_50.py
+docs/radar-2026/tools/inspect_markup.py
+docs/radar-2026/tools/inspect_master_ch3_ch4.py
+docs/radar-2026/tools/inspect_master_screens.py
+docs/radar-2026/tools/inspect_metrics.py
+docs/radar-2026/tools/inspect_pair_telas.py
+docs/radar-2026/tools/inspect_personas_block.py
+docs/radar-2026/tools/inspect_presentation.py
+docs/radar-2026/tools/inspect_quali_detail.py
+docs/radar-2026/tools/inspect_qualitative_screens.py
+docs/radar-2026/tools/inspect_qualitative_screens_50_65.py
+docs/radar-2026/tools/inspect_rb_lines.py
+docs/radar-2026/tools/inspect_rm_fields.py
+docs/radar-2026/tools/inspect_rm_hooks.py
+docs/radar-2026/tools/inspect_rm_js.py
+docs/radar-2026/tools/inspect_rm_lack.py
+docs/radar-2026/tools/inspect_rm_lines_115_155.py
+docs/radar-2026/tools/inspect_rm_metrics.py
+docs/radar-2026/tools/inspect_rm_normalize.py
+docs/radar-2026/tools/inspect_rm_ui.py
+docs/radar-2026/tools/inspect_rm_ui_core.py
+docs/radar-2026/tools/inspect_rm_ui_end.py
+docs/radar-2026/tools/inspect_rm_ui_lines.py
+docs/radar-2026/tools/inspect_samples.py
+docs/radar-2026/tools/inspect_samples_raw.py
+docs/radar-2026/tools/inspect_section_container.py
+docs/radar-2026/tools/inspect_section_tag.py
+docs/radar-2026/tools/inspect_supabase_questions.py
+docs/radar-2026/tools/inspect_t050_check.py
+docs/radar-2026/tools/inspect_t068_069.py
+docs/radar-2026/tools/inspect_t13_full.py
+docs/radar-2026/tools/inspect_t17_full.py
+docs/radar-2026/tools/inspect_tag_patterns.py
+docs/radar-2026/tools/inspect_tags.py
+docs/radar-2026/tools/inspect_telas_100_111.py
+docs/radar-2026/tools/inspect_text_nodes.py
+docs/radar-2026/tools/inspect_text_structure.py
+docs/radar-2026/tools/inspect_trailing_articles.py
+docs/radar-2026/tools/inspect_wt_detail.py
+docs/radar-2026/tools/inventory.py
+docs/radar-2026/tools/list_all_42_dists.py
+docs/radar-2026/tools/list_all_disk_gifs.py
+docs/radar-2026/tools/list_all_telas.py
+docs/radar-2026/tools/list_article_blocks.py
+docs/radar-2026/tools/list_blocks_rb.py
+docs/radar-2026/tools/list_head_articles.py
+docs/radar-2026/tools/list_rm_ids.py
+docs/radar-2026/tools/list_survey_cols.py
+docs/radar-2026/tools/map_115_archetypes.py
+docs/radar-2026/tools/map_all_assets_telas.py
+docs/radar-2026/tools/map_screen_assets.py
+docs/radar-2026/tools/map_telas_overview.py
+docs/radar-2026/tools/maphead.py
+docs/radar-2026/tools/master_builder.py
+docs/radar-2026/tools/outside.py
+docs/radar-2026/tools/parse_approved_screens.py
+docs/radar-2026/tools/parse_telas.py
+docs/radar-2026/tools/parsed_approved_screens.json
+docs/radar-2026/tools/phase0_analysis.json
+docs/radar-2026/tools/phase0_diagnostic_summary.json
+docs/radar-2026/tools/print_appr_103.py
+docs/radar-2026/tools/print_appr_113_114.py
+docs/radar-2026/tools/print_appr_24.py
+docs/radar-2026/tools/print_appr_50.py
+docs/radar-2026/tools/print_appr_52.py
+docs/radar-2026/tools/print_appr_53.py
+docs/radar-2026/tools/print_bar_chart_js.py
+docs/radar-2026/tools/print_bar_plugins.py
+docs/radar-2026/tools/print_chap0_approved.py
+docs/radar-2026/tools/print_cross_summary.py
+docs/radar-2026/tools/print_key_dists.py
+docs/radar-2026/tools/print_pres.py
+docs/radar-2026/tools/print_t006_012.py
+docs/radar-2026/tools/print_t008.py
+docs/radar-2026/tools/print_t015_023.py
+docs/radar-2026/tools/print_t024.py
+docs/radar-2026/tools/print_t029_049.py
+docs/radar-2026/tools/print_t050_051.py
+docs/radar-2026/tools/print_t050_full.py
+docs/radar-2026/tools/print_t103_full.py
+docs/radar-2026/tools/print_t113_114_full.py
+docs/radar-2026/tools/print_t16.py
+docs/radar-2026/tools/print_t18_full.py
+docs/radar-2026/tools/print_t33_app.py
+docs/radar-2026/tools/print_tela_53.py
+docs/radar-2026/tools/prototype_builder.py
+docs/radar-2026/tools/qa_results.json
+docs/radar-2026/tools/quanti_full_cross.json
+docs/radar-2026/tools/read_full_rb.py
+docs/radar-2026/tools/read_rm_source.py
+docs/radar-2026/tools/read_test_rm_ui.py
+docs/radar-2026/tools/render_chapters.py
+docs/radar-2026/tools/run_phase0_diagnostic.py
+docs/radar-2026/tools/run_qa_audit.py
+docs/radar-2026/tools/run_quanti_discoveries.py
+docs/radar-2026/tools/run_test_voices.py
+docs/radar-2026/tools/save_master.py
+docs/radar-2026/tools/screen_assets.json
+docs/radar-2026/tools/screen_updaters.py
+docs/radar-2026/tools/search_screen.py
+docs/radar-2026/tools/show_5_articles.py
+docs/radar-2026/tools/show_approved_17_19.py
+docs/radar-2026/tools/test_all_115_screens_resolution.cjs
+docs/radar-2026/tools/test_article_regex.py
+docs/radar-2026/tools/test_chap0_builder.py
+docs/radar-2026/tools/test_component_extract.py
+docs/radar-2026/tools/test_lacks_calc.cjs
+docs/radar-2026/tools/test_parse_all.py
+docs/radar-2026/tools/test_parse_elements.py
+docs/radar-2026/tools/test_personas_parsing.py
+docs/radar-2026/tools/test_prefix_suffix.py
+docs/radar-2026/tools/test_renderer_t21.py
+docs/radar-2026/tools/test_segment_lines.py
+docs/radar-2026/tools/test_simulated_ui.cjs
+docs/radar-2026/tools/test_smart_parser.py
+docs/radar-2026/tools/test_universal_renderer.py
+docs/radar-2026/tools/test_voice_and_gif_screens.py
+docs/radar-2026/tools/test_voice_parser_correct.py
+docs/radar-2026/tools/test_voice_quotes_parsing.py
+docs/radar-2026/tools/test_voices_renderer.py
+docs/radar-2026/tools/update_ch0_remaining.py
+docs/radar-2026/tools/update_ch1_screens.py
+docs/radar-2026/tools/update_ch2_screens.py
+docs/radar-2026/tools/update_ch3_screens.py
+docs/radar-2026/tools/update_ch4_screens.py
+docs/radar-2026/tools/update_chapter_2_part1.py
+docs/radar-2026/tools/update_chapter_2_part2.py
+docs/radar-2026/tools/update_chapter_3_globo_gente.py
+docs/radar-2026/tools/update_chapter_4_globo_gente.py
+docs/radar-2026/tools/update_rb_18.py
+docs/radar-2026/tools/update_remaining_ch3_ch4.py
+docs/radar-2026/tools/update_t006.py
+docs/radar-2026/tools/update_tela_037.py
+docs/radar-2026/tools/update_telas_100_109.py
+docs/radar-2026/tools/verify_all_screens_numbers.py
+docs/radar-2026/tools/verify_disk_assets.py
+docs/radar-2026/tools/verify_final_production.py
+docs/radar-2026/tools/verify_gate.py
+docs/radar-2026/tools/verify_qualitative_data.py
+docs/radar-2026/visual-after.json
+docs/radar-2026/visual-baseline.json
+dossier_s9.txt
+draft_bloco1.py
+dump_1071.txt
+dump_32.txt
+dump_332.txt
+dump_65.txt
+dump_972.txt
+dump_all_cards.py
+dump_step_15.txt
+dump_step_19.txt
+dump_step_51.txt
+dump_step_55.txt
+entrada_ibge.txt
+entrada_midia.txt
+entrada_pesquisa.txt
+fast_test_urls.py
+find_lines.py
+"fotos radar/Cat\303\241logo de 50 GIFs \342\200\224 Internet e tecnologia.md"
+"fotos radar/Dados p\303\272blicos.jpg"
+fotos radar/capa_sjc_skyline.jpg
+fotos radar/catalogo.json
+fotos radar/clipping.jpg
+fotos radar/dados_publicos.jpg
+fotos radar/foto_cidade.jpg
+fotos radar/foto_cultura.jpg
+fotos radar/foto_gastronomia.jpg
+fotos radar/foto_noite.jpg
+fotos radar/foto_onibus_viaduto.jpg
+fotos radar/foto_pessoas.jpg
+fotos radar/ghibli_aluguel_livre.jpg
+fotos radar/ghibli_aluguel_quer_casa.jpg
+fotos radar/ghibli_casa_propria.jpg
+fotos radar/gifs/01_internet_em_voo_9xEt.gif
+fotos radar/gifs/02_redes_sociais_7DZq.gif
+fotos radar/gifs/03_gato_e_internet_7NUJ.gif
+fotos radar/gifs/04_computador_e_mundo_digital_J4o.gif
+fotos radar/gifs/05_wi_fi_em_loop_1fqC.gif
+fotos radar/gifs/06_falha_de_computador_y7.gif
+fotos radar/gifs/07_computador_SUV4.gif
+fotos radar/gifs/08_computador_e_internet_JXA0.gif
+fotos radar/gifs/09_conex_o_global_D9gM.gif
+fotos radar/gifs/10_tempo_na_internet_7UzU.gif
+fotos radar/gifs/11_internet_ML7C.gif
+fotos radar/gifs/12_download_CWF.gif
+fotos radar/gifs/13_loop_abstrato_NIbp.gif
+fotos radar/gifs/14_computador_transparente_3IsP.gif
+fotos radar/gifs/15_gato_no_facebook_2GU.gif
+fotos radar/gifs/16_computador_digital_MQIW.gif
+fotos radar/gifs/17_design_cyberpunk_QWc9.gif
+fotos radar/gifs/18_reiniciando_o_desktop_g0bL.gif
+fotos radar/gifs/19_computador_dos_muppets_Cdt.gif
+fotos radar/gifs/20_digita_o_r_pida_S0S.gif
+fotos radar/gifs/21_computador_retr_5SM.gif
+fotos radar/gifs/22_teclas_do_computador_6vIk.gif
+fotos radar/gifs/23_macaco_no_escrit_rio_1FA.gif
+fotos radar/gifs/24_e_mail_e_gato_Ao.gif
+fotos radar/gifs/25_arte_ascii_PcUC.gif
+fotos radar/gifs/26_tecnologia_e_cinema_4d_J59.gif
+fotos radar/gifs/27_terra_digital_PX5H.gif
+fotos radar/gifs/28_design_em_loop_9viJ.gif
+fotos radar/gifs/29_design_tron_neon_QWsX.gif
+fotos radar/gifs/30_visual_digital_Uhy5.gif
+fotos radar/gifs/31_redes_sociais_twitter_e_facebook_7AR1.gif
+fotos radar/gifs/32_tecnologia_abstrata_JxUA.gif
+fotos radar/gifs/33_interface_de_realidade_virtual_Rr20.gif
+fotos radar/gifs/34_energia_nuclear_futurista_fxvT.gif
+fotos radar/gifs/35_tecnologia_luminosa_Mr3W.gif
+fotos radar/gifs/36_intelig_ncia_artificial_cyberpunk_75lD.gif
+fotos radar/gifs/37_yin_yang_em_loop_2mue.gif
+fotos radar/gifs/38_loop_perfeito_AQQT.gif
+fotos radar/gifs/39_ciclo_cont_nuo_vI.gif
+fotos radar/gifs/40_rel_mpago_W5Xw.gif
+fotos radar/gifs/41_lua_gzZ.gif
+fotos radar/gifs/42_pato_transparente_XOsX.gif
+fotos radar/gifs/43_onda_circular_4Cb2.gif
+fotos radar/gifs/44_ciclo_colorido_878o.gif
+fotos radar/gifs/45_cpu_em_loop_1ktC.gif
+fotos radar/gifs/46_fractal_em_loop_NTHO.gif
+fotos radar/gifs/47_gr_fico_de_movimento_digital_H9pn.gif
+fotos radar/gifs/48_desenvolvimento_web_6M8G.gif
+fotos radar/gifs/49_glitch_em_loop_8wDL.gif
+fotos radar/gifs/50_radar_futurista_2RNb.gif
+fotos radar/gifs/catalogo.json
+fotos radar/gifs/catalogo_gifs.md
+fotos radar/gifs_internet_50.zip
+fotos radar/hero_bg.jpg
+fotos radar/lentes sjc.jpg
+fotos radar/lentes_sjc.jpg
+fotos radar/logo.png
+fotos radar/logo_header_transparent.png
+fotos radar/logo_login_oficial.png
+fotos radar/logo_login_transparent.png
+fotos radar/logobranco.png
+fotos radar/logos_streaming_png/Amazon_Prime_Video.png
+fotos radar/logos_streaming_png/Apple_TV_Plus.png
+fotos radar/logos_streaming_png/Disney_Plus.png
+fotos radar/logos_streaming_png/Globoplay.png
+fotos radar/logos_streaming_png/Max.png
+fotos radar/logos_streaming_png/Netflix.png
+fotos radar/logos_streaming_png/README.md
+fotos radar/logos_streaming_png/Spotify.png
+fotos radar/logos_streaming_png/YouTube_Music.png
+fotos radar/mapa_origem_entrevistados.png
+fotos radar/nao_triste.jpg
+fotos radar/personagens/carla.png
+fotos radar/personagens/emerson.png
+fotos radar/personagens/felipe.png
+fotos radar/personagens/gabriela.png
+fotos radar/personagens/isis.png
+fotos radar/personagens/lucas.png
+fotos radar/personagens/miriam.png
+fotos radar/personagens/p73_img1.jpeg
+fotos radar/personagens/p73_img10.jpeg
+fotos radar/personagens/p73_img11.jpeg
+fotos radar/personagens/p73_img2.jpeg
+fotos radar/personagens/p73_img3.jpeg
+fotos radar/personagens/p73_img4.jpeg
+fotos radar/personagens/p73_img5.jpeg
+fotos radar/personagens/p73_img6.jpeg
+fotos radar/personagens/p73_img7.jpeg
+fotos radar/personagens/p73_img8.jpeg
+fotos radar/personagens/p73_img9.jpeg
+fotos radar/personagens/page73_full.png
+fotos radar/personagens/ricardo.png
+fotos radar/personagens/roberto.png
+fotos radar/personagens/rosangela.png
+fotos radar/photo_1.jpg
+fotos radar/photo_2.jpg
+fotos radar/photo_3.jpg
+fotos radar/radar_sjc_white_rounded.png
+fotos radar/sim_sorrindo.jpg
+fotos radar/simounao.jpg
+fotos radar/sjc_cassiano_ricardo.jpg
+fotos radar/sjc_ponte_estaiada.jpg
+fotos radar/sjc_rodovia_curva.jpg
+fotos radar/sjc_rodovia_curva.webp
+fotos radar/slides_recortes/slide_114.png
+fotos radar/slides_recortes/slide_120.png
+fotos radar/slides_recortes/slide_121.png
+fotos radar/slides_recortes/slide_129.png
+fotos radar/slides_recortes/slide_131.png
+fotos radar/slides_recortes/slide_138.png
+fotos radar/slides_recortes/slide_140.png
+fotos radar/slides_recortes/slide_148.png
+fotos radar/slides_recortes/slide_150.png
+fotos radar/slides_recortes/slide_158.png
+fotos radar/slides_recortes/slide_160.png
+fotos radar/slides_recortes/slide_161.png
+fotos radar/slides_recortes/slide_170.png
+fotos radar/slides_recortes/slide_171.png
+fotos radar/slides_recortes/slide_172.png
+fotos radar/slides_recortes/slide_178.png
+fotos radar/slides_recortes/slide_180.png
+fotos radar/slides_recortes/slide_181.png
+fotos radar/slides_recortes/slide_182.png
+fotos_radar/gifs_retro_10.zip
+generate_final_outputs.py
+generate_personas_3x4.py
+generate_personas_realistic.py
+gerar_csv.js
+gerar_personas_pipeline.py
+git_prev_data.bin
+guia-palavras-proibidas-ia.pdf
+import_supabase.sql
+inject_missing_filters.js
+inspect_all_cards.py
+inspect_p26_p51.py
+last_lines.txt
+list_sources_ordered.py
+mais_fotos_radar/IMG_2772.jpg
+map_card_sources.py
+midia_sjc/analise_midia_checkpoint.json
+midia_sjc/analise_midia_data.js
+midia_sjc/analise_midia_sjc.csv
+midia_sjc/analise_midia_sjc.json
+midia_sjc/analise_midia_sjc_nova.csv
+midia_sjc/dataset_instagram-scraper_2026-09-10_08-25-56-331.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_08-43-59-064.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_08-50-00-191.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_09-05-14-886.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_09-10-48-925.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_09-46-56-437.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_09-56-11-523.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_15-06-00-770.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_15-36-21-830.json
+midia_sjc/dataset_instagram-scraper_2026-09-10_15-50-23-664.json
+midia_sjc/logos_veiculos_png.zip
+midia_sjc/posts_auditados.csv
+midia_sjc/posts_com_todos_comentarios.csv
+midia_sjc/todos_comentarios_posts_sjc.csv
+midia_sjc/todos_comentarios_posts_sjc.json
+migracao_new.js
+move_block.py
+move_cards.py
+move_filters.js
+optimize_images.py
+pacote_antigravity_eleicoes_2026/data/abstencao/por_regiao.csv
+pacote_antigravity_eleicoes_2026/data/perfil/eleitorado_por_territorio.csv
+pacote_antigravity_eleicoes_2026/data/perfil/por_bairro.csv
+pacote_antigravity_eleicoes_2026/data/perfil/por_local.csv
+pacote_antigravity_eleicoes_2026/data/perfil/por_regiao.csv
+pacote_antigravity_eleicoes_2026/data/perfil/por_secao.csv
+pacote_antigravity_eleicoes_2026/data/territorios/auditoria_bairros.csv
+pacote_antigravity_eleicoes_2026/data/territorios/auditoria_regioes.csv
+pacote_antigravity_eleicoes_2026/data/territorios/bairros.csv
+pacote_antigravity_eleicoes_2026/data/territorios/locais.csv
+pacote_antigravity_eleicoes_2026/data/votos/por_bairro.csv
+pacote_antigravity_eleicoes_2026/data/votos/por_local.csv
+pacote_antigravity_eleicoes_2026/data/votos/por_regiao.csv
+pacote_antigravity_eleicoes_2026/data/votos/por_secao.csv
+pacote_antigravity_eleicoes_2026/data/votos/totais_por_cargo.csv
+pacote_antigravity_eleicoes_2026/docs/DICIONARIO_DADOS.md
+pacote_antigravity_eleicoes_2026/docs/METODOLOGIA_E_LIMITES.md
+pacote_antigravity_eleicoes_2026/docs/auditoria_votos_reclassificados_sistot.csv
+pacote_antigravity_eleicoes_2026/docs/reconciliacao_sistot_candidatos.csv
+pacote_antigravity_eleicoes_2026/docs/reconciliacao_sistot_legendas.csv
+pacote_antigravity_eleicoes_2026/docs/resumo_bairros.json
+pacote_antigravity_eleicoes_2026/docs/resumo_regionalizacao.json
+pacote_antigravity_eleicoes_2026/docs/validacao_perfil.csv
+pacote_antigravity_eleicoes_2026/docs/validacao_sistot_por_cargo.csv
+pacote_antigravity_eleicoes_2026/docs/validacao_votos.csv
+pacote_antigravity_eleicoes_2026/docs/validacao_votos_vs_agregado.csv
+parse_dossier.py
+parse_sources.py
+parsed_cards.json
+personalidades_raw.txt
+prefeitos_raw.txt
+prefeitos_step_15.txt
+prefeitos_step_2327.txt
+prefeitos_step_32.txt
+"public/fotos_radar/Abandono e Fiscaliza\303\247\303\243o.gif"
+"public/fotos_radar/Cat\303\241logo \342\200\224 10 GIFs retr\303\264.md"
+public/fotos_radar/Conflitos Sociais.gif
+public/fotos_radar/Crise nos Planos.gif
+"public/fotos_radar/Dados p\303\272blicos.jpg"
+"public/fotos_radar/Decad\303\252ncia no Atendimento.gif"
+"public/fotos_radar/Demanda Cr\303\255tica.gif"
+"public/fotos_radar/Exclus\303\243o Infraestrutural.gif"
+public/fotos_radar/Falta de Variedade.gif
+public/fotos_radar/Fator Humano.gif
+public/fotos_radar/Gargalo com Especialistas.gif
+public/fotos_radar/Geocentrismo.gif
+"public/fotos_radar/Ilumina\303\247\303\243o e Abandono.gif"
+"public/fotos_radar/Infla\303\247\303\243o local.gif"
+public/fotos_radar/Invisibilidade Social.gif
+public/fotos_radar/LEONARDO.jpeg
+public/fotos_radar/Lazer Concentrado.gif
+"public/fotos_radar/Manuten\303\247\303\243o Seletiva.gif"
+"public/fotos_radar/Monop\303\263lio Tem\303\241tico.gif"
+public/fotos_radar/O Medo Noturno.gif
+"public/fotos_radar/O Pobre Exclu\303\255do.gif"
+public/fotos_radar/O Rei na Barriga.gif
+"public/fotos_radar/Segrega\303\247\303\243o do Lazer.gif"
+"public/fotos_radar/Sensa\303\247\303\243o de Abandono.gif"
+"public/fotos_radar/Servi\303\247o Prec\303\241rio.gif"
+public/fotos_radar/capa_sjc_skyline.jpg
+public/fotos_radar/card_back_blue.jpg
+public/fotos_radar/card_back_blue.png
+public/fotos_radar/card_back_red.jpg
+public/fotos_radar/card_back_red.png
+public/fotos_radar/catalogo_retro_10.json
+public/fotos_radar/cidade do idoso.gif
+public/fotos_radar/clipping.jpg
+public/fotos_radar/dados_publicos.jpg
+public/fotos_radar/foto_cidade.jpg
+public/fotos_radar/foto_cultura.jpg
+public/fotos_radar/foto_gastronomia.jpg
+public/fotos_radar/foto_noite.jpg
+public/fotos_radar/foto_onibus_viaduto.jpg
+public/fotos_radar/foto_pessoas.jpg
+public/fotos_radar/ghibli_aluguel_livre.jpg
+public/fotos_radar/ghibli_aluguel_quer_casa.jpg
+public/fotos_radar/ghibli_casa_propria.jpg
+public/fotos_radar/gifs_retro_10.zip
+public/fotos_radar/hero_bg.jpg
+public/fotos_radar/lentes sjc.jpg
+public/fotos_radar/lentes_sjc.jpg
+public/fotos_radar/logo.png
+public/fotos_radar/logo_header_transparent.png
+public/fotos_radar/logo_login_oficial.png
+public/fotos_radar/logo_login_transparent.png
+public/fotos_radar/logobranco.png
+public/fotos_radar/mapa_origem_entrevistados.png
+public/fotos_radar/mayumi.jpg
+public/fotos_radar/nao_triste.jpg
+public/fotos_radar/photo_1.jpg
+public/fotos_radar/photo_2.jpg
+public/fotos_radar/photo_3.jpg
+public/fotos_radar/radar_logo_pure_white.png
+public/fotos_radar/radar_sjc_white_rounded.png
+public/fotos_radar/sim_sorrindo.jpg
+public/fotos_radar/simounao.jpg
+public/fotos_radar/sjc_cassiano_ricardo.jpg
+public/fotos_radar/sjc_ponte_estaiada.jpg
+public/fotos_radar/sjc_rodovia_curva.jpg
+public/fotos_radar/sjc_rodovia_curva.webp
+public/js/business-plan-controller.js
+public/js/mondayBoard.js
+public/js/spreadsheet.js
+public/js/swotCanvas.js
+reconciliacao_sistot_2026/sjc_auditoria_votos_reclassificados_2026.csv
+reconciliacao_sistot_2026/sjc_reconciliacao_candidatos_2026.csv
+reconciliacao_sistot_2026/sjc_reconciliacao_legendas_2026.csv
+reconciliacao_sistot_2026/sjc_totais_votos_finais_por_cargo_2026.csv
+reconciliacao_sistot_2026/sjc_validacao_sistot_por_cargo_2026.csv
+reconciliacao_sistot_2026/sjc_votos_reconciliados_por_bairro_2026.csv
+reconciliacao_sistot_2026/sjc_votos_reconciliados_por_local_2026.csv
+reconciliacao_sistot_2026/sjc_votos_reconciliados_por_regiao_2026.csv
+reconciliacao_sistot_2026/sjc_votos_reconciliados_secao_2026.csv
+recover.js
+recuperado_personalidades.js
+recuperado_prefeitos.js
+replace_migracao.py
+respostas.csv.csv
+run_full_validation.py
+run_val.py
+safe_move_filters.js
+saida_1_pioneiros.md
+saida_2_pioneiros.json
+scratch/analyze_overflow_causes.js
+scratch/analyze_survey_politics.py
+scratch/analyze_tables.js
+scratch/apply_kpi_and_ids_fixes.js
+scratch/apply_review_fixes.js
+scratch/apply_surgical_fixes.js
+scratch/audit_all_sections.js
+scratch/audit_business_plan.js
+scratch/audit_results.json
+scratch/build_business_os.js
+scratch/build_survey_politics_dataset.py
+scratch/capture_painel.py
+scratch/capture_pesquisa_recortes.py
+scratch/check_article.js
+scratch/check_before_kpi.js
+scratch/check_closing_tags.js
+scratch/check_editable_texts.js
+scratch/check_end_s6.js
+scratch/check_handlers.js
+scratch/check_main.js
+scratch/check_other_tabs.js
+scratch/check_relatorios.js
+scratch/check_required_ids.js
+scratch/check_sec_executivo.js
+scratch/check_sec_mercado.js
+scratch/check_tab_parents.js
+scratch/check_tab_stacks.js
+scratch/compare_tab_plan.js
+scratch/comprehensive_check.js
+scratch/count_tab_plan_divs.js
+scratch/enhance_tables.js
+scratch/execute_master_plan_refactor.js
+scratch/extract_sec_mercado.js
+scratch/extract_sections_commit.js
+scratch/fetch_prefeitura_photo.py
+scratch/find_all_mains.js
+scratch/find_custom_blocks.js
+scratch/find_depth_zero.js
+scratch/find_divs_1376_1661.js
+scratch/find_dom_loaded.js
+scratch/find_extra_closing_div.js
+scratch/find_jump.js
+scratch/find_main_children.js
+scratch/find_main_lines.js
+scratch/find_market_dom.js
+scratch/find_market_ids.js
+scratch/find_nav_lines.js
+scratch/find_overflow_elements.js
+scratch/find_radarzito_in_generator.js
+scratch/find_script_tag.js
+scratch/find_scroll_calls.js
+scratch/find_sec_bounds.js
+scratch/find_sections.js
+scratch/find_switch_tab.js
+scratch/find_tab_content_classes.js
+scratch/find_tab_css.js
+scratch/find_tag_mismatch.js
+scratch/find_unclosed_div.js
+scratch/fix_complete_plan.js
+scratch/gen_hemicycle.py
+scratch/gen_modern_hemicycle.py
+scratch/hemicycle.html
+scratch/inject_tab_plan.js
+scratch/inspect_after_aside.js
+scratch/inspect_all_styles.js
+scratch/inspect_blog_end.js
+scratch/inspect_body_nav.js
+scratch/inspect_body_tag.js
+scratch/inspect_boundary.js
+scratch/inspect_chars.py
+scratch/inspect_crm_end.js
+scratch/inspect_css_tabs.js
+scratch/inspect_db.js
+scratch/inspect_diff_hunks.js
+scratch/inspect_diff_top.js
+scratch/inspect_financeiro.js
+scratch/inspect_intel_structure.js
+scratch/inspect_lists.js
+scratch/inspect_main_start.js
+scratch/inspect_main_tabs.js
+scratch/inspect_mains.js
+scratch/inspect_market_fns.js
+scratch/inspect_market_intel.js
+scratch/inspect_market_intel_head.js
+scratch/inspect_navbar_layout.js
+scratch/inspect_plan_menu.js
+scratch/inspect_plan_opening.js
+scratch/inspect_sections.js
+scratch/inspect_sticky_header.js
+scratch/inspect_sticky_header_html.js
+scratch/inspect_style_2.js
+scratch/inspect_switch_tab.js
+scratch/inspect_swot.js
+scratch/inspect_tab_plan_gen.js
+scratch/inspect_table_markup.js
+scratch/inspect_tables.js
+scratch/inspect_tables_detail.js
+scratch/inspect_toast_divs.js
+scratch/list_gemini_models.js
+scratch/market_intel_content.txt
+scratch/market_intel_utf8.txt
+scratch/print_market_intel.js
+scratch/print_stmt10.py
+scratch/print_stmt10_lines.py
+scratch/radar_pesquisa_politica_recortes.json
+scratch/remove_radarzito_from_generator.js
+scratch/replace_with_sheets.js
+scratch/restore_check.js
+scratch/scan_lists.js
+scratch/scratch_generate_tab_plan.js
+scratch/screenshot_eleicoes_desktop.png
+scratch/screenshot_eleicoes_mapa.png
+scratch/screenshot_eleicoes_mobile.png
+scratch/screenshot_eleicoes_resultados.png
+scratch/sec_exec_429.html
+scratch/sec_exec_cur.html
+scratch/sec_mercado_recovered.html
+scratch/section_audit.js
+scratch/slice_check.js
+scratch/summarize_diff.js
+scratch/take_camara_screenshot.py
+scratch/take_sections_screenshots.py
+scratch/test_browser_module.py
+scratch/test_full_integration.js
+scratch/test_full_validation.py
+scratch/test_gemini_call.js
+scratch/test_gemini_edit.js
+scratch/test_pesquisa_radar.py
+scratch/test_plan_state.js
+"scratch/test_presidenci\303\241veis.py"
+scratch/test_realtime_and_blocks.js
+scratch/test_resultados_detalhamento.py
+scratch/test_sistot_reconciliation.py
+scratch/test_supabase.js
+scratch/test_supabase_realtime.js
+scratch/test_supabase_tables.js
+scratch/test_supabase_write.js
+scratch/test_surgical_fixes.js
+scratch/test_verify.py
+scratch/trace_div_stack.js
+scratch/trace_full_doc_divs.js
+scratch/unify_more_sections.js
+scratch/unify_remaining_sections.js
+scratch/update_controller_sheets.js
+scratch/update_controller_tables.js
+scratch/update_css.js
+scratch/update_swot_and_tables.js
+scratch/verify_all_fixes.js
+scratch/verify_overflow_safe.js
+scratch_step1083.txt
+script.py
+scripts/__pycache__/ai_data_auditor.cpython-312.pyc
+scripts/__pycache__/build_data.cpython-312.pyc
+scripts/__pycache__/build_meio_ambiente_evidence.cpython-312.pyc
+scripts/__pycache__/build_mobilidade_fleet.cpython-312.pyc
+scripts/__pycache__/build_radar_hub_package.cpython-312.pyc
+scripts/__pycache__/collect_financas_p2.cpython-312.pyc
+scripts/__pycache__/collect_meio_ambiente_p3.cpython-312.pyc
+scripts/__pycache__/collect_mobilidade_p4.cpython-312.pyc
+scripts/__pycache__/economia_sources.cpython-312.pyc
+scripts/__pycache__/educacao_p5_core.cpython-312.pyc
+scripts/__pycache__/homologation_test.cpython-312.pyc
+scripts/__pycache__/inspect_mobilidade_sources.cpython-312.pyc
+scripts/__pycache__/meio_ambiente_workbooks.cpython-312.pyc
+scripts/__pycache__/mobilidade_evidence_core.cpython-312.pyc
+scripts/__pycache__/radar_hub_p0_inventory.cpython-312.pyc
+scripts/__pycache__/radar_hub_p0_matrix.cpython-312.pyc
+scripts/__pycache__/test_10058.cpython-312.pyc
+scripts/__pycache__/test_6digit_ibge.cpython-312.pyc
+scripts/__pycache__/test_all_6_axes_auditoria.cpython-312.pyc
+scripts/__pycache__/test_all_ibge_indicators.cpython-312.pyc
+scripts/__pycache__/test_all_sources.cpython-312.pyc
+scripts/__pycache__/test_apis.cpython-312.pyc
+scripts/__pycache__/test_demografia_territorio.cpython-312.pyc
+scripts/__pycache__/test_milestone1_challenger.cpython-312.pyc
+scripts/__pycache__/test_milestone2_challenger.cpython-312.pyc
+scripts/__pycache__/test_mobilidade_p4.cpython-312.pyc
+scripts/__pycache__/test_radar_hub_p0_auditor.cpython-312.pyc
+scripts/__pycache__/test_seguranca_auditoria.cpython-312.pyc
+scripts/analyze_tabnet_forms.py
+scripts/analyze_tabnet_sjc.py
+scripts/apply_critical_health_fixes.py
+scripts/apply_economia_audit.py
+scripts/apply_financas_audit.py
+scripts/apply_meio_ambiente_p3.py
+scripts/apply_mobilidade_p4.py
+scripts/apply_mobilidade_runtime.py
+scripts/art_builder.py
+scripts/build_data.py
+scripts/build_economia_audit.py
+scripts/build_economia_visual_layout.py
+scripts/build_financas_audit.py
+scripts/build_financas_visual_layout.py
+scripts/build_full_blog.py
+scripts/build_meio_ambiente_evidence.py
+scripts/build_mobilidade_additional.py
+scripts/build_mobilidade_fleet.py
+scripts/build_mobilidade_transit.py
+scripts/build_radar_hub_package.py
+scripts/check_censo_2022_dirs.py
+scripts/check_censo_folders.py
+scripts/check_ibge_ftp.py
+scripts/check_intramunicipal.py
+scripts/check_malhas_dirs.py
+scripts/check_mobilidade_extraction.py
+scripts/check_nisp_sjc.py
+scripts/check_shp_folders.py
+scripts/check_sp_zips.py
+scripts/clean_forbidden_patterns.py
+scripts/collect_educacao_p5_catalogs.py
+scripts/collect_educacao_p5_initial.py
+scripts/collect_financas_p2.py
+scripts/collect_financas_references.py
+scripts/collect_meio_ambiente_additional.py
+scripts/collect_meio_ambiente_extended.py
+scripts/collect_meio_ambiente_history.py
+scripts/collect_meio_ambiente_p3.py
+scripts/collect_meio_ambiente_remaining.py
+scripts/collect_meio_ambiente_snis_history.py
+scripts/collect_mobilidade_alternatives.py
+scripts/collect_mobilidade_anac.py
+scripts/collect_mobilidade_extended.py
+scripts/collect_mobilidade_histories.py
+scripts/collect_mobilidade_initial_sources.py
+scripts/collect_mobilidade_more_sources.py
+scripts/collect_mobilidade_p4.py
+scripts/consolidacao_snapshot.py
+scripts/data_extracted/all_ibge_sjc_extracted.json
+scripts/data_extracted/evidence_extracted.json
+scripts/data_extracted/ibge_pesquisas_sjc.json
+scripts/data_extracted/pib_ibge_extracted.json
+scripts/debug_ssp_request.py
+scripts/document_meio_ambiente_p3.py
+scripts/download_full_ssp_data.py
+scripts/download_ibge_sjc_layers.py
+scripts/economia_sources.py
+scripts/educacao_p5_core.py
+scripts/enrich_meio_ambiente_p3.py
+scripts/extract_pmsjc_mapping.py
+scripts/extract_tabnet_sinasc.py
+scripts/fetch_all_6_axes_primary.py
+scripts/fetch_all_target_pesquisas.py
+scripts/fetch_full_ssp_sjc.py
+scripts/fetch_geo_data.py
+scripts/fetch_ibge_comprehensive.py
+scripts/fetch_matched_ibge.py
+scripts/fetch_official_health_expansion.py
+scripts/fetch_pesquisas_details.py
+scripts/filter_sjc_strict.py
+scripts/finalize_meio_ambiente_p3.py
+scripts/find_all_blur.py
+scripts/find_all_http_endpoints.py
+scripts/find_api_url_def.py
+scripts/find_base_api_url.py
+scripts/find_blur_in_app.py
+scripts/find_blur_safe.py
+scripts/find_dengue_class.py
+scripts/find_drawer_ids.py
+scripts/find_drawer_snippet.py
+scripts/find_geosanja_apis.py
+scripts/find_grupo_delito.py
+scripts/find_interceptor.py
+scripts/find_ocorrencias_api.py
+scripts/find_paywall_section.py
+scripts/find_prepare_url.py
+scripts/find_prepare_url_logic.py
+scripts/find_relative_paths.py
+scripts/find_render_seguranca.py
+scripts/find_seg_sections.py
+scripts/find_select_nisp.py
+scripts/find_sih_cid.py
+scripts/find_sih_field.py
+scripts/find_ssp_api.py
+scripts/find_style_blur.py
+scripts/find_tabnet_sjc.py
+scripts/find_tipo_assignment.py
+scripts/find_v1_endpoints.py
+scripts/generate_all.py
+scripts/generate_all_reports.py
+scripts/generate_blog_clean.py
+scripts/generate_enriched_geojson.py
+scripts/generate_geo_bundle.py
+scripts/generate_regioes_geojson.py
+scripts/inspect_anac_csv.py
+scripts/inspect_and_query.py
+scripts/inspect_dengue_tabnet.py
+scripts/inspect_geosanja.py
+scripts/inspect_geosanja_scripts.py
+scripts/inspect_gt.py
+scripts/inspect_meio_ambiente_more.py
+scripts/inspect_meio_ambiente_sources.py
+scripts/inspect_mobilidade_access.py
+scripts/inspect_mobilidade_extended.py
+scripts/inspect_mobilidade_fleet.py
+scripts/inspect_mobilidade_pdfs.py
+scripts/inspect_mobilidade_sources.py
+scripts/inspect_mobilidade_tables.py
+scripts/inspect_primary_ssp_data.py
+scripts/inspect_saude_data.py
+scripts/inspect_sih_html.py
+scripts/inspect_snis_archive_links.py
+scripts/inspect_snis_old_layout.py
+scripts/inspect_ssp_and_articles.py
+scripts/inspect_ssp_bundle.py
+scripts/inspect_ssp_regions.py
+scripts/integrate_primary_ssp_data.py
+scripts/list_35_setores.py
+scripts/list_distritos_shp.py
+scripts/list_geosanja_layers.py
+scripts/list_ibge_pesquisas.py
+scripts/list_selects.py
+scripts/list_sp_files.py
+scripts/list_subfolders.py
+scripts/list_uf_files.py
+scripts/make_clean_blog.py
+scripts/meio_ambiente_workbooks.py
+scripts/mobilidade_evidence_core.py
+scripts/optimize_geojson.py
+scripts/parse_malhas_docs.py
+scripts/parse_pmsjc_pop.py
+scripts/parse_ssp_main_js.py
+scripts/patch_app_html_and_controller.py
+scripts/patch_app_html_and_controller_full.py
+scripts/patch_app_html_health.py
+scripts/patch_financas_runtime.py
+scripts/patch_health_axis.py
+scripts/patch_health_expansion.py
+scripts/patch_security_registry_and_gt.py
+scripts/patch_seguranca_auditoria.py
+scripts/print_mensais_detail.py
+scripts/print_sinasc_table.py
+scripts/print_sjc_crime_details.py
+scripts/print_ssp_sjc_data.py
+scripts/print_table.py
+scripts/query_cnes_exact_sjc.py
+scripts/query_cnes_types.py
+scripts/query_dengue.py
+scripts/query_dengue_2010_2013.py
+scripts/query_dengue_by_class.py
+scripts/query_dengue_exact.py
+scripts/query_geoserver.py
+scripts/query_sih.py
+scripts/query_sih_causas.py
+scripts/query_sih_exact_causas.py
+scripts/query_sih_morbidade_2024.py
+scripts/query_sih_nisp_2024.py
+scripts/query_sinasc.py
+scripts/query_sinasc_exact.py
+scripts/query_sinasc_idade.py
+scripts/query_ssp_sjc_api.py
+scripts/query_tabnet_all.py
+scripts/radar_hub_p0_inventory.py
+scripts/radar_hub_p0_matrix.py
+scripts/registrar_p4_pendencias_20261008.py
+scripts/remove_emdashes.py
+scripts/report_economia_audit.py
+scripts/report_financas_audit.py
+scripts/report_financas_visual.py
+scripts/report_mobilidade_p4.py
+scripts/search_app_js_paywall.py
+scripts/search_core_blur.py
+scripts/search_geosanja_bundle.py
+scripts/search_sjc_tabnet.py
+scripts/search_ssp_keywords.py
+scripts/search_words.py
+scripts/test_10058.py
+scripts/test_6digit_ibge.py
+scripts/test_all_6_axes_auditoria.py
+scripts/test_all_ibge_indicators.py
+scripts/test_all_sources.py
+scripts/test_apis.py
+scripts/test_cnes_estab.py
+scripts/test_demografia_territorio.py
+scripts/test_economia_audit.py
+scripts/test_economia_browser.py
+scripts/test_economia_visual_browser.py
+scripts/test_economia_visual_scope.py
+scripts/test_financas_audit.py
+scripts/test_financas_browser.py
+scripts/test_financas_visual_browser.py
+scripts/test_financas_visual_scope.py
+scripts/test_getfeature.py
+scripts/test_ibge_malhas.py
+scripts/test_ibge_pib_complete.py
+scripts/test_ibge_pib_single.py
+scripts/test_ibge_sidra.py
+scripts/test_meio_ambiente_p3.py
+scripts/test_mensais_exact.py
+scripts/test_milestone1_challenger.py
+scripts/test_milestone2_challenger.py
+scripts/test_mobilidade_p4.py
+scripts/test_radar_hub_p0_auditor.py
+scripts/test_sih_morbidade.py
+scripts/test_sinan_urls.py
+scripts/test_sjc_exact_mensal.py
+scripts/test_ssp_api_direct.py
+scripts/test_ssp_with_headers.py
+scripts/test_tabnet_sia.py
+scripts/test_tabnet_sinasc.py
+scripts/test_tabnet_urls.py
+scripts/traverse_10058.py
+scripts/update_all_6_axes.py
+scripts/update_economia_ui.py
+scripts/update_health_gt.py
+scripts/update_health_meta.py
+scripts/view_ddm_chart.py
+scripts/view_open_meta.py
+scripts/view_seg_charts.py
+scripts/view_seg_charts_2.py
+section10.txt
+section7.txt
+section8.txt
+sources_parsed.json
+sources_s8.txt
+supabase_blog_schema.sql
+supabase_financial_schema.sql
+supabase_parte1_schema.sql
+supabase_parte2_artigos_01_a_10.sql
+supabase_parte3_artigos_11_a_20.sql
+supabase_parte4_artigos_21_a_30.sql
+temp_checkpoint.js
+temp_shp/bairros/SP_bairros_CD2022.cpg
+temp_shp/bairros/SP_bairros_CD2022.dbf
+temp_shp/bairros/SP_bairros_CD2022.prj
+temp_shp/bairros/SP_bairros_CD2022.shp
+temp_shp/bairros/SP_bairros_CD2022.shx
+temp_shp/distritos/SP_distritos_CD2022.cpg
+temp_shp/distritos/SP_distritos_CD2022.dbf
+temp_shp/distritos/SP_distritos_CD2022.prj
+temp_shp/distritos/SP_distritos_CD2022.shp
+temp_shp/distritos/SP_distritos_CD2022.shx
+temp_shp/subdistritos/SP_subdistritos_CD2022.cpg
+temp_shp/subdistritos/SP_subdistritos_CD2022.dbf
+temp_shp/subdistritos/SP_subdistritos_CD2022.prj
+temp_shp/subdistritos/SP_subdistritos_CD2022.shp
+temp_shp/subdistritos/SP_subdistritos_CD2022.shx
+test_urls.py
+teste_3x4_camila_branca.jpg
+teste_3x4_kenji_japones.jpg
+teste_3x4_maria_negra.jpg
+teste_card_camila_empreendedora.jpg
+teste_card_kenji_engenheiro.jpg
+teste_card_maria_confeiteira.jpg
+teste_homem_idoso.jpg
+teste_jovem_tech.jpg
+teste_lapis_cor_1.jpg
+teste_lapis_cor_2.jpg
+teste_lapis_cor_estilo2.jpg
+teste_modelo_magic.jpg
+teste_tarot_lapis_final.jpg
+tests/business-plan-financial.test.js
+tests/extract-sidra-module.js
+tests/sidra.test.js
+tests/test_lentes_sjc.cjs
+tmp/audit-final-v4.cjs
+tmp/auditar-leste.py
+tmp/bairros-antes-leste.json
+tmp/bairros-antes-lote1.json
+tmp/bairros-antes-lote2.json
+tmp/bairros-antes-lote3.json
+tmp/bairros-antes-oeste-sfx.json
+tmp/bairros-antes-sudeste.json
+tmp/bairros-antes-sul-lote1.json
+tmp/bairros-antes-sul-lote2.json
+tmp/bairros-centro-lote1.json
+tmp/bairros-centro-lote1.png
+tmp/bairros-centro-preview.html
+tmp/bairros-layout-preview.html
+tmp/bairros-leste-preview.html
+tmp/bairros-leste.json
+tmp/bairros-leste.png
+tmp/bairros-norte-completa-preview.html
+tmp/bairros-norte-completa.png
+tmp/bairros-norte-lote2.json
+tmp/bairros-norte-lote2.png
+tmp/bairros-norte-lote3.json
+tmp/bairros-norte-preview.html
+tmp/bairros-oeste-sfx-preview.html
+tmp/bairros-oeste-sfx.json
+tmp/bairros-oeste-sfx.png
+tmp/bairros-sudeste-preview.html
+tmp/bairros-sudeste.json
+tmp/bairros-sudeste.png
+tmp/bairros-sul-lote1-preview.html
+tmp/bairros-sul-lote1.json
+tmp/bairros-sul-lote1.png
+tmp/bairros-sul-lote2-preview.html
+tmp/bairros-sul-lote2.json
+tmp/bairros-sul-lote2.png
+tmp/baixar_centro.py
+tmp/centro-pesquisa/adyanna.pdf
+tmp/centro-pesquisa/adyanna.png
+tmp/centro-pesquisa/augusta.pdf
+tmp/centro-pesquisa/augusta.png
+tmp/centro-pesquisa/betania.pdf
+tmp/centro-pesquisa/betania.png
+tmp/centro-pesquisa/ferreira.pdf
+tmp/centro-pesquisa/p55.png
+tmp/centro-pesquisa/p96.png
+tmp/centro-pesquisa/siqueira.pdf
+tmp/check-approved-block3.cjs
+tmp/check-approved-opening.cjs
+tmp/check-block8.cjs
+tmp/check-blocks67-approved.cjs
+tmp/check-methodology-approved.cjs
+tmp/check-report-visual.cjs
+tmp/check-visual-pilot.cjs
+tmp/conferir-centro-lote1.cjs
+tmp/conferir-leste.cjs
+tmp/conferir-norte-lote2.cjs
+tmp/conferir-norte-lote3.cjs
+tmp/conferir-oeste-sfx.cjs
+tmp/conferir-sudeste.cjs
+tmp/conferir-sul-lote1.cjs
+tmp/conferir-sul-lote2.cjs
+tmp/documentar-sul-lote1.py
+tmp/ferreira-norte95.png
+tmp/final-review-layout.cjs
+tmp/finalizar_lendas.py
+tmp/finish-final-v4.cjs
+tmp/humanizar_norte.py
+tmp/implement-approved-opening.cjs
+tmp/implement-block8.cjs
+tmp/implement-blocks67-approved.cjs
+tmp/implement-methodology-approved.cjs
+tmp/implement-visual-pilot.cjs
+tmp/lendas-antes-2026-10-04.json
+tmp/lendas-preview.html
+tmp/lendas-revisadas-2026-10-04.json
+tmp/ler-plantas-norte.py
+tmp/leste/cerejeiras-carimbo.png
+tmp/leste/cerejeiras_jd.pdf
+tmp/leste/cerejeiras_jd.png
+tmp/leste/cerejeiras_jd.txt
+tmp/leste/coqueiros_jd_dos.pdf
+tmp/leste/coqueiros_jd_dos.png
+tmp/leste/coqueiros_jd_dos.txt
+tmp/leste/diamante_jd.pdf
+tmp/leste/diamante_jd.png
+tmp/leste/diamante_jd.txt
+tmp/leste/diocese-trechos.json
+tmp/leste/ecomuseu.json
+tmp/leste/ecomuseu.pdf
+tmp/leste/ferreira-trechos.json
+tmp/leste/galo-relato.txt
+tmp/leste/galo_branco_fl01.pdf
+tmp/leste/galo_branco_fl01.png
+tmp/leste/galo_branco_fl01.txt
+tmp/leste/industrial-titulo.png
+tmp/leste/industrial_vl.pdf
+tmp/leste/industrial_vl.png
+tmp/leste/industrial_vl.txt
+tmp/leste/jardim-mariana-2.pdf
+tmp/leste/jardim-mariana-2.png
+tmp/leste/jardim-mariana-2.txt
+tmp/leste/jconsu515.json
+tmp/leste/jconsu515.pdf
+tmp/leste/judas-titulo.png
+tmp/leste/judas_tadeu_jd_sao.pdf
+tmp/leste/judas_tadeu_jd_sao.png
+tmp/leste/judas_tadeu_jd_sao.txt
+tmp/leste/ler-fontes.py
+tmp/leste/links-conferidos.json
+tmp/leste/loa2025.json
+tmp/leste/loa2025.pdf
+tmp/leste/mariana_jd.pdf
+tmp/leste/mariana_jd.png
+tmp/leste/mariana_jd.txt
+tmp/leste/motorama_jd.pdf
+tmp/leste/motorama_jd.png
+tmp/leste/motorama_jd.txt
+tmp/leste/novo_horizonte_pq_fl01.pdf
+tmp/leste/novo_horizonte_pq_fl01.png
+tmp/leste/novo_horizonte_pq_fl01.txt
+tmp/leste/plantas-contato.png
+tmp/leste/portugal-estudo-trechos.json
+tmp/leste/santa-herminia.pdf
+tmp/leste/santa-herminia.png
+tmp/leste/santa-herminia.txt
+tmp/leste/tatetuba-lexico.txt
+tmp/leste/tatetuba-tcc.json
+tmp/leste/tatetuba-tcc.pdf
+tmp/leste/tatetuba_vl.pdf
+tmp/leste/tatetuba_vl.png
+tmp/leste/tatetuba_vl.txt
+tmp/leste/tesouro_vl.pdf
+tmp/leste/tesouro_vl.png
+tmp/leste/tesouro_vl.txt
+tmp/leste/titulos.png
+tmp/leste/titulos2.png
+tmp/leste/verificar-links.py
+tmp/leste/vista-artigo.json
+tmp/leste/vista-artigo.pdf
+tmp/migrate-final-baseline.cjs
+tmp/migrate-final-v4.cjs
+tmp/normalize-report-visual.cjs
+tmp/norte-lote2/altos-detalhe.png
+tmp/norte-lote2/altos.pdf
+tmp/norte-lote2/altos.png
+tmp/norte-lote2/altos.txt
+tmp/norte-lote2/atas1967-localizadores.json
+tmp/norte-lote2/atas1967.pdf
+tmp/norte-lote2/cristina-1.png
+tmp/norte-lote2/cristina-detalhe.png
+tmp/norte-lote2/cristina-localizadores.json
+tmp/norte-lote2/cristina.pdf
+tmp/norte-lote2/diocese-57.png
+tmp/norte-lote2/diocese-localizadores.json
+tmp/norte-lote2/diocese.pdf
+tmp/norte-lote2/dirce-detalhe.png
+tmp/norte-lote2/dirce.pdf
+tmp/norte-lote2/dirce.png
+tmp/norte-lote2/dirce.txt
+tmp/norte-lote2/expressao2020.pdf
+tmp/norte-lote2/expressao2020.png
+tmp/norte-lote2/expressao2020.txt
+tmp/norte-lote2/fanny-fonte.html
+tmp/norte-lote2/paiva-detalhe.png
+tmp/norte-lote2/paiva.pdf
+tmp/norte-lote2/paiva.png
+tmp/norte-lote2/paiva.txt
+tmp/norte-lote2/pouso1981-3.png
+tmp/norte-lote2/pouso1981.pdf
+tmp/norte-lote2/regioes-52.png
+tmp/norte-lote2/regioes-localizadores.json
+tmp/norte-lote2/regioes.pdf
+tmp/norte-lote2/sfx2016-6.png
+tmp/norte-lote2/sfx2016-localizadores.json
+tmp/norte-lote2/sfx2016.pdf
+tmp/norte-lote2/telespark-detalhe.png
+tmp/norte-lote2/telespark.pdf
+tmp/norte-lote2/telespark.png
+tmp/norte-lote2/telespark.txt
+tmp/norte-lote3/buquirinha.pdf
+tmp/norte-lote3/buquirinha6.png
+tmp/norte-lote3/buquirinha7.png
+tmp/norte-lote3/freitas-conferencia.png
+tmp/norte-lote3/freitas.pdf
+tmp/norte-lote3/freitas.txt
+tmp/norte-lote3/guimaraes-identificacao.png
+tmp/norte-lote3/guimaraes.pdf
+tmp/norte-lote3/guimaraes.png
+tmp/norte-lote3/guimaraes102.png
+tmp/norte-lote3/urbanizacao-conferencia.png
+tmp/norte-lote3/urbanizacao.pdf
+tmp/norte-lote3/urbanizacao.txt
+tmp/norte-lote3/vila-nova-conferencia.png
+tmp/norte-lote3/vila-nova.pdf
+tmp/norte-lote3/vila-nova.txt
+tmp/oeste-sfx/aquarius.pdf
+tmp/oeste-sfx/lei59.html
+tmp/oeste-sfx/mulheres-1.png
+tmp/oeste-sfx/mulheres-10.png
+tmp/oeste-sfx/mulheres-100.png
+tmp/oeste-sfx/mulheres-101.png
+tmp/oeste-sfx/mulheres-102.png
+tmp/oeste-sfx/mulheres-103.png
+tmp/oeste-sfx/mulheres-11.png
+tmp/oeste-sfx/mulheres-115.png
+tmp/oeste-sfx/mulheres-117.png
+tmp/oeste-sfx/mulheres-12.png
+tmp/oeste-sfx/mulheres-13.png
+tmp/oeste-sfx/mulheres-89.png
+tmp/oeste-sfx/mulheres-90.png
+tmp/oeste-sfx/mulheres-91.png
+tmp/oeste-sfx/mulheres-92.png
+tmp/oeste-sfx/mulheres-93.png
+tmp/oeste-sfx/mulheres-97.png
+tmp/oeste-sfx/mulheres-98.png
+tmp/oeste-sfx/mulheres-99.png
+tmp/oeste-sfx/mulheres-title.png
+tmp/oeste-sfx/mulheres.pdf
+tmp/oeste-sfx/mulheres.txt
+tmp/oeste-sfx/sfx-tecnico.pdf
+tmp/oeste-sfx/sfx-tecnico.txt
+tmp/pesquisar-norte-pdfs.py
+tmp/pesquisar-oeste-sfx.py
+tmp/polir-sul2.py
+tmp/polish-final-v4.cjs
+tmp/preparar-conferencia-leste.py
+tmp/preparar-conferencia-sul2.py
+tmp/prepare-final-content.cjs
+tmp/preview_bairros.cjs
+tmp/report-block3-approved-backup/app.html
+tmp/report-block3-approved-backup/checks.json
+tmp/report-block3-approved-backup/pergunta-1440.png
+tmp/report-block3-approved-backup/pergunta-390.png
+tmp/report-block8-approved-backup/app.html
+tmp/report-block8-approved-backup/bloco8-1440.png
+tmp/report-block8-approved-backup/bloco8-390.png
+tmp/report-block8-approved-backup/checks.json
+tmp/report-block8-approved-backup/report-metrics-ui.js
+tmp/report-blocks67-approved-backup/app.html
+tmp/report-blocks67-approved-backup/bloco-6-1440.png
+tmp/report-blocks67-approved-backup/bloco-6-390.png
+tmp/report-blocks67-approved-backup/bloco-7-1440.png
+tmp/report-blocks67-approved-backup/bloco-7-390.png
+tmp/report-blocks67-approved-backup/checks.json
+tmp/report-blocks67-approved-backup/report-metrics-ui.js
+tmp/report-final-v4/app.html.before
+tmp/report-final-v4/app.js.before
+tmp/report-final-v4/baseline.json
+tmp/report-final-v4/current.json
+tmp/report-final-v4/inventory.txt
+tmp/report-final-v4/layout.json
+tmp/report-final-v4/master.md
+tmp/report-final-v4/pages.json
+tmp/report-final-v4/preview.html
+tmp/report-final-v4/public-copy.txt
+tmp/report-final-v4/reader.txt
+tmp/report-final-v4/rep-abertura-2026-1366.png
+tmp/report-final-v4/rep-mov-geografia-inercia-1366.png
+tmp/report-final-v4/rep-perfil-amostra-1366.png
+tmp/report-final-v4/rep-semaforo-playbook-1366.png
+tmp/report-final-v4/report-bindings.js.before
+tmp/report-final-v4/report-editorial.css.before
+tmp/report-final-v4/report-metrics-ui.js.before
+tmp/report-final-v4/report-metrics.js.before
+tmp/report-final-v4/report-source.js.before
+tmp/report-methodology-approved-backup/app.html
+tmp/report-methodology-approved-backup/bloco-4-1440.png
+tmp/report-methodology-approved-backup/bloco-4-390.png
+tmp/report-methodology-approved-backup/bloco-5-1440.png
+tmp/report-methodology-approved-backup/bloco-5-390.png
+tmp/report-methodology-approved-backup/checks.json
+tmp/report-methodology-approved-backup/report-metrics-ui.js
+tmp/report-metrics-phase3-backup/app.html
+tmp/report-metrics-phase3-backup/app.js
+tmp/report-metrics-phase3-backup/app.resume.html
+tmp/report-metrics-phase3-tests/blocks.json
+tmp/report-metrics-phase3-tests/csv-comparison.json
+tmp/report-metrics-phase3-tests/inspect.cjs
+tmp/report-metrics-phase3-tests/live-browser.json
+tmp/report-metrics-phase3-tests/lots.json
+tmp/report-metrics-phase3-tests/reproduction.json
+tmp/report-metrics-phase3-tests/ui.json
+tmp/report-opening-approved-backup/app.html
+tmp/report-opening-approved-backup/checks.json
+tmp/report-opening-approved-backup/equipe-1440.png
+tmp/report-opening-approved-backup/equipe-390.png
+tmp/report-opening-approved-backup/origem-1440.png
+tmp/report-opening-approved-backup/origem-390.png
+tmp/report-review/browser-checks.json
+tmp/report-review/narrator-before.json
+tmp/report-review/preservation.json
+tmp/report-review/preview.html
+tmp/report-review/projection-1366.png
+tmp/report-review/projection-1920.png
+tmp/report-review/qualitative-1366.png
+tmp/report-review/qualitative-1920.png
+tmp/report-review/reading-1366.png
+tmp/report-review/reading-1920.png
+tmp/report-review/report.before.html
+tmp/report-title-case-backup/app.html
+tmp/report-visual-normalization/app.before.html
+tmp/report-visual-normalization/checks.json
+tmp/report-visual-normalization/rep-equipe-1366.png
+tmp/report-visual-normalization/rep-equipe-390.png
+tmp/report-visual-normalization/rep-equipe-900.png
+tmp/report-visual-normalization/rep-metodologia-integrada-1366.png
+tmp/report-visual-normalization/rep-metodologia-integrada-390.png
+tmp/report-visual-normalization/rep-metodologia-integrada-900.png
+tmp/report-visual-normalization/rep-uso-oferta-identificacao-1366.png
+tmp/report-visual-normalization/rep-uso-oferta-identificacao-390.png
+tmp/report-visual-normalization/rep-uso-oferta-identificacao-900.png
+tmp/report-visual-pilot/app.html.before
+tmp/report-visual-pilot/checks.json
+tmp/report-visual-pilot/narrative-live.png
+tmp/report-visual-pilot/preview.html
+tmp/report-visual-pilot/rep-metodologia-integrada-1366.png
+tmp/report-visual-pilot/rep-metodologia-integrada-1920.png
+tmp/report-visual-pilot/rep-metodologia-integrada-390.png
+tmp/report-visual-pilot/rep-metodologia-integrada-900.png
+tmp/report-visual-pilot/rep-pergunta-estrategica-1366.png
+tmp/report-visual-pilot/rep-pergunta-estrategica-1920.png
+tmp/report-visual-pilot/rep-pergunta-estrategica-390.png
+tmp/report-visual-pilot/rep-pergunta-estrategica-900.png
+tmp/report-visual-pilot/rep-uso-oferta-identificacao-1366.png
+tmp/report-visual-pilot/rep-uso-oferta-identificacao-1920.png
+tmp/report-visual-pilot/rep-uso-oferta-identificacao-390.png
+tmp/report-visual-pilot/rep-uso-oferta-identificacao-900.png
+tmp/report-visual-pilot/report-editorial.css.before
+tmp/revisar-leste.py
+tmp/revisar-norte-lote2.py
+tmp/revisar-norte-lote3.py
+tmp/revisar-oeste-sfx.py
+tmp/revisar-sudeste.py
+tmp/revisar-sul-lote1.py
+tmp/revisar-sul-lote2.py
+tmp/revisar_centro_lote1.py
+tmp/revisar_lendas_20261004.py
+tmp/revisar_norte.py
+tmp/rollback-report.cjs
+tmp/saude-audit/app.html.before
+tmp/saude-audit/apply_data.py
+tmp/saude-audit/apply_ui.py
+tmp/saude-audit/audit_report.json.before
+tmp/saude-audit/preview.html
+tmp/saude-audit/q2024-layout.txt
+tmp/saude-audit/q2024.pdf
+tmp/saude-audit/q2024.txt
+tmp/saude-audit/q2025-24.png
+tmp/saude-audit/q2025-26.png
+tmp/saude-audit/q2025-27.png
+tmp/saude-audit/q2025-layout.txt
+tmp/saude-audit/q2025.pdf
+tmp/saude-audit/q2025.txt
+tmp/saude-audit/radar_hub_controller.js.before
+tmp/saude-audit/rag2024-layout.txt
+tmp/saude-audit/rag2024.pdf
+tmp/saude-audit/rag2024.txt
+tmp/saude-audit/rag2025-6.png
+tmp/saude-audit/rag2025-7.png
+tmp/saude-audit/rag2025-layout.txt
+tmp/saude-audit/rag2025.pdf
+tmp/saude-audit/rag2025.txt
+tmp/saude-audit/sjc_metadata_registry.json.before
+tmp/saude-audit/sjc_open_data_ground_truth.json.before
+tmp/saude-audit/tables.png
+tmp/shell-validation/desktop.png
+tmp/shell-validation/mobile.png
+tmp/shell-validation/sidebar-scroll.png
+tmp/sudeste/atas1968.pdf
+tmp/sudeste/atas1968.txt
+tmp/sudeste/flamboyant_pq_resid-titulo.png
+tmp/sudeste/flamboyant_pq_resid.pdf
+tmp/sudeste/flamboyant_pq_resid.png
+tmp/sudeste/flamboyant_pq_resid.txt
+tmp/sudeste/granja_jd_da.pdf
+tmp/sudeste/granja_jd_da.png
+tmp/sudeste/granja_jd_da.txt
+tmp/sudeste/lei189.pdf
+tmp/sudeste/lei189.txt
+tmp/sudeste/santa_julia_jd-titulo.png
+tmp/sudeste/santa_julia_jd.pdf
+tmp/sudeste/santa_julia_jd.png
+tmp/sudeste/santa_julia_jd.txt
+tmp/sudeste/uira_jd-titulo.png
+tmp/sudeste/uira_jd.pdf
+tmp/sudeste/uira_jd.png
+tmp/sudeste/uira_jd.txt
+tmp/sudeste/volume3.pdf
+tmp/sudeste/volume3.txt
+tmp/sul-lote1/31-decreto-cabecalho.png
+tmp/sul-lote1/31-decreto.pdf
+tmp/sul-lote1/31-decreto.png
+tmp/sul-lote1/31-decreto.txt
+tmp/sul-lote1/31-mapa.pdf
+tmp/sul-lote1/31-mapa.png
+tmp/sul-lote1/31-mapa.txt
+tmp/sul-lote1/america-mapa.pdf
+tmp/sul-lote1/america-mapa.png
+tmp/sul-lote1/america-mapa.txt
+tmp/sul-lote1/ferreira.txt
+tmp/sul-lote1/floradas.pdf
+tmp/sul-lote1/floradas.png
+tmp/sul-lote1/floradas.txt
+tmp/sul-lote1/interlagos-mapa.pdf
+tmp/sul-lote1/interlagos-mapa.png
+tmp/sul-lote1/interlagos-mapa.txt
+tmp/sul-lote1/limiro-p142.png
+tmp/sul-lote1/limiro.pdf
+tmp/sul-lote1/limiro.txt
+tmp/sul-lote1/loteamentos-p3.png
+tmp/sul-lote1/loteamentos.pdf
+tmp/sul-lote1/loteamentos.txt
+tmp/sul-lote1/morumbi-mapa.pdf
+tmp/sul-lote1/morumbi-mapa.png
+tmp/sul-lote1/morumbi-p2.png
+tmp/sul-lote1/morumbi.pdf
+tmp/sul-lote1/morumbi.txt
+tmp/sul-lote1/satelite-artigo.pdf
+tmp/sul-lote1/satelite-artigo.txt
+tmp/sul-lote1/satelite-tcc-p17.png
+tmp/sul-lote1/satelite-tcc.pdf
+tmp/sul-lote1/satelite-tcc.txt
+tmp/sul-lote2/bosque_dos_ipes_res.pdf
+tmp/sul-lote2/bosque_dos_ipes_res.png
+tmp/sul-lote2/bosque_dos_ipes_res.txt
+tmp/sul-lote2/catalogo.html
+tmp/sul-lote2/chacaras_reunidas.pdf
+tmp/sul-lote2/chacaras_reunidas.png
+tmp/sul-lote2/chacaras_reunidas.txt
+tmp/sul-lote2/colonial_jd.pdf
+tmp/sul-lote2/colonial_jd.png
+tmp/sul-lote2/colonial_jd.txt
+tmp/sul-lote2/cruzeiro-decreto.pdf
+tmp/sul-lote2/cruzeiro-decreto.txt
+tmp/sul-lote2/cruzeiro_do_sul_jd.pdf
+tmp/sul-lote2/cruzeiro_do_sul_jd.png
+tmp/sul-lote2/cruzeiro_do_sul_jd.txt
+tmp/sul-lote2/estoril_jd-titulo.png
+tmp/sul-lote2/estoril_jd.pdf
+tmp/sul-lote2/estoril_jd.png
+tmp/sul-lote2/estoril_jd.txt
+tmp/sul-lote2/imperial-associacao.pdf
+tmp/sul-lote2/imperial-associacao.txt
+tmp/sul-lote2/imperial_jd.pdf
+tmp/sul-lote2/imperial_jd.png
+tmp/sul-lote2/imperial_jd.txt
+tmp/sul-lote2/ipes-decreto.pdf
+tmp/sul-lote2/ipes-decreto.txt
+tmp/sul-lote2/lacerda.pdf
+tmp/sul-lote2/lacerda.txt
+tmp/sul-lote2/ler-documentos.py
+tmp/sul-lote2/madureira-decreto.pdf
+tmp/sul-lote2/madureira-decreto.txt
+tmp/sul-lote2/madureira_jd.pdf
+tmp/sul-lote2/madureira_jd.png
+tmp/sul-lote2/madureira_jd.txt
+tmp/sul-lote2/palmeiras_de_sao_jose_jd.pdf
+tmp/sul-lote2/palmeiras_de_sao_jose_jd.png
+tmp/sul-lote2/palmeiras_de_sao_jose_jd.txt
+tmp/sul-lote2/pedro_i_d_conj_habitacional-titulo.png
+tmp/sul-lote2/pedro_i_d_conj_habitacional.pdf
+tmp/sul-lote2/pedro_i_d_conj_habitacional.png
+tmp/sul-lote2/pedro_i_d_conj_habitacional.txt
+tmp/sul-lote2/pedro_ii_d_fl01_08.pdf
+tmp/sul-lote2/pedro_ii_d_fl01_08.png
+tmp/sul-lote2/pedro_ii_d_fl01_08.txt
+tmp/sul-lote2/pinheirinho_dos_palmares_ii_fl2_4.pdf
+tmp/sul-lote2/pinheirinho_dos_palmares_ii_fl2_4.png
+tmp/sul-lote2/pinheirinho_dos_palmares_ii_fl2_4.txt
+tmp/sul-lote2/portugal-estudo.pdf
+tmp/sul-lote2/portugal-estudo.txt
+tmp/sul-lote2/portugal_jd-titulo.png
+tmp/sul-lote2/portugal_jd.pdf
+tmp/sul-lote2/portugal_jd.png
+tmp/sul-lote2/portugal_jd.txt
+tmp/sul-lote2/uniao_pq_resid.pdf
+tmp/sul-lote2/uniao_pq_resid.png
+tmp/sul-lote2/uniao_pq_resid.txt
+tmp/validar_lendas.cjs
+tmp/validate-final-v4.cjs
+tmp/verificar_norte.cjs
+update_app_html.py
+update_app_map.py
+update_bairros.js
+update_bairros_ui.py
+update_bibliografia.py
+update_fonte_abnt.py
+update_fonte_bairro.py
+update_gray_and_popups.js
+update_historia_data.py
+update_hm.py
+update_map.py
+update_map_zoom.py
+update_nodes.py
+update_wrapper.py
+url_results.json
+user_prompt_full.txt
+validate_helpers.py
+verify_cards.py
+view_chunk.py
+wbc202408021125139200.pdf
+wrap_switchMainTab.js

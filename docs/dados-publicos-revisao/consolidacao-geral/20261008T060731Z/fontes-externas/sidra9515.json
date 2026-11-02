@@ -1,0 +1,54 @@
+[
+  {
+    "NC": "Nível Territorial (Código)",
+    "NN": "Nível Territorial",
+    "MC": "Unidade de Medida (Código)",
+    "MN": "Unidade de Medida",
+    "V": "Valor",
+    "D1C": "Município (Código)",
+    "D1N": "Município",
+    "D2C": "Variável (Código)",
+    "D2N": "Variável",
+    "D3C": "Ano (Código)",
+    "D3N": "Ano"
+  },
+  {
+    "NC": "6",
+    "NN": "Município",
+    "MC": "1702",
+    "MN": "Razão",
+    "V": "62.48",
+    "D1C": "3549904",
+    "D1N": "São José dos Campos (SP)",
+    "D2C": "10612",
+    "D2N": "Índice de envelhecimento",
+    "D3C": "2022",
+    "D3N": "2022"
+  },
+  {
+    "NC": "6",
+    "NN": "Município",
+    "MC": "1622",
+    "MN": "Anos",
+    "V": "36",
+    "D1C": "3549904",
+    "D1N": "São José dos Campos (SP)",
+    "D2C": "10613",
+    "D2N": "Idade mediana",
+    "D3C": "2022",
+    "D3N": "2022"
+  },
+  {
+    "NC": "6",
+    "NN": "Município",
+    "MC": "1702",
+    "MN": "Razão",
+    "V": "92.72",
+    "D1C": "3549904",
+    "D1N": "São José dos Campos (SP)",
+    "D2C": "8845",
+    "D2N": "Razão de sexo",
+    "D3C": "2022",
+    "D3N": "2022"
+  }
+]

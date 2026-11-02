@@ -1,0 +1,15 @@
+C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_mobilidade_regressions.cjs:3
+const name=process.argv[2];if(!/^test_(?:radar_hub_p0|saude_runtime|economia_visual|financas_visual|meio_ambiente_runtime)\.cjs$/.test(name))throw Error('teste não permitido');
+                                                                                                                                             ^
+
+Error: teste não permitido
+    at Object.<anonymous> (C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_mobilidade_regressions.cjs:3:148)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.19.0

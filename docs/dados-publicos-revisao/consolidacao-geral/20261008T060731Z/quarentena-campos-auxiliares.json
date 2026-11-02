@@ -1,0 +1,4239 @@
+{
+  "homologated": false,
+  "changes": [
+    {
+      "axis": "demografia",
+      "path": "populacao_estimada_2024",
+      "before": {
+        "total": 724756,
+        "valor": 724756,
+        "unidade": "habitantes",
+        "ano_referencia": 2024,
+        "nota": "Estimativa populacional oficial calculada pelo IBGE e publicada no Diario Oficial da Uniao em 29/08/2024 (Portaria IBGE 1.099) com referencia a 1 de julho de 2024.",
+        "fonte_nome": "IBGE - Estimativas da População Residente 2024 (DOU)",
+        "fonte_url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html",
+        "data_consulta": "2026-09-27"
+      },
+      "after": {
+        "total": null,
+        "valor": null,
+        "unidade": "habitantes",
+        "ano_referencia": 2024,
+        "nota": "Estimativa populacional oficial calculada pelo IBGE e publicada no Diario Oficial da Uniao em 29/08/2024 (Portaria IBGE 1.099) com referencia a 1 de julho de 2024.",
+        "fonte_nome": "IBGE - Estimativas da População Residente 2024 (DOU)",
+        "fonte_url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html",
+        "data_consulta": "2026-09-27",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "populacao_estimada_2026",
+      "before": {
+        "total": 729153,
+        "valor": 729153,
+        "unidade": "habitantes",
+        "ano_referencia": 2026,
+        "nota": "Projecao demografica tendencial para 2026: 729.153 (projecao tendencial intercensitaria linear a 0,85% a.a.) e 737.396 (projecao municipal Fundacao SEADE). Classificada formalmente como projecao tendencial, nao como estimativa oficial homologada do IBGE.",
+        "fonte_nome": "IBGE Cidades - Projeções e Estimativas Oficiais",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27",
+        "tipo": "Projecao Demografica Tendencial"
+      },
+      "after": {
+        "total": null,
+        "valor": null,
+        "unidade": "habitantes",
+        "ano_referencia": 2026,
+        "nota": "Projecao demografica tendencial para 2026: 729.153 (projecao tendencial intercensitaria linear a 0,85% a.a.) e 737.396 (projecao municipal Fundacao SEADE). Classificada formalmente como projecao tendencial, nao como estimativa oficial homologada do IBGE.",
+        "fonte_nome": "IBGE Cidades - Projeções e Estimativas Oficiais",
+        "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+        "data_consulta": "2026-09-27",
+        "tipo": "Projecao Demografica Tendencial",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "domicilios_nao_ocupados",
+      "before": {
+        "total": 33978,
+        "vagos": 24667,
+        "uso_ocasional": 9311,
+        "pct_total": 12.04,
+        "ano_referencia": 2022,
+        "nota": "Domicílios particulares permanentes não ocupados: 24.667 vagos (8,74%) e 9.311 de uso ocasional (3,30%).",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+        "data_consulta": "2026-09-27"
+      },
+      "after": {
+        "total": null,
+        "vagos": null,
+        "uso_ocasional": null,
+        "pct_total": null,
+        "ano_referencia": 2022,
+        "nota": "Domicílios particulares permanentes não ocupados: 24.667 vagos (8,74%) e 9.311 de uso ocasional (3,30%).",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+        "data_consulta": "2026-09-27",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "distribuicao_cor_raca_censo_2022",
+      "before": {
+        "ano_referencia": 2022,
+        "categorias": [
+          {
+            "cor_raca": "Branca",
+            "populacao": 462603,
+            "pct": 66.4
+          },
+          {
+            "cor_raca": "Parda",
+            "populacao": 181647,
+            "pct": 26.1
+          },
+          {
+            "cor_raca": "Preta",
+            "populacao": 43136,
+            "pct": 6.2
+          },
+          {
+            "cor_raca": "Amarela",
+            "populacao": 9008,
+            "pct": 1.3
+          },
+          {
+            "cor_raca": "Indígena",
+            "populacao": 629,
+            "pct": 0.1
+          }
+        ],
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9605)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9605",
+        "data_consulta": "2026-09-27"
+      },
+      "after": {
+        "ano_referencia": 2022,
+        "categorias": [
+          {
+            "cor_raca": "Branca",
+            "populacao": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "cor_raca": "Parda",
+            "populacao": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "cor_raca": "Preta",
+            "populacao": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "cor_raca": "Amarela",
+            "populacao": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "cor_raca": "Indígena",
+            "populacao": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9605)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9605",
+        "data_consulta": "2026-09-27",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "piramides_etarias_censos",
+      "before": {
+        "2000": {
+          "ano": 2000,
+          "populacao_total": 539313,
+          "homens_total": 266470,
+          "mulheres_total": 272843,
+          "metricas": {
+            "idade_mediana": "27 anos",
+            "indice_envelhecimento": "15,92",
+            "razao_sexo": "97,66",
+            "razao_dependencia": "46,87%"
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": 1642,
+              "mulheres": 2514,
+              "total": 4156
+            },
+            {
+              "faixa": "75-79",
+              "homens": 1692,
+              "mulheres": 2463,
+              "total": 4155
+            },
+            {
+              "faixa": "70-74",
+              "homens": 2940,
+              "mulheres": 3741,
+              "total": 6681
+            },
+            {
+              "faixa": "65-69",
+              "homens": 3934,
+              "mulheres": 4711,
+              "total": 8645
+            },
+            {
+              "faixa": "60-64",
+              "homens": 5554,
+              "mulheres": 6301,
+              "total": 11855
+            },
+            {
+              "faixa": "55-59",
+              "homens": 8017,
+              "mulheres": 8175,
+              "total": 16192
+            },
+            {
+              "faixa": "50-54",
+              "homens": 12159,
+              "mulheres": 12039,
+              "total": 24198
+            },
+            {
+              "faixa": "45-49",
+              "homens": 16295,
+              "mulheres": 16485,
+              "total": 32780
+            },
+            {
+              "faixa": "40-44",
+              "homens": 19284,
+              "mulheres": 20091,
+              "total": 39375
+            },
+            {
+              "faixa": "35-39",
+              "homens": 20835,
+              "mulheres": 23000,
+              "total": 43835
+            },
+            {
+              "faixa": "30-34",
+              "homens": 21489,
+              "mulheres": 22473,
+              "total": 43962
+            },
+            {
+              "faixa": "25-29",
+              "homens": 22838,
+              "mulheres": 23393,
+              "total": 46231
+            },
+            {
+              "faixa": "20-24",
+              "homens": 26572,
+              "mulheres": 26276,
+              "total": 52848
+            },
+            {
+              "faixa": "15-19",
+              "homens": 27989,
+              "mulheres": 27929,
+              "total": 55918
+            },
+            {
+              "faixa": "10-14",
+              "homens": 26522,
+              "mulheres": 25831,
+              "total": 52353
+            },
+            {
+              "faixa": "5-9",
+              "homens": 24472,
+              "mulheres": 23992,
+              "total": 48464
+            },
+            {
+              "faixa": "0-4",
+              "homens": 24236,
+              "mulheres": 23429,
+              "total": 47665
+            }
+          ]
+        },
+        "2010": {
+          "ano": 2010,
+          "populacao_total": 629921,
+          "homens_total": 308623,
+          "mulheres_total": 321298,
+          "metricas": {
+            "idade_mediana": "31 anos",
+            "indice_envelhecimento": "28,31",
+            "razao_sexo": "96,06",
+            "razao_dependencia": "38,80%"
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": 2573,
+              "mulheres": 4501,
+              "total": 7074
+            },
+            {
+              "faixa": "75-79",
+              "homens": 3059,
+              "mulheres": 4099,
+              "total": 7158
+            },
+            {
+              "faixa": "70-74",
+              "homens": 4428,
+              "mulheres": 5816,
+              "total": 10244
+            },
+            {
+              "faixa": "65-69",
+              "homens": 6659,
+              "mulheres": 7717,
+              "total": 14376
+            },
+            {
+              "faixa": "60-64",
+              "homens": 11151,
+              "mulheres": 11902,
+              "total": 23053
+            },
+            {
+              "faixa": "55-59",
+              "homens": 15163,
+              "mulheres": 15361,
+              "total": 30524
+            },
+            {
+              "faixa": "50-54",
+              "homens": 18089,
+              "mulheres": 20704,
+              "total": 38793
+            },
+            {
+              "faixa": "45-49",
+              "homens": 20015,
+              "mulheres": 22757,
+              "total": 42772
+            },
+            {
+              "faixa": "40-44",
+              "homens": 21723,
+              "mulheres": 23432,
+              "total": 45155
+            },
+            {
+              "faixa": "35-39",
+              "homens": 23723,
+              "mulheres": 24909,
+              "total": 48632
+            },
+            {
+              "faixa": "30-34",
+              "homens": 27760,
+              "mulheres": 28480,
+              "total": 56240
+            },
+            {
+              "faixa": "25-29",
+              "homens": 29718,
+              "mulheres": 30564,
+              "total": 60282
+            },
+            {
+              "faixa": "20-24",
+              "homens": 28465,
+              "mulheres": 27886,
+              "total": 56351
+            },
+            {
+              "faixa": "15-19",
+              "homens": 26269,
+              "mulheres": 25753,
+              "total": 52022
+            },
+            {
+              "faixa": "10-14",
+              "homens": 26101,
+              "mulheres": 25174,
+              "total": 51275
+            },
+            {
+              "faixa": "5-9",
+              "homens": 22417,
+              "mulheres": 21285,
+              "total": 43702
+            },
+            {
+              "faixa": "0-4",
+              "homens": 21310,
+              "mulheres": 20958,
+              "total": 42268
+            }
+          ]
+        },
+        "2022": {
+          "ano": 2022,
+          "populacao_total": 697054,
+          "homens_total": 335359,
+          "mulheres_total": 361695,
+          "metricas": {
+            "idade_mediana": "36 anos",
+            "indice_envelhecimento": "62,48",
+            "razao_sexo": "92,72",
+            "razao_dependencia": "41,20%"
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": 5246,
+              "mulheres": 9025,
+              "total": 14271
+            },
+            {
+              "faixa": "75-79",
+              "homens": 5990,
+              "mulheres": 7828,
+              "total": 13818
+            },
+            {
+              "faixa": "70-74",
+              "homens": 9947,
+              "mulheres": 12226,
+              "total": 22173
+            },
+            {
+              "faixa": "65-69",
+              "homens": 13642,
+              "mulheres": 16600,
+              "total": 30242
+            },
+            {
+              "faixa": "60-64",
+              "homens": 16576,
+              "mulheres": 20413,
+              "total": 36989
+            },
+            {
+              "faixa": "55-59",
+              "homens": 18869,
+              "mulheres": 22468,
+              "total": 41337
+            },
+            {
+              "faixa": "50-54",
+              "homens": 21040,
+              "mulheres": 23437,
+              "total": 44477
+            },
+            {
+              "faixa": "45-49",
+              "homens": 23336,
+              "mulheres": 25827,
+              "total": 49163
+            },
+            {
+              "faixa": "40-44",
+              "homens": 28317,
+              "mulheres": 31141,
+              "total": 59458
+            },
+            {
+              "faixa": "35-39",
+              "homens": 27734,
+              "mulheres": 29870,
+              "total": 57604
+            },
+            {
+              "faixa": "30-34",
+              "homens": 26157,
+              "mulheres": 27780,
+              "total": 53937
+            },
+            {
+              "faixa": "25-29",
+              "homens": 24915,
+              "mulheres": 25640,
+              "total": 50555
+            },
+            {
+              "faixa": "20-24",
+              "homens": 25154,
+              "mulheres": 24652,
+              "total": 49806
+            },
+            {
+              "faixa": "15-19",
+              "homens": 22726,
+              "mulheres": 21643,
+              "total": 44369
+            },
+            {
+              "faixa": "10-14",
+              "homens": 22335,
+              "mulheres": 21573,
+              "total": 43908
+            },
+            {
+              "faixa": "5-9",
+              "homens": 22933,
+              "mulheres": 22027,
+              "total": 44960
+            },
+            {
+              "faixa": "0-4",
+              "homens": 20442,
+              "mulheres": 19545,
+              "total": 39987
+            }
+          ]
+        }
+      },
+      "after": {
+        "2000": {
+          "ano": 2000,
+          "populacao_total": null,
+          "homens_total": null,
+          "mulheres_total": null,
+          "metricas": {
+            "idade_mediana": "27 anos",
+            "indice_envelhecimento": "15,92",
+            "razao_sexo": "97,66",
+            "razao_dependencia": "46,87%",
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "75-79",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "70-74",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "65-69",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "60-64",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "55-59",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "50-54",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "45-49",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "40-44",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "35-39",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "30-34",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "25-29",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "20-24",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "15-19",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "10-14",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "5-9",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "0-4",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            }
+          ],
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2010": {
+          "ano": 2010,
+          "populacao_total": null,
+          "homens_total": null,
+          "mulheres_total": null,
+          "metricas": {
+            "idade_mediana": "31 anos",
+            "indice_envelhecimento": "28,31",
+            "razao_sexo": "96,06",
+            "razao_dependencia": "38,80%",
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "75-79",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "70-74",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "65-69",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "60-64",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "55-59",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "50-54",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "45-49",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "40-44",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "35-39",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "30-34",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "25-29",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "20-24",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "15-19",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "10-14",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "5-9",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "0-4",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            }
+          ],
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2022": {
+          "ano": 2022,
+          "populacao_total": null,
+          "homens_total": null,
+          "mulheres_total": null,
+          "metricas": {
+            "idade_mediana": "36 anos",
+            "indice_envelhecimento": "62,48",
+            "razao_sexo": "92,72",
+            "razao_dependencia": "41,20%",
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          "faixas": [
+            {
+              "faixa": "80+",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "75-79",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "70-74",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "65-69",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "60-64",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "55-59",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "50-54",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "45-49",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "40-44",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "35-39",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "30-34",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "25-29",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "20-24",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "15-19",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "10-14",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "5-9",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            },
+            {
+              "faixa": "0-4",
+              "homens": null,
+              "mulheres": null,
+              "total": null,
+              "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+              "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+            }
+          ],
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "serie_historica_populacao",
+      "before": [
+        {
+          "ano": 1970,
+          "populacao": 148332,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1970"
+        },
+        {
+          "ano": 1980,
+          "populacao": 287513,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1980"
+        },
+        {
+          "ano": 1991,
+          "populacao": 442370,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1991"
+        },
+        {
+          "ano": 2000,
+          "populacao": 539313,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2000"
+        },
+        {
+          "ano": 2010,
+          "populacao": 629921,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2010"
+        },
+        {
+          "ano": 2022,
+          "populacao": 697054,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2022"
+        },
+        {
+          "ano": 2024,
+          "populacao": 724756,
+          "tipo": "Estimativa Oficial",
+          "fonte": "IBGE Estimativa Populacional DOU 2024 (29/08/2024 Portaria 1.099)"
+        },
+        {
+          "ano": 2026,
+          "populacao": 729153,
+          "tipo": "Projecao Tendencial",
+          "fonte": "Projecao Demografica Tendencial (729.153 tendencial geometrica / 737.396 SEADE)"
+        }
+      ],
+      "after": [
+        {
+          "ano": 1970,
+          "populacao": null,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1970",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 1980,
+          "populacao": null,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1980",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 1991,
+          "populacao": null,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 1991",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 2000,
+          "populacao": null,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2000",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 2010,
+          "populacao": null,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2010",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 2022,
+          "populacao": null,
+          "tipo": "Censo",
+          "fonte": "Censo Demográfico 2022",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 2024,
+          "populacao": null,
+          "tipo": "Estimativa Oficial",
+          "fonte": "IBGE Estimativa Populacional DOU 2024 (29/08/2024 Portaria 1.099)",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "ano": 2026,
+          "populacao": null,
+          "tipo": "Projecao Tendencial",
+          "fonte": "Projecao Demografica Tendencial (729.153 tendencial geometrica / 737.396 SEADE)",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "crescimento_anual_intercensitario",
+      "before": [
+        {
+          "periodo": "1970-1980",
+          "anos": 10,
+          "pop_inicial": 148332,
+          "pop_final": 287513,
+          "taxa_anual_pct": 6.84
+        },
+        {
+          "periodo": "1980-1991",
+          "anos": 11,
+          "pop_inicial": 287513,
+          "pop_final": 442370,
+          "taxa_anual_pct": 3.98
+        },
+        {
+          "periodo": "1991-2000",
+          "anos": 9,
+          "pop_inicial": 442370,
+          "pop_final": 539313,
+          "taxa_anual_pct": 2.23
+        },
+        {
+          "periodo": "2000-2010",
+          "anos": 10,
+          "pop_inicial": 539313,
+          "pop_final": 629921,
+          "taxa_anual_pct": 1.56
+        },
+        {
+          "periodo": "2010-2022",
+          "anos": 12,
+          "pop_inicial": 629921,
+          "pop_final": 697054,
+          "taxa_anual_pct": 0.85
+        }
+      ],
+      "after": [
+        {
+          "periodo": "1970-1980",
+          "anos": null,
+          "pop_inicial": null,
+          "pop_final": null,
+          "taxa_anual_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "periodo": "1980-1991",
+          "anos": null,
+          "pop_inicial": null,
+          "pop_final": null,
+          "taxa_anual_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "periodo": "1991-2000",
+          "anos": null,
+          "pop_inicial": null,
+          "pop_final": null,
+          "taxa_anual_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "periodo": "2000-2010",
+          "anos": null,
+          "pop_inicial": null,
+          "pop_final": null,
+          "taxa_anual_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "periodo": "2010-2022",
+          "anos": null,
+          "pop_inicial": null,
+          "pop_final": null,
+          "taxa_anual_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "populacao_por_regiao_censo_2022",
+      "before": [
+        {
+          "regiao": "Região Sul",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "Região Leste",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "Região Centro",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "Região Oeste",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "Região Sudeste",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "Região Norte",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "Zona Rural",
+          "populacao": null,
+          "pct": null
+        },
+        {
+          "regiao": "São Francisco Xavier (Núcleo)",
+          "populacao": null,
+          "pct": null
+        }
+      ],
+      "after": [
+        {
+          "regiao": "Região Sul",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "Região Leste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "Região Centro",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "Região Oeste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "Região Sudeste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "Região Norte",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "Zona Rural",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "regiao": "São Francisco Xavier (Núcleo)",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "ranking_setores_socioeconomicos_censo_2022",
+      "before": [
+        {
+          "posicao": 1,
+          "setor": "Morumbi",
+          "codigo": "15",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 6.82,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 2,
+          "setor": "Campo dos Alemães",
+          "codigo": "12",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 14.27,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 3,
+          "setor": "Novo Horizonte",
+          "codigo": "27",
+          "regiao": "Leste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 15.58,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 4,
+          "setor": "Alto da Ponte",
+          "codigo": "01",
+          "regiao": "Norte",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 9.07,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 5,
+          "setor": "Vila Industrial",
+          "codigo": "05",
+          "regiao": "Leste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 7.12,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 6,
+          "setor": "Putim/Setville",
+          "codigo": "29",
+          "regiao": "Sudeste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 17.16,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 7,
+          "setor": "Parque Industrial",
+          "codigo": "16",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 8.84,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 8,
+          "setor": "Bosque dos Eucaliptos",
+          "codigo": "13",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 4.57,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 9,
+          "setor": "Jardim Satélite",
+          "codigo": "14",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 3.8,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        },
+        {
+          "posicao": 10,
+          "setor": "Aquarius",
+          "codigo": "19",
+          "regiao": "Oeste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": 20.21,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022
+        }
+      ],
+      "after": [
+        {
+          "posicao": null,
+          "setor": "Morumbi",
+          "codigo": "15",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Campo dos Alemães",
+          "codigo": "12",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Novo Horizonte",
+          "codigo": "27",
+          "regiao": "Leste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Alto da Ponte",
+          "codigo": "01",
+          "regiao": "Norte",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Vila Industrial",
+          "codigo": "05",
+          "regiao": "Leste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Putim/Setville",
+          "codigo": "29",
+          "regiao": "Sudeste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Parque Industrial",
+          "codigo": "16",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Bosque dos Eucaliptos",
+          "codigo": "13",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Jardim Satélite",
+          "codigo": "14",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "setor": "Aquarius",
+          "codigo": "19",
+          "regiao": "Oeste",
+          "populacao": null,
+          "pct": null,
+          "area_km2": null,
+          "densidade_hab_km2": null,
+          "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+          "fonte": "PMSJC / Censo 2022 IBGE",
+          "ano": 2022,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "ranking_bairros_populosos",
+      "before": [
+        {
+          "posicao": 1,
+          "bairro": "Morumbi",
+          "regiao": "Sul",
+          "populacao": 62190,
+          "pct": 8.92
+        },
+        {
+          "posicao": 2,
+          "bairro": "Campo dos Alemães",
+          "regiao": "Sul",
+          "populacao": 56500,
+          "pct": 8.11
+        },
+        {
+          "posicao": 3,
+          "bairro": "Novo Horizonte",
+          "regiao": "Leste",
+          "populacao": 47193,
+          "pct": 6.77
+        },
+        {
+          "posicao": 4,
+          "bairro": "Alto da Ponte",
+          "regiao": "Norte",
+          "populacao": 40563,
+          "pct": 5.82
+        },
+        {
+          "posicao": 5,
+          "bairro": "Vila Industrial",
+          "regiao": "Leste",
+          "populacao": 39506,
+          "pct": 5.67
+        },
+        {
+          "posicao": 6,
+          "bairro": "Putim/Setville",
+          "regiao": "Sudeste",
+          "populacao": 38895,
+          "pct": 5.58
+        },
+        {
+          "posicao": 7,
+          "bairro": "Parque Industrial",
+          "regiao": "Sul",
+          "populacao": 38549,
+          "pct": 5.53
+        },
+        {
+          "posicao": 8,
+          "bairro": "Bosque dos Eucaliptos",
+          "regiao": "Sul",
+          "populacao": 33184,
+          "pct": 4.76
+        },
+        {
+          "posicao": 9,
+          "bairro": "Jardim Satélite",
+          "regiao": "Sul",
+          "populacao": 27804,
+          "pct": 3.99
+        },
+        {
+          "posicao": 10,
+          "bairro": "Aquarius",
+          "regiao": "Oeste",
+          "populacao": 25286,
+          "pct": 3.63
+        }
+      ],
+      "after": [
+        {
+          "posicao": null,
+          "bairro": "Morumbi",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Campo dos Alemães",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Novo Horizonte",
+          "regiao": "Leste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Alto da Ponte",
+          "regiao": "Norte",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Vila Industrial",
+          "regiao": "Leste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Putim/Setville",
+          "regiao": "Sudeste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Parque Industrial",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Bosque dos Eucaliptos",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Jardim Satélite",
+          "regiao": "Sul",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "bairro": "Aquarius",
+          "regiao": "Oeste",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "religiao_censo_amostra_2022",
+      "before": [
+        {
+          "categoria": "Católica Apostólica Romana",
+          "sjc_pct": 58.2,
+          "sp_pct": 60.1,
+          "brasil_pct": 56.7
+        },
+        {
+          "categoria": "Evangélica",
+          "sjc_pct": 25.4,
+          "sp_pct": 24.1,
+          "brasil_pct": 26.9
+        },
+        {
+          "categoria": "Sem religião",
+          "sjc_pct": 8.9,
+          "sp_pct": 8.1,
+          "brasil_pct": 9.3
+        },
+        {
+          "categoria": "Espírita",
+          "sjc_pct": 4.3,
+          "sp_pct": 3.3,
+          "brasil_pct": 2.2
+        },
+        {
+          "categoria": "Umbanda e Candomblé",
+          "sjc_pct": 0.8,
+          "sp_pct": 0.9,
+          "brasil_pct": 0.7
+        },
+        {
+          "categoria": "Outras religiosidades / Tradições",
+          "sjc_pct": 2.4,
+          "sp_pct": 3.5,
+          "brasil_pct": 4.2
+        }
+      ],
+      "after": [
+        {
+          "categoria": "Católica Apostólica Romana",
+          "sjc_pct": null,
+          "sp_pct": null,
+          "brasil_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "categoria": "Evangélica",
+          "sjc_pct": null,
+          "sp_pct": null,
+          "brasil_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "categoria": "Sem religião",
+          "sjc_pct": null,
+          "sp_pct": null,
+          "brasil_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "categoria": "Espírita",
+          "sjc_pct": null,
+          "sp_pct": null,
+          "brasil_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "categoria": "Umbanda e Candomblé",
+          "sjc_pct": null,
+          "sp_pct": null,
+          "brasil_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "categoria": "Outras religiosidades / Tradições",
+          "sjc_pct": null,
+          "sp_pct": null,
+          "brasil_pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "alfabetizacao_censo_2022",
+      "before": {
+        "taxa_sjc": 97.86,
+        "taxa_homens": 98.12,
+        "taxa_mulheres": 97.63,
+        "taxa_sp": 96.92,
+        "taxa_brasil": 93.0,
+        "faixa_etaria": "15 anos ou mais de idade",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9543)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9543",
+        "data_consulta": "2026-09-27"
+      },
+      "after": {
+        "taxa_sjc": null,
+        "taxa_homens": null,
+        "taxa_mulheres": null,
+        "taxa_sp": null,
+        "taxa_brasil": null,
+        "faixa_etaria": "15 anos ou mais de idade",
+        "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9543)",
+        "fonte_url": "https://sidra.ibge.gov.br/tabela/9543",
+        "data_consulta": "2026-09-27",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "piramide_etaria_censo_2022",
+      "before": [
+        {
+          "faixa": "0-4",
+          "homens": 18120,
+          "mulheres": 17430,
+          "total": 35550
+        },
+        {
+          "faixa": "5-9",
+          "homens": 20450,
+          "mulheres": 19680,
+          "total": 40130
+        },
+        {
+          "faixa": "10-14",
+          "homens": 21890,
+          "mulheres": 21120,
+          "total": 43010
+        },
+        {
+          "faixa": "15-19",
+          "homens": 23640,
+          "mulheres": 22910,
+          "total": 46550
+        },
+        {
+          "faixa": "20-24",
+          "homens": 26180,
+          "mulheres": 25840,
+          "total": 52020
+        },
+        {
+          "faixa": "25-29",
+          "homens": 27430,
+          "mulheres": 27890,
+          "total": 55320
+        },
+        {
+          "faixa": "30-34",
+          "homens": 28150,
+          "mulheres": 29310,
+          "total": 57460
+        },
+        {
+          "faixa": "35-39",
+          "homens": 27920,
+          "mulheres": 29840,
+          "total": 57760
+        },
+        {
+          "faixa": "40-44",
+          "homens": 27150,
+          "mulheres": 29610,
+          "total": 56760
+        },
+        {
+          "faixa": "45-49",
+          "homens": 24230,
+          "mulheres": 26980,
+          "total": 51210
+        },
+        {
+          "faixa": "50-54",
+          "homens": 22180,
+          "mulheres": 25340,
+          "total": 47520
+        },
+        {
+          "faixa": "55-59",
+          "homens": 20110,
+          "mulheres": 23720,
+          "total": 43830
+        },
+        {
+          "faixa": "60-64",
+          "homens": 17420,
+          "mulheres": 21180,
+          "total": 38600
+        },
+        {
+          "faixa": "65-69",
+          "homens": 13910,
+          "mulheres": 17820,
+          "total": 31730
+        },
+        {
+          "faixa": "70-74",
+          "homens": 9840,
+          "mulheres": 13410,
+          "total": 23250
+        },
+        {
+          "faixa": "75-79",
+          "homens": 6120,
+          "mulheres": 9180,
+          "total": 15300
+        },
+        {
+          "faixa": "80+",
+          "homens": 5571,
+          "mulheres": 9683,
+          "total": 15254
+        }
+      ],
+      "after": [
+        {
+          "faixa": "0-4",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "5-9",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "10-14",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "15-19",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "20-24",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "25-29",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "30-34",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "35-39",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "40-44",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "45-49",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "50-54",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "55-59",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "60-64",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "65-69",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "70-74",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "75-79",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "faixa": "80+",
+          "homens": null,
+          "mulheres": null,
+          "total": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "distritos_oficiais",
+      "before": [
+        {
+          "distrito": "Distrito Sede",
+          "populacao": 542110,
+          "pct": 77.8
+        },
+        {
+          "distrito": "Eugênio de Melo",
+          "populacao": 118420,
+          "pct": 17.0
+        },
+        {
+          "distrito": "São Francisco Xavier",
+          "populacao": 36524,
+          "pct": 5.2
+        }
+      ],
+      "after": [
+        {
+          "distrito": "Distrito Sede",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "distrito": "Eugênio de Melo",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "distrito": "São Francisco Xavier",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "demografia",
+      "path": "reconciliacao_domicilios_2022",
+      "before": {
+        "total_recenseados": 282214,
+        "particulares_permanentes_ocupados": 247894,
+        "particulares_nao_ocupados": 33978,
+        "coletivos": 283,
+        "improvisados": 59,
+        "esclarecimento_cifra_253180": "A cifra de 253.180 correspondia a estimativa preliminar de domicilios ocupados em divulgacoes intermediarias. O total definitivo oficial do Censo 2022 no SIDRA 4711 e de 282.214 domicilios recenseados e 247.894 particulares permanentes ocupados."
+      },
+      "after": {
+        "total_recenseados": null,
+        "particulares_permanentes_ocupados": null,
+        "particulares_nao_ocupados": null,
+        "coletivos": null,
+        "improvisados": null,
+        "esclarecimento_cifra_253180": "A cifra de 253.180 correspondia a estimativa preliminar de domicilios ocupados em divulgacoes intermediarias. O total definitivo oficial do Censo 2022 no SIDRA 4711 e de 282.214 domicilios recenseados e 247.894 particulares permanentes ocupados.",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "ocorrencias_mensais_2023_2024",
+      "before": {
+        "2023": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 20,
+            "furto_veiculo": 113,
+            "roubo_outros": 131,
+            "furto_outros": 504,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 128,
+            "roubo_outros": 132,
+            "furto_outros": 440,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 126,
+            "roubo_outros": 103,
+            "furto_outros": 521,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 104,
+            "roubo_outros": 97,
+            "furto_outros": 484,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 99,
+            "roubo_outros": 132,
+            "furto_outros": 559,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 13,
+            "furto_veiculo": 103,
+            "roubo_outros": 96,
+            "furto_outros": 558,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 135,
+            "roubo_outros": 78,
+            "furto_outros": 554,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 8,
+            "furto_veiculo": 95,
+            "roubo_outros": 101,
+            "furto_outros": 601,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 9,
+            "furto_veiculo": 57,
+            "roubo_outros": 75,
+            "furto_outros": 474,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 80,
+            "roubo_outros": 89,
+            "furto_outros": 500,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 97,
+            "roubo_outros": 72,
+            "furto_outros": 489,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": 7,
+            "roubo_veiculo": 18,
+            "furto_veiculo": 83,
+            "roubo_outros": 95,
+            "furto_outros": 411,
+            "latrocinio": 0
+          }
+        ],
+        "2024": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 5,
+            "furto_veiculo": 78,
+            "roubo_outros": 73,
+            "furto_outros": 517,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 59,
+            "roubo_outros": 84,
+            "furto_outros": 401,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 44,
+            "roubo_outros": 81,
+            "furto_outros": 450,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 12,
+            "furto_veiculo": 51,
+            "roubo_outros": 90,
+            "furto_outros": 440,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 46,
+            "roubo_outros": 73,
+            "furto_outros": 405,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 51,
+            "roubo_outros": 72,
+            "furto_outros": 425,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 59,
+            "roubo_outros": 89,
+            "furto_outros": 449,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 52,
+            "roubo_outros": 87,
+            "furto_outros": 352,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": 0,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 60,
+            "roubo_outros": 85,
+            "furto_outros": 413,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 19,
+            "furto_veiculo": 64,
+            "roubo_outros": 77,
+            "furto_outros": 520,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 14,
+            "furto_veiculo": 76,
+            "roubo_outros": 80,
+            "furto_outros": 425,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 17,
+            "furto_veiculo": 84,
+            "roubo_outros": 74,
+            "furto_outros": 444,
+            "latrocinio": 0
+          }
+        ],
+        "2025": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 55,
+            "roubo_outros": 71,
+            "furto_outros": 468,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 55,
+            "roubo_outros": 65,
+            "furto_outros": 441,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 54,
+            "roubo_outros": 56,
+            "furto_outros": 472,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 6,
+            "furto_veiculo": 51,
+            "roubo_outros": 47,
+            "furto_outros": 430,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 5,
+            "furto_veiculo": 67,
+            "roubo_outros": 74,
+            "furto_outros": 401,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": 5,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 46,
+            "roubo_outros": 34,
+            "furto_outros": 412,
+            "latrocinio": 1
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 7,
+            "furto_veiculo": 51,
+            "roubo_outros": 42,
+            "furto_outros": 425,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": 2,
+            "roubo_veiculo": 15,
+            "furto_veiculo": 53,
+            "roubo_outros": 40,
+            "furto_outros": 408,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": 1,
+            "roubo_veiculo": 9,
+            "furto_veiculo": 84,
+            "roubo_outros": 50,
+            "furto_outros": 563,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": 4,
+            "roubo_veiculo": 4,
+            "furto_veiculo": 70,
+            "roubo_outros": 54,
+            "furto_outros": 484,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 10,
+            "furto_veiculo": 73,
+            "roubo_outros": 45,
+            "furto_outros": 436,
+            "latrocinio": 0
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": 3,
+            "roubo_veiculo": 5,
+            "furto_veiculo": 79,
+            "roubo_outros": 37,
+            "furto_outros": 405,
+            "latrocinio": 0
+          }
+        ]
+      },
+      "after": {
+        "2023": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "2024": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "2025": [
+          {
+            "mes": "Jan",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Fev",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Mar",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Abr",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Mai",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Jun",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Jul",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Ago",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Set",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Out",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Nov",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "mes": "Dez",
+            "homicidio_doloso": null,
+            "roubo_veiculo": null,
+            "furto_veiculo": null,
+            "roubo_outros": null,
+            "furto_outros": null,
+            "latrocinio": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "ocorrencias_anuais_por_categoria",
+      "before": {
+        "2018": {
+          "homicidio_doloso": 39,
+          "roubo_veiculo": 707,
+          "furto_veiculo": 2193,
+          "roubo_outros": 2844,
+          "furto_outros": 5688,
+          "latrocinio": 10
+        },
+        "2019": {
+          "homicidio_doloso": 35,
+          "roubo_veiculo": 452,
+          "furto_veiculo": 1806,
+          "roubo_outros": 2206,
+          "furto_outros": 5126,
+          "latrocinio": 2
+        },
+        "2020": {
+          "homicidio_doloso": 37,
+          "roubo_veiculo": 276,
+          "furto_veiculo": 986,
+          "roubo_outros": 1809,
+          "furto_outros": 4025,
+          "latrocinio": 0
+        },
+        "2021": {
+          "homicidio_doloso": 45,
+          "roubo_veiculo": 302,
+          "furto_veiculo": 800,
+          "roubo_outros": 1675,
+          "furto_outros": 4969,
+          "latrocinio": 2
+        },
+        "2022": {
+          "homicidio_doloso": 46,
+          "roubo_veiculo": 245,
+          "furto_veiculo": 1286,
+          "roubo_outros": 1359,
+          "furto_outros": 5640,
+          "latrocinio": 3
+        },
+        "2023": {
+          "homicidio_doloso": 44,
+          "roubo_veiculo": 158,
+          "furto_veiculo": 1220,
+          "roubo_outros": 1201,
+          "furto_outros": 6095,
+          "latrocinio": 2
+        },
+        "2024": {
+          "homicidio_doloso": 23,
+          "roubo_veiculo": 143,
+          "furto_veiculo": 724,
+          "roubo_outros": 965,
+          "furto_outros": 5241,
+          "latrocinio": 2
+        },
+        "2025": {
+          "homicidio_doloso": 29,
+          "roubo_veiculo": 87,
+          "furto_veiculo": 738,
+          "roubo_outros": 615,
+          "furto_outros": 5345,
+          "latrocinio": 1
+        }
+      },
+      "after": {
+        "2018": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2019": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2020": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2021": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2022": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2023": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2024": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "2025": {
+          "homicidio_doloso": null,
+          "roubo_veiculo": null,
+          "furto_veiculo": null,
+          "roubo_outros": null,
+          "furto_outros": null,
+          "latrocinio": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "produtividade_policial_2024",
+      "before": {
+        "prisoes_efetuadas": 2170,
+        "flagrantes_lavrados": 1295,
+        "inqueritos_policiais_instaurados": 5647,
+        "veiculos_recuperados": 452,
+        "armas_fogo_apreendidas": 199,
+        "trafico_entorpecentes": 438
+      },
+      "after": {
+        "prisoes_efetuadas": null,
+        "flagrantes_lavrados": null,
+        "inqueritos_policiais_instaurados": null,
+        "veiculos_recuperados": null,
+        "armas_fogo_apreendidas": null,
+        "trafico_entorpecentes": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "taxas_delito_ssp",
+      "before": [
+        {
+          "idUnidade": 560,
+          "ano": "2025",
+          "homicidios": "4,12",
+          "furtos": "760,01",
+          "roubos": "87,45",
+          "frvHabitantes": "117,31",
+          "furtoVeiculo": "143,65",
+          "rouboVeiculo": "16,93",
+          "frvVeiculos": "160,59"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2024",
+          "homicidios": "3,28",
+          "furtos": "748,38",
+          "roubos": "137,80",
+          "frvHabitantes": "123,80",
+          "furtoVeiculo": "145,22",
+          "rouboVeiculo": "28,68",
+          "frvVeiculos": "173,90"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2023",
+          "homicidios": "6,28",
+          "furtos": "870,33",
+          "roubos": "171,50",
+          "frvHabitantes": "196,77",
+          "furtoVeiculo": "252,13",
+          "rouboVeiculo": "32,65",
+          "frvVeiculos": "284,78"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2022",
+          "homicidios": "6,14",
+          "furtos": "752,73",
+          "roubos": "181,38",
+          "frvHabitantes": "204,33",
+          "furtoVeiculo": "272,39",
+          "rouboVeiculo": "51,89",
+          "frvVeiculos": "324,28"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2021",
+          "homicidios": "6,28",
+          "furtos": "693,33",
+          "roubos": "233,71",
+          "frvHabitantes": "153,76",
+          "furtoVeiculo": "172,58",
+          "rouboVeiculo": "65,15",
+          "frvVeiculos": "237,72"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2020",
+          "homicidios": "5,17",
+          "furtos": "562,20",
+          "roubos": "252,68",
+          "frvHabitantes": "176,27",
+          "furtoVeiculo": "217,18",
+          "rouboVeiculo": "60,79",
+          "frvVeiculos": "277,97"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2019",
+          "homicidios": "4,95",
+          "furtos": "724,88",
+          "roubos": "311,95",
+          "frvHabitantes": "319,31",
+          "furtoVeiculo": "403,70",
+          "rouboVeiculo": "101,04",
+          "frvVeiculos": "504,74"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2018",
+          "homicidios": "5,58",
+          "furtos": "814,47",
+          "roubos": "407,23",
+          "frvHabitantes": "415,25",
+          "furtoVeiculo": "506,27",
+          "rouboVeiculo": "163,22",
+          "frvVeiculos": "669,48"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2017",
+          "homicidios": "6,69",
+          "furtos": "903,65",
+          "roubos": "456,41",
+          "frvHabitantes": "473,86",
+          "furtoVeiculo": "588,04",
+          "rouboVeiculo": "181,99",
+          "frvVeiculos": "770,02"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2016",
+          "homicidios": "10,88",
+          "furtos": "937,64",
+          "roubos": "625,58",
+          "frvHabitantes": "473,38",
+          "furtoVeiculo": "572,05",
+          "rouboVeiculo": "206,24",
+          "frvVeiculos": "778,29"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2015",
+          "homicidios": "9,52",
+          "furtos": "802,76",
+          "roubos": "514,60",
+          "frvHabitantes": "422,12",
+          "furtoVeiculo": "486,86",
+          "rouboVeiculo": "214,05",
+          "frvVeiculos": "700,91"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2014",
+          "homicidios": "8,29",
+          "furtos": "797,58",
+          "roubos": "481,59",
+          "frvHabitantes": "448,44",
+          "furtoVeiculo": "459,48",
+          "rouboVeiculo": "296,00",
+          "frvVeiculos": "755,48"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2013",
+          "homicidios": "9,93",
+          "furtos": "892,91",
+          "roubos": "438,59",
+          "frvHabitantes": "443,93",
+          "furtoVeiculo": "494,53",
+          "rouboVeiculo": "272,19",
+          "frvVeiculos": "766,73"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2012",
+          "homicidios": "10,21",
+          "furtos": "929,68",
+          "roubos": "466,15",
+          "frvHabitantes": "441,86",
+          "furtoVeiculo": "512,42",
+          "rouboVeiculo": "279,23",
+          "frvVeiculos": "791,65"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2011",
+          "homicidios": "9,72",
+          "furtos": "944,84",
+          "roubos": "546,92",
+          "frvHabitantes": "448,42",
+          "furtoVeiculo": "495,46",
+          "rouboVeiculo": "342,72",
+          "frvVeiculos": "838,18"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2010",
+          "homicidios": "8,74",
+          "furtos": "973,76",
+          "roubos": "562,54",
+          "frvHabitantes": "401,05",
+          "furtoVeiculo": "499,65",
+          "rouboVeiculo": "291,20",
+          "frvVeiculos": "790,84"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2009",
+          "homicidios": "11,13",
+          "furtos": "959,56",
+          "roubos": "620,72",
+          "frvHabitantes": "441,14",
+          "furtoVeiculo": "565,30",
+          "rouboVeiculo": "359,61",
+          "frvVeiculos": "924,91"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2008",
+          "homicidios": "9,33",
+          "furtos": "931,98",
+          "roubos": "523,37",
+          "frvHabitantes": "453,14",
+          "furtoVeiculo": "651,54",
+          "rouboVeiculo": "365,64",
+          "frvVeiculos": "1.017,19"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2007",
+          "homicidios": "11,63",
+          "furtos": "1.080,56",
+          "roubos": "561,46",
+          "frvHabitantes": "400,00",
+          "furtoVeiculo": "621,87",
+          "rouboVeiculo": "349,25",
+          "frvVeiculos": "971,11"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2006",
+          "homicidios": "14,50",
+          "furtos": "1.124,31",
+          "roubos": "569,74",
+          "frvHabitantes": "519,68",
+          "furtoVeiculo": "838,23",
+          "rouboVeiculo": "513,37",
+          "frvVeiculos": "1.351,60"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2005",
+          "homicidios": "14,55",
+          "furtos": "1.164,96",
+          "roubos": "593,69",
+          "frvHabitantes": "548,85",
+          "furtoVeiculo": "928,10",
+          "rouboVeiculo": "590,48",
+          "frvVeiculos": "1.518,58"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2004",
+          "homicidios": "24,16",
+          "furtos": "1.037,13",
+          "roubos": "502,84",
+          "frvHabitantes": "493,97",
+          "furtoVeiculo": "912,36",
+          "rouboVeiculo": "518,62",
+          "frvVeiculos": "1.430,98"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2003",
+          "homicidios": "30,90",
+          "furtos": "951,67",
+          "roubos": "586,89",
+          "frvHabitantes": "484,13",
+          "furtoVeiculo": "897,01",
+          "rouboVeiculo": "546,42",
+          "frvVeiculos": "1.443,42"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2002",
+          "homicidios": "33,37",
+          "furtos": "853,89",
+          "roubos": "513,34",
+          "frvHabitantes": "464,89",
+          "furtoVeiculo": "921,39",
+          "rouboVeiculo": "515,89",
+          "frvVeiculos": "1.437,27"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2001",
+          "homicidios": "42,15",
+          "furtos": "840,37",
+          "roubos": "535,50",
+          "frvHabitantes": "567,79",
+          "furtoVeiculo": "1.078,90",
+          "rouboVeiculo": "744,86",
+          "frvVeiculos": "1.823,77"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "2000",
+          "homicidios": "48,71",
+          "furtos": "957,24",
+          "roubos": "564,79",
+          "frvHabitantes": "604,76",
+          "furtoVeiculo": "-",
+          "rouboVeiculo": "-",
+          "frvVeiculos": "-"
+        },
+        {
+          "idUnidade": 560,
+          "ano": "1999",
+          "homicidios": "47,85",
+          "furtos": "870,79",
+          "roubos": "573,62",
+          "frvHabitantes": "474,32",
+          "furtoVeiculo": "-",
+          "rouboVeiculo": "-",
+          "frvVeiculos": "-"
+        }
+      ],
+      "after": [
+        {
+          "idUnidade": null,
+          "ano": "2025",
+          "homicidios": "4,12",
+          "furtos": "760,01",
+          "roubos": "87,45",
+          "frvHabitantes": "117,31",
+          "furtoVeiculo": "143,65",
+          "rouboVeiculo": "16,93",
+          "frvVeiculos": "160,59",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2024",
+          "homicidios": "3,28",
+          "furtos": "748,38",
+          "roubos": "137,80",
+          "frvHabitantes": "123,80",
+          "furtoVeiculo": "145,22",
+          "rouboVeiculo": "28,68",
+          "frvVeiculos": "173,90",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2023",
+          "homicidios": "6,28",
+          "furtos": "870,33",
+          "roubos": "171,50",
+          "frvHabitantes": "196,77",
+          "furtoVeiculo": "252,13",
+          "rouboVeiculo": "32,65",
+          "frvVeiculos": "284,78",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2022",
+          "homicidios": "6,14",
+          "furtos": "752,73",
+          "roubos": "181,38",
+          "frvHabitantes": "204,33",
+          "furtoVeiculo": "272,39",
+          "rouboVeiculo": "51,89",
+          "frvVeiculos": "324,28",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2021",
+          "homicidios": "6,28",
+          "furtos": "693,33",
+          "roubos": "233,71",
+          "frvHabitantes": "153,76",
+          "furtoVeiculo": "172,58",
+          "rouboVeiculo": "65,15",
+          "frvVeiculos": "237,72",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2020",
+          "homicidios": "5,17",
+          "furtos": "562,20",
+          "roubos": "252,68",
+          "frvHabitantes": "176,27",
+          "furtoVeiculo": "217,18",
+          "rouboVeiculo": "60,79",
+          "frvVeiculos": "277,97",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2019",
+          "homicidios": "4,95",
+          "furtos": "724,88",
+          "roubos": "311,95",
+          "frvHabitantes": "319,31",
+          "furtoVeiculo": "403,70",
+          "rouboVeiculo": "101,04",
+          "frvVeiculos": "504,74",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2018",
+          "homicidios": "5,58",
+          "furtos": "814,47",
+          "roubos": "407,23",
+          "frvHabitantes": "415,25",
+          "furtoVeiculo": "506,27",
+          "rouboVeiculo": "163,22",
+          "frvVeiculos": "669,48",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2017",
+          "homicidios": "6,69",
+          "furtos": "903,65",
+          "roubos": "456,41",
+          "frvHabitantes": "473,86",
+          "furtoVeiculo": "588,04",
+          "rouboVeiculo": "181,99",
+          "frvVeiculos": "770,02",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2016",
+          "homicidios": "10,88",
+          "furtos": "937,64",
+          "roubos": "625,58",
+          "frvHabitantes": "473,38",
+          "furtoVeiculo": "572,05",
+          "rouboVeiculo": "206,24",
+          "frvVeiculos": "778,29",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2015",
+          "homicidios": "9,52",
+          "furtos": "802,76",
+          "roubos": "514,60",
+          "frvHabitantes": "422,12",
+          "furtoVeiculo": "486,86",
+          "rouboVeiculo": "214,05",
+          "frvVeiculos": "700,91",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2014",
+          "homicidios": "8,29",
+          "furtos": "797,58",
+          "roubos": "481,59",
+          "frvHabitantes": "448,44",
+          "furtoVeiculo": "459,48",
+          "rouboVeiculo": "296,00",
+          "frvVeiculos": "755,48",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2013",
+          "homicidios": "9,93",
+          "furtos": "892,91",
+          "roubos": "438,59",
+          "frvHabitantes": "443,93",
+          "furtoVeiculo": "494,53",
+          "rouboVeiculo": "272,19",
+          "frvVeiculos": "766,73",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2012",
+          "homicidios": "10,21",
+          "furtos": "929,68",
+          "roubos": "466,15",
+          "frvHabitantes": "441,86",
+          "furtoVeiculo": "512,42",
+          "rouboVeiculo": "279,23",
+          "frvVeiculos": "791,65",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2011",
+          "homicidios": "9,72",
+          "furtos": "944,84",
+          "roubos": "546,92",
+          "frvHabitantes": "448,42",
+          "furtoVeiculo": "495,46",
+          "rouboVeiculo": "342,72",
+          "frvVeiculos": "838,18",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2010",
+          "homicidios": "8,74",
+          "furtos": "973,76",
+          "roubos": "562,54",
+          "frvHabitantes": "401,05",
+          "furtoVeiculo": "499,65",
+          "rouboVeiculo": "291,20",
+          "frvVeiculos": "790,84",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2009",
+          "homicidios": "11,13",
+          "furtos": "959,56",
+          "roubos": "620,72",
+          "frvHabitantes": "441,14",
+          "furtoVeiculo": "565,30",
+          "rouboVeiculo": "359,61",
+          "frvVeiculos": "924,91",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2008",
+          "homicidios": "9,33",
+          "furtos": "931,98",
+          "roubos": "523,37",
+          "frvHabitantes": "453,14",
+          "furtoVeiculo": "651,54",
+          "rouboVeiculo": "365,64",
+          "frvVeiculos": "1.017,19",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2007",
+          "homicidios": "11,63",
+          "furtos": "1.080,56",
+          "roubos": "561,46",
+          "frvHabitantes": "400,00",
+          "furtoVeiculo": "621,87",
+          "rouboVeiculo": "349,25",
+          "frvVeiculos": "971,11",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2006",
+          "homicidios": "14,50",
+          "furtos": "1.124,31",
+          "roubos": "569,74",
+          "frvHabitantes": "519,68",
+          "furtoVeiculo": "838,23",
+          "rouboVeiculo": "513,37",
+          "frvVeiculos": "1.351,60",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2005",
+          "homicidios": "14,55",
+          "furtos": "1.164,96",
+          "roubos": "593,69",
+          "frvHabitantes": "548,85",
+          "furtoVeiculo": "928,10",
+          "rouboVeiculo": "590,48",
+          "frvVeiculos": "1.518,58",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2004",
+          "homicidios": "24,16",
+          "furtos": "1.037,13",
+          "roubos": "502,84",
+          "frvHabitantes": "493,97",
+          "furtoVeiculo": "912,36",
+          "rouboVeiculo": "518,62",
+          "frvVeiculos": "1.430,98",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2003",
+          "homicidios": "30,90",
+          "furtos": "951,67",
+          "roubos": "586,89",
+          "frvHabitantes": "484,13",
+          "furtoVeiculo": "897,01",
+          "rouboVeiculo": "546,42",
+          "frvVeiculos": "1.443,42",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2002",
+          "homicidios": "33,37",
+          "furtos": "853,89",
+          "roubos": "513,34",
+          "frvHabitantes": "464,89",
+          "furtoVeiculo": "921,39",
+          "rouboVeiculo": "515,89",
+          "frvVeiculos": "1.437,27",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2001",
+          "homicidios": "42,15",
+          "furtos": "840,37",
+          "roubos": "535,50",
+          "frvHabitantes": "567,79",
+          "furtoVeiculo": "1.078,90",
+          "rouboVeiculo": "744,86",
+          "frvVeiculos": "1.823,77",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "2000",
+          "homicidios": "48,71",
+          "furtos": "957,24",
+          "roubos": "564,79",
+          "frvHabitantes": "604,76",
+          "furtoVeiculo": "-",
+          "rouboVeiculo": "-",
+          "frvVeiculos": "-",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "idUnidade": null,
+          "ano": "1999",
+          "homicidios": "47,85",
+          "furtos": "870,79",
+          "roubos": "573,62",
+          "frvHabitantes": "474,32",
+          "furtoVeiculo": "-",
+          "rouboVeiculo": "-",
+          "frvVeiculos": "-",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "ranking_cidades_500k_2024",
+      "before": [
+        {
+          "posicao": 1,
+          "cidade": "São José dos Campos",
+          "taxa_100k": 3.28,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 2,
+          "cidade": "São Bernardo do Campo",
+          "taxa_100k": 3.7,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 3,
+          "cidade": "São Paulo",
+          "taxa_100k": 4.21,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 4,
+          "cidade": "Osasco",
+          "taxa_100k": 4.24,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 5,
+          "cidade": "Santo André",
+          "taxa_100k": 4.25,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 6,
+          "cidade": "Ribeirão Preto",
+          "taxa_100k": 4.54,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 7,
+          "cidade": "Guarulhos",
+          "taxa_100k": 5.03,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 8,
+          "cidade": "Sorocaba",
+          "taxa_100k": 7.23,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 9,
+          "cidade": "Campinas",
+          "taxa_100k": 7.54,
+          "verificacao": "primaria"
+        },
+        {
+          "posicao": 10,
+          "cidade": "São José do Rio Preto",
+          "taxa_100k": 8.86,
+          "verificacao": "primaria"
+        }
+      ],
+      "after": [
+        {
+          "posicao": null,
+          "cidade": "São José dos Campos",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "São Bernardo do Campo",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "São Paulo",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "Osasco",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "Santo André",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "Ribeirão Preto",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "Guarulhos",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "Sorocaba",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "Campinas",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "posicao": null,
+          "cidade": "São José do Rio Preto",
+          "taxa_100k": null,
+          "verificacao": "primaria",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "esclarecimento_deic_2024",
+      "before": {
+        "total_homicidios": 23,
+        "taxa_esclarecimento_pct": 87.0,
+        "fonte": "Divisão de Homicídios do DEIC São José dos Campos",
+        "verificacao": "secundaria",
+        "meios_empregados": [
+          {
+            "meio": "Arma de Fogo",
+            "casos": 14,
+            "pct": 60.9
+          },
+          {
+            "meio": "Arma Branca (Faca)",
+            "casos": 5,
+            "pct": 21.7
+          },
+          {
+            "meio": "Agressão Física / Espancamento",
+            "casos": 2,
+            "pct": 8.7
+          },
+          {
+            "meio": "Asfixia / Estrangulamento",
+            "casos": 1,
+            "pct": 4.3
+          },
+          {
+            "meio": "Outros Meios",
+            "casos": 1,
+            "pct": 4.3
+          }
+        ]
+      },
+      "after": {
+        "total_homicidios": null,
+        "taxa_esclarecimento_pct": null,
+        "fonte": "Divisão de Homicídios do DEIC São José dos Campos",
+        "verificacao": "secundaria",
+        "meios_empregados": [
+          {
+            "meio": "Arma de Fogo",
+            "casos": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "meio": "Arma Branca (Faca)",
+            "casos": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "meio": "Agressão Física / Espancamento",
+            "casos": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "meio": "Asfixia / Estrangulamento",
+            "casos": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "meio": "Outros Meios",
+            "casos": null,
+            "pct": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "axis": "seguranca",
+      "path": "programa_sao_jose_unida",
+      "before": {
+        "ano_criacao": 2017,
+        "ocorrencias_atendidas": 2948,
+        "veiculos_recuperados": 674,
+        "procurados_recapturados": 298,
+        "pessoas_detidas_cameras": 1373,
+        "acoes_integradas": 800,
+        "satisfacao_indsat_pontos": 681,
+        "aprovacao_populacao_pct": 86.2,
+        "fonte": "Prefeitura Municipal de São José dos Campos (Secretaria de Proteção ao Cidadão / CSI)",
+        "fonte_url": "https://www.sjc.sp.gov.br/noticias/2025/janeiro/03/sao-jose-tem-o-menor-numero-de-homicidio-da-historia/",
+        "verificacao": "secundaria"
+      },
+      "after": {
+        "ano_criacao": null,
+        "ocorrencias_atendidas": null,
+        "veiculos_recuperados": null,
+        "procurados_recapturados": null,
+        "pessoas_detidas_cameras": null,
+        "acoes_integradas": null,
+        "satisfacao_indsat_pontos": null,
+        "aprovacao_populacao_pct": null,
+        "fonte": "Prefeitura Municipal de São José dos Campos (Secretaria de Proteção ao Cidadão / CSI)",
+        "fonte_url": "https://www.sjc.sp.gov.br/noticias/2025/janeiro/03/sao-jose-tem-o-menor-numero-de-homicidio-da-historia/",
+        "verificacao": "secundaria",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "decision": "SUSPENSO_SEM_COMPROVACAO"
+    },
+    {
+      "indicator_id": "educ_ideb_anos_iniciais",
+      "before": {
+        "indicator_id": "educ_ideb_anos_iniciais",
+        "name": "IDEB - Anos iniciais do Ensino Fundamental (Rede Pública)",
+        "category": "educacao",
+        "value": 6.8,
+        "unit": "nota (0 a 10)",
+        "source_agency": "INEP / Ministério da Educação",
+        "source_system": "Índice de Desenvolvimento da Educação Básica (IDEB 2023)",
+        "base_year": "2023",
+        "frequency": "Bienal",
+        "geographic_level": "Municipal (Código: 3549904)",
+        "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_date": "2026-10-06",
+        "valid_until": null,
+        "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+        "methodology": "Combinação do rendimento escolar (taxa de aprovação) com proficiências em Português e Matemática (Saeb).",
+        "official_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2025.zip",
+        "verificacao": "primaria",
+        "evidencia": {
+          "evidence_id": "cons:ideb:iniciais:Pública:VL_OBSERVADO_2023",
+          "family": "educacao_inep",
+          "period": "2023",
+          "stage": "iniciais",
+          "network": "Pública",
+          "native_variable": "VL_OBSERVADO_2023",
+          "unit": "nota (0 a 10)",
+          "territory": "Município das escolas; IBGE 3549904; SP",
+          "source_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2025.zip",
+          "raw_reference": "data/radar_hub/educacao_raw_2026-10-08/ideb-iniciais2025.zip",
+          "sha256": "89100286327ab07a4b1318ba51974d62da90af334f663bedf6374cb67298a3e7",
+          "member": "divulgacao_anos_iniciais_municipios_2025/divulgacao_anos_iniciais_municipios_2025.xlsx",
+          "member_sha256": "e132cd0ab83179ffc8263029e67db737aebf84a6977b38fbe3e25bcaf96ba774",
+          "sheet": "IDEB_AI_MUNICÍPIOS",
+          "row": 9947,
+          "column": 124,
+          "header_row": 10,
+          "raw_value": 6.8,
+          "value": 6.8,
+          "status": "CONFIRMADO_FONTE_OFICIAL",
+          "methodology": "Célula publicada pelo INEP na edição 2025; IDEB não equivale à proficiência SAEB nem ao percentual de alunos proficientes; metas do ciclo 2007–2021; nenhum sinal de ausência convertido em zero."
+        },
+        "last_checked": "2026-10-08",
+        "competencia": "2023",
+        "evidence_id": "cons:ideb:iniciais:Pública:VL_OBSERVADO_2023"
+      },
+      "after": {
+        "indicator_id": "educ_ideb_anos_iniciais",
+        "name": "IDEB - Anos iniciais do Ensino Fundamental (Rede Pública)",
+        "category": "educacao",
+        "value": 6.9,
+        "unit": "nota (0 a 10)",
+        "source_agency": "INEP / Ministério da Educação",
+        "source_system": "INEP / IDEB, edição 2025",
+        "base_year": "2025",
+        "frequency": "Bienal",
+        "geographic_level": "Municipal (Código: 3549904)",
+        "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_date": "2026-10-06",
+        "valid_until": null,
+        "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+        "methodology": "Combinação do rendimento escolar (taxa de aprovação) com proficiências em Português e Matemática (Saeb).",
+        "official_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2025.zip",
+        "verificacao": "primaria",
+        "evidencia": {
+          "evidence_id": "cons:ideb:iniciais:Pública:VL_OBSERVADO_2025",
+          "family": "educacao_inep",
+          "period": "2025",
+          "stage": "iniciais",
+          "network": "Pública",
+          "native_variable": "VL_OBSERVADO_2025",
+          "unit": "nota (0 a 10)",
+          "territory": "Município das escolas; IBGE 3549904; SP",
+          "source_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2025.zip",
+          "raw_reference": "data/radar_hub/educacao_raw_2026-10-08/ideb-iniciais2025.zip",
+          "sha256": "89100286327ab07a4b1318ba51974d62da90af334f663bedf6374cb67298a3e7",
+          "member": "divulgacao_anos_iniciais_municipios_2025/divulgacao_anos_iniciais_municipios_2025.xlsx",
+          "member_sha256": "e132cd0ab83179ffc8263029e67db737aebf84a6977b38fbe3e25bcaf96ba774",
+          "sheet": "IDEB_AI_MUNICÍPIOS",
+          "row": 9947,
+          "column": 125,
+          "header_row": 10,
+          "raw_value": 6.9,
+          "value": 6.9,
+          "status": "CONFIRMADO_FONTE_OFICIAL",
+          "methodology": "Célula publicada pelo INEP na edição 2025; IDEB não equivale à proficiência SAEB nem ao percentual de alunos proficientes; metas do ciclo 2007–2021; nenhum sinal de ausência convertido em zero."
+        },
+        "last_checked": "2026-10-08",
+        "competencia": "2025",
+        "evidence_id": "cons:ideb:iniciais:Pública:VL_OBSERVADO_2025"
+      },
+      "decision": "ATUALIZADO_EDICAO_REPRODUZIDA_2025"
+    },
+    {
+      "indicator_id": "educ_ideb_anos_finais",
+      "before": {
+        "indicator_id": "educ_ideb_anos_finais",
+        "name": "IDEB - Anos finais do Ensino Fundamental (Rede Pública)",
+        "category": "educacao",
+        "value": 5.6,
+        "unit": "nota (0 a 10)",
+        "source_agency": "INEP / Ministério da Educação",
+        "source_system": "Índice de Desenvolvimento da Educação Básica (IDEB 2023)",
+        "base_year": "2023",
+        "frequency": "Bienal",
+        "geographic_level": "Municipal (Código: 3549904)",
+        "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_date": "2026-10-06",
+        "valid_until": null,
+        "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+        "methodology": "Indicador oficial calculado para turmas de 6º ao 9º ano da rede pública municipal e estadual.",
+        "official_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+        "verificacao": "primaria",
+        "evidencia": {
+          "evidence_id": "cons:ideb:finais:Pública:VL_OBSERVADO_2023",
+          "family": "educacao_inep",
+          "period": "2023",
+          "stage": "finais",
+          "network": "Pública",
+          "native_variable": "VL_OBSERVADO_2023",
+          "unit": "nota (0 a 10)",
+          "territory": "Município das escolas; IBGE 3549904; SP",
+          "source_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+          "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ideb-finais2025.zip",
+          "sha256": "5f81ae18d33567608f10551d4f563a6879afc0182ff28cfd81e913958a30a6b3",
+          "member": "divulgacao_anos_finais_municipios_2025/divulgacao_anos_finais_municipios_2025.xlsx",
+          "member_sha256": "0a54ddd3010781033273dcfb318baef22c3136345ca0c64125c4a33daebc6ed4",
+          "sheet": "IDEB_AF_MUNICÍPIOS",
+          "row": 10058,
+          "column": 113,
+          "header_row": 10,
+          "raw_value": 5.6,
+          "value": 5.6,
+          "status": "CONFIRMADO_FONTE_OFICIAL",
+          "methodology": "Célula publicada pelo INEP na edição 2025; IDEB não equivale à proficiência SAEB nem ao percentual de alunos proficientes; metas do ciclo 2007–2021; nenhum sinal de ausência convertido em zero."
+        },
+        "last_checked": "2026-10-08",
+        "competencia": "2023",
+        "evidence_id": "cons:ideb:finais:Pública:VL_OBSERVADO_2023"
+      },
+      "after": {
+        "indicator_id": "educ_ideb_anos_finais",
+        "name": "IDEB - Anos finais do Ensino Fundamental (Rede Pública)",
+        "category": "educacao",
+        "value": 5.7,
+        "unit": "nota (0 a 10)",
+        "source_agency": "INEP / Ministério da Educação",
+        "source_system": "INEP / IDEB, edição 2025",
+        "base_year": "2025",
+        "frequency": "Bienal",
+        "geographic_level": "Municipal (Código: 3549904)",
+        "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+        "audit_date": "2026-10-06",
+        "valid_until": null,
+        "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+        "methodology": "Indicador oficial calculado para turmas de 6º ao 9º ano da rede pública municipal e estadual.",
+        "official_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+        "verificacao": "primaria",
+        "evidencia": {
+          "evidence_id": "cons:ideb:finais:Pública:VL_OBSERVADO_2025",
+          "family": "educacao_inep",
+          "period": "2025",
+          "stage": "finais",
+          "network": "Pública",
+          "native_variable": "VL_OBSERVADO_2025",
+          "unit": "nota (0 a 10)",
+          "territory": "Município das escolas; IBGE 3549904; SP",
+          "source_url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+          "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ideb-finais2025.zip",
+          "sha256": "5f81ae18d33567608f10551d4f563a6879afc0182ff28cfd81e913958a30a6b3",
+          "member": "divulgacao_anos_finais_municipios_2025/divulgacao_anos_finais_municipios_2025.xlsx",
+          "member_sha256": "0a54ddd3010781033273dcfb318baef22c3136345ca0c64125c4a33daebc6ed4",
+          "sheet": "IDEB_AF_MUNICÍPIOS",
+          "row": 10058,
+          "column": 114,
+          "header_row": 10,
+          "raw_value": 5.7,
+          "value": 5.7,
+          "status": "CONFIRMADO_FONTE_OFICIAL",
+          "methodology": "Célula publicada pelo INEP na edição 2025; IDEB não equivale à proficiência SAEB nem ao percentual de alunos proficientes; metas do ciclo 2007–2021; nenhum sinal de ausência convertido em zero."
+        },
+        "last_checked": "2026-10-08",
+        "competencia": "2025",
+        "evidence_id": "cons:ideb:finais:Pública:VL_OBSERVADO_2025"
+      },
+      "decision": "ATUALIZADO_EDICAO_REPRODUZIDA_2025"
+    }
+  ]
+}

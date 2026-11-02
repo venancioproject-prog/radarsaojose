@@ -1,0 +1,66 @@
+"""Chrome real via CDP; fixture do módulo com DOM real; nenhum screenshot."""
+from pathlib import Path
+import json,re,subprocess,time,threading,http.server,os,websocket,traceback
+ROOT=Path(__file__).resolve().parent.parent;OUT=sorted((ROOT/'docs/dados-publicos-revisao/consolidacao-geral').glob('20*'))[-1]
+html=(ROOT/'app.html').read_text(encoding='utf8');html=re.sub(r'<script\b[^>]*>.*?</script>','',html,flags=re.S|re.I)
+html=re.sub(r'<(?:img|iframe|source|video|audio)\b[^>]*>','',html,flags=re.I)
+html=html.replace('<head>','<head><base href="/"><style>.hub-axis-content.hidden{display:none} canvas{max-height:320px} </style>',1)
+scripts=['https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js','https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js','/radar_hub_controller.js','/economia_visual.js','/financas_visual.js']
+html=html.replace('</body>',''.join('<script src="'+s+'"></script>' for s in scripts)+'</body>');fixture=OUT/'browser-fixture.html';fixture.write_text(html,encoding='utf8')
+class Handler(http.server.SimpleHTTPRequestHandler):
+ def __init__(self,*a,**kw):super().__init__(*a,directory=str(ROOT),**kw)
+ def log_message(self,*a):pass
+server=http.server.ThreadingHTTPServer(('127.0.0.1',0),Handler);threading.Thread(target=server.serve_forever,daemon=True).start()
+profile=OUT/('chrome-test-profile-'+str(time.time_ns()));profile.mkdir(exist_ok=True)
+chrome=Path('C:/Program Files/Google/Chrome/Application/chrome.exe')
+proc=subprocess.Popen([str(chrome),'--headless=new','--disable-gpu','--no-proxy-server','--no-first-run','--no-default-browser-check','--remote-debugging-port=0','--remote-allow-origins=*','--user-data-dir='+str(profile),'about:blank'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,creationflags=subprocess.CREATE_NO_WINDOW)
+results={'kind':'Chrome real headless; fixture isolada do Radar Hub com DOM de app.html e controller real. App.js não executado. Não é E2E do login/aplicação completa.','screenshots':False,'events':[],'scenarios':[]}
+try:
+ for _ in range(60):
+  if (profile/'DevToolsActivePort').exists():break
+  time.sleep(.5)
+ port=int((profile/'DevToolsActivePort').read_text().splitlines()[0]);import requests
+ targets=requests.get(f'http://127.0.0.1:{port}/json',timeout=5).json()
+ target=next(t for t in targets if t.get('type')=='page' and t.get('url')=='about:blank')
+ ws=websocket.create_connection(target['webSocketDebuggerUrl'],timeout=100,suppress_origin=True);seq=0
+ def call(method,params=None):
+  global seq
+  seq+=1;request_id=seq;ws.send(json.dumps({'id':request_id,'method':method,'params':params or {}}))
+  while True:
+   msg=json.loads(ws.recv())
+   if msg.get('method') in ['Runtime.exceptionThrown','Log.entryAdded','Network.loadingFailed']:results['events'].append(msg)
+   if msg.get('id')==request_id:
+    if 'error' in msg:raise RuntimeError(msg['error'])
+    return msg.get('result',{})
+ def evaluate(expr):
+  r=call('Runtime.evaluate',{'expression':expr,'awaitPromise':True,'returnByValue':True})
+  if r.get('exceptionDetails'):raise RuntimeError(r['exceptionDetails'])
+  return r.get('result',{}).get('value')
+ call('Page.enable');call('Runtime.enable');call('Network.enable');call('Log.enable')
+ axes=['demografia','saude','seguranca','economia','financas','meio_ambiente','educacao','mobilidade']
+ for mode,offline,mobile,slow in [('desktop-online',False,False,False),('desktop-offline',True,False,False),('mobile-limitada',False,True,True)]:
+  print('Chrome',mode,'início',flush=True)
+  call('Network.setCacheDisabled',{'cacheDisabled':True})
+  call('Emulation.setDeviceMetricsOverride',{'width':375 if mobile else 1440,'height':812 if mobile else 1000,'deviceScaleFactor':1,'mobile':mobile})
+  call('Network.emulateNetworkConditions',{'offline':False,'latency':100 if slow else 0,'downloadThroughput':1048576 if slow else -1,'uploadThroughput':1048576 if slow else -1})
+  url=f'http://127.0.0.1:{server.server_port}/'+fixture.relative_to(ROOT).as_posix()+'?mode='+mode
+  results.setdefault('navigations',[]).append({'url':url,'response':call('Page.navigate',{'url':url})});start=time.perf_counter()
+  for _ in range(180):
+   if evaluate("typeof window.initRadarHub==='function'"):break
+   time.sleep(.5)
+  results.setdefault('ready_diagnostics',[]).append(evaluate("({url:location.href,title:document.title,ready:document.readyState,init:typeof window.initRadarHub,resources:performance.getEntriesByType('resource').map(e=>({name:e.name,duration:e.duration})),body:document.body?.innerText?.slice(0,300)})"))
+  if offline:call('Network.emulateNetworkConditions',{'offline':True,'latency':0,'downloadThroughput':-1,'uploadThroughput':-1})
+  init=evaluate("(async()=>{await window.initRadarHub();return {Chart:typeof window.Chart,heap:performance.memory?.usedJSHeapSize??null};})()")
+  checks=[]
+  for axis in axes:
+   evaluate("window.switchRadarHubAxis("+json.dumps(axis)+");true");time.sleep(.12)
+   row=evaluate("(()=>{const c=document.getElementById('hub-axis-container-"+axis+"');return {axis:"+json.dumps(axis)+",visible:!!c&&!c.classList.contains('hidden'),cards:Array.from(c?.querySelectorAll('[data-radar-indicator]')||[]).map(e=>({id:e.dataset.radarIndicator,value:e.textContent})),charts:Array.from(c?.querySelectorAll('canvas')||[]).map(e=>({id:e.id,rendered:typeof Chart!=='undefined'&&!!Chart.getChart(e),fallback:!!document.getElementById('fallback-'+e.id)}))};})()")
+   checks.append(row)
+  export=evaluate("(()=>{const e=window.getRadarHubExport();const csv=window.serializeRadarHubCsv(e.indicators);return {version:e.dataset_version,count:e.indicators.length,nullCount:e.indicators.filter(r=>r.valor===null).length,csvBOM:csv.charCodeAt(0)===65279,periods:e.indicators.every(r=>r.competencia!==undefined),sourceLinks:e.indicators.filter(r=>r.valor!==null).every(r=>/^https?:/.test(r.url)),mobFuture:e.mobilidade_series.filter(r=>r.competencia>'2026-08'&&r.competencia<'2027'&&r.evidencia.family==='transporte_bilhetagem'&&r.valor!==null).length};})()")
+  timings=evaluate("performance.getEntriesByType('resource').filter(e=>e.name.includes('radar_hub')).map(e=>({url:e.name,duration:e.duration,transferSize:e.transferSize,encodedBodySize:e.encodedBodySize,decodedBodySize:e.decodedBodySize}))")
+  export['completeCompetencePreserved']=evaluate("window.getRadarHubExport().indicators.every(r=>r.competencia===(RADAR_HUB_PACKAGE.metadataRegistry.indicators.find(i=>i.indicator_id===r.id).competencia??RADAR_HUB_PACKAGE.metadataRegistry.indicators.find(i=>i.indicator_id===r.id).base_year??null))")
+  results['scenarios'].append({'mode':mode,'seconds':time.perf_counter()-start,'initialization':init,'axes':checks,'export':export,'network_resources':timings,'network_note':'HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico.'});print('Chrome',mode,'fim',round(time.perf_counter()-start,2),flush=True)
+ results['status']='PASS' if all(s['export']['count']==122 and s['export']['nullCount']==34 and s['export']['completeCompetencePreserved'] and s['export']['sourceLinks'] and s['export']['csvBOM'] and s['export']['mobFuture']==0 and all(a['visible'] and all(c['rendered'] or c['fallback'] for c in a['charts']) for a in s['axes']) for s in results['scenarios']) and not any(e['method']=='Runtime.exceptionThrown' for e in results['events']) else 'REVIEW'
+except Exception as e:results.update(status='FAIL',error=str(e),trace=traceback.format_exc());print('Chrome FAIL',str(e)[:300],flush=True)
+finally:
+ (OUT/'testes-chrome-real.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n',encoding='utf8');proc.terminate();server.shutdown()

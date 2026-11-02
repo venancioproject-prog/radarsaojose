@@ -1,0 +1,186 @@
+[
+  {
+    "id": "demo_populacao_estimada_2024",
+    "ground_truth": 724756,
+    "registry": 725450,
+    "audit_report_historico": 725450,
+    "fallback_atual": 725450,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_populacao_estimada_2026",
+    "ground_truth": 729153,
+    "registry": 737396,
+    "audit_report_historico": 737396,
+    "fallback_atual": 737396,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_domicilios_total",
+    "ground_truth": 282214,
+    "registry": 253180,
+    "audit_report_historico": 253180,
+    "fallback_atual": 253180,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_media_moradores",
+    "ground_truth": 2.8,
+    "registry": 2.75,
+    "audit_report_historico": 2.75,
+    "fallback_atual": 2.75,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_area_territorial",
+    "ground_truth": 1099.494,
+    "registry": 1099.4,
+    "audit_report_historico": 1099.4,
+    "fallback_atual": 1099.4,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_densidade_demografica",
+    "ground_truth": 634.03,
+    "registry": 634.3,
+    "audit_report_historico": 634.3,
+    "fallback_atual": 634.3,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_populacao_mulheres",
+    "ground_truth": 361695,
+    "registry": 358983,
+    "audit_report_historico": 358983,
+    "fallback_atual": 358983,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_populacao_homens",
+    "ground_truth": 335359,
+    "registry": 338071,
+    "audit_report_historico": 338071,
+    "fallback_atual": 338071,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_razao_sexo",
+    "ground_truth": 92.72,
+    "registry": 94.17,
+    "audit_report_historico": 94.17,
+    "fallback_atual": 94.17,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "demo_indice_envelhecimento_2022",
+    "ground_truth": 62.48,
+    "registry": 81.6,
+    "audit_report_historico": 81.6,
+    "fallback_atual": 81.6,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_taxa_homicidios",
+    "ground_truth": "vínculo não determinado",
+    "registry": 3.28,
+    "audit_report_historico": 6.31,
+    "fallback_atual": 3.28,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_roubos_veiculos_2024",
+    "ground_truth": "vínculo não determinado",
+    "registry": 143,
+    "audit_report_historico": 118,
+    "fallback_atual": 143,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_furtos_veiculos_2024",
+    "ground_truth": "vínculo não determinado",
+    "registry": 724,
+    "audit_report_historico": 1140,
+    "fallback_atual": 724,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_roubos_gerais",
+    "ground_truth": "vínculo não determinado",
+    "registry": 965,
+    "audit_report_historico": 1845,
+    "fallback_atual": 965,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_produtividade_prisoes",
+    "ground_truth": 2170,
+    "registry": 2170,
+    "audit_report_historico": 2418,
+    "fallback_atual": 2170,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_sao_jose_unida",
+    "ground_truth": 2948,
+    "registry": 2948,
+    "audit_report_historico": "ausente",
+    "fallback_atual": 2948,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_ranking_500k",
+    "ground_truth": "vínculo não determinado",
+    "registry": 3.28,
+    "audit_report_historico": "ausente",
+    "fallback_atual": 3.28,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_esclarecimento_deic",
+    "ground_truth": 87.0,
+    "registry": 87.0,
+    "audit_report_historico": "ausente",
+    "fallback_atual": 87.0,
+    "situacao": "divergência preservada e identificada; auditoria atual indisponível"
+  },
+  {
+    "id": "seg_furtos_veiculos_2023",
+    "ground_truth": "não vinculado",
+    "registry": "ausente",
+    "audit_report_historico": 1220,
+    "fallback_atual": "ausente",
+    "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+  },
+  {
+    "id": "seg_homicidios_dolosos_2023",
+    "ground_truth": "não vinculado",
+    "registry": "ausente",
+    "audit_report_historico": 44,
+    "fallback_atual": "ausente",
+    "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+  },
+  {
+    "id": "seg_roubos_veiculos_2023",
+    "ground_truth": "não vinculado",
+    "registry": "ausente",
+    "audit_report_historico": 157,
+    "fallback_atual": "ausente",
+    "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+  },
+  {
+    "id": "seg_taxa_homicidios_2024",
+    "ground_truth": "não vinculado",
+    "registry": "ausente",
+    "audit_report_historico": 3.17,
+    "fallback_atual": "ausente",
+    "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+  },
+  {
+    "id": "seg_violencia_mulher_medidas",
+    "ground_truth": "não vinculado",
+    "registry": "ausente",
+    "audit_report_historico": 1842,
+    "fallback_atual": "ausente",
+    "situacao": "ID só no relatório histórico; não presume remoção ou renomeação"
+  }
+]

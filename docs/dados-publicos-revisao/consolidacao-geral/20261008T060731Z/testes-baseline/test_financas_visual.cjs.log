@@ -1,0 +1,3 @@
+PASS P2.1 online: KPIs, dados, 12 Chart sem duplicação, índice reutilizado, 9777 registros JSON/CSV.
+PASS P2.1 offline: KPIs, dados, 12 Chart sem duplicação, índice reutilizado, 9777 registros JSON/CSV.
+PASS P2.1 offline null/zero: KPIs, dados, 12 Chart sem duplicação, índice reutilizado, 9777 registros JSON/CSV.

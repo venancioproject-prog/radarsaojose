@@ -1,0 +1,433 @@
+{
+  "selected_options": [
+    "<option value=35 selected>SAO PAULO</option>",
+    "<option value=354990 selected>SAO JOSE DOS CAMPOS</option>",
+    "<option value=202412 selected>12/2024</option>"
+  ],
+  "rows": [
+    {
+      "code": "01",
+      "description": "BUCO MAXILO FACIAL",
+      "existing": 4,
+      "second_column": 0,
+      "html_tr_index": 11,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "02",
+      "description": "CARDIOLOGIA",
+      "existing": 3,
+      "second_column": 0,
+      "html_tr_index": 12,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "03",
+      "description": "CIRURGIA GERAL",
+      "existing": 287,
+      "second_column": 212,
+      "html_tr_index": 13,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "04",
+      "description": "ENDOCRINOLOGIA",
+      "existing": 4,
+      "second_column": 0,
+      "html_tr_index": 14,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "05",
+      "description": "GASTROENTEROLOGIA",
+      "existing": 9,
+      "second_column": 0,
+      "html_tr_index": 15,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "06",
+      "description": "GINECOLOGIA",
+      "existing": 10,
+      "second_column": 0,
+      "html_tr_index": 16,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "08",
+      "description": "NEFROLOGIAUROLOGIA",
+      "existing": 14,
+      "second_column": 0,
+      "html_tr_index": 17,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "09",
+      "description": "NEUROCIRURGIA",
+      "existing": 5,
+      "second_column": 0,
+      "html_tr_index": 18,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "11",
+      "description": "OFTALMOLOGIA",
+      "existing": 4,
+      "second_column": 0,
+      "html_tr_index": 19,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "12",
+      "description": "ONCOLOGIA",
+      "existing": 2,
+      "second_column": 0,
+      "html_tr_index": 20,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "13",
+      "description": "ORTOPEDIATRAUMATOLOGIA",
+      "existing": 32,
+      "second_column": 0,
+      "html_tr_index": 21,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "14",
+      "description": "OTORRINOLARINGOLOGIA",
+      "existing": 9,
+      "second_column": 1,
+      "html_tr_index": 22,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "15",
+      "description": "PLASTICA",
+      "existing": 9,
+      "second_column": 0,
+      "html_tr_index": 23,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "16",
+      "description": "TORACICA",
+      "existing": 3,
+      "second_column": 0,
+      "html_tr_index": 24,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "67",
+      "description": "TRANSPLANTE",
+      "existing": 4,
+      "second_column": 3,
+      "html_tr_index": 25,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "90",
+      "description": "QUEIMADO ADULTO",
+      "existing": 1,
+      "second_column": 0,
+      "html_tr_index": 26,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "91",
+      "description": "QUEIMADO PEDIATRICO",
+      "existing": 1,
+      "second_column": 0,
+      "html_tr_index": 27,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "31",
+      "description": "AIDS",
+      "existing": 2,
+      "second_column": 0,
+      "html_tr_index": 30,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "32",
+      "description": "CARDIOLOGIA",
+      "existing": 12,
+      "second_column": 0,
+      "html_tr_index": 31,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "33",
+      "description": "CLINICA GERAL",
+      "existing": 329,
+      "second_column": 210,
+      "html_tr_index": 32,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "35",
+      "description": "DERMATOLOGIA",
+      "existing": 2,
+      "second_column": 0,
+      "html_tr_index": 33,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "36",
+      "description": "GERIATRIA",
+      "existing": 26,
+      "second_column": 0,
+      "html_tr_index": 34,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "38",
+      "description": "HEMATOLOGIA",
+      "existing": 4,
+      "second_column": 0,
+      "html_tr_index": 35,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "40",
+      "description": "NEFROUROLOGIA",
+      "existing": 11,
+      "second_column": 0,
+      "html_tr_index": 36,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "41",
+      "description": "NEONATOLOGIA",
+      "existing": 2,
+      "second_column": 0,
+      "html_tr_index": 37,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "42",
+      "description": "NEUROLOGIA",
+      "existing": 10,
+      "second_column": 0,
+      "html_tr_index": 38,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "44",
+      "description": "ONCOLOGIA",
+      "existing": 20,
+      "second_column": 14,
+      "html_tr_index": 39,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "46",
+      "description": "PNEUMOLOGIA",
+      "existing": 6,
+      "second_column": 0,
+      "html_tr_index": 40,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "66",
+      "description": "UNIDADE ISOLAMENTO",
+      "existing": 15,
+      "second_column": 3,
+      "html_tr_index": 41,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "10",
+      "description": "OBSTETRICIA CIRURGICA",
+      "existing": 78,
+      "second_column": 55,
+      "html_tr_index": 44,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "43",
+      "description": "OBSTETRICIA CLINICA",
+      "existing": 68,
+      "second_column": 29,
+      "html_tr_index": 45,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "45",
+      "description": "PEDIATRIA CLINICA",
+      "existing": 102,
+      "second_column": 63,
+      "html_tr_index": 48,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "68",
+      "description": "PEDIATRIA CIRURGICA",
+      "existing": 39,
+      "second_column": 22,
+      "html_tr_index": 49,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "34",
+      "description": "CRONICOS",
+      "existing": 52,
+      "second_column": 2,
+      "html_tr_index": 52,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "47",
+      "description": "PSIQUIATRIA",
+      "existing": 301,
+      "second_column": 100,
+      "html_tr_index": 53,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "48",
+      "description": "REABILITACAO",
+      "existing": 1,
+      "second_column": 0,
+      "html_tr_index": 54,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "07",
+      "description": "CIRURGICO/DIAGNOSTICO/TERAPEUTICO",
+      "existing": 77,
+      "second_column": 26,
+      "html_tr_index": 57,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "69",
+      "description": "AIDS",
+      "existing": 6,
+      "second_column": 6,
+      "html_tr_index": 58,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "72",
+      "description": "GERIATRIA",
+      "existing": 5,
+      "second_column": 0,
+      "html_tr_index": 59,
+      "second_column_label": "SUS"
+    },
+    {
+      "code": "74",
+      "description": "UTI-A TIPO I",
+      "existing": 8,
+      "second_column": 0,
+      "html_tr_index": 62,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "75",
+      "description": "UTI-A TIPO II",
+      "existing": 133,
+      "second_column": 101,
+      "html_tr_index": 63,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "76",
+      "description": "UTI-A TIPO III",
+      "existing": 84,
+      "second_column": 12,
+      "html_tr_index": 64,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "78",
+      "description": "UTI PEDIATRICA - TIPO II",
+      "existing": 18,
+      "second_column": 18,
+      "html_tr_index": 65,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "79",
+      "description": "UTI-PED TIPO III",
+      "existing": 5,
+      "second_column": 4,
+      "html_tr_index": 66,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "80",
+      "description": "UTI NEONATAL - TIPO I",
+      "existing": 10,
+      "second_column": 0,
+      "html_tr_index": 67,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "81",
+      "description": "UTI NEONATAL - TIPO II",
+      "existing": 39,
+      "second_column": 22,
+      "html_tr_index": 68,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "82",
+      "description": "UTI NEONATAL - TIPO III",
+      "existing": 10,
+      "second_column": 0,
+      "html_tr_index": 69,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "83",
+      "description": "UTI-Q",
+      "existing": 5,
+      "second_column": 4,
+      "html_tr_index": 70,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "85",
+      "description": "UCO TIPO II",
+      "existing": 12,
+      "second_column": 0,
+      "html_tr_index": 71,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "86",
+      "description": "UCO TIPO III",
+      "existing": 6,
+      "second_column": 0,
+      "html_tr_index": 72,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "92",
+      "description": "UNIDADE DE CUIDADOS INTERMEDIARIOS NEONATAL CONVENCIONAL",
+      "existing": 16,
+      "second_column": 16,
+      "html_tr_index": 73,
+      "second_column_label": "Habilitados"
+    },
+    {
+      "code": "95",
+      "description": "UCI-A",
+      "existing": 6,
+      "second_column": 6,
+      "html_tr_index": 74,
+      "second_column_label": "Habilitados"
+    }
+  ],
+  "derived": {
+    "existing_including_hospital_day_excluding_complementary": 1569,
+    "complementary_existing": 352,
+    "uti_adult_codes_74_75_76_existing": 225,
+    "uti_pediatric_codes_78_79_existing": 23,
+    "uti_neonatal_codes_80_81_82_existing": 59
+  },
+  "note": "Coluna complementar habilitados não se denomina SUS; não somar a coluna SUS dos demais grupos. 88 hospital-dia incluídos na soma sem complementar; 1569 não implica leitos de internação convencional."
+}

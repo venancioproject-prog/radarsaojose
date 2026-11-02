@@ -1,0 +1,691 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "name": "hash:sidra6579.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra9514-quinquenal.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:municipal-populacao.html",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:mapa-setores.pdf",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:caderno-tecnico.pdf",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra4714.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra4711.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra4712.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra9515.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:estimativas-diretorio.html",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra9514-quinquenal-correto.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:9514-metadados.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:6579-metadados.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra9922.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:estimativa2026.xls",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:estimativa2026.xlsx",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:4711-metadados.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:9922-metadados.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra9923.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:9923-metadados.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra4711-especies.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra9605.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra202-historica.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:geo-diretorio.html",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:sidra4711-especies-correto.json",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:estimativa-metodologia2026.pdf",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "hash:estimativas-produto.html",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_populacao_censo",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_domicilios_total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_domicilios_ocupados",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_media_moradores",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_area_territorial",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_densidade_demografica",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_populacao_mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_populacao_homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_razao_sexo",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "baseline:demo_indice_envelhecimento_2022",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:0 a 4 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:5 a 9 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:10 a 14 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:15 a 19 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:20 a 24 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:25 a 29 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:30 a 34 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:35 a 39 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:40 a 44 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:45 a 49 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:50 a 54 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:55 a 59 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:60 a 64 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:65 a 69 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:70 a 74 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:75 a 79 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:80 a 84 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:85 a 89 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:90 a 94 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:95 a 99 anos",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sexo:100 anos ou mais",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "piramide-soma:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "piramide-soma:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "piramide-soma:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:0 a 4 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:0 a 4 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:0 a 4 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:5 a 9 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:5 a 9 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:5 a 9 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:10 a 14 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:10 a 14 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:10 a 14 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:15 a 19 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:15 a 19 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:15 a 19 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:20 a 24 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:20 a 24 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:20 a 24 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:25 a 29 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:25 a 29 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:25 a 29 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:30 a 34 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:30 a 34 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:30 a 34 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:35 a 39 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:35 a 39 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:35 a 39 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:40 a 44 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:40 a 44 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:40 a 44 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:45 a 49 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:45 a 49 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:45 a 49 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:50 a 54 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:50 a 54 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:50 a 54 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:55 a 59 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:55 a 59 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:55 a 59 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:60 a 64 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:60 a 64 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:60 a 64 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:65 a 69 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:65 a 69 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:65 a 69 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:70 a 74 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:70 a 74 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:70 a 74 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:75 a 79 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:75 a 79 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:75 a 79 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:80 a 84 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:80 a 84 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:80 a 84 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:85 a 89 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:85 a 89 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:85 a 89 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:90 a 94 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:90 a 94 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:90 a 94 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:95 a 99 anos:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:95 a 99 anos:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:95 a 99 anos:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:100 anos ou mais:homens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:100 anos ou mais:mulheres",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "municipal-vs-SIDRA:100 anos ou mais:total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "envelhecimento65+",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "razao-sexo",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "densidade2022",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "xlsx-2026-vsSIDRA",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "xlsx-territorio",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "urbana-rural-soma",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "dom-particao",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "dom-nao-ocupados",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "regioes-total-pop",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "regioes-total-dom",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "setores-textuais-total",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "geo35-mantido",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "geo-populacoes-suspensas",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "count": 137
+}

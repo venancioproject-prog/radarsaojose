@@ -1,0 +1,628 @@
+{
+  "status": "CANDIDATO_AGUARDANDO_VALIDACAO_INDEPENDENTE",
+  "territorio": "São José dos Campos/SP; IBGE3549904",
+  "registry_values": {
+    "demo_populacao_estimada_2024": 724756,
+    "demo_populacao_estimada_2026": 729153,
+    "demo_taxa_urbanizacao": 98.72
+  },
+  "estimativas_2001_2026": [
+    {
+      "ano": 2001,
+      "populacao": 550762,
+      "tipo": "Estimativa IBGE",
+      "source_row": 2
+    },
+    {
+      "ano": 2002,
+      "populacao": 559710,
+      "tipo": "Estimativa IBGE",
+      "source_row": 3
+    },
+    {
+      "ano": 2003,
+      "populacao": 569177,
+      "tipo": "Estimativa IBGE",
+      "source_row": 4
+    },
+    {
+      "ano": 2004,
+      "populacao": 589050,
+      "tipo": "Estimativa IBGE",
+      "source_row": 5
+    },
+    {
+      "ano": 2005,
+      "populacao": 600049,
+      "tipo": "Estimativa IBGE",
+      "source_row": 6
+    },
+    {
+      "ano": 2006,
+      "populacao": 610965,
+      "tipo": "Estimativa IBGE",
+      "source_row": 7
+    },
+    {
+      "ano": 2008,
+      "populacao": 609229,
+      "tipo": "Estimativa IBGE",
+      "source_row": 8
+    },
+    {
+      "ano": 2009,
+      "populacao": 615871,
+      "tipo": "Estimativa IBGE",
+      "source_row": 9
+    },
+    {
+      "ano": 2011,
+      "populacao": 636876,
+      "tipo": "Estimativa IBGE",
+      "source_row": 10
+    },
+    {
+      "ano": 2012,
+      "populacao": 643603,
+      "tipo": "Estimativa IBGE",
+      "source_row": 11
+    },
+    {
+      "ano": 2013,
+      "populacao": 673255,
+      "tipo": "Estimativa IBGE",
+      "source_row": 12
+    },
+    {
+      "ano": 2014,
+      "populacao": 681036,
+      "tipo": "Estimativa IBGE",
+      "source_row": 13
+    },
+    {
+      "ano": 2015,
+      "populacao": 688597,
+      "tipo": "Estimativa IBGE",
+      "source_row": 14
+    },
+    {
+      "ano": 2016,
+      "populacao": 695992,
+      "tipo": "Estimativa IBGE",
+      "source_row": 15
+    },
+    {
+      "ano": 2017,
+      "populacao": 703219,
+      "tipo": "Estimativa IBGE",
+      "source_row": 16
+    },
+    {
+      "ano": 2018,
+      "populacao": 713943,
+      "tipo": "Estimativa IBGE",
+      "source_row": 17
+    },
+    {
+      "ano": 2019,
+      "populacao": 721944,
+      "tipo": "Estimativa IBGE",
+      "source_row": 18
+    },
+    {
+      "ano": 2020,
+      "populacao": 729737,
+      "tipo": "Estimativa IBGE",
+      "source_row": 19
+    },
+    {
+      "ano": 2021,
+      "populacao": 737310,
+      "tipo": "Estimativa IBGE",
+      "source_row": 20
+    },
+    {
+      "ano": 2024,
+      "populacao": 724756,
+      "tipo": "Estimativa IBGE",
+      "source_row": 21
+    },
+    {
+      "ano": 2025,
+      "populacao": 727078,
+      "tipo": "Estimativa IBGE",
+      "source_row": 22
+    },
+    {
+      "ano": 2026,
+      "populacao": 729153,
+      "tipo": "Estimativa IBGE",
+      "source_row": 23
+    }
+  ],
+  "censos_1970_2022": [
+    {
+      "ano": 1970,
+      "populacao": 148332,
+      "tipo": "Censo IBGE",
+      "source_row": 2
+    },
+    {
+      "ano": 1980,
+      "populacao": 287513,
+      "tipo": "Censo IBGE",
+      "source_row": 3
+    },
+    {
+      "ano": 1991,
+      "populacao": 442370,
+      "tipo": "Censo IBGE",
+      "source_row": 4
+    },
+    {
+      "ano": 2000,
+      "populacao": 539313,
+      "tipo": "Censo IBGE",
+      "source_row": 5
+    },
+    {
+      "ano": 2010,
+      "populacao": 629921,
+      "tipo": "Censo IBGE",
+      "source_row": 6
+    },
+    {
+      "ano": 2022,
+      "populacao": 697054,
+      "tipo": "Censo IBGE",
+      "source_row": 2
+    }
+  ],
+  "piramide_2022_21faixas": [
+    {
+      "faixa": "0 a 4 anos",
+      "classe_id": "93070",
+      "total": 39987,
+      "homens": 20442,
+      "mulheres": 19545
+    },
+    {
+      "faixa": "5 a 9 anos",
+      "classe_id": "93084",
+      "total": 44960,
+      "homens": 22933,
+      "mulheres": 22027
+    },
+    {
+      "faixa": "10 a 14 anos",
+      "classe_id": "93085",
+      "total": 43908,
+      "homens": 22335,
+      "mulheres": 21573
+    },
+    {
+      "faixa": "15 a 19 anos",
+      "classe_id": "93086",
+      "total": 44369,
+      "homens": 22726,
+      "mulheres": 21643
+    },
+    {
+      "faixa": "20 a 24 anos",
+      "classe_id": "93087",
+      "total": 49806,
+      "homens": 25154,
+      "mulheres": 24652
+    },
+    {
+      "faixa": "25 a 29 anos",
+      "classe_id": "93088",
+      "total": 50555,
+      "homens": 24915,
+      "mulheres": 25640
+    },
+    {
+      "faixa": "30 a 34 anos",
+      "classe_id": "93089",
+      "total": 53937,
+      "homens": 26157,
+      "mulheres": 27780
+    },
+    {
+      "faixa": "35 a 39 anos",
+      "classe_id": "93090",
+      "total": 57604,
+      "homens": 27734,
+      "mulheres": 29870
+    },
+    {
+      "faixa": "40 a 44 anos",
+      "classe_id": "93091",
+      "total": 59458,
+      "homens": 28317,
+      "mulheres": 31141
+    },
+    {
+      "faixa": "45 a 49 anos",
+      "classe_id": "93092",
+      "total": 49163,
+      "homens": 23336,
+      "mulheres": 25827
+    },
+    {
+      "faixa": "50 a 54 anos",
+      "classe_id": "93093",
+      "total": 44477,
+      "homens": 21040,
+      "mulheres": 23437
+    },
+    {
+      "faixa": "55 a 59 anos",
+      "classe_id": "93094",
+      "total": 41337,
+      "homens": 18869,
+      "mulheres": 22468
+    },
+    {
+      "faixa": "60 a 64 anos",
+      "classe_id": "93095",
+      "total": 36989,
+      "homens": 16576,
+      "mulheres": 20413
+    },
+    {
+      "faixa": "65 a 69 anos",
+      "classe_id": "93096",
+      "total": 30242,
+      "homens": 13642,
+      "mulheres": 16600
+    },
+    {
+      "faixa": "70 a 74 anos",
+      "classe_id": "93097",
+      "total": 22173,
+      "homens": 9947,
+      "mulheres": 12226
+    },
+    {
+      "faixa": "75 a 79 anos",
+      "classe_id": "93098",
+      "total": 13818,
+      "homens": 5990,
+      "mulheres": 7828
+    },
+    {
+      "faixa": "80 a 84 anos",
+      "classe_id": "49108",
+      "total": 7851,
+      "homens": 3124,
+      "mulheres": 4727
+    },
+    {
+      "faixa": "85 a 89 anos",
+      "classe_id": "49109",
+      "total": 4044,
+      "homens": 1385,
+      "mulheres": 2659
+    },
+    {
+      "faixa": "90 a 94 anos",
+      "classe_id": "60040",
+      "total": 1800,
+      "homens": 581,
+      "mulheres": 1219
+    },
+    {
+      "faixa": "95 a 99 anos",
+      "classe_id": "60041",
+      "total": 491,
+      "homens": 144,
+      "mulheres": 347
+    },
+    {
+      "faixa": "100 anos ou mais",
+      "classe_id": "6653",
+      "total": 85,
+      "homens": 12,
+      "mulheres": 73
+    }
+  ],
+  "piramide_2022_totais": {
+    "6794": 697054,
+    "4": 335359,
+    "5": 361695
+  },
+  "situacao_domicilio_2022": {
+    "6795": 697054,
+    "1": 688155,
+    "2": 8899
+  },
+  "domicilios_2022_especies": {
+    "59993": {
+      "nome": "Total",
+      "valor": 282214
+    },
+    "9697": {
+      "nome": "Particular",
+      "valor": 281931
+    },
+    "2504": {
+      "nome": "Particular permanente",
+      "valor": 281872
+    },
+    "59998": {
+      "nome": "Particular permanente ocupado",
+      "valor": 247894
+    },
+    "59999": {
+      "nome": "Particular permanente ocupado - com entrevista",
+      "valor": 237696
+    },
+    "60000": {
+      "nome": "Particular permanente ocupado - sem entrevista",
+      "valor": 10198
+    },
+    "60001": {
+      "nome": "Particular permanente não ocupado",
+      "valor": 33978
+    },
+    "60002": {
+      "nome": "Particular permanente não ocupado - vago",
+      "valor": 24667
+    },
+    "60003": {
+      "nome": "Particular permanente não ocupado - uso ocasional",
+      "valor": 9311
+    },
+    "2505": {
+      "nome": "Particular improvisado",
+      "valor": 59
+    },
+    "103995": {
+      "nome": "Coletivo",
+      "valor": 283
+    },
+    "10004": {
+      "nome": "Coletivo - com morador",
+      "valor": 139
+    },
+    "10005": {
+      "nome": "Coletivo - sem morador",
+      "valor": 144
+    }
+  },
+  "regioes_textuais_municipais_2022": [
+    {
+      "regiao": "Centro",
+      "populacao": 72401,
+      "domicilios": 34663
+    },
+    {
+      "regiao": "Leste",
+      "populacao": 181463,
+      "domicilios": 70536
+    },
+    {
+      "regiao": "Norte",
+      "populacao": 61940,
+      "domicilios": 24193
+    },
+    {
+      "regiao": "Oeste",
+      "populacao": 64482,
+      "domicilios": 26913
+    },
+    {
+      "regiao": "São Francisco Xavier (núcleo)",
+      "populacao": 1443,
+      "domicilios": 754
+    },
+    {
+      "regiao": "Sudeste",
+      "populacao": 62541,
+      "domicilios": 23410
+    },
+    {
+      "regiao": "Sul",
+      "populacao": 237572,
+      "domicilios": 91937
+    },
+    {
+      "regiao": "Rural",
+      "populacao": 15212,
+      "domicilios": 9808
+    }
+  ],
+  "setores_textuais_municipais_2022": [
+    {
+      "nome": "Rural Norte",
+      "populacao": 13718
+    },
+    {
+      "nome": "Rural Sul",
+      "populacao": 1494
+    },
+    {
+      "nome": "Alto da Ponte",
+      "populacao": 40563
+    },
+    {
+      "nome": "Santana",
+      "populacao": 16012
+    },
+    {
+      "nome": "Centro",
+      "populacao": 15575
+    },
+    {
+      "nome": "Jardim Paulista",
+      "populacao": 21916
+    },
+    {
+      "nome": "Vila Industrial",
+      "populacao": 39506
+    },
+    {
+      "nome": "Eugênio de Melo",
+      "populacao": 20613
+    },
+    {
+      "nome": "Campos de São José",
+      "populacao": 15237
+    },
+    {
+      "nome": "Vista Verde",
+      "populacao": 14260
+    },
+    {
+      "nome": "Jardim da Granja",
+      "populacao": 21086
+    },
+    {
+      "nome": "DCTA",
+      "populacao": 2560
+    },
+    {
+      "nome": "Interlagos",
+      "populacao": 13898
+    },
+    {
+      "nome": "Campo dos Alemães",
+      "populacao": 56500
+    },
+    {
+      "nome": "Bosque dos Eucaliptos",
+      "populacao": 33184
+    },
+    {
+      "nome": "Jardim Satélite",
+      "populacao": 27804
+    },
+    {
+      "nome": "Morumbi",
+      "populacao": 62190
+    },
+    {
+      "nome": "Parque Industrial",
+      "populacao": 38549
+    },
+    {
+      "nome": "Jardim das Indústrias",
+      "populacao": 23647
+    },
+    {
+      "nome": "Urbanova",
+      "populacao": 14539
+    },
+    {
+      "nome": "Aquarius",
+      "populacao": 25286
+    },
+    {
+      "nome": "Vila Adyanna",
+      "populacao": 18671
+    },
+    {
+      "nome": "São Francisco Xavier",
+      "populacao": 1443
+    },
+    {
+      "nome": "Vargem Grande/Luso Brasileiro",
+      "populacao": 3727
+    },
+    {
+      "nome": "Esplanada",
+      "populacao": 15574
+    },
+    {
+      "nome": "Novo Horizonte",
+      "populacao": 47193
+    },
+    {
+      "nome": "São Bento",
+      "populacao": 5447
+    },
+    {
+      "nome": "Putim/Setville",
+      "populacao": 38895
+    },
+    {
+      "nome": "Bom Retiro",
+      "populacao": 17615
+    },
+    {
+      "nome": "Cajuru",
+      "populacao": 6772
+    },
+    {
+      "nome": "Buquirinha",
+      "populacao": 910
+    },
+    {
+      "nome": "Santa Inês",
+      "populacao": 19469
+    },
+    {
+      "nome": "Banhado – Jaguari",
+      "populacao": 342
+    },
+    {
+      "nome": "Banhado – Santana",
+      "populacao": 167
+    },
+    {
+      "nome": "Banhado – Centro",
+      "populacao": 665
+    },
+    {
+      "nome": "Banhado – Martins Guimarães",
+      "populacao": 536
+    },
+    {
+      "nome": "Banhado – Eugênio de Melo",
+      "populacao": 262
+    },
+    {
+      "nome": "Banhado – Limoeiro",
+      "populacao": 1010
+    },
+    {
+      "nome": "Banhado – Vargem Grande",
+      "populacao": 219
+    }
+  ],
+  "mapa_promovivel": false,
+  "metadata_corrections": [
+    "2026 passa de projeção linear a estimativa oficialIBGE ref1jul2026; nota antiga arquivada, não mantida como autoridade",
+    "Taxa urbanização SIDRA9923:classificação situação domicílioIBGE; não usar valores municipais divergentes",
+    "Domicílios ocupados247894 permanentes; média2.8 usa moradores695312, não697054",
+    "Remover autoridade das notas com percentuais/fontes não comprovados mantendo arquivohistórico",
+    "crescimento2010–2022 anualgeométrico0.8474748%, não1.65% municipal; períodos censitários datas1ago2010/1ago2022",
+    "Não promover corraça/religião/distritos/pirâmides2000/2010 com esta evidência"
+  ],
+  "divergencias": {
+    "urbano_rural": {
+      "IBGE": [
+        688155,
+        8899
+      ],
+      "municipal": [
+        681842,
+        15212
+      ]
+    },
+    "area": {
+      "IBGE_2022": 1099.409,
+      "municipal_sem_edicao": 1099.61
+    },
+    "crescimento_2010_2022": {
+      "calculado_pct": 0.8474748065196325,
+      "municipal_pct": 1.65
+    },
+    "cor_raca": {
+      "total": 697054,
+      "soma_cinco_categorias": 697023,
+      "residuo_nao_classificado": 31
+    }
+  }
+}

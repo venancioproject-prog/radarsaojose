@@ -1,0 +1,50 @@
+{
+  "saude_mortalidade_infantil": [
+    "Taxa de mortalidade infantil publicada pela SMS",
+    "SMS-SJC; SIM e SINASC citados na pactuação interfederativa, Prestação de Contas Q3/2025 p.26",
+    "Anual; separar resultados anuais dos quadrimestrais",
+    2024
+  ],
+  "saude_cobertura_atencao_basica": [
+    "Cobertura populacional estimada da Atenção Primária à Saúde (APS)",
+    "SMS-SJC/e-Gestor MS; indicadores ICSAP/APS, Prestação de Contas Q3/2025 p.24",
+    "Resultado anual publicado; 2024 usa última referência MS abril/2024",
+    2024
+  ],
+  "saude_nascidos_vivos_sinasc": [
+    "Nascidos vivos por residência da mãe (SINASC)",
+    "MS/SVS/DASIS/SINASC; RAG SMS-SJC 2025 p.6, consulta13/05/2026",
+    "Anual; ano nascimento e residência da mãe",
+    2024
+  ],
+  "saude_cobertura_vacinal_bcg": [
+    "Cobertura vacinal BCG publicada no balanço municipal",
+    "SMS-SJC; Retrospectiva de Saúde23/12/2025, parágrafo BCG",
+    "Anual2024; 2025 parcial na publicação23/12/2025",
+    2024
+  ],
+  "saude_dengue_sinan": [
+    "Casos confirmados de dengue — balanço SMS SE1–50/2024",
+    "SMS-SJC; SINAN citado na Retrospectiva de Saúde23/12/2025",
+    "Parcial; semanas epidemiológicas1–50",
+    "2024, SE1–50"
+  ],
+  "saude_internacoes_sih": [
+    "Internações SUS de residentes (SIH/SUS)",
+    "MS/SIH/SUS; RAG SMS-SJC2025 pp.6–7, consulta13/05/2026",
+    "Anual; competência SIH, residência do paciente",
+    2024
+  ],
+  "saude_atencao_basica_cnes_sia": [
+    "Cobertura populacional estimada da Atenção Primária à Saúde (APS)",
+    "SMS-SJC/e-Gestor MS; indicadores ICSAP/APS, Prestação de Contas Q3/2025 p.24",
+    "Resultado anual publicado; 2024 usa última referência MS abril/2024",
+    2024
+  ],
+  "saude_causas_mortalidade": [
+    "Óbitos de residentes por capítulos CID-10 (SIM)",
+    "MS/SVS/CGIAE/SIM; RAG SMS-SJC2025 p.7, consulta13/05/2026",
+    "Anual; ano do óbito e residência do falecido",
+    2023
+  ]
+}

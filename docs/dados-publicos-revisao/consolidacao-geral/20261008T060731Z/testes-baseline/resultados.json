@@ -1,0 +1,62 @@
+[
+  {
+    "test": "test_radar_hub_p0.cjs",
+    "exit_code": 1,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_radar_hub_p0.cjs.log"
+  },
+  {
+    "test": "test_economia_runtime.cjs",
+    "exit_code": 1,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_economia_runtime.cjs.log"
+  },
+  {
+    "test": "test_economia_visual.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_economia_visual.cjs.log"
+  },
+  {
+    "test": "test_financas_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_financas_runtime.cjs.log"
+  },
+  {
+    "test": "test_financas_visual.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_financas_visual.cjs.log"
+  },
+  {
+    "test": "test_meio_ambiente_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_meio_ambiente_runtime.cjs.log"
+  },
+  {
+    "test": "test_meio_ambiente_regressions.cjs",
+    "exit_code": 1,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_meio_ambiente_regressions.cjs.log"
+  },
+  {
+    "test": "test_mobilidade_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_mobilidade_runtime.cjs.log"
+  },
+  {
+    "test": "test_mobilidade_regressions.cjs",
+    "exit_code": 1,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_mobilidade_regressions.cjs.log"
+  },
+  {
+    "test": "test_saude_runtime.cjs",
+    "exit_code": 0,
+    "kind": "Node VM / DOM simulado",
+    "output": "docs\\dados-publicos-revisao\\consolidacao-geral\\20261008T060731Z\\testes-baseline\\test_saude_runtime.cjs.log"
+  }
+]

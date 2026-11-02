@@ -1,0 +1,1942 @@
+{
+  "kind": "Chrome real headless; fixture isolada do Radar Hub com DOM de app.html e controller real. App.js não executado. Não é E2E do login/aplicação completa.",
+  "screenshots": false,
+  "events": [
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "network",
+          "level": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "timestamp": 1791443173309.74,
+          "url": "http://127.0.0.1:53014/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "networkRequestId": "35960.129"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "recommendation",
+          "level": "verbose",
+          "text": "[DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o",
+          "timestamp": 1791443173533.292,
+          "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=desktop-online",
+          "args": [
+            {
+              "type": "object",
+              "subtype": "node",
+              "className": "HTMLInputElement",
+              "description": "input#password.w-full.pl-10.pr-10.py-3.bg-slate-50.border.border-slate-200.rounded-xl.text-sm.font-semibold.text-slate-800.placeholder-slate-400.focus:bg-white.focus:outline-none.focus:ring-2.focus:ring-brand-500/30.focus:border-brand-600.transition-all",
+              "objectId": "-7486687349476763534.2.1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "network",
+          "level": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "timestamp": 1791443176254.758,
+          "url": "http://127.0.0.1:53014/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "networkRequestId": "35960.281"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "recommendation",
+          "level": "verbose",
+          "text": "[DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o",
+          "timestamp": 1791443176945.585,
+          "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=desktop-offline",
+          "args": [
+            {
+              "type": "object",
+              "subtype": "node",
+              "className": "HTMLInputElement",
+              "description": "input#password.w-full.pl-10.pr-10.py-3.bg-slate-50.border.border-slate-200.rounded-xl.text-sm.font-semibold.text-slate-800.placeholder-slate-400.focus:bg-white.focus:outline-none.focus:ring-2.focus:ring-brand-500/30.focus:border-brand-600.transition-all",
+              "objectId": "-7486687349476763534.3.1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "method": "Network.loadingFailed",
+      "params": {
+        "requestId": "35960.303",
+        "timestamp": 59394.601661,
+        "type": "Fetch",
+        "errorText": "net::ERR_INTERNET_DISCONNECTED",
+        "canceled": false
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "network",
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+          "timestamp": 1791443177167.01,
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "networkRequestId": "35960.303"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "network",
+          "level": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "timestamp": 1791443182143.278,
+          "url": "http://127.0.0.1:53014/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "networkRequestId": "35960.425"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "recommendation",
+          "level": "verbose",
+          "text": "[DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o",
+          "timestamp": 1791443209767.503,
+          "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=mobile-limitada",
+          "args": [
+            {
+              "type": "object",
+              "subtype": "node",
+              "className": "HTMLInputElement",
+              "description": "input#password.w-full.pl-10.pr-10.py-3.bg-slate-50.border.border-slate-200.rounded-xl.text-sm.font-semibold.text-slate-800.placeholder-slate-400.focus:bg-white.focus:outline-none.focus:ring-2.focus:ring-brand-500/30.focus:border-brand-600.transition-all",
+              "objectId": "-7486687349476763534.4.1"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "mode": "desktop-online",
+      "seconds": 3.1577132000020356,
+      "initialization": {
+        "Chart": "function",
+        "heap": 103406761
+      },
+      "axes": [
+        {
+          "axis": "demografia",
+          "visible": true,
+          "cards": [
+            {
+              "id": "demo_populacao_censo",
+              "value": "697.054"
+            },
+            {
+              "id": "demo_populacao_estimada_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "demo_densidade_demografica",
+              "value": "634,03"
+            },
+            {
+              "id": "demo_domicilios_ocupados",
+              "value": "247.894"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartDemografiaHistorico",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCrescimento",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaPiramide",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCorRaca",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaReligiao",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaRegioes",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaUrbanoRural",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaDomicilios",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "saude",
+          "visible": true,
+          "cards": [
+            {
+              "id": "saude_mortalidade_infantil",
+              "value": "8,2"
+            },
+            {
+              "id": "saude_leitos_hospitalares_total",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_leitos_uti_adulto",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_cobertura_vacinal_bcg",
+              "value": "60,93"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSaudeLeitos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeMortalidade",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeVacinas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeCausas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeNascidos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeDengue",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeInternacoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeAtencaoBasica",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "seguranca",
+          "visible": true,
+          "cards": [
+            {
+              "id": "seg_homicidios_dolosos_2024",
+              "value": "23"
+            },
+            {
+              "id": "seg_roubos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_furtos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_produtividade_prisoes",
+              "value": "Dado não disponível"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSegurancaHomicidios",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSegurancaMensal",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaPatrimonio",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaDDM",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "economia",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartEconomiaPib",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaNominal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSetores",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstrutura",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstoque",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSaldo",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaMovimentacao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaAnual",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEmpresas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaRemuneracao",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "financas",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartFinancasOrcamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasResultado",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasExecucao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasEvolucaoFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasReceitas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasTributos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasConstitucionais",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasInvestimentos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasPessoal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasDivida",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasCaixa",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "meio_ambiente",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMeioAmbienteAr",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMeioAmbienteQueimadas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteSaneamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteTerritorio",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "educacao",
+          "visible": true,
+          "cards": [
+            {
+              "id": "educ_ideb_anos_iniciais",
+              "value": "6,9"
+            },
+            {
+              "id": "educ_ideb_anos_finais",
+              "value": "5,7"
+            },
+            {
+              "id": "educ_matriculas_total_censo",
+              "value": "163.965"
+            },
+            {
+              "id": "educ_taxa_escolarizacao",
+              "value": "99,09"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartEducacaoIdeb",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoMatriculas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoRede",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoFluxo",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "mobilidade",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMobilidadeFrota",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMobilidadeFatalidades",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeVitimas",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeTaxa",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        }
+      ],
+      "export": {
+        "version": "sha256:9f20f59a93862a89eb7b96c0969fce22cccb435e8a7e657a822edf7253f55969",
+        "count": 122,
+        "nullCount": 34,
+        "csvBOM": true,
+        "periods": true,
+        "sourceLinks": true,
+        "mobFuture": 0,
+        "completeCompetencePreserved": true
+      },
+      "network_resources": [
+        {
+          "url": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 459.8999999985099,
+          "transferSize": 22677245,
+          "encodedBodySize": 22676945,
+          "decodedBodySize": 22676945
+        },
+        {
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "duration": 126,
+          "transferSize": 22440792,
+          "encodedBodySize": 22440492,
+          "decodedBodySize": 22440492
+        }
+      ],
+      "network_note": "HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico."
+    },
+    {
+      "mode": "desktop-offline",
+      "seconds": 3.1662597000031383,
+      "initialization": {
+        "Chart": "function",
+        "heap": 102153621
+      },
+      "axes": [
+        {
+          "axis": "demografia",
+          "visible": true,
+          "cards": [
+            {
+              "id": "demo_populacao_censo",
+              "value": "697.054"
+            },
+            {
+              "id": "demo_populacao_estimada_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "demo_densidade_demografica",
+              "value": "634,03"
+            },
+            {
+              "id": "demo_domicilios_ocupados",
+              "value": "247.894"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartDemografiaHistorico",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCrescimento",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaPiramide",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCorRaca",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaReligiao",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaRegioes",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaUrbanoRural",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaDomicilios",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "saude",
+          "visible": true,
+          "cards": [
+            {
+              "id": "saude_mortalidade_infantil",
+              "value": "8,2"
+            },
+            {
+              "id": "saude_leitos_hospitalares_total",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_leitos_uti_adulto",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_cobertura_vacinal_bcg",
+              "value": "60,93"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSaudeLeitos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeMortalidade",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeVacinas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeCausas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeNascidos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeDengue",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeInternacoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeAtencaoBasica",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "seguranca",
+          "visible": true,
+          "cards": [
+            {
+              "id": "seg_homicidios_dolosos_2024",
+              "value": "23"
+            },
+            {
+              "id": "seg_roubos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_furtos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_produtividade_prisoes",
+              "value": "Dado não disponível"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSegurancaHomicidios",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSegurancaMensal",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaPatrimonio",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaDDM",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "economia",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartEconomiaPib",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaNominal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSetores",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstrutura",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstoque",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSaldo",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaMovimentacao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaAnual",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEmpresas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaRemuneracao",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "financas",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartFinancasOrcamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasResultado",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasExecucao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasEvolucaoFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasReceitas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasTributos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasConstitucionais",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasInvestimentos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasPessoal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasDivida",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasCaixa",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "meio_ambiente",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMeioAmbienteAr",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMeioAmbienteQueimadas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteSaneamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteTerritorio",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "educacao",
+          "visible": true,
+          "cards": [
+            {
+              "id": "educ_ideb_anos_iniciais",
+              "value": "6,9"
+            },
+            {
+              "id": "educ_ideb_anos_finais",
+              "value": "5,7"
+            },
+            {
+              "id": "educ_matriculas_total_censo",
+              "value": "163.965"
+            },
+            {
+              "id": "educ_taxa_escolarizacao",
+              "value": "99,09"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartEducacaoIdeb",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoMatriculas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoRede",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoFluxo",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "mobilidade",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMobilidadeFrota",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMobilidadeFatalidades",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeVitimas",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeTaxa",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        }
+      ],
+      "export": {
+        "version": "sha256:9f20f59a93862a89eb7b96c0969fce22cccb435e8a7e657a822edf7253f55969",
+        "count": 122,
+        "nullCount": 34,
+        "csvBOM": true,
+        "periods": true,
+        "sourceLinks": true,
+        "mobFuture": 0,
+        "completeCompetencePreserved": true
+      },
+      "network_resources": [
+        {
+          "url": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 723.6000000014901,
+          "transferSize": 22677245,
+          "encodedBodySize": 22676945,
+          "decodedBodySize": 22676945
+        },
+        {
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "duration": 8.600000001490116,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        }
+      ],
+      "network_note": "HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico."
+    },
+    {
+      "mode": "mobile-limitada",
+      "seconds": 56.10891480000282,
+      "initialization": {
+        "Chart": "function",
+        "heap": 83479577
+      },
+      "axes": [
+        {
+          "axis": "demografia",
+          "visible": true,
+          "cards": [
+            {
+              "id": "demo_populacao_censo",
+              "value": "697.054"
+            },
+            {
+              "id": "demo_populacao_estimada_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "demo_densidade_demografica",
+              "value": "634,03"
+            },
+            {
+              "id": "demo_domicilios_ocupados",
+              "value": "247.894"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartDemografiaHistorico",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCrescimento",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaPiramide",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCorRaca",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaReligiao",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaRegioes",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaUrbanoRural",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaDomicilios",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "saude",
+          "visible": true,
+          "cards": [
+            {
+              "id": "saude_mortalidade_infantil",
+              "value": "8,2"
+            },
+            {
+              "id": "saude_leitos_hospitalares_total",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_leitos_uti_adulto",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_cobertura_vacinal_bcg",
+              "value": "60,93"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSaudeLeitos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeMortalidade",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeVacinas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeCausas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeNascidos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeDengue",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeInternacoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeAtencaoBasica",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "seguranca",
+          "visible": true,
+          "cards": [
+            {
+              "id": "seg_homicidios_dolosos_2024",
+              "value": "23"
+            },
+            {
+              "id": "seg_roubos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_furtos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_produtividade_prisoes",
+              "value": "Dado não disponível"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSegurancaHomicidios",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSegurancaMensal",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaPatrimonio",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaDDM",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "economia",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartEconomiaPib",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaNominal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSetores",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstrutura",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstoque",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSaldo",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaMovimentacao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaAnual",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEmpresas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaRemuneracao",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "financas",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartFinancasOrcamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasResultado",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasExecucao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasEvolucaoFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasReceitas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasTributos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasConstitucionais",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasInvestimentos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasPessoal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasDivida",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasCaixa",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "meio_ambiente",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMeioAmbienteAr",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMeioAmbienteQueimadas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteSaneamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteTerritorio",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "educacao",
+          "visible": true,
+          "cards": [
+            {
+              "id": "educ_ideb_anos_iniciais",
+              "value": "6,9"
+            },
+            {
+              "id": "educ_ideb_anos_finais",
+              "value": "5,7"
+            },
+            {
+              "id": "educ_matriculas_total_censo",
+              "value": "163.965"
+            },
+            {
+              "id": "educ_taxa_escolarizacao",
+              "value": "99,09"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartEducacaoIdeb",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoMatriculas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoRede",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoFluxo",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "mobilidade",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMobilidadeFrota",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMobilidadeFatalidades",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeVitimas",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeTaxa",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        }
+      ],
+      "export": {
+        "version": "sha256:9f20f59a93862a89eb7b96c0969fce22cccb435e8a7e657a822edf7253f55969",
+        "count": 122,
+        "nullCount": 34,
+        "csvBOM": true,
+        "periods": true,
+        "sourceLinks": true,
+        "mobFuture": 0,
+        "completeCompetencePreserved": true
+      },
+      "network_resources": [
+        {
+          "url": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 25498.59999999404,
+          "transferSize": 22677245,
+          "encodedBodySize": 22676945,
+          "decodedBodySize": 22676945
+        },
+        {
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "duration": 23279,
+          "transferSize": 22440792,
+          "encodedBodySize": 22440492,
+          "decodedBodySize": 22440492
+        }
+      ],
+      "network_note": "HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico."
+    }
+  ],
+  "navigations": [
+    {
+      "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=desktop-online",
+      "response": {
+        "frameId": "753F55FC2F1ED020D3481369B8177257",
+        "loaderId": "5A9337273724B160DB2E141996941969",
+        "isDownload": false
+      }
+    },
+    {
+      "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=desktop-offline",
+      "response": {
+        "frameId": "753F55FC2F1ED020D3481369B8177257",
+        "loaderId": "85F3F342DAB19820423982CDD33F722B",
+        "isDownload": false
+      }
+    },
+    {
+      "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=mobile-limitada",
+      "response": {
+        "frameId": "753F55FC2F1ED020D3481369B8177257",
+        "loaderId": "5C50D9AEC69DF1B894C15873A38036CC",
+        "isDownload": false
+      }
+    }
+  ],
+  "ready_diagnostics": [
+    {
+      "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=desktop-online",
+      "title": "Radar São José | Inteligência & Pesquisa Municipal",
+      "ready": "complete",
+      "init": "function",
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap",
+          "duration": 210.30000000447035
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
+          "duration": 123.79999999701977
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap",
+          "duration": 209.29999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/module-hero.css?v=20261003-shell",
+          "duration": 19.19999999552965
+        },
+        {
+          "name": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+          "duration": 121.89999999850988
+        },
+        {
+          "name": "http://127.0.0.1:53014/report-editorial.css",
+          "duration": 22.30000000447035
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js",
+          "duration": 166.90000000596046
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+          "duration": 167.60000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/economia_visual.js",
+          "duration": 29.200000002980232
+        },
+        {
+          "name": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 459.8999999985099
+        },
+        {
+          "name": "http://127.0.0.1:53014/financas_visual.js",
+          "duration": 34.29999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_onibus_viaduto.jpg",
+          "duration": 11.799999997019768
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_cidade.jpg",
+          "duration": 19.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_cultura.jpg",
+          "duration": 17.80000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_gastronomia.jpg",
+          "duration": 26.700000002980232
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_noite.jpg",
+          "duration": 25.600000001490116
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_pessoas.jpg",
+          "duration": 32.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/capa_sjc_skyline.jpg",
+          "duration": 11
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/sjc_rodovia_curva.jpg",
+          "duration": 15.600000001490116
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/sjc_ponte_estaiada.jpg",
+          "duration": 24.80000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "duration": 438.29999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/IMG_2772.jpg",
+          "duration": 31.30000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/pexels-cup-of-couple-6632857.jpg",
+          "duration": 31.200000002980232
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/IMG_2777.jpg",
+          "duration": 37.600000001490116
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/prefeitura_sjc.jpg",
+          "duration": 47.30000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/gentilico.jpg",
+          "duration": 38.70000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2905.jpg",
+          "duration": 48.20000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2824.jpg",
+          "duration": 48.600000001490116
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/bioma_mata_atlantica.jpg",
+          "duration": 64.89999999850988
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/seguranca.jpg",
+          "duration": 70.69999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/saude.jpg",
+          "duration": 82.09999999403954
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/meio_ambiente.jpg",
+          "duration": 82.60000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2889.jpg",
+          "duration": 84.10000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/pexels-energepic-com-27411-159888-300x225.jpg",
+          "duration": 87.19999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/educacao.jpg",
+          "duration": 95.69999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/financas.jpg",
+          "duration": 109.60000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2916.jpg",
+          "duration": 110
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/photo_1.jpg",
+          "duration": 108.30000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/logo.png",
+          "duration": 7.0999999940395355
+        }
+      ],
+      "body": "Dashboard Executivo\n\nInteligência & Análise 2026/2027\n\nEntrar Novo Usuário\n Entrar com o Google\nou preencha os dados\nNome Completo\nE-mail Institucional\nSenha de Acesso\n \nEntrar no Painel \n© Radar São José. Todos os direitos reservados.\n\nInteligência de Mercado\n& Pesquisa Municipal SJC\n\nDados Público"
+    },
+    {
+      "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=desktop-offline",
+      "title": "Radar São José | Inteligência & Pesquisa Municipal",
+      "ready": "complete",
+      "init": "function",
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap",
+          "duration": 175.20000000298023
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
+          "duration": 108.30000000447035
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap",
+          "duration": 178.30000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/module-hero.css?v=20261003-shell",
+          "duration": 31.899999998509884
+        },
+        {
+          "name": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+          "duration": 110.19999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/report-editorial.css",
+          "duration": 40.899999998509884
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+          "duration": 136.79999999701977
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js",
+          "duration": 101.60000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 723.6000000014901
+        },
+        {
+          "name": "http://127.0.0.1:53014/economia_visual.js",
+          "duration": 39.79999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/financas_visual.js",
+          "duration": 61.600000001490116
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_onibus_viaduto.jpg",
+          "duration": 12.399999998509884
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_cidade.jpg",
+          "duration": 20.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_cultura.jpg",
+          "duration": 19.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_gastronomia.jpg",
+          "duration": 35.20000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_noite.jpg",
+          "duration": 36.19999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_pessoas.jpg",
+          "duration": 45.599999994039536
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/capa_sjc_skyline.jpg",
+          "duration": 44.100000001490116
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/sjc_rodovia_curva.jpg",
+          "duration": 43.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/sjc_ponte_estaiada.jpg",
+          "duration": 61.79999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "duration": 215.89999999850988
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/IMG_2772.jpg",
+          "duration": 54.899999998509884
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/pexels-cup-of-couple-6632857.jpg",
+          "duration": 67.70000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/IMG_2777.jpg",
+          "duration": 68.59999999403954
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/prefeitura_sjc.jpg",
+          "duration": 87.70000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/gentilico.jpg",
+          "duration": 77
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2905.jpg",
+          "duration": 75.70000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2824.jpg",
+          "duration": 93.19999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/bioma_mata_atlantica.jpg",
+          "duration": 103.89999999850988
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/seguranca.jpg",
+          "duration": 101.89999999850988
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/saude.jpg",
+          "duration": 100.60000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/meio_ambiente.jpg",
+          "duration": 105.10000000149012
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2889.jpg",
+          "duration": 125.19999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/pexels-energepic-com-27411-159888-300x225.jpg",
+          "duration": 121.39999999850988
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/educacao.jpg",
+          "duration": 136.80000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/financas.jpg",
+          "duration": 148.19999999552965
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2916.jpg",
+          "duration": 149.20000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/photo_1.jpg",
+          "duration": 173.79999999701977
+        }
+      ],
+      "body": "Dashboard Executivo\n\nInteligência & Análise 2026/2027\n\nEntrar Novo Usuário\n Entrar com o Google\nou preencha os dados\nNome Completo\nE-mail Institucional\nSenha de Acesso\n \nEntrar no Painel \n© Radar São José. Todos os direitos reservados.\n\nInteligência de Mercado\n& Pesquisa Municipal SJC\n\nDados Público"
+    },
+    {
+      "url": "http://127.0.0.1:53014/docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/browser-fixture.html?mode=mobile-limitada",
+      "title": "Radar São José | Inteligência & Pesquisa Municipal",
+      "ready": "complete",
+      "init": "function",
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap",
+          "duration": 130
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
+          "duration": 192.89999999850988
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap",
+          "duration": 129.79999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/module-hero.css?v=20261003-shell",
+          "duration": 179.30000000447035
+        },
+        {
+          "name": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+          "duration": 199.20000000298023
+        },
+        {
+          "name": "http://127.0.0.1:53014/report-editorial.css",
+          "duration": 146
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_onibus_viaduto.jpg",
+          "duration": 1185.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_cultura.jpg",
+          "duration": 1397.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_cidade.jpg",
+          "duration": 1655.2999999970198
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_noite.jpg",
+          "duration": 1888.6999999955297
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_pessoas.jpg",
+          "duration": 2527.6999999955297
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/foto_gastronomia.jpg",
+          "duration": 2682.39999999851
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/capa_sjc_skyline.jpg",
+          "duration": 2390.60000000149
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/sjc_rodovia_curva.jpg",
+          "duration": 2720
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/sjc_ponte_estaiada.jpg",
+          "duration": 3706.89999999851
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "duration": 1207.3999999985099
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/IMG_2772.jpg",
+          "duration": 2019.6000000014901
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/pexels-cup-of-couple-6632857.jpg",
+          "duration": 1612
+        },
+        {
+          "name": "http://127.0.0.1:53014/mais_fotos_radar/IMG_2777.jpg",
+          "duration": 2073.7000000029802
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/prefeitura_sjc.jpg",
+          "duration": 3675.2000000029802
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/gentilico.jpg",
+          "duration": 2396
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2905.jpg",
+          "duration": 2419.1999999955297
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2824.jpg",
+          "duration": 2722.9000000059605
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/bioma_mata_atlantica.jpg",
+          "duration": 3985.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/seguranca.jpg",
+          "duration": 3242.10000000149
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/saude.jpg",
+          "duration": 3418.0999999940395
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/meio_ambiente.jpg",
+          "duration": 3541.7000000029802
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2889.jpg",
+          "duration": 4412.29999999702
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/pexels-energepic-com-27411-159888-300x225.jpg",
+          "duration": 3504
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/educacao.jpg",
+          "duration": 4194.5
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/financas.jpg",
+          "duration": 4765.89999999851
+        },
+        {
+          "name": "http://127.0.0.1:53014/Mais%20fotos%20radar/IMG_2916.jpg",
+          "duration": 4780.30000000447
+        },
+        {
+          "name": "http://127.0.0.1:53014/fotos_radar/photo_1.jpg",
+          "duration": 3687.1999999955297
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+          "duration": 653.2999999970198
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js",
+          "duration": 191.79999999701977
+        },
+        {
+          "name": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 25498.59999999404
+        },
+        {
+          "name": "http://127.0.0.1:53014/economia_visual.js",
+          "duration": 509.30000000447035
+        },
+        {
+          "name": "http://127.0.0.1:53014/financas_visual.js",
+          "duration": 675.8000000044703
+        }
+      ],
+      "body": "Dashboard Executivo\n\nInteligência & Análise 2026/2027\n\nEntrar Novo Usuário\n Entrar com o Google\nou preencha os dados\nNome Completo\nE-mail Institucional\nSenha de Acesso\n \nEntrar no Painel \n© Radar São José. Todos os direitos reservados.\n\nInteligência de Mercado\n& Pesquisa Municipal SJC\n\nDados Público"
+    }
+  ],
+  "status": "PASS"
+}

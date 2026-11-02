@@ -1,0 +1,36 @@
+name: Atualizar Vagas SJC (2x ao dia)
+
+on:
+  schedule:
+    # 11:00 UTC = 08:00 AM Horário de Brasília
+    # 21:00 UTC = 18:00 PM Horário de Brasília
+    - cron: '0 11,21 * * *'
+  workflow_dispatch: # Permite disparo manual a qualquer momento via painel do GitHub
+
+jobs:
+  sincronizar-vagas:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Executar Agregador de Vagas de SJC
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://tocyvysucpslayzglixq.supabase.co' }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY || 'sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT' }}
+        run: node scripts/sync_vagas_sjc.js
+
+      - name: Salvar e Publicar Vagas Atualizadas
+        run: |
+          git config --local user.email "bot@radarsaojose.com.br"
+          git config --local user.name "Radar SJC Bot"
+          git add vagas_sjc.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(vagas): sincronização automática de vagas em SJC [skip ci]" && git push)

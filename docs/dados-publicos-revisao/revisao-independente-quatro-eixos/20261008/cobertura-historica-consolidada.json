@@ -1,0 +1,72 @@
+[
+  {
+    "axis": "educacao",
+    "family": "IDEB, rendimento e SAEB",
+    "before": "2005–2025, três redes",
+    "after": "11 ciclos2005–2025, Pública/Municipal/Estadual, AI/AF;741 células",
+    "limits": "Metas primeiro ciclo2007–2021; metas2023/2025 ausentes. IDEB, nota SAEB e percentuais não equivalentes."
+  },
+  {
+    "axis": "educacao",
+    "family": "Censo Escolar: matrículas/redes/docentes/estabelecimentos/turmas",
+    "before": "Corte2023",
+    "after": "2023–2025; totais163965/161959/156378, quatro redes",
+    "limits": "2025V2 alterou colunas; profissional/especial sobrepõem etapas. Docentes por etapa não são somáveis; estabelecimentos seguem definição da sinopse."
+  },
+  {
+    "axis": "educacao",
+    "family": "Distorção idade-série e rendimento",
+    "before": "Sem série integrada",
+    "after": "2025,32recortes,1136células, redes/localização/etapas explícitas",
+    "limits": "Não preencher anos anteriores nem combinar Total/Pública/componentes."
+  },
+  {
+    "axis": "saude",
+    "family": "SINASC, SIH e SIM por residência",
+    "before": "SINASC/SIH2021–2024;SIM2023–2024",
+    "after": "SINASC2015–2024,SIH2015–2025,SIM2015–2024;31observações selecionadas",
+    "limits": "RAG SMS reproduz DATASUS; extração nacional direta não concluída.85observações de edições preservadas; três revisõesSIH documentadas."
+  },
+  {
+    "axis": "saude",
+    "family": "Dengue CVE por residência/início dos sintomas",
+    "before": "Ausente; boletinsSMS de outro universo",
+    "after": "2019–2025, sete totais e84meses",
+    "limits": "CVE98256/5554 não substitui SMS98163/5529SE1–50. Não atribuir diferença somente às semanas finais."
+  },
+  {
+    "axis": "saude",
+    "family": "CNES por código nativo",
+    "before": "KPIs suspensos",
+    "after": "52linhas, competência12/2024, somente série discreta limitada/export",
+    "limits": "HABILITADOS ≠ SUS. Hospital-dia/complementares/subtipos têm universos distintos. NoveKPIsSaúde continuamnull."
+  },
+  {
+    "axis": "seguranca",
+    "family": "Ocorrências e vítimas SSP",
+    "before": "Anual2001–2025; recortes mensais suspensos",
+    "after": "545recortes anuais/parciais e6540células mensais2001–2026;25anos completos por categorias disponíveis",
+    "limits": "Quatro contagens2001 conflitantes suspensas; mudança registro→ocorrência julho2001. Doisregistros2015semcompetência rejeitados;2026jan–ago somente."
+  },
+  {
+    "axis": "seguranca",
+    "family": "Taxas SSP e produtividade",
+    "before": "Taxa homicídios e produtividade sem vínculo suficiente",
+    "after": "189taxas1999–2025 de sete famílias e13categorias produtividade2024",
+    "limits": "Taxas nativas SEADE/veículos, não recalculadas comIBGEatual. Prisões2170 não pessoas únicas. CSI/DEIC/ranking continuam suspensos."
+  },
+  {
+    "axis": "demografia",
+    "family": "Censos e estimativas",
+    "before": "Censo2022;estimativas suspensas",
+    "after": "Seiscensos1970–2022 e22estimativas2001–2026, famílias separadas",
+    "limits": "Estimativas ausentes2007/2010/2022/2023 não preenchidas. Comparabilidade territorial e revisões precisam de contexto."
+  },
+  {
+    "axis": "demografia",
+    "family": "Idade, sexo, situação e domicílios",
+    "before": "Pirâmide suspensa; totais municipais",
+    "after": "21faixas com homens, mulheres e total2022; situação urbana/rural e13categorias domiciliares",
+    "limits": "Cor/raça residual31 pendente; não completar categorias. Classificação IBGE diverge municipal; não associar tabelas aos35polígonos."
+  }
+]

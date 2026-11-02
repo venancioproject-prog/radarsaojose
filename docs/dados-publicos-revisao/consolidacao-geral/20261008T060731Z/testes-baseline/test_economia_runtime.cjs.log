@@ -1,0 +1,14 @@
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'VALIDADO_EXTERNAMENTE'
+- 'CONFIRMADO'
+
+    at run (C:\Users\leose\OneDrive\Documentos\GitHub\radarsaojose\scripts\test_economia_runtime.cjs:21:270) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'VALIDADO_EXTERNAMENTE',
+  expected: 'CONFIRMADO',
+  operator: 'strictEqual',
+  diff: 'simple'
+}

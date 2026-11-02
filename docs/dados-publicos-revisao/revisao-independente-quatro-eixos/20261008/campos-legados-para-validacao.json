@@ -1,0 +1,778 @@
+[
+  {
+    "id": "saude_mortalidade_infantil",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-infantil-sjc-2010-2025.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_mortalidade_infantil",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+      "locator": {
+        "page": 26,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "excerpt": "Valor conferido: 8.2; referência: 2024; 2025: 7,65; página/seção: 26."
+      },
+      "value": 8.2,
+      "unit": "obitos por mil nascidos vivos",
+      "period": "2024; 2025: 7,65",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_mortalidade_infantil",
+    "field": "trecho_bruto",
+    "value": "SMS-SJC Relatorio de Gestao Quadri 3/2025 Pag. 26: Taxa de Mortalidade Infantil 2024 = 8,20 obitos/mil (66 obitos e 8.048 nascidos vivos); preliminar 2025 = 7,65 (61 obitos e 7.974 nascidos vivos); IBGE Cidades = 7,77",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_mortalidade_infantil",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+      "locator": {
+        "page": 26,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "excerpt": "Valor conferido: 8.2; referência: 2024; 2025: 7,65; página/seção: 26."
+      },
+      "value": 8.2,
+      "unit": "obitos por mil nascidos vivos",
+      "period": "2024; 2025: 7,65",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_leitos_hospitalares_total",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_hospitalares_total",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC (Municipio 3549904): 1.894 leitos hospitalares totais cadastrados (846 SUS e 1.048 Privado/Nao-SUS)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_sus",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_sus",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC: 846 leitos SUS (698 clinicos/cirurgicos + 102 UTI adulto + 18 UTI ped + 28 UTI neo = 846)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_nao_sus",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_nao_sus",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC: 1.048 leitos Nao-SUS (864 clinicos/cirurgicos + 138 UTI adulto + 16 UTI ped + 30 UTI neo = 1.048)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_taxa_leitos_mil_hab",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_taxa_leitos_mil_hab",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC: 1.894 leitos / 724.756 hab (IBGE DOU 2024) * 1.000 = 2,61 leitos por mil habitantes",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_uti_adulto",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_uti_adulto",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC: 240 leitos de UTI Adulto (102 SUS e 138 Nao-SUS)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_uti_pediatrica",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-leitos-hospitalares-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_leitos_uti_pediatrica",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC: 34 leitos UTI Pediatrica (18 SUS, 16 Nao-SUS) e 58 leitos UTI Neonatal (28 SUS, 30 Nao-SUS), totalizando 92 leitos",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+    }
+  },
+  {
+    "id": "saude_estabelecimentos_total",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-cnes-estabelecimentos-sjc-202412.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente."
+    }
+  },
+  {
+    "id": "saude_estabelecimentos_total",
+    "field": "trecho_bruto",
+    "value": "CNES Dez/2024 SJC: 825 estabelecimentos de saude cadastrados no total (40 UBSs CNES, 5 UPAs, 11 hospitais, 6 CAPS)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente."
+    }
+  },
+  {
+    "id": "saude_cobertura_atencao_basica",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_cobertura_atencao_basica",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+      "locator": {
+        "page": 24,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+      },
+      "value": 61.63,
+      "unit": "%",
+      "period": "2024 (último dado MS: abril)",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_cobertura_atencao_basica",
+    "field": "trecho_bruto",
+    "value": "e-Gestor AB / SMS-SJC 2024: 83,5% de cobertura populacional da atencao basica com 142 equipes de Saude da Familia e 1.418.520 consultas realizadas",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_cobertura_atencao_basica",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+      "locator": {
+        "page": 24,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+      },
+      "value": 61.63,
+      "unit": "%",
+      "period": "2024 (último dado MS: abril)",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_nascidos_vivos_sinasc",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-sinasc-nascidos-vivos-parto-sjc-2010-2024.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_nascidos_vivos_sinasc",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "locator": {
+        "page": 6,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "excerpt": "Valor conferido: 7463; referência: 2024; página/seção: 6."
+      },
+      "value": 7463,
+      "unit": "nascidos vivos",
+      "period": "2024",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_nascidos_vivos_sinasc",
+    "field": "trecho_bruto",
+    "value": "SINASC 2024 SJC: 7.463 nascidos vivos de maes residentes (4.660 cesareos e 2.801 vaginais); distribuicao por 9 faixas etarias maternas",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_nascidos_vivos_sinasc",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "locator": {
+        "page": 6,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "excerpt": "Valor conferido: 7463; referência: 2024; página/seção: 6."
+      },
+      "value": 7463,
+      "unit": "nascidos vivos",
+      "period": "2024",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_cobertura_vacinal_bcg",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_cobertura_vacinal_bcg",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+      "locator": {
+        "page": null,
+        "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+        "excerpt": "Valor conferido: 60.93; referência: 2024; parcial 2025: 91,67%; página/seção: balanço municipal."
+      },
+      "value": 60.93,
+      "unit": "%",
+      "period": "2024; parcial 2025: 91,67%",
+      "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_cobertura_vacinal_bcg",
+    "field": "trecho_bruto",
+    "value": "PNI / RNDS SJC 2024: Cobertura vacinal BCG em menores de 1 ano = 60,93% (meta PNI: 90,0%); preliminar 2025 = 91,67%",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_cobertura_vacinal_bcg",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+      "locator": {
+        "page": null,
+        "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+        "excerpt": "Valor conferido: 60.93; referência: 2024; parcial 2025: 91,67%; página/seção: balanço municipal."
+      },
+      "value": 60.93,
+      "unit": "%",
+      "period": "2024; parcial 2025: 91,67%",
+      "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_dengue_sinan",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-sinan-dengue-casos-sjc-2010-2024.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_dengue_sinan",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+      "locator": {
+        "page": null,
+        "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+        "excerpt": "Valor conferido: 98163; referência: 2024, SE 1–50 (parcial); página/seção: balanço municipal."
+      },
+      "value": 98163,
+      "unit": "casos confirmados",
+      "period": "2024, SE 1–50 (parcial)",
+      "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_dengue_sinan",
+    "field": "trecho_bruto",
+    "value": "SINAN / SMS-SJC 2024: 98.219 casos confirmados de dengue no total de 2024 (megaepidemia); 98.163 na SE 1-50 parcial; media historica 2010-2023 = 1.876",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_dengue_sinan",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+      "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+      "locator": {
+        "page": null,
+        "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+        "excerpt": "Valor conferido: 98163; referência: 2024, SE 1–50 (parcial); página/seção: balanço municipal."
+      },
+      "value": 98163,
+      "unit": "casos confirmados",
+      "period": "2024, SE 1–50 (parcial)",
+      "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_internacoes_sih",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-sih-internacoes-hospitalares-sjc-2024.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_internacoes_sih",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "locator": {
+        "page": "6–7",
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "excerpt": "Valor conferido: 38738; referência: 2024; página/seção: 6–7."
+      },
+      "value": 38738,
+      "unit": "internacoes (AIHs)",
+      "period": "2024",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_internacoes_sih",
+    "field": "trecho_bruto",
+    "value": "SIH/SUS 2024 SJC: 54.709 internacoes totais de residentes aprovadas; Top 1 aparelho circulatorio com 7.914 AIHs",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_internacoes_sih",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "locator": {
+        "page": "6–7",
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "excerpt": "Valor conferido: 38738; referência: 2024; página/seção: 6–7."
+      },
+      "value": 38738,
+      "unit": "internacoes (AIHs)",
+      "period": "2024",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_atencao_basica_cnes_sia",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-egestor-atencao-basica-esf-sjc-2024.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_atencao_basica_cnes_sia",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+      "locator": {
+        "page": 24,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+      },
+      "value": 61.63,
+      "unit": "%",
+      "period": "2024 (último dado MS: abril)",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_atencao_basica_cnes_sia",
+    "field": "trecho_bruto",
+    "value": "CNES / e-Gestor / SMS-SJC 2024: 83,5% de cobertura APS, 40 UBSs CNES (45 rede municipal), 142 equipes de Saude da Familia e 1.418.520 consultas",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_atencao_basica_cnes_sia",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+      "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+      "locator": {
+        "page": 24,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+        "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+      },
+      "value": 61.63,
+      "unit": "%",
+      "period": "2024 (último dado MS: abril)",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_procedimentos_sia_sih",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-sia-sih-procedimentos-status-suspensao.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema."
+    }
+  },
+  {
+    "id": "saude_procedimentos_sia_sih",
+    "field": "trecho_bruto",
+    "value": "DataSUS SIA/SIH-SUS: Indicador temporariamente suspenso para revisao metodologica dos denominadores de alta complexidade e producao ambulatorial municipal",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema."
+    }
+  },
+  {
+    "id": "seg_homicidios_dolosos_2024",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ocorrencias-anuais-sjc-2001-2025.json",
+    "active_evidence": {
+      "evidence_id": "cons:ssp:seg_homicidios_dolosos_2024",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212",
+      "locator": {
+        "idUnidade": 560,
+        "ano": 2024,
+        "variable": "homicidio"
+      },
+      "value": 23,
+      "unit": "ocorrencias",
+      "period": "2024",
+      "source_url": "https://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "seg_homicidios_dolosos_2024",
+    "field": "trecho_bruto",
+    "value": "SSP-SP Estatisticas Criminais SJC (idMunicipio 560) 2024: 23 ocorrencias de homicidio doloso e 23 vitimas registradas",
+    "active_evidence": {
+      "evidence_id": "cons:ssp:seg_homicidios_dolosos_2024",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212",
+      "locator": {
+        "idUnidade": 560,
+        "ano": 2024,
+        "variable": "homicidio"
+      },
+      "value": 23,
+      "unit": "ocorrencias",
+      "period": "2024",
+      "source_url": "https://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "seg_taxa_homicidios",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-taxas-delito-sjc-2001-2025.json",
+    "active_evidence": {
+      "evidence_id": "cons:ssp:seg_taxa_homicidios",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-taxas.json",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-taxas.json",
+      "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+      "locator": {
+        "idUnidade": 560,
+        "ano": 2024,
+        "variable": "homicidios"
+      },
+      "value": 3.28,
+      "unit": "homicidios / 100k hab",
+      "period": "2024",
+      "source_url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "seg_taxa_homicidios",
+    "field": "trecho_bruto",
+    "value": "SSP-SP Taxas de Delito SJC 2024: Taxa de Homicidios Dolosos = 3,28 por 100 mil habitantes (2001: 44,79; 2016: 11,04; 2023: 6,28)",
+    "active_evidence": {
+      "evidence_id": "cons:ssp:seg_taxa_homicidios",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-taxas.json",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-taxas.json",
+      "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+      "locator": {
+        "idUnidade": 560,
+        "ano": 2024,
+        "variable": "homicidios"
+      },
+      "value": 3.28,
+      "unit": "homicidios / 100k hab",
+      "period": "2024",
+      "source_url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "seg_roubos_veiculos_2024",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ocorrencias-anuais-sjc-2001-2025.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_roubos_veiculos_2024",
+    "field": "trecho_bruto",
+    "value": "SSP-SP Ocorrencias Anuais SJC 2024: 143 ocorrencias de roubo de veiculo (taxa: 28,68 por 100 mil veiculos)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_furtos_veiculos_2024",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ocorrencias-anuais-sjc-2001-2025.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_furtos_veiculos_2024",
+    "field": "trecho_bruto",
+    "value": "SSP-SP Ocorrencias Anuais SJC 2024: 724 ocorrencias de furto de veiculo (taxa: 145,22 por 100 mil veiculos)",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_roubos_gerais",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ocorrencias-anuais-sjc-2001-2025.json",
+    "active_evidence": {
+      "evidence_id": "cons:ssp:seg_roubos_gerais",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212",
+      "locator": {
+        "idUnidade": 560,
+        "ano": 2024,
+        "variable": "roubo"
+      },
+      "value": 965,
+      "unit": "ocorrencias",
+      "period": "2024",
+      "source_url": "https://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "seg_roubos_gerais",
+    "field": "trecho_bruto",
+    "value": "SSP-SP Ocorrencias Anuais SJC 2024: 965 roubos outros (exclui roubos de carga e veiculo); taxa: 137,80 por 100k hab",
+    "active_evidence": {
+      "evidence_id": "cons:ssp:seg_roubos_gerais",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+      "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212",
+      "locator": {
+        "idUnidade": 560,
+        "ano": 2024,
+        "variable": "roubo"
+      },
+      "value": 965,
+      "unit": "ocorrencias",
+      "period": "2024",
+      "source_url": "https://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "seg_produtividade_prisoes",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-produtividade-policial-sjc-2024.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_produtividade_prisoes",
+    "field": "trecho_bruto",
+    "value": "SSP-SP Produtividade Policial SJC 2024: 2.170 prisoes efetuadas, 1.295 flagrantes lavrados, 452 veiculos recuperados e 199 armas apreendidas",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_sao_jose_unida",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/csi-sao-jose-unida-monitoramento-2024.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_sao_jose_unida",
+    "field": "trecho_bruto",
+    "value": "Centro de Seguranca Integrada (CSI) / Programa Sao Jose Unida 2024: 2.948 ocorrencias atendidas, 674 veiculos recuperados, 298 procurados recapturados e 1.373 detidos por cameras",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_ranking_500k",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ranking-deic-esclarecimento-2024.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_ranking_500k",
+    "field": "trecho_bruto",
+    "value": "Ranking SSP-SP Cidades >500k SP 2024: Sao Jose dos Campos lidera com a menor taxa de homicidios (3,28/100k), superando Ribeirao Preto, Sorocaba e Campinas",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_esclarecimento_deic",
+    "field": "raw_file",
+    "value": "data/radar_hub/seguranca_raw_2026-10-06/ssp-sp-ranking-deic-esclarecimento-2024.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "seg_esclarecimento_deic",
+    "field": "trecho_bruto",
+    "value": "DEIC / Policia Civil de Sao Jose dos Campos 2024: Indice de esclarecimento de homicidios de 87,0%, com forte integracao pericial e CSI",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "Sem resposta original e definição suficiente para este recorte. Endpoint anual retorna 0 nos campos por tipo de veículo, mas FRV=867 em 2024; zeros não aceitos como ausência de crimes. CSI/DEIC/ranking exigem fonte e metodologia próprias."
+    }
+  },
+  {
+    "id": "saude_causas_mortalidade",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/datasus-sim-mortalidade-geral-cid10-sjc-2023-2024.json",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_causas_mortalidade",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "locator": {
+        "page": 7,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "excerpt": "Valor conferido: 4677; referência: 2023; 2024: 5.028; página/seção: 7."
+      },
+      "value": 4677,
+      "unit": "obitos de residentes",
+      "period": "2023; 2024: 5.028",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_causas_mortalidade",
+    "field": "trecho_bruto",
+    "value": "SIM 2024 SJC: 5.028 obitos de residentes categorizados por capitulos CID-10 com fechamento em 100,0% (Aparelho Circulatorio 27%, Neoplasias 21%, Respiratorio 13%)",
+    "active_evidence": {
+      "evidence_id": "cons:saude:saude_causas_mortalidade",
+      "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+      "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+      "locator": {
+        "page": 7,
+        "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+        "excerpt": "Valor conferido: 4677; referência: 2023; 2024: 5.028; página/seção: 7."
+      },
+      "value": 4677,
+      "unit": "obitos de residentes",
+      "period": "2023; 2024: 5.028",
+      "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "accessed_at": "2026-10-08",
+      "territory": "São José dos Campos/SP; IBGE 3549904",
+      "status": "CONFIRMADO_FONTE_OFICIAL"
+    }
+  },
+  {
+    "id": "saude_cobertura_vacinal",
+    "field": "raw_file",
+    "value": "data/radar_hub/saude_raw_2026-10-06/pni-rnds-cobertura-vacinal-sjc-2024-2025.json",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada."
+    }
+  },
+  {
+    "id": "saude_cobertura_vacinal",
+    "field": "trecho_bruto",
+    "value": "PNI / RNDS SJC: Cobertura vacinal multianual mapeada para 7 imunobiologicos prioritarios em 2024 e 2025 com discriminacao de faixas etarias e metas oficiais",
+    "active_evidence": {
+      "status": "SUSPENSO",
+      "reason": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada."
+    }
+  }
+]

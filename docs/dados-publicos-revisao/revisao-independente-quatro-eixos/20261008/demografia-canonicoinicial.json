@@ -1,0 +1,1913 @@
+{
+  "axis": "demografia",
+  "indicators": [
+    {
+      "indicator_id": "demo_populacao_censo",
+      "name": "Populacao Residente (Censo 2022)",
+      "category": "demografia",
+      "value": 697054.0,
+      "unit": "habitantes",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo Demográfico 2022 / SIDRA Tabela 4714",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Contagem censitária universal de pessoas residentes em domicílios particulares e coletivos com data de referência em 1º de agosto de 2022, retificada pós-revisão técnica.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/4714",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_populacao_censo",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+        "sha256": "3d3098541730a46b96a9ca969fe254418d16ef16be7461993a06228596535793",
+        "locator": {
+          "row": 2,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "45",
+            "MN": "Pessoas",
+            "V": "697054",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "93",
+            "D2N": "População residente",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 697054.0,
+        "unit": "habitantes",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/4714",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_populacao_censo",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_populacao_estimada_2024",
+      "name": "Populacao Estimada (IBGE 2024)",
+      "category": "demografia",
+      "value": null,
+      "unit": "habitantes",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Estimativas Populacionais DOU 2024 / Portaria 1099",
+      "base_year": "2024",
+      "frequency": "Anual",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resumo interno não substitui tabela oficial original. Projeção tendencial 2026 não é estimativa oficial do IBGE; urbanização tem divergência entre 98,2 e 98,72; manter suspenso até recorte compatível.",
+      "methodology": "Estimativa populacional calculada pelo método das componentes demográficas com base no Censo 2022 e registros civis.",
+      "official_url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Resumo interno não substitui tabela oficial original. Projeção tendencial 2026 não é estimativa oficial do IBGE; urbanização tem divergência entre 98,2 e 98,72; manter suspenso até recorte compatível."
+      },
+      "competencia": "2024",
+      "evidence_id": null,
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_populacao_estimada_2026",
+      "name": "Projecao Demografica Tendencial (2026)",
+      "category": "demografia",
+      "value": null,
+      "unit": "habitantes",
+      "source_agency": "Fundação SEADE / IBGE",
+      "source_system": "Projeções Populacionais Municipais",
+      "base_year": "2026",
+      "frequency": "Bienal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resumo interno não substitui tabela oficial original. Projeção tendencial 2026 não é estimativa oficial do IBGE; urbanização tem divergência entre 98,2 e 98,72; manter suspenso até recorte compatível.",
+      "methodology": "Extrapolação geométrica de tendência populacional baseada no crescimento de 0,82% ao ano.",
+      "official_url": "https://repositorio.seade.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Resumo interno não substitui tabela oficial original. Projeção tendencial 2026 não é estimativa oficial do IBGE; urbanização tem divergência entre 98,2 e 98,72; manter suspenso até recorte compatível."
+      },
+      "competencia": "2026",
+      "evidence_id": null,
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_domicilios_total",
+      "name": "Total de Domicilios Recenseados (Censo 2022)",
+      "category": "demografia",
+      "value": 282214.0,
+      "unit": "domicilios",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo Demográfico 2022 / SIDRA Tabela 4714",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Total de domicílios particulares permanentes, improvisados e coletivos mapeados na operação censitária.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/4711",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_domicilios_total",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4711.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4711.json",
+        "sha256": "248e59cedcfebfe31fdf1b656a146346539cf1d84f1e6f1a88d80e7806465e42",
+        "locator": {
+          "row": 2,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "1708",
+            "MN": "Domicílios",
+            "V": "282214",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "617",
+            "D2N": "Domicílios recenseados",
+            "D3C": "2022",
+            "D3N": "2022",
+            "D4C": "59993",
+            "D4N": "Total"
+          }
+        },
+        "value": 282214.0,
+        "unit": "domicilios",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/4711",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_domicilios_total",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_domicilios_ocupados",
+      "name": "Domicilios Particulares Permanentes Ocupados (Censo 2022)",
+      "category": "demografia",
+      "value": 247894.0,
+      "unit": "domicilios particulares ocupados",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo Demográfico 2022 / IBGE Cidades",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Domicílios particulares permanentes habitados no momento da entrevista do Censo 2022.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/4712",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_domicilios_ocupados",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4712.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4712.json",
+        "sha256": "89ed3f20e4050d82722748cb21704bf1a3e1a61cb42269d7fa9649bc7b455dfd",
+        "locator": {
+          "row": 2,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "1708",
+            "MN": "Domicílios",
+            "V": "247894",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "381",
+            "D2N": "Domicílios particulares permanentes ocupados",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 247894.0,
+        "unit": "domicilios particulares ocupados",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/4712",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_domicilios_ocupados",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_media_moradores",
+      "name": "Media de Moradores por Domicilio Particular Ocupado",
+      "category": "demografia",
+      "value": 2.8,
+      "unit": "moradores/domicilio",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo Demográfico 2022",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Razão direta entre o total de residentes em domicílios particulares permanentes e o total de domicílios ocupados.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/4712",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_media_moradores",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4712.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4712.json",
+        "sha256": "89ed3f20e4050d82722748cb21704bf1a3e1a61cb42269d7fa9649bc7b455dfd",
+        "locator": {
+          "row": 4,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "45",
+            "MN": "Pessoas",
+            "V": "2.80",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "5930",
+            "D2N": "Média de moradores em domicílios particulares permanentes ocupados",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 2.8,
+        "unit": "moradores/domicilio",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/4712",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_media_moradores",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_area_territorial",
+      "name": "Area Territorial Oficial",
+      "category": "demografia",
+      "value": 1099.409,
+      "unit": "km2",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Malha Municipal e Quadro Territorial",
+      "base_year": "2022",
+      "frequency": "Anual",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Cálculo geodésico da extensão territorial da malha oficial do município.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/4714",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_area_territorial",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+        "sha256": "3d3098541730a46b96a9ca969fe254418d16ef16be7461993a06228596535793",
+        "locator": {
+          "row": 3,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "26",
+            "MN": "Quilômetros quadrados",
+            "V": "1099.409",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "6318",
+            "D2N": "Área da unidade territorial",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 1099.409,
+        "unit": "km2",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/4714",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_area_territorial",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_densidade_demografica",
+      "name": "Densidade Demografica",
+      "category": "demografia",
+      "value": 634.03,
+      "unit": "hab/km2",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo Demográfico 2022",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Divisão da população total de 697.054 habitantes pela área territorial de 1.099,4 km².",
+      "official_url": "https://sidra.ibge.gov.br/tabela/4714",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_densidade_demografica",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+        "sha256": "3d3098541730a46b96a9ca969fe254418d16ef16be7461993a06228596535793",
+        "locator": {
+          "row": 4,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "28",
+            "MN": "Habitante por quilômetro quadrado",
+            "V": "634.03",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "614",
+            "D2N": "Densidade demográfica",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 634.03,
+        "unit": "hab/km2",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/4714",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_densidade_demografica",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_taxa_urbanizacao",
+      "name": "Taxa de Urbanizacao",
+      "category": "demografia",
+      "value": null,
+      "unit": "%",
+      "source_agency": "IBGE / Fundação SEADE",
+      "source_system": "Pesquisas Demográficas Regionais",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "SUSPENSO",
+      "audit_status": "SUSPENSO",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resumo interno não substitui tabela oficial original. Projeção tendencial 2026 não é estimativa oficial do IBGE; urbanização tem divergência entre 98,2 e 98,72; manter suspenso até recorte compatível.",
+      "methodology": "Percentual de habitantes domiciliados dentro do perímetro urbano legal.",
+      "official_url": "https://repositorio.seade.gov.br/",
+      "verificacao": "nao_verificado",
+      "evidencia": {
+        "status": "SUSPENSO",
+        "reason": "Resumo interno não substitui tabela oficial original. Projeção tendencial 2026 não é estimativa oficial do IBGE; urbanização tem divergência entre 98,2 e 98,72; manter suspenso até recorte compatível."
+      },
+      "competencia": "2022",
+      "evidence_id": null,
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_populacao_mulheres",
+      "name": "Populacao Feminina Residente",
+      "category": "demografia",
+      "value": 361695.0,
+      "unit": "habitantes",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo 2022 / SIDRA Tabela 9514",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Contagem censitária de pessoas residentes do sexo feminino (51,5% do total municipal).",
+      "official_url": "https://sidra.ibge.gov.br/tabela/9514",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_populacao_mulheres",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9514-total-idade.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9514-total-idade.json",
+        "sha256": "f188cbdc19452b24a0d67178d01d370c200d1c89322076d095bb415971ec492c",
+        "locator": {
+          "row": 4,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "45",
+            "MN": "Pessoas",
+            "V": "361695",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "93",
+            "D2N": "População residente",
+            "D3C": "2022",
+            "D3N": "2022",
+            "D4C": "5",
+            "D4N": "Mulheres",
+            "D5C": "100362",
+            "D5N": "Total",
+            "D6C": "113635",
+            "D6N": "Total"
+          }
+        },
+        "value": 361695.0,
+        "unit": "habitantes",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/9514",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_populacao_mulheres",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_populacao_homens",
+      "name": "Populacao Masculina Residente",
+      "category": "demografia",
+      "value": 335359.0,
+      "unit": "habitantes",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo 2022 / SIDRA Tabela 9514",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Contagem censitária de pessoas residentes do sexo masculino (48,5% do total municipal).",
+      "official_url": "https://sidra.ibge.gov.br/tabela/9514",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_populacao_homens",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9514-total-idade.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9514-total-idade.json",
+        "sha256": "f188cbdc19452b24a0d67178d01d370c200d1c89322076d095bb415971ec492c",
+        "locator": {
+          "row": 3,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "45",
+            "MN": "Pessoas",
+            "V": "335359",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "93",
+            "D2N": "População residente",
+            "D3C": "2022",
+            "D3N": "2022",
+            "D4C": "4",
+            "D4N": "Homens",
+            "D5C": "100362",
+            "D5N": "Total",
+            "D6C": "113635",
+            "D6N": "Total"
+          }
+        },
+        "value": 335359.0,
+        "unit": "habitantes",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/9514",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_populacao_homens",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_razao_sexo",
+      "name": "Razao de Sexo (Homens por 100 Mulheres)",
+      "category": "demografia",
+      "value": 92.72,
+      "unit": "homens/100 mulheres",
+      "source_agency": "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+      "source_system": "Censo 2022 / SIDRA Tabela 9514",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Quociente da população masculina pela feminina multiplicado por 100.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/9515",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_razao_sexo",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9515.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9515.json",
+        "sha256": "5c38d81cbb3d44a0d80e07bc90892b823d34961258dff1b6fe668d1e7da4088b",
+        "locator": {
+          "row": 4,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "1702",
+            "MN": "Razão",
+            "V": "92.72",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "8845",
+            "D2N": "Razão de sexo",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 92.72,
+        "unit": "homens/100 mulheres",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/9515",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_razao_sexo",
+      "last_checked": "2026-10-08"
+    },
+    {
+      "indicator_id": "demo_indice_envelhecimento_2022",
+      "name": "Indice de Envelhecimento Demografico",
+      "category": "demografia",
+      "value": 62.48,
+      "unit": "idosos/100 jovens",
+      "source_agency": "IBGE / Fundação SEADE",
+      "source_system": "Indicadores Demográficos Municipais",
+      "base_year": "2022",
+      "frequency": "Decenal",
+      "geographic_level": "Municipal (Código: 3549904)",
+      "status_badge": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_status": "CONFIRMADO_FONTE_OFICIAL",
+      "audit_date": "2026-09-27",
+      "valid_until": null,
+      "context_warning": "Resposta primária reproduzida; revisão humana pendente.",
+      "methodology": "Número de pessoas com 60 anos ou mais para cada 100 pessoas de 0 a 14 anos.",
+      "official_url": "https://sidra.ibge.gov.br/tabela/9515",
+      "verificacao": "primaria",
+      "evidencia": {
+        "evidence_id": "cons:sidra:demo_indice_envelhecimento_2022",
+        "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9515.json",
+        "raw_reference": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9515.json",
+        "sha256": "5c38d81cbb3d44a0d80e07bc90892b823d34961258dff1b6fe668d1e7da4088b",
+        "locator": {
+          "row": 2,
+          "native_record": {
+            "NC": "6",
+            "NN": "Município",
+            "MC": "1702",
+            "MN": "Razão",
+            "V": "62.48",
+            "D1C": "3549904",
+            "D1N": "São José dos Campos (SP)",
+            "D2C": "10612",
+            "D2N": "Índice de envelhecimento",
+            "D3C": "2022",
+            "D3N": "2022"
+          }
+        },
+        "value": 62.48,
+        "unit": "idosos/100 jovens",
+        "period": "2022",
+        "source_url": "https://sidra.ibge.gov.br/tabela/9515",
+        "accessed_at": "2026-10-08",
+        "territory": "São José dos Campos/SP; IBGE 3549904",
+        "status": "CONFIRMADO_FONTE_OFICIAL"
+      },
+      "competencia": "2022",
+      "evidence_id": "cons:sidra:demo_indice_envelhecimento_2022",
+      "last_checked": "2026-10-08"
+    }
+  ],
+  "ground_truth": {
+    "populacao_censo_2022": {
+      "total": 697054,
+      "valor": 697054,
+      "unidade": "habitantes",
+      "ano_referencia": 2022,
+      "nota": "População oficial final apurada pelo IBGE no Censo Demográfico 2022.",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4714 / IBGE Cidades)",
+      "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+      "data_consulta": "2026-09-27"
+    },
+    "populacao_estimada_2024": {
+      "total": null,
+      "valor": null,
+      "unidade": "habitantes",
+      "ano_referencia": 2024,
+      "nota": "Estimativa populacional oficial calculada pelo IBGE e publicada no Diario Oficial da Uniao em 29/08/2024 (Portaria IBGE 1.099) com referencia a 1 de julho de 2024.",
+      "fonte_nome": "IBGE - Estimativas da População Residente 2024 (DOU)",
+      "fonte_url": "https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html",
+      "data_consulta": "2026-09-27",
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "populacao_estimada_2026": {
+      "total": null,
+      "valor": null,
+      "unidade": "habitantes",
+      "ano_referencia": 2026,
+      "nota": "Projecao demografica tendencial para 2026: 729.153 (projecao tendencial intercensitaria linear a 0,85% a.a.) e 737.396 (projecao municipal Fundacao SEADE). Classificada formalmente como projecao tendencial, nao como estimativa oficial homologada do IBGE.",
+      "fonte_nome": "IBGE Cidades - Projeções e Estimativas Oficiais",
+      "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+      "data_consulta": "2026-09-27",
+      "tipo": "Projecao Demografica Tendencial",
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "domicilios_censo_2022_total": {
+      "total": 282214,
+      "valor": 282214,
+      "unidade": "domicílios",
+      "ano_referencia": 2022,
+      "nota": "Total de domicílios recenseados pelo IBGE no Censo Demográfico 2022.",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+      "data_consulta": "2026-09-27"
+    },
+    "domicilios_particulares_ocupados": {
+      "total": 247894,
+      "valor": 247894,
+      "unidade": "domicílios ocupados",
+      "ano_referencia": 2022,
+      "nota": "Domicílios particulares permanentes ocupados pelo Censo 2022 (87,84% do total recenseado).",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711 / Tabela 4712)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+      "data_consulta": "2026-09-27"
+    },
+    "domicilios_nao_ocupados": {
+      "total": null,
+      "vagos": null,
+      "uso_ocasional": null,
+      "pct_total": null,
+      "ano_referencia": 2022,
+      "nota": "Domicílios particulares permanentes não ocupados: 24.667 vagos (8,74%) e 9.311 de uso ocasional (3,30%).",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4711)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/4711",
+      "data_consulta": "2026-09-27",
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "media_moradores_domicilio": {
+      "valor": 2.8,
+      "unidade": "moradores/domicílio",
+      "ano_referencia": 2022,
+      "comparacao_2010": null,
+      "nota": "Média de moradores em domicílios particulares permanentes ocupados (2,80 em 2022 contra 3,23 em 2010).",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4712) e Censo 2010 (SIDRA Tabela 3152)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/4712",
+      "data_consulta": "2026-09-27"
+    },
+    "area_territorial_km2": {
+      "valor": 1099.409,
+      "unidade": "km²",
+      "urbana_km2": null,
+      "rural_km2": null,
+      "ano_referencia": 2022,
+      "nota": "Area territorial oficial do Censo 2022 / IBGE SIDRA Agregado 4714 Variavel 6318: 1.099,409 km2 (densidade demografica 634,03 hab/km2); Quadro Territorial Oficial 2025: 1.099,494 km2 (353,9 km2 urbanos e 745,7 km2 rurais).",
+      "fonte_nome": "IBGE - Quadro Territorial Oficial / Prefeitura de SJC (São José em Dados, Território)",
+      "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+      "data_consulta": "2026-09-27",
+      "valor_censo_2022": 1099.409,
+      "densidade_demografica_censo_2022": 634.03
+    },
+    "densidade_demografica_hab_km2": {
+      "valor": 634.03,
+      "unidade": "hab/km²",
+      "ano_referencia": 2022,
+      "nota": "Densidade demográfica apurada no Censo 2022 (634,03 habitantes por km²).",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 4714 / IBGE Cidades)",
+      "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+      "data_consulta": "2026-09-27"
+    },
+    "distribuicao_sexo": {
+      "mulheres": 361695,
+      "homens": 335359,
+      "mulheres_pct": 51.9,
+      "homens_pct": 48.1,
+      "razao_sexo_homens_por_100_mulheres": 92.72,
+      "ano_referencia": 2022,
+      "nota": "Populacao residente por sexo apurada no Censo 2022 (SIDRA Tabela 9514). Razao de sexo de 92,72 homens para cada 100 mulheres (SIDRA Tabela 9515). A referencia de 94,8 corresponde a comparacao com a media nacional de 2022 (94,25) e censo anterior (96,05 em 2010).",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9514 / Tabela 9515)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/9514",
+      "data_consulta": "2026-09-27"
+    },
+    "distribuicao_cor_raca_censo_2022": {
+      "ano_referencia": 2022,
+      "categorias": [
+        {
+          "cor_raca": "Branca",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "cor_raca": "Parda",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "cor_raca": "Preta",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "cor_raca": "Amarela",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        {
+          "cor_raca": "Indígena",
+          "populacao": null,
+          "pct": null,
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        }
+      ],
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9605)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/9605",
+      "data_consulta": "2026-09-27",
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "indicadores_transicao_demografica": {
+      "idade_mediana": 36,
+      "idade_mediana_2010": null,
+      "idade_mediana_2000": null,
+      "idade_mediana_brasil": null,
+      "indice_envelhecimento_ibge": 62.48,
+      "razao_dependencia_total_pct": null,
+      "razao_sexo": 92.72,
+      "definicao_envelhecimento": "Razão de pessoas com 65 anos ou mais de idade para cada 100 pessoas de 0 a 14 anos de idade.",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9515)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/9515",
+      "data_consulta": "2026-09-27",
+      "nota_envelhecimento": "Indice de envelhecimento oficial IBGE (SIDRA Tabela 9515) de 62,48 idosos (65+ anos) por 100 jovens (0 a 14 anos). O valor 81,6 refere-se ao corte de 60 anos ou mais da Fundacao SEADE."
+    },
+    "piramides_etarias_censos": {
+      "2000": {
+        "ano": 2000,
+        "populacao_total": null,
+        "homens_total": null,
+        "mulheres_total": null,
+        "metricas": {
+          "idade_mediana": "27 anos",
+          "indice_envelhecimento": "15,92",
+          "razao_sexo": "97,66",
+          "razao_dependencia": "46,87%",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "faixas": [
+          {
+            "faixa": "80+",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "75-79",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "70-74",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "65-69",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "60-64",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "55-59",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "50-54",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "45-49",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "40-44",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "35-39",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "30-34",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "25-29",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "20-24",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "15-19",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "10-14",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "5-9",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "0-4",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "2010": {
+        "ano": 2010,
+        "populacao_total": null,
+        "homens_total": null,
+        "mulheres_total": null,
+        "metricas": {
+          "idade_mediana": "31 anos",
+          "indice_envelhecimento": "28,31",
+          "razao_sexo": "96,06",
+          "razao_dependencia": "38,80%",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "faixas": [
+          {
+            "faixa": "80+",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "75-79",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "70-74",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "65-69",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "60-64",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "55-59",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "50-54",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "45-49",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "40-44",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "35-39",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "30-34",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "25-29",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "20-24",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "15-19",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "10-14",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "5-9",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "0-4",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "2022": {
+        "ano": 2022,
+        "populacao_total": null,
+        "homens_total": null,
+        "mulheres_total": null,
+        "metricas": {
+          "idade_mediana": "36 anos",
+          "indice_envelhecimento": "62,48",
+          "razao_sexo": "92,72",
+          "razao_dependencia": "41,20%",
+          "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+          "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+        },
+        "faixas": [
+          {
+            "faixa": "80+",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "75-79",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "70-74",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "65-69",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "60-64",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "55-59",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "50-54",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "45-49",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "40-44",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "35-39",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "30-34",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "25-29",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "20-24",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "15-19",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "10-14",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "5-9",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          },
+          {
+            "faixa": "0-4",
+            "homens": null,
+            "mulheres": null,
+            "total": null,
+            "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+            "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+          }
+        ],
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "serie_historica_populacao": [
+      {
+        "ano": 1970,
+        "populacao": null,
+        "tipo": "Censo",
+        "fonte": "Censo Demográfico 1970",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 1980,
+        "populacao": null,
+        "tipo": "Censo",
+        "fonte": "Censo Demográfico 1980",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 1991,
+        "populacao": null,
+        "tipo": "Censo",
+        "fonte": "Censo Demográfico 1991",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 2000,
+        "populacao": null,
+        "tipo": "Censo",
+        "fonte": "Censo Demográfico 2000",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 2010,
+        "populacao": null,
+        "tipo": "Censo",
+        "fonte": "Censo Demográfico 2010",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 2022,
+        "populacao": null,
+        "tipo": "Censo",
+        "fonte": "Censo Demográfico 2022",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 2024,
+        "populacao": null,
+        "tipo": "Estimativa Oficial",
+        "fonte": "IBGE Estimativa Populacional DOU 2024 (29/08/2024 Portaria 1.099)",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "ano": 2026,
+        "populacao": null,
+        "tipo": "Projecao Tendencial",
+        "fonte": "Projecao Demografica Tendencial (729.153 tendencial geometrica / 737.396 SEADE)",
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "crescimento_anual_intercensitario": [
+      {
+        "periodo": "1970-1980",
+        "anos": null,
+        "pop_inicial": null,
+        "pop_final": null,
+        "taxa_anual_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "periodo": "1980-1991",
+        "anos": null,
+        "pop_inicial": null,
+        "pop_final": null,
+        "taxa_anual_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "periodo": "1991-2000",
+        "anos": null,
+        "pop_inicial": null,
+        "pop_final": null,
+        "taxa_anual_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "periodo": "2000-2010",
+        "anos": null,
+        "pop_inicial": null,
+        "pop_final": null,
+        "taxa_anual_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "periodo": "2010-2022",
+        "anos": null,
+        "pop_inicial": null,
+        "pop_final": null,
+        "taxa_anual_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "populacao_por_regiao_censo_2022": [
+      {
+        "regiao": "Região Sul",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "Região Leste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "Região Centro",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "Região Oeste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "Região Sudeste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "Região Norte",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "Zona Rural",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "regiao": "São Francisco Xavier (Núcleo)",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "ranking_setores_socioeconomicos_censo_2022": [
+      {
+        "posicao": null,
+        "setor": "Morumbi",
+        "codigo": "15",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Campo dos Alemães",
+        "codigo": "12",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Novo Horizonte",
+        "codigo": "27",
+        "regiao": "Leste",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Alto da Ponte",
+        "codigo": "01",
+        "regiao": "Norte",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Vila Industrial",
+        "codigo": "05",
+        "regiao": "Leste",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Putim/Setville",
+        "codigo": "29",
+        "regiao": "Sudeste",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Parque Industrial",
+        "codigo": "16",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Bosque dos Eucaliptos",
+        "codigo": "13",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Jardim Satélite",
+        "codigo": "14",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "setor": "Aquarius",
+        "codigo": "19",
+        "regiao": "Oeste",
+        "populacao": null,
+        "pct": null,
+        "area_km2": null,
+        "densidade_hab_km2": null,
+        "unidade_geografica": "Setor Socioeconômico (LC 612/2018)",
+        "fonte": "PMSJC / Censo 2022 IBGE",
+        "ano": 2022,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "ranking_bairros_populosos": [
+      {
+        "posicao": null,
+        "bairro": "Morumbi",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Campo dos Alemães",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Novo Horizonte",
+        "regiao": "Leste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Alto da Ponte",
+        "regiao": "Norte",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Vila Industrial",
+        "regiao": "Leste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Putim/Setville",
+        "regiao": "Sudeste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Parque Industrial",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Bosque dos Eucaliptos",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Jardim Satélite",
+        "regiao": "Sul",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "posicao": null,
+        "bairro": "Aquarius",
+        "regiao": "Oeste",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "religiao_censo_amostra_2022": [
+      {
+        "categoria": "Católica Apostólica Romana",
+        "sjc_pct": null,
+        "sp_pct": null,
+        "brasil_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "categoria": "Evangélica",
+        "sjc_pct": null,
+        "sp_pct": null,
+        "brasil_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "categoria": "Sem religião",
+        "sjc_pct": null,
+        "sp_pct": null,
+        "brasil_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "categoria": "Espírita",
+        "sjc_pct": null,
+        "sp_pct": null,
+        "brasil_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "categoria": "Umbanda e Candomblé",
+        "sjc_pct": null,
+        "sp_pct": null,
+        "brasil_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "categoria": "Outras religiosidades / Tradições",
+        "sjc_pct": null,
+        "sp_pct": null,
+        "brasil_pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "alfabetizacao_censo_2022": {
+      "taxa_sjc": null,
+      "taxa_homens": null,
+      "taxa_mulheres": null,
+      "taxa_sp": null,
+      "taxa_brasil": null,
+      "faixa_etaria": "15 anos ou mais de idade",
+      "fonte_nome": "IBGE - Censo Demográfico 2022 (SIDRA Tabela 9543)",
+      "fonte_url": "https://sidra.ibge.gov.br/tabela/9543",
+      "data_consulta": "2026-09-27",
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "piramide_etaria_censo_2022": [
+      {
+        "faixa": "0-4",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "5-9",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "10-14",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "15-19",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "20-24",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "25-29",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "30-34",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "35-39",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "40-44",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "45-49",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "50-54",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "55-59",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "60-64",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "65-69",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "70-74",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "75-79",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "faixa": "80+",
+        "homens": null,
+        "mulheres": null,
+        "total": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "distritos_oficiais": [
+      {
+        "distrito": "Distrito Sede",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "distrito": "Eugênio de Melo",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      },
+      {
+        "distrito": "São Francisco Xavier",
+        "populacao": null,
+        "pct": null,
+        "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+        "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+      }
+    ],
+    "fonte_nome": "IBGE - Censo Demográfico 2022 / SIDRA",
+    "fonte_url": "https://cidades.ibge.gov.br/brasil/sp/sao-jose-dos-campos/panorama",
+    "data_consulta": "2026-09-27",
+    "reconciliacao_domicilios_2022": {
+      "total_recenseados": null,
+      "particulares_permanentes_ocupados": null,
+      "particulares_nao_ocupados": null,
+      "coletivos": null,
+      "improvisados": null,
+      "esclarecimento_cifra_253180": "A cifra de 253.180 correspondia a estimativa preliminar de domicilios ocupados em divulgacoes intermediarias. O total definitivo oficial do Censo 2022 no SIDRA 4711 e de 282.214 domicilios recenseados e 247.894 particulares permanentes ocupados.",
+      "audit_status": "SUSPENSO_SEM_COMPROVACAO",
+      "consolidacao_note": "Campo auxiliar sem vínculo bruto reproduzível; original completo no snapshot inicial."
+    },
+    "consolidacao_regioes_status": "SUSPENSO_SEM_VINCULO_CENSITARIO_REPRODUZIVEL",
+    "consolidacao_note": "35 unidades municipais não equivalem a setores censitários. Geometrias preservadas. Populações hardcoded totalizam 661.463; vínculo e cobertura precisam de comprovação. Ranking e densidades suspensos."
+  }
+}

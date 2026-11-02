@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "ground_truth_p1_p4_unchanged": {
+    "economia": true,
+    "financas": true,
+    "meio_ambiente": true,
+    "mobilidade": true
+  },
+  "app_js_unchanged": true
+}

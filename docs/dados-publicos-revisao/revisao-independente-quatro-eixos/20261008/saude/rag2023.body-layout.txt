@@ -1,0 +1,512 @@
+  3. Dados Demográficos e de Morbimortalidade
+
+
+    A disponibilização dos dados do SINASC, SIM e SIH, no DGMP, depende do prazo de publicação, respectivamente, pelos DAENT/SVSA e DRAC/SAES
+
+
+
+  3.1. População estimada por sexo e faixa etária
+
+
+  Período: 2021
+
+                               Faixa Etária                                                       Masculino                                              Feminino                                         Total
+
+    0 a 4 anos                                                                                                              24799                                               23669                                     48468
+
+    5 a 9 anos                                                                                                              25096                                               23860                                     48956
+
+    10 a 14 anos                                                                                                            23927                                               23003                                     46930
+
+    15 a 19 anos                                                                                                            24207                                               23078                                     47285
+
+    20 a 29 anos                                                                                                            55825                                               54644                                    110469
+
+    30 a 39 anos                                                                                                            61819                                               62029                                    123848
+
+    40 a 49 anos                                                                                                            52685                                               55276                                    107961
+
+    50 a 59 anos                                                                                                            40616                                               46316                                     86932
+
+    60 a 69 anos                                                                                                            31382                                               36516                                     67898
+
+    70 a 79 anos                                                                                                            15458                                               19115                                     34573
+
+    80 anos e mais                                                                                                           5272                                                 8718                                    13990
+
+    Total                                                                                                                 361086                                               376224                                    737310
+
+  Fonte: Estimativas preliminares elaboradas pelo Ministério da Saúde/SVS/DASNT/CGIAE (DataSUS/Tabnet)
+  Data da consulta: 15/03/2024.
+
+
+  3.2. Nascidos Vivos
+
+
+  Número de nascidos vivos por residência da mãe.
+
+                                                Unidade Federação                                                              2019                        2020                       2021                        2022
+
+                                           SAO JOSE DOS CAMPOS                                                                 9076                        8682                       8545                        8072
+
+  Fonte: Sistema de Informações sobre Nascidos Vivos (MS/SVS/DASIS/SINASC)
+  Data da consulta: 15/03/2024.
+
+
+  3.3. Principais causas de internação
+
+
+  Morbidade Hospitalar de residentes, segundo capítulo da CID-10.
+
+                                                        Capítulo CID-10                                                                  2019               2020                2021               2022               2023
+
+    I. Algumas doenças infecciosas e parasitárias                                                                                              1179               1714               3244               1418               1299
+
+    II. Neoplasias (tumores)                                                                                                                   3664               3226               3527               3484               3775
+
+    III. Doenças sangue órgãos hemat e transt imunitár                                                                                          275                292                332                 324                360
+
+    IV. Doenças endócrinas nutricionais e metabólicas                                                                                           410                403                480                 519                579
+
+    V. Transtornos mentais e comportamentais                                                                                                    804                573                664                 739                805
+
+    VI. Doenças do sistema nervoso                                                                                                              630                550                655                 854                944
+
+    VII. Doenças do olho e anexos                                                                                                               493                216                497                 598                781
+
+    VIII.Doenças do ouvido e da apófise mastóide                                                                                                 57                  34                 23                 33                 40
+
+    IX. Doenças do aparelho circulatório                                                                                                       3806               3693               3525               4391               4169
+
+    X. Doenças do aparelho respiratório                                                                                                        3222               2474               2433               3488               3358
+
+    XI. Doenças do aparelho digestivo                                                                                                          4520               3853               3666               4177               4853
+
+    XII. Doenças da pele e do tecido subcutâneo                                                                                                 629                443                505                 560                636
+
+    XIII.Doenças sist osteomuscular e tec conjuntivo                                                                                            821                533                469                 767                605
+
+    XIV. Doenças do aparelho geniturinário                                                                                                     2667               2388               2416               2750               3229
+
+    XV. Gravidez parto e puerpério                                                                                                             5768               5462               5275               5560               5456
+
+    XVI. Algumas afec originadas no período perinatal                                                                                           646                719                573                 624                596
+
+    XVII.Malf cong deformid e anomalias cromossômicas                                                                                           412                258                252                 281                323
+
+    XVIII.Sint sinais e achad anorm ex clín e laborat                                                                                           455                386                410                 468                552
+
+    XIX. Lesões enven e alg out conseq causas externas                                                                                         3283               2894               3066               3439               3488
+
+
+https://digisusgmp.saude.gov.br                                                                                                                                                                                           6 de 49
+     XX. Causas externas de morbidade e mortalidade                                                                                                     -                    -                    -                   -                    -
+
+     XXI. Contatos com serviços de saúde                                                                                                                     769                  784                 983                  808                 1159
+
+     CID 10ª Revisão não disponível ou não preenchido                                                                                                   -                    -                    -                   -                    -
+
+     Total                                                                                                                                                34510               30895                32995                35282                37007
+
+  Fonte: Sistema de Informações Hospitalares do SUS (SIH/SUS)
+  Data da consulta: 15/03/2024.
+
+  Obs.: A atualização dos valores relativos ao último período ocorrem simultaneamente ao carregamento dos dados no Tabnet/DATASUS.
+
+
+  3.4. Mortalidade por grupos de causas
+
+
+  Mortalidade de residentes, segundo capítulo CID-10
+
+                                                                        Capítulo CID-10                                                                                    2019                 2020                2021                 2022
+
+     I. Algumas doenças infecciosas e parasitárias                                                                                                                                127                  731                1552                  446
+
+     II. Neoplasias (tumores)                                                                                                                                                     880                  901                  930                 884
+
+     III. Doenças sangue órgãos hemat e transt imunitár                                                                                                                             17                    8                  18                   14
+
+     IV. Doenças endócrinas nutricionais e metabólicas                                                                                                                            298                  249                  255                 403
+
+     V. Transtornos mentais e comportamentais                                                                                                                                       53                   84                  80                 124
+
+     VI. Doenças do sistema nervoso                                                                                                                                               221                  176                  216                 283
+
+     VII. Doenças do olho e anexos                                                                                                                                            -                   -                    -                    -
+
+     VIII.Doenças do ouvido e da apófise mastóide                                                                                                                             -                           1                    1                   1
+
+     IX. Doenças do aparelho circulatório                                                                                                                                        1058                1103                 1119                 1090
+
+     X. Doenças do aparelho respiratório                                                                                                                                          481                  417                  439                 426
+
+     XI. Doenças do aparelho digestivo                                                                                                                                            208                  217                  244                 241
+
+     XII. Doenças da pele e do tecido subcutâneo                                                                                                                                    24                   18                  26                   39
+
+     XIII.Doenças sist osteomuscular e tec conjuntivo                                                                                                                               43                   32                  18                   41
+
+     XIV. Doenças do aparelho geniturinário                                                                                                                                       202                  172                  246                 219
+
+     XV. Gravidez parto e puerpério                                                                                                                                                   3                   3                    9                   5
+
+     XVI. Algumas afec originadas no período perinatal                                                                                                                              57                   47                  45                   49
+
+     XVII.Malf cong deformid e anomalias cromossômicas                                                                                                                              30                   34                  29                   28
+
+     XVIII.Sint sinais e achad anorm ex clín e laborat                                                                                                                            193                  115                   84                   40
+
+     XIX. Lesões enven e alg out conseq causas externas                                                                                                                       -                   -                    -                    -
+
+     XX. Causas externas de morbidade e mortalidade                                                                                                                               315                  343                  388                 472
+
+     XXI. Contatos com serviços de saúde                                                                                                                                      -                   -                    -                    -
+
+     XXII.Códigos para propósitos especiais                                                                                                                                   -                   -                    -                    -
+
+     Total                                                                                                                                                                       4210                4651                 5699                 4805
+
+  Fonte: Sistema de Informações sobre Mortalidade (MS/SVS/CGIAE/SIM-TABNET)
+  Data da consulta: 15/03/2024.
+
+
+     Análises e Considerações sobre Dados Demográficos e de Morbimortalidade
+
+  Análises e Considerações sobre Dados Demográficos e de Morbimortalidade:
+
+  3.1. População estimada por sexo e faixa etária
+  A proporção de idosos na população vem aumentando a cada ano, associada ao processo de transição demográfica.
+
+  3.2. Nascidos Vivos
+
+  A natalidade vem gradualmente diminuindo, associada ao processo de transição demográfica.
+
+  3.3. Principais causas de internação
+  As principais causas de internação hospitalar em 2023 foram, excluído gravidez e parto: as doenças do aparelho digestivo, as doenças do aparelho circulatório, as neoplasias, as causas externas e as doenças do
+  aparelho respiratório, nessa ordem.
+
+  Em 2023 houve redução das internações por doenças infecciosas devido à pandemia de covid-19, em relação à 2020.
+
+  3.4. Mortalidade por grupos de causas
+  Em relação a mortalidade, em 2022 predominaram as doenças do aparelho circulatório, as neoplasias, as doenças infecciosas (covid-19) e doenças do aparelho respiratório.
+
+  Esse perfil também reflete o fenômeno de transição demográfica e epidemiológica da população, com o aumento da morbidade das doenças crônicas e acidentes e violência. Tal fato tem repercussão no custo da assistência
+  médica e na qualidade de vida das pessoas visto que, por conta do diagnóstico e tratamento em fases tardias da evolução das doenças, as terapias tendem ter maior custo e as complicações das
+  doenças mais frequentes.
+
+
+
+
+
+
+https://digisusgmp.saude.gov.br                                                                                                                                                                                                               7 de 49
+  4. Dados da Produção de Serviços no SUS
+
+
+     A disponibilização dos dados do SIS AB, SIA e SIH, no DGMP, depende do prazo de publicação, respectivamente, pelos DESF/SAPS e DRAC/SAES
+
+
+
+  4.1. Produção de Atenção Básica
+
+
+
+
+                                                                   Tipo de Produção                                                                                                      Quantidade
+
+    Visita Domiciliar                                                                                                                                       269.914
+
+    Atendimento Individual                                                                                                                                  1.078.970
+
+    Procedimento                                                                                                                                            1.778.044
+
+    Atendimento Odontológico                                                                                                                                95.357
+
+  Fonte: Sistema de informação em Saúde para a Atenção Básica – SISAB
+
+
+
+
+  4.2. Produção de Urgência e Emergência por Grupo de Procedimentos
+
+
+  Caráter de atendimento: Urgência
+
+                                                                                                  Sistema de Informações Ambulatoriais                                      Sistema de Informacões Hospitalares
+                               Grupo procedimento
+                                                                                              Qtd. aprovada                       Valor aprovado                         AIH Pagas                           Valor total
+
+    01 Ações de promoção e prevenção em saúde                                                         -                                    -                                   -                                   -
+
+    02 Procedimentos com finalidade diagnóstica                                                                 45416                            310624,34                                  16                            29088,95
+
+    03 Procedimentos clínicos                                                                                    5354                              46992,28                             18909                         25590554,06
+
+    04 Procedimentos cirúrgicos                                                                                  1043                              30358,67                              7292                         17582540,46
+
+    05 Transplantes de orgãos, tecidos e células                                                      -                                    -                                                35                            57208,08
+
+    06 Medicamentos                                                                                   -                                    -                                   -                                   -
+
+    07 Órteses, próteses e materiais especiais                                                        -                                    -                                   -                                   -
+
+    08 Ações complementares da atenção à saúde                                                        -                                    -                                   -                                   -
+
+    Total                                                                                                       51813                            387975,29                              26252                         43259391,55
+
+  Fonte: Sistemas de Informações Ambulatoriais do SUS (SIA/SUS) e Sistema de Informações Hospitalares do SUS (SIH/SUS)
+  Data da consulta: 15/03/2024.
+
+
+  4.3. Produção de Atenção Psicossocial por Forma de Organização
+
+
+
+                                                                                               Sistema de Informações Ambulatoriais
+
+                                                                  Forma de Organização                                                                              Qtd. aprovada                         Valor aprovado
+
+    030108 Atendimento/Acompanhamento psicossocial                                                                                                                                   142804                              168800,49
+
+                                                                                                 Sistema de Informacões Hospitalares
+
+                                                                  Forma de Organização                                                                                AIH Pagas                              Valor total
+
+    030317 Tratamento dos transtornos mentais e comportamentais                                                                                                                         1607                           2254594,05
+
+  Fonte: Sistemas de Informações Ambulatoriais do SUS (SIA/SUS) e Sistema de Informações Hospitalares do SUS (SIH/SUS)
+  Data da consulta: 15/03/2024.
+
+
+  4.4. Produção de Atenção Ambulatorial Especializada e Hospitalar por Grupo de Procedimentos
+
+
+                                                                                                  Sistema de Informações Ambulatoriais                                      Sistema de Informacões Hospitalares
+                               Grupo procedimento
+                                                                                              Qtd. aprovada                       Valor aprovado                         AIH Pagas                           Valor total
+
+    01 Ações de promoção e prevenção em saúde                                                                  299595                              21530,16                    -                                   -
+
+    02 Procedimentos com finalidade diagnóstica                                                              7534573                          76661331,19                                   63                            40914,40
+
+    03 Procedimentos clínicos                                                                                6481808                          41480690,16                               20015                         25999943,74
+
+    04 Procedimentos cirúrgicos                                                                                 45944                           7953766,61                              16339                         31997821,09
+
+    05 Transplantes de orgãos, tecidos e células                                                                   255                           185309,64                                  71                           935044,32
+
+    06 Medicamentos                                                                                   -                                    -                                   -                                   -
+
+    07 Órteses, próteses e materiais especiais                                                                  69621                            901252,67                     -                                   -
+
+    08 Ações complementares da atenção à saúde                                                                  51093                            318922,80                     -                                   -
+
+    Total                                                                                                   14482889                         127522803,23                               36488                         58973723,55
+
+https://digisusgmp.saude.gov.br                                                                                                                                                                                               8 de 49
+  Fonte: Sistema de Informações Ambulatoriais do SUS (SIA/SUS) e Sistema de Informações Hospitalares do SUS (SIH/SUS)
+  Data da consulta: 15/03/2024.
+
+
+  4.5. Produção de Assistência Farmacêutica
+
+
+
+
+            Esse item refere-se ao componente especializado da assistência farmacêutica, sob gestão da esfera estadual.
+            Portanto, não há produção sob gestão municipal.
+
+
+
+  4.6. Produção de Vigilância em Saúde por Grupo de Procedimentos
+
+
+  Financiamento: Vigilância em Saúde
+
+                                                                                                                                                                            Sistema de Informações Ambulatoriais
+                                                        Grupo procedimento
+                                                                                                                                                             Qtd. aprovada                                                Valor aprovado
+
+     01 Ações de promoção e prevenção em saúde                                                                                                                                              12701                                    -
+
+     02 Procedimentos com finalidade diagnóstica                                                                                                                                            44459                                    -
+
+     Total                                                                                                                                                                                  57160                                    -
+
+  Fonte: Sistemas de Informações Ambulatoriais do SUS (SIA/SUS)
+
+  Data da consulta: 15/03/2024.
+
+
+      Análises e Considerações sobre Dados da Produção de Serviços no SUS
+
+  O RAG 2023 mostrou, em relação ao RAG 2022:
+
+  - Aumento da produção da Atenção Básica;
+
+  - Redução da produção ambulatorial de Urgência e Emergência;
+
+  - Manutenção da produção hospitalar de Urgência e Emergência;
+
+  - Aumento da produção ambulatorial Atenção Psicossocial;
+  - Manutenção da produção hospitalar de Atenção Psicossocial;
+
+  - Aumento da produção de Atenção Ambulatorial Especializada;
+
+  - Aumento da produção de Atenção Hospitalar Especializada;
+
+  - Redução da produção de Vigilância em Saúde.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://digisusgmp.saude.gov.br                                                                                                                                                                                                                            9 de 49
+  5. Rede Física Prestadora de Serviços ao SUS
+
+
+  5.1. Por tipo de estabelecimento e gestão
+
+
+
+    A disponibilização dos dados do SCNES, no DGMP, depende do prazo de publicação pelo DRAC/SAES.
+
+
+  Período 12/2023
+
+   Rede física de estabelecimentos de saúde por tipo de estabelecimentos
+
+                                                     Tipo de Estabelecimento                                                          Dupla        Estadual          Municipal          Total
+
+   HOSPITAL GERAL                                                                                                                            0                2                   4           6
+
+   CONSULTORIO ISOLADO                                                                                                                       0                0                   3           3
+
+   CENTRAL DE ABASTECIMENTO                                                                                                                  0                1                   1           2
+
+   POSTO DE SAUDE                                                                                                                            0                1                   0           1
+
+   HOSPITAL ESPECIALIZADO                                                                                                                    0                1                   1           2
+
+   UNIDADE MOVEL DE NIVEL PRE-HOSPITALAR NA AREA DE URGENCIA                                                                                 0                0                   9           9
+
+   HOSPITAL/DIA - ISOLADO                                                                                                                    0                0                   2           2
+
+   UNIDADE DE VIGILANCIA EM SAUDE                                                                                                            0                1                   1           2
+
+   PRONTO ATENDIMENTO                                                                                                                        0                0                   5           5
+
+   CENTRAL DE REGULACAO DO ACESSO                                                                                                            0                0                   1           1
+
+   POLICLINICA                                                                                                                               0                0                   7           7
+
+   CENTRAL DE GESTAO EM SAUDE                                                                                                                0                0                   1           1
+
+   CENTRO DE ATENCAO HEMOTERAPIA E OU HEMATOLOGICA                                                                                           0                0                   1           1
+
+   CENTRO DE SAUDE/UNIDADE BASICA                                                                                                            0                1                  39          40
+
+   CLINICA/CENTRO DE ESPECIALIDADE                                                                                                           0                2                  45          47
+
+   FARMACIA                                                                                                                                  0                1                   0           1
+
+   UNIDADE DE APOIO DIAGNOSE E TERAPIA (SADT ISOLADO)                                                                                        0                0                  13          13
+
+   UNIDADE MISTA                                                                                                                             0                0                   1           1
+
+   CENTRO DE ATENCAO PSICOSSOCIAL                                                                                                            0                0                   4           4
+
+   CENTRAL DE REGULACAO MEDICA DAS URGENCIAS                                                                                                 0                0                   1           1
+
+   Total                                                                                                                                     0               10                 139         149
+
+  Observação: Os dados apresentados referem-se ao número de estabelecimentos de saúde públicos ou prestadores de serviços ao SUS
+  Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES)
+  Data da consulta: 14/03/2024.
+
+
+  5.2. Por natureza jurídica
+
+
+  Período 12/2023
+
+   Rede física de estabelecimentos de saúde por natureza jurídica
+
+                                                           Natureza Jurídica                                                               Municipal         Estadual       Dupla       Total
+
+                                                                                 ADMINISTRACAO PUBLICA
+
+   ORGAO PUBLICO DO PODER EXECUTIVO ESTADUAL OU DO DISTRITO FEDERAL                                                                                    0               8           0          8
+
+   MUNICIPIO                                                                                                                                          80               0           0         80
+
+   FUNDACAO PUBLICA DE DIREITO PRIVADO MUNICIPAL                                                                                                       1               0           0          1
+
+                                                                                 ENTIDADES EMPRESARIAIS
+
+   EMPRESARIO (INDIVIDUAL)                                                                                                                             1               0           0          1
+
+   SOCIEDADE EMPRESARIA LIMITADA                                                                                                                      34               0           0         34
+
+   SOCIEDADE SIMPLES LIMITADA                                                                                                                          9               0           0          9
+
+   SOCIEDADE SIMPLES PURA                                                                                                                              2               0           0          2
+
+                                                                            ENTIDADES SEM FINS LUCRATIVOS
+
+   FUNDACAO PRIVADA                                                                                                                                    1               0           0          1
+
+   ASSOCIACAO PRIVADA                                                                                                                                 11               2           0         13
+
+                                                                                       PESSOAS FISICAS
+
+   Total                                                                                                                                            139               10           0        149
+
+https://digisusgmp.saude.gov.br                                                                                                                                                         10 de 49

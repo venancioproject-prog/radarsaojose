@@ -1,0 +1,30 @@
+[
+  {
+    "file": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/ssp-2024-grupo6.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "utc": "2026-10-08T08:00:16.336744+00:00",
+    "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+    "bytes": 7537
+  },
+  {
+    "file": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/ssp-2025-grupo6.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2025&grupoDelito=6&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "utc": "2026-10-08T08:00:17.317039+00:00",
+    "sha256": "2c997fee00b7471f1a51f63150fa79b60c150c66839e9f00e271855dbb892f0a",
+    "bytes": 7536
+  },
+  {
+    "file": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/ssp-2024-grupo9.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasMensais/RecuperaDadosMensaisAgrupados?ano=2024&grupoDelito=9&tipoGrupo=MUNIC%C3%8DPIO&idGrupo=560",
+    "utc": "2026-10-08T08:00:18.185324+00:00",
+    "sha256": "fcbd1db005759f0eba638d4684b136b50865a1fa91d10486cdabbb5ea7413ed8",
+    "bytes": 4519
+  },
+  {
+    "file": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/sidra6579.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/6579/n6/3549904/v/9324/p/all",
+    "sha256": "7ca6639ed31965f7089d75a806fea60868f7fdcc9f4d3748f3071d5bd1213320",
+    "utc": "2026-10-08T08:03:42.056004+00:00",
+    "bytes": 6534
+  }
+]

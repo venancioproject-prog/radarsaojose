@@ -1,0 +1,72 @@
+[
+  {
+    "priority": "Alta",
+    "axis": "Educação",
+    "opportunity": "Censo 2024/2025 e séries 1995–2025; matrículas, docentes, estabelecimentos, turmas e infraestrutura",
+    "primary_source": "INEP sinopses; arquivos municipais e notas de cada edição",
+    "condition": "Extrair por rede/etapa, guardar denominadores e quebras. 2023 já extraído em 165 tabelas."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Educação",
+    "opportunity": "Rendimento, abandono, reprovação, distorção idade-série, infantil e ensino médio",
+    "primary_source": "INEP indicadores educacionais, SAEB e resultados por etapa",
+    "condition": "Catálogos localizados; séries não homologadas nesta consolidação. Não usar proficiência como percentual."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Demografia",
+    "opportunity": "Relacionar polígonos municipais e setores censitários",
+    "primary_source": "IBGE malha + camada oficial municipal e chave de agregação",
+    "condition": "Comprovar origem, recobrimento, população de referência e regra de interseção antes de ativar mapa."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Saúde",
+    "opportunity": "CNES completo e séries SINASC/SIM/SIH com versões de extração",
+    "primary_source": "DATASUS/CNES e TabNet, SMS",
+    "condition": "Separar SUS/não-SUS, residência/ocorrência, AIH/internação e taxas SMS; preservar versão."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Segurança",
+    "opportunity": "Vítimas, furtos/roubos de veículos e séries mensais",
+    "primary_source": "SSP tabelas mensais primárias",
+    "condition": "Endpoint agregado mostra zeros incompatíveis com FRV; conferir definição antes de usar."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Mobilidade",
+    "opportunity": "Reprodução do parser tabular com meses vazios",
+    "primary_source": "PDF de bilhetagem municipal",
+    "condition": "42 overrides ativos. Refazer parser preservando coluna, testar agosto/setembro e não alterar arquivo histórico."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Mobilidade",
+    "opportunity": "ANAC: recortes e ausências",
+    "primary_source": "ANAC arquivos e dicionários de dados",
+    "condition": "Somente comparar mesmo universo; ausência não significa aeroporto sem movimento."
+  },
+  {
+    "priority": "Alta",
+    "axis": "Desempenho",
+    "opportunity": "Carregamento de dados por eixo e cache validado",
+    "primary_source": "Package/loader atual",
+    "condition": "Proposta exige autorização de arquitetura; não implementada. Exportação deve manter todos os eixos e evidências."
+  },
+  {
+    "priority": "Média",
+    "axis": "Economia/Finanças",
+    "opportunity": "Simplificação de P1.1/P2.1 e leitura de períodos",
+    "primary_source": "Dados já comprovados",
+    "condition": "Avaliar usabilidade numa etapa visual autorizada; sem redesenho nesta operação."
+  },
+  {
+    "priority": "Média",
+    "axis": "Meio Ambiente",
+    "opportunity": "Mais histórico de estações e séries comparáveis",
+    "primary_source": "CETESB/SNIS/SINISA/INPE",
+    "condition": "Qualidade do ar anual não nasce de um snapshot. Não unir indicadores de conceitos distintos."
+  }
+]

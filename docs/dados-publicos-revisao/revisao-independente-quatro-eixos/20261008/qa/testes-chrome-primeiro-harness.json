@@ -1,0 +1,221 @@
+{
+  "kind": "Chrome real headless; fixture isolada do Radar Hub com DOM de app.html e controller real. App.js não executado. Não é E2E do login/aplicação completa.",
+  "screenshots": false,
+  "events": [
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "network",
+          "level": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+          "timestamp": 1791501905028.666,
+          "url": "http://127.0.0.1:58029/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "networkRequestId": "31776.129"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "recommendation",
+          "level": "verbose",
+          "text": "[DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o",
+          "timestamp": 1791501905245.506,
+          "url": "http://127.0.0.1:58029/docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/browser-fixture.html?mode=desktop-online",
+          "args": [
+            {
+              "type": "object",
+              "subtype": "node",
+              "className": "HTMLInputElement",
+              "description": "input#password.w-full.pl-10.pr-10.py-3.bg-slate-50.border.border-slate-200.rounded-xl.text-sm.font-semibold.text-slate-800.placeholder-slate-400.focus:bg-white.focus:outline-none.focus:ring-2.focus:ring-brand-500/30.focus:border-brand-600.transition-all",
+              "objectId": "-4711926212648336887.2.1"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "scenarios": [],
+  "navigations": [
+    {
+      "url": "http://127.0.0.1:58029/docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/browser-fixture.html?mode=desktop-online",
+      "response": {
+        "frameId": "334D943DFC9A2510821C5090720BEF11",
+        "loaderId": "44E295832C8E215FFCC226C0EBAE3F75",
+        "isDownload": false
+      }
+    }
+  ],
+  "ready_diagnostics": [
+    {
+      "url": "http://127.0.0.1:58029/docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/browser-fixture.html?mode=desktop-online",
+      "title": "Radar São José | Inteligência & Pesquisa Municipal",
+      "ready": "complete",
+      "init": "function",
+      "resources": [
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap",
+          "duration": 260.6000000014901
+        },
+        {
+          "name": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
+          "duration": 136.40000000037253
+        },
+        {
+          "name": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap",
+          "duration": 281.59999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/module-hero.css?v=20261003-shell",
+          "duration": 13.700000001117587
+        },
+        {
+          "name": "http://127.0.0.1:58029/report-editorial.css",
+          "duration": 12.599999999627471
+        },
+        {
+          "name": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+          "duration": 142.19999999925494
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+          "duration": 167.90000000037253
+        },
+        {
+          "name": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js",
+          "duration": 137.09999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/radar_hub_controller.js",
+          "duration": 312.09999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/economia_visual.js",
+          "duration": 17.40000000037253
+        },
+        {
+          "name": "http://127.0.0.1:58029/financas_visual.js",
+          "duration": 18.200000001117587
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/foto_onibus_viaduto.jpg",
+          "duration": 10.300000000745058
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/foto_cidade.jpg",
+          "duration": 17
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/foto_cultura.jpg",
+          "duration": 23.200000001117587
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/foto_gastronomia.jpg",
+          "duration": 27.59999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/foto_noite.jpg",
+          "duration": 26.59999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/foto_pessoas.jpg",
+          "duration": 31.90000000037253
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/capa_sjc_skyline.jpg",
+          "duration": 13.900000000372529
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/sjc_rodovia_curva.jpg",
+          "duration": 18.5
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/sjc_ponte_estaiada.jpg",
+          "duration": 22.700000001117587
+        },
+        {
+          "name": "http://127.0.0.1:58029/mais_fotos_radar/Andr%20Paixo%20-%20Studio%208.jpeg",
+          "duration": 344.80000000074506
+        },
+        {
+          "name": "http://127.0.0.1:58029/mais_fotos_radar/IMG_2772.jpg",
+          "duration": 26
+        },
+        {
+          "name": "http://127.0.0.1:58029/mais_fotos_radar/pexels-cup-of-couple-6632857.jpg",
+          "duration": 26.09999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/mais_fotos_radar/IMG_2777.jpg",
+          "duration": 31.399999998509884
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/prefeitura_sjc.jpg",
+          "duration": 41.90000000037253
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/gentilico.jpg",
+          "duration": 36.399999998509884
+        },
+        {
+          "name": "http://127.0.0.1:58029/Mais%20fotos%20radar/IMG_2905.jpg",
+          "duration": 34.79999999888241
+        },
+        {
+          "name": "http://127.0.0.1:58029/Mais%20fotos%20radar/IMG_2824.jpg",
+          "duration": 47.19999999925494
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/bioma_mata_atlantica.jpg",
+          "duration": 54.90000000037253
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/seguranca.jpg",
+          "duration": 49.20000000111759
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/saude.jpg",
+          "duration": 52.80000000074506
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/meio_ambiente.jpg",
+          "duration": 61.5
+        },
+        {
+          "name": "http://127.0.0.1:58029/Mais%20fotos%20radar/IMG_2889.jpg",
+          "duration": 64.59999999962747
+        },
+        {
+          "name": "http://127.0.0.1:58029/Mais%20fotos%20radar/pexels-energepic-com-27411-159888-300x225.jpg",
+          "duration": 62.90000000037253
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/educacao.jpg",
+          "duration": 65
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/financas.jpg",
+          "duration": 71
+        },
+        {
+          "name": "http://127.0.0.1:58029/Mais%20fotos%20radar/IMG_2916.jpg",
+          "duration": 71.30000000074506
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/photo_1.jpg",
+          "duration": 75
+        },
+        {
+          "name": "http://127.0.0.1:58029/fotos_radar/logo.png",
+          "duration": 6.200000001117587
+        }
+      ],
+      "body": "Dashboard Executivo\n\nInteligência & Análise 2026/2027\n\nEntrar Novo Usuário\n Entrar com o Google\nou preencha os dados\nNome Completo\nE-mail Institucional\nSenha de Acesso\n \nEntrar no Painel \n© Radar São José. Todos os direitos reservados.\n\nInteligência de Mercado\n& Pesquisa Municipal SJC\n\nDados Público"
+    }
+  ],
+  "status": "FAIL",
+  "error": "{'exceptionId': 1, 'text': 'Uncaught', 'lineNumber': 3945, 'columnNumber': 84, 'scriptId': '4', 'stackTrace': {'callFrames': [{'functionName': 'formatter', 'scriptId': '4', 'url': 'http://127.0.0.1:58029/radar_hub_controller.js', 'lineNumber': 3945, 'columnNumber': 84}, {'functionName': '', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21484}, {'functionName': '', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21548}, {'functionName': '', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21900}, {'functionName': 'qe', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 22625}, {'functionName': 'get', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21194}, {'functionName': '', 'scriptId': '34', 'url': '', 'lineNumber': 0, 'columnNumber': 187}, {'functionName': '', 'scriptId': '34', 'url': '', 'lineNumber': 0, 'columnNumber': 233}]}, 'exception': {'type': 'object', 'subtype': 'error', 'className': 'TypeError', 'description': 'TypeError: Cannot convert object to primitive value\\n    at formatter (http://127.0.0.1:58029/radar_hub_controller.js:3946:85)\\n    at https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21485\\n    at https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21549\\n    at https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21901\\n    at qe (https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:22626)\\n    at Object.get (https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21195)\\n    at <anonymous>:1:188\\n    at <anonymous>:1:234', 'objectId': '-4711926212648336887.2.3'}}",
+  "trace": "Traceback (most recent call last):\n  File \"C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\scripts\\revisao_quatro_eixos_qa_chrome.py\", line 65, in <module>\n    row['networkDenominator']=evaluate(\"(()=>{const chart=Chart.getChart('hubChartEducacaoRede');const values=chart.data.datasets[0].data;return {total:values.reduce((s,v)=>s+v,0),formatterFull:chart.options.plugins.datalabels.formatter(163965),labels:chart.data.labels};})()\")\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\leose\\OneDrive\\Documentos\\GitHub\\radarsaojose\\scripts\\revisao_quatro_eixos_qa_chrome.py\", line 37, in evaluate\n    if r.get('exceptionDetails'):raise RuntimeError(r['exceptionDetails'])\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: {'exceptionId': 1, 'text': 'Uncaught', 'lineNumber': 3945, 'columnNumber': 84, 'scriptId': '4', 'stackTrace': {'callFrames': [{'functionName': 'formatter', 'scriptId': '4', 'url': 'http://127.0.0.1:58029/radar_hub_controller.js', 'lineNumber': 3945, 'columnNumber': 84}, {'functionName': '', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21484}, {'functionName': '', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21548}, {'functionName': '', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21900}, {'functionName': 'qe', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 22625}, {'functionName': 'get', 'scriptId': '8', 'url': 'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js', 'lineNumber': 18, 'columnNumber': 21194}, {'functionName': '', 'scriptId': '34', 'url': '', 'lineNumber': 0, 'columnNumber': 187}, {'functionName': '', 'scriptId': '34', 'url': '', 'lineNumber': 0, 'columnNumber': 233}]}, 'exception': {'type': 'object', 'subtype': 'error', 'className': 'TypeError', 'description': 'TypeError: Cannot convert object to primitive value\\n    at formatter (http://127.0.0.1:58029/radar_hub_controller.js:3946:85)\\n    at https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21485\\n    at https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21549\\n    at https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21901\\n    at qe (https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:22626)\\n    at Object.get (https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js:19:21195)\\n    at <anonymous>:1:188\\n    at <anonymous>:1:234', 'objectId': '-4711926212648336887.2.3'}}\n"
+}

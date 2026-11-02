@@ -1,0 +1,58 @@
+{
+  "decision_date": "2026-10-08",
+  "utc": "2026-10-08T23:24:22.404455+00:00",
+  "qa_approved": true,
+  "methodology_approved": true,
+  "human_review_pending": true,
+  "qa_sha256": "31ddd282fec1f88bd0390d46d73eb56e1167d2689bdcd7db4e73bd224704ddb1",
+  "methodology_sha256": "ae36e5471c25dd2f5c49986171d80b93efa6c218540be6efc4989b3bdb83f2ab",
+  "additional_validations": {
+    "qa/validacao-cnes.json": "bd65236de8d9196a690a0ba80a9b1fcdd9f43db8bcdc0b67cbfe8ad49dcfebe2",
+    "qa/validacao-refresh-saude.json": "aec22699ca905886d38a7581311031f9e551a1268e84e16bde960e40048e4577",
+    "qa/validacao-integracao-proposta.json": "8f126ff152faee3da6aa5a41afc909f8ebb2cd8be524ddeb279c4fb6f43f172f"
+  },
+  "proposed_gt_sha256": "40b6a9b1cace0236224af010cab9fe226ef2dda36c8b55872109f634817ed31a",
+  "proposed_registry_sha256": "9b7fed3acd65cf929938bc0bd07246d621c07dab88251dd235b3d7c67b39cd0b",
+  "promotions": {
+    "demo_populacao_estimada_2024": 724756,
+    "demo_populacao_estimada_2026": 729153,
+    "demo_taxa_urbanizacao": 98.72,
+    "seg_roubos_veiculos_2024": 143,
+    "seg_furtos_veiculos_2024": 724,
+    "seg_produtividade_prisoes": 2170
+  },
+  "active_updates": {
+    "saude_mortalidade_infantil": {
+      "value": 7.65,
+      "year": 2025,
+      "preliminary": true
+    },
+    "saude_cobertura_atencao_basica": {
+      "value": 57.95,
+      "year": 2025
+    },
+    "saude_atencao_basica_cnes_sia": {
+      "value": 57.95,
+      "year": 2025
+    },
+    "saude_internacoes_sih": {
+      "value": 41846,
+      "year": 2025
+    },
+    "saude_causas_mortalidade": {
+      "value": 5028,
+      "year": 2024
+    }
+  },
+  "constraints": [
+    "Nove KPIs Saúde continuam null; CNES52códigos só como série discreta limitada/export.",
+    "Quatro contagens anuais2001 em conflito suspensas; taxa nativa SSP/SEADE separada e meses2001 distinguem registro/ocorrência.",
+    "35 geometrias sem associação populacional comprovada; mapa, ranking e densidades suspensos.",
+    "Metas IDEB2023 null; técnica7316 distinta profissional total7322; competências2023 não substituídas por2025.",
+    "CVE separado SMS SE1–50; censos separados estimativas; sem interpolação ou preenchimento de lacunas.",
+    "Gates gráficos incompletos preservados; correções pontuais de texto/denominador; sem redesign.",
+    "P1–P4, app.js e fontes brutas preservados; sem deploy ou screenshots."
+  ],
+  "historical_authority": "Campos antigos e divergências preservados em arquivos de histórico; retirados da autoridade ativa.",
+  "limitations": "QA independente não rebaixou todos os arquivos nacionais novamente; verificou os brutos primários preservados e hashes. Chrome em fixture não comprova login/aplicação completa."
+}

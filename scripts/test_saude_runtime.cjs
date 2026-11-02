@@ -40,7 +40,7 @@ async function run(offline) {
       const file = path.join(root, url);
       return {ok: fs.existsSync(file), json: async () => JSON.parse(fs.readFileSync(file))};
     }};
-  context.window=context;
+  context.window=context;context.RADAR_HUB_VERIFY_ONLINE_PACKAGE=true;
   vm.createContext(context); vm.runInContext(code,context);
   await context.initRadarHub(); context.switchRadarHubAxis('saude');
   const config = key => charts.get('hubChartSaude'+key)?.config;

@@ -1,0 +1,1325 @@
+{
+  "local": [
+    {
+      "file": "data/radar_hub/radar_hub_package.json",
+      "bytes": 22440492,
+      "gzip6_simulated_bytes": 1368862,
+      "python_parse_seconds": [
+        0.20444270000007236,
+        0.2116262000054121,
+        0.22019819999695756
+      ],
+      "note": "Gzip local estimado; transferência real descrita no teste Chrome, produção não medida."
+    },
+    {
+      "file": "radar_hub_controller.js",
+      "bytes": 22676945,
+      "gzip6_simulated_bytes": 1412601,
+      "python_parse_seconds": [],
+      "note": "Gzip local estimado; transferência real descrita no teste Chrome, produção não medida."
+    },
+    {
+      "file": "app.html",
+      "bytes": 978450,
+      "gzip6_simulated_bytes": 152374,
+      "python_parse_seconds": [],
+      "note": "Gzip local estimado; transferência real descrita no teste Chrome, produção não medida."
+    }
+  ],
+  "chrome": [
+    {
+      "mode": "desktop-online",
+      "seconds": 3.1577132000020356,
+      "initialization": {
+        "Chart": "function",
+        "heap": 103406761
+      },
+      "axes": [
+        {
+          "axis": "demografia",
+          "visible": true,
+          "cards": [
+            {
+              "id": "demo_populacao_censo",
+              "value": "697.054"
+            },
+            {
+              "id": "demo_populacao_estimada_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "demo_densidade_demografica",
+              "value": "634,03"
+            },
+            {
+              "id": "demo_domicilios_ocupados",
+              "value": "247.894"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartDemografiaHistorico",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCrescimento",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaPiramide",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCorRaca",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaReligiao",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaRegioes",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaUrbanoRural",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaDomicilios",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "saude",
+          "visible": true,
+          "cards": [
+            {
+              "id": "saude_mortalidade_infantil",
+              "value": "8,2"
+            },
+            {
+              "id": "saude_leitos_hospitalares_total",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_leitos_uti_adulto",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_cobertura_vacinal_bcg",
+              "value": "60,93"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSaudeLeitos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeMortalidade",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeVacinas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeCausas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeNascidos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeDengue",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeInternacoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeAtencaoBasica",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "seguranca",
+          "visible": true,
+          "cards": [
+            {
+              "id": "seg_homicidios_dolosos_2024",
+              "value": "23"
+            },
+            {
+              "id": "seg_roubos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_furtos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_produtividade_prisoes",
+              "value": "Dado não disponível"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSegurancaHomicidios",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSegurancaMensal",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaPatrimonio",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaDDM",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "economia",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartEconomiaPib",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaNominal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSetores",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstrutura",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstoque",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSaldo",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaMovimentacao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaAnual",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEmpresas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaRemuneracao",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "financas",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartFinancasOrcamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasResultado",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasExecucao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasEvolucaoFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasReceitas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasTributos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasConstitucionais",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasInvestimentos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasPessoal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasDivida",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasCaixa",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "meio_ambiente",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMeioAmbienteAr",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMeioAmbienteQueimadas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteSaneamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteTerritorio",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "educacao",
+          "visible": true,
+          "cards": [
+            {
+              "id": "educ_ideb_anos_iniciais",
+              "value": "6,9"
+            },
+            {
+              "id": "educ_ideb_anos_finais",
+              "value": "5,7"
+            },
+            {
+              "id": "educ_matriculas_total_censo",
+              "value": "163.965"
+            },
+            {
+              "id": "educ_taxa_escolarizacao",
+              "value": "99,09"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartEducacaoIdeb",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoMatriculas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoRede",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoFluxo",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "mobilidade",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMobilidadeFrota",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMobilidadeFatalidades",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeVitimas",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeTaxa",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        }
+      ],
+      "export": {
+        "version": "sha256:9f20f59a93862a89eb7b96c0969fce22cccb435e8a7e657a822edf7253f55969",
+        "count": 122,
+        "nullCount": 34,
+        "csvBOM": true,
+        "periods": true,
+        "sourceLinks": true,
+        "mobFuture": 0,
+        "completeCompetencePreserved": true
+      },
+      "network_resources": [
+        {
+          "url": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 459.8999999985099,
+          "transferSize": 22677245,
+          "encodedBodySize": 22676945,
+          "decodedBodySize": 22676945
+        },
+        {
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "duration": 126,
+          "transferSize": 22440792,
+          "encodedBodySize": 22440492,
+          "decodedBodySize": 22440492
+        }
+      ],
+      "network_note": "HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico."
+    },
+    {
+      "mode": "desktop-offline",
+      "seconds": 3.1662597000031383,
+      "initialization": {
+        "Chart": "function",
+        "heap": 102153621
+      },
+      "axes": [
+        {
+          "axis": "demografia",
+          "visible": true,
+          "cards": [
+            {
+              "id": "demo_populacao_censo",
+              "value": "697.054"
+            },
+            {
+              "id": "demo_populacao_estimada_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "demo_densidade_demografica",
+              "value": "634,03"
+            },
+            {
+              "id": "demo_domicilios_ocupados",
+              "value": "247.894"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartDemografiaHistorico",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCrescimento",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaPiramide",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCorRaca",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaReligiao",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaRegioes",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaUrbanoRural",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaDomicilios",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "saude",
+          "visible": true,
+          "cards": [
+            {
+              "id": "saude_mortalidade_infantil",
+              "value": "8,2"
+            },
+            {
+              "id": "saude_leitos_hospitalares_total",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_leitos_uti_adulto",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_cobertura_vacinal_bcg",
+              "value": "60,93"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSaudeLeitos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeMortalidade",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeVacinas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeCausas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeNascidos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeDengue",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeInternacoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeAtencaoBasica",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "seguranca",
+          "visible": true,
+          "cards": [
+            {
+              "id": "seg_homicidios_dolosos_2024",
+              "value": "23"
+            },
+            {
+              "id": "seg_roubos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_furtos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_produtividade_prisoes",
+              "value": "Dado não disponível"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSegurancaHomicidios",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSegurancaMensal",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaPatrimonio",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaDDM",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "economia",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartEconomiaPib",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaNominal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSetores",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstrutura",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstoque",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSaldo",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaMovimentacao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaAnual",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEmpresas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaRemuneracao",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "financas",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartFinancasOrcamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasResultado",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasExecucao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasEvolucaoFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasReceitas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasTributos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasConstitucionais",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasInvestimentos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasPessoal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasDivida",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasCaixa",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "meio_ambiente",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMeioAmbienteAr",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMeioAmbienteQueimadas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteSaneamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteTerritorio",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "educacao",
+          "visible": true,
+          "cards": [
+            {
+              "id": "educ_ideb_anos_iniciais",
+              "value": "6,9"
+            },
+            {
+              "id": "educ_ideb_anos_finais",
+              "value": "5,7"
+            },
+            {
+              "id": "educ_matriculas_total_censo",
+              "value": "163.965"
+            },
+            {
+              "id": "educ_taxa_escolarizacao",
+              "value": "99,09"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartEducacaoIdeb",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoMatriculas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoRede",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoFluxo",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "mobilidade",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMobilidadeFrota",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMobilidadeFatalidades",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeVitimas",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeTaxa",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        }
+      ],
+      "export": {
+        "version": "sha256:9f20f59a93862a89eb7b96c0969fce22cccb435e8a7e657a822edf7253f55969",
+        "count": 122,
+        "nullCount": 34,
+        "csvBOM": true,
+        "periods": true,
+        "sourceLinks": true,
+        "mobFuture": 0,
+        "completeCompetencePreserved": true
+      },
+      "network_resources": [
+        {
+          "url": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 723.6000000014901,
+          "transferSize": 22677245,
+          "encodedBodySize": 22676945,
+          "decodedBodySize": 22676945
+        },
+        {
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "duration": 8.600000001490116,
+          "transferSize": 0,
+          "encodedBodySize": 0,
+          "decodedBodySize": 0
+        }
+      ],
+      "network_note": "HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico."
+    },
+    {
+      "mode": "mobile-limitada",
+      "seconds": 56.10891480000282,
+      "initialization": {
+        "Chart": "function",
+        "heap": 83479577
+      },
+      "axes": [
+        {
+          "axis": "demografia",
+          "visible": true,
+          "cards": [
+            {
+              "id": "demo_populacao_censo",
+              "value": "697.054"
+            },
+            {
+              "id": "demo_populacao_estimada_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "demo_densidade_demografica",
+              "value": "634,03"
+            },
+            {
+              "id": "demo_domicilios_ocupados",
+              "value": "247.894"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartDemografiaHistorico",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCrescimento",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaPiramide",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaCorRaca",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaReligiao",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaRegioes",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaUrbanoRural",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartDemografiaDomicilios",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "saude",
+          "visible": true,
+          "cards": [
+            {
+              "id": "saude_mortalidade_infantil",
+              "value": "8,2"
+            },
+            {
+              "id": "saude_leitos_hospitalares_total",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_leitos_uti_adulto",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "saude_cobertura_vacinal_bcg",
+              "value": "60,93"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSaudeLeitos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeMortalidade",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeVacinas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeCausas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeNascidos",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSaudeDengue",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeInternacoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSaudeAtencaoBasica",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "seguranca",
+          "visible": true,
+          "cards": [
+            {
+              "id": "seg_homicidios_dolosos_2024",
+              "value": "23"
+            },
+            {
+              "id": "seg_roubos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_furtos_veiculos_2024",
+              "value": "Dado não disponível"
+            },
+            {
+              "id": "seg_produtividade_prisoes",
+              "value": "Dado não disponível"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartSegurancaHomicidios",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartSegurancaMensal",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaPatrimonio",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartSegurancaDDM",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "economia",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartEconomiaPib",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaNominal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSetores",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstrutura",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEstoque",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaSaldo",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaMovimentacao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaAnual",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaEmpresas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEconomiaRemuneracao",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "financas",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartFinancasOrcamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasResultado",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasExecucao",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasEvolucaoFuncoes",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasReceitas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasTributos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasConstitucionais",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasInvestimentos",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasPessoal",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasDivida",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartFinancasCaixa",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "meio_ambiente",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMeioAmbienteAr",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMeioAmbienteQueimadas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteSaneamento",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMeioAmbienteTerritorio",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        },
+        {
+          "axis": "educacao",
+          "visible": true,
+          "cards": [
+            {
+              "id": "educ_ideb_anos_iniciais",
+              "value": "6,9"
+            },
+            {
+              "id": "educ_ideb_anos_finais",
+              "value": "5,7"
+            },
+            {
+              "id": "educ_matriculas_total_censo",
+              "value": "163.965"
+            },
+            {
+              "id": "educ_taxa_escolarizacao",
+              "value": "99,09"
+            }
+          ],
+          "charts": [
+            {
+              "id": "hubChartEducacaoIdeb",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoMatriculas",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoRede",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartEducacaoFluxo",
+              "rendered": true,
+              "fallback": false
+            }
+          ]
+        },
+        {
+          "axis": "mobilidade",
+          "visible": true,
+          "cards": [],
+          "charts": [
+            {
+              "id": "hubChartMobilidadeFrota",
+              "rendered": true,
+              "fallback": false
+            },
+            {
+              "id": "hubChartMobilidadeFatalidades",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeVitimas",
+              "rendered": false,
+              "fallback": true
+            },
+            {
+              "id": "hubChartMobilidadeTaxa",
+              "rendered": false,
+              "fallback": true
+            }
+          ]
+        }
+      ],
+      "export": {
+        "version": "sha256:9f20f59a93862a89eb7b96c0969fce22cccb435e8a7e657a822edf7253f55969",
+        "count": 122,
+        "nullCount": 34,
+        "csvBOM": true,
+        "periods": true,
+        "sourceLinks": true,
+        "mobFuture": 0,
+        "completeCompetencePreserved": true
+      },
+      "network_resources": [
+        {
+          "url": "http://127.0.0.1:53014/radar_hub_controller.js",
+          "duration": 25498.59999999404,
+          "transferSize": 22677245,
+          "encodedBodySize": 22676945,
+          "decodedBodySize": 22676945
+        },
+        {
+          "url": "http://127.0.0.1:53014/data/radar_hub/radar_hub_package.json",
+          "duration": 23279,
+          "transferSize": 22440792,
+          "encodedBodySize": 22440492,
+          "decodedBodySize": 22440492
+        }
+      ],
+      "network_note": "HTTP local sem compressão; rede limitada a 1 MiB/s e latência 100 ms no cenário móvel. Viewport emulado, não dispositivo físico."
+    }
+  ],
+  "note": "Gzip simulado local; Chrome servidor local sem compressão. Produção não medida."
+}

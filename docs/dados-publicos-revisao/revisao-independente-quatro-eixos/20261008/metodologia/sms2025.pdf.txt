@@ -1,0 +1,1181 @@
+
+PAGE 1
+PRESTAÇÃO DE CONTAS  3º QUADRIMESTRE 2025 
+1 
+
+PAGE 2
+LEI COMPLEMENTAR Nº 141 - DE 13 DE JANEIRO DE 2012 
+ 
+Regulamenta o § 3º. do art. 198 da Constituição Federal para dispor sobre os valores mínimos a serem aplicados 
+anualmente pela União, Estados, Distrito Federal e Municípios em ações e serviços públicos de saúde; 
+...Seção III 
+Da Prestação de Contas 
+Art. 36. O gestor do SUS em cada ente da Federação elaborará Relatório detalhado referente ao quadrimestre 
+anterior, o qual 
+conterá, no mínimo, as seguintes informações: 
+I.- montante e fonte dos recursos aplicados no período; 
+II.- auditorias realizadas ou em fase de execução no período e suas recomendações e determinações; 
+III.- oferta e produção de serviços públicos na rede assistencial própria, contratada e conveniada, cotejando esses 
+dados com os 
+indicadores de saúde da população em seu âmbito de atuação. 
+...§ 5o  O gestor do SUS apresentará, até o final dos meses de Maio, Setembro e Fevereiro, em audiência 
+pública na Casa Legislativa do respectivo ente da Federação, o Relatório de que trata o caput. 
+2 
+
+PAGE 3
+AUDITORIAS REALIZADAS E EM FASE DE EXECUÇÃO 
+ DO 3º QUADRIMESTRE DE 2025 
+Secretaria de Saúde 
+São José dos Campos 
+ 3 
+
+PAGE 4
+Fonte: Departamento de Gestão Hospitalar e de Emergências 
+AUDITORIA 
+Secretaria de Saúde de 
+São José dos Campos 
+Auditorias – Atenção Terciária 
+Demandante Responsável pela Auditoria Unidade Auditada Finalidade 
+Secretaria de Saúde  - DGHE Setor de qualidade - DGHE 
+Setembro - Hospital Municipal Dr. José 
+de Carvalho Florence (Clínica 3) • Avaliar a estrutura hospitalar. 
+Outubro - UPA Alto da Ponte • Avaliar a estrutura, bem como as salas 
+de emergência. 
+Novembro - HCS 
+• Avaliar os serviços de transporte, assim 
+como o cumprimento do contrato em 
+relação aos treinamentos dos médicos 
+e enfermeiros. 
+4 
+
+PAGE 5
+AÇÕES E SERVIÇOS PÚBLICOS EM SAÚDE (ASPS) 
+ESTABELECIMENTOS E PRODUÇÃO DE SAÚDE 
+5 
+
+PAGE 6
+NÚMERO DE LEITOS SUS – ATENÇÃO TERCIÁRIA 
+Secretaria de Saúde 
+São José dos Campos 
+  TIPO DE LEITO  dez/20  dez/21 dez/22 dez/23 dez/24 dez/25 
+   Cirúrgico 94 94 98 99 99 114 
+   Clínico 163 163 166 167 169 164 
+   Obstétrico 79 79 79 79 79 79 
+   Pediátrico 46 46 46 54 54 52 
+   Psiquiátrico 108 108 100 100 100 100 
+   Crônicos * 1 1 1 2 2 2 
+   Hospital/DIA ** 7 10 10 10 10 13 
+    Leitos Reversíveis *** - - - - 47 14 
+   TOTAL 498 501 500 511 560 538 
+Fonte: Cadastro Nacional de Estabelecimentos de Saúde (CNES). Dez   2025. 
+* 1 leito HM e 1 leito HPIOXII 
+** 6 leitos CRMI – 4 leitos Hoftalmed/Crystalink – 3 leitos do Hospital de Olhos  
+*** 14 Leitos Reversíveis Hospital de Retaguarda (reforma em andamento) 6 
+
+PAGE 7
+Secretaria de Saúde 
+São José dos Campos 
+TABELA SIGTAP - PRODUÇÃO DE SAÚDE POR GRUPO E 
+SUBGRUPO DE PROCEDIMENTO COMPLEXIDADE 
+http://sigtap.datasus.gov.br/tabela-unificada/app/sec/inicio.jsp 
+Estrutura da Tabela SIGTAP: 
+1.Grupo (2 dígitos): O primeiro e maior nível de agregação, que agrupa 
+os procedimentos, medicamentos e OPMs (Órteses, Próteses e Materiais 
+Especiais) de acordo com a área de atuação e finalidade. 
+2.Subgrupo (2 dígitos): O segundo nível, que refina a agregação por tipo 
+de área de atuação dentro de um grupo. 
+3.Forma de Organização (2 dígitos): O terceiro nível, que detalha a 
+organização dos procedimentos por especialidade, tipos de exames, 
+cirurgias, ou outras características mais específicas. 
+4.Procedimento (3 dígitos): O último nível, que identifica o código 
+sequencial de cada procedimento dentro da sua forma de organização.  
+7 
+
+PAGE 8
+Secretaria de Saúde 
+São José dos Campos 
+PRODUÇÃO DE SAÚDE POR GRUPO E SUBGRUPO DE 
+PROCEDIMENTO COMPLEXIDADE: ATENÇÃO PRIMÁRIA 
+8 
+
+PAGE 9
+PRODUÇÃO POR GRUPO E SUBGRUPO DE PROCEDIMENTO  ATENÇÃO BÁSICA 
+Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados 2025 são preliminares, sujeitos a atualizações, tabulados em 03/02/2026 com arquivos disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+Secretaria de Saúde 
+São José dos Campos 
+Grupo/Subgrupo de Procedimento 
+Sistema de Informações Ambulatoriais 
+Resultado  3º Q 2024 Resultado  3º Q 2025 Resultado ANUAL 2025 Variação em relação à 3Q/2024 
+01-AÇÕES DE PROMOÇÃO E PREVENÇÃO EM SAÚDE 121.850 295.030 873.064 142% 
+..0101-Ações coletivas/individuais em saúde 121.850 295.030 873.064 142% 
+02-PROCEDIMENTOS COM FINALIDADE DIAGNÓSTICA 138.595 146.486 456.226 6% 
+..0201-Coleta de material 72.643 73.295 234.952 1% 
+..0202-Diagnóstico em laboratório clínico (apenas teste rápido em 
+gestantes  aparece aqui, exames gerais de sangue, te ste rápido sífilis 
+comum e outros são demonstrados na atenção secundária) 
+30 50 168 67% 
+..0204-Diagnóstico por radiologia (odontológica) 796 1.252 3.248 57% 
+..0211-Métodos diagnósticos em especialidades 68 5 73 -93% 
+..0214-Diagnóstico por teste rápido (alguns atenção primária, 
+alguns atenção secundária ) 65.058 71.884 217.785 10% 
+03-PROCEDIMENTOS CLÍNICOS 692.248 1.083.527 3.283.952 57% 
+..0301-Consultas / Atendimentos / Acompanhamentos 645.357 1.055.291 3.095.358 64% 
+..0307-Tratamentos odontológicos 46.680 27.955 187.926 -40% 
+..0309-Terapias especializadas 211 281 665 33% 
+04-PROCEDIMENTOS CIRÚRGICOS (em atenção Primária UBS) 2.917 3.509 10.556 20% 
+..0401-Peq cirurg e cirurg pele,tec subcut mucosa 317 405 1.140 28% 
+..0404-Cirurgia vias aéreas super, cabeça pescoço 0 2 2 - 
+..0414-Cirurgia oro-facial 2600 3.102 9.414 19% 
+http://sigtap.datasus.gov.br/tabela-unificada/app/sec/inicio.jsp 
+Produção de Atenção Primária por Grupo e Subgrupo de Procedimento Complexidade: Atenção Básica 
+9 
+
+PAGE 10
+Secretaria de Saúde 
+São José dos Campos 
+                     PRODUÇÃO AMBULATORIAL POR GRUPO E SUBGRUPO 
+DE PROCEDIMENTO ATENÇÃO SECUNDÁRIA 
+10 
+
+PAGE 11
+GRUPO E SUBGRUPO DE PROCEDIMENTO ATENÇÃO SECUNDÁRIA 
+Secretaria de Saúde 
+São José dos Campos 
+Produção ambulatorial do SUS em São José dos Campos – 3 º Quadrimestre de 2025 
+ 
+Grupo/Subgrupo do Procedimento 
+Resultado 
+3º Q 2024 
+Tipo de Prestador  
+Resultado 
+3º Q 2025 
+% Variação 
+Em relação a 
+2024 
+Resultado 
+ano 2025 Público Privado (Contratado/ 
+Conveniado) Próprio Org. Social Sub-Total 
+N.º N.º % N.º % N.º % N.º % N.º % N.º 
+01-AÇÕES DE PROMOÇÃO E PREVENÇÃO EM SAÚDE 127.450 157.493 52,5% 142.403 47,5% 299.896 99,3% 2.246 0,7% 302.142 137% 895.289 
+0101-Ações coletivas/individuais em saúde 123.904 153.900 52,0% 142.236 48,0% 296.136 99,2% 2.246 0,8% 298.382 141% 882.244 
+0102-Vigilância em saúde 3.546 3.593 95,6% 167 4,4% 3.760 100,0% 0 0,0% 3.760 6% 13.045 
+02-PROCEDIMENTOS COM 
+FINALIDADE DIAGNÓSTICA 2.302.648 120.878 23,4% 396.419 76,6% 517.297 21,9% 1.839.702 78,1% 2.356.999 2% 7.211.093 
+0201-Coleta de material 73.162 41.440 56,2% 32.357 43,8% 73.797 99,8% 173 0,2% 73.970 1% 237.307 
+0202-Diagnóstico em laboratório clínico 1.724.750 340 0,2% 174.214 99,8% 174.554 10,0% 1.576.534 90,0% 1.751.088 2% 5.296.919 
+0203-Diagnóstico por anatomia patológica e citopat. 27.154 1 0,6% 158 99,4% 159 0,4% 40.684 99,6% 40.843 50% 113.224 
+0204-Diagnóstico por radiologia 98.759 13.551 14,0% 83.085 86,0% 96.636 78,6% 26.286 21,4% 122.922 24% 377.416 
+0205-Diagnóstico por ultrassonografia 81.801 18.086 35,3% 33.209 64,7% 51.295 53,6% 44.421 46,4% 95.716 17% 280.613 
+0206-Diagnóstico por tomografia 9.401 0 0,0% 9.882 100,0% 9.882 64,7% 5.391 35,3% 15.273 62% 47.615 
+0207-Diagnóstico por ressonância magnética 1.765 0 - 0 - 0 0,0% 1.736 100,0% 1.736 -2% 8.520 
+0208-Diagnóstico por medicina nuclear in vivo 1.032 0 - 0 - 0 0,0% 1.099 100,0% 1.099 6% 3.655 
+0209-Diagnóstico por endoscopia 6.096 0 0,0% 1.080 100,0% 1.080 17,1% 5.231 82,9% 6.311 4% 20.859 
+0210-Diagnóstico por radiologia intervencionista 49 0 - 0 - 0 0,0% 64 100,0% 64 31% 175 
+0211-Métodos diagnósticos em especialidades 201.160 2.365 8,2% 26.589 91,8% 28.954 18,3% 129.689 81,7% 158.643 -21% 557.785 
+0212-Diagnóstico e procedim. especiais em 
+hemoterapia 
+7.199 0 0,0% 311 100,0% 311 3,7% 8.164 96,3% 8.475 18% 26.927 
+  0213-Diagnóstico em vigil. epidemiológica 
+ambiental 13 0 0,0% 92 100,0% 92 100,0% 0 0,0% 92 608% 485 
+0214-Diagnóstico por teste rápido 70.307 45.095 56,0% 35.442 44,0% 80.537 99,7% 230 0,3% 80.767 15% 239.593 
+http://sigtap.datasus.gov.br/tabela-unificada/app/sec/inicio.jsp 
+11 Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados 2025 são preliminares, sujeitos a atualizações, tabulados em 03/02/2026 com arquivos disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+
+PAGE 12
+GRUPO E SUBGRUPO DE PROCEDIMENTO ATENÇÃO SECUNDÁRIA 
+Secretaria de Saúde 
+São José dos Campos 
+Produção ambulatorial do SUS em São José dos Campos – 3º Quadrimestre de 2025 
+ 
+ 
+Grupo/Subgrupo do Procedimento 
+Resultado  
+3º Q 2024 
+Tipo de Prestador  
+Resultado 
+3º Q 2025 
+ 
+ 
+% Variação 
+Em relação 
+a 2024 
+ 
+Resultado 
+ano 2025 
+ 
+Público Privado 
+(Contratado/ 
+Conveniado Próprio Org. Social Sub-Total 
+N.º N.º % N.º % N.º % N.º % N.º % N.º 
+04-PROCEDIMENTOS CIRÚRGICOS (UES) 13.594 3.729 38,4% 5.982 61,6% 9.711 59,2% 6.700 40,8% 16.405 21% 49.309 
+0401-Peq cirurg.e cirurg pele,tecido subcut 
+mucosa 
+2.751 1.891 49,9% 1.902 50,1% 3.793 99,8% 6 0,2% 3.799 38% 9.395 
+0404-Cirurgia vias aéreas superiores, 
+cabeça pescoço 
+289 99 20,6% 381 79,4% 480 100,0% 0 0,0% 480 66% 1.028 
+0405-Cirurgia do aparelho da visão 6.004 0 - 0 - 0 0,0% 5.784 100,0% 5.784 -4% 20.477 
+0406-Cirurgia do aparelho circulatório 4 1 100,0% 0 0,0% 1 100,0% 0 0,0% 1 -75% 38 
+ 
+0407-Cirurgia apar.digest.orgãos anex 
+parede abdominal 
+45 0 0,0% 2 100,0% 2 4,4% 43 95,6% 45 0% 131 
+0408-Cirurgia do sistema osteomuscular 200 0 0,0% 417 100,0% 417 100,0% 0 0,0% 417 109% 688 
+0409-Cirurgia do aparelho geniturinário 205 2 0,6% 324 99,4% 326 100,0% 0 0,0% 326 59% 587 
+0410-Cirurgia de mama 4 0 0,0% 2 100,0% 2 100,0% 0 0,0% 2 -50% 5 
+0412-Cirurgia torácica 7 0 - 0 - 0 0,0% 5 100,0% 5 -29% 17 
+0414-Cirurgia oro-facial 3.159 1.721 58,5% 1.222 41,5% 2.943 79,6% 754 20,4% 3.697 17% 9.200 
+0415-Outras cirurgias 60 1 33,3% 2 66,7% 3 100,0% 0 0,0% 3 -95% 6 
+0417-Anestesiologia 866 9 0,5% 1.729 99,5% 1.738 94,1% 108 5,9% 1.846 113% 3.247 
+http://sigtap.datasus.gov.br/tabela-unificada/app/sec/inicio.jsp  
+12 Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados 2025 são preliminares, sujeitos a atualizações, tabulados em 03/02/2026 com arquivos disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+
+PAGE 13
+Secretaria de Saúde 
+São José dos Campos 
+ GRUPO E SUBGRUPO DE PROCEDIMENTO ATENÇÃO SECUNDÁRIA 
+Produção ambulatorial do SUS em São José dos Campos – 3º Quadrimestre de 2025 
+ 
+ 
+Grupo/Subgrupo do Procedimento 
+ 
+Resultado  
+ 3º Q 2024 
+ 
+Tipo de Prestador 
+Resultado  
+3º Q 2025 
+% Variação 
+Em relação 
+a 2024 
+ 
+Resultado  
+Ano 2025  
+ 
+Público Privado    
+(Contrat./Conveniado) Próprio Org. Social Sub-Total 
+     N.º N.º % N.º % N.º % N.º % N.º % N.º 
+03-PROCEDIMENTOS CLÍNICOS 2.091.037 890.965 36,5% 1.550.959 63,5% 2.441.924 88,1% 330.417 11,9% 2.772.330 33% 8.527.474 
+0301-Consultas / Atendimentos / 
+Acompanhamentos 
+1.966.550 
+869.280 36,1% 1.540.771 63,9% 2.410.051 90,3% 259.856 9,7% 2.669.907 36% 5.329.158 
+0302-Fisioterapia 64.000 1.784 93,9% 116 6,1% 1.900 4,9% 37.223 95,1% 39.123 -39% 138.801 
+0303-Tratamentos clínicos (outras especialidades) 522 123 51,3% 117 48,8% 240 1,1% 21.680 98,9% 21.920 4099% 46.417 
+0304-Tratamento em oncologia 5.470 0 - 0 - 0 0,0% 7.330 100,0% 7.330 34% 21.911 
+0306-Hemoterapia 3.397 
+2 10,5% 17 89,5% 19 0,5% 3.983 99,5% 4.002 18% 12.757 
+0307-Tratamentos odontológicos 50.877 19.642 66,8% 9.764 33,2% 29.406 98,8% 345 1,2% 29.751 -42% 140.542 
+0309-Terapias especializadas 221 123 41,4% 174 58,6% 297 100,0% 0 0,0% 297 34% 686 
+05-TRANSPLANTES DE ORGÃOS, TEC. E CÉLULAS 59 0 0,0% 1 100,0% 1 1,5% 67 98,5% 67 15% 199 
+0501-Coleta/exame p/doação orgãos,tec.,cél.transp 12 0 - 0 - 0 0,0% 12 100,0% 12 0% 53 
+0506-Acompanhamento e intercorrências pós-
+transpl 47 0 - 0 - 0 0,0% 55 100,0% 55 17% 142 
+07-ÓRTESES, PRÓTESES E MATERIAIS ESPECIAIS 16.519 41.594 100,0% 5 0,0% 41.599 100,0% 0 0,0% 41.599 152% 62.853 
+0701-Órteses,próteses e mat.espec. não rel ato cirg 16.519 41.550 100,0% 1 0,0% 41.551 100,0% 0 0,0% 41.551 152% 62.803 
+0702-Órteses,próteses e mat. Espec. rel ao ato cirg 0 44 91,7% 4 8,3% 48 100% 0 0,0% 48 100% 50 
+08-AÇÕES COMPLEMENT. DA ATENÇÃO À SAÚDE 12.967 14.109 98,5% 219 1,5% 14.328 100,0% 0 0,0% 14.045 10% 42.630 
+0803-Autorização / Regulação 12.967 14.045 100,0% 0 0,0% 14.045 100,0% 0 0,0% 14.045 8% 42.344 
+http://sigtap.datasus.gov.br/tabela-unificada/app/sec/inicio.jsp 
+13 Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados 2025 são preliminares, sujeitos a atualizações, tabulados em 03/02/2026 com arquivos disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+
+PAGE 14
+Secretaria de Saúde 
+São José dos Campos 
+PRODUÇÃO DE SAÚDE : ATENÇÃO TERCIÁRIA 
+14 
+
+PAGE 15
+Secretaria de Saúde 
+São José dos Campos 
+ SAMU 192 – INDICADORES DE ATENDIMENTO 
+Tipo 3º Q 
+2024 Setembro Outubro Novembro Dezembro 3º Q 
+2025 
+Variação  
+3º Q 2024 
+Resultado 
+2025 
+LIGAÇÕES RECEBIDAS 39.953 9.306 9.204 9.101 10.168 37.779 -5% 108.266 
+LIGAÇÕES ATENDIDAS 29.821 7.239 7.040 6.984 7.427 28.690 -4% 84.060 
+LIGAÇÕES NÃO 
+ATENDIDAS  10.132 2.067 2.164 2.117 2.741 9.089 -10% 24.206 
+TROTE 4.310 485 391 329 426 1.631 -62% 5.973 
+FONTE: Sistema Informatizado Central de Regulação SAMU 
+9.306 9.204 9.101 
+10.168 
+7.239 7.040 6.984 7.427 
+2.067 2.164 2.117 2.741 
+485 391 329 426 
+0
+2.000
+4.000
+6.000
+8.000
+10.000
+12.000
+SET OUT NOV DEZ
+LIGAÇÕES RECEBIDAS
+LIGAÇÕES
+ATENDIDAS
+LIGAÇÕES NÃO
+ATENDIDAS
+TROTE
+15 
+
+PAGE 16
+Secretaria de Saúde 
+São José dos Campos 
+ ATENDIMENTO DE URGÊNCIA/ EMERGÊNCIA 
+Atendimentos 
+3º Q 2024 3º Q 2025 % Variação 3º Q 2024 Resultado 2025 
+Adulto: 337.037 Adulto: 350.524 4% 1.054.417 
+Pediatria: 100.895 Pediatria: 103.065 2% 296.963 
+FONTE: Censo de Ficha de Atendimento Ambulatorial - FAA  
+66.380 
+64.260 
+53.818 
+44.402 
+42.897 
+38.241 
+36.083 
+4.443 
+17.337 
+16.264 
+17.302 
+17.719 
+11.536 
+11.839 
+9.959 
+1.109 
+6.938 
+0 10.000 20.000 30.000 40.000 50.000 60.000 70.000
+Hospital de Clínicas Sul
+Hospital Municipal
+UPA Campo dos Alemães
+UPA Novo Horizonte
+UPA Alto da Ponte
+UPA Putim
+UPA Eugênio de Melo
+UPA São Francisco Xavier
+Odontologia
+Pediatria
+Adulto
+16 
+
+PAGE 17
+Secretaria de Saúde 
+São José dos Campos 
+ ATENDIMENTO PS HCS 
+FONTE: Censo de Ficha de Atendimento Ambulatorial – FAA 
+*Total desconsidera Odonto para efeito de comparação, início em jul/25 
+** Total considerando Odonto 
+Atendimentos 
+3º Q 2024 3º Q 2025 % Variação 3Q2024 Resultado 2025 
+Clínico: 61.977 Clínico Geral: 65.185 
++6,1% 260.823 
+Ortopedia Adulto: 1.195 
+Pediatria: 16.733 Pediatria: 17.067 
+Ortopedia Pediatria: 270 
+ 
+78.710 
+Odontologia: 6.938 
+83.717* 
+(90.655**) 
+65.185 
+1.195 
+17.067 
+270 
+6.938 
+0
+10.000
+20.000
+30.000
+40.000
+50.000
+60.000
+70.000
+Clínico Geral
+Ortopedia Adulto
+Pediatria
+Ortopedia Pediatria
+Odontologia
+17 
+
+PAGE 18
+Secretaria de Saúde 
+São José dos Campos 
+ ATENDIMENTO PS HM 
+46.180 
+1.462 3.032 3.650 
+9.936 
+16.264 
+0
+10.000
+20.000
+30.000
+40.000
+50.000
+Clínico Geral
+Ortopedia
+Obstetrícia/GO
+Cirurgia Geral
+Trauma
+Pediatria
+Atendimentos 
+3Q2024 3Q2025 % Variação 3Q2024 Resultado 2025 
+Clínico Geral: 52.738 Clínico Geral: 46.180 
+-7,6% 238.763 
+Ortopedia: 6.918 Ortopedia: 3.650 
+Obstetrícia/G.O: 11.062 Obstetrícia/G.O: 9.936 
+Pediatria: 16.428 Cirurgia Geral: 3.032 
+87.146 
+Trauma: 1.462 
+Pediatria: 16.264 
+80.524 
+FONTE: Censo de Ficha de Atendimento Ambulatorial – FAA 
+18 
+
+PAGE 19
+Secretaria de Saúde 
+São José dos Campos 
+HISTÓRICO DE PRODUÇÃO: CONSULTAS/ 
+ATENDIMENTOS , INTERNAÇÕES E EXAMES 
+19 
+
+PAGE 20
+PRODUÇÃO DE ATENDIMENTOS MÉDICOS: 2020 A 2025 
+Secretaria de Saúde 
+São José dos Campos 
+Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados 2025 são preliminares, sujeitos a atualizações, tabulados  03/02/2026 com arquivos 
+disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+ 20 
+
+
+PAGE 21
+HISTÓRICO DE INTERNAÇÕES 2020 A 2025 – 3QM 
+Secretaria de Saúde 
+São José dos Campos 
+Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados  2025 são preliminares, sujeitos a atualizações, tabulados em 03/02/2026  com arquivos 
+disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+ 21 
+
+PAGE 22
+HISTÓRICO DE INTERNAÇÕES 2020 A 2025 
+Secretaria de Saúde 
+São José dos Campos 
+Fonte: Ministério da Saúde / Sistema de Informação Ambulatorial – SIA / Dados  2025 são preliminares, sujeitos a atualizações, tabulados em 02/02/2026  com arquivos disponibilizados pelo MINISTÉRIO DA SAÚDE/DATASUS. 
+0
+1.000
+2.000
+3.000
+4.000
+5.000
+6.000
+Cirúrgico Clínico Pediátricos Psiquiatria
+4.536 
+5.165 
+505 256 
+3.269 
+3.989 
+367 233 
+Comparativo de Internações 3Q 2024 x 3Q 2025  
+3Q 2024
+3Q 2025
+22 
+Comparativo anual 
+
+PAGE 23
+INDICADORES DE SAÚDE 
+(SECRETARIA DE SAÚDE/ PREVINE BRASIL/ PACTUAÇÃO INTERFEDERATIVA/ PAS) 
+23 
+
+PAGE 24
+INDICADORES ICSAP / SECRETARIA DE SAÚDE 
+ 
+Nº Indicador Eixo 
+Meta 
+2022 
+Resultado 
+2024 Unidade de medida 
+Resultado 
+3 QUADRIMESTRE 
+2024 
+Resultado 
+3 QUADRIMESTRE 
+2025 
+Resultado 2025 
+ 
+1 
+ 
+Cobertura populacional estimada pelas 
+equipes de Atenção Primária – APS (Ref. 
+fev/2022) 
+ 
+Atenção 
+Primária 
+ 
+50,00% 
+ 
+61,63% 
+ 
+Percentual 
+ 
+61,63 
+(último dado MS 
+abril/2024) 
+57,95 57,95 
+ 
+2 
+ 
+Cobertura populacional estimada de 
+saúde bucal na atenção básica (Ref. 
+dez/2021) 
+ 
+Atenção 
+Primária 
+ 
+23,00% 
+ 
+36,7% 
+ 
+Percentual 36,7 10,62   (38,7) 10,62 
+3 
+Média de ação coletiva de escovação 
+dental supervisionada 
+Parâmetro SUS – 3,0% 
+ 
+ 
+Atenção 
+Primária 
+ 
+3,0% 
+ 
+0,5% 
+ 
+Percentual 
+ 0,5 0,3 0,3 
+ 
+ 
+4 
+Cobertura de primeira consulta 
+odontológica programada 
+Parâmetro SUS: 15,0% 
+ 
+Atenção 
+Primária 
+ 
+15,00% 
+ 
+6,4% 
+ 
+Percentual 
+6,4  
+(considerando 
+levantamento escolar) 
+ 
+6,2  
+(7,4 contando a 
+escolar) 
+6,2 
+ 
+ 
+5 
+Internações por condições sensíveis 
+à Atenção Primária (ICSAP) 
+Atenção 
+Primária 
+ 
+21,0% 
+ 
+23,20% 
+ 
+Percentual 22,3 19,21 20,87 
+Secretaria de Saúde 
+São José dos Campos 
+Fontes: SIM, SINASC, SIA, SIH, SINAN, e-Gestor MS. 
+Portal Conasems : https://portal.conasems.org.br/paineis-de-apoio/paineis/19_equipes-na-atencao-basica 
+Elaboração: SMS/DVS/VE-VISA e SMS/GAB/NIS. 
+24 
+Ótimo 
+Atenção 
+Regular 
+
+PAGE 25
+INDICADORES PACTUAÇÃO INTERFEDERATIVA 
+Secretaria de Saúde 
+São José dos Campos 
+Nº Indicador Eixo Meta 
+2022 
+Resultado 
+2024 
+Unidade 
+de medida 
+Resultado 3º 
+Quadrimestre 
+2024 
+Resultado 3º 
+Quadrimestre 
+2025 
+Resultado 
+2025 
+ 
+6 
+Razão de exames citopatológicos do colo do útero em mulheres 
+de 25 a 64 anos na população residente de determinado local e a 
+população da mesma faixa etária. Parâmetro SUS: > 0,50. 
+Resultado SP 2019: 0,40. 
+ 
+Atenção  
+Primária 
+ 
+0,60 
+ 
+0,50 
+ 
+Razão 
+ 
+ 
+ 
+0,54 0,59 0,53 
+ 
+7 
+ 
+Razão de exames de mamografia de rastreamento realizados em 
+mulheres de 50 a 69 anos na população residente de determinado 
+local e população da mesma faixa etária. Parâmetro SUS: 0,35.  
+Resultado SP 2019: 0,33. (SJC 40 a 69 anos) 
+ 
+Atenção 
+Secundária 
+ 
+0,45 
+ 
+0,50 
+ 
+Razão 
+ 
+ 
+ 
+ 
+0,41 0,38 0,41 
+8 Ações de matriciamento sistemático realizadas por CAPS com 
+equipes de Atenção Básica 
+Atenção 
+Secundária 
+100 100 Percentual 100 100 100 
+9 
+Proporção de parto normal no Sistema Único de Saúde e na Saúde 
+suplementar   
+Parâmetro SUS: 46,0%. Resultado SP 2019: 41,2%. 
+Atenção 
+Terciária 
+42 49,3 Percentual 
+ 
+36,3 36,10 36,13 
+ 
+10 
+Proporção de óbitos nas internações por infarto agudo do 
+miocárdio (IAM) na rede municipal 
+Atenção 
+Terciária 
+11,60 9,1 Percentual 6,88 5,73 6,27 
+Fontes: SIM, SINASC, SIA, SIH, SINAN, e-Gestor MS.  
+Elaboração: SMS/DVS/VE-VISA e SMS/GAB/NIS. 
+25 
+
+PAGE 26
+INDICADORES PACTUAÇÃO INTERFEDERATIVA 
+Secretaria de Saúde 
+São José dos Campos 
+Nº                 Indicador  
+Eixo 
+Meta 
+2022 
+Resultado 
+2024 
+Unidade de 
+medida 
+Resultado 
+3º Quadrimestre 
+2024 
+Resultado 
+3º Quadrimestre 
+2025 
+Resultado 2025 
+ 
+11 
+ 
+Taxa de mortalidade infantil Resultado SP 
+2020: 9,75 
+ 
+ 
+Vigilância em 
+Saúde 
+ 
+9,00 
+ 
+8,2 
+ 
+Taxa por mil 
+nascidos vivos 
+ 
+9,66 
+6,77 7,65 
+12 
+Taxa de mortalidade perinatal 
+Estado de São Paulo em 2019: 12,19 
+Vigilância em 
+Saúde 12,5 11,7 
+Taxa por mil nascidos 
+vivos mais nascidos 
+mortos 
+ 
+14,78 11,76 12,04 
+ 
+13 
+Taxa de prematuridade 
+Estado de São Paulo em 2017: 11,0%. 
+Vigilância em 
+Saúde 
+ 
+13,2 
+ 
+13,1 
+ 
+Percentual 
+ 
+11,42 10,62 11,87 
+ 
+14 
+ 
+Número de óbitos maternos em determinado 
+período e local de residência 
+ 
+Vigilância em 
+Saúde 
+ 
+1 
+ 
+5 
+ 
+Número 
+ 
+0 0 4 
+ 
+15 
+ 
+Proporção de gravidez na adolescência 
+entre as faixas etárias 10 a 19 anos 
+ 
+Vigilância em 
+Saúde 
+ 
+8,6 
+ 
+6,70 
+ 
+Percentual 
+5,84 
+7,15 6,74 
+Fontes: SIM, SINASC, SIA, SIH, SINAN, e-Gestor MS. 
+ Elaboração: SMS/DVS/VE-VISA e SMS/GAB/NIS. 
+26 
+
+PAGE 27
+INDICADORES PROGRAMAÇÃO ANUAL DE SAÚDE 
+Secretaria de Saúde 
+São José dos Campos 
+Nº Indicador Eixo Meta  
+2022 
+Resultado  
+de 2024 
+Unidade 
+de    
+medida 
+Resultado 3º 
+Quadrimestre 2024 
+ 
+Resultado 3º 
+Quadrimestre 
+2025 
+ 
+Resultado 2025 
+ 
+ 
+16 
+Mortalidade prematura (de 30 a 69 anos) pelo 
+conjunto das 4 principais DCNT (doenças do aparelho 
+circulatório, câncer, diabetes e doenças respiratórias 
+crônicas) SP 2019: 318,5. 
+ 
+Vigilância em 
+Saúde 
+ 
+ 
+260,00 
+ 
+ 
+263,29 
+ 
+ 
+Taxa por 
+100 mil 
+hab. 
+249,845 234,86 253,11 
+ 
+17 
+ 
+Proporção de registro de óbitos com causa básica 
+definida. Parâmetro SUS: 90.0%. 
+ 
+Vigilância em 
+Saúde 
+ 
+95,00 
+ 
+97,93 
+ 
+Percentual  
+97,36 100% 98,8% 
+ 
+18 
+ Proporção de óbitos de mulheres em idade fértil (10 a 
+49 anos) investigados. 
+ 
+ 
+Vigilância em 
+Saúde 
+ 
+ 
+95,00 
+ 
+ 
+98,93% 
+ 
+ 
+ 
+Percentual 
+ 
+97,4 % = 39 
+1 casos aguardando 
+investigação outro 
+município 
+94,64%  = 56 
+Aguardando 2 
+investigações : 
+1 Jacareí e 1 IML  
+98,20% 
+ 
+19 
+Proporção de casos de doenças de notificação 
+compulsória imediata (DNCI) encerrados em até 60 
+dias após notificação. 
+ 
+Vigilância em 
+Saúde 
+ 
+95,00 
+ 
+100 
+ 
+Percentual 100% 100% 100% 
+ 
+ 
+ 
+20 
+Proporção de vacinas selecionadas do Calendário 
+Nacional de Vacinação para crianças menores de dois 
+anos de idade - Pentavalente 3ª dose, Pneumocócica 
+10-valente 2ª dose, Poliomielite 3ª dose e Tríplice viral 
+1ª dose - com cobertura vacinal preconizada 
+ 
+ 
+Vigilância em 
+Saúde 
+ 
+ 
+ 
+100,00 
+Penta: 85,90% 
+Pneumo: 
+89,05% 
+SCR: 98,5% 
+Pólio: 85,7% 
+ 
+ 
+ 
+Percentual 
+Penta:85,90 Pneumo: 
+89,05 
+SCR: 98,50 
+Pólio: 85,70 
+ 
+Penta:82,64% 
+Pneumo: 88,74% 
+SCR: 91,44% 
+Pólio: 85,45% 
+ 
+Penta:82,64% 
+Pneumo: 88,74% 
+SCR: 91,44% 
+Pólio: 85,45% 
+Fontes: SIPNI, SIM, SINASC, SIA, SIH, SINAN, e-Gestor MS. 27 
+
+PAGE 28
+INDICADORES PROGRAMAÇÃO ANUAL DE SAÚDE 
+Secretaria de Saúde 
+São José dos Campos 
+ 
+Nº 
+ 
+               Indicador 
+ 
+Eixo Meta 
+2022 
+ 
+Resultado 
+2024 
+Unidade 
+de 
+medida 
+Resultado 3º 
+Quadrimestre 
+2024 
+Resultado 3º 
+Quadrimestre 
+2025 
+ 
+Resultado 2025 
+ 
+ 
+21 
+ 
+Proporção de cura dos casos novos de 
+hanseníase diagnosticados nos anos das 
+coortes 
+ 
+Vigilância em 
+Saúde 
+ 
+ 
+90,00 
+ 
+ 
+100% 
+ 
+Percentual 
+ 
+ 
+100% 
+100% 
+ 
+100% 
+ 
+ 
+22 
+ 
+Número de casos novos de sífilis congênita 
+em menores de um ano de idade 
+ 
+Vigilância em 
+Saúde 
+ 
+60 
+ 
+105 
+Número 
+ 37 33 141 
+ 
+23 Número de casos novos de aids em menores 
+de 5 anos. Vigilância em 
+Saúde 
+ 
+0 
+ 
+0 
+ 
+Número 
+ 
+0 0 0 
+24 
+ Percentual de conformidade das amostras de 
+água para consumo humano quanto aos 
+parâmetros coliformes totais, cloro residual 
+livre e turbidez 
+ 
+Vigilância em 
+Saúde 
+ 
+ 
+      100 
+ 
+ 
+ 
+100 
+ 
+          
+        Percentual 100 100 100 
+ 
+ 
+25 
+ 
+Número de ciclos que atingiram mínimo de 
+80% de cobertura de imóveis visitados para 
+controle vetorial da dengue 
+ 
+Vigilância em 
+Saúde 
+ 
+ 
+4 
+ 
+3,73 
+ 
+Número 1,15 1,07 4,35 
+Fontes: SIM, SINASC, SIA, SIH, SINAN, e-Gestor MS. 
+Elaboração: SMS/DVS/VE-VISA e SMS/GAB/NIS. 
+28 
+
+PAGE 29
+CONSTRUÇÕES
+29 
+
+PAGE 30
+CONSTRUÇÕES 
+Secretaria de Saúde 
+São José dos Campos 
+Reabilitação 
+Centro Especializado em Reabilitação Porte III – Fase de Construção em 65% 
+30 
+
+PAGE 31
+ADEQUAÇÕES E REFORMAS
+31 
+
+PAGE 32
+ADEQUAÇÕES E REFORMAS 
+Secretaria de Saúde 
+São José dos Campos 
+Hospital Municipal 
+DEZEMBRO 
+Clínica 1 
+OUTUBRO 
+Clínica 2 
+32 
+
+PAGE 33
+ADEQUAÇÕES E REFORMAS 
+Secretaria de Saúde 
+São José dos Campos 
+UPAs 
+OUTUBRO 
+Morgue - SFX 
+DEZEMBRO 
+Modernização leitos - Alto da Ponte 
+33 
+
+PAGE 34
+ADEQUAÇÕES E REFORMAS 
+Secretaria de Saúde 
+São José dos Campos 
+Saúde Mental 
+NOVEMBRO 
+Dependência Química-12 novos leitos  
+34 
+
+PAGE 35
+AÇÕES EM SAÚDE
+35 
+
+PAGE 36
+AÇÕES EM SAÚDE 
+Secretaria de Saúde 
+São José dos Campos 
+Conexão Juventude - 2025 Prefeitura Com Você - 2025 
+  
+Eventos - 10 Eventos -6 
+  
+Orientação prevenção combinada -512 Orientação de prevenção combinada - 647 
+  
+Testes realizados - 1064  Testes realizados - 576  
+  
+Teste positivos  
+04  - sífilis 
+1 - HIV 
+1 - Hep.C 
+Teste positivos  
+11 -  sífilis 
+1 - HIV 
+1   Hep.C 
+36 
+
+PAGE 37
+TREINAMENTOS, CERTIFICAÇÕES E OUTROS 
+DESTAQUES
+37 
+
+PAGE 38
+TREINAMENTOS 
+Secretaria de Saúde 
+São José dos Campos 
+DEZEMBRO 
+Unidades DGHE 
+SIRESP - CROSS / DRS XVII   
+Regulação de Leitos de Urgência 
+38 
+
+PAGE 39
+CERTIFICAÇÕES E DESTAQUES 
+Secretaria de Saúde 
+São José dos Campos 
+Setembro: CAAF/SS  
+Prestação de Contas 2Q25 – Contratos de Gestão (OSs)  
+Dezembro: Renovação da qualificação da UPA Campo dos Alemães 
+junto ao Ministério da Saúde  
+Dezembro: Certificação de excelência para o  
+Laboratório Central - HCS 
+Setembro: Início das obras de construção da Maternidade Porte II 
+39 
+
+PAGE 40
+PREFEITO DO MUNICÍPIO DE SÃO JOSÉ DOS CAMPOS  
+Anderson Farias 
+SECRETÁRIO MUNICIPAL DE SAÚDE 
+George Lucas Zenha de Toledo 
+SECRETÁRIA ADJUNTA DE SAÚDE 
+Joselma Alves da Silva 
+Estrutura Administrativa (Lei n° 11.091/2025) 
+  
+Gabinete do Secretário - George Zenha 
+Secretaria Adjunta -  Joselma Alves 
+Chefia de Gabinete – Dra. Bruna Almeida 
+Assessoria de Gabinete – Edmilson Silva 
+Divisão de Gestão Orçamentária e Contratos – José Fábio Gimenez Morais Rodrigues 
+Departamento de Vigilância em Saúde – Valquiria Acacia de Oliveira Ribeiro Urias 
+Divisão de Vigilância Sanitária – Valquiria Acacia de Oliveira Ribeiro Urias 
+Divisão em Saúde do Trabalhador – Vanessa Madalena da Costa Fortes 
+Divisão em Vigilância Entomológica e Zoonose – Cristina Aparecida Oliveira 
+Divisão de Vigilância Epidemiológica – Tereza Monteiro Ribeiro Cardozo 
+Divisão de Saúde e Proteção Animal – Maria Jose Zarur 
+Departamento de Gestão em Saúde - Otávio Franco e Silva 
+Divisão de Planejamento de Suprimentos de Saúde - Ricardo Simão 
+Divisão de Estruturas de Saúde- Alexandre Teruo Miyazaki 
+Divisão de Planejamento Orçamentário da Saúde -Gilson de Araújo Fernandes 
+Departamento de Gestão Hospitalar e de Emergências - Wagner Marques 
+Divisão da Unidade de Pronto Atendimento Parque Novo Horizonte -Isis Caroline da Palma dos Santos 
+Divisão da Unidade de Pronto Atendimento Eugênio de Melo - Maria Silvana de Oliveira Peracchy 
+Divisão da Unidade de Pronto Atendimento São Francisco Xavier - Isabel Cristina Graciano 
+Departamento de Regulação e Controle - Marcelo Augusto A. Lemos Ferreira 
+Divisão de Gestão do Acesso à Saúde - Rafael de Carvalho Damasceno 
+Divisão de Planejamento e Expansão da Rede Assistencial - Julise Prado de Oliveira 
+Divisão de Regulação Assistencial – Rafael  Sebastião da Costa Rodrigues 
+Departamento de Atenção Primária à Saúde - Pedro Henrique Silva Santiago 
+Divisão de Gestão Estrutural - Francisco Goncalves Cartaxo 
+Divisão de Atenção à Saúde Primária - Renata Cristina da Silva Pinto 
+Departamento de Atenção Secundária à Saúde- Marisa Leiko Takeuti Nakagawa 
+Chefe de Divisão de Especialidades: Sônia Maria da Silva Ferneda 
+Chefe de Políticas de Saúde Mental: Andréa Barros Galvão 
+Secretaria de Saúde São 
+José dos Campos 
+40 

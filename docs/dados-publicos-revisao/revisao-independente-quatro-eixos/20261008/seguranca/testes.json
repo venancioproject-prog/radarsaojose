@@ -1,0 +1,4728 @@
+{
+  "status": "PASS",
+  "checks": 1169,
+  "records_verified": 545,
+  "checks_detail": [
+    {
+      "check": "SHA:municipios",
+      "pass": true
+    },
+    {
+      "check": "SHA:ocorrencias",
+      "pass": true
+    },
+    {
+      "check": "SHA:taxas",
+      "pass": true
+    },
+    {
+      "check": "SHA:pda",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2023",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2024",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2025",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2026",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2001",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2002",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2003",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2004",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2005",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2006",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2007",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2008",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2009",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2010",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2011",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2012",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2013",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2014",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2015",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2016",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2017",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2018",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2019",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2020",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2021",
+      "pass": true
+    },
+    {
+      "check": "SHA:mensal-2022",
+      "pass": true
+    },
+    {
+      "check": "SHA:produtividade-2024.json",
+      "pass": true
+    },
+    {
+      "check": "SHA:csi-2025-noticia.html",
+      "pass": true
+    },
+    {
+      "check": "SHA:csi-ata-2025.pdf",
+      "pass": true
+    },
+    {
+      "check": "SHA:portal-main.js",
+      "pass": true
+    },
+    {
+      "check": "SHA:portal-mensal.html",
+      "pass": true
+    },
+    {
+      "check": "mun560",
+      "pass": true
+    },
+    {
+      "check": "2001:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2001:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2001:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2002:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2002:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2002:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2003:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2003:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2003:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2004:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2004:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2004:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2005:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2005:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2005:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2006:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2006:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2006:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2007:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2007:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2007:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2008:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2008:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2008:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2009:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2009:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2009:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2010:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2010:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2010:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2011:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2011:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2011:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2012:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2012:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2012:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2013:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2013:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2013:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2014:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2014:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2014:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2015:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2015:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2015:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2016:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2016:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2016:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2017:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2017:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2017:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2018:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2018:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2018:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2019:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2019:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2019:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2020:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2020:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2020:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2021:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2021:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2021:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2022:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2022:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2022:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2023:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2023:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2023:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2024:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2024:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2024:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2025:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2025:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:placeholder_veiculo",
+      "pass": true
+    },
+    {
+      "check": "2026:38:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:38:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:41:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:41:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:72:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:72:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:73:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:73:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:43:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:43:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:51:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:51:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:42:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:42:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:130:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:130:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:24:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:24:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:23:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:23:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:45:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:45:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:52:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:52:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:53:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:53:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:36:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:36:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:132:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:132:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:131:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:131:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:30:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:30:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:133:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:133:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:37:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:37:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:49:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:49:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:46:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:46:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:21:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:21:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2026:22:sum_published",
+      "pass": true
+    },
+    {
+      "check": "2026:22:valid_period",
+      "pass": true
+    },
+    {
+      "check": "2025:29_ocorrencias_33_vitimas",
+      "pass": true
+    },
+    {
+      "check": "2024:143_724",
+      "pass": true
+    },
+    {
+      "check": "2024:roubo30_inclui_carga",
+      "pass": true
+    },
+    {
+      "check": "2026:cut_publicado8",
+      "pass": true
+    },
+    {
+      "check": "prod2024:74:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:75:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:76:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:81:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:82:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:83:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:84:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:85:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:86:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:87:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:88:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:89:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2024:90:sum",
+      "pass": true
+    },
+    {
+      "check": "prod2170_nao_soma1420_1111",
+      "pass": true
+    },
+    {
+      "check": "rate2024_3.28",
+      "pass": true
+    },
+    {
+      "check": "rate2025_4.12",
+      "pass": true
+    }
+  ],
+  "conflicts_detected": [
+    {
+      "year": 2001,
+      "variable": "homicidio",
+      "annual": 231,
+      "monthly_sum": 229,
+      "decision": "CONFLITO_FONTE_PRIMARIA; não escolher por recência"
+    },
+    {
+      "year": 2001,
+      "variable": "roubo",
+      "annual": 2935,
+      "monthly_sum": 2910,
+      "decision": "CONFLITO_FONTE_PRIMARIA; não escolher por recência"
+    },
+    {
+      "year": 2001,
+      "variable": "furto",
+      "annual": 4606,
+      "monthly_sum": 4528,
+      "decision": "CONFLITO_FONTE_PRIMARIA; não escolher por recência"
+    },
+    {
+      "year": 2001,
+      "variable": "frv",
+      "annual": 3112,
+      "monthly_sum": 3079,
+      "decision": "CONFLITO_FONTE_PRIMARIA"
+    },
+    {
+      "year": 2015,
+      "idDelito": 132,
+      "native_total": 13,
+      "published": 0,
+      "decision": "REJEITAR_SEM_COMPETENCIA_PUBLICADA"
+    },
+    {
+      "year": 2015,
+      "idDelito": 133,
+      "native_total": 316,
+      "published": 0,
+      "decision": "REJEITAR_SEM_COMPETENCIA_PUBLICADA"
+    }
+  ],
+  "no_shared_writes": true
+}

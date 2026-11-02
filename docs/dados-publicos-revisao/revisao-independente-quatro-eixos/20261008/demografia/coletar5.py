@@ -1,0 +1,3 @@
+exec(open('docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/coletar.py',encoding='utf-8-sig').read().split('with concurrent.futures')[0])
+urls={'sidra4711-especies-correto.json':'https://apisidra.ibge.gov.br/values/t/4711/n6/3549904/v/617/p/2022/c3/all','estimativa-metodologia2026.pdf':'https://ftp.ibge.gov.br/Estimativas_de_Populacao/Estimativas_2026/nota_metodologica_2026.pdf','estimativas-produto.html':'https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-population.html'}
+results=[get(x) for x in urls.items()];manifest=json.loads((out/'manifest.json').read_text());manifest.extend(results);(out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8');print(results)

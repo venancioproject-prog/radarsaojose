@@ -1,0 +1,238 @@
+[
+  {
+    "indicator_id": "saude_mortalidade_infantil",
+    "value": 8.2,
+    "period": "2024; 2025: 7,65",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+    "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+    "locator": {
+      "page": 26,
+      "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "excerpt": "Valor conferido: 8.2; referência: 2024; 2025: 7,65; página/seção: 26."
+    },
+    "definition": "Taxas publicadas pela SMS. O relatório não informa os numeradores e denominadores desta tabela. Não recalcular com uma extração SINASC de outra data. A meta 9,00 é a referência municipal de 2022 impressa no relatório, não meta ODS neonatal.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_leitos_hospitalares_total",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+    "missing": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+  },
+  {
+    "indicator_id": "saude_leitos_sus",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+    "missing": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+  },
+  {
+    "indicator_id": "saude_leitos_nao_sus",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+    "missing": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+  },
+  {
+    "indicator_id": "saude_taxa_leitos_mil_hab",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+    "missing": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+  },
+  {
+    "indicator_id": "saude_leitos_uti_adulto",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+    "missing": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+  },
+  {
+    "indicator_id": "saude_leitos_uti_pediatrica",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada.",
+    "missing": "Totais e divisão SUS/não-SUS/UTI sem extração municipal comprovada para 12/2024. A tabela SMS de leitos SUS de atenção terciária tem outro escopo; não substitui o total CNES de todo o município. Consulta TabNet sofreu timeout nesta rodada."
+  },
+  {
+    "indicator_id": "saude_estabelecimentos_total",
+    "value": null,
+    "period": "12/2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://cnes.datasus.gov.br/",
+    "locator": null,
+    "definition": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente.",
+    "missing": "Antigo total 528 sem extração de todo o CNES. RAG 2025 p. 10 informa 155 estabelecimentos públicos/prestadores SUS em 12/2025, escopo diferente."
+  },
+  {
+    "indicator_id": "saude_cobertura_atencao_basica",
+    "value": 61.63,
+    "period": "2024 (último dado MS: abril)",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+    "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+    "locator": {
+      "page": 24,
+      "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+    },
+    "definition": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_nascidos_vivos_sinasc",
+    "value": 7463,
+    "period": "2024",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+    "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "locator": {
+      "page": 6,
+      "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "excerpt": "Valor conferido: 7463; referência: 2024; página/seção: 6."
+    },
+    "definition": "Totais por residência da mãe confirmados. Vias de parto e idade materna não discriminadas nesta tabela; gráfico por via suspenso até obter extração SINASC.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_cobertura_vacinal_bcg",
+    "value": 60.93,
+    "period": "2024; parcial 2025: 91,67%",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+    "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+    "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+    "locator": {
+      "page": null,
+      "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "excerpt": "Valor conferido: 60.93; referência: 2024; parcial 2025: 91,67%; página/seção: balanço municipal."
+    },
+    "definition": "Balanço municipal de 23/12/2025; 2025 parcial, não fechamento anual.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_dengue_sinan",
+    "value": 98163,
+    "period": "2024, SE 1–50 (parcial)",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+    "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0",
+    "source_url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+    "locator": {
+      "page": null,
+      "document_reference": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+      "excerpt": "Valor conferido: 98163; referência: 2024, SE 1–50 (parcial); página/seção: balanço municipal."
+    },
+    "definition": "2010–2018: balanços anuais. 2019–2023: lacunas sem comprovação, não são zeros. 2024: somente SE 1–50, fonte retrospectiva de 23/12/2025. Não calcular média 2010–2023 nem comparar o recorte parcial como ano completo.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_internacoes_sih",
+    "value": 38738,
+    "period": "2024",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+    "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "locator": {
+      "page": "6–7",
+      "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "excerpt": "Valor conferido: 38738; referência: 2024; página/seção: 6–7."
+    },
+    "definition": "Internações SUS por município de residência, segundo capítulo CID-10; não confundir com internações ocorridas nos hospitais de SJC nem com todas as AIHs. Extração 13/05/2026.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_atencao_basica_cnes_sia",
+    "value": 61.63,
+    "period": "2024 (último dado MS: abril)",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+    "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+    "locator": {
+      "page": 24,
+      "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+      "excerpt": "Valor conferido: 61.63; referência: 2024 (último dado MS: abril); página/seção: 24."
+    },
+    "definition": "Cobertura APS, não cobertura ESF isolada. 2024 corresponde ao último dado MS de abril/2024. Atendimento individual SISAB: RAG 2024 e 2025, p. 8; não equivale só a consultas médicas. 40 centros de saúde/UBS na rede SUS em 12/2025 (39 gestão municipal e 1 estadual), RAG 2025 p. 10; não significa 40 UBS municipais ativas. Número de equipes não comprovado.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_procedimentos_sia_sih",
+    "value": null,
+    "period": "2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://datasus.saude.gov.br/",
+    "locator": null,
+    "definition": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema.",
+    "missing": "Séries antigas de produção sem comprovação. SIA quantidade aprovada, SIH AIHs e internações são medidas distintas; não somar como procedimentos únicos. RAG 2025 pp. 8–9 permite futura reconstrução por grupo e sistema."
+  },
+  {
+    "indicator_id": "saude_causas_mortalidade",
+    "value": 4677,
+    "period": "2023; 2024: 5.028",
+    "status": "REPRODUZIDO_LIMITADO",
+    "primary": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+    "source_url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "locator": {
+      "page": 7,
+      "document_reference": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+      "excerpt": "Valor conferido: 4677; referência: 2023; 2024: 5.028; página/seção: 7."
+    },
+    "definition": "SIM por residência, RAG 2025. 2023: 4.677; 2024: 5.028. Sete capítulos e demais causas, sem sobreposição.",
+    "missing": "Denominadores individuais/extração nacional não reproduzidos; publicação municipal conferida."
+  },
+  {
+    "indicator_id": "saude_cobertura_vacinal",
+    "value": null,
+    "period": "2024",
+    "status": "SEM_EVIDENCIA_SUFICIENTE",
+    "primary": null,
+    "sha256": null,
+    "source_url": "https://pni.saude.gov.br/",
+    "locator": null,
+    "definition": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada.",
+    "missing": "SCR, pneumocócica, penta e pólio: p. 27. BCG: retrospectiva municipal de 23/12/2025 (2025 parcial). Hepatite B e rotavírus: sem comprovação nesta rodada."
+  }
+]

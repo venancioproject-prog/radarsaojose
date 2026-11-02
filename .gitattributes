@@ -1,0 +1,4 @@
+# Preserva os bytes das evidências e dos scripts desta revisão; evita alterar SHA via autocrlf.
+docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/** -text
+scripts/revisao_quatro_eixos_*.py -text
+scripts/test_revisao_quatro_eixos.cjs -text

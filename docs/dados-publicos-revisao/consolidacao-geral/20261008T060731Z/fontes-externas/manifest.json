@@ -1,0 +1,219 @@
+[
+  {
+    "name": "ideb-finais2025.zip",
+    "url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+    "accessed_at": "2026-10-08T06:10:43.857811+00:00",
+    "transport": "curl HTTPS com validação TLS padrão",
+    "exit_code": 35,
+    "response": "000\nhttps://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip\n",
+    "error": "curl: (35) Recv failure: Connection was reset\n"
+  },
+  {
+    "name": "ssp-municipios.json",
+    "url": "https://www.ssp.sp.gov.br/v1/Municipios/RecuperaMunicipiosPorRegiao?idRegiao=3",
+    "accessed_at": "2026-10-08T06:10:44.219937+00:00",
+    "transport": "curl HTTPS com validação TLS padrão",
+    "exit_code": 0,
+    "response": "200\nhttps://www.ssp.sp.gov.br/v1/Municipios/RecuperaMunicipiosPorRegiao?idRegiao=3\ntext/html",
+    "error": "",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-municipios.json",
+    "bytes": 26370,
+    "sha256": "7de4936ab01804296513769b2e92c62ea0d056765ee18d5e7f04bbc91c699f8b"
+  },
+  {
+    "name": "ssp-taxas.json",
+    "url": "https://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560",
+    "accessed_at": "2026-10-08T06:10:44.402567+00:00",
+    "transport": "curl HTTPS com validação TLS padrão",
+    "exit_code": 0,
+    "response": "200\nhttps://www.ssp.sp.gov.br/v1/TaxaDelito/RecuperaDadosMunicipio?idMunicipio=560\napplication/json; charset=utf-8",
+    "error": "",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-taxas.json",
+    "bytes": 4965,
+    "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55"
+  },
+  {
+    "name": "ssp-ocorrencias.json",
+    "url": "https://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560",
+    "accessed_at": "2026-10-08T06:10:44.624791+00:00",
+    "transport": "curl HTTPS com validação TLS padrão",
+    "exit_code": 0,
+    "response": "200\nhttps://www.ssp.sp.gov.br/v1/OcorrenciasAnuais/recuperaDadosMunicipio?idMunicipio=560\napplication/json; charset=utf-8",
+    "error": "",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-ocorrencias.json",
+    "bytes": 2900,
+    "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212"
+  },
+  {
+    "name": "ibge-10058.json",
+    "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores?localidade=354990",
+    "accessed_at": "2026-10-08T06:10:45.185691+00:00",
+    "transport": "curl HTTPS com validação TLS padrão",
+    "exit_code": 0,
+    "response": "200\nhttps://servicodados.ibge.gov.br/api/v1/pesquisas/10058/indicadores?localidade=354990\napplication/json",
+    "error": "",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ibge-10058.json",
+    "bytes": 20858,
+    "sha256": "d89e702227fe04e3896373598e542ac5ac1e5202609c8f45a286b5f76b82486c"
+  },
+  {
+    "name": "ibge-escolarizacao.json",
+    "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/10045/indicadores/60045/resultados/354990",
+    "accessed_at": "2026-10-08T06:10:45.434641+00:00",
+    "transport": "curl HTTPS com validação TLS padrão",
+    "exit_code": 22,
+    "response": "500\nhttps://servicodados.ibge.gov.br/api/v1/pesquisas/10045/indicadores/60045/resultados/354990\napplication/json",
+    "error": "curl: (22) The requested URL returned error: 500\n"
+  },
+  {
+    "name": "ideb-finais2025.zip",
+    "url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+    "retrieval_url": "http://download.inep.gov.br/ideb/resultados/divulgacao_anos_finais_municipios_2025.zip",
+    "sha256": "5f81ae18d33567608f10551d4f563a6879afc0182ff28cfd81e913958a30a6b3",
+    "bytes": 24381009,
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ideb-finais2025.zip",
+    "accessed_at": "2026-10-08T06:11:54.402666+00:00",
+    "note": "Resposta HTTP do domínio oficial; HTTPS sofreu reset. ZIP validado separadamente."
+  },
+  {
+    "url": "https://apisidra.ibge.gov.br/values/t/4711/n6/3549904/v/all/p/2022",
+    "name": "sidra4711.json",
+    "exit_code": 0,
+    "response": "200\nhttps://apisidra.ibge.gov.br/values/t/4711/n6/3549904/v/all/p/2022\napplication/json; charset=utf-8",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:48.031561+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4711.json",
+    "sha256": "248e59cedcfebfe31fdf1b656a146346539cf1d84f1e6f1a88d80e7806465e42",
+    "bytes": 1080
+  },
+  {
+    "url": "https://apisidra.ibge.gov.br/values/t/4712/n6/3549904/v/all/p/2022",
+    "name": "sidra4712.json",
+    "exit_code": 0,
+    "response": "200\nhttps://apisidra.ibge.gov.br/values/t/4712/n6/3549904/v/all/p/2022\napplication/json; charset=utf-8",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:48.755952+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4712.json",
+    "sha256": "89ed3f20e4050d82722748cb21704bf1a3e1a61cb42269d7fa9649bc7b455dfd",
+    "bytes": 1278
+  },
+  {
+    "url": "https://apisidra.ibge.gov.br/values/t/4714/n6/3549904/v/all/p/2022",
+    "name": "sidra4714.json",
+    "exit_code": 0,
+    "response": "200\nhttps://apisidra.ibge.gov.br/values/t/4714/n6/3549904/v/all/p/2022\napplication/json; charset=utf-8",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:49.034318+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra4714.json",
+    "sha256": "3d3098541730a46b96a9ca969fe254418d16ef16be7461993a06228596535793",
+    "bytes": 1217
+  },
+  {
+    "url": "https://apisidra.ibge.gov.br/values/t/9514/n6/3549904/v/93/p/2022/c2/all/c287/0",
+    "name": "sidra9514.json",
+    "exit_code": 0,
+    "response": "200\nhttps://apisidra.ibge.gov.br/values/t/9514/n6/3549904/v/93/p/2022/c2/all/c287/0\napplication/json; charset=utf-8",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:49.304982+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9514.json",
+    "sha256": "8859a6d7551b24ceea71edac878d8da45dbcee13495c0f7506fb4c2f645fc70b",
+    "bytes": 1718
+  },
+  {
+    "url": "https://apisidra.ibge.gov.br/values/t/9515/n6/3549904/v/all/p/2022",
+    "name": "sidra9515.json",
+    "exit_code": 0,
+    "response": "200\nhttps://apisidra.ibge.gov.br/values/t/9515/n6/3549904/v/all/p/2022\napplication/json; charset=utf-8",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:50.137582+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9515.json",
+    "sha256": "5c38d81cbb3d44a0d80e07bc90892b823d34961258dff1b6fe668d1e7da4088b",
+    "bytes": 1154
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf",
+    "name": "saude-q2025.pdf",
+    "exit_code": 0,
+    "response": "200\nhttps://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/Quadri_3_2025_1_20260227124829.pdf\napplication/pdf",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:52.657239+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-q2025.pdf",
+    "sha256": "1f0d0893f7b5cb9feafbcecbc9e9830b97191a3f1d1adee9ece218b3b0f1f9b6",
+    "bytes": 3011984
+  },
+  {
+    "url": "https://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf",
+    "name": "saude-rag2025.pdf",
+    "exit_code": 0,
+    "response": "200\nhttps://servicos.sjc.sp.gov.br/portal_da_transparencia/adm/relatorio_gestao/arquivos/RelatAnualGest_2025_1_20260630122107.pdf\napplication/pdf",
+    "error": "",
+    "accessed_at": "2026-10-08T06:16:53.022811+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-rag2025.pdf",
+    "sha256": "8d14b06619c9f1080409fcd9eb219cd72e1049a790c759942f9bded36be2db20",
+    "bytes": 467239
+  },
+  {
+    "url": "https://www.sjc.sp.gov.br/noticias/2019/janeiro/9/com-acoes-de-prevencao-casos-de-dengue-caem-quase-pela-metade-em-sao-jose/",
+    "http_status": 200,
+    "accessed_at": "2026-10-08T06:18:28.652026+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/dengue2019.html",
+    "sha256": "ffea05df0a2095407434ca93263f4cae50520377dae3df30901e01a560749ee1"
+  },
+  {
+    "url": "https://www.sjc.sp.gov.br/noticias/2025/dezembro/23/retrospectiva-2025-joseense-ganha-mais-cuidados-com-a-saude/",
+    "http_status": 200,
+    "accessed_at": "2026-10-08T06:18:29.655907+00:00",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/saude-retrospectiva2025.html",
+    "sha256": "3cf1a0b5e54cf8c2ad5b6c2cb03b376fc256ce99ce96595c3e59cd060b876ef0"
+  },
+  {
+    "name": "9514-metadados.json",
+    "url": "https://servicodados.ibge.gov.br/api/v3/agregados/9514/metadados",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/9514-metadados.json",
+    "sha256": "1d049151ee97b2f42705a7a53cead75fbe2cc6e63f528cafe548655823a6e911",
+    "bytes": 8542,
+    "accessed_date": "2026-10-08",
+    "manifest_added_at": "2026-10-08T06:57:05.099128+00:00",
+    "note": "Complemento de arquivo desta rodada. Hora exata/headers só comprovados quando registrados pelo coletor; mtime não prova consulta. Não inferir URL desconhecida."
+  },
+  {
+    "name": "sidra9514-total-idade.json",
+    "url": "https://apisidra.ibge.gov.br/values/t/9514/n6/3549904/v/93/p/2022/c2/all/c287/100362",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sidra9514-total-idade.json",
+    "sha256": "f188cbdc19452b24a0d67178d01d370c200d1c89322076d095bb415971ec492c",
+    "bytes": 1745,
+    "accessed_date": "2026-10-08",
+    "manifest_added_at": "2026-10-08T06:57:05.106129+00:00",
+    "note": "Complemento de arquivo desta rodada. Hora exata/headers só comprovados quando registrados pelo coletor; mtime não prova consulta. Não inferir URL desconhecida."
+  },
+  {
+    "name": "sinopse2023.zip",
+    "url": "https://download.inep.gov.br/dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_2023.zip",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/sinopse2023.zip",
+    "sha256": "6a29e549ea381ccb74a8b0aeec8b7fd1e4ec00c43bb83eae3ecc5c91bd7a88f5",
+    "bytes": 151568286,
+    "accessed_date": "2026-10-08",
+    "manifest_added_at": "2026-10-08T06:57:05.493799+00:00",
+    "note": "Complemento de arquivo desta rodada. Hora exata/headers só comprovados quando registrados pelo coletor; mtime não prova consulta. Não inferir URL desconhecida."
+  },
+  {
+    "name": "ssp-municipios-todos.json",
+    "url": "https://www.ssp.sp.gov.br/v1/Municipios/RecuperaMunicipios",
+    "raw_file": "docs/dados-publicos-revisao/consolidacao-geral/20261008T060731Z/fontes-externas/ssp-municipios-todos.json",
+    "sha256": "50d7a1ff9c52b30d8b317af58116f52ea15420e765747df093ccd300790f69f2",
+    "bytes": 47754,
+    "accessed_date": "2026-10-08",
+    "manifest_added_at": "2026-10-08T06:57:05.494799+00:00",
+    "note": "Complemento de arquivo desta rodada. Hora exata/headers só comprovados quando registrados pelo coletor; mtime não prova consulta. Não inferir URL desconhecida."
+  },
+  {
+    "name": "ideb-iniciais2025.zip",
+    "raw_file": "data/radar_hub/educacao_raw_2026-10-08/ideb-iniciais2025.zip",
+    "url": "https://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2025.zip",
+    "retrieval_url": "http://download.inep.gov.br/ideb/resultados/divulgacao_anos_iniciais_municipios_2025.zip",
+    "sha256": "89100286327ab07a4b1318ba51974d62da90af334f663bedf6374cb67298a3e7",
+    "bytes": 25308289,
+    "accessed_date": "2026-10-08",
+    "note": "Arquivo preservado da coleta P5 nesta data; HTTP oficial utilizado após falha HTTPS no requests; não houve desativação de certificado. Células e membro ZIP reproduzidos nesta consolidação."
+  }
+]

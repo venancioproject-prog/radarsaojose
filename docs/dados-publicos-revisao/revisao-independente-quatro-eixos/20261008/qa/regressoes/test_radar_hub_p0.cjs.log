@@ -1,0 +1,8 @@
+online: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+throw: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+404: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+invalid-json: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+mixed: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+old: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+missing: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK
+employment: pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK

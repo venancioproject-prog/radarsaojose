@@ -30,7 +30,7 @@
       // Se o usuário já estiver marcado como admin no localStorage, não oculta a tela
       const cachedRole = localStorage.getItem("userRole");
       const cachedEmail = (localStorage.getItem("userEmail") || "").toLowerCase().trim();
-      const isKnownAdmin = (cachedRole === 'admin') || cachedEmail.includes('venancio') || cachedEmail === 'gamersilvaesilva@gmail.com' || cachedEmail.includes('leoserven');
+      const isKnownAdmin = (cachedRole === 'admin') || cachedEmail.includes('venancio') || cachedEmail === 'gamersilvaesilva@gmail.com' || cachedEmail.includes('leoserven') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       if (!isKnownAdmin) {
         document.documentElement.style.visibility = 'hidden';
       }
@@ -136,9 +136,9 @@
           }
         }
 
-        // 2. Se o localStorage já indicava admin anteriormente
-        if (cachedRole === 'admin' || cachedEmail.includes('venancio') || SUPER_ADMINS.includes(cachedEmail)) {
-          console.log("[Auth Guard] Sessão mantida via credencial administrativa em cache.");
+        // 2. Se o localStorage já indicava admin anteriormente ou ambiente local
+        if (cachedRole === 'admin' || cachedEmail.includes('venancio') || SUPER_ADMINS.includes(cachedEmail) || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.log("[Auth Guard] Sessão mantida via credencial administrativa em cache ou ambiente local.");
           grantAdminAccess();
           return;
         }
@@ -1468,6 +1468,8 @@
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
   <!-- Market Intelligence Controller (126k Empresas SJC) -->
   <script src="market-intelligence-controller.js"></script>
+  <!-- Eleições 2026 Controller (Módulo Único Homologado) -->
+  <script src="eleicoes-2026-controller.js?v=20261007_04"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased h-screen overflow-hidden flex flex-col">
 
@@ -1565,6 +1567,16 @@
           <button type="button" onclick="switchTab('market-intel')" id="nav-market-intel" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
             <i class="fa-solid fa-brain text-base text-slate-400 w-5"></i>
             <span>Inteligência Local</span>
+          </button>
+
+          <button type="button" onclick="switchTab('eleicoes-2026')" id="nav-eleicoes-2026" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
+            <i class="fa-solid fa-landmark-flag text-base text-slate-400 w-5"></i>
+            <span>Eleições 2026</span>
+          </button>
+
+          <button type="button" onclick="switchTab('jornada')" id="nav-jornada" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
+            <i class="fa-solid fa-route text-base text-purple-500 w-5"></i>
+            <span>Jornada AIaaS & Billing</span>
           </button>
 
           <button type="button" onclick="switchTab('relatorios')" id="nav-relatorios" class="cursor-pointer w-full flex items-center gap-3.5 px-4 py-3 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-left transition-all">
@@ -1930,6 +1942,10 @@
         </div>
 
         <div class="flex items-center gap-3">
+          <a href="editoria.html?cat=emprego" target="_blank" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xs transition-all cursor-pointer" title="Ver Painel de Vagas em São José dos Campos">
+            <i class="fa-solid fa-briefcase text-emerald-600"></i>
+            <span>Vagas SJC</span>
+          </a>
           <button onclick="openNewPostModal()" class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md hover:shadow-cyan-500/20 transition-all cursor-pointer">
             <i class="fa-solid fa-plus text-slate-950"></i>
             <span>Nova Matéria</span>
@@ -2063,7 +2079,320 @@
           </div>
         </section>
 
-      </main>
+      
+    <!-- ==================== ABA: JORNADA DO CONSUMIDOR (AIaaS & BILLING) ==================== -->
+    <div id="tab-jornada" class="tab-content hidden flex-1 p-6 md:p-8 space-y-8 max-w-7xl mx-auto w-full">
+      
+      <!-- Cabeçalho Executivo -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-8 border border-slate-800 text-white shadow-xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wider mb-3">
+              <i class="fa-solid fa-brain"></i> Modelo de Inteligência como Serviço (AIaaS)
+            </div>
+            <h1 class="text-2xl md:text-3xl font-black tracking-tight">Arquitetura da Jornada do Consumidor & Faturamento</h1>
+            <p class="text-sm text-slate-300 mt-2 max-w-3xl leading-relaxed">
+              Mapeamento estratégico ponta a ponta dos pontos de contato, gatilhos de conversão, orquestração de pagamento (Asaas), concessão atômica de acesso (Supabase) e matriz de contingência para percalços operacionais.
+            </p>
+          </div>
+          <div class="shrink-0 flex items-center gap-3">
+            <a href="app.html" target="_blank" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs flex items-center gap-2 transition-all shadow-md">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Testar no App
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Pilares de Mercado de AIaaS (Benchmarking Global) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-magnet"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 text-base mb-1">1. Freemium / Teaser</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Como Notion AI e Perplexity: o visitante navega por dados públicos e pesquisas de amostra para experimentar o valor (<em>Aha! Moment</em>) antes de qualquer pedido de cartão.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 text-base mb-1">2. Paywall Contextual</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            O bloqueio só ocorre no momento do desejo de valor aprofundado: ao tentar acessar os capítulos executivos do Dossiê, consultar a IA Estratégica ou visualizar dados de influenciadores.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 text-base mb-1">3. Orquestração Híbrida</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Adaptação ao padrão B2B brasileiro: <strong>Pix à vista com 10% de desconto</strong> para fechamento imediato ou <strong>parcelamento em até 12x sem juros</strong> no cartão com carnê Asaas.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 text-base mb-1">4. Ativação Instantânea</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Zero atrito operacional: o gateway notifica via Webhook assinado, o banco executa uma RPC com trava de linha e o front-end sincroniza o acesso em tempo real sem intervenção humana.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 text-base mb-1">5. Upgrades Proporcionais</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Preservação da anuidade original: o cliente que migra do Dash para o Report aproveita o crédito do tempo não utilizado e paga apenas a diferença pelo período restante.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <h3 class="font-extrabold text-slate-900 text-base mb-1">6. Gestão de Assentos (Seats)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Padrão SaaS B2B corporativo (ex.: Linear/Slack): o titular do Plano Mídia gerencia até 2 convidados independentes com contas próprias, sem compartilhamento inseguro de senhas.
+          </p>
+        </div>
+      </div>
+
+      <!-- MAPA VISUAL DA JORNADA COMPLETA (DIAGRAMA INTERATIVO) -->
+      <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-diagram-project text-purple-600"></i> Fluxograma Ponta a Ponta: Da Descoberta ao Pós-Venda
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">Visão esquemática das etapas do consumidor e das bifurcações de segurança.</p>
+          </div>
+          <span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-lg text-xs font-bold">Arquitetura de Conversão</span>
+        </div>
+
+        <!-- Diagrama em Blocos Visuais Conectados -->
+        <div class="space-y-4">
+          
+          <!-- Passo 1: Descoberta -->
+          <div class="flex flex-col md:flex-row items-stretch gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
+            <div class="w-full md:w-48 shrink-0 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center font-black">1</div>
+              <div>
+                <span class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400 block">Etapa 1</span>
+                <strong class="text-sm text-slate-900">Descoberta</strong>
+              </div>
+            </div>
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-eye text-cyan-600 mr-1"></i> Visitante Gratuito</strong>
+                <p class="text-slate-600">Acessa indicadores gerais, linha do tempo dos bairros e bloco de amostra da pesquisa.</p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-slate-200">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-lock text-amber-600 mr-1"></i> Gatilho do Paywall</strong>
+                <p class="text-slate-600">Ao clicar em Dossiê Completo ou Consultor IA, abre o modal de planos em <span class="font-mono text-purple-600">app.html</span>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seta Conectora -->
+          <div class="flex justify-center -my-2 text-slate-300">
+            <i class="fa-solid fa-arrow-down text-lg"></i>
+          </div>
+
+          <!-- Passo 2: Checkout & Cotação -->
+          <div class="flex flex-col md:flex-row items-stretch gap-4 p-5 rounded-2xl bg-indigo-50/50 border border-indigo-200">
+            <div class="w-full md:w-48 shrink-0 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-indigo-200 text-indigo-800 flex items-center justify-center font-black">2</div>
+              <div>
+                <span class="text-[10px] uppercase tracking-wider font-extrabold text-indigo-400 block">Etapa 2</span>
+                <strong class="text-sm text-slate-900">Checkout Oficial</strong>
+              </div>
+            </div>
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div class="bg-white p-3 rounded-xl border border-indigo-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-calculator text-indigo-600 mr-1"></i> Cotação em Centavos</strong>
+                <p class="text-slate-600"><span class="font-mono text-purple-600">lib/pricing.js</span> calcula o total oficial com trava contra adulteração client-side.</p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-indigo-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-brands fa-pix text-emerald-600 mr-1"></i> Escolha Pix (-10%)</strong>
+                <p class="text-slate-600">Gera QR Code dinâmico com chave copia-e-cola e reserva por 15 minutos.</p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-indigo-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-credit-card text-sky-600 mr-1"></i> Escolha Cartão (12x)</strong>
+                <p class="text-slate-600">Validação Luhn e envio criptografado direto ao Asaas com antifraude.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seta Conectora -->
+          <div class="flex justify-center -my-2 text-slate-300">
+            <i class="fa-solid fa-arrow-down text-lg"></i>
+          </div>
+
+          <!-- Passo 3: Gateway & Webhook -->
+          <div class="flex flex-col md:flex-row items-stretch gap-4 p-5 rounded-2xl bg-purple-50/50 border border-purple-200">
+            <div class="w-full md:w-48 shrink-0 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-200 text-purple-800 flex items-center justify-center font-black">3</div>
+              <div>
+                <span class="text-[10px] uppercase tracking-wider font-extrabold text-purple-400 block">Etapa 3</span>
+                <strong class="text-sm text-slate-900">Processamento</strong>
+              </div>
+            </div>
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="bg-white p-3 rounded-xl border border-purple-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-key text-purple-600 mr-1"></i> Webhook Autenticado</strong>
+                <p class="text-slate-600"><span class="font-mono text-purple-600">api/asaas-webhook.js</span> valida assinatura e checa centavos exatos do pedido.</p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-purple-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-database text-purple-600 mr-1"></i> Transação Atômica</strong>
+                <p class="text-slate-600">RPC <span class="font-mono text-purple-600">billing_process_event</span> trava linha do usuário, ativa assinatura e atualiza perfil.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seta Conectora -->
+          <div class="flex justify-center -my-2 text-slate-300">
+            <i class="fa-solid fa-arrow-down text-lg"></i>
+          </div>
+
+          <!-- Passo 4: Ativação & Pós-Venda -->
+          <div class="flex flex-col md:flex-row items-stretch gap-4 p-5 rounded-2xl bg-emerald-50/50 border border-emerald-200">
+            <div class="w-full md:w-48 shrink-0 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-200 text-emerald-800 flex items-center justify-center font-black">4</div>
+              <div>
+                <span class="text-[10px] uppercase tracking-wider font-extrabold text-emerald-400 block">Etapa 4</span>
+                <strong class="text-sm text-slate-900">Liberação & Retenção</strong>
+              </div>
+            </div>
+            <div class="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div class="bg-white p-3 rounded-xl border border-emerald-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Desbloqueio Visual</strong>
+                <p class="text-slate-600"><span class="font-mono text-purple-600">refreshConfirmedPlan()</span> recarrega as permissões e retira paywalls instantaneamente.</p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-emerald-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-envelope text-emerald-600 mr-1"></i> E-mail Transacional</strong>
+                <p class="text-slate-600">Despacha confirmação estruturada com vigência UTC, valor das parcelas e boas-vindas.</p>
+              </div>
+              <div class="bg-white p-3 rounded-xl border border-emerald-100 shadow-xs">
+                <strong class="text-slate-800 block mb-1"><i class="fa-solid fa-users-line text-emerald-600 mr-1"></i> Gestão Mídia</strong>
+                <p class="text-slate-600">Titular acessa modal para convidar até 2 membros independentes por e-mail.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MATRIZ DE PERCALÇOS OPERACIONAIS & CONTINGÊNCIAS (EDGE CASES) -->
+      <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4">
+          <h2 class="text-lg font-black text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Matriz de Percalços Operacionais & Soluções do Radar
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">Como o sistema reage automaticamente quando algo sai do caminho perfeito.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Percalço 1 -->
+          <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 1. Abandono de Pix (Timeout)
+              </strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700">Auto-recuperado</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Cenário:</strong> Usuário gera o Pix mas não conclui o pagamento no app do banco.<br>
+              <strong>Solução:</strong> Pedido possui validade de 15 min (<span class="font-mono text-purple-600">expires_at</span>). Após esse prazo, o sistema auto-cancela a pendência e permite que ele tente de novo imediatamente sem travar o caixa.
+            </p>
+          </div>
+
+          <!-- Percalço 2 -->
+          <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 2. Recusa de Cartão / Antifraude
+              </strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Feedback Imediato</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Cenário:</strong> Cartão sem limite, dados digitados incorretamente ou bloqueio do emissor.<br>
+              <strong>Solução:</strong> O checkout captura o motivo exato do Asaas e orienta o cliente a tentar outro cartão ou optar pelo Pix à vista com 10% de desconto.
+            </p>
+          </div>
+
+          <!-- Percalço 3 -->
+          <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 3. Replay de Webhook / Rede Lenta
+              </strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">100% Idempotente</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Cenário:</strong> O gateway reenvia o mesmo webhook de confirmação duas ou três vezes seguidas.<br>
+              <strong>Solução:</strong> A RPC verifica o status do evento. Se já processado, responde HTTP 200 com flag <span class="font-mono text-purple-600">duplicate: true</span> sem duplicar créditos ou alterar vigência.
+            </p>
+          </div>
+
+          <!-- Percalço 4 -->
+          <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 4. Upgrade Parcelado no Cartão
+              </strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">Proteção Anti-Cobrança Dupla</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Cenário:</strong> Cliente no mês 4 quer subir de plano no cartão sem pagar carnê duplicado.<br>
+              <strong>Solução:</strong> O sistema exibe o cálculo transparente de substituição das 8 parcelas restantes e orienta o contato com a equipe antes de gerar nova cobrança no gateway.
+            </p>
+          </div>
+
+          <!-- Percalço 5 -->
+          <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 5. Convidado Mídia sem Conta
+              </strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-100 text-indigo-800">Validação Atômica</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Cenário:</strong> O titular tenta convidar um e-mail que ainda não possui cadastro no Radar.<br>
+              <strong>Solução:</strong> A API recusa com <span class="font-mono text-purple-600">USER_NOT_REGISTERED</span> e orienta o titular a pedir para o convidado criar uma conta gratuita para vinculação.
+            </p>
+          </div>
+
+          <!-- Percalço 6 -->
+          <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <strong class="text-xs font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span> 6. Estorno / Chargeback
+              </strong>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800">Rollback Seguro</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Cenário:</strong> Pagamento é estornado ou contestado no banco emissor.<br>
+              <strong>Solução:</strong> Se for upgrade, a RPC restaura o plano anterior caso ainda esteja vigente; se for compra inicial, cancela a assinatura e rebaixa para gratuito atomicamente.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
     </div>
 
         <!-- ==================== TAB: BUSINESS PLAN (PLANO DE NEGÓCIOS SEBRAE & MONDAY.COM) ==================== -->
@@ -4594,6 +4923,1370 @@
 
     </div>
 
+    <!-- ==================== TAB: ELEIÇÕES 2026 (MÓDULO ANALÍTICO ÚNICO INTEGRADO) ==================== -->
+    <div id="tab-eleicoes-2026" class="tab-content hidden flex-1 flex flex-col bg-slate-50 relative overflow-y-auto">
+      
+      <!-- SUB-HEADER & TOOLBAR ANALÍTICO STICKY (RADAR SÃO JOSÉ DESIGN SYSTEM) -->
+      <div class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs relative">
+        <!-- Thin Top Loading Progress Bar -->
+        <div id="eleicoesProgressBar" class="h-0.5 w-0 bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-400 transition-all duration-300"></div>
+
+        <!-- Linha 1: Título Executivo + Breadcrumb de Contexto + Ações Principais -->
+        <div class="px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3 border-b border-slate-100">
+          <div class="flex items-center gap-3 sm:gap-4">
+            <!-- Título Executivo Oficial -->
+            <div class="flex items-center gap-2.5 shrink-0">
+              <div class="w-8 h-8 rounded-xl bg-[#0B2545] text-cyan-400 flex items-center justify-center text-sm shadow-xs">
+                <i class="fa-solid fa-landmark-flag"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h1 class="text-sm sm:text-base font-black text-slate-900 tracking-tight">Eleições 2026</h1>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-100 text-cyan-800 border border-cyan-200">1º Turno • Homologado</span>
+                  <span id="eleicoesLoadingSpinner" class="hidden text-cyan-600 text-xs animate-spin" title="Atualizando dados...">
+                    <i class="fa-solid fa-circle-notch"></i>
+                  </span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium hidden sm:block">Como São José dos Campos participou das Eleições 2026, território por território</p>
+              </div>
+            </div>
+
+            <span class="h-5 w-px bg-slate-200 shrink-0 hidden sm:block"></span>
+
+            <!-- Context Breadcrumb Dinâmico -->
+            <div id="eleicoesActiveBreadcrumb" class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 shrink-0 shadow-2xs">
+              <i class="fa-solid fa-location-dot text-cyan-600 text-[11px]"></i>
+              <span id="breadcrumbTerritorioText">São José dos Campos</span>
+            </div>
+          </div>
+
+          <!-- Ações Rápidas do Topo -->
+          <div class="flex items-center gap-2 shrink-0">
+            <!-- Botão de Atalho Destacado para a Pesquisa Radar N=477 -->
+            <button type="button" onclick="document.getElementById('sec-eleicoes-pesquisa-radar').scrollIntoView({behavior:'smooth'})" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs" title="Ver sondagem quantitativa com N=477 respondentes e recortes">
+              <i class="fa-solid fa-square-poll-vertical text-[12px] text-amber-200"></i>
+              <span>Sondagem Radar (N=477)</span>
+            </button>
+
+            <!-- Botão Limpar Filtros -->
+            <button type="button" id="btnLimparFiltrosEleicoes" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-600 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer border border-slate-200 shadow-2xs" title="Restaurar visualização para todo o município e filtros padrão">
+              <i class="fa-solid fa-rotate-left text-[11px]"></i>
+              <span class="hidden md:inline">Limpar Filtros</span>
+            </button>
+
+            <!-- Botão Recarregar -->
+            <button type="button" onclick="initEleicoes2026(true)" class="p-1.5 rounded-xl text-slate-400 hover:text-cyan-600 hover:bg-slate-100 transition-colors cursor-pointer border border-transparent hover:border-slate-200" title="Recarregar dados homologados">
+              <i class="fa-solid fa-arrow-rotate-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Linha 2: Menu de Navegação em Abas Contínuas (Totalmente Visível & Responsivo) -->
+        <div class="px-4 sm:px-6 lg:px-8 bg-slate-50/90 border-b border-slate-200/80 overflow-x-auto">
+          <nav class="flex items-center gap-1 sm:gap-2 py-1 min-w-max">
+            <a href="#sec-eleicoes-visao" class="quick-nav-pill active"><i class="fa-solid fa-chart-pie text-[10px]"></i> Visão Geral</a>
+            <a href="#sec-eleicoes-abstencao" class="quick-nav-pill"><i class="fa-solid fa-chart-bar text-[10px]"></i> Abstenção</a>
+            <a href="#sec-eleicoes-mapa" class="quick-nav-pill"><i class="fa-solid fa-map-location-dot text-[10px]"></i> Mapa Interativo</a>
+            <a href="#sec-eleicoes-resultados" class="quick-nav-pill"><i class="fa-solid fa-check-to-slot text-[10px]"></i> Resultados</a>
+            <a href="#sec-eleicoes-distribuicao" class="quick-nav-pill"><i class="fa-solid fa-arrows-split-up-and-left text-[10px]"></i> Candidatos</a>
+            <a href="#sec-eleicoes-perfil" class="quick-nav-pill"><i class="fa-solid fa-users text-[10px]"></i> Perfil Eleitoral</a>
+            <a href="#sec-eleicoes-comparacao" class="quick-nav-pill"><i class="fa-solid fa-code-compare text-[10px]"></i> Comparação</a>
+            <a href="#sec-eleicoes-pesquisa-radar" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-black bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 transition-all shadow-2xs"><i class="fa-solid fa-square-poll-vertical text-amber-700 text-[11px]"></i> Pesquisa Radar (N=477)</a>
+            <a href="#sec-eleicoes-achados" class="quick-nav-pill"><i class="fa-solid fa-lightbulb text-[10px]"></i> Achados</a>
+            <a href="#sec-eleicoes-metodologia" class="quick-nav-pill"><i class="fa-solid fa-book-bookmark text-[10px]"></i> Metodologia</a>
+          </nav>
+        </div>
+
+        <!-- Linha 3: Barra de Filtros Hierárquicos Globais (Cascata Contínua & Sincronizada) -->
+        <div class="py-2.5 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-200/60">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2 items-center">
+            
+            <!-- 1. Região -->
+            <div class="col-span-1">
+              <label for="filterEleicaoRegiao" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Região</label>
+              <select id="filterEleicaoRegiao" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs">
+                <option value="">Todas as Regiões</option>
+                <option value="Centro">Centro</option>
+                <option value="Norte">Norte</option>
+                <option value="Leste">Leste</option>
+                <option value="Sudeste">Sudeste</option>
+                <option value="Sul">Sul</option>
+                <option value="Oeste">Oeste</option>
+                <option value="São Francisco Xavier">São Francisco Xavier</option>
+              </select>
+            </div>
+
+            <!-- 2. Bairro Analítico -->
+            <div class="col-span-1">
+              <label for="filterEleicaoBairro" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Bairro Analítico</label>
+              <select id="filterEleicaoBairro" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs">
+                <option value="">Todos os Bairros</option>
+              </select>
+            </div>
+
+            <!-- 3. Local de Votação -->
+            <div class="col-span-1 md:col-span-1 lg:col-span-2">
+              <label for="filterEleicaoLocal" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Local de Votação (144)</label>
+              <select id="filterEleicaoLocal" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs truncate">
+                <option value="">Todos os Locais</option>
+              </select>
+            </div>
+
+            <!-- 4. Seção Eleitoral -->
+            <div class="col-span-1">
+              <label for="filterEleicaoSecao" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Seção</label>
+              <select id="filterEleicaoSecao" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs">
+                <option value="">Todas as Seções</option>
+              </select>
+            </div>
+
+            <!-- 5. Cargo Eleitoral -->
+            <div class="col-span-1">
+              <label for="filterEleicaoCargo" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Cargo</label>
+              <select id="filterEleicaoCargo" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs">
+                <option value="Presidente">Presidente</option>
+                <option value="Governador">Governador</option>
+                <option value="Senador">Senador</option>
+                <option value="Deputado Federal">Deputado Federal</option>
+                <option value="Deputado Estadual">Deputado Estadual</option>
+              </select>
+            </div>
+
+            <!-- 6. Candidato -->
+            <div class="col-span-1">
+              <label for="filterEleicaoCandidato" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Candidato</label>
+              <select id="filterEleicaoCandidato" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs truncate">
+                <option value="">Todos os Candidatos</option>
+              </select>
+            </div>
+
+            <!-- 7. Busca Textual Rápida -->
+            <div class="col-span-1">
+              <label for="filterEleicaoBusca" class="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Busca Rápida</label>
+              <div class="relative">
+                <input type="text" id="filterEleicaoBusca" placeholder="Local, bairro, partido..." class="w-full bg-white border border-slate-200 rounded-xl pl-7 pr-2.5 py-1.5 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-2xs" />
+                <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px]"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- CORPO PRINCIPAL DO MÓDULO (EXPERIÊNCIA ANALÍTICA VERTICAL ÚNICA) -->
+      <div class="p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl mx-auto w-full">
+
+        <!-- ==================== SEÇÃO 1: VISÃO GERAL & KPIS CANÔNICOS ==================== -->
+        <section id="sec-eleicoes-visao" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-cyan-700">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Indicadores Oficiais Homologados • TSE 2026</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Visão Geral do Eleitorado & Votação</h2>
+            </div>
+            <div class="text-xs text-slate-500">
+              Território ativo: <span id="labelContextoKpis" class="font-bold text-slate-800">São José dos Campos</span>
+            </div>
+          </div>
+
+          <!-- Grid dos 5 KPIs Canônicos -->
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+            
+            <!-- KPI 1: Eleitorado Cadastrado -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col justify-between hover:shadow-card-hover transition-all">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Eleitorado Cadastrado</span>
+                <span class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs"><i class="fa-solid fa-id-card"></i></span>
+              </div>
+              <div class="space-y-0.5">
+                <span id="kpiEleitoradoCadastrado" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-display">539.147</span>
+                <p class="text-[11px] text-slate-500 font-medium">Universo de Perfil Demográfico</p>
+              </div>
+            </div>
+
+            <!-- KPI 2: Aptos no BU Estadual -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col justify-between hover:shadow-card-hover transition-all">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Aptos (BU Estadual)</span>
+                <span class="w-7 h-7 rounded-lg bg-cyan-50 text-cyan-600 flex items-center justify-center text-xs"><i class="fa-solid fa-check-double"></i></span>
+              </div>
+              <div class="space-y-0.5">
+                <span id="kpiAptosBU" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-display">538.797</span>
+                <p class="text-[11px] text-slate-500 font-medium">Nas 1.561 seções com BU apurado</p>
+              </div>
+            </div>
+
+            <!-- KPI 3: Comparecimento -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col justify-between hover:shadow-card-hover transition-all">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Comparecimento</span>
+                <span class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs"><i class="fa-solid fa-person-walking"></i></span>
+              </div>
+              <div class="space-y-0.5">
+                <span id="kpiComparecimento" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-display">437.624</span>
+                <p id="kpiTaxaComparecimento" class="text-[11px] text-emerald-600 font-bold">81,22% de participação</p>
+              </div>
+            </div>
+
+            <!-- KPI 4: Abstenção -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col justify-between hover:shadow-card-hover transition-all">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Abstenções</span>
+                <span class="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-xs"><i class="fa-solid fa-user-xmark"></i></span>
+              </div>
+              <div class="space-y-0.5">
+                <span id="kpiAbstencoes" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-display">101.173</span>
+                <p id="kpiTaxaAbstencao" class="text-[11px] text-rose-600 font-bold">18,78% de abstenção</p>
+              </div>
+            </div>
+
+            <!-- KPI 5: Rede de Locais e Seções -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 flex flex-col justify-between hover:shadow-card-hover transition-all">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Rede Eleitoral SJC</span>
+                <span class="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs"><i class="fa-solid fa-school-flag"></i></span>
+              </div>
+              <div class="space-y-0.5">
+                <div class="flex items-baseline gap-1.5">
+                  <span id="kpiQtdLocais" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-display">144</span>
+                  <span class="text-xs font-bold text-slate-500">locais</span>
+                </div>
+                <p id="kpiQtdSecoes" class="text-[11px] text-slate-500 font-medium">1.562 seções cadastradas (1 agregada)</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Nota Metodológica Discreta de Universos -->
+          <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100 flex items-start gap-3 text-xs text-blue-900">
+            <i class="fa-solid fa-circle-info text-blue-600 mt-0.5 shrink-0 text-sm"></i>
+            <div>
+              <span class="font-extrabold">Distinção de Universos Homologados:</span>
+              <span class="text-blue-800">
+                O <strong>Eleitorado Cadastrado (539.147)</strong> refere-se à base biométrica oficial usada no perfil demográfico.
+                Os <strong>Aptos no BU Estadual (538.797)</strong> representam as seções com boletim de urna emitido no 1º turno dos cargos estaduais.
+                A diferença de 350 aptos decorre de 1 seção agregada (Zona 411, Seção 412 na EMEF Possidônio Salles) e transferências eleitorais específicas.
+                Nunca substitua um universo pelo outro.
+              </span>
+            </div>
+          </div>
+
+          <!-- Banner / Card de Integração: Perspectiva de Sondagem Radar São José (N=477) -->
+          <div class="p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border-2 border-amber-300/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="space-y-1.5 max-w-3xl">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500 text-white shadow-2xs">Sondagem de Opinião Radar</span>
+                <span class="text-xs font-bold text-amber-900">Base Própria de Respondentes (N=477)</span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-slate-900 tracking-tight">Posicionamento Ideológico & Engajamento Político em São José dos Campos</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Além da apuração das urnas do TSE, integramos os dados declaratórios do <strong>Radar São José</strong> com <strong class="text-slate-900">477 munícipes</strong>: Espectro Político (Direita 38,6%, Esquerda 23,9%, Não Declarados 21,6%, Centro 15,9%) e Acompanhamento Político (3,03/5), com recortes por Região, Renda, Faixa Etária e Ocupação.
+              </p>
+            </div>
+            <div class="shrink-0 flex items-center">
+              <button type="button" onclick="document.getElementById('sec-eleicoes-pesquisa-radar').scrollIntoView({behavior:'smooth'})" class="w-full md:w-auto px-4 py-2.5 rounded-xl bg-[#0B2545] hover:bg-[#133E68] text-cyan-300 hover:text-white text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm border border-cyan-500/30">
+                <i class="fa-solid fa-square-poll-vertical text-cyan-400"></i>
+                <span>Ver Sondagem & Recortes Radar ➔</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 2: PARTICIPAÇÃO & ABSTENÇÃO POR REGIÃO ==================== -->
+        <section id="sec-eleicoes-abstencao" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-rose-600">
+                <i class="fa-solid fa-chart-simple"></i>
+                <span>Comportamento das Urnas • 7 Regiões</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Participação & Abstenção Territorial</h2>
+              <p class="text-xs text-slate-500">Taxas observadas nos boletins de urna homologados por região geográfica do Plano Diretor</p>
+            </div>
+
+            <!-- Controles de Ordenação da Tabela -->
+            <div class="flex items-center gap-2 self-start sm:self-auto">
+              <span class="text-xs font-bold text-slate-500">Ordenar por:</span>
+              <select id="selectOrdemAbstencao" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-2xs">
+                <option value="taxa_desc">Maior Taxa de Abstenção</option>
+                <option value="taxa_asc">Menor Taxa de Abstenção</option>
+                <option value="abst_desc">Maior Volume de Abstenções</option>
+                <option value="aptos_desc">Maior Colégio Eleitoral (Aptos)</option>
+                <option value="comp_desc">Maior Comparecimento</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Grid: Gráfico de Abstenção + Tabela Regional -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Gráfico Comparativo de Abstenção -->
+            <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight">Taxa de Abstenção por Região (%)</h3>
+                  <span class="text-[11px] font-bold text-slate-400">Média: 18,78%</span>
+                </div>
+                <p class="text-xs text-slate-500 mb-4">Percentual de ausência sobre os aptos observados no BU estadual</p>
+                <div class="relative h-[260px] w-full">
+                  <canvas id="chartEleicoesAbstencaoCanvas"></canvas>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <span>Maior: <strong class="text-rose-600 font-black">São Francisco Xavier (22,67%)</strong></span>
+                <span>Menor: <strong class="text-emerald-600 font-black">Oeste (17,77%)</strong></span>
+              </div>
+            </div>
+
+            <!-- Tabela de Dados Regionais Homologados -->
+            <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+              <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight">Quadro Territorial Oficial de Comparecimento</h3>
+                  <p class="text-xs text-slate-500">Totais auditados do 1º turno das Eleições 2026 em São José dos Campos</p>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400">7 Regiões</span>
+              </div>
+              <div class="overflow-x-auto custom-scrollbar flex-1">
+                <table class="w-full text-left border-collapse" id="tableAbstencaoRegioes">
+                  <thead>
+                    <tr class="bg-slate-50/80 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                      <th class="px-4 py-3">Região</th>
+                      <th class="px-3 py-3 text-right">Locais</th>
+                      <th class="px-3 py-3 text-right">Aptos BU</th>
+                      <th class="px-3 py-3 text-right">Comparecimento</th>
+                      <th class="px-3 py-3 text-right">Abstenções</th>
+                      <th class="px-4 py-3 text-right">Taxa Abstenção</th>
+                      <th class="px-3 py-3 text-center">Ação</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyAbstencaoRegioes" class="divide-y divide-slate-100 text-xs font-medium text-slate-700">
+                    <!-- Gerado dinamicamente -->
+                  </tbody>
+                  <tfoot>
+                    <tr class="bg-slate-50 font-black text-xs text-slate-900 border-t border-slate-200">
+                      <td class="px-4 py-3">São José dos Campos (Total)</td>
+                      <td class="px-3 py-3 text-right">144</td>
+                      <td class="px-3 py-3 text-right">538.797</td>
+                      <td class="px-3 py-3 text-right">437.624</td>
+                      <td class="px-3 py-3 text-right">101.173</td>
+                      <td class="px-4 py-3 text-right text-rose-600 font-black">18,78%</td>
+                      <td class="px-3 py-3 text-center">-</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 3: MAPA TERRITORIAL (144 LOCAIS DE VOTAÇÃO) ==================== -->
+        <section id="sec-eleicoes-mapa" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-cyan-700">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>Geolocalização Oficial • 144 Colégios Eleitorais</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Mapa dos Locais de Votação</h2>
+              <p class="text-xs text-slate-500">Distribuição espacial das 1.562 seções e desempenho territorial nas urnas</p>
+            </div>
+
+            <!-- Seletor de Camada / Métrica do Mapa -->
+            <div class="flex flex-wrap items-center gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-2xs">
+              <span class="text-[11px] font-bold text-slate-500 pl-2">Métrica:</span>
+              <button type="button" onclick="setMapaMetrica('abstencao')" id="btnMapMetricAbstencao" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs">
+                Taxa de Abstenção
+              </button>
+              <button type="button" onclick="setMapaMetrica('comparecimento')" id="btnMapMetricComparecimento" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Comparecimento
+              </button>
+              <button type="button" onclick="setMapaMetrica('aptos')" id="btnMapMetricAptos" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Eleitorado (Aptos)
+              </button>
+              <button type="button" onclick="setMapaMetrica('candidato')" id="btnMapMetricCandidato" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Votos do Candidato
+              </button>
+            </div>
+          </div>
+
+          <!-- Contêiner do Mapa com Card e Painel Lateral -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-5 space-y-4">
+            
+            <!-- Barra Superior do Mapa: Legenda e Controles -->
+            <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="font-bold text-slate-700">Legenda da Camada:</span>
+                <div id="mapLegendContainer" class="flex items-center gap-2 text-[11px] font-semibold text-slate-600">
+                  <!-- Injetado dinamicamente -->
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 text-slate-500">
+                <span id="mapLocaisCountBadge" class="px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-bold text-slate-700">144 locais exibidos</span>
+                <button type="button" onclick="resetMapZoom()" class="px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[11px] font-bold text-slate-700" title="Centralizar em São José dos Campos">
+                  <i class="fa-solid fa-arrows-to-dot"></i> Centralizar
+                </button>
+              </div>
+            </div>
+
+            <!-- Frame Leaflet -->
+            <div id="eleicoesLeafletMap" class="w-full h-[520px] rounded-xl overflow-hidden border border-slate-200 relative z-10 shadow-inner"></div>
+
+            <!-- Rodapé do Mapa com Resumo do Local Ativo / Hover -->
+            <div id="mapInfoBanner" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-circle-dot text-cyan-600"></i>
+                <span id="mapInfoBannerText">Passe o mouse ou clique sobre qualquer local de votação para inspecionar indicadores completos e filtrar o módulo.</span>
+              </div>
+              <span class="text-[11px] text-slate-400 font-medium">Coordenadas TSE & Perímetros Plano Diretor SJC</span>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 4: RESULTADOS ELEITORAIS ==================== -->
+        <section id="sec-eleicoes-resultados" class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-blue-600">
+                <i class="fa-solid fa-check-to-slot"></i>
+                <span>Apuração das Urnas • Resultados</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Resultado Eleitoral por Cargo</h2>
+              <p class="text-xs text-slate-500">Ranking oficial e distribuição geográfica dos candidatos apurados para <strong id="lblCargoResultados" class="text-slate-800">Presidente</strong></p>
+            </div>
+
+            <!-- Seletor de Base Percentual: Votos Válidos vs Total Emitido -->
+            <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-2xs self-start sm:self-auto">
+              <span class="text-[11px] font-bold text-slate-500 pl-2">Base %:</span>
+              <button type="button" onclick="setBasePercentual('validos')" id="btnBaseValidos" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs">
+                Votos Válidos
+              </button>
+              <button type="button" onclick="setBasePercentual('total')" id="btnBaseTotal" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Total Emitido no BU
+              </button>
+            </div>
+          </div>
+
+          <!-- Cards Resumo de Apuração do Cargo -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Votos Válidos</span>
+              <span id="cardVotosValidos" class="text-xl font-black text-slate-900 tracking-tight font-display">-</span>
+              <p id="cardVotosValidosPct" class="text-[10px] text-emerald-600 font-bold mt-0.5">100% dos válidos</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Votos Nominais</span>
+              <span id="cardVotosNominais" class="text-xl font-black text-slate-900 tracking-tight font-display">-</span>
+              <p id="cardVotosNominaisPct" class="text-[10px] text-slate-500 font-semibold mt-0.5">-</p>
+            </div>
+
+            <div id="cardLegendaWrapper" class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Votos de Legenda</span>
+              <span id="cardVotosLegenda" class="text-xl font-black text-slate-900 tracking-tight font-display">-</span>
+              <p id="cardVotosLegendaPct" class="text-[10px] text-slate-500 font-semibold mt-0.5">Partidos proporcionais</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Brancos & Nulos</span>
+              <span id="cardVotosBrancosNulos" class="text-xl font-black text-slate-900 tracking-tight font-display">-</span>
+              <p id="cardVotosBrancosNulosPct" class="text-[10px] text-rose-600 font-bold mt-0.5">-</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs col-span-2 sm:col-span-1">
+              <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Total de Votos no BU</span>
+              <span id="cardVotosTotalBU" class="text-xl font-black text-slate-900 tracking-tight font-display">-</span>
+              <p class="text-[10px] text-slate-500 font-semibold mt-0.5">Votos registrados</p>
+            </div>
+          </div>
+
+          <!-- NOVO: Grid com Gráfico Comparativo dos Candidatos + Destaque do Líder -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Gráfico Chart.js dos Candidatos -->
+            <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <div>
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight" id="lblTituloGraficoResultados">Comparativo de Votos por Candidato</h3>
+                  <p class="text-xs text-slate-500" id="lblSubGraficoResultados">Votação nominal apurada no território ativo</p>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400" id="lblBadgeGraficoResultados">Top Candidatos</span>
+              </div>
+              <div class="relative h-[280px] w-full">
+                <canvas id="chartEleicoesResultadosCanvas"></canvas>
+              </div>
+            </div>
+
+            <!-- Card Destaque do Líder -->
+            <div class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between space-y-4">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight">Candidato Líder</h3>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800">1º Lugar</span>
+                </div>
+                <p class="text-xs text-slate-500 mb-3">Mais votado no recorte territorial atual</p>
+                
+                <div id="cardLiderTerritorio" class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+                  <div class="flex items-center gap-3">
+                    <div id="liderAvatarBox" class="w-10 h-10 rounded-xl bg-[#0B2545] text-cyan-400 flex items-center justify-center font-black text-sm shadow-xs">
+                      PL
+                    </div>
+                    <div>
+                      <h4 id="liderNome" class="text-base font-black text-slate-900 leading-tight">Flavio Bolsonaro</h4>
+                      <p id="liderNumeroPartido" class="text-xs text-slate-500 font-bold">22 • PL</p>
+                    </div>
+                  </div>
+                  <div class="pt-2 border-t border-slate-200/60 flex items-baseline justify-between">
+                    <span class="text-xs text-slate-500 font-semibold">Total de Votos:</span>
+                    <span id="liderVotos" class="text-lg font-black text-slate-900 font-display">240.721</span>
+                  </div>
+                  <div class="flex items-baseline justify-between">
+                    <span class="text-xs text-slate-500 font-semibold">Participação Válidos:</span>
+                    <span id="liderPct" class="text-sm font-black text-indigo-600 font-display">57,35%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 space-y-1.5">
+                <p class="flex items-center justify-between">
+                  <span>Segundo Colocado:</span>
+                  <strong id="lblSegundoColocado" class="text-slate-800 font-bold">Lula (PT) — 136.451 (32,51%)</strong>
+                </p>
+                <p class="flex items-center justify-between">
+                  <span>Diferença:</span>
+                  <strong id="lblDiferencaLider" class="text-indigo-700 font-black">+104.270 votos</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabela de Candidatos e Votação Geral -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+            <div class="p-4 sm:p-5 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 class="text-sm font-black text-slate-900 tracking-tight">Ranking Oficial de Candidatos</h3>
+                <p class="text-xs text-slate-500">Clique em qualquer candidato para ver a tabela detalhada de todos os seus bairros e regiões</p>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span id="badgeQtdCandidatos" class="px-2.5 py-0.5 rounded-full bg-slate-100 text-[11px] font-bold text-slate-700">0 votáveis</span>
+              </div>
+            </div>
+
+            <div class="overflow-x-auto custom-scrollbar">
+              <table class="w-full text-left border-collapse" id="tableResultadosCandidatos">
+                <thead>
+                  <tr class="bg-slate-50/80 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                    <th class="px-4 py-3 text-center w-12">#</th>
+                    <th class="px-4 py-3">Candidato / Votável</th>
+                    <th class="px-3 py-3">Número</th>
+                    <th class="px-3 py-3">Partido</th>
+                    <th class="px-3 py-3">Tipo</th>
+                    <th class="px-4 py-3 text-right">Votos</th>
+                    <th class="px-4 py-3 text-right" id="thPercentualCol">% Votos Válidos</th>
+                    <th class="px-4 py-3 text-right">% Total BU</th>
+                    <th class="px-4 py-3 text-center">Bairros & Regiões</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyResultadosCandidatos" class="divide-y divide-slate-100 text-xs font-medium text-slate-700">
+                  <!-- Gerado dinamicamente -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- NOVO: Detalhamento Territorial Específico de Cada Presidenciável (Bairros e Regiões) -->
+          <div id="painelDetalhamentoCandidato" class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-6">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+              <div>
+                <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-indigo-600">
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  <span>Inteligência Territorial por Candidato</span>
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-slate-900 tracking-tight" id="lblDetalhamentoCandidatoNome">Bairros e Regiões de Maior Votação</h3>
+                <p class="text-xs text-slate-500" id="lblDetalhamentoCandidatoSub">Selecione o candidato nas abas abaixo para ver a lista completa de bairros e o quadro das 7 regiões</p>
+              </div>
+
+              <!-- Seletor Rápido de Presidenciáveis / Candidatos (Pills de Navegação) -->
+              <div class="flex flex-col gap-1.5 self-start lg:self-auto">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Alternar Presidenciável:</span>
+                <div id="pillsPresidenciaveisContainer" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar max-w-full pb-1">
+                  <!-- Injetado dinamicamente -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Grid: Tabela das 7 Regiões + Tabela Completa de Bairros -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              <!-- 1. Distribuição por Região (7 Regiões) -->
+              <div class="lg:col-span-5 space-y-3">
+                <div class="flex items-center justify-between">
+                  <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-layer-group text-blue-600"></i>
+                    <span>Votação nas 7 Regiões</span>
+                  </h4>
+                  <span class="text-[10px] text-slate-400 font-bold">Ordenado por Votos</span>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                  <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr class="bg-slate-50 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                        <th class="px-3 py-2.5">Região</th>
+                        <th class="px-3 py-2.5 text-right">Votos</th>
+                        <th class="px-3 py-2.5 text-right">% do Cand.</th>
+                        <th class="px-3 py-2.5 text-right">% na Região</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyDetalhamentoRegioes" class="divide-y divide-slate-100 font-medium text-slate-700">
+                      <!-- Injetado dinamicamente -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 2. Lista Completa de Bairros Analíticos com Mais Votos -->
+              <div class="lg:col-span-7 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <h4 class="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-tree-city text-emerald-600"></i>
+                    <span>Bairros Onde Mais Teve Votos</span>
+                  </h4>
+                  <div class="flex items-center gap-2">
+                    <input type="text" id="inputBuscaBairrosCand" placeholder="Buscar bairro..." class="px-2.5 py-1 text-xs border border-slate-200 rounded-lg bg-slate-50 focus:bg-white focus:outline-none focus:border-cyan-500 w-36 shadow-2xs" />
+                    <select id="selectOrdemBairrosCand" class="px-2 py-1 text-xs border border-slate-200 rounded-lg bg-slate-50 font-bold text-slate-600 shadow-2xs">
+                      <option value="votos_desc">Mais Votos</option>
+                      <option value="pct_desc">Maior % no Bairro</option>
+                      <option value="nome_asc">Nome (A-Z)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-200 max-h-[380px] custom-scrollbar bg-white">
+                  <table class="w-full text-left border-collapse text-xs" id="tableDetalhamentoBairros">
+                    <thead class="sticky top-0 bg-slate-50/95 backdrop-blur-xs z-10">
+                      <tr class="text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                        <th class="px-3 py-2.5 text-center w-8">#</th>
+                        <th class="px-3 py-2.5">Bairro Analítico</th>
+                        <th class="px-2 py-2.5">Região</th>
+                        <th class="px-3 py-2.5 text-right">Votos</th>
+                        <th class="px-3 py-2.5 text-right">% no Bairro</th>
+                        <th class="px-4 py-2.5">Concentração</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyDetalhamentoBairros" class="divide-y divide-slate-100 font-medium text-slate-700">
+                      <!-- Injetado dinamicamente -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 5: DISTRIBUIÇÃO TERRITORIAL DO CANDIDATO ==================== -->
+        <section id="sec-eleicoes-distribuicao" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-indigo-600">
+                <i class="fa-solid fa-arrows-split-up-and-left"></i>
+                <span>Dispersão Territorial do Voto</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Distribuição Territorial de Candidato</h2>
+              <p class="text-xs text-slate-500">Onde o candidato obteve maior concentração de votos: regiões, bairros e colégios eleitorais</p>
+            </div>
+
+            <!-- Candidato Ativo Badge -->
+            <div id="candidatoDistribuicaoBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-900 text-xs font-bold">
+              <i class="fa-solid fa-user-check text-indigo-600"></i>
+              <span id="nomeCandidatoDistribuicaoText">Selecione um candidato acima ou no filtro</span>
+            </div>
+          </div>
+
+          <!-- Conteúdo da Distribuição do Candidato -->
+          <div id="wrapperDistribuicaoCandidato" class="space-y-6">
+            
+            <!-- Cards de Desempenho do Candidato Selecionado -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Total de Votos no Município</span>
+                <span id="distVotosTotal" class="text-2xl font-black text-slate-900 tracking-tight font-display">-</span>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Votos nominais registrados</p>
+              </div>
+
+              <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Participação nos Votos Válidos</span>
+                <span id="distVotosPctValidos" class="text-2xl font-black text-indigo-600 tracking-tight font-display">-</span>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Em São José dos Campos</p>
+              </div>
+
+              <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Região Mais Forte (%)</span>
+                <span id="distRegiaoMaisForte" class="text-lg font-black text-slate-900 tracking-tight">-</span>
+                <p id="distRegiaoMaisFortePct" class="text-[11px] text-emerald-600 font-bold mt-0.5">-</p>
+              </div>
+
+              <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-2xs">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Melhor Colégio Eleitoral</span>
+                <span id="distMelhorLocal" class="text-sm font-black text-slate-900 tracking-tight truncate block" title="">-</span>
+                <p id="distMelhorLocalVotos" class="text-[11px] text-indigo-600 font-bold mt-0.5">-</p>
+              </div>
+            </div>
+
+            <!-- Gráfico de Dispersão por Região + Tabela dos Top Bairros -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              
+              <!-- Votos por Região -->
+              <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between">
+                <div>
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight mb-1">Votação por Região Geográfica</h3>
+                  <p class="text-xs text-slate-500 mb-4">Volume e percentual de votos obtidos nas 7 regiões</p>
+                  <div class="relative h-[250px] w-full">
+                    <canvas id="chartDistribuicaoRegiaoCanvas"></canvas>
+                  </div>
+                </div>
+                <div id="distRegiaoResumoList" class="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs">
+                  <!-- Gerado dinamicamente -->
+                </div>
+              </div>
+
+              <!-- Top Bairros Analíticos do Candidato -->
+              <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+                <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+                  <div>
+                    <h3 class="text-sm font-black text-slate-900 tracking-tight">Top Bairros de Votação</h3>
+                    <p class="text-xs text-slate-500">Bairros analíticos com maior expressividade eleitoral para o candidato</p>
+                  </div>
+                  <span class="text-[11px] font-bold text-slate-400">Classificação</span>
+                </div>
+                <div class="overflow-x-auto custom-scrollbar flex-1 max-h-[380px]">
+                  <table class="w-full text-left border-collapse" id="tableTopBairrosCandidato">
+                    <thead class="sticky top-0 bg-slate-50/95 backdrop-blur-xs">
+                      <tr class="text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                        <th class="px-4 py-2.5">Bairro Analítico</th>
+                        <th class="px-3 py-2.5">Região</th>
+                        <th class="px-3 py-2.5 text-right">Votos</th>
+                        <th class="px-4 py-2.5 text-right">% no Bairro</th>
+                        <th class="px-4 py-2.5">Concentração</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyTopBairrosCandidato" class="divide-y divide-slate-100 text-xs font-medium text-slate-700">
+                      <!-- Gerado dinamicamente -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 6: PERFIL DO ELEITORADO ==================== -->
+        <section id="sec-eleicoes-perfil" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-amber-600">
+                <i class="fa-solid fa-users"></i>
+                <span>Demografia Eleitoral • Universo 539.147</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Quem compõe o eleitorado deste território?</h2>
+              <p class="text-xs text-slate-500">Distribuição sociodemográfica auditada do cadastro de eleitores do TSE</p>
+            </div>
+
+            <!-- Seletor das 6 Dimensões de Perfil -->
+            <div class="flex flex-wrap items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-2xs">
+              <button type="button" onclick="setPerfilDimensao('faixa_etaria')" id="btnDimFaixaEtaria" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs">
+                Faixa Etária
+              </button>
+              <button type="button" onclick="setPerfilDimensao('genero')" id="btnDimGenero" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Gênero
+              </button>
+              <button type="button" onclick="setPerfilDimensao('escolaridade')" id="btnDimEscolaridade" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Escolaridade
+              </button>
+              <button type="button" onclick="setPerfilDimensao('estado_civil')" id="btnDimEstadoCivil" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Estado Civil
+              </button>
+              <button type="button" onclick="setPerfilDimensao('raca_cor')" id="btnDimRacaCor" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Raça/Cor
+              </button>
+              <button type="button" onclick="setPerfilDimensao('identidade_genero')" id="btnDimIdentidadeGenero" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                Identidade de Gênero
+              </button>
+            </div>
+          </div>
+
+          <!-- ALERTA CRÍTICO DE INTEGRIDADE METODOLÓGICA (REGRA DE OURO) -->
+          <div class="p-4 rounded-xl bg-amber-50/80 border border-amber-200/80 flex items-start gap-3.5 text-xs text-amber-950">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 text-base mt-0.5 shrink-0"></i>
+            <div class="space-y-1">
+              <p class="font-black text-amber-900 uppercase tracking-wide text-[11px]">Salvaguarda Metodológica & Estatística Obrigatória:</p>
+              <p class="text-amber-800 leading-relaxed">
+                O perfil do eleitorado retrata a composição demográfica <strong>agregada das seções</strong> no território a partir do cadastro eleitoral oficial (universo de 539.147 eleitores).
+                O voto no Brasil é estritamente secreto. <strong>É terminantemente incorreto e proibido inferir comportamento eleitoral individual a partir de dados demográficos agregados</strong> (falácia ecológica).
+                Portanto, não se afirma que determinados grupos votaram em candidatos específicos; apresentam-se o perfil territorial e o resultado das urnas de forma estritamente independente.
+              </p>
+            </div>
+          </div>
+
+          <!-- Grid: Gráfico de Perfil + Tabela de Categorias -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Gráfico de Barras / Distribuição -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight" id="lblPerfilGraficoTitulo">Distribuição por Faixa Etária</h3>
+                  <span id="lblPerfilTotalEleitoresBadge" class="text-xs font-bold text-amber-600">539.147 eleitores</span>
+                </div>
+                <p class="text-xs text-slate-500 mb-4" id="lblPerfilGraficoSub">Percentual de eleitores cadastrados na dimensão selecionada</p>
+                <div class="relative h-[280px] w-full">
+                  <canvas id="chartEleicoesPerfilCanvas"></canvas>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                <span>Fonte: TSE Perfil do Eleitorado 2026</span>
+                <span id="lblPerfilMaiorGrupo">-</span>
+              </div>
+            </div>
+
+            <!-- Tabela Demográfica com Barras de Proporção -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+              <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight" id="lblPerfilTabelaTitulo">Quadro Detalhado da Dimensão</h3>
+                  <p class="text-xs text-slate-500">Eleitores cadastrados e participação proporcional</p>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400">TSE 2026</span>
+              </div>
+              <div class="overflow-x-auto custom-scrollbar flex-1 max-h-[380px]">
+                <table class="w-full text-left border-collapse" id="tablePerfilDetalhado">
+                  <thead class="sticky top-0 bg-slate-50/95 backdrop-blur-xs">
+                    <tr class="text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                      <th class="px-4 py-3">Categoria</th>
+                      <th class="px-3 py-3 text-right">Eleitores</th>
+                      <th class="px-4 py-3 text-right">Percentual</th>
+                      <th class="px-4 py-3">Distribuição Proporcional</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbodyPerfilDetalhado" class="divide-y divide-slate-100 text-xs font-medium text-slate-700">
+                    <!-- Gerado dinamicamente -->
+                  </tbody>
+                  <tfoot>
+                    <tr class="bg-slate-50 font-black text-xs text-slate-900 border-t border-slate-200">
+                      <td class="px-4 py-2.5">Total no Território</td>
+                      <td id="tfootPerfilTotalEleitores" class="px-3 py-2.5 text-right font-display">-</td>
+                      <td class="px-4 py-2.5 text-right font-display">100,00%</td>
+                      <td class="px-4 py-2.5"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 7: COMPARAÇÃO TERRITORIAL DIRETA (A vs B) ==================== -->
+        <section id="sec-eleicoes-comparacao" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-cyan-700">
+                <i class="fa-solid fa-code-compare"></i>
+                <span>Inteligência Comparativa Territorial</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Comparação Territorial Direta (A × B)</h2>
+              <p class="text-xs text-slate-500">Selecione duas regiões ou bairros para confrontar indicadores eleitorais, participação e votação</p>
+            </div>
+          </div>
+
+          <!-- Painel de Comparação -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-6">
+            
+            <!-- Seletores dos Dois Territórios -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-100">
+              <div class="p-3.5 rounded-xl bg-blue-50/50 border border-blue-200 space-y-1.5">
+                <label for="selectComparaTerritorioA" class="block text-xs font-black uppercase tracking-wider text-blue-900">Território A</label>
+                <select id="selectComparaTerritorioA" class="w-full bg-white border border-blue-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 shadow-2xs">
+                  <!-- Regiões e Bairros -->
+                </select>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-200 space-y-1.5">
+                <label for="selectComparaTerritorioB" class="block text-xs font-black uppercase tracking-wider text-emerald-900">Território B</label>
+                <select id="selectComparaTerritorioB" class="w-full bg-white border border-emerald-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 shadow-2xs">
+                  <!-- Regiões e Bairros -->
+                </select>
+              </div>
+            </div>
+
+            <!-- Tabela Comparativa de Métricas Centrais -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-slate-50 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                    <th class="px-4 py-3">Métrica Eleitoral / Demográfica</th>
+                    <th class="px-4 py-3 text-right text-blue-700 font-extrabold" id="thComparaNomeA">Território A</th>
+                    <th class="px-4 py-3 text-right text-emerald-700 font-extrabold" id="thComparaNomeB">Território B</th>
+                    <th class="px-4 py-3 text-center">Diferença (A - B)</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyComparacaoTerritorial" class="divide-y divide-slate-100 font-medium text-slate-700">
+                  <!-- Gerado dinamicamente -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Comparativo dos Top Candidatos do Cargo em A vs B -->
+            <div class="pt-2">
+              <h4 class="text-xs font-black uppercase tracking-wider text-slate-400 mb-3">Confronto dos Candidatos Líderes no Cargo (<span id="lblComparaCargo">Presidente</span>)</h4>
+              <div id="gridComparaCandidatos" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Gerado dinamicamente -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 8: PESQUISA QUANTITATIVA RADAR SÃO JOSÉ (N=477) ==================== -->
+        <section id="sec-eleicoes-pesquisa-radar" class="space-y-6">
+          
+          <!-- Header da Seção com Badge de Metodologia Própria -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent p-4 sm:p-5 rounded-2xl border border-amber-200/80">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-amber-700">
+                <i class="fa-solid fa-square-poll-vertical"></i>
+                <span>Painel de Opinião Pública • Base de Respondentes SJC</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Perspectiva Política: Pesquisa Radar São José</h2>
+              <p class="text-xs text-slate-600 mt-0.5">
+                Sondagem de opinião com <strong>477 respondentes reais</strong> de São José dos Campos. Análise exclusiva do Radar sobre <em>autodeclaração ideológica</em> e <em>grau de acompanhamento da política local</em>.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2 self-start sm:self-auto shrink-0">
+              <span class="px-3 py-1.5 rounded-xl bg-amber-500 text-white font-black text-xs shadow-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-database text-[10px]"></i> Base Radar • 477 Amostras
+              </span>
+            </div>
+          </div>
+
+          <!-- Banner Metodológico de Separação (TSE vs Pesquisa Radar) -->
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3 text-xs text-slate-600">
+            <i class="fa-solid fa-circle-info text-amber-500 text-sm mt-0.5 shrink-0"></i>
+            <div>
+              <strong class="text-slate-800 font-bold">Nota de Transparência Metodológica:</strong>
+              <span> Esta seção apresenta os dados levantados diretamente pelo <strong>Radar São José</strong> em sua pesquisa quantitativa com munícipes (amostra de conveniência qualificada N=477). Não se confunde com a apuração oficial do TSE/Urnas apresentada nas seções anteriores, servindo como termômetro de sentimento, percepção de espectro e engajamento cívico.</span>
+            </div>
+          </div>
+
+          <!-- Cards Resumo das 2 Perguntas Políticas -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-blue-600 uppercase tracking-wider block mb-1">Direita</span>
+              <span class="text-xl font-black text-slate-900 tracking-tight font-display">38,57%</span>
+              <p class="text-[10px] text-slate-500 font-semibold mt-0.5">184 respondentes (Maior bloco)</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-rose-600 uppercase tracking-wider block mb-1">Esquerda</span>
+              <span class="text-xl font-black text-slate-900 tracking-tight font-display">23,90%</span>
+              <p class="text-[10px] text-slate-500 font-semibold mt-0.5">114 respondentes (2º bloco)</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider block mb-1">Não Declarados</span>
+              <span class="text-xl font-black text-slate-900 tracking-tight font-display">21,59%</span>
+              <p class="text-[10px] text-slate-500 font-semibold mt-0.5">103 respondentes (Volatilidade)</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs">
+              <span class="text-[10px] font-black text-emerald-600 uppercase tracking-wider block mb-1">Centro</span>
+              <span class="text-xl font-black text-slate-900 tracking-tight font-display">15,93%</span>
+              <p class="text-[10px] text-slate-500 font-semibold mt-0.5">76 respondentes (Moderação)</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-slate-200 p-3.5 shadow-2xs col-span-2 sm:col-span-1">
+              <span class="text-[10px] font-black text-amber-600 uppercase tracking-wider block mb-1">Acompanhamento</span>
+              <span class="text-xl font-black text-slate-900 tracking-tight font-display">3,03 <small class="text-xs font-bold text-slate-400">/ 5,0</small></span>
+              <p class="text-[10px] text-emerald-600 font-bold mt-0.5">35,9% acompanham muito (4-5)</p>
+            </div>
+          </div>
+
+          <!-- Grid dos Gráficos das 2 Perguntas -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Gráfico P26: Espectro Político -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-3">
+                <div>
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight">P26: Posicionamento Político</h3>
+                  <p class="text-xs text-slate-500">"Na política, você se sente mais próximo de qual lado?"</p>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400">N=477</span>
+              </div>
+              <div class="relative h-[260px] w-full">
+                <canvas id="chartPesquisaRadarEspectroCanvas"></canvas>
+              </div>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Direita + Esquerda = 62,5%</span>
+                <strong class="text-slate-800">Centro + Isentos = 37,5%</strong>
+              </div>
+            </div>
+
+            <!-- Gráfico P25: Acompanhamento da Política Local (1 a 5) -->
+            <div class="lg:col-span-6 bg-white rounded-2xl border border-slate-200 shadow-xs p-5 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-3">
+                <div>
+                  <h3 class="text-sm font-black text-slate-900 tracking-tight">P25: Grau de Acompanhamento da Política em SJC</h3>
+                  <p class="text-xs text-slate-500">"De 1 a 5, o quanto você acompanha o que acontece na política local?"</p>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400">Média: 3,03</span>
+              </div>
+              <div class="relative h-[260px] w-full">
+                <canvas id="chartPesquisaRadarInteresseCanvas"></canvas>
+              </div>
+              <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                <span>Nota 3 (Moderado): 35,0%</span>
+                <strong class="text-emerald-700 font-bold">Alto engajamento (4-5): 35,9%</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Painel Interativo de Recortes / Cruzamentos Multidimensionais -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+              <div>
+                <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-indigo-600">
+                  <i class="fa-solid fa-table-cells-large"></i>
+                  <span>Cruzamentos Multidimensionais</span>
+                </div>
+                <h3 class="text-base sm:text-lg font-black text-slate-900 tracking-tight" id="lblPesquisaRecorteTitulo">Recortes Demográficos e Territoriais da Opinião Política</h3>
+                <p class="text-xs text-slate-500">Analise como a preferência ideológica e o interesse na política se distribuem por segmento</p>
+              </div>
+
+              <!-- Seletor de Dimensão de Recorte -->
+              <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 shadow-2xs overflow-x-auto no-scrollbar self-start sm:self-auto">
+                <button type="button" onclick="window.setPesquisaRecorteDimensao('por_regiao')" id="btnRecorteRegiao" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs">
+                  Região
+                </button>
+                <button type="button" onclick="window.setPesquisaRecorteDimensao('por_idade')" id="btnRecorteIdade" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                  Idade
+                </button>
+                <button type="button" onclick="window.setPesquisaRecorteDimensao('por_genero')" id="btnRecorteGenero" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                  Gênero
+                </button>
+                <button type="button" onclick="window.setPesquisaRecorteDimensao('por_renda')" id="btnRecorteRenda" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                  Renda
+                </button>
+                <button type="button" onclick="window.setPesquisaRecorteDimensao('por_trabalho')" id="btnRecorteTrabalho" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                  Trabalho
+                </button>
+                <button type="button" onclick="window.setPesquisaRecorteDimensao('por_posicao_politica')" id="btnRecortePosicao" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all text-slate-500 hover:text-slate-900">
+                  Interesse × Lado
+                </button>
+              </div>
+            </div>
+
+            <!-- Tabela Dinâmica do Recorte Selecionado -->
+            <div class="overflow-x-auto custom-scrollbar">
+              <table class="w-full text-left border-collapse text-xs" id="tablePesquisaRecortes">
+                <thead>
+                  <tr class="bg-slate-50 text-[10px] font-black uppercase tracking-wider text-slate-500 border-b border-slate-200">
+                    <th class="px-4 py-3" id="thPesquisaRecorteCategoria">Segmento / Categoria</th>
+                    <th class="px-3 py-3 text-right">Amostras (N)</th>
+                    <th class="px-3 py-3 text-right text-blue-700 font-bold">% Direita</th>
+                    <th class="px-3 py-3 text-right text-rose-700 font-bold">% Esquerda</th>
+                    <th class="px-3 py-3 text-right text-emerald-700 font-bold">% Centro</th>
+                    <th class="px-3 py-3 text-right text-slate-500 font-bold">% Não Declarado</th>
+                    <th class="px-3 py-3 text-right text-amber-700 font-bold">Média Interesse (1-5)</th>
+                    <th class="px-4 py-3">Composição Ideológica</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyPesquisaRecortes" class="divide-y divide-slate-100 font-medium text-slate-700">
+                  <!-- Gerado dinamicamente via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Bloco Editorial de Insights Estratégicos do Radar -->
+          <div class="bg-gradient-to-br from-slate-900 to-[#0B2545] text-white rounded-2xl p-6 shadow-sm space-y-4">
+            <div class="flex items-center gap-2 text-amber-400 font-black text-xs uppercase tracking-wider">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Inteligência Editorial • Insights da Base Radar São José</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-black tracking-tight">O Que a Pesquisa Revela Sobre a Opinião Política em SJC</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-2 text-xs">
+              
+              <div class="p-4 rounded-xl bg-white/10 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2 text-rose-300 font-black text-[11px] uppercase">
+                  <i class="fa-solid fa-user-group"></i> A "Ilha Jovem Adulta" (25-34 anos)
+                </div>
+                <p class="text-slate-200 leading-relaxed">
+                  A faixa de <strong>25 a 34 anos</strong> é a única onde a <strong>Esquerda lidera com 33,8%</strong> (contra 22,8% de Direita). Em contrapartida, no público <strong>+65 anos</strong>, a <strong>Direita dispara para 63,8%</strong> e o interesse na política atinge a maior média da cidade (3,48/5).
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/10 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2 text-amber-300 font-black text-[11px] uppercase">
+                  <i class="fa-solid fa-location-dot"></i> O "Centro Cético" e o Sudeste Polarizado
+                </div>
+                <p class="text-slate-200 leading-relaxed">
+                  No <strong>Centro expandido</strong>, <strong>34,6% preferem não declarar lado</strong> (maior índice municipal). Já a <strong>Região Sudeste registra a maior densidade de Direita (59,4%)</strong>, seguida pela <strong>Região Oeste (48,7%)</strong> e pela massiva <strong>Região Sul (40,9%)</strong>.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/10 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2 text-emerald-300 font-black text-[11px] uppercase">
+                  <i class="fa-solid fa-money-bill-trend-up"></i> Renda Alta migra para o Centro
+                </div>
+                <p class="text-slate-200 leading-relaxed">
+                  Nas famílias com renda <strong>acima de R$ 26.000</strong>, o <strong>Centro salta para 38,1%</strong> (quase empatado com Direita em 42,9% e apenas 4,8% de Esquerda). A classe média (R$ 5,6k a 12k) apresenta a maior taxa de Direita (46,5%).
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/10 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2 text-cyan-300 font-black text-[11px] uppercase">
+                  <i class="fa-solid fa-venus-mars"></i> Gap de Gênero na Autodeclaração
+                </div>
+                <p class="text-slate-200 leading-relaxed">
+                  Entre os <strong>Homens Cis</strong>, <strong>46,8% se declaram de Direita</strong> e apenas 15,3% não declaram. Já entre as <strong>Mulheres Cis</strong>, há maior equilíbrio (32,5% Direita vs 27,2% Esquerda) e um índice de não-declaração de <strong>25,7%</strong>.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/10 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2 text-purple-300 font-black text-[11px] uppercase">
+                  <i class="fa-solid fa-briefcase"></i> Empresários vs Servidores Públicos
+                </div>
+                <p class="text-slate-200 leading-relaxed">
+                  Entre <strong>Empresários/PJ</strong>, a <strong>Direita soma 55,9%</strong> e o Centro 22,1%. Já entre os <strong>Servidores Públicos</strong>, a <strong>Esquerda lidera com 37,8%</strong> (vs 31,1% Direita), com o maior acompanhamento de política local (3,44/5).
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/10 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2 text-blue-300 font-black text-[11px] uppercase">
+                  <i class="fa-solid fa-bolt"></i> Polarização Atrai Acompanhamento
+                </div>
+                <p class="text-slate-200 leading-relaxed">
+                  Respondentes posicionados nos polos acompanham mais a política local: <strong>Direita (3,18/5)</strong> e <strong>Esquerda (3,11/5)</strong> vs <strong>Não Declarados (2,69/5)</strong>, comprovando que a polarização eleva o consumo cívico de notícias.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================== SEÇÃO 9: ACHADOS OBJETIVOS ==================== -->
+        <section id="sec-eleicoes-achados" class="space-y-4">
+          <div>
+            <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-emerald-600">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Análise Factual • Regras Determinísticas</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">O Que os Dados Mostram</h2>
+            <p class="text-xs text-slate-500">Síntese objetiva de fatos auditados extraídos dos dados eleitorais homologados</p>
+          </div>
+
+          <!-- Grid dos Achados Objetivos Auditados -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="gridAchadosObjetivos">
+            
+            <!-- Card 1: São Francisco Xavier -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-2 hover:shadow-card-hover transition-all">
+              <div class="flex items-center gap-2 text-rose-600 font-black text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-arrow-trend-up"></i>
+                <span>Maior Abstenção Regional</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900">São Francisco Xavier (22,67%)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                O distrito registrou a maior taxa de abstenção entre as 7 regiões: <strong>22,67%</strong>, com <strong>685 abstenções</strong> em um colégio de <strong>3.022 aptos</strong> observados no BU estadual.
+              </p>
+            </div>
+
+            <!-- Card 2: Região Oeste -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-2 hover:shadow-card-hover transition-all">
+              <div class="flex items-center gap-2 text-emerald-600 font-black text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-arrow-trend-down"></i>
+                <span>Maior Comparecimento Relativo</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900">Região Oeste (17,77% de Abstenção)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A Região Oeste teve a menor taxa de abstenção do município: <strong>17,77%</strong>, alcançando <strong>82,23% de comparecimento</strong> com <strong>33.390 presenças</strong> em 40.608 aptos nos 10 locais de votação.
+              </p>
+            </div>
+
+            <!-- Card 3: Região Sul -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-2 hover:shadow-card-hover transition-all">
+              <div class="flex items-center gap-2 text-blue-600 font-black text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-users-rays"></i>
+                <span>Maior Concentração Absoluta</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900">Região Sul (34,8% do Eleitorado)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A Região Sul concentra o maior volume absoluto de votantes: <strong>187.578 aptos</strong> em <strong>41 locais</strong> e <strong>34.554 abstenções</strong> (18,42%), sendo o maior colégio eleitoral municipal.
+              </p>
+            </div>
+
+            <!-- Card 4: Local com Maior Votação -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-2 hover:shadow-card-hover transition-all">
+              <div class="flex items-center gap-2 text-indigo-600 font-black text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-school"></i>
+                <span>Rede e Densidade por Colégio</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900">144 Locais e 1.561 Seções com BU</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A infraestrutura de votação abrange 144 estabelecimentos de ensino públicos e privados em 86 bairros analíticos, operando uma média de <strong>10,8 seções</strong> por local apurado.
+              </p>
+            </div>
+
+            <!-- Card 5: Seção Agregada -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-2 hover:shadow-card-hover transition-all">
+              <div class="flex items-center gap-2 text-cyan-700 font-black text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Auditoria de Urnas Agregadas</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900">Seção 412 Agregada (Zona 411)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A diferença de 1.562 seções cadastradas para 1.561 seções com BU apurado estadual é explicada pela Seção 412 da Zona 411 (EMEF Prof. Possidônio Salles), formalmente agregada à Seção 43.
+              </p>
+            </div>
+
+            <!-- Card 6: Override Territorial Homologado -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-2 hover:shadow-card-hover transition-all">
+              <div class="flex items-center gap-2 text-amber-600 font-black text-xs uppercase tracking-wider">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Override Manual Validado</span>
+              </div>
+              <h3 class="text-base font-black text-slate-900">E.E. Dirce Elias (Bairro dos Freitas)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                143 dos 144 locais foram classificados via ponto-em-polígono pelo Plano Diretor. O colégio E.E. Dirce Elias recebeu override auditado como pertencente à <strong>Região Norte</strong>.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ==================== SEÇÃO 9: METODOLOGIA & FONTES OFICIAIS ==================== -->
+        <section id="sec-eleicoes-metodologia" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-slate-500">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <span>Rigor Científico & Transparência</span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Metodologia, Limites & Fontes de Dados</h2>
+              <p class="text-xs text-slate-500">Documentação técnica oficial baseada em METODOLOGIA_E_LIMITES.md do pacote homologado</p>
+            </div>
+          </div>
+
+          <!-- Acordeão Metodológico Estruturado -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-xs divide-y divide-slate-100 overflow-hidden">
+            
+            <!-- Item 1: Fontes Principais -->
+            <details class="p-4 sm:p-5 group cursor-pointer" open>
+              <summary class="flex items-center justify-between font-bold text-sm text-slate-900 list-none">
+                <span class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-database text-cyan-600"></i>
+                  <span>1. Fontes de Dados Primárias</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="mt-3 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>• <strong>Tribunal Superior Eleitoral (TSE)</strong> — Boletins de Urna (BU) do 1º turno das Eleições 2026, Estado de São Paulo.</p>
+                <p>• <strong>Tribunal Superior Eleitoral (TSE)</strong> — Perfil do Eleitorado por Seção Eleitoral, ano 2026.</p>
+                <p>• <strong>Tribunal Superior Eleitoral (TSE)</strong> — Cadastro Oficial de Locais de Votação e Seções Eleitorais de São José dos Campos.</p>
+                <p>• <strong>Prefeitura Municipal de São José dos Campos</strong> — Lei Complementar do Plano Diretor Municipal, Anexo IV-A (Perímetros das Regiões Geográficas).</p>
+              </div>
+            </details>
+
+            <!-- Item 2: Universos Distintos -->
+            <details class="p-4 sm:p-5 group cursor-pointer">
+              <summary class="flex items-center justify-between font-bold text-sm text-slate-900 list-none">
+                <span class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-scale-balanced text-cyan-600"></i>
+                  <span>2. Universos Estatísticos Auditados (Cadastrado vs BU Estadual)</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="mt-3 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p><strong>Eleitorado Cadastrado (539.147 eleitores):</strong> Universo de registros biométricos e cadastrais municipais mantidos pela Justiça Eleitoral, utilizado exclusivamente para as 6 dimensões de perfil sociodemográfico.</p>
+                <p><strong>Aptos no Universo Estadual do BU (538.797 aptos):</strong> Universo de eleitores aptos nas 1.561 seções que transmitiram boletim de urna no pleito estadual. Totaliza 437.624 comparecimentos (81,22%) e 101.173 abstenções (18,78%).</p>
+                <p><strong>Presidente:</strong> Possui universo ligeiramente divergente (438.934 votos emitidos) decorrente de eleitores em trânsito e transferências temporárias autorizadas pelo TSE.</p>
+              </div>
+            </details>
+
+            <!-- Item 3: Local de Votação x Residência -->
+            <details class="p-4 sm:p-5 group cursor-pointer">
+              <summary class="flex items-center justify-between font-bold text-sm text-slate-900 list-none">
+                <span class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-house-circle-exclamation text-cyan-600"></i>
+                  <span>3. Local de Votação Não É Residência Comprovada</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="mt-3 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>A localização do colégio eleitoral <strong>não prova o local de residência individual do cidadão</strong>. É praxe comum que eleitores residam em bairros adjacentes ou mantenham seus títulos em escolas próximas a antigos endereços ou locais de trabalho.</p>
+                <p>Portanto, toda a comunicação do Radar São José adota a terminologia correta: <em>“nos locais de votação situados no bairro X”</em> ou <em>“nas urnas das seções classificadas na Região Sul”</em>, evitando termos incorretos como <em>“os moradores do bairro X votaram...”</em>.</p>
+              </div>
+            </details>
+
+            <!-- Item 4: Regionalização e Override Manual -->
+            <details class="p-4 sm:p-5 group cursor-pointer">
+              <summary class="flex items-center justify-between font-bold text-sm text-slate-900 list-none">
+                <span class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-map-pin text-cyan-600"></i>
+                  <span>4. Regionalização e Desambiguação de Bairros Analíticos</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="mt-3 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>Dos 144 locais, 143 foram regionalizados automaticamente pelo cruzamento espacial entre as coordenadas TSE e os polígonos oficiais das 7 Regiões Geográficas da PMSJC. 1 local (E.E. Dirce Elias, Bairro dos Freitas) recebeu override manual devidamente homologado na Região Norte.</p>
+                <p>O rótulo original do TSE em São Francisco Xavier continha a designação "CENTRO". Para evitar sobreposição com o Centro urbano municipal, foi aplicado o rótulo analítico padronizado <strong>Centro de São Francisco Xavier</strong>.</p>
+              </div>
+            </details>
+
+            <!-- Item 5: Regra de Reconciliação Oficial TSE/SISTOT e Votos Válidos -->
+            <details class="p-4 sm:p-5 group cursor-pointer">
+              <summary class="flex items-center justify-between font-bold text-sm text-slate-900 list-none">
+                <span class="flex items-center gap-2.5">
+                  <i class="fa-solid fa-calculator text-cyan-600"></i>
+                  <span>5. Reconciliação Oficial TSE/SISTOT & Destinação Final dos Votos</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="mt-3 text-xs text-slate-600 space-y-2 leading-relaxed">
+                <p>Os dados de votação do módulo foram reconciliados com a totalização oficial do <strong>TSE / SISTOT</strong>. A classificação de votos válidos e rankings de candidatos obedece estritamente aos campos <code>DS_DESTINACAO_FINAL</code> e <code>ST_VOTO_VALIDO_FINAL = true</code>:</p>
+                <p>• <strong>Votos Válidos:</strong> Inclui apenas <code>VALIDO_NOMINAL</code> (votação direta em candidato com registro deferido) e <code>VALIDO_LEGENDA</code> (votos em partido nas eleições proporcionais). O percentual oficial utiliza <code>PCT_SOBRE_VALIDOS_TERRITORIO</code>.</p>
+                <p>• <strong>Nulos Técnicos e Reclassificações:</strong> Votos nominais registrados na urna para candidaturas indeferidas/cassadas (ex: os 13 votos do nº 28 para Presidente) são totalizados como <strong>nulos técnicos</strong> (<code>NULO_TECNICO</code>) e não integram os votos válidos.</p>
+                <p>• <strong>Anulados Sub Judice:</strong> Registros sob análise judicial (157 em Senador, 142 em Deputado Federal, 175 em Deputado Estadual) são isolados e não compõem a base de votos válidos.</p>
+                <p>• <strong>Regra Especial do Senado 2026:</strong> Em 2026, cada eleitor registrou 2 votos para Senador (2 vagas por UF), resultando em <strong>875.248 registros de voto</strong> (437.624 comparecimentos × 2), sendo 757.483 válidos, 55.157 brancos, 62.451 nulos e 157 sub judice.</p>
+              </div>
+            </details>
+
+          </div>
+
+          <!-- Rodapé Institucional de Fontes -->
+          <div class="p-4 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-500 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <p><strong>Fonte de Dados:</strong> Tribunal Superior Eleitoral (TSE), Eleições 2026. Tratamento, validação e organização: Radar São José.</p>
+              <p><strong>Divisão Territorial:</strong> Regiões Geográficas oficiais — Prefeitura de São José dos Campos (Plano Diretor).</p>
+            </div>
+            <div class="text-[11px] font-bold text-slate-400 shrink-0">
+              Versão 2026.1 • Módulo Integrado
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
     <!-- ==================== TAB 3: RELATÓRIOS ==================== -->
     <div id="tab-relatorios" class="tab-content hidden flex-1 p-8">
       <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
@@ -5868,6 +7561,17 @@
         setTimeout(() => {
           if (window.MarketIntelState && window.MarketIntelState.leafletMap) {
             window.MarketIntelState.leafletMap.invalidateSize();
+          }
+        }, 300);
+      }
+
+      if (tabId === 'eleicoes-2026') {
+        if (typeof window.initEleicoes2026 === 'function') {
+          window.initEleicoes2026();
+        }
+        setTimeout(() => {
+          if (window.Eleicoes2026State && window.Eleicoes2026State.leafletMap) {
+            window.Eleicoes2026State.leafletMap.invalidateSize();
           }
         }, 300);
       }
@@ -7930,52 +9634,46 @@
       });
     }
 
+    async function blogAdminRequest(url, options = {}) {
+      const client = window.supabaseClient;
+      const sessionResult = client?.auth ? await client.auth.getSession() : null;
+      const token = sessionResult?.data?.session?.access_token;
+      if (!token) throw new Error('Sessão administrativa necessária. Entre novamente.');
+      const response = await fetch(url, {...options, headers:{...options.headers,Authorization:'Bearer '+token}});
+      if (!response.ok) throw new Error('Operação não concluída pelo servidor ('+response.status+').');
+      const data = await response.json();
+      if (!data.success) throw new Error(data.message || 'Operação não concluída.');
+      return data;
+    }
+
+    async function loadAllAdminPosts() {
+      const posts=[], ids=new Set(); let page=1, pages=1, expected=0;
+      do {
+        const data=await blogAdminRequest('/api/posts?admin=true&limit=100&sortBy=published_at&order=desc&page='+page);
+        const meta=data.pagination;
+        if (!Array.isArray(data.posts) || !meta || !Number.isInteger(meta.totalPages) || meta.totalPages<0 || !Number.isInteger(meta.total) || meta.total<0) throw new Error('Paginação administrativa inválida.');
+        pages=meta.totalPages; expected=meta.total;
+        let added=0;
+        for (const post of data.posts) {
+          const key=post.id || post.slug;
+          if (!key) throw new Error('Artigo sem identificador.');
+          if (!ids.has(key)) {ids.add(key);posts.push(post);added++;}
+        }
+        if (page<=pages && added===0 && expected>posts.length) throw new Error('Paginação sem progresso; lista incompleta.');
+        page++;
+      } while(page<=pages);
+      if (posts.length!==expected) throw new Error('Lista administrativa incompleta; atualize novamente.');
+      return posts;
+    }
+
     async function uploadImageFile(file, folder = 'uploads') {
       try {
-        // Comprime a imagem no navegador para resolução HD otimizada (<250KB)
-        const compressedBase64 = await compressImageClient(file, 1400, 0.85);
-        const dataToSend = compressedBase64 || null;
-        if (!dataToSend) return null;
-
-        // 1. Tenta endpoint serverless /api/upload
-        try {
-          const res = await fetch('/api/upload', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              fileData: dataToSend,
-              filename: file.name,
-              folder: folder
-            })
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (data.url) return data.url;
-          }
-        } catch (apiErr) {}
-
-        // 2. Tenta upload direto Supabase Storage
-        try {
-          const cleanName = `${folder}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-          const supRes = await fetch(`${SUPABASE_CONFIG.url}/storage/v1/object/${SUPABASE_CONFIG.bucket}/${cleanName}`, {
-            method: 'POST',
-            headers: {
-              'apikey': SUPABASE_CONFIG.key,
-              'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
-              'Content-Type': 'image/jpeg',
-              'x-upsert': 'true'
-            },
-            body: file
-          });
-          if (supRes.ok) {
-            return `${SUPABASE_CONFIG.url}/storage/v1/object/public/${SUPABASE_CONFIG.bucket}/${cleanName}`;
-          }
-        } catch (supErr) {}
-
-        // 3. Fallback resiliente: Data URI comprimida ultraleve (persiste no Supabase e renderiza instantâneo)
-        return dataToSend;
+        const fileData = await compressImageClient(file, 1400, 0.85);
+        if (!fileData) return null;
+        const data = await blogAdminRequest('/api/upload', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fileData,filename:file.name,folder})});
+        return data.url || null;
       } catch (err) {
-        console.error('[Upload Client Error]:', err);
+        showToast(err.message, 'error');
         return null;
       }
     }
@@ -8004,44 +9702,17 @@
       // 1. Initial render from local cache to prevent any delay
       filterAndRenderBlogTable(page, searchVal, catVal, statusVal);
 
-      // 2. Fetch full list of posts from Supabase REST API (Cloud)
       try {
-        const supRes = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?select=*&order=published_at.desc`, {
-          headers: {
-            'apikey': SUPABASE_CONFIG.key,
-            'Authorization': `Bearer ${SUPABASE_CONFIG.key}`
-          }
-        });
-        if (supRes.ok) {
-          const supData = await supRes.json();
-          if (Array.isArray(supData) && supData.length > 0) {
-            allFetchedPosts = supData;
-            // Ordenar estritamente da última postada para a primeira
-            allFetchedPosts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
-            updateDbBadge('supabase', supData.length);
-            syncPortalCacheToLocalStorage();
-            filterAndRenderBlogTable(page, searchVal, catVal, statusVal);
-            return;
-          }
+        const posts = await loadAllAdminPosts();
+        if (Array.isArray(posts)) {
+          allFetchedPosts = posts;
+          allFetchedPosts.sort((a,b)=>new Date(b.published_at||0)-new Date(a.published_at||0));
+          updateDbBadge('supabase', posts.length);
+          syncPortalCacheToLocalStorage();
+          filterAndRenderBlogTable(page,searchVal,catVal,statusVal);
+          return;
         }
-      } catch (supErr) {
-        console.warn('Supabase Cloud fetch:', supErr);
-      }
-
-      // 3. Fallback: Try serverless endpoint /api/posts with high limit
-      try {
-        const apiRes = await fetch(`/api/posts?limit=100&sortBy=published_at&order=desc`);
-        if (apiRes.ok) {
-          const data = await apiRes.json();
-          if (data.success && Array.isArray(data.posts) && data.posts.length > 0) {
-            allFetchedPosts = data.posts;
-            allFetchedPosts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
-            updateDbBadge('supabase', data.posts.length);
-            filterAndRenderBlogTable(page, searchVal, catVal, statusVal);
-            return;
-          }
-        }
-      } catch (apiErr) {}
+      } catch (err) { showToast(err.message, 'error'); return; }
 
       // Ordenar cache local também da mais recente para a mais antiga
       allFetchedPosts.sort((a, b) => new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0));
@@ -8665,85 +10336,17 @@
           btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando no Banco de Dados...';
         }
 
-        // 1. Salvar via Serverless Local /api/posts
-        let savedApi = false;
-        try {
-          const method = id ? 'PUT' : 'POST';
-          const bodyToSend = { ...payload };
-          if (id) bodyToSend.id = id;
-          const res = await fetch('/api/posts', {
-            method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bodyToSend)
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (data && data.success) savedApi = true;
+        // Administrative writes never fall back to direct database access.
+        if (payload.is_featured) {
+          for (const previous of allFetchedPosts.filter(p=>p.is_featured && p.id!==id && p.slug!==slug)) {
+            await blogAdminRequest('/api/posts', {method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:previous.id,original_slug:previous.slug,is_featured:false})});
           }
-        } catch (apiErr) {
-          console.warn('[API Posts Save Warn]:', apiErr);
         }
-
-        // 2. Direct Supabase Cloud REST Save / Update
-        let savedSupabase = false;
-        try {
-          const isUuid = (str) => typeof str === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
-          let supEndpoint = `${SUPABASE_CONFIG.url}/rest/v1/blog_posts`;
-          let supMethod = 'POST';
-          let supHeaders = {
-            'apikey': SUPABASE_CONFIG.key,
-            'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'resolution=merge-duplicates,return=representation'
-          };
-
-          if (id) {
-            const lookupSlug = currentEditingOriginalSlug || slug;
-            if (isUuid(id)) {
-              supEndpoint += `?id=eq.${encodeURIComponent(id)}`;
-            } else {
-              supEndpoint += `?slug=eq.${encodeURIComponent(lookupSlug)}`;
-            }
-            supMethod = 'PATCH';
-          }
-
-          if (payload.is_featured) {
-            try {
-              await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?is_featured=eq.true`, {
-                method: 'PATCH',
-                headers: {
-                  'apikey': SUPABASE_CONFIG.key,
-                  'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ is_featured: false })
-              });
-            } catch (clearErr) {}
-          }
-
-          const supRes = await fetch(supEndpoint, {
-            method: supMethod,
-            headers: supHeaders,
-            body: JSON.stringify({
-              title: payload.title,
-              slug: payload.slug,
-              excerpt: payload.excerpt,
-              content: payload.content,
-              cover_image_url: payload.cover_image_url,
-              status: payload.status,
-              published_at: payload.published_at,
-              category: payload.category,
-              author_name: payload.author_name,
-              author_role: payload.author_role,
-              tags: payload.tags,
-              is_featured: payload.is_featured,
-              seo_metadata: payload.seo_metadata
-            })
-          });
-          if (supRes.ok) savedSupabase = true;
-        } catch (supErr) {
-          console.warn('[Direct Supabase Update Warn]:', supErr);
-        }
+        const bodyToSend = {...payload};
+        if (id) bodyToSend.id = id;
+        await blogAdminRequest('/api/posts', {method:id?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(bodyToSend)});
+        const savedApi = true;
+        const savedSupabase = false;
 
         // 3. Atualizar Dataset em Memória Local
         if (payload.is_featured) {
@@ -8796,16 +10399,9 @@
 
       if (!post) {
         try {
-          const supRes = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?or=(id.eq.${encodeURIComponent(identifier)},slug.eq.${encodeURIComponent(identifier)})`, {
-            headers: {
-              'apikey': SUPABASE_CONFIG.key,
-              'Authorization': `Bearer ${SUPABASE_CONFIG.key}`
-            }
-          });
-          if (supRes.ok) {
-            const data = await supRes.json();
-            if (data.length > 0) post = data[0];
-          }
+          const field=/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(identifier)?'id':'slug';
+          const data=await blogAdminRequest('/api/posts?admin=true&'+field+'='+encodeURIComponent(identifier));
+          if (data.post) post=data.post;
         } catch (e) {}
       }
 
@@ -8914,100 +10510,42 @@
       }
     }
 
-    // Toggle 1-Click Matéria de Capa
+    // All administrative actions use server-side authorization.
     async function toggleFeaturedCover(identifier) {
-      const post = allFetchedPosts.find(p => p.id === identifier || p.slug === identifier);
+      const post = allFetchedPosts.find(p=>p.id===identifier||p.slug===identifier);
       if (!post) return;
-      const newFeatured = !post.is_featured;
-
-      // Se for ativado como capa, remove o destaque dos demais para manter apenas 1 capa no blog
-      if (newFeatured) {
-        allFetchedPosts.forEach(p => {
-          if (p.id !== post.id && p.slug !== post.slug) p.is_featured = false;
-        });
-      }
-      post.is_featured = newFeatured;
-      syncPortalCacheToLocalStorage();
-
-      filterAndRenderBlogTable(blogCurrentPage, '', 'all', 'all');
-
+      const next = !post.is_featured;
       try {
-        if (newFeatured) {
-          await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?is_featured=eq.true`, {
-            method: 'PATCH',
-            headers: {
-              'apikey': SUPABASE_CONFIG.key,
-              'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ is_featured: false })
-          });
+        if (next) for (const previous of allFetchedPosts.filter(p=>p.is_featured&&p!==post)) {
+          await blogAdminRequest('/api/posts',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:previous.id,original_slug:previous.slug,is_featured:false})});
+          previous.is_featured=false;
         }
-
-        await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?or=(id.eq.${encodeURIComponent(identifier)},slug.eq.${encodeURIComponent(identifier)})`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': SUPABASE_CONFIG.key,
-            'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ is_featured: newFeatured })
-        });
-
-        const titleShort = post.title.length > 50 ? post.title.slice(0, 50) + '...' : post.title;
-        const msg = newFeatured 
-          ? `"${titleShort}" agora é a Matéria de Capa oficial do blog!` 
-          : `Destaque de capa removido de "${titleShort}".`;
-        showSuccessModalPopup(msg, newFeatured ? '⭐ Matéria de Capa Definida!' : 'Capa Atualizada');
-        showToast(msg, 'success');
-      } catch (err) {
-        console.warn('Erro ao atualizar Matéria de Capa:', err);
-        showToast('Erro ao sincronizar capa: ' + err.message, 'error');
-      }
+        await blogAdminRequest('/api/posts',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:post.id,original_slug:post.slug,is_featured:next})});
+        post.is_featured=next;
+        syncPortalCacheToLocalStorage(); filterAndRenderBlogTable(blogCurrentPage,'','all','all');
+        showToast('Matéria de capa atualizada.', 'success');
+      } catch(err) { showToast(err.message,'error'); }
     }
-
-    // Toggle 1-Click Status
-    async function togglePostStatus(identifier, currentStatus) {
-      const newStatus = (currentStatus === 'published') ? 'draft' : 'published';
-      const post = allFetchedPosts.find(p => p.id === identifier || p.slug === identifier);
-      if (post) post.status = newStatus;
-      syncPortalCacheToLocalStorage();
-
+    async function togglePostStatus(identifier,currentStatus) {
+      const post=allFetchedPosts.find(p=>p.id===identifier||p.slug===identifier);
+      if (!post) return;
+      const status=currentStatus==='published'?'draft':'published';
       try {
-        await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?or=(id.eq.${encodeURIComponent(identifier)},slug.eq.${encodeURIComponent(identifier)})`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': SUPABASE_CONFIG.key,
-            'Authorization': `Bearer ${SUPABASE_CONFIG.key}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ status: newStatus })
-        });
-      } catch (err) {}
-
-      showToast(`Status alterado para ${newStatus === 'published' ? 'Publicado' : 'Rascunho'}!`);
-      filterAndRenderBlogTable(blogCurrentPage, '', 'all', 'all');
+        await blogAdminRequest('/api/posts',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:post.id,original_slug:post.slug,status})});
+        post.status=status; syncPortalCacheToLocalStorage();
+        filterAndRenderBlogTable(blogCurrentPage,'','all','all'); showToast('Status atualizado.');
+      } catch(err) { showToast(err.message,'error'); }
     }
-
-    // Delete Post
     async function deletePost(identifier) {
-      if (confirm("Deseja realmente excluir permanentemente este artigo do blog?")) {
-        allFetchedPosts = allFetchedPosts.filter(p => p.id !== identifier && p.slug !== identifier);
-        syncPortalCacheToLocalStorage();
-        try {
-          await fetch(`${SUPABASE_CONFIG.url}/rest/v1/blog_posts?or=(id.eq.${encodeURIComponent(identifier)},slug.eq.${encodeURIComponent(identifier)})`, {
-            method: 'DELETE',
-            headers: {
-              'apikey': SUPABASE_CONFIG.key,
-              'Authorization': `Bearer ${SUPABASE_CONFIG.key}`
-            }
-          });
-        } catch (err) {}
-        showToast("Artigo removido com sucesso!");
-        filterAndRenderBlogTable(blogCurrentPage, '', 'all', 'all');
-      }
+      if (!confirm('Deseja realmente excluir permanentemente este artigo do blog?')) return;
+      const post=allFetchedPosts.find(p=>p.id===identifier||p.slug===identifier);
+      if (!post) return;
+      try {
+        await blogAdminRequest('/api/posts',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:post.id,slug:post.slug})});
+        allFetchedPosts=allFetchedPosts.filter(p=>p!==post); syncPortalCacheToLocalStorage();
+        filterAndRenderBlogTable(blogCurrentPage,'','all','all'); showToast('Artigo removido com sucesso!');
+      } catch(err) { showToast(err.message,'error'); }
     }
-
 
         // Init Events & Tables
     if (document.getElementById('blogSearch')) {
@@ -9084,7 +10622,7 @@
     function checkHashAndSwitch() {
       if (window.location.hash) {
         const hash = window.location.hash.replace('#', '');
-        if (['crm', 'blog', 'plan', 'market-intel', 'relatorios', 'config'].includes(hash)) {
+        if (['crm', 'blog', 'plan', 'market-intel', 'eleicoes-2026', 'relatorios', 'config'].includes(hash)) {
           switchTab(hash);
         }
       }

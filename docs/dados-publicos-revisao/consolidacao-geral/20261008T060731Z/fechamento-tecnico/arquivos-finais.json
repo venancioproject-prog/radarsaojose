@@ -1,0 +1,72 @@
+[
+  {
+    "path": "radar_hub_controller.js",
+    "sha256": "e673df388e812c60913e5696a4a4fe5a7cf965c9ff33a10841d559134a74c524",
+    "bytes": 22677527
+  },
+  {
+    "path": "scripts/build_radar_hub_package.py",
+    "sha256": "229cc50d0a0ba4da212098cc8aa03700b7137c015227ca3c25397933c37699b0",
+    "bytes": 4898
+  },
+  {
+    "path": "scripts/test_radar_hub_p0.cjs",
+    "sha256": "f04693a79d7f3ff73e2865155b8a61b90dbc044f620ae0276d4e8240f12b902d",
+    "bytes": 7133
+  },
+  {
+    "path": "scripts/test_economia_runtime.cjs",
+    "sha256": "230f40818cba58c80f750fa4ce5c77d1f28e06a460484df28b17262b78bb6b5a",
+    "bytes": 5543
+  },
+  {
+    "path": "scripts/test_economia_visual.cjs",
+    "sha256": "01cb91b7d79e641c60d387d14eda1b1d2a014d0d8c3bba14f9b67bf66e0a89df",
+    "bytes": 9002
+  },
+  {
+    "path": "scripts/test_financas_runtime.cjs",
+    "sha256": "940738104aabca7ee3db47a50139fe8a8f2c3d60df32c57fe91c20cef9bf53dd",
+    "bytes": 4500
+  },
+  {
+    "path": "scripts/test_meio_ambiente_runtime.cjs",
+    "sha256": "7cad023183a0ff5de02dd7501ae3d8b5532b3b37887b51e6531d8727e22bc793",
+    "bytes": 3428
+  },
+  {
+    "path": "scripts/test_mobilidade_runtime.cjs",
+    "sha256": "ab0e9f78fc05812e8bb98387410b2a0b63dbf4ba7a4780e4146dbc5c4950b949",
+    "bytes": 4499
+  },
+  {
+    "path": "scripts/test_saude_runtime.cjs",
+    "sha256": "beb406d1e72bf389e518951ff55e703b6df5ca702c2d3da5ae0f8aba21a08cf0",
+    "bytes": 5546
+  },
+  {
+    "path": "scripts/fechamento_tecnico.py",
+    "sha256": "b57d7d3eff4b7b86603ecdd66932ba44a8c840baec29d2c338014558039a5845",
+    "bytes": 4630
+  },
+  {
+    "path": "scripts/fechamento_chrome.py",
+    "sha256": "decf983c6b38dcd2e983ff224de8c213f881d1a3b57b63540c1ca7e7bf084730",
+    "bytes": 10173
+  },
+  {
+    "path": "scripts/fechamento_relatorio.py",
+    "sha256": "0bec6f25c9e7f676de8658e4bfa2698d5cb84f2c81229cc3b3d4155adc46a5f2",
+    "bytes": 8629
+  },
+  {
+    "path": "scripts/test_fechamento_tecnico.cjs",
+    "sha256": "3ff9b599baede0acdcf0d2e8d74b6aaaaaeb4470c8b0bd8ea31b6cde56760d89",
+    "bytes": 4332
+  },
+  {
+    "path": ".gitignore",
+    "sha256": "528cf4994e4f02b71e472f29e6a098f5cef798ce09673efb3ca8e8f72f632acf",
+    "bytes": 6608
+  }
+]

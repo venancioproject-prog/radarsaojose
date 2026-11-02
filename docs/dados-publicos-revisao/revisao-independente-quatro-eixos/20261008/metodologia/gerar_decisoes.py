@@ -1,0 +1,36 @@
+from pathlib import Path
+import json
+P=Path(__file__).parent
+M=json.loads((P/'manifest.json').read_text(encoding='utf-8')); refs={Path(x['file']).name:x for x in M}
+d=[]
+def add(axis,key,status,reason,source=None,locator=None,value=None):
+ r=dict(axis=axis,key=key,status=status,reason=reason,independent_numerical_qa_required=True)
+ if source:r['source']=refs[source]
+ if locator:r['locator']=locator
+ if value is not None:r['value']=value
+ d.append(r)
+for key,val,id in [('seg_roubo_veiculos',143,37),('seg_furto_veiculos',724,22),('seg_prisoes',2170,88)]:
+ add('seguranca',key,'APROVADO_COM_RECORTE','Valor e soma dos 12 meses reproduzidos por captura própria. Município SSP560, ano2024. Prisões são variável administrativa nativa, não pessoas únicas.', 'ssp-produtividade2024.json' if id==88 else 'ssp2024.json',{'idDelito':id,'ano':2024,'grupoDelito':9 if id==88 else 6,'municipio':560},val)
+for key,val,year in [('demo_populacao_estimada_2024',724756,2024),('demo_populacao_estimada_2026',729153,2026)]:
+ add('demografia',key,'APROVADO_COM_RECORTE','Estimativa oficial IBGE, referência1julho, não projeção criada no Radar; mudar narrativa legada, preservar histórico.2026 também reproduzido em XLSXDOU.','sidra6579.json',{'municipio':'3549904','variavel':9324,'ano':year},val)
+add('demografia','demo_taxa_urbanizacao','APROVADO_COM_RECORTE','688155/697054*100 arredondado2casas=98.72. Classificação IBGE Censo2022. Divergência municipal681842 não reconciliada.','sidra9923.json',{'municipio':'3549904','variavel':93,'ano':2022,'situacao_urbana':1,'situacao_total':6795},98.72)
+add('educacao','id eb redes etapas2005–2025','APROVADO_METODOLOGICAMENTE','Resultados agregados INEP publicados por rede/etapa. Não média simples entre redes, não percentual proficientes; produtoN*P com tolerância precisão publicada. QA deve validar células XLSX. Metas2023/2025 continuam null.','inep-metas.html')
+add('educacao','censo2023–2025','APROVADO_COM_QUEBRA','Ano/edição/arquivo/células distintos; layout2025V2 altera colunas e IFTP. Rede disjunta pode somar; docente/etapas, educação especial e profissional sobrepõem. Matrícula não pessoa única. Sem substituir campos2023 por2025.','inep-sinopses.html')
+add('educacao','profissional_tecnica2023','APROVADO_COM_RECORTE','Preservar7316 da coluna17 como Técnica de nível médio;7322 da coluna16 é educação profissional total separado. Não renomear técnica como total ou interpretar diferença como erro.')
+add('educacao','denominador_percentuais','CORRIGIR','Eliminar142850 hardcoded; total163965 do mesmo recorte2023. Guardar null/zero inválido; rede soma100, categorias com sobreposição não têm obrigação100.')
+add('educacao','escolarizacao','APROVADO_COM_RECORTE','99.09 Censo2022 e97.4 Censo2010 residentes6–14. Não matrícula, PNAD ou INEP; absolutos não inferidos da porcentagem.','ibge-escolarizacao.json')
+add('saude','atualizacao_ativos','APROVADO_DOCUMENTALMENTE','Mortalidade2025=7.65 anual; APS2025=57.95 estimada e não ESF; SIH2025=41846 residentes; SIM2024=5028. QA deve reproduzir tabela/cabeçalhos. Anos anteriores preservados. Taxas sem numeradores publicados não passam a cálculos próprios.','rag2025.pdf',{'paginas_relevantes':'RAG tabela morbidade/mortalidade; SMSQ3/2025 p24–27'})
+add('saude','historico_rag2015–2025','APROVADO_COM_REVISOES','Mesma variável/residência demonstradas antes de escolher revisão;31observações com todas85edições no histórico. RAG é fonte primária municipal que reproduz DATASUS, não extração nacional direta. SIH internações não AIHs pagas indistintas;2025SINASC/SIM ausentes.','rag2025.pdf')
+add('saude','dengue_cve2019–2025','APROVADO_SERIE_SEPARADA','Municipio residência3549904, mês início sintomas, confirmado autóctone/importado/notificado separados. Não fundir totaisCVE com SMSSE1–50. Datas/edições revisáveis. QA deve validar filtro municipal distintoGVE e84meses.')
+add('saude','9_kpis_suspensos','MANTER_SUSPENSO','CNES total/SUS/UTI/estabelecimentos não redefinidos para universos existentes. Produção/agregados sem prova mantêm null. Acesso novo à fonte não torna o KPI antigo equivalente.','cnes202412.html')
+add('saude','CNES_linhas_nativas','LIMITADO_EVIDENCE_STORE','1569 existentes sem complementares inclui88hospitaldia;352complementares têm HABILITADOS, não SUS.225UTIadulto74/75/76 é subset explícito, não todo tipo de UTI. Não existentes-habilitados=nãoSUS.','cnes202412.html',{'competencia':'202412','municipio':'354990','codigos_adulto':[74,75,76]})
+add('seguranca','series2001','SUSPENDER_QUATRO_CONTAGENS_CANONICAS','Homicídio231/229;roubos2935/2910;furtos4606/4528;FRV3112/3079. Preservar duas edições. Quebra registro→ocorrência emjul2001documentada não comprova causa específica. TaxaSEADE42.15 pode permanecer publicada separadamente sem inferir denominador.','ssp-metodologia.pdf',{'paginas':[20,21,22]})
+add('seguranca','series_mensais2001–2026','APROVADO_COM_LACUNAS','Não confundir vítimas/ocorrências;2025=33/29.2015IDs132/133semcompetência válida ficamnull;2026Jan–Ago somente, mesesfuturosnull. Ausência deID≠zero. Soma crimes não soma pessoas.','ssp2025.json',{'idOcorrencias':38,'idVitimas':41})
+add('seguranca','taxas1999–2025','APROVADO_PUBLICADO','Denom SSP éSEADE; taxa veicular pode ser por100milveículos. Não recalcular comIBGE/inverter arredondamento.','ssp-metodologia.pdf',{'paginas':[20,21,22]})
+add('seguranca','CSI_DEIC_ranking','MANTER_SUSPENSO','CSI2948cumulativo desde implantação não anual2024. DEICcoorte/numerador/denom e rankinguniverso integral ausentes. Não somar universos administrativos.')
+add('demografia','piramide2022_historicos_domicilios','APROVADO_COM_UNIVERSOS','21faixas disjuntasSIDRA9514;80+ pode agregado exato. Censos6observações e estimativas22 observações séries separadas; seminterpolação. Média2.80=moradores695312/permanentesocupados247894, não697054. QA deve reextrair células/fontes.')
+add('demografia','35_poligonos','MANTER_SUSPENSO','Tabela39áreas textuais e8regiões não crosswalk para35geometrias. CD_BAIRRO e setor namespaces distintos. População/densidade/ranknull; áreas hardcoded não comprovadas. Preservar geometria sem join por nome.')
+add('demografia','cor_raca_religiao_piramides_antigas','MANTER_SUSPENSO','Residual31cor/raça não alocar artificialmente; falta nota/validação. Pirâmides2000/2010 e demais auxiliares não reproduzidos, mantêmnull.')
+add('todos','autoridade_legada','CORRIGIR_COM_HISTORICO','Arquivar campos raw_file/trecho_bruto/narrativas contraditórios sem apagar originais; alinhar nome/unidade/fonte/competência/verificação à evidência ativa. Não deixar textos antigos promoverem valores suspensos.')
+add('todos','gates_visualizacao','MANTER_QUARENTENA','Nova evidência será exportável separadamente; não levantar gate integral só porque há subset comprovado. Corrigir labels/denominador de componentes existentes semredesenho; app.js intocado.')
+(P/'matriz-decisoes.json').write_text(json.dumps({'reviewer':'metodologia independente','date':'2026-10-08','promotion_count':6,'own_capture_manifest':'manifest.json','own_numeric_checks':'testes-independentes.json','decisions':d,'acceptance':'Integração depende de QA independente e decisão do integrador; não homologação integral.'},ensure_ascii=False,indent=2),encoding='utf-8')

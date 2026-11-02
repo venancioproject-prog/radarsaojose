@@ -1,0 +1,1286 @@
+{
+  "scope": "Somente esta revisão; estado inicial tinha alterações anteriores que não são atribuídas a esta fase. Sem commit/push/deploy.",
+  "files": [
+    {
+      "path": "app.html",
+      "kind": "alterado nesta fase",
+      "before_sha256": "5ff117f1c6d446bfe08e0d7aac6cf74d37e34f1b54b70ac3857d8591afcc5334",
+      "sha256": "2bba5f9490f388a1ba5bb926b737fcda9f184093b9e6772d1115c4005c0d3b20",
+      "bytes": 986649,
+      "git_ignored": false
+    },
+    {
+      "path": "radar_hub_controller.js",
+      "kind": "alterado nesta fase",
+      "before_sha256": "e673df388e812c60913e5696a4a4fe5a7cf965c9ff33a10841d559134a74c524",
+      "sha256": "4a6236315415cfd0e4056278cfcacd377c0f9db0e07aceba9ac55c8c3042cf7a",
+      "bytes": 26520931,
+      "git_ignored": false
+    },
+    {
+      "path": "data/radar_hub/sjc_open_data_ground_truth.json",
+      "kind": "alterado nesta fase",
+      "before_sha256": "214cee161de1c62b8e2e88fd8960a165097d103afa5624919dcc92d2f69f9079",
+      "sha256": "40b6a9b1cace0236224af010cab9fe226ef2dda36c8b55872109f634817ed31a",
+      "bytes": 40260405,
+      "git_ignored": false
+    },
+    {
+      "path": "data/radar_hub/sjc_metadata_registry.json",
+      "kind": "alterado nesta fase",
+      "before_sha256": "aa7ea20e4776472ed3e1cc92a58f8234b401293a755398a75662906d513ad32b",
+      "sha256": "9b7fed3acd65cf929938bc0bd07246d621c07dab88251dd235b3d7c67b39cd0b",
+      "bytes": 482411,
+      "git_ignored": false
+    },
+    {
+      "path": "data/radar_hub/radar_hub_package.json",
+      "kind": "alterado nesta fase",
+      "before_sha256": "6af7bfc9c40607aa9beeb83b58acf0e47d2c8976eac9dd6ed6587089c1c8b99e",
+      "sha256": "a918dc378ccdb78b7870784491ea2145730e2f05e3e5e49935fbb42b02dce110",
+      "bytes": 26282088,
+      "git_ignored": true
+    },
+    {
+      "path": "data/radar_hub/radar_hub_consistency.json",
+      "kind": "derivado/metadata atualizados; histórico preservado",
+      "before_object_sha256": "08a61c0ad8ba3aae9404f42a82f882e3207a382e305a197e43eb2604582d9463",
+      "sha256": "735b66402e285414aa6d3eb43a7cefdd537bedcfaa20f8ef94e3ef8c342c858b",
+      "bytes": 37279
+    },
+    {
+      "path": "data/radar_hub/consolidacao_status.json",
+      "kind": "derivado/metadata atualizados; histórico preservado",
+      "before_object_sha256": "f0f56fe550733a3ec3c92dbf7bfeb6300458cebaa1d778b807229e91b410cb98",
+      "sha256": "1f0c4a5bc7e8ed7e3a3f95b723e2743f84cb7f97cfc6fdacf178995f2bec1e75",
+      "bytes": 947
+    },
+    {
+      "path": ".gitignore",
+      "kind": "exceções restritas para documentos/scripts desta revisão; raws grandes e clones continuam ignorados",
+      "sha256": "5be1fef0a1614fef53bb963f251c8c71d6b7b1c1d643f94c8d381a1e4a3e36ed",
+      "bytes": 8005
+    },
+    {
+      "path": ".gitattributes",
+      "kind": "preserva bytes/hashes da pasta de evidências e scripts novos; não altera regras dos demais arquivos",
+      "sha256": "a196ffdeb83a9380d22d8ac505f38a431825885540a372f0fad30e80d30eeb6f",
+      "bytes": 262
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_aprovar.py",
+      "kind": "script novo desta fase",
+      "sha256": "96dc171586b337c115fa8545f25ecd35a808b46289e7a356c13dbc4c8365fe1e",
+      "bytes": 3825
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_arquivos.py",
+      "kind": "script novo desta fase",
+      "sha256": "be0713efcc160d12569b3d002f45c99573faefb542dc00f5bb616c745e6d3a11",
+      "bytes": 3874
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_controller.py",
+      "kind": "script novo desta fase",
+      "sha256": "e766d2948898844aaaf42491c8d84e1cc02b620d2709e7b4390bd8d3e51aed7e",
+      "bytes": 8168
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_integrar.py",
+      "kind": "script novo desta fase",
+      "sha256": "067c607adbaa670232f12007bf62eeea444849394d55a358d74717d31b5ef2f9",
+      "bytes": 24594
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_integridade.py",
+      "kind": "script novo desta fase",
+      "sha256": "5c4c0623b289d8e671f15a0a2a4efd0a6ce2c4864600725a5dca8602a9dc5412",
+      "bytes": 5630
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_qa_chrome.py",
+      "kind": "script novo desta fase",
+      "sha256": "edc8c82b445ed13ba7aa25d4fd3915d12aa583524a19def41a2350fb1107b925",
+      "bytes": 11636
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_qa_cnes.py",
+      "kind": "script novo desta fase",
+      "sha256": "c028b46513aa0f984dc425f8a0d6ae1f3740b4de9757ecb6d2dc0d20d01438fe",
+      "bytes": 3401
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_qa_evidencias.py",
+      "kind": "script novo desta fase",
+      "sha256": "34fe656888606d6451848996fca3c1aa07f5f9c4b6e64017bd3ad6b28362ae20",
+      "bytes": 10179
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_qa_integracao.py",
+      "kind": "script novo desta fase",
+      "sha256": "4b315c737cef90352dcaa4dbe6fbf66dd4a69727db2f03698187201cfb297edf",
+      "bytes": 5747
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_qa_refresh.py",
+      "kind": "script novo desta fase",
+      "sha256": "b7b0496ea5fa89672fb82eb7ac968f3bce2166cb60f4ac7a381aa87d4f2d95a5",
+      "bytes": 2117
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_qa_regressoes.py",
+      "kind": "script novo desta fase",
+      "sha256": "e87e532a17a9df63dc72ebce92bd2367949ecbadb21635fe1dbb53db93af294d",
+      "bytes": 5254
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_relatorio.py",
+      "kind": "script novo desta fase",
+      "sha256": "628499164e24c08fed2aeacfe2758b6fbfe02f8b54eeb16951bb1abb33c4e777",
+      "bytes": 26265
+    },
+    {
+      "path": "scripts/revisao_quatro_eixos_validacao_integrador.py",
+      "kind": "script novo desta fase",
+      "sha256": "d48949c4331da91586f67007c3936ee449bd60029427063d9fd4e3d3b9cd09f0",
+      "bytes": 2370
+    },
+    {
+      "path": "scripts/test_revisao_quatro_eixos.cjs",
+      "kind": "script novo desta fase",
+      "sha256": "deae1aca1c772e6af5d81f32d428cb792562cb8675efbfecf26dc3a18bbc781e",
+      "bytes": 3755
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/antes-depois-indicadores.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "17c5259c85d2ef702f4281ccf5affab361deb50933bfb531785d968205c7d94b",
+      "bytes": 243403
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/campos-legados-para-validacao.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "2e97b2d1609b34765a55311be6f9780328382127c6261f0fe8b90d5cc513811a",
+      "bytes": 43114
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/cobertura-historica-consolidada.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a036f7c12fd72cc8f5d553d4884c40000e40d628d9c9a28e226eb0a9ef1f9075",
+      "bytes": 3685
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/consistencia-legada-preservada.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "e27773bb69c66fece433650452aab946b9eca5351a154d51ca598596c583b7f6",
+      "bytes": 6144
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/decisoes-integracao.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "639f04419f8ade7fe88e612c4c4ef29d95bd6c8d268a0f286c5d5414d82f8a93",
+      "bytes": 2776
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia-canonicoinicial.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0ee74e54d871d84f63d93c898cef35a782ef0e162f0301a0c63ef930cb20503b",
+      "bytes": 80422
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/cobertura-historica.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "5655dac386b64ef78077bfc69e0a51595a3f0b6f2c10178df454493279f61c10",
+      "bytes": 1896
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/coletar.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "c522dd6c660711fd2b8837791d655b5e923901c0917a1df107866486b70faa9f",
+      "bytes": 2078
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/coletar2.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "c74928affdbdd23842ed5162e291a73933c800dfbcd53680bcc6926a8c6188d8",
+      "bytes": 1076
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/coletar3.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "004b14538b77003626a0b2524e2d043764491ba93460351ccc8f66af2e1ee51a",
+      "bytes": 1011
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/coletar4.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6028cd3256720096b63025b76302c18e9ad82d138beb16510e8c0f19589c2e8f",
+      "bytes": 1255
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/coletar5.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "acdd3cb008548bffe128bac3a9f7764797c66d1b6f79a0b8a322a891c2c439f1",
+      "bytes": 771
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/fechar.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "dad5de7ae3ba1c2d9fc2790724969e61807ffdad5cbd4a0896e1c106f2f470a9",
+      "bytes": 493
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/html_tabelas.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4ead4cecd7c8fa02be844dad21c333aaf166dbed29d10ed19717ddc342b17a0a",
+      "bytes": 990
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/inspecionar.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "39914cb1d1855cf026ca09d4b979ec1dd0693089c7216885596c92399307cebc",
+      "bytes": 704
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/inspecionar_base.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "097803762f11a73f5bc87a12d76b47c54389713d46ed8c7f8bd3a1304d83d939",
+      "bytes": 594
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/manifest.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "5c029b807248e182b64e760b15bdb615127772dd1bca2daf94cc0c30c56314d4",
+      "bytes": 11554
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/matriz-evidencias.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4a3dbf0c2370a1c964df462d0c0052acabea3047ce80417ff56d45d0bdd15c2d",
+      "bytes": 9965
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/matriz.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a7d61283a7034ec2e1314d7413ec82a3a7da013a886313fa185616c564462bd9",
+      "bytes": 3272
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/propostas.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6be366bd8a7939ceba7d1d7f99125a00da8ad3929f385379847db9af0bec69ff",
+      "bytes": 13224
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/relatorio.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4ab328a83c6c4c4f8c23019a85f6beb82598150cc05e2d22cceb3679683d64af",
+      "bytes": 9492
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/reproduzir.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a7703141db863642319e0bfce7ed5167f34cb78e27ceba5c62d5cf3933402cf3",
+      "bytes": 6199
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/resultado-integrado.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "39dcad9113c40f91a2d49b0f25e68e450935e2d439e7acc769a33ca6682b59c4",
+      "bytes": 5280
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/tabelas-municipais.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "642ea4e36d4467a1cf678589b5750f67b168e9e4b67ffb285ba6ea3a147bef3b",
+      "bytes": 24730
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/testes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "c3298833cbfe45da3f9f5ff315af262612233c4dcb95c5247e14e0da604ea0d7",
+      "bytes": 14632
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/demografia/verificar_extra.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "38c22c4b4a7b60ca498867f4b8d5307d407a3fb91740e543fef4bedce712a89c",
+      "bytes": 427
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao-canonicoinicial.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a8e9cee5e84432caa0c116ae04255f98635d75aba2cc41849ef99a0fd55c68f6",
+      "bytes": 52434
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/ampliacao-censo2023-2025.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "3925644c7b710528b39d4bb80c5a0cf9c1061a26dfeec0021042cd9366847a19",
+      "bytes": 189250
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/ampliacao.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "86ed5b45765c9ca1dcb0ed1218a2229936605449765f7d9b6da360af04e7abc7",
+      "bytes": 11608
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/calculos_ideb.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d64480f1365b663baa6ada3acc2c8485b6fe52ac3b73d2b402b5f7598f22f886",
+      "bytes": 1561
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/censo2024-recorte.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "95beea83b8ddab7396eccd4f3f4765dbfaa3cf2e2164c2f33e8257b732095561",
+      "bytes": 1855388
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/censo2025-recorte.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "866a63e7059c8f51d9f505171df85f29f051a53b556830a188fd6a04e0e8e2f0",
+      "bytes": 3700864
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/fechar_manifest.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "27c7dd5b5a1575d89c3419cfe6493138a0a983d373229f2713f0b9183f84d201",
+      "bytes": 2794
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/indicadores2025-reproduzidos.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "3801271f4ca4d91f094f7b4cf9334f9ea75dccaadafa7cf9d3cf19572d487508",
+      "bytes": 1793524
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/inventario.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "db270b4ff42cfc5c420ea736b5dbb26f85387ce8be1e56e1136f4ffabb0e1fda",
+      "bytes": 52462
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/manifest.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "170c02ad62b7617b69e9e416d9f8e1b15aa2686b91f6678e71422a066f440bda",
+      "bytes": 9772
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/matriz-evidencias.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "31dc9768c5d477293b831c9d19e184f4157be7d5af77b673048190e61a7ede69",
+      "bytes": 1135692
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/propostas.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "863ff5d7e8e746e1c1414fcf6b486b6a32b6a15e5199413502bd597802d91389",
+      "bytes": 1989592
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/relatorio.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "c7bda23564bf953e8730d281a8eb0de69405131cd3c1c40498df25f534b2c40e",
+      "bytes": 9992
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/reproduzir.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ea622076eb569ed45e90a54eaaaac1df5eb13acd4f00f0110cfeb3894de56fee",
+      "bytes": 6116
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/resultado-integrado.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "86a0cd7e59cd9de76f3a47c8b39ae6f9ec53339e9aba83acb09a7bd5f3c9bfe0",
+      "bytes": 5033
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/testes-ampliacao.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "91d5daac856fe73ea659a164f0f83aa2a9ab7afb28b3bf19ae61fe076fa072c7",
+      "bytes": 5958
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/testes-calculo-ideb.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "07352405c4e0638f1cfe790db5612d2cedfeca4b9270951770840dd3648fa51c",
+      "bytes": 40725
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/educacao/testes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8170b8a0f072814c6e2011703298070dfa09e62819e7562913f8b06aa19e8965",
+      "bytes": 235625
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/estado-inicial.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "79857e08a8ec76c2b42b3ae50e1b414cd68126ca24b5246089291e3956d719a9",
+      "bytes": 15764
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integracao-resumo.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "25801b16951ea8fd764459e4b5e501dfbdf5fb3a6fed999dcf5bab8fd837feee",
+      "bytes": 1672
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/manifest.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "fcfe96221f153473215273daeb9f9d91946ece0e45709991e74741e504af0c94",
+      "bytes": 1658
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/sidra6579.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7ca6639ed31965f7089d75a806fea60868f7fdcc9f4d3748f3071d5bd1213320",
+      "bytes": 6534
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/ssp-2024-grupo6.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+      "bytes": 7537
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/ssp-2024-grupo9.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "fcbd1db005759f0eba638d4684b136b50865a1fa91d10486cdabbb5ea7413ed8",
+      "bytes": 4519
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/ssp-2025-grupo6.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "2c997fee00b7471f1a51f63150fa79b60c150c66839e9f00e271855dbb892f0a",
+      "bytes": 7536
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integrador/testes-ssp-independentes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8cd3a495e2d5fc92f7236908c1746fb21df10dc6cd39101a23396b5da10b6c98",
+      "bytes": 2672
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/integridade-final.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7a3b1581698d41211a3a9a2f4a3519aa5abafefad28ce84c0f0e4f6becf0c809",
+      "bytes": 1915615
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/manifest-fontes-integradas.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "5a2511e305597bc2e8188e6b9b06d34dfd4b3d8e6b1be9c43da2dc1212f3d9e7",
+      "bytes": 79755
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/matriz-oportunidades.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0a41614cf046af9b67c676e92a90724fe904f9d45946046b1a24c447be0b80bc",
+      "bytes": 2737
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metadados-legados-preservados.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "eabbb1bf31ac81838cb1f746bcfde5dff52e493f957a6bdda678bbcc1fa53ec9",
+      "bytes": 113362
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/adendo_saude.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6eeadeeada2ca08114955487216eddb8fcd1dc06d04279d6bd748ca7a890b57a",
+      "bytes": 4306
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/conferir.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6daccba2013e3b7000b9abd08ab6d4b52ee5f506e42ce7c62c73d761d761f978",
+      "bytes": 2792
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/gerar_decisoes.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "10e7f65fab36196c286d4d0ee263b2d9dd9b190a23c6c14a9dd37e4a128a48b9",
+      "bytes": 7412
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/manifest.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7f91b12b6f7e7e09e8897093152b4b95ad6d9efd963181e7f8a4ce8e1783004a",
+      "bytes": 6976
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/matriz-decisoes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ae36e5471c25dd2f5c49986171d80b93efa6c218540be6efc4989b3bdb83f2ab",
+      "bytes": 27539
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/rag2025.pdf.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "2f627ebee5e1dee47fb2ea85f65a7bb76901b3a2b7dcade766b600da83abc469",
+      "bytes": 174968
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/relatorio.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "05d332d49b808f51322283d2fbaddd7ac76d3bbfed40059cdc4d0b810e9c094c",
+      "bytes": 9855
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/sms2025.pdf.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "602bd2c4097d09f4fb340c6c63be59d9755e98b8ef1b13d17190ef0af13b7a6b",
+      "bytes": 29996
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/ssp-metodologia.pdf.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7436b6ea4153869c067bfd09abe4091bbf85fa18226709cdecf8c42c31175d8f",
+      "bytes": 58589
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/testes-independentes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "71b6f2bd0a8dd7101950884adecaff662d0e1498b42dae8fd3fd306d87047bea",
+      "bytes": 3373
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/metodologia/validar.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0e4c27731bfba9076a1d4a90d8df2c8c462a064c5baf18cef10ac0cf684a9668",
+      "bytes": 2126
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/protecao-antes-integracao.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8de695cf3ec67d9e7cab3a1d3c1287bd330205a68eec4de3613c2ff51d66b66b",
+      "bytes": 1702
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/protocolo-integracao.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7f3f036365914682b95a2132f28fcf90cfa9b8e58801f4e71a8b14c7f6f5f768",
+      "bytes": 2192
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/README.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "2f6d0bf37614cfe08e1db9a416bba7e0e23985c75982a380d118b4a9a040b45f",
+      "bytes": 1307
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/preservacao-p1-p4-app.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "9a111c3ff48f86076d5cb67db69b4dcff3d387fb2d059fa3ce085bb66c6cc267",
+      "bytes": 194
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regeneracao-fingerprint.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "9c4ab6608c22105acc1c40858fb17ddd6c68e7388d2c458cc7875d5ededef850",
+      "bytes": 2061
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "297c1dcf80da3bf7786b274c763f71b25fd5e9b3df0fc5a401f154e81a6e59b2",
+      "bytes": 1129
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_economia_runtime.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "41296a31e579ebced1b0b8cc73579c94a5f3d002f6fd57070ef052353add09dd",
+      "bytes": 243
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_economia_visual.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d0017e6701275b4d61c910167ea335abe5b8e03e48c8817c3fb7d369dd521581",
+      "bytes": 321
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_fechamento_tecnico.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4ed391888b36bd75d7b8f96e4784f7cc8353397c80b06cb7fb3e7e0d9b68cc59",
+      "bytes": 588
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_financas_runtime.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "600f435d38948c0b029bad4b200d38ea3280df665411c1fd5b2fa14d266bbfc4",
+      "bytes": 285
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_financas_visual.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "daf2da2cf34916870bcaf2db4bce84e08028d0350a31624877387d5f4d96c494",
+      "bytes": 327
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_meio_ambiente_runtime.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "e1c7dabbc89dc554d867f8a6c97fde1990e0bd0a8df53668a3816c2e8ff368b1",
+      "bytes": 327
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_mobilidade_runtime.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "29c07297163edb18da552c6a6920d59dba42d0a1ca7b6a6224e4580e2dc67097",
+      "bytes": 300
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_radar_hub_p0.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "e603b04121a261cfb69dfae56ad64feda130a0b6cc1a228796ebae9122af23dd",
+      "bytes": 715
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_revisao_quatro_eixos.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0d63a6e60d8eb8f53e38e75ea7823b26cbba80c37512aeece98f7e1b237f5cd3",
+      "bytes": 488
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/regressoes/test_saude_runtime.cjs.log",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "59ba49a6fac0043a041e8dca0cb13213fc6a807a3187f173d54c149985c3ba89",
+      "bytes": 117
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/relatorio-qa.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8e7e96ac0b92be35e6976ae20743bae3c4e9a4726b08fd76451a681e44e0f96c",
+      "bytes": 2465
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/testes-chrome-primeiro-harness.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "b214feb4e99be7dd4502f0fc020890ea707ec94a5bace118e08d80bf028088fd",
+      "bytes": 13487
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/testes-chrome-real.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0cd97492bb5f3ed9a7f7686edcf5bdf40d92621cdaf094e9c351567a3f75dbc9",
+      "bytes": 95170
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/validacao-cnes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "bd65236de8d9196a690a0ba80a9b1fcdd9f43db8bcdc0b67cbfe8ad49dcfebe2",
+      "bytes": 34038
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/validacao-evidencias.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "31ddd282fec1f88bd0390d46d73eb56e1167d2689bdcd7db4e73bd224704ddb1",
+      "bytes": 577013
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/validacao-integracao-proposta.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8f126ff152faee3da6aa5a41afc909f8ebb2cd8be524ddeb279c4fb6f43f172f",
+      "bytes": 4300196
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/qa/validacao-refresh-saude.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "aec22699ca905886d38a7581311031f9e551a1268e84e16bde960e40048e4577",
+      "bytes": 1090
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/relatorio-consolidado.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "9764a93a9cb39f0e00e80bd97189ffde6ca781919b9c881a346447bfed5570b8",
+      "bytes": 14282
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude-canonicoinicial.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "35cd84eec2fc2c45de5d3340c0ae1b6ec3c7ce3e58e8bbd1934ca6983b93aab7",
+      "bytes": 77299
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/cnes-extracao.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4a7baaa709c7e7c076105486aecb60150405440a464267107a01aa211815037e",
+      "bytes": 10728
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/coletar.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "88f87a796ff841692dbb7b5a00798e1a5621679850766da33236498a828bf4b3",
+      "bytes": 2096
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/coletar_cve.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "faf2ee6757b618c2958697cf5def03023bf5d9b1c847632762a71144d898a2c9",
+      "bytes": 1350
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/coletar_historicos.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a90099afa83b3cc7cb3928f0cad7487e7568d7c06347995c8f2c4599fc2379fc",
+      "bytes": 1319
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/coletar_metodologia.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "3b8c0a54a0c5351a3b5f2919afd0bd0b78c24f76bc169583d10f70cc0b47695d",
+      "bytes": 1341
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/dengue-cve-extracao.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ea425a69edc6f4877e8653672e7a5c2287de44640468fbf56b72d16e5d88c476",
+      "bytes": 104351
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/extrair_cnes.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d61e24fdb8f400f404e84c42435b977ad6a39e779841a16e0dc39b7961120d63",
+      "bytes": 1820
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/extrair_cve.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7732d527680fab944e93701e27c8bf0893b40f470e3048f5f6d512d75e7e2935",
+      "bytes": 2606
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/extrair_historicos.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "41a6ff495b81c8dfd1eee0d22a36ec2471f1385d5631b07d119335311c6a641a",
+      "bytes": 3934
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/historicos-rag-proposta.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "1b0b0b21a3e98ea4b2486e8088f9164c5ff1ed26ccbea553a7dfb381f0badd29",
+      "bytes": 31047
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/historicos-rag-todas-edicoes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "bf47903c5e76bb020c3136e88c0b68c4e4f3d668f36febab73567544baecaa3b",
+      "bytes": 174047
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/inventario.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6a92f2c9dbacb622ab43dcf756dfebdf50e3c02bd0a2f61abea6cfbb8addee83",
+      "bytes": 77746
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/manifest.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d65fd0447f3d1b6d92e2e9c65dd83b5200d7f0977d2b0aeb7b796b42100aa356",
+      "bytes": 13473
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/matriz-evidencias.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "3ed296275cdb410f813e744460baa81b7908524ffdfc189e62b818ed219724a4",
+      "bytes": 16092
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/matriz-evidencias.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "2f5a4cac0c47698705b030f5d7bc6e282a218264e934d6c01f5c723c0d59fdaf",
+      "bytes": 4992
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/metadata-ativos-especifica.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "06fb4e07c0a2d0062d2308675eb5f0143dea78870cfd2d172c3c0b83111a3005",
+      "bytes": 2024
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/propostas.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a67e43568d4fc504b845e053d5c78f5f25bcee6251e42b71488ef9f53f2bb7f3",
+      "bytes": 20638
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/q2024.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "05f8afe9c4a4e4f77811c5550b31ecf69706699b6be115aa616c59b1bee62f2f",
+      "bytes": 72549
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/q2025-default.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7787e9a85c40075679ceab75590553bdf63d051a9f526c810f0b2db0e17f7af9",
+      "bytes": 31241
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/q2025.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "68792e45ceb49b71597d236672701e350723c77d25331a6b4f8fdcc507aa0c7d",
+      "bytes": 69879
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/quebras-revisoes-rag.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "37f4b4ee302e91cd17229d13ab3fe631671c8c3159944dc00a00b032b76b3e73",
+      "bytes": 12206
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2016.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d237581eb806bdb6ff5d65407beae00dc77e008d28fe7fd49cdfcccea694527d",
+      "bytes": 59907
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2017.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6b25a6c8c6f62ce956fce51ae4218900a51ab6cbbe38be65a2a9e15dd968ad28",
+      "bytes": 46198
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2018.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6b25a6c8c6f62ce956fce51ae4218900a51ab6cbbe38be65a2a9e15dd968ad28",
+      "bytes": 46198
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2019.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "546dca686e0cab5e610da49f9eff9483a16c185d7373ddb488a9bbe5f497a4af",
+      "bytes": 23589
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2019.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7b135726427da1b5e6ea2e421be7d5f7c50216d871b0e6ce176101c2debae5c7",
+      "bytes": 131550
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2020.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4321d0e8b2fbb49adacb0135c9f60bacee2f69681347cf610ccbb9223e752d93",
+      "bytes": 25392
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2020.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "403e4e4f1b213e0bff5580df1914d627eee5fb1ebedaa3974ccde58cbe7336b6",
+      "bytes": 130884
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2021.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a0659b92cccec419e10ed31880c20f8c77b62acee4289df5be1f708f8edeb12d",
+      "bytes": 32045
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2021.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7317ee2a164a5c17d3402021426acf962d5e3ba51006a292f87940e1f07cad09",
+      "bytes": 133455
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2022.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "27b0f2979ca4615c96c142304d5a449c869749edca5b904a429e57a0202b9868",
+      "bytes": 31248
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2022.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "15f6211055e2c576fab094e88437f6d57261feb9abcdb28696a25480bff13c35",
+      "bytes": 166716
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2023.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "28cda13ba9a044822d5678fe703bb9fde7f49cfa3f5d69f8d14dc44fd0f18d60",
+      "bytes": 37024
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2023.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "555e17673a8f111fdd0101341146672f844fa26b4a36469af77abe39e8c46a82",
+      "bytes": 197890
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2024.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4199f2e95e317ba80e387a3bb1a3836582c2706aeb0d9bbb8d2928848e222710",
+      "bytes": 33503
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2024.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0c273c16915063e24425a1c7a3efa5df4196a1e86f3686368a4135d811b1769d",
+      "bytes": 300400
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2025.body-layout.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "742bf8ba2da2c9f10e64ebab72ed4473ea896fb5f0210ad984837de208a576bf",
+      "bytes": 33197
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/rag2025.pdf.pages.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "1bbb2b1e2081520166e6fece64a712e564532bc47b60687515732cfd7e901a0d",
+      "bytes": 282270
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/relatorio.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "703741a75a3c58d963f8e4bf7063c99441020601dd25b9700f0e8b71e863416e",
+      "bytes": 11320
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/reproduzir_ativos.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4e35b99b1cd0501ceb0b851af023c6052339cb4de4a11fc38d6b17eb1d686029",
+      "bytes": 5961
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/resultado-integrado.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "30d282aafebce24b562780ad443a69e55106e6bd27c8aa8b25269dd253531999",
+      "bytes": 5772
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/saude/testes-produtor.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8bb06e7a72d46e3fc95ad1f26018cfd8025a72a802b2bed4dbd50899385844b0",
+      "bytes": 10351
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca-canonicoinicial.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "cc9e7aaf576b5a24732ad0c1c9482c3da122cc32872b796edd6292f597bf724c",
+      "bytes": 67513
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/antes-depois-proposto.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "f584cefc2e16379df5bb56618cb09b4f911122aef5c035b38c6775c521101d7b",
+      "bytes": 22177
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/cobertura.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "91e0e9503905a4191dcd0e38b85b160032c0e1be6e7680d9fccc8961a2366270",
+      "bytes": 2352
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/coletar.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "0ee92d951d21ca491fbe0b634f70b26b361ab0a11e7d25dbd2636bca59b7eaf9",
+      "bytes": 1463
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/coletar_historico.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d7744d28d98c5a1aa5e898b847c2c1d505e9f5b882d3798139c47300e25d7697",
+      "bytes": 1066
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/conflitos-anuais-mensais.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "fb560ab2253c473b4a83ff8ceeb1598a0dce444352dc267546a85a7d12c27da7",
+      "bytes": 979
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/csi-2025-noticia.html",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "434ff2bea2c8725470edeef74196efc6c91fa240c3981afa61fec27fff7c71ef",
+      "bytes": 27565
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/csi-ata-2025.pdf",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8c717071a5466fbfa9d6144a175219a73b1ed3b54779ca02ecd8416b20795897",
+      "bytes": 666196
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/dicionario-ids.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4a24a3ea31c5815226d0de7e53210b6e467501b64f31744f8c98f42283776eba",
+      "bytes": 905
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/evidencias-reproduzidas.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d8fae8ff0361de96bc3925ba6f5be31cc0e23a070cf5b9ea90e1ba2f0c56ba47",
+      "bytes": 649470
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/fontes_adicionais.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "d3e4c3af1845c8edfccb0e24622d86228bf5d0f1b4f279ba8227becd3b9558ca",
+      "bytes": 1278
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/inventario-ground-truth.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "371d2a42f6a2244c2cfc95e05c432c649276c682052061f22c70b744012b757c",
+      "bytes": 46481
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/inventario-registry.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "f38475cc772a971e91f14772e8e0036830b6d6e9e5476e637058f35c3df38ea7",
+      "bytes": 17561
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/manifest.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "bc8379a49650b30f4522c0bad790bb3d3a380a17590fde0ee9c32fd80898e875",
+      "bytes": 18987
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2001.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "db40239dcbd456c671da89588ddf9c86805ef91ebf083467d47992867d2763b1",
+      "bytes": 6659
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2002.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ac982b56a1a61160552359eb3b8c47a6203f292b32a4a01cd172a350d815d9e6",
+      "bytes": 6654
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2003.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "82cfaa8ad158a12252455e07ce1812c8de523f4003f5ea2835dcb94de9954e19",
+      "bytes": 6659
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2004.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "eb2e88552c1c122c972ff388e85a8b95413d583cc27ba65b9cfe4e40eadf7409",
+      "bytes": 6654
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2005.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "1fbef3af0627bb06f6c79e87fb7d693915d50cf4ffcd46f6e333c35beb144bc8",
+      "bytes": 6640
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2006.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7813cf6a927c837deb1af1156d88bb8d92f860bae2fc679ec3b5fd869ed71684",
+      "bytes": 6634
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2007.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "b5dc3a3745b52f777d126cda45ade75a8208830b83409581610b9d9c64d89279",
+      "bytes": 6626
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2008.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "35d7cd7ac6251134fca88247c8653c0020d4b8dd306dfa7478fb7739f36c2d91",
+      "bytes": 6627
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2009.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "21873522db3d7cdd950b32ae832f955df07c9b0524062792e6b880ee63836fcf",
+      "bytes": 6625
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2010.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ce5b3391c3853d95308de6b76a2555e96085ccc60dea8584d143c618b7a9c2e2",
+      "bytes": 6306
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2011.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "91bb01173c247b2aec132f2544f9954e031f730a178ee4165d092049417bcb67",
+      "bytes": 5617
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2012.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ef2cdfc6249d401d4d030921e5234d953997e9c28b465914940a88107482634e",
+      "bytes": 6313
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2013.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "450c9faa7fb5f1e4210e635260e0e7cbc72b603830b4a9932a5a1a752b358959",
+      "bytes": 6309
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2014.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "41be64286ecb8cf035f7474f960115479dee1437c7b31a03f0ccdd4b10f57ce4",
+      "bytes": 6306
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2015.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "6fb85247091952f3ed1799409c238fb000d473de64c2a7f577ac237bed61de2c",
+      "bytes": 6916
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2016.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7922fd7ef1403e40884236c6fc0e42f136b0a5409aaac1736c43c405caa5dd4c",
+      "bytes": 6944
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2017.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "aacce3dbb1294b0267fcb003bf9aa8255e2ade488ef8327b004a0d3151d66f27",
+      "bytes": 7577
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2018.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "52318c228be3f127a3d7d443cea33abdc671efa2c2145181ce12bcf974ef219f",
+      "bytes": 7583
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2019.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4432ac19b8e4822e7822e06c49ba5e2329ab1bf334fb583ea11a96e78aef8922",
+      "bytes": 7581
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2020.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "8e5aa2240ef27dd916b26c1c5b0f0b02ac545f693a0c6583a4023f948a9d18ac",
+      "bytes": 7562
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2021.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "f45aa6dc870cb3dc8a175dfe32cb09669bb6fa06cab3a7487057d5b84c06e614",
+      "bytes": 7562
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2022.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "a67c946c6a3384a00b358dd0baaef34f66203a0a21f620c47f4f1c3d6f894f78",
+      "bytes": 7563
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2023.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "dd3cc1b7cbd30036695eeb202fe268fb07cd2c773f59fdb3917eac67b04c7d42",
+      "bytes": 7561
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2024.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "38d4bc84b7db5c04ad91e4ddce40e4068608e36ec9513f41873f647462e9e5a9",
+      "bytes": 7537
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2025.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "2c997fee00b7471f1a51f63150fa79b60c150c66839e9f00e271855dbb892f0a",
+      "bytes": 7536
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/mensal-2026.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "5e832a8940a4c76bd638eddef11fceb4bc047fbebb583552651c41ab8acb128d",
+      "bytes": 7471
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/municipios.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "50d7a1ff9c52b30d8b317af58116f52ea15420e765747df093ccd300790f69f2",
+      "bytes": 47754
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/ocorrencias.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "29288284811827ed1b25fd699f70523a55e38845b5b2092f3bb2a5cfd2fe4212",
+      "bytes": 2900
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/pda-texto.txt",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "f88b6d859d1c6d02a522f1e12a0054355b0ade88951125e1ed5b17ba2699b612",
+      "bytes": 58496
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/pda.pdf",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ee970b03a05a4aa94e1ee06653e71426d0a4c4b26889a505f08617b0af062db9",
+      "bytes": 757243
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/portal-main.js",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "60b555ea419aec53b7cec259850bc1657faa4673f9f56c3ea349362e3eb48a50",
+      "bytes": 1673938
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/portal-mensal.html",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "7de4936ab01804296513769b2e92c62ea0d056765ee18d5e7f04bbc91c699f8b",
+      "bytes": 26370
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/produtividade-2024.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "fcbd1db005759f0eba638d4684b136b50865a1fa91d10486cdabbb5ea7413ed8",
+      "bytes": 4519
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/relatorio.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "e61ab2e24060cf112f2011705f3da78201edb270d5cb43346d84283a69762ff2",
+      "bytes": 11261
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/reproduzir.py",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "fa54b2906d80a0db1ef0115651aa3a174d8e489578814934d5484493788ed038",
+      "bytes": 7560
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/resultado-integrado.md",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "4c1eb133bde0164762b709c01ea8a944e979474647b95bb9821052de581a1aca",
+      "bytes": 4781
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/taxas-evidencias.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "ddd941efb6dedd6c06492f27821cb64b9e14d0275c50797cef2971f9144c54b6",
+      "bytes": 167498
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/taxas.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "86ff8363edbadd8788b756703556aa3c7943b058081d9f3ec4a0dfde79e86c55",
+      "bytes": 4965
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/seguranca/testes.json",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "c72478eb7dfdba8388f7a4031eb7206bcfb7b2aa83bb6f41a729e658c312d6c6",
+      "bytes": 89407
+    },
+    {
+      "path": "docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/snapshot-inicial.zip",
+      "kind": "evidência/manifest/relatório/script novo",
+      "sha256": "aed98ca8bea956fb08907aa2ce87e03038670a05e41a4a65febeee7469a50860",
+      "bytes": 4729161
+    }
+  ],
+  "protected": "app.js, GT/registry P1–P4, geometrias e bindings protegidos em integridade-final.json.",
+  "excluded_large_files": "Raws nacionais, raw/ e brutos/ dos pesquisadores, perfis Chrome, cópia adversarial e propostas GT duplicadas. Preservados localmente; fontes/hash em manifests.",
+  "self_reference": "Este inventário e sua versão Markdown não têm hash de si mesmos."
+}

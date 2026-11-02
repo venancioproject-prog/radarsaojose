@@ -11,7 +11,7 @@ async function run(mode) {
   const elements = new Map();
   function el(id) {
     return {id,textContent:'',children:[],style:{},dataset:{},getContext:()=>({id,createLinearGradient:()=>({addColorStop(){}})}),classList:{add(){},remove(){},contains(){return false;}},
-      appendChild(e){this.children.push(e);elements.set(e.id,e);},querySelector(){return this.content;}};
+      appendChild(e){this.children.push(e);elements.set(e.id,e);},parentNode:{appendChild(e){elements.set(e.id,e);}},querySelector(){return this.content;}};
   }
   for(const id of ['hub-audit-status-text','hub-audit-validity-text','hub-kpi-emprego','hub-kpi-emprego-reference','hub-audit-modal']) elements.set(id,el(id));
   elements.get('hub-kpi-emprego').parentNode=el('parent');
@@ -22,7 +22,7 @@ async function run(mode) {
     constructor(ctx,config){charts.set(ctx.id,config);this.id=ctx.id;}
     destroy(){charts.delete(this.id);}
   }
-  const sandbox = {setTimeout:fn=>fn(),sessionStorage:{getItem:()=>null,setItem(){}},console:{log(){},warn(){}},document:{getElementById:id=>elements.get(id),querySelectorAll:()=>[],
+  const sandbox = {RADAR_HUB_VERIFY_ONLINE_PACKAGE:true,setTimeout:fn=>fn(),sessionStorage:{getItem:()=>null,setItem(){}},console:{log(){},warn(){}},document:{getElementById:id=>elements.get(id),querySelectorAll:()=>[],
     createElement:()=>el(''),addEventListener(){}},fetch:async url=>{
       calls.push(url);
       if(['throw','missing','employment'].includes(mode)) throw Error('offline');
@@ -36,13 +36,15 @@ async function run(mode) {
   sandbox.window=sandbox;vm.createContext(sandbox);vm.runInContext(code,sandbox);
   if(mode==='missing') {
     sandbox.Chart=Chart;
-    for(const id of ['hubChartMeioAmbienteAr','hubChartEconomiaEmprego','hubChartMobilidadeFatalidades']) elements.set(id,el(id));
+    for(const id of ['hubChartMeioAmbienteAr','hubChartMeioAmbienteQueimadas','hubChartEconomiaEmprego','hubChartMobilidadeFatalidades','hubChartMobilidadeFrota']) elements.set(id,el(id));
     // Injeção de falhas só no sandbox: não modifica os arquivos de dados.
     vm.runInContext(`
       RADAR_HUB_PACKAGE.groundTruth.eixos.meio_ambiente.qualidade_ar_cetesb_mensal_2023_2024['2024']=[{jd_satelite_dias_bom:null},{jd_satelite_dias_bom:0}];
+      RADAR_HUB_PACKAGE.groundTruth.eixos.meio_ambiente.focos_queimadas_inpe_serie=[{ano:2023,focos:null},{ano:2024,focos:0}];
       RADAR_HUB_PACKAGE.groundTruth.eixos.economia.novo_caged_serie_mensal.filter(r=>r.ano===2026)[0].saldo=null;
       RADAR_HUB_PACKAGE.groundTruth.eixos.economia.novo_caged_serie_mensal.filter(r=>r.ano===2026)[1].saldo=0;
       RADAR_HUB_PACKAGE.groundTruth.eixos.mobilidade.fatalidades_transito_mensal_2023_2024['2024']=[{fatalidades:null},{fatalidades:0}];
+      RADAR_HUB_PACKAGE.groundTruth.eixos.mobilidade.frota_veiculos_serie_historica=[{ano:2023,total:null},{ano:2024,total:0}];
     `,sandbox);
   }
   if(mode==='employment') {
@@ -81,7 +83,7 @@ async function run(mode) {
   assert.ok(csv.includes('"0"'));
   assert.ok(!csv.includes('\\n'));
   if(mode==='missing') {
-    for(const [axis,chart] of [['meio_ambiente','hubChartMeioAmbienteAr'],['economia','hubChartEconomiaEmprego'],['mobilidade','hubChartMobilidadeFatalidades']]) {
+    for(const [axis,chart] of [['meio_ambiente','hubChartMeioAmbienteQueimadas'],['economia','hubChartEconomiaEmprego'],['mobilidade','hubChartMobilidadeFrota']]) {
       sandbox.switchRadarHubAxis(axis);
       if(axis==='mobilidade')sandbox.filterHubChart('mob_fatalidades','mode','mensal');
       const data=charts.get(chart).data.datasets[0].data;
@@ -89,6 +91,12 @@ async function run(mode) {
       assert.equal(data[1],0,chart+': zero preservado');
       const formatter=charts.get(chart).options.plugins.datalabels?.formatter;
       if(formatter) assert.doesNotThrow(()=>formatter(null));
+    }
+    for(const chart of ['hubChartMeioAmbienteAr','hubChartMobilidadeFatalidades']) {
+      assert.equal(charts.has(chart),false,chart+': gráfico suspenso não pode ser criado');
+      const fallback=elements.get('fallback-'+chart);
+      assert.ok(fallback,chart+': fallback obrigatório');
+      assert.match(fallback.innerHTML,/suspens|sem comprovação/i);
     }
   }
   console.log(mode+': pacote atômico, auditoria ausente, emprego conflitante, CSV e concorrência OK');

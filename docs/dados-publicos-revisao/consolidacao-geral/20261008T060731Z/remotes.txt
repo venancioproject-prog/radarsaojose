@@ -1,0 +1,2 @@
+origin	https://github.com/venancioproject-prog/radarsaojose.git (fetch)
+origin	https://github.com/venancioproject-prog/radarsaojose.git (push)

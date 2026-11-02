@@ -1,0 +1,4 @@
+PASS revisão: remoto=false, offline=false; quatro séries integrais, hash, unidade, competência, null, JSON/CSV e 42 P4
+PASS revisão: remoto=false, offline=true; quatro séries integrais, hash, unidade, competência, null, JSON/CSV e 42 P4
+PASS revisão: remoto=true, offline=false; quatro séries integrais, hash, unidade, competência, null, JSON/CSV e 42 P4
+PASS revisão: remoto=true, offline=true; quatro séries integrais, hash, unidade, competência, null, JSON/CSV e 42 P4
