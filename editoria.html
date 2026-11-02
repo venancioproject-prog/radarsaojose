@@ -532,42 +532,66 @@
 
         </article>
 
-        <!-- BARRA LATERAL EDITORIAL (DESTAQUES DA EDITORIA - 33%) -->
+        <!-- BARRA LATERAL EDITORIAL (MAIS LIDAS - TOP 6) -->
         <aside class="lg:col-span-4 flex flex-col justify-between gap-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-200 mb-1">
+          <div class="flex items-center justify-between pb-2.5 border-b border-slate-200 mb-1">
             <div class="flex items-center gap-2">
-              <div class="w-2 h-2 rounded-full bg-red-600"></div>
+              <div class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
               <h3 class="text-xs font-black uppercase tracking-widest text-slate-900">
-                DESTAQUES EM <span id="heroSidebarEditoriaName">SJC</span>
+                MAIS LIDAS <span id="heroSidebarEditoriaName">EM SJC</span>
               </h3>
             </div>
-            <span class="text-[11px] text-cyan-700 font-bold">Análises Recentes</span>
+            <span class="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Top 6</span>
           </div>
 
           <div id="heroSidebarContainer" class="flex-1 flex flex-col divide-y divide-slate-100">
-            <div class="py-3.5 flex items-start gap-3.5 animate-pulse">
-              <div class="w-24 sm:w-28 h-20 rounded-md bg-slate-200 shrink-0"></div>
+            <div class="py-2.5 sm:py-3 flex items-start gap-3 animate-pulse p-2">
+              <span class="text-xl font-black font-serif text-slate-200 w-5 shrink-0 text-center">1</span>
               <div class="flex-1 space-y-2">
                 <div class="h-3 w-16 bg-slate-200 rounded"></div>
                 <div class="h-4 w-full bg-slate-200 rounded"></div>
-                <div class="h-3 w-3/4 bg-slate-100 rounded"></div>
               </div>
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
             </div>
-            <div class="py-3.5 flex items-start gap-3.5 animate-pulse">
-              <div class="w-24 sm:w-28 h-20 rounded-md bg-slate-200 shrink-0"></div>
+            <div class="py-2.5 sm:py-3 flex items-start gap-3 animate-pulse p-2">
+              <span class="text-xl font-black font-serif text-slate-200 w-5 shrink-0 text-center">2</span>
               <div class="flex-1 space-y-2">
                 <div class="h-3 w-16 bg-slate-200 rounded"></div>
                 <div class="h-4 w-full bg-slate-200 rounded"></div>
-                <div class="h-3 w-3/4 bg-slate-100 rounded"></div>
               </div>
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
             </div>
-            <div class="py-3.5 flex items-start gap-3.5 animate-pulse">
-              <div class="w-24 sm:w-28 h-20 rounded-md bg-slate-200 shrink-0"></div>
+            <div class="py-2.5 sm:py-3 flex items-start gap-3 animate-pulse p-2">
+              <span class="text-xl font-black font-serif text-slate-200 w-5 shrink-0 text-center">3</span>
               <div class="flex-1 space-y-2">
                 <div class="h-3 w-16 bg-slate-200 rounded"></div>
                 <div class="h-4 w-full bg-slate-200 rounded"></div>
-                <div class="h-3 w-3/4 bg-slate-100 rounded"></div>
               </div>
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
+            </div>
+            <div class="py-2.5 sm:py-3 flex items-start gap-3 animate-pulse p-2">
+              <span class="text-xl font-black font-serif text-slate-200 w-5 shrink-0 text-center">4</span>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-16 bg-slate-200 rounded"></div>
+                <div class="h-4 w-full bg-slate-200 rounded"></div>
+              </div>
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
+            </div>
+            <div class="py-2.5 sm:py-3 flex items-start gap-3 animate-pulse p-2">
+              <span class="text-xl font-black font-serif text-slate-200 w-5 shrink-0 text-center">5</span>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-16 bg-slate-200 rounded"></div>
+                <div class="h-4 w-full bg-slate-200 rounded"></div>
+              </div>
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
+            </div>
+            <div class="py-2.5 sm:py-3 flex items-start gap-3 animate-pulse p-2">
+              <span class="text-xl font-black font-serif text-slate-200 w-5 shrink-0 text-center">6</span>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-16 bg-slate-200 rounded"></div>
+                <div class="h-4 w-full bg-slate-200 rounded"></div>
+              </div>
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
             </div>
           </div>
         </aside>
@@ -1500,36 +1524,38 @@
         authorAvatar.alt = authorVal;
       }
 
-      // Sidebar lateral (Destaques da Editoria)
+      // Sidebar lateral (Mais Lidas na Editoria / Portal)
       const sidebarTitle = document.getElementById('heroSidebarEditoriaName');
-      if (sidebarTitle) sidebarTitle.textContent = currentCatMeta.label.toUpperCase();
+      if (sidebarTitle) sidebarTitle.textContent = currentCatMeta.label ? `EM ${currentCatMeta.label.toUpperCase()}` : 'EM SJC';
 
       const sidebarContainer = document.getElementById('heroSidebarContainer');
       if (sidebarContainer) {
         if (Array.isArray(sidebarPosts) && sidebarPosts.length > 0) {
-          sidebarContainer.innerHTML = sidebarPosts.map(post => {
+          sidebarContainer.innerHTML = sidebarPosts.map((post, idx) => {
             const sCat = resolveCategory(post.category);
             const sUrl = getArticleUrl(post.slug);
             const sRead = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
             const sCover = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
-            const sExcerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
+            const rankNum = idx + 1;
 
             return `
-              <article class="py-3.5 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors group flex items-start gap-3.5">
-                <div class="relative w-24 sm:w-28 h-20 flex-shrink-0 rounded-md overflow-hidden bg-slate-100">
-                  <img src="${sCover}" alt="${post.title.replace(/"/g, '&quot;')}" class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
-                </div>
+              <article class="py-2.5 sm:py-3 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/70 p-2 rounded-lg transition-colors group flex items-start gap-3">
+                <span class="text-xl sm:text-2xl font-black font-serif text-slate-300 group-hover:text-red-600 w-5 shrink-0 transition-colors leading-none pt-0.5 text-center">
+                  ${rankNum}
+                </span>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center gap-1.5 mb-1">
                     <span class="text-[10px] font-bold uppercase tracking-wider ${sCat.text} truncate">${sCat.label}</span>
                     <span class="text-slate-300 text-[10px]">•</span>
-                    <span class="text-slate-500 text-[10px] whitespace-nowrap">${sRead}</span>
+                    <span class="text-slate-400 text-[10px] whitespace-nowrap">${sRead}</span>
                   </div>
                   <h4 class="text-xs sm:text-sm font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-colors line-clamp-2 leading-snug">
                     <a href="${sUrl}">${post.title}</a>
                   </h4>
-                  <p class="text-[11px] text-slate-500 mt-1 line-clamp-1 leading-normal hidden sm:block">${sExcerpt}</p>
                 </div>
+                <a href="${sUrl}" class="relative w-16 h-14 sm:w-20 sm:h-14 flex-shrink-0 rounded-md overflow-hidden bg-slate-100 self-center">
+                  <img src="${sCover}" alt="${post.title.replace(/"/g, '&quot;')}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+                </a>
               </article>
             `;
           }).join('');
@@ -1542,6 +1568,56 @@
           `;
         }
       }
+    }
+
+    // Seleção de 6 matérias no modo "Mais Vistas" (prioriza a categoria e complementa com as mais lidas do portal)
+    function getMostViewedPosts(editoriaPosts, allPosts, heroPost, count = 6) {
+      const heroId = heroPost ? (heroPost.id || heroPost.slug) : null;
+      const getViewCount = (p) => {
+        if (typeof p.views_count === 'number' && !isNaN(p.views_count) && p.views_count > 0) return p.views_count;
+        if (p.seo_metadata && typeof p.seo_metadata.views === 'number' && p.seo_metadata.views > 0) return p.seo_metadata.views;
+        let hash = 0;
+        const str = (p.slug || p.title || '');
+        for (let i = 0; i < str.length; i++) hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        return Math.abs(hash % 5000) + 1200;
+      };
+
+      const sortByViews = (list) => [...list].sort((a, b) => {
+        const vA = getViewCount(a);
+        const vB = getViewCount(b);
+        if (vB !== vA) return vB - vA;
+        return new Date(b.published_at || b.created_at || 0) - new Date(a.published_at || a.created_at || 0);
+      });
+
+      const selected = [];
+      const selectedKeys = new Set();
+      if (heroId) selectedKeys.add(heroId);
+
+      // 1. Matérias mais vistas da própria editoria
+      const sortedEditoria = sortByViews(editoriaPosts || []);
+      for (const p of sortedEditoria) {
+        const key = p.id || p.slug;
+        if (!selectedKeys.has(key)) {
+          selected.push(p);
+          selectedKeys.add(key);
+          if (selected.length === count) break;
+        }
+      }
+
+      // 2. Se a categoria tiver menos de count (6) matérias, complementa com as mais vistas gerais do portal
+      if (selected.length < count && Array.isArray(allPosts)) {
+        const sortedAll = sortByViews(allPosts);
+        for (const p of sortedAll) {
+          const key = p.id || p.slug;
+          if (!selectedKeys.has(key)) {
+            selected.push(p);
+            selectedKeys.add(key);
+            if (selected.length === count) break;
+          }
+        }
+      }
+
+      return selected;
     }
 
     // ── BUSCA RÁPIDA EM TEMPO REAL COM SUPORTE A ACENTOS E FEEDBACK VISUAL ──
@@ -1751,8 +1827,8 @@
       let heroPost = editoriaPosts.find(p => p.is_featured === true);
       if (!heroPost) heroPost = editoriaPosts[0];
 
-      // Próximos destaques laterais desta editoria (até 3)
-      const sidebarPosts = editoriaPosts.filter(p => p.id !== heroPost.id && p.slug !== heroPost.slug).slice(0, 3);
+      // Sempre 6 matérias em modo de mais vistas
+      const sidebarPosts = getMostViewedPosts(editoriaPosts, allPosts, heroPost, 6);
       updateHeroSection(heroPost, sidebarPosts, currentCatMeta);
 
       // 8. Grid Inferior: exibe todas as matérias desta editoria
