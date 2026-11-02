@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="pageTitle">Matéria | Radar São José</title>
   <meta name="description" id="pageDescription" content="Portal oficial de jornalismo de dados, análises demográficas, econômicas e pesquisas municipais em São José dos Campos e Vale do Paraíba." />
-  <link rel="icon" type="image/png" href="fotos_radar/logo.png" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=radar-rd-2" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-radar-rd-32.png?v=radar-rd-2" />
 
   <!-- Open Graph -->
   <meta property="og:locale" content="pt_BR" />
@@ -160,6 +161,7 @@
       box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     }
   </style>
+  <link rel="stylesheet" href="header-brand.css?v=20261102-alinhamento" />
 </head>
 <body class="bg-[#f8fafc] text-slate-900 font-sans antialiased">
 
@@ -175,11 +177,11 @@
       <!-- 2. Menu Central -->
       <ul class="navbar-menu" id="primaryNavMenu" role="menubar">
         <li role="none"><a href="index.html#solucoes" role="menuitem">Soluções</a></li>
-        <li role="none"><a href="index.html#planos" role="menuitem">Planos</a></li>
         <li role="none"><a href="index.html#metodologia" role="menuitem">Metodologia</a></li>
         <li role="none"><a href="index.html#manifesto" role="menuitem">Quem faz</a></li>
-        <li role="none"><a href="blog.html" class="active-nav" role="menuitem" aria-current="page">Blog</a></li>
+        <li role="none"><a href="index.html#planos" role="menuitem">Planos</a></li>
         <li role="none"><a href="index.html#faq" role="menuitem">FAQ</a></li>
+        <li role="none"><a href="blog.html" class="active-nav" role="menuitem" aria-current="page">Blog</a></li>
       </ul>
 
       <!-- 3. Botões e Ações à Direita -->
@@ -307,22 +309,87 @@
       <!-- Barra Lateral (Destaques e Assinatura) -->
       <aside class="lg:col-span-4 space-y-6">
         
-        <!-- Box de Assinatura Radar Premium -->
-        <div class="bg-gradient-to-br from-[#0B2545] to-[#07172C] text-white p-6 rounded-2xl border border-white/10 shadow-lg relative overflow-hidden">
-          <div class="relative z-10">
-            <span class="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-sm inline-block mb-3">
-              ASSINATURA RADAR
-            </span>
-            <h4 class="text-base font-bold font-serif leading-snug mb-2">
-              Tome decisões em São José dos Campos com dados oficiais
-            </h4>
-            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
-              Acesse relatórios demográficos completos, mapeamento imobiliário e inteligência municipal exclusiva.
-            </p>
-            <a href="index.html#planos" class="block text-center py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all">
-              Conhecer Planos
-            </a>
+        <!-- BANNER VERTICAL INSTITUCIONAL - RADAR SÃO JOSÉ (DISPLAY PREMIUM / SKYSCRAPER) -->
+        <div class="relative overflow-hidden rounded-2xl bg-[#0B2545] border border-slate-800 shadow-xl text-white p-6 sm:p-7 flex flex-col justify-between min-h-[520px] lg:min-h-[580px] sticky top-24 group">
+          
+          <!-- Imagem de Fundo (São José dos Campos) -->
+          <div class="absolute inset-0 z-0">
+            <img 
+              src="fotos_radar/sjc_ponte_estaiada.jpg" 
+              alt="São José dos Campos" 
+              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-35"
+              loading="lazy"
+            />
+            <!-- Degradê Profundo Azul-Marinho para Legibilidade Impecável -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0B2545]/95 via-[#07172C]/92 to-[#07172C] z-0"></div>
+
+            <!-- Detalhe Gráfico Sutil de Radar -->
+            <svg class="absolute -right-16 -top-16 w-56 h-56 text-sky-400/10 pointer-events-none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="85" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
+              <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="100" cy="100" r="25" stroke="currentColor" stroke-width="1.5" />
+              <path d="M100 15V185M15 100H185" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" />
+            </svg>
           </div>
+
+          <!-- Conteúdo Superior -->
+          <div class="relative z-10 space-y-4">
+            
+            <!-- Marca + Badge -->
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                <span class="font-bold text-xs uppercase tracking-widest text-sky-300">Radar São José</span>
+              </div>
+              <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Inteligência Local</span>
+            </div>
+
+            <!-- Título Principal -->
+            <h3 class="text-xl sm:text-2xl font-bold font-sans text-white tracking-tight leading-snug pt-1">
+              Decisões estratégicas baseadas em dados reais de São José dos Campos.
+            </h3>
+
+            <!-- Texto de Apoio -->
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+              Dados e insights sobre São José para ajudar negócios e organizações a enxergar oportunidades e agir com mais confiança.
+            </p>
+
+            <!-- 4 Pilares da Plataforma -->
+            <div class="space-y-2.5 pt-2">
+              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
+                <i class="fa-solid fa-chart-simple text-sky-400 w-4 text-center shrink-0"></i>
+                <span class="font-medium">Indicadores Públicos Auditados</span>
+              </div>
+              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
+                <i class="fa-solid fa-map-location-dot text-teal-400 w-4 text-center shrink-0"></i>
+                <span class="font-medium">Mapeamento Urbano e Renda</span>
+              </div>
+              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
+                <i class="fa-solid fa-users-viewfinder text-purple-400 w-4 text-center shrink-0"></i>
+                <span class="font-medium">Pesquisas Quantitativas por Bairro</span>
+              </div>
+              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
+                <i class="fa-solid fa-file-invoice text-amber-400 w-4 text-center shrink-0"></i>
+                <span class="font-medium">Dossiês e Projeções de Mercado</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Conteúdo Inferior (Ação) -->
+          <div class="relative z-10 pt-6 mt-6 border-t border-white/10 space-y-3">
+            <a 
+              href="index.html" 
+              class="w-full py-3.5 px-5 bg-sky-400 hover:bg-sky-300 text-[#0B2545] font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group text-center block"
+            >
+              <span>Conheça o Radar</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <p class="text-[11px] text-center text-slate-400">
+              Acesso livre aos módulos abertos da plataforma
+            </p>
+          </div>
+
         </div>
 
         <!-- Matérias Mais Recentes -->
@@ -346,7 +413,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <img src="fotos_radar/logobranco.png" alt="Radar São José" class="h-7" />
-        <span>&copy; 2026 Radar São José & Studio 8 Intelligence.</span>
+        <span>&copy; 2026 Radar São José. Todos os direitos reservados.</span>
       </div>
       <div class="flex items-center gap-4">
         <a href="blog.html" class="hover:text-cyan-400">Portal de Notícias</a>
