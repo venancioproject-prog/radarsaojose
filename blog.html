@@ -452,26 +452,34 @@
       
       <!-- RSS FEED AO VIVO DE SÃO JOSÉ DOS CAMPOS (MÍDIA NACIONAL & REGIONAL) -->
       <div class="flex-1 min-w-0 pr-0 md:pr-4">
-        <div class="flex flex-wrap items-center gap-2 mb-1">
-          <span id="rssFeedSource" class="bg-cyan-50 text-cyan-800 border border-cyan-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
-            CNN Brasil / G1
-          </span>
-        </div>
+        <div class="flex items-center justify-between gap-3">
+          <a id="rssFeedLink" href="https://news.google.com" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2.5 sm:gap-3 flex-1 min-w-0" title="Clique para abrir a notícia original completa">
+            
+            <!-- LOGO REAL DO VEÍCULO (Lado esquerdo antes da manchete) -->
+            <div class="shrink-0 w-8 h-8 rounded-lg bg-white border border-slate-200/90 shadow-2xs flex items-center justify-center p-1 overflow-hidden group-hover:border-cyan-400 group-hover:shadow-xs transition-all">
+              <img id="rssFeedLogo" src="https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://g1.globo.com&size=64" alt="Logo do Veículo" class="w-full h-full object-contain transition-transform group-hover:scale-105" onerror="this.onerror=null; this.src='https://news.google.com/favicon.ico';" />
+            </div>
 
-        <div class="flex items-start justify-between gap-2.5">
-          <a id="rssFeedLink" href="https://news.google.com" target="_blank" rel="noopener noreferrer" class="group flex-1 min-w-0" title="Clique para abrir a notícia original completa">
-            <p id="rssFeedHeadline" class="text-xs sm:text-sm font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-all duration-200 line-clamp-2 leading-snug cursor-pointer">
-              Carregando matérias sobre São José dos Campos nos principais portais do país...
-            </p>
+            <!-- Identificador do Veículo + Manchete -->
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2 mb-0.5">
+                <span id="rssFeedSource" class="bg-cyan-50 text-cyan-800 border border-cyan-200 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
+                  CNN Brasil / G1
+                </span>
+              </div>
+              <p id="rssFeedHeadline" class="text-xs sm:text-sm font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-all duration-200 line-clamp-1 sm:line-clamp-2 leading-snug cursor-pointer">
+                Carregando matérias sobre São José dos Campos nos principais portais do país...
+              </p>
+            </div>
           </a>
 
           <!-- Botões de navegação rápida do RSS -->
           <div class="flex items-center gap-1 shrink-0 pt-0.5">
-            <button onclick="window.prevRssNews && window.prevRssNews()" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] transition-colors shadow-2xs" title="Notícia anterior">
+            <button onclick="window.prevRssNews && window.prevRssNews()" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] transition-colors shadow-2xs cursor-pointer" title="Notícia anterior">
               <i class="fa-solid fa-chevron-left"></i>
             </button>
             <span id="rssFeedCount" class="text-[10px] text-slate-600 font-mono px-0.5 font-bold">1/6</span>
-            <button onclick="window.nextRssNews && window.nextRssNews()" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] transition-colors shadow-2xs" title="Próxima notícia">
+            <button onclick="window.nextRssNews && window.nextRssNews()" class="w-6 h-6 rounded flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] transition-colors shadow-2xs cursor-pointer" title="Próxima notícia">
               <i class="fa-solid fa-chevron-right"></i>
             </button>
           </div>
@@ -1142,6 +1150,101 @@
       return source.toUpperCase();
     }
 
+    // ── MAPEAMENTO INTELIGENTE DO LOGO REAL DO VEÍCULO ──
+    function getSourceDomain(sourceName, itemLink) {
+      if (!sourceName && !itemLink) return 'g1.globo.com';
+      const s = (sourceName || '').toLowerCase().trim();
+
+      const map = {
+        'estrategia concursos': 'estrategiaconcursos.com.br',
+        'estratégia concursos': 'estrategiaconcursos.com.br',
+        'estrategia': 'estrategiaconcursos.com.br',
+        'g1': 'g1.globo.com',
+        'g1 vale do paraíba': 'g1.globo.com',
+        'g1 vale': 'g1.globo.com',
+        'globo': 'globo.com',
+        'meon': 'meon.com.br',
+        'ovale': 'ovale.com.br',
+        'o vale': 'ovale.com.br',
+        'sampi': 'sampi.net.br',
+        'sampi.net.br': 'sampi.net.br',
+        'folha': 'folha.uol.com.br',
+        'folha de s.paulo': 'folha.uol.com.br',
+        'folha de são paulo': 'folha.uol.com.br',
+        'cnn brasil': 'cnnbrasil.com.br',
+        'cnn': 'cnnbrasil.com.br',
+        'estadão': 'estadao.com.br',
+        'estadao': 'estadao.com.br',
+        'uol': 'uol.com.br',
+        'cbn vale': 'cbnvale.com.br',
+        'cbn': 'cbn.globoradio.globo.com',
+        'band vale': 'band.uol.com.br',
+        'band': 'band.uol.com.br',
+        'sp rio+': 'spriomais.com.br',
+        'spriomais': 'spriomais.com.br',
+        'sprio': 'spriomais.com.br',
+        'life informa': 'lifeinforma.com',
+        'prefeitura de são josé dos campos': 'sjc.sp.gov.br',
+        'prefeitura de sao jose dos campos': 'sjc.sp.gov.br',
+        'prefeitura sjc': 'sjc.sp.gov.br',
+        'pmsjc': 'sjc.sp.gov.br',
+        'valor econômico': 'valor.globo.com',
+        'valor economico': 'valor.globo.com',
+        'valor': 'valor.globo.com',
+        'exame': 'exame.com',
+        'metrópoles': 'metropoles.com',
+        'metropoles': 'metropoles.com',
+        'poder360': 'poder360.com.br',
+        'terra': 'terra.com.br',
+        'jovem pan': 'jovempan.com.br',
+        'gazeta do povo': 'gazetadopovo.com.br',
+        'correio brasiliense': 'correiobraziliense.com.br',
+        'correio braziliense': 'correiobraziliense.com.br',
+        'r7': 'r7.com',
+        'noticias automotivas': 'noticiasautomotivas.com.br',
+        'autoesporte': 'autoesporte.globo.com',
+        'aeroin': 'aeroin.net',
+        'canaltech': 'canaltech.com.br',
+        'tecmundo': 'tecmundo.com.br',
+        'olhar digital': 'olhardigital.com.br',
+        'inpe': 'gov.br/inpe',
+        'ita': 'ita.br',
+        'embraer': 'embraer.com',
+        'ipsm': 'ipsm.sp.gov.br',
+        'vanguarda': 'redeglobo.globo.com/sp/tvvanguarda',
+        'tv vanguarda': 'redeglobo.globo.com/sp/tvvanguarda'
+      };
+
+      if (map[s]) return map[s];
+
+      for (const key in map) {
+        if (s.includes(key)) return map[key];
+      }
+
+      if (s.includes('.com') || s.includes('.br') || s.includes('.org') || s.includes('.net')) {
+        return s.replace(/https?:\/\//, '').replace(/\/.*$/, '').trim();
+      }
+
+      if (itemLink && !itemLink.includes('news.google.com')) {
+        try {
+          const parsed = new URL(itemLink);
+          return parsed.hostname.replace(/^www\./, '');
+        } catch(e) {}
+      }
+
+      const slug = s.replace(/[^a-z0-9]/g, '');
+      if (slug.length >= 3) {
+        return `${slug}.com.br`;
+      }
+
+      return 'news.google.com';
+    }
+
+    function getSourceLogoUrl(sourceName, itemLink) {
+      const domain = getSourceDomain(sourceName, itemLink);
+      return `https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://${domain}&size=64`;
+    }
+
     function renderRSSItem(index) {
       if (!activeRssNews || activeRssNews.length === 0) return;
       currentRssIndex = (index + activeRssNews.length) % activeRssNews.length;
@@ -1149,15 +1252,27 @@
 
       const headlineEl = document.getElementById('rssFeedHeadline');
       const sourceEl = document.getElementById('rssFeedSource');
+      const logoEl = document.getElementById('rssFeedLogo');
       const linkEl = document.getElementById('rssFeedLink');
       const countEl = document.getElementById('rssFeedCount');
 
       if (headlineEl) {
         headlineEl.style.opacity = '0';
         headlineEl.style.transform = 'translateY(2px)';
+        if (logoEl) {
+          logoEl.style.opacity = '0';
+          logoEl.style.transform = 'scale(0.85)';
+        }
         setTimeout(() => {
           headlineEl.textContent = item.title;
           if (sourceEl) sourceEl.textContent = formatSourceBadge(item.source);
+          if (logoEl) {
+            const logoUrl = getSourceLogoUrl(item.source, item.link);
+            logoEl.src = logoUrl;
+            logoEl.alt = item.source || 'Veículo';
+            logoEl.style.opacity = '1';
+            logoEl.style.transform = 'scale(1)';
+          }
           if (linkEl) {
             linkEl.href = item.link || 'https://news.google.com';
             linkEl.title = `Abrir matéria completa em ${item.source}`;
