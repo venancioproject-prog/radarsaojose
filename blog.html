@@ -9,8 +9,8 @@
   <link rel="canonical" href="https://radarsaojose.com.br/blog.html" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico?v=radar-r-1" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-radar-r-32.png?v=radar-r-1" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=radar-rd-2" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-radar-rd-32.png?v=radar-rd-2" />
 
   <!-- Open Graph -->
   <meta property="og:locale" content="pt_BR" />
@@ -615,118 +615,68 @@
     </div>
   </section>
 
-  <!-- ══ FAIXA EDITORIAL DE ASSINATURA & ACESSO À PLATAFORMA ══ -->
-  <section class="py-6 sm:py-8 bg-white" id="subscriptionBanner" aria-label="Acesso e Planos do Radar São José">
+  <!-- ══ BANNER HORIZONTAL RETANGULAR - RADAR SÃO JOSÉ (INTELLIGENCE AS A SERVICE) ══ -->
+  <section class="py-6 sm:py-8 bg-white" id="subscriptionBanner" aria-label="Radar São José - Inteligência Local">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-[#0B2545] text-white rounded-xl p-6 sm:p-8 lg:p-10 border border-slate-800">
+      
+      <div class="relative overflow-hidden rounded-2xl bg-[#0B2545] border border-slate-800 shadow-md flex items-center min-h-[190px]">
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <!-- Fotografia Urbana de São José dos Campos (Fim de tarde) -->
+        <div class="absolute inset-0 z-0">
+          <img 
+            src="fotos_radar/capa_sjc_skyline.jpg" 
+            alt="Vista urbana de São José dos Campos" 
+            class="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
+          <!-- Camada sutil de azul-marinho / degradê escuro para contraste e legibilidade impecável -->
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0B2545] via-[#0B2545]/92 to-[#0B2545]/45"></div>
           
-          <!-- Coluna Institucional / Módulos (7 colunas) -->
-          <div class="lg:col-span-7 space-y-4">
-            
-            <div class="inline-flex items-center gap-2 text-sky-400 text-xs font-bold uppercase tracking-widest">
-              <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-              <span>Inteligência de Mercado • São José dos Campos</span>
+          <!-- Detalhe gráfico discreto inspirado em radar e localização -->
+          <svg class="absolute -right-10 -bottom-10 w-64 h-64 text-sky-400/10 pointer-events-none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="85" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
+            <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5" />
+            <circle cx="100" cy="100" r="25" stroke="currentColor" stroke-width="1.5" />
+            <path d="M100 15V185M15 100H185" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" />
+          </svg>
+        </div>
+
+        <!-- Conteúdo do Banner (Hierarquia Limpa e Tipografia Sem Serifa) -->
+        <div class="relative z-10 w-full p-6 sm:p-8 lg:px-12 py-7 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          
+          <div class="max-w-2xl space-y-2">
+            <!-- Texto Principal / Marca -->
+            <div class="flex items-center gap-2 text-sky-300 text-xs font-semibold tracking-wide">
+              <span class="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+              <span class="uppercase tracking-widest text-[11px] font-bold">Radar São José</span>
             </div>
 
-            <h2 class="text-2xl sm:text-3xl font-bold font-serif text-white tracking-tight leading-tight">
-              Decisões estratégicas baseadas em dados reais de São José dos Campos.
+            <!-- Frase de Destaque -->
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold font-sans text-white tracking-tight leading-snug">
+              Inteligência local para decisões melhores.
             </h2>
 
-            <p class="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed font-sans max-w-2xl">
-              Consulte indicadores públicos auditados, histórico da cidade, pesquisa quantitativa com moradores, estudos de comportamento e inteligência de mídia para orientar o seu negócio.
+            <!-- Texto de Apoio -->
+            <p class="text-slate-200 text-xs sm:text-sm leading-relaxed font-sans max-w-xl">
+              Dados e insights sobre São José para ajudar negócios a enxergar oportunidades e agir com mais confiança.
             </p>
-
-            <!-- 6 Módulos da Plataforma (Grid 3x2 oficial) -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2">
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2.5">
-                <i class="fa-solid fa-chart-simple text-sky-400 text-sm shrink-0"></i>
-                <div class="min-w-0">
-                  <div class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Gratuito</div>
-                  <div class="text-xs font-semibold text-white truncate">Dados Públicos</div>
-                </div>
-              </div>
-
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2.5">
-                <i class="fa-solid fa-landmark text-sky-400 text-sm shrink-0"></i>
-                <div class="min-w-0">
-                  <div class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Gratuito</div>
-                  <div class="text-xs font-semibold text-white truncate">História</div>
-                </div>
-              </div>
-
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2.5">
-                <i class="fa-solid fa-images text-sky-400 text-sm shrink-0"></i>
-                <div class="min-w-0">
-                  <div class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">Gratuito</div>
-                  <div class="text-xs font-semibold text-white truncate">Banco de Imagens</div>
-                </div>
-              </div>
-
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2.5">
-                <i class="fa-solid fa-chart-pie text-cyan-400 text-sm shrink-0"></i>
-                <div class="min-w-0">
-                  <div class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">Plano Dash</div>
-                  <div class="text-xs font-semibold text-white truncate">Pesquisa Quantitativa</div>
-                </div>
-              </div>
-
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2.5">
-                <i class="fa-solid fa-file-lines text-amber-400 text-sm shrink-0"></i>
-                <div class="min-w-0">
-                  <div class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Plano Report</div>
-                  <div class="text-xs font-semibold text-white truncate">Report Exclusivo</div>
-                </div>
-              </div>
-
-              <div class="p-2.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-2.5">
-                <i class="fa-solid fa-bullhorn text-purple-400 text-sm shrink-0"></i>
-                <div class="min-w-0">
-                  <div class="text-[10px] text-purple-400 font-bold uppercase tracking-wider">Plano Mídia</div>
-                  <div class="text-xs font-semibold text-white truncate">Inteligência de Mídia</div>
-                </div>
-              </div>
-            </div>
-
           </div>
 
-          <!-- Coluna de Planos & Ação (5 colunas) -->
-          <div class="lg:col-span-5">
-            <div class="bg-slate-900/90 border border-slate-700/80 rounded-xl p-5 sm:p-6 space-y-4">
-              
-              <div>
-                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Acesso à Plataforma</span>
-                <h3 class="text-lg font-bold font-serif text-white mt-0.5">Comece gratuitamente ou assine um plano anual</h3>
-                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
-                  Crie sua conta sem custo para explorar os 3 módulos abertos. Para aprofundar suas análises, assine a partir de <strong class="text-white font-bold">12× de R$ 269,90</strong> sem juros no cartão (ou 10% de desconto no Pix à vista).
-                </p>
-              </div>
-
-              <div class="space-y-2.5 pt-1">
-                <a href="app.html" class="w-full py-3 px-5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-2 text-center block">
-                  <span>Criar conta gratuita</span>
-                  <i class="fa-solid fa-arrow-right text-xs"></i>
-                </a>
-                <a href="index.html#planos" class="w-full py-2.5 px-5 bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white font-semibold text-xs uppercase tracking-wider rounded-lg border border-white/15 transition-colors flex items-center justify-center gap-2 text-center block">
-                  <span>Conhecer todos os planos e módulos</span>
-                </a>
-              </div>
-
-              <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-400 text-xs"></i> 3 módulos livres</span>
-                <span class="text-slate-600">•</span>
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-400 text-xs"></i> Até 12× sem juros</span>
-                <span class="text-slate-600">•</span>
-                <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-emerald-400 text-xs"></i> 10% off Pix</span>
-              </div>
-
-            </div>
+          <!-- Botão ou Chamada para Ação -->
+          <div class="shrink-0 pt-1 md:pt-0">
+            <a 
+              href="index.html" 
+              class="inline-flex items-center justify-center gap-2.5 bg-sky-400 hover:bg-sky-300 text-[#0B2545] font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 whitespace-nowrap group"
+            >
+              <span>Conheça o Radar</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
           </div>
 
         </div>
 
       </div>
+
     </div>
   </section>
 
