@@ -306,101 +306,92 @@
 
       </article>
 
-      <!-- Barra Lateral (Destaques e Assinatura) -->
+      <!-- Barra Lateral (Banner Vertical AdSense + 10 Matérias Recomendadas) -->
       <aside class="lg:col-span-4 space-y-6">
         
-        <!-- BANNER VERTICAL INSTITUCIONAL - RADAR SÃO JOSÉ (DISPLAY PREMIUM / SKYSCRAPER) -->
-        <div class="relative overflow-hidden rounded-2xl bg-[#0B2545] border border-slate-800 shadow-xl text-white p-6 sm:p-7 flex flex-col justify-between min-h-[520px] lg:min-h-[580px] sticky top-24 group">
+        <!-- BANNER VERTICAL NO ESTILO DISPLAY / GOOGLE ADSENSE (300x600 SKYSCRAPER) -->
+        <div class="relative overflow-hidden rounded-2xl bg-[#0B2545] border border-slate-200 shadow-md text-white flex flex-col justify-between min-h-[460px] sm:min-h-[500px] p-6 sm:p-8 group">
           
-          <!-- Imagem de Fundo (São José dos Campos) -->
+          <!-- Fotografia Urbana de São José dos Campos (Fundo) -->
           <div class="absolute inset-0 z-0">
             <img 
-              src="fotos_radar/sjc_ponte_estaiada.jpg" 
+              src="fotos_radar/capa_sjc_skyline.jpg" 
               alt="São José dos Campos" 
-              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-35"
+              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
-            <!-- Degradê Profundo Azul-Marinho para Legibilidade Impecável -->
-            <div class="absolute inset-0 bg-gradient-to-b from-[#0B2545]/95 via-[#07172C]/92 to-[#07172C] z-0"></div>
-
-            <!-- Detalhe Gráfico Sutil de Radar -->
-            <svg class="absolute -right-16 -top-16 w-56 h-56 text-sky-400/10 pointer-events-none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="100" cy="100" r="85" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
-              <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5" />
-              <circle cx="100" cy="100" r="25" stroke="currentColor" stroke-width="1.5" />
-              <path d="M100 15V185M15 100H185" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" />
-            </svg>
+            <!-- Degradê Escuro Azul-Marinho para Legibilidade Impecável -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0B2545] via-[#0B2545]/85 to-[#0B2545]/45"></div>
           </div>
 
-          <!-- Conteúdo Superior -->
-          <div class="relative z-10 space-y-4">
-            
-            <!-- Marca + Badge -->
-            <div class="flex items-center justify-between pb-3 border-b border-white/10">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-                <span class="font-bold text-xs uppercase tracking-widest text-sky-300">Radar São José</span>
-              </div>
-              <span class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Inteligência Local</span>
-            </div>
+          <!-- Topo do Banner: Etiqueta Discreta de Anúncio / Identidade -->
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-300 bg-black/40 px-2.5 py-0.5 rounded backdrop-blur-xs">
+              Radar São José
+            </span>
+            <span class="text-[9px] uppercase tracking-wider text-slate-400">
+              Inteligência Local
+            </span>
+          </div>
 
-            <!-- Título Principal -->
-            <h3 class="text-xl sm:text-2xl font-bold font-sans text-white tracking-tight leading-snug pt-1">
-              Decisões estratégicas baseadas em dados reais de São José dos Campos.
+          <!-- Centro do Banner: Frase de Destaque + Texto de Apoio (Estilo AdSense) -->
+          <div class="relative z-10 my-auto py-6 space-y-3">
+            <h3 class="text-2xl sm:text-[26px] font-bold font-sans text-white tracking-tight leading-tight">
+              Inteligência local para decisões melhores.
             </h3>
-
-            <!-- Texto de Apoio -->
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
-              Dados e insights sobre São José para ajudar negócios e organizações a enxergar oportunidades e agir com mais confiança.
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+              Dados e insights sobre São José para ajudar negócios a enxergar oportunidades e agir com mais confiança.
             </p>
-
-            <!-- 4 Pilares da Plataforma -->
-            <div class="space-y-2.5 pt-2">
-              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
-                <i class="fa-solid fa-chart-simple text-sky-400 w-4 text-center shrink-0"></i>
-                <span class="font-medium">Indicadores Públicos Auditados</span>
-              </div>
-              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
-                <i class="fa-solid fa-map-location-dot text-teal-400 w-4 text-center shrink-0"></i>
-                <span class="font-medium">Mapeamento Urbano e Renda</span>
-              </div>
-              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
-                <i class="fa-solid fa-users-viewfinder text-purple-400 w-4 text-center shrink-0"></i>
-                <span class="font-medium">Pesquisas Quantitativas por Bairro</span>
-              </div>
-              <div class="flex items-center gap-2.5 text-xs text-slate-200 bg-white/5 p-2 rounded-lg border border-white/5">
-                <i class="fa-solid fa-file-invoice text-amber-400 w-4 text-center shrink-0"></i>
-                <span class="font-medium">Dossiês e Projeções de Mercado</span>
-              </div>
-            </div>
-
           </div>
 
-          <!-- Conteúdo Inferior (Ação) -->
-          <div class="relative z-10 pt-6 mt-6 border-t border-white/10 space-y-3">
+          <!-- Rodapé do Banner: Botão de Chamada para Ação -->
+          <div class="relative z-10 pt-2">
             <a 
               href="index.html" 
-              class="w-full py-3.5 px-5 bg-sky-400 hover:bg-sky-300 text-[#0B2545] font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 group text-center block"
+              class="w-full py-3.5 px-5 bg-sky-400 hover:bg-sky-300 text-[#0B2545] font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 text-center group/btn"
             >
               <span>Conheça o Radar</span>
-              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+              <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition-transform"></i>
             </a>
-            <p class="text-[11px] text-center text-slate-400">
-              Acesso livre aos módulos abertos da plataforma
-            </p>
           </div>
 
         </div>
 
-        <!-- Matérias Mais Recentes -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-            <h4 class="text-xs font-black uppercase tracking-widest text-slate-900">
-              ÚLTIMAS ANÁLISES
-            </h4>
+        <!-- Bloco de 10 Matérias Recomendadas para Clicar -->
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-red-600"></span>
+              <h4 class="text-xs font-black uppercase tracking-widest text-slate-900">
+                MAIS MATÉRIAS EM SJC
+              </h4>
+            </div>
             <a href="blog.html" class="text-[11px] text-cyan-700 font-bold hover:underline">Ver todas</a>
           </div>
-          <div id="sidebarRecentArticles" class="space-y-3"></div>
+          
+          <div id="sidebarRecentArticles" class="divide-y divide-slate-100">
+            <div class="py-3 flex items-start gap-3 animate-pulse">
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-16 bg-slate-200 rounded"></div>
+                <div class="h-4 w-full bg-slate-200 rounded"></div>
+              </div>
+            </div>
+            <div class="py-3 flex items-start gap-3 animate-pulse">
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-16 bg-slate-200 rounded"></div>
+                <div class="h-4 w-full bg-slate-200 rounded"></div>
+              </div>
+            </div>
+            <div class="py-3 flex items-start gap-3 animate-pulse">
+              <div class="w-16 h-14 rounded-md bg-slate-200 shrink-0"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-16 bg-slate-200 rounded"></div>
+                <div class="h-4 w-full bg-slate-200 rounded"></div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </aside>
@@ -641,27 +632,64 @@
     }
 
     async function loadSidebarRecents(currentSlug) {
+      let list = [];
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&limit=5&select=title,slug,published_at,category,cover_image_url`, {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts?status=eq.published&order=published_at.desc&limit=25&select=title,slug,published_at,category,cover_image_url,seo_metadata`, {
           headers: {
             'apikey': SUPABASE_KEY,
             'Authorization': `Bearer ${SUPABASE_KEY}`
           }
         });
         if (res.ok) {
-          const list = await res.json();
-          const filtered = list.filter(p => p.slug !== currentSlug).slice(0, 3);
-          const container = document.getElementById('sidebarRecentArticles');
-          if (container && filtered.length > 0) {
-            container.innerHTML = filtered.map(p => `
-              <a href="artigo.html?slug=${encodeURIComponent(p.slug)}" class="block p-2.5 rounded-xl hover:bg-slate-50 transition-colors group">
-                <span class="text-[10px] font-bold text-cyan-700 uppercase tracking-wider block mb-1">${p.category || 'Demografia'}</span>
-                <h5 class="text-xs font-bold font-serif text-slate-900 group-hover:text-cyan-700 line-clamp-2 leading-snug">${p.title}</h5>
-              </a>
-            `).join('');
-          }
+          list = await res.json();
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Supabase fetch warn:', e);
+      }
+
+      // Fallback para cache local se offline ou rede lenta
+      if (!list || list.length === 0) {
+        try {
+          const cached = JSON.parse(localStorage.getItem('radarsaojose_portal_posts_cache_v2') || '[]');
+          if (Array.isArray(cached) && cached.length > 0) {
+            list = cached;
+          }
+        } catch (ce) {}
+      }
+
+      if (Array.isArray(list) && list.length > 0) {
+        const filtered = list.filter(p => p.slug !== currentSlug).slice(0, 10);
+        const container = document.getElementById('sidebarRecentArticles');
+        if (container && filtered.length > 0) {
+          container.innerHTML = filtered.map((p, idx) => {
+            const readTime = (p.seo_metadata && p.seo_metadata.read_time) || '4 min';
+            const cover = p.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+            const cat = p.category || 'Demografia & População';
+            const articleUrl = `artigo.html?slug=${encodeURIComponent(p.slug)}`;
+            const safeTitle = (p.title || '').replace(/"/g, '&quot;');
+
+            return `
+              <article class="py-3 hover:bg-slate-50/80 p-2 rounded-lg transition-colors group">
+                <a href="${articleUrl}" class="flex items-start gap-3">
+                  <div class="relative w-16 h-14 sm:w-20 sm:h-14 flex-shrink-0 rounded-md overflow-hidden bg-slate-100 self-center">
+                    <img src="${cover}" alt="${safeTitle}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-1.5 mb-1">
+                      <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-700 truncate">${cat}</span>
+                      <span class="text-slate-300 text-[10px]">•</span>
+                      <span class="text-slate-400 text-[10px] whitespace-nowrap">${readTime}</span>
+                    </div>
+                    <h5 class="text-xs font-bold font-serif text-slate-900 group-hover:text-cyan-700 transition-colors line-clamp-2 leading-snug">
+                      ${p.title}
+                    </h5>
+                  </div>
+                </a>
+              </article>
+            `;
+          }).join('');
+        }
+      }
     }
 
     loadArticle();
