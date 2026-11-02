@@ -1603,7 +1603,7 @@
       navButtons.forEach(btn => {
         const bCat = btn.getAttribute('data-cat') || '';
         if (bCat === currentCatMeta.slug || bCat === catParam) {
-          btn.className = 'cat-btn h-full flex items-center px-3.5 text-xs font-bold uppercase tracking-wider text-[#0B2545] border-b-2 border-[#0B2545] whitespace-nowrap transition-colors shrink-0 cursor-pointer';
+          btn.className = 'cat-btn h-full flex items-center gap-1.5 px-3.5 text-xs font-bold uppercase tracking-wider text-[#0B2545] border-b-2 border-[#0B2545] whitespace-nowrap transition-colors shrink-0 cursor-pointer';
           foundMatchingBtn = true;
         } else {
           btn.className = 'cat-btn h-full flex items-center gap-1.5 px-3 text-xs font-semibold uppercase tracking-wider text-slate-600 hover:text-slate-950 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap transition-colors shrink-0 cursor-pointer';
