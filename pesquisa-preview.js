@@ -182,8 +182,9 @@
   // ==========================================
   function applyReportPreview() {
     const root = document.getElementById('executive-report-view');
-    const cover = document.getElementById('rep-tela-001');
-    if (!root || !cover) return;
+    if (!root) return;
+    const articles = Array.from(root.querySelectorAll(':scope > article'));
+    if (articles.length < 3) return;
 
     const state = window.appState;
     const plan = state?.entitlement?.planType || state?.plan_type || state?.profile?.plan_type;
@@ -191,37 +192,38 @@
     const unlocked = admin?.role === 'admin' || admin?.is_admin === true ||
       ['report', 'midia', 'plano_15', 'enterprise'].includes(plan);
     root.classList.toggle('report-preview-unlocked', unlocked);
-    let preview = document.getElementById('report-sales-preview');
-    if (!preview) {
-      preview = document.createElement('div');
-      preview.id = 'report-sales-preview';
-      preview.innerHTML = `
-        <p class="report-sales-preview-label">Prévia ilustrativa</p>
-        <div class="report-sales-preview-sample" aria-hidden="true">
-          <div><strong>Consumo e lazer</strong><i></i><i></i><i></i></div>
-          <div><strong>Comportamento por região</strong><i></i><i></i><i></i></div>
-        </div>
-        ${createStickyNoticeHtml({
-          badge: 'PLANO REPORT',
-          title: 'Veja como São José consome e vive',
-          description: 'Conheça os capítulos executivos da pesquisa e use o consultor de IA para explorar os resultados.',
-          bullets: [],
-          priceText: 'Confira o valor para a sua conta no checkout',
-          targetPlan: 'report',
-          buttonLabel: 'Ver Plano Report'
-        })}
-      `;
-      cover.after(preview);
-      const button = preview.querySelector('.btn-open-plans-checkout');
-      button.onclick = () => {
-        if (['dash', 'plano_10'].includes(window.appState?.entitlement?.planType || window.appState?.plan_type) &&
-            typeof window.openPlanUpgradeModal === 'function') {
-          window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' });
-        } else {
-          openCheckoutModal('report');
-        }
-      };
-    }
+    articles.slice(2).forEach(article => {
+      article.inert = !unlocked;
+      if (unlocked) article.removeAttribute('aria-hidden');
+      else article.setAttribute('aria-hidden', 'true');
+    });
+    if (document.getElementById('report-paywall-overlay')) return;
+
+    const template = document.createElement('template');
+    template.innerHTML = createStickyNoticeHtml({
+      badge: 'RELATÓRIO EXECUTIVO · CONTEÚDO EXCLUSIVO',
+      title: 'Relatório Executivo Completo',
+      description: 'Explore o comportamento dos moradores de São José dos Campos e descubra oportunidades para o seu negócio.',
+      bullets: [
+        '8 capítulos com análises aprofundadas',
+        'Pesquisa com 477 moradores de São José dos Campos',
+        'Consultor de IA para explorar os resultados'
+      ],
+      priceText: 'Confira o valor para a sua conta no checkout',
+      targetPlan: 'report',
+      buttonLabel: 'Ver Plano Report'
+    }).trim();
+    const notice = template.content.firstElementChild;
+    notice.id = 'report-paywall-overlay';
+    articles[1].after(notice);
+    notice.querySelector('.btn-open-plans-checkout').onclick = () => {
+      const currentPlan = window.appState?.entitlement?.planType || window.appState?.plan_type;
+      if (['dash', 'plano_10'].includes(currentPlan) && typeof window.openPlanUpgradeModal === 'function') {
+        window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' });
+      } else {
+        openCheckoutModal('report');
+      }
+    };
   }
 
   // ==========================================
