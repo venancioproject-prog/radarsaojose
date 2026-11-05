@@ -2633,7 +2633,7 @@ function processAndRenderDynamicCharts(snapshot) {
       const culturePhotoCard = document.createElement("div");
       culturePhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       culturePhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_cultura.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('web-media/foto_cultura-95d0cf78551c.webp');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/70 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2679,7 +2679,7 @@ function processAndRenderDynamicCharts(snapshot) {
       const relPhotoCard = document.createElement("div");
       relPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6";
       relPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/photo_3.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('web-media/photo_3-dde2125543c7.webp');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -2725,7 +2725,7 @@ function processAndRenderDynamicCharts(snapshot) {
       const econPhotoCard = document.createElement("div");
       econPhotoCard.className = "group relative rounded-3xl overflow-hidden shadow-card hover:shadow-card-hover border border-surface-border transition-all duration-500 min-h-[380px] flex flex-col justify-end p-6 col-span-1 md:col-span-2 lg:col-span-1";
       econPhotoCard.innerHTML = `
-        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('fotos_radar/foto_gastronomia.jpg');"></div>
+        <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url('web-media/foto_gastronomia-2e195d219775.webp');"></div>
         <div class="absolute inset-0 z-0 bg-gradient-to-t from-brand-950 via-brand-950/75 to-transparent"></div>
         
         <div class="relative z-10 space-y-2">
@@ -4659,7 +4659,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Sim (sorrindo) na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos_radar/sim_sorrindo.jpg" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/photo_1.jpg\';" />' +
+        '<img src="web-media/sim_sorrindo-2387cc253cd6.webp" alt="Sim - Tenho Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/photo_1.jpg\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -4695,7 +4695,7 @@ function renderPrideYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Não (triste) na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos_radar/nao_triste.jpg" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/photo_2.jpg\';" />' +
+        '<img src="web-media/nao_triste-03cfb5bb8012.webp" alt="Não - Sem Orgulho" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/photo_2.jpg\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -4760,7 +4760,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-emerald-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Sim na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos_radar/foto_gastronomia.jpg" alt="Sim - Já fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/sim_sorrindo.jpg\';" />' +
+        '<img src="web-media/foto_gastronomia-2e195d219775.webp" alt="Sim - Já fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'web-media/sim_sorrindo-2387cc253cd6.webp\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-emerald-500 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -4796,7 +4796,7 @@ function renderInfluencerYesNoCardsWidget(dataMap, total) {
     '<div class="group relative rounded-2xl overflow-hidden border border-slate-200/90 bg-white shadow-xs hover:shadow-md transition-all duration-300 flex-1 flex flex-row items-stretch min-h-[145px] sm:min-h-[155px]">' +
       // Imagem Não na esquerda
       '<div class="relative w-24 sm:w-28 md:w-32 overflow-hidden bg-slate-900 shrink-0">' +
-        '<img src="fotos_radar/foto_noite.jpg" alt="Não - Nunca fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'fotos_radar/nao_triste.jpg\';" />' +
+        '<img src="fotos_radar/foto_noite.jpg" alt="Não - Nunca fui por indicação" class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src=\'web-media/nao_triste-03cfb5bb8012.webp\';" />' +
         '<div class="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/40"></div>' +
         '<div class="absolute top-2 left-2">' +
           '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-slate-700 text-white font-black text-[10px] shadow-sm tracking-wide">' +
@@ -7208,7 +7208,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     cargo: "Trabalhador da Indústria",
     idade: "48 anos",
     regiao: "Sudeste",
-    foto: "fotos_radar/photo_3.jpg",
+    foto: "web-media/photo_3-dde2125543c7.webp",
     cor: "border-blue-600",
     badgeBg: "bg-blue-100 text-blue-800",
     resumo: "Rotina marcada por trabalho, deslocamento e estabilidade. Olha com desconfiança para modismos e calcula valor antes de gastar.",
@@ -7220,7 +7220,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     cargo: "Cabeleireiro",
     idade: "33 anos",
     regiao: "Oeste",
-    foto: "fotos_radar/foto_cultura.jpg",
+    foto: "web-media/foto_cultura-95d0cf78551c.webp",
     cor: "border-purple-500",
     badgeBg: "bg-purple-100 text-purple-800",
     resumo: "Trabalha com público, conversa o dia inteiro e acompanha tendências de comportamento, estética e consumo pelas redes e pelo salão.",
@@ -7232,7 +7232,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     cargo: "Garçonete Freelancer",
     idade: "43 anos",
     regiao: "Centro",
-    foto: "fotos_radar/foto_gastronomia.jpg",
+    foto: "web-media/foto_gastronomia-2e195d219775.webp",
     cor: "border-rose-500",
     badgeBg: "bg-rose-100 text-rose-800",
     resumo: "Vive a cidade pela noite, por eventos e por trabalhos temporários. Enxerga de perto a diferença entre quem está se divertindo e quem está servindo.",
@@ -7256,7 +7256,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     cargo: "Estudante",
     idade: "18 anos",
     regiao: "Leste",
-    foto: "fotos_radar/overview_densidade_IMG_2824.jpg",
+    foto: "web-media/overview_densidade_img_2824-0ef37a5c412e.webp",
     cor: "border-teal-500",
     badgeBg: "bg-teal-100 text-teal-800",
     resumo: "Traz repertório jovem, digital e crítico. Fala de cultura, preço, diversidade de programação e acesso a partir da periferia.",
@@ -7268,7 +7268,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     cargo: "Diarista",
     idade: "56 anos",
     regiao: "Norte",
-    foto: "fotos_radar/overview_benchmark_IMG_2916.jpg",
+    foto: "web-media/overview_benchmark_img_2916-99480b9ce5cc.webp",
     cor: "border-indigo-500",
     badgeBg: "bg-indigo-100 text-indigo-800",
     resumo: "Conhece a cidade por trajetos de trabalho e casas de diferentes regiões. Saúde, transporte, renda e segurança entram diretamente nas decisões.",
@@ -7280,7 +7280,7 @@ const EXECUTIVE_REPORT_PERSONAS = [
     cargo: "Professora Pública",
     idade: "34 anos",
     regiao: "Norte",
-    foto: "fotos_radar/overview_area_IMG_2905.jpg",
+    foto: "web-media/overview_area_img_2905-e75d8e49a056.webp",
     cor: "border-red-500",
     badgeBg: "bg-red-100 text-red-800",
     resumo: "Consumidora de cultura e servidora pública. Observa a distância entre a imagem de cidade avançada e o acesso cotidiano a serviços e programação.",

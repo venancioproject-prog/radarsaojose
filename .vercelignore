@@ -35,8 +35,39 @@ scripts/data_extracted/
 Mais fotos radar/
 "fotos radar/"
 fotos radar/
-"mais_fotos_radar/"
-mais_fotos_radar/
+# Publicar os originais usados pelos downloads do Banco de Imagens.
+mais_fotos_radar/*
+!mais_fotos_radar/IMG_2777.jpg
+!mais_fotos_radar/IMG_2780.jpg
+!mais_fotos_radar/IMG_2808.jpg
+!mais_fotos_radar/IMG_2809.jpg
+!mais_fotos_radar/IMG_2810.jpg
+!mais_fotos_radar/IMG_2815.jpg
+!mais_fotos_radar/IMG_2822.jpg
+!mais_fotos_radar/IMG_2838.jpg
+!mais_fotos_radar/IMG_2840.jpg
+!mais_fotos_radar/IMG_2841.jpg
+!mais_fotos_radar/IMG_2857.jpg
+!mais_fotos_radar/IMG_2858.jpg
+!mais_fotos_radar/IMG_2863.jpg
+!mais_fotos_radar/IMG_2865.jpg
+!mais_fotos_radar/IMG_2868.jpg
+!mais_fotos_radar/IMG_2874.jpg
+!mais_fotos_radar/IMG_2875.jpg
+!mais_fotos_radar/IMG_2883.jpg
+!mais_fotos_radar/IMG_2890.jpg
+!mais_fotos_radar/IMG_2893.jpg
+!mais_fotos_radar/IMG_2896.jpg
+!mais_fotos_radar/IMG_2902.jpg
+!mais_fotos_radar/IMG_2904.jpg
+!mais_fotos_radar/IMG_2905.jpg
+!mais_fotos_radar/IMG_2906.jpg
+!mais_fotos_radar/IMG_2911.jpg
+!mais_fotos_radar/IMG_2912.jpg
+!mais_fotos_radar/IMG_2914.jpg
+!mais_fotos_radar/IMG_2915.jpg
+!mais_fotos_radar/IMG_2916.jpg
+!mais_fotos_radar/IMG_2919.jpg
 
 # Configuracoes de IDE e CI
 .github/

@@ -624,7 +624,7 @@
         <!-- Fotografia Urbana de São José dos Campos (Fim de tarde) -->
         <div class="absolute inset-0 z-0">
           <img 
-            src="fotos_radar/capa_sjc_skyline.jpg" 
+            src="web-media/capa_sjc_skyline-e75d8e49a056.webp" 
             alt="Vista urbana de São José dos Campos" 
             class="w-full h-full object-cover object-center"
             loading="lazy"
@@ -1525,7 +1525,7 @@
       const author = post.author_name || 'Leonardo Venâncio';
       const isMayumi = author.toLowerCase().includes('mayumi');
       const authorAvatarSrc = isMayumi ? 'fotos_radar/mayumi.jpg' : 'fotos_radar/LEONARDO.jpeg';
-      const coverUrl = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+      const coverUrl = post.cover_image_url || 'web-media/capa_sjc_skyline-e75d8e49a056.webp';
       const articleUrl = getArticleUrl(post.slug);
       const excerpt = post.excerpt || (post.seo_metadata && post.seo_metadata.bluf_summary) || post.title;
 
@@ -1533,7 +1533,7 @@
         <article class="article-card flex flex-col justify-between group border-b border-slate-200/80 pb-6 transition-all" data-category="${catMeta.slug}">
           <div>
             <div class="relative aspect-[16/10] overflow-hidden rounded-lg bg-slate-100 mb-3.5">
-              <img src="${coverUrl}" alt="${post.title} - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+              <img src="${coverUrl}" alt="${post.title} - Radar São José dos Campos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='web-media/capa_sjc_skyline-e75d8e49a056.webp'" />
               <div class="absolute top-3 left-3">
                 <span class="${catMeta.color} text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
                   <i class="fa-solid ${catMeta.icon} mr-1"></i>${catMeta.label}
@@ -1574,7 +1574,7 @@
       const formattedDate = formatPortalDate(heroPost.published_at || heroPost.created_at);
       const readTime = (heroPost.seo_metadata && heroPost.seo_metadata.read_time) || '4 min de leitura';
       const excerpt = heroPost.excerpt || (heroPost.seo_metadata && heroPost.seo_metadata.bluf_summary) || heroPost.title;
-      const coverUrl = heroPost.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+      const coverUrl = heroPost.cover_image_url || 'web-media/capa_sjc_skyline-e75d8e49a056.webp';
 
       const catEl = document.getElementById('heroBadgeCategory');
       if (catEl) {
@@ -1629,7 +1629,7 @@
           const sCat = resolveCategory(post.category);
           const sUrl = getArticleUrl(post.slug);
           const sRead = (post.seo_metadata && post.seo_metadata.read_time) || '4 min de leitura';
-          const sCover = post.cover_image_url || 'fotos_radar/capa_sjc_skyline.jpg';
+          const sCover = post.cover_image_url || 'web-media/capa_sjc_skyline-e75d8e49a056.webp';
           const rankNum = idx + 1;
 
           return `
@@ -1648,7 +1648,7 @@
                 </h4>
               </div>
               <a href="${sUrl}" class="relative w-16 h-14 sm:w-20 sm:h-14 flex-shrink-0 rounded-md overflow-hidden bg-slate-100 self-center">
-                <img src="${sCover}" alt="${post.title.replace(/"/g, '&quot;')}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='fotos_radar/capa_sjc_skyline.jpg'" />
+                <img src="${sCover}" alt="${post.title.replace(/"/g, '&quot;')}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='web-media/capa_sjc_skyline-e75d8e49a056.webp'" />
               </a>
             </article>
           `;
