@@ -15,3 +15,6 @@ docs/piloto-dataviz/integracao-oficial/** -text
 scripts/integrar_dataviz_blocos.py -text
 scripts/test_integracao_oficial.py -text
 scripts/test_integracao_escopo.py -text
+
+# Preserva bytes exatos dos recortes de dados publicos contra alteracao de CRLF na Vercel
+public-data/** -text

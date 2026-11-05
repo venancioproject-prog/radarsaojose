@@ -110,3 +110,5 @@ docs/piloto-dataviz/
 radar-piloto.html
 scripts/audit_challenger_results.json
 scripts/build_*.py
+
+public-images/
