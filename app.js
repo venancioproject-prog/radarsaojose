@@ -889,6 +889,8 @@ window.refreshConfirmedPlan = async function() {
     window.appState.entitlement = entJson.entitlement;
     window.appState.plan_type = entJson.entitlement.planType;
     window.applyPlanRestrictions();
+    if (window.radarCanLoadModule?.('dashboard') && !allSurveyRecords.length) void fetchSurveyData();
+    if (window.currentMainTab === 'midia') window.onSwitchToMidiaTab?.();
     return window.appState.plan_type;
   } catch (error) {
     window.appState.profile = null;
@@ -1507,6 +1509,14 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 // ==========================================
 async function fetchSurveyData() {
   const request = ++surveyRequest;
+  if (!window.radarCanLoadModule?.('dashboard')) {
+    allSurveyRecords = [];
+    window.allSurveyRecords = [];
+    dynamicChartsGrid?.replaceChildren();
+    dataFetchError?.classList.add('hidden');
+    window.updateRadarPreviews?.();
+    return;
+  }
   try {
     if (!supabaseClient) throw new Error('Supabase indisponível');
     let { data, error } = await supabaseClient.from('respostas_pesquisa').select('*').range(0, 5000);

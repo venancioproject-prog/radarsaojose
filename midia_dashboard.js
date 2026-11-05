@@ -174,6 +174,12 @@
 
   // 1. CARREGAMENTO ULTRA RÁPIDO DOS DADOS
   async function fetchMidiaData() {
+    if (!window.radarCanLoadModule?.('midia')) {
+      document.getElementById('midia-loading-state')?.classList.add('hidden');
+      document.getElementById('midia-error-state')?.classList.add('hidden');
+      window.updateRadarPreviews?.();
+      return;
+    }
     showMidiaLoading(true);
     let data = [];
     let source = "preloaded";
@@ -248,6 +254,7 @@
 
   // Hook disparado na troca de aba
   window.onSwitchToMidiaTab = function() {
+    if (!window.radarCanLoadModule?.('midia')) return fetchMidiaData();
     const loadingState = document.getElementById('midia-loading-state');
     const dashboardContent = document.getElementById('midia-dashboard-content');
     
@@ -259,7 +266,7 @@
         renderMidiaDashboard();
       }, 50);
     } else {
-      fetchMidiaData();
+      if (window.currentMainTab === 'midia') fetchMidiaData();
     }
   };
 
@@ -2572,7 +2579,7 @@
     });
   } else {
     setupMidiaEventListeners();
-    fetchMidiaData();
+    if (window.currentMainTab === 'midia') fetchMidiaData();
   }
 
 })();
