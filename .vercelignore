@@ -128,7 +128,10 @@ pacote_antigravity_eleicoes_2026/
 CONTINUAR-PLANOS.md
 HANDOFF.md
 app.updated.html
-assets/
+assets/*
+!assets/module-tours/
+assets/module-tours/*
+!assets/module-tours/*.mp4
 /[0-9]*.png
 data/capitulo-*.json
 data/migrations/

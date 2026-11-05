@@ -1,18 +1,56 @@
 (() => {
   'use strict';
   const videos = [...document.querySelectorAll('.module-showcase video')];
+
   function loadVideo(video) {
     const source = video.querySelector('source[data-src]');
     if (!source) return;
-    source.src = source.dataset.src;
+    const srcUrl = source.dataset.src;
+    source.src = srcUrl;
     source.removeAttribute('data-src');
+    if (!video.src || video.src === window.location.href) {
+      video.src = srcUrl;
+    }
+    video.preload = 'auto';
     video.load();
   }
+
   function playVideo(video) {
     video.muted = true;
-    const playback = video.play();
-    if (playback) playback.catch(() => {});
+    video.defaultMuted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+
+    const startPlay = () => {
+      const playback = video.play();
+      if (playback && typeof playback.catch === 'function') {
+        playback.catch(() => {
+          video.addEventListener('canplay', () => {
+            video.play().catch(() => {});
+          }, { once: true });
+        });
+      }
+    };
+
+    if (video.readyState >= 2) {
+      startPlay();
+    } else {
+      video.addEventListener('loadeddata', startPlay, { once: true });
+      startPlay();
+    }
   }
+
+  videos.forEach(video => {
+    video.style.cursor = 'pointer';
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        playVideo(video);
+      } else {
+        video.pause();
+      }
+    });
+  });
+
   if ('IntersectionObserver' in window) {
     const loader = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -21,7 +59,8 @@
           loader.unobserve(entry.target);
         }
       });
-    }, { rootMargin: '250px' });
+    }, { rootMargin: '300px' });
+
     const playback = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -31,7 +70,8 @@
           entry.target.pause();
         }
       });
-    });
+    }, { threshold: 0.1 });
+
     videos.forEach(video => {
       loader.observe(video);
       playback.observe(video);
@@ -60,17 +100,4 @@
   });
   update();
   mobile.addEventListener('change', update);
-})();
-
-(() => {
-  const button = document.querySelector('.nav-toggle-btn');
-  const menu = document.getElementById('primaryNavMenu');
-  if (!button || !menu) return;
-  const close = () => { menu.classList.remove('active'); button.setAttribute('aria-expanded', 'false'); };
-  button.addEventListener('click', () => {
-    const open = menu.classList.toggle('active');
-    button.setAttribute('aria-expanded', String(open));
-  });
-  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
 })();

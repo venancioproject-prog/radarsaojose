@@ -397,6 +397,8 @@
     
   </style>
   <link rel="stylesheet" href="../header-brand.css?v=20261102-alinhamento" />
+  <link rel="stylesheet" href="../header-menu.css?v=20261105-mobile-cta">
+  <script src="../header-menu.js?v=20261105" defer></script>
 </head>
 <body class="bg-white text-slate-900 font-sans antialiased">
 
@@ -422,9 +424,8 @@
 
       <!-- 3. Botões e Ações à Direita -->
       <div class="navbar-actions">
-        <a href="../index.html#contato" class="btn-nav-outline">Falar com especialista</a>
         <a href="../app.html" class="btn-nav-primary">Criar conta grátis</a>
-        <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+        <button type="button" class="nav-toggle-btn" data-header-menu-toggle aria-controls="primaryNavMenu" aria-label="Menu de navegação" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>

@@ -61,18 +61,6 @@ window.scrollToSection = function(sectionId) {
 window.currentMainTab = "dashboard";
 window.tabScrollPositions = {};
 
-// Keep the active mobile destination visible without moving the document.
-window.syncMobileModuleNav = function() {
-  const nav = document.getElementById("app-module-nav-mobile");
-  const active = nav?.querySelector(".is-active");
-  if (!nav || !active || !nav.clientWidth) return;
-  const navRect = nav.getBoundingClientRect();
-  const activeRect = active.getBoundingClientRect();
-  if (activeRect.left < navRect.left || activeRect.right > navRect.right) {
-    nav.scrollLeft += activeRect.left - navRect.left - (nav.clientWidth - activeRect.width) / 2;
-  }
-};
-
 window.switchMainTab = function(tabName) {
   // 1. Salvar a posição de rolagem atual da aba de onde o usuário está saindo
   if (window.currentMainTab) {
@@ -234,7 +222,6 @@ window.switchMainTab = function(tabName) {
     link.classList.toggle("is-active", link.getAttribute("data-module") === tabName);
   });
 
-  window.syncMobileModuleNav();
 
   if (typeof window.updateRadarPreviews === "function") {
     window.updateRadarPreviews();
@@ -515,7 +502,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         filterSidebar.classList.remove("flex");
       }
     }
-    window.syncMobileModuleNav();
 
   if (typeof window.updateRadarPreviews === "function") {
     window.updateRadarPreviews();

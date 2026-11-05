@@ -24,9 +24,7 @@
 #main-app-header button:focus-visible,
 #main-app-header a:focus-visible { outline: 2px solid #087ee1; outline-offset: 3px; }
 @media (max-width: 767px) {
-  :root { --app-header-height: 110px; }
   .app-header-row { height: 68px; padding-inline: 16px; }
-  #app-module-nav-mobile { height: 41px; padding-block: 0; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .app-header-row { padding-inline: 20px; gap: 16px; }
@@ -89,26 +87,6 @@
 .app-nav-link[data-module="image-bank"], #btn-nav-image-bank { --module-nav-accent: #475569; }
 
 /* Navegação Mobile */
-.app-nav-link-mobile {
-  font-family: var(--font-ui, 'Inter', sans-serif) !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: #64748b !important;
-  background: transparent !important;
-  border: none !important;
-  padding: 6px 12px !important;
-  border-radius: 0 !important;
-  position: relative;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.app-nav-link-mobile.is-active {
-  color: #080e2e !important;
-  font-weight: 600 !important;
-}
-.app-nav-link-mobile.is-active::after { content: ''; position: absolute; height: 2px; inset: auto 12px 0; background: var(--module-nav-accent, #009bb6); }
 .app-nav-link-mobile[data-module="report"] { --module-nav-accent: #4f46b5; }
 .app-nav-link-mobile[data-module="ibge"] { --module-nav-accent: #2875dd; }
 .app-nav-link-mobile[data-module="midia"] { --module-nav-accent: #c20c57; }

@@ -288,6 +288,8 @@
     .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
   <link rel="stylesheet" href="header-brand.css?v=20261102-alinhamento" />
+  <link rel="stylesheet" href="header-menu.css?v=20261105-mobile-cta">
+  <script src="header-menu.js?v=20261105" defer></script>
 </head>
 <body class="bg-white text-slate-900 font-sans antialiased">
 
@@ -312,9 +314,8 @@
 
       <!-- 3. Botões e Ações à Direita -->
       <div class="navbar-actions">
-        <a href="index.html#contato" class="btn-nav-outline">Falar com especialista</a>
         <a href="app.html" class="btn-nav-primary">Criar conta grátis</a>
-        <button class="nav-toggle-btn" onclick="document.getElementById('primaryNavMenu').classList.toggle('active')" aria-label="Abrir Menu de Navegação" aria-expanded="false">
+        <button type="button" class="nav-toggle-btn" data-header-menu-toggle aria-controls="primaryNavMenu" aria-label="Menu de navegação" aria-expanded="false">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -327,7 +328,8 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 h-11 px-4 sm:px-6 lg:px-8">
       
       <!-- Lista de Categorias Estilo Portal de Notícias -->
-      <div class="flex items-center gap-1 sm:gap-1.5 flex-1 min-w-0 overflow-x-auto scrollbar-none h-full" id="categoryNav">
+      <button type="button" data-header-menu-toggle aria-controls="categoryNav" aria-expanded="false" class="header-menu-button text-xs font-bold text-slate-700"><i class="fa-solid fa-list" aria-hidden="true"></i> Editorias</button>
+      <div class="header-menu-panel flex items-center gap-1 sm:gap-1.5 flex-1 min-w-0 overflow-x-auto scrollbar-none h-full" id="categoryNav">
         <a href="blog.html" class="cat-btn h-full flex items-center px-3.5 text-xs font-semibold uppercase tracking-wider text-slate-600 hover:text-slate-950 border-b-2 border-transparent hover:border-slate-300 whitespace-nowrap transition-colors shrink-0" data-cat="todas">
           Todas
         </a>

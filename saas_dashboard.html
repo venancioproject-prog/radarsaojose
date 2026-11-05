@@ -72,6 +72,8 @@
       background: #94a3b8;
     }
   </style>
+  <link rel="stylesheet" href="header-menu.css?v=20261105">
+  <script src="header-menu.js?v=20261105" defer></script>
 </head>
 
 <body class="h-full text-slate-800 bg-[#f8f9fa] flex flex-col antialiased selection:bg-teal-500 selection:text-white">
@@ -90,14 +92,15 @@
         <div>
           <div class="flex items-center gap-2">
             <span class="font-extrabold text-base tracking-tight text-brand-950">NEXUS<span class="text-teal-600">SaaS</span></span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-700 border border-teal-200">PRO v3.4</span>
+            <span class="hidden min-[400px]:inline-block px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 text-teal-700 border border-teal-200">PRO v3.4</span>
           </div>
           <p class="text-[11px] font-medium text-slate-400 hidden sm:block">Enterprise Management Suite</p>
         </div>
       </div>
 
       <!-- Navegação Central em Formato 'Pills' (Abas) -->
-      <nav class="flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl border border-slate-200/80 shadow-inner">
+      <button type="button" data-header-menu-toggle aria-controls="saas-header-navigation" aria-expanded="false" aria-label="Menu de navegação" class="header-menu-button rounded-xl border border-slate-200 text-slate-600"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <nav id="saas-header-navigation" class="header-menu-panel flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl border border-slate-200/80 shadow-inner">
         <button 
           id="tab-btn-crm" 
           onclick="switchTab('crm')" 

@@ -55,7 +55,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet" />
   <!-- Source Serif 4 & Source Sans 3: Tipografia Documental & Registro de Arquivo -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="module-hero.css?v=20261003-shell" />
+  <link rel="stylesheet" href="module-hero.css?v=20261105-menu" />
   <link rel="stylesheet" href="radar_benchmark.css?v=20261020" />
   <script src="module-hero.js" defer></script>
 
@@ -1549,6 +1549,8 @@
   <link rel="stylesheet" href="header-brand.css?v=20261102-alinhamento" />
   <link rel="stylesheet" href="radar_mobilidade_visual.css?v=20261013">
   <link rel="stylesheet" href="radar_mobilidade_atlas.css?v=20261013">
+  <link rel="stylesheet" href="header-menu.css?v=20261105-panel">
+  <script src="header-menu.js?v=20261105" defer></script>
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
   <div id="app-boot" role="status" aria-live="polite">
@@ -1799,6 +1801,10 @@
         <!-- Right: Controles Essenciais + Menu de Usuário Dropdown -->
         <div class="flex items-center gap-2 sm:gap-3 shrink-0">
           
+          <button type="button" data-header-menu-toggle aria-controls="app-module-nav-mobile" aria-expanded="false" aria-label="Menu de módulos" class="header-menu-button rounded-xl border border-surface-border text-slate-700 dark:text-slate-200">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+          </button>
+
           <!-- Mobile Filter Toggle Button -->
           <button 
             type="button"
@@ -1940,7 +1946,7 @@
       </div>
 
       <!-- Mobile Navigation Bar -->
-      <nav id="app-module-nav-mobile" class="md:hidden flex items-center gap-2 overflow-x-auto px-4 py-2 bg-slate-50 border-t border-slate-200/80 scrollbar-none" aria-label="Navegação Mobile">
+      <nav id="app-module-nav-mobile" class="hidden" aria-label="Navegação Mobile">
         <button type="button" onclick="window.switchMainTab('ibge')" data-module="ibge" class="app-nav-link-mobile text-xs font-medium text-slate-600 py-1 px-2 whitespace-nowrap">Dados Públicos</button>
         <button type="button" onclick="window.switchMainTab('historia')" data-module="historia" class="app-nav-link-mobile text-xs font-medium text-slate-600 py-1 px-2 whitespace-nowrap">História</button>
         <button type="button" onclick="window.switchMainTab('image-bank')" data-module="image-bank" class="app-nav-link-mobile text-xs font-medium text-slate-600 py-1 px-2 whitespace-nowrap">Banco de Imagens</button>
@@ -13444,7 +13450,7 @@
   <script src="report-source.js?v=20261104_report_restore"></script>
   <script src="report-metrics-ui.js?v=20261104_report_restore"></script>
   <script src="lentes_sjc_module.js?v=20261004_v1"></script>
-  <script src="app.js?v=20261105_wordcloud_restore"></script>
+  <script src="app.js?v=20261105_wordcloud_restore_mobile_menu"></script>
   <script src="data/radar_hub/sjc_setores_geo_bundle.js?v=20260927_v1"></script>
   <script src="radar_benchmark.js?v=20261020"></script><script src="radar_demografia_contracts.js?v=20261012-r5"></script><script src="radar_mobilidade_atlas.js?v=20261013"></script>
 <script src="radar_mobilidade_visual.js?v=20261013"></script>

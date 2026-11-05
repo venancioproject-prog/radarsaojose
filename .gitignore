@@ -405,7 +405,10 @@ scripts/copy_*.cjs
 CONTINUAR-PLANOS.md
 HANDOFF.md
 app.updated.html
-assets/
+assets/*
+!assets/module-tours/
+assets/module-tours/*
+!assets/module-tours/*.mp4
 /[0-9]*.png
 data/capitulo-*.json
 data/migrations/
