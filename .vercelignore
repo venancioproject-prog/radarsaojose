@@ -23,7 +23,6 @@ tmp/
 /revisao/baseline/
 /app.html.bak-step
 /app.updated.html
-/report-source.js
 data/radar_hub/*_raw_*/
 data/radar_hub/*_raw_*
 data/radar_hub/*_evidence_*.json

@@ -273,6 +273,7 @@ const P_PROPORTION = 0.5;
 
 let supabaseClient = null;
 let surveyRequest = 0;
+let allSurveyRecords = [];
 let chartInstances = {};
 
 function initSupabase() {
@@ -746,6 +747,9 @@ async function handleLogin(e) {
 
 async function handleLogout() {
   ++surveyRequest;
+  allSurveyRecords = [];
+  window.allSurveyRecords = [];
+  window.currentFilteredRecords = [];
   dynamicChartsGrid?.replaceChildren();
   Object.values(chartInstances).forEach(chart => chart?.destroy());
   chartInstances = {};
@@ -1351,7 +1355,7 @@ window.applyPlanRestrictions = function() {
             </button>
           </div>
         `;
-        dashboardView.insertBefore(dashUpsellBanner, dashChartsGrid);
+        dashChartsGrid.before(dashUpsellBanner);
       }
     } else {
       if (dashUpsellBanner) dashUpsellBanner.remove();
@@ -1537,32 +1541,27 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 async function fetchSurveyData() {
   const request = ++surveyRequest;
   try {
-    const { data } = await supabaseClient?.auth.getSession() || {};
-    const token = data?.session?.access_token;
-    const headers = token ? { Authorization: 'Bearer ' + token } : {};
-    const params = new URLSearchParams();
-    ALL_FILTER_ELEMENTS.forEach(select => {
-      if (select?.value && select.value !== 'TODOS') params.set(select.id.slice(7), select.value);
-    });
-    let response = await fetch('/api/survey-preview?' + params, { headers, cache: 'no-store' });
-    if (response.status === 401 && token) response = await fetch('/api/survey-preview?' + params, { cache: 'no-store' });
-    if (!response.ok) throw new Error('Survey unavailable');
-    const snapshot = await response.json();
+    if (!supabaseClient) throw new Error('Supabase indisponível');
+    let { data, error } = await supabaseClient.from('respostas_pesquisa').select('*').range(0, 5000);
+    if (error) {
+      ({ data, error } = await supabaseClient.from('respostas radar').select('*').range(0, 5000));
+    }
     if (request !== surveyRequest) return;
+    if (error || !Array.isArray(data) || !data.length) throw new Error('Pesquisa indisponível');
+    allSurveyRecords = data;
+    window.allSurveyRecords = data;
     dataFetchError?.classList.add('hidden');
-    if (supabaseTableStatus) supabaseTableStatus.textContent = 'Ativo (' + snapshot.total + ' registros)';
-    populateAllSidebarFilters(snapshot.options);
-    if (totalBaseCount) totalBaseCount.textContent = snapshot.total.toLocaleString('pt-BR');
-    if (filteredRecordsCount) filteredRecordsCount.textContent = snapshot.count.toLocaleString('pt-BR');
+    if (supabaseTableStatus) supabaseTableStatus.textContent = 'Ativo (' + data.length + ' registros)';
     updateSyncTime();
-    updateStatisticalHeader(snapshot.count, snapshot.total);
-    processAndRenderDynamicCharts(snapshot);
-    window.applyPlanRestrictions?.();
-    if (location.hash === '#report') window.renderExecutiveReportCharts?.();
+    populateAllSidebarFilters(data);
+    applyCombinedFilters();
   } catch (_) {
     if (request !== surveyRequest) return;
     if (supabaseTableStatus) supabaseTableStatus.textContent = 'Pesquisa indisponível';
-    dataFetchError?.classList.remove('hidden');
+    if (dataFetchError) {
+      dataFetchError.textContent = 'Não foi possível carregar a pesquisa. Atualize a página para tentar novamente.';
+      dataFetchError.classList.remove('hidden');
+    }
   }
 }
 
@@ -1697,17 +1696,66 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas", customS
   }
 }
 
-function populateAllSidebarFilters(options) {
-  populateSelectOptions(filterGenderSelect, options.gender, "Todos os Gêneros");
-  populateSelectOptions(filterIncomeSelect, options.income, "Todas as Faixas", sortFilterIncomes);
-  populateSelectOptions(filterAgeSelect, options.age, "Todas as Idades", sortFilterAges);
-  populateSelectOptions(filterRegionSelect, options.region, "Todas as Regiões");
-  populateSelectOptions(filterMaritalSelect, options.marital, "Todos os Estados Civis");
-  populateSelectOptions(filterWorkSelect, options.work, "Todos os Modelos");
-  populateSelectOptions(filterHouseSelect, options.house, "Todas as Opções");
-  populateSelectOptions(filterPoliticsSelect, options.politics, "Todos os Posicionamentos");
-  populateSelectOptions(filterQualitySelect, options.quality, "Todas as Notas (1 a 5)", sortFilterQualities);
-  populateSelectOptions(filterPrideSelect, options.pride, "Todas as Opções");
+function populateAllSidebarFilters(records) {
+  const genders = new Set(["Homem", "Mulher", "Outros"]);
+  const incomes = new Set();
+  const ages = new Set();
+  const regions = new Set();
+  const maritals = new Set();
+  const works = new Set();
+  const houses = new Set();
+  const politics = new Set();
+  const qualities = new Set();
+  const prides = new Set();
+
+  records.forEach(r => {
+    const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
+    if (inc) incomes.add(inc);
+
+    const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+    if (age) ages.add(age);
+
+    const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+    if (reg) regions.add(reg);
+
+    const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
+    if (mar) maritals.add(mar);
+
+    const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
+    if (wrk) works.add(wrk);
+
+    const hou = getField(r, ["Você Já tem casa própria?", "casa_propria"]);
+    if (hou) houses.add(hou);
+
+    const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
+    if (pol) politics.add(pol);
+
+    const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+    if (qua) {
+      const trimmed = String(qua).trim();
+      const m = trimmed.match(/^([1-5])$/) || trimmed.match(/nota\s*([1-5])/i) || trimmed.match(/\b([1-5])\b/);
+      if (m && parseInt(m[1], 10) >= 1 && parseInt(m[1], 10) <= 5) {
+        qualities.add("Nota " + m[1]);
+      }
+    }
+    const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
+    if (pri) prides.add(pri);
+  });
+
+  populateSelectOptions(filterGenderSelect, genders, "Todos os Gêneros");
+  populateSelectOptions(filterIncomeSelect, incomes, "Todas as Faixas", sortFilterIncomes);
+  populateSelectOptions(filterAgeSelect, ages, "Todas as Idades", sortFilterAges);
+  populateSelectOptions(filterRegionSelect, regions, "Todas as Regiões");
+  populateSelectOptions(filterMaritalSelect, maritals, "Todos os Estados Civis");
+  populateSelectOptions(filterWorkSelect, works, "Todos os Modelos");
+  populateSelectOptions(filterHouseSelect, houses, "Todas as Opções");
+  populateSelectOptions(filterPoliticsSelect, politics, "Todos os Posicionamentos");
+  populateSelectOptions(filterQualitySelect, qualities, "Todas as Notas (1 a 5)", sortFilterQualities);
+  populateSelectOptions(filterPrideSelect, prides, "Todas as Opções");
+
+  if (totalBaseCount) {
+    totalBaseCount.textContent = records.length.toLocaleString("pt-BR");
+  }
 }
 
 // Consolidador de gênero em Homem, Mulher e Outros
@@ -1720,7 +1768,82 @@ function normalizeGender(val) {
 }
 
 function applyCombinedFilters() {
-  return fetchSurveyData();
+  const selGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
+  const selIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
+  const selAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
+  const selRegion = filterRegionSelect ? filterRegionSelect.value : "TODOS";
+  const selMarital = filterMaritalSelect ? filterMaritalSelect.value : "TODOS";
+  const selWork = filterWorkSelect ? filterWorkSelect.value : "TODOS";
+  const selHouse = filterHouseSelect ? filterHouseSelect.value : "TODOS";
+  const selPolitics = filterPoliticsSelect ? filterPoliticsSelect.value : "TODOS";
+  const selQuality = filterQualitySelect ? filterQualitySelect.value : "TODOS";
+  const selPride = filterPrideSelect ? filterPrideSelect.value : "TODOS";
+
+  const filtered = allSurveyRecords.filter(r => {
+    if (selGender !== "TODOS") {
+      const rawGen = getField(r, ["Como você se identifica?", "genero", "identificacao"]);
+      const normGen = normalizeGender(rawGen);
+      if (normGen !== selGender) return false;
+    }
+    if (selIncome !== "TODOS") {
+      const inc = getField(r, ["Qual a renda total da sua casa por mês?", "renda", "renda_mensal"]);
+      if (inc !== selIncome) return false;
+    }
+    if (selAge !== "TODOS") {
+      const age = getField(r, ["Qual a sua idade?", "idade", "faixa_etaria"]);
+      if (age !== selAge) return false;
+    }
+    if (selRegion !== "TODOS") {
+      const reg = getField(r, ["Região", "Regiao", "regiao", "região", "Em qual bairro você mora?", "bairro"]);
+      if (reg !== selRegion) return false;
+    }
+    if (selMarital !== "TODOS") {
+      const mar = getField(r, ["Qual o seu estado civil?", "estado_civil"]);
+      if (mar !== selMarital) return false;
+    }
+    if (selWork !== "TODOS") {
+      const wrk = getField(r, ["O seu trabalho hoje é:", "trabalho", "modelo_trabalho"]);
+      if (wrk !== selWork) return false;
+    }
+    if (selHouse !== "TODOS") {
+      const hou = getField(r, ["Você Já tem casa própria?", "casa_propria"]);
+      if (hou !== selHouse) return false;
+    }
+    if (selPolitics !== "TODOS") {
+      const pol = getField(r, ["Na política, você se sente mais próximo de qual lado?", "posicionamento_politico"]);
+      if (pol !== selPolitics) return false;
+    }
+    if (selQuality !== "TODOS") {
+      const qua = getField(r, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+      const mRow = String(qua).match(/([1-5])/);
+      const mSel = String(selQuality).match(/([1-5])/);
+      if (mRow && mSel) {
+        if (mRow[1] !== mSel[1]) return false;
+      } else if (qua !== selQuality) {
+        return false;
+      }
+    }
+    if (selPride !== "TODOS") {
+      const pri = getField(r, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]);
+      if (pri !== selPride) return false;
+    }
+    return true;
+  });
+
+  if (filteredRecordsCount) {
+    filteredRecordsCount.textContent = filtered.length.toLocaleString("pt-BR");
+  }
+  if (totalBaseCount) {
+    totalBaseCount.textContent = allSurveyRecords.length.toLocaleString("pt-BR");
+  }
+
+  window.currentFilteredRecords = filtered;
+  updateStatisticalHeader(filtered.length, allSurveyRecords.length);
+  processAndRenderDynamicCharts(filtered);
+  if (location.hash === "#report") window.renderExecutiveReportCharts?.();
+  if (typeof window.applyPlanRestrictions === "function") {
+    window.applyPlanRestrictions();
+  }
 }
 
 function resetAllFilters() {
@@ -1813,23 +1936,80 @@ function aggregateSurveyChartData(records, questionText) {
   return dataMap;
 }
 
-function expandSurveyDistribution(distribution, question) {
-  return (distribution || []).flatMap(({ label, count }) => Array(count).fill({ [question]: label }));
-}
+function processAndRenderDynamicCharts(records) {
+  const total = records.length;
+  if (statTotalResponses) statTotalResponses.textContent = total.toLocaleString("pt-BR");
 
-function processAndRenderDynamicCharts(snapshot) {
-  const total = snapshot.count;
-  if (statTotalResponses) statTotalResponses.textContent = total.toLocaleString('pt-BR');
-  if (statQualityLife) statQualityLife.textContent = snapshot.kpis.quality;
-  if (statPrideRate) statPrideRate.textContent = snapshot.kpis.pride + '%';
-  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = String(snapshot.kpis.neighborhoods);
-  if (!total) {
+  if (total === 0) {
+    if (statQualityLife) statQualityLife.textContent = "0.0";
+    if (statPrideRate) statPrideRate.textContent = "0%";
+    if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = "0";
     if (dynamicChartsGrid) {
       dynamicChartsGrid.innerHTML = '<div class="bg-white rounded-3xl p-12 text-center text-slate-400 font-semibold border border-slate-200">Nenhum resultado corresponde aos filtros selecionados.</div>';
     }
     return;
   }
-  const questionList = snapshot.questions;
+
+  const referenceRecords = allSurveyRecords.length ? allSurveyRecords : records;
+
+  // Descobrir todas as perguntas existentes (ignora metadados, campos abertos e coluna utilitária Região)
+  const ignoredColumns = new Set([
+    "id",
+    "created_at",
+    "Carimbo de data/hora",
+    "data",
+    "Data",
+    "timestamp",
+    "user_id",
+    "Região",
+    "Regiao",
+    "região",
+    "regiao",
+    "Escreva o nome de até 3 influenciadores de São José que você acompanha.",
+    "Escreva o nome de até 3 influenciadores de São José que você acompanha. "
+  ]);
+  const allColumns = new Set();
+
+  referenceRecords.forEach(row => {
+    Object.keys(row).forEach(key => {
+      const kTrim = key.trim();
+      const isIgnored = ignoredColumns.has(key) ||
+        ignoredColumns.has(kTrim) ||
+        /^regi[aã]o$/i.test(kTrim) ||
+        /até 3 influenciadores|ate 3 influenciadores/i.test(key);
+
+      if (!isIgnored && kTrim.length > 1) {
+        allColumns.add(key);
+      }
+    });
+  });
+
+  const questionList = Array.from(allColumns);
+
+  // KPIs
+  let totalQualityScore = 0;
+  let qualityCount = 0;
+  let prideCount = 0;
+  const neighborhoods = new Set();
+
+  records.forEach(row => {
+    const qv = getField(row, ["De 1 a 5, que nota você dá para a qualidade de vida em São José?", "qualidade_vida", "nota_qualidade"]);
+    const qvNum = parseFloat(qv);
+    if (!isNaN(qvNum) && qvNum >= 1 && qvNum <= 5) {
+      totalQualityScore += qvNum;
+      qualityCount++;
+    }
+    const pride = getField(row, ["Você tem orgulho de morar em São José dos Campos?", "orgulho", "tem_orgulho"]).toLowerCase();
+    if (pride.includes("sim") || pride.includes("muito")) prideCount++;
+
+    const bairro = getField(row, ["Em qual bairro você mora?", "bairro", "Bairro"]);
+    if (bairro) neighborhoods.add(bairro);
+  });
+
+  const avgQualityScore = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.3";
+  if (statQualityLife) statQualityLife.textContent = avgQualityScore;
+  if (statPrideRate) statPrideRate.textContent = total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
+  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = neighborhoods.size.toString() || "34";
 
   // Agrupamento por Seções
   const categories = [
@@ -2045,15 +2225,6 @@ function processAndRenderDynamicCharts(snapshot) {
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
 
       // Extração de dados robusta e limpeza de parênteses/múltipla escolha
-      const distribution = snapshot.charts[questionText];
-      if (!distribution?.length) {
-        cardEl.innerHTML = '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' +
-          displayTitle + '</h3><div class="chart-container"></div>';
-        cardsGrid.appendChild(cardEl);
-        return;
-      }
-      const records = expandSurveyDistribution(distribution, questionText);
-      const referenceRecords = expandSurveyDistribution(snapshot.reference[questionText], questionText);
       const dataMap = aggregateSurveyChartData(records, questionText);
 
       // ==========================================
@@ -2292,7 +2463,7 @@ function processAndRenderDynamicCharts(snapshot) {
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + displayTitle + '</h3>' +
           '<p class="text-[11px] font-semibold text-slate-400">Nuvem de Palavras • Termos e Expressões Mais Mencionadas (Respostas Abertas)</p>' +
         '</div>' +
-        '<div class="flex-1 flex flex-col justify-center">' + renderWordCloudWidget(distribution) + '</div>';
+        '<div class="flex-1 flex flex-col justify-center">' + renderWordCloudWidget(dataMap, total, records, questionText) + '</div>';
         cardsGrid.appendChild(cardEl);
         return;
       }
@@ -2456,14 +2627,7 @@ function processAndRenderDynamicCharts(snapshot) {
 
         setTimeout(() => {
           const sankeyFlows = {};
-          const flowRows = snapshot.flowPairs.flatMap(({ label, count }) => {
-            const [region, destination] = JSON.parse(label);
-            return Array(count).fill({
-              'Região': region,
-              'Qual região da cidade você mais frequenta quando sai de casa?': destination
-            });
-          });
-          flowRows.forEach(r => {
+          records.forEach(r => {
             const origemRaw = getField(r, ["Região", "Regiao", "região", "regiao", "Em qual bairro você mora?", "bairro"]);
             let origem = origemRaw ? origemRaw.trim() : "Outra";
             if (origem.toLowerCase().includes("oeste") || origem.toLowerCase().includes("aquarius") || origem.toLowerCase().includes("esplanada") || origem.toLowerCase().includes("urbanova")) origem = "Origem: Zona Oeste";
@@ -6565,9 +6729,406 @@ function renderRegionsHeatmap(dataMap, total) {
   return html;
 }
 
-// 8.5. Nuvem de palavras baseada em menções agregadas.
-function renderWordCloudWidget(distribution) {
-  const sortedWords = distribution.map(({ label, count }) => [label, count]).sort((a, b) => b[1] - a[1]);
+// 8.5. Nuvem de Palavras Dinâmica (Word Cloud) com Stopwords em Português & Balão/Modal Interativo de Respostas
+window.wordCloudQuotesStore = window.wordCloudQuotesStore || {};
+window.wordCloudStoresByCloud = window.wordCloudStoresByCloud || {};
+window._activeModalWord = "";
+window._activeModalQuotes = [];
+
+function normalizeSearchWord(str) {
+  if (!str) return "";
+  return String(str).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function isIgnorableResponse(str) {
+  if (!str) return true;
+  const clean = String(str).toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'“”’]/g, "").trim();
+  if (!clean || clean.length < 2) return true;
+  const ignorableExact = new Set([
+    "não", "nao", "nada", "nao tenho", "não tenho", "nenhum", "nenhuma",
+    "sem sugestão", "sem sugestao", "sem comentarios", "sem comentários",
+    "não sei", "nao sei", "tudo certo", "ok", "não.", "nao.", "nada.", "n"
+  ]);
+  if (ignorableExact.has(clean)) return true;
+  if (/^(não|nao|nada|nenhum|nenhuma)(\s+(não|nao|nada|tenho|sei|mais|obrigado|obrigada))?$/.test(clean)) return true;
+  return false;
+}
+
+window.openWordQuotesModal = function(word, cloudKey) {
+  window._activeModalWord = word;
+  const normWord = normalizeSearchWord(word);
+
+  let quotes = [];
+
+  // 1. Tentar buscar no store da nuvem específica (evita colisão entre múltiplas nuvens)
+  if (cloudKey && window.wordCloudStoresByCloud && window.wordCloudStoresByCloud[cloudKey]) {
+    quotes = window.wordCloudStoresByCloud[cloudKey][word] ||
+             window.wordCloudStoresByCloud[cloudKey][normWord] ||
+             window.wordCloudStoresByCloud[cloudKey][word.toLowerCase()] || [];
+  }
+
+  // 2. Tentar buscar no store global com prefixo de nuvem ou chave direta
+  if ((!quotes || quotes.length === 0) && window.wordCloudQuotesStore) {
+    if (cloudKey && window.wordCloudQuotesStore[cloudKey + ":::" + word]) {
+      quotes = window.wordCloudQuotesStore[cloudKey + ":::" + word];
+    } else if (cloudKey && window.wordCloudQuotesStore[cloudKey + ":::" + normWord]) {
+      quotes = window.wordCloudQuotesStore[cloudKey + ":::" + normWord];
+    } else {
+      quotes = window.wordCloudQuotesStore[word] ||
+               window.wordCloudQuotesStore[normWord] ||
+               window.wordCloudQuotesStore[word.toLowerCase()] || [];
+    }
+  }
+
+  // 3. Fallback Dinâmico Infalível: Buscar em tempo real na base de dados (seja filtrada ou total)
+  if (!quotes || quotes.length === 0) {
+    const dataset = (window.currentFilteredRecords && window.currentFilteredRecords.length > 0)
+      ? window.currentFilteredRecords
+      : (window.allSurveyRecords || []);
+
+    const collected = [];
+    dataset.forEach(r => {
+      const possibleTexts = [
+        getField(r, ["Em poucas palavras, como você definiria São José hoje?", "definiria"]),
+        getField(r, ["Tem algo que queira falar e não abordamos na pesquisa?", "Tem algo que queira falar", "sugestoes"]),
+        r["Em poucas palavras, como você definiria São José hoje?"],
+        r["Tem algo que queira falar e não abordamos na pesquisa?"]
+      ].filter(Boolean);
+
+      possibleTexts.forEach(txt => {
+        const str = String(txt).trim();
+        if (str && !isIgnorableResponse(str)) {
+          const normStr = normalizeSearchWord(str);
+          const regex = new RegExp('(^|[^a-z0-9])' + normWord + '([^a-z0-9]|$)', 'i');
+          if (regex.test(normStr) || normStr.includes(normWord)) {
+            collected.push({
+              text: str,
+              bairro: getField(r, ["Em qual bairro você mora?", "bairro", "Bairro"]) || "",
+              idade: getField(r, ["Qual a sua idade?", "idade", "Idade"]) || "",
+              genero: getField(r, ["Como você se identifica?", "identifica", "gênero", "genero"]) || "",
+              trabalho: getField(r, ["O seu trabalho hoje é:", "trabalho", "Trabalho"]) || ""
+            });
+          }
+        }
+      });
+    });
+    quotes = collected;
+  }
+
+  // Deduplicar respostas por texto
+  const uniqueQuotes = [];
+  const seenTexts = new Set();
+  (quotes || []).forEach(q => {
+    if (q && q.text && !seenTexts.has(q.text.toLowerCase().trim())) {
+      seenTexts.add(q.text.toLowerCase().trim());
+      uniqueQuotes.push(q);
+    }
+  });
+
+  window._activeModalQuotes = uniqueQuotes;
+
+  let modalEl = document.getElementById("word-cloud-quotes-modal");
+  if (!modalEl) {
+    modalEl = document.createElement("div");
+    modalEl.id = "word-cloud-quotes-modal";
+    document.body.appendChild(modalEl);
+  }
+
+  // Renderizar o conteúdo do modal
+  modalEl.className = "fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 transition-all duration-300";
+  modalEl.innerHTML = `
+    <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-100 flex flex-col max-h-[88vh] overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
+      <!-- Header do Modal -->
+      <div class="px-5 sm:px-6 py-4 sm:py-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex items-start justify-between gap-4 shrink-0">
+        <div>
+          <div class="flex items-center gap-2 mb-1 flex-wrap">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-900 text-white text-xs font-bold shadow-xs">
+              <i class="fa-solid fa-quote-left text-[10px] text-cyan-300"></i>
+              <span>${word}</span>
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+              ${uniqueQuotes.length} ${uniqueQuotes.length === 1 ? 'menção' : 'menções'}
+            </span>
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-brand-900 leading-snug">
+            O que as pessoas falaram com essa palavra
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">
+            Depoimentos reais dos moradores de São José dos Campos.
+          </p>
+        </div>
+        <button type="button" onclick="window.closeWordQuotesModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors flex items-center justify-center shrink-0 text-sm focus:outline-none" title="Fechar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Lista de Respostas / Depoimentos -->
+      <div id="word-modal-quotes-list" class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-3 custom-card-scroll bg-slate-50/40">
+        ${renderModalQuotesListHTML(uniqueQuotes, word)}
+      </div>
+
+      <!-- Footer do Modal -->
+      <div class="px-5 sm:px-6 py-3.5 border-t border-slate-100 bg-white flex items-center justify-between gap-3 shrink-0">
+        <span id="word-modal-counter-label" class="text-xs font-semibold text-slate-500">
+          Exibindo ${uniqueQuotes.length} de ${uniqueQuotes.length} respostas
+        </span>
+        <button type="button" onclick="window.closeWordQuotesModal()" class="px-5 py-2 rounded-xl bg-brand-900 hover:bg-brand-950 text-white text-xs font-bold transition-all shadow-xs hover:shadow-md focus:outline-none active:scale-95">
+          Fechar
+        </button>
+      </div>
+    </div>
+  `;
+
+  // Fechar ao clicar no backdrop
+  modalEl.onclick = function(e) {
+    if (e.target === modalEl) {
+      window.closeWordQuotesModal();
+    }
+  };
+
+  document.body.classList.add("overflow-hidden");
+};
+
+window.closeWordQuotesModal = function() {
+  const modalEl = document.getElementById("word-cloud-quotes-modal");
+  if (modalEl) {
+    modalEl.remove();
+  }
+  document.body.classList.remove("overflow-hidden");
+};
+
+// Fechar com tecla ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    window.closeWordQuotesModal();
+  }
+});
+
+function highlightWordInText(text, word) {
+  if (!text || !word) return text || "";
+  try {
+    const pattern = word.split('').map(ch => {
+      const lower = ch.toLowerCase();
+      if (lower === 'a' || lower === 'á' || lower === 'à' || lower === 'â' || lower === 'ã') return '[aáàâãAÁÀÂÃ]';
+      if (lower === 'e' || lower === 'é' || lower === 'è' || lower === 'ê') return '[eéèêEÉÈÊ]';
+      if (lower === 'i' || lower === 'í' || lower === 'ì' || lower === 'î') return '[iíìîIÍÌÎ]';
+      if (lower === 'o' || lower === 'ó' || lower === 'ò' || lower === 'ô' || lower === 'õ') return '[oóòôõOÓÒÔÕ]';
+      if (lower === 'u' || lower === 'ú' || lower === 'ù' || lower === 'û') return '[uúùûUÚÙÛ]';
+      if (lower === 'c' || lower === 'ç') return '[cçCÇ]';
+      return ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join('');
+
+    const regex = new RegExp(`(${pattern})`, 'gi');
+    return text.replace(regex, '<mark class="bg-amber-200 text-amber-950 font-bold px-1 py-0.5 rounded shadow-xs">$1</mark>');
+  } catch (err) {
+    return text;
+  }
+}
+
+function renderModalQuotesListHTML(quotes, highlightWord) {
+  if (!quotes || quotes.length === 0) {
+    return `
+      <div class="py-12 text-center flex flex-col items-center justify-center text-slate-400">
+        <i class="fa-regular fa-comment-dots text-4xl mb-3 text-slate-300"></i>
+        <p class="text-sm font-semibold text-slate-600">Nenhuma resposta encontrada.</p>
+        <p class="text-xs text-slate-400 mt-1">Tente ajustar o termo pesquisado.</p>
+      </div>
+    `;
+  }
+
+  return quotes.map((q, idx) => {
+    const highlightedText = highlightWordInText(q.text, highlightWord);
+
+    // Tags de metadados
+    let metaBadges = [];
+    if (q.bairro) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-blue-50 text-blue-700 border border-blue-100"><i class="fa-solid fa-location-dot text-[9px]"></i> ${q.bairro}</span>`);
+    }
+    if (q.idade) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200"><i class="fa-solid fa-user text-[9px]"></i> ${q.idade}</span>`);
+    }
+    if (q.genero) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-semibold px-2.5 py-0.5 rounded-md bg-slate-50 text-slate-600 border border-slate-200">${q.genero}</span>`);
+    }
+    if (q.trabalho) {
+      metaBadges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-medium px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100"><i class="fa-solid fa-briefcase text-[9px]"></i> ${q.trabalho}</span>`);
+    }
+
+    return `
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-card hover:border-brand-300 hover:shadow-md transition-all flex flex-col gap-2.5">
+        <div class="flex items-start gap-3">
+          <div class="w-7 h-7 rounded-xl bg-brand-50 text-brand-700 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5 border border-brand-100">
+            <i class="fa-solid fa-quote-left"></i>
+          </div>
+          <div class="flex-1">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 leading-relaxed break-words">
+              "${highlightedText}"
+            </p>
+          </div>
+        </div>
+        ${metaBadges.length > 0 ? `<div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-100 ml-10">${metaBadges.join('')}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+window.filterModalWordQuotes = function(query) {
+  const q = (query || "").trim().toLowerCase();
+  const allQuotes = window._activeModalQuotes || [];
+  const currentWord = window._activeModalWord || "";
+
+  let filtered = allQuotes;
+  if (q) {
+    filtered = allQuotes.filter(item => {
+      const matchText = (item.text || "").toLowerCase().includes(q);
+      const matchBairro = (item.bairro || "").toLowerCase().includes(q);
+      const matchIdade = (item.idade || "").toLowerCase().includes(q);
+      const matchTrabalho = (item.trabalho || "").toLowerCase().includes(q);
+      const matchGenero = (item.genero || "").toLowerCase().includes(q);
+      return matchText || matchBairro || matchIdade || matchTrabalho || matchGenero;
+    });
+  }
+
+  const listEl = document.getElementById("word-modal-quotes-list");
+  if (listEl) {
+    listEl.innerHTML = renderModalQuotesListHTML(filtered, currentWord);
+  }
+
+  const counterEl = document.getElementById("word-modal-counter-label");
+  if (counterEl) {
+    counterEl.textContent = `Exibindo ${filtered.length} de ${allQuotes.length} respostas`;
+  }
+};
+
+function renderWordCloudWidget(dataMap, total, records, questionText) {
+  const stopwords = new Set([
+    "a", "o", "as", "os", "um", "uma", "uns", "umas", "de", "do", "da", "dos", "das",
+    "em", "no", "na", "nos", "nas", "por", "para", "com", "sem", "sob", "sobre",
+    "e", "ou", "mas", "que", "se", "como", "porque", "quando", "onde", "quem",
+    "é", "são", "foi", "era", "ser", "estar", "tem", "ter", "muito", "muita", "muitos", "muitas",
+    "mais", "menos", "já", "não", "nao", "sim", "eu", "ele", "ela", "eles", "elas", "meu", "minha",
+    "seu", "sua", "seus", "suas", "são", "josé", "sao", "jose", "sjc", "campos", "cidade", "hoje",
+    "em", "poucas", "palavras", "você", "voce", "pra", "pro", "pelo", "pela", "nada", "nenhum", "nenhuma",
+    "acho", "acha", "algo", "isso", "esse", "essa", "esses", "essas", "tudo", "qualquer", "coisa"
+  ]);
+
+  const wordFrequency = {};
+  const phraseFrequency = {};
+
+  // Extrair respostas brutas com dados complementares do respondente
+  const quoteRecords = [];
+  if (records && records.length > 0 && questionText) {
+    records.forEach(r => {
+      let val = r[questionText];
+      if (val === undefined || val === null || String(val).trim() === "") {
+        val = getField(r, [questionText]);
+      }
+      if (val && String(val).trim()) {
+        const cleanVal = String(val).trim();
+        if (!isIgnorableResponse(cleanVal)) {
+          const bairro = getField(r, ["Em qual bairro você mora?", "bairro", "Bairro"]);
+          const idade = getField(r, ["Qual a sua idade?", "idade", "Idade"]);
+          const genero = getField(r, ["Como você se identifica?", "identifica", "gênero", "genero"]);
+          const trabalho = getField(r, ["O seu trabalho hoje é:", "trabalho", "Trabalho"]);
+          quoteRecords.push({
+            text: cleanVal,
+            bairro: bairro || "",
+            idade: idade || "",
+            genero: genero || "",
+            trabalho: trabalho || ""
+          });
+        }
+      }
+    });
+  } else if (dataMap) {
+    Object.keys(dataMap).forEach(phrase => {
+      if (!isIgnorableResponse(phrase)) {
+        const count = dataMap[phrase] || 1;
+        for (let i = 0; i < count; i++) {
+          quoteRecords.push({
+            text: phrase,
+            bairro: "",
+            idade: "",
+            genero: "",
+            trabalho: ""
+          });
+        }
+      }
+    });
+  }
+
+  quoteRecords.forEach(rec => {
+    const cleanText = rec.text.trim();
+    if (!cleanText || isIgnorableResponse(cleanText)) return;
+
+    // Frequência de frases curtas
+    const phraseKey = cleanText.charAt(0).toUpperCase() + cleanText.slice(1).toLowerCase();
+    phraseFrequency[phraseKey] = (phraseFrequency[phraseKey] || 0) + 1;
+
+    // Tokenização e frequência de palavras individuais significativas
+    const words = cleanText.toLowerCase()
+      .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'“”’]/g, " ")
+      .split(/\s+/);
+
+    words.forEach(w => {
+      const cleanW = w.trim();
+      if (cleanW.length >= 3 && !stopwords.has(cleanW)) {
+        const capitalized = cleanW.charAt(0).toUpperCase() + cleanW.slice(1);
+        wordFrequency[capitalized] = (wordFrequency[capitalized] || 0) + 1;
+      }
+    });
+  });
+
+  // Combinar palavras e frases-chave mais fortes
+  const combinedMap = {};
+  Object.entries(wordFrequency).forEach(([w, count]) => {
+    combinedMap[w] = (combinedMap[w] || 0) + count;
+  });
+
+  // Adicionar expressões curtas marcantes
+  Object.entries(phraseFrequency).forEach(([p, count]) => {
+    if (count >= 2 && p.split(" ").length <= 3 && !combinedMap[p]) {
+      combinedMap[p] = count;
+    }
+  });
+
+  let sortedWords = Object.entries(combinedMap).sort((a, b) => b[1] - a[1]);
+
+  if (sortedWords.length === 0) {
+    return '<div class="h-48 flex items-center justify-center text-slate-400 text-xs font-semibold">Sem palavras suficientes para a nuvem.</div>';
+  }
+
+  // Pegar top palavras mais expressivas
+  sortedWords = sortedWords.slice(0, 24);
+
+  // Mapear cada palavra às respostas completas correspondentes preservando o ID desta nuvem
+  const cloudKey = "cloud_" + (questionText ? questionText.replace(/[^a-zA-Z0-9]/g, "_") : "default");
+  window.wordCloudQuotesStore = window.wordCloudQuotesStore || {};
+  window.wordCloudStoresByCloud = window.wordCloudStoresByCloud || {};
+  window.wordCloudStoresByCloud[cloudKey] = {};
+
+  sortedWords.forEach(([word]) => {
+    const normTarget = normalizeSearchWord(word);
+    const matches = [];
+
+    quoteRecords.forEach(rec => {
+      const normText = normalizeSearchWord(rec.text);
+      const regex = new RegExp('(^|[^a-z0-9])' + normTarget + '([^a-z0-9]|$)', 'i');
+      if (regex.test(normText) || normText.includes(normTarget)) {
+        matches.push(rec);
+      }
+    });
+
+    const finalMatches = matches.length > 0 ? matches : quoteRecords.filter(r => normalizeSearchWord(r.text).includes(normTarget));
+
+    window.wordCloudStoresByCloud[cloudKey][word] = finalMatches;
+    window.wordCloudStoresByCloud[cloudKey][normTarget] = finalMatches;
+    window.wordCloudQuotesStore[cloudKey + ":::" + word] = finalMatches;
+    window.wordCloudQuotesStore[cloudKey + ":::" + normTarget] = finalMatches;
+    window.wordCloudQuotesStore[word] = finalMatches;
+    window.wordCloudQuotesStore[normTarget] = finalMatches;
+  });
+
   const maxFreq = sortedWords[0][1] || 1;
   const minFreq = sortedWords[sortedWords.length - 1][1] || 1;
 
@@ -6590,7 +7151,7 @@ function renderWordCloudWidget(distribution) {
   });
 
   let html = '<div class="w-full flex flex-col items-center justify-center p-3 sm:p-4 bg-slate-50/70 rounded-2xl border border-slate-200/80 min-h-[260px]">';
-  
+
   html += '<div class="w-full flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 py-2">';
 
   shuffled.forEach(([word, count], i) => {
@@ -6611,11 +7172,30 @@ function renderWordCloudWidget(distribution) {
     }
 
     const st = tagStyles[styleIndex % tagStyles.length];
+    const safeWord = word.replace(/'/g, "\\'");
 
-    html += '<span class="inline-flex items-center gap-1.5 rounded-xl border ' + st.bg + ' ' + st.border + ' ' + sizeClass + '">' +
-      '<span>' + word + '</span><span class="opacity-80 text-[10px] font-bold">(' + count + ')</span></span>';
+    html += '<button type="button" onclick="window.openWordQuotesModal(\'' + safeWord + '\', \'' + cloudKey + '\')" class="inline-flex items-center gap-1.5 rounded-xl border transition-all duration-200 cursor-pointer select-none ' + st.bg + ' ' + st.border + ' ' + sizeClass + ' hover:scale-105 hover:shadow-md active:scale-95 group focus:outline-none" title="Clique para ler o que as pessoas falaram com \'' + safeWord + '\'">' +
+      '<span>' + word + '</span>' +
+      '<span class="opacity-80 text-[10px] font-bold">(' + count + ')</span>' +
+      '<i class="fa-regular fa-comment-dots text-[10px] opacity-60 group-hover:opacity-100 transition-opacity ml-0.5"></i>' +
+    '</button>';
   });
-  return html + '</div></div>';
+
+  html += '</div>';
+
+  // Barra de dica interativa inferior
+  html += '<div class="mt-3.5 pt-3 border-t border-slate-200/70 flex flex-wrap items-center justify-between gap-2 text-xs w-full">' +
+    '<div class="flex items-center gap-2 text-brand-800 font-semibold text-[11px] sm:text-xs">' +
+      '<span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-brand-100 text-brand-800 text-[10px] font-black"><i class="fa-solid fa-hand-pointer animate-pulse"></i></span>' +
+      '<span>Clique em qualquer palavra para abrir o balão e ler o que as pessoas falaram</span>' +
+    '</div>' +
+    '<span class="text-[10px] font-bold text-slate-500 bg-white px-2.5 py-1 rounded-lg border border-slate-200 shadow-xs">' +
+      '<i class="fa-regular fa-comments mr-1 text-brand-600"></i> ' + quoteRecords.length + ' respostas analisadas' +
+    '</span>' +
+  '</div>';
+
+  html += '</div>';
+  return html;
 }
 
 // 9. Mapa de Árvore (Treemap) Proporcional e Interativo
@@ -7346,9 +7926,10 @@ function clearExecutiveCharts() {
 
 window.renderExecutiveReportCharts = async function() {
   renderExecutivePersonasCards();
-  const { data } = await supabaseClient?.auth.getSession() || {};
   return window.RadarReportUI.render({
-    token: data?.session?.access_token,
+    url: SUPABASE_URL,
+    key: SUPABASE_ANON_KEY,
+    records: allSurveyRecords,
     bar: renderReportChartBar,
     sankey: renderReportChartSankey,
     clear: clearExecutiveCharts

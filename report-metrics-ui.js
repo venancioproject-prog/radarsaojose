@@ -2,8 +2,8 @@
 (function (root) {
   'use strict';
   const M = root.RadarReportMetrics, B = root.RadarReportBindings;
-  let engine, revision = 0, initialized = false, state = 'IDLE';
-  const genders = ['Homem Cis', 'Mulher Cis', 'Outros', 'Homem Trans'];
+  let source, engine, revision = 0, initialized = false, state = 'IDLE';
+  let genders = ['Homem Cis', 'Mulher Cis', 'Outros', 'Homem Trans'];
   const bindings = [], unresolved = [], charts = {};
   const ids = { gender: 'gender', income: 'income', age: 'age', region: 'region', marital: 'marital', work: 'work', home: 'house', politics: 'politics', quality: 'quality', pride: 'pride' };
   const percentPattern = /(?:(?<!%)-)?\d+(?:[.,]\d+)?\s*%/g;
@@ -155,7 +155,19 @@
     document.querySelectorAll('[data-report-live-metric]').forEach(element => bindings.push({ element, spec: { name: element.dataset.reportLiveMetric }, block: Number(element.closest('article')?.dataset.reportBlock) || 14, original: element.textContent.trim() || '—' }));
   }
   function result(spec) {
-    return engine?.results.get(JSON.stringify(spec)) || null;
+    if (!spec || !engine) return null;
+    if (spec.type === 'sample' || spec.type === 'total' || (spec.type === 'valid' && !spec.field)) {
+      return { formatted: M.formatNumberBR(engine.n, 0) };
+    }
+    if (!spec.name && !spec.field) return null;
+    try {
+      const r = spec.name ? engine.metric(spec.name) : engine.calculate(spec.type === 'valid'
+        ? { ...spec, type: 'percent', options: [] } : spec);
+      if (spec.type === 'valid') return { ...r, formatted: M.formatNumberBR(r.valid, 0) };
+      return spec.type === 'numerator' ? { ...r, formatted: M.formatNumberBR(r.numerator, 0) } : r;
+    } catch (_) {
+      return null;
+    }
   }
   function paint() {
     const report = document.getElementById('executive-report-view');
@@ -277,51 +289,32 @@
       console.warn('Error rendering sankey chart:', err);
     }
   }
-  async function render({ token, filters, bar, sankey, clear } = {}) {
+  async function render({ url, key, records, filters, bar, sankey, clear } = {}) {
     initialize();
     const current = ++revision;
-    if (!token) {
+    if (!url || !key) {
       engine = null;
       state = 'PREVIEW';
-      if (clear) clear();
+      clear?.();
       paint();
       return audit();
     }
-    const selected = filters ?? filtersFromUI();
-    const specs = [...bindings.map(binding => binding.spec), { name: 'pride' }, { name: 'external' }];
-    document.querySelectorAll('[data-report-indicator]').forEach(el => specs.push({ name: el.dataset.reportIndicator }));
     try {
-      const response = await fetch('/api/survey-report', {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filters: selected, specs }),
-        cache: 'no-store'
-      });
+      if (!source) source = root.RadarReportSource.create({ url, key });
+      const snapshot = records?.length ? { records, metadata: { provider: 'Supabase' } } : await source.load();
       if (current !== revision) return;
-      if (!response.ok) throw new Error(response.status === 403 ? 'PREVIEW' : 'SOURCE_ERROR');
-      const snapshot = await response.json();
-      if (current !== revision) return;
-      const results = new Map(specs.map((spec, index) => [JSON.stringify(spec), snapshot.metrics[index]]));
-      engine = {
-        N: snapshot.N,
-        n: snapshot.n,
-        filters: selected,
-        results,
-        distribution: field => snapshot.distributions[field] || { valid: 0, categories: [] },
-        metric: name => results.get(JSON.stringify({ name })) || {},
-        flows: () => snapshot.flows,
-        audit: () => ({ N: snapshot.N, n: snapshot.n, filters: selected })
-      };
+      genders = M.create(snapshot.records, snapshot.metadata).distribution('gender').categories.map(c => c.category);
+      engine = M.create(snapshot.records, snapshot.metadata, filters ?? filtersFromUI());
       state = 'READY';
-      if (clear) clear();
+      clear?.();
       paint();
       paintAllCharts(bar, sankey);
       return audit();
-    } catch (error) {
+    } catch (_) {
       if (current !== revision) return;
       engine = null;
-      state = error.message === 'PREVIEW' ? 'PREVIEW' : 'SOURCE_ERROR';
-      if (clear) clear();
+      state = 'SOURCE_ERROR';
+      clear?.();
       paint();
       return audit();
     }
