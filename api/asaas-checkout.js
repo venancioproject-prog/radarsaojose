@@ -231,12 +231,15 @@ function isPublicSupabaseKey(key) {
 module.exports = async function handler(req, res) {
   if (req.method === 'GET' && req.query?.browserConfig === '1') {
     const preview = process.env.VERCEL_ENV === 'preview';
-    const url = process.env.SUPABASE_URL;
-    const key = process.env.SUPABASE_PUBLISHABLE_KEY || (!preview && process.env.SUPABASE_ANON_KEY);
+    const url = process.env.SUPABASE_URL?.trim();
+    const key = process.env.SUPABASE_PUBLISHABLE_KEY?.trim() || (!preview && process.env.SUPABASE_ANON_KEY?.trim());
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('X-Content-Type-Options', 'nosniff');
-    if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(url || '') || !isPublicSupabaseKey(key)) {
-      return res.status(503).json({success:false, code:'BROWSER_CONFIG_UNAVAILABLE'});
+    if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(url || '')) {
+      return res.status(503).json({success:false, code:'BROWSER_DATABASE_URL_INVALID'});
+    }
+    if (!isPublicSupabaseKey(key)) {
+      return res.status(503).json({success:false, code:'BROWSER_DATABASE_KEY_INVALID'});
     }
     res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
     return res.status(200).send('window.radarSupabaseConfig = ' + JSON.stringify({url, key}) + ';');
