@@ -97,7 +97,7 @@ fotos_radar/capa-radar-pessoas.png
 fotos_radar/capa_radar_fundo_branco.png
 fotos_radar/pexels-edmond-dantes-4340082.jpg
 fotos_radar/pexels-anna-nekrashevich-6801648.jpg
-!midia_sjc/logos_veiculos/*
+
 /0*.png
 /0*.jpg
 /capa*.png
@@ -143,3 +143,6 @@ scripts/audit_challenger_results.json
 scripts/build_*.py
 
 public-images/
+
+# Logos oficiais dos canais de midia
+!midia_sjc/logos_veiculos/*

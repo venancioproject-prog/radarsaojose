@@ -329,10 +329,10 @@ data/radar_hub/data_lake_20261009/mobilidade/derived/infosiga-recorte-municipal-
 *.mov
 *.webm
 *.avi
-0*.png
-0*.jpg
-capa*.png
-download.png
+/0*.png
+/0*.jpg
+/capa*.png
+/download.png
 "capa Radar*.png"
 "Copy of*.mp4"
 "video de fundo*.mp4"
@@ -405,7 +405,7 @@ CONTINUAR-PLANOS.md
 HANDOFF.md
 app.updated.html
 assets/
-[0-9]*.png
+/[0-9]*.png
 data/capitulo-*.json
 data/migrations/
 data/report-methodology-sources.json
@@ -419,3 +419,6 @@ scripts/audit_challenger_results.json
 scripts/build_*.py
 
 public-images/
+
+# Logos oficiais dos canais de midia
+!midia_sjc/logos_veiculos/*
