@@ -14,6 +14,9 @@
     }
     html.dark.app-booting #app-boot { background: #06162a; color: #e2e8f0; }
     #app-boot img { width: 100px; height: auto; }
+    .app-logo-dark { display: none; }
+    html.dark .app-logo-light { display: none; }
+    html.dark .app-logo-dark { display: block; }
     #app-boot .app-boot-spinner {
       width: 28px; height: 28px; border: 3px solid #cbd5e1;
       border-top-color: #0077b6; border-radius: 50%;
@@ -1554,7 +1557,8 @@
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
   <div id="app-boot" role="status" aria-live="polite">
-    <img src="fotos_radar/logo_radar.png?v=20261105" alt="Radar São José" />
+    <img class="app-logo-light" src="fotos_radar/logo_radar.png?v=20261105" alt="Radar São José" />
+    <img class="app-logo-dark" src="fotos_radar/logobranco_radar.png?v=20261105" alt="Radar São José" />
     <span class="app-boot-spinner" aria-hidden="true"></span>
     <span>Preparando seu acesso…</span>
   </div>
@@ -1582,9 +1586,10 @@
           <img 
             src="fotos_radar/logo_login_radar.png?v=20261105" 
             alt="Radar São José" 
-            class="h-16 sm:h-20 max-w-[260px] object-contain drop-shadow-xs"
+            class="app-logo-light h-16 sm:h-20 max-w-[260px] object-contain drop-shadow-xs"
             onerror="this.src='fotos_radar/logo_radar.png?v=20261105'"
           />
+          <img class="app-logo-dark h-16 sm:h-20 max-w-[260px] object-contain drop-shadow-xs" src="fotos_radar/logobranco_radar.png?v=20261105" alt="Radar São José" />
         </div>
         <h1 class="text-2xl font-black tracking-tight text-brand-900">Dashboard Executivo</h1>
         <p class="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Inteligência & Análise 2026/2027</p>
