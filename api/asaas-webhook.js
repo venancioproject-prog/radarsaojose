@@ -61,10 +61,23 @@ function verifyAsaasWebhookToken(received, expected) {
 }
 
 async function readRawBody(req) {
-  if (Buffer.isBuffer(req.rawBody)) return req.rawBody;
-  if (typeof req.rawBody === 'string') return Buffer.from(req.rawBody, 'utf8');
-  if (Buffer.isBuffer(req.body)) return req.body;
-  if (typeof req.body === 'string') return Buffer.from(req.body, 'utf8');
+  function boundedBuffer(value) {
+    // Check strings before allocating their UTF-8 buffer; characters are not bytes.
+    const size = Buffer.isBuffer(value) ? value.length : Buffer.byteLength(value, 'utf8');
+    if (size > MAX_WEBHOOK_BODY_BYTES) throw new BillingError(413, 'WEBHOOK_PAYLOAD_TOO_LARGE');
+    return Buffer.isBuffer(value) ? value : Buffer.from(value, 'utf8');
+  }
+  if (Buffer.isBuffer(req.rawBody) || typeof req.rawBody === 'string') return boundedBuffer(req.rawBody);
+  if (Buffer.isBuffer(req.body) || typeof req.body === 'string') return boundedBuffer(req.body);
+  // Some runtimes provide a parsed body as well as an async iterable request.
+  // Validate the representation that the handler will actually process.
+  if (req.body && typeof req.body === 'object') {
+    let serialized;
+    try { serialized = JSON.stringify(req.body); }
+    catch (_) { throw new BillingError(400, 'INVALID_JSON'); }
+    if (typeof serialized !== 'string') throw new BillingError(400, 'INVALID_JSON');
+    return boundedBuffer(serialized);
+  }
   if (req && typeof req[Symbol.asyncIterator] === 'function') {
     const chunks = [];
     let total = 0;
@@ -75,9 +88,6 @@ async function readRawBody(req) {
       chunks.push(buf);
     }
     return Buffer.concat(chunks);
-  }
-  if (req.body && typeof req.body === 'object') {
-    return Buffer.from(JSON.stringify(req.body), 'utf8');
   }
   return Buffer.alloc(0);
 }
@@ -95,8 +105,10 @@ function checkAmount(order, payment) {
   if (order.quote?.requiresGatewayScheduleReplacement) throw new BillingError(409, 'SCHEDULE_RECONCILIATION_REQUIRED');
   if (payment.currency !== undefined && payment.currency !== 'BRL') throw new BillingError(409, 'PAYMENT_CURRENCY_MISMATCH');
   const count = order.installment_count;
-  // Individual charge value, not the annual total. Subsequent installments require persisted mapping.
-  const expected = count > 1 ? order.quote?.installments?.[0] : Number(order.amount_cents);
+  const gatewayPayments = order.quote?.gatewayPayments;
+  const expected = count === 1 ? Number(order.amount_cents) : gatewayPayments
+    ? (Object.hasOwn(gatewayPayments, payment.id) ? gatewayPayments[payment.id] : undefined)
+    : order.quote?.installments?.[0];
   if (!Number.isSafeInteger(expected) || cents(payment.value) !== expected) throw new BillingError(409, 'PAYMENT_AMOUNT_MISMATCH');
   if (payment.billingType !== order.payment_method) throw new BillingError(409, 'PAYMENT_METHOD_MISMATCH');
 }
@@ -104,10 +116,10 @@ function checkAmount(order, payment) {
 async function verifyPaymentWithAsaas(paymentId, order, eventType) {
   const env = (process.env.ASAAS_ENVIRONMENT || 'sandbox').toLowerCase();
   const apiKey = env === 'sandbox'
-    ? (process.env.ASAAS_SANDBOX_API_KEY || process.env.ASAAS_API_KEY)
+    ? process.env.ASAAS_SANDBOX_API_KEY
     : process.env.ASAAS_API_KEY;
   const apiUrl = process.env.ASAAS_API_URL ||
-    (env === 'sandbox' ? 'https://sandbox.asaas.com/api/v3' : 'https://api.asaas.com/v3');
+    (env === 'sandbox' ? 'https://api-sandbox.asaas.com/v3' : 'https://api.asaas.com/v3');
 
   if (!apiKey) throw new BillingError(503, 'ASAAS_NOT_CONFIGURED');
   if (typeof fetch !== 'function') throw new BillingError(503, 'ASAAS_VERIFICATION_FAILED');
@@ -117,6 +129,7 @@ async function verifyPaymentWithAsaas(paymentId, order, eventType) {
     response = await fetch(apiUrl + '/payments/' + encodeURIComponent(paymentId), {
       method: 'GET',
       headers: { access_token: apiKey, 'Content-Type': 'application/json' },
+      redirect: 'error',
       signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined
     });
   } catch (_) {
@@ -126,7 +139,7 @@ async function verifyPaymentWithAsaas(paymentId, order, eventType) {
 
   const live = await response.json();
   if (!live || live.id !== paymentId) throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
-  if (live.externalReference !== undefined && live.externalReference !== null && live.externalReference !== order.id) {
+  if ((order.quote?.gatewayPayments || live.externalReference != null) && live.externalReference !== order.id) {
     throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
   }
   if (live.billingType && live.billingType !== order.payment_method) {
@@ -222,9 +235,16 @@ async function handler(req, res) {
     }
 
     const orders = await db('billing_orders?asaas_payment_id=eq.' + encodeURIComponent(payment.id) + '&select=*');
-    const order = orders?.[0];
+    let order = orders?.[0];
+    if (!order && typeof payment.externalReference === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(payment.externalReference)) {
+      const candidates = await db('billing_orders?id=eq.' + encodeURIComponent(payment.externalReference) + '&select=*');
+      const candidate = candidates?.[0];
+      if (candidate?.quote?.gatewayPayments && Object.hasOwn(candidate.quote.gatewayPayments, payment.id)) order = candidate;
+    }
     // Checkout alone binds the payment; arbitrary externalReference never grants access.
-    if (!order) throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+    if (!order || (order.quote?.gatewayPayments && !Object.hasOwn(order.quote.gatewayPayments, payment.id))) {
+      throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+    }
     if (payment.externalReference !== undefined && payment.externalReference !== null && payment.externalReference !== order.id) {
       throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
     }
@@ -244,7 +264,7 @@ async function handler(req, res) {
 
     // Despacho de e-mail seguro e desacoplado após confirmação persistida
     let emailStatus = 'ignored';
-    if (!result.duplicate && !result.ignored && ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
+    if (!result.duplicate && !result.ignored && !result.installmentUpdated && ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
       try {
         const emailRes = await sendConfirmationEmail({ order, event: stored.payload });
         emailStatus = emailRes.status;

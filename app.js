@@ -252,8 +252,7 @@ window.switchMainTab = function(tabName) {
 // 2. CONFIGURAÇÕES GERAIS E ESTATÍSTICAS
 // ==========================================
 // ==========================================
-const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+const { url: SUPABASE_URL, key: SUPABASE_ANON_KEY } = window.radarSupabaseConfig || {};
 const POPULACAO_SJC = 737310;
 const Z_CONFIDENCE_95 = 1.96;
 const P_PROPORTION = 0.5;
@@ -265,7 +264,7 @@ let chartInstances = {};
 
 function initSupabase() {
   try {
-    if (window.supabase && typeof window.supabase.createClient === "function") {
+    if (SUPABASE_URL && SUPABASE_ANON_KEY && typeof window.supabase?.createClient === "function") {
       supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth: {
           persistSession: true,
@@ -876,26 +875,19 @@ window.refreshConfirmedPlan = async function() {
     window.appState.user = data.user;
     window.appState.profile = result.data;
     window.appState.role = result.data.role || 'usuario';
-    let effectivePlan = result.data.plan_type || 'gratis';
-    if (typeof supabaseClient.auth.getSession === 'function' && typeof fetch === 'function') {
-      try {
-        const sessionRes = await supabaseClient.auth.getSession();
-        const token = sessionRes?.data?.session?.access_token;
-        if (token) {
-          const entRes = await fetch('/api/billing-licenses?action=entitlement', {
-            headers: { Authorization: 'Bearer ' + token }
-          });
-          if (entRes.ok) {
-            const entJson = await entRes.json();
-            if (entJson?.success && entJson?.entitlement?.planType) {
-              window.appState.entitlement = entJson.entitlement;
-              effectivePlan = entJson.entitlement.planType;
-            }
-          }
-        }
-      } catch (_) {}
+    const sessionRes = await supabaseClient.auth.getSession();
+    const token = sessionRes?.data?.session?.access_token;
+    if (!token) throw new Error('Entre na sua conta para verificar o pagamento.');
+    const entRes = await fetch('/api/billing-licenses?action=entitlement', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    if (!entRes.ok) throw new Error('Não foi possível confirmar seu plano.');
+    const entJson = await entRes.json();
+    if (!entJson?.success || !entJson?.entitlement?.planType) {
+      throw new Error('Não foi possível confirmar seu plano.');
     }
-    window.appState.plan_type = effectivePlan;
+    window.appState.entitlement = entJson.entitlement;
+    window.appState.plan_type = entJson.entitlement.planType;
     window.applyPlanRestrictions();
     return window.appState.plan_type;
   } catch (error) {

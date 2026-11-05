@@ -38,8 +38,7 @@ function loadEnv() {
 loadEnv();
 
 const ASAAS_ENVIRONMENT = (process.env.ASAAS_ENVIRONMENT || 'sandbox').toLowerCase();
-const ASAAS_API_KEY = process.env.ASAAS_SANDBOX_API_KEY || process.env.ASAAS_API_KEY;
-const ASAAS_API_URL = process.env.ASAAS_API_URL || (ASAAS_ENVIRONMENT === 'sandbox' ? "https://sandbox.asaas.com/api/v3" : "https://api.asaas.com/v3");
+const ASAAS_API_URL = process.env.ASAAS_API_URL || (ASAAS_ENVIRONMENT === 'sandbox' ? "https://api-sandbox.asaas.com/v3" : "https://api.asaas.com/v3");
 
 const RATE_LIMIT_BUCKETS = new Map();
 function checkRateLimit(key, maxRequests, windowMs = 60000) {
@@ -219,7 +218,29 @@ function luhnCheck(num) {
 const pricing = require('../lib/pricing');
 const billing = require('../lib/billing-store');
 
+function isPublicSupabaseKey(key) {
+  if (/^sb_publishable_[A-Za-z0-9_-]+$/.test(key || '')) return true;
+  if (!/^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(key || '')) return false;
+  try {
+    return JSON.parse(Buffer.from(key.split('.')[1], 'base64url').toString('utf8')).role === 'anon';
+  } catch (_) {
+    return false;
+  }
+}
+
 module.exports = async function handler(req, res) {
+  if (req.method === 'GET' && req.query?.browserConfig === '1') {
+    const preview = process.env.VERCEL_ENV === 'preview';
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_PUBLISHABLE_KEY || (!preview && process.env.SUPABASE_ANON_KEY);
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(url || '') || !isPublicSupabaseKey(key)) {
+      return res.status(503).json({success:false, code:'BROWSER_CONFIG_UNAVAILABLE'});
+    }
+    res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    return res.status(200).send('window.radarSupabaseConfig = ' + JSON.stringify({url, key}) + ';');
+  }
   if (req.method === 'GET') return res.status(200).json({success:true, plans:PLANS_CONFIG});
   if (req.method !== 'POST') return res.status(405).json({success:false, code:'METHOD_NOT_ALLOWED'});
   try {
@@ -255,6 +276,9 @@ module.exports = async function handler(req, res) {
     if (body.action === 'quote') {
       if (!checkRateLimit('quote:' + user.id, 40, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
       return res.status(200).json({success:true, quote, plan});
+    }
+    if (body.expectedAmountCents !== undefined && body.expectedAmountCents !== quote.amountCents) {
+      throw new billing.BillingError(409, 'PRICE_CHANGED');
     }
     if (!checkRateLimit('pay:' + user.id, 8, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
     if (quote.replacementSchedule) throw new billing.BillingError(409, 'INSTALLMENT_REPLACEMENT_REQUIRES_RECONCILIATION');
@@ -294,11 +318,12 @@ module.exports = async function handler(req, res) {
       const m = methodOverride || (payload ? 'POST' : 'GET');
       const response = await fetch(ASAAS_API_URL+path,{method:m,
         headers:{access_token:apiKey,'Content-Type':'application/json'},
-        ...(payload ? {body:JSON.stringify(payload)} : {}),signal:AbortSignal.timeout(10000)});
+        ...(payload ? {body:JSON.stringify(payload)} : {}),
+        redirect:'error', signal:AbortSignal.timeout(m === 'POST' && path === '/payments' && paymentMethod === 'CREDIT_CARD' ? 60000 : 10000)});
       if (!response.ok) throw new billing.BillingError(502, 'ASAAS_REQUEST_FAILED');
       return response.json();
     }
-    const existing = await billing.db('billing_orders?user_id=eq.'+encodeURIComponent(user.id)+'&status=eq.pending&select=id,asaas_payment_id,expires_at');
+    const existing = await billing.db('billing_orders?user_id=eq.'+encodeURIComponent(user.id)+'&status=eq.pending&select=id,asaas_payment_id,installment_count,expires_at');
     if (existing?.length) {
       for (const pendingOrd of existing) {
         const expMs = pendingOrd.expires_at ? Date.parse(pendingOrd.expires_at) : NaN;
@@ -308,6 +333,7 @@ module.exports = async function handler(req, res) {
         // Pending order past expires_at: never unlock by clock alone; verify with Asaas and guard against mid-flight state changes.
         try {
           if (pendingOrd.asaas_payment_id) {
+            if (pendingOrd.installment_count > 1) throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
             const payId = pendingOrd.asaas_payment_id;
             const gatewayEvents = await billing.db('billing_gateway_events?payment_id=eq.' + encodeURIComponent(payId) + '&select=event_id,event_type,status');
             if (Array.isArray(gatewayEvents) && gatewayEvents.some(ev => ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(ev.event_type))) {
@@ -315,19 +341,22 @@ module.exports = async function handler(req, res) {
             }
             const live = await asaas('/payments/' + encodeURIComponent(payId));
             const paidStates = ['RECEIVED', 'CONFIRMED', 'RECEIVED_IN_CASH', 'DUNNING_RECEIVED'];
-            if (!live?.id || paidStates.includes(live.status)) {
+            if (live?.id !== payId || paidStates.includes(live.status)) {
               throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
             }
             if (live.status === 'PENDING' && !live.deleted) {
               const delRes = await asaas('/payments/' + encodeURIComponent(payId), null, 'DELETE');
-              if (!delRes?.deleted) {
+              if (delRes?.deleted !== true) {
                 throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
               }
               const recheck = await asaas('/payments/' + encodeURIComponent(payId));
-              if (paidStates.includes(recheck?.status) || !recheck?.deleted) {
+              if (recheck?.id !== payId || paidStates.includes(recheck?.status) || recheck?.deleted !== true) {
                 throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
               }
-            } else if (!live.deleted && !['OVERDUE', 'REFUNDED', 'REFUND_REQUESTED'].includes(live.status)) {
+            } else if (live.deleted !== true) {
+              // Overdue/refund status alone does not establish that the old charge
+              // is safely closed. Keep the order pending for reconciliation;
+              // do not silently replace it or decide a refund policy here.
               throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
             }
             const canceledRows = await billing.db(
@@ -344,10 +373,10 @@ module.exports = async function handler(req, res) {
           } else {
             const found = await asaas('/payments?externalReference=' + encodeURIComponent(pendingOrd.id));
             const items = Array.isArray(found?.data) ? found.data : null;
-            if (!items) throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
+            if (!items || found.hasMore) throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
             if (items.length > 0) {
               const first = items[0];
-              if (first?.id) {
+              if (items.length === 1 && first?.id && pendingOrd.installment_count <= 1) {
                 await billing.db('billing_orders?id=eq.' + encodeURIComponent(pendingOrd.id) + '&status=eq.pending', {
                   method: 'PATCH',
                   body: JSON.stringify({ asaas_payment_id: first.id })
@@ -380,7 +409,7 @@ module.exports = async function handler(req, res) {
     const order = orders?.[0];
     if (!order?.id) throw new billing.BillingError(503, 'ORDER_NOT_PERSISTED');
     const customer = await asaas('/customers',{name,email:user.email,cpfCnpj:document.clean,
-      mobilePhone:cleanPhone,notificationDisabled:false});
+      mobilePhone:cleanPhone,notificationDisabled:ASAAS_ENVIRONMENT === 'sandbox'});
     if (!customer.id) throw new billing.BillingError(502, 'ASAAS_CUSTOMER_MISSING');
     const payload = {customer:customer.id,billingType:paymentMethod,dueDate:now.toISOString().slice(0,10),
       description:plan.description,externalReference:order.id};
@@ -409,7 +438,38 @@ module.exports = async function handler(req, res) {
     }
     const payment = await asaas('/payments',payload);
     if (!payment.id) throw new billing.BillingError(502, 'ASAAS_PAYMENT_MISSING');
-    await billing.db('billing_orders?id=eq.'+encodeURIComponent(order.id), {method:'PATCH',body:JSON.stringify({asaas_payment_id:payment.id})});
+    const binding = { asaas_payment_id: payment.id };
+    if (quote.installments.length > 1) {
+      if (!payment.installment) throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
+      const schedule = await asaas('/installments/' + encodeURIComponent(payment.installment) + '/payments');
+      if (!Array.isArray(schedule.data) || schedule.hasMore || schedule.data.length !== quote.installments.length) {
+        throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
+      }
+      const paymentIds = new Set();
+      const numbers = new Set();
+      const gatewayPayments = Object.create(null);
+      let total = 0;
+      for (const entry of schedule.data) {
+        const number = entry.installmentNumber;
+        const amount = Math.round(Number(entry.value) * 100);
+        if (typeof entry.id !== 'string' || !entry.id || paymentIds.has(entry.id) ||
+            !Number.isInteger(number) || number < 1 || number > quote.installments.length || numbers.has(number) ||
+            entry.externalReference !== order.id || entry.installment !== payment.installment ||
+            entry.billingType !== paymentMethod || !Number.isSafeInteger(amount) || amount <= 0 ||
+            Math.abs(amount - quote.installments[number - 1]) > 1) {
+          throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
+        }
+        paymentIds.add(entry.id);
+        numbers.add(number);
+        gatewayPayments[entry.id] = amount;
+        total += amount;
+      }
+      if (total !== quote.amountCents || !paymentIds.has(payment.id)) {
+        throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
+      }
+      binding.quote = { ...order.quote, ...quote, customerEmail:user.email, customerName:name, gatewayPayments };
+    }
+    await billing.db('billing_orders?id=eq.'+encodeURIComponent(order.id), {method:'PATCH',body:JSON.stringify(binding)});
     // CRM sync is non-blocking after the order and Asaas payment are bound, preventing 503 after card authorization.
     try {
       const people = await billing.db('crm_pessoas?email=eq.'+encodeURIComponent(user.email)+'&select=id');
@@ -428,8 +488,15 @@ module.exports = async function handler(req, res) {
     }
     let pix = null;
     if (paymentMethod === 'PIX') {
-      const qr = await asaas('/payments/'+encodeURIComponent(payment.id)+'/pixQrCode');
-      pix = {qrCodeImage:'data:image/png;base64,'+qr.encodedImage,copyPasteKey:qr.payload,expirationDate:qr.expirationDate};
+      try {
+        const qr = await asaas('/payments/'+encodeURIComponent(payment.id)+'/pixQrCode');
+        if (qr.encodedImage && qr.payload) {
+          pix = {qrCodeImage:'data:image/png;base64,'+qr.encodedImage,copyPasteKey:qr.payload,expirationDate:qr.expirationDate};
+        }
+      } catch (_) {
+        // O pedido já está vinculado a uma cobrança. O checkout oferece a fatura
+        // do Asaas quando a geração do QR não está disponível.
+      }
     }
     return res.status(200).json({success:true,environment:ASAAS_ENVIRONMENT,sandbox:ASAAS_ENVIRONMENT==='sandbox',
       orderId:order.id,quote,plan,

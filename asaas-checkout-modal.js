@@ -841,9 +841,6 @@
               <button type="button" role="tab" aria-selected="false" id="tabPayCard" onclick="window.setAsaasPaymentMethod('CREDIT_CARD')" class="asaas-method-tab">
                 <i class="fa-regular fa-credit-card text-sky-400"></i> Cartão (12x)
               </button>
-              <button type="button" role="tab" aria-selected="false" id="tabPayBoleto" onclick="window.setAsaasPaymentMethod('BOLETO')" class="asaas-method-tab">
-                <i class="fa-solid fa-barcode text-amber-400"></i> Boleto
-              </button>
             </div>
           </div>
 
@@ -876,6 +873,16 @@
                 <input type="text" id="asaasCardCvv" placeholder="123" maxlength="4" class="asaas-text-input" />
               </div>
             </div>
+            <div class="asaas-field-row">
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasCardPostalCode">CEP do titular</label>
+                <input type="text" id="asaasCardPostalCode" inputmode="numeric" maxlength="9" class="asaas-text-input" />
+              </div>
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasCardAddressNumber">Número do endereço</label>
+                <input type="text" id="asaasCardAddressNumber" maxlength="30" class="asaas-text-input" />
+              </div>
+            </div>
           </div>
 
           <!-- BOTÃO PRINCIPAL DE SUBMISSÃO -->
@@ -893,9 +900,9 @@
             <div class="asaas-success-icon">
               <i class="fa-solid fa-check"></i>
             </div>
-            <h4 class="asaas-success-title">Assinatura Aprovada com Sucesso!</h4>
+            <h4 class="asaas-success-title">Solicitação de pagamento registrada</h4>
             <p class="asaas-success-text">
-              Sua contratação no Asaas Sandbox foi processada e confirmada. Seu acesso completo já está ativo.
+              Verifique a confirmação abaixo para atualizar seu acesso.
             </p>
           </div>
 
@@ -920,6 +927,12 @@
                 </button>
               </div>
             </div>
+          </div>
+
+          <div id="resultPixInvoiceBox" style="display:none;" class="asaas-success-card">
+            <h4 class="asaas-success-title">Cobrança Pix registrada</h4>
+            <p class="asaas-success-text">O QR Code ficou indisponível nesta tela.</p>
+            <a id="asaasPixInvoiceLink" target="_blank" rel="noopener noreferrer">Abrir cobrança no Asaas</a>
           </div>
 
           <!-- Sucesso Boleto -->
@@ -1017,7 +1030,7 @@
       const up = UPGRADE_PRICING[key];
       if (up) {
         banner.style.display = 'flex';
-        bannerText.innerHTML = `Você já possui o <strong>${up.fromName}</strong>. Pague apenas a <strong>diferença de R$ ${up.totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} (12x de R$ ${up.installmentValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })})</strong> para desbloquear o ${up.toName}.`;
+        bannerText.textContent = `Upgrade de ${up.fromName} para ${up.toName}. Confira a cotação antes de confirmar.`;
         return;
       }
     }
@@ -1173,29 +1186,15 @@
     });
   }
 
-  // Preenche opções de parcelas do Cartão de Crédito com suporte a diferença de Upgrade
-  function updateInstallmentOptions(plan) {
+  function updateInstallmentOptions() {
     const sel = document.getElementById('asaasCardInstallments');
     if (!sel) return;
     sel.innerHTML = '';
 
-    let totalVal = plan.totalValue;
-    if (isUpgradeMode && upgradeFromPlan) {
-      const upKey = `${upgradeFromPlan}->${plan.id}`;
-      if (UPGRADE_PRICING[upKey]) {
-        totalVal = UPGRADE_PRICING[upKey].totalValue;
-      }
-    }
-
     for (let i = 1; i <= 12; i++) {
       const opt = document.createElement('option');
       opt.value = i;
-      const partVal = (totalVal / i).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      if (i === 1) {
-        opt.textContent = `1x de R$ ${partVal} (à vista)`;
-      } else {
-        opt.textContent = `${i}x de R$ ${partVal} sem juros`;
-      }
+      opt.textContent = i === 1 ? '1x (à vista)' : `${i}x sem juros`;
       if (i === 12) opt.selected = true;
       sel.appendChild(opt);
     }
@@ -1207,27 +1206,12 @@
     if (!btnText) return;
     const plan = PLANS_DATA[currentPlanId] || PLANS_DATA.report;
 
-    let totalVal = plan.totalValue;
-    let isUp = false;
-    if (isUpgradeMode && upgradeFromPlan) {
-      const upKey = `${upgradeFromPlan}->${plan.id}`;
-      if (UPGRADE_PRICING[upKey]) {
-        totalVal = UPGRADE_PRICING[upKey].totalValue;
-        isUp = true;
-      }
-    }
-
-    const prefix = isUp ? 'Pagar Diferença' : 'Pagar';
-
     if (currentPaymentMethod === 'PIX') {
-      btnText.textContent = `${isUp ? 'Gerar PIX da Diferença' : 'Gerar PIX'} • ${plan.name} (R$ ${totalVal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })})`;
+      btnText.textContent = `Conferir valor no Pix • ${plan.name}`;
     } else if (currentPaymentMethod === 'CREDIT_CARD') {
       const sel = document.getElementById('asaasCardInstallments');
       const count = sel ? parseInt(sel.value || 12, 10) : 12;
-      const part = (totalVal / count).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-      btnText.textContent = `${prefix} em ${count}x de R$ ${part} no Cartão`;
-    } else if (currentPaymentMethod === 'BOLETO') {
-      btnText.textContent = `${isUp ? 'Emitir Boleto da Diferença' : 'Emitir Boleto'} • ${plan.name} (R$ ${totalVal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })})`;
+      btnText.textContent = `Conferir valor em ${count}x no cartão`;
     }
   }
 
@@ -1236,6 +1220,9 @@
   // ==========================================
 
   window.openAsaasCheckout = function(planKey = 'report', options = {}) {
+    if (typeof supabaseClient === 'undefined') {
+      return redirectToCheckoutLogin(planKey);
+    }
     previouslyFocusedElement = document.activeElement;
     initAsaasCheckoutComponent();
     const modal = document.getElementById('asaasCheckoutModal');
@@ -1278,17 +1265,15 @@
       const savedEmail = localStorage.getItem('userEmail') || '';
       const savedName = localStorage.getItem('userName') || '';
       const savedPhone = localStorage.getItem('userWhatsapp') || localStorage.getItem('userPhone') || '';
-      const savedDoc = localStorage.getItem('userCpf') || '';
+      localStorage.removeItem('userCpf');
 
       const nameEl = document.getElementById('asaasPayerName');
       const emailEl = document.getElementById('asaasPayerEmail');
       const phoneEl = document.getElementById('asaasPayerPhone');
-      const docEl = document.getElementById('asaasPayerCpf');
 
       if (nameEl && !nameEl.value && savedName) nameEl.value = savedName;
       if (emailEl && !emailEl.value && savedEmail) emailEl.value = savedEmail;
       if (phoneEl && !phoneEl.value && savedPhone) phoneEl.value = savedPhone;
-      if (docEl && !docEl.value && savedDoc) docEl.value = savedDoc;
     } catch (e) {}
 
     // Acessibilidade: move foco para o primeiro input do modal
@@ -1342,17 +1327,17 @@
 
     const plan = PLANS_DATA[currentPlanId];
     updateUpgradeBanner();
-    updateInstallmentOptions(plan);
+    updateInstallmentOptions();
     updateSubmitButtonLabel();
   };
 
   window.setAsaasPaymentMethod = function(method) {
+    if (method !== 'PIX' && method !== 'CREDIT_CARD') return;
     currentPaymentMethod = method;
     hideCheckoutError();
 
     const tabPix = document.getElementById('tabPayPix');
     const tabCard = document.getElementById('tabPayCard');
-    const tabBoleto = document.getElementById('tabPayBoleto');
     const cardFields = document.getElementById('asaasCardFields');
 
     if (tabPix) {
@@ -1362,10 +1347,6 @@
     if (tabCard) {
       tabCard.classList.toggle('active', method === 'CREDIT_CARD');
       tabCard.setAttribute('aria-selected', method === 'CREDIT_CARD' ? 'true' : 'false');
-    }
-    if (tabBoleto) {
-      tabBoleto.classList.toggle('active', method === 'BOLETO');
-      tabBoleto.setAttribute('aria-selected', method === 'BOLETO' ? 'true' : 'false');
     }
 
     if (cardFields) {
@@ -1390,6 +1371,23 @@
   function hideCheckoutError() {
     const errBox = document.getElementById('asaasErrorBox');
     if (errBox) errBox.classList.remove('show');
+  }
+
+  function redirectToCheckoutLogin(plan) {
+    try { sessionStorage.setItem('radarCheckoutPlan', plan); } catch (_) {}
+    window.location.href = 'login.html';
+  }
+
+  async function resumeCheckoutAfterLogin() {
+    if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
+    try {
+      const plan = sessionStorage.getItem('radarCheckoutPlan');
+      if (!Object.hasOwn(PLANS_DATA, plan)) return;
+      const { data } = await supabaseClient.auth.getSession();
+      if (!data?.session?.access_token) return;
+      sessionStorage.removeItem('radarCheckoutPlan');
+      window.openAsaasCheckout(plan);
+    } catch (_) {}
   }
 
   // Submissão do Formulário de Checkout
@@ -1468,6 +1466,12 @@
       if (!cardCvv || cardCvv.length < 3) {
         return showCheckoutError('Por favor, informe o código de segurança (CVV).');
       }
+      const postalCode = document.getElementById('asaasCardPostalCode')?.value.replace(/\D/g, '') || '';
+      const addressNumber = document.getElementById('asaasCardAddressNumber')?.value.trim() || '';
+      if (postalCode.length !== 8 || !addressNumber || !phone) {
+        return showCheckoutError('Informe o telefone, o CEP e o número do endereço do titular do cartão.');
+      }
+      payload.creditCardHolderInfo = { postalCode, addressNumber };
 
       payload.installmentCount = parseInt(installmentsSel?.value || 12, 10);
       payload.creditCard = {
@@ -1479,60 +1483,56 @@
       };
     }
 
-    // Salva preferências no localStorage
-    try {
-      localStorage.setItem('userName', name);
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('userWhatsapp', phone);
-      localStorage.setItem('userCpf', cpfCnpj);
-    } catch (e) {}
-
     // Loading State & In-Flight Lock
     isSubmitting = true;
     if (btnSubmit) btnSubmit.disabled = true;
-    if (btnText) btnText.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processando no Asaas Sandbox...';
-
-    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    const timeoutId = controller ? setTimeout(() => controller.abort(), 15000) : null;
+    if (btnText) btnText.textContent = 'Conferindo cotação…';
 
     try {
+      const session = typeof supabaseClient !== 'undefined' && supabaseClient
+        ? (await supabaseClient.auth.getSession()).data?.session : null;
+      if (!session?.access_token) return redirectToCheckoutLogin(payload.plan);
+      const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token };
+      const quoteResponse = await fetch('/api/asaas-checkout', {
+        method: 'POST', headers, signal: AbortSignal.timeout(20000),
+        body: JSON.stringify({ action: 'quote', plan: payload.plan, billingType: payload.billingType, installmentCount: payload.installmentCount })
+      });
+      const quoted = await quoteResponse.json();
+      if (!quoteResponse.ok || !quoted.success || !Number.isSafeInteger(quoted.quote?.amountCents)) {
+        return showCheckoutError(quoted.message || 'Não foi possível conferir o valor da contratação.');
+      }
+      const total = (quoted.quote.amountCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const count = quoted.quote.installments.length;
+      if (!window.confirm(`Confirmar ${quoted.plan.name} por ${total} no total${count > 1 ? ` em ${count} parcelas` : ''}?`)) return;
+      payload.expectedAmountCents = quoted.quote.amountCents;
+      if (btnText) btnText.textContent = 'Processando pagamento…';
       const response = await fetch('/api/asaas-checkout', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(payload),
-        signal: controller ? controller.signal : undefined
+        signal: AbortSignal.timeout(payload.billingType === 'CREDIT_CARD' ? 85000 : 35000)
       });
-      if (timeoutId) clearTimeout(timeoutId);
 
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        isSubmitting = false;
-        showCheckoutError(data.message || 'Erro ao processar transação no Asaas.');
-        if (btnSubmit) btnSubmit.disabled = false;
-        updateSubmitButtonLabel();
-        return;
+        return showCheckoutError(data.message || 'Erro ao processar transação no Asaas.');
       }
 
-      // Sucesso! Limpa dados sensíveis do cartão do DOM para segurança (zero retenção)
+      renderCheckoutSuccessScreen(data);
+    } catch (err) {
+      if (err?.name === 'AbortError' || err?.name === 'TimeoutError') {
+        showCheckoutError('O processamento demorou mais que o esperado. Consulte a confirmação antes de tentar novamente.');
+      } else {
+        showCheckoutError('Falha na comunicação com o servidor de pagamento.');
+      }
+    } finally {
       const cardNumEl = document.getElementById('asaasCardNumber');
       const cardCvvEl = document.getElementById('asaasCardCvv');
       if (cardNumEl) cardNumEl.value = '';
       if (cardCvvEl) cardCvvEl.value = '';
 
-      // Transição para Tela de Sucesso
       isSubmitting = false;
-      renderCheckoutSuccessScreen(data);
-
-    } catch (err) {
-      if (timeoutId) clearTimeout(timeoutId);
-      isSubmitting = false;
-      console.error('[Checkout Client Error]:', err);
-      if (err && err.name === 'AbortError') {
-        showCheckoutError('A requisição excedeu o tempo limite (15s). Verifique sua conexão e tente novamente.');
-      } else {
-        showCheckoutError('Falha na comunicação com o servidor de pagamento. Verifique sua conexão e tente novamente.');
-      }
       if (btnSubmit) btnSubmit.disabled = false;
       updateSubmitButtonLabel();
     }
@@ -1544,6 +1544,7 @@
     const resultBox = document.getElementById('asaasCheckoutResult');
     const resultCardSuccess = document.getElementById('resultCardSuccess');
     const resultPixBox = document.getElementById('resultPixBox');
+    const resultPixInvoiceBox = document.getElementById('resultPixInvoiceBox');
     const resultBoletoBox = document.getElementById('resultBoletoBox');
 
     if (form) form.style.display = 'none';
@@ -1552,6 +1553,7 @@
     // Esconde todos inicialmente
     if (resultCardSuccess) resultCardSuccess.style.display = 'none';
     if (resultPixBox) resultPixBox.style.display = 'none';
+    if (resultPixInvoiceBox) resultPixInvoiceBox.style.display = 'none';
     if (resultBoletoBox) resultBoletoBox.style.display = 'none';
 
     const payment = data.payment || {};
@@ -1568,6 +1570,20 @@
       const pixInput = document.getElementById('asaasPixCopyInput');
       if (pixImg && payment.pix.qrCodeImage) pixImg.src = payment.pix.qrCodeImage;
       if (pixInput && payment.pix.copyPasteKey) pixInput.value = payment.pix.copyPasteKey;
+    } else if (payment.billingType === 'PIX' && resultPixInvoiceBox) {
+      resultPixInvoiceBox.style.display = 'block';
+      const link = document.getElementById('asaasPixInvoiceLink');
+      if (link) {
+        link.removeAttribute('href');
+        link.hidden = true;
+        try {
+          const url = new URL(payment.invoiceUrl);
+          if (url.protocol === 'https:' && (url.hostname === 'asaas.com' || url.hostname.endsWith('.asaas.com'))) {
+            link.href = url.href;
+            link.hidden = false;
+          }
+        } catch (_) {}
+      }
     }
     // 3. Boleto
     else if (payment.billingType === 'BOLETO') {
@@ -1591,12 +1607,13 @@
 
     if (sumPlanName) sumPlanName.textContent = plan.name || 'Plano Radar São José';
     if (sumPlanValue) {
-      sumPlanValue.textContent = `R$ ${(plan.value || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })} (${payment.installmentCount || 12}x de R$ ${(payment.installmentValue || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })})`;
+      const total = (plan.value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      sumPlanValue.textContent = payment.installmentCount > 1 ? `${total} em ${payment.installmentCount} parcelas` : total;
     }
     if (sumPaymentMethod) {
-      sumPaymentMethod.textContent = payment.billingType === 'CREDIT_CARD' ? 'Cartão de Crédito (Aprovado)' : payment.billingType === 'PIX' ? 'PIX Dinâmico (Aguardando)' : 'Boleto Bancário (Aguardando)';
+      sumPaymentMethod.textContent = payment.billingType === 'CREDIT_CARD' ? 'Cartão de crédito' : payment.billingType === 'PIX' ? 'Pix' : 'Boleto bancário';
     }
-    if (sumPaymentId) sumPaymentId.textContent = payment.id || 'pay_sb_confirmed';
+    if (sumPaymentId) sumPaymentId.textContent = payment.id || '—';
 
 
   }
@@ -1739,8 +1756,10 @@
   // Auto-inicialização na carga do DOM
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAsaasCheckoutComponent);
+    document.addEventListener('DOMContentLoaded', resumeCheckoutAfterLogin);
   } else {
     initAsaasCheckoutComponent();
+    resumeCheckoutAfterLogin();
   }
 
 })();

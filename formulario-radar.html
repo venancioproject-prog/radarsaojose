@@ -54,6 +54,8 @@
 
   <!-- Supabase JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/api/asaas-checkout?browserConfig=1"></script>
+  <script src="/supabase-browser-config.js"></script>
 </head>
 <body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden antialiased bg-[#F8FAFC] text-slate-800">
 
@@ -422,11 +424,10 @@
   </div>
 
   <script>
-    const SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
-    const SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+    const { url: SUPABASE_URL, key: SUPABASE_ANON_KEY } = window.radarSupabaseConfig || {};
     let supabaseClient = null;
 
-    if (window.supabase && typeof window.supabase.createClient === 'function') {
+    if (SUPABASE_URL && SUPABASE_ANON_KEY && typeof window.supabase?.createClient === 'function') {
       supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth: {
           persistSession: true,

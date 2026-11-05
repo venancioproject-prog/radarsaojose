@@ -27,6 +27,26 @@ test('failed confirmation never completes checkout', async () => {
   await state.window.completeCheckoutAndUnlock();
   assert.equal(state.window.closed, undefined);
 });
+test('a paid profile cannot confirm checkout when the entitlement API fails', async () => {
+  const window = { appState: {}, applyPlanRestrictions() {} };
+  const supabaseClient = {
+    auth: {
+      getUser: async () => ({ data: { user: { id: 'buyer' } } }),
+      getSession: async () => ({ data: { session: { access_token: 'test-session' } } })
+    },
+    from: () => ({ select: () => ({ eq: () => ({
+      single: async () => ({ data: { id: 'buyer', plan_type: 'report' } })
+    }) }) })
+  };
+  const start = app.indexOf('window.refreshConfirmedPlan =');
+  const end = app.indexOf('\n};', start) + 3;
+  vm.runInNewContext(app.slice(start, end), {
+    window, supabaseClient, fetch: async () => ({ ok: false })
+  });
+  await assert.rejects(window.refreshConfirmedPlan(), /Não foi possível confirmar seu plano/);
+  assert.equal(window.appState.plan_type, 'gratis');
+  assert.equal(window.appState.entitlement, null);
+});
 test('checkout cannot write commercial rights', () => {
   assert.doesNotMatch(modal, /localStorage\.setItem\(['"]userPlan/);
   assert.doesNotMatch(modal, /\.update\(\{\s*plan_type/);
