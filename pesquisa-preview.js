@@ -93,51 +93,6 @@
     }
   }
 
-  const previewTopics = {
-    dashboard: ['Perfil demográfico', 'Qualidade de vida', 'Mobilidade urbana', 'Cultura e lazer', 'Mídia e streaming', 'Economia local', 'Voz da população'],
-    midia: ['Veículos acompanhados', 'Engajamento por canal', 'Temas em destaque', 'Sentimento dos comentários', 'Evolução das notícias', 'Influenciadores locais', 'Mapa de assuntos']
-  };
-
-  function renderIllustrativePreview(root, moduleName, show) {
-    const id = 'radar-illustrative-' + moduleName;
-    const existing = document.getElementById(id);
-    if (!show) {
-      existing?.remove();
-      return;
-    }
-    if (existing) return;
-
-    const isMidia = moduleName === 'midia';
-    const targetPlan = isMidia ? 'midia' : 'dash';
-    const [intro, ...topics] = previewTopics[moduleName];
-    const card = (title, index) => `
-      <div class="radar-illustrative-chart radar-illustrative-chart--${index % 3}">
-        <h3>${title}</h3>
-        <div class="radar-illustrative-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      </div>`;
-    const sample = document.createElement('div');
-    sample.id = id;
-    sample.innerHTML = `
-      <p class="radar-illustrative-label">Demonstração visual · sem dados da pesquisa</p>
-      ${card(intro, 0)}
-      <div class="pesquisa-preview-container">
-        ${createStickyNoticeHtml({
-          badge: isMidia ? 'INTELIGÊNCIA DE MÍDIA' : 'PESQUISA QUANTITATIVA',
-          title: isMidia ? 'Entenda o que movimenta as notícias locais' : 'Explore o que os moradores de São José revelaram',
-          description: isMidia ? 'Acompanhe os canais, os temas e as reações do público.' : 'Compare os perfis e descubra como as respostas mudam por idade, renda e região.',
-          bullets: [],
-          priceText: 'Confira os detalhes do plano',
-          targetPlan,
-          buttonLabel: isMidia ? 'Ver Plano Mídia' : 'Ver Plano Dash'
-        })}
-        <div class="pesquisa-preview-content radar-illustrative-grid" inert aria-hidden="true">
-          ${topics.map(card).join('')}
-        </div>
-      </div>`;
-    root.before(sample);
-    attachEvents(sample.querySelector('.pesquisa-preview-container'), targetPlan);
-  }
-
   // ==========================================
   // 1. PESQUISA QUANTITATIVA (DASHBOARD)
   // ==========================================
@@ -147,7 +102,6 @@
     const existing = root.querySelector('.pesquisa-preview-container');
     const unlocked = isModuleUnlocked('dashboard');
     const block = document.getElementById('secao-bloco-2');
-    renderIllustrativePreview(root, 'dashboard', !unlocked && !existing && !block);
 
     if (existing) {
       setContainerUnlocked(existing, unlocked);
@@ -255,9 +209,9 @@
     if (!root) return;
     const existing = root.querySelector('.midia-preview-container');
     const unlocked = isModuleUnlocked('midia');
-    renderIllustrativePreview(root, 'midia', !unlocked);
-    root.classList.toggle('midia-preview-restricted', !unlocked);
-    if (!unlocked) return;
+    const restricted = !unlocked && window.radarSupabaseConfig?.preview !== true;
+    root.classList.toggle('midia-preview-restricted', restricted);
+    if (restricted) return;
 
     if (existing) {
       setContainerUnlocked(existing, unlocked);

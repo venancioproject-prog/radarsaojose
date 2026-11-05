@@ -173,20 +173,41 @@
   }
 
   // 1. CARREGAMENTO ULTRA RÁPIDO DOS DADOS
+  function demoMidiaRecords() {
+    const profiles = Object.keys(PROFILE_COLORS);
+    const topics = ['Cultura & Entretenimento', 'Cotidiano & Cidade', 'Trânsito & Mobilidade', 'Educação & Tecnologia'];
+    const tones = ['Informativo', 'Descontraído', 'Crítico'];
+    const sentiments = ['Positivo', 'Neutro', 'Negativo'];
+    return Array.from({ length: 120 }, (_, index) => ({
+      id: index + 1,
+      perfil: profiles[index % profiles.length],
+      tema_central: topics[Math.floor(index / 3) % topics.length],
+      tom_noticia: tones[Math.floor(index / 7) % tones.length],
+      sentimento_comentarios: sentiments[Math.floor(index / 11) % sentiments.length],
+      timestamp_brasilia: new Date(Date.UTC(2026, 0, index + 1)).toISOString(),
+      likes: 15 + (index * 37) % 280,
+      comments: 2 + (index * 7) % 54,
+      gatilho_engajamento: ['Utilidade Pública & Oportunidade', 'Curiosidade & Viralização'][index % 2],
+      entidades_citadas: 'São José dos Campos',
+      legenda: 'Publicação simulada para testar os gráficos do Radar'
+    }));
+  }
+
   async function fetchMidiaData() {
-    if (!window.radarCanLoadModule?.('midia')) {
+    const isDemo = window.radarSupabaseConfig?.preview === true;
+    if (!isDemo && !window.radarCanLoadModule?.('midia')) {
       document.getElementById('midia-loading-state')?.classList.add('hidden');
       document.getElementById('midia-error-state')?.classList.add('hidden');
       window.updateRadarPreviews?.();
       return;
     }
     showMidiaLoading(true);
-    let data = [];
+    let data = isDemo ? demoMidiaRecords() : [];
     let source = "preloaded";
 
     // 1. Prioridade 1: Buscar do Supabase (Fonte Oficial Atualizada)
     try {
-      if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+      if (!isDemo && typeof supabaseClient !== 'undefined' && supabaseClient) {
         let allSupabaseData = [];
         let from = 0;
         let limit = 1000;
@@ -239,7 +260,7 @@
         
       const statusBadge = document.getElementById('midia-data-status-badge');
       if (statusBadge) {
-        statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Base Conectada (${allMidiaRecords.length.toLocaleString('pt-BR')} posts)`;
+        statusBadge.textContent = isDemo ? 'Ambiente de testes · publicações simuladas' : `Base conectada (${allMidiaRecords.length.toLocaleString('pt-BR')} posts)`;
         statusBadge.className = "inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30";
       }
 
@@ -254,7 +275,7 @@
 
   // Hook disparado na troca de aba
   window.onSwitchToMidiaTab = function() {
-    if (!window.radarCanLoadModule?.('midia')) return fetchMidiaData();
+    if (window.radarSupabaseConfig?.preview !== true && !window.radarCanLoadModule?.('midia')) return fetchMidiaData();
     const loadingState = document.getElementById('midia-loading-state');
     const dashboardContent = document.getElementById('midia-dashboard-content');
     

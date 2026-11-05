@@ -229,6 +229,11 @@ function isPublicSupabaseKey(key) {
 }
 
 module.exports = async function handler(req, res) {
+  if (req.method === 'GET' && req.query?.surveyDemo === '1') {
+    res.setHeader('Cache-Control', 'no-store');
+    if (process.env.VERCEL_ENV !== 'preview') return res.status(404).json({success:false});
+    return res.status(200).json({ rows: require('../lib/survey-data').demoSurveyRows() });
+  }
   if (req.method === 'GET' && req.query?.browserConfig === '1') {
     const preview = process.env.VERCEL_ENV === 'preview';
     const url = process.env.SUPABASE_URL?.trim();
@@ -242,7 +247,7 @@ module.exports = async function handler(req, res) {
       return res.status(503).json({success:false, code:'BROWSER_DATABASE_KEY_INVALID'});
     }
     res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-    return res.status(200).send('window.radarSupabaseConfig = ' + JSON.stringify({url, key}) + ';');
+    return res.status(200).send('window.radarSupabaseConfig = ' + JSON.stringify({url, key, preview}) + ';');
   }
   if (req.method === 'GET') return res.status(200).json({success:true, plans:PLANS_CONFIG});
   if (req.method !== 'POST') return res.status(405).json({success:false, code:'METHOD_NOT_ALLOWED'});

@@ -1509,7 +1509,8 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 // ==========================================
 async function fetchSurveyData() {
   const request = ++surveyRequest;
-  if (!window.radarCanLoadModule?.('dashboard')) {
+  const isDemo = window.radarSupabaseConfig?.preview === true;
+  if (!isDemo && !window.radarCanLoadModule?.('dashboard')) {
     allSurveyRecords = [];
     window.allSurveyRecords = [];
     dynamicChartsGrid?.replaceChildren();
@@ -1518,17 +1519,25 @@ async function fetchSurveyData() {
     return;
   }
   try {
-    if (!supabaseClient) throw new Error('Supabase indisponível');
-    let { data, error } = await supabaseClient.from('respostas_pesquisa').select('*').range(0, 5000);
-    if (error) {
-      ({ data, error } = await supabaseClient.from('respostas radar').select('*').range(0, 5000));
+    let data;
+    if (isDemo) {
+      const response = await fetch('/api/asaas-checkout?surveyDemo=1', { cache: 'no-store' });
+      if (!response.ok) throw new Error('Base de demonstração indisponível');
+      ({ rows: data } = await response.json());
+    } else {
+      if (!supabaseClient) throw new Error('Supabase indisponível');
+      let result = await supabaseClient.from('respostas_pesquisa').select('*').range(0, 5000);
+      if (result.error) result = await supabaseClient.from('respostas radar').select('*').range(0, 5000);
+      if (result.error) throw result.error;
+      data = result.data;
     }
     if (request !== surveyRequest) return;
-    if (error || !Array.isArray(data) || !data.length) throw new Error('Pesquisa indisponível');
+    if (!Array.isArray(data) || !data.length) throw new Error('Pesquisa indisponível');
     allSurveyRecords = data;
     window.allSurveyRecords = data;
     dataFetchError?.classList.add('hidden');
-    if (supabaseTableStatus) supabaseTableStatus.textContent = 'Ativo (' + data.length + ' registros)';
+    document.getElementById('survey-demo-label')?.classList.toggle('hidden', !isDemo);
+    if (supabaseTableStatus) supabaseTableStatus.textContent = isDemo ? 'Base de demonstração' : 'Ativo (' + data.length + ' registros)';
     updateSyncTime();
     populateAllSidebarFilters(data);
     applyCombinedFilters();
