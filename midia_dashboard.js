@@ -1147,16 +1147,16 @@
 
   // Dicionário de Metadados e Logos dos 10 Veículos de Mídia Oficial de SJC
   const MEDIA_VEHICLES_CONFIG = {
-    'lifeinforma': { name: 'Life Informa', handle: '@lifeinforma', followers: '285 mil', logo: 'midia_sjc/logos_veiculos/01-lifeinforma.png', color: '#F59E0B' },
-    'jornalovale': { name: 'Jornal O VALE', handle: '@jornalovale', followers: '210 mil', logo: 'midia_sjc/logos_veiculos/02-jornalovale.png', color: '#D97706' },
-    'aquivaleoficial': { name: 'Aqui Vale', handle: '@aquivaleoficial', followers: '165 mil', logo: 'midia_sjc/logos_veiculos/03-aquivaleoficial.png', color: '#EC4899' },
-    'cbnvale': { name: 'CBN Vale', handle: '@cbnvale', followers: '142 mil', logo: 'midia_sjc/logos_veiculos/04-cbnvale.png', color: '#E11D48' },
-    'bandvaletv': { name: 'Band Vale TV', handle: '@bandvaletv', followers: '198 mil', logo: 'midia_sjc/logos_veiculos/05-bandvaletv.png', color: '#2563EB' },
-    'spriomais': { name: 'SP RIO+', handle: '@spriomais', followers: '115 mil', logo: 'midia_sjc/logos_veiculos/06-spriomais.png', color: '#8B5CF6' },
-    'vale360news': { name: 'Vale 360 News', handle: '@vale360news', followers: '98 mil', logo: 'midia_sjc/logos_veiculos/07-vale360news.png', color: '#0D9488' },
-    'noticias.sjcampos': { name: 'Notícias SJC', handle: '@noticias.sjcampos', followers: '175 mil', logo: 'midia_sjc/logos_veiculos/08-noticias-sjcampos.png', color: '#10B981' },
-    'redevanguarda': { name: 'Rede Vanguarda', handle: '@redevanguarda', followers: '480 mil', logo: 'midia_sjc/logos_veiculos/09-redevanguarda.png', color: '#0284C7' },
-    'jovempansjc': { name: 'Jovem Pan SJC', handle: '@jovempansjc', followers: '135 mil', logo: 'midia_sjc/logos_veiculos/10-jovempansjc.png', color: '#EA580C' }
+    'lifeinforma': { name: 'Life Informa', handle: '@lifeinforma', followers: '285 mil', logo: 'midia_sjc/logos_veiculos/logo-01-lifeinforma.png?v=20261105_v3', color: '#F59E0B' },
+    'jornalovale': { name: 'Jornal O VALE', handle: '@jornalovale', followers: '210 mil', logo: 'midia_sjc/logos_veiculos/logo-02-jornalovale.png?v=20261105_v3', color: '#D97706' },
+    'aquivaleoficial': { name: 'Aqui Vale', handle: '@aquivaleoficial', followers: '165 mil', logo: 'midia_sjc/logos_veiculos/logo-03-aquivaleoficial.png?v=20261105_v3', color: '#EC4899' },
+    'cbnvale': { name: 'CBN Vale', handle: '@cbnvale', followers: '142 mil', logo: 'midia_sjc/logos_veiculos/logo-04-cbnvale.png?v=20261105_v3', color: '#E11D48' },
+    'bandvaletv': { name: 'Band Vale TV', handle: '@bandvaletv', followers: '198 mil', logo: 'midia_sjc/logos_veiculos/logo-05-bandvaletv.png?v=20261105_v3', color: '#2563EB' },
+    'spriomais': { name: 'SP RIO+', handle: '@spriomais', followers: '115 mil', logo: 'midia_sjc/logos_veiculos/logo-06-spriomais.png?v=20261105_v3', color: '#8B5CF6' },
+    'vale360news': { name: 'Vale 360 News', handle: '@vale360news', followers: '98 mil', logo: 'midia_sjc/logos_veiculos/logo-07-vale360news.png?v=20261105_v3', color: '#0D9488' },
+    'noticias.sjcampos': { name: 'Notícias SJC', handle: '@noticias.sjcampos', followers: '175 mil', logo: 'midia_sjc/logos_veiculos/logo-08-noticias-sjcampos.png?v=20261105_v3', color: '#10B981' },
+    'redevanguarda': { name: 'Rede Vanguarda', handle: '@redevanguarda', followers: '480 mil', logo: 'midia_sjc/logos_veiculos/logo-09-redevanguarda.png?v=20261105_v3', color: '#0284C7' },
+    'jovempansjc': { name: 'Jovem Pan SJC', handle: '@jovempansjc', followers: '135 mil', logo: 'midia_sjc/logos_veiculos/logo-10-jovempansjc.png?v=20261105_v3', color: '#EA580C' }
   };
 
   // Cache de imagens pré-carregadas para o Plugin do Chart.js
@@ -1233,7 +1233,7 @@
         };
         card.innerHTML = `
           <div class="w-11 h-11 rounded-full border-2 ${logoBgClass} p-1 shadow-sm overflow-hidden flex items-center justify-center mb-1.5 shrink-0">
-            <img src="${cfg.logo}" alt="${cfg.name}" class="w-full h-full object-contain ${imgScaleClass}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(cfg.name)}&background=random'" />
+            <img src="${cfg.logo}" alt="${cfg.name}" class="w-full h-full object-contain ${imgScaleClass}" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='web-media/logos_veiculos/' + this.src.split('?')[0].split('/').pop();}else{this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(cfg.name)}&background=random';}" />
           </div>
           <span class="text-[11px] font-black text-slate-800 leading-tight truncate w-full" title="${cfg.name}">${cfg.name}</span>
           <span class="text-[10px] font-bold text-slate-400 font-mono">${cfg.handle}</span>
