@@ -337,6 +337,7 @@ data/radar_hub/data_lake_20261009/mobilidade/derived/infosiga-recorte-municipal-
 "Copy of*.mp4"
 "video de fundo*.mp4"
 fotos_radar/notaveis/*.png
+fotos_radar/notaveis/*.jpg
 fotos_radar/*.gif
 fotos_radar/gifs_retro_10.zip
 fotos_radar/capa-radar-pessoas.png
