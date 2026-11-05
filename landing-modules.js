@@ -3,15 +3,40 @@
   const videos = [...document.querySelectorAll('.module-showcase video')];
 
   function loadVideo(video) {
-    const source = video.querySelector('source[data-src]');
-    if (!source) return;
-    const srcUrl = source.dataset.src;
-    source.src = srcUrl;
-    source.removeAttribute('data-src');
-    if (!video.src || video.src === window.location.href) {
-      video.src = srcUrl;
+    const sources = [...video.querySelectorAll('source[data-src]')];
+    if (sources.length > 0) {
+      sources.forEach(source => {
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+      });
+      const firstSrc = sources[0].src;
+      if (!video.src || video.src === window.location.href) {
+        video.src = firstSrc;
+      }
     }
     video.preload = 'auto';
+
+    // Intelligent fallback: if the primary video path fails, fallback to secondary source
+    if (!video.dataset.fallbackAttached) {
+      video.dataset.fallbackAttached = '1';
+      video.addEventListener('error', () => {
+        if (!video.dataset.retried) {
+          video.dataset.retried = '1';
+          const filename = (video.currentSrc || video.src || '').split('?')[0].split('/').pop();
+          if (filename) {
+            // Try alternating between web-media/ and assets/
+            const isWebMedia = (video.src || '').includes('web-media');
+            const fallbackPath = isWebMedia 
+              ? 'assets/module-tours/' + filename 
+              : 'web-media/module-tours/' + filename;
+            video.src = fallbackPath;
+            video.load();
+            playVideo(video);
+          }
+        }
+      }, true);
+    }
+
     video.load();
   }
 

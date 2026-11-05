@@ -76,6 +76,10 @@ mais_fotos_radar/*
 
 # Midias e videos pesados nao servidos
 *.mp4
+assets/hero/
+assets/module-tours/frames/
+assets/module-tours/motion/
+assets/module-tours/*.jpg
 *.mov
 *.webm
 *.avi
@@ -128,10 +132,6 @@ pacote_antigravity_eleicoes_2026/
 CONTINUAR-PLANOS.md
 HANDOFF.md
 app.updated.html
-assets/*
-!assets/module-tours/
-assets/module-tours/*
-!assets/module-tours/*.mp4
 /[0-9]*.png
 data/capitulo-*.json
 data/migrations/
@@ -149,3 +149,6 @@ public-images/
 
 # Logos oficiais dos canais de midia
 !midia_sjc/logos_veiculos/*
+
+!assets/module-tours/*.mp4
+!web-media/module-tours/*.mp4
