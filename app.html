@@ -1552,7 +1552,7 @@
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
   <div id="app-boot" role="status" aria-live="polite">
-    <img src="fotos_radar/logo.png" alt="Radar São José" />
+    <img src="fotos_radar/logo_radar.png?v=20261105" alt="Radar São José" />
     <span class="app-boot-spinner" aria-hidden="true"></span>
     <span>Preparando seu acesso…</span>
   </div>
@@ -1578,10 +1578,10 @@
         <div class="inline-flex items-center justify-center mb-3">
           <!-- Logo Oficial Radar São José -->
           <img 
-            src="fotos_radar/logo_login_oficial.png?v=3" 
+            src="fotos_radar/logo_login_radar.png?v=20261105" 
             alt="Radar São José" 
             class="h-16 sm:h-20 max-w-[260px] object-contain drop-shadow-xs"
-            onerror="this.src='fotos_radar/logo.png'"
+            onerror="this.src='fotos_radar/logo_radar.png?v=20261105'"
           />
         </div>
         <h1 class="text-2xl font-black tracking-tight text-brand-900">Dashboard Executivo</h1>
@@ -1712,10 +1712,10 @@
           <a href="index.html" title="Voltar para a Landing Page" class="flex items-center">
             <img 
               id="mainAppLogo"
-              src="fotos_radar/logo.png" 
+              src="fotos_radar/logo_radar.png?v=20261105" 
               alt="Radar São José" 
               class="h-7 w-auto max-w-[119px] object-contain hover:opacity-90 transition-opacity"
-              onerror="this.src='fotos_radar/logobranco.png'"
+              onerror="this.src='fotos_radar/logobranco_radar.png?v=20261105'"
             />
           </a>
         </div>
@@ -3173,7 +3173,7 @@
 
           <!-- Topo Minimalista de Revista -->
           <header class="relative z-10 flex items-center justify-between px-8 sm:px-14 pt-8 sm:pt-10 pb-5 border-b border-white/15 report-cover-masthead">
-            <img src="fotos_radar/logobranco.png" alt="Radar São José" class="h-7 sm:h-8 w-auto object-contain opacity-95">
+            <img src="fotos_radar/logobranco_radar.png?v=20261105" alt="Radar São José" class="h-7 sm:h-8 w-auto object-contain opacity-95">
             <div class="flex items-center gap-6 text-xs sm:text-sm text-white/80 font-sans tracking-wide">
               <span>SÃO JOSÉ DOS CAMPOS • 2026</span>
               <span class="text-white/40">|</span>
@@ -13174,7 +13174,7 @@
     <footer class="bg-brand-950 text-white border-t border-brand-900 py-6 mt-12">
       <div class="w-full px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
         <div class="flex items-center gap-3">
-          <img src="fotos_radar/logobranco.png" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos_radar/logo.png'" />
+          <img src="fotos_radar/logobranco_radar.png?v=20261105" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos_radar/logo_radar.png?v=20261105'" />
           <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Pesquisa Municipal SJC</span>
         </div>
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
@@ -13843,7 +13843,7 @@
       const logoImg = document.getElementById('mainAppLogo');
 
       if (logoImg) {
-        logoImg.src = isDark ? 'fotos_radar/logobranco.png' : 'fotos_radar/logo.png';
+        logoImg.src = isDark ? 'fotos_radar/logobranco_radar.png?v=20261105' : 'fotos_radar/logo_radar.png?v=20261105';
       }
 
       const coverBg = document.getElementById('rep-cover-bg');

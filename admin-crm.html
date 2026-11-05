@@ -1486,7 +1486,7 @@
           <i class="fa-solid fa-bars text-lg"></i>
         </button>
         <a href="index.html" class="flex items-center gap-3" title="Radar São José - Home">
-          <img id="mainHeaderLogo" src="fotos_radar/logo.png" alt="Radar São José" class="h-10 max-w-[170px] object-contain hover:opacity-90 transition-opacity" onerror="this.src='fotos_radar/logobranco.png'" />
+          <img id="mainHeaderLogo" src="fotos_radar/logo_radar.png?v=20261105" alt="Radar São José" class="h-10 max-w-[170px] object-contain hover:opacity-90 transition-opacity" onerror="this.src='fotos_radar/logobranco_radar.png?v=20261105'" />
         </a>
         <div class="hidden sm:block border-l border-slate-200 pl-4">
           <h2 class="text-xs font-black tracking-widest text-[#0B2545] uppercase leading-none">RADAR SÃO JOSÉ</h2>
@@ -10459,7 +10459,7 @@
         if (avatarEl) avatarEl.src = 'fotos_radar/mayumi.jpg';
       } else if (authorLower.includes('redação') || authorLower.includes('redacao')) {
         if (selectEl) selectEl.value = 'redacao';
-        if (avatarEl) avatarEl.src = 'fotos_radar/logobranco.png';
+        if (avatarEl) avatarEl.src = 'fotos_radar/logobranco_radar.png?v=20261105';
       } else if (authorLower.includes('leonardo')) {
         if (selectEl) selectEl.value = 'leonardo';
         if (avatarEl) avatarEl.src = 'fotos_radar/LEONARDO.jpeg';
@@ -10505,7 +10505,7 @@
       } else if (val === 'redacao') {
         if (nameEl) nameEl.value = 'Redação Radar São José';
         if (roleEl) roleEl.value = 'Equipe de Inteligência & Jornalismo de Dados';
-        if (avatarEl) avatarEl.src = 'fotos_radar/logobranco.png';
+        if (avatarEl) avatarEl.src = 'fotos_radar/logobranco_radar.png?v=20261105';
       } else if (val === 'leonardo') {
         if (nameEl) nameEl.value = 'Leonardo Venâncio';
         if (roleEl) roleEl.value = 'Head de Inteligência & Dados';
@@ -10669,7 +10669,7 @@
       const logoImg = document.getElementById('mainHeaderLogo');
 
       if (logoImg) {
-        logoImg.src = isDark ? 'fotos_radar/logobranco.png' : 'fotos_radar/logo.png';
+        logoImg.src = isDark ? 'fotos_radar/logobranco_radar.png?v=20261105' : 'fotos_radar/logo_radar.png?v=20261105';
       }
 
       if (headerIcon) {
