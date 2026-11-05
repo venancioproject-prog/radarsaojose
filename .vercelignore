@@ -17,6 +17,13 @@ __tests__/
 tmp/
 
 # Dumps e evidencias brutas de processamento
+/dados_pesquisa_477.json
+/all_cap1_ground_truth.json
+/backups/
+/revisao/baseline/
+/app.html.bak-step
+/app.updated.html
+/report-source.js
 data/radar_hub/*_raw_*/
 data/radar_hub/*_raw_*
 data/radar_hub/*_evidence_*.json
@@ -36,3 +43,70 @@ mais_fotos_radar/
 .vscode/
 .idea/
 .git/
+
+# Midias e videos pesados nao servidos
+*.mp4
+*.mov
+*.webm
+*.avi
+*.zip
+*.tar*
+*.rar
+*.7z
+*.pdf
+*.exe
+*.pptx
+*.bin
+*.bak*
+
+# Imagens gigantes e nao utilizadas na web
+fotos_radar/*.gif
+fotos_radar/*.zip
+fotos_radar/notaveis/*.png
+fotos_radar/capa-radar-pessoas.png
+fotos_radar/capa_radar_fundo_branco.png
+fotos_radar/pexels-edmond-dantes-4340082.jpg
+fotos_radar/pexels-anna-nekrashevich-6801648.jpg
+0*.png
+0*.jpg
+capa*.png
+download.png
+
+# Datasets brutos e dumps pesados de processamento
+data/radar_hub/sjc_open_data_ground_truth.json
+data/radar_hub/sjc_open_data_ground_truth.json.*
+data/radar_hub/radar_hub_package.json
+data/radar_hub/data_lake_20261009/
+data/radar_hub/piloto_dataviz/
+data/radar_hub/*.tmp
+data/radar_hub/*.geojson
+data/capitulo-*.json
+data/migrations/
+
+# Pastas de desenvolvimento e testes
+chrome-temp-profile/
+.agents/
+prototypes/
+revisao/
+portraits_*/
+logos_atualizados/
+reconciliacao_sistot_2026/
+pacote_antigravity_eleicoes_2026/
+
+# Arquivos de handoff, backup e docs temporarios
+CONTINUAR-PLANOS.md
+HANDOFF.md
+app.updated.html
+assets/
+[0-9]*.png
+data/capitulo-*.json
+data/migrations/
+data/report-methodology-sources.json
+data/radar_hub/data_lake_20261009/
+data/radar_hub/piloto_dataviz/
+docs/dados-publicos-revisao/data-lake-completo/
+docs/dados-publicos-revisao/projeto-dataviz-oito-eixos/
+docs/piloto-dataviz/
+radar-piloto.html
+scripts/audit_challenger_results.json
+scripts/build_*.py

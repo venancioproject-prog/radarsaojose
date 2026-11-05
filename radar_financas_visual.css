@@ -1,0 +1,441 @@
+/* RADAR SÃO JOSÉ — FINANÇAS 2.0: EDUCAÇÃO FISCAL E AUDITORIA VISUAL */
+
+#hub-axis-container-financas {
+  font-size: 14px;
+  color: var(--dv-text);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+#hub-axis-container-financas article {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  min-width: 0;
+  max-width: 100%;
+  background: var(--dv-surface);
+  border: 1px solid var(--dv-grid);
+  box-sizing: border-box;
+}
+
+#hub-axis-container-financas h4 {
+  line-height: 1.4;
+  color: var(--dv-ink);
+}
+
+#hub-axis-container-financas [id^="fin-source-"] {
+  font-size: 12px;
+  line-height: 1.65;
+  margin-top: 14px;
+  color: var(--dv-muted);
+}
+
+#hub-axis-container-financas [id^="fin-summary-"] {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--dv-muted);
+}
+
+#hub-axis-container-financas [id^="fin-kpi-"] {
+  color: var(--dv-primary);
+  font-feature-settings: "tnum";
+}
+
+#hub-axis-container-financas .fin-detail {
+  margin-top: 10px;
+  border-top: 1px solid var(--dv-grid);
+  padding-top: 10px;
+}
+
+#hub-axis-container-financas summary {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dv-primary);
+  user-select: none;
+  outline: none;
+}
+
+#hub-axis-container-financas summary:focus-visible,
+#hub-axis-container-financas select:focus-visible,
+#hub-axis-container-financas button:focus-visible {
+  outline: 2px solid var(--dv-primary);
+  outline-offset: 2px;
+}
+
+#hub-axis-container-financas .fin-table-scroll {
+  overflow: auto;
+  max-height: 360px;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--dv-grid);
+}
+
+#hub-axis-container-financas table {
+  font-size: 12px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#hub-axis-container-financas th,
+#hub-axis-container-financas td {
+  padding: 8px 10px;
+  text-align: right;
+  border-bottom: 1px solid var(--dv-grid);
+  white-space: nowrap;
+}
+
+#hub-axis-container-financas th:first-child {
+  text-align: left;
+}
+
+#hub-axis-container-financas select {
+  font-size: 12px;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--dv-grid);
+  background-color: var(--dv-surface);
+  color: var(--dv-text);
+  padding: 0.375rem 0.625rem;
+}
+
+/* EDUCAÇÃO FISCAL & COMPARAÇÃO INTERATIVA */
+
+#hub-axis-container-financas .fin-education {
+  background: var(--dv-surface);
+  border: 1px solid var(--dv-grid);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+#hub-axis-container-financas .fin-education h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dv-ink);
+  margin-top: 0.25rem;
+  margin-bottom: 0.375rem;
+  letter-spacing: -0.01em;
+}
+
+#hub-axis-container-financas .fin-education > p {
+  font-size: 0.875rem;
+  color: var(--dv-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.fin-eyebrow {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dv-primary);
+  background: var(--dv-light);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+html.dark .fin-eyebrow {
+  background: rgba(45, 212, 191, 0.15);
+  color: var(--dv-primary);
+}
+
+/* BOTÕES DE ESTÁGIO DA DESPESA (EMPENHADA / LIQUIDADA / PAGA) */
+.fin-stage-buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  background: var(--dv-soft);
+  border: 1px solid var(--dv-grid);
+  padding: 4px;
+  border-radius: 0.75rem;
+  margin-bottom: 1.25rem;
+  max-width: 100%;
+}
+
+.fin-stage-buttons button {
+  padding: 0.5rem 1.125rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--dv-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.fin-stage-buttons button:hover {
+  color: var(--dv-ink);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+html.dark .fin-stage-buttons button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.fin-stage-buttons button[aria-pressed="true"],
+.fin-stage-buttons button.active {
+  background: var(--dv-primary) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+}
+
+html.dark .fin-stage-buttons button[aria-pressed="true"],
+html.dark .fin-stage-buttons button.active {
+  background: var(--dv-primary) !important;
+  color: #0f172a !important;
+}
+
+/* GRID DE COMPARAÇÃO DAS CONTAS */
+.fin-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fin-comparison-grid > div {
+  background: var(--dv-soft);
+  border: 1px solid var(--dv-grid);
+  border-radius: 1rem;
+  padding: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.fin-comparison-grid > div > span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dv-muted);
+  margin-bottom: 0.375rem;
+}
+
+.fin-comparison-grid > div > strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--dv-ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+}
+
+/* BARRA DE PROGRESSO VISUAL (METER) */
+.fin-meter {
+  height: 8px;
+  width: 100%;
+  background: var(--dv-grid);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+.fin-meter i {
+  display: block;
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--dv-primary), var(--dv-secondary));
+  transition: width 0.35s ease;
+}
+
+/* CARD DE DIFERENÇA ARITMÉTICA */
+.fin-difference {
+  background: var(--dv-light) !important;
+  border: 1.5px solid var(--dv-primary) !important;
+}
+
+html.dark .fin-difference {
+  background: rgba(45, 212, 191, 0.08) !important;
+  border-color: var(--dv-primary) !important;
+}
+
+.fin-difference strong {
+  color: var(--dv-ink);
+}
+
+.fin-status-pill {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+  width: fit-content;
+}
+
+.fin-status-deficit {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+html.dark .fin-status-deficit {
+  background: #450a0a;
+  color: #fca5a5;
+}
+
+.fin-status-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+html.dark .fin-status-warning {
+  background: #451a03;
+  color: #fcd34d;
+}
+
+.fin-status-info {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+html.dark .fin-status-info {
+  background: #082f49;
+  color: #7dd3fc;
+}
+
+/* EXPLICAÇÃO DIDÁTICA DO COMPARADOR */
+#fin-compare-explanation {
+  font-size: 0.84375rem;
+  line-height: 1.6;
+  color: var(--dv-text);
+  background: var(--dv-soft);
+  border-left: 4px solid var(--dv-primary);
+  padding: 0.875rem 1.125rem;
+  border-radius: 0 0.75rem 0.75rem 0;
+  margin-bottom: 0.75rem;
+}
+
+.fin-caption {
+  font-size: 0.75rem;
+  color: var(--dv-muted);
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* GRID DIDÁTICA: ESTÁGIOS DA DESPESA / RESTOS A PAGAR */
+.fin-learning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fin-learning-grid > div {
+  background: var(--dv-soft);
+  border: 1px solid var(--dv-grid);
+  border-radius: 1rem;
+  padding: 1.125rem;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.fin-learning-grid > div > b {
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--dv-ink);
+  margin-bottom: 0.375rem;
+  border-bottom: 1px dotted var(--dv-muted);
+  cursor: help;
+}
+
+.fin-learning-grid > div > span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dv-muted);
+  margin-bottom: 0.375rem;
+}
+
+.fin-learning-grid > div > strong {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dv-ink);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.25rem;
+}
+
+.fin-learning-grid > div > p {
+  font-size: 0.8125rem;
+  color: var(--dv-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* BLOCO DE EXECUÇÃO PARCIAL DE 2026 */
+#hub-axis-container-financas .fin-partial {
+  padding: 1.25rem;
+  background: var(--dv-surface);
+  border: 1px solid var(--dv-grid);
+  border-radius: 1.25rem;
+  margin-top: 1rem;
+  box-sizing: border-box;
+}
+
+#hub-axis-container-financas dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+#hub-axis-container-financas dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--dv-muted);
+}
+
+#hub-axis-container-financas dd {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--dv-ink);
+  font-variant-numeric: tabular-nums;
+  margin-inline-start: 0;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 640px) {
+  #hub-axis-container-financas article,
+  #hub-axis-container-financas .fin-education {
+    padding: 1rem;
+  }
+  #hub-axis-container-financas [id^="fin-area-"] {
+    height: 220px;
+  }
+  .fin-stage-buttons {
+    width: 100%;
+    display: flex;
+  }
+  .fin-stage-buttons button {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .fin-comparison-grid,
+  .fin-learning-grid {
+    grid-template-columns: 1fr;
+  }
+  #hub-axis-container-financas dl {
+    grid-template-columns: 1fr;
+  }
+}

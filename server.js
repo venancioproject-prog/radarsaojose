@@ -109,7 +109,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (pathname === '/' || pathname === '') {
-    pathname = '/app.html';
+    pathname = '/index.html';
   }
 
   let filePath = path.join(__dirname, pathname);

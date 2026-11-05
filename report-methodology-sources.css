@@ -1,0 +1,275 @@
+/* Standalone documentation section, deliberately outside chapter 04. */
+#executive-report-view#executive-report-view > .report-methodology { --ms-ink:#f4f6f7; --ms-muted:#c2c9cf; --ms-accent:#aeb9c1; --ms-panel:#353c43; --ms-panel-deep:#293036; --ms-line:#59636c; background:linear-gradient(150deg,#3c454d,#30383f 58%,#252c32); color:var(--ms-ink); padding:clamp(24px,4vw,52px); border:1px solid #505b64; border-top:5px solid #aeb9c1; border-radius:16px; min-width:0; font-family:Inter,Arial,sans-serif; box-shadow:none; }
+#executive-report-view#executive-report-view .report-methodology .ms-meta { display:flex; justify-content:space-between; gap:20px; align-items:flex-start; border-bottom:1px solid var(--ms-line); padding-bottom:12px; margin:0 0 24px; }
+#executive-report-view#executive-report-view .report-methodology .ms-meta > div { display:flex; flex-wrap:wrap; gap:10px 16px; min-width:0; }
+#executive-report-view#executive-report-view .report-methodology .ms-meta span { font-size:11px; color:#c5ccd1!important; line-height:1.4; text-transform:uppercase; letter-spacing:.07em; }
+#executive-report-view#executive-report-view .report-methodology .ms-heading { margin:0 0 28px; max-width:none; width:100%; padding:0; }
+#executive-report-view#executive-report-view .report-methodology .ms-heading > span { display:block; font-size:10px; letter-spacing:.12em; color:var(--ms-accent); font-weight:700; }
+#executive-report-view#executive-report-view .report-methodology .ms-heading h2 { color:var(--ms-ink); font-size:clamp(28px,3vw,42px); line-height:1.12; font-weight:650; letter-spacing:-.035em; max-width:none; margin:10px 0 0; }
+#executive-report-view#executive-report-view .report-methodology .ms-heading > p { color:var(--ms-muted); font-size:16px; line-height:1.4; margin:12px 0 0; }
+#executive-report-view#executive-report-view .report-methodology .ms-content { min-width:0; color:var(--ms-muted); }
+#executive-report-view#executive-report-view .report-methodology .ms-content p { font-size:17px; line-height:1.5; margin:0 0 14px; }
+#executive-report-view#executive-report-view .report-methodology .ms-content p:last-child { margin-bottom:0; }
+#executive-report-view#executive-report-view .report-methodology .ms-layout { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:28px; margin:0; align-items:start; }
+#executive-report-view#executive-report-view .report-methodology .ms-layout > * { min-width:0; }
+#executive-report-view#executive-report-view .report-methodology .ms-layout > :is(.lg\:col-span-7,.lg\:col-span-6,.lg\:col-span-5) { grid-column:auto; }
+#executive-report-view#executive-report-view .report-methodology .gg-kpi-card { background:var(--ms-panel); border:1px solid var(--ms-line); padding:18px; box-shadow:none; border-radius:12px; }
+#executive-report-view#executive-report-view .report-methodology .gg-kpi-card > span { color:var(--ms-accent); font-size:11px; }
+#executive-report-view#executive-report-view .report-methodology .gg-kpi-card li { font-size:15px; line-height:1.5; font-family:Inter,Arial,sans-serif; }
+#executive-report-view#executive-report-view .report-methodology .ms-precision-note { padding:14px 18px; background:var(--ms-panel-deep); border-left:3px solid var(--ms-accent); font-size:13px; line-height:1.45; margin-top:20px; }
+#executive-report-view#executive-report-view .report-methodology .ms-primary > .gg-photo-card { height:150px; min-height:0; margin-top:18px; }
+#executive-report-view#executive-report-view .report-methodology .ms-primary .gg-photo-card img { height:100%; width:100%; object-fit:cover; }
+#executive-report-view#executive-report-view .report-methodology .ms-profile-cards { grid-template-columns:repeat(4,minmax(0,1fr)); }
+#executive-report-view#executive-report-view .report-methodology .ms-profile-cards > * { grid-column:auto; }
+#executive-report-view#executive-report-view .report-methodology .ms-profile-cards + div { margin-top:20px; padding:18px; border-radius:12px; }
+#executive-report-view#executive-report-view .report-methodology .ms-chart-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:24px; }
+#executive-report-view#executive-report-view .report-methodology .report-chart-panel { padding:18px; border:1px solid var(--ms-line); border-radius:12px; background:var(--ms-panel); min-width:0; }
+#executive-report-view#executive-report-view .report-methodology .report-chart-canvas { height:310px; position:relative; width:100%; }
+#executive-report-view#executive-report-view .report-methodology .ms-qualitative-panel { background:var(--ms-panel); border-color:var(--ms-line); padding:24px; }
+#executive-report-view#executive-report-view .report-methodology .ms-portrait-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px 10px; margin:20px 0; }
+#executive-report-view#executive-report-view .report-methodology .ms-field-mosaic { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+#executive-report-view#executive-report-view .report-methodology .ms-field-mosaic .gg-photo-card { height:180px; }
+#executive-report-view#executive-report-view .report-methodology .ms-field-mosaic img { height:100%; object-fit:cover; }
+#executive-report-view#executive-report-view .report-methodology .ms-footer { display:block; border-top:1px solid var(--ms-line); padding-top:10px; margin-top:28px; font-size:11px; line-height:1.4; color:#c5ccd1; }
+#executive-report-view#executive-report-view .report-methodology .ms-footer > span { overflow:visible; white-space:normal; font-size:11px; color:#c5ccd1; }
+#executive-report-view#executive-report-view .report-methodology .ms-footer > span:last-child { float:right; }
+#executive-report-view#executive-report-view .report-methodology .ms-jump { color:var(--ms-accent); font-size:12px; font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+#executive-report-view#executive-report-view .report-methodology .ms-content h3 { color:var(--ms-ink); font-size:22px; line-height:1.2; font-weight:650; letter-spacing:-.02em; margin:0 0 12px; }
+#executive-report-view#executive-report-view .report-methodology .ms-opening-copy > p { font-size:21px; }
+#executive-report-view#executive-report-view .report-methodology.ms-opener .ms-content { display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center; }
+#executive-report-view#executive-report-view .report-methodology.ms-opener h2 { font-size:clamp(42px,5vw,70px); }
+#executive-report-view#executive-report-view .report-methodology .ms-opening-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; margin-top:32px; }
+#executive-report-view#executive-report-view .report-methodology .ms-opening-facts strong { display:block; font-size:42px; color:var(--ms-accent); line-height:1; font-weight:650; }
+#executive-report-view#executive-report-view .report-methodology .ms-opening-facts span { display:block; margin-top:8px; font-size:14px; }
+#executive-report-view#executive-report-view .report-methodology .ms-opening-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+#executive-report-view#executive-report-view .report-methodology .ms-nav-card { display:block; text-decoration:none; background:var(--ms-panel); border:1px solid var(--ms-line); border-top:3px solid var(--ms-accent); border-radius:0 0 12px 12px; padding:24px; }
+#executive-report-view#executive-report-view .report-methodology .ms-nav-card > span { display:block; font-size:12px; color:var(--ms-accent); font-weight:650; margin-bottom:20px; }
+#executive-report-view#executive-report-view .report-methodology .ms-nav-card p { font-size:15px; margin:0; }
+#executive-report-view#executive-report-view .report-methodology .ms-nav-card:hover { background:#424c54; }
+#executive-report-view#executive-report-view .report-methodology .ms-reading-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+#executive-report-view#executive-report-view .report-methodology .ms-reading-card { background:var(--ms-panel); border:1px solid var(--ms-line); border-top:3px solid var(--ms-accent); border-radius:0 0 12px 12px; padding:22px; }
+#executive-report-view#executive-report-view .report-methodology .ms-reading-card p { font-size:16px; }
+#executive-report-view#executive-report-view .report-methodology .ms-reference-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+#executive-report-view#executive-report-view .report-methodology .ms-reference-card { padding:22px; border:1px solid var(--ms-line); border-radius:12px; background:var(--ms-panel); min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:16px; }
+#executive-report-view#executive-report-view .report-methodology .ms-reference-card p { font-size:16px; line-height:1.5; margin:0; overflow-wrap:anywhere; }
+#executive-report-view#executive-report-view .report-methodology .ms-reference-card a { overflow-wrap:anywhere; color:var(--ms-accent); text-underline-offset:3px; }
+#executive-report-view#executive-report-view .report-methodology .ms-reference-card cite { font-style:normal; font-weight:650; color:var(--ms-ink); }
+#executive-report-view#executive-report-view .report-methodology .ms-credit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+#executive-report-view#executive-report-view .report-methodology .ms-credit-grid p { font-size:15px; line-height:1.45; }
+#executive-report-view#executive-report-view .report-methodology .ms-pending-note { color:#735b36; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-methodology.active-slide { display:grid!important; grid-template-rows:auto auto minmax(0,1fr) auto; height:calc(100vh - 60px); padding:20px 4vw; gap:16px; overflow:hidden; border-radius:0; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology > * { margin:0; min-width:0; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-meta { padding-bottom:10px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-heading h2 { font-size:clamp(26px,3.5vh,40px); margin-top:7px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology.ms-opener h2 { font-size:clamp(38px,5.5vh,62px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-content p { font-size:clamp(15px,1.9vh,21px); line-height:1.4; margin-bottom:12px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-layout { gap:26px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology.ms-quant .ms-content { display:flex; flex-direction:column; gap:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology.ms-quant .ms-layout { flex:1; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-primary > .gg-photo-card { height:clamp(90px,15vh,160px); margin-top:14px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .gg-kpi-card { padding:14px 18px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .gg-kpi-card p { font-size:clamp(12px,1.5vh,17px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-precision-note { font-size:clamp(11px,1.4vh,15px); line-height:1.4; padding:10px 14px; margin:0; flex-shrink:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .gg-kpi-card li { font-size:clamp(13px,1.7vh,19px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile-cards { height:auto; align-items:stretch; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile-cards + div { font-size:clamp(12px,1.5vh,17px); padding:12px 16px; margin-top:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile .ms-content { display:flex; flex-direction:column; min-height:0; overflow:visible; gap:14px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile .ms-profile-cards { flex:1 1 auto; min-height:0; height:auto; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile .gg-kpi-card { padding:12px 14px; overflow:visible; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile .gg-kpi-card > span { font-size:10px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile .gg-kpi-card li { font-size:clamp(11px,1.45vh,15px); line-height:1.34; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-profile .ms-profile-cards + div { flex-shrink:0; margin-top:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-chart-grid { flex:1; min-height:0; margin:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology.ms-distributions .ms-content { display:flex; flex-direction:column; gap:18px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-chart-grid .report-chart-panel { display:flex; flex-direction:column; height:100%; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-chart-grid .report-chart-canvas { flex:1; min-height:0; height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-qualitative-panel { padding:20px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-qualitative-panel p { font-size:clamp(14px,1.7vh,19px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-field-mosaic .gg-photo-card { height:clamp(135px,23vh,260px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-content h3 { font-size:clamp(18px,2.3vh,26px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-nav-card { padding:20px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reading-grid { height:100%; grid-template-rows:repeat(2,minmax(0,1fr)); gap:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reading-card { padding:18px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reading-card p { font-size:clamp(14px,1.8vh,20px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reference-grid { height:100%; grid-auto-rows:1fr; gap:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reference-card { padding:18px 20px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reference-card p { font-size:clamp(13px,1.75vh,19px); line-height:1.45; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-credit-grid { height:100%; }
+body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-credit-grid p { font-size:clamp(13px,1.6vh,18px); }
+/* Desktop is a reading surface, not a projected slide: preserve density and comfortable line lengths. */
+body:not(.presentation-mode) #executive-report-view#executive-report-view > .report-methodology { max-width:1180px; margin:28px auto; padding:clamp(24px,3vw,38px); }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-heading { margin-bottom:20px; }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-heading h2 { font-size:clamp(28px,2.5vw,38px); }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-content p { font-size:15px; line-height:1.45; }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-opening-copy > p { font-size:17px; }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-reference-card { padding:18px; }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-reference-card p { font-size:14px; line-height:1.42; }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-reading-card { padding:18px; }
+body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-reading-card p { font-size:14px; }
+@media(max-height:740px),(max-width:1100px) {
+ body.presentation-mode #executive-report-view#executive-report-view > article.report-methodology.active-slide { padding:16px 3vw; gap:12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-content p { font-size:14px; line-height:1.35; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-layout { gap:20px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-primary > .gg-photo-card { height:90px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-primary .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top:10px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-secondary .gg-kpi-card { padding:10px 14px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-secondary .gg-kpi-card p { font-size:12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-precision-note { font-size:11px; padding:8px 12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reference-card { padding:14px 16px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reference-card p { font-size:13px; line-height:1.4; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-nav-card { padding:16px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-nav-card > span { margin-bottom:12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reading-card { padding:14px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-methodology .ms-reading-card p { font-size:13px; }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology :is(.ms-layout,.ms-opening-nav,.ms-reference-grid,.ms-reading-grid,.ms-credit-grid,.ms-chart-grid,.ms-content) { grid-template-columns:minmax(0,1fr); }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-profile-cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-meta { gap:10px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-meta > span:last-child { flex-shrink:0; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-footer > span:last-child { display:block; float:none; margin-top:5px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-reference-card { padding:18px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-methodology .ms-field-mosaic .gg-photo-card { height:150px; }
+}
+
+
+/* ==========================================================================
+   METODOLOGIA & FONTES — CONTRASTE ALTO E ACESSIBILIDADE VISUAL (WCAG AAA)
+   ========================================================================== */
+
+#executive-report-view#executive-report-view .report-methodology {
+  --ms-ink: #ffffff;
+  --ms-muted: #e2e8f0;
+  --ms-accent: #38bdf8;
+  --ms-panel: #222a33;
+  --ms-panel-deep: #182027;
+  --ms-line: #475569;
+}
+
+/* Headings e Títulos Principais */
+#executive-report-view#executive-report-view .report-methodology :is(h2, h3, .ms-heading h2, .ms-content h3) {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Eyebrows, Tags Monospaçadas e Badges de Categoria */
+#executive-report-view#executive-report-view .report-methodology .ms-heading > span,
+#executive-report-view#executive-report-view .report-methodology :is([class*="text-[#0066FF]"], [class*="text-blue"], .ms-heading span[class*="font-mono"]) {
+  color: #38bdf8 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+}
+
+/* Textos Corridos, Parágrafos e Listas de Leitura */
+#executive-report-view#executive-report-view .report-methodology :is(
+  p,
+  li,
+  .ms-content p,
+  .ms-primary p,
+  .ms-secondary p,
+  .text-slate-600,
+  .text-slate-700,
+  .text-slate-800,
+  .text-neutral-700
+) {
+  color: #e2e8f0 !important;
+  line-height: 1.55;
+}
+
+/* Números Gigantes e Estatísticas de Alto Destaque (477, ±4,5 p.p., 95%) */
+#executive-report-view#executive-report-view .report-methodology :is(
+  [id^="rep-stat-"],
+  .text-brand-950,
+  .text-slate-900,
+  .text-4xl,
+  .text-6xl,
+  .text-2xl.font-black
+) {
+  color: #ffffff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Cards, Painéis de Métricas e Contêineres de Informação */
+#executive-report-view#executive-report-view .report-methodology :is(
+  .gg-kpi-card,
+  .ms-qualitative-panel,
+  .report-content-grid > div:has(> p),
+  [class*="bg-slate-50"],
+  [class*="bg-neutral-50"]
+) {
+  background: #222a33 !important;
+  border-color: #475569 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Rótulos e Ícones Internos dos Cards */
+#executive-report-view#executive-report-view .report-methodology .gg-kpi-card > span,
+#executive-report-view#executive-report-view .report-methodology .gg-kpi-card span[class*="font-mono"] {
+  color: #38bdf8 !important;
+  font-weight: 700 !important;
+}
+
+/* Subtítulos de Cards e Textos Secundários Legíveis */
+#executive-report-view#executive-report-view .report-methodology :is(
+  .text-slate-500,
+  .text-slate-400,
+  .text-neutral-400,
+  .text-neutral-500,
+  .ms-meta span,
+  .ms-footer,
+  .ms-footer span,
+  .report-page-source,
+  .report-page-source span,
+  p.italic
+) {
+  color: #94a3b8 !important;
+}
+
+/* Nota Metodológica de Precisão no Rodapé da Tela 007 */
+#executive-report-view#executive-report-view .report-methodology .ms-precision-note {
+  background: #182027 !important;
+  border-left: 3px solid #38bdf8 !important;
+  color: #cbd5e1 !important;
+}
+
+/* Tela 009: Nomes dos Personagens Sob os Retratos Qualitativos */
+#executive-report-view#executive-report-view .report-methodology .ms-portrait-grid span {
+  color: #f1f5f9 !important;
+  font-weight: 600 !important;
+}
+
+/* Tela 009: Bloco de Destaque Qualitativo */
+#executive-report-view#executive-report-view .report-methodology .ms-qualitative-panel {
+  background: rgba(147, 51, 234, 0.14) !important;
+  border: 1px solid rgba(192, 132, 252, 0.35) !important;
+}
+#executive-report-view#executive-report-view .report-methodology .ms-qualitative-panel > span {
+  color: #c084fc !important;
+}
+#executive-report-view#executive-report-view .report-methodology .ms-qualitative-panel p {
+  color: #f1f5f9 !important;
+}
+
+/* Tela 010: Card de Destaque 'Observado em Campo' */
+#executive-report-view#executive-report-view .report-methodology [class*="bg-emerald-50"] {
+  background: rgba(16, 185, 129, 0.14) !important;
+  border: 1px solid rgba(52, 211, 153, 0.35) !important;
+}
+#executive-report-view#executive-report-view .report-methodology [class*="bg-emerald-50"] > span {
+  color: #34d399 !important;
+}
+#executive-report-view#executive-report-view .report-methodology [class*="bg-emerald-50"] p {
+  color: #e2e8f0 !important;
+}
+#executive-report-view#executive-report-view .report-methodology [class*="bg-emerald-50"] strong {
+  color: #6ee7b7 !important;
+}
+#executive-report-view#executive-report-view .report-methodology [class*="bg-emerald-50"] div {
+  color: #34d399 !important;
+}
+
+/* Linhas divisórias internas */
+#executive-report-view#executive-report-view .report-methodology :is(.border-slate-100, .border-neutral-100, .border-slate-200) {
+  border-color: #475569 !important;
+}

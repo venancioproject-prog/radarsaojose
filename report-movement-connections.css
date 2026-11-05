@@ -1,0 +1,455 @@
+/* Chapter 03: stronger identities, historical bridges, and geographic reading. */
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement] { position:relative; background:linear-gradient(180deg,var(--movement-tint),#fff 180px); }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="1"] { --movement-accent:#155fc9; --movement-tint:#edf3ff; }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="2"] { --movement-accent:#7850c9; --movement-tint:#f3eefb; }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="3"] { --movement-accent:#bd376d; --movement-tint:#fceef4; }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="4"] { --movement-accent:#087e6b; --movement-tint:#eaf7f2; }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement]::after { content:""; position:absolute; inset:0 0 auto; height:6px; background:var(--movement-accent); pointer-events:none; }
+#executive-report-view#executive-report-view .report-movements-editorial[data-movement] .movement-heading > span { display:inline-block; width:fit-content; padding:6px 10px; color:#fff; background:var(--movement-accent); border-radius:5px; letter-spacing:.1em; font-size:10px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-original p:first-child { color:#293445; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief { background:var(--movement-accent); border:0; border-radius:12px; padding:20px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief :is(p,h3,.movement-label,.movement-scope) { color:#fff; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research { position:relative; background:transparent; border:0; border-top:2px solid var(--movement-accent); border-radius:0; padding:14px 0 0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research > h3 { color:var(--movement-accent); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-connection-label { display:block; font-size:9px; line-height:1.3; font-weight:750; letter-spacing:.1em; color:var(--movement-accent); margin-bottom:7px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research .movement-interpretation { background:var(--movement-tint); border:0; border-left:3px solid var(--movement-accent); padding:10px 14px; margin-bottom:10px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history-jump { position:absolute; top:12px; right:0; color:var(--movement-accent); font-size:10px; line-height:1.4; text-decoration:underline; text-underline-offset:3px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history { border-top:3px solid var(--movement-accent); background:var(--movement-tint); border-radius:0 0 12px 12px; padding:16px 20px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history h3 { font-size:23px; line-height:1.15; color:#172233; font-weight:650; margin:8px 0 12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history p { font-size:16px; line-height:1.4; color:#424e5f; margin:0 0 10px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history p:last-child { margin:0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history-timeline { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-bottom:12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history-timeline strong { display:block; font-size:23px; line-height:1.1; color:var(--movement-accent); letter-spacing:-.03em; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history-timeline span { font-size:11px; line-height:1.3; color:#526071; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-history-connection { border-top:1px solid #17223320; padding-top:10px; }
+#executive-report-view#executive-report-view .movement-territory-page .movement-main { grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-territory { display:flex; flex-direction:column; gap:9px; min-width:0; margin:0; padding:16px; border:1px solid #dbe4ec; border-radius:16px; background:var(--movement-tint); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-kicker { font-size:10px; line-height:1.3; color:var(--movement-accent); letter-spacing:.1em; font-weight:750; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-svg { width:100%; height:320px; background:#f9fbfd; border-radius:12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-sector { fill:#e4eaf0; stroke:#fff; stroke-width:1; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-sector.is-selected { fill:var(--movement-accent); fill-opacity:.2; stroke:var(--movement-accent); stroke-width:1.3; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-sector.is-active { fill-opacity:.43; stroke-width:2.5; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-pin { cursor:pointer; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-pin circle { fill:var(--movement-accent); stroke:#fff; stroke-width:3; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-pin text { font-size:24px; font-weight:750; fill:#fff; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-pin.is-active circle { fill:#172233; stroke-width:4; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-north { fill:#526071; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-svg > g:last-child text { font-size:17px; fill:#526071; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-legend { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-place { display:grid; grid-template-columns:minmax(0,1fr) 24px; align-items:center; border:1px solid #dbe4ec; background:#fff; border-radius:8px; overflow:hidden; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-place.is-active { border-color:var(--movement-accent); box-shadow:inset 3px 0 var(--movement-accent); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-select { display:flex; align-items:center; gap:9px; text-align:left; padding:7px 9px; background:transparent; color:#243144; min-height:46px; min-width:0; cursor:pointer; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-number { flex-shrink:0; display:grid; place-items:center; height:22px; width:22px; border-radius:50%; color:#fff; background:var(--movement-accent); font-size:12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-select strong { display:block; font-size:13px; line-height:1.2; font-weight:650; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-select small { display:block; font-size:10px; line-height:1.25; margin-top:3px; color:#617083; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-open { color:var(--movement-accent); font-size:20px; line-height:1; text-decoration:none; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-note,
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-caption { position:static; color:#526071; padding:0; margin:0; font-size:11px; line-height:1.35; background:none; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-caption { border-top:1px solid #17223315; padding-top:7px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-map-access-note { font-size:13px; line-height:1.4; padding:12px; border-left:3px solid var(--movement-accent); background:var(--movement-tint); color:#526071; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-territory-context-link { font-size:15px; font-weight:600; color:var(--movement-accent); text-decoration:underline; text-underline-offset:3px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial[data-movement] { background:linear-gradient(180deg,var(--movement-tint),#fff 170px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history h3 { font-size:clamp(20px,2.5vh,28px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history p { font-size:clamp(14px,1.8vh,20px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history-timeline strong { font-size:clamp(22px,2.8vh,32px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history-timeline span { font-size:clamp(10px,1.35vh,14px); }
+
+/* Territory Page & Map Layout in Presentation Mode: Expands full height and centers map */
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .movement-main {
+  min-height: 0;
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(16px, 2.5vw, 36px);
+  align-items: stretch;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-territory {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(10px, 1.5vh, 18px);
+  gap: clamp(6px, 1vh, 10px);
+  border-radius: 16px;
+  border: 1px solid #dce4ed;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(15, 30, 50, 0.05);
+  box-sizing: border-box;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-kicker {
+  flex: 0 0 auto;
+  font-size: clamp(9px, 1.2vh, 11px);
+  font-weight: 750;
+  letter-spacing: .08em;
+  color: var(--movement-accent, #155fc9);
+  margin: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-svg {
+  flex: 1 1 auto;
+  min-height: clamp(160px, 22vh, 260px);
+  max-height: clamp(220px, 32vh, 360px);
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-legend {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-place {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22px;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-place.is-active {
+  border-color: var(--movement-accent, #155fc9);
+  box-shadow: inset 3px 0 var(--movement-accent, #155fc9), 0 2px 6px rgba(0, 0, 0, 0.04);
+  background: #f8fbff;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-select {
+  padding: clamp(4px, 0.8vh, 7px) clamp(6px, 0.8vw, 10px);
+  min-height: clamp(36px, 4.5vh, 44px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-select strong {
+  font-size: clamp(11px, 1.4vh, 13px);
+  line-height: 1.2;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-select small {
+  font-size: clamp(8px, 1.1vh, 10px);
+  line-height: 1.25;
+  margin-top: 1px;
+  color: #64748b;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-note {
+  flex: 0 0 auto;
+  font-size: clamp(8px, 1.05vh, 10px);
+  line-height: 1.3;
+  color: #64748b;
+  margin: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-map-caption {
+  flex: 0 0 auto;
+  font-size: clamp(10px, 1.25vh, 12px);
+  line-height: 1.3;
+  color: #334155;
+  font-weight: 500;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 4px;
+  margin: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .movement-story {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: clamp(4px, 1vh, 14px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .movement-original {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .report-content-grid {
+  display: block !important;
+  width: 100% !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .report-content-grid > .lg\:col-span-7 {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .movement-original p {
+  font-size: clamp(15px, 2vh, 20px) !important;
+  line-height: 1.55 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin-bottom: clamp(10px, 1.6vh, 18px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .movement-territory-context-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(13px, 1.6vh, 16px);
+  font-weight: 650;
+  padding: 8px 18px;
+  background: var(--movement-tint, #edf3ff);
+  color: var(--movement-accent, #155fc9);
+  border: 1px solid var(--movement-accent, #155fc9);
+  border-radius: 9999px;
+  width: fit-content;
+  text-decoration: none;
+  margin-top: auto;
+  transition: all 0.2s ease;
+}
+
+@media(max-height:740px),(max-width:1100px) {
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history { padding:12px 14px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history h3 { font-size:19px; margin:6px 0 9px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history p { font-size:14px; line-height:1.35; margin-bottom:8px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-history-timeline { margin-bottom:9px; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-territory-page .movement-main { gap:18px; }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .movement-territory-page .movement-main { grid-template-columns:minmax(0,1fr); }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-map-legend { grid-template-columns:minmax(0,1fr); }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-map-svg { height:290px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-history-jump { font-size:10px; }
+}
+/* Research continuations: 2-column editorial presentation layout */
+body.presentation-mode .movement-research-page .movement-main {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.25fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  gap: clamp(20px, 2.5vw, 40px) !important;
+  align-items: stretch !important;
+}
+body.presentation-mode .movement-research-page .movement-story {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  gap: clamp(14px, 2vh, 26px) !important;
+}
+body.presentation-mode .movement-research-page .movement-visual {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  position: relative !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+body.presentation-mode .movement-research-page .movement-visual img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+body.presentation-mode .movement-research-page .movement-original {
+  flex: 0 1 auto !important;
+  min-height: 0 !important;
+}
+body.presentation-mode .movement-research-page .movement-original p {
+  font-size: clamp(17px, 2.15vh, 20.5px) !important;
+  line-height: 1.56 !important;
+  margin-bottom: clamp(12px, 1.6vh, 18px) !important;
+  color: var(--report-presentation-ink, #1e293b) !important;
+}
+body.presentation-mode .movement-research-page .movement-original p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Slides com texto mais curto (1 ou 2 parágrafos, ex: Tela 74): ocupam espaço nobre sem vazios */
+body.presentation-mode .movement-research-page:not(:has(.movement-original p:nth-of-type(3))) .movement-original p {
+  font-size: clamp(20px, 2.7vh, 25.5px) !important;
+  line-height: 1.68 !important;
+  margin-bottom: clamp(18px, 2.4vh, 26px) !important;
+}
+body.presentation-mode .movement-research-page:not(:has(.movement-original p:nth-of-type(3))) .movement-research {
+  padding: clamp(18px, 2.4vh, 26px) clamp(20px, 2.2vw, 30px) !important;
+  row-gap: 5px !important;
+}
+body.presentation-mode .movement-research-page:not(:has(.movement-original p:nth-of-type(3))) .movement-research h3 {
+  font-size: clamp(17px, 2.25vh, 22px) !important;
+  line-height: 1.3 !important;
+}
+body.presentation-mode .movement-research-page:not(:has(.movement-original p:nth-of-type(3))) .movement-research .movement-stat {
+  font-size: clamp(24px, 3.2vh, 32px) !important;
+}
+
+/* Slides com 3 parágrafos (ex: Tela 101, Tela 81): nunca colidem */
+body.presentation-mode .movement-research-page:has(.movement-original p:nth-of-type(3)) .movement-original p {
+  font-size: clamp(16px, 2.05vh, 19px) !important;
+  line-height: 1.5 !important;
+  margin-bottom: clamp(8px, 1.2vh, 14px) !important;
+}
+body.presentation-mode .movement-research-page:has(.movement-original p:nth-of-type(3)) .movement-research {
+  padding: clamp(12px, 1.6vh, 18px) clamp(16px, 1.8vw, 22px) !important;
+  row-gap: 3px !important;
+}
+body.presentation-mode .movement-research-page:has(.movement-original p:nth-of-type(3)) .movement-research h3 {
+  font-size: clamp(15px, 1.9vh, 18px) !important;
+  line-height: 1.25 !important;
+}
+
+body.presentation-mode .movement-research-page .movement-research,
+body.presentation-mode .movement-research-page .movement-research-integrated {
+  flex: 0 0 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr) !important;
+  grid-template-rows: auto auto auto auto 1fr auto !important;
+  column-gap: clamp(16px, 2vw, 26px) !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
+  align-items: start !important;
+  margin: 0 !important;
+}
+body.presentation-mode .movement-research-page .movement-research > :is(.movement-label,h3,.movement-stat,.movement-evidence),
+body.presentation-mode .movement-research-page .movement-research-integrated > :is(.movement-label,h3,.movement-stat,.movement-evidence) {
+  grid-column: 1 !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-label,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-label {
+  grid-row: 1 !important;
+  font-size: clamp(11px, 1.35vh, 12.5px) !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  color: var(--movement-link, var(--movement-accent, #7050d6)) !important;
+  margin: 0 0 2px 0 !important;
+  padding: 0 !important;
+}
+body.presentation-mode .movement-research-page .movement-research h3,
+body.presentation-mode .movement-research-page .movement-research-integrated h3 {
+  grid-row: 2 !important;
+  font-weight: 700 !important;
+  margin: 0 0 clamp(4px, 0.6vh, 7px) 0 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-stat,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-stat {
+  grid-row: 3 !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  color: var(--movement-link, var(--movement-accent, #7050d6)) !important;
+  margin: 0 0 clamp(4px, 0.6vh, 7px) 0 !important;
+  display: block !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-evidence,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-evidence {
+  grid-row: 4 / 6 !important;
+  font-size: clamp(12px, 1.5vh, 14.5px) !important;
+  line-height: 1.46 !important;
+  color: var(--report-presentation-copy, #475569) !important;
+  margin: 0 !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-interpretation,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-interpretation {
+  grid-column: 2 !important;
+  grid-row: 1 / 5 !important;
+  margin: 0 !important;
+  padding: 0 0 0 clamp(16px, 1.8vw, 22px) !important;
+  border: 0 !important;
+  border-left: 1px solid #cbd5e1 !important;
+  background: transparent !important;
+  font-size: clamp(12.5px, 1.55vh, 14.5px) !important;
+  line-height: 1.48 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  align-self: stretch !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-interpretation .movement-reading-lead,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-interpretation .movement-reading-lead {
+  font-weight: 700 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+  font-size: clamp(13px, 1.6vh, 15px) !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-scope,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-scope {
+  grid-column: 2 !important;
+  grid-row: 5 !important;
+  margin: 4px 0 0 clamp(16px, 1.8vw, 22px) !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-history-jump,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-history-jump {
+  grid-column: 2 !important;
+  grid-row: 6 !important;
+  font-size: clamp(11.5px, 1.4vh, 13px) !important;
+  margin: 8px 0 0 clamp(16px, 1.8vw, 22px) !important;
+  color: var(--movement-link, var(--movement-accent, #7050d6)) !important;
+  font-weight: 600 !important;
+  width: fit-content !important;
+  position: static !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+}
+body.presentation-mode .movement-research-page .movement-research .movement-history-jump:hover,
+body.presentation-mode .movement-research-page .movement-research-integrated .movement-history-jump:hover {
+  text-decoration: underline !important;
+}
+#executive-report-view#executive-report-view .report-movements-editorial :is(.movement-map-select,.movement-map-pin,.movement-map-open,.movement-history-jump):focus-visible { outline:3px solid var(--movement-accent); outline-offset:3px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research-integrated .movement-interpretation { background:none; border:0; padding:0; margin:12px 0 0; color:#37465a; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-reading-lead { font-weight:650; color:#202b3b; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research-integrated .movement-label { max-width:100%; font-size:10px; line-height:1.4; letter-spacing:.06em; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research-integrated .movement-history-jump { position:static; display:block; width:fit-content; margin:12px 0 0; font-size:11px; }
+
+@media(max-width:1450px),(max-height:940px) {
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-main { grid-template-columns:minmax(0,.65fr) minmax(0,1.4fr); }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-story { gap:14px; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-original p { font-size:16px; line-height:1.4; margin-bottom:10px; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-history { padding:12px 14px; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-history h3 { font-size:20px; margin:6px 0 8px; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-history p { font-size:14px; line-height:1.35; margin-bottom:8px; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-history-timeline { margin-bottom:9px; }
+ body.presentation-mode .movement-research-page .movement-main { gap: 18px !important; }
+ body.presentation-mode .movement-research-page:not(:has(.movement-original p:nth-of-type(3))) .movement-original p {
+   font-size: 18px !important;
+   line-height: 1.55 !important;
+   margin-bottom: 14px !important;
+ }
+ body.presentation-mode .movement-research-page:has(.movement-original p:nth-of-type(3)) .movement-original p {
+   font-size: 15px !important;
+   line-height: 1.44 !important;
+   margin-bottom: 8px !important;
+ }
+ body.presentation-mode .movement-research-page .movement-research,
+ body.presentation-mode .movement-research-page .movement-research-integrated { padding: 10px 14px !important; column-gap: 14px !important; }
+ body.presentation-mode .movement-research-page .movement-research h3,
+ body.presentation-mode .movement-research-page .movement-research-integrated h3 { font-size: 14px !important; }
+ body.presentation-mode .movement-research-page .movement-research .movement-stat,
+ body.presentation-mode .movement-research-page .movement-research-integrated .movement-stat { font-size: 18px !important; }
+ body.presentation-mode .movement-research-page .movement-research .movement-evidence,
+ body.presentation-mode .movement-research-page .movement-research-integrated .movement-evidence { font-size: 11.5px !important; line-height: 1.36 !important; }
+ body.presentation-mode .movement-research-page .movement-research-integrated .movement-interpretation { font-size:12px !important; line-height:1.38 !important; padding-left: 14px !important; }
+}
+@media(max-height:760px) {
+ body.presentation-mode .movement-research-page .movement-main { gap: 14px !important; }
+ body.presentation-mode .movement-research-page:not(:has(.movement-original p:nth-of-type(3))) .movement-original p {
+   font-size: 15.5px !important;
+   line-height: 1.44 !important;
+   margin-bottom: 10px !important;
+ }
+ body.presentation-mode .movement-research-page:has(.movement-original p:nth-of-type(3)) .movement-original p {
+   font-size: 13.5px !important;
+   line-height: 1.38 !important;
+   margin-bottom: 6px !important;
+ }
+ body.presentation-mode .movement-research-page .movement-research,
+ body.presentation-mode .movement-research-page .movement-research-integrated { padding: 8px 12px !important; column-gap: 12px !important; }
+ body.presentation-mode .movement-research-page .movement-research h3,
+ body.presentation-mode .movement-research-page .movement-research-integrated h3 { font-size: 13.5px !important; }
+ body.presentation-mode .movement-research-page .movement-research .movement-evidence,
+ body.presentation-mode .movement-research-page .movement-research-integrated .movement-evidence { font-size: 11px !important; line-height: 1.32 !important; }
+ body.presentation-mode .movement-research-page .movement-research-integrated .movement-interpretation { font-size: 11.5px !important; line-height: 1.34 !important; }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-source-local > span { width:auto; max-width:100%; text-align:left; align-self:flex-start; }
+}
+@media(max-height:740px) {
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-original p { font-size:15px; line-height:1.35; }
+}
+@media(max-width:1100px) {
+ body.presentation-mode #executive-report-view#executive-report-view .movement-history-page .movement-main { grid-template-columns:minmax(0,.45fr) minmax(0,1.55fr); }
+}

@@ -1,0 +1,313 @@
+/* Report theme corrections for sections that still use light-only colors. */
+html.dark #executive-report-view {
+  --rs-panel: #131f36;
+  --rs-panel-hover: #1e304b;
+  --report-presentation-ink: var(--rs-ink);
+  --report-presentation-copy: var(--rs-copy);
+  --report-presentation-muted: var(--rs-muted);
+  --report-presentation-panel: var(--rs-panel);
+  --report-chart-ink: var(--rs-copy);
+  --report-chart-value: var(--rs-ink);
+  --report-chart-bar: #0066ff;
+  --report-chart-bar-alt: #60a5fa;
+}
+
+html.dark #executive-report-view > article:not(#rep-tela-001, .q-cover-slide, .report-methodology) .report-page-source span {
+  color: var(--rs-muted) !important;
+}
+
+html.dark #executive-report-view > article:not(#rep-tela-001, .q-cover-slide, .report-methodology) :is(.text-neutral-700, .text-neutral-800, .text-slate-950) {
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view > article:not(#rep-tela-001, .q-cover-slide, .report-methodology) :is(.text-\[\#0066FF\], .text-indigo-600) {
+  color: var(--rs-accent);
+}
+
+html.dark #executive-report-view > article:not(#rep-tela-001, .q-cover-slide, .report-methodology) :is(.text-slate-400, .text-neutral-400) {
+  color: var(--rs-muted) !important;
+}
+
+html.dark #executive-report-view > article.report-layout-chart :is(.bg-blue-200\/50, .bg-amber-200\/50) {
+  background-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view > #rep-tela-006.report-method-merged :is(.method-label, .method-convergence > p + p) {
+  color: var(--rs-copy);
+}
+
+html.dark #executive-report-view > #rep-tela-006.report-method-merged :is(.method-title h3, .method-datum strong) {
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view > #rep-tela-006.report-method-merged .method-convergence {
+  background-color: var(--rs-panel);
+  border-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view#executive-report-view > :is(#rep-tela-015, #rep-tela-017).report-pilot {
+  --pilot-ink: var(--rs-ink);
+  --pilot-muted: var(--rs-copy);
+  --pilot-accent: var(--rs-accent);
+  --pilot-tint: var(--rs-panel);
+}
+
+html.dark #executive-report-view#executive-report-view > #rep-tela-017.report-pilot {
+  --pilot-accent: #6ee7b7;
+}
+
+html.dark #executive-report-view#executive-report-view .report-pilot :is(.pilot-evidence, .pilot-context) {
+  background-color: var(--rs-panel);
+  border-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view#executive-report-view .report-pilot .gg-kpi-card {
+  border-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view #rep-tela-023 :is(.creators-intro-heading h2, .creators-intro-question blockquote, .creators-intro-directory h3) {
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view #rep-tela-023 .creators-intro-content p {
+  color: var(--rs-copy);
+}
+
+html.dark #executive-report-view #rep-tela-023 :is(.creators-intro-heading, .creators-intro-question) > span,
+html.dark #executive-report-view #rep-tela-024 .report-creator-arrow {
+  color: var(--rs-accent);
+}
+
+html.dark #executive-report-view #rep-tela-023 .creators-intro-note {
+  background-color: #132c2b;
+}
+
+html.dark #executive-report-view #rep-tela-023 .creators-intro-note strong {
+  color: #6ee7b7;
+}
+
+html.dark #executive-report-view #rep-tela-024 .report-creator-card {
+  background-color: var(--rs-panel);
+  border-color: var(--rs-rule);
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view #rep-tela-024 .report-creator-card:hover {
+  background-color: var(--rs-panel-hover);
+  border-color: var(--rs-accent);
+}
+
+html.dark #executive-report-view #rep-tela-024 :is(.report-creator-copy p, .report-creators-ranking-note p) {
+  color: var(--rs-muted);
+}
+
+html.dark #executive-report-view #rep-tela-024 .bg-brand-100 {
+  background-color: var(--rs-panel-hover);
+}
+
+html.dark #executive-report-view#executive-report-view > article.report-qualitative[data-q-theme] :is(.q-eyebrow, .q-health-badge) {
+  color: var(--rs-paper);
+}
+
+html.dark #executive-report-view#executive-report-view #rep-tela-051 :is(.q-theme-number, .q-theme .q-theme-evidence > strong) {
+  color: color-mix(in srgb, var(--q-blue) 50%, white) !important;
+}
+
+html.dark #executive-report-view#executive-report-view #rep-tela-051 .q-theme-number {
+  background-color: color-mix(in srgb, var(--q-blue) 22%, var(--rs-paper));
+}
+
+html.dark #executive-report-view > article.chapter-side-analysis .report-content-grid > div:not(.report-chart-panel) .text-slate-600 {
+  color: var(--rs-copy) !important;
+}
+
+/* Keep the accent for each movement and use a darker tint behind its content. */
+html.dark #executive-report-view#executive-report-view > .report-movements-editorial {
+  --movement-ink: var(--rs-ink);
+  --movement-muted: var(--rs-copy);
+  --movement-tint: color-mix(in srgb, var(--movement-accent) 15%, var(--rs-paper));
+  --movement-link: color-mix(in srgb, var(--movement-accent) 52%, white);
+}
+
+html.dark #executive-report-view#executive-report-view > .report-movements-editorial[data-movement] {
+  background-image: linear-gradient(180deg, var(--movement-tint), var(--rs-paper) 180px);
+}
+
+html.dark body.presentation-mode #executive-report-view#executive-report-view > .report-movements-editorial[data-movement] {
+  background-image: linear-gradient(180deg, var(--movement-tint), var(--rs-paper) 170px);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-heading > :is(h1, h2), .movement-history h3, .movement-question p, .movement-reading-lead, .movement-map-select) {
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-original p:first-child, .movement-opening-copy p, .movement-history p, .movement-interpretation, .movement-map-access-note, .movement-map-note, .movement-reference cite, .movement-map-caption, .movement-history-timeline span, .movement-map-select small, .movement-source-local span) {
+  color: var(--rs-copy);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-reference a, .movement-heading > span, .movement-research > h3, .movement-stat, .movement-label, .movement-connection-label, .movement-history-jump, .movement-map-kicker, .movement-map-open, .movement-territory-context-link, .movement-history-timeline strong, .op-context-kicker, .op-stat strong, .op-ideas li strong) {
+  color: var(--movement-link);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial[data-movement] .movement-heading > span {
+  color: white;
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief {
+  background-color: #174a99;
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief .movement-label {
+  color: white;
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-synthesis-card, .movement-map-card, .movement-map-svg, .movement-map-place, .op-card, .op-market-column) {
+  background-color: var(--rs-panel);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-map-card, .movement-map-place, .movement-territory, .op-card, .op-market-column) {
+  border-right-color: var(--rs-rule);
+  border-bottom-color: var(--rs-rule);
+  border-left-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial .movement-map-place.is-active {
+  background-color: var(--rs-panel-hover);
+  border-color: var(--movement-link);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial .movement-map-sector:not(.is-selected) {
+  fill: #27364c;
+  stroke: var(--rs-paper);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-map-north, .movement-map-svg > g:last-child text) {
+  fill: var(--rs-muted);
+}
+
+html.dark #executive-report-view#executive-report-view .report-opportunities :is(.op-original, .op-context, .movement-heading > p) {
+  color: var(--rs-copy);
+}
+
+html.dark #executive-report-view#executive-report-view .report-opportunities :is(.op-context h3, .op-card > p:first-child, .op-market-column h3, .op-market-column h4) {
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view#executive-report-view .report-opportunities :is(.op-base, .op-survey-source, .op-source-original > span) {
+  color: var(--rs-muted);
+}
+
+html.dark #executive-report-view#executive-report-view .report-opportunities.op-ideas .op-original-grid > div > span {
+  color: var(--movement-link);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-visual, .op-photo) {
+  background-color: var(--rs-panel);
+}
+
+html.dark #executive-report-view#executive-report-view > .report-movements-editorial .report-page-meta span {
+  color: var(--rs-muted) !important;
+}
+
+html.dark #executive-report-view #rep-tela-037 .sjc-card-arrow-indicator {
+  color: var(--rs-accent) !important; /* The card colors are set inline. */
+}
+
+html.dark #executive-report-view #rep-tela-043 .text-cyan-100 {
+  color: #fff;
+}
+
+/* Chapter 1 uses the same colors in reading and presentation. */
+html.dark #executive-report-view > #rep-tela-001 .text-white\/40 {
+  color: var(--rs-muted);
+}
+
+html.dark #executive-report-view > article.report-chapter-one-fit .gg-kpi-giant {
+  color: var(--rs-ink) !important;
+}
+
+html.dark #executive-report-view > article.report-chapter-one-fit .gg-kpi-giant.text-\[\#0066FF\] {
+  color: var(--rs-accent) !important;
+}
+
+html.dark #executive-report-view > :is(#rep-tela-019, #rep-tela-020) .report-quote {
+  background-color: var(--rs-panel) !important;
+  border-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view > :is(#rep-tela-019, #rep-tela-020) .report-quote-source.bg-blue-100 {
+  background-color: #163454 !important;
+  color: var(--rs-accent);
+}
+
+html.dark #executive-report-view #rep-tela-024 .report-creators-ranking-note p {
+  color: var(--rs-muted) !important;
+}
+
+html.dark #executive-report-view#executive-report-view #rep-tela-051 .q-theme {
+  background-color: var(--rs-panel) !important;
+  border-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view#executive-report-view #rep-tela-051 .q-theme:hover {
+  background-color: var(--rs-panel-hover) !important;
+}
+
+html.dark #executive-report-view#executive-report-view > .report-qualitative .q-quote-open .q-open-tag {
+  color: #bfdbfe;
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-evidence, .culture-analysis p, .op-final-note p) {
+  color: var(--rs-copy);
+}
+
+html.dark #executive-report-view#executive-report-view .report-movements-editorial .movement-territory {
+  background-color: var(--movement-tint) !important;
+}
+
+html.dark #executive-report-view#executive-report-view .report-opportunities .op-study-facts p {
+  color: var(--movement-link);
+}
+
+html.dark #executive-report-view .report-benchmarks-cidades .report-page-heading h2,
+html.dark #executive-report-view .benchmark-city-card :is(h3, strong) {
+  color: var(--rs-ink);
+}
+
+html.dark #executive-report-view :is(.report-benchmarks-cidades .report-page-heading > p, .benchmark-city-card p) {
+  color: var(--rs-copy);
+}
+
+html.dark #executive-report-view .benchmark-city-card span {
+  color: var(--rs-muted);
+}
+
+html.dark #executive-report-view .report-benchmarks-cidades .report-page-source a {
+  color: var(--rs-accent);
+}
+
+html.dark #executive-report-view .benchmark-city-card {
+  background-color: var(--rs-panel);
+  border-right-color: var(--rs-rule);
+  border-bottom-color: var(--rs-rule);
+  border-left-color: var(--rs-rule);
+}
+
+html.dark #executive-report-view .benchmark-city-card.benchmark-global {
+  background-color: #211e38;
+}
+
+html.dark #executive-report-view > #rep-tela-006.report-method-merged .method-column .method-icon {
+  color: #93c5fd;
+  background-color: #19304e;
+}
+
+html.dark #executive-report-view > #rep-tela-006.report-method-merged .method-column:nth-child(2) .method-icon {
+  color: #d8b4fe;
+  background-color: #302446;
+}
+
+html.dark #executive-report-view > #rep-tela-006.report-method-merged .method-column:nth-child(3) .method-icon {
+  color: #6ee7b7;
+  background-color: #183830;
+}

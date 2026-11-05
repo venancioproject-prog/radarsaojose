@@ -1,0 +1,2143 @@
+/* Chapter 01 slide rhythm. Reading/mobile layouts retain natural document flow. */
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit.active-slide {
+ overflow:hidden; scrollbar-gutter:auto; padding:20px 4vw; gap:12px; --report-body:clamp(13px,1.7vh,18px);
+}
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit > * { min-width:0; margin-block:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-heading h2 { font-size:clamp(25px,3.5vh,40px); max-width:none; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-heading { gap:6px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-heading > * { margin-block:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-body { flex:1 1 0; min-height:0; gap:14px; padding-top:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-body > * { margin-block:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-content-grid { gap:20px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .gg-kpi-card { padding:10px 12px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .gg-kpi-card p { font-size:clamp(12px,1.55vh,16px); line-height:1.35; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit :is(p,blockquote) { font-size:var(--report-body); line-height:1.4; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit :is(.space-y-4,.space-y-3) > * + * { margin-top:8px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-chart-canvas { height:clamp(160px,24vh,280px); min-height:0!important; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-reading-copy { max-width:none; column-gap:24px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-reading-copy p { break-inside:auto; margin-bottom:8px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .gg-photo-card { position:relative; overflow:hidden; height:clamp(110px,17vh,190px); }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-source { margin-top:auto; padding:8px 0 0; gap:16px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-source span { font-size:clamp(10px,1.3vh,13px); line-height:1.35; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-quote { padding:12px 20px; gap:8px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .gg-bento-card { padding:14px 18px; }
+/* Dense canvases are bounded by the space reserved in the slide. */
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-chart-canvas { min-height:0!important; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis.active-slide {
+ display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto minmax(0,1fr) auto auto;
+}
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis > .report-reading-copy { columns:2; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis > .report-content-grid:has(.report-chart-panel) { grid-template-columns:repeat(2,minmax(0,1fr)); min-height:0; align-items:stretch; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis .report-chart-panel { display:flex; flex-direction:column; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis .report-chart-canvas { flex:1; height:auto; min-height:0!important; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis.active-slide { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto minmax(0,1fr) auto; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis.active-slide { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto minmax(0,1fr) auto; }
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) > .report-content-grid:last-of-type { min-height:0; align-items:stretch; }
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) > .report-content-grid:has(.report-chart-panel) > * { min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) .report-chart-panel { min-height:0; display:flex; flex-direction:column; }
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) .report-chart-canvas { height:auto; flex:1; min-height:0!important; }
+/* rep-tela-019, 020 photo removed */
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-021,#rep-tela-026) > .report-content-grid:last-of-type > div:last-child { display:flex; flex-direction:column; gap:10px; }
+
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-source { flex-shrink:0; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-reading-copy { columns:2; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .report-page-body > .p-6 { padding:16px; }
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047,#rep-tela-048) .report-page-body > .report-content-grid { flex:1; min-height:0; align-items:stretch; }
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047,#rep-tela-048) .aspect-video { height:clamp(90px,13vh,145px); aspect-ratio:auto; }
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047,#rep-tela-048) .report-content-grid > div > .p-6 { padding:12px; }
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047,#rep-tela-048) .report-content-grid p { font-size:clamp(12px,1.6vh,17px); line-height:1.35; }
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047,#rep-tela-048) .report-content-grid .p-3\.5 { padding:9px; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .sjc-reg-card { padding:9px 12px; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .sjc-reg-card p { font-size:12px; line-height:1.3; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid > div:first-child > .relative { min-height:0; max-height:calc(100vh - 310px); width:auto; max-width:100%; }
+
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-021 .report-content-grid > div:last-child { gap:6px; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-021 .report-content-grid > div:last-child .space-y-4 > * + * { margin-top:6px; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-content-grid > div:last-child .p-4 { padding:8px; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-030 .report-content-grid:last-of-type { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-030 .report-content-grid:last-of-type > * { grid-column:auto; }
+@media(max-width:1100px) {
+ body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-021 .report-content-grid:last-of-type { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+ body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-021 .report-content-grid:last-of-type > * { grid-column:auto; }
+}
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-chart-canvas,
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-chart-canvas { position:relative; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-chart-canvas > canvas,
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-chart-canvas > canvas { position:absolute; inset:0; width:100%!important; height:100%!important; }
+/* Stretch plot panels into their reserved grid tracks before Chart.js measures them. */
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) > .report-content-grid:has(.report-chart-panel) { align-items:stretch; min-height:0; height:100%; }
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) > .report-content-grid:has(.report-chart-panel) > * { min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis,.chapter-full-analysis) .report-chart-panel { align-self:stretch; }
+body.presentation-mode #executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition { align-items:stretch; }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-030 .report-content-grid:has(.report-chart-panel) { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-030 .report-content-grid:has(.report-chart-panel) > * { grid-column:auto; }
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis > .report-reading-copy p,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-reading-copy p { break-inside:avoid; }
+
+/* ==========================================================================
+   CAPÍTULO 01 — LAYOUT KEYNOTE NO MODO APRESENTAÇÃO TELA CHEIA
+   Distribuição vertical generosa, respiro harmônico e preenchimento de tela
+   ========================================================================== */
+
+/* ==========================================================================
+   REQUISITO R1: ELIMINAÇÃO DE CARDS E CAIXAS DE FUNDO NO MODO APRESENTAÇÃO
+   Aplica-se ESTRITAMENTE em presentation-mode (Web reading mode fica 100% intocado)
+   ========================================================================== */
+
+/* 1. Gráficos Limpos sobre a Lâmina do Slide (Sem caixas cinzas de fundo) */
+body.presentation-mode #executive-report-view#executive-report-view .report-chart-panel,
+body.presentation-mode #executive-report-view#executive-report-view .gg-chart-box,
+body.presentation-mode #executive-report-view#executive-report-view .pilot-evidence,
+body.presentation-mode #executive-report-view#executive-report-view .flow-pair .report-chart-panel,
+body.presentation-mode #executive-report-view#executive-report-view article.chapter-side-analysis .report-chart-panel,
+body.presentation-mode #executive-report-view#executive-report-view article.chapter-pair-analysis .report-chart-panel,
+body.presentation-mode #executive-report-view#executive-report-view article.chapter-full-analysis .report-chart-panel,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 .report-chart-panel,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 .report-chart-panel {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 2. KPIs e Números Limpos sobre o Fundo do Slide (Sem caixas nem molduras) */
+body.presentation-mode #executive-report-view#executive-report-view .gg-kpi-card,
+body.presentation-mode #executive-report-view#executive-report-view .gg-bento-card,
+body.presentation-mode #executive-report-view#executive-report-view #rep-paradoxo .gg-kpi-card,
+body.presentation-mode #executive-report-view#executive-report-view .pilot-evidence > .gg-kpi-card,
+body.presentation-mode #executive-report-view#executive-report-view article.chapter-side-analysis .gg-kpi-card,
+body.presentation-mode #executive-report-view#executive-report-view article.chapter-side-analysis .gg-bento-card,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-021 .report-content-grid > div:last-child,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .report-content-grid:first-of-type > div,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .report-content-grid > div {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+
+/* ==========================================================================
+   REQUISITO R2: PADRONIZAÇÃO TIPOGRÁFICA OFICIAL (SORA + INTER) NO MODO SLIDE
+   ========================================================================== */
+
+/* 1. Base Geral de Texto dos Slides do Capítulo 1 -> Inter */
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024),
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) :is(p, span, div, label, li, a, button, blockquote, small):not(i):not([class*="fa-"]):not([class*="fa"]):not(.report-headline):not(.pilot-lead):not([id^="rep-val-"]):not(.gg-kpi-giant):not(.kpi-hero-num):not(.kpi-display-num):not([data-kpi-highlight="true"]):not(:where(#rep-tela-033 .gg-kpi-card > span.font-mono, #rep-tela-033 .gg-kpi-card > span.font-mono [data-report-metric])) {
+  font-family: var(--font-ui, 'Inter', system-ui, -apple-system, sans-serif) !important;
+}
+
+/* 2. Títulos Display, Manchetes e Chamadas Editoriais -> Sora */
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) :is(h1, h2, .report-headline, .pilot-lead) {
+  font-family: var(--font-display, 'Sora', system-ui, -apple-system, sans-serif) !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* 3. Métricas Gigantes e Números de Destaque -> Sora (com numerais tabulares) */
+body.presentation-mode #executive-report-view#executive-report-view :is([id^="rep-val-"], .gg-kpi-giant, .kpi-hero-num, .kpi-display-num, [data-kpi-highlight="true"]):not(i):not([class*="fa-"]):not([class*="fa"]) {
+  font-family: var(--font-display, 'Sora', system-ui, -apple-system, sans-serif) !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* 4. Padronização de Rótulos Técnicos que Usam font-mono -> Inter Editorial */
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) .font-mono:not([id^="rep-val-"]):not(.kpi-hero-num):not(.kpi-display-num):not(.gg-kpi-giant):not(:where(#rep-tela-033 .gg-kpi-card > span.font-mono)) {
+  font-family: var(--font-ui, 'Inter', system-ui, -apple-system, sans-serif) !important;
+}
+
+/* 5. Números Percentuais em Destaque nos Cards que Utilizam .font-mono -> Sora */
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) :is(.gg-kpi-card, .pilot-evidence) span.font-mono[class*="text-3xl"],
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) :is(.gg-kpi-card, .pilot-evidence) span.font-mono[class*="text-4xl"],
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) :is(.gg-kpi-card, .pilot-evidence) span.font-mono[class*="text-5xl"],
+body.presentation-mode #executive-report-view#executive-report-view > :is(article.report-chapter-one-fit, #rep-tela-015, #rep-tela-016, #rep-tela-017, #rep-tela-023, #rep-tela-024) :is(.gg-kpi-card, .pilot-evidence) span.font-mono[class*="text-6xl"] {
+  font-family: var(--font-display, 'Sora', system-ui, -apple-system, sans-serif) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+/* 6. Textos SVG (ex: Mapa Regional rep-tela-037) -> Inter */
+body.presentation-mode #executive-report-view#executive-report-view svg text {
+  font-family: var(--font-ui, 'Inter', system-ui, -apple-system, sans-serif) !important;
+}
+
+/* Regra Geral de Base para todos os slides do Capítulo 01 */
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100dvh - 60px) !important;
+  min-height: 0 !important;
+  padding: clamp(18px, 2.4vh, 32px) clamp(32px, 4vw, 72px) !important;
+  gap: clamp(12px, 1.8vh, 22px) !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-meta {
+  flex-shrink: 0 !important;
+  padding-bottom: clamp(6px, 1vh, 10px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-source {
+  flex-shrink: 0 !important;
+  margin-top: auto !important;
+  padding-top: clamp(8px, 1.2vh, 14px) !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.report-chapter-one-fit .report-page-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(14px, 2vh, 24px) !important;
+  padding-top: 0 !important;
+}
+
+/* 1. Tela 07 (#rep-tela-013) — Abertura do Capítulo 01 */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-013.active-slide {
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-013 .report-page-heading {
+  margin-block: auto !important;
+  align-self: flex-start !important;
+  max-width: 960px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(12px, 1.8vh, 22px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-013 .report-page-heading h1 {
+  font-size: clamp(38px, 5.6vh, 64px) !important;
+  font-weight: 800 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.04em !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-013 .report-page-heading p:first-of-type {
+  font-size: clamp(18px, 2.4vh, 26px) !important;
+  line-height: 1.35 !important;
+  font-weight: 550 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-013 .report-page-heading p:last-of-type {
+  font-size: clamp(14px, 1.8vh, 18px) !important;
+  line-height: 1.55 !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  margin: 0 !important;
+}
+
+/* 2. Tela 08 (#rep-tela-014) — Comportamento & Identidade: Paradoxo Orgulho vs. Evasão */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(12px, 1.8vh, 24px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 .report-page-heading {
+  margin: 0 !important;
+  gap: 6px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 .report-page-heading h2 {
+  font-size: clamp(26px, 3.6vh, 40px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 #rep-paradoxo {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(20px, 2.5vw, 40px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 #rep-paradoxo .gg-kpi-card {
+  padding: clamp(14px, 1.8vh, 22px) clamp(18px, 2vw, 28px) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 #rep-paradoxo [id^="rep-val-"] {
+  font-size: clamp(44px, 5.8vh, 62px) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.04em !important;
+  margin: 2px 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 #rep-paradoxo p:first-of-type {
+  font-size: clamp(13px, 1.6vh, 16px) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--report-presentation-ink, #1e293b) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 #rep-paradoxo p:last-of-type {
+  font-size: clamp(12px, 1.45vh, 14.5px) !important;
+  color: var(--report-presentation-muted, #64748b) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 #rep-paradoxo .w-full.rounded-full {
+  margin-top: 6px !important;
+  height: 6px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important;
+  gap: clamp(28px, 3.5vw, 56px) !important;
+  align-items: stretch !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) .space-y-4 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(12px, 1.8vh, 20px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) .space-y-4 > p {
+  font-size: clamp(15px, 2vh, 18.5px) !important;
+  line-height: 1.55 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) .space-y-4 > p:last-child {
+  font-weight: 600 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 .report-chart-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: clamp(14px, 2vh, 22px) clamp(18px, 2vw, 26px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 .report-chart-panel span {
+  font-size: clamp(10.5px, 1.3vh, 12px) !important;
+  font-weight: 750 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--report-presentation-copy, #475569) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-014 .report-chart-canvas {
+  flex: 1 1 auto !important;
+  min-height: clamp(180px, 25vh, 280px) !important;
+  height: auto !important;
+  position: relative !important;
+  margin: 8px 0 !important;
+}
+
+/* 3. Slides de Análise Lateral (chapter-side-analysis) */
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis.active-slide {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  gap: clamp(10px, 1.4vh, 18px) !important;
+  padding: clamp(16px, 2.2vh, 26px) clamp(32px, 4vw, 72px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis > .report-content-grid:first-of-type {
+  gap: clamp(10px, 1.2vw, 16px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-kpi-card,
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-bento-card {
+  padding: clamp(8px, 1.2vh, 12px) clamp(10px, 1.2vw, 16px) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-kpi-card [class*="text-4xl"],
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-kpi-card [class*="text-5xl"],
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-bento-card [class*="text-4xl"],
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-bento-card [class*="text-5xl"],
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-kpi-giant {
+  font-size: clamp(24px, 3.2vh, 34px) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  margin-bottom: 2px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-kpi-card p,
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .gg-bento-card p {
+  font-size: clamp(11px, 1.35vh, 13px) !important;
+  line-height: 1.3 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis > .report-content-grid:last-of-type {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: clamp(32px, 3.8vw, 60px) !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis > .report-content-grid:last-of-type > * {
+  min-height: 0 !important;
+  grid-column: auto !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .report-chart-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: clamp(14px, 1.8vh, 22px) clamp(16px, 1.8vw, 24px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .report-chart-canvas {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis .report-chart-canvas > canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis > .report-content-grid:last-of-type > div:not(.report-chart-panel) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: clamp(12px, 1.8vh, 20px) !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis > .report-content-grid:last-of-type > div:not(.report-chart-panel) p {
+  font-size: clamp(16.5px, 2.15vh, 20px) !important;
+  line-height: 1.6 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 0 clamp(8px, 1.2vh, 14px) 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-side-analysis > .report-content-grid:last-of-type > div:not(.report-chart-panel) p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 3.1 Slides de Análise Completa (chapter-full-analysis: rep-tela-032 e rep-tela-036) */
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037).active-slide {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto minmax(0, 1fr) auto !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  gap: clamp(12px, 1.8vh, 22px) !important;
+  padding: clamp(18px, 2.4vh, 32px) clamp(32px, 4vw, 72px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) > .report-content-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) !important;
+  gap: clamp(28px, 3.5vw, 56px) !important;
+  align-items: stretch !important;
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) > .report-content-grid > * {
+  min-height: 0 !important;
+  grid-column: auto !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) .report-chart-panel {
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: clamp(16px, 2vh, 24px) clamp(18px, 2vw, 26px) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) .report-chart-canvas {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) .report-chart-canvas > canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) > .report-content-grid > div:last-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: clamp(12px, 1.8vh, 22px) !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-full-analysis:not(#rep-tela-037) > .report-content-grid > div:last-child p {
+  font-size: clamp(15px, 2vh, 18.5px) !important;
+  line-height: 1.55 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+/* 3.2 Slide Split Chart (rep-tela-016) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  text-align: left !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading > div:first-child {
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading h2 {
+  text-align: left !important;
+  margin-inline: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading span {
+  text-align: left !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important;
+  gap: clamp(20px, 2.5vw, 40px) !important;
+  align-items: stretch !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition > * {
+  min-height: 0 !important;
+  grid-column: auto !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-chart-canvas {
+  height: 100% !important;
+  min-height: clamp(140px, 18vh, 220px) !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-chart-canvas > canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 4. Slides de Análise Pareada (chapter-pair-analysis) */
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(12px, 1.6vh, 20px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis .report-reading-copy {
+  columns: 2 !important;
+  column-gap: clamp(24px, 3.2vw, 52px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis .report-reading-copy p {
+  font-size: clamp(14px, 1.85vh, 17.5px) !important;
+  line-height: 1.5 !important;
+  margin-bottom: clamp(6px, 1vh, 12px) !important;
+  break-inside: avoid !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis > .report-content-grid:has(.report-chart-panel) {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(20px, 2.5vw, 36px) !important;
+  align-items: stretch !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis .report-chart-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: clamp(12px, 1.6vh, 20px) clamp(16px, 1.8vw, 24px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.chapter-pair-analysis .report-chart-canvas {
+  flex: 1 1 auto !important;
+  min-height: clamp(150px, 22vh, 280px) !important;
+  height: auto !important;
+  position: relative !important;
+}
+
+/* 5. Tela 20 (#rep-tela-027) — Micromobilidade (Bicicleta e Patinete) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .report-content-grid:first-of-type {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2vw, 28px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .report-content-grid:first-of-type > div {
+  padding: clamp(14px, 1.8vh, 22px) clamp(16px, 1.8vw, 24px) !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 4px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .report-content-grid:first-of-type span[class*="text-4xl"],
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .report-content-grid:first-of-type span[class*="text-5xl"] {
+  font-size: clamp(36px, 4.8vh, 52px) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .report-content-grid:first-of-type p {
+  font-size: clamp(12px, 1.5vh, 15px) !important;
+  line-height: 1.4 !important;
+  color: var(--report-presentation-muted, #64748b) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 > .report-content-grid:last-of-type {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) !important;
+  gap: clamp(28px, 3.5vw, 56px) !important;
+  align-items: center !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 > .report-content-grid:last-of-type > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(12px, 1.8vh, 18px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 > .report-content-grid:last-of-type > div:first-child p {
+  font-size: clamp(15px, 2vh, 18.5px) !important;
+  line-height: 1.55 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .gg-photo-card {
+  height: 100% !important;
+  min-height: clamp(200px, 28vh, 340px) !important;
+  border-radius: 18px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-027 .gg-photo-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* 6. Tela 30 (#rep-tela-037) — Radiografia das Regiões */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid:last-of-type {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr) !important;
+  gap: clamp(24px, 3vw, 44px) !important;
+  align-items: stretch !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid > div:first-child > .relative {
+  height: 100% !important;
+  min-height: clamp(280px, 42vh, 460px) !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid > div:last-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  gap: clamp(8px, 1.2vh, 14px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid > div:last-child > .grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(8px, 1.2vh, 12px) !important;
+  flex: 1 1 auto !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .sjc-reg-card {
+  padding: clamp(10px, 1.4vh, 14px) clamp(12px, 1.4vw, 16px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  border-radius: 14px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .sjc-reg-card p {
+  font-size: clamp(12px, 1.45vh, 14px) !important;
+  line-height: 1.38 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-037 .report-content-grid > div:last-child > .p-3 {
+  padding: clamp(10px, 1.3vh, 14px) clamp(14px, 1.6vw, 18px) !important;
+  font-size: clamp(12.5px, 1.5vh, 14.5px) !important;
+  border-radius: 12px !important;
+}
+
+/* 7. Tela 31 (#rep-tela-039) — Centro/Oeste concentra atração (Correção de sobreposição do rodapé) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-page-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-content-grid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important;
+  gap: clamp(24px, 3vw, 48px) !important;
+  align-items: center !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-content-grid > * {
+  grid-column: auto !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-content-grid > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(10px, 1.5vh, 16px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-content-grid > div:first-child p {
+  font-size: clamp(16px, 2.15vh, 19.5px) !important;
+  line-height: 1.6 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-content-grid > div:last-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .gg-photo-card {
+  height: clamp(220px, 34vh, 360px) !important;
+  max-height: 100% !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .gg-photo-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-039 .report-page-source {
+  flex-shrink: 0 !important;
+  z-index: 10 !important;
+  position: relative !important;
+}
+
+
+/* 7.1 Tela 33 (#rep-tela-041) — Vida Social & Estabilidade */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(12px, 1.6vh, 20px) !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 .report-reading-copy {
+  columns: 2 !important;
+  column-gap: clamp(24px, 3.2vw, 52px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 .report-reading-copy p {
+  font-size: clamp(14px, 1.85vh, 17.5px) !important;
+  line-height: 1.5 !important;
+  margin-bottom: clamp(6px, 1vh, 12px) !important;
+  break-inside: avoid !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 > .report-content-grid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(20px, 2.5vw, 36px) !important;
+  align-items: stretch !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 .report-chart-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: clamp(12px, 1.6vh, 20px) clamp(16px, 1.8vw, 24px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 .report-chart-canvas {
+  flex: 1 1 auto !important;
+  min-height: clamp(150px, 22vh, 280px) !important;
+  height: auto !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-041 .report-chart-canvas > canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+/* 9. Telas 35 e 36 (#rep-tela-043 e #rep-tela-044) — Modelo Radar (R$ 19 mi) */
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-043, #rep-tela-044, #rep-tela-045).active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-043, #rep-tela-044, #rep-tela-045) .report-page-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(14px, 2vh, 26px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .report-page-body > .rep-19m-banner {
+  padding: clamp(12px, 1.8vh, 18px) clamp(16px, 2vw, 24px) !important;
+  border-radius: 20px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .report-page-body > .rep-19m-banner span[class*="text-xl"],
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .report-page-body > .rep-19m-banner span[class*="text-2xl"] {
+  font-size: clamp(20px, 2.5vh, 28px) !important;
+  font-weight: 800 !important;
+}
+
+/* Tela 36 (#rep-tela-044) — Reter consumo (Layout Elegante & Distribuído) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-page-body {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+/* Preservar cores e dar porte editorial aos 2 KPI cards */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(24px, 3vw, 48px) !important;
+  margin-block: clamp(10px, 1.6vh, 20px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid > div {
+  padding: clamp(22px, 3vh, 32px) clamp(24px, 2.5vw, 36px) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+/* Card 1: Âmbar suave */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid > div:first-child {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%) !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+
+/* Card 2: Esmeralda suave */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid > div:last-child {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.04) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid div[class*="text-5xl"],
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid [class*="text-4xl"] {
+  font-size: clamp(44px, 5.8vh, 64px) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.02em !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-content-grid p {
+  font-size: clamp(13.5px, 1.7vh, 16px) !important;
+  line-height: 1.45 !important;
+  color: var(--report-presentation-copy, #475569) !important;
+}
+
+/* Grid de leitura inferior: 2 colunas estáveis (texto à esquerda, callout box à direita) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-reading-copy {
+  columns: auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: clamp(24px, 3.2vw, 52px) !important;
+  align-items: center !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-reading-copy p {
+  font-size: clamp(16px, 2.2vh, 19.5px) !important;
+  line-height: 1.62 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin-bottom: clamp(8px, 1.2vh, 14px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-reading-copy > div {
+  padding: clamp(20px, 2.6vh, 28px) clamp(22px, 2.2vw, 32px) !important;
+  background: var(--report-presentation-panel, #f0f7ff) !important;
+  border-left: 5px solid #0066FF !important;
+  border-radius: 0 20px 20px 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-044 .report-reading-copy > div p {
+  font-size: clamp(16.5px, 2.25vh, 20.5px) !important;
+  font-weight: 700 !important;
+  line-height: 1.52 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+  margin-bottom: 0 !important;
+}
+
+/* 10. Tela 37 (#rep-tela-045) — Três Tensões de São José */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .report-content-grid.rep-tensoes-cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2.2vw, 32px) !important;
+}
+
+/* Remover caixas cinzas atrás dos KPIs no modo slide (Requisito R1) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .report-content-grid.rep-tensoes-cards > div {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensoes-cards .gg-kpi-giant {
+  font-size: clamp(38px, 4.8vh, 56px) !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  margin: 2px 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensoes-cards p {
+  font-size: clamp(12px, 1.45vh, 14px) !important;
+  line-height: 1.38 !important;
+  color: var(--report-presentation-muted, #64748b) !important;
+}
+
+/* Container de Leitura: flex-col vertical sem colunas divididas */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .report-reading-copy {
+  columns: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(12px, 1.8vh, 20px) !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  margin-block: auto !important;
+}
+
+/* Grid de 3 blocos lado a lado na horizontal */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensoes-blocks-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2.2vw, 32px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensao-block p:first-child {
+  font-size: clamp(14px, 1.8vh, 16.5px) !important;
+  font-weight: 800 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+  margin-bottom: 4px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensao-block p:last-child {
+  font-size: clamp(12.5px, 1.55vh, 14.5px) !important;
+  line-height: 1.45 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+
+/* Conclusão em largura total abaixo dos 3 blocos */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensoes-conclusion {
+  padding: clamp(12px, 1.8vh, 18px) clamp(16px, 1.8vw, 24px) !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border-left: 4px solid #0066FF !important;
+  border-radius: 0 16px 16px 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-045 .rep-tensoes-conclusion p {
+  font-size: clamp(13px, 1.65vh, 15px) !important;
+  line-height: 1.45 !important;
+  margin-bottom: 2px !important;
+}
+
+/* 11. Tela 38 (#rep-tela-046) — "Comparar não é copiar" (Abertura Benchmarks) */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .report-content-grid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important;
+  gap: clamp(28px, 3.5vw, 56px) !important;
+  align-items: center !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .report-content-grid > div:first-child {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(14px, 2vh, 22px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .report-content-grid > div:first-child p {
+  font-size: clamp(16px, 2.15vh, 20px) !important;
+  line-height: 1.58 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .p-4.rounded-2xl {
+  padding: clamp(16px, 2.2vh, 24px) clamp(20px, 2.2vw, 28px) !important;
+  background: var(--report-presentation-panel, #f0f7ff) !important;
+  border-left: 4px solid #0066ff !important;
+  border-radius: 0 16px 16px 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .p-4.rounded-2xl p {
+  font-size: clamp(17px, 2.3vh, 22px) !important;
+  font-weight: 700 !important;
+  line-height: 1.42 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .gg-photo-card {
+  height: clamp(240px, 36vh, 420px) !important;
+  border-radius: 20px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-046 .gg-photo-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* 12. Telas 39 e 40 (#rep-tela-047 e #rep-tela-048) — Benchmarks Nacional e Internacional */
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048).active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-page-body > .report-content-grid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(16px, 2vw, 28px) !important;
+  align-items: stretch !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid > div {
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .aspect-video {
+  height: clamp(120px, 18vh, 190px) !important;
+  width: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid > div > .p-6 {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: clamp(14px, 1.8vh, 22px) !important;
+  gap: clamp(10px, 1.4vh, 16px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid h3 {
+  font-size: clamp(18px, 2.3vh, 24px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid p {
+  font-size: clamp(13px, 1.65vh, 15.5px) !important;
+  line-height: 1.45 !important;
+  color: var(--report-presentation-copy, #475569) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid .p-3\.5 {
+  padding: clamp(10px, 1.3vh, 14px) clamp(12px, 1.4vw, 16px) !important;
+  border-radius: 12px !important;
+  background: var(--report-presentation-panel, #ffffff) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid .p-3\.5 p {
+  font-size: clamp(12px, 1.5vh, 14px) !important;
+  line-height: 1.4 !important;
+}
+/* ==========================================================================
+   CAPÍTULO 01 — AJUSTES ESPECÍFICOS DE APRESENTAÇÃO (TELAS 8 A 37)
+   ========================================================================== */
+
+/* Regra Unificada para Telas com Gráfico Lateral no Modo Apresentação */
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis, .chapter-full-analysis) .report-content-grid:has(.report-chart-panel) {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: clamp(32px, 3.8vw, 60px) !important;
+  align-items: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis, .chapter-full-analysis) .report-content-grid:has(.report-chart-panel) > * {
+  grid-column: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis, .chapter-full-analysis) .report-content-grid:has(.report-chart-panel) > div:not(.report-chart-panel):not(:has(.report-chart-panel)) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis, .chapter-full-analysis) .report-content-grid:has(.report-chart-panel) > div:not(.report-chart-panel):not(:has(.report-chart-panel)) p {
+  font-size: clamp(16.5px, 2.15vh, 20px) !important;
+  line-height: 1.62 !important;
+  margin-bottom: clamp(10px, 1.4vh, 16px) !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis, .chapter-full-analysis) .report-content-grid:has(.report-chart-panel) > div:not(.report-chart-panel):not(:has(.report-chart-panel)) p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Gráfico / Painel Lateral */
+body.presentation-mode #executive-report-view#executive-report-view > article:is(.chapter-side-analysis, .chapter-full-analysis) .report-content-grid:has(.report-chart-panel) > :is(.report-chart-panel, div:has(.report-chart-panel)) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+/* Ajustes Específicos por Tela: */
+
+/* Tela 8 (#rep-tela-015): Espaçamento nobre entre blocos, sem colisão e sem vazamento */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-main {
+  gap: clamp(24px, 3.2vw, 44px) !important;
+  align-items: stretch !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-story {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(14px, 1.8vh, 22px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-story > p {
+  font-size: clamp(15.5px, 1.95vh, 18.5px) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-story .pilot-lead {
+  font-size: clamp(18px, 2.25vh, 22px) !important;
+  line-height: 1.38 !important;
+  font-weight: 600 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-story .pilot-takeaway {
+  padding: clamp(10px, 1.3vh, 16px) clamp(14px, 1.5vw, 20px) !important;
+  border-radius: 0 10px 10px 0 !important;
+  margin-block: 4px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-supporting {
+  gap: clamp(16px, 2vw, 26px) !important;
+  padding-top: 6px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-supporting > .gg-kpi-card {
+  padding: 8px 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-015 .pilot-context {
+  min-height: clamp(52px, 6.5vh, 68px) !important;
+  margin-top: auto !important;
+}
+
+/* Tela 9 (#rep-tela-016): Descer e centralizar textos e blocos Polo Centro-Oeste / Zona Sul */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading {
+  align-items: center !important;
+  margin-bottom: clamp(16px, 2.2vh, 28px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading > div:last-child {
+  align-self: center !important;
+  margin-top: clamp(14px, 2.2vh, 28px) !important;
+  transform: translateY(6px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair {
+  gap: clamp(18px, 2.8vh, 32px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition {
+  align-items: center !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-reading-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding-top: clamp(16px, 2.8vh, 36px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-reading-copy p {
+  font-size: clamp(17px, 2.25vh, 20.5px) !important;
+  line-height: 1.62 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 0 clamp(10px, 1.4vh, 16px) 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-reading-copy p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Tela 10 (#rep-tela-017): Espaçamento nobre e equilibrado após remoção de foto/contexto */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017.active-slide {
+  gap: clamp(10px, 1.4vh, 18px) !important;
+  padding: clamp(18px, 2.2vh, 28px) clamp(32px, 4vw, 72px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017 .pilot-main {
+  gap: clamp(20px, 2.8vw, 40px) !important;
+  align-items: stretch !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017 .pilot-story {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-evenly !important;
+  gap: clamp(10px, 1.6vh, 22px) !important;
+  height: 100% !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017 .pilot-story > p {
+  font-size: clamp(15px, 2.0vh, 19px) !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017 .pilot-story .pilot-lead {
+  font-size: clamp(17.5px, 2.25vh, 22px) !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017 .pilot-story .pilot-takeaway {
+  padding: clamp(10px, 1.3vh, 16px) clamp(14px, 1.5vw, 20px) !important;
+  border-radius: 0 10px 10px 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-017 .pilot-supporting {
+  gap: clamp(14px, 1.8vw, 26px) !important;
+  padding-top: 6px !important;
+}
+
+/* Telas 12 e 13 (#rep-tela-019 e #rep-tela-020): Quote box e canvas confortáveis */
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-019, #rep-tela-020) .gg-quote-box {
+  padding: clamp(10px, 1.4vh, 18px) clamp(16px, 1.8vw, 24px) !important;
+  margin-block: clamp(4px, 0.8vh, 10px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-019, #rep-tela-020) .gg-quote-box blockquote {
+  font-size: clamp(16px, 2.1vh, 21px) !important;
+  line-height: 1.42 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-019, #rep-tela-020) .report-chart-canvas {
+  height: clamp(250px, 34vh, 330px) !important;
+}
+
+/* ==========================================================================
+   BATCH 2 — REGRAS DE TIPOGRAFIA E ESPAÇAMENTO SLIDE (TELAS 19, 21, 22, 23)
+   ========================================================================== */
+
+/* Tela 19 (#rep-tela-026): Aumentar fonte do texto descritivo no modo slide */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-026 .report-content-grid:last-of-type > div:last-child > .space-y-4 p {
+  font-size: clamp(15.5px, 2.0vh, 18.5px) !important;
+  line-height: 1.55 !important;
+  margin-bottom: clamp(8px, 1.2vh, 12px) !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+
+/* Telas 18 & 19 (#rep-tela-023 & #rep-tela-024): Ajustes de altura e contenção */
+@media (max-height: 900px) {
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-copy { gap: 14px !important; }
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-content { gap: 10px !important; }
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-heading h2 { font-size: clamp(24px, 3.8vh, 38px) !important; }
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-content p { font-size: clamp(12.5px, 1.75vh, 16px) !important; }
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-directory { padding-top: 10px !important; gap: 10px !important; }
+}
+
+/* Telas 17, 21 e 22 consolidadas na seção mestre no final do arquivo */
+
+/* Tela 23 (#rep-tela-030): Aumentar tamanho do texto no modal/slide */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-030 .report-content-grid:last-of-type > div:last-child p {
+  font-size: clamp(15px, 1.95vh, 18px) !important;
+  line-height: 1.52 !important;
+  margin-bottom: clamp(6px, 1.0vh, 10px) !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+
+/* ==========================================================================
+   BATCH 3 — REGRAS DE TIPOGRAFIA E ESPAÇAMENTO SLIDE (TELAS 28, 29, 32, 35)
+   ========================================================================== */
+
+/* Telas 28 e 29 (#rep-tela-035, #rep-tela-036): Tipografia generosa e preenchimento vertical */
+body.presentation-mode #executive-report-view#executive-report-view > :is(#rep-tela-035, #rep-tela-036) .report-content-grid:has(.report-chart-panel) > div:not(.report-chart-panel):not(:has(.report-chart-panel)) p {
+  font-size: clamp(18px, 2.45vh, 22.5px) !important;
+  line-height: 1.65 !important;
+  margin-bottom: clamp(8px, 1.2vh, 14px) !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+
+/* Tela 28 (#rep-tela-035): Aumentar texto descritivo dos 4 KPI cards superiores */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-035 .gg-kpi-card {
+  padding: clamp(14px, 1.8vh, 20px) clamp(14px, 1.4vw, 20px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-035 .gg-kpi-card p {
+  font-size: clamp(13px, 1.6vh, 15.5px) !important;
+  line-height: 1.45 !important;
+}
+
+/* Tela 29 (#rep-tela-036): Tipografia e respiro generoso para os 5 parágrafos */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-036 .report-content-grid > div:last-child {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: clamp(8px, 1.2vh, 14px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-036 .report-content-grid > div:last-child p {
+  font-size: clamp(18px, 2.45vh, 22.5px) !important;
+  line-height: 1.65 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+/* Tela 32 (#rep-tela-040) — Gênero & Rotina Econômica */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-040 .report-content-grid:has(.report-chart-panel) > div:not(.report-chart-panel):not(:has(.report-chart-panel)) p {
+  font-size: clamp(15.5px, 2.05vh, 18.5px) !important;
+  line-height: 1.55 !important;
+  margin-bottom: clamp(6px, 1.0vh, 10px) !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-040 .gg-bento-card {
+  padding: clamp(12px, 1.5vh, 18px) clamp(16px, 1.6vw, 22px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-040 .gg-bento-card p {
+  font-size: clamp(12px, 1.45vh, 14.5px) !important;
+  line-height: 1.35 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-040 .report-chart-canvas {
+  height: clamp(170px, 24vh, 230px) !important;
+  min-height: 0 !important;
+}
+
+/* Tela 35 (#rep-tela-043) — Modelo Radar (R$ 19 mi / 10,5%): Grid estável 2 colunas */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .report-reading-copy {
+  columns: auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: clamp(20px, 2.5vw, 40px) !important;
+  align-items: center !important;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  margin-block: auto !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .rep-19m-text-col p {
+  font-size: clamp(13px, 1.6vh, 15.5px) !important;
+  line-height: 1.5 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin-bottom: clamp(6px, 0.9vh, 10px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .rep-19m-text-col p.font-bold {
+  font-size: clamp(15px, 1.85vh, 18px) !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .rep-19m-calc-col {
+  padding: clamp(14px, 2vh, 22px) clamp(16px, 1.8vw, 24px) !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 20px !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-043 .rep-19m-calc-col p {
+  font-size: clamp(12.5px, 1.55vh, 14.5px) !important;
+  line-height: 1.45 !important;
+  margin-bottom: 3px !important;
+}
+
+
+/* ==========================================================================
+   TELA 09 (#rep-tela-016) — SANKEY EM DESTAQUE CENTRAL EM TELA CHEIA
+   ========================================================================== */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  padding: clamp(18px, 2.4vh, 32px) clamp(32px, 4vw, 72px) !important;
+  gap: clamp(12px, 1.8vh, 22px) !important;
+}
+
+/* R1: Remoção de caixas/cards atrás dos KPIs do cabeçalho */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading .bg-blue-50,
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-page-heading .bg-cyan-50 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Centralização heroica do Sankey: ocultação da 2ª linha e expansão da 1ª */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair > .report-chart-composition:nth-child(2) {
+  display: none !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair > .report-chart-composition:first-child {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr) !important;
+  gap: clamp(24px, 3.5vw, 56px) !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+/* R1: Remoção do card cinza atrás do gráfico */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-chart-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-height: 0 !important;
+}
+
+/* Ampliação da altura e dimensões do Sankey Canvas */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-chart-canvas {
+  height: clamp(380px, 52vh, 560px) !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .report-chart-canvas > canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-reading-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: clamp(12px, 1.8vh, 20px) !important;
+  padding-top: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-016 .flow-pair .report-reading-copy p {
+  font-size: clamp(16px, 2.2vh, 21px) !important;
+  line-height: 1.65 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+
+/* ==========================================================================
+   TELA 16 (#rep-tela-023) — CONEXÕES LOCAIS & INFLUENCIADORES INTRO
+   - Distribuição em 2 colunas: Foto à esquerda, Texto à direita
+   - Prevenção contra colapso de largura
+   ========================================================================== */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  padding: clamp(14px, 2vh, 24px) clamp(24px, 3.5vw, 56px) !important;
+  gap: clamp(8px, 1.2vh, 14px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-body {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr) !important;
+  gap: clamp(20px, 2.5vw, 40px) !important;
+  align-items: stretch !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-photo {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  gap: clamp(10px, 1.5vh, 20px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-023 .creators-intro-heading h2 {
+  font-size: clamp(22px, 3.2vh, 36px) !important;
+  line-height: 1.2 !important;
+  max-width: none !important;
+}
+
+/* ==========================================================================
+   TELA 17 (#rep-tela-024) — DIRETÓRIO DE CRIADORES & INFLUENCIADORES
+   - Grid editorial de 3 linhas: Meta (auto), Body (minmax(0, 1fr)), Source (auto)
+   - Zero colisão geométrica com o rodapé
+   - Visual premium com fundo suave slate-50 no diretório
+   - Bloqueio de 12 cards (:nth-child(n+13)) TOTALMENTE REMOVIDO
+   - Scroll vertical suave, pleno e completo em #stakeholders-influenciadores-grid (todos os 76+ influenciadores)
+   ========================================================================== */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024.active-slide {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  padding: clamp(12px, 1.8vh, 20px) clamp(20px, 3vw, 44px) !important;
+  gap: clamp(6px, 1vh, 10px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-page-meta {
+  grid-row: 1 !important;
+  padding-bottom: clamp(3px, 0.5vh, 6px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-page-body {
+  grid-row: 2 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  gap: clamp(6px, 0.9vh, 10px) !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-page-heading {
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-page-heading h2 {
+  font-size: clamp(20px, 2.8vh, 28px) !important;
+  line-height: 1.2 !important;
+}
+
+/* Top 10 cards: 2 linhas de 5 cards com acabamento refinado */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creator-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: clamp(6px, 0.7vw, 10px) !important;
+  width: 100% !important;
+  flex-shrink: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creator-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: clamp(6px, 0.8vw, 10px) !important;
+  padding: clamp(5px, 0.7vh, 8px) clamp(8px, 0.8vw, 12px) !important;
+  background: var(--report-presentation-panel, #ffffff) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.15s ease !important;
+  width: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creator-card:hover {
+  border-color: #0066FF !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  transform: translateY(-1px);
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creator-photo img {
+  width: clamp(28px, 3vh, 36px) !important;
+  height: clamp(28px, 3vh, 36px) !important;
+  border-radius: 50% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creator-copy h3 {
+  font-size: clamp(11px, 1.3vh, 13px) !important;
+  font-weight: 700 !important;
+  color: var(--report-presentation-ink, #0f172a) !important;
+  line-height: 1.2 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creator-copy p {
+  font-size: clamp(9.5px, 1.1vh, 11px) !important;
+  color: var(--report-presentation-muted, #64748b) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creators-ranking-note {
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creators-ranking-note p {
+  font-size: clamp(10.5px, 1.2vh, 12px) !important;
+  line-height: 1.35 !important;
+  color: var(--report-presentation-muted, #64748b) !important;
+}
+
+/* Container do Diretório Completo com fundo elegante slate-50 */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creators-directory {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: clamp(8px, 1vh, 12px) clamp(12px, 1.2vw, 18px) !important;
+  gap: clamp(6px, 0.8vh, 10px) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-creators-directory > :first-child {
+  flex-shrink: 0 !important;
+}
+
+/* Grid com Scroll Vertical Pleno de Todos os Influenciadores */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(5px, 0.7vw, 8px) !important;
+  overflow-y: auto !important;
+  padding-right: 6px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbd5e1 transparent !important;
+  width: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid::-webkit-scrollbar {
+  width: 6px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid::-webkit-scrollbar-track {
+  background: var(--report-presentation-panel, #f1f5f9) !important;
+  border-radius: 4px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Cards dentro do grid de scroll */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid a {
+  background: var(--report-presentation-panel, #ffffff) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  padding: clamp(4px, 0.6vh, 6px) clamp(6px, 0.7vw, 10px) !important;
+  gap: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 #stakeholders-influenciadores-grid a:hover {
+  border-color: #0066FF !important;
+  background: var(--report-presentation-panel, #ffffff) !important;
+  transform: translateY(-1px);
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-024 .report-page-source {
+  grid-row: 3 !important;
+  padding-top: clamp(3px, 0.5vh, 6px) !important;
+  border-top: 1px solid #f1f5f9 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   TELA 21 (#rep-tela-028 — MÚSICA)
+   - Grid editorial de 5 linhas: 100% travado na viewport, sem colisão e sem overflow
+   - Tipografia GRANDE, nobre e legível no modo slide
+   - Estrutura preservada integralmente
+   ========================================================================== */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028.active-slide {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  padding: clamp(12px, 1.8vh, 22px) clamp(24px, 3.5vw, 56px) !important;
+  gap: clamp(6px, 1vh, 12px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-page-meta {
+  grid-row: 1 !important;
+  padding-bottom: clamp(3px, 0.5vh, 6px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-page-heading {
+  grid-row: 2 !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-page-heading h2 {
+  font-size: clamp(20px, 2.8vh, 30px) !important;
+  line-height: 1.2 !important;
+}
+
+/* 4 KPI cards superiores: limpos e elegantes */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 > .report-content-grid:first-of-type {
+  grid-row: 3 !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(8px, 1.1vw, 14px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 > .report-content-grid:first-of-type .gg-kpi-card {
+  padding: clamp(6px, 1vh, 12px) clamp(8px, 1vw, 14px) !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 > .report-content-grid:first-of-type .gg-kpi-card span {
+  font-size: clamp(20px, 2.6vh, 28px) !important;
+  line-height: 1.1 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 > .report-content-grid:first-of-type .gg-kpi-card p {
+  font-size: clamp(11px, 1.3vh, 13px) !important;
+  font-weight: 600 !important;
+  color: var(--report-presentation-copy, #475569) !important;
+}
+
+/* Grid principal: Gráfico à esquerda e Texto nobre à direita */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 > .report-content-grid:nth-of-type(2) {
+  grid-row: 4 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: clamp(16px, 2.2vw, 32px) !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-chart-panel {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: clamp(8px, 1.2vh, 16px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-chart-canvas {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-chart-canvas canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Coluna de texto nobre da direita */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .lg\:col-span-5 {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: clamp(5px, 0.8vh, 10px) !important;
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .lg\:col-span-5 p {
+  font-size: clamp(13.5px, 1.7vh, 16.5px) !important;
+  line-height: 1.45 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-028 .report-page-source {
+  grid-row: 5 !important;
+  padding-top: clamp(3px, 0.5vh, 6px) !important;
+  border-top: 1px solid #f1f5f9 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================================
+   TELA 22 (#rep-tela-029 — STREAMING & REPERTÓRIO DIGITAL)
+   - Grid editorial de 5 linhas: 100% travado na viewport, sem colisão e sem overflow
+   - Tipografia GRANDE, nobre e legível no modo slide
+   - Preservação integral das menções a Netflix, Globoplay, etc.
+   - Logos organizados harmoniosamente abaixo dos parágrafos
+   ========================================================================== */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029.active-slide {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto !important;
+  height: calc(100dvh - 60px) !important;
+  max-height: calc(100dvh - 60px) !important;
+  overflow: hidden !important;
+  padding: clamp(12px, 1.8vh, 22px) clamp(24px, 3.5vw, 56px) !important;
+  gap: clamp(6px, 1vh, 12px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-page-meta {
+  grid-row: 1 !important;
+  padding-bottom: clamp(3px, 0.5vh, 6px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-page-heading {
+  grid-row: 2 !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-page-heading h2 {
+  font-size: clamp(20px, 2.8vh, 30px) !important;
+  line-height: 1.2 !important;
+}
+
+/* 3 KPI cards superiores: Spotify, YouTube Music, Deezer */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 > .report-content-grid:first-of-type {
+  grid-row: 3 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(8px, 1.2vw, 16px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 > .report-content-grid:first-of-type .gg-kpi-card {
+  padding: clamp(6px, 1vh, 12px) clamp(10px, 1.1vw, 16px) !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: clamp(8px, 0.9vw, 14px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 > .report-content-grid:first-of-type img {
+  width: clamp(26px, 3.2vh, 36px) !important;
+  height: clamp(26px, 3.2vh, 36px) !important;
+  object-fit: contain !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 > .report-content-grid:first-of-type span {
+  font-size: clamp(20px, 2.6vh, 28px) !important;
+  line-height: 1.1 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 > .report-content-grid:first-of-type p {
+  font-size: clamp(11px, 1.3vh, 13px) !important;
+  font-weight: 600 !important;
+  color: var(--report-presentation-copy, #475569) !important;
+}
+
+/* Grid principal: Gráfico de streaming à esquerda e Texto nobre à direita */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 > .report-content-grid:nth-of-type(2) {
+  grid-row: 4 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
+  gap: clamp(16px, 2.2vw, 32px) !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-chart-panel {
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  padding: clamp(8px, 1.2vh, 16px) !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-chart-canvas {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  position: relative !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-chart-canvas canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Coluna de texto nobre da direita */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .lg\:col-span-5 {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: clamp(5px, 0.8vh, 10px) !important;
+  min-height: 0 !important;
+  height: 100% !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .lg\:col-span-5 .space-y-4 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(4px, 0.6vh, 7px) !important;
+  margin: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .lg\:col-span-5 p {
+  font-size: clamp(13px, 1.65vh, 16px) !important;
+  line-height: 1.42 !important;
+  color: var(--report-presentation-copy, #334155) !important;
+  margin: 0 !important;
+}
+
+/* Faixa elegante com logotipos de streaming de vídeo */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .lg\:col-span-5 div:has(> img[alt="Netflix"]) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: clamp(4px, 0.7vh, 8px) clamp(10px, 1vw, 16px) !important;
+  gap: clamp(8px, 1vw, 14px) !important;
+  margin-top: clamp(3px, 0.5vh, 6px) !important;
+  flex-shrink: 0 !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .lg\:col-span-5 div:has(> img[alt="Netflix"]) img {
+  height: clamp(15px, 2vh, 22px) !important;
+  object-fit: contain !important;
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-029 .report-page-source {
+  grid-row: 5 !important;
+  padding-top: clamp(3px, 0.5vh, 6px) !important;
+  border-top: 1px solid #f1f5f9 !important;
+  margin: 0 !important;
+}
+
+
+
+/* Vida pet: métricas recalculadas e escala usam a mesma fonte. */
+#executive-report-view#executive-report-view > #rep-tela-033 .gg-kpi-card > span.font-mono,
+#executive-report-view#executive-report-view > #rep-tela-033 .gg-kpi-card > span.font-mono [data-report-metric] {
+  font-family: var(--font-display, 'Sora', sans-serif) !important;
+  font-variant-numeric: tabular-nums;
+}

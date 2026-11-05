@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-10-21T00:35:16.983351+00:00",
+  "reference": "3549904",
+  "sources": {
+    "censo": {
+      "url": "https://apisidra.ibge.gov.br/values/t/4714/n6/3549904,3554102,3524402,3538006,3518404,3508504,3527207,3513405,3510500,3550704,3555406,3520400,3509502,3552205,3525904,3543402,3538709,3548906,3549805,3506003,3520509,3501608,3548500,3548807,3550308,4106902,4205407,4209102,4202404,4115200,3106200/n3/35/n1/1/v/all/p/2022",
+      "table": "4714",
+      "sha256": "d029c492566736ea3b3dbd607c56857e0a8520015fc490728e64b04b994d4141",
+      "evidence": "evidence/censo.json"
+    },
+    "estimativa": {
+      "url": "https://apisidra.ibge.gov.br/values/t/6579/n6/3549904,3554102,3524402,3538006,3518404,3508504,3527207,3513405,3510500,3550704,3555406,3520400,3509502,3552205,3525904,3543402,3538709,3548906,3549805,3506003,3520509,3501608,3548500,3548807,3550308,4106902,4205407,4209102,4202404,4115200,3106200/n3/35/n1/1/v/9324/p/2026",
+      "table": "6579",
+      "sha256": "bda7ed0627deadb3ba9ff7a59fd2aaa5b5133aebbd4ab273c02e1a9324144415",
+      "evidence": "evidence/estimativa.json"
+    },
+    "economia": {
+      "url": "https://apisidra.ibge.gov.br/values/t/5938/n6/3549904,3554102,3524402,3538006,3518404,3508504,3527207,3513405,3510500,3550704,3555406,3520400,3509502,3552205,3525904,3543402,3538709,3548906,3549805,3506003,3520509,3501608,3548500,3548807,3550308,4106902,4205407,4209102,4202404,4115200,3106200/n3/35/n1/1/v/37,498,513,517,6575,525/p/2021,2023",
+      "table": "5938",
+      "sha256": "b2ddf09406fb127ee4441efbba70f45e7072256e62be0bedbf3c426861e5c550",
+      "evidence": "evidence/economia.json"
+    }
+  },
+  "territories": [
+    {
+      "codigo_ibge": "3549904",
+      "nome": "São José dos Campos",
+      "uf": "SP",
+      "grupo": "Cidade Base",
+      "values": {
+        "pop2022": 697054.0,
+        "pop2026": 729153.0,
+        "density": 634.03,
+        "area": 1099.409,
+        "gdp": 61394524.0,
+        "industry": 42.390511011412556,
+        "services": 50.11396951268211
+      }
+    },
+    {
+      "codigo_ibge": "3554102",
+      "nome": "Taubaté",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 310739.0,
+        "pop2026": 323380.0,
+        "density": 497.18,
+        "area": 625.003,
+        "gdp": 22607800.0,
+        "industry": 34.98009450622911,
+        "services": 53.47954270749548
+      }
+    },
+    {
+      "codigo_ibge": "3524402",
+      "nome": "Jacareí",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 240275.0,
+        "pop2026": 251848.0,
+        "density": 517.53,
+        "area": 464.272,
+        "gdp": 19692996.0,
+        "industry": 40.10811935695197,
+        "services": 52.073549266954636
+      }
+    },
+    {
+      "codigo_ibge": "3538006",
+      "nome": "Pindamonhangaba",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 165428.0,
+        "pop2026": 173267.0,
+        "density": 226.19,
+        "area": 731.355,
+        "gdp": 13674680.0,
+        "industry": 55.41395442219713,
+        "services": 37.36074726880253
+      }
+    },
+    {
+      "codigo_ibge": "3518404",
+      "nome": "Guaratinguetá",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 118044.0,
+        "pop2026": 122100.0,
+        "density": 156.84,
+        "area": 752.636,
+        "gdp": 8369821.0,
+        "industry": 42.04532025128593,
+        "services": 48.65643915837028
+      }
+    },
+    {
+      "codigo_ibge": "3508504",
+      "nome": "Caçapava",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 96202.0,
+        "pop2026": 100422.0,
+        "density": 260.72,
+        "area": 368.99,
+        "gdp": 6516271.0,
+        "industry": 43.331553757590605,
+        "services": 46.276014260751325
+      }
+    },
+    {
+      "codigo_ibge": "3527207",
+      "nome": "Lorena",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 84855.0,
+        "pop2026": 87551.0,
+        "density": 204.88,
+        "area": 414.16,
+        "gdp": 4501318.0,
+        "industry": 38.66119713278063,
+        "services": 49.96979309591705
+      }
+    },
+    {
+      "codigo_ibge": "3513405",
+      "nome": "Cruzeiro",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 74961.0,
+        "pop2026": 76381.0,
+        "density": 245.21,
+        "area": 305.699,
+        "gdp": 4281962.0,
+        "industry": 36.02532065309122,
+        "services": 50.11889594065957
+      }
+    },
+    {
+      "codigo_ibge": "3510500",
+      "nome": "Caraguatatuba",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 134873.0,
+        "pop2026": 143291.0,
+        "density": 278.12,
+        "area": 484.947,
+        "gdp": 5822815.0,
+        "industry": 23.056006915250393,
+        "services": 59.57471682427518
+      }
+    },
+    {
+      "codigo_ibge": "3550704",
+      "nome": "São Sebastião",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 81595.0,
+        "pop2026": 84514.0,
+        "density": 202.77,
+        "area": 402.395,
+        "gdp": 17400619.0,
+        "industry": 62.78484541868207,
+        "services": 32.63888424495356
+      }
+    },
+    {
+      "codigo_ibge": "3555406",
+      "nome": "Ubatuba",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 92981.0,
+        "pop2026": 97541.0,
+        "density": 131.31,
+        "area": 708.105,
+        "gdp": 3506919.0,
+        "industry": 14.961122446938719,
+        "services": 64.86608058498884
+      }
+    },
+    {
+      "codigo_ibge": "3520400",
+      "nome": "Ilhabela",
+      "uf": "SP",
+      "grupo": "RMVale & Litoral Norte",
+      "values": {
+        "pop2022": 34934.0,
+        "pop2026": 36766.0,
+        "density": 100.85,
+        "area": 346.389,
+        "gdp": 14830715.0,
+        "industry": 70.0988063524705,
+        "services": 27.613731558772564
+      }
+    },
+    {
+      "codigo_ibge": "3509502",
+      "nome": "Campinas",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 1139047.0,
+        "pop2026": 1189761.0,
+        "density": 1433.54,
+        "area": 794.571,
+        "gdp": 91968328.0,
+        "industry": 18.83761598261532,
+        "services": 72.10818415729082
+      }
+    },
+    {
+      "codigo_ibge": "3552205",
+      "nome": "Sorocaba",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 723682.0,
+        "pop2026": 766390.0,
+        "density": 1608.64,
+        "area": 449.872,
+        "gdp": 58816286.0,
+        "industry": 32.49822849231111,
+        "services": 58.951352276725764
+      }
+    },
+    {
+      "codigo_ibge": "3525904",
+      "nome": "Jundiaí",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 443221.0,
+        "pop2026": 465277.0,
+        "density": 1027.87,
+        "area": 431.204,
+        "gdp": 65418378.0,
+        "industry": 26.76903856743582,
+        "services": 67.68360672979206
+      }
+    },
+    {
+      "codigo_ibge": "3543402",
+      "nome": "Ribeirão Preto",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 698642.0,
+        "pop2026": 734538.0,
+        "density": 1073.32,
+        "area": 650.916,
+        "gdp": 52306820.0,
+        "industry": 15.341281371027367,
+        "services": 76.13615973701508
+      }
+    },
+    {
+      "codigo_ibge": "3538709",
+      "nome": "Piracicaba",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 423323.0,
+        "pop2026": 442635.0,
+        "density": 307.19,
+        "area": 1378.069,
+        "gdp": 44351588.0,
+        "industry": 37.395311868794565,
+        "services": 54.762992463260616
+      }
+    },
+    {
+      "codigo_ibge": "3548906",
+      "nome": "São Carlos",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 254857.0,
+        "pop2026": 267441.0,
+        "density": 224.17,
+        "area": 1136.907,
+        "gdp": 18386920.0,
+        "industry": 31.812496405476338,
+        "services": 56.77699802761504
+      }
+    },
+    {
+      "codigo_ibge": "3549805",
+      "nome": "São José do Rio Preto",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 480393.0,
+        "pop2026": 506466.0,
+        "density": 1112.17,
+        "area": 431.944,
+        "gdp": 26390121.0,
+        "industry": 11.55169631516621,
+        "services": 78.11928726435416
+      }
+    },
+    {
+      "codigo_ibge": "3506003",
+      "nome": "Bauru",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 379146.0,
+        "pop2026": 394028.0,
+        "density": 567.85,
+        "area": 667.684,
+        "gdp": 20654759.0,
+        "industry": 16.970510334771095,
+        "services": 72.14075231283586
+      }
+    },
+    {
+      "codigo_ibge": "3520509",
+      "nome": "Indaiatuba",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 255748.0,
+        "pop2026": 271322.0,
+        "density": 820.9,
+        "area": 311.545,
+        "gdp": 28264863.0,
+        "industry": 38.09605806304263,
+        "services": 54.65764991387525
+      }
+    },
+    {
+      "codigo_ibge": "3501608",
+      "nome": "Americana",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 237240.0,
+        "pop2026": 248392.0,
+        "density": 1771.61,
+        "area": 133.912,
+        "gdp": 17600566.0,
+        "industry": 35.075566132116904,
+        "services": 55.695269374135414
+      }
+    },
+    {
+      "codigo_ibge": "3548500",
+      "nome": "Santos",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 418608.0,
+        "pop2026": 429528.0,
+        "density": 1489.53,
+        "area": 281.033,
+        "gdp": 30961718.0,
+        "industry": 10.578073903000492,
+        "services": 77.5879569445576
+      }
+    },
+    {
+      "codigo_ibge": "3548807",
+      "nome": "São Caetano do Sul",
+      "uf": "SP",
+      "grupo": "Polos Tecnológicos & Industriais SP",
+      "values": {
+        "pop2022": 165655.0,
+        "pop2026": 173216.0,
+        "density": 10805.23,
+        "area": 15.331,
+        "gdp": 22553448.0,
+        "industry": 26.570352451920616,
+        "services": 61.848262787373244
+      }
+    },
+    {
+      "codigo_ibge": "3550308",
+      "nome": "São Paulo",
+      "uf": "SP",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 11451999.0,
+        "pop2026": 11911337.0,
+        "density": 7528.26,
+        "area": 1521.202,
+        "gdp": 1066825105.0,
+        "industry": 9.460376673302818,
+        "services": 83.19767865309838
+      }
+    },
+    {
+      "codigo_ibge": "4106902",
+      "nome": "Curitiba",
+      "uf": "PR",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 1773718.0,
+        "pop2026": 1832183.0,
+        "density": 4078.53,
+        "area": 434.892,
+        "gdp": 120065276.0,
+        "industry": 22.077533306207602,
+        "services": 66.47242621482916
+      }
+    },
+    {
+      "codigo_ibge": "4205407",
+      "nome": "Florianópolis",
+      "uf": "SC",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 537211.0,
+        "pop2026": 598370.0,
+        "density": 796.05,
+        "area": 674.844,
+        "gdp": 31190132.0,
+        "industry": 8.41743305768882,
+        "services": 76.09425484678131
+      }
+    },
+    {
+      "codigo_ibge": "4209102",
+      "nome": "Joinville",
+      "uf": "SC",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 616317.0,
+        "pop2026": 673980.0,
+        "density": 546.41,
+        "area": 1127.947,
+        "gdp": 49815877.0,
+        "industry": 35.463344347570505,
+        "services": 54.001918888875586
+      }
+    },
+    {
+      "codigo_ibge": "4202404",
+      "nome": "Blumenau",
+      "uf": "SC",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 361261.0,
+        "pop2026": 390371.0,
+        "density": 696.58,
+        "area": 518.619,
+        "gdp": 24871920.0,
+        "industry": 27.186944904009337,
+        "services": 60.48442901402507
+      }
+    },
+    {
+      "codigo_ibge": "4115200",
+      "nome": "Maringá",
+      "uf": "PR",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 409657.0,
+        "pop2026": 432635.0,
+        "density": 841.16,
+        "area": 487.012,
+        "gdp": 27817346.0,
+        "industry": 20.01861446979496,
+        "services": 67.11242971632242
+      }
+    },
+    {
+      "codigo_ibge": "3106200",
+      "nome": "Belo Horizonte",
+      "uf": "MG",
+      "grupo": "Capitais & Referências Nacionais",
+      "values": {
+        "pop2022": 2315560.0,
+        "pop2026": 2415451.0,
+        "density": 6988.18,
+        "area": 331.354,
+        "gdp": 130197671.0,
+        "industry": 17.518862425097854,
+        "services": 68.64988856051019
+      }
+    },
+    {
+      "codigo_ibge": "35",
+      "nome": "Estado de São Paulo",
+      "uf": "SP",
+      "grupo": "Referências agregadas",
+      "values": {
+        "pop2022": 44411238.0,
+        "pop2026": 46179008.0,
+        "density": 178.92,
+        "area": 248219.485,
+        "gdp": 3444814033.0,
+        "industry": 23.072494120837455,
+        "services": 65.66002915845263
+      }
+    },
+    {
+      "codigo_ibge": "1",
+      "nome": "Brasil",
+      "uf": "",
+      "grupo": "Referências agregadas",
+      "values": {
+        "pop2022": 203080756.0,
+        "pop2026": 214211951.0,
+        "density": 23.86,
+        "area": 8510417.771,
+        "gdp": 10943345439.0,
+        "industry": 25.8465032209623,
+        "services": 50.689130242303634
+      }
+    }
+  ]
+}

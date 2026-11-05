@@ -1,0 +1,181 @@
+/* Chapter 03 — researched editorial compositions. Scoped to this chapter only. */
+#executive-report-view#executive-report-view > article.report-movements-editorial {
+ --movement-accent:#176fff; --movement-tint:#f0f5ff; --movement-ink:#17191e; --movement-muted:#536071;
+ color:var(--movement-ink); background:#fff; border:1px solid #e8ebf0; border-radius:18px; box-shadow:none;
+ font-family:Inter,Arial,sans-serif; padding:clamp(22px,3.5vw,52px);
+}
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="2"] { --movement-accent:#7050d6; --movement-tint:#f4f1fc; }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="3"] { --movement-accent:#ba3d68; --movement-tint:#fbf0f4; }
+#executive-report-view#executive-report-view > .report-movements-editorial[data-movement="4"] { --movement-accent:#147b68; --movement-tint:#edf7f3; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-main { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr); gap:32px; min-width:0; align-items:stretch; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-heading { width:100%; max-width:none; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-heading > span { font-size:11px; letter-spacing:.12em; color:var(--movement-accent); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-heading h2 { color:var(--movement-ink); max-width:48ch; font-size:clamp(28px,2.8vw,42px); font-weight:650; letter-spacing:-.035em; line-height:1.12; margin:10px 0 0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-visual { position:relative; display:block; margin:0; min-height:360px; overflow:hidden; border-radius:16px; background:#e7eaf0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-visual img { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; border-radius:0; aspect-ratio:auto; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-visual figcaption { position:absolute; inset:auto 0 0; background:linear-gradient(transparent,rgba(0,0,0,.8)); color:#fff; padding:50px 22px 20px; font-size:13px; line-height:1.4; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-story { display:flex; flex-direction:column; justify-content:center; gap:24px; min-width:0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-original :is(.report-content-grid,.culture-analysis,.report-reading-copy) { display:block; columns:auto; margin:0; padding:0; border:0; max-width:none; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-original :is(p,blockquote) { font-size:18px; line-height:1.5; color:var(--movement-muted); margin:0 0 16px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-original p:last-child { margin-bottom:0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-original .report-content-grid > div { grid-column:auto; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-label { display:block; font-size:10px; line-height:1.3; font-weight:700; letter-spacing:.12em; color:var(--movement-accent); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research { border:0; border-left:3px solid var(--movement-accent); border-radius:0 12px 12px 0; background:var(--movement-tint); padding:20px 24px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research h3 { color:var(--movement-ink); font-size:23px; font-weight:650; line-height:1.18; letter-spacing:-.025em; margin:8px 0 12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research p { color:#424e5f; font-size:16px; line-height:1.5; margin:0 0 12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-research .movement-interpretation { padding-top:10px; border-top:1px solid #172b4318; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-stat { display:block; color:var(--movement-accent); font-size:40px; line-height:1; letter-spacing:-.05em; margin:0 0 12px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-scope { display:block; font-size:11px; color:var(--movement-muted); line-height:1.4; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-question { padding-top:20px; border-top:1px solid #dfe5ed; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-question p { font-size:22px; line-height:1.35; color:var(--movement-ink); font-weight:550; margin:10px 0 0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-footer { display:block; border-top:1px solid #e6eaf0; padding:12px 0 0; color:#596779; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-source-local { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-source-local span { font-size:10px; line-height:1.4; white-space:normal; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-source-local span:last-child:not(:first-child) { max-width:38%; text-align:right; flex-shrink:1; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-reference { font-size:11px; line-height:1.45; margin-top:6px; overflow-wrap:anywhere; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-reference cite { font-style:normal; font-weight:650; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-reference a { color:#2767bd; text-decoration:underline; text-underline-offset:2px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-main { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:36px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-visual { position:relative; min-height:540px; border-radius:18px; overflow:hidden; display:flex; align-items:flex-end; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-visual > div.absolute:first-child { opacity:1; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-visual > div.absolute:nth-child(2) { background:linear-gradient(0deg,rgba(0,0,0,.82),transparent 85%); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-visual > div.absolute:nth-child(3) { display:none; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title { position:relative; z-index:1; padding:40px; color:#fff; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title h1 { font-size:clamp(40px,4.2vw,66px); font-weight:650; letter-spacing:-.045em; line-height:1.04; color:#fff; margin:14px 0 18px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title > span { font-size:11px; letter-spacing:.12em; color:#fff; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title > p { font-size:22px; line-height:1.3; color:#fff; margin:0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-copy { display:flex; flex-direction:column; justify-content:center; gap:18px; min-width:0; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-copy > p { font-size:18px; line-height:1.5; margin:0; color:var(--movement-muted); }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief { border-top:3px solid var(--movement-accent); padding-top:20px; margin-top:4px; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief h3 { margin:8px 0; font-size:23px; font-weight:650; color:var(--movement-ink); line-height:1.2; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief p { font-size:16px; color:var(--movement-muted); line-height:1.45; margin:0 0 10px; }
+#executive-report-view#executive-report-view .movement-overview .movement-main { display:block; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-card { display:grid; grid-template-columns:36% minmax(0,1fr); grid-template-rows:auto 1fr; gap:10px 20px; border:1px solid #e2e7ed; border-radius:14px; overflow:hidden; background:#fff; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-image { grid-row:1 / 3; width:100%; height:100%; min-height:180px; object-fit:cover; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-name { grid-column:2; padding:18px 16px 0 0; margin:0; color:var(--movement-accent); font-size:20px; font-weight:650; line-height:1.2; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-card > p:last-child { grid-column:2; padding:0 16px 18px 0; margin:0; font-size:16px; line-height:1.45; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-link { color:inherit; text-decoration:none; }
+#executive-report-view#executive-report-view .movement-overview .movement-map-link:hover { text-decoration:underline; }
+#executive-report-view#executive-report-view .movement-dense .movement-main { grid-template-columns:minmax(0,1.45fr) minmax(0,1fr); }
+#executive-report-view#executive-report-view .movement-dense .movement-original { display:flex; flex-direction:column; justify-content:center; }
+#executive-report-view#executive-report-view .movement-dense .movement-research { align-self:center; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-main { display:block; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-card { background:#f7f9fc; border-top:3px solid var(--movement-accent); border-radius:0 0 14px 14px; padding:24px; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-card:nth-child(2) { --movement-accent:#7050d6; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-card:nth-child(3) { --movement-accent:#ba3d68; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-card:nth-child(4) { --movement-accent:#147b68; }
+#executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-card p { margin:12px 0 0; }
+/* Fullscreen slide layout has an explicit source row; content cannot borrow its space. */
+body.presentation-mode article.report-movements-editorial.active-slide {
+ display: flex !important;
+ flex-direction: column !important;
+ position: fixed !important;
+ inset: 4px 0 56px !important;
+ width: 100vw !important;
+ max-width: 100vw !important;
+ height: calc(100vh - 60px) !important;
+ max-height: calc(100vh - 60px) !important;
+ padding: clamp(14px, 2vh, 22px) 4vw !important;
+ gap: clamp(8px, 1.2vh, 14px) !important;
+ overflow: hidden !important;
+ box-sizing: border-box !important;
+ z-index: 999910 !important;
+ border: 0 !important;
+ border-radius: 0 !important;
+}
+body.presentation-mode article.report-movements-editorial.active-slide > .report-page-meta {
+ flex: 0 0 auto !important;
+ padding-bottom: 6px !important;
+}
+body.presentation-mode article.report-movements-editorial.active-slide > .movement-heading {
+ flex: 0 0 auto !important;
+}
+body.presentation-mode article.report-movements-editorial.active-slide > :is(.movement-main, .movement-opening-main) {
+ flex: 1 1 0 !important;
+ min-height: 0 !important;
+ height: 100% !important;
+ max-height: 100% !important;
+}
+body.presentation-mode article.report-movements-editorial.active-slide > .movement-footer {
+ flex: 0 0 auto !important;
+ margin-top: auto !important;
+ padding-top: 8px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial > * { margin:0; min-width:0; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .report-page-meta { padding-bottom:10px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .report-page-meta span { color:#596779; font-size:clamp(10px,1.35vh,14px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-heading h2 { font-size:clamp(27px,3.6vh,42px); margin-top:6px; max-width:none; }
+body.presentation-mode .report-movements-editorial .movement-main { height: auto !important; min-height: 0 !important; max-height: 100% !important; align-self: stretch !important; gap: clamp(16px, 2.5vw, 36px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-visual { min-height: 0; height: 100%; position: relative; border-radius: 16px; overflow: hidden; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-visual img { width: 100%; height: 100%; object-fit: cover; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-visual figcaption { font-size:clamp(11px,1.5vh,16px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-story { height: 100%; min-height: 0; gap: 20px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-original :is(p,blockquote) { font-size:clamp(16px,2.2vh,24px); line-height:1.45; margin-bottom:14px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-question { padding-top:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-question p { font-size:clamp(20px,2.5vh,28px); line-height:1.3; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-research { padding:16px 20px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-research h3 { font-size:clamp(20px,2.5vh,28px); margin:7px 0 10px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-research p { font-size:clamp(14px,1.8vh,20px); line-height:1.45; margin-bottom:10px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-stat { font-size:clamp(32px,4vh,48px); margin-bottom:10px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-scope { font-size:clamp(10px,1.25vh,13px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-reference { font-size:clamp(10px,1.15vh,12px); line-height:1.35; margin-top:5px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-footer { padding-top:8px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-main { min-height:0; gap:32px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-visual { min-height:0; height:100%; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title { padding:30px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title h1 { font-size:clamp(40px,5.6vh,66px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title > p { font-size:clamp(20px,2.5vh,28px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-copy { gap:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-copy > p { font-size:clamp(15px,1.95vh,22px); line-height:1.45; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief { padding-top:14px; margin:0; }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief h3 { font-size:clamp(19px,2.3vh,26px); }
+body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief p { font-size:clamp(14px,1.7vh,19px); }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-map-grid { min-height:0; height:100%; grid-template-rows:repeat(2,minmax(0,1fr)); gap:16px; }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-map-image { min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-map-name { font-size:clamp(18px,2.4vh,26px); }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-map-card > p:last-child { font-size:clamp(14px,1.9vh,20px); }
+body.presentation-mode #executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-grid { height:100%; grid-template-rows:repeat(2,minmax(0,1fr)); }
+body.presentation-mode #executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-card { padding:22px; display:flex; flex-direction:column; justify-content:center; }
+@media(max-height:740px),(max-width:1100px) {
+ body.presentation-mode #executive-report-view#executive-report-view > article.report-movements-editorial.active-slide { gap:12px; padding:18px 3vw; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-main { grid-template-columns:minmax(0,.65fr) minmax(0,1.4fr); gap:22px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-story { gap:14px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-original :is(p,blockquote) { font-size:15px; line-height:1.4; margin-bottom:12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-question p { font-size:19px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-research { padding:13px 16px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-research h3 { font-size:19px; margin:6px 0 9px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-research p { font-size:14px; line-height:1.4; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-main { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:22px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-copy { gap:12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-copy > p { font-size:14px; line-height:1.4; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief h3 { font-size:19px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-brief p { font-size:13px; line-height:1.4; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-main,
+ body.presentation-mode #executive-report-view#executive-report-view .movement-synthesis .movement-main { display:block; }
+ body.presentation-mode #executive-report-view#executive-report-view .movement-dense .movement-main { grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial :is(.movement-main,.movement-opening-main) { grid-template-columns:minmax(0,1fr); gap:24px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-visual { min-height:300px; height:46svh; max-height:480px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-visual { min-height:440px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title { padding:24px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title h1 { font-size:42px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .movement-overview .movement-map-grid,
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .movement-synthesis .movement-synthesis-grid { grid-template-columns:minmax(0,1fr); }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-source-local { flex-direction:column; gap:4px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-source-local span { max-width:none; text-align:left; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-reference { font-size:12px; }
+}
+/* White-surface opening metadata must override the legacy full-bleed-photo colors. */
+#executive-report-view#executive-report-view > .report-movements-editorial.movement-opening .report-page-meta span { color:#596779!important; }
+#executive-report-view#executive-report-view .report-movements-editorial .movement-image-credit { display:block; font-size:10px; font-weight:400; opacity:.8; margin-bottom:12px; letter-spacing:0; }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-original { height:100%; min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-original > div { display:flex; flex-direction:column; height:100%; min-height:0; gap:12px; }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-map-grid { flex:1; min-height:0; height:auto; margin:0; }
+body.presentation-mode #executive-report-view#executive-report-view .movement-overview .movement-map-grid + p { flex-shrink:0; margin:0; font-size:clamp(14px,1.8vh,20px); }
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title { padding:20px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-movements-editorial .movement-opening-title h1 { font-size:clamp(25px,7.1vw,34px); overflow-wrap:normal; }
+}

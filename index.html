@@ -73,14 +73,14 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 0 40px;
+      padding: 0 24px;
       width: 100%;
       box-sizing: border-box;
     }
 
     .navbar-container {
       width: 100%;
-      height: 72px;
+      height: 71px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -96,9 +96,9 @@
     }
 
     .navbar-brand img {
-      height: 40px;
+      height: 28px;
       width: auto;
-      max-width: 170px;
+      max-width: 119px;
       object-fit: contain;
       display: block;
     }
@@ -1400,6 +1400,11 @@
       @media (max-width: 600px) {
       .how-section .steps-grid { grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 767px) {
+      .site-header { padding: 0 16px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1410,17 +1415,17 @@
 
       <!-- 1. Logo à Esquerda -->
       <a href="index.html" class="navbar-brand" title="Página Inicial - Radar São José">
-        <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="160" height="40" loading="eager" />
+        <img src="fotos_radar/logobranco.png" alt="Radar São José - Inteligência de Mercado" width="71" height="28" loading="eager" />
       </a>
 
       <!-- 2. Menu Central -->
       <ul class="navbar-menu" id="primaryNavMenu" role="menubar">
         <li role="none"><a href="#solucoes" role="menuitem">Soluções</a></li>
-        <li role="none"><a href="#planos" role="menuitem">Planos</a></li>
         <li role="none"><a href="#metodologia" role="menuitem">Metodologia</a></li>
         <li role="none"><a href="#manifesto" role="menuitem">Quem faz</a></li>
-        <li role="none"><a href="blog.html" role="menuitem">Blog</a></li>
+        <li role="none"><a href="#planos" role="menuitem">Planos</a></li>
         <li role="none"><a href="#faq" role="menuitem">FAQ</a></li>
+        <li role="none"><a href="blog.html" role="menuitem">Blog</a></li>
       </ul>
 
       <!-- 3. Botões e Ações à Direita -->

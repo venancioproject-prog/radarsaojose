@@ -1,0 +1,75 @@
+/* Rodada 1: apenas o interior da Visão Geral oficial. */
+#hub-axis-container-visao_geral{min-width:0;color:#0b2545}
+#hub-axis-container-visao_geral>*{min-width:0}
+#hub-axis-container-visao_geral .overview-provenance{font:500 11px/1.6 Inter,system-ui,sans-serif;color:#64748b;margin-top:10px}
+#hub-axis-container-visao_geral a:focus-visible,#hub-axis-container-visao_geral button:focus-visible,#hub-axis-container-visao_geral select:focus-visible,#hub-axis-container-visao_geral [data-overview-axis]:focus-visible,#hub-axis-container-visao_geral summary:focus-visible{outline:3px solid #0284c7;outline-offset:3px}
+#hub-axis-container-visao_geral .overview-provenance a,#hub-axis-container-visao_geral .overview-chart-source a,#hub-axis-container-visao_geral .overview-macro-footer a{color:#0369a1;text-decoration:underline;text-underline-offset:3px}
+#hub-axis-container-visao_geral .overview-section-heading{display:flex;gap:10px 20px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+#hub-axis-container-visao_geral .overview-section-heading p{font:500 11px/1.5 Inter,system-ui,sans-serif;color:#64748b}
+#hub-axis-container-visao_geral .overview-macro-value{font:700 clamp(22px,2.2vw,30px)/1.2 Sora,system-ui,sans-serif;letter-spacing:-.03em;margin:12px 0 4px;overflow-wrap:anywhere}
+#hub-axis-container-visao_geral .overview-macro-caption{font:600 12px/1.5 Inter,system-ui,sans-serif;color:#475569}
+#hub-axis-container-visao_geral .overview-macro-note{font:500 12px/1.6 Inter,system-ui,sans-serif;color:#475569;margin-top:10px}
+#hub-axis-container-visao_geral .overview-macro-footer{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;border-top:1px solid #f1f5f9;margin-top:14px;padding-top:10px;font-size:10px;color:#0369a1}
+#hub-axis-container-visao_geral .overview-controls{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+#hub-axis-container-visao_geral .overview-controls label{display:flex;flex-direction:column;gap:5px;font:600 11px/1.5 Inter,system-ui,sans-serif;color:#475569;min-width:0;max-width:100%}
+#hub-axis-container-visao_geral .overview-controls select{border:1px solid #cbd5e1;border-radius:8px;min-height:40px;padding:7px 10px;font:500 12px Inter,system-ui,sans-serif;color:#0b2545;background:#fff;max-width:100%}
+#hub-axis-container-visao_geral .overview-reading{font:600 12px/1.6 Inter,system-ui,sans-serif;color:#334155;overflow-wrap:anywhere;min-height:20px}
+#hub-axis-container-visao_geral .overview-chart-frame{position:relative;height:280px;min-height:0;flex:none;min-width:0}
+#hub-axis-container-visao_geral .overview-chart-frame canvas{max-width:100%}
+#hub-axis-container-visao_geral .overview-chart-source{border-top:1px solid #f1f5f9;padding-top:10px;margin-top:12px;font:500 11px/1.6 Inter,system-ui,sans-serif;color:#64748b}
+#hub-axis-container-visao_geral .overview-chart-source p+p{margin-top:5px}
+#hub-axis-container-visao_geral [id$="-evidence"]{display:none} /* mesma nota em fonte/ficha do recorte */
+#hub-axis-container-visao_geral .overview-details{border-top:1px solid #e2e8f0;margin-top:12px;font:500 12px/1.6 Inter,system-ui,sans-serif;color:#475569;min-width:0}
+#hub-axis-container-visao_geral .overview-details summary{padding:12px 0;cursor:pointer;font-weight:600;min-height:44px;color:#0b2545}
+#hub-axis-container-visao_geral .overview-details [id$="-technical"]{overflow-wrap:anywhere}
+#hub-axis-container-visao_geral .overview-export{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+#hub-axis-container-visao_geral .overview-export button{border:1px solid #cbd5e1;background:#fff;color:#0b2545;border-radius:8px;min-height:40px;padding:7px 12px;font:600 12px Inter,system-ui,sans-serif}
+#hub-axis-container-visao_geral .overview-table-scroll{overflow-x:auto;max-width:100%;min-width:0}
+#hub-axis-container-visao_geral .overview-table-scroll table{border-collapse:collapse;width:100%;font-size:12px}
+#hub-axis-container-visao_geral .overview-table-scroll th,#hub-axis-container-visao_geral .overview-table-scroll td{padding:9px 12px;border-bottom:1px solid #e2e8f0;text-align:left;white-space:nowrap}
+#hub-axis-container-visao_geral .overview-table-scroll th{background:#f8fafc}
+#hub-axis-container-visao_geral .overview-photo-source{display:block;font:500 10px/1.5 Inter,system-ui,sans-serif;color:#fff;text-decoration:underline;text-underline-offset:3px;margin-top:6px}
+#hub-axis-container-visao_geral [data-overview-axis] .text-4xl{font-size:clamp(25px,2.6vw,34px);line-height:1.15;overflow-wrap:anywhere}
+#hub-axis-container-visao_geral [data-overview-axis] .whitespace-nowrap{white-space:normal}
+#hub-axis-container-visao_geral .filter-pill-pib-year{min-width:38px;min-height:32px}
+#hub-axis-container-visao_geral #pib-setorial-year-pills{max-height:110px}
+#hub-axis-container-visao_geral .overview-sector-unavailable{min-height:0;text-align:left}
+@media(max-width:639px){#hub-axis-container-visao_geral{gap:0}#hub-axis-container-visao_geral .overview-chart-frame{height:245px}#hub-axis-container-visao_geral .overview-controls label{flex:1 1 140px}#hub-axis-container-visao_geral .overview-macro-card{padding:18px}#hub-axis-container-visao_geral .flex.items-center.justify-between:has(h4){align-items:flex-start;gap:8px}#hub-axis-container-visao_geral h4{font-size:14px;line-height:1.4}#hub-axis-container-visao_geral [data-overview-axis] .text-4xl{font-size:30px}}
+/* Superfícies do tema noturno existente; regras limitadas ao mesmo container. */
+html.dark #hub-axis-container-visao_geral{color:#e2e8f0}
+html.dark #hub-axis-container-visao_geral .overview-macro-value,
+html.dark #hub-axis-container-visao_geral .overview-details summary{color:#f8fafc}
+html.dark #hub-axis-container-visao_geral .overview-macro-caption,
+html.dark #hub-axis-container-visao_geral .overview-macro-note,
+html.dark #hub-axis-container-visao_geral .overview-reading,
+html.dark #hub-axis-container-visao_geral .overview-details,
+html.dark #hub-axis-container-visao_geral .overview-controls label{color:#cbd5e1}
+html.dark #hub-axis-container-visao_geral .overview-provenance,
+html.dark #hub-axis-container-visao_geral .overview-chart-source,
+html.dark #hub-axis-container-visao_geral .overview-section-heading p{color:#94a3b8}
+html.dark #hub-axis-container-visao_geral .overview-provenance a,
+html.dark #hub-axis-container-visao_geral .overview-chart-source a,
+html.dark #hub-axis-container-visao_geral .overview-macro-footer a{color:#7dd3fc}
+html.dark #hub-axis-container-visao_geral .overview-controls select,
+html.dark #hub-axis-container-visao_geral .overview-export button{background:#0e172a;color:#e2e8f0;border-color:#475569}
+html.dark #hub-axis-container-visao_geral .overview-table-scroll th{background:#1e293b;color:#f8fafc}
+html.dark #hub-axis-container-visao_geral .overview-table-scroll td,
+html.dark #hub-axis-container-visao_geral .overview-details,
+html.dark #hub-axis-container-visao_geral .overview-macro-footer,
+html.dark #hub-axis-container-visao_geral .overview-chart-source{border-color:#334155}
+
+#hub-axis-container-visao_geral .overview-audit-context{margin-top:0;font-size:11px;line-height:1.6}
+#hub-axis-container-visao_geral .overview-macro-card{display:flex;flex-direction:column;min-width:0}
+#hub-axis-container-visao_geral .overview-macro-footer{margin-top:auto;padding-top:12px}
+
+#hub-axis-container-visao_geral .overview-chamber-panel svg{height:auto;aspect-ratio:500/275}
+#hub-axis-container-visao_geral .overview-chamber-focus{font:500 11px/1.6 Inter,system-ui,sans-serif;color:#64748b;min-height:36px}
+#hub-axis-container-visao_geral [data-overview-seat]:focus-visible circle{stroke:#00b4d8;stroke-width:4}
+html.dark #hub-axis-container-visao_geral .overview-chamber-focus{color:#cbd5e1}
+@media(max-width:1023px){#hub-axis-container-visao_geral .overview-chamber-panel{min-height:0}}
+
+#hub-axis-container-visao_geral .overview-sector-unavailable:not(.hidden){display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;padding:12px}
+#hub-axis-container-visao_geral .overview-sector-unavailable>*{margin-top:0}
+#hub-axis-container-visao_geral .overview-sector-unavailable>div:first-child{width:24px;height:24px;font-size:12px}
+#hub-axis-container-visao_geral .overview-sector-unavailable>div:not(:first-child),#hub-axis-container-visao_geral .overview-sector-unavailable>button{grid-column:2}
+#hub-axis-container-visao_geral .overview-sector-unavailable>button{justify-self:start;min-height:36px}

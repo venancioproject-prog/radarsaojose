@@ -1,495 +1,270 @@
-// =========================================================================
-// API Serverless: Webhook Asaas para Liberação Automática de Acessos & CRM
-// Radar São José - Gateway de Pagamento Seguro (Asaas)
-// =========================================================================
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const crypto = require('node:crypto');
+const {db, BillingError, fail} = require('../lib/billing-store');
+const {sendConfirmationEmail} = require('../lib/billing-email');
 
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
+const MAX_WEBHOOK_BODY_BYTES = 256 * 1024; // 256 KB
 
-// Carregador autônomo de variáveis de ambiente (.env / .env.local)
-function loadEnv() {
-  const envCandidates = [
-    path.join(process.cwd(), '.env'),
-    path.join(process.cwd(), '.env.local'),
-    path.join(__dirname, '..', '.env'),
-    path.join(__dirname, '.env')
+function loadEnvIfNeeded() {
+  if (process.env.ASAAS_WEBHOOK_SECRET !== undefined || process.env.ASAAS_WEBHOOK_TOKEN !== undefined) return;
+  if (!fs || typeof fs.existsSync !== 'function' || typeof fs.readFileSync !== 'function') return;
+  const cwd = typeof process.cwd === 'function' ? process.cwd() : '.';
+  const envFiles = [
+    path.join(cwd, '.env.local'),
+    path.join(cwd, '.env')
   ];
-  for (const p of envCandidates) {
-    if (fs.existsSync(p)) {
-      try {
+  for (const p of envFiles) {
+    try {
+      if (fs.existsSync(p)) {
         const text = fs.readFileSync(p, 'utf8');
-        text.split('\n').forEach(line => {
+        for (const line of text.split('\n')) {
           const trimmed = line.trim();
           if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
             const idx = trimmed.indexOf('=');
             const k = trimmed.slice(0, idx).trim();
             const v = trimmed.slice(idx + 1).replace(/^['"]|['"\r]$/g, '').trim();
-            if (k && !process.env[k]) {
-              process.env[k] = v;
-            }
+            if (k && process.env[k] === undefined) process.env[k] = v;
           }
-        });
-      } catch (e) {}
-    }
+        }
+      }
+    } catch (_) {}
   }
 }
-loadEnv();
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
-
-function getWebhookSecret() {
-  return process.env.ASAAS_WEBHOOK_SECRET || process.env.ASAAS_WEBHOOK_TOKEN || null;
-}
-
-function getSupabaseServiceKey() {
-  return process.env.SUPABASE_SERVICE_ROLE_KEY || null;
-}
-
-const KNOWN_ASAAS_EVENTS = [
-  'PAYMENT_CREATED',
-  'PAYMENT_UPDATED',
-  'PAYMENT_CONFIRMED',
+const KNOWN_ASAAS_EVENTS = new Set([
   'PAYMENT_RECEIVED',
+  'PAYMENT_CONFIRMED',
   'PAYMENT_OVERDUE',
   'PAYMENT_DELETED',
-  'PAYMENT_RESTORED',
   'PAYMENT_REFUNDED',
-  'PAYMENT_RECEIVED_IN_CASH_UNDONE',
-  'PAYMENT_CHARGEBACK_REQUESTED',
-  'PAYMENT_CHARGEBACK_DISPUTE',
-  'PAYMENT_AWAITING_CHARGEBACK_REVERSAL',
-  'PAYMENT_DUNNING_RECEIVED',
-  'PAYMENT_DUNNING_REQUESTED',
-  'PAYMENT_BANK_SLIP_VIEWED',
-  'PAYMENT_CHECKOUT_VIEWED'
-];
+  'PAYMENT_CHARGEBACK_REQUESTED'
+]);
 
-/**
- * Validação Criptográfica de Autenticidade do Webhook Asaas
- * O Asaas envia o token de autenticação no header 'asaas-access-token'.
- * Utiliza crypto.timingSafeEqual para prevenir timing attacks (CWE-208).
- * Comportamento fail-closed se o secret não estiver configurado no servidor.
- */
-function verifyAsaasWebhookToken(req) {
-  const configuredSecret = getWebhookSecret();
-  if (!configuredSecret) {
-    console.error('[Asaas Webhook Security] Falha de configuração: segredo do webhook ausente no servidor (fail-closed).');
-    return {
-      valid: false,
-      status: 500,
-      error: 'Erro de configuração interna: autenticação de webhook não configurada no servidor.',
-      code: 'WEBHOOK_SECRET_NOT_CONFIGURED'
-    };
+function getHeader(req, name) {
+  const headers = req?.headers;
+  if (!headers || typeof headers !== 'object') return undefined;
+  const lower = name.toLowerCase();
+  if (headers[lower] !== undefined) return headers[lower];
+  for (const [k, v] of Object.entries(headers)) {
+    if (k.toLowerCase() === lower) return v;
   }
-
-  const headers = req.headers || {};
-  const incomingToken = headers['asaas-access-token'] || headers['Asaas-Access-Token'] || '';
-
-  if (!incomingToken || typeof incomingToken !== 'string') {
-    return {
-      valid: false,
-      status: 401,
-      error: 'Não autorizado. Cabeçalho asaas-access-token ausente.',
-      code: 'UNAUTHORIZED'
-    };
-  }
-
-  const bufIncoming = Buffer.from(incomingToken.trim());
-  const bufExpected = Buffer.from(configuredSecret.trim());
-
-  if (bufIncoming.length !== bufExpected.length) {
-    return {
-      valid: false,
-      status: 401,
-      error: 'Não autorizado. Token de webhook inválido.',
-      code: 'UNAUTHORIZED'
-    };
-  }
-
-  if (!crypto.timingSafeEqual(bufIncoming, bufExpected)) {
-    return {
-      valid: false,
-      status: 401,
-      error: 'Não autorizado. Token de webhook inválido.',
-      code: 'UNAUTHORIZED'
-    };
-  }
-
-  return { valid: true };
+  return undefined;
 }
 
-/**
- * Validação Estrutural e Semântica do Payload do Webhook Asaas
- */
-function validateWebhookPayload(body) {
-  if (!body || typeof body !== 'object' || Array.isArray(body)) {
-    return { valid: false, error: 'Corpo da requisição deve ser um objeto JSON válido.' };
+function verifyAsaasWebhookToken(received, expected) {
+  if (typeof received !== 'string' || typeof expected !== 'string' || !received || !expected) return false;
+  const a = Buffer.from(received, 'utf8');
+  const b = Buffer.from(expected, 'utf8');
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+async function readRawBody(req) {
+  if (Buffer.isBuffer(req.rawBody)) return req.rawBody;
+  if (typeof req.rawBody === 'string') return Buffer.from(req.rawBody, 'utf8');
+  if (Buffer.isBuffer(req.body)) return req.body;
+  if (typeof req.body === 'string') return Buffer.from(req.body, 'utf8');
+  if (req && typeof req[Symbol.asyncIterator] === 'function') {
+    const chunks = [];
+    let total = 0;
+    for await (const chunk of req) {
+      const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(String(chunk), 'utf8');
+      total += buf.length;
+      if (total > MAX_WEBHOOK_BODY_BYTES) throw new BillingError(413, 'WEBHOOK_PAYLOAD_TOO_LARGE');
+      chunks.push(buf);
+    }
+    return Buffer.concat(chunks);
+  }
+  if (req.body && typeof req.body === 'object') {
+    return Buffer.from(JSON.stringify(req.body), 'utf8');
+  }
+  return Buffer.alloc(0);
+}
+
+function cents(value) {
+  const text = String(value);
+  if (!/^\d+(\.\d{1,2})?$/.test(text)) throw new BillingError(400, 'INVALID_PAYMENT_VALUE');
+  const [whole, fractional = ''] = text.split('.');
+  const result = Number(whole) * 100 + Number(fractional.padEnd(2, '0'));
+  if (!Number.isSafeInteger(result)) throw new BillingError(400, 'INVALID_PAYMENT_VALUE');
+  return result;
+}
+
+function checkAmount(order, payment) {
+  if (order.quote?.requiresGatewayScheduleReplacement) throw new BillingError(409, 'SCHEDULE_RECONCILIATION_REQUIRED');
+  if (payment.currency !== undefined && payment.currency !== 'BRL') throw new BillingError(409, 'PAYMENT_CURRENCY_MISMATCH');
+  const count = order.installment_count;
+  // Individual charge value, not the annual total. Subsequent installments require persisted mapping.
+  const expected = count > 1 ? order.quote?.installments?.[0] : Number(order.amount_cents);
+  if (!Number.isSafeInteger(expected) || cents(payment.value) !== expected) throw new BillingError(409, 'PAYMENT_AMOUNT_MISMATCH');
+  if (payment.billingType !== order.payment_method) throw new BillingError(409, 'PAYMENT_METHOD_MISMATCH');
+}
+
+async function verifyPaymentWithAsaas(paymentId, order, eventType) {
+  const env = (process.env.ASAAS_ENVIRONMENT || 'sandbox').toLowerCase();
+  const apiKey = env === 'sandbox'
+    ? (process.env.ASAAS_SANDBOX_API_KEY || process.env.ASAAS_API_KEY)
+    : process.env.ASAAS_API_KEY;
+  const apiUrl = process.env.ASAAS_API_URL ||
+    (env === 'sandbox' ? 'https://sandbox.asaas.com/api/v3' : 'https://api.asaas.com/v3');
+
+  if (!apiKey) throw new BillingError(503, 'ASAAS_NOT_CONFIGURED');
+  if (typeof fetch !== 'function') throw new BillingError(503, 'ASAAS_VERIFICATION_FAILED');
+
+  let response;
+  try {
+    response = await fetch(apiUrl + '/payments/' + encodeURIComponent(paymentId), {
+      method: 'GET',
+      headers: { access_token: apiKey, 'Content-Type': 'application/json' },
+      signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined
+    });
+  } catch (_) {
+    throw new BillingError(502, 'ASAAS_VERIFICATION_FAILED');
+  }
+  if (!response || !response.ok) throw new BillingError(502, 'ASAAS_VERIFICATION_FAILED');
+
+  const live = await response.json();
+  if (!live || live.id !== paymentId) throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
+  if (live.externalReference !== undefined && live.externalReference !== null && live.externalReference !== order.id) {
+    throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
+  }
+  if (live.billingType && live.billingType !== order.payment_method) {
+    throw new BillingError(409, 'PAYMENT_METHOD_MISMATCH');
   }
 
-  const { event, payment } = body;
-
-  if (!event || typeof event !== 'string' || !event.trim()) {
-    return { valid: false, error: 'Campo "event" é obrigatório e deve ser uma string.' };
-  }
-
-  const normalizedEvent = event.trim().toUpperCase();
-  if (!KNOWN_ASAAS_EVENTS.includes(normalizedEvent)) {
-    return { valid: false, error: `Tipo de evento desconhecido: "${event}".` };
-  }
-
-  if (!payment || typeof payment !== 'object' || Array.isArray(payment)) {
-    return { valid: false, error: 'Campo "payment" é obrigatório e deve ser um objeto JSON.' };
-  }
-
-  if (!payment.id || typeof payment.id !== 'string' || !payment.id.trim()) {
-    return { valid: false, error: 'Campo "payment.id" é obrigatório e deve ser uma string.' };
-  }
-
-  if (payment.value !== undefined && payment.value !== null) {
-    const val = Number(payment.value);
-    if (isNaN(val) || val <= 0) {
-      return { valid: false, error: 'Campo "payment.value" deve ser um número positivo.' };
+  if (['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(eventType)) {
+    if (!['RECEIVED', 'CONFIRMED', 'RECEIVED_IN_CASH'].includes(live.status) || live.deleted === true) {
+      throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
+    }
+    checkAmount(order, live);
+  } else if (eventType === 'PAYMENT_REFUNDED') {
+    if (!['REFUNDED', 'REFUND_REQUESTED', 'REFUND_IN_PROGRESS'].includes(live.status)) {
+      throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
+    }
+  } else if (eventType === 'PAYMENT_CHARGEBACK_REQUESTED') {
+    if (!['CHARGEBACK_REQUESTED', 'CHARGEBACK_DISPUTE', 'AWAITING_CHARGEBACK_REVERSAL', 'REFUNDED'].includes(live.status)) {
+      throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
+    }
+  } else if (eventType === 'PAYMENT_DELETED') {
+    if (live.deleted !== true && !['DELETED', 'REFUNDED'].includes(live.status)) {
+      throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
+    }
+  } else if (eventType === 'PAYMENT_OVERDUE') {
+    if (live.status !== 'OVERDUE') {
+      throw new BillingError(409, 'ASAAS_PAYMENT_STATE_MISMATCH');
     }
   }
-
-  return { valid: true, normalizedEvent };
+  return live;
 }
 
-module.exports = async function handler(req, res) {
-  // Configuração CORS (Mantém compatibilidade existente)
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, asaas-access-token');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
-  }
-
-  // 1. Verificação Estrita do Método HTTP (Apenas POST permitido)
+async function handler(req, res) {
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST, OPTIONS');
-    return res.status(405).json({
-      success: false,
-      error: `Método ${req.method} não permitido. Utilize POST.`,
-      code: 'METHOD_NOT_ALLOWED'
-    });
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ success: false, code: 'METHOD_NOT_ALLOWED' });
   }
 
   try {
-    // 2. Validação Obrigatória de Autenticidade (Origin Auth / Secret) ANTES do Processamento
-    const authCheck = verifyAsaasWebhookToken(req);
-    if (!authCheck.valid) {
-      return res.status(authCheck.status).json({
-        success: false,
-        error: authCheck.error,
-        code: authCheck.code
-      });
+    loadEnvIfNeeded();
+    const secret = process.env.ASAAS_WEBHOOK_SECRET || process.env.ASAAS_WEBHOOK_TOKEN;
+    if (!secret || secret === 'sandbox_webhook_token' || secret.trim().length < 16) {
+      throw new BillingError(503, 'WEBHOOK_SECRET_NOT_CONFIGURED');
     }
 
-    // 3. Validação Estrutural e Semântica do Payload
-    const payloadCheck = validateWebhookPayload(req.body);
-    if (!payloadCheck.valid) {
-      return res.status(400).json({
-        success: false,
-        error: payloadCheck.error,
-        code: 'BAD_REQUEST'
-      });
+    // 1. Validação em tempo constante do header oficial asaas-access-token antes de ler/parsear o corpo no handler
+    const accessToken = getHeader(req, 'asaas-access-token');
+    if (!verifyAsaasWebhookToken(accessToken, secret)) {
+      throw new BillingError(401, 'INVALID_WEBHOOK_TOKEN');
     }
 
-    const { payment } = req.body;
-    const event = payloadCheck.normalizedEvent;
-    const asaasPaymentId = payment.id.trim();
-    const paymentValue = Number(payment.value) || 10.00;
+    // 2. Leitura controlada do raw body (limite de 256 KB) após autenticação do header
+    const rawBuffer = await readRawBody(req);
 
-    // 4. Verificação de Service Role Key para operações administrativas no banco (Fail-Closed)
-    const serviceKey = getSupabaseServiceKey();
-    if (!serviceKey) {
-      console.error('[Asaas Webhook Security] SUPABASE_SERVICE_ROLE_KEY ausente para persistência administrativa (fail-closed).');
-      return res.status(500).json({
-        success: false,
-        error: 'Erro de configuração interna do servidor para operações de persistência.',
-        code: 'CONFIG_SERVICE_ROLE_KEY_MISSING'
-      });
+    let body;
+    if (req.body && typeof req.body === 'object' && !Buffer.isBuffer(req.body) && req.rawBody === undefined) {
+      body = req.body;
+    } else {
+      const rawText = rawBuffer.toString('utf8');
+      if (!rawText) throw new BillingError(400, 'INVALID_JSON');
+      try { body = JSON.parse(rawText); } catch (_) { throw new BillingError(400, 'INVALID_JSON'); }
     }
+    if (!body || typeof body.id !== 'string' || !body.id || typeof body.event !== 'string') throw new BillingError(400, 'INVALID_EVENT');
+    if (!KNOWN_ASAAS_EVENTS.has(body.event)) return res.status(200).json({ success: true, ignored: true });
 
-    // 5. Processamento Idempotente e Confiável de Pagamento Confirmado / Recebido
-    if (event === 'PAYMENT_RECEIVED' || event === 'PAYMENT_CONFIRMED') {
-      // 5.1 Busca venda vinculada ao pagamento Asaas no CRM
-      const searchVendaRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_vendas?asaas_payment_id=eq.${encodeURIComponent(asaasPaymentId)}&select=id,status_pagamento,pessoa_id,empresa_id,valor_fechado`, {
-        method: 'GET',
-        headers: {
-          'apikey': serviceKey,
-          'Authorization': `Bearer ${serviceKey}`,
-          'Content-Type': 'application/json'
-        }
-      });
+    const payment = body.payment;
+    if (!payment || typeof payment.id !== 'string' || !payment.id || payment.id.startsWith('pay_sb_')) throw new BillingError(400, 'INVALID_PAYMENT');
+    if (payment.currency !== undefined && payment.currency !== 'BRL') throw new BillingError(409, 'PAYMENT_CURRENCY_MISMATCH');
 
-      if (!searchVendaRes.ok) {
-        const errText = await searchVendaRes.text().catch(() => '');
-        console.error('[Asaas Webhook] Erro ao consultar venda no Supabase:', searchVendaRes.status, errText);
-        return res.status(500).json({
-          success: false,
-          error: 'Falha ao consultar registro de venda no banco de dados.',
-          code: 'SUPABASE_QUERY_VENDA_FAILED'
-        });
-      }
-
-      const vendas = await searchVendaRes.json();
-      if (!Array.isArray(vendas) || vendas.length === 0) {
-        return res.status(200).json({
-          success: true,
-          message: 'Nenhuma venda vinculada encontrada para este pagamento.',
-          paymentId: asaasPaymentId,
-          event
-        });
-      }
-
-      const venda = vendas[0];
-      let clienteAlreadyExisted = false;
-      let accessAlreadyExisted = false;
-      let clienteId = null;
-
-      // 5.2 Se há pessoa vinculada à venda, inspeciona o estado atual do provisionamento
-      if (venda.pessoa_id) {
-        // Verifica se cliente já foi registrado para esta venda
-        const checkClientRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_clientes?venda_id=eq.${encodeURIComponent(venda.id)}&select=id`, {
-          method: 'GET',
-          headers: {
-            'apikey': serviceKey,
-            'Authorization': `Bearer ${serviceKey}`,
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!checkClientRes.ok) {
-          const errText = await checkClientRes.text().catch(() => '');
-          console.error('[Asaas Webhook] Erro ao consultar cliente no Supabase:', checkClientRes.status, errText);
-          return res.status(500).json({
-            success: false,
-            error: 'Falha ao consultar cliente no banco de dados.',
-            code: 'SUPABASE_QUERY_CLIENTE_FAILED'
-          });
-        }
-
-        const existingClients = await checkClientRes.json();
-        if (Array.isArray(existingClients) && existingClients.length > 0) {
-          clienteAlreadyExisted = true;
-          clienteId = existingClients[0].id;
-        }
-
-        // Se o cliente já existe, verifica se a licença de acesso já foi registrada
-        if (clienteId) {
-          const checkAccessRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_acessos?cliente_id=eq.${encodeURIComponent(clienteId)}&select=id`, {
-            method: 'GET',
-            headers: {
-              'apikey': serviceKey,
-              'Authorization': `Bearer ${serviceKey}`,
-              'Content-Type': 'application/json'
-            }
-          });
-
-          if (!checkAccessRes.ok) {
-            const errText = await checkAccessRes.text().catch(() => '');
-            console.error('[Asaas Webhook] Erro ao consultar licença de acesso no Supabase:', checkAccessRes.status, errText);
-            return res.status(500).json({
-              success: false,
-              error: 'Falha ao consultar licença de acesso no banco de dados.',
-              code: 'SUPABASE_QUERY_ACESSO_FAILED'
-            });
-          }
-
-          const existingAccess = await checkAccessRes.json();
-          if (Array.isArray(existingAccess) && existingAccess.length > 0) {
-            accessAlreadyExisted = true;
-          }
-        }
-      }
-
-      // 5.3 IDEMPOTÊNCIA: Se a venda já foi aprovada E todo o provisionamento (cliente + acesso) já foi concluído:
-      const isFullyProvisioned = venda.status_pagamento === 'Aprovado' &&
-        (!venda.pessoa_id || (clienteAlreadyExisted && accessAlreadyExisted));
-
-      if (isFullyProvisioned) {
-        return res.status(200).json({
-          success: true,
-          message: 'Evento já processado anteriormente. Idempotência preservada.',
-          alreadyProcessed: true,
-          paymentId: asaasPaymentId,
-          event
-        });
-      }
-
-      // 5.4 Se o provisionamento está incompleto ou a venda ainda não foi aprovada:
-      // (a) Atualiza status da venda para 'Aprovado' caso ainda esteja pendente
-      if (venda.status_pagamento !== 'Aprovado') {
-        const updateVendaRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_vendas?id=eq.${encodeURIComponent(venda.id)}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': serviceKey,
-            'Authorization': `Bearer ${serviceKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            status_pagamento: 'Aprovado',
-            data_pagamento: new Date().toISOString()
-          })
-        });
-
-        if (!updateVendaRes.ok) {
-          const errText = await updateVendaRes.text().catch(() => '');
-          console.error('[Asaas Webhook] Erro ao atualizar status da venda:', updateVendaRes.status, errText);
-          return res.status(500).json({
-            success: false,
-            error: 'Falha ao atualizar status da venda no banco de dados.',
-            code: 'SUPABASE_UPDATE_VENDA_FAILED'
-          });
-        }
-      }
-
-      // (b) Se há pessoa vinculada, atualiza oportunidade e provisiona pendências
-      if (venda.pessoa_id) {
-        // Atualiza oportunidade para Ganha
-        const updateOportunidadeRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_oportunidades?pessoa_id=eq.${encodeURIComponent(venda.pessoa_id)}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': serviceKey,
-            'Authorization': `Bearer ${serviceKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            etapa_pipeline: 'Ganho',
-            status: 'Ganha'
-          })
-        });
-
-        if (!updateOportunidadeRes.ok) {
-          const errText = await updateOportunidadeRes.text().catch(() => '');
-          console.error('[Asaas Webhook] Erro ao atualizar oportunidade:', updateOportunidadeRes.status, errText);
-          return res.status(500).json({
-            success: false,
-            error: 'Falha ao atualizar status da oportunidade no banco de dados.',
-            code: 'SUPABASE_UPDATE_OPORTUNIDADE_FAILED'
-          });
-        }
-
-        // Provisiona registro de cliente apenas se ainda não existir (evita duplicação)
-        if (!clienteId) {
-          const clientRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_clientes`, {
-            method: 'POST',
-            headers: {
-              'apikey': serviceKey,
-              'Authorization': `Bearer ${serviceKey}`,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=representation'
-            },
-            body: JSON.stringify([{
-              pessoa_id: venda.pessoa_id,
-              empresa_id: venda.empresa_id || null,
-              venda_id: venda.id,
-              produto: paymentValue >= 15.00 ? 'Radar São José - Plano Empresarial' : 'Radar São José - Plano Pro',
-              valor_total: paymentValue,
-              quantidade_acessos: paymentValue >= 15.00 ? 3 : 1,
-              status: 'Ativo',
-              onboarding_status: 'Pendente'
-            }])
-          });
-
-          if (!clientRes.ok) {
-            const errText = await clientRes.text().catch(() => '');
-            console.error('[Asaas Webhook] Erro ao criar cliente:', clientRes.status, errText);
-            return res.status(500).json({
-              success: false,
-              error: 'Falha ao registrar cliente no banco de dados.',
-              code: 'SUPABASE_CREATE_CLIENTE_FAILED'
-            });
-          }
-
-          const clientData = await clientRes.json();
-          if (Array.isArray(clientData) && clientData.length > 0) {
-            clienteId = clientData[0].id;
-          } else {
-            return res.status(500).json({
-              success: false,
-              error: 'Retorno inesperado ao registrar cliente no banco de dados.',
-              code: 'SUPABASE_CREATE_CLIENTE_EMPTY'
-            });
-          }
-        }
-
-        // Provisiona licença de acesso individual apenas se ainda não existir (evita duplicação)
-        if (!accessAlreadyExisted && clienteId) {
-          const accessRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_acessos`, {
-            method: 'POST',
-            headers: {
-              'apikey': serviceKey,
-              'Authorization': `Bearer ${serviceKey}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify([{
-              cliente_id: clienteId,
-              pessoa_id: venda.pessoa_id,
-              produto: paymentValue >= 15.00 ? 'Plano Empresarial' : 'Plano Pro',
-              status: 'Ativo'
-            }])
-          });
-
-          if (!accessRes.ok) {
-            const errText = await accessRes.text().catch(() => '');
-            console.error('[Asaas Webhook] Erro ao provisionar licença de acesso:', accessRes.status, errText);
-            return res.status(500).json({
-              success: false,
-              error: 'Falha ao registrar licença de acesso no banco de dados.',
-              code: 'SUPABASE_CREATE_ACESSO_FAILED'
-            });
-          }
-        }
-      }
-    }
-
-    // 6. Processamento de Pagamento Vencido / Cancelado
-    if (event === 'PAYMENT_OVERDUE' || event === 'PAYMENT_DELETED') {
-      const cancelRes = await fetch(`${SUPABASE_URL}/rest/v1/crm_vendas?asaas_payment_id=eq.${encodeURIComponent(asaasPaymentId)}`, {
-        method: 'PATCH',
-        headers: {
-          'apikey': serviceKey,
-          'Authorization': `Bearer ${serviceKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          status_pagamento: 'Cancelado'
-        })
-      });
-
-      if (!cancelRes.ok) {
-        const errText = await cancelRes.text().catch(() => '');
-        console.error('[Asaas Webhook Status Sync Error]:', cancelRes.status, errText);
-        return res.status(500).json({
-          success: false,
-          error: 'Falha ao atualizar status de cancelamento no banco de dados.',
-          code: 'SUPABASE_UPDATE_CANCELADO_FAILED'
-        });
-      }
-    }
-
-    return res.status(200).json({
-      success: true,
-      event,
-      paymentId: asaasPaymentId,
-      processedAt: new Date().toISOString()
+    // Persist in a separate transaction before processing. No email/description is authority.
+    await db('billing_gateway_events?on_conflict=event_id', {
+      method: 'POST',
+      headers: { Prefer: 'resolution=ignore-duplicates' },
+      body: JSON.stringify({
+        event_id: body.id,
+        payment_id: payment.id,
+        event_type: body.event,
+        occurred_at: new Date().toISOString(),
+        payload: body,
+        status: 'pending'
+      })
     });
 
-  } catch (err) {
-    console.error('[Asaas Webhook Exception]:', err.message);
-    return res.status(500).json({
-      success: false,
-      error: 'Erro interno ao processar webhook.'
+    const events = await db('billing_gateway_events?event_id=eq.' + encodeURIComponent(body.id) + '&select=*');
+    const stored = events?.[0];
+    if (
+      !stored ||
+      stored.payment_id !== payment.id ||
+      stored.event_type !== body.event ||
+      (stored.payload?.payment?.value !== undefined && payment.value !== undefined && cents(stored.payload.payment.value) !== cents(payment.value)) ||
+      (stored.payload?.payment?.billingType !== undefined && payment.billingType !== undefined && stored.payload.payment.billingType !== payment.billingType)
+    ) {
+      throw new BillingError(409, 'EVENT_ID_CONFLICT');
+    }
+
+    const orders = await db('billing_orders?asaas_payment_id=eq.' + encodeURIComponent(payment.id) + '&select=*');
+    const order = orders?.[0];
+    // Checkout alone binds the payment; arbitrary externalReference never grants access.
+    if (!order) throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+    if (payment.externalReference !== undefined && payment.externalReference !== null && payment.externalReference !== order.id) {
+      throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
+    }
+
+    if (['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
+      checkAmount(order, stored.payload.payment);
+    }
+
+    // 3. Confirmação ativa server-to-server na API v3 do Asaas (GET /v3/payments/{id})
+    await verifyPaymentWithAsaas(payment.id, order, body.event);
+
+    const result = await db('rpc/billing_process_event', {
+      method: 'POST',
+      body: JSON.stringify({ p_event_id: body.id })
     });
+    if (!result?.success) throw new BillingError(503, 'BILLING_EVENT_PROCESSING_FAILED');
+
+    // Despacho de e-mail seguro e desacoplado após confirmação persistida
+    let emailStatus = 'ignored';
+    if (!result.duplicate && !result.ignored && ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
+      try {
+        const emailRes = await sendConfirmationEmail({ order, event: stored.payload });
+        emailStatus = emailRes.status;
+      } catch (emailErr) {
+        console.error('[Asaas Webhook] Erro não-bloqueante no envio de e-mail:', emailErr);
+        emailStatus = 'failed_non_blocking';
+      }
+    } else if (result.duplicate) {
+      emailStatus = 'duplicate_ignored';
+    }
+
+    return res.status(200).json({ ...result, emailStatus });
+  } catch (error) {
+    return fail(res, error);
   }
-};
+}
 
+module.exports = handler;
+module.exports.config = { api: { bodyParser: false } };
 module.exports.verifyAsaasWebhookToken = verifyAsaasWebhookToken;
-module.exports.validateWebhookPayload = validateWebhookPayload;
-module.exports.getWebhookSecret = getWebhookSecret;
-module.exports.getSupabaseServiceKey = getSupabaseServiceKey;
+module.exports.verifyPaymentWithAsaas = verifyPaymentWithAsaas;
+module.exports.checkAmount = checkAmount;
 module.exports.KNOWN_ASAAS_EVENTS = KNOWN_ASAAS_EVENTS;

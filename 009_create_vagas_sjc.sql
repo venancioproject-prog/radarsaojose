@@ -36,9 +36,16 @@ CREATE POLICY "Permitir leitura pública de vagas"
 ON public.vagas_sjc FOR SELECT
 USING (true);
 
--- Política 2: Inserção/Atualização via API pública (anônimo ou autenticado)
+-- Política 2: Inserção/Atualização restrita a administradores / service_role
 DROP POLICY IF EXISTS "Permitir sincronização de vagas" ON public.vagas_sjc;
 CREATE POLICY "Permitir sincronização de vagas"
 ON public.vagas_sjc FOR ALL
-USING (true)
-WITH CHECK (true);
+TO authenticated
+USING (
+  coalesce((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false)
+  OR coalesce((auth.jwt() -> 'app_metadata' ->> 'is_admin')::boolean, false)
+)
+WITH CHECK (
+  coalesce((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin', false)
+  OR coalesce((auth.jwt() -> 'app_metadata' ->> 'is_admin')::boolean, false)
+);

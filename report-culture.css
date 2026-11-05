@@ -1,0 +1,83 @@
+/* Voices and cultural movements: editorial hierarchy shared by all formats. */
+#executive-report-view > article.report-culture {
+  --culture-accent: #0066cc;
+  --culture-tint: #eff6ff;
+  padding: clamp(24px, 4cqw, 56px);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #10263e06;
+  min-width: 0;
+}
+#executive-report-view > .report-culture[data-movement="1"] { --culture-accent: #245ea8; --culture-tint: #eff5fc; }
+#executive-report-view > .report-culture[data-movement="2"] { --culture-accent: #7952a8; --culture-tint: #f6f1fb; }
+#executive-report-view > .report-culture[data-movement="3"] { --culture-accent: #b33f64; --culture-tint: #fff1f5; }
+#executive-report-view > .report-culture[data-movement="4"] { --culture-accent: #14785f; --culture-tint: #eef8f4; }
+#executive-report-view .report-culture .report-page-meta { gap: 12px; align-items: start; }
+#executive-report-view .report-culture .report-page-meta > div { flex-wrap: wrap; min-width: 0; }
+#executive-report-view .report-culture .report-page-heading h2 { max-width: 32ch; font-weight: 650; line-height: 1.12; letter-spacing: -.035em; }
+#executive-report-view .report-culture .report-page-heading > span { color: var(--culture-accent); }
+#executive-report-view .report-culture :is(p,blockquote) { overflow-wrap: break-word; }
+#executive-report-view .report-culture :is(h1,h2,h3) { overflow-wrap: anywhere; min-width: 0; }
+#executive-report-view .report-culture .report-content-grid { gap: clamp(24px, 3cqw, 44px); align-items: start; }
+#executive-report-view .report-culture .report-content-grid p { font-size: 16px; line-height: 1.65; }
+#executive-report-view .report-culture .report-content-grid > div > .rounded-2xl:not(.gg-photo-card) { background: var(--culture-tint); border: 0; border-radius: 12px; box-shadow: none; }
+#executive-report-view .report-culture .gg-photo-card { border-radius: 12px; }
+#executive-report-view .report-culture figure.gg-photo-card { aspect-ratio: auto; overflow: visible; background: transparent; }
+#executive-report-view .report-culture figure.gg-photo-card img { display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; }
+#executive-report-view .report-culture .gg-photo-caption { position: static; padding: 12px 0 0; background: none; color: var(--rs-muted); font-size: 12px; line-height: 1.5; }
+#executive-report-view .report-culture .report-quote-grid { gap: 18px; align-items: stretch; }
+#executive-report-view .report-culture .report-quote {
+  display: flex; flex-direction: column; justify-content: flex-start; gap: 20px;
+  padding: 24px; background: var(--culture-tint); border: 0;
+  border-top: 3px solid var(--culture-accent); border-radius: 0 0 12px 12px;
+}
+#executive-report-view .report-culture .report-quote > * { margin: 0; }
+#executive-report-view .report-culture .report-quote blockquote { padding: 0; border: 0; font-size: 18px; font-style: normal; line-height: 1.55; color: var(--rs-ink); }
+#executive-report-view .report-culture .report-quote-person { align-items: start; gap: 12px; }
+#executive-report-view .report-culture .report-quote-source { margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--rs-muted); white-space: normal; font-size: 10px; line-height: 1.5; }
+#executive-report-view .report-culture .report-reading-copy { max-width: none; font-size: 16px; line-height: 1.65; columns: auto; }
+#executive-report-view .report-culture .culture-analysis { max-width: 80ch; padding-left: 24px; border-left: 3px solid var(--culture-accent); }
+#executive-report-view .report-culture .culture-analysis p + p { margin-top: 20px; }
+#executive-report-view .report-culture .culture-profile-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
+#executive-report-view .report-culture .culture-profile-grid > * { grid-column: auto; padding: 24px; border: 1px solid var(--rs-rule); border-radius: 12px; background: var(--culture-tint); }
+#executive-report-view .report-culture .culture-facts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+#executive-report-view .report-culture .culture-facts > p { padding: 20px; background: var(--culture-tint); border-radius: 12px; font-size: 16px; line-height: 1.55; }
+#executive-report-view .report-culture .culture-context > div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 32px; align-items: start; }
+#executive-report-view .report-culture .culture-context > div > * { margin: 0; }
+#executive-report-view .report-culture .culture-context .gg-photo-card { height: 240px; }
+#executive-report-view .report-culture .culture-quote-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+#executive-report-view .report-culture .culture-quote-pair > :only-child { grid-column: 1 / -1; max-width: 80ch; }
+#executive-report-view .report-culture .culture-narrative-grid { display: grid; grid-template-columns: minmax(0,4fr) minmax(0,8fr); }
+#executive-report-view .report-culture .culture-narrative-grid > * { grid-column: auto; }
+#executive-report-view .report-culture .culture-narrative-grid .report-reading-copy { padding-left: 24px; border-left: 1px solid var(--rs-rule); }
+#executive-report-view .report-culture .culture-context-column > * + * { margin-top: 20px; }
+@container report-slide (min-width: 761px) and (max-width: 1100px) {
+  #executive-report-view .report-culture .culture-narrative-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+#executive-report-view .report-culture .gg-bento-card { padding: 24px; border: 1px solid var(--rs-rule); border-radius: 12px; box-shadow: none; }
+#executive-report-view .report-culture .report-page-source span { white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+#executive-report-view .report-culture .report-page-source { align-items: start; }
+@container report-slide (max-width: 760px) {
+  #executive-report-view .report-culture :is(.report-quote-grid,.report-content-grid) { grid-template-columns: minmax(0,1fr); }
+  #executive-report-view .report-culture .report-content-grid > * { grid-column: auto; }
+  #executive-report-view .report-culture .report-page-heading h2 { font-size: 30px; }
+  #executive-report-view .report-culture .report-quote { padding: 20px; }
+  #executive-report-view .report-culture :is(.culture-profile-grid,.culture-facts,.culture-quote-pair,.culture-context > div) { grid-template-columns: minmax(0,1fr); }
+}
+body.presentation-mode #executive-report-view > article.report-culture { gap: 18px; padding: 24px 4%; }
+body.presentation-mode #executive-report-view > .report-culture > * { margin-block: 0; flex-shrink: 0; }
+body.presentation-mode #executive-report-view .report-culture .report-page-body { flex: 1 0 auto; justify-content: center; gap: 20px; }
+body.presentation-mode #executive-report-view > article.report-culture .report-page-body { padding-top: 0; }
+body.presentation-mode #executive-report-view .report-culture .report-page-heading h2 { font-size: clamp(28px, 4.5vh, 48px); }
+body.presentation-mode #executive-report-view .report-culture .report-content-grid p { font-size: 16px; line-height: 1.5; }
+body.presentation-mode #executive-report-view .report-culture .report-quote blockquote { font-size: 17px; line-height: 1.45; }
+@media (max-height: 850px) and (min-width: 761px) {
+  body.presentation-mode #executive-report-view .report-culture .culture-context-column .gg-photo-card { height: 100px; min-height: 0; }
+  body.presentation-mode #executive-report-view .report-culture .culture-context-column > div:first-child { padding: 16px; }
+  body.presentation-mode #executive-report-view .report-culture .culture-context-column p { font-size: 15px; line-height: 1.45; }
+  body.presentation-mode #executive-report-view .report-culture .culture-context-column > * + * { margin-top: 16px; }
+}
+@media (max-height: 740px) and (min-width: 761px) {
+  body.presentation-mode #executive-report-view .report-culture .gg-bento-card { padding: 16px; }
+  body.presentation-mode #executive-report-view > article.report-culture .report-page-body { gap: 16px; }
+}
+html.dark #executive-report-view > .report-culture { --culture-tint: #17253a; }

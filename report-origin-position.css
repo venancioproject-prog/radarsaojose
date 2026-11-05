@@ -1,0 +1,24 @@
+/* Screen 03: center the opening question within its available space. */
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-003 .origin-body {
+ align-items:center;
+}
+body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-003 .origin-question {
+ align-self:center;
+}
+body:not(.presentation-mode) #executive-report-view#executive-report-view #rep-tela-003 .origin-question {
+ min-height:clamp(360px,65svh,680px);
+ align-content:center;
+ align-items:center;
+ box-sizing:border-box;
+ padding-block:32px;
+}
+@media(max-width:760px) {
+ body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-003 .origin-question {
+  min-height:65svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:stretch;
+  padding-block:24px;
+ }
+}

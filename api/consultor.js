@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const crypto = require('crypto');
+const { getDbPool } = require('../lib/db-pool');
 
 // Carregador autônomo de variáveis de ambiente (.env)
 function loadEnvLocal() {
@@ -215,13 +216,13 @@ async function loadSupabaseResearchData() {
   const selectQuery = encodeURIComponent(RELEVANT_COLUMNS.map(c => `"${c}"`).join(','));
   const endpoint = `${SUPABASE_URL}/rest/v1/${TABLE_NAME}?select=${selectQuery}&limit=2000`;
 
-  const response = await fetchWithTimeout(endpoint, {
+  const response = await getDbPool().fetchWithPool(endpoint, {
     headers: {
       "apikey": SUPABASE_ANON_KEY,
       "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
       "Prefer": "count=exact"
     }
-  }, 15000, "Supabase REST");
+  }, { timeoutMs: 15000, coalesce: true, cacheTtlMs: 300000 });
 
   if (!response.ok) {
     const errText = await response.text();
@@ -1733,6 +1734,9 @@ function assembleFinalReport(job, snapshot) {
 
 // 12. HANDLER SERVERLESS PRINCIPAL
 module.exports = async function handler(req, res, options = {}) {
+  const entitlement = req.method !== 'OPTIONS' ? await require('../lib/entitlements').requirePlan(req, res, 'report') : null;
+  if (req.method !== 'OPTIONS' && !entitlement) return;
+  const authUser = entitlement?.user || null;
   const handlerStartTime = Date.now();
   const workerId = options.workerId || `worker_${Math.random().toString(36).substring(2, 9)}`;
   const mockProvider = options.mockProvider || null;
@@ -1745,10 +1749,18 @@ module.exports = async function handler(req, res, options = {}) {
     return res.status(200).end();
   }
 
+  if (req.method !== 'GET' && req.method !== 'POST') {
+    res.setHeader('Allow', 'GET, POST, OPTIONS');
+    return res.status(405).json({ error: 'Método não permitido.' });
+  }
+
   try {
     let body = req.body;
     if (typeof body === "string") {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
+    if (body != null && (typeof body !== 'object' || Array.isArray(body))) {
+      return res.status(400).json({ error: 'Corpo JSON deve ser um objeto.' });
     }
     body = body || {};
 
@@ -1756,9 +1768,9 @@ module.exports = async function handler(req, res, options = {}) {
     const action = String(query.action || body.action || "").toLowerCase().trim();
     const jobId = String(query.job_id || body.job_id || "").trim();
 
-    // Segurança de Credenciais: Apenas process.env ou Headers autorizados
-    const apiKey = (process.env.GROQ_API_KEY || req.headers?.["x-groq-key"] || "").trim();
-    const geminiKey = (process.env.GEMINI_API_KEY || req.headers?.["x-gemini-key"] || "").trim();
+    // Segurança de Credenciais: Exclusivamente variáveis de ambiente do servidor
+    const apiKey = (process.env.GROQ_API_KEY || "").trim();
+    const geminiKey = (process.env.GEMINI_API_KEY || "").trim();
 
     // ROTA DE DIAGNÓSTICO (action === "diag")
     if (action === "diag") {
@@ -1768,7 +1780,7 @@ module.exports = async function handler(req, res, options = {}) {
         active_provider: geminiKey ? "gemini" : (apiKey ? "groq" : "none"),
         groq_model: GROQ_MODEL,
         gemini_model: GEMINI_MODEL,
-        presentation: loc,
+        presentation: { available: Boolean(loc.foundPath) },
         supabase_url_configured: Boolean(SUPABASE_URL),
         groq_api_key_configured: Boolean(apiKey),
         gemini_api_key_configured: Boolean(geminiKey)
@@ -1794,6 +1806,7 @@ module.exports = async function handler(req, res, options = {}) {
 
       const newJob = {
         job_id: newJobId,
+        user_id: authUser?.id || null,
         idea: combinedInput,
         report_to_audit: reportToAudit,
         rows: Array.isArray(body.rows) ? body.rows : null,
@@ -1852,6 +1865,9 @@ module.exports = async function handler(req, res, options = {}) {
 
       if (!job) {
         return res.status(404).json({ error_code: "JOB_NOT_FOUND", error: "Job não encontrado ou expirado." });
+      }
+      if (job.user_id && authUser && job.user_id !== authUser.id) {
+        return res.status(403).json({ error_code: "FORBIDDEN", error: "Acesso negado: este relatório pertence a outro usuário." });
       }
 
       function formatStatusResponse(jobData, overrides = {}) {
@@ -2131,6 +2147,9 @@ module.exports = async function handler(req, res, options = {}) {
       if (!job) {
         return res.status(404).json({ error_code: "JOB_NOT_FOUND", error: "Job não encontrado." });
       }
+      if (job.user_id && authUser && job.user_id !== authUser.id) {
+        return res.status(403).json({ error_code: "FORBIDDEN", error: "Acesso negado: este relatório pertence a outro usuário." });
+      }
       if (job.status !== "completed") {
         return res.status(400).json({ 
           error_code: "JOB_NOT_COMPLETED",
@@ -2155,6 +2174,9 @@ module.exports = async function handler(req, res, options = {}) {
       const getRes = await getJob(jobId);
       const job = getRes.job;
       if (job) {
+        if (job.user_id && authUser && job.user_id !== authUser.id) {
+          return res.status(403).json({ error_code: "FORBIDDEN", error: "Acesso negado: este relatório pertence a outro usuário." });
+        }
         job.cancel_requested = true;
         job.status = "cancelled";
         job.error_code = "JOB_CANCELLED";

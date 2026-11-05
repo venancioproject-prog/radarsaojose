@@ -1,0 +1,83 @@
+/* Isolated Mobility atlas; no application shell or other map styles. */
+.mob-atlas{--atlas-primary:#0284c7;--atlas-cyan:#06b6d4;--atlas-ink:#0f172a;--atlas-muted:#475569;--atlas-line:#dbe7ee;background:#fff;border:1px solid var(--atlas-line);border-radius:20px;padding:22px;color:var(--atlas-ink);margin:22px 0;min-width:0;font-family:Inter,sans-serif}
+.mob-atlas *{box-sizing:border-box}
+.mob-atlas .atlas-eyebrow{color:var(--atlas-primary);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
+.mob-atlas .atlas-heading h3{font:800 22px/1.35 Sora,Inter,sans-serif;margin:0 0 8px;color:var(--atlas-ink)}
+.mob-atlas .atlas-heading>p:last-child{font-size:13px;line-height:1.6;color:var(--atlas-muted);margin:0}
+.mob-atlas .atlas-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
+.mob-atlas .atlas-layer{display:inline-flex;gap:10px;align-items:center;font-size:12px;font-weight:750;background:#e0f2fe;color:#075985;border:1px solid #bae6fd;border-radius:9px;padding:9px 12px}
+.mob-atlas .atlas-layer>span{background:white;border-radius:6px;padding:1px 6px}
+.mob-atlas .atlas-map-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mob-atlas button{font:600 12px/1.45 Inter,sans-serif;border:1px solid var(--atlas-line);background:#fff;color:var(--atlas-ink);border-radius:8px;cursor:pointer;padding:9px 11px;min-height:40px}
+.mob-atlas button:hover{background:#f0f9ff;border-color:#7dd3fc}
+.mob-atlas :is(button,input,summary,a):focus-visible{outline:3px solid var(--atlas-primary);outline-offset:3px}
+.mob-atlas .atlas-layout{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(255px,1fr);gap:18px;align-items:start}
+.mob-atlas .atlas-cartography,.mob-atlas .atlas-panel{min-width:0}
+.mob-atlas .atlas-panel{max-height:480px;overflow:auto;padding-right:4px;scrollbar-width:thin;scrollbar-color:#bae6fd transparent}
+.mob-atlas .atlas-map{height:480px;width:100%;border-radius:13px;border:1px solid var(--atlas-line);background:#f0f9ff;z-index:0}
+.mob-atlas .atlas-legend{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0 8px;color:var(--atlas-muted);font-size:11px;line-height:1.5}
+.mob-atlas .atlas-legend>span{display:inline-flex;align-items:center;gap:7px}
+.mob-atlas .atlas-legend i{display:inline-block;width:22px;border-top:4px solid var(--atlas-cyan);border-radius:2px}
+.mob-atlas .atlas-legend i.selected{border-color:#0369a1;border-width:5px}
+.mob-atlas .atlas-cart-source{font-size:11px;line-height:1.65;color:var(--atlas-muted);margin:0;overflow-wrap:anywhere}
+.mob-atlas a{color:var(--atlas-primary);text-decoration:underline;text-underline-offset:3px}
+.mob-atlas .atlas-search{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:650;color:var(--atlas-muted)}
+.mob-atlas .atlas-search input{width:100%;font:400 13px Inter,sans-serif;padding:11px 12px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:var(--atlas-ink);min-height:42px}
+.mob-atlas .atlas-road-list{display:grid;gap:7px;margin:12px 0}
+.mob-atlas .atlas-road-list button{display:flex;gap:10px;align-items:center;text-align:left;width:100%;padding:9px 10px}
+.mob-atlas .atlas-road-list strong{flex:none;color:var(--atlas-primary);font-size:11px}
+.mob-atlas .atlas-road-list span{font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+.mob-atlas .atlas-road-list button[aria-pressed=true]{background:#e0f2fe;border-color:#38bdf8;box-shadow:inset 3px 0 #0284c7}
+.mob-atlas .atlas-status{font-size:11px;color:var(--atlas-muted);margin:8px 0 12px;line-height:1.5}
+.mob-atlas .atlas-context{border-top:1px solid var(--atlas-line);padding-top:14px}
+.mob-atlas .atlas-context h4{font:750 16px/1.45 Sora,Inter,sans-serif;margin:0 0 10px;overflow-wrap:anywhere}
+.mob-atlas .atlas-ref{font-size:11px;font-weight:700;color:var(--atlas-primary);margin:0 0 5px}
+.mob-atlas .atlas-context h5{font-size:12px;font-weight:750;color:var(--atlas-muted);margin:0 0 5px}
+.mob-atlas .atlas-facts{margin:12px 0}
+.mob-atlas .atlas-facts ul{margin:0;padding-left:17px;font-size:12px;line-height:1.7}
+.mob-atlas .atlas-territorial,.mob-atlas .atlas-intro p{font-size:12px;line-height:1.65;color:var(--atlas-muted);margin:12px 0}
+.mob-atlas .atlas-official{margin-top:14px}
+.mob-atlas .atlas-official p{font-size:11px;line-height:1.65;margin:6px 0;overflow-wrap:anywhere}
+.mob-atlas .atlas-method{margin-top:17px;border-top:1px solid var(--atlas-line);padding-top:12px;font-size:12px;color:var(--atlas-muted)}
+.mob-atlas .atlas-method summary{cursor:pointer;font-weight:650;line-height:1.5}
+.mob-atlas .atlas-method p{line-height:1.65;margin:10px 0 0}
+.mob-atlas .atlas-empty,[data-mob-atlas-root]>.atlas-loading{font:400 13px/1.6 Inter,sans-serif;color:#475569;padding:12px 0}
+@media(max-width:1050px){.mob-atlas .atlas-layout{grid-template-columns:minmax(0,1fr)}.mob-atlas .atlas-map{height:400px}.mob-atlas .atlas-panel{max-height:none;overflow:visible;padding-right:0}.mob-atlas .atlas-road-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.mob-atlas{padding:16px;border-radius:16px}.mob-atlas .atlas-heading h3{font-size:20px}.mob-atlas .atlas-map{height:340px}.mob-atlas .atlas-road-list{grid-template-columns:1fr}.mob-atlas .atlas-toolbar{gap:10px}.mob-atlas .atlas-map-actions{width:100%}.mob-atlas .atlas-map-actions button{flex:1}.mob-atlas .atlas-legend{gap:10px}}
+
+/* Local theme rules: Atlas surfaces and Leaflet controls, never other maps. */
+html.dark #hub-axis-container-mobilidade .mob-atlas{--atlas-primary:#38bdf8;--atlas-ink:#f1f5f9;--atlas-muted:#cbd5e1;--atlas-line:#475569;background:#0f172a;color:var(--atlas-ink);color-scheme:dark}
+html.dark #hub-axis-container-mobilidade .mob-atlas :is(h3,h4,strong){color:var(--atlas-ink)}
+html.dark #hub-axis-container-mobilidade .mob-atlas :is(p,span,label,summary,li){color:var(--atlas-muted)}
+html.dark #hub-axis-container-mobilidade .mob-atlas :is(.atlas-eyebrow,.atlas-ref,.atlas-road-list strong,a){color:var(--atlas-primary)}
+html.dark #hub-axis-container-mobilidade .mob-atlas button{background:#1e293b;color:#f1f5f9;border-color:#475569}
+html.dark #hub-axis-container-mobilidade .mob-atlas button:hover{background:#334155;border-color:#38bdf8}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-layer,
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-road-list button[aria-pressed=true]{background:#0c4a6e;color:#e0f2fe;border-color:#38bdf8;box-shadow:inset 3px 0 #38bdf8}
+html.dark #hub-axis-container-mobilidade .mob-atlas :is(.atlas-layer,.atlas-road-list button[aria-pressed=true]) :is(span,strong){color:#e0f2fe}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-layer>span{background:#1e293b}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-search input{background:#1e293b;color:#f1f5f9;border-color:#64748b}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-search input::placeholder{color:#cbd5e1;opacity:1}
+html.dark #hub-axis-container-mobilidade .mob-atlas :is(input,button,summary,a):focus-visible{outline:3px solid #38bdf8;outline-offset:3px}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-panel{scrollbar-color:#64748b transparent}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-map{background:#1e293b;border-color:#475569}
+/* Retain original OSM cartographic colors; cancel the inherited global inversion only here. */
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-tile-pane{filter:none}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-control-attribution{background:rgba(15,23,42,.94);color:#e2e8f0}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-control-attribution a{color:#38bdf8}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-bar a{background:#1e293b;color:#f1f5f9;border-color:#475569}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-bar a:hover{background:#334155;color:#f1f5f9}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-bar a.leaflet-disabled{color:#94a3b8}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-tooltip{background:#1e293b;color:#f1f5f9;border-color:#64748b;box-shadow:0 2px 8px #02061766}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-tooltip-top:before{border-top-color:#1e293b}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-tooltip-bottom:before{border-bottom-color:#1e293b}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-tooltip-left:before{border-left-color:#1e293b}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-tooltip-right:before{border-right-color:#1e293b}
+html.dark #hub-axis-container-mobilidade .mob-atlas :is(.leaflet-popup-content-wrapper,.leaflet-popup-tip){background:#1e293b!important;color:#f1f5f9!important}
+html.dark #hub-axis-container-mobilidade .mob-atlas .leaflet-popup-content{color:#f1f5f9}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-empty{color:#cbd5e1}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-legend i.selected{border-color:#7dd3fc}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-search input{background-color:#1e293b!important;color:#f1f5f9!important;border-color:#64748b!important} html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-search input::placeholder{color:#cbd5e1!important;opacity:1}
+html.dark #hub-axis-container-mobilidade .mob-atlas .atlas-search input:focus{border-color:#38bdf8!important;box-shadow:0 0 0 2px rgba(56,189,248,.2)!important}
+#hub-axis-container-mobilidade .mob-atlas .atlas-road-list button[aria-pressed=true] strong{color:inherit}
+.mob-atlas .atlas-heading{margin-bottom:16px}

@@ -1,0 +1,324 @@
+// ============================================================================
+// RADAR SÃO JOSÉ - SISTEMA UNIFICADO DE PREVIEW, BLUR & CAIXINHA DE VENDA STICKY
+// Proteção e Teaser com card flutuante sticky para:
+// 1. Pesquisa Quantitativa (dynamic-charts-grid) -> Requer plano 'dash', 'report', 'midia' ou admin
+// 2. Report Exclusivo (executive-report-view) -> Requer plano 'report', 'midia' ou admin
+// 3. Inteligência de Mídia (midia-dashboard-content) -> Requer plano 'midia' ou admin
+// ============================================================================
+
+(() => {
+  'use strict';
+
+  function isMasterAdminEmail(email) {
+    if (!email) return false;
+    const clean = String(email).toLowerCase().trim();
+    return clean === 'venancio.project@gmail.com' ||
+           clean.includes('venancio') ||
+           clean.includes('leoserven') ||
+           clean === 'gamersilvaesilva@gmail.com' ||
+           clean === 'leonardo@radarsaojose.com.br';
+  }
+
+  function getUserPlanInfo() {
+    try {
+      const email = (
+        window.appState?.user?.email ||
+        window.appState?.profile?.email ||
+        localStorage.getItem('userEmail') ||
+        ''
+      ).toLowerCase().trim();
+
+      const isMaster = isMasterAdminEmail(email);
+
+      const role = isMaster ? 'admin' : (window.appState?.role || localStorage.getItem('userRole') || 'usuario');
+      const rawPlan = isMaster ? 'admin' : (window.appState?.profile?.plan_type || window.appState?.plan_type || localStorage.getItem('userPlan') || 'gratis').toString().toLowerCase().trim();
+      const isAdminMaster = isMaster || rawPlan === 'admin' || (role === 'admin' && !['gratis', 'dash', 'report', 'midia'].includes(rawPlan));
+      return { role, plan: isMaster ? 'admin' : rawPlan, isAdminMaster };
+    } catch (e) {
+      return { role: 'usuario', plan: 'gratis', isAdminMaster: false };
+    }
+  }
+
+  function isModuleUnlocked(moduleName) {
+    const { plan, isAdminMaster } = getUserPlanInfo();
+    if (isAdminMaster) return true;
+    if (moduleName === 'dashboard') {
+      return ['dash', 'report', 'midia', 'plano_10', 'plano_15', 'enterprise', 'admin'].includes(plan);
+    }
+    if (moduleName === 'report') {
+      return ['report', 'midia', 'plano_15', 'enterprise', 'admin'].includes(plan);
+    }
+    if (moduleName === 'midia') {
+      return ['midia', 'enterprise', 'admin'].includes(plan);
+    }
+    return false;
+  }
+
+  function openCheckoutModal(targetPlan) {
+    if (typeof window.openPlanUpgradeModal === 'function') {
+      window.openPlanUpgradeModal(targetPlan);
+    } else if (typeof window.openAsaasCheckout === 'function') {
+      window.openAsaasCheckout(targetPlan);
+    }
+  }
+
+  function createStickyNoticeHtml({ badge, title, description, bullets, priceText, targetPlan, buttonLabel }) {
+    const listItems = bullets.map(b => `<li>${b}</li>`).join('');
+    return `
+      <div class="pesquisa-preview-sticky-wrap">
+        <div class="pesquisa-preview-notice" onclick="event.stopPropagation()">
+          <div class="pesquisa-preview-badge">${badge}</div>
+          <div class="pesquisa-preview-lock" aria-hidden="true">&#128274;</div>
+          <h2>${title}</h2>
+          <p>${description}</p>
+          <ul>${listItems}</ul>
+          <div class="pesquisa-preview-actions">
+            <button type="button" class="btn-open-plans-checkout" data-target-plan="${targetPlan}">
+              <span>${buttonLabel}</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+            <div class="pesquisa-preview-guarantee">${priceText}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function attachEvents(container, targetPlan) {
+    const btn = container.querySelector('.btn-open-plans-checkout');
+    if (btn) {
+      btn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openCheckoutModal(targetPlan);
+      };
+    }
+    container.onclick = (e) => {
+      if (container.classList.contains('is-unlocked')) return;
+      if (e.target.closest('button, a, input, select, textarea')) return;
+      openCheckoutModal(targetPlan);
+    };
+  }
+
+  function setContainerUnlocked(container, unlocked) {
+    if (!container) return;
+    container.classList.toggle('is-unlocked', unlocked);
+    const content = container.querySelector('.pesquisa-preview-content');
+    if (content) {
+      content.inert = !unlocked;
+      if (unlocked) {
+        content.removeAttribute('aria-hidden');
+      } else {
+        content.setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+
+  // ==========================================
+  // 1. PESQUISA QUANTITATIVA (DASHBOARD)
+  // ==========================================
+  function applyPesquisaPreview() {
+    const root = document.getElementById('dynamic-charts-grid');
+    if (!root) return;
+    const existing = root.querySelector('.pesquisa-preview-container');
+    const unlocked = isModuleUnlocked('dashboard');
+
+    if (existing) {
+      setContainerUnlocked(existing, unlocked);
+      return;
+    }
+
+    const block = document.getElementById('secao-bloco-2');
+    if (!block) return;
+    const grid = block.lastElementChild;
+    if (!grid || grid.children.length < 3) return;
+
+    const region = document.createElement('div');
+    region.className = 'pesquisa-preview-container pesquisa-preview';
+
+    const content = document.createElement('div');
+    content.className = 'pesquisa-preview-content';
+
+    // Mantém os primeiros 3 cards abertos como teaser gratuito
+    const remaining = grid.cloneNode(false);
+    remaining.removeAttribute('id');
+    while (grid.children.length > 3) {
+      remaining.appendChild(grid.children[3]);
+    }
+    if (remaining.children.length) {
+      content.appendChild(remaining);
+    }
+
+    let sibling = block.nextElementSibling;
+    while (sibling) {
+      const next = sibling.nextElementSibling;
+      content.appendChild(sibling);
+      sibling = next;
+    }
+
+    region.innerHTML = createStickyNoticeHtml({
+      badge: 'CONTEÚDO EXCLUSIVO · PESQUISA QUANTITATIVA',
+      title: 'Você já viu o cenário.<br>Agora descubra as oportunidades.',
+      description: 'O que falta na cidade? Onde estão as demandas? Como os públicos se diferenciam? Continue a pesquisa e transforme essas respostas em decisões para o seu negócio.',
+      bullets: [
+        'Explore todos os 10 blocos e 30 gráficos da pesquisa quantitativa',
+        'Cruze perfis e descubra demandas por renda, idade e região de SJC',
+        'Amostra completa e auditada com 477 respondentes reais de SJC'
+      ],
+      priceText: '🔒 A partir de 12x de R$ 269,90 • Desbloqueio imediato',
+      targetPlan: 'dash',
+      buttonLabel: 'Ver Planos & Desbloquear Acesso'
+    });
+
+    region.appendChild(content);
+    root.appendChild(region);
+
+    attachEvents(region, 'dash');
+    setContainerUnlocked(region, unlocked);
+  }
+
+  // ==========================================
+  // 2. REPORT EXCLUSIVO (EXECUTIVE REPORT)
+  // O Report possui sistema próprio de visualização, apresentação Keynote e ancoragem.
+  // Não alterar a estrutura DOM dos artigos do report para preservar layouts e apresentação.
+  // ==========================================
+  function applyReportPreview() {
+    return;
+  }
+
+  // ==========================================
+  // 3. INTELIGÊNCIA DE MÍDIA (MIDIA DASHBOARD)
+  // ==========================================
+  function applyMidiaPreview() {
+    const root = document.getElementById('midia-dashboard-content');
+    if (!root) return;
+    const existing = root.querySelector('.midia-preview-container');
+    const unlocked = isModuleUnlocked('midia');
+
+    if (existing) {
+      setContainerUnlocked(existing, unlocked);
+      return;
+    }
+
+    const children = Array.from(root.children);
+    if (children.length < 3) return;
+
+    const region = document.createElement('div');
+    region.className = 'pesquisa-preview-container midia-preview-container';
+
+    const content = document.createElement('div');
+    content.className = 'pesquisa-preview-content';
+
+    // Mantém os 2 primeiros blocos abertos (Mini-cards veículos + 6 KPIs)
+    const lockedElements = children.slice(2);
+    lockedElements.forEach(el => content.appendChild(el));
+
+    region.innerHTML = createStickyNoticeHtml({
+      badge: 'INTELIGÊNCIA DE MÍDIA · CONTEÚDO EXCLUSIVO',
+      title: 'Monitore a Opinião Pública & Notícias.<br>Acesse a Inteligência de Mídia.',
+      description: 'Análise profunda de 7.542 postagens dos 10 veículos de comunicação de São José dos Campos, sentimento da população, temas dominantes e influenciadores.',
+      bullets: [
+        '7.542 postagens monitoradas e categorizadas por tema e tom',
+        'Mapeamento detalhado de influenciadores locais e engajamento',
+        '3 licenças corporativas para compartilhamento em equipe'
+      ],
+      priceText: '🔒 Plano Mídia • 12x de R$ 1.190,00 • 3 Licenças Corporativas',
+      targetPlan: 'midia',
+      buttonLabel: 'Desbloquear Inteligência de Mídia'
+    });
+
+    region.appendChild(content);
+    root.appendChild(region);
+
+    attachEvents(region, 'midia');
+    setContainerUnlocked(region, unlocked);
+  }
+
+  // ==========================================
+  // ATUALIZAÇÃO GLOBAL & CONTROLES PÚBLICOS
+  // ==========================================
+  function updateAllRadarPreviews() {
+    applyPesquisaPreview();
+    applyReportPreview();
+    applyMidiaPreview();
+
+    const dashEl = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
+    if (dashEl) setContainerUnlocked(dashEl, isModuleUnlocked('dashboard'));
+
+    const repEl = document.querySelector('#executive-report-view .report-preview-container');
+    if (repEl) setContainerUnlocked(repEl, isModuleUnlocked('report'));
+
+    const midiaEl = document.querySelector('#midia-dashboard-content .midia-preview-container');
+    if (midiaEl) setContainerUnlocked(midiaEl, isModuleUnlocked('midia'));
+  }
+
+  window.updateRadarPreviews = updateAllRadarPreviews;
+
+  window.unlockPesquisaPreview = function() {
+    const preview = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
+    if (preview) setContainerUnlocked(preview, true);
+  };
+  window.lockPesquisaPreview = function() {
+    const preview = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
+    if (preview) setContainerUnlocked(preview, false);
+  };
+
+  window.unlockReportPreview = function() {
+    const preview = document.querySelector('#executive-report-view .report-preview-container');
+    if (preview) setContainerUnlocked(preview, true);
+  };
+  window.lockReportPreview = function() {
+    const preview = document.querySelector('#executive-report-view .report-preview-container');
+    if (preview) setContainerUnlocked(preview, false);
+  };
+
+  window.unlockMidiaPreview = function() {
+    const preview = document.querySelector('#midia-dashboard-content .midia-preview-container');
+    if (preview) setContainerUnlocked(preview, true);
+  };
+  window.lockMidiaPreview = function() {
+    const preview = document.querySelector('#midia-dashboard-content .midia-preview-container');
+    if (preview) setContainerUnlocked(preview, false);
+  };
+
+  function init() {
+    // 1. Observer no dynamic-charts-grid (re-render dos filtros)
+    const dashRoot = document.getElementById('dynamic-charts-grid');
+    if (dashRoot) {
+      new MutationObserver(() => applyPesquisaPreview()).observe(dashRoot, { childList: true });
+    }
+
+    // 2. Observer no executive-report-view
+    const reportRoot = document.getElementById('executive-report-view');
+    if (reportRoot) {
+      new MutationObserver(() => applyReportPreview()).observe(reportRoot, { childList: true });
+    }
+
+    // 3. Observer no midia-dashboard-content
+    const midiaRoot = document.getElementById('midia-dashboard-content');
+    if (midiaRoot) {
+      new MutationObserver(() => applyMidiaPreview()).observe(midiaRoot, { childList: true });
+    }
+
+    // Navegação suave pelo menu
+    document.addEventListener('click', event => {
+      const link = event.target.closest('button[onclick*="scrollToSection"], a[href*="#secao-bloco-"]');
+      if (!link) return;
+      const match = (link.getAttribute('onclick') || link.getAttribute('href') || '').match(/secao-bloco-\d+/);
+      const target = match && document.getElementById(match[0]);
+      const region = dashRoot?.querySelector('.pesquisa-preview-container:not(.is-unlocked)');
+      if (!target || !region || !region.querySelector('.pesquisa-preview-content')?.contains(target)) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      region.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, true);
+
+    updateAllRadarPreviews();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

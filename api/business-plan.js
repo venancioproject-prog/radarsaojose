@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { getDbPool } = require('../lib/db-pool');
 
 // Carregador autônomo de variáveis de ambiente (.env / .env.local)
 function loadEnv() {
@@ -522,13 +523,13 @@ async function authenticateSupabaseRequest(req) {
   }
 
   try {
-    const authRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+    const authRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/auth/v1/user`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
         'apikey': SUPABASE_ANON_KEY
       }
-    });
+    }, { timeoutMs: 8000, coalesce: true });
 
     if (!authRes.ok) {
       const errBody = await authRes.json().catch(() => ({}));
@@ -596,13 +597,13 @@ async function isUserAdmin(user) {
   const serviceKey = getSupabaseServiceKey();
   if (SUPABASE_URL && serviceKey && user.id) {
     try {
-      const profileRes = await fetch(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${encodeURIComponent(user.id)}&select=role`, {
+      const profileRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${encodeURIComponent(user.id)}&select=role`, {
         method: 'GET',
         headers: {
           'apikey': serviceKey,
           'Authorization': `Bearer ${serviceKey}`
         }
-      });
+      }, { timeoutMs: 8000, maxRetries: 0, coalesce: false });
       if (profileRes.ok) {
         const rows = await profileRes.json();
         if (Array.isArray(rows) && rows.length > 0 && rows[0].role === 'admin') {
@@ -723,14 +724,14 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
   // 1. Busca planos ativos existentes ordenados por data
   let queryRes;
   try {
-    queryRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=id,version,updated_at&order=updated_at.desc`, {
+    queryRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=id,version,updated_at&order=updated_at.desc`, {
       method: 'GET',
       headers: {
         'apikey': serviceKey,
         'Authorization': `Bearer ${serviceKey}`,
         'Content-Type': 'application/json'
       }
-    });
+    }, { timeoutMs: 8000, maxRetries: 0, coalesce: false });
   } catch (err) {
     return {
       persisted: false,
@@ -767,7 +768,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
   if (Array.isArray(activeRows) && activeRows.length === 1) {
     const targetId = activeRows[0].id;
     try {
-      const patchRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?id=eq.${encodeURIComponent(targetId)}`, {
+      const patchRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans?id=eq.${encodeURIComponent(targetId)}`, {
         method: 'PATCH',
         headers: {
           'apikey': serviceKey,
@@ -781,7 +782,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
           updated_at: new Date().toISOString(),
           updated_by: userEmail || 'admin'
         })
-      });
+      }, { timeoutMs: 8000, maxRetries: 0 });
 
       if (!patchRes.ok) {
         return {
@@ -811,7 +812,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
 
   // CENÁRIO C: 0 planos ativos encontrados -> Inserção determinística do plano oficial ativo
   try {
-    const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans`, {
+    const insertRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans`, {
       method: 'POST',
       headers: {
         'apikey': serviceKey,
@@ -830,7 +831,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
         updated_at: new Date().toISOString(),
         updated_by: userEmail || 'admin'
       })
-    });
+    }, { timeoutMs: 8000, maxRetries: 0 });
 
     if (!insertRes.ok) {
       return {
@@ -1061,14 +1062,14 @@ module.exports = async function handler(req, res) {
       const serviceKey = getSupabaseServiceKey();
       if (SUPABASE_URL && serviceKey) {
         try {
-          const fetchRes = await fetch(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=*&order=updated_at.desc&limit=1`, {
+          const fetchRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=*&order=updated_at.desc&limit=1`, {
             method: 'GET',
             headers: {
               'apikey': serviceKey,
               'Authorization': `Bearer ${serviceKey}`,
               'Content-Type': 'application/json'
             }
-          });
+          }, { timeoutMs: 8000, maxRetries: 0, coalesce: false });
           if (fetchRes.ok) {
             const rows = await fetchRes.json();
             if (Array.isArray(rows) && rows.length > 0 && rows[0].data && Object.keys(rows[0].data).length > 0) {
@@ -1099,7 +1100,7 @@ module.exports = async function handler(req, res) {
     console.error("[Backend Error Business Plan]:", error);
     return res.status(500).json({
       success: false,
-      error: error.message || "Erro interno no servidor de Plano de Negócios"
+      error: "Erro interno no servidor de Plano de Negócios"
     });
   }
 };

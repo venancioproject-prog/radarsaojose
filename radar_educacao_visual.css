@@ -1,0 +1,84 @@
+#hub-axis-container-educacao{--education-blue:var(--dv-primary);--education-ink:var(--dv-ink);--education-purple:var(--dv-dark)}
+#hub-axis-container-educacao .hub-editorial-grid{align-items:stretch;gap:20px}
+#hub-axis-container-educacao .education-official-card{background:var(--dv-surface);border:1px solid var(--dv-grid);border-radius:20px;padding:20px;min-width:0;box-shadow:none;display:flex;flex-direction:column;height:auto}
+#hub-axis-container-educacao [data-education-panel]{display:flex;flex-direction:column;gap:12px;min-width:0;flex:1}
+#hub-axis-container-educacao [data-education-panel]>*,#hub-axis-container-educacao .education-official-card>*{margin-top:0;margin-bottom:0}
+#hub-axis-container-educacao .education-eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dv-text);margin:0 0 5px}
+#hub-axis-container-educacao [data-education-panel] h4{font-size:19px;line-height:1.3;font-weight:800;color:var(--education-ink);margin:0}
+#hub-axis-container-educacao .education-subtitle{font-size:13px;line-height:1.5;color:var(--dv-text);margin:6px 0 0}
+#hub-axis-container-educacao .education-controls{display:flex;gap:12px;flex-wrap:wrap}
+#hub-axis-container-educacao .education-controls label{display:flex;flex-direction:column;gap:4px;color:var(--dv-text);font-size:12px;font-weight:600;max-width:100%}
+#hub-axis-container-educacao .education-controls select{font:inherit;color:var(--dv-ink);border:1px solid var(--dv-grid);border-radius:8px;background:var(--dv-surface);padding:7px 26px 7px 9px;max-width:100%;min-height:34px}
+#hub-axis-container-educacao .education-summary{font-size:12px;color:var(--dv-text)}
+#hub-axis-container-educacao .education-small-multiples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+#hub-axis-container-educacao .education-small-multiples h5{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700;color:var(--education-ink);margin:0}
+#hub-axis-container-educacao .education-small-multiples h5 strong{color:var(--education-blue);font-size:19px}
+#hub-axis-container-educacao .education-small-multiples h5 small{font-size:12px;font-weight:500;color:var(--dv-text)}
+#hub-axis-container-educacao .education-line{display:block;width:100%;height:190px;overflow:visible}
+#hub-axis-container-educacao .education-line text{fill:var(--dv-text);font-family:inherit;font-size:12px}
+#hub-axis-container-educacao .education-line .education-value{font-weight:700;fill:var(--education-ink)}
+#hub-axis-container-educacao .education-bars{display:flex;flex-direction:column;gap:14px}
+#hub-axis-container-educacao .education-bar-row>div:first-child{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--dv-ink);line-height:1.4}
+#hub-axis-container-educacao .education-bar-row strong{text-align:right;color:var(--education-ink);white-space:nowrap;font-size:14px}
+#hub-axis-container-educacao .education-bar-row small{display:block;font-size:12px;color:var(--dv-text);font-weight:500}
+#hub-axis-container-educacao .education-bar-track{height:8px;background:var(--dv-light);border-radius:4px;margin-top:5px;overflow:hidden}
+#hub-axis-container-educacao .education-bar-track i{display:block;height:100%;background:var(--education-blue);border-radius:4px}
+#hub-axis-container-educacao .education-total{font-size:13px;color:var(--dv-text);margin:0 0 14px}
+#hub-axis-container-educacao .education-total strong{font-size:24px;color:var(--dv-primary);font-weight:800}
+#hub-axis-container-educacao .education-dumbbell-legend{display:flex;gap:20px;font-size:12px;color:var(--dv-text)}
+#hub-axis-container-educacao .education-dumbbell-legend>span{display:flex;align-items:center;gap:6px}
+#hub-axis-container-educacao .education-dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex-shrink:0}
+#hub-axis-container-educacao .municipal{background:var(--dv-primary);width:12px;height:12px}
+#hub-axis-container-educacao .estadual{background:var(--dv-surface);border:2px solid var(--dv-dark);box-sizing:border-box;width:8px;height:8px}
+#hub-axis-container-educacao .municipal-text{color:var(--education-blue)}
+#hub-axis-container-educacao .estadual-text{color:var(--education-purple)}
+#hub-axis-container-educacao .education-scale{font-size:12px;color:var(--dv-text);margin:10px 0}
+#hub-axis-container-educacao .education-dumbbells{display:flex;flex-direction:column;gap:24px;margin:20px 0}
+#hub-axis-container-educacao .education-dumbbell-row{display:grid;grid-template-columns:95px minmax(60px,1fr) 84px;align-items:center;gap:14px;font-size:13px}
+#hub-axis-container-educacao .education-dumbbell-row>strong{font-size:13px;color:var(--dv-ink);font-weight:600}
+#hub-axis-container-educacao .education-dumbbell-track{position:relative;height:2px;background:var(--dv-grid)}
+#hub-axis-container-educacao .education-dumbbell-track .education-dot{position:absolute;top:-4px;transform:translateX(-50%);box-shadow:0 0 0 2px var(--dv-surface)}
+#hub-axis-container-educacao .education-connector{position:absolute;top:-1px;height:4px;background:var(--dv-secondary)}
+#hub-axis-container-educacao .education-comparison-values{display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;font-size:14px}
+#hub-axis-container-educacao .education-comparison-values small{width:100%;font-size:12px;line-height:1.4;color:var(--dv-text)}
+#hub-axis-container-educacao .education-structure-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+#hub-axis-container-educacao .education-structure-kpis>div{padding:12px 10px;border:1px solid var(--dv-grid);border-radius:10px;display:flex;flex-direction:column;gap:3px;background:var(--dv-surface)}
+#hub-axis-container-educacao .education-structure-kpis span{font-size:12px;font-weight:600;color:var(--dv-text)}
+#hub-axis-container-educacao .education-structure-kpis strong{font-size:22px;color:var(--dv-primary);font-weight:800}
+#hub-axis-container-educacao .education-structure-kpis small{font-size:12px;color:var(--dv-text)}
+#hub-axis-container-educacao .education-distortion{display:flex;justify-content:space-between;padding:14px 0 0;border-top:1px solid var(--dv-grid);margin:16px 0 0;font-size:13px;color:var(--dv-text)}
+#hub-axis-container-educacao .education-distortion strong{color:var(--education-purple);font-size:20px}
+#hub-axis-container-educacao .education-source{margin-top:auto;display:flex;flex-wrap:wrap;gap:5px;font-size:12px;line-height:1.5;border-top:1px solid var(--dv-grid);padding-top:12px;color:var(--dv-text)}
+#hub-axis-container-educacao .education-source a{color:var(--dv-text);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
+#hub-axis-container-educacao .education-source>span{width:100%}
+#hub-axis-container-educacao .education-details{display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.5;color:var(--dv-text)}
+#hub-axis-container-educacao .education-details summary{cursor:pointer;font-weight:600}
+#hub-axis-container-educacao .education-details p{margin:8px 0}
+#hub-axis-container-educacao .education-details code{font-size:12px;overflow-wrap:anywhere}
+#hub-axis-container-educacao .education-table-wrap{overflow-x:auto;max-width:100%;margin-top:8px}
+#hub-axis-container-educacao table{width:100%;border-collapse:collapse;font-size:12px}
+#hub-axis-container-educacao caption{text-align:left;color:var(--dv-text);font-size:12px;padding:5px 0}
+#hub-axis-container-educacao th,#hub-axis-container-educacao td{padding:7px 8px;text-align:left;border-bottom:1px solid var(--dv-grid);vertical-align:top}
+#hub-axis-container-educacao :is(select,summary,[tabindex]):focus-visible{outline:2px solid var(--dv-primary);outline-offset:3px}
+@media(max-width:1100px){#hub-axis-container-educacao .hub-editorial-grid{grid-template-columns:minmax(0,1fr)}#hub-axis-container-educacao .hub-editorial-grid>.education-official-card{grid-column:auto}}
+@media(max-width:640px){#hub-axis-container-educacao .education-official-card{padding:16px}#hub-axis-container-educacao [data-education-panel] h4{font-size:17px}#hub-axis-container-educacao .education-small-multiples{grid-template-columns:minmax(0,1fr);gap:18px}#hub-axis-container-educacao .education-dumbbell-row{grid-template-columns:80px minmax(50px,1fr) 80px;gap:8px}#hub-axis-container-educacao .education-structure-kpis{gap:5px}#hub-axis-container-educacao .education-structure-kpis>div{padding:10px 6px}#hub-axis-container-educacao .education-structure-kpis strong{font-size:19px}}
+
+/* Filled municipal point and outlined state point remain distinguishable at coincident values. */
+#hub-axis-container-educacao .education-dumbbell-track .municipal{top:-5px}
+#hub-axis-container-educacao .education-dumbbell-track .estadual{top:-3px}
+#hub-axis-container-educacao [data-radar-indicator]{color:var(--dv-primary)}
+
+/* Education uses the shared violet family and neutral surfaces. */
+#hub-axis-container-educacao{font-family:Inter,system-ui,sans-serif}
+#hub-axis-container-educacao :is(h3,h4,h5){font-family:Sora,Inter,system-ui,sans-serif}
+#hub-axis-container-educacao .education-intro h3{font-size:22px;line-height:1.35;color:var(--dv-ink);font-weight:700;margin:0 0 8px}
+#hub-axis-container-educacao .education-intro p{max-width:85ch;font-size:14px;line-height:1.6;color:var(--dv-text);margin:0}
+#hub-axis-container-educacao .education-reading{font-size:13px;line-height:1.55;color:var(--dv-text);margin:0}
+#hub-axis-container-educacao .education-line{height:auto;aspect-ratio:auto}
+#hub-axis-container-educacao .education-source{margin-top:auto}
+#hub-axis-container-educacao [data-radar-indicator]{font-variant-numeric:tabular-nums}
+#hub-axis-container-educacao [data-radar-indicator]~span{font-size:12px}
+#hub-axis-container-educacao .space-y-1>p{font-size:12px;line-height:1.5;color:var(--dv-text)}
+#hub-axis-container-educacao .space-y-1>p a{text-decoration:underline;text-underline-offset:2px}
+#hub-axis-container-educacao .education-comparison-values{font-variant-numeric:tabular-nums}
+@media(max-width:640px){#hub-axis-container-educacao .education-controls label{flex:1 1 120px}#hub-axis-container-educacao .education-structure-kpis{grid-template-columns:1fr}#hub-axis-container-educacao .education-structure-kpis>div{display:grid;grid-template-columns:1fr auto;align-items:center;padding:10px}#hub-axis-container-educacao .education-structure-kpis small{grid-column:1/-1}#hub-axis-container-educacao .education-intro h3{font-size:19px}}

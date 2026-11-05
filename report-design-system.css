@@ -1,0 +1,515 @@
+/* Radar report: canonical presentation tokens and layout families.
+   Content, IDs, data bindings and approved bespoke compositions remain intact. */
+#executive-report-view {
+  --rs-font: Inter, system-ui, sans-serif;
+  --rs-paper: #ffffff;
+  --rs-ink: #10263e;
+  --rs-copy: #475569;
+  --rs-muted: #536276;
+  --rs-accent: #0066ff;
+  --rs-rule: #dce3ea;
+  --rs-radius: 8px;
+  --rs-1: 8px;
+  --rs-2: 16px;
+  --rs-3: 24px;
+  --rs-4: 40px;
+  --rs-5: 64px;
+  --rs-title: clamp(28px, 3.1cqw, 56px);
+  --rs-subtitle: clamp(20px, 1.7cqw, 30px);
+  --rs-body: clamp(16px, 1.2cqw, 22px);
+  --rs-caption: clamp(12px, .8cqw, 15px);
+  --rs-number: clamp(36px, 4cqw, 72px);
+  --rs-gap: clamp(16px, 2cqw, 32px);
+  --rs-safe-inline: clamp(24px, 4%, 80px);
+  --rs-chart-height: clamp(280px, 26cqw, 440px);
+  --rs-nav-height: 56px;
+}
+html.dark #executive-report-view {
+  --rs-paper: #0e172a;
+  --rs-ink: #f1f5f9;
+  --rs-copy: #cbd5e1;
+  --rs-muted: #94a3b8;
+  --rs-accent: #60a5fa;
+  --rs-rule: #334155;
+}
+#executive-report-view > article.report-layout-slide {
+  container-type: inline-size;
+  container-name: report-slide;
+  min-width: 0;
+}
+/* The opening's approved art direction consumes its existing local scale. */
+#executive-report-view > article.report-layout-slide:not(:is(#rep-tela-001,#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012)) {
+  --report-space: var(--rs-gap);
+  --report-body: var(--rs-body);
+  padding-inline: var(--rs-safe-inline);
+}
+#executive-report-view > article.report-layout-slide:not(:is(#rep-tela-001,#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012)) .report-page-heading h2 {
+  font-family: var(--rs-font);
+  font-size: var(--rs-title);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+#executive-report-view .report-layout-slide :is(.report-content-grid,.report-chart-composition,.report-chart-pair,.report-quote-grid,.report-divided-grid) > * {
+  min-width: 0;
+}
+#executive-report-view > article.report-layout-slide .report-page-source {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--rs-2) var(--rs-3);
+  align-items: start;
+  font-size: var(--rs-caption);
+  line-height: 1.5;
+}
+#executive-report-view > article.report-layout-slide .report-page-source span:last-child {
+  max-width: none;
+  white-space: normal;
+}
+#executive-report-view > article.report-layout-slide .report-page-meta {
+  align-items: start;
+}
+#executive-report-view > article.report-layout-slide .report-page-meta > span:last-child {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+#executive-report-view .report-chart-panel { min-width: 0; }
+#executive-report-view > article.report-layout-slide .report-chart-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: var(--rs-chart-height);
+}
+#executive-report-view .report-chart-canvas canvas { max-width: 100%; }
+#executive-report-view .report-layout-slide img { max-width: 100%; }
+#executive-report-view .report-layout-slide .gg-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--rs-radius);
+}
+#executive-report-view .report-layout-slide table { width: 100%; border-collapse: collapse; }
+#executive-report-view .report-layout-slide :is(th,td) { overflow-wrap: anywhere; }
+body.presentation-mode #executive-report-view > article.report-layout-slide:not(:is(#rep-tela-001,#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012)) {
+  container-type: size;
+  --rs-title: clamp(28px, min(3.1cqw, 5.4cqh), 64px);
+  --rs-body: clamp(16px, min(1.2cqw, 2.15cqh), 26px);
+  --rs-gap: clamp(16px, min(2cqw, 2.4cqh), 40px);
+  --rs-chart-height: clamp(240px, 33cqh, 520px);
+  padding: clamp(20px, 3vh, 48px) var(--rs-safe-inline);
+  gap: var(--rs-gap);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+body.presentation-mode #executive-report-view > article.report-layout-slide:not(:is(#rep-tela-001,#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012)) .report-page-body {
+  padding-top: 0;
+  gap: var(--rs-gap);
+}
+/* A report source is content; the site-wide footer hiding rule must not hide it. */
+body.presentation-mode #executive-report-view > article.report-layout-slide footer.report-page-source {
+  display: grid !important;
+}
+@container report-slide (max-width: 760px) {
+  #executive-report-view .report-layout-slide :is(.report-chart-pair,.report-chart-composition,.report-quote-grid,.report-content-grid,.report-divided-grid[data-report-columns]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #executive-report-view .report-layout-slide :is(.report-content-grid,.report-chart-composition,.report-quote-grid,.report-divided-grid) > * {
+    grid-column: auto;
+  }
+  #executive-report-view .report-layout-slide .report-reading-copy { columns: auto; }
+  #executive-report-view > article.report-layout-slide .report-page-source {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #executive-report-view > article.report-layout-slide .report-page-source span:last-child {
+    text-align: left;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #executive-report-view .report-layout-slide { animation: none; }
+}
+/* Secondary heading and metric roles use the same scale without touching portrait names. */
+#executive-report-view > article.report-layout-slide:not(:is(#rep-tela-001,#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012)) :is(.report-chart-panel > h3,.report-content-grid > div > h3) {
+  font-family: var(--rs-font);
+  font-size: var(--rs-subtitle);
+  font-weight: 600;
+  line-height: 1.25;
+}
+#executive-report-view .gg-kpi-card > :is(.text-5xl,.text-6xl,.text-7xl) {
+  font-size: var(--rs-number);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Narrow reading areas use normal flow, including the approved opening layouts. */
+@container report-slide (max-width: 760px) {
+  #executive-report-view #rep-tela-003 .origin-question,
+  #executive-report-view #rep-tela-003 .context-editorial-authors {
+    grid-template-columns: minmax(0,1fr);
+    gap: 24px;
+  }
+  #executive-report-view #rep-tela-003 .origin-question > p { grid-column: 1; grid-row: 3; }
+  #executive-report-view .report-layout-slide .report-content-grid .grid { grid-template-columns: minmax(0,1fr); }
+  #executive-report-view .report-layout-slide :is(p,h2,h3,blockquote) { overflow-wrap: break-word; }
+}
+@media (max-width: 760px) {
+  body.presentation-mode #executive-report-view > article.report-layout-slide {
+    padding: 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  body.presentation-mode #executive-report-view > article.report-layout-slide .report-page-body {
+    flex: 0 0 auto;
+    min-height: min-content;
+    height: auto;
+    overflow: visible;
+    padding-block: 24px;
+    justify-content: flex-start;
+    align-content: start;
+  }
+  body.presentation-mode #executive-report-view > article.report-layout-slide .report-page-source {
+    position: static;
+    margin-top: 24px;
+    flex: 0 0 auto;
+  }
+  body.presentation-mode #executive-report-view > #rep-tela-003 .origin-body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 24px 0;
+    flex: 0 0 auto;
+    min-height: min-content;
+    overflow: visible;
+  }
+  body.presentation-mode #executive-report-view #rep-tela-003 .origin-question h2 { font-size: 30px; margin-top: 16px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .origin-question > p { font-size: 17px; margin-top: 24px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .origin-authors > header h3 { font-size: 24px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .context-author-heading { grid-template-columns: 80px minmax(0,1fr); gap: 16px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .context-author img { width: 80px; height: 80px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .context-author h3 { font-size: 22px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 :is(.context-author-role,.context-author-bio) { font-size: 16px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .context-author-label { font-size: 13px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .context-author + .context-author { margin-top: 24px; padding-top: 24px; }
+  body.presentation-mode #executive-report-view #rep-tela-003 .origin-eyebrow { font-size: 13px; }
+}
+
+/* Consolidated chapter refinements: scoped layout only. */
+/* Chapter 01: bounded presentation rhythm; text and media remain intact. */
+#executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) { min-width: 0; }
+#executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) :is(.report-content-grid, .report-chart-panel, .report-reading-copy, .gg-kpi-card) { min-width: 0; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) {
+  padding: clamp(24px, 2.5vh, 32px) clamp(32px, 4vw, 80px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  --report-body: clamp(16px, 1.67vh, 18px);
+}
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048).active-slide { gap: clamp(16px, 2vh, 24px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-chart-canvas { height: clamp(210px, 27vh, 300px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048).report-layout-chart-split .report-chart-canvas { height: clamp(280px, 39vh, 430px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .gg-kpi-card { padding-block: clamp(12px, 1.5vh, 18px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-page-body { padding-top: 0; gap: clamp(16px, 2vh, 24px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-page-source { flex-shrink: 0; padding-bottom: 8px; }
+
+/* Dense analytic pages: reserve height for the complete interpretation. */
+body.presentation-mode #executive-report-view > :is(#rep-tela-015, #rep-tela-017) .report-chart-canvas { height: clamp(180px, 20vh, 220px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015, #rep-tela-017) .gg-kpi-card p { font-size: 16px; line-height: 1.45; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015, #rep-tela-017) .report-page-heading h2 { max-width: 58ch; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-page-body { gap: 16px; }
+
+@media (max-height: 850px) {
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) { --report-body: 15px; padding: 20px 32px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048).active-slide { gap: 14px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-page-heading h2 { font-size: 30px; max-width: 62ch; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .gg-kpi-card { padding: 10px 12px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .gg-kpi-card p { font-size: 14px; line-height: 1.45; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-content-grid [class*="space-y-"] > p + p { margin-top: 8px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-content-grid > .gg-photo-card { height: 160px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-013, #rep-tela-014, #rep-tela-015, #rep-tela-016, #rep-tela-016-cont-2, #rep-tela-017, #rep-tela-018, #rep-tela-019, #rep-tela-020, #rep-tela-021, #rep-tela-022, #rep-tela-023, #rep-tela-024, #rep-tela-025, #rep-tela-026, #rep-tela-027, #rep-tela-028, #rep-tela-029, #rep-tela-030, #rep-tela-031, #rep-tela-032, #rep-tela-033, #rep-tela-034, #rep-tela-035, #rep-tela-036, #rep-tela-037, #rep-tela-038, #rep-tela-039, #rep-tela-040, #rep-tela-041, #rep-tela-042, #rep-tela-043, #rep-tela-044, #rep-tela-045, #rep-tela-046, #rep-tela-047, #rep-tela-048) .report-page-body { gap: 14px; }
+}
+body.presentation-mode #executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-page-heading h2 { max-width: 60ch; }
+
+@media (max-height: 850px) {
+  body.presentation-mode #executive-report-view > :is(#rep-tela-047, #rep-tela-048) .aspect-video { height: 150px; aspect-ratio: auto; }
+  body.presentation-mode #executive-report-view > :is(#rep-tela-047, #rep-tela-048) .report-content-grid > div > .p-6 { padding: 16px; }
+  body.presentation-mode #executive-report-view > :is(#rep-tela-047, #rep-tela-048) .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 8px; }
+}
+
+/* Chapter 02 is styled with Chapter 03 in report-culture.css. */
+/* Chapter 03 only: consistent source-note rows. No editorial or media changes. */
+#executive-report-view :is(
+  #rep-tela-070, #rep-tela-071, #rep-tela-072, #rep-tela-073,
+  #rep-tela-074, #rep-tela-075, #rep-tela-076, #rep-tela-077,
+  #rep-tela-078, #rep-tela-079, #rep-tela-080, #rep-tela-081,
+  #rep-tela-082, #rep-tela-083, #rep-tela-084, #rep-tela-085,
+  #rep-tela-086, #rep-tela-087, #rep-tela-088, #rep-tela-089,
+  #rep-tela-090, #rep-tela-091, #rep-tela-092, #rep-tela-093
+) > .report-page-source {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .8fr);
+  align-items: start;
+  gap: 12px 24px;
+  padding-top: 12px;
+  line-height: 1.5;
+}
+#executive-report-view :is(
+  #rep-tela-070, #rep-tela-071, #rep-tela-072, #rep-tela-073,
+  #rep-tela-074, #rep-tela-075, #rep-tela-076, #rep-tela-077,
+  #rep-tela-078, #rep-tela-079, #rep-tela-080, #rep-tela-081,
+  #rep-tela-082, #rep-tela-083, #rep-tela-084, #rep-tela-085,
+  #rep-tela-086, #rep-tela-087, #rep-tela-088, #rep-tela-089,
+  #rep-tela-090, #rep-tela-091, #rep-tela-092, #rep-tela-093
+) > .report-page-source > span {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+}
+@container report-slide (max-width: 599px) {
+  #executive-report-view :is(
+    #rep-tela-070, #rep-tela-071, #rep-tela-072, #rep-tela-073,
+    #rep-tela-074, #rep-tela-075, #rep-tela-076, #rep-tela-077,
+    #rep-tela-078, #rep-tela-079, #rep-tela-080, #rep-tela-081,
+    #rep-tela-082, #rep-tela-083, #rep-tela-084, #rep-tela-085,
+    #rep-tela-086, #rep-tela-087, #rep-tela-088, #rep-tela-089,
+    #rep-tela-090, #rep-tela-091, #rep-tela-092, #rep-tela-093
+  ) > .report-page-source { grid-template-columns: 1fr; }
+  #executive-report-view :is(
+    #rep-tela-070, #rep-tela-071, #rep-tela-072, #rep-tela-073,
+    #rep-tela-074, #rep-tela-075, #rep-tela-076, #rep-tela-077,
+    #rep-tela-078, #rep-tela-079, #rep-tela-080, #rep-tela-081,
+    #rep-tela-082, #rep-tela-083, #rep-tela-084, #rep-tela-085,
+    #rep-tela-086, #rep-tela-087, #rep-tela-088, #rep-tela-089,
+    #rep-tela-090, #rep-tela-091, #rep-tela-092, #rep-tela-093
+  ) > .report-page-source > span:last-child { text-align: left; }
+}
+
+
+@media (max-width:760px) {
+ body.presentation-mode #executive-report-view > #rep-tela-002 .context-editorial-body { flex:0 0 auto; min-height:max-content; height:auto; align-items:stretch; justify-content:flex-start; padding-block:24px; }
+ body.presentation-mode #executive-report-view > #rep-tela-002 .report-page-source { position:static; margin-top:24px; flex:0 0 auto; }
+}
+
+/* Screen 08 pilot: balanced hierarchy and a reserved source row. */
+#executive-report-view > #rep-tela-014 { --t8-copy:18px; }
+#executive-report-view #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) { grid-template-columns:minmax(0,1.25fr) minmax(0,.95fr); gap:40px; }
+#executive-report-view #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) > div { grid-column:auto; min-width:0; }
+#executive-report-view #rep-tela-014 #rep-paradoxo { column-gap:40px; row-gap:8px; }
+#executive-report-view #rep-tela-014 #rep-paradoxo > div { padding:12px 16px; }
+#executive-report-view #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) p { font-size:var(--t8-copy); line-height:1.48; }
+#executive-report-view #rep-tela-014 .report-chart-panel { padding:0; }
+#executive-report-view #rep-tela-014 .report-chart-panel > p { font-size:12px!important; }
+body.presentation-mode #executive-report-view > #rep-tela-014.active-slide {
+ display:grid; grid-template-rows:auto auto auto minmax(0,1fr) auto;
+ gap:clamp(12px,1.6vh,18px); padding:24px clamp(32px,4vw,80px);
+ overflow-y:auto; --t8-copy:clamp(15px,2vh,22px);
+}
+body.presentation-mode #executive-report-view > #rep-tela-014 > * { margin-block:0; min-height:0; }
+body.presentation-mode #executive-report-view #rep-tela-014 .report-page-heading h2 { font-size:clamp(28px,3.8vh,42px); max-width:52ch; line-height:1.12; margin-top:12px; }
+body.presentation-mode #executive-report-view #rep-tela-014 #rep-paradoxo { grid-template-rows:repeat(5,auto); row-gap:6px; }
+body.presentation-mode #executive-report-view #rep-tela-014 #rep-paradoxo > div { padding:8px 12px; }
+body.presentation-mode #executive-report-view #rep-tela-014 #rep-paradoxo [id^="rep-val-"] { font-size:clamp(46px,5.6vh,62px); line-height:1; }
+body.presentation-mode #executive-report-view #rep-tela-014 #rep-paradoxo p { font-size:clamp(14px,1.5vh,16px); line-height:1.35; }
+body.presentation-mode #executive-report-view #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) { align-self:center; }
+body.presentation-mode #executive-report-view #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) > div:first-child { display:flex; flex-direction:column; gap:16px; }
+body.presentation-mode #executive-report-view #rep-tela-014 .space-y-4 > p + p { margin-top:clamp(10px,1.3vh,16px); }
+body.presentation-mode #executive-report-view #rep-tela-014 .report-chart-canvas { height:clamp(180px,28vh,300px); margin-top:12px; }
+body.presentation-mode #executive-report-view #rep-tela-014 .report-page-source { display:grid; grid-template-columns:minmax(0,1fr) auto; padding-top:12px; margin-top:0; gap:24px; }
+body.presentation-mode #executive-report-view #rep-tela-014 .report-page-source span { font-size:11px; line-height:1.4; }
+@container report-slide (max-width:760px) {
+ #executive-report-view #rep-tela-014 > .report-content-grid:not(#rep-paradoxo) { grid-template-columns:1fr; gap:24px; }
+ #executive-report-view #rep-tela-014 #rep-paradoxo { grid-template-columns:1fr; grid-template-rows:none; }
+ #executive-report-view #rep-tela-014 #rep-paradoxo > div { display:flex; flex-direction:column; gap:12px; grid-row:auto; }
+ #executive-report-view #rep-tela-014 .report-page-source { grid-template-columns:1fr; }
+}
+@media (max-width:760px) {
+ body.presentation-mode #executive-report-view > #rep-tela-014.active-slide { display:flex; padding:24px; gap:24px; }
+ body.presentation-mode #executive-report-view > #rep-tela-014 > * { flex:0 0 auto; }
+ body.presentation-mode #executive-report-view #rep-tela-014 .report-page-source { grid-template-columns:1fr; }
+}
+
+/* Opening 01–07: editorial refinement following the approved screen 08. */
+#executive-report-view > :is(#rep-tela-001,#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012,#rep-tela-013) { font-family:Inter,system-ui,sans-serif; }
+#executive-report-view #rep-tela-001 .report-cover-masthead { padding:28px clamp(24px,4cqw,80px); }
+#executive-report-view #rep-tela-001 .report-cover-masthead > img { height:40px; width:auto; }
+#executive-report-view #rep-tela-001 .report-cover-body { max-width:1100px; padding:64px clamp(24px,4cqw,80px) 40px; }
+#executive-report-view #rep-tela-001 .report-cover-body h1 { font-family:Inter,sans-serif; font-size:clamp(40px,5cqw,84px); font-weight:600; letter-spacing:-.04em; line-height:1.04; }
+#executive-report-view #rep-tela-001 .report-cover-body p:first-of-type { font-size:clamp(22px,2cqw,32px); }
+#executive-report-view #rep-tela-001 .report-cover-body p:nth-of-type(2) { font-size:clamp(16px,1.15cqw,20px); max-width:56ch; line-height:1.55; }
+#executive-report-view #rep-tela-001 .report-cover-nav { backdrop-filter:none; background:rgba(5,15,28,.8); }
+#executive-report-view #rep-tela-001 .report-cover-nav button { padding:20px 24px; min-height:88px; }
+#executive-report-view #rep-tela-011 .gg-kpi-card { padding:20px 0; border-radius:0; }
+#executive-report-view #rep-tela-011 .gg-kpi-card > div:first-child { background:#0066ff; border-radius:8px; box-shadow:none; }
+#executive-report-view #rep-tela-011 .gg-kpi-card > span { color:#0066ff; }
+#executive-report-view #rep-tela-011 .report-content-grid:last-child { border:0; border-left:2px solid #0066ff; border-radius:0; background:transparent; padding:16px 0 16px 24px; }
+#executive-report-view #rep-tela-011 .gg-photo-card { border:0; border-radius:8px; overflow:hidden; }
+#executive-report-view #rep-tela-013 > .absolute { margin:0!important; inset:0; transform:none; }
+#executive-report-view #rep-tela-013 .report-page-heading { max-width:840px; }
+#executive-report-view #rep-tela-013 .report-page-heading h1 { font-family:Inter,sans-serif; font-size:clamp(36px,4.4cqw,72px); font-weight:600; line-height:1.08; letter-spacing:-.03em; max-width:20ch; }
+#executive-report-view #rep-tela-013 .report-page-heading p:first-of-type { font-size:clamp(20px,1.6cqw,28px); font-weight:500; }
+#executive-report-view #rep-tela-013 .report-page-heading p:last-child { font-size:clamp(16px,1.2cqw,21px); max-width:56ch; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012,#rep-tela-013) { padding:24px clamp(32px,4vw,80px); gap:18px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012,#rep-tela-013) > .report-page-source { margin-top:0; flex-shrink:0; }
+body.presentation-mode #executive-report-view #rep-tela-002 .report-page-heading h2 { font-size:clamp(32px,min(3cqw,5cqh),50px); font-weight:600; }
+body.presentation-mode #executive-report-view #rep-tela-002 .context-intro { font-size:clamp(16px,2vh,22px); }
+body.presentation-mode #executive-report-view #rep-tela-003 .origin-question h2 { font-size:clamp(32px,calc(var(--u)*2.4),52px); }
+body.presentation-mode #executive-report-view #rep-tela-003 .origin-question > p { font-size:clamp(17px,calc(var(--u)*1.1),22px); margin-top:32px; }
+body.presentation-mode #executive-report-view #rep-tela-003 .origin-authors > header h3 { font-size:clamp(22px,calc(var(--u)*1.3),28px); }
+body.presentation-mode #executive-report-view #rep-tela-003 .context-author img { width:clamp(80px,calc(var(--u)*5),110px); height:clamp(80px,calc(var(--u)*5),110px); }
+body.presentation-mode #executive-report-view #rep-tela-003 .context-author-heading { grid-template-columns:clamp(80px,calc(var(--u)*5),110px) minmax(0,1fr); gap:20px; }
+body.presentation-mode #executive-report-view #rep-tela-003 .context-author h3 { font-size:clamp(22px,calc(var(--u)*1.2),27px); }
+body.presentation-mode #executive-report-view #rep-tela-003 :is(.context-author-role,.context-author-bio) { font-size:clamp(16px,calc(var(--u)*.9),18px); }
+body.presentation-mode #executive-report-view #rep-tela-003 .origin-body { padding-block:24px; column-gap:6%; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-body { padding:0; }
+body.presentation-mode #executive-report-view #rep-tela-006 .report-page-heading h2 { font-size:clamp(28px,4vh,42px); margin:12px 0 24px; }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-column img { height:clamp(120px,18vh,196px); aspect-ratio:auto; }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-grid { row-gap:12px; column-gap:clamp(24px,3cqw,48px); }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-column h3 { font-size:clamp(20px,2.5vh,28px); }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-datum strong { font-size:clamp(38px,4.8vh,52px); }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-datum > span { font-size:clamp(14px,1.7vh,18px); }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-description { font-size:clamp(16px,1.8vh,20px); }
+body.presentation-mode #executive-report-view #rep-tela-006 .method-closing { margin-top:clamp(24px,3.5vh,40px); font-size:clamp(18px,2vh,22px); }
+body.presentation-mode #executive-report-view #rep-tela-011 .report-page-body { gap:clamp(24px,3vh,40px); }
+body.presentation-mode #executive-report-view #rep-tela-011 .report-page-heading h2 { font-size:clamp(30px,4.2vh,46px); max-width:38ch; }
+body.presentation-mode #executive-report-view #rep-tela-011 .gg-kpi-card { padding:16px 0; }
+body.presentation-mode #executive-report-view #rep-tela-011 .gg-kpi-card p { font-size:clamp(16px,1.85vh,21px); }
+body.presentation-mode #executive-report-view #rep-tela-011 .report-content-grid:last-child { padding:16px 0 16px 24px; }
+body.presentation-mode #executive-report-view #rep-tela-011 .report-content-grid:last-child p:first-child { font-size:clamp(22px,2.5vh,28px); }
+body.presentation-mode #executive-report-view #rep-tela-011 .gg-photo-card { height:clamp(150px,20vh,220px); }
+body.presentation-mode #executive-report-view #rep-tela-012 .transition-copy h2 { font-size:clamp(36px,min(3.6cqw,6cqh),64px); }
+body.presentation-mode #executive-report-view #rep-tela-012 .transition-lead { font-size:clamp(20px,2.3vh,26px); }
+body.presentation-mode #executive-report-view #rep-tela-012 .transition-support { font-size:clamp(16px,1.9vh,21px); }
+body.presentation-mode #executive-report-view #rep-tela-013 .report-page-heading { margin-block:auto; padding-block:24px; }
+@media (max-width:760px) {
+ body.presentation-mode #executive-report-view > :is(#rep-tela-002,#rep-tela-003,#rep-tela-006,#rep-tela-011,#rep-tela-012,#rep-tela-013) { padding:24px; overflow-y:auto; }
+ body.presentation-mode #executive-report-view #rep-tela-001 .report-cover-body { padding-block:40px 24px; }
+ #executive-report-view #rep-tela-001 .report-cover-masthead { align-items:flex-start; gap:16px; }
+ #executive-report-view #rep-tela-001 .report-cover-masthead > div { flex-wrap:wrap; justify-content:flex-end; gap:8px; }
+ body.presentation-mode #executive-report-view #rep-tela-003 .origin-body { display:flex; gap:32px; }
+ body.presentation-mode #executive-report-view #rep-tela-003 .origin-question h2 { font-size:30px; }
+ body.presentation-mode #executive-report-view #rep-tela-003 .origin-authors > header h3 { font-size:24px; }
+ body.presentation-mode #executive-report-view #rep-tela-003 .context-author h3 { font-size:22px; }
+ body.presentation-mode #executive-report-view #rep-tela-006 .method-body { flex:0 0 auto; min-height:max-content; }
+ body.presentation-mode #executive-report-view #rep-tela-006 .method-column img { height:auto; aspect-ratio:16/10; }
+ body.presentation-mode #executive-report-view #rep-tela-006 .method-column { grid-row:auto; grid-template-rows:none; gap:12px; }
+ body.presentation-mode #executive-report-view #rep-tela-006 .method-description { font-size:17px; }
+ body.presentation-mode #executive-report-view #rep-tela-011 .report-page-body { flex:0 0 auto; min-height:max-content; padding-top:24px; }
+ body.presentation-mode #executive-report-view #rep-tela-011 .report-content-grid { grid-template-columns:1fr; }
+ body.presentation-mode #executive-report-view #rep-tela-011 .report-content-grid > div { grid-column:auto; }
+ body.presentation-mode #executive-report-view #rep-tela-012 .transition-body { flex:0 0 auto; min-height:max-content; grid-template-columns:1fr; }
+ body.presentation-mode #executive-report-view #rep-tela-012 .transition-photo { min-height:280px; }
+ body.presentation-mode #executive-report-view #rep-tela-012 .transition-photo img { height:320px; flex:none; }
+}
+html.dark #executive-report-view #rep-tela-011 .gg-kpi-card > span { color:#60a5fa; }
+
+
+/* ==========================================================================
+   CAPA (rep-tela-001): TEMA CLARO vs MODO NOTURNO DINÂMICO
+   ========================================================================== */
+
+/* Tema Claro: Imagem de fundo branco com tipografia editorial escura e alto contraste */
+html:not(.dark) #executive-report-view #rep-tela-001 {
+  background: #ffffff !important;
+  color: #0b2545 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 #rep-cover-bg {
+  opacity: 0.88 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 > div.bg-gradient-to-t {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.65) 45%, rgba(255, 255, 255, 0.15) 100%) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 > div.bg-gradient-to-r {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.45) 55%, transparent 100%) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-masthead {
+  border-bottom-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-masthead > img {
+  content: url('fotos_radar/logo.png') !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-masthead div {
+  color: #475569 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-masthead span {
+  color: #64748b !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-body h1 {
+  color: #0b2545 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-body p:first-of-type {
+  color: #1e293b !important;
+  font-weight: 600 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-body p:nth-of-type(2) {
+  color: #475569 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-body button {
+  background: #0066ff !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-body button:hover {
+  background: #0052cc !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 #rep-cover-preview-text {
+  color: #64748b !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-nav {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-top-color: rgba(15, 23, 42, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-nav button {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-nav button:hover {
+  background: rgba(0, 102, 255, 0.06) !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-nav button span:first-child {
+  color: #0066ff !important;
+  font-weight: 700 !important;
+}
+
+html:not(.dark) #executive-report-view #rep-tela-001 .report-cover-nav button span:last-child {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+/* Modo Noturno: Restaura a atmosfera cinematográfica com a foto escura */
+html.dark #executive-report-view #rep-tela-001 {
+  background: #050b14 !important;
+  color: #ffffff !important;
+}
+
+html.dark #executive-report-view #rep-tela-001 #rep-cover-bg {
+  opacity: 0.55 !important;
+}
+
+html.dark #executive-report-view #rep-tela-001 .report-cover-body button {
+  background: #ffffff !important;
+  color: #0a0a0a !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark #executive-report-view #rep-tela-001 .report-cover-body button:hover {
+  background: #e2e8f0 !important;
+}

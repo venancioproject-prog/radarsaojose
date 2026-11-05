@@ -43,6 +43,9 @@
     local: field('Você costuma comprar de produtores locais ou ir em feiras de artesanato da cidade?', 'Você costuma comprar de produtores locais ou ir em feiras de a'),
     pet: field('Você tem animal de estimação?(gato, cachorro e etc)'),
     petScore: field('Você acha que São José é uma cidade boa para quem tem animais de estimação (cachorro, gato e etc)?', 'Você acha que São José é uma cidade boa para quem tem anima', { scale: true }),
+    openDefinition: field('Em poucas palavras, como você definiria São José hoje?'),
+    influencersOpen: field('Escreva o nome de até 3 influenciadores de São José que você acompanha ou lembra:', 'Escreva o nome de até 3 influenciadores de São José que voc'),
+    openExtra: field('Tem algo que queira falar e não abordamos na pesquisa?'),
     region: field('Região')
   };
   const clean = value => value == null ? '' : String(value).trim().replace(/\s+/g, ' ');
@@ -132,7 +135,8 @@
     growth_company: { field: 'growth', options: ['As empresas e o comércio', 'Os dois juntos'] },
     social_any: { field: 'social', options: ['Um pouco', 'Muito'] },
     lacks_any: { field: 'lacks', exclude: ['Não falta nada'] },
-    quality: { field: 'quality', type: 'mean' }
+    quality: { field: 'quality', type: 'mean' },
+    health_mentions: { field: 'openExtra', type: 'regex', pattern: '\\b(sa[úu]de|atendimento|upa|sus|conv[êe]nio|m[ée]dico|m[ée]dicos|especialista|especialistas|espera|hospital|hospitais|consulta|consultas|exame|exames|posto de sa[úu]de|ubs|plano de sa[úu]de|pronto socorro)\\b' }
   };
   function create(records, metadata = {}, filters = {}, rules = []) {
     const eligible = eligibility(normalize(records), rules);
@@ -168,13 +172,18 @@
       if (spec.type === 'mean' || spec.type === 'median' || spec.type === 'meanSelections') {
         const scores = rows.map(r => spec.type === 'meanSelections' ? r.values[fieldId].length : Number(r.values[fieldId])).sort((a, b) => a - b);
         if (scores.length) value = spec.type === 'mean' ? scores.reduce((sum, x) => sum + x, 0) / scores.length : (scores[Math.floor((scores.length - 1) / 2)] + scores[Math.floor(scores.length / 2)]) / 2;
+      } else if (spec.type === 'regex') {
+        const re = new RegExp(spec.pattern, 'i');
+        numerator = rows.filter(row => re.test(String(row.values[fieldId] || ''))).length;
+        value = meta.valid ? numerator / meta.valid * 100 : null;
       } else {
         if (!fields[fieldId].multiple) {
           numerator = distribution(fieldId, segment).categories.filter(c => spec.exclude ? !spec.exclude.includes(c.category) : spec.options.includes(c.category)).reduce((sum, c) => sum + c.numerator, 0);
         } else numerator = rows.filter(row => row.values[fieldId].some(v => spec.exclude ? !spec.exclude.includes(v) : spec.options.includes(v))).length;
         value = meta.valid ? numerator / meta.valid * 100 : null;
       }
-      const metric = { ...meta, metric_id: id, rule: spec, numerator, value, formatted: spec.type ? formatNumberBR(value, spec.decimals ?? 2) : formatPercentBR(value), status: meta.valid ? 'CALCULATED' : 'NO_VALID_RESPONSES' };
+      const isScaleMetric = spec.type === 'mean' || spec.type === 'median' || spec.type === 'meanSelections';
+      const metric = { ...meta, metric_id: id, rule: spec, numerator, value, formatted: isScaleMetric ? formatNumberBR(value, spec.decimals ?? 2) : formatPercentBR(value), status: meta.valid ? 'CALCULATED' : 'NO_VALID_RESPONSES' };
       audit[id] = metric; return metric;
     }
     function metric(id) {

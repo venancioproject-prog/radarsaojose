@@ -115,6 +115,8 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: "Método não permitido. Use POST." });
   }
 
+  if (!await require('../lib/entitlements').requirePlan(req, res, 'midia')) return;
+
   try {
     let body = req.body;
     if (!body && typeof req.on === "function") {
@@ -127,6 +129,9 @@ module.exports = async function handler(req, res) {
       });
     } else if (typeof body === "string") {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
+    if (body != null && (typeof body !== 'object' || Array.isArray(body))) {
+      return res.status(400).json({ error: 'Corpo JSON deve ser um objeto.' });
     }
     body = body || {};
 

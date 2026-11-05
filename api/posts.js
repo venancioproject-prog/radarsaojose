@@ -1,5 +1,7 @@
 // API Serverless: Gerenciamento de Blog & Posts (CRUD Completo)
 // Supabase REST Engine + Fallback Seguro para Vercel Serverless
+const { requireAdmin } = require('./_authorization');
+const { getDbPool } = require('../lib/db-pool');
 const fs = require('fs');
 const path = require('path');
 
@@ -30,7 +32,20 @@ loadEnv();
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const SUPABASE_READ_KEY = SUPABASE_SERVICE_KEY || SUPABASE_ANON_KEY;
+
+const ALLOWED_SORT_COLUMNS = new Set(['published_at', 'created_at', 'updated_at', 'views_count', 'title']);
+const ALLOWED_SORT_ORDERS = new Set(['asc', 'desc']);
+const SYSTEM_RESERVED_SLUG = 'system-business-plan-blocks-v2';
+
+function sanitizePostgrestSearchTerm(raw) {
+  return String(raw || '')
+    .replace(/[(),.*\\;'"`%]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 120);
+}
 
 // Cache em memória para desenvolvimento / fallback offline
 let localPostsCache = null;
@@ -110,6 +125,14 @@ module.exports = async function handler(req, res) {
   const method = req.method;
   const query = req.query || {};
 
+  if (req.body != null && (typeof req.body !== 'object' || Array.isArray(req.body))) {
+    return res.status(400).json({ error: 'Corpo JSON deve ser um objeto.' });
+  }
+
+  if (req.method !== 'GET') {
+    if (!await requireAdmin(req, res, {url:SUPABASE_URL,anonKey:SUPABASE_ANON_KEY})) return;
+  }
+
   try {
     // -------------------------------------------------------------
     // 1. GET: Listar ou Buscar Artigo
@@ -117,37 +140,53 @@ module.exports = async function handler(req, res) {
     if (method === 'GET') {
       const { slug, id, q, category, status, page = 1, limit = 10, sortBy = 'published_at', order = 'desc' } = query;
 
-      // Buscar no Supabase REST
+      const adminView = query.admin === 'true';
+      if (adminView && !await requireAdmin(req, res, {url:SUPABASE_URL,anonKey:SUPABASE_ANON_KEY})) return;
+      if (slug === 'system-business-plan-blocks-v2') return res.status(404).json({success:false,message:'Artigo não encontrado.'});
+
+      // Buscar no Supabase REST com Connection Pool + Singleflight + Cache Curto
       let supabaseOk = false;
       let supabaseData = null;
+      const safeSortBy = ALLOWED_SORT_COLUMNS.has(String(sortBy)) ? String(sortBy) : 'published_at';
+      const safeOrder = ALLOWED_SORT_ORDERS.has(String(order).toLowerCase()) ? String(order).toLowerCase() : 'desc';
+      const safeSearch = sanitizePostgrestSearchTerm(q);
 
       try {
-        let endpoint = `${SUPABASE_URL}/rest/v1/blog_posts?select=*`;
+        let endpoint = `${SUPABASE_URL}/rest/v1/blog_posts?select=*&slug=neq.${SYSTEM_RESERVED_SLUG}${adminView ? '' : '&status=eq.published'}`;
         if (slug) {
           endpoint += `&slug=eq.${encodeURIComponent(slug)}`;
         } else if (id) {
           endpoint += `&id=eq.${encodeURIComponent(id)}`;
         } else {
           if (category && category !== 'all') endpoint += `&category=eq.${encodeURIComponent(category)}`;
-          if (status && status !== 'all') endpoint += `&status=eq.${encodeURIComponent(status)}`;
-          if (q) {
-            endpoint += `&or=(title.ilike.*${encodeURIComponent(q)}*,slug.ilike.*${encodeURIComponent(q)}*,category.ilike.*${encodeURIComponent(q)}*)`;
+          if (adminView && status && status !== 'all') endpoint += `&status=eq.${encodeURIComponent(status)}`;
+          if (safeSearch) {
+            const encodedTerm = encodeURIComponent(safeSearch);
+            endpoint += `&or=(title.ilike.*${encodedTerm}*,slug.ilike.*${encodedTerm}*,category.ilike.*${encodedTerm}*)`;
           }
-          endpoint += `&order=${sortBy}.${order}`;
+          endpoint += `&order=${safeSortBy}.${safeOrder}`;
+          const requestedPage = Math.max(1, parseInt(page, 10) || 1);
+          const requestedLimit = Math.min(100, Math.max(1, parseInt(limit, 10) || 10));
+          endpoint += `&limit=${requestedLimit}&offset=${(requestedPage - 1) * requestedLimit}`;
         }
 
-        const supRes = await fetch(endpoint, {
+        const pool = getDbPool();
+        const supRes = await pool.fetchWithPool(endpoint, {
           headers: {
-            'apikey': SUPABASE_SERVICE_KEY,
-            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+            'apikey': SUPABASE_READ_KEY,
+            'Authorization': `Bearer ${SUPABASE_READ_KEY}`,
             'Range-Unit': 'items',
             'Prefer': 'count=exact'
           }
+        }, {
+          timeoutMs: 8000,
+          coalesce: true,
+          cacheTtlMs: adminView ? 0 : 5000
         });
 
         if (supRes.ok) {
-          supabaseData = await supRes.json();
-          const contentRange = supRes.headers.get('content-range');
+          supabaseData = (await supRes.json()).filter(p => p.slug !== SYSTEM_RESERVED_SLUG && (adminView || p.status === 'published'));
+          const contentRange = supRes.headers && typeof supRes.headers.get === 'function' ? supRes.headers.get('content-range') : null;
           let total = supabaseData.length;
           if (contentRange && contentRange.includes('/')) {
             total = parseInt(contentRange.split('/')[1], 10) || total;
@@ -161,10 +200,9 @@ module.exports = async function handler(req, res) {
             }
           } else {
             // Paginação no array recebido ou paginado
-            const p = Math.max(1, parseInt(page, 10));
-            const l = Math.max(1, parseInt(limit, 10));
-            const startIndex = (p - 1) * l;
-            const pagedPosts = supabaseData.slice(startIndex, startIndex + l);
+            const p = Math.max(1, parseInt(page, 10) || 1);
+            const l = Math.min(100, Math.max(1, parseInt(limit, 10) || 10));
+            const pagedPosts = supabaseData;
 
             return res.status(200).json({
               success: true,
@@ -184,7 +222,7 @@ module.exports = async function handler(req, res) {
       }
 
       // Fallback para cache local/artigos locais se Supabase indisponível ou tabela vazia
-      const fallbackList = getFallbackArticles();
+      const fallbackList = getFallbackArticles().filter(p => p.slug !== 'system-business-plan-blocks-v2' && (adminView || p.status === 'published'));
 
       if (slug) {
         const found = fallbackList.find(p => p.slug === slug);
@@ -262,6 +300,9 @@ module.exports = async function handler(req, res) {
       }
 
       const postSlug = slugify(slug || title);
+      if (postSlug === SYSTEM_RESERVED_SLUG) {
+        return res.status(403).json({ success: false, message: 'Slug reservado pelo sistema.' });
+      }
       const newPost = {
         title: title.trim(),
         slug: postSlug,
@@ -288,28 +329,31 @@ module.exports = async function handler(req, res) {
       if (body.cover_image_credit !== undefined) mergedSeo.cover_image_credit = body.cover_image_credit;
       newPost.seo_metadata = mergedSeo;
 
-      // Tentar salvar no Supabase
-      try {
-        const supRes = await fetch(`${SUPABASE_URL}/rest/v1/blog_posts`, {
-          method: 'POST',
-          headers: {
-            'apikey': SUPABASE_SERVICE_KEY,
-            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-          },
-          body: JSON.stringify(newPost)
-        });
+      // Tentar salvar no Supabase via Pool
+      if (SUPABASE_SERVICE_KEY) {
+        try {
+          const pool = getDbPool();
+          const supRes = await pool.fetchWithPool(`${SUPABASE_URL}/rest/v1/blog_posts`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_SERVICE_KEY,
+              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify(newPost)
+          }, { timeoutMs: 8000 });
 
-        if (supRes.ok) {
-          const inserted = await supRes.json();
-          return res.status(201).json({ success: true, post: inserted[0] || newPost, message: 'Artigo publicado com sucesso no Supabase!' });
-        } else {
-          const errBody = await supRes.text();
-          console.warn('[Supabase Insert Error]:', errBody);
+          if (supRes.ok) {
+            const inserted = await supRes.json();
+            return res.status(201).json({ success: true, post: inserted[0] || newPost, message: 'Artigo publicado com sucesso no Supabase!' });
+          } else {
+            const errBody = await supRes.text();
+            console.warn('[Supabase Insert Error]:', errBody);
+          }
+        } catch (err) {
+          console.warn('[Supabase Insert Fallback]:', err.message);
         }
-      } catch (err) {
-        console.warn('[Supabase Insert Fallback]:', err.message);
       }
 
       // Fallback em memória para POST
@@ -334,6 +378,9 @@ module.exports = async function handler(req, res) {
 
       if (!targetId && !targetSlug) {
         return res.status(400).json({ success: false, message: 'Identificador (id ou slug) é obrigatório para atualização.' });
+      }
+      if (targetSlug === SYSTEM_RESERVED_SLUG || body.slug === SYSTEM_RESERVED_SLUG || targetId === SYSTEM_RESERVED_SLUG) {
+        return res.status(403).json({ success: false, message: 'Registro reservado pelo sistema.' });
       }
 
       const isUuid = (str) => typeof str === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
@@ -366,43 +413,49 @@ module.exports = async function handler(req, res) {
 
       if (body.slug) {
         updatePayload.slug = slugify(body.slug);
+        if (updatePayload.slug === SYSTEM_RESERVED_SLUG) {
+          return res.status(403).json({ success: false, message: 'Slug reservado pelo sistema.' });
+        }
       }
 
-      // Tentar atualizar no Supabase
-      try {
-        let updateUrl = `${SUPABASE_URL}/rest/v1/blog_posts?`;
-        if (targetId && isUuid(targetId)) {
-          updateUrl += `id=eq.${encodeURIComponent(targetId)}`;
-        } else if (targetSlug) {
-          updateUrl += `slug=eq.${encodeURIComponent(targetSlug)}`;
-        } else if (targetId) {
-          updateUrl += `slug=eq.${encodeURIComponent(targetId)}`;
-        }
+      // Tentar atualizar no Supabase via Pool
+      if (SUPABASE_SERVICE_KEY) {
+        try {
+          let updateUrl = `${SUPABASE_URL}/rest/v1/blog_posts?slug=neq.${SYSTEM_RESERVED_SLUG}&`;
+          if (targetId && isUuid(targetId)) {
+            updateUrl += `id=eq.${encodeURIComponent(targetId)}`;
+          } else if (targetSlug) {
+            updateUrl += `slug=eq.${encodeURIComponent(targetSlug)}`;
+          } else if (targetId) {
+            updateUrl += `slug=eq.${encodeURIComponent(targetId)}`;
+          }
 
-        const supRes = await fetch(updateUrl, {
-          method: 'PATCH',
-          headers: {
-            'apikey': SUPABASE_SERVICE_KEY,
-            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-          },
-          body: JSON.stringify(updatePayload)
-        });
+          const pool = getDbPool();
+          const supRes = await pool.fetchWithPool(updateUrl, {
+            method: 'PATCH',
+            headers: {
+              'apikey': SUPABASE_SERVICE_KEY,
+              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify(updatePayload)
+          }, { timeoutMs: 8000 });
 
-        if (supRes.ok) {
-          const updated = await supRes.json();
-          return res.status(200).json({ 
-            success: true, 
-            post: updated[0] || { ...body, ...updatePayload }, 
-            message: 'Artigo atualizado com sucesso no Supabase!' 
-          });
-        } else {
-          const errBody = await supRes.text();
-          console.warn('[Supabase Patch Error]:', errBody);
+          if (supRes.ok) {
+            const updated = await supRes.json();
+            return res.status(200).json({ 
+              success: true, 
+              post: updated[0] || { ...body, ...updatePayload }, 
+              message: 'Artigo atualizado com sucesso no Supabase!' 
+            });
+          } else {
+            const errBody = await supRes.text();
+            console.warn('[Supabase Patch Error]:', errBody);
+          }
+        } catch (err) {
+          console.warn('[Supabase Patch Exception]:', err.message);
         }
-      } catch (err) {
-        console.warn('[Supabase Patch Exception]:', err.message);
       }
 
       // Fallback em memória
@@ -438,33 +491,39 @@ module.exports = async function handler(req, res) {
       if (!targetId && !targetSlug) {
         return res.status(400).json({ success: false, message: 'ID ou Slug é obrigatório para exclusão.' });
       }
+      if (targetSlug === SYSTEM_RESERVED_SLUG || targetId === SYSTEM_RESERVED_SLUG) {
+        return res.status(403).json({ success: false, message: 'Registro reservado pelo sistema.' });
+      }
 
       const isUuid = (str) => typeof str === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
-      // Deletar no Supabase
-      try {
-        let deleteUrl = `${SUPABASE_URL}/rest/v1/blog_posts?`;
-        if (targetId && isUuid(targetId)) {
-          deleteUrl += `id=eq.${encodeURIComponent(targetId)}`;
-        } else if (targetSlug) {
-          deleteUrl += `slug=eq.${encodeURIComponent(targetSlug)}`;
-        } else if (targetId) {
-          deleteUrl += `slug=eq.${encodeURIComponent(targetId)}`;
-        }
-
-        const supRes = await fetch(deleteUrl, {
-          method: 'DELETE',
-          headers: {
-            'apikey': SUPABASE_SERVICE_KEY,
-            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
+      // Deletar no Supabase via Pool
+      if (SUPABASE_SERVICE_KEY) {
+        try {
+          let deleteUrl = `${SUPABASE_URL}/rest/v1/blog_posts?slug=neq.${SYSTEM_RESERVED_SLUG}&`;
+          if (targetId && isUuid(targetId)) {
+            deleteUrl += `id=eq.${encodeURIComponent(targetId)}`;
+          } else if (targetSlug) {
+            deleteUrl += `slug=eq.${encodeURIComponent(targetSlug)}`;
+          } else if (targetId) {
+            deleteUrl += `slug=eq.${encodeURIComponent(targetId)}`;
           }
-        });
 
-        if (supRes.ok) {
-          return res.status(200).json({ success: true, message: 'Artigo removido com sucesso do Supabase!' });
+          const pool = getDbPool();
+          const supRes = await pool.fetchWithPool(deleteUrl, {
+            method: 'DELETE',
+            headers: {
+              'apikey': SUPABASE_SERVICE_KEY,
+              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
+            }
+          }, { timeoutMs: 8000 });
+
+          if (supRes.ok) {
+            return res.status(200).json({ success: true, message: 'Artigo removido com sucesso do Supabase!' });
+          }
+        } catch (err) {
+          console.warn('[Supabase Delete Exception]:', err.message);
         }
-      } catch (err) {
-        console.warn('[Supabase Delete Exception]:', err.message);
       }
 
       // Fallback em memória
@@ -481,6 +540,6 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ success: false, message: `Método ${method} não suportado.` });
   } catch (globalErr) {
     console.error('[API Blog Posts Global Error]:', globalErr);
-    return res.status(500).json({ success: false, message: 'Erro interno no servidor.', error: globalErr.message });
+    return res.status(500).json({ success: false, message: 'Erro interno no servidor.' });
   }
 };

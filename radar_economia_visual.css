@@ -1,0 +1,36 @@
+#hub-axis-container-economia{--eco-border:var(--dv-grid);gap:24px}#hub-axis-container-economia article{min-width:0}#hub-axis-container-economia article:has(canvas){padding:20px;display:flex;flex-direction:column;gap:12px}#hub-axis-container-economia article:has(canvas)>*{margin-top:0!important}#hub-axis-container-economia article:has(canvas) p{font-size:13px;line-height:1.55}#hub-axis-container-economia article:has(canvas) footer{font-size:12px;line-height:1.5;margin-top:auto!important}#hub-axis-container-economia select,#hub-axis-container-economia button{font-size:12px!important;min-height:36px}#hub-axis-container-economia .eco-alternative,#hub-axis-container-economia .eco-method{font-size:12px;border-top:1px solid var(--eco-border);padding-top:10px}#hub-axis-container-economia summary{cursor:pointer;color:var(--dv-primary);font-weight:600;min-height:28px}#hub-axis-container-economia .eco-table-scroll{overflow:auto;max-width:100%;max-height:320px}#hub-axis-container-economia table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}#hub-axis-container-economia th,#hub-axis-container-economia td{padding:8px;text-align:left;border-bottom:1px solid var(--eco-border);white-space:nowrap}#hub-axis-container-economia caption{text-align:left;padding:8px;font-weight:600}#hub-axis-container-economia .eco-load-error{padding:12px;border:1px solid var(--dv-grid);border-radius:12px}@media(max-width:1000px){#hub-axis-container-economia section>div:has(article canvas){grid-template-columns:minmax(0,1fr)!important}}@media(max-width:600px){#hub-axis-container-economia article:has(canvas){padding:16px}#hub-axis-container-economia .relative:has(canvas){height:240px!important}}
+#hub-axis-container-economia article .relative:has(canvas){height:270px!important}#hub-axis-container-economia article:has(#hubChartEconomiaSetores) .relative{height:180px!important}
+
+@media(max-width:600px){#hub-axis-container-economia article .relative:has(canvas){height:240px!important}#hub-axis-container-economia article:has(#hubChartEconomiaSetores) .relative{height:180px!important}}
+
+/* Economia: azul, verde e tons neutros. */
+#hub-axis-container-economia article canvas{max-width:100%!important}
+#hub-axis-container-economia article{background-color:var(--dv-surface)!important;border-color:var(--dv-grid)!important;color:var(--dv-text)}
+#hub-axis-container-economia select{background-color:var(--dv-surface)!important;color:var(--dv-text)!important;border-color:var(--dv-grid)!important}
+#hub-axis-container-economia button[data-eco-pib],#hub-axis-container-economia button[data-eco-salary]{background-color:var(--dv-soft)!important;color:var(--dv-text)!important}
+#hub-axis-container-economia button[data-eco-pib][aria-pressed="true"],#hub-axis-container-economia button[data-eco-salary][aria-pressed="true"]{background-color:var(--dv-primary)!important;color:var(--dv-surface)!important}
+#hub-axis-container-economia button:focus-visible,#hub-axis-container-economia select:focus-visible,#hub-axis-container-economia summary:focus-visible{outline-color:var(--dv-primary)!important}
+#hub-axis-container-economia [id^="eco-source-"]{color:var(--dv-muted)!important;border-color:var(--dv-grid)!important}
+#hub-axis-container-economia [id^="eco-source-"] a{color:var(--dv-text)!important}
+#hub-axis-container-economia [id^="eco-insight-"]{color:var(--dv-text)!important}
+#hub-axis-container-economia #hub-econ-pib-total,#hub-axis-container-economia #hub-econ-pib-pc,#hub-axis-container-economia #hub-kpi-emprego,#hub-axis-container-economia #hub-econ-saldo,#hub-axis-container-economia #hub-econ-organizacoes,#hub-axis-container-economia #hub-econ-locais{color:var(--dv-primary)!important}
+#hub-axis-container-economia .eco-alternative,#hub-axis-container-economia .eco-method{color:var(--dv-text)}
+
+/* Conclusão editorial: tipografia, tabelas e dimensões do recorte econômico. */
+#hub-axis-container-economia{font-family:Inter,sans-serif}
+#hub-axis-container-economia h2,#hub-axis-container-economia h3,#hub-axis-container-economia h4{font-family:Sora,Inter,sans-serif;overflow-wrap:anywhere}
+#hub-axis-container-economia h4,#hub-axis-container-economia label,#hub-axis-container-economia article>p:not([id]),#hub-axis-container-economia #hub-kpi-emprego-reference,#hub-axis-container-economia .eco-kpi-source{font-size:12px;line-height:1.5}
+#hub-axis-container-economia article:has(canvas) header h4{font-size:16px;line-height:1.4}
+#hub-axis-container-economia article:has(canvas) header p{font-size:12px}
+#hub-axis-container-economia article:has(#hubChartEconomiaSetores) .relative{height:310px!important}
+#hub-axis-container-economia .eco-kpi-source{margin-top:auto;padding-top:6px;color:var(--dv-muted)}
+#hub-axis-container-economia .eco-kpi-source a{color:var(--dv-primary);text-decoration:underline;text-underline-offset:3px}
+#hub-axis-container-economia .eco-table-scroll:focus-visible{outline:2px solid var(--dv-primary);outline-offset:2px}
+#hub-axis-container-economia th{white-space:normal;min-width:110px}
+#hub-axis-container-economia td{font-variant-numeric:tabular-nums}
+#hub-axis-container-economia .eco-method p{padding-top:6px}
+
+@media(max-width:600px){#hub-axis-container-economia article:has(#hubChartEconomiaSetores) .relative{height:330px!important}#hub-axis-container-economia article header{gap:8px}#hub-axis-container-economia button,#hub-axis-container-economia select{max-width:100%}#hub-axis-container-economia .eco-table-scroll{max-height:260px}}
+
+#hub-axis-container-economia :is([data-economy-chart="Estrutura"],[data-economy-chart="Setores"])>.relative:has(canvas){height:300px!important;min-height:0;max-height:300px;flex:none}
+@media(max-width:600px){#hub-axis-container-economia :is([data-economy-chart="Estrutura"],[data-economy-chart="Setores"])>.relative:has(canvas){height:280px!important;max-height:280px}}

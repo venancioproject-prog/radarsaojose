@@ -1,0 +1,112 @@
+{
+  "territory": "3549904",
+  "approved_pairs": [
+    [
+      1991,
+      2000
+    ]
+  ],
+  "sources": [
+    {
+      "url": "https://sidra.ibge.gov.br/tabela/136",
+      "query_url": "https://apisidra.ibge.gov.br/values/t/136/n6/3549904/v/93/p/1991,2000,2010/c86/all",
+      "sha256": "06ab4aca6bc26ef12f55d1e517d25e58971ca42473c446aa663acd2132367fa0",
+      "edition": "SIDRA consultado em 12/10/2026; Censos 1991 e 2000; publicação original não informada",
+      "universe": "População residente municipal; cor ou raça investigada na amostra em 1991 e 2000. Denominador nativo inclui Sem declaração."
+    }
+  ],
+  "rows": [
+    {
+      "year": 1991,
+      "category": "Branca",
+      "value": 345286,
+      "denominator": 442370,
+      "source": 0,
+      "native_row": 3,
+      "evidence": "sidra136:3549904:1991:2776"
+    },
+    {
+      "year": 1991,
+      "category": "Preta",
+      "value": 13127,
+      "denominator": 442370,
+      "source": 0,
+      "native_row": 4,
+      "evidence": "sidra136:3549904:1991:2777"
+    },
+    {
+      "year": 1991,
+      "category": "Amarela",
+      "value": 6638,
+      "denominator": 442370,
+      "source": 0,
+      "native_row": 5,
+      "evidence": "sidra136:3549904:1991:2778"
+    },
+    {
+      "year": 1991,
+      "category": "Parda",
+      "value": 75596,
+      "denominator": 442370,
+      "source": 0,
+      "native_row": 6,
+      "evidence": "sidra136:3549904:1991:2779"
+    },
+    {
+      "year": 1991,
+      "category": "Indígena",
+      "value": 143,
+      "denominator": 442370,
+      "source": 0,
+      "native_row": 7,
+      "evidence": "sidra136:3549904:1991:2780"
+    },
+    {
+      "year": 2000,
+      "category": "Branca",
+      "value": 424013,
+      "denominator": 539313,
+      "source": 0,
+      "native_row": 10,
+      "evidence": "sidra136:3549904:2000:2776"
+    },
+    {
+      "year": 2000,
+      "category": "Preta",
+      "value": 19049,
+      "denominator": 539313,
+      "source": 0,
+      "native_row": 11,
+      "evidence": "sidra136:3549904:2000:2777"
+    },
+    {
+      "year": 2000,
+      "category": "Amarela",
+      "value": 7533,
+      "denominator": 539313,
+      "source": 0,
+      "native_row": 12,
+      "evidence": "sidra136:3549904:2000:2778"
+    },
+    {
+      "year": 2000,
+      "category": "Parda",
+      "value": 84514,
+      "denominator": 539313,
+      "source": 0,
+      "native_row": 13,
+      "evidence": "sidra136:3549904:2000:2779"
+    },
+    {
+      "year": 2000,
+      "category": "Indígena",
+      "value": 1221,
+      "denominator": 539313,
+      "source": 0,
+      "native_row": 14,
+      "evidence": "sidra136:3549904:2000:2780"
+    }
+  ],
+  "note": "1991/2000: resultados da amostra, separados de 2010/2022 do universo. Denominadores nativos incluem Sem declaração: 1.580 em 1991 e 2.983 em 2000. Não redistribuir ausências. Limites municipais conforme cada edição; comparação descritiva sem harmonização territorial adicional.",
+  "methodology_url": "https://agenciadenoticias.ibge.gov.br/agencia-sala-de-imprensa/2013-agencia-de-noticias/releases/14204-asi-entre-1991-e-2010-populacao-indigena-se-expandiu-de-345-para-805-dos-municipios-do-pais"
+}

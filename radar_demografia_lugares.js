@@ -1,0 +1,12 @@
+/* Geographic intersection only; no statistical aggregation. */
+(function(g){'use strict';
+const polygons=x=>x.type==='Polygon'?[x.coordinates]:x.type==='MultiPolygon'?x.coordinates:[];
+const lines=x=>x.type==='LineString'?[x.coordinates]:x.type==='MultiLineString'?x.coordinates:[];
+function ring(p,r){let inside=false;for(let i=0,j=r.length-1;i<r.length;j=i++){const a=r[i],b=r[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;}
+function inPoly(p,x){return polygons(x).some(rs=>ring(p,rs[0])&&!rs.slice(1).some(r=>ring(p,r)));}
+function cross(a,b,c,d){const dx=b[0]-a[0],dy=b[1]-a[1],ex=d[0]-c[0],ey=d[1]-c[1],den=dx*ey-dy*ex;if(Math.abs(den)<1e-18)return null;const t=((c[0]-a[0])*ey-(c[1]-a[1])*ex)/den,u=((c[0]-a[0])*dy-(c[1]-a[1])*dx)/den;return t>0&&t<1&&u>=0&&u<=1?t:null;}
+function edges(x){return polygons(x).flatMap(p=>p.flatMap(r=>r.slice(1).map((b,i)=>[r[i],b])));}
+function lineIntersects(ls,p){const es=edges(p);for(const l of ls)for(let i=1;i<l.length;i++){const a=l[i-1],b=l[i],ts=[0,1];for(const [c,d]of es){const t=cross(a,b,c,d);if(t!=null)ts.push(t);}ts.sort((a,b)=>a-b);for(let j=1;j<ts.length;j++){const t=(ts[j]+ts[j-1])/2;if(inPoly([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])],p))return true;}}return false;}
+function bbox(x){const pts=[];function walk(a){if(typeof a[0]==='number')pts.push(a);else a.forEach(walk);}walk(x.coordinates);return [Math.min(...pts.map(p=>p[0])),Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[1]))];}
+function links(x,features){if(x.type==='Point')return [];const b=bbox(x),out=[];for(const f of features){const y=f.geometry,c=bbox(y);if(b[0]>c[2]||b[2]<c[0]||b[1]>c[3]||b[3]<c[1])continue;if(lines(x).length){if(lineIntersects(lines(x),y))out.push({id:f.properties.id,relation:'atravessado'});}else if(polygons(x).length){const xe=edges(x),ye=edges(y);const hit=polygons(x).some(p=>p[0].some(v=>inPoly(v,y)))||polygons(y).some(p=>p[0].some(v=>inPoly(v,x)))||xe.some(([a,b])=>ye.some(([c,d])=>cross(a,b,c,d)!=null));if(hit){const contained=polygons(y).every(p=>p.every(r=>r.every(v=>inPoly(v,x))))&&!ye.some(([a,b])=>xe.some(([c,d])=>cross(a,b,c,d)!=null))&&!polygons(x).some(rs=>rs.slice(1).some(h=>h.some(v=>inPoly(v,y))));out.push({id:f.properties.id,relation:contained?'contido':'parcial'});}}}return out;}
+g.RadarPlaceSpatial={links,inPoly,bbox};})(window);

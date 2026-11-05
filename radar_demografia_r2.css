@@ -1,0 +1,611 @@
+/* Only the official Demografia container. Institutional shell is unchanged. */
+#hub-axis-container-demografia{--demo-blue:#0369a1;--demo-violet:#6d28d9;--demo-ink:#0f172a;--demo-muted:#64748b;--demo-line:#e2e8f0}
+#hub-axis-container-demografia .demo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+#hub-axis-container-demografia .demo-card{background:#fff;border:1px solid var(--demo-line);border-radius:20px;padding:22px;min-width:0;box-shadow:0 2px 8px #0f172a04}
+#hub-axis-container-demografia .demo-wide{grid-column:1/-1}
+#hub-axis-container-demografia h4{font-family:Sora,Inter,sans-serif;font-size:17px;font-weight:800;line-height:1.4;color:var(--demo-ink);margin:0 0 5px}
+#hub-axis-container-demografia .demo-kicker{color:var(--demo-blue);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+#hub-axis-container-demografia .demo-subtitle,#hub-axis-container-demografia .demo-note{font-size:12px;color:var(--demo-muted);line-height:1.65;margin:6px 0 12px}
+#hub-axis-container-demografia .demo-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:12px 0}
+#hub-axis-container-demografia label{display:flex;flex-direction:column;gap:4px;font-size:11px;font-weight:600;color:var(--demo-muted);min-width:0}
+#hub-axis-container-demografia select,#hub-axis-container-demografia .demo-action{font:600 12px Inter,sans-serif;color:var(--demo-ink);background:#f8fafc;border:1px solid #cbd5e1;border-radius:9px;padding:8px 10px;max-width:100%;cursor:pointer}
+#hub-axis-container-demografia :is(button,select,summary,[tabindex]):focus-visible{outline:3px solid #0284c7;outline-offset:3px}
+#hub-axis-container-demografia .demo-svg{width:100%;display:block;overflow:visible;height:auto}
+#hub-axis-container-demografia .demo-svg text{font-family:Inter,sans-serif;fill:var(--demo-muted);font-size:13px}
+#hub-axis-container-demografia .demo-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;font-weight:600;color:var(--demo-muted);margin:8px 0}
+#hub-axis-container-demografia .demo-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+#hub-axis-container-demografia .demo-summary{font-size:13px;font-weight:600;line-height:1.6;color:var(--demo-ink);margin:8px 0}
+#hub-axis-container-demografia .demo-tip{min-height:38px;border-left:3px solid var(--demo-blue);padding:8px 12px;font-size:12px;line-height:1.5;background:#f0f9ff;color:#0c4a6e;margin:8px 0;border-radius:0 8px 8px 0}
+#hub-axis-container-demografia .demo-source{font-size:12px;line-height:1.6;color:var(--demo-muted);padding-top:12px;border-top:1px solid var(--demo-line);overflow-wrap:anywhere}
+#hub-axis-container-demografia .demo-source a{color:var(--demo-blue);text-decoration:underline;text-underline-offset:2px}
+#hub-axis-container-demografia .demo-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#hub-axis-container-demografia details{margin-top:6px;font-size:12px;color:var(--demo-muted)}
+#hub-axis-container-demografia summary{cursor:pointer;font-weight:600;padding:6px 0}
+#hub-axis-container-demografia .demo-table-wrap{overflow:auto;max-height:330px}
+#hub-axis-container-demografia table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap}
+#hub-axis-container-demografia th,#hub-axis-container-demografia td{padding:8px;text-align:left;border-bottom:1px solid var(--demo-line)}
+#hub-axis-container-demografia .demo-sexbar{display:flex;height:28px;border-radius:8px;overflow:hidden;margin:18px 0 10px}
+#hub-axis-container-demografia .demo-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+#hub-axis-container-demografia .demo-metrics>div{background:#f8fafc;border-radius:12px;padding:10px;font-size:10px;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-metrics strong{display:block;font-size:16px;color:var(--demo-ink);margin:6px 0}
+#hub-axis-container-demografia .demo-map-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(210px,1fr);gap:18px}
+#hub-axis-container-demografia #hubMapDemografiaCalor{height:480px;border-radius:16px;position:relative;z-index:0;background:#f1f5f9}
+#hub-axis-container-demografia .demo-sectors{display:grid;gap:5px;max-height:325px;overflow:auto}
+#hub-axis-container-demografia .demo-sectors button{text-align:left;font-size:11px;padding:8px;border:1px solid var(--demo-line);border-radius:8px;cursor:pointer}
+#hub-axis-container-demografia .demo-sectors button[aria-pressed=true]{background:#e0f2fe;border-color:#0284c7;color:#075985}
+#hub-axis-container-demografia button:disabled{cursor:not-allowed;opacity:.6}
+#hub-axis-container-demografia .leaflet-popup-content,#hub-axis-container-demografia .leaflet-tooltip{font-family:Inter,sans-serif;line-height:1.6;font-size:12px}
+@media(max-width:1000px){#hub-axis-container-demografia .demo-grid{grid-template-columns:minmax(0,1fr)}#hub-axis-container-demografia .demo-map-layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){#hub-axis-container-demografia .demo-card{padding:16px;border-radius:18px}#hub-axis-container-demografia h4{font-size:15px}#hub-axis-container-demografia .demo-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}#hub-axis-container-demografia #hubMapDemografiaCalor{height:350px}}
+.dark #hub-axis-container-demografia{--demo-ink:#e2e8f0;--demo-muted:#94a3b8;--demo-line:#334155;--demo-blue:#38bdf8}
+.dark #hub-axis-container-demografia .demo-card{background:#0f172a}.dark #hub-axis-container-demografia :is(select,.demo-action,.demo-metrics>div){background:#1e293b}.dark #hub-axis-container-demografia .demo-tip{background:#082f49;color:#bae6fd}
+@media(prefers-reduced-motion:reduce){#hub-axis-container-demografia *{scroll-behavior:auto!important;transition:none!important}}
+
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]),#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]){grid-column:1/-1;grid-row:auto}
+#hub-axis-container-demografia .demo-source{display:flex;flex-wrap:wrap;gap:4px 12px;padding-top:10px}
+#hub-axis-container-demografia .demo-source span{flex-basis:100%}
+#hub-axis-container-demografia .demo-disclosures{display:flex;gap:0 20px;flex-wrap:wrap}
+#hub-axis-container-demografia .demo-disclosures details[open]{flex-basis:100%}
+#hub-axis-container-demografia .demo-source span{flex-basis:auto}
+#hub-axis-container-demografia .demo-comparison-row>.demo-category{grid-row:span 2;align-self:center}
+#hub-axis-container-demografia .demo-chart-tip[hidden]{display:none}
+#hub-axis-container-demografia .demo-legend{font-size:13px}
+#hub-axis-container-demografia .demo-controls label{font-size:12px}
+#hub-axis-container-demografia .demo-controls select{font-size:13px;min-height:40px}
+#hub-axis-container-demografia .demo-controls:empty{display:none}
+#hub-axis-container-demografia [data-demo-chart=history]>.demo-controls,#hub-axis-container-demografia [data-demo-chart=pyramid]>.demo-controls,#hub-axis-container-demografia [data-demo-chart=race]>.demo-controls,#hub-axis-container-demografia [data-demo-chart=religion]>.demo-controls{display:inline-flex;margin:8px 20px 10px 0;vertical-align:middle}
+#hub-axis-container-demografia [data-demo-chart=history]>.demo-legend,#hub-axis-container-demografia [data-demo-chart=pyramid]>.demo-legend,#hub-axis-container-demografia [data-demo-chart=race]>.demo-legend,#hub-axis-container-demografia [data-demo-chart=religion]>.demo-legend{display:inline-flex;vertical-align:middle}
+#hub-axis-container-demografia table{font-size:12px}
+#hub-axis-container-demografia .demo-svg text{font-size:12px}
+#hub-axis-container-demografia .demo-point-value{fill:var(--demo-ink);font-size:12px;font-weight:750;font-variant-numeric:tabular-nums}
+#hub-axis-container-demografia .demo-year-label{fill:var(--demo-muted);font-size:11.5px;font-weight:600}
+#hub-axis-container-demografia .demo-category{font-size:14px;font-weight:600;line-height:1.45;color:var(--demo-ink);overflow-wrap:anywhere}
+#hub-axis-container-demografia .demo-comparison-row{display:grid;grid-template-columns:minmax(180px,1fr) minmax(240px,1fr);column-gap:24px;padding:10px 0;border-bottom:1px solid var(--demo-line)}
+#hub-axis-container-demografia .demo-comparison-values{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:12px}
+#hub-axis-container-demografia .demo-comparison-values strong{font-size:14px;font-variant-numeric:tabular-nums;margin-left:5px}
+#hub-axis-container-demografia .demo-value-earlier{color:var(--demo-blue)}
+#hub-axis-container-demografia .demo-value-later{color:var(--demo-violet)}
+#hub-axis-container-demografia .demo-delta{color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-mini-svg{grid-column:2;width:100%;height:32px;display:block;overflow:visible}
+#hub-axis-container-demografia .demo-bar-row{padding:8px 0}
+#hub-axis-container-demografia .demo-bar-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:7px}
+#hub-axis-container-demografia .demo-bar-heading strong{font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--demo-ink)}
+#hub-axis-container-demografia .demo-bar-heading strong small{display:block;font-size:12px;font-weight:400;text-align:right;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-bar-track{height:12px;background:#f1f5f9;border-radius:4px;overflow:hidden}
+#hub-axis-container-demografia .demo-bar-track i{display:block;height:100%;background:var(--demo-blue);border-radius:4px}
+#hub-axis-container-demografia .demo-reference{border-bottom:1px solid var(--demo-line);margin-bottom:8px}
+#hub-axis-container-demografia .demo-reference .demo-bar-track i{background:var(--demo-muted)}
+#hub-axis-container-demografia .demo-pyramid{max-width:780px;margin:16px auto 0}
+#hub-axis-container-demografia .demo-pyramid-row{display:grid;grid-template-columns:minmax(0,1fr) 70px minmax(0,1fr);align-items:center;height:22px}
+#hub-axis-container-demografia .demo-age{font-size:12px;text-align:center;color:var(--demo-ink)}
+#hub-axis-container-demografia .demo-pyramid-side{display:flex;align-items:center;gap:8px;min-width:0}
+#hub-axis-container-demografia .demo-female{flex-direction:row-reverse}
+#hub-axis-container-demografia .demo-pyramid-number{font-size:12px;flex:0 0 54px;font-variant-numeric:tabular-nums;color:var(--demo-ink)}
+#hub-axis-container-demografia .demo-female .demo-pyramid-number{text-align:right}
+#hub-axis-container-demografia .demo-pyramid-track{flex:1;height:13px;display:flex;min-width:0}
+#hub-axis-container-demografia .demo-male .demo-pyramid-track{justify-content:flex-end}
+#hub-axis-container-demografia .demo-pyramid-track i{display:block;background:var(--demo-blue);height:100%;border-radius:2px}
+#hub-axis-container-demografia .demo-female .demo-pyramid-track i{background:var(--demo-violet)}
+#hub-axis-container-demografia #hubMapDemografiaCalor{height:480px!important;min-height:0!important}
+#hub-axis-container-demografia>.space-y-3 .items-baseline{flex-wrap:wrap}
+.dark #hub-axis-container-demografia{--demo-violet:#c4b5fd}
+.dark #hub-axis-container-demografia .demo-bar-track{background:#1e293b}
+.dark #hub-axis-container-demografia .demo-svg [fill="#0369a1"]{fill:#38bdf8}
+.dark #hub-axis-container-demografia .demo-svg [stroke="#0369a1"]{stroke:#38bdf8}
+.dark #hub-axis-container-demografia .demo-mini-svg [fill="#0369a1"]{fill:#38bdf8}
+.dark #hub-axis-container-demografia .demo-mini-svg [fill="#6d28d9"]{fill:#c4b5fd}
+@media(max-width:600px){
+ #hub-axis-container-demografia .demo-comparison-row>.demo-category{grid-row:auto}
+ #hub-axis-container-demografia .demo-comparison-row{grid-template-columns:minmax(0,1fr);gap:5px}
+ #hub-axis-container-demografia .demo-mini-svg{grid-column:1}
+ #hub-axis-container-demografia .demo-category{font-size:13px}
+ #hub-axis-container-demografia .demo-bar-heading{flex-wrap:wrap;gap:4px}
+ #hub-axis-container-demografia .demo-pyramid-row{grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr)}
+ #hub-axis-container-demografia .demo-pyramid-number{flex-basis:47px}
+ #hub-axis-container-demografia .demo-pyramid-side{gap:4px}
+ #hub-axis-container-demografia #hubMapDemografiaCalor{height:350px!important}
+}
+
+/* Opening pair: harmonious heights, refined pyramid utilization. */
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=history]),
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]){padding:18px 20px}
+#hub-axis-container-demografia :is([data-demo-chart=history],[data-demo-chart=pyramid]) .demo-controls{gap:8px;margin:6px 0 8px}
+#hub-axis-container-demografia :is([data-demo-chart=history],[data-demo-chart=pyramid]) .demo-legend{margin:4px 0 8px}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-pyramid{margin:10px auto 4px;width:100%;max-width:560px}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-pyramid-row{height:23px;grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr);align-items:center}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-pyramid-side{gap:6px}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-pyramid-track{height:14px}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-pyramid-track i{border-radius:3px}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-pyramid-number{font-size:11.5px;flex-basis:48px}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]) .demo-age{font-size:11.5px;font-weight:600}
+@media(min-width:1001px){
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=history]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]){grid-column:auto;grid-row:auto}
+}
+
+/* Editorial comparison pair, confined to race and religion. */
+@media(min-width:1001px){
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]){grid-column:auto;grid-row:auto}
+}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]),
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]){padding:18px}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion])>.demo-controls{gap:8px;margin:6px 0 8px}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion])>.demo-legend{margin:4px 0 8px}
+#hub-axis-container-demografia .demo-dumbbell-row{display:grid;grid-template-columns:minmax(80px,.65fr) minmax(100px,1.25fr) 52px;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--demo-line)}
+#hub-axis-container-demografia .demo-dumbbell-row .demo-category{font-size:13px;line-height:1.35;overflow-wrap:normal}
+#hub-axis-container-demografia .demo-dumbbell-plot{height:62px;position:relative;min-width:0}
+#hub-axis-container-demografia .demo-dumbbell-plot .demo-mini-svg{height:62px;width:100%;display:block}
+#hub-axis-container-demografia .demo-dot-label{position:absolute;transform:translateX(-50%);font-size:12px;line-height:18px;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+#hub-axis-container-demografia .demo-earliest{top:0;color:var(--demo-blue)}
+#hub-axis-container-demografia .demo-fixed-dot{position:absolute;top:31px;transform:translate(-50%,-50%);border-radius:50%;box-sizing:border-box}
+#hub-axis-container-demografia .demo-dot-earliest{width:13px;height:13px;background:var(--demo-blue);border:1px solid white}
+#hub-axis-container-demografia .demo-dot-latest{width:9px;height:9px;background:var(--demo-violet);border:1px solid white}
+#hub-axis-container-demografia .demo-latest{bottom:0;color:var(--demo-violet)}
+#hub-axis-container-demografia .demo-difference{font-size:13px;font-weight:750;text-align:right;color:var(--demo-ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+#hub-axis-container-demografia .demo-difference small{display:block;font-size:11px;color:var(--demo-muted);font-weight:400}
+#hub-axis-container-demografia .demo-comparison-scale{font-size:12px;line-height:1.4;margin:8px 0}
+#hub-axis-container-demografia .demo-svg.demo-history{width:100%;height:510px;min-height:480px;display:block}
+@media(max-width:1000px){#hub-axis-container-demografia .demo-svg.demo-history{height:360px;min-height:320px}}
+@media(max-width:600px){#hub-axis-container-demografia .demo-svg.demo-history{height:290px;min-height:270px}}
+
+#hub-axis-container-demografia .demo-history-line{stroke:#0b556d!important;stroke-width:3.5px;stroke-linecap:round;stroke-linejoin:round}
+#hub-axis-container-demografia .demo-history-dot{fill:#0b556d!important;stroke:#ffffff;stroke-width:2.5px;transition:r .15s ease,fill .15s ease}
+#hub-axis-container-demografia .demo-history-dot:hover,#hub-axis-container-demografia [data-demo-chart=history] g:focus-visible circle{fill:#145a73!important;r:7.5px}
+#hub-axis-container-demografia [data-demo-chart=history] .demo-legend i{background:#0b556d!important;width:10px;height:10px}
+
+/* Growth interval pills on history chart (compact, discreet green badge) */
+#hub-axis-container-demografia .demo-growth-pill{cursor:pointer;outline:none}
+#hub-axis-container-demografia .demo-growth-pill .demo-pill-bg{fill:#ecfdf5;stroke:#86efac;stroke-width:1;transition:fill .15s ease,stroke .15s ease}
+#hub-axis-container-demografia .demo-growth-pill .demo-pill-text{fill:#166534;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;font-size:9.5px;font-weight:700;text-anchor:middle;dominant-baseline:central;pointer-events:none;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+@media(max-width:420px){#hub-axis-container-demografia .demo-growth-pill .demo-pill-text{font-size:9px}}
+#hub-axis-container-demografia .demo-growth-pill:hover .demo-pill-bg,#hub-axis-container-demografia .demo-growth-pill:focus-visible .demo-pill-bg{fill:#15803d;stroke:#14532d}
+#hub-axis-container-demografia .demo-growth-pill:hover .demo-pill-text,#hub-axis-container-demografia .demo-growth-pill:focus-visible .demo-pill-text{fill:#ffffff}
+#hub-axis-container-demografia .demo-growth-pill:focus-visible{outline:2px solid #15803d;outline-offset:2px}
+
+.dark #hub-axis-container-demografia .demo-history-line{stroke:#38bdf8!important}
+.dark #hub-axis-container-demografia .demo-history-dot{fill:#38bdf8!important;stroke:#0f172a}
+.dark #hub-axis-container-demografia [data-demo-chart=history] .demo-legend i{background:#38bdf8!important}
+.dark #hub-axis-container-demografia .demo-growth-pill .demo-pill-bg{fill:#064e3b;stroke:#059669;stroke-width:1}
+.dark #hub-axis-container-demografia .demo-growth-pill .demo-pill-text{fill:#a7f3d0}
+.dark #hub-axis-container-demografia .demo-growth-pill:hover .demo-pill-bg,.dark #hub-axis-container-demografia .demo-growth-pill:focus-visible .demo-pill-bg{fill:#047857;stroke:#10b981}
+.dark #hub-axis-container-demografia .demo-growth-pill:hover .demo-pill-text,.dark #hub-axis-container-demografia .demo-growth-pill:focus-visible .demo-pill-text{fill:#ffffff}
+.dark #hub-axis-container-demografia .demo-svg [fill="#0b556d"]{fill:#38bdf8}
+.dark #hub-axis-container-demografia .demo-svg [stroke="#0b556d"]{stroke:#38bdf8}
+.dark #hub-axis-container-demografia stop[stop-color="#0b556d"]{stop-color:#38bdf8}
+@media(max-width:600px){
+ #hub-axis-container-demografia .demo-dumbbell-row{grid-template-columns:minmax(74px,.7fr) minmax(90px,1.3fr) 50px;gap:6px}
+}
+
+/* Equalize only the two editorial pairs; plots retain their intrinsic size. */
+#hub-axis-container-demografia .demo-card-footer{min-width:0;overflow-wrap:anywhere}
+#hub-axis-container-demografia .demo-card-footer details{min-width:0;max-width:100%}
+#hub-axis-container-demografia .demo-modes{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%;margin-bottom:4px}
+#hub-axis-container-demografia .demo-modes .demo-action{font-size:12px;min-height:38px}
+#hub-axis-container-demografia .demo-modes .demo-action[aria-pressed=true]{color:var(--demo-blue);background:#e0f2fe;border-color:var(--demo-blue)}
+.dark #hub-axis-container-demografia .demo-modes .demo-action[aria-pressed=true]{background:#082f49}
+#hub-axis-container-demografia .demo-years{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%;margin:2px 0 4px}
+#hub-axis-container-demografia .demo-years button{font-size:13px;min-width:54px;min-height:40px}
+#hub-axis-container-demografia .demo-years button[aria-pressed=true],#hub-axis-container-demografia .demo-secondary[aria-pressed=true]{background:#e0f2fe;border-color:var(--demo-blue);color:var(--demo-blue)}
+#hub-axis-container-demografia .demo-secondary{font-size:12px;text-decoration:underline;text-underline-offset:3px}
+.dark #hub-axis-container-demografia .demo-years button[aria-pressed=true],.dark #hub-axis-container-demografia .demo-secondary[aria-pressed=true]{background:#082f49}
+#hub-axis-container-demografia [data-demo-chart=race] .demo-bar-row{display:grid;grid-template-columns:minmax(100px,1fr) minmax(30px,.6fr) max-content;gap:8px;align-items:center;padding:6px 0}
+#hub-axis-container-demografia [data-demo-chart=race] .demo-bar-heading{display:contents}
+#hub-axis-container-demografia [data-demo-chart=race] .demo-bar-heading>.demo-category{grid-column:1;grid-row:1;font-size:13px}
+#hub-axis-container-demografia [data-demo-chart=race] .demo-bar-heading>strong{grid-column:3;grid-row:1;text-align:right}
+#hub-axis-container-demografia [data-demo-chart=race] .demo-bar-track{grid-column:2;grid-row:1;height:10px}
+
+/* Informative KPI cards: only the sex and municipal urban/rural blocks. */
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=sex]),
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=urban]){padding:18px}
+#hub-axis-container-demografia .demo-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px}
+#hub-axis-container-demografia .demo-card-header-titles{flex:1;min-width:0}
+#hub-axis-container-demografia .demo-card-header-titles .demo-subtitle{margin-bottom:0}
+#hub-axis-container-demografia .demo-header-control{flex-shrink:0;display:flex;align-items:flex-start}
+#hub-axis-container-demografia .demo-header-control label{display:flex;flex-direction:column;gap:3px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-header-control select{font:600 12px Inter,sans-serif;color:var(--demo-ink);background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:5px 10px;min-height:32px;min-width:92px;line-height:1.2;cursor:pointer;box-shadow:0 1px 2px rgba(15,23,42,0.04)}
+.dark #hub-axis-container-demografia .demo-header-control select{background:#1e293b;border-color:#334155;color:var(--demo-ink)}
+#hub-axis-container-demografia :is([data-demo-chart=sex],[data-demo-chart=urban])>.demo-controls{margin:8px 0 12px}
+#hub-axis-container-demografia .demo-composition-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#hub-axis-container-demografia .demo-composition-kpi{background:#fff;border:1px solid var(--demo-line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:5px;min-width:0;color:var(--demo-blue)}
+#hub-axis-container-demografia .demo-kpi-mulheres{color:var(--demo-violet)}
+#hub-axis-container-demografia .demo-kpi-rural{color:#0f766e}
+#hub-axis-container-demografia .demo-kpi-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:650}
+#hub-axis-container-demografia .demo-kpi-label svg{width:24px;height:24px;flex-shrink:0;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+#hub-axis-container-demografia .demo-kpi-percent{font-size:clamp(24px,2.2vw,30px);font-weight:750;letter-spacing:-.025em;line-height:1.2;font-variant-numeric:tabular-nums;margin-top:4px}
+#hub-axis-container-demografia .demo-kpi-count{font-size:12px;line-height:1.5;color:var(--demo-muted);font-variant-numeric:tabular-nums}
+.dark #hub-axis-container-demografia .demo-composition-kpi{background:#0f172a}
+.dark #hub-axis-container-demografia .demo-kpi-rural{color:#5eead4}
+@media(max-width:600px){
+ #hub-axis-container-demografia .demo-card-header{flex-direction:column;align-items:stretch;gap:8px}
+ #hub-axis-container-demografia .demo-header-control{width:100%}
+ #hub-axis-container-demografia .demo-header-control label{width:100%}
+ #hub-axis-container-demografia .demo-header-control select{width:100%}
+ #hub-axis-container-demografia .demo-composition-kpis{grid-template-columns:minmax(0,1fr);gap:8px}
+ #hub-axis-container-demografia .demo-composition-kpi{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;padding:12px 14px}
+ #hub-axis-container-demografia .demo-kpi-label{grid-column:1;grid-row:1}
+ #hub-axis-container-demografia .demo-kpi-count{grid-column:1;grid-row:2}
+ #hub-axis-container-demografia .demo-kpi-percent{grid-column:2;grid-row:1/3;align-self:center;margin:0;font-size:26px}
+}
+#hub-axis-container-demografia [data-demo-chart=religion] .demo-bar-row{display:grid;grid-template-columns:minmax(100px,1fr) minmax(30px,.6fr) max-content;gap:8px;align-items:center;padding:6px 0}
+#hub-axis-container-demografia [data-demo-chart=religion] .demo-bar-heading{display:contents}
+#hub-axis-container-demografia [data-demo-chart=religion] .demo-bar-heading>.demo-category{grid-column:1;grid-row:1;font-size:13px}
+#hub-axis-container-demografia [data-demo-chart=religion] .demo-bar-heading>strong{grid-column:3;grid-row:1;text-align:right}
+#hub-axis-container-demografia [data-demo-chart=religion] .demo-bar-track{grid-column:2;grid-row:1;height:10px}
+#hub-axis-container-demografia .demo-card-body>.demo-controls{display:inline-flex;gap:8px;margin:6px 12px 8px 0;vertical-align:middle}
+#hub-axis-container-demografia .demo-card-body>.demo-legend{display:inline-flex;vertical-align:middle;margin:4px 0 8px}
+@media(min-width:1001px){
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=history]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=sex]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=urban]){align-self:stretch;display:flex;flex-direction:column}
+ #hub-axis-container-demografia :is([data-demo-chart=history],[data-demo-chart=pyramid],[data-demo-chart=race],[data-demo-chart=religion],[data-demo-chart=sex],[data-demo-chart=urban]){display:flex;flex-direction:column;flex:1;min-width:0;gap:6px}
+ #hub-axis-container-demografia :is([data-demo-chart=history],[data-demo-chart=pyramid],[data-demo-chart=race],[data-demo-chart=religion]) .demo-card-footer,
+ #hub-axis-container-demografia :is([data-demo-chart=sex],[data-demo-chart=urban]) .demo-source{margin-top:auto}
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]) h4,
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]) h4{min-height:2lh}
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]) .demo-subtitle,
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]) .demo-subtitle{min-height:2lh}
+}
+
+/* Card 01 · Crescimento: par harmonico e bem distribuido */
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=history]){
+  display:flex;
+  flex-direction:column;
+  padding:18px 20px;
+}
+#hub-axis-container-demografia [data-demo-chart=history]{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:0;
+}
+#hub-axis-container-demografia [data-demo-chart=history] .demo-card-body{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+#hub-axis-container-demografia [data-demo-chart=history] .demo-summary{
+  margin:10px 0 12px;
+  line-height:1.5;
+}
+#hub-axis-container-demografia [data-demo-chart=history] .demo-card-footer{
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid var(--demo-line);
+}
+#hub-axis-container-demografia [data-demo-chart=history] .demo-source{
+  padding-top:0;
+  border-top:none;
+}
+#hub-axis-container-demografia [data-demo-chart=history] .demo-disclosures{
+  margin-top:4px;
+}
+
+/* Card 02 · Estrutura etaria: aproveitamento vertical refinado e equilibrado */
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid]){
+  display:flex;
+  flex-direction:column;
+  padding:18px 20px;
+}
+#hub-axis-container-demografia [data-demo-chart=pyramid]{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:0;
+}
+#hub-axis-container-demografia [data-demo-chart=pyramid] .demo-card-body{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+#hub-axis-container-demografia [data-demo-chart=pyramid] .demo-note{
+  margin:6px 0 8px;
+  line-height:1.45;
+}
+#hub-axis-container-demografia [data-demo-chart=pyramid] .demo-summary{
+  margin:6px 0 10px;
+  line-height:1.45;
+}
+#hub-axis-container-demografia [data-demo-chart=pyramid] .demo-card-footer{
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid var(--demo-line);
+}
+#hub-axis-container-demografia [data-demo-chart=pyramid] .demo-source{
+  padding-top:0;
+  border-top:none;
+}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=pyramid])>details{
+  margin-top:8px;
+}
+
+/* 06 · Moradia - Reformulação Editorial Refinada */
+#hub-axis-container-demografia .demo-moradia-wrap{display:flex;flex-direction:column;gap:16px;margin-top:6px}
+#hub-axis-container-demografia .demo-moradia-block{background:#fff;border:1px solid var(--demo-line);border-radius:14px;padding:16px 18px}
+#hub-axis-container-demografia .demo-moradia-head{margin-bottom:12px}
+#hub-axis-container-demografia .demo-moradia-kicker{display:inline-block;font-size:10px;font-weight:700;color:var(--demo-blue);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+#hub-axis-container-demografia .demo-moradia-heading{font-family:Sora,Inter,sans-serif;font-size:14px;font-weight:700;color:var(--demo-ink);margin:0 0 3px}
+#hub-axis-container-demografia .demo-moradia-sub{font-size:11.5px;color:var(--demo-muted);margin:0;line-height:1.4}
+
+/* Retrato 2022: KPIs Compactos */
+#hub-axis-container-demografia .demo-moradia-kpis-compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:10px 0 14px}
+#hub-axis-container-demografia .demo-mkpi-compact{background:#f8fafc;border:1px solid var(--demo-line);border-radius:10px;padding:10px 14px;display:flex;flex-direction:column;gap:2px}
+#hub-axis-container-demografia .demo-mkpi-label{font-size:11px;font-weight:600;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-mkpi-val{font-size:20px;font-weight:800;color:var(--demo-ink);font-variant-numeric:tabular-nums;line-height:1.15}
+#hub-axis-container-demografia .demo-mkpi-sub{font-size:11px;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-mkpi-compact-highlight{background:#f0f9ff;border-color:#bae6fd}
+#hub-axis-container-demografia .demo-mkpi-compact-highlight .demo-mkpi-val{color:var(--demo-blue)}
+
+/* Retrato 2022: Barra Proporcional de 100% */
+#hub-axis-container-demografia .demo-moradia-stacked-bar{display:flex;height:14px;border-radius:6px;overflow:hidden;background:#e2e8f0;margin:6px 0 12px;box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+#hub-axis-container-demografia .demo-moradia-stacked-bar>div{height:100%;transition:width .2s ease;outline:none}
+#hub-axis-container-demografia .demo-moradia-stacked-bar>div:focus-visible{outline:2px solid #0284c7;outline-offset:1px}
+
+/* Retrato 2022: Tabela de Categorias e Percentuais */
+#hub-axis-container-demografia .demo-moradia-table{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--demo-line);padding-top:8px}
+#hub-axis-container-demografia .demo-moradia-row{display:grid;grid-template-columns:10px 1fr 80px 65px;align-items:center;column-gap:14px;padding:5px 8px;font-size:12px;border-radius:6px;transition:background .15s}
+#hub-axis-container-demografia .demo-moradia-row:hover,#hub-axis-container-demografia .demo-moradia-row:focus-visible{background:#f8fafc}
+#hub-axis-container-demografia .demo-mrow-dot{width:8px;height:8px;border-radius:50%}
+#hub-axis-container-demografia .demo-mrow-dot-total{background:transparent}
+#hub-axis-container-demografia .demo-mrow-label{color:var(--demo-ink);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#hub-axis-container-demografia .demo-mrow-val{color:var(--demo-ink);font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+#hub-axis-container-demografia .demo-mrow-pct{color:var(--demo-muted);font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+#hub-axis-container-demografia .demo-mrow-total{border-top:1px dashed var(--demo-line);margin-top:4px;padding-top:7px}
+#hub-axis-container-demografia .demo-mrow-total .demo-mrow-label{font-weight:700}
+#hub-axis-container-demografia .demo-mrow-total .demo-mrow-val{font-weight:800}
+#hub-axis-container-demografia .demo-mrow-total .demo-mrow-pct{color:var(--demo-ink);font-weight:700}
+
+/* Histórico: Grid de 2 Colunas */
+#hub-axis-container-demografia .demo-moradia-history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#hub-axis-container-demografia .demo-moradia-svg-wrap{margin:6px 0 8px}
+#hub-axis-container-demografia .demo-moradia-series-pills{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 8px}
+#hub-axis-container-demografia .demo-mpill{background:#f8fafc;border:1px solid var(--demo-line);border-radius:6px;padding:4px 8px;font-size:11px;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-mpill strong{color:var(--demo-ink);font-variant-numeric:tabular-nums;margin-left:2px}
+
+/* Média de Moradores */
+#hub-axis-container-demografia .demo-moradia-highlight-box{background:#f8fafc;border:1px solid var(--demo-line);border-radius:10px;padding:10px 14px;margin:8px 0 10px}
+#hub-axis-container-demografia .demo-mhighlight-row{display:flex;align-items:baseline;gap:8px;margin:3px 0 2px}
+#hub-axis-container-demografia .demo-mhighlight-val{font-size:26px;font-weight:800;color:var(--demo-blue);font-variant-numeric:tabular-nums;line-height:1}
+#hub-axis-container-demografia .demo-mhighlight-unit{font-size:12px;font-weight:600;color:var(--demo-ink)}
+#hub-axis-container-demografia .demo-mhighlight-sub{font-size:11px;color:var(--demo-muted);margin:0}
+
+#hub-axis-container-demografia .demo-moradia-avg-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:8px 0 10px}
+#hub-axis-container-demografia .demo-mavg-item{background:#f8fafc;border:1px solid var(--demo-line);border-radius:8px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px}
+#hub-axis-container-demografia .demo-mavg-year{font-size:10px;font-weight:700;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-mavg-val{font-size:16px;font-weight:800;color:var(--demo-ink);font-variant-numeric:tabular-nums;line-height:1}
+#hub-axis-container-demografia .demo-mavg-unit{font-size:9.5px;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-mavg-item-current{background:#f0f9ff;border-color:#bae6fd}
+#hub-axis-container-demografia .demo-mavg-item-current .demo-mavg-val{color:var(--demo-blue)}
+
+#hub-axis-container-demografia .demo-moradia-footnote{font-size:10.5px;color:var(--demo-muted);line-height:1.4;margin:6px 0 0}
+
+@media(max-width:800px){
+ #hub-axis-container-demografia .demo-moradia-history-grid{grid-template-columns:minmax(0,1fr)}
+ #hub-axis-container-demografia .demo-moradia-avg-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #hub-axis-container-demografia .demo-moradia-row{grid-template-columns:10px 1fr auto auto;column-gap:8px}
+}
+
+.dark #hub-axis-container-demografia .demo-moradia-block{background:#0f172a}
+.dark #hub-axis-container-demografia :is(.demo-mkpi-compact,.demo-mpill,.demo-moradia-highlight-box,.demo-mavg-item){background:#1e293b}
+.dark #hub-axis-container-demografia .demo-moradia-row:hover,
+.dark #hub-axis-container-demografia .demo-moradia-row:focus-visible{background:#1e293b}
+.dark #hub-axis-container-demografia :is(.demo-mkpi-compact-highlight,.demo-mavg-item-current){background:#082f49;border-color:#0284c7}
+.dark #hub-axis-container-demografia .demo-moradia-stacked-bar{background:#334155}
+
+/* Temas Censitários Especiais - Grid e Cartões */
+#hub-axis-container-demografia .demo-temas-especiais{margin-top:14px}
+#hub-axis-container-demografia .demo-temas-header{margin-bottom:16px}
+#hub-axis-container-demografia .demo-temas-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+#hub-axis-container-demografia .demo-tema-card{background:#f8fafc;border:1px solid var(--demo-line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+#hub-axis-container-demografia .demo-tema-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hub-axis-container-demografia .demo-tema-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--demo-ink);text-transform:uppercase;letter-spacing:.05em}
+#hub-axis-container-demografia .demo-tema-year{font-size:10px;font-weight:600;color:var(--demo-muted);background:#fff;border:1px solid var(--demo-line);border-radius:6px;padding:2px 6px}
+#hub-axis-container-demografia .demo-tema-highlight{display:flex;flex-direction:column;gap:2px}
+#hub-axis-container-demografia .demo-tema-kpi-main{font-size:26px;font-weight:800;color:var(--demo-blue);font-variant-numeric:tabular-nums;line-height:1.1}
+#hub-axis-container-demografia .demo-tema-kpi-sub{font-size:11.5px;color:var(--demo-muted)}
+
+#hub-axis-container-demografia .demo-tema-bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:#e2e8f0;margin:2px 0}
+#hub-axis-container-demografia .demo-tema-bar>div{height:100%}
+
+#hub-axis-container-demografia .demo-tema-info-banner{background:#fff;border:1px solid var(--demo-line);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+#hub-axis-container-demografia .demo-tema-info-banner strong{font-size:12px;color:var(--demo-ink)}
+#hub-axis-container-demografia .demo-tema-info-banner span{font-size:10.5px;color:var(--demo-muted);line-height:1.35}
+
+#hub-axis-container-demografia .demo-tema-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:2px 0}
+#hub-axis-container-demografia .demo-tstat-col{background:#fff;border:1px solid var(--demo-line);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+#hub-axis-container-demografia .demo-tstat-label{font-size:10.5px;font-weight:600;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-tstat-val{font-size:15px;font-weight:800;color:var(--demo-ink);font-variant-numeric:tabular-nums}
+#hub-axis-container-demografia .demo-tstat-pct{font-size:10px;color:var(--demo-muted)}
+
+#hub-axis-container-demografia .demo-tema-pill-row{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0}
+#hub-axis-container-demografia .demo-tpill{background:#fff;border:1px solid var(--demo-line);border-radius:6px;padding:4px 8px;font-size:10.5px;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-tpill strong{color:var(--demo-ink);font-variant-numeric:tabular-nums;margin-left:2px}
+#hub-axis-container-demografia .demo-tpill-note{flex:1;text-align:center}
+
+#hub-axis-container-demografia .demo-tema-details{border-top:1px solid var(--demo-line);padding-top:6px;margin-top:auto}
+#hub-axis-container-demografia .demo-tema-details summary{font-size:11px;font-weight:600;color:var(--demo-muted);cursor:pointer;padding:4px 0}
+#hub-axis-container-demografia .demo-tema-details p{font-size:10.5px;line-height:1.45;color:var(--demo-muted);margin:6px 0 0}
+#hub-axis-container-demografia .demo-tema-details a{color:var(--demo-blue);text-decoration:underline;text-underline-offset:2px}
+
+@media(max-width:1024px){
+ #hub-axis-container-demografia .demo-temas-grid{grid-template-columns:minmax(0,1fr)}
+}
+
+.dark #hub-axis-container-demografia .demo-tema-card{background:#1e293b}
+.dark #hub-axis-container-demografia :is(.demo-tema-year,.demo-tema-info-banner,.demo-tstat-col,.demo-tpill){background:#0f172a}
+.dark #hub-axis-container-demografia .demo-tema-bar{background:#334155}
+
+/* 07 · Território - Distribuição Territorial da População */
+#hub-axis-container-demografia .demo-card-territory{padding:22px}
+#hub-axis-container-demografia .demo-card-head{margin-bottom:12px}
+#hub-axis-container-demografia .demo-territory-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:#f8fafc;border:1px solid var(--demo-line);border-radius:12px;padding:12px 14px;margin:12px 0 16px}
+#hub-axis-container-demografia .demo-territory-modes{display:flex;gap:6px;flex-wrap:wrap}
+#hub-axis-container-demografia .demo-territory-modes .demo-action{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;min-height:36px;padding:6px 12px;border-radius:8px;transition:all .15s}
+#hub-axis-container-demografia .demo-territory-modes .demo-action.active,
+#hub-axis-container-demografia .demo-territory-modes .demo-action[aria-pressed=true]{background:#0284c7;color:#fff;border-color:#0284c7;box-shadow:0 1px 3px rgba(2,132,199,.25)}
+#hub-axis-container-demografia .demo-filter-label{display:inline-flex;flex-direction:row;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--demo-ink);margin:0}
+#hub-axis-container-demografia .demo-filter-label select{font:600 12px Inter,sans-serif;color:var(--demo-ink);background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px;min-height:36px;cursor:pointer}
+#hub-axis-container-demografia .demo-metric-pills{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+#hub-axis-container-demografia .demo-metric-pills .filter-pill-mapa-metric{font-size:11.5px;padding:6px 10px;min-height:36px;border-radius:8px}
+#hub-axis-container-demografia .demo-metric-pills .filter-pill-mapa-metric.active{background:#e0f2fe;color:var(--demo-blue);border-color:var(--demo-blue);font-weight:700}
+
+#hub-axis-container-demografia .demo-card-territory .demo-map-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(330px,1fr);gap:20px;align-items:stretch}
+#hub-axis-container-demografia .demo-map-col{display:flex;flex-direction:column;gap:10px;min-width:0;height:100%;justify-content:space-between}
+#hub-axis-container-demografia .demo-card-territory #hubMapDemografiaCalor{flex:1 1 auto;min-height:540px;height:100%!important;border-radius:14px;border:1px solid var(--demo-line);box-shadow:inset 0 1px 3px rgba(0,0,0,.03);background:#f1f5f9;position:relative;z-index:0}
+#hub-axis-container-demografia .demo-map-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:11px;color:var(--demo-muted);background:#f8fafc;border:1px solid var(--demo-line);border-radius:8px;padding:8px 12px;margin:auto 0 0}
+#hub-axis-container-demografia .demo-leg-label{font-weight:700;color:var(--demo-ink);margin-right:2px}
+#hub-axis-container-demografia .demo-leg-item{display:inline-flex;align-items:center;gap:5px;font-weight:600}
+#hub-axis-container-demografia .demo-leg-item i{width:11px;height:11px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.08)}
+
+/* Painel Lateral de Exploração */
+#hub-axis-container-demografia .demo-territory-aside{display:flex;flex-direction:column;gap:10px;background:#f8fafc;border:1px solid var(--demo-line);border-radius:14px;padding:14px 16px;min-width:0}
+#hub-axis-container-demografia .demo-aside-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hub-axis-container-demografia .demo-aside-head h5{font-family:Sora,Inter,sans-serif;font-size:13.5px;font-weight:700;color:var(--demo-ink);margin:0}
+#hub-axis-container-demografia .demo-clear-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--demo-blue);background:#fff;border:1px solid var(--demo-line);border-radius:6px;padding:4px 8px;cursor:pointer;transition:all .15s}
+#hub-axis-container-demografia .demo-clear-btn:hover{background:#f0f9ff;border-color:#bae6fd}
+
+/* Cartão Hero de Seleção */
+#hub-axis-container-demografia .demo-territory-hero{background:#fff;border:1px solid var(--demo-line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 3px rgba(15,23,42,.03)}
+#hub-axis-container-demografia .demo-thero-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#hub-axis-container-demografia .demo-thero-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--demo-blue);text-transform:uppercase;letter-spacing:.04em}
+#hub-axis-container-demografia .demo-thero-year,#hub-axis-container-demografia .demo-thero-rank{font-size:10.5px;font-weight:700;color:var(--demo-ink);background:#f1f5f9;border:1px solid var(--demo-line);border-radius:6px;padding:2px 7px}
+#hub-axis-container-demografia .demo-thero-title{font-family:Sora,Inter,sans-serif;font-size:15px;font-weight:800;color:var(--demo-ink);margin:0}
+#hub-axis-container-demografia .demo-thero-main{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+#hub-axis-container-demografia .demo-thero-pop{font-size:24px;font-weight:850;color:var(--demo-blue);font-variant-numeric:tabular-nums;line-height:1}
+#hub-axis-container-demografia .demo-thero-label{font-size:11.5px;font-weight:600;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-thero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;background:#f8fafc;border:1px solid var(--demo-line);border-radius:8px;padding:7px 10px}
+#hub-axis-container-demografia .demo-tstat-item{font-size:10.5px;display:flex;flex-direction:column;gap:1px}
+#hub-axis-container-demografia .demo-tstat-item span{color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-tstat-item strong{color:var(--demo-ink);font-weight:700;font-variant-numeric:tabular-nums}
+#hub-axis-container-demografia .demo-thero-hint{font-size:11px;color:var(--demo-muted);line-height:1.4;margin:0}
+#hub-axis-container-demografia .demo-thero-subnote{font-size:10.5px;color:#b45309;background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:5px 8px;margin:2px 0 0;line-height:1.35;display:flex;align-items:baseline;gap:5px}
+
+/* Campo de Busca */
+#hub-axis-container-demografia .demo-search-wrap{position:relative}
+#hub-axis-container-demografia .demo-search-input-box{position:relative;display:flex;align-items:center}
+#hub-axis-container-demografia .demo-search-icon{position:absolute;left:10px;font-size:12px;color:var(--demo-muted);pointer-events:none}
+#hub-axis-container-demografia #demo-sector-search{width:100%;font:500 12px Inter,sans-serif;color:var(--demo-ink);background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:7px 10px 7px 30px;outline:none;transition:border-color .15s}
+#hub-axis-container-demografia #demo-sector-search:focus{border-color:#0284c7;box-shadow:0 0 0 2px rgba(2,132,199,.15)}
+
+#hub-axis-container-demografia .demo-territory-counter{font-size:11px;font-weight:600;color:var(--demo-muted);margin:0}
+
+/* Lista de Itens Territoriais */
+#hub-axis-container-demografia .demo-territory-list{display:flex;flex-direction:column;gap:5px;max-height:300px;overflow-y:auto;padding-right:2px}
+#hub-axis-container-demografia .demo-territory-item-btn{background:#fff;border:1px solid var(--demo-line);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:5px;text-align:left;cursor:pointer;transition:all .15s}
+#hub-axis-container-demografia .demo-territory-item-btn:hover{background:#f0f9ff;border-color:#bae6fd}
+#hub-axis-container-demografia .demo-territory-item-btn[aria-pressed=true]{background:#e0f2fe;border-color:#0284c7;box-shadow:0 0 0 1px #0284c7}
+#hub-axis-container-demografia .demo-titem-top{display:flex;align-items:center;gap:6px;font-size:12px}
+#hub-axis-container-demografia .demo-titem-rank{font-size:10px;font-weight:700;color:var(--demo-muted);background:#f1f5f9;border-radius:4px;padding:1px 5px;font-variant-numeric:tabular-nums}
+#hub-axis-container-demografia .demo-titem-name{font-weight:700;color:var(--demo-ink);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#hub-axis-container-demografia .demo-titem-regiao{font-size:10.5px;color:var(--demo-muted);font-weight:500}
+#hub-axis-container-demografia .demo-titem-pop{font-size:12px;font-weight:800;color:var(--demo-blue);font-variant-numeric:tabular-nums;white-space:nowrap}
+#hub-axis-container-demografia .demo-titem-bar{display:flex;align-items:center;gap:8px}
+#hub-axis-container-demografia .demo-titem-track{flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden}
+#hub-axis-container-demografia .demo-titem-track i{display:block;height:100%;background:#0284c7;border-radius:3px}
+#hub-axis-container-demografia .demo-titem-pct{font-size:10.5px;font-weight:600;color:var(--demo-muted);font-variant-numeric:tabular-nums;min-width:36px;text-align:right}
+#hub-axis-container-demografia .demo-titem-sub{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--demo-muted)}
+
+/* Badges de Categorias Territoriais */
+#hub-axis-container-demografia .demo-tbadge-geo{display:inline-flex;align-items:center;gap:3px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:4px;padding:1px 5px;font-size:9.5px;font-weight:600}
+#hub-axis-container-demografia .demo-tbadge-tab{display:inline-flex;align-items:center;gap:3px;background:#fffbeb;color:#92400e;border:1px solid #fde68a;border-radius:4px;padding:1px 5px;font-size:9.5px;font-weight:600}
+#hub-axis-container-demografia .demo-tbadge-div{display:inline-flex;align-items:center;gap:3px;background:#fef2f2;color:#991b1b;border:1px solid #fecaca;border-radius:4px;padding:1px 5px;font-size:9.5px;font-weight:600}
+
+/* Conteúdo da Ficha Técnica */
+#hub-axis-container-demografia .demo-ficha-content{display:flex;flex-direction:column;gap:8px;padding-top:6px}
+#hub-axis-container-demografia .demo-ficha-content p{margin:0;font-size:11.5px;line-height:1.5;color:var(--demo-muted)}
+#hub-axis-container-demografia .demo-ficha-content strong{color:var(--demo-ink)}
+
+/* Dark Mode para Território */
+.dark #hub-axis-container-demografia :is(.demo-territory-controls,.demo-map-legend,.demo-territory-aside,.demo-tstat-item){background:#1e293b}
+.dark #hub-axis-container-demografia :is(.demo-territory-hero,.demo-territory-item-btn,.demo-clear-btn,#demo-sector-search,#demo-place-search,.demo-place-option){background:#0f172a;border-color:#334155;color:#f8fafc}
+.dark #hub-axis-container-demografia :is(.demo-territory-item-btn,.demo-place-option):hover{background:#1e293b}
+.dark #hub-axis-container-demografia .demo-territory-item-btn[aria-pressed=true]{background:#082f49;border-color:#0284c7}
+.dark #hub-axis-container-demografia #demo-sector-search{color:#f8fafc}
+.dark #hub-axis-container-demografia .demo-thero-year,.dark #hub-axis-container-demografia .demo-thero-rank,.dark #hub-axis-container-demografia .demo-titem-rank{background:#1e293b;border-color:#334155;color:#e2e8f0}
+.dark #hub-axis-container-demografia .demo-card-territory #hubMapDemografiaCalor{background:#0f172a}
+
+/* Responsividade */
+@media(max-width:1024px){
+ #hub-axis-container-demografia .demo-card-territory .demo-map-layout{grid-template-columns:minmax(0,1fr)}
+ #hub-axis-container-demografia .demo-card-territory #hubMapDemografiaCalor{height:420px!important}
+ #hub-axis-container-demografia .demo-metric-pills{margin-left:0}
+}
+@media(max-width:640px){
+ #hub-axis-container-demografia .demo-card{padding:14px 12px;border-radius:14px}
+ #hub-axis-container-demografia .demo-card-header{flex-direction:column;align-items:stretch;gap:8px;margin-bottom:12px}
+ #hub-axis-container-demografia .demo-header-control select{width:100%;min-height:40px;font-size:13px}
+ #hub-axis-container-demografia .demo-card-footer details summary{min-height:42px;display:flex;align-items:center;cursor:pointer}
+ #hub-axis-container-demografia .demo-card-footer .demo-action{min-height:38px}
+ #hub-axis-container-demografia .demo-territory-controls{flex-direction:column;align-items:stretch;gap:10px}
+ #hub-axis-container-demografia .demo-territory-modes{width:100%;display:flex;gap:6px}
+ #hub-axis-container-demografia .demo-territory-modes .demo-action{flex:1;min-height:44px;font-size:11px;padding:6px 4px;text-align:center;justify-content:center;line-height:1.25}
+ #hub-axis-container-demografia .demo-filter-label{width:100%}
+ #hub-axis-container-demografia .demo-filter-label select{width:100%;min-height:42px;font-size:13px}
+ #hub-axis-container-demografia .demo-metric-pills{width:100%;display:flex;gap:6px}
+ #hub-axis-container-demografia .demo-metric-pills .filter-pill-mapa-metric{flex:1;min-height:38px;justify-content:center;font-size:11.5px}
+ #hub-axis-container-demografia .demo-card-territory #hubMapDemografiaCalor{height:320px!important;touch-action:pan-x pan-y}
+ #hub-axis-container-demografia .demo-territory-aside{padding:12px 10px}
+ #hub-axis-container-demografia .demo-territory-list{max-height:250px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+ #hub-axis-container-demografia .demo-territory-item-btn{min-height:46px;padding:9px 10px}
+ #hub-axis-container-demografia #demo-place-search{min-height:42px;font-size:13px}
+}
+
+
+
+/* Two single-Census cards: perfectly equalized editorial pair on desktop, stacked on mobile. */
+@media(min-width:1001px){
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]),
+ #hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]){grid-column:auto;grid-row:auto;align-self:stretch;display:flex;flex-direction:column;min-height:0}
+ #hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]){display:flex;flex-direction:column;flex:1;min-height:0;gap:0}
+ #hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-card-body{display:flex;flex-direction:column;flex:1;min-height:0}
+ #hub-axis-container-demografia [data-demo-chart=race] .demo-census-bars{display:flex;flex-direction:column;justify-content:space-around;flex:1;min-height:280px;padding:4px 0}
+ #hub-axis-container-demografia [data-demo-chart=race] .demo-census-bars .demo-bar-row{padding:8px 0}
+ #hub-axis-container-demografia [data-demo-chart=religion] .demo-census-bars{display:flex;flex-direction:column;flex:1;padding:4px 0}
+ #hub-axis-container-demografia [data-demo-chart=religion] .demo-census-bars .demo-bar-row{padding:3px 0}
+ #hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-summary{margin-top:auto;padding-top:10px}
+ #hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-card-footer{margin-top:0;padding-top:10px}
+}
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]) :is(h4,.demo-subtitle),
+#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]) :is(h4,.demo-subtitle){min-height:0}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars{max-height:none;overflow:visible}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars .demo-bar-row{display:block}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars .demo-bar-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars .demo-category{font-size:13px;white-space:normal;text-overflow:clip;overflow:visible;line-height:1.45;min-width:0}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars strong{font-size:14px;line-height:1.4;text-align:right;flex-shrink:0}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars strong small{display:block;font-size:12px;font-weight:400;line-height:1.4}
+#hub-axis-container-demografia :is([data-demo-chart=race],[data-demo-chart=religion]) .demo-census-bars .demo-bar-track{width:100%;height:6px}
+@media(max-width:1000px){#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=race]),#hub-axis-container-demografia .demo-grid>article:has([data-demo-chart=religion]){grid-column:1/-1}}
+
+/* Moradia: one distribution card beside two stacked complementary cards. */
+@media(min-width:1001px){
+ #hub-axis-container-demografia .demo-moradia-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+ #hub-axis-container-demografia .demo-moradia-wrap>.demo-moradia-block{display:flex;flex-direction:column;min-width:0}
+ #hub-axis-container-demografia .demo-moradia-wrap>.demo-moradia-block .demo-moradia-table{flex:1;justify-content:space-between}
+ #hub-axis-container-demografia .demo-moradia-history-grid{grid-template-columns:minmax(0,1fr);align-content:start;min-width:0}
+}
+@media(max-width:1000px){
+ #hub-axis-container-demografia .demo-moradia-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+ #hub-axis-container-demografia .demo-moradia-history-grid{grid-template-columns:minmax(0,1fr)}
+}
+
+/* IBGE map only: native identifiers and accessible unit details. */
+.demo-card-territory[data-ibge-bound] .demo-ibge-code{white-space:normal;overflow-wrap:anywhere;text-overflow:clip}
+.demo-card-territory[data-ibge-bound] .demo-tstat-item{font-size:12px}
+.demo-card-territory[data-ibge-bound] .demo-ibge-details table{width:100%;font-size:12px;border-collapse:collapse}
+.demo-card-territory[data-ibge-bound] .demo-ibge-details th,.demo-card-territory[data-ibge-bound] .demo-ibge-details td{padding:5px;text-align:left}
+.demo-card-territory[data-ibge-bound] #demo-ibge-search{box-sizing:border-box;width:100%;min-width:0;padding:10px;border:1px solid #cbd5e1;border-radius:8px;background:transparent;color:inherit}
+.demo-card-territory[data-ibge-bound] .demo-search-wrap label{display:block;font-size:12px;margin-bottom:6px}
+.demo-card-territory[data-ibge-bound] .demo-map-legend{flex-wrap:wrap;gap:8px}
+
+.demo-card-territory #demo-place-search{width:100%;box-sizing:border-box;padding:9px 12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:inherit;min-width:0;font-size:12.5px;font-family:inherit;transition:border-color .15s, box-shadow .15s}
+.demo-card-territory #demo-place-search:focus{outline:none;border-color:#0284c7;box-shadow:0 0 0 3px rgba(2,132,199,.15)}
+.demo-card-territory .demo-place-option{display:flex;flex-direction:column;align-items:flex-start;width:100%;margin-top:5px;text-align:left;white-space:normal;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px;cursor:pointer;transition:all .15s ease}
+.demo-card-territory .demo-place-option:hover{background:#f0f9ff;border-color:#0284c7}
+.demo-card-territory .demo-place-option strong{font-size:12.5px;color:var(--demo-ink);display:flex;align-items:center;gap:6px}
+.demo-card-territory .demo-place-option span{font-size:11px;line-height:1.4;color:var(--demo-muted);margin-top:2px}
+.demo-card-territory #demo-place-result{font-size:12px;line-height:1.5}
+.demo-card-territory #demo-place-suggestions{max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;margin-top:6px}
+.demo-card-territory #demo-place-result:not(:empty){border-left:3px solid #e87918;padding:10px;margin:10px 0}

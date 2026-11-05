@@ -1,0 +1,1 @@
+window.RADAR_PILOTO_RELEASE={"dataset_version":"sha256:7e9547065b7f4f0a284f654c8756d21c1c3433226947d5fcf1d8b88e42f17046","manifest_sha256":"114f2868df44e34b6f8b8b3776c906d94c774a2d8e8a38943584e664e6c05b4d","manifest_url":"data/radar_hub/piloto_dataviz/manifest.json"};

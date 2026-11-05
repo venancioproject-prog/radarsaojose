@@ -1,0 +1,1455 @@
+/* ==========================================================================
+   CAPÍTULO 02 — VOZES DA CIDADE (KEYNOTE & GLOBO GENTE PRESENTATION SYSTEM)
+   Unificado entre Desktop, Mobile (<= 760px) e Apresentação Tela Cheia
+   Escopo: #rep-tela-049 até #rep-tela-069-cont-2 (.report-qualitative)
+   ========================================================================== */
+
+#executive-report-view#executive-report-view > article.report-qualitative {
+  --q-ink: #10263e;
+  --q-ink-strong: #06162a;
+  --q-copy: #334155;
+  --q-muted: #475569;
+  --q-subtle: #64748b;
+  --q-blue: #0066ff;
+  --q-blue-soft: #f0f6ff;
+  --q-blue-border: #bfdbfe;
+  --q-surface: #ffffff;
+  --q-tint: #f8fafc;
+  --q-rule: #dce3ea;
+  --q-rule-strong: #cbd5e1;
+  container-name: qualitative;
+  container-type: inline-size;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  color: var(--q-ink);
+  background: var(--q-surface);
+  border: 1px solid #e8ebf0;
+  border-radius: 18px;
+  box-shadow: none;
+  padding: clamp(24px, 3.5vw, 52px);
+  min-width: 0;
+}
+
+html.dark #executive-report-view#executive-report-view > article.report-qualitative {
+  --q-ink: #f1f5f9;
+  --q-ink-strong: #ffffff;
+  --q-copy: #e2e8f0;
+  --q-muted: #cbd5e1;
+  --q-subtle: #94a3b8;
+  --q-blue: #60a5fa;
+  --q-blue-soft: rgba(56, 189, 248, 0.12);
+  --q-blue-border: rgba(96, 165, 250, 0.35);
+  --q-surface: #0e172a;
+  --q-tint: #131f36;
+  --q-rule: #26354d;
+  --q-rule-strong: #334155;
+  border-color: #1e293b;
+}
+
+/* --------------------------------------------------------------------------
+   0. PALETA VISUAL DOS 9 TEMAS (1 COR DE DESTAQUE POR EIXO)
+   Propaga automaticamente para cards da Matriz (#rep-tela-051),
+   telas Narrativas e telas de Vozes (Parte 1 e Parte 2) via [data-q-theme]
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="01"],
+#executive-report-view#executive-report-view [data-q-theme="01"] {
+  --q-blue: #0066ff;
+  --q-blue-soft: #f0f6ff;
+  --q-blue-border: #bfdbfe;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="02"],
+#executive-report-view#executive-report-view [data-q-theme="02"] {
+  --q-blue: #e65100;
+  --q-blue-soft: #fff5ed;
+  --q-blue-border: #fed7aa;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="03"],
+#executive-report-view#executive-report-view [data-q-theme="03"] {
+  --q-blue: #e11d48;
+  --q-blue-soft: #fff1f2;
+  --q-blue-border: #fecdd3;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="04"],
+#executive-report-view#executive-report-view [data-q-theme="04"] {
+  --q-blue: #059669;
+  --q-blue-soft: #ecfdf5;
+  --q-blue-border: #a7f3d0;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="05"],
+#executive-report-view#executive-report-view [data-q-theme="05"] {
+  --q-blue: #7c3aed;
+  --q-blue-soft: #f5f3ff;
+  --q-blue-border: #ddd6fe;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="06"],
+#executive-report-view#executive-report-view [data-q-theme="06"] {
+  --q-blue: #b45309;
+  --q-blue-soft: #fffbeb;
+  --q-blue-border: #fde68a;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="07"],
+#executive-report-view#executive-report-view [data-q-theme="07"] {
+  --q-blue: #0284c7;
+  --q-blue-soft: #f0f9ff;
+  --q-blue-border: #bae6fd;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="08"],
+#executive-report-view#executive-report-view [data-q-theme="08"] {
+  --q-blue: #0d9488;
+  --q-blue-soft: #f0fdfa;
+  --q-blue-border: #99f6e4;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme="09"],
+#executive-report-view#executive-report-view [data-q-theme="09"] {
+  --q-blue: #c026d3;
+  --q-blue-soft: #fdf4ff;
+  --q-blue-border: #f5d0fe;
+}
+
+#executive-report-view#executive-report-view .q-accent-strong {
+  color: var(--q-blue);
+}
+
+/* Assinatura visual de cada bloco temático (mesmo padrão de report-movement-connections.css):
+   - Barra superior de 6px na cor do tema (::after)
+   - Degradê suave no topo da página/slide (linear-gradient 180deg da cor suave até branco)
+   - Tag/pílula preenchida na cor do tema (.q-eyebrow) */
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme] {
+  position: relative;
+  background: linear-gradient(180deg, var(--q-blue-soft), var(--q-surface) 180px);
+}
+
+body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative[data-q-theme] {
+  background: linear-gradient(180deg, var(--q-blue-soft), var(--q-surface) 170px);
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme]::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: var(--q-blue);
+  pointer-events: none;
+}
+
+#executive-report-view#executive-report-view > article.report-qualitative[data-q-theme] .q-eyebrow {
+  display: inline-block;
+  width: fit-content;
+  padding: 6px 10px;
+  color: #ffffff;
+  background: var(--q-blue);
+  border-radius: 5px;
+  letter-spacing: 0.1em;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   1. META HEADER, EYEBROWS, HEADINGS & SOURCE FOOTER (KEYNOTE RHYTHM)
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > .report-qualitative .report-page-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--q-rule);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-page-meta > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-page-meta span {
+  font-family: Inter, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  color: var(--q-subtle) !important;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-continuity-note {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--q-blue-soft);
+  color: var(--q-blue) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-eyebrow {
+  display: block;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--q-blue);
+  line-height: 1.4;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-page-heading h2 {
+  font-family: var(--font-display, 'Sora', Inter, sans-serif) !important;
+  font-size: clamp(28px, 2.8cqw, 44px);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--q-ink-strong);
+  margin: 8px 0 0;
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative :is(.report-content-grid, .report-quote-grid, .q-open-grid, .q-voices-stage) > * {
+  min-width: 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative :is(p, h1, h2, h3, blockquote, span) {
+  overflow-wrap: break-word;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-page-source {
+  display: flex;
+  gap: 12px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 1.45;
+  padding-top: 12px;
+  border-top: 1px solid var(--q-rule);
+  color: var(--q-subtle);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-page-source span {
+  white-space: normal;
+  overflow: visible;
+  font-size: 12px;
+  color: var(--q-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   2. PORTRAITS CIRCULARES DOS 10 ENTREVISTADOS (KEYNOTE AVATARS)
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view .report-portrait {
+  --portrait-x: 66.333%;
+  --portrait-y: 69.333%;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0;
+  vertical-align: middle;
+  box-shadow: 0 0 0 2px var(--q-surface), 0 0 0 3px var(--q-rule-strong);
+  background: var(--q-tint);
+}
+
+#executive-report-view#executive-report-view .report-portrait > img {
+  position: absolute;
+  width: 138% !important;
+  height: 138% !important;
+  max-width: none;
+  left: calc(50% - var(--portrait-x));
+  top: calc(50% - var(--portrait-y));
+  object-fit: fill;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view .report-portrait[data-portrait="lucas"] { --portrait-x: 70.667%; }
+#executive-report-view#executive-report-view .report-portrait[data-portrait="ricardo"] { --portrait-x: 72.667%; }
+#executive-report-view#executive-report-view .report-portrait[data-portrait="felipe"] { --portrait-x: 74.667%; }
+#executive-report-view#executive-report-view .report-portrait[data-portrait="rosangela"],
+#executive-report-view#executive-report-view .report-portrait[data-portrait="roberto"] { --portrait-y: 59.333%; }
+#executive-report-view#executive-report-view .report-portrait[data-portrait="isis"] { --portrait-x: 70.667%; --portrait-y: 59.333%; }
+#executive-report-view#executive-report-view .report-portrait[data-portrait="miriam"] { --portrait-x: 72.667%; --portrait-y: 59.333%; }
+#executive-report-view#executive-report-view .report-portrait[data-portrait="carla"] { --portrait-x: 74.667%; --portrait-y: 59.333%; }
+
+/* --------------------------------------------------------------------------
+   3. TELA 44 (#rep-tela-049) — CAPA DO CAPÍTULO 02
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide {
+  background: #050c1a !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  min-height: 540px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .report-page-meta {
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .report-page-meta span {
+  color: #e2e8f0 !important;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .report-page-source {
+  border-top-color: rgba(255, 255, 255, 0.15);
+  color: rgba(226, 232, 240, 0.75);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .report-page-source span {
+  color: rgba(226, 232, 240, 0.75);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-grid {
+  align-items: center;
+  gap: clamp(28px, 4cqw, 56px);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-lead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-kicker {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(0, 102, 255, 0.32);
+  border: 1px solid rgba(96, 165, 250, 0.5);
+  color: #93c5fd !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide h1 {
+  font-size: clamp(34px, 3.8cqw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: #ffffff !important;
+  max-width: 20ch;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-lead > p {
+  font-size: clamp(16px, 1.3cqw, 20px);
+  line-height: 1.55;
+  color: rgba(241, 245, 249, 0.94) !important;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: clamp(24px, 2.8cqw, 36px) !important;
+  border-radius: 16px !important;
+  background: rgba(8, 17, 34, 0.78) !important;
+  backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-left: 4px solid #38bdf8 !important;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-panel p {
+  font-size: clamp(15px, 1.15cqw, 17.5px);
+  line-height: 1.58;
+  color: rgba(241, 245, 249, 0.92) !important;
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-panel .q-cover-keyline {
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-weight: 700;
+  font-size: clamp(17px, 1.3cqw, 21px);
+  color: #ffffff !important;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-panel .q-cover-note {
+  font-size: 12px;
+  color: rgba(148, 163, 184, 0.95) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. TELA 45 (#rep-tela-050) — GALERIA DOS 10 ENTREVISTADOS (KEYNOTE 5 × 2)
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-gallery-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+  gap: clamp(24px, 4cqw, 56px);
+  align-items: end;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--q-rule);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-gallery-footer-note {
+  margin: 0;
+  padding: 0 0 0 18px;
+  border-left: 3px solid var(--q-blue);
+  color: var(--q-muted);
+  font-size: clamp(14px, 1.05cqw, 16.5px);
+  line-height: 1.5;
+  font-weight: 450;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: clamp(20px, 2.2cqw, 36px);
+  row-gap: clamp(20px, 2.2cqw, 32px);
+  align-items: start;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0 0;
+  border: 0;
+  border-top: 2px solid var(--q-ink-strong);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .report-portrait {
+  width: 56px;
+  height: 56px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-card h3 {
+  font-family: var(--font-display, 'Sora', Inter, sans-serif) !important;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--q-ink-strong);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-head p {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--q-blue);
+  margin: 3px 0 0;
+  font-weight: 600;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-bio {
+  font-size: 14.5px;
+  line-height: 1.52;
+  color: var(--q-muted);
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. TELA 46 (#rep-tela-051) — MATRIZ DOS 9 TEMAS (3 × 3 GLOBO GENTE)
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > #rep-tela-051 .q-themes-intro {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--q-muted);
+  margin-top: 8px;
+  max-width: 78ch;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-themes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme {
+  padding: 18px 22px;
+  border: 1px solid var(--q-rule);
+  border-left: 4px solid var(--q-blue);
+  border-radius: 14px;
+  background: var(--q-tint);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme:hover,
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme:focus-visible {
+  background: var(--q-surface);
+  border-color: var(--q-blue);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme-number {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--q-blue-soft);
+  border: 1px solid var(--q-blue-border);
+  color: var(--q-blue);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme-icon {
+  color: var(--q-blue);
+  font-size: 15px;
+  opacity: 0.92;
+  flex-shrink: 0;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--q-ink-strong);
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme-insight {
+  font-size: 14px;
+  line-height: 1.48;
+  color: var(--q-muted);
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme-evidence {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--q-rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme-evidence strong {
+  color: var(--q-blue);
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 750;
+  font-family: var(--font-display, 'Sora', sans-serif);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme:nth-child(6) .q-theme-evidence strong,
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme:nth-child(9) .q-theme-evidence strong {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-theme-evidence span {
+  font-size: 12.5px;
+  line-height: 1.38;
+  color: var(--q-subtle);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-themes-source {
+  display: block;
+  position: static;
+  margin: 0;
+  border-top: 1px solid var(--q-rule);
+  padding: 12px 0 0;
+  color: var(--q-subtle);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-source-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--q-ink);
+  margin-bottom: 6px;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-source-questions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-source-questions li {
+  font-size: 11px;
+  line-height: 1.38;
+  color: var(--q-muted);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-source-questions b {
+  font-weight: 700;
+  color: var(--q-ink);
+}
+
+#executive-report-view#executive-report-view > #rep-tela-051 .q-source-note {
+  font-size: 10.5px;
+  line-height: 1.35;
+  margin: 6px 0 0;
+  color: var(--q-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   6. TELAS NARRATIVAS (#rep-tela-052, 054, 056, 058, 060, 062, 064, 066, 068)
+   Editorial Keynote 2-Column Composition (Visual/Context Left + Prose Right)
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1.32fr);
+  gap: clamp(28px, 3.6cqw, 56px);
+  align-items: start;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-grid > div {
+  grid-column: auto;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-photo {
+  margin: 0;
+  height: 190px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--q-tint);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-context-card {
+  padding: 16px 20px;
+  border-left: 3px solid var(--q-blue);
+  background: var(--q-blue-soft);
+  border-radius: 0 12px 12px 0;
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-context-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--q-blue);
+  margin-bottom: 6px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-context-copy p {
+  font-size: 15px;
+  line-height: 1.52;
+  color: var(--q-ink-strong);
+  font-weight: 500;
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-health-stat-box {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--q-blue-border);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--q-ink);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-health-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--q-blue);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+/* 3 Eixos / Pilares Observados — Hairline Editorial List with Theme Icon */
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillars-stack {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--q-rule);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-chip {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--q-rule);
+  background: transparent;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--q-blue-soft);
+  border: 1px solid var(--q-blue-border);
+  color: var(--q-blue);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-idx {
+  font-family: var(--font-display, 'Sora', sans-serif);
+  color: var(--q-blue);
+  font-size: 12.5px;
+  font-weight: 800;
+  margin-right: 4px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-text strong {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--q-ink-strong);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-text span {
+  font-size: 13.5px;
+  line-height: 1.42;
+  color: var(--q-muted);
+}
+
+/* Coluna Principal de Leitura Analítica — Clean Editorial Typography */
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--q-copy);
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p:first-child {
+  font-size: 20px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--q-ink-strong);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p.q-observed-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--q-blue);
+  padding-top: 6px;
+  margin-bottom: -8px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p:last-child {
+  padding-top: 16px;
+  border-top: 2px solid var(--q-blue);
+  font-size: 19px;
+  line-height: 1.42;
+  font-weight: 650;
+  color: var(--q-ink-strong);
+}
+
+/* --------------------------------------------------------------------------
+   7. TELAS DE VOZES — PARTE 1 (ENTREVISTAS EM PROFUNDIDADE) & PARTE 2 (ABERTAS)
+   True Keynote / Globo Gente Editorial Presentation
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Header unificado: Título à esquerda + Lead de contexto à direita (sem caixa cinza no topo!) */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  gap: clamp(24px, 3.5cqw, 48px);
+  align-items: end;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--q-rule);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-header h2 {
+  font-size: clamp(22px, 2.35cqw, 33px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  max-width: 34ch;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-lead {
+  padding-left: 18px;
+  border-left: 3px solid var(--q-blue);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-lead p {
+  margin: 0;
+  font-size: clamp(14.5px, 1.1cqw, 17px);
+  line-height: 1.5;
+  color: var(--q-muted);
+  font-weight: 450;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-lead p.q-health-meta-line {
+  font-size: 13px;
+  color: var(--q-subtle);
+}
+
+/* Palco Principal Parte 1 (Entrevistas em Profundidade + Síntese Editorial) */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Caso especial: 1 Entrevista em Profundidade (#rep-tela-053 Identidade) -> Lado a lado tipo Keynote Spotlight! */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage[data-persona-count="1"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(32px, 4.5cqw, 64px);
+  align-items: center;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(28px, 3.2cqw, 48px);
+  row-gap: clamp(22px, 2.4cqw, 34px);
+  align-items: start;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid > .report-quote:first-child {
+  grid-column: auto;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="1"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="5"],
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="6"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Card de Entrevista em Profundidade — Estilo Editorial Keynote (Sem caixas pesadas) */
+#executive-report-view#executive-report-view > .report-qualitative .report-quote.q-quote-persona {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 18px 0 0;
+  border: 0;
+  border-top: 2px solid var(--q-blue);
+  border-radius: 0;
+  background: transparent;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="1"] .report-quote.q-quote-persona {
+  padding: 28px 32px;
+  background: var(--q-blue-soft);
+  border-top: 0;
+  border-left: 4px solid var(--q-blue);
+  border-radius: 0 18px 18px 0;
+  gap: 20px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .q-person-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .report-portrait {
+  width: 54px;
+  height: 54px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="1"] .q-quote-persona .report-portrait {
+  width: 68px;
+  height: 68px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .q-person-name {
+  font-family: var(--font-display, 'Sora', Inter, sans-serif) !important;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--q-ink-strong);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="1"] .q-quote-persona .q-person-name {
+  font-size: 21px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .q-person-role {
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--q-blue);
+  font-weight: 600;
+  margin: 3px 0 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-persona blockquote.q-persona-blockquote {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.52;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--q-ink);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="1"] .q-quote-persona blockquote.q-persona-blockquote {
+  font-size: clamp(20px, 1.75cqw, 26px);
+  line-height: 1.45;
+  font-weight: 550;
+  color: var(--q-ink-strong);
+}
+
+/* Síntese Editorial de Leitura (Parte 1) — Estilo Bloco Temático (como .movement-history) */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading {
+  max-width: none;
+  columns: auto;
+  padding: 16px 22px;
+  border-top: 3px solid var(--q-blue);
+  background: var(--q-blue-soft);
+  border-radius: 0 0 12px 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 40px;
+  align-items: start;
+}
+
+/* Quando há apenas 1 parágrafo na leitura de síntese, ocupa a largura com destaque */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading > p:only-child {
+  grid-column: 1 / -1;
+  max-width: 95ch;
+}
+
+/* No Spotlight de 1 persona (#rep-tela-053), a síntese fica na coluna da direita */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage[data-persona-count="1"] .q-voices-reading {
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading p {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--q-muted);
+  margin: 0;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading p:last-child {
+  font-weight: 600;
+  color: var(--q-ink-strong);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage[data-persona-count="1"] .q-voices-reading p {
+  font-size: 17.5px;
+  line-height: 1.58;
+}
+
+/* --------------------------------------------------------------------------
+   8. TELAS DE VOZES — PARTE 2 (VOZES ABERTAS DA PESQUISA QUANTITATIVA)
+   Clean Keynote Editorial Grid with Respondent Demographic Profile
+   -------------------------------------------------------------------------- */
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(24px, 2.8cqw, 40px);
+  row-gap: clamp(20px, 2.2cqw, 32px);
+  align-items: stretch;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="7"],
+#executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="8"] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .report-quote.q-quote-open {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px 22px;
+  background: var(--q-blue-soft);
+  border: 1px solid var(--q-blue-border);
+  border-top: 3px solid var(--q-blue);
+  border-radius: 0 0 14px 14px;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-open .q-open-tag {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--q-blue-soft);
+  color: var(--q-blue);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-open blockquote.q-open-blockquote {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--q-ink-strong);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-open .q-open-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--q-rule);
+}
+
+#executive-report-view#executive-report-view > .report-qualitative .q-quote-open .q-open-profile {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  color: var(--q-blue);
+}
+
+/* --------------------------------------------------------------------------
+   9. MODO APRESENTAÇÃO TELA CHEIA (body.presentation-mode) — KEYNOTE 16:9
+   Zero Scrollbars on Desktop Viewports • True Keynote Scale & Proportion
+   -------------------------------------------------------------------------- */
+@media (min-width: 761px) {
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative.active-slide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    height: calc(100dvh - 60px);
+    min-height: 0;
+    padding: clamp(18px, 2.4vh, 32px) clamp(32px, 4vw, 72px);
+    gap: clamp(12px, 1.8vh, 22px);
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative > * {
+    margin: 0;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative .report-page-meta {
+    padding-bottom: 8px;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative .report-page-body {
+    min-height: 0;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(14px, 2vh, 24px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative .report-page-heading h2 {
+    font-size: clamp(26px, 3.6vh, 42px);
+    margin-top: 4px;
+    max-width: none;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative.q-voices-slide .q-voices-header h2 {
+    font-size: clamp(22px, 3.1vh, 34px);
+    line-height: 1.14;
+    max-width: 36ch;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-qualitative .report-page-source {
+    padding-top: 8px;
+    margin: 0;
+  }
+
+  /* 9.1 Capa (#rep-tela-049) em Tela Cheia */
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide.active-slide {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-grid {
+    align-self: center;
+    margin-block: auto;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide h1 {
+    font-size: clamp(36px, 5.2vh, 58px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-lead > p {
+    font-size: clamp(16px, 2.1vh, 21px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide .q-cover-panel p {
+    font-size: clamp(14px, 1.85vh, 18px);
+  }
+
+  /* 9.2 Galeria dos 10 Entrevistados (#rep-tela-050) em Tela Cheia */
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-gallery-body {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(14px, 2vh, 24px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-gallery-heading {
+    padding-bottom: 12px;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-gallery {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    row-gap: clamp(14px, 2vh, 26px);
+    column-gap: clamp(18px, 2vw, 32px);
+    align-items: stretch;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-card {
+    padding-top: clamp(10px, 1.4vh, 16px);
+    gap: clamp(8px, 1.2vh, 14px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .report-portrait {
+    width: clamp(46px, 5.6vh, 60px);
+    height: clamp(46px, 5.6vh, 60px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-card h3 {
+    font-size: clamp(15px, 2vh, 19px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-head p {
+    font-size: clamp(11.5px, 1.45vh, 14px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-bio {
+    font-size: clamp(12.5px, 1.65vh, 15.5px);
+    line-height: 1.45;
+  }
+
+  /* 9.3 Telas Narrativas em Tela Cheia */
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-body {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(14px, 2vh, 22px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-grid {
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+    gap: clamp(24px, 3.2vw, 48px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-sidebar {
+    justify-content: space-between;
+    gap: clamp(10px, 1.4vh, 16px);
+    min-height: 0;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-photo {
+    flex: 1 1 auto;
+    min-height: 96px;
+    max-height: 22vh;
+    height: auto;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-context-card {
+    padding: clamp(10px, 1.4vh, 16px) clamp(14px, 1.6vw, 20px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-context-copy p {
+    font-size: clamp(13px, 1.65vh, 16px);
+    line-height: 1.42;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-chip {
+    padding: clamp(7px, 1vh, 11px) 0;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-text strong {
+    font-size: clamp(13px, 1.65vh, 15.5px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-pillar-text span {
+    font-size: clamp(11.5px, 1.45vh, 13.5px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose {
+    gap: clamp(10px, 1.45vh, 16px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p {
+    font-size: clamp(14px, 1.85vh, 18.5px);
+    line-height: 1.48;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p:first-child {
+    font-size: clamp(16px, 2.15vh, 22px);
+    line-height: 1.38;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-prose p:last-child {
+    padding-top: clamp(10px, 1.4vh, 16px);
+    font-size: clamp(15px, 2vh, 20px);
+  }
+
+  /* 9.4 Telas de Vozes Parte 1 (Entrevistas em Profundidade) em Tela Cheia */
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-body {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(14px, 2vh, 24px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-header {
+    padding-bottom: clamp(10px, 1.4vh, 16px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-lead p {
+    font-size: clamp(13.5px, 1.75vh, 17px);
+    line-height: 1.42;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage {
+    min-height: 0;
+    height: 100%;
+    justify-content: space-between;
+    gap: clamp(14px, 2vh, 24px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    align-content: center;
+    column-gap: clamp(24px, 3vw, 48px);
+    row-gap: clamp(14px, 2vh, 26px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .report-quote.q-quote-persona {
+    padding-top: clamp(10px, 1.4vh, 16px);
+    gap: clamp(8px, 1.2vh, 14px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .report-portrait {
+    width: clamp(44px, 5.4vh, 56px);
+    height: clamp(44px, 5.4vh, 56px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .q-person-name {
+    font-size: clamp(15px, 1.95vh, 18.5px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-quote-persona .q-person-role {
+    font-size: clamp(12px, 1.5vh, 14px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-quote-persona blockquote.q-persona-blockquote {
+    font-size: clamp(14.5px, 1.95vh, 19px);
+    line-height: 1.45;
+  }
+
+  /* Quando são 5 ou 6 entrevistas na Parte 1 (#rep-tela-055, #rep-tela-061), calibragem 3x2 limpa */
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="5"] blockquote.q-persona-blockquote,
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="6"] blockquote.q-persona-blockquote {
+    font-size: clamp(13.5px, 1.75vh, 16.5px);
+    line-height: 1.4;
+  }
+
+  /* Spotlight 1 entrevista (#rep-tela-053) em Tela Cheia */
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-persona-grid[data-persona-count="1"] .q-quote-persona blockquote.q-persona-blockquote {
+    font-size: clamp(20px, 2.8vh, 28px);
+    line-height: 1.42;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading {
+    flex-shrink: 0;
+    padding-top: clamp(10px, 1.5vh, 16px);
+    gap: 14px 36px;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading p {
+    font-size: clamp(13.5px, 1.75vh, 16.5px);
+    line-height: 1.45;
+  }
+
+  /* 9.5 Telas de Vozes Parte 2 (Amostra Quantitativa) em Tela Cheia */
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-voices-body {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(14px, 2vh, 24px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid {
+    min-height: 0;
+    height: 100%;
+    align-content: center;
+    column-gap: clamp(18px, 2.2vw, 32px);
+    row-gap: clamp(14px, 2vh, 24px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .report-quote.q-quote-open {
+    padding: clamp(14px, 2vh, 22px) clamp(16px, 1.8vw, 24px);
+    gap: clamp(10px, 1.4vh, 16px);
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-quote-open blockquote.q-open-blockquote {
+    font-size: clamp(15px, 2.05vh, 20px);
+    line-height: 1.44;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-open-grid[data-open-count="7"] .q-quote-open blockquote.q-open-blockquote,
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-open-grid[data-open-count="8"] .q-quote-open blockquote.q-open-blockquote {
+    font-size: clamp(14px, 1.85vh, 17.5px);
+    line-height: 1.4;
+  }
+
+  body.presentation-mode #executive-report-view#executive-report-view > .report-qualitative .q-quote-open .q-open-profile {
+    font-size: clamp(12px, 1.55vh, 14px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. RESPONSIVIDADE MOBILE & TABLET (<= 960px e <= 760px)
+   -------------------------------------------------------------------------- */
+@container qualitative (max-width: 960px) {
+  #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-gallery-heading,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-header,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage[data-persona-count="1"] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #executive-report-view#executive-report-view > #rep-tela-051 .q-themes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="5"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="6"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="7"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="8"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container qualitative (max-width: 760px) {
+  #executive-report-view#executive-report-view > article.report-qualitative {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide {
+    min-height: auto;
+  }
+
+  #executive-report-view#executive-report-view > #rep-tela-049.q-cover-slide h1 {
+    font-size: 28px;
+  }
+
+  #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-gallery,
+  #executive-report-view#executive-report-view > #rep-tela-051 .q-themes-grid,
+  #executive-report-view#executive-report-view > #rep-tela-051 .q-source-questions,
+  #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="5"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="6"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="7"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="8"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #executive-report-view#executive-report-view > .report-qualitative .report-page-source {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 760px) {
+  #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-gallery-heading,
+  #executive-report-view#executive-report-view > #rep-tela-050.q-gallery-slide .q-persona-gallery,
+  #executive-report-view#executive-report-view > #rep-tela-051 .q-themes-grid,
+  #executive-report-view#executive-report-view > #rep-tela-051 .q-source-questions,
+  #executive-report-view#executive-report-view > .report-qualitative.q-narrative-slide .q-narrative-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-slide .q-voices-header,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-stage[data-persona-count="1"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="5"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-persona-grid[data-persona-count="6"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid,
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="7"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-open-slide .q-open-grid[data-open-count="8"],
+  #executive-report-view#executive-report-view > .report-qualitative.q-voices-personas-slide .q-voices-reading {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}

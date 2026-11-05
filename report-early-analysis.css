@@ -1,0 +1,59 @@
+/* Screens 8–11: bounded analytical compositions, with original copy and chart IDs. */
+#executive-report-view #rep-tela-016 .flow-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+#executive-report-view #rep-tela-016 .flow-pair .report-chart-composition { display:flex; flex-direction:column; gap:18px; margin:0; }
+#executive-report-view #rep-tela-016 .flow-pair .report-chart-composition > * { width:100%; min-width:0; }
+#executive-report-view #rep-tela-016 .report-page-heading { text-align:left; align-items:flex-end; flex-direction:row; justify-content:space-between; }
+#executive-report-view #rep-tela-016 .report-page-heading h2 { margin-inline:0; text-align:left; }
+#executive-report-view #rep-tela-016 .report-page-heading > div:first-child { text-align:left; align-items:flex-start; }
+#executive-report-view #rep-tela-016 .report-page-heading > .flex { justify-content:flex-end; }
+@media(max-width:700px) {
+ #executive-report-view #rep-tela-016 .flow-pair { grid-template-columns:1fr; }
+}
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017).report-analysis-fit.active-slide,
+body.presentation-mode #executive-report-view > #rep-tela-016.report-flow-merged.active-slide {
+ display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto minmax(0,1fr) minmax(0,1fr) auto;
+ overflow:hidden; scrollbar-gutter:auto; padding:22px 4vw; gap:clamp(10px,1.5vh,18px); --report-body:clamp(13px,1.65vh,18px);
+}
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) > * { min-height:0; min-width:0; margin:0; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid { gap:18px; align-items:stretch; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(3) { grid-template-columns:repeat(4,minmax(0,1fr)); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(4) { grid-template-columns:repeat(2,minmax(0,1fr)); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(5) { grid-template-columns:minmax(0,3fr) minmax(0,1fr); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(5) > div { grid-column:auto; height:100%; min-height:0; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(5) > div:first-child { columns:2; column-gap:24px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(5) p { margin:0 0 .6em; font-size:var(--report-body); line-height:1.4; break-inside:avoid; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) .gg-kpi-card { padding:10px 14px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) .gg-kpi-card p { font-size:clamp(12px,1.5vh,16px); line-height:1.3; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) .gg-kpi-card > span { font-size:clamp(28px,3.8vh,42px); }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-chart-panel { display:flex; flex-direction:column; padding:12px 16px; min-height:0; gap:8px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-chart-canvas { flex:1; min-height:0; height:auto; margin:0; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-chart-canvas canvas { max-height:100%; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-page-heading h2 { font-size:clamp(26px,3.5vh,40px); max-width:none; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-page-heading { gap:6px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-page-source { margin:0; padding:8px 0 0; gap:16px; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-016,#rep-tela-017) .report-page-source span { font-size:clamp(10px,1.3vh,13px); line-height:1.35; }
+body.presentation-mode #executive-report-view > #rep-tela-016.report-flow-merged.active-slide { grid-template-rows:auto auto minmax(0,1fr) auto; }
+body.presentation-mode #executive-report-view > #rep-tela-016 .flow-pair { grid-template-columns:repeat(2,minmax(0,1fr)); height:100%; }
+body.presentation-mode #executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition { display:grid; grid-template-rows:minmax(0,1fr) auto; gap:14px; min-height:0; }
+body.presentation-mode #executive-report-view > #rep-tela-016 .report-reading-copy { columns:auto; font-size:var(--report-body); }
+body.presentation-mode #executive-report-view > #rep-tela-016 .report-reading-copy p { font-size:var(--report-body); line-height:1.45; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017).report-analysis-fit.active-slide { grid-template-rows:auto auto auto minmax(0,.85fr) minmax(0,1.15fr) auto; background:#fff; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) > .report-content-grid:nth-of-type(5) p { break-inside:auto; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017) .gg-photo-card { position:relative; overflow:hidden; border-radius:12px; }
+body.presentation-mode #executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition { grid-template-columns:minmax(0,1fr); }
+body.presentation-mode #executive-report-view > #rep-tela-016 .flow-pair .report-chart-composition > * { grid-column:1; }
+body.presentation-mode #executive-report-view > :is(#rep-tela-015,#rep-tela-017).report-analysis-fit.active-slide { grid-template-rows:auto auto auto minmax(148px,.85fr) minmax(0,1.15fr) auto; }
+body.presentation-mode #executive-report-view > #rep-tela-017.report-analysis-fit.active-slide { grid-template-rows:auto auto auto minmax(170px,.85fr) minmax(0,1.15fr) auto; }
+body.presentation-mode #executive-report-view > #rep-tela-017 > .report-content-grid:nth-of-type(5) { grid-template-columns:minmax(0,4fr) minmax(0,1fr); }
+@media(max-height:720px) {
+ body.presentation-mode #executive-report-view > #rep-tela-017 .gg-kpi-card { padding-block:6px; }
+ body.presentation-mode #executive-report-view > #rep-tela-017 > .report-content-grid:nth-of-type(5) p { font-size:12.5px; line-height:1.3; }
+}
+/* Reset the old two-row subgrid, whose inherited gap inflated the KPI strip. */
+body.presentation-mode #executive-report-view > #rep-tela-017 .report-kpi-row-aligned { grid-template-rows:auto; }
+body.presentation-mode #executive-report-view > #rep-tela-017 .report-kpi-row-aligned > .gg-kpi-card { grid-row:auto; display:flex; flex-direction:column; justify-content:flex-start; gap:6px; }
+body.presentation-mode #executive-report-view > #rep-tela-017 .report-kpi-row-aligned > .gg-kpi-card > :first-child { line-height:1.1; }
+body.presentation-mode #executive-report-view > #rep-tela-017 .report-kpi-row-aligned > .gg-kpi-card > div:first-child > span:first-child { font-size:clamp(28px,3.8vh,42px); line-height:1.1; }
+body.presentation-mode #executive-report-view > #rep-tela-017 .report-page-heading { display:grid; gap:4px; }
+body.presentation-mode #executive-report-view > #rep-tela-017 .report-page-heading > * { margin:0; }
+body.presentation-mode #executive-report-view > #rep-tela-017.report-analysis-fit.active-slide { grid-template-rows:auto auto auto minmax(186px,.85fr) minmax(0,1.15fr) auto; }

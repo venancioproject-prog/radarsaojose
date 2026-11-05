@@ -227,6 +227,7 @@
 
   const historiaState = {
     activeSection: 'ciclos',
+    activeCicloIndex: 0,
     bairrosFilterRegiao: 'all',
     bairrosSearchQuery: '',
     activePrefeitosSubTab: 'personalidades',
@@ -463,6 +464,7 @@
       eraId: "colonial",
       numero: "01",
       epoca: "Século XVII – 1863",
+      resumoFase: "Aldeamento & Vila",
       titulo: "Antes da cidade, uma aldeia indígena",
       subtitulo: "Do Rio Comprido à colina onde hoje está o Centro",
       imagem: "fotos_radar/ciclo1_carvao_rembrandt.jpg",
@@ -482,6 +484,7 @@
       eraId: "sanatorial-cafe",
       numero: "02",
       epoca: "1864 – 1923",
+      resumoFase: "Café, Trem & Indústria",
       titulo: "Café, trabalho e a chegada do trem",
       subtitulo: "Cidade, café, trem e as primeiras fábricas",
       imagem: "fotos_radar/ciclo2_trem_carvao.jpg",
@@ -501,6 +504,7 @@
       eraId: "sanatorial",
       numero: "03",
       epoca: "1924 – 1945",
+      resumoFase: "Fase Sanatorial",
       titulo: "Quem chegava em busca de tratamento",
       subtitulo: "Sanatórios, médicos e a transformação da paisagem urbana",
       imagem: "fotos_radar/ciclo3_sanatorio_carvao.jpg",
@@ -520,6 +524,7 @@
       eraId: "tecnologica",
       numero: "04",
       epoca: "1946 – 1999",
+      resumoFase: "Aeroespacial & ITA",
       titulo: "Das salas de aula aos aviões e satélites",
       subtitulo: "ITA, CTA, INPE e Embraer mudaram a direção de São José",
       imagem: "fotos_radar/ciclo4_aeroespacial_carvao.jpg",
@@ -539,6 +544,7 @@
       eraId: "contemporanea",
       numero: "05",
       epoca: "2000 – 2026",
+      resumoFase: "Cidade Tecnológica",
       titulo: "A tecnologia encontra a vida nos bairros",
       subtitulo: "Parque Tecnológico, serviços urbanos e os desafios do presente",
       imagem: "fotos_radar/ciclo5_smartcity_carvao.jpg",
@@ -968,9 +974,17 @@
     } else if (sectionId === 'quiz' && !historiaState.renderedSections.quiz) {
       renderQuizJoseensidade();
       historiaState.renderedSections.quiz = true;
-    } else if (sectionId === 'migracao' && !historiaState.renderedSections.migracao) {
-      renderMigracaoJoseenses();
-      historiaState.renderedSections.migracao = true;
+    } else if (sectionId === 'migracao') {
+      if (!historiaState.renderedSections.migracao) {
+        renderMigracaoJoseenses();
+        historiaState.renderedSections.migracao = true;
+      } else if (typeof _migracaoLeafletMap !== 'undefined' && _migracaoLeafletMap) {
+        setTimeout(function() {
+          try {
+            _migracaoLeafletMap.invalidateSize();
+          } catch (e) {}
+        }, 150);
+      }
     } else if (sectionId === 'lendas') {
       openHistoriaLendas();
     } else if (sectionId === 'bibliografia') {
@@ -1106,6 +1120,15 @@
       setupImageFallback(img, 'fotos_radar/capa_sjc_skyline.jpg');
     });
   }
+
+  function selectCiclo(index) {
+    if (typeof index === 'number' && CICLOS_EDITORIAIS[index]) {
+      const el = document.getElementById('historia-ciclo-' + CICLOS_EDITORIAIS[index].eraId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function navigateCiclo() {}
 
   /**
    * Ficha editorial do ciclo, com contexto e referências bibliográficas.
@@ -2354,6 +2377,60 @@
   /**
    * Renderizar Cards de Pioneiros & Personalidades
    */
+  const NOTAVEIS_PHOTO_MAP = {
+    'P01': '01_Ozires_Silva.jpg',
+    'P02': '02_Casimiro_Montenegro_Filho.jpg',
+    'P03': '03_Fernando_de_Mendonca.jpg',
+    'P04': '04_Cassiano_Ricardo.jpg',
+    'P05': '05_Dona_Vicentina_de_Queiroz_Aranha.jpg',
+    'P06': 'ze_mira_rembrandt.jpg',
+    'P07': '06_Euclides_Bueno_Miragaia.jpg',
+    'P08': '07_Affonso_Berardinelli_Tarantino.jpg',
+    'P09': '09_Jose_de_Araujo_Coimbra.jpg',
+    'P10': '10_Francisco_dos_Anjos_Gaia.jpg',
+    'P11': '08_Henrique_Jorge_Guedes.jpg',
+    'P12': '11_Mario_Guimaraes_Ferri.jpg',
+    'P13': '12_Paulo_Setubal.jpg',
+    'P14': '13_Padre_Rodolfo_Komorek.jpg',
+    'P15': '14_Nilton_Renno.jpg',
+    'P16': '15_Jose_Maria_Fidelis.jpg',
+    'P17': '16_Casemiro.jpg',
+    'P18': '17_Richard_Harbert_Smith.jpg',
+    'P19': '18_Aldo_Weber_Vieira_da_Rosa.jpg',
+    'P20': '19_Joseph_Kovacs.jpg',
+    'P21': '20_Nelson_Silveira_Davila.jpg',
+    'P22': '21_Madre_Maria_Teresa_de_Jesus_Eucaristico.jpg',
+    'P23': '22_Jose_Edvar_Simoes.jpg',
+    'P24': '23_Jean_Galvao.jpg',
+    'P25': '24_Coronel_Jose_Monteiro.jpg',
+    'P26': '25_Francisco_Rafael.jpg',
+    'P27': '26_Luiz_Jacinto_de_Medeiros.jpg',
+    'P28': '27_Dolzani_Ricardo.jpg',
+    'P29': '28_Aristides_Friggi.jpg',
+    'P30': '29_Joao_Batista_Peneluppi.jpg',
+    'P31': '30_Genesia_Berardinelli_Tarantino.jpg',
+    'P32': 'P32_Jeni_Davi_Bacha.jpg',
+    'P33': '31_Sebastiao_Humel.jpg',
+    'P34': '32_Conego_Francisco_de_Oliveira_Lima.jpg',
+    'P35': '33_Joao_Guilhermino.jpg',
+    'P36': '34_Geraldo_Queiroz.jpg',
+    'P37': '35_Benedito_Matarazzo.jpg',
+    'P38': '36_Felicio_Savastano.jpg',
+    'P39': '37_Juvenal_Machado_de_Araujo.jpg',
+    'P40': '38_Pedro_Mascarenhas.jpg',
+    'P41': '39_Suely_Antunes_de_Mello.jpg',
+    'P42': '40_Amintas_Rocha_Brito.jpg',
+    'P43': 'P43_Maria_Gomide_Santos_de_Souza.jpg',
+    'P44': 'P44_Joao_Alves_da_Silva_Cursino.jpg',
+    'P45': 'P45_Elmano_Ferreira_Veloso.jpg',
+    'P46': 'P46_Dr_Ruy_Rodrigues_Doria.jpg',
+    'P47': 'P47_Dr_Mario_Nunes_Galvao.jpg',
+    'P48': '41_Francisco_Pereira_da_Silva_Chico_Triste.jpg',
+    'P49': '42_Domingos_de_Macedo_Custodio.jpg',
+    'P50': '43_Major_Jose_Mariotto_Ferreira.jpg',
+    'P51': '44_Olimpio_Catao.jpg'
+  };
+
   function renderPioneirosEditorial() {
     const container = document.getElementById("view-pioneiros-grid");
     if (!container) return;
@@ -2389,8 +2466,16 @@
         </div>
       ` : '';
 
+      const photoFile = NOTAVEIS_PHOTO_MAP[p.id] || p.foto || p.imagem;
+      const photoHtml = photoFile ? `
+        <div class="w-full h-56 rounded-2xl overflow-hidden mb-3 bg-slate-900/10 border border-slate-200/80 shadow-2xs relative">
+          <img src="fotos_radar/notaveis/${photoFile}" alt="${escapeHtml(p.nome)}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none';" />
+        </div>
+      ` : '';
+
       return `<article class="bg-white rounded-3xl border border-slate-200 p-6 flex flex-col justify-between gap-4 hover:border-slate-300 hover:shadow-md transition-all group">
         <div class="space-y-3">
+          ${photoHtml}
           <div class="flex items-center justify-between gap-2 flex-wrap text-xs text-slate-500 font-semibold">
             <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 px-2 py-0.5 rounded-full ${badgeClass}">
               ${escapeHtml(p.categoria || p.tag || "Pioneiro")}
@@ -2409,44 +2494,74 @@
   }
 
   /**
-   * Estado de Filtros de Prefeitos (Tabela Técnica de Alta Densidade)
+   * =========================================================================
+   * GOVERNANTES DE SÃO JOSÉ DOS CAMPOS — ACERVO HISTÓRICO & DOCUMENTAL
+   * =========================================================================
    */
+  let prefeitosViewMode = 'tabela'; // 'catalogo' | 'cronologia' | 'tabela'
   let prefeitosEraFiltro = 'todas';
   let prefeitosFiltroAtual = 'todos';
+  let prefeitosStatusFiltro = 'todos';
   let prefeitosBuscaAtual = '';
-
-  // Stubs de compatibilidade retroativa
-  function switchPrefeitosViewMode() {}
-  function selectPrefeitoByIndex() {}
-  function navigatePrefeito() {}
-  function abrirPrefeitosDrawer() {}
-  function fecharPrefeitosDrawer() {}
-  function abrirCatalogoGeralDossie() {
-    const acc = document.getElementById("accordion-referencias");
-    const icon = document.getElementById("accordion-referencias-icon");
-    if (acc) {
-      acc.classList.remove("hidden");
-      if (icon) icon.classList.add("rotate-180");
-      acc.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
+  let prefeitosFilteredCache = [];
+  let prefeitoAtivoId = null;
 
   /**
-   * Formatar Citações Historiográficas no formato [X] ou [X–Y] em tags interativas
+   * Extrair Iniciais para Monograma Institucional Histórico
    */
-  function formatarCitacoesDossie(texto) {
-    if (!texto) return '';
-    const safe = escapeHtml(texto);
-    return safe.replace(/\[([0-9,\s–-]+)\]/g, function(match, group) {
-      const cleanGroup = group.replace(/\s+/g, ' ');
-      const firstNumMatch = cleanGroup.match(/\d+/);
-      const firstNum = firstNumMatch ? firstNumMatch[0] : '';
-      return `<button type="button" onclick="window.abrirRefPrefeitos('${firstNum}', event)" class="inline-flex items-center px-1 py-0.2 mx-0.5 text-[10px] font-bold font-mono rounded bg-amber-100 text-amber-950 hover:bg-amber-200 border border-amber-300/80 transition-all cursor-pointer shadow-2xs" title="Localizar referência [${cleanGroup}]">[${cleanGroup}]</button>`;
+  function getPrefeitoIniciais(nome) {
+    if (!nome) return 'SJ';
+    const limpo = nome.replace(/\(.*?\)/g, '').replace(/[^a-zA-ZÀ-ÿ\s]/g, '').trim();
+    const partes = limpo.split(/\s+/).filter(function(p) {
+      const w = p.toLowerCase();
+      return w.length > 1 && !['de', 'da', 'do', 'dos', 'das', 'e'].includes(w);
     });
+    if (partes.length === 0) return 'SJ';
+    if (partes.length === 1) return partes[0].substring(0, 2).toUpperCase();
+    return (partes[0].charAt(0) + partes[partes.length - 1].charAt(0)).toUpperCase();
   }
 
   /**
-   * Badge Compacto de Categoria de Acesso Político
+   * Markup do Monograma Institucional Clássico (Acervo Histórico Oficial)
+   */
+  function getPrefeitoMonogramaMarkup(iniciais, size) {
+    const isDrawer = size === 'drawer';
+    const containerClass = isDrawer
+      ? 'w-24 h-28 shrink-0 rounded-2xl bg-gradient-to-br from-slate-100 via-stone-50 to-amber-50/40 border border-slate-200/90 shadow-xs flex flex-col items-center justify-center relative select-none'
+      : 'w-20 h-24 shrink-0 rounded-xl bg-gradient-to-br from-slate-100 via-stone-50 to-amber-50/40 border border-slate-200/90 shadow-2xs flex flex-col items-center justify-center relative select-none group-hover:border-[#a45b16]/30 transition-colors';
+    const textClass = isDrawer
+      ? 'font-serif font-black text-2xl text-slate-800 tracking-wider'
+      : 'font-serif font-bold text-xl text-slate-700 tracking-wider';
+
+    return `<div class="${containerClass}">
+      <span class="${textClass}">${escapeHtml(iniciais)}</span>
+      <span class="text-[8px] font-mono uppercase font-black text-slate-400 mt-1 tracking-widest flex items-center gap-0.5">
+        <i class="fa-solid fa-landmark text-[7px] text-[#a45b16]/70"></i> ACERVO
+      </span>
+    </div>`;
+  }
+  window.getPrefeitoMonogramaMarkup = getPrefeitoMonogramaMarkup;
+
+  /**
+   * Renderizar Imagem Autêntica ou Monograma Institucional
+   */
+  function renderPrefeitoAvatar(pref, size) {
+    size = size || 'card';
+    const foto = pref.foto || pref.imagem;
+    const iniciais = getPrefeitoIniciais(pref.nome);
+    const isDrawer = size === 'drawer';
+
+    if (foto) {
+      return `<div class="${isDrawer ? 'w-24 h-28' : 'w-20 h-24'} shrink-0 relative rounded-xl overflow-hidden border border-slate-200/90 shadow-2xs bg-slate-100">
+        <img src="${escapeHtml(foto)}" alt="${escapeHtml(pref.nome)}" class="w-full h-full object-cover" onerror="this.parentElement.outerHTML=window.getPrefeitoMonogramaMarkup('${escapeHtml(iniciais)}', '${size}');" />
+      </div>`;
+    }
+
+    return getPrefeitoMonogramaMarkup(iniciais, size);
+  }
+
+  /**
+   * Badge de Categoria de Acesso Político
    */
   function renderPrefeitoBadge(categoria) {
     switch (categoria) {
@@ -2465,125 +2580,550 @@
   }
 
   /**
-   * Renderizar Seção de Prefeitos (Tabela Técnica Direta, Compacta e Visual)
+   * Verificar se governante possui ressalva historiográfica documentada
+   */
+  function isPrefeitoComRessalva(pref) {
+    if (pref.categoria === 'Alegação / Não Confirmado') return true;
+    const s = (pref.situacaoDocumental || '').toLowerCase();
+    return s.includes('ressalva') || s.includes('não confirmado') || s.includes('sem ato primário') || s.includes('divergência') || s.includes('lacuna') || s.includes('interregno');
+  }
+
+  /**
+   * Badge de Status Documental
+   */
+  function renderPrefeitoStatusBadge(pref) {
+    if (isPrefeitoComRessalva(pref)) {
+      return `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-50 text-amber-900 border border-amber-200/90 whitespace-nowrap"><i class="fa-solid fa-triangle-exclamation text-[8px] text-amber-600"></i> Com Ressalvas</span>`;
+    }
+    return `<span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-200/90 whitespace-nowrap"><i class="fa-solid fa-circle-check text-[8px] text-emerald-600"></i> Mandato Comprovado</span>`;
+  }
+
+  /**
+   * Formatar Citações Historiográficas no formato [X] ou [X–Y] em botões interativos
+   */
+  function formatarCitacoesDossie(texto) {
+    if (!texto) return '';
+    const safe = escapeHtml(texto);
+    return safe.replace(/\[([0-9,\s–-]+)\]/g, function(match, group) {
+      const cleanGroup = group.replace(/\s+/g, ' ');
+      const firstNumMatch = cleanGroup.match(/\d+/);
+      const firstNum = firstNumMatch ? firstNumMatch[0] : '';
+      return `<button type="button" onclick="window.abrirRefPrefeitos('${firstNum}', event)" class="inline-flex items-center px-1 py-0.2 mx-0.5 text-[10px] font-bold font-mono rounded bg-amber-100 text-amber-950 hover:bg-amber-200 border border-amber-300/80 transition-all cursor-pointer shadow-2xs" title="Localizar referência [${cleanGroup}]">[${cleanGroup}]</button>`;
+    });
+  }
+
+  /**
+   * Utilitário de Cópia para a Área de Transferência (Clipboard)
+   */
+  function fallbackCopyText(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function copiarReferenciaAbnt(refId, btnEl) {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.prefeitosDossie || !data.prefeitosDossie.referencias) return;
+    const ref = data.prefeitosDossie.referencias.find(function(r) {
+      return String(r.id) === String(refId);
+    });
+    if (!ref || !ref.fullText) return;
+
+    const originalHtml = btnEl ? btnEl.innerHTML : '';
+    function feedback() {
+      if (btnEl) {
+        btnEl.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> <span class="text-emerald-700 font-bold">Copiado!</span>';
+        setTimeout(function() { btnEl.innerHTML = originalHtml; }, 2200);
+      }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ref.fullText).then(feedback).catch(function() {
+        fallbackCopyText(ref.fullText);
+        feedback();
+      });
+    } else {
+      fallbackCopyText(ref.fullText);
+      feedback();
+    }
+  }
+
+  /**
+   * Alternar Modo de Visualização Principal: Catálogo | Cronologia | Tabela
+   */
+  function switchPrefeitosViewMode(mode) {
+    if (mode !== 'catalogo' && mode !== 'cronologia' && mode !== 'tabela') {
+      mode = 'catalogo';
+    }
+    prefeitosViewMode = mode;
+
+    const catView = document.getElementById("prefeitos-view-catalogo");
+    const cronView = document.getElementById("prefeitos-view-cronologia");
+    const tabView = document.getElementById("prefeitos-view-tabela");
+
+    const btnCat = document.getElementById("btn-view-mode-catalogo");
+    const btnCron = document.getElementById("btn-view-mode-cronologia");
+    const btnTab = document.getElementById("btn-view-mode-tabela");
+
+    const activeClass = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 bg-[#a45b16] text-white shadow-2xs cursor-pointer";
+    const inactiveClass = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-200/60 cursor-pointer";
+
+    if (catView) catView.classList.toggle("hidden", mode !== 'catalogo');
+    if (cronView) cronView.classList.toggle("hidden", mode !== 'cronologia');
+    if (tabView) tabView.classList.toggle("hidden", mode !== 'tabela');
+
+    if (btnCat) {
+      btnCat.className = mode === 'catalogo' ? activeClass : inactiveClass;
+      btnCat.setAttribute("aria-selected", mode === 'catalogo' ? "true" : "false");
+    }
+    if (btnCron) {
+      btnCron.className = mode === 'cronologia' ? activeClass : inactiveClass;
+      btnCron.setAttribute("aria-selected", mode === 'cronologia' ? "true" : "false");
+    }
+    if (btnTab) {
+      btnTab.className = mode === 'tabela' ? activeClass : inactiveClass;
+      btnTab.setAttribute("aria-selected", mode === 'tabela' ? "true" : "false");
+    }
+
+    renderPrefeitosEditorial();
+  }
+
+  /**
+   * Renderizador Central do Módulo de Governantes
    */
   function renderPrefeitosEditorial() {
     const data = window.HISTORIA_SJC_DATA;
     if (!data || !data.prefeitos) return;
 
-    const tbody = document.getElementById("prefeitos-editorial-table-body");
-    const countDisplay = document.getElementById("prefeitos-count-display");
+    // Atualizar Indicadores Museológicos no Cabeçalho
+    const indTotal = document.getElementById("indicador-total-autoridades");
+    const indRefs = document.getElementById("indicador-total-referencias");
+    if (indTotal) indTotal.textContent = data.prefeitos.length;
+    if (indRefs && data.prefeitosDossie && data.prefeitosDossie.referencias) {
+      indRefs.textContent = data.prefeitosDossie.referencias.length;
+    }
 
     // Filtragem Multi-critério
     const query = prefeitosBuscaAtual.trim().toLowerCase();
     const filtrados = data.prefeitos.filter(function(pref) {
+      // 1. Filtro de Época
       if (prefeitosEraFiltro !== 'todas' && pref.eraId !== prefeitosEraFiltro) {
         return false;
       }
+      // 2. Filtro de Acesso / Categoria
       if (prefeitosFiltroAtual !== 'todos' && pref.categoria !== prefeitosFiltroAtual) {
         return false;
       }
+      // 3. Filtro de Status
+      if (prefeitosStatusFiltro === 'confirmados' && isPrefeitoComRessalva(pref)) {
+        return false;
+      }
+      if (prefeitosStatusFiltro === 'ressalvas' && !isPrefeitoComRessalva(pref)) {
+        return false;
+      }
+      // 4. Busca Textual
       if (query) {
-        const haystack = ((pref.nome || '') + ' ' + (pref.periodo || '') + ' ' + (pref.cargo || '') + ' ' + (pref.marcos || '') + ' ' + (pref.situacaoDocumental || '')).toLowerCase();
+        const haystack = (
+          (pref.nome || '') + ' ' +
+          (pref.periodo || '') + ' ' +
+          (pref.cargo || '') + ' ' +
+          (pref.marcos || '') + ' ' +
+          (pref.situacaoDocumental || '') + ' ' +
+          (pref.eraNome || '')
+        ).toLowerCase();
         if (!haystack.includes(query)) return false;
       }
       return true;
     });
 
+    prefeitosFilteredCache = filtrados;
+
+    const countDisplay = document.getElementById("prefeitos-count-display");
     if (countDisplay) {
       countDisplay.textContent = filtrados.length;
     }
 
-    if (tbody) {
-      if (filtrados.length === 0) {
-        tbody.innerHTML = `<tr>
-          <td colspan="4" class="px-6 py-10 text-center text-slate-500 space-y-2">
-            <i class="fa-solid fa-magnifying-glass text-2xl text-slate-300 block mb-1"></i>
-            <p class="font-bold text-slate-700 text-xs">Nenhum governante encontrado para os filtros selecionados.</p>
-            <p class="text-[11px] text-slate-400">Tente buscar por outro termo ou limpe os filtros.</p>
-            <button type="button" onclick="window.resetarPrefeitosFiltros()" class="mt-2 px-3 py-1 rounded-lg text-xs font-bold bg-[#a45b16] text-white hover:bg-[#8c4d12] transition-colors cursor-pointer">
-              Ver todos os 53 registros
-            </button>
-          </td>
-        </tr>`;
-      } else {
-        tbody.innerHTML = filtrados.map(function(pref, idx) {
-          const isPar = idx % 2 === 0;
-          const bgClass = isPar ? 'bg-white' : 'bg-slate-50/50';
-          const isNaoConfirmado = pref.categoria === 'Alegação / Não Confirmado';
-          const refs = pref.referenciasDetalhadas || [];
-
-          return `
-            <tr id="pref-row-${pref.id || idx}" class="${bgClass} hover:bg-amber-50/40 transition-colors">
-              <!-- Coluna 1: Governança & Período (Nome Maior para Destaque Visual) -->
-              <td class="px-3.5 py-2.5 align-top w-52 shrink-0 border-b border-slate-100">
-                <div class="text-sm sm:text-base font-black text-slate-900 tracking-tight leading-tight">
-                  ${escapeHtml(pref.nome)}
-                </div>
-                <div class="mt-1">
-                  <span class="inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200">
-                    ${escapeHtml(pref.periodo)}
-                  </span>
-                </div>
-                <div class="mt-1">
-                  ${renderPrefeitoBadge(pref.categoria)}
-                </div>
-                <div class="text-[10px] text-slate-500 mt-1 leading-snug">
-                  ${escapeHtml(pref.cargo || "")}
-                </div>
-              </td>
-
-              <!-- Coluna 2: Marcos & Feitos Documentados (Letras Reduzidas para Caber na Tela) -->
-              <td class="px-3.5 py-2.5 align-top min-w-[280px] border-b border-slate-100">
-                <div class="text-[11px] text-slate-800 leading-snug font-normal">
-                  ${formatarCitacoesDossie(pref.marcos)}
-                </div>
-              </td>
-
-              <!-- Coluna 3: Situação Documental & Ressalvas Historiográficas -->
-              <td class="px-3.5 py-2.5 align-top min-w-[280px] border-b border-slate-100">
-                <div class="text-[11px] leading-snug p-2 rounded-lg border font-medium ${isNaoConfirmado ? 'bg-rose-50/70 border-rose-200 text-rose-950' : 'bg-amber-50/60 border-amber-200/70 text-amber-950'}">
-                  ${formatarCitacoesDossie(pref.situacaoDocumental)}
-                </div>
-              </td>
-
-              <!-- Coluna 4: Fontes & Citações ABNT (Discriminadas Uma a Uma com Links Oficiais) -->
-              <td class="px-3.5 py-2.5 align-top min-w-[300px] bg-slate-50/40 border-b border-slate-100">
-                <div class="space-y-1.5">
-                  ${refs.map(function(r) {
-                    return `
-                      <div id="table-ref-item-${r.id}" class="p-1.5 rounded-md bg-white border border-slate-200 shadow-2xs flex items-start gap-1.5">
-                        <span class="w-6 h-4.5 rounded bg-blue-100 text-blue-900 font-mono font-black text-[9px] flex items-center justify-center shrink-0 mt-0.5 border border-blue-200">
-                          [${r.id}]
-                        </span>
-                        <div class="flex-1 min-w-0">
-                          <p class="text-[10px] text-slate-700 leading-tight font-normal line-clamp-2" title="${escapeHtml(r.fullText)}">
-                            ${escapeHtml(r.fullText)}
-                          </p>
-                          ${r.url ? `
-                            <a href="${escapeHtml(safeUrl(r.url))}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[9px] font-bold text-blue-700 hover:text-blue-900 underline mt-0.5">
-                              <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i> Ver documento ↗
-                            </a>
-                          ` : `
-                            <span class="text-[9px] text-slate-400 italic block mt-0.5">Arquivo primário</span>
-                          `}
-                        </div>
-                      </div>
-                    `;
-                  }).join('')}
-                </div>
-              </td>
-            </tr>
-          `;
-        }).join('');
-      }
-    }
-
+    // Renderizar tabela documental técnica e complementos
+    renderPrefeitosTabela(filtrados);
     renderPrefeitosComplementos();
   }
 
   /**
-   * Renderizar os Cards de Correções, Lacunas e Referências [1–93]
+   * MODO 1: Catálogo Biográfico Editorial (Grade de Cartões)
+   */
+  function renderPrefeitosCatalogo(filtrados) {
+    const container = document.getElementById("prefeitos-view-catalogo");
+    if (!container) return;
+
+    if (filtrados.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full py-12 px-6 text-center bg-white rounded-2xl border border-slate-200 text-slate-500 space-y-3">
+          <i class="fa-solid fa-magnifying-glass text-3xl text-slate-300 block mb-1"></i>
+          <p class="font-bold text-slate-700 text-sm">Nenhum governante encontrado para os filtros selecionados.</p>
+          <p class="text-xs text-slate-400">Tente buscar por outro termo ou limpe os filtros para restaurar a série completa.</p>
+          <button type="button" onclick="window.resetarPrefeitosFiltros()" class="mt-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#a45b16] text-white hover:bg-[#8c4d12] transition-colors cursor-pointer shadow-2xs">
+            Restaurar todos os 53 registros
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtrados.map(function(pref) {
+      const refs = pref.referenciasDetalhadas || [];
+      const eraRotulo = pref.eraNome ? pref.eraNome.split('(')[0].trim() : 'Histórico';
+
+      return `
+        <article class="group bg-white rounded-2xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-[#a45b16]/40 transition-all flex flex-col justify-between overflow-hidden relative">
+          <!-- Topo do Cartão: Header, Avatar e Identificação -->
+          <div class="p-4 sm:p-5 flex-1 flex flex-col">
+            <!-- Linha Superior: Época & Período -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-[#a45b16] bg-[#a45b16]/8 px-2 py-0.5 rounded-md border border-[#a45b16]/15 truncate max-w-[55%]">
+                ${escapeHtml(eraRotulo)}
+              </span>
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 text-slate-800 border border-slate-200 shrink-0">
+                <i class="fa-regular fa-calendar text-[9px] text-slate-500"></i> ${escapeHtml(pref.periodo)}
+              </span>
+            </div>
+
+            <!-- Identidade: Monograma/Avatar e Dados Históricos -->
+            <div class="flex items-start gap-3.5 mb-3">
+              ${renderPrefeitoAvatar(pref, 'card')}
+              <div class="flex-1 min-w-0">
+                <h3 class="text-sm sm:text-base font-black text-slate-900 tracking-tight leading-snug group-hover:text-[#a45b16] transition-colors line-clamp-2">
+                  ${escapeHtml(pref.nome)}
+                </h3>
+                <p class="text-[11px] text-slate-500 font-medium mt-1 line-clamp-2 leading-tight">
+                  ${escapeHtml(pref.cargo || 'Autoridade Municipal')}
+                </p>
+                <div class="flex flex-wrap items-center gap-1.5 mt-2">
+                  ${renderPrefeitoBadge(pref.categoria)}
+                  ${renderPrefeitoStatusBadge(pref)}
+                </div>
+              </div>
+            </div>
+
+            <!-- Síntese Documental (Marcos) -->
+            <div class="mt-2 pt-3 border-t border-slate-100 flex-1">
+              <div class="text-[11px] text-slate-700 leading-relaxed font-normal line-clamp-3">
+                ${formatarCitacoesDossie(pref.marcos)}
+              </div>
+            </div>
+          </div>
+
+          <!-- Rodapé do Cartão: Contagem de Fontes & Ação do Dossiê -->
+          <div class="px-4 sm:px-5 py-3 bg-slate-50/70 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-1.5 text-[10px] text-slate-500 font-bold">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white border border-slate-200">
+                <i class="fa-solid fa-scroll text-blue-700 text-[9px]"></i>
+                ${refs.length} ${refs.length === 1 ? 'fonte' : 'fontes'}
+              </span>
+            </div>
+
+            <button 
+              type="button" 
+              onclick="window.abrirPrefeitosDrawer('${pref.id}')" 
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#a45b16] bg-white hover:bg-[#a45b16] hover:text-white border border-[#a45b16]/30 shadow-2xs hover:shadow-xs transition-all cursor-pointer group/btn"
+            >
+              <span>Explorar dossiê</span>
+              <i class="fa-solid fa-arrow-right text-[10px] group-hover/btn:translate-x-0.5 transition-transform"></i>
+            </button>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  /**
+   * MODO 2: Cronologia Documental Navegável (Linha do Tempo Vertical)
+   */
+  function renderPrefeitosCronologia(filtrados) {
+    const container = document.getElementById("prefeitos-view-cronologia");
+    if (!container) return;
+
+    if (filtrados.length === 0) {
+      container.innerHTML = `
+        <div class="py-12 px-6 text-center bg-white rounded-2xl border border-slate-200 text-slate-500 space-y-3">
+          <i class="fa-solid fa-magnifying-glass text-3xl text-slate-300 block mb-1"></i>
+          <p class="font-bold text-slate-700 text-sm">Nenhum governante encontrado para a cronologia.</p>
+          <button type="button" onclick="window.resetarPrefeitosFiltros()" class="mt-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#a45b16] text-white hover:bg-[#8c4d12] transition-colors cursor-pointer shadow-2xs">
+            Restaurar todos os 53 registros
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    // Agrupamento por Eras Históricas preservando a ordem cronológica
+    const erasMap = new Map();
+    filtrados.forEach(function(pref) {
+      const eraKey = pref.eraId || 'outros';
+      if (!erasMap.has(eraKey)) {
+        erasMap.set(eraKey, {
+          nome: pref.eraNome || 'Período Histórico',
+          cor: pref.eraCor || 'amber',
+          itens: []
+        });
+      }
+      erasMap.get(eraKey).itens.push(pref);
+    });
+
+    let html = '<div class="space-y-8">';
+    erasMap.forEach(function(eraGroup) {
+      html += `
+        <div class="space-y-4">
+          <!-- Cabeçalho da Era na Cronologia -->
+          <div class="sticky top-2 z-20 bg-slate-900/90 backdrop-blur-md text-white px-4 py-2.5 rounded-xl border border-slate-800 shadow-md flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-amber-400 text-xs"></i>
+              <h4 class="text-xs sm:text-sm font-black tracking-tight">${escapeHtml(eraGroup.nome)}</h4>
+            </div>
+            <span class="text-[10px] font-mono font-bold text-slate-300 bg-white/10 px-2 py-0.5 rounded-full">
+              ${eraGroup.itens.length} ${eraGroup.itens.length === 1 ? 'autoridade' : 'autoridades'}
+            </span>
+          </div>
+
+          <!-- Trilha Vertical Conectada -->
+          <div class="relative border-l-2 border-amber-300/80 ml-4 sm:ml-6 pl-6 sm:pl-8 space-y-4">
+            ${eraGroup.itens.map(function(pref) {
+              const refs = pref.referenciasDetalhadas || [];
+              return `
+                <div class="relative group">
+                  <!-- Ponto Conector na Régua -->
+                  <div class="absolute -left-[31px] sm:-left-[39px] top-4 w-4 h-4 rounded-full bg-white border-4 border-[#a45b16] shadow-2xs group-hover:scale-125 transition-transform"></div>
+
+                  <!-- Cartão Cronológico -->
+                  <div class="bg-white rounded-2xl border border-slate-200/90 p-4 sm:p-5 shadow-2xs hover:shadow-md hover:border-[#a45b16]/40 transition-all space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
+                      <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded-md text-[11px] font-mono font-black bg-amber-50 text-amber-900 border border-amber-200">
+                          ${escapeHtml(pref.periodo)}
+                        </span>
+                        <h4 class="text-sm sm:text-base font-black text-slate-900 group-hover:text-[#a45b16] transition-colors">
+                          ${escapeHtml(pref.nome)}
+                        </h4>
+                      </div>
+                      <div class="flex flex-wrap items-center gap-1.5">
+                        ${renderPrefeitoBadge(pref.categoria)}
+                        ${renderPrefeitoStatusBadge(pref)}
+                      </div>
+                    </div>
+
+                    <p class="text-xs text-slate-600 font-medium">
+                      ${escapeHtml(pref.cargo || 'Autoridade Municipal')}
+                    </p>
+
+                    <div class="text-xs text-slate-700 leading-relaxed font-normal">
+                      ${formatarCitacoesDossie(pref.marcos)}
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                      <span class="text-[10px] text-slate-500 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-scroll text-blue-700 text-[9px]"></i> ${refs.length} fontes documentais
+                      </span>
+                      <button 
+                        type="button" 
+                        onclick="window.abrirPrefeitosDrawer('${pref.id}')" 
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#a45b16] bg-amber-50 hover:bg-[#a45b16] hover:text-white border border-[#a45b16]/30 transition-all cursor-pointer shadow-2xs"
+                      >
+                        <span>Ver dossiê completo</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+
+    container.innerHTML = html;
+  }
+
+  /**
+   * Helper para formatar período com anotações em itálico
+   */
+  function formatarPeriodoEditorial(periodo) {
+    if (!periodo) return '';
+    return escapeHtml(periodo).replace(/\(([^)]+)\)/g, function(_, match) {
+      return '<span class="gov-periodo-nota">(' + match + ')</span>';
+    });
+  }
+
+  /**
+   * Alternar expansão de fontes no card da tabela editorial
+   */
+  function toggleGovFonte(rowId, refId) {
+    const item = document.getElementById('gov-ref-' + rowId + '-' + refId);
+    const btn = document.getElementById('gov-btn-ref-' + rowId + '-' + refId);
+    if (!item) return;
+    const isHidden = item.classList.contains('hidden');
+    if (isHidden) {
+      item.classList.remove('hidden');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    } else {
+      item.classList.add('hidden');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+  window.toggleGovFonte = toggleGovFonte;
+
+  /**
+   * MODO 3: Tabela Documental Técnica com Estilo Editorial Arquivístico (Fonte Serifada Grande 23px)
+   */
+  function renderPrefeitosTabela(filtrados) {
+    const tbody = document.getElementById("prefeitos-editorial-table-body");
+    if (!tbody) return;
+
+    if (filtrados.length === 0) {
+      tbody.innerHTML = `
+        <div class="py-12 px-6 text-center text-slate-500 space-y-3">
+          <i class="fa-solid fa-magnifying-glass text-3xl text-slate-300 block mb-1"></i>
+          <p class="font-bold text-slate-700 text-sm">Nenhum governante encontrado para os filtros selecionados.</p>
+          <p class="text-xs text-slate-400">Tente buscar por outro termo ou limpe os filtros para restaurar a série completa.</p>
+          <button type="button" onclick="window.resetarPrefeitosFiltros()" class="mt-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#a45b16] text-white hover:bg-[#8c4d12] transition-colors cursor-pointer shadow-2xs">
+            Restaurar todos os 53 registros
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    tbody.innerHTML = filtrados.map(function(pref, idx) {
+      const isSemAto = pref.categoria === 'Alegação / Não Confirmado';
+      const bordaClasse = isSemAto ? 'sem-ato' : 'mandato-comprovado';
+      const bullet = isSemAto ? '○' : '●';
+      const ressalvaAsterisco = isPrefeitoComRessalva(pref) ? '<span class="gov-asterisco">*</span>' : '';
+      const refs = pref.referenciasDetalhadas || [];
+      const rowId = pref.id || idx;
+
+      const periodoHtml = formatarPeriodoEditorial(pref.periodo);
+
+      let acessoTexto = '';
+      if (!isSemAto) {
+        if (pref.categoria === 'Eleito') {
+          acessoTexto = 'Eleito direto';
+        } else if (pref.categoria && pref.categoria !== 'Outros') {
+          acessoTexto = pref.categoria;
+        }
+      }
+
+      // Coluna 2: Feitos e Situação Documental
+      const marcosTrim = (pref.marcos || '').trim();
+      const isSemFeitos = !marcosTrim || marcosTrim === 'Nenhum feito localizado.';
+      const feitosHtml = isSemFeitos
+        ? '<p class="gov-feitos-vazio">Nenhum feito localizado na documentação primária consultada.</p>'
+        : '<p>' + formatarCitacoesDossie(pref.marcos) + '</p>';
+
+      const situacaoRaw = (pref.situacaoDocumental || '').trim();
+      let situacaoHtml = '';
+      if (situacaoRaw) {
+        situacaoHtml = `
+          <div class="gov-nota-editorial">
+            <strong>Situação Documental:</strong> ${formatarCitacoesDossie(situacaoRaw)}
+          </div>
+        `;
+      }
+
+      // Coluna 3: Fontes
+      const botoesFontes = refs.map(function(r) {
+        const itemDomId = 'gov-ref-' + rowId + '-' + r.id;
+        const btnDomId = 'gov-btn-ref-' + rowId + '-' + r.id;
+        return `
+          <button 
+            type="button" 
+            class="gov-fonte-btn" 
+            id="${btnDomId}"
+            aria-expanded="false" 
+            aria-controls="${itemDomId}"
+            onclick="window.toggleGovFonte('${rowId}', '${r.id}')"
+            title="Ver referência [${r.id}]"
+          >
+            [${r.id}]
+          </button>
+        `;
+      }).join(' ');
+
+      const cardsFontes = refs.map(function(r, rIdx) {
+        const itemDomId = 'gov-ref-' + rowId + '-' + r.id;
+        const isHidden = rIdx === 0 ? '' : 'hidden';
+        return `
+          <div id="${itemDomId}" class="gov-fonte-detalhe ${isHidden}">
+            <div>
+              <span style="color: var(--acento); font-weight: 600; margin-right: 4px;">[${r.id}]</span>${escapeHtml(r.fullText)}
+            </div>
+            <div class="gov-fonte-links">
+              <button type="button" onclick="window.copiarReferenciaAbnt('${r.id}', this)" class="gov-fonte-link-btn">
+                <i class="fa-regular fa-copy"></i> Copiar
+              </button>
+              ${r.url ? `
+                <a href="${escapeHtml(safeUrl(r.url))}" target="_blank" rel="noopener noreferrer" class="gov-fonte-link-a">
+                  Ato primário ↗
+                </a>
+              ` : `
+                <span style="color: var(--suave); font-style: italic; font-size: 12px;">Arquivo primário</span>
+              `}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="gov-row" id="pref-row-${rowId}" role="row">
+          <!-- Coluna 1: Governante e Período (Fonte Serifada Grande 23px) -->
+          <div class="gov-col-autoridade ${bordaClasse}">
+            <div class="gov-nome">${escapeHtml(pref.nome)}</div>
+            <div class="gov-periodo">${periodoHtml}</div>
+            <div class="gov-status-line">
+              <span class="gov-status-bullet">${bullet}</span>
+              <span>${isSemAto ? 'Sem Ato Primário' : 'Mandato Comprovado'}</span>
+              ${ressalvaAsterisco}
+            </div>
+            ${acessoTexto ? '<div class="gov-acesso-line">' + escapeHtml(acessoTexto) + '</div>' : ''}
+            <div class="mt-3">
+              <button 
+                type="button" 
+                onclick="window.abrirPrefeitosDrawer('${pref.id}')" 
+                class="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--acento)] hover:underline cursor-pointer"
+                title="Abrir dossiê completo de ${escapeHtml(pref.nome)}"
+              >
+                <span>Dossiê documental ↗</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Feitos e Situação Documental -->
+          <div class="gov-col-feitos">
+            ${feitosHtml}
+            ${situacaoHtml}
+          </div>
+
+          <!-- Coluna 3: Fontes e Citações ABNT -->
+          <div class="gov-col-fontes">
+            <div class="gov-fontes-nav">
+              ${botoesFontes}
+            </div>
+            <div class="gov-fontes-expansivel">
+              ${cardsFontes}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  /**
+   * Renderizar os Cards de Correções, Lacunas e Referências [1–93] no Rodapé
    */
   function renderPrefeitosComplementos() {
     const data = window.HISTORIA_SJC_DATA;
@@ -2644,32 +3184,48 @@
   }
 
   /**
-   * Filtrar por Era Política
+   * Filtrar por Época Política
    */
   function filtrarPrefeitosEra(eraId) {
     prefeitosEraFiltro = eraId;
     document.querySelectorAll('.prefeitos-era-btn').forEach(function(btn) {
       const e = btn.getAttribute('data-pref-era');
       if (e === eraId) {
-        btn.className = "prefeitos-era-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-[#a45b16] text-white shadow-2xs whitespace-nowrap cursor-pointer";
+        btn.classList.add('is-active');
       } else {
-        btn.className = "prefeitos-era-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 whitespace-nowrap cursor-pointer";
+        btn.classList.remove('is-active');
       }
     });
     renderPrefeitosEditorial();
   }
 
   /**
-   * Filtrar por Categoria na Tabela de Prefeitos
+   * Filtrar por Categoria / Forma de Acesso Político
    */
   function filtrarPrefeitosCategoria(categoria) {
     prefeitosFiltroAtual = categoria;
     document.querySelectorAll('.prefeitos-filter-btn').forEach(function(btn) {
       const filter = btn.getAttribute('data-pref-filter');
       if (filter === categoria) {
-        btn.className = "prefeitos-filter-btn px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-slate-800 text-white whitespace-nowrap cursor-pointer";
+        btn.classList.add('is-active');
       } else {
-        btn.className = "prefeitos-filter-btn px-2 py-0.5 rounded text-[10px] font-bold transition-all bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 whitespace-nowrap cursor-pointer";
+        btn.classList.remove('is-active');
+      }
+    });
+    renderPrefeitosEditorial();
+  }
+
+  /**
+   * Filtrar por Status Documental (Comprovados vs Com Ressalvas)
+   */
+  function filtrarPrefeitosStatus(status) {
+    prefeitosStatusFiltro = status;
+    document.querySelectorAll('.prefeitos-status-btn').forEach(function(btn) {
+      const s = btn.getAttribute('data-pref-status');
+      if (s === status) {
+        btn.classList.add('is-active');
+      } else {
+        btn.classList.remove('is-active');
       }
     });
     renderPrefeitosEditorial();
@@ -2681,18 +3237,32 @@
   function resetarPrefeitosFiltros() {
     prefeitosEraFiltro = 'todas';
     prefeitosFiltroAtual = 'todos';
+    prefeitosStatusFiltro = 'todos';
     prefeitosBuscaAtual = '';
+
     const searchInput = document.getElementById("prefeitos-search-input");
     if (searchInput) searchInput.value = '';
+    const clearBtn = document.getElementById("btn-prefeitos-clear-search");
+    if (clearBtn) clearBtn.classList.add("hidden");
+
     filtrarPrefeitosEra('todas');
     filtrarPrefeitosCategoria('todos');
+    filtrarPrefeitosStatus('todos');
   }
 
   /**
-   * Busca em tempo real
+   * Busca em tempo real com indicador de limpar
    */
   function handlePrefeitosSearch(termo) {
     prefeitosBuscaAtual = termo;
+    const clearBtn = document.getElementById("btn-prefeitos-clear-search");
+    if (clearBtn) {
+      if (termo && termo.trim().length > 0) {
+        clearBtn.classList.remove("hidden");
+      } else {
+        clearBtn.classList.add("hidden");
+      }
+    }
     renderPrefeitosEditorial();
   }
 
@@ -2714,7 +3284,7 @@
   }
 
   /**
-   * Destacar e Rolar para Referência [N]
+   * Destacar e Rolar para Referência [N] (No Drawer, na Tabela ou no Rodapé)
    */
   function abrirRefPrefeitos(refNum, event) {
     if (event) {
@@ -2723,7 +3293,18 @@
     }
     if (!refNum) return;
 
-    // Destacar na coluna 4 da tabela se o elemento estiver na tela
+    // 1. Se estiver com o drawer aberto e o card da referência estiver no drawer
+    const drawerItem = document.getElementById("drawer-ref-item-" + refNum);
+    if (drawerItem) {
+      drawerItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      drawerItem.classList.add("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
+      setTimeout(function() {
+        drawerItem.classList.remove("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
+      }, 3500);
+      return;
+    }
+
+    // 2. Se estiver na tabela técnica
     const tableItem = document.getElementById("table-ref-item-" + refNum);
     if (tableItem) {
       tableItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2734,7 +3315,7 @@
       return;
     }
 
-    // Caso contrário, abre o catálogo geral no rodapé
+    // 3. Caso contrário, abre o catálogo geral no rodapé
     const acc = document.getElementById("accordion-referencias");
     const icon = document.getElementById("accordion-referencias-icon");
     if (acc && acc.classList.contains("hidden")) {
@@ -2749,6 +3330,293 @@
       setTimeout(function() {
         refItem.classList.remove("bg-amber-100", "ring-2", "ring-amber-500", "shadow-sm");
       }, 3500);
+    }
+  }
+
+  function abrirCatalogoGeralDossie() {
+    const acc = document.getElementById("accordion-referencias");
+    const icon = document.getElementById("accordion-referencias-icon");
+    if (acc) {
+      acc.classList.remove("hidden");
+      if (icon) icon.classList.add("rotate-180");
+      acc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /**
+   * ABRIR PAINEL LATERAL DO DOSSIÊ INDIVIDUAL (DRAWER SEÇÕES A–E)
+   */
+  function abrirPrefeitosDrawer(prefeitoId) {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.prefeitos) return;
+
+    let pref = data.prefeitos.find(function(p) {
+      return String(p.id) === String(prefeitoId);
+    });
+
+    if (!pref) {
+      const idx = parseInt(prefeitoId, 10);
+      if (!isNaN(idx) && data.prefeitos[idx]) {
+        pref = data.prefeitos[idx];
+      }
+    }
+
+    if (!pref) return;
+
+    prefeitoAtivoId = pref.id;
+
+    // Localizar índice na lista filtrada ativa para navegação sequencial
+    const list = (prefeitosFilteredCache && prefeitosFilteredCache.length > 0) ? prefeitosFilteredCache : data.prefeitos;
+    let currentIndex = list.findIndex(function(p) { return String(p.id) === String(pref.id); });
+    if (currentIndex === -1) currentIndex = 0;
+    const totalFiltrados = list.length;
+    const hasPrev = currentIndex > 0;
+    const hasNext = currentIndex < totalFiltrados - 1;
+
+    const drawer = document.getElementById("prefeitos-abnt-drawer");
+    const backdrop = document.getElementById("prefeitos-abnt-drawer-backdrop");
+    const content = document.getElementById("prefeitos-drawer-content");
+
+    if (!content) return;
+
+    const isNaoConfirmado = pref.categoria === 'Alegação / Não Confirmado';
+    const refs = pref.referenciasDetalhadas || [];
+
+    content.innerHTML = `
+      <!-- Cabeçalho Fixo do Drawer -->
+      <div class="p-4 sm:p-5 border-b border-slate-200 bg-slate-900 text-white flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-8 h-8 rounded-lg bg-[#a45b16] text-white flex items-center justify-center text-sm shrink-0 shadow-2xs">
+            <i class="fa-solid fa-landmark"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase tracking-wider text-amber-300">Dossiê Documental</span>
+              <span class="text-slate-500">•</span>
+              <span class="text-[10px] font-mono font-bold text-slate-300">${escapeHtml(pref.periodo)}</span>
+            </div>
+            <h3 id="dossie-drawer-nome" class="text-sm sm:text-base font-black truncate text-white">
+              ${escapeHtml(pref.nome)}
+            </h3>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          onclick="window.fecharPrefeitosDrawer()" 
+          class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0" 
+          aria-label="Fechar dossiê"
+        >
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Corpo Rolável do Dossiê com Seções A, B, C, D -->
+      <div class="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6 scrollbar-thin bg-slate-50/60">
+
+        <!-- SEÇÃO A: Identificação Histórica -->
+        <section class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-2xs space-y-4">
+          <div class="flex items-start gap-4">
+            ${renderPrefeitoAvatar(pref, 'drawer')}
+            <div class="flex-1 min-w-0 space-y-1.5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-[#a45b16] bg-[#a45b16]/10 px-2 py-0.5 rounded-md border border-[#a45b16]/20">
+                  ${escapeHtml(pref.eraNome || 'Acervo Histórico')}
+                </span>
+                <span class="text-xs font-mono font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                  ${escapeHtml(pref.periodo)}
+                </span>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                ${escapeHtml(pref.nome)}
+              </h2>
+              <p class="text-xs sm:text-sm text-slate-600 font-medium">
+                ${escapeHtml(pref.cargo || 'Autoridade Municipal')}
+              </p>
+              <div class="flex flex-wrap items-center gap-2 pt-1">
+                ${renderPrefeitoBadge(pref.categoria)}
+                ${renderPrefeitoStatusBadge(pref)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEÇÃO B: Trajetória & Marcos Documentados -->
+        <section class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-2xs space-y-3">
+          <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+            <i class="fa-solid fa-feather text-[#a45b16] text-sm"></i>
+            <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">Trajetória & Marcos Históricos Documentados</h3>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-2 font-normal">
+            ${formatarCitacoesDossie(pref.marcos)}
+          </div>
+        </section>
+
+        <!-- SEÇÃO C: Auditoria Documental & Ressalvas Historiográficas -->
+        <section class="rounded-2xl p-5 border shadow-2xs space-y-3 ${isNaoConfirmado ? 'bg-rose-50/70 border-rose-200 text-rose-950' : 'bg-amber-50/60 border-amber-200/80 text-amber-950'}">
+          <div class="flex items-center gap-2 pb-2 border-b ${isNaoConfirmado ? 'border-rose-200/80' : 'border-amber-200/80'}">
+            <i class="fa-solid fa-shield-halved text-sm ${isNaoConfirmado ? 'text-rose-700' : 'text-amber-700'}"></i>
+            <h3 class="text-xs font-black uppercase tracking-wider ${isNaoConfirmado ? 'text-rose-900' : 'text-amber-900'}">Auditoria Documental & Ressalvas Historiográficas</h3>
+          </div>
+          <div class="text-xs sm:text-sm leading-relaxed space-y-2 font-normal">
+            ${formatarCitacoesDossie(pref.situacaoDocumental)}
+          </div>
+        </section>
+
+        <!-- SEÇÃO D: Biblioteca de Fontes & Citações ABNT -->
+        <section class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-2xs space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-book-bookmark text-blue-700 text-sm"></i>
+              <h3 class="text-xs font-black uppercase tracking-wider text-slate-900">Fontes & Citações Documentais (${refs.length})</h3>
+            </div>
+            <span class="text-[10px] font-mono text-slate-500">Normas ABNT NBR 6023:2018</span>
+          </div>
+
+          <div class="space-y-3">
+            ${refs.map(function(r) {
+              return `
+                <div id="drawer-ref-item-${r.id}" class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5 transition-colors">
+                  <div class="flex items-start gap-2">
+                    <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-900 font-mono font-black text-[10px] border border-blue-200 shrink-0">
+                      [${r.id}]
+                    </span>
+                    <p class="text-xs text-slate-800 leading-relaxed font-normal flex-1">
+                      ${escapeHtml(r.fullText)}
+                    </p>
+                  </div>
+                  
+                  <div class="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-200/60 justify-end">
+                    <button 
+                      type="button" 
+                      onclick="window.copiarReferenciaAbnt('${r.id}', this)" 
+                      class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 transition-all cursor-pointer shadow-2xs"
+                    >
+                      <i class="fa-regular fa-copy text-[10px]"></i>
+                      <span>Copiar ABNT</span>
+                    </button>
+                    ${r.url ? `
+                      <a 
+                        href="${escapeHtml(safeUrl(r.url))}" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold text-blue-700 hover:text-blue-900 bg-blue-50/80 hover:bg-blue-100 border border-blue-200 transition-all"
+                      >
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        <span>Acessar documento oficial ↗</span>
+                      </a>
+                    ` : `
+                      <span class="text-[10px] text-slate-400 italic px-2 py-1">Arquivo documental primário</span>
+                    `}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </section>
+
+      </div>
+
+      <!-- SEÇÃO E: Navegação Sequencial no Rodapé -->
+      <div class="p-3.5 sm:p-4 bg-white border-t border-slate-200 shrink-0 flex items-center justify-between gap-3 shadow-lg">
+        <button 
+          type="button" 
+          onclick="window.navigatePrefeito(-1)" 
+          ${hasPrev ? '' : 'disabled'} 
+          class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${hasPrev ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 cursor-pointer' : 'bg-slate-50 text-slate-300 cursor-not-allowed'}"
+        >
+          <i class="fa-solid fa-arrow-left text-[11px]"></i>
+          <span class="hidden sm:inline">Anterior</span>
+        </button>
+
+        <div class="text-center">
+          <span class="text-xs font-black text-slate-800 font-mono">${currentIndex + 1} de ${totalFiltrados}</span>
+          <span class="block text-[10px] text-slate-400">autoridades no filtro</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button 
+            type="button" 
+            onclick="window.navigatePrefeito(1)" 
+            ${hasNext ? '' : 'disabled'} 
+            class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${hasNext ? 'bg-slate-100 text-slate-800 hover:bg-slate-200 cursor-pointer' : 'bg-slate-50 text-slate-300 cursor-not-allowed'}"
+          >
+            <span class="hidden sm:inline">Próximo</span>
+            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+          </button>
+          <button 
+            type="button" 
+            onclick="window.fecharPrefeitosDrawer()" 
+            class="px-3 py-2 rounded-xl text-xs font-bold bg-[#a45b16] text-white hover:bg-[#8c4d12] transition-colors cursor-pointer"
+          >
+            Fechar
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Revelar Gaveta com Animação Suave
+    if (backdrop) {
+      backdrop.classList.remove("invisible", "opacity-0");
+      backdrop.classList.add("opacity-100");
+    }
+    if (drawer) {
+      drawer.classList.remove("invisible", "translate-x-full");
+      drawer.classList.add("translate-x-0");
+    }
+    document.body.classList.add("overflow-hidden");
+  }
+
+  /**
+   * FECHAR PAINEL LATERAL DO DOSSIÊ
+   */
+  function fecharPrefeitosDrawer() {
+    const drawer = document.getElementById("prefeitos-abnt-drawer");
+    const backdrop = document.getElementById("prefeitos-abnt-drawer-backdrop");
+
+    if (backdrop) {
+      backdrop.classList.remove("opacity-100");
+      backdrop.classList.add("opacity-0");
+      setTimeout(function() {
+        backdrop.classList.add("invisible");
+      }, 300);
+    }
+    if (drawer) {
+      drawer.classList.remove("translate-x-0");
+      drawer.classList.add("translate-x-full");
+      setTimeout(function() {
+        drawer.classList.add("invisible");
+      }, 300);
+    }
+    document.body.classList.remove("overflow-hidden");
+  }
+
+  /**
+   * Navegar Sequencialmente Entre Governantes no Dossiê
+   */
+  function navigatePrefeito(step) {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.prefeitos) return;
+
+    const list = (prefeitosFilteredCache && prefeitosFilteredCache.length > 0) ? prefeitosFilteredCache : data.prefeitos;
+    if (list.length === 0) return;
+
+    let currentIndex = list.findIndex(function(p) { return String(p.id) === String(prefeitoAtivoId); });
+    if (currentIndex === -1) currentIndex = 0;
+
+    const nextIndex = currentIndex + step;
+    if (nextIndex >= 0 && nextIndex < list.length) {
+      abrirPrefeitosDrawer(list[nextIndex].id);
+    }
+  }
+
+  /**
+   * Selecionar por Índice (Compatibilidade)
+   */
+  function selectPrefeitoByIndex(idx) {
+    const data = window.HISTORIA_SJC_DATA;
+    if (!data || !data.prefeitos) return;
+    if (data.prefeitos[idx]) {
+      abrirPrefeitosDrawer(data.prefeitos[idx].id);
     }
   }
 
@@ -3155,6 +4023,7 @@
       id: 'sanatorio',
       ano: 'Antes de 1950',
       titulo: 'A Fase Sanatorial',
+      shortTitle: 'Sanatorial',
       desc: 'Entre 1920 e 1950, São José dos Campos consolidou-se como a principal estância climatérica e antituberculosa do Brasil. Atraídos pela pureza do ar, topografia e amenidade térmica recomendadas pela medicina tisiológica da época, milhares de doentes afluíram da capital paulista, do Rio de Janeiro e de Minas Gerais. O fluxo transformou o tecido urbano com a construção de grandes complexos sanatoriais (como o Sanatório Vicentina Aranha, inaugurado em 1924 pela Santa Casa de Misericórdia de São Paulo, e o Sanatório Vila Samaritana), além de dezenas de pensões e consultórios especializados. O contingente de médicos sanitaristas, religiosos, enfermeiros e pacientes curados formou a base demográfica e profissional que preparou a cidade para receber os projetos federais das décadas seguintes.',
       fluxos: ['rj', 'sp_capital', 'sul_minas'],
       color: '#d97706',
@@ -3185,6 +4054,7 @@
       id: 'fabricas',
       ano: '1950 – 1970',
       titulo: 'A Era das Fábricas',
+      shortTitle: 'Fábricas',
       desc: 'Com a inauguração da Rodovia Presidente Dutra em 1951 e incentivos fiscais estratégicos, São José dos Campos passou por uma industrialização acelerada e atraiu corporações multinacionais de ponta, como Johnson & Johnson, General Motors, Rhodia, Ericsson e Eaton. Essa dinâmica converteu a cidade em um poderoso polo de atração migratória, mobilizando grandes contingentes de trabalhadores operários vindos do Nordeste brasileiro (especialmente dos sertões e agrestes da Bahia, Pernambuco e Ceará), do Sul de Minas Gerais e do Vale histórico. O influxo populacional redefiniu o mapa habitacional joseense, estimulando a abertura de loteamentos populares nas regiões Leste, Norte e Sul e alavancando as primeiras grandes mobilizações sindicais do setor metalúrgico.',
       fluxos: ['nordeste', 'sul_minas', 'interior_sp'],
       color: '#0284c7',
@@ -3216,6 +4086,7 @@
       id: 'tecnologia',
       ano: '1970 – 1990',
       titulo: 'A Cidade Tecnológica',
+      shortTitle: 'Tecnológica',
       desc: 'A consolidação do Centro Técnico de Aeronáutica (CTA/DCTA, fundado em 1950), do Instituto Tecnológico de Aeronáutica (ITA), do Instituto Nacional de Pesquisas Espaciais (INPE, 1961) e a fundação da EMBRAER (1969) inauguraram uma onda migratória qualificada sem precedentes no país. Atraídos pela vanguarda científica, engenheiros aeronáuticos, cientistas da computação, físicos e pesquisadores de todas as capitais brasileiras (com expressivo destaque para São Paulo, Rio de Janeiro, Brasília, Porto Alegre e Recife) e especialistas estrangeiros fixaram residência no município. Esse ecossistema gerou fornecedores especializados em defesa e telecomunicações, elevando os padrões de renda, a qualificação da força de trabalho e remodelando os bairros centrais e oeste com bairros-jardins e infraestrutura moderna.',
       fluxos: ['nordeste_capitais', 'sul', 'sp_capital', 'rj', 'brasilia'],
       color: '#7c3aed',
@@ -3246,6 +4117,7 @@
       id: 'metropole',
       ano: '1990 em diante',
       titulo: 'A Metrópole Regional',
+      shortTitle: 'Metrópole',
       desc: 'Com a ultrapassagem da marca de 700 mil habitantes, São José dos Campos consagrou-se como a sede oficial e metrópole polarizadora da Região Metropolitana do Vale do Paraíba e Litoral Norte (RMVale). A matriz migratória contemporânea transicionou da migração inter-regional de longa distância para uma densa dinâmica de mobilidade pendular e serviços avançados: acolhimento diário de estudantes e profissionais do Vale e do Sul de Minas, fortalecimento do polo médico-hospitalar e universitário, expansão dos centros de tecnologia da informação e logística (Parque Tecnológico de SJC) e centralização administrativa e financeira regional.',
       fluxos: ['vale_paraiba', 'litoral', 'sul_minas'],
       color: '#059669',
@@ -3288,83 +4160,346 @@
     litoral: { lat: -23.7600, lng: -45.4100, label: 'Litoral Norte (Caraguá/S. Sebastião)' }
   };
 
+  window.MIGRACAO_STEPS = MIGRACAO_STEPS;
+  window.MIGRACAO_GEO_NODES = MIGRACAO_GEO_NODES;
+
   let _migracaoLeafletMap = null;
   let _migracaoLayerGroup = null;
 
   window.activeMigracaoStep = window.activeMigracaoStep || 0;
 
-  window.switchMigracaoStep = function(index) {
-    if (window.activeMigracaoStep === index) return;
-    window.activeMigracaoStep = index;
+  /**
+   * Reposiciona o scroll de forma suave e previsível no início da narrativa do período migratório
+   * respeitando o cabeçalho global fixo, a barra sticky contextual e a preferência por redução de movimento (WCAG 2.2).
+   */
+  function scrollMigracaoToStart() {
+    const panel = document.getElementById('migracao-narrative-panel') || document.getElementById('migracao-joseenses-container');
+    const stickyNav = document.getElementById('migracao-nav-sticky-container');
+    if (!panel) return;
 
-    // Atualizar classes ativas dos itens da timeline sem recriar o DOM inteiro
-    const step = MIGRACAO_STEPS[index];
-    const timelineContainer = document.getElementById('migracao-timeline-list');
-    if (timelineContainer) {
-      const items = timelineContainer.querySelectorAll('.migracao-timeline-item');
-      items.forEach((item, idx) => {
-        const dot = item.querySelector('.migracao-timeline-dot');
-        const card = item.querySelector('.migracao-timeline-card');
-        const descBlock = item.querySelector('.migracao-timeline-desc');
-        const titleEl = item.querySelector('.migracao-timeline-title');
-        const s = MIGRACAO_STEPS[idx];
+    const header = document.getElementById('main-app-header');
+    const headerHeight = header ? header.getBoundingClientRect().height : 72;
+    const stickyNavHeight = stickyNav ? stickyNav.getBoundingClientRect().height : 56;
+    const breathingMargin = 16;
+    const topOffset = headerHeight + stickyNavHeight + breathingMargin;
 
-        if (idx === index) {
-          if (dot) dot.style.cssText = `background-color: ${s.color}; box-shadow: 0 0 0 4px ${s.color}33;`;
-          if (card) {
-            card.className = "migracao-timeline-card flex-1 transition-all duration-300 bg-amber-50/50 border border-amber-200/80 rounded-2xl p-4 sm:p-5 shadow-xs ring-1 ring-amber-400/30";
-          }
-          if (titleEl) titleEl.className = "migracao-timeline-title text-base sm:text-lg font-black text-slate-900 mt-0.5";
-          if (descBlock) descBlock.classList.remove('hidden');
+    const panelRect = panel.getBoundingClientRect();
+    const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const targetTop = Math.max(0, panelRect.top + currentScrollY - topOffset);
 
-          // Alinha suavemente o card da fase ativa para ficar visível e alinhado ao mapa
-          try {
-            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          } catch (e) {}
-        } else {
-          const isPast = idx < index;
-          if (dot) dot.style.cssText = isPast ? 'background-color: #94a3b8;' : 'background-color: #ffffff; border: 2px solid #cbd5e1;';
-          if (card) {
-            card.className = "migracao-timeline-card flex-1 transition-all duration-300 bg-transparent border border-transparent scale-95 opacity-60 hover:bg-slate-50 hover:opacity-100 cursor-pointer rounded-2xl p-4 sm:p-5";
-          }
-          if (titleEl) titleEl.className = "migracao-timeline-title text-base sm:text-lg font-black text-slate-800 mt-0.5";
-          if (descBlock) descBlock.classList.add('hidden');
-        }
+    // Reposiciona de forma controlada uma única vez
+    const currentOffset = panelRect.top - topOffset;
+    if (Math.abs(currentOffset) > 8) {
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'auto'
       });
+      checkMigracaoStickyState();
     }
 
-    // Atualizar badge do cabeçalho do mapa
+    // Foco acessível no cabeçalho da narrativa para leitores de tela sem disparo de rolagem
+    const title = document.getElementById('migracao-narrative-title');
+    if (title) {
+      title.setAttribute('tabindex', '-1');
+      try {
+        title.focus({ preventScroll: true });
+      } catch (e) {}
+    }
+  }
+
+  /**
+   * Monitora a posição de rolagem para alternar dinamicamente entre estado normal e compacto da barra sticky
+   */
+  function checkMigracaoStickyState() {
+    const nav = document.getElementById('migracao-nav-sticky-container');
+    const sentinel = document.getElementById('migracao-sticky-sentinel');
+    if (!nav || !sentinel) return;
+
+    const sec = document.getElementById('section-view-migracao');
+    if (!sec || sec.classList.contains('hidden')) return;
+
+    const header = document.getElementById('main-app-header');
+    const headerHeight = header ? header.getBoundingClientRect().height : 72;
+    const sentinelRect = sentinel.getBoundingClientRect();
+
+    // Histerese estável: entra em modo compacto ao passar do header, volta ao normal acima
+    const isSticking = sentinelRect.top <= (headerHeight + 2);
+    if (isSticking !== nav.classList.contains('is-stuck')) {
+      nav.classList.toggle('is-stuck', isSticking);
+      const h = nav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--migracao-sticky-height', h + 'px');
+    }
+  }
+
+  // Listener passivo e leve de rolagem
+  window.addEventListener('scroll', checkMigracaoStickyState, { passive: true });
+
+  /**
+   * Navegação acessível por teclado no Stepper (WAI-ARIA Tabs pattern)
+   */
+  function handleMigracaoTabKeydown(e, index) {
+    let targetIndex = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      targetIndex = (index + 1) % MIGRACAO_STEPS.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      targetIndex = (index - 1 + MIGRACAO_STEPS.length) % MIGRACAO_STEPS.length;
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      targetIndex = 0;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      targetIndex = MIGRACAO_STEPS.length - 1;
+    }
+
+    if (targetIndex !== null) {
+      window.switchMigracaoStep(targetIndex, true);
+      const newTab = document.getElementById(`migracao-tab-${targetIndex}`);
+      if (newTab && typeof newTab.focus === 'function') {
+        newTab.focus();
+      }
+    }
+  }
+  window.handleMigracaoTabKeydown = handleMigracaoTabKeydown;
+
+  /**
+   * Navegação sequencial programática entre períodos
+   */
+  window.navigateMigracaoStep = function(dir) {
+    const nextIdx = (window.activeMigracaoStep || 0) + dir;
+    if (nextIdx >= 0 && nextIdx < MIGRACAO_STEPS.length) {
+      window.switchMigracaoStep(nextIdx, true);
+    }
+  };
+
+  /**
+   * Alterna o período ativo da narrativa de migração e sincroniza cartografia
+   * @param {number} index - Índice do período migratório (0 a 3)
+   * @param {boolean} [shouldScroll=true] - Se deve rolar a tela até o início da narrativa
+   */
+  window.switchMigracaoStep = function(index, shouldScroll) {
+    if (typeof index !== 'number' || index < 0 || index >= MIGRACAO_STEPS.length) return;
+    if (typeof shouldScroll === 'undefined') {
+      shouldScroll = true;
+    }
+
+    window.activeMigracaoStep = index;
+    const step = MIGRACAO_STEPS[index];
+
+    // 1. Atualizar Abas do Stepper Cronológico
+    const stepperContainer = document.getElementById('migracao-stepper-tabs');
+    if (stepperContainer) {
+      const tabs = stepperContainer.querySelectorAll('.migracao-tab-btn');
+      tabs.forEach((tab, idx) => {
+        const isCurrent = idx === index;
+        const s = MIGRACAO_STEPS[idx];
+        tab.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        tab.setAttribute('tabindex', isCurrent ? '0' : '-1');
+
+        const badge = tab.querySelector('.migracao-tab-badge');
+        const indicator = tab.querySelector('.migracao-tab-indicator');
+        const titleEl = tab.querySelector('.migracao-tab-title');
+        const compactNum = tab.querySelector('.migracao-compact-num');
+        const compactName = tab.querySelector('.migracao-compact-name');
+
+        if (isCurrent) {
+          tab.className = "migracao-tab-btn is-active group relative p-3 sm:p-4 rounded-2xl bg-white border-2 text-left shadow-sm transition-all cursor-pointer ring-2 ring-amber-500/20 flex-1 min-w-[140px] sm:min-w-0";
+          tab.style.borderColor = s.color;
+          if (badge) {
+            badge.style.backgroundColor = s.color;
+            badge.style.color = '#ffffff';
+          }
+          if (indicator) {
+            indicator.style.backgroundColor = s.color;
+            indicator.classList.remove('opacity-0');
+            indicator.classList.add('opacity-100');
+          }
+          if (titleEl) {
+            titleEl.className = "migracao-tab-title text-xs sm:text-sm font-black text-slate-900 leading-snug";
+          }
+          if (compactNum) {
+            compactNum.style.backgroundColor = s.color;
+            compactNum.className = "migracao-compact-num font-mono font-black text-xs px-1.5 py-0.5 rounded-md text-white";
+          }
+          if (compactName) {
+            compactName.className = "migracao-compact-name font-black text-xs truncate text-slate-900";
+          }
+        } else {
+          tab.className = "migracao-tab-btn group relative p-3 sm:p-4 rounded-2xl bg-slate-50/70 hover:bg-white border border-slate-200/80 hover:border-slate-300 text-left transition-all cursor-pointer opacity-80 hover:opacity-100 flex-1 min-w-[140px] sm:min-w-0";
+          tab.style.borderColor = '';
+          if (badge) {
+            badge.style.backgroundColor = '#e2e8f0';
+            badge.style.color = '#475569';
+          }
+          if (indicator) {
+            indicator.classList.remove('opacity-100');
+            indicator.classList.add('opacity-0');
+          }
+          if (titleEl) {
+            titleEl.className = "migracao-tab-title text-xs sm:text-sm font-bold text-slate-700 leading-snug";
+          }
+          if (compactNum) {
+            compactNum.style.backgroundColor = '';
+            compactNum.className = "migracao-compact-num font-mono font-black text-xs px-1.5 py-0.5 rounded-md text-slate-600 bg-slate-200";
+          }
+          if (compactName) {
+            compactName.className = "migracao-compact-name font-bold text-xs truncate text-slate-700";
+          }
+        }
+      });
+
+      // Em mobile, assegura que a aba ativa esteja no viewport horizontal sem interferir na rolagem vertical da página
+      const activeTab = document.getElementById(`migracao-tab-${index}`);
+      if (activeTab && stepperContainer && stepperContainer.scrollWidth > stepperContainer.clientWidth) {
+        const tabOffset = activeTab.offsetLeft - stepperContainer.offsetLeft;
+        const targetLeft = tabOffset - (stepperContainer.clientWidth / 2) + (activeTab.clientWidth / 2);
+        stepperContainer.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+      }
+    }
+
+    // 2. Atualizar aria-labelledby no painel narrativo
+    const panel = document.getElementById('migracao-narrative-panel');
+    if (panel) {
+      panel.setAttribute('aria-labelledby', `migracao-tab-${index}`);
+    }
+
+    // 3. Atualizar o Painel Narrativo Editorial
+    renderMigracaoNarrativeContent(index);
+
+    // 4. Atualizar Badge do Cabeçalho do Mapa
     const badgeEl = document.getElementById('migracao-map-phase-badge');
     if (badgeEl) {
       badgeEl.innerHTML = `
-        <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: ${step.color}"></span>
+        <span class="w-2.5 h-2.5 rounded-full animate-pulse" style="background-color: ${step.color}"></span>
         ${escapeHtml(step.titulo)}
       `;
     }
 
-    // Atualizar card flutuante de rota sobreposto
+    // 5. Atualizar Card Flutuante de Rota no Mapa
     const overlayCard = document.getElementById('migracao-route-overlay-card');
     if (overlayCard) {
       overlayCard.innerHTML = `
         <div class="space-y-0.5 min-w-0">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full" style="background-color: ${step.color}"></span>
-            <span class="text-[10px] font-black uppercase tracking-wider text-slate-800">${escapeHtml(step.titulo)}</span>
-            <span class="text-[10px] text-slate-400 font-mono">• ${escapeHtml(step.ano)}</span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${step.color}"></span>
+            <span class="text-[11px] font-black uppercase tracking-wider text-slate-800">${escapeHtml(step.titulo)}</span>
+            <span class="text-[11px] text-slate-500 font-mono">• ${escapeHtml(step.ano)}</span>
           </div>
           <p class="text-[11px] text-slate-600 truncate font-medium">Principais vetores: ${step.fluxos.map(f => MIGRACAO_GEO_NODES[f]?.label).filter(Boolean).join(', ')}.</p>
         </div>
         <div class="shrink-0 text-right">
-          <span class="text-[10px] font-bold text-[#a45b16] bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80">
-            Destino: São José dos Campos
+          <span class="text-[10px] font-bold text-[#a45b16] bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200/80 inline-flex items-center gap-1">
+            <i class="fa-solid fa-location-dot text-[9px]"></i> Destino: São José dos Campos
           </span>
         </div>
       `;
     }
 
-    // Atualiza os arcos e marcadores no mapa Leaflet existente
+    // 6. Atualizar Camadas e Animações no Mapa Leaflet
     updateMigracaoLeafletMap();
+
+    // 7. Atualizar variável CSS de altura da barra sticky
+    const stickyNav = document.getElementById('migracao-nav-sticky-container');
+    if (stickyNav) {
+      const h = stickyNav.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--migracao-sticky-height', h + 'px');
+    }
+
+    // 8. Reposicionar no início da narrativa (somente se disparado explicitamente pelo usuário)
+    if (shouldScroll) {
+      scrollMigracaoToStart();
+    }
   };
+
+  /**
+   * Renderiza a narrativa do período migratório ativo com tipografia editorial e referências ABNT
+   */
+  function renderMigracaoNarrativeContent(index) {
+    const container = document.getElementById('migracao-narrative-content');
+    if (!container) return;
+
+    const step = MIGRACAO_STEPS[index];
+
+    // Formata o texto em parágrafos equilibrados para excelente legibilidade
+    let descHtml = '';
+    const rawDesc = step.desc || '';
+    const sentences = rawDesc.match(/[^.!?]+[.!?]+(\s|$)/g) || [rawDesc];
+    if (sentences.length >= 3) {
+      const mid = Math.ceil(sentences.length / 2);
+      const p1 = sentences.slice(0, mid).join('').trim();
+      const p2 = sentences.slice(mid).join('').trim();
+      descHtml = `
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">${escapeHtml(p1)}</p>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">${escapeHtml(p2)}</p>
+      `;
+    } else {
+      descHtml = `<p class="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">${escapeHtml(rawDesc)}</p>`;
+    }
+
+    // Pills com vetores de origem geográfica
+    const originPills = (step.fluxos || []).map(originId => {
+      const node = MIGRACAO_GEO_NODES[originId];
+      if (!node) return '';
+      return `
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+          <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${step.color}"></span>
+          ${escapeHtml(node.label)}
+        </span>
+      `;
+    }).join('');
+
+    // Formatação de referências ABNT
+    const fontesHtml = (step.fontes || []).map(f => formatMigracaoFonteAbnt(f)).join('');
+
+    container.innerHTML = `
+      <div class="space-y-6 animate-in fade-in duration-300">
+        <!-- Top Metadata & Período Tag -->
+        <div class="space-y-3 pb-5 border-b border-slate-100">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider text-white shadow-xs" style="background-color: ${step.color}">
+              <i class="fa-solid fa-timeline text-[10px]"></i> Período 0${index + 1}
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-slate-700 bg-slate-100 border border-slate-200 font-mono">
+              <i class="fa-regular fa-calendar text-[11px] text-slate-500"></i> ${escapeHtml(step.ano)}
+            </span>
+          </div>
+
+          <h3 id="migracao-narrative-title" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight outline-none">
+            ${escapeHtml(step.titulo)}
+          </h3>
+
+          <!-- Origens Geográficas -->
+          <div class="flex flex-wrap items-center gap-1.5 pt-1">
+            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+              <i class="fa-solid fa-route text-[#a45b16]"></i> Vetores:
+            </span>
+            ${originPills}
+          </div>
+        </div>
+
+        <!-- Narrative Editorial Body -->
+        <div class="space-y-4 text-justify sm:text-left">
+          ${descHtml}
+        </div>
+
+        <!-- Seção de Fontes Históricas & Referências ABNT -->
+        <div class="pt-5 border-t border-slate-100 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
+              <i class="fa-solid fa-graduation-cap text-[#a45b16]"></i> Fontes Históricas & Referências (ABNT)
+            </h4>
+            <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+              ${(step.fontes || []).length} ${(step.fontes || []).length === 1 ? 'fonte' : 'fontes'}
+            </span>
+          </div>
+          <div class="space-y-2.5">
+            ${fontesHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
   /**
    * Inicializa ou atualiza o Mapa Leaflet com Camada Oficial OpenStreetMap PB e Arcos Suaves
@@ -3373,7 +4508,7 @@
     const mapContainer = document.getElementById('migracao-leaflet-map');
     if (!mapContainer || typeof L === 'undefined') return;
 
-    const step = MIGRACAO_STEPS[window.activeMigracaoStep];
+    const step = MIGRACAO_STEPS[window.activeMigracaoStep || 0];
     const target = MIGRACAO_GEO_NODES.sjc;
 
     if (!_migracaoLeafletMap) {
@@ -3393,13 +4528,25 @@
       _migracaoLayerGroup.clearLayers();
     }
 
-    // Ajusta visualização suavemente para enquadrar as rotas daquele período
-    if (step.bounds) {
-      _migracaoLeafletMap.flyToBounds(step.bounds, {
-        padding: [45, 45],
-        duration: 1.2,
-        easeLinearity: 0.2
-      });
+    // Atualiza dimensões do mapa e ajusta visualização suavemente para enquadrar as rotas
+    try {
+      _migracaoLeafletMap.invalidateSize({ pan: false });
+    } catch (e) {}
+
+    const mapSize = _migracaoLeafletMap.getSize();
+    if (step.bounds && mapSize.x > 0 && mapSize.y > 0) {
+      try {
+        _migracaoLeafletMap.fitBounds(step.bounds, {
+          padding: [35, 35],
+          maxZoom: 8,
+          animate: true,
+          duration: 0.8
+        });
+      } catch (err) {
+        try {
+          _migracaoLeafletMap.fitBounds(step.bounds, { padding: [15, 15] });
+        } catch (e2) {}
+      }
     }
 
     // 1. Marcador Alvo: Epicentro São José dos Campos
@@ -3424,7 +4571,7 @@
     L.marker([target.lat, target.lng], { icon: sjcIcon, zIndexOffset: 2000 }).addTo(_migracaoLayerGroup);
 
     // 2. Traçar Arcos Geodésicos Suaves com Brilho e Partículas de Fluxo
-    step.fluxos.forEach(originId => {
+    (step.fluxos || []).forEach(originId => {
       const origin = MIGRACAO_GEO_NODES[originId];
       if (!origin) return;
 
@@ -3493,14 +4640,14 @@
     const pagina = f.pagina ? `<span class="inline-flex items-center gap-1 font-bold text-amber-900 bg-amber-100/90 px-1.5 py-0.5 rounded text-[10px] ml-1"><i class="fa-regular fa-file-lines text-[9px]"></i>${escapeHtml(f.pagina)}</span>` : '';
 
     return `
-      <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1 hover:bg-slate-100/70 transition-colors">
+      <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1.5 hover:bg-slate-100/70 transition-colors">
         <p class="text-[11px] leading-relaxed text-slate-800">
           <strong>${autor}</strong>. ${titulo}${subtitulo}.${veiculo}${local}${volume}${ano} ${pagina}
         </p>
         <div class="pt-0.5">
           <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#a45b16] hover:text-[#83450e] hover:underline underline-offset-2 break-all">
             <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-            <span>Acessar fonte / documento original</span>
+            <span>Acessar documento original</span>
           </a>
         </div>
       </div>
@@ -3513,80 +4660,174 @@
 
     // Se o mapa já existir no DOM, só atualiza o passo sem recriar
     if (document.getElementById('migracao-leaflet-map') && _migracaoLeafletMap) {
-      window.switchMigracaoStep(window.activeMigracaoStep);
+      window.switchMigracaoStep(window.activeMigracaoStep || 0, false);
       return;
     }
 
-    const step = MIGRACAO_STEPS[window.activeMigracaoStep];
+    // Injeta estilos da barra sticky e estado compacto se não existirem
+    if (!document.getElementById('migracao-nav-sticky-styles')) {
+      const styleEl = document.createElement('style');
+      styleEl.id = 'migracao-nav-sticky-styles';
+      styleEl.textContent = `
+        #migracao-nav-sticky-container {
+          position: sticky;
+          top: var(--app-header-height, 72px);
+          z-index: 35;
+          background-color: var(--surface-bg, #f8fafc);
+          transition: padding 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        @supports (backdrop-filter: blur(8px)) {
+          #migracao-nav-sticky-container {
+            background-color: rgba(248, 250, 252, 0.94);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+          }
+          html.dark #migracao-nav-sticky-container {
+            background-color: rgba(15, 23, 42, 0.94);
+          }
+        }
+        #migracao-nav-sticky-container.is-stuck {
+          border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+          box-shadow: 0 4px 14px -3px rgba(15, 23, 42, 0.05);
+          padding-top: 0.35rem;
+          padding-bottom: 0.5rem;
+        }
+        html.dark #migracao-nav-sticky-container.is-stuck {
+          border-bottom-color: rgba(51, 65, 85, 0.8);
+          box-shadow: 0 4px 14px -3px rgba(0, 0, 0, 0.3);
+        }
+        #migracao-nav-sticky-container.is-stuck #migracao-nav-header-row {
+          display: none;
+        }
+        #migracao-nav-sticky-container.is-stuck .migracao-tab-full {
+          display: none;
+        }
+        #migracao-nav-sticky-container.is-stuck .migracao-tab-compact {
+          display: flex;
+        }
+        #migracao-nav-sticky-container.is-stuck .migracao-tab-btn {
+          padding: 0.5rem 0.65rem;
+          border-radius: 0.875rem;
+        }
+      `;
+      document.head.appendChild(styleEl);
+    }
 
-    let timelineHtml = '<div id="migracao-timeline-list" class="space-y-4 relative before:absolute before:inset-y-0 before:left-[19px] before:w-[2px] before:bg-slate-200">';
-    
+    const currentStepIdx = window.activeMigracaoStep || 0;
+    const step = MIGRACAO_STEPS[currentStepIdx];
+
+    // Construção das Abas do Stepper Cronológico
+    let tabsHtml = '';
     MIGRACAO_STEPS.forEach((s, idx) => {
-      const isActive = idx === window.activeMigracaoStep;
-      const isPast = idx < window.activeMigracaoStep;
-      
-      let dotStyle = isActive ? `background-color: ${s.color}; box-shadow: 0 0 0 4px ${s.color}33;` : (isPast ? 'background-color: #94a3b8;' : 'background-color: #ffffff; border: 2px solid #cbd5e1;');
-      let cardClass = isActive ? 'bg-amber-50/50 border border-amber-200/80 rounded-2xl p-4 sm:p-5 shadow-xs' : 'bg-transparent border border-transparent scale-95 opacity-60 hover:bg-slate-50 hover:opacity-100 cursor-pointer rounded-2xl p-4 sm:p-5';
+      const isCurrent = idx === currentStepIdx;
+      const borderClass = isCurrent ? 'border-2 ring-2 ring-amber-500/20' : 'border border-slate-200/80 hover:border-slate-300';
+      const bgClass = isCurrent ? 'bg-white shadow-sm' : 'bg-slate-50/70 hover:bg-white opacity-80 hover:opacity-100';
 
-      timelineHtml += `
-        <div class="migracao-timeline-item relative flex items-start gap-3 sm:gap-4 cursor-pointer" onclick="window.switchMigracaoStep(${idx})">
-          <div class="w-10 h-10 shrink-0 flex items-center justify-center relative z-10 bg-white pt-2 sm:pt-0">
-            <div class="migracao-timeline-dot w-4 h-4 rounded-full transition-all duration-300" style="${dotStyle}"></div>
-          </div>
-          <div class="migracao-timeline-card flex-1 transition-all duration-300 ${cardClass}">
-            <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">${escapeHtml(s.ano)}</span>
-            <h4 class="migracao-timeline-title text-base sm:text-lg font-black text-slate-900 mt-0.5">${escapeHtml(s.titulo)}</h4>
-            <div class="migracao-timeline-desc ${isActive ? '' : 'hidden'} space-y-3.5 mt-2.5">
-              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed text-justify">${escapeHtml(s.desc)}</p>
-              
-              <div class="pt-3 border-t border-slate-200/70 space-y-2">
-                <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
-                  <i class="fa-solid fa-graduation-cap text-[#a45b16]"></i> Fontes Históricas & Referências (ABNT):
-                </span>
-                <div class="space-y-2">
-                  ${(s.fontes || []).map(f => formatMigracaoFonteAbnt(f)).join('')}
-                </div>
-              </div>
+      tabsHtml += `
+        <button 
+          type="button" 
+          role="tab"
+          id="migracao-tab-${idx}"
+          data-index="${idx}"
+          aria-selected="${isCurrent ? 'true' : 'false'}"
+          aria-controls="migracao-narrative-panel"
+          tabindex="${isCurrent ? '0' : '-1'}"
+          onclick="window.switchMigracaoStep(${idx}, true)"
+          onkeydown="window.handleMigracaoTabKeydown(event, ${idx})"
+          class="migracao-tab-btn group relative p-3 sm:p-4 rounded-2xl text-left transition-all cursor-pointer flex-1 min-w-[140px] sm:min-w-0 ${isCurrent ? 'is-active' : ''} ${bgClass} ${borderClass}"
+          style="${isCurrent ? `border-color: ${s.color};` : ''}"
+        >
+          <!-- Layout Completo (Normal) -->
+          <div class="migracao-tab-full flex flex-col justify-between h-full">
+            <div class="flex items-center justify-between gap-1.5 mb-1.5">
+              <span class="migracao-tab-badge inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-colors" style="${isCurrent ? `background-color: ${s.color}; color: #ffffff;` : 'background-color: #e2e8f0; color: #475569;'}">
+                Período 0${idx + 1}
+              </span>
+              <span class="migracao-tab-year text-[10px] font-mono text-slate-500 font-bold">
+                ${escapeHtml(s.ano)}
+              </span>
             </div>
+            <h4 class="migracao-tab-title text-xs sm:text-sm ${isCurrent ? 'font-black text-slate-900' : 'font-bold text-slate-700'} leading-snug">
+              ${escapeHtml(s.titulo)}
+            </h4>
           </div>
-        </div>
+
+          <!-- Layout Compacto (Sticky durante rolagem) -->
+          <div class="migracao-tab-compact hidden items-center justify-center gap-1.5 py-0.5 text-center">
+            <span class="migracao-compact-num font-mono font-black text-xs px-1.5 py-0.5 rounded-md ${isCurrent ? 'text-white' : 'text-slate-600 bg-slate-200'}" style="${isCurrent ? `background-color: ${s.color};` : ''}">0${idx + 1}</span>
+            <span class="migracao-compact-name font-bold text-xs truncate ${isCurrent ? 'text-slate-900 font-black' : 'text-slate-700'}">${escapeHtml(s.shortTitle || s.titulo.replace(/^A\s+/, ''))}</span>
+          </div>
+
+          <div class="migracao-tab-indicator absolute bottom-0 left-4 right-4 h-0.5 rounded-full transition-all ${isCurrent ? 'opacity-100' : 'opacity-0'}" style="background-color: ${s.color}"></div>
+        </button>
       `;
     });
-    timelineHtml += '</div>';
 
     container.innerHTML = `
-      <div class="space-y-8 animate-in fade-in duration-500">
-        <!-- Interactive Journey Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          
-          <!-- Timeline (Col Esquerda) -->
-          <div class="lg:col-span-5 bg-white rounded-3xl border border-slate-200 p-5 shadow-sm">
-            <div class="mb-5 pb-4 border-b border-slate-100 flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full bg-amber-50 text-[#a45b16] flex items-center justify-center shrink-0">
-                <i class="fa-solid fa-timeline text-xs"></i>
-              </div>
-              <div>
-                <h4 class="text-sm font-black text-slate-900 uppercase tracking-widest">Ondas Migratórias</h4>
-                <p class="text-[11px] text-slate-500 font-medium">Selecione o período para projetar os fluxos no mapa</p>
-              </div>
+      <div id="migracao-timeline-wrapper" class="space-y-5 sm:space-y-6 animate-in fade-in duration-500 relative">
+        <!-- Sentinel de rolagem para alternância de estado Normal / Compacto -->
+        <div id="migracao-sticky-sentinel" class="w-full h-px pointer-events-none -mt-2"></div>
+
+        <!-- Barra Única de Navegação Contextual Sticky Inteligente -->
+        <nav 
+          id="migracao-nav-sticky-container" 
+          class="sticky top-[var(--app-header-height,72px)] z-30 pt-1 pb-2.5 px-2 -mx-2 transition-all duration-200"
+          aria-label="Períodos Migratórios de São José dos Campos"
+        >
+          <!-- Cabeçalho descritivo (visível no estado normal, recolhido no estado compacto durante a rolagem) -->
+          <div id="migracao-nav-header-row" class="flex items-center justify-between px-1 mb-2.5 transition-all duration-200">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#a45b16]"></span>
+              <span class="text-xs font-black uppercase tracking-wider text-slate-700">Períodos Migratórios</span>
             </div>
-            ${timelineHtml}
+            <span class="text-[11px] font-medium text-slate-400 hidden sm:inline">
+              Selecione um período para explorar a narrativa e a cartografia
+            </span>
           </div>
 
-          <!-- Map (Col Direita) -->
-          <div class="lg:col-span-7 sticky top-[calc(var(--app-header-height,72px)+16px)]">
-            <div class="mb-3 flex items-center justify-between">
-               <h4 class="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                 <i class="fa-solid fa-map-location-dot text-[#a45b16]"></i> Mapa Georreferenciado de Fluxos
-               </h4>
-               <span id="migracao-map-phase-badge" class="text-[10px] text-slate-600 font-bold uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 flex items-center gap-1.5">
-                 <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: ${step.color}"></span>
-                 ${escapeHtml(step.titulo)}
-               </span>
+          <!-- Abas dos 4 Períodos com Suporte a Estado Normal e Compacto -->
+          <div 
+            id="migracao-stepper-tabs" 
+            role="tablist" 
+            aria-label="Seleção de períodos históricos" 
+            class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 overflow-x-auto no-scrollbar scroll-smooth"
+          >
+            ${tabsHtml}
+          </div>
+        </nav>
+
+        <!-- 2. Grid de Conteúdo: Narrativa Editorial (Col 7) + Mapa Georreferenciado (Col 5) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          
+          <!-- Narrativa Histórica Editorial (Esquerda) -->
+          <div class="lg:col-span-7">
+            <article 
+              id="migracao-narrative-panel" 
+              role="tabpanel" 
+              tabindex="-1" 
+              aria-labelledby="migracao-tab-${currentStepIdx}" 
+              class="bg-white rounded-3xl border border-slate-200 p-5 sm:p-8 shadow-xs focus:outline-none"
+            >
+              <div id="migracao-narrative-content">
+                <!-- Preenchido via renderMigracaoNarrativeContent -->
+              </div>
+            </article>
+          </div>
+
+          <!-- Mapa Georreferenciado Sticky (Direita) -->
+          <div id="migracao-map-col" class="lg:col-span-5 sticky top-[calc(var(--app-header-height,72px)+var(--migracao-sticky-height,68px)+16px)]">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <h4 class="text-xs font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                <i class="fa-solid fa-map-location-dot text-[#a45b16]"></i> Mapa de Fluxos
+              </h4>
+              <span id="migracao-map-phase-badge" class="text-[10px] text-slate-700 font-bold uppercase tracking-wider bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 flex items-center gap-1.5 shrink-0">
+                <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: ${step.color}"></span>
+                ${escapeHtml(step.titulo)}
+              </span>
             </div>
 
             <!-- Container do Mapa Real Leaflet com Estilo Preto & Branco Executivo -->
-            <div class="relative w-full h-[520px] bg-slate-100 rounded-3xl border border-slate-200 overflow-hidden shadow-inner sjc-bw-map">
+            <div class="relative w-full h-[500px] bg-slate-100 rounded-3xl border border-slate-200 overflow-hidden shadow-inner sjc-bw-map">
               <style>
                 .migracao-flow-dash {
                   animation: migracaoFlowDash 8s linear infinite;
@@ -3601,23 +4842,23 @@
               <!-- Card Flutuante de Contexto da Rota -->
               <div id="migracao-route-overlay-card" class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-slate-200/90 shadow-lg z-[1000] flex items-center justify-between gap-3 pointer-events-auto">
                 <div class="space-y-0.5 min-w-0">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full" style="background-color: ${step.color}"></span>
-                    <span class="text-[10px] font-black uppercase tracking-wider text-slate-800">${escapeHtml(step.titulo)}</span>
-                    <span class="text-[10px] text-slate-400 font-mono">• ${escapeHtml(step.ano)}</span>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${step.color}"></span>
+                    <span class="text-[11px] font-black uppercase tracking-wider text-slate-800">${escapeHtml(step.titulo)}</span>
+                    <span class="text-[11px] text-slate-500 font-mono">• ${escapeHtml(step.ano)}</span>
                   </div>
                   <p class="text-[11px] text-slate-600 truncate font-medium">Principais vetores: ${step.fluxos.map(f => MIGRACAO_GEO_NODES[f]?.label).filter(Boolean).join(', ')}.</p>
                 </div>
                 <div class="shrink-0 text-right">
-                  <span class="text-[10px] font-bold text-[#a45b16] bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80">
-                    Destino: São José dos Campos
+                  <span class="text-[10px] font-bold text-[#a45b16] bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200/80 inline-flex items-center gap-1">
+                    <i class="fa-solid fa-location-dot text-[9px]"></i> Destino: São José dos Campos
                   </span>
                 </div>
               </div>
             </div>
 
-            <p class="text-center text-[10px] text-slate-500 mt-3 font-medium px-4">
-              * Mapa cartográfico real centrado em São José dos Campos. As trajetórias representam a direção e origem comprovada das ondas migratórias municipais.
+            <p class="text-center text-[10px] text-slate-500 mt-2.5 font-medium px-2">
+              * Cartografia georreferenciada centrada em São José dos Campos. As trajetórias representam a direção e origem comprovada dos fluxos migratórios.
             </p>
           </div>
 
@@ -3625,8 +4866,17 @@
       </div>
     `;
 
+    // Renderiza a narrativa do período migratório ativo
+    renderMigracaoNarrativeContent(currentStepIdx);
+
     // Atualiza o Leaflet após a injeção do container no DOM
     requestAnimationFrame(function() {
+      const stickyNav = document.getElementById('migracao-nav-sticky-container');
+      if (stickyNav) {
+        const h = stickyNav.getBoundingClientRect().height;
+        document.documentElement.style.setProperty('--migracao-sticky-height', h + 'px');
+      }
+      checkMigracaoStickyState();
       updateMigracaoLeafletMap();
       if (_migracaoLeafletMap) {
         setTimeout(function() {
@@ -4494,6 +5744,8 @@
     restartQuizJoseensidade: restartQuizJoseensidade,
     shareQuizResult: shareQuizResult,
     renderCiclosCards: renderCiclosCards,
+    selectCiclo: selectCiclo,
+    navigateCiclo: navigateCiclo,
     renderBairrosEditorial: renderBairrosEditorial,
     renderPatrimoniosEditorial: renderPatrimoniosEditorial,
     renderPioneirosEditorial: renderPioneirosEditorial,
@@ -4507,11 +5759,15 @@
     filtrarPrefeitosEra: filtrarPrefeitosEra,
     resetarPrefeitosFiltros: resetarPrefeitosFiltros,
     filtrarPrefeitosCategoria: filtrarPrefeitosCategoria,
+    filtrarPrefeitosStatus: filtrarPrefeitosStatus,
     handlePrefeitosSearch: handlePrefeitosSearch,
     togglePrefeitosAccordion: togglePrefeitosAccordion,
     abrirRefPrefeitos: abrirRefPrefeitos,
+    copiarReferenciaAbnt: copiarReferenciaAbnt,
     renderQuizJoseensidade: renderQuizJoseensidade,
     renderMigracaoJoseenses: renderMigracaoJoseenses,
+    switchMigracaoStep: window.switchMigracaoStep,
+    navigateMigracaoStep: window.navigateMigracaoStep,
     openBibliografia: openHistoriaBibliografia,
     closeBibliografia: closeHistoriaBibliografia,
     openLendas: openHistoriaLendas,
@@ -4531,6 +5787,8 @@
   window.filterBairros = Historia.filterBairros;
   window.filterBairrosByRegiao = Historia.filterBairrosByRegiao;
   window.renderCiclosCards = Historia.renderCiclosCards;
+  window.selectCiclo = Historia.selectCiclo;
+  window.navigateCiclo = Historia.navigateCiclo;
   window.renderBairrosEditorial = Historia.renderBairrosEditorial;
   window.renderPatrimoniosEditorial = Historia.renderPatrimoniosEditorial;
   window.openHistoriaBibliografia = Historia.openBibliografia;
@@ -4548,9 +5806,11 @@
   window.filtrarPrefeitosEra = Historia.filtrarPrefeitosEra;
   window.resetarPrefeitosFiltros = Historia.resetarPrefeitosFiltros;
   window.filtrarPrefeitosCategoria = Historia.filtrarPrefeitosCategoria;
+  window.filtrarPrefeitosStatus = Historia.filtrarPrefeitosStatus;
   window.handlePrefeitosSearch = Historia.handlePrefeitosSearch;
   window.togglePrefeitosAccordion = Historia.togglePrefeitosAccordion;
   window.abrirRefPrefeitos = Historia.abrirRefPrefeitos;
+  window.copiarReferenciaAbnt = Historia.copiarReferenciaAbnt;
   window.openCicloDossieModal = Historia.openCicloMarcosModal;
   window.openHistoriaEventoModal = Historia.openEventoModal;
   window.closeHistoriaEventoModal = Historia.closeEventoModal;
@@ -4566,12 +5826,14 @@
   window.shareQuizResult = Historia.shareQuizResult;
   window.renderQuizJoseensidade = Historia.renderQuizJoseensidade;
   window.renderMigracaoJoseenses = Historia.renderMigracaoJoseenses;
+  window.switchMigracaoStep = Historia.switchMigracaoStep;
+  window.navigateMigracaoStep = Historia.navigateMigracaoStep;
   window.resetHistoriaFilters = resetHistoriaFilters;
   window.filterHistoriaEvents = filterHistoriaEvents;
   window.scrollHistoriaRiver = scrollHistoriaRiver;
   window.initHistoriaKeyboardNav = initHistoriaKeyboardNav;
 
-  // Navegação pelo teclado na Régua Cronológica de Prefeitos
+  // Navegação pelo teclado no Módulo de Prefeitos
   document.addEventListener('keydown', function(e) {
     const sec = document.getElementById("section-view-prefeitos");
     if (!sec || sec.classList.contains("hidden")) return;
@@ -4584,16 +5846,23 @@
       return;
     }
 
-    // Apenas se a gaveta estiver fechada e não estiver digitando em campo de input
-    if (!isDrawerOpen && prefeitosViewMode === 'timeline') {
-      const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-      if (activeTag === 'input' || activeTag === 'textarea') return;
-
+    if (isDrawerOpen) {
       if (e.key === 'ArrowLeft') {
         navigatePrefeito(-1);
       } else if (e.key === 'ArrowRight') {
         navigatePrefeito(1);
       }
+      return;
+    }
+
+    // Se a gaveta estiver fechada e não estiver digitando em campo de texto
+    const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+    if (activeTag === 'input' || activeTag === 'textarea') return;
+
+    if (e.key === 'ArrowLeft') {
+      navigatePrefeito(-1);
+    } else if (e.key === 'ArrowRight') {
+      navigatePrefeito(1);
     }
   });
 

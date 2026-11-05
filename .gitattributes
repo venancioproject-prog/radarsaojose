@@ -2,3 +2,16 @@
 docs/dados-publicos-revisao/revisao-independente-quatro-eixos/20261008/** -text
 scripts/revisao_quatro_eixos_*.py -text
 scripts/test_revisao_quatro_eixos.cjs -text
+
+# Shards e leitor offline do piloto: hashes calculados sobre bytes exatos.
+data/radar_hub/piloto_dataviz/** -text
+radar-piloto.html -text
+radar_piloto_*.js -text
+radar_piloto_visual.css -text
+docs/piloto-dataviz/20261008/** -text
+scripts/build_piloto_dataviz.py -text
+scripts/test_piloto_* -text
+docs/piloto-dataviz/integracao-oficial/** -text
+scripts/integrar_dataviz_blocos.py -text
+scripts/test_integracao_oficial.py -text
+scripts/test_integracao_escopo.py -text

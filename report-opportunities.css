@@ -1,0 +1,487 @@
+/* Chapter 04 builds on the approved editorial direction. Existing copy stays intact. */
+#executive-report-view#executive-report-view > .report-opportunities { background:linear-gradient(180deg,var(--movement-tint),#fff 160px); }
+#executive-report-view#executive-report-view .report-opportunities .movement-heading { margin:24px 0; }
+#executive-report-view#executive-report-view .report-opportunities .movement-heading h1 { color:#172233; font-size:clamp(36px,4vw,62px); line-height:1.08; letter-spacing:-.04em; font-weight:650; margin:10px 0 0; }
+#executive-report-view#executive-report-view .report-opportunities .movement-heading > p { color:#536071; margin:12px 0 0; font-size:16px; line-height:1.45; }
+#executive-report-view#executive-report-view .report-opportunities .op-main { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr); gap:32px; min-width:0; }
+#executive-report-view#executive-report-view .report-opportunities .op-original { color:#455369; min-width:0; align-self:center; }
+#executive-report-view#executive-report-view .report-opportunities .op-original :is(div,p,ul,li,span,strong,h3,h4,a) { position:static; max-height:none; max-width:none; overflow:visible; text-transform:none; letter-spacing:normal; font-family:Inter,Arial,sans-serif; }
+#executive-report-view#executive-report-view .report-opportunities .op-original p { font-size:18px; line-height:1.45; margin:0 0 16px; }
+#executive-report-view#executive-report-view .report-opportunities .op-original p:last-child { margin-bottom:0; }
+#executive-report-view#executive-report-view .report-opportunities .op-original-grid { display:grid; gap:16px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+#executive-report-view#executive-report-view .report-opportunities .op-original-grid[data-columns="3"] { grid-template-columns:repeat(3,minmax(0,1fr)); }
+#executive-report-view#executive-report-view .report-opportunities .op-original-grid > :only-child { grid-column:1 / -1; }
+#executive-report-view#executive-report-view .report-opportunities .op-card { background:#fff; border:1px solid #dce3ed; border-top:3px solid var(--movement-accent); border-radius:0 0 12px 12px; padding:18px; }
+#executive-report-view#executive-report-view .report-opportunities .op-card > p:first-child { font-weight:650; color:#172233; font-size:19px; line-height:1.25; margin-bottom:10px; }
+#executive-report-view#executive-report-view .report-opportunities .op-card:nth-child(4n+2) { border-top-color:#7850c9; }
+#executive-report-view#executive-report-view .report-opportunities .op-card:nth-child(4n+3) { border-top-color:#bd376d; }
+#executive-report-view#executive-report-view .report-opportunities .op-card:nth-child(4n) { border-top-color:#087e6b; }
+#executive-report-view#executive-report-view .report-opportunities .op-sidebar { display:flex; flex-direction:column; gap:20px; min-width:0; }
+#executive-report-view#executive-report-view .report-opportunities .op-photo { position:relative; margin:0; height:300px; border-radius:14px; overflow:hidden; background:#e7ebef; }
+#executive-report-view#executive-report-view .report-opportunities .op-photo img { width:100%; height:100%; object-fit:cover; }
+#executive-report-view#executive-report-view .report-opportunities .op-photo figcaption { position:absolute; inset:auto 0 0; padding:40px 16px 14px; background:linear-gradient(transparent,#000d); color:#fff; font-size:12px; line-height:1.35; }
+#executive-report-view#executive-report-view .report-opportunities .op-image-credit { display:block; font-size:10px; color:#fff; opacity:.85; margin-bottom:5px; }
+#executive-report-view#executive-report-view .report-opportunities .op-context { border-top:2px solid var(--movement-accent); padding:16px 0 0; color:#455369; }
+#executive-report-view#executive-report-view .report-opportunities .op-context-kicker { display:block; font-size:10px; font-weight:700; line-height:1.3; letter-spacing:.08em; color:var(--movement-accent); margin-bottom:10px; }
+#executive-report-view#executive-report-view .report-opportunities .op-stat { display:flex; gap:16px; align-items:center; margin-bottom:8px; }
+#executive-report-view#executive-report-view .report-opportunities .op-stat strong { font-size:40px; line-height:1; letter-spacing:-.04em; color:var(--movement-accent); flex-shrink:0; }
+#executive-report-view#executive-report-view .report-opportunities .op-stat span { font-size:14px; line-height:1.3; }
+#executive-report-view#executive-report-view .report-opportunities .op-base { display:block; color:#647286; font-size:10px; margin:0 0 12px; }
+#executive-report-view#executive-report-view .report-opportunities .op-context h3 { color:#182436; font-size:22px; line-height:1.2; font-weight:650; letter-spacing:-.02em; margin:10px 0; }
+#executive-report-view#executive-report-view .report-opportunities .op-context p { font-size:16px; line-height:1.45; margin:0; }
+#executive-report-view#executive-report-view .report-opportunities .op-source-original { display:flex; gap:18px; justify-content:space-between; }
+#executive-report-view#executive-report-view .report-opportunities .op-source-original > span { overflow:visible; text-overflow:clip; white-space:normal; font-size:10px; color:#5a687b; }
+#executive-report-view#executive-report-view .report-opportunities .op-survey-source { font-size:11px; line-height:1.35; color:#526174; margin-top:5px; }
+#executive-report-view#executive-report-view .report-opportunities.op-reference .op-main { display:flex; flex-direction:column; }
+#executive-report-view#executive-report-view .report-opportunities.op-reference .op-original { align-self:stretch; }
+#executive-report-view#executive-report-view .report-opportunities.op-reference .op-context { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.7fr); gap:6px 28px; padding-top:12px; }
+#executive-report-view#executive-report-view .report-opportunities.op-reference .op-context > :is(.op-context-kicker,.op-stat,.op-base,h3) { grid-column:1; margin:0; }
+#executive-report-view#executive-report-view .report-opportunities.op-reference .op-context p { grid-column:2; grid-row:1 / 6; align-self:center; }
+#executive-report-view#executive-report-view .report-opportunities.op-reference .op-context h3 { font-size:20px; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column { border:1px solid #dce3ed; padding:18px; border-radius:14px; background:#fff; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column:nth-child(1) { border-top:4px solid #087e6b; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column:nth-child(2) { border-top:4px solid #b07214; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column:nth-child(3) { border-top:4px solid #bd376d; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column h3 { color:#172233; font-size:20px; font-weight:650; margin:0 0 16px; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column h4 { color:#27364a; font-size:16px; font-weight:650; margin:12px 0 4px; }
+#executive-report-view#executive-report-view .report-opportunities .op-market-column p { font-size:14px; line-height:1.4; margin:0; }
+#executive-report-view#executive-report-view .report-opportunities.op-ideas .op-original-grid > div { border:1px solid #dce3ed; border-top:3px solid var(--movement-accent); padding:18px; border-radius:0 0 12px 12px; }
+#executive-report-view#executive-report-view .report-opportunities.op-ideas .op-original-grid > div > span { display:block; font-size:18px; font-weight:650; color:var(--movement-accent); margin-bottom:14px; }
+#executive-report-view#executive-report-view .report-opportunities.op-ideas ul { list-style:none; padding:0; margin:0; }
+#executive-report-view#executive-report-view .report-opportunities.op-ideas li { display:flex; gap:8px; align-items:flex-start; font-size:15px; line-height:1.4; margin-bottom:8px; }
+#executive-report-view#executive-report-view .report-opportunities.op-ideas li strong { color:var(--movement-accent); font-size:13px; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-opportunities.active-slide {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: calc(100vh - 60px) !important;
+  min-height: calc(100vh - 60px) !important;
+  max-height: calc(100vh - 60px) !important;
+  box-sizing: border-box !important;
+  padding: clamp(16px, 2.4vh, 28px) clamp(24px, 4vw, 56px) !important;
+  gap: clamp(10px, 1.5vh, 18px) !important;
+  overflow: hidden !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view > article.report-opportunities > * {
+  margin: 0 !important;
+  min-width: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .report-page-meta {
+  flex-shrink: 0;
+  padding-bottom: 6px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .movement-heading {
+  flex-shrink: 0;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .movement-heading :is(h1, h2) {
+  font-size: clamp(24px, 3.4vh, 40px);
+  line-height: 1.15;
+  margin-top: 4px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .movement-heading > p {
+  font-size: clamp(13px, 1.6vh, 16px);
+  margin: 4px 0 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-main {
+  flex: 1 1 0 !important;
+  min-height: 0 !important;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.2vw, 48px);
+  align-items: stretch;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-original {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-self: stretch;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities:not(.op-reference) .op-original-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities:not(.op-reference) .op-original-grid > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original-grid[data-columns="3"] {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 1.4vw, 16px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original-grid[data-columns="2"] {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 1.4vw, 16px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-original p {
+  font-size: clamp(15px, 2vh, 20px);
+  line-height: 1.55;
+  color: var(--report-presentation-copy, #334155);
+  margin: 0 0 clamp(8px, 1.2vh, 16px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-original p:last-child {
+  margin-bottom: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-sidebar {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(12px, 1.8vh, 20px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-photo {
+  flex: 1 1 0;
+  min-height: clamp(150px, 20vh, 250px);
+  max-height: clamp(200px, 28vh, 320px);
+  height: auto;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #e7ebef;
+  box-shadow: 0 4px 16px rgba(15, 30, 50, 0.06);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-photo figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: clamp(20px, 3vh, 36px) clamp(12px, 1.5vw, 18px) clamp(8px, 1.2vh, 12px);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  color: #fff;
+  font-size: clamp(10.5px, 1.35vh, 13.5px);
+  line-height: 1.35;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-image-credit {
+  display: block;
+  font-size: clamp(8.5px, 1.1vh, 10.5px);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-context {
+  flex-shrink: 0;
+  padding: clamp(12px, 1.8vh, 20px);
+  background: var(--report-presentation-panel, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-top: 4px solid var(--movement-accent, #0066ff);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-context-kicker {
+  display: block;
+  font-size: clamp(9px, 1.2vh, 11px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  color: var(--movement-accent, #0066ff);
+  margin-bottom: clamp(4px, 0.6vh, 6px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-stat {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: clamp(3px, 0.5vh, 6px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-stat strong {
+  font-size: clamp(32px, 4.2vh, 46px);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--movement-accent, #0066ff);
+  flex-shrink: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-stat span {
+  font-size: clamp(12px, 1.5vh, 15px);
+  line-height: 1.35;
+  color: var(--report-presentation-copy, #334155);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-base {
+  display: block;
+  color: #64748b;
+  font-size: clamp(8.5px, 1.1vh, 10.5px);
+  margin-bottom: clamp(4px, 0.6vh, 8px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-context h3 {
+  color: #0f172a;
+  font-size: clamp(16px, 2.1vh, 22px);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin: clamp(4px, 0.6vh, 6px) 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-context p {
+  font-size: clamp(12px, 1.55vh, 16px);
+  line-height: 1.45;
+  color: var(--report-presentation-copy, #475569);
+  margin: 0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-footer {
+  margin-top: auto !important;
+  flex-shrink: 0 !important;
+  padding-top: 8px;
+  border-top: 1px solid #e2e8f0;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .movement-reference {
+  font-size: clamp(9px, 1.1vh, 12px);
+  margin-top: 4px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-survey-source {
+  font-size: 10px;
+  margin-top: 4px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-card {
+  padding: 14px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-original-grid {
+  gap: 12px;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-card > p:first-child {
+  font-size: clamp(16px, 2vh, 22px);
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-main {
+  flex: 1 1 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: clamp(8px, 1.2vh, 14px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original {
+  flex: 1 1 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-evenly !important;
+  overflow: visible !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original-grid {
+  height: auto !important;
+  min-height: 0 !important;
+  flex: 0 1 auto !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference #rep-semaforo-root {
+  flex: 1 1 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original-grid[data-columns="3"] {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 1.4vw, 20px) !important;
+  height: auto !important;
+  align-items: stretch !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original-grid[data-columns="2"] {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(12px, 1.6vw, 24px) !important;
+  height: auto !important;
+  align-items: stretch !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-sidebar {
+  flex: 0 0 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-context {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+  padding: clamp(10px, 1.5vh, 16px) clamp(16px, 2vw, 28px) !important;
+  border-radius: 14px !important;
+  border-top-width: 4px !important;
+  gap: clamp(4px, 0.8vh, 8px) clamp(16px, 2vw, 32px) !important;
+  background: var(--report-presentation-panel, #f8fafc) !important;
+  border-color: #e2e8f0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-context-kicker {
+  font-size: clamp(9.5px, 1.2vh, 12px) !important;
+  margin-bottom: 3px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-stat {
+  margin-bottom: 3px !important;
+  gap: clamp(8px, 1vw, 14px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-stat strong {
+  font-size: clamp(30px, 3.8vh, 42px) !important;
+  line-height: 1 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-stat span {
+  font-size: clamp(12.5px, 1.55vh, 15px) !important;
+  line-height: 1.3 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-base {
+  font-size: clamp(8.5px, 1.1vh, 10.5px) !important;
+  margin-bottom: 4px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-context h3 {
+  font-size: clamp(16px, 2.1vh, 22px) !important;
+  line-height: 1.25 !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-context p {
+  font-size: clamp(13px, 1.65vh, 16px) !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original > div > p {
+  font-size: clamp(14px, 1.85vh, 18px) !important;
+  line-height: 1.5 !important;
+  margin-bottom: clamp(8px, 1.2vh, 14px) !important;
+  color: var(--report-presentation-copy, #334155) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original > div > div:last-child p {
+  font-size: clamp(13px, 1.7vh, 16.5px) !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+  color: var(--report-presentation-copy, #475569) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-original > div > div:last-child {
+  margin-top: clamp(8px, 1.2vh, 14px) !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-card {
+  padding: clamp(12px, 1.6vh, 18px) clamp(14px, 1.5vw, 20px) !important;
+  border-radius: 0 0 12px 12px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-card > p:first-child {
+  font-size: clamp(16px, 2.2vh, 22px) !important;
+  line-height: 1.25 !important;
+  margin-bottom: clamp(6px, 0.9vh, 10px) !important;
+  font-weight: 700 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-reference .op-card p:not(:first-child) {
+  font-size: clamp(13.5px, 1.75vh, 16.5px) !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column {
+  padding: clamp(10px, 1.4vh, 16px) clamp(12px, 1.3vw, 18px) !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column h3 {
+  font-size: clamp(15px, 1.9vh, 19px) !important;
+  margin: 0 0 clamp(4px, 0.7vh, 8px) !important;
+  font-weight: 700 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column h4 {
+  font-size: clamp(12.5px, 1.55vh, 15.5px) !important;
+  margin: clamp(4px, 0.6vh, 8px) 0 2px !important;
+  line-height: 1.25 !important;
+  font-weight: 650 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column p {
+  font-size: clamp(11.5px, 1.35vh, 13.5px) !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-ideas .op-original-grid > div {
+  padding: clamp(12px, 1.6vh, 20px) clamp(16px, 1.6vw, 24px) !important;
+  border-radius: 0 0 12px 12px !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-ideas .op-original-grid > div > span {
+  font-size: clamp(16px, 2.1vh, 20px) !important;
+  margin-bottom: clamp(8px, 1.1vh, 12px) !important;
+  font-weight: 700 !important;
+}
+body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-ideas li {
+  font-size: clamp(12.5px, 1.55vh, 15px) !important;
+  line-height: 1.38 !important;
+  margin-bottom: clamp(4px, 0.7vh, 8px) !important;
+}
+@media(max-height:740px),(max-width:1100px) {
+  body.presentation-mode #executive-report-view#executive-report-view > article.report-opportunities.active-slide {
+    gap: 8px;
+    padding: 14px 3vw;
+  }
+  body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-main {
+    gap: 18px;
+  }
+  body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-sidebar {
+    gap: 10px;
+  }
+  body.presentation-mode #executive-report-view#executive-report-view .report-opportunities .op-photo {
+    min-height: 150px;
+  }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-main { grid-template-columns:minmax(0,1fr); gap:24px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-original-grid,
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-context { grid-template-columns:minmax(0,1fr); }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-context p { grid-column:1; grid-row:auto; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-stat { align-items:flex-start; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-stat strong { font-size:34px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-source-original { flex-direction:column; gap:4px; }
+}
+#executive-report-view#executive-report-view .report-opportunities .report-page-meta span { color:#596779!important; }
+#executive-report-view#executive-report-view .report-opportunities .movement-heading :is(h1,h2) { max-width:none!important; }
+#executive-report-view#executive-report-view .report-opportunities .op-original-stat { display:block; color:var(--movement-accent); font-weight:650; font-size:clamp(40px,4vh,56px); line-height:1; margin-bottom:12px; }
+
+#executive-report-view#executive-report-view .report-opportunities .op-study-facts { display:grid; grid-template-columns:1fr 1fr 2fr; gap:14px; border-bottom:1px solid #dce3ed; padding-bottom:14px; margin-bottom:16px; }
+#executive-report-view#executive-report-view .report-opportunities .op-study-facts p { margin:0; font-weight:600; color:var(--movement-accent); }
+#executive-report-view#executive-report-view .report-opportunities .op-closing-brand { display:flex; gap:18px; margin-top:16px; }
+#executive-report-view#executive-report-view .report-opportunities .op-closing-brand p { font-size:12px; margin:0; }
+body.presentation-mode #executive-report-view#executive-report-view #rep-tela-115 .op-photo { min-height:0; }
+body.presentation-mode #executive-report-view#executive-report-view #rep-tela-115 .op-context { flex:0 0 auto; }
+@media(max-height:740px) {
+ body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column { padding:10px 12px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column h4 { margin:7px 0 3px; }
+ body.presentation-mode #executive-report-view#executive-report-view .report-opportunities.op-market .op-market-column p { font-size:12px; line-height:1.3; }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-study-facts { grid-template-columns:minmax(0,1fr); gap:10px; }
+}
+#executive-report-view#executive-report-view #rep-tela-110 .op-final-note p { display:inline; margin:0; }
+#executive-report-view#executive-report-view #rep-tela-110 .op-final-note p + p::before { content:' '; }
+#executive-report-view#executive-report-view .op-cover .op-photo .movement-heading { position:absolute; inset:auto 24px 45px; margin:0; z-index:2; }
+#executive-report-view#executive-report-view .op-cover .op-photo::after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,#000d,transparent 85%); pointer-events:none; }
+#executive-report-view#executive-report-view .op-cover .op-photo .movement-heading :is(h1,p) { color:#fff; }
+#executive-report-view#executive-report-view .op-cover .op-photo .movement-heading h1 { font-size:clamp(38px,4vw,62px); }
+#executive-report-view#executive-report-view .op-cover .op-photo .movement-heading p { font-size:20px; line-height:1.3; margin-top:14px; }
+#executive-report-view#executive-report-view .op-cover .op-main { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); grid-template-rows:1fr auto; }
+#executive-report-view#executive-report-view .op-cover .op-sidebar { display:contents; }
+#executive-report-view#executive-report-view .op-cover .op-photo { grid-column:1; grid-row:1 / 3; height:100%; min-height:520px; }
+#executive-report-view#executive-report-view .op-cover .op-original { grid-column:2; grid-row:1; }
+#executive-report-view#executive-report-view .op-cover .op-context { grid-column:2; grid-row:2; }
+body.presentation-mode #executive-report-view#executive-report-view > article.report-opportunities.op-cover.active-slide { grid-template-rows:auto minmax(0,1fr) auto; }
+body.presentation-mode #executive-report-view#executive-report-view .op-cover .op-photo { min-height:0; height:100%; }
+body.presentation-mode #executive-report-view#executive-report-view .op-cover .op-photo .movement-heading h1 { font-size:clamp(38px,5.5vh,64px); }
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .op-cover .op-main { display:flex; flex-direction:column; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .op-cover .op-photo { order:-1; height:460px; min-height:460px; }
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .op-cover .op-photo .movement-heading h1 { font-size:36px; }
+}
+#executive-report-view#executive-report-view .op-cover .op-photo figcaption { z-index:3; padding:0 12px 10px; background:none; }
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .op-closing-brand { flex-direction:column; gap:6px; }
+}
+@media(max-width:760px) {
+ body:not(.presentation-mode) #executive-report-view#executive-report-view .report-opportunities .movement-heading h1 { font-size:clamp(28px,8vw,36px); }
+}
+#executive-report-view#executive-report-view #rep-tela-101 .op-photo img { object-position:center bottom; }

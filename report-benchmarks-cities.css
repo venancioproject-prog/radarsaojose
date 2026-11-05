@@ -1,0 +1,24 @@
+/* One chapter 04 benchmark slide, preserving the six reference questions. */
+#executive-report-view .report-benchmarks-cidades { container-type:inline-size; color:#142b45; }
+#executive-report-view .report-benchmarks-cidades .report-page-heading { margin:0; max-width:76rem; }
+#executive-report-view .report-benchmarks-cidades .report-page-heading h2 { margin:8px 0; max-width:28ch; }
+#executive-report-view .report-benchmarks-cidades .report-page-heading > p { margin:0; max-width:70ch; color:#526174; font-size:16px; line-height:1.45; }
+#executive-report-view .benchmark-city-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+#executive-report-view .benchmark-city-card { min-width:0; padding:18px; border:1px solid #dce5ee; border-top:3px solid #3b82f6; background:#f8fafc; }
+#executive-report-view .benchmark-city-card.benchmark-global { border-top-color:#7c3aed; background:#faf8ff; }
+#executive-report-view .benchmark-city-card > div { display:flex; justify-content:space-between; gap:12px; align-items:baseline; }
+#executive-report-view .benchmark-city-card span { color:#64748b; font:800 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.09em; }
+#executive-report-view .benchmark-city-card h3 { margin:0; color:#142b45; font-size:20px; line-height:1.1; }
+#executive-report-view .benchmark-city-card strong { display:block; margin:14px 0 8px; color:#1e3a5f; font-size:14px; line-height:1.25; }
+#executive-report-view .benchmark-city-card p { margin:0; color:#526174; font-size:13px; line-height:1.4; }
+#executive-report-view .report-benchmarks-cidades .report-page-source a { color:#2563eb; text-decoration:underline; text-underline-offset:3px; }
+body.presentation-mode #executive-report-view > .report-benchmarks-cidades.active-slide { display:flex!important; flex-direction:column; gap:clamp(10px,1.7vh,16px); padding:clamp(16px,2.6vh,30px) clamp(36px,5vw,86px); overflow:hidden; }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .report-page-heading h2 { font-size:clamp(28px,4.25vh,48px); }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .report-page-heading > p { font-size:clamp(13px,1.7vh,17px); }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-grid { flex:1 1 auto; grid-auto-rows:1fr; min-height:0; }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-card { padding:clamp(12px,1.8vh,18px); }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-card h3 { font-size:clamp(17px,2.4vh,23px); }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-card strong { margin:clamp(8px,1.3vh,13px) 0 6px; font-size:clamp(12px,1.6vh,16px); }
+body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-card p { font-size:clamp(11px,1.45vh,14px); line-height:1.35; }
+@media (max-width:760px) { #executive-report-view .benchmark-city-grid { grid-template-columns:1fr; } }
+@media (max-height:720px) and (min-width:900px) { body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-card { padding:10px 12px; } body.presentation-mode #executive-report-view .report-benchmarks-cidades .benchmark-city-card strong { margin:6px 0 4px; } }

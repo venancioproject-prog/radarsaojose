@@ -1,0 +1,90 @@
+#hub-axis-container-meio_ambiente .amb-intro{margin-bottom:20px}#hub-axis-container-meio_ambiente .amb-intro h2{font-size:24px;font-weight:750;color:var(--dv-text);margin:0 0 6px}#hub-axis-container-meio_ambiente .amb-intro p{font-size:14px;color:var(--dv-muted);margin:0}#hub-axis-container-meio_ambiente .amb-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}#hub-axis-container-meio_ambiente .amb-card{background:var(--dv-surface);border:1px solid var(--dv-grid);border-radius:16px;padding:20px;min-width:0;color:var(--dv-text)}#hub-axis-container-meio_ambiente .amb-eyebrow{font-size:12px;font-weight:700;color:var(--dv-dark);margin:0 0 8px}#hub-axis-container-meio_ambiente h3{font-size:18px;line-height:1.35;margin:0 0 14px;color:var(--dv-text)}#hub-axis-container-meio_ambiente .amb-controls{margin-bottom:12px}#hub-axis-container-meio_ambiente label{font-size:12px;font-weight:600;display:block}#hub-axis-container-meio_ambiente select{display:block;width:100%;min-width:0;max-width:100%;color:var(--dv-text);font:inherit;font-size:13px;background:var(--dv-soft);border:1px solid var(--dv-grid);padding:8px;border-radius:8px;margin-top:5px}#hub-axis-container-meio_ambiente .amb-unit{font-size:12px;color:var(--dv-muted);margin:0 0 8px}#hub-axis-container-meio_ambiente .amb-latest{margin:0 0 7px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}#hub-axis-container-meio_ambiente .amb-latest strong{font-size:27px;color:var(--dv-dark);letter-spacing:-.5px}#hub-axis-container-meio_ambiente .amb-latest span{font-size:12px;color:var(--dv-muted)}#hub-axis-container-meio_ambiente .amb-plot svg{display:block;width:100%;height:auto;max-height:235px;overflow:visible}#hub-axis-container-meio_ambiente .amb-plot svg text{font-size:12px;fill:var(--dv-text);font-family:inherit}#hub-axis-container-meio_ambiente footer{border-top:1px solid var(--dv-grid);margin-top:16px;padding-top:12px;font-size:12px}#hub-axis-container-meio_ambiente footer p{margin:0 0 8px;line-height:1.5}#hub-axis-container-meio_ambiente a{color:var(--dv-text);text-decoration:underline;overflow-wrap:anywhere}#hub-axis-container-meio_ambiente details{margin-top:10px}#hub-axis-container-meio_ambiente summary{font-size:12px;font-weight:600;cursor:pointer;color:var(--dv-text);padding:5px 0}#hub-axis-container-meio_ambiente details p{overflow-wrap:anywhere}#hub-axis-container-meio_ambiente .amb-note{color:var(--dv-muted)}#hub-axis-container-meio_ambiente .amb-table-wrap{overflow-x:auto}#hub-axis-container-meio_ambiente table{width:100%;border-collapse:collapse;font-size:12px}#hub-axis-container-meio_ambiente th,#hub-axis-container-meio_ambiente td{text-align:left;border-bottom:1px solid var(--dv-grid);padding:7px}#hub-axis-container-meio_ambiente .amb-bar-row{display:grid;grid-template-columns:minmax(120px,1.2fr) minmax(40px,1fr) 58px;align-items:center;gap:10px;margin:14px 0;font-size:13px}#hub-axis-container-meio_ambiente .amb-track{height:8px;background:var(--dv-soft);border-radius:4px}#hub-axis-container-meio_ambiente .amb-track i{display:block;height:100%;background:var(--dv-primary);border-radius:4px}#hub-axis-container-meio_ambiente .amb-control-note{font-size:13px;color:var(--dv-muted);margin:0;padding:7px 0}#hub-axis-container-meio_ambiente .amb-availability{font-size:13px;padding:12px 0;color:var(--dv-muted)}@media(max-width:1050px){#hub-axis-container-meio_ambiente .amb-grid{grid-template-columns:1fr}}@media(max-width:480px){#hub-axis-container-meio_ambiente .amb-card{padding:16px}#hub-axis-container-meio_ambiente .amb-bar-row{grid-template-columns:minmax(100px,1.3fr) minmax(25px,.7fr) 55px;gap:8px}#hub-axis-container-meio_ambiente h3{font-size:17px}}
+
+#hub-axis-container-meio_ambiente{font-family:Inter,sans-serif}#hub-axis-container-meio_ambiente .amb-intro h2,#hub-axis-container-meio_ambiente h3{font-family:Sora,Inter,sans-serif}#hub-axis-container-meio_ambiente .amb-reading{font-size:13px;line-height:1.6;color:var(--dv-muted);margin:0 0 12px}#hub-axis-container-meio_ambiente .amb-bar-row>span{overflow-wrap:anywhere;line-height:1.5}#hub-axis-container-meio_ambiente .amb-bar-row strong{font-variant-numeric:tabular-nums;text-align:right}#hub-axis-container-meio_ambiente .amb-intro p{line-height:1.6;max-width:900px}#hub-axis-container-meio_ambiente select:focus-visible,#hub-axis-container-meio_ambiente summary:focus-visible{outline:2px solid var(--dv-primary);outline-offset:3px}#hub-axis-container-meio_ambiente caption{text-align:left;padding:8px 0;line-height:1.5}@media(max-width:480px){#hub-axis-container-meio_ambiente .amb-bar-row{grid-template-columns:minmax(0,1fr) 62px;gap:6px;margin:17px 0}#hub-axis-container-meio_ambiente .amb-bar-row>span{grid-column:1/-1}#hub-axis-container-meio_ambiente .amb-intro h2{font-size:21px}}
+
+#hub-axis-container-meio_ambiente [data-amb-card="residuos"]{grid-column:1/-1}#hub-axis-container-meio_ambiente [data-amb-card="residuos"] .amb-bar-row{grid-template-columns:minmax(180px,1.4fr) minmax(80px,1fr) 64px}#hub-axis-container-meio_ambiente .amb-bars{margin:18px 0}@media(max-width:480px){#hub-axis-container-meio_ambiente [data-amb-card="residuos"] .amb-bar-row{grid-template-columns:minmax(0,1fr) 62px}}
+
+#hub-axis-container-meio_ambiente .amb-atlas{background:var(--dv-surface);border:1px solid var(--dv-grid);border-radius:20px;padding:24px;margin-bottom:28px;min-width:0;color:var(--dv-text)}
+#hub-axis-container-meio_ambiente .amb-atlas>header{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:18px}
+#hub-axis-container-meio_ambiente .amb-atlas>header h3{font-size:21px;line-height:1.45;margin:0 0 8px}
+#hub-axis-container-meio_ambiente .amb-atlas>header p:last-child{font-size:13px;line-height:1.7;color:var(--dv-muted);margin:0}
+#hub-axis-container-meio_ambiente .amb-atlas>header>a{font-size:12px;white-space:nowrap;flex-shrink:0;padding:10px 12px;border:1px solid var(--dv-grid);border-radius:8px;text-decoration:none}
+#hub-axis-container-meio_ambiente .amb-atlas-heading{flex:1;min-width:0}
+#hub-axis-container-meio_ambiente .amb-atlas-toolbar{display:flex;align-items:end;gap:8px;flex:0 1 350px;min-width:260px}
+#hub-axis-container-meio_ambiente .amb-atlas-toolbar label{flex:1;min-width:0;font-size:11px;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-atlas-toolbar select{background:var(--dv-surface);padding:11px 30px 11px 12px;min-height:44px;font-size:13px;color:var(--dv-text)}
+#hub-axis-container-meio_ambiente .amb-atlas button{font:600 12px/1.5 Inter,sans-serif;color:var(--dv-text);background:var(--dv-surface);border:1px solid var(--dv-grid);border-radius:8px;padding:10px 12px;cursor:pointer;min-height:42px}
+#hub-axis-container-meio_ambiente .amb-atlas-external{display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border:1px solid var(--dv-grid);border-radius:8px;text-decoration:none;background:var(--dv-surface)}
+#hub-axis-container-meio_ambiente .amb-atlas-layout{display:block}
+#hub-axis-container-meio_ambiente .amb-atlas-layout>div{min-width:0}
+#hub-axis-container-meio_ambiente .amb-atlas-map-wrap{position:relative}
+#hub-axis-container-meio_ambiente .amb-atlas-map-wrap>[data-atlas-reset]{position:absolute;top:12px;right:12px;z-index:1;box-shadow:0 2px 8px #0f172a15;background:var(--dv-surface)}
+#hub-axis-container-meio_ambiente .amb-atlas-map{height:460px;border:1px solid var(--dv-grid);border-radius:12px;overflow:hidden;background:#eef3f1;z-index:0;font-family:Inter,sans-serif}
+#hub-axis-container-meio_ambiente .amb-atlas-map .leaflet-control-attribution{font-size:9px;background:#fffffff0;color:#35465b}
+#hub-axis-container-meio_ambiente .amb-atlas-map .leaflet-control-attribution a{color:#35465b}
+#hub-axis-container-meio_ambiente .amb-atlas-map .leaflet-popup-content{font-size:12px;line-height:1.6;color:#24364b}
+#hub-axis-container-meio_ambiente .amb-atlas-map .leaflet-tooltip{font-size:11px;color:#24364b}
+#hub-axis-container-meio_ambiente .amb-atlas-legend{display:flex;flex-wrap:wrap;gap:8px 18px;padding-top:12px;font-size:11px;line-height:1.6;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-atlas-legend>span{display:flex;align-items:center;gap:7px}
+#hub-axis-container-meio_ambiente .amb-atlas-legend i{display:inline-block;width:12px;height:9px;border-radius:2px;opacity:.85}
+#hub-axis-container-meio_ambiente .amb-atlas-legend i.amb-atlas-boundary-swatch{border:1px dashed #52677b;background:transparent}
+#hub-axis-container-meio_ambiente .amb-atlas-status{font-size:11px;color:var(--dv-muted);line-height:1.6;margin:8px 0 0;min-height:18px}
+#hub-axis-container-meio_ambiente .amb-atlas-map-meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+#hub-axis-container-meio_ambiente .amb-atlas-aside{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px;font-size:12px;line-height:1.7;min-width:0;color:var(--dv-muted);padding-top:18px;border-top:1px solid var(--dv-grid)}
+#hub-axis-container-meio_ambiente .amb-atlas-kicker{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dv-dark);margin:0 0 8px}
+#hub-axis-container-meio_ambiente .amb-atlas-aside h4{font:700 16px/1.5 Sora,Inter,sans-serif;color:var(--dv-text);margin:0 0 12px}
+#hub-axis-container-meio_ambiente .amb-atlas-aside p{margin:0 0 12px}
+#hub-axis-container-meio_ambiente .amb-atlas-interpretation{padding:12px;border-left:3px solid var(--dv-secondary);background:var(--dv-soft);border-radius:0 8px 8px 0}
+#hub-axis-container-meio_ambiente .amb-atlas-selection{margin:0;padding:0}
+#hub-axis-container-meio_ambiente .amb-atlas-area{border-left:1px solid var(--dv-grid);padding-left:24px;min-width:0}
+#hub-axis-container-meio_ambiente .amb-atlas-selection h5{font-size:13px;line-height:1.6;color:var(--dv-text);margin:0 0 8px;font-weight:700}
+#hub-axis-container-meio_ambiente .amb-atlas-selection p{font-size:11px;line-height:1.7}
+#hub-axis-container-meio_ambiente .amb-atlas-list{display:grid;gap:7px;max-height:250px;overflow:auto;margin-top:8px;padding:3px}
+#hub-axis-container-meio_ambiente .amb-atlas-list button{text-align:left;font-size:11px;line-height:1.5}
+#hub-axis-container-meio_ambiente .amb-atlas-list button:hover{border-color:var(--dv-primary);background:var(--dv-soft)}
+#hub-axis-container-meio_ambiente .amb-atlas-list small{display:block;font-size:9px;color:var(--dv-muted);margin-top:3px}
+#hub-axis-container-meio_ambiente .amb-atlas footer{margin-top:18px}
+#hub-axis-container-meio_ambiente .amb-atlas footer p{font-size:11px;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-atlas-retry{display:block;margin-top:8px}
+#hub-axis-container-meio_ambiente .amb-charts-heading{padding:0 0 18px}
+#hub-axis-container-meio_ambiente .amb-charts-heading h3{font-size:20px;margin-bottom:8px}
+#hub-axis-container-meio_ambiente .amb-charts-heading p{font-size:13px;line-height:1.7;color:var(--dv-muted);margin:0}
+#hub-axis-container-meio_ambiente .amb-bar-row small{display:block;font-size:11px;line-height:1.6;font-weight:400;color:var(--dv-muted);margin-top:4px}
+#hub-axis-container-meio_ambiente .amb-residue-group{font-size:12px;line-height:1.6;font-weight:700;color:var(--dv-text);padding:12px 0 5px;margin:6px 0;border-bottom:1px solid var(--dv-grid)}
+#hub-axis-container-meio_ambiente .amb-grid{align-items:stretch}
+#hub-axis-container-meio_ambiente .amb-card{display:flex;flex-direction:column}
+#hub-axis-container-meio_ambiente .amb-card>header{min-height:102px}
+#hub-axis-container-meio_ambiente .amb-card footer{margin-top:auto}
+#hub-axis-container-meio_ambiente .amb-card .amb-plot{margin-bottom:18px}
+#hub-axis-container-meio_ambiente .amb-atlas :is(button,a,[tabindex]):focus-visible{outline:3px solid var(--dv-primary);outline-offset:3px}
+#hub-axis-container-meio_ambiente .amb-nature-grid{margin-bottom:28px}
+#hub-axis-container-meio_ambiente .amb-indicator-section{margin:0 0 28px}
+#hub-axis-container-meio_ambiente .amb-indicator-heading{display:block;padding:0 0 16px}
+#hub-axis-container-meio_ambiente .amb-indicator-heading h3{font:700 20px/1.5 Sora,Inter,sans-serif;margin:0 0 5px}
+#hub-axis-container-meio_ambiente .amb-indicator-heading p{font-size:13px;line-height:1.7;color:var(--dv-muted);margin:0}
+#hub-axis-container-meio_ambiente .amb-metric-card{padding:22px;border-radius:18px;box-shadow:0 3px 12px #0f172a03}
+#hub-axis-container-meio_ambiente .amb-metric-card>header{min-height:0;margin:0 0 16px}
+#hub-axis-container-meio_ambiente .amb-metric-topline{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+#hub-axis-container-meio_ambiente .amb-metric-icon{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;flex-shrink:0;background:var(--dv-soft);color:var(--dv-primary);font-size:14px}
+#hub-axis-container-meio_ambiente .amb-metric-topline .amb-eyebrow{margin:0;flex:1;font-size:11px;font-weight:600;line-height:1.5;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-year-badge{font-size:11px;font-weight:600;padding:3px 8px;border:1px solid var(--dv-grid);border-radius:6px;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-metric-card h3{font:700 17px/1.5 Sora,Inter,sans-serif;min-height:51px;margin:0;color:var(--dv-text)}
+#hub-axis-container-meio_ambiente .amb-metric-value{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+#hub-axis-container-meio_ambiente .amb-metric-value strong{font-size:36px;line-height:1.15;font-weight:750;letter-spacing:-1.1px;font-variant-numeric:tabular-nums;color:var(--dv-dark)}
+#hub-axis-container-meio_ambiente .amb-metric-value>span{font-size:12px;line-height:1.6;min-height:38px;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-metric-card>.amb-reading{font-size:12px;line-height:1.7;min-height:42px;margin:0 0 18px}
+#hub-axis-container-meio_ambiente .amb-metric-history{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:10px;line-height:1.6;color:var(--dv-muted);padding-top:12px;border-top:1px solid var(--dv-grid);margin-bottom:4px}
+#hub-axis-container-meio_ambiente .amb-metric-history>span:last-child{white-space:nowrap}
+#hub-axis-container-meio_ambiente .amb-metric-card .amb-plot{margin-bottom:14px}
+#hub-axis-container-meio_ambiente .amb-endpoint{font-weight:650}
+#hub-axis-container-meio_ambiente .amb-metric-meaning{font-size:11px;line-height:1.7;background:var(--dv-soft);color:var(--dv-muted);border-radius:8px;padding:10px 12px;margin:0 0 18px}
+#hub-axis-container-meio_ambiente .amb-metric-source{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;font-size:10px;line-height:1.7;color:var(--dv-muted)}
+#hub-axis-container-meio_ambiente .amb-metric-source a{color:var(--dv-dark)}
+#hub-axis-container-meio_ambiente .amb-metric-details{display:flex;flex-wrap:wrap;gap:0 16px;margin-top:7px}
+#hub-axis-container-meio_ambiente .amb-metric-details details{margin-top:0;min-width:0;max-width:100%}
+#hub-axis-container-meio_ambiente .amb-metric-details details[open]{flex-basis:100%}
+#hub-axis-container-meio_ambiente .amb-metric-details summary{font-size:11px}
+#hub-axis-container-meio_ambiente .amb-metric-details p{font-size:11px;color:var(--dv-muted)}
+@media(max-width:600px){#hub-axis-container-meio_ambiente .amb-metric-card{padding:18px}#hub-axis-container-meio_ambiente .amb-metric-card h3{min-height:0}#hub-axis-container-meio_ambiente .amb-metric-value>span,#hub-axis-container-meio_ambiente .amb-metric-card>.amb-reading{min-height:0}#hub-axis-container-meio_ambiente .amb-metric-value strong{font-size:32px}}
+@media(max-width:1050px){#hub-axis-container-meio_ambiente .amb-atlas>header{flex-direction:column;align-items:stretch;gap:14px}#hub-axis-container-meio_ambiente .amb-atlas-toolbar{flex:auto;min-width:0}#hub-axis-container-meio_ambiente .amb-atlas-map{height:420px}}
+@media(max-width:600px){#hub-axis-container-meio_ambiente .amb-atlas{padding:16px;border-radius:16px}#hub-axis-container-meio_ambiente .amb-atlas>header h3{font-size:18px}#hub-axis-container-meio_ambiente .amb-atlas-map{height:360px}#hub-axis-container-meio_ambiente .amb-atlas-map-meta{display:block;margin-bottom:12px}#hub-axis-container-meio_ambiente .amb-atlas-aside{grid-template-columns:minmax(0,1fr);gap:12px}#hub-axis-container-meio_ambiente .amb-atlas-area{border-left:0;border-top:1px solid var(--dv-grid);padding:12px 0 0}#hub-axis-container-meio_ambiente .amb-atlas-map-wrap>[data-atlas-reset]{font-size:10px;padding:7px 9px;min-height:34px;top:10px;right:10px}#hub-axis-container-meio_ambiente .amb-card>header{min-height:0}}
