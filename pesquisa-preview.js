@@ -179,11 +179,49 @@
 
   // ==========================================
   // 2. REPORT EXCLUSIVO (EXECUTIVE REPORT)
-  // O Report possui sistema próprio de visualização, apresentação Keynote e ancoragem.
-  // Não alterar a estrutura DOM dos artigos do report para preservar layouts e apresentação.
   // ==========================================
   function applyReportPreview() {
-    return;
+    const root = document.getElementById('executive-report-view');
+    const cover = document.getElementById('rep-tela-001');
+    if (!root || !cover) return;
+
+    const state = window.appState;
+    const plan = state?.entitlement?.planType || state?.plan_type || state?.profile?.plan_type;
+    const admin = state?.user?.app_metadata;
+    const unlocked = admin?.role === 'admin' || admin?.is_admin === true ||
+      ['report', 'midia', 'plano_15', 'enterprise'].includes(plan);
+    root.classList.toggle('report-preview-unlocked', unlocked);
+    let preview = document.getElementById('report-sales-preview');
+    if (!preview) {
+      preview = document.createElement('div');
+      preview.id = 'report-sales-preview';
+      preview.innerHTML = `
+        <p class="report-sales-preview-label">Prévia ilustrativa</p>
+        <div class="report-sales-preview-sample" aria-hidden="true">
+          <div><strong>Consumo e lazer</strong><i></i><i></i><i></i></div>
+          <div><strong>Comportamento por região</strong><i></i><i></i><i></i></div>
+        </div>
+        ${createStickyNoticeHtml({
+          badge: 'PLANO REPORT',
+          title: 'Veja como São José consome e vive',
+          description: 'Conheça os capítulos executivos da pesquisa e use o consultor de IA para explorar os resultados.',
+          bullets: [],
+          priceText: 'Confira o valor para a sua conta no checkout',
+          targetPlan: 'report',
+          buttonLabel: 'Ver Plano Report'
+        })}
+      `;
+      cover.after(preview);
+      const button = preview.querySelector('.btn-open-plans-checkout');
+      button.onclick = () => {
+        if (['dash', 'plano_10'].includes(window.appState?.entitlement?.planType || window.appState?.plan_type) &&
+            typeof window.openPlanUpgradeModal === 'function') {
+          window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' });
+        } else {
+          openCheckoutModal('report');
+        }
+      };
+    }
   }
 
   // ==========================================
@@ -245,9 +283,6 @@
     const dashEl = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
     if (dashEl) setContainerUnlocked(dashEl, isModuleUnlocked('dashboard'));
 
-    const repEl = document.querySelector('#executive-report-view .report-preview-container');
-    if (repEl) setContainerUnlocked(repEl, isModuleUnlocked('report'));
-
     const midiaEl = document.querySelector('#midia-dashboard-content .midia-preview-container');
     if (midiaEl) setContainerUnlocked(midiaEl, isModuleUnlocked('midia'));
   }
@@ -260,15 +295,6 @@
   };
   window.lockPesquisaPreview = function() {
     const preview = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
-    if (preview) setContainerUnlocked(preview, false);
-  };
-
-  window.unlockReportPreview = function() {
-    const preview = document.querySelector('#executive-report-view .report-preview-container');
-    if (preview) setContainerUnlocked(preview, true);
-  };
-  window.lockReportPreview = function() {
-    const preview = document.querySelector('#executive-report-view .report-preview-container');
     if (preview) setContainerUnlocked(preview, false);
   };
 

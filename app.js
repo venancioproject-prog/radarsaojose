@@ -1318,11 +1318,18 @@ window.applyPlanRestrictions = function() {
                 <span class="text-xs text-slate-400 font-medium">Plano Dash Ativo</span>
               </div>
               <p class="text-xs sm:text-sm font-bold text-white mt-0.5">
-                Evolua para o Plano Report: 8 Capítulos Executivos + IA por apenas mais <span class="text-cyan-300 font-black">12x R$ 220,00</span>
+                Evolua para o Plano Report: 8 capítulos executivos e consultor de IA.
               </p>
             </div>
           </div>
-          <div class="flex items-center gap-2.5 shrink-0 w-full md:w-auto">
+          <div class="flex flex-wrap items-center justify-center gap-2.5 shrink-0 w-full md:w-auto">
+            <button
+              type="button"
+              onclick="window.switchMainTab('report')"
+              class="px-4 py-2.5 rounded-xl border border-cyan-300/40 text-cyan-100 text-xs font-bold"
+            >
+              Ver prévia do Report
+            </button>
             <button 
               type="button" 
               onclick="window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' })" 
@@ -1337,24 +1344,6 @@ window.applyPlanRestrictions = function() {
       }
     } else {
       if (dashUpsellBanner) dashUpsellBanner.remove();
-    }
-  }
-
-  // 2. REPORT PESQUISA: Teaser/Blur + Caixinha de Venda Sticky
-  const reportView = document.getElementById("executive-report-view");
-  const isReportUnlocked = ["report", "midia"].includes(userPlan) || isAdminMaster;
-  if (reportView) {
-    reportView.querySelectorAll("article").forEach(article => article.classList.remove("hidden"));
-    document.querySelectorAll("#report-paywall-overlay").forEach(overlay => overlay.remove());
-    if (isReportUnlocked) {
-      if (typeof window.unlockReportPreview === "function") {
-        window.unlockReportPreview();
-      }
-      reportView.classList.remove("teaser-paywall-locked", "paywall-blur-active");
-    } else {
-      if (typeof window.lockReportPreview === "function") {
-        window.lockReportPreview();
-      }
     }
   }
 

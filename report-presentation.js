@@ -134,7 +134,7 @@
     else all[index].scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   };
   window.openFullscreenDeck = function() {
-    if (presenting) return;
+    if (presenting || !document.getElementById('executive-report-view')?.classList.contains('report-preview-unlocked')) return;
     window.switchMainTab?.('report');
     const all=refreshCounters();
     if (!all.length) return;
