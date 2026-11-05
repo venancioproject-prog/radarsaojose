@@ -97,10 +97,11 @@ fotos_radar/capa-radar-pessoas.png
 fotos_radar/capa_radar_fundo_branco.png
 fotos_radar/pexels-edmond-dantes-4340082.jpg
 fotos_radar/pexels-anna-nekrashevich-6801648.jpg
-0*.png
-0*.jpg
-capa*.png
-download.png
+!midia_sjc/logos_veiculos/*
+/0*.png
+/0*.jpg
+/capa*.png
+/download.png
 
 # Datasets brutos e dumps pesados de processamento
 data/radar_hub/sjc_open_data_ground_truth.json
@@ -128,7 +129,7 @@ CONTINUAR-PLANOS.md
 HANDOFF.md
 app.updated.html
 assets/
-[0-9]*.png
+/[0-9]*.png
 data/capitulo-*.json
 data/migrations/
 data/report-methodology-sources.json
