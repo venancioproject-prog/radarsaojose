@@ -97,7 +97,7 @@
     window.getRadarPaywallQuote(targetPlan, userId).then(quote => {
       if (priceRequests.get(price) !== request || window.appState?.user?.id !== userId) return;
       if (quote?.kind === 'upgrade') {
-        price.textContent = `Estimativa no Pix: ${money.format(quote.amountCents / 100)}. Inclui ${money.format(quote.creditCents / 100)} de crédito. Nova vigência de 12 meses. Pagamento após conciliação.`;
+        price.textContent = `Estimativa no Pix: ${money.format(quote.amountCents / 100)}. Inclui ${money.format(quote.creditCents / 100)} de crédito. Nova vigência de 12 meses após confirmação.${quote.payable ? '' : ' Pagamento após conciliação.'}`;
       } else if (quote?.kind === 'purchase') {
         price.textContent = `Plano ${planLabels[targetPlan]} · ${money.format(quote.amountCents / 100)} à vista no Pix · acesso anual`;
       } else {

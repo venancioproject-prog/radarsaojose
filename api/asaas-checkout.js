@@ -265,50 +265,61 @@ module.exports = async function handler(req, res) {
     const current = await billing.subscription(user.id);
     const active = current && current.status === 'active' && Date.parse(current.period_end) > now.getTime();
     if (current && !active) throw new billing.BillingError(409, 'SUBSCRIPTION_REQUIRES_RECONCILIATION');
-    if (body.action === 'paywallQuote') {
-      if (!checkRateLimit('quote:' + user.id, 40, 60000)) {
-        throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
-      }
-      const annual = pricing.quotePurchase({ plan: target });
-      if (!active) return res.status(200).json({ success: true, quote: { ...annual, kind: 'purchase' } });
+    const paywall = body.action === 'paywallQuote';
+    const quoting = paywall || body.action === 'quote';
+    if (quoting && !checkRateLimit('quote:' + user.id, 40, 60000)) {
+      throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
+    }
+    let quote;
+    if (active) {
       if (pricing.PLAN_PRICES_CENTS[target] <= pricing.PLAN_PRICES_CENTS[current.plan_type]) {
         throw new billing.BillingError(409, 'UPGRADE_REQUIRED');
       }
       const orders = current.source_order_id ? await billing.db(
         'billing_orders?id=eq.' + encodeURIComponent(current.source_order_id) +
-        '&user_id=eq.' + encodeURIComponent(user.id) + '&status=eq.paid&select=kind,amount_cents,target_plan'
+        '&user_id=eq.' + encodeURIComponent(user.id) + '&status=eq.paid&select=kind,amount_cents,target_plan,quote'
       ) : [];
       const previous = orders?.[0];
-      if (previous?.kind !== 'purchase' || previous.target_plan !== current.plan_type ||
-          !Number.isSafeInteger(previous.amount_cents) || previous.amount_cents <= 0) {
+      const previousAmount = previous?.kind === 'purchase' ? previous.amount_cents :
+        previous?.quote?.termPolicy === 'annual_upgrade_v1' ? previous.quote.annualPriceCents : null;
+      if (previous?.target_plan !== current.plan_type ||
+          !Number.isSafeInteger(previousAmount) || previousAmount <= 0) {
         throw new billing.BillingError(409, 'UPGRADE_REQUIRES_REVIEW');
       }
+      const annual = pricing.quotePurchase({ plan: target });
       const credit = pricing.quoteAnnualUpgradeCredit({
-        previousAmountCents: previous.amount_cents,
+        previousAmountCents: previousAmount,
         periodStart: current.period_start, periodEnd: current.period_end, now: now.toISOString()
       });
-      return res.status(200).json({ success: true, quote: {
-        kind: 'upgrade', annualPriceCents: annual.amountCents, creditCents: credit,
-        amountCents: Math.max(0, annual.amountCents - credit), payable: false
-      } });
+      const amount = Math.max(0, annual.amountCents - credit);
+      let payable = false;
+      if (paymentMethod === 'PIX' && current.installments_paid === current.installment_count && amount > 0) {
+        try {
+          payable = await billing.db('rpc/billing_annual_upgrade_ready') === true;
+        } catch (_) { /* Fail closed while the database migration is unavailable. */ }
+      }
+      quote = {
+        kind:'upgrade', termPolicy:'annual_upgrade_v1', annualPriceCents:annual.amountCents,
+        creditCents:credit, amountCents:amount, installments:[amount], payable,
+        periodStart:current.period_start, periodEnd:current.period_end
+      };
+      if (!paywall && !payable) {
+        return res.status(409).json({ success:false, code:'UPGRADE_REQUIRES_REVIEW',
+          message:'O upgrade precisa de conciliação antes do pagamento. Nenhuma cobrança foi gerada.' });
+      }
+    } else {
+      try {
+        quote = pricing.quotePurchase({plan:target, paymentMethod:paywall ? 'PIX' : paymentMethod, installments:paywall ? 1 : count});
+      } catch (error) { throw new billing.BillingError(409, error.message); }
+      const end = new Date(now); end.setUTCFullYear(end.getUTCFullYear()+1);
+      quote = {...quote, kind:'purchase', periodStart:now.toISOString(), periodEnd:end.toISOString()};
     }
-    if (active) {
-      return res.status(409).json({ success: false, code: 'UPGRADE_REQUIRES_REVIEW',
-        message: 'O upgrade precisa de conciliação antes do pagamento. Nenhuma cobrança foi gerada.' });
-    }
-    let quote;
-    try {
-      quote = pricing.quotePurchase({plan:target, paymentMethod, installments:count});
-    } catch (error) { throw new billing.BillingError(409, error.message); }
-    const end = new Date(now); end.setUTCFullYear(end.getUTCFullYear()+1);
-    quote = {...quote, kind:'purchase', periodStart:now.toISOString(), periodEnd:end.toISOString()};
     const plan = {...PLANS_CONFIG[target], value:quote.amountCents/100,
       installmentCount:quote.installments.length, installmentValue:quote.installments[0]/100};
-    if (body.action === 'quote') {
-      if (!checkRateLimit('quote:' + user.id, 40, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
+    if (quoting) {
       return res.status(200).json({success:true, quote, plan, sandbox:ASAAS_ENVIRONMENT === 'sandbox'});
     }
-    if (body.expectedAmountCents !== undefined && body.expectedAmountCents !== quote.amountCents) {
+    if ((active || body.expectedAmountCents !== undefined) && body.expectedAmountCents !== quote.amountCents) {
       throw new billing.BillingError(409, 'PRICE_CHANGED');
     }
     if (!checkRateLimit('pay:' + user.id, 8, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
@@ -432,8 +443,8 @@ module.exports = async function handler(req, res) {
       }
     }
     const orders = await billing.db('billing_orders', {method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({
-      user_id:user.id, subscription_id:null, target_plan:target, kind:quote.kind,
-      amount_cents:quote.amountCents, credit_cents:quote.creditCents || 0, expected_version:null,
+      user_id:user.id, subscription_id:active ? current.id : null, target_plan:target, kind:quote.kind,
+      amount_cents:quote.amountCents, credit_cents:quote.creditCents || 0, expected_version:active ? current.version : null,
       period_start:quote.periodStart, period_end:quote.periodEnd, payment_method:paymentMethod,
       installment_count:quote.installments.length, quote:{...quote, customerEmail:user.email, customerName:name}})});
     const order = orders?.[0];

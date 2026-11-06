@@ -271,7 +271,11 @@ async function handler(req, res) {
     let emailStatus = 'ignored';
     if (!result.duplicate && !result.ignored && !result.installmentUpdated && ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
       try {
-        const emailRes = await sendConfirmationEmail({ order, event: stored.payload });
+        const confirmationOrder = order.quote?.termPolicy === 'annual_upgrade_v1'
+          ? (await db('billing_orders?id=eq.' + encodeURIComponent(order.id) + '&select=*'))?.[0]
+          : order;
+        if (!confirmationOrder) throw new Error('Order unavailable for confirmation email');
+        const emailRes = await sendConfirmationEmail({ order: confirmationOrder, event: stored.payload });
         emailStatus = emailRes.status;
       } catch (emailErr) {
         console.error('[Asaas Webhook] Erro não-bloqueante no envio de e-mail:', emailErr);

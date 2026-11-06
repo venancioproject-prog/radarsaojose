@@ -1081,6 +1081,18 @@
       || (upgradeFromPlan === 'report' && plan === 'midia');
     const activePlan = window.appState?.entitlement?.status === 'active' && ['dash', 'report', 'midia'].includes(upgradeFromPlan);
     document.getElementById('asaasCheckoutForm').hidden = isUpgradeMode || activePlan;
+    const userId = window.appState?.user?.id;
+    if (isUpgradeMode && userId && window.getRadarPaywallQuote) {
+      window.setAsaasPaymentMethod('PIX');
+      window.getRadarPaywallQuote(plan, userId).then(quote => {
+        if (!quote?.payable || currentPlanId !== plan || !isUpgradeMode ||
+            window.appState?.user?.id !== userId) return;
+        document.getElementById('asaasCheckoutForm').hidden = false;
+        document.getElementById('asaasUpgradeBannerText').textContent =
+          'Seu crédito será aplicado. A nova vigência de 12 meses começa após a confirmação do Pix.';
+      }).catch(() => {});
+    }
+    document.getElementById('tabPayCard').hidden = isUpgradeMode;
     const activeNotice = document.getElementById('asaasActivePlanNotice');
     activeNotice.hidden = !activePlan || isUpgradeMode;
     updateUpgradeBanner();
@@ -1170,7 +1182,7 @@
   // Submissão do Formulário de Checkout
   window.handleAsaasCheckoutSubmit = async function(e) {
     if (e && e.preventDefault) e.preventDefault();
-    if (isSubmitting || isUpgradeMode || document.getElementById('asaasCheckoutForm').hidden) return;
+    if (isSubmitting || document.getElementById('asaasCheckoutForm').hidden) return;
     hideCheckoutError();
 
     const nameInput = document.getElementById('asaasPayerName');
@@ -1281,7 +1293,9 @@
       const total = (quoted.quote.amountCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       const count = quoted.quote.installments.length;
       const environmentNote = quoted.sandbox ? 'Ambiente de testes do Asaas. Nenhuma cobrança real será feita.\n\n' : '';
-      if (!window.confirm(`${environmentNote}Confirmar ${planNames[payload.plan]} por ${total} no total${count > 1 ? ` em ${count} parcelas` : ''}?`)) return;
+      const upgradeDetails = quoted.quote.kind === 'upgrade'
+        ? `Crédito aplicado: ${(quoted.quote.creditCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}. Nova vigência de 12 meses após a confirmação.\n\n` : '';
+      if (!window.confirm(`${environmentNote}${upgradeDetails}Confirmar ${planNames[payload.plan]} por ${total} no total${count > 1 ? ` em ${count} parcelas` : ''}?`)) return;
       payload.expectedAmountCents = quoted.quote.amountCents;
       if (btnText) btnText.textContent = 'Processando pagamento…';
       const response = await fetch('/api/asaas-checkout', {

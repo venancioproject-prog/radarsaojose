@@ -217,6 +217,45 @@ async function main() {
       assert.deepEqual(await value(`SELECT s.status,p.plan_type FROM public.billing_subscriptions s
         JOIN public.profiles p ON p.id=s.user_id WHERE s.user_id=$1`, [owner]), { status: 'canceled', plan_type: 'gratis' });
     });
+    await check('Upgrade Pix abre 12 meses, reenvios preservam a vigência e estorno restaura o plano anterior', async () => {
+      await db.exec(migration('015_billing_annual_upgrade.sql'));
+      const user = '00000000-0000-4000-8000-000000000015';
+      await db.query("INSERT INTO auth.users VALUES ($1,'annual@example.invalid','{}')", [user]);
+      await db.query(`INSERT INTO public.billing_orders(user_id,target_plan,kind,amount_cents,period_start,period_end,payment_method,installment_count,asaas_payment_id)
+        VALUES ($1,'dash','purchase',291492,now() - interval '6 months',now() + interval '6 months','PIX',1,'pay_annual_original')`, [user]);
+      const processEvent = async (id, payment, type) => {
+        await db.query(`INSERT INTO public.billing_gateway_events(event_id,payment_id,event_type,occurred_at,payload)
+          VALUES ($1,$2,$3,now(),'{}') ON CONFLICT DO NOTHING`, [id, payment, type]);
+        await db.exec(`SELECT set_config('request.jwt.claims','{"role":"service_role"}',false); SET ROLE service_role;`);
+        try {
+          assert.equal((await value('SELECT public.billing_annual_upgrade_ready() AS ready')).ready, true);
+          return (await value('SELECT public.billing_process_event($1) AS result', [id])).result;
+        } finally { await db.exec('RESET ROLE'); }
+      };
+      const current = () => value('SELECT * FROM public.billing_subscriptions WHERE user_id=$1', [user]);
+      await processEvent('annual_original', 'pay_annual_original', 'PAYMENT_CONFIRMED');
+      const before = await current();
+      await db.query(`INSERT INTO public.billing_orders(user_id,subscription_id,target_plan,kind,amount_cents,expected_version,
+        period_start,period_end,payment_method,installment_count,asaas_payment_id,quote)
+        VALUES ($1,$2,'report','upgrade',383346,$3,$4,$5,'PIX',1,'pay_annual_upgrade','{"termPolicy":"annual_upgrade_v1"}')`,
+      [user,before.id,before.version,before.period_start,before.period_end]);
+      await processEvent('annual_upgrade', 'pay_annual_upgrade', 'PAYMENT_CONFIRMED');
+      const after = await current();
+      assert.equal(after.plan_type, 'report');
+      assert.ok(after.period_end > before.period_end);
+      assert.equal((await value(`SELECT period_end = ((period_start AT TIME ZONE 'UTC') + interval '12 months') AT TIME ZONE 'UTC'
+        AS exact FROM public.billing_subscriptions WHERE id=$1`, [after.id])).exact, true);
+      const order = await value('SELECT period_start,period_end FROM public.billing_orders WHERE id=$1', [after.source_order_id]);
+      assert.deepEqual(order, { period_start:after.period_start, period_end:after.period_end });
+      assert.equal((await processEvent('annual_upgrade', 'pay_annual_upgrade', 'PAYMENT_CONFIRMED')).duplicate, true);
+      await processEvent('annual_upgrade_received', 'pay_annual_upgrade', 'PAYMENT_RECEIVED');
+      assert.deepEqual(await current(), after);
+      await processEvent('annual_refund', 'pay_annual_upgrade', 'PAYMENT_REFUNDED');
+      const restored = await current();
+      for (const field of ['plan_type','status','period_start','period_end','payment_method','installment_count','installments_paid','source_order_id']) {
+        assert.deepEqual(restored[field], before[field]);
+      }
+    });
     if (process.argv.includes('--sandbox')) await checkSandbox(db, evidence);
     console.log(JSON.stringify(evidence, null, 2));
     if (evidence.pending.length) process.exitCode = 1;
