@@ -19,6 +19,8 @@
   }
 
   function isModuleUnlocked(moduleName) {
+    if (moduleName === 'report' && window.radarSupabaseConfig?.preview === true &&
+        new URLSearchParams(window.location.search).get('reportPreview') === 'locked') return false;
     const { plan, isAdminMaster } = getUserPlanInfo();
     if (isAdminMaster) return true;
     if (moduleName === 'dashboard') {

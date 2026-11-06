@@ -44,10 +44,29 @@
 }
 
 #executive-report-view:not(.report-preview-unlocked) > #rep-tela-014 ~ article {
-  filter: blur(5px);
-  opacity: 0.65;
+  filter: blur(10px);
+  opacity: 0.76;
   pointer-events: none;
   user-select: none;
+}
+
+#executive-report-view > #report-paywall-overlay {
+  top: 88px;
+  height: 0;
+  margin-block: 0 !important;
+}
+
+#executive-report-view > #report-paywall-overlay + [data-report-placeholder] {
+  margin-top: 1rem;
+}
+
+#executive-report-view > [data-report-placeholder] {
+  min-height: clamp(420px, 68vh, 640px);
+}
+
+@media (max-width: 640px) {
+  #executive-report-view > #report-paywall-overlay { top: 68px; }
+  #report-paywall-overlay .pesquisa-preview-notice ul { display: none; }
 }
 
 .report-teaser-grid {
