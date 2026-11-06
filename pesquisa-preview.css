@@ -127,11 +127,8 @@ html.dark #executive-report-view > [data-preview-tone="light"] > img {
   min-width: 0;
 }
 
-.raster-dashboard-sample-label {
-  margin: 0 0 .75rem;
-  color: #64748b;
-  font-size: .875rem;
-  font-weight: 600;
+#midia-raster-preview .raster-dashboard-page:first-child img {
+  filter: blur(7px);
 }
 
 .raster-dashboard-pages {
