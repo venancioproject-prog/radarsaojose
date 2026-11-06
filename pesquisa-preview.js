@@ -43,10 +43,10 @@
     }
   }
 
-  function createStickyNoticeHtml({ badge, title, description, bullets, priceText, targetPlan, buttonLabel }) {
+  function createStickyNoticeHtml({ badge, title, description, bullets, priceText, targetPlan, buttonLabel, sticky = true }) {
     const listItems = bullets.map(b => `<li>${b}</li>`).join('');
     return `
-      <div class="pesquisa-preview-sticky-wrap">
+      <div class="${sticky ? 'pesquisa-preview-sticky-wrap' : 'midia-paywall-wrap'}">
         <div class="pesquisa-preview-notice" onclick="event.stopPropagation()">
           <div class="pesquisa-preview-badge">${badge}</div>
           <div class="pesquisa-preview-lock" aria-hidden="true">&#128274;</div>
@@ -111,59 +111,46 @@
     });
   }
 
-  function applyRasterPaywall({ rootId, moduleName, plan, sampleHeight, pages, offer }) {
-    const root = document.getElementById(rootId);
+  function applyPesquisaPreview() {
+    const root = document.getElementById('dynamic-charts-grid');
     if (!root) return;
-
-    const unlocked = isModuleUnlocked(moduleName);
-    const id = moduleName + '-raster-preview';
-    root.classList.toggle('raster-dashboard-restricted', !unlocked &&
-      (moduleName !== 'dashboard' || root.dataset.publicSurvey !== 'true'));
-    let preview = document.getElementById(id);
+    const unlocked = isModuleUnlocked('dashboard');
+    root.classList.toggle('raster-dashboard-restricted', !unlocked && root.dataset.publicSurvey !== 'true');
+    let preview = document.getElementById('dashboard-raster-preview');
     if (unlocked) {
       preview?.remove();
       return;
     }
 
     if (!preview) {
-      const image = (name, width, height, alt = '') =>
-        `<img src="/web-media/dashboard-preview/${name}.webp" width="${width}" height="${height}" loading="lazy" decoding="async" alt="${alt}">`;
-      const article = (name, height, index) =>
-        `<div class="raster-dashboard-page"${moduleName === 'dashboard' ? ` data-preview-section="secao-bloco-${index + 2}"` : ''}>${image(name, 460, height)}</div>`;
-      preview = document.createElement('div');
-      preview.id = id;
-      preview.className = 'raster-dashboard-preview';
-      preview.innerHTML = `
-        ${moduleName === 'dashboard' ? '' : `<p class="raster-dashboard-sample-label">Prévia do painel com dados simulados</p>
-        <div class="raster-dashboard-page" data-preview-section="secao-bloco-1">
-          ${image(plan + '-amostra', 900, sampleHeight, 'Exemplo de visualização do painel com dados simulados')}
-        </div>`}
-        ${createStickyNoticeHtml({ ...offer, targetPlan: plan })}
-        <div class="raster-dashboard-pages" aria-hidden="true" inert>
-          ${pages.map(([name, height], index) => article(name, height, index)).join('')}
-        </div>`;
-      root.after(preview);
-      preview.querySelector('.btn-open-plans-checkout').onclick = () => openCheckoutModal(plan);
-    }
-    updatePaywallPrice(preview, plan, false);
-  }
-
-  function applyPesquisaPreview() {
-    applyRasterPaywall({
-      rootId: 'dynamic-charts-grid', moduleName: 'dashboard', plan: 'dash',
-      pages: [
+      const pages = [
         ['dash-corte-02', 452], ['dash-02', 791], ['dash-03', 754], ['dash-04', 417], ['dash-05', 263],
         ['dash-06', 247], ['dash-07', 297], ['dash-08', 238], ['dash-09', 191]
-      ],
-      offer: {
+      ];
+      const offer = createStickyNoticeHtml({
+        targetPlan: 'dash',
         badge: 'PESQUISA QUANTITATIVA',
         title: 'Explore a pesquisa completa de São José',
         description: 'Descubra como as respostas variam por renda, idade e região da cidade.',
         bullets: ['10 blocos temáticos e 30 gráficos', 'Filtros para cruzar perfis e recortes'],
         priceText: 'Acesso anual ao Plano Dash',
         buttonLabel: 'Ver Plano Dash'
-      }
-    });
+      });
+      preview = document.createElement('div');
+      preview.id = 'dashboard-raster-preview';
+      preview.className = 'raster-dashboard-preview';
+      preview.innerHTML = `
+        ${offer}
+        <div class="raster-dashboard-pages" aria-hidden="true" inert>
+          ${pages.map(([name, height], index) => `
+            <div class="raster-dashboard-page" data-preview-section="secao-bloco-${index + 2}">
+              <img src="/web-media/dashboard-preview/${name}.webp" width="460" height="${height}" loading="lazy" decoding="async" alt="">
+            </div>`).join('')}
+        </div>`;
+      root.after(preview);
+      preview.querySelector('.btn-open-plans-checkout').onclick = () => openCheckoutModal('dash');
+    }
+    updatePaywallPrice(preview, 'dash', false);
   }
 
   // ==========================================
@@ -222,21 +209,33 @@
   // 3. INTELIGÊNCIA DE MÍDIA (MIDIA DASHBOARD)
   // ==========================================
   function applyMidiaPreview() {
-    applyRasterPaywall({
-      rootId: 'midia-dashboard-content', moduleName: 'midia', plan: 'midia', sampleHeight: 116,
-      pages: [
-        ['midia-02', 192], ['midia-03', 322], ['midia-04', 178], ['midia-05', 215],
-        ['midia-06', 262], ['midia-07', 229], ['midia-09', 192], ['midia-10', 453]
-      ],
-      offer: {
+    const root = document.getElementById('midia-dashboard-content');
+    if (!root) return;
+    const unlocked = isModuleUnlocked('midia');
+    root.classList.toggle('raster-dashboard-restricted', !unlocked);
+    let offer = document.getElementById('midia-paywall');
+    if (unlocked) {
+      offer?.remove();
+      return;
+    }
+
+    if (!offer) {
+      offer = document.createElement('div');
+      offer.id = 'midia-paywall';
+      offer.innerHTML = createStickyNoticeHtml({
+        targetPlan: 'midia',
+        sticky: false,
         badge: 'INTELIGÊNCIA DE MÍDIA',
-        title: 'Veja o que movimenta a conversa na cidade',
-        description: 'Acompanhe veículos locais, temas dominantes e a reação do público.',
+        title: 'Inteligência de Mídia',
+        description: 'Disponível no Plano Mídia.',
         bullets: ['Análise por canal, tema e sentimento', '3 licenças para sua equipe'],
         priceText: 'Acesso anual ao Plano Mídia',
         buttonLabel: 'Ver Plano Mídia'
-      }
-    });
+      });
+      root.after(offer);
+      offer.querySelector('.btn-open-plans-checkout').onclick = () => openCheckoutModal('midia');
+    }
+    updatePaywallPrice(offer, 'midia', false);
   }
 
   function updateAllRadarPreviews() {
