@@ -195,7 +195,7 @@
 
   async function fetchMidiaData() {
     const isDemo = window.radarSupabaseConfig?.preview === true;
-    if (!isDemo && !window.radarCanLoadModule?.('midia')) {
+    if (!window.radarCanLoadModule?.('midia')) {
       document.getElementById('midia-loading-state')?.classList.add('hidden');
       document.getElementById('midia-error-state')?.classList.add('hidden');
       window.updateRadarPreviews?.();
@@ -275,7 +275,7 @@
 
   // Hook disparado na troca de aba
   window.onSwitchToMidiaTab = function() {
-    if (window.radarSupabaseConfig?.preview !== true && !window.radarCanLoadModule?.('midia')) return fetchMidiaData();
+    if (!window.radarCanLoadModule?.('midia')) return fetchMidiaData();
     const loadingState = document.getElementById('midia-loading-state');
     const dashboardContent = document.getElementById('midia-dashboard-content');
     

@@ -48,7 +48,8 @@
   user-select: none;
 }
 
-#executive-report-view > #report-paywall-overlay {
+#executive-report-view > #report-paywall-overlay,
+.raster-dashboard-preview > .pesquisa-preview-sticky-wrap {
   top: 88px;
   height: 0;
   margin-block: 0 !important;
@@ -58,21 +59,26 @@
   margin-top: 1rem;
 }
 
-#report-paywall-overlay .pesquisa-preview-notice {
+#report-paywall-overlay .pesquisa-preview-notice,
+.raster-dashboard-preview .pesquisa-preview-notice {
   max-width: 510px;
   padding: 22px clamp(16px, 4vw, 28px);
 }
 
-#report-paywall-overlay .pesquisa-preview-lock {
+#report-paywall-overlay .pesquisa-preview-lock,
+.raster-dashboard-preview .pesquisa-preview-lock {
   display: none;
 }
 
 #report-paywall-overlay .pesquisa-preview-notice h2,
-#report-paywall-overlay .pesquisa-preview-notice p {
+#report-paywall-overlay .pesquisa-preview-notice p,
+.raster-dashboard-preview .pesquisa-preview-notice h2,
+.raster-dashboard-preview .pesquisa-preview-notice p {
   margin-bottom: 10px;
 }
 
-#report-paywall-overlay .pesquisa-preview-notice ul {
+#report-paywall-overlay .pesquisa-preview-notice ul,
+.raster-dashboard-preview .pesquisa-preview-notice ul {
   margin-bottom: 12px;
 }
 
@@ -90,15 +96,49 @@
 }
 
 @media (max-width: 640px) {
-  #executive-report-view > #report-paywall-overlay { top: 68px; }
+  #executive-report-view > #report-paywall-overlay,
+  .raster-dashboard-preview > .pesquisa-preview-sticky-wrap { top: 68px; }
 }
 
 @media (max-width: 640px), (max-height: 700px) {
-  #report-paywall-overlay .pesquisa-preview-notice ul { display: none; }
+  #report-paywall-overlay .pesquisa-preview-notice ul,
+  .raster-dashboard-preview .pesquisa-preview-notice ul { display: none; }
 }
 
-.midia-preview-restricted {
+.raster-dashboard-restricted {
   display: none !important;
+}
+
+.raster-dashboard-preview {
+  position: relative;
+  min-width: 0;
+}
+
+.raster-dashboard-sample-label {
+  margin: 0 0 .75rem;
+  color: #64748b;
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.raster-dashboard-pages {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.raster-dashboard-page {
+  overflow: hidden;
+  scroll-margin-top: 100px;
+  border: 1px solid #cbd5e1;
+  border-radius: 1.25rem;
+  background: #f6f8fc;
+}
+
+.raster-dashboard-page img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .pesquisa-preview-content {
@@ -405,6 +445,7 @@ html.dark .pesquisa-preview-container:not(.is-unlocked)::before {
 }
 
 @media print {
+  .raster-dashboard-pages,
   #executive-report-view:not(.report-preview-unlocked) > #rep-tela-014 ~ article,
   .pesquisa-preview:not(.is-unlocked) .pesquisa-preview-content,
   .pesquisa-preview-container:not(.is-unlocked) .pesquisa-preview-content {

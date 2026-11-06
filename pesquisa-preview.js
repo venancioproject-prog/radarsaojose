@@ -19,8 +19,8 @@
   }
 
   function isModuleUnlocked(moduleName) {
-    if (moduleName === 'report' && window.radarSupabaseConfig?.preview === true &&
-        new URLSearchParams(window.location.search).get('reportPreview') === 'locked') return false;
+    if (window.radarSupabaseConfig?.preview === true &&
+        new URLSearchParams(window.location.search).get(moduleName + 'Preview') === 'locked') return false;
     const { plan, isAdminMaster } = getUserPlanInfo();
     if (isAdminMaster) return true;
     if (moduleName === 'dashboard') {
@@ -111,99 +111,58 @@
     });
   }
 
-  function attachEvents(container, targetPlan) {
-    const btn = container.querySelector('.btn-open-plans-checkout');
-    if (btn) {
-      btn.onclick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        openCheckoutModal(targetPlan);
-      };
-    }
-    container.onclick = (e) => {
-      if (container.classList.contains('is-unlocked')) return;
-      if (e.target.closest('button, a, input, select, textarea')) return;
-      openCheckoutModal(targetPlan);
-    };
-  }
-
-  function setContainerUnlocked(container, unlocked) {
-    if (!container) return;
-    container.classList.toggle('is-unlocked', unlocked);
-    const targetPlan = container.querySelector('[data-target-plan]')?.dataset.targetPlan;
-    if (targetPlan) updatePaywallPrice(container, targetPlan, unlocked);
-    const content = container.querySelector('.pesquisa-preview-content');
-    if (content) {
-      content.inert = !unlocked;
-      if (unlocked) {
-        content.removeAttribute('aria-hidden');
-      } else {
-        content.setAttribute('aria-hidden', 'true');
-      }
-    }
-  }
-
-  // ==========================================
-  // 1. PESQUISA QUANTITATIVA (DASHBOARD)
-  // ==========================================
-  function applyPesquisaPreview() {
-    const root = document.getElementById('dynamic-charts-grid');
+  function applyRasterPaywall({ rootId, moduleName, plan, sampleHeight, pages, offer }) {
+    const root = document.getElementById(rootId);
     if (!root) return;
-    const existing = root.querySelector('.pesquisa-preview-container');
-    const unlocked = isModuleUnlocked('dashboard');
-    const block = document.getElementById('secao-bloco-2');
 
-    if (existing) {
-      setContainerUnlocked(existing, unlocked);
+    const unlocked = isModuleUnlocked(moduleName);
+    const id = moduleName + '-raster-preview';
+    root.classList.toggle('raster-dashboard-restricted', !unlocked);
+    let preview = document.getElementById(id);
+    if (unlocked) {
+      preview?.remove();
       return;
     }
 
-    if (!block) return;
-    const grid = block.lastElementChild;
-    if (!grid || grid.children.length < 3) return;
-
-    const region = document.createElement('div');
-    region.className = 'pesquisa-preview-container pesquisa-preview';
-
-    const content = document.createElement('div');
-    content.className = 'pesquisa-preview-content';
-
-    // Mantém os primeiros 3 cards abertos como teaser gratuito
-    const remaining = grid.cloneNode(false);
-    remaining.removeAttribute('id');
-    while (grid.children.length > 3) {
-      remaining.appendChild(grid.children[3]);
+    if (!preview) {
+      const image = (name, width, height, alt = '') =>
+        `<img src="/web-media/dashboard-preview/${name}.webp" width="${width}" height="${height}" loading="lazy" decoding="async" alt="${alt}">`;
+      const article = (name, height, index) =>
+        `<div class="raster-dashboard-page"${moduleName === 'dashboard' ? ` data-preview-section="secao-bloco-${index + 2}"` : ''}>${image(name, 460, height)}</div>`;
+      preview = document.createElement('div');
+      preview.id = id;
+      preview.className = 'raster-dashboard-preview';
+      preview.innerHTML = `
+        <p class="raster-dashboard-sample-label">Prévia do painel com dados simulados</p>
+        <div class="raster-dashboard-page" data-preview-section="secao-bloco-1">
+          ${image(plan + '-amostra', 900, sampleHeight, 'Exemplo de visualização do painel com dados simulados')}
+        </div>
+        ${createStickyNoticeHtml({ ...offer, targetPlan: plan })}
+        <div class="raster-dashboard-pages" aria-hidden="true" inert>
+          ${pages.map(([name, height], index) => article(name, height, index)).join('')}
+        </div>`;
+      root.after(preview);
+      preview.querySelector('.btn-open-plans-checkout').onclick = () => openCheckoutModal(plan);
     }
-    if (remaining.children.length) {
-      content.appendChild(remaining);
-    }
+    updatePaywallPrice(preview, plan, false);
+  }
 
-    let sibling = block.nextElementSibling;
-    while (sibling) {
-      const next = sibling.nextElementSibling;
-      content.appendChild(sibling);
-      sibling = next;
-    }
-
-    region.innerHTML = createStickyNoticeHtml({
-      badge: 'CONTEÚDO EXCLUSIVO · PESQUISA QUANTITATIVA',
-      title: 'Você já viu o cenário.<br>Agora descubra as oportunidades.',
-      description: 'O que falta na cidade? Onde estão as demandas? Como os públicos se diferenciam? Continue a pesquisa e transforme essas respostas em decisões para o seu negócio.',
-      bullets: [
-        'Explore todos os 10 blocos e 30 gráficos da pesquisa quantitativa',
-        'Cruze perfis e descubra demandas por renda, idade e região de SJC',
-        'Amostra completa e auditada com 477 respondentes reais de SJC'
+  function applyPesquisaPreview() {
+    applyRasterPaywall({
+      rootId: 'dynamic-charts-grid', moduleName: 'dashboard', plan: 'dash', sampleHeight: 807,
+      pages: [
+        ['dash-01', 235], ['dash-02', 791], ['dash-03', 754], ['dash-04', 417], ['dash-05', 263],
+        ['dash-06', 247], ['dash-07', 297], ['dash-08', 238], ['dash-09', 191]
       ],
-      priceText: 'Acesso anual ao Plano Dash',
-      targetPlan: 'dash',
-      buttonLabel: 'Ver Planos & Desbloquear Acesso'
+      offer: {
+        badge: 'PESQUISA QUANTITATIVA',
+        title: 'Explore a pesquisa completa de São José',
+        description: 'Descubra como as respostas variam por renda, idade e região da cidade.',
+        bullets: ['10 blocos temáticos e 30 gráficos', 'Filtros para cruzar perfis e recortes'],
+        priceText: 'Acesso anual ao Plano Dash',
+        buttonLabel: 'Ver Plano Dash'
+      }
     });
-
-    region.appendChild(content);
-    root.appendChild(region);
-
-    attachEvents(region, 'dash');
-    setContainerUnlocked(region, unlocked);
   }
 
   // ==========================================
@@ -262,88 +221,31 @@
   // 3. INTELIGÊNCIA DE MÍDIA (MIDIA DASHBOARD)
   // ==========================================
   function applyMidiaPreview() {
-    const root = document.getElementById('midia-dashboard-content');
-    if (!root) return;
-    const existing = root.querySelector('.midia-preview-container');
-    const unlocked = isModuleUnlocked('midia');
-    const restricted = !unlocked && window.radarSupabaseConfig?.preview !== true;
-    root.classList.toggle('midia-preview-restricted', restricted);
-    if (restricted) return;
-
-    if (existing) {
-      setContainerUnlocked(existing, unlocked);
-      return;
-    }
-
-    const children = Array.from(root.children);
-    if (children.length < 3) return;
-
-    const region = document.createElement('div');
-    region.className = 'pesquisa-preview-container midia-preview-container';
-
-    const content = document.createElement('div');
-    content.className = 'pesquisa-preview-content';
-
-    // Mantém os 2 primeiros blocos abertos (Mini-cards veículos + 6 KPIs)
-    const lockedElements = children.slice(2);
-    lockedElements.forEach(el => content.appendChild(el));
-
-    region.innerHTML = createStickyNoticeHtml({
-      badge: 'INTELIGÊNCIA DE MÍDIA · CONTEÚDO EXCLUSIVO',
-      title: 'Monitore a Opinião Pública & Notícias.<br>Acesse a Inteligência de Mídia.',
-      description: 'Análise profunda de 7.542 postagens dos 10 veículos de comunicação de São José dos Campos, sentimento da população, temas dominantes e influenciadores.',
-      bullets: [
-        '7.542 postagens monitoradas e categorizadas por tema e tom',
-        'Mapeamento detalhado de influenciadores locais e engajamento',
-        '3 licenças corporativas para compartilhamento em equipe'
+    applyRasterPaywall({
+      rootId: 'midia-dashboard-content', moduleName: 'midia', plan: 'midia', sampleHeight: 116,
+      pages: [
+        ['midia-02', 192], ['midia-03', 322], ['midia-04', 178], ['midia-05', 215],
+        ['midia-06', 262], ['midia-07', 229], ['midia-09', 192], ['midia-10', 453]
       ],
-      priceText: 'Acesso anual ao Plano Mídia',
-      targetPlan: 'midia',
-      buttonLabel: 'Desbloquear Inteligência de Mídia'
+      offer: {
+        badge: 'INTELIGÊNCIA DE MÍDIA',
+        title: 'Veja o que movimenta a conversa na cidade',
+        description: 'Acompanhe veículos locais, temas dominantes e a reação do público.',
+        bullets: ['Análise por canal, tema e sentimento', '3 licenças para sua equipe'],
+        priceText: 'Acesso anual ao Plano Mídia',
+        buttonLabel: 'Ver Plano Mídia'
+      }
     });
-
-    region.appendChild(content);
-    root.appendChild(region);
-
-    attachEvents(region, 'midia');
-    setContainerUnlocked(region, unlocked);
   }
 
-  // ==========================================
-  // ATUALIZAÇÃO GLOBAL & CONTROLES PÚBLICOS
-  // ==========================================
   function updateAllRadarPreviews() {
     applyPesquisaPreview();
     applyReportPreview();
     applyMidiaPreview();
-
-    const dashEl = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
-    if (dashEl) setContainerUnlocked(dashEl, isModuleUnlocked('dashboard'));
-
-    const midiaEl = document.querySelector('#midia-dashboard-content .midia-preview-container');
-    if (midiaEl) setContainerUnlocked(midiaEl, isModuleUnlocked('midia'));
   }
 
   window.updateRadarPreviews = updateAllRadarPreviews;
   window.radarCanLoadModule = isModuleUnlocked;
-
-  window.unlockPesquisaPreview = function() {
-    const preview = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
-    if (preview) setContainerUnlocked(preview, true);
-  };
-  window.lockPesquisaPreview = function() {
-    const preview = document.querySelector('#dynamic-charts-grid .pesquisa-preview-container');
-    if (preview) setContainerUnlocked(preview, false);
-  };
-
-  window.unlockMidiaPreview = function() {
-    const preview = document.querySelector('#midia-dashboard-content .midia-preview-container');
-    if (preview) setContainerUnlocked(preview, true);
-  };
-  window.lockMidiaPreview = function() {
-    const preview = document.querySelector('#midia-dashboard-content .midia-preview-container');
-    if (preview) setContainerUnlocked(preview, false);
-  };
 
   function init() {
     // 1. Observer no dynamic-charts-grid (re-render dos filtros)
@@ -369,12 +271,11 @@
       const link = event.target.closest('button[onclick*="scrollToSection"], a[href*="#secao-bloco-"]');
       if (!link) return;
       const match = (link.getAttribute('onclick') || link.getAttribute('href') || '').match(/secao-bloco-\d+/);
-      const target = match && document.getElementById(match[0]);
-      const region = dashRoot?.querySelector('.pesquisa-preview-container:not(.is-unlocked)');
-      if (!target || !region || !region.querySelector('.pesquisa-preview-content')?.contains(target)) return;
+      const target = match && document.querySelector('#dashboard-raster-preview [data-preview-section="' + match[0] + '"]');
+      if (!target) return;
       event.preventDefault();
       event.stopImmediatePropagation();
-      region.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, true);
 
     updateAllRadarPreviews();

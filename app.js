@@ -1183,29 +1183,8 @@ window.applyPlanRestrictions = function() {
 
   const isAdminMaster = rawPlan === "admin" || (userRole === "admin" && !["gratis", "dash", "report", "midia"].includes(rawPlan));
 
-  // 1. DASH PESQUISA: 100% dos blocos para Dash, Report, Mídia e Admin. Teaser/Blur para Grátis.
-  const dashboardView = document.getElementById("dashboard-view");
   const dashChartsGrid = document.getElementById("dynamic-charts-grid");
-  const isDashUnlocked = ["dash", "report", "midia"].includes(userPlan) || isAdminMaster;
-
-  if (dashboardView && dashChartsGrid) {
-    const allSections = Array.from(dashChartsGrid.querySelectorAll(":scope > section"));
-    allSections.forEach(sec => sec.classList.remove("hidden"));
-    const dashPaywall = document.getElementById("dash-paywall-overlay");
-    if (dashPaywall) dashPaywall.remove();
-
-    if (isDashUnlocked) {
-      if (typeof window.unlockPesquisaPreview === "function") {
-        window.unlockPesquisaPreview();
-      }
-      dashboardView.classList.remove("teaser-paywall-locked");
-      dashChartsGrid.classList.remove("paywall-blur-active");
-    } else {
-      if (typeof window.lockPesquisaPreview === "function") {
-        window.lockPesquisaPreview();
-      }
-    }
-
+  if (dashChartsGrid) {
     // In-app upsell sutil para assinantes do Plano Dash
     let dashUpsellBanner = document.getElementById("dash-upsell-report-banner");
     if (userPlan === "dash" && (userRole !== "admin" || rawPlan === "dash")) {
@@ -1250,23 +1229,6 @@ window.applyPlanRestrictions = function() {
       }
     } else {
       if (dashUpsellBanner) dashUpsellBanner.remove();
-    }
-  }
-
-  // 3. INTELIGÊNCIA DE MÍDIA (midia-dashboard-view): Teaser/Blur + Caixinha de Venda Sticky
-  const midiaView = document.getElementById("midia-dashboard-view");
-  const isMidiaUnlocked = userPlan === "midia" || isAdminMaster;
-  if (midiaView) {
-    document.querySelectorAll("#midia-paywall-overlay").forEach(overlay => overlay.remove());
-    if (isMidiaUnlocked) {
-      if (typeof window.unlockMidiaPreview === "function") {
-        window.unlockMidiaPreview();
-      }
-      midiaView.classList.remove("paywall-blur-active", "teaser-paywall-locked");
-    } else {
-      if (typeof window.lockMidiaPreview === "function") {
-        window.lockMidiaPreview();
-      }
     }
   }
 
@@ -1414,7 +1376,7 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 async function fetchSurveyData() {
   const request = ++surveyRequest;
   const isDemo = window.radarSupabaseConfig?.preview === true;
-  if (!isDemo && !window.radarCanLoadModule?.('dashboard')) {
+  if (!window.radarCanLoadModule?.('dashboard')) {
     allSurveyRecords = [];
     window.allSurveyRecords = [];
     dynamicChartsGrid?.replaceChildren();
