@@ -95,6 +95,19 @@
   height: auto;
 }
 
+html.dark #executive-report-view > [data-report-placeholder] {
+  background: #111c30;
+  border-color: #34435b;
+}
+
+html.dark #executive-report-view > [data-report-placeholder] > img {
+  filter: brightness(.82) saturate(.86);
+}
+
+html.dark #executive-report-view > [data-preview-tone="light"] > img {
+  filter: invert(.91) hue-rotate(180deg) saturate(.85);
+}
+
 @media (max-width: 640px) {
   #executive-report-view > #report-paywall-overlay,
   .raster-dashboard-preview > .pesquisa-preview-sticky-wrap { top: 68px; }
@@ -441,6 +454,37 @@ html.dark .pesquisa-preview-container:not(.is-unlocked)::before {
   .btn-open-plans-checkout {
     padding: 13px 18px;
     font-size: 13px;
+  }
+
+  #report-paywall-overlay .pesquisa-preview-notice {
+    width: calc(100% - 24px);
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+
+  #report-paywall-overlay .pesquisa-preview-badge {
+    padding: 4px 8px;
+    font-size: 8px;
+    letter-spacing: .07em;
+  }
+
+  #report-paywall-overlay .pesquisa-preview-notice h2 {
+    margin: 8px 0;
+    font-size: clamp(16px, 4.7vw, 19px);
+  }
+
+  #report-paywall-overlay .pesquisa-preview-notice p {
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
+
+  #report-paywall-overlay .pesquisa-preview-guarantee {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  #executive-report-view > [data-report-placeholder] {
+    border-radius: 1rem;
   }
 }
 
