@@ -1,6 +1,7 @@
 'use strict';
 
 const store = require('../lib/billing-store');
+const publicSurvey = require('../lib/survey-public-2026.json');
 const { filters, readSurveyRows, surveyPlan, surveyPreview } = require('../lib/survey-data');
 
 module.exports = async function handler(req, res) {
@@ -17,10 +18,13 @@ module.exports = async function handler(req, res) {
   }
   try {
     const full = ['dash', 'report', 'midia', 'admin'].includes(await surveyPlan(req));
-    if (!full && Object.keys(selected).some(field => field !== 'age')) {
-      return res.status(400).json({ code: 'INVALID_SURVEY_PREVIEW_QUERY' });
+    if (!full) {
+      if (Object.keys(selected).length) {
+        return res.status(400).json({ code: 'INVALID_SURVEY_PREVIEW_QUERY' });
+      }
+      return res.status(200).json(publicSurvey);
     }
-    const result = surveyPreview(await readSurveyRows(full), selected, full);
+    const result = surveyPreview(await readSurveyRows(), selected, true);
     if (process.env.VERCEL_ENV === 'preview') result.synthetic = true;
     return res.status(200).json(result);
   } catch (error) {

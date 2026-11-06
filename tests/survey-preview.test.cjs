@@ -22,40 +22,26 @@ function encodeRows(path, rows) {
   return rows.map(row => ({ id: row.id, ...Object.fromEntries(aliases.map(([, alias, field]) => [alias, row[field]])) }));
 }
 
-test('survey preview delivers only the public chart distributions and suppresses small cells', async t => {
-  const row = {
-    id: 123,
-    'Como você se identifica?': 'Homem Cis',
-    'Qual a sua idade?': '30 a 39 anos',
-    'Na política, você se sente mais próximo de qual lado?': 'private marker',
-    'Carimbo de data/hora': 'private timestamp'
-  };
-  const db = t.mock.method(store, 'db', async path => encodeRows(path, [
-    ...Array.from({ length: 10 }, () => row),
-    { ...row, 'Como você se identifica?': 'Mulher', 'Qual a sua idade?': '18 a 24 anos' }
-  ]));
+test('the free survey delivers the verified totals without small cells or age cross-tabs', async t => {
+  const db = t.mock.method(store, 'db', async () => []);
   const result = await request();
   assert.equal(result.status, 200);
   assert.equal(result.headers['Cache-Control'], 'no-store');
-  assert.deepEqual(result.body.charts['Como você se identifica?'], [{ label: 'Homem', count: 10 }]);
-  assert.deepEqual(result.body.charts['Qual a sua idade?'], [{ label: '30 a 39 anos', count: 10 }]);
-  assert.equal(result.body.charts['Na política, você se sente mais próximo de qual lado?'], undefined);
+  assert.equal(result.body.total, 477);
+  assert.equal(result.body.full, false);
   assert.equal(result.body.questions.length, 9);
-  assert.deepEqual(result.body.questions.slice(-3), [
-    'De 1 a 5, que nota você dá para a qualidade de vida em São José?',
-    'Para você, São José é:',
-    'Para você, a cidade de São José está:'
-  ]);
-  assert.deepEqual(Object.keys(result.body.options), ['age']);
-  assert.equal(result.body.kpis, undefined);
-  assert.equal(result.body.flowPairs, undefined);
-  assert.equal(result.body.reference, undefined);
-  assert.doesNotMatch(decodeURIComponent(db.mock.calls[0].arguments[0]), /mais falta|política|orgulho/);
-  assert.doesNotMatch(JSON.stringify(result.body), /private|123|18 a 24/);
-  assert.doesNotMatch(decodeURIComponent(db.mock.calls[0].arguments[0]), /Carimbo|select=\*/);
-  const narrow = await request('GET', { age: '18 a 24 anos' });
-  assert.equal(narrow.body.count, 0);
-  assert.deepEqual(narrow.body.charts['Qual a sua idade?'], []);
+  const [quality, identity, outlook] = result.body.questions.slice(-3);
+  assert.deepEqual(result.body.charts[quality].map(b => b.count), [16, 34, 135, 170, 122]);
+  assert.deepEqual(result.body.charts[identity].map(b => b.count), [270, 96, 68, 43]);
+  assert.deepEqual(result.body.charts[outlook].map(b => b.count), [189, 187, 101]);
+  assert.deepEqual(Object.keys(result.body.charts), result.body.questions);
+  for (const buckets of Object.values(result.body.charts)) {
+    assert.equal(buckets.reduce((sum, bucket) => sum + bucket.count, 0), 477);
+    assert.ok(buckets.every(bucket => bucket.count >= 10));
+  }
+  assert.deepEqual(Object.keys(result.body), ['full', 'total', 'count', 'questions', 'charts']);
+  assert.equal((await request('GET', { age: '16 a 17 anos' })).status, 400);
+  assert.equal(db.mock.callCount(), 0);
 });
 
 test('survey preview rejects caller-controlled columns and filters before accessing storage', async t => {
@@ -68,8 +54,8 @@ test('survey preview rejects caller-controlled columns and filters before access
 });
 
 test('survey preview keeps storage errors private', async t => {
-  t.mock.method(store, 'db', async () => { throw new Error('private connection details'); });
-  const result = await request();
+  t.mock.method(store, 'authenticate', async () => { throw new Error('private connection details'); });
+  const result = await request('GET', {}, { authorization: 'Bearer test' });
   assert.equal(result.status, 503);
   assert.deepEqual(result.body, { code: 'SURVEY_PREVIEW_UNAVAILABLE' });
 });
@@ -104,7 +90,7 @@ test('paid research is gated by the verified account, and Report requires Report
   assert.equal((await request('GET', {}, headers)).body.full, false);
 });
 
-test('preview serves synthetic aggregates and chapters only to the required plan', async t => {
+test('preview serves original public aggregates and synthetic chapters only to the required plan', async t => {
   const previous = process.env.VERCEL_ENV;
   process.env.VERCEL_ENV = 'preview';
   t.after(() => {
@@ -125,8 +111,8 @@ test('preview serves synthetic aggregates and chapters only to the required plan
   assert.equal((await request('POST', {}, {}, report, chapters)).status, 403);
   assert.equal((await request('POST', {}, headers, report, chapters)).status, 403);
   const survey = await request();
-  assert.equal(survey.body.total, 96);
-  assert.equal(survey.body.synthetic, true);
+  assert.equal(survey.body.total, 477);
+  assert.equal(survey.body.synthetic, undefined);
   plan = 'report';
   const content = await request('POST', {}, headers, report, chapters);
   assert.equal(content.status, 200);

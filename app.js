@@ -1377,7 +1377,7 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 async function fetchSurveyData() {
   const unlocked = window.radarCanLoadModule?.('dashboard');
   ALL_FILTER_ELEMENTS.forEach(select => {
-    if (select) select.disabled = !unlocked && select !== filterAgeSelect;
+    if (select) select.disabled = !unlocked;
   });
   if (!unlocked) {
     allSurveyRecords = [];
@@ -1424,16 +1424,12 @@ async function fetchSurveyData() {
 
 async function fetchPublicSurvey() {
   const request = ++surveyRequest;
-  const query = new URLSearchParams();
-  const age = filterAgeSelect?.value;
-  if (age && age !== 'TODOS') query.set('age', age);
   try {
-    const response = await fetch('/api/survey-preview' + (query.size ? '?' + query : ''), { cache: 'no-store' });
+    const response = await fetch('/api/survey-preview', { cache: 'no-store' });
     if (!response.ok) throw new Error('Prévia indisponível');
     const preview = await response.json();
     if (request !== surveyRequest || window.radarCanLoadModule?.('dashboard')) return;
     if (preview.full !== false) throw new Error('Prévia inválida');
-    populateSelectOptions(filterAgeSelect, preview.options.age, 'Todas as Idades', sortFilterAges);
     if (filteredRecordsCount) filteredRecordsCount.textContent = preview.count.toLocaleString('pt-BR');
     if (totalBaseCount) totalBaseCount.textContent = preview.total.toLocaleString('pt-BR');
     updateStatisticalHeader(preview.count, preview.total);
@@ -2229,8 +2225,7 @@ function processAndRenderDynamicCharts(records, preview) {
 
       // 2. GÊNERO: Homem (Azul), Mulher (Rosa Bebê), Outros (#94A3B8)
       if (qLower.includes("identifica") || qLower.includes("gênero") || qLower.includes("genero")) {
-        const genderMap = { "Homem": 0, "Mulher": 0, "Outros": 0 };
-        if (preview) Object.assign(genderMap, dataMap);
+        const genderMap = preview ? dataMap : { "Homem": 0, "Mulher": 0, "Outros": 0 };
         records.forEach(r => {
           const g = normalizeGender(getField(r, [questionText]));
           genderMap[g] = (genderMap[g] || 0) + 1;
@@ -2238,7 +2233,8 @@ function processAndRenderDynamicCharts(records, preview) {
 
         cardEl.innerHTML = '<div>' +
           '<h3 class="text-sm sm:text-base font-bold text-brand-900 leading-snug break-words mb-1">' + questionText + '</h3>' +
-          '<p class="text-[11px] font-medium text-slate-400 mb-4">Homem (Azul) • Mulher (Rosa Bebê) • Outros</p>' +
+          '<p class="text-[11px] font-medium text-slate-400 mb-4">' +
+          (preview ? 'Distribuição das respostas · categorias agrupadas' : 'Homem (Azul) • Mulher (Rosa Bebê) • Outros') + '</p>' +
         '</div>' +
         '<div class="chart-container"><canvas id="' + canvasId + '"></canvas></div>';
         cardsGrid.appendChild(cardEl);
@@ -3197,8 +3193,9 @@ function renderGenderChart(canvasId, dataMap) {
   const ctx = canvas.getContext("2d");
   if (chartInstances[canvasId]) chartInstances[canvasId].destroy();
 
-  const labels = ["Homem", "Mulher", "Outros"];
-  const values = [dataMap["Homem"] || 0, dataMap["Mulher"] || 0, dataMap["Outros"] || 0];
+  const labels = Object.keys(dataMap);
+  const values = Object.values(dataMap);
+  const colors = { Homem: "#0077B6", Mulher: "#F472B6" };
   const totalSum = values.reduce((a, b) => a + b, 0);
 
   chartInstances[canvasId] = new Chart(ctx, {
@@ -3207,11 +3204,7 @@ function renderGenderChart(canvasId, dataMap) {
       labels: labels,
       datasets: [{
         data: values,
-        backgroundColor: [
-          "#0077B6", // Azul Elegante para Homem
-          "#F472B6", // Rosa Bebê Suave para Mulher
-          "#94A3B8"  // Cinza Slate para Outros
-        ],
+        backgroundColor: labels.map(label => colors[label] || "#94A3B8"),
         borderColor: "#FFFFFF",
         borderWidth: 3,
         hoverOffset: 6

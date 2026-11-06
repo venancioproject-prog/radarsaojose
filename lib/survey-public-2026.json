@@ -1,0 +1,200 @@
+{
+  "full": false,
+  "total": 477,
+  "count": 477,
+  "questions": [
+    "Como você se identifica?",
+    "Qual a sua idade?",
+    "Qual a renda total da sua casa por mês?",
+    "O seu trabalho hoje é:",
+    "Qual o seu estado civil?",
+    "Você Já tem casa própria?",
+    "De 1 a 5, que nota você dá para a qualidade de vida em São José?",
+    "Para você, São José é:",
+    "Para você, a cidade de São José está:"
+  ],
+  "charts": {
+    "Como você se identifica?": [
+      {
+        "label": "Mulher",
+        "count": 268
+      },
+      {
+        "label": "Demais respostas",
+        "count": 209
+      }
+    ],
+    "Qual a sua idade?": [
+      {
+        "label": "25 a 34 anos",
+        "count": 136
+      },
+      {
+        "label": "35 a 44 anos",
+        "count": 102
+      },
+      {
+        "label": "45 a 54 anos",
+        "count": 80
+      },
+      {
+        "label": "+65 anos",
+        "count": 58
+      },
+      {
+        "label": "18 a 24 anos",
+        "count": 51
+      },
+      {
+        "label": "55 anos a 64 anos",
+        "count": 32
+      },
+      {
+        "label": "16 a 17 anos",
+        "count": 18
+      }
+    ],
+    "Qual a renda total da sua casa por mês?": [
+      {
+        "label": "Entre R$ 2.801 e R$ 5.600",
+        "count": 161
+      },
+      {
+        "label": "Entre R$ 5.601 e R$ 12.000",
+        "count": 155
+      },
+      {
+        "label": "Até R$ 2.800",
+        "count": 73
+      },
+      {
+        "label": "Entre R$ 12.001 e R$ 26.000",
+        "count": 67
+      },
+      {
+        "label": "Mais de R$ 26.000",
+        "count": 21
+      }
+    ],
+    "O seu trabalho hoje é:": [
+      {
+        "label": "Carteira assinada (CLT)",
+        "count": 197
+      },
+      {
+        "label": "Por conta própria / Bico / PJ",
+        "count": 107
+      },
+      {
+        "label": "Aposentado",
+        "count": 56
+      },
+      {
+        "label": "Estudante",
+        "count": 37
+      },
+      {
+        "label": "Funcionário público",
+        "count": 36
+      },
+      {
+        "label": "Desempregado",
+        "count": 26
+      },
+      {
+        "label": "Dono de empresa",
+        "count": 18
+      }
+    ],
+    "Qual o seu estado civil?": [
+      {
+        "label": "Casado(a) ou morando junto",
+        "count": 243
+      },
+      {
+        "label": "Solteiro(a)",
+        "count": 117
+      },
+      {
+        "label": "Namorando",
+        "count": 63
+      },
+      {
+        "label": "Divorciado(a)",
+        "count": 40
+      },
+      {
+        "label": "Viúvo(a)",
+        "count": 14
+      }
+    ],
+    "Você Já tem casa própria?": [
+      {
+        "label": "Tenho Casa Própria",
+        "count": 226
+      },
+      {
+        "label": "Moro de aluguel mas quero uma casa própria",
+        "count": 192
+      },
+      {
+        "label": "Demais respostas",
+        "count": 59
+      }
+    ],
+    "De 1 a 5, que nota você dá para a qualidade de vida em São José?": [
+      {
+        "label": "1",
+        "count": 16
+      },
+      {
+        "label": "2",
+        "count": 34
+      },
+      {
+        "label": "3",
+        "count": 135
+      },
+      {
+        "label": "4",
+        "count": 170
+      },
+      {
+        "label": "5",
+        "count": 122
+      }
+    ],
+    "Para você, São José é:": [
+      {
+        "label": "Um pouco das duas coisas",
+        "count": 270
+      },
+      {
+        "label": "Uma cidade moderna e cheia de tecnologia",
+        "count": 96
+      },
+      {
+        "label": "Uma cidade tranquila com jeito de interior",
+        "count": 68
+      },
+      {
+        "label": "Nenhuma delas",
+        "count": 43
+      }
+    ],
+    "Para você, a cidade de São José está:": [
+      {
+        "label": "Melhorando",
+        "count": 189
+      },
+      {
+        "label": "Do mesmo jeito",
+        "count": 187
+      },
+      {
+        "label": "Piorando",
+        "count": 101
+      }
+    ]
+  }
+}
