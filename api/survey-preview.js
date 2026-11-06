@@ -17,7 +17,9 @@ module.exports = async function handler(req, res) {
   }
   try {
     const full = ['dash', 'report', 'midia', 'admin'].includes(await surveyPlan(req));
-    return res.status(200).json(surveyPreview(await readSurveyRows(), selected, full));
+    const result = surveyPreview(await readSurveyRows(), selected, full);
+    if (process.env.VERCEL_ENV === 'preview') result.synthetic = true;
+    return res.status(200).json(result);
   } catch (error) {
     if (error instanceof store.BillingError && error.status === 401) {
       return res.status(401).json({ code: 'INVALID_SESSION' });

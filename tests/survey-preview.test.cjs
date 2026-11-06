@@ -91,3 +91,38 @@ test('paid research is gated by the verified account, and Report requires Report
   status = 'expired';
   assert.equal((await request('GET', {}, headers)).body.full, false);
 });
+
+test('preview serves synthetic aggregates and chapters only to the required plan', async t => {
+  const previous = process.env.VERCEL_ENV;
+  process.env.VERCEL_ENV = 'preview';
+  t.after(() => {
+    if (previous === undefined) delete process.env.VERCEL_ENV;
+    else process.env.VERCEL_ENV = previous;
+  });
+  let plan = 'dash';
+  t.mock.method(store, 'authenticate', async () => ({ id: 'test-user' }));
+  t.mock.method(store, 'subscription', async () => ({
+    status: 'active', plan_type: plan, period_start: '2020-01-01', period_end: '2099-01-01'
+  }));
+  const db = t.mock.method(store, 'db', async path => {
+    assert.doesNotMatch(path, /^respostas_pesquisa\?/);
+    return [];
+  });
+  const headers = { authorization: 'Bearer test' };
+  const chapters = { action: 'chapters' };
+  assert.equal((await request('POST', {}, {}, report, chapters)).status, 403);
+  assert.equal((await request('POST', {}, headers, report, chapters)).status, 403);
+  const survey = await request();
+  assert.equal(survey.body.total, 96);
+  assert.equal(survey.body.synthetic, true);
+  plan = 'report';
+  const content = await request('POST', {}, headers, report, chapters);
+  assert.equal(content.status, 200);
+  assert.equal(content.headers['Cache-Control'], 'no-store');
+  assert.equal(content.body.synthetic, true);
+  const page = require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'app.html'), 'utf8');
+  const ids = (html, attribute) => [...html.matchAll(new RegExp('<article id="(rep-tela-\\d+)" ' + attribute, 'g'))].map(match => match[1]);
+  assert.deepEqual(ids(content.body.html, 'data-report-block'), ids(page, 'data-report-placeholder'));
+  assert.equal((await request('POST', {}, headers, report, { specs: [{ type: 'sample' }] })).body.N, 96);
+  assert.equal(db.mock.callCount(), 0);
+});

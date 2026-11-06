@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
       if (process.env.VERCEL_ENV !== 'preview') {
         return res.status(503).json({ code: 'REPORT_CHAPTERS_UNAVAILABLE' });
       }
-      return res.status(200).json({ html: require('./_report-chapters').demoChapters() });
+      return res.status(200).json({ html: require('./_report-chapters').demoChapters(), synthetic: true });
     }
     const { filters = {}, specs } = body || {};
     if (!validFilters(filters) || !Array.isArray(specs) || specs.length > 2000) {
