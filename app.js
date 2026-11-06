@@ -690,45 +690,30 @@ async function handleLogin(e) {
 
   const email = (document.getElementById("email")?.value || emailInput?.value || "").trim();
   const password = document.getElementById("password")?.value || passwordInput?.value || "";
-  const nome = document.getElementById("nome_cadastro")?.value?.trim() || "";
-  const isRegisterMode = document.getElementById("app-field-nome") && !document.getElementById("app-field-nome").classList.contains("hidden");
-
+  const isRegisterMode = !document.getElementById('app-field-nome')?.classList.contains('hidden');
+  if (isRegisterMode) {
+    window.location.href = 'login.html?cadastro=1';
+    return false;
+  }
   if (!email || !password) {
-    showLoginAlert("Por favor, preencha todos os campos.", "error");
+    showLoginAlert('Por favor, preencha todos os campos.', 'error');
     return false;
   }
 
   setLoginLoading(true);
-
-  let loggedInUser = null;
-
-  if (supabaseClient) {
-    try {
-      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (!error && data?.user) {
-        loggedInUser = data.user;
-      }
-    } catch (err) {
-      console.warn("Autenticação Supabase em fallback local:", err.message);
+  try {
+    if (!supabaseClient) throw new Error('AUTH_UNAVAILABLE');
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if (error || !data?.session) {
+      showLoginAlert('Não foi possível entrar. Confira seu e-mail e sua senha.', 'error');
+      return false;
     }
+    await checkActiveSession();
+  } catch (_) {
+    showLoginAlert('Não foi possível entrar. Tente novamente.', 'error');
+  } finally {
+    setLoginLoading(false);
   }
-
-  // Persistência apenas de preferências visuais de identificação (nunca autoridade de plano)
-  const userName = loggedInUser?.user_metadata?.full_name || nome || email.split("@")[0];
-  localStorage.setItem("userName", userName);
-  localStorage.setItem("userEmail", email);
-  localStorage.removeItem("userPlan");
-
-  const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
-
-  setLoginLoading(false);
-
-  if (isRegisterMode || !hasCompletedOnboarding) {
-    window.location.href = "formulario-radar.html";
-    return false;
-  }
-
-  showDashboard(loggedInUser || { email, user_metadata: { full_name: userName } });
   return false;
 }
 

@@ -462,6 +462,7 @@
     }
 
     document.getElementById('year-current').innerText = new Date().getFullYear();
+    if (new URLSearchParams(window.location.search).get('cadastro') === '1') setAuthMode('register');
   </script>
 </body>
 </html>
