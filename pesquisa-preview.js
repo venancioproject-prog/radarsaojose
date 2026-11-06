@@ -166,10 +166,12 @@
     if (articles.length < 3) return;
 
     const unlocked = isModuleUnlocked('report');
+    if (!unlocked) window.clearPaidReport?.();
     root.classList.toggle('report-preview-unlocked', unlocked);
     articles.slice(2).forEach(article => {
-      article.inert = !unlocked;
-      if (unlocked) article.removeAttribute('aria-hidden');
+      const show = unlocked && !article.hasAttribute('data-report-placeholder');
+      article.inert = !show;
+      if (show) article.removeAttribute('aria-hidden');
       else article.setAttribute('aria-hidden', 'true');
     });
     if (document.getElementById('report-paywall-overlay')) return;

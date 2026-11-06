@@ -670,6 +670,8 @@ async function checkActiveSession() {
       window.applyPlanRestrictions();
     }
 
+    window.resumeCheckoutAfterLogin?.();
+
   } catch (err) {
     console.error("Falha na validação de sessão segura:", err);
     showLogin();
@@ -738,6 +740,7 @@ async function handleLogout() {
   dynamicChartsGrid?.replaceChildren();
   Object.values(chartInstances).forEach(chart => chart?.destroy());
   chartInstances = {};
+  window.clearPaidReport?.();
   window.RadarReportUI?.render({ clear: clearExecutiveCharts });
   localStorage.removeItem("userRole");
   localStorage.removeItem("userName");
@@ -773,91 +776,6 @@ function hideLoginAlert() {
 // ==========================================
 // 5.1 PLANOS, PAYWALL (BLUR) & ASAAS GATEWAY
 // ==========================================
-window.currentSelectedPlan = "plano_10";
-
-window.openPlanUpgradeModal = function(preferredPlan = "report", options = {}) {
-  if (typeof window.openAsaasCheckout === 'function') {
-    window.openAsaasCheckout(preferredPlan, options);
-    return;
-  }
-  window.currentSelectedPlan = preferredPlan;
-  const modal = document.getElementById("modal-planos-asaas");
-  if (modal) modal.classList.remove("hidden");
-  window.selectPlan(preferredPlan);
-};
-
-window.closePlanUpgradeModal = function() {
-  if (typeof window.closeAsaasModal === 'function') {
-    window.closeAsaasModal();
-  }
-  const modal = document.getElementById("modal-planos-asaas");
-  if (modal) modal.classList.add("hidden");
-};
-
-window.selectPlan = function(planId) {
-  window.currentSelectedPlan = planId;
-  const checkoutSection = document.getElementById("asaas-checkout-section");
-  const planNameLabel = document.getElementById("checkout-selected-plan-name");
-
-  if (planId === "gratis") {
-    if (checkoutSection) checkoutSection.classList.add("hidden");
-    window.applyPlanRestrictions();
-    return;
-  }
-
-  if (checkoutSection) checkoutSection.classList.remove("hidden");
-  if (planNameLabel) {
-    planNameLabel.textContent = planId === "plano_15" ? "Radar Premium Pro (R$ 15/mês)" : "Radar Pesquisa (R$ 10/mês)";
-  }
-};
-
-window.setPaymentMethod = function(method) {
-  const pixBtn = document.getElementById("btn-pay-pix");
-  const cardBtn = document.getElementById("btn-pay-card");
-  const boletoBtn = document.getElementById("btn-pay-boleto");
-
-  const pixContent = document.getElementById("pay-content-pix");
-  const cardContent = document.getElementById("pay-content-card");
-  const boletoContent = document.getElementById("pay-content-boleto");
-
-  const activeBtnClass = "px-3.5 py-1.5 rounded-xl font-bold text-xs bg-brand-900 text-white shadow-xs cursor-pointer flex items-center gap-1.5";
-  const inactiveBtnClass = "px-3.5 py-1.5 rounded-xl font-bold text-xs bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 cursor-pointer flex items-center gap-1.5";
-
-  if (pixBtn) pixBtn.className = method === "pix" ? activeBtnClass : inactiveBtnClass;
-  if (cardBtn) cardBtn.className = method === "card" ? activeBtnClass : inactiveBtnClass;
-  if (boletoBtn) boletoBtn.className = method === "boleto" ? activeBtnClass : inactiveBtnClass;
-
-  if (pixContent) pixContent.classList.toggle("hidden", method !== "pix");
-  if (cardContent) cardContent.classList.toggle("hidden", method !== "card");
-  if (boletoContent) boletoContent.classList.toggle("hidden", method !== "boleto");
-};
-
-window.copyPixCode = function() {
-  const input = document.getElementById("pix-copy-input");
-  if (input) {
-    navigator.clipboard.writeText(input.value).then(() => {
-      alert("Chave Pix Copia e Cola copiada para a área de transferência!");
-    });
-  }
-};
-// ============================================================================
-// CHECKOUT REAL INTEGRADO AO ASAAS (/api/asaas-checkout)
-// ============================================================================
-window.processarAssinaturaReal = function(planId) {
-  const targetPlan = String(planId || window.currentSelectedPlan || 'report').toLowerCase().trim();
-  let mapped = 'report';
-  if (targetPlan.includes('dash') || targetPlan.includes('10')) mapped = 'dash';
-  else if (targetPlan.includes('midia') || targetPlan.includes('cotas') || targetPlan.includes('enterprise')) mapped = 'midia';
-  if (typeof window.openAsaasCheckout === 'function') {
-    return window.openAsaasCheckout(mapped);
-  }
-  window.location.href = '#precos';
-};
-
-window.simulateInstantPayment = function() {
-  window.processarAssinaturaReal(window.currentSelectedPlan || "plano_10");
-};
-
 window.simulatePlanChange = function() {
   // Simulation must never grant commercial access.
   return window.refreshConfirmedPlan();
@@ -891,6 +809,7 @@ window.refreshConfirmedPlan = async function() {
     window.applyPlanRestrictions();
     if (window.radarCanLoadModule?.('dashboard') && !allSurveyRecords.length) void fetchSurveyData();
     if (window.currentMainTab === 'midia') window.onSwitchToMidiaTab?.();
+    if (window.currentMainTab === 'report') void window.renderExecutiveReportCharts();
     return window.appState.plan_type;
   } catch (error) {
     window.appState.profile = null;
@@ -7910,7 +7829,73 @@ function clearExecutiveCharts() {
   });
 }
 
+let loadedReport = null;
+let loadingReport = null;
+
+window.clearPaidReport = function() {
+  loadingReport = null;
+  if (!loadedReport) return;
+  for (const [chapter, placeholder] of loadedReport.pages) chapter.replaceWith(placeholder);
+  loadedReport = null;
+  clearExecutiveCharts();
+};
+
+async function loadPaidReport() {
+  const userId = window.appState?.user?.id;
+  if (!userId || !window.radarCanLoadModule?.('report')) {
+    window.clearPaidReport();
+    return false;
+  }
+  if (loadedReport?.userId === userId) return true;
+  if (loadingReport?.userId === userId) return loadingReport.promise;
+  window.clearPaidReport();
+  const pending = { userId };
+  loadingReport = pending;
+  pending.promise = (async () => {
+    const root = document.getElementById('executive-report-view');
+    try {
+      const { data } = await supabaseClient.auth.getSession();
+      if (data?.session?.user?.id !== userId) return false;
+      const response = await fetch('/api/survey-report', {
+        method: 'POST', cache: 'no-store',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + data.session.access_token },
+        body: JSON.stringify({ action: 'chapters' })
+      });
+      if (!response.ok) throw new Error('Report unavailable');
+      const { html } = await response.json();
+      if (loadingReport !== pending || window.appState?.user?.id !== userId ||
+          !window.radarCanLoadModule?.('report')) return false;
+      const template = document.createElement('template');
+      template.innerHTML = html;
+      const chapters = [...template.content.children];
+      const placeholders = [...root.querySelectorAll(':scope > [data-report-placeholder]')];
+      if (chapters.length !== placeholders.length ||
+          chapters.some((chapter, index) => chapter.id !== placeholders[index].id)) {
+        throw new Error('Unexpected Report chapters');
+      }
+      const pages = chapters.map((chapter, index) => [chapter, placeholders[index]]);
+      for (const [chapter, placeholder] of pages) placeholder.replaceWith(chapter);
+      loadedReport = { userId, pages };
+      root.querySelector('[data-report-load-error]')?.remove();
+      return true;
+    } catch (_) {
+      if (loadingReport === pending && !root.querySelector('[data-report-load-error]')) {
+        const error = document.createElement('p');
+        error.dataset.reportLoadError = '';
+        error.setAttribute('role', 'status');
+        error.textContent = 'Não foi possível carregar os capítulos. Abra a aba Report novamente para tentar de novo.';
+        root.querySelector('[data-report-placeholder]')?.before(error);
+      }
+      return false;
+    } finally {
+      if (loadingReport === pending) loadingReport = null;
+    }
+  })();
+  return pending.promise;
+}
+
 window.renderExecutiveReportCharts = async function() {
+  if (!await loadPaidReport()) return;
   renderExecutivePersonasCards();
   return window.RadarReportUI.render({
     url: SUPABASE_URL,

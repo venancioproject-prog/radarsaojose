@@ -52,6 +52,12 @@ module.exports = async function handler(req, res) {
     const plan = await surveyPlan(req);
     if (!['report', 'midia', 'admin'].includes(plan)) return res.status(403).json({ code: 'REPORT_REQUIRED' });
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    if (body?.action === 'chapters') {
+      if (process.env.VERCEL_ENV !== 'preview') {
+        return res.status(503).json({ code: 'REPORT_CHAPTERS_UNAVAILABLE' });
+      }
+      return res.status(200).json({ html: require('./_report-chapters').demoChapters() });
+    }
     const { filters = {}, specs } = body || {};
     if (!validFilters(filters) || !Array.isArray(specs) || specs.length > 2000) {
       return res.status(400).json({ code: 'INVALID_REPORT_QUERY' });

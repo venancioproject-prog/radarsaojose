@@ -574,122 +574,6 @@
 
     /* ── PLANOS ── */
     .plans-section { background: var(--preto); }
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-      background: rgba(255,255,255,0.08);
-    }
-    .plan-card {
-      background: #111;
-      padding: 38px 24px;
-      display: flex;
-      flex-direction: column;
-    }
-    .plan-card .btn-plan {
-      margin-top: auto;
-    }
-    .plans-note {
-      text-align: center;
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.45);
-      margin-top: 32px;
-      line-height: 1.6;
-    }
-    .plan-card.destaque {
-      background: var(--azul);
-      position: relative;
-    }
-    .plan-badge {
-      font-family: var(--font-ui);
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--azul-claro);
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-    }
-    .plan-name {
-      font-family: var(--font-ui);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 16px;
-    }
-    .plan-price {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--branco);
-      line-height: 1;
-      letter-spacing: -0.025em;
-      margin-bottom: 6px;
-    }
-    .plan-price span {
-      font-family: var(--font-ui);
-      font-size: 1rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.4);
-    }
-    .plan-tagline {
-      font-family: var(--font-ui);
-      font-size: 0.82rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 32px;
-      line-height: 1.5;
-    }
-    .plan-features {
-      list-style: none;
-      margin-bottom: 36px;
-    }
-    .plan-features li {
-      font-family: var(--font-ui);
-      font-size: 0.84rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.75);
-      padding: 8px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .plan-features li:last-child { border-bottom: none; }
-    .plan-features li i { color: var(--azul-claro); flex-shrink: 0; margin-top: 2px; }
-    .btn-plan {
-      display: block;
-      text-align: center;
-      padding: 13px 24px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: opacity 0.2s;
-      font-family: var(--font-ui);
-    }
-    .btn-plan:hover { opacity: 0.85; }
-    .btn-plan-outline {
-      border: 1.5px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.7);
-    }
-    .btn-plan-solid {
-      background: var(--azul-claro);
-      color: var(--branco);
-    }
-    .btn-plan-red {
-      background: var(--vermelho);
-      color: var(--branco);
-    }
 
     /* ── COMO FUNCIONA ── */
     .how-section { background: var(--branco); }
@@ -1235,7 +1119,6 @@
       .carousel-btn { display: none; }
       .platform-grid { grid-template-columns: 1fr; margin-top: 40px; }
       .platform-card { width: 300px; min-width: 300px; flex: 0 0 300px; }
-      .plans-grid { grid-template-columns: repeat(2, 1fr); }
       .how-layout { grid-template-columns: 1fr; gap: 40px; }
       .how-intro { max-width: 100%; }
       .how-section .steps-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1253,7 +1136,6 @@
     }
 
     @media (max-width: 640px) {
-      .plans-grid { grid-template-columns: 1fr !important; }
       .navbar { padding: 14px 20px; }
       .hero { padding: 105px 20px 60px; }
       .hero-title { font-size: 2.1rem; }
@@ -1410,6 +1292,7 @@
   </style>
   <link rel="stylesheet" href="header-menu.css?v=20261105-mobile-cta">
   <script src="header-menu.js?v=20261105" defer></script>
+  <link rel="stylesheet" href="radar-planos.css">
 </head>
 <body>
 
@@ -1615,8 +1498,8 @@
         <div class="module-copy">
           <p class="module-eyebrow"><span>06 / Inteligência de Mídia</span><span class="module-access paid">Conteúdo por assinatura</span></p>
           <h3 id="titulo-midia">Antes de anunciar,<br> entenda a conversa local.</h3>
-          <p>Veja os temas que aparecem nos canais de notícias e como o público reage. Consulte os recortes de publicações e engajamento para preparar o planejamento de comunicação.</p>
-          <ul><li>Comparações entre canais e temas da cobertura local.</li><li>Painéis de engajamento, sentimento e distribuição das publicações.</li><li>Leituras sobre repercussão para orientar perguntas e escolhas de mídia.</li><li>Mapeamento de influenciadores locais e personas comportamentais no plano Mídia.</li></ul>
+          <p>Acompanhe a análise das publicações de sites e blogs de notícias de São José dos Campos. No dia 10 de cada mês, o dashboard recebe a análise referente ao mês anterior.</p>
+          <ul><li>Comparações entre canais e temas da cobertura local.</li><li>Painéis de engajamento, sentimento e distribuição das publicações.</li><li>Leituras sobre repercussão para orientar perguntas e escolhas de mídia.</li></ul>
           <div class="module-use"><h4>Para planejar a comunicação</h4><p>Compare o volume de publicações com as interações. Um canal com mais posts nem sempre é o que concentra mais engajamento. Confira o período da base ao usar os números.</p></div>
           <a href="#planos" class="btn-outline module-paid-cta">Conhecer o plano Mídia</a>
         </div>
@@ -1814,7 +1697,7 @@
         <h2 class="manifesto-title">Uma pesquisa feita para entender a vida de quem mora, consome e trabalha em São José.</h2>
         <div class="manifesto-text">
           <p>O Radar nasceu de perguntas presentes no comércio e nos bairros: onde o morador procura lazer, como escolhe o que consumir e o que sente falta na cidade. O estudo reúne 477 respostas, entrevistas em profundidade e observação de campo.</p>
-          <p>Hoje, a plataforma aproxima essa pesquisa de indicadores públicos, fotografias e análises de mídia. O trabalho do Studio 8 é organizar essas referências para que você consiga consultá-las quando surgir uma nova questão no negócio.</p>
+          <p>Hoje, a plataforma aproxima essa pesquisa de indicadores públicos, fotografias e análises de mídia. O trabalho do Radar São José é organizar essas referências para que você consiga consultá-las quando surgir uma nova questão no negócio.</p>
         </div>
       </div>
 
@@ -1823,7 +1706,7 @@
           <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="author-photo" loading="lazy" />
           <div class="author-info">
             <h4>Leonardo Venâncio</h4>
-            <div class="author-role">Consultor de Pesquisa - Studio 8</div>
+            <div class="author-role">Consultor de Pesquisa - Radar São José</div>
             <p class="author-bio">Pesquisador e consultor com mais de uma década de experiência em inteligência de mercado para marcas como Ambev, Pernod Ricard, Sadia e CNN Brasil. Nasceu em São José dos Campos, construiu carreira em São Paulo e nunca parou de olhar para o Vale com os dois olhos: o de quem foi criado aqui e o de quem aprendeu a ler mercado lá fora.</p>
           </div>
         </div>
@@ -1831,7 +1714,7 @@
           <img src="fotos_radar/mayumi.jpg" alt="Mayumi Nagano" class="author-photo" loading="lazy" />
           <div class="author-info">
             <h4>Mayumi Nagano</h4>
-            <div class="author-role">Estrategista de Tráfego e Cultura - Studio 8</div>
+            <div class="author-role">Estrategista de Tráfego e Cultura - Radar São José</div>
             <p class="author-bio">Empreendedora desde 2016 e especialista em automação, tráfego pago e growth para escala em performance digital. Ajuda a transformar a inteligência de dados em ação e crescimento real para negócios em São José dos Campos e região.</p>
           </div>
         </div>
@@ -1848,70 +1731,8 @@
         Escolha pela decisão que você precisa tomar. Todos os planos pagos incluem acesso por um ano.
       </p>
 
-      <div class="plans-grid">
-        <!-- PLANO GRÁTIS -->
-        <div class="plan-card" id="plano-gratis">
-          <p class="plan-name">Plano Grátis</p>
-          <div class="plan-price"><span>Acesso livre</span> R$ 0</div>
-          <p class="plan-tagline">Sem cartão e sem compromisso.<br><strong>100% gratuito</strong> para sempre.</p>
-          <p class="plan-tagline">História, Banco de Imagens e Dados Públicos no acesso gratuito.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check" aria-hidden="true"></i>Dados Públicos e indicadores de SJC</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>História e linha do tempo da cidade</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Banco de Imagens em alta resolução</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Acesso gratuito imediato</li>
-          </ul>
-          <a href="app.html" class="btn-plan btn-plan-outline">Criar conta gratuita</a>
-        </div>
-
-        <!-- PLANO DASH -->
-        <div class="plan-card">
-
-          <p class="plan-name">Plano Dash</p>
-          <div class="plan-price"><span>12× de</span> R$ 269,90</div>
-          <p class="plan-tagline">Sem juros no cartão. Total anual: R$ 3.238,80.<br><strong>R$ 2.914,92 à vista no Pix</strong> (10% de desconto).</p>
-          <p class="plan-tagline">Para investigar o público e comparar os recortes da pesquisa.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check" aria-hidden="true"></i>Pesquisa Quantitativa completa</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>30 gráficos interativos</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Filtros por gênero, idade, renda e região</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Base de 477 moradores</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Recortes de perfil e comportamento</li>
-          </ul>
-          <a href="app.html" class="btn-plan btn-plan-outline">Criar conta para contratar</a>
-        </div>
-        <div class="plan-card destaque">
-          <div class="plan-badge">Recomendado</div>
-          <p class="plan-name">Plano Report</p>
-          <div class="plan-price"><span>12× de</span> R$ 489,90</div>
-          <p class="plan-tagline">Sem juros no cartão. Total anual: R$ 5.878,80.<br><strong>R$ 5.290,92 à vista no Pix</strong> (10% de desconto).</p>
-          <p class="plan-tagline">Para levar uma análise mais completa à próxima reunião de decisão.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check" aria-hidden="true"></i>Tudo do plano Dash</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Report Exclusivo completo</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>10 entrevistas em profundidade</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Observação de campo: Invasão de Cenários</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Análises de comportamento e consumo</li>
-          </ul>
-          <a href="app.html" class="btn-plan btn-plan-solid">Criar conta para contratar</a>
-        </div>
-        <div class="plan-card">
-
-          <p class="plan-name">Plano Mídia</p>
-          <div class="plan-price"><span>12× de</span> R$ 1.190,00</div>
-          <p class="plan-tagline">Sem juros no cartão. Total anual: R$ 14.280,00.<br><strong>R$ 12.852,00 à vista no Pix</strong> (10% de desconto).</p>
-          <p class="plan-tagline">Para equipes que planejam comunicação e precisam acompanhar a cidade.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check" aria-hidden="true"></i>Tudo do plano Report</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Inteligência de Mídia e notícias de SJC</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Mapeamento de influenciadores locais</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>Personas comportamentais</li>
-            <li><i class="fas fa-check" aria-hidden="true"></i>3 usuários: titular e 2 convidados</li>
-          </ul>
-          <a href="app.html" class="btn-plan btn-plan-outline">Criar conta para contratar</a>
-        </div>
-      </div>
-      <p class="plans-note">Os planos pagos têm vigência anual. O valor em 12 parcelas corresponde ao pagamento do período de um ano.</p>
+      <div class="radar-plan-catalog" data-radar-plan-catalog></div>
+      <noscript><p><a href="app.html">Acessar a plataforma</a></p></noscript>
     </div>
   </section>
 
@@ -1922,8 +1743,8 @@
 <details><summary>Preciso pagar para criar uma conta?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Não. A conta dá acesso gratuito a História, Banco de Imagens e Dados Públicos. A Pesquisa Quantitativa completa, o Report Exclusivo e a Inteligência de Mídia fazem parte dos planos pagos.</p></details>
 <details><summary>Como faço meu cadastro?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Clique em Criar minha conta gratuita. Na tela da plataforma, escolha Novo Usuário e siga as etapas de cadastro. Se você já tem uma conta, use Entrar.</p></details>
 <details><summary>O que posso fazer na primeira visita?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Abra Dados Públicos para consultar um indicador. No Banco de Imagens, encontre uma fotografia para sua apresentação e confira os créditos e condições de uso. Em História, percorra os períodos da formação de São José.</p></details>
-<details><summary>Qual plano faz sentido para o meu trabalho?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">O Dash inclui a Pesquisa Quantitativa. O Report acrescenta o estudo executivo, entrevistas e observação de campo. O Mídia reúne esses conteúdos com inteligência de mídia, influenciadores, personas e acesso para três usuários. A contratação é anual, com as condições apresentadas nos planos.</p></details>
-<details><summary>Os dados são atualizados em tempo real?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Cada base tem seu período de referência. A pesquisa reúne uma coleta com 477 moradores; os indicadores públicos e os painéis de mídia têm referências próprias. Consulte a fonte, a data e a base de cada recorte antes de interpretar os resultados.</p></details>
+<details><summary>Qual plano faz sentido para o meu trabalho?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">O Dash inclui o dashboard da pesquisa quantitativa. O Report acrescenta o relatório da pesquisa. O Mídia inclui os dois e acrescenta o dashboard de inteligência de mídia e uma apresentação online por ano para a equipe. A contratação é anual.</p></details>
+<details><summary>Quando os dados são atualizados?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">O dashboard e o relatório da pesquisa refletem a edição disponibilizada. No plano Mídia, o dashboard de inteligência de mídia recebe, no dia 10 de cada mês, a análise das publicações do mês anterior. Os indicadores públicos seguem os períodos de referência de cada fonte.</p></details>
 <details><summary>Posso usar as fotografias nas minhas apresentações?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Consulte os créditos e as condições de uso apresentados junto de cada fotografia. O acervo permite ampliar as imagens e baixar o arquivo original.</p></details>
 <details><summary>Posso acessar pelo celular?<i class="fas fa-plus faq-icon" aria-hidden="true"></i></summary><p class="faq-answer">Sim. Para comparar gráficos e explorar análises com mais espaço, use um computador ou tablet.</p></details>
 </div></div></div></section>
@@ -1945,7 +1766,7 @@
         <p>Dados Públicos, História e Banco de Imagens. Conheça a plataforma antes de escolher uma assinatura.</p>
         <a href="app.html" class="btn-primary">Criar minha conta gratuita</a>
         <p class="signup-help">Na próxima tela, escolha <strong>Novo Usuário</strong>. Já tem conta? Use <strong>Entrar</strong>.</p>
-        <p class="signup-contact">Precisa falar com a equipe? <a href="https://wa.me/5512991661925">WhatsApp</a> · <a href="mailto:radarsaojose@studio8.com.br">E-mail</a></p>
+        <p class="signup-contact">Precisa falar com a equipe? <a href="mailto:radarsaojose@gmail.com">E-mail</a></p>
       </div>
     </div></div>
   </section>
@@ -1957,8 +1778,11 @@
         <strong>Radar São José</strong> · Studio 8 · 2026 · <a href="blog.html" style="color: rgba(255,255,255,0.7); text-decoration: underline; margin-left: 8px;">Blog</a>
       </p>
       <p class="footer-email">
-        <a href="mailto:radarsaojose@studio8.com.br">radarsaojose@studio8.com.br</a>
+        <a href="mailto:radarsaojose@gmail.com">radarsaojose@gmail.com</a>
       </p>
+      <nav class="footer-email" aria-label="Informações jurídicas">
+        <a href="juridico.html#termos">Termos</a> · <a href="juridico.html#privacidade">Privacidade</a> · <a href="juridico.html#cookies">Cookies</a> · <a href="juridico.html#sla">SLA e Suporte</a>
+      </nav>
     </div>
   </footer>
 
@@ -2036,7 +1860,8 @@
     }
   </script>
   <!-- Asaas Checkout Integration -->
-  <script src="asaas-checkout-modal.js"></script>
+  <script src="radar-planos.js"></script>
+  <script src="asaas-checkout-modal.js?v=20261105_planos"></script>
 
 </body>
 </html>

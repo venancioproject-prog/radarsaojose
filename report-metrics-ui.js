@@ -2,9 +2,10 @@
 (function (root) {
   'use strict';
   const M = root.RadarReportMetrics, B = root.RadarReportBindings;
-  let source, engine, revision = 0, initialized = false, state = 'IDLE';
+  let engine, revision = 0, state = 'IDLE';
   let genders = ['Homem Cis', 'Mulher Cis', 'Outros', 'Homem Trans'];
-  const bindings = [], unresolved = [], charts = {};
+  let bindings = [], unresolved = [];
+  const initialized = new WeakSet(), charts = {};
   const ids = { gender: 'gender', income: 'income', age: 'age', region: 'region', marital: 'marital', work: 'work', home: 'house', politics: 'politics', quality: 'quality', pride: 'pride' };
   const percentPattern = /(?:(?<!%)-)?\d+(?:[.,]\d+)?\s*%/g;
   function filtersFromUI() {
@@ -114,9 +115,12 @@
     return entry || null;
   }
   function initialize() {
-    if (initialized) return; initialized = true;
+    bindings = bindings.filter(binding => binding.element.isConnected);
+    unresolved = unresolved.filter(element => element.isConnected);
     const articles = [...document.querySelectorAll('#executive-report-view > article')];
     articles.forEach((article, i) => {
+      if (initialized.has(article) || article.hasAttribute('data-report-placeholder')) return;
+      initialized.add(article);
       const block = Number(article.dataset.reportBlock) || i + 1; article.dataset.reportBlock = block;
       article.querySelectorAll('[data-report-spec]').forEach(element => {
         try {
@@ -289,10 +293,10 @@
       console.warn('Error rendering sankey chart:', err);
     }
   }
-  async function render({ url, key, records, filters, bar, sankey, clear } = {}) {
+  async function render({ records, filters, bar, sankey, clear } = {}) {
     initialize();
     const current = ++revision;
-    if (!url || !key) {
+    if (!records?.length) {
       engine = null;
       state = 'PREVIEW';
       clear?.();
@@ -300,8 +304,7 @@
       return audit();
     }
     try {
-      if (!source) source = root.RadarReportSource.create({ url, key });
-      const snapshot = records?.length ? { records, metadata: { provider: 'Supabase' } } : await source.load();
+      const snapshot = { records, metadata: { provider: 'Demonstração' } };
       if (current !== revision) return;
       genders = M.create(snapshot.records, snapshot.metadata).distribution('gender').categories.map(c => c.category);
       engine = M.create(snapshot.records, snapshot.metadata, filters ?? filtersFromUI());

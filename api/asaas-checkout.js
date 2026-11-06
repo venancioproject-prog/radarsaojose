@@ -283,7 +283,7 @@ module.exports = async function handler(req, res) {
       installmentCount:quote.installments.length, installmentValue:quote.installments[0]/100};
     if (body.action === 'quote') {
       if (!checkRateLimit('quote:' + user.id, 40, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
-      return res.status(200).json({success:true, quote, plan});
+      return res.status(200).json({success:true, quote, plan, sandbox:ASAAS_ENVIRONMENT === 'sandbox'});
     }
     if (body.expectedAmountCents !== undefined && body.expectedAmountCents !== quote.amountCents) {
       throw new billing.BillingError(409, 'PRICE_CHANGED');

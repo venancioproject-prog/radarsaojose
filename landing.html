@@ -546,97 +546,6 @@
 
     /* ── PLANOS ── */
     .plans-section { background: var(--preto); }
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-      background: rgba(255,255,255,0.08);
-    }
-    .plan-card {
-      background: #111;
-      padding: 44px 36px;
-    }
-    .plan-card.destaque {
-      background: var(--azul);
-      position: relative;
-    }
-    .plan-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--azul-claro);
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 4px 14px;
-    }
-    .plan-name {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 16px;
-    }
-    .plan-price {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--branco);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .plan-price span { font-size: 1rem; font-weight: 500; color: rgba(255,255,255,0.4); }
-    .plan-tagline {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 32px;
-      line-height: 1.5;
-    }
-    .plan-features {
-      list-style: none;
-      margin-bottom: 36px;
-    }
-    .plan-features li {
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.75);
-      padding: 8px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .plan-features li:last-child { border-bottom: none; }
-    .plan-features li i { color: var(--azul-claro); flex-shrink: 0; margin-top: 2px; }
-    .btn-plan {
-      display: block;
-      text-align: center;
-      padding: 13px 24px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: opacity 0.2s;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .btn-plan:hover { opacity: 0.85; }
-    .btn-plan-outline {
-      border: 1.5px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.7);
-    }
-    .btn-plan-solid {
-      background: var(--azul-claro);
-      color: var(--branco);
-    }
-    .btn-plan-red {
-      background: var(--vermelho);
-      color: var(--branco);
-    }
 
     /* ── COMO FUNCIONA ── */
     .how-section { background: var(--branco); }
@@ -1123,7 +1032,6 @@
       .carousel-btn { display: none; }
       .platform-grid { grid-template-columns: 1fr; margin-top: 40px; }
       .platform-card { width: 300px; min-width: 300px; flex: 0 0 300px; }
-      .plans-grid { grid-template-columns: 1fr; }
       .how-section .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .insights-grid { grid-template-columns: 1fr; }
       .video-inner { grid-template-columns: 1fr; }
@@ -1239,6 +1147,7 @@
   </style>
   <link rel="stylesheet" href="header-menu.css?v=20261105-mobile-cta">
   <script src="header-menu.js?v=20261105" defer></script>
+  <link rel="stylesheet" href="radar-planos.css">
 </head>
 <body>
 
@@ -1395,53 +1304,8 @@
         Do básico ao estratégico — comece gratuitamente e expanda conforme sua necessidade.
       </p>
 
-      <div class="plans-grid">
-        <!-- GRATUITO -->
-        <div class="plan-card">
-          <p class="plan-name">Gratuito</p>
-          <div class="plan-price">R$ 0 <span>/ sempre</span></div>
-          <p class="plan-tagline">Crie sua conta e acesse imediatamente o banco de imagens e os dados do IBGE.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i>Banco de imagens profissionais de SJC</li>
-            <li><i class="fas fa-check"></i>Dados IBGE Censo 2022 organizados</li>
-            <li><i class="fas fa-check"></i>Prévia dos insights da plataforma</li>
-            <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Dashboard analítico completo</li>
-            <li><i class="fas fa-times" style="color: rgba(255,255,255,0.2)"></i>Relatório comportamental</li>
-          </ul>
-          <a href="login.html" class="btn-plan btn-plan-outline">Criar conta grátis</a>
-        </div>
-
-        <!-- PRO (R$ 10) -->
-        <div class="plan-card destaque">
-          <div class="plan-badge">Mais popular</div>
-          <p class="plan-name">Pro</p>
-          <div class="plan-price">R$ 10 <span>/ mês</span></div>
-          <p class="plan-tagline">Dashboard analítico completo + cruzamento de dados de 477 respondentes e clipping local.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i>Tudo do plano Gratuito</li>
-            <li><i class="fas fa-check"></i>Dashboard analítico interativo completo</li>
-            <li><i class="fas fa-check"></i>Relatório comportamental (3 camadas)</li>
-            <li><i class="fas fa-check"></i>Curadoria de Mídia — clipping SJC</li>
-            <li><i class="fas fa-check"></i>Acesso individual oficial</li>
-          </ul>
-          <a href="javascript:void(0)" onclick="openAsaasCheckout('pro')" class="btn-plan btn-plan-solid">Assinar Plano Pro (R$ 10)</a>
-        </div>
-
-        <!-- EMPRESARIAL (R$ 15) -->
-        <div class="plan-card">
-          <p class="plan-name">Empresarial</p>
-          <div class="plan-price">R$ 15 <span>/ mês</span></div>
-          <p class="plan-tagline">Acesso ilimitado + Consultor IA Oráculo + relatórios executivos e suporte prioritário.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i>Tudo do plano Pro</li>
-            <li><i class="fas fa-check"></i>Consultor IA Oráculo McKinsey liberado</li>
-            <li><i class="fas fa-check"></i>Múltiplos acessos simultâneos</li>
-            <li><i class="fas fa-check"></i>Recortes e diagnósticos de decisão</li>
-            <li><i class="fas fa-check"></i>Suporte prioritário Studio 8</li>
-          </ul>
-          <a href="javascript:void(0)" onclick="openAsaasCheckout('enterprise')" class="btn-plan btn-plan-red">Assinar Empresarial (R$ 15)</a>
-        </div>
-      </div>
+      <div class="radar-plan-catalog" data-radar-plan-catalog></div>
+      <noscript><p><a href="app.html">Acessar a plataforma</a></p></noscript>
     </div>
   </section>
 
@@ -1770,13 +1634,13 @@
         <div class="author-card">
           <img src="fotos_radar/LEONARDO.jpeg" alt="Leonardo Venâncio" class="author-photo" loading="lazy" />
           <h4>Leonardo Venâncio</h4>
-          <div class="author-role">Consultor de Pesquisa - Studio 8</div>
+          <div class="author-role">Consultor de Pesquisa - Radar São José</div>
           <p class="author-bio">Pesquisador e consultor com mais de uma década de experiência em inteligência de mercado para marcas como Ambev, Pernod Ricard, Sadia e CNN Brasil. Nasceu em São José dos Campos, construiu carreira em São Paulo e nunca parou de olhar para o Vale com os dois olhos: o de quem foi criado aqui e o de quem aprendeu a ler mercado lá fora.</p>
         </div>
         <div class="author-card">
           <img src="fotos_radar/mayumi.jpg" alt="Mayumi Nagano" class="author-photo" loading="lazy" />
           <h4>Mayumi Nagano</h4>
-          <div class="author-role">Estrategista de Tráfego e Cultura - Studio 8</div>
+          <div class="author-role">Estrategista de Tráfego e Cultura - Radar São José</div>
           <p class="author-bio">Empreendedora desde 2016 e especialista em automação, tráfego pago e growth para escala em performance digital. Ajuda a transformar a inteligência de dados em ação e crescimento real para negócios em São José dos Campos e região.</p>
         </div>
       </div>
@@ -2128,6 +1992,7 @@
     }
   </script>
   <!-- Asaas Checkout Integration -->
-  <script src="asaas-checkout-modal.js"></script>
+  <script src="radar-planos.js"></script>
+  <script src="asaas-checkout-modal.js?v=20261105_planos"></script>
 </body>
 </html>

@@ -4,63 +4,13 @@
 // - Plano Dash (Explorer): 12x de R$ 269,90 (R$ 3.238,80 anual)
 // - Plano Report (Executive - Recomendado): 12x de R$ 489,90 (R$ 5.878,80 anual)
 // - Plano Mídia (Authority / Cotas): 12x de R$ 1.190,00 (R$ 14.280,00 anual)
-// Multi-Método: PIX dinâmico, Cartão de Crédito parcelado até 12x e Boleto Bancário
+// Meios de pagamento: Pix dinâmico e cartão de crédito em até 12 parcelas.
 // ============================================================================
 
 (function() {
   'use strict';
 
-  // Definição dos Planos Comerciais do Radar São José
-  const PLANS_DATA = {
-    dash: {
-      id: 'dash',
-      name: 'Plano Dash (Explorer)',
-      badge: 'Explorer',
-      installmentCount: 12,
-      installmentValue: 269.90,
-      totalValue: 3238.80,
-      tagline: 'Acesso completo aos 30 gráficos e cruzamentos quantitativos',
-      features: [
-        '30 Gráficos interativos da Pesquisa Quantitativa',
-        'Filtros por gênero, faixa etária, renda e região',
-        'Base completa de 477 moradores respondentes',
-        'Exportação de dados e recortes estatísticos'
-      ]
-    },
-    report: {
-      id: 'report',
-      name: 'Plano Report (Executive - Recomendado)',
-      badge: 'Executive • Recomendado',
-      recommended: true,
-      installmentCount: 12,
-      installmentValue: 489.90,
-      totalValue: 5878.80,
-      tagline: 'Inteligência analítica aprofundada com o Dossiê Executivo completo',
-      features: [
-        'Tudo do Plano Dash (Explorer)',
-        'Dossiê Executivo Completo com 8 capítulos',
-        '10 Entrevistas em Profundidade na íntegra',
-        'Invasão de Cenários & Comportamento Urbano',
-        'Consultor IA Estratégico integrado'
-      ]
-    },
-    midia: {
-      id: 'midia',
-      name: 'Plano Mídia (Authority / Cotas)',
-      badge: 'Authority / Cotas',
-      installmentCount: 12,
-      installmentValue: 1190.00,
-      totalValue: 14280.00,
-      tagline: 'Inteligência de mídia, notícias, influenciadores e ativação de equipe',
-      features: [
-        'Tudo do Plano Report (Executive)',
-        'Painel de Inteligência de Mídia & Notícias SJC',
-        'Métricas e Mapeamento de Influenciadores Locais',
-        'Personas Comportamentais estruturadas',
-        '3 Licenças simultâneas para sua equipe corporativa'
-      ]
-    }
-  };
+  const planNames = Object.freeze({ dash: 'Plano Dash', report: 'Plano Report', midia: 'Plano Mídia' });
 
   // Estilos CSS auto-contidos e modernos do Modal de Checkout
   const checkoutStyles = `
@@ -101,6 +51,7 @@
         max-width: 580px;
         max-height: 94vh;
         overflow-y: auto;
+        overscroll-behavior: contain;
         margin: auto;
         border-radius: 28px;
         border: 1px solid rgba(255, 255, 255, 0.18);
@@ -172,21 +123,6 @@
         gap: 6px;
       }
 
-      .asaas-sandbox-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 2px 7px;
-        border-radius: 6px;
-        background: rgba(245, 158, 11, 0.18);
-        border: 1px solid rgba(245, 158, 11, 0.4);
-        color: #fbbf24;
-        font-size: 9.5px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
       .asaas-close-button {
         background: rgba(255, 255, 255, 0.06);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -207,94 +143,15 @@
         color: #ffffff;
       }
 
-      /* 3 PLANOS EM GRID */
-      .asaas-plan-selector {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin-bottom: 20px;
+      .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) {
+        max-width: 1440px;
+        background: #0a0a0a;
       }
 
-      @media (max-width: 520px) {
-        .asaas-plan-selector {
-          grid-template-columns: 1fr;
-          gap: 8px;
-        }
-      }
-
-      .asaas-plan-card-opt {
-        padding: 12px;
-        border-radius: 16px;
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.04);
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        user-select: none;
-        position: relative;
-      }
-
-      .asaas-plan-card-opt:hover {
-        border-color: rgba(0, 180, 216, 0.4);
-        background: rgba(255, 255, 255, 0.07);
-      }
-
-      .asaas-plan-card-opt.active {
-        border-color: #00B4D8;
-        background: rgba(0, 180, 216, 0.14);
-        box-shadow: 0 0 20px rgba(0, 180, 216, 0.25);
-      }
-
-      .asaas-plan-card-opt.recommended-plan {
-        border-color: rgba(16, 185, 129, 0.4);
-      }
-
-      .asaas-plan-card-opt.recommended-plan.active {
-        border-color: #10B981;
-        background: rgba(16, 185, 129, 0.15);
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
-      }
-
-      .asaas-opt-badge {
-        font-size: 9px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #94a3b8;
-        margin-bottom: 4px;
-        display: block;
-      }
-
-      .asaas-plan-card-opt.active .asaas-opt-badge {
-        color: #38bdf8;
-      }
-
-      .asaas-plan-card-opt.recommended-plan.active .asaas-opt-badge {
-        color: #34d399;
-      }
-
-      .asaas-opt-title {
-        font-size: 13px;
-        font-weight: 800;
-        color: #ffffff;
-        margin-bottom: 6px;
-      }
-
-      .asaas-opt-price-big {
-        font-size: 16px;
-        font-weight: 900;
-        color: #ffffff;
-        line-height: 1.1;
-      }
-
-      .asaas-opt-price-sub {
-        font-size: 10px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.6);
-        margin-top: 2px;
-      }
+      #asaasPlanGrid .plans-grid { margin-top: 28px; }
+      #asaasPlanGrid .btn-plan[data-suggested] { outline: 2px solid #19afea; }
+      #asaasPaymentStep > button { margin-bottom: 16px; }
+      #asaasCheckoutModal [hidden] { display: none !important; }
 
       /* BANNER DE UPGRADE DE PLANO */
       .asaas-upgrade-callout {
@@ -741,9 +598,8 @@
               <i class="fa-solid fa-shield-halved"></i>
             </div>
             <div>
-              <h3 id="asaasModalTitle" class="asaas-modal-title">Checkout Seguro • Asaas</h3>
+              <h3 id="asaasModalTitle" class="asaas-modal-title" tabindex="-1">Escolha seu plano</h3>
               <p class="asaas-modal-sub">
-                <span class="asaas-sandbox-pill"><i class="fa-solid fa-flask"></i> Sandbox</span>
                 <span>Radar São José • Contratação Oficial</span>
               </p>
             </div>
@@ -753,233 +609,207 @@
           </button>
         </div>
 
-        <!-- SELEÇÃO DOS 3 PLANOS COMERCIAIS -->
-        <div class="asaas-plan-selector" id="asaasPlanGrid" role="radiogroup" aria-label="Selecione um Plano">
-          <!-- 1. Dash -->
-          <div id="planCardDash" role="radio" aria-checked="false" tabindex="0" class="asaas-plan-card-opt" onclick="window.selectAsaasPlan('dash')">
-            <div>
-              <span class="asaas-opt-badge">Explorer</span>
-              <div class="asaas-opt-title">Plano Dash</div>
-            </div>
-            <div>
-              <div class="asaas-opt-price-big">12x R$ 269,90</div>
-              <div class="asaas-opt-price-sub">ou R$ 3.238,80 anual</div>
-            </div>
-          </div>
-
-          <!-- 2. Report (Recomendado) -->
-          <div id="planCardReport" role="radio" aria-checked="true" tabindex="0" class="asaas-plan-card-opt recommended-plan active" onclick="window.selectAsaasPlan('report')">
-            <div>
-              <span class="asaas-opt-badge">Recomendado</span>
-              <div class="asaas-opt-title">Plano Report</div>
-            </div>
-            <div>
-              <div class="asaas-opt-price-big">12x R$ 489,90</div>
-              <div class="asaas-opt-price-sub">ou R$ 5.878,80 anual</div>
-            </div>
-          </div>
-
-          <!-- 3. Mídia -->
-          <div id="planCardMidia" role="radio" aria-checked="false" tabindex="0" class="asaas-plan-card-opt" onclick="window.selectAsaasPlan('midia')">
-            <div>
-              <span class="asaas-opt-badge">Authority / Cotas</span>
-              <div class="asaas-opt-title">Plano Mídia</div>
-            </div>
-            <div>
-              <div class="asaas-opt-price-big">12x R$ 1.190,00</div>
-              <div class="asaas-opt-price-sub">ou R$ 14.280,00 anual</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Banner Dinâmico de Upgrade In-App & Diferença -->
-        <div id="asaasUpgradeBanner" class="asaas-upgrade-callout" style="display: none;">
-          <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> UPGRADE COM CRÉDITO DO SEU PLANO ATUAL</div>
-          <div id="asaasUpgradeBannerText" class="asaas-upgrade-desc">
-            Pague apenas a diferença para evoluir de plano.
-          </div>
-        </div>
-
-        <!-- FORMULÁRIO PRINCIPAL -->
-        <form id="asaasCheckoutForm" onsubmit="window.handleAsaasCheckoutSubmit(event)" class="asaas-form-container">
-          
-          <!-- Alerta de Erro Amigável -->
-          <div id="asaasErrorBox" class="asaas-alert-box asaas-alert-error">
-            <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
-            <span id="asaasErrorText">Por favor, verifique os campos informados.</span>
-          </div>
-
-          <!-- Dados do Pagador -->
-          <div class="asaas-field-group">
-            <label class="asaas-field-label" for="asaasPayerName">Nome Completo ou Razão Social *</label>
-            <input type="text" id="asaasPayerName" required placeholder="Ex: Maria Silva ou Empresa SJC Ltda" class="asaas-text-input" />
-          </div>
-
-          <div class="asaas-field-row">
-            <div class="asaas-field-group">
-              <label class="asaas-field-label" for="asaasPayerEmail">E-mail para Acesso & Nota *</label>
-              <input type="email" id="asaasPayerEmail" required placeholder="seu@email.com" class="asaas-text-input" />
-            </div>
-            <div class="asaas-field-group">
-              <label class="asaas-field-label" for="asaasPayerPhone">WhatsApp / Telefone *</label>
-              <input type="tel" id="asaasPayerPhone" required placeholder="(12) 99999-9999" class="asaas-text-input" />
-            </div>
-          </div>
-
-          <div class="asaas-field-group">
-            <label class="asaas-field-label" for="asaasPayerCpf">CPF ou CNPJ (obrigatório para nota) *</label>
-            <input type="text" id="asaasPayerCpf" required placeholder="000.000.000-00 ou 00.000.000/0000-00" class="asaas-text-input" />
-          </div>
-
-          <!-- MÉTODOS DE PAGAMENTO -->
-          <div>
-            <label class="asaas-field-label">Escolha a Forma de Pagamento</label>
-            <div class="asaas-methods-nav" role="tablist">
-              <button type="button" role="tab" aria-selected="true" id="tabPayPix" onclick="window.setAsaasPaymentMethod('PIX')" class="asaas-method-tab active">
-                <i class="fa-brands fa-pix text-emerald-400"></i> PIX
-              </button>
-              <button type="button" role="tab" aria-selected="false" id="tabPayCard" onclick="window.setAsaasPaymentMethod('CREDIT_CARD')" class="asaas-method-tab">
-                <i class="fa-regular fa-credit-card text-sky-400"></i> Cartão (12x)
-              </button>
-            </div>
-          </div>
-
-          <!-- CONTEÚDO ESPECÍFICO: CARTÃO DE CRÉDITO -->
-          <div id="asaasCardFields" style="display: none;" class="asaas-form-container">
-            <div class="asaas-field-group">
-              <label class="asaas-field-label" for="asaasCardInstallments">Número de Parcelas</label>
-              <select id="asaasCardInstallments" class="asaas-select-input">
-                <!-- Preenchido dinamicamente via JS -->
-              </select>
-            </div>
-
-            <div class="asaas-field-group">
-              <label class="asaas-field-label" for="asaasCardNumber">Número do Cartão de Crédito</label>
-              <input type="text" id="asaasCardNumber" placeholder="0000 0000 0000 0000" maxlength="19" class="asaas-text-input" />
-            </div>
-
-            <div class="asaas-field-group">
-              <label class="asaas-field-label" for="asaasCardHolder">Nome Impresso no Cartão</label>
-              <input type="text" id="asaasCardHolder" placeholder="Como gravado no cartão" class="asaas-text-input" />
-            </div>
-
-            <div class="asaas-field-row">
-              <div class="asaas-field-group">
-                <label class="asaas-field-label" for="asaasCardExpiry">Validade (MM/AA)</label>
-                <input type="text" id="asaasCardExpiry" placeholder="12/28" maxlength="5" class="asaas-text-input" />
-              </div>
-              <div class="asaas-field-group">
-                <label class="asaas-field-label" for="asaasCardCvv">CVV</label>
-                <input type="text" id="asaasCardCvv" placeholder="123" maxlength="4" class="asaas-text-input" />
-              </div>
-            </div>
-            <div class="asaas-field-row">
-              <div class="asaas-field-group">
-                <label class="asaas-field-label" for="asaasCardPostalCode">CEP do titular</label>
-                <input type="text" id="asaasCardPostalCode" inputmode="numeric" maxlength="9" class="asaas-text-input" />
-              </div>
-              <div class="asaas-field-group">
-                <label class="asaas-field-label" for="asaasCardAddressNumber">Número do endereço</label>
-                <input type="text" id="asaasCardAddressNumber" maxlength="30" class="asaas-text-input" />
-              </div>
-            </div>
-          </div>
-
-          <!-- BOTÃO PRINCIPAL DE SUBMISSÃO -->
-          <button type="submit" id="asaasBtnSubmit" class="asaas-submit-btn">
-            <i class="fa-solid fa-lock"></i>
-            <span id="asaasBtnSubmitText">Contratar Plano Report (12x de R$ 489,90)</span>
+        <div id="asaasPlanGrid" class="radar-plan-catalog">${window.radarPlanCatalog || ''}</div>
+        <div id="asaasPaymentStep" hidden>
+          <button type="button" class="asaas-method-tab" id="asaasBackToPlans">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Ver planos
           </button>
-        </form>
 
-        <!-- RESULTADO & SUCESSO PÓS-COMPRA -->
-        <div id="asaasCheckoutResult" class="asaas-checkout-result">
-          
-          <!-- Sucesso Cartão de Crédito -->
-          <div id="resultCardSuccess" style="display:none;" class="asaas-success-card">
-            <div class="asaas-success-icon">
-              <i class="fa-solid fa-check"></i>
+          <!-- Banner Dinâmico de Upgrade In-App & Diferença -->
+          <div id="asaasUpgradeBanner" class="asaas-upgrade-callout" style="display: none;">
+            <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> UPGRADE COM CRÉDITO DO SEU PLANO ATUAL</div>
+            <div id="asaasUpgradeBannerText" class="asaas-upgrade-desc">
+              Pague apenas a diferença para evoluir de plano.
             </div>
-            <h4 class="asaas-success-title">Solicitação de pagamento registrada</h4>
-            <p class="asaas-success-text">
-              Verifique a confirmação abaixo para atualizar seu acesso.
-            </p>
           </div>
 
-          <!-- Sucesso PIX -->
-          <div id="resultPixBox" style="display:none;" class="asaas-form-container">
-            <div class="asaas-success-card">
-              <h4 class="asaas-success-title"><i class="fa-brands fa-pix"></i> PIX Gerado com Sucesso!</h4>
-              <p class="asaas-success-text">Escaneie o QR Code abaixo com o aplicativo do seu banco ou utilize o código Copia e Cola:</p>
+          <!-- FORMULÁRIO PRINCIPAL -->
+          <form id="asaasCheckoutForm" onsubmit="window.handleAsaasCheckoutSubmit(event)" class="asaas-form-container">
+
+            <!-- Alerta de Erro Amigável -->
+            <div id="asaasErrorBox" class="asaas-alert-box asaas-alert-error">
+              <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
+              <span id="asaasErrorText">Por favor, verifique os campos informados.</span>
             </div>
 
-            <div class="asaas-pix-display">
-              <img id="asaasPixQrImage" src="" alt="PIX QR Code" class="asaas-pix-img" />
-              <p class="asaas-pix-instruction">Aponte a câmera do seu banco</p>
+            <!-- Dados do Pagador -->
+            <div class="asaas-field-group">
+              <label class="asaas-field-label" for="asaasPayerName">Nome Completo ou Razão Social *</label>
+              <input type="text" id="asaasPayerName" required placeholder="Ex: Maria Silva ou Empresa SJC Ltda" class="asaas-text-input" />
             </div>
 
-            <div class="asaas-copy-container">
-              <label class="asaas-field-label">Código PIX Copia e Cola:</label>
-              <div class="asaas-copy-input-row">
-                <input type="text" id="asaasPixCopyInput" readonly class="asaas-copy-text" />
-                <button type="button" id="btnCopyPix" onclick="window.copyAsaasPixCode(this)" class="asaas-btn-copy-code">
-                  <i class="fa-solid fa-copy"></i> Copiar
-                </button>
+            <div class="asaas-field-row">
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasPayerEmail">E-mail para Acesso & Nota *</label>
+                <input type="email" id="asaasPayerEmail" required placeholder="seu@email.com" class="asaas-text-input" />
               </div>
-            </div>
-          </div>
-
-          <div id="resultPixInvoiceBox" style="display:none;" class="asaas-success-card">
-            <h4 class="asaas-success-title">Cobrança Pix registrada</h4>
-            <p class="asaas-success-text">O QR Code ficou indisponível nesta tela.</p>
-            <a id="asaasPixInvoiceLink" target="_blank" rel="noopener noreferrer">Abrir cobrança no Asaas</a>
-          </div>
-
-          <!-- Sucesso Boleto -->
-          <div id="resultBoletoBox" style="display:none;" class="asaas-boleto-box">
-            <div class="asaas-success-card">
-              <h4 class="asaas-success-title"><i class="fa-solid fa-barcode"></i> Boleto Emitido com Sucesso!</h4>
-              <p class="asaas-success-text">Vencimento em 3 dias úteis. Acesso liberado automaticamente após a compensação.</p>
-            </div>
-
-            <div class="asaas-copy-container">
-              <label class="asaas-field-label">Linha Digitável:</label>
-              <div class="asaas-copy-input-row">
-                <input type="text" id="asaasBoletoLinhaInput" readonly class="asaas-copy-text" />
-                <button type="button" id="btnCopyBoleto" onclick="window.copyAsaasBoletoCode(this)" class="asaas-btn-copy-code">
-                  <i class="fa-solid fa-copy"></i> Copiar
-                </button>
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasPayerPhone">WhatsApp / Telefone *</label>
+                <input type="tel" id="asaasPayerPhone" required placeholder="(12) 99999-9999" class="asaas-text-input" />
               </div>
             </div>
 
+            <div class="asaas-field-group">
+              <label class="asaas-field-label" for="asaasPayerCpf">CPF ou CNPJ (obrigatório para nota) *</label>
+              <input type="text" id="asaasPayerCpf" required placeholder="000.000.000-00 ou 00.000.000/0000-00" class="asaas-text-input" />
+            </div>
+
+            <!-- MÉTODOS DE PAGAMENTO -->
             <div>
-              <a id="asaasBoletoDownloadLink" href="#" target="_blank" rel="noopener noreferrer" class="asaas-btn-slip">
-                <i class="fa-solid fa-file-pdf"></i>
-                <span>Visualizar / Baixar Boleto Asaas (PDF)</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-              </a>
+              <label class="asaas-field-label">Escolha a Forma de Pagamento</label>
+              <div class="asaas-methods-nav" role="tablist">
+                <button type="button" role="tab" aria-selected="true" id="tabPayPix" onclick="window.setAsaasPaymentMethod('PIX')" class="asaas-method-tab active">
+                  <i class="fa-brands fa-pix text-emerald-400"></i> PIX
+                </button>
+                <button type="button" role="tab" aria-selected="false" id="tabPayCard" onclick="window.setAsaasPaymentMethod('CREDIT_CARD')" class="asaas-method-tab">
+                  <i class="fa-regular fa-credit-card text-sky-400"></i> Cartão (12x)
+                </button>
+              </div>
             </div>
-          </div>
 
-          <!-- Resumo dos Dados Contratados -->
-          <div id="asaasOrderSummary" class="asaas-boleto-box" style="font-size: 11.5px; line-height: 1.6;">
-            <div style="font-weight: 800; color: #00B4D8; text-transform: uppercase; letter-spacing: 0.05em;">Resumo do Pedido</div>
-            <div style="color: #cbd5e1;">Plano: <strong id="summaryPlanName" style="color:#ffffff;">-</strong></div>
-            <div style="color: #cbd5e1;">Valor Total: <strong id="summaryPlanValue" style="color:#ffffff;">-</strong></div>
-            <div style="color: #cbd5e1;">Forma de Pagamento: <strong id="summaryPaymentMethod" style="color:#ffffff;">-</strong></div>
-            <div style="color: #cbd5e1;">ID da Cobrança Asaas: <strong id="summaryPaymentId" style="font-family:monospace; color:#38bdf8;">-</strong></div>
-          </div>
+            <!-- CONTEÚDO ESPECÍFICO: CARTÃO DE CRÉDITO -->
+            <div id="asaasCardFields" style="display: none;" class="asaas-form-container">
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasCardInstallments">Número de Parcelas</label>
+                <select id="asaasCardInstallments" class="asaas-select-input">
+                  <!-- Preenchido dinamicamente via JS -->
+                </select>
+              </div>
 
-          <!-- Botão Acessar Plataforma / Desbloquear -->
-          <div>
-            <button type="button" onclick="window.completeCheckoutAndUnlock()" class="asaas-btn-unlock-view">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Acessar Pesquisa Completa Liberada</span>
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasCardNumber">Número do Cartão de Crédito</label>
+                <input type="text" id="asaasCardNumber" placeholder="0000 0000 0000 0000" maxlength="19" class="asaas-text-input" />
+              </div>
+
+              <div class="asaas-field-group">
+                <label class="asaas-field-label" for="asaasCardHolder">Nome Impresso no Cartão</label>
+                <input type="text" id="asaasCardHolder" placeholder="Como gravado no cartão" class="asaas-text-input" />
+              </div>
+
+              <div class="asaas-field-row">
+                <div class="asaas-field-group">
+                  <label class="asaas-field-label" for="asaasCardExpiry">Validade (MM/AA)</label>
+                  <input type="text" id="asaasCardExpiry" placeholder="12/28" maxlength="5" class="asaas-text-input" />
+                </div>
+                <div class="asaas-field-group">
+                  <label class="asaas-field-label" for="asaasCardCvv">CVV</label>
+                  <input type="text" id="asaasCardCvv" placeholder="123" maxlength="4" class="asaas-text-input" />
+                </div>
+              </div>
+              <div class="asaas-field-row">
+                <div class="asaas-field-group">
+                  <label class="asaas-field-label" for="asaasCardPostalCode">CEP do titular</label>
+                  <input type="text" id="asaasCardPostalCode" inputmode="numeric" maxlength="9" class="asaas-text-input" />
+                </div>
+                <div class="asaas-field-group">
+                  <label class="asaas-field-label" for="asaasCardAddressNumber">Número do endereço</label>
+                  <input type="text" id="asaasCardAddressNumber" maxlength="30" class="asaas-text-input" />
+                </div>
+              </div>
+            </div>
+
+            <p class="asaas-field-label">
+              Consulte os <a href="juridico.html#termos" target="_blank" rel="noopener">Termos de Uso</a>,
+              as <a href="juridico.html#condicoes" target="_blank" rel="noopener">Condições Comerciais</a>,
+              a <a href="juridico.html#privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+              e o <a href="juridico.html#sla" target="_blank" rel="noopener">SLA e Suporte</a>.
+            </p>
+            <!-- BOTÃO PRINCIPAL DE SUBMISSÃO -->
+            <button type="submit" id="asaasBtnSubmit" class="asaas-submit-btn">
+              <i class="fa-solid fa-lock"></i>
+              <span id="asaasBtnSubmitText">Contratar Plano Report (12x de R$ 489,90)</span>
             </button>
+          </form>
+
+          <!-- RESULTADO & SUCESSO PÓS-COMPRA -->
+          <div id="asaasCheckoutResult" class="asaas-checkout-result">
+
+            <!-- Sucesso Cartão de Crédito -->
+            <div id="resultCardSuccess" style="display:none;" class="asaas-success-card">
+              <div class="asaas-success-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h4 class="asaas-success-title">Solicitação de pagamento registrada</h4>
+              <p class="asaas-success-text">
+                Verifique a confirmação abaixo para atualizar seu acesso.
+              </p>
+            </div>
+
+            <!-- Sucesso PIX -->
+            <div id="resultPixBox" style="display:none;" class="asaas-form-container">
+              <div class="asaas-success-card">
+                <h4 class="asaas-success-title"><i class="fa-brands fa-pix"></i> PIX Gerado com Sucesso!</h4>
+                <p class="asaas-success-text">Escaneie o QR Code abaixo com o aplicativo do seu banco ou utilize o código Copia e Cola:</p>
+              </div>
+
+              <div class="asaas-pix-display">
+                <img id="asaasPixQrImage" src="" alt="PIX QR Code" class="asaas-pix-img" />
+                <p class="asaas-pix-instruction">Aponte a câmera do seu banco</p>
+              </div>
+
+              <div class="asaas-copy-container">
+                <label class="asaas-field-label">Código PIX Copia e Cola:</label>
+                <div class="asaas-copy-input-row">
+                  <input type="text" id="asaasPixCopyInput" readonly class="asaas-copy-text" />
+                  <button type="button" id="btnCopyPix" onclick="window.copyAsaasPixCode(this)" class="asaas-btn-copy-code">
+                    <i class="fa-solid fa-copy"></i> Copiar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="resultPixInvoiceBox" style="display:none;" class="asaas-success-card">
+              <h4 class="asaas-success-title">Cobrança Pix registrada</h4>
+              <p class="asaas-success-text">O QR Code ficou indisponível nesta tela.</p>
+              <a id="asaasPixInvoiceLink" target="_blank" rel="noopener noreferrer">Abrir cobrança no Asaas</a>
+            </div>
+
+            <!-- Sucesso Boleto -->
+            <div id="resultBoletoBox" style="display:none;" class="asaas-boleto-box">
+              <div class="asaas-success-card">
+                <h4 class="asaas-success-title"><i class="fa-solid fa-barcode"></i> Boleto Emitido com Sucesso!</h4>
+                <p class="asaas-success-text">Vencimento em 3 dias úteis. Acesso liberado automaticamente após a compensação.</p>
+              </div>
+
+              <div class="asaas-copy-container">
+                <label class="asaas-field-label">Linha Digitável:</label>
+                <div class="asaas-copy-input-row">
+                  <input type="text" id="asaasBoletoLinhaInput" readonly class="asaas-copy-text" />
+                  <button type="button" id="btnCopyBoleto" onclick="window.copyAsaasBoletoCode(this)" class="asaas-btn-copy-code">
+                    <i class="fa-solid fa-copy"></i> Copiar
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <a id="asaasBoletoDownloadLink" href="#" target="_blank" rel="noopener noreferrer" class="asaas-btn-slip">
+                  <i class="fa-solid fa-file-pdf"></i>
+                  <span>Visualizar / Baixar Boleto Asaas (PDF)</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Resumo dos Dados Contratados -->
+            <div id="asaasOrderSummary" class="asaas-boleto-box" style="font-size: 11.5px; line-height: 1.6;">
+              <div style="font-weight: 800; color: #00B4D8; text-transform: uppercase; letter-spacing: 0.05em;">Resumo do Pedido</div>
+              <div style="color: #cbd5e1;">Plano: <strong id="summaryPlanName" style="color:#ffffff;">-</strong></div>
+              <div style="color: #cbd5e1;">Valor Total: <strong id="summaryPlanValue" style="color:#ffffff;">-</strong></div>
+              <div style="color: #cbd5e1;">Forma de Pagamento: <strong id="summaryPaymentMethod" style="color:#ffffff;">-</strong></div>
+              <div style="color: #cbd5e1;">ID da Cobrança Asaas: <strong id="summaryPaymentId" style="font-family:monospace; color:#38bdf8;">-</strong></div>
+            </div>
+
+            <!-- Botão Acessar Plataforma / Desbloquear -->
+            <div>
+              <button type="button" onclick="window.completeCheckoutAndUnlock()" class="asaas-btn-unlock-view">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Verificar pagamento e acessar o plano</span>
+              </button>
+            </div>
+
           </div>
 
         </div>
-
       </div>
     </div>
   `;
@@ -992,49 +822,13 @@
   let isUpgradeMode = false;
   let upgradeFromPlan = null;
 
-  // Precificação diferencial para Upgrades In-App
-  const UPGRADE_PRICING = {
-    'dash->report': {
-      fromName: 'Plano Dash (Explorer)',
-      toName: 'Plano Report (Executive)',
-      totalValue: 2640.00,
-      installmentValue: 220.00,
-      installmentCount: 12,
-      badgeText: 'Upgrade: Dash → Report (12x R$ 220,00)'
-    },
-    'dash->midia': {
-      fromName: 'Plano Dash (Explorer)',
-      toName: 'Plano Mídia (Authority)',
-      totalValue: 11041.20,
-      installmentValue: 920.10,
-      installmentCount: 12,
-      badgeText: 'Upgrade: Dash → Mídia (12x R$ 920,10)'
-    },
-    'report->midia': {
-      fromName: 'Plano Report (Executive)',
-      toName: 'Plano Mídia (Authority)',
-      totalValue: 8401.20,
-      installmentValue: 700.10,
-      installmentCount: 12,
-      badgeText: 'Upgrade: Report → Mídia (12x R$ 700,10)'
-    }
-  };
-
   function updateUpgradeBanner() {
     const banner = document.getElementById('asaasUpgradeBanner');
-    const bannerText = document.getElementById('asaasUpgradeBannerText');
-    if (!banner || !bannerText) return;
-
-    if (isUpgradeMode && upgradeFromPlan) {
-      const key = `${upgradeFromPlan}->${currentPlanId}`;
-      const up = UPGRADE_PRICING[key];
-      if (up) {
-        banner.style.display = 'flex';
-        bannerText.textContent = `Upgrade de ${up.fromName} para ${up.toName}. Confira a cotação antes de confirmar.`;
-        return;
-      }
+    banner.style.display = isUpgradeMode ? 'block' : 'none';
+    if (isUpgradeMode) {
+      const message = document.getElementById('asaasUpgradeBannerText');
+      message.textContent = `Upgrade de ${planNames[upgradeFromPlan]} para ${planNames[currentPlanId]}. Confira a cotação antes de confirmar.`;
     }
-    banner.style.display = 'none';
   }
 
   // Inicialização e injeção do componente no DOM
@@ -1044,6 +838,9 @@
     }
     if (!document.getElementById('asaasCheckoutModal')) {
       document.body.insertAdjacentHTML('beforeend', checkoutModalMarkup);
+      document.getElementById('asaasBackToPlans').addEventListener('click', () => {
+        if (!isSubmitting) showPlanCatalog();
+      });
 
       // Fecha ao clicar fora
       const modal = document.getElementById('asaasCheckoutModal');
@@ -1160,30 +957,6 @@
     }
 
     // Acessibilidade: Seleção de planos via teclado (Enter / Espaço / Setas)
-    const planKeys = ['dash', 'report', 'midia'];
-    planKeys.forEach((k, idx) => {
-      const card = document.getElementById('planCard' + k.charAt(0).toUpperCase() + k.slice(1));
-      if (card) {
-        card.addEventListener('keydown', function(ev) {
-          if (ev.key === 'Enter' || ev.key === ' ') {
-            ev.preventDefault();
-            window.selectAsaasPlan(k);
-          } else if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') {
-            ev.preventDefault();
-            const nextKey = planKeys[(idx + 1) % planKeys.length];
-            window.selectAsaasPlan(nextKey);
-            const nextEl = document.getElementById('planCard' + nextKey.charAt(0).toUpperCase() + nextKey.slice(1));
-            if (nextEl) nextEl.focus();
-          } else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') {
-            ev.preventDefault();
-            const prevKey = planKeys[(idx - 1 + planKeys.length) % planKeys.length];
-            window.selectAsaasPlan(prevKey);
-            const prevEl = document.getElementById('planCard' + prevKey.charAt(0).toUpperCase() + prevKey.slice(1));
-            if (prevEl) prevEl.focus();
-          }
-        });
-      }
-    });
   }
 
   function updateInstallmentOptions() {
@@ -1204,10 +977,10 @@
   function updateSubmitButtonLabel() {
     const btnText = document.getElementById('asaasBtnSubmitText');
     if (!btnText) return;
-    const plan = PLANS_DATA[currentPlanId] || PLANS_DATA.report;
+    const planName = planNames[currentPlanId];
 
     if (currentPaymentMethod === 'PIX') {
-      btnText.textContent = `Conferir valor no Pix • ${plan.name}`;
+      btnText.textContent = `Conferir valor no Pix • ${planName}`;
     } else if (currentPaymentMethod === 'CREDIT_CARD') {
       const sel = document.getElementById('asaasCardInstallments');
       const count = sel ? parseInt(sel.value || 12, 10) : 12;
@@ -1220,45 +993,30 @@
   // ==========================================
 
   window.openAsaasCheckout = function(planKey = 'report', options = {}) {
-    if (typeof supabaseClient === 'undefined') {
-      return redirectToCheckoutLogin(planKey);
-    }
+    if (isSubmitting) return;
     previouslyFocusedElement = document.activeElement;
     initAsaasCheckoutComponent();
     const modal = document.getElementById('asaasCheckoutModal');
-    if (modal) {
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-    }
-
-    // Identificação inteligente de upgrade in-app
-    const currentSavedPlan = (window.appState?.plan_type || window.appState?.profile?.plan_type || '').toLowerCase().trim();
-    if (options && options.isUpgrade) {
-      isUpgradeMode = true;
-      upgradeFromPlan = options.fromPlan || (currentSavedPlan === 'dash' ? 'dash' : currentSavedPlan === 'report' ? 'report' : null);
-    } else if ((currentSavedPlan === 'dash' && (planKey === 'report' || planKey === 'midia')) ||
-               (currentSavedPlan === 'report' && planKey === 'midia')) {
-      isUpgradeMode = true;
-      upgradeFromPlan = currentSavedPlan;
-    } else {
-      isUpgradeMode = false;
-      upgradeFromPlan = null;
-    }
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    currentPlanId = normalizePlan(planKey);
+    upgradeFromPlan = options.fromPlan || window.appState?.plan_type;
+    showPlanCatalog();
+    document.getElementById('asaasBackToPlans').hidden = false;
 
     // Reseta visualização do form e esconde resultado
     const form = document.getElementById('asaasCheckoutForm');
     const result = document.getElementById('asaasCheckoutResult');
     const errBox = document.getElementById('asaasErrorBox');
     const btnSubmit = document.getElementById('asaasBtnSubmit');
-    if (form) form.style.display = 'flex';
+    if (form) {
+      form.reset();
+      form.style.display = 'flex';
+    }
+    window.setAsaasPaymentMethod('PIX');
     if (result) result.classList.remove('show');
     if (errBox) errBox.classList.remove('show');
     if (btnSubmit) btnSubmit.disabled = false;
-    isSubmitting = false;
-
-    window.selectAsaasPlan(planKey);
-    updateUpgradeBanner();
-    updateSubmitButtonLabel();
 
     // Auto-preenchimento inteligente de dados salvos
     try {
@@ -1276,19 +1034,14 @@
       if (phoneEl && !phoneEl.value && savedPhone) phoneEl.value = savedPhone;
     } catch (e) {}
 
-    // Acessibilidade: move foco para o primeiro input do modal
-    setTimeout(() => {
-      const nameInput = document.getElementById('asaasPayerName');
-      if (nameInput) nameInput.focus();
-    }, 60);
   };
 
   window.closeAsaasModal = function() {
+    if (isSubmitting) return;
     const modal = document.getElementById('asaasCheckoutModal');
-    if (modal) {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-    }
+    if (!modal?.classList.contains('show')) return;
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
     // Acessibilidade: Restaura o foco para o elemento original
     if (previouslyFocusedElement && typeof previouslyFocusedElement.focus === 'function') {
       try { previouslyFocusedElement.focus(); } catch (e) {}
@@ -1300,36 +1053,42 @@
     window.openAsaasCheckout(planKey, options);
   };
 
-  window.selectAsaasPlan = function(planKey) {
-    const raw = String(planKey || 'report').trim();
-    let key = raw.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    key = key.replace(/^(plano|plano_)[_\s\-]*/, '').trim();
+  function normalizePlan(planKey) {
+    const key = String(planKey).normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase().trim().replace(/^plano[_\s-]*/, '');
+    if (['10', 'explorer', 'dash'].includes(key)) return 'dash';
+    if (['authority', 'cotas', 'cota', 'enterprise', 'empresarial', 'midia'].includes(key)) return 'midia';
+    return 'report';
+  }
 
-    if (key === 'explorer' || key === 'plano_10' || key.includes('dash')) key = 'dash';
-    else if (key === 'executive' || key === 'plano_15' || key.includes('report')) key = 'report';
-    else if (key === 'authority' || key === 'cotas' || key === 'cota' || key === 'enterprise' || key === 'empresarial' || key.includes('midia')) key = 'midia';
-    
-    if (!Object.prototype.hasOwnProperty.call(PLANS_DATA, key)) key = 'report';
-
-    currentPlanId = key;
-    hideCheckoutError();
-
-    // Atualiza bordas dos cards e atributos aria-checked
-    ['dash', 'report', 'midia'].forEach(k => {
-      const card = document.getElementById('planCard' + k.charAt(0).toUpperCase() + k.slice(1));
-      if (card) {
-        const isCur = (k === currentPlanId);
-        if (isCur) card.classList.add('active');
-        else card.classList.remove('active');
-        card.setAttribute('aria-checked', isCur ? 'true' : 'false');
-      }
+  function showPlanCatalog() {
+    const grid = document.getElementById('asaasPlanGrid');
+    document.getElementById('asaasPaymentStep').hidden = true;
+    grid.hidden = false;
+    grid.querySelectorAll('[data-checkout-plan]').forEach(link => {
+      link.toggleAttribute('data-suggested', link.dataset.checkoutPlan === currentPlanId);
     });
+    const title = document.getElementById('asaasModalTitle');
+    title.textContent = 'Escolha seu plano';
+    title.focus();
+    title.closest('.asaas-modal-dialog').scrollTop = 0;
+  }
 
-    const plan = PLANS_DATA[currentPlanId];
+  function showPaymentStep(plan) {
+    currentPlanId = plan;
+    isUpgradeMode = (upgradeFromPlan === 'dash' && plan !== 'dash')
+      || (upgradeFromPlan === 'report' && plan === 'midia');
     updateUpgradeBanner();
     updateInstallmentOptions();
     updateSubmitButtonLabel();
-  };
+
+    document.getElementById('asaasPlanGrid').hidden = true;
+    document.getElementById('asaasPaymentStep').hidden = false;
+    const title = document.getElementById('asaasModalTitle');
+    title.textContent = `${planNames[plan]} · Pagamento via Asaas`;
+    title.focus();
+    title.closest('.asaas-modal-dialog').scrollTop = 0;
+  }
 
   window.setAsaasPaymentMethod = function(method) {
     if (method !== 'PIX' && method !== 'CREDIT_CARD') return;
@@ -1378,17 +1137,30 @@
     window.location.href = 'login.html';
   }
 
-  async function resumeCheckoutAfterLogin() {
-    if (typeof supabaseClient === 'undefined' || !supabaseClient) return;
+  window.resumeCheckoutAfterLogin = function() {
     try {
       const plan = sessionStorage.getItem('radarCheckoutPlan');
-      if (!Object.hasOwn(PLANS_DATA, plan)) return;
-      const { data } = await supabaseClient.auth.getSession();
-      if (!data?.session?.access_token) return;
-      sessionStorage.removeItem('radarCheckoutPlan');
+      if (!Object.hasOwn(planNames, plan)) return;
       window.openAsaasCheckout(plan);
+      showPaymentStep(plan);
+      sessionStorage.removeItem('radarCheckoutPlan');
     } catch (_) {}
-  }
+  };
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('[data-checkout-plan]');
+    if (!link || event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const plan = link.dataset.checkoutPlan;
+    if (!Object.hasOwn(planNames, plan)) return;
+    event.preventDefault();
+    if (!link.closest('#asaasPlanGrid')) {
+      window.openAsaasCheckout(plan);
+    } else if (!window.appState?.user) {
+      redirectToCheckoutLogin(plan);
+    } else {
+      showPaymentStep(plan);
+    }
+  });
 
   // Submissão do Formulário de Checkout
   window.handleAsaasCheckoutSubmit = async function(e) {
@@ -1503,7 +1275,8 @@
       }
       const total = (quoted.quote.amountCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       const count = quoted.quote.installments.length;
-      if (!window.confirm(`Confirmar ${quoted.plan.name} por ${total} no total${count > 1 ? ` em ${count} parcelas` : ''}?`)) return;
+      const environmentNote = quoted.sandbox ? 'Ambiente de testes do Asaas. Nenhuma cobrança real será feita.\n\n' : '';
+      if (!window.confirm(`${environmentNote}Confirmar ${planNames[payload.plan]} por ${total} no total${count > 1 ? ` em ${count} parcelas` : ''}?`)) return;
       payload.expectedAmountCents = quoted.quote.amountCents;
       if (btnText) btnText.textContent = 'Processando pagamento…';
       const response = await fetch('/api/asaas-checkout', {
@@ -1548,6 +1321,7 @@
     const resultBoletoBox = document.getElementById('resultBoletoBox');
 
     if (form) form.style.display = 'none';
+    document.getElementById('asaasBackToPlans').hidden = true;
     if (resultBox) resultBox.classList.add('show');
 
     // Esconde todos inicialmente
@@ -1756,10 +1530,8 @@
   // Auto-inicialização na carga do DOM
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAsaasCheckoutComponent);
-    document.addEventListener('DOMContentLoaded', resumeCheckoutAfterLogin);
   } else {
     initAsaasCheckoutComponent();
-    resumeCheckoutAfterLogin();
   }
 
 })();

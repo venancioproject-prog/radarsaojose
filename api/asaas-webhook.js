@@ -208,6 +208,26 @@ async function handler(req, res) {
     if (!payment || typeof payment.id !== 'string' || !payment.id || payment.id.startsWith('pay_sb_')) throw new BillingError(400, 'INVALID_PAYMENT');
     if (payment.currency !== undefined && payment.currency !== 'BRL') throw new BillingError(409, 'PAYMENT_CURRENCY_MISMATCH');
 
+    const orders = await db('billing_orders?asaas_payment_id=eq.' + encodeURIComponent(payment.id) + '&select=*');
+    let order = orders?.[0];
+    if (!order && typeof payment.externalReference === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(payment.externalReference)) {
+      const candidates = await db('billing_orders?id=eq.' + encodeURIComponent(payment.externalReference) + '&select=*');
+      const candidate = candidates?.[0];
+      if (candidate && !candidate.asaas_payment_id) {
+        throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+      }
+      if (candidate?.quote?.gatewayPayments && Object.hasOwn(candidate.quote.gatewayPayments, payment.id)) order = candidate;
+    }
+    // This webhook can receive other charges from the same Asaas account.
+    // Acknowledge them without persisting or applying them to a Radar order.
+    if (!order) return res.status(200).json({ success: true, ignored: true });
+    if (order.quote?.gatewayPayments && !Object.hasOwn(order.quote.gatewayPayments, payment.id)) {
+      throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+    }
+    if (payment.externalReference !== undefined && payment.externalReference !== null && payment.externalReference !== order.id) {
+      throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
+    }
+
     // Persist in a separate transaction before processing. No email/description is authority.
     await db('billing_gateway_events?on_conflict=event_id', {
       method: 'POST',
@@ -232,21 +252,6 @@ async function handler(req, res) {
       (stored.payload?.payment?.billingType !== undefined && payment.billingType !== undefined && stored.payload.payment.billingType !== payment.billingType)
     ) {
       throw new BillingError(409, 'EVENT_ID_CONFLICT');
-    }
-
-    const orders = await db('billing_orders?asaas_payment_id=eq.' + encodeURIComponent(payment.id) + '&select=*');
-    let order = orders?.[0];
-    if (!order && typeof payment.externalReference === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(payment.externalReference)) {
-      const candidates = await db('billing_orders?id=eq.' + encodeURIComponent(payment.externalReference) + '&select=*');
-      const candidate = candidates?.[0];
-      if (candidate?.quote?.gatewayPayments && Object.hasOwn(candidate.quote.gatewayPayments, payment.id)) order = candidate;
-    }
-    // Checkout alone binds the payment; arbitrary externalReference never grants access.
-    if (!order || (order.quote?.gatewayPayments && !Object.hasOwn(order.quote.gatewayPayments, payment.id))) {
-      throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
-    }
-    if (payment.externalReference !== undefined && payment.externalReference !== null && payment.externalReference !== order.id) {
-      throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
     }
 
     if (['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {

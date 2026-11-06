@@ -1,0 +1,134 @@
+.radar-plan-catalog {
+  --font-ui: Inter, system-ui, sans-serif;
+  --font-display: Sora, system-ui, sans-serif;
+  --azul: #0B2545;
+  --azul-claro: #19afea;
+  --branco: #fff;
+}
+
+.radar-plan-catalog :is(p, ul) { margin: 0; padding: 0; }
+.radar-plan-catalog .plans-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+  background: rgba(255,255,255,0.08);
+}
+.radar-plan-catalog .plan-card {
+  background: #111;
+  padding: 38px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.radar-plan-catalog .plan-card .btn-plan {
+  margin-top: auto;
+}
+.radar-plan-catalog .plans-note {
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 32px;
+  line-height: 1.6;
+}
+.radar-plan-catalog .plan-card.destaque {
+  background: var(--azul);
+  position: relative;
+}
+.radar-plan-catalog .plan-badge {
+  font-family: var(--font-ui);
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--azul-claro);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+}
+.radar-plan-catalog .plan-name {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+.radar-plan-catalog .plan-price {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--branco);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+}
+.radar-plan-catalog .plan-price span {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+}
+.radar-plan-catalog .plan-tagline {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+.radar-plan-catalog .plan-features {
+  list-style: none;
+  margin-bottom: 36px;
+}
+.radar-plan-catalog .plan-features li {
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  padding: 8px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.radar-plan-catalog .plan-features li:last-child { border-bottom: none; }
+.radar-plan-catalog .plan-features li i { color: var(--azul-claro); flex-shrink: 0; margin-top: 2px; }
+.radar-plan-catalog .plan-feature-detail { display: block; margin-top: 3px; }
+.radar-plan-catalog .plan-features strong { color: var(--branco); }
+.radar-plan-catalog .btn-plan {
+  display: block;
+  text-align: center;
+  padding: 13px 24px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: opacity 0.2s;
+  font-family: var(--font-ui);
+}
+.radar-plan-catalog .btn-plan:hover { opacity: 0.85; }
+.radar-plan-catalog .btn-plan-outline {
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.7);
+}
+.radar-plan-catalog .btn-plan-solid {
+  background: var(--azul-claro);
+  color: var(--branco);
+}
+.radar-plan-catalog .btn-plan-red {
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
+@media (max-width: 1050px) {
+  .radar-plan-catalog .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .radar-plan-catalog .plans-grid { grid-template-columns: 1fr; gap: 18px; }
+}
