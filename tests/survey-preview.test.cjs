@@ -127,6 +127,13 @@ test('preview serves synthetic aggregates and chapters only to the required plan
   const articleIds = [...section.matchAll(/<article[^>]+id="(rep-[^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(articleIds, ['rep-tela-001', 'rep-tela-002', 'rep-tela-003', 'rep-tela-006', 'rep-tela-012', 'rep-tela-013', 'rep-tela-014', ...ids(page, 'data-report-placeholder')]);
   assert.equal(ids(page, 'data-report-placeholder')[0], 'rep-tela-015');
+  const placeholders = [...section.matchAll(/<article id="([^"]+)" data-report-placeholder[^>]*>([\s\S]*?)<\/article>/g)];
+  assert.equal(placeholders.length, ids(page, 'data-report-placeholder').length);
+  for (const [, id, content] of placeholders) {
+    const image = content.trim().match(/^<img src="(\/web-media\/report-preview\/[^"]+\.webp)" width="420" height="\d+" loading="lazy" decoding="async" alt="">$/);
+    assert.equal(image?.[1], '/web-media/report-preview/' + id + '.webp');
+    assert.ok(require('node:fs').existsSync(require('node:path').join(__dirname, '..', image[1])));
+  }
   assert.equal((await request('POST', {}, headers, report, { specs: [{ type: 'sample' }] })).body.N, 96);
   assert.equal(db.mock.callCount(), 0);
 });
