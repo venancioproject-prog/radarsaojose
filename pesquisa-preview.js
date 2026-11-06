@@ -210,13 +210,13 @@
   function applyReportPreview() {
     const root = document.getElementById('executive-report-view');
     if (!root) return;
-    const lastFreePage = root.querySelector(':scope > #rep-tela-007');
+    const lastFreePage = root.querySelector(':scope > #rep-tela-014');
     if (!lastFreePage) return;
 
     const unlocked = isModuleUnlocked('report');
     if (!unlocked) window.clearPaidReport?.();
     root.classList.toggle('report-preview-unlocked', unlocked);
-    root.querySelectorAll(':scope > #rep-tela-007 ~ article').forEach(article => {
+    root.querySelectorAll(':scope > #rep-tela-014 ~ article').forEach(article => {
       const show = unlocked && !article.hasAttribute('data-report-placeholder');
       article.inert = !show;
       if (show) article.removeAttribute('aria-hidden');

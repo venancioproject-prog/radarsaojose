@@ -7742,7 +7742,13 @@ async function loadPaidReport() {
 }
 
 window.renderExecutiveReportCharts = async function() {
-  if (!await loadPaidReport()) return;
+  if (!await loadPaidReport()) {
+    renderReportChartBar('repChartEvasaoFrequencia', [
+      { category: 'Às vezes', value: 49.9, formatted: '49,9%' },
+      { category: 'Quase nunca', value: 27, formatted: '27,0%' }
+    ], '#1E293B');
+    return;
+  }
   return window.RadarReportUI.render({
     url: SUPABASE_URL,
     key: SUPABASE_ANON_KEY,

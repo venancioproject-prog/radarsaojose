@@ -125,8 +125,8 @@ test('preview serves synthetic aggregates and chapters only to the required plan
   assert.deepEqual(ids(content.body.html, 'data-report-block'), ids(page, 'data-report-placeholder'));
   const section = page.slice(page.indexOf('<section id="executive-report-view"'), page.indexOf('<section id="image-bank-view"'));
   const articleIds = [...section.matchAll(/<article[^>]+id="(rep-[^"]+)"/g)].map(match => match[1]);
-  assert.deepEqual(articleIds, ['rep-tela-001', 'rep-tela-002', 'rep-tela-003', 'rep-tela-006', 'rep-tela-007', ...ids(page, 'data-report-placeholder')]);
-  assert.equal(ids(page, 'data-report-placeholder')[0], 'rep-tela-008');
+  assert.deepEqual(articleIds, ['rep-tela-001', 'rep-tela-002', 'rep-tela-003', 'rep-tela-006', 'rep-tela-012', 'rep-tela-013', 'rep-tela-014', ...ids(page, 'data-report-placeholder')]);
+  assert.equal(ids(page, 'data-report-placeholder')[0], 'rep-tela-015');
   assert.equal((await request('POST', {}, headers, report, { specs: [{ type: 'sample' }] })).body.N, 96);
   assert.equal(db.mock.callCount(), 0);
 });
