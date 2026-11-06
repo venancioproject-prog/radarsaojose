@@ -266,10 +266,11 @@
 }
 
 .pesquisa-preview-guarantee {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #64748B;
-  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+  line-height: 1.45;
+  margin-bottom: 6px;
 }
 
 /* Estado Desbloqueado */

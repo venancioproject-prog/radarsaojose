@@ -52,11 +52,11 @@
           <p>${description}</p>
           <ul>${listItems}</ul>
           <div class="pesquisa-preview-actions">
+            <div class="pesquisa-preview-guarantee" aria-live="polite">${priceText}</div>
             <button type="button" class="btn-open-plans-checkout" data-target-plan="${targetPlan}">
               <span>${buttonLabel}</span>
               <span aria-hidden="true">&rarr;</span>
             </button>
-            <div class="pesquisa-preview-guarantee" aria-live="polite">${priceText}</div>
           </div>
         </div>
       </div>
