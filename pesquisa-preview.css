@@ -58,6 +58,24 @@
   margin-top: 1rem;
 }
 
+#report-paywall-overlay .pesquisa-preview-notice {
+  max-width: 510px;
+  padding: 22px clamp(16px, 4vw, 28px);
+}
+
+#report-paywall-overlay .pesquisa-preview-lock {
+  display: none;
+}
+
+#report-paywall-overlay .pesquisa-preview-notice h2,
+#report-paywall-overlay .pesquisa-preview-notice p {
+  margin-bottom: 10px;
+}
+
+#report-paywall-overlay .pesquisa-preview-notice ul {
+  margin-bottom: 12px;
+}
+
 #executive-report-view > [data-report-placeholder] {
   overflow: hidden;
   border: 1px solid #cbd5e1;
@@ -73,6 +91,9 @@
 
 @media (max-width: 640px) {
   #executive-report-view > #report-paywall-overlay { top: 68px; }
+}
+
+@media (max-width: 640px), (max-height: 700px) {
   #report-paywall-overlay .pesquisa-preview-notice ul { display: none; }
 }
 
