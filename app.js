@@ -7702,8 +7702,26 @@ async function loadPaidReport() {
           chapters.some((chapter, index) => chapter.id !== placeholders[index].id)) {
         throw new Error('Unexpected Report chapters');
       }
+      const scripts = [...template.content.querySelectorAll('script')];
+      if (scripts.length) {
+        const [script] = scripts;
+        if (scripts.length !== 1 || script.closest('article')?.id !== 'rep-tela-037' || script.attributes.length) {
+          throw new Error('Unexpected Report script');
+        }
+        const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(script.textContent));
+        const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+        if (hash !== '6b59fd243f900b89516247c946a26bb5e216daf13e2b51f91917783022a3efa9') {
+          throw new Error('Unexpected Report map script');
+        }
+      }
+      if (loadingReport !== pending || !window.radarCanLoadModule?.('report')) return false;
       const pages = chapters.map((chapter, index) => [chapter, placeholders[index]]);
       for (const [chapter, placeholder] of pages) placeholder.replaceWith(chapter);
+      if (scripts.length) {
+        const mapScript = document.createElement('script');
+        mapScript.textContent = scripts[0].textContent;
+        scripts[0].replaceWith(mapScript);
+      }
       loadedReport = { userId, pages };
       root.querySelector('[data-report-load-error]')?.remove();
       return true;

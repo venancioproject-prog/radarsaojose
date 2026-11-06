@@ -1,6 +1,7 @@
 'use strict';
 
 const store = require('../lib/billing-store');
+const { gunzipSync } = require('node:zlib');
 const M = require('../report-metrics');
 const { minimumCount, readSurveyRows, surveyPlan } = require('../lib/survey-data');
 
@@ -60,7 +61,10 @@ module.exports = async function handler(req, res) {
       if (!document?.chapters_html?.trim()) {
         return res.status(503).json({ code: 'REPORT_CHAPTERS_UNAVAILABLE' });
       }
-      return res.status(200).json({ html: document.chapters_html, synthetic: false });
+      const saved = document.chapters_html;
+      const html = saved.startsWith('gzip:') ?
+        gunzipSync(Buffer.from(saved.slice(5), 'base64'), { maxOutputLength: 3 * 1024 * 1024 }).toString('utf8') : saved;
+      return res.status(200).json({ html, synthetic: false });
     }
     const { filters = {}, specs } = body || {};
     if (!validFilters(filters) || !Array.isArray(specs) || specs.length > 2000) {

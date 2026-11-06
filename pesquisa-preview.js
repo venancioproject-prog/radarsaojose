@@ -210,13 +210,13 @@
   function applyReportPreview() {
     const root = document.getElementById('executive-report-view');
     if (!root) return;
-    const articles = Array.from(root.querySelectorAll(':scope > article'));
-    if (articles.length < 3) return;
+    const lastFreePage = root.querySelector(':scope > #rep-tela-007');
+    if (!lastFreePage) return;
 
     const unlocked = isModuleUnlocked('report');
     if (!unlocked) window.clearPaidReport?.();
     root.classList.toggle('report-preview-unlocked', unlocked);
-    articles.slice(2).forEach(article => {
+    root.querySelectorAll(':scope > #rep-tela-007 ~ article').forEach(article => {
       const show = unlocked && !article.hasAttribute('data-report-placeholder');
       article.inert = !show;
       if (show) article.removeAttribute('aria-hidden');
@@ -244,7 +244,7 @@
     }).trim();
     const notice = template.content.firstElementChild;
     notice.id = 'report-paywall-overlay';
-    articles[1].after(notice);
+    lastFreePage.after(notice);
     updatePaywallPrice(notice, 'report', unlocked);
     notice.querySelector('.btn-open-plans-checkout').onclick = () => {
       const currentPlan = window.appState?.entitlement?.planType || window.appState?.plan_type;
