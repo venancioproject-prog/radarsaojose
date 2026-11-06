@@ -39,3 +39,20 @@ test('installment remainder preserves exact cents', () => {
   assert.equal(q.installments.reduce((a,b)=>a+b,0),323880);
   assert.ok(Math.max(...q.installments)-Math.min(...q.installments)<=1);
 });
+
+test('the new-term upgrade credit uses the amount actually contracted', () => {
+  const credit = p.quoteAnnualUpgradeCredit({
+    previousAmountCents: 240000,
+    periodStart: '2026-01-01T00:00:00Z',
+    periodEnd: '2026-01-11T00:00:00Z',
+    now: '2026-01-06T00:00:00Z'
+  });
+  assert.equal(credit, 120000);
+  assert.equal(p.quotePurchase({plan:'report'}).amountCents - credit, 409092);
+  assert.throws(() => p.quoteAnnualUpgradeCredit({
+    previousAmountCents: 240000,
+    periodStart: '2026-01-01T00:00:00Z',
+    periodEnd: '2026-01-11T00:00:00Z',
+    now: '2026-01-11T00:00:00Z'
+  }), /OUTSIDE/);
+});

@@ -7661,6 +7661,18 @@ function clearExecutiveCharts() {
   });
 }
 
+window.getRadarPaywallQuote = async function(plan, userId) {
+  const { data } = await supabaseClient.auth.getSession();
+  if (data?.session?.user?.id !== userId) return null;
+  const response = await fetch('/api/asaas-checkout', {
+    method: 'POST', cache: 'no-store',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + data.session.access_token },
+    body: JSON.stringify({ action: 'paywallQuote', plan, billingType: 'PIX' })
+  });
+  if (!response.ok) return null;
+  return (await response.json()).quote;
+};
+
 let loadedReport = null;
 let loadingReport = null;
 
@@ -7715,7 +7727,7 @@ async function loadPaidReport() {
         const error = document.createElement('p');
         error.dataset.reportLoadError = '';
         error.setAttribute('role', 'status');
-        error.textContent = 'Não foi possível carregar os capítulos. Abra a aba Report novamente para tentar de novo.';
+        error.textContent = 'Os capítulos completos estão temporariamente indisponíveis. Você pode continuar navegando pela prévia.';
         root.querySelector('[data-report-placeholder]')?.before(error);
       }
       return false;

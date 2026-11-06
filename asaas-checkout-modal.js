@@ -611,13 +611,14 @@
 
         <div id="asaasPlanGrid" class="radar-plan-catalog">${window.radarPlanCatalog || ''}</div>
         <div id="asaasPaymentStep" hidden>
+          <p id="asaasActivePlanNotice" hidden>Você já tem um plano ativo. Escolha um plano superior para consultar o upgrade.</p>
           <button type="button" class="asaas-method-tab" id="asaasBackToPlans">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Ver planos
           </button>
 
           <!-- Banner Dinâmico de Upgrade In-App & Diferença -->
           <div id="asaasUpgradeBanner" class="asaas-upgrade-callout" style="display: none;">
-            <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> UPGRADE COM CRÉDITO DO SEU PLANO ATUAL</div>
+            <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> CRÉDITO DO SEU PLANO ATUAL</div>
             <div id="asaasUpgradeBannerText" class="asaas-upgrade-desc">
               Pague apenas a diferença para evoluir de plano.
             </div>
@@ -827,7 +828,7 @@
     banner.style.display = isUpgradeMode ? 'block' : 'none';
     if (isUpgradeMode) {
       const message = document.getElementById('asaasUpgradeBannerText');
-      message.textContent = `Upgrade de ${planNames[upgradeFromPlan]} para ${planNames[currentPlanId]}. Confira a cotação antes de confirmar.`;
+      message.textContent = `Upgrade de ${planNames[upgradeFromPlan]} para ${planNames[currentPlanId]}. O crédito e as parcelas do seu plano precisam ser conferidos antes do pagamento.`;
     }
   }
 
@@ -1078,6 +1079,10 @@
     currentPlanId = plan;
     isUpgradeMode = (upgradeFromPlan === 'dash' && plan !== 'dash')
       || (upgradeFromPlan === 'report' && plan === 'midia');
+    const activePlan = window.appState?.entitlement?.status === 'active' && ['dash', 'report', 'midia'].includes(upgradeFromPlan);
+    document.getElementById('asaasCheckoutForm').hidden = isUpgradeMode || activePlan;
+    const activeNotice = document.getElementById('asaasActivePlanNotice');
+    activeNotice.hidden = !activePlan || isUpgradeMode;
     updateUpgradeBanner();
     updateInstallmentOptions();
     updateSubmitButtonLabel();
@@ -1085,7 +1090,7 @@
     document.getElementById('asaasPlanGrid').hidden = true;
     document.getElementById('asaasPaymentStep').hidden = false;
     const title = document.getElementById('asaasModalTitle');
-    title.textContent = `${planNames[plan]} · Pagamento via Asaas`;
+    title.textContent = isUpgradeMode ? `${planNames[plan]} · Upgrade` : planNames[plan] + ' · Pagamento via Asaas';
     title.focus();
     title.closest('.asaas-modal-dialog').scrollTop = 0;
   }
@@ -1165,7 +1170,7 @@
   // Submissão do Formulário de Checkout
   window.handleAsaasCheckoutSubmit = async function(e) {
     if (e && e.preventDefault) e.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmitting || isUpgradeMode || document.getElementById('asaasCheckoutForm').hidden) return;
     hideCheckoutError();
 
     const nameInput = document.getElementById('asaasPayerName');

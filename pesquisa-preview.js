@@ -56,11 +56,57 @@
               <span>${buttonLabel}</span>
               <span aria-hidden="true">&rarr;</span>
             </button>
-            <div class="pesquisa-preview-guarantee">${priceText}</div>
+            <div class="pesquisa-preview-guarantee" aria-live="polite">${priceText}</div>
           </div>
         </div>
       </div>
     `;
+  }
+
+  const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  const planLabels = { dash: 'Dash', report: 'Report', midia: 'Mídia' };
+  const priceRequests = new WeakMap();
+
+  function updatePaywallPrice(container, targetPlan, unlocked) {
+    const price = container.querySelector('.pesquisa-preview-guarantee');
+    if (!price) return;
+    if (unlocked) {
+      priceRequests.delete(price);
+      return;
+    }
+    if (container.closest('.hidden')) return;
+    const userId = window.appState?.user?.id;
+    const currentPlan = getUserPlanInfo().plan;
+    const key = `${userId || 'guest'}:${currentPlan}:${targetPlan}`;
+    const existing = priceRequests.get(price);
+    if (existing?.key === key && Date.now() - existing.at < 60_000) return;
+    const request = { key, at: Date.now() };
+    priceRequests.set(price, request);
+
+    const fullPrice = window.RadarPricing?.quotePurchase({ plan: targetPlan });
+    const annualText = fullPrice
+      ? `Plano ${planLabels[targetPlan]} · ${money.format(fullPrice.amountCents / 100)} à vista no Pix · acesso anual`
+      : `Confira o valor do plano ${planLabels[targetPlan]}.`;
+    const hasCurrentPlan = currentPlan !== 'gratis';
+    price.textContent = hasCurrentPlan ? 'Consultando o crédito do seu plano…' : annualText;
+    if (!userId || !window.getRadarPaywallQuote) {
+      if (hasCurrentPlan) price.textContent = 'A equipe do Radar precisa conferir o crédito do seu plano.';
+      return;
+    }
+
+    window.getRadarPaywallQuote(targetPlan, userId).then(quote => {
+      if (priceRequests.get(price) !== request || window.appState?.user?.id !== userId) return;
+      if (quote?.kind === 'upgrade') {
+        price.textContent = `Estimativa no Pix: ${money.format(quote.amountCents / 100)}. Inclui ${money.format(quote.creditCents / 100)} de crédito. Nova vigência de 12 meses. Pagamento após conciliação.`;
+      } else if (quote?.kind === 'purchase') {
+        price.textContent = `Plano ${planLabels[targetPlan]} · ${money.format(quote.amountCents / 100)} à vista no Pix · acesso anual`;
+      } else {
+        price.textContent = hasCurrentPlan ? 'A equipe do Radar precisa conferir o crédito do seu plano.' : annualText;
+      }
+    }).catch(() => {
+      if (priceRequests.get(price) !== request) return;
+      price.textContent = hasCurrentPlan ? 'A equipe do Radar precisa conferir o crédito do seu plano.' : annualText;
+    });
   }
 
   function attachEvents(container, targetPlan) {
@@ -82,6 +128,8 @@
   function setContainerUnlocked(container, unlocked) {
     if (!container) return;
     container.classList.toggle('is-unlocked', unlocked);
+    const targetPlan = container.querySelector('[data-target-plan]')?.dataset.targetPlan;
+    if (targetPlan) updatePaywallPrice(container, targetPlan, unlocked);
     const content = container.querySelector('.pesquisa-preview-content');
     if (content) {
       content.inert = !unlocked;
@@ -144,7 +192,7 @@
         'Cruze perfis e descubra demandas por renda, idade e região de SJC',
         'Amostra completa e auditada com 477 respondentes reais de SJC'
       ],
-      priceText: '🔒 A partir de 12x de R$ 269,90 • Desbloqueio imediato',
+      priceText: 'Acesso anual ao Plano Dash',
       targetPlan: 'dash',
       buttonLabel: 'Ver Planos & Desbloquear Acesso'
     });
@@ -174,7 +222,11 @@
       if (show) article.removeAttribute('aria-hidden');
       else article.setAttribute('aria-hidden', 'true');
     });
-    if (document.getElementById('report-paywall-overlay')) return;
+    const existingNotice = document.getElementById('report-paywall-overlay');
+    if (existingNotice) {
+      updatePaywallPrice(existingNotice, 'report', unlocked);
+      return;
+    }
 
     const template = document.createElement('template');
     template.innerHTML = createStickyNoticeHtml({
@@ -193,6 +245,7 @@
     const notice = template.content.firstElementChild;
     notice.id = 'report-paywall-overlay';
     articles[1].after(notice);
+    updatePaywallPrice(notice, 'report', unlocked);
     notice.querySelector('.btn-open-plans-checkout').onclick = () => {
       const currentPlan = window.appState?.entitlement?.planType || window.appState?.plan_type;
       if (['dash', 'plano_10'].includes(currentPlan) && typeof window.openPlanUpgradeModal === 'function') {
@@ -242,7 +295,7 @@
         'Mapeamento detalhado de influenciadores locais e engajamento',
         '3 licenças corporativas para compartilhamento em equipe'
       ],
-      priceText: '🔒 Plano Mídia • 12x de R$ 1.190,00 • 3 Licenças Corporativas',
+      priceText: 'Acesso anual ao Plano Mídia',
       targetPlan: 'midia',
       buttonLabel: 'Desbloquear Inteligência de Mídia'
     });

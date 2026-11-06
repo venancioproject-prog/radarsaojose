@@ -265,20 +265,43 @@ module.exports = async function handler(req, res) {
     const current = await billing.subscription(user.id);
     const active = current && current.status === 'active' && Date.parse(current.period_end) > now.getTime();
     if (current && !active) throw new billing.BillingError(409, 'SUBSCRIPTION_REQUIRES_RECONCILIATION');
+    if (body.action === 'paywallQuote') {
+      if (!checkRateLimit('quote:' + user.id, 40, 60000)) {
+        throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
+      }
+      const annual = pricing.quotePurchase({ plan: target });
+      if (!active) return res.status(200).json({ success: true, quote: { ...annual, kind: 'purchase' } });
+      if (pricing.PLAN_PRICES_CENTS[target] <= pricing.PLAN_PRICES_CENTS[current.plan_type]) {
+        throw new billing.BillingError(409, 'UPGRADE_REQUIRED');
+      }
+      const orders = current.source_order_id ? await billing.db(
+        'billing_orders?id=eq.' + encodeURIComponent(current.source_order_id) +
+        '&user_id=eq.' + encodeURIComponent(user.id) + '&status=eq.paid&select=kind,amount_cents,target_plan'
+      ) : [];
+      const previous = orders?.[0];
+      if (previous?.kind !== 'purchase' || previous.target_plan !== current.plan_type ||
+          !Number.isSafeInteger(previous.amount_cents) || previous.amount_cents <= 0) {
+        throw new billing.BillingError(409, 'UPGRADE_REQUIRES_REVIEW');
+      }
+      const credit = pricing.quoteAnnualUpgradeCredit({
+        previousAmountCents: previous.amount_cents,
+        periodStart: current.period_start, periodEnd: current.period_end, now: now.toISOString()
+      });
+      return res.status(200).json({ success: true, quote: {
+        kind: 'upgrade', annualPriceCents: annual.amountCents, creditCents: credit,
+        amountCents: Math.max(0, annual.amountCents - credit), payable: false
+      } });
+    }
+    if (active) {
+      return res.status(409).json({ success: false, code: 'UPGRADE_REQUIRES_REVIEW',
+        message: 'O upgrade precisa de conciliação antes do pagamento. Nenhuma cobrança foi gerada.' });
+    }
     let quote;
     try {
-      if (active) {
-        quote = pricing.quoteUpgrade({subscription:{id:current.id, plan:current.plan_type, status:current.status,
-          periodStart:current.period_start, periodEnd:current.period_end, version:current.version,
-          paymentMethod:current.payment_method, installments:current.installment_count,
-          paidInstallments:current.installments_paid}, targetPlan:target, paymentMethod,
-          now:now.toISOString(), expectedVersion:current.version});
-      } else quote = pricing.quotePurchase({plan:target, paymentMethod, installments:count});
+      quote = pricing.quotePurchase({plan:target, paymentMethod, installments:count});
     } catch (error) { throw new billing.BillingError(409, error.message); }
     const end = new Date(now); end.setUTCFullYear(end.getUTCFullYear()+1);
-    quote = {...quote, kind:active ? 'upgrade' : 'purchase',
-      periodStart:active ? current.period_start : now.toISOString(),
-      periodEnd:active ? current.period_end : end.toISOString()};
+    quote = {...quote, kind:'purchase', periodStart:now.toISOString(), periodEnd:end.toISOString()};
     const plan = {...PLANS_CONFIG[target], value:quote.amountCents/100,
       installmentCount:quote.installments.length, installmentValue:quote.installments[0]/100};
     if (body.action === 'quote') {
@@ -289,7 +312,6 @@ module.exports = async function handler(req, res) {
       throw new billing.BillingError(409, 'PRICE_CHANGED');
     }
     if (!checkRateLimit('pay:' + user.id, 8, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
-    if (quote.replacementSchedule) throw new billing.BillingError(409, 'INSTALLMENT_REPLACEMENT_REQUIRES_RECONCILIATION');
     if (quote.amountCents <= 0) throw new billing.BillingError(409, 'ZERO_AMOUNT_REQUIRES_RECONCILIATION');
     const apiKey = ASAAS_ENVIRONMENT === 'sandbox' ? process.env.ASAAS_SANDBOX_API_KEY : process.env.ASAAS_API_KEY;
     if (!apiKey) throw new billing.BillingError(503, 'ASAAS_NOT_CONFIGURED');
@@ -410,8 +432,8 @@ module.exports = async function handler(req, res) {
       }
     }
     const orders = await billing.db('billing_orders', {method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({
-      user_id:user.id, subscription_id:active ? current.id : null, target_plan:target, kind:quote.kind,
-      amount_cents:quote.amountCents, credit_cents:quote.creditCents || 0, expected_version:active ? current.version : null,
+      user_id:user.id, subscription_id:null, target_plan:target, kind:quote.kind,
+      amount_cents:quote.amountCents, credit_cents:quote.creditCents || 0, expected_version:null,
       period_start:quote.periodStart, period_end:quote.periodEnd, payment_method:paymentMethod,
       installment_count:quote.installments.length, quote:{...quote, customerEmail:user.email, customerName:name}})});
     const order = orders?.[0];

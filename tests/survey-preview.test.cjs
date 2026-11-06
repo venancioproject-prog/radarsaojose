@@ -121,8 +121,10 @@ test('preview serves synthetic aggregates and chapters only to the required plan
   assert.equal(content.headers['Cache-Control'], 'no-store');
   assert.equal(content.body.synthetic, true);
   const page = require('node:fs').readFileSync(require('node:path').join(__dirname, '..', 'app.html'), 'utf8');
-  const ids = (html, attribute) => [...html.matchAll(new RegExp('<article id="(rep-tela-\\d+)" ' + attribute, 'g'))].map(match => match[1]);
+  const ids = (html, attribute) => [...html.matchAll(new RegExp('<article id="(rep-(?:tela-[^"]+|benchmarks-cidades))" ' + attribute, 'g'))].map(match => match[1]);
   assert.deepEqual(ids(content.body.html, 'data-report-block'), ids(page, 'data-report-placeholder'));
+  const articleIds = [...page.matchAll(/<article[^>]+id="(rep-(?:tela-[^"]+|benchmarks-cidades))"/g)].map(match => match[1]);
+  assert.deepEqual(articleIds, ['rep-tela-001', 'rep-tela-002', ...ids(page, 'data-report-placeholder')]);
   assert.equal((await request('POST', {}, headers, report, { specs: [{ type: 'sample' }] })).body.N, 96);
   assert.equal(db.mock.callCount(), 0);
 });
