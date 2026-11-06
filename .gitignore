@@ -415,6 +415,7 @@ data/capitulo-*.json
 data/migrations/*
 !data/migrations/010_admin_authority.sql
 !data/migrations/011_billing_state.sql
+!data/migrations/016_report_private_documents.sql
 data/report-methodology-sources.json
 data/radar_hub/data_lake_20261009/
 data/radar_hub/piloto_dataviz/

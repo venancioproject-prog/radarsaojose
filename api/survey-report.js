@@ -53,10 +53,14 @@ module.exports = async function handler(req, res) {
     if (!['report', 'midia', 'admin'].includes(plan)) return res.status(403).json({ code: 'REPORT_REQUIRED' });
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     if (body?.action === 'chapters') {
-      if (process.env.VERCEL_ENV !== 'preview') {
+      if (process.env.VERCEL_ENV === 'preview') {
+        return res.status(200).json({ html: require('./_report-chapters').demoChapters(), synthetic: true });
+      }
+      const [document] = await store.db('report_private_documents?slug=eq.radar-2026&select=chapters_html&limit=1');
+      if (!document?.chapters_html?.trim()) {
         return res.status(503).json({ code: 'REPORT_CHAPTERS_UNAVAILABLE' });
       }
-      return res.status(200).json({ html: require('./_report-chapters').demoChapters(), synthetic: true });
+      return res.status(200).json({ html: document.chapters_html, synthetic: false });
     }
     const { filters = {}, specs } = body || {};
     if (!validFilters(filters) || !Array.isArray(specs) || specs.length > 2000) {

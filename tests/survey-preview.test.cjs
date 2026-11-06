@@ -129,3 +129,29 @@ test('preview serves synthetic aggregates and chapters only to the required plan
   assert.equal((await request('POST', {}, headers, report, { specs: [{ type: 'sample' }] })).body.N, 96);
   assert.equal(db.mock.callCount(), 0);
 });
+
+test('production chapters are read from private storage only for an eligible account', async t => {
+  t.mock.method(store, 'authenticate', async () => ({ id: 'test-user' }));
+  let plan = 'dash';
+  t.mock.method(store, 'subscription', async () => ({
+    status: 'active', plan_type: plan, period_start: '2020-01-01', period_end: '2099-01-01'
+  }));
+  const html = '<article id="rep-tela-003">Conteúdo protegido</article>';
+  let rows = [{ chapters_html: html }];
+  const db = t.mock.method(store, 'db', async path => {
+    assert.equal(path, 'report_private_documents?slug=eq.radar-2026&select=chapters_html&limit=1');
+    return rows;
+  });
+  const chapters = { action: 'chapters' };
+  const headers = { authorization: 'Bearer test' };
+  assert.equal((await request('POST', {}, {}, report, chapters)).status, 403);
+  assert.equal((await request('POST', {}, headers, report, chapters)).status, 403);
+  assert.equal(db.mock.callCount(), 0);
+  plan = 'report';
+  const authorized = await request('POST', {}, headers, report, chapters);
+  assert.equal(authorized.status, 200);
+  assert.equal(authorized.headers['Cache-Control'], 'no-store');
+  assert.deepEqual(authorized.body, { html, synthetic: false });
+  rows = [];
+  assert.equal((await request('POST', {}, headers, report, chapters)).status, 503);
+});
