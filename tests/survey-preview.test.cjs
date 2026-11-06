@@ -40,6 +40,17 @@ test('survey preview delivers only the public chart distributions and suppresses
   assert.deepEqual(result.body.charts['Como você se identifica?'], [{ label: 'Homem', count: 10 }]);
   assert.deepEqual(result.body.charts['Qual a sua idade?'], [{ label: '30 a 39 anos', count: 10 }]);
   assert.equal(result.body.charts['Na política, você se sente mais próximo de qual lado?'], undefined);
+  assert.equal(result.body.questions.length, 9);
+  assert.deepEqual(result.body.questions.slice(-3), [
+    'De 1 a 5, que nota você dá para a qualidade de vida em São José?',
+    'Para você, São José é:',
+    'Para você, a cidade de São José está:'
+  ]);
+  assert.deepEqual(Object.keys(result.body.options), ['age']);
+  assert.equal(result.body.kpis, undefined);
+  assert.equal(result.body.flowPairs, undefined);
+  assert.equal(result.body.reference, undefined);
+  assert.doesNotMatch(decodeURIComponent(db.mock.calls[0].arguments[0]), /mais falta|política|orgulho/);
   assert.doesNotMatch(JSON.stringify(result.body), /private|123|18 a 24/);
   assert.doesNotMatch(decodeURIComponent(db.mock.calls[0].arguments[0]), /Carimbo|select=\*/);
   const narrow = await request('GET', { age: '18 a 24 anos' });
@@ -51,6 +62,7 @@ test('survey preview rejects caller-controlled columns and filters before access
   const db = t.mock.method(store, 'db', async () => []);
   assert.equal((await request('GET', { select: '*' })).status, 400);
   assert.equal((await request('GET', { id: '123' })).status, 400);
+  assert.equal((await request('GET', { age: '18 a 24 anos', politics: 'Centro' })).status, 400);
   assert.equal((await request('POST')).status, 405);
   assert.equal(db.mock.callCount(), 0);
 });

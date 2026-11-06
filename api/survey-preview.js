@@ -17,7 +17,10 @@ module.exports = async function handler(req, res) {
   }
   try {
     const full = ['dash', 'report', 'midia', 'admin'].includes(await surveyPlan(req));
-    const result = surveyPreview(await readSurveyRows(), selected, full);
+    if (!full && Object.keys(selected).some(field => field !== 'age')) {
+      return res.status(400).json({ code: 'INVALID_SURVEY_PREVIEW_QUERY' });
+    }
+    const result = surveyPreview(await readSurveyRows(full), selected, full);
     if (process.env.VERCEL_ENV === 'preview') result.synthetic = true;
     return res.status(200).json(result);
   } catch (error) {

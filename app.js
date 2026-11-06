@@ -719,6 +719,7 @@ async function handleLogin(e) {
 
 async function handleLogout() {
   ++surveyRequest;
+  if (dynamicChartsGrid) delete dynamicChartsGrid.dataset.publicSurvey;
   allSurveyRecords = [];
   window.allSurveyRecords = [];
   window.currentFilteredRecords = [];
@@ -1374,16 +1375,20 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 // 7. CARREGAMENTO DOS DADOS DO SUPABASE
 // ==========================================
 async function fetchSurveyData() {
-  const request = ++surveyRequest;
-  const isDemo = window.radarSupabaseConfig?.preview === true;
-  if (!window.radarCanLoadModule?.('dashboard')) {
+  const unlocked = window.radarCanLoadModule?.('dashboard');
+  ALL_FILTER_ELEMENTS.forEach(select => {
+    if (select) select.disabled = !unlocked && select !== filterAgeSelect;
+  });
+  if (!unlocked) {
     allSurveyRecords = [];
     window.allSurveyRecords = [];
-    dynamicChartsGrid?.replaceChildren();
-    dataFetchError?.classList.add('hidden');
-    window.updateRadarPreviews?.();
-    return;
+    window.currentFilteredRecords = [];
+    return fetchPublicSurvey();
   }
+  if (dynamicChartsGrid) delete dynamicChartsGrid.dataset.publicSurvey;
+  document.getElementById('survey-public-label')?.classList.add('hidden');
+  const request = ++surveyRequest;
+  const isDemo = window.radarSupabaseConfig?.preview === true;
   try {
     let data;
     if (isDemo) {
@@ -1412,6 +1417,36 @@ async function fetchSurveyData() {
     if (supabaseTableStatus) supabaseTableStatus.textContent = 'Pesquisa indisponível';
     if (dataFetchError) {
       dataFetchError.textContent = 'Não foi possível carregar a pesquisa. Atualize a página para tentar novamente.';
+      dataFetchError.classList.remove('hidden');
+    }
+  }
+}
+
+async function fetchPublicSurvey() {
+  const request = ++surveyRequest;
+  const query = new URLSearchParams();
+  const age = filterAgeSelect?.value;
+  if (age && age !== 'TODOS') query.set('age', age);
+  try {
+    const response = await fetch('/api/survey-preview' + (query.size ? '?' + query : ''), { cache: 'no-store' });
+    if (!response.ok) throw new Error('Prévia indisponível');
+    const preview = await response.json();
+    if (request !== surveyRequest || window.radarCanLoadModule?.('dashboard')) return;
+    if (preview.full !== false) throw new Error('Prévia inválida');
+    populateSelectOptions(filterAgeSelect, preview.options.age, 'Todas as Idades', sortFilterAges);
+    if (filteredRecordsCount) filteredRecordsCount.textContent = preview.count.toLocaleString('pt-BR');
+    if (totalBaseCount) totalBaseCount.textContent = preview.total.toLocaleString('pt-BR');
+    updateStatisticalHeader(preview.count, preview.total);
+    processAndRenderDynamicCharts([], preview);
+    if (dynamicChartsGrid) dynamicChartsGrid.dataset.publicSurvey = 'true';
+    document.getElementById('survey-public-label')?.classList.remove('hidden');
+    document.getElementById('survey-demo-label')?.classList.toggle('hidden', !preview.synthetic);
+    dataFetchError?.classList.add('hidden');
+    window.updateRadarPreviews?.();
+  } catch (_) {
+    if (request !== surveyRequest) return;
+    if (dataFetchError) {
+      dataFetchError.textContent = 'Não foi possível carregar a prévia da pesquisa. Atualize a página para tentar novamente.';
       dataFetchError.classList.remove('hidden');
     }
   }
@@ -1620,6 +1655,7 @@ function normalizeGender(val) {
 }
 
 function applyCombinedFilters() {
+  if (!window.radarCanLoadModule?.('dashboard')) return fetchPublicSurvey();
   const selGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
   const selIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
   const selAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
@@ -1788,11 +1824,11 @@ function aggregateSurveyChartData(records, questionText) {
   return dataMap;
 }
 
-function processAndRenderDynamicCharts(records) {
-  const total = records.length;
+function processAndRenderDynamicCharts(records, preview) {
+  const total = preview?.count ?? records.length;
   if (statTotalResponses) statTotalResponses.textContent = total.toLocaleString("pt-BR");
 
-  if (total === 0) {
+  if (total === 0 && !preview) {
     if (statQualityLife) statQualityLife.textContent = "0.0";
     if (statPrideRate) statPrideRate.textContent = "0%";
     if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = "0";
@@ -1836,7 +1872,7 @@ function processAndRenderDynamicCharts(records) {
     });
   });
 
-  const questionList = Array.from(allColumns);
+  const questionList = preview?.questions ?? Array.from(allColumns);
 
   // KPIs
   let totalQualityScore = 0;
@@ -1859,9 +1895,9 @@ function processAndRenderDynamicCharts(records) {
   });
 
   const avgQualityScore = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.3";
-  if (statQualityLife) statQualityLife.textContent = avgQualityScore;
-  if (statPrideRate) statPrideRate.textContent = total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
-  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = neighborhoods.size.toString() || "34";
+  if (statQualityLife) statQualityLife.textContent = preview ? "—" : avgQualityScore;
+  if (statPrideRate) statPrideRate.textContent = preview ? "—" : total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
+  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = preview ? "—" : neighborhoods.size.toString() || "34";
 
   // Agrupamento por Seções
   const categories = [
@@ -2077,7 +2113,21 @@ function processAndRenderDynamicCharts(records) {
       cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
 
       // Extração de dados robusta e limpeza de parênteses/múltipla escolha
-      const dataMap = aggregateSurveyChartData(records, questionText);
+      const dataMap = preview
+        ? Object.fromEntries(preview.charts[questionText].map(({ label, count }) => [label, count]))
+        : aggregateSurveyChartData(records, questionText);
+
+      if (preview && Object.keys(dataMap).length === 0) {
+        const heading = document.createElement('h3');
+        heading.className = 'text-sm sm:text-base font-bold text-brand-900';
+        heading.textContent = displayTitle;
+        const message = document.createElement('p');
+        message.className = 'mt-4 text-sm text-slate-500';
+        message.textContent = 'Amostra insuficiente para exibir este resultado.';
+        cardEl.append(heading, message);
+        cardsGrid.appendChild(cardEl);
+        return;
+      }
 
       // ==========================================
       // AJUSTES ESPECÍFICOS POR PERGUNTA:
@@ -2142,7 +2192,7 @@ function processAndRenderDynamicCharts(records) {
         }
 
         // 5. Garantia estatística caso registros existam mas sem preenchimento dessa pergunta específica
-        if (scoreCount === 0 && total > 0) {
+        if (!preview && scoreCount === 0 && total > 0) {
           const sampleBase = total;
           const c5 = isPoliticsQuestion ? Math.round(sampleBase * 0.13) : Math.round(sampleBase * 0.52);
           const c4 = isPoliticsQuestion ? Math.round(sampleBase * 0.23) : Math.round(sampleBase * 0.32);
@@ -2158,8 +2208,13 @@ function processAndRenderDynamicCharts(records) {
           scoreCount = sampleBase;
         }
 
+        if (preview && scoreCount === 0) {
+          cardEl.textContent = 'Amostra insuficiente para exibir a nota de qualidade de vida.';
+          cardsGrid.appendChild(cardEl);
+          return;
+        }
         const calculatedAvg = scoreCount > 0 ? (totalScore / scoreCount).toFixed(1) : (isPoliticsQuestion ? "3.0" : (avgQualityScore || "4.3"));
-        const subtitleText = isPoliticsQuestion ? "Intensidade de Acompanhamento (Escala 1 a 5) • " + scoreCount.toLocaleString("pt-BR") + " avaliações" : "Média de Satisfação (Escala 1 a 5) • " + scoreCount.toLocaleString("pt-BR") + " avaliações";
+        const subtitleText = isPoliticsQuestion ? "Intensidade de Acompanhamento (Escala 1 a 5) • " + scoreCount.toLocaleString("pt-BR") + " avaliações" : "Média de Satisfação (Escala 1 a 5) • " + scoreCount.toLocaleString("pt-BR") + (preview && scoreCount < total ? " avaliações exibidas" : " avaliações");
 
         cardEl.className = "bg-surface-card rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-surface-border transition-all flex flex-col justify-between";
         cardEl.innerHTML = '<div class="mb-2">' +
@@ -2175,6 +2230,7 @@ function processAndRenderDynamicCharts(records) {
       // 2. GÊNERO: Homem (Azul), Mulher (Rosa Bebê), Outros (#94A3B8)
       if (qLower.includes("identifica") || qLower.includes("gênero") || qLower.includes("genero")) {
         const genderMap = { "Homem": 0, "Mulher": 0, "Outros": 0 };
+        if (preview) Object.assign(genderMap, dataMap);
         records.forEach(r => {
           const g = normalizeGender(getField(r, [questionText]));
           genderMap[g] = (genderMap[g] || 0) + 1;
@@ -2611,7 +2667,7 @@ function processAndRenderDynamicCharts(records) {
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
       // O filtro altera os valores, mas preserva o tipo e a orientação da amostra completa.
-      const referenceDataMap = aggregateSurveyChartData(referenceRecords, questionText);
+      const referenceDataMap = preview ? dataMap : aggregateSurveyChartData(referenceRecords, questionText);
       const chartTypeConfig = determineChartType(questionText, referenceDataMap, globalQuestionIndex);
       const itemCount = Object.keys(dataMap).length;
       const minContainerHeight = (chartTypeConfig.options && chartTypeConfig.options.horizontal && itemCount > 6) 

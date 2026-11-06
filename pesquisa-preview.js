@@ -117,7 +117,8 @@
 
     const unlocked = isModuleUnlocked(moduleName);
     const id = moduleName + '-raster-preview';
-    root.classList.toggle('raster-dashboard-restricted', !unlocked);
+    root.classList.toggle('raster-dashboard-restricted', !unlocked &&
+      (moduleName !== 'dashboard' || root.dataset.publicSurvey !== 'true'));
     let preview = document.getElementById(id);
     if (unlocked) {
       preview?.remove();
@@ -133,10 +134,10 @@
       preview.id = id;
       preview.className = 'raster-dashboard-preview';
       preview.innerHTML = `
-        <p class="raster-dashboard-sample-label">Prévia do painel com dados simulados</p>
+        ${moduleName === 'dashboard' ? '' : `<p class="raster-dashboard-sample-label">Prévia do painel com dados simulados</p>
         <div class="raster-dashboard-page" data-preview-section="secao-bloco-1">
           ${image(plan + '-amostra', 900, sampleHeight, 'Exemplo de visualização do painel com dados simulados')}
-        </div>
+        </div>`}
         ${createStickyNoticeHtml({ ...offer, targetPlan: plan })}
         <div class="raster-dashboard-pages" aria-hidden="true" inert>
           ${pages.map(([name, height], index) => article(name, height, index)).join('')}
@@ -149,9 +150,9 @@
 
   function applyPesquisaPreview() {
     applyRasterPaywall({
-      rootId: 'dynamic-charts-grid', moduleName: 'dashboard', plan: 'dash', sampleHeight: 807,
+      rootId: 'dynamic-charts-grid', moduleName: 'dashboard', plan: 'dash',
       pages: [
-        ['dash-01', 235], ['dash-02', 791], ['dash-03', 754], ['dash-04', 417], ['dash-05', 263],
+        ['dash-corte-02', 452], ['dash-02', 791], ['dash-03', 754], ['dash-04', 417], ['dash-05', 263],
         ['dash-06', 247], ['dash-07', 297], ['dash-08', 238], ['dash-09', 191]
       ],
       offer: {
@@ -271,6 +272,7 @@
       const link = event.target.closest('button[onclick*="scrollToSection"], a[href*="#secao-bloco-"]');
       if (!link) return;
       const match = (link.getAttribute('onclick') || link.getAttribute('href') || '').match(/secao-bloco-\d+/);
+      if (match && document.getElementById(match[0])?.getClientRects().length) return;
       const target = match && document.querySelector('#dashboard-raster-preview [data-preview-section="' + match[0] + '"]');
       if (!target) return;
       event.preventDefault();
