@@ -26,138 +26,27 @@
     window.SUPABASE_URL = "https://tocyvysucpslayzglixq.supabase.co";
     window.SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 
-    (function enforceImmediateSecurity() {
-      // Se o usuário já estiver marcado como admin no localStorage, não oculta a tela
-      const cachedRole = localStorage.getItem("userRole");
-      const cachedEmail = (localStorage.getItem("userEmail") || "").toLowerCase().trim();
-      const isKnownAdmin = (cachedRole === 'admin') || cachedEmail.includes('venancio') || cachedEmail === 'gamersilvaesilva@gmail.com' || cachedEmail.includes('leoserven') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      if (!isKnownAdmin) {
-        document.documentElement.style.visibility = 'hidden';
-      }
-    })();
+    document.documentElement.style.visibility = 'hidden';
 
     (async function authGuard() {
-      const SUPABASE_URL = window.SUPABASE_URL;
-      const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY;
-
-      const cachedRole = localStorage.getItem("userRole");
-      const cachedEmail = (localStorage.getItem("userEmail") || "").toLowerCase().trim();
-      const cachedName = localStorage.getItem("userName") || (cachedEmail.includes('venancio') ? 'Leonardo Venâncio' : 'Administrador');
-
-      const SUPER_ADMINS = [
-        'venancio.project@gmail.com',
-        'gamersilvaesilva@gmail.com',
-        'leonardo@radarsaojose.com.br',
-        'leoserven@gmail.com'
-      ];
-
-      function grantAdminAccess(userData) {
-        window.currentAdminUser = {
-          id: userData?.id || 'admin-local',
-          email: userData?.email || cachedEmail || 'venancio.project@gmail.com',
-          nome: userData?.nome || cachedName || 'Leonardo Venâncio',
-          role: 'admin'
-        };
-        localStorage.setItem("userRole", "admin");
-        if (userData?.nome) localStorage.setItem("userName", userData.nome);
-        if (userData?.email) localStorage.setItem("userEmail", userData.email);
-        document.documentElement.style.visibility = 'visible';
-        sessionStorage.removeItem('auth_redirect_count');
-      }
-
-      // Prevenção contra loop de redirecionamento
-      const redirectCount = Number(sessionStorage.getItem('auth_redirect_count') || 0);
-      if (redirectCount >= 2) {
-        console.warn("[Auth Guard] Loop de redirecionamento prevenido. Concedendo acesso de administrador.");
-        grantAdminAccess();
-        return;
-      }
-
       try {
-        if (!window.supabase || typeof window.supabase.createClient !== 'function') {
-          if (cachedRole === 'admin' || cachedEmail.includes('venancio') || SUPER_ADMINS.includes(cachedEmail)) {
-            grantAdminAccess();
-            return;
-          }
-          throw new Error("SDK do Supabase indisponível.");
-        }
-
-        // Inicializa cliente global do Supabase
-        window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-          auth: {
-            persistSession: true,
-            autoRefreshToken: true,
-            detectSessionInUrl: true
-          }
-        });
-
-        // 1. Tenta obter a sessão ativa do Supabase
-        let session = null;
-        try {
-          const { data } = await window.supabaseClient.auth.getSession();
-          session = data?.session;
-        } catch (sErr) {
-          console.warn("[Auth Guard] Aviso ao consultar getSession:", sErr);
-        }
-
-        // Se encontrou sessão ativa
-        if (session && session.user) {
-          const userEmail = (session.user.email || '').toLowerCase().trim();
-          const isSuper = SUPER_ADMINS.includes(userEmail) || userEmail.includes('venancio') || userEmail.includes('leoserven');
-          const isMetadataAdmin = session.user.user_metadata?.role === 'admin';
-
-          if (isSuper || isMetadataAdmin || cachedRole === 'admin') {
-            const adminName = session.user.user_metadata?.nome || session.user.user_metadata?.full_name || (userEmail.includes('venancio') ? 'Leonardo Venâncio' : 'Super Admin');
-            grantAdminAccess({
-              id: session.user.id,
-              email: session.user.email,
-              nome: adminName
-            });
-            return;
-          }
-
-          // Consulta na tabela profiles com timeout defensivo de 3s
-          try {
-            const profilePromise = window.supabaseClient
-              .from('profiles')
-              .select('id, email, nome, role')
-              .eq('id', session.user.id)
-              .maybeSingle();
-
-            const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Profile timeout')), 3000));
-            const { data: profile } = await Promise.race([profilePromise, timeoutPromise]);
-
-            if (profile && profile.role === 'admin') {
-              grantAdminAccess(profile);
-              return;
-            }
-          } catch (e) {
-            console.warn("[Auth Guard] Verificação de profile falhou ou expirou, checando role local:", e);
-          }
-        }
-
-        // 2. Se o localStorage já indicava admin anteriormente ou ambiente local
-        if (cachedRole === 'admin' || cachedEmail.includes('venancio') || SUPER_ADMINS.includes(cachedEmail) || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-          console.log("[Auth Guard] Sessão mantida via credencial administrativa em cache ou ambiente local.");
-          grantAdminAccess();
+        window.supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+        const { data, error } = await window.supabaseClient.auth.getUser();
+        const user = data?.user;
+        const claims = user?.app_metadata;
+        if (error || !user?.id || (claims?.role !== 'admin' && claims?.is_admin !== true)) {
+          window.location.replace('app.html');
           return;
         }
 
-        // 3. Usuário não autenticado
-        console.warn("[Auth Guard] Nenhuma sessão ativa detectada. Redirecionando para login...");
-        sessionStorage.setItem('auth_redirect_count', String(redirectCount + 1));
+        const name = user.user_metadata?.nome || user.user_metadata?.full_name || 'Administrador';
+        window.currentAdminUser = { id: user.id, email: user.email, nome: name, role: 'admin' };
+        localStorage.setItem('userRole', 'admin');
+        localStorage.setItem('userName', name);
+        if (user.email) localStorage.setItem('userEmail', user.email);
         document.documentElement.style.visibility = 'visible';
-        window.location.replace("login.html?redirect=admin-crm.html");
-
-      } catch (err) {
-        console.error("[Auth Guard Fatal]:", err);
-        if (cachedRole === 'admin' || cachedEmail.includes('venancio') || SUPER_ADMINS.includes(cachedEmail)) {
-          grantAdminAccess();
-        } else {
-          document.documentElement.style.visibility = 'visible';
-          sessionStorage.setItem('auth_redirect_count', String(redirectCount + 1));
-          window.location.replace("login.html?redirect=admin-crm.html");
-        }
+      } catch (_) {
+        window.location.replace('app.html');
       }
     })();
   </script>

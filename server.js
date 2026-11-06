@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const url = require('url');
+const { pipeline } = require('node:stream/promises');
 
 // Carrega .env se existir
 if (fs.existsSync(path.join(__dirname, '.env'))) {
@@ -32,126 +32,119 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
   '.csv': 'text/csv; charset=utf-8',
-  '.webp': 'image/webp'
+  '.webp': 'image/webp',
+  '.geojson': 'application/geo+json',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.mp4': 'video/mp4',
+  '.webm': 'video/webm',
+  '.avif': 'image/avif'
 };
 
-const server = http.createServer(async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, apikey');
+const staticDirectories = new Set([
+  'artigos', 'assets', 'data', 'fotos_influenciadores', 'fotos_radar', 'mais_fotos_radar',
+  'midia_sjc', 'public-data', 'thumbnails', 'web-media', 'Landing page_files', 'data_personas'
+]);
+const internalAsset = /^(?:server|check|fix|patch|temp|debug|test|backup)(?:[-_.]|$)|^dados_pesquisa|^comunidade_/i;
+const assetExtensions = new Set(Object.keys(MIME_TYPES).filter(ext => ext !== '.csv'));
 
-  if (req.method === 'OPTIONS') {
-    res.writeHead(204);
-    res.end();
-    return;
+function send(res, status, message) {
+  res.writeHead(status, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end(message);
+}
+
+async function readJson(req, res, limit) {
+  if (Number(req.headers['content-length']) > limit) {
+    send(res, 413, 'Corpo da requisição acima do limite.');
+    return false;
   }
-
-  const parsedUrl = url.parse(req.url, true);
-  let pathname = decodeURIComponent(parsedUrl.pathname);
-
-  // Roteador de APIs Serverless (/api/consultor, /api/oraculo, etc.)
-  if (pathname.startsWith('/api/')) {
-    const routeName = pathname.replace('/api/', '').replace(/\.js$/, '');
-    const apiPath = path.resolve(__dirname, 'api', `${routeName}.js`);
-    
-    if (fs.existsSync(apiPath)) {
-      try {
-        delete require.cache[require.resolve(apiPath)];
-        const handler = require(apiPath);
-
-        // Helper de compatibilidade Serverless / Express (res.status().json())
-        res.status = function(statusCode) {
-          res.statusCode = statusCode;
-          return {
-            json: (data) => {
-              if (!res.headersSent) res.setHeader('Content-Type', 'application/json; charset=utf-8');
-              res.end(JSON.stringify(data));
-            },
-            send: (data) => {
-              res.end(data);
-            },
-            end: () => {
-              res.end();
-            }
-          };
-        };
-        res.json = function(data) {
-          if (!res.headersSent) res.setHeader('Content-Type', 'application/json; charset=utf-8');
-          res.end(JSON.stringify(data));
-        };
-        req.query = parsedUrl.query || {};
-
-        if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
-          let body = '';
-          req.on('data', chunk => { body += chunk; });
-          req.on('end', async () => {
-            try {
-              req.body = body ? JSON.parse(body) : {};
-            } catch(e) {
-              req.body = {};
-            }
-            await handler(req, res);
-          });
-        } else {
-          req.body = {};
-          await handler(req, res);
-        }
-        return;
-      } catch (err) {
-        console.error(`API ${routeName} Error:`, err);
-        if (!res.headersSent) {
-          res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
-          res.end(JSON.stringify({ error: err.message }));
-        }
-        return;
-      }
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of req.iterator({ destroyOnReturn: false })) {
+    size += chunk.length;
+    if (size > limit) {
+      send(res, 413, 'Corpo da requisição acima do limite.');
+      return false;
     }
+    chunks.push(chunk);
   }
-
-  if (pathname === '/' || pathname === '') {
-    pathname = '/index.html';
+  try {
+    req.body = size ? JSON.parse(Buffer.concat(chunks).toString('utf8')) : {};
+    return true;
+  } catch (_) {
+    send(res, 400, 'JSON inválido.');
+    return false;
   }
+}
 
-  let filePath = path.join(__dirname, pathname);
-
-  fs.stat(filePath, (err, stats) => {
-    if (err) {
-      if (fs.existsSync(filePath + '.html')) {
-        filePath = filePath + '.html';
-      } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('404 Not Found: ' + pathname);
-        return;
-      }
-    } else if (stats.isDirectory()) {
-      filePath = path.join(filePath, 'index.html');
-      if (!fs.existsSync(filePath)) {
-        filePath = path.join(__dirname, 'app.html');
-      }
+const rootPath = fs.promises.realpath(__dirname);
+const server = http.createServer({ requestTimeout: 15000, headersTimeout: 10000 }, async (req, res) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  try {
+    const root = await rootPath;
+    const queryStart = req.url.indexOf('?');
+    const rawPath = queryStart < 0 ? req.url : req.url.slice(0, queryStart);
+    if (!rawPath.startsWith('/') || rawPath.startsWith('//')) return send(res, 400, 'URL inválida.');
+    let pathname;
+    try { pathname = decodeURIComponent(rawPath); }
+    catch (_) { return send(res, 400, 'URL inválida.'); }
+    const segments = pathname.split('/').filter(Boolean);
+    if (/[\\\x00-\x1f]/.test(pathname) || segments.some(part => part.startsWith('.') || part.includes(':'))) {
+      return send(res, 400, 'URL inválida.');
     }
 
-    const ext = path.extname(filePath).toLowerCase();
-    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-
-    fs.readFile(filePath, (readErr, content) => {
-      if (readErr) {
-        res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('500 Error loading file: ' + readErr.message);
-        return;
+    if (segments[0] === 'api') {
+      const route = segments.length === 2 && /^([a-z][a-z0-9-]*)(?:\.js)?$/i.exec(segments[1]);
+      const file = route && path.join(root, 'api', route[1] + '.js');
+      if (!file || !fs.existsSync(file)) return send(res, 404, 'Rota inexistente.');
+      const handler = require(file);
+      if (typeof handler !== 'function') return send(res, 404, 'Rota inexistente.');
+      res.status = status => { res.statusCode = status; return res; };
+      res.json = data => {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.end(JSON.stringify(data));
+      };
+      res.send = data => res.end(data);
+      const query = new URLSearchParams(queryStart < 0 ? '' : req.url.slice(queryStart + 1));
+      req.query = Object.fromEntries([...new Set(query.keys())].map(key => {
+        const values = query.getAll(key);
+        return [key, values.length === 1 ? values[0] : values];
+      }));
+      if (handler.config?.api?.bodyParser !== false && ['POST','PUT','PATCH','DELETE'].includes(req.method)) {
+        const limit = route[1] === 'upload' ? 14 * 1024 * 1024 : 256 * 1024;
+        if (!await readJson(req, res, limit)) return;
       }
-      res.writeHead(200, { 
-        'Content-Type': contentType,
-        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      });
-      res.end(content);
+      await handler(req, res);
+      return;
+    }
+
+    if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'Método não permitido.');
+    if (!segments.length) segments.push('index.html');
+    const leaf = segments.at(-1);
+    if (internalAsset.test(leaf) || (segments.length > 1 && !staticDirectories.has(segments[0])) ||
+        segments.includes('migrations') || segments.includes('evidence') ||
+        (segments[0] === 'data_personas' && segments[1] !== 'capivara')) {
+      return send(res, 404, 'Arquivo inexistente.');
+    }
+    if (!path.extname(leaf)) segments[segments.length - 1] += '.html';
+    const extension = path.extname(segments.at(-1)).toLowerCase();
+    if (!assetExtensions.has(extension)) return send(res, 404, 'Arquivo inexistente.');
+    const file = await fs.promises.realpath(path.join(root, ...segments)).catch(() => null);
+    if (!file || !file.startsWith(root + path.sep) || !(await fs.promises.stat(file)).isFile()) {
+      return send(res, 404, 'Arquivo inexistente.');
+    }
+    res.writeHead(200, {
+      'Content-Type': MIME_TYPES[extension] || 'application/octet-stream',
+      'Cache-Control': 'no-store'
     });
-  });
+    if (req.method === 'HEAD') return res.end();
+    await pipeline(fs.createReadStream(file), res);
+  } catch (_) {
+    if (!res.headersSent) send(res, 500, 'Erro interno.');
+    else if (!res.writableEnded) res.destroy();
+  }
 });
 
-server.listen(PORT, () => {
-  console.log('Servidor Radar SJC rodando em http://localhost:' + PORT);
-  console.log('App: http://localhost:' + PORT + '/app.html');
-  console.log('Oraculo: http://localhost:' + PORT + '/app.html#personas');
+server.listen(PORT, '127.0.0.1', () => {
+  console.log('Servidor Radar SJC em http://127.0.0.1:' + server.address().port);
 });

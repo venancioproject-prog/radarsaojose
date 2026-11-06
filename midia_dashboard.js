@@ -2479,22 +2479,9 @@
 
   // 13. MODAL DE COMUNIDADE & COMENTARISTAS
   let communityDataLoaded = false;
-  async function loadCommunityModalData() {
-    if (typeof window.PRELOADED_COMUNIDADE_DATA !== 'undefined' && window.PRELOADED_COMUNIDADE_DATA) {
-      renderCommunityModalContent(window.PRELOADED_COMUNIDADE_DATA);
-      communityDataLoaded = true;
-      return;
-    }
-    try {
-      const response = await fetch('midia_sjc/comunidade_comentarios_sjc.json?t=' + Date.now());
-      if (response.ok) {
-        const cData = await response.json();
-        renderCommunityModalContent(cData);
-        communityDataLoaded = true;
-      }
-    } catch (err) {
-      console.error("[MIDIA] Erro ao carregar comunidade_comentarios_sjc.json:", err);
-    }
+  function loadCommunityModalData() {
+    renderCommunityModalContent({ top_commenters: [], sample_popular_comments: [] });
+    communityDataLoaded = true;
   }
 
   function renderCommunityModalContent(cData) {

@@ -152,3 +152,7 @@ public-images/
 
 !assets/module-tours/*.mp4
 !web-media/module-tours/*.mp4
+
+/server.js
+/midia_sjc/comunidade_data.js
+/midia_sjc/comunidade_comentarios_sjc.json

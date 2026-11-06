@@ -114,12 +114,7 @@ function checkAmount(order, payment) {
 }
 
 async function verifyPaymentWithAsaas(paymentId, order, eventType) {
-  const env = (process.env.ASAAS_ENVIRONMENT || 'sandbox').toLowerCase();
-  const apiKey = env === 'sandbox'
-    ? process.env.ASAAS_SANDBOX_API_KEY
-    : process.env.ASAAS_API_KEY;
-  const apiUrl = process.env.ASAAS_API_URL ||
-    (env === 'sandbox' ? 'https://api-sandbox.asaas.com/v3' : 'https://api.asaas.com/v3');
+  const { key: apiKey, url: apiUrl } = require('../lib/asaas-config').asaasConfig(process.env);
 
   if (!apiKey) throw new BillingError(503, 'ASAAS_NOT_CONFIGURED');
   if (typeof fetch !== 'function') throw new BillingError(503, 'ASAAS_VERIFICATION_FAILED');
@@ -128,7 +123,7 @@ async function verifyPaymentWithAsaas(paymentId, order, eventType) {
   try {
     response = await fetch(apiUrl + '/payments/' + encodeURIComponent(paymentId), {
       method: 'GET',
-      headers: { access_token: apiKey, 'Content-Type': 'application/json' },
+      headers: { access_token: apiKey, 'Content-Type': 'application/json', 'User-Agent': 'RadarSaoJose/1.0' },
       redirect: 'error',
       signal: typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(10000) : undefined
     });

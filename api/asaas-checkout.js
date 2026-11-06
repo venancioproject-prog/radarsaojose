@@ -37,8 +37,8 @@ function loadEnv() {
 }
 loadEnv();
 
-const ASAAS_ENVIRONMENT = (process.env.ASAAS_ENVIRONMENT || 'sandbox').toLowerCase();
-const ASAAS_API_URL = process.env.ASAAS_API_URL || (ASAAS_ENVIRONMENT === 'sandbox' ? "https://api-sandbox.asaas.com/v3" : "https://api.asaas.com/v3");
+const { asaasConfig } = require('../lib/asaas-config');
+const { environment: ASAAS_ENVIRONMENT, url: ASAAS_API_URL, key: apiKey } = asaasConfig(process.env);
 
 const RATE_LIMIT_BUCKETS = new Map();
 function checkRateLimit(key, maxRequests, windowMs = 60000) {
@@ -324,7 +324,6 @@ module.exports = async function handler(req, res) {
     }
     if (!checkRateLimit('pay:' + user.id, 8, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
     if (quote.amountCents <= 0) throw new billing.BillingError(409, 'ZERO_AMOUNT_REQUIRES_RECONCILIATION');
-    const apiKey = ASAAS_ENVIRONMENT === 'sandbox' ? process.env.ASAAS_SANDBOX_API_KEY : process.env.ASAAS_API_KEY;
     if (!apiKey) throw new billing.BillingError(503, 'ASAAS_NOT_CONFIGURED');
     const document = validateCpfCnpj(body.cpfCnpj);
     if (!document.valid) throw new billing.BillingError(400, 'INVALID_DOCUMENT');
@@ -358,7 +357,7 @@ module.exports = async function handler(req, res) {
     async function asaas(path, payload, methodOverride) {
       const m = methodOverride || (payload ? 'POST' : 'GET');
       const response = await fetch(ASAAS_API_URL+path,{method:m,
-        headers:{access_token:apiKey,'Content-Type':'application/json'},
+        headers:{access_token:apiKey,'Content-Type':'application/json','User-Agent':'RadarSaoJose/1.0'},
         ...(payload ? {body:JSON.stringify(payload)} : {}),
         redirect:'error', signal:AbortSignal.timeout(m === 'POST' && path === '/payments' && paymentMethod === 'CREDIT_CARD' ? 60000 : 10000)});
       if (!response.ok) throw new billing.BillingError(502, 'ASAAS_REQUEST_FAILED');
