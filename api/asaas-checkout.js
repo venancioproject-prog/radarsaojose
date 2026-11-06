@@ -481,7 +481,7 @@ module.exports = async function handler(req, res) {
     const binding = { asaas_payment_id: payment.id };
     if (quote.installments.length > 1) {
       if (!payment.installment) throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
-      const schedule = await asaas('/installments/' + encodeURIComponent(payment.installment) + '/payments');
+      const schedule = await asaas('/installments/' + encodeURIComponent(payment.installment) + '/payments?limit=' + quote.installments.length);
       if (!Array.isArray(schedule.data) || schedule.hasMore || schedule.data.length !== quote.installments.length) {
         throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
       }

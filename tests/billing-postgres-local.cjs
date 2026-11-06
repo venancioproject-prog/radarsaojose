@@ -98,7 +98,7 @@ async function checkSandbox(db, evidence) {
   const purchase = await request(checkout, {
     plan: 'dash', billingType: method, name: 'Teste Radar Sao Jose', cpfCnpj: '52998224725',
     ...(method === 'CREDIT_CARD' ? {phone:'11900000000'} : {}),
-    ...(method === 'CREDIT_CARD' ? { installmentCount: 2, creditCard: {
+    ...(method === 'CREDIT_CARD' ? { installmentCount: 12, creditCard: {
       holderName: 'TESTE RADAR', number: '4111111111111111', ccv: '123', expiryMonth: '12', expiryYear: '2031'
     }, creditCardHolderInfo: { postalCode: '01001000', addressNumber: '10' } } : {})
   });
@@ -128,7 +128,7 @@ async function checkSandbox(db, evidence) {
   assert.deepEqual(state, { status: 'active', plan_type: 'dash', installments_paid: 1 });
   evidence.checks.push(`Checkout ${method}, verificação do Asaas, ativação e reenvio no PostgreSQL local`);
   if (installmentGroup) {
-    const list = await sandboxFetch(`${base}/installments/${encodeURIComponent(installmentGroup)}/payments`, {method:'GET',headers:{access_token:key}});
+    const list = await sandboxFetch(`${base}/installments/${encodeURIComponent(installmentGroup)}/payments?limit=12`, {method:'GET',headers:{access_token:key}});
     const {data = []} = await list.json();
     evidence.sandbox.installments = data.map(item => ({ number: item.installmentNumber, value: item.value, status: item.status, matchingOrder: item.externalReference === order.orderId }));
     for (const installment of data.filter(item => item.id !== paymentId)) {
