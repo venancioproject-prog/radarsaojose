@@ -58,7 +58,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/api/asaas-checkout?browserConfig=1"></script>
   <script src="/supabase-browser-config.js"></script>
-  <script src="aceite-termos.js"></script>
+  <script src="aceite-termos.js?v=20261107_nome"></script>
 
   <style>
     body {
@@ -167,7 +167,7 @@
             </div>
             <input 
               type="text" 
-              id="nome" 
+              id="nome" maxlength="120" autocomplete="name"
               placeholder="Seu nome completo" 
               class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all"
             />
@@ -384,6 +384,10 @@
       const password = document.getElementById('password')?.value || '';
       const nome = document.getElementById('nome')?.value?.trim() || '';
       const isNewRegister = authMode === 'register';
+      if (isNewRegister && nome.length < 2) {
+        alert('Informe seu nome completo.');
+        return false;
+      }
 
       if (!email || !password) {
         alert("Por favor, preencha todos os campos.");
@@ -405,7 +409,7 @@
             email,
             password: String(password),
             options: {
-              data: { full_name: nome || email.split('@')[0] }
+              data: { full_name: nome }
             }
           });
           if (signUpErr) throw signUpErr;

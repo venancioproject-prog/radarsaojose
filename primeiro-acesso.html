@@ -19,7 +19,7 @@
     .intro { margin: 4px 0 22px; color: #475569; text-align: center; }
     a { color: #075985; text-underline-offset: .15em; }
     .profile-label { display: block; font-weight: 700; }
-    select { display: block; width: 100%; margin: 6px 0 14px; padding: 11px; border: 1px solid #94a3b8; border-radius: 10px; color: inherit; background: #fff; font: inherit; }
+    select, input[name="fullName"] { display: block; width: 100%; margin: 6px 0 14px; padding: 11px; border: 1px solid #94a3b8; border-radius: 10px; color: inherit; background: #fff; font: inherit; }
     .acceptance { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; background: #f0f7ff; }
     .acceptance input { margin-top: .35rem; flex: none; }
     .privacy, .back { font-size: .8rem; }
@@ -34,7 +34,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/api/asaas-checkout?browserConfig=1"></script>
   <script defer src="/supabase-browser-config.js"></script>
-  <script defer src="aceite-termos.js"></script>
+  <script defer src="aceite-termos.js?v=20261107_nome"></script>
 </head>
 <body>
   <div class="background" aria-hidden="true">
@@ -49,6 +49,8 @@
     <h1>Primeiro acesso</h1>
     <p class="intro">Complete seu perfil para entrar no Radar.</p>
     <form id="legal-acceptance-form" hidden>
+      <label class="profile-label" for="full-name">Nome completo</label>
+      <input id="full-name" name="fullName" autocomplete="name" minlength="2" maxlength="120" required>
       <label class="profile-label" for="profile-type">Qual é o seu perfil?</label>
       <select id="profile-type" name="profile" required>
         <option value="">Selecione seu perfil</option>
@@ -93,6 +95,7 @@
       const button = form.querySelector("button");
       const checkbox = form.elements.accepted;
       const select = form.elements.profile;
+      const nameInput = form.elements.fullName;
       const options = new Set(Array.from(select.options, option => option.value).filter(Boolean));
       const { url, key } = window.radarSupabaseConfig || {};
 
@@ -111,6 +114,7 @@
           return;
         }
 
+        nameInput.value = window.radarLegal.displayName(user);
         const existingProfile = user.user_metadata?.radar_profile_type;
         select.value = options.has(existingProfile) ? existingProfile : "";
         const alreadyAccepted = window.radarLegal.hasAccepted(user);
@@ -122,11 +126,16 @@
         form.addEventListener("submit", async event => {
           event.preventDefault();
           if (button.disabled || !options.has(select.value) || (!alreadyAccepted && !checkbox.checked)) return;
+          const name = nameInput.value.trim();
+          if (name.length < 2 || name.length > 120) {
+            status.textContent = "Informe seu nome completo.";
+            return;
+          }
           button.disabled = true;
           status.textContent = "Salvando seu primeiro acesso…";
 
           try {
-            const metadata = { radar_profile_type: select.value };
+            const metadata = { radar_profile_type: select.value, radar_full_name: name, full_name: name };
             if (!alreadyAccepted) {
               metadata.radar_terms_acceptance = {
                 version: window.radarLegal.version,
