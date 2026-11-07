@@ -217,7 +217,7 @@
         </div>
 
         <div id="field-password-confirm" hidden>
-          <p id="registration-password-hint" class="mb-3 text-xs text-slate-600">Use pelo menos 15 caracteres. Uma frase longa também serve. Evite sequências e senhas comuns.</p>
+          <p id="registration-password-hint" class="mb-3 text-xs text-slate-600">Use pelo menos 9 caracteres, com um número, uma letra maiúscula e um caractere especial, como ! ou @. Evite sequências e senhas comuns.</p>
           <label for="password-confirm" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Confirme a senha</label>
           <input type="password" id="password-confirm" autocomplete="new-password" disabled
             class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all">
@@ -392,7 +392,12 @@
     }
 
     function registrationPasswordError(password, confirmation) {
-      if (Array.from(password).length < 15) return 'Use uma senha com pelo menos 15 caracteres.';
+      const missing = [];
+      if (Array.from(password).length < 9) missing.push('pelo menos 9 caracteres');
+      if (!/\p{N}/u.test(password)) missing.push('um número');
+      if (!/\p{Lu}/u.test(password)) missing.push('uma letra maiúscula');
+      if (!/[\p{P}\p{S}]/u.test(password)) missing.push('um caractere especial');
+      if (missing.length) return 'A senha precisa ter ' + new Intl.ListFormat('pt-BR').format(missing) + '.';
       const compact = password.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
       if (!compact || /^\p{N}+$/u.test(compact) || /^(?<part>.{1,8})\k<part>+$/u.test(compact) ||
           /^(?:senha|password|qwerty|abc123|radarsaojose)\d*$/u.test(compact) ||
