@@ -257,6 +257,9 @@ module.exports = async function handler(req, res) {
     try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; }
     catch (_) { throw new billing.BillingError(400, 'INVALID_JSON'); }
     if (!body || typeof body !== 'object') throw new billing.BillingError(400, 'INVALID_BODY');
+    if (Object.hasOwn(body, 'creditCard') || Object.hasOwn(body, 'creditCardHolderInfo') || Object.hasOwn(body, 'creditCardToken')) {
+      throw new billing.BillingError(400, 'HOSTED_CARD_ONLY');
+    }
     const target = body.plan;
     if (!Object.hasOwn(pricing.PLAN_PRICES_CENTS, target)) throw new billing.BillingError(400, 'INVALID_PLAN');
     const paymentMethod = body.billingType || 'PIX';
@@ -330,30 +333,6 @@ module.exports = async function handler(req, res) {
     const name = String(body.name || '').replace(/<[^>]*>/g, '').replace(/[<>]/g, '').trim().slice(0,120);
     if (name.length < 3) throw new billing.BillingError(400, 'INVALID_NAME');
     const cleanPhone = String(body.phone || '').replace(/\D/g, '');
-    let cleanPostalCode = '';
-    let cleanAddressNumber = '';
-    let cleanAddressComplement = '';
-    if (paymentMethod === 'CREDIT_CARD') {
-      const card = body.creditCard || {};
-      const cleanCardNumber = String(card.number || '').replace(/\D/g, '');
-      const cleanCcv = String(card.ccv || '').replace(/\D/g, '');
-      if (!luhnCheck(cleanCardNumber) || !/^\d{13,19}$/.test(cleanCardNumber) ||
-          !/^\d{3,4}$/.test(cleanCcv) || !card.holderName || !card.expiryMonth || !card.expiryYear)
-        throw new billing.BillingError(400, 'INVALID_CARD');
-      const expMonth = Number(card.expiryMonth);
-      const rawYear = Number(String(card.expiryYear).trim());
-      const expYear = rawYear < 100 ? 2000 + rawYear : rawYear;
-      const curYear = now.getUTCFullYear();
-      const curMonth = now.getUTCMonth() + 1;
-      if (!Number.isInteger(expMonth) || expMonth < 1 || expMonth > 12 || !Number.isInteger(expYear) ||
-          expYear < curYear || (expYear === curYear && expMonth < curMonth))
-        throw new billing.BillingError(400, 'CARD_EXPIRED');
-      cleanPostalCode = String(body.creditCardHolderInfo?.postalCode || '').replace(/\D/g, '');
-      cleanAddressNumber = String(body.creditCardHolderInfo?.addressNumber || '').trim().slice(0, 30);
-      cleanAddressComplement = String(body.creditCardHolderInfo?.addressComplement || '').trim().slice(0, 60);
-      if (cleanPostalCode.length !== 8 || !cleanAddressNumber)
-        throw new billing.BillingError(400, 'CARD_ADDRESS_REQUIRED');
-    }
     async function asaas(path, payload, methodOverride) {
       const m = methodOverride || (payload ? 'POST' : 'GET');
       const response = await fetch(ASAAS_API_URL+path,{method:m,
@@ -457,25 +436,6 @@ module.exports = async function handler(req, res) {
       payload.totalValue = quote.amountCents/100;
       payload.installmentCount = quote.installments.length;
     } else payload.value = quote.amountCents/100;
-    if (paymentMethod === 'CREDIT_CARD') {
-      payload.remoteIp = resolveClientIp(req);
-      payload.creditCard = {
-        holderName: String(body.creditCard.holderName).trim().slice(0, 80),
-        number: String(body.creditCard.number).replace(/\D/g, ''),
-        expiryMonth: String(body.creditCard.expiryMonth).trim(),
-        expiryYear: String(body.creditCard.expiryYear).trim(),
-        ccv: String(body.creditCard.ccv).trim()
-      };
-      payload.creditCardHolderInfo = {
-        name,
-        email: user.email,
-        cpfCnpj: document.clean,
-        postalCode: cleanPostalCode,
-        addressNumber: cleanAddressNumber,
-        ...(cleanAddressComplement ? { addressComplement: cleanAddressComplement } : {}),
-        phone: cleanPhone
-      };
-    }
     const payment = await asaas('/payments',payload);
     if (!payment.id) throw new billing.BillingError(502, 'ASAAS_PAYMENT_MISSING');
     const binding = { asaas_payment_id: payment.id };
@@ -543,7 +503,7 @@ module.exports = async function handler(req, res) {
       customer:{id:customer.id,name,email:user.email,cpfCnpj:document.clean},
       payment:{id:payment.id,status:payment.status,value:quote.amountCents/100,
       billingType:paymentMethod,installmentCount:quote.installments.length,installmentValue:quote.installments[0]/100,
-      invoiceUrl:payment.invoiceUrl,creditCard:payment.creditCard||null,pix}});
+      invoiceUrl:payment.invoiceUrl,pix}});
   } catch (error) { return billing.fail(res,error); }
 };
 

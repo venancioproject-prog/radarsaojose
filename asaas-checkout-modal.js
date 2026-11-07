@@ -677,36 +677,7 @@
                 </select>
               </div>
 
-              <div class="asaas-field-group">
-                <label class="asaas-field-label" for="asaasCardNumber">Número do Cartão de Crédito</label>
-                <input type="text" id="asaasCardNumber" placeholder="0000 0000 0000 0000" maxlength="19" class="asaas-text-input" />
-              </div>
-
-              <div class="asaas-field-group">
-                <label class="asaas-field-label" for="asaasCardHolder">Nome Impresso no Cartão</label>
-                <input type="text" id="asaasCardHolder" placeholder="Como gravado no cartão" class="asaas-text-input" />
-              </div>
-
-              <div class="asaas-field-row">
-                <div class="asaas-field-group">
-                  <label class="asaas-field-label" for="asaasCardExpiry">Validade (MM/AA)</label>
-                  <input type="text" id="asaasCardExpiry" placeholder="12/28" maxlength="5" class="asaas-text-input" />
-                </div>
-                <div class="asaas-field-group">
-                  <label class="asaas-field-label" for="asaasCardCvv">CVV</label>
-                  <input type="text" id="asaasCardCvv" placeholder="123" maxlength="4" class="asaas-text-input" />
-                </div>
-              </div>
-              <div class="asaas-field-row">
-                <div class="asaas-field-group">
-                  <label class="asaas-field-label" for="asaasCardPostalCode">CEP do titular</label>
-                  <input type="text" id="asaasCardPostalCode" inputmode="numeric" maxlength="9" class="asaas-text-input" />
-                </div>
-                <div class="asaas-field-group">
-                  <label class="asaas-field-label" for="asaasCardAddressNumber">Número do endereço</label>
-                  <input type="text" id="asaasCardAddressNumber" maxlength="30" class="asaas-text-input" />
-                </div>
-              </div>
+              <p class="asaas-field-label">Você informa os dados do cartão na página do Asaas.</p>
             </div>
 
             <p class="asaas-field-label">
@@ -732,8 +703,10 @@
               </div>
               <h4 class="asaas-success-title">Solicitação de pagamento registrada</h4>
               <p class="asaas-success-text">
-                Verifique a confirmação abaixo para atualizar seu acesso.
+                Finalize o pagamento no Asaas. Depois, volte para verificar a liberação do acesso.
               </p>
+              <a id="asaasCardInvoiceLink" class="asaas-submit-btn" target="_blank" rel="noopener noreferrer" style="display:none">Pagar com cartão no Asaas</a>
+              <p id="asaasCardInvoiceUnavailable" class="asaas-field-label" hidden>O link de pagamento está indisponível. Consulte o suporte antes de tentar novamente.</p>
             </div>
 
             <!-- Sucesso PIX -->
@@ -913,40 +886,6 @@
           v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
         }
         this.value = v;
-      });
-    }
-
-    const cardNumInput = document.getElementById('asaasCardNumber');
-    if (cardNumInput) {
-      cardNumInput.addEventListener('input', function() {
-        let v = this.value.replace(/\D/g, '').slice(0, 16);
-        v = v.replace(/(\d{4})(?=\d)/g, '$1 ');
-        this.value = v;
-      });
-    }
-
-    const cardExpiryInput = document.getElementById('asaasCardExpiry');
-    if (cardExpiryInput) {
-      cardExpiryInput.addEventListener('input', function() {
-        const raw = this.value.replace(/\D/g, '');
-        let v = raw;
-        if (raw.length >= 6) {
-          // Usuário digitou ou colou no formato MMYYYY (ex: 122028)
-          v = raw.slice(0, 2) + raw.slice(-2);
-        } else {
-          v = raw.slice(0, 4);
-        }
-        if (v.length >= 2) {
-          v = v.slice(0, 2) + '/' + v.slice(2);
-        }
-        this.value = v;
-      });
-    }
-
-    const cardCvvInput = document.getElementById('asaasCardCvv');
-    if (cardCvvInput) {
-      cardCvvInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '').slice(0, 4);
       });
     }
 
@@ -1220,56 +1159,7 @@
 
     if (currentPaymentMethod === 'CREDIT_CARD') {
       const installmentsSel = document.getElementById('asaasCardInstallments');
-      const cardNum = document.getElementById('asaasCardNumber')?.value.trim();
-      const cardHolder = document.getElementById('asaasCardHolder')?.value.trim();
-      const cardExpiry = document.getElementById('asaasCardExpiry')?.value.trim();
-      const cardCvv = document.getElementById('asaasCardCvv')?.value.trim();
-
-      if (!cardNum || cardNum.replace(/\D/g, '').length < 13) {
-        return showCheckoutError('Por favor, informe o número completo do Cartão de Crédito.');
-      }
-      if (!cardHolder || cardHolder.length < 3) {
-        return showCheckoutError('Por favor, informe o Nome impresso no Cartão.');
-      }
-      if (!cardExpiry || !cardExpiry.includes('/')) {
-        return showCheckoutError('Por favor, informe a data de validade no formato MM/AA.');
-      }
-
-      const parts = cardExpiry.split('/');
-      const m = parseInt(parts[0], 10);
-      let y = parseInt(parts[1], 10);
-      if (isNaN(m) || m < 1 || m > 12) {
-        return showCheckoutError('Mês de validade do cartão inválido (utilize 01 a 12).');
-      }
-      if (!parts[1] || parts[1].trim().length < 2) {
-        return showCheckoutError('Por favor, informe a validade completa do cartão (mês e ano, ex: 12/28).');
-      }
-      if (y < 100) y += 2000;
-      const now = new Date();
-      const curYear = now.getFullYear();
-      const curMonth = now.getMonth() + 1;
-      if (isNaN(y) || y < curYear || y > curYear + 25 || (y === curYear && m < curMonth)) {
-        return showCheckoutError('Cartão de crédito com validade expirada. Verifique o mês e o ano informados.');
-      }
-
-      if (!cardCvv || cardCvv.length < 3) {
-        return showCheckoutError('Por favor, informe o código de segurança (CVV).');
-      }
-      const postalCode = document.getElementById('asaasCardPostalCode')?.value.replace(/\D/g, '') || '';
-      const addressNumber = document.getElementById('asaasCardAddressNumber')?.value.trim() || '';
-      if (postalCode.length !== 8 || !addressNumber || !phone) {
-        return showCheckoutError('Informe o telefone, o CEP e o número do endereço do titular do cartão.');
-      }
-      payload.creditCardHolderInfo = { postalCode, addressNumber };
-
       payload.installmentCount = parseInt(installmentsSel?.value || 12, 10);
-      payload.creditCard = {
-        holderName: cardHolder,
-        number: cardNum,
-        expiryMonth: parts[0],
-        expiryYear: parts[1],
-        ccv: cardCvv
-      };
     }
 
     // Loading State & In-Flight Lock
@@ -1319,11 +1209,6 @@
         showCheckoutError('Falha na comunicação com o servidor de pagamento.');
       }
     } finally {
-      const cardNumEl = document.getElementById('asaasCardNumber');
-      const cardCvvEl = document.getElementById('asaasCardCvv');
-      if (cardNumEl) cardNumEl.value = '';
-      if (cardCvvEl) cardCvvEl.value = '';
-
       isSubmitting = false;
       if (btnSubmit) btnSubmit.disabled = false;
       updateSubmitButtonLabel();
@@ -1355,6 +1240,19 @@
     // 1. Cartão de Crédito
     if (payment.billingType === 'CREDIT_CARD') {
       if (resultCardSuccess) resultCardSuccess.style.display = 'block';
+      const link = document.getElementById('asaasCardInvoiceLink');
+      const unavailable = document.getElementById('asaasCardInvoiceUnavailable');
+      link.removeAttribute('href');
+      link.style.display = 'none';
+      try {
+        const url = new URL(payment.invoiceUrl);
+        if (url.protocol === 'https:' && !url.username && !url.password &&
+            (url.hostname === 'asaas.com' || url.hostname.endsWith('.asaas.com'))) {
+          link.href = url.href;
+          link.style.display = '';
+        }
+      } catch (_) {}
+      unavailable.hidden = Boolean(link.getAttribute('href'));
     }
     // 2. PIX
     else if (payment.billingType === 'PIX' && payment.pix) {

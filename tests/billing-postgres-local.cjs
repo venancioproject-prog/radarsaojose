@@ -97,10 +97,7 @@ async function checkSandbox(db, evidence) {
   evidence.sandbox = { method, requests: responses, webhookDelivery: 'evento injetado localmente, com consulta autenticada ao Asaas' };
   const purchase = await request(checkout, {
     plan: 'dash', billingType: method, name: 'Teste Radar Sao Jose', cpfCnpj: '52998224725',
-    ...(method === 'CREDIT_CARD' ? {phone:'11900000000'} : {}),
-    ...(method === 'CREDIT_CARD' ? { installmentCount: 12, creditCard: {
-      holderName: 'TESTE RADAR', number: '4111111111111111', ccv: '123', expiryMonth: '12', expiryYear: '2031'
-    }, creditCardHolderInfo: { postalCode: '01001000', addressNumber: '10' } } : {})
+    ...(method === 'CREDIT_CARD' ? {phone:'11900000000', installmentCount: 12} : {})
   });
   evidence.sandbox.checkoutHttp = purchase.code;
   if (purchase.code !== 200) { evidence.pending.push({ sandboxCheckout: purchase.body?.code }); return; }

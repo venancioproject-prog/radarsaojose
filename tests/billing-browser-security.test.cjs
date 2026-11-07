@@ -1,6 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const { quotePurchase } = require('../lib/pricing');
 const vm = require('node:vm');
 const modal = fs.readFileSync('asaas-checkout-modal.js', 'utf8');
 const app = fs.readFileSync('app.js', 'utf8');
@@ -11,6 +12,81 @@ function completion(refresh) {
   vm.runInNewContext(modal.slice(modal.indexOf('  window.completeCheckoutAndUnlock ='), modal.indexOf('  // Listener para fechamento')), context);
   return { window, messages };
 }
+test('card checkout sends customers to Asaas and rejects legacy card fields', async () => {
+  const path = require('node:path');
+  const filename = path.resolve('api/asaas-checkout.js');
+  const localRequire = require('node:module').createRequire(filename);
+  const billing = localRequire('../lib/billing-store');
+  const gatewayCalls = [];
+  const module = { exports: {} };
+  vm.runInNewContext(fs.readFileSync(filename, 'utf8'), {
+    module, AbortSignal, console, __dirname: path.dirname(filename),
+    process: { cwd: () => path.dirname(filename), env: { ASAAS_SANDBOX_API_KEY: 'fixture' } },
+    require(id) {
+      if (id === 'fs') return { existsSync: () => false };
+      if (id !== '../lib/billing-store') return localRequire(id);
+      return {
+        ...billing,
+        authenticate: async () => ({ id: 'buyer', email: 'buyer@example.invalid' }),
+        subscription: async () => null,
+        db: async (route, options) => route === 'billing_orders' && options?.method === 'POST'
+          ? [{ id: 'order' }] : []
+      };
+    },
+    async fetch(url, options) {
+      const route = new URL(url).pathname;
+      const payload = options.body ? JSON.parse(options.body) : null;
+      gatewayCalls.push({ route, payload });
+      let body;
+      if (route === '/v3/customers') body = { id: 'customer' };
+      else if (route === '/v3/payments') {
+        body = {
+          id: 'payment', status: 'PENDING', invoiceUrl: 'https://sandbox.asaas.com/i/example',
+          installment: payload.installmentCount > 1 ? 'group' : undefined
+        };
+      } else {
+        assert.equal(route, '/v3/installments/group/payments');
+        const quote = quotePurchase({ plan: 'dash', paymentMethod: 'CREDIT_CARD', installments: 2 });
+        body = { data: quote.installments.map((amount, index) => ({
+          id: index === 0 ? 'payment' : 'payment-2',
+          value: amount / 100, installmentNumber: index + 1, installment: 'group',
+          billingType: 'CREDIT_CARD', externalReference: 'order'
+        })) };
+      }
+      return { ok: true, json: async () => body };
+    }
+  });
+  async function request(fields) {
+    const res = {
+      setHeader() {},
+      status(code) { this.code = code; return this; },
+      json(body) { this.body = body; }
+    };
+    await module.exports({
+      method: 'POST', body: {
+        plan: 'dash', billingType: 'CREDIT_CARD', installmentCount: 1,
+        name: 'Cliente Teste', cpfCnpj: '52998224725', ...fields
+      }
+    }, res);
+    return res;
+  }
+  assert.equal((await request({ creditCard: { number: 'fixture' } })).body.code, 'HOSTED_CARD_ONLY');
+  assert.equal(gatewayCalls.length, 0);
+  const hosted = await request({});
+  assert.equal(hosted.code, 200);
+  assert.equal(hosted.body.payment.status, 'PENDING');
+  assert.equal(hosted.body.payment.invoiceUrl, 'https://sandbox.asaas.com/i/example');
+  assert.equal(gatewayCalls[1].route, '/v3/payments');
+  assert.equal(gatewayCalls[1].payload.billingType, 'CREDIT_CARD');
+  const installments = await request({ installmentCount: 2 });
+  assert.equal(installments.code, 200);
+  assert.equal(installments.body.payment.installmentCount, 2);
+  assert.equal(gatewayCalls[3].payload.installmentCount, 2);
+  assert.equal(gatewayCalls[4].route, '/v3/installments/group/payments');
+  assert.doesNotMatch(JSON.stringify(gatewayCalls), /creditCard|ccv/i);
+  assert.doesNotMatch(modal, /asaasCard(?:Number|Cvv|Expiry)|payload\.creditCard/);
+});
+
 test('pending confirmation never completes checkout', async () => {
   const state = completion(async () => 'gratis');
   await state.window.completeCheckoutAndUnlock();
