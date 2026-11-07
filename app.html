@@ -7392,7 +7392,8 @@
   <script src="report-source.js?v=20261104_report_restore"></script>
   <script src="report-metrics-ui.js?v=20261105_private"></script>
   <script src="lentes_sjc_module.js?v=20261004_v1"></script>
-  <script src="app.js?v=20261106_dashboard_original"></script>
+  <script src="aceite-termos.js"></script>
+  <script src="app.js?v=20261107_primeiro_acesso"></script>
   <script src="data/radar_hub/sjc_setores_geo_bundle.js?v=20260927_v1"></script>
   <script src="radar_benchmark.js?v=20261020"></script><script src="radar_demografia_contracts.js?v=20261012-r5"></script><script src="radar_mobilidade_atlas.js?v=20261013"></script>
 <script src="radar_mobilidade_visual.js?v=20261013"></script>
@@ -7722,26 +7723,7 @@
         }
       }
 
-      // Fallback
-      const email = "usuario.google@radarsaojose.com.br";
-      const name = "Usuário Google SJC";
-      localStorage.setItem('userRole', 'usuario');
-      localStorage.setItem('userName', name);
-      localStorage.setItem('userEmail', email);
-      localStorage.setItem('authProvider', 'google');
-      if (!localStorage.getItem('userPlan')) localStorage.setItem('userPlan', 'gratis');
-
-      const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted_' + email) || localStorage.getItem('onboardingCompleted');
-      if (!hasCompletedOnboarding) {
-        window.location.href = "formulario-radar.html";
-        return;
-      }
-
-      const loginScreen = document.getElementById('login-screen');
-      const dashboardScreen = document.getElementById('dashboard-screen');
-      if (loginScreen) loginScreen.classList.add('hidden');
-      if (dashboardScreen) dashboardScreen.classList.remove('hidden');
-      if (typeof window.applyPlanRestrictions === 'function') window.applyPlanRestrictions();
+      window.location.href = "login.html";
     }
 
     // =========================================================================

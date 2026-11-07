@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Primeiro acesso | Radar São José</title>
+  <link rel="icon" href="favicon-radar-rd-32.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: clamp(16px, 4vw, 32px); background: #07172c; color: #0b2545; font: .875rem/1.55 Montserrat, system-ui, sans-serif; }
+    .background, .background span, .background::after { position: fixed; inset: 0; pointer-events: none; }
+    .background span { background: center / cover no-repeat; opacity: 0; transition: opacity 1.2s ease; }
+    .background span.active { opacity: 1; }
+    .background::after { content: ""; background: linear-gradient(0deg, #07172ce6, #07172c80 55%, #07172cbf); }
+    main { position: relative; width: min(100%, 460px); padding: clamp(20px, 6vw, 40px); background: #fff; border-radius: 24px; box-shadow: 0 20px 60px #0006; }
+    .brand { display: block; height: clamp(54px, 12vw, 80px); max-width: 100%; margin: 0 auto 14px; object-fit: contain; }
+    h1 { margin: 0; font-size: 1.65rem; text-align: center; }
+    .intro { margin: 4px 0 22px; color: #475569; text-align: center; }
+    a { color: #075985; text-underline-offset: .15em; }
+    .profile-label { display: block; font-weight: 700; }
+    select { display: block; width: 100%; margin: 6px 0 14px; padding: 11px; border: 1px solid #94a3b8; border-radius: 10px; color: inherit; background: #fff; font: inherit; }
+    .acceptance { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; background: #f0f7ff; }
+    .acceptance input { margin-top: .35rem; flex: none; }
+    .privacy, .back { font-size: .8rem; }
+    .back { display: block; text-align: center; margin-top: 12px; }
+    button { width: 100%; margin-top: 4px; padding: 12px; border: 0; border-radius: 10px; background: #0b2545; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+    button:hover { background: #075985; }
+    button:disabled { opacity: .65; }
+    :focus-visible { outline: 3px solid #0284c7; outline-offset: 3px; }
+    #legal-acceptance-status:empty { display: none; }
+    @media (prefers-reduced-motion: reduce) { .background span { transition: none; } }
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/api/asaas-checkout?browserConfig=1"></script>
+  <script defer src="/supabase-browser-config.js"></script>
+  <script defer src="aceite-termos.js"></script>
+</head>
+<body>
+  <div class="background" aria-hidden="true">
+    <span class="active" style="background-image: url('web-media/foto_onibus_viaduto-18691779619a.webp'); background-position: center 35%;"></span>
+    <span style="background-image: url('fotos_radar/foto_cidade.jpg');"></span>
+    <span style="background-image: url('web-media/foto_cultura-95d0cf78551c.webp');"></span>
+    <span style="background-image: url('web-media/foto_gastronomia-2e195d219775.webp');"></span>
+    <span style="background-image: url('fotos_radar/foto_pessoas.jpg');"></span>
+  </div>
+  <main>
+    <img class="brand" src="fotos_radar/logo_login_radar.png?v=20261105" alt="Radar São José">
+    <h1>Primeiro acesso</h1>
+    <p class="intro">Complete seu perfil para entrar no Radar.</p>
+    <form id="legal-acceptance-form" hidden>
+      <label class="profile-label" for="profile-type">Qual é o seu perfil?</label>
+      <select id="profile-type" name="profile" required>
+        <option value="">Selecione seu perfil</option>
+        <option value="empresario">Empresário(a) ou empreendedor(a)</option>
+        <option value="gestor">Diretor(a) ou gestor(a) de empresa</option>
+        <option value="marketing">Profissional de marketing</option>
+        <option value="agencia">Profissional de agência ou publicidade</option>
+        <option value="investidor">Investidor(a)</option>
+        <option value="imobiliario">Profissional do setor imobiliário</option>
+        <option value="consultor">Consultor(a) de negócios</option>
+        <option value="inteligencia">Profissional de pesquisa ou inteligência de mercado</option>
+        <option value="setor_publico">Profissional do setor público</option>
+        <option value="comunicacao">Jornalista ou profissional de comunicação</option>
+        <option value="professor">Professor(a)</option>
+        <option value="estudante">Estudante</option>
+        <option value="outros">Outros</option>
+      </select>
+      <div id="terms-fields">
+        <p>Leia os <a href="juridico.html#termos" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="juridico.html#uso-aceitavel" target="_blank" rel="noopener">Política de Uso Aceitável</a>.</p>
+        <label class="acceptance"><input type="checkbox" name="accepted" required> <span>Li e aceito os Termos de Uso e a Política de Uso Aceitável.</span></label>
+      </div>
+      <p class="privacy">Saiba como seus dados são tratados na <a href="juridico.html#privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+      <button type="submit">Salvar e entrar no Radar</button>
+    </form>
+    <p id="legal-acceptance-status" role="status">Carregando sua conta…</p>
+    <a class="back" href="index.html">Voltar ao site</a>
+  </main>
+  <script>
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const slides = document.querySelectorAll(".background span");
+      let activeSlide = 0;
+      setInterval(() => {
+        slides[activeSlide].classList.remove("active");
+        activeSlide = (activeSlide + 1) % slides.length;
+        slides[activeSlide].classList.add("active");
+      }, 6500);
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const form = document.getElementById("legal-acceptance-form");
+      const status = document.getElementById("legal-acceptance-status");
+      const button = form.querySelector("button");
+      const checkbox = form.elements.accepted;
+      const select = form.elements.profile;
+      const options = new Set(Array.from(select.options, option => option.value).filter(Boolean));
+      const { url, key } = window.radarSupabaseConfig || {};
+
+      try {
+        if (!url || !key || !window.supabase) throw new Error("Autenticação indisponível");
+        const client = window.supabase.createClient(url, key);
+        const { data, error } = await client.auth.getSession();
+        if (error) throw error;
+        if (!data.session?.user) {
+          window.location.replace("login.html");
+          return;
+        }
+        const user = data.session.user;
+        if (!window.radarLegal.needsFirstAccess(user)) {
+          window.location.replace("app.html");
+          return;
+        }
+
+        const existingProfile = user.user_metadata?.radar_profile_type;
+        select.value = options.has(existingProfile) ? existingProfile : "";
+        const alreadyAccepted = window.radarLegal.hasAccepted(user);
+        checkbox.checked = false;
+        checkbox.disabled = alreadyAccepted;
+        document.getElementById("terms-fields").hidden = alreadyAccepted;
+        status.textContent = "";
+        form.hidden = false;
+        form.addEventListener("submit", async event => {
+          event.preventDefault();
+          if (button.disabled || !options.has(select.value) || (!alreadyAccepted && !checkbox.checked)) return;
+          button.disabled = true;
+          status.textContent = "Salvando seu primeiro acesso…";
+
+          try {
+            const metadata = { radar_profile_type: select.value };
+            if (!alreadyAccepted) {
+              metadata.radar_terms_acceptance = {
+                version: window.radarLegal.version,
+                accepted_at: new Date().toISOString()
+              };
+            }
+            const { data, error } = await client.auth.updateUser({ data: metadata });
+            if (error || window.radarLegal.needsFirstAccess(data?.user)) throw error || new Error("Primeiro acesso não confirmado");
+            window.location.replace("app.html");
+          } catch {
+            status.textContent = "Não foi possível salvar. Tente novamente.";
+            button.disabled = false;
+          }
+        });
+      } catch {
+        status.textContent = "Não foi possível carregar sua conta. Volte ao site e tente entrar novamente.";
+      }
+    });
+  </script>
+</body>
+</html>

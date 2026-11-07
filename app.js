@@ -596,8 +596,9 @@ async function checkActiveSession() {
       .single();
 
     if ((profileError || !profile) && !isVerifiedAdmin) {
-      console.warn("Perfil não encontrado no Supabase. Redirecionando para onboarding...");
-      window.location.href = "formulario-radar.html";
+      console.warn("Perfil não encontrado no Supabase.");
+      showLogin();
+      showLoginAlert("Não foi possível carregar sua conta. Tente novamente.", "error");
       return;
     }
 
@@ -618,9 +619,9 @@ async function checkActiveSession() {
       profile.onboarding_completed = true;
     }
 
-    // 3. Verificação estrita de Onboarding
-    if (!isVerifiedAdmin && !profile.onboarding_completed) {
-      window.location.href = "formulario-radar.html";
+    // 3. Aceite e perfil de primeiro acesso
+    if (!isVerifiedAdmin && profile.role !== "vendedor" && window.radarLegal.needsFirstAccess(user)) {
+      window.location.href = "primeiro-acesso.html";
       return;
     }
 
