@@ -61,11 +61,15 @@
   <script src="aceite-termos.js?v=20261107_nome"></script>
 
   <style>
+    html, body {
+      background-color: #020617;
+      overscroll-behavior: none;
+    }
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #F8FAFC;
       color: #1E293B;
     }
+    #login-screen { min-height: 100dvh; }
     .view-transition {
       transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -86,7 +90,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
+<body class="min-h-screen antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
 
   <!-- 1. TELA DE LOGIN ORIGINAL (SLIDESHOW COM FOTOS DINÂMICAS DE SÃO JOSÉ DOS CAMPOS) -->
   <main id="login-screen" class="view-transition min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden bg-slate-950">
