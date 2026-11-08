@@ -734,7 +734,7 @@
                 </select>
               </div>
 
-              <p class="asaas-field-label">Você informa os dados do cartão na página do Asaas.</p>
+              <p class="asaas-field-label">Compra única para 12 meses, sem renovação automática. Se preferir parcelar, escolha em quantas vezes. Você informa os dados do cartão na página do Asaas.</p>
             </div>
 
             <p class="asaas-field-label">
@@ -986,7 +986,7 @@
       const opt = document.createElement('option');
       opt.value = i;
       opt.textContent = i === 1 ? '1x (à vista)' : `${i}x sem juros`;
-      if (i === 12) opt.selected = true;
+      if (i === 1) opt.selected = true;
       sel.appendChild(opt);
     }
   }
@@ -1001,7 +1001,7 @@
       btnText.textContent = `Conferir valor no Pix • ${planName}`;
     } else if (currentPaymentMethod === 'CREDIT_CARD') {
       const sel = document.getElementById('asaasCardInstallments');
-      const count = sel ? parseInt(sel.value || 12, 10) : 12;
+      const count = parseInt(sel?.value || '1', 10);
       btnText.textContent = `Conferir valor em ${count}x no cartão`;
     } else {
       btnText.textContent = `Conferir valor no boleto • ${planName}`;
@@ -1243,7 +1243,7 @@
 
     if (currentPaymentMethod === 'CREDIT_CARD') {
       const installmentsSel = document.getElementById('asaasCardInstallments');
-      payload.installmentCount = parseInt(installmentsSel?.value || 12, 10);
+      payload.installmentCount = parseInt(installmentsSel?.value || '1', 10);
     }
 
     // Loading State & In-Flight Lock

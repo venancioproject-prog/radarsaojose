@@ -46,10 +46,13 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
         };
       } else {
         assert.equal(route, '/v3/installments/group/payments');
-        const quote = quotePurchase({ plan: 'dash', paymentMethod: 'CREDIT_CARD', installments: 2 });
-        body = { data: quote.installments.map((amount, index) => ({
-          id: index === 0 ? 'payment' : 'payment-2',
-          value: amount / 100, installmentNumber: index + 1, installment: 'group',
+        const count = Number(new URL(url).searchParams.get('limit'));
+        const quote = quotePurchase({ plan: 'dash', paymentMethod: 'CREDIT_CARD', installments: count });
+        const base = Math.floor(quote.amountCents / count);
+        body = { data: quote.installments.map((_, index) => ({
+          id: index === 0 ? 'payment' : 'payment-' + (index + 1),
+          value: (index === count - 1 ? quote.amountCents - base * (count - 1) : base) / 100,
+          installmentNumber: index + 1, installment: 'group',
           billingType: 'CREDIT_CARD', externalReference: 'order'
         })) };
       }
@@ -64,7 +67,7 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
     };
     await module.exports({
       method: 'POST', body: {
-        plan: 'dash', billingType: 'CREDIT_CARD', installmentCount: 1,
+        plan: 'dash', billingType: 'CREDIT_CARD',
         name: 'Cliente Teste', cpfCnpj: '52998224725', ...fields
       }
     }, res);
@@ -78,11 +81,16 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
   assert.equal(hosted.body.payment.invoiceUrl, 'https://sandbox.asaas.com/i/example');
   assert.equal(gatewayCalls[1].route, '/v3/payments');
   assert.equal(gatewayCalls[1].payload.billingType, 'CREDIT_CARD');
+  assert.equal(gatewayCalls[1].payload.value, 3238.80);
+  assert.equal(gatewayCalls[1].payload.installmentCount, undefined);
   const installments = await request({ installmentCount: 2 });
   assert.equal(installments.code, 200);
   assert.equal(installments.body.payment.installmentCount, 2);
   assert.equal(gatewayCalls[3].payload.installmentCount, 2);
   assert.equal(gatewayCalls[4].route, '/v3/installments/group/payments');
+  const rounded = await request({ installmentCount: 7 });
+  assert.equal(rounded.code, 200);
+  assert.equal(rounded.body.payment.installmentCount, 7);
   assert.doesNotMatch(JSON.stringify(gatewayCalls), /creditCard|ccv/i);
   assert.doesNotMatch(modal, /asaasCard(?:Number|Cvv|Expiry)|payload\.creditCard/);
 });

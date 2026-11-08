@@ -266,7 +266,7 @@ module.exports = async function handler(req, res) {
     if (!['PIX', 'CREDIT_CARD', 'BOLETO'].includes(paymentMethod)) {
       throw new billing.BillingError(400, 'INVALID_PAYMENT_METHOD');
     }
-    const count = paymentMethod === 'CREDIT_CARD' ? Number(body.installmentCount || 12) : 1;
+    const count = paymentMethod === 'CREDIT_CARD' ? Number(body.installmentCount ?? 1) : 1;
     const now = new Date();
     const current = await billing.subscription(user.id);
     const active = current && current.status === 'active' && Date.parse(current.period_end) > now.getTime();
@@ -469,7 +469,9 @@ module.exports = async function handler(req, res) {
             !Number.isInteger(number) || number < 1 || number > quote.installments.length || numbers.has(number) ||
             entry.externalReference !== order.id || entry.installment !== payment.installment ||
             entry.billingType !== paymentMethod || !Number.isSafeInteger(amount) || amount <= 0 ||
-            Math.abs(amount - quote.installments[number - 1]) > 1) {
+            // Asaas can accumulate rounding on the final installment. The
+            // total is checked below after validating every earlier payment.
+            (number < quote.installments.length && Math.abs(amount - quote.installments[number - 1]) > 1)) {
           throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
         }
         paymentIds.add(entry.id);
