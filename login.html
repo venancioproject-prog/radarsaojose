@@ -227,7 +227,31 @@
             class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-600 transition-all">
         </div>
 
-        <button 
+        <fieldset id="registration-profile" hidden disabled class="space-y-3">
+          <label for="register-profile" class="block text-xs font-bold uppercase tracking-wider text-slate-600">Qual é o seu perfil?</label>
+          <select id="register-profile" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800">
+            <option value="">Selecione seu perfil</option>
+        <option value="empresario">Empresário(a) ou empreendedor(a)</option>
+        <option value="gestor">Diretor(a) ou gestor(a) de empresa</option>
+        <option value="marketing">Profissional de marketing</option>
+        <option value="agencia">Profissional de agência ou publicidade</option>
+        <option value="investidor">Investidor(a)</option>
+        <option value="imobiliario">Profissional do setor imobiliário</option>
+        <option value="consultor">Consultor(a) de negócios</option>
+        <option value="inteligencia">Profissional de pesquisa ou inteligência de mercado</option>
+        <option value="setor_publico">Profissional do setor público</option>
+        <option value="comunicacao">Jornalista ou profissional de comunicação</option>
+        <option value="professor">Professor(a)</option>
+        <option value="estudante">Estudante</option>
+        <option value="outros">Outros</option>
+          </select>
+          <label class="flex items-start gap-2 text-sm text-slate-700">
+            <input type="checkbox" id="register-terms" required class="mt-1">
+            <span>Li e aceito os <a href="juridico.html#termos" target="_blank" rel="noopener" class="underline">Termos de Uso</a> e a <a href="juridico.html#uso-aceitavel" target="_blank" rel="noopener" class="underline">Política de Uso Aceitável</a>.</span>
+          </label>
+        </fieldset>
+
+        <button
           type="submit"
           id="btn-login" 
           class="w-full py-3.5 px-4 bg-brand-900 hover:bg-brand-800 active:scale-[0.99] text-white font-bold rounded-xl text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mt-4"
@@ -265,6 +289,8 @@
       const btnText = document.getElementById('btn-login-text');
       const googleLabel = document.getElementById('googleBtnLabel');
       const registering = mode === 'register';
+      const registrationProfile = document.getElementById('registration-profile');
+      registrationProfile.hidden = registrationProfile.disabled = !registering;
       const password = document.getElementById('password');
       const confirmPassword = document.getElementById('password-confirm');
       document.getElementById('field-password-confirm').hidden = !registering;
@@ -441,6 +467,11 @@
 
       showRegistrationError('');
       if (isNewRegister) {
+        const profile = document.getElementById('register-profile');
+        if (!profile.value || !document.getElementById('register-terms').checked) {
+          showRegistrationError('Escolha seu perfil e aceite os termos para continuar.');
+          return false;
+        }
         const confirmation = document.getElementById('password-confirm').value;
         const message = registrationPasswordError(password, confirmation);
         if (message) {
@@ -465,7 +496,15 @@
             password: String(password),
             options: {
               emailRedirectTo: new URL("primeiro-acesso.html?confirmacao=1", window.location.href).href,
-              data: { full_name: nome }
+              data: {
+                full_name: nome,
+                radar_full_name: nome,
+                radar_profile_type: document.getElementById('register-profile').value,
+                radar_terms_acceptance: {
+                  version: window.radarLegal.version,
+                  accepted_at: new Date().toISOString()
+                }
+              }
             }
           });
           if (signUpErr) throw signUpErr;
