@@ -590,7 +590,7 @@ async function checkActiveSession() {
 
     if (sessionError || !session || !session.user) {
       console.info("Nenhuma sessão válida ativa.");
-      showLogin();
+      window.location.replace("login.html");
       return;
     }
 
@@ -749,7 +749,7 @@ async function handleLogout() {
       console.error("Erro ao sair:", err);
     }
   }
-  showLogin();
+  window.location.replace("login.html");
 }
 
 function setLoginLoading(isLoading) {
