@@ -1099,15 +1099,27 @@
     updateSubmitButtonLabel();
   };
 
-  function showCheckoutError(msg) {
+  const FRIENDLY_CHECKOUT_ERRORS = {
+    'ORDER_PENDING_RECONCILIATION': 'Você já possui um pedido de pagamento em andamento. Aguarde a confirmação ou tente novamente em alguns instantes.',
+    'SUBSCRIPTION_REQUIRES_RECONCILIATION': 'Sua assinatura anterior possui pendências de conciliação. Fale com nossa equipe de suporte.',
+    'PRICE_CHANGED': 'O valor da cotação foi atualizado. Por favor, revise o valor antes de confirmar.',
+    'HOSTED_CARD_ONLY': 'O pagamento com cartão é concluído com segurança na fatura oficial do Asaas.',
+    'ASAAS_NOT_CONFIGURED': 'O serviço de pagamentos está em manutenção momentânea. Tente novamente em instantes.',
+    'TOO_MANY_REQUESTS': 'Muitas tentativas em pouco tempo. Aguarde um minuto e tente novamente.',
+    'INVALID_DOCUMENT': 'O CPF ou CNPJ informado possui dígitos inválidos.',
+    'INVALID_NAME': 'Por favor, informe seu nome completo ou razão social.'
+  };
+
+  function showCheckoutError(msg, code) {
+    const message = Object.hasOwn(FRIENDLY_CHECKOUT_ERRORS, code) ? FRIENDLY_CHECKOUT_ERRORS[code] : msg;
     const errBox = document.getElementById('asaasErrorBox');
     const errText = document.getElementById('asaasErrorText');
     if (errBox && errText) {
-      errText.textContent = msg || 'Ocorreu um erro na validação dos dados.';
+      errText.textContent = message || 'Ocorreu um erro na validação dos dados.';
       errBox.classList.add('show');
       errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {
-      alert(msg);
+      alert(message);
     }
   }
 
@@ -1206,7 +1218,7 @@
       });
       const quoted = await quoteResponse.json();
       if (!quoteResponse.ok || !quoted.success || !Number.isSafeInteger(quoted.quote?.amountCents)) {
-        return showCheckoutError(quoted.message || 'Não foi possível conferir o valor da contratação.');
+        return showCheckoutError(quoted.message || 'Não foi possível conferir o valor da contratação.', quoted.code);
       }
       const total = (quoted.quote.amountCents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       const count = quoted.quote.installments.length;
@@ -1226,7 +1238,7 @@
       const data = await response.json();
 
       if (!response.ok || !data.success) {
-        return showCheckoutError(data.message || 'Erro ao processar transação no Asaas.');
+        return showCheckoutError(data.message || 'Não foi possível concluir o pagamento.', data.code);
       }
 
       renderCheckoutSuccessScreen(data);

@@ -300,7 +300,7 @@
       password.autocomplete = registering ? 'new-password' : 'current-password';
       if (registering) password.setAttribute('aria-describedby', 'registration-password-hint');
       else password.removeAttribute('aria-describedby');
-      showRegistrationError('');
+      showLoginMessage('');
 
       if (mode === 'login') {
         tabEntrar.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
@@ -395,7 +395,7 @@
       }
 
       if (!supabaseClient) {
-        alert("Erro de conexão: Cliente de autenticação não inicializado.");
+        showLoginMessage("Não foi possível conectar. Tente novamente em instantes.");
         if (btn) {
           btn.disabled = false;
           btn.innerHTML = '<i class="fa-brands fa-google text-rose-500 text-lg"></i><span>Continuar com Google</span>';
@@ -413,7 +413,7 @@
         if (error) throw error;
       } catch (err) {
         console.error("Erro no login com Google:", err);
-        alert("Não foi possível conectar com o Google: " + (err.message || "Tente novamente mais tarde."));
+        showLoginMessage("Não foi possível conectar com o Google. Tente novamente.");
         if (btn) {
           btn.disabled = false;
           btn.innerHTML = '<i class="fa-brands fa-google text-rose-500 text-lg"></i><span>Continuar com Google</span>';
@@ -438,12 +438,14 @@
       return '';
     }
 
-    function showRegistrationError(message) {
+    function showLoginMessage(message, type = 'error') {
       const notice = document.getElementById('login-error-alert');
+      if (!notice) return;
+      const isError = Boolean(message) && type === 'error';
       notice.textContent = message;
       notice.classList.toggle('hidden', !message);
-      notice.classList.toggle('text-red-800', Boolean(message));
-      notice.classList.toggle('border-red-300', Boolean(message));
+      notice.classList.toggle('text-red-800', isError);
+      notice.classList.toggle('border-red-300', isError);
     }
 
     async function handleAuthSubmit(e) {
@@ -456,26 +458,26 @@
       const nome = document.getElementById('nome')?.value?.trim() || '';
       const isNewRegister = authMode === 'register';
       if (isNewRegister && nome.length < 2) {
-        alert('Informe seu nome completo.');
+        showLoginMessage('Informe seu nome completo.');
         return false;
       }
 
       if (!email || !password) {
-        alert("Por favor, preencha todos os campos.");
+        showLoginMessage("Preencha o e-mail e a senha.");
         return false;
       }
 
-      showRegistrationError('');
+      showLoginMessage('');
       if (isNewRegister) {
         const profile = document.getElementById('register-profile');
         if (!profile.value || !document.getElementById('register-terms').checked) {
-          showRegistrationError('Escolha seu perfil e aceite os termos para continuar.');
+          showLoginMessage('Escolha seu perfil e aceite os termos para continuar.');
           return false;
         }
         const confirmation = document.getElementById('password-confirm').value;
         const message = registrationPasswordError(password, confirmation);
         if (message) {
-          showRegistrationError(message);
+          showLoginMessage(message);
           return false;
         }
       }
@@ -553,7 +555,10 @@
         }
       } catch (err) {
         console.error("Erro na autenticação:", err);
-        alert("Erro ao autenticar: " + (err.message || "Verifique suas credenciais."));
+        showLoginMessage(err?.code === "email_not_confirmed"
+          ? "Confirme seu e-mail antes de entrar na conta."
+          : isNewRegister ? "Não foi possível criar a conta. Confira os dados e tente novamente."
+          : "Não foi possível entrar. Confira o e-mail e a senha.");
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
