@@ -154,6 +154,10 @@
       </div>
 
       <div id="login-error-alert" role="alert" class="hidden mb-4 p-3 rounded-xl text-xs font-semibold border transition-all"></div>
+      <div id="confirmation-help" class="hidden mb-4">
+        <button id="resend-confirmation" type="button" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-bold text-slate-800 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60">Reenviar e-mail de confirmação</button>
+        <p id="confirmation-status" role="status" class="mt-2 text-xs text-slate-700"></p>
+      </div>
 
       <!-- Formulário de Login (Original) -->
       <form id="login-form" class="space-y-4" onsubmit="handleAuthSubmit(event); return false;">
@@ -438,7 +442,66 @@
       return '';
     }
 
+    const confirmationHelp = document.getElementById('confirmation-help');
+    const resendButton = document.getElementById('resend-confirmation');
+    const confirmationStatus = document.getElementById('confirmation-status');
+    const emailField = document.getElementById('email');
+    let pendingConfirmationEmail = '';
+    let resendInProgress = false;
+    let resendAvailableAt = 0;
+
+    function confirmationRedirectUrl() {
+      return new URL("primeiro-acesso.html?confirmacao=1", window.location.href).href;
+    }
+
+    function updateResendButton() {
+      const waiting = Date.now() < resendAvailableAt;
+      resendButton.disabled = resendInProgress || waiting;
+      resendButton.textContent = resendInProgress ? 'Reenviando…' :
+        waiting ? 'Aguarde para reenviar' : 'Reenviar e-mail de confirmação';
+    }
+
+    emailField.addEventListener('input', () => {
+      if (pendingConfirmationEmail) showLoginMessage('');
+    });
+
+    resendButton.addEventListener('click', async () => {
+      const email = pendingConfirmationEmail;
+      if (!email || authMode !== 'login' || emailField.value.trim() !== email ||
+          resendInProgress || Date.now() < resendAvailableAt) return;
+
+      resendInProgress = true;
+      updateResendButton();
+      confirmationStatus.textContent = 'Solicitando reenvio…';
+      let feedback = 'Não foi possível reenviar agora. Tente novamente em instantes.';
+      try {
+        const { error } = await supabaseClient.auth.resend({
+          type: 'signup',
+          email,
+          options: { emailRedirectTo: confirmationRedirectUrl() }
+        });
+        if (error) throw error;
+        feedback = 'Reenvio solicitado. Confira sua caixa de entrada e a pasta de spam ou lixo eletrônico.';
+        resendAvailableAt = Date.now() + 60000;
+      } catch (error) {
+        if (error?.status === 429 || error?.code === 'over_email_send_rate_limit') {
+          feedback = 'Aguarde pelo menos um minuto antes de pedir outro e-mail.';
+          resendAvailableAt = Date.now() + 60000;
+        }
+      } finally {
+        resendInProgress = false;
+        updateResendButton();
+        if (resendAvailableAt > Date.now()) {
+          setTimeout(updateResendButton, resendAvailableAt - Date.now() + 10);
+        }
+        if (pendingConfirmationEmail === email) confirmationStatus.textContent = feedback;
+      }
+    });
+
     function showLoginMessage(message, type = 'error') {
+      pendingConfirmationEmail = '';
+      confirmationHelp.classList.add('hidden');
+      confirmationStatus.textContent = '';
       const notice = document.getElementById('login-error-alert');
       if (!notice) return;
       const isError = Boolean(message) && type === 'error';
@@ -497,7 +560,7 @@
             email,
             password: String(password),
             options: {
-              emailRedirectTo: new URL("primeiro-acesso.html?confirmacao=1", window.location.href).href,
+              emailRedirectTo: confirmationRedirectUrl(),
               data: {
                 full_name: nome,
                 radar_full_name: nome,
@@ -555,10 +618,16 @@
         }
       } catch (err) {
         console.error("Erro na autenticação:", err);
-        showLoginMessage(err?.code === "email_not_confirmed"
-          ? "Confirme seu e-mail antes de entrar na conta."
-          : isNewRegister ? "Não foi possível criar a conta. Confira os dados e tente novamente."
+        if (!isNewRegister && err?.code === "email_not_confirmed" &&
+            authMode === 'login' && emailField.value.trim() === email) {
+          showLoginMessage("Para entrar, confirme seu e-mail. Se não encontrar a mensagem na caixa de entrada, confira também o spam ou lixo eletrônico.");
+          pendingConfirmationEmail = email;
+          updateResendButton();
+          confirmationHelp.classList.remove('hidden');
+        } else {
+          showLoginMessage(isNewRegister ? "Não foi possível criar a conta. Confira os dados e tente novamente."
           : "Não foi possível entrar. Confira o e-mail e a senha.");
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
