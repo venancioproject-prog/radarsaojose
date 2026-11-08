@@ -464,6 +464,7 @@
             email,
             password: String(password),
             options: {
+              emailRedirectTo: new URL("primeiro-acesso.html?confirmacao=1", window.location.href).href,
               data: { full_name: nome }
             }
           });

@@ -48,6 +48,7 @@
     <img class="brand" src="fotos_radar/logo_login_radar.png?v=20261105" alt="Radar São José">
     <h1>Primeiro acesso</h1>
     <p class="intro">Complete seu perfil para entrar no Radar.</p>
+    <p id="email-confirmed" role="status" hidden>Seu e-mail foi confirmado. Seu acesso ao Radar está liberado.</p>
     <form id="legal-acceptance-form" hidden>
       <label class="profile-label" for="full-name">Nome completo</label>
       <input id="full-name" name="fullName" autocomplete="name" minlength="2" maxlength="120" required>
@@ -96,6 +97,7 @@
       const checkbox = form.elements.accepted;
       const select = form.elements.profile;
       const nameInput = form.elements.fullName;
+      const fromConfirmation = new URLSearchParams(location.search).get("confirmacao") === "1";
       const options = new Set(Array.from(select.options, option => option.value).filter(Boolean));
       const { url, key } = window.radarSupabaseConfig || {};
 
@@ -105,10 +107,24 @@
         const { data, error } = await client.auth.getSession();
         if (error) throw error;
         if (!data.session?.user) {
+          if (fromConfirmation) {
+            status.textContent = "Não foi possível abrir sua sessão. Volte ao login para entrar ou solicitar um novo e-mail.";
+            return;
+          }
           window.location.replace("login.html");
           return;
         }
         const user = data.session.user;
+        if (fromConfirmation && user.email_confirmed_at) {
+          document.getElementById("email-confirmed").hidden = false;
+          if (!window.radarLegal.needsFirstAccess(user)) {
+            const link = document.createElement("a");
+            link.href = "app.html";
+            link.textContent = "Entrar no painel";
+            status.replaceChildren(link);
+            return;
+          }
+        }
         if (!window.radarLegal.needsFirstAccess(user)) {
           window.location.replace("app.html");
           return;
