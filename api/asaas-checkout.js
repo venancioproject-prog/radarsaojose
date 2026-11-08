@@ -295,15 +295,18 @@ module.exports = async function handler(req, res) {
         periodStart: current.period_start, periodEnd: current.period_end, now: now.toISOString()
       });
       const amount = Math.max(0, annual.amountCents - credit);
-      let payable = false;
-      if (paymentMethod === 'PIX' && current.installments_paid === current.installment_count && amount > 0) {
+      let unavailableReason = paymentMethod !== 'PIX' ? 'PIX_REQUIRED' :
+        current.installments_paid !== current.installment_count ? 'INSTALLMENTS_PENDING' :
+        amount <= 0 ? 'ZERO_BALANCE' : null;
+      if (!unavailableReason) {
         try {
-          payable = await billing.db('rpc/billing_annual_upgrade_ready') === true;
-        } catch (_) { /* Fail closed while the database migration is unavailable. */ }
+          if (await billing.db('rpc/billing_annual_upgrade_ready') !== true) unavailableReason = 'UPGRADE_UNAVAILABLE';
+        } catch (_) { unavailableReason = 'UPGRADE_UNAVAILABLE'; }
       }
+      const payable = !unavailableReason;
       quote = {
         kind:'upgrade', termPolicy:'annual_upgrade_v1', annualPriceCents:annual.amountCents,
-        creditCents:credit, amountCents:amount, installments:[amount], payable,
+        creditCents:credit, amountCents:amount, installments:[amount], payable, unavailableReason,
         periodStart:current.period_start, periodEnd:current.period_end
       };
       if (!paywall && !payable) {

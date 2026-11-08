@@ -675,10 +675,15 @@
 
           <!-- Banner Dinâmico de Upgrade In-App & Diferença -->
           <div id="asaasUpgradeBanner" class="asaas-upgrade-callout" style="display: none;">
-            <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> CRÉDITO DO SEU PLANO ATUAL</div>
-            <div id="asaasUpgradeBannerText" class="asaas-upgrade-desc">
-              Pague apenas a diferença para evoluir de plano.
-            </div>
+            <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> COMO O CRÉDITO É CALCULADO</div>
+            <p class="asaas-upgrade-desc">O crédito é a parte do valor do seu plano atual que corresponde ao tempo que ainda falta até o vencimento. Ele é abatido do valor anual do novo plano no Pix.</p>
+            <dl id="asaasUpgradeBreakdown" hidden style="display:grid;grid-template-columns:1fr auto;gap:6px 12px;margin:12px 0;font-size:13px">
+              <dt>Novo plano anual no Pix</dt><dd id="asaasUpgradeAnnual" style="margin:0;text-align:right"></dd>
+              <dt>Crédito pelo tempo restante</dt><dd id="asaasUpgradeCredit" style="margin:0;text-align:right"></dd>
+              <dt><strong>Total a pagar no Pix</strong></dt><dd id="asaasUpgradeTotal" style="margin:0;text-align:right;font-weight:800"></dd>
+            </dl>
+            <p id="asaasUpgradeBannerText" class="asaas-upgrade-desc" role="status"></p>
+            <button type="button" id="asaasRetryUpgrade" class="asaas-method-tab" hidden>Tentar novamente</button>
           </div>
 
           <!-- FORMULÁRIO PRINCIPAL -->
@@ -852,14 +857,43 @@
   let previouslyFocusedElement = null;
   let isUpgradeMode = false;
   let upgradeFromPlan = null;
+  let upgradeQuoteRequest = 0;
 
   function updateUpgradeBanner() {
     const banner = document.getElementById('asaasUpgradeBanner');
     banner.style.display = isUpgradeMode ? 'block' : 'none';
-    if (isUpgradeMode) {
-      const message = document.getElementById('asaasUpgradeBannerText');
-      message.textContent = `Upgrade de ${planNames[upgradeFromPlan]} para ${planNames[currentPlanId]}. O crédito e as parcelas do seu plano precisam ser conferidos antes do pagamento.`;
+  }
+
+  async function loadUpgradeQuote(plan) {
+    const request = ++upgradeQuoteRequest;
+    const userId = window.appState?.user?.id;
+    const message = document.getElementById('asaasUpgradeBannerText');
+    const breakdown = document.getElementById('asaasUpgradeBreakdown');
+    const retry = document.getElementById('asaasRetryUpgrade');
+    const form = document.getElementById('asaasCheckoutForm');
+    form.hidden = breakdown.hidden = retry.hidden = true;
+    message.textContent = 'Calculando seu crédito…';
+    let quote;
+    try {
+      if (userId) quote = await window.getRadarPaywallQuote?.(plan, userId);
+    } catch (_) {}
+    if (request !== upgradeQuoteRequest || window.appState?.user?.id !== userId) return;
+    if (quote?.kind !== 'upgrade' || ![quote.annualPriceCents, quote.creditCents, quote.amountCents].every(Number.isSafeInteger)) {
+      message.textContent = 'Não foi possível consultar seu crédito. Tente novamente em instantes.';
+      retry.hidden = false;
+      return;
     }
+    const money = cents => (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    document.getElementById('asaasUpgradeAnnual').textContent = money(quote.annualPriceCents);
+    document.getElementById('asaasUpgradeCredit').textContent = '− ' + money(quote.creditCents);
+    document.getElementById('asaasUpgradeTotal').textContent = money(quote.amountCents);
+    breakdown.hidden = false;
+    form.hidden = !quote.payable;
+    retry.hidden = quote.payable || quote.unavailableReason === 'INSTALLMENTS_PENDING' || quote.unavailableReason === 'ZERO_BALANCE';
+    message.textContent = quote.payable ? 'Os 12 meses do novo plano começam após a confirmação do Pix.' :
+      quote.unavailableReason === 'INSTALLMENTS_PENDING' ? 'O plano atual tem parcelas pendentes. O upgrade pelo Pix fica disponível após a quitação.' :
+      quote.unavailableReason === 'ZERO_BALANCE' ? 'Seu crédito cobre o valor do novo plano. Fale com o suporte para concluir a troca.' :
+      'O pagamento do upgrade está indisponível no momento. Tente novamente em instantes.';
   }
 
   // Inicialização e injeção do componente no DOM
@@ -869,6 +903,7 @@
     }
     if (!document.getElementById('asaasCheckoutModal')) {
       document.body.insertAdjacentHTML('beforeend', checkoutModalMarkup);
+      document.getElementById('asaasRetryUpgrade').addEventListener('click', () => loadUpgradeQuote(currentPlanId));
       document.getElementById('asaasBackToPlans').addEventListener('click', () => {
         if (!isSubmitting) showPlanCatalog();
       });
@@ -1059,6 +1094,7 @@
   }
 
   function showPlanCatalog() {
+    ++upgradeQuoteRequest;
     const grid = document.getElementById('asaasPlanGrid');
     document.getElementById('asaasPaymentStep').hidden = true;
     grid.hidden = false;
@@ -1072,21 +1108,15 @@
   }
 
   function showPaymentStep(plan) {
+    ++upgradeQuoteRequest;
     currentPlanId = plan;
     isUpgradeMode = (upgradeFromPlan === 'dash' && plan !== 'dash')
       || (upgradeFromPlan === 'report' && plan === 'midia');
     const activePlan = window.appState?.entitlement?.status === 'active' && ['dash', 'report', 'midia'].includes(upgradeFromPlan);
     document.getElementById('asaasCheckoutForm').hidden = isUpgradeMode || activePlan;
-    const userId = window.appState?.user?.id;
-    if (isUpgradeMode && userId && window.getRadarPaywallQuote) {
+    if (isUpgradeMode) {
       window.setAsaasPaymentMethod('PIX');
-      window.getRadarPaywallQuote(plan, userId).then(quote => {
-        if (!quote?.payable || currentPlanId !== plan || !isUpgradeMode ||
-            window.appState?.user?.id !== userId) return;
-        document.getElementById('asaasCheckoutForm').hidden = false;
-        document.getElementById('asaasUpgradeBannerText').textContent =
-          'Seu crédito será aplicado. A nova vigência de 12 meses começa após a confirmação do Pix.';
-      }).catch(() => {});
+      loadUpgradeQuote(plan);
     }
     document.getElementById('tabPayCard').hidden = isUpgradeMode;
     const activeNotice = document.getElementById('asaasActivePlanNotice');

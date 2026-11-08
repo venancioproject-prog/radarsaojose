@@ -1202,37 +1202,31 @@ window.applyPlanRestrictions = function() {
       if (!dashUpsellBanner) {
         dashUpsellBanner = document.createElement("div");
         dashUpsellBanner.id = "dash-upsell-report-banner";
-        dashUpsellBanner.className = "mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white border border-indigo-500/30 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 animate-in fade-in";
+        dashUpsellBanner.className = "mb-6 p-5 sm:p-7 rounded-none bg-slate-950 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-5";
+        dashUpsellBanner.style.backgroundImage = "linear-gradient(90deg, #071b32f5 0%, #071b32db 55%, #071b32a6 100%), url('web-media/foto_onibus_viaduto-18691779619a.webp')";
+        dashUpsellBanner.style.backgroundSize = "cover";
+        dashUpsellBanner.style.backgroundPosition = "center 35%";
         dashUpsellBanner.innerHTML = `
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400 shrink-0">
-              <i class="fa-solid fa-arrow-trend-up text-lg"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-400/20">Upgrade Disponível</span>
-                <span class="text-xs text-slate-400 font-medium">Plano Dash Ativo</span>
-              </div>
-              <p class="text-xs sm:text-sm font-bold text-white mt-0.5">
-                Evolua para o Plano Report: 8 capítulos executivos e consultor de IA.
-              </p>
-            </div>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-cyan-200">Plano Report · Crédito do seu Dash</p>
+            <p class="text-xl sm:text-2xl font-extrabold text-white mt-1">Leve para a próxima reunião o que os gráficos ajudam a revelar.</p>
+            <p class="text-sm text-slate-100 mt-1">Explore 8 capítulos executivos e tire dúvidas com o consultor de IA. O tempo restante do seu Dash vira crédito no upgrade.</p>
           </div>
           <div class="flex flex-wrap items-center justify-center gap-2.5 shrink-0 w-full md:w-auto">
             <button
               type="button"
               onclick="window.switchMainTab('report')"
-              class="px-4 py-2.5 rounded-xl border border-cyan-300/40 text-cyan-100 text-xs font-bold"
+              class="px-4 py-2.5 rounded-none border border-cyan-200/60 text-cyan-100 text-sm font-bold"
             >
               Ver prévia do Report
             </button>
             <button 
               type="button" 
               onclick="window.openPlanUpgradeModal('report', { isUpgrade: true, fromPlan: 'dash' })" 
-              class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-emerald-400 hover:from-cyan-300 hover:to-emerald-300 text-slate-950 font-black text-xs shadow-md transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+              class="w-full md:w-auto px-5 py-2.5 rounded-none bg-cyan-300 hover:bg-cyan-200 text-slate-950 font-black text-sm transition-colors flex items-center justify-center gap-2"
             >
               <i class="fa-solid fa-bolt text-slate-950 text-xs"></i>
-              <span>Evoluir para o Plano Report</span>
+              <span>Ver meu crédito e fazer upgrade</span>
             </button>
           </div>
         `;
@@ -7677,7 +7671,7 @@ window.getRadarPaywallQuote = async function(plan, userId) {
   const { data } = await supabaseClient.auth.getSession();
   if (data?.session?.user?.id !== userId) return null;
   const response = await fetch('/api/asaas-checkout', {
-    method: 'POST', cache: 'no-store',
+    method: 'POST', cache: 'no-store', signal: AbortSignal.timeout(15000),
     headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + data.session.access_token },
     body: JSON.stringify({ action: 'paywallQuote', plan, billingType: 'PIX' })
   });
