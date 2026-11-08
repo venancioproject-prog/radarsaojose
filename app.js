@@ -1384,6 +1384,12 @@ function updateStatisticalHeader(filteredCount, totalCount) {
 // ==========================================
 // 7. CARREGAMENTO DOS DADOS DO SUPABASE
 // ==========================================
+function setSurveyDemoLabel(isDemo) {
+  document.querySelectorAll('[data-survey-demo-label]').forEach(label => {
+    label.classList.toggle('hidden', !isDemo);
+  });
+}
+
 async function fetchSurveyData() {
   const unlocked = window.radarCanLoadModule?.('dashboard');
   ALL_FILTER_ELEMENTS.forEach(select => {
@@ -1417,7 +1423,7 @@ async function fetchSurveyData() {
     allSurveyRecords = data;
     window.allSurveyRecords = data;
     dataFetchError?.classList.add('hidden');
-    document.getElementById('survey-demo-label')?.classList.toggle('hidden', !isDemo);
+    setSurveyDemoLabel(isDemo);
     if (supabaseTableStatus) supabaseTableStatus.textContent = isDemo ? 'Base de demonstração' : 'Ativo (' + data.length + ' registros)';
     updateSyncTime();
     populateAllSidebarFilters(data);
@@ -1446,7 +1452,7 @@ async function fetchPublicSurvey() {
     processAndRenderDynamicCharts([], preview);
     if (dynamicChartsGrid) dynamicChartsGrid.dataset.publicSurvey = 'true';
     document.getElementById('survey-public-label')?.classList.remove('hidden');
-    document.getElementById('survey-demo-label')?.classList.toggle('hidden', !preview.synthetic);
+    setSurveyDemoLabel(preview.synthetic);
     dataFetchError?.classList.add('hidden');
     window.updateRadarPreviews?.();
   } catch (_) {
