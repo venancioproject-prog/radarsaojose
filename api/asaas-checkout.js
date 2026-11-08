@@ -263,7 +263,10 @@ module.exports = async function handler(req, res) {
     const target = body.plan;
     if (!Object.hasOwn(pricing.PLAN_PRICES_CENTS, target)) throw new billing.BillingError(400, 'INVALID_PLAN');
     const paymentMethod = body.billingType || 'PIX';
-    const count = paymentMethod === 'PIX' ? 1 : Number(body.installmentCount || 12);
+    if (!['PIX', 'CREDIT_CARD', 'BOLETO'].includes(paymentMethod)) {
+      throw new billing.BillingError(400, 'INVALID_PAYMENT_METHOD');
+    }
+    const count = paymentMethod === 'CREDIT_CARD' ? Number(body.installmentCount || 12) : 1;
     const now = new Date();
     const current = await billing.subscription(user.id);
     const active = current && current.status === 'active' && Date.parse(current.period_end) > now.getTime();
@@ -289,24 +292,25 @@ module.exports = async function handler(req, res) {
           !Number.isSafeInteger(previousAmount) || previousAmount <= 0) {
         throw new billing.BillingError(409, 'UPGRADE_REQUIRES_REVIEW');
       }
-      const annual = pricing.quotePurchase({ plan: target });
+      const annual = pricing.quotePurchase({ plan: target, paymentMethod, installments: count });
       const credit = pricing.quoteAnnualUpgradeCredit({
         previousAmountCents: previousAmount,
         periodStart: current.period_start, periodEnd: current.period_end, now: now.toISOString()
       });
       const amount = Math.max(0, annual.amountCents - credit);
-      let unavailableReason = paymentMethod !== 'PIX' ? 'PIX_REQUIRED' :
-        current.installments_paid !== current.installment_count ? 'INSTALLMENTS_PENDING' :
+      let unavailableReason = current.installments_paid !== current.installment_count ? 'INSTALLMENTS_PENDING' :
         amount <= 0 ? 'ZERO_BALANCE' : null;
       if (!unavailableReason) {
         try {
-          if (await billing.db('rpc/billing_annual_upgrade_ready') !== true) unavailableReason = 'UPGRADE_UNAVAILABLE';
+          const readiness = paymentMethod === 'PIX' ? 'billing_annual_upgrade_ready' : 'billing_annual_upgrade_methods_ready';
+          if (await billing.db('rpc/' + readiness) !== true) unavailableReason = 'UPGRADE_UNAVAILABLE';
         } catch (_) { unavailableReason = 'UPGRADE_UNAVAILABLE'; }
       }
       const payable = !unavailableReason;
       quote = {
         kind:'upgrade', termPolicy:'annual_upgrade_v1', annualPriceCents:annual.amountCents,
-        creditCents:credit, amountCents:amount, installments:[amount], payable, unavailableReason,
+        creditCents:credit, amountCents:amount,
+        installments:amount > 0 ? pricing.splitInstallments(amount, count) : [0], payable, unavailableReason,
         periodStart:current.period_start, periodEnd:current.period_end
       };
       if (!paywall && !payable) {
@@ -317,6 +321,10 @@ module.exports = async function handler(req, res) {
       try {
         quote = pricing.quotePurchase({plan:target, paymentMethod:paywall ? 'PIX' : paymentMethod, installments:paywall ? 1 : count});
       } catch (error) { throw new billing.BillingError(409, error.message); }
+      if (!paywall && paymentMethod === 'BOLETO' &&
+          await billing.db('rpc/billing_annual_upgrade_methods_ready') !== true) {
+        throw new billing.BillingError(503, 'BILLING_UNAVAILABLE');
+      }
       const end = new Date(now); end.setUTCFullYear(end.getUTCFullYear()+1);
       quote = {...quote, kind:'purchase', periodStart:now.toISOString(), periodEnd:end.toISOString()};
     }
@@ -423,17 +431,19 @@ module.exports = async function handler(req, res) {
         }
       }
     }
+    const dueDate = new Date(now.getTime() + (paymentMethod === 'BOLETO' ? 2 * 86400000 : 0));
     const orders = await billing.db('billing_orders', {method:'POST',headers:{Prefer:'return=representation'},body:JSON.stringify({
       user_id:user.id, subscription_id:active ? current.id : null, target_plan:target, kind:quote.kind,
       amount_cents:quote.amountCents, credit_cents:quote.creditCents || 0, expected_version:active ? current.version : null,
       period_start:quote.periodStart, period_end:quote.periodEnd, payment_method:paymentMethod,
+      ...(paymentMethod === 'BOLETO' ? {expires_at:new Date(dueDate.getTime() + 2 * 86400000).toISOString()} : {}),
       installment_count:quote.installments.length, quote:{...quote, customerEmail:user.email, customerName:name}})});
     const order = orders?.[0];
     if (!order?.id) throw new billing.BillingError(503, 'ORDER_NOT_PERSISTED');
     const customer = await asaas('/customers',{name,email:user.email,cpfCnpj:document.clean,
       mobilePhone:cleanPhone,notificationDisabled:ASAAS_ENVIRONMENT === 'sandbox'});
     if (!customer.id) throw new billing.BillingError(502, 'ASAAS_CUSTOMER_MISSING');
-    const payload = {customer:customer.id,billingType:paymentMethod,dueDate:now.toISOString().slice(0,10),
+    const payload = {customer:customer.id,billingType:paymentMethod,dueDate:dueDate.toISOString().slice(0,10),
       description:plan.description,externalReference:order.id};
     if (paymentMethod === 'CREDIT_CARD' && quote.installments.length > 1) {
       payload.totalValue = quote.amountCents/100;

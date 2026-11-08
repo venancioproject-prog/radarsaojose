@@ -676,17 +676,25 @@
           <!-- Banner Dinâmico de Upgrade In-App & Diferença -->
           <div id="asaasUpgradeBanner" class="asaas-upgrade-callout" style="display: none;">
             <div class="asaas-upgrade-pill"><i class="fa-solid fa-arrow-trend-up"></i> COMO O CRÉDITO É CALCULADO</div>
-            <p class="asaas-upgrade-desc">O crédito é a parte do valor do seu plano atual que corresponde ao tempo que ainda falta até o vencimento. Ele é abatido do valor anual do novo plano no Pix.</p>
+            <p class="asaas-upgrade-desc">O crédito corresponde ao tempo restante do seu plano atual e é abatido do preço anual do novo plano. O preço inclui 10% de desconto quando você escolhe Pix.</p>
             <dl id="asaasUpgradeBreakdown" hidden style="display:grid;grid-template-columns:1fr auto;gap:6px 12px;margin:12px 0;font-size:13px">
-              <dt>Novo plano anual no Pix</dt><dd id="asaasUpgradeAnnual" style="margin:0;text-align:right"></dd>
+              <dt>Novo plano anual</dt><dd id="asaasUpgradeAnnual" style="margin:0;text-align:right"></dd>
               <dt>Crédito pelo tempo restante</dt><dd id="asaasUpgradeCredit" style="margin:0;text-align:right"></dd>
-              <dt><strong>Total a pagar no Pix</strong></dt><dd id="asaasUpgradeTotal" style="margin:0;text-align:right;font-weight:800"></dd>
+              <dt><strong>Total a pagar</strong></dt><dd id="asaasUpgradeTotal" style="margin:0;text-align:right;font-weight:800"></dd>
             </dl>
             <p id="asaasUpgradeBannerText" class="asaas-upgrade-desc" role="status"></p>
             <button type="button" id="asaasRetryUpgrade" class="asaas-method-tab" hidden>Tentar novamente</button>
           </div>
 
           <!-- FORMULÁRIO PRINCIPAL -->
+          <div id="asaasPaymentChoices" style="margin-bottom:16px">
+            <p class="asaas-field-label" id="asaasPaymentChoicesLabel">Escolha a forma de pagamento</p>
+            <div class="asaas-methods-nav" role="group" aria-labelledby="asaasPaymentChoicesLabel">
+              <button type="button" aria-pressed="true" id="tabPayPix" onclick="window.setAsaasPaymentMethod('PIX')" class="asaas-method-tab active">Pix</button>
+              <button type="button" aria-pressed="false" id="tabPayCard" onclick="window.setAsaasPaymentMethod('CREDIT_CARD')" class="asaas-method-tab">Cartão</button>
+              <button type="button" aria-pressed="false" id="tabPayBoleto" onclick="window.setAsaasPaymentMethod('BOLETO')" class="asaas-method-tab">Boleto</button>
+            </div>
+          </div>
           <form id="asaasCheckoutForm" onsubmit="window.handleAsaasCheckoutSubmit(event)" class="asaas-form-container">
 
             <!-- Alerta de Erro Amigável -->
@@ -715,19 +723,6 @@
             <div class="asaas-field-group">
               <label class="asaas-field-label" for="asaasPayerCpf">CPF ou CNPJ (obrigatório para nota) *</label>
               <input type="text" id="asaasPayerCpf" required placeholder="000.000.000-00 ou 00.000.000/0000-00" class="asaas-text-input" />
-            </div>
-
-            <!-- MÉTODOS DE PAGAMENTO -->
-            <div>
-              <label class="asaas-field-label">Escolha a Forma de Pagamento</label>
-              <div class="asaas-methods-nav" role="tablist">
-                <button type="button" role="tab" aria-selected="true" id="tabPayPix" onclick="window.setAsaasPaymentMethod('PIX')" class="asaas-method-tab active">
-                  <i class="fa-brands fa-pix text-emerald-400"></i> PIX
-                </button>
-                <button type="button" role="tab" aria-selected="false" id="tabPayCard" onclick="window.setAsaasPaymentMethod('CREDIT_CARD')" class="asaas-method-tab">
-                  <i class="fa-regular fa-credit-card text-sky-400"></i> Cartão (12x)
-                </button>
-              </div>
             </div>
 
             <!-- CONTEÚDO ESPECÍFICO: CARTÃO DE CRÉDITO -->
@@ -804,25 +799,16 @@
             <div id="resultBoletoBox" style="display:none;" class="asaas-boleto-box">
               <div class="asaas-success-card">
                 <h4 class="asaas-success-title"><i class="fa-solid fa-barcode"></i> Boleto Emitido com Sucesso!</h4>
-                <p class="asaas-success-text">Vencimento em 3 dias úteis. Acesso liberado automaticamente após a compensação.</p>
-              </div>
-
-              <div class="asaas-copy-container">
-                <label class="asaas-field-label">Linha Digitável:</label>
-                <div class="asaas-copy-input-row">
-                  <input type="text" id="asaasBoletoLinhaInput" readonly class="asaas-copy-text" />
-                  <button type="button" id="btnCopyBoleto" onclick="window.copyAsaasBoletoCode(this)" class="asaas-btn-copy-code">
-                    <i class="fa-solid fa-copy"></i> Copiar
-                  </button>
-                </div>
+                <p class="asaas-success-text">Confira a data de vencimento e a linha digitável na fatura do Asaas. O plano é liberado após a confirmação do pagamento.</p>
               </div>
 
               <div>
                 <a id="asaasBoletoDownloadLink" href="#" target="_blank" rel="noopener noreferrer" class="asaas-btn-slip">
                   <i class="fa-solid fa-file-pdf"></i>
-                  <span>Visualizar / Baixar Boleto Asaas (PDF)</span>
+                  <span>Abrir boleto no Asaas</span>
                   <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                 </a>
+                <p id="asaasBoletoUnavailable" class="asaas-success-text" hidden>O link do boleto está indisponível. Consulte o suporte com o ID da cobrança abaixo.</p>
               </div>
             </div>
 
@@ -875,7 +861,7 @@
     message.textContent = 'Calculando seu crédito…';
     let quote;
     try {
-      if (userId) quote = await window.getRadarPaywallQuote?.(plan, userId);
+      if (userId) quote = await window.getRadarPaywallQuote?.(plan, userId, currentPaymentMethod);
     } catch (_) {}
     if (request !== upgradeQuoteRequest || window.appState?.user?.id !== userId) return;
     if (quote?.kind !== 'upgrade' || ![quote.annualPriceCents, quote.creditCents, quote.amountCents].every(Number.isSafeInteger)) {
@@ -890,8 +876,8 @@
     breakdown.hidden = false;
     form.hidden = !quote.payable;
     retry.hidden = quote.payable || quote.unavailableReason === 'INSTALLMENTS_PENDING' || quote.unavailableReason === 'ZERO_BALANCE';
-    message.textContent = quote.payable ? 'Os 12 meses do novo plano começam após a confirmação do Pix.' :
-      quote.unavailableReason === 'INSTALLMENTS_PENDING' ? 'O plano atual tem parcelas pendentes. O upgrade pelo Pix fica disponível após a quitação.' :
+    message.textContent = quote.payable ? 'Os 12 meses do novo plano começam após a confirmação do pagamento.' :
+      quote.unavailableReason === 'INSTALLMENTS_PENDING' ? 'O plano atual tem parcelas pendentes. O upgrade fica disponível após a quitação.' :
       quote.unavailableReason === 'ZERO_BALANCE' ? 'Seu crédito cobre o valor do novo plano. Fale com o suporte para concluir a troca.' :
       'O pagamento do upgrade está indisponível no momento. Tente novamente em instantes.';
   }
@@ -1017,6 +1003,8 @@
       const sel = document.getElementById('asaasCardInstallments');
       const count = sel ? parseInt(sel.value || 12, 10) : 12;
       btnText.textContent = `Conferir valor em ${count}x no cartão`;
+    } else {
+      btnText.textContent = `Conferir valor no boleto • ${planName}`;
     }
   }
 
@@ -1116,9 +1104,8 @@
     document.getElementById('asaasCheckoutForm').hidden = isUpgradeMode || activePlan;
     if (isUpgradeMode) {
       window.setAsaasPaymentMethod('PIX');
-      loadUpgradeQuote(plan);
     }
-    document.getElementById('tabPayCard').hidden = isUpgradeMode;
+    document.getElementById('asaasPaymentChoices').hidden = activePlan && !isUpgradeMode;
     const activeNotice = document.getElementById('asaasActivePlanNotice');
     activeNotice.hidden = !activePlan || isUpgradeMode;
     updateUpgradeBanner();
@@ -1127,6 +1114,7 @@
 
     document.getElementById('asaasPlanGrid').hidden = true;
     document.getElementById('asaasPaymentStep').hidden = false;
+    if (isUpgradeMode) loadUpgradeQuote(plan);
     const title = document.getElementById('asaasModalTitle');
     title.textContent = isUpgradeMode ? `${planNames[plan]} · Upgrade` : planNames[plan] + ' · Pagamento via Asaas';
     title.focus();
@@ -1134,21 +1122,16 @@
   }
 
   window.setAsaasPaymentMethod = function(method) {
-    if (method !== 'PIX' && method !== 'CREDIT_CARD') return;
+    if (isSubmitting || !['PIX', 'CREDIT_CARD', 'BOLETO'].includes(method)) return;
+    const changed = currentPaymentMethod !== method;
     currentPaymentMethod = method;
     hideCheckoutError();
 
-    const tabPix = document.getElementById('tabPayPix');
-    const tabCard = document.getElementById('tabPayCard');
     const cardFields = document.getElementById('asaasCardFields');
-
-    if (tabPix) {
-      tabPix.classList.toggle('active', method === 'PIX');
-      tabPix.setAttribute('aria-selected', method === 'PIX' ? 'true' : 'false');
-    }
-    if (tabCard) {
-      tabCard.classList.toggle('active', method === 'CREDIT_CARD');
-      tabCard.setAttribute('aria-selected', method === 'CREDIT_CARD' ? 'true' : 'false');
+    for (const [id, option] of [['tabPayPix', 'PIX'], ['tabPayCard', 'CREDIT_CARD'], ['tabPayBoleto', 'BOLETO']]) {
+      const button = document.getElementById(id);
+      button?.classList.toggle('active', method === option);
+      button?.setAttribute('aria-pressed', String(method === option));
     }
 
     if (cardFields) {
@@ -1156,6 +1139,8 @@
     }
 
     updateSubmitButtonLabel();
+    if (changed && isUpgradeMode && !document.getElementById('asaasPaymentStep').hidden &&
+        document.getElementById('asaasPlanGrid').hidden) loadUpgradeQuote(currentPlanId);
   };
 
   const FRIENDLY_CHECKOUT_ERRORS = {
@@ -1324,6 +1309,8 @@
     const resultBoletoBox = document.getElementById('resultBoletoBox');
 
     if (form) form.style.display = 'none';
+    const choices = document.getElementById('asaasPaymentChoices');
+    if (choices) choices.hidden = true;
     document.getElementById('asaasBackToPlans').hidden = true;
     if (resultBox) resultBox.classList.add('show');
 
@@ -1378,15 +1365,18 @@
     // 3. Boleto
     else if (payment.billingType === 'BOLETO') {
       if (resultBoletoBox) resultBoletoBox.style.display = 'flex';
-      const boletoInput = document.getElementById('asaasBoletoLinhaInput');
       const slipLink = document.getElementById('asaasBoletoDownloadLink');
-      if (boletoInput && payment.boleto) boletoInput.value = payment.boleto.identificationField || '';
-      if (slipLink && payment.bankSlipUrl) {
-        const url = String(payment.bankSlipUrl).trim();
-        if (/^https?:\/\//i.test(url)) {
-          slipLink.href = url;
+      slipLink.removeAttribute('href');
+      slipLink.hidden = true;
+      try {
+        const url = new URL(payment.invoiceUrl);
+        if (url.protocol === 'https:' && !url.username && !url.password &&
+            (url.hostname === 'asaas.com' || url.hostname.endsWith('.asaas.com'))) {
+          slipLink.href = url.href;
+          slipLink.hidden = false;
         }
-      }
+      } catch (_) {}
+      document.getElementById('asaasBoletoUnavailable').hidden = !slipLink.hidden;
     }
 
     // Preenche resumo
@@ -1508,14 +1498,6 @@
     const btn = buttonElement || document.getElementById('btnCopyPix') || document.querySelector('.asaas-btn-copy-code');
     const val = input ? input.value : '';
     copyTextWithFallback(val, input, btn, 'Chave PIX Copia e Cola copiada com sucesso!');
-  };
-
-  // Cópia da Linha Digitável do Boleto
-  window.copyAsaasBoletoCode = function(buttonElement) {
-    const input = document.getElementById('asaasBoletoLinhaInput');
-    const btn = buttonElement || document.getElementById('btnCopyBoleto') || document.querySelectorAll('.asaas-btn-copy-code')[1];
-    const val = input ? input.value : '';
-    copyTextWithFallback(val, input, btn, 'Linha digitável do boleto copiada com sucesso!');
   };
 
   // Finalização e Desbloqueio da Plataforma

@@ -7667,13 +7667,13 @@ function clearExecutiveCharts() {
   });
 }
 
-window.getRadarPaywallQuote = async function(plan, userId) {
+window.getRadarPaywallQuote = async function(plan, userId, billingType = 'PIX') {
   const { data } = await supabaseClient.auth.getSession();
   if (data?.session?.user?.id !== userId) return null;
   const response = await fetch('/api/asaas-checkout', {
     method: 'POST', cache: 'no-store', signal: AbortSignal.timeout(15000),
     headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + data.session.access_token },
-    body: JSON.stringify({ action: 'paywallQuote', plan, billingType: 'PIX' })
+    body: JSON.stringify({ action: 'paywallQuote', plan, billingType, installmentCount: 1 })
   });
   if (!response.ok) return null;
   return (await response.json()).quote;
