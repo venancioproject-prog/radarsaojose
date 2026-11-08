@@ -22,7 +22,7 @@
         top: 0;
         left: 0;
         width: 100vw;
-        height: 100vh;
+        height: 100dvh;
         z-index: 999999;
         background: rgba(6, 22, 42, 0.85);
         backdrop-filter: blur(12px);
@@ -34,6 +34,7 @@
         opacity: 0;
         visibility: hidden;
         overflow-y: auto;
+        overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
         transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
       }
@@ -145,21 +146,40 @@
 
       .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) {
         max-width: 1120px;
-        max-height: calc(100dvh - 32px);
-        padding: clamp(14px, 2vw, 20px);
+        max-height: none;
+        overflow: visible;
+        padding: 20px 10px 10px;
         border-radius: 20px;
         background: #0a0a0a;
       }
 
       .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) .asaas-top-header {
-        padding-bottom: 10px;
-        margin-bottom: 16px;
+        display: contents;
+      }
+
+      .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) .asaas-brand-badge {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+      }
+
+      .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) .asaas-close-button {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        z-index: 1;
+        width: 32px;
+        height: 32px;
+        background: #242424;
+        color: #fff;
       }
 
       #asaasPlanGrid .plans-grid { margin-top: 0; gap: 4px; }
       #asaasPlanGrid .plan-card { min-width: 0; padding: 16px 14px; }
       #asaasPlanGrid .plan-name { margin-bottom: 8px; }
-      #asaasPlanGrid .plan-price { font-size: 1.85rem; white-space: nowrap; }
+      #asaasPlanGrid .plan-price { font-size: clamp(1.4rem, 2.2vw, 1.85rem); white-space: nowrap; }
       #asaasPlanGrid .plan-price span { display: block; font-size: 0.75rem; margin-bottom: 4px; }
       #asaasPlanGrid .plan-tagline { margin-bottom: 12px; line-height: 1.4; }
       #asaasPlanGrid .plan-features { margin-bottom: 12px; }
@@ -170,12 +190,21 @@
       @media (min-width: 900px) {
         #asaasPlanGrid .plans-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       }
+      @media (min-width: 900px) and (max-height: 760px) {
+        #asaasPlanGrid .plan-card { padding: 13px 10px 10px; }
+        #asaasPlanGrid .plan-tagline { margin-bottom: 7px; line-height: 1.3; }
+        #asaasPlanGrid .plan-features { margin-bottom: 8px; }
+        #asaasPlanGrid .plan-features li { padding: 3px 0; line-height: 1.25; }
+        #asaasPlanGrid .plans-note { margin-top: 7px; }
+      }
+      @media (max-width: 899px) {
+        .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) { padding-top: 42px; }
+      }
       @media (min-width: 560px) and (max-width: 899px) {
         #asaasPlanGrid .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 6px; }
       }
       @media (max-width: 559px) {
         #asaasPlanGrid .plans-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-        .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) { max-height: calc(100dvh - 16px); }
       }
       #asaasPlanGrid .btn-plan[data-suggested] { outline: 2px solid #19afea; }
       #asaasPaymentStep > button { margin-bottom: 16px; }
@@ -1038,8 +1067,8 @@
     });
     const title = document.getElementById('asaasModalTitle');
     title.textContent = 'Escolha seu plano';
-    title.focus();
-    title.closest('.asaas-modal-dialog').scrollTop = 0;
+    title.focus({ preventScroll: true });
+    document.getElementById('asaasCheckoutModal').scrollTop = 0;
   }
 
   function showPaymentStep(plan) {
