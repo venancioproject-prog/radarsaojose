@@ -561,6 +561,15 @@ async function checkActiveSession() {
   const hash = (window.location.hash || "").replace("#", "").trim();
   if (hash === "historia") {
     showDashboard({ email: "visitante@radarsaojose.com" });
+    if (new URLSearchParams(window.location.search).get("primeiraVisita") === "1" &&
+        !document.getElementById("first-visit-notice")) {
+      const notice = document.createElement("p");
+      notice.id = "first-visit-notice";
+      notice.className = "bg-sky-950 px-4 py-3 text-center text-sm text-white";
+      notice.setAttribute("role", "status");
+      notice.textContent = "Você pode explorar o Radar como visitante. Confira seu e-mail para confirmar o cadastro antes de entrar na sua conta.";
+      dashboardScreen.prepend(notice);
+    }
     return;
   }
 

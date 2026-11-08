@@ -475,7 +475,7 @@
           localStorage.setItem('userRole', 'usuario');
           localStorage.setItem('userPlan', 'gratis');
           if (!signUpData?.session) {
-            alert("Se for necessário confirmar o cadastro, você receberá um e-mail. Confirme o endereço antes de entrar.");
+            window.location.href = "app.html?primeiraVisita=1#historia";
             return;
           }
           window.location.href = "primeiro-acesso.html";
