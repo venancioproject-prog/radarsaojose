@@ -144,11 +144,39 @@
       }
 
       .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) {
-        max-width: 1440px;
+        max-width: 1120px;
+        max-height: calc(100dvh - 32px);
+        padding: clamp(14px, 2vw, 20px);
+        border-radius: 20px;
         background: #0a0a0a;
       }
 
-      #asaasPlanGrid .plans-grid { margin-top: 28px; }
+      .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) .asaas-top-header {
+        padding-bottom: 10px;
+        margin-bottom: 16px;
+      }
+
+      #asaasPlanGrid .plans-grid { margin-top: 0; gap: 4px; }
+      #asaasPlanGrid .plan-card { min-width: 0; padding: 16px 14px; }
+      #asaasPlanGrid .plan-name { margin-bottom: 8px; }
+      #asaasPlanGrid .plan-price { font-size: 1.85rem; white-space: nowrap; }
+      #asaasPlanGrid .plan-price span { display: block; font-size: 0.75rem; margin-bottom: 4px; }
+      #asaasPlanGrid .plan-tagline { margin-bottom: 12px; line-height: 1.4; }
+      #asaasPlanGrid .plan-features { margin-bottom: 12px; }
+      #asaasPlanGrid .plan-features li { padding: 5px 0; gap: 7px; line-height: 1.35; }
+      #asaasPlanGrid .btn-plan { padding: 10px 8px; }
+      #asaasPlanGrid .plans-note { margin-top: 12px; }
+
+      @media (min-width: 900px) {
+        #asaasPlanGrid .plans-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      }
+      @media (min-width: 560px) and (max-width: 899px) {
+        #asaasPlanGrid .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 6px; }
+      }
+      @media (max-width: 559px) {
+        #asaasPlanGrid .plans-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+        .asaas-modal-dialog:has(#asaasPlanGrid:not([hidden])) { max-height: calc(100dvh - 16px); }
+      }
       #asaasPlanGrid .btn-plan[data-suggested] { outline: 2px solid #19afea; }
       #asaasPaymentStep > button { margin-bottom: 16px; }
       #asaasCheckoutModal [hidden] { display: none !important; }
