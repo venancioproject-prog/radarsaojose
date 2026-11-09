@@ -398,7 +398,7 @@ module.exports = async function handler(req, res) {
     if (existing?.length) {
       for (const pendingOrd of existing) {
         const expMs = pendingOrd.expires_at ? Date.parse(pendingOrd.expires_at) : NaN;
-        if (!Number.isFinite(expMs) || expMs > now.getTime()) {
+        if (pendingOrd.asaas_payment_id && (!Number.isFinite(expMs) || expMs > now.getTime())) {
           throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
         }
         // Pending order past expires_at: never unlock by clock alone; verify with Asaas and guard against mid-flight state changes.
