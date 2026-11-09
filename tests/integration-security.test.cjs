@@ -320,7 +320,7 @@ test('Mídia: conta Report recebe 403 em GET /api/media e na tela vê apenas a p
   assert.equal(allowed.body.rows.length, 1);
 
   // Verifica também os endpoints de IA desativados neste lançamento
-  for (const endpointFile of ['consultor.js', 'oraculo.js']) {
+  for (const endpointFile of ['consultor.js', '_oraculo.js']) {
     const handler = require(path.join(rootDir, 'api', endpointFile));
     const res = {
       statusCode: 200,
