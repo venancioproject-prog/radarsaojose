@@ -2,6 +2,11 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    if (window.location.hash && /type=recovery/i.test(window.location.hash)) {
+      window.location.replace("recuperar-senha.html?modo=redefinir" + window.location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Acesso ao Painel | Radar São José</title>
     <!-- Favicon Oficial Radar São José -->
@@ -343,6 +348,7 @@
 
     // Checa se o usuário acabou de voltar autenticado do Google OAuth
     async function checkGoogleCallback() {
+      if (window.location.hash && /type=recovery/i.test(window.location.hash)) return;
       if (supabaseClient) {
         try {
           const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();

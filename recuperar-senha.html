@@ -49,7 +49,9 @@
       const update = document.getElementById("update");
       const status = document.getElementById("status");
       const mode = new URLSearchParams(location.search).get("modo");
-      const recovery = mode === "redefinir";
+      const hash = window.location.hash || "";
+      const hasRecoveryHash = /type=recovery/i.test(hash) || /access_token=/i.test(hash);
+      const recovery = mode === "redefinir" || hasRecoveryHash;
       const confirmation = mode === "confirmar";
       const { url, key } = window.radarSupabaseConfig || {};
       if (!url || !key || !window.supabase) {
@@ -97,17 +99,29 @@
       const recoveryWait = setTimeout(() => {
         status.textContent = "Não foi possível confirmar o link. Você pode solicitar outro.";
         document.getElementById("retry").hidden = false;
-      }, 5000);
-      client.auth.onAuthStateChange((event, session) => {
-        if (event !== "PASSWORD_RECOVERY" || !session?.user) return;
+      }, 7000);
+
+      function showPasswordForm(user) {
+        if (!user?.id) return;
         clearTimeout(recoveryWait);
-        recoveryUserId = session.user.id;
+        recoveryUserId = user.id;
         document.getElementById("title").textContent = "Criar nova senha";
         document.getElementById("retry").hidden = true;
+        request.hidden = true;
         update.hidden = false;
         status.textContent = "";
+      }
+
+      client.auth.onAuthStateChange((event, session) => {
+        if (session?.user && (event === "PASSWORD_RECOVERY" || recovery)) {
+          showPasswordForm(session.user);
+        }
       });
-      client.auth.getSession().catch(() => {});
+      client.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user && recovery) {
+          showPasswordForm(session.user);
+        }
+      }).catch(() => {});
 
       update.addEventListener("submit", async event => {
         event.preventDefault();
