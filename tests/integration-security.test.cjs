@@ -503,3 +503,201 @@ test('Termos de uso e privacidade: sistema usa exclusivamente o registro imutáv
   );
   await db.exec('RESET ROLE');
 });
+
+
+test('Migração 020 isolada da 021: cadastro novo + confirmação de e-mail, conta antiga e compatibilidade com Preview antigo no mesmo banco', async () => {
+  const db = new PGlite();
+  const oldAccountId = '00000000-0000-4000-8000-000000000901';
+  const newIntegratedUserId = '00000000-0000-4000-8000-000000000902';
+  const newOldPreviewUserId = '00000000-0000-4000-8000-000000000903';
+
+  await db.exec(`
+    CREATE ROLE anon NOLOGIN;
+    CREATE ROLE authenticated NOLOGIN;
+    CREATE ROLE service_role NOLOGIN BYPASSRLS;
+    CREATE SCHEMA auth;
+    CREATE TABLE auth.users(
+      id uuid PRIMARY KEY,
+      email text,
+      raw_app_meta_data jsonb DEFAULT '{}'::jsonb,
+      raw_user_meta_data jsonb DEFAULT '{}'::jsonb,
+      email_confirmed_at timestamptz
+    );
+    CREATE FUNCTION auth.jwt() RETURNS jsonb LANGUAGE sql STABLE AS $$
+      SELECT COALESCE(NULLIF(current_setting('request.jwt.claims', true), ''), '{}')::jsonb
+    $$;
+    CREATE FUNCTION auth.role() RETURNS text LANGUAGE sql STABLE AS $$ SELECT auth.jwt()->>'role' $$;
+    CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT (auth.jwt()->>'sub')::uuid $$;
+    CREATE TABLE auth.mfa_factors(id uuid DEFAULT gen_random_uuid() PRIMARY KEY, user_id uuid, status text);
+    GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
+    GRANT SELECT ON auth.users TO service_role;
+  `);
+
+  // Aplica somente até a 019 primeiro, cria uma conta antiga ANTES da 020, e depois aplica a 020 (sem a 021!)
+  for (const m of [
+    '010_admin_authority.sql',
+    '011_billing_state.sql',
+    '012_security_and_pool_hardening.sql',
+    '013_restrict_survey_responses.sql',
+    '014_account_mfa.sql',
+    '015_billing_annual_upgrade.sql',
+    '016_report_private_documents.sql',
+    '017_paid_data_rls.sql',
+    '018_billing_upgrade_payment_methods.sql',
+    '019_billing_installment_progress_version.sql'
+  ]) {
+    await db.exec(readMigration(m));
+  }
+
+  // Conta antiga criada ANTES da migração 020 (possui user_metadata da versão antiga, mas não terá linha em terms_acceptances)
+  await db.query(
+    `INSERT INTO auth.users (id, email, raw_user_meta_data, email_confirmed_at)
+     VALUES ($1, 'conta-antiga@example.invalid', $2::jsonb, now() - interval '10 days')`,
+    [
+      oldAccountId,
+      JSON.stringify({
+        full_name: 'Cliente Antigo',
+        radar_full_name: 'Cliente Antigo',
+        radar_profile_type: 'gestao',
+        radar_terms_acceptance: { version: '0.2', accepted_at: '2026-10-01T12:00:00.000Z' }
+      })
+    ]
+  );
+
+  // Agora aplica SOMENTE a migração 020 (separada da 021)
+  await db.exec(readMigration('020_immutable_terms_acceptance.sql'));
+
+  // 1. Cadastro novo no Preview Integrado + confirmação de e-mail
+  const beforeSignup = Date.now();
+  await db.query(
+    `INSERT INTO auth.users (id, email, raw_user_meta_data, email_confirmed_at)
+     VALUES ($1, 'novo-integrado@example.invalid', $2::jsonb, NULL)`,
+    [
+      newIntegratedUserId,
+      JSON.stringify({
+        full_name: 'Novo Integrado',
+        radar_full_name: 'Novo Integrado',
+        radar_profile_type: 'cidadania',
+        radar_terms_acceptance: { version: '0.2', accepted_at: '1999-01-01T00:00:00.000Z' }
+      })
+    ]
+  );
+  // Confirma o e-mail da conta nova
+  await db.query(`UPDATE auth.users SET email_confirmed_at = now() WHERE id = $1`, [newIntegratedUserId]);
+
+  const integratedTerms = (await db.query(
+    `SELECT terms_version, profile_type, accepted_at FROM public.terms_acceptances WHERE user_id = $1`,
+    [newIntegratedUserId]
+  )).rows;
+  assert.equal(integratedTerms.length, 1, 'Cadastro novo deve gravar aceite em terms_acceptances');
+  assert.equal(integratedTerms[0].terms_version, '0.2');
+  assert.equal(integratedTerms[0].profile_type, 'cidadania');
+  const dbAcceptedMs = Date.parse(integratedTerms[0].accepted_at);
+  assert.ok(dbAcceptedMs >= beforeSignup - 5000, 'accepted_at deve ser a data do banco (now()) e ignorar a data 1999 enviada pelo cliente');
+
+  const sandbox = { window: {}, navigator: { userAgent: 'RadarIntegrated/1.0' }, console };
+  vm.runInNewContext(fs.readFileSync(path.join(rootDir, 'aceite-termos.js'), 'utf8'), sandbox);
+  const radarLegal = sandbox.window.radarLegal;
+
+  function makeClientFor(userId) {
+    return {
+      from(table) {
+        assert.equal(table, 'terms_acceptances');
+        return {
+          select() {
+            const filters = {};
+            return {
+              eq(col, val) { filters[col] = val; return this; },
+              async limit() {
+                await db.exec('RESET ROLE');
+                await db.query(`SELECT set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ role: 'authenticated', sub: userId })]);
+                await db.exec('SET ROLE authenticated');
+                const r = await db.query(
+                  `SELECT id, user_id, terms_version, profile_type, accepted_at FROM public.terms_acceptances WHERE user_id = $1 AND terms_version = $2 LIMIT 1`,
+                  [filters.user_id, filters.terms_version]
+                );
+                await db.exec('RESET ROLE');
+                return { data: r.rows, error: null };
+              }
+            };
+          },
+          async insert(payload) {
+            try {
+              await db.exec('RESET ROLE');
+              await db.query(`SELECT set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ role: 'authenticated', sub: userId })]);
+              await db.exec('SET ROLE authenticated');
+              await db.query(
+                `INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type, user_agent) VALUES ($1, $2, $3, $4)`,
+                [payload.user_id, payload.terms_version, payload.profile_type, payload.user_agent]
+              );
+              await db.exec('RESET ROLE');
+              return { error: null };
+            } catch (err) {
+              await db.exec('RESET ROLE');
+              return { error: err };
+            }
+          }
+        };
+      }
+    };
+  }
+
+  // Após confirmar e-mail, a conta nova no Preview Integrado entra direto porque o registro em terms_acceptances já está gravado no banco
+  const newAccountState = await radarLegal.checkFirstAccess(makeClientFor(newIntegratedUserId), {
+    id: newIntegratedUserId,
+    user_metadata: {
+      full_name: 'Novo Integrado',
+      radar_full_name: 'Novo Integrado',
+      radar_profile_type: 'cidadania',
+      radar_terms_acceptance: { version: '0.2', accepted_at: '1999-01-01T00:00:00.000Z' }
+    }
+  });
+  assert.equal(newAccountState.accepted, true);
+  assert.equal(newAccountState.needsFirstAccess, false);
+  assert.equal(newAccountState.record.terms_version, '0.2');
+
+  // 2. Conta antiga (criada antes da 020):
+  // No Preview Integrado, checkFirstAccess exige a confirmação no primeiro-acesso.html (mantendo nome e perfil já preenchidos)
+  const oldUserObj = {
+    id: oldAccountId,
+    user_metadata: {
+      full_name: 'Cliente Antigo',
+      radar_full_name: 'Cliente Antigo',
+      radar_profile_type: 'gestao',
+      radar_terms_acceptance: { version: '0.2', accepted_at: '2026-10-01T12:00:00.000Z' }
+    }
+  };
+  const oldBefore = await radarLegal.checkFirstAccess(makeClientFor(oldAccountId), oldUserObj);
+  assert.equal(oldBefore.accepted, false, 'Conta antiga sem linha em terms_acceptances deve registrar aceite oficial');
+  assert.equal(oldBefore.needsFirstAccess, true);
+  assert.equal(oldBefore.fullName, 'Cliente Antigo', 'Nome da conta antiga permanece preenchido');
+  assert.equal(oldBefore.profileType, 'gestao', 'Perfil da conta antiga permanece preenchido');
+
+  // Quando a conta antiga confirma no primeiro-acesso.html, o registro oficial é criado com data do banco e libera o acesso
+  const oldRecorded = await radarLegal.recordAcceptance(makeClientFor(oldAccountId), oldUserObj);
+  assert.ok(oldRecorded && oldRecorded.id);
+  const oldAfter = await radarLegal.checkFirstAccess(makeClientFor(oldAccountId), oldUserObj);
+  assert.equal(oldAfter.accepted, true);
+  assert.equal(oldAfter.needsFirstAccess, false);
+
+  // 3. Cadastro novo feito pelo Preview Antigo (codex/asaas-preview) compartilhando o mesmo banco com a 020 aplicada:
+  await db.query(
+    `INSERT INTO auth.users (id, email, raw_user_meta_data, email_confirmed_at)
+     VALUES ($1, 'novo-preview-antigo@example.invalid', $2::jsonb, NULL)`,
+    [
+      newOldPreviewUserId,
+      JSON.stringify({
+        full_name: 'Usuário Preview Antigo',
+        radar_full_name: 'Usuário Preview Antigo',
+        radar_profile_type: 'pesquisa',
+        radar_terms_acceptance: { version: '0.2', accepted_at: new Date().toISOString() }
+      })
+    ]
+  );
+  const oldPreviewProfile = (await db.query(`SELECT id, email, role, plan_type FROM public.profiles WHERE id = $1`, [newOldPreviewUserId])).rows;
+  const oldPreviewTerms = (await db.query(`SELECT terms_version, profile_type FROM public.terms_acceptances WHERE user_id = $1`, [newOldPreviewUserId])).rows;
+  assert.equal(oldPreviewProfile.length, 1, 'Trigger 016 (handle_new_user) continua criando public.profiles normalmente no Preview antigo');
+  assert.equal(oldPreviewTerms.length, 1, 'Trigger 020 (handle_new_user_terms_acceptance) também grava o aceite oficial para cadastros vindos do Preview antigo');
+  assert.equal(oldPreviewTerms[0].terms_version, '0.2');
+  assert.equal(oldPreviewTerms[0].profile_type, 'pesquisa');
+});

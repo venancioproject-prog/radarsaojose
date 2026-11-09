@@ -41,8 +41,12 @@ DECLARE
   v_version text;
   v_profile text;
 BEGIN
-  v_version := nullif(trim(coalesce(new.raw_user_meta_data->'radar_terms_acceptance'->>'version', '')), '');
-  v_profile := nullif(trim(coalesce(new.raw_user_meta_data->>'radar_profile_type', '')), '');
+  IF jsonb_typeof(new.raw_user_meta_data) = 'object' THEN
+    IF jsonb_typeof(new.raw_user_meta_data->'radar_terms_acceptance') = 'object' THEN
+      v_version := nullif(trim(coalesce(new.raw_user_meta_data->'radar_terms_acceptance'->>'version', '')), '');
+    END IF;
+    v_profile := nullif(trim(coalesce(new.raw_user_meta_data->>'radar_profile_type', '')), '');
+  END IF;
   IF v_version IS NOT NULL THEN
     INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type, accepted_at)
     VALUES (new.id, v_version, v_profile, now())

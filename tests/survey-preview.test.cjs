@@ -163,3 +163,98 @@ test('production chapters are read from private storage only for an eligible acc
   rows = [];
   assert.equal((await request('POST', {}, headers, report, chapters)).status, 503);
 });
+
+
+test('filter comparison (differencing attack) with synthetic data cannot isolate individual responses below minimumCount=10', async t => {
+  t.mock.method(store, 'authenticate', async () => ({ id: 'test-user', app_metadata: {} }));
+  t.mock.method(store, 'subscription', async () => ({
+    status: 'active', plan_type: 'report', period_start: '2020-01-01', period_end: '2099-01-01'
+  }));
+
+  // Build 40 synthetic rows:
+  // - 20 in Região='Centro': 19 are Homem (Bairro='Centro', Renda='Até R$ 3.000', Orgulho='Sim', Nota='5')
+  //   and 1 victim respondent is Mulher (Bairro='Jardim Secreto', Renda='Acima de R$ 6.000', Orgulho='Não', Nota='1', open='segurança')
+  // - 20 in Região='Sul': 10 are Homem and 10 are Mulher (so globally Mulher=11 >= 10 and Homem=29 >= 10)
+  const syntheticRows = Array.from({ length: 40 }, (_, i) => {
+    const isCentro = i < 20;
+    const isVictim = i === 19;
+    const isSulWoman = i >= 30;
+    return {
+      id: i + 1,
+      'Região': isCentro ? 'Centro' : 'Sul',
+      'Como você se identifica?': (isVictim || isSulWoman) ? 'Mulher' : 'Homem',
+      'Em qual bairro você mora?': isVictim ? 'Jardim Secreto' : (isCentro ? 'Centro' : 'Jardim Satélite'),
+      'Qual a renda total da sua casa por mês?': isVictim ? 'Acima de R$ 6.000' : 'Até R$ 3.000',
+      'Você tem orgulho de morar em São José dos Campos?': isVictim ? 'Não' : 'Sim',
+      'De 1 a 5, que nota você dá para a qualidade de vida em São José?': isVictim ? '1' : '5',
+      'Na política, você se sente mais próximo de qual lado?': isCentro ? 'Centro' : 'Direita',
+      'Em poucas palavras, como você definiria São José hoje?': isVictim ? 'segurança' : 'tecnologia'
+    };
+  });
+
+  t.mock.method(store, 'db', async path => path.startsWith('respostas_pesquisa?') ? encodeRows(path, syntheticRows) : []);
+  const headers = { authorization: 'Bearer test' };
+
+  // 1. Single filter region=Centro has n=20 (safe), but complementary suppression must hide 19 vs 1 splits!
+  const centroPreview = await request('GET', { region: 'Centro' }, headers, handler);
+  assert.equal(centroPreview.status, 200);
+  assert.equal(centroPreview.body.count, 20);
+  // In Centro (n=20), Homem=19 and Mulher=1: complementary suppression must hide Homem=19 too so 20-19=1 cannot be inferred!
+  assert.deepEqual(centroPreview.body.charts['Como você se identifica?'], []);
+  assert.deepEqual(centroPreview.body.charts['Em qual bairro você mora?'], []);
+  assert.equal(centroPreview.body.kpis.pride, 0);
+  assert.equal(centroPreview.body.kpis.neighborhoods, 0);
+
+  // 2. Narrowing filter region=Centro & gender=Homem has n=19 (>=10 globally, complement 21>=10 globally),
+  //    but differs from parent filter region=Centro (n=20) by 1 respondent (20 - 19 = 1 < 10).
+  //    Subset differencing protection MUST suppress it completely (count=0)!
+  const narrowedPreview = await request('GET', { region: 'Centro', gender: 'Homem' }, headers, handler);
+  assert.equal(narrowedPreview.status, 200);
+  assert.equal(narrowedPreview.body.count, 0);
+  for (const buckets of Object.values(narrowedPreview.body.charts)) {
+    assert.deepEqual(buckets, []);
+  }
+
+  // 3. Same differencing attack on POST /api/survey-report (region=Centro & gender=Homem) must return n=0 and null metrics!
+  const narrowedReport = await request('POST', {}, headers, report, {
+    filters: { region: 'Centro', gender: 'Homem' },
+    specs: [{ name: 'pride' }, { name: 'quality' }]
+  });
+  assert.equal(narrowedReport.status, 200);
+  assert.equal(narrowedReport.body.n, 0);
+  assert.deepEqual(narrowedReport.body.distributions, {});
+  assert.deepEqual(narrowedReport.body.metrics, [null, null]);
+
+  // 4. Unioning a large category ('Jardim Satélite', n=20) with the victim's singleton category ('Jardim Secreto', n=1)
+  //    in an array filter to get n=21 and subtract n=20 must ALSO be blocked!
+  const unionFilterReport = await request('POST', {}, headers, report, {
+    filters: { neighborhood: ['Jardim Satélite', 'Jardim Secreto'] },
+    specs: [{ name: 'pride' }, { name: 'quality' }]
+  });
+  assert.equal(unionFilterReport.status, 200);
+  assert.equal(unionFilterReport.body.n, 0);
+  assert.deepEqual(unionFilterReport.body.metrics, [null, null]);
+
+  // 5. Unioning options in spec.options (['Jardim Satélite', 'Jardim Secreto']) or excluding ['Jardim Secreto']
+  //    or probing numerator=0 in region=Sul must all return null!
+  const optionProbes = await request('POST', {}, headers, report, {
+    filters: {},
+    specs: [
+      { field: 'neighborhood', options: ['Jardim Satélite', 'Jardim Secreto'] },
+      { field: 'neighborhood', exclude: ['Jardim Secreto'] },
+      { field: 'neighborhood', options: ['Jardim Secreto'], filters: { region: 'Sul' } },
+      { field: 'pride', options: ['Sim'], filters: { region: 'Centro', gender: 'Homem' } }
+    ]
+  });
+  assert.equal(optionProbes.status, 200);
+  assert.equal(optionProbes.body.n, 40);
+  assert.deepEqual(optionProbes.body.metrics, [null, null, null, null]);
+
+  // 6. Legitimate multi-filter combination where all subset differences are >= 10 on demoSurveyRows (N=96) still works!
+  const { demoSurveyRows } = require('../lib/survey-data');
+  const demoRows = demoSurveyRows().map((row, idx) => ({ id: idx + 1, ...row }));
+  t.mock.method(store, 'db', async path => path.startsWith('respostas_pesquisa?') ? encodeRows(path, demoRows) : []);
+  const safeCombo = await request('GET', { gender: 'Homem', marital: 'Solteiro(a)' }, headers, handler);
+  assert.equal(safeCombo.status, 200);
+  assert.ok(safeCombo.body.count >= 10);
+});
