@@ -6114,16 +6114,7 @@
         }, 300);
       }
 
-      if (tabId === 'eleicoes-2026') {
-        if (typeof window.initEleicoes2026 === 'function') {
-          window.initEleicoes2026();
-        }
-        setTimeout(() => {
-          if (window.Eleicoes2026State && window.Eleicoes2026State.leafletMap) {
-            window.Eleicoes2026State.leafletMap.invalidateSize();
-          }
-        }, 300);
-      }
+      
     }
 
     function slugify(text) {
@@ -6206,288 +6197,20 @@
     // =========================================================================
     let customLeadFilter = null;
 
-    const DEFAULT_SUBSCRIBERS = [
-      {
-        id: 1,
-        empresa: "Andrade & Filhos Varejo",
-        nome: "Juliana Andrade",
-        cargo: "Diretora Comercial",
-        papel_decisao: "Decisor Final",
-        relacao_sjc: "Sede própria em SJC",
-        setor: "Varejo & Comércio",
-        bairro: "Jd. Aquarius",
-        regiao: "Zona Oeste",
-        whatsapp: "12981442030",
-        email: "juliana@andradevarejo.com.br",
-        plano: "Enterprise",
-        mrr: 149.00,
-        stage: "ativo",
-        status: "Ativo",
-        data: "12/09/2026",
-        avatar: "JA",
-        avatarBg: "bg-blue-600",
-        tipo_decisao: "Expansão de Negócio",
-        projeto_nome: "Nova Unidade Aquarius 2026",
-        estagio_projeto: "Em Execução",
-        prazo_decisao: "Imediato (< 30 dias)",
-        faixa_valor: "R$ 200 mil a R$ 1 Milhão",
-        pergunta_principal: "Qual é a densidade de tráfego e ticket médio nas transversais da Av. Cassiano Ricardo no período noturno?",
-        sla_prioridade: "Alta",
-        proximo_passo: "Apresentar benchmark de fluxo comercial da Zona Oeste",
-        proximo_passo_data: "2026-09-20",
-        notas: "Cliente enterprise com 8 lojas físicas no Vale. Usa os dados de tráfego para expansão.",
-        historico: [
-          "Exportou Relatório Demografia Aquarius",
-          "Acessou Pesquisa de Fluxo Comercial",
-          "Adicionou 3 novos operadores"
-        ]
-      },
-      {
-        id: 2,
-        empresa: "Embraer Engenharia & Projetos",
-        nome: "Carlos Eduardo Ramos",
-        cargo: "Head de Suprimentos & Facilities",
-        papel_decisao: "Decisor Final",
-        relacao_sjc: "Sede própria em SJC",
-        setor: "Aeroespacial & Defesa",
-        bairro: "Putim",
-        regiao: "Zona Sudeste",
-        whatsapp: "12997123344",
-        email: "carlos.ramos@embraer.com.br",
-        plano: "Pro",
-        mrr: 49.00,
-        stage: "ativo",
-        status: "Ativo",
-        data: "10/09/2026",
-        avatar: "CR",
-        avatarBg: "bg-emerald-600",
-        tipo_decisao: "Validação de Mercado",
-        projeto_nome: "Mapeamento Mobilidade Sudeste",
-        estagio_projeto: "Em Estudo de Viabilidade",
-        prazo_decisao: "30 a 60 dias",
-        faixa_valor: "Acima de R$ 1 Milhão",
-        pergunta_principal: "Como o novo corredor de ônibus da Zona Sudeste alterou o tempo de deslocamento dos colaboradores?",
-        sla_prioridade: "Normal",
-        proximo_passo: "Enviar cruzamento de linhas de ônibus com horários de turno",
-        proximo_passo_data: "2026-09-25",
-        notas: "Contrato corporativo renovado anualmente. Acessa dados de mobilidade dos funcionários.",
-        historico: [
-          "Consulta Mapa de Ônibus & Mobilidade",
-          "Relatório Setor Sudeste"
-        ]
-      },
-      {
-        id: 3,
-        empresa: "Clínica Bem Estar SJC",
-        nome: "Dra. Fernanda Silveira",
-        cargo: "Sócia-Diretora Médica",
-        papel_decisao: "Decisor Final",
-        relacao_sjc: "Sede própria em SJC",
-        setor: "Saúde & Medicina",
-        bairro: "Vila Ema",
-        regiao: "Centro",
-        whatsapp: "12988771122",
-        email: "fernanda@bemestarsjc.med.br",
-        plano: "Pro",
-        mrr: 49.00,
-        stage: "proposta",
-        status: "Pendente",
-        data: "08/09/2026",
-        avatar: "FS",
-        avatarBg: "bg-amber-600",
-        tipo_decisao: "Abertura de Filial / Unidade",
-        projeto_nome: "Expansão Clínica Vila Ema",
-        estagio_projeto: "Em Negociação / Seleção",
-        prazo_decisao: "30 a 60 dias",
-        faixa_valor: "R$ 50 mil a R$ 200 mil",
-        pergunta_principal: "Qual a concentração de famílias das classes A/B sem plano de saúde privado na região central?",
-        sla_prioridade: "Alta",
-        proximo_passo: "Apresentar proposta de customização Enterprise para 5 consultórios",
-        proximo_passo_data: "2026-09-18",
-        notas: "Aguardando aprovação da diretoria para upgrade ao plano Enterprise.",
-        historico: [
-          "Download Demonstração Dados Demográficos",
-          "Simulação de Ticket Médio"
-        ]
-      },
-      {
-        id: 4,
-        empresa: "PIT SJC Tech Hub & Startups",
-        nome: "Marcelo Toledo",
-        cargo: "Gerente de Inovação",
-        papel_decisao: "Avaliador Técnico",
-        relacao_sjc: "Filial / Operação",
-        setor: "Tecnologia & Inovação",
-        bairro: "Eugênio de Melo",
-        regiao: "Zona Leste",
-        whatsapp: "12991054321",
-        email: "m.toledo@pitstartup.io",
-        plano: "Enterprise",
-        mrr: 149.00,
-        stage: "ativo",
-        status: "Ativo",
-        data: "01/09/2026",
-        avatar: "MT",
-        avatarBg: "bg-indigo-600",
-        tipo_decisao: "Validação de Mercado",
-        projeto_nome: "Radar Tech Startups",
-        estagio_projeto: "Em Execução",
-        prazo_decisao: "Imediato (< 30 dias)",
-        faixa_valor: "R$ 200 mil a R$ 1 Milhão",
-        pergunta_principal: "Quantas empresas de base tecnológica se instalaram no eixo Eugênio de Melo no último biênio?",
-        sla_prioridade: "Média",
-        proximo_passo: "Reunião de alinhamento trimestral de dados",
-        proximo_passo_data: "2026-09-28",
-        notas: "Hub de aceleração conectado ao Parque Tecnológico de São José dos Campos.",
-        historico: [
-          "Acesso API Radar",
-          "Download Base de Pesquisa Habitantes"
-        ]
-      },
-      {
-        id: 5,
-        empresa: "Construtora Vale Imperial",
-        nome: "Renata Fagundes",
-        cargo: "Diretora de Incorporação",
-        papel_decisao: "Decisor Final",
-        relacao_sjc: "Sede própria em SJC",
-        setor: "Imobiliário & Construção",
-        bairro: "Urbanova",
-        regiao: "Zona Oeste",
-        whatsapp: "12981776655",
-        email: "renata@valeimperial.com.br",
-        plano: "Enterprise",
-        mrr: 149.00,
-        stage: "lead",
-        status: "Pendente",
-        data: "Hoje",
-        avatar: "RF",
-        avatarBg: "bg-blue-500",
-        tipo_decisao: "Compra Imobiliária / Ponto Comercial",
-        projeto_nome: "Lançamento Reserva Urbanova",
-        estagio_projeto: "Em Estudo de Viabilidade",
-        prazo_decisao: "Imediato (< 30 dias)",
-        faixa_valor: "Acima de R$ 1 Milhão",
-        pergunta_principal: "Qual a demanda reprimida por apartamentos de 3 e 4 dormitórios de alto padrão no Urbanova?",
-        sla_prioridade: "Alta",
-        proximo_passo: "Realizar primeiro contato no WhatsApp com dossiê de demanda do Urbanova",
-        proximo_passo_data: "2026-09-22",
-        notas: "Lead recente capturado no blog no artigo sobre expansão urbana no Urbanova.",
-        historico: [
-          "Baixou E-book Demografia SJC",
-          "Preencheu Formulário de Decisão Comercial"
-        ]
-      },
-      {
-        id: 6,
-        empresa: "LogVale Transportes & Cargas",
-        nome: "Roberto Siqueira",
-        cargo: "Gerente de Operações",
-        papel_decisao: "Avaliador Técnico",
-        relacao_sjc: "Planejando entrar em SJC",
-        setor: "Indústria & Logística",
-        bairro: "Eugênio de Melo",
-        regiao: "Zona Leste",
-        whatsapp: "12992334411",
-        email: "roberto@logvale.com.br",
-        plano: "Enterprise",
-        mrr: 149.00,
-        stage: "qualificacao",
-        status: "Pendente",
-        data: "15/09/2026",
-        avatar: "RS",
-        avatarBg: "bg-amber-600",
-        tipo_decisao: "Abertura de Filial / Unidade",
-        projeto_nome: "Galpão Logístico Dutra Leste",
-        estagio_projeto: "Em Negociação / Seleção",
-        prazo_decisao: "30 a 60 dias",
-        faixa_valor: "R$ 500 mil a R$ 1 Milhão",
-        pergunta_principal: "Qual é a velocidade média e restrições de tráfego de caminhões pesados nos acessos à Dutra em Eugênio de Melo?",
-        sla_prioridade: "Alta",
-        proximo_passo: "Enviar relatório técnico de zoneamento viário",
-        proximo_passo_data: "2026-09-19",
-        notas: "Agendou demonstração técnica das rotas e zoneamento industrial via Dutra/Carvalho Pinto.",
-        historico: [
-          "Solicitou Demonstração pelo Site",
-          "Acessou Dados de Infraestrutura Viária"
-        ]
-      }
-    ];
+    const DEFAULT_SUBSCRIBERS = [];
 
-    let subscribers = [];
-
-    // Converte lead vindo do formulário de entrada para o formato de card do CRM
-    function mapInboundToSubscriber(inb, idx = 0) {
-      const displayName = inb.nome || inb.email || 'Lead Inbound';
-      const initials = displayName.split(' ').filter(Boolean).map(w => w[0]).join('').substring(0, 2).toUpperCase() || 'LD';
-      const isEnterprise = Boolean(inb.tem_decisao || inb.empresa_nome);
-      const stage = inb.stage || (inb.tem_decisao ? 'qualificacao' : 'lead');
-
-      let papel = 'Pesquisador';
-      const cLow = (inb.cargo || '').toLowerCase();
-      const pLow = (inb.perfil || '').toLowerCase();
-      if (cLow.includes('diretor') || cLow.includes('sócio') || cLow.includes('dono') || cLow.includes('proprietário') || cLow.includes('ceo') || pLow === 'empresario') {
-        papel = 'Decisor Final';
-      } else if (cLow.includes('gerente') || cLow.includes('head') || cLow.includes('coordenador') || pLow === 'gestor') {
-        papel = 'Avaliador Técnico';
-      } else if (inb.tem_decisao) {
-        papel = 'Tomador de Decisão';
-      }
-
-      const cleanWhatsapp = (inb.whatsapp || '').replace(/\D/g, '');
-
-      return {
-        id: inb.id || ('inb_' + (inb.email ? inb.email.replace(/[^a-zA-Z0-9]/g, '_') : Date.now()) + '_' + idx),
-        empresa: inb.empresa_nome || (inb.nome ? `${inb.nome} (Pessoa Física)` : 'Contato Inbound'),
-        nome: displayName,
-        cargo: inb.cargo || inb.perfil || 'Decisor Comercial',
-        papel_decisao: papel,
-        relacao_sjc: inb.cidade_mora ? `Mora em ${inb.cidade_mora}` : (Array.isArray(inb.relacao_sjc) && inb.relacao_sjc.length ? inb.relacao_sjc.join(', ') : 'São José dos Campos'),
-        setor: inb.segmento || (inb.empresa_nome ? 'Corporativo B2B' : 'Consumidor / Pesquisa'),
-        bairro: inb.regiao_bairro || inb.cidade_mora || 'São José dos Campos',
-        regiao: 'São José dos Campos',
-        whatsapp: cleanWhatsapp,
-        email: inb.email || '',
-        plano: isEnterprise ? 'Enterprise' : 'Pro',
-        mrr: stage === 'ativo' ? 149.00 : (isEnterprise ? 149.00 : 49.00),
-        stage: stage,
-        status: stage === 'ativo' ? 'Ativo' : (stage === 'churn' ? 'Cancelado' : 'Pendente'),
-        data: inb.created_at ? new Date(inb.created_at).toLocaleDateString('pt-BR') : 'Hoje',
-        avatar: initials,
-        avatarBg: inb.tem_decisao ? 'bg-cyan-600' : 'bg-emerald-600',
-        tipo_decisao: inb.tipo_decisao || inb.motivo_entrada || 'Qualificação Comercial',
-        projeto_nome: inb.projeto_nome || (inb.empresa_nome ? `Projeto ${inb.empresa_nome}` : 'Lead Formulário Radar'),
-        estagio_projeto: inb.estagio_projeto || 'Em Qualificação',
-        prazo_decisao: inb.prazo_decisao || '30 a 60 dias',
-        faixa_valor: inb.faixa_valor || 'A definir',
-        pergunta_principal: inb.pergunta_principal || inb.motivo_entrada_detalhe || 'Como os dados do Radar São José apoiam essa decisão?',
-        sla_prioridade: (inb.prazo_decisao === 'Já estou decidindo' || inb.tem_decisao) ? 'Alta' : 'Normal',
-        proximo_passo: inb.proximo_passo || 'Realizar primeiro contato via WhatsApp',
-        proximo_passo_data: inb.proximo_passo_data || new Date().toISOString().split('T')[0],
-        notas: `[Origem]: Formulário Radar Inbound\n[Pergunta Sagrada]: ${inb.pergunta_principal || 'N/A'}\n[Empresa]: ${inb.empresa_nome || 'N/A'}\n[Perfil]: ${inb.perfil || 'N/A'}`,
-        historico: inb.historico || [
-          `Lead capturado via Formulário Radar Onboarding em ${inb.created_at ? new Date(inb.created_at).toLocaleDateString('pt-BR') : new Date().toLocaleDateString('pt-BR')}`
-        ]
-      };
-    }
-
-    function mapPipelineToStage(etapa) {
-      if (!etapa) return 'lead';
-      const e = String(etapa).toLowerCase();
-      if (e.includes('lead')) return 'lead';
-      if (e.includes('qualif') || e.includes('diag') || e.includes('oportun')) return 'qualificacao';
-      if (e.includes('prop') || e.includes('negoc')) return 'proposta';
-      if (e.includes('ganho') || e.includes('ativ') || e.includes('fech') || e.includes('aprov')) return 'ativo';
-      if (e.includes('perd') || e.includes('churn') || e.includes('canc')) return 'churn';
-      return 'lead';
-    }
-
-    // Sincronização Inteligente Híbrida: Supabase Cloud + LocalStorage + Inbound Forms
     async function fetchCRMDataFromSupabase() {
       try {
         console.log('[CRM Supabase] Sincronizando registros comerciais...');
 
         // 1. Carrega dados do cache local (resiliência offline)
+        
+    try {
+      localStorage.removeItem('radarsaojose_crm_subscribers_v3');
+      localStorage.removeItem('radarsaojose_crm_subscribers_v2');
+      localStorage.removeItem('radarsaojose_crm_subscribers');
+    } catch (_) {}
+
         let localList = [];
         try {
           const stored = localStorage.getItem('radarsaojose_crm_subscribers_v3');
@@ -6538,87 +6261,71 @@
           });
         }
 
-        // 4. Consulta banco de dados Supabase Cloud (quando online)
-        const client = window.supabaseClient || (window.supabase && typeof window.supabase.createClient === 'function' ? window.supabase.createClient(
-          window.SUPABASE_URL,
-          window.SUPABASE_ANON_KEY
-        ) : null);
-
-        if (client) {
-          // 4.1 Oportunidades com joins relacionais
-          try {
-            const { data: opps, error: oppsError } = await client
-              .from('crm_oportunidades')
-              .select('*, crm_pessoas(*), crm_empresas(*)')
-              .order('created_at', { ascending: false });
-
-            if (!oppsError && Array.isArray(opps) && opps.length > 0) {
-              opps.forEach(opp => {
-                const p = opp.crm_pessoas || {};
-                const emp = opp.crm_empresas || {};
-                const displayName = p.nome || opp.titulo || 'Contato Comercial';
-                const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-                const stage = mapPipelineToStage(opp.etapa_pipeline);
-                const emailLower = (p.email || '').toLowerCase().trim();
-
-                const supCard = {
-                  id: opp.id,
-                  empresa: emp.nome || opp.projeto_nome || opp.titulo || (p.nome ? `${p.nome} (PF)` : 'Empresa não informada'),
+                // 4. Conexão direta com os Usuários Reais da Plataforma (/api/crm-accounts)
+        try {
+          const { data: sessData } = await (window.supabaseClient ? window.supabaseClient.auth.getSession() : { data: {} });
+          if (sessData?.session?.access_token) {
+            const resp = await fetch('/api/crm-accounts?page=1', {
+              headers: { Authorization: 'Bearer ' + sessData.session.access_token }
+            });
+            if (resp.ok) {
+              const resJson = await resp.json();
+              const realUsers = resJson.accounts || [];
+              realUsers.forEach((u, idx) => {
+                const displayName = u.name || u.email.split('@')[0];
+                const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() || 'U';
+                const stage = u.plan && u.plan !== 'gratis' ? 'ativo' : 'lead';
+                const card = {
+                  id: u.id || ('usr_' + idx),
+                  empresa: u.profile ? `Perfil: ${u.profile.toUpperCase()}` : 'Cadastro Gratuito',
                   nome: displayName,
-                  cargo: p.perfil || 'Decisor Comercial',
-                  papel_decisao: 'Decisor Final',
-                  relacao_sjc: p.cidade_mora ? `Mora em ${p.cidade_mora}` : (emp.relacao_sjc || 'São José dos Campos'),
-                  setor: emp.segmento || 'Corporativo B2B',
-                  bairro: opp.regiao_bairro || p.cidade_mora || 'SJC',
-                  regiao: 'São José dos Campos',
-                  whatsapp: (p.whatsapp || '').replace(/\D/g, ''),
-                  email: p.email || '',
-                  plano: opp.faixa_valor ? 'Enterprise' : 'Pro',
-                  mrr: stage === 'ativo' ? 149.00 : 0.00,
+                  cargo: u.profile || 'Usuário Cadastrado',
+                  papel_decisao: 'Decisor',
+                  relacao_sjc: 'São José dos Campos',
+                  setor: u.profile || 'Geral',
+                  bairro: 'São José dos Campos',
+                  regiao: 'SJC',
+                  whatsapp: u.phone || '',
+                  email: u.email || '',
+                  plano: (u.plan || 'gratis').toUpperCase(),
+                  mrr: u.plan === 'dash' ? 291.49 : (u.plan === 'report' ? 490.00 : (u.plan === 'midia' ? 1200.00 : 0)),
                   stage: stage,
-                  status: stage === 'ativo' ? 'Ativo' : (stage === 'churn' ? 'Cancelado' : 'Pendente'),
-                  data: opp.created_at ? new Date(opp.created_at).toLocaleDateString('pt-BR') : 'Hoje',
+                  status: stage === 'ativo' ? 'Ativo' : 'Lead novo',
+                  data: u.createdAt ? new Date(u.createdAt).toLocaleDateString('pt-BR') : new Date().toLocaleDateString('pt-BR'),
                   avatar: initials,
-                  avatarBg: stage === 'ativo' ? 'bg-emerald-600' : (stage === 'proposta' ? 'bg-purple-600' : 'bg-cyan-600'),
-                  tipo_decisao: opp.tipo_decisao || 'Decisão Comercial',
-                  projeto_nome: opp.projeto_nome || opp.titulo || 'Projeto Mapeado',
-                  estagio_projeto: opp.estagio_projeto || 'Em Estudo',
-                  prazo_decisao: opp.prazo_decisao || '30 a 60 dias',
-                  faixa_valor: opp.faixa_valor || 'A definir',
-                  pergunta_principal: opp.pergunta_principal || 'Como os dados de inteligência podem respaldar essa tomada de decisão?',
-                  sla_prioridade: opp.prioridade_sla || 'Normal',
-                  proximo_passo: opp.proximo_passo || 'Realizar contato de qualificação e alinhamento',
-                  proximo_passo_data: opp.data_proximo_passo ? opp.data_proximo_passo.split('T')[0] : new Date().toISOString().split('T')[0],
-                  notas: `[Pergunta Sagrada]: ${opp.pergunta_principal || 'N/A'}\n[Projeto]: ${opp.projeto_nome || 'N/A'}`,
+                  avatarBg: stage === 'ativo' ? 'bg-emerald-600' : 'bg-cyan-600',
+                  tipo_decisao: 'Acesso à Plataforma',
+                  projeto_nome: `Plano ${(u.plan || 'gratis').toUpperCase()}`,
+                  estagio_projeto: stage === 'ativo' ? 'Assinante Ativo' : 'Cadastro Recente',
+                  prazo_decisao: 'Imediato',
+                  faixa_valor: u.plan === 'gratis' ? 'Gratuito' : 'Assinatura Paga',
+                  pergunta_principal: `Perfil declarado: ${u.profile || 'Geral'}. Telefone: ${u.phone || 'Não informado'}`,
                   historico: [
-                    `Origem: ${opp.origem || 'Supabase Cloud'} em ${new Date(opp.created_at || Date.now()).toLocaleDateString('pt-BR')}`
+                    { data: new Date().toLocaleDateString('pt-BR'), texto: 'Usuário real sincronizado do Radar São José.' }
                   ]
                 };
-
-                const exIdx = localList.findIndex(s => 
-                  (emailLower && (s.email || '').toLowerCase().trim() === emailLower) ||
-                  String(s.id) === String(opp.id)
-                );
-
+                const emailLower = (u.email || '').toLowerCase().trim();
+                const exIdx = localList.findIndex(s => (emailLower && (s.email || '').toLowerCase().trim() === emailLower));
                 if (exIdx >= 0) {
-                  localList[exIdx] = { ...localList[exIdx], ...supCard };
+                  localList[exIdx] = { ...localList[exIdx], ...card };
                 } else {
-                  localList.unshift(supCard);
+                  localList.push(card);
                 }
               });
             }
-          } catch (cloudErr) {
-            console.warn('[CRM Supabase Cloud Opps Warn]:', cloudErr.message);
           }
+        } catch (realErr) {
+          console.warn('[CRM Real Accounts Sync Warn]:', realErr);
+        }
 
-          // 4.2 Fallback em crm_pessoas
+        // 4.2 Fallback em crm_pessoas
           try {
             const { data: pessoas, error: pesErr } = await client
               .from('crm_pessoas')
               .select('*')
               .order('created_at', { ascending: false });
 
-            if (!pesErr && Array.isArray(pessoas) && pessoas.length > 0) {
+            if (false && !pesErr && Array.isArray(pessoas)) {
               pessoas.forEach((p, idx) => {
                 const emailLower = (p.email || '').toLowerCase().trim();
                 const exIdx = localList.findIndex(s => 
@@ -9171,7 +8878,7 @@
     function checkHashAndSwitch() {
       if (window.location.hash) {
         const hash = window.location.hash.replace('#', '');
-        if (['crm', 'blog', 'plan', 'market-intel', 'eleicoes-2026', 'relatorios', 'config'].includes(hash)) {
+        if (['crm', 'blog', 'plan', 'market-intel', 'relatorios', 'config'].includes(hash)) {
           switchTab(hash);
         }
       }
