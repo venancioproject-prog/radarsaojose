@@ -19,6 +19,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/api/asaas-checkout?browserConfig=1"></script>
   <script src="/supabase-browser-config.js"></script>
+  <script src="radar-mfa.js"></script>
 
   <!-- ========================================================================= -->
   <!-- 2. AUTH GUARD BLINDADO (Anti-FOUC, Validação de Sessão & Perfil Admin) -->
@@ -38,6 +39,10 @@
         const claims = user?.app_metadata;
         if (error || !user?.id || (claims?.role !== 'admin' && claims?.is_admin !== true)) {
           window.location.replace('app.html');
+          return;
+        }
+
+        if (window.radarMfa && await window.radarMfa.redirectIfRequired(window.supabaseClient, user, true)) {
           return;
         }
 
