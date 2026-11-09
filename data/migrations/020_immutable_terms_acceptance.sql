@@ -22,11 +22,27 @@ DROP POLICY IF EXISTS select_own_acceptance ON public.terms_acceptances;
 CREATE POLICY select_own_acceptance ON public.terms_acceptances
   FOR SELECT TO authenticated USING (auth.uid() = user_id);
 
--- Enforce append-only immutability for clients: no UPDATE or DELETE allowed for public/anon/authenticated
-REVOKE ALL ON public.terms_acceptances FROM PUBLIC, anon;
-REVOKE UPDATE, DELETE ON public.terms_acceptances FROM authenticated;
+-- Enforce append-only immutability for clients: no UPDATE or DELETE allowed for public/anon/authenticated,
+-- and revoke default Supabase table-level INSERT before granting only safe columns.
+REVOKE ALL ON public.terms_acceptances FROM PUBLIC, anon, authenticated;
 GRANT SELECT, INSERT (user_id, terms_version, profile_type, user_agent) ON public.terms_acceptances TO authenticated;
 GRANT ALL ON public.terms_acceptances TO service_role;
+
+CREATE OR REPLACE FUNCTION public.enforce_terms_acceptance_server_fields()
+RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = pg_catalog, public AS $$
+BEGIN
+  new.id := coalesce(new.id, gen_random_uuid());
+  new.accepted_at := now();
+  RETURN new;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.enforce_terms_acceptance_server_fields() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS trg_terms_acceptances_server_fields ON public.terms_acceptances;
+CREATE TRIGGER trg_terms_acceptances_server_fields
+  BEFORE INSERT ON public.terms_acceptances
+  FOR EACH ROW EXECUTE FUNCTION public.enforce_terms_acceptance_server_fields();
 
 CREATE UNIQUE INDEX IF NOT EXISTS terms_acceptances_user_version_uidx
   ON public.terms_acceptances(user_id, terms_version);

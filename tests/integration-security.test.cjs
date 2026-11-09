@@ -390,6 +390,7 @@ test('Termos de uso e privacidade: sistema usa exclusivamente o registro imutáv
     $$;
     CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT (auth.jwt()->>'sub')::uuid $$;
     GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authenticated, service_role;
   `);
   await db.exec(readMigration('020_immutable_terms_acceptance.sql'));
 
