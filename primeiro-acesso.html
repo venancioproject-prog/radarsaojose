@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
+  <meta name="referrer" content="no-referrer">
+  <script>
+    const recoveryHash = new URLSearchParams(window.location.hash.slice(1));
+    if (recoveryHash.get("type") === "recovery") {
+      window.location.replace("recuperar-senha.html?modo=redefinir" + window.location.hash);
+    }
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Primeiro acesso | Radar São José</title>
   <link rel="icon" href="favicon-radar-rd-32.png">

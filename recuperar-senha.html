@@ -49,9 +49,8 @@
       const update = document.getElementById("update");
       const status = document.getElementById("status");
       const mode = new URLSearchParams(location.search).get("modo");
-      const hash = window.location.hash || "";
-      const hasRecoveryHash = /type=recovery/i.test(hash) || /access_token=/i.test(hash);
-      const recovery = mode === "redefinir" || hasRecoveryHash;
+      const hash = new URLSearchParams(window.location.hash.slice(1));
+      const recovery = mode === "redefinir" || hash.get("type") === "recovery";
       const confirmation = mode === "confirmar";
       const { url, key } = window.radarSupabaseConfig || {};
       if (!url || !key || !window.supabase) {
@@ -113,15 +112,10 @@
       }
 
       client.auth.onAuthStateChange((event, session) => {
-        if (session?.user && (event === "PASSWORD_RECOVERY" || recovery)) {
+        if (event === "PASSWORD_RECOVERY" && session?.user) {
           showPasswordForm(session.user);
         }
       });
-      client.auth.getSession().then(({ data: { session } }) => {
-        if (session?.user && recovery) {
-          showPasswordForm(session.user);
-        }
-      }).catch(() => {});
 
       update.addEventListener("submit", async event => {
         event.preventDefault();
