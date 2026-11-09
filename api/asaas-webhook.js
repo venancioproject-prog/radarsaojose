@@ -4,6 +4,7 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const {db, BillingError, fail} = require('../lib/billing-store');
 const {sendConfirmationEmail} = require('../lib/billing-email');
+const {validateInstallments} = require('../lib/asaas-installments');
 
 const MAX_WEBHOOK_BODY_BYTES = 256 * 1024; // 256 KB
 
@@ -166,6 +167,38 @@ async function verifyPaymentWithAsaas(paymentId, order, eventType) {
   return live;
 }
 
+async function recoverUnboundCardOrder(order, paymentId) {
+  const { key, url } = require('../lib/asaas-config').asaasConfig(process.env);
+  if (!key) throw new BillingError(503, 'ASAAS_NOT_CONFIGURED');
+  const options = {
+    headers: { access_token: key, 'User-Agent': 'RadarSaoJose/1.0' },
+    redirect: 'error', signal: AbortSignal.timeout(10000)
+  };
+  const response = await fetch(url + '/payments/' + encodeURIComponent(paymentId), options);
+  if (!response.ok) throw new BillingError(502, 'ASAAS_VERIFICATION_FAILED');
+  const live = await response.json();
+  if (live.id !== paymentId || live.externalReference !== order.id ||
+      live.billingType !== 'CREDIT_CARD' || live.deleted ||
+      !['CONFIRMED', 'RECEIVED', 'RECEIVED_IN_CASH'].includes(live.status) || !live.installment) {
+    throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+  }
+  const scheduleResponse = await fetch(url + '/installments/' + encodeURIComponent(live.installment) +
+    '/payments?limit=' + order.installment_count, options);
+  if (!scheduleResponse.ok) throw new BillingError(502, 'ASAAS_VERIFICATION_FAILED');
+  const schedule = await scheduleResponse.json();
+  const gatewayPayments = validateInstallments(order, live, schedule);
+  const firstPayment = schedule.data.find(entry => entry.installmentNumber === 1);
+  const quote = { ...order.quote, gatewayPayments };
+  checkAmount({ ...order, quote }, live);
+  const rows = await db('billing_orders?id=eq.' + encodeURIComponent(order.id) +
+    '&status=eq.pending&asaas_payment_id=is.null', {
+    method: 'PATCH', headers: { Prefer: 'return=representation' },
+    body: JSON.stringify({ asaas_payment_id: firstPayment.id, quote })
+  });
+  if (rows?.length !== 1) throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+  return rows[0];
+}
+
 async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -208,7 +241,11 @@ async function handler(req, res) {
     if (!order && typeof payment.externalReference === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(payment.externalReference)) {
       const candidates = await db('billing_orders?id=eq.' + encodeURIComponent(payment.externalReference) + '&select=*');
       const candidate = candidates?.[0];
-      if (candidate && !candidate.asaas_payment_id) {
+      if (candidate?.status === 'pending' && !candidate.asaas_payment_id &&
+          candidate.payment_method === 'CREDIT_CARD' && candidate.installment_count > 1 &&
+          ['PAYMENT_CONFIRMED', 'PAYMENT_RECEIVED'].includes(body.event)) {
+        order = await recoverUnboundCardOrder(candidate, payment.id);
+      } else if (candidate && !candidate.asaas_payment_id) {
         throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
       }
       if (candidate?.quote?.gatewayPayments && Object.hasOwn(candidate.quote.gatewayPayments, payment.id)) order = candidate;

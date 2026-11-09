@@ -114,6 +114,21 @@
         letter-spacing: -0.02em;
       }
 
+      .asaas-trust-panel {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 16px;
+        padding: 12px 14px;
+        background: #f0f7ff;
+        color: #102948;
+        border-radius: 12px;
+      }
+      .asaas-trust-panel img { display: block; width: 84px; height: auto; }
+      .asaas-trust-copy { flex: 1 1 210px; font-size: 12px; line-height: 1.45; }
+      .asaas-trust-copy strong { display: block; font-size: 13px; }
+
       .asaas-modal-sub {
         font-size: 11.5px;
         font-weight: 500;
@@ -668,6 +683,14 @@
 
         <div id="asaasPlanGrid" class="radar-plan-catalog">${window.radarPlanCatalog || ''}</div>
         <div id="asaasPaymentStep" hidden>
+          <div class="asaas-trust-panel">
+            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+            <img src="web-media/asaas-logo.svg" alt="Asaas" width="84" height="15">
+            <div class="asaas-trust-copy">
+              <strong>Pagamento processado pelo Asaas</strong>
+              Os dados do cartão são informados na página do Asaas. O Radar libera o plano após a confirmação.
+            </div>
+          </div>
           <p id="asaasActivePlanNotice" hidden>Você já tem um plano ativo. Escolha um plano superior para consultar o upgrade.</p>
           <button type="button" class="asaas-method-tab" id="asaasBackToPlans">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Ver planos
@@ -700,7 +723,10 @@
             <!-- Alerta de Erro Amigável -->
             <div id="asaasErrorBox" class="asaas-alert-box asaas-alert-error">
               <i class="fa-solid fa-circle-exclamation mt-0.5"></i>
-              <span id="asaasErrorText">Por favor, verifique os campos informados.</span>
+              <div>
+                <span id="asaasErrorText">Por favor, verifique os campos informados.</span>
+                <button type="button" id="asaasCheckPending" class="asaas-method-tab" onclick="window.completeCheckoutAndUnlock()" hidden>Já paguei · Verificar pagamento</button>
+              </div>
             </div>
 
             <!-- Dados do Pagador -->
@@ -1144,7 +1170,7 @@
   };
 
   const FRIENDLY_CHECKOUT_ERRORS = {
-    'ORDER_PENDING_RECONCILIATION': 'Você já possui um pedido de pagamento em andamento. Aguarde a confirmação ou tente novamente em alguns instantes.',
+    'ORDER_PENDING_RECONCILIATION': 'Já existe um pedido em andamento. Se você já pagou, verifique o pagamento abaixo.',
     'SUBSCRIPTION_REQUIRES_RECONCILIATION': 'Sua assinatura anterior possui pendências de conciliação. Fale com nossa equipe de suporte.',
     'PRICE_CHANGED': 'O valor da cotação foi atualizado. Por favor, revise o valor antes de confirmar.',
     'HOSTED_CARD_ONLY': 'O pagamento com cartão é concluído com segurança na fatura oficial do Asaas.',
@@ -1160,6 +1186,7 @@
     const errText = document.getElementById('asaasErrorText');
     if (errBox && errText) {
       errText.textContent = message || 'Ocorreu um erro na validação dos dados.';
+      document.getElementById('asaasCheckPending').hidden = code !== 'ORDER_PENDING_RECONCILIATION';
       errBox.classList.add('show');
       errBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     } else {

@@ -455,33 +455,11 @@ module.exports = async function handler(req, res) {
     if (quote.installments.length > 1) {
       if (!payment.installment) throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
       const schedule = await asaas('/installments/' + encodeURIComponent(payment.installment) + '/payments?limit=' + quote.installments.length);
-      if (!Array.isArray(schedule.data) || schedule.hasMore || schedule.data.length !== quote.installments.length) {
-        throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
-      }
-      const paymentIds = new Set();
-      const numbers = new Set();
-      const gatewayPayments = Object.create(null);
-      let total = 0;
-      for (const entry of schedule.data) {
-        const number = entry.installmentNumber;
-        const amount = Math.round(Number(entry.value) * 100);
-        if (typeof entry.id !== 'string' || !entry.id || paymentIds.has(entry.id) ||
-            !Number.isInteger(number) || number < 1 || number > quote.installments.length || numbers.has(number) ||
-            entry.externalReference !== order.id || entry.installment !== payment.installment ||
-            entry.billingType !== paymentMethod || !Number.isSafeInteger(amount) || amount <= 0 ||
-            // Asaas can accumulate rounding on the final installment. The
-            // total is checked below after validating every earlier payment.
-            (number < quote.installments.length && Math.abs(amount - quote.installments[number - 1]) > 1)) {
-          throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
-        }
-        paymentIds.add(entry.id);
-        numbers.add(number);
-        gatewayPayments[entry.id] = amount;
-        total += amount;
-      }
-      if (total !== quote.amountCents || !paymentIds.has(payment.id)) {
-        throw new billing.BillingError(409, 'ORDER_PENDING_RECONCILIATION');
-      }
+      const { validateInstallments } = require('../lib/asaas-installments');
+      const gatewayPayments = validateInstallments({
+        id: order.id, payment_method: paymentMethod, amount_cents: quote.amountCents,
+        installment_count: quote.installments.length, quote
+      }, payment, schedule);
       binding.quote = { ...order.quote, ...quote, customerEmail:user.email, customerName:name, gatewayPayments };
     }
     await billing.db('billing_orders?id=eq.'+encodeURIComponent(order.id), {method:'PATCH',body:JSON.stringify(binding)});
