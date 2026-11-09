@@ -115,12 +115,10 @@
           return;
         }
         const user = data.session.user;
-        if (window.radarLegal.hasAccepted(user)) {
-          await window.radarLegal.recordAcceptance(client, user);
-        }
+        const accessState = await window.radarLegal.checkFirstAccess(client, user);
         if (fromConfirmation && user.email_confirmed_at) {
           document.getElementById("email-confirmed").hidden = false;
-          if (!window.radarLegal.needsFirstAccess(user)) {
+          if (!accessState.needsFirstAccess) {
             const link = document.createElement("a");
             link.href = "app.html";
             link.textContent = "Entrar no painel";
@@ -128,15 +126,15 @@
             return;
           }
         }
-        if (!window.radarLegal.needsFirstAccess(user)) {
+        if (!accessState.needsFirstAccess) {
           window.location.replace("app.html");
           return;
         }
 
-        nameInput.value = window.radarLegal.displayName(user);
-        const existingProfile = user.user_metadata?.radar_profile_type;
+        nameInput.value = accessState.fullName;
+        const existingProfile = accessState.profileType;
         select.value = options.has(existingProfile) ? existingProfile : "";
-        const alreadyAccepted = window.radarLegal.hasAccepted(user);
+        const alreadyAccepted = accessState.accepted;
         checkbox.checked = false;
         checkbox.disabled = alreadyAccepted;
         document.getElementById("terms-fields").hidden = alreadyAccepted;
@@ -154,21 +152,22 @@
           status.textContent = "Salvando seu primeiro acesso…";
 
           try {
-            const acceptedAt = new Date().toISOString();
-            const metadata = { radar_profile_type: select.value, radar_full_name: name, full_name: name };
-            if (!alreadyAccepted) {
-              metadata.radar_terms_acceptance = {
-                version: window.radarLegal.version,
-                accepted_at: acceptedAt
-              };
-            }
-            const { data, error } = await client.auth.updateUser({ data: metadata });
-            if (error || window.radarLegal.needsFirstAccess(data?.user)) throw error || new Error("Primeiro acesso não confirmado");
-            await window.radarLegal.recordAcceptance(client, data?.user || user, {
-              terms_version: window.radarLegal.version,
-              accepted_at: acceptedAt,
+            const savedRecord = await window.radarLegal.recordAcceptance(client, user, {
               profile_type: select.value
             });
+            if (!savedRecord) throw new Error("Aceite não confirmado no banco");
+            const metadata = {
+              radar_profile_type: select.value,
+              radar_full_name: name,
+              full_name: name,
+              radar_terms_acceptance: {
+                version: savedRecord.terms_version,
+                accepted_at: savedRecord.accepted_at
+              }
+            };
+            const { data, error } = await client.auth.updateUser({ data: metadata });
+            const verified = await window.radarLegal.checkFirstAccess(client, data?.user || user);
+            if (error || verified.needsFirstAccess) throw error || new Error("Primeiro acesso não confirmado");
             window.location.replace("app.html");
           } catch {
             status.textContent = "Não foi possível salvar. Tente novamente.";

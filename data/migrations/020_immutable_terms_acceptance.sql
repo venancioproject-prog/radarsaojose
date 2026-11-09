@@ -23,8 +23,9 @@ CREATE POLICY select_own_acceptance ON public.terms_acceptances
   FOR SELECT TO authenticated USING (auth.uid() = user_id);
 
 -- Enforce append-only immutability for clients: no UPDATE or DELETE allowed for public/anon/authenticated
-REVOKE UPDATE, DELETE ON public.terms_acceptances FROM PUBLIC, anon, authenticated;
-GRANT SELECT, INSERT ON public.terms_acceptances TO authenticated;
+REVOKE ALL ON public.terms_acceptances FROM PUBLIC, anon;
+REVOKE UPDATE, DELETE ON public.terms_acceptances FROM authenticated;
+GRANT SELECT, INSERT (user_id, terms_version, profile_type, user_agent) ON public.terms_acceptances TO authenticated;
 GRANT ALL ON public.terms_acceptances TO service_role;
 
 CREATE UNIQUE INDEX IF NOT EXISTS terms_acceptances_user_version_uidx
@@ -32,5 +33,30 @@ CREATE UNIQUE INDEX IF NOT EXISTS terms_acceptances_user_version_uidx
 
 CREATE INDEX IF NOT EXISTS terms_acceptances_user_idx
   ON public.terms_acceptances(user_id, accepted_at DESC);
+
+-- Server-side trigger to record initial signup acceptance with database timestamp now()
+CREATE OR REPLACE FUNCTION public.handle_new_user_terms_acceptance()
+RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = pg_catalog, public AS $$
+DECLARE
+  v_version text;
+  v_profile text;
+BEGIN
+  v_version := nullif(trim(coalesce(new.raw_user_meta_data->'radar_terms_acceptance'->>'version', '')), '');
+  v_profile := nullif(trim(coalesce(new.raw_user_meta_data->>'radar_profile_type', '')), '');
+  IF v_version IS NOT NULL THEN
+    INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type, accepted_at)
+    VALUES (new.id, v_version, v_profile, now())
+    ON CONFLICT (user_id, terms_version) DO NOTHING;
+  END IF;
+  RETURN new;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.handle_new_user_terms_acceptance() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS on_auth_user_created_terms ON auth.users;
+CREATE TRIGGER on_auth_user_created_terms
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user_terms_acceptance();
 
 COMMIT;

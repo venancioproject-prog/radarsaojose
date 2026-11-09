@@ -628,13 +628,15 @@ async function checkActiveSession() {
       profile.onboarding_completed = true;
     }
 
-    // 3. Aceite e perfil de primeiro acesso
-    if (window.radarLegal?.hasAccepted?.(user) && typeof window.radarLegal.recordAcceptance === "function") {
-      await window.radarLegal.recordAcceptance(supabaseClient, user);
-    }
-    if (!isVerifiedAdmin && profile.role !== "vendedor" && window.radarLegal.needsFirstAccess(user)) {
-      window.location.href = "primeiro-acesso.html";
-      return;
+    // 3. Aceite e perfil de primeiro acesso (validado pelo registro imutavel em public.terms_acceptances)
+    if (!isVerifiedAdmin && profile.role !== "vendedor") {
+      const accessState = typeof window.radarLegal?.checkFirstAccess === "function"
+        ? await window.radarLegal.checkFirstAccess(supabaseClient, user)
+        : { needsFirstAccess: window.radarLegal.needsFirstAccess(user) };
+      if (accessState.needsFirstAccess) {
+        window.location.href = "primeiro-acesso.html";
+        return;
+      }
     }
 
     // 4. Salvar estado autorizado em memória segura e consultar entitlement efetivo no servidor

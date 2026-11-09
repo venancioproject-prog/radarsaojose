@@ -367,17 +367,18 @@ test('Dash pago calcula gráficos no servidor (/api/survey-preview) e nunca baix
   );
 });
 
-test('Termos de uso e privacidade: cadastro (login.html) e primeiro acesso (primeiro-acesso.html) gravam registro imutável em terms_acceptances para conta nova', async () => {
+test('Termos de uso e privacidade: sistema usa exclusivamente o registro imutável em terms_acceptances e ignora user_metadata forjado', async () => {
   const loginHtml = fs.readFileSync(path.join(rootDir, 'login.html'), 'utf8');
   const primeiroAcessoHtml = fs.readFileSync(path.join(rootDir, 'primeiro-acesso.html'), 'utf8');
   const appJs = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
 
-  assert.match(loginHtml, /window\.radarLegal\.recordAcceptance\(/, 'login.html deve conectar ao registro protegido terms_acceptances');
-  assert.match(primeiroAcessoHtml, /window\.radarLegal\.recordAcceptance\(/, 'primeiro-acesso.html deve conectar ao registro protegido terms_acceptances');
-  assert.match(appJs, /window\.radarLegal\.recordAcceptance\(/, 'app.js deve garantir sincronização do registro protegido terms_acceptances');
+  assert.match(loginHtml, /window\.radarLegal\.checkFirstAccess\(/, 'login.html deve consultar o registro protegido em terms_acceptances');
+  assert.match(primeiroAcessoHtml, /window\.radarLegal\.checkFirstAccess\(/, 'primeiro-acesso.html deve consultar o registro protegido em terms_acceptances');
+  assert.match(appJs, /window\.radarLegal\.checkFirstAccess\(/, 'app.js deve validar o acesso pelo registro protegido em terms_acceptances');
 
   const db = new PGlite();
   const newUserId = '00000000-0000-4000-8000-000000000777';
+  const signupUserId = '00000000-0000-4000-8000-000000000888';
   await db.exec(`
     CREATE ROLE anon NOLOGIN;
     CREATE ROLE authenticated NOLOGIN;
@@ -391,14 +392,26 @@ test('Termos de uso e privacidade: cadastro (login.html) e primeiro acesso (prim
     GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
   `);
   await db.exec(readMigration('020_immutable_terms_acceptance.sql'));
+
+  // 1. Conta criada sem trigger (ex.: Google OAuth ou conta antiga) mas com user_metadata forjado
   await db.query(`INSERT INTO auth.users VALUES ($1, 'nova-conta@example.invalid', '{}')`, [newUserId]);
+
+  // 2. Conta criada no cadastro do login.html com raw_user_meta_data aciona a trigger no banco com now()
+  await db.query(
+    `INSERT INTO auth.users VALUES ($1, 'cadastro-login@example.invalid', $2::jsonb)`,
+    [signupUserId, JSON.stringify({ radar_profile_type: 'morador', radar_terms_acceptance: { version: '0.2' } })]
+  );
+  const triggerRows = (await db.query(`SELECT terms_version, profile_type, accepted_at FROM public.terms_acceptances WHERE user_id = $1`, [signupUserId])).rows;
+  assert.equal(triggerRows.length, 1, 'Trigger de cadastro deve criar registro imutável em terms_acceptances no banco');
+  assert.equal(triggerRows[0].terms_version, '0.2');
+  assert.equal(triggerRows[0].profile_type, 'morador');
 
   const sandbox = { window: {}, navigator: { userAgent: 'RadarTestBrowser/1.0' }, console };
   vm.runInNewContext(fs.readFileSync(path.join(rootDir, 'aceite-termos.js'), 'utf8'), sandbox);
   const radarLegal = sandbox.window.radarLegal;
-  assert.equal(typeof radarLegal.recordAcceptance, 'function');
+  assert.equal(typeof radarLegal.checkFirstAccess, 'function');
 
-  // Cliente Supabase ligado ao banco PostgreSQL (PGlite) autenticado como a conta nova
+  // Cliente Supabase ligado ao banco PostgreSQL (PGlite) autenticado como newUserId
   await db.query(`SELECT set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ role: 'authenticated', sub: newUserId })]);
   await db.exec('SET ROLE authenticated');
 
@@ -412,7 +425,7 @@ test('Termos de uso e privacidade: cadastro (login.html) e primeiro acesso (prim
             eq(col, val) { filters[col] = val; return this; },
             async limit() {
               const r = await db.query(
-                `SELECT id FROM public.terms_acceptances WHERE user_id = $1 AND terms_version = $2 LIMIT 1`,
+                `SELECT id, user_id, terms_version, profile_type, accepted_at FROM public.terms_acceptances WHERE user_id = $1 AND terms_version = $2 LIMIT 1`,
                 [filters.user_id, filters.terms_version]
               );
               return { data: r.rows, error: null };
@@ -422,9 +435,9 @@ test('Termos de uso e privacidade: cadastro (login.html) e primeiro acesso (prim
         async insert(payload) {
           try {
             await db.query(
-              `INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type, accepted_at, user_agent)
-               VALUES ($1, $2, $3, $4, $5)`,
-              [payload.user_id, payload.terms_version, payload.profile_type, payload.accepted_at, payload.user_agent]
+              `INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type, user_agent)
+               VALUES ($1, $2, $3, $4)`,
+              [payload.user_id, payload.terms_version, payload.profile_type, payload.user_agent]
             );
             return { error: null };
           } catch (err) {
@@ -435,27 +448,43 @@ test('Termos de uso e privacidade: cadastro (login.html) e primeiro acesso (prim
     }
   };
 
-  const newUser = {
+  const newUserWithForgedMeta = {
     id: newUserId,
     user_metadata: {
       radar_full_name: 'Maria Teste',
       radar_profile_type: 'empresario',
       radar_terms_acceptance: {
         version: radarLegal.version,
-        accepted_at: '2026-11-08T23:00:00.000Z'
+        accepted_at: '2020-01-01T00:00:00.000Z'
       }
     }
   };
 
-  assert.equal(radarLegal.hasAccepted(newUser), true);
-  assert.equal(radarLegal.needsFirstAccess(newUser), false);
+  // ANTES de gravar no banco: mesmo com user_metadata preenchido/forjado, checkFirstAccess recusa porque não existe linha em terms_acceptances!
+  const beforeDb = await radarLegal.checkFirstAccess(client, newUserWithForgedMeta);
+  assert.equal(beforeDb.accepted, false, 'Não deve confiar em user_metadata sem linha no banco');
+  assert.equal(beforeDb.needsFirstAccess, true, 'Deve exigir primeiro acesso enquanto não houver registro em terms_acceptances');
+  assert.equal(beforeDb.record, null);
 
-  const firstSave = await radarLegal.recordAcceptance(client, newUser);
-  assert.equal(firstSave, true);
+  // Cliente não consegue forjar accepted_at via INSERT direto
+  await assert.rejects(
+    db.query(`INSERT INTO public.terms_acceptances (user_id, terms_version, accepted_at) VALUES ($1, '0.2', '2020-01-01T00:00:00Z')`, [newUserId]),
+    { code: '42501' }
+  );
 
-  // Chamada repetida (ex.: confirmação no primeiro-acesso.html após cadastro no login.html) é idempotente e não duplica
-  const secondSave = await radarLegal.recordAcceptance(client, newUser);
-  assert.equal(secondSave, true);
+  // Ao gravar pelo fluxo oficial (recordAcceptance), o banco preenche accepted_at = now() e retorna o registro oficial
+  const firstSave = await radarLegal.recordAcceptance(client, newUserWithForgedMeta);
+  assert.ok(firstSave && firstSave.id, 'recordAcceptance deve retornar o registro lido do banco');
+  assert.equal(firstSave.terms_version, '0.2');
+
+  const afterDb = await radarLegal.checkFirstAccess(client, newUserWithForgedMeta);
+  assert.equal(afterDb.accepted, true, 'Após gravar em terms_acceptances, checkFirstAccess confirma pelo banco');
+  assert.equal(afterDb.needsFirstAccess, false);
+  assert.equal(afterDb.record.id, firstSave.id);
+
+  // Chamada repetida é idempotente e não duplica
+  const secondSave = await radarLegal.recordAcceptance(client, newUserWithForgedMeta);
+  assert.equal(secondSave.id, firstSave.id);
 
   const rows = (await db.query(`SELECT user_id, terms_version, profile_type, user_agent FROM public.terms_acceptances WHERE user_id = $1`, [newUserId])).rows;
   assert.equal(rows.length, 1);

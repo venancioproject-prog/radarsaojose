@@ -379,10 +379,8 @@
               return;
             }
 
-            if (window.radarLegal.hasAccepted(user)) {
-              await window.radarLegal.recordAcceptance(supabaseClient, user);
-            }
-            if (window.radarLegal.needsFirstAccess(user)) {
+            const accessState = await window.radarLegal.checkFirstAccess(supabaseClient, user);
+            if (accessState.needsFirstAccess) {
               window.location.href = "primeiro-acesso.html";
             } else {
               window.location.href = "app.html";
@@ -605,9 +603,6 @@
           if (signInErr) throw signInErr;
 
           const user = signInData.user;
-          if (window.radarLegal.hasAccepted(user)) {
-            await window.radarLegal.recordAcceptance(supabaseClient, user);
-          }
           const { data: profile } = await supabaseClient
             .from('profiles')
             .select('id, email, nome, role, plan_type, onboarding_completed')
@@ -627,10 +622,13 @@
             window.location.href = "admin-crm.html";
           } else if (role === 'vendedor') {
             window.location.href = "painel-afiliado.html";
-          } else if (window.radarLegal.needsFirstAccess(user)) {
-            window.location.href = "primeiro-acesso.html";
           } else {
-            window.location.href = "app.html";
+            const accessState = await window.radarLegal.checkFirstAccess(supabaseClient, user);
+            if (accessState.needsFirstAccess) {
+              window.location.href = "primeiro-acesso.html";
+            } else {
+              window.location.href = "app.html";
+            }
           }
         }
       } catch (err) {
