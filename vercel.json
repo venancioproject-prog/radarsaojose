@@ -45,6 +45,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/api/oraculo", "destination": "/api/consultor" },
     { "source": "/artigos/:slug.html", "destination": "/artigo.html?slug=:slug" },
     { "source": "/artigos/:slug", "destination": "/artigo.html?slug=:slug" },
     { "source": "/artigo/:slug", "destination": "/artigo.html?slug=:slug" }
