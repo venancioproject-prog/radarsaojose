@@ -710,6 +710,7 @@
             </div>
           </div>
           <p id="asaasPaymentStatus" class="asaas-payment-status" role="status" tabindex="-1" hidden></p>
+          <button type="button" id="asaasCheckExisting" class="asaas-method-tab" onclick="window.completeCheckoutAndUnlock()" hidden>Já paguei · Verificar pagamento</button>
           <p id="asaasActivePlanNotice" hidden>Você já tem um plano ativo. Escolha um plano superior para consultar o upgrade.</p>
           <button type="button" class="asaas-method-tab" id="asaasBackToPlans">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Ver planos
@@ -1147,6 +1148,7 @@
     document.getElementById('asaasPaymentStatus').hidden = true;
     isUpgradeMode = (upgradeFromPlan === 'dash' && plan !== 'dash')
       || (upgradeFromPlan === 'report' && plan === 'midia');
+    document.getElementById('asaasCheckExisting').hidden = !isUpgradeMode;
     const activePlan = window.appState?.entitlement?.status === 'active' && ['dash', 'report', 'midia'].includes(upgradeFromPlan);
     document.getElementById('asaasCheckoutForm').hidden = isUpgradeMode || activePlan;
     if (isUpgradeMode) {
@@ -1357,6 +1359,7 @@
     const resultBoletoBox = document.getElementById('resultBoletoBox');
 
     if (form) form.style.display = 'none';
+    document.getElementById('asaasCheckExisting').hidden = true;
     const choices = document.getElementById('asaasPaymentChoices');
     if (choices) choices.hidden = true;
     document.getElementById('asaasBackToPlans').hidden = true;
