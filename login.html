@@ -379,6 +379,9 @@
               return;
             }
 
+            if (window.radarLegal.hasAccepted(user)) {
+              await window.radarLegal.recordAcceptance(supabaseClient, user);
+            }
             if (window.radarLegal.needsFirstAccess(user)) {
               window.location.href = "primeiro-acesso.html";
             } else {
@@ -557,6 +560,8 @@
         if (!supabaseClient) throw new Error("Cliente Supabase não disponível.");
 
         if (isNewRegister) {
+          const acceptedAt = new Date().toISOString();
+          const selectedProfile = document.getElementById('register-profile').value;
           const { data: signUpData, error: signUpErr } = await supabaseClient.auth.signUp({
             email,
             password: String(password),
@@ -565,15 +570,23 @@
               data: {
                 full_name: nome,
                 radar_full_name: nome,
-                radar_profile_type: document.getElementById('register-profile').value,
+                radar_profile_type: selectedProfile,
                 radar_terms_acceptance: {
                   version: window.radarLegal.version,
-                  accepted_at: new Date().toISOString()
+                  accepted_at: acceptedAt
                 }
               }
             }
           });
           if (signUpErr) throw signUpErr;
+
+          if (signUpData?.session?.user) {
+            await window.radarLegal.recordAcceptance(supabaseClient, signUpData.session.user, {
+              terms_version: window.radarLegal.version,
+              accepted_at: acceptedAt,
+              profile_type: selectedProfile
+            });
+          }
 
           localStorage.setItem('userEmail', email);
           localStorage.setItem('userName', nome || email.split('@')[0]);
@@ -592,6 +605,9 @@
           if (signInErr) throw signInErr;
 
           const user = signInData.user;
+          if (window.radarLegal.hasAccepted(user)) {
+            await window.radarLegal.recordAcceptance(supabaseClient, user);
+          }
           const { data: profile } = await supabaseClient
             .from('profiles')
             .select('id, email, nome, role, plan_type, onboarding_completed')

@@ -333,3 +333,144 @@ test('Mídia: conta Report recebe 403 em GET /api/media e na tela vê apenas a p
     assert.equal(res.body.code, 'NOT_FOUND');
   }
 });
+
+
+test('Dash pago calcula gráficos no servidor (/api/survey-preview) e nunca baixa as 477 linhas brutas no navegador', async () => {
+  const appJs = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
+  assert.doesNotMatch(appJs, /from\(["']respostas_pesquisa["']\)/, 'app.js não deve ler respostas_pesquisa direto no navegador');
+  assert.doesNotMatch(appJs, /surveyDemo=1/, 'app.js não deve buscar linhas brutas de demonstração em /api/asaas-checkout?surveyDemo=1');
+  assert.match(appJs, /fetch\(['"]\/api\/survey-preview['"]\s*\+/, 'app.js deve buscar agregados do servidor em /api/survey-preview');
+
+  const surveyData = require('../lib/survey-data');
+  const rows = surveyData.demoSurveyRows();
+  const payload = surveyData.surveyPreview(rows, {}, true);
+
+  assert.equal(payload.full, true);
+  assert.equal(payload.total, 96);
+  assert.ok(payload.kpis && typeof payload.kpis.pride === 'number', 'Servidor deve entregar KPIs calculados');
+  assert.ok(Array.isArray(payload.flowPairs), 'Servidor deve entregar pares de fluxo Sankey agregados');
+  assert.ok(payload.reference && typeof payload.reference === 'object', 'Servidor deve entregar agregado de referência por pergunta');
+
+  // Perguntas de múltipla escolha devem ser separadas por vírgula e sem parênteses no servidor
+  const transportQuestion = payload.questions.find(q => /transporte/i.test(q));
+  assert.ok(transportQuestion, 'Pergunta de transporte presente');
+  const multiRows = rows.map(r => ({ ...r, [transportQuestion]: 'Carro (próprio), Ônibus (municipal)' }));
+  const multiPayload = surveyData.surveyPreview(multiRows, {}, true);
+  const transportBuckets = multiPayload.charts[transportQuestion] || [];
+  assert.deepEqual(
+    transportBuckets,
+    [
+      { label: 'Carro', count: 96 },
+      { label: 'Ônibus', count: 96 }
+    ],
+    'Buckets de múltipla escolha devem ser separados por vírgula e sem parênteses no servidor'
+  );
+});
+
+test('Termos de uso e privacidade: cadastro (login.html) e primeiro acesso (primeiro-acesso.html) gravam registro imutável em terms_acceptances para conta nova', async () => {
+  const loginHtml = fs.readFileSync(path.join(rootDir, 'login.html'), 'utf8');
+  const primeiroAcessoHtml = fs.readFileSync(path.join(rootDir, 'primeiro-acesso.html'), 'utf8');
+  const appJs = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
+
+  assert.match(loginHtml, /window\.radarLegal\.recordAcceptance\(/, 'login.html deve conectar ao registro protegido terms_acceptances');
+  assert.match(primeiroAcessoHtml, /window\.radarLegal\.recordAcceptance\(/, 'primeiro-acesso.html deve conectar ao registro protegido terms_acceptances');
+  assert.match(appJs, /window\.radarLegal\.recordAcceptance\(/, 'app.js deve garantir sincronização do registro protegido terms_acceptances');
+
+  const db = new PGlite();
+  const newUserId = '00000000-0000-4000-8000-000000000777';
+  await db.exec(`
+    CREATE ROLE anon NOLOGIN;
+    CREATE ROLE authenticated NOLOGIN;
+    CREATE ROLE service_role NOLOGIN BYPASSRLS;
+    CREATE SCHEMA auth;
+    CREATE TABLE auth.users(id uuid PRIMARY KEY, email text, raw_user_meta_data jsonb);
+    CREATE FUNCTION auth.jwt() RETURNS jsonb LANGUAGE sql STABLE AS $$
+      SELECT COALESCE(NULLIF(current_setting('request.jwt.claims', true), ''), '{}')::jsonb
+    $$;
+    CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT (auth.jwt()->>'sub')::uuid $$;
+    GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
+  `);
+  await db.exec(readMigration('020_immutable_terms_acceptance.sql'));
+  await db.query(`INSERT INTO auth.users VALUES ($1, 'nova-conta@example.invalid', '{}')`, [newUserId]);
+
+  const sandbox = { window: {}, navigator: { userAgent: 'RadarTestBrowser/1.0' }, console };
+  vm.runInNewContext(fs.readFileSync(path.join(rootDir, 'aceite-termos.js'), 'utf8'), sandbox);
+  const radarLegal = sandbox.window.radarLegal;
+  assert.equal(typeof radarLegal.recordAcceptance, 'function');
+
+  // Cliente Supabase ligado ao banco PostgreSQL (PGlite) autenticado como a conta nova
+  await db.query(`SELECT set_config('request.jwt.claims', $1, false)`, [JSON.stringify({ role: 'authenticated', sub: newUserId })]);
+  await db.exec('SET ROLE authenticated');
+
+  const client = {
+    from(table) {
+      assert.equal(table, 'terms_acceptances');
+      return {
+        select() {
+          const filters = {};
+          return {
+            eq(col, val) { filters[col] = val; return this; },
+            async limit() {
+              const r = await db.query(
+                `SELECT id FROM public.terms_acceptances WHERE user_id = $1 AND terms_version = $2 LIMIT 1`,
+                [filters.user_id, filters.terms_version]
+              );
+              return { data: r.rows, error: null };
+            }
+          };
+        },
+        async insert(payload) {
+          try {
+            await db.query(
+              `INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type, accepted_at, user_agent)
+               VALUES ($1, $2, $3, $4, $5)`,
+              [payload.user_id, payload.terms_version, payload.profile_type, payload.accepted_at, payload.user_agent]
+            );
+            return { error: null };
+          } catch (err) {
+            return { error: err };
+          }
+        }
+      };
+    }
+  };
+
+  const newUser = {
+    id: newUserId,
+    user_metadata: {
+      radar_full_name: 'Maria Teste',
+      radar_profile_type: 'empresario',
+      radar_terms_acceptance: {
+        version: radarLegal.version,
+        accepted_at: '2026-11-08T23:00:00.000Z'
+      }
+    }
+  };
+
+  assert.equal(radarLegal.hasAccepted(newUser), true);
+  assert.equal(radarLegal.needsFirstAccess(newUser), false);
+
+  const firstSave = await radarLegal.recordAcceptance(client, newUser);
+  assert.equal(firstSave, true);
+
+  // Chamada repetida (ex.: confirmação no primeiro-acesso.html após cadastro no login.html) é idempotente e não duplica
+  const secondSave = await radarLegal.recordAcceptance(client, newUser);
+  assert.equal(secondSave, true);
+
+  const rows = (await db.query(`SELECT user_id, terms_version, profile_type, user_agent FROM public.terms_acceptances WHERE user_id = $1`, [newUserId])).rows;
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].terms_version, '0.2');
+  assert.equal(rows[0].profile_type, 'empresario');
+  assert.equal(rows[0].user_agent, 'RadarTestBrowser/1.0');
+
+  // Imutabilidade: a própria conta nova não consegue alterar nem apagar o registro
+  await assert.rejects(
+    db.query(`UPDATE public.terms_acceptances SET profile_type = 'outro' WHERE user_id = $1`, [newUserId]),
+    { code: '42501' }
+  );
+  await assert.rejects(
+    db.query(`DELETE FROM public.terms_acceptances WHERE user_id = $1`, [newUserId]),
+    { code: '42501' }
+  );
+  await db.exec('RESET ROLE');
+});

@@ -163,6 +163,9 @@
     if (spec.type === 'sample' || spec.type === 'total' || (spec.type === 'valid' && !spec.field)) {
       return { formatted: M.formatNumberBR(engine.n, 0) };
     }
+    if (engine.results) {
+      return engine.results.get(JSON.stringify(spec)) || null;
+    }
     if (!spec.name && !spec.field) return null;
     try {
       const r = spec.name ? engine.metric(spec.name) : engine.calculate(spec.type === 'valid'
@@ -293,30 +296,83 @@
       console.warn('Error rendering sankey chart:', err);
     }
   }
-  async function render({ records, filters, bar, sankey, clear } = {}) {
+  async function render({ token, records, filters, bar, sankey, clear } = {}) {
     initialize();
     const current = ++revision;
-    if (!records?.length) {
+    if (records?.length) {
+      try {
+        const snapshot = { records, metadata: { provider: 'Demonstração' } };
+        if (current !== revision) return;
+        genders = M.create(snapshot.records, snapshot.metadata).distribution('gender').categories.map(c => c.category);
+        engine = M.create(snapshot.records, snapshot.metadata, filters ?? filtersFromUI());
+        state = 'READY';
+        clear?.();
+        paint();
+        paintAllCharts(bar, sankey);
+        return audit();
+      } catch (_) {
+        if (current !== revision) return;
+        engine = null;
+        state = 'SOURCE_ERROR';
+        clear?.();
+        paint();
+        return audit();
+      }
+    }
+    if (!token) {
       engine = null;
       state = 'PREVIEW';
       clear?.();
       paint();
       return audit();
     }
+    const selected = filters ?? filtersFromUI();
+    const specs = [...bindings.map(binding => binding.spec), { name: 'pride' }, { name: 'external' }];
+    document.querySelectorAll('[data-report-indicator]').forEach(el => specs.push({ name: el.dataset.reportIndicator }));
     try {
-      const snapshot = { records, metadata: { provider: 'Demonstração' } };
+      const response = await fetch('/api/survey-report', {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filters: selected, specs }),
+        cache: 'no-store'
+      });
       if (current !== revision) return;
-      genders = M.create(snapshot.records, snapshot.metadata).distribution('gender').categories.map(c => c.category);
-      engine = M.create(snapshot.records, snapshot.metadata, filters ?? filtersFromUI());
+      if (!response.ok) throw new Error(response.status === 403 ? 'PREVIEW' : 'SOURCE_ERROR');
+      const snapshot = await response.json();
+      if (current !== revision) return;
+      const results = new Map(specs.map((spec, index) => [JSON.stringify(spec), snapshot.metrics[index]]));
+      engine = {
+        N: snapshot.N,
+        n: snapshot.n,
+        filters: selected,
+        results,
+        distribution: field => {
+          const dist = snapshot.distributions[field] || { valid: 0, categories: [] };
+          return {
+            valid: dist.valid,
+            categories: (dist.categories || []).map(c => ({
+              ...c,
+              denominator: dist.valid,
+              formatted: c.formatted || M.formatPercentBR(c.value)
+            }))
+          };
+        },
+        metric: name => results.get(JSON.stringify({ name })) || {},
+        flows: () => (snapshot.flows || []).map(f => ({
+          ...f,
+          formatted: f.formatted || String(f.flow)
+        })),
+        audit: () => ({ N: snapshot.N, n: snapshot.n, filters: selected })
+      };
       state = 'READY';
       clear?.();
       paint();
       paintAllCharts(bar, sankey);
       return audit();
-    } catch (_) {
+    } catch (error) {
       if (current !== revision) return;
       engine = null;
-      state = 'SOURCE_ERROR';
+      state = error.message === 'PREVIEW' ? 'PREVIEW' : 'SOURCE_ERROR';
       clear?.();
       paint();
       return audit();

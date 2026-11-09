@@ -115,6 +115,9 @@
           return;
         }
         const user = data.session.user;
+        if (window.radarLegal.hasAccepted(user)) {
+          await window.radarLegal.recordAcceptance(client, user);
+        }
         if (fromConfirmation && user.email_confirmed_at) {
           document.getElementById("email-confirmed").hidden = false;
           if (!window.radarLegal.needsFirstAccess(user)) {
@@ -151,15 +154,21 @@
           status.textContent = "Salvando seu primeiro acesso…";
 
           try {
+            const acceptedAt = new Date().toISOString();
             const metadata = { radar_profile_type: select.value, radar_full_name: name, full_name: name };
             if (!alreadyAccepted) {
               metadata.radar_terms_acceptance = {
                 version: window.radarLegal.version,
-                accepted_at: new Date().toISOString()
+                accepted_at: acceptedAt
               };
             }
             const { data, error } = await client.auth.updateUser({ data: metadata });
             if (error || window.radarLegal.needsFirstAccess(data?.user)) throw error || new Error("Primeiro acesso não confirmado");
+            await window.radarLegal.recordAcceptance(client, data?.user || user, {
+              terms_version: window.radarLegal.version,
+              accepted_at: acceptedAt,
+              profile_type: select.value
+            });
             window.location.replace("app.html");
           } catch {
             status.textContent = "Não foi possível salvar. Tente novamente.";

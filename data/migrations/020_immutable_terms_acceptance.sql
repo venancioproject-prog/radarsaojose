@@ -1,4 +1,4 @@
--- Migration 016: Immutable Terms Acceptance Audit Log
+-- Migration 020: Immutable Terms Acceptance Audit Log
 -- Provides an append-only, legally auditable log of terms of use and privacy policy acceptances under LGPD.
 BEGIN;
 SET LOCAL lock_timeout = '5s';
@@ -26,6 +26,9 @@ CREATE POLICY select_own_acceptance ON public.terms_acceptances
 REVOKE UPDATE, DELETE ON public.terms_acceptances FROM PUBLIC, anon, authenticated;
 GRANT SELECT, INSERT ON public.terms_acceptances TO authenticated;
 GRANT ALL ON public.terms_acceptances TO service_role;
+
+CREATE UNIQUE INDEX IF NOT EXISTS terms_acceptances_user_version_uidx
+  ON public.terms_acceptances(user_id, terms_version);
 
 CREATE INDEX IF NOT EXISTS terms_acceptances_user_idx
   ON public.terms_acceptances(user_id, accepted_at DESC);

@@ -629,6 +629,9 @@ async function checkActiveSession() {
     }
 
     // 3. Aceite e perfil de primeiro acesso
+    if (window.radarLegal?.hasAccepted?.(user) && typeof window.radarLegal.recordAcceptance === "function") {
+      await window.radarLegal.recordAcceptance(supabaseClient, user);
+    }
     if (!isVerifiedAdmin && profile.role !== "vendedor" && window.radarLegal.needsFirstAccess(user)) {
       window.location.href = "primeiro-acesso.html";
       return;
@@ -804,7 +807,7 @@ window.refreshConfirmedPlan = async function(expectedPlan) {
     window.appState.entitlement = entJson.entitlement;
     window.appState.plan_type = entJson.entitlement.planType;
     window.applyPlanRestrictions();
-    if (window.radarCanLoadModule?.('dashboard') && !allSurveyRecords.length) void fetchSurveyData();
+    if (window.radarCanLoadModule?.('dashboard')) void fetchSurveyData();
     if (window.currentMainTab === 'midia') window.onSwitchToMidiaTab?.();
     if (window.currentMainTab === 'report') void window.renderExecutiveReportCharts();
     return window.appState.plan_type;
@@ -1391,39 +1394,46 @@ async function fetchSurveyData() {
   ALL_FILTER_ELEMENTS.forEach(select => {
     if (select) select.disabled = !unlocked;
   });
+  allSurveyRecords = [];
+  window.allSurveyRecords = [];
+  window.currentFilteredRecords = [];
   if (!unlocked) {
-    allSurveyRecords = [];
-    window.allSurveyRecords = [];
-    window.currentFilteredRecords = [];
     return fetchPublicSurvey();
   }
   if (dynamicChartsGrid) delete dynamicChartsGrid.dataset.publicSurvey;
   document.getElementById('survey-public-label')?.classList.add('hidden');
   const request = ++surveyRequest;
-  const isDemo = window.radarSupabaseConfig?.preview === true;
   try {
-    let data;
-    if (isDemo) {
-      const response = await fetch('/api/asaas-checkout?surveyDemo=1', { cache: 'no-store' });
-      if (!response.ok) throw new Error('Base de demonstração indisponível');
-      ({ rows: data } = await response.json());
-    } else {
-      if (!supabaseClient) throw new Error('Supabase indisponível');
-      let result = await supabaseClient.from('respostas_pesquisa').select('*').range(0, 5000);
-      if (result.error) result = await supabaseClient.from('respostas radar').select('*').range(0, 5000);
-      if (result.error) throw result.error;
-      data = result.data;
-    }
+    const { data: sessionData } = await supabaseClient?.auth.getSession() || {};
+    const token = sessionData?.session?.access_token;
+    const headers = token ? { Authorization: 'Bearer ' + token } : {};
+    const params = new URLSearchParams();
+    ALL_FILTER_ELEMENTS.forEach(select => {
+      if (select?.value && select.value !== 'TODOS') params.set(select.id.slice(7), select.value);
+    });
+    const query = params.toString();
+    const response = await fetch('/api/survey-preview' + (query ? '?' + query : ''), { headers, cache: 'no-store' });
+    if (!response.ok) throw new Error('Pesquisa indisponível');
+    const preview = await response.json();
     if (request !== surveyRequest) return;
-    if (!Array.isArray(data) || !data.length) throw new Error('Pesquisa indisponível');
-    allSurveyRecords = data;
-    window.allSurveyRecords = data;
+    if (preview.full !== true) return fetchPublicSurvey();
     dataFetchError?.classList.add('hidden');
-    setSurveyDemoLabel(isDemo);
-    if (supabaseTableStatus) supabaseTableStatus.textContent = isDemo ? 'Base de demonstração' : 'Ativo (' + data.length + ' registros)';
+    setSurveyDemoLabel(Boolean(preview.synthetic));
+    if (supabaseTableStatus) {
+      supabaseTableStatus.textContent = preview.synthetic
+        ? 'Base de demonstração'
+        : 'Ativo (' + preview.total + ' registros)';
+    }
     updateSyncTime();
-    populateAllSidebarFilters(data);
-    applyCombinedFilters();
+    populateAllSidebarFilters(preview.options);
+    if (filteredRecordsCount) filteredRecordsCount.textContent = preview.count.toLocaleString('pt-BR');
+    if (totalBaseCount) totalBaseCount.textContent = preview.total.toLocaleString('pt-BR');
+    updateStatisticalHeader(preview.count, preview.total);
+    processAndRenderDynamicCharts([], preview);
+    if (location.hash === '#report') window.renderExecutiveReportCharts?.();
+    if (typeof window.applyPlanRestrictions === 'function') {
+      window.applyPlanRestrictions();
+    }
   } catch (_) {
     if (request !== surveyRequest) return;
     if (supabaseTableStatus) supabaseTableStatus.textContent = 'Pesquisa indisponível';
@@ -1592,6 +1602,20 @@ function populateSelectOptions(selectEl, values, defaultLabel = "Todas", customS
 }
 
 function populateAllSidebarFilters(records) {
+  if (records && !Array.isArray(records)) {
+    const options = records;
+    populateSelectOptions(filterGenderSelect, options.gender || ["Homem", "Mulher", "Outros"], "Todos os Gêneros");
+    populateSelectOptions(filterIncomeSelect, options.income || [], "Todas as Faixas", sortFilterIncomes);
+    populateSelectOptions(filterAgeSelect, options.age || [], "Todas as Idades", sortFilterAges);
+    populateSelectOptions(filterRegionSelect, options.region || [], "Todas as Regiões");
+    populateSelectOptions(filterMaritalSelect, options.marital || [], "Todos os Estados Civis");
+    populateSelectOptions(filterWorkSelect, options.work || [], "Todos os Modelos");
+    populateSelectOptions(filterHouseSelect, options.house || [], "Todas as Opções");
+    populateSelectOptions(filterPoliticsSelect, options.politics || [], "Todos os Posicionamentos");
+    populateSelectOptions(filterQualitySelect, options.quality || [], "Todas as Notas (1 a 5)", sortFilterQualities);
+    populateSelectOptions(filterPrideSelect, options.pride || [], "Todas as Opções");
+    return;
+  }
   const genders = new Set(["Homem", "Mulher", "Outros"]);
   const incomes = new Set();
   const ages = new Set();
@@ -1664,6 +1688,7 @@ function normalizeGender(val) {
 
 function applyCombinedFilters() {
   if (!window.radarCanLoadModule?.('dashboard')) return fetchPublicSurvey();
+  if (!allSurveyRecords.length) return fetchSurveyData();
   const selGender = filterGenderSelect ? filterGenderSelect.value : "TODOS";
   const selIncome = filterIncomeSelect ? filterIncomeSelect.value : "TODOS";
   const selAge = filterAgeSelect ? filterAgeSelect.value : "TODOS";
@@ -1903,9 +1928,15 @@ function processAndRenderDynamicCharts(records, preview) {
   });
 
   const avgQualityScore = qualityCount > 0 ? (totalQualityScore / qualityCount).toFixed(1) : "4.3";
-  if (statQualityLife) statQualityLife.textContent = preview ? "—" : avgQualityScore;
-  if (statPrideRate) statPrideRate.textContent = preview ? "—" : total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
-  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = preview ? "—" : neighborhoods.size.toString() || "34";
+  if (statQualityLife) statQualityLife.textContent = preview ? (preview.kpis ? preview.kpis.quality : "—") : avgQualityScore;
+  if (statPrideRate) statPrideRate.textContent = preview ? (preview.kpis ? preview.kpis.pride + "%" : "—") : total > 0 ? Math.round((prideCount / total) * 100) + "%" : "85%";
+  if (statNeighborhoodsCount) statNeighborhoodsCount.textContent = preview ? (preview.kpis ? String(preview.kpis.neighborhoods) : "—") : neighborhoods.size.toString() || "34";
+  if (total === 0 && preview?.full === true) {
+    if (dynamicChartsGrid) {
+      dynamicChartsGrid.innerHTML = '<div class="bg-white rounded-3xl p-12 text-center text-slate-400 font-semibold border border-slate-200">Nenhum resultado corresponde aos filtros selecionados.</div>';
+    }
+    return;
+  }
 
   // Agrupamento por Seções
   const categories = [
@@ -2543,7 +2574,16 @@ function processAndRenderDynamicCharts(records, preview) {
 
         setTimeout(() => {
           const sankeyFlows = {};
-          records.forEach(r => {
+          const flowSource = (preview?.flowPairs && (!records || records.length === 0))
+            ? preview.flowPairs.flatMap(({ label, count }) => {
+                const [region, dest] = JSON.parse(label);
+                return Array(count).fill({
+                  'Região': region,
+                  'Qual região da cidade você mais frequenta quando sai de casa?': dest
+                });
+              })
+            : records;
+          flowSource.forEach(r => {
             const origemRaw = getField(r, ["Região", "Regiao", "região", "regiao", "Em qual bairro você mora?", "bairro"]);
             let origem = origemRaw ? origemRaw.trim() : "Outra";
             if (origem.toLowerCase().includes("oeste") || origem.toLowerCase().includes("aquarius") || origem.toLowerCase().includes("esplanada") || origem.toLowerCase().includes("urbanova")) origem = "Origem: Zona Oeste";
@@ -2675,7 +2715,9 @@ function processAndRenderDynamicCharts(records, preview) {
       // GRÁFICO PADRÃO OTIMIZADO PARA DEMAIS PERGUNTAS
       const isMultipleChoice = /transporte|música|musica|serviços|servicos|streaming|mais falta|o que falta|influenciador|notícias|noticias|sabendo das/i.test(questionText);
       // O filtro altera os valores, mas preserva o tipo e a orientação da amostra completa.
-      const referenceDataMap = preview ? dataMap : aggregateSurveyChartData(referenceRecords, questionText);
+      const referenceDataMap = preview
+        ? Object.fromEntries((preview.reference?.[questionText] || preview.charts[questionText] || []).map(({ label, count }) => [label, count]))
+        : aggregateSurveyChartData(referenceRecords, questionText);
       const chartTypeConfig = determineChartType(questionText, referenceDataMap, globalQuestionIndex);
       const itemCount = Object.keys(dataMap).length;
       const minContainerHeight = (chartTypeConfig.options && chartTypeConfig.options.horizontal && itemCount > 6) 
@@ -7772,7 +7814,9 @@ window.renderExecutiveReportCharts = async function() {
     ], '#1E293B');
     return;
   }
+  const { data: sessionData } = await supabaseClient?.auth.getSession() || {};
   return window.RadarReportUI.render({
+    token: sessionData?.session?.access_token,
     url: SUPABASE_URL,
     key: SUPABASE_ANON_KEY,
     records: allSurveyRecords,
