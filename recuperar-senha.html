@@ -50,7 +50,11 @@
       const status = document.getElementById("status");
       const mode = new URLSearchParams(location.search).get("modo");
       const hash = new URLSearchParams(window.location.hash.slice(1));
-      const recovery = mode === "redefinir" || hash.get("type") === "recovery";
+      const recoveryToken = hash.get("recovery_token");
+      const recovery = mode === "redefinir" || hash.get("type") === "recovery" || Boolean(recoveryToken);
+      if (recoveryToken) {
+        window.history.replaceState(null, "", location.pathname + location.search);
+      }
       const confirmation = mode === "confirmar";
       const { url, key } = window.radarSupabaseConfig || {};
       if (!url || !key || !window.supabase) {
@@ -58,7 +62,9 @@
         return;
       }
 
-      const client = window.supabase.createClient(url, key);
+      const client = window.supabase.createClient(url, key, {
+        auth: { persistSession: !recoveryToken }
+      });
       if (!recovery) {
         if (confirmation) {
           document.getElementById("title").textContent = "Reenviar confirmação";
@@ -111,11 +117,24 @@
         status.textContent = "";
       }
 
-      client.auth.onAuthStateChange((event, session) => {
-        if (event === "PASSWORD_RECOVERY" && session?.user) {
-          showPasswordForm(session.user);
-        }
-      });
+      if (recoveryToken) {
+        client.auth.verifyOtp({ token_hash: recoveryToken, type: "recovery" })
+          .then(({ data, error }) => {
+            if (error || !data.session?.user) throw new Error("Link inválido");
+            showPasswordForm(data.session.user);
+          })
+          .catch(() => {
+            clearTimeout(recoveryWait);
+            status.textContent = "Este link expirou ou já foi usado. Solicite outro.";
+            document.getElementById("retry").hidden = false;
+          });
+      } else {
+        client.auth.onAuthStateChange((event, session) => {
+          if (event === "PASSWORD_RECOVERY" && session?.user) {
+            showPasswordForm(session.user);
+          }
+        });
+      }
 
       update.addEventListener("submit", async event => {
         event.preventDefault();
