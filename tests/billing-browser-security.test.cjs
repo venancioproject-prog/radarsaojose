@@ -5,12 +5,15 @@ const { quotePurchase } = require('../lib/pricing');
 const vm = require('node:vm');
 const modal = fs.readFileSync('asaas-checkout-modal.js', 'utf8');
 const app = fs.readFileSync('app.js', 'utf8');
-function completion(refresh) {
-  const messages = [];
+function completion(refresh, verify) {
+  const status = { focus() {} };
   const window = { refreshConfirmedPlan: refresh, closeAsaasModal() { this.closed = true; } };
-  const context = { window, currentPlanId: 'report', alert: value => messages.push(value) };
+  const context = { window, currentPlanId: 'report', isCheckingPayment: false, isSubmitting: false,
+    document: { getElementById: () => status }, AbortSignal,
+    supabaseClient: verify && { auth: { getSession: async () => ({ data: { session: { access_token: 'fixture' } } }) } },
+    fetch: verify };
   vm.runInNewContext(modal.slice(modal.indexOf('  window.completeCheckoutAndUnlock ='), modal.indexOf('  // Listener para fechamento')), context);
-  return { window, messages };
+  return { window, status };
 }
 test('card checkout sends customers to Asaas and rejects legacy card fields', async () => {
   const path = require('node:path');
@@ -99,7 +102,18 @@ test('pending confirmation never completes checkout', async () => {
   const state = completion(async () => 'gratis');
   await state.window.completeCheckoutAndUnlock();
   assert.equal(state.window.closed, undefined);
-  assert.equal(state.messages.length, 1);
+  assert.match(state.status.textContent, /pendente/);
+});
+test('manual verification checks the existing payment and re-reads the confirmed plan', async () => {
+  let active = 'dash';
+  const state = completion(async () => active, async (url, request) => {
+    assert.equal(url, '/api/asaas-checkout');
+    assert.deepEqual(JSON.parse(request.body), { action: 'verifyPayment', plan: 'report' });
+    active = 'report';
+    return { ok: true };
+  });
+  await state.window.completeCheckoutAndUnlock();
+  assert.equal(state.window.closed, true);
 });
 test('server confirmed plan completes checkout', async () => {
   const state = completion(async () => 'report');

@@ -125,9 +125,11 @@
         color: #102948;
         border-radius: 12px;
       }
-      .asaas-trust-panel img { display: block; width: 84px; height: auto; }
+      .asaas-trust-panel img { display: block; width: 84px; height: auto; padding: 8px; border-radius: 7px; background: #174c9b; box-sizing: content-box; }
+      .asaas-trust-lock { width: 42px; height: 42px; padding: 9px; border-radius: 12px; background: #dcecff; color: #174c9b; box-sizing: border-box; }
       .asaas-trust-copy { flex: 1 1 210px; font-size: 12px; line-height: 1.45; }
       .asaas-trust-copy strong { display: block; font-size: 13px; }
+      .asaas-payment-status { margin: 0 0 14px; padding: 10px 12px; border-left: 3px solid #2563eb; background: #eff6ff; color: #193d72; font-size: 13px; }
 
       .asaas-modal-sub {
         font-size: 11.5px;
@@ -655,6 +657,22 @@
       .asaas-btn-unlock-view:hover {
         background: #059669;
       }
+      .asaas-modal-dialog:has(#asaasPaymentStep:not([hidden])) { background: #fff; color: #102948; color-scheme: light; border-color: #dbe6f3; }
+      .asaas-modal-dialog:has(#asaasPaymentStep:not([hidden])) .asaas-top-header { border-color: #e2e8f0; margin-bottom: 14px; }
+      .asaas-modal-dialog:has(#asaasPaymentStep:not([hidden])) :is(.asaas-modal-title, .asaas-close-button) { color: #102948; }
+      .asaas-modal-dialog:has(#asaasPaymentStep:not([hidden])) .asaas-modal-sub { color: #52647c; }
+      .asaas-modal-dialog:has(#asaasPaymentStep:not([hidden])) .asaas-close-button { background: #f1f5f9; border-color: #dbe6f3; }
+      #asaasPaymentStep :is(.asaas-field-label, .asaas-upgrade-desc, .asaas-success-text) { color: #334b68; }
+      #asaasPaymentStep p.asaas-field-label { display: block; text-transform: none; letter-spacing: normal; line-height: 1.5; }
+      #asaasPaymentStep p.asaas-field-label a { color: #1752a5; text-decoration: underline; }
+      #asaasPaymentStep :is(.asaas-text-input, .asaas-select-input, .asaas-copy-text) { background: #f8fafc; border-color: #c9d7e8; color: #102948; }
+      #asaasPaymentStep .asaas-text-input::placeholder { color: #65768b; }
+      #asaasPaymentStep .asaas-select-input option { background: #fff; color: #102948; }
+      #asaasPaymentStep :is(.asaas-methods-nav, .asaas-upgrade-callout, .asaas-success-card, .asaas-boleto-box) { background: #f5f8fc; border-color: #d6e2f1; box-shadow: none; }
+      #asaasPaymentStep :is(.asaas-method-tab, .asaas-upgrade-pill, .asaas-success-title, .asaas-pix-instruction) { color: #174c9b; }
+      #asaasPaymentStep :is(.asaas-method-tab.active, .asaas-submit-btn) { background: #174c9b; color: #fff; box-shadow: none; }
+      #asaasPaymentStep .asaas-alert-error { background: #fff3f2; border-color: #f6c3c0; color: #882a26; }
+      #asaasOrderSummary :is(div, strong) { color: #334b68 !important; }
     </style>
   `;
 
@@ -684,13 +702,14 @@
         <div id="asaasPlanGrid" class="radar-plan-catalog">${window.radarPlanCatalog || ''}</div>
         <div id="asaasPaymentStep" hidden>
           <div class="asaas-trust-panel">
-            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+            <svg class="asaas-trust-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg>
             <img src="web-media/asaas-logo.svg" alt="Asaas" width="84" height="15">
             <div class="asaas-trust-copy">
-              <strong>Pagamento processado pelo Asaas</strong>
+              <strong>Ambiente de pagamento Asaas</strong>
               Os dados do cartão são informados na página do Asaas. O Radar libera o plano após a confirmação.
             </div>
           </div>
+          <p id="asaasPaymentStatus" class="asaas-payment-status" role="status" tabindex="-1" hidden></p>
           <p id="asaasActivePlanNotice" hidden>Você já tem um plano ativo. Escolha um plano superior para consultar o upgrade.</p>
           <button type="button" class="asaas-method-tab" id="asaasBackToPlans">
             <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Ver planos
@@ -866,6 +885,7 @@
   let currentPlanId = 'report';
   let currentPaymentMethod = 'PIX';
   let isSubmitting = false;
+  let isCheckingPayment = false;
   let previouslyFocusedElement = null;
   let isUpgradeMode = false;
   let upgradeFromPlan = null;
@@ -1124,6 +1144,7 @@
   function showPaymentStep(plan) {
     ++upgradeQuoteRequest;
     currentPlanId = plan;
+    document.getElementById('asaasPaymentStatus').hidden = true;
     isUpgradeMode = (upgradeFromPlan === 'dash' && plan !== 'dash')
       || (upgradeFromPlan === 'report' && plan === 'midia');
     const activePlan = window.appState?.entitlement?.status === 'active' && ['dash', 'report', 'midia'].includes(upgradeFromPlan);
@@ -1529,19 +1550,39 @@
 
   // Finalização e Desbloqueio da Plataforma
   window.completeCheckoutAndUnlock = async function() {
+    if (isCheckingPayment || isSubmitting) return;
+    const target = currentPlanId;
+    const status = document.getElementById('asaasPaymentStatus');
+    status.hidden = false;
+    status.textContent = 'Consultando o pagamento no Asaas…';
+    status.focus();
+    isCheckingPayment = true;
     try {
       if (typeof window.refreshConfirmedPlan !== 'function') {
         throw new Error('Entre na sua conta para verificar a confirmação do pagamento.');
       }
-      const confirmedPlan = await window.refreshConfirmedPlan();
-      if (confirmedPlan !== currentPlanId) {
-        alert('Pagamento ainda não confirmado para este plano. Aguarde e verifique novamente.');
+      let confirmedPlan = await window.refreshConfirmedPlan();
+      if (confirmedPlan !== target && typeof supabaseClient !== 'undefined' && supabaseClient) {
+        const { data } = await supabaseClient.auth.getSession();
+        if (!data?.session?.access_token) throw new Error('Entre na sua conta para verificar o pagamento.');
+        const response = await fetch('/api/asaas-checkout', {
+          method: 'POST', signal: AbortSignal.timeout(35000),
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + data.session.access_token },
+          body: JSON.stringify({ action: 'verifyPayment', plan: target })
+        });
+        if (!response.ok) throw new Error('Não foi possível conferir a cobrança agora. Tente verificar novamente.');
+        confirmedPlan = await window.refreshConfirmedPlan();
+      }
+      if (target !== currentPlanId) return;
+      if (confirmedPlan !== target) {
+        status.textContent = 'O pagamento ainda está pendente. Verifique novamente após a confirmação.';
         return;
       }
       window.closeAsaasModal();
-      alert('Plano confirmado pelo servidor. Seu acesso foi atualizado.');
     } catch (error) {
-      alert(error.message || 'Não foi possível confirmar o pagamento. Tente novamente.');
+      status.textContent = error.message || 'Não foi possível confirmar o pagamento. Tente novamente.';
+    } finally {
+      isCheckingPayment = false;
     }
   };
 

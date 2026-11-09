@@ -229,101 +229,106 @@ async function handler(req, res) {
       if (!rawText) throw new BillingError(400, 'INVALID_JSON');
       try { body = JSON.parse(rawText); } catch (_) { throw new BillingError(400, 'INVALID_JSON'); }
     }
-    if (!body || typeof body.id !== 'string' || !body.id || typeof body.event !== 'string') throw new BillingError(400, 'INVALID_EVENT');
-    if (!KNOWN_ASAAS_EVENTS.has(body.event)) return res.status(200).json({ success: true, ignored: true });
-
-    const payment = body.payment;
-    if (!payment || typeof payment.id !== 'string' || !payment.id || payment.id.startsWith('pay_sb_')) throw new BillingError(400, 'INVALID_PAYMENT');
-    if (payment.currency !== undefined && payment.currency !== 'BRL') throw new BillingError(409, 'PAYMENT_CURRENCY_MISMATCH');
-
-    const orders = await db('billing_orders?asaas_payment_id=eq.' + encodeURIComponent(payment.id) + '&select=*');
-    let order = orders?.[0];
-    if (!order && typeof payment.externalReference === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(payment.externalReference)) {
-      const candidates = await db('billing_orders?id=eq.' + encodeURIComponent(payment.externalReference) + '&select=*');
-      const candidate = candidates?.[0];
-      if (candidate?.status === 'pending' && !candidate.asaas_payment_id &&
-          candidate.payment_method === 'CREDIT_CARD' && candidate.installment_count > 1 &&
-          ['PAYMENT_CONFIRMED', 'PAYMENT_RECEIVED'].includes(body.event)) {
-        order = await recoverUnboundCardOrder(candidate, payment.id);
-      } else if (candidate && !candidate.asaas_payment_id) {
-        throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
-      }
-      if (candidate?.quote?.gatewayPayments && Object.hasOwn(candidate.quote.gatewayPayments, payment.id)) order = candidate;
-    }
-    // This webhook can receive other charges from the same Asaas account.
-    // Acknowledge them without persisting or applying them to a Radar order.
-    if (!order) return res.status(200).json({ success: true, ignored: true });
-    if (order.quote?.gatewayPayments && !Object.hasOwn(order.quote.gatewayPayments, payment.id)) {
-      throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
-    }
-    if (payment.externalReference !== undefined && payment.externalReference !== null && payment.externalReference !== order.id) {
-      throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
-    }
-
-    // Persist in a separate transaction before processing. No email/description is authority.
-    await db('billing_gateway_events?on_conflict=event_id', {
-      method: 'POST',
-      headers: { Prefer: 'resolution=ignore-duplicates' },
-      body: JSON.stringify({
-        event_id: body.id,
-        payment_id: payment.id,
-        event_type: body.event,
-        occurred_at: new Date().toISOString(),
-        payload: body,
-        status: 'pending'
-      })
-    });
-
-    const events = await db('billing_gateway_events?event_id=eq.' + encodeURIComponent(body.id) + '&select=*');
-    const stored = events?.[0];
-    if (
-      !stored ||
-      stored.payment_id !== payment.id ||
-      stored.event_type !== body.event ||
-      (stored.payload?.payment?.value !== undefined && payment.value !== undefined && cents(stored.payload.payment.value) !== cents(payment.value)) ||
-      (stored.payload?.payment?.billingType !== undefined && payment.billingType !== undefined && stored.payload.payment.billingType !== payment.billingType)
-    ) {
-      throw new BillingError(409, 'EVENT_ID_CONFLICT');
-    }
-
-    if (['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
-      checkAmount(order, stored.payload.payment);
-    }
-
-    // 3. Confirmação ativa server-to-server na API v3 do Asaas (GET /v3/payments/{id})
-    await verifyPaymentWithAsaas(payment.id, order, body.event);
-
-    const result = await db('rpc/billing_process_event', {
-      method: 'POST',
-      body: JSON.stringify({ p_event_id: body.id })
-    });
-    if (!result?.success) throw new BillingError(503, 'BILLING_EVENT_PROCESSING_FAILED');
-
-    // Despacho de e-mail seguro e desacoplado após confirmação persistida
-    let emailStatus = 'ignored';
-    if (!result.duplicate && !result.ignored && !result.installmentUpdated && ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
-      try {
-        const confirmationOrder = order.quote?.termPolicy === 'annual_upgrade_v1'
-          ? (await db('billing_orders?id=eq.' + encodeURIComponent(order.id) + '&select=*'))?.[0]
-          : order;
-        if (!confirmationOrder) throw new Error('Order unavailable for confirmation email');
-        const emailRes = await sendConfirmationEmail({ order: confirmationOrder, event: stored.payload });
-        emailStatus = emailRes.status;
-      } catch (emailErr) {
-        console.error('[Asaas Webhook] Erro não-bloqueante no envio de e-mail:', emailErr);
-        emailStatus = 'failed_non_blocking';
-      }
-    } else if (result.duplicate) {
-      emailStatus = 'duplicate_ignored';
-    }
-
-    return res.status(200).json({ ...result, emailStatus });
+    return await processPaymentEvent(body, res);
   } catch (error) {
     return fail(res, error);
   }
 }
 
+async function processPaymentEvent(body, res) {
+  if (!body || typeof body.id !== 'string' || !body.id || typeof body.event !== 'string') throw new BillingError(400, 'INVALID_EVENT');
+  if (!KNOWN_ASAAS_EVENTS.has(body.event)) return res.status(200).json({ success: true, ignored: true });
+
+  const payment = body.payment;
+  if (!payment || typeof payment.id !== 'string' || !payment.id || payment.id.startsWith('pay_sb_')) throw new BillingError(400, 'INVALID_PAYMENT');
+  if (payment.currency !== undefined && payment.currency !== 'BRL') throw new BillingError(409, 'PAYMENT_CURRENCY_MISMATCH');
+
+  const orders = await db('billing_orders?asaas_payment_id=eq.' + encodeURIComponent(payment.id) + '&select=*');
+  let order = orders?.[0];
+  if (!order && typeof payment.externalReference === 'string' && /^[\da-f]{8}(?:-[\da-f]{4}){3}-[\da-f]{12}$/i.test(payment.externalReference)) {
+    const candidates = await db('billing_orders?id=eq.' + encodeURIComponent(payment.externalReference) + '&select=*');
+    const candidate = candidates?.[0];
+    if (candidate?.status === 'pending' && !candidate.asaas_payment_id &&
+        candidate.payment_method === 'CREDIT_CARD' && candidate.installment_count > 1 &&
+        ['PAYMENT_CONFIRMED', 'PAYMENT_RECEIVED'].includes(body.event)) {
+      order = await recoverUnboundCardOrder(candidate, payment.id);
+    } else if (candidate && !candidate.asaas_payment_id) {
+      throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+    }
+    if (candidate?.quote?.gatewayPayments && Object.hasOwn(candidate.quote.gatewayPayments, payment.id)) order = candidate;
+  }
+  // This webhook can receive other charges from the same Asaas account.
+  // Acknowledge them without persisting or applying them to a Radar order.
+  if (!order) return res.status(200).json({ success: true, ignored: true });
+  if (order.quote?.gatewayPayments && !Object.hasOwn(order.quote.gatewayPayments, payment.id)) {
+    throw new BillingError(409, 'PAYMENT_ORDER_NOT_BOUND');
+  }
+  if (payment.externalReference !== undefined && payment.externalReference !== null && payment.externalReference !== order.id) {
+    throw new BillingError(409, 'PAYMENT_ORDER_MISMATCH');
+  }
+
+  // Persist in a separate transaction before processing. No email/description is authority.
+  await db('billing_gateway_events?on_conflict=event_id', {
+    method: 'POST',
+    headers: { Prefer: 'resolution=ignore-duplicates' },
+    body: JSON.stringify({
+      event_id: body.id,
+      payment_id: payment.id,
+      event_type: body.event,
+      occurred_at: new Date().toISOString(),
+      payload: body,
+      status: 'pending'
+    })
+  });
+
+  const events = await db('billing_gateway_events?event_id=eq.' + encodeURIComponent(body.id) + '&select=*');
+  const stored = events?.[0];
+  if (
+    !stored ||
+    stored.payment_id !== payment.id ||
+    stored.event_type !== body.event ||
+    (stored.payload?.payment?.value !== undefined && payment.value !== undefined && cents(stored.payload.payment.value) !== cents(payment.value)) ||
+    (stored.payload?.payment?.billingType !== undefined && payment.billingType !== undefined && stored.payload.payment.billingType !== payment.billingType)
+  ) {
+    throw new BillingError(409, 'EVENT_ID_CONFLICT');
+  }
+
+  if (['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
+    checkAmount(order, stored.payload.payment);
+  }
+
+  // 3. Confirmação ativa server-to-server na API v3 do Asaas (GET /v3/payments/{id})
+  await verifyPaymentWithAsaas(payment.id, order, body.event);
+
+  const result = await db('rpc/billing_process_event', {
+    method: 'POST',
+    body: JSON.stringify({ p_event_id: body.id })
+  });
+  if (!result?.success) throw new BillingError(503, 'BILLING_EVENT_PROCESSING_FAILED');
+
+  // Despacho de e-mail seguro e desacoplado após confirmação persistida
+  let emailStatus = 'ignored';
+  if (!result.duplicate && !result.ignored && !result.installmentUpdated && ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
+    try {
+      const confirmationOrder = order.quote?.termPolicy === 'annual_upgrade_v1'
+        ? (await db('billing_orders?id=eq.' + encodeURIComponent(order.id) + '&select=*'))?.[0]
+        : order;
+      if (!confirmationOrder) throw new Error('Order unavailable for confirmation email');
+      const emailRes = await sendConfirmationEmail({ order: confirmationOrder, event: stored.payload });
+      emailStatus = emailRes.status;
+    } catch (emailErr) {
+      console.error('[Asaas Webhook] Erro não-bloqueante no envio de e-mail:', emailErr);
+      emailStatus = 'failed_non_blocking';
+    }
+  } else if (result.duplicate) {
+    emailStatus = 'duplicate_ignored';
+  }
+
+  return res.status(200).json({ ...result, emailStatus });
+}
+
 module.exports = handler;
+module.exports.processPaymentEvent = processPaymentEvent;
 module.exports.config = { api: { bodyParser: false } };
 module.exports.verifyAsaasWebhookToken = verifyAsaasWebhookToken;
 module.exports.verifyPaymentWithAsaas = verifyPaymentWithAsaas;

@@ -262,6 +262,33 @@ module.exports = async function handler(req, res) {
     }
     const target = body.plan;
     if (!Object.hasOwn(pricing.PLAN_PRICES_CENTS, target)) throw new billing.BillingError(400, 'INVALID_PLAN');
+    if (body.action === 'verifyPayment') {
+      res.setHeader('Cache-Control', 'no-store');
+      if (!checkRateLimit('verify:' + user.id, 12, 60000)) throw new billing.BillingError(429, 'TOO_MANY_REQUESTS');
+      const pending = await billing.db('billing_orders?user_id=eq.' + encodeURIComponent(user.id) +
+        '&target_plan=eq.' + encodeURIComponent(target) + '&status=eq.pending&select=id,payment_method,installment_count');
+      if (pending?.length !== 1) return res.status(200).json({ success:true, pending:true });
+      if (!apiKey) throw new billing.BillingError(503, 'ASAAS_NOT_CONFIGURED');
+      const order = pending[0];
+      const response = await fetch(ASAAS_API_URL + '/payments?limit=20&externalReference=' + encodeURIComponent(order.id), {
+        headers: { access_token:apiKey, 'User-Agent':'RadarSaoJose/1.0' },
+        redirect:'error', signal:AbortSignal.timeout(10000)
+      });
+      if (!response.ok) throw new billing.BillingError(502, 'ASAAS_VERIFICATION_FAILED');
+      const payments = await response.json();
+      if (!Array.isArray(payments.data) || payments.hasMore || payments.data.length !== order.installment_count) {
+        return res.status(200).json({ success:true, pending:true });
+      }
+      const confirmed = payments.data.find(payment => payment.externalReference === order.id &&
+        payment.billingType === order.payment_method && !payment.deleted &&
+        ['CONFIRMED','RECEIVED','RECEIVED_IN_CASH'].includes(payment.status));
+      if (!confirmed) return res.status(200).json({ success:true, pending:true });
+      // Uses the same server-side payment validation and transactional grant as the webhook.
+      const { processPaymentEvent } = require('./asaas-webhook');
+      return await processPaymentEvent({
+        id:'radar-verified:' + confirmed.id, event:'PAYMENT_CONFIRMED', payment:confirmed
+      }, res);
+    }
     const paymentMethod = body.billingType || 'PIX';
     if (!['PIX', 'CREDIT_CARD', 'BOLETO'].includes(paymentMethod)) {
       throw new billing.BillingError(400, 'INVALID_PAYMENT_METHOD');
