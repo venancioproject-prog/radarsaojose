@@ -152,8 +152,13 @@
         button.disabled = true;
         status.textContent = "Salvando a nova senha…";
         try {
-          const { data } = await client.auth.getSession();
-          if (data.session?.user?.id !== recoveryUserId) throw new Error("Sessão de recuperação inválida");
+          const { data, error: sessionError } = await client.auth.getSession();
+          if (sessionError) throw sessionError;
+          if (data.session?.user?.id !== recoveryUserId) {
+            status.textContent = "A sessão de recuperação terminou. Solicite um novo link.";
+            document.getElementById("retry").hidden = false;
+            return;
+          }
           const { error } = await client.auth.updateUser({ password });
           if (error) throw error;
           update.reset();
@@ -161,8 +166,23 @@
           recoveryUserId = undefined;
           status.textContent = "Senha atualizada. Volte ao login para continuar.";
           await client.auth.signOut({ scope: "global" }).catch(() => {});
-        } catch {
-          status.textContent = "Não foi possível alterar a senha. Tente novamente ou solicite outro link.";
+        } catch (error) {
+          const code = error?.code;
+          if (code === "same_password") {
+            status.textContent = "Escolha uma senha diferente da que já estava cadastrada.";
+            return;
+          }
+          if (code === "weak_password") {
+            status.textContent = "O serviço recusou essa senha. Tente uma senha mais longa, com maiúscula, minúscula, número e símbolo, sem sequências comuns.";
+            return;
+          }
+          if (["session_expired", "session_not_found", "refresh_token_not_found", "bad_jwt"].includes(code)
+              || error?.name === "AuthSessionMissingError") {
+            status.textContent = "A sessão de recuperação terminou. Solicite um novo link.";
+          } else {
+            const reference = typeof code === "string" && /^[a-z0-9_]{1,60}$/.test(code) ? code : "sem_codigo";
+            status.textContent = "Não foi possível alterar a senha. Referência do erro: " + reference + ".";
+          }
           document.getElementById("retry").hidden = false;
         } finally {
           button.disabled = false;
