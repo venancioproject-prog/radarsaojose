@@ -777,7 +777,7 @@ window.simulatePlanChange = function() {
   return window.refreshConfirmedPlan();
 };
 
-window.refreshConfirmedPlan = async function() {
+window.refreshConfirmedPlan = async function(expectedPlan) {
   try {
     if (!supabaseClient) throw new Error('Sessão indisponível.');
     const { data, error } = await supabaseClient.auth.getUser();
@@ -786,9 +786,6 @@ window.refreshConfirmedPlan = async function() {
       .select('id,email,nome,role,plan_type,onboarding_completed')
       .eq('id', data.user.id).single();
     if (result.error || !result.data) throw new Error('Não foi possível confirmar seu plano.');
-    window.appState.user = data.user;
-    window.appState.profile = result.data;
-    window.appState.role = result.data.role || 'usuario';
     const sessionRes = await supabaseClient.auth.getSession();
     const token = sessionRes?.data?.session?.access_token;
     if (!token) throw new Error('Entre na sua conta para verificar o pagamento.');
@@ -800,6 +797,10 @@ window.refreshConfirmedPlan = async function() {
     if (!entJson?.success || !entJson?.entitlement?.planType) {
       throw new Error('Não foi possível confirmar seu plano.');
     }
+    if (expectedPlan && entJson.entitlement.planType !== expectedPlan) return entJson.entitlement.planType;
+    window.appState.user = data.user;
+    window.appState.profile = result.data;
+    window.appState.role = result.data.role || 'usuario';
     window.appState.entitlement = entJson.entitlement;
     window.appState.plan_type = entJson.entitlement.planType;
     window.applyPlanRestrictions();
@@ -808,6 +809,7 @@ window.refreshConfirmedPlan = async function() {
     if (window.currentMainTab === 'report') void window.renderExecutiveReportCharts();
     return window.appState.plan_type;
   } catch (error) {
+    if (expectedPlan) throw error;
     window.appState.profile = null;
     window.appState.entitlement = null;
     window.appState.plan_type = 'gratis';

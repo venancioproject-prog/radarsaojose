@@ -891,6 +891,7 @@
   let isUpgradeMode = false;
   let upgradeFromPlan = null;
   let upgradeQuoteRequest = 0;
+  let paymentWatch = 0;
 
   function updateUpgradeBanner() {
     const banner = document.getElementById('asaasUpgradeBanner');
@@ -904,7 +905,9 @@
     const breakdown = document.getElementById('asaasUpgradeBreakdown');
     const retry = document.getElementById('asaasRetryUpgrade');
     const form = document.getElementById('asaasCheckoutForm');
-    form.hidden = breakdown.hidden = retry.hidden = true;
+    form.hidden = false;
+    const submit = document.getElementById('asaasBtnSubmit');
+    submit.disabled = breakdown.hidden = retry.hidden = true;
     message.textContent = 'Calculando seu crédito…';
     let quote;
     try {
@@ -921,7 +924,7 @@
     document.getElementById('asaasUpgradeCredit').textContent = '− ' + money(quote.creditCents);
     document.getElementById('asaasUpgradeTotal').textContent = money(quote.amountCents);
     breakdown.hidden = false;
-    form.hidden = !quote.payable;
+    submit.disabled = !quote.payable;
     retry.hidden = quote.payable || quote.unavailableReason === 'ZERO_BALANCE';
     message.textContent = quote.payable ? 'Os 12 meses do novo plano começam após a confirmação do pagamento.' :
       quote.unavailableReason === 'INSTALLMENTS_PENDING' ? 'O Asaas ainda não confirmou a compra completa do plano atual. Assim que confirmar, você poderá fazer o upgrade mesmo que os repasses mensais ainda estejam agendados.' :
@@ -1105,6 +1108,7 @@
 
   window.closeAsaasModal = function() {
     if (isSubmitting) return;
+    ++paymentWatch;
     const modal = document.getElementById('asaasCheckoutModal');
     if (!modal?.classList.contains('show')) return;
     modal.classList.remove('show');
@@ -1150,7 +1154,8 @@
       || (upgradeFromPlan === 'report' && plan === 'midia');
     document.getElementById('asaasCheckExisting').hidden = !isUpgradeMode;
     const activePlan = window.appState?.entitlement?.status === 'active' && ['dash', 'report', 'midia'].includes(upgradeFromPlan);
-    document.getElementById('asaasCheckoutForm').hidden = isUpgradeMode || activePlan;
+    document.getElementById('asaasCheckoutForm').hidden = activePlan && !isUpgradeMode;
+    document.getElementById('asaasBtnSubmit').disabled = isUpgradeMode;
     if (isUpgradeMode) {
       window.setAsaasPaymentMethod('PIX');
     }
@@ -1255,7 +1260,8 @@
   // Submissão do Formulário de Checkout
   window.handleAsaasCheckoutSubmit = async function(e) {
     if (e && e.preventDefault) e.preventDefault();
-    if (isSubmitting || document.getElementById('asaasCheckoutForm').hidden) return;
+    if (isSubmitting || document.getElementById('asaasCheckoutForm').hidden ||
+        document.getElementById('asaasBtnSubmit').disabled) return;
     hideCheckoutError();
 
     const nameInput = document.getElementById('asaasPayerName');
@@ -1364,6 +1370,13 @@
     if (choices) choices.hidden = true;
     document.getElementById('asaasBackToPlans').hidden = true;
     if (resultBox) resultBox.classList.add('show');
+    if (data.quote?.kind === 'upgrade') {
+      const money = cents => (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('asaasUpgradeAnnual').textContent = money(data.quote.annualPriceCents);
+      document.getElementById('asaasUpgradeCredit').textContent = '− ' + money(data.quote.creditCents);
+      document.getElementById('asaasUpgradeTotal').textContent = money(data.quote.amountCents);
+    }
+    watchPaymentConfirmation(currentPlanId);
 
     // Esconde todos inicialmente
     if (resultCardSuccess) resultCardSuccess.style.display = 'none';
@@ -1550,6 +1563,27 @@
     const val = input ? input.value : '';
     copyTextWithFallback(val, input, btn, 'Chave PIX Copia e Cola copiada com sucesso!');
   };
+
+  // Refresh the entitlement after the Asaas webhook confirms the order.
+  function watchPaymentConfirmation(plan) {
+    const watch = ++paymentWatch;
+    let attempts = 0;
+    async function refresh() {
+      if (watch !== paymentWatch || ++attempts > 24) return;
+      if (!isCheckingPayment) {
+        try {
+          const confirmed = await window.refreshConfirmedPlan(plan);
+          if (watch !== paymentWatch) return;
+          if (confirmed === plan) {
+            window.closeAsaasModal();
+            return;
+          }
+        } catch (_) { /* Manual verification remains available. */ }
+      }
+      if (watch === paymentWatch) setTimeout(refresh, 5000);
+    }
+    setTimeout(refresh, 3000);
+  }
 
   // Finalização e Desbloqueio da Plataforma
   window.completeCheckoutAndUnlock = async function() {

@@ -217,15 +217,16 @@ async function main() {
     await check('Upgrade do Pix para Pix, cartão ou boleto abre 12 meses e restaura o plano anterior no estorno', async () => {
       await db.exec(migration('015_billing_annual_upgrade.sql'));
       await db.exec(migration('018_billing_upgrade_payment_methods.sql'));
+      await db.exec(migration('019_billing_installment_progress_version.sql'));
       for (const [index, method] of ['PIX', 'CREDIT_CARD', 'BOLETO'].entries()) {
         const user = '00000000-0000-4000-8000-00000000001' + (5 + index);
         await db.query("INSERT INTO auth.users VALUES ($1,'annual@example.invalid','{}')", [user]);
         await db.query(`INSERT INTO public.billing_orders(user_id,target_plan,kind,amount_cents,period_start,period_end,payment_method,installment_count,asaas_payment_id)
           VALUES ($1,'dash','purchase',291492,now() - interval '6 months',now() + interval '6 months','PIX',1,$2)`,
         [user, 'pay_annual_original' + index]);
-        const processEvent = async (id, payment, type) => {
+        const processEvent = async (id, payment, type, orderId) => {
           await db.query(`INSERT INTO public.billing_gateway_events(event_id,payment_id,event_type,occurred_at,payload)
-            VALUES ($1,$2,$3,now(),'{}') ON CONFLICT DO NOTHING`, [id, payment, type]);
+            VALUES ($1,$2,$3,now(),$4) ON CONFLICT DO NOTHING`, [id, payment, type, JSON.stringify({ payment: { externalReference: orderId } })]);
           await db.exec(`SELECT set_config('request.jwt.claims','{"role":"service_role"}',false); SET ROLE service_role;`);
           try {
             assert.equal((await value('SELECT public.billing_annual_upgrade_methods_ready() AS ready')).ready, true);
@@ -252,6 +253,17 @@ async function main() {
         assert.equal((await processEvent('annual_upgrade' + index, 'pay_annual_upgrade' + index, 'PAYMENT_CONFIRMED')).duplicate, true);
         await processEvent('annual_upgrade_received' + index, 'pay_annual_upgrade' + index, 'PAYMENT_RECEIVED');
         assert.deepEqual(await current(), after);
+        if (method === 'CREDIT_CARD') {
+          await db.query("UPDATE public.billing_orders SET quote=quote || $2::jsonb WHERE id=$1", [
+            after.source_order_id, JSON.stringify({ gatewayPayments: {
+              ['pay_annual_upgrade' + index]: 191673, ['pay_annual_second' + index]: 191673
+            } })
+          ]);
+          await processEvent('annual_second' + index, 'pay_annual_second' + index, 'PAYMENT_CONFIRMED', after.source_order_id);
+          const updated = await current();
+          assert.equal(updated.installments_paid, 2);
+          assert.equal(updated.version, after.version);
+        }
         await processEvent('annual_refund' + index, 'pay_annual_upgrade' + index, 'PAYMENT_REFUNDED');
         const restored = await current();
         for (const field of ['plan_type','status','period_start','period_end','payment_method','installment_count','installments_paid','source_order_id']) {
