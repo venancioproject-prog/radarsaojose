@@ -289,6 +289,24 @@
       }, 4000);
     }
 
+    
+    const telInput = document.getElementById('telefone');
+    if (telInput) {
+      telInput.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+        if (v.length > 10) {
+          v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+        } else if (v.length > 5) {
+          v = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+        } else if (v.length > 2) {
+          v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+        } else if (v.length > 0) {
+          v = v.replace(/^(\d*)$/, '($1');
+        }
+        e.target.value = v;
+      });
+    }
+
     let authMode = 'login';
 
     function setAuthMode(mode) {
@@ -296,6 +314,7 @@
       const tabEntrar = document.getElementById('tabEntrarBtn');
       const tabNovo = document.getElementById('tabNovoBtn');
       const fieldNome = document.getElementById('field-nome');
+      const fieldTelefone = document.getElementById('field-telefone');
       const btnText = document.getElementById('btn-login-text');
       const googleLabel = document.getElementById('googleBtnLabel');
       const registering = mode === 'register';
@@ -316,12 +335,14 @@
         tabEntrar.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
         tabNovo.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all";
         fieldNome.classList.add('hidden');
+        if (fieldTelefone) fieldTelefone.classList.add('hidden');
         btnText.innerText = 'Entrar no Painel';
         googleLabel.innerText = 'Entrar com o Google';
       } else {
         tabNovo.className = "flex-1 py-2 rounded-lg bg-brand-900 text-white shadow-xs text-center transition-all";
         tabEntrar.className = "flex-1 py-2 rounded-lg text-slate-500 hover:text-slate-900 text-center transition-all";
         fieldNome.classList.remove('hidden');
+        if (fieldTelefone) fieldTelefone.classList.remove('hidden');
         btnText.innerText = 'Cadastrar & Acessar';
         googleLabel.innerText = 'Cadastrar com o Google';
       }
@@ -575,6 +596,8 @@
                 full_name: nome,
                 radar_full_name: nome,
                 radar_profile_type: selectedProfile,
+                telefone: telefone,
+                phone: telefone,
                 radar_terms_acceptance: {
                   version: window.radarLegal.version,
                   accepted_at: acceptedAt
