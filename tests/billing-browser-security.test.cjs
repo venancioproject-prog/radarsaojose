@@ -21,6 +21,9 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
   const localRequire = require('node:module').createRequire(filename);
   const billing = localRequire('../lib/billing-store');
   const gatewayCalls = [];
+  let current = null;
+  let previous = null;
+  let previousPayments = [];
   const module = { exports: {} };
   vm.runInNewContext(fs.readFileSync(filename, 'utf8'), {
     module, AbortSignal, console, __dirname: path.dirname(filename),
@@ -31,9 +34,12 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
       return {
         ...billing,
         authenticate: async () => ({ id: 'buyer', email: 'buyer@example.invalid' }),
-        subscription: async () => null,
-        db: async (route, options) => route === 'billing_orders' && options?.method === 'POST'
-          ? [{ id: 'order' }] : []
+        subscription: async () => current,
+        db: async (route, options) => {
+          if (route.startsWith('billing_orders?id=eq.previous&')) return [previous];
+          if (route.startsWith('rpc/billing_annual_upgrade')) return true;
+          return route === 'billing_orders' && options?.method === 'POST' ? [{ id: 'order' }] : [];
+        }
       };
     },
     async fetch(url, options) {
@@ -42,7 +48,9 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
       gatewayCalls.push({ route, payload });
       let body;
       if (route === '/v3/customers') body = { id: 'customer' };
-      else if (route === '/v3/payments') {
+      else if (route === '/v3/payments' && new URL(url).searchParams.get('externalReference') === 'previous') {
+        body = { data: previousPayments };
+      } else if (route === '/v3/payments') {
         body = {
           id: 'payment', status: 'PENDING', invoiceUrl: 'https://sandbox.asaas.com/i/example',
           installment: payload.installmentCount > 1 ? 'group' : undefined
@@ -96,6 +104,32 @@ test('card checkout sends customers to Asaas and rejects legacy card fields', as
   assert.equal(rounded.body.payment.installmentCount, 7);
   assert.doesNotMatch(JSON.stringify(gatewayCalls), /creditCard|ccv/i);
   assert.doesNotMatch(modal, /asaasCard(?:Number|Cvv|Expiry)|payload\.creditCard/);
+  current = {
+    source_order_id: 'previous', plan_type: 'report', status: 'active', payment_method: 'CREDIT_CARD',
+    installment_count: 2, installments_paid: 1,
+    period_start: new Date(Date.now() - 86400000).toISOString(),
+    period_end: new Date(Date.now() + 86400000 * 364).toISOString()
+  };
+  previous = {
+    id: 'previous', kind: 'upgrade', target_plan: 'report', amount_cents: 296400,
+    payment_method: 'CREDIT_CARD', installment_count: 2, asaas_payment_id: 'first',
+    quote: { termPolicy: 'annual_upgrade_v1', annualPriceCents: 587880, installments: [148200, 148200],
+      gatewayPayments: { first: 148200, second: 148200 } }
+  };
+  previousPayments = ['first', 'second'].map((id, index) => ({
+    id, installment: 'previous-group', externalReference: 'previous', installmentNumber: index + 1,
+    billingType: 'CREDIT_CARD', value: 1482, status: index ? 'PENDING' : 'CONFIRMED'
+  }));
+  const upgrade = { plan: 'midia', billingType: 'BOLETO', action: 'paywallQuote' };
+  assert.equal((await request(upgrade)).body.quote.payable, false);
+  previousPayments[1].status = 'CONFIRMED';
+  for (const billingType of ['PIX', 'CREDIT_CARD', 'BOLETO']) {
+    const approved = await request({ ...upgrade, billingType, action: 'quote' });
+    assert.equal(approved.body.quote.payable, true);
+    assert.equal(approved.body.quote.amountCents, approved.body.quote.annualPriceCents - approved.body.quote.creditCents);
+  }
+  previousPayments[1].status = 'REFUNDED';
+  assert.equal((await request(upgrade)).body.quote.payable, false);
 });
 
 test('pending confirmation never completes checkout', async () => {

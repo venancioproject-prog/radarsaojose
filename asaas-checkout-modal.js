@@ -922,9 +922,9 @@
     document.getElementById('asaasUpgradeTotal').textContent = money(quote.amountCents);
     breakdown.hidden = false;
     form.hidden = !quote.payable;
-    retry.hidden = quote.payable || quote.unavailableReason === 'INSTALLMENTS_PENDING' || quote.unavailableReason === 'ZERO_BALANCE';
+    retry.hidden = quote.payable || quote.unavailableReason === 'ZERO_BALANCE';
     message.textContent = quote.payable ? 'Os 12 meses do novo plano começam após a confirmação do pagamento.' :
-      quote.unavailableReason === 'INSTALLMENTS_PENDING' ? 'O plano atual tem parcelas pendentes. O upgrade fica disponível após a quitação.' :
+      quote.unavailableReason === 'INSTALLMENTS_PENDING' ? 'O Asaas ainda não confirmou a compra completa do plano atual. Assim que confirmar, você poderá fazer o upgrade mesmo que os repasses mensais ainda estejam agendados.' :
       quote.unavailableReason === 'ZERO_BALANCE' ? 'Seu crédito cobre o valor do novo plano. Fale com o suporte para concluir a troca.' :
       'O pagamento do upgrade está indisponível no momento. Tente novamente em instantes.';
   }

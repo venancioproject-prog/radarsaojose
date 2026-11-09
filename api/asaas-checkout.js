@@ -310,7 +310,8 @@ module.exports = async function handler(req, res) {
       }
       const orders = current.source_order_id ? await billing.db(
         'billing_orders?id=eq.' + encodeURIComponent(current.source_order_id) +
-        '&user_id=eq.' + encodeURIComponent(user.id) + '&status=eq.paid&select=kind,amount_cents,target_plan,quote'
+        '&user_id=eq.' + encodeURIComponent(user.id) +
+        '&status=eq.paid&select=id,kind,amount_cents,target_plan,quote,payment_method,installment_count,asaas_payment_id'
       ) : [];
       const previous = orders?.[0];
       const previousAmount = previous?.kind === 'purchase' ? previous.amount_cents :
@@ -325,8 +326,21 @@ module.exports = async function handler(req, res) {
         periodStart: current.period_start, periodEnd: current.period_end, now: now.toISOString()
       });
       const amount = Math.max(0, annual.amountCents - credit);
-      let unavailableReason = current.installments_paid !== current.installment_count ? 'INSTALLMENTS_PENDING' :
-        amount <= 0 ? 'ZERO_BALANCE' : null;
+      let unavailableReason = amount <= 0 ? 'ZERO_BALANCE' : null;
+      if (!unavailableReason && current.payment_method === 'CREDIT_CARD' && current.installment_count > 1) {
+        try {
+          if (!apiKey || previous.installment_count !== current.installment_count) throw new Error('Installment unavailable');
+          const response = await fetch(ASAAS_API_URL + '/payments?limit=20&externalReference=' + encodeURIComponent(previous.id), {
+            headers: { access_token:apiKey, 'User-Agent':'RadarSaoJose/1.0' },
+            redirect:'error', signal:AbortSignal.timeout(8000)
+          });
+          if (!response.ok) throw new Error('Installment unavailable');
+          const { isConfirmedCardInstallment } = require('../lib/asaas-installments');
+          if (!isConfirmedCardInstallment(previous, await response.json())) unavailableReason = 'INSTALLMENTS_PENDING';
+        } catch (_) { unavailableReason = 'UPGRADE_UNAVAILABLE'; }
+      } else if (!unavailableReason && current.installments_paid !== current.installment_count) {
+        unavailableReason = 'INSTALLMENTS_PENDING';
+      }
       if (!unavailableReason) {
         try {
           const readiness = paymentMethod === 'PIX' ? 'billing_annual_upgrade_ready' : 'billing_annual_upgrade_methods_ready';
