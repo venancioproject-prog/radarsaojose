@@ -145,6 +145,8 @@
     return s;
   }
 
+  const escapeMediaText = value => window.radarSafeContent ? window.radarSafeContent.escape(value) : String(value ?? '');
+
   function sanitizeMidiaRecord(r) {
     if (!r) return r;
     const clean = { ...r };
@@ -195,7 +197,7 @@
 
   async function fetchMidiaData() {
     const isDemo = window.radarSupabaseConfig?.preview === true;
-    if (!window.radarCanLoadModule?.('midia')) {
+    if (!isDemo && !window.radarCanLoadModule?.('midia')) {
       document.getElementById('midia-loading-state')?.classList.add('hidden');
       document.getElementById('midia-error-state')?.classList.add('hidden');
       window.updateRadarPreviews?.();
@@ -203,45 +205,27 @@
     }
     showMidiaLoading(true);
     let data = isDemo ? demoMidiaRecords() : [];
-    let source = "preloaded";
 
-    // 1. Prioridade 1: Buscar do Supabase (Fonte Oficial Atualizada)
-    try {
-      if (!isDemo && typeof supabaseClient !== 'undefined' && supabaseClient) {
-        let allSupabaseData = [];
-        let from = 0;
-        let limit = 1000;
-        let hasMore = true;
-        
-        while (hasMore) {
-          const res = await supabaseClient
-            .from('analise_midia_sjc')
-            .select('*')
-            .range(from, from + limit - 1);
-            
-          if (res && !res.error && res.data) {
-            allSupabaseData = allSupabaseData.concat(res.data);
-            if (res.data.length < limit) hasMore = false;
-            else from += limit;
-          } else {
-            hasMore = false;
-          }
-        }
-        if (allSupabaseData.length > 0) {
-          data = allSupabaseData;
-          source = "supabase";
-        }
-      }
-    } catch (err) {
-      console.error("[MIDIA] Erro ao buscar dados do Supabase:", err);
-    }
-
-    // 2. Prioridade 2: Fallback para dados embutidos
-    if (!data || data.length === 0) {
-      if (typeof window.PRELOADED_MIDIA_DATA !== 'undefined' && Array.isArray(window.PRELOADED_MIDIA_DATA) && window.PRELOADED_MIDIA_DATA.length > 0) {
-        data = window.PRELOADED_MIDIA_DATA;
-        source = "preloaded_js";
-        console.warn("[MIDIA] Supabase falhou, usando dados locais.");
+    if (!isDemo) {
+      try {
+        const { data: auth } = await supabaseClient.auth.getSession();
+        if (!auth.session?.access_token) throw new Error('Sessão indisponível');
+        let cursor = null;
+        do {
+          const query = cursor ? '?after=' + encodeURIComponent(cursor) : '';
+          const response = await fetch('/api/media' + query, {
+            headers: { Authorization: 'Bearer ' + auth.session.access_token },
+            cache: 'no-store'
+          });
+          if (!response.ok) throw new Error('Dados de mídia indisponíveis');
+          const page = await response.json();
+          data = data.concat(page.rows);
+          cursor = page.next;
+        } while (cursor);
+      } catch {
+        showMidiaLoading(false);
+        showMidiaError('Não foi possível carregar os dados de mídia.');
+        return;
       }
     }
 
@@ -387,6 +371,7 @@
 
   // 3. APLICAÇÃO DE FILTROS COMBINADOS
   function applyMidiaFilters() {
+    if (!window.radarCanLoadModule?.('midia')) return fetchMidiaData();
     const perfil = document.getElementById('filter-midia-perfil')?.value || '';
     const tema = document.getElementById('filter-midia-tema')?.value || '';
     const sentimento = document.getElementById('filter-midia-sentimento')?.value || '';
@@ -434,6 +419,7 @@
   }
 
   function resetMidiaFilters() {
+    if (!window.radarCanLoadModule?.('midia')) return fetchMidiaData();
     const p = document.getElementById('filter-midia-perfil');
     const t = document.getElementById('filter-midia-tema');
     const s = document.getElementById('filter-midia-sentimento');
@@ -460,6 +446,7 @@
 
   // 4. RENDERIZAÇÃO DEFENSIVA DO DASHBOARD
   function renderMidiaDashboard() {
+    if (!window.radarCanLoadModule?.('midia')) return;
     console.log("[MIDIA] Iniciando renderização do Dashboard de Mídia (" + filteredMidiaRecords.length + " posts)...");
     
     // Garantir que os containers de visualização estejam no estado correto
@@ -2335,10 +2322,14 @@
         formattedDate = formattedDate.replace('T', ' ').substring(0, 16);
       }
 
-      const postUrl = r.url_post || `https://www.instagram.com/${r.perfil}/`;
+      let postUrl = 'https://www.instagram.com/' + encodeURIComponent(r.perfil) + '/';
+      try {
+        const candidate = new URL(r.url_post);
+        if (candidate.protocol === 'https:' && ['instagram.com', 'www.instagram.com'].includes(candidate.hostname)) postUrl = candidate.href;
+      } catch { /* Keep the safe profile link. */ }
       
       const fotoHtml = r.foto_url ? `
-        <a href="${postUrl}" target="_blank" rel="noopener noreferrer" title="Abrir publicação original no Instagram" class="group/thumb relative block w-11 h-11 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs hover:shadow-md transition-all mx-auto">
+        <a href="${escapeMediaText(postUrl)}" target="_blank" rel="noopener noreferrer" title="Abrir publicação original no Instagram" class="group/thumb relative block w-11 h-11 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs hover:shadow-md transition-all mx-auto">
           <img 
             src="${r.foto_url}" 
             alt="Foto do post @${r.perfil}" 
@@ -2351,20 +2342,20 @@
           </div>
         </a>
       ` : `
-        <a href="${postUrl}" target="_blank" rel="noopener noreferrer" title="Abrir publicação no Instagram" class="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-rose-500 hover:bg-rose-50 transition-colors mx-auto">
+        <a href="${escapeMediaText(postUrl)}" target="_blank" rel="noopener noreferrer" title="Abrir publicação no Instagram" class="w-11 h-11 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-rose-500 hover:bg-rose-50 transition-colors mx-auto">
           <i class="fa-brands fa-instagram text-base"></i>
         </a>
       `;
 
-      const safeLegenda = (r.legenda || r.caption || '').replace(/"/g, '&quot;');
+      const safeLegenda = escapeMediaText(r.legenda || r.caption || '');
       const legendaDisplay = r.legenda || r.caption ? `
         <p class="text-[10px] text-slate-700 leading-snug line-clamp-2 font-normal" title="${safeLegenda}">
-          ${r.legenda || r.caption}
+          ${safeLegenda}
         </p>
       ` : `<span class="text-[10px] text-slate-400 italic">-</span>`;
 
       const fotoCompact = r.foto_url ? `
-        <a href="${postUrl}" target="_blank" rel="noopener noreferrer" title="Abrir publicação original" class="group/thumb relative block w-9 h-9 rounded-lg overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs hover:shadow-md transition-all mx-auto">
+        <a href="${escapeMediaText(postUrl)}" target="_blank" rel="noopener noreferrer" title="Abrir publicação original" class="group/thumb relative block w-9 h-9 rounded-lg overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs hover:shadow-md transition-all mx-auto">
           <img 
             src="${r.foto_url}" 
             alt="Foto do post @${r.perfil}" 
@@ -2374,7 +2365,7 @@
           />
         </a>
       ` : `
-        <a href="${postUrl}" target="_blank" rel="noopener noreferrer" title="Abrir publicação" class="w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-rose-500 hover:bg-rose-50 transition-colors mx-auto">
+        <a href="${escapeMediaText(postUrl)}" target="_blank" rel="noopener noreferrer" title="Abrir publicação" class="w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-rose-500 hover:bg-rose-50 transition-colors mx-auto">
           <i class="fa-brands fa-instagram text-xs"></i>
         </a>
       `;
@@ -2441,7 +2432,7 @@
               <span class="text-[10px] font-semibold text-slate-700 truncate block" title="${r.entidades_citadas || ''}">
                 ${r.entidades_citadas || '-'}
               </span>
-              <a href="${postUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] font-bold text-brand-600 hover:underline">
+              <a href="${escapeMediaText(postUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] font-bold text-brand-600 hover:underline">
                 <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i> Ver post
               </a>
             </div>
@@ -2476,56 +2467,6 @@
     link.click();
     document.body.removeChild(link);
   }
-
-  // 13. MODAL DE COMUNIDADE & COMENTARISTAS
-  let communityDataLoaded = false;
-  function loadCommunityModalData() {
-    renderCommunityModalContent({ top_commenters: [], sample_popular_comments: [] });
-    communityDataLoaded = true;
-  }
-
-  function renderCommunityModalContent(cData) {
-    const totalSpan = document.getElementById('community-total-commenters');
-    const tbody = document.getElementById('community-top-users-body');
-    const commentsList = document.getElementById('community-sample-comments-list');
-
-    if (totalSpan && cData.total_unique_commenters) {
-      totalSpan.textContent = cData.total_unique_commenters.toLocaleString('pt-BR');
-    }
-
-    if (tbody && cData.top_commenters) {
-      tbody.innerHTML = cData.top_commenters.map(u => `
-        <tr class="hover:bg-slate-50 text-xs">
-          <td class="px-4 py-2 font-black text-slate-400">#${u.rank}</td>
-          <td class="px-4 py-2 font-bold text-brand-950">@${u.username}</td>
-          <td class="px-4 py-2 text-center font-semibold text-slate-700">${u.comments_count}</td>
-          <td class="px-4 py-2 text-right font-black text-rose-600">${u.total_likes_received.toLocaleString('pt-BR')}</td>
-        </tr>
-      `).join('');
-    }
-
-    if (commentsList && cData.sample_popular_comments) {
-      commentsList.innerHTML = cData.sample_popular_comments.map(c => `
-        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-brand-900">@${c.ownerUsername} &bull; <span class="text-slate-400 font-normal">em @${c.post_perfil}</span></span>
-            <span class="text-[10px] text-rose-500 font-bold flex items-center gap-1"><i class="fa-solid fa-heart text-[8px]"></i> ${c.likesCount}</span>
-          </div>
-          <p class="text-slate-700 font-medium leading-relaxed italic">"${c.text}"</p>
-        </div>
-      `).join('');
-    }
-  }
-
-  window.openCommunityModal = function () {
-    const modal = document.getElementById('midia-community-modal');
-    if (modal) {
-      modal.classList.remove('hidden');
-      if (!communityDataLoaded) {
-        loadCommunityModalData();
-      }
-    }
-  };
 
   window.closeCommunityModal = function () {
     const modal = document.getElementById('midia-community-modal');

@@ -1,0 +1,335 @@
+'use strict';
+
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const test = require('node:test');
+const vm = require('node:vm');
+
+function resolvePglite() {
+  const candidates = [
+    path.join(process.env.LOCALAPPDATA || '', 'RadarSaoJose', 'tools', 'pglite-0.5.15', 'node_modules', '@electric-sql', 'pglite'),
+    path.join(process.env.USERPROFILE || '', 'AppData', 'Local', 'Packages', 'OpenAI.Codex_2p2nqsd0c76g0', 'LocalCache', 'Local', 'RadarSaoJose', 'tools', 'pglite-0.5.15', 'node_modules', '@electric-sql', 'pglite')
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return require(candidate).PGlite;
+  }
+  throw new Error('PGlite não encontrado no ambiente local');
+}
+
+const PGlite = resolvePglite();
+const rootDir = path.join(__dirname, '..');
+const readMigration = name => fs.readFileSync(path.join(rootDir, 'data', 'migrations', name), 'utf8');
+
+test('Sequência ordenada de migrações 010..021 aplica sem conflito no PostgreSQL local (PGlite) e protege dados pagos e CRM', async () => {
+  const db = new PGlite();
+  const userFree = '00000000-0000-4000-8000-000000000010';
+  const userDash = '00000000-0000-4000-8000-000000000011';
+  const userReport = '00000000-0000-4000-8000-000000000012';
+  const userMidia = '00000000-0000-4000-8000-000000000013';
+  const userAdmin = '00000000-0000-4000-8000-000000000099';
+
+  await db.exec(`
+    CREATE ROLE anon NOLOGIN;
+    CREATE ROLE authenticated NOLOGIN;
+    CREATE ROLE service_role NOLOGIN BYPASSRLS;
+    CREATE SCHEMA auth;
+    CREATE TABLE auth.users(id uuid PRIMARY KEY, email text, raw_user_meta_data jsonb);
+    CREATE TABLE auth.mfa_factors(id uuid DEFAULT gen_random_uuid() PRIMARY KEY, user_id uuid, status text);
+    CREATE FUNCTION auth.jwt() RETURNS jsonb LANGUAGE sql STABLE AS $$
+      SELECT COALESCE(NULLIF(current_setting('request.jwt.claims', true), ''), '{}')::jsonb
+    $$;
+    CREATE FUNCTION auth.role() RETURNS text LANGUAGE sql STABLE AS $$ SELECT auth.jwt()->>'role' $$;
+    CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql STABLE AS $$ SELECT (auth.jwt()->>'sub')::uuid $$;
+    GRANT USAGE ON SCHEMA auth TO anon, authenticated, service_role;
+
+    CREATE TABLE public.respostas_pesquisa (
+      id bigint PRIMARY KEY,
+      "Como você se identifica?" text,
+      "Qual a sua idade?" text,
+      "Região" text
+    );
+    INSERT INTO public.respostas_pesquisa VALUES (1, 'Mulher', '25 a 34 anos', 'Centro');
+
+    CREATE TABLE public.analise_midia_sjc (
+      id bigint PRIMARY KEY,
+      perfil text,
+      tema_central text,
+      likes integer,
+      comments integer
+    );
+    INSERT INTO public.analise_midia_sjc VALUES (101, 'lifeinforma', 'Cultura & Entretenimento', 120, 15);
+
+    CREATE TABLE public.empresas_sjc (
+      cnpj text PRIMARY KEY,
+      razao_social text,
+      status_funil text DEFAULT 'Disponivel_Pool',
+      assigned_to text,
+      assigned_at timestamptz,
+      updated_at timestamptz
+    );
+    CREATE TABLE public.blog_posts (
+      id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+      slug text,
+      title text,
+      status text DEFAULT 'published',
+      published_at timestamptz DEFAULT now()
+    );
+    CREATE TABLE public.affiliate_leads (
+      id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+      company_name text
+    );
+    GRANT SELECT ON public.respostas_pesquisa, public.analise_midia_sjc, public.empresas_sjc, public.blog_posts, public.affiliate_leads TO anon, authenticated;
+  `);
+
+  const orderedMigrations = [
+    '010_admin_authority.sql',
+    '011_billing_state.sql',
+    '012_security_and_pool_hardening.sql',
+    '013_restrict_survey_responses.sql',
+    '014_account_mfa.sql',
+    '015_billing_annual_upgrade.sql',
+    '016_report_private_documents.sql',
+    '017_paid_data_rls.sql',
+    '018_billing_upgrade_payment_methods.sql',
+    '019_billing_installment_progress_version.sql',
+    '020_immutable_terms_acceptance.sql'
+  ];
+
+  for (const file of orderedMigrations) {
+    await db.exec(readMigration(file));
+  }
+
+  await db.query(
+    `INSERT INTO auth.users VALUES
+      ($1, 'free@example.invalid', '{}'),
+      ($2, 'dash@example.invalid', '{}'),
+      ($3, 'report@example.invalid', '{}'),
+      ($4, 'midia@example.invalid', '{}'),
+      ($5, 'admin@example.invalid', '{}')`,
+    [userFree, userDash, userReport, userMidia, userAdmin]
+  );
+
+  for (const [uid, plan] of [[userDash, 'dash'], [userReport, 'report'], [userMidia, 'midia']]) {
+    await db.query(
+      `INSERT INTO public.billing_subscriptions (
+        user_id, plan_type, status, payment_method, installment_count, installments_paid,
+        period_start, period_end
+      ) VALUES ($1, $2, 'active', 'PIX', 1, 1, now() - interval '1 day', now() + interval '364 days')`,
+      [uid, plan]
+    );
+  }
+
+  async function asRole(role, claims, fn) {
+    await db.query(`SELECT set_config('request.jwt.claims', $1, false)`, [JSON.stringify(claims)]);
+    await db.exec(`SET ROLE ${role}`);
+    try {
+      return await fn();
+    } finally {
+      await db.exec('RESET ROLE');
+    }
+  }
+
+  // 1. Anon bloqueado em respostas_pesquisa, analise_midia_sjc, report_private_documents e empresas_sjc
+  await asRole('anon', { role: 'anon' }, async () => {
+    await assert.rejects(db.query('SELECT * FROM public.respostas_pesquisa'), { code: '42501' });
+    await assert.rejects(db.query('SELECT * FROM public.analise_midia_sjc'), { code: '42501' });
+    await assert.rejects(db.query('SELECT * FROM public.report_private_documents'), { code: '42501' });
+    await assert.rejects(db.query('SELECT * FROM public.empresas_sjc'), { code: '42501' });
+  });
+
+  // 2. Conta Grátis: bloqueada nas bases pagas (0 linhas em respostas_pesquisa e analise_midia_sjc)
+  await asRole('authenticated', { role: 'authenticated', sub: userFree }, async () => {
+    assert.equal((await db.query('SELECT * FROM public.respostas_pesquisa')).rows.length, 0);
+    assert.equal((await db.query('SELECT * FROM public.analise_midia_sjc')).rows.length, 0);
+    await assert.rejects(db.query('SELECT * FROM public.report_private_documents'), { code: '42501' });
+
+    // Pode registrar aceite imutável dos termos para si mesmo, mas não atualizar nem apagar
+    await db.query(
+      `INSERT INTO public.terms_acceptances (user_id, terms_version, profile_type) VALUES ($1, '2026-11-05', 'empresario')`,
+      [userFree]
+    );
+    assert.equal((await db.query('SELECT terms_version FROM public.terms_acceptances')).rows.length, 1);
+    await assert.rejects(
+      db.query(`DELETE FROM public.terms_acceptances WHERE user_id = $1`, [userFree]),
+      { code: '42501' }
+    );
+  });
+
+  // 3. Conta Report: lê respostas_pesquisa sob 017, mas NÃO consegue obter dados de analise_midia_sjc nem report_private_documents direto do banco
+  await asRole('authenticated', { role: 'authenticated', sub: userReport }, async () => {
+    assert.equal((await db.query('SELECT * FROM public.respostas_pesquisa')).rows.length, 1);
+    assert.equal((await db.query('SELECT * FROM public.analise_midia_sjc')).rows.length, 0);
+    await assert.rejects(db.query('SELECT * FROM public.report_private_documents'), { code: '42501' });
+  });
+
+  // 4. Conta Mídia: lê analise_midia_sjc sob 017; após 021, analise_midia_sjc fica restrita ao service_role (/api/media) e admin exige MFA aal2
+  await asRole('authenticated', { role: 'authenticated', sub: userMidia }, async () => {
+    assert.equal((await db.query('SELECT * FROM public.analise_midia_sjc')).rows.length, 1);
+  });
+
+  await db.exec(readMigration('021_private_media_and_admin_mfa.sql'));
+
+  await asRole('authenticated', { role: 'authenticated', sub: userMidia }, async () => {
+    await assert.rejects(db.query('SELECT * FROM public.analise_midia_sjc'), { code: '42501' });
+  });
+
+  await asRole('authenticated', { role: 'authenticated', sub: userAdmin, aal: 'aal1', app_metadata: { role: 'admin' } }, async () => {
+    assert.equal((await db.query('SELECT public.is_admin() AS ok')).rows[0].ok, false);
+  });
+
+  await asRole('authenticated', { role: 'authenticated', sub: userAdmin, aal: 'aal2', app_metadata: { role: 'admin' } }, async () => {
+    assert.equal((await db.query('SELECT public.is_admin() AS ok')).rows[0].ok, true);
+  });
+});
+
+test('POST /api/survey-report bloqueia anônimo, Grátis e Dash (403) e libera capítulos e métricas para Report, Mídia e Admin (200)', async () => {
+  const sampleRows = require('../lib/survey-data').demoSurveyRows();
+  let currentPlan = 'gratis';
+
+  function loadSurveyReportHandler(previewEnv = true) {
+    const mod = { exports: {} };
+    const surveyData = require('../lib/survey-data');
+    vm.runInNewContext(fs.readFileSync(path.join(rootDir, 'api', 'survey-report.js'), 'utf8'), {
+      module: mod,
+      exports: mod.exports,
+      Buffer,
+      process: { env: previewEnv ? { VERCEL_ENV: 'preview' } : {} },
+      require(id) {
+        if (id === '../lib/survey-data') {
+          return {
+            ...surveyData,
+            surveyPlan: async () => currentPlan,
+            readSurveyRows: async () => sampleRows
+          };
+        }
+        if (id === '../lib/billing-store') {
+          return {
+            ...require('../lib/billing-store'),
+            db: async () => [{ chapters_html: '<article id="rep-tela-015">Capítulo Real</article>' }]
+          };
+        }
+        if (id === './_report-chapters') return require('../api/_report-chapters');
+        if (id === '../report-metrics') return require('../report-metrics');
+        return require(id);
+      }
+    });
+    return mod.exports;
+  }
+
+  async function callReport(handler, body, method = 'POST') {
+    const res = {
+      statusCode: 200,
+      headers: {},
+      setHeader(k, v) { this.headers[k] = v; },
+      status(c) { this.statusCode = c; return this; },
+      json(payload) { this.body = payload; return this; }
+    };
+    await handler({ method, body }, res);
+    return res;
+  }
+
+  const handler = loadSurveyReportHandler(true);
+
+  for (const blockedPlan of ['gratis', 'dash']) {
+    currentPlan = blockedPlan;
+    const chaptersRes = await callReport(handler, { action: 'chapters' });
+    assert.equal(chaptersRes.statusCode, 403);
+    assert.equal(chaptersRes.body.code, 'REPORT_REQUIRED');
+
+    const metricsRes = await callReport(handler, { filters: {}, specs: [{ type: 'sample' }] });
+    assert.equal(metricsRes.statusCode, 403);
+    assert.equal(metricsRes.body.code, 'REPORT_REQUIRED');
+  }
+
+  for (const allowedPlan of ['report', 'midia', 'admin']) {
+    currentPlan = allowedPlan;
+    const chaptersRes = await callReport(handler, { action: 'chapters' });
+    assert.equal(chaptersRes.statusCode, 200);
+    assert.equal(chaptersRes.body.synthetic, true);
+    assert.match(chaptersRes.body.html, /rep-tela-015/);
+
+    const metricsRes = await callReport(handler, {
+      filters: {},
+      specs: [{ type: 'sample' }, { field: 'quality', type: 'mean', decimals: 1 }]
+    });
+    assert.equal(metricsRes.statusCode, 200);
+    assert.equal(metricsRes.body.N, 96);
+    assert.equal(metricsRes.body.metrics[0].formatted, '96');
+  }
+});
+
+test('Mídia: conta Report recebe 403 em GET /api/media e na tela vê apenas a prévia desfocada sem carregar linhas', async () => {
+  const BillingStore = require('../lib/billing-store');
+  let activePlan = 'report';
+
+  function loadMediaHandler() {
+    const mod = { exports: {} };
+    vm.runInNewContext(fs.readFileSync(path.join(rootDir, 'api', 'media.js'), 'utf8'), {
+      module: mod,
+      exports: mod.exports,
+      require(id) {
+        if (id === '../lib/billing-store') {
+          return {
+            ...BillingStore,
+            async authenticate() {
+              return { id: 'u1', app_metadata: activePlan === 'admin' ? { role: 'admin' } : {} };
+            },
+            async db() {
+              return [{ id: 1, perfil: 'lifeinforma', tema_central: 'Cultura', likes: 50, comments: 4 }];
+            }
+          };
+        }
+        if (id === '../lib/entitlements') {
+          return {
+            async getEffectiveEntitlement() {
+              return { planType: activePlan };
+            }
+          };
+        }
+        return require(id);
+      }
+    });
+    return mod.exports;
+  }
+
+  async function callMedia(handler) {
+    const res = {
+      statusCode: 200,
+      headers: {},
+      setHeader(k, v) { this.headers[k] = v; },
+      status(c) { this.statusCode = c; return this; },
+      json(payload) { this.body = payload; return this; }
+    };
+    await handler({ method: 'GET', query: {} }, res);
+    return res;
+  }
+
+  const mediaHandler = loadMediaHandler();
+
+  for (const deniedPlan of ['gratis', 'dash', 'report']) {
+    activePlan = deniedPlan;
+    const denied = await callMedia(mediaHandler);
+    assert.equal(denied.statusCode, 403, `Plano ${deniedPlan} deveria receber 403 em /api/media`);
+    assert.equal(denied.body.code, 'ACTIVE_PLAN_REQUIRED');
+  }
+
+  activePlan = 'midia';
+  const allowed = await callMedia(mediaHandler);
+  assert.equal(allowed.statusCode, 200);
+  assert.equal(allowed.body.rows.length, 1);
+
+  // Verifica também os endpoints de IA desativados neste lançamento
+  for (const endpointFile of ['consultor.js', 'oraculo.js']) {
+    const handler = require(path.join(rootDir, 'api', endpointFile));
+    const res = {
+      statusCode: 200,
+      setHeader() {},
+      status(c) { this.statusCode = c; return this; },
+      json(payload) { this.body = payload; return this; }
+    };
+    await handler({ method: 'POST', headers: {} }, res);
+    assert.equal(res.statusCode, 404);
+    assert.equal(res.body.code, 'NOT_FOUND');
+  }
+});

@@ -3,38 +3,11 @@
 // Radar São José - Inteligência Territorial
 // =========================================================================
 
-const fs = require('fs');
-const path = require('path');
 const { getDbPool } = require('../lib/db-pool');
+const { isAdmin, hasRequiredMfa } = require('../lib/auth-mfa');
 
 // Carregador autônomo de variáveis de ambiente (.env / .env.local)
-function loadEnv() {
-  const envCandidates = [
-    path.join(process.cwd(), '.env'),
-    path.join(process.cwd(), '.env.local'),
-    path.join(__dirname, '..', '.env'),
-    path.join(__dirname, '.env')
-  ];
-  for (const p of envCandidates) {
-    if (fs.existsSync(p)) {
-      try {
-        const text = fs.readFileSync(p, 'utf8');
-        text.split('\n').forEach(line => {
-          const trimmed = line.trim();
-          if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
-            const idx = trimmed.indexOf('=');
-            const k = trimmed.slice(0, idx).trim();
-            const v = trimmed.slice(idx + 1).replace(/^['"]|['"\r]$/g, '').trim();
-            if (k && !process.env[k]) {
-              process.env[k] = v;
-            }
-          }
-        });
-      } catch (e) {}
-    }
-  }
-}
-loadEnv();
+
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
@@ -488,12 +461,7 @@ const SEED_FALLBACK_PLAN = {
 // SEGURANÇA & CONTROLE DE ACESSO (SUPABASE AUTH & RBAC SERVER-SIDE)
 // =========================================================================
 
-const SUPER_ADMIN_EMAILS = [
-  'venancio.project@gmail.com',
-  'gamersilvaesilva@gmail.com',
-  'leonardo@radarsaojose.com.br',
-  'leoserven@gmail.com'
-];
+
 
 /**
  * Extrai e valida o token Bearer via Supabase Auth (/auth/v1/user)
@@ -552,6 +520,9 @@ async function authenticateSupabaseRequest(req) {
       };
     }
 
+    if (!hasRequiredMfa(user, token)) {
+      return { ok: false, status: 403, error: "Conclua a verificação em duas etapas.", code: "MFA_REQUIRED" };
+    }
     return { ok: true, user };
   } catch (err) {
     console.error('[Auth Error Business Plan]:', err.message);
@@ -564,58 +535,8 @@ async function authenticateSupabaseRequest(req) {
   }
 }
 
-/**
- * Validação de Autorização Administrativa (RBAC) no Servidor
- * Aceita EXCLUSIVAMENTE fontes controladas pelo servidor:
- * 1) Lista explícita de superadministradores no backend (SUPER_ADMIN_EMAILS)
- * 2) app_metadata.role === 'admin' (definido apenas por service_role no Supabase)
- * 3) app_metadata.is_admin === true (definido apenas por service_role no Supabase)
- * 4) profiles.role === 'admin' (consultado server-side com SUPABASE_SERVICE_ROLE_KEY)
- * 
- * NUNCA utiliza user_metadata, body.role, query.role ou header.role para concessão de privilégios.
- */
 async function isUserAdmin(user) {
-  if (!user || typeof user !== 'object') return false;
-
-  // 1. Verificação autoritativa por e-mail na lista de superadministradores do backend
-  const email = (user.email || '').toLowerCase().trim();
-  if (email && SUPER_ADMIN_EMAILS.includes(email)) {
-    return true;
-  }
-
-  // 2. Verificação de claims administrativas em app_metadata (protegido contra edição pelo usuário)
-  const appRole = (user.app_metadata?.role || '').toLowerCase().trim();
-  if (appRole === 'admin') {
-    return true;
-  }
-  if (user.app_metadata?.is_admin === true) {
-    return true;
-  }
-
-  // 3. Consulta autoritativa da tabela profiles no Supabase via SUPABASE_SERVICE_KEY
-  // (Requer chave de serviço; se não configurada, opera em fail-closed)
-  const serviceKey = getSupabaseServiceKey();
-  if (SUPABASE_URL && serviceKey && user.id) {
-    try {
-      const profileRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/profiles?id=eq.${encodeURIComponent(user.id)}&select=role`, {
-        method: 'GET',
-        headers: {
-          'apikey': serviceKey,
-          'Authorization': `Bearer ${serviceKey}`
-        }
-      }, { timeoutMs: 8000, maxRetries: 0, coalesce: false });
-      if (profileRes.ok) {
-        const rows = await profileRes.json();
-        if (Array.isArray(rows) && rows.length > 0 && rows[0].role === 'admin') {
-          return true;
-        }
-      }
-    } catch (profileErr) {
-      console.warn('[Admin Check] Aviso ao consultar profile no Supabase:', profileErr.message);
-    }
-  }
-
-  return false;
+  return isAdmin(user);
 }
 
 /**
@@ -1119,7 +1040,6 @@ module.exports.isUserAdmin = isUserAdmin;
 module.exports.sanitizeBusinessPlanPayload = sanitizeBusinessPlanPayload;
 module.exports.saveBusinessPlanToSupabase = saveBusinessPlanToSupabase;
 module.exports.getSupabaseServiceKey = getSupabaseServiceKey;
-module.exports.SUPER_ADMIN_EMAILS = SUPER_ADMIN_EMAILS;
 
 
 

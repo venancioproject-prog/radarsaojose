@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Segurança da conta | Radar São José</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 20px; background: linear-gradient(#07172c99,#07172cdd),url('web-media/foto_onibus_viaduto-18691779619a.webp') center/cover; color: #0b2545; font: 1rem/1.5 system-ui,sans-serif; }
+    main { width: min(100%, 460px); padding: clamp(20px,6vw,36px); border-radius: 24px; background: #fff; }
+    img { display: block; max-width: 100%; margin: 0 auto; }
+    h1 { font-size: 1.6rem; }
+    label { display: block; font-weight: 650; margin-top: 14px; }
+    input, button { width: 100%; margin-top: 6px; padding: 10px; border: 1px solid #94a3b8; border-radius: 8px; font: inherit; }
+    button { margin-top: 12px; background: #0b2545; color: white; font-weight: 700; cursor: pointer; }
+    button:disabled { opacity: .65; }
+    a { color: #075985; }
+    #status:empty { display: none; }
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="/api/asaas-checkout?browserConfig=1"></script>
+  <script defer src="/supabase-browser-config.js"></script>
+  <script defer src="radar-mfa.js"></script>
+</head>
+<body>
+  <main>
+    <img src="fotos_radar/logo_login_radar.png" width="155" alt="Radar São José">
+    <h1>Segurança da conta</h1>
+    <p id="description"></p>
+    <button type="button" id="enroll" hidden>Configurar app autenticador</button>
+    <div id="setup" hidden>
+      <ol>
+        <li>Abra um app autenticador no celular e escolha adicionar uma conta.</li>
+        <li>Escaneie o QR Code. Se estiver no mesmo aparelho, use a chave abaixo.</li>
+        <li>Digite o código de seis dígitos mostrado no app.</li>
+      </ol>
+      <img id="qr" width="170" height="170" alt="QR Code para configurar o autenticador">
+      <label for="key">Chave para configuração manual</label>
+      <input id="key" readonly spellcheck="false" autocomplete="off">
+      <button type="button" id="copy">Copiar chave</button>
+    </div>
+    <form id="challenge" hidden>
+      <label for="code">Código do autenticador</label>
+      <input id="code" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required>
+      <button type="submit">Verificar e continuar</button>
+    </form>
+    <p id="status" role="status">Conferindo sua conta…</p>
+    <p><a id="back" href="app.html" hidden>Voltar ao painel</a></p>
+    <button type="button" id="sign-out" hidden>Sair desta conta</button>
+  </main>
+  <script defer src="seguranca-conta.js"></script>
+</body>
+</html>

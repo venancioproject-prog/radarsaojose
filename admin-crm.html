@@ -43,9 +43,6 @@
 
         const name = user.user_metadata?.nome || user.user_metadata?.full_name || 'Administrador';
         window.currentAdminUser = { id: user.id, email: user.email, nome: name, role: 'admin' };
-        localStorage.setItem('userRole', 'admin');
-        localStorage.setItem('userName', name);
-        if (user.email) localStorage.setItem('userEmail', user.email);
         document.documentElement.style.visibility = 'visible';
       } catch (_) {
         window.location.replace('app.html');
@@ -1364,6 +1361,7 @@
   <script src="market-intelligence-controller.js"></script>
   <!-- Eleições 2026 Controller (Módulo Único Homologado) -->
   <script src="eleicoes-2026-controller.js?v=20261007_04"></script>
+  <script src="/radar-safe-content.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased h-screen overflow-hidden flex flex-col">
 
@@ -9176,7 +9174,7 @@
       const toolbar = document.getElementById('wpToolbar');
 
       if (mode === 'visual') {
-        visualEl.innerHTML = htmlEl.value;
+        window.radarSafeContent.render(visualEl, htmlEl.value);
         visualEl.classList.remove('hidden');
         htmlEl.classList.add('hidden');
         if (toolbar) toolbar.classList.remove('opacity-50', 'pointer-events-none');
@@ -9203,7 +9201,7 @@
     function handleWpHtmlInput() {
       const visualEl = document.getElementById('wpEditorVisual');
       const htmlEl = document.getElementById('wpEditorHtml');
-      if (visualEl && htmlEl) visualEl.innerHTML = htmlEl.value;
+      if (visualEl && htmlEl) window.radarSafeContent.render(visualEl, htmlEl.value);
       updateWordCounts();
     }
 
@@ -10166,7 +10164,7 @@
         const htmlEl = document.getElementById('wpEditorHtml');
         contentHtml = htmlEl ? htmlEl.value : '';
         const visualEl = document.getElementById('wpEditorVisual');
-        if (visualEl) visualEl.innerHTML = contentHtml;
+        if (visualEl) window.radarSafeContent.render(visualEl, contentHtml);
       } else {
         const visualEl = document.getElementById('wpEditorVisual');
         contentHtml = visualEl ? visualEl.innerHTML : '';
@@ -10327,7 +10325,7 @@
 
       const visualEl = document.getElementById('wpEditorVisual');
       const htmlEl = document.getElementById('wpEditorHtml');
-      if (visualEl) visualEl.innerHTML = post.content || '';
+      if (visualEl) window.radarSafeContent.render(visualEl, post.content);
       if (htmlEl) htmlEl.value = post.content || '';
       setEditorMode('visual');
 

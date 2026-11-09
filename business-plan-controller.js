@@ -2210,56 +2210,24 @@ function initPlanScrollSpy() {
 // Sincronização Bidirecional Direta em Tempo Real (Leonardo & Mayumi / Maira)
 // =========================================================================
 
-const PLAN_SUPABASE_CLOUD_URL = "https://tocyvysucpslayzglixq.supabase.co";
-const PLAN_SUPABASE_ANON_KEY = "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
 const PLAN_SYNC_SLUG = "system-business-plan-blocks-v2";
 
-function getPlanSupabaseConfig() {
-  const url = (typeof window !== 'undefined' && window.SUPABASE_URL) ? window.SUPABASE_URL : PLAN_SUPABASE_CLOUD_URL;
-  const key = (typeof window !== 'undefined' && window.SUPABASE_ANON_KEY) ? window.SUPABASE_ANON_KEY : PLAN_SUPABASE_ANON_KEY;
-  return { url, key };
-}
+async function callPlanBlocksApi(method = "GET", payload = null) {
+  const { data } = await window.supabaseClient?.auth?.getSession() || {};
+  const token = data?.session?.access_token;
+  if (!token) return null;
 
-// Resolve URLs de API com tolerância a servidores estáticos locais
-function resolvePlanApiUrl(path) {
-  if (typeof window !== 'undefined') {
-    const loc = window.location;
-    if (loc.protocol === 'file:' || ['8000', '5500', '8080', '5173'].includes(loc.port)) {
-      return `http://localhost:3000${path}`;
-    }
-  }
-  return path;
-}
-
-// Chamador HTTP fallback para rota serverless Vercel
-async function callPlanBlocksApi(method = 'GET', payload = null) {
-  const primaryUrl = resolvePlanApiUrl('/api/plan-blocks');
-  const candidateUrls = [
-    primaryUrl,
-    '/api/plan-blocks',
-    'http://localhost:3000/api/plan-blocks'
-  ].filter((v, i, a) => a.indexOf(v) === i);
-
-  for (const url of candidateUrls) {
-    try {
-      const opts = {
-        method: method,
-        headers: { 'Content-Type': 'application/json' }
-      };
-      if (payload) opts.body = JSON.stringify(payload);
-      const res = await fetch(url, opts);
-      if (res.status === 501 || res.status === 404) continue;
-      return res;
-    } catch (e) {}
-  }
-  return null;
+  return fetch("/api/plan-blocks", {
+    method,
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: payload ? JSON.stringify(payload) : undefined
+  });
 }
 
 /**
  * Busca estado completo diretamente do Supabase Cloud (com tolerância a falhas)
  */
 async function fetchPlanStateFromCloud() {
-  const { url, key } = getPlanSupabaseConfig();
 
   // 1. Tenta via window.supabaseClient oficial se disponível
   if (typeof window !== 'undefined' && window.supabaseClient && typeof window.supabaseClient.from === 'function') {
@@ -2277,26 +2245,7 @@ async function fetchPlanStateFromCloud() {
     }
   }
 
-  // 2. Requisição REST direta ao Supabase Cloud com apikey pública (independe de sessão ou serverless)
-  try {
-    const res = await fetch(`${url}/rest/v1/blog_posts?slug=eq.${PLAN_SYNC_SLUG}&select=*`, {
-      method: 'GET',
-      headers: {
-        'apikey': key,
-        'Authorization': `Bearer ${key}`
-      }
-    });
-    if (res.ok) {
-      const rows = await res.json();
-      if (Array.isArray(rows) && rows.length > 0) {
-        return rows[0];
-      }
-    }
-  } catch (e) {
-    console.warn('[Cloud Sync] Fetch direto REST Supabase warning:', e.message);
-  }
-
-  // 3. Fallback adicional via Serverless API (/api/plan-blocks)
+  // Alternativa pela rota administrativa do servidor.
   try {
     const apiRes = await callPlanBlocksApi('GET');
     if (apiRes && apiRes.ok) {
@@ -2314,7 +2263,6 @@ async function fetchPlanStateFromCloud() {
  * Persiste estado completo na nuvem Supabase (compartilhado entre Leonardo e Mayumi / Maira)
  */
 async function savePlanStateToCloud(forceImmediate = false) {
-  const { url, key } = getPlanSupabaseConfig();
   const nowIso = new Date().toISOString();
   currentPlanState.updated_at = nowIso;
 
@@ -2397,36 +2345,11 @@ async function savePlanStateToCloud(forceImmediate = false) {
     }
   }
 
-  // 2. Se não salvou, executa PATCH direto na REST API do Supabase com public anon key
-  if (!savedOk) {
-    try {
-      const patchRes = await fetch(`${url}/rest/v1/blog_posts?slug=eq.${PLAN_SYNC_SLUG}`, {
-        method: 'PATCH',
-        headers: {
-          'apikey': key,
-          'Authorization': `Bearer ${key}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          content: bodyContent,
-          seo_metadata: meta,
-          updated_at: nowIso
-        })
-      });
-      if (patchRes.ok) {
-        savedOk = true;
-      }
-    } catch (e) {
-      console.warn('[Cloud Sync] PATCH REST Supabase warning:', e.message);
-    }
-  }
-
-  // 3. Fallback adicional via Serverless API
+  // Alternativa pela rota administrativa do servidor.
   if (!savedOk) {
     try {
       const apiRes = await callPlanBlocksApi('POST', fullPayload);
-      if (apiRes && apiRes.ok) savedOk = true;
+      if (apiRes?.ok) savedOk = (await apiRes.json()).success === true;
     } catch (e) {}
   }
 

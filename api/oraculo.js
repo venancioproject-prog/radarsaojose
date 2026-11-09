@@ -9,32 +9,7 @@ exports.config = {
 };
 
 // Carregador de .env autônomo
-function loadEnvLocal() {
-  const envCandidates = [
-    path.join(process.cwd(), '.env'),
-    path.join(__dirname, '..', '.env'),
-    path.join(__dirname, '.env')
-  ];
-  for (const p of envCandidates) {
-    if (fs.existsSync(p)) {
-      try {
-        const text = fs.readFileSync(p, 'utf8');
-        text.split('\n').forEach(line => {
-          const trimmed = line.trim();
-          if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
-            const idx = trimmed.indexOf('=');
-            const k = trimmed.slice(0, idx).trim();
-            const v = trimmed.slice(idx + 1).replace(/^['"]|['"\r]$/g, '').trim();
-            if (k && !process.env[k]) {
-              process.env[k] = v;
-            }
-          }
-        });
-      } catch (e) {}
-    }
-  }
-}
-loadEnvLocal();
+
 
 // Modelos Homologados
 const GROQ_MODEL = process.env.GROQ_MODEL || "qwen/qwen3.6-27b";
@@ -87,6 +62,10 @@ function loadAllRawData() {
 }
 
 module.exports = async function handler(req, res) {
+  if (process.env.RADAR_AI_ENABLED !== '1') {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(404).json({ code: 'NOT_FOUND' });
+  }
   // Polyfill / Helper para compatibilidade universal (Vercel Serverless e Node HTTP)
   if (!res.status) {
     res.status = function(code) {
@@ -601,7 +580,7 @@ Se qualquer resposta for “não”, corrija o objeto antes de enviá-lo.`;
 
   } catch (error) {
     console.error("Erro no handler do Oráculo:", error);
-    return res.status(500).json({ error: "Erro interno no processamento do Oráculo RDR: " + error.message });
+    return res.status(500).json({ error: "Erro interno no processamento do Oráculo RDR." });
   }
 };
 

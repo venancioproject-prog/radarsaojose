@@ -363,8 +363,18 @@
   window.updateAllComponents = updateAllComponents;
   window.reloadAllMarketIntelligence = updateAllComponents;
 
+  async function requireAdminMasterSession() {
+    const client = window.supabaseClient;
+    if (!client || !window.radarMfa) return false;
+    const { data, error } = await client.auth.getUser();
+    const user = data?.user;
+    if (error || !(user?.app_metadata?.role === 'admin' || user?.app_metadata?.is_admin === true)) return false;
+    return !(await window.radarMfa.status(client, user)).required;
+  }
+
   // Inicialização Central
   window.initMarketIntelligence = async function() {
+    if (!await requireAdminMasterSession()) return;
     console.log('[Market Intel] Inicializando Módulo com Quarentena de Outliers, Street-Level Map & Filtros Globais...');
     try {
       bindEvents();
@@ -414,7 +424,7 @@
         p_faixa_idade: f.faixa_idade || null,
         p_simples: f.simples || null,
         p_mei: f.mei || null,
-        p_search: f.search || null,
+        p_search: pgSafe(f.search) || null,
         p_incluir_outliers: f.incluir_outliers
       };
 
@@ -433,7 +443,7 @@
             p_faixa_idade: f.faixa_idade || null,
             p_simples: f.simples || null,
             p_mei: f.mei || null,
-            p_search: f.search || null,
+            p_search: pgSafe(f.search) || null,
             p_incluir_outliers: f.incluir_outliers
           });
           if (fbErr) throw fbErr;
@@ -450,14 +460,14 @@
         let q = client.from('empresas_sjc').select('*', { count: 'exact', head: true });
         if (!f.incluir_outliers) q = q.eq('is_outlier_extremo', false);
         if (currentFilters.bairro.length === 1) {
-          q = q.ilike('bairro', `%${currentFilters.bairro[0]}%`);
+          q = q.ilike('bairro', `%${pgSafe(currentFilters.bairro[0])}%`);
         } else if (currentFilters.bairro.length > 1) {
-          q = q.or(currentFilters.bairro.map(b => `bairro.ilike.%${b}%`).join(','));
+          q = q.or(currentFilters.bairro.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
         }
         if (currentFilters.cnae.length === 1) {
-          q = q.or(`setor_cnae_codigo.ilike.%${currentFilters.cnae[0]}%,setor_cnae_descricao.ilike.%${currentFilters.cnae[0]}%`);
+          q = q.or(`setor_cnae_codigo.ilike.%${pgSafe(currentFilters.cnae[0])}%,setor_cnae_descricao.ilike.%${pgSafe(currentFilters.cnae[0])}%`);
         } else if (currentFilters.cnae.length > 1) {
-          q = q.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${c}%,setor_cnae_descricao.ilike.%${c}%`).join(','));
+          q = q.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${pgSafe(c)}%,setor_cnae_descricao.ilike.%${pgSafe(c)}%`).join(','));
         }
         // Filtro de Macro-Setor via prefixos CNAE (prefix match com .like, NÃO .ilike com %)
         if (currentFilters.macro_setor.length > 0 && currentFilters.cnae.length === 0) {
@@ -467,7 +477,7 @@
             list.forEach(d => { if (!divs.includes(d)) divs.push(d); });
           });
           if (divs.length > 0) {
-            q = q.or(divs.map(d => `setor_cnae_codigo.like.${d}*`).join(','));
+            q = q.or(divs.map(d => `setor_cnae_codigo.like.${pgSafe(d)}*`).join(','));
           }
         }
         if (currentFilters.porte.length === 1) {
@@ -477,7 +487,7 @@
         }
         if (f.mei) q = q.eq('opcao_mei', f.mei);
         if (f.simples) q = q.eq('opcao_simples', f.simples);
-        if (f.search) q = q.or(`razao_social.ilike.%${f.search}%,cnpj.ilike.%${f.search}%`);
+        if (f.search) q = q.or(`razao_social.ilike.%${pgSafe(f.search)}%,cnpj.ilike.%${pgSafe(f.search)}%`);
 
         const { count, error: cErr } = await q;
         if (!cErr && typeof count === 'number') {
@@ -922,13 +932,13 @@
           const targetBairro = bairro || f.bairro;
           if (targetBairro) {
             const bList = targetBairro.split(',').map(b => b.trim()).filter(Boolean);
-            if (bList.length === 1) q = q.ilike('bairro', `%${bList[0]}%`);
-            else if (bList.length > 1) q = q.or(bList.map(b => `bairro.ilike.%${b}%`).join(','));
+            if (bList.length === 1) q = q.ilike('bairro', `%${pgSafe(bList[0])}%`);
+            else if (bList.length > 1) q = q.or(bList.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
           }
 
           // Filtra por prefixos CNAE server-side (evita trazer 125k registros desnecessários)
           if (activeCnaePrefixes && activeCnaePrefixes.length > 0) {
-            q = q.or(activeCnaePrefixes.map(d => `setor_cnae_codigo.like.${d}*`).join(','));
+            q = q.or(activeCnaePrefixes.map(d => `setor_cnae_codigo.like.${pgSafe(d)}*`).join(','));
           }
 
           const { data: dbData } = await q.limit(2000);
@@ -1812,7 +1822,7 @@
 
           if (targetCnae) {
             const cList = targetCnae.split(',').map(c => c.trim()).filter(Boolean);
-            if (cList.length === 1) q = q.or(`setor_cnae_codigo.ilike.%${cList[0]}%,setor_cnae_descricao.ilike.%${cList[0]}%`);
+            if (cList.length === 1) q = q.or(`setor_cnae_codigo.ilike.%${pgSafe(cList[0])}%,setor_cnae_descricao.ilike.%${pgSafe(cList[0])}%`);
             else if (cList.length > 1) {
               const orCnaes = cList.map(c => `setor_cnae_codigo.ilike.%${c}%,setor_cnae_descricao.ilike.%${c}%`).join(',');
               q = q.or(orCnaes);
@@ -2009,15 +2019,15 @@
           }
 
           if (currentFilters.bairro.length === 1) {
-            query = query.ilike('bairro', `%${currentFilters.bairro[0]}%`);
+            query = query.ilike('bairro', `%${pgSafe(currentFilters.bairro[0])}%`);
           } else if (currentFilters.bairro.length > 1) {
-            query = query.or(currentFilters.bairro.map(b => `bairro.ilike.%${b}%`).join(','));
+            query = query.or(currentFilters.bairro.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
           }
 
           if (currentFilters.cnae.length === 1) {
-            query = query.or(`setor_cnae_codigo.ilike.%${currentFilters.cnae[0]}%,setor_cnae_descricao.ilike.%${currentFilters.cnae[0]}%`);
+            query = query.or(`setor_cnae_codigo.ilike.%${pgSafe(currentFilters.cnae[0])}%,setor_cnae_descricao.ilike.%${pgSafe(currentFilters.cnae[0])}%`);
           } else if (currentFilters.cnae.length > 1) {
-            query = query.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${c}%,setor_cnae_descricao.ilike.%${c}%`).join(','));
+            query = query.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${pgSafe(c)}%,setor_cnae_descricao.ilike.%${pgSafe(c)}%`).join(','));
           }
 
           // Filtro Macro-Setor via prefixos CNAE (server-side, sincronizado com a tabela e os KPIs)
@@ -2028,7 +2038,7 @@
               list.forEach(d => { if (!divs.includes(d)) divs.push(d); });
             });
             if (divs.length > 0) {
-              query = query.or(divs.map(d => `setor_cnae_codigo.like.${d}*`).join(','));
+              query = query.or(divs.map(d => `setor_cnae_codigo.like.${pgSafe(d)}*`).join(','));
             }
           }
 
@@ -2049,7 +2059,7 @@
           if (f.simples) query = query.eq('opcao_simples', f.simples);
           if (f.mei) query = query.eq('opcao_mei', f.mei);
           if (f.search) {
-            query = query.or(`razao_social.ilike.%${f.search}%,nome_fantasia.ilike.%${f.search}%,cnpj.ilike.%${f.search}%`);
+            query = query.or(`razao_social.ilike.%${pgSafe(f.search)}%,nome_fantasia.ilike.%${pgSafe(f.search)}%,cnpj.ilike.%${pgSafe(f.search)}%`);
           }
 
           return query;
@@ -2062,14 +2072,14 @@
           let cq = client.from('empresas_sjc').select('cnpj', { count: 'exact', head: true });
           if (!f.incluir_outliers) cq = cq.eq('is_outlier_extremo', false);
           if (currentFilters.bairro.length === 1) {
-            cq = cq.ilike('bairro', `%${currentFilters.bairro[0]}%`);
+            cq = cq.ilike('bairro', `%${pgSafe(currentFilters.bairro[0])}%`);
           } else if (currentFilters.bairro.length > 1) {
-            cq = cq.or(currentFilters.bairro.map(b => `bairro.ilike.%${b}%`).join(','));
+            cq = cq.or(currentFilters.bairro.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
           }
           if (currentFilters.cnae.length === 1) {
-            cq = cq.or(`setor_cnae_codigo.ilike.%${currentFilters.cnae[0]}%,setor_cnae_descricao.ilike.%${currentFilters.cnae[0]}%`);
+            cq = cq.or(`setor_cnae_codigo.ilike.%${pgSafe(currentFilters.cnae[0])}%,setor_cnae_descricao.ilike.%${pgSafe(currentFilters.cnae[0])}%`);
           } else if (currentFilters.cnae.length > 1) {
-            cq = cq.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${c}%,setor_cnae_descricao.ilike.%${c}%`).join(','));
+            cq = cq.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${pgSafe(c)}%,setor_cnae_descricao.ilike.%${pgSafe(c)}%`).join(','));
           }
           if (currentFilters.macro_setor.length > 0 && currentFilters.cnae.length === 0) {
             const divs = [];
@@ -2077,13 +2087,13 @@
               const list = MACRO_CNAE_DIVISIONS[m] || [];
               list.forEach(d => { if (!divs.includes(d)) divs.push(d); });
             });
-            if (divs.length > 0) cq = cq.or(divs.map(d => `setor_cnae_codigo.like.${d}*`).join(','));
+            if (divs.length > 0) cq = cq.or(divs.map(d => `setor_cnae_codigo.like.${pgSafe(d)}*`).join(','));
           }
           if (currentFilters.porte.length === 1) cq = cq.eq('porte', currentFilters.porte[0]);
           else if (currentFilters.porte.length > 1) cq = cq.in('porte', currentFilters.porte);
           if (f.simples) cq = cq.eq('opcao_simples', f.simples);
           if (f.mei) cq = cq.eq('opcao_mei', f.mei);
-          if (f.search) cq = cq.or(`razao_social.ilike.%${f.search}%,nome_fantasia.ilike.%${f.search}%,cnpj.ilike.%${f.search}%`);
+          if (f.search) cq = cq.or(`razao_social.ilike.%${pgSafe(f.search)}%,nome_fantasia.ilike.%${pgSafe(f.search)}%,cnpj.ilike.%${pgSafe(f.search)}%`);
           const { count: exactCount } = await cq;
           if (typeof exactCount === 'number') estimatedTotal = exactCount;
         } catch (e) {
@@ -2373,16 +2383,16 @@
 
       // Filtro Bairro (múltiplos com OR)
       if (currentFilters.bairro.length === 1) {
-        query = query.ilike('bairro', `%${currentFilters.bairro[0]}%`);
+        query = query.ilike('bairro', `%${pgSafe(currentFilters.bairro[0])}%`);
       } else if (currentFilters.bairro.length > 1) {
-        query = query.or(currentFilters.bairro.map(b => `bairro.ilike.%${b}%`).join(','));
+        query = query.or(currentFilters.bairro.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
       }
 
       // Filtro CNAE (múltiplos com OR)
       if (currentFilters.cnae.length === 1) {
-        query = query.or(`setor_cnae_codigo.ilike.%${currentFilters.cnae[0]}%,setor_cnae_descricao.ilike.%${currentFilters.cnae[0]}%`);
+        query = query.or(`setor_cnae_codigo.ilike.%${pgSafe(currentFilters.cnae[0])}%,setor_cnae_descricao.ilike.%${pgSafe(currentFilters.cnae[0])}%`);
       } else if (currentFilters.cnae.length > 1) {
-        query = query.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${c}%,setor_cnae_descricao.ilike.%${c}%`).join(','));
+        query = query.or(currentFilters.cnae.map(c => `setor_cnae_codigo.ilike.%${pgSafe(c)}%,setor_cnae_descricao.ilike.%${pgSafe(c)}%`).join(','));
       }
 
       // Filtro Macro-Setores
@@ -2393,10 +2403,10 @@
           list.forEach(d => { if (!divs.includes(d)) divs.push(d); });
         });
         if (divs.length > 0) {
-          query = query.or(divs.map(d => `setor_cnae_codigo.like.${d}*`).join(','));
+          query = query.or(divs.map(d => `setor_cnae_codigo.like.${pgSafe(d)}*`).join(','));
         }
       } else if (f.setor && !f.cnae) {
-        query = query.or(`setor_cnae_descricao.ilike.%${f.setor}%,setor_cnae_codigo.ilike.%${f.setor}%`);
+        query = query.or(`setor_cnae_descricao.ilike.%${pgSafe(f.setor)}%,setor_cnae_codigo.ilike.%${pgSafe(f.setor)}%`);
       }
 
       // Filtro Porte
@@ -2421,7 +2431,7 @@
 
       // Busca Textual Ampla (Razão, Fantasia, CNPJ, Responsável, Email, Telefone)
       if (f.search) {
-        query = query.or(`razao_social.ilike.%${f.search}%,nome_fantasia.ilike.%${f.search}%,cnpj.ilike.%${f.search}%,nome_responsavel.ilike.%${f.search}%,email.ilike.%${f.search}%,telefone.ilike.%${f.search}%`);
+        query = query.or(`razao_social.ilike.%${pgSafe(f.search)}%,nome_fantasia.ilike.%${pgSafe(f.search)}%,cnpj.ilike.%${pgSafe(f.search)}%,nome_responsavel.ilike.%${pgSafe(f.search)}%,email.ilike.%${pgSafe(f.search)}%,telefone.ilike.%${pgSafe(f.search)}%`);
       }
 
       // Ordenação Multi-Colunas
@@ -2463,7 +2473,7 @@
 
     try {
       const { data, error } = await client.rpc('rpc_get_empresas_sjc_paginated', {
-        p_search: f.search || null,
+        p_search: pgSafe(f.search) || null,
         p_bairro: f.bairro || null,
         p_setor: f.macro_setor || f.setor || null,
         p_cnae: f.cnae || null,
@@ -2519,6 +2529,12 @@
     }
   }
 
+  function pgSafe(value) {
+    return String(value ?? '').replace(/[^\p{L}\p{M}\p{N} -]/gu, ' ').trim().slice(0, 100);
+  }
+
+  const escapeMarketText = value => window.radarSafeContent.escape(value);
+
   function formatPhone(ddd, tel) {
     if (!tel) return '<span class="text-slate-300">-</span>';
     const cleanTel = String(tel).replace(/\D/g, '');
@@ -2543,7 +2559,9 @@
 
   function formatEmail(email) {
     if (!email) return '<span class="text-slate-300">-</span>';
-    const cleanEmail = String(email).trim().toLowerCase();
+    const address = String(email).trim().toLowerCase();
+    if (!/^[\w.+-]+@[\w.-]+$/.test(address)) return '<span class="text-slate-300">-</span>';
+    const cleanEmail = escapeMarketText(address);
     return `
       <a href="mailto:${cleanEmail}" class="text-blue-600 hover:text-blue-800 hover:underline text-[11px] truncate max-w-[170px] inline-flex items-center gap-1 transition-colors" title="${cleanEmail}">
         <i class="fa-solid fa-envelope text-[9px] text-blue-400 shrink-0"></i>
@@ -2594,21 +2612,21 @@
         <tr class="hover:bg-slate-50/90 transition-colors border-b border-slate-100 text-xs">
           <!-- 1. CNPJ -->
           <td class="py-3 px-3.5 font-mono font-bold text-slate-800 whitespace-nowrap">
-            ${cnpjFmt}
+            ${escapeMarketText(cnpjFmt)}
           </td>
 
           <!-- 2. Razão Social / Fantasia -->
           <td class="py-3 px-3.5 min-w-[200px] max-w-[260px]">
-            <strong class="text-slate-900 block truncate" title="${r.razao_social || ''}">${r.razao_social || 'Sem Razão Social'}</strong>
-            ${r.nome_fantasia ? `<span class="text-[10px] text-slate-400 block truncate" title="${r.nome_fantasia}">${r.nome_fantasia}</span>` : ''}
+            <strong class="text-slate-900 block truncate" title="${escapeMarketText(r.razao_social || '')}">${escapeMarketText(r.razao_social || 'Sem Razão Social')}</strong>
+            ${r.nome_fantasia ? `<span class="text-[10px] text-slate-400 block truncate" title="${escapeMarketText(r.nome_fantasia)}">${escapeMarketText(r.nome_fantasia)}</span>` : ''}
           </td>
 
           <!-- 3. Responsável -->
           <td class="py-3 px-3.5 min-w-[150px] max-w-[210px]">
             ${responsavel ? `
-              <div class="flex items-center gap-1.5 truncate" title="${responsavel}">
+              <div class="flex items-center gap-1.5 truncate" title="${escapeMarketText(responsavel)}">
                 <i class="fa-solid fa-user-tie text-[10px] text-slate-400 shrink-0"></i>
-                <span class="font-semibold text-slate-700 truncate">${responsavel}</span>
+                <span class="font-semibold text-slate-700 truncate">${escapeMarketText(responsavel)}</span>
               </div>
             ` : '<span class="text-slate-300">-</span>'}
           </td>
@@ -2625,16 +2643,16 @@
 
           <!-- 6. Bairro -->
           <td class="py-3 px-3.5 font-semibold text-slate-700 whitespace-nowrap">
-            ${r.bairro || '<span class="text-slate-300">-</span>'}
+            ${r.bairro ? escapeMarketText(r.bairro) : '<span class="text-slate-300">-</span>'}
           </td>
 
           <!-- 7. Macro-Setor (IBGE) -->
           <td class="py-3 px-3.5 max-w-[200px]">
             <span class="inline-block px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-cyan-50 text-cyan-800 border border-cyan-200 mb-0.5 whitespace-nowrap">
-              ${r.macro_setor || getMacroSetorFromCnae(r.setor_cnae_codigo)}
+              ${escapeMarketText(r.macro_setor || getMacroSetorFromCnae(r.setor_cnae_codigo))}
             </span>
-            <span class="text-slate-600 block text-[11px] truncate" title="${r.setor_cnae_descricao || ''}">
-              ${r.setor_cnae_codigo ? '[' + r.setor_cnae_codigo + '] ' : ''}${r.setor_cnae_descricao || 'Geral'}
+            <span class="text-slate-600 block text-[11px] truncate" title="${escapeMarketText(r.setor_cnae_descricao || '')}">
+              ${r.setor_cnae_codigo ? '[' + escapeMarketText(r.setor_cnae_codigo) + '] ' : ''}${escapeMarketText(r.setor_cnae_descricao || 'Geral')}
             </span>
           </td>
 
@@ -2646,7 +2664,7 @@
           <!-- 9. Porte -->
           <td class="py-3 px-3.5 text-center whitespace-nowrap">
             <span class="px-2 py-0.5 rounded text-[10px] font-bold ${porteBadge}">
-              ${porteLabel}
+              ${escapeMarketText(porteLabel)}
             </span>
           </td>
 
@@ -2895,9 +2913,9 @@
           .limit(50);
 
         if (currentFilters.bairro.length === 1) {
-          q = q.ilike('bairro', `%${currentFilters.bairro[0]}%`);
+          q = q.ilike('bairro', `%${pgSafe(currentFilters.bairro[0])}%`);
         } else if (currentFilters.bairro.length > 1) {
-          q = q.or(currentFilters.bairro.map(b => `bairro.ilike.%${b}%`).join(','));
+          q = q.or(currentFilters.bairro.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
         }
         const { data: fbData } = await q;
         if (fbData) {
@@ -2981,7 +2999,7 @@
 
       try {
         const { data, error } = await client.rpc('rpc_export_empresas_sjc', {
-          p_search: f.search || null,
+          p_search: pgSafe(f.search) || null,
           p_bairro: f.bairro || null,
           p_setor: f.macro_setor || f.setor || null,
           p_cnae: f.cnae || null,
@@ -3000,13 +3018,13 @@
         if (!f.incluir_outliers) q = q.eq('is_outlier_extremo', false);
         if (f.bairro) {
           const bList = f.bairro.split(',').map(b => b.trim()).filter(Boolean);
-          if (bList.length === 1) q = q.ilike('bairro', `%${bList[0]}%`);
-          else if (bList.length > 1) q = q.or(bList.map(b => `bairro.ilike.%${b}%`).join(','));
+          if (bList.length === 1) q = q.ilike('bairro', `%${pgSafe(bList[0])}%`);
+          else if (bList.length > 1) q = q.or(bList.map(b => `bairro.ilike.%${pgSafe(b)}%`).join(','));
         }
         if (f.cnae) {
           const cList = f.cnae.split(',').map(c => c.trim()).filter(Boolean);
-          if (cList.length === 1) q = q.or(`setor_cnae_codigo.ilike.%${cList[0]}%,setor_cnae_descricao.ilike.%${cList[0]}%`);
-          else if (cList.length > 1) q = q.or(cList.map(c => `setor_cnae_codigo.ilike.%${c}%,setor_cnae_descricao.ilike.%${c}%`).join(','));
+          if (cList.length === 1) q = q.or(`setor_cnae_codigo.ilike.%${pgSafe(cList[0])}%,setor_cnae_descricao.ilike.%${pgSafe(cList[0])}%`);
+          else if (cList.length > 1) q = q.or(cList.map(c => `setor_cnae_codigo.ilike.%${pgSafe(c)}%,setor_cnae_descricao.ilike.%${pgSafe(c)}%`).join(','));
         }
         if (f.porte) {
           const pList = f.porte.split(',').map(p => p.trim()).filter(Boolean);

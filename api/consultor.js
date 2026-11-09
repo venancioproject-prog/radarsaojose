@@ -9,32 +9,7 @@ const crypto = require('crypto');
 const { getDbPool } = require('../lib/db-pool');
 
 // Carregador autônomo de variáveis de ambiente (.env)
-function loadEnvLocal() {
-  const envCandidates = [
-    path.join(process.cwd(), '.env'),
-    path.join(__dirname, '..', '.env'),
-    path.join(__dirname, '.env')
-  ];
-  for (const p of envCandidates) {
-    if (fs.existsSync(p)) {
-      try {
-        const text = fs.readFileSync(p, 'utf8');
-        text.split('\n').forEach(line => {
-          const trimmed = line.trim();
-          if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
-            const idx = trimmed.indexOf('=');
-            const k = trimmed.slice(0, idx).trim();
-            const v = trimmed.slice(idx + 1).replace(/^['"]|['"\r]$/g, '').trim();
-            if (k && !process.env[k]) {
-              process.env[k] = v;
-            }
-          }
-        });
-      } catch (e) {}
-    }
-  }
-}
-loadEnvLocal();
+
 
 // Configuração de Runtime Serverless Vercel
 exports.config = {
@@ -1734,6 +1709,10 @@ function assembleFinalReport(job, snapshot) {
 
 // 12. HANDLER SERVERLESS PRINCIPAL
 module.exports = async function handler(req, res, options = {}) {
+  if (process.env.RADAR_AI_ENABLED !== '1') {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(404).json({ code: 'NOT_FOUND' });
+  }
   const entitlement = req.method !== 'OPTIONS' ? await require('../lib/entitlements').requirePlan(req, res, 'report') : null;
   if (req.method !== 'OPTIONS' && !entitlement) return;
   const authUser = entitlement?.user || null;
@@ -1866,7 +1845,7 @@ module.exports = async function handler(req, res, options = {}) {
       if (!job) {
         return res.status(404).json({ error_code: "JOB_NOT_FOUND", error: "Job não encontrado ou expirado." });
       }
-      if (job.user_id && authUser && job.user_id !== authUser.id) {
+      if (!authUser?.id || job.user_id !== authUser.id) {
         return res.status(403).json({ error_code: "FORBIDDEN", error: "Acesso negado: este relatório pertence a outro usuário." });
       }
 
@@ -1887,12 +1866,16 @@ module.exports = async function handler(req, res, options = {}) {
           is_processing: Boolean(jobData.is_processing),
           cancel_requested: Boolean(jobData.cancel_requested),
           updated_at: jobData.updated_at || new Date().toISOString(),
-          last_error: jobData.last_error || null,
+          last_error: jobData.last_error ? "Ocorreu uma falha no processamento." : null,
           error_code: jobData.error_code || null,
           completed_steps: jobData.completed_steps || [],
           total_steps: MODULE_DEFINITIONS.length,
           progress_percent: Math.round(((jobData.completed_steps || []).length / MODULE_DEFINITIONS.length) * 100),
-          message: jobData.message || "Processando...",
+          message: jobData.status === "failed" && jobData.last_error
+            ? jobData.error_code === "AI_QUOTA_EXHAUSTED"
+              ? "Cota diária da IA excedida. O processamento foi encerrado."
+              : "Não foi possível concluir o processamento do relatório."
+            : jobData.message || "Processando...",
           ...overrides
         };
       }
@@ -1982,8 +1965,8 @@ module.exports = async function handler(req, res, options = {}) {
           } catch (prepErr) {
             activeJob.status = "failed";
             activeJob.error_code = prepErr.error_code || "SUPABASE_FETCH_ERROR";
-            activeJob.message = `Falha ao preparar fontes oficiais: ${prepErr.message}`;
-            activeJob.last_error = prepErr.message;
+            activeJob.message = "Falha ao preparar fontes oficiais.";
+            activeJob.last_error = activeJob.message;
             await releaseJobLock(activeJob);
             return res.status(200).json(formatStatusResponse(activeJob, { success: false }));
           }
@@ -2111,18 +2094,18 @@ module.exports = async function handler(req, res, options = {}) {
             activeJob.status = "failed";
             activeJob.error_code = "AI_QUOTA_EXHAUSTED";
             activeJob.message = "Cota diária da IA excedida. O processamento foi encerrado.";
-            activeJob.last_error = err.message;
+            activeJob.last_error = activeJob.message;
           } else if (err.error_code === "AI_RATE_LIMIT") {
             activeJob.status = "waiting_rate_limit";
             activeJob.error_code = "AI_RATE_LIMIT";
             activeJob.retry_after_at = new Date(Date.now() + ((err.retryAfterSeconds || 10) * 1000)).toISOString();
             activeJob.message = `Limite de requisições atingido. Retomando em ${err.retryAfterSeconds || 10}s...`;
           } else {
-            activeJob.last_error = err.message;
+            activeJob.last_error = "Falha ao processar a etapa do relatório.";
             if (currentAttemptNumber >= 3) {
               activeJob.status = "failed";
               activeJob.error_code = err.error_code || "STEP_EXECUTION_FAILED";
-              activeJob.message = `Falha ao executar a etapa ${stepDef.label}: ${err.message}`;
+              activeJob.message = `Falha ao executar a etapa ${stepDef.label}.`;
             } else {
               activeJob.status = "running";
               activeJob.message = `Tentativa ${currentAttemptNumber}/3: Reexecutando ${stepDef.label}...`;
@@ -2147,7 +2130,7 @@ module.exports = async function handler(req, res, options = {}) {
       if (!job) {
         return res.status(404).json({ error_code: "JOB_NOT_FOUND", error: "Job não encontrado." });
       }
-      if (job.user_id && authUser && job.user_id !== authUser.id) {
+      if (!authUser?.id || job.user_id !== authUser.id) {
         return res.status(403).json({ error_code: "FORBIDDEN", error: "Acesso negado: este relatório pertence a outro usuário." });
       }
       if (job.status !== "completed") {
@@ -2174,7 +2157,7 @@ module.exports = async function handler(req, res, options = {}) {
       const getRes = await getJob(jobId);
       const job = getRes.job;
       if (job) {
-        if (job.user_id && authUser && job.user_id !== authUser.id) {
+        if (!authUser?.id || job.user_id !== authUser.id) {
           return res.status(403).json({ error_code: "FORBIDDEN", error: "Acesso negado: este relatório pertence a outro usuário." });
         }
         job.cancel_requested = true;
@@ -2189,12 +2172,11 @@ module.exports = async function handler(req, res, options = {}) {
 
     return res.status(400).json({ error: "Ação não suportada." });
 
-  } catch (error) {
-    // HIGIENE DE SEGURANÇA: Resposta limpa sem stack trace ou segredos vazados
+  } catch {
     return res.status(500).json({
       error_code: "INTERNAL_SERVER_ERROR",
       error: "Erro interno no Servidor.",
-      message: error.message
+      message: "Não foi possível processar o relatório."
     });
   }
 };

@@ -1,5 +1,13 @@
 # Documentacao e logs
 README.md
+/.env*
+/server.js
+/emails-auth/
+/midia_sjc/analise_midia_data.js
+/midia_sjc/comunidade_data.js
+/midia_sjc/comunidade_comentarios_sjc.json
+/app_recovered.html
+/app_backup_*.html
 docs/
 *.md
 *.txt
@@ -152,7 +160,3 @@ public-images/
 
 !assets/module-tours/*.mp4
 !web-media/module-tours/*.mp4
-
-/server.js
-/midia_sjc/comunidade_data.js
-/midia_sjc/comunidade_comentarios_sjc.json

@@ -1557,6 +1557,7 @@
   <link rel="stylesheet" href="header-menu.css?v=20261105-panel">
   <script src="header-menu.js?v=20261105" defer></script>
   <link rel="stylesheet" href="radar-planos.css">
+  <script src="/radar-safe-content.js"></script>
 </head>
 <body class="min-h-screen bg-surface-bg antialiased selection:bg-brand-500 selection:text-white flex flex-col justify-between">
   <div id="app-boot" role="status" aria-live="polite">
@@ -1700,6 +1701,7 @@
           <i id="btn-login-spinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
         </button>
       </form>
+      <p class="mt-4 text-center text-xs font-semibold"><a class="underline text-brand-900" href="recuperar-senha.html">Esqueci minha senha</a></p>
 
       <div class="mt-6 pt-5 border-t border-slate-100 text-center text-[11px] text-slate-400 font-medium">
         &copy; <span id="year-current"></span> Radar São José. Todos os direitos reservados.
@@ -1859,12 +1861,13 @@
               class="hidden absolute right-0 mt-2 w-72 sm:w-80 bg-white rounded-2xl shadow-xl border border-slate-200/90 py-3 px-4 z-[60] animate-in fade-in zoom-in-95 duration-150"
             >
               <!-- Info do Usuário -->
-              <div class="pb-3 border-b border-slate-100">
+              <div class="pb-3 border-b border-slate-100 space-y-1.5">
                 <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Usuário Conectado</p>
                 <div class="flex items-center gap-2 mt-1">
                   <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
                   <p id="user-email-display" class="text-xs font-bold text-slate-800 truncate">usuario@exemplo.com</p>
                 </div>
+                <a href="seguranca-conta.html" class="block text-xs font-bold text-sky-700 underline">Segurança da conta</a>
               </div>
 
               <!-- Plano & Upgrade -->
@@ -5969,6 +5972,7 @@
                 </button>
               </div>
             </form>
+      <p class="mt-4 text-center text-xs font-semibold"><a class="underline text-brand-900" href="recuperar-senha.html">Esqueci minha senha</a></p>
           </div>
 
           <!-- Modal / Overlay de Loading do Consultor IA -->
@@ -7340,6 +7344,12 @@
           <img src="fotos_radar/logobranco_radar.png?v=20261105" alt="Logo Branco" class="h-6 object-contain" onerror="this.src='fotos_radar/logo_radar.png?v=20261105'" />
           <span class="text-slate-300 font-semibold">Radar São José &bull; Inteligência & Pesquisa Municipal SJC</span>
         </div>
+        <nav class="flex flex-wrap items-center gap-3" aria-label="Documentos jurídicos">
+          <a class="underline" href="juridico.html#termos">Termos de Uso</a>
+          <a class="underline" href="juridico.html#privacidade">Privacidade</a>
+          <a class="underline" href="juridico.html#cookies">Cookies</a>
+          <a class="underline" href="juridico.html#sla">SLA e Suporte</a>
+        </nav>
         <span>Desenvolvido com Tailwind CSS, Supabase & Chart.js</span>
       </div>
     </footer>
@@ -7391,6 +7401,7 @@
   <script src="report-source.js?v=20261104_report_restore"></script>
   <script src="report-metrics-ui.js?v=20261105_private"></script>
   <script src="lentes_sjc_module.js?v=20261004_v1"></script>
+  <script src="radar-mfa.js"></script>
   <script src="aceite-termos.js?v=20261107_nome"></script>
   <script src="app.js?v=20261108_auto_confirmation"></script>
   <script src="data/radar_hub/sjc_setores_geo_bundle.js?v=20260927_v1"></script>
