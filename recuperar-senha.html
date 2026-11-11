@@ -89,10 +89,13 @@
               : await client.auth.resetPasswordForEmail(email, {
                   redirectTo: new URL("recuperar-senha.html?modo=redefinir", location.href).href
                 });
+            if (error?.status === 429) throw error;
             if (error && !(error.status >= 400 && error.status < 500)) throw error;
             status.textContent = "Se o endereço estiver apto a receber este link, ele chegará por e-mail. Confira também a caixa de spam.";
-          } catch {
-            status.textContent = "Não foi possível solicitar o link agora. Tente novamente.";
+          } catch (error) {
+            status.textContent = error?.status === 429
+              ? "O limite de envios foi atingido. Aguarde alguns minutos e peça um novo link. Confira também o e-mail mais recente."
+              : "Não foi possível solicitar o link agora. Tente novamente.";
           } finally {
             button.disabled = false;
           }

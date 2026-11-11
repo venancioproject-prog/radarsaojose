@@ -462,3 +462,6 @@ public-images/
 
 !assets/module-tours/*.mp4
 !web-media/module-tours/*.mp4
+
+!data/migrations/022_crm_account_followups.sql
+!tests/crm-security.test.cjs

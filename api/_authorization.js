@@ -1,6 +1,7 @@
 // Authorization uses only verified Supabase Auth claims protected from user edits.
 'use strict';
 const { getDbPool } = require('../lib/db-pool');
+const { hasRequiredMfa } = require('../lib/auth-mfa');
 async function requireAdmin(req, res, config) {
   const header = req.headers?.authorization || req.headers?.Authorization || '';
   const match = typeof header === 'string' && /^Bearer\s+(\S+)$/i.exec(header);
@@ -16,6 +17,11 @@ async function requireAdmin(req, res, config) {
     if (user.app_metadata?.role !== 'admin' && user.app_metadata?.is_admin !== true) {
       res.status(403).json({success:false,code:'FORBIDDEN',message:'Permissão administrativa necessária.'}); return false;
     }
+    if (!hasRequiredMfa(user, match[1])) {
+      res.status(403).json({success:false,code:'MFA_REQUIRED',message:'Confirme o código do autenticador para continuar.'});
+      return false;
+    }
+    req.adminUser = user;
     return true;
   } catch (_) { res.status(503).json({success:false,code:'AUTH_UNAVAILABLE',message:'Validação de permissão indisponível.'}); return false; }
 }
