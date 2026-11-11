@@ -126,7 +126,7 @@
     option.value = value;
     profileFilter.append(option);
   });
-  const filterBar = element('div', null, 'px-8 py-3 flex flex-wrap items-center gap-3');
+  const filterBar = element('div', null, 'py-3 flex flex-wrap items-center gap-3');
   filterBar.append(planFilter, profileFilter);
   const explanation = element('p',
     'Indicadores de toda a base comercial. Administradores e convidados Mídia ficam fora destes totais.',
@@ -271,7 +271,7 @@
 
     async function refreshFollowup() {
       try {
-        const response = await authorizedFetch('/api/crm-followups?userId=' + encodeURIComponent(account.id));
+        const response = await authorizedFetch('/api/crm-accounts?userId=' + encodeURIComponent(account.id));
         if (!response.ok) throw new Error('O acompanhamento está indisponível. A equipe precisa conferir a configuração do CRM.');
         const result = await response.json();
         if (activeDialog !== dialog) return;
@@ -303,7 +303,7 @@
       setEnabled(false);
       message.textContent = 'Salvando…';
       try {
-        const response = await authorizedFetch('/api/crm-followups', {
+        const response = await authorizedFetch('/api/crm-accounts', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

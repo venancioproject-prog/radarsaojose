@@ -4,6 +4,7 @@ const { requireAdmin } = require('./_authorization');
 const { configuration, db } = require('../lib/billing-store');
 const { permits } = require('../lib/entitlements');
 const { normalizePhone, profiles } = require('../radar-contact');
+const handleFollowup = require('../lib/crm-followups');
 
 const pageSize = 50;
 const authPageSize = 500;
@@ -68,8 +69,11 @@ function activeAccess(userId, ownSubscriptions, licenses, subscriptionsById, now
 
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  if (req.method === 'PUT' || (req.method === 'GET' && req.query?.userId !== undefined)) {
+    return handleFollowup(req, res);
+  }
   if (req.method !== 'GET') {
-    res.setHeader('Allow', 'GET');
+    res.setHeader('Allow', 'GET, PUT');
     return res.status(405).json({ code: 'METHOD_NOT_ALLOWED' });
   }
   const page = Number(req.query?.page ?? 1);

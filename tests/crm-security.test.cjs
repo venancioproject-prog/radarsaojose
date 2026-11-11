@@ -174,12 +174,12 @@ test('CRM search and metrics cover multiple auth pages, use subscriptions and im
 
 test('CRM followup rejects commercial fields and handles concurrent saves', async () => {
   let calls = 0;
-  const handler = loadHandler('api/crm-followups.js', {
-    './_authorization': { requireAdmin: async req => {
+  const handler = loadHandler('lib/crm-followups.js', {
+    '../api/_authorization': { requireAdmin: async req => {
       req.adminUser = { id: 'admin' };
       return true;
     } },
-    '../lib/billing-store': {
+    './billing-store': {
       configuration: () => ({ url: 'https://fixture.invalid' }),
       db: async () => { calls += 1; return []; }
     }
@@ -337,4 +337,18 @@ test('Recovery email rate limiting is reported without claiming another message 
   await submit({ preventDefault() {} });
   assert.match(status.textContent, /limite de envios/);
   assert.equal(button.disabled, false);
+});
+test('CRM followup shares the existing route and keeps the deployment within twelve functions', async () => {
+  const files = fs.readdirSync(path.join(__dirname, '../api')).filter(name => name.endsWith('.js') && !name.startsWith('_'));
+  assert.ok(files.length <= 12, 'The current hosting configuration permits twelve functions');
+  const seen = [];
+  const handler = loadHandler('api/crm-accounts.js', {
+    '../lib/crm-followups': async (req, res) => { seen.push(req.method); return res.status(200).json({ routed: true }); }
+  });
+  for (const req of [{ method: 'GET', query: { userId: 'fixture' } }, { method: 'PUT', body: {} }]) {
+    const res = response();
+    await handler(req, res);
+    assert.equal(res.body.routed, true);
+  }
+  assert.deepEqual(seen, ['GET', 'PUT']);
 });
