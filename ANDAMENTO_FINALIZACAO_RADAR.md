@@ -2,12 +2,12 @@
 
 Atualizado em 12/11/2026.
 
-Estimativa atual de aproximadamente 74% concluído e 26% restante. As estimativas por área abaixo têm média simples de 74%. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
+Estimativa atual de aproximadamente 75% concluído e 25% restante. As estimativas por área abaixo têm média simples de 74,5%, arredondada. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
 
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Código publicado e conferido: f6b11fb. Esta rodada prepara o pacote privado do Report e remove destinos de banco implícitos nas rotas de posts, upload e plano de negócios.
+- Evidência de publicação anterior: 2b3f115. Esta rodada implementa a fila financeira opt-in e aplica sua estrutura desativada no banco de teste.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -38,7 +38,7 @@ O telefone foi escolhido como opcional. Ele fica disponível para contato sobre 
 
 ## Evidências
 
-- 57 testes automatizados passaram com zero falhas.
+- 63 testes automatizados passaram com zero falhas.
 - A bateria financeira adicional em PostgreSQL descartável também passou.
 - A sequência existente de migrações e a nova 022 foram testadas localmente.
 - A 022 foi aplicada duas vezes no teste local para conferir reaplicação.
@@ -96,7 +96,7 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 | Termos e privacidade da pesquisa | 90% | 10% | Auditoria final das políticas e conteúdo real |
 | Conteúdo real pago | 50% | 50% | Pacote do Report preparado; falta integração protegida e aprovação dos conteúdos reais |
 | Retirada de Eleições 2026 | 50% | 50% | Concluir dependências e levar a retirada à versão oficial |
-| E-mails e identidade visual | 85% | 15% | Recebimento real, destino das imagens e envio financeiro |
+| E-mails e identidade visual | 90% | 10% | Configurar provedor, ativar e validar recebimento financeiro e destino das imagens |
 | Preparação e publicação oficial | 40% | 60% | Cópia de segurança, conteúdo/configuração reais e validações |
 
 ## Próximos passos
@@ -144,7 +144,7 @@ A conferência anônima não substitui a validação com duas contas autenticada
 - [x] Conferir HTTP 404 no Preview para .env, .env.local, .git/config, migração 022, dados_pesquisa_477.json, fontes privadas do Report, app_recovered.html e modelo de recuperação.
 - [x] Preparar checagem GitHub Actions com credencial somente de leitura, ações fixadas por revisão e PGlite 0.5.15 instalado sem scripts em máquina temporária. Ela não usa segredos de produção nem executa pagamentos remotos.
 
-Limitação identificada: o SMTP configurado no Supabase atende os e-mails de autenticação. O módulo de confirmação financeira do Radar implementa envio via Resend, não via esse SMTP. Não foi configurado provedor financeiro nem feito envio real nesta revisão. Sem configuração, o módulo retorna pending_configuration; não há uma fila persistente ou retentativa automática apesar do comentário antigo dizer que havia. O comentário foi corrigido. Essa pendência fica explícita no lançamento; não marcar os e-mails financeiros como entregues.
+Limitação identificada naquela rodada: o SMTP do Supabase atende autenticação, enquanto o módulo financeiro implementava Resend e ainda não tinha fila persistente, apesar de um comentário antigo dizer que havia. A fila foi implementada depois e seu estado atual está na seção final. O provedor financeiro e a entrega real continuam sem comprovação; não marcar e-mails financeiros como entregues.
 
 Fontes consultadas: https://docs.asaas.com/docs/webhook-para-cobrancas e https://resend.com/blog/engineering-idempotency-keys . O Asaas também possui eventos de captura recusada/análise de risco; o código atual não concede plano para eles. Ainda falta validar a experiência de nova tentativa após recusa com o checkout hospedado, sem duplicar cobrança.
 
@@ -193,4 +193,19 @@ Validação remota da revisão f6b11fb: Vercel informou publicação concluída 
 
 Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43157824121
 
-O envio financeiro permanece como pendência de configuração e implementação de fila; esta rodada não criou fila, cron, remetente ou novos envios. Para essa etapa, conservar apenas referência do pedido na fila, exigir escrita do servidor e tornar o agendamento atômico com a confirmação financeira. O processador deverá usar bloqueio de concorrência, retentativa limitada, estado de entrega auditável e destinatário do pedido confirmado, sem dados de cartão nem respostas privadas do provedor nos logs. Esses itens são plano, não funcionalidade já entregue.
+No fechamento anterior, o envio financeiro ainda dependia da implementação de fila. A seção seguinte registra essa implementação; cron, remetente e entrega real continuam pendentes.
+
+## Fila financeira preparada e protegida
+
+- [x] Implementar a migração 023: referência única por pedido, criação transacional ao confirmar pagamento e nenhum reenvio retroativo de compras antigas.
+- [x] Reservar uma mensagem por vez, com prazo e identificação da reserva; uma execução antiga não conclui o trabalho assumido por outra.
+- [x] Preparar recuperação após interrupção, intervalos de espera e limites de seis tentativas/20 horas. Depois disso, exigir revisão para não repetir um envio incerto fora da janela do provedor.
+- [x] Separar erros temporários de erros permanentes e ignorar pedidos já cancelados. Não modificar o pagamento ao registrar falha de entrega.
+- [x] Usar somente destinatário do pedido confirmado e guardar apenas estado/códigos resumidos na fila, sem duplicar dados do cartão ou destinatário.
+- [x] Preparar processador autenticado por CRON_SECRET em GET /api/asaas-webhook?emailQueue=1, sem criar uma nova função pública na Vercel.
+- [x] Proteger a ativação por duas flags do servidor e chave no banco, todas desligadas por padrão. Sem provedor configurado, não reservar mensagem nem consumir tentativa.
+- [x] Testar atomicidade, permissões, reserva perdida, retentativa, esgotamento e autenticação do agendador em PostgreSQL descartável e serviços simulados.
+- [x] Aplicar somente a migração 023 no Supabase de teste, após conferir que a estrutura não existia. Confirmar fila vazia, envios desligados, proteção por linha ativa e ausência de permissões para conta comum/visitante.
+- [ ] Configurar provedor e remetente financeiro, validar entrega a destinatário autorizado e só depois ativar agendador compatível com os limites da hospedagem.
+
+Procedimento: FILA_EMAILS_FINANCEIROS.md. A estrutura remota está preparada, mas não há fila ativa, cron, credencial nova, cobrança alterada ou e-mail real enviado por esta revisão. A troca para o modo novo precisa seguir a sequência documentada, conservando a chave do banco desligada até o servidor correto estar publicado.

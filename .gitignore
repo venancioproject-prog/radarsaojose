@@ -468,12 +468,15 @@ public-images/
 !web-media/module-tours/*.mp4
 
 !data/migrations/022_crm_account_followups.sql
+!data/migrations/023_billing_email_outbox.sql
 !tests/crm-security.test.cjs
 !tests/payment-events-security.test.cjs
 !tests/report-release-security.test.cjs
 !tests/server-config-security.test.cjs
+!tests/billing-email-queue.test.cjs
 !scripts/prepare-private-report.cjs
 !REVISAO_SEGURANCA_ATUAL_2026-11-12.md
+!FILA_EMAILS_FINANCEIROS.md
 
 !emails-auth/
 !emails-auth/confirmar-cadastro.html

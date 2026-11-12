@@ -8,7 +8,7 @@ O pacote privado do Report foi preparado sem modificar o banco remoto.
 Configurações de produção, recuperação de cópia de segurança e testes com as duas administradoras continuam pendentes.
 O site ainda não deve ser declarado totalmente seguro ou pronto para lançamento.
 
-Evidência desta revisão: 57 testes passaram localmente e no GitHub (execução 43157824121), com publicação Vercel confirmada para f6b11fb. As 82 referências locais de mídia do pacote do Report responderam HTTP 200 no Preview. O teste de importação do pacote real usou apenas PostgreSQL descartável e preservou integralmente o HTML.
+Evidência anterior: 57 testes passaram localmente e no GitHub (execução 43157824121), com publicação Vercel confirmada para f6b11fb. As 82 referências locais de mídia do pacote do Report responderam HTTP 200 no Preview. O teste de importação do pacote real usou apenas PostgreSQL descartável e preservou integralmente o HTML. A rodada da fila ampliou a bateria para 63 testes locais aprovados e aplicou a estrutura desativada no Supabase de teste, sem enviar mensagens.
 
 ## Fontes consultadas diretamente
 
@@ -30,7 +30,7 @@ Evidência desta revisão: 57 testes passaram localmente e no GitHub (execução
 
 5. **Pendência funcional de lançamento — Report privado antigo incompatível.** `app.js:7768` exige todos os blocos e `app.js:7780` confere o resumo do script do mapa. O arquivo local report-complete-local-20261105.html não tem 15 dos blocos esperados e seu script não corresponde ao permitido. Não usar esse arquivo antigo para preencher o banco. A origem Git 9de76ef contém os 143 blocos e o script esperado; o pacote privado gerado preserva exatamente esses blocos. Conferir editorialmente antes de aplicar. O pacote não foi publicado nem importado remotamente.
 
-6. **Pendência operacional — entrega financeira sem fila comprovada.** `lib/billing-email.js` possui envio Resend condicionado à configuração, mas não possui fila persistente nem recuperação automática de mensagens após falha. A proteção contra repetição do provedor tem duração limitada; não é uma fila. SMTP de autenticação do Supabase é um serviço separado. Configurar remetente/provedor e planejar recuperação de falhas antes de prometer confirmação financeira por e-mail. A falha do e-mail não deve desfazer um pagamento já confirmado.
+6. **Pendência operacional — ativação e entrega financeira real.** A fila foi implementada em `lib/billing-email-queue.js` e na migração 023, com testes de recuperação e limite de retentativas. Sua estrutura foi aplicada ao banco de teste e ficou desativada/vazia, com acesso bloqueado a usuários comuns. A proteção contra repetição do provedor tem duração limitada; a fila interrompe tentativas incertas antes de ultrapassá-la. SMTP de autenticação do Supabase é separado. Configurar remetente/provedor, seguir FILA_EMAILS_FINANCEIROS.md e comprovar recebimento real antes de prometer entrega. Nenhuma mensagem real foi enviada nesta revisão.
 
 ## Cobertura das 17 áreas
 
@@ -68,6 +68,6 @@ Evidência desta revisão: 57 testes passaram localmente e no GitHub (execução
 
 1. Conservar o pacote privado fora do Git e validar a aparência e o conteúdo completo em ambiente protegido.
 2. Revisar e corrigir as dependências externas e a CSP com comparação visual; não mudar as duas coisas indiscriminadamente.
-3. Preparar fila/reenvio financeiro e validar remetente, provedor e recebimento sem duplicação.
+3. Ativar e validar a fila preparada, o remetente, o provedor e o recebimento sem duplicação.
 4. Conferir May, duas contas no CRM, convidados e nova tentativa de pagamento real no ambiente de teste.
 5. Fechar a matriz ASVS Nível 1, a restauração de backup e as configurações oficiais antes do lançamento.

@@ -18,13 +18,20 @@ function fixture() {
     amount_cents: 12345, payment_method: 'PIX', installment_count: 1, status: 'pending', quote: {} };
   const live = { id: 'pay_fixture', externalReference: order.id, billingType: 'PIX', value: 123.45, status: 'RECEIVED' };
   const state = { dbCalls: 0, fetches: 0, processed: 0, emails: 0, result: { success: true },
-    events: new Map(), offline: false, unknown: false };
+    events: new Map(), offline: false, unknown: false, queueEnabled: true, queueStatus: 'queued',
+    queueError: false, workerCalls: 0 };
+  const env = { ASAAS_WEBHOOK_SECRET: secret };
   const module = { exports: {} };
   vm.runInNewContext(fs.readFileSync(filename, 'utf8'), {
-    module, Buffer, AbortSignal, console, process: { env: { ASAAS_WEBHOOK_SECRET: secret } },
+    module, Buffer, AbortSignal, console, process: { env },
     require(id) {
       if (id === '../lib/asaas-config') return { asaasConfig: () => ({ key: 'fixture-only', url: 'https://fixture.invalid/v3' }) };
       if (id === '../lib/billing-email') return { sendConfirmationEmail: async () => { state.emails += 1; return { status: 'local_test' }; } };
+      if (id === '../lib/billing-email-queue') return {
+        queueEnabled: async () => { if (state.queueError) throw new Error('private queue failure'); return state.queueEnabled; },
+        orderStatus: async () => state.queueStatus,
+        processOne: async () => { state.workerCalls += 1; if (state.queueError) throw new Error('private worker failure'); return { status: 'empty' }; }
+      };
       if (id === '../lib/billing-store') return { ...localRequire(id), db: async (route, options = {}) => {
         state.dbCalls += 1;
         if (route.startsWith('billing_orders?')) return state.unknown ? [] : [order];
@@ -57,7 +64,7 @@ function fixture() {
     await module.exports({ method: 'POST', headers: { 'asaas-access-token': token }, body }, res);
     return res;
   };
-  return { state, order, live, event, request };
+  return { state, order, live, event, request, env, handler: module.exports };
 }
 
 test('Webhook authenticates before touching its body and bounds UTF-8 payloads', async () => {
@@ -171,4 +178,44 @@ test('Git excludes environment variants while retaining credential-free sample f
   }).trim().split(/\r?\n/));
   for (const file of files.slice(0, -2)) assert.ok(ignored.has(file), file);
   for (const sample of files.slice(-2)) assert.ok(!ignored.has(sample), sample);
+});
+
+test('Durable delivery mode never sends directly after queuing or after an uncertain queue lookup', async () => {
+  for (const mode of ['queued', 'unavailable', 'not_scheduled']) {
+    const f = fixture();
+    f.env.BILLING_EMAIL_QUEUE_ENABLED = 'true';
+    if (mode === 'unavailable') f.state.queueError = true;
+    if (mode === 'not_scheduled') f.state.queueStatus = 'not_scheduled';
+    const res = await f.request();
+    assert.equal(res.statusCode, 200);
+    assert.equal(f.state.processed, 1);
+    assert.equal(f.state.emails, 0);
+    assert.equal(res.body.emailStatus, mode === 'unavailable' ? 'queue_unavailable' : mode);
+  }
+  const legacy = fixture();
+  legacy.env.BILLING_EMAIL_QUEUE_ENABLED = 'true';
+  legacy.state.queueEnabled = false;
+  assert.equal((await legacy.request()).body.emailStatus, 'local_test');
+  assert.equal(legacy.state.emails, 1);
+});
+
+test('The queue processor authenticates its scheduler separately and never exposes private errors', async () => {
+  const f = fixture();
+  f.env.CRON_SECRET = 'scheduler-fixture-secret-with-at-least-32-characters';
+  for (const token of ['', 'Bearer wrong', ['Bearer ' + f.env.CRON_SECRET]]) {
+    const res = response();
+    await f.handler({ method:'GET', query:{emailQueue:'1'}, headers:{authorization:token} },res);
+    assert.equal(res.statusCode,401);
+  }
+  assert.equal(f.state.workerCalls,0);
+  const req = { method:'GET',query:{emailQueue:'1'},headers:{authorization:'Bearer ' + f.env.CRON_SECRET} };
+  const allowed = response();
+  await f.handler(req,allowed);
+  assert.equal(allowed.statusCode,200);
+  assert.equal(f.state.workerCalls,1);
+  f.state.queueError=true;
+  const failed=response();
+  await f.handler(req,failed);
+  assert.equal(failed.statusCode,503);
+  assert.doesNotMatch(JSON.stringify(failed.body),/private worker failure|scheduler-fixture/);
 });

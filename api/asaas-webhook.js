@@ -200,6 +200,21 @@ async function recoverUnboundCardOrder(order, paymentId) {
 }
 
 async function handler(req, res) {
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.method === 'GET' && req.query?.emailQueue === '1') {
+    const secret = process.env.CRON_SECRET;
+    const authorization = getHeader(req, 'authorization');
+    if (typeof secret !== 'string' || secret.trim().length < 32 ||
+        !verifyAsaasWebhookToken(authorization, 'Bearer ' + secret)) {
+      return res.status(401).json({ success: false, code: 'UNAUTHORIZED' });
+    }
+    try {
+      const result = await require('../lib/billing-email-queue').processOne();
+      return res.status(200).json({ success: true, ...result });
+    } catch (_) {
+      return res.status(503).json({ success: false, code: 'EMAIL_QUEUE_UNAVAILABLE' });
+    }
+  }
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ success: false, code: 'METHOD_NOT_ALLOWED' });
@@ -305,6 +320,21 @@ async function processPaymentEvent(body, res) {
     body: JSON.stringify({ p_event_id: body.id })
   });
   if (!result?.success) throw new BillingError(503, 'BILLING_EVENT_PROCESSING_FAILED');
+
+  // Migration 023 schedules new paid orders in the SAME database transaction.
+  // The disabled-by-default flags preserve the existing deployment until rollout.
+  if (process.env.BILLING_EMAIL_QUEUE_ENABLED === 'true' &&
+      ['PAYMENT_RECEIVED', 'PAYMENT_CONFIRMED'].includes(body.event)) {
+    try {
+      const queue = require('../lib/billing-email-queue');
+      if (await queue.queueEnabled()) {
+        return res.status(200).json({ ...result, emailStatus: await queue.orderStatus(order.id) });
+      }
+    } catch (_) {
+      // Never fall back to direct delivery after an uncertain queue read.
+      return res.status(200).json({ ...result, emailStatus: 'queue_unavailable' });
+    }
+  }
 
   // Despacho de e-mail seguro e desacoplado após confirmação persistida
   let emailStatus = 'ignored';

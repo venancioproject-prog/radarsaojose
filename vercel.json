@@ -1,5 +1,8 @@
 {
   "functions": {
+    "api/asaas-webhook.js": {
+      "maxDuration": 60
+    },
     "api/consultor.js": {
       "maxDuration": 60
     }
