@@ -7,7 +7,7 @@ Estimativa atual de aproximadamente 74% concluído e 26% restante. As estimativa
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Evidência de publicação anterior: f0af7d1. Esta rodada prepara o pacote privado do Report e remove destinos de banco implícitos nas rotas de posts, upload e plano de negócios.
+- Código publicado e conferido: f6b11fb. Esta rodada prepara o pacote privado do Report e remove destinos de banco implícitos nas rotas de posts, upload e plano de negócios.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -175,7 +175,7 @@ No fechamento anterior, o percentual era aproximadamente 73%: testes e rotina au
 - [x] Comparar o pacote privado antigo com os blocos esperados na aplicação: faltavam 15 dos 143 blocos e o script do mapa era incompatível. Esse pacote antigo não deve ser importado.
 - [x] Preparar os 143 blocos da origem Git 9de76ef45924f6fadfea118fe7381a3fa2054e8a em pacote privado novo, preservando cartões internos, atributos, ordem do índice e o script permitido.
 - [x] Testar importação e leitura no PostgreSQL descartável: o HTML voltou idêntico, incluindo caracteres em português. A consulta anônima foi bloqueada. Nenhum banco remoto foi alterado.
-- [x] Conferir as 82 referências locais de mídia do pacote: todas existem no checkout. A checagem HTTP ficou incompleta por tempos limite, inclusive em consultas de controle ao login; não tratar isso como prova de imagens ausentes.
+- [x] Conferir as 82 referências locais de mídia do pacote: todas existem no checkout e todas responderam HTTP 200 no Preview na repetição concluída. A primeira tentativa sofreu tempos limite; isso não foi classificado como imagem ausente.
 - [x] Adicionar ferramenta offline que recusa gravar conteúdo pago dentro de uma pasta Git e não sobrescreve pacote anterior. A ferramenta não envia arquivos nem aplica SQL.
 - [x] Remover endereços/chaves públicos de produção usados como reserva em api/posts.js, api/upload.js e api/business-plan.js. Configuração ausente/inválida agora impede a consulta; o cálculo em memória permanece independente.
 - [x] Suportar chaves publicáveis e secretas modernas sem tratá-las como token de sessão, preservando suporte às chaves antigas.
@@ -188,3 +188,9 @@ Pacote local, fora do repositório:
 Contém manifest.json, report-chapters.html e report-import.sql. O HTML tem 1.079.719 bytes e SHA-256 4be5a4512be8cf831652127cd0bc7b45bec085095aed5946fd903d4f7d5d5516. Não publicar essa pasta. O SQL substitui o registro radar-2026 se já existir: antes de aplicar, aprovar o conteúdo e conservar cópia do registro anterior. Não executar como tentativa de resolver o Preview de demonstração, que é intencional.
 
 A ferramenta versionada é scripts/prepare-private-report.cjs. O pacote traz conteúdo real já rastreado na origem oficial, mas ainda não foi aprovado visual/editorialmente nem integrado ao banco oficial. Pesquisa quantitativa e mídia reais continuam pendentes. O frontend publicado não foi redesenhado nesta rodada.
+
+Validação remota da revisão f6b11fb: Vercel informou publicação concluída e a execução GitHub 43157824121 terminou com sucesso, incluindo a bateria PostgreSQL. No Preview, /api/posts respondeu HTTP 200, /api/business-plan sem sessão respondeu HTTP 401 e os endereços da ferramenta e do pacote privado responderam HTTP 404.
+
+Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43157824121
+
+O envio financeiro permanece como pendência de configuração e implementação de fila; esta rodada não criou fila, cron, remetente ou novos envios. Para essa etapa, conservar apenas referência do pedido na fila, exigir escrita do servidor e tornar o agendamento atômico com a confirmação financeira. O processador deverá usar bloqueio de concorrência, retentativa limitada, estado de entrega auditável e destinatário do pedido confirmado, sem dados de cartão nem respostas privadas do provedor nos logs. Esses itens são plano, não funcionalidade já entregue.

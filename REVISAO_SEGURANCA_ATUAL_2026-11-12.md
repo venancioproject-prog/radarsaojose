@@ -8,6 +8,8 @@ O pacote privado do Report foi preparado sem modificar o banco remoto.
 Configurações de produção, recuperação de cópia de segurança e testes com as duas administradoras continuam pendentes.
 O site ainda não deve ser declarado totalmente seguro ou pronto para lançamento.
 
+Evidência desta revisão: 57 testes passaram localmente e no GitHub (execução 43157824121), com publicação Vercel confirmada para f6b11fb. As 82 referências locais de mídia do pacote do Report responderam HTTP 200 no Preview. O teste de importação do pacote real usou apenas PostgreSQL descartável e preservou integralmente o HTML.
+
 ## Fontes consultadas diretamente
 
 - [vibe-security, checklist original](https://github.com/astoj/vibe-security/blob/main/web-app-security.md): organização das 17 áreas abaixo.
