@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "total": 120,
-    "atualizado_em": "2026-11-11T18:30:39.140Z",
-    "atualizado_em_formatado": "11/11/2026, 15:30",
-    "proxima_atualizacao": "Hoje às 08h00 do próximo dia útil",
+    "total": 122,
+    "atualizado_em": "2026-11-12T02:11:08.383Z",
+    "atualizado_em_formatado": "11/11/2026, 23:11",
+    "proxima_atualizacao": "Hoje às 18h00",
     "cidade": "São José dos Campos - SP",
     "fontes": [
       "Trabalha Brasil",
@@ -28,7 +28,7 @@
       "link_candidatura": "https://embraer.gupy.io/",
       "fonte": "Embraer Carreiras",
       "fonte_icone": "fa-plane",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": true
     },
     {
@@ -43,7 +43,7 @@
       "link_candidatura": "https://jnj.com/careers",
       "fonte": "J&J Carreiras",
       "fonte_icone": "fa-heart-pulse",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": true
     },
     {
@@ -58,7 +58,7 @@
       "link_candidatura": "https://www.ericsson.com/en/careers",
       "fonte": "Ericsson SJC",
       "fonte_icone": "fa-wifi",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": true
     },
     {
@@ -73,7 +73,7 @@
       "link_candidatura": "https://pqtec.org.br/oportunidades",
       "fonte": "Parque Tecnológico SJC",
       "fonte_icone": "fa-microchip",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": true
     },
     {
@@ -88,7 +88,7 @@
       "link_candidatura": "https://rededor.gupy.io/",
       "fonte": "Hospital Vivalle SJC",
       "fonte_icone": "fa-hospital",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": true
     },
     {
@@ -103,7 +103,7 @@
       "link_candidatura": "https://servicos.sjc.sp.gov.br/pat/",
       "fonte": "PAT SJC / Balcão Municipal",
       "fonte_icone": "fa-building-columns",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": false
     },
     {
@@ -118,7 +118,7 @@
       "link_candidatura": "https://servicos.sjc.sp.gov.br/pat/",
       "fonte": "PAT SJC",
       "fonte_icone": "fa-wrench",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
       "destaque": false
     },
     {
@@ -133,7 +133,22 @@
       "link_candidatura": "https://portal.ciee.org.br/",
       "fonte": "CIEE SJC / LinkedIn",
       "fonte_icone": "fa-graduation-cap",
-      "publicado_em": "2026-11-11T18:30:18.081Z",
+      "publicado_em": "2026-11-12T02:10:46.673Z",
+      "destaque": false
+    },
+    {
+      "id": "vagas-2842861",
+      "titulo": "11394 - Operador de Empilhadeira/ Rebocador",
+      "empresa": "Panasonic",
+      "localizacao": "São José dos Campos - SP",
+      "modalidade": "Presencial",
+      "tipo_contrato": "CLT",
+      "nivel": "Auxiliar/Operacional",
+      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
+      "link_candidatura": "https://www.vagas.com.br/vagas/v2842861/11394-operador-de-empilhadeira-rebocador",
+      "fonte": "Vagas.com / LinkedIn",
+      "fonte_icone": "fa-briefcase",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -148,67 +163,7 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2841865/vendedor-a-externo-a-pneus-michelin-sao-jose-dos-campos-sp",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
-      "destaque": false
-    },
-    {
-      "id": "vagas-2839012",
-      "titulo": "11390 - Inspetor de Recebimento/ Materiais",
-      "empresa": "Panasonic",
-      "localizacao": "São José dos Campos - SP",
-      "modalidade": "Presencial",
-      "tipo_contrato": "CLT",
-      "nivel": "Auxiliar/Operacional",
-      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
-      "link_candidatura": "https://www.vagas.com.br/vagas/v2839012/11390-inspetor-de-recebimento-materiais",
-      "fonte": "Vagas.com / LinkedIn",
-      "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
-      "destaque": false
-    },
-    {
-      "id": "vagas-2839003",
-      "titulo": "11387 - Técnico de Instrumentação - Montagem Industrial",
-      "empresa": "Panasonic",
-      "localizacao": "São José dos Campos - SP",
-      "modalidade": "Presencial",
-      "tipo_contrato": "CLT",
-      "nivel": "Auxiliar/Operacional",
-      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
-      "link_candidatura": "https://www.vagas.com.br/vagas/v2839003/11387-tecnico-de-instrumentacao-montagem-industrial",
-      "fonte": "Vagas.com / LinkedIn",
-      "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
-      "destaque": false
-    },
-    {
-      "id": "vagas-2839006",
-      "titulo": "11388 - Eletricista - Montagem Industrial",
-      "empresa": "Panasonic",
-      "localizacao": "São José dos Campos - SP",
-      "modalidade": "Presencial",
-      "tipo_contrato": "CLT",
-      "nivel": "Auxiliar/Operacional",
-      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
-      "link_candidatura": "https://www.vagas.com.br/vagas/v2839006/11388-eletricista-montagem-industrial",
-      "fonte": "Vagas.com / LinkedIn",
-      "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
-      "destaque": false
-    },
-    {
-      "id": "vagas-2839010",
-      "titulo": "11389 - Almoxarife Industrial",
-      "empresa": "Panasonic",
-      "localizacao": "São José dos Campos - SP",
-      "modalidade": "Presencial",
-      "tipo_contrato": "CLT",
-      "nivel": "Auxiliar/Operacional",
-      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
-      "link_candidatura": "https://www.vagas.com.br/vagas/v2839010/11389-almoxarife-industrial",
-      "fonte": "Vagas.com / LinkedIn",
-      "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -223,7 +178,67 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2839019/11386-inspetor-de-cq-montagem-industrial",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
+      "destaque": false
+    },
+    {
+      "id": "vagas-2839012",
+      "titulo": "11390 - Inspetor de Recebimento/ Materiais",
+      "empresa": "Panasonic",
+      "localizacao": "São José dos Campos - SP",
+      "modalidade": "Presencial",
+      "tipo_contrato": "CLT",
+      "nivel": "Auxiliar/Operacional",
+      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
+      "link_candidatura": "https://www.vagas.com.br/vagas/v2839012/11390-inspetor-de-recebimento-materiais",
+      "fonte": "Vagas.com / LinkedIn",
+      "fonte_icone": "fa-briefcase",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
+      "destaque": false
+    },
+    {
+      "id": "vagas-2839003",
+      "titulo": "11387 - Técnico de Instrumentação - Montagem Industrial",
+      "empresa": "Panasonic",
+      "localizacao": "São José dos Campos - SP",
+      "modalidade": "Presencial",
+      "tipo_contrato": "CLT",
+      "nivel": "Auxiliar/Operacional",
+      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
+      "link_candidatura": "https://www.vagas.com.br/vagas/v2839003/11387-tecnico-de-instrumentacao-montagem-industrial",
+      "fonte": "Vagas.com / LinkedIn",
+      "fonte_icone": "fa-briefcase",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
+      "destaque": false
+    },
+    {
+      "id": "vagas-2839006",
+      "titulo": "11388 - Eletricista - Montagem Industrial",
+      "empresa": "Panasonic",
+      "localizacao": "São José dos Campos - SP",
+      "modalidade": "Presencial",
+      "tipo_contrato": "CLT",
+      "nivel": "Auxiliar/Operacional",
+      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
+      "link_candidatura": "https://www.vagas.com.br/vagas/v2839006/11388-eletricista-montagem-industrial",
+      "fonte": "Vagas.com / LinkedIn",
+      "fonte_icone": "fa-briefcase",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
+      "destaque": false
+    },
+    {
+      "id": "vagas-2839010",
+      "titulo": "11389 - Almoxarife Industrial",
+      "empresa": "Panasonic",
+      "localizacao": "São José dos Campos - SP",
+      "modalidade": "Presencial",
+      "tipo_contrato": "CLT",
+      "nivel": "Auxiliar/Operacional",
+      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos para nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportu...",
+      "link_candidatura": "https://www.vagas.com.br/vagas/v2839010/11389-almoxarife-industrial",
+      "fonte": "Vagas.com / LinkedIn",
+      "fonte_icone": "fa-briefcase",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -238,7 +253,7 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2841370/projetista-mecanico-eletrico",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -253,7 +268,7 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2841297/11401-analista-de-planejamento-comercial-senior",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -268,7 +283,7 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2841136/coordenador-a-de-gestao-de-pedidos-order-management-logistica",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -283,7 +298,7 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2840980/fonoaudiologo-pj",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.185Z",
       "destaque": false
     },
     {
@@ -298,7 +313,7 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2840558/11396-lider-de-eletrica",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.186Z",
       "destaque": false
     },
     {
@@ -313,7 +328,22 @@
       "link_candidatura": "https://www.vagas.com.br/vagas/v2840352/vendedor-a-externo-118481",
       "fonte": "Vagas.com / LinkedIn",
       "fonte_icone": "fa-briefcase",
-      "publicado_em": "2026-11-11T18:30:18.339Z",
+      "publicado_em": "2026-11-12T02:10:47.186Z",
+      "destaque": false
+    },
+    {
+      "id": "vagas-2839015",
+      "titulo": "11391 - Líder de Montagem Mecânica - Mem",
+      "empresa": "Panasonic",
+      "localizacao": "São José dos Campos - SP",
+      "modalidade": "Presencial",
+      "tipo_contrato": "CLT",
+      "nivel": "Sênior",
+      "descricao": "Em parceria com a Talent Group, estamos conduzindo processos seletivos nova operação da PANASONIC, que contempla a fabricação nacional de equipamentos para purificação de biogás e produção de biometano, em São José dos Campos (SP). Uma oportunidad...",
+      "link_candidatura": "https://www.vagas.com.br/vagas/v2839015/11391-lider-de-montagem-mecanica-mem",
+      "fonte": "Vagas.com / LinkedIn",
+      "fonte_icone": "fa-briefcase",
+      "publicado_em": "2026-11-12T02:10:47.186Z",
       "destaque": false
     },
     {
@@ -328,7 +358,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/ajudante-de-servicos-domesticos/13755038",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.067Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -343,7 +373,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/cliente-oculto/13367333",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.067Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -358,7 +388,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/domestica/13403522",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.067Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -373,7 +403,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/visual-merchandiser/12449306",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.067Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -388,7 +418,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/operador-de-loja/12445069",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.067Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -403,7 +433,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-frota/12366556",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -418,7 +448,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/domestica/12012285",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -433,7 +463,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/consultor-de-vendas/11760940",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -448,7 +478,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/domestica/11678823",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -463,7 +493,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/motorista/11632084",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -478,7 +508,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/coordenador-de-frota/11589395",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -493,7 +523,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/mecanico-de-refrigeracao/11524143",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -508,7 +538,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-servicos-gerais/11411558",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -523,7 +553,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-financeiro/11130050",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:21.068Z",
+      "publicado_em": "2026-11-12T02:10:49.399Z",
       "destaque": false
     },
     {
@@ -538,7 +568,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/captador-de-recursos/11141111",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.828Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -553,7 +583,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/assistente-administrativo/11141098",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.828Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -568,7 +598,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor-externo/11101347",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -583,7 +613,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-administrativo/10611733",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -598,7 +628,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/costureira/9610160",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -613,7 +643,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/analista-de-frota/10859361",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -628,7 +658,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/representante-comercial/10659416",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -643,7 +673,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor/10462536",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -658,7 +688,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-dp/10440438",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -673,7 +703,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-administrativo/10401365",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -688,7 +718,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/massagista/7633366",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -703,7 +733,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/massagista/10371772",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -718,7 +748,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor/10206464",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -733,7 +763,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor/9891719",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:23.829Z",
+      "publicado_em": "2026-11-12T02:10:52.388Z",
       "destaque": false
     },
     {
@@ -748,7 +778,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/domestica/8816638",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.136Z",
+      "publicado_em": "2026-11-12T02:10:55.016Z",
       "destaque": false
     },
     {
@@ -763,7 +793,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor/8583521",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.136Z",
+      "publicado_em": "2026-11-12T02:10:55.016Z",
       "destaque": false
     },
     {
@@ -778,7 +808,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/motorista-carreteiro/8379625",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.136Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -793,7 +823,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/chapeiro/8176844",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.136Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -808,7 +838,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/enfermeiro/8014183",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -823,7 +853,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor-externo/7743254",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -838,7 +868,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/medico-do-trabalho/5858885",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -853,7 +883,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/assistente-de-almoxarifado/13752442",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -868,7 +898,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/terapeuta/13751614",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -883,7 +913,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-rh/13747398",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -898,7 +928,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-producao/13746700",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -913,7 +943,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/assistente-financeiro/13742955",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -928,7 +958,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/assistente-de-marketing/13742954",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:26.137Z",
+      "publicado_em": "2026-11-12T02:10:55.017Z",
       "destaque": false
     },
     {
@@ -943,7 +973,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/analista-contabil/13734099",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -958,7 +988,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/estagiario/13734097",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -973,7 +1003,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-limpeza/13732238",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -988,7 +1018,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/tecnico-de-manutencao-eletronica/13731328",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -1003,7 +1033,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/eletricista/13731326",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -1018,7 +1048,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/costureira/13731118",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -1033,7 +1063,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/repositor-de-mercadorias/13731117",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.992Z",
       "destaque": false
     },
     {
@@ -1048,7 +1078,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/instalador/13731113",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.993Z",
       "destaque": false
     },
     {
@@ -1063,7 +1093,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/ajudante-geral/13731112",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.993Z",
       "destaque": false
     },
     {
@@ -1078,7 +1108,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/consultor-de-vendas/13731111",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.993Z",
       "destaque": false
     },
     {
@@ -1093,7 +1123,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/garcom/13731110",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:28.686Z",
+      "publicado_em": "2026-11-12T02:10:57.993Z",
       "destaque": false
     },
     {
@@ -1108,7 +1138,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/atendente/13731109",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.551Z",
       "destaque": false
     },
     {
@@ -1123,7 +1153,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-logistica/13731108",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.551Z",
       "destaque": false
     },
     {
@@ -1138,7 +1168,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/operador-de-maquinas/13731107",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.551Z",
       "destaque": false
     },
     {
@@ -1153,7 +1183,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/analista-fiscal/13731105",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.551Z",
       "destaque": false
     },
     {
@@ -1168,7 +1198,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-administrativo/13731103",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.551Z",
       "destaque": false
     },
     {
@@ -1183,7 +1213,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-producao/13731101",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.551Z",
       "destaque": false
     },
     {
@@ -1198,7 +1228,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/pedreiro/13731100",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1213,7 +1243,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/degustador-de-bebidas/13726221",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1228,7 +1258,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/degustador-de-bebidas/13726218",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1243,7 +1273,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/marceneiro/13726092",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1258,7 +1288,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-farmacia/13726091",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.342Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1273,7 +1303,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/promotor-de-vendas/13720303",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.343Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1288,7 +1318,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/promotor/13720302",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.343Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1303,7 +1333,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-recursos-humanos/13717289",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.343Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1318,7 +1348,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-recursos-humanos/13717267",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:31.343Z",
+      "publicado_em": "2026-11-12T02:11:00.552Z",
       "destaque": false
     },
     {
@@ -1333,7 +1363,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/fonoaudiologo/13709119",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1348,7 +1378,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-departamento-pessoal/13704706",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1363,7 +1393,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/analista-de-rh/13704705",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1378,7 +1408,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/coordenador-comercial/13695674",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1393,7 +1423,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/medico-veterinario/13689962",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1408,7 +1438,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/monitor/13689214",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1423,7 +1453,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/terapeuta/13675248",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1438,7 +1468,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/promotor/13668782",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1453,7 +1483,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/coordenador-de-operacoes/13665057",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1468,7 +1498,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/estagiario/13659900",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1483,7 +1513,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/controlador-de-pragas/13651562",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1498,7 +1528,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/ajudante-de-pizzaiolo/13651559",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1513,7 +1543,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-logistica/13651552",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1528,7 +1558,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/coordenador-comercial/13647426",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1543,7 +1573,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor-externo/13647398",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:33.786Z",
+      "publicado_em": "2026-11-12T02:11:03.248Z",
       "destaque": false
     },
     {
@@ -1558,7 +1588,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/coordenador-de-recursos-humanos/13638652",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1573,7 +1603,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-rh/13638582",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1588,7 +1618,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-de-enfermagem/13637050",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1603,7 +1633,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/promotor/13635584",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1618,7 +1648,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/domestica/13629888",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1633,7 +1663,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/promotor/13624132",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1648,7 +1678,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/vendedor/13623827",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1663,7 +1693,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/atendente/13621506",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1678,7 +1708,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/supervisor-de-merchandising/13606573",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1693,7 +1723,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/supervisor-social/13606569",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:36.476Z",
+      "publicado_em": "2026-11-12T02:11:05.884Z",
       "destaque": false
     },
     {
@@ -1708,7 +1738,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/auxiliar-administrativo/13606568",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1723,7 +1753,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/contador/13595588",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1738,7 +1768,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/estagiario/13592659",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1753,7 +1783,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/operador-de-sistemas/13579479",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1768,7 +1798,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/assistente-administrativo/13577513",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1783,7 +1813,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/mecanico-de-refrigeracao/13572913",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1798,7 +1828,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/mecanico-automotivo/13572907",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     },
     {
@@ -1813,7 +1843,7 @@
       "link_candidatura": "https://www.trabalhabrasil.com.br/vagas-de-emprego-em-sao-jose-dos-campos-sp/promotor/13571387",
       "fonte": "Trabalha Brasil / Google Jobs",
       "fonte_icone": "fa-user-tie",
-      "publicado_em": "2026-11-11T18:30:39.139Z",
+      "publicado_em": "2026-11-12T02:11:08.383Z",
       "destaque": false
     }
   ]
