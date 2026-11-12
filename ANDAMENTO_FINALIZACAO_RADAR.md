@@ -2,12 +2,12 @@
 
 Atualizado em 12/11/2026.
 
-Estimativa atual de aproximadamente 72% concluído e 28% restante. As estimativas por área abaixo têm média simples de 71,5%, arredondada. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
+Estimativa atual de aproximadamente 73% concluído e 27% restante. As estimativas por área abaixo têm média simples de 72,5%, arredondada. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
 
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Base funcional publicada: 9e6442e; esta rodada acrescenta verificação de eventos financeiros, e-mails seguros e checagem automática no GitHub.
+- Base funcional publicada: c3d1a69, confirmada com sucesso no Vercel; inclui verificação de eventos financeiros, e-mails seguros e checagem automática no GitHub.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -91,13 +91,13 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 | Cadastro, login e recuperação | 90% | 10% | Reteste real por e-mail e Google após configurações |
 | Administradores e autenticador | 75% | 25% | May e testes finais de acesso |
 | CRM do Radar | 85% | 15% | Validar salvamento visual com duas contas |
-| Pagamentos Asaas | 85% | 15% | Casos de falha e reteste final |
+| Pagamentos Asaas | 90% | 10% | Recusa e nova tentativa reais, reteste final |
 | Bloqueios e acessos por plano | 85% | 15% | Teste real de convidados e publicação |
 | Termos e privacidade da pesquisa | 90% | 10% | Auditoria final das políticas e conteúdo real |
 | Conteúdo real pago | 35% | 65% | Homologar gráficos e capítulos reais |
 | Retirada de Eleições 2026 | 50% | 50% | Concluir dependências e levar a retirada à versão oficial |
-| E-mails e identidade visual | 90% | 10% | Recebimento real e destino definitivo das imagens |
-| Preparação e publicação oficial | 30% | 70% | Integração, cópia de segurança e validações |
+| E-mails e identidade visual | 85% | 15% | Recebimento real, destino das imagens e envio financeiro |
+| Preparação e publicação oficial | 40% | 60% | Cópia de segurança, conteúdo/configuração reais e validações |
 
 ## Próximos passos
 
@@ -164,4 +164,8 @@ Ordem de lançamento e retorno:
 8. [ ] Publicar a revisão candidata e conferir cadastro, recuperação, CRM, conteúdo real e liberação após pagamento. Cópia de código aprovada não valida configuração remota.
 9. [ ] Se houver falha, retornar o Vercel à revisão anterior compatível. Não apagar/reverter tabelas nem eventos financeiros automaticamente: preservar as cobranças e conferir compatibilidade com o banco antes de qualquer retorno.
 
-O percentual permanece aproximadamente 72%: os novos testes melhoram a confiança, mas as pendências de conteúdo real, operação e configuração de produção continuam abertas.
+Resultado remoto comprovado: execução 43154044891 do workflow Revisão automática de segurança concluiu com sucesso em c3d1a69. Os testes de acesso/faturamento e a bateria PostgreSQL passaram no Linux temporário do GitHub. O Preview dessa revisão também foi publicado com sucesso. A revisão decdf95 integrou as vagas mais recentes do origin/main; o conflito desse único arquivo foi resolvido preservando integralmente vagas_sjc.json do origin/main, sem substituir código funcional.
+
+Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43154044891
+
+O percentual fica aproximadamente 73%: os novos testes e a rotina automática avançaram, mas conteúdo real, operação e configuração de produção continuam abertos. A área de e-mails foi reajustada para explicitar o envio financeiro ainda não comprovado, em vez de esconder essa pendência.
