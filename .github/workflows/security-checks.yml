@@ -9,6 +9,9 @@ on:
       - '**.html'
       - 'data/migrations/**'
       - '.gitignore'
+      - 'data/browser-dependencies.json'
+      - '.gitattributes'
+      - 'vendor/**'
       - 'vercel.json'
       - '.vercelignore'
       - '.github/workflows/security-checks.yml'
@@ -47,3 +50,5 @@ jobs:
         run: node --test tests/*.test.cjs
       - name: Testar estados financeiros no PostgreSQL local
         run: node tests/billing-postgres-local.cjs
+      - name: Conferir bibliotecas do navegador e alertas públicos
+        run: node scripts/audit-browser-dependencies.cjs --online

@@ -1,5 +1,7 @@
 # Documentacao e logs
 private-release/
+/Landing page.html
+/Landing page_files/
 README.md
 /.env*
 /server.js

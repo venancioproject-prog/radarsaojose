@@ -474,6 +474,10 @@ public-images/
 !tests/report-release-security.test.cjs
 !tests/server-config-security.test.cjs
 !tests/billing-email-queue.test.cjs
+!tests/browser-dependencies.test.cjs
+!scripts/audit-browser-dependencies.cjs
+!scripts/build-browser-csp.cjs
+!tests/browser-security-fixture.cjs
 !scripts/prepare-private-report.cjs
 !REVISAO_SEGURANCA_ATUAL_2026-11-12.md
 !FILA_EMAILS_FINANCEIROS.md

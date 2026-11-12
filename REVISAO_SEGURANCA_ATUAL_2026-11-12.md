@@ -24,9 +24,9 @@ Evidência anterior: 57 testes passaram localmente e no GitHub (execução 43157
 
 2. **MÉDIA, compatibilidade corrigida — chaves modernas tratadas como sessão.** `lib/supabase-api-headers.js:4` passou a separar as chaves de aplicação do token do usuário nas rotas de posts, upload e plano de negócios. Chaves modernas seguem somente em apikey; a compatibilidade com a chave antiga foi conservada. A identidade administrativa continua sendo verificada antes da operação. Testes cobrem upload e leitura de artigos com as duas formas; nenhuma credencial real foi usada neles.
 
-3. **MÉDIA, pendente — scripts de terceiros variáveis.** `login.html:24` e `login.html:63`, com ocorrências em `app.html:71` e `app.html:157`, carregam Tailwind sem versão fixa e Supabase com a versão ampla @2. Isso permite que uma publicação externa mude o código executado sem alteração do Radar. Não foi demonstrada adulteração. Preparar uma versão fixa ou arquivos locais verificáveis e testar login, gráficos, mapa e telas antes de substituir. Risco da correção: médio, especialmente no Tailwind em tempo de execução. Conferência: comparar o visual e os fluxos com os arquivos fixados.
+3. **MÉDIA, corrigida no Preview — scripts de terceiros variáveis.** As 45 páginas públicas são conferidas por scripts/audit-browser-dependencies.cjs. Tailwind 3.4.17 foi preservado em vendor, com os mesmos bytes do CDN anterior e sua licença; Supabase foi fixado em 2.119.0, também idêntico ao alias anterior. As 56 referências usam verificação SHA-384. A consulta OSV das 12 versões diretas restantes não retornou alertas conhecidos; isso não cobre todas as dependências internas nem vulnerabilidades desconhecidas. O Tailwind ainda compila estilos no navegador, sem otimização de compilação para produção.
 
-4. **MÉDIA, pendente — política do navegador parcial.** `vercel.json:12` tem uma CSP, uma regra que limita recursos do navegador, mas ainda não restringe as origens dos scripts. Os bloqueios atuais de objetos, base e enquadramento são úteis, porém não substituem essa restrição. Não é prova isolada de invasão. Preparar política em modo de observação e depois ajustar scripts locais, externos e trechos embutidos antes de impor bloqueio. Risco de alteração direta: alto para o funcionamento do frontend; por isso não foi imposta uma lista incompleta nesta rodada.
+4. **MÉDIA, reduzida no Preview — política do navegador parcial.** vercel.json passa a permitir scripts locais, caminhos externos fixos e resumos SHA-256 dos trechos aprovados. Bloqueia eval e scripts embutidos inesperados. Uma página local controlada comprovou os bloqueios e o funcionamento de botões existentes; nenhuma conta ou pagamento real foi criado. Atributos antigos como onclick permanecem explicitamente permitidos por script-src-attr e precisam de migração própria; a CSP não é proteção completa contra toda injeção. scripts/build-browser-csp.cjs deve ser executado quando os trechos embutidos mudarem; o teste acusa política desatualizada.
 
 5. **Pendência funcional de lançamento — Report privado antigo incompatível.** `app.js:7768` exige todos os blocos e `app.js:7780` confere o resumo do script do mapa. O arquivo local report-complete-local-20261105.html não tem 15 dos blocos esperados e seu script não corresponde ao permitido. Não usar esse arquivo antigo para preencher o banco. A origem Git 9de76ef contém os 143 blocos e o script esperado; o pacote privado gerado preserva exatamente esses blocos. Conferir editorialmente antes de aplicar. O pacote não foi publicado nem importado remotamente.
 
@@ -46,11 +46,11 @@ Evidência anterior: 57 testes passaram localmente e no GitHub (execução 43157
 | 6. Dados recebidos | Verificado no teste | Cobranças, campos do CRM, datas e HTML de e-mails têm validações testadas. |
 | 7. Permissões do banco | Parcial | Migração 022 e bloqueios do teste conferidos; banco oficial e conteúdo real não aprovados. |
 | 8. Hospedagem | Parcial | Preview publicado; cota Supabase e processo de lançamento pendentes. |
-| 9. Comunicação protegida | Parcial | HTTPS e cabeçalhos configurados; CSP e scripts externos permanecem abertos. |
+| 9. Comunicação protegida | Parcial | HTTPS e cabeçalhos configurados; Scripts fixados e CSP restritiva testada; eventos antigos em atributos ainda permitidos. |
 | 10. Acompanhamento e alertas | Pendente | Histórico de fichas/eventos existe; alertas e rotina de incidentes não foram comprovados. |
 | 11. Testes de proteção | Parcial | Bateria automatizada e PostgreSQL descartável; avaliação final de produção pendente. |
 | 12. Cópias e recuperação | Pendente | Não há restauração comprovada do banco oficial nesta revisão. |
-| 13. Bibliotecas externas | Parcial | Ações de CI fixadas; dependências do navegador ainda precisam de tratamento. |
+| 13. Bibliotecas externas | Parcial | Ações fixadas; 13 arquivos de 12 pacotes diretos com versão e integridade, auditoria OSV automática. |
 | 14. Limites contra abuso | Parcial | Checkout tem limite por memória da instância (`api/asaas-checkout.js:43`); proteção distribuída e do provedor requerem conferência. |
 | 15. Privacidade | Parcial | Aceite imutável e limites de grupos testados; retenção, exclusão e uso operacional de contatos pendentes. |
 | 16. Resposta a incidentes | Pendente | Roteiro de retorno preparado; responsáveis, alertas e exercício ainda não comprovados. |
@@ -71,3 +71,11 @@ Evidência anterior: 57 testes passaram localmente e no GitHub (execução 43157
 3. Ativar e validar a fila preparada, o remetente, o provedor e o recebimento sem duplicação.
 4. Conferir May, duas contas no CRM, convidados e nova tentativa de pagamento real no ambiente de teste.
 5. Fechar a matriz ASVS Nível 1, a restauração de backup e as configurações oficiais antes do lançamento.
+
+## Rodada de dependências e navegador
+
+- 67 testes locais aprovados, incluindo bloqueios da política e preservação da exportação por impressão.
+- Removido html2pdf.js 0.10.1 de admin-crm.html: pacote não usado com alerta alto [CVE-2026-22787](https://github.com/advisories/GHSA-w8x4-x68c-m6fc). Não foi demonstrada exploração no Radar. A função atual chama window.print e foi preservada.
+- Mantidas cores, campos e regras de cadastro. Medições locais de fontes/cores/alturas conferidas; a diferença de largura observada na comparação entre abas foi afetada pelo tamanho real de cada viewport e não foi tratada como prova de regressão.
+- Cópia salva de WordPress Landing page.html e seus arquivos deixam de ser publicados; o código foi conservado no Git.
+- Conferência de integridade: [MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity). Limite do compilador no navegador: [Tailwind](https://v3.tailwindcss.com/docs/installation/play-cdn).

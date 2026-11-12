@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-12",
+  "description": "Explicit versions and browser-verified SHA-384 values. Direct browser packages only; not a complete transitive SBOM.",
+  "entries": [
+    {
+      "package": "@supabase/supabase-js",
+      "version": "2.119.0",
+      "src": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0",
+      "sourceUrl": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0",
+      "integrity": "sha384-gnyZit14c5lnGcarmA166QQjjJXpucw25ogZXuwH3HxxY904zHkBqmxVpelsPorb",
+      "bytes": 220148
+    },
+    {
+      "package": "tailwindcss",
+      "version": "3.4.17",
+      "src": "/vendor/tailwindcss-3.4.17.js",
+      "sourceUrl": "https://cdn.tailwindcss.com/3.4.17",
+      "integrity": "sha384-igm5BeiBt36UU4gqwWS7imYmelpTsZlQ45FZf+XBn9MuJbn4nQr7yx1yFydocC/K",
+      "bytes": 407279
+    },
+    {
+      "package": "quill",
+      "version": "2.0.2",
+      "src": "https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js",
+      "sourceUrl": "https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js",
+      "integrity": "sha384-hcxmSutM10NL6iGBAA0LStIhy+kWJxfrhqWVMRuABZH5Vqztexq2nBz/Xnfllly9",
+      "bytes": 209340
+    },
+    {
+      "package": "chart.js",
+      "version": "4.4.1",
+      "src": "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+      "sourceUrl": "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+      "integrity": "sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4",
+      "bytes": 205399
+    },
+    {
+      "package": "leaflet",
+      "version": "1.9.4",
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js",
+      "sourceUrl": "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js",
+      "integrity": "sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO",
+      "bytes": 147171
+    },
+    {
+      "package": "leaflet.markercluster",
+      "version": "1.5.3",
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js",
+      "sourceUrl": "https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js",
+      "integrity": "sha384-SIh+qcEBNMda8tT+rx66aCBuWtVYMVzRABqhK4eeQh4pjDHoRdVx8nYU4LQ5eGzI",
+      "bytes": 33995
+    },
+    {
+      "package": "leaflet.heat",
+      "version": "0.2.0",
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js",
+      "sourceUrl": "https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js",
+      "integrity": "sha384-mFKkGiGvT5vo1fEyGCD3hshDdKmW3wzXW/x+fWriYJArD0R3gawT6lMvLboM22c0",
+      "bytes": 5158
+    },
+    {
+      "package": "tom-select",
+      "version": "2.3.1",
+      "src": "https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js",
+      "sourceUrl": "https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js",
+      "integrity": "sha384-cnROoUgVILyibe3J0zhzWoJ9p2WmdnK7j/BOTSWqVDbC1pVw2d+i6Q/1ESKJKCYf",
+      "bytes": 50720
+    },
+    {
+      "package": "jszip",
+      "version": "3.10.1",
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
+      "sourceUrl": "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
+      "integrity": "sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG",
+      "bytes": 97630
+    },
+    {
+      "package": "file-saver",
+      "version": "2.0.5",
+      "src": "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js",
+      "sourceUrl": "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js",
+      "integrity": "sha384-PlRSzpewlarQuj5alIadXwjNUX+2eNMKwr0f07ShWYLy8B6TjEbm7ZlcN/ScSbwy",
+      "bytes": 2749
+    },
+    {
+      "package": "chartjs-plugin-datalabels",
+      "version": "2.2.0",
+      "src": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js",
+      "sourceUrl": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js",
+      "integrity": "sha384-y49Zu59jZHJL/PLKgZPv3k2WI9c0Yp3pWB76V8OBVCb0QBKS8l4Ff3YslzHVX76Y",
+      "bytes": 12937
+    },
+    {
+      "package": "chartjs-chart-sankey",
+      "version": "0.12.1",
+      "src": "https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.1/dist/chartjs-chart-sankey.min.js",
+      "sourceUrl": "https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.1/dist/chartjs-chart-sankey.min.js",
+      "integrity": "sha384-R5LF8opcxOg7Ibk9Tcz2v5qJ/2FKaqqJfvGRDQtj5e7gQ4AzhwYCB61EOu/N6qoh",
+      "bytes": 10614
+    },
+    {
+      "package": "leaflet",
+      "version": "1.9.4",
+      "src": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+      "sourceUrl": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+      "integrity": "sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH",
+      "bytes": 147552
+    }
+  ]
+}

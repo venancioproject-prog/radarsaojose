@@ -11,12 +11,30 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000" },
-        { "key": "Content-Security-Policy", "value": "object-src 'none'; base-uri 'self'; frame-ancestors 'none'" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "no-referrer" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0 https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js https://cdn.jsdelivr.net/npm/chartjs-chart-sankey@0.12.1/dist/chartjs-chart-sankey.min.js https://unpkg.com/leaflet@1.9.4/dist/leaflet.js https://vercel.live/_next-live/ 'sha256-+seYcI4wwRVT3Qf2f0wwtRTmYVsBJnQT5DGBR3AWjR8=' 'sha256-/2rtBoarL0yq9FRwZLsPOzLg+Wq/dbRr+/vCxw1JTVI=' 'sha256-0PsF01uLb7iauMAWRtOAuE06vz+VfdFb5C9kh2qcX7o=' 'sha256-0ouPf1JbjM5LloWpYWrRx/i1mvGMVGMvb3Y5+wlro4E=' 'sha256-1KNHjzWOfpNaoscntyt8Hm+nPu30lC4sfmX7y38aZ+k=' 'sha256-1YswWgxJ3vCDss6knRFSMhZtGYITw9cSt1m8a1zsPto=' 'sha256-28cyp/KO8A3ysJmuJDrRNXfL9kRmuYkofTRTbU2bj5s=' 'sha256-58Neyz8A1kt/pqglmaZzo5JiA/fQbeksjKbWM9BekFA=' 'sha256-7x8PnoWaWIOSBVJ2BXX2uc2SvGFd1qkCm5ISeFktN/M=' 'sha256-9S1R21IIjHyKEIlLArjy75Q927pCXFNy+yIF0NecNqA=' 'sha256-Cn4rLOIXcbZtbtW5f0AiMbFo+UEi9ZqbC/fHwXyu1Jk=' 'sha256-CoV6LQo/V7NrZuxpCm8grzTYb2lw8tYbcWUTTiLIfzY=' 'sha256-G3cX6W7TBxkWKfAuJT3LCm4qAgkvXGXa7uXjxoAlMDc=' 'sha256-GXgkf8/wTFF9bg0iUsIy8EpXehi8zYMJcJAWYf05JGM=' 'sha256-LEXrlm2+zrPlYkjeFPa6o0x0ftQmsghvtFiHTjSqMSI=' 'sha256-QbERXpg4PLRobB3U2aHtxcxwnKK2aV2m1O8moCo8S10=' 'sha256-TKw0TRJeOk7OxTk8cmRq0bE2Dbaq1w3WWtSqxh00Vlo=' 'sha256-V8kPwxMlzAaM1y0peGpKaO/ju6OkbQL1Z6m79n4Y9tA=' 'sha256-XBGC1WYtvdq1fIAfFvvP5KWVGwRJY1SeMhpHRfy0Wbc=' 'sha256-Y9sl9uQm+2MYNNx6Y46Z6FhNOCSozGtNBTXuBMvppxo=' 'sha256-YkAqj4R+lYJJiAng2u6rjbhK4J+ugKMdRMeJuXrD4Jc=' 'sha256-ZqPeCXf+Ez1DQrltmi5ymqBM4d2T419Sv5hnAVh2NCE=' 'sha256-a1n9JD+QC4lRYkfJRqJrteIW2vE+K1H5GRd4MCKj76k=' 'sha256-csPLcQq+GGU3Pyy4Pjts5NpdVQ0pQ/w+m2yEZYw4yo8=' 'sha256-fVtGdw/GImcGw3ZjdYnEnMNvokunv7Hdfsw24CEq6bE=' 'sha256-ggXuO8coIhMrT0LYcWA3ridoqrhK/fwIbbwUsK/TAyI=' 'sha256-myBJDYNBzPpLzs0JiIJnwmLs6qbnOkxlU6y5Q4m9A0U=' 'sha256-o3AKjjgKIrjpaIQ8Cbtoc8Qb9ubVe3waGtUneUu42Tg=' 'sha256-o4d6/CFUrcLXYP0AktgRiKvfFvKHhHxu9JJDpUDpGwo=' 'sha256-pQbQWXyedHy6kw2cZBhDR0kjj5PqO20B8TWsEoGmRAg=' 'sha256-rD3uLN7PNCHsqAtjVHzx/A0FBWDIDEIBx8WdjPV3LNs='; script-src-attr 'unsafe-inline'"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "no-referrer"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     },
     {
@@ -48,9 +66,21 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/oraculo", "destination": "/api/consultor" },
-    { "source": "/artigos/:slug.html", "destination": "/artigo.html?slug=:slug" },
-    { "source": "/artigos/:slug", "destination": "/artigo.html?slug=:slug" },
-    { "source": "/artigo/:slug", "destination": "/artigo.html?slug=:slug" }
+    {
+      "source": "/api/oraculo",
+      "destination": "/api/consultor"
+    },
+    {
+      "source": "/artigos/:slug.html",
+      "destination": "/artigo.html?slug=:slug"
+    },
+    {
+      "source": "/artigos/:slug",
+      "destination": "/artigo.html?slug=:slug"
+    },
+    {
+      "source": "/artigo/:slug",
+      "destination": "/artigo.html?slug=:slug"
+    }
   ]
 }
