@@ -4,16 +4,17 @@
 // =========================================================================
 
 const { getDbPool } = require('../lib/db-pool');
+const { apiKeyHeaders } = require('../lib/supabase-api-headers');
 const { isAdmin, hasRequiredMfa } = require('../lib/auth-mfa');
 
 // Carregador autônomo de variáveis de ambiente (.env / .env.local)
 
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
+const SUPABASE_URL = (process.env.SUPABASE_URL || '').trim().replace(/\/$/, '');
+const SUPABASE_ANON_KEY = (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 // Credencial privilegiada para operações administrativas de backend (fail-closed: nunca substitui por anon key)
 function getSupabaseServiceKey() {
-  return process.env.SUPABASE_SERVICE_ROLE_KEY || null;
+  return process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || null;
 }
 
 // =========================================================================
@@ -490,6 +491,9 @@ async function authenticateSupabaseRequest(req) {
     };
   }
 
+  if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(SUPABASE_URL) || !SUPABASE_ANON_KEY) {
+    return { ok: false, status: 503, code: 'DATABASE_NOT_CONFIGURED', error: 'Serviço temporariamente indisponível.' };
+  }
   try {
     const authRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/auth/v1/user`, {
       method: 'GET',
@@ -648,8 +652,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
     queryRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=id,version,updated_at&order=updated_at.desc`, {
       method: 'GET',
       headers: {
-        'apikey': serviceKey,
-        'Authorization': `Bearer ${serviceKey}`,
+        ...apiKeyHeaders(serviceKey),
         'Content-Type': 'application/json'
       }
     }, { timeoutMs: 8000, maxRetries: 0, coalesce: false });
@@ -692,8 +695,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
       const patchRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans?id=eq.${encodeURIComponent(targetId)}`, {
         method: 'PATCH',
         headers: {
-          'apikey': serviceKey,
-          'Authorization': `Bearer ${serviceKey}`,
+          ...apiKeyHeaders(serviceKey),
           'Content-Type': 'application/json',
           'Prefer': 'return=representation'
         },
@@ -736,8 +738,7 @@ async function saveBusinessPlanToSupabase(sanitizedPayload, calculatedKpis, user
     const insertRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans`, {
       method: 'POST',
       headers: {
-        'apikey': serviceKey,
-        'Authorization': `Bearer ${serviceKey}`,
+        ...apiKeyHeaders(serviceKey),
         'Content-Type': 'application/json',
         'Prefer': 'return=representation'
       },
@@ -986,8 +987,7 @@ module.exports = async function handler(req, res) {
           const fetchRes = await getDbPool().fetchWithPool(`${SUPABASE_URL}/rest/v1/business_plans?is_active=eq.true&select=*&order=updated_at.desc&limit=1`, {
             method: 'GET',
             headers: {
-              'apikey': serviceKey,
-              'Authorization': `Bearer ${serviceKey}`,
+              ...apiKeyHeaders(serviceKey),
               'Content-Type': 'application/json'
             }
           }, { timeoutMs: 8000, maxRetries: 0, coalesce: false });

@@ -1,4 +1,5 @@
 # Documentacao e logs
+private-release/
 README.md
 /.env*
 /server.js

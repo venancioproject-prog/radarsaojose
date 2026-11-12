@@ -2,6 +2,7 @@
 // Supabase REST Engine + Fallback Seguro para Vercel Serverless
 const { requireAdmin } = require('./_authorization');
 const { getDbPool } = require('../lib/db-pool');
+const { apiKeyHeaders } = require('../lib/supabase-api-headers');
 const fs = require('fs');
 const path = require('path');
 
@@ -30,9 +31,9 @@ function loadEnv() {
 }
 loadEnv();
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const SUPABASE_URL = (process.env.SUPABASE_URL || '').trim().replace(/\/$/, '');
+const SUPABASE_ANON_KEY = (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const SUPABASE_READ_KEY = SUPABASE_SERVICE_KEY || SUPABASE_ANON_KEY;
 
 const ALLOWED_SORT_COLUMNS = new Set(['published_at', 'created_at', 'updated_at', 'views_count', 'title']);
@@ -122,6 +123,10 @@ module.exports = async function handler(req, res) {
     return res.status(204).end();
   }
 
+  if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(SUPABASE_URL) || !SUPABASE_ANON_KEY) {
+    return res.status(503).json({ success: false, code: 'DATABASE_NOT_CONFIGURED', message: 'Serviço temporariamente indisponível.' });
+  }
+
   const method = req.method;
   const query = req.query || {};
 
@@ -173,8 +178,7 @@ module.exports = async function handler(req, res) {
         const pool = getDbPool();
         const supRes = await pool.fetchWithPool(endpoint, {
           headers: {
-            'apikey': SUPABASE_READ_KEY,
-            'Authorization': `Bearer ${SUPABASE_READ_KEY}`,
+            ...apiKeyHeaders(SUPABASE_READ_KEY),
             'Range-Unit': 'items',
             'Prefer': 'count=exact'
           }
@@ -336,8 +340,7 @@ module.exports = async function handler(req, res) {
           const supRes = await pool.fetchWithPool(`${SUPABASE_URL}/rest/v1/blog_posts`, {
             method: 'POST',
             headers: {
-              'apikey': SUPABASE_SERVICE_KEY,
-              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+              ...apiKeyHeaders(SUPABASE_SERVICE_KEY),
               'Content-Type': 'application/json',
               'Prefer': 'return=representation'
             },
@@ -434,8 +437,7 @@ module.exports = async function handler(req, res) {
           const supRes = await pool.fetchWithPool(updateUrl, {
             method: 'PATCH',
             headers: {
-              'apikey': SUPABASE_SERVICE_KEY,
-              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+              ...apiKeyHeaders(SUPABASE_SERVICE_KEY),
               'Content-Type': 'application/json',
               'Prefer': 'return=representation'
             },
@@ -513,8 +515,7 @@ module.exports = async function handler(req, res) {
           const supRes = await pool.fetchWithPool(deleteUrl, {
             method: 'DELETE',
             headers: {
-              'apikey': SUPABASE_SERVICE_KEY,
-              'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`
+              ...apiKeyHeaders(SUPABASE_SERVICE_KEY)
             }
           }, { timeoutMs: 8000 });
 

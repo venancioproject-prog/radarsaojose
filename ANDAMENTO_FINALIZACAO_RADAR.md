@@ -2,12 +2,12 @@
 
 Atualizado em 12/11/2026.
 
-Estimativa atual de aproximadamente 73% concluído e 27% restante. As estimativas por área abaixo têm média simples de 72,5%, arredondada. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
+Estimativa atual de aproximadamente 74% concluído e 26% restante. As estimativas por área abaixo têm média simples de 74%. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
 
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Base funcional publicada: c3d1a69, confirmada com sucesso no Vercel; inclui verificação de eventos financeiros, e-mails seguros e checagem automática no GitHub.
+- Evidência de publicação anterior: f0af7d1. Esta rodada prepara o pacote privado do Report e remove destinos de banco implícitos nas rotas de posts, upload e plano de negócios.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -38,7 +38,7 @@ O telefone foi escolhido como opcional. Ele fica disponível para contato sobre 
 
 ## Evidências
 
-- 48 testes automatizados passaram com zero falhas.
+- 57 testes automatizados passaram com zero falhas.
 - A bateria financeira adicional em PostgreSQL descartável também passou.
 - A sequência existente de migrações e a nova 022 foram testadas localmente.
 - A 022 foi aplicada duas vezes no teste local para conferir reaplicação.
@@ -94,7 +94,7 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 | Pagamentos Asaas | 90% | 10% | Recusa e nova tentativa reais, reteste final |
 | Bloqueios e acessos por plano | 85% | 15% | Teste real de convidados e publicação |
 | Termos e privacidade da pesquisa | 90% | 10% | Auditoria final das políticas e conteúdo real |
-| Conteúdo real pago | 35% | 65% | Homologar gráficos e capítulos reais |
+| Conteúdo real pago | 50% | 50% | Pacote do Report preparado; falta integração protegida e aprovação dos conteúdos reais |
 | Retirada de Eleições 2026 | 50% | 50% | Concluir dependências e levar a retirada à versão oficial |
 | E-mails e identidade visual | 85% | 15% | Recebimento real, destino das imagens e envio financeiro |
 | Preparação e publicação oficial | 40% | 60% | Cópia de segurança, conteúdo/configuração reais e validações |
@@ -168,4 +168,23 @@ Resultado remoto comprovado: execução 43154044891 do workflow Revisão automá
 
 Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43154044891
 
-O percentual fica aproximadamente 73%: os novos testes e a rotina automática avançaram, mas conteúdo real, operação e configuração de produção continuam abertos. A área de e-mails foi reajustada para explicitar o envio financeiro ainda não comprovado, em vez de esconder essa pendência.
+No fechamento anterior, o percentual era aproximadamente 73%: testes e rotina automática avançaram, mas conteúdo real, operação e configuração de produção continuaram abertos. A área de e-mails foi reajustada para explicitar o envio financeiro ainda não comprovado.
+
+## Pacote do Report e configuração segura do servidor
+
+- [x] Comparar o pacote privado antigo com os blocos esperados na aplicação: faltavam 15 dos 143 blocos e o script do mapa era incompatível. Esse pacote antigo não deve ser importado.
+- [x] Preparar os 143 blocos da origem Git 9de76ef45924f6fadfea118fe7381a3fa2054e8a em pacote privado novo, preservando cartões internos, atributos, ordem do índice e o script permitido.
+- [x] Testar importação e leitura no PostgreSQL descartável: o HTML voltou idêntico, incluindo caracteres em português. A consulta anônima foi bloqueada. Nenhum banco remoto foi alterado.
+- [x] Conferir as 82 referências locais de mídia do pacote: todas existem no checkout. A checagem HTTP ficou incompleta por tempos limite, inclusive em consultas de controle ao login; não tratar isso como prova de imagens ausentes.
+- [x] Adicionar ferramenta offline que recusa gravar conteúdo pago dentro de uma pasta Git e não sobrescreve pacote anterior. A ferramenta não envia arquivos nem aplica SQL.
+- [x] Remover endereços/chaves públicos de produção usados como reserva em api/posts.js, api/upload.js e api/business-plan.js. Configuração ausente/inválida agora impede a consulta; o cálculo em memória permanece independente.
+- [x] Suportar chaves publicáveis e secretas modernas sem tratá-las como token de sessão, preservando suporte às chaves antigas.
+- [x] Preparar relatório atual REVISAO_SEGURANCA_ATUAL_2026-11-12.md, com as 17 áreas, evidências, correções de interpretações históricas e pendências. A conferência completa ASVS Nível 1 permanece aberta.
+
+Pacote local, fora do repositório:
+
+    C:/Users/leose/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/RadarSaoJose/private-release/report-2026-11-12/
+
+Contém manifest.json, report-chapters.html e report-import.sql. O HTML tem 1.079.719 bytes e SHA-256 4be5a4512be8cf831652127cd0bc7b45bec085095aed5946fd903d4f7d5d5516. Não publicar essa pasta. O SQL substitui o registro radar-2026 se já existir: antes de aplicar, aprovar o conteúdo e conservar cópia do registro anterior. Não executar como tentativa de resolver o Preview de demonstração, que é intencional.
+
+A ferramenta versionada é scripts/prepare-private-report.cjs. O pacote traz conteúdo real já rastreado na origem oficial, mas ainda não foi aprovado visual/editorialmente nem integrado ao banco oficial. Pesquisa quantitativa e mídia reais continuam pendentes. O frontend publicado não foi redesenhado nesta rodada.

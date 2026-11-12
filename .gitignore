@@ -1,4 +1,5 @@
 # Environment variables (chaves de API)
+private-release/
 .env
 .env.*
 !.env.example
@@ -469,6 +470,10 @@ public-images/
 !data/migrations/022_crm_account_followups.sql
 !tests/crm-security.test.cjs
 !tests/payment-events-security.test.cjs
+!tests/report-release-security.test.cjs
+!tests/server-config-security.test.cjs
+!scripts/prepare-private-report.cjs
+!REVISAO_SEGURANCA_ATUAL_2026-11-12.md
 
 !emails-auth/
 !emails-auth/confirmar-cadastro.html

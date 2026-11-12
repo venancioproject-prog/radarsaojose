@@ -2,6 +2,7 @@
 // Suporte a Base64, Imagens de Capa e Imagens Embutidas no Rich Text (Quill/TipTap)
 const { requireAdmin } = require('./_authorization');
 const { getDbPool } = require('../lib/db-pool');
+const { apiKeyHeaders } = require('../lib/supabase-api-headers');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -30,9 +31,9 @@ function loadEnv() {
 }
 loadEnv();
 
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://tocyvysucpslayzglixq.supabase.co";
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || "sb_publishable_8mKUf28dbMM8EOSPrgjRUA_19taJmrT";
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const SUPABASE_URL = (process.env.SUPABASE_URL || '').trim().replace(/\/$/, '');
+const SUPABASE_ANON_KEY = (process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || "blog-images";
 
 module.exports = async function handler(req, res) {
@@ -47,6 +48,10 @@ module.exports = async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Método não permitido. Utilize POST.' });
+  }
+
+  if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(SUPABASE_URL) || !SUPABASE_ANON_KEY) {
+    return res.status(503).json({ success: false, code: 'DATABASE_NOT_CONFIGURED', message: 'Serviço temporariamente indisponível.' });
   }
 
   if (req.body != null && (typeof req.body !== 'object' || Array.isArray(req.body))) {
@@ -118,8 +123,7 @@ module.exports = async function handler(req, res) {
         const uploadRes = await getDbPool().fetchWithPool(storageUploadUrl, {
           method: 'POST',
           headers: {
-            'apikey': SUPABASE_SERVICE_KEY,
-            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+            ...apiKeyHeaders(SUPABASE_SERVICE_KEY),
             'Content-Type': contentType,
             'x-upsert': 'true'
           },
