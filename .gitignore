@@ -1,5 +1,8 @@
 # Environment variables (chaves de API)
 .env
+.env.*
+!.env.example
+!.env.*.example
 .env.local
 .env.development.local
 .env.test.local
@@ -465,6 +468,7 @@ public-images/
 
 !data/migrations/022_crm_account_followups.sql
 !tests/crm-security.test.cjs
+!tests/payment-events-security.test.cjs
 
 !emails-auth/
 !emails-auth/confirmar-cadastro.html

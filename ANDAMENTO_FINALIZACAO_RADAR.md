@@ -7,7 +7,7 @@ Estimativa atual de aproximadamente 72% concluído e 28% restante. As estimativa
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Base funcional publicada: 5a8dd52; esta rodada acrescenta correções para assinatura própria combinada com convite Mídia.
+- Base funcional publicada: 9e6442e; esta rodada acrescenta verificação de eventos financeiros, e-mails seguros e checagem automática no GitHub.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -38,7 +38,7 @@ O telefone foi escolhido como opcional. Ele fica disponível para contato sobre 
 
 ## Evidências
 
-- 40 testes automatizados passaram com zero falhas.
+- 48 testes automatizados passaram com zero falhas.
 - A bateria financeira adicional em PostgreSQL descartável também passou.
 - A sequência existente de migrações e a nova 022 foram testadas localmente.
 - A 022 foi aplicada duas vezes no teste local para conferir reaplicação.
@@ -50,7 +50,7 @@ O telefone foi escolhido como opcional. Ele fica disponível para contato sobre 
 
 Comando da bateria principal:
 
-    node --test tests/billing-browser-security.test.cjs tests/pricing.test.cjs tests/survey-preview.test.cjs tests/integration-security.test.cjs tests/crm-security.test.cjs
+    node --test tests/*.test.cjs
 
 O teste financeiro adicional depende do PGlite já instalado em LocalCache/Local/RadarSaoJose/tools/pglite-0.5.15. Não usar a opção --sandbox sem combinar um novo teste com o Leonardo.
 
@@ -132,3 +132,36 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 - [x] Rodar novamente os 40 testes e a bateria financeira local, sem tráfego financeiro real.
 
 A conferência anônima não substitui a validação com duas contas autenticadas. O navegador disponível não tem sessão administrativa do Radar; não criar senha, contornar o autenticador ou marcar esse teste como concluído. A retirada de Eleições não tem arquivos/rótulos ativos encontrados no código rastreado desta branch; ainda falta comprovar a integração na versão oficial, preservando as referências históricas legítimas sobre eleições municipais na seção História.
+
+## Segunda rodada autônoma de 12/11
+
+- [x] Conferir o webhook (notificação do Asaas ao Radar) com serviços simulados: token incorreto, corpo muito grande em bytes UTF-8, cobrança desconhecida, referência de outro pedido, valor divergente, pagamento não confirmado, comunicação indisponível, estorno e contestação do cartão.
+- [x] Confirmar que essas falhas não chamam a ativação nem enviam e-mail de compra. Eventos duplicados não disparam nova confirmação por e-mail.
+- [x] Corrigir o e-mail financeiro que chamava boleto de cartão, escapar texto inserido no HTML e usar nome neutro para plano desconhecido.
+- [x] Exigir remetente financeiro explícito, sem inventar endereço de domínio. Usar chave estável por pedido/destinatário no Resend, que deduplica por até 24 horas; isso não substitui fila persistente.
+- [x] Proteger também .env.production, .env.preview, .env.test e outras variações no Git, mantendo modelos .example.
+- [x] Conferir o histórico Git completo disponível (repositório não raso), sem imprimir valores: nenhum caminho .env* encontrado fora dos modelos .example.
+- [x] Conferir HTTP 404 no Preview para .env, .env.local, .git/config, migração 022, dados_pesquisa_477.json, fontes privadas do Report, app_recovered.html e modelo de recuperação.
+- [x] Preparar checagem GitHub Actions com credencial somente de leitura, ações fixadas por revisão e PGlite 0.5.15 instalado sem scripts em máquina temporária. Ela não usa segredos de produção nem executa pagamentos remotos.
+
+Limitação identificada: o SMTP configurado no Supabase atende os e-mails de autenticação. O módulo de confirmação financeira do Radar implementa envio via Resend, não via esse SMTP. Não foi configurado provedor financeiro nem feito envio real nesta revisão. Sem configuração, o módulo retorna pending_configuration; não há uma fila persistente ou retentativa automática apesar do comentário antigo dizer que havia. O comentário foi corrigido. Essa pendência fica explícita no lançamento; não marcar os e-mails financeiros como entregues.
+
+Fontes consultadas: https://docs.asaas.com/docs/webhook-para-cobrancas e https://resend.com/blog/engineering-idempotency-keys . O Asaas também possui eventos de captura recusada/análise de risco; o código atual não concede plano para eles. Ainda falta validar a experiência de nova tentativa após recusa com o checkout hospedado, sem duplicar cobrança.
+
+## Preparação da versão oficial
+
+O origin/main foi atualizado e comparado em leitura nesta rodada. Desde o ancestral comum com a branch integrada, as alterações próprias de main são as atualizações automáticas de vagas_sjc.json. A comparação entre as duas versões tinha 248 arquivos diferentes (incluindo imagens de prévia e código de segurança); quantidade de arquivos não mede risco. Nunca copiar só app.html para publicar: as APIs, os scripts, as migrações e as imagens correspondentes precisam acompanhar a mesma revisão.
+
+Ordem de lançamento e retorno:
+
+1. [ ] Identificar a revisão candidata exata e registrar a revisão anterior do Vercel. Conservar alterações locais anteriores no OneDrive.
+2. [ ] Fazer cópia de segurança do banco oficial e conferir restauração em ambiente separado antes de aplicar migrações. Não executar 010..022 cegamente: há CREATE TABLE não reaplicável; comparar estrutura e permissões reais primeiro.
+3. [ ] Validar conteúdo privado real: respostas da pesquisa, linhas de mídia e report_private_documents/radar-2026. O Preview usa conteúdo sintético de propósito quando VERCEL_ENV=preview; aprovar conteúdo real em ambiente protegido sem depender desse comportamento de demonstração.
+4. [ ] Separar Supabase e Asaas oficiais dos de teste, conferir somente presença/destino das variáveis sem divulgar valores e preparar URLs de retorno e webhook oficiais. Não copiar token ou URL de teste por engano.
+5. [ ] Preparar remetente e imagens dos e-mails em destino definitivo; o bucket atual de logos pertence ao projeto de teste. Decidir a configuração financeira e a estratégia de reenvio que ainda faltam.
+6. [ ] Exigir sucesso da revisão automática no processo de integração. O arquivo do workflow sozinho não configura proteção da branch nem impede o Vercel de publicar um push.
+7. [ ] Confirmar as contas administrativas, o autenticador, o acesso por plano e o fluxo final completo. Resolver a cota excedida da organização Supabase antes da abertura ao público.
+8. [ ] Publicar a revisão candidata e conferir cadastro, recuperação, CRM, conteúdo real e liberação após pagamento. Cópia de código aprovada não valida configuração remota.
+9. [ ] Se houver falha, retornar o Vercel à revisão anterior compatível. Não apagar/reverter tabelas nem eventos financeiros automaticamente: preservar as cobranças e conferir compatibilidade com o banco antes de qualquer retorno.
+
+O percentual permanece aproximadamente 72%: os novos testes melhoram a confiança, mas as pendências de conteúdo real, operação e configuração de produção continuam abertas.

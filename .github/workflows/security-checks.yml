@@ -1,0 +1,49 @@
+name: Revisão automática de segurança
+
+on:
+  push:
+    branches: [main, codex/radar-integracao]
+    paths:
+      - '**.js'
+      - '**.cjs'
+      - '**.html'
+      - 'data/migrations/**'
+      - '.gitignore'
+      - 'vercel.json'
+      - '.vercelignore'
+      - '.github/workflows/security-checks.yml'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security:
+    name: Testes de acesso e faturamento
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      LOCALAPPDATA: ${{ runner.temp }}
+    steps:
+      - name: Ler o código sem guardar credenciais
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Usar Node.js 24
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Preparar PostgreSQL descartável sem scripts de instalação
+        run: >-
+          npm install --prefix "$LOCALAPPDATA/RadarSaoJose/tools/pglite-0.5.15"
+          --no-save --package-lock=false --ignore-scripts --no-audit --no-fund
+          @electric-sql/pglite@0.5.15
+      - name: Testar autenticação, CRM, pesquisa, e-mails e pagamentos simulados
+        run: node --test tests/*.test.cjs
+      - name: Testar estados financeiros no PostgreSQL local
+        run: node tests/billing-postgres-local.cjs
