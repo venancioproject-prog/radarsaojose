@@ -19,8 +19,16 @@
   }
 
   function render(target, html) {
-    const template = document.createElement('template');
-    template.innerHTML = String(html ?? '');
+    if (typeof window.DOMPurify?.sanitize !== 'function') {
+      target.replaceChildren(document.createTextNode('Não foi possível carregar o conteúdo com segurança. Atualize a página.'));
+      return;
+    }
+    // Keep the existing presentation allowlist; the maintained parser removes
+    // malformed markup and active content before our minimal DOM reconstruction.
+    const clean = window.DOMPurify.sanitize(String(html ?? ''), {
+      ALLOWED_TAGS: [...allowed], ALLOWED_ATTR: ['href', 'src', 'alt'],
+      ALLOW_DATA_ATTR: false, ALLOW_ARIA_ATTR: false, RETURN_DOM_FRAGMENT: true
+    });
     function copy(source, destination) {
       for (const node of source.childNodes) {
         if (node.nodeType === 3) destination.append(document.createTextNode(node.textContent));
@@ -43,7 +51,7 @@
       }
     }
     const fragment = document.createDocumentFragment();
-    copy(template.content, fragment);
+    copy(clean, fragment);
     target.replaceChildren(fragment);
   }
 

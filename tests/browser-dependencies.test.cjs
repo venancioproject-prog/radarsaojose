@@ -10,7 +10,7 @@ const { buildPolicy, scriptHash } = require('../scripts/build-browser-csp.cjs');
 test('Every public page pins third-party scripts and checks their integrity', () => {
   const result = validate();
   assert.ok(result.pages >= 40);
-  assert.equal(result.uniqueLibraries, 13);
+  assert.equal(result.uniqueLibraries, 14);
   assert.ok(result.scriptReferences > 50);
 });
 

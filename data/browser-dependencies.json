@@ -106,6 +106,14 @@
       "sourceUrl": "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
       "integrity": "sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH",
       "bytes": 147552
+    },
+    {
+      "package": "dompurify",
+      "version": "3.4.17",
+      "src": "/vendor/dompurify-3.4.17.min.js",
+      "sourceUrl": "https://raw.githubusercontent.com/cure53/DOMPurify/3.4.17/dist/purify.min.js",
+      "integrity": "sha384-P0JNneQf81HOl9VwNXK76cQ9VMD6Nfsnepxb0cCOg8+UzEdzgPHAPV4wVQrvYQSx",
+      "bytes": 29828
     }
   ]
 }

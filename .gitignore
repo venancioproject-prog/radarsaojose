@@ -490,3 +490,5 @@ public-images/
 !emails-auth/autenticador-removido.html
 
 !data/migrations/024_private_survey_responses.sql
+
+!scripts/check-preview-release.cjs
