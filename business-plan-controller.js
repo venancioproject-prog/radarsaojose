@@ -2426,9 +2426,9 @@ function applyRemotePlanState(remoteData, notify = true) {
     currentPlanState.editedTexts = Object.assign({}, currentPlanState.editedTexts, editedTexts);
     if (typeof document !== 'undefined') {
       Object.keys(currentPlanState.editedTexts).forEach(textId => {
-        const el = document.querySelector(`[data-text-id="${textId}"]`);
+        const el = document.querySelector(`[data-text-id="${CSS.escape(String(textId))}"]`);
         if (el && document.activeElement !== el) {
-          el.innerHTML = currentPlanState.editedTexts[textId];
+          window.radarSafeContent.renderPlan(el, currentPlanState.editedTexts[textId]);
         }
       });
     }
@@ -2442,7 +2442,7 @@ function applyRemotePlanState(remoteData, notify = true) {
       Object.keys(currentPlanState.tableContents).forEach(tblId => {
         const tbody = document.getElementById(tblId);
         if (tbody && currentPlanState.tableContents[tblId]) {
-          tbody.innerHTML = currentPlanState.tableContents[tblId];
+          window.radarSafeContent.renderPlan(tbody, currentPlanState.tableContents[tblId]);
         }
       });
     }
@@ -2668,61 +2668,10 @@ const PlanRealtimeCollab = {
   },
 
   setupRealtimeChannel() {
-    if (typeof window === 'undefined' || !window.supabaseClient || typeof window.supabaseClient.channel !== 'function') {
-      return;
-    }
-
-    try {
-      this.channel = window.supabaseClient.channel('business_plan_collab_live', {
-        config: {
-          presence: { key: this.activeUser },
-          broadcast: { self: false }
-        }
-      });
-
-      this.channel
-        .on('presence', { event: 'sync' }, () => {
-          const state = this.channel.presenceState ? this.channel.presenceState() : {};
-          this.peerPresence = {};
-          Object.keys(state).forEach(k => {
-            if (k !== this.activeUser && Array.isArray(state[k]) && state[k].length > 0) {
-              this.peerPresence[k] = state[k][0];
-            }
-          });
-          this.updateUserAvatarsUI();
-          this.updateSectionPresenceIndicators();
-        })
-        .on('presence', { event: 'join' }, ({ key, newPresences }) => {
-          if (key !== this.activeUser && newPresences && newPresences[0]) {
-            this.peerPresence[key] = newPresences[0];
-            this.updateUserAvatarsUI();
-            this.updateSectionPresenceIndicators();
-            this.showCollabToast(
-              this.getUserInitials(key),
-              `${this.getUserDisplayName(key)} conectou`,
-              'Online no Plano de Negócios'
-            );
-          }
-        })
-        .on('presence', { event: 'leave' }, ({ key }) => {
-          if (key !== this.activeUser) {
-            delete this.peerPresence[key];
-            this.updateUserAvatarsUI();
-            this.updateSectionPresenceIndicators();
-          }
-        })
-        .on('broadcast', { event: 'plan_change' }, ({ payload }) => {
-          this.handleRemoteChange(payload);
-        })
-        .subscribe((status) => {
-          if (status === 'SUBSCRIBED') {
-            this.isSubscribed = true;
-            this.trackLocalPresence();
-          }
-        });
-    } catch (e) {
-      console.warn('[Collab Realtime] Falha ao inicializar websocket:', e.message);
-    }
+    // Legacy public broadcasts carried private plan content and accepted peer HTML.
+    // Keep authenticated server polling until a private, MFA-protected channel is verified.
+    this.channel = null;
+    this.isSubscribed = false;
   },
 
   trackLocalPresence(sectionId) {
@@ -2775,9 +2724,9 @@ const PlanRealtimeCollab = {
         currentPlanState.editedTexts = currentPlanState.editedTexts || {};
         currentPlanState.editedTexts[textId] = html;
         if (typeof document !== 'undefined') {
-          const targetEl = document.querySelector(`[data-text-id="${textId}"]`);
+          const targetEl = document.querySelector(`[data-text-id="${CSS.escape(String(textId))}"]`);
           if (targetEl && document.activeElement !== targetEl) {
-            targetEl.innerHTML = html;
+            window.radarSafeContent.renderPlan(targetEl, html);
           }
         }
       }
@@ -3005,7 +2954,7 @@ function setupDescriptiveTables() {
     Object.keys(currentPlanState.tableContents).forEach(tblId => {
       const tbody = document.getElementById(tblId);
       if (tbody && currentPlanState.tableContents[tblId]) {
-        tbody.innerHTML = currentPlanState.tableContents[tblId];
+        window.radarSafeContent.renderPlan(tbody, currentPlanState.tableContents[tblId]);
       }
     });
   }
@@ -3127,9 +3076,9 @@ async function loadBusinessPlan(forceDefaults = false) {
     // Aplica textos editados anteriormente, se houver
     if (currentPlanState.editedTexts) {
       Object.keys(currentPlanState.editedTexts).forEach(textId => {
-        const el = document.querySelector(`[data-text-id="${textId}"]`);
+        const el = document.querySelector(`[data-text-id="${CSS.escape(String(textId))}"]`);
         if (el && currentPlanState.editedTexts[textId]) {
-          el.innerHTML = currentPlanState.editedTexts[textId];
+          window.radarSafeContent.renderPlan(el, currentPlanState.editedTexts[textId]);
         }
       });
     }

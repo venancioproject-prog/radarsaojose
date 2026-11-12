@@ -27,7 +27,7 @@ const server = http.createServer((req,res)=>{
   if(url.pathname==='/sanitizer-fixture.html'){
     res.setHeader('Content-Type','text/html; charset=utf-8');
     res.setHeader('Content-Security-Policy',buildPolicy());
-    return res.end('<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Conferência do conteúdo editorial</title><h1>Conteúdo editorial protegido</h1><div id="content"></div><div id="missing"></div><ul id="checks"></ul><script src="/vendor/dompurify-3.4.17.min.js"></script><script src="/radar-safe-content.js"></script><script src="/sanitizer-fixture.js"></script></html>');
+    return res.end('<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Conferência do conteúdo editorial</title><h1>Conteúdo editorial protegido</h1><div id="content"></div><div id="missing"></div><table><tbody id="plan-table"></tbody></table><ul id="checks"></ul><script src="/vendor/dompurify-3.4.17.min.js"></script><script src="/radar-safe-content.js"></script><script src="/sanitizer-fixture.js"></script></html>');
   }
   if(url.pathname==='/sanitizer-fixture.js'){
     res.setHeader('Content-Type','application/javascript');
@@ -37,7 +37,9 @@ const server = http.createServer((req,res)=>{
       const inactive=!target.querySelector('script,svg,iframe,[onclick],[onerror],[onload]')&&!target.querySelector('a').hasAttribute('href')&&!target.querySelector('img').hasAttribute('src');
       const purifier=window.DOMPurify;window.DOMPurify=undefined;radarSafeContent.render(document.getElementById('missing'),'<img onerror="alert(1)">');window.DOMPurify=purifier;
       const closed=document.getElementById('missing').textContent.includes('com segurança')&&!document.getElementById('missing').querySelector('img');
-      for(const [ok,text] of [[safe,'Texto, destaque, lista e tabela preservados'],[inactive,'Scripts, atributos ativos e URLs perigosas removidos'],[closed,'Falha da biblioteca bloqueia conteúdo inseguro']]){const li=document.createElement('li');li.textContent=(ok?'PASSOU: ':'FALHOU: ')+text;document.getElementById('checks').append(li);}`);
+      const table=document.getElementById('plan-table');radarSafeContent.renderPlan(table,'<tr><td class="plan-table-cell" contenteditable="true" style="font-weight:700" onclick="alert(1)">Custo salvo</td><td><button type="button" class="plan-del-row-btn">Excluir linha</button></td></tr>');
+      const tableSafe=table.querySelector('td')?.textContent==='Custo salvo'&&table.querySelector('td')?.getAttribute('contenteditable')==='true'&&table.querySelector('td')?.style.fontWeight==='700'&&!!table.querySelector('button.plan-del-row-btn')&&!table.querySelector('[onclick]');
+      for(const [ok,text] of [[tableSafe,'Tabela editável e botão preservados sem evento injetado'],[safe,'Texto, destaque, lista e tabela preservados'],[inactive,'Scripts, atributos ativos e URLs perigosas removidos'],[closed,'Falha da biblioteca bloqueia conteúdo inseguro']]){const li=document.createElement('li');li.textContent=(ok?'PASSOU: ':'FALHOU: ')+text;document.getElementById('checks').append(li);}`);
   }
   if(url.pathname==='/security-fixture.html'){
     res.setHeader('Content-Type','text/html; charset=utf-8');

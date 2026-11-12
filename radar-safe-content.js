@@ -55,5 +55,21 @@
     target.replaceChildren(fragment);
   }
 
-  window.radarSafeContent = Object.freeze({ escape, render });
+  function renderPlan(target, html) {
+    if (typeof window.DOMPurify?.sanitize !== 'function') {
+      target.replaceChildren(document.createTextNode('Não foi possível carregar o conteúdo com segurança. Atualize a página.'));
+      return;
+    }
+    const table = target.tagName === 'TBODY';
+    const source = table ? '<table><tbody>' + String(html ?? '') + '</tbody></table>' : String(html ?? '');
+    const clean = window.DOMPurify.sanitize(source, {
+      USE_PROFILES: { html: true }, ADD_ATTR: ['contenteditable'],
+      FORBID_TAGS: ['style', 'form', 'input', 'textarea', 'select', 'option', 'iframe', 'object', 'embed', 'video', 'audio'],
+      FORBID_ATTR: ['id', 'name', 'form', 'formaction'], RETURN_DOM_FRAGMENT: true
+    });
+    if (table) target.replaceChildren(...(clean.querySelector('tbody')?.childNodes || []));
+    else target.replaceChildren(clean);
+  }
+
+  window.radarSafeContent = Object.freeze({ escape, render, renderPlan });
 })();

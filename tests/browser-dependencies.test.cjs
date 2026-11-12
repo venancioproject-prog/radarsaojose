@@ -64,3 +64,29 @@ test('Published CSP allows approved script hashes but not arbitrary inline scrip
   assert.deepEqual(directives['form-action'], ["'self'"]);
   assert.ok(Buffer.byteLength(policy) < 7000);
 });
+
+
+test('Business plan collaboration never connects a public channel and preserves server refresh', async () => {
+  const source=fs.readFileSync(path.join(__dirname,'../business-plan-controller.js'),'utf8');
+  const start=source.indexOf('const PlanRealtimeCollab = {');
+  const end=source.indexOf('\nfunction toggleActiveCollaborator',start);
+  let channelCalls=0, refreshes=0, timer;
+  const applied=[];
+  const context={window:{supabaseClient:{channel:()=>{channelCalls+=1;throw Error('Public channel must remain unused');}}},
+    currentPlanState:{updated_at:'2026-11-01T00:00:00Z'},
+    fetchPlanStateFromCloud:async()=>{refreshes+=1;return {updated_at:'2026-11-02T00:00:00Z',saved_by:'mayumi'};},
+    applyRemotePlanState:state=>applied.push(state),clearInterval:()=>{},
+    setInterval:(callback,delay)=>{assert.equal(delay,4500);timer=callback;return 1;}};
+  vm.createContext(context);
+  vm.runInContext(source.slice(start,end)+'\nglobalThis.collab=PlanRealtimeCollab;',context);
+  context.collab.setupRealtimeChannel();
+  context.collab.broadcastChange('text_edited',{html:'private content'});
+  context.collab.trackLocalPresence('private section');
+  assert.equal(channelCalls,0);
+  assert.equal(context.collab.channel,null);
+  context.collab.lastRemoteSyncTs=1;
+  context.collab.startPollingFallback();
+  await timer();
+  assert.equal(refreshes,1);
+  assert.equal(applied.length,1);
+});
