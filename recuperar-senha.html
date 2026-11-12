@@ -35,7 +35,7 @@
     <form id="update" hidden>
       <label for="password">Nova senha</label>
       <input id="password" name="password" type="password" autocomplete="new-password" minlength="9" required>
-      <small>Use pelo menos 9 caracteres, com letra maiúscula, número e símbolo.</small>
+      <small>Use pelo menos 9 caracteres, com letra maiúscula, minúscula, número e símbolo.</small>
       <label for="confirm">Confirme a nova senha</label>
       <input id="confirm" name="confirm" type="password" autocomplete="new-password" minlength="9" required>
       <button type="submit">Salvar nova senha</button>
@@ -144,8 +144,8 @@
         const button = update.querySelector("button");
         const password = update.elements.password.value;
         if (!recoveryUserId || button.disabled) return;
-        if (Array.from(password).length < 9 || !/[A-ZÀ-Ý]/.test(password) || !/\d/.test(password) || !/[^\p{L}\p{N}\s]/u.test(password)) {
-          status.textContent = "Use pelo menos 9 caracteres, com letra maiúscula, número e símbolo.";
+        if (Array.from(password).length < 9 || !/\p{Lu}/u.test(password) || !/\p{Ll}/u.test(password) || !/\d/.test(password) || !/[^\p{L}\p{N}\s]/u.test(password)) {
+          status.textContent = "Use pelo menos 9 caracteres, com letra maiúscula, minúscula, número e símbolo.";
           return;
         }
         if (password !== update.elements.confirm.value) {

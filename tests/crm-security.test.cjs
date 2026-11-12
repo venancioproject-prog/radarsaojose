@@ -352,3 +352,14 @@ test('CRM followup shares the existing route and keeps the deployment within twe
   }
   assert.deepEqual(seen, ['GET', 'PUT']);
 });
+test('Signup explains the lowercase requirement and accepts a matching nine-character password', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../login.html'), 'utf8');
+  const start = html.indexOf('    function registrationPasswordError');
+  const end = html.indexOf('    const confirmationHelp', start);
+  const context = {};
+  vm.createContext(context);
+  vm.runInContext(html.slice(start, end), context);
+  assert.match(context.registrationPasswordError('PASSWORD9!', 'PASSWORD9!'), /minúscula/);
+  assert.equal(context.registrationPasswordError('CasaAz9!1', 'CasaAz9!1'), '');
+  assert.match(context.registrationPasswordError('CasaA9!1', 'CasaA9!1'), /9 caracteres/);
+});
