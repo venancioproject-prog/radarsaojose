@@ -8,7 +8,7 @@ O pacote privado do Report foi preparado sem modificar o banco remoto.
 Configurações de produção, recuperação de cópia de segurança e testes com as duas administradoras continuam pendentes.
 O site ainda não deve ser declarado totalmente seguro ou pronto para lançamento.
 
-Evidência anterior: 57 testes passaram localmente e no GitHub (execução 43157824121), com publicação Vercel confirmada para f6b11fb. As 82 referências locais de mídia do pacote do Report responderam HTTP 200 no Preview. O teste de importação do pacote real usou apenas PostgreSQL descartável e preservou integralmente o HTML. A rodada da fila ampliou a bateria para 63 testes locais aprovados e aplicou a estrutura desativada no Supabase de teste, sem enviar mensagens.
+Evidência anterior: 57 testes passaram localmente e no GitHub (execução 43157824121), com publicação Vercel confirmada para f6b11fb. As 82 referências locais de mídia do pacote do Report responderam HTTP 200 no Preview. O teste de importação do pacote real usou apenas PostgreSQL descartável e preservou integralmente o HTML. A rodada da fila ampliou a bateria para 63 testes aprovados localmente e no GitHub (execução 43266150127), publicou a30a28f e aplicou a estrutura desativada no Supabase de teste, sem enviar mensagens. A rota do processador e as duas tabelas negaram consultas sem autorização.
 
 ## Fontes consultadas diretamente
 

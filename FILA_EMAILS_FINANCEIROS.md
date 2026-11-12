@@ -61,3 +61,5 @@ Para pausar, desligar o agendador e BILLING_EMAIL_DELIVERY_ENABLED. Conservar as
 Não alterar à mão first_attempt_at, attempts ou uma mensagem sent para forçar reenvio. Resolver o motivo de revisão e conferir o histórico do provedor primeiro. A fila não configura retenção de longo prazo, alerta automático ou atendimento de incidentes; esses procedimentos operacionais permanecem pendentes.
 
 Fonte da janela do provedor: [Resend, idempotência](https://resend.com/blog/engineering-idempotency-keys).
+
+Evidência da implementação: revisão a30a28f publicada no Preview e execução GitHub 43266150127 aprovada, com 63 testes e bateria PostgreSQL local. A rota sem segredo e as tabelas sem sessão foram bloqueadas no ambiente publicado. Isso não comprova recebimento de mensagem real, que continua pendente.

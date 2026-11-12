@@ -7,7 +7,7 @@ Estimativa atual de aproximadamente 75% concluído e 25% restante. As estimativa
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Evidência de publicação anterior: 2b3f115. Esta rodada implementa a fila financeira opt-in e aplica sua estrutura desativada no banco de teste.
+- Código publicado e conferido: a30a28f. Esta rodada implementa a fila financeira opt-in e aplica sua estrutura desativada no banco de teste.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -209,3 +209,7 @@ No fechamento anterior, o envio financeiro ainda dependia da implementação de 
 - [ ] Configurar provedor e remetente financeiro, validar entrega a destinatário autorizado e só depois ativar agendador compatível com os limites da hospedagem.
 
 Procedimento: FILA_EMAILS_FINANCEIROS.md. A estrutura remota está preparada, mas não há fila ativa, cron, credencial nova, cobrança alterada ou e-mail real enviado por esta revisão. A troca para o modo novo precisa seguir a sequência documentada, conservando a chave do banco desligada até o servidor correto estar publicado.
+
+Evidência remota: execução GitHub 43266150127 concluída com sucesso e publicação Vercel confirmada para a30a28f. A rota do processador sem segredo respondeu HTTP 401; o GET comum do webhook respondeu HTTP 405. As tabelas billing_email_outbox e billing_email_queue_settings negaram consulta anônima com HTTP 401. A migração e o documento operacional não são servidos pelo site (HTTP 404).
+
+Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43266150127
