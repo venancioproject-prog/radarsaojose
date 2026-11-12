@@ -21,7 +21,7 @@ const PGlite = resolvePglite();
 const rootDir = path.join(__dirname, '..');
 const readMigration = name => fs.readFileSync(path.join(rootDir, 'data', 'migrations', name), 'utf8');
 
-test('Sequência ordenada de migrações 010..021 aplica sem conflito no PostgreSQL local (PGlite) e protege dados pagos e CRM', async () => {
+test('Migrações de acesso 010..021 e 024 aplicam sem conflito no PostgreSQL local (PGlite) e protege dados pagos e CRM', async () => {
   const db = new PGlite();
   const userFree = '00000000-0000-4000-8000-000000000010';
   const userDash = '00000000-0000-4000-8000-000000000011';
@@ -169,6 +169,21 @@ test('Sequência ordenada de migrações 010..021 aplica sem conflito no Postgre
   });
 
   await db.exec(readMigration('021_private_media_and_admin_mfa.sql'));
+
+  // A 017 reabria leitura individual para assinantes. A 024 fecha tabela e colunas,
+  // sem depender do estado de pagamento ou do segundo fator do navegador.
+  await db.exec('GRANT SELECT (id) ON public.respostas_pesquisa TO authenticated');
+  await db.exec(readMigration('024_private_survey_responses.sql'));
+  await db.exec(readMigration('024_private_survey_responses.sql'));
+  for (const uid of [userFree, userDash, userReport, userMidia, userAdmin]) {
+    await asRole('authenticated', {role:'authenticated',sub:uid,aal:'aal2',app_metadata:uid===userAdmin?{role:'admin'}:{}},async()=>{
+      await assert.rejects(db.query('SELECT * FROM public.respostas_pesquisa'),{code:'42501'});
+      await assert.rejects(db.query('SELECT id FROM public.respostas_pesquisa'),{code:'42501'});
+    });
+  }
+  await asRole('service_role',{role:'service_role'},async()=>{
+    assert.equal((await db.query('SELECT * FROM public.respostas_pesquisa')).rows.length,1);
+  });
 
   await asRole('authenticated', { role: 'authenticated', sub: userMidia }, async () => {
     await assert.rejects(db.query('SELECT * FROM public.analise_midia_sjc'), { code: '42501' });

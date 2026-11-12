@@ -46,7 +46,7 @@ SMTP do Supabase atende autenticação e não fornece essas configurações ao s
 4. Preparar CRON_SECRET no armazenamento de segredos, sem divulgar o valor. Não reutilizar o segredo do Asaas.
 5. Publicar BILLING_EMAIL_QUEUE_ENABLED=true com a chave do banco ainda falsa. A integração continua pelo caminho anterior enquanto a chave do banco estiver falsa. Aguardar a conclusão e a saída das execuções da revisão anterior antes da troca.
 6. Pausar brevemente a criação de novos testes de pagamento durante a troca. Ativar a chave do banco. Após uma confirmação nova, conferir exatamente uma linha pending na fila. Confirmar novamente o mesmo evento e conferir que a contagem permanece uma.
-7. Com autorização para o teste real, ativar BILLING_EMAIL_DELIVERY_ENABLED=true e chamar GET /api/asaas-webhook?emailQueue=1 com Authorization: Bearer seguido do CRON_SECRET. Essa chamada é de servidor, não de navegador. Conferir recebimento, sent_at e identificador no provedor. O indicador sent registra aceitação pelo provedor, não prova que o destinatário abriu ou que a caixa recebeu fora do spam.
+7. Com autorização para o teste real, ativar BILLING_EMAIL_DELIVERY_ENABLED=true e chamar POST /api/asaas-webhook?emailQueue=1 com Authorization: Bearer seguido do CRON_SECRET. Essa chamada é de servidor, não de navegador. Conferir recebimento, sent_at e identificador no provedor. O indicador sent registra aceitação pelo provedor, não prova que o destinatário abriu ou que a caixa recebeu fora do spam.
 8. Testar falha temporária, resposta perdida simulada, cancelamento do pedido e interrupção de reserva em ambiente isolado. Não induzir falhas financeiras na conta real.
 9. Só então configurar um agendador autenticado com frequência compatível com o volume e as tentativas. Nenhum cron foi criado aqui. Uma chamada processa uma mensagem; verificar limites/custos da hospedagem. Um agendamento diário pode ultrapassar a janela de retentativa e levar mensagens para revisão.
 
@@ -63,3 +63,5 @@ Não alterar à mão first_attempt_at, attempts ou uma mensagem sent para força
 Fonte da janela do provedor: [Resend, idempotência](https://resend.com/blog/engineering-idempotency-keys).
 
 Evidência da implementação: revisão a30a28f publicada no Preview e execução GitHub 43266150127 aprovada, com 63 testes e bateria PostgreSQL local. A rota sem segredo e as tabelas sem sessão foram bloqueadas no ambiente publicado. Isso não comprova recebimento de mensagem real, que continua pendente.
+
+O processador aceita somente POST. GET/HEAD/OPTIONS retornam 405 e não reservam nem enviam mensagens. Não cadastrar um cron GET da Vercel diretamente; usar um agendador capaz de enviar POST com o cabeçalho secreto. Nenhum agendamento foi ativado nesta revisão.

@@ -204,11 +204,17 @@ test('The queue processor authenticates its scheduler separately and never expos
   f.env.CRON_SECRET = 'scheduler-fixture-secret-with-at-least-32-characters';
   for (const token of ['', 'Bearer wrong', ['Bearer ' + f.env.CRON_SECRET]]) {
     const res = response();
-    await f.handler({ method:'GET', query:{emailQueue:'1'}, headers:{authorization:token} },res);
+    await f.handler({ method:'POST', query:{emailQueue:'1'}, headers:{authorization:token} },res);
     assert.equal(res.statusCode,401);
   }
   assert.equal(f.state.workerCalls,0);
-  const req = { method:'GET',query:{emailQueue:'1'},headers:{authorization:'Bearer ' + f.env.CRON_SECRET} };
+  const req = { method:'POST',query:{emailQueue:'1'},headers:{authorization:'Bearer ' + f.env.CRON_SECRET} };
+  for (const method of ['GET','HEAD','OPTIONS']) {
+    const rejected=response();
+    await f.handler({...req,method},rejected);
+    assert.equal(rejected.statusCode,405);
+  }
+  assert.equal(f.state.workerCalls,0);
   const allowed = response();
   await f.handler(req,allowed);
   assert.equal(allowed.statusCode,200);

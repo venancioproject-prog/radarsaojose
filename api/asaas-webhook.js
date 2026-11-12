@@ -201,7 +201,11 @@ async function recoverUnboundCardOrder(order, paymentId) {
 
 async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
-  if (req.method === 'GET' && req.query?.emailQueue === '1') {
+  if (req.query?.emailQueue === '1') {
+    if (req.method !== 'POST') {
+      res.setHeader('Allow', 'POST');
+      return res.status(405).json({ success: false, code: 'METHOD_NOT_ALLOWED' });
+    }
     const secret = process.env.CRON_SECRET;
     const authorization = getHeader(req, 'authorization');
     if (typeof secret !== 'string' || secret.trim().length < 32 ||

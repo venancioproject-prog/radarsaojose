@@ -488,3 +488,5 @@ public-images/
 !emails-auth/senha-alterada.html
 !emails-auth/autenticador-adicionado.html
 !emails-auth/autenticador-removido.html
+
+!data/migrations/024_private_survey_responses.sql
