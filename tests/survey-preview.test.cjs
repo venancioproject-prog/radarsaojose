@@ -133,7 +133,8 @@ test('preview serves original public aggregates and synthetic chapters only to t
     assert.ok(require('node:fs').existsSync(require('node:path').join(__dirname, '..', image[1])));
   }
   assert.equal((await request('POST', {}, headers, report, { specs: [{ type: 'sample' }] })).body.N, 96);
-  assert.equal(db.mock.callCount(), 0);
+  assert.ok(db.mock.calls.every(call => call.arguments[0].startsWith('billing_licenses?')),
+    'Preview may verify invitations but must not read real paid content');
 });
 
 test('production chapters are read from private storage only for an eligible account', async t => {
@@ -144,20 +145,24 @@ test('production chapters are read from private storage only for an eligible acc
   }));
   const html = '<article id="rep-tela-003">Conteúdo protegido</article>';
   let rows = [{ chapters_html: html }];
+  let contentReads = 0;
   const db = t.mock.method(store, 'db', async path => {
+    if (path.startsWith('billing_licenses?')) return [];
     assert.equal(path, 'report_private_documents?slug=eq.radar-2026&select=chapters_html&limit=1');
+    contentReads += 1;
     return rows;
   });
   const chapters = { action: 'chapters' };
   const headers = { authorization: 'Bearer test' };
   assert.equal((await request('POST', {}, {}, report, chapters)).status, 403);
   assert.equal((await request('POST', {}, headers, report, chapters)).status, 403);
-  assert.equal(db.mock.callCount(), 0);
+  assert.equal(contentReads, 0);
   plan = 'report';
   const authorized = await request('POST', {}, headers, report, chapters);
   assert.equal(authorized.status, 200);
   assert.equal(authorized.headers['Cache-Control'], 'no-store');
   assert.deepEqual(authorized.body, { html, synthetic: false });
+  assert.equal(contentReads, 1);
   rows = [{ chapters_html: 'gzip:' + require('node:zlib').gzipSync(html).toString('base64') }];
   assert.deepEqual((await request('POST', {}, headers, report, chapters)).body, { html, synthetic: false });
   rows = [];

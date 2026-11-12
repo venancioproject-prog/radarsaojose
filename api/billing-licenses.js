@@ -1,6 +1,6 @@
 'use strict';
 const store = require('../lib/billing-store');
-const { getEffectiveEntitlement } = require('../lib/entitlements');
+const { getEffectiveEntitlement, permits } = require('../lib/entitlements');
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,8 +30,7 @@ module.exports = async function handler(req, res) {
     }
 
     const s = await store.subscription(user.id);
-    if (!s || s.plan_type !== 'midia' || s.status !== 'active' ||
-        Date.parse(s.period_start) > Date.now() || Date.parse(s.period_end) <= Date.now()) {
+    if (s?.plan_type !== 'midia' || !permits(s, 'midia')) {
       throw new store.BillingError(403, 'ACTIVE_MIDIA_OWNER_REQUIRED');
     }
 

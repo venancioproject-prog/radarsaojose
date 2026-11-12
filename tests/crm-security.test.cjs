@@ -165,6 +165,13 @@ test('CRM search and metrics cover multiple auth pages, use subscriptions and im
   await handler({ method: 'GET', query: { search: 'user4@example.invalid' } }, res);
   assert.equal(res.body.accounts[0].plan, 'midia');
   assert.equal(res.body.accounts[0].isGuest, true);
+  tables.billing_licenses.push({ id: 'license-1', user_id: 'user-1', subscription_id: 'subscription-2' });
+  res = response();
+  await handler({ method: 'GET', query: { search: 'user1@example.invalid' } }, res);
+  assert.equal(res.body.accounts[0].plan, 'midia');
+  assert.equal(res.body.accounts[0].isGuest, true);
+  assert.equal(res.body.metrics.paid, 2, 'an existing paying customer remains in commercial totals');
+  assert.equal(res.body.metrics.guestAccesses, 2);
   storageFailure = true;
   res = response();
   await handler({ method: 'GET', query: {} }, res);
@@ -362,4 +369,85 @@ test('Signup explains the lowercase requirement and accepts a matching nine-char
   assert.match(context.registrationPasswordError('PASSWORD9!', 'PASSWORD9!'), /minúscula/);
   assert.equal(context.registrationPasswordError('CasaAz9!1', 'CasaAz9!1'), '');
   assert.match(context.registrationPasswordError('CasaA9!1', 'CasaA9!1'), /9 caracteres/);
+});
+
+test('A valid Media invitation upgrades effective access without replacing the personal subscription', async () => {
+  const now = Date.now();
+  const personal = { id: 'own', plan_type: 'dash', status: 'active',
+    period_start: new Date(now - 10000).toISOString(), period_end: new Date(now + 100000).toISOString() };
+  const invited = { ...personal, id: 'team', plan_type: 'midia' };
+  let licenses = [{ subscription_id: 'team' }];
+  const store = {
+    ...require('../lib/billing-store'),
+    authenticate: async () => ({ id: 'customer', email: 'customer@example.invalid' }),
+    subscription: async () => personal,
+    db: async route => {
+      if (route.startsWith('billing_licenses?')) return licenses;
+      if (route.startsWith('billing_subscriptions?')) return [invited];
+      if (route.startsWith('analise_midia_sjc?')) return [{ id: 'article' }];
+      throw new Error('Unexpected request: ' + route);
+    }
+  };
+  const rights = loadHandler('lib/entitlements.js', { './billing-store': store });
+  const media = loadHandler('api/media.js', {
+    '../lib/billing-store': store, '../lib/entitlements': rights
+  });
+  for (const plan of ['dash', 'report']) {
+    personal.plan_type = plan;
+    const access = await rights.getEffectiveEntitlement('customer', now);
+    assert.equal(access.planType, 'midia');
+    assert.equal(access.isLicenseGuest, true);
+    assert.equal(access.subscriptionId, 'team');
+    const res = response();
+    await media({ method: 'GET', query: {} }, res);
+    assert.equal(res.statusCode, 200);
+    assert.equal(res.body.rows[0].id, 'article');
+    assert.equal(personal.plan_type, plan, 'access lookup never changes the purchased plan');
+  }
+  licenses = [];
+  assert.equal((await rights.getEffectiveEntitlement('customer', now)).planType, 'report');
+  const denied = response();
+  await media({ method: 'GET', query: {} }, denied);
+  assert.equal(denied.statusCode, 403);
+  licenses = [{ subscription_id: 'team' }];
+  for (const changes of [
+    { status: 'refunded' }, { status: 'active', period_end: new Date(now).toISOString() },
+    { period_end: new Date(now + 100000).toISOString(), period_start: new Date(now + 10000).toISOString() },
+    { period_start: 'invalid' }
+  ]) {
+    Object.assign(invited, changes);
+    assert.equal((await rights.getEffectiveEntitlement('customer', now)).planType, 'report');
+  }
+  Object.assign(invited, { ...personal, id: 'team', plan_type: 'midia' });
+  personal.plan_type = 'midia';
+  assert.equal((await rights.getEffectiveEntitlement('customer', now)).isLicenseGuest, false);
+});
+
+test('Only an active Media owner with valid dates can manage team seats', async () => {
+  const now = Date.now();
+  const own = { id: 'own', plan_type: 'dash', status: 'active',
+    period_start: new Date(now - 10000).toISOString(), period_end: new Date(now + 100000).toISOString() };
+  let writes = 0;
+  const handler = loadHandler('api/billing-licenses.js', {
+    '../lib/billing-store': {
+      ...require('../lib/billing-store'),
+      authenticate: async () => ({ id: 'customer', email: 'customer@example.invalid' }),
+      subscription: async () => own,
+      db: async () => { writes += 1; return []; }
+    },
+    '../lib/entitlements': { ...require('../lib/entitlements'),
+      getEffectiveEntitlement: async () => ({ planType: 'midia', isLicenseGuest: true }) }
+  });
+  for (const changes of [{ plan_type: 'dash' }, { plan_type: 'midia', period_end: 'invalid' },
+    { period_end: new Date(now).toISOString() },
+    { period_end: new Date(now + 100000).toISOString(), period_start: 'invalid' }]) {
+    Object.assign(own, changes);
+    for (const method of ['GET', 'POST', 'DELETE']) {
+      const res = response();
+      await handler({ method, query: {}, body: { userId: '00000000-0000-4000-8000-000000000001' } }, res);
+      assert.equal(res.statusCode, 403);
+      assert.equal(res.body.code, 'ACTIVE_MIDIA_OWNER_REQUIRED');
+    }
+  }
+  assert.equal(writes, 0);
 });

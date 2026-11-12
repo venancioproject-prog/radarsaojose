@@ -2,7 +2,7 @@
 
 const { requireAdmin } = require('./_authorization');
 const { configuration, db } = require('../lib/billing-store');
-const { permits } = require('../lib/entitlements');
+const { permits, selectEffectiveAccess } = require('../lib/entitlements');
 const { normalizePhone, profiles } = require('../radar-contact');
 const handleFollowup = require('../lib/crm-followups');
 
@@ -55,14 +55,11 @@ async function relatedRows(table, columns, field, ids, extra = '') {
 
 function activeAccess(userId, ownSubscriptions, licenses, subscriptionsById, now) {
   const own = ownSubscriptions.get(userId);
-  if (permits(own, own?.plan_type, now)) {
-    return { plan: own.plan_type, planStatus: 'active', periodEnd: own.period_end, isGuest: false };
-  }
-  const guestSubscription = (licenses.get(userId) || [])
-    .map(id => subscriptionsById.get(id))
-    .find(subscription => subscription?.plan_type === 'midia' && permits(subscription, 'midia', now));
-  if (guestSubscription) {
-    return { plan: 'midia', planStatus: 'active', periodEnd: guestSubscription.period_end, isGuest: true };
+  const access = selectEffectiveAccess(own,
+    (licenses.get(userId) || []).map(id => subscriptionsById.get(id)), now);
+  if (access) {
+    return { plan: access.subscription.plan_type, planStatus: 'active',
+      periodEnd: access.subscription.period_end, isGuest: access.isLicenseGuest };
   }
   return { plan: 'gratis', planStatus: own?.status || 'none', periodEnd: own?.period_end || null, isGuest: false };
 }
@@ -139,8 +136,12 @@ module.exports = async function handler(req, res) {
       };
     });
 
-    const customers = accounts.filter(account => !account.isAdmin && !account.isGuest);
-    const paid = customers.filter(account => account.plan !== 'gratis').length;
+    const ownsPaidPlan = account => {
+      const own = ownSubscriptions.get(account.id);
+      return permits(own, own?.plan_type, now);
+    };
+    const customers = accounts.filter(account => !account.isAdmin && (!account.isGuest || ownsPaidPlan(account)));
+    const paid = customers.filter(ownsPaidPlan).length;
     const metrics = {
       total: customers.length,
       guestAccesses: accounts.filter(account => !account.isAdmin && account.isGuest).length,

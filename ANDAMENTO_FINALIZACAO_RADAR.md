@@ -2,12 +2,12 @@
 
 Atualizado em 12/11/2026.
 
-Estimativa atual de aproximadamente 70% concluído e 30% restante. As estimativas por área abaixo têm média simples de 70%. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
+Estimativa atual de aproximadamente 72% concluído e 28% restante. As estimativas por área abaixo têm média simples de 71,5%, arredondada. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
 
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Base funcional publicada: 85a6e0f; esta atualização acrescenta alinhamento de senhas e modelos de e-mail versionados.
+- Base funcional publicada: 5a8dd52; esta rodada acrescenta correções para assinatura própria combinada com convite Mídia.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
 - A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
@@ -38,7 +38,7 @@ O telefone foi escolhido como opcional. Ele fica disponível para contato sobre 
 
 ## Evidências
 
-- 38 testes automatizados passaram com zero falhas.
+- 40 testes automatizados passaram com zero falhas.
 - A bateria financeira adicional em PostgreSQL descartável também passou.
 - A sequência existente de migrações e a nova 022 foram testadas localmente.
 - A 022 foi aplicada duas vezes no teste local para conferir reaplicação.
@@ -90,9 +90,9 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 |---|---:|---:|---|
 | Cadastro, login e recuperação | 90% | 10% | Reteste real por e-mail e Google após configurações |
 | Administradores e autenticador | 75% | 25% | May e testes finais de acesso |
-| CRM do Radar | 80% | 20% | Validar salvamento visual com duas contas |
+| CRM do Radar | 85% | 15% | Validar salvamento visual com duas contas |
 | Pagamentos Asaas | 85% | 15% | Casos de falha e reteste final |
-| Bloqueios e acessos por plano | 75% | 25% | Contas e vigências finais, convidados e publicação |
+| Bloqueios e acessos por plano | 85% | 15% | Teste real de convidados e publicação |
 | Termos e privacidade da pesquisa | 90% | 10% | Auditoria final das políticas e conteúdo real |
 | Conteúdo real pago | 35% | 65% | Homologar gráficos e capítulos reais |
 | Retirada de Eleições 2026 | 50% | 50% | Concluir dependências e levar a retirada à versão oficial |
@@ -118,3 +118,17 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 - SECURITY_REVIEW_2026-11-09.md contém afirmações históricas que precisam ser corrigidas, especialmente sobre exigência de segundo fator no servidor e estado das tabelas remotas.
 - Ativação do autenticador na conta não comprova aplicação de todas as regras do banco.
 - Consultor e oráculo ficam fora do escopo atual de lançamento.
+
+## Conferência adicional de acessos em 12/11
+
+- [x] Reproduzir antes da correção: titular de Dash/Report com convite Mídia era classificado somente pelo plano próprio, inclusive na API de mídia e no CRM.
+- [x] Usar a mesma seleção de acesso efetivo no CRM e nos serviços: convite Mídia vigente prevalece sobre Dash/Report; Mídia próprio prevalece no empate.
+- [x] Preservar a assinatura comprada. Remover ou vencer o convite devolve o acesso ao plano próprio vigente, sem alterar pagamentos.
+- [x] Manter compradores nos indicadores comerciais quando também usam convite; convidados sem compra continuam separados.
+- [x] Exigir Mídia próprio vigente e datas válidas para gerenciar vagas. Um convite não concede gestão da equipe.
+- [x] Testar convite revogado, vencido, início futuro, estado de estorno e datas inválidas; manter o conteúdo bloqueado quando não há direito vigente.
+- [x] Conferir o CRM publicado sem sessão: redireciona ao login.
+- [x] Conferir consultas anônimas diretas no banco de teste, sem exibir dados: profiles retornou zero linhas; fichas, histórico, termos, assinaturas e pedidos retornaram HTTP 401.
+- [x] Rodar novamente os 40 testes e a bateria financeira local, sem tráfego financeiro real.
+
+A conferência anônima não substitui a validação com duas contas autenticadas. O navegador disponível não tem sessão administrativa do Radar; não criar senha, contornar o autenticador ou marcar esse teste como concluído. A retirada de Eleições não tem arquivos/rótulos ativos encontrados no código rastreado desta branch; ainda falta comprovar a integração na versão oficial, preservando as referências históricas legítimas sobre eleições municipais na seção História.
