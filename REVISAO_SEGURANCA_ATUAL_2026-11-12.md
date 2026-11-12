@@ -97,3 +97,7 @@ A matriz MATRIZ_ASVS_N1.md enumera os 70 requisitos de Nível 1 da release 5.0.0
 **ALTA, corrigida no cliente — colaboração por canal público.** business-plan-controller.js usava business_plan_collab_live sem private e transmitia textos, tarefas e blocos, aceitando HTML recebido como atualização. Não foi comprovado acesso remoto indevido; a segurança não podia depender de políticas privadas ausentes no código. O canal antigo deixou de ser aberto. Salvamento e sincronização continuam pelas APIs com admin/MFA, com atualização automática já existente a cada 4,5 segundos; presença/edição instantânea por broadcast ficam suspensas até existir canal privado com autorização comprovada.
 
 **MÉDIA, corrigida — HTML persistido do plano.** As restaurações de editedTexts/tableContents e texto recebido usam DOMPurify por renderPlan. Tabelas mantêm células editáveis, classes, formatação e botão; comandos em atributos são retirados. Seletores de texto usam CSS.escape. Conferência local de navegador passou. Falta reteste com duas administradoras na tela real. Nenhuma linha ou conteúdo do banco foi apagado.
+
+## Publicação e testes finais desta rodada
+
+Commit de código f34d104: publicação Vercel confirmada. [GitHub Actions 43275229158](https://github.com/venancioproject-prog/radarsaojose/actions/runs/43275229158) concluiu com sucesso a bateria de 68 testes, PostgreSQL financeiro e auditoria OSV. As 17 checagens HTTP do Preview passaram após a publicação; cadastro recarregado sem erros de script. Nenhuma produção foi alterada.

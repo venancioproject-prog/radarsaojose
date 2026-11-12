@@ -2,15 +2,15 @@
 
 Atualizado em 12/11/2026.
 
-Estimativa atual de aproximadamente 75% concluído e 25% restante. As estimativas por área abaixo têm média simples de 74,5%, arredondada. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
+Estimativa de organização: cerca de 80% concluído e 20% restante. A média simples das áreas abaixo é 77,5%, expressa em uma faixa aproximada de 5 pontos. Servem para organizar o trabalho e não representam prazo, probabilidade de falha ou certificação de segurança.
 
 ## Ambiente de referência
 
 - Branch de publicação de teste: codex/radar-integracao.
-- Código publicado e conferido: a30a28f. Esta rodada implementa a fila financeira opt-in e aplica sua estrutura desativada no banco de teste.
+- Código de referência desta rodada: f34d104. Inclui dependências fixadas, CSP, DOMPurify, correção da leitura individual da pesquisa e fechamento do canal público do plano. A fila financeira permanece desativada.
 - Preview integrado: https://radarsaojose-git-codex-radar-integracao-tagma.vercel.app/
 - Supabase de teste: zidlawqyqlysecsweggn.
-- A integração GitHub/Vercel confirmou a publicação do commit 6125e11.
+- As publicações 1b97a46, 38d3de9 e f47e07b passaram na Vercel e no GitHub. A conferência final de f34d104 está registrada ao fim.
 - O login publicado contém o campo de telefone e o CRM publicado contém esta revisão.
 - A publicação oficial depende de integração e validações próprias de produção.
 
@@ -38,7 +38,7 @@ O telefone foi escolhido como opcional. Ele fica disponível para contato sobre 
 
 ## Evidências
 
-- 63 testes automatizados passaram com zero falhas.
+- A bateria chegou a 68 testes automatizados; conferir a execução final registrada abaixo.
 - A bateria financeira adicional em PostgreSQL descartável também passou.
 - A sequência existente de migrações e a nova 022 foram testadas localmente.
 - A 022 foi aplicada duas vezes no teste local para conferir reaplicação.
@@ -95,9 +95,9 @@ GET e PUT compartilham /api/crm-accounts. O acompanhamento é tratado em lib/crm
 | Bloqueios e acessos por plano | 85% | 15% | Teste real de convidados e publicação |
 | Termos e privacidade da pesquisa | 90% | 10% | Auditoria final das políticas e conteúdo real |
 | Conteúdo real pago | 50% | 50% | Pacote do Report preparado; falta integração protegida e aprovação dos conteúdos reais |
-| Retirada de Eleições 2026 | 50% | 50% | Concluir dependências e levar a retirada à versão oficial |
+| Retirada de Eleições 2026 | 75% | 25% | Código ativo rastreado conferido sem o módulo; falta integrar a retirada na versão oficial |
 | E-mails e identidade visual | 90% | 10% | Configurar provedor, ativar e validar recebimento financeiro e destino das imagens |
-| Preparação e publicação oficial | 40% | 60% | Cópia de segurança, conteúdo/configuração reais e validações |
+| Preparação e publicação oficial | 45% | 55% | Matriz e roteiro operacional preparados; backup, configuração e validações oficiais pendentes |
 
 ## Próximos passos
 
@@ -202,7 +202,7 @@ No fechamento anterior, o envio financeiro ainda dependia da implementação de 
 - [x] Preparar recuperação após interrupção, intervalos de espera e limites de seis tentativas/20 horas. Depois disso, exigir revisão para não repetir um envio incerto fora da janela do provedor.
 - [x] Separar erros temporários de erros permanentes e ignorar pedidos já cancelados. Não modificar o pagamento ao registrar falha de entrega.
 - [x] Usar somente destinatário do pedido confirmado e guardar apenas estado/códigos resumidos na fila, sem duplicar dados do cartão ou destinatário.
-- [x] Preparar processador autenticado por CRON_SECRET em GET /api/asaas-webhook?emailQueue=1, sem criar uma nova função pública na Vercel.
+- [x] Preparar processador autenticado por CRON_SECRET em POST /api/asaas-webhook?emailQueue=1, sem criar uma nova função pública na Vercel.
 - [x] Proteger a ativação por duas flags do servidor e chave no banco, todas desligadas por padrão. Sem provedor configurado, não reservar mensagem nem consumir tentativa.
 - [x] Testar atomicidade, permissões, reserva perdida, retentativa, esgotamento e autenticação do agendador em PostgreSQL descartável e serviços simulados.
 - [x] Aplicar somente a migração 023 no Supabase de teste, após conferir que a estrutura não existia. Confirmar fila vazia, envios desligados, proteção por linha ativa e ausência de permissões para conta comum/visitante.
@@ -213,3 +213,40 @@ Procedimento: FILA_EMAILS_FINANCEIROS.md. A estrutura remota está preparada, ma
 Evidência remota: execução GitHub 43266150127 concluída com sucesso e publicação Vercel confirmada para a30a28f. A rota do processador sem segredo respondeu HTTP 401; o GET comum do webhook respondeu HTTP 405. As tabelas billing_email_outbox e billing_email_queue_settings negaram consulta anônima com HTTP 401. A migração e o documento operacional não são servidos pelo site (HTTP 404).
 
 Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43266150127
+
+## Fechamento da rodada: navegador, pesquisa e plano administrativo
+
+- [x] Fixar 14 arquivos de 13 bibliotecas diretas, com integridade SHA-384 e licenças dos arquivos locais.
+- [x] Remover html2pdf.js vulnerável e sem uso; exportação continua pela impressão do navegador.
+- [x] Restringir scripts pela CSP e testar bloqueio de script inesperado, origem não autorizada e eval; botões existentes preservados. Eventos antigos em atributos ainda precisam de migração própria.
+- [x] Acrescentar DOMPurify na limpeza de artigos e HTML salvo do plano, conservando tabelas editáveis e botões. Falha da biblioteca bloqueia o conteúdo recebido.
+- [x] Fechar o canal público antigo do plano de negócios; sincronização autenticada automática pelo servidor permanece a cada 4,5 segundos. A presença instantânea fica suspensa até autorização privada comprovada.
+- [x] Encontrar a reabertura da leitura de respostas individuais pela migração 017; preparar/testar a 024, bloqueando também todas as contas pagas e admin no navegador.
+- [x] Confirmar que essas tabelas de pesquisa não estão no banco TESTE; o Preview usa dados sintéticos. Não aplicar nem abrir dados do banco oficial nesta etapa.
+- [x] Exigir POST para processar e-mails, rejeitando GET/HEAD sem envio ou reserva.
+- [x] Conferir os 70 IDs do Nível 1 do ASVS, com situação individual em MATRIZ_ASVS_N1.md. Inventário completo não significa aprovação dos requisitos.
+- [x] Documentar o receptor original da pesquisa como ainda não identificado, distinguindo-o do formulário antigo do CRM: PESQUISA_ORIGEM_E_PRIVACIDADE.md.
+- [x] Preparar roteiro de atualizações, alertas, incidente, retorno e restauração: OPERACAO_SEGURANCA_RADAR.md. Alertas e backup real ainda não foram ativados/comprovados.
+- [x] Conferir o Preview por 17 checagens HTTP sem login/gravação: cabeçalhos, bibliotecas, páginas, arquivos privados e APIs anônimas.
+- [x] Abrir artigo publicado com a proteção nova e testar a pergunta expansível: conteúdo carregou e botão funcionou, sem erro de script.
+- [ ] Retestar plano administrativo com as duas contas e conferir alterações sem a colaboração antiga.
+- [ ] Aplicar a 024 no banco com os dados reais e conferir gráficos + bloqueio direto na integração de lançamento.
+
+### O que depende de participação, credenciais ou decisão do titular
+
+1. **Entradas reais:** Leonardo com autenticador e May com e-mail confirmado/autenticador; salvar/reabrir CRM, teste em duas abas, conta Google e saída em computador compartilhado. Não criar senha nem contornar o segundo fator.
+2. **Conteúdo real:** aprovar Report/pesquisa/mídia e integrar no banco correto. O blog também contém artigos de teste e textos com tarefas de apuração; revisar editorialmente antes de lançar, sem apagar conteúdo por adivinhação.
+3. **Pesquisa original:** fornecer o sistema/link de coleta para conferir envio, responsáveis, consentimento e retenção. Saber qual tabela é lida não identifica o coletor.
+4. **E-mails financeiros:** definir/remeter provedor e remetente, permitir um envio de teste e ativar fila/agendador seguindo o roteiro. Nada foi enviado nesta rodada.
+5. **Infraestrutura oficial:** resolver cota Supabase, designar operação/alertas, comprovar backup e restauração, conferir variáveis e promover a versão correta. Produção não foi publicada nesta rodada.
+6. **Conformidade restante:** decidir divergência da composição obrigatória de senha com ASVS 6.2.5; conferir proteção contra senhas conhecidas, revogação/limpeza de sessões e parâmetros dos provedores. Não declarar 100% de segurança.
+
+O restante não equivale a prazo em meses nem a uma quantidade linear de código. Esta rodada resolveu riscos que a contagem antiga não detalhava; os percentuais permanecem estimativas de acompanhamento.
+
+### Evidência final publicada
+
+Código f34d104f25510b60b1ac9411b58eb61eaccc5f32: Vercel success e GitHub Actions 43275229158 success. A bateria tem 68 testes, além da bateria financeira PostgreSQL e da consulta OSV dos 13 pacotes diretos. A checagem pública posterior passou nos 17 pontos. O cadastro foi recarregado no navegador e não apresentou erros de script. A versão oficial/main não foi publicada nem substituída.
+
+Execução: https://github.com/venancioproject-prog/radarsaojose/actions/runs/43275229158
+
+Evidências locais fora do Git: cadastro-final-publicado-2026-11-12.png, tabelas-protegidas-validadas-2026-11-12.png e checagem-preview-final-2026-11-12.json, na pasta de visualizações desta conversa.
