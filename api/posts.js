@@ -39,6 +39,7 @@ const SUPABASE_READ_KEY = SUPABASE_SERVICE_KEY || SUPABASE_ANON_KEY;
 const ALLOWED_SORT_COLUMNS = new Set(['published_at', 'created_at', 'updated_at', 'views_count', 'title']);
 const ALLOWED_SORT_ORDERS = new Set(['asc', 'desc']);
 const SYSTEM_RESERVED_SLUG = 'system-business-plan-blocks-v2';
+const PUBLIC_LIST_COLUMNS = 'id,title,slug,excerpt,cover_image_url,status,published_at,created_at,updated_at,author_name,author_role,category,tags,seo_metadata,views_count,is_featured';
 
 function sanitizePostgrestSearchTerm(raw) {
   return String(raw || '')
@@ -149,6 +150,9 @@ module.exports = async function handler(req, res) {
       if (adminView && !await requireAdmin(req, res, {url:SUPABASE_URL,anonKey:SUPABASE_ANON_KEY})) return;
       if (slug === 'system-business-plan-blocks-v2') return res.status(404).json({success:false,message:'Artigo não encontrado.'});
 
+      const isSinglePost = Boolean(slug || id);
+      const selectProjection = (isSinglePost || adminView) ? '*' : PUBLIC_LIST_COLUMNS;
+
       // Buscar no Supabase REST com Connection Pool + Singleflight + Cache Curto
       let supabaseOk = false;
       let supabaseData = null;
@@ -157,7 +161,7 @@ module.exports = async function handler(req, res) {
       const safeSearch = sanitizePostgrestSearchTerm(q);
 
       try {
-        let endpoint = `${SUPABASE_URL}/rest/v1/blog_posts?select=*&slug=neq.${SYSTEM_RESERVED_SLUG}${adminView ? '' : '&status=eq.published'}`;
+        let endpoint = `${SUPABASE_URL}/rest/v1/blog_posts?select=${selectProjection}&slug=neq.${SYSTEM_RESERVED_SLUG}${adminView ? '' : '&status=eq.published'}`;
         if (slug) {
           endpoint += `&slug=eq.${encodeURIComponent(slug)}`;
         } else if (id) {
@@ -263,7 +267,10 @@ module.exports = async function handler(req, res) {
       const pg = Math.max(1, parseInt(page, 10));
       const lm = Math.max(1, parseInt(limit, 10));
       const startIndex = (pg - 1) * lm;
-      const pagedPosts = filtered.slice(startIndex, startIndex + lm);
+      const rawPagedPosts = filtered.slice(startIndex, startIndex + lm);
+      const pagedPosts = (isSinglePost || adminView)
+        ? rawPagedPosts
+        : rawPagedPosts.map(({ content, ...rest }) => rest);
 
       return res.status(200).json({
         success: true,
