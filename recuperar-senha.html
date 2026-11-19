@@ -33,6 +33,12 @@
       <button type="submit">Enviar link</button>
     </form>
     <form id="update" hidden>
+      <div id="recovery-mfa" hidden>
+        <p>Esta conta tem verificação em duas etapas. Para alterar a senha, confirme também o código do seu app autenticador.</p>
+        <label for="authenticator-code">Código do autenticador</label>
+        <input id="authenticator-code" name="authenticatorCode" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" aria-describedby="authenticator-help">
+        <small id="authenticator-help">Use os 6 números exibidos no app. Este código não é enviado por e-mail. Se perdeu o acesso ao autenticador, entre em contato com o suporte do Radar.</small>
+      </div>
       <label for="password">Nova senha</label>
       <input id="password" name="password" type="password" autocomplete="new-password" minlength="9" required>
       <small>Use pelo menos 9 caracteres, com letra maiúscula, minúscula, número e símbolo.</small>
@@ -104,27 +110,58 @@
       }
 
       let recoveryUserId;
+      let recoveryFactorId;
+      const mfaSection = document.getElementById('recovery-mfa');
+      const authenticatorCode = document.getElementById('authenticator-code');
       const recoveryWait = setTimeout(() => {
         status.textContent = "Não foi possível confirmar o link. Você pode solicitar outro.";
         document.getElementById("retry").hidden = false;
       }, 7000);
 
-      function showPasswordForm(user) {
+      async function prepareRecoveryMfa(force = false) {
+        const { data, error } = await client.auth.mfa.getAuthenticatorAssuranceLevel();
+        if (error) throw error;
+        if (!data?.currentLevel) throw { code: 'session_not_found' };
+        recoveryFactorId = undefined;
+        mfaSection.hidden = true;
+        authenticatorCode.required = false;
+        if (force || (data.nextLevel === 'aal2' && data.currentLevel !== 'aal2')) {
+          const { data: factors, error: factorError } = await client.auth.mfa.listFactors();
+          if (factorError) throw factorError;
+          recoveryFactorId = factors?.totp?.find(factor => factor.status === 'verified')?.id;
+          if (!recoveryFactorId) throw { code: 'recovery_factor_unavailable' };
+          mfaSection.hidden = false;
+          authenticatorCode.required = true;
+          status.textContent = 'Antes de salvar a senha, informe o código atual do seu app autenticador.';
+        }
+      }
+
+      async function showPasswordForm(user) {
         if (!user?.id) return;
         clearTimeout(recoveryWait);
         recoveryUserId = user.id;
         document.getElementById("title").textContent = "Criar nova senha";
         document.getElementById("retry").hidden = true;
         request.hidden = true;
-        update.hidden = false;
-        status.textContent = "";
+        update.hidden = true;
+        status.textContent = 'Conferindo a segurança da conta…';
+        try {
+          await prepareRecoveryMfa();
+          update.hidden = false;
+          if (!recoveryFactorId) status.textContent = '';
+        } catch (error) {
+          status.textContent = error?.code === 'recovery_factor_unavailable'
+            ? 'Sua conta exige uma segunda verificação que não está disponível nesta tela. Entre em contato com o suporte do Radar para recuperar o acesso com segurança.'
+            : 'Não foi possível confirmar a segurança da recuperação. Solicite um novo link e tente novamente.';
+          document.getElementById('retry').hidden = false;
+        }
       }
 
       if (recoveryToken) {
         client.auth.verifyOtp({ token_hash: recoveryToken, type: "recovery" })
           .then(({ data, error }) => {
             if (error || !data.session?.user) throw new Error("Link inválido");
-            showPasswordForm(data.session.user);
+            return showPasswordForm(data.session.user);
           })
           .catch(() => {
             clearTimeout(recoveryWait);
@@ -134,7 +171,8 @@
       } else {
         client.auth.onAuthStateChange((event, session) => {
           if (event === "PASSWORD_RECOVERY" && session?.user) {
-            showPasswordForm(session.user);
+            // Leave the SDK auth event callback before calling session/MFA APIs.
+            setTimeout(() => { void showPasswordForm(session.user); }, 0);
           }
         });
       }
@@ -144,8 +182,14 @@
         const button = update.querySelector("button");
         const password = update.elements.password.value;
         if (!recoveryUserId || button.disabled) return;
-        if (Array.from(password).length < 9 || !/\p{Lu}/u.test(password) || !/\p{Ll}/u.test(password) || !/\d/.test(password) || !/[^\p{L}\p{N}\s]/u.test(password)) {
-          status.textContent = "Use pelo menos 9 caracteres, com letra maiúscula, minúscula, número e símbolo.";
+        const missing = [];
+        if (Array.from(password).length < 9) missing.push('pelo menos 9 caracteres');
+        if (!/\p{Lu}/u.test(password)) missing.push('uma letra maiúscula');
+        if (!/\p{Ll}/u.test(password)) missing.push('uma letra minúscula');
+        if (!/\p{N}/u.test(password)) missing.push('um número');
+        if (!/[\p{P}\p{S}]/u.test(password)) missing.push('um caractere especial');
+        if (missing.length) {
+          status.textContent = 'A senha precisa ter ' + new Intl.ListFormat('pt-BR').format(missing) + '.';
           return;
         }
         if (password !== update.elements.confirm.value) {
@@ -162,6 +206,20 @@
             document.getElementById("retry").hidden = false;
             return;
           }
+          if (recoveryFactorId) {
+            const code = authenticatorCode.value.trim();
+            if (!/^\d{6}$/.test(code)) {
+              status.textContent = 'Digite os 6 números atuais do app autenticador para confirmar a troca de senha.';
+              return;
+            }
+            status.textContent = 'Confirmando o autenticador…';
+            const { error: verifyError } = await client.auth.mfa.challengeAndVerify({ factorId: recoveryFactorId, code });
+            authenticatorCode.value = '';
+            if (verifyError) throw verifyError;
+            recoveryFactorId = undefined;
+            authenticatorCode.required = false;
+            mfaSection.hidden = true;
+          }
           const { error } = await client.auth.updateUser({ password });
           if (error) throw error;
           update.reset();
@@ -171,6 +229,25 @@
           await client.auth.signOut({ scope: "global" }).catch(() => {});
         } catch (error) {
           const code = error?.code;
+          if (code === 'insufficient_aal') {
+            try {
+              await prepareRecoveryMfa(true);
+              status.textContent = 'A troca de senha exige o autenticador desta conta. Informe o código atual do app e salve novamente.';
+            } catch {
+              status.textContent = 'A troca exige uma segunda verificação. Se não consegue acessar o autenticador, entre em contato com o suporte do Radar.';
+              update.hidden = true;
+              document.getElementById('retry').hidden = false;
+            }
+            return;
+          }
+          if (['mfa_verification_failed', 'mfa_verification_rejected', 'mfa_challenge_expired'].includes(code)) {
+            status.textContent = 'O código do autenticador está incorreto ou expirou. Use o código atual do app e tente novamente.';
+            return;
+          }
+          if (error?.status === 429 || code === 'over_request_rate_limit') {
+            status.textContent = 'Muitas tentativas em pouco tempo. Aguarde alguns minutos antes de tentar novamente.';
+            return;
+          }
           if (code === "same_password") {
             status.textContent = "Escolha uma senha diferente da que já estava cadastrada.";
             return;
@@ -179,7 +256,7 @@
             status.textContent = "O serviço recusou essa senha. Tente uma senha mais longa, com maiúscula, minúscula, número e símbolo, sem sequências comuns.";
             return;
           }
-          if (["session_expired", "session_not_found", "refresh_token_not_found", "bad_jwt"].includes(code)
+          if (["session_expired", "session_not_found", "refresh_token_not_found", "bad_jwt", "reauthentication_needed"].includes(code)
               || error?.name === "AuthSessionMissingError") {
             status.textContent = "A sessão de recuperação terminou. Solicite um novo link.";
           } else {
